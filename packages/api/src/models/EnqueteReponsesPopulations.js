@@ -117,16 +117,16 @@ class EnqueteReponsesPopulations extends Model {
         maj_service_psychiatrique: { type: "number" },
         maj_autre_service: { type: "number" },
         sauvegarde_justice_etablissement_personne_handicapee: {
-          type: "number"
+          type: "number",
         },
         sauvegarde_justice_service_personne_handicapee: { type: "number" },
         sauvegarde_justice_ehpad: { type: "number" },
         sauvegarde_justice_autre_etablissement_personne_agee: {
-          type: "number"
+          type: "number",
         },
         sauvegarde_justice_chrs: { type: "number" },
         sauvegarde_justice_service_hospitalier_soins_longue_duree: {
-          type: "number"
+          type: "number",
         },
         sauvegarde_justice_service_psychiatrique: { type: "number" },
         sauvegarde_justice_autre_service: { type: "number" },
@@ -136,11 +136,11 @@ class EnqueteReponsesPopulations extends Model {
         autre_mesures_autre_etablissement_personne_agee: { type: "number" },
         autre_mesures_chrs: { type: "number" },
         autre_mesures_service_hospitalier_soins_longue_duree: {
-          type: "number"
+          type: "number",
         },
         autre_mesures_service_psychiatrique: { type: "number" },
-        autre_mesures_autre_service: { type: "number" }
-      }
+        autre_mesures_autre_service: { type: "number" },
+      },
     };
   }
 }

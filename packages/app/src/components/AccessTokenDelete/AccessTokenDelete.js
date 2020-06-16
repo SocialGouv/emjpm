@@ -5,7 +5,7 @@ import { Box } from "rebass";
 
 import { REMOVE_ACCESS_TOKEN } from "./Mutation";
 
-const AccessTokenDelete = props => {
+const AccessTokenDelete = (props) => {
   const { id } = props;
   const [RemoveAccessToken] = useMutation(REMOVE_ACCESS_TOKEN);
 
@@ -16,8 +16,8 @@ const AccessTokenDelete = props => {
         RemoveAccessToken({
           refetchQueries: ["AccessToken"],
           variables: {
-            id: id
-          }
+            id: id,
+          },
         });
       }}
     >

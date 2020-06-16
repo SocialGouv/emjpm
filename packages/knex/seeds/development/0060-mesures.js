@@ -1,7 +1,7 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return knex("mesures")
     .del() // Deletes ALL existing entries
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
         code_postal: "62000",
@@ -17,10 +17,10 @@ exports.seed = function(knex) {
         status: "Eteindre mesure",
         extinction: "2019-07-01T00:00:00Z",
         latitude: 48.858483,
-        longitude: 2.27154
+        longitude: 2.27154,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
         code_postal: "75000",
@@ -35,10 +35,10 @@ exports.seed = function(knex) {
         civilite: "F",
         status: "Mesure en cours",
         latitude: 48.858483,
-        longitude: 2.27154
+        longitude: 2.27154,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
         etablissement: "UDAHF",
@@ -51,10 +51,10 @@ exports.seed = function(knex) {
         civilite: "F",
         status: "Mesure en attente",
         latitude: 48.858483,
-        longitude: 2.27154
+        longitude: 2.27154,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
         code_postal: "93000",
@@ -69,10 +69,10 @@ exports.seed = function(knex) {
         civilite: "H",
         status: "Mesure en cours",
         latitude: 48.858483,
-        longitude: 2.27154
+        longitude: 2.27154,
       });
     })
-    .then(function() {
+    .then(function () {
       // Inserts seed entries one by one in series
       return knex("mesures").insert({
         code_postal: "92000",
@@ -87,7 +87,7 @@ exports.seed = function(knex) {
         civilite: "F",
         status: "Eteindre mesure",
         latitude: 48.858483,
-        longitude: 2.27154
+        longitude: 2.27154,
       });
     });
 };

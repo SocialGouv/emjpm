@@ -6,7 +6,7 @@ import { Box, Button, Flex } from "rebass";
 import { ADD_SERVICE_TIS, DELETE_SERVICE_TIS } from "./mutations";
 import { SERVICE } from "./queries";
 
-const AdminServiceInformations = props => {
+const AdminServiceInformations = (props) => {
   const { serviceId } = props;
   const [selectedTribunal, setSelectedTribunal] = useState(undefined);
   const { data, loading, error } = useQuery(SERVICE, { variables: { serviceId } });
@@ -65,7 +65,7 @@ const AdminServiceInformations = props => {
         <Box width={2 / 3} px={4} py={2}>
           <Box>
             {service_tis &&
-              service_tis.map(relation => {
+              service_tis.map((relation) => {
                 const { ti, id } = relation;
 
                 return (
@@ -81,7 +81,7 @@ const AdminServiceInformations = props => {
                         onClick={() =>
                           deleteServiceTribunalRelation({
                             variables: { id },
-                            refetchQueries: ["admin_service"]
+                            refetchQueries: ["admin_service"],
                           })
                         }
                       >
@@ -98,8 +98,8 @@ const AdminServiceInformations = props => {
                   placeholder="Ajouter un tribunal"
                   onChange={({ value }) => setSelectedTribunal(value)}
                   options={data.tis
-                    .filter(ti => !service_tis.some(relation => relation.ti.id === ti.id))
-                    .map(ti => ({ label: ti.etablissement, value: ti.id }))}
+                    .filter((ti) => !service_tis.some((relation) => relation.ti.id === ti.id))
+                    .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
                 />
               </Box>
               <Button
@@ -107,7 +107,7 @@ const AdminServiceInformations = props => {
                   if (selectedTribunal) {
                     addServiceTribunalRelation({
                       refetchQueries: ["admin_service"],
-                      variables: { serviceId, tiId: selectedTribunal }
+                      variables: { serviceId, tiId: selectedTribunal },
                     });
                   }
                 }}

@@ -1,4 +1,4 @@
-module.exports = zipcode => {
+module.exports = (zipcode) => {
   if (!zipcode || zipcode.length !== 5) {
     throw "zip code is invalid";
   }

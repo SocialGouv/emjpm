@@ -4,7 +4,7 @@ const { validationResult } = require("express-validator");
 const createError = require("http-errors");
 const { User } = require("../../models/User");
 const {
-  confirmationPasswordEmail
+  confirmationPasswordEmail,
 } = require("../../email/password-confirmation");
 
 /**
@@ -29,13 +29,11 @@ const resetPasswordWithToken = async (req, res) => {
       throw createError.Unauthorized("Votre lien de réinitialisation a expiré");
     }
     try {
-      await User.query()
-        .where("id", user.id)
-        .update({
-          password: newPasswordHash,
-          reset_password_token: null,
-          reset_password_expires: null
-        });
+      await User.query().where("id", user.id).update({
+        password: newPasswordHash,
+        reset_password_token: null,
+        reset_password_expires: null,
+      });
       res.status(200).json({ status: "ok" });
       return confirmationPasswordEmail(user.email);
     } catch (err) {
@@ -47,8 +45,8 @@ const resetPasswordWithToken = async (req, res) => {
       errors: {
         msg: "Votre lien de réinitialisation a expiré",
         location: "body",
-        error: err
-      }
+        error: err,
+      },
     });
   }
 };

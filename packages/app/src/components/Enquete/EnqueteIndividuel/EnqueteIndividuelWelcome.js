@@ -7,10 +7,10 @@ import { LinkButton } from "../../../components/Commons";
 
 const textStyle = {
   textAlign: "center",
-  lineHeight: "30px"
+  lineHeight: "30px",
 };
 
-export const EnqueteIndividuelWelcome = props => {
+export const EnqueteIndividuelWelcome = (props) => {
   const { goToFirstPage, enquete } = props;
   const { id: enqueteId } = enquete;
   return (

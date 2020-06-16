@@ -2,7 +2,7 @@ const logger = require("../../utils/logger");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const {
-  confirmationPasswordEmail
+  confirmationPasswordEmail,
 } = require("../../email/password-confirmation");
 const { User } = require("../../models/User");
 
@@ -24,14 +24,14 @@ const resetPassword = async (req, res) => {
       .where("username", username)
       .orWhere("email", username.toLowerCase().trim())
       .first();
-    user.verifyPassword(password, async function(err, passwordCorrect) {
+    user.verifyPassword(password, async function (err, passwordCorrect) {
       if (err) {
         logger.error(err);
         return res.status(400).json({
           errors: {
             msg: "Une erreur est survenue",
-            location: "body"
-          }
+            location: "body",
+          },
         });
       }
       if (!passwordCorrect) {
@@ -39,8 +39,8 @@ const resetPassword = async (req, res) => {
           errors: {
             param: "password",
             msg: "votre mot de passe actuel n'est pas le bon",
-            location: "body"
-          }
+            location: "body",
+          },
         });
       }
       try {
@@ -60,8 +60,8 @@ const resetPassword = async (req, res) => {
       errors: {
         msg: "Une erreur est survenue",
         location: "body",
-        error: err
-      }
+        error: err,
+      },
     });
   }
 };

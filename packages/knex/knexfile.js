@@ -11,15 +11,15 @@ module.exports = {
       user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm"
+      database: "emjpm",
     },
     migrations: {
       directory: join(__dirname, "migrations_v2"),
-      tableName: "knex_migrations_v2"
+      tableName: "knex_migrations_v2",
     },
     seeds: {
-      directory: join(__dirname, "seeds/development")
-    }
+      directory: join(__dirname, "seeds/development"),
+    },
   },
   development: {
     client: "pg",
@@ -28,15 +28,15 @@ module.exports = {
       user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm"
+      database: "emjpm",
     },
     migrations: {
       directory: join(__dirname, "migrations_v2"),
-      tableName: "knex_migrations_v2"
+      tableName: "knex_migrations_v2",
     },
     seeds: {
-      directory: join(__dirname, "seeds/development")
-    }
+      directory: join(__dirname, "seeds/development"),
+    },
   },
   production: {
     client: "pg",
@@ -45,11 +45,11 @@ module.exports = {
       user: "emjpm",
       password: "test",
       port: "5434",
-      database: "emjpm"
+      database: "emjpm",
     },
     migrations: {
       directory: join(__dirname, "migrations_v2"),
-      tableName: "knex_migrations_v2"
-    }
-  }
+      tableName: "knex_migrations_v2",
+    },
+  },
 };

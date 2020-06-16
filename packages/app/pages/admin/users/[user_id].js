@@ -10,11 +10,11 @@ import { MesureImportPanel } from "../../../src/components/MesureImport";
 import { isMandataire } from "../../../src/util";
 import { withAuthSync } from "../../../src/util/auth";
 
-const UserInformationTabPanel = userId => {
+const UserInformationTabPanel = (userId) => {
   return <AdminUserInformations userId={userId} />;
 };
 
-const MandataireImportTabPanel = userId => (
+const MandataireImportTabPanel = (userId) => (
   <Fragment>
     <Heading4 mb={2}>Selectionnez le fichier</Heading4>
     <MesureImportPanel mandataireUserId={userId} />
@@ -25,29 +25,29 @@ const getTabInfos = (type, active) => {
   const tabInfos = [];
   tabInfos.push({
     createPanel: UserInformationTabPanel,
-    title: "Information"
+    title: "Information",
   });
 
   if (active && isMandataire(type)) {
     tabInfos.push({
       // eslint-disable-next-line react/display-name
-      createPanel: id => {
+      createPanel: (id) => {
         return <AdminUsersMesures userId={id} />;
       },
-      title: "Mesures"
+      title: "Mesures",
     });
   }
 
   if (active && isMandataire(type)) {
     tabInfos.push({
       createPanel: MandataireImportTabPanel,
-      title: "Import"
+      title: "Import",
     });
   }
   return tabInfos;
 };
 
-const User = props => {
+const User = (props) => {
   const { userId, type, active } = props;
   const tabInfos = getTabInfos(type, active);
 

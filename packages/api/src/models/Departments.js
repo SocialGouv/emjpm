@@ -18,11 +18,11 @@ class Department extends Model {
       properties: {
         id: { type: "integer" },
         id_finess: {
-          type: "string"
+          type: "string",
         },
         nom: { type: "string" },
-        code: { type: "string" }
-      }
+        code: { type: "string" },
+      },
     };
   }
 }

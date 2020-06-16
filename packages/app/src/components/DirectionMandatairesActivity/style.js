@@ -1,7 +1,7 @@
 const textStyle = {
   fontFamily: "heading",
   fontWeight: "600",
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const numberStyle = {
@@ -9,7 +9,7 @@ const numberStyle = {
   fontSize: 5,
   fontWeight: "600",
   pt: 2,
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const percentStyle = {
@@ -17,7 +17,7 @@ const percentStyle = {
   fontSize: 3,
   fontWeight: "600",
   pt: 1,
-  textAlign: "center"
+  textAlign: "center",
 };
 
 const pieTextStyle = {
@@ -30,11 +30,11 @@ const pieTextStyle = {
   position: "absolute",
   textAlign: "center",
   top: "50%",
-  width: "100px"
+  width: "100px",
 };
 
 const legendStyle = {
-  fontSize: 1
+  fontSize: 1,
 };
 
 export { textStyle, numberStyle, percentStyle, pieTextStyle, legendStyle };

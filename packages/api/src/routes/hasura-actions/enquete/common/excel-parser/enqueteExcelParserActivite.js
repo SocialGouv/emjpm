@@ -95,12 +95,12 @@ function parse(ws) {
 
     sorties_main_levee: parser.integer(ws["C50"]),
     sorties_deces: parser.integer(ws["C51"]),
-    sorties_masp: parser.integer(ws["C52"])
+    sorties_masp: parser.integer(ws["C52"]),
   };
 }
 
 const enqueteExcelParserActivite = {
-  parse
+  parse,
 };
 
 module.exports = enqueteExcelParserActivite;

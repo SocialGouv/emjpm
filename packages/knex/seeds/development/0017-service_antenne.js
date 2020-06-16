@@ -1,8 +1,8 @@
-exports.seed = async function(knex) {
+exports.seed = async function (knex) {
   await knex("service_antenne").del();
   const services = await knex("services");
   return Promise.all(
-    services.map(service =>
+    services.map((service) =>
       knex("service_antenne").insert({
         service_id: service.id,
         name: "skynet antenne",
@@ -13,7 +13,7 @@ exports.seed = async function(knex) {
         address_street: "1 rue des chats",
         address_zip_code: "75017",
         address_city: "paris",
-        mesures_max: 300
+        mesures_max: 300,
       })
     )
   );

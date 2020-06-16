@@ -14,12 +14,9 @@ const validationSchema = yup.object(
     "revisions_masp",
     "revisions_reconduction",
     "revisions_changement",
-    "revisions_autre"
+    "revisions_autre",
   ].reduce((acc, attrName) => {
-    acc[attrName] = yup
-      .number()
-      .positive()
-      .integer();
+    acc[attrName] = yup.number().positive().integer();
     return acc;
   }, [])
 );
@@ -30,18 +27,18 @@ function dataToForm(data) {
     revisionsMasp: data.revisionsMasp || "",
     revisionsReconduction: data.revisionsReconduction || "",
     revisionsChangement: data.revisionsChangement || "",
-    revisionsAutre: data.revisionsAutre || ""
+    revisionsAutre: data.revisionsAutre || "",
   };
 }
 
-export const EnqueteActiviteRevisionMesuresForm = props => {
+export const EnqueteActiviteRevisionMesuresForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -52,7 +49,7 @@ export const EnqueteActiviteRevisionMesuresForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
 
   return (

@@ -1,5 +1,5 @@
-exports.up = function(knex) {
-  return knex.schema.createTable("serviceAntennes", function(table) {
+exports.up = function (knex) {
+  return knex.schema.createTable("serviceAntennes", function (table) {
     table.increments();
     table.string("etablissement");
     table.string("poste");
@@ -14,13 +14,10 @@ exports.up = function(knex) {
     table.string("telephone_portable");
     table.string("nom");
     table.string("prenom");
-    table
-      .integer("service_id")
-      .references("id")
-      .inTable("mandataires");
+    table.integer("service_id").references("id").inTable("mandataires");
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.dropTable("serviceAntennes");
 };

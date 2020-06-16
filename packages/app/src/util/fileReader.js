@@ -37,5 +37,5 @@ function readBinaryFileAsBase64(file, cb, err) {
 
 export const fileReader = {
   readBinaryFileAsBase64,
-  readTextFile
+  readTextFile,
 };

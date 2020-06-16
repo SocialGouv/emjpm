@@ -41,5 +41,5 @@ const resetPasswordEmail = async (user, email, url) => {
 };
 
 module.exports = {
-  resetPasswordEmail
+  resetPasswordEmail,
 };

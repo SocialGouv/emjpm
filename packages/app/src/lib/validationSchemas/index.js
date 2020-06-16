@@ -57,5 +57,5 @@ export {
   editorTokenSchema,
   satisfactionCampaignSchema,
   serviceMesureImportSchema,
-  servicePersonnelSchema
+  servicePersonnelSchema,
 };

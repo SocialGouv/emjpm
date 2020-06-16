@@ -1,5 +1,4 @@
-
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw(`
   update mesures set residence = 'domicile' where residence= 'à domicile';
   update mesures set residence = 'en établissement' where residence= 'en ã©tablissement';
@@ -12,9 +11,7 @@ exports.up = function(knex) {
   update mesures set residence = null where residence= 'non reseigné';
   update mesures set residence = null where residence= 'autre';
   update mesures set residence = null where residence= 'autres';
-  `)
+  `);
 };
 
-exports.down = function(knex) {
-
-};
+exports.down = function (knex) {};

@@ -1,5 +1,5 @@
-exports.up = async knex => {
-  await knex.schema.createTable("magistrat", table => {
+exports.up = async (knex) => {
+  await knex.schema.createTable("magistrat", (table) => {
     table.increments();
     table
       .integer("user_id")
@@ -7,11 +7,7 @@ exports.up = async knex => {
       .notNullable()
       .references("id")
       .inTable("users");
-    table
-      .integer("ti_id")
-      .notNullable()
-      .references("id")
-      .inTable("tis");
+    table.integer("ti_id").notNullable().references("id").inTable("tis");
   });
   await knex.raw(`
 DELETE FROM user_role where user_id IN (
@@ -34,6 +30,6 @@ DELETE FROM user_tis where user_tis.user_id IN (select id FROM users WHERE users
 `);
 };
 
-exports.down = knex => {
+exports.down = (knex) => {
   return knex.schema.dropTable("magistrat");
 };

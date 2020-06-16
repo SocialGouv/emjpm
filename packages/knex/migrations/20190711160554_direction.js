@@ -1,5 +1,5 @@
-exports.up = knex => {
-  return knex.schema.createTable("direction", table => {
+exports.up = (knex) => {
+  return knex.schema.createTable("direction", (table) => {
     table.increments();
     table.integer("region_id");
     table.integer("user_id");
@@ -7,6 +7,6 @@ exports.up = knex => {
   });
 };
 
-exports.down = knex => {
+exports.down = (knex) => {
   return knex.schema.dropTable("direction");
 };

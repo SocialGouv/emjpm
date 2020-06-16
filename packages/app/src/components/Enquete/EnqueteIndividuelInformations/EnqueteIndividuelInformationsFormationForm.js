@@ -9,27 +9,15 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
-  cnc_annee_obtention: yup
-    .number()
-    .positive()
-    .integer()
-    .required(),
-  cnc_heures_formation: yup
-    .number()
-    .positive()
-    .required(),
-  niveau_qualification: yup
-    .number()
-    .min(1)
-    .max(6)
-    .integer()
-    .required(),
+  cnc_annee_obtention: yup.number().positive().integer().required(),
+  cnc_heures_formation: yup.number().positive().required(),
+  niveau_qualification: yup.number().min(1).max(6).integer().required(),
   secretaire_specialise_etp_n1: yup.number().min(0),
   secretaire_specialise_etp_spe_n2: yup.number().min(0),
   secretaire_specialise_etp_spe_n3: yup.number().min(0),
   secretaire_specialise_etp_spe_n4: yup.number().min(0),
   secretaire_specialise_etp_spe_n5: yup.number().min(0),
-  secretaire_specialise_etp_spe_n6: yup.number().min(0)
+  secretaire_specialise_etp_spe_n6: yup.number().min(0),
 });
 
 function dataToForm(data) {
@@ -54,18 +42,18 @@ function dataToForm(data) {
       : "",
     secretaire_specialise_etp_n6: data.secretaire_specialise_etp_n6
       ? parseFloat(data.secretaire_specialise_etp_n6)
-      : ""
+      : "",
   };
 }
 
-export const EnqueteIndividuelInformationsFormationForm = props => {
+export const EnqueteIndividuelInformationsFormationForm = (props) => {
   const {
     data = {},
     loading = false,
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -76,7 +64,7 @@ export const EnqueteIndividuelInformationsFormationForm = props => {
     step,
     validationSchema,
     dataToForm,
-    loading
+    loading,
   });
   return (
     <form onSubmit={submitForm}>

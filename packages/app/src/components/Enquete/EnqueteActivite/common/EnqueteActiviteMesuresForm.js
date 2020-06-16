@@ -15,7 +15,7 @@ function dataToForm(data) {
     debutAnnee: data.debutAnnee || "",
     finAnnee: data.finAnnee || "",
     mesuresNouvelles: data.mesuresNouvelles || "",
-    sortieMesures: data.sortieMesures || ""
+    sortieMesures: data.sortieMesures || "",
   };
 }
 
@@ -24,7 +24,7 @@ function formToData(data) {
     debutAnnee: parseIntToSubmit(data.debutAnnee),
     finAnnee: parseIntToSubmit(data.finAnnee),
     mesuresNouvelles: parseIntToSubmit(data.mesuresNouvelles),
-    sortieMesures: parseIntToSubmit(data.sortieMesures)
+    sortieMesures: parseIntToSubmit(data.sortieMesures),
   };
 
   function parseIntToSubmit(value) {
@@ -32,7 +32,7 @@ function formToData(data) {
   }
 }
 
-export const EnqueteActiviteMesuresForm = props => {
+export const EnqueteActiviteMesuresForm = (props) => {
   const {
     title,
     data = {},
@@ -40,7 +40,7 @@ export const EnqueteActiviteMesuresForm = props => {
     step,
     onSubmit,
     enqueteContext,
-    dispatchEnqueteContextEvent
+    dispatchEnqueteContextEvent,
   } = props;
 
   const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
@@ -52,7 +52,7 @@ export const EnqueteActiviteMesuresForm = props => {
     validationSchema,
     dataToForm,
     formToData,
-    loading
+    loading,
   });
   return (
     <form onSubmit={submitForm}>

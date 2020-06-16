@@ -2,7 +2,7 @@ import { COUNTRIES } from "../../constants/mesures";
 
 export const mesureFormatter = {
   formatMajeurProtege,
-  formatPays
+  formatPays,
 };
 
 function formatMajeurProtege(civilite, realAge) {

@@ -8,7 +8,7 @@ import { AntenneLinkButton, LinkButton } from "../Commons";
 import { ANTENNE } from "./queries";
 import { AntennesStyle } from "./style";
 
-const ServiceAntennes = props => {
+const ServiceAntennes = (props) => {
   const { isAntenneCreationHidden } = props;
   const { data, loading, error } = useQuery(ANTENNE, { fetchPolicy: "cache-and-network" });
 
@@ -41,7 +41,7 @@ const ServiceAntennes = props => {
               <Box
                 sx={{
                   flexBasis: 120,
-                  flexGrow: 1
+                  flexGrow: 1,
                 }}
               >
                 <img src="/static/images/enterprise.svg" alt="entreprise" />
@@ -56,7 +56,7 @@ const ServiceAntennes = props => {
               <Box
                 sx={{
                   flexBasis: 260,
-                  flexGrow: 1
+                  flexGrow: 1,
                 }}
               >
                 <LinkButton href="/services/antennes/create" ml="1">
@@ -78,7 +78,7 @@ const ServiceAntennes = props => {
             )}
           </Flex>
           <Box sx={AntennesStyle} {...props}>
-            {service_antenne.map(antenne => {
+            {service_antenne.map((antenne) => {
               antenne = { ...antenne, preferences: [] };
               return (
                 <Antenne
@@ -99,11 +99,11 @@ const ServiceAntennes = props => {
 };
 
 ServiceAntennes.defaultProps = {
-  isAntenneCreationHidden: false
+  isAntenneCreationHidden: false,
 };
 
 ServiceAntennes.propTypes = {
-  isAntenneCreationHidden: PropTypes.bool
+  isAntenneCreationHidden: PropTypes.bool,
 };
 
 export { ServiceAntennes };

@@ -9,7 +9,7 @@ export const containerStyle = {
   p: 4,
   width: 400,
   borderRadius: 10,
-  zIndex: 1000
+  zIndex: 1000,
 };
 
 export const buttonStyle = {
@@ -22,6 +22,6 @@ export const buttonStyle = {
   borderRadius: 4,
   textAlign: "center",
   "&:hover": {
-    bg: "rgba(255, 255, 255, 0.7)"
-  }
+    bg: "rgba(255, 255, 255, 0.7)",
+  },
 };

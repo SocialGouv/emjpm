@@ -2,7 +2,7 @@ const sentry = require("../utils/sentry");
 const logger = require("../utils/logger");
 const { sendEmail } = require(".");
 
-const EMAIL_RELANCE_TEXT = url => `
+const EMAIL_RELANCE_TEXT = (url) => `
 Bonjour,
 
 eMJPM vient de valider votre compte.
@@ -16,7 +16,7 @@ Bien à vous.
 eMJPM Team
 `;
 
-const EMAIL_RELANCE_HTML = url => `
+const EMAIL_RELANCE_HTML = (url) => `
 Bonjour,<br>
 <br>
 eMJPM vient de valider votre compte.
@@ -45,5 +45,5 @@ const validationEmail = async (email, url) => {
 };
 
 module.exports = {
-  validationEmail
+  validationEmail,
 };

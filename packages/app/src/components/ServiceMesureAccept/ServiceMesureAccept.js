@@ -12,12 +12,12 @@ import { SERVICE } from "./queries";
 import { ServiceMesureAcceptForm } from "./ServiceMesureAcceptForm";
 import { ServiceMesureAcceptStyle } from "./style";
 
-export const ServiceMesureAccept = props => {
+export const ServiceMesureAccept = (props) => {
   const { service_members, id } = useContext(UserContext);
   const [
     {
-      service: { service_antennes }
-    }
+      service: { service_antennes },
+    },
   ] = service_members;
   const mesure = useContext(MesureContext);
   const client = useApolloClient();
@@ -26,18 +26,18 @@ export const ServiceMesureAccept = props => {
     refetchQueries: [
       {
         query: SERVICE,
-        variables: { id: mesure.serviceId }
+        variables: { id: mesure.serviceId },
       },
       {
         query: GET_SERVICE_USERS,
-        variables: { userId: id }
-      }
-    ]
+        variables: { userId: id },
+      },
+    ],
   });
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
-    }
+    },
   });
 
   return (
@@ -49,12 +49,12 @@ export const ServiceMesureAccept = props => {
           if (values.country.value === "FR") {
             const location = await getLocation(client, {
               zipcode: values.zipcode,
-              city: values.city
+              city: values.city,
             });
 
             if (!location || !location.department) {
               setErrors({
-                zipcode: `Le code postal semble invalide.`
+                zipcode: `Le code postal semble invalide.`,
               });
               return setSubmitting(false);
             } else {
@@ -75,8 +75,8 @@ export const ServiceMesureAccept = props => {
               date_ouverture: values.date_ouverture,
               id: mesure.id,
               residence: values.residence.value,
-              pays: values.country.value
-            }
+              pays: values.country.value,
+            },
           });
 
           await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`);

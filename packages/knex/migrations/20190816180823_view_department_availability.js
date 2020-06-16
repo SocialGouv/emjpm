@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   return knex.raw(`
 CREATE VIEW view_department_availability AS
  SELECT department_id, sum(mesures_awaiting) mesures_awaiting, sum(mesures_in_progress) mesures_in_progress, sum(mesures_max) mesures_max
@@ -7,7 +7,7 @@ CREATE VIEW view_department_availability AS
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
 DROP VIEW view_department_availability
   `);

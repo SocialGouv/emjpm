@@ -10,7 +10,7 @@ const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
         type="file"
         name="file"
         value=""
-        onChange={event => {
+        onChange={(event) => {
           const file = event.currentTarget.files[0];
           onFileChosen(file);
         }}

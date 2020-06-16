@@ -7,17 +7,17 @@ import { MagistratMesureServiceTitle } from "../MagistratMesureServiceTitle";
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
 import { MagistratMandataireStyle } from "./style";
 
-const MagistratMesureAdd = props => {
+const MagistratMesureAdd = (props) => {
   const { gestionnaireId } = props;
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
   const cancelActionRoute = gestionnaireId
     ? {
         href: "/magistrats/gestionnaires/[gestionnaire_id]",
-        as: `/magistrats/gestionnaires/${gestionnaireId}`
+        as: `/magistrats/gestionnaires/${gestionnaireId}`,
       }
     : {
         href: `/magistrats`,
-        as: `/magistrats`
+        as: `/magistrats`,
       };
 
   return (

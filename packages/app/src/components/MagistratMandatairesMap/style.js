@@ -4,7 +4,7 @@ const MagistratMandatairesMapStyle = () => {
     height: "100%",
     width: "100%",
     top: "0",
-    pt: "115px"
+    pt: "115px",
   };
 };
 
@@ -17,14 +17,14 @@ const titleStyle = {
   overflow: "hidden",
   textOverflow: "ellipsis",
   whiteSpace: "nowrap",
-  width: "200px"
+  width: "200px",
 };
 
 const subtitleStyle = {
   color: "mediumGray",
   fontFamily: "body",
   fontSize: "12px",
-  fontWeight: "600"
+  fontWeight: "600",
 };
 
 const labelStyle = {
@@ -34,7 +34,7 @@ const labelStyle = {
   fontWeight: "600",
   mb: "0",
   mt: "10px",
-  lineHeight: "1.4"
+  lineHeight: "1.4",
 };
 
 const descriptionStyle = {
@@ -44,10 +44,10 @@ const descriptionStyle = {
   fontWeight: "600",
   overflow: "hidden",
   textOverflow: "ellipsis",
-  whiteSpace: "nowrap"
+  whiteSpace: "nowrap",
 };
 
-const dispoDescriptionStyle = isPositive => {
+const dispoDescriptionStyle = (isPositive) => {
   return {
     color: isPositive ? "success" : "error",
     fontFamily: "heading",
@@ -55,7 +55,7 @@ const dispoDescriptionStyle = isPositive => {
     fontWeight: "600",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    whiteSpace: "nowrap"
+    whiteSpace: "nowrap",
   };
 };
 
@@ -65,5 +65,5 @@ export {
   subtitleStyle,
   labelStyle,
   descriptionStyle,
-  dispoDescriptionStyle
+  dispoDescriptionStyle,
 };

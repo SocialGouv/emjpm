@@ -8,13 +8,13 @@ import { MagistratMandataireComment } from "./MagistratMandataireComment";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { MANDATAIRE_COMMENTS } from "./queries";
 
-const MagistratMandataireComments = props => {
+const MagistratMandataireComments = (props) => {
   const { tiId, serviceId, mandataireId } = props;
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
       mandataire_id: mandataireId,
-      service_id: serviceId
-    }
+      service_id: serviceId,
+    },
   });
 
   const [isOpen, toggleCommentForm] = useState(false);
@@ -44,7 +44,7 @@ const MagistratMandataireComments = props => {
     <Fragment>
       {commentaires.length > 0 ? (
         <Box width="100%">
-          {commentaires.map(commentaire => {
+          {commentaires.map((commentaire) => {
             return (
               <MagistratMandataireComment
                 key={commentaire.id}
@@ -94,7 +94,7 @@ const MagistratMandataireComments = props => {
 MagistratMandataireComments.propTypes = {
   mandataireId: PropTypes.number,
   serviceId: PropTypes.number,
-  tiId: PropTypes.number
+  tiId: PropTypes.number,
 };
 
 export { MagistratMandataireComments };

@@ -19,10 +19,10 @@ const EXTINCTION_LABEL_VALUE = [
   { label: "décès", value: "décès" },
   { label: "main levée", value: "levée" },
   { label: "erreur de saisie", value: "saisie" },
-  { label: "autre", value: "autre" }
+  { label: "autre", value: "autre" },
 ];
 
-export const ServiceMesureCloseForm = props => {
+export const ServiceMesureCloseForm = (props) => {
   const { mesure } = props;
   const { id, serviceId } = mesure;
   const user = useContext(UserContext);
@@ -31,22 +31,22 @@ export const ServiceMesureCloseForm = props => {
     refetchQueries: [
       {
         query: MESURE,
-        variables: { id }
+        variables: { id },
       },
       {
         query: SERVICE,
-        variables: { id: serviceId }
+        variables: { id: serviceId },
       },
       {
         query: GET_SERVICE_USERS,
-        variables: { userId: user.id }
-      }
-    ]
+        variables: { userId: user.id },
+      },
+    ],
   });
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateServiceMesure({ variables: { service_id: serviceId } });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -55,20 +55,20 @@ export const ServiceMesureCloseForm = props => {
         variables: {
           extinction: values.extinction,
           id,
-          reason_extinction: values.reason_extinction.value
-        }
+          reason_extinction: values.reason_extinction.value,
+        },
       });
 
       await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-        shallow: true
+        shallow: true,
       });
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
       extinction: Yup.date().required("Required"),
-      reason_extinction: Yup.string().required("Required")
+      reason_extinction: Yup.string().required("Required"),
     }),
-    initialValues: { extinction: "", reason_extinction: "" }
+    initialValues: { extinction: "", reason_extinction: "" },
   });
 
   return (
@@ -103,7 +103,7 @@ export const ServiceMesureCloseForm = props => {
               placeholder="Raison de la fin de mandat"
               value={formik.values.type}
               hasError={formik.errors.type && formik.touched.type}
-              onChange={option => formik.setFieldValue("reason_extinction", option)}
+              onChange={(option) => formik.setFieldValue("reason_extinction", option)}
               options={EXTINCTION_LABEL_VALUE}
             />
           </Field>
@@ -114,7 +114,7 @@ export const ServiceMesureCloseForm = props => {
                 variant="outline"
                 onClick={() => {
                   Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-                    shallow: true
+                    shallow: true,
                   });
                 }}
               >
@@ -136,8 +136,8 @@ export const ServiceMesureCloseForm = props => {
 ServiceMesureCloseForm.propTypes = {
   mesure: PropTypes.shape({
     id: PropTypes.number,
-    serviceId: PropTypes.number
-  })
+    serviceId: PropTypes.number,
+  }),
 };
 
 export default ServiceMesureCloseForm;

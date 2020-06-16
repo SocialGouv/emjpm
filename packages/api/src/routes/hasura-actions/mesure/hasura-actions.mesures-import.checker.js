@@ -11,7 +11,7 @@ async function checkImportMesuresParameters(req) {
     content,
     serviceId,
     mandataireUserId,
-    antennesMap
+    antennesMap,
   } = inputParameters;
 
   if (!serviceId && !mandataireUserId) {
@@ -54,10 +54,10 @@ async function checkImportMesuresParameters(req) {
   const importMesuresParameters = {
     file: {
       content,
-      type: name.endsWith(".xls") || name.endsWith(".xlsx") ? "xls" : "csv"
+      type: name.endsWith(".xls") || name.endsWith(".xlsx") ? "xls" : "csv",
     },
     importContext,
-    antennesMap: antennesMap ? JSON.parse(antennesMap) : undefined
+    antennesMap: antennesMap ? JSON.parse(antennesMap) : undefined,
   };
   return importMesuresParameters;
 }

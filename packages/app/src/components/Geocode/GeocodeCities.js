@@ -4,21 +4,21 @@ import { useQuery } from "react-apollo";
 
 import { CODE_POSTAL } from "./queries";
 
-export const GeocodeCities = props => {
+export const GeocodeCities = (props) => {
   const { onChange, hasError, zipcode, value, name } = props;
   const { data, loading } = useQuery(CODE_POSTAL, {
     variables: {
-      zipcode: zipcode
-    }
+      zipcode: zipcode,
+    },
   });
 
   let options = [];
   if (data && !loading) {
     const { geolocalisation_code_postal } = data;
-    options = geolocalisation_code_postal.map(item => {
+    options = geolocalisation_code_postal.map((item) => {
       return {
         value: item.cities,
-        label: item.cities
+        label: item.cities,
       };
     });
   }
@@ -30,7 +30,7 @@ export const GeocodeCities = props => {
       value={value ? { label: value, value } : { label: "", value: "" }}
       placeholder="Ville"
       hasError={hasError}
-      onChange={item => onChange(item.value)}
+      onChange={(item) => onChange(item.value)}
       options={options}
     />
   );

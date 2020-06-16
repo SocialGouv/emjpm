@@ -8,7 +8,7 @@ import { individuelExerciceSchema } from "../../lib/validationSchemas";
 import { findOption, getOptionValue } from "../../util/option/OptionUtil";
 import { FieldLabel } from "../IndividuelInformationCommon";
 
-const IndividuelInformationExerciceForm = props => {
+const IndividuelInformationExerciceForm = (props) => {
   const { exercice, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
@@ -22,8 +22,8 @@ const IndividuelInformationExerciceForm = props => {
       cumulPreposeEtp: findOption(INTERVALLE_ETP_OPTIONS, exercice.cumul_prepose_etp) || "",
       cumulDelegueService: findOption(YES_NO_OPTIONS, exercice.cumul_delegue_service) || "",
       cumulDelegueServiceEtp:
-        findOption(INTERVALLE_ETP_OPTIONS, exercice.cumul_delegue_service_etp) || ""
-    }
+        findOption(INTERVALLE_ETP_OPTIONS, exercice.cumul_delegue_service_etp) || "",
+    },
   });
 
   return (
@@ -37,7 +37,7 @@ const IndividuelInformationExerciceForm = props => {
             name="estimationEtp"
             value={formik.values.estimationEtp}
             hasError={formik.errors.estimationEtp}
-            onChange={option => formik.setFieldValue("estimationEtp", option)}
+            onChange={(option) => formik.setFieldValue("estimationEtp", option)}
             options={INTERVALLE_ETP_OPTIONS}
           />
           <InlineError message={formik.errors.estimationEtp} fieldId="estimationEtp" />
@@ -52,7 +52,7 @@ const IndividuelInformationExerciceForm = props => {
             name="secretariatSpecialise"
             value={formik.values.secretariatSpecialise}
             hasError={formik.errors.secretariatSpecialise}
-            onChange={option => {
+            onChange={(option) => {
               formik.setFieldValue("secretariatSpecialise", option);
               if (!option.value) {
                 formik.setFieldValue("secretariatSpecialiseEtp", "");
@@ -92,7 +92,7 @@ const IndividuelInformationExerciceForm = props => {
             name="cumulPrepose"
             value={formik.values.cumulPrepose}
             hasError={formik.errors.cumulPrepose}
-            onChange={option => {
+            onChange={(option) => {
               formik.setFieldValue("cumulPrepose", option);
               if (!option.value) {
                 formik.setFieldValue("cumulPreposeEtp", "");
@@ -111,7 +111,7 @@ const IndividuelInformationExerciceForm = props => {
               placeholder="ETP consacré au cumul en tant que préposé"
               value={formik.values.cumulPreposeEtp}
               hasError={formik.errors.cumulPreposeEtp}
-              onChange={option => formik.setFieldValue("cumulPreposeEtp", option)}
+              onChange={(option) => formik.setFieldValue("cumulPreposeEtp", option)}
               options={INTERVALLE_ETP_OPTIONS}
             />
             <InlineError message={formik.errors.cumulPreposeEtp} fieldId="cumulPreposeEtp" />
@@ -127,7 +127,7 @@ const IndividuelInformationExerciceForm = props => {
             name="cumulDelegueService"
             value={formik.values.cumulDelegueService}
             hasError={formik.errors.cumulDelegueService}
-            onChange={option => {
+            onChange={(option) => {
               formik.setFieldValue("cumulDelegueService", option);
               if (!option.value) {
                 formik.setFieldValue("cumulDelegueServiceEtp", "");
@@ -145,7 +145,7 @@ const IndividuelInformationExerciceForm = props => {
               name="cumulDelegueServiceEtp"
               value={formik.values.cumulDelegueServiceEtp}
               hasError={formik.errors.cumulDelegueServiceEtp}
-              onChange={option => formik.setFieldValue("cumulDelegueServiceEtp", option)}
+              onChange={(option) => formik.setFieldValue("cumulDelegueServiceEtp", option)}
               options={INTERVALLE_ETP_OPTIONS}
             />
             <InlineError

@@ -1,13 +1,13 @@
 const {
   getValidationStatus,
-  getGlobalStatus
+  getGlobalStatus,
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
 const enqueteAgrementsFormationsStatus = require("../agrements_formations/enqueteAgrementsFormationsStatus");
 
 const debugGroupName = "informationsGenerales";
 
-module.exports = async enqueteReponse => {
+module.exports = async (enqueteReponse) => {
   const status = {
     informationsGenerales: await getValidationStatus(
       enqueteReponse.enquete_reponses_informations_mandataire,
@@ -20,7 +20,7 @@ module.exports = async enqueteReponse => {
           forme_juridique: yup.string().when("benevole", {
             is: false,
             then: yup.string().required(),
-            otherwise: yup.string().nullable()
+            otherwise: yup.string().nullable(),
           }),
           anciennete: yup.string().required(),
           estimation_etp: yup.string().required(),
@@ -30,35 +30,29 @@ module.exports = async enqueteReponse => {
             .number()
             .when("exerce_secretaires_specialises", {
               is: true,
-              then: yup
-                .number()
-                .positive()
-                .required(), // > 0
-              otherwise: yup
-                .number()
-                .oneOf([0])
-                .nullable() // 0 or empty
+              then: yup.number().positive().required(), // > 0
+              otherwise: yup.number().oneOf([0]).nullable(), // 0 or empty
             }),
-          local_professionnel: yup.boolean().required()
+          local_professionnel: yup.boolean().required(),
         }),
         debugName: `${debugGroupName}/agrementsStatus`,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
     ),
     agrements: enqueteAgrementsFormationsStatus.agrementsStatus(
       enqueteReponse,
       {
         debugGroupName,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
     ),
     formation: enqueteAgrementsFormationsStatus.formationStatus(
       enqueteReponse,
       {
         debugGroupName,
-        logDataWithErrors: false
+        logDataWithErrors: false,
       }
-    )
+    ),
   };
 
   status.global = getGlobalStatus(status);

@@ -12,16 +12,16 @@ export const EnqueteCreate = () => {
   const client = useApolloClient();
   const [createEnquete] = useMutation(CREATE_ENQUETE, {
     onCompleted: () => Router.push("/direction/enquetes"),
-    refetchQueries: [{ query: ENQUETES }]
+    refetchQueries: [{ query: ENQUETES }],
   });
   const formik = useFormik({
     initialValues: {
       year: new Date().getFullYear(),
-      endedAt: ""
+      endedAt: "",
     },
     onSubmit: async (values, formikHelpers) => {
       const { data } = await client.query({ query: ENQUETES });
-      if (data && data.enquetes.some(e => Number(e.annee) === Number(values.year))) {
+      if (data && data.enquetes.some((e) => Number(e.annee) === Number(values.year))) {
         Router.push("/direction/enquetes");
       }
 
@@ -33,8 +33,8 @@ export const EnqueteCreate = () => {
         .string()
         .matches(/^[0-9]{4}$/, "L'année doit comporter 4 chiffres.")
         .required(),
-      endedAt: yup.date().required()
-    })
+      endedAt: yup.date().required(),
+    }),
   });
 
   const { values, touched, handleChange, handleSubmit, errors } = formik;

@@ -6,10 +6,10 @@ import { MagistratMandataire } from "../../../../src/components/MagistratMandata
 import { UserContext } from "../../../../src/components/UserContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const Gestionnaire = props => {
+const Gestionnaire = (props) => {
   const { gestionnaireId } = props;
   const {
-    magistrat: { ti_id: tiId }
+    magistrat: { ti_id: tiId },
   } = useContext(UserContext);
 
   return (

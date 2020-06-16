@@ -3,7 +3,7 @@ import React, { createContext, useState } from "react";
 import { endDate, startDate } from "../../../util/dates";
 export const Context = createContext({});
 
-export const Provider = props => {
+export const Provider = (props) => {
   // Initial values are obtained from the props
   const { children } = props;
 
@@ -22,7 +22,7 @@ export const Provider = props => {
     endDateValue,
     selectedDepartementValue,
     selectedRegionalValue,
-    startDateValue
+    startDateValue,
   };
 
   // pass the value in provider and return

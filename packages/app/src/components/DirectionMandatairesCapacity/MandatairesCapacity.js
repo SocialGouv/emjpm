@@ -10,15 +10,15 @@ import { MANDATAIRES_CAPACITY } from "./queries";
 const options = [
   { label: "Chocolate", value: "chocolate" },
   { label: "Strawberry", value: "strawberry" },
-  { label: "Vanilla", value: "vanilla" }
+  { label: "Vanilla", value: "vanilla" },
 ];
 
-const MandatairesCapacity = props => {
+const MandatairesCapacity = (props) => {
   const {
     selectedRegionalValue,
     startDateValue,
     selectedDepartementValue,
-    endDateValue
+    endDateValue,
   } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MANDATAIRES_CAPACITY, {
@@ -26,8 +26,8 @@ const MandatairesCapacity = props => {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue
-    }
+      start: startDateValue,
+    },
   });
 
   if (loading) {
@@ -58,7 +58,7 @@ const MandatairesCapacity = props => {
           placeholder="Mandataire en surcapacité par ordre décroissant"
           options={options}
           value={"selectedValue"}
-          onChange={selectedOption => console.log(selectedOption)}
+          onChange={(selectedOption) => console.log(selectedOption)}
         />
       </Box>
       <MandatairesCapacityChart data={data} />

@@ -23,7 +23,7 @@ tarteaucitron.init({
 
   //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
 
-  useExternalCss: false /* Change the default readmore link */
+  useExternalCss: false /* Change the default readmore link */,
 });
 
 tarteaucitron.user.matomoId = 13;

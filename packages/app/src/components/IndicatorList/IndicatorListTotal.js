@@ -30,64 +30,64 @@ const IndicatorListTotal = () => {
   const {
     serviceLoginCount: {
       aggregate: {
-        sum: { count: serviceLoginCount }
-      }
+        sum: { count: serviceLoginCount },
+      },
     },
     individuelLoginCount: {
       aggregate: {
-        sum: { count: individuelLoginCount }
-      }
+        sum: { count: individuelLoginCount },
+      },
     },
     preposeLoginCount: {
       aggregate: {
-        sum: { count: preposeLoginCount }
-      }
+        sum: { count: preposeLoginCount },
+      },
     },
     magistratLoginCount: {
       aggregate: {
-        sum: { count: magistratLoginCount }
-      }
+        sum: { count: magistratLoginCount },
+      },
     },
     serviceInscritCount: {
       aggregate: {
-        sum: { count: serviceInscritCount }
-      }
+        sum: { count: serviceInscritCount },
+      },
     },
     individuelInscritCount: {
       aggregate: {
-        sum: { count: individuelInscritCount }
-      }
+        sum: { count: individuelInscritCount },
+      },
     },
     preposeInscritCount: {
       aggregate: {
-        sum: { count: preposeInscritCount }
-      }
+        sum: { count: preposeInscritCount },
+      },
     },
     magistratInscritCount: {
       aggregate: {
-        sum: { count: magistratInscritCount }
-      }
+        sum: { count: magistratInscritCount },
+      },
     },
     magistratStatisfaction: {
       aggregate: {
-        avg: { value: magistratStatisfactionValue }
-      }
+        avg: { value: magistratStatisfactionValue },
+      },
     },
     serviceStatisfaction: {
       aggregate: {
-        avg: { value: serviceStatisfactionValue }
-      }
+        avg: { value: serviceStatisfactionValue },
+      },
     },
     preposeStatisfaction: {
       aggregate: {
-        avg: { value: preposeStatisfactionValue }
-      }
+        avg: { value: preposeStatisfactionValue },
+      },
     },
     individuelStatisfaction: {
       aggregate: {
-        avg: { value: individuelStatisfactionValue }
-      }
-    }
+        avg: { value: individuelStatisfactionValue },
+      },
+    },
   } = data;
   return (
     <Box>

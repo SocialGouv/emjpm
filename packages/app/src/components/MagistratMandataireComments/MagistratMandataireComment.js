@@ -8,7 +8,7 @@ import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm
 import { REMOVE_COMMENT } from "./mutations";
 import { topTextStyle } from "./style";
 
-const MagistratMandataireComment = props => {
+const MagistratMandataireComment = (props) => {
   const {
     setCurrentComment,
     currentComment,
@@ -16,7 +16,7 @@ const MagistratMandataireComment = props => {
     comment,
     isEditOpen,
     toggleEditCommentForm,
-    toggleCommentForm
+    toggleCommentForm,
   } = props;
   const [RemoveComment] = useMutation(REMOVE_COMMENT);
 
@@ -35,7 +35,7 @@ const MagistratMandataireComment = props => {
             <Box
               sx={{
                 flexBasis: 256,
-                flexGrow: 1
+                flexGrow: 1,
               }}
             >
               {`- ${comment}`}

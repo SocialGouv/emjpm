@@ -2,28 +2,26 @@
 
 const knex = require("../knex.js");
 
-const getAllTisByMandataire = mandataireId =>
+const getAllTisByMandataire = (mandataireId) =>
   knex("user_tis")
     .distinct("user_tis.ti_id")
     .select("tis.id", "tis.etablissement", "user_tis.ti_id")
     .innerJoin("tis", "user_tis.ti_id", "tis.id")
     .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
     .where({
-      "mandataires.id": parseInt(mandataireId)
+      "mandataires.id": parseInt(mandataireId),
     });
 
 // change mandataire_tis
 //const addMandataireTis = data => knex("mandataire_tis").insert(data);
 
-const findUserbymandataire = mandataire_id =>
-  knex("mandataires")
-    .select("mandataires.user_id")
-    .where("id", mandataire_id);
+const findUserbymandataire = (mandataire_id) =>
+  knex("mandataires").select("mandataires.user_id").where("id", mandataire_id);
 
 const addMandataireTis = (ti_id, mandataire_id) =>
   knex("user_tis").insert({
     ti_id: ti_id,
-    user_id: findUserbymandataire(mandataire_id)
+    user_id: findUserbymandataire(mandataire_id),
   });
 
 const deleteMandataireTis = (tiId, mandataireId) =>
@@ -31,21 +29,21 @@ const deleteMandataireTis = (tiId, mandataireId) =>
     .innerJoin("mandataires", "mandataires.user_id", "user_tis.user_id")
     .where({
       ti_id: parseInt(tiId),
-      user_id: findUserbymandataire(parseInt(mandataireId))
+      user_id: findUserbymandataire(parseInt(mandataireId)),
     })
     .first()
     .del();
 
 const getTis = () => knex("tis");
 
-const getTiById = tiId =>
+const getTiById = (tiId) =>
   knex("tis")
     .where({
-      id: parseInt(tiId)
+      id: parseInt(tiId),
     })
     .first();
 
-const getTiByUserId = userId =>
+const getTiByUserId = (userId) =>
   knex("tis")
     .select(
       "tis.*",
@@ -62,7 +60,7 @@ const getTiByUserId = userId =>
     .where("user_tis.user_id", Number(userId))
     .first();
 
-const getTiByUserIdWithCodePostal = userId =>
+const getTiByUserIdWithCodePostal = (userId) =>
   knex("tis")
     .select(
       "tis.id",
@@ -82,9 +80,9 @@ const getTiByUserIdWithCodePostal = userId =>
     .where("user_tis.user_id", parseInt(userId))
     .first();
 
-const getTisNames = async tis => {
-  const getEtablissementByTi = id =>
-    getTiById(id).then(json => json.etablissement);
+const getTisNames = async (tis) => {
+  const getEtablissementByTi = (id) =>
+    getTiById(id).then((json) => json.etablissement);
   if (tis) {
     const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
       ", "
@@ -101,5 +99,5 @@ module.exports = {
   getTisNames,
   getTiByUserId,
   getTiByUserIdWithCodePostal,
-  getTiById
+  getTiById,
 };

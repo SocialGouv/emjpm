@@ -5,7 +5,7 @@ import { Box, Button, Flex, Text } from "rebass";
 
 import { LinkButton } from "../../../components/Commons";
 
-export const EnquetePreposeWelcome = props => {
+export const EnquetePreposeWelcome = (props) => {
   const { goToFirstPage, enquete } = props;
   const { id: enqueteId } = enquete;
   return (

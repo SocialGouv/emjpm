@@ -21,7 +21,7 @@ const MagistratFilters = () => {
                 options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
                 placeholder={"Type de mesure"}
                 value={mesureType}
-                onChange={option => changeMesureType(option)}
+                onChange={(option) => changeMesureType(option)}
               />
             </Box>
             <Box width="200px" mr={1}>
@@ -29,7 +29,7 @@ const MagistratFilters = () => {
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={event => changeSearchText(event.target.value)}
+                onChange={(event) => changeSearchText(event.target.value)}
                 name="search"
                 size="small"
                 placeholder="Numéro RG"

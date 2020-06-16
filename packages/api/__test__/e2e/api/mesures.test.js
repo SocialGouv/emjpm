@@ -21,24 +21,20 @@ beforeAll(async () => {
   const [user] = await knex("users");
   const [mesure] = await knex("mesures");
 
-  await request(server)
-    .post("/api/auth/login")
-    .send({
-      username: user.username,
-      password: "johnson123"
-    });
+  await request(server).post("/api/auth/login").send({
+    username: user.username,
+    password: "johnson123",
+  });
 
-  const res = await request(server)
-    .post("/api/oauth/authorize")
-    .send({
-      userId: user.id,
-      editorId: editor.id,
-      editorToken: editor.api_token,
-      redirectUrl: "http://localhost:3001"
-    });
+  const res = await request(server).post("/api/oauth/authorize").send({
+    userId: user.id,
+    editorId: editor.id,
+    editorToken: editor.api_token,
+    redirectUrl: "http://localhost:3001",
+  });
 
   const {
-    body: { publicToken }
+    body: { publicToken },
   } = res;
 
   global.token = publicToken;
@@ -103,7 +99,7 @@ describe("POST /api/editors/mesures", () => {
         numero_rg: "RGXXXX123",
         residence: "en établissement",
         ti_id: global.ti.id,
-        type: "curatelle renforcée aux biens et à la personne"
+        type: "curatelle renforcée aux biens et à la personne",
       });
 
     expect(response.status).toBe(201);
@@ -145,9 +141,9 @@ describe("POST /api/editors/mesures/batch", () => {
             numero_rg: "RGXXXX123",
             residence: "en établissement",
             ti_id: global.ti.id,
-            type: "curatelle renforcée aux biens et à la personne"
-          }
-        ]
+            type: "curatelle renforcée aux biens et à la personne",
+          },
+        ],
       });
 
     expect(response.status).toBe(201);

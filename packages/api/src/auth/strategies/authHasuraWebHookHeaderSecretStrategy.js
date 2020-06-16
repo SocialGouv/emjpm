@@ -3,7 +3,7 @@ const passportCustom = require("passport-custom");
 const CustomStrategy = passportCustom.Strategy;
 
 // http://www.passportjs.org/packages/passport-trusted-header/
-const strategy = new CustomStrategy(function(req, done) {
+const strategy = new CustomStrategy(function (req, done) {
   const secret = req.headers["hasura_web_hook_secret"];
 
   if (secret === process.env["HASURA_WEB_HOOK_SECRET"]) {
@@ -17,18 +17,18 @@ const strategy = new CustomStrategy(function(req, done) {
 });
 
 function buildHasuraUser(req) {
-  const buildHasuraUser = session_variables => {
+  const buildHasuraUser = (session_variables) => {
     const {
       "x-hasura-role": role,
       "x-hasura-user-id": userId,
-      "x-hasura-service-id": serviceId
+      "x-hasura-service-id": serviceId,
     } = session_variables;
 
     return {
       __auth_type__: "hasura",
       role,
       userId: userId !== "null" ? parseInt(userId) : undefined,
-      serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined
+      serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined,
     };
   };
   if (!req) {
@@ -54,7 +54,7 @@ function serializeUser(hasuraUser) {
   return (
     SERIALIZED_PREFIX +
     [hasuraUser.role, hasuraUser.userId, hasuraUser.serviceId]
-      .map(x => (x ? `${x}` : ""))
+      .map((x) => (x ? `${x}` : ""))
       .join(";")
   );
 }
@@ -66,7 +66,7 @@ function deserializeUser(str) {
       __auth_type__: "hasura",
       role: chunks[1],
       userId: chunks[2] !== "" ? parseInt(chunks[2]) : undefined,
-      serviceId: chunks[3] !== "" ? parseInt(chunks[3]) : undefined
+      serviceId: chunks[3] !== "" ? parseInt(chunks[3]) : undefined,
     };
     return hasuraUser;
   }
@@ -78,6 +78,6 @@ module.exports = {
   userSerializer: {
     serialize: serializeUser,
     deserialize: deserializeUser,
-    PREFIX: SERIALIZED_PREFIX
-  }
+    PREFIX: SERIALIZED_PREFIX,
+  },
 };

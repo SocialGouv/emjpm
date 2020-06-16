@@ -7,7 +7,7 @@ import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
-const MagistratInformations = props => {
+const MagistratInformations = (props) => {
   const { email, cabinet, nom, prenom } = useContext(UserContext);
 
   return (

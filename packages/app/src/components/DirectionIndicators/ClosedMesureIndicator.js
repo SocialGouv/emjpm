@@ -10,7 +10,7 @@ const ClosedMesureIndicator = () => {
     selectedRegionalValue,
     selectedDepartementValue,
     startDateValue,
-    endDateValue
+    endDateValue,
   } = useContext(FiltersContext);
 
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
@@ -18,8 +18,8 @@ const ClosedMesureIndicator = () => {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
       end: endDateValue,
       region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue
-    }
+      start: startDateValue,
+    },
   });
 
   return (

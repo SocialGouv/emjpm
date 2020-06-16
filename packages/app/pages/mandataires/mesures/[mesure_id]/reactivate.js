@@ -8,7 +8,7 @@ import { MandataireMesureSidebar } from "../../../../src/components/MandataireMe
 import { MesureProvider } from "../../../../src/components/MesureContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
-const ReactivateMesurePage = props => {
+const ReactivateMesurePage = (props) => {
   const { mesureId } = props;
   return (
     <MesureProvider mesureId={mesureId}>
@@ -16,14 +16,14 @@ const ReactivateMesurePage = props => {
         <BoxWrapper mt={6} px="0">
           <Flex
             sx={{
-              flexWrap: "wrap"
+              flexWrap: "wrap",
             }}
           >
             <Box
               sx={{
                 flexBasis: 250,
                 flexGrow: 1,
-                p: 1
+                p: 1,
               }}
             >
               <MandataireMesureSidebar mesureId={mesureId} />
@@ -33,7 +33,7 @@ const ReactivateMesurePage = props => {
                 flexBasis: 0,
                 flexGrow: 99999,
                 minWidth: 320,
-                p: 1
+                p: 1,
               }}
             >
               <MandataireMesureReactivate />

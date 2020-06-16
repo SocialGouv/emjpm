@@ -4,7 +4,7 @@ var {
   enqueteExcelParserAgrementsPopulations,
   enqueteExcelParserInformationsMandataire,
   enqueteExcelParserPrestationsSociales,
-  enqueteExcelParserActivite
+  enqueteExcelParserActivite,
 } = require("../common/excel-parser");
 
 var HttpError = require("../../../../utils/error/HttpError");
@@ -16,7 +16,7 @@ const parse = async ({ content }) => {
     dateNF: "dd/mm/yyyy",
     locale: "fr-FR",
     type: "base64",
-    raw: false
+    raw: false,
   });
 
   // vérification du nom des onglets
@@ -26,7 +26,7 @@ const parse = async ({ content }) => {
     // "activité 2018 et flux", // TODO réactiver ce check quand on aura fini les tests, car on utilise des jeux de données de l'an dernier avec l'onglet "activité 2017 et flux"
     "Populations ", // espace final dans le nom de l'onglet
     "Prestations sociales ", // espace final dans le nom de l'onglet
-    "Données à exporter"
+    "Données à exporter",
   ]);
 
   const res = {
@@ -44,7 +44,7 @@ const parse = async ({ content }) => {
     ),
     prestationsSociales: enqueteExcelParserPrestationsSociales.parse(
       workbook.Sheets["Prestations sociales "]
-    )
+    ),
   };
 
   logger.info(
@@ -55,12 +55,12 @@ const parse = async ({ content }) => {
 };
 
 function checkRequiredTabs(workbook, tabNames) {
-  tabNames.forEach(tabName => {
+  tabNames.forEach((tabName) => {
     if (!workbook.Sheets[tabName]) {
       logger.warn(
         `[IMPORT ENQUETE] Onglet "${tabName}" manquant - onglets présents: ${Object.keys(
           workbook.Sheets
-        ).map(x => `"${x}"`)}`
+        ).map((x) => `"${x}"`)}`
       );
 
       throw new HttpError(422, `Onglet "${tabName}" manquant`);
@@ -69,7 +69,7 @@ function checkRequiredTabs(workbook, tabNames) {
 }
 
 const mandataireIndividuelEnqueteExcelParser = {
-  parse
+  parse,
 };
 
 module.exports = mandataireIndividuelEnqueteExcelParser;

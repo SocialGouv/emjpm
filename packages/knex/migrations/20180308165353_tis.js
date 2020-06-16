@@ -1,5 +1,5 @@
-exports.up = knex => {
-  return knex.schema.createTable("tis", table => {
+exports.up = (knex) => {
+  return knex.schema.createTable("tis", (table) => {
     table.increments();
     table.string("etablissement").notNullable();
     table.string("email").notNullable();
@@ -8,17 +8,11 @@ exports.up = knex => {
     table.string("telephone").notNullable();
     table.float("latitude").notNullable();
     table.float("longitude").notNullable();
-    table
-      .boolean("admin")
-      .notNullable()
-      .defaultTo(false);
-    table
-      .timestamp("created_at")
-      .notNullable()
-      .defaultTo(knex.fn.now());
+    table.boolean("admin").notNullable().defaultTo(false);
+    table.timestamp("created_at").notNullable().defaultTo(knex.fn.now());
   });
 };
 
-exports.down = knex => {
+exports.down = (knex) => {
   return knex.schema.dropTable("tis");
 };

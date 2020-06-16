@@ -138,10 +138,10 @@ function parse(ws) {
       ws["G44"]
     ),
     autre_mesures_service_psychiatrique: parser.integer(ws["G45"]),
-    autre_mesures_autre_service: parser.integer(ws["G46"])
+    autre_mesures_autre_service: parser.integer(ws["G46"]),
   };
 }
 
 module.exports = {
-  parse
+  parse,
 };

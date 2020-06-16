@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const Context = createContext({});
 
-export const Provider = props => {
+export const Provider = (props) => {
   // Initial values are obtained from the props
   const { children } = props;
 
@@ -27,7 +27,7 @@ export const Provider = props => {
     setService,
     setUser,
     user,
-    validateStepOne
+    validateStepOne,
   };
 
   // pass the value in provider and return

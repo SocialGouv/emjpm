@@ -1,7 +1,7 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema.alterTable(
     "enquete_reponses_agrements_formations",
-    function(table) {
+    function (table) {
       table.integer("nb_mesures_dep_finance").nullable();
       table.integer("nb_mesures_dep_autres").nullable();
       table.integer("cnc_annee_obtention").nullable();
@@ -19,22 +19,16 @@ exports.up = function(knex) {
       table.dropColumn("cnc_mjpm_heure_formation");
       table.dropColumn("cnc_mjpm_annee_obtention");
       table.dropColumn("niveau_qualification_secretaire_spe");
-      table
-        .string("nb_departements")
-        .nullable()
-        .alter(); // integer => string
-      table
-        .string("niveau_qualification")
-        .nullable()
-        .alter(); // integer => string
+      table.string("nb_departements").nullable().alter(); // integer => string
+      table.string("niveau_qualification").nullable().alter(); // integer => string
     }
   );
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema.alterTable(
     "enquete_reponses_agrements_formations",
-    function(table) {
+    function (table) {
       table.integer("niveau_qualification_secretaire_spe").nullable();
       table.dropColumn("nb_mesures_dep_finance");
       table.dropColumn("nb_mesures_dep_autres");
@@ -53,14 +47,8 @@ exports.down = function(knex) {
       table.integer("cnc_mjpm_heure_formation").nullable();
       table.integer("cnc_mjpm_annee_obtention").nullable();
 
-      table
-        .integer("nb_departements")
-        .nullable()
-        .alter(); // string => integer
-      table
-        .integer("niveau_qualification")
-        .nullable()
-        .alter(); // string => integer
+      table.integer("nb_departements").nullable().alter(); // string => integer
+      table.integer("niveau_qualification").nullable().alter(); // string => integer
     }
   );
 };

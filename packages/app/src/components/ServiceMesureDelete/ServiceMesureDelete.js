@@ -5,7 +5,7 @@ import { MesureContext } from "../MesureContext";
 import { ServiceDeleteMesureForm } from "./ServiceMesureDeleteForm";
 import { ServiceMesureDeleteStyle } from "./style";
 
-const ServiceMesureDelete = props => {
+const ServiceMesureDelete = (props) => {
   const mesure = useContext(MesureContext);
 
   return (

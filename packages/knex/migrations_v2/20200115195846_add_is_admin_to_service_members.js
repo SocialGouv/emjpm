@@ -1,9 +1,6 @@
-exports.up = async function(knex) {
-  await knex.schema.alterTable("service_members", function(table) {
-    table
-      .boolean("is_admin")
-      .defaultTo(false)
-      .notNullable();
+exports.up = async function (knex) {
+  await knex.schema.alterTable("service_members", function (table) {
+    table.boolean("is_admin").defaultTo(false).notNullable();
   });
 
   return knex.raw(`
@@ -11,8 +8,8 @@ exports.up = async function(knex) {
   `);
 };
 
-exports.down = function(knex) {
-  return knex.schema.alterTable("service_members", function(table) {
+exports.down = function (knex) {
+  return knex.schema.alterTable("service_members", function (table) {
     table.dropColumn("is_admin");
   });
 };

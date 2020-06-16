@@ -1,5 +1,5 @@
 const ServiceCreateAntenneStyle = {
-  flexWrap: "wrap"
+  flexWrap: "wrap",
 };
 
 export { ServiceCreateAntenneStyle };

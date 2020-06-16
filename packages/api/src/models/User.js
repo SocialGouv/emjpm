@@ -17,7 +17,7 @@ const MAIN_ROLES = [
   "individuel",
   "prepose",
   "direction",
-  "ti"
+  "ti",
 ];
 
 const redirs = {
@@ -27,7 +27,7 @@ const redirs = {
   ti: "/magistrats",
   admin: "/admin",
   direction: "/direction",
-  default: "/"
+  default: "/",
 };
 
 class User extends Model {
@@ -48,18 +48,18 @@ class User extends Model {
           from: "users.id",
           through: {
             from: "user_role.user_id",
-            to: "user_role.role_id"
+            to: "user_role.role_id",
           },
-          to: "role.id"
-        }
+          to: "role.id",
+        },
       },
       mandataire: {
         relation: Model.BelongsToOneRelation,
         modelClass: Mandataire,
         join: {
           from: "users.id",
-          to: "mandataires.user_id"
-        }
+          to: "mandataires.user_id",
+        },
       },
       service: {
         relation: Model.HasOneThroughRelation,
@@ -68,10 +68,10 @@ class User extends Model {
           from: "users.id",
           through: {
             from: "service_members.user_id",
-            to: "service_members.service_id"
+            to: "service_members.service_id",
           },
-          to: "services.id"
-        }
+          to: "services.id",
+        },
       },
       tis: {
         relation: Model.ManyToManyRelation,
@@ -80,21 +80,21 @@ class User extends Model {
           from: "users.id",
           through: {
             from: "user_tis.user_id",
-            to: "user_tis.ti_id"
+            to: "user_tis.ti_id",
           },
-          to: "tis.id"
-        }
-      }
+          to: "tis.id",
+        },
+      },
     };
   }
 
   getRoles() {
-    return this.roles.map(el => el.name).concat("user");
+    return this.roles.map((el) => el.name).concat("user");
   }
 
   getDefaultRole() {
     const defaultRoleName = (
-      this.roles.find(role => MAIN_ROLES.includes(role.name)) || {}
+      this.roles.find((role) => MAIN_ROLES.includes(role.name)) || {}
     ).name;
     if (!defaultRoleName) {
       throw new Error(
@@ -112,7 +112,7 @@ class User extends Model {
       token: this.getJwt(),
       // TODO: remove when full graphql auth
       url: redirs[this.type] || redirs.default,
-      type: this.type
+      type: this.type,
     };
   }
 
@@ -125,7 +125,7 @@ class User extends Model {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": this.getDefaultRole(),
       "x-hasura-user-id": `${this.id}`,
-      "x-hasura-service-id": `${this.getService()}`
+      "x-hasura-service-id": `${this.getService()}`,
     };
   }
 
@@ -133,14 +133,14 @@ class User extends Model {
     const signOptions = {
       subject: this.id.toString(),
       expiresIn: "30d",
-      algorithm: "RS256"
+      algorithm: "RS256",
     };
     const claim = {
       name: this.username,
       id: this.id,
       url: redirs[this.type] || redirs.default,
       role: this.getDefaultRole(),
-      "https://hasura.io/jwt/claims": this.getHasuraClaims()
+      "https://hasura.io/jwt/claims": this.getHasuraClaims(),
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
@@ -167,8 +167,8 @@ class User extends Model {
         nom: { type: "string" },
         prenom: { type: "string" },
         email: { type: "string" },
-        cabinet: { type: "string" }
-      }
+        cabinet: { type: "string" },
+      },
     };
   }
 }

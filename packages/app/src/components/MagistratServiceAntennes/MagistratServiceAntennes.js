@@ -6,12 +6,12 @@ import { Box } from "rebass";
 
 import { SERVICE_ANTENNES } from "./queries";
 
-const MagistratServiceAntennes = props => {
+const MagistratServiceAntennes = (props) => {
   const { serviceId } = props;
   const { data, error, loading } = useQuery(SERVICE_ANTENNES, {
     variables: {
-      serviceId: serviceId
-    }
+      serviceId: serviceId,
+    },
   });
 
   if (loading) {
@@ -47,10 +47,10 @@ const MagistratServiceAntennes = props => {
         css={{
           display: "grid",
           gridGap: 15,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"]
+          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"],
         }}
       >
-        {service_antenne.map(antenne => {
+        {service_antenne.map((antenne) => {
           antenne = { ...antenne, preferences: [] };
           return (
             <Antenne
@@ -67,7 +67,7 @@ const MagistratServiceAntennes = props => {
 };
 
 MagistratServiceAntennes.propTypes = {
-  serviceId: PropTypes.number
+  serviceId: PropTypes.number,
 };
 
 export { MagistratServiceAntennes };

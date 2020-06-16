@@ -2,7 +2,7 @@ import * as XLSX from "xlsx";
 
 const NON_RENSEIGNE = "Non renseigné";
 
-const cellValue = value => {
+const cellValue = (value) => {
   if (value == undefined) {
     return NON_RENSEIGNE;
   }
@@ -18,8 +18,8 @@ const remainingCapacity = (max, awaiting, inProgress) => {
 
 const getMandataireRows = (datas, type) => {
   return datas
-    .filter(user => user.type === type)
-    .map(data => {
+    .filter((user) => user.type === type)
+    .map((data) => {
       const inProgress = data.mandataire ? data.mandataire.mesures_en_cours : undefined;
       const awaiting = data.mandataire ? data.mandataire.mesures_en_attente : undefined;
       const max = data.mandataire ? data.mandataire.dispo_max : undefined;
@@ -35,13 +35,13 @@ const getMandataireRows = (datas, type) => {
         Portable: cellValue(data.mandataire ? data.mandataire.portable : undefined),
         Prénom: cellValue(data.prenom),
         Télephone: cellValue(data.mandataire ? data.mandataire.telephone : undefined),
-        Ville: cellValue(data.mandataire ? data.mandataire.ville : undefined)
+        Ville: cellValue(data.mandataire ? data.mandataire.ville : undefined),
       };
     });
 };
 
-const getServiceRows = datas => {
-  return datas.map(data => {
+const getServiceRows = (datas) => {
+  return datas.map((data) => {
     const inProgress = data.service_antennes.reduce(
       (acc, current) => acc + current.mesures_in_progress,
       0
@@ -64,7 +64,7 @@ const getServiceRows = datas => {
       "Nombre d'antenne": data.service_antennes.length,
       "Prénom du contact": cellValue(data.prenom),
       Télephone: cellValue(data.telephone),
-      Ville: cellValue(data.ville)
+      Ville: cellValue(data.ville),
     };
   });
 };
@@ -73,22 +73,22 @@ const writeSheet = (wb, region, department, title, datas) => {
   const filterData = [
     {
       Département: department ? department.label : "Aucun filtre",
-      Région: region ? region.label : "Aucun filtre"
-    }
+      Région: region ? region.label : "Aucun filtre",
+    },
   ];
 
   wb.SheetNames.push(title);
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], [{ title: title }], {
     origin: "B2",
-    skipHeader: true
+    skipHeader: true,
   });
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], filterData, {
     origin: "B4",
-    skipHeader: false
+    skipHeader: false,
   });
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], datas, {
     origin: "B7",
-    skipHeader: false
+    skipHeader: false,
   });
 };
 
@@ -96,7 +96,7 @@ export const exportMandataires = (users, services, region, department) => {
   const wb = XLSX.utils.book_new();
 
   wb.Props = {
-    Title: "e-EMJPM - export des mandataires"
+    Title: "e-EMJPM - export des mandataires",
   };
 
   writeSheet(

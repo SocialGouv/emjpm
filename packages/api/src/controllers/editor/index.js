@@ -11,5 +11,5 @@ module.exports = {
   mesureCreate,
   mesureUpdate,
   mesureBatch,
-  mesureDelete
+  mesureDelete,
 };

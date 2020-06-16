@@ -11,13 +11,13 @@ const smtpConfig = {
   host: smtpHost,
   port: smtpPort,
   ignoreTLS: true,
-  secure: false
+  secure: false,
 };
 
 if (smtpUser) {
   smtpConfig.auth = {
     user: smtpUser,
-    pass: smtpPass
+    pass: smtpPass,
   };
 }
 
@@ -29,11 +29,11 @@ const sendEmail = (sendTo, subject, text, html, bcc) => {
     subject,
     text,
     html,
-    bcc
+    bcc,
   };
   return transporter.sendMail(mailOptions);
 };
 
 module.exports = {
-  sendEmail
+  sendEmail,
 };

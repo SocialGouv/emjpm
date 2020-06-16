@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 
 import {
   default as MesureInput,
-  FormMesure
+  FormMesure,
 } from "../src/components/mandataireComponents/CreationMesure";
 
 storiesOf("MesuresCreation", module).add("PanelCreation", () => (

@@ -7,13 +7,13 @@ import { Box, Text } from "rebass";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { PreferencesPanelStyle } from "./style";
 
-const PreferencesPanel = props => {
+const PreferencesPanel = (props) => {
   const { antenneId } = props;
 
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     variables: {
-      antenneId
-    }
+      antenneId,
+    },
   });
 
   if (loading) {
@@ -50,7 +50,7 @@ const PreferencesPanel = props => {
           fontWeight: 600,
           lineHeight: 1.6,
           mt: "5",
-          textAlign: "center"
+          textAlign: "center",
         }}
       >
         Ces informations sont indicatives et sont communiquées au juge des tutelles
@@ -60,7 +60,7 @@ const PreferencesPanel = props => {
 };
 
 PreferencesPanel.propTypes = {
-  antenneId: PropTypes.array.required
+  antenneId: PropTypes.array.required,
 };
 
 export { PreferencesPanel };

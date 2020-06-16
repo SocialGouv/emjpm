@@ -1,25 +1,25 @@
 const {
-  EnqueteReponsesPopulations
+  EnqueteReponsesPopulations,
 } = require("../../../../models/EnqueteReponsesPopulations");
 const {
-  EnqueteReponsesModalitesExercice
+  EnqueteReponsesModalitesExercice,
 } = require("../../../../models/EnqueteReponsesModalitesExercice");
 const {
-  EnqueteReponsesPreposePersonnelFormation
+  EnqueteReponsesPreposePersonnelFormation,
 } = require("../../../../models/EnqueteReponsesPreposePersonnelFormation");
 const {
-  EnqueteReponsesPreposePrestationsSociales
+  EnqueteReponsesPreposePrestationsSociales,
 } = require("../../../../models/EnqueteReponsesPreposePrestationsSociales");
 const {
-  EnqueteReponsesFinancement
+  EnqueteReponsesFinancement,
 } = require("../../../../models/EnqueteReponsesFinancement");
 const {
-  EnqueteReponsesActivite
+  EnqueteReponsesActivite,
 } = require("../../../../models/EnqueteReponsesActivite");
 
 const {
   getEnqueteReponseMandatairePrepose,
-  createEmptyEnqueteReponse
+  createEmptyEnqueteReponse,
 } = require("../mandataire-prepose/requests");
 
 async function update(enqueteId, { tabs, mandataireId }) {
@@ -29,12 +29,12 @@ async function update(enqueteId, { tabs, mandataireId }) {
     preposePersonnelFormation,
     prestationsSociales,
     financement,
-    activite
+    activite,
   } = tabs;
 
   const enqueteReponse = await initEnqueteMandataireIndividuel({
     enqueteId,
-    mandataireId
+    mandataireId,
   });
 
   await EnqueteReponsesPopulations.query()
@@ -65,13 +65,13 @@ async function update(enqueteId, { tabs, mandataireId }) {
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
-    mandataireId
+    mandataireId,
   });
 
   if (!enqueteReponse) {
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
-      mandataireId
+      mandataireId,
     });
     enqueteReponse = insert_enquete_reponses_one;
   }
@@ -79,7 +79,7 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
 }
 
 const preposeEnqueteRepository = {
-  update
+  update,
 };
 
 module.exports = preposeEnqueteRepository;

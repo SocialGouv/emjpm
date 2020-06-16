@@ -1,9 +1,9 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.raw("DROP TABLE user_antenne CASCADE");
 };
 
-exports.down = function(knex) {
-  return knex.schema.createTable("user_antenne", table => {
+exports.down = function (knex) {
+  return knex.schema.createTable("user_antenne", (table) => {
     table.increments("id").primary();
     table
       .integer("user_id")

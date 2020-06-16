@@ -12,7 +12,7 @@ import { Link } from "../Commons";
 import { UserContext } from "../UserContext";
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL },
 } = getConfig();
 
 const checkStatus = async (response, setSubmitting, setStatus, type) => {
@@ -29,7 +29,7 @@ const checkStatus = async (response, setSubmitting, setStatus, type) => {
   }
   setSubmitting(false);
   Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-    shallow: true
+    shallow: true,
   });
   return json;
 };
@@ -44,12 +44,12 @@ const EditPassword = () => {
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
         password: values.password,
-        username: username
+        username: username,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      method: "POST"
+      method: "POST",
     });
     checkStatus(response, setSubmitting, setStatus, type);
   };
@@ -62,8 +62,8 @@ const EditPassword = () => {
     initialValues: {
       newPassword: "",
       newPasswordConfirmation: "",
-      password: ""
-    }
+      password: "",
+    },
   });
 
   return (

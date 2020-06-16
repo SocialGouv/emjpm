@@ -1,6 +1,6 @@
 import { useMemo, useReducer, useState } from "react";
 
-export const useEnqueteContext = props => {
+export const useEnqueteContext = (props) => {
   const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(false);
 
   const { currentStep, navigateToStep, sections } = props;
@@ -11,11 +11,11 @@ export const useEnqueteContext = props => {
         dirty: false,
         valid: true,
         value: undefined,
-        nextStep: getNextPageStep(sections, currentStep) // {section, step} | 'previous' | 'next'
+        nextStep: getNextPageStep(sections, currentStep), // {section, step} | 'previous' | 'next'
       },
       actions: {
-        autoSubmit: false
-      }
+        autoSubmit: false,
+      },
     }),
     [currentStep, sections]
   );
@@ -32,8 +32,8 @@ export const useEnqueteContext = props => {
           ...state,
           form: {
             ...state.form,
-            nextStep
-          }
+            nextStep,
+          },
         };
       }
       case "navigate-to-next-page":
@@ -45,32 +45,32 @@ export const useEnqueteContext = props => {
           ...state,
           form: {
             ...state.form,
-            dirty: action.value
-          }
+            dirty: action.value,
+          },
         };
       case "set-form-valid":
         return {
           ...state,
           form: {
             ...state.form,
-            valid: action.value
-          }
+            valid: action.value,
+          },
         };
       case "set-form-value":
         return {
           ...state,
           form: {
             ...state.form,
-            value: action.value
-          }
+            value: action.value,
+          },
         };
       case "set-actions-autoSubmit":
         return {
           ...state,
           actions: {
             ...state.form,
-            autoSubmit: true
-          }
+            autoSubmit: true,
+          },
         };
       default:
         console.warn(`Unexpected state action ${action}`, state);
@@ -94,8 +94,8 @@ export const useEnqueteContext = props => {
       },
       onCancel: () => {
         setOpenConfirmExitInvalidForm(false);
-      }
-    }
+      },
+    },
   };
 
   async function saveAndNavigate({ step, substep }) {

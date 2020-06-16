@@ -10,18 +10,18 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const authUserJwtStrategy = new JWTStrategy(
   {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-    secretOrKey: jwtConfig.publicKey || "emjpm-jwtkey"
+    secretOrKey: jwtConfig.publicKey || "emjpm-jwtkey",
   },
-  function(jwtPayload, cb) {
+  function (jwtPayload, cb) {
     //find the user in db if needed. This functionality may be omitted if you store everything you'll need in JWT payload.
     return knex("users")
       .where("id", parseInt(jwtPayload.id))
       .select()
-      .then(users => {
+      .then((users) => {
         const user = users[0];
         return cb(null, JSON.parse(JSON.stringify(user)));
       })
-      .catch(err => {
+      .catch((err) => {
         logger.error(err);
         return cb(err);
       });

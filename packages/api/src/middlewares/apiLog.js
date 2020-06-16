@@ -7,7 +7,7 @@ module.exports = async (req, res, next) => {
     headers: { authorization },
     method,
     originalUrl,
-    params
+    params,
   } = req;
   const token = authorization ? authorization.slice(7, -1) : "";
 
@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
         request_method: method,
         request_params: params,
         response,
-        token
+        token,
       });
 
       tempSend.call(this, response);
@@ -40,7 +40,7 @@ module.exports = async (req, res, next) => {
       request_url: originalUrl,
       request_method: method,
       request_params: params,
-      token
+      token,
     });
   }
 

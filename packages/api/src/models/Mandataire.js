@@ -19,22 +19,22 @@ class Mandataire extends Model {
         etablissement: { type: "string" },
         id: { type: "integer" },
         genre: {
-          type: "string"
+          type: "string",
         },
         telephone: { type: "string" },
         telephone_portable: {
-          type: "string"
+          type: "string",
         },
         adresse: { type: "string" },
         code_postal: { type: "string" },
         ville: { type: "string" },
         dispo_max: {
-          type: "integer"
+          type: "integer",
         },
         zip: {
-          type: "string"
-        }
-      }
+          type: "string",
+        },
+      },
     };
   }
   static get relationMappings() {
@@ -46,17 +46,17 @@ class Mandataire extends Model {
         modelClass: User,
         join: {
           from: "mandataires.user_id",
-          to: "users.id"
-        }
+          to: "users.id",
+        },
       },
       department: {
         relation: Model.BelongsToOneRelation,
         modelClass: Department,
         join: {
           from: "mandataires.department_id",
-          to: "departements.id"
-        }
-      }
+          to: "departements.id",
+        },
+      },
     };
   }
 }

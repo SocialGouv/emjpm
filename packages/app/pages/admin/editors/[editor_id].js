@@ -7,7 +7,7 @@ import { AdminEditorInformations } from "../../../src/components/AdminEditors/Ad
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
-const Editor = props => {
+const Editor = (props) => {
   const { editorId } = props;
 
   return (

@@ -1,12 +1,12 @@
-exports.up = function(knex) {
+exports.up = function (knex) {
   // set all users active
   return knex.table("users").update({
-    active: true
+    active: true,
   });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.table("users").update({
-    active: false
+    active: false,
   });
 };

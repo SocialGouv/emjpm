@@ -12,7 +12,7 @@ const EMAIL_EDITOR_CONFIRMATION = () =>
 
 L’équipe e-mjpm.`;
 
-const editorConfirmationEmail = async email => {
+const editorConfirmationEmail = async (email) => {
   try {
     await sendEmail(
       email,
@@ -26,5 +26,5 @@ const editorConfirmationEmail = async email => {
 };
 
 module.exports = {
-  editorConfirmationEmail
+  editorConfirmationEmail,
 };

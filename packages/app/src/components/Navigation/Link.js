@@ -3,10 +3,10 @@ import { withRouter } from "next/router";
 import React from "react";
 import { Box, Link } from "rebass";
 
-const LinkStyle = isActive => {
+const LinkStyle = (isActive) => {
   return {
     "&:hover": {
-      textDecoration: "none"
+      textDecoration: "none",
     },
     color: isActive ? "primary" : "black",
     cursor: "pointer",
@@ -15,7 +15,7 @@ const LinkStyle = isActive => {
     fontWeight: "700",
     lineHeight: "1.5",
     p: "2px",
-    position: "relative"
+    position: "relative",
   };
 };
 
@@ -26,15 +26,15 @@ const LineStyle = {
   left: 0,
   mt: "8px",
   position: "absolute",
-  right: 0
+  right: 0,
 };
 
 const BoxStyle = {
   height: "34px",
-  overflow: "hidden"
+  overflow: "hidden",
 };
 
-const ActiveLink = props => {
+const ActiveLink = (props) => {
   const { router, isNestedLinks, href, as } = props;
   if (!router) return null;
   const { pathname } = router;

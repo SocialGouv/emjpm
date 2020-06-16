@@ -40,10 +40,10 @@ const AdminApiLogs = () => {
       return;
     }
 
-    const run = async query => {
+    const run = async (query) => {
       const { data } = await client.query({
         query: API_LOGS_SEARCH,
-        variables: { query }
+        variables: { query },
       });
 
       setLoading(false);
@@ -53,7 +53,7 @@ const AdminApiLogs = () => {
     run(debouncedSearchQuery);
   }, [client, debouncedSearchQuery]);
 
-  const handleSearchChange = event => {
+  const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
@@ -69,13 +69,13 @@ const AdminApiLogs = () => {
             sx={{
               "&:focus": {
                 outline: "none",
-                borderColor: "textTertiary"
+                borderColor: "textTertiary",
               },
               width: 300,
               border: "1px solid",
               borderColor: "whiteGray",
               borderRadius: 4,
-              p: 2
+              p: 2,
             }}
             onChange={handleSearchChange}
           />
@@ -88,13 +88,13 @@ const AdminApiLogs = () => {
           borderBottom: "1px solid whiteGray",
           bg: "muted",
           color: "mediumGray",
-          fontWeight: "bold"
+          fontWeight: "bold",
         }}
       >
         <Box
           sx={{
             width: 120,
-            mr: 2
+            mr: 2,
           }}
         >
           DATE
@@ -105,7 +105,7 @@ const AdminApiLogs = () => {
             whiteSpace: "nowrap",
             overflow: "hidden",
             BoxOverflow: "ellipsis",
-            mr: 2
+            mr: 2,
           }}
         >
           METHOD
@@ -116,7 +116,7 @@ const AdminApiLogs = () => {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2
+            mr: 2,
           }}
         >
           URL
@@ -127,7 +127,7 @@ const AdminApiLogs = () => {
             whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2
+            mr: 2,
           }}
         >
           TOKEN
@@ -137,7 +137,7 @@ const AdminApiLogs = () => {
             width: 200,
             whiteSpace: "nowrap",
             overflow: "hidden",
-            textOverflow: "ellipsis"
+            textOverflow: "ellipsis",
           }}
         >
           RESPONSE
@@ -145,19 +145,19 @@ const AdminApiLogs = () => {
       </Flex>
       {logs.length ? (
         <Box>
-          {logs.map(log => (
+          {logs.map((log) => (
             <Flex
               key={log.id}
               sx={{
                 p: 2,
                 borderBottom: "1px solid",
-                borderColor: "whiteGray"
+                borderColor: "whiteGray",
               }}
             >
               <Box
                 sx={{
                   width: 120,
-                  mr: 2
+                  mr: 2,
                 }}
               >
                 {format(new Date(log.created_at), "dd/MM/yyyy hh:mm")}
@@ -168,7 +168,7 @@ const AdminApiLogs = () => {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   BoxOverflow: "ellipsis",
-                  mr: 2
+                  mr: 2,
                 }}
               >
                 {log.request_method}
@@ -179,7 +179,7 @@ const AdminApiLogs = () => {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  mr: 2
+                  mr: 2,
                 }}
               >
                 {log.request_url}
@@ -190,7 +190,7 @@ const AdminApiLogs = () => {
                   whiteSpace: "nowrap",
                   overflow: "hidden",
                   textOverflow: "ellipsis",
-                  mr: 2
+                  mr: 2,
                 }}
               >
                 {log.token}
@@ -200,7 +200,7 @@ const AdminApiLogs = () => {
                   width: 200,
                   whiteSpace: "nowrap",
                   overflow: "hidden",
-                  textOverflow: "ellipsis"
+                  textOverflow: "ellipsis",
                 }}
               >
                 {JSON.stringify(log.response, null, "\t")}
@@ -212,7 +212,7 @@ const AdminApiLogs = () => {
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   margin: "auto",
-                  justifyContent: "flex-end"
+                  justifyContent: "flex-end",
                 }}
               >
                 <Link href={`/admin/api-logs/[api_log_id]`} as={`/admin/api-logs/${log.id}`}>

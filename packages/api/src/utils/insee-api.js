@@ -2,7 +2,7 @@ const sentry = require("../utils/sentry");
 const siret = require("../utils/siret");
 const logger = require("../utils/logger");
 
-const fetchTribunalDatas = async tribunal_siret => {
+const fetchTribunalDatas = async (tribunal_siret) => {
   const { error, data } = await siret.find(tribunal_siret);
 
   if (error) {
@@ -20,9 +20,9 @@ const fetchTribunalDatas = async tribunal_siret => {
     typeVoieEtablissement,
     libelleVoieEtablissement,
     codePostalEtablissement,
-    libelleCommuneEtablissement
+    libelleCommuneEtablissement,
   } = adresseEtablissement;
-  const periode = periodesEtablissement.find(p => !p.dateFin);
+  const periode = periodesEtablissement.find((p) => !p.dateFin);
   const { enseigne1Etablissement } = periode || {};
 
   return {
@@ -30,7 +30,7 @@ const fetchTribunalDatas = async tribunal_siret => {
     code_postal: codePostalEtablissement,
     etablissement: enseigne1Etablissement,
     ville: libelleCommuneEtablissement,
-    siret: tribunal_siret
+    siret: tribunal_siret,
   };
 };
 

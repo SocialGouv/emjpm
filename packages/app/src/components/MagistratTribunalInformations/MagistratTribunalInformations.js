@@ -7,9 +7,9 @@ import { Box, Flex, Text } from "rebass";
 import { UserContext } from "../UserContext";
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 
-const MagistratTribunalInformations = props => {
+const MagistratTribunalInformations = (props) => {
   const {
-    magistrat: { ti }
+    magistrat: { ti },
   } = useContext(UserContext);
   return (
     <Box {...props}>

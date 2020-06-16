@@ -8,7 +8,7 @@ import * as Yup from "yup";
 
 import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 
-export const MagistratMandataireCommentForm = props => {
+export const MagistratMandataireCommentForm = (props) => {
   const {
     tiId,
     serviceId,
@@ -17,7 +17,7 @@ export const MagistratMandataireCommentForm = props => {
     toggleCommentForm,
     id,
     comment,
-    isEditing
+    isEditing,
   } = props;
   const [insertComment] = useMutation(ADD_COMMENT);
   const [editComment] = useMutation(EDIT_COMMENT);
@@ -29,8 +29,8 @@ export const MagistratMandataireCommentForm = props => {
           refetchQueries: ["MandataireComments"],
           variables: {
             comment: values.comment,
-            id: id
-          }
+            id: id,
+          },
         });
 
         toggleEditCommentForm(false);
@@ -41,19 +41,19 @@ export const MagistratMandataireCommentForm = props => {
             comment: values.comment,
             mandataire_id: mandataireId,
             service_id: serviceId,
-            ti_id: tiId
-          }
+            ti_id: tiId,
+          },
         });
         toggleCommentForm(false);
       }
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      comment: Yup.string().required()
+      comment: Yup.string().required(),
     }),
     initialValues: {
-      comment: comment || null
-    }
+      comment: comment || null,
+    },
   });
 
   return (
@@ -107,7 +107,7 @@ MagistratMandataireCommentForm.defaultProps = {
   mandataireId: null,
   tiId: null,
   toggleCommentForm: null,
-  toggleEditCommentForm: null
+  toggleEditCommentForm: null,
 };
 
 MagistratMandataireCommentForm.propTypes = {
@@ -118,5 +118,5 @@ MagistratMandataireCommentForm.propTypes = {
   mandataireId: PropTypes.number,
   tiId: PropTypes.number,
   toggleCommentForm: PropTypes.func,
-  toggleEditCommentForm: PropTypes.func
+  toggleEditCommentForm: PropTypes.func,
 };

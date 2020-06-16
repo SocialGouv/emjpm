@@ -10,7 +10,7 @@ import { resetPasswordSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 
 const {
-  publicRuntimeConfig: { API_URL }
+  publicRuntimeConfig: { API_URL },
 } = getConfig();
 
 const cardStyle = { mt: "5", p: "0" };
@@ -18,7 +18,7 @@ const cardStyle = { mt: "5", p: "0" };
 const grayBox = {
   bg: "cardSecondary",
   borderRadius: "5px 0 0 5px",
-  p: "5"
+  p: "5",
 };
 
 const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
@@ -34,15 +34,15 @@ const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) =>
     return json;
   }
   toggleMessage(true);
-  setTimeout(function() {
+  setTimeout(function () {
     Router.push(`/login`, `/login`, {
-      shallow: true
+      shallow: true,
     });
   }, 3000);
   return json;
 };
 
-const ResetPassword = props => {
+const ResetPassword = (props) => {
   const { token } = props;
   const [isMessageVisible, toggleMessage] = useState(false);
   const url = `${API_URL}/api/auth/reset-password-with-token`;
@@ -52,12 +52,12 @@ const ResetPassword = props => {
       body: JSON.stringify({
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
-        token: token
+        token: token,
       }),
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      method: "POST"
+      method: "POST",
     });
     checkStatus(response, setSubmitting, setStatus, toggleMessage);
   };
@@ -78,7 +78,7 @@ const ResetPassword = props => {
                 color: "white",
                 lineHeight: "1.5",
                 mt: "1",
-                p: "1"
+                p: "1",
               }}
             >
               {`Votre mot de passe a bien été changé, vous allez être
@@ -96,10 +96,10 @@ const ResetPassword = props => {
             validationSchema={resetPasswordSchema}
             initialValues={{
               newPassword: "",
-              newPasswordConfirmation: ""
+              newPasswordConfirmation: "",
             }}
           >
-            {props => {
+            {(props) => {
               const {
                 status,
                 values,
@@ -107,7 +107,7 @@ const ResetPassword = props => {
                 errors,
                 isSubmitting,
                 handleChange,
-                handleSubmit
+                handleSubmit,
               } = props;
               return (
                 <form onSubmit={handleSubmit}>

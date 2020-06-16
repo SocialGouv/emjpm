@@ -2,7 +2,7 @@ import { Button, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-export const DynamicTableHeader = props => {
+export const DynamicTableHeader = (props) => {
   const { title, buttonEnable, selectedItemsCount, buttonText, isLoading, onClick } = props;
 
   return (

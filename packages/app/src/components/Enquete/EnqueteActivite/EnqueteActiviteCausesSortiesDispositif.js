@@ -7,7 +7,7 @@ import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCau
 import { UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF } from "./mutations";
 import { ENQUETE_CAUSES_SORTIE_DISPOSITIF } from "./queries";
 
-export const EnqueteActiviteCausesSortiesDispositif = props => {
+export const EnqueteActiviteCausesSortiesDispositif = (props) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -15,30 +15,30 @@ export const EnqueteActiviteCausesSortiesDispositif = props => {
     section,
     step,
     userId,
-    enquete: { id: enqueteId }
+    enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { activite_id }
+    enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId }
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_CAUSES_SORTIE_DISPOSITIF,
         variables: {
-          id: activite_id
-        }
-      }
-    ]
+          id: activite_id,
+        },
+      },
+    ],
   });
   const { data, loading } = useQuery(ENQUETE_CAUSES_SORTIE_DISPOSITIF, {
     variables: {
-      id: activite_id
-    }
+      id: activite_id,
+    },
   });
 
   const { sorties_main_levee, sorties_deces, sorties_masp } = data
@@ -52,16 +52,16 @@ export const EnqueteActiviteCausesSortiesDispositif = props => {
         data={{
           sortiesMainLevee: sorties_main_levee,
           sortiesDeces: sorties_deces,
-          sortiesMasp: sorties_masp
+          sortiesMasp: sorties_masp,
         }}
         section={section}
         step={step}
-        onSubmit={async values => {
+        onSubmit={async (values) => {
           await updateEnquete({
             variables: {
               id: activite_id,
-              ...values
-            }
+              ...values,
+            },
           });
         }}
         enqueteContext={enqueteContext}

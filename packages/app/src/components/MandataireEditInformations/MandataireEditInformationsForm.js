@@ -8,7 +8,7 @@ import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { Link } from "../Commons";
 import { GeocodeCities } from "../Geocode";
 
-const MandataireEditInformationsForm = props => {
+const MandataireEditInformationsForm = (props) => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
 
   const formik = useFormik({
@@ -19,15 +19,15 @@ const MandataireEditInformationsForm = props => {
       nom: user.nom || "",
       prenom: user.prenom || "",
       dispo_max: mandataire.dispo_max || "",
-      genre: GENDER_OPTIONS.find(el => el.value === mandataire.genre),
+      genre: GENDER_OPTIONS.find((el) => el.value === mandataire.genre),
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       competences: mandataire.competences || "",
       address: mandataire.adresse || "",
       city: mandataire.ville || "",
-      zipcode: mandataire.code_postal || ""
-    }
+      zipcode: mandataire.code_postal || "",
+    },
   });
 
   return (
@@ -74,7 +74,7 @@ const MandataireEditInformationsForm = props => {
           placeholder="Titre de civilité"
           value={formik.values.genre}
           hasError={formik.errors.genre && formik.touched.genre}
-          onChange={option => formik.setFieldValue("genre", option)}
+          onChange={(option) => formik.setFieldValue("genre", option)}
           options={GENDER_OPTIONS}
         />
         <InlineError message={formik.errors.genre} fieldId="genre" />
@@ -128,7 +128,7 @@ const MandataireEditInformationsForm = props => {
               value={formik.values.zipcode}
               id="zipcode"
               name="zipcode"
-              onChange={async e => {
+              onChange={async (e) => {
                 const { value } = e.target;
                 await formik.setFieldValue("zipcode", value);
                 await formik.setFieldValue("city", "");
@@ -144,7 +144,7 @@ const MandataireEditInformationsForm = props => {
               name="city"
               id="city"
               zipcode={formik.values.zipcode}
-              onChange={value => formik.setFieldValue("city", value)}
+              onChange={(value) => formik.setFieldValue("city", value)}
               value={formik.values.city}
               hasError={!!formik.errors.city}
             />

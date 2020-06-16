@@ -8,14 +8,14 @@ import { FiltersContext } from "../DirectionFilters/context";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
-const MandatairesActivity = props => {
+const MandatairesActivity = (props) => {
   const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
       department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined
-    }
+      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+    },
   });
 
   if (loading) {
@@ -46,17 +46,17 @@ const MandatairesActivity = props => {
   const activityChartData = {
     mandataireIndividuel: {
       percentage: convertToPercentage(mandataireIndividuel, total),
-      sum: mandataireIndividuel
+      sum: mandataireIndividuel,
     },
     mandatairePrepose: {
       percentage: convertToPercentage(mandatairePrepose, total),
-      sum: mandatairePrepose
+      sum: mandatairePrepose,
     },
     service: {
       percentage: convertToPercentage(service, total),
-      sum: service
+      sum: service,
     },
-    total
+    total,
   };
 
   return (

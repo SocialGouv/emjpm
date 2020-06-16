@@ -6,15 +6,15 @@ import { Box, Button, Flex, Text } from "rebass";
 import { ADD_MAGISTRAT, DELETE_MAGISTRAT } from "./mutations";
 import { MAGISTRAT } from "./queries";
 
-const AdminUsersMagistratTribunal = props => {
+const AdminUsersMagistratTribunal = (props) => {
   const { id: userId } = props;
 
   const [selectedTribunal, setSelectedTribunal] = useState(null);
 
   const { data, loading } = useQuery(MAGISTRAT, {
     variables: {
-      userId
-    }
+      userId,
+    },
   });
 
   const [deleteMagistrat] = useMutation(DELETE_MAGISTRAT);
@@ -26,7 +26,7 @@ const AdminUsersMagistratTribunal = props => {
 
   return (
     <Box>
-      {data.magistrat.map(magistrat => {
+      {data.magistrat.map((magistrat) => {
         const { ti, id } = magistrat;
 
         return (
@@ -37,7 +37,7 @@ const AdminUsersMagistratTribunal = props => {
                 onClick={() =>
                   deleteMagistrat({
                     variables: { id },
-                    refetchQueries: ["admin_magistrat"]
+                    refetchQueries: ["admin_magistrat"],
                   })
                 }
               >
@@ -54,7 +54,7 @@ const AdminUsersMagistratTribunal = props => {
             <Select
               placeholder="Ajouter un tribunal"
               onChange={({ value }) => setSelectedTribunal(value)}
-              options={data.tis.map(ti => ({ label: ti.etablissement, value: ti.id }))}
+              options={data.tis.map((ti) => ({ label: ti.etablissement, value: ti.id }))}
             />
           </Box>
           <Button
@@ -62,7 +62,7 @@ const AdminUsersMagistratTribunal = props => {
               if (selectedTribunal) {
                 addMagistrat({
                   refetchQueries: ["admin_magistrat"],
-                  variables: { userId, tiId: selectedTribunal }
+                  variables: { userId, tiId: selectedTribunal },
                 });
               }
             }}

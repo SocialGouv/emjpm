@@ -9,7 +9,7 @@ import {
   AvailableMesureIndicator,
   EtablissementIndicator,
   MandatairesIndicator,
-  ServicesIndicator
+  ServicesIndicator,
 } from "../../src/components/DirectionIndicators";
 import { MandatairesActivity } from "../../src/components/DirectionMandatairesActivity";
 // import { MandatairesCapacity } from "../../src/components/MandatairesCapacity";

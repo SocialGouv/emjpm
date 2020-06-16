@@ -11,7 +11,7 @@ import { BoxStyle } from "./style";
 const TYPE_OPTIONS = [
   { label: "Tous les types", value: null },
   { label: "Mandataire individuel", value: "individuel" },
-  { label: "Mandataire préposé d'établissement", value: "prepose" }
+  { label: "Mandataire préposé d'établissement", value: "prepose" },
 ];
 
 const ListeBlancheFilter = () => {
@@ -22,7 +22,7 @@ const ListeBlancheFilter = () => {
     selectedType,
     selectType,
     searchText,
-    changeSearchText
+    changeSearchText,
   } = useContext(FiltersContext);
 
   if (loading) {
@@ -45,7 +45,7 @@ const ListeBlancheFilter = () => {
             options={departmentOptions}
             placeholder={"Département"}
             value={selectedDepartement}
-            onChange={option => selectDepartement(option)}
+            onChange={(option) => selectDepartement(option)}
           />
         </Box>
         <Box sx={BoxStyle}>
@@ -54,7 +54,7 @@ const ListeBlancheFilter = () => {
             options={TYPE_OPTIONS}
             placeholder={"Type"}
             value={selectedType}
-            onChange={option => selectType(option)}
+            onChange={(option) => selectType(option)}
           />
         </Box>
         <Box sx={BoxStyle}>
@@ -62,7 +62,7 @@ const ListeBlancheFilter = () => {
             value={searchText}
             spellCheck="false"
             autoComplete="false"
-            onChange={event => changeSearchText(event.target.value)}
+            onChange={(event) => changeSearchText(event.target.value)}
             name="search"
             size="small"
             placeholder="Nom"

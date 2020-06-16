@@ -8,7 +8,7 @@ import { isUnsupportedBrowser } from "../../util/browser";
 const excludedBrowsers = [
   { name: "chrome", version: "44.0.2403" },
   { name: "ie", version: "10" },
-  { name: "firefox", version: "68.0" }
+  { name: "firefox", version: "68.0" },
 ];
 const currentBrowser = detectBrowser();
 
@@ -32,11 +32,11 @@ export const ExcludeBrowserBanner = () => {
 };
 
 ExcludeBrowserBanner.propTypes = {
-  excludedBrowsers: PropTypes.arrayOf(PropTypes.string)
+  excludedBrowsers: PropTypes.arrayOf(PropTypes.string),
 };
 
 ExcludeBrowserBanner.defaultProps = {
-  excludedBrowsers: []
+  excludedBrowsers: [],
 };
 
 export default ExcludeBrowserBanner;

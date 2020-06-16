@@ -15,7 +15,7 @@ const Mandataires = () => {
     <FiltersContextProvider
       initialValues={{
         mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
-        mesureType: DEFAULT_MESURE_TYPE
+        mesureType: DEFAULT_MESURE_TYPE,
       }}
     >
       <LayoutMandataire>
@@ -37,7 +37,7 @@ const Mandataires = () => {
           <Flex
             sx={{
               flexWrap: "wrap",
-              mt: "2"
+              mt: "2",
             }}
           >
             <MandataireMesures />

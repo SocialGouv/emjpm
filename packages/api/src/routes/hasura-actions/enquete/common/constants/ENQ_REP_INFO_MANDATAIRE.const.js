@@ -7,7 +7,7 @@ const ENQ_REP_INFO_MANDATAIRE = {
     "5-10": "5 ans à moins de 10 ans",
     "10-20": "10 ans à moins de 20 ans",
     "20-30": "20 ans à moins de 30 ans",
-    "30+": "30 ans et plus"
+    "30+": "30 ans et plus",
   }),
   FORME_JURIDIQUE: enqueteKeysBuilder.buildKeys({
     EI: "Entreprise individuelle",
@@ -18,28 +18,28 @@ const ENQ_REP_INFO_MANDATAIRE = {
     SAS: "SAS",
     SNC: "SNC",
     SEL: "SEL",
-    SCP: "SCP"
+    SCP: "SCP",
   }),
   ESTIMATION_ETP: enqueteKeysBuilder.buildKeys({
     "0-30": "jusqu'à 30% d'un ETP",
     "30-50": "supérieure à 30% jusqu'à 50%",
     "50-70": "supérieure à 50% jusqu'à 70%",
     "70-90": "supérieure à 70% jusqu'à 90%",
-    "90-100": "A temps plein"
+    "90-100": "A temps plein",
   }),
   TRANCHE_AGE: enqueteKeysBuilder.buildKeys({
     "0-25": "Inférieur à 25 ans",
     "25-35": "25 ans à moins de 35 ans",
     "35-50": "35 ans à moins de 50 ans",
     "50-65": "50 ans à moins de 65 ans",
-    "65+": "Plus de 65 ans"
+    "65+": "Plus de 65 ans",
   }),
   SEXE: enqueteKeysBuilder.buildKeys({
     H: "Homme",
-    F: "Femme"
-  })
+    F: "Femme",
+  }),
 };
 
 module.exports = {
-  ENQ_REP_INFO_MANDATAIRE
+  ENQ_REP_INFO_MANDATAIRE,
 };

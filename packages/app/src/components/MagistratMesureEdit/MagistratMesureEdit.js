@@ -16,9 +16,9 @@ export const MagistratMesureEdit = () => {
   const [updateMesure] = useMutation(EDIT_MESURE, {
     onCompleted() {
       Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
-        shallow: true
+        shallow: true,
       });
-    }
+    },
   });
 
   const formik = useFormik({
@@ -30,8 +30,8 @@ export const MagistratMesureEdit = () => {
           civilite: values.civilite.value,
           id: id,
           numero_rg: values.numero_rg,
-          type: values.type.value
-        }
+          type: values.type.value,
+        },
       });
 
       setSubmitting(false);
@@ -42,8 +42,8 @@ export const MagistratMesureEdit = () => {
       cabinet: cabinet ? cabinet : "",
       civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
       numero_rg: numeroRg,
-      type: { label: type, value: type }
-    }
+      type: { label: type, value: type },
+    },
   });
 
   return (
@@ -69,7 +69,7 @@ export const MagistratMesureEdit = () => {
               placeholder="Type de mesure"
               value={formik.values.type}
               hasError={formik.errors.type && formik.touched.type}
-              onChange={option => formik.setFieldValue("type", option)}
+              onChange={(option) => formik.setFieldValue("type", option)}
               options={MESURE_TYPE_LABEL_VALUE}
             />
             <InlineError message={formik.errors.type} fieldId="type" />
@@ -81,7 +81,7 @@ export const MagistratMesureEdit = () => {
               placeholder="civilité"
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
-              onChange={option => formik.setFieldValue("civilite", option)}
+              onChange={(option) => formik.setFieldValue("civilite", option)}
               options={CIVILITY}
             />
             <InlineError message={formik.errors.civilite} fieldId="civilite" />
@@ -126,7 +126,7 @@ export const MagistratMesureEdit = () => {
                 variant="outline"
                 onClick={() => {
                   Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
-                    shallow: true
+                    shallow: true,
                   });
                 }}
               >

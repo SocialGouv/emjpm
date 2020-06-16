@@ -1,5 +1,5 @@
-exports.up = knex => {
-  return knex.schema.alterTable("enquete_reponses", table => {
+exports.up = (knex) => {
+  return knex.schema.alterTable("enquete_reponses", (table) => {
     table.timestamp("last_update").defaultTo(knex.fn.now());
 
     table.integer("activite_curatelle_renforcee_etablissement_debut_annee");
@@ -72,8 +72,8 @@ exports.up = knex => {
   });
 };
 
-exports.down = knex => {
-  knex.schema.alterTable("enquete_reponses", table => {
+exports.down = (knex) => {
+  knex.schema.alterTable("enquete_reponses", (table) => {
     table.dropColumn("last_update");
 
     table.dropColumn("activite_curatelle_renforcee_etablissement_debut_annee");

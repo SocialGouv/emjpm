@@ -1,9 +1,9 @@
-exports.up = function(knex) {
-  return knex.schema.alterTable("mandataires", function(table) {
+exports.up = function (knex) {
+  return knex.schema.alterTable("mandataires", function (table) {
     table.dropColumn("type");
   });
 };
 
-exports.down = function() {
+exports.down = function () {
   return Promise.resolve();
 };

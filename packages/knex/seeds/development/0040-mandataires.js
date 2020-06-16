@@ -1,8 +1,8 @@
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   return (
     knex("mandataires")
       .del() // Deletes ALL existing entries
-      .then(function() {
+      .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "UDAHF",
@@ -16,10 +16,10 @@ exports.seed = function(knex) {
           dispo_max: 5,
           user_id: 1,
           latitude: 48.840356,
-          longitude: 2.27154
+          longitude: 2.27154,
         });
       })
-      .then(function() {
+      .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "test42",
@@ -33,11 +33,11 @@ exports.seed = function(knex) {
           dispo_max: 3,
           user_id: 2,
           latitude: 48.8359,
-          longitude: 2.27154
+          longitude: 2.27154,
         });
       })
       //disabled mandataire
-      .then(function() {
+      .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "test43",
@@ -51,10 +51,10 @@ exports.seed = function(knex) {
           dispo_max: 38,
           user_id: 42,
           latitude: 48.840359,
-          longitude: 2.27154
+          longitude: 2.27154,
         });
       })
-      .then(function() {
+      .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "test43",
@@ -68,11 +68,11 @@ exports.seed = function(knex) {
           dispo_max: 38,
           user_id: 52,
           latitude: 48.858483,
-          longitude: 2.27154
+          longitude: 2.27154,
         });
       })
 
-      .then(function() {
+      .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
           etablissement: "service-1",
@@ -86,7 +86,7 @@ exports.seed = function(knex) {
           dispo_max: 55,
           user_id: 3,
           latitude: 48.85843,
-          longitude: 2.27154
+          longitude: 2.27154,
         });
       })
   );

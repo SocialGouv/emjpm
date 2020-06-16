@@ -10,7 +10,7 @@ const months = {
   6: "JUI",
   7: "AOU",
   8: "SEP",
-  9: "OCT"
+  9: "OCT",
 };
 
 export { months };

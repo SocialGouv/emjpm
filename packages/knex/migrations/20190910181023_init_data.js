@@ -1,4 +1,4 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   return knex.raw(`
   UPDATE mandataires SET mesures_en_attente = 0 where mesures_en_attente is NULL;
   ALTER TABLE mandataires ALTER COLUMN mesures_en_attente SET default 0;
@@ -11,7 +11,7 @@ exports.up = async function(knex) {
   `);
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.raw(`
   ALTER TABLE mandataires ALTER COLUMN mesures_en_attente DROP NOT NULL;
   ALTER TABLE mandataires ALTER COLUMN mesures_en_cours DROP NOT NULL;

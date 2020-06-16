@@ -2,7 +2,7 @@ import React, { createContext, useState } from "react";
 
 export const Context = createContext({});
 
-export const Provider = props => {
+export const Provider = (props) => {
   // Initial values are obtained from the props
   const { children, longitude = 2.3488, latitude = 48.8534 } = props;
 
@@ -12,13 +12,13 @@ export const Provider = props => {
     latitude: latitude,
     longitude: longitude,
     id: null,
-    type: null
+    type: null,
   });
 
   // Make the context object:
   const mapContext = {
     currentMarker,
-    setCurrentMarker
+    setCurrentMarker,
   };
 
   // pass the value in provider and return

@@ -1,10 +1,10 @@
-exports.up = async function(knex) {
+exports.up = async function (knex) {
   await knex.raw("DROP TABLE IF EXISTS enquete_individuels");
   await knex.raw("DROP TABLE IF EXISTS enquete_preposes");
 };
 
-exports.down = async function(knex) {
-  await knex.schema.createTable("enquete_individuels", table => {
+exports.down = async function (knex) {
+  await knex.schema.createTable("enquete_individuels", (table) => {
     table.increments();
     table
       .integer("mandataire_id")
@@ -41,7 +41,7 @@ exports.down = async function(knex) {
     table.integer("ps_aspa").nullable();
     table.integer("ps_apa").nullable();
   });
-  await knex.schema.createTable("enquete_preposes", table => {
+  await knex.schema.createTable("enquete_preposes", (table) => {
     table.increments();
     table
       .integer("mandataire_id")

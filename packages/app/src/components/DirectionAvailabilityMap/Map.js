@@ -4,7 +4,7 @@ import { SvgLoader, SvgProxy } from "react-svgmt";
 import Map from "./MapSvg";
 import { Panel } from "./Panel";
 
-const France = props => {
+const France = (props) => {
   const { color, aboveColor, belowColor, departements } = props;
   const [currentPanel, togglePanel] = useState(false);
   return (
@@ -31,6 +31,6 @@ France.defaultProps = {
   aboveColor: "#FF6966",
   belowColor: "#70D54F",
   color: "#f6f6f9",
-  departements: []
+  departements: [],
 };
 export default France;

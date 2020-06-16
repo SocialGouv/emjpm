@@ -18,13 +18,13 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
     variables: {
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
-      ids: mesuresIds
-    }
+      ids: mesuresIds,
+    },
   });
 
   const selectMesure = ({ id }) => {
     Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-      shallow: true
+      shallow: true,
     });
   };
 
@@ -46,7 +46,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
         <Box p="2">
           {mesures.length > 0 ? (
             <Fragment>
-              {mesures.map(mesure => {
+              {mesures.map((mesure) => {
                 return (
                   <MesureListItem
                     key={mesure.id}
@@ -74,7 +74,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
                 marginPagesDisplayed={1}
                 forcePage={currentOffset / RESULT_PER_PAGE}
                 pageRangeDisplayed={1}
-                onPageChange={data => {
+                onPageChange={(data) => {
                   setCurrentOffset(data.selected * RESULT_PER_PAGE);
                 }}
                 subContainerClassName={"pages pagination"}

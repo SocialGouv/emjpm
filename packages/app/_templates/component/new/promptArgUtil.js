@@ -1,4 +1,4 @@
-module.exports = questions => ({ prompter, args }) => {
+module.exports = (questions) => ({ prompter, args }) => {
   const providedArgs = questions.reduce((selectedArgs, question) => {
     // eslint-disable-next-line no-param-reassign
     if (args[question.name]) selectedArgs[question.name] = args[question.name];
@@ -6,5 +6,5 @@ module.exports = questions => ({ prompter, args }) => {
   }, {});
   return prompter
     .prompt(questions.filter(({ name }) => !providedArgs[name]))
-    .then(answers => ({ ...answers, ...providedArgs }));
+    .then((answers) => ({ ...answers, ...providedArgs }));
 };

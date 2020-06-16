@@ -22,7 +22,7 @@ test("it should display initial values", () => {
     estimation_etp: INTERVALLE_ETP_OPTIONS[1].value,
     forme_juridique: "SASU",
     local_professionnel: true,
-    secretaire_specialise_etp: 5
+    secretaire_specialise_etp: 5,
   };
 
   const { getByLabelText } = render(
@@ -41,7 +41,7 @@ test("it should display initial values", () => {
 test('it should display "forme juridique" field when "benevole" field is not selected', () => {
   const data = {
     benevole: false,
-    forme_juridique: "Autoentrepreneur"
+    forme_juridique: "Autoentrepreneur",
   };
 
   const { getByLabelText } = render(<EnqueteIndividuelInformationsMandataireForm data={data} />);

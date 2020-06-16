@@ -5,7 +5,7 @@ const magistratMesureEditSchema = yup.object().shape({
   cabinet: yup.string().nullable(),
   civilite: yup.string().required(),
   numero_rg: yup.string().required(),
-  type: yup.string().required()
+  type: yup.string().required(),
 });
 
 export { magistratMesureEditSchema };
