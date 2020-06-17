@@ -2921,6 +2921,32 @@
       - departement_financeur
       filter: {}
       allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_financeur
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - departement_financeur
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_id
+      - id
+      - lb_user_id
+      - created_at
+      filter: {}
 - table:
     schema: public
     name: lb_users
@@ -2945,6 +2971,28 @@
       - type
       filter: {}
       allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - type
+      - siret
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - siret
+      - type
+      filter: {}
 - table:
     schema: public
     name: magistrat
