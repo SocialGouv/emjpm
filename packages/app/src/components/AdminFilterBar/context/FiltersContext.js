@@ -10,6 +10,7 @@ export const Provider = (props) => {
 
   // Use State to keep the values
   const [searchText, changeSearchText] = useState("");
+  const [selectedType, selectType] = useState();
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 
@@ -18,6 +19,8 @@ export const Provider = (props) => {
     changeSearchText,
     debouncedSearchText,
     searchText,
+    selectedType,
+    selectType,
   };
 
   // pass the value in provider and return
