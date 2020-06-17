@@ -79,9 +79,9 @@ const Mesure = (props) => {
           <Box width="270px">
             <Text sx={titleStyle}>
               {numeroRg || 'RG-XXXXXX'}
-              <Text sx={statusStyle(status)}>{currentStatus || 'non reseigné'}</Text>
+              <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
             </Text>
-            <Text sx={subtitleStyle}>{type || 'type de mesure non reseigné'}</Text>
+            <Text sx={subtitleStyle}>{type || 'type de mesure non renseigné'}</Text>
             {!isMagistrat && (
               <Text mt="4px" sx={subtitleStyle}>
                 {tribunal || 'Tribunal non renseigné'} {cabinet}
@@ -103,12 +103,12 @@ const Mesure = (props) => {
             <Fragment>
               <Flex width="120px" sx={columnStyle(true, true)}>
                 <Text sx={labelStyle}>Numero de dossier</Text>
-                <Text sx={descriptionStyle}>{numeroDossier || 'numeroDossier non reseigné'}</Text>
+                <Text sx={descriptionStyle}>{numeroDossier || 'numeroDossier non renseigné'}</Text>
               </Flex>
 
               <Flex width="150px" sx={columnStyle(true, true)}>
                 <Text sx={labelStyle}>Commune</Text>
-                <Text sx={descriptionStyle}>{ville || 'ville non reseigné'}</Text>
+                <Text sx={descriptionStyle}>{ville || 'ville non renseignée'}</Text>
               </Flex>
             </Fragment>
           )}
@@ -116,7 +116,7 @@ const Mesure = (props) => {
             <Fragment>
               <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Date prév. juge.</Text>
-                <Text sx={descriptionStyle}>{judgmentDate || 'non reseigné'}</Text>
+                <Text sx={descriptionStyle}>{judgmentDate || 'non renseigné'}</Text>
               </Flex>
               <Flex width="130px">
                 <Box alignSelf="center" pt="4px" mr="1">
@@ -138,7 +138,7 @@ const Mesure = (props) => {
             <Fragment>
               <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Decision du</Text>
-                <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non reseigné'}</Text>
+                <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non renseigné'}</Text>
               </Flex>
             </Fragment>
           )}
