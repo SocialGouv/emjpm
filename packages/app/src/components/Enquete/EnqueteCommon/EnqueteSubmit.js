@@ -10,12 +10,12 @@ export const EnqueteSubmit = ({
   enquete,
   enqueteReponse,
   goToFirstPage,
-  submitEnquete,
+  submitEnqueteReponse,
 }) => {
-  const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
+  const hasError = enqueteReponse.enquete_reponse_validation_status.global !== "valid";
   const { enquete_reponse_ids } = enqueteReponse;
 
-  return enqueteReponse.submitted_at ? (
+  return enqueteReponse.status !== "draft" ? (
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />
   ) : (
     <Flex flexDirection="column" justifyContent="center">
@@ -44,7 +44,7 @@ export const EnqueteSubmit = ({
               <Button
                 marginTop={4}
                 onClick={async () => {
-                  await submitEnquete({
+                  await submitEnqueteReponse({
                     variables: {
                       id: enquete_reponse_ids.id,
                     },

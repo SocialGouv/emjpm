@@ -18,6 +18,7 @@ export const SmallInput = (props) => {
       {...props}
       sx={{
         ...getBorderProps(props),
+        bg: props.readOnly ? "#f0f0f0" : undefined,
         borderRadius: "8px",
         color: "#000000",
         fontSize: "14px",

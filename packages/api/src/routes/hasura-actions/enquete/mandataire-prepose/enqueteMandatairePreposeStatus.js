@@ -9,6 +9,10 @@ const {
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
+  console.log(
+    "xxx enqueteReponse:",
+    JSON.stringify(enqueteReponse, undefined, 2)
+  );
   const status = {
     modalitesExercice: await enqueteModalitesExerciceStatus(enqueteReponse),
     activite: await enqueteActiviteStatus(enqueteReponse),

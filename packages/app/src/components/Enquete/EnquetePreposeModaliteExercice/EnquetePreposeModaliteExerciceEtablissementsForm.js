@@ -7,6 +7,7 @@ import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormFloat } from "../../../util";
 import { findOption } from "../../../util/option/OptionUtil";
 import { YesNoComboBox } from "../../Commons";
 import { SmallInput } from "../../Commons/SmallInput";
@@ -57,18 +58,14 @@ function dataToForm(data) {
       ...result,
       etablissements: items.map((item) => {
         return {
-          finess: item.finess || "",
-          nombre_journees_hospitalisation: item.nombre_journees_hospitalisation
-            ? parseFloat(item.nombre_journees_hospitalisation)
-            : "",
-          nombre_lits: item.nombre_lits ? parseFloat(item.nombre_lits) : "",
-          raison_sociale: item.raison_sociale || "",
-          statut: item.statut || "",
-          type: item.type || "",
-          nombre_journees_esms: item.nombre_journees_esms
-            ? parseFloat(item.nombre_journees_esms)
-            : "",
-          nombre_mesures: item.nombre_mesures ? parseFloat(item.nombre_mesures) : "",
+          finess: formatFormInput(item.finess),
+          nombre_journees_hospitalisation: formatFormInput(item.nombre_journees_hospitalisation),
+          nombre_lits: formatFormInput(item.nombre_lits),
+          raison_sociale: formatFormInput(item.raison_sociale),
+          statut: formatFormInput(item.statut),
+          type: formatFormInput(item.type),
+          nombre_journees_esms: formatFormInput(item.nombre_journees_esms),
+          nombre_mesures: formatFormInput(item.nombre_mesures),
         };
       }),
     };

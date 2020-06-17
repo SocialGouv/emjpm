@@ -55,20 +55,10 @@ export const EnquetePopulationsAutreMesures = (props) => {
           section={section}
           step={step}
           onSubmit={async (values) => {
-            const data = Object.keys(values).reduce((acc, key) => {
-              if (values[key] !== "") {
-                return {
-                  ...acc,
-                  [key]: parseInt(values[key], 10),
-                };
-              }
-              return acc;
-            }, {});
-
             await updateEnquete({
               variables: {
                 id: populations_id,
-                ...data,
+                ...values,
               },
             });
           }}

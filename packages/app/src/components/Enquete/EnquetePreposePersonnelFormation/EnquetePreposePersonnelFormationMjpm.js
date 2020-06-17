@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { parseFloatValue, parseIntValue } from "../../../util";
+import { parseFormFloat, parseFormInt } from "../../../util";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationMjpmForm } from "./EnquetePreposePersonnelFormationMjpmForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM } from "./mutations";
@@ -69,8 +69,8 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
         await sendEnqueteReponseInformations({
           variables: {
             id: personel_formation_id,
-            nb_preposes_mjpm: parseIntValue(values.nb_preposes_mjpm),
-            nb_preposes_mjpm_etp: parseFloatValue(values.nb_preposes_mjpm_etp),
+            nb_preposes_mjpm: parseFormInt(values.nb_preposes_mjpm),
+            nb_preposes_mjpm_etp: parseFormFloat(values.nb_preposes_mjpm_etp),
             formation_preposes_mjpm,
           },
         });
@@ -82,7 +82,7 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
 export default EnquetePreposePersonnelFormationMjpm;
 function parseNbPreposeHeuresFormationFromForm(val) {
   return {
-    nb_preposes: val ? parseIntValue(val.nb_preposes, 10) : null,
-    heures_formation: val ? parseFloatValue(val.heures_formation) : null,
+    nb_preposes: val ? parseFormInt(val.nb_preposes, 10) : null,
+    heures_formation: val ? parseFormFloat(val.heures_formation) : null,
   };
 }

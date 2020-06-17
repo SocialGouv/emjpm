@@ -4,19 +4,32 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormFloat } from "../../../util";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 function dataToForm(data) {
   return {
-    charges_personnel: data.charges_personnel || "",
-    charges_preposes: data.charges_preposes || "",
-    charges_fonctionnement: data.charges_fonctionnement || "",
-    produits_bareme_prelevements: data.produits_bareme_prelevements || "",
-    autre_produits: data.autre_produits || "",
-    financement_public: data.financement_public || "",
-    aide_sociale_conseil_departemental: data.aide_sociale_conseil_departemental || "",
+    charges_personnel: formatFormInput(data.charges_personnel),
+    charges_preposes: formatFormInput(data.charges_preposes),
+    charges_fonctionnement: formatFormInput(data.charges_fonctionnement),
+    produits_bareme_prelevements: formatFormInput(data.produits_bareme_prelevements),
+    autre_produits: formatFormInput(data.autre_produits),
+    financement_public: formatFormInput(data.financement_public),
+    aide_sociale_conseil_departemental: formatFormInput(data.aide_sociale_conseil_departemental),
+  };
+}
+
+function formToData(values) {
+  return {
+    aide_sociale_conseil_departemental: parseFormFloat(values.aide_sociale_conseil_departemental),
+    autre_produits: parseFormFloat(values.autre_produits),
+    charges_fonctionnement: parseFormFloat(values.charges_fonctionnement),
+    charges_personnel: parseFormFloat(values.charges_personnel),
+    charges_preposes: parseFormFloat(values.charges_preposes),
+    financement_public: parseFormFloat(values.financement_public),
+    produits_bareme_prelevements: parseFormFloat(values.produits_bareme_prelevements),
   };
 }
 
@@ -68,6 +81,7 @@ export const EnquetePreposeFinancementForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 

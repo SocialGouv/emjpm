@@ -1,7 +1,6 @@
 import React from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { parseFloatValue } from "../../../util";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRepartitionPersonnesForm } from "./EnquetePreposePrestationsSocialesRepartitionPersonnesForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION } from "./mutations";
@@ -56,13 +55,7 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (props) => 
         await updateEnquete({
           variables: {
             id: prestations_sociales_id,
-            aah: parseFloatValue(values.aah),
-            pch: parseFloatValue(values.pch),
-            asi: parseFloatValue(values.asi),
-            rsa: parseFloatValue(values.rsa),
-            als_apl: parseFloatValue(values.als_apl),
-            aspa: parseFloatValue(values.aspa),
-            apa: parseFloatValue(values.apa),
+            ...values,
           },
         });
       }}
