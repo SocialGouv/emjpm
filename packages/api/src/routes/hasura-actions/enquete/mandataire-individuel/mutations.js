@@ -1,7 +1,7 @@
 module.exports = {
   SUBMIT_ENQUETE_REPONSE: `
-  mutation submit_enquete_individuel_reponse($id: Int!, $submittedAt: timestamptz!) {
-    update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submittedAt}) {
+  mutation submit_enquete_reponse($id: Int!, $submittedAt: timestamptz!) {
+    update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submittedAt, status: "submitted"}) {
       id
       enquete_reponses_activite_id
       enquete_reponses_agrements_formations_id
@@ -10,6 +10,7 @@ module.exports = {
       enquete_reponses_prestations_sociale_id
       mandataire_id
       service_id
+      status
       submitted_at
       created_at
       enquete_id
@@ -28,6 +29,7 @@ module.exports = {
       enquete_reponses_prestations_sociale_id
       mandataire_id
       service_id
+      status
       submitted_at
       created_at
       enquete_id

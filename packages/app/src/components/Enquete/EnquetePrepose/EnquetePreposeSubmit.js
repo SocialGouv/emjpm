@@ -3,12 +3,12 @@ import { useMutation } from "react-apollo";
 
 import { EnqueteSubmit } from "../EnqueteCommon";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
-import { SUBMIT_ENQUETE } from "./mutations";
+import { SUBMIT_ENQUETE_REPONSE } from "./mutations";
 
 export const EnquetePreposeSubmit = (props) => {
   const { enquete, enqueteReponse, userId, goToFirstPage } = props;
 
-  const [submitEnquete, { loading }] = useMutation(SUBMIT_ENQUETE, {
+  const [submitEnqueteReponse, { loading }] = useMutation(SUBMIT_ENQUETE_REPONSE, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
@@ -23,7 +23,7 @@ export const EnquetePreposeSubmit = (props) => {
       enquete={enquete}
       enqueteReponse={enqueteReponse}
       goToFirstPage={goToFirstPage}
-      submitEnquete={submitEnquete}
+      submitEnqueteReponse={submitEnqueteReponse}
     />
   );
 };

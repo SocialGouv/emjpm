@@ -11,7 +11,7 @@ actions:
   - role: individuel
   - role: prepose
   - role: service
-- name: submit_enquete_individuel
+- name: submit_enquete_reponse
   definition:
     kind: synchronous
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/mandataire-individuel/submit'

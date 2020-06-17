@@ -39,6 +39,7 @@ module.exports = {
   query enquete_reponses($enqueteId: Int!, $mandataireId: Int!) {
     enquete_reponses(where: {enquete_id: {_eq: $enqueteId}, mandataire_id: { _eq: $mandataireId }}) {
       id
+      status
       submitted_at
       enquete_id
       enquete_reponses_activite_id

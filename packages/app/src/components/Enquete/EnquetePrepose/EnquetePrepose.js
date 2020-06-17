@@ -71,10 +71,16 @@ export const EnquetePrepose = (props) => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          enqueteContext={{
+            ...enqueteContext,
+            enqueteReponse,
+            userId,
+            section,
+            step,
+          }}
           userId={userId}
           section={section}
           step={step}
-          enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => goToFirstPage()}
         />
