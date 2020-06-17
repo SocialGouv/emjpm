@@ -20,7 +20,7 @@ const AdminUsersPage = () => {
               mt: "2",
             }}
           >
-            <AdminFilterBar />
+            <AdminFilterBar userTypeFilter />
             <AdminUsers />
           </Flex>
         </BoxWrapper>

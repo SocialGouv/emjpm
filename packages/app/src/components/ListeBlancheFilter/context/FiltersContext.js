@@ -12,9 +12,14 @@ export const Provider = (props) => {
   const [selectedDepartement, selectDepartement] = useState(false);
   const [selectedType, selectType] = useState(false);
   // Use State to keep the values
-  const [searchText, changeSearchText] = useState("");
+  const [searchNom, changeSearchNom] = useState();
+  const [searchPrenom, changeSearchPrenom] = useState();
+  const [searchSiret, changeSearchSiret] = useState();
+  const [departementFinanceur, toogleDepartementFinanceur] = useState(false);
 
-  const debouncedSearchText = useDebounce(searchText, 1000);
+  const debouncedSearchNom = useDebounce(searchNom, 1000);
+  const debouncedSearchPrenom = useDebounce(searchPrenom, 1000);
+  const debouncedSearchSiret = useDebounce(searchSiret, 1000);
 
   // Make the context object:
   const filtersContext = {
@@ -22,8 +27,16 @@ export const Provider = (props) => {
     selectDepartement,
     selectedType,
     selectType,
-    changeSearchText,
-    debouncedSearchText,
+    changeSearchNom,
+    debouncedSearchNom,
+    departementFinanceur,
+    toogleDepartementFinanceur,
+    searchSiret,
+    changeSearchSiret,
+    debouncedSearchSiret,
+    searchPrenom,
+    changeSearchPrenom,
+    debouncedSearchPrenom,
   };
 
   // pass the value in provider and return

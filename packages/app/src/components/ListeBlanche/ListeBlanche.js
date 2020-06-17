@@ -18,7 +18,7 @@ const getType = (type) => {
 };
 
 const ListBlancheItem = ({ item }) => (
-  <Card key={item.id} sx={cardStyle(item.user_id)} mb="2">
+  <Card key={item.id} sx={cardStyle} mb="2">
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>{getType(item.type)}</Text>
@@ -67,7 +67,14 @@ const ListBlancheItem = ({ item }) => (
 );
 
 const ListeBlanche = () => {
-  const { selectedDepartement, selectedType, debouncedSearchText } = useContext(FiltersContext);
+  const {
+    selectedDepartement,
+    selectedType,
+    debouncedSearchNom,
+    debouncedSearchSiret,
+    debouncedSearchPrenom,
+    departementFinanceur,
+  } = useContext(FiltersContext);
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -78,7 +85,10 @@ const ListeBlanche = () => {
       offset: currentOffset,
       type: selectedType ? selectedType.value : null,
       departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
-      searchText: debouncedSearchText ? `${debouncedSearchText}%` : null,
+      nom: debouncedSearchNom ? `${debouncedSearchNom}%` : null,
+      prenom: debouncedSearchPrenom ? `${debouncedSearchPrenom}%` : null,
+      departementFinanceur: departementFinanceur ? true : null,
+      siret: debouncedSearchSiret ? `${debouncedSearchSiret}%` : null,
     },
   });
 

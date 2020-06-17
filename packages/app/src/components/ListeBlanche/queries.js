@@ -6,13 +6,21 @@ export const LB_USERS = gql`
     $offset: Int
     $type: String
     $departementId: Int
-    $searchText: String
+    $departementFinanceur: Boolean
+    $nom: String
+    $prenom: String
+    $siret: String
   ) {
     lb_users_aggregate(
       where: {
         type: { _eq: $type }
-        lb_departements: { departement_id: { _eq: $departementId } }
-        nom: { _ilike: $searchText }
+        lb_departements: {
+          departement_id: { _eq: $departementId }
+          departement_financeur: { _eq: $departementFinanceur }
+        }
+        nom: { _ilike: $nom }
+        prenom: { _ilike: $prenom }
+        siret: { _ilike: $siret }
       }
     ) {
       aggregate {
@@ -24,8 +32,13 @@ export const LB_USERS = gql`
       offset: $offset
       where: {
         type: { _eq: $type }
-        lb_departements: { departement_id: { _eq: $departementId } }
-        nom: { _ilike: $searchText }
+        lb_departements: {
+          departement_id: { _eq: $departementId }
+          departement_financeur: { _eq: $departementFinanceur }
+        }
+        nom: { _ilike: $nom }
+        prenom: { _ilike: $prenom }
+        siret: { _ilike: $siret }
       }
       order_by: { nom: asc_nulls_last }
     ) {
@@ -35,7 +48,6 @@ export const LB_USERS = gql`
       email
       siret
       type
-      user_id
       lb_departements {
         id
         departement_financeur
