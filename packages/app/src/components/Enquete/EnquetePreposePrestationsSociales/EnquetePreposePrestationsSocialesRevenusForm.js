@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { parseFloatValue } from "../../../util";
+import { parseFormFloat } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -33,7 +33,7 @@ function dataToForm(data = {}) {
 
 function formToData(values) {
   const data = Object.keys(values).reduce((acc, attr) => {
-    acc[attr] = parseFloatValue(values[attr]);
+    acc[attr] = parseFormFloat(values[attr]);
     return acc;
   }, {});
   return data;

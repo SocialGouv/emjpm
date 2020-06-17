@@ -19,7 +19,7 @@ export const EnquetePrepose = (props) => {
     variables: { enqueteId, userId },
   });
 
-  const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
+  const enqueteReponse = data ? data.enquete_reponse_validation_status || {} : {};
 
   const sections = useMemo(
     () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),

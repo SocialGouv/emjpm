@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormFloat } from "../../../util";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
@@ -20,13 +21,24 @@ export const validationSchema = yup.object().shape({
 });
 function dataToForm(data) {
   return {
-    aah: data.aah || "",
-    pch: data.pch || "",
-    asi: data.asi || "",
-    rsa: data.rsa || "",
-    als_apl: data.als_apl || "",
-    aspa: data.aspa || "",
-    apa: data.apa || "",
+    aah: formatFormInput(data.aah),
+    pch: formatFormInput(data.pch),
+    asi: formatFormInput(data.asi),
+    rsa: formatFormInput(data.rsa),
+    als_apl: formatFormInput(data.als_apl),
+    aspa: formatFormInput(data.aspa),
+    apa: formatFormInput(data.apa),
+  };
+}
+function formToData(values) {
+  return {
+    aah: parseFormFloat(values.aah),
+    pch: parseFormFloat(values.pch),
+    asi: parseFormFloat(values.asi),
+    rsa: parseFormFloat(values.rsa),
+    als_apl: parseFormFloat(values.als_apl),
+    aspa: parseFormFloat(values.aspa),
+    apa: parseFormFloat(values.apa),
   };
 }
 
@@ -48,6 +60,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 

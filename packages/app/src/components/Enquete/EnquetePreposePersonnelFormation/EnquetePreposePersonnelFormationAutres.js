@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { parseFloatValue, parseIntValue } from "../../../util";
+import { parseFormFloat, parseFormInt } from "../../../util";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationAutresForm } from "./EnquetePreposePersonnelFormationAutresForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES } from "./mutations";
@@ -78,10 +78,10 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
         await sendEnqueteReponseInformations({
           variables: {
             id: personel_formation_id,
-            nb_preposes_homme: parseIntValue(values.nb_preposes_homme),
-            nb_preposes_femme: parseIntValue(values.nb_preposes_femme),
-            nb_autre_personnel: parseIntValue(values.nb_autre_personnel),
-            nb_autre_personnel_etp: parseFloatValue(values.nb_autre_personnel_etp),
+            nb_preposes_homme: parseFormInt(values.nb_preposes_homme),
+            nb_preposes_femme: parseFormInt(values.nb_preposes_femme),
+            nb_autre_personnel: parseFormInt(values.nb_autre_personnel),
+            nb_autre_personnel_etp: parseFormFloat(values.nb_autre_personnel_etp),
             niveaux_qualification,
           },
         });
@@ -93,7 +93,7 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
 export default EnquetePreposePersonnelFormationAutres;
 function parseNbPreposeNombrePreposesParNiveauQualificationFromForm(val) {
   return {
-    nb_preposes: val ? parseIntValue(val.nb_preposes, 10) : null,
-    nb_preposes_etp: val ? parseFloatValue(val.nb_preposes_etp) : null,
+    nb_preposes: val ? parseFormInt(val.nb_preposes, 10) : null,
+    nb_preposes_etp: val ? parseFormFloat(val.nb_preposes_etp) : null,
   };
 }

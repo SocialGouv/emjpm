@@ -32,7 +32,7 @@ export const enqueteIndividuelMenuBuilder = {
 };
 
 function buildMenuSections(enqueteReponse) {
-  const status = enqueteReponse.enquete_reponse_status;
+  const status = enqueteReponse.enquete_reponse_validation_status;
 
   return [
     {

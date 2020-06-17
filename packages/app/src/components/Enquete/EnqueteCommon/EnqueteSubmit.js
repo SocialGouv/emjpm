@@ -12,7 +12,7 @@ export const EnqueteSubmit = ({
   goToFirstPage,
   submitEnqueteReponse,
 }) => {
-  const hasError = enqueteReponse.enquete_reponse_status.global !== "valid";
+  const hasError = enqueteReponse.enquete_reponse_validation_status.global !== "valid";
   const { enquete_reponse_ids } = enqueteReponse;
 
   return enqueteReponse.status !== "draft" ? (

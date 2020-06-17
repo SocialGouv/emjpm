@@ -52,13 +52,7 @@ export const EnqueteIndividuelPrestationsSociales = (props) => {
         await updateEnquete({
           variables: {
             id: prestations_sociale_id,
-            aah: values.aah || null,
-            pch: values.pch || null,
-            asi: values.asi || null,
-            rsa: values.rsa || null,
-            als: values.als || null,
-            aspa: values.aspa || null,
-            apa: values.apa || null,
+            ...values,
           },
         });
       }}

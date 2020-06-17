@@ -30,7 +30,7 @@ module.exports = async (enqueteReponse) => {
       enqueteReponse.enquete_reponses_modalites_exercice,
       {
         schema: yup.object().shape({
-          etablissements: yup.array().of(
+          nombre_lits_journee_hospitalisation: yup.array().of(
             yup.object().shape({
               finess: yup.string().required(),
               nombre_journees_hospitalisation: yup.number().min(0).required(),

@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput } from "../../../util";
 import { findOption } from "../../../util/option/OptionUtil";
 import { SmallInput } from "../../Commons/SmallInput";
 import { PERSONNALITE_JURIDIQUE } from "../constants";
@@ -24,23 +25,17 @@ const validationSchema = yup.object().shape({
 
 function dataToForm(data) {
   return {
-    departement: data.departement || "",
-    region: data.region || "",
-    raison_sociale: data.raison_sociale || "",
-    personnalite_juridique_etablissement: data.personnalite_juridique_etablissement || "",
-    activite_personne_physique: data.activite_personne_physique
-      ? parseFloat(data.activite_personne_physique)
-      : "",
-    activite_service: data.activite_service ? parseFloat(data.activite_service) : "",
-    total_mesures_etablissements: data.total_mesures_etablissements
-      ? parseFloat(data.total_mesures_etablissements)
-      : "",
-    etablissement_personne_morale: data.etablissement_personne_morale
-      ? parseFloat(data.etablissement_personne_morale)
-      : "",
-    etablissement_convention_groupement: data.etablissement_convention_groupement
-      ? parseFloat(data.etablissement_convention_groupement)
-      : "",
+    departement: formatFormInput(data.departement),
+    region: formatFormInput(data.region),
+    raison_sociale: formatFormInput(data.raison_sociale),
+    personnalite_juridique_etablissement: formatFormInput(
+      data.personnalite_juridique_etablissement
+    ),
+    activite_personne_physique: formatFormInput(data.activite_personne_physique),
+    activite_service: formatFormInput(data.activite_service),
+    total_mesures_etablissements: formatFormInput(data.total_mesures_etablissements),
+    etablissement_personne_morale: formatFormInput(data.etablissement_personne_morale),
+    etablissement_convention_groupement: formatFormInput(data.etablissement_convention_groupement),
   };
 }
 
@@ -80,6 +75,11 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
     loading,
   });
 
+  const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
+  const readOnly = enqueteReponseStatus !== "draft";
+
+  console.log("xxx enqueteReponseStatus:", enqueteReponseStatus);
+
   return (
     <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -95,6 +95,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
               </Label>
               <Input
                 placeholder=""
+                readOnly={readOnly}
                 id="region"
                 name="region"
                 value={values.region}

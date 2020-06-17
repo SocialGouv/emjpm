@@ -1,5 +1,5 @@
 actions:
-- name: enquete_reponse_status
+- name: enquete_reponse_validation_status
   definition:
     kind: ""
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/reponse-status'
