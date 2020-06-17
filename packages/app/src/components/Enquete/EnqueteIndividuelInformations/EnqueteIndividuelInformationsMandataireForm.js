@@ -5,6 +5,7 @@ import { Box, Text } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormBoolean, formatFormInput, parseFormFloat } from "../../../util";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -44,19 +45,37 @@ const validationSchema = yup.object().shape({
 
 function dataToForm(data) {
   return {
-    departement: data.departement || "",
-    region: data.region || "",
-    nom: data.nom || "",
-    benevole: data.benevole || false,
-    anciennete: data.anciennete || "",
-    estimation_etp: data.estimation_etp || "",
-    forme_juridique: data.forme_juridique || "",
-    exerce_seul_activite: data.exerce_seul_activite || false,
-    exerce_secretaires_specialises: data.exerce_secretaires_specialises || false,
-    secretaire_specialise_etp: data.secretaire_specialise_etp || "",
-    local_professionnel: data.local_professionnel || false,
+    departement: formatFormInput(data.departement),
+    region: formatFormInput(data.region),
+    nom: formatFormInput(data.nom),
+    benevole: formatFormBoolean(data.benevole, false),
+    anciennete: formatFormInput(data.anciennete),
+    estimation_etp: formatFormInput(data.estimation_etp),
+    forme_juridique: formatFormInput(data.forme_juridique),
+    exerce_seul_activite: formatFormBoolean(data.exerce_seul_activite, false),
+    exerce_secretaires_specialises: formatFormBoolean(data.exerce_secretaires_specialises, false),
+    secretaire_specialise_etp: formatFormInput(data.secretaire_specialise_etp),
+    local_professionnel: formatFormBoolean(data.local_professionnel, false),
     tranche_age: data.tranche_age,
     sexe: data.sexe,
+  };
+}
+
+function formToData(data) {
+  return {
+    nom: data.nom,
+    departement: data.departement,
+    region: data.region,
+    sexe: data.sexe,
+    tranche_age: data.tranche_age,
+    anciennete: data.anciennete,
+    benevole: data.benevole,
+    estimation_etp: data.estimation_etp,
+    forme_juridique: data.forme_juridique,
+    local_professionnel: data.local_professionnel,
+    exerce_seul_activite: data.exerce_seul_activite,
+    exerce_secretaires_specialises: data.exerce_secretaires_specialises,
+    secretaire_specialise_etp: parseFormFloat(data.secretaire_specialise_etp),
   };
 }
 
@@ -86,6 +105,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 

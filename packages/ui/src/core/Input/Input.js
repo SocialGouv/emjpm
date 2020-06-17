@@ -62,6 +62,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   onChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
+  readOnly: PropTypes.bool,
   required: PropTypes.bool,
   size: PropTypes.string,
   type: PropTypes.string,
@@ -74,6 +75,7 @@ Input.defaultProps = {
   onChange: () => {
     return null;
   },
+  readOnly: false,
   required: false,
   size: 'large',
   type: null,

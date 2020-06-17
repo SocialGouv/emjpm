@@ -3,7 +3,7 @@ import { useMemo, useReducer, useState } from "react";
 export const useEnqueteContext = (props) => {
   const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(false);
 
-  const { currentStep, navigateToStep, sections } = props;
+  const { enqueteReponse, currentStep, navigateToStep, sections } = props;
 
   const { section, step } = useMemo(() => {
     const section = !sections ? undefined : sections[currentStep.step];
@@ -25,6 +25,10 @@ export const useEnqueteContext = (props) => {
     }),
     [currentStep, sections]
   );
+
+  const enqueteReponseStatus = enqueteReponse.status;
+  const readOnly = enqueteReponseStatus !== "draft";
+
   function enqueteContextReducer(state, action) {
     switch (action.type) {
       case "submit-and-navigate": {
@@ -35,7 +39,8 @@ export const useEnqueteContext = (props) => {
             ? getPrevPageStep(sections, currentStep)
             : action.value;
 
-        if (state.form.dirty) {
+        if (!readOnly && state.form.dirty) {
+          // form has been modified
           if (state.form.valid) {
             return {
               ...state,

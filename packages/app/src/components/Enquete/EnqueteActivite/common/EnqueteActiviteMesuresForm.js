@@ -2,6 +2,7 @@ import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 
 import yup from "../../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormInt } from "../../../../util";
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
 import { useEnqueteForm } from "../../useEnqueteForm.hook";
 import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
@@ -12,24 +13,20 @@ const validationSchema = yup.object(buildMesureGroupsAttributes([""]));
 
 function dataToForm(data) {
   return {
-    debutAnnee: data.debutAnnee || "",
-    finAnnee: data.finAnnee || "",
-    mesuresNouvelles: data.mesuresNouvelles || "",
-    sortieMesures: data.sortieMesures || "",
+    debutAnnee: formatFormInput(data.debutAnnee),
+    finAnnee: formatFormInput(data.finAnnee),
+    mesuresNouvelles: formatFormInput(data.mesuresNouvelles),
+    sortieMesures: formatFormInput(data.sortieMesures),
   };
 }
 
 function formToData(data) {
   return {
-    debutAnnee: parseIntToSubmit(data.debutAnnee),
-    finAnnee: parseIntToSubmit(data.finAnnee),
-    mesuresNouvelles: parseIntToSubmit(data.mesuresNouvelles),
-    sortieMesures: parseIntToSubmit(data.sortieMesures),
+    debutAnnee: parseFormInt(data.debutAnnee),
+    finAnnee: parseFormInt(data.finAnnee),
+    mesuresNouvelles: parseFormInt(data.mesuresNouvelles),
+    sortieMesures: parseFormInt(data.sortieMesures),
   };
-
-  function parseIntToSubmit(value) {
-    return value ? parseInt(value) : undefined;
-  }
 }
 
 export const EnqueteActiviteMesuresForm = (props) => {

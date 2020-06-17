@@ -3,6 +3,7 @@ import React from "react";
 import { Box, Text } from "rebass";
 
 import yup from "../../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormInt } from "../../../../util";
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
 import { useEnqueteForm } from "../../useEnqueteForm.hook";
 import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
@@ -19,32 +20,28 @@ const validationSchema = yup.object(buildMesureGroupsAttributes(["etablissement"
 
 function dataToForm(data) {
   return {
-    etablissementDebutAnnee: data.etablissementDebutAnnee || "",
-    etablissementFinAnnee: data.etablissementFinAnnee || "",
-    domicileDebutAnnee: data.domicileDebutAnnee || "",
-    domicileFinAnnee: data.domicileFinAnnee || "",
-    etablissementMesuresNouvelles: data.etablissementMesuresNouvelles || "",
-    etablissementSortieMesures: data.etablissementSortieMesures || "",
-    domicileMesuresNouvelles: data.domicileMesuresNouvelles || "",
-    domicileSortieMesures: data.domicileSortieMesures || "",
+    etablissementDebutAnnee: formatFormInput(data.etablissementDebutAnnee),
+    etablissementFinAnnee: formatFormInput(data.etablissementFinAnnee),
+    domicileDebutAnnee: formatFormInput(data.domicileDebutAnnee),
+    domicileFinAnnee: formatFormInput(data.domicileFinAnnee),
+    etablissementMesuresNouvelles: formatFormInput(data.etablissementMesuresNouvelles),
+    etablissementSortieMesures: formatFormInput(data.etablissementSortieMesures),
+    domicileMesuresNouvelles: formatFormInput(data.domicileMesuresNouvelles),
+    domicileSortieMesures: formatFormInput(data.domicileSortieMesures),
   };
 }
 
 function formToData(data) {
   return {
-    etablissementDebutAnnee: parseIntToSubmit(data.etablissementDebutAnnee),
-    etablissementFinAnnee: parseIntToSubmit(data.etablissementFinAnnee),
-    domicileDebutAnnee: parseIntToSubmit(data.domicileDebutAnnee),
-    domicileFinAnnee: parseIntToSubmit(data.domicileFinAnnee),
-    etablissementMesuresNouvelles: parseIntToSubmit(data.etablissementMesuresNouvelles),
-    etablissementSortieMesures: parseIntToSubmit(data.etablissementSortieMesures),
-    domicileMesuresNouvelles: parseIntToSubmit(data.domicileMesuresNouvelles),
-    domicileSortieMesures: parseIntToSubmit(data.domicileSortieMesures),
+    etablissementDebutAnnee: parseFormInt(data.etablissementDebutAnnee),
+    etablissementFinAnnee: parseFormInt(data.etablissementFinAnnee),
+    domicileDebutAnnee: parseFormInt(data.domicileDebutAnnee),
+    domicileFinAnnee: parseFormInt(data.domicileFinAnnee),
+    etablissementMesuresNouvelles: parseFormInt(data.etablissementMesuresNouvelles),
+    etablissementSortieMesures: parseFormInt(data.etablissementSortieMesures),
+    domicileMesuresNouvelles: parseFormInt(data.domicileMesuresNouvelles),
+    domicileSortieMesures: parseFormInt(data.domicileSortieMesures),
   };
-
-  function parseIntToSubmit(value) {
-    return value ? parseInt(value) : undefined;
-  }
 }
 
 export const EnqueteActiviteEtablissementDomicileForm = (props) => {

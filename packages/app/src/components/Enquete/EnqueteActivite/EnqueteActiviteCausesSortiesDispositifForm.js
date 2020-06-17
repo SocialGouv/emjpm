@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormInt } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -15,22 +16,18 @@ const validationSchema = yup.object(
 );
 function dataToForm(data) {
   return {
-    sortiesMainLevee: data.sortiesMainLevee || "",
-    sortiesDeces: data.sortiesDeces || "",
-    sortiesMasp: data.sortiesMasp || "",
+    sortiesMainLevee: formatFormInput(data.sortiesMainLevee),
+    sortiesDeces: formatFormInput(data.sortiesDeces),
+    sortiesMasp: formatFormInput(data.sortiesMasp),
   };
 }
 
 function formToData(data) {
   return {
-    sortiesMainLevee: parseIntToSubmit(data.sortiesMainLevee),
-    sortiesDeces: parseIntToSubmit(data.sortiesDeces),
-    sortiesMasp: parseIntToSubmit(data.sortiesMasp),
+    sortiesMainLevee: parseFormInt(data.sortiesMainLevee),
+    sortiesDeces: parseFormInt(data.sortiesDeces),
+    sortiesMasp: parseFormInt(data.sortiesMasp),
   };
-
-  function parseIntToSubmit(value) {
-    return value ? parseInt(value) : undefined;
-  }
 }
 
 export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {

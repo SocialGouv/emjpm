@@ -6,11 +6,6 @@ import { EnquetePreposeFinancementForm } from "./EnquetePreposeFinancementForm";
 import { UPDATE_ENQUETE_REPONSES_FINANCEMENT } from "./mutations";
 import { ENQUETE_REPONSES_FINANCEMENT } from "./queries";
 
-function convertToFloat(str) {
-  const value = parseFloat(`${str}`.replace(",", "."));
-  return isNaN(value) ? null : value;
-}
-
 export const EnquetePreposeFinancement = (props) => {
   const {
     enqueteContext,
@@ -55,15 +50,7 @@ export const EnquetePreposeFinancement = (props) => {
         await updateFinancement({
           variables: {
             id: financement_id,
-            aide_sociale_conseil_departemental: convertToFloat(
-              values.aide_sociale_conseil_departemental
-            ),
-            autre_produits: convertToFloat(values.autre_produits),
-            charges_fonctionnement: convertToFloat(values.charges_fonctionnement),
-            charges_personnel: convertToFloat(values.charges_personnel),
-            charges_preposes: convertToFloat(values.charges_preposes),
-            financement_public: convertToFloat(values.financement_public),
-            produits_bareme_prelevements: convertToFloat(values.produits_bareme_prelevements),
+            ...values,
           },
         });
       }}

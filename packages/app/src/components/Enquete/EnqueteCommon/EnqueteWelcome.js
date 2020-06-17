@@ -12,7 +12,7 @@ const textStyle = {
 };
 export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPrefix }) => {
   const { id: enqueteId } = enquete;
-  return enqueteReponse.submitted_at ? (
+  return enqueteReponse.status !== "draft" ? (
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />
   ) : (
     <Flex flexDirection="column">

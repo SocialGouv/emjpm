@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormInt } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -23,14 +24,22 @@ const validationSchema = yup.object(
 
 function dataToForm(data) {
   return {
-    revisionsMainLevee: data.revisionsMainLevee || "",
-    revisionsMasp: data.revisionsMasp || "",
-    revisionsReconduction: data.revisionsReconduction || "",
-    revisionsChangement: data.revisionsChangement || "",
-    revisionsAutre: data.revisionsAutre || "",
+    revisionsMainLevee: formatFormInput(data.revisionsMainLevee),
+    revisionsMasp: formatFormInput(data.revisionsMasp),
+    revisionsReconduction: formatFormInput(data.revisionsReconduction),
+    revisionsChangement: formatFormInput(data.revisionsChangement),
+    revisionsAutre: formatFormInput(data.revisionsAutre),
   };
 }
-
+function formToData(values) {
+  return {
+    revisionsMainLevee: parseFormInt(values.revisionsMainLevee),
+    revisionsMasp: parseFormInt(values.revisionsMasp),
+    revisionsReconduction: parseFormInt(values.revisionsReconduction),
+    revisionsChangement: parseFormInt(values.revisionsChangement),
+    revisionsAutre: parseFormInt(values.revisionsAutre),
+  };
+}
 export const EnqueteActiviteRevisionMesuresForm = (props) => {
   const {
     data = {},
@@ -49,6 +58,7 @@ export const EnqueteActiviteRevisionMesuresForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 
