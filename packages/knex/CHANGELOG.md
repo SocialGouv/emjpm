@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.41.0](https://github.com/SocialGouv/emjpm/compare/v25.40.0...v25.41.0) (2020-06-17)
+
+
+### Bug Fixes
+
+* **enquete:** prepose issues ([#1929](https://github.com/SocialGouv/emjpm/issues/1929)) ([1441037](https://github.com/SocialGouv/emjpm/commit/1441037c33a5014c62a3ee4e464fa96b59f5a208))
+
+
+### Features
+
+* **enquete:** prepose personel et formation ([#1915](https://github.com/SocialGouv/emjpm/issues/1915)) ([79b92e0](https://github.com/SocialGouv/emjpm/commit/79b92e0e5f5a9574435d52083b5aebc806e2e536))
+* **enquete:** prepose personel et formation autres ([#1919](https://github.com/SocialGouv/emjpm/issues/1919)) ([ace638c](https://github.com/SocialGouv/emjpm/commit/ace638c8e25d0edd1db31c415e6363a81915b610))
+* **enquete:** prestations sociales for prepose ([#1922](https://github.com/SocialGouv/emjpm/issues/1922)) ([6fcf7c9](https://github.com/SocialGouv/emjpm/commit/6fcf7c9255f714b2f508385a6234e5036e14f12e))
+* **enquete:** prestations sociales for prepose ([#1926](https://github.com/SocialGouv/emjpm/issues/1926)) ([56299ce](https://github.com/SocialGouv/emjpm/commit/56299ce1159812dd848624f88e95dab9959b9a6a))
+* **enquete:** submit precedent [#1912](https://github.com/SocialGouv/emjpm/issues/1912) ([#1920](https://github.com/SocialGouv/emjpm/issues/1920)) ([854c61e](https://github.com/SocialGouv/emjpm/commit/854c61e734ed8c0760d97700137a8d5f9abdb515))
+* **liste-blanche:** add unique index ([b06048c](https://github.com/SocialGouv/emjpm/commit/b06048c29e4a5a6b2b6bc61d155d5958fa8604d4))
+
+
+
+
+
 # [25.40.0](https://github.com/SocialGouv/emjpm/compare/v25.39.0...v25.40.0) (2020-06-09)
 
 **Note:** Version bump only for package @emjpm/knex
