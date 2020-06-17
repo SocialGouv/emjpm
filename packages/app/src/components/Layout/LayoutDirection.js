@@ -47,7 +47,9 @@ const LayoutDirection = ({ children }) => {
           <Footer />
         </BoxWrapper>
       </Box>
-      <SatisfactionCampaign />
+      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !== "true" && (
+        <SatisfactionCampaign />
+      )}
     </Fragment>
   );
 };
