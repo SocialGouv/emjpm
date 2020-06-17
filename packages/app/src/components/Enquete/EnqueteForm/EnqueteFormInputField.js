@@ -1,38 +1,44 @@
 import { Field, InlineError, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
 
 export const EnqueteFormInputField = ({
   id,
+  value,
+  error,
   label,
+  text,
   size,
   type,
   min,
   max,
-  enqueteContext,
   enqueteForm,
   children,
 }) => {
-  const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
-  const readOnly = enqueteReponseStatus !== "draft";
-
-  const { formik, showError } = enqueteForm;
+  const { readOnly, formik, showError } = enqueteForm;
   const { handleChange, handleBlur, values, errors } = formik;
 
   if (!type) {
     type = "text";
   }
+  if (!value) {
+    value = values[id];
+  }
+  if (!error) {
+    error = errors[id];
+  }
 
   return (
     <Field>
       {label && (
-        <Label mb={1} htmlFor={id}>
+        <Label mb={"5px"} htmlFor={id}>
           {label}
         </Label>
       )}
+      {text && <Text mb={"5px"}>{text}</Text>}
 
       <Flex alignItems="center">
         {size === "small" || size === "medium" ? (
@@ -41,9 +47,9 @@ export const EnqueteFormInputField = ({
             readOnly={readOnly}
             id={id}
             name={id}
-            value={values[id]}
+            value={value}
             onChange={handleChange}
-            hasError={!!errors.activite_personne_physique}
+            hasError={showError && !!error}
             type={type}
             min={min}
             max={max}
@@ -55,10 +61,10 @@ export const EnqueteFormInputField = ({
             readOnly={readOnly}
             id={id}
             name={id}
-            value={values[id]}
+            value={value}
             onBlur={handleBlur}
             onChange={handleChange}
-            hasError={showError && !!errors[id]}
+            hasError={showError && !!error}
             type={type}
             min={min}
             max={max}
@@ -67,9 +73,7 @@ export const EnqueteFormInputField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <InlineError showError={showError} message={errors[id]} fieldId={id} />
+      <InlineError showError={showError} message={error} fieldId={id} />
     </Field>
   );
 };
-
-export default EnqueteFormInputField;

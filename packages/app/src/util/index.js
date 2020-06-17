@@ -18,6 +18,10 @@ export function parseFormInt(value) {
   return value !== "" && !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : null;
 }
 
+export function parseFormInput(value) {
+  return value !== "" ? value : null;
+}
+
 export function formatFormInput(value) {
   return value === null || value === undefined ? "" : value;
 }

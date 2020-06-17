@@ -4,25 +4,29 @@ import React, { useMemo } from "react";
 
 import { findOption } from "../../../util/option/OptionUtil";
 
-export const EnqueteFormSelectField = ({ id, label, options, enqueteContext, enqueteForm }) => {
-  const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
-  const readOnly = enqueteReponseStatus !== "draft";
-
-  const { formik, showError } = enqueteForm;
+export const EnqueteFormSelectField = ({ id, value, error, label, options, enqueteForm }) => {
+  const { readOnly, formik, showError } = enqueteForm;
   const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
+
+  if (!value) {
+    value = values[id];
+  }
+  if (!error) {
+    error = errors[id];
+  }
 
   const readOnlyValue = useMemo(() => {
     if (readOnly) {
-      const option = findOption(options, values[id]);
+      const option = findOption(options, value);
       if (option) {
         return option.label;
       }
     }
-  }, [id, options, readOnly, values]);
+  }, [options, readOnly, value]);
 
   return (
     <Field>
-      <Label mb={1} htmlFor={id}>
+      <Label mb={"5px"} htmlFor={id}>
         {label}
       </Label>
       {readOnly ? (
@@ -35,16 +39,16 @@ export const EnqueteFormSelectField = ({ id, label, options, enqueteContext, enq
           value={readOnlyValue}
           onBlur={handleBlur}
           onChange={handleChange}
-          hasError={showError && !!errors[id]}
+          hasError={showError && error}
         />
       ) : (
         <Select
           id={id}
           instanceId={id}
           placeholder=""
-          hasError={showError && !!errors[id]}
+          hasError={showError && error}
           onChange={({ value }) => setFieldValue(id, value)}
-          value={findOption(options, values[id])}
+          value={findOption(options, value)}
           options={options}
         />
       )}
@@ -52,5 +56,3 @@ export const EnqueteFormSelectField = ({ id, label, options, enqueteContext, enq
     </Field>
   );
 };
-
-export default EnqueteFormSelectField;
