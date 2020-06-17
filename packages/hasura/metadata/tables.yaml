@@ -2841,7 +2841,6 @@
       - prenom
       - siret
       - type
-      - user_id
       filter: {}
       allow_aggregations: true
 - table:
@@ -2933,6 +2932,9 @@
   - name: departement
     using:
       foreign_key_constraint_on: department_id
+  - name: lb_user
+    using:
+      foreign_key_constraint_on: lb_user_id
   - name: user
     using:
       foreign_key_constraint_on: user_id

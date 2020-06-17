@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Input, Select } from "@emjpm/ui";
+import { Card, CheckBox, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
@@ -19,6 +19,8 @@ const ListeBlancheFilter = () => {
   const {
     selectedDepartement,
     selectDepartement,
+    payedBy,
+    tooglePayedBy,
     selectedType,
     selectType,
     searchText,
@@ -47,6 +49,9 @@ const ListeBlancheFilter = () => {
             value={selectedDepartement}
             onChange={(option) => selectDepartement(option)}
           />
+        </Box>
+        <Box mr={1} pt={2} width="100px">
+          <CheckBox label="Financé" isChecked={payedBy} onChange={() => tooglePayedBy(!payedBy)} />
         </Box>
         <Box sx={BoxStyle}>
           <Select
