@@ -10,7 +10,7 @@ import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
-  const { id, nom, prenom, email, type, active } = item;
+  const { id, nom, prenom, email, type, active, mandataire } = item;
 
   return (
     <>
@@ -35,6 +35,12 @@ const RowItem = ({ item }) => {
               <Text sx={labelStyle}>état</Text>
               <Text sx={descriptionStyle}>{active ? "activé" : "non activé"}</Text>
             </Flex>
+            {["individuel", "prepose"].includes(type) && (
+              <Flex width="100px" flexDirection="column">
+                <Text sx={labelStyle}>Liste Blanche</Text>
+                <Text sx={descriptionStyle}>{mandataire.lb_user_id ? "oui" : "non"}</Text>
+              </Flex>
+            )}
           </Flex>
           <Box mr="1" width="120px">
             <Link
@@ -55,7 +61,7 @@ const RowItem = ({ item }) => {
 const AdminUsers = () => {
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText } = useContext(AdminFilterContext);
+  const { debouncedSearchText, selectedType } = useContext(AdminFilterContext);
 
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
@@ -64,6 +70,7 @@ const AdminUsers = () => {
       offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+      type: selectedType,
     },
   });
 

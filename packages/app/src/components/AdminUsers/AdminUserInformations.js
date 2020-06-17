@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
+import { isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
 import AdminUsersTribunaux from "./AdminUsersTribunaux";
@@ -75,6 +76,16 @@ const AdminUserInformations = (props) => {
           </Text>
         </Box>
       </Flex>
+      {isMandataire(user.type) && (
+        <Flex mb={4}>
+          <Box width={1 / 3} p={2} bg="cardSecondary">
+            SIRET
+          </Box>
+          <Box width={2 / 3} px={4} py={2}>
+            <Text>{user.mandataire.siret}</Text>
+          </Box>
+        </Flex>
+      )}
 
       {user.type === "service" ? (
         <Flex mb={4}>
