@@ -1,4 +1,4 @@
-import { Button, Card, Input, Text, Select } from "@emjpm/ui";
+import { Button, Card, Input, Select, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 

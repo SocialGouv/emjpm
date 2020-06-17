@@ -4,13 +4,12 @@ import Link from "next/link";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
+import { isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
 import AdminUsersTribunaux from "./AdminUsersTribunaux";
 import { ACTIVATE_USER } from "./mutations";
 import { USER } from "./queries";
-
-import { isMandataire } from "../../../src/util";
 
 const AdminUserInformations = (props) => {
   const { userId } = props;

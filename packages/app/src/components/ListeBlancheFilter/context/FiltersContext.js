@@ -36,7 +36,7 @@ export const Provider = (props) => {
     debouncedSearchSiret,
     searchPrenom,
     changeSearchPrenom,
-    debouncedSearchPrenom
+    debouncedSearchPrenom,
   };
 
   // pass the value in provider and return
