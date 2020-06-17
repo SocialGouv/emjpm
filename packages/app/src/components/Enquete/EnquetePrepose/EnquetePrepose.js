@@ -37,6 +37,7 @@ export const EnquetePrepose = (props) => {
     currentStep,
     navigateToStep,
     sections,
+    enqueteReponse,
   });
 
   if (loading) {

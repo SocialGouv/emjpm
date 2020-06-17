@@ -37,6 +37,7 @@ export const EnqueteIndividuel = (props) => {
     currentStep,
     navigateToStep,
     sections,
+    enqueteReponse,
   });
 
   if (loading) {
@@ -74,7 +75,13 @@ export const EnqueteIndividuel = (props) => {
           userId={userId}
           section={section}
           step={step}
-          enqueteContext={enqueteContext}
+          enqueteContext={{
+            ...enqueteContext,
+            enqueteReponse,
+            userId,
+            section,
+            step,
+          }}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
