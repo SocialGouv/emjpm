@@ -40,9 +40,10 @@ async function initEnqueteMandatairePrepose({
       enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
   };
   return {
+    status: enqueteReponse.status,
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,
-    enquete_reponse_status: status,
+    enquete_reponse_validation_status: status,
     enquete_reponse_ids: ids,
   };
 }

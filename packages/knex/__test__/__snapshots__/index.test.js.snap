@@ -366,6 +366,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "status": Object {
+    "defaultValue": "'draft'::character varying",
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "submitted_at": Object {
     "defaultValue": null,
     "maxLength": null,

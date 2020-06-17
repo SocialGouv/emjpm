@@ -4,6 +4,7 @@ import React from "react";
 import { Box, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput, parseFormFloat, parseFormInt } from "../../../util";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -22,27 +23,29 @@ export const validationSchema = yup.object().shape({
 
 function dataToForm(data) {
   return {
-    cnc_annee_obtention: data.cnc_annee_obtention || "",
-    cnc_heures_formation: data.cnc_heures_formation || "",
-    niveau_qualification: data.niveau_qualification ? parseInt(data.niveau_qualification) : "",
-    secretaire_specialise_etp_n1: data.secretaire_specialise_etp_n1
-      ? parseFloat(data.secretaire_specialise_etp_n1)
-      : "",
-    secretaire_specialise_etp_n2: data.secretaire_specialise_etp_n2
-      ? parseFloat(data.secretaire_specialise_etp_n2)
-      : "",
-    secretaire_specialise_etp_n3: data.secretaire_specialise_etp_n3
-      ? parseFloat(data.secretaire_specialise_etp_n3)
-      : "",
-    secretaire_specialise_etp_n4: data.secretaire_specialise_etp_n4
-      ? parseFloat(data.secretaire_specialise_etp_n4)
-      : "",
-    secretaire_specialise_etp_n5: data.secretaire_specialise_etp_n5
-      ? parseFloat(data.secretaire_specialise_etp_n5)
-      : "",
-    secretaire_specialise_etp_n6: data.secretaire_specialise_etp_n6
-      ? parseFloat(data.secretaire_specialise_etp_n6)
-      : "",
+    cnc_annee_obtention: formatFormInput(data.cnc_annee_obtention),
+    cnc_heures_formation: formatFormInput(data.cnc_heures_formation),
+    niveau_qualification: formatFormInput(data.niveau_qualification),
+    secretaire_specialise_etp_n1: formatFormInput(data.secretaire_specialise_etp_n1),
+    secretaire_specialise_etp_n2: formatFormInput(data.secretaire_specialise_etp_n2),
+    secretaire_specialise_etp_n3: formatFormInput(data.secretaire_specialise_etp_n3),
+    secretaire_specialise_etp_n4: formatFormInput(data.secretaire_specialise_etp_n4),
+    secretaire_specialise_etp_n5: formatFormInput(data.secretaire_specialise_etp_n5),
+    secretaire_specialise_etp_n6: formatFormInput(data.secretaire_specialise_etp_n6),
+  };
+}
+
+function formToData(data) {
+  return {
+    cnc_annee_obtention: parseFormInt(data.cnc_annee_obtention),
+    cnc_heures_formation: parseFormInt(data.cnc_heures_formation),
+    niveau_qualification: parseFormInt(data.niveau_qualification),
+    secretaire_specialise_etp_n1: parseFormFloat(data.secretaire_specialise_etp_n1),
+    secretaire_specialise_etp_n2: parseFormFloat(data.secretaire_specialise_etp_n2),
+    secretaire_specialise_etp_n3: parseFormFloat(data.secretaire_specialise_etp_n3),
+    secretaire_specialise_etp_n4: parseFormFloat(data.secretaire_specialise_etp_n4),
+    secretaire_specialise_etp_n5: parseFormFloat(data.secretaire_specialise_etp_n5),
+    secretaire_specialise_etp_n6: parseFormFloat(data.secretaire_specialise_etp_n6),
   };
 }
 
@@ -64,6 +67,7 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
   return (

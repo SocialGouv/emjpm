@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { parseFloatValue } from "../../../util";
+import { parseFormFloat } from "../../../util";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePreposeModaliteExerciceInformationsForm";
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS } from "./mutations";
@@ -58,11 +58,11 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
             raison_sociale: values.raison_sociale || null,
             personnalite_juridique_etablissement:
               values.personnalite_juridique_etablissement || null,
-            activite_personne_physique: parseFloatValue(values.activite_personne_physique),
-            activite_service: parseFloatValue(values.activite_service),
-            total_mesures_etablissements: parseFloatValue(values.total_mesures_etablissements),
-            etablissement_personne_morale: parseFloatValue(values.etablissement_personne_morale),
-            etablissement_convention_groupement: parseFloatValue(
+            activite_personne_physique: parseFormFloat(values.activite_personne_physique),
+            activite_service: parseFormFloat(values.activite_service),
+            total_mesures_etablissements: parseFormFloat(values.total_mesures_etablissements),
+            etablissement_personne_morale: parseFormFloat(values.etablissement_personne_morale),
+            etablissement_convention_groupement: parseFormFloat(
               values.etablissement_convention_groupement
             ),
           },

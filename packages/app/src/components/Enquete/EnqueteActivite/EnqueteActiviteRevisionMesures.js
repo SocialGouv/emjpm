@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
@@ -41,36 +41,36 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     },
   });
 
-  const {
-    revisions_main_levee,
-    revisions_masp,
-    revisions_reconduction,
-    revisions_changement,
-    revisions_autre,
-  } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+  const initialData = useMemo(() => {
+    const {
+      revisions_main_levee: revisionsMainLevee,
+      revisions_masp: revisionsMasp,
+      revisions_reconduction: revisionsReconduction,
+      revisions_changement: revisionsChangement,
+      revisions_autre: revisionsAutre,
+    } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+
+    return {
+      revisionsMainLevee,
+      revisionsMasp,
+      revisionsReconduction,
+      revisionsChangement,
+      revisionsAutre,
+    };
+  }, [data]);
 
   return (
     <Box>
       <EnqueteActiviteRevisionMesuresForm
         loading={loading}
-        data={{
-          revisionsMainLevee: revisions_main_levee,
-          revisionsMasp: revisions_masp,
-          revisionsReconduction: revisions_reconduction,
-          revisionsChangement: revisions_changement,
-          revisionsAutre: revisions_autre,
-        }}
+        data={initialData}
         section={section}
         step={step}
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
               id: activite_id,
-              revisionsMainLevee: values.revisionsMainLevee || null,
-              revisionsMasp: values.revisionsMasp || null,
-              revisionsReconduction: values.revisionsReconduction || null,
-              revisionsChangement: values.revisionsChangement || null,
-              revisionsAutre: values.revisionsAutre || null,
+              ...values,
             },
           });
         }}
@@ -80,5 +80,4 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     </Box>
   );
 };
-
 export default EnqueteActiviteRevisionMesures;

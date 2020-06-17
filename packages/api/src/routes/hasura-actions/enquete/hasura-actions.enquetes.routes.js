@@ -43,7 +43,7 @@ router.post(
       next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processing file")
+  hasuraActionErrorHandler("Unexpected error submitting enquete")
 );
 
 router.post(
@@ -69,7 +69,7 @@ router.post(
       next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processing file")
+  hasuraActionErrorHandler("Unexpected error submitting enquete")
 );
 
 router.post(
@@ -95,7 +95,7 @@ router.post(
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processing file")
+  hasuraActionErrorHandler("Unexpected error processiong status")
 );
 
 // hasura action: `upload_enquete_file`

@@ -1,9 +1,9 @@
-import { parseFloatValue, parseIntValue } from "../../../util";
+import { parseFormFloat, parseFormInt } from "../../../util";
 
 function mapFormation_preposes_mjpm_nb_prepose_heures_formation(data) {
   return {
-    nb_preposes: !data ? "" : parseIntValue(data.nb_preposes),
-    heures_formation: !data ? "" : parseFloatValue(data.heures_formation),
+    nb_preposes: !data ? "" : parseFormInt(data.nb_preposes),
+    heures_formation: !data ? "" : parseFormFloat(data.heures_formation),
   };
 }
 function mapFormation_preposes_mjpm(data) {
@@ -22,9 +22,9 @@ function mapFormation_preposes_mjpm(data) {
 
 function dataToForm(data) {
   return {
-    nb_preposes_mjpm: data.nb_preposes_mjpm ? parseIntValue(data.nb_preposes_mjpm) : "",
+    nb_preposes_mjpm: data.nb_preposes_mjpm ? parseFormInt(data.nb_preposes_mjpm) : "",
     nb_preposes_mjpm_etp: data.nb_preposes_mjpm_etp
-      ? parseFloatValue(data.nb_preposes_mjpm_etp)
+      ? parseFormFloat(data.nb_preposes_mjpm_etp)
       : "",
     formation_preposes_mjpm: mapFormation_preposes_mjpm(data.formation_preposes_mjpm),
   };
