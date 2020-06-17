@@ -1,13 +1,13 @@
-import { parseFloatValue } from ".";
+import { parseFormFloat } from ".";
 
-describe("parseFloatValue()", () => {
+describe("parseFormFloat()", () => {
   test("it should return null", () => {
-    expect(parseFloatValue(undefined)).toBe(null);
-    expect(parseFloatValue("NaN")).toBe(null);
+    expect(parseFormFloat(undefined)).toBe(null);
+    expect(parseFormFloat("NaN")).toBe(null);
   });
 
   test("it should return float value", () => {
-    expect(parseFloatValue("10.5")).toEqual(10.5);
-    expect(parseFloatValue("10.15.41531")).toBe(10.15);
+    expect(parseFormFloat("10.5")).toEqual(10.5);
+    expect(parseFormFloat("10.15.41531")).toBe(10.15);
   });
 });
