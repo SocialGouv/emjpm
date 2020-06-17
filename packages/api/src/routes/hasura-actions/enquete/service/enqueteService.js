@@ -41,8 +41,6 @@ async function initEnqueteService(context) {
     //   enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
   };
 
-  logger.info(enqueteReponse, "enqueteReponse");
-
   return {
     status: enqueteReponse.status || {},
     user_type: enqueteReponse.user_type,
