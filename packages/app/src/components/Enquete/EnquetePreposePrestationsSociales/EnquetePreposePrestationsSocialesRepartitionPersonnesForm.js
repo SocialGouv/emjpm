@@ -1,11 +1,10 @@
-import { Field, Heading1, Heading3, InlineError } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
-import { SmallInput } from "../../Commons/SmallInput";
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -54,7 +53,7 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (props)
     dispatchEnqueteContextEvent,
   } = props;
 
-  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -65,6 +64,8 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (props)
     formToData,
     loading,
   });
+
+  const { submitForm, submit } = enqueteForm;
 
   return (
     <form onSubmit={submitForm}>
@@ -80,124 +81,74 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (props)
       <Box mt={3}>
         <Flex>
           <Box>
-            <Field>
-              <Label mb={1} htmlFor={"aah"}>
-                {"AAH"}
-              </Label>
-              <SmallInput
-                type="number"
-                placeholder=""
-                value={values.aah}
-                id="aah"
-                name="aah"
-                hasError={showError && !!errors.aah}
-                onChange={handleChange}
-                min={0}
-              />
-              {showError && <InlineError message={errors.aah} fieldId={"aah"} />}
-            </Field>
+            <EnqueteFormInputField
+              id="aah"
+              label="AAH"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
 
-            <Field>
-              <Label mb={1} htmlFor={"pch"}>
-                {"PCH"}
-              </Label>
-              <SmallInput
-                id="pch"
-                name="pch"
-                placeholder=""
-                type="number"
-                value={values.pch}
-                onChange={handleChange}
-                hasError={showError && !!errors.pch}
-                min={0}
-              />
-              {showError && <InlineError message={errors.pch} fieldId={"pch"} />}
-            </Field>
+            <EnqueteFormInputField
+              id="pch"
+              label="PCH"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
 
-            <Field>
-              <Label mb={1} htmlFor={"asi"}>
-                {"ASI"}
-              </Label>
-              <SmallInput
-                id="asi"
-                name="asi"
-                placeholder=""
-                type="number"
-                value={values.asi}
-                onChange={handleChange}
-                hasError={showError && !!errors.asi}
-                min={0}
-              />
-              {showError && <InlineError message={errors.asi} fieldId={"asi"} />}
-            </Field>
+            <EnqueteFormInputField
+              id="asi"
+              label="ASI"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
 
-            <Field>
-              <Label mb={1} htmlFor={"rsa"}>
-                {"RSA de base ou majoré"}
-              </Label>
-              <SmallInput
-                id="rsa"
-                name="rsa"
-                placeholder=""
-                type="number"
-                value={values.rsa}
-                hasError={showError && !!errors.rsa}
-                onChange={handleChange}
-                min={0}
-              />
-              {showError && <InlineError message={errors.rsa} fieldId={"rsa"} />}
-            </Field>
+            <EnqueteFormInputField
+              id="rsa"
+              label="RSA de base ou majoré"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
           </Box>
           <Box>
-            <Field>
-              <Label mb={1} htmlFor={"als"}>
-                {"ALS ou APL"}
-              </Label>
-              <SmallInput
-                id="als_apl"
-                name="als_apl"
-                placeholder=""
-                type="number"
-                value={values.als_apl}
-                hasError={showError && !!errors.als_apl}
-                onChange={handleChange}
-                min={0}
-              />
-              {showError && <InlineError message={errors.als_apl} fieldId={"als_apl"} />}
-            </Field>
-            <Field>
-              <Label mb={1} htmlFor={"aspa"}>
-                {"ASPA"}
-              </Label>
-              <SmallInput
-                id="aspa"
-                name="aspa"
-                placeholder=""
-                type="number"
-                value={values.aspa}
-                hasError={showError && !!errors.aspa}
-                onChange={handleChange}
-                min={0}
-              />
-              {showError && <InlineError message={errors.aspa} fieldId={"aspa"} />}
-            </Field>
-
-            <Field>
-              <Label mb={1} htmlFor={"apa"}>
-                {"APA"}
-              </Label>
-              <SmallInput
-                id="apa"
-                name="apa"
-                placeholder=""
-                type="number"
-                value={values.apa}
-                hasError={showError && !!errors.apa}
-                onChange={handleChange}
-                min={0}
-              />
-              {showError && <InlineError message={errors.apa} fieldId={"apa"} />}
-            </Field>
+            <EnqueteFormInputField
+              id="aspa"
+              label="ALS ou APL"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
+            <EnqueteFormInputField
+              id="als_apl"
+              label="ASPA"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
+            <EnqueteFormInputField
+              id="apa"
+              label="APA"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              size="small"
+              type="number"
+              min={0}
+            />
           </Box>
         </Flex>
 

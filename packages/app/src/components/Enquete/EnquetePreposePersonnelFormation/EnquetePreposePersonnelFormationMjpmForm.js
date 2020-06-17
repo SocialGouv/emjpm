@@ -1,8 +1,8 @@
-import { Field, Heading1, Heading3, Heading5, InlineError, Input } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Heading1, Heading3, Heading5 } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { enquetePreposePersonnelFormationMjpmFormMapper } from "./EnquetePreposePersonnelFormationMjpmFormMapper";
@@ -18,15 +18,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const {
-    submitForm,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    showError,
-    submit,
-  } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -36,6 +28,8 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
     dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
     loading,
   });
+
+  const { submitForm, values, errors, submit } = enqueteForm;
 
   return (
     <Box>
@@ -51,47 +45,20 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
           </Heading5>
           <Flex alignItems="start">
             <Box mr={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_preposes_mjpm">
-                  {"Nombre de préposés"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_preposes_mjpm"
-                  name="nb_preposes_mjpm"
-                  value={values.nb_preposes_mjpm}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="text"
-                  hasError={showError && !!errors.nb_preposes_mjpm}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_preposes_mjpm}
-                  fieldId="nb_preposes_mjpm"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_preposes_mjpm"
+                label="Nombre de préposés"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
             <Box ml={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_preposes_mjpm_etp">
-                  {"Nombre de préposés en ETP"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_preposes_mjpm_etp"
-                  name="nb_preposes_mjpm_etp"
-                  value={values.nb_preposes_mjpm_etp}
-                  onChange={handleChange}
-                  type="text"
-                  hasError={showError && !!errors.nb_preposes_mjpm_etp}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_preposes_mjpm_etp}
-                  fieldId="nb_preposes_mjpm_etp"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_preposes_mjpm_etp"
+                label="Nombre de préposés en ETP"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
           </Flex>
         </Box>
@@ -131,69 +98,32 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
         </Heading5>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
-            <Field>
-              <Label mb={1} htmlFor={`formation_preposes_mjpm.${prefix}.nb_preposes`}>
-                {"Nombre de préposés"}
-              </Label>
-              <Input
-                placeholder=""
-                id={`formation_preposes_mjpm.${prefix}.nb_preposes`}
-                name={`formation_preposes_mjpm.${prefix}.nb_preposes`}
-                value={values.formation_preposes_mjpm[prefix].nb_preposes}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                type="text"
-                hasError={
-                  showError &&
-                  !!(
-                    errors.formation_preposes_mjpm &&
-                    errors.formation_preposes_mjpm[prefix] &&
-                    errors.formation_preposes_mjpm[prefix].nb_preposes
-                  )
-                }
-              />
-              <InlineError
-                showError={showError}
-                message={
-                  errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
-                    ? errors.formation_preposes_mjpm[prefix].nb_preposes
-                    : ""
-                }
-                fieldId={`formation_preposes_mjpm.${prefix}.nb_preposes`}
-              />
-            </Field>
+            <EnqueteFormInputField
+              id={`formation_preposes_mjpm.${prefix}.nb_preposes`}
+              value={values.formation_preposes_mjpm[prefix].nb_preposes}
+              error={
+                errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
+                  ? errors.formation_preposes_mjpm[prefix].nb_preposes
+                  : ""
+              }
+              label="Nombre de préposés"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
           </Box>
           <Box ml={1} flex={1 / 2}>
-            <Field>
-              <Label mb={1} htmlFor={`formation_preposes_mjpm.${prefix}.heures_formation`}>
-                {"Total heures de formation effectuées/prévues"}
-              </Label>
-              <Input
-                placeholder=""
-                id={`formation_preposes_mjpm.${prefix}.heures_formation`}
-                name={`formation_preposes_mjpm.${prefix}.heures_formation`}
-                value={values.formation_preposes_mjpm[prefix].heures_formation}
-                onChange={handleChange}
-                type="text"
-                hasError={
-                  showError &&
-                  !!(
-                    errors.formation_preposes_mjpm &&
-                    errors.formation_preposes_mjpm[prefix] &&
-                    errors.formation_preposes_mjpm[prefix].heures_formation
-                  )
-                }
-              />
-              <InlineError
-                showError={showError}
-                message={
-                  errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
-                    ? errors.formation_preposes_mjpm[prefix].heures_formation
-                    : ""
-                }
-                fieldId={`formation_preposes_mjpm.${prefix}.heures_formation`}
-              />
-            </Field>
+            <EnqueteFormInputField
+              id={`formation_preposes_mjpm.${prefix}.heures_formation`}
+              value={values.formation_preposes_mjpm[prefix].heures_formation}
+              error={
+                errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
+                  ? errors.formation_preposes_mjpm[prefix].heures_formation
+                  : ""
+              }
+              label="Total heures de formation effectuées/prévues"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
           </Box>
         </Flex>
       </Fragment>

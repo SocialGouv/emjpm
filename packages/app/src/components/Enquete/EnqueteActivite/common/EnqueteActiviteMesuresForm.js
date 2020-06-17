@@ -40,7 +40,7 @@ export const EnqueteActiviteMesuresForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -51,6 +51,7 @@ export const EnqueteActiviteMesuresForm = (props) => {
     formToData,
     loading,
   });
+  const { submitForm, errors, showError, submit } = enqueteForm;
   return (
     <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -60,10 +61,10 @@ export const EnqueteActiviteMesuresForm = (props) => {
       {title && <Heading3>{title}</Heading3>}
 
       <EnqueteActiviteFormGroupMesures
-        values={values}
+        enqueteContext={enqueteContext}
+        enqueteForm={enqueteForm}
         errors={errors}
         showError={showError}
-        handleChange={handleChange}
         prefix=""
       />
 

@@ -1,10 +1,10 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
-import { Input, Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormInt } from "../../../util";
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -40,7 +40,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -51,6 +51,8 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
     formToData,
     loading,
   });
+
+  const { submitForm, errors, submit } = enqueteForm;
 
   console.log("errors", errors);
 
@@ -65,48 +67,39 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
 
         <Flex mt={4}>
           <Flex alignItems="center" flex={1 / 2}>
-            <Label width={"120px"}>{`Main levée :`}</Label>
-            <Input
-              mx={1}
-              width={"60px"}
-              min={0}
-              placeholder=""
-              name="sortiesMainLevee"
-              value={values.sortiesMainLevee}
-              hasError={showError && !!errors.sortiesMainLevee}
-              onChange={handleChange}
+            <EnqueteFormInputField
+              id="sortiesMainLevee"
+              label="Main levées"
+              size="medium"
               type="number"
+              min={0}
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
             />
           </Flex>
 
           <Flex alignItems="center" flex={1 / 2}>
-            <Label width={"120px"}>Décès :</Label>
-            <Input
-              mx={1}
-              width={"60px"}
-              min={0}
-              placeholder=""
-              name="sortiesDeces"
-              value={values.sortiesDeces}
-              hasError={showError && !!errors.sortiesDeces}
-              onChange={handleChange}
+            <EnqueteFormInputField
+              id="sortiesDeces"
+              label="Décès"
+              size="medium"
               type="number"
+              min={0}
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
             />
           </Flex>
         </Flex>
         <Flex mt={4}>
           <Flex alignItems="center" flex={1 / 2}>
-            <Label width={"120px"}>MASP :</Label>
-            <Input
-              mx={1}
-              width={"60px"}
-              min={0}
-              placeholder=""
-              name="sortiesMasp"
-              value={values.sortiesMasp}
-              hasError={showError && !!errors.sortiesMasp}
-              onChange={handleChange}
+            <EnqueteFormInputField
+              id="sortiesMasp"
+              label="MASP"
+              size="medium"
               type="number"
+              min={0}
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
             />
           </Flex>
 

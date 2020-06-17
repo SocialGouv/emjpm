@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { formatFormInput, parseFormInt } from "../../../util";
-import { SmallInput } from "../../Commons/SmallInput";
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { EnquetePopulationTrancheAgeField } from "./EnquetePopulationsFields";
@@ -70,7 +70,7 @@ export const EnquetePopulationsForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -81,6 +81,7 @@ export const EnquetePopulationsForm = (props) => {
     formToData,
     loading,
   });
+  const { submitForm, handleChange, values, errors, showError, submit } = enqueteForm;
 
   return (
     <Box
@@ -106,11 +107,13 @@ export const EnquetePopulationsForm = (props) => {
 
       {title && <Heading3>{title}</Heading3>}
 
-      <Text my={4} fontWeight="bold" color="titleSecondary">
+      <Text mt={4} mb={2} fontWeight="bold" color="titleSecondary">
         PAR TRANCHE D’ÂGE
       </Text>
 
       <EnquetePopulationTrancheAgeField
+        enqueteForm={enqueteForm}
+        enqueteContext={enqueteContext}
         label="Personnes de moins de 25 ans :"
         errors={errors}
         showError={showError}
@@ -121,6 +124,8 @@ export const EnquetePopulationsForm = (props) => {
       />
 
       <EnquetePopulationTrancheAgeField
+        enqueteForm={enqueteForm}
+        enqueteContext={enqueteContext}
         errors={errors}
         showError={showError}
         label="Personnes entre 25 et 39 ans :"
@@ -131,6 +136,8 @@ export const EnquetePopulationsForm = (props) => {
       />
 
       <EnquetePopulationTrancheAgeField
+        enqueteForm={enqueteForm}
+        enqueteContext={enqueteContext}
         errors={errors}
         showError={showError}
         label="Personnes entre 40 et 59 ans :"
@@ -141,6 +148,8 @@ export const EnquetePopulationsForm = (props) => {
       />
 
       <EnquetePopulationTrancheAgeField
+        enqueteForm={enqueteForm}
+        enqueteContext={enqueteContext}
         errors={errors}
         showError={showError}
         label="Personnes entre 60 et 74 ans :"
@@ -151,6 +160,8 @@ export const EnquetePopulationsForm = (props) => {
       />
 
       <EnquetePopulationTrancheAgeField
+        enqueteForm={enqueteForm}
+        enqueteContext={enqueteContext}
         errors={errors}
         showError={showError}
         label="Personnes de plus de 75 ans :"
@@ -160,223 +171,220 @@ export const EnquetePopulationsForm = (props) => {
         values={values}
       />
 
-      <Text mt={"80px"} mb={4} fontWeight="bold" color="titleSecondary">
+      <Text mt={4} mb={2} fontWeight="bold" color="titleSecondary">
         PAR ANCIENNETÉ DE PRISE EN CHARGE
       </Text>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="150px">Depuis moins d’un an :</Label>
-        <SmallInput
-          mx={1}
-          min={0}
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {"Depuis moins d’un an :"}
+        </Label>
+        <EnqueteFormInputField
           id="anciennete_inf_1_an"
-          name="anciennete_inf_1_an"
-          value={values.anciennete_inf_1_an}
-          hasError={showError && !!errors.anciennete_inf_1_an}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="150px">De 1 à 3 ans :</Label>
-        <SmallInput
-          mx={1}
-          min={0}
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {"De 1 à 3 ans :"}
+        </Label>
+        <EnqueteFormInputField
           id="anciennete_1_3_ans"
-          name="anciennete_1_3_ans"
-          value={values.anciennete_1_3_ans}
-          hasError={showError && !!errors.anciennete_1_3_ans}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="150px">De 3 à 5 ans :</Label>
-        <SmallInput
-          mx={1}
-          min={0}
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {"De 3 à 5 ans :"}
+        </Label>
+        <EnqueteFormInputField
           id="anciennete_3_5_ans"
-          name="anciennete_3_5_ans"
-          value={values.anciennete_3_5_ans}
-          hasError={showError && !!errors.anciennete_3_5_ans}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="150px">De 5 à 10 ans :</Label>
-        <SmallInput
-          mx={1}
-          min={0}
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {"De 5 à 10 ans :"}
+        </Label>
+        <EnqueteFormInputField
           id="anciennete_5_10_ans"
-          name="anciennete_5_10_ans"
-          value={values.anciennete_5_10_ans}
-          hasError={showError && !!errors.anciennete_5_10_ans}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
-      </Flex>
-
-      <Flex mb={4} alignItems="center">
-        <Label width="150px">10 ans et plus :</Label>
-        <SmallInput
-          mx={1}
           min={0}
-          id="anciennete_sup_10_ans"
-          name="anciennete_sup_10_ans"
-          value={values.anciennete_sup_10_ans}
-          hasError={showError && !!errors.anciennete_sup_10_ans}
-          onChange={handleChange}
-          type="number"
-        />
-        <Label width="auto">personnes</Label>
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Text my={4} fontWeight="bold" color="titleSecondary">
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {"10 ans et plus :"}
+        </Label>
+        <EnqueteFormInputField
+          id="anciennete_sup_10_ans"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
+          type="number"
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
+      </Flex>
+
+      <Text mt={4} mb={2} fontWeight="bold" color="titleSecondary">
         {"PAR CATEGORIE D'ETABLISSEMENT"}
       </Text>
 
-      <Flex mb={4} alignItems="center">
-        <Label htmlFor={"type_etablissement_personne_handicapee"} width="300px">
-          Etablissements pour personnes handicapées
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
+          {"Etablissements pour personnes handicapées"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_etablissement_personne_handicapee"
-          name="type_etablissement_personne_handicapee"
-          value={values.type_etablissement_personne_handicapee}
-          hasError={showError && !!errors.type_etablissement_personne_handicapee}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_service_personne_handicapee"}>
-          Services pour personnes handicapées
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
+          {"Services pour personnes handicapées"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_service_personne_handicapee"
-          name="type_service_personne_handicapee"
-          value={values.type_service_personne_handicapee}
-          hasError={showError && !!errors.type_service_personne_handicapee}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_ehpad"}>
-          EHPAD
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
+          {"EHPAD"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_ehpad"
-          name="type_ehpad"
-          value={values.type_ehpad}
-          hasError={showError && !!errors.type_ehpad}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
-      </Flex>
-
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_autre_etablissement_personne_agee"}>
-          Autres établissements pour personnes âgées
-        </Label>
-        <SmallInput
-          mx={1}
           min={0}
-          id="type_autre_etablissement_personne_agee"
-          name="type_autre_etablissement_personne_agee"
-          value={values.type_autre_etablissement_personne_agee}
-          hasError={showError && !!errors.type_autre_etablissement_personne_agee}
-          onChange={handleChange}
-          type="number"
-        />
-        <Label width="auto">personnes</Label>
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_chrs"}>
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
+          {"Autres établissements pour personnes âgées"}
+        </Label>
+        <EnqueteFormInputField
+          id="type_autre_etablissement_personne_agee"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
+          type="number"
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
+      </Flex>
+
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
           {"Centre d'hébergement et de réinsertion sociale (CHRS)"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_chrs"
-          name="type_chrs"
-          value={values.type_chrs}
-          hasError={showError && !!errors.type_chrs}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_service_hospitalier_soins_longue_duree"}>
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
           {"Service de soins de longue durée"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_service_hospitalier_soins_longue_duree"
-          name="type_service_hospitalier_soins_longue_duree"
-          value={values.type_service_hospitalier_soins_longue_duree}
-          hasError={showError && !!errors.type_service_hospitalier_soins_longue_duree}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_service_psychiatrique"}>
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
           {"Service psychiatrique"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_service_psychiatrique"
-          name="type_service_psychiatrique"
-          value={values.type_service_psychiatrique}
-          hasError={showError && !!errors.type_service_psychiatrique}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
-      <Flex mb={4} alignItems="center">
-        <Label width="300px" htmlFor={"type_autre_service"}>
+      <Flex alignItems="center">
+        <Label mb={2} width="360px">
           {"Autre service"}
         </Label>
-        <SmallInput
-          mx={1}
-          min={0}
+        <EnqueteFormInputField
           id="type_autre_service"
-          name="type_autre_service"
-          value={values.type_autre_service}
-          hasError={showError && !!errors.type_autre_service}
-          onChange={handleChange}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">personnes</Label>
+          min={0}
+        >
+          <Text mx={2}>personnes</Text>
+        </EnqueteFormInputField>
       </Flex>
 
       <Box mt={4}>
