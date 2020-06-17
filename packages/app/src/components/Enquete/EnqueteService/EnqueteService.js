@@ -14,7 +14,6 @@ export const EnqueteService = (props) => {
   const router = useRouter();
   const { enquete, userId, currentStep } = props;
   const { id: enqueteId } = enquete;
-  console.log("userId", userId);
 
   const { data, loading, error } = useQuery(ENQUETE_REPONSE_STATUS, {
     variables: { enqueteId, userId },
