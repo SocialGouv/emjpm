@@ -66,9 +66,9 @@ const MesureListItem = (props) => {
           <Box minWidth="220px" mr="1">
             <Text sx={titleStyle}>
               {numeroRg || 'RG-XXXXXX'}
-              <Text sx={statusStyle(status)}>{currentStatus || 'non reseigné'}</Text>
+              <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
             </Text>
-            <Text sx={typeStyle}>{type || 'type de mesure non reseigné'}</Text>
+            <Text sx={typeStyle}>{type || 'type de mesure non renseigné'}</Text>
           </Box>
 
           {hasTribunal && (
@@ -93,13 +93,13 @@ const MesureListItem = (props) => {
           {hasFolderNumber && (
             <Flex width="90px" sx={columnStyle(true, true)}>
               <Text sx={labelStyle}>Dossier</Text>
-              <Text sx={descriptionStyle}>{numeroDossier || 'numeroDossier non reseigné'}</Text>
+              <Text sx={descriptionStyle}>{numeroDossier || 'numeroDossier non renseigné'}</Text>
             </Flex>
           )}
 
           <Flex width="280px" sx={columnStyle(true, true)}>
             <Text sx={labelStyle}>Commune</Text>
-            <Text sx={descriptionStyle}>{ville || 'ville non reseigné'}</Text>
+            <Text sx={descriptionStyle}>{ville || 'ville non renseignée'}</Text>
           </Flex>
 
           {status === MESURE_TYPE.WAITING && (
@@ -120,7 +120,7 @@ const MesureListItem = (props) => {
               </Flex>
               <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Date prév. juge.</Text>
-                <Text sx={descriptionStyle}>{judgmentDate || 'non reseigné'}</Text>
+                <Text sx={descriptionStyle}>{judgmentDate || 'non renseigné'}</Text>
               </Flex>
             </Fragment>
           )}
@@ -128,7 +128,7 @@ const MesureListItem = (props) => {
           {status !== MESURE_TYPE.WAITING && (
             <Flex minWidth="70px" textAlign="left" sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>Decision du</Text>
-              <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non reseigné'}</Text>
+              <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non renseigné'}</Text>
             </Flex>
           )}
         </Flex>
