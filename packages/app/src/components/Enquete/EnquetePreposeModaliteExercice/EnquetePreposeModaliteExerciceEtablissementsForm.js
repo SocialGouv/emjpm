@@ -1,17 +1,18 @@
 /* eslint-disable no-unused-vars */
-import { Button, Card, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
-import { Checkbox, Label } from "@rebass/forms";
+import { Button, Card, Heading1, Heading3 } from "@emjpm/ui";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
-import { Field, FieldArray, Form, FormikProvider, useFormik } from "formik";
-import React, { Fragment, useEffect } from "react";
-import { Box, Flex, Text } from "rebass";
+import { FieldArray, FormikProvider } from "formik";
+import React from "react";
+import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput, parseFormFloat } from "../../../util";
-import { findOption } from "../../../util/option/OptionUtil";
-import { YesNoComboBox } from "../../Commons";
-import { SmallInput } from "../../Commons/SmallInput";
+import { formatFormInput } from "../../../util";
 import { STATUTS, TYPES } from "../constants";
+import {
+  EnqueteFormInputField,
+  EnqueteFormSelectField,
+  EnqueteFormYesNoField,
+} from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -83,17 +84,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const {
-    submitForm,
-    handleChange,
-    setFieldValue,
-    handleBlur,
-    values,
-    errors,
-    showError,
-    submit,
-    formik,
-  } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -103,6 +94,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
     dataToForm,
     loading,
   });
+  const { submitForm, readOnly, values, errors, submit, formik } = enqueteForm;
+
   return (
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
@@ -110,15 +103,11 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
           {"Modalité d'exercice"}
         </Heading1>
         <Box mb={4}>
-          <Label mb={1} htmlFor="actions_information_tuteurs_familiaux">
-            {"Vous menez des actions d'information des tuteurs familiaux"}
-          </Label>
-          <YesNoComboBox
-            defaultValue={values.actions_information_tuteurs_familiaux}
-            name="actions_information_tuteurs_familiaux"
-            onChange={(value) => {
-              setFieldValue("actions_information_tuteurs_familiaux", value);
-            }}
+          <EnqueteFormYesNoField
+            id={`actions_information_tuteurs_familiaux`}
+            label="Vous menez des actions d'information des tuteurs familiaux"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
           />
         </Box>
         <FieldArray
@@ -130,121 +119,134 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                   values.etablissements.length > 1 ? "s" : ""
                 }`}</Heading3>
 
-                <Box>
-                  <Button
-                    type="button"
-                    onClick={() => {
-                      arrayHelpers.push({
-                        finess: "",
-                        nombre_journees_hospitalisation: "",
-                        nombre_lits: "",
-                        raison_sociale: "",
-                        statut: "",
-                        type: "",
-                        nombre_journees_esms: "",
-                        nombre_mesures: "",
-                      });
-                    }}
-                  >
-                    Ajouter un établissement
-                  </Button>
-                </Box>
+                {!readOnly && (
+                  <Box>
+                    <Button
+                      type="button"
+                      onClick={() => {
+                        arrayHelpers.push({
+                          finess: "",
+                          nombre_journees_hospitalisation: "",
+                          nombre_lits: "",
+                          raison_sociale: "",
+                          statut: "",
+                          type: "",
+                          nombre_journees_esms: "",
+                          nombre_mesures: "",
+                        });
+                      }}
+                    >
+                      Ajouter un établissement
+                    </Button>
+                  </Box>
+                )}
               </Flex>
               {values.etablissements.map((etablissement, index) => {
-                const value = values.etablissements ? values.etablissements[index] : {};
+                const value = etablissement ? etablissement : {};
                 const error = errors.etablissements ? errors.etablissements[index] : {};
 
                 return (
                   <Card mb={4} key={`etablissement-${index}`} sx={{ position: "relative" }}>
-                    <Box
-                      sx={{
-                        position: "absolute",
-                        right: 2,
-                        cursor: "pointer",
-                      }}
-                    >
-                      <SquaredCross width={"20px"} onClick={() => arrayHelpers.remove(index)} />
-                    </Box>
+                    {!readOnly &
+                    (
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          right: 2,
+                          cursor: "pointer",
+                        }}
+                      >
+                        <SquaredCross width={"20px"} onClick={() => arrayHelpers.remove(index)} />
+                      </Box>
+                    )}
                     <Flex mt={4} mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "finess",
-                          label: "N° FINESS",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].finess`}
+                          label="N° FINESS"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.finess}
+                          error={error.finess}
+                        />
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "raison_sociale",
-                          label: "Raison sociale",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].raison_sociale`}
+                          label="Raison sociale"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.raison_sociale}
+                          error={error.raison_sociale}
+                        />
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        {renderArraySelect({
-                          attr: "statut",
-                          label: "Statut de l'établissement",
-                          options: STATUTS,
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormSelectField
+                          id={`etablissements[${index}].statut`}
+                          label="Statut de l'établissement"
+                          options={STATUTS.byKey}
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.statut}
+                          error={error.statut}
+                        />
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        {renderArraySelect({
-                          attr: "type",
-                          label: "Type d'établissement",
-                          options: TYPES,
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormSelectField
+                          id={`etablissements[${index}].type`}
+                          label="Type d'établissement"
+                          options={TYPES.byKey}
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.type}
+                          error={error.type}
+                        />
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "nombre_lits",
-                          label: "Nombre de lits ou de places",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].nombre_lits`}
+                          label="Nombre de lits ou de places"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.nombre_lits}
+                          error={error.nombre_lits}
+                        />
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "nombre_journees_hospitalisation",
-                          label: "Nombre de journées d'hospitalisation complètes",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].nombre_journees_hospitalisation`}
+                          label="Nombre de journées d'hospitalisation complètes"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.nombre_journees_hospitalisation}
+                          error={error.nombre_journees_hospitalisation}
+                        />
                       </Box>
                     </Flex>
                     <Flex mb={4}>
                       <Box mr={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "nombre_mesures",
-                          label: "Nombre de mesures au 31/12",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].nombre_mesures`}
+                          label="Nombre de mesures au 31/12"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.nombre_mesures}
+                          error={error.nombre_mesures}
+                        />
                       </Box>
                       <Box ml={2} flex={1 / 2}>
-                        {renderArrayInput({
-                          attr: "nombre_journees_esms",
-                          label: "Nombre de journées pour les ESMS",
-                          index,
-                          value,
-                          error,
-                        })}
+                        <EnqueteFormInputField
+                          id={`etablissements[${index}].nombre_journees_esms`}
+                          label="Nombre de journées pour les ESMS"
+                          enqueteContext={enqueteContext}
+                          enqueteForm={enqueteForm}
+                          value={value.nombre_journees_esms}
+                          error={error.nombre_journees_esms}
+                        />
                       </Box>
                     </Flex>
                   </Card>
@@ -257,48 +259,6 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
       </form>
     </FormikProvider>
   );
-  function renderArrayInput({ index, label, attr, value, error }) {
-    const id = `etablissements[${index}].${attr}`;
-    return (
-      <Fragment>
-        <Label mb={1} htmlFor={id}>
-          {label}
-        </Label>
-        <Input
-          id={id}
-          name={id}
-          value={value[attr]}
-          placeholder=""
-          hasError={showError && error ? !!error[attr] : false}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="text"
-        />
-        {showError && <InlineError message={error ? error[attr] : ""} fieldId={id} />}
-      </Fragment>
-    );
-  }
-  function renderArraySelect({ index, label, attr, options, value, error }) {
-    const id = `etablissements[${index}].${attr}`;
-    return (
-      <Fragment>
-        <Label mb={1} htmlFor={id}>
-          {label}
-        </Label>
-        <Select
-          placeholder=""
-          instanceId={id}
-          id={id}
-          name={id}
-          value={findOption(options.byKey, value[attr])}
-          hasError={showError && error ? !!error[attr] : false}
-          onChange={(option) => setFieldValue(id, option.value)}
-          options={options.byKey}
-        />
-        {showError && <InlineError message={error ? error[attr] : ""} fieldId={id} />}
-      </Fragment>
-    );
-  }
 };
 
 export default EnquetePreposeModaliteExerciceEtablissementsForm;

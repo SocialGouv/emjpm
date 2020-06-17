@@ -53,6 +53,8 @@ export function useEnqueteForm({
         dirty: undefined,
       };
 
+  const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
+  const readOnly = enqueteReponseStatus !== "draft";
   useMemo(() => {
     setTimeout(() => {
       dispatchEnqueteContextEvent({ type: "set-form-valid", value: isValid });
@@ -114,5 +116,6 @@ export function useEnqueteForm({
     setFieldValue,
     showError,
     submit,
+    readOnly,
   };
 }

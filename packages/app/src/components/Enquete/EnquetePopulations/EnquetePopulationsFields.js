@@ -1,9 +1,9 @@
 import { InlineError } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import React, { Fragment } from "react";
+import React, { Fragment, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { SmallInput } from "../../Commons/SmallInput";
+import { EnqueteFormInputField } from "../EnqueteForm";
 import styles from "./style";
 
 export function calculateTotal(firstProperty, secondProperty) {
@@ -11,47 +11,57 @@ export function calculateTotal(firstProperty, secondProperty) {
 }
 
 export const EnquetePopulationTrancheAgeField = (props) => {
-  const { values, errors, menFieldId, womenFieldId, label, handleChange, showError } = props;
+  const {
+    values,
+    errors,
+    menFieldId,
+    womenFieldId,
+    label,
+    showError,
+    enqueteContext,
+    enqueteForm,
+  } = props;
   const men = { value: values[menFieldId], error: errors[menFieldId], field: menFieldId };
   const women = { value: values[womenFieldId], error: errors[womenFieldId], field: womenFieldId };
-
+  const total = useMemo(() => calculateTotal(men.value, women.value), [men.value, women.value]);
   return (
     <Fragment>
-      <Box mb={2}>
+      <Box>
         <InlineError showError={showError} message={men.error} fieldId={men.field} />
         {!men.error && (
           <InlineError showError={showError} message={women.error} fieldId={women.field} />
         )}
       </Box>
-      <Flex mb={4} alignItems="center">
-        <Label width="210px">{label}</Label>
-        <SmallInput
-          mx={1}
+      <Flex alignItems="center">
+        <Label mb={2} width="210px">
+          {label}
+        </Label>
+        <EnqueteFormInputField
+          id={womenFieldId}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
+          type="number"
           min={0}
-          id={women.field}
-          name={women.field}
           value={women.value}
-          hasError={!!women.error}
-          onChange={handleChange}
+          error={women.error}
+        >
+          <Text mx={2}>femmes et</Text>
+        </EnqueteFormInputField>
+        <EnqueteFormInputField
+          id={womenFieldId}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          size="small"
           type="number"
-        />
-        <Label width="auto">femmes et</Label>
-        <SmallInput
-          mx={1}
           min={0}
-          placeholder=""
-          id={men.field}
-          name={men.field}
           value={men.value}
-          hasError={!!men.error}
-          onChange={handleChange}
-          type="number"
-        />
-        <Box sx={styles.label}>
-          {"hommes, soit "}
-          <Text sx={styles.strongLabel}>{calculateTotal(men.value, women.value)}</Text>
-          {" personnes."}
-        </Box>
+          error={men.error}
+        >
+          <Text ml={2}>
+            hommes, soit <Box sx={styles.strongLabel}>{total}</Box> personnes
+          </Text>
+        </EnqueteFormInputField>
       </Flex>
     </Fragment>
   );
