@@ -1,12 +1,9 @@
-const cardStyle = (userId) => {
-  return {
-    mb: "1",
-    overflow: "hidden",
-    pl: "16px",
-    position: "relative",
-    width: "100%",
-    borderLeft: userId ? "2px solid green" : "2px solid red",
-  };
+const cardStyle = {
+  mb: "1",
+  overflow: "hidden",
+  pl: "16px",
+  position: "relative",
+  width: "100%",
 };
 
 const labelStyle = {

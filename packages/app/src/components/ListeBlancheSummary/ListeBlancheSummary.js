@@ -71,6 +71,12 @@ const ListeBlancheSummary = () => {
     prepose: {
       aggregate: { count: preposeCount },
     },
+    individuel_finance: {
+      aggregate: { count: individuelFinanceCount },
+    },
+    prepose_finance: {
+      aggregate: { count: preposeFinanceCount },
+    },
   } = data;
 
   return (
@@ -79,8 +85,14 @@ const ListeBlancheSummary = () => {
         {selectedDepartement ? selectedDepartement.label : "Tous les départements"}
       </Heading2>
       <Flex flexDirection="column" pt={1}>
-        <LabelValue label="Mandataire individuel" value={individuelCount} />
-        <LabelValue label="Mandataire préposé à un établissement" value={preposeCount} />
+        <LabelValue
+          label="Mandataire individuel"
+          value={`${individuelCount} dont ${individuelFinanceCount} financés`}
+        />
+        <LabelValue
+          label="Mandataire préposé à un établissement"
+          value={`${preposeCount} dont ${preposeFinanceCount} financés`}
+        />
       </Flex>
     </Card>
   );

@@ -1,9 +1,12 @@
 import gql from "graphql-tag";
 
 export const USERS = gql`
-  query services($limit: Int, $searchText: String, $offset: Int) {
+  query services($limit: Int, $searchText: String, $offset: Int, $type: String) {
     users_aggregate(
-      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
+      where: {
+        type: { _eq: $type }
+        _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }]
+      }
     ) {
       aggregate {
         count
@@ -13,7 +16,10 @@ export const USERS = gql`
       limit: $limit
       order_by: { active: asc, id: desc }
       offset: $offset
-      where: { _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }] }
+      where: {
+        type: { _eq: $type }
+        _or: [{ email: { _ilike: $searchText } }, { nom: { _ilike: $searchText } }]
+      }
     ) {
       id
       nom
@@ -21,6 +27,9 @@ export const USERS = gql`
       type
       email
       active
+      mandataire {
+        lb_user_id
+      }
     }
   }
 `;
@@ -96,6 +105,9 @@ export const USER = gql`
       type
       email
       active
+      mandataire {
+        siret
+      }
       magistrat {
         id
         ti {
