@@ -1,11 +1,12 @@
-import { Field, InlineError, Input } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { InlineError } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import { EnqueteFormInputField } from "../../EnqueteForm";
+
 export const EnqueteActiviteFormGroupMesures = (props) => {
   // prefix: 'etablissement' | 'domicile' | ''
-  const { values, errors, handleChange, prefix, showError } = props;
+  const { errors, prefix, showError, enqueteContext, enqueteForm } = props;
 
   const idDebutAnnee = prefix ? `${prefix}DebutAnnee` : "debutAnnee";
   const idFinAnnee = prefix ? `${prefix}FinAnnee` : "finAnnee";
@@ -17,90 +18,50 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
     <Box mt={2}>
       <Flex>
         <Box width="50%">
-          <Field>
-            <Label width="auto">Mesures au 1er janvier</Label>
-            <Box width="200px">
-              <Input
-                placeholder=""
-                min={0}
-                id={idDebutAnnee}
-                name={idDebutAnnee}
-                value={values[idDebutAnnee]}
-                hasError={showError && !!errors[idDebutAnnee]}
-                onChange={handleChange}
-                type="number"
-              />
-            </Box>
-            <InlineError
-              showError={showError}
-              message={errors[idDebutAnnee]}
-              fieldId={idDebutAnnee}
-            />
-          </Field>
+          <EnqueteFormInputField
+            id={idDebutAnnee}
+            label="Mesures au 1er janvier"
+            type="number"
+            min={0}
+            size="medium"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         </Box>
         <Box width="50%">
-          <Field>
-            <Label width="auto">Mesures au 31 décembre</Label>
-            <Box width="200px">
-              <Input
-                placeholder=""
-                min={0}
-                id={idFinAnnee}
-                name={idFinAnnee}
-                value={values[idFinAnnee]}
-                hasError={showError && (!!errors[idFinAnnee] || !!errors[idSomme])}
-                onChange={handleChange}
-                type="number"
-              />
-            </Box>
-            <InlineError showError={showError} message={errors[idFinAnnee]} fieldId={idFinAnnee} />
-          </Field>
+          <EnqueteFormInputField
+            id={idFinAnnee}
+            label="Mesures au 31 décembre"
+            type="number"
+            min={0}
+            size="medium"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         </Box>
       </Flex>
       <Flex>
         <Box width="50%">
-          <Field>
-            <Label width="auto">Nouvelles mesures</Label>
-            <Box width="200px">
-              <Input
-                placeholder=""
-                min={0}
-                id={idMesuresNouvelles}
-                name={idMesuresNouvelles}
-                value={values[idMesuresNouvelles]}
-                hasError={showError && !!errors[idMesuresNouvelles]}
-                onChange={handleChange}
-                type="number"
-              />
-            </Box>
-            <InlineError
-              showError={showError}
-              message={errors[idMesuresNouvelles]}
-              fieldId={idMesuresNouvelles}
-            />
-          </Field>
+          <EnqueteFormInputField
+            id={idMesuresNouvelles}
+            label="Nouvelles mesures"
+            type="number"
+            min={0}
+            size="medium"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         </Box>
         <Box width="50%">
-          <Field>
-            <Label width="auto">Sortie de mesures</Label>
-            <Box width="200px">
-              <Input
-                placeholder=""
-                min={0}
-                id={idSortieMesures}
-                name={idSortieMesures}
-                value={values[idSortieMesures]}
-                hasError={showError && !!errors[idSortieMesures]}
-                onChange={handleChange}
-                type="number"
-              />
-            </Box>
-            <InlineError
-              showError={showError}
-              message={errors[idSortieMesures]}
-              fieldId={idSortieMesures}
-            />
-          </Field>
+          <EnqueteFormInputField
+            id={idSortieMesures}
+            label="Sortie de mesures"
+            type="number"
+            min={0}
+            size="medium"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         </Box>
       </Flex>
       <InlineError showError={showError} message={errors[idSomme]} fieldId={idSomme} />

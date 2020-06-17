@@ -2,10 +2,8 @@ import { Label, Radio } from "@rebass/forms";
 import React from "react";
 import { Flex } from "rebass";
 
-// TODO: create a generic component and move it into ui folder
-
 export const YesNoComboBox = (props) => {
-  const { onChange = () => {}, name = "", defaultValue = false } = props;
+  const { onChange = () => {}, name = "", value, readOnly } = props;
   return (
     <Flex width={1 / 2}>
       <Label alignItems="center" width={[1 / 2]} p={2}>
@@ -13,8 +11,14 @@ export const YesNoComboBox = (props) => {
           id={name}
           name={name}
           value="false"
-          defaultChecked={defaultValue === false}
-          onChange={() => onChange(false)}
+          readOnly={readOnly}
+          disabled={readOnly}
+          checked={value === false}
+          onChange={() => {
+            if (!readOnly) {
+              onChange(false);
+            }
+          }}
         />
         Non
       </Label>
@@ -23,8 +27,14 @@ export const YesNoComboBox = (props) => {
           id={name}
           name={name}
           value="true"
-          defaultChecked={defaultValue === true}
-          onChange={() => onChange(true)}
+          readOnly={readOnly}
+          disabled={readOnly}
+          checked={value === true}
+          onChange={() => {
+            if (!readOnly) {
+              onChange(true);
+            }
+          }}
         />
         Oui
       </Label>

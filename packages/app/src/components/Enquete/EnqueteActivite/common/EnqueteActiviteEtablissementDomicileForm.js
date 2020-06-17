@@ -55,7 +55,7 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const { submitForm, handleChange, values, errors, showError, submit } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -66,6 +66,8 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
     formToData,
     loading,
   });
+
+  const { submitForm, values, errors, showError, submit } = enqueteForm;
 
   const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
 
@@ -84,10 +86,10 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
       </Text>
 
       <EnqueteActiviteFormGroupMesures
-        values={values}
+        enqueteContext={enqueteContext}
+        enqueteForm={enqueteForm}
         errors={errors}
         showError={showError}
-        handleChange={handleChange}
         prefix="etablissement"
       />
 
@@ -96,10 +98,10 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
       </Text>
 
       <EnqueteActiviteFormGroupMesures
-        values={values}
+        enqueteContext={enqueteContext}
+        enqueteForm={enqueteForm}
         errors={errors}
         showError={showError}
-        handleChange={handleChange}
         prefix="domicile"
       />
 

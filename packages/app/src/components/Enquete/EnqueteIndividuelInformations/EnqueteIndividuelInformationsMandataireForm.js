@@ -5,7 +5,7 @@ import { Box, Text } from "rebass";
 
 import { YesNoComboBox } from "../../../components/Commons";
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormBoolean, formatFormInput, parseFormFloat } from "../../../util";
+import { formatFormBoolean, formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
 import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -63,18 +63,18 @@ function dataToForm(data) {
 
 function formToData(data) {
   return {
-    nom: data.nom,
-    departement: data.departement,
-    region: data.region,
-    sexe: data.sexe,
-    tranche_age: data.tranche_age,
-    anciennete: data.anciennete,
-    benevole: data.benevole,
-    estimation_etp: data.estimation_etp,
-    forme_juridique: data.forme_juridique,
-    local_professionnel: data.local_professionnel,
-    exerce_seul_activite: data.exerce_seul_activite,
-    exerce_secretaires_specialises: data.exerce_secretaires_specialises,
+    nom: parseFormInput(data.nom),
+    departement: parseFormInput(data.departement),
+    region: parseFormInput(data.region),
+    sexe: parseFormInput(data.sexe),
+    tranche_age: parseFormInput(data.tranche_age),
+    anciennete: parseFormInput(data.anciennete),
+    benevole: parseFormInput(data.benevole),
+    estimation_etp: parseFormInput(data.estimation_etp),
+    forme_juridique: parseFormInput(data.forme_juridique),
+    local_professionnel: parseFormInput(data.local_professionnel),
+    exerce_seul_activite: parseFormInput(data.exerce_seul_activite),
+    exerce_secretaires_specialises: parseFormInput(data.exerce_secretaires_specialises),
     secretaire_specialise_etp: parseFormFloat(data.secretaire_specialise_etp),
   };
 }
@@ -173,7 +173,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
             {"Exercez-vous cette activité à titre bénévole ?"}
           </Label>
           <YesNoComboBox
-            defaultValue={values.benevole}
+            value={values.benevole}
             name="benevole"
             onChange={(value) => setFieldValue("benevole", value)}
           />
@@ -263,7 +263,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
         <Field>
           <Label mb={1}>{"Exercez-vous seul l'activité ?"}</Label>
           <YesNoComboBox
-            defaultValue={values.exerce_seul_activite}
+            value={values.exerce_seul_activite}
             name="exerce_seul_activite"
             onChange={(value) => setFieldValue("exerce_seul_activite", value)}
           />
@@ -298,7 +298,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
         <Field>
           <Label mb={1}>{"Exercez-vous avec un secrétariat spécialisé ?"}</Label>
           <YesNoComboBox
-            defaultValue={values.exerce_secretaires_specialises}
+            value={values.exerce_secretaires_specialises}
             name="exerce_secretaires_specialises"
             onChange={(value) => setFieldValue("exerce_secretaires_specialises", value)}
           />
@@ -334,7 +334,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
         <Field>
           <Label mb={1}>{"Exercez-vous votre activité dans un local professionnnel ?"}</Label>
           <YesNoComboBox
-            defaultValue={values.local_professionnel}
+            value={values.local_professionnel}
             name="local_professionnel"
             onChange={(value) => setFieldValue("local_professionnel", value)}
           />

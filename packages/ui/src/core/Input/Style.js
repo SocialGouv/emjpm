@@ -29,7 +29,7 @@ const InputStyle = (props) => {
     fontWeight: props.isActive ? '600' : '500',
     height: props.size === 'small' ? '42px' : '52px',
     lineHeight: props.size === 'small' ? '22px' : '32px',
-    opacity: props.isActive ? '1' : '0',
+    opacity: props.readOnly || props.isActive ? '1' : '0',
     outline: 'none',
     pb: '1',
     position: 'relative',

@@ -1,8 +1,8 @@
-import { Field, Heading1, Heading3, Heading5, InlineError, Input } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Heading1, Heading3, Heading5 } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { enquetePreposePersonnelFormationAutresFormMapper } from "./EnquetePreposePersonnelFormationAutresFormMapper";
@@ -19,15 +19,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const {
-    submitForm,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    showError,
-    submit,
-  } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -37,6 +29,8 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
     dataToForm,
     loading,
   });
+
+  const { submitForm, values, errors, submit } = enqueteForm;
 
   return (
     <Box>
@@ -93,47 +87,20 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
           </Heading5>
           <Flex alignItems="start">
             <Box mr={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_preposes_homme">
-                  {"Hommes au 31/12/2018"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_preposes_homme"
-                  name="nb_preposes_homme"
-                  value={values.nb_preposes_homme}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="text"
-                  hasError={showError && !!errors.nb_preposes_homme}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_preposes_homme}
-                  fieldId="nb_preposes_homme"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_preposes_homme"
+                label="Hommes au 31/12"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
             <Box ml={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_preposes_femme">
-                  {"Femmes au 31/12/2018"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_preposes_femme"
-                  name="nb_preposes_femme"
-                  value={values.nb_preposes_femme}
-                  onChange={handleChange}
-                  type="text"
-                  hasError={showError && !!errors.nb_preposes_femme}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_preposes_femme}
-                  fieldId="nb_preposes_femme"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_preposes_femme"
+                label="Femmes au 31/12"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
           </Flex>
         </Box>
@@ -143,47 +110,20 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
           </Heading5>
           <Flex alignItems="start">
             <Box mr={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_autre_personnel">
-                  {"Nombre d'autres personnels"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_autre_personnel"
-                  name="nb_autre_personnel"
-                  value={values.nb_autre_personnel}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="text"
-                  hasError={showError && !!errors.nb_autre_personnel}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_autre_personnel}
-                  fieldId="nb_autre_personnel"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_autre_personnel"
+                label="Nombre d'autres personnels"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
             <Box ml={1} flex={1 / 2}>
-              <Field>
-                <Label mb={1} htmlFor="nb_autre_personnel_etp">
-                  {"Nombre d'autres personnels en ETP"}
-                </Label>
-                <Input
-                  placeholder=""
-                  id="nb_autre_personnel_etp"
-                  name="nb_autre_personnel_etp"
-                  value={values.nb_autre_personnel_etp}
-                  onChange={handleChange}
-                  type="text"
-                  hasError={showError && !!errors.nb_autre_personnel_etp}
-                />
-                <InlineError
-                  showError={showError}
-                  message={errors.nb_autre_personnel_etp}
-                  fieldId="nb_autre_personnel_etp"
-                />
-              </Field>
+              <EnqueteFormInputField
+                id="nb_autre_personnel_etp"
+                label="Nombre d'autres personnels en ETP"
+                enqueteContext={enqueteContext}
+                enqueteForm={enqueteForm}
+              />
             </Box>
           </Flex>
         </Box>
@@ -201,69 +141,32 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
         </Heading5>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
-            <Field>
-              <Label mb={1} htmlFor={`niveaux_qualification.${niveau}.nb_preposes`}>
-                {"Nombre de préposés"}
-              </Label>
-              <Input
-                placeholder=""
-                id={`niveaux_qualification.${niveau}.nb_preposes`}
-                name={`niveaux_qualification.${niveau}.nb_preposes`}
-                value={values.niveaux_qualification[niveau].nb_preposes}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                type="text"
-                hasError={
-                  showError &&
-                  !!(
-                    errors.niveaux_qualification &&
-                    errors.niveaux_qualification[niveau] &&
-                    errors.niveaux_qualification[niveau].nb_preposes
-                  )
-                }
-              />
-              <InlineError
-                showError={showError}
-                message={
-                  errors.niveaux_qualification && errors.niveaux_qualification[niveau]
-                    ? errors.niveaux_qualification[niveau].nb_preposes
-                    : ""
-                }
-                fieldId={`niveaux_qualification.${niveau}.nb_preposes`}
-              />
-            </Field>
+            <EnqueteFormInputField
+              id={`niveaux_qualification.${niveau}.nb_preposes`}
+              value={values.niveaux_qualification[niveau].nb_preposes}
+              error={
+                errors.niveaux_qualification && errors.formation_preposes_mjpm[niveau]
+                  ? errors.formation_preposes_mjpm[niveau].nb_preposes
+                  : ""
+              }
+              label="Nombre de préposés"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
           </Box>
           <Box ml={1} flex={1 / 2}>
-            <Field>
-              <Label mb={1} htmlFor={`niveaux_qualification.${niveau}.nb_preposes_etp`}>
-                {"Nombre de préposés en ETP"}
-              </Label>
-              <Input
-                placeholder=""
-                id={`niveaux_qualification.${niveau}.nb_preposes_etp`}
-                name={`niveaux_qualification.${niveau}.nb_preposes_etp`}
-                value={values.niveaux_qualification[niveau].nb_preposes_etp}
-                onChange={handleChange}
-                type="text"
-                hasError={
-                  showError &&
-                  !!(
-                    errors.niveaux_qualification &&
-                    errors.niveaux_qualification[niveau] &&
-                    errors.niveaux_qualification[niveau].nb_preposes_etp
-                  )
-                }
-              />
-              <InlineError
-                showError={showError}
-                message={
-                  errors.niveaux_qualification && errors.niveaux_qualification[niveau]
-                    ? errors.niveaux_qualification[niveau].nb_preposes_etp
-                    : ""
-                }
-                fieldId={`niveaux_qualification.${niveau}.nb_preposes_etp`}
-              />
-            </Field>
+            <EnqueteFormInputField
+              id={`niveaux_qualification.${niveau}.nb_preposes_etp`}
+              value={values.niveaux_qualification[niveau].nb_preposes_etp}
+              error={
+                errors.niveaux_qualification && errors.nb_preposes_etp[niveau]
+                  ? errors.formation_preposes_mjpm[niveau].nb_preposes_etp
+                  : ""
+              }
+              label="Nombre de préposés en ETP"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
           </Box>
         </Flex>
       </Fragment>
