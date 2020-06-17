@@ -8,6 +8,7 @@ import { MandataireInformationsSidebar } from "../MandataireInformationsSidebar"
 import { Navigation } from "../Navigation";
 import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { UserContext } from "../UserContext";
+import isPayedByParis from "./isPayedByParis";
 
 const navigationLinks = [
   {
@@ -28,13 +29,15 @@ const LayoutMandataire = (props) => {
   const { children, hasNavigation = true } = props;
   const user = useContext(UserContext);
 
-  const links = user.enquete
-    ? navigationLinks.concat({
-        title: `Enquête ${user.enquete.annee}`,
-        url: "/mandataires/enquetes/[enquete_id]",
-        as: `/mandataires/enquetes/${user.enquete.id}`,
-      })
-    : navigationLinks;
+  let links = navigationLinks;
+
+  if (user.enquete && isPayedByParis(user)) {
+    links = navigationLinks.concat({
+      title: `Enquête ${user.enquete.annee}`,
+      url: "/mandataires/enquetes/[enquete_id]",
+      as: `/mandataires/enquetes/${user.enquete.id}`,
+    });
+  }
 
   return (
     <Fragment>
