@@ -67,9 +67,14 @@ const ListBlancheItem = ({ item }) => (
 );
 
 const ListeBlanche = () => {
-  const { selectedDepartement, selectedType, debouncedSearchText, payedBy } = useContext(
-    FiltersContext
-  );
+  const {
+    selectedDepartement,
+    selectedType,
+    debouncedSearchNom,
+    debouncedSearchSiret,
+    debouncedSearchPrenom,
+    departementFinanceur,
+  } = useContext(FiltersContext);
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -80,8 +85,10 @@ const ListeBlanche = () => {
       offset: currentOffset,
       type: selectedType ? selectedType.value : null,
       departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
-      searchText: debouncedSearchText ? `${debouncedSearchText}%` : null,
-      departementFinanceur: payedBy ? true : null,
+      nom: debouncedSearchNom ? `${debouncedSearchNom}%` : null,
+      prenom: debouncedSearchPrenom ? `${debouncedSearchPrenom}%` : null,
+      departementFinanceur: departementFinanceur ? true : null,
+      siret: debouncedSearchSiret ? `${debouncedSearchSiret}%` : null,
     },
   });
 

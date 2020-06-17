@@ -2797,12 +2797,6 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
 }
 `;
 
@@ -2966,6 +2960,12 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "real",
+  },
+  "lb_user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
   },
   "longitude": Object {
     "defaultValue": null,

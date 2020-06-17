@@ -17,6 +17,6 @@ exports.down = async function (knex) {
     table.dropColumn("lb_user_id");
   });
   return knex.schema.alterTable("lb_users", function (table) {
-    table.integer("user_id");
+    table.integer("user_id").unique();
   });
 };

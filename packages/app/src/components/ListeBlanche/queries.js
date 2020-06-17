@@ -7,7 +7,9 @@ export const LB_USERS = gql`
     $type: String
     $departementId: Int
     $departementFinanceur: Boolean
-    $searchText: String
+    $nom: String
+    $prenom: String
+    $siret: String
   ) {
     lb_users_aggregate(
       where: {
@@ -16,7 +18,9 @@ export const LB_USERS = gql`
           departement_id: { _eq: $departementId }
           departement_financeur: { _eq: $departementFinanceur }
         }
-        nom: { _ilike: $searchText }
+        nom: { _ilike: $nom }
+        prenom: { _ilike: $prenom }
+        siret: { _ilike: $siret }
       }
     ) {
       aggregate {
@@ -32,7 +36,9 @@ export const LB_USERS = gql`
           departement_id: { _eq: $departementId }
           departement_financeur: { _eq: $departementFinanceur }
         }
-        nom: { _ilike: $searchText }
+        nom: { _ilike: $nom }
+        prenom: { _ilike: $prenom }
+        siret: { _ilike: $siret }
       }
       order_by: { nom: asc_nulls_last }
     ) {
