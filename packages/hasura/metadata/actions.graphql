@@ -83,7 +83,7 @@ type EnquetePreposeReponse {
 type EnqueteReponseStatus {
   enquete_id : Int!
   submitted_at : timestamptz
-  status: String!
+  status : String!
   enquete_reponse_ids : json!
   enquete_reponse_validation_status : json!
 }
