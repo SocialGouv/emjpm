@@ -174,6 +174,16 @@ export const MANDATAIRE_USERS = gql`
         ville
         code_postal
         competences
+        lb_user {
+          id
+          lb_departements {
+            id
+            departement_financeur
+            departement {
+              code
+            }
+          }
+        }
       }
     }
   }
