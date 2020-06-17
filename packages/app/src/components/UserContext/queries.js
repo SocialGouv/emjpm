@@ -11,7 +11,18 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query users($userId: Int!) {
+  query users($userId: Int!, $endDate: timestamptz) {
+    enquetes(
+      where: {
+        status: { _eq: "created" }
+        _or: [{ date_fin: { _lt: $endDate } }, { date_fin: { _is_null: true } }]
+      }
+    ) {
+      annee
+      status
+      date_fin
+      id
+    }
     users_by_pk(id: $userId) {
       email
       created_at

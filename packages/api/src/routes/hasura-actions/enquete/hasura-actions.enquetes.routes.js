@@ -14,7 +14,10 @@ const {
   initEnqueteMandatairePrepose,
   submitEnqueteMandatairePrepose,
 } = require("./mandataire-prepose/enqueteMandatairePrepose");
-
+const {
+  initEnqueteService,
+  // submitEnqueteService,
+} = require("./service/enqueteService");
 const router = express.Router();
 
 router.post(
@@ -80,12 +83,15 @@ router.post(
         result = await initEnqueteMandataireIndividuel({ enqueteContext });
       } else if (enqueteContext.role === "prepose") {
         result = await initEnqueteMandatairePrepose({ enqueteContext });
+      } else if (enqueteContext.role === "service") {
+        result = await initEnqueteService(enqueteContext);
       } else {
         logger.error("Unexpected role", enqueteContext.role);
         return next(new HttpError(500, "Undexpected role"));
       }
       return res.json(result);
     } catch (err) {
+      logger.error(err, "error");
       return next(err);
     }
   },
