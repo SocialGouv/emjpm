@@ -1,11 +1,10 @@
-import { Heading1, Heading3, InlineError } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
-import { SmallInput } from "../../Commons/SmallInput";
+import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -65,15 +64,7 @@ export const EnquetePreposeFinancementForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const {
-    submitForm,
-    handleChange,
-    handleBlur,
-    values,
-    errors,
-    showError,
-    submit,
-  } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -85,156 +76,91 @@ export const EnquetePreposeFinancementForm = (props) => {
     loading,
   });
 
+  const { submitForm, submit } = enqueteForm;
+
   return (
     <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
         {"Financement"}
       </Heading1>
-      <Heading3>{"Charges"}</Heading3>
+      <Heading3 mb={2}>{"Charges"}</Heading3>
       <Flex>
-        <Box width={1 / 2}>
-          <Flex alignItems="center">
-            <Label minWidth={"180px"} mr={4}>
-              {"charges de personnel"}
-            </Label>
-            <SmallInput
-              onChange={handleChange}
-              onBlur={handleBlur}
-              id="charges_personnel"
-              name="charges_personnel"
-              value={values.charges_personnel}
-              width={100}
-            />
-          </Flex>
-          {showError && (
-            <InlineError message={errors.charges_personnel} fieldId={"charges_personnel"} />
-          )}
+        <Box width={1 / 3}>
+          <EnqueteFormInputField
+            id="charges_personnel"
+            label="Charges de personnel"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+            type="number"
+            size="medium"
+          />
         </Box>
-        <Box width={1 / 2}>
-          <Flex alignItems="center">
-            <Label width={"180px"} mr={4}>
-              {"dont préposés"}
-            </Label>
-            <SmallInput
-              onChange={handleChange}
-              onBlur={handleBlur}
-              id="charges_preposes"
-              name="charges_preposes"
-              value={values.charges_preposes}
-              width={100}
-            />
-          </Flex>
-          {showError && (
-            <InlineError message={errors.charges_preposes} fieldId={"charges_preposes"} />
-          )}
+        <Box width={1 / 3}>
+          <EnqueteFormInputField
+            id="charges_preposes"
+            label="dont préposés"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+            type="number"
+            size="medium"
+          />
         </Box>
-      </Flex>
-      <Flex mt={4}>
-        <Box width={1 / 2}>
-          <Flex alignItems="center">
-            <Label minWidth={"180px"} mr={4}>
-              {"charges de fonctionnement"}
-            </Label>
-            <SmallInput
-              onChange={handleChange}
-              onBlur={handleBlur}
-              id="charges_fonctionnement"
-              name="charges_fonctionnement"
-              value={values.charges_fonctionnement}
-              width={100}
-            />
-          </Flex>
-          {showError && (
-            <InlineError
-              message={errors.charges_fonctionnement}
-              fieldId={"charges_fonctionnement"}
-            />
-          )}
+        <Box width={1 / 3}>
+          <EnqueteFormInputField
+            id="charges_fonctionnement"
+            label="Charges de fonctionnement"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+            type="number"
+            size="medium"
+          />
         </Box>
       </Flex>
 
       <Box mt={"50px"}>
-        <Heading3>{"Produits"}</Heading3>
+        <Heading3 mb={2}>{"Produits"}</Heading3>
         <Flex>
           <Box width={1 / 2}>
-            <Flex alignItems="center">
-              <Label width={"180px"} mr={4}>
-                {"issus de l'application du barème de prélèvements"}
-              </Label>
-              <SmallInput
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="produits_bareme_prelevements"
-                name="produits_bareme_prelevements"
-                value={values.produits_bareme_prelevements}
-                width={100}
-              />
-            </Flex>
-            {showError && (
-              <InlineError
-                message={errors.produits_bareme_prelevements}
-                fieldId={"produits_bareme_prelevements"}
-              />
-            )}
+            <EnqueteFormInputField
+              id="produits_bareme_prelevements"
+              label="Issus de l'application du barème de prélèvements"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+              size="medium"
+            />
           </Box>
           <Box width={1 / 2}>
-            <Flex alignItems="center">
-              <Label width={"180px"} mr={4}>
-                {"issus de la participation des personnes (tarif hébergement)"}
-              </Label>
-              <SmallInput
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="autre_produits"
-                name="autre_produits"
-                value={values.autre_produits}
-                width={100}
-              />
-            </Flex>
-            {showError && (
-              <InlineError message={errors.autre_produits} fieldId={"autre_produits"} />
-            )}
+            <EnqueteFormInputField
+              id="autre_produits"
+              label="Issus de la participation des personnes (tarif hébergement)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+              size="medium"
+            />
           </Box>
         </Flex>
         <Flex mt={4}>
           <Box width={1 / 2}>
-            <Flex alignItems="center">
-              <Label width={"180px"} mr={4}>
-                {"financement public"}
-              </Label>
-              <SmallInput
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id={"financement_public"}
-                name={"financement_public"}
-                value={values.financement_public}
-                width={100}
-              />
-            </Flex>
-            {showError && (
-              <InlineError message={errors.financement_public} fieldId={"financement_public"} />
-            )}
+            <EnqueteFormInputField
+              id="financement"
+              label="Financement public"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+              size="medium"
+            />
           </Box>
           <Box width={1 / 2}>
-            <Flex alignItems="center">
-              <Label width={"180px"} mr={4}>
-                {"dont aide sociale du conseil départemental"}
-              </Label>
-              <SmallInput
-                onChange={handleChange}
-                onBlur={handleBlur}
-                id="aide_sociale_conseil_departemental"
-                name="aide_sociale_conseil_departemental"
-                value={values.aide_sociale_conseil_departemental}
-                width={100}
-              />
-            </Flex>
-            {showError && (
-              <InlineError
-                message={errors.aide_sociale_conseil_departemental}
-                fieldId={"aide_sociale_conseil_departemental"}
-              />
-            )}
+            <EnqueteFormInputField
+              id="aide_sociale_conseil_departemental"
+              label="dont aide sociale du conseil départemental"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+              size="medium"
+            />
           </Box>
         </Flex>
       </Box>

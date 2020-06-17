@@ -72,7 +72,7 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
             {"Exerciez vous l'activité de mandataire avant le 01/01/2009 ?"}
           </Label>
           <YesNoComboBox
-            defaultValue={values.debut_activite_avant_2009}
+            value={values.debut_activite_avant_2009}
             name="debut_activite_avant_2009"
             onChange={(value) => {
               setFieldValue("debut_activite_avant_2009", value);

@@ -4,12 +4,8 @@ import React from 'react';
 import { Flex, Text } from 'rebass';
 
 const InlineError = ({ message, fieldId, showError }) => {
-  if (!message) {
-    return null;
-  }
-
   return (
-    showError !== false && (
+    showError !== false && message && (
       <Flex id={fieldId} alignItems="center" pt="1" color="error">
         <Exclamation size="20" />
         <Text mx="1" fontSize="1">

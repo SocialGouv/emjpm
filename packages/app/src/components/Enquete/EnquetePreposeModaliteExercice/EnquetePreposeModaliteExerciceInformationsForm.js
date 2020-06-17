@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput } from "../../../util";
+import { formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
 import { PERSONNALITE_JURIDIQUE } from "../constants";
 import { EnqueteFormInputField, EnqueteFormSelectField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -37,6 +37,23 @@ function dataToForm(data) {
     etablissement_convention_groupement: formatFormInput(data.etablissement_convention_groupement),
   };
 }
+function formToData(values) {
+  return {
+    departement: parseFormInput(values.departement),
+    region: parseFormInput(values.region),
+    raison_sociale: parseFormInput(values.raison_sociale),
+    personnalite_juridique_etablissement: parseFormInput(
+      values.personnalite_juridique_etablissement
+    ),
+    activite_personne_physique: parseFormFloat(values.activite_personne_physique),
+    activite_service: parseFormFloat(values.activite_service),
+    total_mesures_etablissements: parseFormFloat(values.total_mesures_etablissements),
+    etablissement_personne_morale: parseFormFloat(values.etablissement_personne_morale),
+    etablissement_convention_groupement: parseFormFloat(
+      parseFormInput(values.etablissement_convention_groupement)
+    ),
+  };
+}
 
 function getEtablissementsCount(values) {
   const etablissementPersonneMorale = parseInt(values.etablissement_personne_morale || "0", 10);
@@ -62,6 +79,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 
