@@ -463,6 +463,29 @@
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+  - role: service
+    permission:
+      columns:
+      - id
+      - created_at
+      - submitted_at
+      - enquete_id
+      - mandataire_id
+      - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prepose_prestations_sociales_id
+      filter:
+        enquete_service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
   update_permissions:
   - role: individuel
     permission:
@@ -494,6 +517,30 @@
         mandataire:
           user_id:
             _eq: X-Hasura-User-Id
+      check: null
+  - role: service
+    permission:
+      columns:
+      - enquete_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prepose_prestations_sociales_id
+      - enquete_reponses_prestations_sociale_id
+      - id
+      - mandataire_id
+      - service_id
+      - created_at
+      - submitted_at
+      filter:
+        enquete_service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
       check: null
 - table:
     schema: public
@@ -2475,6 +2522,15 @@
       - status
       filter: {}
   - role: prepose
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      - date_fin
+      filter: {}
+  - role: service
     permission:
       columns:
       - id
