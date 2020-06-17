@@ -1,5 +1,5 @@
 import { BoxWrapper } from "@emjpm/ui";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "../Footer";
@@ -7,24 +7,34 @@ import { Header } from "../Header";
 import { Navigation } from "../Navigation";
 import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { ServiceInformationsSidebar } from "../ServiceInformationsSidebar";
+import { UserContext } from "../UserContext";
+
+const navigationLinks = [
+  {
+    title: "Vos mesures",
+    url: "/services",
+  },
+  {
+    title: "Vos mesures en attente",
+    url: "/services/waiting-mesures",
+  },
+  {
+    title: "La carte de vos mesures",
+    url: "/services/map",
+  },
+];
 
 const LayoutServices = (props) => {
   const { children, hasNavigation = true } = props;
+  const user = useContext(UserContext);
 
-  const navigationLinks = [
-    {
-      title: "Vos mesures",
-      url: "/services",
-    },
-    {
-      title: "Vos mesures en attente",
-      url: "/services/waiting-mesures",
-    },
-    {
-      title: "La carte de vos mesures",
-      url: "/services/map",
-    },
-  ];
+  const links = user.enquete
+    ? navigationLinks.concat({
+        title: `Enquête ${user.enquete.annee}`,
+        url: "/services/enquetes/[enquete_id]",
+        as: `/services/enquetes/${user.enquete.id}`,
+      })
+    : navigationLinks;
 
   return (
     <Fragment>
@@ -44,7 +54,7 @@ const LayoutServices = (props) => {
           />
           {hasNavigation && (
             <BoxWrapper>
-              <Navigation links={navigationLinks} />
+              <Navigation links={links} />
             </BoxWrapper>
           )}
         </Box>
