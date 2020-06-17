@@ -1,12 +1,12 @@
 const HttpError = require("../../../utils/error/HttpError");
 const { Service } = require("../../../models/Service");
+const { ServiceMember } = require("../../../models/ServiceMember");
 const { Mandataire } = require("../../../models/Mandataire");
 
 async function checkEnqueteContext(req) {
   const { role, userId: authUserId } = req.user;
 
   const inputParameters = req.body.input;
-
   const { enqueteId, userId } = inputParameters;
 
   if (!userId) {
@@ -26,10 +26,16 @@ async function checkEnqueteContext(req) {
     if (userId !== authUserId) {
       throw new HttpError(403, "Access denied: invalid serviceId");
     }
-    context.service = await Service.query().findOne({
+
+    const serviceMember = await ServiceMember.query().findOne({
       user_id: userId,
     });
-    throw new HttpError(400, "Not supported yet (service)");
+
+    if (serviceMember) {
+      context.service = await Service.query().findOne({
+        id: serviceMember.service_id,
+      });
+    }
   } else if (role === "individuel") {
     // MANDATAIRE INDIVIDUEL
     if (userId !== authUserId) {
