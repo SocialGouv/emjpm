@@ -3,6 +3,7 @@ import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { formatFormInput, parseFormInt } from "../../../util";
 import { SmallInput } from "../../Commons/SmallInput";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
@@ -12,43 +13,49 @@ import { enquetePopulationsSchema as validationSchema } from "./enquetePopulatio
 export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
 }
-function emptyStringIfNull(value) {
-  if (value === null) {
-    return "";
-  }
-  return value;
+function formToData(values) {
+  return Object.keys(values).reduce((acc, key) => {
+    const value = parseFormInt(values[key]);
+    if (value !== null) {
+      return {
+        ...acc,
+        [key]: value,
+      };
+    }
+    return acc;
+  }, {});
 }
 function dataToForm(data) {
   return {
-    age_inf_25_ans_homme: emptyStringIfNull(data.age_inf_25_ans_homme),
-    age_inf_25_ans_femme: emptyStringIfNull(data.age_inf_25_ans_femme),
-    age_25_39_ans_homme: emptyStringIfNull(data.age_25_39_ans_homme),
-    age_25_39_ans_femme: emptyStringIfNull(data.age_25_39_ans_femme),
-    age_40_59_ans_homme: emptyStringIfNull(data.age_40_59_ans_homme),
-    age_40_59_ans_femme: emptyStringIfNull(data.age_40_59_ans_femme),
-    age_60_74_ans_homme: emptyStringIfNull(data.age_60_74_ans_homme),
-    age_60_74_ans_femme: emptyStringIfNull(data.age_60_74_ans_femme),
-    age_sup_75_ans_homme: emptyStringIfNull(data.age_sup_75_ans_homme),
-    age_sup_75_ans_femme: emptyStringIfNull(data.age_sup_75_ans_femme),
-    anciennete_inf_1_an: emptyStringIfNull(data.anciennete_inf_1_an),
-    anciennete_1_3_ans: emptyStringIfNull(data.anciennete_1_3_ans),
-    anciennete_3_5_ans: emptyStringIfNull(data.anciennete_3_5_ans),
-    anciennete_5_10_ans: emptyStringIfNull(data.anciennete_5_10_ans),
-    anciennete_sup_10_ans: emptyStringIfNull(data.anciennete_sup_10_ans),
-    type_etablissement_personne_handicapee: emptyStringIfNull(
+    age_inf_25_ans_homme: formatFormInput(data.age_inf_25_ans_homme),
+    age_inf_25_ans_femme: formatFormInput(data.age_inf_25_ans_femme),
+    age_25_39_ans_homme: formatFormInput(data.age_25_39_ans_homme),
+    age_25_39_ans_femme: formatFormInput(data.age_25_39_ans_femme),
+    age_40_59_ans_homme: formatFormInput(data.age_40_59_ans_homme),
+    age_40_59_ans_femme: formatFormInput(data.age_40_59_ans_femme),
+    age_60_74_ans_homme: formatFormInput(data.age_60_74_ans_homme),
+    age_60_74_ans_femme: formatFormInput(data.age_60_74_ans_femme),
+    age_sup_75_ans_homme: formatFormInput(data.age_sup_75_ans_homme),
+    age_sup_75_ans_femme: formatFormInput(data.age_sup_75_ans_femme),
+    anciennete_inf_1_an: formatFormInput(data.anciennete_inf_1_an),
+    anciennete_1_3_ans: formatFormInput(data.anciennete_1_3_ans),
+    anciennete_3_5_ans: formatFormInput(data.anciennete_3_5_ans),
+    anciennete_5_10_ans: formatFormInput(data.anciennete_5_10_ans),
+    anciennete_sup_10_ans: formatFormInput(data.anciennete_sup_10_ans),
+    type_etablissement_personne_handicapee: formatFormInput(
       data.type_etablissement_personne_handicapee
     ),
-    type_service_personne_handicapee: emptyStringIfNull(data.type_service_personne_handicapee),
-    type_ehpad: emptyStringIfNull(data.type_ehpad),
-    type_autre_etablissement_personne_agee: emptyStringIfNull(
+    type_service_personne_handicapee: formatFormInput(data.type_service_personne_handicapee),
+    type_ehpad: formatFormInput(data.type_ehpad),
+    type_autre_etablissement_personne_agee: formatFormInput(
       data.type_autre_etablissement_personne_agee
     ),
-    type_chrs: emptyStringIfNull(data.type_chrs),
-    type_service_hospitalier_soins_longue_duree: emptyStringIfNull(
+    type_chrs: formatFormInput(data.type_chrs),
+    type_service_hospitalier_soins_longue_duree: formatFormInput(
       data.type_service_hospitalier_soins_longue_duree
     ),
-    type_service_psychiatrique: emptyStringIfNull(data.type_service_psychiatrique),
-    type_autre_service: emptyStringIfNull(data.type_autre_service),
+    type_service_psychiatrique: formatFormInput(data.type_service_psychiatrique),
+    type_autre_service: formatFormInput(data.type_autre_service),
   };
 }
 
@@ -71,6 +78,7 @@ export const EnquetePopulationsForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 

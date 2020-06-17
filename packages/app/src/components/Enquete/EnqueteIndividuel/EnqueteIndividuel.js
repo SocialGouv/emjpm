@@ -2,7 +2,7 @@ import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { MenuStepper } from "../../MenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
@@ -19,7 +19,7 @@ export const EnqueteIndividuel = (props) => {
     variables: { enqueteId, userId },
   });
 
-  const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
+  const enqueteReponse = data ? data.enquete_reponse_validation_status || {} : {};
 
   const sections = useMemo(
     () => (!data ? undefined : enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse)),
@@ -37,6 +37,7 @@ export const EnqueteIndividuel = (props) => {
     currentStep,
     navigateToStep,
     sections,
+    enqueteReponse,
   });
 
   if (loading) {
@@ -48,23 +49,6 @@ export const EnqueteIndividuel = (props) => {
       <Box mt={4}>
         <Heading1 mb={4}>Oups</Heading1>
         <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
-      </Box>
-    );
-  }
-
-  if (enqueteReponse.submitted_at) {
-    return (
-      <Box py={"50px"}>
-        <Heading1 textAlign="center">
-          {enqueteReponse.submitted_at
-            ? `Vos réponses à l’enquête ${enquete.annee} ont bien été envoyées.`
-            : "Envoi de vos réponses"}
-        </Heading1>
-        <Box sx={{ textAlign: "center", lineHeight: "30px", marginTop: 4 }}>
-          <Text>Nous vous remercions pour le temps que vous nous avez accordé.</Text>
-          <Text>À bientôt,</Text>
-          <Text>Votre direction régionale</Text>
-        </Box>
       </Box>
     );
   }
@@ -91,7 +75,13 @@ export const EnqueteIndividuel = (props) => {
           userId={userId}
           section={section}
           step={step}
-          enqueteContext={enqueteContext}
+          enqueteContext={{
+            ...enqueteContext,
+            enqueteReponse,
+            userId,
+            section,
+            step,
+          }}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />

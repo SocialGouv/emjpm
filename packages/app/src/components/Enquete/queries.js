@@ -12,12 +12,13 @@ export const ENQUETE = gql`
 `;
 
 export const ENQUETE_REPONSE_STATUS = gql`
-  query enquete_reponse_status($enqueteId: Int!, $userId: Int!) {
-    enquete_reponse_status(enqueteId: $enqueteId, userId: $userId) {
+  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int!) {
+    enquete_reponse_validation_status(enqueteId: $enqueteId, userId: $userId) {
+      status
       submitted_at
       enquete_id
       enquete_reponse_ids
-      enquete_reponse_status
+      enquete_reponse_validation_status
     }
   }
 `;

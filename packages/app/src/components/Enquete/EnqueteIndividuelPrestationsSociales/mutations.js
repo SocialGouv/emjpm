@@ -7,13 +7,21 @@ export const UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES = gql`
     $pch: Int
     $asi: Int
     $rsa: Int
-    $als: Int
+    $als_apl: Int
     $aspa: Int
     $apa: Int
   ) {
     update_enquete_reponses_prestations_sociales_by_pk(
       pk_columns: { id: $id }
-      _set: { aah: $aah, pch: $pch, asi: $asi, rsa: $rsa, als_apl: $als, aspa: $aspa, apa: $apa }
+      _set: {
+        aah: $aah
+        pch: $pch
+        asi: $asi
+        rsa: $rsa
+        als_apl: $als_apl
+        aspa: $aspa
+        apa: $apa
+      }
     ) {
       aah
       als_apl

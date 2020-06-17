@@ -19,7 +19,7 @@ export const EnquetePrepose = (props) => {
     variables: { enqueteId, userId },
   });
 
-  const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
+  const enqueteReponse = data ? data.enquete_reponse_validation_status || {} : {};
 
   const sections = useMemo(
     () => (!data ? undefined : enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse)),
@@ -37,6 +37,7 @@ export const EnquetePrepose = (props) => {
     currentStep,
     navigateToStep,
     sections,
+    enqueteReponse,
   });
 
   if (loading) {
@@ -71,10 +72,16 @@ export const EnquetePrepose = (props) => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          enqueteContext={{
+            ...enqueteContext,
+            enqueteReponse,
+            userId,
+            section,
+            step,
+          }}
           userId={userId}
           section={section}
           step={step}
-          enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => goToFirstPage()}
         />
