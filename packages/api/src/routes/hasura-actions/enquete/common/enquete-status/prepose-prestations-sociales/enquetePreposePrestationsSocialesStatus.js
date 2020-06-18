@@ -7,64 +7,53 @@ const yup = require("yup");
 const debugGroupName = "preposePrestationsSociales";
 
 module.exports = async (enqueteReponse) => {
+  const prestationsSociale =
+    enqueteReponse.enquete_reponses_prepose_prestations_sociale;
+
+  const get = (property) => {
+    return prestationsSociale ? prestationsSociale[property] : {};
+  };
+
   const status = {
-    tutelle: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale.tutelle,
-      {
-        schema: tranches1a11(),
-        debugName: `${debugGroupName}/tutelle`,
-        logDataWithErrors: false,
-        logDataIfEmpty: true,
-        logData: true,
-      }
-    ),
-    curatelle_simple: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale
-        .curatelle_simple,
-      {
-        schema: tranches1a11(),
-        debugName: `${debugGroupName}/curatelle_simple`,
-      }
-    ),
-    curatelle_renforcee: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale
-        .curatelle_renforcee,
-      {
-        schema: tranches1a11(),
-        debugName: `${debugGroupName}/curatelle_renforcee`,
-      }
-    ),
+    tutelle: await getValidationStatus(get("tutelle"), {
+      schema: tranches1a11(),
+      debugName: `${debugGroupName}/tutelle`,
+      logDataWithErrors: false,
+      logDataIfEmpty: true,
+      logData: true,
+    }),
+    curatelle_simple: await getValidationStatus(get("curatelle_simple"), {
+      schema: tranches1a11(),
+      debugName: `${debugGroupName}/curatelle_simple`,
+    }),
+    curatelle_renforcee: await getValidationStatus(get("curatelle_renforcee"), {
+      schema: tranches1a11(),
+      debugName: `${debugGroupName}/curatelle_renforcee`,
+    }),
     sauvegarde_autres_mesures: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale
-        .sauvegarde_autres_mesures,
+      get("sauvegarde_autres_mesures"),
       {
         schema: tranches1a11(),
         debugName: `${debugGroupName}/sauvegarde_autres_mesures`,
       }
     ),
-    maj: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale.maj,
-      {
-        schema: tranches1a11(),
-        debugName: `${debugGroupName}/maj`,
-      }
-    ),
-    repartition: await getValidationStatus(
-      enqueteReponse.enquete_reponses_prepose_prestations_sociale,
-      {
-        schema: yup.object({
-          aah: yup.number().min(0).nullable(),
-          als_apl: yup.number().min(0).nullable(),
-          apa: yup.number().min(0).nullable(),
-          asi: yup.number().min(0).nullable(),
-          aspa: yup.number().min(0).nullable(),
-          pch: yup.number().min(0).nullable(),
-          rsa: yup.number().min(0).nullable(),
-        }),
-        debugName: `${debugGroupName}/repartition`,
-        logDataWithErrors: false,
-      }
-    ),
+    maj: await getValidationStatus(get("maj"), {
+      schema: tranches1a11(),
+      debugName: `${debugGroupName}/maj`,
+    }),
+    repartition: await getValidationStatus(prestationsSociale, {
+      schema: yup.object({
+        aah: yup.number().min(0).nullable(),
+        als_apl: yup.number().min(0).nullable(),
+        apa: yup.number().min(0).nullable(),
+        asi: yup.number().min(0).nullable(),
+        aspa: yup.number().min(0).nullable(),
+        pch: yup.number().min(0).nullable(),
+        rsa: yup.number().min(0).nullable(),
+      }),
+      debugName: `${debugGroupName}/repartition`,
+      logDataWithErrors: false,
+    }),
   };
 
   status.global = getGlobalStatus(status);
