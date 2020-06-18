@@ -1,13 +1,15 @@
-import { Field, Heading1, Heading3, InlineError, Input, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Text } from "rebass";
 
-import { YesNoComboBox } from "../../../components/Commons";
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormBoolean, formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
-import { findOption } from "../../../util/option/OptionUtil";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
+import {
+  EnqueteFormInputField,
+  EnqueteFormSelectField,
+  EnqueteFormYesNoField,
+} from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -89,15 +91,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const {
-    submitForm,
-    handleChange,
-    setFieldValue,
-    values,
-    errors,
-    showError,
-    submit,
-  } = useEnqueteForm({
+  const enqueteForm = useEnqueteForm({
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -109,6 +103,8 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
     loading,
   });
 
+  const { submitForm, values, errors, submit } = enqueteForm;
+
   return (
     <form onSubmit={submitForm}>
       <Heading1 textAlign="center" mb={"80px"}>
@@ -116,234 +112,109 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
       </Heading1>
       <Heading3>Informations générales</Heading3>
       <Box mt={4}>
-        <Field>
-          <Label mb={1} htmlFor="departement">
-            {"Département"}
-          </Label>
-          <Input
-            placeholder=""
-            id="departement"
-            name="departement"
-            value={values.departement}
-            hasError={showError && !!errors.departement}
-            onChange={handleChange}
-            type="text"
-          />
-          <InlineError showError={showError} message={errors.departement} fieldId="departement" />
-        </Field>
-
-        <Field>
-          <Label mb={1} htmlFor="region">
-            {"Région"}
-          </Label>
-          <Input
-            placeholder=""
-            id="region"
-            name="region"
-            value={values.region}
-            hasError={showError && !!errors.region}
-            onChange={handleChange}
-            type="text"
-          />
-          <InlineError showError={showError} message={errors.region} fieldId="region" />
-        </Field>
-
-        <Field>
-          <Label mb={1} htmlFor="nom">
-            {"Nom du mandataire"}
-          </Label>
-          <Input
-            placeholder=""
-            id="nom"
-            name="nom"
-            value={values.nom}
-            hasError={showError && !!errors.nom}
-            onChange={handleChange}
-            type="text"
-          />
-          <InlineError showError={showError} message={errors.nom} fieldId="nom" />
-        </Field>
+        <EnqueteFormInputField
+          id="departement"
+          label="Département"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
+        <EnqueteFormInputField
+          id="region"
+          label="Région"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
+        <EnqueteFormInputField
+          id="nom"
+          label="Nom du mandataire"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
           STATUT
         </Text>
 
-        <Field>
-          <Label mb={1} htmlFor="benevole">
-            {"Exercez-vous cette activité à titre bénévole ?"}
-          </Label>
-          <YesNoComboBox
-            value={values.benevole}
-            name="benevole"
-            onChange={(value) => setFieldValue("benevole", value)}
-          />
-          <InlineError showError={showError} message={errors.benevole} fieldId="benevole" />
-        </Field>
+        <EnqueteFormYesNoField
+          id={`benevole`}
+          label="Exercez-vous cette activité à titre bénévole ?"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         {values.benevole === false && (
-          <Field>
-            <Label mb={1} htmlFor="forme_juridique">
-              {"Forme juridique de votre entreprise"}
-            </Label>
-            <Select
-              placeholder=""
-              id="forme_juridique"
-              instanceId={"forme_juridique"}
-              name="forme_juridique"
-              value={findOption(
-                ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey,
-                values.forme_juridique
-              )}
-              hasError={showError && !!errors.forme_juridique}
-              onChange={(option) => setFieldValue("forme_juridique", option.value)}
-              options={ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey}
-            />
-            <InlineError
-              showError={showError}
-              message={errors.forme_juridique}
-              fieldId="forme_juridique"
-            />
-          </Field>
+          <EnqueteFormSelectField
+            id="forme_juridique"
+            label="Forme juridique de votre entreprise"
+            options={ENQ_REP_INFO_MANDATAIRE.FORME_JURIDIQUE.byKey}
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         )}
 
-        <Field>
-          <Label mb={1} htmlFor="sexe">
-            {"Sexe"}
-          </Label>
-          <Select
-            placeholder=""
-            id="sexe"
-            instanceId={"sexe"}
-            name="sexe"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE.SEXE.byKey, values.sexe)}
-            hasError={showError && !!errors.sexe}
-            onChange={(option) => setFieldValue("sexe", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE.SEXE.byKey}
-          />
-          <InlineError showError={showError} message={errors.sexe} fieldId="sexe" />
-        </Field>
+        <EnqueteFormSelectField
+          id="sexe"
+          label="Sexe"
+          options={ENQ_REP_INFO_MANDATAIRE.SEXE.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
-        <Field>
-          <Label mb={1} htmlFor="forme_juridique">
-            {"Ancienneté dans la fonction de MJPM"}
-          </Label>
-          <Select
-            placeholder=""
-            id="anciennete"
-            instanceId={"anciennete"}
-            name="anciennete"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey, values.anciennete)}
-            hasError={showError && !!errors.anciennete}
-            onChange={(option) => setFieldValue("anciennete", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey}
-          />
-          <InlineError showError={showError} message={errors.anciennete} fieldId="anciennete" />
-        </Field>
+        <EnqueteFormSelectField
+          id="anciennete"
+          label="Ancienneté dans la fonction de MJPM"
+          options={ENQ_REP_INFO_MANDATAIRE.ANCIENNETE.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
-        <Field>
-          <Label mb={1} htmlFor="tranche_age">
-            {"Tranche d'âge dans laquelle vous vous situez"}
-          </Label>
-          <Select
-            placeholder=""
-            id="tranche_age"
-            instanceId={"tranche_age"}
-            name="tranche_age"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey, values.tranche_age)}
-            hasError={showError && !!errors.tranche_age}
-            onChange={(option) => setFieldValue("tranche_age", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey}
-          />
-          <InlineError showError={showError} message={errors.tranche_age} fieldId="tranche_age" />
-        </Field>
+        <EnqueteFormSelectField
+          id="tranche_age"
+          label="Tranche d'âge dans laquelle vous vous situez"
+          options={ENQ_REP_INFO_MANDATAIRE.TRANCHE_AGE.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
           {"CONDITIONS D'EXERCICE DE L'ACTIVITE"}
         </Text>
-        <Field>
-          <Label mb={1}>{"Exercez-vous seul l'activité ?"}</Label>
-          <YesNoComboBox
-            value={values.exerce_seul_activite}
-            name="exerce_seul_activite"
-            onChange={(value) => setFieldValue("exerce_seul_activite", value)}
-          />
-          <InlineError
-            showError={showError}
-            message={errors.exerce_seul_activite}
-            fieldId="exerce_seul_activite"
-          />
-        </Field>
-        <Field>
-          <Label mb={1} htmlFor="estimation_etp">
-            {"Estimation de l'activité en équivalent temps plein (ETP)"}
-          </Label>
-          <Select
-            placeholder=""
-            id="estimation_etp"
-            instanceId={"estimation_etp"}
-            name="estimation_etp"
-            value={findOption(ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey, values.estimation_etp)}
-            hasError={showError && !!errors.estimation_etp}
-            onChange={(option) => setFieldValue("estimation_etp", option.value)}
-            options={ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey}
-          />
-          <InlineError
-            showError={showError}
-            message={errors.estimation_etp}
-            fieldId="estimation_etp"
-          />
-        </Field>
+        <EnqueteFormYesNoField
+          id={`exerce_seul_activite`}
+          label="Exercez-vous seul l'activité ?"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
+        <EnqueteFormSelectField
+          id="estimation_etp"
+          label="Estimation de l'activité en équivalent temps plein (ETP)"
+          options={ENQ_REP_INFO_MANDATAIRE.ESTIMATION_ETP.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
       </Box>
       <Box>
-        <Field>
-          <Label mb={1}>{"Exercez-vous avec un secrétariat spécialisé ?"}</Label>
-          <YesNoComboBox
-            value={values.exerce_secretaires_specialises}
-            name="exerce_secretaires_specialises"
-            onChange={(value) => setFieldValue("exerce_secretaires_specialises", value)}
-          />
-          <InlineError
-            showError={showError}
-            message={errors.exerce_secretaires_specialises}
-            fieldId="exerce_secretaires_specialises"
-          />
-        </Field>
+        <EnqueteFormYesNoField
+          id={`exerce_secretaires_specialises`}
+          label="Exercez-vous avec un secrétariat spécialisé ?"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         {(values.exerce_secretaires_specialises || !!errors.secretaire_specialise_etp) && (
-          <Field>
-            <Label mb={1} htmlFor="secretaire_specialise_etp">
-              {"Estimation de l'activité en ETP du secrétariat spécialisé"}
-            </Label>
-            <Input
-              placeholder=""
-              id="secretaire_specialise_etp"
-              name="secretaire_specialise_etp"
-              value={values.secretaire_specialise_etp}
-              hasError={showError && !!errors.secretaire_specialise_etp}
-              onChange={handleChange}
-              type="number"
-            />
-            <InlineError
-              showError={showError}
-              message={errors.secretaire_specialise_etp}
-              fieldId="secretaire_specialise_etp"
-            />
-          </Field>
+          <EnqueteFormInputField
+            id="secretaire_specialise_etp"
+            label="Estimation de l'activité en ETP du secrétariat spécialisé"
+            enqueteContext={enqueteContext}
+            enqueteForm={enqueteForm}
+          />
         )}
-
-        <Field>
-          <Label mb={1}>{"Exercez-vous votre activité dans un local professionnnel ?"}</Label>
-          <YesNoComboBox
-            value={values.local_professionnel}
-            name="local_professionnel"
-            onChange={(value) => setFieldValue("local_professionnel", value)}
-          />
-          <InlineError
-            showError={showError}
-            message={errors.local_professionnel}
-            fieldId="local_professionnel"
-          />
-        </Field>
+        <EnqueteFormYesNoField
+          id={`local_professionnel`}
+          label="Exercez-vous votre activité dans un local professionnnel ?"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
       </Box>
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
