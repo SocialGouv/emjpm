@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
+
+
+### Features
+
+* **liste-blanche:** add new filter and enhance model ([#1943](https://github.com/SocialGouv/emjpm/issues/1943)) ([409f6fd](https://github.com/SocialGouv/emjpm/commit/409f6fd9bf3b6c26d4da319b117092e867d98c4c))
+
+
+
+
+
 # [25.41.0](https://github.com/SocialGouv/emjpm/compare/v25.40.0...v25.41.0) (2020-06-17)
 
 
