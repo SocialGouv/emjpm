@@ -70,11 +70,11 @@ export function useEnqueteForm({
       dispatchEnqueteContextEvent({ type: "set-form-value", value: values });
     }, 0);
   }, [dispatchEnqueteContextEvent, values]);
-  useMemo(() => {
-    setTimeout(() => {
-      dispatchEnqueteContextEvent({ type: "set-form-value", value: values });
-    }, 0);
-  }, [dispatchEnqueteContextEvent, values]);
+  // useMemo(() => {
+  //   setTimeout(() => {
+  //     dispatchEnqueteContextEvent({ type: "set-form-value", value: values });
+  //   }, 0);
+  // }, [dispatchEnqueteContextEvent, values]);
   useMemo(() => {
     if (enqueteContext.actions.autoSubmit === true) {
       setTimeout(() => {

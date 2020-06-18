@@ -49,7 +49,7 @@ export const EnquetePreposePrestationsSocialesCuratelleSimple = (props) => {
 
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={prestationsSociales.curatelle_simple || {}}
+      data={prestationsSociales.curatelle_simple}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
