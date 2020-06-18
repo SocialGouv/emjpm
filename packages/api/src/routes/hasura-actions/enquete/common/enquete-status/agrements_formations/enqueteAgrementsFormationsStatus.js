@@ -1,13 +1,14 @@
-const { getValidationStatus } = require("../enqueteSchemaUtil");
 const yup = require("yup");
+
+const { getValidationStatus } = require("../enqueteSchemaUtil");
 const { ENQ_REP_AGREMENTS_FORMATIONS } = require("../../constants");
 
 module.exports = {
   agrementsStatus: async (
     enqueteReponse,
     { debugGroupName, logDataWithErrors }
-  ) =>
-    await getValidationStatus(
+  ) => {
+    const validationResult = await getValidationStatus(
       enqueteReponse.enquete_reponses_agrements_formation,
       {
         schema: yup.object({
@@ -23,12 +24,14 @@ module.exports = {
         debugName: `${debugGroupName}/agrementsStatus`,
         logDataWithErrors,
       }
-    ),
+    );
+    return validationResult;
+  },
   formationStatus: async (
     enqueteReponse,
     { debugGroupName, logDataWithErrors }
-  ) =>
-    await getValidationStatus(
+  ) => {
+    const validationResult = await getValidationStatus(
       enqueteReponse.enquete_reponses_agrements_formation,
       {
         schema: yup.object({
@@ -45,5 +48,7 @@ module.exports = {
         debugName: `${debugGroupName}/formationStatus`,
         logDataWithErrors,
       }
-    ),
+    );
+    return validationResult;
+  },
 };

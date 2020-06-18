@@ -8,6 +8,22 @@ const enqueteAgrementsFormationsStatus = require("../agrements_formations/enquet
 const debugGroupName = "informationsGenerales";
 
 module.exports = async (enqueteReponse) => {
+  const agrements = await enqueteAgrementsFormationsStatus.agrementsStatus(
+    enqueteReponse,
+    {
+      debugGroupName,
+      logDataWithErrors: false,
+    }
+  );
+
+  const formation = await enqueteAgrementsFormationsStatus.formationStatus(
+    enqueteReponse,
+    {
+      debugGroupName,
+      logDataWithErrors: false,
+    }
+  );
+
   const status = {
     informationsGenerales: await getValidationStatus(
       enqueteReponse.enquete_reponses_informations_mandataire,
@@ -48,23 +64,10 @@ module.exports = async (enqueteReponse) => {
         logDataWithErrors: false,
       }
     ),
-    agrements: enqueteAgrementsFormationsStatus.agrementsStatus(
-      enqueteReponse,
-      {
-        debugGroupName,
-        logDataWithErrors: false,
-      }
-    ),
-    formation: enqueteAgrementsFormationsStatus.formationStatus(
-      enqueteReponse,
-      {
-        debugGroupName,
-        logDataWithErrors: false,
-      }
-    ),
+    agrements,
+    formation,
   };
 
   status.global = getGlobalStatus(status);
-
   return status;
 };

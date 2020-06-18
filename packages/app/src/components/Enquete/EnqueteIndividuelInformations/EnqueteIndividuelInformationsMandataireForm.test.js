@@ -54,16 +54,3 @@ test('it should hide "forme juridique" field when "benevole" field is selected',
   );
   expect(queryByLabelText(/Forme juridique de votre entreprise/i)).toBeNull();
 });
-
-// test("it should submit form with empty values", async () => {
-//   const promise = Promise.resolve();
-//   const handleSubmitMock = jest.fn(() => promise);
-
-//   const { getByText } = render(
-//     <EnqueteIndividuelInformationsForm handleSubmit={handleSubmitMock} />
-//   );
-
-//   const nextButton = getByText("Suivant");
-//   userEvent.click(nextButton);
-//   expect(handleSubmitMock).toHaveBeenCalledTimes(1);
-// });

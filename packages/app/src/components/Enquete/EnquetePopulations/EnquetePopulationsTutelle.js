@@ -1,6 +1,5 @@
 import React, { useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
-import { Box } from "rebass";
 
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
@@ -47,27 +46,23 @@ export const EnquetePopulationsTutelle = (props) => {
   ]);
 
   return (
-    !loading && (
-      <Box>
-        <EnquetePopulationsForm
-          loading={loading}
-          data={reponsePopulations}
-          section={section}
-          step={step}
-          onSubmit={async (values) => {
-            await updateEnquete({
-              variables: {
-                id: populations_id,
-                ...values,
-              },
-            });
-          }}
-          enqueteContext={enqueteContext}
-          dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-          title={"Tutelle"}
-        />
-      </Box>
-    )
+    <EnquetePopulationsForm
+      loading={loading}
+      data={reponsePopulations}
+      section={section}
+      step={step}
+      onSubmit={async (values) => {
+        await updateEnquete({
+          variables: {
+            id: populations_id,
+            ...values,
+          },
+        });
+      }}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+      title={"Tutelle"}
+    />
   );
 };
 

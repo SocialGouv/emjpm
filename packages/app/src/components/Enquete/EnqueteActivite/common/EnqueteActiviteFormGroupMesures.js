@@ -17,7 +17,7 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
   return (
     <Box mt={2}>
       <Flex>
-        <Box width="50%">
+        <Box width={1 / 2}>
           <EnqueteFormInputField
             id={idDebutAnnee}
             label="Mesures au 1er janvier"
@@ -28,7 +28,7 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
             enqueteForm={enqueteForm}
           />
         </Box>
-        <Box width="50%">
+        <Box width={1 / 2}>
           <EnqueteFormInputField
             id={idFinAnnee}
             label="Mesures au 31 décembre"
@@ -41,7 +41,7 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
         </Box>
       </Flex>
       <Flex>
-        <Box width="50%">
+        <Box width={1 / 2}>
           <EnqueteFormInputField
             id={idMesuresNouvelles}
             label="Nouvelles mesures"
@@ -52,7 +52,7 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
             enqueteForm={enqueteForm}
           />
         </Box>
-        <Box width="50%">
+        <Box width={1 / 2}>
           <EnqueteFormInputField
             id={idSortieMesures}
             label="Sortie de mesures"
