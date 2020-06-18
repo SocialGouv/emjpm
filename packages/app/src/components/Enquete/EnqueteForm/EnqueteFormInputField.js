@@ -24,7 +24,7 @@ export const EnqueteFormInputField = ({
   if (!type || readOnly) {
     type = "text";
   }
-  if (!value) {
+  if (value === undefined) {
     value = values[id];
   }
   if (!error) {

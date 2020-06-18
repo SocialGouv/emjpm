@@ -47,25 +47,23 @@ export const EnquetePopulationsCuratelle = (props) => {
   ]);
 
   return (
-    !loading && (
-      <EnquetePopulationsForm
-        loading={loading}
-        data={reponsePopulations}
-        section={section}
-        step={step}
-        onSubmit={async (values) => {
-          await updateEnquete({
-            variables: {
-              id: populations_id,
-              ...values,
-            },
-          });
-        }}
-        enqueteContext={enqueteContext}
-        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-        title={"Curatelle"}
-      />
-    )
+    <EnquetePopulationsForm
+      loading={loading}
+      data={reponsePopulations}
+      section={section}
+      step={step}
+      onSubmit={async (values) => {
+        await updateEnquete({
+          variables: {
+            id: populations_id,
+            ...values,
+          },
+        });
+      }}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+      title={"Curatelle"}
+    />
   );
 };
 

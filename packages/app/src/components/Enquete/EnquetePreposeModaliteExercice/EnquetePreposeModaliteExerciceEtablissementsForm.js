@@ -96,6 +96,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   });
   const { submitForm, readOnly, values, errors, submit, formik } = enqueteForm;
 
+  console.log("values", formik.values);
+
   return (
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
@@ -147,8 +149,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
 
                 return (
                   <Card mb={4} key={`etablissement-${index}`} sx={{ position: "relative" }}>
-                    {!readOnly &
-                    (
+                    {!readOnly && (
                       <Box
                         sx={{
                           position: "absolute",
