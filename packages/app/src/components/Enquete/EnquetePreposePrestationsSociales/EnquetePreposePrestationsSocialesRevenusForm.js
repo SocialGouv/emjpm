@@ -43,7 +43,7 @@ function formToData(values) {
 export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
   const {
     title,
-    data = {},
+    data,
     loading = false,
     step,
     onSubmit,

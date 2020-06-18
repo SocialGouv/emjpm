@@ -55,27 +55,22 @@ export function useEnqueteForm({
 
   const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
   const readOnly = enqueteReponseStatus !== "draft";
-  useMemo(() => {
+
+  useEffect(() => {
     setTimeout(() => {
+      console.log("set-form-valid");
       dispatchEnqueteContextEvent({ type: "set-form-valid", value: isValid });
     }, 0);
   }, [dispatchEnqueteContextEvent, isValid]);
-  useMemo(() => {
+
+  useEffect(() => {
     setTimeout(() => {
+      console.log("set-form-dirty");
       dispatchEnqueteContextEvent({ type: "set-form-dirty", value: dirty });
     }, 0);
   }, [dispatchEnqueteContextEvent, dirty]);
-  useMemo(() => {
-    setTimeout(() => {
-      dispatchEnqueteContextEvent({ type: "set-form-value", value: values });
-    }, 0);
-  }, [dispatchEnqueteContextEvent, values]);
-  useMemo(() => {
-    setTimeout(() => {
-      dispatchEnqueteContextEvent({ type: "set-form-value", value: values });
-    }, 0);
-  }, [dispatchEnqueteContextEvent, values]);
-  useMemo(() => {
+
+  useEffect(() => {
     if (enqueteContext.actions.autoSubmit === true) {
       setTimeout(() => {
         submitForm();
@@ -84,14 +79,13 @@ export function useEnqueteForm({
   }, [enqueteContext.actions.autoSubmit, submitForm]);
 
   useEffect(() => {
-    setValues(dataToForm(data));
-  }, [data, setValues, dataToForm]);
+    const newValues = dataToForm ? dataToForm(data) : data;
+    setValues(newValues);
+  }, [data, dataToForm, setValues]);
 
-  const showError = useMemo(() => !loading && (step.status !== "empty" || submitCount !== 0), [
-    step.status,
-    submitCount,
-    loading,
-  ]);
+  const showError = useMemo(() => {
+    return dirty || (!loading && (step.status !== "empty" || submitCount !== 0));
+  }, [dirty, step.status, submitCount, loading]);
 
   const submit = useCallback(
     ({ action }) => {
