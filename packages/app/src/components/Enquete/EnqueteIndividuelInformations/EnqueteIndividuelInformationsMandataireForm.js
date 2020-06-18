@@ -207,6 +207,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
             label="Estimation de l'activité en ETP du secrétariat spécialisé"
             enqueteContext={enqueteContext}
             enqueteForm={enqueteForm}
+            type="number"
           />
         )}
         <EnqueteFormYesNoField
