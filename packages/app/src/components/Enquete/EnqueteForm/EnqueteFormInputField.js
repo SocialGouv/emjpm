@@ -21,7 +21,7 @@ export const EnqueteFormInputField = ({
   const { readOnly, formik, showError } = enqueteForm;
   const { handleChange, handleBlur, values, errors } = formik;
 
-  if (!type) {
+  if (!type || readOnly) {
     type = "text";
   }
   if (!value) {
