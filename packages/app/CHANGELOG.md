@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
+
+
+### Bug Fixes
+
+* **enquete-visibility:** update isPayedByParis ([367c798](https://github.com/SocialGouv/emjpm/commit/367c798fc59702e14bdf56a73723cebae19513b6))
+
+
+### Features
+
+* **dev:** disable satisfaction campain in local env ([#1937](https://github.com/SocialGouv/emjpm/issues/1937)) ([57e3629](https://github.com/SocialGouv/emjpm/commit/57e36292fc4eda89bf3aa2bd86e20e26c33114b1))
+* **enquete:** display menu only for Paris ([#1946](https://github.com/SocialGouv/emjpm/issues/1946)) ([327d6ab](https://github.com/SocialGouv/emjpm/commit/327d6ab59dfbee3d166e7164798a438f541ffc3c))
+* **enquete:** initialize service enquete ([#1941](https://github.com/SocialGouv/emjpm/issues/1941)) ([ac65931](https://github.com/SocialGouv/emjpm/commit/ac659310aac1ba9cef88d0074869174aee737c4e))
+* **enquete:** lecture seule - individuels [#1911](https://github.com/SocialGouv/emjpm/issues/1911) ([#1948](https://github.com/SocialGouv/emjpm/issues/1948)) ([1a291bb](https://github.com/SocialGouv/emjpm/commit/1a291bb24423676742805a57d6620cc81b698bfa))
+* **enquete:** lecture seule - preposes [#1911](https://github.com/SocialGouv/emjpm/issues/1911) ([#1947](https://github.com/SocialGouv/emjpm/issues/1947)) ([861bab3](https://github.com/SocialGouv/emjpm/commit/861bab3c9451d4661e5aae50fc2417c940df763a))
+* **liste-blanche:** add new filter and enhance model ([#1943](https://github.com/SocialGouv/emjpm/issues/1943)) ([409f6fd](https://github.com/SocialGouv/emjpm/commit/409f6fd9bf3b6c26d4da319b117092e867d98c4c))
+
+
+
+
+
 # [25.41.0](https://github.com/SocialGouv/emjpm/compare/v25.40.0...v25.41.0) (2020-06-17)
 
 
