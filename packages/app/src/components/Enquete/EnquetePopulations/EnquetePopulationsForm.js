@@ -42,20 +42,16 @@ function dataToForm(data) {
     anciennete_3_5_ans: formatFormInput(data.anciennete_3_5_ans),
     anciennete_5_10_ans: formatFormInput(data.anciennete_5_10_ans),
     anciennete_sup_10_ans: formatFormInput(data.anciennete_sup_10_ans),
-    type_etablissement_personne_handicapee: formatFormInput(
-      data.type_etablissement_personne_handicapee
+    etablissement_personne_handicapee: formatFormInput(data.etablissement_personne_handicapee),
+    service_personne_handicapee: formatFormInput(data.service_personne_handicapee),
+    ehpad: formatFormInput(data.ehpad),
+    autre_etablissement_personne_agee: formatFormInput(data.autre_etablissement_personne_agee),
+    chrs: formatFormInput(data.chrs),
+    service_hospitalier_soins_longue_duree: formatFormInput(
+      data.service_hospitalier_soins_longue_duree
     ),
-    type_service_personne_handicapee: formatFormInput(data.type_service_personne_handicapee),
-    type_ehpad: formatFormInput(data.type_ehpad),
-    type_autre_etablissement_personne_agee: formatFormInput(
-      data.type_autre_etablissement_personne_agee
-    ),
-    type_chrs: formatFormInput(data.type_chrs),
-    type_service_hospitalier_soins_longue_duree: formatFormInput(
-      data.type_service_hospitalier_soins_longue_duree
-    ),
-    type_service_psychiatrique: formatFormInput(data.type_service_psychiatrique),
-    type_autre_service: formatFormInput(data.type_autre_service),
+    service_psychiatrique: formatFormInput(data.service_psychiatrique),
+    autre_service: formatFormInput(data.autre_service),
   };
 }
 
@@ -264,7 +260,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Etablissements pour personnes handicapées"}
         </Label>
         <EnqueteFormInputField
-          id="type_etablissement_personne_handicapee"
+          id="etablissement_personne_handicapee"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -280,7 +276,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Services pour personnes handicapées"}
         </Label>
         <EnqueteFormInputField
-          id="type_service_personne_handicapee"
+          id="service_personne_handicapee"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -296,7 +292,7 @@ export const EnquetePopulationsForm = (props) => {
           {"EHPAD"}
         </Label>
         <EnqueteFormInputField
-          id="type_ehpad"
+          id="ehpad"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -312,7 +308,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Autres établissements pour personnes âgées"}
         </Label>
         <EnqueteFormInputField
-          id="type_autre_etablissement_personne_agee"
+          id="autre_etablissement_personne_agee"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -328,7 +324,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Centre d'hébergement et de réinsertion sociale (CHRS)"}
         </Label>
         <EnqueteFormInputField
-          id="type_chrs"
+          id="chrs"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -344,7 +340,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Service de soins de longue durée"}
         </Label>
         <EnqueteFormInputField
-          id="type_service_hospitalier_soins_longue_duree"
+          id="service_hospitalier_soins_longue_duree"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -360,7 +356,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Service psychiatrique"}
         </Label>
         <EnqueteFormInputField
-          id="type_service_psychiatrique"
+          id="service_psychiatrique"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -376,7 +372,7 @@ export const EnquetePopulationsForm = (props) => {
           {"Autre service"}
         </Label>
         <EnqueteFormInputField
-          id="type_autre_service"
+          id="autre_service"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"

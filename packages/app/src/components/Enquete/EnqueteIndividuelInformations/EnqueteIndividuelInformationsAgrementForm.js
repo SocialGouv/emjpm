@@ -28,7 +28,7 @@ function dataToForm(data) {
     annee_agrement: formatFormInput(data.annee_agrement),
     nb_departements: formatFormInput(data.nb_departements),
     nb_mesures_dep_finance: formatFormInput(data.nb_mesures_dep_finance),
-    nb_mesures_dep_autres: formatFormInput(data.nb_mesures_dep_finance),
+    nb_mesures_dep_autres: formatFormInput(data.nb_mesures_dep_autres),
   };
 }
 
@@ -80,7 +80,7 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
         <EnqueteFormSelectField
           id="nb_departements"
           label="Nombre de départements dans lesquels vous disposez d'un agrément"
-          options={ENQ_REP_AGREMENTS_FORMATIONS.byKey}
+          options={ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byKey}
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
         />
