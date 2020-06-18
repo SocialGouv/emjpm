@@ -39,14 +39,14 @@ export const EnqueteFormSelectField = ({ id, value, error, label, options, enque
           value={readOnlyValue}
           onBlur={handleBlur}
           onChange={handleChange}
-          hasError={showError && error}
+          hasError={showError && !!error}
         />
       ) : (
         <Select
           id={id}
           instanceId={id}
           placeholder=""
-          hasError={showError && error}
+          hasError={showError && !!error}
           onChange={({ value }) => setFieldValue(id, value)}
           value={findOption(options, value)}
           options={options}
