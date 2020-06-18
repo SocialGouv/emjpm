@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
+
+
+### Bug Fixes
+
+* typos ([#1940](https://github.com/SocialGouv/emjpm/issues/1940)) ([ba3589f](https://github.com/SocialGouv/emjpm/commit/ba3589faea35cc7af5b8bec4b500364f072a276f))
+
+
+### Features
+
+* **enquete:** lecture seule - preposes [#1911](https://github.com/SocialGouv/emjpm/issues/1911) ([#1947](https://github.com/SocialGouv/emjpm/issues/1947)) ([861bab3](https://github.com/SocialGouv/emjpm/commit/861bab3c9451d4661e5aae50fc2417c940df763a))
+
+
+
+
+
 # [25.41.0](https://github.com/SocialGouv/emjpm/compare/v25.40.0...v25.41.0) (2020-06-17)
 
 **Note:** Version bump only for package @emjpm/ui
