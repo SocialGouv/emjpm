@@ -11,6 +11,7 @@ const TYPE_OPTIONS = [
   { label: "Mandataire préposé d'établissement", value: "prepose" },
   { label: "Membre d'un service", value: "service" },
   { label: "Magistrat", value: "ti" },
+  { label: "Direction", value: "direction" },
   { label: "Admin", value: "admin" },
 ];
 
