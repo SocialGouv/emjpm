@@ -49,7 +49,7 @@ export const EnquetePopulationTrancheAgeField = (props) => {
           <Text mx={2}>femmes et</Text>
         </EnqueteFormInputField>
         <EnqueteFormInputField
-          id={womenFieldId}
+          id={menFieldId}
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"

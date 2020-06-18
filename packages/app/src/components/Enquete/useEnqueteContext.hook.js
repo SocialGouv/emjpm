@@ -16,7 +16,6 @@ export const useEnqueteContext = (props) => {
       form: {
         dirty: false,
         valid: true,
-        value: undefined,
         nextStep: getNextPageStep(sections, currentStep), // {section, step} | 'previous' | 'next'
       },
       actions: {
@@ -92,14 +91,6 @@ export const useEnqueteContext = (props) => {
           form: {
             ...state.form,
             valid: action.value,
-          },
-        };
-      case "set-form-value":
-        return {
-          ...state,
-          form: {
-            ...state.form,
-            value: action.value,
           },
         };
 
