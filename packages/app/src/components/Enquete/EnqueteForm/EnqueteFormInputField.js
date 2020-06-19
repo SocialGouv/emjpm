@@ -48,6 +48,7 @@ export const EnqueteFormInputField = ({
             id={id}
             name={id}
             value={value}
+            onBlur={handleBlur}
             onChange={handleChange}
             hasError={showError && !!error}
             type={type}
