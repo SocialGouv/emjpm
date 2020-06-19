@@ -123,7 +123,7 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (props)
           </Box>
           <Box>
             <EnqueteFormInputField
-              id="aspa"
+              id="als_apl"
               label="ALS ou APL"
               enqueteContext={enqueteContext}
               enqueteForm={enqueteForm}
@@ -132,7 +132,7 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (props)
               min={0}
             />
             <EnqueteFormInputField
-              id="als_apl"
+              id="aspa"
               label="ASPA"
               enqueteContext={enqueteContext}
               enqueteForm={enqueteForm}
