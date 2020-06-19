@@ -22,7 +22,7 @@ const InputLabel = (props) => {
 };
 
 const Input = (props) => {
-  const { onChange, placeholder, isValid, hasError, name, required, size, value, type } = props;
+  const { onChange, placeholder, isValid, hasError, name, required, size, value, type, onBlur } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive = isFocus || hasValue || value;
@@ -45,7 +45,12 @@ const Input = (props) => {
           toogleValue(e.target.value.length > 0);
           onChange(e);
         }}
-        onBlur={() => toggleFocus(false)}
+        onBlur={(event) => {
+          toggleFocus(false);
+          if (onBlur) {
+            onBlur(event);
+          }
+        }}
         onFocus={() => toggleFocus(true)}
       />
     </InputWrapper>
@@ -60,6 +65,7 @@ Input.propTypes = {
   hasError: PropTypes.bool,
   isValid: PropTypes.bool,
   name: PropTypes.string.isRequired,
+  onBlur: PropTypes.func,
   onChange: PropTypes.func,
   placeholder: PropTypes.string.isRequired,
   readOnly: PropTypes.bool,
@@ -72,6 +78,7 @@ Input.propTypes = {
 Input.defaultProps = {
   hasError: false,
   isValid: false,
+  onBlur: undefined,
   onChange: () => {
     return null;
   },
