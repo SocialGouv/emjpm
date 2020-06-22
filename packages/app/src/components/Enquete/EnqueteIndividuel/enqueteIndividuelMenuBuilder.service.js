@@ -11,6 +11,7 @@ import {
   EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle,
 } from "../EnqueteActivite";
+import { menuBuilder } from "../EnqueteCommon";
 import {
   EnqueteIndividuelInformationsAgrement,
   EnqueteIndividuelInformationsFormation,
@@ -34,7 +35,7 @@ export const enqueteIndividuelMenuBuilder = {
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponse_validation_status;
 
-  return [
+  const menu = [
     {
       status: "valid",
       steps: [
@@ -180,4 +181,6 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
   ];
+
+  return menuBuilder.fixMenuStatus(menu);
 }

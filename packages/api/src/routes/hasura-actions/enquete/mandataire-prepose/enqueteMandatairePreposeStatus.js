@@ -9,18 +9,44 @@ const {
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
+  const statusBuildContext = {
+    allowEmpty: true,
+  };
+  // IMPORTANT: construire les status dans l'ordre d'affichage car un statut "empty" devient "invalid" si au moins un onglet précédent a été renseigné
+  const modalitesExercice = await enqueteModalitesExerciceStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+  const activite = await enqueteActiviteStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+  const populations = await populationsStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+  const personnelFormation = await preposePersonnelFormationStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+  const prestationsSociales = await preposePrestationsSocialesStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+  const financement = await preposeFinancementStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
   const status = {
-    modalitesExercice: await enqueteModalitesExerciceStatus(enqueteReponse),
-    activite: await enqueteActiviteStatus(enqueteReponse),
-    populations: await populationsStatus(enqueteReponse),
-    personnelFormation: await preposePersonnelFormationStatus(enqueteReponse),
-    prestationsSociales: await preposePrestationsSocialesStatus(enqueteReponse),
-    financement: await preposeFinancementStatus(enqueteReponse),
+    modalitesExercice,
+    activite,
+    populations,
+    personnelFormation,
+    prestationsSociales,
+    financement,
   };
 
-  status.global = getTopLevelGlobalStatus(
-    Object.values(status).map((x) => x.global)
-  );
+  status.global = getTopLevelGlobalStatus(status);
 
   return status;
 }

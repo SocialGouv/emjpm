@@ -1,4 +1,4 @@
-const getRegionCode = require("../../src/utils/getRegionCode");
+const getRegionCode = require("./getRegionCode");
 
 test("it should return common codes", () => {
   expect(getRegionCode("92350")).toBe("92");
