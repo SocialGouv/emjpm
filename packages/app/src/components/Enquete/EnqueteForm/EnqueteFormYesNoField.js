@@ -1,16 +1,17 @@
 import { Field } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { YesNoComboBox } from "../../Commons";
-import { EnqueteFieldInlineError } from "./EnqueteFieldInlineError";
+import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
+import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 
 export const EnqueteFormYesNoField = ({
   id,
   value,
   error,
   label,
+  text,
   enqueteForm,
   children,
   disableErrorMessage,
@@ -28,11 +29,7 @@ export const EnqueteFormYesNoField = ({
 
   return (
     <Field>
-      {label && (
-        <Label mb={"5px"} htmlFor={id}>
-          {label}
-        </Label>
-      )}
+      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
 
       <Flex alignItems="center">
         <YesNoComboBox
@@ -46,7 +43,7 @@ export const EnqueteFormYesNoField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <EnqueteFieldInlineError
+      <EnqueteFormFieldErrorMessage
         id={id}
         error={error}
         enqueteForm={enqueteForm}
