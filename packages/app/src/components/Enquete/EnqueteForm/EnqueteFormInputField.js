@@ -1,9 +1,10 @@
-import { Field, InlineError, Input } from "@emjpm/ui";
+import { Field, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
+import { EnqueteInlineError } from "./EnqueteInlineError";
 
 export const EnqueteFormInputField = ({
   id,
@@ -17,18 +18,16 @@ export const EnqueteFormInputField = ({
   max,
   enqueteForm,
   children,
+  disableErrorMessage,
 }) => {
   const { readOnly, formik, showError } = enqueteForm;
-  const { handleChange, handleBlur, values, errors } = formik;
+  const { handleChange, handleBlur, values } = formik;
 
   if (!type || readOnly) {
     type = "text";
   }
   if (value === undefined) {
     value = values[id];
-  }
-  if (!error) {
-    error = errors[id];
   }
 
   return (
@@ -74,7 +73,12 @@ export const EnqueteFormInputField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <InlineError showError={showError} message={error} fieldId={id} />
+      <EnqueteInlineError
+        id={id}
+        error={error}
+        enqueteForm={enqueteForm}
+        disableErrorMessage={disableErrorMessage}
+      />
     </Field>
   );
 };

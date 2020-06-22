@@ -7,8 +7,8 @@ import { formatFormInput, parseFormInt } from "../../../util";
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
-import { EnquetePopulationTrancheAgeField } from "./EnquetePopulationsFields";
 import { enquetePopulationsSchema as validationSchema } from "./enquetePopulationsSchema";
+import { EnquetePopulationTrancheAgeField } from "./EnquetePopulationTrancheAgeField";
 
 export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
@@ -77,7 +77,7 @@ export const EnquetePopulationsForm = (props) => {
     formToData,
     loading,
   });
-  const { submitForm, handleChange, values, errors, showError, submit } = enqueteForm;
+  const { submitForm, handleChange, values, errors, submit } = enqueteForm;
 
   return (
     <Box
@@ -112,7 +112,6 @@ export const EnquetePopulationsForm = (props) => {
         enqueteContext={enqueteContext}
         label="Personnes de moins de 25 ans :"
         errors={errors}
-        showError={showError}
         menFieldId="age_inf_25_ans_homme"
         womenFieldId="age_inf_25_ans_femme"
         handleChange={handleChange}
@@ -123,7 +122,6 @@ export const EnquetePopulationsForm = (props) => {
         enqueteForm={enqueteForm}
         enqueteContext={enqueteContext}
         errors={errors}
-        showError={showError}
         label="Personnes entre 25 et 39 ans :"
         menFieldId="age_25_39_ans_homme"
         womenFieldId="age_25_39_ans_femme"
@@ -135,7 +133,6 @@ export const EnquetePopulationsForm = (props) => {
         enqueteForm={enqueteForm}
         enqueteContext={enqueteContext}
         errors={errors}
-        showError={showError}
         label="Personnes entre 40 et 59 ans :"
         menFieldId="age_40_59_ans_homme"
         womenFieldId="age_40_59_ans_femme"
@@ -147,7 +144,6 @@ export const EnquetePopulationsForm = (props) => {
         enqueteForm={enqueteForm}
         enqueteContext={enqueteContext}
         errors={errors}
-        showError={showError}
         label="Personnes entre 60 et 74 ans :"
         menFieldId="age_60_74_ans_homme"
         womenFieldId="age_60_74_ans_femme"
@@ -159,7 +155,6 @@ export const EnquetePopulationsForm = (props) => {
         enqueteForm={enqueteForm}
         enqueteContext={enqueteContext}
         errors={errors}
-        showError={showError}
         label="Personnes de plus de 75 ans :"
         menFieldId="age_sup_75_ans_homme"
         womenFieldId="age_sup_75_ans_femme"
