@@ -143,7 +143,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
               </Flex>
               {values.etablissements.map((etablissement, index) => {
                 const value = etablissement ? etablissement : {};
-                const error = errors.etablissements ? errors.etablissements[index] : {};
+                const error = errors.etablissements ? errors.etablissements[index] || {} : {};
 
                 return (
                   <Card mb={4} key={`etablissement-${index}`} sx={{ position: "relative" }}>
