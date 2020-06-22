@@ -49,7 +49,7 @@ export const EnquetePreposePrestationsSocialesTutelle = (props) => {
 
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={prestationsSociales.tutelle || {}}
+      data={prestationsSociales.tutelle}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}

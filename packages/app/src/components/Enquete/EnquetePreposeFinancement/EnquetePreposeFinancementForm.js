@@ -5,6 +5,7 @@ import { Box, Flex } from "rebass";
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
 import { EnqueteFormInputField } from "../EnqueteForm";
+import { EnqueteInlineError } from "../EnqueteForm/EnqueteInlineError";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -93,6 +94,7 @@ export const EnquetePreposeFinancementForm = (props) => {
             enqueteForm={enqueteForm}
             type="number"
             size="medium"
+            disableErrorMessage={true} // error displayed below
           />
         </Box>
         <Box width={1 / 3}>
@@ -103,6 +105,7 @@ export const EnquetePreposeFinancementForm = (props) => {
             enqueteForm={enqueteForm}
             type="number"
             size="medium"
+            disableErrorMessage={true} // error displayed below
           />
         </Box>
         <Box width={1 / 3}>
@@ -113,9 +116,15 @@ export const EnquetePreposeFinancementForm = (props) => {
             enqueteForm={enqueteForm}
             type="number"
             size="medium"
+            disableErrorMessage={true} // error displayed below
           />
         </Box>
       </Flex>
+      <Box>
+        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_personnel" />
+        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_preposes" />
+        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_fonctionnement" />
+      </Box>
 
       <Box mt={"50px"}>
         <Heading3 mb={2}>{"Produits"}</Heading3>
@@ -128,6 +137,7 @@ export const EnquetePreposeFinancementForm = (props) => {
               enqueteForm={enqueteForm}
               type="number"
               size="medium"
+              disableErrorMessage={true} // error displayed below
             />
           </Box>
           <Box width={1 / 2}>
@@ -138,9 +148,14 @@ export const EnquetePreposeFinancementForm = (props) => {
               enqueteForm={enqueteForm}
               type="number"
               size="medium"
+              disableErrorMessage={true} // error displayed below
             />
           </Box>
         </Flex>
+        <Box>
+          <EnqueteInlineError enqueteForm={enqueteForm} id="produits_bareme_prelevements" />
+          <EnqueteInlineError enqueteForm={enqueteForm} id="autre_produits" />
+        </Box>
         <Flex mt={4}>
           <Box width={1 / 2}>
             <EnqueteFormInputField
@@ -150,6 +165,7 @@ export const EnquetePreposeFinancementForm = (props) => {
               enqueteForm={enqueteForm}
               type="number"
               size="medium"
+              disableErrorMessage={true} // error displayed below
             />
           </Box>
           <Box width={1 / 2}>
@@ -160,9 +176,14 @@ export const EnquetePreposeFinancementForm = (props) => {
               enqueteForm={enqueteForm}
               type="number"
               size="medium"
+              disableErrorMessage={true} // error displayed below
             />
           </Box>
         </Flex>
+        <Box>
+          <EnqueteInlineError enqueteForm={enqueteForm} id="financement" />
+          <EnqueteInlineError enqueteForm={enqueteForm} id="aide_sociale_conseil_departemental" />
+        </Box>
       </Box>
 
       <EnqueteStepperButtons submit={submit} disabled={loading} />
