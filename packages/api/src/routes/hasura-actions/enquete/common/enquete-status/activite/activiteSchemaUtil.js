@@ -6,16 +6,16 @@ function buildMesureGroupsAttributes(mesureGroups) {
     const finAnnee = `${mesureGroup}_fin_annee`;
     const mesuresNouvelles = `${mesureGroup}_mesures_nouvelles`;
     const sortieMesures = `${mesureGroup}_sortie_mesures`;
-    acc[debutAnnee] = yup.number().min(0).integer().nullable();
 
-    acc[mesuresNouvelles] = yup.number().min(0).integer().nullable();
-    acc[sortieMesures] = yup.number().min(0).integer().nullable();
+    acc[debutAnnee] = yup.number().min(0).integer().required();
+    acc[mesuresNouvelles] = yup.number().min(0).integer().required();
+    acc[sortieMesures] = yup.number().min(0).integer().required();
 
     acc[finAnnee] = yup
       .number()
       .min(0)
       .integer()
-      .nullable()
+      .required()
       .test(
         "diff-match",
         "La valeur de fin d'année n'est pas cohérente avec les autres données.",

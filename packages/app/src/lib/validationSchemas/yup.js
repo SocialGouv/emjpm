@@ -1,8 +1,10 @@
 import * as yup from "yup";
 
+export const FORM_REQUIRED_MESSAGE = "Veuillez renseigner ce champ.";
+
 yup.setLocale({
   mixed: {
-    required: "Veuillez renseigner ce champ.",
+    required: FORM_REQUIRED_MESSAGE,
   },
   number: {
     integer: "Le nombre indiqué doit être un entier",
