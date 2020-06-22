@@ -78,7 +78,7 @@ const ServiceEditForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Adresse email"
         />
-        <InlineError message={formik.errors.etablissement} fieldId="email" />
+        <InlineError message={formik.errors.email} fieldId="email" />
       </Field>
       <Field>
         <Geocode
