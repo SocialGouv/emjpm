@@ -24,7 +24,7 @@ const EnquetePage = ({ enqueteId }) => {
   const currentStep = { step, substep };
 
   return (
-    <LayoutMandataire>
+    <LayoutMandataire hasFooterMargins={false}>
       <BoxWrapper>
         <Enquete id={enqueteId} currentStep={currentStep} />
       </BoxWrapper>

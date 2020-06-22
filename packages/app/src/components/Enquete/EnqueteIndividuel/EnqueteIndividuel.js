@@ -61,7 +61,7 @@ export const EnqueteIndividuel = (props) => {
 
   return (
     <Flex>
-      <Box>
+      <Box bg="#DBE7F6">
         <MenuStepper
           sections={sections}
           currentStep={currentStep}
