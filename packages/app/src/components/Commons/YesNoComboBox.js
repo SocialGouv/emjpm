@@ -1,6 +1,10 @@
 import { Label, Radio } from "@rebass/forms";
 import React from "react";
-import { Flex } from "rebass";
+import { Box, Flex } from "rebass";
+
+const FieldValue = ({ isChecked, readOnly }) => ({
+  color: readOnly && !isChecked ? "#999" : "inherit",
+});
 
 export const YesNoComboBox = (props) => {
   const { onChange = () => {}, name = "", value, readOnly } = props;
@@ -20,7 +24,7 @@ export const YesNoComboBox = (props) => {
             }
           }}
         />
-        Non
+        <Box sx={FieldValue({ readOnly, isChecked: value === false })}>Non</Box>
       </Label>
       <Label alignItems="center" width={[1 / 2]} p={2}>
         <Radio
@@ -36,7 +40,7 @@ export const YesNoComboBox = (props) => {
             }
           }}
         />
-        Oui
+        <Box sx={FieldValue({ readOnly, isChecked: value === true })}>Oui</Box>
       </Label>
     </Flex>
   );
