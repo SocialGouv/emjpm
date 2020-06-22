@@ -96,8 +96,6 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   });
   const { submitForm, readOnly, values, errors, submit, formik } = enqueteForm;
 
-  console.log("values", formik.values);
-
   return (
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
