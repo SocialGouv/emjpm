@@ -1,10 +1,19 @@
-import { Field, InlineError, Input, Select } from "@emjpm/ui";
+import { Field, Input, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React, { useMemo } from "react";
 
 import { findOption } from "../../../util/option/OptionUtil";
+import { EnqueteInlineError } from "./EnqueteInlineError";
 
-export const EnqueteFormSelectField = ({ id, value, error, label, options, enqueteForm }) => {
+export const EnqueteFormSelectField = ({
+  id,
+  value,
+  error,
+  label,
+  options,
+  enqueteForm,
+  disableErrorMessage,
+}) => {
   const { readOnly, formik, showError } = enqueteForm;
   const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
 
@@ -52,7 +61,13 @@ export const EnqueteFormSelectField = ({ id, value, error, label, options, enque
           options={options}
         />
       )}
-      <InlineError showError={showError} message={errors[id]} fieldId={id} />
+
+      <EnqueteInlineError
+        id={id}
+        error={error}
+        enqueteForm={enqueteForm}
+        disableErrorMessage={disableErrorMessage}
+      />
     </Field>
   );
 };

@@ -1,12 +1,12 @@
-import { InlineError } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteFormInputField } from "../../EnqueteForm";
+import { EnqueteInlineError } from "../../EnqueteForm/EnqueteInlineError";
 
 export const EnqueteActiviteFormGroupMesures = (props) => {
   // prefix: 'etablissement' | 'domicile' | ''
-  const { errors, prefix, showError, enqueteContext, enqueteForm } = props;
+  const { prefix, enqueteContext, enqueteForm } = props;
 
   const idDebutAnnee = prefix ? `${prefix}DebutAnnee` : "debutAnnee";
   const idFinAnnee = prefix ? `${prefix}FinAnnee` : "finAnnee";
@@ -64,7 +64,7 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
           />
         </Box>
       </Flex>
-      <InlineError showError={showError} message={errors[idSomme]} fieldId={idSomme} />
+      <EnqueteInlineError enqueteForm={enqueteForm} id={idSomme} />
     </Box>
   );
 };
