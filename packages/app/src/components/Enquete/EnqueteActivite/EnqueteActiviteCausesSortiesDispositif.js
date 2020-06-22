@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
-import { Box } from "rebass";
 
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCausesSortiesDispositifForm";
@@ -41,33 +40,35 @@ export const EnqueteActiviteCausesSortiesDispositif = (props) => {
     },
   });
 
-  const { sorties_main_levee, sorties_deces, sorties_masp } = data
-    ? data.enquete_reponses_activite_by_pk || {}
-    : {};
+  const initialData = useMemo(() => {
+    const { sorties_main_levee, sorties_deces, sorties_masp } = data
+      ? data.enquete_reponses_activite_by_pk || {}
+      : {};
+
+    return {
+      sortiesMainLevee: sorties_main_levee,
+      sortiesDeces: sorties_deces,
+      sortiesMasp: sorties_masp,
+    };
+  }, [data]);
 
   return (
-    <Box>
-      <EnqueteActiviteCausesSortiesDispositifForm
-        loading={loading}
-        data={{
-          sortiesMainLevee: sorties_main_levee,
-          sortiesDeces: sorties_deces,
-          sortiesMasp: sorties_masp,
-        }}
-        section={section}
-        step={step}
-        onSubmit={async (values) => {
-          await updateEnquete({
-            variables: {
-              id: activite_id,
-              ...values,
-            },
-          });
-        }}
-        enqueteContext={enqueteContext}
-        dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-      />
-    </Box>
+    <EnqueteActiviteCausesSortiesDispositifForm
+      loading={loading}
+      data={initialData}
+      section={section}
+      step={step}
+      onSubmit={async (values) => {
+        await updateEnquete({
+          variables: {
+            id: activite_id,
+            ...values,
+          },
+        });
+      }}
+      enqueteContext={enqueteContext}
+      dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+    />
   );
 };
 
