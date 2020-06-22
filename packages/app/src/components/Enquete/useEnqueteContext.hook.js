@@ -14,6 +14,7 @@ export const useEnqueteContext = (props) => {
   const enqueteContextInitialValue = useMemo(
     () => ({
       form: {
+        submited: false,
         dirty: false,
         valid: true,
         nextStep: getNextPageStep(sections, currentStep), // {section, step} | 'previous' | 'next'
@@ -59,6 +60,7 @@ export const useEnqueteContext = (props) => {
               form: {
                 ...state.form,
                 nextStep,
+                submited: true,
               },
             };
           }

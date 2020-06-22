@@ -29,7 +29,6 @@ export function useEnqueteForm({
 
   const {
     submitForm,
-    submitCount,
     handleChange,
     handleBlur,
     values,
@@ -42,7 +41,6 @@ export function useEnqueteForm({
     ? formik
     : {
         submitForm: undefined,
-        submitCount: undefined,
         handleChange: undefined,
         handleBlur: undefined,
         values: undefined,
@@ -58,14 +56,14 @@ export function useEnqueteForm({
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("set-form-valid");
+      // console.log("set-form-valid");
       dispatchEnqueteContextEvent({ type: "set-form-valid", value: isValid });
     }, 0);
   }, [dispatchEnqueteContextEvent, isValid]);
 
   useEffect(() => {
     setTimeout(() => {
-      console.log("set-form-dirty");
+      // console.log("set-form-dirty");
       dispatchEnqueteContextEvent({ type: "set-form-dirty", value: dirty });
     }, 0);
   }, [dispatchEnqueteContextEvent, dirty]);
@@ -84,8 +82,8 @@ export function useEnqueteForm({
   }, [data, dataToForm, setValues]);
 
   const showError = useMemo(() => {
-    return dirty || (!loading && (step.status !== "empty" || submitCount !== 0));
-  }, [dirty, step.status, submitCount, loading]);
+    return dirty || (!loading && (step.status !== "empty" || enqueteContext.form.submited));
+  }, [dirty, step.status, enqueteContext.form.submited, loading]);
 
   const submit = useCallback(
     ({ action }) => {
@@ -100,8 +98,9 @@ export function useEnqueteForm({
 
   return {
     formik,
+    enqueteContext,
+    validationSchema,
     submitForm,
-    submitCount,
     handleChange,
     handleBlur,
     values,

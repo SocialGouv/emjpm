@@ -4,8 +4,7 @@ import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
-import { EnqueteFormInputField } from "../EnqueteForm";
-import { EnqueteInlineError } from "../EnqueteForm/EnqueteInlineError";
+import { EnqueteFieldInlineError, EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -121,9 +120,9 @@ export const EnquetePreposeFinancementForm = (props) => {
         </Box>
       </Flex>
       <Box>
-        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_personnel" />
-        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_preposes" />
-        <EnqueteInlineError enqueteForm={enqueteForm} id="charges_fonctionnement" />
+        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_personnel" />
+        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_preposes" />
+        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_fonctionnement" />
       </Box>
 
       <Box mt={"50px"}>
@@ -153,8 +152,8 @@ export const EnquetePreposeFinancementForm = (props) => {
           </Box>
         </Flex>
         <Box>
-          <EnqueteInlineError enqueteForm={enqueteForm} id="produits_bareme_prelevements" />
-          <EnqueteInlineError enqueteForm={enqueteForm} id="autre_produits" />
+          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="produits_bareme_prelevements" />
+          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="autre_produits" />
         </Box>
         <Flex mt={4}>
           <Box width={1 / 2}>
@@ -181,8 +180,11 @@ export const EnquetePreposeFinancementForm = (props) => {
           </Box>
         </Flex>
         <Box>
-          <EnqueteInlineError enqueteForm={enqueteForm} id="financement" />
-          <EnqueteInlineError enqueteForm={enqueteForm} id="aide_sociale_conseil_departemental" />
+          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="financement" />
+          <EnqueteFieldInlineError
+            enqueteForm={enqueteForm}
+            id="aide_sociale_conseil_departemental"
+          />
         </Box>
       </Box>
 

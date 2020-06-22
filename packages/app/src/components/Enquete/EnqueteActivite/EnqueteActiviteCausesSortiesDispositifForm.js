@@ -52,9 +52,7 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
     loading,
   });
 
-  const { submitForm, errors, submit } = enqueteForm;
-
-  console.log("errors", errors);
+  const { submitForm, submit } = enqueteForm;
 
   return (
     <Box>

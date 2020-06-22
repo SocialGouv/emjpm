@@ -1,10 +1,22 @@
 import { Field, Input } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
-import { EnqueteInlineError } from "./EnqueteInlineError";
+import { EnqueteFieldInlineError } from "./EnqueteFieldInlineError";
+import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
+
+const FieldLabel = ({ isRequired }) =>
+  isRequired
+    ? {
+        "&:after": {
+          content: "'  *'",
+          color: "#db4949",
+          marginLeft: "3px",
+        },
+      }
+    : {};
 
 export const EnqueteFormInputField = ({
   id,
@@ -19,8 +31,9 @@ export const EnqueteFormInputField = ({
   enqueteForm,
   children,
   disableErrorMessage,
+  hideErrorMessageIfPristine,
 }) => {
-  const { readOnly, formik, showError } = enqueteForm;
+  const { readOnly, formik, validationSchema } = enqueteForm;
   const { handleChange, handleBlur, values } = formik;
 
   if (!type || readOnly) {
@@ -30,10 +43,23 @@ export const EnqueteFormInputField = ({
     value = values[id];
   }
 
+  const isRequired = useMemo(() => {
+    const fieldValidation = validationSchema.fields[id];
+    return fieldValidation && fieldValidation._exclusive && fieldValidation._exclusive.required;
+  }, [id, validationSchema.fields]);
+
+  const showError = useEnqueteFieldShowError({
+    id,
+    error,
+    enqueteForm,
+    disableErrorMessage,
+    hideErrorMessageIfPristine,
+  });
+
   return (
     <Field>
       {label && (
-        <Label mb={"5px"} htmlFor={id}>
+        <Label sx={FieldLabel({ isRequired })} mb={"5px"} htmlFor={id}>
           {label}
         </Label>
       )}
@@ -49,7 +75,7 @@ export const EnqueteFormInputField = ({
             value={value}
             onBlur={handleBlur}
             onChange={handleChange}
-            hasError={showError && !!error}
+            hasError={showError}
             type={type}
             min={min}
             max={max}
@@ -64,7 +90,7 @@ export const EnqueteFormInputField = ({
             value={value}
             onBlur={handleBlur}
             onChange={handleChange}
-            hasError={showError && !!error}
+            hasError={showError}
             type={type}
             min={min}
             max={max}
@@ -73,11 +99,12 @@ export const EnqueteFormInputField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <EnqueteInlineError
+      <EnqueteFieldInlineError
         id={id}
         error={error}
         enqueteForm={enqueteForm}
         disableErrorMessage={disableErrorMessage}
+        hideErrorMessageIfPristine={hideErrorMessageIfPristine}
       />
     </Field>
   );
