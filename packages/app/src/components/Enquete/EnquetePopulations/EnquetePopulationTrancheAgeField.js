@@ -2,7 +2,7 @@ import { Label } from "@rebass/forms";
 import React, { Fragment, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { EnqueteFieldInlineError, EnqueteFormInputField } from "../EnqueteForm";
+import { EnqueteFormFieldErrorMessage, EnqueteFormInputField } from "../EnqueteForm";
 import styles from "./style";
 
 export function calculateTotal(firstProperty, secondProperty) {
@@ -19,9 +19,9 @@ export const EnquetePopulationTrancheAgeField = (props) => {
   return (
     <Fragment>
       <Box>
-        <EnqueteFieldInlineError enqueteForm={enqueteForm} id={menFieldId} />
+        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id={menFieldId} />
         {!errors[menFieldId] && (
-          <EnqueteFieldInlineError enqueteForm={enqueteForm} id={womenFieldId} />
+          <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id={womenFieldId} />
         )}
       </Box>
       <Flex alignItems="center">
