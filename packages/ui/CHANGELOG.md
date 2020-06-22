@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.44.0](https://github.com/SocialGouv/emjpm/compare/v25.43.0...v25.44.0) (2020-06-22)
+
+
+### Bug Fixes
+
+* **enquete:** formation individuel [#1969](https://github.com/SocialGouv/emjpm/issues/1969) ([#1972](https://github.com/SocialGouv/emjpm/issues/1972)) ([8544395](https://github.com/SocialGouv/emjpm/commit/8544395a54f9285cb45f059fdce0ba4640a385ac))
+
+
+
+
+
 # [25.43.0](https://github.com/SocialGouv/emjpm/compare/v25.42.1...v25.43.0) (2020-06-22)
 
 **Note:** Version bump only for package @emjpm/ui
