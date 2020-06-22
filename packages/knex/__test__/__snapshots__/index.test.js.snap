@@ -378,6 +378,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "uploaded_on": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
 }
 `;
 
