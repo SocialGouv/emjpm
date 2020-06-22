@@ -21,6 +21,7 @@ export const EnqueteFormInputField = ({
   children,
   disableErrorMessage,
   hideErrorMessageIfPristine,
+  required,
 }) => {
   const { readOnly, formik } = enqueteForm;
   const { handleChange, handleBlur, values } = formik;
@@ -42,7 +43,13 @@ export const EnqueteFormInputField = ({
 
   return (
     <Field>
-      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
+      <EnqueteFormFieldLabel
+        id={id}
+        label={label}
+        text={text}
+        required={required}
+        enqueteForm={enqueteForm}
+      />
 
       <Flex alignItems="center">
         {size === "small" || size === "medium" ? (

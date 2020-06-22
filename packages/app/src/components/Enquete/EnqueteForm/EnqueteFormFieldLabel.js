@@ -13,13 +13,16 @@ const FieldLabel = ({ isRequired, readOnly }) =>
       }
     : {};
 
-export const EnqueteFormFieldLabel = ({ id, label, text, enqueteForm }) => {
+export const EnqueteFormFieldLabel = ({ id, label, text, enqueteForm, required }) => {
   const { validationSchema, readOnly } = enqueteForm;
 
   const isRequired = useMemo(() => {
+    if (required) {
+      return true;
+    }
     const fieldValidation = validationSchema.fields[id];
     return fieldValidation && fieldValidation._exclusive && fieldValidation._exclusive.required;
-  }, [id, validationSchema.fields]);
+  }, [id, required, validationSchema.fields]);
 
   return (
     <Fragment>

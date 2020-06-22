@@ -163,6 +163,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].finess`}
                           label="N° FINESS"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.finess}
@@ -173,6 +174,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].raison_sociale`}
                           label="Raison sociale"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.raison_sociale}
@@ -185,6 +187,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormSelectField
                           id={`etablissements[${index}].statut`}
                           label="Statut de l'établissement"
+                          required={true}
                           options={STATUTS.byKey}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
@@ -196,6 +199,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormSelectField
                           id={`etablissements[${index}].type`}
                           label="Type d'établissement"
+                          required={true}
                           options={TYPES.byKey}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
@@ -209,6 +213,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].nombre_lits`}
                           label="Nombre de lits ou de places"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.nombre_lits}
@@ -219,6 +224,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].nombre_journees_hospitalisation`}
                           label="Nombre de journées d'hospitalisation complètes"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.nombre_journees_hospitalisation}
@@ -231,6 +237,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].nombre_mesures`}
                           label="Nombre de mesures au 31/12"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.nombre_mesures}
@@ -241,6 +248,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                         <EnqueteFormInputField
                           id={`etablissements[${index}].nombre_journees_esms`}
                           label="Nombre de journées pour les ESMS"
+                          required={true}
                           enqueteContext={enqueteContext}
                           enqueteForm={enqueteForm}
                           value={value.nombre_journees_esms}
