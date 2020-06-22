@@ -1,10 +1,10 @@
 import React from "react";
 import { useMutation, useQuery } from "react-apollo";
-
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
+
 
 export const EnquetePreposePrestationsSocialesTutelle = (props) => {
   const {
@@ -49,7 +49,7 @@ export const EnquetePreposePrestationsSocialesTutelle = (props) => {
 
   return (
     <EnquetePreposePrestationsSocialesRevenusForm
-      data={prestationsSociales.tutelle || {}}
+      data={prestationsSociales.tutelle}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
