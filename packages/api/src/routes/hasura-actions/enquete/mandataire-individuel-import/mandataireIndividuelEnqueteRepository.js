@@ -1,3 +1,4 @@
+const { EnqueteReponses } = require("../../../../models/EnqueteReponses");
 const {
   EnqueteReponsesPopulations,
 } = require("../../../../models/EnqueteReponsesPopulations");
@@ -18,7 +19,7 @@ const {
   createEmptyEnqueteReponse,
 } = require("../mandataire-individuel/requests");
 
-async function update(enqueteId, { tabs, mandataireId }) {
+async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   const {
     informationsMandataire,
     agrementsFormations,
@@ -31,6 +32,12 @@ async function update(enqueteId, { tabs, mandataireId }) {
     enqueteId,
     mandataireId,
   });
+
+  if (isUpload) {
+    await EnqueteReponses.query()
+      .findById(enqueteReponse.id)
+      .patch({ uploaded_on: new Date() });
+  }
 
   await EnqueteReponsesInformationsMandataire.query()
     .findById(enqueteReponse.enquete_reponses_informations_mandataire_id)
@@ -52,6 +59,7 @@ async function update(enqueteId, { tabs, mandataireId }) {
     .findById(enqueteReponse.enquete_reponses_activite_id)
     .patch(activite);
 }
+
 async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponse({
     enqueteId,
@@ -65,6 +73,7 @@ async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
     });
     enqueteReponse = insert_enquete_reponses_one;
   }
+
   return enqueteReponse;
 }
 
