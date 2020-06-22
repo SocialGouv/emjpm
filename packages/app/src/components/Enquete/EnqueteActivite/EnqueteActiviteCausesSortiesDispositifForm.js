@@ -8,12 +8,12 @@ import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
-const validationSchema = yup.object(
-  ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce((acc, attrName) => {
-    acc[attrName] = yup.number().min(0).integer().nullable();
-    return acc;
-  }, [])
-);
+const validationSchema = yup.object({
+  sortiesMainLevee: yup.number().min(0).integer().nullable(),
+  sortiesDeces: yup.number().min(0).integer().nullable(),
+  sortiesMasp: yup.number().min(0).integer().nullable(),
+});
+
 function dataToForm(data) {
   return {
     sortiesMainLevee: formatFormInput(data.sortiesMainLevee),
