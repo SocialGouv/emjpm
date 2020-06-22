@@ -1,9 +1,9 @@
 import { Field, Input, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
 import React, { useMemo } from "react";
 
 import { findOption } from "../../../util/option/OptionUtil";
-import { EnqueteFieldInlineError } from "./EnqueteFieldInlineError";
+import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
+import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
 
 export const EnqueteFormSelectField = ({
@@ -11,6 +11,7 @@ export const EnqueteFormSelectField = ({
   value,
   error,
   label,
+  text,
   options,
   enqueteForm,
   disableErrorMessage,
@@ -45,9 +46,8 @@ export const EnqueteFormSelectField = ({
 
   return (
     <Field>
-      <Label mb={"5px"} htmlFor={id}>
-        {label}
-      </Label>
+      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
+
       {readOnly ? (
         <Input
           placeholder=""
@@ -72,7 +72,7 @@ export const EnqueteFormSelectField = ({
         />
       )}
 
-      <EnqueteFieldInlineError
+      <EnqueteFormFieldErrorMessage
         id={id}
         error={error}
         enqueteForm={enqueteForm}

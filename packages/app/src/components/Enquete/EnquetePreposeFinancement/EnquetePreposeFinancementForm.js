@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
-import { EnqueteFieldInlineError, EnqueteFormInputField } from "../EnqueteForm";
+import { EnqueteFormFieldErrorMessage, EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -120,9 +120,9 @@ export const EnquetePreposeFinancementForm = (props) => {
         </Box>
       </Flex>
       <Box>
-        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_personnel" />
-        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_preposes" />
-        <EnqueteFieldInlineError enqueteForm={enqueteForm} id="charges_fonctionnement" />
+        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_personnel" />
+        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_preposes" />
+        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_fonctionnement" />
       </Box>
 
       <Box mt={"50px"}>
@@ -152,8 +152,11 @@ export const EnquetePreposeFinancementForm = (props) => {
           </Box>
         </Flex>
         <Box>
-          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="produits_bareme_prelevements" />
-          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="autre_produits" />
+          <EnqueteFormFieldErrorMessage
+            enqueteForm={enqueteForm}
+            id="produits_bareme_prelevements"
+          />
+          <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="autre_produits" />
         </Box>
         <Flex mt={4}>
           <Box width={1 / 2}>
@@ -179,13 +182,7 @@ export const EnquetePreposeFinancementForm = (props) => {
             />
           </Box>
         </Flex>
-        <Box>
-          <EnqueteFieldInlineError enqueteForm={enqueteForm} id="financement" />
-          <EnqueteFieldInlineError
-            enqueteForm={enqueteForm}
-            id="aide_sociale_conseil_departemental"
-          />
-        </Box>
+        <Box />
       </Box>
 
       <EnqueteStepperButtons submit={submit} disabled={loading} />

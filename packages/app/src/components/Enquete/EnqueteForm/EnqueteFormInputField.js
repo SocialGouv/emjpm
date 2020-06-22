@@ -1,22 +1,11 @@
 import { Field, Input } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
-import React, { useMemo } from "react";
-import { Box, Flex, Text } from "rebass";
+import React from "react";
+import { Box, Flex } from "rebass";
 
 import { SmallInput } from "../../Commons/SmallInput";
-import { EnqueteFieldInlineError } from "./EnqueteFieldInlineError";
+import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
+import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
-
-const FieldLabel = ({ isRequired }) =>
-  isRequired
-    ? {
-        "&:after": {
-          content: "'  *'",
-          color: "#db4949",
-          marginLeft: "3px",
-        },
-      }
-    : {};
 
 export const EnqueteFormInputField = ({
   id,
@@ -33,7 +22,7 @@ export const EnqueteFormInputField = ({
   disableErrorMessage,
   hideErrorMessageIfPristine,
 }) => {
-  const { readOnly, formik, validationSchema } = enqueteForm;
+  const { readOnly, formik } = enqueteForm;
   const { handleChange, handleBlur, values } = formik;
 
   if (!type || readOnly) {
@@ -42,11 +31,6 @@ export const EnqueteFormInputField = ({
   if (value === undefined) {
     value = values[id];
   }
-
-  const isRequired = useMemo(() => {
-    const fieldValidation = validationSchema.fields[id];
-    return fieldValidation && fieldValidation._exclusive && fieldValidation._exclusive.required;
-  }, [id, validationSchema.fields]);
 
   const showError = useEnqueteFieldShowError({
     id,
@@ -58,12 +42,7 @@ export const EnqueteFormInputField = ({
 
   return (
     <Field>
-      {label && (
-        <Label sx={FieldLabel({ isRequired })} mb={"5px"} htmlFor={id}>
-          {label}
-        </Label>
-      )}
-      {text && <Text mb={"5px"}>{text}</Text>}
+      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
 
       <Flex alignItems="center">
         {size === "small" || size === "medium" ? (
@@ -99,7 +78,7 @@ export const EnqueteFormInputField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <EnqueteFieldInlineError
+      <EnqueteFormFieldErrorMessage
         id={id}
         error={error}
         enqueteForm={enqueteForm}
