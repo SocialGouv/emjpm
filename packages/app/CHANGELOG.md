@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.42.1](https://github.com/SocialGouv/emjpm/compare/v25.42.0...v25.42.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **enquete:** fix [#1949](https://github.com/SocialGouv/emjpm/issues/1949) ([#1954](https://github.com/SocialGouv/emjpm/issues/1954)) ([f6dea58](https://github.com/SocialGouv/emjpm/commit/f6dea58976d6aa0ec64e7bb854fa111bfc0ea7b3))
+* **enquete:** prestation sociales for prepose [#1951](https://github.com/SocialGouv/emjpm/issues/1951) ([#1959](https://github.com/SocialGouv/emjpm/issues/1959)) ([fae103f](https://github.com/SocialGouv/emjpm/commit/fae103f53f14d58bfbbc28544d5ec1a43db3edbe))
+* **enquete:** render loop [#1955](https://github.com/SocialGouv/emjpm/issues/1955) ([#1957](https://github.com/SocialGouv/emjpm/issues/1957)) ([b45eac5](https://github.com/SocialGouv/emjpm/commit/b45eac5a6dfe809b2cce1f73c88ae11478da7d0f))
+* **enquete-prepose:** add test to avoid undefined exception ([#1952](https://github.com/SocialGouv/emjpm/issues/1952)) ([1c2cff0](https://github.com/SocialGouv/emjpm/commit/1c2cff0ec39a5abb9dcd03f38d5a274c3e10b4b3))
+* **input:** onblur ([#1958](https://github.com/SocialGouv/emjpm/issues/1958)) ([3f5cd7f](https://github.com/SocialGouv/emjpm/commit/3f5cd7f64e848385bdae1b696283dde49fcdea52))
+
+
+
+
+
 # [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
 
 

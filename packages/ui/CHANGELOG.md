@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.42.1](https://github.com/SocialGouv/emjpm/compare/v25.42.0...v25.42.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **input:** onblur ([#1958](https://github.com/SocialGouv/emjpm/issues/1958)) ([3f5cd7f](https://github.com/SocialGouv/emjpm/commit/3f5cd7f64e848385bdae1b696283dde49fcdea52))
+
+
+
+
+
 # [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
 
 
