@@ -15,11 +15,11 @@ const validationSchema = yup.object().shape({
   region: yup.string().required(),
   raison_sociale: yup.string().required(),
   personnalite_juridique_etablissement: yup.string().required(),
-  activite_personne_physique: yup.number().min(0).nullable(),
-  activite_service: yup.number().min(0).nullable(),
-  total_mesures_etablissements: yup.number().min(0).nullable(),
-  etablissement_personne_morale: yup.number().min(0).nullable(),
-  etablissement_convention_groupement: yup.number().min(0).nullable(),
+  activite_personne_physique: yup.number().min(0).required(),
+  activite_service: yup.number().min(0).required(),
+  total_mesures_etablissements: yup.number().min(0).required(),
+  etablissement_personne_morale: yup.number().min(0).required(),
+  etablissement_convention_groupement: yup.number().min(0).required(),
 });
 
 function dataToForm(data) {
@@ -138,7 +138,18 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text ml={3}>personne(s) physique(s)</Text>
+                <Text
+                  sx={{
+                    "&:after": {
+                      content: "'  *'",
+                      color: "#db4949",
+                      marginLeft: "3px",
+                    },
+                  }}
+                  ml={3}
+                >
+                  personne(s) physique(s)
+                </Text>
               </EnqueteFormInputField>
             </Flex>
             <Flex flex={1 / 2} alignItems="center">
@@ -150,7 +161,18 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text ml={3}>{"service(s) au sens de l'article L312-1 du CASF"}</Text>
+                <Text
+                  sx={{
+                    "&:after": {
+                      content: "'  *'",
+                      color: "#db4949",
+                      marginLeft: "3px",
+                    },
+                  }}
+                  ml={3}
+                >
+                  {"service(s) au sens de l'article L312-1 du CASF"}
+                </Text>
               </EnqueteFormInputField>
             </Flex>
           </Flex>
@@ -170,7 +192,18 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text ml={3}>établissement(s) dépendant de la même personne morale</Text>
+                <Text
+                  sx={{
+                    "&:after": {
+                      content: "'  *'",
+                      color: "#db4949",
+                      marginLeft: "3px",
+                    },
+                  }}
+                  ml={3}
+                >
+                  établissement(s) dépendant de la même personne morale
+                </Text>
               </EnqueteFormInputField>
             </Flex>
             <Flex flex={1 / 2} alignItems="center">
@@ -182,7 +215,16 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text ml={3}>
+                <Text
+                  sx={{
+                    "&:after": {
+                      content: "'  *'",
+                      color: "#db4949",
+                      marginLeft: "3px",
+                    },
+                  }}
+                  ml={3}
+                >
                   {
                     "établissement(s) dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP)."
                   }
@@ -202,6 +244,13 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
             enqueteForm={enqueteForm}
           >
             <Text
+              sx={{
+                "&:after": {
+                  content: "'  *'",
+                  color: "#db4949",
+                  marginLeft: "3px",
+                },
+              }}
               ml={3}
               dangerouslySetInnerHTML={{
                 __html: ` mesure(s) prises en charge par ces <strong>${
