@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.42.1](https://github.com/SocialGouv/emjpm/compare/v25.42.0...v25.42.1) (2020-06-22)
+
+
+### Bug Fixes
+
+* **enquete:** render loop [#1955](https://github.com/SocialGouv/emjpm/issues/1955) ([#1957](https://github.com/SocialGouv/emjpm/issues/1957)) ([b45eac5](https://github.com/SocialGouv/emjpm/commit/b45eac5a6dfe809b2cce1f73c88ae11478da7d0f))
+* **enquete-prepose:** add test to avoid undefined exception ([#1952](https://github.com/SocialGouv/emjpm/issues/1952)) ([1c2cff0](https://github.com/SocialGouv/emjpm/commit/1c2cff0ec39a5abb9dcd03f38d5a274c3e10b4b3))
+
+
+
+
+
 # [25.42.0](https://github.com/SocialGouv/emjpm/compare/v25.41.0...v25.42.0) (2020-06-18)
 
 
