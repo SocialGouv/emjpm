@@ -25,7 +25,7 @@ const Input = (props) => {
   const { onChange, placeholder, isValid, hasError, name, required, size, value, type, onBlur } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
-  const isActive = isFocus || hasValue || value;
+  const isActive = isFocus || hasValue || (value !== null && value !== undefined);
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>

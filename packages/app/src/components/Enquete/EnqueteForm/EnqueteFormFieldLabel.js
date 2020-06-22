@@ -2,8 +2,8 @@ import { Label } from "@rebass/forms";
 import React, { Fragment, useMemo } from "react";
 import { Text } from "rebass";
 
-const FieldLabel = ({ isRequired }) =>
-  isRequired
+const FieldLabel = ({ isRequired, readOnly }) =>
+  isRequired && !readOnly
     ? {
         "&:after": {
           content: "'  *'",
@@ -14,7 +14,7 @@ const FieldLabel = ({ isRequired }) =>
     : {};
 
 export const EnqueteFormFieldLabel = ({ id, label, text, enqueteForm }) => {
-  const { validationSchema } = enqueteForm;
+  const { validationSchema, readOnly } = enqueteForm;
 
   const isRequired = useMemo(() => {
     const fieldValidation = validationSchema.fields[id];
@@ -24,7 +24,7 @@ export const EnqueteFormFieldLabel = ({ id, label, text, enqueteForm }) => {
   return (
     <Fragment>
       {label && (
-        <Label sx={FieldLabel({ isRequired })} mb={"5px"} htmlFor={id}>
+        <Label sx={FieldLabel({ isRequired, readOnly })} mb={"5px"} htmlFor={id}>
           {label}
         </Label>
       )}

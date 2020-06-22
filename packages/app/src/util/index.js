@@ -26,9 +26,6 @@ export function formatFormInput(value) {
   return value === null || value === undefined ? "" : value;
 }
 
-export function formatFormBoolean(value, defaultValue) {
-  if (defaultValue !== true) {
-    defaultValue = false;
-  }
-  return value === null || value === undefined ? defaultValue : value;
+export function formatFormBoolean(value) {
+  return value !== true || value !== false ? undefined : value;
 }

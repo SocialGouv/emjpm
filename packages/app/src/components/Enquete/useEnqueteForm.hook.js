@@ -82,8 +82,10 @@ export function useEnqueteForm({
   }, [data, dataToForm, setValues]);
 
   const showError = useMemo(() => {
-    return dirty || (!loading && (step.status !== "empty" || enqueteContext.form.submited));
-  }, [dirty, step.status, enqueteContext.form.submited, loading]);
+    return (
+      dirty || (!loading && !readOnly && (step.status !== "empty" || enqueteContext.form.submited))
+    );
+  }, [dirty, step.status, readOnly, enqueteContext.form.submited, loading]);
 
   const submit = useCallback(
     ({ action }) => {
