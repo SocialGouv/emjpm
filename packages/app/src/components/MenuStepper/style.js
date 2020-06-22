@@ -3,6 +3,8 @@ export default {
     fontSize: "16px",
     width: "377px",
     backgroundColor: "#DBE7F6",
+    position: "sticky",
+    top: 0,
   },
   menuTag: {
     justifyContent: "center",
