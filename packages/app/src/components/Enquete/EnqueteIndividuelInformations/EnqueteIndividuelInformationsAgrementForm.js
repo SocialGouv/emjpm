@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormBoolean, formatFormInput } from "../../../util";
+import { formatFormBoolean, formatFormInput, parseFormInt } from "../../../util";
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import {
   EnqueteFormInputField,
@@ -24,7 +24,7 @@ export const validationSchema = yup.object().shape({
 
 function dataToForm(data) {
   return {
-    debut_activite_avant_2009: formatFormBoolean(data.debut_activite_avant_2009, false),
+    debut_activite_avant_2009: formatFormBoolean(data.debut_activite_avant_2009),
     annee_agrement: formatFormInput(data.annee_agrement),
     nb_departements: formatFormInput(data.nb_departements),
     nb_mesures_dep_finance: formatFormInput(data.nb_mesures_dep_finance),
@@ -32,6 +32,15 @@ function dataToForm(data) {
   };
 }
 
+function formToData(values) {
+  return {
+    debut_activite_avant_2009: values.debut_activite_avant_2009,
+    annee_agrement: parseFormInt(values.annee_agrement),
+    nb_departements: values.nb_departements,
+    nb_mesures_dep_finance: parseFormInt(values.nb_mesures_dep_finance),
+    nb_mesures_dep_autres: parseFormInt(values.nb_mesures_dep_autres),
+  };
+}
 export const EnqueteIndividuelInformationsAgrementForm = (props) => {
   const {
     data = {},
@@ -50,6 +59,7 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
     step,
     validationSchema,
     dataToForm,
+    formToData,
     loading,
   });
 

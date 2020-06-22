@@ -39,7 +39,7 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     ],
   });
 
-  const agrements = data ? data.enquete_reponses_agrements_formations_by_pk || {} : {};
+  const agrements = data ? data.enquete_reponses_agrements_formations_by_pk : undefined;
   return loading ? null : (
     <EnqueteIndividuelInformationsAgrementForm
       data={agrements}
@@ -51,15 +51,7 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
         await updateEnquete({
           variables: {
             id: informations_mandataire_id,
-            debut_activite_avant_2009: values.debut_activite_avant_2009,
-            annee_agrement: values.annee_agrement ? Number(values.annee_agrement) : null,
-            nb_departements: values.nb_departements,
-            nb_mesures_dep_finance: values.nb_mesures_dep_finance
-              ? Number(values.nb_mesures_dep_finance)
-              : null,
-            nb_mesures_dep_autres: values.nb_mesures_dep_autres
-              ? Number(values.nb_mesures_dep_autres)
-              : null,
+            ...values,
           },
         });
       }}
