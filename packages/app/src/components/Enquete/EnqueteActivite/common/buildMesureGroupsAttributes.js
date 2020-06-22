@@ -14,37 +14,33 @@ export function buildMesureGroupsAttributes(mesureGroups) {
     acc[sortieMesures] = yup.number().min(0).integer().required();
     acc[finAnnee] = yup.number().min(0).integer().required();
 
-    acc[somme] = yup.mixed().test(
-      // "diff-match",
-      // "La valeur de fin d'année n'est pas cohérente avec les autres données.",
-      function () {
-        const nbDebutAnnee = this.parent[debutAnnee];
-        const nbSortieMesures = this.parent[sortieMesures];
-        const nbMesuresNouvelles = this.parent[mesuresNouvelles];
-        const nbFinAnnee = this.parent[finAnnee];
+    acc[somme] = yup.mixed().test(function () {
+      const nbDebutAnnee = this.parent[debutAnnee];
+      const nbSortieMesures = this.parent[sortieMesures];
+      const nbMesuresNouvelles = this.parent[mesuresNouvelles];
+      const nbFinAnnee = this.parent[finAnnee];
 
-        if (
-          nbDebutAnnee !== undefined &&
-          nbDebutAnnee !== null &&
-          nbSortieMesures !== undefined &&
-          nbSortieMesures !== null &&
-          nbMesuresNouvelles !== undefined &&
-          nbMesuresNouvelles !== null &&
-          nbFinAnnee !== undefined &&
-          nbFinAnnee !== null
-        ) {
-          const expectedFinAnnee = nbDebutAnnee + nbMesuresNouvelles - nbSortieMesures;
+      if (
+        nbDebutAnnee !== undefined &&
+        nbDebutAnnee !== null &&
+        nbSortieMesures !== undefined &&
+        nbSortieMesures !== null &&
+        nbMesuresNouvelles !== undefined &&
+        nbMesuresNouvelles !== null &&
+        nbFinAnnee !== undefined &&
+        nbFinAnnee !== null
+      ) {
+        const expectedFinAnnee = nbDebutAnnee + nbMesuresNouvelles - nbSortieMesures;
 
-          if (expectedFinAnnee !== nbFinAnnee) {
-            return this.createError({
-              message: `La valeur de fin d'année n'est pas cohérente avec les autres données: ${nbDebutAnnee} + ${nbMesuresNouvelles} - ${nbSortieMesures} = ${expectedFinAnnee}`,
-              path: somme,
-            });
-          }
+        if (expectedFinAnnee !== nbFinAnnee) {
+          return this.createError({
+            message: `La valeur de fin d'année n'est pas cohérente avec les autres données: ${nbDebutAnnee} + ${nbMesuresNouvelles} - ${nbSortieMesures} = ${expectedFinAnnee}`,
+            path: somme,
+          });
         }
-        return true;
       }
-    );
+      return true;
+    });
 
     return acc;
   }, {});
