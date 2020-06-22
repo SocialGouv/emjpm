@@ -32,6 +32,7 @@ async function initEnqueteMandataireIndividuel({
     });
     enqueteReponse = insert_enquete_reponses_one;
   }
+
   const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
   const ids = {
     id: enqueteReponse.id,
