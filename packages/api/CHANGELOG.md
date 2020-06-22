@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.44.0](https://github.com/SocialGouv/emjpm/compare/v25.43.0...v25.44.0) (2020-06-22)
+
+
+### Bug Fixes
+
+* **enquete:** enquete for mandataires individuels - it closes [#1970](https://github.com/SocialGouv/emjpm/issues/1970) ([#1975](https://github.com/SocialGouv/emjpm/issues/1975)) ([09d7881](https://github.com/SocialGouv/emjpm/commit/09d788101510db08f1a08ad36eda4986ec7f6412))
+* **enquete:** fix form validation behavior ([#1963](https://github.com/SocialGouv/emjpm/issues/1963)) ([808ae01](https://github.com/SocialGouv/emjpm/commit/808ae01ec8eaa6629293ca264ff5c07afbf808dd))
+* **enquete:** formation individuel [#1969](https://github.com/SocialGouv/emjpm/issues/1969) ([#1972](https://github.com/SocialGouv/emjpm/issues/1972)) ([8544395](https://github.com/SocialGouv/emjpm/commit/8544395a54f9285cb45f059fdce0ba4640a385ac))
+* **enquete:** prepose [#1973](https://github.com/SocialGouv/emjpm/issues/1973) ([#1976](https://github.com/SocialGouv/emjpm/issues/1976)) ([37a288e](https://github.com/SocialGouv/emjpm/commit/37a288e5ef7bd5eb3344ef1d0895ef67867a6d9b))
+* **enquete:** show error if a tab is skipped # ([#1967](https://github.com/SocialGouv/emjpm/issues/1967)) ([8c991c5](https://github.com/SocialGouv/emjpm/commit/8c991c59db4c888a64f463e9e6b06304f5b024c9))
+
+
+### Features
+
+* **enquete:** population enquete individuel with default values" ([#1971](https://github.com/SocialGouv/emjpm/issues/1971)) ([9b8471d](https://github.com/SocialGouv/emjpm/commit/9b8471d1ce885e0a4ea0d064d1484c3ffc910749))
+* **knex:** create uploaded_on column ([#1965](https://github.com/SocialGouv/emjpm/issues/1965)) ([c418164](https://github.com/SocialGouv/emjpm/commit/c41816488d5614ef58df9c71b859a89244199fc3))
+
+
+
+
+
 # [25.43.0](https://github.com/SocialGouv/emjpm/compare/v25.42.1...v25.43.0) (2020-06-22)
 
 **Note:** Version bump only for package @emjpm/api

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.44.0](https://github.com/SocialGouv/emjpm/compare/v25.43.0...v25.44.0) (2020-06-22)
+
+
+### Bug Fixes
+
+* **test:** update snapshot ([37ce6df](https://github.com/SocialGouv/emjpm/commit/37ce6df22bfe3a5c3f35042bbc5192c903fc5c4f))
+
+
+### Features
+
+* **knex:** create uploaded_on column ([#1965](https://github.com/SocialGouv/emjpm/issues/1965)) ([c418164](https://github.com/SocialGouv/emjpm/commit/c41816488d5614ef58df9c71b859a89244199fc3))
+
+
+
+
+
 # [25.43.0](https://github.com/SocialGouv/emjpm/compare/v25.42.1...v25.43.0) (2020-06-22)
 
 **Note:** Version bump only for package @emjpm/knex
