@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.43.0](https://github.com/SocialGouv/emjpm/compare/v25.42.1...v25.43.0) (2020-06-22)
+
+
+### Features
+
+* **enquete:** fix inline error alignment [#1956](https://github.com/SocialGouv/emjpm/issues/1956) ([#1961](https://github.com/SocialGouv/emjpm/issues/1961)) ([7098da3](https://github.com/SocialGouv/emjpm/commit/7098da323219b339f6c1c8641e20fc9c6d67f1b1))
+
+
+
+
+
 ## [25.42.1](https://github.com/SocialGouv/emjpm/compare/v25.42.0...v25.42.1) (2020-06-22)
 
 
