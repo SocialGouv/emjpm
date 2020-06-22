@@ -4,7 +4,7 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { YesNoComboBox } from "../../Commons";
-import { EnqueteInlineError } from "./EnqueteInlineError";
+import { EnqueteFieldInlineError } from "./EnqueteFieldInlineError";
 
 export const EnqueteFormYesNoField = ({
   id,
@@ -14,6 +14,7 @@ export const EnqueteFormYesNoField = ({
   enqueteForm,
   children,
   disableErrorMessage,
+  hideErrorMessageIfPristine,
 }) => {
   const { readOnly, formik } = enqueteForm;
   const { setFieldValue, values, errors } = formik;
@@ -45,11 +46,12 @@ export const EnqueteFormYesNoField = ({
         <Box>{children}</Box>
       </Flex>
 
-      <EnqueteInlineError
+      <EnqueteFieldInlineError
         id={id}
         error={error}
         enqueteForm={enqueteForm}
         disableErrorMessage={disableErrorMessage}
+        hideErrorMessageIfPristine={hideErrorMessageIfPristine}
       />
     </Field>
   );
