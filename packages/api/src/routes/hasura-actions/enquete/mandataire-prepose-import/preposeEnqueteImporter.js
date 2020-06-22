@@ -23,6 +23,7 @@ async function importEnqueteFile({
   await preposeEnqueteRepository.update(enqueteId, {
     tabs,
     mandataireId: mandataire.id,
+    isUpload: true,
   });
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);

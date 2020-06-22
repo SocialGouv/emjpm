@@ -1,3 +1,4 @@
+const { EnqueteReponses } = require("../../../../models/EnqueteReponses");
 const {
   EnqueteReponsesPopulations,
 } = require("../../../../models/EnqueteReponsesPopulations");
@@ -22,7 +23,7 @@ const {
   createEmptyEnqueteReponse,
 } = require("../mandataire-prepose/requests");
 
-async function update(enqueteId, { tabs, mandataireId }) {
+async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   const {
     populations,
     modaliteExercice,
@@ -36,6 +37,12 @@ async function update(enqueteId, { tabs, mandataireId }) {
     enqueteId,
     mandataireId,
   });
+
+  if (isUpload) {
+    await EnqueteReponses.query()
+      .findById(enqueteReponse.id)
+      .patch({ uploaded_on: new Date() });
+  }
 
   await EnqueteReponsesPopulations.query()
     .findById(enqueteReponse.enquete_reponses_populations_id)
