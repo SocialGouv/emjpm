@@ -11,6 +11,7 @@ import {
   EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle,
 } from "../EnqueteActivite";
+import { menuBuilder } from "../EnqueteCommon";
 import {
   EnquetePopulationsAutreMesures,
   EnquetePopulationsCuratelle,
@@ -38,7 +39,7 @@ import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponse_validation_status;
-  return [
+  const menu = [
     {
       status: "valid",
       steps: [
@@ -230,6 +231,8 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
   ];
+
+  return menuBuilder.fixMenuStatus(menu);
 }
 
 export const enquetePreposeMenuBuilder = {
