@@ -1,6 +1,5 @@
 export const FooterWrapperStyle = {
   bg: "cardPrimary",
-  mt: 7,
   py: 5,
 };
 

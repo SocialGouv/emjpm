@@ -8,9 +8,10 @@ import { FooterFlexStyle, FooterItemStyle, FooterWrapperStyle } from "./style";
 
 const { publicRuntimeConfig } = getConfig();
 
-function Footer() {
+function Footer(props) {
+  const { hasMarginTop = true } = props;
   return (
-    <Box sx={FooterWrapperStyle}>
+    <Box mt={hasMarginTop ? 7 : 0} sx={FooterWrapperStyle}>
       <BoxWrapper>
         <Flex sx={FooterFlexStyle}>
           <Box mb={[3, 0]} flexBasis={["100%", "13%"]}>
