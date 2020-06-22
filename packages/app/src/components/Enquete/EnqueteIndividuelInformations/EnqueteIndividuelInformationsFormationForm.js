@@ -1,10 +1,11 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
-import { Box, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInt } from "../../../util";
 import { EnqueteFormInputField } from "../EnqueteForm";
+import { EnqueteFormFieldErrorMessage } from "../EnqueteForm/EnqueteFormFieldErrorMessage";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -14,15 +15,37 @@ export const validationSchema = yup.object().shape({
   cnc_heures_formation: yup.number().positive().required(),
   niveau_qualification: yup.number().min(1).max(6).integer().required(),
   secretaire_specialise_etp_n1: yup.number().min(0),
-  secretaire_specialise_etp_spe_n2: yup.number().min(0),
-  secretaire_specialise_etp_spe_n3: yup.number().min(0),
-  secretaire_specialise_etp_spe_n4: yup.number().min(0),
-  secretaire_specialise_etp_spe_n5: yup.number().min(0),
-  secretaire_specialise_etp_spe_n6: yup.number().min(0),
+  secretaire_specialise_etp_spe_n2: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_spe_n3: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_spe_n4: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_spe_n5: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_spe_n6: yup.number().min(0).nullable(),
+  informations_generales_secretaire_specialise_etp: yup.number().test(function (value) {
+    if (value !== undefined) {
+      const etp1 = this.parent["secretaire_specialise_etp_n1"] | 0;
+      const etp2 = this.parent["secretaire_specialise_etp_n2"] | 0;
+      const etp3 = this.parent["secretaire_specialise_etp_n3"] | 0;
+      const etp4 = this.parent["secretaire_specialise_etp_n4"] | 0;
+      const etp5 = this.parent["secretaire_specialise_etp_n5"] | 0;
+      const etp6 = this.parent["secretaire_specialise_etp_n6"] | 0;
+
+      const expectedTotal = etp1 + etp2 + etp3 + etp4 + etp5 + etp6;
+
+      if (expectedTotal !== value) {
+        return this.createError({
+          message: `La somme des ETP des secrétaires spécialisés par niveau (${expectedTotal}) ne correspond pas à la valeur "Estimation de l'activité en ETP du secrétariat spécialisé" renseignée dans l'onglet "Informations Générales" (${value})`,
+          path: "informations_generales_secretaire_specialise_etp",
+        });
+      }
+    }
+    return true;
+  }),
 });
 
 function dataToForm(data) {
   return {
+    informations_generales_secretaire_specialise_etp:
+      data.informations_generales_secretaire_specialise_etp,
     cnc_annee_obtention: formatFormInput(data.cnc_annee_obtention),
     cnc_heures_formation: formatFormInput(data.cnc_heures_formation),
     niveau_qualification: formatFormInput(data.niveau_qualification),
@@ -106,47 +129,68 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
           {"Activité des secrétaires spécialisés par niveau en équivalent temps plein (ETP)"}
         </Text>
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n1"
-          label="Secrétaires spécialisés niveau 1 (ETP)"
-          enqueteContext={enqueteContext}
+        <Flex mt={4}>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n1"
+              label="Secrétaires spécialisés niveau 1 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n2"
+              label="Secrétaires spécialisés niveau 2 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n3"
+              label="Secrétaires spécialisés niveau 3 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+        </Flex>
+        <Flex mt={4}>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n4"
+              label="Secrétaires spécialisés niveau 4 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n5"
+              label="Secrétaires spécialisés niveau 5 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+          <Flex alignItems="center" flex={1 / 2}>
+            <EnqueteFormInputField
+              id="secretaire_specialise_etp_n6"
+              label="Secrétaires spécialisés niveau 6 (ETP)"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+              type="number"
+            />
+          </Flex>
+        </Flex>
+
+        <EnqueteFormFieldErrorMessage
           enqueteForm={enqueteForm}
-          type="number"
-        />
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n2"
-          label="Secrétaires spécialisés niveau 2 (ETP)"
-          enqueteContext={enqueteContext}
-          enqueteForm={enqueteForm}
-          type="number"
-        />
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n3"
-          label="Secrétaires spécialisés niveau 3 (ETP)"
-          enqueteContext={enqueteContext}
-          enqueteForm={enqueteForm}
-          type="number"
-        />
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n4"
-          label="Secrétaires spécialisés niveau 4 (ETP)"
-          enqueteContext={enqueteContext}
-          enqueteForm={enqueteForm}
-          type="number"
-        />
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n5"
-          label="Secrétaires spécialisés niveau 5 (ETP)"
-          enqueteContext={enqueteContext}
-          enqueteForm={enqueteForm}
-          type="number"
-        />
-        <EnqueteFormInputField
-          id="secretaire_specialise_etp_n6"
-          label="Secrétaires spécialisés niveau 6 (ETP)"
-          enqueteContext={enqueteContext}
-          enqueteForm={enqueteForm}
-          type="number"
+          id="informations_generales_secretaire_specialise_etp"
         />
         <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>
