@@ -1,9 +1,9 @@
-import { InlineError } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React, { Fragment, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
+import { EnqueteInlineError } from "../EnqueteForm/EnqueteInlineError";
 import styles from "./style";
 
 export function calculateTotal(firstProperty, secondProperty) {
@@ -11,26 +11,16 @@ export function calculateTotal(firstProperty, secondProperty) {
 }
 
 export const EnquetePopulationTrancheAgeField = (props) => {
-  const {
-    values,
-    errors,
-    menFieldId,
-    womenFieldId,
-    label,
-    showError,
-    enqueteContext,
-    enqueteForm,
-  } = props;
-  const men = { value: values[menFieldId], error: errors[menFieldId], field: menFieldId };
-  const women = { value: values[womenFieldId], error: errors[womenFieldId], field: womenFieldId };
-  const total = useMemo(() => calculateTotal(men.value, women.value), [men.value, women.value]);
+  const { values, errors, menFieldId, womenFieldId, label, enqueteContext, enqueteForm } = props;
+  const total = useMemo(() => calculateTotal(values[menFieldId], values[womenFieldId]), [
+    values[menFieldId],
+    values[womenFieldId],
+  ]);
   return (
     <Fragment>
       <Box>
-        <InlineError showError={showError} message={men.error} fieldId={men.field} />
-        {!men.error && (
-          <InlineError showError={showError} message={women.error} fieldId={women.field} />
-        )}
+        <EnqueteInlineError enqueteForm={enqueteForm} id={menFieldId} />
+        {!errors[menFieldId] && <EnqueteInlineError enqueteForm={enqueteForm} id={womenFieldId} />}
       </Box>
       <Flex alignItems="center">
         <Label mb={2} width="210px">
@@ -43,8 +33,7 @@ export const EnquetePopulationTrancheAgeField = (props) => {
           size="small"
           type="number"
           min={0}
-          value={women.value}
-          error={women.error}
+          disableErrorMessage={true} // message displayed above
         >
           <Text mx={2}>femmes et</Text>
         </EnqueteFormInputField>
@@ -55,8 +44,7 @@ export const EnquetePopulationTrancheAgeField = (props) => {
           size="small"
           type="number"
           min={0}
-          value={men.value}
-          error={men.error}
+          disableErrorMessage={true} // message displayed above
         >
           <Text ml={2}>
             hommes, soit <Box sx={styles.strongLabel}>{total}</Box> personnes
