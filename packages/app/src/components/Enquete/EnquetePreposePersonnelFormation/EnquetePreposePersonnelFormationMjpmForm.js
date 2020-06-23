@@ -1,6 +1,6 @@
 import { Heading1, Heading3, Heading5 } from "@emjpm/ui";
 import React, { Fragment } from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -32,60 +32,74 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
   const { submitForm, values, errors, submit } = enqueteForm;
 
   return (
-    <Box>
-      <form onSubmit={submitForm}>
-        <Heading1 textAlign="center" mb={"50px"}>
-          {"Personnel et formation en 2019"}
-        </Heading1>
-        <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
+    <Box
+      sx={{
+        strong: {
+          color: "primary",
+        },
+      }}
+      as="form"
+      onSubmit={submitForm}
+    >
+      <Box textAlign="center" mb={"50px"}>
+        <Heading1 mb={1}>{"Personnel et formation en 2019"}</Heading1>
+        <Text
+          sx={{
+            color: "titleSecondary",
+            fontWeight: "bold",
+          }}
+        >
+          Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
+        </Text>
+      </Box>
+      <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
 
-        <Box mt={1}>
-          <Heading5 mt={1} mb="2">
-            Nombre de préposés MJPM au 31/12
-          </Heading5>
-          <Flex alignItems="start">
-            <Box mr={1} flex={1 / 2}>
-              <EnqueteFormInputField
-                id="nb_preposes_mjpm"
-                label="Nombre de préposés"
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              />
-            </Box>
-            <Box ml={1} flex={1 / 2}>
-              <EnqueteFormInputField
-                id="nb_preposes_mjpm_etp"
-                label="Nombre de préposés en ETP"
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              />
-            </Box>
-          </Flex>
+      <Box mt={1}>
+        <Heading5 mt={1} mb="2">
+          Nombre de préposés MJPM
+        </Heading5>
+        <Flex alignItems="start">
+          <Box mr={1} flex={1 / 2}>
+            <EnqueteFormInputField
+              id="nb_preposes_mjpm"
+              label="Nombre de préposés"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
+          </Box>
+          <Box ml={1} flex={1 / 2}>
+            <EnqueteFormInputField
+              id="nb_preposes_mjpm_etp"
+              label="Nombre de préposés en ETP"
+              enqueteContext={enqueteContext}
+              enqueteForm={enqueteForm}
+            />
+          </Box>
+        </Flex>
+      </Box>
+      <Box mt={1}>
+        <Heading3>{"La formation des préposés MJPM"}</Heading3>
+        <Box>
+          {renderFormationPreposeBox({
+            prefix: "en_poste_cnc",
+            label: "Nombre de préposés en poste ayant le CNC",
+          })}
         </Box>
-        <Box mt={1}>
-          <Heading3>{"La formation des préposés MJPM"}</Heading3>
-          <Box>
-            {renderFormationPreposeBox({
-              prefix: "en_poste_cnc",
-              label: "Nombre de préposés en poste au 31/12 ayant le CNC",
-            })}
-          </Box>
-          <Box>
-            {renderFormationPreposeBox({
-              prefix: "formation_non_cnc",
-              label: "Nombre de préposés en poste au 31/12 et en formation",
-            })}
-          </Box>
-          <Box>
-            {renderFormationPreposeBox({
-              prefix: "non_formation_non_cnc",
-              label: "Nombre de préposés en poste au 31/12 ni formés, ni en formation",
-            })}
-          </Box>
+        <Box>
+          {renderFormationPreposeBox({
+            prefix: "formation_non_cnc",
+            label: "Nombre de préposés en poste et en formation",
+          })}
         </Box>
+        <Box>
+          {renderFormationPreposeBox({
+            prefix: "non_formation_non_cnc",
+            label: "Nombre de préposés en poste ni formés, ni en formation",
+          })}
+        </Box>
+      </Box>
 
-        <EnqueteStepperButtons submit={submit} disabled={loading} />
-      </form>
+      <EnqueteStepperButtons submit={submit} disabled={loading} />
     </Box>
   );
 
