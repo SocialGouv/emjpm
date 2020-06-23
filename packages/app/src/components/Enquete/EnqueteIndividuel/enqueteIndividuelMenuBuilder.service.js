@@ -11,7 +11,6 @@ import {
   EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle,
 } from "../EnqueteActivite";
-import { menuBuilder } from "../EnqueteCommon";
 import {
   EnqueteIndividuelInformationsAgrement,
   EnqueteIndividuelInformationsFormation,
@@ -182,5 +181,5 @@ function buildMenuSections(enqueteReponse) {
     },
   ];
 
-  return menuBuilder.fixMenuStatus(menu);
+  return menu;
 }

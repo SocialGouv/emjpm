@@ -83,7 +83,10 @@ export function useEnqueteForm({
 
   const showError = useMemo(() => {
     return (
-      dirty || (!loading && !readOnly && (step.status !== "empty" || enqueteContext.form.submited))
+      dirty ||
+      (!loading &&
+        !readOnly &&
+        (step.status.indexOf("empty") !== 0 || enqueteContext.form.submited))
     );
   }, [dirty, step.status, readOnly, enqueteContext.form.submited, loading]);
 

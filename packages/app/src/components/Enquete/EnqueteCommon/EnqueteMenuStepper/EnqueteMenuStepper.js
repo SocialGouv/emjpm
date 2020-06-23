@@ -1,11 +1,16 @@
-import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import {
+  EnqueteStatusHalfStarIcon,
+  EnqueteStatusInvalidIcon,
+  EnqueteStatusStarIcon,
+  EnqueteStatusValidIcon,
+} from "../EnqueteIcons";
 import styles from "./style";
 
-export const MenuStepper = (props) => {
-  const { sections, currentStep, onClickLink } = props;
+export const EnqueteMenuStepper = (props) => {
+  const { readOnly, sections, currentStep, onClickLink } = props;
 
   return (
     <Fragment>
@@ -14,7 +19,6 @@ export const MenuStepper = (props) => {
           const hasSubSections = menuSection.steps && menuSection.steps.length > 1;
           const isActiveSesion = currentStep.step === index;
 
-          const hasSectionError = menuSection.status === "invalid";
           return (
             <Box key={`step-${index}`} mb={4}>
               {renderSectionTitle({
@@ -22,7 +26,7 @@ export const MenuStepper = (props) => {
                 index,
                 isActiveSesion,
                 onClickLink,
-                hasSectionError,
+                readOnly,
               })}
 
               {hasSubSections && isActiveSesion && (
@@ -43,6 +47,7 @@ export const MenuStepper = (props) => {
                       subsectionIndex,
                       isActiveSubSection,
                       step,
+                      readOnly,
                       onClickLink,
                     });
                   })}
@@ -55,7 +60,7 @@ export const MenuStepper = (props) => {
     </Fragment>
   );
 };
-function renderSectionTitle({ menuSection, index, isActiveSesion, onClickLink, hasSectionError }) {
+function renderSectionTitle({ menuSection, index, isActiveSesion, readOnly, onClickLink }) {
   return (
     <Fragment>
       <Flex
@@ -85,12 +90,21 @@ function renderSectionTitle({ menuSection, index, isActiveSesion, onClickLink, h
         </Text>
 
         <Box display="flex" flexGrow={1} />
-        {hasSectionError && !isActiveSesion && renderErrorBox()}
+        {(!isActiveSesion || menuSection.steps.length === 1) &&
+          !readOnly &&
+          renderIcon(menuSection.status)}
       </Flex>
     </Fragment>
   );
 }
-function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, onClickLink }) {
+function renderSubSection({
+  index,
+  subsectionIndex,
+  isActiveSubSection,
+  step,
+  readOnly,
+  onClickLink,
+}) {
   return (
     <Flex
       alignItems="center"
@@ -114,22 +128,19 @@ function renderSubSection({ index, subsectionIndex, isActiveSubSection, step, on
 
       <Box display="flex" flexGrow={1} />
 
-      {step.status === "invalid" && renderErrorBox()}
+      {!readOnly && renderIcon(step.status)}
     </Flex>
   );
 }
 
-function renderErrorBox() {
-  return (
-    <Box
-      sx={{
-        color: "#1D2649",
-        width: "24px",
-      }}
-    >
-      <SquaredCross />
-    </Box>
-  );
+function renderIcon(status) {
+  return status === "valid" ? (
+    <EnqueteStatusValidIcon />
+  ) : status === "invalid" ? (
+    <EnqueteStatusInvalidIcon />
+  ) : status === "empty" ? (
+    <EnqueteStatusStarIcon />
+  ) : status === "empty-half" ? (
+    <EnqueteStatusHalfStarIcon />
+  ) : null;
 }
-
-export default MenuStepper;

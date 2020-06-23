@@ -78,11 +78,19 @@ function isEmptyData(data, schema, debugName) {
 
 function getGlobalStatus(status) {
   const statusArray = Object.values(status);
-  return statusArray.some((x) => x === "invalid")
-    ? "invalid"
-    : statusArray.some((x) => x === "empty")
-    ? "empty"
-    : "valid";
+  if (statusArray.some((x) => x === "invalid")) {
+    return "invalid";
+  }
+  if (statusArray.some((x) => x === "empty-half")) {
+    return "empty-half";
+  }
+  if (statusArray.some((x) => x === "empty")) {
+    if (statusArray.some((x) => x === "valid")) {
+      return "empty-half";
+    }
+    return "empty";
+  }
+  return "valid";
 }
 
 function getTopLevelGlobalStatus(status) {
