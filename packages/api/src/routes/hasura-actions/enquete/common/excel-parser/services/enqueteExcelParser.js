@@ -33,7 +33,9 @@ function integer(cell, options) {
 function float(cell, options) {
   const value = raw(cell);
   if (isDefined(value)) {
-    const parsed = parseFloat(value);
+    const parsed = parseFloat(
+      value.replace ? value.replace(/ /g, "").replace(",", ".") : value
+    );
     const result = !isNaN(parsed) ? parsed : undefined;
     return _validateMinMax(result, options);
   }
