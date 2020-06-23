@@ -5,6 +5,7 @@ const {
 } = require("./requests");
 const enqueteServiceStatus = require("./enqueteServiceStatus");
 const logger = require("../../../../utils/logger");
+const HttpError = require("../../../../utils/error/HttpError");
 
 async function initEnqueteService(context) {
   const { enqueteId, service } = context;
@@ -48,8 +49,14 @@ async function initEnqueteService(context) {
 }
 
 async function submitEnqueteService(id) {
-  // TODO(remiroyc): check if all form sections are valids
+  if (enqueteReponse.status !== "draft") {
+    throw new HttpError(423, "Enquete response has already been submitted.");
+  }
+  const status = await enqueteServiceStatus(enqueteReponse);
 
+  if (status.global === "invalid") {
+    throw new HttpError(400, "Enquete response is invalid");
+  }
   const enqueteReponse = await submitEnqueteReponse(id);
   return enqueteReponse;
 }

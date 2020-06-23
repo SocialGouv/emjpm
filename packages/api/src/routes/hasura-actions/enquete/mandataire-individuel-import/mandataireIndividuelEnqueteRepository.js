@@ -18,6 +18,7 @@ const {
   getEnqueteReponse,
   createEmptyEnqueteReponse,
 } = require("../mandataire-individuel/requests");
+const HttpError = require("../../../../utils/error/HttpError");
 
 async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   const {
@@ -32,6 +33,10 @@ async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
     enqueteId,
     mandataireId,
   });
+
+  if (isUpload && enqueteReponse.status !== "draft") {
+    throw new HttpError(423, "Enquete response has already been submitted.");
+  }
 
   if (isUpload) {
     await EnqueteReponses.query()
