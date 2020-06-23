@@ -3,6 +3,7 @@ const {
   getGlobalStatus,
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
+const { ENQ_REP_MODALITE_EXERCICE } = require("../../constants");
 
 const debugGroupName = "modalitesExercice";
 
@@ -16,11 +17,15 @@ module.exports = async (enqueteReponse) => {
         region: yup.string().required(),
         raison_sociale: yup.string().required(),
         personnalite_juridique_etablissement: yup.string().required(),
-        activite_personne_physique: yup.number().min(0).required(),
-        activite_service: yup.number().min(0).required(),
+        activite_exercee_par: yup
+          .mixed()
+          .oneOf(ENQ_REP_MODALITE_EXERCICE.ACTIVE_EXERCEE_PAR.keys)
+          .required(),
+        etablissements_type: yup
+          .mixed()
+          .oneOf(ENQ_REP_MODALITE_EXERCICE.ETABLISSEMENTS_TYPE.keys)
+          .required(),
         total_mesures_etablissements: yup.number().min(0).required(),
-        etablissement_personne_morale: yup.number().min(0).required(),
-        etablissement_convention_groupement: yup.number().min(0).required(),
       }),
       debugName: `${debugGroupName}/informationsGenerales`,
       logDataWithErrors: false,
