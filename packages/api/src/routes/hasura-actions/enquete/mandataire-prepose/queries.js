@@ -218,15 +218,12 @@ module.exports = {
       enquete_reponses_modalites_exercice_id
       enquete_reponses_modalites_exercice {
         actions_information_tuteurs_familiaux
-        activite_personne_physique
-        activite_service
         created_at
         departement
-        etablissement_convention_groupement
-        etablissement_personne_morale
         id
         last_update
-        nombre_etablissements
+        activite_exercee_par
+        etablissements_type
         nombre_lits_journee_hospitalisation
         personnalite_juridique_etablissement
         raison_sociale

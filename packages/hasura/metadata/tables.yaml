@@ -1381,11 +1381,8 @@
       - region
       - raison_sociale
       - personnalite_juridique_etablissement
-      - activite_personne_physique
-      - activite_service
-      - etablissement_personne_morale
-      - etablissement_convention_groupement
-      - nombre_etablissements
+      - activite_exercee_par
+      - etablissements_type
       - total_mesures_etablissements
       - nombre_lits_journee_hospitalisation
       - actions_information_tuteurs_familiaux
@@ -1399,12 +1396,9 @@
     permission:
       columns:
       - actions_information_tuteurs_familiaux
-      - activite_personne_physique
-      - activite_service
-      - etablissement_convention_groupement
-      - etablissement_personne_morale
       - id
-      - nombre_etablissements
+      - activite_exercee_par
+      - etablissements_type
       - total_mesures_etablissements
       - nombre_lits_journee_hospitalisation
       - created_at
