@@ -41,7 +41,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
 
         <Box mt={1}>
           <Heading5 mt={1} mb="2">
-            Nombre de préposés MJPM au 31/12/2019
+            Nombre de préposés MJPM au 31/12
           </Heading5>
           <Flex alignItems="start">
             <Box mr={1} flex={1 / 2}>
