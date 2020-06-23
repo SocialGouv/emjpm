@@ -8,7 +8,7 @@ type Query {
 
 type Mutation {
   submit_enquete_reponse (
-    id: Int!
+    enqueteId: Int!
   ): EnqueteReponseSubmitted
 }
 
