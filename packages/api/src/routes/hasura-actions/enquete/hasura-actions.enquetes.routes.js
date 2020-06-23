@@ -21,43 +21,24 @@ const {
 const router = express.Router();
 
 router.post(
-  "/mandataire-prepose/submit",
+  "/submit",
   async (req, res, next) => {
-    const { id } = req.body.input;
-    if (!id) {
-      return res.status(422).json({
-        message: "Invalid parameters: id is required",
-      });
-    }
     try {
-      const { id } = req.body.input;
-      const enqueteReponse = await submitEnqueteMandatairePrepose(id);
+      const enqueteContext = await checkEnqueteContext(req);
 
-      return res.json({
-        enquete_id: enqueteReponse.enquete_id,
-        enquete_reponses_id: enqueteReponse.id,
-        submitted_at: enqueteReponse.submitted_at,
-      });
-    } catch (err) {
-      logger.error(err);
-      next(err);
-    }
-  },
-  hasuraActionErrorHandler("Unexpected error submitting enquete")
-);
-
-router.post(
-  "/mandataire-individuel/submit",
-  async (req, res, next) => {
-    const { id } = req.body.input;
-    if (!id) {
-      return res.status(422).json({
-        message: "Invalid parameters: id is required",
-      });
-    }
-    try {
-      const { id } = req.body.input;
-      const enqueteReponse = await submitEnqueteMandataireIndividuel(id);
+      let enqueteReponse;
+      if (enqueteContext.role === "individuel") {
+        enqueteReponse = await submitEnqueteMandataireIndividuel({
+          enqueteContext,
+        });
+      } else if (enqueteContext.role === "prepose") {
+        enqueteReponse = enqueteReponse = await submitEnqueteMandatairePrepose({
+          enqueteContext,
+        });
+      } else {
+        logger.error("Unexpected role", enqueteContext.role);
+        return next(new HttpError(500, "Unexpected role"));
+      }
 
       return res.json({
         enquete_id: enqueteReponse.enquete_id,
@@ -87,7 +68,7 @@ router.post(
         result = await initEnqueteService(enqueteContext);
       } else {
         logger.error("Unexpected role", enqueteContext.role);
-        return next(new HttpError(500, "Undexpected role"));
+        return next(new HttpError(500, "Unexpected role"));
       }
       return res.json(result);
     } catch (err) {
@@ -119,7 +100,7 @@ router.post(
         });
       } else {
         logger.error("Unexpected role", enqueteContext.role);
-        return next(new HttpError(500, "Undexpected role"));
+        return next(new HttpError(500, "Unexpected role"));
       }
 
       return res.status(201).json({

@@ -5,12 +5,25 @@ const {
 } = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
 const logger = require("../../../../utils/logger");
+const HttpError = require("../../../../utils/error/HttpError");
 
-async function submitEnqueteMandataireIndividuel(id) {
-  // TODO(remiroyc): check if all form sections are valids
+async function submitEnqueteMandataireIndividuel({
+  enqueteContext: { enqueteId, mandataire },
+}) {
+  const enqueteReponse = await getEnqueteReponse({
+    enqueteId,
+    mandataireId: mandataire.id,
+  });
+  if (enqueteReponse.status !== "draft") {
+    throw new HttpError(423, "Enquete response has already been submitted.");
+  }
+  const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
 
-  const enqueteReponse = await submitEnqueteReponse(id);
-  return enqueteReponse;
+  if (status.global === "invalid") {
+    throw new HttpError(400, "Enquete response is invalid");
+  }
+
+  return await submitEnqueteReponse(enqueteReponse.id);
 }
 
 async function initEnqueteMandataireIndividuel({
