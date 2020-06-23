@@ -47,11 +47,18 @@ function parse(ws) {
     personnalite_juridique_etablissement: parser.select(ws["E8"], {
       map: ENQ_REP_MODALITE_EXERCICE.PERSONNALITE_JURIDIQUE.byValue,
     }),
-    activite_personne_physique: parser.integer(ws["C13"]),
-    activite_service: parser.integer(ws["C15"]),
-    etablissement_personne_morale: parser.integer(ws["E18"]),
-    etablissement_convention_groupement: parser.integer(ws["E20"]),
-    nombre_etablissements: parser.integer(ws["B22"]),
+    activite_exercee_par:
+      parser.integer(ws["C13"]) === 1
+        ? "personne-physique"
+        : parser.integer(ws["C15"]) === 1
+        ? "service"
+        : undefined,
+    etablissements_type:
+      parser.integer(ws["E18"]) === 1
+        ? "personne-morale"
+        : parser.integer(ws["E20"]) === 1
+        ? "convention-groupement"
+        : undefined,
     total_mesures_etablissements: parser.integer(ws["E22"]),
     nombre_lits_journee_hospitalisation: JSON.stringify(
       nombre_lits_journee_hospitalisation

@@ -22,12 +22,9 @@ export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS = gql`
 export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS = gql`
   mutation update_enquete_prepose_modalite_exercice(
     $id: Int!
-    $activite_personne_physique: Int
-    $activite_service: Int
     $departement: String
-    $etablissement_convention_groupement: Int
-    $etablissement_personne_morale: Int
-    $nombre_etablissements: Int
+    $activite_exercee_par: String
+    $etablissements_type: String
     $personnalite_juridique_etablissement: String
     $raison_sociale: String
     $region: String
@@ -36,12 +33,9 @@ export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS = gql`
     update_enquete_reponses_modalites_exercice_by_pk(
       pk_columns: { id: $id }
       _set: {
-        activite_personne_physique: $activite_personne_physique
-        activite_service: $activite_service
         departement: $departement
-        etablissement_convention_groupement: $etablissement_convention_groupement
-        etablissement_personne_morale: $etablissement_personne_morale
-        nombre_etablissements: $nombre_etablissements
+        activite_exercee_par: $activite_exercee_par
+        etablissements_type: $etablissements_type
         personnalite_juridique_etablissement: $personnalite_juridique_etablissement
         raison_sociale: $raison_sociale
         region: $region
@@ -49,15 +43,12 @@ export const UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS = gql`
       }
     ) {
       actions_information_tuteurs_familiaux
-      activite_personne_physique
-      activite_service
       created_at
       departement
-      etablissement_convention_groupement
-      etablissement_personne_morale
+      activite_exercee_par
+      etablissements_type
       id
       last_update
-      nombre_etablissements
       nombre_lits_journee_hospitalisation
       personnalite_juridique_etablissement
       raison_sociale

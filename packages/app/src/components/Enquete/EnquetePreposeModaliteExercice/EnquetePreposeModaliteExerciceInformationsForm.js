@@ -1,11 +1,10 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
-import { PERSONNALITE_JURIDIQUE } from "../constants";
+import { ENQ_REP_MODALITE_EXERCICE, PERSONNALITE_JURIDIQUE } from "../constants";
 import {
   EnqueteFormFieldLabel,
   EnqueteFormInputField,
@@ -19,11 +18,15 @@ const validationSchema = yup.object().shape({
   region: yup.string().required(),
   raison_sociale: yup.string().required(),
   personnalite_juridique_etablissement: yup.string().required(),
-  activite_personne_physique: yup.number().min(0).required(),
-  activite_service: yup.number().min(0).required(),
+  activite_exercee_par: yup
+    .mixed()
+    .oneOf(ENQ_REP_MODALITE_EXERCICE.ACTIVE_EXERCEE_PAR.keys)
+    .required(),
+  etablissements_type: yup
+    .mixed()
+    .oneOf(ENQ_REP_MODALITE_EXERCICE.ETABLISSEMENTS_TYPE.keys)
+    .required(),
   total_mesures_etablissements: yup.number().min(0).required(),
-  etablissement_personne_morale: yup.number().min(0).required(),
-  etablissement_convention_groupement: yup.number().min(0).required(),
 });
 
 function dataToForm(data) {
@@ -34,11 +37,9 @@ function dataToForm(data) {
     personnalite_juridique_etablissement: formatFormInput(
       data.personnalite_juridique_etablissement
     ),
-    activite_personne_physique: formatFormInput(data.activite_personne_physique),
-    activite_service: formatFormInput(data.activite_service),
+    activite_exercee_par: formatFormInput(data.activite_exercee_par),
+    etablissements_type: formatFormInput(data.etablissements_type),
     total_mesures_etablissements: formatFormInput(data.total_mesures_etablissements),
-    etablissement_personne_morale: formatFormInput(data.etablissement_personne_morale),
-    etablissement_convention_groupement: formatFormInput(data.etablissement_convention_groupement),
   };
 }
 function formToData(values) {
@@ -49,20 +50,10 @@ function formToData(values) {
     personnalite_juridique_etablissement: parseFormInput(
       values.personnalite_juridique_etablissement
     ),
-    activite_personne_physique: parseFormFloat(values.activite_personne_physique),
-    activite_service: parseFormFloat(values.activite_service),
+    activite_exercee_par: values.activite_exercee_par,
+    etablissements_type: values.etablissements_type,
     total_mesures_etablissements: parseFormFloat(values.total_mesures_etablissements),
-    etablissement_personne_morale: parseFormFloat(values.etablissement_personne_morale),
-    etablissement_convention_groupement: parseFormFloat(
-      parseFormInput(values.etablissement_convention_groupement)
-    ),
   };
-}
-
-function getEtablissementsCount(values) {
-  const etablissementPersonneMorale = parseInt(values.etablissement_personne_morale || "0", 10);
-  const etablissement = parseInt(values.etablissement_convention_groupement || "0", 10);
-  return etablissementPersonneMorale + etablissement;
 }
 
 export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
@@ -87,7 +78,7 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
     loading,
   });
 
-  const { submitForm, values, submit } = enqueteForm;
+  const { submitForm, submit } = enqueteForm;
 
   return (
     <form onSubmit={submitForm}>
@@ -130,91 +121,21 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
           enqueteForm={enqueteForm}
         />
 
-        <Box>
-          <Label>{"L'activité de préposé est exercée par :"}</Label>
-          <Flex mt={2} alignItems="start">
-            <Flex flex={1 / 2} alignItems="center">
-              <EnqueteFormInputField
-                id="activite_personne_physique"
-                size="small"
-                type="number"
-                min={0}
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              >
-                <Box ml={3}>
-                  <EnqueteFormFieldLabel
-                    text="personne(s) physique(s)"
-                    id="activite_personne_physique"
-                    enqueteForm={enqueteForm}
-                  />
-                </Box>
-              </EnqueteFormInputField>
-            </Flex>
-            <Flex flex={1 / 2} alignItems="center">
-              <EnqueteFormInputField
-                id="activite_service"
-                size="small"
-                type="number"
-                min={0}
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              >
-                <Box ml={3}>
-                  <EnqueteFormFieldLabel
-                    text="service(s) au sens de l'article L312-1 du CASF"
-                    id="activite_service"
-                    enqueteForm={enqueteForm}
-                  />
-                </Box>
-              </EnqueteFormInputField>
-            </Flex>
-          </Flex>
-        </Box>
+        <EnqueteFormSelectField
+          id="activite_exercee_par"
+          label="L'activité de préposé est exercée par"
+          options={ENQ_REP_MODALITE_EXERCICE.ACTIVE_EXERCEE_PAR.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
-        <Box>
-          <Label>
-            {"Nombre d'établissements auprès desquels est exercée l'activité de préposé MJPM :"}
-          </Label>
-          <Flex mt={2} alignItems="start">
-            <Flex flex={1 / 2} alignItems="center">
-              <EnqueteFormInputField
-                id="etablissement_personne_morale"
-                size="small"
-                type="number"
-                min={0}
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              >
-                <Box ml={3}>
-                  <EnqueteFormFieldLabel
-                    text="établissement(s) dépendant de la même personne morale"
-                    id="etablissement_personne_morale"
-                    enqueteForm={enqueteForm}
-                  />
-                </Box>
-              </EnqueteFormInputField>
-            </Flex>
-            <Flex flex={1 / 2} alignItems="center">
-              <EnqueteFormInputField
-                id="etablissement_convention_groupement"
-                size="small"
-                type="number"
-                min={0}
-                enqueteContext={enqueteContext}
-                enqueteForm={enqueteForm}
-              >
-                <Box ml={3}>
-                  <EnqueteFormFieldLabel
-                    text="établissement(s) dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP)."
-                    id="etablissement_convention_groupement"
-                    enqueteForm={enqueteForm}
-                  />
-                </Box>
-              </EnqueteFormInputField>
-            </Flex>
-          </Flex>
-        </Box>
+        <EnqueteFormSelectField
+          id="etablissements_type"
+          label="Situation des d'établissements auprès desquels est exercée l'activité de préposé MJPM"
+          options={ENQ_REP_MODALITE_EXERCICE.ETABLISSEMENTS_TYPE.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         <Box mt={2}>
           <EnqueteFormInputField
@@ -226,10 +147,11 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
             enqueteForm={enqueteForm}
           >
             <Box ml={3}>
-              <EnqueteFormFieldLabel id="total_mesures_etablissements" enqueteForm={enqueteForm}>
-                mesure(s) prises en charge par ces{" "}
-                <strong>{getEtablissementsCount(values) || ""}</strong> établissements
-              </EnqueteFormFieldLabel>
+              <EnqueteFormFieldLabel
+                id="total_mesures_etablissements"
+                enqueteForm={enqueteForm}
+                label="mesure(s) prises en charge par ces établissements"
+              />
             </Box>
           </EnqueteFormInputField>
         </Box>
