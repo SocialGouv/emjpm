@@ -11,8 +11,8 @@ function mapFormation_preposes_mjpm(data) {
     en_poste_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
       !data ? null : data.en_poste_cnc
     ),
-    embauches_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      !data ? null : data.embauches_cnc
+    non_formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
+      !data ? null : data.non_formation_non_cnc
     ),
     formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
       !data ? null : data.formation_non_cnc
