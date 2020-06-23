@@ -42,7 +42,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
 
         <Box mt={1}>
           <Heading5 mt={1} mb="2">
-            Répartition par niveau de formation
+            Répartition des préposés en fonction de leur niveau de formation
           </Heading5>
           <Box>
             {renderNiveauxQualificationBox({
@@ -112,7 +112,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
             <Box mr={1} flex={1 / 2}>
               <EnqueteFormInputField
                 id="nb_autre_personnel"
-                label="Nombre d'autres personnels"
+                label="Nombre d'autres personnels au 31/12"
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               />
@@ -120,7 +120,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
             <Box ml={1} flex={1 / 2}>
               <EnqueteFormInputField
                 id="nb_autre_personnel_etp"
-                label="Nombre d'autres personnels en ETP"
+                label="Nombre d'autres personnels en ETP au 31/12"
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               />
@@ -149,7 +149,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
                   ? errors.formation_preposes_mjpm[niveau].nb_preposes
                   : ""
               }
-              label="Nombre de préposés"
+              label="Nombre de préposés au 31/12"
               enqueteContext={enqueteContext}
               enqueteForm={enqueteForm}
             />
@@ -163,7 +163,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
                   ? errors.formation_preposes_mjpm[niveau].nb_preposes_etp
                   : ""
               }
-              label="Nombre de préposés en ETP"
+              label="Nombre de préposés en ETP au 31/12"
               enqueteContext={enqueteContext}
               enqueteForm={enqueteForm}
             />

@@ -6,7 +6,7 @@ export const enquetePreposePersonnelFormationMjpmFormSchema = yup.object().shape
   nb_preposes_mjpm_etp: yup.number().integer().min(0).required(),
   formation_preposes_mjpm: yup.object({
     en_poste_cnc: validate_nb_preposes_heures_formation(),
-    embauches_cnc: validate_nb_preposes_heures_formation(),
+    non_formation_non_cnc: validate_nb_preposes_heures_formation(),
     formation_non_cnc: validate_nb_preposes_heures_formation(),
   }),
 });
