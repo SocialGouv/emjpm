@@ -13,6 +13,7 @@ export const EnqueteFormSelectField = ({
   label,
   text,
   options,
+  required,
   enqueteForm,
   disableErrorMessage,
   hideErrorMessageIfPristine,
@@ -46,7 +47,13 @@ export const EnqueteFormSelectField = ({
 
   return (
     <Field>
-      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
+      <EnqueteFormFieldLabel
+        id={id}
+        label={label}
+        text={text}
+        required={required}
+        enqueteForm={enqueteForm}
+      />
 
       {readOnly ? (
         <Input

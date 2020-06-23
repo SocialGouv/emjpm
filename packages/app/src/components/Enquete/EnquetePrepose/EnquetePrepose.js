@@ -4,7 +4,7 @@ import React, { useMemo } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
-import { MenuStepper } from "../../MenuStepper";
+import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
 import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
@@ -62,7 +62,8 @@ export const EnquetePrepose = (props) => {
   return (
     <Flex>
       <Box>
-        <MenuStepper
+        <EnqueteMenuStepper
+          readOnly={enqueteReponse.status !== "draft"}
           sections={sections}
           currentStep={currentStep}
           onClickLink={(x) => saveAndNavigate(x)}
