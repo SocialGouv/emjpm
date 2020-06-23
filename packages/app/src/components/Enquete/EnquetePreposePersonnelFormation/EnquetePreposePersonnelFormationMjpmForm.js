@@ -63,23 +63,23 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
           </Flex>
         </Box>
         <Box mt={1}>
-          <Heading3>{"Formation des préposés MJPM au CNC"}</Heading3>
+          <Heading3>{"La formation des préposés MJPM"}</Heading3>
           <Box>
             {renderFormationPreposeBox({
               prefix: "en_poste_cnc",
-              label: "Préposés CNC en poste au 01/01/2020",
-            })}
-          </Box>
-          <Box>
-            {renderFormationPreposeBox({
-              prefix: "embauches_cnc",
-              label: "Préposés CNC embauchés depuis le 01/01/2020",
+              label: "Nombre de préposés en poste au 31/12 ayant le CNC",
             })}
           </Box>
           <Box>
             {renderFormationPreposeBox({
               prefix: "formation_non_cnc",
-              label: "Préposés en cours de formation",
+              label: "Nombre de préposés en poste au 31/12 et en formation",
+            })}
+          </Box>
+          <Box>
+            {renderFormationPreposeBox({
+              prefix: "non_formation_non_cnc",
+              label: "Nombre de préposés en poste au 31/12 ni formés, ni en formation",
             })}
           </Box>
         </Box>
@@ -89,7 +89,7 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
     </Box>
   );
 
-  // prefix: 'en_poste_cnc' || 'embauches_cnc' || 'formation_non_cnc'
+  // prefix: 'en_poste_cnc' || 'non_formation_non_cnc' || 'formation_non_cnc'
   function renderFormationPreposeBox({ prefix, label }) {
     return (
       <Fragment>
