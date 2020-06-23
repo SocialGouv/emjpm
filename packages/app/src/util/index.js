@@ -10,16 +10,16 @@ export const formatTribunauxOptions = (tribunaux) => {
   });
 };
 
-export function parseFormFloat(value) {
-  return value !== "" && !isNaN(parseFloat(value)) ? parseFloat(value) : null;
+export function parseFormFloat(value, defaultValue = null) {
+  return value !== "" && !isNaN(parseFloat(value)) ? parseFloat(value) : defaultValue;
 }
 
-export function parseFormInt(value) {
-  return value !== "" && !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : null;
+export function parseFormInt(value, defaultValue = null) {
+  return value !== "" && !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : defaultValue;
 }
 
-export function parseFormInput(value) {
-  return value !== "" ? value : null;
+export function parseFormInput(value, defaultValue = null) {
+  return value !== "" ? value : defaultValue;
 }
 
 export function formatFormInput(value) {
