@@ -104,7 +104,7 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
   const { submitForm, submit } = enqueteForm;
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
+      <Heading1 textAlign="center" mb={"50px"}>
         {"Vos informations"}
       </Heading1>
       <Heading3>Formation</Heading3>

@@ -80,8 +80,8 @@ export const EnquetePreposeFinancementForm = (props) => {
 
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
-        {"Financement"}
+      <Heading1 textAlign="center" mb={"50px"}>
+        {"Financement en 2019"}
       </Heading1>
       <Heading3 mb={2}>{"Charges"}</Heading3>
       <Flex>

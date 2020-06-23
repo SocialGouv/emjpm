@@ -34,8 +34,8 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
   return (
     <Box>
       <form onSubmit={submitForm}>
-        <Heading1 textAlign="center" mb={"80px"}>
-          {"Personnel et formation"}
+        <Heading1 textAlign="center" mb={"50px"}>
+          {"Personnel et formation en 2019"}
         </Heading1>
         <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
 
