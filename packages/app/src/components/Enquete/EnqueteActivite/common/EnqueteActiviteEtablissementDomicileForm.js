@@ -75,8 +75,8 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
 
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
-        {"Votre activité"}
+      <Heading1 textAlign="center" mb={"50px"}>
+        {"Votre activité en 2019"}
       </Heading1>
 
       {title && <Heading3>{title}</Heading3>}

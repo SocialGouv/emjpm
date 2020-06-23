@@ -1,7 +1,7 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { parseFormFloat } from "../../../util";
@@ -66,10 +66,26 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
   const { submitForm, submit } = enqueteForm;
 
   return (
-    <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
-        {"Revenus / Prestation sociales"}
-      </Heading1>
+    <Box
+      sx={{
+        strong: {
+          color: "primary",
+        },
+      }}
+      as="form"
+      onSubmit={submitForm}
+    >
+      <Box textAlign="center" mb={"50px"}>
+        <Heading1 textAlign="center">{"Revenus / Prestations sociales en 2019"}</Heading1>
+        <Text
+          sx={{
+            color: "titleSecondary",
+            fontWeight: "bold",
+          }}
+        >
+          Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
+        </Text>
+      </Box>
       <Heading3 mb={4}>{title}</Heading3>
 
       <Flex justifyContent="start" mb={4}>
@@ -201,7 +217,7 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
         <Box ml={3} flex={1 / 2} />
       </Flex>
       <EnqueteStepperButtons submit={submit} disabled={loading} />
-    </form>
+    </Box>
   );
 };
 

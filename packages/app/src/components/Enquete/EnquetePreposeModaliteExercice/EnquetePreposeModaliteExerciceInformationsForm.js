@@ -82,8 +82,8 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
 
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
-        {"Modalité d'exercice"}
+      <Heading1 textAlign="center" mb={"50px"}>
+        {"Modalité d'exercice en 2019"}
       </Heading1>
       <Heading3>{"Informations générales"}</Heading3>
       <Box mt={4}>

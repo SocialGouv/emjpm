@@ -67,7 +67,7 @@ export const EnqueteIndividuelPrestationsSocialesForm = (props) => {
 
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"80px"}>
+      <Heading1 textAlign="center" mb={"50px"}>
         {"Prestation sociales"}
       </Heading1>
       <Heading3>Répartition des personnes</Heading3>
