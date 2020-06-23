@@ -20,7 +20,7 @@ function raw(cell) {
 // options?: { min: number, max: number }
 function integer(cell, options) {
   const value = raw(cell);
-  if (value) {
+  if (isDefined(value)) {
     const parsed = parseInt(value, 10);
     const result = !isNaN(parsed) ? parsed : undefined;
 
@@ -32,7 +32,7 @@ function integer(cell, options) {
 // options?: { min: number, max: number }
 function float(cell, options) {
   const value = raw(cell);
-  if (value) {
+  if (isDefined(value)) {
     const parsed = parseFloat(value);
     const result = !isNaN(parsed) ? parsed : undefined;
     return _validateMinMax(result, options);
@@ -45,7 +45,7 @@ function select(cell, { map }) {
     throw new Error("Required 'map' parameter missing");
   }
   const value = raw(cell);
-  if (value !== undefined && value !== null) {
+  if (isDefined(value)) {
     return map[value.trim ? value.trim() : value];
   }
   return undefined;
@@ -53,7 +53,7 @@ function select(cell, { map }) {
 
 function boolean(cell) {
   const value = raw(cell);
-  if (value) {
+  if (isDefined(value)) {
     return value === "Oui";
   }
   return undefined;
@@ -61,7 +61,7 @@ function boolean(cell) {
 
 function integerAsBoolean(cell) {
   const value = raw(cell);
-  if (value) {
+  if (isDefined(value)) {
     return value === 1;
   }
   return false;
@@ -69,7 +69,7 @@ function integerAsBoolean(cell) {
 
 function string(cell) {
   const value = raw(cell);
-  if (value) {
+  if (isDefined(value)) {
     return `${value}`;
   }
   return undefined;
@@ -87,4 +87,8 @@ function _validateMinMax(value, options) {
     return undefined;
   }
   return value;
+}
+
+function isDefined(value) {
+  return value !== undefined && value !== null;
 }
