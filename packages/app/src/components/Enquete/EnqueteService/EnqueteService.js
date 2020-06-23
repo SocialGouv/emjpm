@@ -10,6 +10,13 @@ import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { buildMenuSections } from "./EnqueteServiceMenuBuilder.service";
 
+// function goToStep(router, { enqueteId, step, substep }) {
+//   router.push("/services/enquetes/[enquete_id]", {
+//     pathname: `/services/enquetes/${enqueteId}`,
+//     query: { step, substep },
+//   });
+// }
+
 export const EnqueteService = (props) => {
   const router = useRouter();
   const { enquete, userId, currentStep } = props;
@@ -25,6 +32,8 @@ export const EnqueteService = (props) => {
     enqueteReponse,
     data,
   ]);
+
+  console.log("currentStep", currentStep);
 
   const {
     section,
@@ -52,10 +61,15 @@ export const EnqueteService = (props) => {
     );
   }
 
+  // if ((!step || !section || !step.component) && typeof window !== "undefined") {
+  //   // goToStep(router, { enqueteId, step: 0, substep: 0 });
+  //   return null;
+  // }
+
   if (!step || !section) {
-    onClickLink({ step: 0, substep: 0 });
-    return <Box mt={4}>Redirection...</Box>;
+    return null;
   }
+
   const ComponentForm = step.component;
 
   return (
@@ -86,14 +100,6 @@ export const EnqueteService = (props) => {
 
   function goToFirstPage() {
     navigateToStep({ step: 1, substep: 0 });
-  }
-
-  async function onClickLink({ step, substep }) {
-    await router.push("/services/enquetes/[enquete_id]", {
-      pathname: `/services/enquetes/${enqueteId}`,
-      query: { step, substep },
-    });
-    window.scrollTo(0, 0);
   }
 
   async function navigateToStep({ step, substep }) {

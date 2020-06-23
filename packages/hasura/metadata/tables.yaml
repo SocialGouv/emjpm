@@ -380,6 +380,9 @@
   - name: enquete_reponses_prestations_sociale
     using:
       foreign_key_constraint_on: enquete_reponses_prestations_sociale_id
+  - name: enquete_reponses_service_information
+    using:
+      foreign_key_constraint_on: enquete_reponses_service_informations_id
   - name: enquete_service
     using:
       foreign_key_constraint_on: service_id
@@ -2514,6 +2517,17 @@
             user_id:
               _eq: X-Hasura-User-Id
       check: null
+- table:
+    schema: public
+    name: enquete_reponses_service_informations
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_reponses_service_informations_id
+        table:
+          schema: public
+          name: enquete_reponses
 - table:
     schema: public
     name: enquete_services
