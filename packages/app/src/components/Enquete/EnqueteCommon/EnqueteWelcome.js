@@ -1,17 +1,37 @@
 import { Heading1 } from "@emjpm/ui";
 import { format } from "date-fns";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
 import { LinkButton } from "../../../components/Commons";
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
+import { UserContext } from "../../../../src/components/UserContext";
+import { isIndividuel, isPrepose, isService } from "../../../util";
 
 const textStyle = {
   textAlign: "center",
   lineHeight: "30px",
 };
+
+const downloadStyle = { color: "blue", "text-decoration": "underline" };
+
+const getExcelName = (type) => {
+  if (isService(type)) {
+    return "annexe_3-2019.xls";
+  }
+  if (isIndividuel(type)) {
+    return "annexe_5-2019.xls";
+  }
+  if (isPrepose(type)) {
+    return "annexe_7-2019.xls";
+  }
+};
+
 export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPrefix }) => {
   const { id: enqueteId } = enquete;
+
+  const { type } = useContext(UserContext);
+
   return enqueteReponse.status !== "draft" ? (
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />
   ) : (
@@ -30,14 +50,19 @@ export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPre
         </Button>
       </Flex>
       <Flex flexDirection="column">
-        <Box mt="4" mb="3" sx={textStyle}>
-          <Text>
-            {`Vous avez déjà rempli le fichier excel envoyé par votre direction départementale?`}
+        <Box mt="4" sx={textStyle}>
+          <Text as="span">{`Vous avez déjà rempli le `}</Text>
+          <Text as="span" sx={downloadStyle}>
+            <a href={`/static/docs/enquetes/${getExcelName(type)}`}>{`fichier excel`}</a>
           </Text>
+
+          <Text as="span">{` envoyé par votre direction départementale?`}</Text>
         </Box>
+
         <LinkButton
           mx="auto"
           pt={15}
+          mt={4}
           href={`${pathPrefix}/[enquete_id]/import`}
           asLink={`${pathPrefix}/${enqueteId}/import`}
           outline
