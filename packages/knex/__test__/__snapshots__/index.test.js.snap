@@ -1135,17 +1135,11 @@ Object {
     "nullable": true,
     "type": "boolean",
   },
-  "activite_personne_physique": Object {
+  "activite_exercee_par": Object {
     "defaultValue": null,
-    "maxLength": null,
+    "maxLength": 255,
     "nullable": true,
-    "type": "integer",
-  },
-  "activite_service": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
+    "type": "character varying",
   },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
@@ -1159,17 +1153,11 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "etablissement_convention_groupement": Object {
+  "etablissements_type": Object {
     "defaultValue": null,
-    "maxLength": null,
+    "maxLength": 255,
     "nullable": true,
-    "type": "integer",
-  },
-  "etablissement_personne_morale": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
+    "type": "character varying",
   },
   "id": Object {
     "defaultValue": "nextval('enquete_reponses_modalite_exercice_id_seq'::regclass)",
@@ -1182,12 +1170,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "timestamp with time zone",
-  },
-  "nombre_etablissements": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
   },
   "nombre_lits_journee_hospitalisation": Object {
     "defaultValue": null,

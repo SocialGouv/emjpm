@@ -31,6 +31,16 @@ const ENQ_REP_MODALITE_EXERCICE = {
     public: "Public",
     private: "Privé",
   }),
+  ACTIVE_EXERCEE_PAR: enqueteKeysBuilder.buildKeys({
+    "personne-physique": "Une personne physique",
+    service: "Un service au sens de l'article L312-1 du CASF",
+  }),
+  ETABLISSEMENTS_TYPE: enqueteKeysBuilder.buildKeys({
+    "personne-morale":
+      "Un ou plusieurs établissements dépendant de la même personne morale.",
+    "convention-groupement":
+      "Plusieurs établissements dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP).",
+  }),
 };
 
 module.exports = {
