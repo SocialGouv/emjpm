@@ -67,7 +67,7 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      label: "Votre activité",
+      label: "Votre activité en 2019",
       status: status.activite.global,
       steps: [
         {

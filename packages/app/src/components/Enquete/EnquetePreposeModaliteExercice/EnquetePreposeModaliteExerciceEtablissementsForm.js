@@ -99,8 +99,8 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   return (
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
-        <Heading1 textAlign="center" mb={"80px"}>
-          {"Modalité d'exercice"}
+        <Heading1 textAlign="center" mb={"50px"}>
+          {"Modalité d'exercice en 2019"}
         </Heading1>
         <Box mb={4}>
           <EnqueteFormYesNoField
