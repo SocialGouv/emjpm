@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { EnqueteFormFieldErrorMessage, EnqueteFormInputField } from "../../EnqueteForm";
+import { EnqueteFormInputField } from "../../EnqueteForm";
 
 export const EnqueteActiviteFormGroupMesures = (props) => {
   // prefix: 'etablissement' | 'domicile' | ''
@@ -11,7 +11,6 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
   const idFinAnnee = prefix ? `${prefix}FinAnnee` : "finAnnee";
   const idMesuresNouvelles = prefix ? `${prefix}MesuresNouvelles` : "mesuresNouvelles";
   const idSortieMesures = prefix ? `${prefix}SortieMesures` : "sortieMesures";
-  const idSomme = prefix ? `${prefix}Somme` : "somme";
 
   return (
     <Box mt={2}>
@@ -63,7 +62,6 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
           />
         </Box>
       </Flex>
-      <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id={idSomme} />
     </Box>
   );
 };
