@@ -27,5 +27,5 @@ export function formatFormInput(value) {
 }
 
 export function formatFormBoolean(value) {
-  return value !== true || value !== false ? undefined : value;
+  return value !== true && value !== false ? undefined : value;
 }
