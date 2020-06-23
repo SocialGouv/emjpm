@@ -3,10 +3,10 @@ import { format } from "date-fns";
 import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
-import { LinkButton } from "../../../components/Commons";
-import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 import { UserContext } from "../../../../src/components/UserContext";
+import { LinkButton } from "../../../components/Commons";
 import { isIndividuel, isPrepose, isService } from "../../../util";
+import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
 const textStyle = {
   textAlign: "center",
