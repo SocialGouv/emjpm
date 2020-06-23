@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.45.0](https://github.com/SocialGouv/emjpm/compare/v25.44.0...v25.45.0) (2020-06-23)
+
+
+### Bug Fixes
+
+* **enquete:** [#1913](https://github.com/SocialGouv/emjpm/issues/1913) afficher liste des sections vides ([#1978](https://github.com/SocialGouv/emjpm/issues/1978)) ([e390ef7](https://github.com/SocialGouv/emjpm/commit/e390ef7915190d1d814ae0665b6ec2651a6ee464))
+* **enquete:** activite champs facultatifs ([#1977](https://github.com/SocialGouv/emjpm/issues/1977)) ([b51e789](https://github.com/SocialGouv/emjpm/commit/b51e789047681148c6a4b6c929b8f41381c060a2))
+* **enquete:** boolean value ([#1980](https://github.com/SocialGouv/emjpm/issues/1980)) ([13636e3](https://github.com/SocialGouv/emjpm/commit/13636e33986804bb666b1048fa0ab716870492af))
+* **enquete:** fix bug init mandataire ([#1983](https://github.com/SocialGouv/emjpm/issues/1983)) ([2b8ef76](https://github.com/SocialGouv/emjpm/commit/2b8ef76db265f78c36405f6703d3a1fc903fee57))
+* **enquete:** fix form bugs ([#1981](https://github.com/SocialGouv/emjpm/issues/1981)) ([21bc793](https://github.com/SocialGouv/emjpm/commit/21bc79338b5ae056789bd9a6c203fce62c63ed9b))
+* **enquete:** trim map values ([#1982](https://github.com/SocialGouv/emjpm/issues/1982)) ([37eb361](https://github.com/SocialGouv/emjpm/commit/37eb36159af1988046861ba455db3eedd590c604))
+
+
+### Features
+
+* **enquete:** add xls download ([#1979](https://github.com/SocialGouv/emjpm/issues/1979)) ([9c54a0d](https://github.com/SocialGouv/emjpm/commit/9c54a0d3e7ada25eaa10f1e5f1f69519946fe794))
+* **enquete-service:** display enquete only for paris ([98aa55d](https://github.com/SocialGouv/emjpm/commit/98aa55d87cf74fa229e630485d5d04ad8680d19a))
+
+
+
+
+
 # [25.44.0](https://github.com/SocialGouv/emjpm/compare/v25.43.0...v25.44.0) (2020-06-22)
 
 
