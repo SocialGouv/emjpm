@@ -45,8 +45,8 @@ function select(cell, { map }) {
     throw new Error("Required 'map' parameter missing");
   }
   const value = raw(cell);
-  if (value) {
-    return map[value];
+  if (value !== undefined && value !== null) {
+    return map[value.trim ? value.trim() : value];
   }
   return undefined;
 }
