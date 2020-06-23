@@ -14,6 +14,7 @@ export const EnqueteFormYesNoField = ({
   text,
   enqueteForm,
   children,
+  required,
   disableErrorMessage,
   hideErrorMessageIfPristine,
 }) => {
@@ -29,7 +30,13 @@ export const EnqueteFormYesNoField = ({
 
   return (
     <Field>
-      <EnqueteFormFieldLabel id={id} label={label} text={text} enqueteForm={enqueteForm} />
+      <EnqueteFormFieldLabel
+        id={id}
+        label={label}
+        text={text}
+        required={required}
+        enqueteForm={enqueteForm}
+      />
 
       <Flex alignItems="center">
         <YesNoComboBox

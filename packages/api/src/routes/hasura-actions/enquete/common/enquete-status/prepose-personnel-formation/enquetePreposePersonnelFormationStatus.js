@@ -54,8 +54,8 @@ module.exports = async (enqueteReponse) => {
 
 function validate_nb_preposes_heures_formation() {
   return yup.object({
-    nb_preposes: yup.number().integer().min(0),
-    heures_formation: yup.number().min(0),
+    nb_preposes: yup.number().integer().min(0).nullable(),
+    heures_formation: yup.number().min(0).nullable(),
   });
 }
 
