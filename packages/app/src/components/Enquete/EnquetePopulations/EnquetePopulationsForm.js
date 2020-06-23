@@ -89,15 +89,15 @@ export const EnquetePopulationsForm = (props) => {
       as="form"
       onSubmit={submitForm}
     >
-      <Box textAlign="center" mb={"80px"}>
-        <Heading1 mb={1}>{"Populations"}</Heading1>
+      <Box textAlign="center" mb={"50px"}>
+        <Heading1 mb={1}>{"Populations en 2019"}</Heading1>
         <Text
           sx={{
             color: "titleSecondary",
             fontWeight: "bold",
           }}
         >
-          Les données à remplir ci-dessous sont celles au <strong>31/12/2019</strong>
+          Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
         </Text>
       </Box>
 
