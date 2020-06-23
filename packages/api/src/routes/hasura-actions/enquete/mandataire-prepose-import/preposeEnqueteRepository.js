@@ -33,7 +33,7 @@ async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
     activite,
   } = tabs;
 
-  const enqueteReponse = await initEnqueteMandataireIndividuel({
+  const enqueteReponse = await initEnqueteReponse({
     enqueteId,
     mandataireId,
   });
@@ -69,7 +69,7 @@ async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
     .patch(financement);
 }
 
-async function initEnqueteMandataireIndividuel({ enqueteId, mandataireId }) {
+async function initEnqueteReponse({ enqueteId, mandataireId }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
     mandataireId,
