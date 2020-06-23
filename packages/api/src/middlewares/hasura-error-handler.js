@@ -5,6 +5,7 @@ const HttpError = require("../utils/error/HttpError");
 // https://hasura.io/docs/1.0/graphql/manual/actions/action-handlers.html#returning-an-error-response
 const hasuraActionErrorHandler = (message) => (err, req, res, next) => {
   if (err) {
+    logger.error("[hasuraActionErrorHandler]", err);
     if (err instanceof HttpError) {
       logger.warn(err.message);
       // response format: {message!, code}

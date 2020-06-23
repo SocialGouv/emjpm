@@ -13,7 +13,7 @@ const textStyle = {
   lineHeight: "30px",
 };
 
-const downloadStyle = { color: "blue", "text-decoration": "underline" };
+const downloadStyle = { color: "blue", textDecoration: "underline" };
 
 const getExcelName = (type) => {
   if (isService(type)) {
