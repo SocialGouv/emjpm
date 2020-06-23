@@ -51,7 +51,7 @@ module.exports = {
 
         if (lb_user) {
           defaultValues.nom = `${lb_user.prenom} ${lb_user.nom}`;
-          if (lb_user.lb_departements) {
+          if (lb_user.lb_departements && lb_user.lb_departements.length) {
             const [{ departement }] = lb_user.lb_departements;
             defaultValues.region = departement.region.nom;
             defaultValues.departement = departement.nom;
