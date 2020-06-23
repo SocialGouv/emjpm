@@ -18,7 +18,6 @@ export const EnqueteSubmit = ({
   submitEnqueteReponse,
 }) => {
   const globalStatus = enqueteReponse.enquete_reponse_validation_status.global;
-  const { enquete_reponse_ids } = enqueteReponse;
 
   return enqueteReponse.status !== "draft" ? (
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />
@@ -98,7 +97,7 @@ export const EnqueteSubmit = ({
                   onClick={async () => {
                     await submitEnqueteReponse({
                       variables: {
-                        id: enquete_reponse_ids.id,
+                        enqueteId: enquete.id,
                       },
                     });
                   }}
