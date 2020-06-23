@@ -56,9 +56,9 @@ function parse(ws) {
     curatelle_biens_etablissement_mesures_nouvelles: parser.integer(ws["E20"]),
     curatelle_biens_etablissement_sortie_mesures: parser.integer(ws["F20"]),
     curatelle_biens_etablissement_fin_annee: parser.integer(ws["G20"]),
-    curatelle_biens_domicile_debut_annee: parser.integer(ws["G21"]),
-    curatelle_biens_domicile_mesures_nouvelles: parser.integer(ws["G21"]),
-    curatelle_biens_domicile_sortie_mesures: parser.integer(ws["G21"]),
+    curatelle_biens_domicile_debut_annee: parser.integer(ws["D21"]),
+    curatelle_biens_domicile_mesures_nouvelles: parser.integer(ws["E21"]),
+    curatelle_biens_domicile_sortie_mesures: parser.integer(ws["F21"]),
     curatelle_biens_domicile_fin_annee: parser.integer(ws["G21"]),
 
     curatelle_personne_etablissement_debut_annee: parser.integer(ws["D23"]),
@@ -72,10 +72,10 @@ function parse(ws) {
     curatelle_personne_domicile_sortie_mesures: parser.integer(ws["F24"]),
     curatelle_personne_domicile_fin_annee: parser.integer(ws["G24"]),
 
-    subroge_tuteur_createur_debut_annee: parser.integer(ws["D24"]),
-    subroge_tuteur_createur_mesures_nouvelles: parser.integer(ws["E24"]),
-    subroge_tuteur_createur_sortie_mesures: parser.integer(ws["F24"]),
-    subroge_tuteur_createur_fin_annee: parser.integer(ws["G24"]),
+    subroge_tuteur_createur_debut_annee: parser.integer(ws["D26"]),
+    subroge_tuteur_createur_mesures_nouvelles: parser.integer(ws["E26"]),
+    subroge_tuteur_createur_sortie_mesures: parser.integer(ws["F26"]),
+    subroge_tuteur_createur_fin_annee: parser.integer(ws["G26"]),
 
     sauvegarde_justice_debut_annee: parser.integer(ws["D27"]),
     sauvegarde_justice_mesures_nouvelles: parser.integer(ws["E27"]),
