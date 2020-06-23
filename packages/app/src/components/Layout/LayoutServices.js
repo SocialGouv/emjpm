@@ -28,13 +28,20 @@ const LayoutServices = (props) => {
   const { children, hasNavigation = true } = props;
   const user = useContext(UserContext);
 
-  const links = user.enquete
-    ? navigationLinks.concat({
+  let links = navigationLinks;
+
+  if (user.enquete) {
+    const [serviceMember] = user.service_members;
+    const { code } = serviceMember.service.departement;
+
+    if (code === "75") {
+      links = navigationLinks.concat({
         title: `Enquête ${user.enquete.annee}`,
         url: "/services/enquetes/[enquete_id]",
         as: `/services/enquetes/${user.enquete.id}`,
-      })
-    : navigationLinks;
+      });
+    }
+  }
 
   return (
     <Fragment>
