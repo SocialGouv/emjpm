@@ -57,8 +57,8 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
               en_poste_cnc: parseNbPreposeHeuresFormationFromForm(
                 values.formation_preposes_mjpm.en_poste_cnc
               ),
-              embauches_cnc: parseNbPreposeHeuresFormationFromForm(
-                values.formation_preposes_mjpm.embauches_cnc
+              non_formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
+                values.formation_preposes_mjpm.non_formation_non_cnc
               ),
               formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
                 values.formation_preposes_mjpm.formation_non_cnc
