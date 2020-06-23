@@ -22,8 +22,9 @@ export function useEnqueteForm({
   }, [data]);
 
   const initialValues = useMemo(() => {
-    console.debug("[useEnqueteForm] build initialValues", data);
-    return data && dataToForm ? dataToForm(data) : data;
+    const initialValues = dataToForm ? dataToForm(data) : data;
+    console.debug("[useEnqueteForm] build initialValues", data, initialValues);
+    return initialValues;
   }, [data, dataToForm]);
 
   const formik = useFormik({
