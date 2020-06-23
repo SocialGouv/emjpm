@@ -6,8 +6,8 @@ function parse(ws) {
     nb_preposes_mjpm_etp: parser.integer(ws["D7"]),
     formation_preposes_mjpm: {
       en_poste_cnc: parse_nb_preposes_heures_formation(ws, 11),
-      embauches_cnc: parse_nb_preposes_heures_formation(ws, 12),
-      formation_non_cnc: parse_nb_preposes_heures_formation(ws, 13),
+      formation_non_cnc: parse_nb_preposes_heures_formation(ws, 12),
+      non_formation_non_cnc: parse_nb_preposes_heures_formation(ws, 13),
     },
     niveaux_qualification: {
       n1: parse_nb_preposes_nb_preposes_etp(ws, 21),
