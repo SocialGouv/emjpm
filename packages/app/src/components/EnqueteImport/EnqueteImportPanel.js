@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import menuStepperStyle from "../MenuStepper/style";
+import menuStepperStyle from "../Enquete/EnqueteCommon/EnqueteMenuStepper/style";
 import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 
