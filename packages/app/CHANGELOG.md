@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.46.0](https://github.com/SocialGouv/emjpm/compare/v25.45.0...v25.46.0) (2020-06-23)
+
+
+### Bug Fixes
+
+* **enquete:** fix form bugs & prevent import if not draft [#1801](https://github.com/SocialGouv/emjpm/issues/1801) ([#1987](https://github.com/SocialGouv/emjpm/issues/1987)) ([dff144b](https://github.com/SocialGouv/emjpm/commit/dff144b3069481fa1e984ca533382d9c7c9e10a1))
+* **enquete:** import issues ([#1988](https://github.com/SocialGouv/emjpm/issues/1988)) ([64dae1a](https://github.com/SocialGouv/emjpm/commit/64dae1a60a8f1f7ea72fcb4bb9682e471cda3b77)), closes [#1985](https://github.com/SocialGouv/emjpm/issues/1985) [#1984](https://github.com/SocialGouv/emjpm/issues/1984) [#1986](https://github.com/SocialGouv/emjpm/issues/1986)
+* **enquete:** mandataire modalites exercice [#1989](https://github.com/SocialGouv/emjpm/issues/1989) ([#1992](https://github.com/SocialGouv/emjpm/issues/1992)) ([745f0cb](https://github.com/SocialGouv/emjpm/commit/745f0cba7986cb8fbfd84c62a3a172653b54af9b))
+* **enquete-prepose:** rename embauches_cnc to non_formation_non_cnc ([#1993](https://github.com/SocialGouv/emjpm/issues/1993)) ([b91ddcd](https://github.com/SocialGouv/emjpm/commit/b91ddcd0c8a547f74ede7bc1b64291ceb045d2fc))
+
+
+### Features
+
+* **enquete-prepose:** update title ([5006473](https://github.com/SocialGouv/emjpm/commit/5006473fda509bce6e9fe3bb479a29ba6d0bec6d))
+* **enquete-prepose:** update title ([696398a](https://github.com/SocialGouv/emjpm/commit/696398a6ef027b2e3be442a45c8b0448626ee1a3))
+* **enquete-service:** do not display link for service ([1b36d64](https://github.com/SocialGouv/emjpm/commit/1b36d647a83ca5650d832947b5f40f9e806aacba))
+
+
+
+
+
 # [25.45.0](https://github.com/SocialGouv/emjpm/compare/v25.44.0...v25.45.0) (2020-06-23)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.46.0](https://github.com/SocialGouv/emjpm/compare/v25.45.0...v25.46.0) (2020-06-23)
+
+
+### Bug Fixes
+
+* **enquete:** mandataire modalites exercice [#1989](https://github.com/SocialGouv/emjpm/issues/1989) ([#1992](https://github.com/SocialGouv/emjpm/issues/1992)) ([745f0cb](https://github.com/SocialGouv/emjpm/commit/745f0cba7986cb8fbfd84c62a3a172653b54af9b))
+
+
+
+
+
 # [25.45.0](https://github.com/SocialGouv/emjpm/compare/v25.44.0...v25.45.0) (2020-06-23)
 
 **Note:** Version bump only for package @emjpm/knex
