@@ -82,7 +82,7 @@ export const EnqueteFormInputField = ({
             max={max}
           />
         )}
-        <Box>{children}</Box>
+        {children ? <Box>{children}</Box> : null}
       </Flex>
 
       <EnqueteFormFieldErrorMessage

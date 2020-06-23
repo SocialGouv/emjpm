@@ -170,7 +170,7 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      status: status.global === "valid" ? "valid" : "empty",
+      status: enqueteReponse.status === "draft" ? "empty" : "valid",
       steps: [
         {
           label: "Envoi de vos réponses",

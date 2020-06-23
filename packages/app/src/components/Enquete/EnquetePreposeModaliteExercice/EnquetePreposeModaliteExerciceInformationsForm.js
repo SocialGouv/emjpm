@@ -1,12 +1,16 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
 import { PERSONNALITE_JURIDIQUE } from "../constants";
-import { EnqueteFormInputField, EnqueteFormSelectField } from "../EnqueteForm";
+import {
+  EnqueteFormFieldLabel,
+  EnqueteFormInputField,
+  EnqueteFormSelectField,
+} from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
@@ -138,18 +142,13 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text
-                  sx={{
-                    "&:after": {
-                      content: "'  *'",
-                      color: "#db4949",
-                      marginLeft: "3px",
-                    },
-                  }}
-                  ml={3}
-                >
-                  personne(s) physique(s)
-                </Text>
+                <Box ml={3}>
+                  <EnqueteFormFieldLabel
+                    text="personne(s) physique(s)"
+                    id="activite_personne_physique"
+                    enqueteForm={enqueteForm}
+                  />
+                </Box>
               </EnqueteFormInputField>
             </Flex>
             <Flex flex={1 / 2} alignItems="center">
@@ -161,18 +160,13 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text
-                  sx={{
-                    "&:after": {
-                      content: "'  *'",
-                      color: "#db4949",
-                      marginLeft: "3px",
-                    },
-                  }}
-                  ml={3}
-                >
-                  {"service(s) au sens de l'article L312-1 du CASF"}
-                </Text>
+                <Box ml={3}>
+                  <EnqueteFormFieldLabel
+                    text="service(s) au sens de l'article L312-1 du CASF"
+                    id="activite_service"
+                    enqueteForm={enqueteForm}
+                  />
+                </Box>
               </EnqueteFormInputField>
             </Flex>
           </Flex>
@@ -192,18 +186,13 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text
-                  sx={{
-                    "&:after": {
-                      content: "'  *'",
-                      color: "#db4949",
-                      marginLeft: "3px",
-                    },
-                  }}
-                  ml={3}
-                >
-                  établissement(s) dépendant de la même personne morale
-                </Text>
+                <Box ml={3}>
+                  <EnqueteFormFieldLabel
+                    text="établissement(s) dépendant de la même personne morale"
+                    id="etablissement_personne_morale"
+                    enqueteForm={enqueteForm}
+                  />
+                </Box>
               </EnqueteFormInputField>
             </Flex>
             <Flex flex={1 / 2} alignItems="center">
@@ -215,20 +204,13 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
                 enqueteContext={enqueteContext}
                 enqueteForm={enqueteForm}
               >
-                <Text
-                  sx={{
-                    "&:after": {
-                      content: "'  *'",
-                      color: "#db4949",
-                      marginLeft: "3px",
-                    },
-                  }}
-                  ml={3}
-                >
-                  {
-                    "établissement(s) dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP)."
-                  }
-                </Text>
+                <Box ml={3}>
+                  <EnqueteFormFieldLabel
+                    text="établissement(s) dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP)."
+                    id="etablissement_convention_groupement"
+                    enqueteForm={enqueteForm}
+                  />
+                </Box>
               </EnqueteFormInputField>
             </Flex>
           </Flex>
@@ -243,21 +225,12 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
             enqueteContext={enqueteContext}
             enqueteForm={enqueteForm}
           >
-            <Text
-              sx={{
-                "&:after": {
-                  content: "'  *'",
-                  color: "#db4949",
-                  marginLeft: "3px",
-                },
-              }}
-              ml={3}
-              dangerouslySetInnerHTML={{
-                __html: ` mesure(s) prises en charge par ces <strong>${
-                  getEtablissementsCount(values) || ""
-                }</strong> établissements`,
-              }}
-            />
+            <Box ml={3}>
+              <EnqueteFormFieldLabel id="total_mesures_etablissements" enqueteForm={enqueteForm}>
+                mesure(s) prises en charge par ces{" "}
+                <strong>{getEtablissementsCount(values) || ""}</strong> établissements
+              </EnqueteFormFieldLabel>
+            </Box>
           </EnqueteFormInputField>
         </Box>
 
