@@ -52,6 +52,10 @@ export const GET_SERVICE_USERS = gql`
           etablissement
           longitude
           latitude
+          departement {
+            id
+            code
+          }
           service_antennes(order_by: { name: asc }) {
             name
             mesures_max
