@@ -22,7 +22,7 @@ export const EnqueteFormYesNoField = ({
   const { setFieldValue, values, errors } = formik;
 
   if (!value) {
-    value = values[id] || false;
+    value = values[id];
   }
   if (!error) {
     error = errors[id];
