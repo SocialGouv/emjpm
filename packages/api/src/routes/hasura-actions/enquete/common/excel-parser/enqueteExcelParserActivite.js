@@ -87,15 +87,15 @@ function parse(ws) {
     mandat_adhoc_majeur_sortie_mesures: parser.integer(ws["F28"]),
     mandat_adhoc_majeur_fin_annee: parser.integer(ws["G28"]),
 
-    revisions_main_levee: parser.integer(ws["C39"]),
-    revisions_masp: parser.integer(ws["C40"]),
-    revisions_reconduction: parser.integer(ws["C41"]),
-    revisions_changement: parser.integer(ws["C42"]),
-    revisions_autre: parser.integer(ws["C43"]),
+    revisions_main_levee: parser.integer(ws["C38"]),
+    revisions_masp: parser.integer(ws["C39"]),
+    revisions_reconduction: parser.integer(ws["C40"]),
+    revisions_changement: parser.integer(ws["C41"]),
+    revisions_autre: parser.integer(ws["C42"]),
 
-    sorties_main_levee: parser.integer(ws["C50"]),
-    sorties_deces: parser.integer(ws["C51"]),
-    sorties_masp: parser.integer(ws["C52"]),
+    sorties_main_levee: parser.integer(ws["C48"]),
+    sorties_deces: parser.integer(ws["C49"]),
+    sorties_masp: parser.integer(ws["C50"]),
   };
 }
 

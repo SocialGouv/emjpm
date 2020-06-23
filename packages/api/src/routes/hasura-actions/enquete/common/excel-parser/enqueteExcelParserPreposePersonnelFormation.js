@@ -20,7 +20,7 @@ function parse(ws) {
     nb_preposes_homme: parser.integer(ws["C32"]),
     nb_preposes_femme: parser.integer(ws["C33"]),
     nb_autre_personnel: parser.integer(ws["C39"]),
-    nb_autre_personnel_etp: parser.integer(ws["D39"]),
+    nb_autre_personnel_etp: parser.float(ws["D39"]),
   };
 }
 const enqueteExcelParserInformationsMandataire = {
