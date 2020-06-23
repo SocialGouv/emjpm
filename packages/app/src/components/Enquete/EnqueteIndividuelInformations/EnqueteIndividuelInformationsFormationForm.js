@@ -14,12 +14,12 @@ export const validationSchema = yup.object().shape({
   cnc_annee_obtention: yup.number().positive().integer().required(),
   cnc_heures_formation: yup.number().positive().required(),
   niveau_qualification: yup.number().min(1).max(6).integer().required(),
-  secretaire_specialise_etp_n1: yup.number().min(0),
-  secretaire_specialise_etp_spe_n2: yup.number().min(0).nullable(),
-  secretaire_specialise_etp_spe_n3: yup.number().min(0).nullable(),
-  secretaire_specialise_etp_spe_n4: yup.number().min(0).nullable(),
-  secretaire_specialise_etp_spe_n5: yup.number().min(0).nullable(),
-  secretaire_specialise_etp_spe_n6: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n1: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n2: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n3: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n4: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n5: yup.number().min(0).nullable(),
+  secretaire_specialise_etp_n6: yup.number().min(0).nullable(),
   informations_generales_secretaire_specialise_etp: yup
     .number()
     .nullable()
