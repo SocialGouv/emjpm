@@ -1,6 +1,9 @@
 import { useFormik } from "formik";
 import { useCallback, useEffect, useMemo } from "react";
-
+function isEmptyObject(obj) {
+  return Object.keys(obj).length === 0 && obj.constructor === Object;
+}
+const emptyReferencedObject = {};
 export function useEnqueteForm({
   onSubmit,
   dispatchEnqueteContextEvent,
@@ -12,9 +15,18 @@ export function useEnqueteForm({
   formToData,
   loading,
 }) {
-  useMemo(() => console.debug("[useEnqueteForm] input data changed", data), [data]);
+  // avoid infinite loop due to data = {} while data is loading in parent components
+  data = useMemo(() => {
+    // console.debug("[useEnqueteForm] input data changed", data);
+    return data && !isEmptyObject(data) ? data : emptyReferencedObject;
+  }, [data]);
 
-  const initialValues = dataToForm ? dataToForm(data) : data;
+  const initialValues = useMemo(() => {
+    const initialValues = dataToForm ? dataToForm(data) : data;
+    console.debug("[useEnqueteForm] build initialValues", data, initialValues);
+    return initialValues;
+  }, [data, dataToForm]);
+
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       values = formToData ? formToData(values) : values;
@@ -83,7 +95,10 @@ export function useEnqueteForm({
 
   const showError = useMemo(() => {
     return (
-      dirty || (!loading && !readOnly && (step.status !== "empty" || enqueteContext.form.submited))
+      dirty ||
+      (!loading &&
+        !readOnly &&
+        (step.status.indexOf("empty") !== 0 || enqueteContext.form.submited))
     );
   }, [dirty, step.status, readOnly, enqueteContext.form.submited, loading]);
 

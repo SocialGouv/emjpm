@@ -1,33 +1,34 @@
-import { parseFormFloat, parseFormInt } from "../../../util";
+import { formatFormInput } from "../../../util";
 
 function mapFormation_preposes_mjpm_nb_prepose_heures_formation(data) {
   return {
-    nb_preposes: !data ? "" : parseFormInt(data.nb_preposes),
-    heures_formation: !data ? "" : parseFormFloat(data.heures_formation),
+    nb_preposes: formatFormInput(!data ? null : data.nb_preposes),
+    heures_formation: formatFormInput(!data ? null : data.heures_formation),
   };
 }
 function mapFormation_preposes_mjpm(data) {
   return {
     en_poste_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.en_poste_cnc : null
+      !data ? null : data.en_poste_cnc
     ),
     embauches_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.embauches_cnc : null
+      !data ? null : data.embauches_cnc
     ),
     formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      data ? data.formation_non_cnc : null
+      !data ? null : data.formation_non_cnc
     ),
   };
 }
 
 function dataToForm(data) {
-  return {
-    nb_preposes_mjpm: data.nb_preposes_mjpm ? parseFormInt(data.nb_preposes_mjpm) : "",
-    nb_preposes_mjpm_etp: data.nb_preposes_mjpm_etp
-      ? parseFormFloat(data.nb_preposes_mjpm_etp)
-      : "",
-    formation_preposes_mjpm: mapFormation_preposes_mjpm(data.formation_preposes_mjpm),
+  const formData = {
+    nb_preposes_mjpm: formatFormInput(data.nb_preposes_mjpm),
+    nb_preposes_mjpm_etp: formatFormInput(data.nb_preposes_mjpm_etp),
+    formation_preposes_mjpm: mapFormation_preposes_mjpm(
+      !data ? null : data.formation_preposes_mjpm
+    ),
   };
+  return formData;
 }
 export const enquetePreposePersonnelFormationMjpmFormMapper = {
   dataToForm,
