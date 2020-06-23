@@ -1,10 +1,10 @@
 import { BoxWrapper } from "@emjpm/ui";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment /*, useContext*/ } from "react";
 import { Box } from "rebass";
 
 import { Header } from "../Header";
 import { Navigation } from "../Navigation";
-import { UserContext } from "../UserContext";
+// import { UserContext } from "../UserContext";
 
 const navigationLinks = [
   {
@@ -24,22 +24,22 @@ const navigationLinks = [
 const LayoutServicesMap = (props) => {
   const { children } = props;
 
-  const user = useContext(UserContext);
+  // const user = useContext(UserContext);
 
-  let links = navigationLinks;
+  const links = navigationLinks;
 
-  if (user.enquete) {
-    const [serviceMember] = user.service_members;
-    const { code } = serviceMember.service.departement;
+  // if (user.enquete) {
+  //   const [serviceMember] = user.service_members;
+  //   const { code } = serviceMember.service.departement;
 
-    if (code === "75") {
-      links = navigationLinks.concat({
-        title: `Enquête ${user.enquete.annee}`,
-        url: "/services/enquetes/[enquete_id]",
-        as: `/services/enquetes/${user.enquete.id}`,
-      });
-    }
-  }
+  //   if (code === "75") {
+  //     links = navigationLinks.concat({
+  //       title: `Enquête ${user.enquete.annee}`,
+  //       url: "/services/enquetes/[enquete_id]",
+  //       as: `/services/enquetes/${user.enquete.id}`,
+  //     });
+  //   }
+  // }
 
   return (
     <Fragment>
