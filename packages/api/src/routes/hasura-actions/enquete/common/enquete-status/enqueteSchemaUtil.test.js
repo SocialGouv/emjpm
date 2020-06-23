@@ -30,7 +30,7 @@ test("getGlobalStatus should return empty if at least one sub-status is empty (a
       status3: "empty",
       status4: "valid",
     })
-  ).toBe("empty");
+  ).toBe("empty-half");
 });
 
 test("getTopLevelGlobalStatus should return valid if all sub-steps global status are valid", () => {
@@ -63,5 +63,5 @@ test("getTopLevelGlobalStatus should return empty if at least one sub-steps glob
       step3: { global: "empty" },
       step4: { global: "valid" },
     })
-  ).toBe("empty");
+  ).toBe("empty-half");
 });
