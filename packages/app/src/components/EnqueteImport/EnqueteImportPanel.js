@@ -92,12 +92,10 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
                 Attention, les données déjà renseignée seront écrasées.
               </Box>
             )}
-          {enqueteReponse && enqueteReponse.status === "draft" && (
-            <SingleImportFilePicker
-              placeholder="Cliquez ici pour sélectionner votre fichier excel"
-              onFileChosen={(file) => importEnqueteFile(file)}
-            />
-          )}
+          <SingleImportFilePicker
+            placeholder="Cliquez ici pour sélectionner votre fichier excel"
+            onFileChosen={(file) => importEnqueteFile(file)}
+          />
         </Flex>
       </Box>
     </Flex>

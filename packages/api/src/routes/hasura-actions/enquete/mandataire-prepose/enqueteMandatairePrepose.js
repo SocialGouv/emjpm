@@ -5,6 +5,7 @@ const {
 } = require("./requests");
 const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
 const logger = require("../../../../utils/logger");
+const HttpError = require("../../../../utils/error/HttpError");
 
 async function initEnqueteMandatairePrepose({
   // eslint-disable-next-line no-unused-vars
@@ -48,11 +49,24 @@ async function initEnqueteMandatairePrepose({
   };
 }
 
-async function submitEnqueteMandatairePrepose(id) {
-  // TODO(remiroyc): check if all form sections are valids
+async function submitEnqueteMandatairePrepose({
+  enqueteContext: { enqueteId, mandataire },
+}) {
+  const enqueteReponse = await getEnqueteReponseMandatairePrepose({
+    enqueteId,
+    mandataireId: mandataire.id,
+  });
 
-  const enqueteReponse = await submitEnqueteReponse(id);
-  return enqueteReponse;
+  if (enqueteReponse.status !== "draft") {
+    throw new HttpError(423, "Enquete response has already been submitted.");
+  }
+  const status = await enqueteMandatairePreposeStatus(enqueteReponse);
+
+  if (status.global === "invalid") {
+    throw new HttpError(400, "Enquete response is invalid");
+  }
+
+  return await submitEnqueteReponse(enqueteReponse.id);
 }
 
 module.exports = {
