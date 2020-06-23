@@ -2,7 +2,7 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { Heading1 } from "@emjpm/ui";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import menuStepperStyle from "../Enquete/EnqueteCommon/EnqueteMenuStepper/style";
@@ -18,12 +18,40 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   const router = useRouter();
 
   const apolloClient = useApolloClient();
-  const { importEnqueteFile, importSummary, enqueteImportLoading } = useEnqueteImportManager({
+
+  const {
+    importEnqueteFile,
+    importSummary,
+    loading,
+    uploading,
+    enqueteReponse,
+    error,
+  } = useEnqueteImportManager({
     enqueteId,
     userId,
   });
 
-  if (enqueteImportLoading) {
+  useEffect(() => {
+    if (enqueteReponse && enqueteReponse.status !== "draft") {
+      router.push("/mandataires/enquetes/[enquete_id]", {
+        pathname: `/mandataires/enquetes/${enqueteId}`,
+        query: { step: 0, substep: 0 },
+      });
+    }
+  });
+
+  if (error) {
+    return <div>error</div>;
+  }
+  if (loading) {
+    return (
+      <Box p={4}>
+        <LoaderCircle size="16" /> Chargement en cours, veuillez patienter...
+      </Box>
+    );
+  }
+
+  if (uploading) {
     return (
       <Box p={4}>
         <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez patienter...
@@ -57,10 +85,19 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
               Erreur innatendue. Veuillez ré-essayer.
             </Box>
           )}
-          <SingleImportFilePicker
-            placeholder="Cliquez ici pour sélectionner votre fichier excel"
-            onFileChosen={(file) => importEnqueteFile(file)}
-          />
+          {enqueteReponse &&
+            enqueteReponse.enquete_reponse_validation_status &&
+            enqueteReponse.enquete_reponse_validation_status.global !== "empty" && (
+              <Box mt={2} mb={2} fontWeight="bold">
+                Attention, les données déjà renseignée seront écrasées.
+              </Box>
+            )}
+          {enqueteReponse && enqueteReponse.status === "draft" && (
+            <SingleImportFilePicker
+              placeholder="Cliquez ici pour sélectionner votre fichier excel"
+              onFileChosen={(file) => importEnqueteFile(file)}
+            />
+          )}
         </Flex>
       </Box>
     </Flex>

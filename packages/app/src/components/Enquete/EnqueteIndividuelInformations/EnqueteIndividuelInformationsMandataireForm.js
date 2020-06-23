@@ -35,7 +35,11 @@ const validationSchema = yup.object().shape({
       then: yup
         .boolean()
         .required()
-        .test("equals-to-false", "Vous avez déclaré exercer seul une activité.", () => false),
+        .test(
+          "equals-to-false",
+          "Vous avez déclaré exercer seul une activité.",
+          (value) => value === false
+        ),
     }),
   secretaire_specialise_etp: yup.number().when("exerce_secretaires_specialises", {
     is: true,
