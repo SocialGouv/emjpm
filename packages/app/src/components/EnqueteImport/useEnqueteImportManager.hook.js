@@ -1,12 +1,28 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useState } from "react";
 
 import { fileReader } from "../../util/fileReader";
+import { ENQUETE, ENQUETE_REPONSE_STATUS } from "../Enquete/queries";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();
   const [uploadFile, { loading: enqueteImportLoading }] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
+  const { data: enqueteData, loading: enqueteLoading, error: enqueteError } = useQuery(ENQUETE, {
+    variables: { id: enqueteId },
+  });
+  const enquete = enqueteData ? enqueteData.enquetes_by_pk : undefined;
+
+  const {
+    data: enqueteReponseData,
+    loading: enqueteReponseLoading,
+    error: enqueteReponseError,
+  } = useQuery(ENQUETE_REPONSE_STATUS, {
+    variables: { enqueteId, userId },
+  });
+  const enqueteReponse = enqueteReponseData
+    ? enqueteReponseData.enquete_reponse_validation_status
+    : undefined;
 
   function readFile(file, cb, err) {
     if (file) {
@@ -46,9 +62,13 @@ function useEnqueteImportManager({ enqueteId, userId }) {
   }
 
   return {
+    enquete,
+    enqueteReponse,
     importEnqueteFile,
     importSummary,
-    enqueteImportLoading,
+    loading: enqueteReponseLoading || enqueteLoading,
+    error: enqueteReponseError || enqueteError,
+    uploading: enqueteImportLoading,
     reset,
   };
 }
