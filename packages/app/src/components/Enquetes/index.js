@@ -1,1 +1,0 @@
-export { Enquetes } from "./Enquetes";
