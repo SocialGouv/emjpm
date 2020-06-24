@@ -47,7 +47,7 @@ const getStatusLabel = (status) => {
   }
 };
 
-export const DirectionEnqueteReponseResumeCard = ({ item }) => (
+export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => (
   <Card key={item.reponse_id} sx={cardStyle} mb="2">
     <Flex justifyContent="flex-start">
       <Flex width="50%" flexDirection="column">
@@ -82,6 +82,9 @@ export const DirectionEnqueteReponseResumeCard = ({ item }) => (
         <Text sx={descriptionStyle()}>
           {item.submitted_at ? format(new Date(item.submitted_at), "dd/MM/yyyy") : ""}
         </Text>
+      </Flex>
+      <Flex width="50%" flexDirection="column">
+        {renderActions ? renderActions(item) : null}
       </Flex>
     </Flex>
   </Card>

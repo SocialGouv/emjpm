@@ -1,25 +1,21 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
-import { differenceInDays } from "date-fns";
 import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
-import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
 import { directionEnqueteReponseResumeBuilder } from "./enBuilder";
 import { ENQUETE_DETAILS } from "./queries";
 
-export const DirectionEnqueteDetails = ({ enqueteId }) => {
+export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
   const { data, loading, error } = useQuery(ENQUETE_DETAILS, {
-    variables: { enqueteId, limit: 5 },
+    variables: { enqueteId },
   });
 
-  const directionEnqueteDetails = useDirectionEnqueteDetails(data);
-
-  const { enqueteLabel, enqueteReponseResumes } = directionEnqueteDetails;
+  const { enqueteLabel, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(data);
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -34,23 +30,19 @@ export const DirectionEnqueteDetails = ({ enqueteId }) => {
           },
           {
             label: enqueteLabel,
+            href: "/direction/enquetes/[enquete_id]",
+            as: `/direction/enquetes/${enqueteId}`,
+          },
+          {
+            label: "Toutes les réponses",
           },
         ]}
       />
+
       <Flex mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
-        <Heading2>{enqueteLabel}</Heading2>
+        <Heading2>{"Réponses à l'enquête"}</Heading2>
       </Flex>
-      <Flex mt={3} flexDirection="row">
-        <Heading2>Informations clés</Heading2>
-      </Flex>
-      <Box mt={2}>
-        <DirectionEnqueteDetailsInformationsClesIndicators
-          directionEnqueteDetails={directionEnqueteDetails}
-        />
-      </Box>
-      <Flex mt={3} flexDirection="row">
-        <Heading2>Dernières réponses</Heading2>
-      </Flex>
+
       <Box mt={2}>
         <PaginatedList
           entries={enqueteReponseResumes}
@@ -78,20 +70,10 @@ export const DirectionEnqueteDetails = ({ enqueteId }) => {
           }}
         />
       </Box>
-      <Box mt={2} textAlign="center">
-        <Link
-          href={`/direction/enquetes/[enquete_id]/reponses`}
-          as={`/direction/enquetes/${enqueteId}/reponses`}
-        >
-          <a>
-            <Button>Voir les réponses</Button>
-          </a>
-        </Link>
-      </Box>
     </LoadingWrapper>
   );
 };
-function useDirectionEnqueteDetails(data) {
+function useDirectionEnqueteDetailsReponsesList(data) {
   return useMemo(() => {
     if (data) {
       const enqueteReponses = data.enquete_reponses;
@@ -100,20 +82,11 @@ function useDirectionEnqueteDetails(data) {
       return {
         enqueteLabel,
         enqueteReponseResumes: directionEnqueteReponseResumeBuilder.buildMany(enqueteReponses),
-        destinatairesCount:
-          data.mandataires_aggregate.mandataires.count + data.services_aggregate.services.count,
-        enqueteReponsesCount: data.enquete_reponses_aggregate.enquete_reponses.count,
-        daysBeforeClosing: enquete.date_fin
-          ? differenceInDays(new Date(enquete.date_fin), new Date())
-          : undefined,
       };
     }
     return {
       enqueteLabel: "",
       enqueteReponseResumes: [],
-      destinatairesCount: 0,
-      enqueteReponsesCount: 0,
-      daysBeforeClosing: 0,
     };
   }, [data]);
 }
