@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { Box } from "rebass";
 
 import { getOptionValue } from "../../util/option/OptionUtil";
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import { UserContext } from "../UserContext";
 import { IndividuelInformationExerciceForm } from "./IndividuelInformationExerciceForm";
 import { IndividuelInformationExerciceView } from "./IndividuelInformationExerciceView";
@@ -41,7 +41,7 @@ const IndividuelInformationExercice = () => {
       });
       setEdit(false);
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
     }
 

@@ -3,7 +3,7 @@ import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import serviceSiretExists from "../../util/serviceSiretExists";
 import { AdminServiceForm } from "./AdminServiceForm";
 import { ADD_SERVICE } from "./mutations";
@@ -60,7 +60,7 @@ export const AdminAddService = () => {
         },
       });
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
