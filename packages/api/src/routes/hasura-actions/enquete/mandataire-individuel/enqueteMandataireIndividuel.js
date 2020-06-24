@@ -61,6 +61,7 @@ async function initEnqueteMandataireIndividuel({
 
   return {
     status: enqueteReponse.status,
+    user_type: enqueteReponse.user_type,
     submitted_at: enqueteReponse.submitted_at,
     enquete_id: enqueteReponse.enquete_id,
     enquete_reponse_validation_status: status,

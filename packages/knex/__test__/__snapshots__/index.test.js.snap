@@ -384,6 +384,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "user_type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
 }
 `;
 

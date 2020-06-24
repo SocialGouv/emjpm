@@ -1,39 +1,20 @@
-import { Heading1 } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
-import { useQuery } from "react-apollo";
 import { Box, Flex } from "rebass";
 
 import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
-import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
-import { buildMenuSections } from "./EnqueteServiceMenuBuilder.service";
-
-// function goToStep(router, { enqueteId, step, substep }) {
-//   router.push("/services/enquetes/[enquete_id]", {
-//     pathname: `/services/enquetes/${enqueteId}`,
-//     query: { step, substep },
-//   });
-// }
+import { enqueteServiceMenuBuilder } from "./EnqueteServiceMenuBuilder.service";
 
 export const EnqueteService = (props) => {
   const router = useRouter();
-  const { enquete, userId, currentStep } = props;
-  const { id: enqueteId } = enquete;
 
-  const { data, loading, error } = useQuery(ENQUETE_REPONSE_STATUS, {
-    variables: { enqueteId, userId },
-  });
+  const { userId, enquete, enqueteReponse, currentStep } = props;
 
-  const enqueteReponse = data ? data.enquete_reponse_status || {} : {};
-
-  const sections = useMemo(() => (!data ? undefined : buildMenuSections(enqueteReponse)), [
+  const sections = useMemo(() => enqueteServiceMenuBuilder.buildMenuSections(enqueteReponse), [
     enqueteReponse,
-    data,
   ]);
-
-  console.log("currentStep", currentStep);
 
   const {
     section,
@@ -46,30 +27,16 @@ export const EnqueteService = (props) => {
     currentStep,
     navigateToStep,
     sections,
+    enqueteReponse,
   });
 
-  if (loading) {
-    return <Box mt={4}>Chargement...</Box>;
+  console.log("xxx section:", section);
+  console.log("xxx step:", step);
+
+  if (step === undefined || section === undefined) {
+    navigateToStep({ step: 0, substep: 0 });
+    return <Box mt={4}>Redirection...</Box>;
   }
-
-  if (error) {
-    return (
-      <Box mt={4}>
-        <Heading1 mb={4}>Oups</Heading1>
-        <Box>Une erreur est survenue. Merci de réessayer ultérieurement.</Box>
-      </Box>
-    );
-  }
-
-  // if ((!step || !section || !step.component) && typeof window !== "undefined") {
-  //   // goToStep(router, { enqueteId, step: 0, substep: 0 });
-  //   return null;
-  // }
-
-  if (!step || !section) {
-    return null;
-  }
-
   const ComponentForm = step.component;
 
   return (
@@ -86,29 +53,36 @@ export const EnqueteService = (props) => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          enqueteContext={{
+            ...enqueteContext,
+            enqueteReponse,
+            userId,
+            section,
+            step,
+          }}
           userId={userId}
           section={section}
           step={step}
-          enqueteContext={enqueteContext}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
-          goToFirstPage={() => goToFirstPage()}
+          goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
+
         <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
       </Box>
     </Flex>
   );
-
-  function goToFirstPage() {
-    navigateToStep({ step: 1, substep: 0 });
-  }
-
   async function navigateToStep({ step, substep }) {
     if (step === undefined || substep === undefined) {
       return;
     }
+    console.log(
+      `xxx Redirect ${step} ${substep}`,
+      currentStep,
+      step !== currentStep.step || substep !== currentStep.substep
+    );
     if (step !== currentStep.step || substep !== currentStep.substep) {
       await router.push("/services/enquetes/[enquete_id]", {
-        pathname: `/services/enquetes/${enqueteId}`,
+        pathname: `/services/enquetes/${enquete.id}`,
         query: { step, substep },
       });
       window.scrollTo(0, 0);

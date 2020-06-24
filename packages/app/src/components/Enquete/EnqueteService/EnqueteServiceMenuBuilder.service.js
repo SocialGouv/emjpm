@@ -1,7 +1,35 @@
-export function buildMenuSections(enqueteReponse) {
-  const status = enqueteReponse.enquete_reponse_status;
-  console.log("status", status);
-  const menu = [];
+import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
+import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
+
+function buildMenuSections(enqueteReponse) {
+  const status = enqueteReponse.enquete_reponse_validation_status;
+  const menu = [
+    {
+      status: "valid",
+      steps: [
+        {
+          label: "Bienvenue",
+          component: EnqueteServiceWelcome,
+          status: "valid",
+        },
+      ],
+    },
+
+    {
+      status: enqueteReponse.status === "draft" ? "empty" : "valid",
+      steps: [
+        {
+          label: "Envoi de vos réponses",
+          component: EnqueteServiceSubmit,
+          status: status.global === "valid" ? "valid" : "empty",
+        },
+      ],
+    },
+  ];
 
   return menu;
 }
+
+export const enqueteServiceMenuBuilder = {
+  buildMenuSections,
+};
