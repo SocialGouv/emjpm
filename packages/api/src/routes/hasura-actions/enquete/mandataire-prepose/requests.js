@@ -4,7 +4,10 @@ const {
   graphqlFetch,
   backendAuthHeaders,
 } = require("../../../../utils/graphql-fetcher");
-const { ENQUETE_REPONSE_MANDATAIRE_PREPOSE } = require("./queries");
+const {
+  ENQUETE_REPONSE_MANDATAIRE_PREPOSE,
+  ENQUETE_REPONSE_DEFAULT_VALUES,
+} = require("./queries");
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
@@ -53,11 +56,39 @@ module.exports = {
   },
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
     try {
+      const queryResult = await graphqlFetch(
+        { mandataireId },
+        ENQUETE_REPONSE_DEFAULT_VALUES,
+        backendAuthHeaders
+      );
+
+      const defaultValues = {
+        region: null,
+        departement: null,
+      };
+
+      if (queryResult.data.mandataires_by_pk) {
+        const { lb_user } = queryResult.data.mandataires_by_pk;
+        if (
+          lb_user &&
+          lb_user.lb_departements &&
+          lb_user.lb_departements.length
+        ) {
+          const [{ departement }] = lb_user.lb_departements;
+          defaultValues.region = departement.region.nom;
+          defaultValues.departement = departement.nom;
+        }
+      }
+
+      const value = {
+        enqueteId,
+        mandataireId,
+        departement: defaultValues.departement,
+        region: defaultValues.region,
+      };
+
       const { data, errors } = await graphqlFetch(
-        {
-          enqueteId,
-          mandataireId,
-        },
+        value,
         INIT_ENQUETE_REPONSE,
         backendAuthHeaders
       );
