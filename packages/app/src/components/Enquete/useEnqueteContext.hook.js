@@ -26,7 +26,7 @@ export const useEnqueteContext = (props) => {
     [currentStep, sections]
   );
 
-  const enqueteReponseStatus = enqueteReponse.status;
+  const enqueteReponseStatus = enqueteReponse ? enqueteReponse.status : "";
   const readOnly = enqueteReponseStatus !== "draft";
 
   function enqueteContextReducer(state, action) {
