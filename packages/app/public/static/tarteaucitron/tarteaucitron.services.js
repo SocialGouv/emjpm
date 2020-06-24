@@ -91,6 +91,11 @@ tarteaucitron.services.matomo = {
     You don't need to add any html code, if the service is autorized, the javascript is added. otherwise no.
   */
 tarteaucitron.services.hotjar = {
+  key: "hotjar",
+  type: "analytic",
+  name: "Hotjar",
+  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar",
+  needConsent: true,
   cookies: [
     "hjClosedSurveyInvites",
     "_hjDonePolls",
@@ -119,9 +124,4 @@ tarteaucitron.services.hotjar = {
     var extension = ".js?sv=";
     tarteaucitron.addScript(uri + window._hjSettings.hjid + extension + window._hjSettings.hjsv);
   },
-  key: "hotjar",
-  name: "Hotjar",
-  needConsent: true,
-  type: "analytic",
-  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar",
 };
