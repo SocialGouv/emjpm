@@ -30,20 +30,24 @@ async function initEnqueteService(context) {
 
   const ids = {
     id: enqueteReponse.id,
-    modalites_exercice_id:
-      enqueteReponse.enquete_reponses_modalites_exercice_id,
-    populations_id: enqueteReponse.enquete_reponses_populations_id,
-    financement_id: enqueteReponse.enquete_reponses_financement_id,
-    activite_id: enqueteReponse.enquete_reponses_activite_id,
-    personel_formation_id:
-      enqueteReponse.enquete_reponses_prepose_personel_formation_id,
-    prestations_sociales_id:
-      enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
+    // modalites_exercice_id:
+    //   enqueteReponse.enquete_reponses_modalites_exercice_id,
+    // populations_id: enqueteReponse.enquete_reponses_populations_id,
+    // financement_id: enqueteReponse.enquete_reponses_financement_id,
+    // activite_id: enqueteReponse.enquete_reponses_activite_id,
+    // personel_formation_id:
+    //   enqueteReponse.enquete_reponses_prepose_personel_formation_id,
+    // prestations_sociales_id:
+    //   enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
   };
+
+  logger.info(enqueteReponse, "enqueteReponse");
+
   return {
+    status: enqueteReponse.status || {},
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,
-    enquete_reponse_status: status,
+    enquete_reponse_validation_status: status,
     enquete_reponse_ids: ids,
   };
 }

@@ -52,12 +52,12 @@ module.exports = {
       return null;
     }
   },
-  createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
+  createEmptyEnqueteReponse: async ({ enqueteId, serviceId }) => {
     try {
       const { data, errors } = await graphqlFetch(
         {
           enqueteId,
-          mandataireId,
+          serviceId,
         },
         INIT_ENQUETE_REPONSE,
         backendAuthHeaders
