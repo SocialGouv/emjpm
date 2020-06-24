@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { createContext, Fragment } from "react";
 
+import { setUser } from "../../util/sentry";
+
 export const Context = createContext({});
 
 import {
@@ -25,6 +27,11 @@ const UserProvider = (props) => {
   const { data } = useQuery(QUERY_TYPE[type], {
     variables: {
       userId: userId,
+    },
+    onCompleted: ({ users_by_pk: user }) => {
+      if (user) {
+        setUser({ id: user.id, role: type });
+      }
     },
   });
 

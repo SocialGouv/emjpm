@@ -3,7 +3,7 @@ import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import { AdminEditorForm } from "./AdminEditorForm";
 import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";
@@ -23,7 +23,7 @@ export const AdminEditorCreate = () => {
         },
       });
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
     }
 

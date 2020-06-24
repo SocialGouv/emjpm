@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useContext, useState } from "react";
 import { Box } from "rebass";
 
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import { UserContext } from "../UserContext";
 import { UPDATE_SERVICE_PERSONNEL } from "./mutations";
 import { SERVICE_PERSONNEL } from "./queries";
@@ -44,7 +44,7 @@ const ServiceInformationPersonnel = () => {
       });
       setEdit(false);
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
     }
 
