@@ -3,6 +3,9 @@ module.exports = {
   query enquete_reponses_service($enqueteId: Int!, $serviceId: Int!) {
     enquete_reponses(where: {enquete_id: {_eq: $enqueteId}, service_id: {_eq: $serviceId}}) {
       id
+      status
+      user_type
+      submitted_at
       enquete_id
     }
   }  

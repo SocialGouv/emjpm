@@ -1,9 +1,10 @@
 import { Heading4, Spinner } from "@emjpm/ui";
+import Error from "next/error";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box, Card } from "rebass";
 
-export const LoadingWrapper = ({ children, error, loading, errorRedirect }) => {
+export const LoadingWrapper = ({ children, error, errorCode, loading, errorRedirect }) => {
   const router = useRouter();
 
   const errorRedirectionEnabled = errorRedirect && errorRedirect.url;
@@ -17,7 +18,9 @@ export const LoadingWrapper = ({ children, error, loading, errorRedirect }) => {
     }
   }, [error, errorRedirect, errorRedirectionEnabled, router]);
 
-  return error ? (
+  return errorCode ? (
+    <Error code={errorCode} />
+  ) : error ? (
     errorRedirectionEnabled ? (
       <Card mt={4} height="100%">
         <Heading4>Erreur inattendue, redirection...</Heading4>
