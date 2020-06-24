@@ -20,8 +20,8 @@ module.exports = {
   }
   `,
   INIT_ENQUETE_REPONSE: `
-    mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!) {
-      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, mandataire_id: $mandataireId, enquete_reponses_prepose_prestations_sociale: {data: {}}, enquete_reponses_activite: {data: {}}, enquete_reponses_financement: {data: {}}, enquete_reponses_modalites_exercice: {data: {}}, enquete_reponses_population: {data: {}}, enquete_reponses_prepose_personel_formation: {data: {}}}) {
+    mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!, $departement: String, $region: String) {
+      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, mandataire_id: $mandataireId, enquete_reponses_prepose_prestations_sociale: {data: {}}, enquete_reponses_activite: {data: {}}, enquete_reponses_financement: {data: {}}, enquete_reponses_modalites_exercice: {data: {departement: $departement, region: $region}}, enquete_reponses_population: {data: {}}, enquete_reponses_prepose_personel_formation: {data: {}}}) {
         id
         enquete_reponses_activite_id
         enquete_reponses_financement_id
@@ -38,6 +38,6 @@ module.exports = {
         created_at
         enquete_id
       }
-    }  
+    }
   `,
 };
