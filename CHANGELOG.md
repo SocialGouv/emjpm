@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.47.0](https://github.com/SocialGouv/emjpm/compare/v25.46.0...v25.47.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* **enquete:** initial values for prepose - it closes [#1997](https://github.com/SocialGouv/emjpm/issues/1997) ([#2002](https://github.com/SocialGouv/emjpm/issues/2002)) ([91d6353](https://github.com/SocialGouv/emjpm/commit/91d63530c5af20f8427cd296df4452bb1539017d))
+* **enquete:** it fixes [#2000](https://github.com/SocialGouv/emjpm/issues/2000) ([#2004](https://github.com/SocialGouv/emjpm/issues/2004)) ([8a3140e](https://github.com/SocialGouv/emjpm/commit/8a3140edefbd258fffd3cdef9630875b53bfdc6a))
+
+
+### Features
+
+* **hotjar:** change hotjar id ([a8f41d0](https://github.com/SocialGouv/emjpm/commit/a8f41d04fa33b024f01a1ddba8c1437e70b61cc3))
+* **sentry:** add additional informations about user - it closes [#2003](https://github.com/SocialGouv/emjpm/issues/2003) ([#2005](https://github.com/SocialGouv/emjpm/issues/2005)) ([3f41dee](https://github.com/SocialGouv/emjpm/commit/3f41deee44b273188a64a4d5c65eb402af28cbba))
+
+
+
+
+
 # [25.46.0](https://github.com/SocialGouv/emjpm/compare/v25.45.0...v25.46.0) (2020-06-23)
 
 
