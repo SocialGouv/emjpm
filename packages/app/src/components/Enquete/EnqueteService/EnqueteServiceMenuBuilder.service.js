@@ -1,3 +1,4 @@
+import { EnqueteServiceInformations } from "../EnqueteServiceInformations";
 import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
 import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
 
@@ -14,7 +15,16 @@ function buildMenuSections(enqueteReponse) {
         },
       ],
     },
-
+    {
+      status: "valid",
+      steps: [
+        {
+          label: "Informations service",
+          component: EnqueteServiceInformations,
+          status: "valid",
+        },
+      ],
+    },
     {
       status: enqueteReponse.status === "draft" ? "empty" : "valid",
       steps: [

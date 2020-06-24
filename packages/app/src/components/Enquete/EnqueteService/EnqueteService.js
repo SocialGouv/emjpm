@@ -70,6 +70,7 @@ export const EnqueteService = (props) => {
       </Box>
     </Flex>
   );
+
   async function navigateToStep({ step, substep }) {
     if (step === undefined || substep === undefined) {
       return;
