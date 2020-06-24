@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.48.0](https://github.com/SocialGouv/emjpm/compare/v25.47.0...v25.48.0) (2020-06-24)
+
+
+### Bug Fixes
+
+* **hotjar:** update tarteaucitron ([2aaa18e](https://github.com/SocialGouv/emjpm/commit/2aaa18eef41765753020b859386843974befcbb5))
+
+
+### Features
+
+* **enquete:** dashboard direction [#1998](https://github.com/SocialGouv/emjpm/issues/1998) ([#1999](https://github.com/SocialGouv/emjpm/issues/1999)) ([8f927bc](https://github.com/SocialGouv/emjpm/commit/8f927bcbe5b1c36ec6ade818a7b9139fd3ca5612))
+* **enquete:** service ([#2006](https://github.com/SocialGouv/emjpm/issues/2006)) ([4fc1a1b](https://github.com/SocialGouv/emjpm/commit/4fc1a1bc1fb3fba66ae901dc22fa0ee5d0c20285))
+
+
+
+
+
 # [25.47.0](https://github.com/SocialGouv/emjpm/compare/v25.46.0...v25.47.0) (2020-06-24)
 
 

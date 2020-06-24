@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.48.0](https://github.com/SocialGouv/emjpm/compare/v25.47.0...v25.48.0) (2020-06-24)
+
+
+### Features
+
+* **enquete:** service ([#2006](https://github.com/SocialGouv/emjpm/issues/2006)) ([4fc1a1b](https://github.com/SocialGouv/emjpm/commit/4fc1a1bc1fb3fba66ae901dc22fa0ee5d0c20285))
+
+
+
+
+
 # [25.47.0](https://github.com/SocialGouv/emjpm/compare/v25.46.0...v25.47.0) (2020-06-24)
 
 **Note:** Version bump only for package @emjpm/knex
