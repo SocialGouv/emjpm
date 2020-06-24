@@ -30,6 +30,7 @@ async function initEnqueteService(context) {
 
   const ids = {
     id: enqueteReponse.id,
+    activite_id: enqueteReponse.enquete_reponses_activite_id,
     service_informations_id:
       enqueteReponse.enquete_reponses_service_informations_id,
   };

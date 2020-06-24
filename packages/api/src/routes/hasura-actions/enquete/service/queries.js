@@ -22,6 +22,7 @@ module.exports = {
         submitted_at
         enquete_id
         enquete_reponses_service_informations_id
+        enquete_reponses_activite_id
       }
     }  
   `,
