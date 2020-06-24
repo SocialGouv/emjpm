@@ -1,1 +1,1 @@
-export { Enquete } from "./Enquete";
+export { EnqueteReponse } from "./EnqueteReponse";
