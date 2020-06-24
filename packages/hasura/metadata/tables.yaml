@@ -446,6 +446,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_populations_id
       filter: {}
+      allow_aggregations: true
   - role: individuel
     permission:
       columns:

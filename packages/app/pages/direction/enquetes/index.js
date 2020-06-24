@@ -3,11 +3,11 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "../../../src/components/Commons";
-import { Enquetes } from "../../../src/components/Enquetes";
+import { DirectionEnquetesList } from "../../../src/components/EnqueteDirection";
 import { LayoutDirection } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
-const EnquetesPage = () => {
+const DirectionEnquetesPage = () => {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
@@ -17,10 +17,10 @@ const EnquetesPage = () => {
             <LinkButton href="/direction/enquetes/create">Ajouter une enquête</LinkButton>
           </Box>
         </Flex>
-        <Enquetes />
+        <DirectionEnquetesList />
       </BoxWrapper>
     </LayoutDirection>
   );
 };
 
-export default withAuthSync(EnquetesPage);
+export default withAuthSync(DirectionEnquetesPage);

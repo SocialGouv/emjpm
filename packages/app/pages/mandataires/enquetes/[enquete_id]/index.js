@@ -7,7 +7,7 @@ import { LayoutMandataire } from "../../../../src/components/Layout";
 import { withAuthSync } from "../../../../src/util/auth";
 import { useUrlQueryValues } from "../../../../src/util/url";
 
-const EnquetePage = ({ enqueteId }) => {
+const MandataireEnquetePage = ({ enqueteId }) => {
   const { step, substep } = useUrlQueryValues([
     {
       defaultValue: 0,
@@ -32,10 +32,10 @@ const EnquetePage = ({ enqueteId }) => {
   );
 };
 
-EnquetePage.getInitialProps = async (params) => {
+MandataireEnquetePage.getInitialProps = async (params) => {
   const { query } = params;
   resetIdCounter();
   return { enqueteId: Number(query.enquete_id) };
 };
 
-export default withAuthSync(EnquetePage);
+export default withAuthSync(MandataireEnquetePage);
