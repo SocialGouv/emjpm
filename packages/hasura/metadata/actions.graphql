@@ -84,6 +84,7 @@ type EnqueteReponseStatus {
   enquete_id : Int!
   submitted_at : timestamptz
   status : String!
+  user_type : String!
   enquete_reponse_ids : json!
   enquete_reponse_validation_status : json!
 }

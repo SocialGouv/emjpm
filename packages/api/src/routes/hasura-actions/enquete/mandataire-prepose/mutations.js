@@ -21,8 +21,9 @@ module.exports = {
   `,
   INIT_ENQUETE_REPONSE: `
     mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!, $departement: String, $region: String) {
-      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, mandataire_id: $mandataireId, enquete_reponses_prepose_prestations_sociale: {data: {}}, enquete_reponses_activite: {data: {}}, enquete_reponses_financement: {data: {}}, enquete_reponses_modalites_exercice: {data: {departement: $departement, region: $region}}, enquete_reponses_population: {data: {}}, enquete_reponses_prepose_personel_formation: {data: {}}}) {
+      insert_enquete_reponses_one(object: {enquete_id: $enqueteId, user_type: "prepose", mandataire_id: $mandataireId, enquete_reponses_prepose_prestations_sociale: {data: {}}, enquete_reponses_activite: {data: {}}, enquete_reponses_financement: {data: {}}, enquete_reponses_modalites_exercice: {data: {departement: $departement, region: $region}}, enquete_reponses_population: {data: {}}, enquete_reponses_prepose_personel_formation: {data: {}}}) {
         id
+        user_type
         enquete_reponses_activite_id
         enquete_reponses_financement_id
         enquete_reponses_modalites_exercice_id
