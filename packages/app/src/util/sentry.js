@@ -15,7 +15,7 @@ try {
   console.log(`SENTRY: ${error.message}`);
 }
 
-const captureException = (error, context = {}) => {
+export const captureException = (error, context = {}) => {
   Sentry.configureScope((scope) => {
     if (error.message) {
       scope.setFingerprint([error.message]);
@@ -32,6 +32,9 @@ const captureException = (error, context = {}) => {
   Sentry.captureException(error);
 };
 
-export default {
-  captureException,
+export const setUser = (id, role) => {
+  Sentry.configureScope((scope) => {
+    scope.setUser({ id });
+    scope.setTag("role", role);
+  });
 };
