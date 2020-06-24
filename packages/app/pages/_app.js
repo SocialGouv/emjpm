@@ -11,7 +11,7 @@ import { UserProvider } from "../src/components/UserContext";
 import { withApolloClient } from "../src/lib/apollo";
 import { initMatomo } from "../src/matomo";
 import { formatUserFromToken } from "../src/util/formatUserFromToken";
-import Sentry from "../src/util/sentry";
+import { captureException } from "../src/util/sentry";
 
 class MyApp extends App {
   static async getInitialProps(appContext) {
@@ -26,7 +26,7 @@ class MyApp extends App {
     try {
       pageProps = await Component.getInitialProps(ctx);
     } catch (e) {
-      Sentry.captureException(e, ctx);
+      captureException(e, ctx);
     }
 
     return { pageProps };

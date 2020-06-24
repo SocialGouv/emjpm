@@ -4,7 +4,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import { EDIT_ANTENNE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditForm } from "./ServiceEditForm";
@@ -51,7 +51,7 @@ const ServiceEdit = () => {
         },
       });
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
 
