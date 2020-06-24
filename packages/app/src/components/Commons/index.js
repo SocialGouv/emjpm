@@ -5,7 +5,7 @@ import LinkButton from "./LinkButton";
 import { List, ListItem, ListTitle } from "./List";
 import ServiceEditLinkButton from "./ServiceEditLinkButton";
 import { YesNoComboBox } from "./YesNoComboBox";
-
+export * from "./LoadingWrapper";
 export {
   List,
   ListItem,
