@@ -11,8 +11,8 @@ const Indicator = (props) => {
     return (
       <Card height="100%">
         <Heading4>{title}</Heading4>
-        <Heading4 color="error" mt="7">
-          aucune données disponible
+        <Heading4 color="error" mt="3">
+          aucune donnée disponible
         </Heading4>
       </Card>
     );
@@ -22,7 +22,7 @@ const Indicator = (props) => {
     return (
       <Card height="100%">
         <Heading4>{title}</Heading4>
-        <Box mt="7">
+        <Box mt="3">
           <Spinner />
         </Box>
       </Card>
