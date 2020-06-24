@@ -71,8 +71,6 @@ router.post(
         return next(new HttpError(500, "Unexpected role"));
       }
 
-      logger.info(result, "result");
-
       return res.json(result);
     } catch (err) {
       logger.error(err, "error");
