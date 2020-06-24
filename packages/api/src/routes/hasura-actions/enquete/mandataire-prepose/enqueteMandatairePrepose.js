@@ -42,6 +42,7 @@ async function initEnqueteMandatairePrepose({
   };
   return {
     status: enqueteReponse.status,
+    user_type: enqueteReponse.user_type,
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,
     enquete_reponse_validation_status: status,

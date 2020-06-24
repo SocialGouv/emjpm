@@ -436,23 +436,6 @@
   - role: direction
     permission:
       columns:
-      - id
-      - created_at
-      - status
-      - submitted_at
-      - enquete_id
-      - mandataire_id
-      - service_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_agrements_formations_id
-      - enquete_reponses_activite_id
-      - enquete_reponses_populations_id
-      filter: {}
-      allow_aggregations: true
-  - role: individuel
-    permission:
-      columns:
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
@@ -468,7 +451,34 @@
       - service_id
       - created_at
       - submitted_at
+      - uploaded_on
       - status
+      - user_type
+      filter:
+        status:
+          _eq: submitted
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - created_at
+      - submitted_at
+      - enquete_id
+      - mandataire_id
+      - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prepose_prestations_sociales_id
+      - status
+      - uploaded_on
+      - user_type
       filter:
         mandataire:
           user_id:
@@ -491,7 +501,9 @@
       - service_id
       - created_at
       - submitted_at
+      - uploaded_on
       - status
+      - user_type
       filter:
         mandataire:
           user_id:
@@ -499,21 +511,24 @@
   - role: service
     permission:
       columns:
-      - id
-      - created_at
-      - submitted_at
       - enquete_id
-      - mandataire_id
-      - service_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_agrements_formations_id
       - enquete_reponses_activite_id
-      - enquete_reponses_populations_id
-      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_populations_id
       - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prepose_prestations_sociales_id
+      - enquete_reponses_prestations_sociale_id
+      - id
+      - mandataire_id
+      - service_id
+      - created_at
+      - submitted_at
+      - uploaded_on
+      - status
+      - user_type
       filter:
         enquete_service:
           service_members:
