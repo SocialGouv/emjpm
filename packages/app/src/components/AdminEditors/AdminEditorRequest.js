@@ -3,7 +3,7 @@ import { Button, Card, Heading5 } from "@emjpm/ui";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import Sentry from "../../util/sentry";
+import { captureException } from "../../util/sentry";
 import { PaginatedList } from "../PaginatedList";
 import { ADD_EDITOR_FROM_REQUEST } from "./mutations";
 import { EDITOR_REQUESTS } from "./queries";
@@ -24,7 +24,7 @@ const RowItem = ({ item }) => {
         },
       });
     } catch (error) {
-      Sentry.captureException(error);
+      captureException(error);
       // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
     }
   };
