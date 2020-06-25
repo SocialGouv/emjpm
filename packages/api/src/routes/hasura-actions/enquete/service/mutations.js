@@ -10,6 +10,6 @@ module.exports = {
         enquete_reponses_service_informations_id
         enquete_reponses_activite_id
       }
-    }  
+    }
   `,
 };
