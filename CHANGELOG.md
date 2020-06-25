@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.49.0](https://github.com/SocialGouv/emjpm/compare/v25.48.0...v25.49.0) (2020-06-25)
+
+
+### Bug Fixes
+
+* **enquete:** it fixes [#2009](https://github.com/SocialGouv/emjpm/issues/2009) ([#2012](https://github.com/SocialGouv/emjpm/issues/2012)) ([a58e289](https://github.com/SocialGouv/emjpm/commit/a58e289b7b560ed682212a5f028b6c90cbe38c73))
+* **enquete:** it fixes [#2010](https://github.com/SocialGouv/emjpm/issues/2010) ([#2011](https://github.com/SocialGouv/emjpm/issues/2011)) ([a7be5e8](https://github.com/SocialGouv/emjpm/commit/a7be5e86a39c6692cb0dc73cb86d9916ceec266e))
+
+
+### Features
+
+* **enquete:** dashboard direction [#1998](https://github.com/SocialGouv/emjpm/issues/1998) - refactor enquetes forms ([#2007](https://github.com/SocialGouv/emjpm/issues/2007)) ([e1d6387](https://github.com/SocialGouv/emjpm/commit/e1d6387a503713da4eca88202e49ca3c75f96f69))
+* **enquete-excel:** update excel ([d0cb5fb](https://github.com/SocialGouv/emjpm/commit/d0cb5fb889e3a5f5997db4f6af32df924e204af2))
+
+
+
+
+
 # [25.48.0](https://github.com/SocialGouv/emjpm/compare/v25.47.0...v25.48.0) (2020-06-24)
 
 
