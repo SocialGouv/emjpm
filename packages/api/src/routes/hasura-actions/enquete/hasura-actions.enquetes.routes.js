@@ -16,7 +16,7 @@ const {
 } = require("./mandataire-prepose/enqueteMandatairePrepose");
 const {
   initEnqueteService,
-  // submitEnqueteService,
+  submitEnqueteService,
 } = require("./service/enqueteService");
 const router = express.Router();
 
@@ -33,6 +33,10 @@ router.post(
         });
       } else if (enqueteContext.role === "prepose") {
         enqueteReponse = enqueteReponse = await submitEnqueteMandatairePrepose({
+          enqueteContext,
+        });
+      } else if (enqueteContext.role === "service") {
+        enqueteReponse = enqueteReponse = await submitEnqueteService({
           enqueteContext,
         });
       } else {

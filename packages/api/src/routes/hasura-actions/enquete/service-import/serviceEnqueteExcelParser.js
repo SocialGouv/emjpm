@@ -1,5 +1,9 @@
 var XLSX = require("xlsx");
-var { enqueteExcelParserActivite } = require("../common/excel-parser");
+var {
+  enqueteExcelParserAgrementsPopulations,
+  enqueteExcelParserActivite,
+  enqueteExcelParserInformationsService,
+} = require("../common/excel-parser");
 
 // var HttpError = require("../../../../utils/error/HttpError");
 const logger = require("../../../../utils/logger");
@@ -26,8 +30,14 @@ const parse = async ({ content }) => {
   // ]);
 
   const res = {
+    informations: enqueteExcelParserInformationsService.parse(
+      workbook.Sheets["info service "]
+    ),
     activite: enqueteExcelParserActivite.parse(
       workbook.Sheets[workbook.SheetNames[3]]
+    ),
+    populations: enqueteExcelParserAgrementsPopulations.parse(
+      workbook.Sheets["Populations "]
     ),
   };
 

@@ -33,6 +33,7 @@ async function initEnqueteService(context) {
     activite_id: enqueteReponse.enquete_reponses_activite_id,
     service_informations_id:
       enqueteReponse.enquete_reponses_service_informations_id,
+    populations_id: enqueteReponse.enquete_reponses_populations_id,
   };
 
   return {

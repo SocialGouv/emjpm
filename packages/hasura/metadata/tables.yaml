@@ -2705,19 +2705,35 @@
       - departement
       - region
       - nom
-      - association
-      - ccas
-      - organisme_securite_sociale
-      - autres
-      - cooperation
       - nb_structures_concernees
       - affiliation_federation
+      - type_organisme_gestionnaire
       filter:
         enquete_reponses:
           enquete_service:
             service_members:
               user_id:
                 _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: service
+    permission:
+      columns:
+      - id
+      - nb_structures_concernees
+      - created_at
+      - last_update
+      - affiliation_federation
+      - departement
+      - nom
+      - region
+      - type_organisme_gestionnaire
+      filter:
+        enquete_reponses:
+          enquete_service:
+            service_members:
+              user_id:
+                _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: enquete_services

@@ -1,18 +1,22 @@
 import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
-import { Box, Text } from "rebass";
+import { Box } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput, parseFormInput } from "../../../util";
-import { EnqueteFormInputField } from "../EnqueteForm";
+import { formatFormInput, parseFormInput, parseFormInt } from "../../../util";
+import { ENQ_REP_INFO_SERVICE } from "../constants/ENQ_REQ_INFO_SERVICE.const";
+import { EnqueteFormInputField, EnqueteFormSelectField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 function dataToForm(data) {
   return {
+    nom: formatFormInput(data.nom),
     departement: formatFormInput(data.departement),
     region: formatFormInput(data.region),
-    nom: formatFormInput(data.nom),
+    type_organisme_gestionnaire: formatFormInput(data.type_organisme_gestionnaire),
+    nb_structures_concernees: formatFormInput(data.nb_structures_concernees),
+    affiliation_federation: formatFormInput(data.affiliation_federation),
   };
 }
 
@@ -21,6 +25,9 @@ function formToData(data) {
     nom: parseFormInput(data.nom),
     departement: parseFormInput(data.departement),
     region: parseFormInput(data.region),
+    type_organisme_gestionnaire: parseFormInput(data.type_organisme_gestionnaire),
+    nb_structures_concernees: parseFormInt(data.nb_structures_concernees),
+    affiliation_federation: parseFormInput(data.affiliation_federation),
   };
 }
 
@@ -75,7 +82,29 @@ export const EnqueteServiceInformationsForm = (props) => {
           enqueteForm={enqueteForm}
         />
 
-        <Text>{"Type d'organisme gestionnaire :"}</Text>
+        <EnqueteFormSelectField
+          id="type_organisme_gestionnaire"
+          label="Type d'organisme gestionnaire"
+          options={ENQ_REP_INFO_SERVICE.TYPE_ORGANISME_GESTIONNAIRE.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
+
+        <EnqueteFormInputField
+          id="nb_structures_concernees"
+          label="Nombre de structures concernées"
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+          type="number"
+        />
+
+        <EnqueteFormSelectField
+          id="affiliation_federation"
+          label="Affiliation à une Fédération"
+          options={ENQ_REP_INFO_SERVICE.AFFILIATION_FEDERATION.byKey}
+          enqueteContext={enqueteContext}
+          enqueteForm={enqueteForm}
+        />
 
         <EnqueteStepperButtons submit={submit} disabled={loading} />
       </Box>

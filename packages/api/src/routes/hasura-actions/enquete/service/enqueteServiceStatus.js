@@ -1,6 +1,7 @@
 const {
   getTopLevelGlobalStatus,
   enqueteActiviteStatus,
+  populationsStatus,
 } = require("../common/enquete-status");
 
 async function enqueteMandatairePreposeStatus(enqueteReponse) {
@@ -13,8 +14,14 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     statusBuildContext
   );
 
+  const populations = await populationsStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+
   const status = {
     activite,
+    populations,
   };
 
   status.global = getTopLevelGlobalStatus(

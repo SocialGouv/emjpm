@@ -11,6 +11,13 @@ import {
   EnqueteActiviteSubrogeTuteurCreateur,
   EnqueteActiviteTutelle,
 } from "../EnqueteActivite";
+import {
+  EnquetePopulationsAutreMesures,
+  EnquetePopulationsCuratelle,
+  EnquetePopulationsMAJ,
+  EnquetePopulationsSauvegardeJustice,
+  EnquetePopulationsTutelle,
+} from "../EnquetePopulations";
 import { EnqueteServiceInformations } from "../EnqueteServiceInformations";
 import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
 import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
@@ -96,6 +103,37 @@ function buildMenuSections(enqueteReponse) {
           label: "Causes des sorties du dispositif",
           component: EnqueteActiviteCausesSortiesDispositif,
           status: status.activite.causesSortiesDispositif,
+        },
+      ],
+    },
+    {
+      label: "Populations",
+      status: status.populations.global,
+      steps: [
+        {
+          label: "Curatelle",
+          component: EnquetePopulationsCuratelle,
+          status: status.populations.curatelle,
+        },
+        {
+          label: "Tutelle",
+          component: EnquetePopulationsTutelle,
+          status: status.populations.tutelle,
+        },
+        {
+          label: "Mesure d'accompagnement de justice",
+          component: EnquetePopulationsMAJ,
+          status: status.populations.accompagnementJudiciaire,
+        },
+        {
+          label: "Sauvegarde de justice",
+          component: EnquetePopulationsSauvegardeJustice,
+          status: status.populations.sauvegardeJustice,
+        },
+        {
+          label: "Autre",
+          component: EnquetePopulationsAutreMesures,
+          status: status.populations.autresMesures,
         },
       ],
     },
