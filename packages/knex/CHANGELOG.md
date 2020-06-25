@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.49.0](https://github.com/SocialGouv/emjpm/compare/v25.48.0...v25.49.0) (2020-06-25)
+
+
+### Features
+
+* **enquete:** dashboard direction [#1998](https://github.com/SocialGouv/emjpm/issues/1998) - refactor enquetes forms ([#2007](https://github.com/SocialGouv/emjpm/issues/2007)) ([e1d6387](https://github.com/SocialGouv/emjpm/commit/e1d6387a503713da4eca88202e49ca3c75f96f69))
+
+
+
+
+
 # [25.48.0](https://github.com/SocialGouv/emjpm/compare/v25.47.0...v25.48.0) (2020-06-24)
 
 
