@@ -2,12 +2,18 @@ const {
   getTopLevelGlobalStatus,
   enqueteActiviteStatus,
   populationsStatus,
+  serviceInformationsStatus,
 } = require("../common/enquete-status");
 
-async function enqueteMandatairePreposeStatus(enqueteReponse) {
+async function enqueteServiceStatus(enqueteReponse) {
   const statusBuildContext = {
     allowEmpty: true,
   };
+
+  const informations = await serviceInformationsStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
 
   const activite = await enqueteActiviteStatus(
     enqueteReponse,
@@ -20,6 +26,7 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
   );
 
   const status = {
+    informations,
     activite,
     populations,
   };
@@ -30,4 +37,4 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
   return status;
 }
 
-module.exports = enqueteMandatairePreposeStatus;
+module.exports = enqueteServiceStatus;
