@@ -52,55 +52,7 @@ module.exports = {
         secretaire_specialise_etp_n6: yup.number().min(0).nullable(),
         informations_generales_secretaire_specialise_etp: yup
           .number()
-          .nullable()
-          .test(function (value) {
-            if (value !== undefined) {
-              const etp1 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n1"],
-                0
-              );
-              const etp2 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n2"],
-                0
-              );
-              const etp3 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n3"],
-                0
-              );
-              const etp4 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n4"],
-                0
-              );
-              const etp5 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n5"],
-                0
-              );
-              const etp6 = valueOrDefault(
-                this.parent["secretaire_specialise_etp_n6"],
-                0
-              );
-
-              // deal with js number precision: 0.5+0.2+0.1 = 0.7999999999999999
-              // https://stackoverflow.com/questions/1458633/how-to-deal-with-floating-point-number-precision-in-javascript#3439981
-              const expectedTotal =
-                Math.round(
-                  etp1 * 1000 +
-                    etp2 * 1000 +
-                    etp3 * 1000 +
-                    etp4 * 1000 +
-                    etp5 * 1000 +
-                    etp6 * 1000
-                ) / 1000;
-
-              if (expectedTotal !== value) {
-                return this.createError({
-                  message: `La somme des ETP des secrétaires spécialisés par niveau (${expectedTotal}) ne correspond pas à la valeur "Estimation de l'activité en ETP du secrétariat spécialisé" renseignée dans l'onglet "Informations Générales" (${value})`,
-                  path: "informations_generales_secretaire_specialise_etp",
-                });
-              }
-            }
-            return true;
-          }),
+          .nullable(),
       }),
       debugName: `${debugGroupName}/formationStatus`,
       logDataWithErrors,
@@ -108,10 +60,3 @@ module.exports = {
     return validationResult;
   },
 };
-function valueOrDefault(value, defaultValue) {
-  return isDefined(value) ? value : defaultValue;
-}
-
-function isDefined(value) {
-  return value !== undefined && value !== null;
-}
