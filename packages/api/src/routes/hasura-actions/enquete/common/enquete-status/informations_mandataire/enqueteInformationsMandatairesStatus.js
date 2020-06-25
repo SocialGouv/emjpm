@@ -52,7 +52,7 @@ module.exports = async (enqueteReponse) => {
                 .test(
                   "equals-to-false",
                   "Vous avez déclaré exercer seul une activité.",
-                  () => false
+                  (value) => value === false
                 ),
             }),
           secretaire_specialise_etp: yup
