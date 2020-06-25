@@ -33,6 +33,7 @@ module.exports = {
       submitted_at
       created_at
       enquete_id
+      user_type
     }
   }
 `,
