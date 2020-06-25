@@ -3719,6 +3719,15 @@
 - table:
     schema: public
     name: lb_users
+  object_relationships:
+  - name: mandataire
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: mandataires
+        column_mapping:
+          id: lb_user_id
   array_relationships:
   - name: lb_departements
     using:

@@ -29,11 +29,16 @@ export const ListeBlancheItemCard = ({ item }) => (
         <Text sx={labelStyle}>SIRET</Text>
         <Text sx={descriptionStyle}>{item.siret}</Text>
       </Flex>
-      <Flex width="25%" flexDirection="column">
+      <Flex width="30%" flexDirection="column">
         <Text sx={labelStyle}>Email</Text>
         <Text sx={descriptionStyle}>{item.email}</Text>
       </Flex>
-      <Flex width="50%" flexDirection="column">
+      <Flex width="10%" flexDirection="column">
+        <Text sx={labelStyle}>Utilisateur</Text>
+        <Text sx={descriptionStyle}>{item.mandataire ? "oui" : "non"}</Text>
+      </Flex>
+
+      <Flex width="30%" flexDirection="column">
         {item.lb_departements.map((lbDep) => (
           <Flex
             key={lbDep.id}
