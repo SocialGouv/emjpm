@@ -11,6 +11,8 @@ const prestationsSocialesStatus = require("./prestations-sociales/prestationsSoc
 const preposePersonnelFormationStatus = require("./prepose-personnel-formation/enquetePreposePersonnelFormationStatus");
 const preposePrestationsSocialesStatus = require("./prepose-prestations-sociales/enquetePreposePrestationsSocialesStatus");
 const preposeFinancementStatus = require("./prepose-financement/enquetePreposeFinancementStatus");
+const serviceInformationsStatus = require("./service-informations/enqueteServiceInformationsStatus");
+const servicePersonnelFormationStatus = require("./service-personnel-formation/enqueteServicePersonnelFormationStatus");
 
 module.exports = {
   getTopLevelGlobalStatus,
@@ -24,4 +26,6 @@ module.exports = {
   preposePersonnelFormationStatus,
   preposePrestationsSocialesStatus,
   preposeFinancementStatus,
+  serviceInformationsStatus,
+  servicePersonnelFormationStatus,
 };

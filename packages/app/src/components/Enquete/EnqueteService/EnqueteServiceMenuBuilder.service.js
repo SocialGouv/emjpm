@@ -24,6 +24,9 @@ import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
 
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponse_validation_status;
+
+  console.log("status", status);
+
   const menu = [
     {
       status: "valid",
@@ -36,12 +39,12 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      status: "valid",
+      status: status.informations.global,
       steps: [
         {
           label: "Informations service",
           component: EnqueteServiceInformations,
-          status: "valid",
+          status: status.informations.informations,
         },
       ],
     },

@@ -1,4 +1,5 @@
 import { BoxWrapper } from "@emjpm/ui";
+import { useRouter } from "next/router";
 import React, { useContext } from "react";
 
 import { EnqueteImportPanel } from "../../../../src/components/EnqueteImport";
@@ -8,10 +9,20 @@ import { withAuthSync } from "../../../../src/util/auth";
 
 const ImportEnquetePage = ({ enqueteId }) => {
   const user = useContext(UserContext);
+  const router = useRouter();
   return (
     <LayoutMandataire>
       <BoxWrapper>
-        <EnqueteImportPanel enqueteId={enqueteId} userId={user.id} />
+        <EnqueteImportPanel
+          goToStep={(enqueteId, { step, substep }) => {
+            router.push("/mandataires/enquetes/[enquete_id]", {
+              pathname: `/mandataires/enquetes/${enqueteId}`,
+              query: { step, substep },
+            });
+          }}
+          enqueteId={enqueteId}
+          userId={user.id}
+        />
       </BoxWrapper>
     </LayoutMandataire>
   );
