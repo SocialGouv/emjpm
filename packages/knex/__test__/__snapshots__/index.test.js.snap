@@ -2380,65 +2380,6 @@ Object {
 }
 `;
 
-exports[`enquete_reponses_service_informations table schema 1`] = `
-Object {
-  "affiliation_federation": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "departement": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "id": Object {
-    "defaultValue": "nextval('enquete_reponses_service_informations_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "last_update": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "nb_structures_concernees": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "region": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "type_organisme_gestionnaire": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-}
-`;
-
 exports[`enquete_services table schema 1`] = `
 Object {
   "id": Object {
