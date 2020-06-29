@@ -43,6 +43,7 @@ export const ENQUETE_DETAILS = gql`
       reponse_id: id
       status
       submitted_at
+      user_type
       mandataire {
         id
         user {
@@ -51,6 +52,15 @@ export const ENQUETE_DETAILS = gql`
           nom
           type
         }
+        departement {
+          code
+          nom
+        }
+        ville
+      }
+      service {
+        id
+        etablissement
         departement {
           code
           nom

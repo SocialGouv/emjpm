@@ -27,11 +27,11 @@ router.post(
       const enqueteContext = await checkEnqueteContext(req);
 
       let enqueteReponse;
-      if (enqueteContext.role === "individuel") {
+      if (enqueteContext.user_type === "individuel") {
         enqueteReponse = await submitEnqueteMandataireIndividuel({
           enqueteContext,
         });
-      } else if (enqueteContext.role === "prepose") {
+      } else if (enqueteContext.user_type === "prepose") {
         enqueteReponse = enqueteReponse = await submitEnqueteMandatairePrepose({
           enqueteContext,
         });
@@ -40,8 +40,8 @@ router.post(
           enqueteContext,
         });
       } else {
-        logger.error("Unexpected role", enqueteContext.role);
-        return next(new HttpError(500, "Unexpected role"));
+        logger.error("Unexpected user_type", enqueteContext.user_type);
+        return next(new HttpError(500, "Unexpected user_type"));
       }
 
       return res.json({
@@ -64,15 +64,15 @@ router.post(
       const enqueteContext = await checkEnqueteContext(req);
 
       let result;
-      if (enqueteContext.role === "individuel") {
+      if (enqueteContext.user_type === "individuel") {
         result = await initEnqueteMandataireIndividuel({ enqueteContext });
-      } else if (enqueteContext.role === "prepose") {
+      } else if (enqueteContext.user_type === "prepose") {
         result = await initEnqueteMandatairePrepose({ enqueteContext });
-      } else if (enqueteContext.role === "service") {
+      } else if (enqueteContext.user_type === "service") {
         result = await initEnqueteService(enqueteContext);
       } else {
-        logger.error("Unexpected role", enqueteContext.role);
-        return next(new HttpError(500, "Unexpected role"));
+        logger.error("Unexpected user_type", enqueteContext.user_type);
+        return next(new HttpError(500, "Unexpected user_type"));
       }
 
       return res.json(result);
@@ -81,7 +81,7 @@ router.post(
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processiong status")
+  hasuraActionErrorHandler("Unexpected error processing status")
 );
 
 // hasura action: `upload_enquete_file`
@@ -93,19 +93,19 @@ router.post(
       const file = { content: req.body.input.content };
 
       let result;
-      if (enqueteContext.role === "individuel") {
+      if (enqueteContext.user_type === "individuel") {
         result = await mandataireIndividuelEnqueteImporter.importEnqueteFile({
           file,
           enqueteContext,
         });
-      } else if (enqueteContext.role === "prepose") {
+      } else if (enqueteContext.user_type === "prepose") {
         result = await preposeEnqueteImporter.importEnqueteFile({
           file,
           enqueteContext,
         });
       } else {
-        logger.error("Unexpected role", enqueteContext.role);
-        return next(new HttpError(500, "Unexpected role"));
+        logger.error("Unexpected user_type", enqueteContext.user_type);
+        return next(new HttpError(500, "Unexpected user_type"));
       }
 
       return res.status(201).json({

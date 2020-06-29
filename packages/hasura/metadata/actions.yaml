@@ -8,6 +8,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: direction
   - role: individuel
   - role: prepose
   - role: service

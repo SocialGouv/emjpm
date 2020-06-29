@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
@@ -8,9 +7,7 @@ import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
 
 export const EnquetePrepose = (props) => {
-  const router = useRouter();
-
-  const { userId, enquete, enqueteReponse, currentStep } = props;
+  const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
   const sections = useMemo(() => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse), [
     enqueteReponse,
@@ -53,11 +50,9 @@ export const EnquetePrepose = (props) => {
           enqueteContext={{
             ...enqueteContext,
             enqueteReponse,
-            userId,
             section,
             step,
           }}
-          userId={userId}
           section={section}
           step={step}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
@@ -67,19 +62,6 @@ export const EnquetePrepose = (props) => {
       </Box>
     </Flex>
   );
-
-  async function navigateToStep({ step, substep }) {
-    if (step === undefined || substep === undefined) {
-      return;
-    }
-    if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push("/mandataires/enquetes/[enquete_id]", {
-        pathname: `/mandataires/enquetes/${enquete.id}`,
-        query: { step, substep },
-      });
-      window.scrollTo(0, 0);
-    }
-  }
 };
 
 export default EnquetePrepose;

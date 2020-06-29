@@ -11,7 +11,6 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
-    userId,
     step,
     enquete: { id: enqueteId },
   } = props;
@@ -32,7 +31,7 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId },
+          variables: { enqueteId, reponseId: enqueteReponse.id },
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,

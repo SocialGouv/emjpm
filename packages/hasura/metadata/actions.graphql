@@ -1,7 +1,8 @@
 type Query {
   enquete_reponse_validation_status (
     enqueteId: Int!
-    userId: Int!
+    userId: Int
+    reponseId: Int
   ): EnqueteReponseStatus
 }
 
@@ -87,5 +88,7 @@ type EnqueteReponseStatus {
   user_type : String!
   enquete_reponse_ids : json!
   enquete_reponse_validation_status : json!
+  mandataire : json
+  service : json
 }
 
