@@ -9,7 +9,7 @@ const debugGroupName = "servicePersonnelFormation";
 module.exports = async (enqueteReponse) => {
   const status = {
     informations: await getValidationStatus(
-      enqueteReponse.enquete_service_personnel_formation,
+      enqueteReponse.enquete_reponses_service_personnel_formation,
       {
         schema: yup.object().shape({}),
         debugName: `${debugGroupName}`,

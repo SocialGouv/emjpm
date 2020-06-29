@@ -19,6 +19,7 @@ import {
   EnquetePopulationsTutelle,
 } from "../EnquetePopulations";
 import { EnqueteServiceInformations } from "../EnqueteServiceInformations";
+import { EnqueteServicePersonnelFormation } from "../EnqueteServicePersonnelFormation";
 import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
 import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
 
@@ -45,6 +46,16 @@ function buildMenuSections(enqueteReponse) {
           label: "Informations service",
           component: EnqueteServiceInformations,
           status: status.informations.informations,
+        },
+      ],
+    },
+    {
+      status: "valid",
+      steps: [
+        {
+          label: "Personnel et formation",
+          component: EnqueteServicePersonnelFormation,
+          status: "valid",
         },
       ],
     },
