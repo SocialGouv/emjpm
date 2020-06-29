@@ -9,7 +9,6 @@ import { enqueteServiceMenuBuilder } from "./EnqueteServiceMenuBuilder.service";
 
 export const EnqueteService = (props) => {
   const router = useRouter();
-
   const { userId, enquete, enqueteReponse, currentStep } = props;
 
   const sections = useMemo(() => enqueteServiceMenuBuilder.buildMenuSections(enqueteReponse), [
@@ -71,6 +70,7 @@ export const EnqueteService = (props) => {
       </Box>
     </Flex>
   );
+
   async function navigateToStep({ step, substep }) {
     if (step === undefined || substep === undefined) {
       return;

@@ -30,18 +30,11 @@ async function initEnqueteService(context) {
 
   const ids = {
     id: enqueteReponse.id,
-    // modalites_exercice_id:
-    //   enqueteReponse.enquete_reponses_modalites_exercice_id,
-    // populations_id: enqueteReponse.enquete_reponses_populations_id,
-    // financement_id: enqueteReponse.enquete_reponses_financement_id,
-    // activite_id: enqueteReponse.enquete_reponses_activite_id,
-    // personel_formation_id:
-    //   enqueteReponse.enquete_reponses_prepose_personel_formation_id,
-    // prestations_sociales_id:
-    //   enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
+    activite_id: enqueteReponse.enquete_reponses_activite_id,
+    service_informations_id:
+      enqueteReponse.enquete_reponses_service_informations_id,
+    populations_id: enqueteReponse.enquete_reponses_populations_id,
   };
-
-  logger.info(enqueteReponse, "enqueteReponse");
 
   return {
     status: enqueteReponse.status || {},
