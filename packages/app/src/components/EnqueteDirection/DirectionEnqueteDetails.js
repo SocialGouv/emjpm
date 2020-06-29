@@ -8,8 +8,8 @@ import { Box, Button, Flex } from "rebass";
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
+import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
-import { directionEnqueteReponseResumeBuilder } from "./enBuilder";
 import { ENQUETE_DETAILS } from "./queries";
 
 export const DirectionEnqueteDetails = ({ enqueteId }) => {
