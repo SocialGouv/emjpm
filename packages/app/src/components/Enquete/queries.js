@@ -12,8 +12,12 @@ export const ENQUETE = gql`
 `;
 
 export const ENQUETE_REPONSE_STATUS = gql`
-  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int!) {
-    enquete_reponse_validation_status(enqueteId: $enqueteId, userId: $userId) {
+  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int, $reponseId: Int) {
+    enquete_reponse_validation_status(
+      enqueteId: $enqueteId
+      userId: $userId
+      reponseId: $reponseId
+    ) {
       status
       user_type
       submitted_at
@@ -23,19 +27,26 @@ export const ENQUETE_REPONSE_STATUS = gql`
     }
   }
 `;
+// init reponse from userId or get response from reponseId
 export const ENQUETE_WITH_REPONSE_STATUS = gql`
-  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int!) {
+  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int, $reponseId: Int) {
     enquetes_by_pk(id: $enqueteId) {
       id
       created_at
       annee
       date_fin
     }
-    enquete_reponse_validation_status(enqueteId: $enqueteId, userId: $userId) {
+    enquete_reponse_validation_status(
+      enqueteId: $enqueteId
+      userId: $userId
+      reponseId: $reponseId
+    ) {
       status
       submitted_at
       enquete_id
       user_type
+      mandataire
+      service
       enquete_reponse_ids
       enquete_reponse_validation_status
     }

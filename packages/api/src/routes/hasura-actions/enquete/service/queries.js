@@ -24,6 +24,9 @@ module.exports = {
         enquete_reponses_service_informations_id
         enquete_reponses_activite_id
         enquete_reponses_populations_id
+        service {
+          id
+        }
       }
     }  
   `,

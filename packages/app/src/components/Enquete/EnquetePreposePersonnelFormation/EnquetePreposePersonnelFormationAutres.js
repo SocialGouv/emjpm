@@ -14,7 +14,6 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
     enqueteReponse,
     step,
     enquete: { id: enqueteId },
-    userId,
   } = props; /* mandataireId, enquete */
   const {
     enquete_reponse_ids: { personel_formation_id },
@@ -32,7 +31,7 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId },
+          variables: { enqueteId, reponseId: enqueteReponse.id },
         },
         {
           query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,

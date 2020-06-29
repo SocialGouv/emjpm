@@ -62,6 +62,15 @@ module.exports = {
       user_type
       submitted_at
       enquete_id
+      mandataire {
+        id
+        user {
+          id
+          prenom
+          nom
+          type
+        }
+      }
       enquete_reponses_populations_id
       enquete_reponses_population {
         created_at

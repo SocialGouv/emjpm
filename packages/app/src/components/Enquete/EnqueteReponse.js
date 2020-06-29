@@ -5,33 +5,33 @@ import { EnqueteIndividuel } from "./EnqueteIndividuel";
 import { EnquetePrepose } from "./EnquetePrepose";
 import { EnqueteService } from "./EnqueteService";
 
-export const EnqueteReponse = ({ enquete, enqueteReponse, currentStep, userId }) => {
+export const EnqueteReponse = ({ enquete, enqueteReponse, currentStep, navigateToStep }) => {
   return (
     <Fragment>
       {enqueteReponse.user_type === "individuel" && (
         <EnqueteIndividuel
-          userId={userId}
           enquete={enquete}
           enqueteReponse={enqueteReponse}
           currentStep={currentStep}
+          navigateToStep={navigateToStep}
         />
       )}
 
       {enqueteReponse.user_type === "prepose" && (
         <EnquetePrepose
-          userId={userId}
           enquete={enquete}
           enqueteReponse={enqueteReponse}
           currentStep={currentStep}
+          navigateToStep={navigateToStep}
         />
       )}
 
       {enqueteReponse.user_type === "service" && (
         <EnqueteService
-          userId={userId}
           enquete={enquete}
           enqueteReponse={enqueteReponse}
           currentStep={currentStep}
+          navigateToStep={navigateToStep}
         />
       )}
     </Fragment>
@@ -39,5 +39,7 @@ export const EnqueteReponse = ({ enquete, enqueteReponse, currentStep, userId })
 };
 
 EnqueteReponse.propTypes = {
-  userId: PropTypes.number.isRequired,
+  enquete: PropTypes.object.isRequired,
+  enqueteReponse: PropTypes.object.isRequired,
+  currentStep: PropTypes.object.isRequired,
 };

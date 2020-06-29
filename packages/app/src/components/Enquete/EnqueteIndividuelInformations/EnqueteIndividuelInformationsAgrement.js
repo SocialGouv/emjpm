@@ -11,7 +11,6 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
-    userId,
     section,
     step,
     enquete: { id: enqueteId },
@@ -30,7 +29,7 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId },
+        variables: { enqueteId, reponseId: enqueteReponse.id },
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,

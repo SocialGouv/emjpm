@@ -9,20 +9,20 @@ const HttpError = require("../../../../utils/error/HttpError");
 
 async function initEnqueteMandatairePrepose({
   // eslint-disable-next-line no-unused-vars
-  enqueteContext: { enqueteId, userId, service, mandataire },
+  enqueteContext: { enqueteId, mandataireId },
 }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
-    mandataireId: mandataire.id,
+    mandataireId,
   });
 
   if (!enqueteReponse) {
     logger.warn(
-      `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataire.id}: create it`
+      `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataireId}: create it`
     );
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
-      mandataireId: mandataire.id,
+      mandataireId,
     });
 
     enqueteReponse = insert_enquete_reponses_one;
@@ -42,6 +42,7 @@ async function initEnqueteMandatairePrepose({
   };
   return {
     status: enqueteReponse.status,
+    mandataire: enqueteReponse.mandataire,
     user_type: enqueteReponse.user_type,
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,
@@ -51,11 +52,11 @@ async function initEnqueteMandatairePrepose({
 }
 
 async function submitEnqueteMandatairePrepose({
-  enqueteContext: { enqueteId, mandataire },
+  enqueteContext: { enqueteId, mandataireId },
 }) {
   const enqueteReponse = await getEnqueteReponseMandatairePrepose({
     enqueteId,
-    mandataireId: mandataire.id,
+    mandataireId: mandataireId,
   });
 
   if (enqueteReponse.status !== "draft") {

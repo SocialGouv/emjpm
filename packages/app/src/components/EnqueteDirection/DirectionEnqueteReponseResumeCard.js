@@ -29,12 +29,14 @@ const descriptionStyle = (style) => ({
   whiteSpace: "nowrap",
 });
 
-const getTypeLabel = (type) => {
-  if (type === "individuel") {
-    return "Mandataire individuel";
-  }
-  if (type === "prepose") {
-    return "Mandataire préposé d'établissement";
+const getTypeLabel = (user_type) => {
+  switch (user_type) {
+    case "individuel":
+      return "Mandataire individuel";
+    case "prepose":
+      return "Mandataire préposé d'établissement";
+    case "service":
+      return "Service";
   }
 };
 
@@ -51,15 +53,19 @@ export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => (
   <Card key={item.reponse_id} sx={cardStyle} mb="2">
     <Flex justifyContent="flex-start">
       <Flex width="50%" flexDirection="column">
-        <Text sx={labelStyle}>{getTypeLabel(item.user.type)}</Text>
-        <Flex>
-          <Text sx={descriptionStyle("important")}>
-            {item.user.nom ? item.user.nom.toUpperCase() : ""}
-          </Text>
-          <Text pl="1" sx={descriptionStyle("important")}>
-            {item.user.prenom}
-          </Text>
-        </Flex>
+        <Text sx={labelStyle}>{getTypeLabel(item.user_type)}</Text>
+        {item.user ? (
+          <Flex>
+            <Text sx={descriptionStyle("important")}>
+              {item.user.nom ? item.user.nom.toUpperCase() : ""}
+            </Text>
+            <Text pl="1" sx={descriptionStyle("important")}>
+              {item.user.prenom}
+            </Text>
+          </Flex>
+        ) : item.etablissement ? (
+          <Text sx={descriptionStyle("important")}>{item.etablissement.toUpperCase()}</Text>
+        ) : null}
       </Flex>
       <Flex width="50%" flexDirection="column">
         <Text sx={labelStyle}>{`Département`}</Text>
