@@ -4,7 +4,10 @@ const {
   graphqlFetch,
   backendAuthHeaders,
 } = require("../../../../utils/graphql-fetcher");
-const { ENQUETE_REPONSE_SERVICE } = require("./queries");
+const {
+  ENQUETE_REPONSE_SERVICE,
+  ENQUETE_REPONSE_DEFAULT_VALUES,
+} = require("./queries");
 const { INIT_ENQUETE_REPONSE } = require("./mutations");
 const logger = require("../../../../utils/logger");
 
@@ -54,11 +57,40 @@ module.exports = {
   },
   createEmptyEnqueteReponse: async ({ enqueteId, serviceId }) => {
     try {
+      const queryResult = await graphqlFetch(
+        { serviceId },
+        ENQUETE_REPONSE_DEFAULT_VALUES,
+        backendAuthHeaders
+      );
+
+      const defaultValues = {
+        region: null,
+        departement: null,
+        nom: null,
+      };
+
+      if (queryResult.data.services_by_pk) {
+        const {
+          id,
+          etablissement,
+          departement,
+        } = queryResult.data.services_by_pk;
+
+        defaultValues.region = departement.region.nom;
+        defaultValues.departement = departement.nom;
+        defaultValues.nom = etablissement;
+      }
+
+      const value = {
+        enqueteId,
+        serviceId,
+        departement: defaultValues.departement,
+        region: defaultValues.region,
+        nom: defaultValues.nom,
+      };
+
       const { data, errors } = await graphqlFetch(
-        {
-          enqueteId,
-          serviceId,
-        },
+        value,
         INIT_ENQUETE_REPONSE,
         backendAuthHeaders
       );
