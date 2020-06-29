@@ -14,7 +14,6 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     enqueteReponse,
     section,
     step,
-    userId,
     enquete: { id: enqueteId },
   } = props;
   const {
@@ -25,7 +24,7 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId },
+        variables: { enqueteId, reponseId: enqueteReponse.id },
       },
       {
         query: ENQUETE_REVISION_MESURES,

@@ -8,20 +8,20 @@ const logger = require("../../../../utils/logger");
 const HttpError = require("../../../../utils/error/HttpError");
 
 async function initEnqueteService(context) {
-  const { enqueteId, service } = context;
+  const { enqueteId, serviceId } = context;
 
   let enqueteReponse = await getEnqueteReponseService({
     enqueteId,
-    serviceId: service.id,
+    serviceId,
   });
 
   if (!enqueteReponse) {
     logger.warn(
-      `EnqueteReponse does not exists for enqueteId ${enqueteId} and serviceId ${service.id}: create it`
+      `EnqueteReponse does not exists for enqueteId ${enqueteId} and serviceId ${serviceId}: create it`
     );
     const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
       enqueteId,
-      serviceId: service.id,
+      serviceId,
     });
 
     enqueteReponse = insert_enquete_reponses_one;
@@ -38,6 +38,7 @@ async function initEnqueteService(context) {
 
   return {
     status: enqueteReponse.status || {},
+    service: enqueteReponse.service,
     user_type: enqueteReponse.user_type,
     enquete_id: enqueteReponse.enquete_id,
     submitted_at: enqueteReponse.submitted_at,

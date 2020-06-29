@@ -6,13 +6,13 @@ import { ENQUETE_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_REPONSE } from "./mutations";
 
 export const EnquetePreposeSubmit = (props) => {
-  const { enquete, enqueteReponse, userId, goToFirstPage } = props;
+  const { enquete, enqueteReponse, goToFirstPage } = props;
 
   const [submitEnqueteReponse, { loading }] = useMutation(SUBMIT_ENQUETE_REPONSE, {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId: enquete.id, userId },
+        variables: { enqueteId: enquete.id, reponseId: enqueteReponse.id },
       },
     ],
   });
