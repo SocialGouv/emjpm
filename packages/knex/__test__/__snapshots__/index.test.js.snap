@@ -354,6 +354,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "enquete_service_personnel_formation_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "id": Object {
     "defaultValue": "nextval('enquete_reponses_id_seq'::regclass)",
     "maxLength": null,
@@ -2164,33 +2170,9 @@ exports[`enquete_reponses_service_informations table schema 1`] = `
 Object {
   "affiliation_federation": Object {
     "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "jsonb",
-  },
-  "association": Object {
-    "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
-  },
-  "autres": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "ccas": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "cooperation": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
   },
   "created_at": Object {
     "defaultValue": "CURRENT_TIMESTAMP",
@@ -2228,13 +2210,13 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "organisme_securite_sociale": Object {
+  "region": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
-  "region": Object {
+  "type_organisme_gestionnaire": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
@@ -3807,6 +3789,7 @@ Array [
   "enquete_reponses_prepose_prestations_sociales",
   "enquete_reponses_prestations_sociales",
   "enquete_reponses_service_informations",
+  "enquete_service_personnel_formation",
   "enquete_services",
   "enquetes",
   "etablissements",

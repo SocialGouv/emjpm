@@ -1,4 +1,4 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading1 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
@@ -41,7 +41,11 @@ export const EnqueteServiceInformationsForm = (props) => {
     dispatchEnqueteContextEvent,
   } = props;
 
-  const validationSchema = yup.object().shape({});
+  const validationSchema = yup.object().shape({
+    nom: yup.string().required(),
+    departement: yup.string().required(),
+    region: yup.string().required(),
+  });
 
   const enqueteForm = useEnqueteForm({
     onSubmit,
@@ -61,7 +65,6 @@ export const EnqueteServiceInformationsForm = (props) => {
       <Heading1 textAlign="center" mb={"50px"}>
         {"Vos informations"}
       </Heading1>
-      <Heading3>Informations générales</Heading3>
       <Box mt={4}>
         <EnqueteFormInputField
           id="departement"

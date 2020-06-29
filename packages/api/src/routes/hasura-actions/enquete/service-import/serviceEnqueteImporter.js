@@ -1,6 +1,6 @@
-const preposeEnqueteExcelParser = require("./preposeEnqueteExcelParser");
+const serviceEnqueteExcelParser = require("./serviceEnqueteExcelParser");
 const logger = require("../../../../utils/logger");
-const preposeEnqueteRepository = require("./preposeEnqueteRepository");
+const serviceEnqueteRepository = require("./serviceEnqueteRepository");
 
 async function importEnqueteFile({
   file: { content },
@@ -11,12 +11,12 @@ async function importEnqueteFile({
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
 
   // parse
-  const tabs = await preposeEnqueteExcelParser.parse({
+  const tabs = await serviceEnqueteExcelParser.parse({
     content,
   });
 
   // save data to database
-  await preposeEnqueteRepository.update(enqueteId, {
+  await serviceEnqueteRepository.update(enqueteId, {
     tabs,
     serviceId: service.id,
     isUpload: true,
