@@ -1,7 +1,6 @@
 import { useApolloClient } from "@apollo/react-hooks";
 import { Heading1 } from "@emjpm/ui";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
-import { useRouter } from "next/router";
 import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -14,9 +13,8 @@ const textStyle = {
   lineHeight: "30px",
 };
 
-export const EnqueteImportPanel = ({ enqueteId, userId }) => {
-  const router = useRouter();
-
+export const EnqueteImportPanel = (props) => {
+  const { enqueteId, userId, goToStep } = props;
   const apolloClient = useApolloClient();
 
   const {
@@ -33,10 +31,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
 
   useEffect(() => {
     if (enqueteReponse && enqueteReponse.status !== "draft") {
-      router.push("/mandataires/enquetes/[enquete_id]", {
-        pathname: `/mandataires/enquetes/${enqueteId}`,
-        query: { step: 0, substep: 0 },
-      });
+      goToStep(enqueteId, { step: 0, subtep: 0 });
     }
   });
 
@@ -62,14 +57,13 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   if (importSummary && !importSummary.unexpectedError) {
     // clear cache after import
     apolloClient.clearStore();
-
-    goToFirstStep(router, enqueteId);
+    goToStep(enqueteId, { step: 1, substep: 0 });
   }
 
   return (
     <Flex>
       <Box py={"50px"} px={4} sx={menuStepperStyle.menu}>
-        <Box>{renderSectionTitle(router, enqueteId)}</Box>
+        <Box>{renderSectionTitle(enqueteId, goToStep)}</Box>
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
         <Flex flexDirection="column" mb="5">
@@ -102,14 +96,7 @@ export const EnqueteImportPanel = ({ enqueteId, userId }) => {
   );
 };
 
-function goToFirstStep(router, enqueteId) {
-  router.push("/mandataires/enquetes/[enquete_id]", {
-    pathname: `/mandataires/enquetes/${enqueteId}`,
-    query: { step: 1, substep: 0 },
-  });
-}
-
-function renderSectionTitle(router, enqueteId) {
+function renderSectionTitle(enqueteId, goToStep) {
   return (
     <Fragment>
       <Flex
@@ -119,7 +106,7 @@ function renderSectionTitle(router, enqueteId) {
           cursor: "pointer",
         }}
         alignItems="center"
-        onClick={() => goToFirstStep(router, enqueteId)}
+        onClick={() => goToStep(enqueteId, { step: 1, substep: 0 })}
       >
         <Flex
           sx={{
