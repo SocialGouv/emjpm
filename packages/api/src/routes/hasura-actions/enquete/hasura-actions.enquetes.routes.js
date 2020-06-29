@@ -4,6 +4,7 @@ const HttpError = require("../../../utils/error/HttpError");
 const logger = require("../../../utils/logger");
 const mandataireIndividuelEnqueteImporter = require("./mandataire-individuel-import/mandataireIndividuelEnqueteImporter");
 const preposeEnqueteImporter = require("./mandataire-prepose-import/preposeEnqueteImporter");
+const serviceEnqueteImporter = require("./service-import/serviceEnqueteImporter");
 const checkEnqueteContext = require("./hasura-actions.enquetes.checker");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const {
@@ -25,6 +26,8 @@ router.post(
   async (req, res, next) => {
     try {
       const enqueteContext = await checkEnqueteContext(req);
+
+      logger.info(enqueteContext.role, "enqueteContext.role");
 
       let enqueteReponse;
       if (enqueteContext.user_type === "individuel") {
@@ -100,6 +103,11 @@ router.post(
         });
       } else if (enqueteContext.user_type === "prepose") {
         result = await preposeEnqueteImporter.importEnqueteFile({
+          file,
+          enqueteContext,
+        });
+      } else if (enqueteContext.role === "service") {
+        result = await serviceEnqueteImporter.importEnqueteFile({
           file,
           enqueteContext,
         });

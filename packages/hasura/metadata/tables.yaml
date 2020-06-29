@@ -383,12 +383,15 @@
   - name: enquete_reponses_service_information
     using:
       foreign_key_constraint_on: enquete_reponses_service_informations_id
-  - name: service
+  - name: enquete_service_personnel_formation
     using:
-      foreign_key_constraint_on: service_id
+      foreign_key_constraint_on: enquete_service_personnel_formation_id
   - name: mandataire
     using:
       foreign_key_constraint_on: mandataire_id
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
   insert_permissions:
   - role: individuel
     permission:
@@ -446,6 +449,8 @@
       - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prepose_prestations_sociales_id
       - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_service_informations_id
+      - enquete_service_personnel_formation_id
       - id
       - mandataire_id
       - service_id
@@ -459,23 +464,25 @@
   - role: individuel
     permission:
       columns:
-      - id
-      - created_at
-      - submitted_at
       - enquete_id
-      - mandataire_id
-      - service_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_agrements_formations_id
       - enquete_reponses_activite_id
-      - enquete_reponses_populations_id
-      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_populations_id
       - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prepose_prestations_sociales_id
-      - status
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_service_informations_id
+      - enquete_service_personnel_formation_id
+      - id
+      - mandataire_id
+      - service_id
+      - created_at
+      - submitted_at
       - uploaded_on
+      - status
       - user_type
       filter:
         mandataire:
@@ -494,6 +501,8 @@
       - enquete_reponses_prepose_personel_formation_id
       - enquete_reponses_prepose_prestations_sociales_id
       - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_service_informations_id
+      - enquete_service_personnel_formation_id
       - id
       - mandataire_id
       - service_id
@@ -509,25 +518,26 @@
   - role: service
     permission:
       columns:
-      - created_at
-      - enquete_id
-      - enquete_reponses_activite_id
-      - enquete_reponses_agrements_formations_id
-      - enquete_reponses_financement_id
-      - enquete_reponses_informations_mandataire_id
-      - enquete_reponses_modalites_exercice_id
-      - enquete_reponses_populations_id
-      - enquete_reponses_prepose_personel_formation_id
-      - enquete_reponses_prepose_prestations_sociales_id
-      - enquete_reponses_prestations_sociale_id
-      - enquete_reponses_service_informations_id
       - id
+      - created_at
+      - submitted_at
+      - enquete_id
       - mandataire_id
       - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prepose_prestations_sociales_id
       - status
-      - submitted_at
       - uploaded_on
+      - enquete_reponses_service_informations_id
       - user_type
+      - enquete_service_personnel_formation_id
       filter:
         service:
           service_members:
@@ -2935,6 +2945,88 @@
       - nom
       - region
       - type_organisme_gestionnaire
+      filter:
+        enquete_reponses:
+          service:
+            service_members:
+              user_id:
+                _eq: X-Hasura-User-Id
+      check: null
+- table:
+    schema: public
+    name: enquete_service_personnel_formation
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_service_personnel_formation_id
+        table:
+          schema: public
+          name: enquete_reponses
+  select_permissions:
+  - role: service
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - nb_delegues_debut_annee
+      - nb_delegues_fin_annee
+      - nb_delegues_cnc
+      - nb_delegues_en_formation
+      - total_heures_delegues_en_formation
+      - nb_delegues_non_formes
+      - nb_delegues_niveau1
+      - nb_delegues_niveau1_etp
+      - nb_delegues_niveau2
+      - nb_delegues_niveau2_etp
+      - nb_delegues_niveau3
+      - nb_delegues_niveau3_etp
+      - nb_delegues_niveau4
+      - nb_delegues_niveau4_etp
+      - nb_delegues_niveau5
+      - nb_delegues_niveau5_etp
+      - nb_delegues_niveau6
+      - nb_delegues_niveau6_etp
+      - nb_delegues_homme
+      - nb_delegues_homme_etp
+      - nb_delegues_femme
+      - nb_delegues_femme_etp
+      filter:
+        enquete_reponses:
+          service:
+            service_members:
+              user_id:
+                _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: service
+    permission:
+      columns:
+      - nb_delegues_femme_etp
+      - nb_delegues_homme_etp
+      - nb_delegues_niveau1_etp
+      - nb_delegues_niveau2_etp
+      - nb_delegues_niveau3_etp
+      - nb_delegues_niveau4_etp
+      - nb_delegues_niveau5_etp
+      - nb_delegues_niveau6_etp
+      - total_heures_delegues_en_formation
+      - id
+      - nb_delegues_cnc
+      - nb_delegues_debut_annee
+      - nb_delegues_en_formation
+      - nb_delegues_femme
+      - nb_delegues_fin_annee
+      - nb_delegues_homme
+      - nb_delegues_niveau1
+      - nb_delegues_niveau2
+      - nb_delegues_niveau3
+      - nb_delegues_niveau4
+      - nb_delegues_niveau5
+      - nb_delegues_niveau6
+      - nb_delegues_non_formes
+      - created_at
+      - last_update
       filter:
         enquete_reponses:
           service:
