@@ -8,8 +8,7 @@ const mandataireIndividuelEnqueteImporter = {
 
 async function importEnqueteFile({
   file: { content },
-  // eslint-disable-next-line no-unused-vars
-  enqueteContext: { enqueteId, userId, service, mandataire },
+  enqueteContext: { enqueteId, mandataireId },
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
@@ -22,7 +21,7 @@ async function importEnqueteFile({
   // save data to database
   await mandataireIndividuelEnqueteRepository.update(enqueteId, {
     tabs,
-    mandataireId: mandataire.id,
+    mandataireId,
     isUpload: true,
   });
 

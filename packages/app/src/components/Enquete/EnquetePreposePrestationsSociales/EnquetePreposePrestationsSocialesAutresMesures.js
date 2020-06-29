@@ -12,7 +12,6 @@ export const EnquetePreposePrestationsSocialesAutresMesures = (props) => {
     dispatchEnqueteContextEvent,
     enqueteReponse,
     step,
-    userId,
     enquete: { id: enqueteId },
   } = props;
   const {
@@ -31,7 +30,7 @@ export const EnquetePreposePrestationsSocialesAutresMesures = (props) => {
       refetchQueries: [
         {
           query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, userId },
+          variables: { enqueteId, reponseId: enqueteReponse.id },
         },
         {
           query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
