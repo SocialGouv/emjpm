@@ -24,6 +24,34 @@ module.exports = {
         service {
           id
         }
+        enquete_service_personnel_formation_id
+        enquete_service_personnel_formation {
+          created_at
+          id
+          last_update
+          nb_delegues_cnc
+          nb_delegues_debut_annee
+          nb_delegues_en_formation
+          nb_delegues_femme
+          nb_delegues_femme_etp
+          nb_delegues_fin_annee
+          nb_delegues_homme
+          nb_delegues_homme_etp
+          nb_delegues_niveau1
+          nb_delegues_niveau1_etp
+          nb_delegues_niveau2
+          nb_delegues_niveau2_etp
+          nb_delegues_niveau3
+          nb_delegues_niveau3_etp
+          nb_delegues_niveau4
+          nb_delegues_niveau4_etp
+          nb_delegues_niveau5
+          nb_delegues_niveau5_etp
+          nb_delegues_niveau6
+          nb_delegues_niveau6_etp
+          nb_delegues_non_formes
+          total_heures_delegues_en_formation
+        }
         enquete_reponses_service_informations_id
         enquete_reponses_service_information {
           affiliation_federation

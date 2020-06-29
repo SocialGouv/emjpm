@@ -3,6 +3,7 @@ const {
   enqueteActiviteStatus,
   populationsStatus,
   serviceInformationsStatus,
+  servicePersonnelFormationStatus,
 } = require("../common/enquete-status");
 
 async function enqueteServiceStatus(enqueteReponse) {
@@ -25,10 +26,16 @@ async function enqueteServiceStatus(enqueteReponse) {
     statusBuildContext
   );
 
+  const personnelFormation = await servicePersonnelFormationStatus(
+    enqueteReponse,
+    statusBuildContext
+  );
+
   const status = {
     informations,
     activite,
     populations,
+    personnelFormation,
   };
 
   status.global = getTopLevelGlobalStatus(
