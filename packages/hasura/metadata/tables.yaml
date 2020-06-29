@@ -439,6 +439,7 @@
   - role: direction
     permission:
       columns:
+      - created_at
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
@@ -454,10 +455,9 @@
       - id
       - mandataire_id
       - service_id
-      - created_at
+      - status
       - submitted_at
       - uploaded_on
-      - status
       - user_type
       filter: {}
       allow_aggregations: true
