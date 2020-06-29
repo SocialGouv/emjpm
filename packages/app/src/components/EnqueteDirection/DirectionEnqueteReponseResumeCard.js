@@ -86,7 +86,11 @@ export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => (
         <Text sx={labelStyle}>{`Statut`}</Text>
         <Text sx={descriptionStyle("important")}>{getStatusLabel(item.status)}</Text>
         <Text sx={descriptionStyle()}>
-          {item.submitted_at ? format(new Date(item.submitted_at), "dd/MM/yyyy") : ""}
+          {item.submitted_at
+            ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${
+                item.uploaded_on ? "import" : "manuel"
+              })`
+            : ""}
         </Text>
       </Flex>
       <Flex width="50%" flexDirection="column">

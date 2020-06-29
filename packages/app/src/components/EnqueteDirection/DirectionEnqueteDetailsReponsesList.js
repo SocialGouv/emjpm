@@ -6,8 +6,13 @@ import { Box, Button, Flex } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
+import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
-import { directionEnqueteReponseResumeBuilder } from "./enBuilder";
+import {
+  DirectionEnqueteReponsesCriteria,
+  enqueteReponseResumesFilter,
+  useDirectionEnqueteReponsesCriteria,
+} from "./DirectionEnqueteReponsesFilter";
 import { ENQUETE_DETAILS } from "./queries";
 
 export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
@@ -19,6 +24,17 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
+
+  const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria();
+
+  const filteredEnqueteReponseResumes = useMemo(
+    () =>
+      enqueteReponseResumesFilter.filter({
+        enqueteReponseResumes,
+        criteria,
+      }),
+    [criteria, enqueteReponseResumes]
+  );
 
   return (
     <LoadingWrapper error={error} loading={loading} errorRedirect={{ url: "/direction/enquetes" }}>
@@ -39,13 +55,15 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         ]}
       />
 
-      <Flex mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+      <Flex mb={4} mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
         <Heading2>{"Réponses à l'enquête"}</Heading2>
       </Flex>
 
+      <DirectionEnqueteReponsesCriteria criteria={criteria} updateCriteria={updateCriteria} />
+
       <Box mt={2}>
         <PaginatedList
-          entries={enqueteReponseResumes}
+          entries={filteredEnqueteReponseResumes}
           RowItem={DirectionEnqueteReponseResumeCard}
           count={enqueteReponseResumes.length}
           resultPerPage={resultPerPage}
@@ -73,6 +91,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
     </LoadingWrapper>
   );
 };
+
 function useDirectionEnqueteDetailsReponsesList(data) {
   return useMemo(() => {
     if (data) {
