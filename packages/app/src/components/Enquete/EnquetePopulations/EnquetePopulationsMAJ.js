@@ -12,7 +12,6 @@ export const EnquetePopulationsMAJ = (props) => {
     enqueteContext,
     dispatchEnqueteContextEvent,
     enqueteReponse,
-    userId,
     enquete: { id: enqueteId },
     section,
     step,
@@ -30,7 +29,7 @@ export const EnquetePopulationsMAJ = (props) => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId },
+        variables: { enqueteId, reponseId: enqueteReponse.id },
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_MAJ,

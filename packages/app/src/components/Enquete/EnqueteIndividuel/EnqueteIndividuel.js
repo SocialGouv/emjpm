@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
@@ -7,9 +6,7 @@ import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvali
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
 export const EnqueteIndividuel = (props) => {
-  const router = useRouter();
-
-  const { userId, enquete, enqueteReponse, currentStep } = props;
+  const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
   const sections = useMemo(() => enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse), [
     enqueteReponse,
@@ -49,13 +46,11 @@ export const EnqueteIndividuel = (props) => {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
-          userId={userId}
           section={section}
           step={step}
           enqueteContext={{
             ...enqueteContext,
             enqueteReponse,
-            userId,
             section,
             step,
           }}
@@ -66,19 +61,6 @@ export const EnqueteIndividuel = (props) => {
       </Box>
     </Flex>
   );
-
-  async function navigateToStep({ step, substep }) {
-    if (step === undefined || substep === undefined) {
-      return;
-    }
-    if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push("/mandataires/enquetes/[enquete_id]", {
-        pathname: `/mandataires/enquetes/${enquete.id}`,
-        query: { step, substep },
-      });
-      window.scrollTo(0, 0);
-    }
-  }
 };
 
 export default EnqueteIndividuel;

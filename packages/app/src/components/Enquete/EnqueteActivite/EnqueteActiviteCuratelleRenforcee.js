@@ -16,7 +16,6 @@ export const EnqueteActiviteCuratelleRenforcee = (props) => {
     enqueteReponse,
     section,
     step,
-    userId,
     enquete: { id: enqueteId },
   } = props;
 
@@ -27,7 +26,7 @@ export const EnqueteActiviteCuratelleRenforcee = (props) => {
     refetchQueries: [
       {
         query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, userId },
+        variables: { enqueteId, reponseId: enqueteReponse.id },
       },
       {
         query: ENQUETE_CURATELLE_RENFORCEE,
