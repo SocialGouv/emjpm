@@ -34,6 +34,8 @@ async function initEnqueteService(context) {
     service_informations_id:
       enqueteReponse.enquete_reponses_service_informations_id,
     populations_id: enqueteReponse.enquete_reponses_populations_id,
+    personnel_formation_id:
+      enqueteReponse.enquete_reponses_service_personnel_formation_id,
   };
 
   return {
