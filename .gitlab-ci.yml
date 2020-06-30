@@ -925,7 +925,7 @@ Release:
 Trigger production:
   extends: .base_stage
   stage: Notify Finished Deployment
-  image: curlimages/curl:7.70.0
+  image: curlimages/curl:7.71.0
   when: manual
   variables:
     GIT_STRATEGY: none
@@ -944,7 +944,7 @@ Trigger production:
 Trigger release:
   extends: .base_stage
   stage: Notify Finished Deployment
-  image: curlimages/curl:7.70.0
+  image: curlimages/curl:7.71.0
   when: manual
   variables:
     GIT_STRATEGY: none
