@@ -13,8 +13,13 @@ const getType = (type) => {
   }
 };
 
-export const ListeBlancheItemCard = ({ item }) => (
-  <Card key={item.id} sx={cardStyle} mb="2">
+export const ListeBlancheItemCard = ({ item, onClick }) => (
+  <Card
+    key={item.id}
+    sx={cardStyle({ clickable: !!onClick })}
+    mb="2"
+    onClick={() => (onClick ? onClick(item) : null)}
+  >
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>{getType(item.type)}</Text>
@@ -29,11 +34,16 @@ export const ListeBlancheItemCard = ({ item }) => (
         <Text sx={labelStyle}>SIRET</Text>
         <Text sx={descriptionStyle}>{item.siret}</Text>
       </Flex>
-      <Flex width="25%" flexDirection="column">
+      <Flex width="30%" flexDirection="column">
         <Text sx={labelStyle}>Email</Text>
         <Text sx={descriptionStyle}>{item.email}</Text>
       </Flex>
-      <Flex width="50%" flexDirection="column">
+      <Flex width="10%" flexDirection="column">
+        <Text sx={labelStyle}>Utilisateur</Text>
+        <Text sx={descriptionStyle}>{item.mandataire ? "oui" : "non"}</Text>
+      </Flex>
+
+      <Flex width="30%" flexDirection="column">
         {item.lb_departements.map((lbDep) => (
           <Flex
             key={lbDep.id}
