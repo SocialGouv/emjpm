@@ -1,4 +1,3 @@
-// const { ENQ_REP_INFO_MANDATAIRE } = require("../constants");
 const { enqueteExcelParser: parser } = require("./services");
 
 function parse(ws) {
