@@ -10,10 +10,10 @@ import { PaginatedList } from "../PaginatedList";
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
-import { ENQUETE_DETAILS } from "./queries";
+import { ENQUETE_DETAILS_RESUME } from "./queries";
 
 export const DirectionEnqueteDetails = ({ enqueteId }) => {
-  const { data, loading, error } = useQuery(ENQUETE_DETAILS, {
+  const { data, loading, error } = useQuery(ENQUETE_DETAILS_RESUME, {
     variables: { enqueteId, limit: 5 },
   });
 
@@ -21,7 +21,7 @@ export const DirectionEnqueteDetails = ({ enqueteId }) => {
 
   const { enqueteLabel, enqueteReponseResumes } = directionEnqueteDetails;
 
-  const resultPerPage = 50;
+  const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
 
   return (

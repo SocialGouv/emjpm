@@ -22,7 +22,7 @@ const USER_TYPE_OPTIONS = [
   { label: "Service", value: "service" },
 ];
 
-const ENQUETE_REPONSE_STATUS_OPTIONS = [
+export const ENQUETE_REPONSE_STATUS_OPTIONS = [
   { label: "Tous les status", value: null },
   { label: "En cours", value: "draft" },
   { label: "Réponse reçue", value: "submitted" },
