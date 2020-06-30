@@ -27,3 +27,5 @@ export const EnqueteServiceSubmit = (props) => {
     />
   );
 };
+
+export default EnqueteServiceSubmit;

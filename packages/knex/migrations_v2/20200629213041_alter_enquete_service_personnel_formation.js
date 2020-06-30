@@ -32,14 +32,14 @@ exports.down = async function (knex) {
     "enquete_reponses_service_personnel_formation",
     (table) => {
       table.renameColumn("nb_delegues", "nb_delegues_debut_annee");
-      table.renameColumn("nb_delegues_fin_annee", "nb_delegues_etp");
+      table.renameColumn("nb_delegues_etp", "nb_delegues_fin_annee");
     }
   );
 
   await knex.schema.alterTable(
     "enquete_reponses_service_personnel_formation",
     (table) => {
-      table.integer("nb_delegues_etp").nullable().alter();
+      table.integer("nb_delegues_fin_annee").nullable().alter();
     }
   );
 

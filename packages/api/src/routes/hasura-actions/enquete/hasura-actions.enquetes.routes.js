@@ -26,9 +26,6 @@ router.post(
   async (req, res, next) => {
     try {
       const enqueteContext = await checkEnqueteContext(req);
-
-      logger.info(enqueteContext.role, "enqueteContext.role");
-
       let enqueteReponse;
       if (enqueteContext.user_type === "individuel") {
         enqueteReponse = await submitEnqueteMandataireIndividuel({
@@ -38,7 +35,7 @@ router.post(
         enqueteReponse = enqueteReponse = await submitEnqueteMandatairePrepose({
           enqueteContext,
         });
-      } else if (enqueteContext.role === "service") {
+      } else if (enqueteContext.user_type === "service") {
         enqueteReponse = enqueteReponse = await submitEnqueteService({
           enqueteContext,
         });
@@ -106,7 +103,7 @@ router.post(
           file,
           enqueteContext,
         });
-      } else if (enqueteContext.role === "service") {
+      } else if (enqueteContext.user_type === "service") {
         result = await serviceEnqueteImporter.importEnqueteFile({
           file,
           enqueteContext,

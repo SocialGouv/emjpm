@@ -38,9 +38,8 @@ async function enqueteServiceStatus(enqueteReponse) {
     personnelFormation,
   };
 
-  status.global = getTopLevelGlobalStatus(
-    Object.values(status).map((x) => x.global)
-  );
+  status.global = getTopLevelGlobalStatus(status);
+
   return status;
 }
 
