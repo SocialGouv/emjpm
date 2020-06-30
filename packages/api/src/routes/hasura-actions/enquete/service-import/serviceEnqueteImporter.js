@@ -5,7 +5,7 @@ const serviceEnqueteRepository = require("./serviceEnqueteRepository");
 async function importEnqueteFile({
   file: { content },
   // eslint-disable-next-line no-unused-vars
-  enqueteContext: { enqueteId, userId, service },
+  enqueteContext: { enqueteId, userId, serviceId },
 }) {
   const start = Date.now();
   logger.info(`[IMPORT ENQUETE] START ${enqueteId}`);
@@ -18,7 +18,7 @@ async function importEnqueteFile({
   // save data to database
   await serviceEnqueteRepository.update(enqueteId, {
     tabs,
-    serviceId: service.id,
+    serviceId,
     isUpload: true,
   });
 

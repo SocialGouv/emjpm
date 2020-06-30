@@ -8,6 +8,9 @@ const {
 const {
   EnqueteReponsesServiceInformations,
 } = require("../../../../models/EnqueteReponsesServiceInformations");
+const {
+  EnqueteReponsesServicePersonnelFormation,
+} = require("../../../../models/EnqueteReponsesServicePersonnelFormation");
 
 const {
   getEnqueteReponseService,
@@ -16,7 +19,7 @@ const {
 const HttpError = require("../../../../utils/error/HttpError");
 
 async function update(enqueteId, { tabs, serviceId, isUpload = false }) {
-  const { activite, populations, informations } = tabs;
+  const { activite, populations, informations, personnelFormation } = tabs;
 
   const enqueteReponse = await initEnqueteReponse({
     enqueteId,
@@ -32,6 +35,11 @@ async function update(enqueteId, { tabs, serviceId, isUpload = false }) {
       .findById(enqueteReponse.id)
       .patch({ uploaded_on: new Date() });
   }
+
+  await EnqueteReponsesServicePersonnelFormation.query()
+    .findById(enqueteReponse.enquete_reponses_service_personnel_formation_id)
+    .patch(personnelFormation);
+
   await EnqueteReponsesServiceInformations.query()
     .findById(enqueteReponse.enquete_reponses_service_informations_id)
     .patch(informations);

@@ -50,12 +50,12 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      status: "valid",
+      status: status.personnelFormation.global,
       steps: [
         {
           label: "Personnel et formation",
           component: EnqueteServicePersonnelFormation,
-          status: "valid",
+          status: status.personnelFormation.personnelFormation,
         },
       ],
     },
