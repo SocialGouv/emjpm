@@ -3874,6 +3874,13 @@
         table:
           schema: public
           name: commentaires
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: enquete_reponses
   - name: mandataire_etablissements
     using:
       foreign_key_constraint_on:
@@ -5259,6 +5266,13 @@
     using:
       foreign_key_constraint_on: department_id
   array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: enquete_reponses
   - name: service_antennes
     using:
       foreign_key_constraint_on:
