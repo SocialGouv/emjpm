@@ -29,6 +29,12 @@ export default (App) => {
           // Handle them in components via the data.error prop:
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           console.error("Error while running `getDataFromTree`", error);
+          console.error(
+            `Error while running "getDataFromTree" on ${Component.displayName} with appProps ${
+              appProps ? JSON.stringify(appProps) : ""
+            } and context ${ctx ? JSON.stringify(ctx) : ""}`,
+            error
+          );
         }
 
         // getDataFromTree does not call componentWillUnmount
