@@ -4,10 +4,15 @@ import { Box, Flex } from "rebass";
 
 import { PaginatedListStyle } from "./style";
 
-const DataList = ({ entries, RowItem, renderActions }) => (
+const DataList = ({ entries, RowItem, renderActions, onRowClick }) => (
   <Flex flexDirection="column">
     {entries.map((entry, index) => (
-      <RowItem key={index} item={entry} renderActions={renderActions} />
+      <RowItem
+        onClick={() => (onRowClick ? onRowClick(entry) : null)}
+        key={index}
+        item={entry}
+        renderActions={renderActions}
+      />
     ))}
   </Flex>
 );
@@ -20,13 +25,19 @@ const PaginatedList = ({
   setCurrentOffset,
   count,
   renderActions,
+  onRowClick,
 }) => {
   const totalPage = count / resultPerPage;
   return (
     <Box sx={PaginatedListStyle}>
       {entries.length > 0 ? (
         <Fragment>
-          <DataList entries={entries} RowItem={RowItem} renderActions={renderActions} />
+          <DataList
+            entries={entries}
+            RowItem={RowItem}
+            renderActions={renderActions}
+            onRowClick={onRowClick}
+          />
           {count > resultPerPage && (
             <ReactPaginate
               previousLabel={"Précédent"}

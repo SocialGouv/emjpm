@@ -31,8 +31,8 @@ export default (App) => {
           console.error("Error while running `getDataFromTree`", error);
           console.error(
             `Error while running "getDataFromTree" on ${Component.displayName} with appProps ${
-              appProps ? JSON.stringify(appProps) : ""
-            } and context ${ctx ? JSON.stringify(ctx) : ""}`,
+              appProps ? safeStringify(appProps) : ""
+            } and context ${ctx ? safeStringify(ctx) : ""}`,
             error
           );
         }
@@ -61,3 +61,18 @@ export default (App) => {
     }
   };
 };
+
+function safeStringify(obj) {
+  // https://stackoverflow.com/questions/11616630/how-can-i-print-a-circular-structure-in-a-json-like-format
+  const cache = [];
+  return JSON.stringify(obj, (key, value) => {
+    if (typeof value === "object" && value !== null) {
+      // Duplicate reference found, discard key
+      if (cache.includes(value)) return;
+
+      // Store value in our collection
+      cache.push(value);
+    }
+    return value;
+  });
+}
