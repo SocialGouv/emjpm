@@ -27,13 +27,19 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
 
   const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria();
 
+  const enqueteReponseResumesIndex = useMemo(
+    () => enqueteReponseResumesFilter.buildIndex(enqueteReponseResumes),
+    [enqueteReponseResumes]
+  );
+
   const filteredEnqueteReponseResumes = useMemo(
     () =>
       enqueteReponseResumesFilter.filter({
+        enqueteReponseResumesIndex,
         enqueteReponseResumes,
         criteria,
       }),
-    [criteria, enqueteReponseResumes]
+    [criteria, enqueteReponseResumes, enqueteReponseResumesIndex]
   );
 
   return (

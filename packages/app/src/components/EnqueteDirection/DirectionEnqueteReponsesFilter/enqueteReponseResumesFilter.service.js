@@ -1,14 +1,12 @@
 import Fuse from "fuse.js";
 
-function filter({ enqueteReponseResumes, criteria }) {
-  if (
-    enqueteReponseResumes &&
-    (criteria.userType ||
-      criteria.searchText ||
-      criteria.selectedDepartement ||
-      criteria.responseStatus)
-  ) {
-    const items = enqueteReponseResumes.filter((r) => {
+function filter({ enqueteReponseResumesIndex: fuse, enqueteReponseResumes, criteria }) {
+  const items = criteria.searchText
+    ? fuse.search(criteria.searchText).map((x) => x.item)
+    : enqueteReponseResumes;
+
+  if (fuse && (criteria.userType || criteria.selectedDepartement || criteria.responseStatus)) {
+    return items.filter((r) => {
       if (criteria.userType && criteria.userType.value && criteria.userType.value !== r.user_type) {
         return false;
       }
@@ -29,42 +27,42 @@ function filter({ enqueteReponseResumes, criteria }) {
 
       return true;
     });
-
-    if (criteria.searchText) {
-      const options = {
-        includeScore: false,
-        // Search in `author` and in `tags` array
-        keys: [
-          {
-            name: "etablissement",
-            weight: 2,
-          },
-          {
-            name: "user.nom",
-            weight: 2,
-          },
-          {
-            name: "user.prenom",
-            weight: 1,
-          },
-          {
-            name: "ville",
-            weight: 0.5,
-          },
-        ],
-      };
-
-      const fuse = new Fuse(items, options);
-
-      const result = fuse.search(criteria.searchText);
-      return result.map((x) => x.item);
-    }
-
-    return items;
   }
-  return enqueteReponseResumes;
+  return items;
+}
+
+function buildIndex(items) {
+  console.log("xxx buildIndex");
+  // https://fusejs.io/api/options.html
+  const options = {
+    includeScore: false,
+    keys: [
+      {
+        name: "etablissement",
+        weight: 2,
+      },
+      {
+        name: "user.nom",
+        weight: 2,
+      },
+      {
+        name: "user.prenom",
+        weight: 1,
+      },
+      {
+        name: "ville",
+        weight: 0.5,
+      },
+    ],
+  };
+  // https://fusejs.io/api/indexing.html
+  const index = Fuse.createIndex(options.keys, items);
+  const fuse = new Fuse(items, options, index);
+
+  return fuse;
 }
 
 export const enqueteReponseResumesFilter = {
+  buildIndex,
   filter,
 };
