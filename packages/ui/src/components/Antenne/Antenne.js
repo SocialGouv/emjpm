@@ -65,7 +65,7 @@ Antenne.propTypes = {
     mesures_in_progress: PropTypes.number.isRequired,
     mesures_max: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    preferences: PropTypes.array,
+    preferences: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   hasButton: PropTypes.bool,
   href: PropTypes.string,
