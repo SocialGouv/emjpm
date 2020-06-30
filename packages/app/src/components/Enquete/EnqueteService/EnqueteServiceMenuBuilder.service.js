@@ -26,8 +26,6 @@ import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
 function buildMenuSections(enqueteReponse) {
   const status = enqueteReponse.enquete_reponse_validation_status;
 
-  console.log("status", status);
-
   const menu = [
     {
       status: "valid",
