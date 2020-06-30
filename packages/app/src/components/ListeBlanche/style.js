@@ -4,6 +4,7 @@ const cardStyle = {
   pl: "16px",
   position: "relative",
   width: "100%",
+  cursor: "pointer",
 };
 
 const labelStyle = {

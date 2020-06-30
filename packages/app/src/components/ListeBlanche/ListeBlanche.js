@@ -1,14 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner } from "@emjpm/ui";
-import React, { useContext, useState } from "react";
-import { Box } from "rebass";
+import React, { useContext, useMemo, useState } from "react";
 
+import { LoadingWrapper } from "../Commons";
 import { FiltersContext } from "../ListeBlancheFilter/context";
 import { PaginatedList } from "../PaginatedList";
 import { ListeBlancheItemCard } from "./ListeBlancheItemCard";
 import { LB_USERS } from "./queries";
 
-const ListeBlanche = () => {
+const ListeBlanche = ({ onSelectLbUser }) => {
   const {
     selectedDepartement,
     selectedType,
@@ -34,35 +33,33 @@ const ListeBlanche = () => {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading4>erreur</Heading4>
-      </Card>
-    );
-  }
-  const { count } = data.lb_users_aggregate.aggregate;
-  const users = data.lb_users;
+  const { count, users } = useMemo(() => {
+    if (data) {
+      const { count } = data.lb_users_aggregate.aggregate;
+      const users = data.lb_users;
+      return {
+        count,
+        users,
+      };
+    }
+    return {
+      count: 0,
+      users: [],
+    };
+  }, [data]);
 
   return (
-    <PaginatedList
-      entries={users}
-      RowItem={ListeBlancheItemCard}
-      count={count}
-      resultPerPage={resultPerPage}
-      currentOffset={currentOffset}
-      setCurrentOffset={setCurrentOffset}
-    />
+    <LoadingWrapper loading={loading} error={error}>
+      <PaginatedList
+        entries={users}
+        RowItem={ListeBlancheItemCard}
+        count={count}
+        resultPerPage={resultPerPage}
+        currentOffset={currentOffset}
+        setCurrentOffset={setCurrentOffset}
+        onRowClick={onSelectLbUser}
+      />
+    </LoadingWrapper>
   );
 };
 
