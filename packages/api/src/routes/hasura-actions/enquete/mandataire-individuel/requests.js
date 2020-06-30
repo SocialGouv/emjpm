@@ -67,8 +67,6 @@ module.exports = {
         region: defaultValues.region,
       };
 
-      logger.info(value);
-
       const { data, errors } = await graphqlFetch(
         value,
         INIT_ENQUETE_REPONSE,

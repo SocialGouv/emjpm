@@ -49,7 +49,14 @@ async function initEnqueteService(context) {
   };
 }
 
-async function submitEnqueteService(id) {
+async function submitEnqueteService({
+  enqueteContext: { enqueteId, serviceId },
+}) {
+  const enqueteReponse = await getEnqueteReponseService({
+    enqueteId,
+    serviceId,
+  });
+
   if (enqueteReponse.status !== "draft") {
     throw new HttpError(423, "Enquete response has already been submitted.");
   }
@@ -58,8 +65,8 @@ async function submitEnqueteService(id) {
   if (status.global === "invalid") {
     throw new HttpError(400, "Enquete response is invalid");
   }
-  const enqueteReponse = await submitEnqueteReponse(id);
-  return enqueteReponse;
+
+  return await submitEnqueteReponse(enqueteReponse.id);
 }
 
 module.exports = {
