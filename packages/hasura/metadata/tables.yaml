@@ -3719,6 +3719,15 @@
 - table:
     schema: public
     name: lb_users
+  object_relationships:
+  - name: mandataire
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: mandataires
+        column_mapping:
+          id: lb_user_id
   array_relationships:
   - name: lb_departements
     using:
@@ -3865,6 +3874,13 @@
         table:
           schema: public
           name: commentaires
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: enquete_reponses
   - name: mandataire_etablissements
     using:
       foreign_key_constraint_on:
@@ -5250,6 +5266,13 @@
     using:
       foreign_key_constraint_on: department_id
   array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: enquete_reponses
   - name: service_antennes
     using:
       foreign_key_constraint_on:

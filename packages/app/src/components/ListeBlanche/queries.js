@@ -48,6 +48,10 @@ export const LB_USERS = gql`
       email
       siret
       type
+      mandataire {
+        id
+        user_id
+      }
       lb_departements {
         id
         departement_financeur
