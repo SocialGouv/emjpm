@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
 import Link from "next/link";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "../Commons";
@@ -26,11 +26,17 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
   );
 
   const resultPerPage = 10;
-  const [currentOffset, setCurrentOffset] = useState(0);
 
   const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria({
     responseStatus: ENQUETE_REPONSE_STATUS_OPTIONS[0],
   });
+
+  const setCurrentOffset = useCallback(
+    (value) => {
+      updateCriteria("currentOffset", value);
+    },
+    [updateCriteria]
+  );
 
   const enqueteReponseResumesIndex = useMemo(
     () => enqueteReponseResumesFilter.buildIndex(enqueteReponseResumes),
@@ -48,11 +54,11 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
   );
 
   const currentPageEntries = useMemo(() => {
-    const start = currentOffset;
+    const start = criteria.currentOffset;
     const end = start + resultPerPage;
     const items = filteredEnqueteReponseResumes.slice(start, end);
     return items;
-  }, [currentOffset, filteredEnqueteReponseResumes]);
+  }, [criteria.currentOffset, filteredEnqueteReponseResumes]);
 
   return (
     <LoadingWrapper error={error} loading={loading} errorRedirect={{ url: "/direction/enquetes" }}>
@@ -83,9 +89,9 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         <PaginatedList
           entries={currentPageEntries}
           RowItem={DirectionEnqueteReponseResumeCard}
-          count={enqueteReponseResumes.length}
+          count={filteredEnqueteReponseResumes.length}
           resultPerPage={resultPerPage}
-          currentOffset={currentOffset}
+          currentOffset={criteria.currentOffset}
           setCurrentOffset={setCurrentOffset}
           renderActions={(enqueteReponseResume) => {
             if (enqueteReponseResume.enqueteReponse.status === "submitted") {

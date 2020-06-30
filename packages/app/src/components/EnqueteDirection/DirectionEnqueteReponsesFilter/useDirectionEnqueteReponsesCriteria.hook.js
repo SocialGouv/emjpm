@@ -12,24 +12,34 @@ export function useDirectionEnqueteReponsesCriteria({
         return {
           ...state,
           responseStatus: action.value,
+          currentOffset: 0,
         };
       }
       case "userType": {
         return {
           ...state,
           userType: action.value,
+          currentOffset: 0,
         };
       }
       case "searchText": {
         return {
           ...state,
           searchText: action.value,
+          currentOffset: 0,
         };
       }
       case "selectedDepartement": {
         return {
           ...state,
           selectedDepartement: action.value,
+          currentOffset: 0,
+        };
+      }
+      case "currentOffset": {
+        return {
+          ...state,
+          currentOffset: action.value,
         };
       }
     }
@@ -41,6 +51,7 @@ export function useDirectionEnqueteReponsesCriteria({
     userType,
     searchText: searchText || "",
     selectedDepartement,
+    currentOffset: 0,
   });
 
   return {
