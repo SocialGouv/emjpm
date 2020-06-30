@@ -5,7 +5,7 @@ function filter({ enqueteReponseResumesIndex: fuse, enqueteReponseResumes, crite
     ? fuse.search(criteria.searchText).map((x) => x.item)
     : enqueteReponseResumes;
 
-  if (fuse && (criteria.userType || criteria.selectedDepartement || criteria.responseStatus)) {
+  if (items && (criteria.userType || criteria.selectedDepartement || criteria.responseStatus)) {
     return items.filter((r) => {
       if (criteria.userType && criteria.userType.value && criteria.userType.value !== r.user_type) {
         return false;
@@ -32,7 +32,6 @@ function filter({ enqueteReponseResumesIndex: fuse, enqueteReponseResumes, crite
 }
 
 function buildIndex(items) {
-  console.log("xxx buildIndex");
   // https://fusejs.io/api/options.html
   const options = {
     includeScore: false,

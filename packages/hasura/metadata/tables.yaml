@@ -3603,27 +3603,34 @@
       using:
         foreign_key_constraint_on: user_id
   array_relationships:
-    - name: commentaires
-      using:
-        foreign_key_constraint_on:
-          column: mandataire_id
-          table:
-            schema: public
-            name: commentaires
-    - name: mandataire_etablissements
-      using:
-        foreign_key_constraint_on:
-          column: mandataire_id
-          table:
-            schema: public
-            name: mandataire_etablissements
-    - name: mesures
-      using:
-        foreign_key_constraint_on:
-          column: mandataire_id
-          table:
-            schema: public
-            name: mesures
+  - name: commentaires
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: commentaires
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: enquete_reponses
+  - name: mandataire_etablissements
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: mandataire_etablissements
+  - name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: mesures
   insert_permissions:
     - role: individuel
       permission:
@@ -4995,34 +5002,41 @@
       using:
         foreign_key_constraint_on: department_id
   array_relationships:
-    - name: service_antennes
-      using:
-        foreign_key_constraint_on:
-          column: service_id
-          table:
-            schema: public
-            name: service_antenne
-    - name: service_members
-      using:
-        foreign_key_constraint_on:
-          column: service_id
-          table:
-            schema: public
-            name: service_members
-    - name: service_personnels
-      using:
-        foreign_key_constraint_on:
-          column: service_id
-          table:
-            schema: public
-            name: service_personnels
-    - name: service_tis
-      using:
-        foreign_key_constraint_on:
-          column: service_id
-          table:
-            schema: public
-            name: service_tis
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: enquete_reponses
+  - name: service_antennes
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: service_antenne
+  - name: service_members
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: service_members
+  - name: service_personnels
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: service_personnels
+  - name: service_tis
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: service_tis
   select_permissions:
     - role: anonymous
       permission:
