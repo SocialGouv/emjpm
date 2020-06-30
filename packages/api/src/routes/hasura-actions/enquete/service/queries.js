@@ -24,17 +24,17 @@ module.exports = {
         service {
           id
         }
-        enquete_service_personnel_formation_id
-        enquete_service_personnel_formation {
+        enquete_reponses_service_personnel_formation_id
+        enquete_reponses_service_personnel_formation {
           created_at
           id
           last_update
           nb_delegues_cnc
-          nb_delegues_debut_annee
+          nb_delegues
           nb_delegues_en_formation
           nb_delegues_femme
           nb_delegues_femme_etp
-          nb_delegues_fin_annee
+          nb_delegues_etp
           nb_delegues_homme
           nb_delegues_homme_etp
           nb_delegues_niveau1
