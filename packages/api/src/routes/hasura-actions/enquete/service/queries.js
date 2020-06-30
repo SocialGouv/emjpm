@@ -1,3 +1,40 @@
+function build2Combinaisons(prefixes, suffixes, separator) {
+  if (separator === undefined) {
+    separator = "_";
+  }
+  return prefixes
+    .reduce(
+      (acc, prefix) =>
+        suffixes.reduce((acc, suffix) => {
+          acc.push(`${prefix}${separator}${suffix}`);
+          return acc;
+        }, acc),
+
+      []
+    )
+    .join("\n");
+}
+
+function build3Combinaisons(prefixes, middles, suffixes, separator) {
+  if (separator === undefined) {
+    separator = "_";
+  }
+  return prefixes
+    .reduce(
+      (acc, prefix) =>
+        middles.reduce(
+          (acc, middle) =>
+            suffixes.reduce((acc, suffix) => {
+              acc.push(`${prefix}${separator}${middle}${separator}${suffix}`);
+              return acc;
+            }, acc),
+          acc
+        ),
+      []
+    )
+    .join("\n");
+}
+
 module.exports = {
   ENQUETE_REPONSE_DEFAULT_VALUES: `
     query enquete_service_default_values($serviceId: Int!) {
@@ -65,6 +102,40 @@ module.exports = {
           type_organisme_gestionnaire
         }
         enquete_reponses_activite_id
+        enquete_reponses_activite {
+          created_at
+          last_update
+          ${build3Combinaisons(
+            [
+              "accompagnement_judiciaire",
+              "curatelle_biens",
+              "tutelle",
+              "curatelle_personne",
+              "curatelle_renforcee",
+              "curatelle_simple",
+            ],
+            ["domicile", "etablissement"],
+            ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
+            "_"
+          )}
+          ${build2Combinaisons(
+            [
+              "subroge_tuteur_createur",
+              "sauvegarde_justice",
+              "mandat_adhoc_majeur",
+            ],
+            ["debut_annee", "fin_annee", "mesures_nouvelles", "sortie_mesures"],
+            "_"
+          )}
+          revisions_main_levee
+          revisions_masp
+          revisions_reconduction
+          revisions_changement
+          revisions_autre
+          sorties_main_levee
+          sorties_deces
+          sorties_masp
+        }
         enquete_reponses_populations_id
         enquete_reponses_population {
           created_at

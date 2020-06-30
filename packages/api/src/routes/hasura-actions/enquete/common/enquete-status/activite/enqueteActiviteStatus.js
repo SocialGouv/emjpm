@@ -4,8 +4,14 @@ const {
   getGlobalStatus,
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
+const logger = require("../../../../../../utils/logger");
 
 module.exports = async (enqueteReponse) => {
+  logger.info(
+    enqueteReponse.enquete_reponses_activite,
+    "enquete_reponses_activite"
+  );
+
   const data = enqueteReponse.enquete_reponses_activite;
 
   const activiteStatus = {
