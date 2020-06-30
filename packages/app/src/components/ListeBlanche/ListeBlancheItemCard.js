@@ -14,7 +14,12 @@ const getType = (type) => {
 };
 
 export const ListeBlancheItemCard = ({ item, onClick }) => (
-  <Card key={item.id} sx={cardStyle} mb="2" onClick={() => (onClick ? onClick(item) : null)}>
+  <Card
+    key={item.id}
+    sx={cardStyle({ clickable: !!onClick })}
+    mb="2"
+    onClick={() => (onClick ? onClick(item) : null)}
+  >
     <Flex justifyContent="flex-start">
       <Flex width="25%" flexDirection="column">
         <Text sx={labelStyle}>{getType(item.type)}</Text>

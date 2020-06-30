@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner } from "@emjpm/ui";
-import React from "react";
-import { Box } from "rebass";
+import React, { useMemo } from "react";
 
+import { LoadingWrapper } from "../Commons";
+import { ListeBlancheItemCard } from "../ListeBlanche/ListeBlancheItemCard";
 import { LB_USER } from "./queries";
 
 const ListeBlancheDetail = ({ lbUserId }) => {
@@ -12,26 +12,16 @@ const ListeBlancheDetail = ({ lbUserId }) => {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
+  const user = useMemo(
+    () => (data && data.lb_users && data.lb_users.length ? data.lb_users[0] : undefined),
+    [data]
+  );
 
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading4>erreur</Heading4>
-      </Card>
-    );
-  }
-  const [user] = data.lb_users;
-
-  return <h1>{user.nom}</h1>;
+  return (
+    <LoadingWrapper loading={loading || !user} error={error}>
+      <ListeBlancheItemCard item={user} />
+    </LoadingWrapper>
+  );
 };
 
 export { ListeBlancheDetail };

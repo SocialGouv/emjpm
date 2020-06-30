@@ -1,11 +1,11 @@
-const cardStyle = {
+const cardStyle = ({ clickable }) => ({
   mb: "1",
   overflow: "hidden",
   pl: "16px",
   position: "relative",
   width: "100%",
-  cursor: "pointer",
-};
+  cursor: clickable ? "pointer" : "default",
+});
 
 const labelStyle = {
   color: "mediumGray",
