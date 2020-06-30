@@ -10,31 +10,49 @@ import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseR
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
 import {
   DirectionEnqueteReponsesCriteria,
+  ENQUETE_REPONSE_STATUS_OPTIONS,
   enqueteReponseResumesFilter,
   useDirectionEnqueteReponsesCriteria,
 } from "./DirectionEnqueteReponsesFilter";
-import { ENQUETE_DETAILS } from "./queries";
+import { ENQUETE_DETAILS_LIST } from "./queries";
 
 export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
-  const { data, loading, error } = useQuery(ENQUETE_DETAILS, {
+  const { data, loading, error } = useQuery(ENQUETE_DETAILS_LIST, {
     variables: { enqueteId },
   });
 
-  const { enqueteLabel, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(data);
+  const { enqueteLabel, counts, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(
+    data
+  );
 
-  const resultPerPage = 50;
+  const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
 
-  const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria();
+  const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria({
+    responseStatus: ENQUETE_REPONSE_STATUS_OPTIONS[0],
+  });
+
+  const enqueteReponseResumesIndex = useMemo(
+    () => enqueteReponseResumesFilter.buildIndex(enqueteReponseResumes),
+    [enqueteReponseResumes]
+  );
 
   const filteredEnqueteReponseResumes = useMemo(
     () =>
       enqueteReponseResumesFilter.filter({
+        enqueteReponseResumesIndex,
         enqueteReponseResumes,
         criteria,
       }),
-    [criteria, enqueteReponseResumes]
+    [criteria, enqueteReponseResumes, enqueteReponseResumesIndex]
   );
+
+  const currentPageEntries = useMemo(() => {
+    const start = currentOffset;
+    const end = start + resultPerPage;
+    const items = filteredEnqueteReponseResumes.slice(start, end);
+    return items;
+  }, [currentOffset, filteredEnqueteReponseResumes]);
 
   return (
     <LoadingWrapper error={error} loading={loading} errorRedirect={{ url: "/direction/enquetes" }}>
@@ -56,14 +74,14 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       />
 
       <Flex mb={4} mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
-        <Heading2>{"Réponses à l'enquête"}</Heading2>
+        <Heading2>{`Réponses à l'enquête (${counts.responses}/${counts.all})`}</Heading2>
       </Flex>
 
       <DirectionEnqueteReponsesCriteria criteria={criteria} updateCriteria={updateCriteria} />
 
       <Box mt={2}>
         <PaginatedList
-          entries={filteredEnqueteReponseResumes}
+          entries={currentPageEntries}
           RowItem={DirectionEnqueteReponseResumeCard}
           count={enqueteReponseResumes.length}
           resultPerPage={resultPerPage}
@@ -98,14 +116,44 @@ function useDirectionEnqueteDetailsReponsesList(data) {
       const enqueteReponses = data.enquete_reponses;
       const enquete = data.enquetes_by_pk;
       const enqueteLabel = `Enquête ${enquete.annee} sur l'activité de ${enquete.annee - 1}`;
+      const resumes = directionEnqueteReponseResumeBuilder.buildMany(enqueteReponses);
+      const resumes_mandataires_sans_reponse = directionEnqueteReponseResumeBuilder.buildManyFromMandatairesSansReponse(
+        data.mandataires_sans_reponse
+      );
+      const resumes_services_sans_reponse = directionEnqueteReponseResumeBuilder.buildManyFromServicesSansReponse(
+        data.services_sans_reponse
+      );
+
+      const enqueteReponseResumes = resumes
+        .concat(resumes_mandataires_sans_reponse)
+        .concat(resumes_services_sans_reponse);
+
+      enqueteReponseResumes.sort(function (a, b) {
+        if (a.sortName < b.sortName) {
+          return -1;
+        }
+        if (a.sortName > b.sortName) {
+          return 1;
+        }
+        return a.uniqueId - b.uniqueId;
+      });
+
       return {
         enqueteLabel,
-        enqueteReponseResumes: directionEnqueteReponseResumeBuilder.buildMany(enqueteReponses),
+        enqueteReponseResumes,
+        counts: {
+          responses: resumes.length,
+          all: enqueteReponseResumes.length,
+        },
       };
     }
     return {
       enqueteLabel: "",
       enqueteReponseResumes: [],
+      counts: {
+        responses: 0,
+        all: 0,
+      },
     };
   }, [data]);
 }

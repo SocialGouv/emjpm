@@ -1,6 +1,11 @@
 import { useReducer } from "react";
 
-export function useDirectionEnqueteReponsesCriteria() {
+export function useDirectionEnqueteReponsesCriteria({
+  responseStatus,
+  userType,
+  searchText,
+  selectedDepartement,
+}) {
   function criteriaReducer(state, action) {
     switch (action.name) {
       case "responseStatus": {
@@ -32,10 +37,10 @@ export function useDirectionEnqueteReponsesCriteria() {
   }
 
   const [criteria, setCriteria] = useReducer(criteriaReducer, {
-    responseStatus: undefined,
-    userType: undefined,
-    searchText: "",
-    selectedDepartement: undefined,
+    responseStatus,
+    userType,
+    searchText: searchText || "",
+    selectedDepartement,
   });
 
   return {
