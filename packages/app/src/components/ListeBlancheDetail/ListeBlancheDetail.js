@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 
 import { LoadingWrapper } from "../Commons";
 import { ListeBlancheItemCard } from "../ListeBlanche/ListeBlancheItemCard";
+import { ListeBlancheForm } from "./ListeBlancheForm";
 import { LB_USER } from "./queries";
 
 const ListeBlancheDetail = ({ lbUserId }) => {
@@ -20,6 +21,7 @@ const ListeBlancheDetail = ({ lbUserId }) => {
   return (
     <LoadingWrapper loading={loading || !user} error={error}>
       <ListeBlancheItemCard item={user} />
+      <ListeBlancheForm data={user} />
     </LoadingWrapper>
   );
 };
