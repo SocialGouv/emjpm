@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 
 import { parseFormFloat, parseFormInt } from "../../../util";
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationAutresForm } from "./EnquetePreposePersonnelFormationAutresForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
@@ -18,7 +19,7 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
   const {
     enquete_reponse_ids: { personel_formation_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PERSONNEL_FORMATION, {
     variables: {
       id: personel_formation_id,
@@ -30,8 +31,8 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
     {
       refetchQueries: [
         {
-          query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, reponseId: enqueteReponse.id },
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,

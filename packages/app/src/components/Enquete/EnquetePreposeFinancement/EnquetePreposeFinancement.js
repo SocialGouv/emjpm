@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeFinancementForm } from "./EnquetePreposeFinancementForm";
 import { UPDATE_ENQUETE_REPONSES_FINANCEMENT } from "./mutations";
 import { ENQUETE_REPONSES_FINANCEMENT } from "./queries";
@@ -17,7 +18,7 @@ export const EnquetePreposeFinancement = (props) => {
   const {
     enquete_reponse_ids: { financement_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_REPONSES_FINANCEMENT, {
     variables: {
       id: financement_id,
@@ -26,8 +27,8 @@ export const EnquetePreposeFinancement = (props) => {
   const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
     refetchQueries: [
       {
-        query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, reponseId: enqueteReponse.id },
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_REPONSES_FINANCEMENT,

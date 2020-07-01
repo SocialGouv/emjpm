@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePreposeModaliteExerciceInformationsForm";
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
@@ -18,7 +19,7 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
   const {
     enquete_reponse_ids: { modalites_exercice_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
       id: modalites_exercice_id,
@@ -30,8 +31,8 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
     {
       refetchQueries: [
         {
-          query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, reponseId: enqueteReponse.id },
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,
