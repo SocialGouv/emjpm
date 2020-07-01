@@ -23,7 +23,9 @@ const ListItem = (props) => {
 };
 
 const ListTitle = (props) => {
-  return <Text as="li" {...props} sx={ListTitleStyle} />;
+  return (
+    <Text as="li" {...props} sx={props.sx ? { ...ListTitleStyle, ...props.sx } : ListTitleStyle} />
+  );
 };
 
 export { List, ListItem, ListTitle };
