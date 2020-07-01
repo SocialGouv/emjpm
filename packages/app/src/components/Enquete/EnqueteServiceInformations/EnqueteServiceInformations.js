@@ -1,12 +1,23 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import React from "react";
+import React, { useContext } from "react";
 
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteServiceInformationsForm } from "./EnqueteServiceInformationsForm";
 import { UPDATE_ENQUETE_SERVICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_SERVICE_INFORMATIONS } from "./queries";
 
 export const EnqueteServiceInformations = (props) => {
-  const { enqueteContext, dispatchEnqueteContextEvent, enqueteReponse, section, step } = props;
+  const {
+    enqueteContext,
+    dispatchEnqueteContextEvent,
+    enqueteReponse,
+    section,
+    step,
+    enquete: { id: enqueteId },
+  } = props;
+
+  const { id: userId } = useContext(UserContext);
 
   const {
     enquete_reponse_ids: { service_informations_id },
@@ -20,6 +31,10 @@ export const EnqueteServiceInformations = (props) => {
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_SERVICE_INFORMATIONS, {
     refetchQueries: [
+      {
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId },
+      },
       {
         query: ENQUETE_SERVICE_INFORMATIONS,
         variables: {

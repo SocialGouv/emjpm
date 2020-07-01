@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./queries";
@@ -19,7 +20,7 @@ export const EnquetePopulationsSauvegardeJustice = (props) => {
   const {
     enquete_reponse_ids: { populations_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE, {
     variables: {
       id: populations_id,
@@ -29,8 +30,8 @@ export const EnquetePopulationsSauvegardeJustice = (props) => {
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE, {
     refetchQueries: [
       {
-        query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, reponseId: enqueteReponse.id },
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
