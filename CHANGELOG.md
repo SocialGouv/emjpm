@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.51.0](https://github.com/SocialGouv/emjpm/compare/v25.50.0...v25.51.0) (2020-07-01)
+
+
+### Bug Fixes
+
+* **enquete:** service ([#2044](https://github.com/SocialGouv/emjpm/issues/2044)) ([9934619](https://github.com/SocialGouv/emjpm/commit/9934619e9b526f3b0b7723fafb793a8fb7c1ccc5))
+
+
+### Features
+
+* **enquete:** service ([#2043](https://github.com/SocialGouv/emjpm/issues/2043)) ([b71aad8](https://github.com/SocialGouv/emjpm/commit/b71aad8d51d302d5ae4434959ab8861fd9837dbb))
+
+
+
+
+
 # [25.50.0](https://github.com/SocialGouv/emjpm/compare/v25.49.0...v25.50.0) (2020-07-01)
 
 
