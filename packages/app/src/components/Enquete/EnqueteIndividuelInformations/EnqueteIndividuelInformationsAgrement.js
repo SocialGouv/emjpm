@@ -17,12 +17,12 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { informations_mandataire_id },
+    enquete_reponse_ids: { agrements_formations_id },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS, {
     variables: {
-      id: informations_mandataire_id,
+      id: agrements_formations_id,
     },
   });
 
@@ -34,7 +34,7 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
-        variables: { id: informations_mandataire_id },
+        variables: { id: agrements_formations_id },
       },
     ],
   });
@@ -50,7 +50,7 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: informations_mandataire_id,
+            id: agrements_formations_id,
             ...values,
           },
         });
