@@ -1,7 +1,8 @@
-import React, { useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCausesSortiesDispositifForm";
 import { UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF } from "./mutations";
 import { ENQUETE_CAUSES_SORTIE_DISPOSITIF } from "./queries";
@@ -18,12 +19,12 @@ export const EnqueteActiviteCausesSortiesDispositif = (props) => {
   const {
     enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF, {
     refetchQueries: [
       {
-        query: ENQUETE_REPONSE_STATUS,
-        variables: { enqueteId, reponseId: enqueteReponse.id },
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId },
       },
       {
         query: ENQUETE_CAUSES_SORTIE_DISPOSITIF,
