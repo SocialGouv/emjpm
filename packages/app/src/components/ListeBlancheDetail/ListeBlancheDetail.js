@@ -6,7 +6,7 @@ import { ListeBlancheItemCard } from "../ListeBlanche/ListeBlancheItemCard";
 import { ListeBlancheForm } from "./ListeBlancheForm";
 import { LB_USER } from "./queries";
 
-const ListeBlancheDetail = ({ lbUserId }) => {
+const ListeBlancheDetail = ({ lbUserId, handleSubmit }) => {
   const { data, error, loading } = useQuery(LB_USER, {
     variables: {
       id: lbUserId,
@@ -21,7 +21,7 @@ const ListeBlancheDetail = ({ lbUserId }) => {
   return (
     <LoadingWrapper loading={loading || !user} error={error}>
       <ListeBlancheItemCard item={user} />
-      <ListeBlancheForm data={user} />
+      <ListeBlancheForm data={user} handleSubmit={handleSubmit} />
     </LoadingWrapper>
   );
 };

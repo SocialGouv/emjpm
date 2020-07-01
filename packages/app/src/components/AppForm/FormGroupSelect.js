@@ -2,16 +2,14 @@ import { Field, Input, Select } from "@emjpm/ui";
 import React, { useMemo } from "react";
 
 import { findOption } from "../../util/option/OptionUtil";
-import { AppFormFieldErrorMessage } from "./AppFormFieldErrorMessage";
-import { AppFormFieldLabel } from "./AppFormFieldLabel";
-import { useAppFieldShowError } from "./useAppFieldShowError.hook";
+import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
+import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
 
-export const AppFormSelectField = ({
+export const FormGroupSelect = ({
   id,
   value,
   error,
-  label,
-  text,
+  placeholder,
   options,
   readOnly,
   formik,
@@ -45,17 +43,9 @@ export const AppFormSelectField = ({
 
   return (
     <Field>
-      <AppFormFieldLabel
-        id={id}
-        label={label}
-        text={text}
-        readOnly={readOnly}
-        required={required}
-      />
-
       {readOnly ? (
         <Input
-          placeholder=""
+          placeholder={placeholder}
           type="text"
           readOnly={true}
           id={id}
@@ -69,7 +59,8 @@ export const AppFormSelectField = ({
         <Select
           id={id}
           instanceId={id}
-          placeholder=""
+          placeholder={placeholder}
+          required={required}
           hasError={showError}
           onChange={({ value }) => setFieldValue(id, value)}
           value={findOption(options, value)}
