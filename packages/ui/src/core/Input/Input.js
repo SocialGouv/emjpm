@@ -21,17 +21,22 @@ const InputLabel = (props) => {
   );
 };
 
+
+function formatFormInput(value) {
+  return value === null || value === undefined ? "" : value;
+}
+
 const Input = (props) => {
-  const { onChange, placeholder, isValid, hasError, name, required, size, value, type, onBlur } = props;
+  const { onChange, placeholder, isValid, hasError, name, required, size, value, type, onBlur, readOnly } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive = isFocus || hasValue || (value !== null && value !== undefined);
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
-      <InputLabel size={size} aria-label={name} htmlFor={name} isActive={isActive}>
+      {placeholder && <InputLabel size={size} aria-label={name} htmlFor={name} isActive={isActive} required={required} readOnly={readOnly}>
         {placeholder}
-      </InputLabel>
+      </InputLabel>}
       <InputElement
         size={size}
         type={type}
@@ -39,6 +44,7 @@ const Input = (props) => {
         aria-required={required}
         placeholder={null}
         isActive={isActive}
+        value={formatFormInput(value)}
         name={name}
         {...props}
         onChange={(e) => {
@@ -57,6 +63,7 @@ const Input = (props) => {
   );
 };
 
+
 InputLabel.propTypes = {
   children: PropTypes.node.isRequired,
 };
@@ -71,6 +78,7 @@ Input.propTypes = {
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   size: PropTypes.string,
+  title: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
@@ -85,6 +93,7 @@ Input.defaultProps = {
   readOnly: false,
   required: false,
   size: 'large',
+  title: null,
   type: null,
   value: null,
 };

@@ -25,6 +25,7 @@ export const LB_USER = gql`
         prepose
         individuel
         departement {
+          id
           code
           nom
         }
