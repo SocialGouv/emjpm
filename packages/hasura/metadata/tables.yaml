@@ -3675,6 +3675,21 @@
   - name: departement
     using:
       foreign_key_constraint_on: departement_id
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_financeur
+      backend_only: false
   select_permissions:
   - role: direction
     permission:
@@ -3715,6 +3730,17 @@
       - id
       - lb_user_id
       - created_at
+      filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - departement_financeur
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: direction
+    permission:
       filter: {}
 - table:
     schema: public
@@ -3736,6 +3762,19 @@
         table:
           schema: public
           name: lb_departements
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - siret
+      - type
+      backend_only: false
   select_permissions:
   - role: direction
     permission:
@@ -3771,6 +3810,16 @@
       - siret
       - type
       filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - email
+      - nom
+      - prenom
+      - siret
+      filter: {}
+      check: null
 - table:
     schema: public
     name: magistrat

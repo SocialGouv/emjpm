@@ -1,5 +1,6 @@
 import { BoxWrapper } from "@emjpm/ui";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
@@ -10,6 +11,13 @@ import { withAuthSync } from "../../../src/util/auth";
 const ListeBlancheDetailPage = (props) => {
   const { lbUserId } = props;
 
+  const router = useRouter();
+
+  async function handleSubmit() {
+    await router.push("/admin/liste-blanche");
+
+    window.scrollTo(0, 0);
+  }
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
@@ -18,7 +26,7 @@ const ListeBlancheDetailPage = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <ListeBlancheDetail lbUserId={lbUserId} />
+        <ListeBlancheDetail lbUserId={lbUserId} handleSubmit={handleSubmit} />
       </BoxWrapper>
     </LayoutAdmin>
   );

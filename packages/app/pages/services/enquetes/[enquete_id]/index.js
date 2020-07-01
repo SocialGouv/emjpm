@@ -1,7 +1,7 @@
 import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
-import { useQuery } from "react-apollo";
+import { useSubscription } from "react-apollo";
 import { resetIdCounter } from "react-tabs";
 
 import { LoadingWrapper } from "../../../../src/components/Commons";
@@ -18,7 +18,7 @@ const EnquetePage = ({ enqueteId }) => {
 
   const currentStep = useCurrentStepFromUrl();
 
-  const { data, loading, error } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
+  const { data, loading, error } = useSubscription(ENQUETE_WITH_REPONSE_STATUS, {
     variables: { enqueteId, userId },
   });
 
