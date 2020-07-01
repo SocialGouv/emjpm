@@ -8,6 +8,6 @@
   },
   "dependencies": {
     "codeceptjs": "^2.6.6",
-    "got": "^10.7.0"
+    "got": "^11.3.0"
   }
 }
