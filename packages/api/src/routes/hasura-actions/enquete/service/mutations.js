@@ -12,6 +12,7 @@ module.exports = {
         enquete_reponses_activite_id
         enquete_reponses_populations_id
         enquete_reponses_service_personnel_formation_id
+        status
       }
     }
   `,
@@ -28,6 +29,7 @@ module.exports = {
       enquete_reponses_activite_id
       enquete_reponses_populations_id
       enquete_reponses_service_personnel_formation_id
+      status
     }
   }
   `,
