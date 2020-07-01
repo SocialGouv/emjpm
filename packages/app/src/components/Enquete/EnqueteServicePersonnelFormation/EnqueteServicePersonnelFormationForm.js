@@ -5,7 +5,8 @@ import { Box, Flex, Text } from "rebass";
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInt } from "../../../util";
 import { EnqueteFormInputField } from "../EnqueteForm";
-import EnqueteStepperButtons from "../EnqueteStepperButtons";
+import { EnqueteFormFieldLabel } from "../EnqueteForm/EnqueteFormFieldLabel";
+import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
@@ -150,14 +151,18 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
         <Flex mb={2} alignCenter="start">
           <Box mr={2} flex={1 / 3} />
           <Box alignSelf="flex-end" mr={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              Nombre de délégués au 31/12
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre de délégués au 31/12"}
+              required={true}
+            />
           </Box>
           <Box alignSelf="flex-end" ml={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              {"Nombre total d'heures de formation"}
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre total d'heures de formation"}
+              required={true}
+            />
           </Box>
         </Flex>
 
@@ -232,14 +237,18 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
         <Flex mb={2} alignCenter="start">
           <Box mr={2} flex={1 / 3} />
           <Box alignSelf="flex-end" mr={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              Nombre de délégués au 31/12
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre de délégués au 31/12"}
+              required={true}
+            />
           </Box>
           <Box alignSelf="flex-end" ml={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              {"Nombre de délégués en ETP au 31/12"}
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre de délégués en ETP au 31/12"}
+              required={true}
+            />
           </Box>
         </Flex>
 
@@ -403,14 +412,18 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
         <Flex mb={2} alignCenter="start">
           <Box mr={2} flex={1 / 3} />
           <Box alignSelf="flex-end" mr={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              Nombre de délégués au 31/12
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre de délégués au 31/12"}
+              required={true}
+            />
           </Box>
           <Box alignSelf="flex-end" ml={2} flex={1 / 3}>
-            <Text fontSize="13px" fontWeight="700" color="#555555" textAlign="center">
-              {"Nombre de délégués en ETP au 31/12"}
-            </Text>
+            <EnqueteFormFieldLabel
+              enqueteForm={enqueteForm}
+              label={"Nombre de délégués en ETP au 31/12"}
+              required={true}
+            />
           </Box>
         </Flex>
 

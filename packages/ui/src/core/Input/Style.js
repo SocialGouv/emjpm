@@ -21,7 +21,7 @@ const InputWrapperStyle = (props) => {
 
 const InputStyle = (props) => {
   return {
-    bg:  props.readOnly? '#f0f0f0' : 'transparent',
+    bg: props.readOnly ? '#f0f0f0' : 'transparent',
     border: '0',
     boxShadow: 'none',
     color: 'text',
@@ -41,27 +41,32 @@ const InputStyle = (props) => {
   };
 };
 
-const LabelStyle = (props) => {
+const LabelStyle = ({ required, readOnly, isActive, size }) => {
+
   return {
+    "&:after": required && !readOnly ? {
+      color: "#db4949",
+      content: "'  *'",
+    } : {},
     color: () => {
-      if (props.isActive) return 'primary';
+      if (isActive) return 'primary';
       return 'textSecondary';
     },
     fontSize: () => {
-      if (props.isActive) return props.size === 'small' ? '10px' : '0';
+      if (isActive) return size === 'small' ? '10px' : '0';
       return '1';
     },
     fontWeight: '600',
-    height: props.size === 'small' ? '42px' : '52px',
+    height: size === 'small' ? '42px' : '52px',
     left: '0',
-    lineHeight: props.size === 'small' ? '22px' : '32px',
+    lineHeight: size === 'small' ? '22px' : '32px',
     position: 'absolute',
+    pt: '6px',
     px: '2',
-    py: '1',
-    top: props.isActive ? '-12px' : '0px',
+    top: isActive ? '-12px' : '0px',
     transition: '150ms ease-in-out all',
     width: '100%',
-    zIndex: 0,
+    zIndex: 0
   };
 };
 

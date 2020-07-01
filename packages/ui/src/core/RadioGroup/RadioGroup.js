@@ -1,29 +1,26 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Box, Flex } from 'rebass';
 
 import { Radio } from '../Radio';
 
 export const RadioGroup = (props) => {
-  const { options, onChange, defaultValue } = props;
-  const [currentRadio, toogleRadio] = useState(null);
-
-  useEffect(() => {
-    toogleRadio(defaultValue);
-  }, []);
+  const { options, onValueChange, value, renderRadioLabel } = props;
 
   return (
-    <Box onChange={onChange(currentRadio)} width="100%">
+    <Box width="100%">
       <Flex flexWrap="wrap">
         {options.map((option) => {
           return (
             <Box key={option.value} width={[1]} mb={1}>
               <Radio
-                onChange={() => toogleRadio(option.value)}
+                onChange={() => onValueChange(option.value)}
                 id={option.value}
                 label={option.label}
-                checked={option.checked || option.value === currentRadio}
-                name={option.name}
+                checked={option.checked || option.value === value}
+                name={option.name ? option.name : ''}
+                option={option}
+                renderRadioLabel={renderRadioLabel}
               />
             </Box>
           );
@@ -34,17 +31,19 @@ export const RadioGroup = (props) => {
 };
 
 RadioGroup.propTypes = {
-  defaultValue: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
+  onValueChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
       value: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  renderRadioLabel: PropTypes.func,
+  value: PropTypes.string,
 };
 
 RadioGroup.defaultProps = {
-  defaultValue: 'null',
+  renderRadioLabel: 'null',
+  value: 'null',
 };

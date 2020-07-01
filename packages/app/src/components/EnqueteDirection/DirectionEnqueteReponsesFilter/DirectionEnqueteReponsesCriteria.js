@@ -1,19 +1,10 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, Input, Select } from "@emjpm/ui";
-import { gql } from "apollo-boost";
-import React, { useMemo } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
+import { useDepartementsOptions } from "../../../util/departements";
 import { LoadingWrapper } from "../../Commons";
 import { BoxStyle } from "./style";
-const GET_DEPARTEMENTS = gql`
-  {
-    departements(order_by: { nom: asc }) {
-      code
-      nom
-    }
-  }
-`;
 
 const USER_TYPE_OPTIONS = [
   { label: "Tous les types", value: null },
@@ -27,34 +18,13 @@ export const ENQUETE_REPONSE_STATUS_OPTIONS = [
   { label: "En cours", value: "draft" },
   { label: "Réponse reçue", value: "submitted" },
 ];
-const departementToOptions = (datas) => {
-  const all = [
-    {
-      label: "Tous les départements",
-      value: null,
-    },
-  ].concat(
-    datas.map((data) => ({
-      label: `${data["code"]} - ${data["nom"]}`,
-      value: data["code"],
-    }))
-  );
-  all.sort(function (a, b) {
-    return a.label - b.label;
-  });
-  return all;
+const departementsOptionsConfig = {
+  nullOption: {
+    label: "Tous les départements",
+  },
 };
 const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
-  const { data: departementsData, loading, error } = useQuery(GET_DEPARTEMENTS);
-
-  const departmentOptions = useMemo(() => {
-    if (departementsData) {
-      const allDepartments = departementsData.departements;
-      const departmentOptions = departementToOptions(allDepartments);
-      return departmentOptions;
-    }
-    return [];
-  }, [departementsData]);
+  const { departementsOptions, error, loading } = useDepartementsOptions(departementsOptionsConfig);
 
   return (
     <LoadingWrapper error={error} loading={loading}>
@@ -74,7 +44,7 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
           <Box sx={BoxStyle}>
             <Select
               size="small"
-              options={departmentOptions}
+              options={departementsOptions}
               placeholder={"Département"}
               value={criteria.selectedDepartement}
               onChange={(option) => updateCriteria("selectedDepartement", option)}
