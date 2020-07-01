@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.50.0](https://github.com/SocialGouv/emjpm/compare/v25.49.0...v25.50.0) (2020-07-01)
+
+
+### Features
+
+* **enquete:** dashboard direction [#1998](https://github.com/SocialGouv/emjpm/issues/1998) - preview responses ([#2016](https://github.com/SocialGouv/emjpm/issues/2016)) ([c064478](https://github.com/SocialGouv/emjpm/commit/c0644787ab93e23bed627ce0d4ed9457ce6aa889))
+* **enquete:** service ([#2008](https://github.com/SocialGouv/emjpm/issues/2008)) ([9075aae](https://github.com/SocialGouv/emjpm/commit/9075aae58bf43f47629dc8239f39cb99e874d445))
+* **enquete:** service ([#2017](https://github.com/SocialGouv/emjpm/issues/2017)) ([75fc441](https://github.com/SocialGouv/emjpm/commit/75fc4416a375bf5975759390845cb714e02ac660))
+* **enquete:** service ([#2020](https://github.com/SocialGouv/emjpm/issues/2020)) ([2e986e6](https://github.com/SocialGouv/emjpm/commit/2e986e6d0a113f90f91ad9830b7c897ddf63c1d6))
+* **enquete:** service ([#2022](https://github.com/SocialGouv/emjpm/issues/2022)) ([745e3ac](https://github.com/SocialGouv/emjpm/commit/745e3aca71e8c83559880137f476ab47ee49cc66))
+* **enquete:** service ([#2026](https://github.com/SocialGouv/emjpm/issues/2026)) ([6c387d6](https://github.com/SocialGouv/emjpm/commit/6c387d68cadf4292555d1a8265ba2a6b55826a37))
+
+
+
+
+
 # [25.49.0](https://github.com/SocialGouv/emjpm/compare/v25.48.0...v25.49.0) (2020-06-25)
 
 
