@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useState } from "react";
 
 import { fileReader } from "../../util/fileReader";
-import { ENQUETE, ENQUETE_REPONSE_STATUS } from "../Enquete/queries";
+import { ENQUETE, ENQUETE_WITH_REPONSE_STATUS } from "../Enquete/queries";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
@@ -17,7 +17,7 @@ function useEnqueteImportManager({ enqueteId, userId }) {
     data: enqueteReponseData,
     loading: enqueteReponseLoading,
     error: enqueteReponseError,
-  } = useQuery(ENQUETE_REPONSE_STATUS, {
+  } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
     variables: { enqueteId, userId },
   });
   const enqueteReponse = enqueteReponseData

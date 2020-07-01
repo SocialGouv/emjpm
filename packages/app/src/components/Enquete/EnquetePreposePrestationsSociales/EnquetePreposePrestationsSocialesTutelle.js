@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { ENQUETE_REPONSE_STATUS } from "../queries";
+import { UserContext } from "../../UserContext";
+import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
@@ -17,7 +18,7 @@ export const EnquetePreposePrestationsSocialesTutelle = (props) => {
   const {
     enquete_reponse_ids: { prestations_sociales_id },
   } = enqueteReponse;
-
+  const { id: userId } = useContext(UserContext);
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PRESTATIONS_SOCIALES, {
     variables: {
       id: prestations_sociales_id,
@@ -29,8 +30,8 @@ export const EnquetePreposePrestationsSocialesTutelle = (props) => {
     {
       refetchQueries: [
         {
-          query: ENQUETE_REPONSE_STATUS,
-          variables: { enqueteId, reponseId: enqueteReponse.id },
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
         {
           query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
