@@ -259,6 +259,10 @@
 - table:
     schema: public
     name: direction
+  object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
   insert_permissions:
   - role: direction
     permission:
@@ -268,10 +272,11 @@
       set:
         user_id: x-hasura-User-Id
       columns:
+      - department_id
       - id
       - region_id
       - user_id
-      - department_id
+      - type
   select_permissions:
   - role: direction
     permission:
@@ -280,6 +285,7 @@
       - region_id
       - user_id
       - department_id
+      - type
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -287,10 +293,11 @@
   - role: direction
     permission:
       columns:
+      - department_id
       - id
       - region_id
       - user_id
-      - department_id
+      - type
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -5738,6 +5745,13 @@
         column_mapping:
           id: user_id
   array_relationships:
+  - name: directions
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          schema: public
+          name: direction
   - name: service_members
     using:
       foreign_key_constraint_on:

@@ -97,8 +97,23 @@ export const MAGISTRAT = gql`
 `;
 
 export const USER = gql`
-  query user($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query user($userId: Int!) {
+    departements {
+      code
+      nom
+      id
+    }
+    regions {
+      nom
+      id
+    }
+    users_by_pk(id: $userId) {
+      directions {
+        id
+        region_id
+        department_id
+        type
+      }
       id
       nom
       prenom

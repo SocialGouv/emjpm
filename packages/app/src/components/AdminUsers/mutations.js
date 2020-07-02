@@ -11,6 +11,20 @@ export const ACTIVATE_USER = gql`
   }
 `;
 
+export const UPDATE_DIRECTION = gql`
+  mutation update_direction($id: Int!, $type: String!, $department_id: Int, $region_id: Int) {
+    update_direction_by_pk(
+      pk_columns: { id: $id }
+      _set: { department_id: $department_id, region_id: $region_id, type: $type }
+    ) {
+      id
+      department_id
+      region_id
+      type
+    }
+  }
+`;
+
 export const DELETE_MAGISTRAT = gql`
   mutation deleteMagistrat($id: Int!) {
     delete_magistrat(where: { id: { _eq: $id } }) {

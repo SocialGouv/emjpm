@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Text } from "@emjpm/ui";
+import { Button, Heading3, Text } from "@emjpm/ui";
 import Link from "next/link";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
@@ -8,17 +8,18 @@ import { isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
 import AdminUsersTribunaux from "./AdminUsersTribunaux";
-import { ACTIVATE_USER } from "./mutations";
+import { ACTIVATE_USER, UPDATE_DIRECTION } from "./mutations";
 import { USER } from "./queries";
+import { TypeDirectionForm } from "./TypeDirectionForm";
 
 const AdminUserInformations = (props) => {
   const { userId } = props;
   const { data, loading, error } = useQuery(USER, { variables: { userId } });
   const [activateUser] = useMutation(ACTIVATE_USER);
+  const [updateDirection] = useMutation(UPDATE_DIRECTION);
 
   const toggleActivation = useCallback(() => {
-    const [{ active, id }] = data.users;
-
+    const { active, id } = data.users_by_pk;
     activateUser({
       variables: {
         active: !active,
@@ -35,13 +36,27 @@ const AdminUserInformations = (props) => {
     return <div>Erreur</div>;
   }
 
-  const [user] = data.users;
-  const { active, id, type, nom, prenom, email } = user;
+  const { users_by_pk, regions, departements } = data;
+
+  const {
+    active,
+    id,
+    type,
+    service_members,
+    mandataire,
+    nom,
+    prenom,
+    email,
+    directions,
+  } = users_by_pk;
+
+  const [direction] = directions;
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
     <Fragment>
+      <Heading3 mb={4}>Informations générales</Heading3>
       <Flex mb={4}>
         <Box width={1 / 3} p={2} bg="cardSecondary">
           ID
@@ -76,25 +91,25 @@ const AdminUserInformations = (props) => {
           </Text>
         </Box>
       </Flex>
-      {isMandataire(user.type) && (
+      {isMandataire(type) && (
         <Flex mb={4}>
           <Box width={1 / 3} p={2} bg="cardSecondary">
             SIRET
           </Box>
           <Box width={2 / 3} px={4} py={2}>
-            <Text>{user.mandataire.siret}</Text>
+            <Text>{mandataire.siret}</Text>
           </Box>
         </Flex>
       )}
 
-      {user.type === "service" ? (
+      {type === "service" ? (
         <Flex mb={4}>
           <Box width={1 / 3} p={2} bg="cardSecondary">
             Service
           </Box>
           <Box width={2 / 3} px={4} py={2}>
-            {user.service_members &&
-              user.service_members.map((val) => {
+            {service_members &&
+              service_members.map((val) => {
                 const { etablissement, id } = val.service;
                 return (
                   <Link
@@ -114,10 +129,8 @@ const AdminUserInformations = (props) => {
             Tribunaux
           </Box>
           <Box width={2 / 3} px={4} py={2}>
-            {user.type === "ti" && <AdminUsersMagistratTribunal id={user.id} />}
-            {(user.type === "individuel" || user.type === "prepose") && (
-              <AdminUsersTribunaux id={user.id} />
-            )}
+            {type === "ti" && <AdminUsersMagistratTribunal id={id} />}
+            {(type === "individuel" || type === "prepose") && <AdminUsersTribunaux id={id} />}
           </Box>
         </Flex>
       )}
@@ -132,6 +145,28 @@ const AdminUserInformations = (props) => {
           </Button>
         </Box>
       </Flex>
+
+      {type === "direction" && (
+        <Box mt={4}>
+          <Heading3 mb={4}>Type de direction</Heading3>
+          <TypeDirectionForm
+            onSubmit={async (values) => {
+              await updateDirection({
+                variables: {
+                  id: direction.id,
+                  type: values.type,
+                  department_id: values.departement || null,
+                  region_id: values.region || null,
+                },
+              });
+            }}
+            regions={regions}
+            departements={departements}
+            direction={direction}
+          />
+        </Box>
+      )}
+
       <Box mt="2">
         <AccessToken bg="cardSecondary" isAdmin userId={id} />
       </Box>
