@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.51.1](https://github.com/SocialGouv/emjpm/compare/v25.51.0...v25.51.1) (2020-07-02)
+
+
+### Bug Fixes
+
+* **enquete:** status ([#2047](https://github.com/SocialGouv/emjpm/issues/2047)) ([640daa1](https://github.com/SocialGouv/emjpm/commit/640daa1b50d185e1c883fa51d534560872977881))
+* **enquete:** update excel file ([#2048](https://github.com/SocialGouv/emjpm/issues/2048)) ([f70bd29](https://github.com/SocialGouv/emjpm/commit/f70bd293d7b0d5312a4efbc4b878da2bcb3b8a6c))
+
+
+
+
+
 # [25.51.0](https://github.com/SocialGouv/emjpm/compare/v25.50.0...v25.51.0) (2020-07-01)
 
 **Note:** Version bump only for package @emjpm/api
