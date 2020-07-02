@@ -81,6 +81,15 @@ export const SERVICE = gql`
       longitude
       email
       telephone
+      service_members {
+        id
+        user {
+          id
+          email
+          prenom
+          nom
+        }
+      }
       service_tis {
         id
         ti {
