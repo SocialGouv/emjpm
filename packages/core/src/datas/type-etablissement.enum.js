@@ -1,8 +1,8 @@
-const resultatRevisionMesureType =
+const typeEtablissementEnum =
   "mainlevee" |
   "reconduction" |
   "aggravation" |
   "allegement" |
   "dessaisissement_famille" |
   "dessaisissement_autre_mjpm";
-export default resultatRevisionMesureType;
+export default typeEtablissementEnum;

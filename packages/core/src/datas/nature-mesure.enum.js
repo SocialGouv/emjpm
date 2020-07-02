@@ -1,4 +1,4 @@
-const natureMesureType =
+const natureMesureEnum =
   "curatelle_simple" |
   "curatelle_renforcee" |
   "tutelle" |
@@ -8,4 +8,4 @@ const natureMesureType =
   "subroge_tuteur" |
   "mandat_protection_future" |
   "mesure_ad_hoc";
-export default natureMesureType;
+export default natureMesureEnum;
