@@ -9,7 +9,7 @@ import { LB_USERS } from "./queries";
 
 const ListeBlanche = ({ onSelectLbUser }) => {
   const {
-    selectedDepartement,
+    departements,
     selectedType,
     debouncedSearchNom,
     debouncedSearchSiret,
@@ -20,12 +20,14 @@ const ListeBlanche = ({ onSelectLbUser }) => {
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
 
+  const departement = departements.length === 1 ? departements[0] : null;
+
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
       type: selectedType ? selectedType.value : null,
-      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+      departementId: departement ? parseInt(departement.id) : null,
       nom: debouncedSearchNom ? `${debouncedSearchNom}%` : null,
       prenom: debouncedSearchPrenom ? `${debouncedSearchPrenom}%` : null,
       departementFinanceur: departementFinanceur ? true : null,

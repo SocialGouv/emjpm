@@ -1,6 +1,9 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
+import { useQuery } from "react-apollo";
 
 import { useDebounce } from "../../../lib/hooks";
+import { UserContext } from "../../UserContext";
+import { GET_DEPARTEMENTS, GET_DIRECTION_REGION_DEPARTEMENT } from "../queries";
 
 export const Context = createContext({});
 
@@ -9,8 +12,40 @@ export const Provider = (props) => {
   const { children } = props;
 
   // Use State to keep the values
-  const [selectedDepartement, selectDepartement] = useState(false);
+  const [departements, setDepartements] = useState([]);
   const [selectedType, selectType] = useState(false);
+
+  const user = useContext(UserContext);
+  const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
+    variables: {
+      userId: user.id,
+    },
+    skip: user.type !== "direction",
+  });
+
+  let departementsIds = null;
+
+  if (data && data.direction) {
+    const [direction] = data.direction;
+    const { departement, region } = direction;
+
+    if (region && region.departements) {
+      const { departements } = region;
+      departementsIds = departements.map(({ id }) => id);
+    } else if (departement) {
+      departementsIds = [departement.id];
+    }
+  }
+
+  const { data: departementsData, loading, error } = useQuery(GET_DEPARTEMENTS, {
+    variables: {
+      filterIds: departementsIds,
+    },
+    onCompleted: (result) => {
+      setDepartements(result ? result.departements : []);
+    },
+  });
+
   // Use State to keep the values
   const [searchNom, changeSearchNom] = useState();
   const [searchPrenom, changeSearchPrenom] = useState();
@@ -21,10 +56,21 @@ export const Provider = (props) => {
   const debouncedSearchPrenom = useDebounce(searchPrenom, 1000);
   const debouncedSearchSiret = useDebounce(searchSiret, 1000);
 
+  function searchDepartement(value) {
+    if (value === null) {
+      setDepartements(departementsData.departements);
+    } else {
+      const departements = departementsData.departements.filter((item) => item.id === value);
+      setDepartements(departements);
+    }
+  }
+
   // Make the context object:
   const filtersContext = {
-    selectedDepartement,
-    selectDepartement,
+    loading,
+    error,
+    departements,
+    searchDepartement,
     selectedType,
     selectType,
     changeSearchNom,

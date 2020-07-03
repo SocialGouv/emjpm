@@ -1,11 +1,9 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, CheckBox, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
 import { FiltersContext } from "./context";
-import { GET_DEPARTEMENTS } from "./queries";
 import { BoxStyle } from "./style";
 
 const TYPE_OPTIONS = [
@@ -15,10 +13,11 @@ const TYPE_OPTIONS = [
 ];
 
 const ListeBlancheFilter = () => {
-  const { data: departementsData, loading, error } = useQuery(GET_DEPARTEMENTS);
   const {
-    selectedDepartement,
-    selectDepartement,
+    departements,
+    searchDepartement,
+    loading,
+    error,
     departementFinanceur,
     toogleDepartementFinanceur,
     selectedType,
@@ -32,15 +31,29 @@ const ListeBlancheFilter = () => {
   } = useContext(FiltersContext);
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>{"Chargement..."}</div>;
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>{"Oups, une erreur s'est produite. Veuillez réessayer ultérieurement."}</div>;
   }
 
-  const allDepartments = departementsData.departements;
-  const departmentOptions = departementToOptions(allDepartments);
+  const departmentOptions = departementToOptions(departements);
+
+  let selectedDepartement = null;
+  if (departements.length === 1) {
+    const item = departements[0];
+    selectedDepartement = {
+      label: item.nom,
+      value: item.id,
+    };
+  } else if (departements.length > 1) {
+    const item = departmentOptions[0];
+    selectedDepartement = {
+      label: item.nom,
+      value: item.id,
+    };
+  }
 
   return (
     <Card>
@@ -52,12 +65,13 @@ const ListeBlancheFilter = () => {
               options={departmentOptions}
               placeholder={"Département"}
               value={selectedDepartement}
-              onChange={(option) => selectDepartement(option)}
+              onChange={(option) => searchDepartement(option.value)}
             />
           </Box>
           <Box mr={1} pt={2} width="100px">
             <CheckBox
               label="Financé"
+              name="departementFinanceur"
               isChecked={departementFinanceur}
               onChange={() => toogleDepartementFinanceur(!departementFinanceur)}
             />

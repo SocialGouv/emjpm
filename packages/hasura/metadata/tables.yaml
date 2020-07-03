@@ -186,6 +186,13 @@
     using:
       foreign_key_constraint_on: id_region
   array_relationships:
+  - name: directions
+    using:
+      foreign_key_constraint_on:
+        column: department_id
+        table:
+          schema: public
+          name: direction
   - name: mandataires
     using:
       foreign_key_constraint_on:
@@ -260,6 +267,12 @@
     schema: public
     name: direction
   object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: department_id
+  - name: region
+    using:
+      foreign_key_constraint_on: region_id
   - name: user
     using:
       foreign_key_constraint_on: user_id

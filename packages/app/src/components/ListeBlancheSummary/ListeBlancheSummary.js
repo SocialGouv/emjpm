@@ -38,11 +38,12 @@ const LabelValue = ({ label, value }) => (
 );
 
 const ListeBlancheSummary = () => {
-  const { selectedDepartement } = useContext(FiltersContext);
+  const { departements } = useContext(FiltersContext);
+  const selectedDepartement = departements.length > 1 ? null : departements[0];
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+      departementId: selectedDepartement ? parseInt(selectedDepartement.id) : null,
     },
   });
 
@@ -81,9 +82,7 @@ const ListeBlancheSummary = () => {
 
   return (
     <Card>
-      <Heading2>
-        {selectedDepartement ? selectedDepartement.label : "Tous les départements"}
-      </Heading2>
+      <Heading2>{selectedDepartement ? selectedDepartement.nom : "Tous les départements"}</Heading2>
       <Flex flexDirection="column" pt={1}>
         <LabelValue
           label="Mandataire individuel"
