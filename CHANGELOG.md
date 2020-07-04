@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.52.0](https://github.com/SocialGouv/emjpm/compare/v25.51.1...v25.52.0) (2020-07-04)
+
+
+### Bug Fixes
+
+* **enquete:** personnel formation validation ([#2049](https://github.com/SocialGouv/emjpm/issues/2049)) ([0a7ac87](https://github.com/SocialGouv/emjpm/commit/0a7ac87ea2e5add9743d7ae59c440931d5527289))
+* **enquete:** service ([#2052](https://github.com/SocialGouv/emjpm/issues/2052)) ([622741e](https://github.com/SocialGouv/emjpm/commit/622741e00c8b758b8c709d71c0026d78832854fe))
+
+
+### Features
+
+* **admin-service:** display service members ([7d0091e](https://github.com/SocialGouv/emjpm/commit/7d0091e458056e6226c0d910fcea184f77c7d3a8))
+
+
+
+
+
 ## [25.51.1](https://github.com/SocialGouv/emjpm/compare/v25.51.0...v25.51.1) (2020-07-02)
 
 
