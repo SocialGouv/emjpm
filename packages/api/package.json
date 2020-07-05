@@ -51,7 +51,7 @@
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",
     "tmp": "^0.2.1",
-    "xlsx": "^0.16.2",
+    "xlsx": "^0.16.3",
     "yup": "^0.28.5"
   },
   "devDependencies": {
@@ -66,7 +66,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "jest-cli": "^24.9.0",
     "jest-environment-knex": "^1.1.14",
-    "nodemailer-mock": "^1.5.1",
+    "nodemailer-mock": "^1.5.2",
     "nodemon": "^1.19.4",
     "pg": "^7.18.2",
     "pg-query-stream": "^2.1.2",
