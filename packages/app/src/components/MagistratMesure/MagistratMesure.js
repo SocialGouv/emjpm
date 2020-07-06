@@ -12,6 +12,7 @@ import {
   MagistratMesureStyle,
   MagistratMesureTitleStyle,
 } from "./style";
+import { getCiviliteLabel } from "../../util/mesures";
 
 const MagistratMesure = (props) => {
   const {
@@ -74,7 +75,7 @@ const MagistratMesure = (props) => {
           <Box width="50%">
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Civilité</Text>
-              <Text sx={MagistratMesureContentStyle}>{civilite === "F" ? "Femme" : "Homme"}</Text>
+              <Text sx={MagistratMesureContentStyle}>{getCiviliteLabel(civilite)}</Text>
             </Box>
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Age de la personne a protéger</Text>

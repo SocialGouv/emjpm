@@ -9,6 +9,7 @@ import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../c
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
+import { getCiviliteLabel } from "../../util/mesures";
 
 export const MandataireMesureEditForm = (props) => {
   const {
@@ -37,7 +38,7 @@ export const MandataireMesureEditForm = (props) => {
     validationSchema: mandataireMesureSchema,
     initialValues: {
       annee: age,
-      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      civilite: { label: getCiviliteLabel(civilite), value: civilite },
       date_ouverture: dateOuverture,
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,

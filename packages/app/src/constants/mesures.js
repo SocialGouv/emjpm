@@ -1,3 +1,5 @@
+import { CIVILITE_MADAME, CIVILITE_MONSIEUR } from "../util/mesures";
+
 export const MESURE_TYPES = [
   "curatelle",
   "curatelle renforcée",
@@ -158,8 +160,8 @@ export const RESIDENCE = [
 ];
 
 export const CIVILITY = [
-  { label: "Femme", value: "F" },
-  { label: "Homme", value: "H" },
+  { label: "Femme", value: CIVILITE_MADAME },
+  { label: "Homme", value: CIVILITE_MONSIEUR },
 ];
 
 export const IS_URGENT = [

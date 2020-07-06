@@ -44,7 +44,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
   civilite: yup
     .mixed()
     .oneOf(
-      ["F", "H"],
+      ["monsieur", "madame"],
       (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),

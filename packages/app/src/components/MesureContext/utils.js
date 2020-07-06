@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { CIVILITE_MONSIEUR } from "../../utils/mesure";
 
 export const formatMesure = (mesure) => {
   const {
@@ -47,7 +48,7 @@ export const formatMesure = (mesure) => {
     realAge: annee ? currentYear - annee : "nc",
     antenne: service_antenne ? service_antenne.name : null,
     cabinet: cabinet ? cabinet : null,
-    civilite: civilite ? civilite : "H",
+    civilite: civilite ? civilite : CIVILITE_MONSIEUR,
     codePostal: code_postal ? code_postal : "non renseigné",
     dateOuverture: date_ouverture ? date_ouverture : "non renseigné",
     dateOuvertureFormated: date_ouverture

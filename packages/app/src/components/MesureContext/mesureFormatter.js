@@ -1,4 +1,5 @@
 import { COUNTRIES } from "../../constants/mesures";
+import { isMan } from "../../util/mesures";
 
 export const mesureFormatter = {
   formatMajeurProtege,
@@ -9,7 +10,7 @@ function formatMajeurProtege(civilite, realAge) {
   if (!civilite) {
     return `${realAge} ans`;
   }
-  return `${civilite === "F" ? "Femme de" : "Homme de"} ${realAge} ans`;
+  return `${isMan(civilite) ? "Homme de" : "Femme de"} ${realAge} ans`;
 }
 
 function formatPays(codePays) {

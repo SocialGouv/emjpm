@@ -21,6 +21,7 @@ import {
   subtitleStyle,
   titleStyle,
 } from './style';
+import { isMan } from '../../../../app/src/util/mesures';
 
 const GrayMale = styled(Male)`
   color: '#333333';
@@ -91,7 +92,7 @@ const Mesure = (props) => {
 
           <Flex width="70px">
             <Box alignSelf="center" pt="4px" mr="1">
-              {civilite && <Fragment>{civilite === 'F' ? <GrayFemale size="24" /> : <GrayMale size="24" />}</Fragment>}
+              {civilite && <Fragment>{isMan(civilite) ? <GrayMale size="24" /> : <GrayFemale size="24" />}</Fragment>}
             </Box>
             <Box>
               <Text sx={labelStyle}>Age</Text>

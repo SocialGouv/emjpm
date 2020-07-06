@@ -9,6 +9,7 @@ import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
+import { getCiviliteLabel } from "../../util/mesures";
 
 export const ServiceMesureEditForm = (props) => {
   const {
@@ -42,7 +43,7 @@ export const ServiceMesureEditForm = (props) => {
     initialValues: {
       annee: age,
       antenne_id: antenneId ? antenneOptions.find((o) => o.value === antenneId) : null,
-      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      civilite: { label: getCiviliteLabel(civilite), value: civilite },
       date_ouverture: dateOuverture,
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,

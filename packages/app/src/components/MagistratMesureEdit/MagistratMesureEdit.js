@@ -10,6 +10,7 @@ import { magistratMesureEditSchema } from "../../lib/validationSchemas";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
+import { getCiviliteLabel } from "../../util/mesures";
 
 export const MagistratMesureEdit = () => {
   const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
@@ -40,7 +41,7 @@ export const MagistratMesureEdit = () => {
     initialValues: {
       annee: age,
       cabinet: cabinet ? cabinet : "",
-      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      civilite: { label: getCiviliteLabel(civilite), value: civilite },
       numero_rg: numeroRg,
       type: { label: type, value: type },
     },

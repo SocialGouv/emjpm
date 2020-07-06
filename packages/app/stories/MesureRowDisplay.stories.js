@@ -1,13 +1,9 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
-import {
-  default as TableRowMesure,
-  TableRowMesureView,
-} from "../src/components/mandataireComponents/TableRowMesure";
+import { TableRowMesureView } from "../src/components/mandataireComponents/TableRowMesure";
+import { CIVILITE_MONSIEUR } from "../src/util/mesures";
 
 storiesOf("MesuresCreation", module)
   .add("ShowMesure", () => (
@@ -16,7 +12,7 @@ storiesOf("MesuresCreation", module)
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}
-      civilite={"H"}
+      civilite={CIVILITE_MONSIEUR}
       annee={"2010"}
     />
   ))
@@ -26,7 +22,7 @@ storiesOf("MesuresCreation", module)
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}
-      civilite={"H"}
+      civilite={CIVILITE_MONSIEUR}
       annee={"2010"}
       isOpen={true}
     />

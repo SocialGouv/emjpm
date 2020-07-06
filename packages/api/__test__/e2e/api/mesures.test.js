@@ -88,7 +88,7 @@ describe("POST /api/editors/mesures", () => {
       .send({
         annee: "1983",
         antenne_id: null,
-        civilite: "H",
+        civilite: "monsieur",
         code_postal: "75015",
         ville: "paris",
         latitude: "45.8383",
@@ -130,7 +130,7 @@ describe("POST /api/editors/mesures/batch", () => {
           {
             annee: "1983",
             antenne_id: null,
-            civilite: "H",
+            civilite: "monsieur",
             code_postal: "75015",
             ville: "paris",
             latitude: "45.8383",

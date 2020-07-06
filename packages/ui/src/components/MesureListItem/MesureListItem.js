@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment } from 'react';
 import { Box, Flex } from 'rebass';
 
+import { isMan } from '../../../../app/src/util/mesures';
 import { Card, Text } from '../../core';
 import { MESURE_TYPE } from './constants/type';
 import {
@@ -82,7 +83,7 @@ const MesureListItem = (props) => {
 
           <Flex minWidth="50px" mr="1">
             <Box alignSelf="center" pt="4px" mr="1">
-              {civilite && <Fragment>{civilite === 'F' ? <GrayFemale size="24" /> : <GrayMale size="24" />}</Fragment>}
+              {civilite && <Fragment>{isMan(civilite) ? <GrayMale size="24" /> : <GrayFemale size="24" />}</Fragment>}
             </Box>
             <Box>
               <Text sx={labelStyle}>Age</Text>

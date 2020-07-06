@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { getCiviliteLabel } from "../../util/mesures";
 
 // move me in the good folder
 export const formatMesureList = (mesureList) => {
@@ -29,7 +30,7 @@ export const formatMesureList = (mesureList) => {
       age: annee ? annee : "nc",
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
-      civilite: civilite ? civilite : "H",
+      civilite: getCiviliteLabel(civilite),
       codePostal: code_postal ? code_postal : "non renseigné",
       dateOuverture: date_ouverture ? date_ouverture : "non renseigné",
       dateOuvertureFormated: date_ouverture
