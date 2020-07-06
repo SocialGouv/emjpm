@@ -4,10 +4,11 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
+import { MESURE_PROTECTION } from "@emjpm/core";
 
 const initialValues = {
   annee: "",
@@ -160,7 +161,7 @@ export const ServiceMesureCreateForm = (props) => {
           value={formik.values.residence}
           hasError={!!formik.errors.residence}
           onChange={(option) => formik.setFieldValue("residence", option)}
-          options={RESIDENCE}
+          options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
         />
         {formik.touched.residence && (
           <InlineError message={formik.errors.residence} fieldId="residence" />

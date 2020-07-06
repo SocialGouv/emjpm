@@ -139,17 +139,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
   },
 ];
 
-export const RESIDENCE = [
-  { label: "domicile", value: "domicile" },
-  { label: "en établissement", value: "en établissement" },
-  {
-    label: "en établissement avec conservation du domicile",
-    value: "en établissement avec conservation du domicile",
-  },
-  { label: "sdf", value: "sdf" },
-  { label: "autres", value: "autres" },
-];
-
 export const CIVILITY = [
   { label: "Femme", value: "F" },
   { label: "Homme", value: "H" },

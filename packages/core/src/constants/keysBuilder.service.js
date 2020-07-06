@@ -1,23 +1,17 @@
-/* eslint no-param-reassign: ["error", { "props": false }] */
-function revertMapKeysValues(mapByKey) {
-  return Object.keys(mapByKey).reduce((map, key) => {
-    const value = mapByKey[key];
-    map[value] = key;
-    return map;
-  }, {});
-}
-
-function buildKeys(byKey) {
+function buildKeys(map) {
+  const byKey = Object.keys(map).map((value) => {
+    const label = map[value];
+    return {
+      label,
+      value,
+    };
+  });
   return {
     byKey,
-    byValue: revertMapKeysValues(byKey),
-    keys: Object.keys(byKey),
-    values: Object.values(byKey),
+    keys: Object.keys(map),
   };
 }
 
-const keysBuilder = {
+export const keysBuilder = {
   buildKeys,
 };
-
-export { keysBuilder };

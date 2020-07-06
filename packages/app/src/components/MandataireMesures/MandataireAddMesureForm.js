@@ -4,10 +4,11 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
+import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const MandataireAddMesureForm = (props) => {
   const { onSubmit, tribunaux } = props;
@@ -163,7 +164,7 @@ export const MandataireAddMesureForm = (props) => {
                   value={formik.values.residence}
                   hasError={formik.errors.residence && formik.touched.residence}
                   onChange={(option) => formik.setFieldValue("residence", option)}
-                  options={RESIDENCE}
+                  options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
                 />
                 {formik.errors.residence && formik.touched.residence && (
                   <Text>{formik.errors.residence}</Text>

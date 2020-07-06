@@ -4,10 +4,11 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
+import { COUNTRIES } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
+import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const ServiceMesureAcceptForm = (props) => {
   const { mesure, service_antennes, onSubmit } = props;
@@ -61,7 +62,7 @@ export const ServiceMesureAcceptForm = (props) => {
               value={formik.values.residence}
               hasError={formik.errors.residence && formik.touched.residence}
               onChange={(option) => formik.setFieldValue("residence", option)}
-              options={RESIDENCE}
+              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>

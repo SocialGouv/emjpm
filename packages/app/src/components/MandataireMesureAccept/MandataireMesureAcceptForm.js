@@ -1,13 +1,15 @@
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES, RESIDENCE } from "../../constants/mesures";
+import { COUNTRIES } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
+
 
 export const MandataireMesureAcceptForm = (props) => {
   const { mesure, onSubmit } = props;
@@ -61,7 +63,7 @@ export const MandataireMesureAcceptForm = (props) => {
               value={formik.values.residence}
               hasError={formik.errors.residence && formik.touched.residence}
               onChange={(option) => formik.setFieldValue("residence", option)}
-              options={RESIDENCE}
+              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>

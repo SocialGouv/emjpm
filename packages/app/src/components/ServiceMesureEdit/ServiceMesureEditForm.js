@@ -1,10 +1,11 @@
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
@@ -190,7 +191,7 @@ export const ServiceMesureEditForm = (props) => {
               value={formik.values.residence}
               hasError={formik.errors.residence && formik.touched.residence}
               onChange={(option) => formik.setFieldValue("residence", option)}
-              options={RESIDENCE}
+              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
             />
             <InlineError message={formik.errors.residence} fieldId="residence" />
           </Field>
