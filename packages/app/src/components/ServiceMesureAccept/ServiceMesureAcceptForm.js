@@ -1,3 +1,4 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -8,7 +9,6 @@ import { COUNTRIES } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const ServiceMesureAcceptForm = (props) => {
   const { mesure, service_antennes, onSubmit } = props;

@@ -1,5 +1,5 @@
-import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { MESURE_PROTECTION } from "@emjpm/core";
+import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -9,7 +9,6 @@ import { Box, Flex, Text } from "rebass";
 import { COUNTRIES } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
-
 
 export const MandataireMesureAcceptForm = (props) => {
   const { mesure, onSubmit } = props;

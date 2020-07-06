@@ -1,3 +1,4 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Card, Field, Heading4, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -8,7 +9,6 @@ import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/me
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const MandataireAddMesureForm = (props) => {
   const { onSubmit, tribunaux } = props;

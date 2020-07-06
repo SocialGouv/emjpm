@@ -1,3 +1,4 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -8,7 +9,6 @@ import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/me
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 const initialValues = {
   annee: "",
