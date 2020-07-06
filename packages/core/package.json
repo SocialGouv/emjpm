@@ -10,7 +10,18 @@
   "files": [
     "src"
   ],
-  "scripts": {},
+  "scripts": {
+    "build": "rollup -c",
+    "build-storybook": "build-storybook",
+    "lint:pre-commit": "npm run lint:fix",
+    "lint": "eslint --fix . && echo 'Lint complete.'",
+    "lint:fix": "eslint --cache --fix .",
+    "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.html,.ts,.tsx,.mjs --report-unused-disable-directives",
+    "lint:package": "sort-package-json",
+    "dev": "rollup -c -w",
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'"
+  },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.9.6",

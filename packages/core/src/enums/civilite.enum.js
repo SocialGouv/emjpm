@@ -1,3 +1,3 @@
-const civiliteEnum = "madame" | "monsieur";
+const civiliteEnum = 'madame' | 'monsieur';
 
-export default civiliteEnum;
+export { civiliteEnum };

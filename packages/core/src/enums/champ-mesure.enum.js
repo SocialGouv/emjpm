@@ -1,4 +1,3 @@
-const champMesureEnum =
-  "protection_bien" | "protection_personne" | "protection_bien_personne";
+const champMesureEnum = 'protection_bien' | 'protection_personne' | 'protection_bien_personne';
 
-export default champMesureEnum;
+export { champMesureEnum };
