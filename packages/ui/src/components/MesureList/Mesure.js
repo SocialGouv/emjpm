@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React, { Fragment, useContext } from 'react';
 import { Box, Flex } from 'rebass';
 
+import { isMan } from '../../../../app/src/util/mesures';
 import { Button, Card, Text } from '../../core';
 import { MESURE_TYPE, PANEL_TYPE } from './constants/type';
 import { MesureContext } from './context';
@@ -21,7 +22,6 @@ import {
   subtitleStyle,
   titleStyle,
 } from './style';
-import { isMan } from '../../../../app/src/util/mesures';
 
 const GrayMale = styled(Male)`
   color: '#333333';

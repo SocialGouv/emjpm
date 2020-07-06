@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+
 import { CIVILITE_MONSIEUR } from "../../utils/mesure";
 
 export const formatMesure = (mesure) => {

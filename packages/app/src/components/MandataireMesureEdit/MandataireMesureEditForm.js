@@ -7,9 +7,9 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
+import { getCiviliteLabel } from "../../util/mesures";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { getCiviliteLabel } from "../../util/mesures";
 
 export const MandataireMesureEditForm = (props) => {
   const {

@@ -2,6 +2,7 @@ import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { getCiviliteLabel } from "../../util/mesures";
 import { Link } from "../Commons";
 import { MesureContext } from "../MesureContext";
 import {
@@ -12,7 +13,6 @@ import {
   MagistratMesureStyle,
   MagistratMesureTitleStyle,
 } from "./style";
-import { getCiviliteLabel } from "../../util/mesures";
 
 const MagistratMesure = (props) => {
   const {

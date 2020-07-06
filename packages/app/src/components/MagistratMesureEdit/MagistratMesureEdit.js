@@ -7,10 +7,10 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMesureEditSchema } from "../../lib/validationSchemas";
+import { getCiviliteLabel } from "../../util/mesures";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
-import { getCiviliteLabel } from "../../util/mesures";
 
 export const MagistratMesureEdit = () => {
   const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
