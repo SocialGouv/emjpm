@@ -5,7 +5,7 @@ export const LB_USERS = gql`
     $limit: Int
     $offset: Int
     $type: String
-    $departementId: Int
+    $departementIds: [Int!]
     $departementFinanceur: Boolean
     $nom: String
     $prenom: String
@@ -15,7 +15,7 @@ export const LB_USERS = gql`
       where: {
         type: { _eq: $type }
         lb_departements: {
-          departement_id: { _eq: $departementId }
+          departement_id: { _in: $departementIds }
           departement_financeur: { _eq: $departementFinanceur }
         }
         nom: { _ilike: $nom }
@@ -33,7 +33,7 @@ export const LB_USERS = gql`
       where: {
         type: { _eq: $type }
         lb_departements: {
-          departement_id: { _eq: $departementId }
+          departement_id: { _in: $departementIds }
           departement_financeur: { _eq: $departementFinanceur }
         }
         nom: { _ilike: $nom }

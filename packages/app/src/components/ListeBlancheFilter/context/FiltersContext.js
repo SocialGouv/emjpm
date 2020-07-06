@@ -43,10 +43,13 @@ export const Provider = (props) => {
     },
     onCompleted: (result) => {
       setDepartements(result ? result.departements : []);
+      setSelectedDepartements(result ? result.departements : []);
     },
   });
 
   // Use State to keep the values
+  const [selectedDepartements, setSelectedDepartements] = useState([]);
+  const [filterDepartement, setFilterDepartement] = useState(null);
   const [searchNom, changeSearchNom] = useState();
   const [searchPrenom, changeSearchPrenom] = useState();
   const [searchSiret, changeSearchSiret] = useState();
@@ -56,12 +59,13 @@ export const Provider = (props) => {
   const debouncedSearchPrenom = useDebounce(searchPrenom, 1000);
   const debouncedSearchSiret = useDebounce(searchSiret, 1000);
 
-  function searchDepartement(value) {
-    if (value === null) {
-      setDepartements(departementsData.departements);
+  function searchDepartement(option) {
+    setFilterDepartement(option);
+    if (option.value === null) {
+      setSelectedDepartements(departementsData.departements);
     } else {
-      const departements = departementsData.departements.filter((item) => item.id === value);
-      setDepartements(departements);
+      const departements = departementsData.departements.filter((item) => item.id === option.value);
+      setSelectedDepartements(departements);
     }
   }
 
@@ -71,6 +75,8 @@ export const Provider = (props) => {
     error,
     departements,
     searchDepartement,
+    filterDepartement,
+    selectedDepartements,
     selectedType,
     selectType,
     changeSearchNom,

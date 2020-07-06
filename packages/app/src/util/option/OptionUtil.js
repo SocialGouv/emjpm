@@ -12,12 +12,10 @@ export const regionsToOptions = (datas) => {
 export const departementToOptions = (datas) => {
   const all = [];
   if (datas && datas.length > 1) {
-    all.push([
-      {
-        label: "Tous les départements",
-        value: null,
-      },
-    ]);
+    all.push({
+      label: "Tous les départements",
+      value: null,
+    });
   }
   Array.prototype.push.apply(all, toOptions(datas, "id", "nom"));
   all.sort(function (a, b) {

@@ -28,6 +28,7 @@ const ListeBlancheFilter = () => {
     changeSearchPrenom,
     searchSiret,
     changeSearchSiret,
+    filterDepartement,
   } = useContext(FiltersContext);
 
   if (loading) {
@@ -40,21 +41,6 @@ const ListeBlancheFilter = () => {
 
   const departmentOptions = departementToOptions(departements);
 
-  let selectedDepartement = null;
-  if (departements.length === 1) {
-    const item = departements[0];
-    selectedDepartement = {
-      label: item.nom,
-      value: item.id,
-    };
-  } else if (departements.length > 1) {
-    const item = departmentOptions[0];
-    selectedDepartement = {
-      label: item.nom,
-      value: item.id,
-    };
-  }
-
   return (
     <Card>
       <Flex flexDirection="column">
@@ -64,8 +50,8 @@ const ListeBlancheFilter = () => {
               size="small"
               options={departmentOptions}
               placeholder={"Département"}
-              value={selectedDepartement}
-              onChange={(option) => searchDepartement(option.value)}
+              value={filterDepartement}
+              onChange={(option) => searchDepartement(option)}
             />
           </Box>
           <Box mr={1} pt={2} width="100px">
