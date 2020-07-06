@@ -20,4 +20,4 @@ const keysBuilder = {
   buildKeys,
 };
 
-module.exports = keysBuilder;
+export { keysBuilder };

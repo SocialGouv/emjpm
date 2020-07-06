@@ -19,6 +19,7 @@ export const MESURE_PROTECTION = {
     domicile: 'domicile',
     etablissement: 'établissement',
     etablissement_conservation_domicile: 'établissement avec conservation du domicile',
+    sdf: 'SDF',
   }),
 
   NATURE_MESURE: keysBuilder.buildKeys({

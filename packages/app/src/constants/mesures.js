@@ -22,13 +22,6 @@ export const MESURE_TYPES = [
   "tutelle aux biens et à la personne",
 ];
 
-export const MESURE_RESIDENCES = [
-  "domicile",
-  "en établissement",
-  "en établissement avec conservation du domicile",
-  "sdf",
-];
-
 export const MESURE_CIVILITIES = ["F", "H"];
 
 export const MESURE_STATUS_LABEL_VALUE_EN_COURS = {
