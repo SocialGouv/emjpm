@@ -8,12 +8,8 @@ import { Navigation } from "../Navigation";
 import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { UserContext } from "../UserContext";
 
-function hasDirectionNationalRole(roles) {
-  return roles.some(({ role }) => role && role.name === "direction_national");
-}
-
 const LayoutDirection = ({ children }) => {
-  const { user_roles: userRoles } = useContext(UserContext);
+  const { type } = useContext(UserContext);
   const navigationLinks = [
     {
       title: "Mandataires",
@@ -29,7 +25,7 @@ const LayoutDirection = ({ children }) => {
     },
   ];
 
-  if (hasDirectionNationalRole(userRoles)) {
+  if (type === "admin" || type === "direction") {
     navigationLinks.splice(2, 0, { title: "Enquêtes", url: "/direction/enquetes" });
   }
 
