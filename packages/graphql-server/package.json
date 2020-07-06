@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
-    "apollo-datasource-rest": "^0.9.2",
+    "apollo-datasource-rest": "^0.9.3",
     "apollo-server-koa": "^2.13.1",
     "graphql": "^14.6.0",
     "koa": "^2.11.0",
@@ -55,6 +55,6 @@
     "prettier": "^2.0.5",
     "ts-node": "^8.10.2",
     "tslint": "^5.20.1",
-    "typescript": "^3.9.5"
+    "typescript": "^3.9.6"
   }
 }
