@@ -1,6 +1,6 @@
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { useMutation } from "react-apollo";
 import { Box, Card, Flex } from "rebass";
 
@@ -50,12 +50,13 @@ export const ListeBlancheForm = (props) => {
     deleteLbDepartement,
   } = useMutations();
 
-  const submitForm = useCallback(
-    async (value) => {
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
       await updateLbUser({
         variables: {
           id: lb_user.id,
-          ...value,
+          ...values,
+          siret: values.siret || null,
         },
       });
       const departementsOperations = lbDepartements.reduce((acc, lbDepartement) => {
@@ -104,31 +105,17 @@ export const ListeBlancheForm = (props) => {
         await Promise.all(departementsOperations);
       }
 
-      handleSubmit(value, formik);
+      setSubmitting(false);
+      props.handleSubmit();
     },
-    [
-      createLbDepartement,
-      deleteLbDepartement,
-      formik,
-      handleSubmit,
-      lbDepartements,
-      lb_user.id,
-      lb_user.lb_departements,
-      updateLbDepartement,
-      updateLbUser,
-    ]
-  );
-
-  const formik = useFormik({
-    onSubmit: submitForm,
     validationSchema,
     initialValues,
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex flexDirection="row" mt={4}>
-        <Flex pr={2} flex={2 / 3} flexDirection="column">
+      <Box mt={4}>
+        <Flex pr={2} flexDirection="column">
           <Flex flexDirection="row">
             <Flex pr={2} flex={1 / 2} flexDirection="column">
               <FormGroupInput
@@ -159,36 +146,36 @@ export const ListeBlancheForm = (props) => {
               />
             </Flex>
           </Flex>
-          <Flex mt={6} justifyContent="center">
-            {handleCancel && (
-              <Box>
-                <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
-                  Annuler
-                </Button>
-              </Box>
-            )}
+        </Flex>
+
+        <Card>
+          <Heading4 mb={1}>{"Départements"}</Heading4>
+          <ListeBlancheFormDepartementFinanceur
+            lbDepartements={lbDepartements}
+            setLbDepartements={setLbDepartements}
+          />
+          <ListeBlancheFormDepartementAjout
+            lb_user={lb_user}
+            lbDepartements={lbDepartements}
+            setLbDepartements={setLbDepartements}
+          />
+        </Card>
+
+        <Flex mt={4} justifyContent="flex-end">
+          {handleCancel && (
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-                Enregistrer
+              <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+                Annuler
               </Button>
             </Box>
-          </Flex>
+          )}
+          <Box>
+            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              Enregistrer
+            </Button>
+          </Box>
         </Flex>
-        <Flex flex={1 / 3}>
-          <Card>
-            <Heading4 mb={1}>{"Départements"}</Heading4>
-            <ListeBlancheFormDepartementFinanceur
-              lbDepartements={lbDepartements}
-              setLbDepartements={setLbDepartements}
-            />
-            <ListeBlancheFormDepartementAjout
-              lb_user={lb_user}
-              lbDepartements={lbDepartements}
-              setLbDepartements={setLbDepartements}
-            />
-          </Card>
-        </Flex>
-      </Flex>
+      </Box>
     </form>
   );
   function useMutations() {

@@ -9,11 +9,15 @@ module.exports = {
       $email: String
       $siret: String
     ) {
-      update_lb_users(
-        where: { id: { _eq: $id } }
+      update_lb_users_by_pk(
+        pk_columns: { id: $id }
         _set: { email: $email, nom: $nom, prenom: $prenom, siret: $siret }
       ) {
-        affected_rows
+        id
+        email
+        nom
+        prenom
+        siret
       }
     }
   `,
