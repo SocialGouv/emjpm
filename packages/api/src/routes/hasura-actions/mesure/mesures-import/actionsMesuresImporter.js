@@ -1,3 +1,4 @@
+const { MESURE_PROTECTION } = require("@emjpm/core");
 const excelParser = require("../../../../utils/file/excelParser");
 const logger = require("../../../../utils/logger");
 
@@ -47,6 +48,7 @@ async function importMesuresFile({
     if (data.residence) {
       data.residence = data.residence.toLowerCase();
       data.residence = data.residence.replace("a domicile", "domicile");
+      data.residence = data.residence.replace("sdf", "SDF");
     }
   });
 
@@ -133,8 +135,15 @@ const importMesures = async ({
     if (counter === 1 || counter === size || counter % 100 === 0) {
       logger.info(`[IMPORT MESURES] mesure ${counter} / ${size}`);
     }
+
+    const lieu_vie = mesure.residence
+      ? MESURE_PROTECTION.LIEU_VIE_MAJEUR.byValue[mesure.residence]
+      : null;
+    delete mesure.residence;
+
     const mesureDatas = {
       ...mesure,
+      lieu_vie,
       date_ouverture: toDate(mesure.date_ouverture),
       mandataire,
       service,
@@ -287,7 +296,7 @@ const prepareMesure = async (
     mandataire_id: mandataire ? mandataire.id : null,
     service_id: service ? service.id : null,
     antenne_id: mesureDatas.antenne_id,
-    residence: mesureDatas.residence,
+    lieu_vie: mesureDatas.lieu_vie,
     department_id: department.id,
     ti_id: ti ? ti.id : null,
     cabinet: mesureDatas.tribunal_cabinet,

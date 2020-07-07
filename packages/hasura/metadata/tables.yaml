@@ -4214,7 +4214,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4248,7 +4248,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4283,7 +4283,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4313,7 +4313,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4344,7 +4344,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4376,7 +4376,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4412,7 +4412,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4447,7 +4447,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4482,7 +4482,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4519,7 +4519,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4555,7 +4555,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4590,7 +4590,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id
@@ -4622,7 +4622,7 @@
       - numero_rg
       - pays
       - reason_extinction
-      - residence
+      - lieu_vie
       - service_id
       - status
       - ti_id

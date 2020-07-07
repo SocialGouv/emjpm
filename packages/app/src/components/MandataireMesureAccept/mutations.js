@@ -5,7 +5,7 @@ export const ACCEPT_MESURE = gql`
     $id: Int!
     $department_id: Int
     $date_ouverture: date!
-    $residence: String!
+    $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
     $latitude: Float
@@ -18,7 +18,7 @@ export const ACCEPT_MESURE = gql`
         department_id: $department_id
         status: "Mesure en cours"
         date_ouverture: $date_ouverture
-        residence: $residence
+        lieu_vie: $lieu_vie
         code_postal: $code_postal
         ville: $ville
         latitude: $latitude
@@ -42,7 +42,7 @@ export const ACCEPT_MESURE = gql`
         status
         type
         ville
-        residence
+        lieu_vie
         mandataire_id
         numero_rg
         numero_dossier

@@ -22,7 +22,7 @@ export const REACTIVATE_MESURE = gql`
         status
         type
         ville
-        residence
+        lieu_vie
         numero_rg
         numero_dossier
         mandataire_id

@@ -19,7 +19,7 @@ router.post(
     body("date_ouverture").not().isEmpty(),
     body("numero_dossier").not().isEmpty(),
     body("numero_rg").not().isEmpty(),
-    body("residence").not().isEmpty(),
+    body("lieu_vie").not().isEmpty(),
     body("ti_id").not().isEmpty(),
   ],
   mesureCreate

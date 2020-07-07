@@ -4,7 +4,7 @@ import { format } from "date-fns";
 export const formatMesureList = (mesureList) => {
   const mesures = mesureList.map((mesure) => {
     const {
-      residence,
+      lieu_vie,
       code_postal,
       numero_dossier,
       antenne_id,
@@ -40,11 +40,11 @@ export const formatMesureList = (mesureList) => {
       isUrgent: is_urgent,
       judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non renseigné",
       latitude: latitude || 45.5,
+      lieu_vie: lieu_vie ? lieu_vie : "non renseigné",
       longitude: longitude || 0.5,
       numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
       numeroRg: numero_rg ? numero_rg : "RG-00000000",
       pays,
-      residence: residence ? residence : "non renseigné",
       status: status ? status : "non renseigné",
       tiId: ti ? ti.id : null,
       tribunal: ti ? ti.etablissement : "Tribunal non renseigné",

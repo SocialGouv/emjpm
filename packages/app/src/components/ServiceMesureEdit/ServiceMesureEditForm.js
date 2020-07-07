@@ -1,11 +1,13 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
+import { findOption } from "../../util/option/OptionUtil";
 import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -21,7 +23,7 @@ export const ServiceMesureEditForm = (props) => {
       id,
       numeroRg,
       numeroDossier,
-      residence,
+      lieuVie,
       type,
       tribunal,
       tiId,
@@ -46,7 +48,7 @@ export const ServiceMesureEditForm = (props) => {
       date_ouverture: dateOuverture,
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,
-      residence: { label: residence, value: residence },
+      lieu_vie: findOption(MESURE_PROTECTION.LIEU_VIE_MAJEUR.options, lieuVie),
       tribunal: { label: tribunal, value: tiId },
       type: { label: type, value: type },
       country: { value: pays, label: COUNTRIES[pays] },
@@ -184,15 +186,15 @@ export const ServiceMesureEditForm = (props) => {
           </Field>
           <Field>
             <Select
-              id="residence"
-              name="residence"
-              placeholder="Type de residence"
-              value={formik.values.residence}
-              hasError={formik.errors.residence && formik.touched.residence}
-              onChange={(option) => formik.setFieldValue("residence", option)}
-              options={RESIDENCE}
+              id="lieu_vie"
+              name="lieu_vie"
+              placeholder="Lieu de vie du majeur"
+              value={formik.values.lieu_vie}
+              hasError={formik.errors.lieu_vie && formik.touched.lieu_vie}
+              onChange={(option) => formik.setFieldValue("lieu_vie", option)}
+              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
             />
-            <InlineError message={formik.errors.residence} fieldId="residence" />
+            <InlineError message={formik.errors.lieu_vie} fieldId="lieu_vie" />
           </Field>
 
           <Field>
