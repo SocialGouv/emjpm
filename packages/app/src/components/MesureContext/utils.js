@@ -13,7 +13,7 @@ export const formatMesure = (mesure) => {
     annee_naissance,
     antenne_id,
     civilite,
-    date_ouverture,
+    date_nomination,
     numero_rg,
     is_urgent,
     judgment_date,
@@ -49,9 +49,9 @@ export const formatMesure = (mesure) => {
     cabinet: cabinet ? cabinet : null,
     civilite: civilite ? civilite : "H",
     codePostal: code_postal ? code_postal : "non renseigné",
-    dateOuverture: date_ouverture ? date_ouverture : "non renseigné",
-    dateOuvertureFormated: date_ouverture
-      ? format(new Date(date_ouverture), "dd/MM/yyyy")
+    dateNomination: date_nomination ? date_nomination : "non renseigné",
+    dateNominationFormated: date_nomination
+      ? format(new Date(date_nomination), "dd/MM/yyyy")
       : "non renseigné",
     href: `/services/mesure/${id}/`,
     id: id,

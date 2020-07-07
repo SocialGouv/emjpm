@@ -175,8 +175,8 @@ function buildTableColumns() {
       accessor: "annee_naissance",
     },
     {
-      Header: "Date ouverture",
-      accessor: (data) => format(new Date(data.date_ouverture), "dd/MM/yyy"),
+      Header: "Date de jugement ou ordonnance de nomination",
+      accessor: (data) => format(new Date(data.date_nomination), "dd/MM/yyy"),
     },
     {
       Header: "Date de création",

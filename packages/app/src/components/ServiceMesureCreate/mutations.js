@@ -11,7 +11,7 @@ export const RECALCULATE_SERVICE_MESURES = gql`
 
 export const ADD_MESURE = gql`
   mutation addMesure(
-    $date_ouverture: date!
+    $date_nomination: date!
     $department_id: Int
     $type: String!
     $lieu_vie: lieu_vie_type!
@@ -31,7 +31,7 @@ export const ADD_MESURE = gql`
     insert_mesures(
       objects: {
         department_id: $department_id
-        date_ouverture: $date_ouverture
+        date_nomination: $date_nomination
         type: $type
         ti_id: $ti_id
         lieu_vie: $lieu_vie
@@ -74,7 +74,7 @@ export const ADD_MESURE = gql`
         numero_dossier
         etablissement
         annee_naissance
-        date_ouverture
+        date_nomination
         pays
         cabinet
       }

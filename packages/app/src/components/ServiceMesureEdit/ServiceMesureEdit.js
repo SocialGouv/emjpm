@@ -91,7 +91,7 @@ const ServiceMesureEdit = (props) => {
               annee_naissance: values.annee_naissance,
               antenne_id: values.antenne_id ? values.antenne_id.value : null,
               civilite: values.civilite.value,
-              date_ouverture: values.date_ouverture,
+              date_nomination: values.date_nomination,
               id: id,
               numero_dossier: values.numero_dossier,
               numero_rg: values.numero_rg,

@@ -19,7 +19,7 @@ export const MandataireAddMesureForm = (props) => {
     initialValues: {
       annee_naissance: "",
       civilite: "",
-      date_ouverture: "",
+      date_nomination: "",
       numero_dossier: "",
       numero_rg: "",
       tribunal: undefined,
@@ -105,16 +105,16 @@ export const MandataireAddMesureForm = (props) => {
               </Field>
               <Field>
                 <Input
-                  value={formik.values.date_ouverture}
-                  id="date_ouverture"
+                  value={formik.values.date_nomination}
+                  id="date_nomination"
                   type="date"
-                  name="date_ouverture"
-                  hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+                  name="date_nomination"
+                  hasError={formik.errors.date_nomination && formik.touched.date_nomination}
                   onChange={formik.handleChange}
-                  placeholder="Date d'ordonnance"
+                  placeholder="Date de jugement ou ordonnance de nomination"
                 />
-                {formik.errors.date_ouverture && formik.touched.date_ouverture && (
-                  <Text>{formik.errors.date_ouverture}</Text>
+                {formik.errors.date_nomination && formik.touched.date_nomination && (
+                  <Text>{formik.errors.date_nomination}</Text>
                 )}
               </Field>
               <Field>

@@ -14,7 +14,7 @@ export const formatMandatairesMesureList = (mesureList) => {
       ti,
       annee_naissance,
       civilite,
-      date_ouverture,
+      date_nomination,
       is_urgent,
       judgment_date,
       numero_rg,
@@ -29,8 +29,10 @@ export const formatMandatairesMesureList = (mesureList) => {
       cabinet: cabinet ? cabinet : null,
       civilite: civilite ? civilite : null,
       codePostal: code_postal ? code_postal : null,
-      dateOuverture: date_ouverture ? date_ouverture : null,
-      dateOuvertureFormated: date_ouverture ? format(new Date(date_ouverture), "dd/MM/yyy") : null,
+      dateNomination: date_nomination ? date_nomination : null,
+      dateNominationFormated: date_nomination
+        ? format(new Date(date_nomination), "dd/MM/yyy")
+        : null,
       href: `/services/mesure/${id}/`,
       id: id,
       tribunal: ti.etablissement,
