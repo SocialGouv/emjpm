@@ -18,7 +18,7 @@ export const ADD_MESURE = gql`
     $code_postal: String
     $ville: String
     $civilite: String!
-    $annee: String!
+    $annee_naissance: String!
     $numero_dossier: String!
     $numero_rg: String!
     $antenne_id: Int
@@ -38,7 +38,7 @@ export const ADD_MESURE = gql`
         code_postal: $code_postal
         ville: $ville
         civilite: $civilite
-        annee: $annee
+        annee_naissance: $annee_naissance
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
         status: "Mesure en cours"
@@ -73,7 +73,7 @@ export const ADD_MESURE = gql`
         numero_rg
         numero_dossier
         etablissement
-        annee
+        annee_naissance
         date_ouverture
         pays
         cabinet

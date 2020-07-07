@@ -7,7 +7,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $magistrat_id: Int!
     $type: String!
     $civilite: String!
-    $annee: String!
+    $annee_naissance: String!
     $cabinet: String
     $urgent: Boolean!
     $judgmentDate: date
@@ -23,7 +23,7 @@ export const CHOOSE_MANDATAIRE = gql`
         magistrat_id: $magistrat_id
         type: $type
         civilite: $civilite
-        annee: $annee
+        annee_naissance: $annee_naissance
         numero_rg: $numero_rg
         status: "Mesure en attente"
       }
@@ -60,7 +60,7 @@ export const CHOOSE_SERVICE = gql`
     $magistrat_id: Int!
     $type: String!
     $civilite: String!
-    $annee: String!
+    $annee_naissance: String!
     $cabinet: String
     $judgmentDate: date
     $numero_rg: String!
@@ -75,7 +75,7 @@ export const CHOOSE_SERVICE = gql`
         magistrat_id: $magistrat_id
         type: $type
         civilite: $civilite
-        annee: $annee
+        annee_naissance: $annee_naissance
         numero_rg: $numero_rg
         judgment_date: $judgmentDate
         status: "Mesure en attente"

@@ -4193,7 +4193,7 @@
           user_id:
             _eq: X-Hasura-User-Id
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4227,7 +4227,7 @@
           user_id:
             _eq: X-Hasura-User-Id
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4262,7 +4262,7 @@
       set:
         service_id: x-hasura-Service-Id
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4293,7 +4293,7 @@
     permission:
       check: {}
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4323,7 +4323,7 @@
   - role: direction
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4355,7 +4355,7 @@
   - role: individuel
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4391,7 +4391,7 @@
   - role: prepose
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4426,7 +4426,7 @@
   - role: service
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4460,7 +4460,7 @@
   - role: ti
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4498,7 +4498,7 @@
   - role: individuel
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4534,7 +4534,7 @@
   - role: prepose
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4569,7 +4569,7 @@
   - role: service
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite
@@ -4603,7 +4603,7 @@
   - role: ti
     permission:
       columns:
-      - annee
+      - annee_naissance
       - antenne_id
       - cabinet
       - civilite

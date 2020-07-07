@@ -47,7 +47,7 @@ export const ACCEPT_MESURE = gql`
         numero_rg
         numero_dossier
         etablissement
-        annee
+        annee_naissance
         date_ouverture
         pays
       }

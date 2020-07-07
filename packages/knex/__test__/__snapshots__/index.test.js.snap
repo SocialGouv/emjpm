@@ -3246,7 +3246,7 @@ Object {
 
 exports[`mesures table schema 1`] = `
 Object {
-  "annee": Object {
+  "annee_naissance": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,

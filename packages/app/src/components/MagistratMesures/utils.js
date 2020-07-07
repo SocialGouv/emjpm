@@ -12,7 +12,7 @@ export const formatMandatairesMesureList = (mesureList) => {
       status,
       id,
       ti,
-      annee,
+      annee_naissance,
       civilite,
       date_ouverture,
       is_urgent,
@@ -24,7 +24,7 @@ export const formatMandatairesMesureList = (mesureList) => {
     return {
       judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyy") : null,
       isUrgent: is_urgent,
-      age: annee ? annee : null,
+      age: annee_naissance ? annee_naissance : null,
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
       civilite: civilite ? civilite : null,
