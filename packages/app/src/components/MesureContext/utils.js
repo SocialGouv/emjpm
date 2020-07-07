@@ -2,7 +2,7 @@ import { format } from "date-fns";
 
 export const formatMesure = (mesure) => {
   const {
-    residence,
+    lieu_vie,
     code_postal,
     numero_dossier,
     departement,
@@ -62,7 +62,7 @@ export const formatMesure = (mesure) => {
     judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non renseigné",
     numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
     numeroRg: numero_rg ? numero_rg : "RG-00000000",
-    residence: residence ? residence : "non renseigné",
+    lieu_vie: lieu_vie ? lieu_vie : "non renseigné",
     status: status ? currentStatus : "non renseigné",
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal non renseigné",

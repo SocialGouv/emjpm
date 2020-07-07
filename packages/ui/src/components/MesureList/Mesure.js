@@ -50,7 +50,7 @@ const Mesure = (props) => {
     AcceptComponent,
     CloseComponent,
     ReactivateComponent,
-    residence,
+    lieuVie,
     codePostal,
     numeroDossier,
     antenneId,
@@ -201,7 +201,7 @@ const Mesure = (props) => {
                 type={type}
                 tribunal={tribunal}
                 cabinet={cabinet}
-                residence={residence}
+                lieuVie={lieuVie}
                 codePostal={codePostal}
                 latitude={latitude}
                 longitude={longitude}
@@ -245,11 +245,11 @@ Mesure.propTypes = {
   isUrgent: PropTypes.bool,
   judgmentDate: PropTypes.string,
   latitude: PropTypes.number.isRequired,
+  lieuVie: PropTypes.string.isRequired,
   longitude: PropTypes.number.isRequired,
   numeroDossier: PropTypes.string,
   numeroRg: PropTypes.string.isRequired,
   onPanelOpen: PropTypes.func,
-  residence: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
   tiId: PropTypes.number,
   tribunal: PropTypes.string,

@@ -52,7 +52,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
   residence: yup
     .mixed()
     .oneOf(
-      MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys,
+      MESURE_PROTECTION.LIEU_VIE_MAJEUR.values,
       (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),

@@ -17,7 +17,7 @@ const mandataireMesureSchema = yup.object().shape({
   date_ouverture: yup.date().required(),
   numero_dossier: yup.string(),
   numero_rg: yup.string().required(),
-  residence: yup.string().required(),
+  lieu_vie: yup.string().required(),
   tribunal: yup.string().required(),
   type: yup.string().required(),
   zipcode: yup.string().when("country", {

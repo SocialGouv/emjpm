@@ -26,7 +26,7 @@ export const CLOSE_MESURE = gql`
         status
         type
         ville
-        residence
+        lieu_vie
         mandataire_id
         numero_rg
         numero_dossier

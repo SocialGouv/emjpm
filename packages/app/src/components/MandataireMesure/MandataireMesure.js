@@ -15,7 +15,7 @@ export const MandataireMesure = (props) => {
     dateOuvertureFormated,
     numeroDossier,
     numeroRg,
-    residence,
+    lieuVie,
     status,
     tribunal,
     type,
@@ -46,7 +46,7 @@ export const MandataireMesure = (props) => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Type de résidence</Text>
-              <Text sx={content}>{residence}</Text>
+              <Text sx={content}>{lieuVie}</Text>
             </Box>
 
             <Box mb={4}>

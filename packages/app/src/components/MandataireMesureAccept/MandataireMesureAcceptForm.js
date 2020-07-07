@@ -18,7 +18,7 @@ export const MandataireMesureAcceptForm = (props) => {
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
       date_ouverture: "",
-      residence: "",
+      lieu_vie: "",
       city: mesure.ville,
       zipcode: mesure.code_postal,
       country: { value: "FR", label: COUNTRIES["FR"] },
@@ -56,15 +56,15 @@ export const MandataireMesureAcceptForm = (props) => {
           </Field>
           <Field>
             <Select
-              id="residence"
-              name="residence"
-              placeholder="Type de residence"
-              value={formik.values.residence}
-              hasError={formik.errors.residence && formik.touched.residence}
-              onChange={(option) => formik.setFieldValue("residence", option)}
-              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
+              id="lieu_vie"
+              name="lieu_vie"
+              placeholder="Lieu de vie du majeur"
+              value={formik.values.lieu_vie}
+              hasError={formik.errors.lieu_vie && formik.touched.lieu_vie}
+              onChange={(option) => formik.setFieldValue("lieu_vie", option)}
+              options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
             />
-            <InlineError message={formik.errors.residence} fieldId="residence" />
+            <InlineError message={formik.errors.lieu_vie} fieldId="lieu_vie" />
           </Field>
 
           <Field>

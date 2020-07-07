@@ -1,3 +1,4 @@
+const { MESURE_PROTECTION } = require("@emjpm/core");
 const excelParser = require("../../../../utils/file/excelParser");
 const logger = require("../../../../utils/logger");
 
@@ -133,8 +134,15 @@ const importMesures = async ({
     if (counter === 1 || counter === size || counter % 100 === 0) {
       logger.info(`[IMPORT MESURES] mesure ${counter} / ${size}`);
     }
+
+    const lieu_vie = mesure.residence
+      ? MESURE_PROTECTION.LIEU_VIE_MAJEUR.byValue[mesure.residence]
+      : null;
+    delete mesure.residence;
+
     const mesureDatas = {
       ...mesure,
+      lieu_vie,
       date_ouverture: toDate(mesure.date_ouverture),
       mandataire,
       service,

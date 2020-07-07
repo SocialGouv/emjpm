@@ -47,7 +47,7 @@ export const MESURES = gql`
       annee
       type
       numero_dossier
-      residence
+      lieu_vie
       numero_rg
       status
       date_ouverture

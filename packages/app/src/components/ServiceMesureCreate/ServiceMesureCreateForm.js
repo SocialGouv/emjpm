@@ -155,16 +155,16 @@ export const ServiceMesureCreateForm = (props) => {
       </Field>
       <Field>
         <Select
-          id="residence"
-          name="residence"
-          placeholder="Type de residence"
-          value={formik.values.residence}
-          hasError={!!formik.errors.residence}
-          onChange={(option) => formik.setFieldValue("residence", option)}
-          options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey}
+          id="lieu_vie"
+          name="lieu_vie"
+          placeholder="Type de lieu_vie"
+          value={formik.values.lieu_vie}
+          hasError={!!formik.errors.lieu_vie}
+          onChange={(option) => formik.setFieldValue("lieu_vie", option)}
+          options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
         />
-        {formik.touched.residence && (
-          <InlineError message={formik.errors.residence} fieldId="residence" />
+        {formik.touched.lieu_vie && (
+          <InlineError message={formik.errors.lieu_vie} fieldId="lieu_vie" />
         )}
       </Field>
 

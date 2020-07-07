@@ -15,7 +15,7 @@ const ServiceMesure = (props) => {
     dateOuvertureFormated,
     numeroDossier,
     numeroRg,
-    residence,
+    lieu_vie,
     status,
     tribunal,
     type,
@@ -45,7 +45,7 @@ const ServiceMesure = (props) => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Type de résidence</Text>
-              <Text sx={content}>{residence}</Text>
+              <Text sx={content}>{lieu_vie}</Text>
             </Box>
 
             <Box mb={4}>
