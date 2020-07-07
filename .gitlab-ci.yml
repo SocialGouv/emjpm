@@ -237,9 +237,11 @@ Lint @emjpm/app:
   dependencies:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   needs:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   script:
     - yarn workspace @emjpm/app lint
 
