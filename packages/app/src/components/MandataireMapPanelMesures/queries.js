@@ -24,7 +24,7 @@ export const MESURES = gql`
       department_id
       etablissement
       etablissement_id
-      extinction
+      date_fin_mesure
       is_urgent
       judgment_date
       mandataire_id

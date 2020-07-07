@@ -10,7 +10,7 @@ const convertDates = (mesure: SearchMesureResult) => {
   mesure.date_nomination = mesure.date_nomination
     ? new Date(mesure.date_nomination)
     : null;
-  mesure.extinction = mesure.extinction ? new Date(mesure.extinction) : null;
+  mesure.date_fin_mesure = mesure.date_fin_mesure ? new Date(mesure.date_fin_mesure) : null;
   return mesure;
 };
 
@@ -29,7 +29,7 @@ export class MesureAPI extends AuthDataSource {
         civilite
         status
         type
-        extinction
+        date_fin_mesure
       }
     }
   `;
@@ -180,13 +180,13 @@ export class MesureAPI extends AuthDataSource {
       if (params.closed.between) {
         const between = params.closed.between;
         filters.push(
-          `extinction: { _gt: "${between.start}", _lt: "${between.end}" }`
+          `date_fin_mesure: { _gt: "${between.start}", _lt: "${between.end}" }`
         );
       }
       if (params.closed.gt_or_null) {
         filters.push(
           `_or: [
-                  {extinction: { _gt: "${params.closed.gt_or_null}"}},
+                  {date_fin_mesure: { _gt: "${params.closed.gt_or_null}"}},
                   {status: {_neq: "Eteindre mesure"}}
               ]`
         );

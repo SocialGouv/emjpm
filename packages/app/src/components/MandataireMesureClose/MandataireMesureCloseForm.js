@@ -44,7 +44,7 @@ export const MandataireMesureCloseForm = (props) => {
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
         variables: {
-          extinction: values.extinction,
+          date_fin_mesure: values.date_fin_mesure,
           id: mesure.id,
           reason_extinction: values.reason_extinction.value,
         },
@@ -55,10 +55,10 @@ export const MandataireMesureCloseForm = (props) => {
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      extinction: Yup.date().required("Required"),
+      date_fin_mesure: Yup.date().required("Required"),
       reason_extinction: Yup.string().required("Required"),
     }),
-    initialValues: { extinction: "", reason_extinction: "" },
+    initialValues: { date_fin_mesure: "", reason_extinction: "" },
   });
 
   return (
@@ -76,13 +76,13 @@ export const MandataireMesureCloseForm = (props) => {
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Input
-              value={formik.values.extinction}
-              id="extinction"
-              name="extinction"
-              hasError={formik.errors.extinction && formik.touched.extinction}
+              value={formik.values.date_fin_mesure}
+              id="date_fin_mesure"
+              name="date_fin_mesure"
+              hasError={formik.errors.date_fin_mesure && formik.touched.date_fin_mesure}
               type="date"
               onChange={formik.handleChange}
-              placeholder="Date de fin de mandat"
+              placeholder="Date de fin de la mesure de protection"
             />
           </Field>
           <Field>

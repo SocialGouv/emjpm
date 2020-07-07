@@ -131,5 +131,5 @@ export interface SearchMesuresParam {
 
 export type SearchMesureResult = Pick<
   Mesures,
-  "date_nomination" | "cabinet" | "civilite" | "status" | "type" | "extinction"
+  "date_nomination" | "cabinet" | "civilite" | "status" | "type" | "date_fin_mesure"
 >;
