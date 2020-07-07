@@ -17,8 +17,8 @@ export const MESURE_PROTECTION = {
 
   LIEU_VIE_MAJEUR: buildKeys({
     domicile: 'domicile',
-    etablissement: 'établissement',
-    etablissement_conservation_domicile: 'établissement avec conservation du domicile',
+    etablissement: 'en établissement',
+    etablissement_conservation_domicile: 'en établissement avec conservation du domicile',
     sdf: 'SDF',
   }),
 

@@ -48,6 +48,7 @@ async function importMesuresFile({
     if (data.residence) {
       data.residence = data.residence.toLowerCase();
       data.residence = data.residence.replace("a domicile", "domicile");
+      data.residence = data.residence.replace("sdf", "SDF");
     }
   });
 
@@ -295,7 +296,7 @@ const prepareMesure = async (
     mandataire_id: mandataire ? mandataire.id : null,
     service_id: service ? service.id : null,
     antenne_id: mesureDatas.antenne_id,
-    residence: mesureDatas.residence,
+    lieu_vie: mesureDatas.lieu_vie,
     department_id: department.id,
     ti_id: ti ? ti.id : null,
     cabinet: mesureDatas.tribunal_cabinet,
