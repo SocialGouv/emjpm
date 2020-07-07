@@ -3,7 +3,7 @@ import { format } from "date-fns";
 export const formatMandatairesMesureList = (mesureList) => {
   const mesures = mesureList.map((mesure) => {
     const {
-      residence,
+      lieu_vie,
       code_postal,
       numero_dossier,
       antenne_id,
@@ -36,7 +36,7 @@ export const formatMandatairesMesureList = (mesureList) => {
       tribunal: ti.etablissement,
       numeroDossier: numero_dossier ? numero_dossier : null,
       numeroRg: numero_rg ? numero_rg : null,
-      residence: residence ? residence : null,
+      lieuVie: lieu_vie ? lieu_vie : null,
       status: status ? status : null,
       type: type ? type : null,
       ville: ville ? ville : null,

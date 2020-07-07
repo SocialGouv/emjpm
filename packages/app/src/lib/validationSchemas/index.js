@@ -20,7 +20,6 @@ import { satisfactionCampaignSchema } from "./satisfactionCampaignSchema";
 import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
-import { serviceMesureImportSchema } from "./serviceMesureImportSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
 import { servicePersonnelSchema } from "./servicePersonnelSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
@@ -56,6 +55,5 @@ export {
   signupServiceSchema,
   editorTokenSchema,
   satisfactionCampaignSchema,
-  serviceMesureImportSchema,
   servicePersonnelSchema,
 };

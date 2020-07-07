@@ -9,7 +9,7 @@ const serviceAcceptMesureSchema = yup.object().shape({
     value: yup.string().required(),
   }),
   date_ouverture: yup.date().required(),
-  residence: yup.string().required(),
+  lieu_vie: yup.string().required(),
   zipcode: yup.string().when("country", {
     is: (country) => country.value && country.value === "FR",
     then: yup.string().length(5).required(),

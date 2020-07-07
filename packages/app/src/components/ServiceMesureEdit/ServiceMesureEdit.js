@@ -95,7 +95,7 @@ const ServiceMesureEdit = (props) => {
               id: id,
               numero_dossier: values.numero_dossier,
               numero_rg: values.numero_rg,
-              residence: values.residence.value,
+              lieu_vie: values.lieu_vie.value,
               ti_id: values.tribunal.value,
               type: values.type.value,
               pays: values.country.value,

@@ -61,7 +61,7 @@ export const MandataireMesureAccept = (props) => {
               ...variables,
               date_ouverture: values.date_ouverture,
               id,
-              residence: values.residence.value,
+              lieu_vie: values.lieu_vie.value,
               pays: values.country.value,
             },
           });
