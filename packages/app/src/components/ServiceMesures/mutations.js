@@ -1,11 +1,11 @@
 import gql from "graphql-tag";
 
 export const CLOSE_MESURE = gql`
-  mutation closeMesure($id: Int!, $reason_extinction: String!, $extinction: date!) {
+  mutation closeMesure($id: Int!, $reason_extinction: String!, $date_fin_mesure: date!) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
-        extinction: $extinction
+        date_fin_mesure: $date_fin_mesure
         reason_extinction: $reason_extinction
         status: "Eteindre mesure"
       }

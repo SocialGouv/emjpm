@@ -48,7 +48,7 @@ export interface Mesures {
   lieu_vie: MesureLieuVie;
   civilite: NullableString;
   status: MesureStatus;
-  extinction: NullableDate;
+  date_fin_mesure: NullableDate;
   etablissement_id: NullableNumber;
   ti_id: NullableNumber;
   cabinet: NullableString;
