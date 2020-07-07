@@ -27,7 +27,7 @@ export const REACTIVATE_MESURE = gql`
         numero_dossier
         mandataire_id
         etablissement
-        annee
+        annee_naissance
         date_ouverture
       }
     }

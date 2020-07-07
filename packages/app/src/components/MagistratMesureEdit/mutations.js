@@ -5,7 +5,7 @@ export const EDIT_MESURE = gql`
     $id: Int!
     $type: String
     $civilite: String
-    $annee: String
+    $annee_naissance: String
     $numero_rg: String
     $cabinet: String
   ) {
@@ -14,7 +14,7 @@ export const EDIT_MESURE = gql`
       _set: {
         type: $type
         civilite: $civilite
-        annee: $annee
+        annee_naissance: $annee_naissance
         numero_rg: $numero_rg
         cabinet: $cabinet
       }
@@ -39,7 +39,7 @@ export const EDIT_MESURE = gql`
         numero_rg
         numero_dossier
         etablissement
-        annee
+        annee_naissance
         date_ouverture
         pays
       }

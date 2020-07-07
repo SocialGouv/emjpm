@@ -1,7 +1,7 @@
 import yup from "./yup";
 
 const magistratMesureEditSchema = yup.object().shape({
-  annee: yup.string().required(),
+  annee_naissance: yup.string().required(),
   cabinet: yup.string().nullable(),
   civilite: yup.string().required(),
   numero_rg: yup.string().required(),

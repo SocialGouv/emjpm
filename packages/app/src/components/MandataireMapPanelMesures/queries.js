@@ -14,7 +14,7 @@ export const MESURES = gql`
       where: { id: { _in: $ids } }
     ) {
       id
-      annee
+      annee_naissance
       antenne_id
       cabinet
       civilite
