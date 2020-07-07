@@ -15,7 +15,7 @@ const initialValues = {
   antenne: "",
   civilite: "",
   code_postal: "",
-  date_ouverture: "",
+  date_nomination: "",
   numero_dossier: "",
   numero_rg: "",
   tribunal: undefined,
@@ -103,16 +103,16 @@ export const ServiceMesureCreateForm = (props) => {
       </Field>
       <Field>
         <Input
-          value={formik.values.date_ouverture}
-          id="date_ouverture"
+          value={formik.values.date_nomination}
+          id="date_nomination"
           type="date"
-          name="date_ouverture"
-          hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+          name="date_nomination"
+          hasError={formik.errors.date_nomination && formik.touched.date_nomination}
           onChange={formik.handleChange}
-          placeholder="Date d'ordonnance"
+          placeholder="Date de jugement ou ordonnance de nomination"
         />
-        {formik.touched.date_ouverture && (
-          <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+        {formik.touched.date_nomination && (
+          <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
         )}
       </Field>
       <Field>

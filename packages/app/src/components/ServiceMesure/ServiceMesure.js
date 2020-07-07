@@ -12,7 +12,7 @@ const ServiceMesure = (props) => {
     realAge,
     cabinet,
     civilite,
-    dateOuvertureFormated,
+    dateNominationFormated,
     numeroDossier,
     numeroRg,
     lieuVie,
@@ -84,8 +84,8 @@ const ServiceMesure = (props) => {
             )}
 
             <Box mb={4}>
-              <Text sx={subtitle}>Decision du</Text>
-              <Text sx={content}>{dateOuvertureFormated}</Text>
+              <Text sx={subtitle}>Date de jugement ou ordonnance de nomination</Text>
+              <Text sx={content}>{dateNominationFormated}</Text>
             </Box>
 
             <Box mb={4}>

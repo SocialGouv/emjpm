@@ -59,7 +59,7 @@ export const MandataireMesureAccept = (props) => {
             refetchQueries: ["mesures", "mesures_aggregate"],
             variables: {
               ...variables,
-              date_ouverture: values.date_ouverture,
+              date_nomination: values.date_nomination,
               id,
               lieu_vie: values.lieu_vie.value,
               pays: values.country.value,

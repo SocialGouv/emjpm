@@ -16,7 +16,7 @@ router.post(
   [
     body("annee_naissance").not().isEmpty(),
     body("civilite").not().isEmpty(),
-    body("date_ouverture").not().isEmpty(),
+    body("date_nomination").not().isEmpty(),
     body("numero_dossier").not().isEmpty(),
     body("numero_rg").not().isEmpty(),
     body("lieu_vie").not().isEmpty(),

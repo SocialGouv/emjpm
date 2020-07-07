@@ -12,7 +12,7 @@ import {
 storiesOf("MesuresCreation", module)
   .add("ShowMesure", () => (
     <TableRowMesureView
-      date_ouverture={"10/12/2010"}
+      date_nomination={"10/12/2010"}
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}
@@ -22,7 +22,7 @@ storiesOf("MesuresCreation", module)
   ))
   .add("ShowMesurewithModal", () => (
     <TableRowMesureView
-      date_ouverture={"10/12/2010"}
+      date_nomination={"10/12/2010"}
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}

@@ -19,7 +19,7 @@ export const ServiceMesureEditForm = (props) => {
       age,
       antenneId,
       civilite,
-      dateOuverture,
+      dateNomination,
       id,
       numeroRg,
       numeroDossier,
@@ -45,7 +45,7 @@ export const ServiceMesureEditForm = (props) => {
       annee_naissance: age,
       antenne_id: antenneId ? antenneOptions.find((o) => o.value === antenneId) : null,
       civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
-      date_ouverture: dateOuverture,
+      date_nomination: dateNomination,
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,
       lieu_vie: findOption(MESURE_PROTECTION.LIEU_VIE_MAJEUR.options, lieuVie),
@@ -125,15 +125,15 @@ export const ServiceMesureEditForm = (props) => {
           </Field>
           <Field>
             <Input
-              value={formik.values.date_ouverture}
-              id="date_ouverture"
+              value={formik.values.date_nomination}
+              id="date_nomination"
               type="date"
-              name="date_ouverture"
-              hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+              name="date_nomination"
+              hasError={formik.errors.date_nomination && formik.touched.date_nomination}
               onChange={formik.handleChange}
-              placeholder="Date d'ordonnance"
+              placeholder="Date de jugement ou ordonnance de nomination"
             />
-            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+            <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
           </Field>
           {service_antennes.length >= 2 && (
             <Field>
