@@ -72,7 +72,7 @@ export const ServiceMesureCreate = (props) => {
       refetchQueries: ["mesures", "mesures_aggregate"],
       variables: {
         ...variables,
-        annee: values.annee.toString(),
+        annee_naissance: values.annee_naissance.toString(),
         antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
         civilite: values.civilite.value,
         date_ouverture: values.date_ouverture,

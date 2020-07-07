@@ -17,7 +17,7 @@ export const MandataireAddMesureForm = (props) => {
     onSubmit,
     validationSchema: mandataireMesureSchema,
     initialValues: {
-      annee: "",
+      annee_naissance: "",
       civilite: "",
       date_ouverture: "",
       numero_dossier: "",
@@ -146,15 +146,17 @@ export const MandataireAddMesureForm = (props) => {
 
               <Field>
                 <Input
-                  value={formik.values.annee}
-                  id="annee"
-                  name="annee"
+                  value={formik.values.annee_naissance}
+                  id="annee_naissance"
+                  name="annee_naissance"
                   type="number"
-                  hasError={formik.errors.annee && formik.touched.annee}
+                  hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
                   onChange={formik.handleChange}
                   placeholder="Année de naissance"
                 />
-                {formik.errors.annee && formik.touched.annee && <Text>{formik.errors.annee}</Text>}
+                {formik.errors.annee_naissance && formik.touched.annee_naissance && (
+                  <Text>{formik.errors.annee_naissance}</Text>
+                )}
               </Field>
               <Field>
                 <Select

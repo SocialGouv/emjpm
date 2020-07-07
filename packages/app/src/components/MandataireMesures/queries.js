@@ -42,7 +42,7 @@ export const MANDATAIRE_MESURES = gql`
         type: { _eq: $type }
       }
     ) {
-      annee
+      annee_naissance
       antenne_id
       cabinet
       civilite

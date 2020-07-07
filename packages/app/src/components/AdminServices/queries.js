@@ -40,7 +40,7 @@ export const MESURES = gql`
       id
       etablissement
       numero_dossier
-      annee
+      annee_naissance
       lieu_vie
       numero_rg
       type

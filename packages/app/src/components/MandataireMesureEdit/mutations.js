@@ -10,7 +10,7 @@ export const EDIT_MESURE = gql`
     $code_postal: String
     $ville: String
     $civilite: String
-    $annee: String
+    $annee_naissance: String
     $numero_dossier: String
     $numero_rg: String
     $ti_id: Int!
@@ -29,7 +29,7 @@ export const EDIT_MESURE = gql`
         code_postal: $code_postal
         ville: $ville
         civilite: $civilite
-        annee: $annee
+        annee_naissance: $annee_naissance
         ti_id: $ti_id
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
@@ -59,7 +59,7 @@ export const EDIT_MESURE = gql`
         numero_rg
         numero_dossier
         etablissement
-        annee
+        annee_naissance
         mandataire_id
         date_ouverture
         latitude

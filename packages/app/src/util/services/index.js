@@ -12,7 +12,7 @@ export const formatMesureList = (mesureList) => {
       ville,
       status,
       id,
-      annee,
+      annee_naissance,
       civilite,
       date_ouverture,
       numero_rg,
@@ -26,7 +26,7 @@ export const formatMesureList = (mesureList) => {
     } = mesure;
 
     return {
-      age: annee ? annee : "nc",
+      age: annee_naissance ? annee_naissance : "nc",
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
       civilite: civilite ? civilite : "H",

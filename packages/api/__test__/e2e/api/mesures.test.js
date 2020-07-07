@@ -86,7 +86,7 @@ describe("POST /api/editors/mesures", () => {
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({
-        annee: "1983",
+        annee_naissance: "1983",
         antenne_id: null,
         civilite: "H",
         code_postal: "75015",
@@ -113,7 +113,7 @@ describe("PUT /api/editors/mesures", () => {
       .put(`/api/editors/mesures/${global.mesure.id}`)
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
-      .send({ annee: "1983" });
+      .send({ annee_naissance: "1983" });
     expect(response.status).toBe(200);
   });
 });
@@ -128,7 +128,7 @@ describe("POST /api/editors/mesures/batch", () => {
       .send({
         mesures: [
           {
-            annee: "1983",
+            annee_naissance: "1983",
             antenne_id: null,
             civilite: "H",
             code_postal: "75015",
