@@ -1,5 +1,5 @@
-import { format } from "date-fns";
 import { MESURE_PROTECTION } from "@emjpm/core";
+import { format } from "date-fns";
 
 export const formatMesure = (mesure) => {
   const {
