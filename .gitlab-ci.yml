@@ -520,11 +520,14 @@ Register app image:
   dependencies:
     - Build @emjpm/ui
     - Build @emjpm/app
+    - Build @emjpm/core
   needs:
     - Install app
     - Install ui
+    - Install core
     - Build @emjpm/ui
     - Build @emjpm/app
+    - Build @emjpm/core
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
