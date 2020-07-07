@@ -97,7 +97,7 @@ describe("POST /api/editors/mesures", () => {
         department_id: "75",
         numero_dossier: "123123123",
         numero_rg: "RGXXXX123",
-        residence: "en établissement",
+        lieu_vie: "etablissement",
         ti_id: global.ti.id,
         type: "curatelle renforcée aux biens et à la personne",
       });
@@ -139,7 +139,7 @@ describe("POST /api/editors/mesures/batch", () => {
             department_id: "75",
             numero_dossier: "123123123",
             numero_rg: "RGXXXX123",
-            residence: "en établissement",
+            lieu_vie: "etablissement",
             ti_id: global.ti.id,
             type: "curatelle renforcée aux biens et à la personne",
           },

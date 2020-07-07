@@ -1,10 +1,11 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Card, Field, Heading4, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE, RESIDENCE } from "../../constants/mesures";
+import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -157,16 +158,16 @@ export const MandataireAddMesureForm = (props) => {
               </Field>
               <Field>
                 <Select
-                  id="residence"
-                  name="residence"
-                  placeholder="Type de residence"
-                  value={formik.values.residence}
-                  hasError={formik.errors.residence && formik.touched.residence}
-                  onChange={(option) => formik.setFieldValue("residence", option)}
-                  options={RESIDENCE}
+                  id="lieu_vie"
+                  name="lieu_vie"
+                  placeholder="Lieu de vie du majeur"
+                  value={formik.values.lieu_vie}
+                  hasError={formik.errors.lieu_vie && formik.touched.lieu_vie}
+                  onChange={(option) => formik.setFieldValue("lieu_vie", option)}
+                  options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
                 />
-                {formik.errors.residence && formik.touched.residence && (
-                  <Text>{formik.errors.residence}</Text>
+                {formik.errors.lieu_vie && formik.touched.lieu_vie && (
+                  <Text>{formik.errors.lieu_vie}</Text>
                 )}
               </Field>
 

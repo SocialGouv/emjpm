@@ -31,7 +31,7 @@ export const MESURES = gql`
       numero_dossier
       numero_rg
       reason_extinction
-      residence
+      lieu_vie
       service_id
       status
       ti_id

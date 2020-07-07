@@ -1,4 +1,5 @@
 const yup = require("yup");
+const { MESURE_PROTECTION } = require("@emjpm/core");
 
 const MESURE_TYPES = [
   "curatelle",
@@ -24,13 +25,6 @@ const MESURE_TYPES = [
   "tutelle aux biens et à la personne",
 ];
 
-const MESURE_RESIDENCES = [
-  "domicile",
-  "en établissement",
-  "en établissement avec conservation du domicile",
-  "sdf",
-];
-
 // 20/11/2015 or 20/11/15
 const REGEX_DATE_OUVERTURE = /^([0-2][0-9]|(3)[0-1])(\/)((0[0-9])|(1[0-2]))(\/)(([12][0-9]{3}))$/;
 
@@ -44,7 +38,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
   civilite: yup
     .mixed()
     .oneOf(
-      ["F", "H"],
+      MESURE_PROTECTION.SEXE.keys,
       (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),
@@ -58,7 +52,7 @@ const actionsMesuresImporterSchema = yup.object().shape({
   residence: yup
     .mixed()
     .oneOf(
-      MESURE_RESIDENCES,
+      MESURE_PROTECTION.LIEU_VIE_MAJEUR.values,
       (field) => `'${field.value}' n'est pas une valeur acceptée`
     )
     .required("doit être rempli"),

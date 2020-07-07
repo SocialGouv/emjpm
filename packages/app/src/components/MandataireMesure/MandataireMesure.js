@@ -15,7 +15,7 @@ export const MandataireMesure = (props) => {
     dateOuvertureFormated,
     numeroDossier,
     numeroRg,
-    residence,
+    lieuVie,
     status,
     tribunal,
     type,
@@ -45,8 +45,8 @@ export const MandataireMesure = (props) => {
             </Box>
 
             <Box mb={4}>
-              <Text sx={subtitle}>Type de résidence</Text>
-              <Text sx={content}>{residence}</Text>
+              <Text sx={subtitle}>Lieu de vie du majeur</Text>
+              <Text sx={content}>{mesureFormatter.formatLieuVie(lieuVie)}</Text>
             </Box>
 
             <Box mb={4}>
