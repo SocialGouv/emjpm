@@ -46,7 +46,7 @@ export const EDIT_MESURE = gql`
     $antenne_id: Int
     $date_ouverture: date
     $type: String
-    $lieu_vie: String
+    $lieu_vie: lieu_vie_type
     $code_postal: String
     $ville: String
     $civilite: String
@@ -169,7 +169,7 @@ export const ADD_MESURE = gql`
     $date_ouverture: date!
     $department_id: Int
     $type: String!
-    $lieu_vie: String!
+    $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
     $civilite: String!

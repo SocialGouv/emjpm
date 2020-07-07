@@ -6,7 +6,7 @@ export const EDIT_MESURE = gql`
     $department_id: Int
     $date_ouverture: date
     $type: String
-    $lieu_vie: String
+    $lieu_vie: lieu_vie_type
     $code_postal: String
     $ville: String
     $civilite: String

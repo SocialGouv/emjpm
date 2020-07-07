@@ -5,7 +5,7 @@ export const ACCEPT_MESURE = gql`
     $id: Int!
     $department_id: Int
     $date_ouverture: date!
-    $lieu_vie: String!
+    $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
     $antenne_id: Int
