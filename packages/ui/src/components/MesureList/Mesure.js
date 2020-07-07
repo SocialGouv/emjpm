@@ -37,8 +37,8 @@ const Mesure = (props) => {
     type,
     ville,
     numeroRg,
-    dateOuvertureFormated,
-    dateOuverture,
+    dateNominationFormated,
+    dateNomination,
     age,
     civilite,
     cabinet,
@@ -138,7 +138,7 @@ const Mesure = (props) => {
             <Fragment>
               <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Decision du</Text>
-                <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non renseigné'}</Text>
+                <Text sx={descriptionStyle}>{dateNominationFormated || 'non renseigné'}</Text>
               </Flex>
             </Fragment>
           )}
@@ -197,7 +197,7 @@ const Mesure = (props) => {
             EditComponent={() => (
               <EditComponent
                 currentMesure={currentMesure}
-                dateOuverture={dateOuverture}
+                dateNomination={dateNomination}
                 type={type}
                 tribunal={tribunal}
                 cabinet={cabinet}
@@ -238,8 +238,8 @@ Mesure.propTypes = {
   cabinet: PropTypes.string,
   civilite: PropTypes.string.isRequired,
   codePostal: PropTypes.string.isRequired,
-  dateOuverture: PropTypes.string.isRequired,
-  dateOuvertureFormated: PropTypes.string.isRequired,
+  dateNomination: PropTypes.string.isRequired,
+  dateNominationFormated: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   isMagistrat: PropTypes.bool,
   isUrgent: PropTypes.bool,

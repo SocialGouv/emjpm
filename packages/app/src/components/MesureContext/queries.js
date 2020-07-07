@@ -51,7 +51,7 @@ export const MESURES = gql`
       numero_dossier
       etablissement
       annee_naissance
-      date_ouverture
+      date_nomination
     }
   }
 `;

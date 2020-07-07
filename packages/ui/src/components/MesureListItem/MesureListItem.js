@@ -36,7 +36,7 @@ const MesureListItem = (props) => {
       age,
       cabinet,
       civilite,
-      dateOuvertureFormated,
+      dateNominationFormated,
       isUrgent,
       judgmentDate,
       numeroDossier,
@@ -128,7 +128,7 @@ const MesureListItem = (props) => {
           {status !== MESURE_TYPE.WAITING && (
             <Flex minWidth="70px" textAlign="left" sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>Decision du</Text>
-              <Text sx={descriptionStyle}>{dateOuvertureFormated || 'non renseigné'}</Text>
+              <Text sx={descriptionStyle}>{dateNominationFormated || 'non renseigné'}</Text>
             </Flex>
           )}
         </Flex>
@@ -152,7 +152,7 @@ MesureListItem.propTypes = {
     civilite: PropTypes.string,
     codePostal: PropTypes.string,
     currentStatus: PropTypes.string,
-    dateOuvertureFormated: PropTypes.string,
+    dateNominationFormated: PropTypes.string,
     id: PropTypes.number,
     isUrgent: PropTypes.bool,
     judgmentDate: PropTypes.string,

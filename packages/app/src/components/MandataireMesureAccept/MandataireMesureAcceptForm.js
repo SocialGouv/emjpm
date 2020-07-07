@@ -17,7 +17,7 @@ export const MandataireMesureAcceptForm = (props) => {
     onSubmit,
     validationSchema: mandataireAcceptMesureSchema,
     initialValues: {
-      date_ouverture: "",
+      date_nomination: "",
       lieu_vie: "",
       city: mesure.ville,
       zipcode: mesure.code_postal,
@@ -44,15 +44,15 @@ export const MandataireMesureAcceptForm = (props) => {
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Input
-              value={formik.values.date_ouverture}
-              id="date_ouverture"
+              value={formik.values.date_nomination}
+              id="date_nomination"
               type="date"
-              name="date_ouverture"
-              hasError={formik.errors.date_ouverture && formik.touched.date_ouverture}
+              name="date_nomination"
+              hasError={formik.errors.date_nomination && formik.touched.date_nomination}
               onChange={formik.handleChange}
-              placeholder="Date d'ordonnance"
+              placeholder="Date de jugement ou ordonnance de nomination"
             />
-            <InlineError message={formik.errors.date_ouverture} fieldId="date_ouverture" />
+            <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
           </Field>
           <Field>
             <Select

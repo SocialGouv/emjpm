@@ -3282,7 +3282,7 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
-  "date_ouverture": Object {
+  "date_nomination": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,

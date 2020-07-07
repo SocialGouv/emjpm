@@ -144,7 +144,7 @@ const importMesures = async ({
     const mesureDatas = {
       ...mesure,
       lieu_vie,
-      date_ouverture: toDate(mesure.date_ouverture),
+      date_nomination: toDate(mesure.date_ouverture),
       mandataire,
       service,
       status: "Mesure en cours",
@@ -284,7 +284,7 @@ const prepareMesure = async (
   }
 
   const data = {
-    date_ouverture: mesureDatas.date_ouverture,
+    date_nomination: mesureDatas.date_nomination,
     ville: mesureDatas.ville,
     type: mesureDatas.type,
     status: mesureDatas.status,

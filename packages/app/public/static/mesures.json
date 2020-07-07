@@ -14,7 +14,7 @@
         "age": 38,
         "sattus":"en cours",
         "type_etablissement": "Centre hospitalier",
-        "date_ouverture": "16/06/13",
+        "date_nomination": "16/06/13",
         "tel": "03.20.54.25.00 03.20.54.00.20"
     },
    {
@@ -31,7 +31,7 @@
      "age": 38,
      "sattus":"en cours",
      "type_etablissement": "Centre hospitalier",
-     "date_ouverture": "16/06/13",
+     "date_nomination": "16/06/13",
      "tel": "03.20.54.25.00 03.20.54.00.20"
    },
    {
@@ -48,7 +48,7 @@
      "age": 38,
      "sattus":"en cours",
      "type_etablissement": "Centre hospitalier",
-     "date_ouverture": "16/06/13",
+     "date_nomination": "16/06/13",
      "tel": "03.20.54.25.00 03.20.54.00.20"
    },
    {
@@ -65,7 +65,7 @@
      "age": 38,
      "sattus":"en cours",
      "type_etablissement": "Centre hospitalier",
-     "date_ouverture": "16/06/13",
+     "date_nomination": "16/06/13",
      "tel": "03.20.54.25.00 03.20.54.00.20"
    },
    {
@@ -82,7 +82,7 @@
      "age": 38,
      "sattus":"en cours",
      "type_etablissement": "Centre hospitalier",
-     "date_ouverture": "16/06/13",
+     "date_nomination": "16/06/13",
      "tel": "03.20.54.25.00 03.20.54.00.20"
    },
    {
@@ -99,7 +99,7 @@
      "age": 38,
      "sattus":"en cours",
      "type_etablissement": "Centre hospitalier",
-     "date_ouverture": "16/06/13",
+     "date_nomination": "16/06/13",
      "tel": "03.20.54.25.00 03.20.54.00.20"
    }
   ]
