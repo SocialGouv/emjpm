@@ -4203,7 +4203,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4237,7 +4237,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4272,7 +4272,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4303,7 +4303,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4333,7 +4333,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4365,7 +4365,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4401,7 +4401,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4436,7 +4436,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4470,7 +4470,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4508,7 +4508,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4544,7 +4544,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4579,7 +4579,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
@@ -4613,7 +4613,7 @@
       - department_id
       - etablissement
       - etablissement_id
-      - extinction
+      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date

@@ -3282,6 +3282,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "date_fin_mesure": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
   "date_nomination": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3305,12 +3311,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
-  },
-  "extinction": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "date",
   },
   "id": Object {
     "defaultValue": "nextval('mesures_id_seq'::regclass)",

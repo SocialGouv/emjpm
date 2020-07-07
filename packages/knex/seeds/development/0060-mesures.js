@@ -15,7 +15,7 @@ exports.seed = function (knex) {
         lieu_vie: "etablissement",
         civilite: "F",
         status: "Eteindre mesure",
-        extinction: "2019-07-01T00:00:00Z",
+        date_fin_mesure: "2019-07-01T00:00:00Z",
         latitude: 48.858483,
         longitude: 2.27154,
       });
