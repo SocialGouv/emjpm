@@ -1,7 +1,7 @@
-import { keysBuilder } from './keysBuilder.service';
+import { buildKeys } from './keysBuilder.service';
 
 export const MESURE_PROTECTION = {
-  CAUSE_SORTIE: keysBuilder.buildKeys({
+  CAUSE_SORTIE: buildKeys({
     caducite: 'caducité',
     deces: 'décès',
     dessaisissement_autre_mjpm: "dessaisissement en faveur d'un autre MJPM",
@@ -9,20 +9,20 @@ export const MESURE_PROTECTION = {
     mainlevee: 'mainlevée',
   }),
 
-  CHAMP_MESURE: keysBuilder.buildKeys({
+  CHAMP_MESURE: buildKeys({
     protection_bien: 'protection aux biens',
     protection_bien_personne: 'protection aux biens et à la personne',
     protection_personne: 'protection à la personne',
   }),
 
-  LIEU_VIE_MAJEUR: keysBuilder.buildKeys({
+  LIEU_VIE_MAJEUR: buildKeys({
     domicile: 'domicile',
     etablissement: 'établissement',
     etablissement_conservation_domicile: 'établissement avec conservation du domicile',
     sdf: 'SDF',
   }),
 
-  NATURE_MESURE: keysBuilder.buildKeys({
+  NATURE_MESURE: buildKeys({
     curatelle_renforcee: 'curatelle renforcée',
     curatelle_simple: 'curatelle simple',
     mandat_protection_future: 'mandatat de protection future',
@@ -34,7 +34,7 @@ export const MESURE_PROTECTION = {
     tutelle: 'tutelle',
   }),
 
-  RESULTAT_REVISION: keysBuilder.buildKeys({
+  RESULTAT_REVISION: buildKeys({
     aggravation: 'aggravation',
     allegement: 'allègement',
     dessaisissement_autre_mjpm: "dessaisissement en faveur d'autre_mjpm",
@@ -43,7 +43,7 @@ export const MESURE_PROTECTION = {
     reconduction: 'reconduction',
   }),
 
-  SEXE: keysBuilder.buildKeys({
+  SEXE: buildKeys({
     F: 'femme',
     H: 'homme',
   }),

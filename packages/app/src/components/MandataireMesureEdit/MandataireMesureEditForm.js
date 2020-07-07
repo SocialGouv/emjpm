@@ -173,7 +173,7 @@ export const MandataireMesureEditForm = (props) => {
               instanceId={"lieu_vie"}
               id="lieu_vie"
               name="lieu_vie"
-              placeholder="Type de lieu_vie"
+              placeholder="Lieu de vie du majeur"
               value={formik.values.lieu_vie}
               hasError={formik.errors.lieu_vie && formik.touched.lieu_vie}
               onChange={(option) => formik.setFieldValue("lieu_vie", option)}
