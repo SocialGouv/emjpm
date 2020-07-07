@@ -1,13 +1,14 @@
-const knexConnection = require("../db/knex");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtConfig = require("../config/jwt");
 const { Model } = require("objection");
 
+const knexConnection = require("../db/knex");
+const jwtConfig = require("../config/jwt");
 const { Mandataire } = require("./Mandataire");
 const { Role } = require("./Role");
 const { Tis } = require("./Tis");
 const { Service } = require("./Service");
+const { Direction } = require("./Direction");
 
 Model.knex(knexConnection);
 
@@ -73,6 +74,14 @@ class User extends Model {
           to: "services.id",
         },
       },
+      direction: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Direction,
+        join: {
+          from: "users.id",
+          to: "direction.user_id",
+        },
+      },
       tis: {
         relation: Model.ManyToManyRelation,
         modelClass: Tis,
@@ -96,6 +105,7 @@ class User extends Model {
     const defaultRoleName = (
       this.roles.find((role) => MAIN_ROLES.includes(role.name)) || {}
     ).name;
+
     if (!defaultRoleName) {
       throw new Error(
         "No default role found in the list : " + JSON.stringify(this.roles)
@@ -121,12 +131,19 @@ class User extends Model {
   }
 
   getHasuraClaims() {
-    return {
+    const role = this.getDefaultRole();
+    const claims = {
       "x-hasura-allowed-roles": this.getRoles(),
-      "x-hasura-default-role": this.getDefaultRole(),
+      "x-hasura-default-role": role,
       "x-hasura-user-id": `${this.id}`,
       "x-hasura-service-id": `${this.getService()}`,
     };
+
+    if (role === "direction_territoriale") {
+      claims["x-hasura-agrements"] = [];
+    }
+
+    return claims;
   }
 
   getJwt() {

@@ -231,6 +231,14 @@
       - code
       - nom
       filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      filter: {}
   - role: individuel
     permission:
       columns:
@@ -456,10 +464,9 @@
       - status
       backend_only: false
   select_permissions:
-  - role: direction
+  - role: direction_nationale
     permission:
       columns:
-      - created_at
       - enquete_id
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
@@ -475,10 +482,36 @@
       - id
       - mandataire_id
       - service_id
-      - status
+      - created_at
       - submitted_at
       - uploaded_on
+      - status
       - user_type
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - created_at
+      - submitted_at
+      - enquete_id
+      - mandataire_id
+      - service_id
+      - enquete_reponses_informations_mandataire_id
+      - enquete_reponses_prestations_sociale_id
+      - enquete_reponses_agrements_formations_id
+      - enquete_reponses_activite_id
+      - enquete_reponses_populations_id
+      - enquete_reponses_modalites_exercice_id
+      - enquete_reponses_financement_id
+      - enquete_reponses_prepose_personel_formation_id
+      - enquete_reponses_prepose_prestations_sociales_id
+      - status
+      - uploaded_on
+      - enquete_reponses_service_informations_id
+      - user_type
+      - enquete_reponses_service_personnel_formation_id
       filter: {}
       allow_aggregations: true
   - role: individuel
@@ -3347,6 +3380,15 @@
       - status
       - date_fin
       filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      - date_fin
+      filter: {}
   - role: individuel
     permission:
       columns:
@@ -3725,6 +3767,19 @@
       - departement_financeur
       filter: {}
       allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_financeur
+      filter: {}
   - role: individuel
     permission:
       columns:
@@ -3808,6 +3863,17 @@
       - type
       filter: {}
       allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - type
+      - siret
+      filter: {}
   - role: individuel
     permission:
       columns:
@@ -4043,6 +4109,32 @@
       - genre
       - mesures_en_attente
       - competences
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - etablissement
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - mesures_en_cours
+      - dispo_max
+      - user_id
+      - telephone_portable
+      - created_at
+      - date_mesure_update
+      - email_send
+      - genre
+      - mesures_en_attente
+      - competences
+      - department_id
+      - siret
+      - latitude
+      - longitude
+      - lb_user_id
       filter: {}
       allow_aggregations: true
   - role: individuel
@@ -5381,19 +5473,45 @@
   - role: direction
     permission:
       columns:
-      - adresse
-      - code_postal
-      - created_at
-      - department_id
-      - dispo_max
-      - email
-      - etablissement
       - id
-      - competences
-      - mesures_awaiting
-      - mesures_in_progress
+      - etablissement
+      - email
       - nom
       - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - competences
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      - siret
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
+      - etablissement
+      - nom
+      - prenom
+      - siret
       - telephone
       - ville
       filter: {}
@@ -5907,6 +6025,23 @@
       - reset_password_token
       - type
       - username
+      filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
       filter: {}
   - role: individuel
     permission:
