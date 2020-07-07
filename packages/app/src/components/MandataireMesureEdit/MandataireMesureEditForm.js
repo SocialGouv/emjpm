@@ -8,9 +8,9 @@ import { Box, Flex, Text } from "rebass";
 
 import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
+import { findOption } from "../../util/option/OptionUtil";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
-import { findOption } from "../../util/option/OptionUtil";
 
 export const MandataireMesureEditForm = (props) => {
   const {
