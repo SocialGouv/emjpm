@@ -1,10 +1,11 @@
-import { COUNTRIES } from "../../constants/mesures";
 import { MESURE_PROTECTION } from "@emjpm/core";
+
+import { COUNTRIES } from "../../constants/mesures";
 
 export const mesureFormatter = {
   formatMajeurProtege,
   formatPays,
-  formatLieuVie
+  formatLieuVie,
 };
 
 function formatLieuVie(lieuVie) {
