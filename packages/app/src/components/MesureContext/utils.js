@@ -1,4 +1,3 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
 import { format } from "date-fns";
 
 export const formatMesure = (mesure) => {
@@ -63,7 +62,7 @@ export const formatMesure = (mesure) => {
     judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "non renseigné",
     numeroDossier: numero_dossier ? numero_dossier : "non renseigné",
     numeroRg: numero_rg ? numero_rg : "RG-00000000",
-    lieuVie: lieu_vie ? MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey[lieu_vie] : "",
+    lieuVie: lieu_vie ? lieu_vie : "",
     status: status ? currentStatus : "non renseigné",
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal non renseigné",

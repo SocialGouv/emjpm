@@ -1,9 +1,18 @@
 import { COUNTRIES } from "../../constants/mesures";
+import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const mesureFormatter = {
   formatMajeurProtege,
   formatPays,
+  formatLieuVie
 };
+
+function formatLieuVie(lieuVie) {
+  if (!lieuVie) {
+    return "";
+  }
+  return MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey[lieuVie];
+}
 
 function formatMajeurProtege(civilite, realAge) {
   if (!civilite) {

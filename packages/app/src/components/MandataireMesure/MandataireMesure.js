@@ -46,7 +46,7 @@ export const MandataireMesure = (props) => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Lieu de vie du majeur</Text>
-              <Text sx={content}>{lieuVie}</Text>
+              <Text sx={content}>{mesureFormatter.formatLieuVie(lieuVie)}</Text>
             </Box>
 
             <Box mb={4}>
