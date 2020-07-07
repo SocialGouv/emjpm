@@ -45,7 +45,7 @@ export const MESURES = gql`
       numero_rg
       type
       status
-      date_ouverture
+      date_nomination
       created_at
       ti {
         etablissement

@@ -50,7 +50,7 @@ export const MESURES = gql`
       lieu_vie
       numero_rg
       status
-      date_ouverture
+      date_nomination
       created_at
       ti {
         etablissement

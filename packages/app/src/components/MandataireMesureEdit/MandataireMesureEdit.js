@@ -86,7 +86,7 @@ const MandataireMesureEdit = (props) => {
               ...variables,
               annee_naissance: values.annee_naissance,
               civilite: values.civilite.value,
-              date_ouverture: values.date_ouverture,
+              date_nomination: values.date_nomination,
               id,
               numero_dossier: values.numero_dossier,
               numero_rg: values.numero_rg,

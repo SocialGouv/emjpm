@@ -72,7 +72,7 @@ export const ServiceMesureAccept = (props) => {
             variables: {
               ...variables,
               antenne_id: values.antenne_id ? values.antenne_id.value : null,
-              date_ouverture: values.date_ouverture,
+              date_nomination: values.date_nomination,
               id: mesure.id,
               lieu_vie: values.lieu_vie.value,
               pays: values.country.value,

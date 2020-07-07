@@ -75,7 +75,7 @@ export const ServiceMesureCreate = (props) => {
         annee_naissance: values.annee_naissance.toString(),
         antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
         civilite: values.civilite.value,
-        date_ouverture: values.date_ouverture,
+        date_nomination: values.date_nomination,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
         lieu_vie: values.lieu_vie.value,

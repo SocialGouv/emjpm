@@ -34,7 +34,7 @@ export const MANDATAIRE_MESURES = gql`
     mesures(
       offset: $offset
       limit: $limit
-      order_by: { date_ouverture: desc_nulls_first }
+      order_by: { date_nomination: desc_nulls_first }
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
@@ -48,7 +48,7 @@ export const MANDATAIRE_MESURES = gql`
       civilite
       code_postal
       created_at
-      date_ouverture
+      date_nomination
       department_id
       etablissement
       etablissement_id

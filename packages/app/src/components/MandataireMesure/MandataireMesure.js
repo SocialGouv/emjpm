@@ -12,7 +12,7 @@ export const MandataireMesure = (props) => {
     realAge,
     cabinet,
     civilite,
-    dateOuvertureFormated,
+    dateNominationFormated,
     numeroDossier,
     numeroRg,
     lieuVie,
@@ -86,7 +86,7 @@ export const MandataireMesure = (props) => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Decision du</Text>
-              <Text sx={content}>{dateOuvertureFormated}</Text>
+              <Text sx={content}>{dateNominationFormated}</Text>
             </Box>
 
             <Box mb={4}>

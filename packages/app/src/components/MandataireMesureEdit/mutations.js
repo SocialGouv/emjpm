@@ -4,7 +4,7 @@ export const EDIT_MESURE = gql`
   mutation EditMesure(
     $id: Int!
     $department_id: Int
-    $date_ouverture: date
+    $date_nomination: date
     $type: String
     $lieu_vie: lieu_vie_type
     $code_postal: String
@@ -22,7 +22,7 @@ export const EDIT_MESURE = gql`
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
-        date_ouverture: $date_ouverture
+        date_nomination: $date_nomination
         department_id: $department_id
         type: $type
         lieu_vie: $lieu_vie
@@ -61,7 +61,7 @@ export const EDIT_MESURE = gql`
         etablissement
         annee_naissance
         mandataire_id
-        date_ouverture
+        date_nomination
         latitude
         longitude
         ti {
