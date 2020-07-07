@@ -11,7 +11,7 @@ import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
 const initialValues = {
-  annee: "",
+  annee_naissance: "",
   antenne: "",
   civilite: "",
   code_postal: "",
@@ -143,15 +143,17 @@ export const ServiceMesureCreateForm = (props) => {
       </Field>
       <Field>
         <Input
-          value={formik.values.annee}
-          id="annee"
-          name="annee"
+          value={formik.values.annee_naissance}
+          id="annee_naissance"
+          name="annee_naissance"
           type="number"
-          hasError={formik.errors.annee && formik.touched.annee}
+          hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
           onChange={formik.handleChange}
           placeholder="Année de naissance"
         />
-        {formik.touched.annee && <InlineError message={formik.errors.annee} fieldId="type" />}
+        {formik.touched.annee_naissance && (
+          <InlineError message={formik.errors.annee_naissance} fieldId="type" />
+        )}
       </Field>
       <Field>
         <Select

@@ -290,7 +290,7 @@ const prepareMesure = async (
     status: mesureDatas.status,
     code_postal: mesureDatas.code_postal,
     civilite: mesureDatas.civilite,
-    annee: mesureDatas.annee,
+    annee_naissance: mesureDatas.annee,
     numero_rg: mesureDatas.numero_rg,
     numero_dossier: mesureDatas.numero_dossier,
     mandataire_id: mandataire ? mandataire.id : null,

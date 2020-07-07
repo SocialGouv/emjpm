@@ -42,7 +42,7 @@ export const ServiceMesureEditForm = (props) => {
     onSubmit,
     validationSchema: serviceMesureSchema,
     initialValues: {
-      annee: age,
+      annee_naissance: age,
       antenne_id: antenneId ? antenneOptions.find((o) => o.value === antenneId) : null,
       civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
       date_ouverture: dateOuverture,
@@ -175,14 +175,14 @@ export const ServiceMesureEditForm = (props) => {
           </Field>
           <Field>
             <Input
-              value={formik.values.annee}
-              id="annee"
-              name="annee"
-              hasError={formik.errors.annee && formik.touched.annee}
+              value={formik.values.annee_naissance}
+              id="annee_naissance"
+              name="annee_naissance"
+              hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
               onChange={formik.handleChange}
               placeholder="Année de naissance"
             />
-            <InlineError message={formik.errors.annee} fieldId="annee" />
+            <InlineError message={formik.errors.annee_naissance} fieldId="annee_naissance" />
           </Field>
           <Field>
             <Select

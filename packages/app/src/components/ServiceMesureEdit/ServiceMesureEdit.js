@@ -88,7 +88,7 @@ const ServiceMesureEdit = (props) => {
             awaitRefetchQueries: true,
             variables: {
               ...variables,
-              annee: values.annee,
+              annee_naissance: values.annee_naissance,
               antenne_id: values.antenne_id ? values.antenne_id.value : null,
               civilite: values.civilite.value,
               date_ouverture: values.date_ouverture,

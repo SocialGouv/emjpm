@@ -17,7 +17,7 @@ storiesOf("MesuresCreation", module)
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"H"}
-      annee={"2010"}
+      annee_naissance={"2010"}
     />
   ))
   .add("ShowMesurewithModal", () => (
@@ -27,7 +27,7 @@ storiesOf("MesuresCreation", module)
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"H"}
-      annee={"2010"}
+      annee_naissance={"2010"}
       isOpen={true}
     />
   ));

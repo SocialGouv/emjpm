@@ -18,7 +18,7 @@ export const GET_SERVICE_USERS = gql`
         _or: [{ date_fin: { _lt: $endDate } }, { date_fin: { _is_null: true } }]
       }
     ) {
-      annee
+      annee_naissance
       status
       date_fin
       id

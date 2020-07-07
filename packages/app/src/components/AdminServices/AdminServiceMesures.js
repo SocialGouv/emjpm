@@ -199,7 +199,7 @@ function buildTableColumns() {
     },
     {
       Header: "année",
-      accessor: "annee",
+      accessor: "annee_naissance",
     },
     {
       Header: "Date ouverture",
