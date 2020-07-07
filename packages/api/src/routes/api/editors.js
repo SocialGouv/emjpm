@@ -14,7 +14,7 @@ router.get("/mesures", mesures);
 router.post(
   "/mesures",
   [
-    body("annee").not().isEmpty(),
+    body("annee_naissance").not().isEmpty(),
     body("civilite").not().isEmpty(),
     body("date_ouverture").not().isEmpty(),
     body("numero_dossier").not().isEmpty(),

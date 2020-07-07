@@ -1,7 +1,7 @@
 import yup from "./yup";
 
 const mandataireMesureSchema = yup.object().shape({
-  annee: yup
+  annee_naissance: yup
     .number()
     .required()
     .min(1900, "L'année choisi doit être au minimum 1900.")

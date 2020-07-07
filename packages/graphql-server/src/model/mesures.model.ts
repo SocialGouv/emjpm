@@ -42,7 +42,7 @@ export interface Mesures {
   etablissement: NullableString;
   mandataire_id: NullableNumber;
   created_at: NullableDate;
-  annee: NullableString;
+  annee_naissance: NullableString;
   type: MesureType;
   date_ouverture: NullableDate;
   lieu_vie: MesureLieuVie;

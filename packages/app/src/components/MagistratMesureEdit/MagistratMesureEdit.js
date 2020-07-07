@@ -25,7 +25,7 @@ export const MagistratMesureEdit = () => {
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
         variables: {
-          annee: values.annee,
+          annee_naissance: values.annee_naissance,
           cabinet: values.cabinet,
           civilite: values.civilite.value,
           id: id,
@@ -38,7 +38,7 @@ export const MagistratMesureEdit = () => {
     },
     validationSchema: magistratMesureEditSchema,
     initialValues: {
-      annee: age,
+      annee_naissance: age,
       cabinet: cabinet ? cabinet : "",
       civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
       numero_rg: numeroRg,
@@ -88,14 +88,14 @@ export const MagistratMesureEdit = () => {
           </Field>
           <Field>
             <Input
-              value={formik.values.annee}
-              id="annee"
-              name="annee"
-              hasError={formik.errors.annee && formik.touched.annee}
+              value={formik.values.annee_naissance}
+              id="annee_naissance"
+              name="annee_naissance"
+              hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
               onChange={formik.handleChange}
               placeholder="Année de naissance"
             />
-            <InlineError message={formik.errors.annee} fieldId="annee" />
+            <InlineError message={formik.errors.annee_naissance} fieldId="annee_naissance" />
           </Field>
           <Field>
             <Input

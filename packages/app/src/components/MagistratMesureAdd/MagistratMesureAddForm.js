@@ -93,7 +93,7 @@ export const MagistratMesureAddForm = (props) => {
             "view_mesure_gestionnaire",
           ],
           variables: {
-            annee: values.annee,
+            annee_naissance: values.annee_naissance,
             cabinet: values.cabinet,
             civilite: values.civilite.value,
             judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
@@ -109,7 +109,7 @@ export const MagistratMesureAddForm = (props) => {
         await chooseService({
           refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
           variables: {
-            annee: values.annee,
+            annee_naissance: values.annee_naissance,
             cabinet: values.cabinet,
             civilite: values.civilite.value,
             judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
@@ -127,7 +127,7 @@ export const MagistratMesureAddForm = (props) => {
     },
     validationSchema: magistratMandataireSchema,
     initialValues: {
-      annee: "",
+      annee_naissance: "",
       cabinet,
       civilite: "",
       judgmentDate: "",
@@ -175,14 +175,14 @@ export const MagistratMesureAddForm = (props) => {
           </Field>
           <Field>
             <Input
-              value={formik.values.annee}
-              id="annee"
-              name="annee"
-              hasError={formik.errors.annee && formik.touched.annee}
+              value={formik.values.annee_naissance}
+              id="annee_naissance"
+              name="annee_naissance"
+              hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
               onChange={formik.handleChange}
               placeholder="Année de naissance"
             />
-            <InlineError message={formik.errors.annee} fieldId="annee" />
+            <InlineError message={formik.errors.annee_naissance} fieldId="annee_naissance" />
           </Field>
           <Field>
             <Input

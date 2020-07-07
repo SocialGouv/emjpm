@@ -14,7 +14,7 @@ Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
   }, vous a confié une nouvelle mesure :
 - "type de mesure": ${mesure.type}
 - "genre": ${mesure.civilite}
-- "année de naissance": ${mesure.annee}.
+- "année de naissance": ${mesure.annee_naissance}.
 
 Cette dernière a été entre-temps annulée par le magistrat, ne vous sera pas notifiée et n'apparaît plus dans vos mesures en attente.
 Pour rappel, à ce jour, vous avez déclaré prendre en charge "${

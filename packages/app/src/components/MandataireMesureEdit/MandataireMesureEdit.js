@@ -84,7 +84,7 @@ const MandataireMesureEdit = (props) => {
             refetchQueries: ["mesures", "mesures_aggregate", "user_tis", "ti"],
             variables: {
               ...variables,
-              annee: values.annee,
+              annee_naissance: values.annee_naissance,
               civilite: values.civilite.value,
               date_ouverture: values.date_ouverture,
               id,
