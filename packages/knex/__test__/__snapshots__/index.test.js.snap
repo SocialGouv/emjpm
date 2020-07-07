@@ -3336,6 +3336,12 @@ Object {
     "nullable": true,
     "type": "real",
   },
+  "lieu_vie": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
   "longitude": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3378,12 +3384,6 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "residence": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
   "service_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3407,6 +3407,12 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+  "type_etablissement": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
   },
   "ville": Object {
     "defaultValue": null,

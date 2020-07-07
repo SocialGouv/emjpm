@@ -38,7 +38,7 @@ export const MESURES = gql`
       status
       type
       ville
-      residence
+      lieu_vie
       numero_rg
       numero_dossier
       etablissement

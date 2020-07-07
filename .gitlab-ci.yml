@@ -152,6 +152,7 @@ Install app:
     - find packages -maxdepth 1
       -not -name ${CONTEXT}
       -not -name ui
+      -not -name core
       -type d | tail -n +2 |
       xargs -I {} rm -rf {}
 
@@ -186,6 +187,13 @@ Install ui:
   variables:
     CONTEXT: ui
 
+    #
+
+Install core:
+  extends: .base_yarn_workspace_install
+  variables:
+    CONTEXT: core
+
 ################################################################################################
 ###################################                    #########################################
 ###################################     CODE QUALITY   #########################################
@@ -211,15 +219,29 @@ Lint @emjpm/api:
 
 #
 
+Lint @emjpm/core:
+  extends: .quality_stage
+  image: node:12-alpine
+  dependencies:
+    - Install core
+  needs:
+    - Install core
+  script:
+    - yarn workspace @emjpm/core lint
+
+#
+
 Lint @emjpm/app:
   extends: .build_stage
   image: node:12-alpine
   dependencies:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   needs:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   script:
     - yarn workspace @emjpm/app lint
 
@@ -347,8 +369,10 @@ Build @emjpm/api:
   extends: .build_stage
   dependencies:
     - Install api
+    - Build @emjpm/core
   needs:
     - Install api
+    - Build @emjpm/core
   image: node:12-alpine
   script:
     - yarn workspace @emjpm/api build
@@ -366,9 +390,11 @@ Build @emjpm/app:
   dependencies:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   needs:
     - Install app
     - Build @emjpm/ui
+    - Build @emjpm/core
   image: node:12-alpine
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
@@ -407,6 +433,24 @@ Build @emjpm/ui:
     - Install ui
   variables:
     CONTEXT: ui
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/${CONTEXT} build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/${CONTEXT}/dist
+
+#
+
+Build @emjpm/core:
+  extends: .quality_stage
+  dependencies:
+    - Install core
+  needs:
+    - Install core
+  variables:
+    CONTEXT: core
   image: node:12-alpine
   script:
     - yarn workspace @emjpm/${CONTEXT} build
@@ -476,11 +520,14 @@ Register app image:
   dependencies:
     - Build @emjpm/ui
     - Build @emjpm/app
+    - Build @emjpm/core
   needs:
     - Install app
     - Install ui
+    - Install core
     - Build @emjpm/ui
     - Build @emjpm/app
+    - Build @emjpm/core
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-

@@ -21,6 +21,7 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
+    "@emjpm/core": "^25.52.1",
     "@emjpm/ui": "^25.52.1",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",

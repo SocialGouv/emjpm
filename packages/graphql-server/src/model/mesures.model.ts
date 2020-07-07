@@ -29,12 +29,11 @@ export type MesureType =
   | "tutelle aux biens et à la personne"
   | null;
 
-export type MesureResidence =
+export type MesureLieuVie =
   | "domicile"
-  | "en établissement"
-  | "en établissement avec conservation du domicile"
+  | "etablissement"
+  | "etablissement_conservation_domicile"
   | "sdf"
-  | "autres"
   | null;
 
 export interface Mesures {
@@ -46,7 +45,7 @@ export interface Mesures {
   annee: NullableString;
   type: MesureType;
   date_ouverture: NullableDate;
-  residence: MesureResidence;
+  lieu_vie: MesureLieuVie;
   civilite: NullableString;
   status: MesureStatus;
   extinction: NullableDate;

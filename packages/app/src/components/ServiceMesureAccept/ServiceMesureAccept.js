@@ -74,7 +74,7 @@ export const ServiceMesureAccept = (props) => {
               antenne_id: values.antenne_id ? values.antenne_id.value : null,
               date_ouverture: values.date_ouverture,
               id: mesure.id,
-              residence: values.residence.value,
+              lieu_vie: values.lieu_vie.value,
               pays: values.country.value,
             },
           });
