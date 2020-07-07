@@ -93,7 +93,7 @@ export const MandataireAddMesure = () => {
             ...variables,
             annee_naissance: values.annee_naissance.toString(),
             civilite: values.civilite.value,
-            date_ouverture: values.date_ouverture,
+            date_nomination: values.date_nomination,
             numero_dossier: values.numero_dossier,
             numero_rg: values.numero_rg,
             lieu_vie: values.lieu_vie.value,

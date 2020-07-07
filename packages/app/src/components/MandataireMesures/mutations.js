@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const ADD_MESURE = gql`
   mutation addMesure(
-    $date_ouverture: date!
+    $date_nomination: date!
     $department_id: Int
     $type: String!
     $lieu_vie: lieu_vie_type!
@@ -22,7 +22,7 @@ export const ADD_MESURE = gql`
     insert_mesures(
       objects: {
         department_id: $department_id
-        date_ouverture: $date_ouverture
+        date_nomination: $date_nomination
         type: $type
         ti_id: $ti_id
         lieu_vie: $lieu_vie
@@ -48,7 +48,7 @@ export const ADD_MESURE = gql`
         civilite
         code_postal
         created_at
-        date_ouverture
+        date_nomination
         department_id
         etablissement
         etablissement_id

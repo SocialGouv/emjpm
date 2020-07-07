@@ -44,7 +44,7 @@ export interface Mesures {
   created_at: NullableDate;
   annee_naissance: NullableString;
   type: MesureType;
-  date_ouverture: NullableDate;
+  date_nomination: NullableDate;
   lieu_vie: MesureLieuVie;
   civilite: NullableString;
   status: MesureStatus;

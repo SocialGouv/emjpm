@@ -15,7 +15,7 @@ const serviceMesureSchema = yup.object().shape({
   country: yup.object().shape({
     value: yup.string().required(),
   }),
-  date_ouverture: yup.date().required(),
+  date_nomination: yup.date().required(),
   lieu_vie: yup.string().required(),
   numero_dossier: yup.string(),
   numero_rg: yup.string().required(),

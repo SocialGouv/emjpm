@@ -4,7 +4,7 @@ export const ACCEPT_MESURE = gql`
   mutation editMesure(
     $id: Int!
     $department_id: Int
-    $date_ouverture: date!
+    $date_nomination: date!
     $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
@@ -17,7 +17,7 @@ export const ACCEPT_MESURE = gql`
       _set: {
         department_id: $department_id
         status: "Mesure en cours"
-        date_ouverture: $date_ouverture
+        date_nomination: $date_nomination
         lieu_vie: $lieu_vie
         code_postal: $code_postal
         ville: $ville
@@ -48,7 +48,7 @@ export const ACCEPT_MESURE = gql`
         numero_dossier
         etablissement
         annee_naissance
-        date_ouverture
+        date_nomination
         pays
       }
     }

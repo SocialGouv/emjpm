@@ -7,8 +7,8 @@ import {
 import { AuthDataSource } from "./auth-datasource";
 
 const convertDates = (mesure: SearchMesureResult) => {
-  mesure.date_ouverture = mesure.date_ouverture
-    ? new Date(mesure.date_ouverture)
+  mesure.date_nomination = mesure.date_nomination
+    ? new Date(mesure.date_nomination)
     : null;
   mesure.extinction = mesure.extinction ? new Date(mesure.extinction) : null;
   return mesure;
@@ -24,7 +24,7 @@ export class MesureAPI extends AuthDataSource {
     const query = `
     {
       mesures(where: { ${where} }) {
-        date_ouverture
+        date_nomination
         cabinet
         civilite
         status
@@ -169,11 +169,11 @@ export class MesureAPI extends AuthDataSource {
       if (params.opening.between) {
         const between = params.opening.between;
         filters.push(
-          `date_ouverture: { _gt: "${between.start}", _lt: "${between.end}" }`
+          `date_nomination: { _gt: "${between.start}", _lt: "${between.end}" }`
         );
       }
       if (params.opening.lt) {
-        filters.push(`date_ouverture: { _lt: "${params.opening.lt}" }`);
+        filters.push(`date_nomination: { _lt: "${params.opening.lt}" }`);
       }
     }
     if (params.closed) {
