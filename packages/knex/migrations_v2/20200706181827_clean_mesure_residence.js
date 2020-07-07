@@ -6,7 +6,9 @@ exports.up = async function (knex) {
   update mesures set residence = null where residence = 'autres';
   update mesures set residence = 'en établissement' where residence = 'en étbablissement';
   update mesures set residence = 'en établissement' where residence = 'en �tablissemn';
+  update mesures set residence = 'en établissement' where residence = 'en �tablissemnt';
   update mesures set residence = 'en établissement' where residence = 'epsm';
+  update mesures set residence = null where residence = '';
     `);
 };
 
