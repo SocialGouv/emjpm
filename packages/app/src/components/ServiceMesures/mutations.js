@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const CLOSE_MESURE = gql`
-  mutation closeMesure($id: Int!, $reason_extinction: String!, $date_fin_mesure: date!) {
+  mutation closeMesure($id: Int!, $cause_sortie: cause_sortie_type!, $date_fin_mesure: date!) {
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
         date_fin_mesure: $date_fin_mesure
-        reason_extinction: $reason_extinction
+        cause_sortie: $cause_sortie
         status: "Eteindre mesure"
       }
     ) {
@@ -113,11 +113,8 @@ export const EDIT_MESURE = gql`
 `;
 
 export const REACTIVATE_MESURE = gql`
-  mutation reactivateMesure($id: Int!, $service_id: Int!, $reason_extinction: String!) {
-    update_mesures(
-      where: { id: { _eq: $id } }
-      _set: { reason_extinction: $reason_extinction, status: "Mesure en cours" }
-    ) {
+  mutation reactivateMesure($id: Int!) {
+    update_mesures(where: { id: { _eq: $id } }, _set: { status: "Mesure en cours" }) {
       returning {
         antenne_id
         service_id
