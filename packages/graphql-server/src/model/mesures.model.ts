@@ -38,6 +38,14 @@ export type MesureLieuVie =
 
 export type Civilite = "madame" | "monsieur" | null;
 
+export type MesureCauseSortie =
+  | "caducite"
+  | "deces"
+  | "dessaisissement_autre_mjpm"
+  | "dessaisissement_famille"
+  | "mainlevee"
+  | null;
+
 export interface Mesures {
   id: number;
   ville: NullableString;
@@ -55,6 +63,6 @@ export interface Mesures {
   ti_id: NullableNumber;
   cabinet: NullableString;
   numero_dossier: NullableString;
-  reason_extinction: NullableString;
+  cause_sortie: MesureCauseSortie;
   numero_rg: NullableString;
 }
