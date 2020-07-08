@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -17,7 +18,6 @@ import {
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const MagistratMesureAddForm = (props) => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
