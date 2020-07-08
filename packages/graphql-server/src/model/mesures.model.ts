@@ -36,6 +36,8 @@ export type MesureLieuVie =
   | "sdf"
   | null;
 
+export type Civilite = "madame" | "monsieur" | null;
+
 export interface Mesures {
   id: number;
   ville: NullableString;
@@ -46,7 +48,7 @@ export interface Mesures {
   type: MesureType;
   date_nomination: NullableDate;
   lieu_vie: MesureLieuVie;
-  civilite: NullableString;
+  civilite: Civilite;
   status: MesureStatus;
   date_fin_mesure: NullableDate;
   etablissement_id: NullableNumber;

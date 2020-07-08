@@ -13,7 +13,7 @@ Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
     (mesure.cabinet && `cabinet ${mesure.cabinet}`) || ""
   }, vous a confié une nouvelle mesure :
 - "type de mesure": ${mesure.type}
-- "genre": ${mesure.civilite}
+- "civilité": ${mesure.civilite}
 - "année de naissance": ${mesure.annee_naissance}.
 
 Cette dernière a été entre-temps annulée par le magistrat, ne vous sera pas notifiée et n'apparaît plus dans vos mesures en attente.
