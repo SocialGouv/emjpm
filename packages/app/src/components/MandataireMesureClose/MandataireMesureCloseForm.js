@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -8,7 +9,6 @@ import * as Yup from "yup";
 
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MESURE } from "./queries";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const MandataireMesureCloseForm = (props) => {
   const { mesure } = props;

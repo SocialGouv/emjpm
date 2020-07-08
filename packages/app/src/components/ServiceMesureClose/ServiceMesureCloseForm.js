@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -11,7 +12,6 @@ import { UserContext } from "../../components/UserContext";
 import { GET_SERVICE_USERS } from "../../components/UserContext/queries";
 import { CLOSE_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
 import { MESURE, SERVICE } from "./queries";
-import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const ServiceMesureCloseForm = (props) => {
   const { mesure } = props;
