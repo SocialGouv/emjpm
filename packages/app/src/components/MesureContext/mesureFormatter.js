@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION, isMonsieur } from "@emjpm/core";
+import { isMonsieur, MESURE_PROTECTION } from "@emjpm/core";
 
 import { COUNTRIES } from "../../constants/mesures";
 

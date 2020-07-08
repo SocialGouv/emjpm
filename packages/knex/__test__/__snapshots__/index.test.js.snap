@@ -3264,6 +3264,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "cause_sortie": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
   "civilite": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3376,12 +3382,6 @@ Object {
     "defaultValue": "'FR'::character varying",
     "maxLength": 255,
     "nullable": false,
-    "type": "character varying",
-  },
-  "reason_extinction": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
     "type": "character varying",
   },
   "service_id": Object {

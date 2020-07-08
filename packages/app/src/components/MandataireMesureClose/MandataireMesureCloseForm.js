@@ -1,4 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -8,16 +9,6 @@ import * as Yup from "yup";
 
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MESURE } from "./queries";
-
-const EXTINCTION_LABEL_VALUE = [
-  { label: "caducité", value: "caducité" },
-  { label: "changement de mandataires", value: "changement de mandataires" },
-  { label: "changement de tribunal d'instance", value: "changement de tribunal d'instance" },
-  { label: "décès", value: "décès" },
-  { label: "main levée", value: "levée" },
-  { label: "erreur de saisie", value: "saisie" },
-  { label: "autre", value: "autr" },
-];
 
 export const MandataireMesureCloseForm = (props) => {
   const { mesure } = props;
@@ -46,7 +37,7 @@ export const MandataireMesureCloseForm = (props) => {
         variables: {
           date_fin_mesure: values.date_fin_mesure,
           id: mesure.id,
-          reason_extinction: values.reason_extinction.value,
+          cause_sortie: values.cause_sortie.value,
         },
       });
       Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${mesure.id}`, {
@@ -56,9 +47,9 @@ export const MandataireMesureCloseForm = (props) => {
     },
     validationSchema: Yup.object().shape({
       date_fin_mesure: Yup.date().required("Required"),
-      reason_extinction: Yup.string().required("Required"),
+      cause_sortie: Yup.string().required("Required"),
     }),
-    initialValues: { date_fin_mesure: "", reason_extinction: "" },
+    initialValues: { date_fin_mesure: "", cause_sortie: "" },
   });
 
   return (
@@ -87,13 +78,13 @@ export const MandataireMesureCloseForm = (props) => {
           </Field>
           <Field>
             <Select
-              id="reason_extinction"
-              name="reason_extinction"
+              id="cause_sortie"
+              name="cause_sortie"
               placeholder="Raison de la fin de mandat"
               value={formik.values.type}
               hasError={formik.errors.type && formik.touched.type}
-              onChange={(option) => formik.setFieldValue("reason_extinction", option)}
-              options={EXTINCTION_LABEL_VALUE}
+              onChange={(option) => formik.setFieldValue("cause_sortie", option)}
+              options={MESURE_PROTECTION.CAUSE_SORTIE.options}
             />
           </Field>
           <Flex justifyContent="flex-end">

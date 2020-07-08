@@ -4213,7 +4213,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4247,7 +4247,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4282,7 +4282,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4312,7 +4312,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4343,7 +4343,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4375,7 +4375,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4411,7 +4411,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4446,7 +4446,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4481,7 +4481,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4518,7 +4518,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4554,7 +4554,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4589,7 +4589,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
@@ -4621,7 +4621,7 @@
       - numero_dossier
       - numero_rg
       - pays
-      - reason_extinction
+      - cause_sortie
       - lieu_vie
       - service_id
       - status
