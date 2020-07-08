@@ -5,7 +5,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
 import { formatAntenneOptions } from "../../util/services";
@@ -44,7 +44,7 @@ export const ServiceMesureEditForm = (props) => {
     initialValues: {
       annee_naissance: age,
       antenne_id: antenneId ? antenneOptions.find((o) => o.value === antenneId) : null,
-      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
       date_nomination: dateNomination,
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,
@@ -169,7 +169,7 @@ export const ServiceMesureEditForm = (props) => {
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
               onChange={(option) => formik.setFieldValue("civilite", option)}
-              options={CIVILITY}
+              options={MESURE_PROTECTION.CIVILITE.options}
             />
             <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>

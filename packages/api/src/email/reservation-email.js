@@ -10,7 +10,7 @@ const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
     (mesure.cabinet && `cabinet ${mesure.cabinet},`) || ""
   } a décidé de vous confier une nouvelle mesure :
   - type de mesure: ${mesure.type}
-  - genre: ${mesure.civilite}
+  - civilité: ${mesure.civilite}
   - année de naissance: ${mesure.annee_naissance}
   ${
     mesure.judgment_date
@@ -45,7 +45,7 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
   <br>
   - type de mesure: ${mesure.type}
   <br>
-  - genre: ${mesure.civilite}
+  - civilité: ${mesure.civilite}
   <br>
   - année de naissance: ${mesure.annee_naissance}.
   ${

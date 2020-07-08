@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { UserContext } from "../UserContext";
@@ -17,6 +17,7 @@ import {
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
+import { MESURE_PROTECTION } from "@emjpm/core";
 
 export const MagistratMesureAddForm = (props) => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -169,7 +170,7 @@ export const MagistratMesureAddForm = (props) => {
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
               onChange={(option) => formik.setFieldValue("civilite", option)}
-              options={CIVILITY}
+              options={MESURE_PROTECTION.CIVILITE.options}
             />
             <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>

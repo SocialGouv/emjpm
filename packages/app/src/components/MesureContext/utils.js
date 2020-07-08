@@ -47,7 +47,7 @@ export const formatMesure = (mesure) => {
     realAge: annee_naissance ? currentYear - annee_naissance : "nc",
     antenne: service_antenne ? service_antenne.name : null,
     cabinet: cabinet ? cabinet : null,
-    civilite: civilite ? civilite : "H",
+    civilite: civilite ? civilite : null,
     codePostal: code_postal ? code_postal : "non renseigné",
     dateNomination: date_nomination ? date_nomination : "non renseigné",
     dateNominationFormated: date_nomination
