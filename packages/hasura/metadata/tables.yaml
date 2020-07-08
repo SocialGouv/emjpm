@@ -512,7 +512,12 @@
       - enquete_reponses_service_informations_id
       - user_type
       - enquete_reponses_service_personnel_formation_id
-      filter: {}
+      filter:
+        mandataire:
+          lb_user:
+            lb_departements:
+              departement_id:
+                _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
     permission:

@@ -39,7 +39,7 @@ class Mandataire extends Model {
   }
   static get relationMappings() {
     const { User } = require("./User");
-    const { Department } = require("./Departments");
+    const { Departement } = require("./Departement");
     return {
       users: {
         relation: Model.BelongsToOneRelation,
@@ -51,7 +51,7 @@ class Mandataire extends Model {
       },
       department: {
         relation: Model.BelongsToOneRelation,
-        modelClass: Department,
+        modelClass: Departement,
         join: {
           from: "mandataires.department_id",
           to: "departements.id",

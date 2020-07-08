@@ -1,6 +1,5 @@
 const { Strategy: LocalStrategy } = require("passport-local");
 const { User } = require("../../models/User");
-const logger = require("../../utils/logger");
 
 const authLoginPasswordStrategy = new LocalStrategy(
   {
@@ -14,8 +13,6 @@ const authLoginPasswordStrategy = new LocalStrategy(
       .first()
       .withGraphFetched("[roles, service, tis, direction]")
       .then(function (user) {
-        logger.info(user, "user");
-
         if (!user) {
           return done("Unknown user");
         }
