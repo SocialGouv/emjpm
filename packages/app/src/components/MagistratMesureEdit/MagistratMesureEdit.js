@@ -5,11 +5,13 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { CIVILITY, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMesureEditSchema } from "../../lib/validationSchemas";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
+import { MESURE_PROTECTION } from "@emjpm/core";
+import { findOption } from "../../util";
 
 export const MagistratMesureEdit = () => {
   const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
@@ -40,7 +42,7 @@ export const MagistratMesureEdit = () => {
     initialValues: {
       annee_naissance: age,
       cabinet: cabinet ? cabinet : "",
-      civilite: { label: civilite === "F" ? "Femme" : "Homme", value: civilite },
+      civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
       numero_rg: numeroRg,
       type: { label: type, value: type },
     },
@@ -82,7 +84,7 @@ export const MagistratMesureEdit = () => {
               value={formik.values.civilite}
               hasError={formik.errors.civilite && formik.touched.civilite}
               onChange={(option) => formik.setFieldValue("civilite", option)}
-              options={CIVILITY}
+              options={MESURE_PROTECTION.CIVILITE.options}
             />
             <InlineError message={formik.errors.civilite} fieldId="civilite" />
           </Field>

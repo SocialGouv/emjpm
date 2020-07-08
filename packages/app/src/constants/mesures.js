@@ -139,11 +139,6 @@ export const MESURE_TYPE_LABEL_VALUE = [
   },
 ];
 
-export const CIVILITY = [
-  { label: "Femme", value: "F" },
-  { label: "Homme", value: "H" },
-];
-
 export const IS_URGENT = [
   { label: "oui, c'est une demande urgente", value: true },
   { label: "non, ce n'est pas une demande urgente", value: false },

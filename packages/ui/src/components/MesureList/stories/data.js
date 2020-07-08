@@ -1,7 +1,7 @@
 export const datas = [
   {
     age: 1924,
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2019-01-10',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -23,7 +23,7 @@ export const datas = [
   {
     age: 1924,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2007-06-05',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -46,7 +46,7 @@ export const datas = [
   {
     age: 1986,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -69,7 +69,7 @@ export const datas = [
   {
     age: 1927,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -93,7 +93,7 @@ export const datas = [
   {
     age: 1985,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -116,7 +116,7 @@ export const datas = [
   {
     age: 1988,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -139,7 +139,7 @@ export const datas = [
   {
     age: 1985,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -165,7 +165,7 @@ export const mandataireDatas = [
   {
     age: 1998,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -188,7 +188,7 @@ export const mandataireDatas = [
   {
     age: 1998,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -211,7 +211,7 @@ export const mandataireDatas = [
   {
     age: 1998,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -234,7 +234,7 @@ export const mandataireDatas = [
   {
     age: 1998,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,
@@ -257,7 +257,7 @@ export const mandataireDatas = [
   {
     age: 1998,
     cabinet: 'test',
-    civilite: 'F',
+    civilite: 'madame',
     dateNomination: '2011-01-11',
     dateNominationFormated: '2019/01/10',
     hasAccepting: false,

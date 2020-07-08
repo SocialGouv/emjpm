@@ -3266,9 +3266,9 @@ Object {
   },
   "civilite": Object {
     "defaultValue": null,
-    "maxLength": 255,
+    "maxLength": null,
     "nullable": true,
-    "type": "character varying",
+    "type": "USER-DEFINED",
   },
   "code_postal": Object {
     "defaultValue": null,
