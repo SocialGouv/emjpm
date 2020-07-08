@@ -15,6 +15,11 @@ export const MESURE_PROTECTION = {
     protection_personne: 'protection à la personne',
   }),
 
+  CIVILITE: buildKeys({
+    madame: 'Madame',
+    monsieur: 'Monsieur',
+  }),
+
   LIEU_VIE_MAJEUR: buildKeys({
     domicile: 'domicile',
     etablissement: 'en établissement',
@@ -42,7 +47,6 @@ export const MESURE_PROTECTION = {
     mainlevee: 'mainlevée',
     reconduction: 'reconduction',
   }),
-
   SEXE: buildKeys({
     F: 'femme',
     H: 'homme',

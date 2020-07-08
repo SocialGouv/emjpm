@@ -16,7 +16,7 @@ storiesOf("MesuresCreation", module)
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}
-      civilite={"H"}
+      civilite={"monsieur"}
       annee_naissance={"2010"}
     />
   ))
@@ -26,7 +26,7 @@ storiesOf("MesuresCreation", module)
       type={"curatelle"}
       code_postal={28110}
       ville={"LeBelfort"}
-      civilite={"H"}
+      civilite={"monsieur"}
       annee_naissance={"2010"}
       isOpen={true}
     />

@@ -1,3 +1,4 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -74,7 +75,9 @@ const MagistratMesure = (props) => {
           <Box width="50%">
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Civilité</Text>
-              <Text sx={MagistratMesureContentStyle}>{civilite === "F" ? "Femme" : "Homme"}</Text>
+              <Text sx={MagistratMesureContentStyle}>
+                {MESURE_PROTECTION.CIVILITE.byKey[civilite]}
+              </Text>
             </Box>
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Age de la personne a protéger</Text>

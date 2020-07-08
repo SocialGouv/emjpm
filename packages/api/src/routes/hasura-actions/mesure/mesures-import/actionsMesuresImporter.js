@@ -141,8 +141,17 @@ const importMesures = async ({
       : null;
     delete mesure.residence;
 
+    let civilite;
+    const sexe = mesure.civilite;
+    if (sexe && sexe === "H") {
+      civilite = "monsieur";
+    } else if (sexe && sexe === "F") {
+      civilite = "madame";
+    }
+
     const mesureDatas = {
       ...mesure,
+      civilite,
       lieu_vie,
       date_nomination: toDate(mesure.date_ouverture),
       mandataire,
