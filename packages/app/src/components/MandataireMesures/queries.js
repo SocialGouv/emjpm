@@ -59,7 +59,7 @@ export const MANDATAIRE_MESURES = gql`
       mandataire_id
       numero_dossier
       numero_rg
-      reason_extinction
+      cause_sortie
       lieu_vie
       service_id
       status
