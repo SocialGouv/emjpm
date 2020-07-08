@@ -29,7 +29,7 @@ export const formatMesureList = (mesureList) => {
       age: annee_naissance ? annee_naissance : "nc",
       antenneId: antenne_id ? antenne_id : null,
       cabinet: cabinet ? cabinet : null,
-      civilite: civilite ? civilite : "H",
+      civilite: civilite ? civilite : null,
       codePostal: code_postal ? code_postal : "non renseigné",
       dateNomination: date_nomination ? date_nomination : "non renseigné",
       dateNominationFormated: date_nomination

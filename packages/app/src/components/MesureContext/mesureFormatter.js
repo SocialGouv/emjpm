@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { MESURE_PROTECTION, isMonsieur } from "@emjpm/core";
 
 import { COUNTRIES } from "../../constants/mesures";
 
@@ -19,7 +19,7 @@ function formatMajeurProtege(civilite, realAge) {
   if (!civilite) {
     return `${realAge} ans`;
   }
-  return `${civilite === "F" ? "Femme de" : "Homme de"} ${realAge} ans`;
+  return `${isMonsieur({ civilite }) ? "Homme de" : "Femme de"} ${realAge} ans`;
 }
 
 function formatPays(codePays) {

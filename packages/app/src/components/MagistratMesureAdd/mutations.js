@@ -6,7 +6,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $mandataire_id: Int!
     $magistrat_id: Int!
     $type: String!
-    $civilite: String!
+    $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
     $urgent: Boolean!
@@ -59,7 +59,7 @@ export const CHOOSE_SERVICE = gql`
     $service_id: Int!
     $magistrat_id: Int!
     $type: String!
-    $civilite: String!
+    $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
     $judgmentDate: date

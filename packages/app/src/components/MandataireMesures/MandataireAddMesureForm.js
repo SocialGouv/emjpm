@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { CIVILITY, COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { COUNTRIES, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -137,7 +137,7 @@ export const MandataireAddMesureForm = (props) => {
                   value={formik.values.civilite}
                   hasError={formik.errors.civilite && formik.touched.civilite}
                   onChange={(option) => formik.setFieldValue("civilite", option)}
-                  options={CIVILITY}
+                  options={MESURE_PROTECTION.CIVILITE.options}
                 />
                 {formik.errors.civilite && formik.touched.civilite && (
                   <Text>{formik.errors.civilite}</Text>
