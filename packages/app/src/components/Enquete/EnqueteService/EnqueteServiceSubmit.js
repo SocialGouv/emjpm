@@ -17,6 +17,12 @@ export const EnqueteServiceSubmit = (props) => {
         variables: { enqueteId, userId },
       },
     ],
+    onCompleted: () => {
+      // TODO: it needs to be changed, but actually SUBMIT_ENQUETE_REPONSE
+      // use useSubscription method with graphql query 🤷
+      // The problem is refetchQueries doesn't works with useSubscription.
+      document.location.reload(true);
+    },
   });
 
   return (
