@@ -54,6 +54,7 @@ export const ENQUETE_DETAILS_RESUME = gql`
           type
         }
         lb_user {
+          id
           lb_departements {
             departement_financeur
             departement {
@@ -104,6 +105,7 @@ export const ENQUETE_DETAILS_LIST = gql`
           type
         }
         lb_user {
+          id
           lb_departements {
             departement_financeur
             departement {
