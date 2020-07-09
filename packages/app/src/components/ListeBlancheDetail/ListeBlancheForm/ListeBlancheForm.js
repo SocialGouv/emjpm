@@ -1,7 +1,7 @@
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React, { useMemo, useState } from "react";
-import { useMutation } from "react-apollo";
+import { useApolloClient, useMutation } from "react-apollo";
 import { Box, Card, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
@@ -14,6 +14,7 @@ import {
   UPDATE_LB_DEPARTEMENT,
   UPDATE_LB_USER,
 } from "../mutations";
+import { LB_USER } from "../queries";
 import { ListeBlancheFormDepartementAjout } from "./ListeBlancheFormDepartementAjout";
 import { ListeBlancheFormDepartementFinanceur } from "./ListeBlancheFormDepartementFinanceur";
 
@@ -25,6 +26,7 @@ const validationSchema = yup.object().shape({
 });
 export const ListeBlancheForm = (props) => {
   const { handleCancel, handleSubmit, data: lb_user } = props;
+  const apolloClient = useApolloClient();
   const initialValues = useMemo(() => {
     return {
       nom: formatFormInput(lb_user.nom),
@@ -84,6 +86,7 @@ export const ListeBlancheForm = (props) => {
             })
           );
         }
+
         return acc;
       }, []);
       const departementsCodes = lbDepartements.map(
@@ -104,6 +107,13 @@ export const ListeBlancheForm = (props) => {
       if (departementsOperations.length) {
         await Promise.all(departementsOperations);
       }
+
+      apolloClient.query({
+        query: LB_USER,
+        variables: {
+          id: lb_user.id,
+        },
+      });
 
       setSubmitting(false);
       props.handleSubmit();

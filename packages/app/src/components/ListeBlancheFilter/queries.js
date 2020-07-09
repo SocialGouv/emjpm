@@ -19,8 +19,8 @@ export const GET_DIRECTION_REGION_DEPARTEMENT = gql`
 `;
 
 export const GET_DEPARTEMENTS = gql`
-  query departements($filterIds: [Int!] = []) {
-    departements(order_by: { nom: asc }, where: { id: { _in: $filterIds } }) {
+  query departements {
+    departements(order_by: { nom: asc }) {
       id
       nom
     }

@@ -1,9 +1,8 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { useQuery } from "react-apollo";
 
 import { useDebounce } from "../../../lib/hooks";
-import { UserContext } from "../../UserContext";
-import { GET_DEPARTEMENTS, GET_DIRECTION_REGION_DEPARTEMENT } from "../queries";
+import { GET_DEPARTEMENTS } from "../queries";
 
 export const Context = createContext({});
 
@@ -15,32 +14,29 @@ export const Provider = (props) => {
   const [departements, setDepartements] = useState([]);
   const [selectedType, selectType] = useState(false);
 
-  const user = useContext(UserContext);
-  const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
-    variables: {
-      userId: user.id,
-    },
-    skip: user.type !== "direction",
-  });
+  // const user = useContext(UserContext);
+  // const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
+  //   variables: {
+  //     userId: user.id,
+  //   },
+  //   skip: user.type !== "direction",
+  // });
 
-  let departementsIds = null;
+  // let departementsIds = null;
 
-  if (data && data.direction) {
-    const [direction] = data.direction;
-    const { departement, region } = direction;
+  // if (data && data.direction) {
+  //   const [direction] = data.direction;
+  //   const { departement, region } = direction;
 
-    if (region && region.departements) {
-      const { departements } = region;
-      departementsIds = departements.map(({ id }) => id);
-    } else if (departement) {
-      departementsIds = [departement.id];
-    }
-  }
+  //   if (region && region.departements) {
+  //     const { departements } = region;
+  //     departementsIds = departements.map(({ id }) => id);
+  //   } else if (departement) {
+  //     departementsIds = [departement.id];
+  //   }
+  // }
 
   const { data: departementsData, loading, error } = useQuery(GET_DEPARTEMENTS, {
-    variables: {
-      filterIds: departementsIds,
-    },
     onCompleted: (result) => {
       setDepartements(result ? result.departements : []);
       setSelectedDepartements(result ? result.departements : []);
