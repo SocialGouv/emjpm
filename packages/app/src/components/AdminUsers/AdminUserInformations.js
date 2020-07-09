@@ -8,15 +8,16 @@ import { isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
 import AdminUsersTribunaux from "./AdminUsersTribunaux";
-import { ACTIVATE_USER, UPDATE_DIRECTION } from "./mutations";
+import { ACTIVATE_USER, CHANGE_DIRECTION_AGREMENT } from "./mutations";
 import { USER } from "./queries";
 import { TypeDirectionForm } from "./TypeDirectionForm";
 
 const AdminUserInformations = (props) => {
   const { userId } = props;
   const { data, loading, error } = useQuery(USER, { variables: { userId } });
+
   const [activateUser] = useMutation(ACTIVATE_USER);
-  const [updateDirection] = useMutation(UPDATE_DIRECTION);
+  const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
 
   const toggleActivation = useCallback(() => {
     const { active, id } = data.users_by_pk;
@@ -36,7 +37,7 @@ const AdminUserInformations = (props) => {
     return <div>Erreur</div>;
   }
 
-  const { users_by_pk, regions, departements } = data;
+  const { users_by_pk, regions, departements, directionRoles } = data;
 
   const {
     active,
@@ -151,9 +152,17 @@ const AdminUserInformations = (props) => {
           <Heading3 mb={4}>Type de direction</Heading3>
           <TypeDirectionForm
             onSubmit={async (values) => {
-              await updateDirection({
+              const newDirectionRoleName =
+                values.type !== "national" ? "direction_territoriale" : "direction_nationale";
+              const newDirectionRole = directionRoles.find((d) => d.name === newDirectionRoleName);
+              const directionRole = directionRoles.find((d) => d.name === "direction");
+
+              await changeDirectionAgrements({
                 variables: {
-                  id: direction.id,
+                  user_id: userId,
+                  direction_id: direction.id,
+                  direction_role_id: newDirectionRole.id,
+                  new_direction_role_id: directionRole.id,
                   type: values.type,
                   department_id: values.departement || null,
                   region_id: values.region || null,

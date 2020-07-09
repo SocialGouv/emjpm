@@ -98,6 +98,10 @@ export const MAGISTRAT = gql`
 
 export const USER = gql`
   query user($userId: Int!) {
+    directionRoles: role(where: { name: { _like: "direction%" } }) {
+      id
+      name
+    }
     departements {
       code
       nom
@@ -108,6 +112,12 @@ export const USER = gql`
       id
     }
     users_by_pk(id: $userId) {
+      user_roles {
+        role {
+          name
+          id
+        }
+      }
       directions {
         id
         region_id

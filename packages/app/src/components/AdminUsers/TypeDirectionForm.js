@@ -28,6 +28,11 @@ const validationSchema = yup.object({
     then: yup.string().required(),
     otherwise: yup.string().nullable(),
   }),
+  departement: yup.string().when("type", {
+    is: "departemental",
+    then: yup.string().required(),
+    otherwise: yup.string().nullable(),
+  }),
 });
 
 export const TypeDirectionForm = (props) => {
@@ -63,7 +68,13 @@ export const TypeDirectionForm = (props) => {
           <Fragment>
             <Select
               name="type"
-              onChange={({ value }) => setFieldValue("type", value)}
+              onChange={({ value }) => {
+                setFieldValue("type", value);
+                if (value === "national") {
+                  setFieldValue("departement", "");
+                  setFieldValue("region", "");
+                }
+              }}
               size="small"
               value={findOption(directionTypeOptions, values.type)}
               placeholder="Type de direction"
