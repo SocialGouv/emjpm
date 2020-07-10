@@ -4,7 +4,7 @@ exports.up = async function (knex) {
     from user_role as ur
     inner join role as r on r.id = ur.role_id
     inner join direction as d on d.user_id = ur.user_id
-    where r."name" = 'direction_departemental' 
+    where r."name" = 'direction_departemental'
     or r."name" = 'direction_regional'
   `);
 
@@ -23,7 +23,7 @@ exports.up = async function (knex) {
     name: "direction_territoriale",
   });
 
-  const { id } = await knex
+  const directionTerritorialeRole = await knex
     .select()
     .table("role")
     .where({ name: "direction_territoriale" })
@@ -35,13 +35,18 @@ exports.up = async function (knex) {
     .where({ name: "direction_regional" })
     .first();
 
-  if (directionRegionalRole && directionRegionalRole.id) {
+  if (
+    directionRegionalRole &&
+    directionRegionalRole.id &&
+    directionTerritorialeRole &&
+    directionTerritorialeRole.id
+  ) {
     await knex("user_role")
       .where({
         role_id: directionRegionalRole.id,
       })
       .update({
-        role_id: id,
+        role_id: directionTerritorialeRole.id,
       });
 
     await knex("role").where({ id: directionRegionalRole.id }).del();
