@@ -26,15 +26,16 @@ const login = async (req, res, next) => {
     if (user) {
       await User.query()
         .where("id", user.id)
-        .update({ last_login: new Date().toISOString() })
-        .then(
-          await Logs.query().insert({
-            user_id: user.id,
-            action: "connexion",
-            result: "success",
-          })
-        );
-      return res.status(200).json(user.getUser());
+        .update({ last_login: new Date().toISOString() });
+
+      await Logs.query().insert({
+        user_id: user.id,
+        action: "connexion",
+        result: "success",
+      });
+
+      const userResult = await user.getUser();
+      return res.status(200).json(userResult);
     }
   })(req, res, next);
 };

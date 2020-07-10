@@ -13,8 +13,8 @@ import { withAuthSync } from "../../../src/util/auth";
 const ListBlanchePage = () => {
   const router = useRouter();
   return (
-    <FiltersContextProvider>
-      <LayoutAdmin>
+    <LayoutAdmin>
+      <FiltersContextProvider>
         <BoxWrapper mt={4} px={1}>
           <Flex flexDirection="column">
             <Box mb="2">
@@ -35,8 +35,8 @@ const ListBlanchePage = () => {
             </Box>
           </Flex>
         </BoxWrapper>
-      </LayoutAdmin>
-    </FiltersContextProvider>
+      </FiltersContextProvider>
+    </LayoutAdmin>
   );
 };
 
