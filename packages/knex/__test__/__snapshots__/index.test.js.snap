@@ -3244,6 +3244,77 @@ Object {
 }
 `;
 
+exports[`mesure_etat table schema 1`] = `
+Object {
+  "champ_protection": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
+  "code_postal": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "date_changement_etat": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "date",
+  },
+  "etablissement_siret": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mesure_etat_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "lieu_vie": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "USER-DEFINED",
+  },
+  "mesure_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "nature_mesure": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "USER-DEFINED",
+  },
+  "pays": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "type_etablissement": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
+  "ville": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+}
+`;
+
 exports[`mesures table schema 1`] = `
 Object {
   "annee_naissance": Object {
@@ -3969,6 +4040,7 @@ Array [
   "magistrat",
   "mandataire_etablissements",
   "mandataires",
+  "mesure_etat",
   "mesures",
   "regions",
   "role",
