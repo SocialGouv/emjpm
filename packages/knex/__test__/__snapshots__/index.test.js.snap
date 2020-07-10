@@ -219,6 +219,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "type": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "user_id": Object {
     "defaultValue": null,
     "maxLength": null,

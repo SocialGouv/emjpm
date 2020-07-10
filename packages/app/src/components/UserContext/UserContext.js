@@ -23,7 +23,7 @@ const QUERY_TYPE = {
 };
 
 const UserProvider = (props) => {
-  const { type, userId, children } = props;
+  const { type, userId, agrements, children } = props;
   const { data } = useQuery(QUERY_TYPE[type], {
     variables: {
       userId: userId,
@@ -41,6 +41,7 @@ const UserProvider = (props) => {
 
   const currentUser = {
     ...data.users_by_pk,
+    agrements,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
   };
 
@@ -51,10 +52,11 @@ export const Provider = (props) => {
   const { children, user } = props;
   const type = user ? user.role : null;
   const userId = user ? user.id : null;
+  const agrements = user ? user.agrements : [];
 
   if (userId) {
     return (
-      <UserProvider type={type} userId={userId}>
+      <UserProvider type={type} userId={userId} agrements={agrements}>
         {children}
       </UserProvider>
     );

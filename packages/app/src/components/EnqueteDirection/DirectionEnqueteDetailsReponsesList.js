@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useCallback, useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
+import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
 import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
@@ -17,8 +18,11 @@ import {
 import { ENQUETE_DETAILS_LIST } from "./queries";
 
 export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
+  const queryContext = useQueryContextWithHasuraRole("direction_");
+
   const { data, loading, error } = useQuery(ENQUETE_DETAILS_LIST, {
     variables: { enqueteId },
+    context: queryContext,
   });
 
   const { enqueteLabel, counts, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(

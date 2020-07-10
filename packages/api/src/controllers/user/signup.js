@@ -91,14 +91,20 @@ const createUserTis = (tis, user_id) => {
   );
 };
 
-const createDirection = (userId) => {
+const createDirection = (userId, type) => {
   return Direction.query().insert({
     user_id: userId,
+    type,
   });
 };
 
 const createRole = async (userId, type) => {
-  const [role] = await Role.query().where("name", type);
+  const [role] = await Role.query().where(
+    "name",
+    type === "regional" || type === "departemental"
+      ? "direction_territoriale"
+      : "direction_nationale"
+  );
   if (role && userId) {
     return UserRole.query().allowInsert("[user_id,role_id]").insert({
       user_id: userId,
@@ -171,8 +177,10 @@ const signup = async (req, res) => {
       }
       case "direction": {
         const { directionType } = body.direction;
+
         await createRole(user.id, directionType);
-        await createDirection(user.id);
+        await createDirection(user.id, directionType);
+
         break;
       }
       default:
