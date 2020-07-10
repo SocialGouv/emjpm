@@ -38,11 +38,11 @@ const LabelValue = ({ label, value }) => (
 );
 
 const ListeBlancheSummary = () => {
-  const { selectedDepartement } = useContext(FiltersContext);
+  const { selectedDepartements, filterDepartement } = useContext(FiltersContext);
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+      departementIds: selectedDepartements.map((d) => d.id),
     },
   });
 
@@ -82,7 +82,9 @@ const ListeBlancheSummary = () => {
   return (
     <Card>
       <Heading2>
-        {selectedDepartement ? selectedDepartement.label : "Tous les départements"}
+        {!filterDepartement || filterDepartement.value === null
+          ? "Tous les départements"
+          : filterDepartement.label}
       </Heading2>
       <Flex flexDirection="column" pt={1}>
         <LabelValue

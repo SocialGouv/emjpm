@@ -1,13 +1,15 @@
-const knexConnection = require("../db/knex");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const jwtConfig = require("../config/jwt");
 const { Model } = require("objection");
 
+const knexConnection = require("../db/knex");
+const jwtConfig = require("../config/jwt");
 const { Mandataire } = require("./Mandataire");
+const { Departement } = require("./Departement");
 const { Role } = require("./Role");
 const { Tis } = require("./Tis");
 const { Service } = require("./Service");
+const { Direction } = require("./Direction");
 
 Model.knex(knexConnection);
 
@@ -73,6 +75,14 @@ class User extends Model {
           to: "services.id",
         },
       },
+      direction: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Direction,
+        join: {
+          from: "users.id",
+          to: "direction.user_id",
+        },
+      },
       tis: {
         relation: Model.ManyToManyRelation,
         modelClass: Tis,
@@ -96,6 +106,7 @@ class User extends Model {
     const defaultRoleName = (
       this.roles.find((role) => MAIN_ROLES.includes(role.name)) || {}
     ).name;
+
     if (!defaultRoleName) {
       throw new Error(
         "No default role found in the list : " + JSON.stringify(this.roles)
@@ -104,12 +115,13 @@ class User extends Model {
     return defaultRoleName;
   }
 
-  getUser() {
+  async getUser() {
+    const token = await this.getJwt();
     return {
       id: this.id,
       username: this.username,
       roles: this.getRoles(),
-      token: this.getJwt(),
+      token: token,
       // TODO: remove when full graphql auth
       url: redirs[this.type] || redirs.default,
       type: this.type,
@@ -120,27 +132,43 @@ class User extends Model {
     return this.service ? this.service.id : null;
   }
 
-  getHasuraClaims() {
+  async getDirectionAgrements() {
+    if (!this.direction) {
+      return [];
+    }
+    const { region_id, department_id } = this.direction;
+    const departements = await Departement.query()
+      .where({ id_region: region_id })
+      .orWhere({ id: department_id });
+    return departements.map((d) => d.id);
+  }
+
+  async getHasuraClaims() {
+    const role = this.getDefaultRole();
+    const agrements = await this.getDirectionAgrements();
     return {
       "x-hasura-allowed-roles": this.getRoles(),
-      "x-hasura-default-role": this.getDefaultRole(),
+      "x-hasura-default-role": role,
       "x-hasura-user-id": `${this.id}`,
       "x-hasura-service-id": `${this.getService()}`,
+      "x-hasura-agrements": `{${agrements.join(",")}}`,
     };
   }
 
-  getJwt() {
+  async getJwt() {
     const signOptions = {
       subject: this.id.toString(),
       expiresIn: "30d",
       algorithm: "RS256",
     };
+
+    const hasuraClaims = await this.getHasuraClaims();
     const claim = {
       name: this.username,
       id: this.id,
       url: redirs[this.type] || redirs.default,
       role: this.getDefaultRole(),
-      "https://hasura.io/jwt/claims": this.getHasuraClaims(),
+      "https://hasura.io/jwt/claims": hasuraClaims,
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }

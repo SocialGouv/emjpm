@@ -2,7 +2,7 @@ const {
   GeolocalisationCodePostal,
 } = require("../../../../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../../../../utils/getRegionCode");
-const { Department } = require("../../../../../models/Departments");
+const { Departement } = require("../../../../../models/Departement");
 
 const getGeoDatas = async (code_postal, ville) => {
   if (!code_postal) {
@@ -34,7 +34,7 @@ const findDepartmentFromPostalCode = async (
     regionCode = getRegionCode(code_postal);
     department = departmentByRegionCode[regionCode];
     if (!department) {
-      department = await Department.query().findOne({
+      department = await Departement.query().findOne({
         code: regionCode,
       });
     }
@@ -61,7 +61,7 @@ async function findDepartment({
     department = departmentById[department_id];
   }
   if (!department) {
-    department = await Department.query().findById(department_id);
+    department = await Departement.query().findById(department_id);
   }
   if (department) {
     departmentById[department.id] = department;

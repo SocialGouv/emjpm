@@ -9,12 +9,12 @@ import { LB_USERS } from "./queries";
 
 const ListeBlanche = ({ onSelectLbUser }) => {
   const {
-    selectedDepartement,
     selectedType,
     debouncedSearchNom,
     debouncedSearchSiret,
     debouncedSearchPrenom,
     departementFinanceur,
+    selectedDepartements,
   } = useContext(FiltersContext);
 
   const resultPerPage = 50;
@@ -25,7 +25,7 @@ const ListeBlanche = ({ onSelectLbUser }) => {
       limit: resultPerPage,
       offset: currentOffset,
       type: selectedType ? selectedType.value : null,
-      departementId: selectedDepartement ? parseInt(selectedDepartement.value) : null,
+      departementIds: selectedDepartements.map((d) => d.id),
       nom: debouncedSearchNom ? `${debouncedSearchNom}%` : null,
       prenom: debouncedSearchPrenom ? `${debouncedSearchPrenom}%` : null,
       departementFinanceur: departementFinanceur ? true : null,

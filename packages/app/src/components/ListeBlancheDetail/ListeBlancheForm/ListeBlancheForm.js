@@ -1,7 +1,7 @@
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import React, { useCallback, useMemo, useState } from "react";
-import { useMutation } from "react-apollo";
+import React, { useMemo, useState } from "react";
+import { useApolloClient, useMutation } from "react-apollo";
 import { Box, Card, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
@@ -14,6 +14,7 @@ import {
   UPDATE_LB_DEPARTEMENT,
   UPDATE_LB_USER,
 } from "../mutations";
+import { LB_USER } from "../queries";
 import { ListeBlancheFormDepartementAjout } from "./ListeBlancheFormDepartementAjout";
 import { ListeBlancheFormDepartementFinanceur } from "./ListeBlancheFormDepartementFinanceur";
 
@@ -25,6 +26,7 @@ const validationSchema = yup.object().shape({
 });
 export const ListeBlancheForm = (props) => {
   const { handleCancel, handleSubmit, data: lb_user } = props;
+  const apolloClient = useApolloClient();
   const initialValues = useMemo(() => {
     return {
       nom: formatFormInput(lb_user.nom),
@@ -50,12 +52,13 @@ export const ListeBlancheForm = (props) => {
     deleteLbDepartement,
   } = useMutations();
 
-  const submitForm = useCallback(
-    async (value) => {
+  const formik = useFormik({
+    onSubmit: async (values, { setSubmitting }) => {
       await updateLbUser({
         variables: {
           id: lb_user.id,
-          ...value,
+          ...values,
+          siret: values.siret || null,
         },
       });
       const departementsOperations = lbDepartements.reduce((acc, lbDepartement) => {
@@ -83,6 +86,7 @@ export const ListeBlancheForm = (props) => {
             })
           );
         }
+
         return acc;
       }, []);
       const departementsCodes = lbDepartements.map(
@@ -104,31 +108,24 @@ export const ListeBlancheForm = (props) => {
         await Promise.all(departementsOperations);
       }
 
-      handleSubmit(value, formik);
-    },
-    [
-      createLbDepartement,
-      deleteLbDepartement,
-      formik,
-      handleSubmit,
-      lbDepartements,
-      lb_user.id,
-      lb_user.lb_departements,
-      updateLbDepartement,
-      updateLbUser,
-    ]
-  );
+      apolloClient.query({
+        query: LB_USER,
+        variables: {
+          id: lb_user.id,
+        },
+      });
 
-  const formik = useFormik({
-    onSubmit: submitForm,
+      setSubmitting(false);
+      props.handleSubmit();
+    },
     validationSchema,
     initialValues,
   });
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex flexDirection="row" mt={4}>
-        <Flex pr={2} flex={2 / 3} flexDirection="column">
+      <Box mt={4}>
+        <Flex pr={2} flexDirection="column">
           <Flex flexDirection="row">
             <Flex pr={2} flex={1 / 2} flexDirection="column">
               <FormGroupInput
@@ -159,36 +156,36 @@ export const ListeBlancheForm = (props) => {
               />
             </Flex>
           </Flex>
-          <Flex mt={6} justifyContent="center">
-            {handleCancel && (
-              <Box>
-                <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
-                  Annuler
-                </Button>
-              </Box>
-            )}
+        </Flex>
+
+        <Card>
+          <Heading4 mb={1}>{"Départements"}</Heading4>
+          <ListeBlancheFormDepartementFinanceur
+            lbDepartements={lbDepartements}
+            setLbDepartements={setLbDepartements}
+          />
+          <ListeBlancheFormDepartementAjout
+            lb_user={lb_user}
+            lbDepartements={lbDepartements}
+            setLbDepartements={setLbDepartements}
+          />
+        </Card>
+
+        <Flex mt={4} justifyContent="flex-end">
+          {handleCancel && (
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-                Enregistrer
+              <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+                Annuler
               </Button>
             </Box>
-          </Flex>
+          )}
+          <Box>
+            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              Enregistrer
+            </Button>
+          </Box>
         </Flex>
-        <Flex flex={1 / 3}>
-          <Card>
-            <Heading4 mb={1}>{"Départements"}</Heading4>
-            <ListeBlancheFormDepartementFinanceur
-              lbDepartements={lbDepartements}
-              setLbDepartements={setLbDepartements}
-            />
-            <ListeBlancheFormDepartementAjout
-              lb_user={lb_user}
-              lbDepartements={lbDepartements}
-              setLbDepartements={setLbDepartements}
-            />
-          </Card>
-        </Flex>
-      </Flex>
+      </Box>
     </form>
   );
   function useMutations() {
