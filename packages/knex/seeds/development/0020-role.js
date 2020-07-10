@@ -10,8 +10,7 @@ exports.seed = function (knex) {
         { name: "service" },
         { name: "direction" },
         { name: "direction_national" },
-        { name: "direction_regional" },
-        { name: "direction_departemental" },
+        { name: "direction_territoriale" },
       ]);
     });
 };
