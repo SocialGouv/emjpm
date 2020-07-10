@@ -13,7 +13,7 @@ export const ENQUETES = gql`
 `;
 
 export const ENQUETE_DETAILS_RESUME = gql`
-  query enquete_details($enqueteId: Int!, $limit: Int) {
+  query enquete_details_resume($enqueteId: Int!, $limit: Int) {
     enquetes_by_pk(id: $enqueteId) {
       id
       created_at
@@ -54,6 +54,7 @@ export const ENQUETE_DETAILS_RESUME = gql`
           type
         }
         lb_user {
+          id
           lb_departements {
             departement_financeur
             departement {
@@ -104,6 +105,7 @@ export const ENQUETE_DETAILS_LIST = gql`
           type
         }
         lb_user {
+          id
           lb_departements {
             departement_financeur
             departement {

@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useMemo, useState } from "react";
 import { Box, Button, Flex } from "rebass";
 
+import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
@@ -13,12 +14,13 @@ import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResu
 import { ENQUETE_DETAILS_RESUME } from "./queries";
 
 export const DirectionEnqueteDetails = ({ enqueteId }) => {
+  const queryContext = useQueryContextWithHasuraRole("direction_");
   const { data, loading, error } = useQuery(ENQUETE_DETAILS_RESUME, {
     variables: { enqueteId, limit: 5 },
+    context: queryContext,
   });
 
   const directionEnqueteDetails = useDirectionEnqueteDetails(data);
-
   const { enqueteLabel, enqueteReponseResumes } = directionEnqueteDetails;
 
   const resultPerPage = 10;

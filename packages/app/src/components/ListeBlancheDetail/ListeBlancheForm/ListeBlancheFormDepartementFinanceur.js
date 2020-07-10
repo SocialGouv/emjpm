@@ -1,11 +1,14 @@
 import { RadioGroup } from "@emjpm/ui";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
-import React, { Fragment, useMemo, useState } from "react";
+import React, { Fragment, useContext, useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { DepartementFormUtil } from "../../../util/departements";
+import { UserContext } from "../../UserContext";
 
 export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepartements }) => {
+  const user = useContext(UserContext);
+  console.log("user", user);
   const options = useMemo(() => {
     return DepartementFormUtil.departementToOptions(
       lbDepartements.map((lbDepartement) => lbDepartement.departement)
@@ -60,6 +63,10 @@ export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepa
         }}
         options={options}
         renderRadioLabel={({ label, option }) => {
+          const {
+            departement: { id },
+          } = option;
+
           return (
             <Flex
               sx={{
@@ -70,23 +77,26 @@ export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepa
               }}
             >
               <Text lineHeight="20px">{label}</Text>
-              <Box
-                sx={{
-                  cursor: "pointer",
-                  color: "#777",
-                  ":hover": {
-                    color: "#aa2d2d",
-                  },
-                }}
-              >
-                <XCircle
-                  size={24}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onRemoveDepartement(option);
+              {(user.user_roles.some(({ role }) => role.name === "direction_nationale") ||
+                user.agrements.includes(id)) && (
+                <Box
+                  sx={{
+                    cursor: "pointer",
+                    color: "#777",
+                    ":hover": {
+                      color: "#aa2d2d",
+                    },
                   }}
-                />
-              </Box>
+                >
+                  <XCircle
+                    size={24}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onRemoveDepartement(option);
+                    }}
+                  />
+                </Box>
+              )}
             </Flex>
           );
         }}

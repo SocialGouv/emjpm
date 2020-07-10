@@ -91,6 +91,9 @@ export const DIRECTION_USERS = gql`
       prenom
       type
       username
+      directions {
+        type
+      }
       user_roles {
         role {
           name
