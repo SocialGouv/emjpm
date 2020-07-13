@@ -44,8 +44,6 @@ async function importMesuresFile({
   mesuresToImport.forEach((data) => {
     if (data.type) {
       data.type = data.type.toLowerCase();
-      data.nature_mesure = adaptNatureMesure(data.type);
-      data.champ_protection = adaptChampMesure(data.type);
     }
     if (data.residence) {
       data.residence = data.residence.toLowerCase();
@@ -143,6 +141,10 @@ const importMesures = async ({
       : null;
     delete mesure.residence;
 
+    const nature_mesure = adaptNatureMesure(mesure.type);
+    const champ_protection = adaptChampMesure(mesure.type);
+    delete mesure.type;
+
     let civilite;
     const sexe = mesure.civilite;
     if (sexe && sexe === "H") {
@@ -153,6 +155,8 @@ const importMesures = async ({
 
     const mesureDatas = {
       ...mesure,
+      nature_mesure,
+      champ_protection,
       civilite,
       lieu_vie,
       date_nomination: toDate(mesure.date_ouverture),
