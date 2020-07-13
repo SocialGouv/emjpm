@@ -42,5 +42,5 @@ function formatPays(codePays) {
   if (COUNTRIES[codePays]) {
     return COUNTRIES[codePays];
   }
-  return `pays non renseigné`;
+  return ``;
 }

@@ -67,8 +67,8 @@ const MesureListItem = (props) => {
         <Flex sx={mesureListItemStyle}>
           <Box minWidth="220px" mr="1">
             <Text sx={titleStyle}>
-              {numeroRg || '-'}
-              <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
+              {numeroRg || ''}
+              <Text sx={statusStyle(status)}>{currentStatus || ''}</Text>
             </Text>
             <Text sx={natureStyle}>{`${natureMesure} ${champProtection || ''}`}</Text>
           </Box>
@@ -77,7 +77,7 @@ const MesureListItem = (props) => {
             <Flex width="280px" sx={columnStyle(true, true)}>
               <Text sx={labelStyle}>Tribunal</Text>
               <Text sx={descriptionStyle}>
-                {tribunal || 'Tribunal non renseigné'} {cabinet}
+                {tribunal || ''} {cabinet}
               </Text>
             </Flex>
           )}
@@ -97,13 +97,13 @@ const MesureListItem = (props) => {
           {hasFolderNumber && (
             <Flex width="90px" sx={columnStyle(true, true)}>
               <Text sx={labelStyle}>Dossier</Text>
-              <Text sx={descriptionStyle}>{numeroDossier || 'numeroDossier non renseigné'}</Text>
+              <Text sx={descriptionStyle}>{numeroDossier || ''}</Text>
             </Flex>
           )}
 
           <Flex width="280px" sx={columnStyle(true, true)}>
             <Text sx={labelStyle}>Commune</Text>
-            <Text sx={descriptionStyle}>{ville || 'ville non renseignée'}</Text>
+            <Text sx={descriptionStyle}>{ville || ''}</Text>
           </Flex>
 
           {status === MESURE_TYPE.WAITING && (
@@ -124,7 +124,7 @@ const MesureListItem = (props) => {
               </Flex>
               <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Date prév. juge.</Text>
-                <Text sx={descriptionStyle}>{judgmentDate || 'non renseigné'}</Text>
+                <Text sx={descriptionStyle}>{judgmentDate || ''}</Text>
               </Flex>
             </Fragment>
           )}
@@ -132,7 +132,7 @@ const MesureListItem = (props) => {
           {status !== MESURE_TYPE.WAITING && (
             <Flex minWidth="70px" textAlign="left" sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>Decision du</Text>
-              <Text sx={descriptionStyle}>{dateNominationFormated || 'non renseigné'}</Text>
+              <Text sx={descriptionStyle}>{dateNominationFormated || ''}</Text>
             </Flex>
           )}
         </Flex>
