@@ -4,7 +4,7 @@ export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
     $nature_mesure: nature_mesure_type
-    $champ_potection: $champ_potection_type
+    $champ_potection: champ_potection_type
     $civilite: civilite_type
     $annee_naissance: String
     $numero_rg: String
