@@ -5,7 +5,7 @@ import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { formatMesureList } from "../../util/services";
+import { mesureFormatter } from "../MesureContext";
 import { FiltersContext } from "../ServiceFilters/context";
 import { MESURES } from "./queries";
 
@@ -54,7 +54,7 @@ const ServiceMesures = (props) => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const mesures = formatMesureList(data.mesures);
+  const mesures = mesureFormatter.formatMesureList(data.mesures);
 
   return (
     <Box width={[1]}>

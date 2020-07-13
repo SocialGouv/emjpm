@@ -8,7 +8,7 @@ import { Box, Flex } from "rebass";
 import { FiltersContext } from "../MagistratFilters/context";
 import { MESURES } from "./queries";
 import { MagistratListStyle } from "./style";
-import { formatMandatairesMesureList } from "./utils";
+import { mesureFormatter } from "../MesureContext";
 
 const RESULT_PER_PAGE = 20;
 
@@ -43,7 +43,7 @@ const MagistratMesures = () => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const mesures = formatMandatairesMesureList(data.mesures);
+  const mesures = mesureFormatter.formatMesureList(data.mesures);
 
   return (
     <Box sx={MagistratListStyle}>

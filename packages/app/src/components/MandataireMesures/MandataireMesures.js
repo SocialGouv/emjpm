@@ -8,7 +8,7 @@ import { Box, Flex } from "rebass";
 import { FiltersContext } from "../MandataireFilters/context";
 import { MANDATAIRE_MESURES } from "./queries";
 import { MesureListStyle } from "./style";
-import { formatMesureList } from "./utils";
+import { mesureFormatter } from "../MesureContext";
 
 const RESULT_PER_PAGE = 20;
 
@@ -54,7 +54,7 @@ const MandataireMesures = (props) => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const mesures = formatMesureList(data.mesures);
+  const mesures = mesureFormatter.formatMesureList(data.mesures);
 
   return (
     <Box sx={MesureListStyle}>
