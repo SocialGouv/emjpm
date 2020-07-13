@@ -1,5 +1,5 @@
 import { MesureNature } from "../../../../model/mesures.model";
-import { MesureNatureCategory } from "../../../../natures/resolvers-natures";
+import { MesureNatureCategory } from "../../../../types/resolvers-types";
 
 export const mesureStatAdapter = {
   adaptCategory: (category: MesureNatureCategory) => {
