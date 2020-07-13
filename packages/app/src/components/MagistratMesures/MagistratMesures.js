@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureContextProvider, MesureListItem } from "@emjpm/ui";
+import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -46,49 +46,47 @@ const MagistratMesures = () => {
   const mesures = formatMandatairesMesureList(data.mesures);
 
   return (
-    <MesureContextProvider>
-      <Box sx={MagistratListStyle}>
-        <Fragment>
-          {mesures.length > 0 ? (
-            <Fragment>
-              {mesures.map((mesure) => {
-                return (
-                  <MesureListItem
-                    key={mesure.id}
-                    mesure={mesure}
-                    hasFolderNumber={false}
-                    hasLocation={false}
-                    onClick={({ mesure }) => selectMesure(mesure)}
-                  />
-                );
-              })}
-              {count > RESULT_PER_PAGE && (
-                <Flex alignItems="center" justifyContent="center">
-                  <ReactPaginate
-                    previousLabel={"Précédent"}
-                    nextLabel={"Suivant"}
-                    breakLabel={"..."}
-                    breakClassName={"break-me"}
-                    pageCount={totalPage}
-                    containerClassName={"react-paginate"}
-                    marginPagesDisplayed={2}
-                    forcePage={currentOffset / RESULT_PER_PAGE}
-                    pageRangeDisplayed={5}
-                    onPageChange={(data) => {
-                      setCurrentOffset(data.selected * RESULT_PER_PAGE);
-                    }}
-                    subContainerClassName={"pages pagination"}
-                    activeClassName={"active"}
-                  />
-                </Flex>
-              )}
-            </Fragment>
-          ) : (
-            <div>Pas de donnée à afficher</div>
-          )}
-        </Fragment>
-      </Box>
-    </MesureContextProvider>
+    <Box sx={MagistratListStyle}>
+      <Fragment>
+        {mesures.length > 0 ? (
+          <Fragment>
+            {mesures.map((mesure) => {
+              return (
+                <MesureListItem
+                  key={mesure.id}
+                  mesure={mesure}
+                  hasFolderNumber={false}
+                  hasLocation={false}
+                  onClick={({ mesure }) => selectMesure(mesure)}
+                />
+              );
+            })}
+            {count > RESULT_PER_PAGE && (
+              <Flex alignItems="center" justifyContent="center">
+                <ReactPaginate
+                  previousLabel={"Précédent"}
+                  nextLabel={"Suivant"}
+                  breakLabel={"..."}
+                  breakClassName={"break-me"}
+                  pageCount={totalPage}
+                  containerClassName={"react-paginate"}
+                  marginPagesDisplayed={2}
+                  forcePage={currentOffset / RESULT_PER_PAGE}
+                  pageRangeDisplayed={5}
+                  onPageChange={(data) => {
+                    setCurrentOffset(data.selected * RESULT_PER_PAGE);
+                  }}
+                  subContainerClassName={"pages pagination"}
+                  activeClassName={"active"}
+                />
+              </Flex>
+            )}
+          </Fragment>
+        ) : (
+          <div>Pas de donnée à afficher</div>
+        )}
+      </Fragment>
+    </Box>
   );
 };
 
