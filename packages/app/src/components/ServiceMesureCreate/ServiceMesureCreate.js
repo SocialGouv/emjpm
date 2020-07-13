@@ -81,7 +81,7 @@ export const ServiceMesureCreate = (props) => {
         lieu_vie: values.lieu_vie.value,
         ti_id: values.tribunal.value,
         nature_mesure: values.nature_mesure.value,
-        champ_protection: values.champ_protection.value,
+        champ_protection: values.champ_protection ? values.champ_protection.value : null,
         pays: values.country.value,
         cabinet: values.cabinet,
       },

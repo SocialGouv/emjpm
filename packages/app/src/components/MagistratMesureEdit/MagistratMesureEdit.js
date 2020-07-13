@@ -34,7 +34,7 @@ export const MagistratMesureEdit = () => {
           id: id,
           numero_rg: values.numero_rg,
           nature_mesure: values.nature_mesure.value,
-          champ_protection: values.champ_protection.value,
+          champ_protection: values.champ_protection ? values.champ_protection.value : null,
         },
       });
 
