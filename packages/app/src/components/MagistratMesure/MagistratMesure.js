@@ -63,7 +63,7 @@ const MagistratMesure = (props) => {
               </Text>
             </Box>
             <Box>
-              <Text sx={MagistratMesureTitleStyle}>Champ de protection</Text>
+              <Text sx={MagistratMesureTitleStyle}>Champ de la protection</Text>
               <Text sx={MagistratMesureContentStyle}>
                 {MESURE_PROTECTION.CHAMP_MESURE.byKey[champProtection]}
               </Text>

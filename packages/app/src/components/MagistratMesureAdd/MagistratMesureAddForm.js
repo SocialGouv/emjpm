@@ -169,7 +169,7 @@ export const MagistratMesureAddForm = (props) => {
             <Select
               id="champProtection"
               name="champProtection"
-              placeholder="Champ de protection"
+              placeholder="Champ de la protection"
               value={formik.values.champProtection}
               hasError={formik.errors.champProtection && formik.touched.champProtection}
               onChange={(option) => formik.setFieldValue("champProtection", option)}
