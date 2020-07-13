@@ -37,6 +37,7 @@ const MesureListItem = (props) => {
       age,
       cabinet,
       civilite,
+      champProtection,
       dateNominationFormated,
       isUrgent,
       judgmentDate,
@@ -66,10 +67,10 @@ const MesureListItem = (props) => {
         <Flex sx={mesureListItemStyle}>
           <Box minWidth="220px" mr="1">
             <Text sx={titleStyle}>
-              {numeroRg || 'RG-XXXXXX'}
+              {numeroRg || '-'}
               <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
             </Text>
-            <Text sx={natureStyle}>{natureMesure}</Text>
+            <Text sx={natureStyle}>{`${natureMesure} ${champProtection || ''}`}</Text>
           </Box>
 
           {hasTribunal && (
