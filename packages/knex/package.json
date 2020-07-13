@@ -20,7 +20,7 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
-    "knex": "^0.21.1",
+    "knex": "^0.21.2",
     "objection": "^1.6.11",
     "pg": "^7.18.2"
   },
