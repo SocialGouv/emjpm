@@ -8,7 +8,6 @@ import { Box, Flex, Text } from "rebass";
 import { COUNTRIES } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
-import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
@@ -37,7 +36,10 @@ export const ServiceMesureEditForm = (props) => {
     service_antennes,
   } = props;
 
-  const antenneOptions = formatAntenneOptions(service_antennes);
+  const antenneOptions = service_antennes.map((antenne) => ({
+    label: antenne.name,
+    value: antenne.id,
+  }));
 
   const formik = useFormik({
     onSubmit,
