@@ -1,5 +1,5 @@
-import { format } from "date-fns";
 import { isMonsieur, MESURE_PROTECTION } from "@emjpm/core";
+import { format } from "date-fns";
 
 import { COUNTRIES } from "../../constants/mesures";
 

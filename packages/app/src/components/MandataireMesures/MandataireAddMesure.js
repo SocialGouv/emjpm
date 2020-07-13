@@ -84,7 +84,7 @@ export const MandataireAddMesure = () => {
                 offset: 0,
                 searchText: null,
                 status: MESURE_STATUS_LABEL_VALUE[0].value,
-                nature_mesure: null,
+                natureMesure: null,
                 excludeStatus: "Mesure en attente",
               },
             },

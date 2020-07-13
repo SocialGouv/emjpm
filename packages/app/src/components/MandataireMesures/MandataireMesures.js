@@ -6,9 +6,9 @@ import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../MandataireFilters/context";
+import { mesureFormatter } from "../MesureContext";
 import { MANDATAIRE_MESURES } from "./queries";
 import { MesureListStyle } from "./style";
-import { mesureFormatter } from "../MesureContext";
 
 const RESULT_PER_PAGE = 20;
 

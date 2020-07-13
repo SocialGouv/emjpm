@@ -6,9 +6,9 @@ import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../MagistratFilters/context";
+import { mesureFormatter } from "../MesureContext";
 import { MESURES } from "./queries";
 import { MagistratListStyle } from "./style";
-import { mesureFormatter } from "../MesureContext";
 
 const RESULT_PER_PAGE = 20;
 
