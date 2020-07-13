@@ -6,7 +6,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $mandataire_id: Int!
     $magistrat_id: Int!
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type!
+    $champ_protection: champ_protection_type
     $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
@@ -61,7 +61,7 @@ export const CHOOSE_SERVICE = gql`
     $service_id: Int!
     $magistrat_id: Int!
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type!
+    $champ_protection: champ_protection_type
     $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
