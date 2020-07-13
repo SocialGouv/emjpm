@@ -45,9 +45,9 @@ export const MesureAllocation = () => {
     );
   }
 
-  const mesures = data.mesureTypeCategoryStatistics.map((mesure) => {
+  const mesures = data.mesureNatureCategoryStatistics.map((mesure) => {
     return {
-      name: getMesureCategoryNatureLabel(mesure.mesureTypeCategory),
+      name: getMesureCategoryNatureLabel(mesure.mesureNatureCategory),
       "nombre de mesures": mesure.number,
       nature: mesure.mesureNatureCategory,
     };

@@ -6,13 +6,13 @@ const getEvolution = (data) => {
   const evolutionFilters = [];
   data.map((nature, index) => {
     evolutionFilters[index] = {
-      label: getMesureCategoryNatureLabel(nature.mesureTypeCategory),
-      value: nature.mesureTypeCategory,
+      label: getMesureCategoryNatureLabel(nature.mesureNatureCategory),
+      value: nature.mesureNatureCategory,
     };
     nature.monthlyEvolutions.map((monthlyEvolution, index) => {
       evolutionDatas[index] = {
         ...evolutionDatas[index],
-        [getMesureCategoryNatureLabel(nature.mesureTypeCategory)]: monthlyEvolution.number,
+        [getMesureCategoryNatureLabel(nature.mesureNatureCategory)]: monthlyEvolution.number,
         Total: evolutionDatas[index]
           ? evolutionDatas[index].Total + monthlyEvolution.number
           : monthlyEvolution.number,
