@@ -102,8 +102,8 @@ export const MagistratMesureAddForm = (props) => {
             magistrat_id: magistratId,
             numero_rg: values.numero_rg,
             ti: tiId,
-            natureMesure: values.natureMesure.value,
-            champProtection: values.champProtection.value,
+            nature_mesure: values.nature_mesure.value,
+            champ_protection: values.champ_protection ? values.champ_protection.value : null,
             urgent: values.urgent.value,
           },
         });
@@ -119,8 +119,8 @@ export const MagistratMesureAddForm = (props) => {
             service_id: serviceId,
             magistrat_id: magistratId,
             ti: tiId,
-            natureMesure: values.natureMesure.value,
-            champProtection: values.champProtection.value,
+            nature_mesure: values.nature_mesure.value,
+            champ_protection: values.champ_protection.value,
             urgent: values.urgent.value,
           },
         });
@@ -135,8 +135,8 @@ export const MagistratMesureAddForm = (props) => {
       civilite: "",
       judgmentDate: "",
       numero_rg: "",
-      natureMesure: "",
-      champProtection: "",
+      nature_mesure: "",
+      champ_protection: "",
       urgent: IS_URGENT.find((lv) => lv.value == false),
     },
   });
@@ -155,27 +155,27 @@ export const MagistratMesureAddForm = (props) => {
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Select
-              id="natureMesure"
-              name="natureMesure"
+              id="nature_mesure"
+              name="nature_mesure"
               placeholder="Nature de la mesure"
-              value={formik.values.natureMesure}
-              hasError={formik.errors.natureMesure && formik.touched.natureMesure}
-              onChange={(option) => formik.setFieldValue("natureMesure", option)}
+              value={formik.values.nature_mesure}
+              hasError={formik.errors.nature_mesure && formik.touched.nature_mesure}
+              onChange={(option) => formik.setFieldValue("nature_mesure", option)}
               options={MESURE_PROTECTION.NATURE_MESURE.options}
             />
-            <InlineError message={formik.errors.natureMesure} fieldId="natureMesure" />
+            <InlineError message={formik.errors.nature_mesure} fieldId="nature_mesure" />
           </Field>
           <Field>
             <Select
-              id="champProtection"
-              name="champProtection"
+              id="champ_protection"
+              name="champ_protection"
               placeholder="Champ de la protection"
-              value={formik.values.champProtection}
-              hasError={formik.errors.champProtection && formik.touched.champProtection}
-              onChange={(option) => formik.setFieldValue("champProtection", option)}
+              value={formik.values.champ_protection}
+              hasError={formik.errors.champ_protection && formik.touched.champ_protection}
+              onChange={(option) => formik.setFieldValue("champ_protection", option)}
               options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
             />
-            <InlineError message={formik.errors.champProtection} fieldId="champProtection" />
+            <InlineError message={formik.errors.champ_protection} fieldId="champ_protection" />
           </Field>
           <Field>
             <Select
