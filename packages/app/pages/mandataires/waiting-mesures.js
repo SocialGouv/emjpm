@@ -13,7 +13,7 @@ const Mandataires = () => {
   return (
     <FiltersContextProvider
       initialValues={{
-        mesureType: DEFAULT_MESURE_NATURE,
+        natureMesure: DEFAULT_MESURE_NATURE,
       }}
     >
       <LayoutMandataire>

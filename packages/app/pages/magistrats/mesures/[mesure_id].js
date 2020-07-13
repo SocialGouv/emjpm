@@ -12,7 +12,7 @@ import { withAuthSync } from "../../../src/util/auth";
 const Mandataires = (props) => {
   const { mesureId } = props;
   return (
-    <LayoutMagistrat initialValues={{ mesureType: DEFAULT_MESURE_NATURE }}>
+    <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
       <BoxWrapper mt={6} px="1">
         <Flex
           sx={{
