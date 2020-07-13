@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { IS_URGENT, MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
+import { IS_URGENT } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { UserContext } from "../UserContext";
@@ -102,7 +102,8 @@ export const MagistratMesureAddForm = (props) => {
             magistrat_id: magistratId,
             numero_rg: values.numero_rg,
             ti: tiId,
-            type: values.type.value,
+            natureMesure: values.natureMesure.value,
+            champProtection: values.champProtection.value,
             urgent: values.urgent.value,
           },
         });
@@ -118,7 +119,8 @@ export const MagistratMesureAddForm = (props) => {
             service_id: serviceId,
             magistrat_id: magistratId,
             ti: tiId,
-            type: values.type.value,
+            natureMesure: values.natureMesure.value,
+            champProtection: values.champProtection.value,
             urgent: values.urgent.value,
           },
         });
@@ -133,7 +135,8 @@ export const MagistratMesureAddForm = (props) => {
       civilite: "",
       judgmentDate: "",
       numero_rg: "",
-      type: "",
+      natureMesure: "",
+      champProtection: "",
       urgent: IS_URGENT.find((lv) => lv.value == false),
     },
   });
@@ -152,15 +155,27 @@ export const MagistratMesureAddForm = (props) => {
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Select
-              id="type"
-              name="type"
-              placeholder="Type de mesure"
-              value={formik.values.type}
-              hasError={formik.errors.type && formik.touched.type}
-              onChange={(option) => formik.setFieldValue("type", option)}
-              options={MESURE_TYPE_LABEL_VALUE}
+              id="natureMesure"
+              name="natureMesure"
+              placeholder="Nature de la mesure"
+              value={formik.values.natureMesure}
+              hasError={formik.errors.natureMesure && formik.touched.natureMesure}
+              onChange={(option) => formik.setFieldValue("natureMesure", option)}
+              options={MESURE_PROTECTION.NATURE_MESURE.options}
             />
-            <InlineError message={formik.errors.type} fieldId="type" />
+            <InlineError message={formik.errors.natureMesure} fieldId="natureMesure" />
+          </Field>
+          <Field>
+            <Select
+              id="champProtection"
+              name="champProtection"
+              placeholder="Champ de protection"
+              value={formik.values.champProtection}
+              hasError={formik.errors.champProtection && formik.touched.champProtection}
+              onChange={(option) => formik.setFieldValue("champProtection", option)}
+              options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
+            />
+            <InlineError message={formik.errors.champProtection} fieldId="champProtection" />
           </Field>
           <Field>
             <Select

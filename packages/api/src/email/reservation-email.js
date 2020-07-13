@@ -9,7 +9,8 @@ const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
   Pour information, le ${ti.etablissement} ${
     (mesure.cabinet && `cabinet ${mesure.cabinet},`) || ""
   } a décidé de vous confier une nouvelle mesure :
-  - type de mesure: ${mesure.type}
+  - Nature de la mesure: ${mesure.nature_mesure}
+  - Champ de la protection: ${mesure.champ_protection}
   - civilité: ${mesure.civilite}
   - année de naissance: ${mesure.annee_naissance}
   ${
@@ -43,7 +44,9 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
     (mesure.cabinet && `cabinet ${mesure.cabinet},`) || ""
   } a décidé de vous confier une nouvelle mesure :
   <br>
-  - type de mesure: ${mesure.type}
+  - Nature de la mesure: ${mesure.nature_mesure}
+  <br>
+  - Champ de la protection: ${mesure.champ_protection}
   <br>
   - civilité: ${mesure.civilite}
   <br>

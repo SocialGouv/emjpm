@@ -16,9 +16,9 @@ import {
   descriptionStyle,
   labelStyle,
   mesureListItemStyle,
+  natureStyle,
   statusStyle,
   titleStyle,
-  typeStyle,
 } from './style';
 
 const GrayMale = styled(Male)`
@@ -44,7 +44,7 @@ const MesureListItem = (props) => {
       numeroRg,
       status,
       tribunal,
-      type,
+      natureMesure,
       ville,
     },
     hasTribunal,
@@ -69,7 +69,7 @@ const MesureListItem = (props) => {
               {numeroRg || 'RG-XXXXXX'}
               <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
             </Text>
-            <Text sx={typeStyle}>{type || 'type de mesure non renseigné'}</Text>
+            <Text sx={natureStyle}>{natureMesure}</Text>
           </Box>
 
           {hasTribunal && (
@@ -152,6 +152,7 @@ MesureListItem.propTypes = {
   mesure: PropTypes.shape({
     age: PropTypes.string,
     cabinet: PropTypes.string,
+    champProtection: PropTypes.string,
     civilite: PropTypes.string,
     codePostal: PropTypes.string,
     currentStatus: PropTypes.string,
@@ -159,13 +160,13 @@ MesureListItem.propTypes = {
     id: PropTypes.number,
     isUrgent: PropTypes.bool,
     judgmentDate: PropTypes.string,
-    lieu_vie: PropTypes.string,
+    lieuVie: PropTypes.string,
+    natureMesure: PropTypes.string,
     numeroDossier: PropTypes.string,
     numeroRg: PropTypes.string,
     status: PropTypes.string,
     tiId: PropTypes.number,
     tribunal: PropTypes.string,
-    type: PropTypes.string,
     ville: PropTypes.string,
   }).isRequired,
   onClick: PropTypes.func,

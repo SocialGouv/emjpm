@@ -18,7 +18,8 @@ export const MandataireMesure = (props) => {
     lieuVie,
     status,
     tribunal,
-    type,
+    natureMesure,
+    champProtection,
     ville,
     pays,
     antenne,
@@ -40,8 +41,12 @@ export const MandataireMesure = (props) => {
         <Flex p="5">
           <Box flex="1">
             <Box mb={4}>
-              <Text sx={subtitle}>Type de mesure</Text>
-              <Text sx={content}>{type}</Text>
+              <Text sx={subtitle}>Nature de la mesure</Text>
+              <Text sx={content}>{mesureFormatter.formatNatureMesure(natureMesure)}</Text>
+            </Box>
+            <Box mb={4}>
+              <Text sx={subtitle}>Champ de la protection</Text>
+              <Text sx={content}>{mesureFormatter.formatChampProtection(champProtection)}</Text>
             </Box>
 
             <Box mb={4}>

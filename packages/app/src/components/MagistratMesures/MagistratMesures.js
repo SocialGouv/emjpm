@@ -14,14 +14,14 @@ const RESULT_PER_PAGE = 20;
 
 const MagistratMesures = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { mesureType, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+  const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
 
   const queryVariables = {
     offset: currentOffset,
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: mesureStatus ? mesureStatus.value : null,
-    type: mesureType ? mesureType.value : null,
+    natureMesure: natureMesure ? natureMesure.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES, {

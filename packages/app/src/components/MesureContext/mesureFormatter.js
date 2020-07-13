@@ -6,6 +6,8 @@ export const mesureFormatter = {
   formatMajeurProtege,
   formatPays,
   formatLieuVie,
+  formatNatureMesure,
+  formatChampProtection,
 };
 
 function formatLieuVie(lieuVie) {
@@ -13,6 +15,20 @@ function formatLieuVie(lieuVie) {
     return "";
   }
   return MESURE_PROTECTION.LIEU_VIE_MAJEUR.byKey[lieuVie];
+}
+
+function formatNatureMesure(natureMesure) {
+  if (!natureMesure) {
+    return "";
+  }
+  return MESURE_PROTECTION.NATURE_MESURE.byKey[natureMesure];
+}
+
+function formatChampProtection(champProtection) {
+  if (!champProtection) {
+    return "";
+  }
+  return MESURE_PROTECTION.CHAMP_PROTECTION.byKey[champProtection];
 }
 
 function formatMajeurProtege(civilite, realAge) {

@@ -12,7 +12,8 @@ Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
   } ${
     (mesure.cabinet && `cabinet ${mesure.cabinet}`) || ""
   }, vous a confié une nouvelle mesure :
-- "type de mesure": ${mesure.type}
+- "nature de la mesure": ${mesure.nature_mesure}
+- "champ de la protection": ${mesure.champ_protection}
 - "civilité": ${mesure.civilite}
 - "année de naissance": ${mesure.annee_naissance}.
 

@@ -50,7 +50,7 @@ export const MESURES = gql`
   query mesures(
     $limit: Int
     $antenne: Int
-    $type: String
+    $natureMesure: nature_mesure_type
     $status: String
     $excludeStatus: String
     $searchText: String
@@ -61,7 +61,7 @@ export const MESURES = gql`
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         _not: { status: { _eq: $excludeStatus } }
-        type: { _eq: $type }
+        nature_mesure: { _eq: $nature_mesure }
         antenne_id: { _eq: $antenne }
       }
     ) {
@@ -77,7 +77,7 @@ export const MESURES = gql`
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         _not: { status: { _eq: $excludeStatus } }
-        type: { _eq: $type }
+        nature_mesure: { _eq: $nature_mesure }
         antenne_id: { _eq: $antenne }
       }
     ) {
@@ -104,7 +104,8 @@ export const MESURES = gql`
         etablissement
       }
       status
-      type
+      nature_mesure
+      champ_protection
       ville
       lieu_vie
       numero_rg

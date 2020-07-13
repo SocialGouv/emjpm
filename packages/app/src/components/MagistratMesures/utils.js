@@ -7,7 +7,8 @@ export const formatMandatairesMesureList = (mesureList) => {
       code_postal,
       numero_dossier,
       antenne_id,
-      type,
+      nature_mesure,
+      champ_protection,
       ville,
       status,
       id,
@@ -40,7 +41,8 @@ export const formatMandatairesMesureList = (mesureList) => {
       numeroRg: numero_rg ? numero_rg : null,
       lieuVie: lieu_vie ? lieu_vie : null,
       status: status ? status : null,
-      type: type ? type : null,
+      natureMesure: nature_mesure ? nature_mesure : null,
+      champProtection: champ_protection ? champ_protection : null,
       ville: ville ? ville : null,
     };
   });

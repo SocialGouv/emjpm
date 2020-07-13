@@ -44,7 +44,8 @@ export const ACCEPT_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         lieu_vie
         numero_rg

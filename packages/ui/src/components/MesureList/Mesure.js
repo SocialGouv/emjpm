@@ -35,7 +35,8 @@ const Mesure = (props) => {
   const { currentMesure, currentPanelType, setCurrentMesure, setPanelType } = useContext(MesureContext);
 
   const {
-    type,
+    natureMesure,
+    champProtection,
     ville,
     numeroRg,
     dateNominationFormated,
@@ -82,7 +83,7 @@ const Mesure = (props) => {
               {numeroRg || 'RG-XXXXXX'}
               <Text sx={statusStyle(status)}>{currentStatus || 'non renseigné'}</Text>
             </Text>
-            <Text sx={subtitleStyle}>{type || 'type de mesure non renseigné'}</Text>
+            <Text sx={subtitleStyle}>{natureMesure || ''}</Text>
             {!isMagistrat && (
               <Text mt="4px" sx={subtitleStyle}>
                 {tribunal || 'Tribunal non renseigné'} {cabinet}
@@ -201,7 +202,8 @@ const Mesure = (props) => {
               <EditComponent
                 currentMesure={currentMesure}
                 dateNomination={dateNomination}
-                type={type}
+                natureMesure={natureMesure}
+                champProtection={champProtection}
                 tribunal={tribunal}
                 cabinet={cabinet}
                 lieuVie={lieuVie}
@@ -239,6 +241,7 @@ Mesure.propTypes = {
   age: PropTypes.string.isRequired,
   antenneId: PropTypes.number,
   cabinet: PropTypes.string,
+  champProtection: PropTypes.string,
   civilite: PropTypes.string.isRequired,
   codePostal: PropTypes.string.isRequired,
   dateNomination: PropTypes.string.isRequired,
@@ -250,13 +253,13 @@ Mesure.propTypes = {
   latitude: PropTypes.number.isRequired,
   lieuVie: PropTypes.string.isRequired,
   longitude: PropTypes.number.isRequired,
+  natureMesure: PropTypes.string.isRequired,
   numeroDossier: PropTypes.string,
   numeroRg: PropTypes.string.isRequired,
   onPanelOpen: PropTypes.func,
   status: PropTypes.string.isRequired,
   tiId: PropTypes.number,
   tribunal: PropTypes.string,
-  type: PropTypes.string.isRequired,
   ville: PropTypes.string.isRequired,
 };
 
@@ -268,6 +271,7 @@ Mesure.defaultProps = {
   RemoveComponent: null,
   antenneId: null,
   cabinet: null,
+  champProtection: null,
   isMagistrat: false,
   isUrgent: false,
   judgmentDate: null,

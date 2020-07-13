@@ -6,7 +6,6 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { MESURE_TYPE_LABEL_VALUE } from "../../constants/mesures";
 import { magistratMesureEditSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util";
 import { MesureContext } from "../MesureContext";
@@ -14,7 +13,9 @@ import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
 
 export const MagistratMesureEdit = () => {
-  const { id, age, civilite, numeroRg, type, cabinet } = useContext(MesureContext);
+  const { id, age, civilite, numeroRg, natureMesure, champProtection, cabinet } = useContext(
+    MesureContext
+  );
   const [updateMesure] = useMutation(EDIT_MESURE, {
     onCompleted() {
       Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
@@ -32,7 +33,8 @@ export const MagistratMesureEdit = () => {
           civilite: values.civilite.value,
           id: id,
           numero_rg: values.numero_rg,
-          type: values.type.value,
+          nature_mesure: values.nature_mesure.value,
+          champ_protection: values.champ_protection.value,
         },
       });
 
@@ -44,7 +46,8 @@ export const MagistratMesureEdit = () => {
       cabinet: cabinet ? cabinet : "",
       civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
       numero_rg: numeroRg,
-      type: { label: type, value: type },
+      nature_mesure: findOption(MESURE_PROTECTION.NATURE_MESURE.options, natureMesure),
+      champ_protection: findOption(MESURE_PROTECTION.CHAMP_PROTECTION.options, champProtection),
     },
   });
 
@@ -66,15 +69,27 @@ export const MagistratMesureEdit = () => {
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Select
-              id="type"
-              name="type"
-              placeholder="Type de mesure"
-              value={formik.values.type}
-              hasError={formik.errors.type && formik.touched.type}
-              onChange={(option) => formik.setFieldValue("type", option)}
-              options={MESURE_TYPE_LABEL_VALUE}
+              id="nature_mesure"
+              name="nature_mesure"
+              placeholder="Nature de la mesure"
+              value={formik.values.nature_mesure}
+              hasError={formik.errors.nature_mesure && formik.touched.nature_mesure}
+              onChange={(option) => formik.setFieldValue("nature_mesure", option)}
+              options={MESURE_PROTECTION.NATURE_MESURE.options}
             />
-            <InlineError message={formik.errors.type} fieldId="type" />
+            <InlineError message={formik.errors.nature_mesure} fieldId="nature_mesure" />
+          </Field>
+          <Field>
+            <Select
+              id="champ_protection"
+              name="champ_protection"
+              placeholder="Champ de la protection"
+              value={formik.values.champ_protection}
+              hasError={formik.errors.champ_protection && formik.touched.champ_protection}
+              onChange={(option) => formik.setFieldValue("champ_protection", option)}
+              options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
+            />
+            <InlineError message={formik.errors.champ_protection} fieldId="champ_protection" />
           </Field>
           <Field>
             <Select

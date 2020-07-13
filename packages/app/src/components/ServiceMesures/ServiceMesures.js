@@ -14,7 +14,7 @@ const RESULT_PER_PAGE = 20;
 const ServiceMesures = (props) => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { mesureType, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
+  const { natureMesure, mesureStatus, antenne, debouncedSearchText } = useContext(FiltersContext);
 
   let currentMesureType = null;
   if (isOnlyWaiting) {
@@ -30,7 +30,7 @@ const ServiceMesures = (props) => {
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: currentMesureType,
     excludeStatus: isOnlyWaiting ? "" : "Mesure en attente",
-    type: mesureType ? mesureType.value : null,
+    natureMesure: natureMesure ? natureMesure.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES, {

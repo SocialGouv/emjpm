@@ -1,35 +1,35 @@
 import { addMonths, isBefore } from "date-fns";
 import {
-  MesureTypeCategory,
-  MesureTypeCategoryEvolution,
-  MesureTypeCategoryStatistic,
+  MesureNatureCategory,
+  MesureNatureCategoryEvolution,
+  MesureNatureCategoryStatistic,
   MonthlyNumber
 } from "../../../../types/resolvers-types";
 
-const buildMesureCategoryTypeStatistic = (
-  mesureTypeCategory: MesureTypeCategory
+const buildMesureCategoryNatureStatistic = (
+  mesureNatureCategory: MesureNatureCategory
 ) => {
   return {
-    mesureTypeCategory,
+    mesureNatureCategory,
     number: 0
   };
 };
 
-export const buildMesureTypeCategoryStatistics: () => MesureTypeCategoryStatistic[] = () => {
+export const buildMesureNatureCategoryStatistics: () => MesureNatureCategoryStatistic[] = () => {
   return [
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.Tutelle),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.CuratelleRenforcee),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.CuratelleSimple),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.SauvegardeJustice),
-    buildMesureCategoryTypeStatistic(MesureTypeCategory.Other)
+    buildMesureCategoryNatureStatistic(MesureNatureCategory.Tutelle),
+    buildMesureCategoryNatureStatistic(MesureNatureCategory.CuratelleRenforcee),
+    buildMesureCategoryNatureStatistic(MesureNatureCategory.CuratelleSimple),
+    buildMesureCategoryNatureStatistic(MesureNatureCategory.SauvegardeJustice),
+    buildMesureCategoryNatureStatistic(MesureNatureCategory.Other)
   ];
 };
 
-const buildMesureTypeCategoryEvolution = (
+const buildMesureNatureCategoryEvolution = (
   start: string,
   end: string,
-  mesureTypeCategory: MesureTypeCategory
-): MesureTypeCategoryEvolution => {
+  mesureNatureCategory: MesureNatureCategory
+): MesureNatureCategoryEvolution => {
   const startDate = new Date(start);
   const endDate = new Date(end);
   let refDate = startDate;
@@ -45,33 +45,33 @@ const buildMesureTypeCategoryEvolution = (
   }
   return {
     end,
-    mesureTypeCategory,
+    mesureNatureCategory,
     monthlyEvolutions,
     start
   };
 };
 
-export const buildMesureTypeCategoryEvolutions = (
+export const buildMesureNatureCategoryEvolutions = (
   start: string,
   end: string
 ) => {
   return [
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Tutelle),
-    buildMesureTypeCategoryEvolution(
+    buildMesureNatureCategoryEvolution(start, end, MesureNatureCategory.Tutelle),
+    buildMesureNatureCategoryEvolution(
       start,
       end,
-      MesureTypeCategory.CuratelleRenforcee
+      MesureNatureCategory.CuratelleRenforcee
     ),
-    buildMesureTypeCategoryEvolution(
+    buildMesureNatureCategoryEvolution(
       start,
       end,
-      MesureTypeCategory.CuratelleSimple
+      MesureNatureCategory.CuratelleSimple
     ),
-    buildMesureTypeCategoryEvolution(
+    buildMesureNatureCategoryEvolution(
       start,
       end,
-      MesureTypeCategory.SauvegardeJustice
+      MesureNatureCategory.SauvegardeJustice
     ),
-    buildMesureTypeCategoryEvolution(start, end, MesureTypeCategory.Other)
+    buildMesureNatureCategoryEvolution(start, end, MesureNatureCategory.Other)
   ];
 };

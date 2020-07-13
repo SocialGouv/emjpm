@@ -2,61 +2,61 @@ import { addMonths } from "date-fns";
 import { DataSource } from "../../../datasource";
 import { logger } from "../../../logger";
 import {
-  MesureTypeCategoryEvolution,
-  QueryMesureTypeCategoryEvolutionArgs
+  MesureNatureCategoryEvolution,
+  QueryMesureNatureCategoryEvolutionArgs,
 } from "../../../types/resolvers-types";
 import { mesureStatAdapter } from "./utils/mesure-stat.adapter";
-import { buildMesureTypeCategoryEvolutions } from "./utils/mesure-stat.builder";
+import { buildMesureNatureCategoryEvolutions } from "./utils/mesure-stat.builder";
 
-export const mesureTypeCategoryEvolution = async (
+export const mesureNatureCategoryEvolution = async (
   _: any,
-  args: QueryMesureTypeCategoryEvolutionArgs,
+  args: QueryMesureNatureCategoryEvolutionArgs,
   { dataSources }: { dataSources: DataSource }
 ) => {
-  const res: MesureTypeCategoryEvolution[] = buildMesureTypeCategoryEvolutions(
+  const res: MesureNatureCategoryEvolution[] = buildMesureNatureCategoryEvolutions(
     args.start,
     args.end
   );
 
-  const months = res[0].monthlyEvolutions.map(elm => ({
+  const months = res[0].monthlyEvolutions.map((elm) => ({
     month: elm.month,
-    year: elm.year
+    year: elm.year,
   }));
 
-  for (const mesureTypeEvolution of res) {
-    const currentTypeCategory = mesureTypeEvolution.mesureTypeCategory;
+  for (const mesureNatureEvolution of res) {
+    const currentNatureCategory = mesureNatureEvolution.mesureNatureCategory;
 
     for (const month of months) {
       logger.info(
-        `${month.year} ${month.month} - ${currentTypeCategory} - START`
+        `${month.year} ${month.month} - ${currentNatureCategory} - START`
       );
 
       const startMonthDate = new Date(month.year, month.month, 1);
       const endMonthDate = addMonths(startMonthDate, 1);
 
-      const mesureTypes = mesureStatAdapter.adaptCategory(currentTypeCategory);
+      const mesureNatures = mesureStatAdapter.adaptCategory(currentNatureCategory);
 
       const mesureNumberResult = await dataSources.mesureAPI.countMesures({
         closed: {
-          gt_or_null: startMonthDate.toISOString()
+          gt_or_null: startMonthDate.toISOString(),
         },
         court: args.court,
         department: args.department,
+        nature: { _in: mesureNatures },
         opening: {
-          lt: endMonthDate.toISOString()
+          lt: endMonthDate.toISOString(),
         },
         region: args.region,
-        type: { _in: mesureTypes }
       });
       const mesureNumber =
         mesureNumberResult.data.mesures_aggregate.aggregate.count;
 
       logger.info(
-        `${month.year} ${month.month} - ${mesureNumber} ${currentTypeCategory}`
+        `${month.year} ${month.month} - ${mesureNumber} ${currentNatureCategory}`
       );
 
-      const monthlyEvolution = mesureTypeEvolution.monthlyEvolutions.find(
-        elm => elm.month === month.month && elm.year === month.year
+      const monthlyEvolution = mesureNatureEvolution.monthlyEvolutions.find(
+        (elm) => elm.month === month.month && elm.year === month.year
       );
       if (!monthlyEvolution) {
         logger.error(
@@ -69,7 +69,7 @@ export const mesureTypeCategoryEvolution = async (
       monthlyEvolution.number = mesureNumber;
 
       logger.info(
-        `${month.year} ${month.month} - ${currentTypeCategory} - END`
+        `${month.year} ${month.month} - ${currentNatureCategory} - END`
       );
     }
   }

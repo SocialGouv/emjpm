@@ -44,6 +44,8 @@ async function importMesuresFile({
   mesuresToImport.forEach((data) => {
     if (data.type) {
       data.type = data.type.toLowerCase();
+      data.nature_mesure = adaptNatureMesure(data.type);
+      data.champ_protection = adaptChampMesure(data.type);
     }
     if (data.residence) {
       data.residence = data.residence.toLowerCase();
@@ -295,7 +297,8 @@ const prepareMesure = async (
   const data = {
     date_nomination: mesureDatas.date_nomination,
     ville: mesureDatas.ville,
-    type: mesureDatas.type,
+    nature_mesure: mesureDatas.nature_mesure,
+    champ_protection: mesureDatas.champ_protection,
     status: mesureDatas.status,
     code_postal: mesureDatas.code_postal,
     civilite: mesureDatas.civilite,
@@ -347,5 +350,63 @@ const toDate = (dateStr) => {
   const [day, month, year] = dateStr.split("/").map((x) => parseInt(x));
   return new Date(year, month - 1, day);
 };
+
+function adaptChampMesure(type) {
+  switch (type) {
+    case "tutelle à la personne":
+    case "curatelle simple à la personne":
+    case "curatelle renforcée à la personne":
+      return "protection_personne";
+    case "curatelle simple aux biens":
+    case "curatelle renforcée aux biens":
+    case "tutelle aux biens":
+      return "protection_bien";
+    case "curatelle simple aux biens et à la personne":
+    case "tutelle aux biens et à la personne":
+    case "curatelle renforcée aux biens et à la personne":
+      return "protection_bien_personne";
+    default:
+      return null;
+  }
+}
+
+function adaptNatureMesure(type) {
+  if (type === null || type === undefined) {
+    return null;
+  }
+  switch (type) {
+    case "curatelle":
+    case "curatelle simple":
+    case "curatelle simple à la personne":
+    case "curatelle simple aux biens":
+    case "curatelle simple aux biens et à la personne":
+      return "curatelle_simple";
+    case "curatelle renforcée":
+    case "curatelle renforcée à la personne":
+    case "curatelle renforcée aux biens":
+    case "curatelle renforcée aux biens et à la personne":
+      return "curatelle_renforcee";
+    case "maj":
+      return "mesure_accompagnement_judiciaire";
+    case "mandat de protection future":
+      return "mandat_protection_future";
+    case "mesure ad hoc":
+      return "mesure_ad_hoc";
+    case "sauvegarde de justice":
+    case "sauvegarde de justice avec mandat spécial":
+      return "sauvegarde_justice";
+    case "subrogé curateur":
+      return "subroge_curateur";
+    case "subrogé tuteur":
+      return "subroge_tuteur";
+    case "tutelle":
+    case "tutelle à la personne":
+    case "tutelle aux biens":
+    case "tutelle aux biens et à la personne":
+      return "tutelle";
+    default:
+      throw new Error(`unknown type ${type}`);
+  }
+}
 
 module.exports = actionsMesuresImporter;

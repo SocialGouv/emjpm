@@ -29,7 +29,7 @@ const dataProgress = {
   status: 'Mesure en cours',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -53,7 +53,7 @@ const dataWaiting = {
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -77,7 +77,7 @@ const dataWaitingUrgent = {
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -101,7 +101,7 @@ const dataClose = {
   status: 'Eteindre mesure',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -125,7 +125,7 @@ const dataMagistratUrgent = {
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -149,7 +149,7 @@ const dataMagistrat = {
   status: 'Mesure en attente',
   tiId: null,
   tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
