@@ -92,8 +92,8 @@ export const ServiceMesureCloseForm = (props) => {
               id="cause_sortie"
               name="cause_sortie"
               placeholder="Raison de la fin de mandat"
-              value={formik.values.type}
-              hasError={formik.errors.type && formik.touched.type}
+              value={formik.values.cause_sortie}
+              hasError={formik.errors.cause_sortie && formik.touched.cause_sortie}
               onChange={(option) => formik.setFieldValue("cause_sortie", option)}
               options={MESURE_PROTECTION.CAUSE_SORTIE.options}
             />

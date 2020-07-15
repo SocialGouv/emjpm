@@ -3,7 +3,7 @@ import { Card, Heading2, Heading4, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { getMesureCategoryTypeLabel } from "../../util/mesures";
+import { getMesureCategoryNatureLabel } from "../../util/mesures";
 import { FiltersContext } from "../DirectionFilters/context";
 import { MesureAllocationChart } from "./MesureAllocationChart";
 import { GET_CATEGORY_STATS } from "./queries";
@@ -45,11 +45,11 @@ export const MesureAllocation = () => {
     );
   }
 
-  const mesures = data.mesureTypeCategoryStatistics.map((mesure) => {
+  const mesures = data.mesureNatureCategoryStatistics.map((mesure) => {
     return {
-      name: getMesureCategoryTypeLabel(mesure.mesureTypeCategory),
+      name: getMesureCategoryNatureLabel(mesure.mesureNatureCategory),
       "nombre de mesures": mesure.number,
-      type: mesure.mesureTypeCategory,
+      nature: mesure.mesureNatureCategory,
     };
   });
 

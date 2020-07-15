@@ -124,12 +124,12 @@ export interface SearchMesuresParam {
   };
   region?: NullableNumber;
   status?: MesureStatus;
-  type?: {
+  nature?: {
     _in: string[];
   };
 }
 
 export type SearchMesureResult = Pick<
   Mesures,
-  "date_nomination" | "cabinet" | "civilite" | "status" | "type" | "date_fin_mesure"
+  "date_nomination" | "cabinet" | "civilite" | "status" | "nature_mesure" | "date_fin_mesure"
 >;

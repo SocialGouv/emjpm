@@ -26,7 +26,8 @@ export const CLOSE_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         lieu_vie
         numero_rg
@@ -45,7 +46,8 @@ export const EDIT_MESURE = gql`
     $department_id: Int
     $antenne_id: Int
     $date_nomination: date
-    $type: String
+    $nature_mesure: nature_mesure_type!
+    $champ_protection: champ_protection_type
     $lieu_vie: lieu_vie_type
     $code_postal: String
     $ville: String
@@ -64,7 +66,8 @@ export const EDIT_MESURE = gql`
       _set: {
         date_nomination: $date_nomination
         department_id: $department_id
-        type: $type
+        nature_mesure: $nature_mesure
+        champ_protection: $champ_protection
         antenne_id: $antenne_id
         lieu_vie: $lieu_vie
         code_postal: $code_postal
@@ -95,7 +98,8 @@ export const EDIT_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         latitude
         longitude
@@ -131,7 +135,8 @@ export const REACTIVATE_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         lieu_vie
         numero_rg
@@ -165,7 +170,8 @@ export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
     $department_id: Int
-    $type: String!
+    $nature_mesure: nature_mesure_type!
+    $champ_protection: champ_protection_type
     $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
@@ -183,7 +189,8 @@ export const ADD_MESURE = gql`
       objects: {
         department_id: $department_id
         date_nomination: $date_nomination
-        type: $type
+        nature_mesure: $nature_mesure
+        champ_protection: $champ_protection
         ti_id: $ti_id
         lieu_vie: $lieu_vie
         code_postal: $code_postal
@@ -215,7 +222,8 @@ export const ADD_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         latitude
         longitude

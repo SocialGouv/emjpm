@@ -13,9 +13,9 @@ import {
 } from "recharts";
 
 import {
-  getMesureCategoryTypeColor,
-  getMesureCategoryTypeLabel,
-  MESURE_CATEGORY_TYPE_KEYS,
+  getMesureCategoryNatureColor,
+  getMesureCategoryNatureLabel,
+  MESURE_CATEGORY_NATURE_KEYS,
 } from "../../util/mesures";
 import { getEvolution } from "./getEvolution";
 
@@ -23,7 +23,7 @@ const MesureEvolutionChart = (props) => {
   const [selectedMesures, setMesures] = useState([]);
   const { data } = props;
 
-  const { evolutionDatas, evolutionFilters } = getEvolution(data.mesureTypeCategoryEvolution);
+  const { evolutionDatas, evolutionFilters } = getEvolution(data.mesureNatureCategoryEvolution);
 
   const selectMesures = (selectedOptions) => {
     if (selectedOptions) {
@@ -42,7 +42,7 @@ const MesureEvolutionChart = (props) => {
         <Select
           isMulti={true}
           options={evolutionFilters}
-          placeholder={"Affiner par type de mesures"}
+          placeholder={"Affiner par nature de mesures"}
           onChange={(selectedOptions) => selectMesures(selectedOptions)}
         />
       </Box>
@@ -54,7 +54,7 @@ const MesureEvolutionChart = (props) => {
             <CartesianGrid stroke="#f5f5f5" />
             <Tooltip />
             <Legend />
-            {MESURE_CATEGORY_TYPE_KEYS.filter((key) => {
+            {MESURE_CATEGORY_NATURE_KEYS.filter((key) => {
               return selectedMesures.includes(key) || selectedMesures.length === 0;
             }).map((key, index) => (
               <Line
@@ -62,8 +62,8 @@ const MesureEvolutionChart = (props) => {
                 type="monotone"
                 dot={false}
                 strokeWidth={2}
-                dataKey={getMesureCategoryTypeLabel(key)}
-                stroke={getMesureCategoryTypeColor(key)}
+                dataKey={getMesureCategoryNatureLabel(key)}
+                stroke={getMesureCategoryNatureColor(key)}
               />
             ))}
           </LineChart>

@@ -20,7 +20,7 @@ const dataProgress = {
   href: '/services/mesure/59185/',
   id: 59185,
   isUrgent: false,
-  judgmentDate: 'non renseigné',
+  judgmentDate: '',
   latitude: 43.712,
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
@@ -28,8 +28,8 @@ const dataProgress = {
   lieu_vie: 'domicile',
   status: 'Mesure en cours',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -44,7 +44,7 @@ const dataWaiting = {
   href: '/services/mesure/59185/',
   id: 59185,
   isUrgent: false,
-  judgmentDate: 'non renseigné',
+  judgmentDate: '',
   latitude: 43.712,
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
@@ -52,8 +52,8 @@ const dataWaiting = {
   lieu_vie: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -76,8 +76,8 @@ const dataWaitingUrgent = {
   lieu_vie: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -92,7 +92,7 @@ const dataClose = {
   href: '/services/mesure/59185/',
   id: 59185,
   isUrgent: false,
-  judgmentDate: 'non renseigné',
+  judgmentDate: '',
   latitude: 43.712,
   longitude: 7.23827,
   numeroDossier: 'AMBLPIE',
@@ -100,8 +100,8 @@ const dataClose = {
   lieu_vie: 'domicile',
   status: 'Eteindre mesure',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -124,8 +124,8 @@ const dataMagistratUrgent = {
   lieu_vie: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 
@@ -148,8 +148,8 @@ const dataMagistrat = {
   lieu_vie: 'domicile',
   status: 'Mesure en attente',
   tiId: null,
-  tribunal: 'Tribunal non renseigné',
-  type: 'sauvegarde de justice',
+  tribunal: '',
+  natureMesure: 'sauvegarde_justice',
   ville: 'NICE',
 };
 

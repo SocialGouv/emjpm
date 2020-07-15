@@ -44,7 +44,8 @@ export const MESURES = gql`
         etablissement
       }
       status
-      type
+      nature_mesure
+      champ_protection
       ville
       lieu_vie
       numero_rg

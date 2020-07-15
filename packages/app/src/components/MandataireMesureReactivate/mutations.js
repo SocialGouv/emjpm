@@ -17,7 +17,8 @@ export const REACTIVATE_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         lieu_vie
         numero_rg

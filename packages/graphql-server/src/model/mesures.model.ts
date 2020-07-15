@@ -6,29 +6,27 @@ export type MesureStatus =
   | "Eteindre mesure"
   | null;
 
-export type MesureType =
-  | "curatelle"
-  | "curatelle renforcée"
-  | "curatelle renforcée à la personne"
-  | "curatelle renforcée aux biens"
-  | "curatelle renforcée aux biens et à la personne"
-  | "curatelle simple"
-  | "curatelle simple à la personne"
-  | "curatelle simple aux biens"
-  | "curatelle simple aux biens et à la personne"
-  | "maj"
-  | "mandat de protection future"
-  | "mesure ad hoc"
-  | "sauvegarde de justice"
-  | "sauvegarde de justice avec mandat spécial"
-  | "subrogé curateur"
-  | "subrogé tuteur"
+// TODO(tglatt): use constants from @emjpm/core
+export type MesureNature =
+  | "curatelle_renforcee"
+  | "curatelle_simple"
+  | "mandat_protection_future"
+  | "mesure_accompagnement_judiciaire"
+  | "mesure_ad_hoc"
+  | "sauvegarde_justice"
+  | "subroge_curateur"
+  | "subroge_tuteur"
   | "tutelle"
-  | "tutelle à la personne"
-  | "tutelle aux biens"
-  | "tutelle aux biens et à la personne"
   | null;
 
+// TODO(tglatt): use constants from @emjpm/core
+export type ChampProtection =
+  | "protection_bien"
+  | "protection_personne"
+  | "protection_bien_personne"
+  | null;
+
+// TODO(tglatt): use constants from @emjpm/core
 export type MesureLieuVie =
   | "domicile"
   | "etablissement"
@@ -36,8 +34,10 @@ export type MesureLieuVie =
   | "sdf"
   | null;
 
+// TODO(tglatt): use constants from @emjpm/core
 export type Civilite = "madame" | "monsieur" | null;
 
+// TODO(tglatt): use constants from @emjpm/core
 export type MesureCauseSortie =
   | "caducite"
   | "deces"
@@ -53,7 +53,8 @@ export interface Mesures {
   mandataire_id: NullableNumber;
   created_at: NullableDate;
   annee_naissance: NullableString;
-  type: MesureType;
+  nature_mesure: MesureNature;
+  champ_protection: ChampProtection;
   date_nomination: NullableDate;
   lieu_vie: MesureLieuVie;
   civilite: Civilite;

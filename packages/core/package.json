@@ -53,5 +53,8 @@
     "rollup": "^2.10.9",
     "rollup-plugin-babel": "^4.4.0",
     "sort-package-json": "^1.42.2"
+  },
+  "dependencies": {
+    "date-fns": "^2.14.0"
   }
 }

@@ -1,21 +1,21 @@
 import gql from "graphql-tag";
 
 export const GET_CATEGORY_EVOLUTION = gql`
-  query mesureTypeCategoryEvolution(
+  query mesureNatureCategoryEvolution(
     $end: String!
     $start: String!
     $court: Int
     $department: Int
     $region: Int
   ) {
-    mesureTypeCategoryEvolution(
+    mesureNatureCategoryEvolution(
       end: $end
       start: $start
       court: $court
       department: $department
       region: $region
     ) {
-      mesureTypeCategory
+      mesureNatureCategory
       start
       end
       monthlyEvolutions {
