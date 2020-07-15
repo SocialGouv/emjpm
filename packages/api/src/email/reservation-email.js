@@ -1,6 +1,6 @@
 const sentry = require("../utils/sentry");
 const logger = require("../utils/logger");
-const { format } = require("date-fns");
+const { mesureFormatter } = require("@emjpm/core");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
@@ -9,13 +9,18 @@ const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
   Pour information, le ${ti.etablissement} ${
     (mesure.cabinet && `cabinet ${mesure.cabinet},`) || ""
   } a décidé de vous confier une nouvelle mesure :
-  - type de mesure: ${mesure.type}
+  - nature de la mesure: ${mesureFormatter.formatNatureMesure(
+    mesure.nature_mesure
+  )}
+  - champ de la protection: ${mesureFormatter.formatChampProtection(
+    mesure.champ_protection
+  )}
   - civilité: ${mesure.civilite}
   - année de naissance: ${mesure.annee_naissance}
   ${
     mesure.judgment_date
       ? `- date prévisionnelle du jugement: ` +
-        format(new Date(mesure.judgment_date), "dd/MM/yyyy")
+        mesureFormatter.formatJudgmentDate(mesure.judgment_date)
       : ""
   }
 
@@ -43,7 +48,13 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
     (mesure.cabinet && `cabinet ${mesure.cabinet},`) || ""
   } a décidé de vous confier une nouvelle mesure :
   <br>
-  - type de mesure: ${mesure.type}
+  - nature de la mesure: ${mesureFormatter.formatNatureMesure(
+    mesure.nature_mesure
+  )}
+  <br>
+  - champ de la protection: ${mesureFormatter.formatChampProtection(
+    mesure.champ_protection
+  )}
   <br>
   - civilité: ${mesure.civilite}
   <br>
@@ -53,7 +64,7 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
       ? `
       <br>
       - date prévisionnelle du jugement: ` +
-        format(new Date(mesure.judgment_date), "dd/MM/yyyy")
+        mesureFormatter.formatJudgmentDate(mesure.judgment_date)
       : ""
   }
 <br><br>

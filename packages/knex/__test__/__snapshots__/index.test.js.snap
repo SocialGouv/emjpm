@@ -3347,6 +3347,12 @@ Object {
     "nullable": true,
     "type": "USER-DEFINED",
   },
+  "champ_protection": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
   "civilite": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3443,6 +3449,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "nature_mesure": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
+  },
   "numero_dossier": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -3478,12 +3490,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
-  },
-  "type": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
   },
   "type_etablissement": Object {
     "defaultValue": null,

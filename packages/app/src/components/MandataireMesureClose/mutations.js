@@ -24,7 +24,8 @@ export const CLOSE_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         lieu_vie
         mandataire_id

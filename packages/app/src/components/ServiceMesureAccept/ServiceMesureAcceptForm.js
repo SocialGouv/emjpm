@@ -7,12 +7,15 @@ import { Box, Flex, Text } from "rebass";
 
 import { COUNTRIES } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
-import { formatAntenneOptions } from "../../util/services";
 import { GeocodeCities } from "../Geocode";
 
 export const ServiceMesureAcceptForm = (props) => {
   const { mesure, service_antennes, onSubmit } = props;
-  const antenneOptions = formatAntenneOptions(service_antennes);
+
+  const antenneOptions = service_antennes.map((antenne) => ({
+    label: antenne.name,
+    value: antenne.id,
+  }));
 
   const formik = useFormik({
     onSubmit,

@@ -1,12 +1,9 @@
+import { MESURE_PROTECTION } from "@emjpm/core";
 import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import {
-  DEFAULT_MESURE_TYPE,
-  MESURE_STATUS_LABEL_VALUE,
-  MESURE_TYPE_LABEL_VALUE,
-} from "../../constants/mesures";
+import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
@@ -14,8 +11,8 @@ const MandataireFilters = (props) => {
   const { isStatusHidden } = props;
 
   const {
-    mesureType,
-    changeMesureType,
+    natureMesure,
+    changeNatureMesure,
     mesureStatus,
     changeMesureStatus,
     searchText,
@@ -31,11 +28,11 @@ const MandataireFilters = (props) => {
             <Box width="200px" mr={1}>
               <Select
                 size="small"
-                instanceId={"mesureType"}
-                options={[DEFAULT_MESURE_TYPE].concat(MESURE_TYPE_LABEL_VALUE)}
-                placeholder={"type de la mesure"}
-                value={mesureType}
-                onChange={(option) => changeMesureType(option)}
+                instanceId={"natureMesure"}
+                options={[DEFAULT_MESURE_NATURE].concat(MESURE_PROTECTION.NATURE_MESURE.options)}
+                placeholder={"nature de la mesure"}
+                value={natureMesure}
+                onChange={(option) => changeNatureMesure(option)}
               />
             </Box>
             {!isStatusHidden && (

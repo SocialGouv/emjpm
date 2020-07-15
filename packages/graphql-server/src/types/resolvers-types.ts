@@ -30,7 +30,7 @@ export type DepartmentAvailibility = {
   max: Scalars['Int'];
 };
 
-export enum MesureTypeCategory {
+export enum MesureNatureCategory {
   Tutelle = 'TUTELLE',
   CuratelleSimple = 'CURATELLE_SIMPLE',
   CuratelleRenforcee = 'CURATELLE_RENFORCEE',
@@ -38,17 +38,17 @@ export enum MesureTypeCategory {
   Other = 'OTHER'
 }
 
-export type MesureTypeCategoryEvolution = {
-   __typename?: 'MesureTypeCategoryEvolution';
+export type MesureNatureCategoryEvolution = {
+   __typename?: 'MesureNatureCategoryEvolution';
   start: Scalars['String'];
   end: Scalars['String'];
-  mesureTypeCategory: MesureTypeCategory;
+  mesureNatureCategory: MesureNatureCategory;
   monthlyEvolutions: Array<MonthlyNumber>;
 };
 
-export type MesureTypeCategoryStatistic = {
-   __typename?: 'MesureTypeCategoryStatistic';
-  mesureTypeCategory: MesureTypeCategory;
+export type MesureNatureCategoryStatistic = {
+   __typename?: 'MesureNatureCategoryStatistic';
+  mesureNatureCategory: MesureNatureCategory;
   number: Scalars['Int'];
 };
 
@@ -81,8 +81,8 @@ export type Query = {
   closedMesureNumber: Scalars['Int'];
   openMesureNumber: Scalars['Int'];
   availableMesureNumber: Scalars['Int'];
-  mesureTypeCategoryStatistics: Array<MesureTypeCategoryStatistic>;
-  mesureTypeCategoryEvolution: Array<MesureTypeCategoryEvolution>;
+  mesureNatureCategoryStatistics: Array<MesureNatureCategoryStatistic>;
+  mesureNatureCategoryEvolution: Array<MesureNatureCategoryEvolution>;
   departmentAvailabilities: Array<DepartmentAvailibility>;
 };
 
@@ -119,14 +119,14 @@ export type QueryAvailableMesureNumberArgs = {
 };
 
 
-export type QueryMesureTypeCategoryStatisticsArgs = {
+export type QueryMesureNatureCategoryStatisticsArgs = {
   region?: Maybe<Scalars['Int']>;
   department?: Maybe<Scalars['Int']>;
   court?: Maybe<Scalars['Int']>;
 };
 
 
-export type QueryMesureTypeCategoryEvolutionArgs = {
+export type QueryMesureNatureCategoryEvolutionArgs = {
   start: Scalars['String'];
   end: Scalars['String'];
   region?: Maybe<Scalars['Int']>;

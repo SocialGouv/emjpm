@@ -9,10 +9,10 @@ export const MESURE_PROTECTION = {
     mainlevee: 'mainlevée',
   }),
 
-  CHAMP_MESURE: buildKeys({
-    protection_bien: 'protection aux biens',
-    protection_bien_personne: 'protection aux biens et à la personne',
-    protection_personne: 'protection à la personne',
+  CHAMP_PROTECTION: buildKeys({
+    protection_bien: 'aux biens',
+    protection_bien_personne: 'aux biens et à la personne',
+    protection_personne: 'à la personne',
   }),
 
   CIVILITE: buildKeys({

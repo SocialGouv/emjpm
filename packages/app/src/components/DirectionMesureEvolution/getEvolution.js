@@ -1,18 +1,18 @@
 import { months } from "../../constants";
-import { getMesureCategoryTypeLabel } from "../../util/mesures";
+import { getMesureCategoryNatureLabel } from "../../util/mesures";
 
 const getEvolution = (data) => {
   const evolutionDatas = [];
   const evolutionFilters = [];
-  data.map((type, index) => {
+  data.map((nature, index) => {
     evolutionFilters[index] = {
-      label: getMesureCategoryTypeLabel(type.mesureTypeCategory),
-      value: type.mesureTypeCategory,
+      label: getMesureCategoryNatureLabel(nature.mesureNatureCategory),
+      value: nature.mesureNatureCategory,
     };
-    type.monthlyEvolutions.map((monthlyEvolution, index) => {
+    nature.monthlyEvolutions.map((monthlyEvolution, index) => {
       evolutionDatas[index] = {
         ...evolutionDatas[index],
-        [getMesureCategoryTypeLabel(type.mesureTypeCategory)]: monthlyEvolution.number,
+        [getMesureCategoryNatureLabel(nature.mesureNatureCategory)]: monthlyEvolution.number,
         Total: evolutionDatas[index]
           ? evolutionDatas[index].Total + monthlyEvolution.number
           : monthlyEvolution.number,

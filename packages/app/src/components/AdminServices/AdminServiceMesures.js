@@ -194,8 +194,12 @@ function buildTableColumns() {
       accessor: "numero_dossier",
     },
     {
-      Header: "Type",
-      accessor: "type",
+      Header: "Nature",
+      accessor: "nature_mesure",
+    },
+    {
+      Header: "Protection",
+      accessor: "champ_protection",
     },
     {
       Header: "année",

@@ -2,7 +2,7 @@ import {
   CountMandataireMesuresQueryResult,
   CountServiceMesuresQueryResult,
   SearchMesureResult,
-  SearchMesuresParam
+  SearchMesuresParam,
 } from "../types";
 import { AuthDataSource } from "./auth-datasource";
 
@@ -10,7 +10,9 @@ const convertDates = (mesure: SearchMesureResult) => {
   mesure.date_nomination = mesure.date_nomination
     ? new Date(mesure.date_nomination)
     : null;
-  mesure.date_fin_mesure = mesure.date_fin_mesure ? new Date(mesure.date_fin_mesure) : null;
+  mesure.date_fin_mesure = mesure.date_fin_mesure
+    ? new Date(mesure.date_fin_mesure)
+    : null;
   return mesure;
 };
 
@@ -28,13 +30,13 @@ export class MesureAPI extends AuthDataSource {
         cabinet
         civilite
         status
-        type
+        nature_mesure
         date_fin_mesure
       }
     }
   `;
 
-    return this.post("/", { query }).then(response => {
+    return this.post("/", { query }).then((response) => {
       return response.data.mesures.map(convertDates);
     });
   }
@@ -83,10 +85,10 @@ export class MesureAPI extends AuthDataSource {
       {
         operationName: "service_mesures",
         query,
-        variables: { serviceId }
+        variables: { serviceId },
       },
       {
-        headers: this.adminHeader
+        headers: this.adminHeader,
       }
     );
 
@@ -123,10 +125,10 @@ export class MesureAPI extends AuthDataSource {
       {
         operationName: "mandataire_mesures",
         query,
-        variables: { mandataireId }
+        variables: { mandataireId },
       },
       {
-        headers: this.adminHeader
+        headers: this.adminHeader,
       }
     );
     return response;
@@ -149,9 +151,11 @@ export class MesureAPI extends AuthDataSource {
 
   private buildFilters(params: SearchMesuresParam): string[] {
     const filters = [];
-    if (params.type) {
-      if (params.type._in) {
-        filters.push(`type: { _in: ${JSON.stringify(params.type._in)} }`);
+    if (params.nature) {
+      if (params.nature._in) {
+        filters.push(
+          `nature_mesure: { _in: ${JSON.stringify(params.nature._in)} }`
+        );
       }
     }
     if (params.created) {

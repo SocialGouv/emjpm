@@ -52,7 +52,7 @@ const subtitleStyle = {
   fontWeight: '600',
 };
 
-const typeStyle = {
+const natureStyle = {
   color: 'mediumGray',
   fontFamily: 'body',
   fontSize: '12px',
@@ -123,5 +123,5 @@ export {
   descriptionStyle,
   decorationStyle,
   cardStyle,
-  typeStyle,
+  natureStyle,
 };

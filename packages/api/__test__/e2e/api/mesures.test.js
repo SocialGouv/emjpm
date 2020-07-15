@@ -99,7 +99,8 @@ describe("POST /api/editors/mesures", () => {
         numero_rg: "RGXXXX123",
         lieu_vie: "etablissement",
         ti_id: global.ti.id,
-        type: "curatelle renforcée aux biens et à la personne",
+        nature_mesure: "curatelle_renforcee",
+        champ_protection: "protection_bien_personne",
       });
 
     expect(response.status).toBe(201);
@@ -141,7 +142,8 @@ describe("POST /api/editors/mesures/batch", () => {
             numero_rg: "RGXXXX123",
             lieu_vie: "etablissement",
             ti_id: global.ti.id,
-            type: "curatelle renforcée aux biens et à la personne",
+            nature_mesure: "curatelle_renforcee",
+            champ_protection: "protection_bien_personne",
           },
         ],
       });

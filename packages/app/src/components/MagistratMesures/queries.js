@@ -1,12 +1,17 @@
 import gql from "graphql-tag";
 
 export const MESURES = gql`
-  query magistratMesures($type: String, $status: String, $searchText: String, $offset: Int) {
+  query magistratMesures(
+    $natureMesure: nature_mesure_type
+    $status: String
+    $searchText: String
+    $offset: Int
+  ) {
     mesures_aggregate(
       where: {
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
-        type: { _eq: $type }
+        nature_mesure: { _eq: $natureMesure }
       }
     ) {
       aggregate {
@@ -17,7 +22,7 @@ export const MESURES = gql`
       where: {
         numero_rg: { _ilike: $searchText }
         status: { _eq: "Mesure en attente" }
-        type: { _eq: $type }
+        nature_mesure: { _eq: $natureMesure }
       }
       offset: $offset
       limit: 20
@@ -42,7 +47,8 @@ export const MESURES = gql`
         etablissement
       }
       status
-      type
+      nature_mesure
+      champ_protection
       ville
       lieu_vie
       numero_rg

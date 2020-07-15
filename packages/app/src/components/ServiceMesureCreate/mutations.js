@@ -13,7 +13,8 @@ export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
     $department_id: Int
-    $type: String!
+    $nature_mesure: nature_mesure_type!
+    $champ_protection: champ_protection_type
     $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
@@ -32,7 +33,8 @@ export const ADD_MESURE = gql`
       objects: {
         department_id: $department_id
         date_nomination: $date_nomination
-        type: $type
+        nature_mesure: $nature_mesure
+        champ_protection: $champ_protection
         ti_id: $ti_id
         lieu_vie: $lieu_vie
         code_postal: $code_postal
@@ -65,7 +67,8 @@ export const ADD_MESURE = gql`
           }
         }
         status
-        type
+        nature_mesure
+        champ_protection
         ville
         latitude
         longitude

@@ -2,6 +2,7 @@ const { format } = require("date-fns");
 
 const sentry = require("../utils/sentry");
 const logger = require("../utils/logger");
+const { mesureFormatter } = require("@emjpm/core");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
@@ -12,7 +13,12 @@ Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
   } ${
     (mesure.cabinet && `cabinet ${mesure.cabinet}`) || ""
   }, vous a confié une nouvelle mesure :
-- "type de mesure": ${mesure.type}
+- "nature de la mesure": ${mesureFormatter.formatNatureMesure(
+    mesure.nature_mesure
+  )}
+- "champ de la protection": ${mesureFormatter.formatChampProtection(
+    mesure.champ_protection
+  )}
 - "civilité": ${mesure.civilite}
 - "année de naissance": ${mesure.annee_naissance}.
 

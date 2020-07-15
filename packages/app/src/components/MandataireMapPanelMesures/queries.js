@@ -35,7 +35,8 @@ export const MESURES = gql`
       service_id
       status
       ti_id
-      type
+      nature_mesure
+      champ_protection
       ville
       departement {
         id
