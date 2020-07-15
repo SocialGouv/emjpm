@@ -16,12 +16,13 @@ const mesures = async (req, res) => {
     const service = await user.$relatedQuery("service");
 
     mesures = await Mesure.query()
+      .withGraphFetched("[etats]")
       .where("service_id", service.id)
       .where("status", "=", status);
   } else {
     const mandataire = await user.$relatedQuery("mandataire");
-
     mesures = await Mesure.query()
+      .withGraphFetched("[etats]")
       .where("mandataire_id", mandataire.id)
       .where("status", "=", status);
   }

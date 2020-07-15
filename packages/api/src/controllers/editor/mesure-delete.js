@@ -1,5 +1,6 @@
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
+const { MesureEtat } = require("../../models/MesureEtat");
 
 const mesureDelete = async (req, res) => {
   const {
@@ -23,6 +24,8 @@ const mesureDelete = async (req, res) => {
   } catch (error) {
     return res.status(422).json({ error: `${type} not found` });
   }
+
+  await MesureEtat.query().where("mesure_id", id).delete();
 
   await Mesure.query()
     .where("id", id)

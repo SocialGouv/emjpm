@@ -1,5 +1,7 @@
-const knexConnection = require("../db/knex");
 const { Model } = require("objection");
+
+const knexConnection = require("../db/knex");
+const { MesureEtat } = require("./MesureEtat");
 
 Model.knex(knexConnection);
 
@@ -10,6 +12,19 @@ class Mesure extends Model {
 
   static get idColumn() {
     return "id";
+  }
+
+  static get relationMappings() {
+    return {
+      etats: {
+        relation: Model.HasManyRelation,
+        modelClass: MesureEtat,
+        join: {
+          from: "mesures.id",
+          to: "mesure_etat.mesure_id",
+        },
+      },
+    };
   }
 
   static get jsonSchema() {

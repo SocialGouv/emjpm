@@ -1,6 +1,6 @@
-const knexConnection = require("../db/knex");
 const { Model } = require("objection");
 
+const knexConnection = require("../db/knex");
 const { Mesure } = require("./Mesure");
 
 Model.knex(knexConnection);

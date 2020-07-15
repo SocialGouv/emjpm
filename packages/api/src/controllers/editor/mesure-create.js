@@ -49,32 +49,41 @@ const mesureCreate = async (req, res) => {
     const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
 
     const mesureToCreate = {
-      [`${type}_id`]: serviceOrMandataire.id,
-      reason_extinction: body.cause_sortie,
-      extinction: body.date_fin_mesure,
-      antenne_id: body.antenne_id,
-      ti_id: tis ? tis.id : null,
-      code_postal: body.code_postal,
-      ville: null,
-      etablissement: null,
       annee_naissance: body.annee_naissance,
-      date_nomination: body.date_nomination.toISOString(),
-      status: null,
-      date_fin_mesure: body.date_fin_mesure,
-      etablissement_id: null,
-      numero_dossier: body.numero_dossier,
+      antenne_id: body.antenne_id,
       cabinet: body.tribunal_cabinet,
-      numero_rg: body.numero_rg,
+      cause_sortie: body.cause_sortie,
+      champ_protection: lastEtat ? lastEtat.champ_protection : null,
+      civilite: body.civilite,
+      code_postal: lastEtat ? lastEtat.code_postal : null,
+      date_fin_mesure: body.date_fin_mesure
+        ? body.date_fin_mesure.toISOString()
+        : null,
+      date_nomination: body.date_nomination
+        ? body.date_nomination.toISOString()
+        : null,
       department_id: null,
+      etablissement: null,
+      etablissement_id: null,
       judgment_date: null,
       latitude: null,
+      lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
       longitude: null,
+      [`${type}_id`]: serviceOrMandataire.id,
+      ti_id: tis ? tis.id : null,
+      ville: lastEtat ? lastEtat.ville : null,
+      date_premier_mesure: body.date_premier_mesure
+        ? body.date_premier_mesure.toISOString()
+        : null,
+      date_protection_en_cours: body.date_protection_en_cours
+        ? body.date_protection_en_cours.toISOString()
+        : null,
+      status: "Mesure en cours",
+      numero_dossier: body.numero_dossier,
+      numero_rg: body.numero_rg,
       pays: lastEtat ? lastEtat.pays : null,
       magistrat_id: null,
-      lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
       type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
-      civilite: body.civilite,
-      cause_sortie: body.cause_sortie,
     };
 
     mesure = await Mesure.query().insert(mesureToCreate);
