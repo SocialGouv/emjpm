@@ -2,7 +2,7 @@ import { findOption } from "../../util/option/OptionUtil";
 
 const getLabel = (value, options) => {
   if (value == undefined || value == null) {
-    return "non renseigné";
+    return "";
   }
   if (options) {
     const option = findOption(options, value);

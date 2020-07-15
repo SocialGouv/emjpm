@@ -7,7 +7,7 @@ import { ServiceFilters } from "../../src/components/ServiceFilters";
 import { FiltersContextProvider } from "../../src/components/ServiceFilters/context";
 import { ServiceMesures } from "../../src/components/ServiceMesures";
 import { UserContext } from "../../src/components/UserContext";
-import { DEFAULT_MESURE_TYPE } from "../../src/constants/mesures";
+import { DEFAULT_MESURE_NATURE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
@@ -21,7 +21,7 @@ const Mesures = () => {
   return (
     <FiltersContextProvider
       initialValues={{
-        mesureType: DEFAULT_MESURE_TYPE,
+        natureMesure: DEFAULT_MESURE_NATURE,
       }}
     >
       <LayoutServices>

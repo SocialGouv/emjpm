@@ -8,7 +8,7 @@ import { UserContext } from "../UserContext";
 import { boxStyle, content, innerTextStyle, subtitle } from "./style";
 
 const label = (value) => {
-  return value ? value : "non renseigné";
+  return value ? value : "";
 };
 
 const MandataireInformations = () => {
@@ -18,7 +18,7 @@ const MandataireInformations = () => {
   return (
     <Box>
       <Heading3>
-        {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
+        {nom ? nom : ""} {prenom ? prenom : ""}
       </Heading3>
       <Flex>
         <Flex flexDirection="column" mr={6}>

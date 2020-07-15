@@ -45,7 +45,8 @@ export const MESURES = gql`
       id
       etablissement
       annee_naissance
-      type
+      nature_mesure
+      champ_protection
       numero_dossier
       lieu_vie
       numero_rg

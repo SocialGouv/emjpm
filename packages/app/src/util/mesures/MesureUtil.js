@@ -1,4 +1,4 @@
-export const MESURE_CATEGORY_TYPE_KEYS = [
+export const MESURE_CATEGORY_NATURE_KEYS = [
   "TOTAL",
   "TUTELLE",
   "CURATELLE_RENFORCEE",
@@ -7,7 +7,7 @@ export const MESURE_CATEGORY_TYPE_KEYS = [
   "OTHER",
 ];
 
-const MESURE_CATEGORY_TYPE_COLORS = {
+const MESURE_CATEGORY_NATURE_COLORS = {
   CURATELLE_RENFORCEE: "#00977B",
   CURATELLE_SIMPLE: "#E46137",
   OTHER: "#CEA914",
@@ -25,6 +25,6 @@ const VALUE_LABEL = {
   TUTELLE: "tutelle",
 };
 
-export const getMesureCategoryTypeColor = (type) => MESURE_CATEGORY_TYPE_COLORS[type];
+export const getMesureCategoryNatureColor = (nature) => MESURE_CATEGORY_NATURE_COLORS[nature];
 
-export const getMesureCategoryTypeLabel = (type) => VALUE_LABEL[type];
+export const getMesureCategoryNatureLabel = (nature) => VALUE_LABEL[nature];
