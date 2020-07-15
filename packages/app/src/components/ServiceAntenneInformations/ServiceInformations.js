@@ -46,13 +46,11 @@ const ServiceInformations = (props) => {
             <Heading5 mb="3">Contact</Heading5>
             <Flex mt="2">
               <MailOutline size="16" />
-              <Text sx={iconTextStyle}>{antenne.contact_email || "Email non renseigné"}</Text>
+              <Text sx={iconTextStyle}>{antenne.contact_email || ""}</Text>
             </Flex>
             <Flex mt="1">
               <Smartphone size="16" />
-              <Text sx={iconTextStyle}>
-                {antenne.contact_phone || "Numero de téléphone non renseigné"}
-              </Text>
+              <Text sx={iconTextStyle}>{antenne.contact_phone || ""}</Text>
             </Flex>
             <Heading5 mt="5" mb="3">
               Informations

@@ -35,7 +35,7 @@ const ServiceInformations = (props) => {
             <Heading5 mb="3">Contact</Heading5>
             <Flex mt="2">
               <MailOutline size="16" />
-              <Text sx={iconTextStyle}>{email || "Email non renseigné"}</Text>
+              <Text sx={iconTextStyle}>{email || ""}</Text>
             </Flex>
             <Flex mt="2">
               <MyLocation size="16" />
@@ -43,7 +43,7 @@ const ServiceInformations = (props) => {
             </Flex>
             <Flex mt="2">
               <Smartphone size="16" />
-              <Text sx={iconTextStyle}>{telephone || "Numero de téléphone non renseigné"}</Text>
+              <Text sx={iconTextStyle}>{telephone || ""}</Text>
             </Flex>
           </Box>
           <Box sx={boxStyle}>

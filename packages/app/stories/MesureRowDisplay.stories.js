@@ -13,7 +13,8 @@ storiesOf("MesuresCreation", module)
   .add("ShowMesure", () => (
     <TableRowMesureView
       date_nomination={"10/12/2010"}
-      type={"curatelle"}
+      nature_mesure={"curatelle_simple"}
+      champ_protection={"protection_bien"}
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"monsieur"}
@@ -23,7 +24,8 @@ storiesOf("MesuresCreation", module)
   .add("ShowMesurewithModal", () => (
     <TableRowMesureView
       date_nomination={"10/12/2010"}
-      type={"curatelle"}
+      nature_mesure={"curatelle_simple"}
+      champ_protection={"protection_personne"}
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"monsieur"}

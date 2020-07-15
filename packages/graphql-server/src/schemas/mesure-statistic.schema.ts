@@ -22,19 +22,19 @@ export default gql`
 
     availableMesureNumber(region: Int, department: Int, court: Int): Int!
 
-    mesureTypeCategoryStatistics(
+    mesureNatureCategoryStatistics(
       region: Int
       department: Int
       court: Int
-    ): [MesureTypeCategoryStatistic!]!
+    ): [MesureNatureCategoryStatistic!]!
 
-    mesureTypeCategoryEvolution(
+    mesureNatureCategoryEvolution(
       start: String!
       end: String!
       region: Int
       department: Int
       court: Int
-    ): [MesureTypeCategoryEvolution!]!
+    ): [MesureNatureCategoryEvolution!]!
 
     departmentAvailabilities: [DepartmentAvailibility!]!
   }
@@ -62,10 +62,10 @@ export default gql`
     nom: String!
   }
 
-  type MesureTypeCategoryEvolution {
+  type MesureNatureCategoryEvolution {
     start: String!
     end: String!
-    mesureTypeCategory: MesureTypeCategory!
+    mesureNatureCategory: MesureNatureCategory!
     monthlyEvolutions: [MonthlyNumber!]!
   }
 
@@ -75,12 +75,12 @@ export default gql`
     number: Int!
   }
 
-  type MesureTypeCategoryStatistic {
-    mesureTypeCategory: MesureTypeCategory!
+  type MesureNatureCategoryStatistic {
+    mesureNatureCategory: MesureNatureCategory!
     number: Int!
   }
 
-  enum MesureTypeCategory {
+  enum MesureNatureCategory {
     TUTELLE
     CURATELLE_SIMPLE
     CURATELLE_RENFORCEE

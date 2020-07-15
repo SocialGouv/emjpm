@@ -14,7 +14,7 @@ const MagistratInformations = (props) => {
     <Box {...props}>
       <Card p="5">
         <Heading3>
-          {nom ? nom : "Nom non renseigné"} {prenom ? prenom : "Prénom non renseigné"}
+          {nom ? nom : ""} {prenom ? prenom : ""}
         </Heading3>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
@@ -23,11 +23,9 @@ const MagistratInformations = (props) => {
               <MailOutline size="16" />
               <Text sx={iconTextStyle}>{email}</Text>
             </Flex>
-            <Text sx={innerTextStyle}>{nom ? nom : "Nom non renseigné"} </Text>
-            <Text sx={innerTextStyle}>{prenom ? prenom : "Prénom non renseigné"}</Text>
-            <Text sx={innerTextStyle}>
-              {cabinet ? `Cabinet: ${cabinet}` : "Cabinet non renseigné"}
-            </Text>
+            <Text sx={innerTextStyle}>{nom ? nom : ""} </Text>
+            <Text sx={innerTextStyle}>{prenom ? prenom : ""}</Text>
+            <Text sx={innerTextStyle}>{cabinet ? `Cabinet: ${cabinet}` : ""}</Text>
           </Box>
         </Flex>
         <Flex mt="5">

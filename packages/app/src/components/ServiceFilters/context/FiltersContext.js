@@ -10,7 +10,7 @@ export const Provider = (props) => {
 
   // Use State to keep the values
   const [antenne, changeAntenne] = useState(false);
-  const [mesureType, changeMesureType] = useState(initialValues.mesureType);
+  const [natureMesure, changeNatureMesure] = useState(initialValues.natureMesure);
   const [mesureStatus, changeMesureStatus] = useState(initialValues.mesureStatus);
   const [searchText, changeSearchText] = useState("");
 
@@ -21,11 +21,11 @@ export const Provider = (props) => {
     antenne,
     changeAntenne,
     changeMesureStatus,
-    changeMesureType,
+    changeNatureMesure,
     changeSearchText,
     debouncedSearchText,
     mesureStatus,
-    mesureType,
+    natureMesure,
     searchText,
   };
 

@@ -9,7 +9,7 @@ export const Provider = (props) => {
   const { children, initialValues = {} } = props;
 
   // Use State to keep the values
-  const [mesureType, changeMesureType] = useState(initialValues.mesureType);
+  const [natureMesure, changeNatureMesure] = useState(initialValues.natureMesure);
   const [mesureStatus, changeMesureStatus] = useState(initialValues.mesureStatus);
   const [searchText, changeSearchText] = useState("");
 
@@ -18,11 +18,11 @@ export const Provider = (props) => {
   // Make the context object:
   const filtersContext = {
     changeMesureStatus,
-    changeMesureType,
+    changeNatureMesure,
     changeSearchText,
     debouncedSearchText,
     mesureStatus,
-    mesureType,
+    natureMesure,
     searchText,
   };
 

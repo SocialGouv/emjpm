@@ -13,7 +13,7 @@ import {
   YAxis,
 } from "recharts";
 
-import { getMesureCategoryTypeColor } from "../../util/mesures";
+import { getMesureCategoryNatureColor } from "../../util/mesures";
 
 const MesureAllocationChart = (props) => {
   const { mesures } = props;
@@ -39,7 +39,7 @@ const MesureAllocationChart = (props) => {
             <Legend />
             <Bar dataKey="nombre de mesures" barSize={24}>
               {mesures.map((mesure, index) => (
-                <Cell key={index} fill={getMesureCategoryTypeColor(mesure.type)} />
+                <Cell key={index} fill={getMesureCategoryNatureColor(mesure.nature)} />
               ))}
             </Bar>
           </ComposedChart>

@@ -59,48 +59,44 @@ export const formatMandataire = (
         : null;
 
     currentDiscriminator = {
-      adresse: service.adresse ? capitalize(service.adresse) : "non renseigné",
-      codePostal: service.code_postal ? capitalize(service.code_postal) : "non renseigné",
-      competences: service.competences || "non renseigné",
-      email: service.email ? service.email : "non renseigné",
-      etablissement: service.etablissement ? service.etablissement : "non renseigné",
+      adresse: service.adresse ? capitalize(service.adresse) : "",
+      codePostal: service.code_postal ? capitalize(service.code_postal) : "",
+      competences: service.competences || "",
+      email: service.email ? service.email : "",
+      etablissement: service.etablissement ? service.etablissement : "",
       genre: "F",
       id: id,
-      lastLogin: lastLogin ? formatLastLogin(lastLogin) : "non renseigné",
+      lastLogin: lastLogin ? formatLastLogin(lastLogin) : "",
       lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
       latitude: service.latitude || null,
       longitude: service.longitude || null,
       nom: service.nom ? service.nom : null,
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
-      telephone: service.telephone ? service.telephone : "non renseigné",
-      ville: service.ville ? capitalize(service.ville) : "non renseigné",
+      telephone: service.telephone ? service.telephone : "",
+      ville: service.ville ? capitalize(service.ville) : "",
     };
   } else {
     currentDiscriminator = {
-      adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "non renseigné",
-      codePostal: mandataire.code_postal ? capitalize(mandataire.code_postal) : "non renseigné",
-      competences: mandataire.competences || "non renseigné",
-      email: mandataire.user && mandataire.user.email ? mandataire.user.email : "non renseigné",
+      adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "",
+      codePostal: mandataire.code_postal ? capitalize(mandataire.code_postal) : "",
+      competences: mandataire.competences || "",
+      email: mandataire.user && mandataire.user.email ? mandataire.user.email : "",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: id,
       lastLogin:
         mandataire.user && mandataire.user.last_login
           ? formatLastLogin(mandataire.user.last_login)
-          : "non renseigné",
+          : "",
       lastLoginIsCritical:
         mandataire.user && mandataire.user.last_login && isCriticalDate(mandataire.user.last_login),
       latitude: mandataire.latitude || null,
       longitude: mandataire.longitude || null,
       mandataireId: mandataire.id,
-      nom:
-        mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "non renseigné",
-      prenom:
-        mandataire.user && mandataire.user.prenom
-          ? capitalize(mandataire.user.prenom)
-          : "non renseigné",
+      nom: mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "",
+      prenom: mandataire.user && mandataire.user.prenom ? capitalize(mandataire.user.prenom) : "",
       telephone: mandataire.telephone,
-      ville: mandataire.ville ? capitalize(mandataire.ville) : "non renseigné",
+      ville: mandataire.ville ? capitalize(mandataire.ville) : "",
     };
   }
   return {

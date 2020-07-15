@@ -6,8 +6,8 @@ import {
   availableMesureNumber,
   closedMesureNumber,
   departmentAvailabilities,
-  mesureTypeCategoryEvolution,
-  mesureTypeCategoryStatistics,
+  mesureNatureCategoryEvolution,
+  mesureNatureCategoryStatistics,
   newMesureNumber,
   openMesureNumber
 } from "./query/mesure-stat";
@@ -21,8 +21,8 @@ export const resolvers = {
     availableMesureNumber,
     closedMesureNumber,
     departmentAvailabilities,
-    mesureTypeCategoryEvolution,
-    mesureTypeCategoryStatistics,
+    mesureNatureCategoryEvolution,
+    mesureNatureCategoryStatistics,
     newMesureNumber,
     openMesureNumber
   }
