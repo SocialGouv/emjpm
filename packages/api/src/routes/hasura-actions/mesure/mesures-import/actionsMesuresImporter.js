@@ -1,4 +1,4 @@
-const { MESURE_PROTECTION } = require("@emjpm/core");
+const { MESURE_PROTECTION, MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const excelParser = require("../../../../utils/file/excelParser");
 const logger = require("../../../../utils/logger");
 
@@ -162,7 +162,7 @@ const importMesures = async ({
       date_nomination: toDate(mesure.date_ouverture),
       mandataire,
       service,
-      status: "Mesure en cours",
+      status: MESURE_PROTECTION_STATUS.en_cours,
     };
     await prepareMesure(mesureDatas, {
       line,

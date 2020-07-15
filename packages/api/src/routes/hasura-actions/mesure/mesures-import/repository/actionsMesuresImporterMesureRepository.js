@@ -1,6 +1,7 @@
 const { Service } = require("../../../../../models/Service");
 const { Mandataire } = require("../../../../../models/Mandataire");
 const { raw } = require("objection");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const { Mesure } = require("../../../../../models/Mesure");
 const { ServiceAntenne } = require("../../../../../models/ServiceAntenne");
 const { Tis } = require("../../../../../models/Tis");
@@ -24,8 +25,14 @@ const getMesureStates = async (mandataire_id, service_id, antenne_id) => {
 
 const updateAntenneMesureState = async (antenne) => {
   const counters = await getMesureStates(null, antenne.service_id, antenne.id);
-  const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
-  const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
+  const mesures_in_progress = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.en_cours
+  );
+  const mesures_awaiting = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.eteinte
+  );
 
   await ServiceAntenne.query().findById(antenne.id).patch({
     mesures_in_progress,
@@ -35,8 +42,14 @@ const updateAntenneMesureState = async (antenne) => {
 const updateServiceMesureStates = async (service_id) => {
   const counters = await getMesureStates(null, service_id, null);
 
-  const mesures_in_progress = countMesuresInState(counters, "Mesure en cours");
-  const mesures_awaiting = countMesuresInState(counters, "Mesure en attente");
+  const mesures_in_progress = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.en_cours
+  );
+  const mesures_awaiting = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.mesures_en_attente
+  );
 
   await Service.query().findById(service_id).patch({
     mesures_in_progress,
@@ -54,8 +67,14 @@ const updateServiceMesureStates = async (service_id) => {
 const updateMandataireMesureStates = async (mandataire_id) => {
   const counters = await getMesureStates(mandataire_id, null, null);
 
-  const mesures_en_cours = countMesuresInState(counters, "Mesure en cours");
-  const mesures_en_attente = countMesuresInState(counters, "Mesure en attente");
+  const mesures_en_cours = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.en_cours
+  );
+  const mesures_en_attente = countMesuresInState(
+    counters,
+    MESURE_PROTECTION_STATUS.en_attente
+  );
 
   await Mandataire.query().findById(mandataire_id).patch({
     mesures_en_cours,

@@ -6,7 +6,7 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { mesureFormatter } from "../MesureContext";
+import { formatMesureListItems } from "../../util/mesures";
 import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;
@@ -28,9 +28,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
     });
   };
 
-  const mesures = useMemo(() => (data ? mesureFormatter.formatMesureList(data.mesures) : []), [
-    data,
-  ]);
+  const mesures = useMemo(() => (data ? formatMesureListItems(data.mesures) : []), [data]);
 
   const count = useMemo(() => (data ? data.mesures_aggregate.aggregate.count : 0), [data]);
   const totalPage = useMemo(() => Math.ceil(count / RESULT_PER_PAGE), [count]);

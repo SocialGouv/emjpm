@@ -1,11 +1,10 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES } from "../../constants/mesures";
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -21,7 +20,7 @@ const initialValues = {
   tribunal: undefined,
   city: "",
   zipcode: "",
-  country: { value: "FR", label: COUNTRIES["FR"] },
+  country: GLOBAL.COUNTRIES.options.find((elm) => elm.value === "FR"),
   cabinet: "",
 };
 

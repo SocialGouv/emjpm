@@ -14,16 +14,14 @@ export const MANDATAIRE_MESURES = gql`
   query MandataireMesures(
     $limit: Int
     $natureMesure: nature_mesure_type
-    $status: String!
+    $status: mesure_status_type!
     $searchText: String
-    $excludeStatus: String
     $offset: Int
   ) {
     mesures_aggregate(
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
-        _not: { status: { _eq: $excludeStatus } }
         nature_mesure: { _eq: $natureMesure }
       }
     ) {
@@ -38,7 +36,6 @@ export const MANDATAIRE_MESURES = gql`
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
-        _not: { status: { _eq: $excludeStatus } }
         nature_mesure: { _eq: $natureMesure }
       }
     ) {

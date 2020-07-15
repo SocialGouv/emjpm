@@ -15,7 +15,7 @@ exports.seed = function (knex) {
         date_nomination: "2010-10-05",
         lieu_vie: "etablissement",
         civilite: "madame",
-        status: "Eteindre mesure",
+        status: "eteinte",
         date_fin_mesure: "2019-07-01T00:00:00Z",
         latitude: 48.858483,
         longitude: 2.27154,
@@ -34,7 +34,7 @@ exports.seed = function (knex) {
         date_nomination: "2010-10-05",
         lieu_vie: "etablissement",
         civilite: "madame",
-        status: "Mesure en cours",
+        status: "en_cours",
         latitude: 48.858483,
         longitude: 2.27154,
       });
@@ -51,7 +51,7 @@ exports.seed = function (knex) {
         date_nomination: "2010-10-05",
         lieu_vie: "domicile",
         civilite: "madame",
-        status: "Mesure en attente",
+        status: "en_attente",
         latitude: 48.858483,
         longitude: 2.27154,
       });
@@ -69,7 +69,7 @@ exports.seed = function (knex) {
         date_nomination: "2010-10-05",
         lieu_vie: "etablissement",
         civilite: "monsieur",
-        status: "Mesure en cours",
+        status: "en_cours",
         latitude: 48.858483,
         longitude: 2.27154,
       });
@@ -88,7 +88,7 @@ exports.seed = function (knex) {
         date_nomination: "2012-10-05",
         lieu_vie: "etablissement",
         civilite: "madame",
-        status: "Eteindre mesure",
+        status: "eteinte",
         latitude: 48.858483,
         longitude: 2.27154,
       });
