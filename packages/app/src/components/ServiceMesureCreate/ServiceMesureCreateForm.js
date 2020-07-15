@@ -137,6 +137,7 @@ export const ServiceMesureCreateForm = (props) => {
           value={formik.values.champ_protection}
           hasError={formik.errors.champ_protection && formik.touched.champ_protection}
           onChange={(option) => formik.setFieldValue("champ_protection", option)}
+          isClearable={true}
           options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
         />
         {formik.touched.champ_protection && (

@@ -1,29 +1,3 @@
-// export const MESURE_TYPES = [
-//   "curatelle",
-//   "curatelle renforcée",
-//   "curatelle renforcée à la personne",
-//   "curatelle renforcée aux biens",
-//   "curatelle renforcée aux biens et à la personne",
-//   "curatelle simple",
-//   "curatelle simple à la personne",
-//   "curatelle simple aux biens",
-//   "curatelle simple à la personne",
-//   "curatelle simple aux biens et à la personne",
-//   "maj",
-//   "mandat de protection future",
-//   "mesure ad hoc",
-//   "sauvegarde de justice",
-//   "sauvegarde de justice avec mandat spécial",
-//   "subrogé curateur",
-//   "subrogé tuteur",
-//   "tutelle",
-//   "tutelle à la personne",
-//   "tutelle aux biens",
-//   "tutelle aux biens et à la personne",
-// ];
-
-export const MESURE_CIVILITIES = ["F", "H"];
-
 export const MESURE_STATUS_LABEL_VALUE_EN_COURS = {
   label: "Mesure en cours",
   value: "Mesure en cours",

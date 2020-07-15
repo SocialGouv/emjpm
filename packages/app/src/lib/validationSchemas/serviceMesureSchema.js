@@ -7,7 +7,7 @@ const serviceMesureSchema = yup.object().shape({
     .min(1900, "l'année choisi doit être au minimum 1900")
     .max(2019, "l'année choisi doit être au maximum 2019"),
   antenne: yup.string(),
-  champ_protection: yup.string(),
+  champ_protection: yup.string().nullable(),
   city: yup.string().when("country", {
     is: (country) => country.value && country.value === "FR",
     then: yup.string().required(),
