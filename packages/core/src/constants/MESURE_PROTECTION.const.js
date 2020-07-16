@@ -51,4 +51,9 @@ export const MESURE_PROTECTION = {
     F: 'femme',
     H: 'homme',
   }),
+  STATUS: buildKeys({
+    en_attente: 'Mesure en attente',
+    en_cours: 'Mesure en cours',
+    eteinte: 'Mesure éteinte',
+  }),
 };

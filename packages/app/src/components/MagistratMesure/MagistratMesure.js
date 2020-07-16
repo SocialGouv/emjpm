@@ -98,7 +98,7 @@ const MagistratMesure = (props) => {
             </Box>
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Status de la mesure</Text>
-              <Text sx={MagistratMesureContentStyle}>{status}</Text>
+              <Text sx={MagistratMesureContentStyle}>{MESURE_PROTECTION.STATUS.byKey[status]}</Text>
             </Box>
           </Box>
         </Flex>

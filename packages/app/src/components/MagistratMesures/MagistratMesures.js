@@ -5,8 +5,8 @@ import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import { formatMesureListItems } from "../../util/mesures";
 import { FiltersContext } from "../MagistratFilters/context";
-import { mesureFormatter } from "../MesureContext";
 import { MESURES } from "./queries";
 import { MagistratListStyle } from "./style";
 
@@ -43,7 +43,7 @@ const MagistratMesures = () => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const mesures = mesureFormatter.formatMesureList(data.mesures);
+  const mesures = formatMesureListItems(data.mesures);
 
   return (
     <Box sx={MagistratListStyle}>

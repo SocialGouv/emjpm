@@ -4,11 +4,7 @@ export const CLOSE_MESURE = gql`
   mutation closeMesure($id: Int!, $cause_sortie: cause_sortie_type!, $date_fin_mesure: date!) {
     update_mesures(
       where: { id: { _eq: $id } }
-      _set: {
-        date_fin_mesure: $date_fin_mesure
-        cause_sortie: $cause_sortie
-        status: "Eteindre mesure"
-      }
+      _set: { date_fin_mesure: $date_fin_mesure, cause_sortie: $cause_sortie, status: "eteinte" }
     ) {
       returning {
         antenne_id
@@ -118,7 +114,7 @@ export const EDIT_MESURE = gql`
 
 export const REACTIVATE_MESURE = gql`
   mutation reactivateMesure($id: Int!) {
-    update_mesures(where: { id: { _eq: $id } }, _set: { status: "Mesure en cours" }) {
+    update_mesures(where: { id: { _eq: $id } }, _set: { status: "en_cours" }) {
       returning {
         antenne_id
         service_id
@@ -199,7 +195,7 @@ export const ADD_MESURE = gql`
         annee_naissance: $annee_naissance
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
-        status: "Mesure en cours"
+        status: "en_cours"
         antenne_id: $antenne_id
         latitude: $latitude
         longitude: $longitude

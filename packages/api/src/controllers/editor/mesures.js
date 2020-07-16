@@ -1,11 +1,10 @@
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 
-const DEFAULT_STATUS = "Mesure en attente";
-
 const mesures = async (req, res) => {
   const {
-    query: { status = DEFAULT_STATUS },
+    query: { status = MESURE_PROTECTION_STATUS.en_attente },
     user: { user_id },
   } = req;
 

@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const REACTIVATE_MESURE = gql`
   mutation reactivateMesure($id: Int) {
-    update_mesures(where: { id: { _eq: $id } }, _set: { status: "Mesure en cours" }) {
+    update_mesures(where: { id: { _eq: $id } }, _set: { status: "en_cours" }) {
       returning {
         id
         cabinet
