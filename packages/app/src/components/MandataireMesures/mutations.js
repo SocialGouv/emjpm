@@ -34,7 +34,7 @@ export const ADD_MESURE = gql`
         annee_naissance: $annee_naissance
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
-        status: "Mesure en cours"
+        status: "en_cours"
         mandataire_id: $mandataireId
         latitude: $latitude
         longitude: $longitude

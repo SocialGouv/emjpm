@@ -1,9 +1,9 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import Router from "next/router";
 import React, { useContext, useMemo } from "react";
 
 import { UserContext } from "../../components/UserContext";
-import { MESURE_STATUS_LABEL_VALUE } from "../../constants/mesures";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions } from "../../util";
 import { MandataireAddMesureForm } from "./MandataireAddMesureForm";
@@ -83,9 +83,8 @@ export const MandataireAddMesure = () => {
                 limit: 20,
                 offset: 0,
                 searchText: null,
-                status: MESURE_STATUS_LABEL_VALUE[0].value,
+                status: MESURE_PROTECTION_STATUS.en_cours,
                 natureMesure: null,
-                excludeStatus: "Mesure en attente",
               },
             },
           ],

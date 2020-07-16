@@ -3,14 +3,14 @@ import gql from "graphql-tag";
 export const MESURES = gql`
   query magistratMesures(
     $natureMesure: nature_mesure_type
-    $status: String
+    $status: mesure_status_type
     $searchText: String
     $offset: Int
   ) {
     mesures_aggregate(
       where: {
         numero_rg: { _ilike: $searchText }
-        status: { _eq: "Mesure en attente" }
+        status: { _eq: "en_attente" }
         nature_mesure: { _eq: $natureMesure }
       }
     ) {
@@ -21,7 +21,7 @@ export const MESURES = gql`
     mesures(
       where: {
         numero_rg: { _ilike: $searchText }
-        status: { _eq: "Mesure en attente" }
+        status: { _eq: "en_attente" }
         nature_mesure: { _eq: $natureMesure }
       }
       offset: $offset

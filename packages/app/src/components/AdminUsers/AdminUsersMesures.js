@@ -1,5 +1,6 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { isEnAttente, isEnCours, isEteinte } from "@emjpm/core";
 import { Select } from "@emjpm/ui";
 import { Checkbox, Label } from "@rebass/forms";
 import { format } from "date-fns";
@@ -196,13 +197,14 @@ function buildTableColumns() {
 function buildMesuresCounts(allMesures) {
   return allMesures.reduce(
     (acc, mesure) => {
-      if (mesure.status === "Mesure en attente") {
+      const { status } = mesure;
+      if (isEnAttente({ status })) {
         acc.awaitingMesuresCount++;
       }
-      if (mesure.status === "Mesure en cours") {
+      if (isEnCours({ status })) {
         acc.inProgressMesuresCount++;
       }
-      if (mesure.status === "Eteindre mesure") {
+      if (isEteinte({ status })) {
         acc.extinctionMesuresCount++;
       }
       return acc;

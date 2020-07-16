@@ -4,11 +4,7 @@ export const CLOSE_MESURE = gql`
   mutation closeMesure($id: Int!, $cause_sortie: cause_sortie_type!, $date_fin_mesure: date!) {
     update_mesures(
       where: { id: { _eq: $id } }
-      _set: {
-        date_fin_mesure: $date_fin_mesure
-        cause_sortie: $cause_sortie
-        status: "Eteindre mesure"
-      }
+      _set: { date_fin_mesure: $date_fin_mesure, cause_sortie: $cause_sortie, status: "eteinte" }
     ) {
       returning {
         id

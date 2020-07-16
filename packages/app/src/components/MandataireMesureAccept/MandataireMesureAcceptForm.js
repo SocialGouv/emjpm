@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES } from "../../constants/mesures";
 import { mandataireAcceptMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 
@@ -21,7 +20,7 @@ export const MandataireMesureAcceptForm = (props) => {
       lieu_vie: "",
       city: mesure.ville,
       zipcode: mesure.code_postal,
-      country: { value: "FR", label: COUNTRIES["FR"] },
+      country: GLOBAL.COUNTRIES.options.find((elm) => elm.value === "FR"),
     },
   });
 

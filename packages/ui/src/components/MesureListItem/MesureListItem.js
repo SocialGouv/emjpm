@@ -53,12 +53,7 @@ const MesureListItem = (props) => {
     onClick,
   } = props;
 
-  let currentStatus;
-  if (status === 'Eteindre mesure') {
-    currentStatus = 'Mesure éteinte';
-  } else {
-    currentStatus = status;
-  }
+  const currentStatus = status;
 
   return (
     <Fragment>

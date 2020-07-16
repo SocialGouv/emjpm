@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES } from "../../constants/mesures";
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
 import { GeocodeCities } from "../Geocode";
@@ -50,7 +49,7 @@ export const MandataireMesureEditForm = (props) => {
       champ_protection: findOption(MESURE_PROTECTION.CHAMP_PROTECTION.options, champProtection),
       city: ville,
       zipcode: codePostal,
-      country: { label: COUNTRIES[pays], value: pays },
+      country: findOption(GLOBAL.COUNTRIES.options, pays),
       cabinet: cabinet || "",
     },
   });

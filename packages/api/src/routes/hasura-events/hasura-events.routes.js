@@ -1,5 +1,6 @@
 const express = require("express");
 const uid = require("rand-token").uid;
+const { isEnAttente } = require("@emjpm/core");
 const { Service } = require("../../models/Service");
 const {
   ServiceMemberInvitation,
@@ -58,7 +59,7 @@ router.post("/email-reservation", async function (req, res) {
   const mesure = req.body.event.data.new;
   const { ti_id, service_id, mandataire_id, status } = mesure;
 
-  if (status === "Mesure en attente") {
+  if (isEnAttente({ status })) {
     const ti = await Tis.query().findById(ti_id);
     const users = await getEmailUserDatas(mandataire_id, service_id);
     const emails = users.map((user) => reservationEmail(ti, mesure, user));
@@ -84,7 +85,7 @@ router.post("/email-cancel-reservation", async function (req, res) {
     if (isTi && userId) {
       const oldMesure = req.body.event.data.old;
       const { ti_id, service_id, mandataire_id, status } = oldMesure;
-      if (status === "Mesure en attente") {
+      if (isEnAttente({ status })) {
         const [currentTi] = await Tis.query().where("id", ti_id);
         const users = await getEmailUserDatas(mandataire_id, service_id);
         for (const user of users) {

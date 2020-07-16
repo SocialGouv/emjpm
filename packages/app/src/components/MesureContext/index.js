@@ -3,4 +3,3 @@ export {
   Context as MesureContext,
   Provider as MesureProvider,
 } from "./MesureContext";
-export { mesureFormatter } from "./mesureFormatter";
