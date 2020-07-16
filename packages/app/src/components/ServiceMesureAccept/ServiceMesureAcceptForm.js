@@ -1,11 +1,10 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { COUNTRIES } from "../../constants/mesures";
 import { serviceAcceptMesureSchema } from "../../lib/validationSchemas";
 import { GeocodeCities } from "../Geocode";
 
@@ -26,7 +25,7 @@ export const ServiceMesureAcceptForm = (props) => {
       lieu_vie: "",
       city: "",
       zipcode: "",
-      country: { value: "FR", label: COUNTRIES["FR"] },
+      country: GLOBAL.COUNTRIES.options.find((elm) => elm.value === "FR"),
     },
   });
   return (

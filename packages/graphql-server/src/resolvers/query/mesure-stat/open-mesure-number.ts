@@ -10,7 +10,7 @@ export const openMesureNumber = async (
     court: args.court,
     department: args.department,
     region: args.region,
-    status: "Mesure en cours"
+    status: "en_cours"
   });
   return openMesuresNumber.data.mesures_aggregate.aggregate.count;
 };

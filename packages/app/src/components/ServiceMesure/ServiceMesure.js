@@ -1,10 +1,10 @@
+import { MESURE_PROTECTION_STATUS, mesureFormatter } from "@emjpm/core";
 import { Card, Heading2 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "../../components/Commons";
-import { MesureContext, mesureFormatter } from "../MesureContext";
-import { MESURE_TYPE } from "./constants";
+import { MesureContext } from "../MesureContext";
 import { content, statusBox, subtitle } from "./style";
 
 const ServiceMesure = (props) => {
@@ -34,7 +34,7 @@ const ServiceMesure = (props) => {
       <Card p={4}>
         <Box textAlign="center">
           <Text mx="auto" sx={statusBox}>
-            {status}
+            {mesureFormatter.formatStatus(status)}
           </Text>
         </Box>
         <Flex p="5">
@@ -100,7 +100,7 @@ const ServiceMesure = (props) => {
           </Box>
         </Flex>
         <Box textAlign="center">
-          {status === MESURE_TYPE.WAITING && (
+          {status === MESURE_PROTECTION_STATUS.en_attente && (
             <LinkButton
               outline={true}
               href="/services/mesures/[mesure_id]/accept"
@@ -110,7 +110,7 @@ const ServiceMesure = (props) => {
             </LinkButton>
           )}
 
-          {status === MESURE_TYPE.CLOSED && (
+          {status === MESURE_PROTECTION_STATUS.eteinte && (
             <Fragment>
               <LinkButton
                 outline={true}
@@ -132,7 +132,7 @@ const ServiceMesure = (props) => {
             </Fragment>
           )}
 
-          {status === MESURE_TYPE.IN_PROGRESS && (
+          {status === MESURE_PROTECTION_STATUS.en_cours && (
             <Fragment>
               <LinkButton
                 bg="red"

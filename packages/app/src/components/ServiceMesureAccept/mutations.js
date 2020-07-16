@@ -18,7 +18,7 @@ export const ACCEPT_MESURE = gql`
       _set: {
         antenne_id: $antenne_id
         department_id: $department_id
-        status: "Mesure en cours"
+        status: "en_cours"
         date_nomination: $date_nomination
         lieu_vie: $lieu_vie
         code_postal: $code_postal

@@ -1,7 +1,7 @@
 export const TYPES = {
-  "Mesure éteinte": "#7EA3AA",
-  "Mesure en attente": "#F4AF00",
-  "Mesure en cours": "#2DA0FB",
+  eteinte: "#7EA3AA",
+  en_attente: "#F4AF00",
+  en_cours: "#2DA0FB",
 };
 
 export const titleStyle = {

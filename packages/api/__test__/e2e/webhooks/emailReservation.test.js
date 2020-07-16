@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 
 const nodemailerMock = require("nodemailer-mock");
 jest.setMock("nodemailer", nodemailerMock);
@@ -33,7 +34,9 @@ beforeAll(async () => {
   await knex.migrate.latest();
   await knex.seed.run();
 
-  const [mesure] = await knex("mesures").where({ status: "Mesure en attente" });
+  const [mesure] = await knex("mesures").where({
+    status: MESURE_PROTECTION_STATUS.en_attente,
+  });
 
   global.mesure = mesure;
 });

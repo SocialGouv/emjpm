@@ -1,14 +1,16 @@
+import { MESURE_PROTECTION, MESURE_PROTECTION_STATUS } from "@emjpm/core";
+
 export const MESURE_STATUS_LABEL_VALUE_EN_COURS = {
-  label: "Mesure en cours",
-  value: "Mesure en cours",
+  label: MESURE_PROTECTION.STATUS.byKey[MESURE_PROTECTION_STATUS.en_cours],
+  value: MESURE_PROTECTION_STATUS.en_cours,
 };
 export const MESURE_STATUS_LABEL_VALUE_ETEINTE = {
-  label: "Mesure éteinte",
-  value: "Eteindre mesure",
+  label: MESURE_PROTECTION.STATUS.byKey[MESURE_PROTECTION_STATUS.eteinte],
+  value: MESURE_PROTECTION_STATUS.eteinte,
 };
 export const MESURE_STATUS_LABEL_VALUE_ATTENTE = {
-  label: "Mesure en attente",
-  value: "Mesure en attente",
+  label: MESURE_PROTECTION.STATUS.byKey[MESURE_PROTECTION_STATUS.en_attente],
+  value: MESURE_PROTECTION_STATUS.en_attente,
 };
 
 export const MESURE_STATUS_LABEL_VALUE = [
@@ -19,11 +21,6 @@ export const MESURE_STATUS_LABEL_VALUE = [
 export const DEFAULT_MESURE_NATURE = {
   label: "Toutes les natures",
   value: null,
-};
-
-export const COUNTRIES = {
-  BE: "Belgique",
-  FR: "France",
 };
 
 export const IS_URGENT = [
