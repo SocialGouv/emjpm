@@ -42,7 +42,7 @@ export const MESURE_PROTECTION = {
   RESULTAT_REVISION: buildKeys({
     aggravation: 'aggravation',
     allegement: 'allègement',
-    dessaisissement_autre_mjpm: "dessaisissement en faveur d'autre_mjpm",
+    dessaisissement_autre_mjpm: "dessaisissement en faveur d'autre mjpm",
     dessaisissement_famille: 'dessaisissementen faveur de la famille',
     mainlevee: 'mainlevée',
     reconduction: 'reconduction',

@@ -29,7 +29,10 @@ const mesureCreate = async (req, res) => {
   }
 
   try {
-    tis = await Tis.query().where("siret", body.tribunal_siret).first();
+    let tis = null;
+    if (body.tribunal_siret) {
+      tis = await Tis.query().where("siret", body.tribunal_siret).first();
+    }
     if (!tis) {
       throw "tribunal not found";
     }
@@ -50,7 +53,7 @@ const mesureCreate = async (req, res) => {
 
     const mesureToCreate = {
       annee_naissance: body.annee_naissance,
-      antenne_id: body.antenne_id,
+      antenne_id: body.antenne_id || null,
       cabinet: body.tribunal_cabinet,
       cause_sortie: body.cause_sortie,
       champ_protection: lastEtat ? lastEtat.champ_protection : null,
@@ -59,9 +62,7 @@ const mesureCreate = async (req, res) => {
       date_fin_mesure: body.date_fin_mesure
         ? body.date_fin_mesure.toISOString()
         : null,
-      date_nomination: body.date_nomination
-        ? body.date_nomination.toISOString()
-        : null,
+      date_nomination: body.date_nomination.toISOString(),
       department_id: null,
       etablissement: null,
       etablissement_id: null,
@@ -78,12 +79,13 @@ const mesureCreate = async (req, res) => {
       date_protection_en_cours: body.date_protection_en_cours
         ? body.date_protection_en_cours.toISOString()
         : null,
-      status: "Mesure en cours",
+      status: "en_cours",
       numero_dossier: body.numero_dossier,
       numero_rg: body.numero_rg,
       pays: lastEtat ? lastEtat.pays : null,
       magistrat_id: null,
       type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
+      resultat_revision: body.resultat_revision,
     };
 
     mesure = await Mesure.query().insert(mesureToCreate);
