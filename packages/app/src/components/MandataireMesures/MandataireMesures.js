@@ -1,12 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import { formatMesureListItems } from "../../util/mesures";
 import { FiltersContext } from "../MandataireFilters/context";
-import { mesureFormatter } from "../MesureContext";
 import { MANDATAIRE_MESURES } from "./queries";
 import { MesureListStyle } from "./style";
 
@@ -19,7 +20,7 @@ const MandataireMesures = (props) => {
 
   let currentMesureStatus = null;
   if (isOnlyWaiting) {
-    currentMesureStatus = "Mesure en attente";
+    currentMesureStatus = MESURE_PROTECTION_STATUS.en_attente;
   } else {
     currentMesureStatus = mesureStatus ? mesureStatus.value : null;
   }
@@ -30,7 +31,6 @@ const MandataireMesures = (props) => {
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: currentMesureStatus,
-    excludeStatus: isOnlyWaiting ? "" : "Mesure en attente",
     natureMesure: natureMesure ? natureMesure.value : null,
   };
 
@@ -54,7 +54,7 @@ const MandataireMesures = (props) => {
 
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const mesures = mesureFormatter.formatMesureList(data.mesures);
+  const mesures = formatMesureListItems(data.mesures);
 
   return (
     <Box sx={MesureListStyle}>

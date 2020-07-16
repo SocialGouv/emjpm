@@ -16,7 +16,7 @@ export const ACCEPT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         department_id: $department_id
-        status: "Mesure en cours"
+        status: "en_cours"
         date_nomination: $date_nomination
         lieu_vie: $lieu_vie
         code_postal: $code_postal

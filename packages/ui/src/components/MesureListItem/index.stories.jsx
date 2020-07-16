@@ -98,7 +98,7 @@ const dataClose = {
   numeroDossier: 'AMBLPIE',
   numeroRg: '19/00519',
   lieu_vie: 'domicile',
-  status: 'Eteindre mesure',
+  status: 'Mesure éteinte',
   tiId: null,
   tribunal: '',
   natureMesure: 'sauvegarde_justice',

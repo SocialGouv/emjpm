@@ -27,7 +27,7 @@ export const CHOOSE_MANDATAIRE = gql`
         civilite: $civilite
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg
-        status: "Mesure en attente"
+        status: "en_attente"
       }
     ) {
       returning {
@@ -82,7 +82,7 @@ export const CHOOSE_SERVICE = gql`
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg
         judgment_date: $judgmentDate
-        status: "Mesure en attente"
+        status: "en_attente"
       }
     ) {
       returning {

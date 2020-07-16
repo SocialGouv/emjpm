@@ -47,14 +47,14 @@ export class MesureAPI extends AuthDataSource {
     const query = `
     query service_mesures($serviceId: Int!) {
       inprogressMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en cours" }, service_id: { _eq: $serviceId } }
+        where: { status: { _eq: "en_cours" }, service_id: { _eq: $serviceId } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
       awaitingMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en attente" }, service_id: { _eq: $serviceId } }
+        where: { status: { _eq: "en_attente" }, service_id: { _eq: $serviceId } }
       ) {
         aggregate {
           count(columns: id)
@@ -67,12 +67,12 @@ export class MesureAPI extends AuthDataSource {
       }
       service_antenne(where: {service_id: {_eq: $serviceId}}) {
         id
-        mesures_awaiting: mesures_aggregate(where: { status: { _eq: "Mesure en attente" } }) {
+        mesures_awaiting: mesures_aggregate(where: { status: { _eq: "en_attente" } }) {
           aggregate {
             count(columns: antenne_id)
           }
         }
-        mesures_in_progress: mesures_aggregate(where: { status: { _eq: "Mesure en cours" } }) {
+        mesures_in_progress: mesures_aggregate(where: { status: { _eq: "en_cours" } }) {
           aggregate {
             count(columns: antenne_id)
           }
@@ -101,14 +101,14 @@ export class MesureAPI extends AuthDataSource {
     const query = `
     query mandataire_mesures($mandataireId: Int!) {
       inprogressMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en cours" }, mandataire: { id: { _eq: $mandataireId } } }
+        where: { status: { _eq: "en_cours" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
         }
       }
       awaitingMesures: mesures_aggregate(
-        where: { status: { _eq: "Mesure en attente" }, mandataire: { id: { _eq: $mandataireId } } }
+        where: { status: { _eq: "en_attente" }, mandataire: { id: { _eq: $mandataireId } } }
       ) {
         aggregate {
           count(columns: id)
@@ -191,7 +191,7 @@ export class MesureAPI extends AuthDataSource {
         filters.push(
           `_or: [
                   {date_fin_mesure: { _gt: "${params.closed.gt_or_null}"}},
-                  {status: {_neq: "Eteindre mesure"}}
+                  {status: {_neq: "eteinte"}}
               ]`
         );
       }

@@ -3481,9 +3481,9 @@ Object {
   },
   "status": Object {
     "defaultValue": null,
-    "maxLength": 255,
+    "maxLength": null,
     "nullable": true,
-    "type": "character varying",
+    "type": "USER-DEFINED",
   },
   "ti_id": Object {
     "defaultValue": null,

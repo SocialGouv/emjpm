@@ -1,9 +1,9 @@
 import { NullableDate, NullableNumber, NullableString } from "../types";
 
 export type MesureStatus =
-  | "Mesure en cours"
-  | "Mesure en attente"
-  | "Eteindre mesure"
+  | "en_cours"
+  | "en_attente"
+  | "eteinte"
   | null;
 
 // TODO(tglatt): use constants from @emjpm/core
