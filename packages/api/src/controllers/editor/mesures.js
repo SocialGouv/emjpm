@@ -1,10 +1,9 @@
-const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 
 const mesures = async (req, res) => {
   const {
-    query: { status = MESURE_PROTECTION_STATUS.en_attente },
+    query: { status },
     user: { user_id },
   } = req;
 
@@ -14,17 +13,18 @@ const mesures = async (req, res) => {
 
   if (user.type === "service") {
     const service = await user.$relatedQuery("service");
-
-    mesures = await Mesure.query()
-      .withGraphFetched("[etats]")
-      .where("service_id", service.id)
-      .where("status", "=", status);
+    const filter = { service_id: service.id };
+    if (status) {
+      filter.status = status;
+    }
+    mesures = await Mesure.query().withGraphFetched("[etats]").where(filter);
   } else {
     const mandataire = await user.$relatedQuery("mandataire");
-    mesures = await Mesure.query()
-      .withGraphFetched("[etats]")
-      .where("mandataire_id", mandataire.id)
-      .where("status", "=", status);
+    const filter = { mandataire_id: mandataire.id };
+    if (status) {
+      filter.status = status;
+    }
+    mesures = await Mesure.query().withGraphFetched("[etats]").where(filter);
   }
 
   return res.status(200).json({ mesures: mesures });
