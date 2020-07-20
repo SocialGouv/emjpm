@@ -56,7 +56,7 @@ const mesureCreate = async (req, res) => {
       antenne_id: body.antenne_id || null,
       cabinet: body.tribunal_cabinet,
       cause_sortie: body.cause_sortie,
-      champ_protection: lastEtat ? lastEtat.champ_protection : null,
+      champ_mesure: lastEtat ? lastEtat.champ_mesure : null,
       civilite: body.civilite,
       code_postal: lastEtat ? lastEtat.code_postal : null,
       date_fin_mesure: body.date_fin_mesure
@@ -97,7 +97,7 @@ const mesureCreate = async (req, res) => {
           mesure_id: mesure.id,
           date_changement_etat: etat.date_changement_etat,
           nature_mesure: etat.nature_mesure,
-          champ_protection: etat.champ_protection,
+          champ_protection: etat.champ_mesure,
           lieu_vie: etat.lieu_vie || "",
           code_postal: etat.code_postal || "",
           ville: etat.ville || "",
@@ -112,7 +112,7 @@ const mesureCreate = async (req, res) => {
     return res.status(422).json({ error: error.message });
   }
 
-  return res.status(201).json({ mesure });
+  return res.status(201).json(mesure);
 };
 
 module.exports = mesureCreate;

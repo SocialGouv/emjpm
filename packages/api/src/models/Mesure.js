@@ -35,7 +35,7 @@ class Mesure extends Model {
         antenne_id: { type: ["integer", null] },
         cabinet: { type: ["string", null] },
         cause_sortie: { type: ["string", null] },
-        champ_protection: { type: ["string", null] },
+        champ_mesure: { type: ["string", null] },
         civilite: { type: ["string", null] },
         code_postal: { type: ["string", null] },
         created_at: { type: "timestamptz" },

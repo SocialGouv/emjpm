@@ -21,14 +21,16 @@ router.post(
     body("annee_naissance").not().isEmpty().trim().escape(),
     body("civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
     body("date_nomination").isDate().toDate(),
-    body("date_fin_mesure").isDate().toDate(),
+    body("date_fin_mesure").optional().isDate().toDate(),
     body("date_premier_mesure").optional().isDate().toDate(),
     body("date_protection_en_cours").optional().isDate().toDate(),
     body("tribunal_siret").not().isEmpty().trim().escape(),
     body("antenne_id").optional().toInt(10),
     body("lieu_vie").optional().isIn(MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys),
     body("cause_sortie").optional().isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
-    body("resultat_revision").isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
+    body("resultat_revision")
+      .optional()
+      .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
     check("etats.*.pays").isISO31661Alpha2(),
     check("etats.*.date_changement_etat").isDate().toDate(),
     check("etats.*.lieu_vie").not().isEmpty().trim().escape(),
@@ -51,7 +53,9 @@ router.put(
     body("antenne_id").optional().toInt(10),
     body("lieu_vie").optional().isIn(MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys),
     body("cause_sortie").optional().isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
-    body("resultat_revision").isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
+    body("resultat_revision")
+      .optional()
+      .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
     check("etats.*.pays").isISO31661Alpha2(),
     check("etats.*.date_changement_etat").isDate().toDate(),
     check("etats.*.lieu_vie").not().isEmpty().trim().escape(),
