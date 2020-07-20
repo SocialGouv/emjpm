@@ -37,7 +37,7 @@ const MesureListItem = (props) => {
       age,
       cabinet,
       civilite,
-      champProtection,
+      champMesure,
       dateNominationFormated,
       isUrgent,
       judgmentDate,
@@ -65,7 +65,7 @@ const MesureListItem = (props) => {
               {numeroRg || ''}
               <Text sx={statusStyle(status)}>{currentStatus || ''}</Text>
             </Text>
-            <Text sx={natureStyle}>{`${natureMesure} ${champProtection || ''}`}</Text>
+            <Text sx={natureStyle}>{`${natureMesure} ${champMesure || ''}`}</Text>
           </Box>
 
           {hasTribunal && (
@@ -148,7 +148,7 @@ MesureListItem.propTypes = {
   mesure: PropTypes.shape({
     age: PropTypes.string,
     cabinet: PropTypes.string,
-    champProtection: PropTypes.string,
+    champMesure: PropTypes.string,
     civilite: PropTypes.string,
     codePostal: PropTypes.string,
     currentStatus: PropTypes.string,

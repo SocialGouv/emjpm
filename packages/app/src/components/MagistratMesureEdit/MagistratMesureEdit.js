@@ -13,7 +13,7 @@ import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
 
 export const MagistratMesureEdit = () => {
-  const { id, age, civilite, numeroRg, natureMesure, champProtection, cabinet } = useContext(
+  const { id, age, civilite, numeroRg, natureMesure, champMesure, cabinet } = useContext(
     MesureContext
   );
   const [updateMesure] = useMutation(EDIT_MESURE, {
@@ -34,7 +34,7 @@ export const MagistratMesureEdit = () => {
           id: id,
           numero_rg: values.numero_rg,
           nature_mesure: values.nature_mesure.value,
-          champ_protection: values.champ_protection ? values.champ_protection.value : null,
+          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
         },
       });
 
@@ -47,7 +47,7 @@ export const MagistratMesureEdit = () => {
       civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
       numero_rg: numeroRg,
       nature_mesure: findOption(MESURE_PROTECTION.NATURE_MESURE.options, natureMesure),
-      champ_protection: findOption(MESURE_PROTECTION.CHAMP_PROTECTION.options, champProtection),
+      champ_mesure: findOption(MESURE_PROTECTION.CHAMP_MESURE.options, champMesure),
     },
   });
 
@@ -81,16 +81,16 @@ export const MagistratMesureEdit = () => {
           </Field>
           <Field>
             <Select
-              id="champ_protection"
-              name="champ_protection"
-              placeholder="Champ de la protection"
-              value={formik.values.champ_protection}
-              hasError={formik.errors.champ_protection && formik.touched.champ_protection}
-              onChange={(option) => formik.setFieldValue("champ_protection", option)}
+              id="champ_mesure"
+              name="champ_mesure"
+              placeholder="Champ de la mesure"
+              value={formik.values.champ_mesure}
+              hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
+              onChange={(option) => formik.setFieldValue("champ_mesure", option)}
               isClearable={true}
-              options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
+              options={MESURE_PROTECTION.CHAMP_MESURE.options}
             />
-            <InlineError message={formik.errors.champ_protection} fieldId="champ_protection" />
+            <InlineError message={formik.errors.champ_mesure} fieldId="champ_mesure" />
           </Field>
           <Field>
             <Select

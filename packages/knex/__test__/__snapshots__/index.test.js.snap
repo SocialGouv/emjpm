@@ -3347,7 +3347,7 @@ Object {
     "nullable": true,
     "type": "USER-DEFINED",
   },
-  "champ_protection": Object {
+  "champ_mesure": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,

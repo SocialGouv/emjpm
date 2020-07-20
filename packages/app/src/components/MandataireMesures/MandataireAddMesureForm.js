@@ -131,17 +131,17 @@ export const MandataireAddMesureForm = (props) => {
               </Field>
               <Field>
                 <Select
-                  instanceId={"champ_protection"}
-                  id="champ_protection"
-                  name="champ_protection"
-                  placeholder="Champ de la protection"
-                  value={formik.values.champ_protection}
-                  hasError={formik.errors.champ_protection && formik.touched.champ_protection}
-                  onChange={(option) => formik.setFieldValue("champ_protection", option)}
+                  instanceId={"champ_mesure"}
+                  id="champ_mesure"
+                  name="champ_mesure"
+                  placeholder="Champ de la mesure"
+                  value={formik.values.champ_mesure}
+                  hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
+                  onChange={(option) => formik.setFieldValue("champ_mesure", option)}
                   isClearable={true}
-                  options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
+                  options={MESURE_PROTECTION.CHAMP_MESURE.options}
                 />
-                <InlineError message={formik.errors.champ_protection} fieldId="champ_protection" />
+                <InlineError message={formik.errors.champ_mesure} fieldId="champ_mesure" />
               </Field>
               <Field>
                 <Select

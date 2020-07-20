@@ -44,7 +44,7 @@ export const MESURES = gql`
       lieu_vie
       numero_rg
       nature_mesure
-      champ_protection
+      champ_mesure
       status
       date_nomination
       created_at
