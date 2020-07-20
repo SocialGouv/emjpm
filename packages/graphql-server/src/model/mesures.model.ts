@@ -54,7 +54,7 @@ export interface Mesures {
   created_at: NullableDate;
   annee_naissance: NullableString;
   nature_mesure: MesureNature;
-  champ_protection: ChampProtection;
+  champ_mesure: ChampProtection;
   date_nomination: NullableDate;
   lieu_vie: MesureLieuVie;
   civilite: Civilite;

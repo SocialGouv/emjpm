@@ -6,7 +6,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $mandataire_id: Int!
     $magistrat_id: Int!
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
@@ -23,7 +23,7 @@ export const CHOOSE_MANDATAIRE = gql`
         mandataire_id: $mandataire_id
         magistrat_id: $magistrat_id
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         civilite: $civilite
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg
@@ -61,7 +61,7 @@ export const CHOOSE_SERVICE = gql`
     $service_id: Int!
     $magistrat_id: Int!
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $civilite: civilite_type!
     $annee_naissance: String!
     $cabinet: String
@@ -77,7 +77,7 @@ export const CHOOSE_SERVICE = gql`
         service_id: $service_id
         magistrat_id: $magistrat_id
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         civilite: $civilite
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg

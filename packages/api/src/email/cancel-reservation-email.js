@@ -16,8 +16,8 @@ Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
 - "nature de la mesure": ${mesureFormatter.formatNatureMesure(
     mesure.nature_mesure
   )}
-- "champ de la protection": ${mesureFormatter.formatChampProtection(
-    mesure.champ_protection
+- "champ de la mesure de protection": ${mesureFormatter.formatChampMesure(
+    mesure.champ_mesure
   )}
 - "civilité": ${mesure.civilite}
 - "année de naissance": ${mesure.annee_naissance}.

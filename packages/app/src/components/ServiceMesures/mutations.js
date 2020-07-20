@@ -23,7 +23,7 @@ export const CLOSE_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         lieu_vie
         numero_rg
@@ -43,7 +43,7 @@ export const EDIT_MESURE = gql`
     $antenne_id: Int
     $date_nomination: date
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $lieu_vie: lieu_vie_type
     $code_postal: String
     $ville: String
@@ -63,7 +63,7 @@ export const EDIT_MESURE = gql`
         date_nomination: $date_nomination
         department_id: $department_id
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         antenne_id: $antenne_id
         lieu_vie: $lieu_vie
         code_postal: $code_postal
@@ -95,7 +95,7 @@ export const EDIT_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         latitude
         longitude
@@ -132,7 +132,7 @@ export const REACTIVATE_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         lieu_vie
         numero_rg
@@ -167,7 +167,7 @@ export const ADD_MESURE = gql`
     $date_nomination: date!
     $department_id: Int
     $nature_mesure: nature_mesure_type!
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $lieu_vie: lieu_vie_type!
     $code_postal: String
     $ville: String
@@ -186,7 +186,7 @@ export const ADD_MESURE = gql`
         department_id: $department_id
         date_nomination: $date_nomination
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         ti_id: $ti_id
         lieu_vie: $lieu_vie
         code_postal: $code_postal
@@ -219,7 +219,7 @@ export const ADD_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         latitude
         longitude

@@ -14,7 +14,7 @@ storiesOf("MesuresCreation", module)
     <TableRowMesureView
       date_nomination={"10/12/2010"}
       nature_mesure={"curatelle_simple"}
-      champ_protection={"protection_bien"}
+      champ_mesure={"protection_bien"}
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"monsieur"}
@@ -25,7 +25,7 @@ storiesOf("MesuresCreation", module)
     <TableRowMesureView
       date_nomination={"10/12/2010"}
       nature_mesure={"curatelle_simple"}
-      champ_protection={"protection_personne"}
+      champ_mesure={"protection_personne"}
       code_postal={28110}
       ville={"LeBelfort"}
       civilite={"monsieur"}
