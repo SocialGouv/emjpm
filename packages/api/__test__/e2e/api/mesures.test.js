@@ -80,29 +80,42 @@ describe("POST /api/editors/mesures", () => {
   });
 
   test("it returns 201", async () => {
-    // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
       .post("/api/editors/mesures")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({
-        annee_naissance: "1983",
+        annee_naissance: 1989,
         antenne_id: null,
+        cause_sortie: "dessaisissement_famille",
         civilite: "monsieur",
-        code_postal: "75015",
-        ville: "paris",
-        latitude: "45.8383",
-        longitude: "1.01181",
-        date_nomination: "2020-02-20",
-        department_id: "75",
-        numero_dossier: "123123123",
-        numero_rg: "RGXXXX123",
-        lieu_vie: "etablissement",
-        ti_id: global.ti.id,
-        nature_mesure: "curatelle_renforcee",
-        champ_mesure: "protection_bien_personne",
+        date_fin_mesure: "2020-04-04",
+        date_nomination: "2020-01-01",
+        date_premier_mesure: "2020-01-10",
+        date_protection_en_cours: "2020-01-10",
+        numero_dossier: "45656456",
+        numero_rg: "RG234534534",
+        tribunal_siret: global.ti.siret,
+        tribunal_cabinet: null,
+        etats: [
+          {
+            date_changement_etat: "2020-01-05",
+            lieu_vie: "domicile",
+            pays: "FR",
+            nature_mesure: "curatelle_simple",
+            code_postal: "89000",
+            ville: "auxerre",
+          },
+          {
+            date_changement_etat: "2020-01-06",
+            lieu_vie: "domicile",
+            pays: "FR",
+            nature_mesure: "curatelle_simple",
+            code_postal: "89350",
+            ville: "perrigny",
+          },
+        ],
       });
-
     expect(response.status).toBe(201);
   });
 });
@@ -115,6 +128,8 @@ describe("PUT /api/editors/mesures", () => {
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` })
       .send({ annee_naissance: "1983" });
+
+    console.log(response.body);
     expect(response.status).toBe(200);
   });
 });
@@ -134,10 +149,10 @@ describe("POST /api/editors/mesures/batch", () => {
             civilite: "monsieur",
             code_postal: "75015",
             ville: "paris",
-            latitude: "45.8383",
-            longitude: "1.01181",
+            latitude: 45.8383,
+            longitude: 1.01181,
             date_nomination: "2020-02-20",
-            department_id: "75",
+            department_id: 75,
             numero_dossier: "123123123",
             numero_rg: "RGXXXX123",
             lieu_vie: "etablissement",

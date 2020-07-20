@@ -5,11 +5,22 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 
+function formatMesure(data) {
+  const keys = Object.keys(data);
+  keys.forEach((key) => {
+    if (key.includes("date_")) {
+      data[key] = `${data[key].toISOString()}`;
+    }
+  });
+
+  return data;
+}
+
 const mesureUpdate = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors });
+    return res.status(422).json(errors);
   }
 
   const {
@@ -43,67 +54,53 @@ const mesureUpdate = async (req, res) => {
     return res.status(422).json({ error: "Mesure not found" });
   }
 
-  try {
-    let tis = null;
-    if (body.tribunal_siret) {
-      tis = await Tis.query().where("siret", body.tribunal_siret).first();
+  if (body.tribunal_siret) {
+    try {
+      const tis = await Tis.query().where("siret", body.tribunal_siret).first();
+      if (!tis) {
+        throw "tribunal not found";
+      }
+      mesure.ti_id = tis.id;
+    } catch (error) {
+      return res.status(400).json({ error: "Siret does not valid" });
     }
-    if (!tis) {
-      throw "tribunal not found";
-    }
-    mesure.ti_id = tis.id;
-  } catch (error) {
-    return res.status(400).json({ error: "Siret does not valid" });
   }
 
   try {
     const etats = await MesureEtat.query().where({ mesure_id: id });
 
-    for (const etat of body.etats) {
-      const matchEtat = etats.find(
-        (e) => e.date_changement_etat === etat.date_changement_etat
-      );
-      if (matchEtat) {
-        await MesureEtat.query().where({ id: matchEtat.id }).patch(etat);
-      } else {
-        await MesureEtat.query().insert({ mesure_id: mesure.id, ...etat });
+    if (body.etats) {
+      for (const etat of body.etats) {
+        const matchEtat = etats.find(
+          (e) => e.date_changement_etat === etat.date_changement_etat
+        );
+        if (matchEtat) {
+          await MesureEtat.query().where({ id: matchEtat.id }).patch(etat);
+        } else {
+          await MesureEtat.query().insert({ mesure_id: mesure.id, ...etat });
+        }
       }
     }
 
+    const mesureToUpdate = {
+      ...formatMesure(body),
+      ti_id: mesure.ti_id,
+      [`${type}_id`]: serviceOrMandataire.id,
+    };
+
     const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
+    if (lastEtat) {
+      mesureToUpdate.champ_protection = lastEtat.champ_protection;
+      mesureToUpdate.code_postal = lastEtat.code_postal;
+      mesureToUpdate.lieu_vie = lastEtat.lieu_vie;
+      mesureToUpdate.ville = lastEtat.ville;
+      mesureToUpdate.pays = lastEtat.pays;
+      mesureToUpdate.type_etablissement = lastEtat.type_etablissement;
+    }
 
-    await Mesure.query()
-      .where({ id: mesure.id })
-      .patch({
-        ...mesure,
-        annee_naissance: body.annee_naissance,
-        antenne_id: body.antenne_id || null,
-        cabinet: body.tribunal_cabinet,
-        cause_sortie: body.cause_sortie,
-        champ_protection: lastEtat ? lastEtat.champ_protection : null,
-        civilite: body.civilite,
-        code_postal: lastEtat ? lastEtat.code_postal : null,
-        date_fin_mesure: body.date_fin_mesure
-          ? body.date_fin_mesure.toISOString()
-          : null,
-        date_nomination: body.date_nomination.toISOString(),
-        lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
-        [`${type}_id`]: serviceOrMandataire.id,
-        ville: lastEtat ? lastEtat.ville : null,
-        date_premier_mesure: body.date_premier_mesure
-          ? body.date_premier_mesure.toISOString()
-          : null,
-        date_protection_en_cours: body.date_protection_en_cours
-          ? body.date_protection_en_cours.toISOString()
-          : null,
-        status: body.status,
-        numero_dossier: body.numero_dossier,
-        numero_rg: body.numero_rg,
-        pays: lastEtat ? lastEtat.pays : null,
-        type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
-        resultat_revision: body.resultat_revision,
-      });
+    console.log(mesureToUpdate);
 
+    await Mesure.query().where({ id: mesure.id }).patch(mesureToUpdate);
     mesure = await Mesure.query().where({ id }).first();
     mesure.etats = await MesureEtat.query().where({ mesure_id: id });
   } catch (error) {
