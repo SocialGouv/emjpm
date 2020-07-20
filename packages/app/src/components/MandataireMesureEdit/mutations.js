@@ -6,7 +6,7 @@ export const EDIT_MESURE = gql`
     $department_id: Int
     $date_nomination: date
     $nature_mesure: nature_mesure_type
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $lieu_vie: lieu_vie_type
     $code_postal: String
     $ville: String
@@ -26,7 +26,7 @@ export const EDIT_MESURE = gql`
         date_nomination: $date_nomination
         department_id: $department_id
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         lieu_vie: $lieu_vie
         code_postal: $code_postal
         ville: $ville
@@ -56,7 +56,7 @@ export const EDIT_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         lieu_vie
         numero_rg

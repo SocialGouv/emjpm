@@ -45,7 +45,7 @@ export const MESURES = gql`
       }
       status
       nature_mesure
-      champ_protection
+      champ_mesure
       ville
       lieu_vie
       numero_rg

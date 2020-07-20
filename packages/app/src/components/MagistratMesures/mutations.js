@@ -4,7 +4,7 @@ export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
     $nature_mesure: nature_mesure_type
-    $champ_protection: champ_protection_type
+    $champ_mesure: champ_mesure_type
     $civilite: civilite_type
     $annee_naissance: String
     $numero_rg: String
@@ -14,7 +14,7 @@ export const EDIT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         nature_mesure: $nature_mesure
-        champ_protection: $champ_protection
+        champ_mesure: $champ_mesure
         civilite: $civilite
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg

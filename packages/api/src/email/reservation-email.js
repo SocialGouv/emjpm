@@ -12,8 +12,8 @@ const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>
   - nature de la mesure: ${mesureFormatter.formatNatureMesure(
     mesure.nature_mesure
   )}
-  - champ de la protection: ${mesureFormatter.formatChampProtection(
-    mesure.champ_protection
+  - champ de la mesure de protection: ${mesureFormatter.formatChampMesure(
+    mesure.champ_mesure
   )}
   - civilité: ${mesure.civilite}
   - année de naissance: ${mesure.annee_naissance}
@@ -52,8 +52,8 @@ const EMAIL_RESERVATION_HTML = (ti, user, mesure) =>
     mesure.nature_mesure
   )}
   <br>
-  - champ de la protection: ${mesureFormatter.formatChampProtection(
-    mesure.champ_protection
+  - champ de la mesure de protection: ${mesureFormatter.formatChampMesure(
+    mesure.champ_mesure
   )}
   <br>
   - civilité: ${mesure.civilite}

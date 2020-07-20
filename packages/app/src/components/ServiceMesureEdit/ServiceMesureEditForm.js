@@ -23,7 +23,7 @@ export const ServiceMesureEditForm = (props) => {
       numeroDossier,
       lieuVie,
       natureMesure,
-      champProtection,
+      champMesure,
       tribunal,
       tiId,
       pays,
@@ -53,7 +53,7 @@ export const ServiceMesureEditForm = (props) => {
       lieu_vie: findOption(MESURE_PROTECTION.LIEU_VIE_MAJEUR.options, lieuVie),
       tribunal: { label: tribunal, value: tiId },
       nature_mesure: findOption(MESURE_PROTECTION.NATURE_MESURE.options, natureMesure),
-      champ_protection: findOption(MESURE_PROTECTION.CHAMP_PROTECTION.options, champProtection),
+      champ_mesure: findOption(MESURE_PROTECTION.CHAMP_MESURE.options, champMesure),
       country: GLOBAL.COUNTRIES.options.find((elm) => elm.value === pays),
       city: ville,
       zipcode: codePostal,
@@ -166,16 +166,16 @@ export const ServiceMesureEditForm = (props) => {
           </Field>
           <Field>
             <Select
-              id="champ_protection"
-              name="champ_protection"
+              id="champ_mesure"
+              name="champ_mesure"
               placeholder="Nature de la mesure"
-              value={formik.values.champ_protection}
-              hasError={formik.errors.champ_protection && formik.touched.champ_protection}
-              onChange={(option) => formik.setFieldValue("champ_protection", option)}
+              value={formik.values.champ_mesure}
+              hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
+              onChange={(option) => formik.setFieldValue("champ_mesure", option)}
               isClearable={true}
-              options={MESURE_PROTECTION.CHAMP_PROTECTION.options}
+              options={MESURE_PROTECTION.CHAMP_MESURE.options}
             />
-            <InlineError message={formik.errors.champ_protection} fieldId="champ_protection" />
+            <InlineError message={formik.errors.champ_mesure} fieldId="champ_mesure" />
           </Field>
           <Field>
             <Select

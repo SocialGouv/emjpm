@@ -100,7 +100,7 @@ describe("POST /api/editors/mesures", () => {
         lieu_vie: "etablissement",
         ti_id: global.ti.id,
         nature_mesure: "curatelle_renforcee",
-        champ_protection: "protection_bien_personne",
+        champ_mesure: "protection_bien_personne",
       });
 
     expect(response.status).toBe(201);
@@ -143,7 +143,7 @@ describe("POST /api/editors/mesures/batch", () => {
             lieu_vie: "etablissement",
             ti_id: global.ti.id,
             nature_mesure: "curatelle_renforcee",
-            champ_protection: "protection_bien_personne",
+            champ_mesure: "protection_bien_personne",
           },
         ],
       });

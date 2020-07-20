@@ -62,7 +62,7 @@ export const MANDATAIRE_MESURES = gql`
       status
       ti_id
       nature_mesure
-      champ_protection
+      champ_mesure
       ville
       departement {
         id
