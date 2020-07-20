@@ -142,7 +142,7 @@ const importMesures = async ({
     delete mesure.residence;
 
     const nature_mesure = adaptNatureMesure(mesure.type);
-    const champ_protection = adaptChampMesure(mesure.type);
+    const champ_mesure = adaptChampMesure(mesure.type);
     delete mesure.type;
 
     let civilite;
@@ -156,7 +156,7 @@ const importMesures = async ({
     const mesureDatas = {
       ...mesure,
       nature_mesure,
-      champ_protection,
+      champ_mesure,
       civilite,
       lieu_vie,
       date_nomination: toDate(mesure.date_ouverture),
@@ -302,7 +302,7 @@ const prepareMesure = async (
     date_nomination: mesureDatas.date_nomination,
     ville: mesureDatas.ville,
     nature_mesure: mesureDatas.nature_mesure,
-    champ_protection: mesureDatas.champ_protection,
+    champ_mesure: mesureDatas.champ_mesure,
     status: mesureDatas.status,
     code_postal: mesureDatas.code_postal,
     civilite: mesureDatas.civilite,

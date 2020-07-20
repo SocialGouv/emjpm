@@ -98,7 +98,7 @@ const ServiceMesureEdit = (props) => {
               lieu_vie: values.lieu_vie.value,
               ti_id: values.tribunal.value,
               nature_mesure: values.nature_mesure.value,
-              champ_protection: values.champ_protection ? values.champ_protection.value : null,
+              champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
               pays: values.country.value,
               cabinet: values.cabinet,
             },

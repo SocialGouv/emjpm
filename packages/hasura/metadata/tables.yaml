@@ -4336,7 +4336,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
   - role: prepose
     permission:
@@ -4371,7 +4371,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
   - role: service
     permission:
@@ -4407,7 +4407,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
   - role: ti
     permission:
@@ -4438,7 +4438,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
   select_permissions:
   - role: direction
@@ -4470,7 +4470,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter: {}
       allow_aggregations: true
@@ -4503,7 +4503,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         mandataire:
@@ -4540,7 +4540,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         mandataire:
@@ -4576,7 +4576,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         service_id:
@@ -4612,7 +4612,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         ti:
@@ -4650,7 +4650,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         mandataire:
@@ -4687,7 +4687,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         mandataire:
@@ -4723,7 +4723,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         service_id:
@@ -4756,7 +4756,7 @@
       - status
       - ti_id
       - nature_mesure
-      - champ_protection
+      - champ_mesure
       - ville
       filter:
         ti:

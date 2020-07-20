@@ -4,11 +4,11 @@ import { GLOBAL, MESURE_PROTECTION } from '../constants';
 import { isMonsieur } from '../services';
 
 export const mesureFormatter = {
-  formatChampProtection(champProtection) {
-    if (!champProtection) {
+  formatChampMesure(champMesure) {
+    if (!champMesure) {
       return '';
     }
-    return MESURE_PROTECTION.CHAMP_PROTECTION.byKey[champProtection];
+    return MESURE_PROTECTION.CHAMP_MESURE.byKey[champMesure];
   },
   formatJudgmentDate(judgmentDate) {
     if (!judgmentDate) {

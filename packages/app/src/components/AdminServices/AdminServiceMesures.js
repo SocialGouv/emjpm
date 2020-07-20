@@ -200,7 +200,7 @@ function buildTableColumns() {
     },
     {
       Header: "Protection",
-      accessor: "champ_protection",
+      accessor: "champ_mesure",
     },
     {
       Header: "année",

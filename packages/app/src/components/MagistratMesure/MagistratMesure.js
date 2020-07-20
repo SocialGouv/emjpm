@@ -25,7 +25,7 @@ const MagistratMesure = (props) => {
     tribunal,
     isUrgent,
     natureMesure,
-    champProtection,
+    champMesure,
     id,
   } = useContext(MesureContext);
   return (
@@ -63,9 +63,9 @@ const MagistratMesure = (props) => {
               </Text>
             </Box>
             <Box>
-              <Text sx={MagistratMesureTitleStyle}>Champ de la protection</Text>
+              <Text sx={MagistratMesureTitleStyle}>Champ de la mesure</Text>
               <Text sx={MagistratMesureContentStyle}>
-                {MESURE_PROTECTION.CHAMP_PROTECTION.byKey[champProtection]}
+                {MESURE_PROTECTION.CHAMP_MESURE.byKey[champMesure]}
               </Text>
             </Box>
             <Box>

@@ -21,7 +21,7 @@ export const CLOSE_MESURE = gql`
         }
         status
         nature_mesure
-        champ_protection
+        champ_mesure
         ville
         lieu_vie
         mandataire_id
