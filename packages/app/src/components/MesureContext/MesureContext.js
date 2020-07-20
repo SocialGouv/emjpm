@@ -34,7 +34,7 @@ function formatMesure(mesure) {
     numero_dossier,
     departement,
     nature_mesure,
-    champ_protection,
+    champ_mesure,
     ville,
     status,
     id,
@@ -86,7 +86,7 @@ function formatMesure(mesure) {
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal ",
     natureMesure: nature_mesure ? nature_mesure : "",
-    champProtection: champ_protection ? champ_protection : "",
+    champMesure: champ_mesure ? champ_mesure : "",
     ville: ville ? ville : "ville ",
     pays,
   };

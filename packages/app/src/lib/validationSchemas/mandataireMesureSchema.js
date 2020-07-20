@@ -6,7 +6,7 @@ const mandataireMesureSchema = yup.object().shape({
     .required()
     .min(1900, "L'année choisi doit être au minimum 1900.")
     .max(2019, "L'année choisi doit être au maximum 2019."),
-  champ_protection: yup.string().nullable(),
+  champ_mesure: yup.string().nullable(),
   city: yup.string().when("country", {
     is: (country) => country.value && country.value === "FR",
     then: yup.string().required(),
