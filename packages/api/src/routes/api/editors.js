@@ -65,7 +65,9 @@ router.put(
   mesureUpdate
 );
 router.post("/mesures/batch", mesureBatch);
-router.delete("/mesures/:id", mesureDelete);
+
+router.delete("/mesures/:id", mesureDelete.deleteById);
+router.delete("/mesures", mesureDelete.deleteAll);
 router.get("/mesures/:id", param("id").isInt(), mesure);
 
 module.exports = router;
