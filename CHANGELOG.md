@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.53.0](https://github.com/SocialGouv/emjpm/compare/v25.52.1...v25.53.0) (2020-07-20)
+
+
+### Bug Fixes
+
+* **enquete:** reload enquete after submission ([#2068](https://github.com/SocialGouv/emjpm/issues/2068)) ([bb69218](https://github.com/SocialGouv/emjpm/commit/bb6921882fe286460464ceb2c0649b4d313ec7fe))
+* **schema-pjm:** mesures.status ([#2075](https://github.com/SocialGouv/emjpm/issues/2075)) ([525ffdf](https://github.com/SocialGouv/emjpm/commit/525ffdfb35ad27f136055bf464d91bf3fa4ebf65))
+* **test:** update migration script ([#2070](https://github.com/SocialGouv/emjpm/issues/2070)) ([9db8bee](https://github.com/SocialGouv/emjpm/commit/9db8beed949f9251349fe63115c4939f490c4034))
+
+
+### Features
+
+* **liste-blanche:** [#2050](https://github.com/SocialGouv/emjpm/issues/2050) ([#2060](https://github.com/SocialGouv/emjpm/issues/2060)) ([a83d326](https://github.com/SocialGouv/emjpm/commit/a83d3267e5698a2f85a2bda03e9be020fc043d86))
+* **mesures-etat:** create table mesure_etat ([#2069](https://github.com/SocialGouv/emjpm/issues/2069)) ([c1e724c](https://github.com/SocialGouv/emjpm/commit/c1e724cee97a86f257c0737dfbb8f764668914f6))
+* **schema-pjm:** mesures.cause_sortie ([#2066](https://github.com/SocialGouv/emjpm/issues/2066)) ([3f03ea6](https://github.com/SocialGouv/emjpm/commit/3f03ea6f5e1182df974de7b39b0157ee4876ecf6))
+* **schema-pjm:** mesures.civilite ([#2065](https://github.com/SocialGouv/emjpm/issues/2065)) ([c4b635e](https://github.com/SocialGouv/emjpm/commit/c4b635e487ee5d79328a4e07220c2ea8daa84529))
+* **schema-pjm:** mesures.date_fin_mesure ([#2064](https://github.com/SocialGouv/emjpm/issues/2064)) ([2e6f62e](https://github.com/SocialGouv/emjpm/commit/2e6f62e6a2e542ffd978dfb00ff15c77ebd3421f))
+* **schema-pjm:** mesures.date_nomination ([#2063](https://github.com/SocialGouv/emjpm/issues/2063)) ([1e28ac7](https://github.com/SocialGouv/emjpm/commit/1e28ac7641d2c6e688549336a91eba29f9d56b93))
+* **schema-pjm:** mesures.lieu_vie ([#2057](https://github.com/SocialGouv/emjpm/issues/2057)) ([2f1aab8](https://github.com/SocialGouv/emjpm/commit/2f1aab8df9694000b4a087a17470443ca2bbc0bb))
+* **schema-pjm:** mesures.nature ([#2067](https://github.com/SocialGouv/emjpm/issues/2067)) ([ad444d1](https://github.com/SocialGouv/emjpm/commit/ad444d1b36aaba8e94e8ae95fa2e25bb16398a40))
+* **schema-pjm:** rename annee to annee_naissance ([#2062](https://github.com/SocialGouv/emjpm/issues/2062)) ([de85701](https://github.com/SocialGouv/emjpm/commit/de85701a9401491b9c5894a7b25717e340de5b7b))
+
+
+
+
+
 ## [25.52.1](https://github.com/SocialGouv/emjpm/compare/v25.52.0...v25.52.1) (2020-07-06)
 
 **Note:** Version bump only for package emjpm
