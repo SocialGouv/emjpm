@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.54.0](https://github.com/SocialGouv/emjpm/compare/v25.53.0...v25.54.0) (2020-07-20)
+
+
+### Features
+
+* **schema-pjm:** rename champ_protection to champ_mesure ([#2077](https://github.com/SocialGouv/emjpm/issues/2077)) ([9af782f](https://github.com/SocialGouv/emjpm/commit/9af782f2dbeddda334a01699dcda8ad4a1c58c58))
+
+
+
+
+
 # [25.53.0](https://github.com/SocialGouv/emjpm/compare/v25.52.1...v25.53.0) (2020-07-20)
 
 
