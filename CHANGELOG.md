@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.55.0](https://github.com/SocialGouv/emjpm/compare/v25.54.0...v25.55.0) (2020-07-21)
+
+
+### Features
+
+* **cgu-mention:** add cgu + mentions legales ([#2083](https://github.com/SocialGouv/emjpm/issues/2083)) ([4dcc26e](https://github.com/SocialGouv/emjpm/commit/4dcc26e0be3120ac4cfd2a6dbb0c0668853433f2))
+* **mesure-import:** clear cache after import ([0f87470](https://github.com/SocialGouv/emjpm/commit/0f87470d24ec7fa6e5cdfced70f116035cf332ee))
+
+
+
+
+
 # [25.54.0](https://github.com/SocialGouv/emjpm/compare/v25.53.0...v25.54.0) (2020-07-20)
 
 
