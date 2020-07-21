@@ -136,8 +136,8 @@ export const MAGISTRAT_USERS = gql`
 `;
 
 export const ADMIN_USERS = gql`
-  query users($userId: Int) {
-    users(where: { id: { _eq: $userId } }) {
+  query users($userId: Int!) {
+    users_by_pk(id: $userId) {
       email
       created_at
       id

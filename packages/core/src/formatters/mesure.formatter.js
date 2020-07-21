@@ -35,7 +35,6 @@ export const mesureFormatter = {
     return MESURE_PROTECTION.NATURE_MESURE.byKey[natureMesure];
   },
   formatPays(codePays) {
-    console.log(codePays);
     if (codePays) {
       return GLOBAL.COUNTRIES.byKey[codePays];
     }
