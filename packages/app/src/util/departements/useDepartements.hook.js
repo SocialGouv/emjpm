@@ -27,7 +27,9 @@ const GET_DEPARTEMENTS = gql`
 export const GET_DIRECTION_REGION_DEPARTEMENT = gql`
   query direction_region_departement($userId: Int!) {
     direction(where: { user_id: { _eq: $userId } }) {
+      id
       region {
+        id
         nom
         departements {
           code
@@ -38,6 +40,7 @@ export const GET_DIRECTION_REGION_DEPARTEMENT = gql`
       departement {
         id
         code
+        nom
       }
     }
   }
