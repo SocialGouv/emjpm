@@ -1,14 +1,11 @@
 const { validationResult } = require("express-validator");
-
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
-const { Departement } = require("../../models/Departement");
-const {
-  GeolocalisationCodePostal,
-} = require("../../models/GeolocalisationCodePostal");
-const getRegionCode = require("../../utils/getRegionCode");
+const getGeoDatas = require("../../services/getGeoDatas");
+const getDepartement = require("../../services/getDepartement");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -60,20 +57,14 @@ const mesureCreate = async (req, res) => {
     let latitude = null;
 
     if (lastEtat && lastEtat.code_postal) {
-      const regionCode = getRegionCode(lastEtat.code_postal);
-      const departement = await Departement.query()
-        .where({ code: regionCode })
-        .first();
+      const departement = await getDepartement(lastEtat.code_postal);
       departementId = departement.id;
 
-      const geoloc = await GeolocalisationCodePostal.query()
-        .where({ code_postal: lastEtat.code_postal })
-        .first();
+      const geoloc = await getGeoDatas(lastEtat.code_postal, lastEtat.ville);
 
       if (geoloc) {
-        // TODO(remiroyc): <!> "error": "latitude: should be float,, longitude: should be float,"
-        longitude = parseFloat(geoloc.longitude);
-        latitude = parseFloat(geoloc.latitude);
+        longitude = geoloc.longitude;
+        latitude = geoloc.latitude;
       }
     }
 
@@ -93,9 +84,9 @@ const mesureCreate = async (req, res) => {
       etablissement: null,
       etablissement_id: null,
       judgment_date: null,
-      latitude: 10.5,
+      latitude,
+      longitude,
       lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
-      longitude: 10.5,
       [`${type}_id`]: serviceOrMandataire.id,
       ti_id: tis ? tis.id : null,
       ville: lastEtat ? lastEtat.ville : null,
@@ -105,7 +96,7 @@ const mesureCreate = async (req, res) => {
       date_protection_en_cours: body.date_protection_en_cours
         ? body.date_protection_en_cours.toISOString()
         : null,
-      status: "en_cours",
+      status: MESURE_PROTECTION_STATUS.en_cours,
       numero_dossier: body.numero_dossier,
       numero_rg: body.numero_rg,
       pays: lastEtat ? lastEtat.pays : null,
