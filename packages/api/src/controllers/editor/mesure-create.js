@@ -4,6 +4,8 @@ const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
+const { Departement } = require("../../models/Departement");
+const getRegionCode = require("../../utils/getRegionCode");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -50,6 +52,15 @@ const mesureCreate = async (req, res) => {
   try {
     const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
 
+    let departementId = null;
+    if (lastEtat && lastEtat.code_postal) {
+      const regionCode = getRegionCode(lastEtat.code_postal);
+      const departement = await Departement.query()
+        .where({ code: regionCode })
+        .first();
+      departementId = departement.id;
+    }
+
     const mesureToCreate = {
       annee_naissance: body.annee_naissance,
       antenne_id: body.antenne_id || null,
@@ -62,7 +73,7 @@ const mesureCreate = async (req, res) => {
         ? body.date_fin_mesure.toISOString()
         : null,
       date_nomination: body.date_nomination.toISOString(),
-      department_id: null,
+      department_id: departementId,
       etablissement: null,
       etablissement_id: null,
       judgment_date: null,
@@ -108,6 +119,7 @@ const mesureCreate = async (req, res) => {
       }
     }
   } catch (error) {
+    console.error("error", error.message);
     return res.status(422).json({ error: error.message });
   }
 

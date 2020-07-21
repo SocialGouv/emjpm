@@ -4,6 +4,8 @@ const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
+const { Departement } = require("../../models/Departement");
+const getRegionCode = require("../../utils/getRegionCode");
 
 function formatMesure(data) {
   const keys = Object.keys(data);
@@ -90,6 +92,14 @@ const mesureUpdate = async (req, res) => {
 
     const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
     if (lastEtat) {
+      if (lastEtat.code_postal) {
+        const regionCode = getRegionCode(lastEtat.code_postal);
+        const departement = await Departement.query()
+          .where({ code: regionCode })
+          .first();
+        mesureToUpdate.department_id = departement.id;
+      }
+
       mesureToUpdate.champ_protection = lastEtat.champ_protection;
       mesureToUpdate.code_postal = lastEtat.code_postal;
       mesureToUpdate.lieu_vie = lastEtat.lieu_vie;
@@ -97,8 +107,6 @@ const mesureUpdate = async (req, res) => {
       mesureToUpdate.pays = lastEtat.pays;
       mesureToUpdate.type_etablissement = lastEtat.type_etablissement;
     }
-
-    console.log(mesureToUpdate);
 
     await Mesure.query().where({ id: mesure.id }).patch(mesureToUpdate);
     mesure = await Mesure.query().where({ id }).first();
