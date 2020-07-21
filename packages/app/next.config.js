@@ -13,7 +13,12 @@ const withSourceMaps = require("@zeit/next-source-maps")({
   devtool: "hidden-source-map",
 });
 
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/
+})
+
 module.exports = flow(
+  withMDX,
   withCSS,
   withImages,
   withSourceMaps,
