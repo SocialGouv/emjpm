@@ -1,3 +1,4 @@
+import { DIRECTION } from "@emjpm/core";
 import { Button, Card, Field, Heading1, Heading4, InlineError, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -5,7 +6,6 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { DIRECTION_TYPE_LABEL_VALUE } from "../../constants/direction";
 import { signupDirectionSchema } from "../../lib/validationSchemas";
 import { SignupContext } from "./context";
 import signup from "./signup";
@@ -65,7 +65,7 @@ export const SignupDirection = () => {
                     value={formik.values.directionType}
                     hasError={formik.errors.directionType && formik.touched.directionType}
                     onChange={(option) => formik.setFieldValue("directionType", option)}
-                    options={DIRECTION_TYPE_LABEL_VALUE}
+                    options={DIRECTION.DIRECTION_TYPE.options}
                   />
                   {formik.touched.directionType && (
                     <InlineError message={formik.errors.directionType} fieldId="directionType" />

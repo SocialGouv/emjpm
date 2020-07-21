@@ -1,3 +1,4 @@
+import { isAdmin, isDirectionNationale } from "@emjpm/core";
 import { RadioGroup } from "@emjpm/ui";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React, { Fragment, useContext, useMemo, useState } from "react";
@@ -8,7 +9,6 @@ import { UserContext } from "../../UserContext";
 
 export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepartements }) => {
   const user = useContext(UserContext);
-  console.log("user", user);
   const options = useMemo(() => {
     return DepartementFormUtil.departementToOptions(
       lbDepartements.map((lbDepartement) => lbDepartement.departement)
@@ -77,8 +77,7 @@ export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepa
               }}
             >
               <Text lineHeight="20px">{label}</Text>
-              {(user.user_roles.some(({ role }) => role.name === "direction_nationale") ||
-                user.agrements.includes(id)) && (
+              {canDeleteAgrement(user, id) && (
                 <Box
                   sx={{
                     cursor: "pointer",
@@ -104,6 +103,16 @@ export const ListeBlancheFormDepartementFinanceur = ({ lbDepartements, setLbDepa
     </Fragment>
   ) : null;
 };
+
+function canDeleteAgrement(user, departementId) {
+  if (isAdmin(user)) {
+    return true;
+  }
+  if (isDirectionNationale(user)) {
+    return true;
+  }
+  return user.agrements.includes(departementId);
+}
 
 function removeFromArray(array, index) {
   // https://stackoverflow.com/questions/40737482/immutable-change-elements-in-array-with-slice-no-splice#40737615
