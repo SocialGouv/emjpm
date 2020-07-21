@@ -1,7 +1,6 @@
 const { Model } = require("objection");
 
 const knexConnection = require("../db/knex");
-const { Mesure } = require("./Mesure");
 
 Model.knex(knexConnection);
 
@@ -32,19 +31,6 @@ class MesureEtat extends Model {
       },
     };
   }
-
-  // static get relationMappings() {
-  //   return {
-  //     mesure: {
-  //       relation: Model.BelongsToOneRelation,
-  //       modelClass: Mesure,
-  //       join: {
-  //         from: "mesure_etat.mesure_id",
-  //         to: "mesures.id",
-  //       },
-  //     },
-  //   };
-  // }
 }
 
 module.exports = { MesureEtat };
