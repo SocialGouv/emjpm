@@ -3383,6 +3383,18 @@ Object {
     "nullable": true,
     "type": "date",
   },
+  "date_premier_mesure": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
+  "date_protection_en_cours": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "date",
+  },
   "department_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3472,6 +3484,12 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
+  },
+  "resultat_revision": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "USER-DEFINED",
   },
   "service_id": Object {
     "defaultValue": null,
