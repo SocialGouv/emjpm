@@ -50,7 +50,11 @@ export const LB_USERS = gql`
       type
       mandataire {
         id
-        user_id
+        user {
+          id
+          nom
+          prenom
+        }
       }
       lb_departements {
         id
@@ -60,6 +64,7 @@ export const LB_USERS = gql`
         prepose
         individuel
         departement {
+          id
           code
           nom
         }
