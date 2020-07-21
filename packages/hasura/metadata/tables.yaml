@@ -3824,6 +3824,59 @@
       filter: {}
 - table:
     schema: public
+    name: lb_structures
+  object_relationships:
+  - name: lb_departement
+    using:
+      foreign_key_constraint_on: lb_departement_id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_departement_id
+      - type
+      - nom
+      filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - lb_departement_id
+      - created_at
+      - nom
+      - type
+      filter: {}
+  delete_permissions:
+  - role: direction
+    permission:
+      filter: {}
+  - role: direction_nationale
+    permission:
+      filter: {}
+- table:
+    schema: public
+    name: lb_tribunaux
+  object_relationships:
+  - name: lb_departement
+    using:
+      foreign_key_constraint_on: lb_departement_id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_departement_id
+      - ville
+      filter: {}
+  delete_permissions:
+  - role: direction
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: lb_users
   object_relationships:
   - name: mandataire
