@@ -20,31 +20,13 @@ function Footer(props) {
           <List sx={FooterItemStyle}>
             <ListTitle>A propos de nous</ListTitle>
             <ListItem>
-              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/category/news">
-                Notre actualité
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Link target="_blank" href="/mentions-legales-modalites-utilisation">
+              <Link target="_blank" href="/mentions-legales">
                 Mentions légales
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/stats">
-                Statistique de connexion
-              </Link>
-            </ListItem>
-          </List>
-          <List sx={FooterItemStyle}>
-            <ListTitle>Aide et ressources</ListTitle>
-            <ListItem>
-              <Link target="_blank" href="https://emjpm-blog.azurewebsites.net/medias/ ">
-                Guide d’utilisation
-              </Link>
-            </ListItem>
-            <ListItem>
-              <Link target="_blank" href="https://github.com/SocialGouv/emjpm">
-                Version {publicRuntimeConfig.PACKAGE_VERSION}
+              <Link target="_blank" href="/conditions-utilisation">
+                {`Conditions d'utilisation`}
               </Link>
             </ListItem>
           </List>
@@ -55,12 +37,17 @@ function Footer(props) {
                 Par email
               </Link>
             </ListItem>
+          </List>
+          <List sx={FooterItemStyle}>
+            <ListTitle>Aide et ressources</ListTitle>
             <ListItem>
-              <Link
-                target="_blank"
-                href="https://docs.google.com/forms/d/1W8f9ySchjaJfAoYMVsYxjsk1PUAGoCX51Aykb_CUNXA/prefill"
-              >
-                Proposez une fonctionnalité
+              <Link target="_blank" href="https://github.com/SocialGouv/emjpm">
+                Version {publicRuntimeConfig.PACKAGE_VERSION}
+              </Link>
+            </ListItem>
+            <ListItem>
+              <Link target="_blank" href="/stats">
+                Statistique de connexion
               </Link>
             </ListItem>
           </List>
