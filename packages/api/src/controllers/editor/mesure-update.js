@@ -5,6 +5,9 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 const { Departement } = require("../../models/Departement");
+const {
+  GeolocalisationCodePostal,
+} = require("../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../utils/getRegionCode");
 
 function formatMesure(data) {
@@ -98,6 +101,14 @@ const mesureUpdate = async (req, res) => {
           .where({ code: regionCode })
           .first();
         mesureToUpdate.department_id = departement.id;
+
+        const geoloc = await GeolocalisationCodePostal.query()
+          .where({ code_postal: lastEtat.code_postal })
+          .first();
+        if (geoloc) {
+          mesureToUpdate.longitude = geoloc.longitude;
+          mesureToUpdate.latitude = geoloc.latitude;
+        }
       }
 
       mesureToUpdate.champ_protection = lastEtat.champ_protection;

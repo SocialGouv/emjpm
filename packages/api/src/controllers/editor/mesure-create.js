@@ -5,6 +5,9 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 const { Departement } = require("../../models/Departement");
+const {
+  GeolocalisationCodePostal,
+} = require("../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../utils/getRegionCode");
 
 const mesureCreate = async (req, res) => {
@@ -53,12 +56,25 @@ const mesureCreate = async (req, res) => {
     const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
 
     let departementId = null;
+    let longitude = null;
+    let latitude = null;
+
     if (lastEtat && lastEtat.code_postal) {
       const regionCode = getRegionCode(lastEtat.code_postal);
       const departement = await Departement.query()
         .where({ code: regionCode })
         .first();
       departementId = departement.id;
+
+      const geoloc = await GeolocalisationCodePostal.query()
+        .where({ code_postal: lastEtat.code_postal })
+        .first();
+
+      if (geoloc) {
+        // TODO(remiroyc): <!> "error": "latitude: should be float,, longitude: should be float,"
+        longitude = parseFloat(geoloc.longitude);
+        latitude = parseFloat(geoloc.latitude);
+      }
     }
 
     const mesureToCreate = {
@@ -77,9 +93,9 @@ const mesureCreate = async (req, res) => {
       etablissement: null,
       etablissement_id: null,
       judgment_date: null,
-      latitude: null,
+      latitude: 10.5,
       lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
-      longitude: null,
+      longitude: 10.5,
       [`${type}_id`]: serviceOrMandataire.id,
       ti_id: tis ? tis.id : null,
       ville: lastEtat ? lastEtat.ville : null,
@@ -97,6 +113,8 @@ const mesureCreate = async (req, res) => {
       type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
       resultat_revision: body.resultat_revision,
     };
+
+    console.log(mesureToCreate);
 
     mesure = await Mesure.query().insert(mesureToCreate);
     mesure.etats = [];
