@@ -33,18 +33,18 @@ class MesureEtat extends Model {
     };
   }
 
-  static get relationMappings() {
-    return {
-      service: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Mesure,
-        join: {
-          from: "mesure_etat.mesure_id",
-          to: "mesures.id",
-        },
-      },
-    };
-  }
+  // static get relationMappings() {
+  //   return {
+  //     mesure: {
+  //       relation: Model.BelongsToOneRelation,
+  //       modelClass: Mesure,
+  //       join: {
+  //         from: "mesure_etat.mesure_id",
+  //         to: "mesures.id",
+  //       },
+  //     },
+  //   };
+  // }
 }
 
 module.exports = { MesureEtat };
