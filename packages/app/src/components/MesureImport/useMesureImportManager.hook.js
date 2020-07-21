@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import { useState } from "react";
 
 import { fileReader } from "../../util/fileReader";
@@ -8,6 +8,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [file, setFile] = useState();
   const [uploadFile, { loading: mesuresImportLoading }] = useMutation(UPLOAD_MESURES_EXCEL_FILE);
+  const apolloClient = useApolloClient();
 
   function importMesureFileWithAntennesMap(antennesMap) {
     launchImport({ file, antennesMap });
@@ -49,6 +50,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
               upload_mesures_file: { data },
             },
           }) => {
+            apolloClient.clearStore();
             const importSummary = JSON.parse(data);
             setImportSummary(importSummary);
           }
