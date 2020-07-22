@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const MESURES = gql`
   query MesureGestionnaire {
-    mesures {
+    mesures(where: { status: { _eq: "en_cours" } }) {
       id
       code_postal
       longitude
