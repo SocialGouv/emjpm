@@ -42,7 +42,7 @@ const formatMesureListItems = (mesureList) => {
       numeroDossier: numero_dossier ? numero_dossier : "-",
       numeroRg: numero_rg ? numero_rg : null,
       status: status ? formatter.formatStatus(status) : null,
-      tribunal: ti.etablissement,
+      tribunal: ti ? ti.etablissement : "-",
       ville: ville ? ville : null,
     };
   });
