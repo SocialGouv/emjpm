@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.56.0](https://github.com/SocialGouv/emjpm/compare/v25.55.0...v25.56.0) (2020-07-22)
+
+
+### Bug Fixes
+
+* **liste-blanche:** add id in gql query ([#2086](https://github.com/SocialGouv/emjpm/issues/2086)) ([d0a0f95](https://github.com/SocialGouv/emjpm/commit/d0a0f95886c3ee9ad1977828039c6205de3a0c84))
+* **liste-blanche:** allow admin edit liste blanche ([#2085](https://github.com/SocialGouv/emjpm/issues/2085)) ([47d02e9](https://github.com/SocialGouv/emjpm/commit/47d02e93a44358c75fc2c33e6b0395f30ec15f71))
+* **ui:** add test to avoid undefined exception ([cc8c006](https://github.com/SocialGouv/emjpm/commit/cc8c006fc9905fa2ed0d0e4bb3a76634d24dda42))
+
+
+### Features
+
+* **apollo-cache:** clear store after login and logout ([b711bdc](https://github.com/SocialGouv/emjpm/commit/b711bdc93428076581cbb29524239de1c57752b0))
+
+
+
+
+
 # [25.55.0](https://github.com/SocialGouv/emjpm/compare/v25.54.0...v25.55.0) (2020-07-21)
 
 
