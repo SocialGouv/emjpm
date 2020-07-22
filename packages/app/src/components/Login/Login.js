@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
 import React from "react";
+import { useApolloClient } from "react-apollo";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
@@ -16,7 +17,7 @@ const {
   publicRuntimeConfig: { API_URL },
 } = getConfig();
 
-const checkStatus = async (response, setSubmitting, setStatus) => {
+const checkStatus = async (apolloClient, response, setSubmitting, setStatus) => {
   let json = null;
   setSubmitting(false);
   try {
@@ -30,6 +31,7 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
     return json;
   }
 
+  apolloClient.clearStore();
   login({ token: json.token });
   Router.push(json.url);
   matopush(["trackEvent", "login", "success"]);
@@ -42,6 +44,8 @@ const Login = (props) => {
   const { token } = props;
   const url = `${API_URL}/api/auth/login`;
 
+  const apolloClient = useApolloClient();
+
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {
       body: JSON.stringify({
@@ -53,7 +57,7 @@ const Login = (props) => {
       },
       method: "POST",
     });
-    checkStatus(response, setSubmitting, setStatus);
+    checkStatus(apolloClient, response, setSubmitting, setStatus);
   };
 
   const formik = useFormik({
