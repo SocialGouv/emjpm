@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.56.0](https://github.com/SocialGouv/emjpm/compare/v25.55.0...v25.56.0) (2020-07-22)
+
+
+### Bug Fixes
+
+* **liste-blanche:** allow admin edit liste blanche ([#2085](https://github.com/SocialGouv/emjpm/issues/2085)) ([47d02e9](https://github.com/SocialGouv/emjpm/commit/47d02e93a44358c75fc2c33e6b0395f30ec15f71))
+
+
+
+
+
 # [25.55.0](https://github.com/SocialGouv/emjpm/compare/v25.54.0...v25.55.0) (2020-07-21)
 
 **Note:** Version bump only for package @emjpm/core
