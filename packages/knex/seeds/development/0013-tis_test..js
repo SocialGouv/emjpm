@@ -12,6 +12,7 @@ exports.seed = function (knex) {
         code_postal: "62000",
         ville: "Arras",
         telephone: "0237100000",
+        siret: "17590111501251",
       });
     })
     .then(function () {
