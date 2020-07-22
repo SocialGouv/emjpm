@@ -1,3 +1,4 @@
+import { useApolloClient } from "@apollo/react-hooks";
 import { DropDownMenu, Header as HeaderComponent } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
@@ -10,8 +11,14 @@ export const defaultLinks = [
   // { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
 ];
 
+const handleLogout = (apolloClient) => {
+  apolloClient.clearStore();
+  logout();
+};
+
 const Header = (props) => {
   const { username } = useContext(UserContext);
+  const apolloClient = useApolloClient();
   const { dropDownLinks } = props;
   return (
     <Fragment>
@@ -19,7 +26,7 @@ const Header = (props) => {
         username={username}
         Link={Link}
         dropDownLinks={defaultLinks.concat(dropDownLinks)}
-        disconnect={logout}
+        disconnect={() => handleLogout(apolloClient)}
         DropDownMenu={DropDownMenu}
       />
     </Fragment>
