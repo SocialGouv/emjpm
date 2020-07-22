@@ -1,7 +1,11 @@
+const { transaction } = require("objection");
+
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
+const { MesureEtat } = require("../../models/MesureEtat");
+const { MesureRessources } = require("../../models/MesureRessources");
 
-const mesureDelete = async (req, res) => {
+const deleteById = async (req, res) => {
   const {
     params: { id },
     user: { user_id },
@@ -24,12 +28,75 @@ const mesureDelete = async (req, res) => {
     return res.status(422).json({ error: `${type} not found` });
   }
 
-  await Mesure.query()
-    .where("id", id)
-    .where(`${type}_id`, serviceOrMandataire.id)
-    .delete();
-
-  return res.status(204).json({});
+  const affectedRows = await transaction(
+    Mesure,
+    MesureEtat,
+    MesureRessources,
+    async (Mesure, MesureEtat, MesureRessources) => {
+      await MesureEtat.query().where("mesure_id", id).delete();
+      await MesureRessources.query().where("mesure_id", id).delete();
+      const affectedRows = await Mesure.query()
+        .where("id", id)
+        .where(`${type}_id`, serviceOrMandataire.id)
+        .delete();
+      return affectedRows;
+    }
+  );
+  return res.status(200).json({ affected_rows: affectedRows });
 };
 
-module.exports = mesureDelete;
+const deleteAll = async (req, res) => {
+  const {
+    user: { user_id },
+  } = req;
+
+  let user;
+  let serviceOrMandataire;
+
+  try {
+    user = await User.query().findById(user_id);
+  } catch (error) {
+    return res.status(422).json({ error: "user not found" });
+  }
+
+  try {
+    const type = user.type === "service" ? "service" : "mandataire";
+    try {
+      serviceOrMandataire = await user.$relatedQuery(type);
+    } catch (error) {
+      return res.status(422).json({ error: `${type} not found` });
+    }
+
+    const mesures = await Mesure.query()
+      .select("mesures.id")
+      .where({ [`${type}_id`]: serviceOrMandataire.id });
+
+    const mesureIds = mesures.map((m) => m.id);
+
+    const affectedRows = await transaction(
+      Mesure,
+      MesureEtat,
+      MesureRessources,
+      async (Mesure, MesureEtat, MesureRessources) => {
+        console.log("Suppression MesureEtat");
+
+        await MesureEtat.query().delete().whereIn("mesure_id", mesureIds);
+        await MesureRessources.query().delete().whereIn("mesure_id", mesureIds);
+
+        const affectedRows = await Mesure.query()
+          .where(`${type}_id`, serviceOrMandataire.id)
+          .delete();
+
+        return affectedRows;
+      }
+    );
+    return res.status(200).json({ affected_rows: affectedRows });
+  } catch (err) {
+    return res.status(401).end({ error: "something goes wrong" });
+  }
+};
+
+module.exports = {
+  deleteById,
+  deleteAll,
+};
