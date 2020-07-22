@@ -33,15 +33,17 @@ const mesureBatch = async (req, res) => {
   try {
     const regionCodes = body.mesures
       ? body.mesures.reduce((acc, item) => {
-          const regionCodes = item.etats.reduce((codes, { code_postal }) => {
-            if (code_postal) {
-              const regionCode = getRegionCode(code_postal);
-              if (!codes.includes(regionCode)) {
-                return codes.concat(regionCode);
-              }
-            }
-            return codes;
-          }, []);
+          const regionCodes = !item.etats
+            ? []
+            : item.etats.reduce((codes, { code_postal }) => {
+                if (code_postal) {
+                  const regionCode = getRegionCode(code_postal);
+                  if (!codes.includes(regionCode)) {
+                    return codes.concat(regionCode);
+                  }
+                }
+                return codes;
+              }, []);
 
           const results = [...acc];
           regionCodes.forEach((regionCode) => {
