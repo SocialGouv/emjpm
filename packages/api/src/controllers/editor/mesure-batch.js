@@ -5,6 +5,7 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Departement } = require("../../models/Departement");
 const { Tis } = require("../../models/Tis");
+const { MesureRessources } = require("../../models/MesureRessources");
 const getRegionCode = require("../../utils/getRegionCode");
 
 const mesureBatch = async (req, res) => {
@@ -58,7 +59,8 @@ const mesureBatch = async (req, res) => {
     const createdMesures = await transaction(
       Mesure,
       MesureEtat,
-      async (Mesure, MesureEtat) => {
+      MesureRessources,
+      async (Mesure, MesureEtat, MesureRessources) => {
         const results = [];
 
         for (const idx in body.mesures) {
@@ -126,8 +128,24 @@ const mesureBatch = async (req, res) => {
             resultat_revision: mesure.resultat_revision,
           });
 
-          createdMesure.etats = [];
+          createdMesure.ressources = [];
+          if (mesure.ressources) {
+            for (const ressource of mesure.ressources) {
+              const createdMesureRessource = await MesureRessources.query().insert(
+                {
+                  mesure_id: createdMesure.id,
+                  annee: ressource.annee || null,
+                  niveau_ressource: ressource.niveau_ressource,
+                  prestations_sociales: JSON.stringify(
+                    ressource.prestations_sociales
+                  ),
+                }
+              );
+              createdMesure.ressources.push(createdMesureRessource);
+            }
+          }
 
+          createdMesure.etats = [];
           if (mesure.etats) {
             for (const etat of mesure.etats) {
               const mesureEtat = await MesureEtat.query().insert({
