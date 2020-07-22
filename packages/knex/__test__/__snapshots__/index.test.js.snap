@@ -3321,6 +3321,41 @@ Object {
 }
 `;
 
+exports[`mesure_ressources table schema 1`] = `
+Object {
+  "annee": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mesure_ressources_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mesure_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "niveau_ressource": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "prestations_sociales": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "jsonb",
+  },
+}
+`;
+
 exports[`mesures table schema 1`] = `
 Object {
   "annee_naissance": Object {
