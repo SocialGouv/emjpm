@@ -55,6 +55,7 @@ module.exports = {
             const [{ departement }] = lb_user.lb_departements;
             defaultValues.region = departement.region.nom;
             defaultValues.departement = departement.nom;
+            defaultValues.departementId = departement.id;
           }
         }
       }
@@ -63,6 +64,7 @@ module.exports = {
         enqueteId,
         mandataireId,
         nom: defaultValues.nom,
+        departementId: defaultValues.departementId,
         departement: defaultValues.departement,
         region: defaultValues.region,
       };

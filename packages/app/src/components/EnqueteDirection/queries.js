@@ -42,6 +42,11 @@ export const ENQUETE_DETAILS_RESUME = gql`
     ) {
       reponse_id: id
       status
+      departement {
+        id
+        code
+        nom
+      }
       submitted_at
       uploaded_on
       user_type
@@ -53,25 +58,11 @@ export const ENQUETE_DETAILS_RESUME = gql`
           nom
           type
         }
-        lb_user {
-          id
-          lb_departements {
-            departement_financeur
-            departement {
-              code
-              nom
-            }
-          }
-        }
         ville
       }
       service {
         id
         etablissement
-        departement {
-          code
-          nom
-        }
         ville
       }
     }
@@ -96,6 +87,11 @@ export const ENQUETE_DETAILS_LIST = gql`
       submitted_at
       uploaded_on
       user_type
+      departement {
+        id
+        code
+        nom
+      }
       mandataire {
         id
         user {
@@ -104,25 +100,11 @@ export const ENQUETE_DETAILS_LIST = gql`
           nom
           type
         }
-        lb_user {
-          id
-          lb_departements {
-            departement_financeur
-            departement {
-              code
-              nom
-            }
-          }
-        }
         ville
       }
       service {
         id
         etablissement
-        departement {
-          code
-          nom
-        }
         ville
       }
     }

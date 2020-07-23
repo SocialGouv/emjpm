@@ -231,6 +231,14 @@
       - code
       - nom
       filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - id_region
+      - code
+      - nom
+      filter: {}
   - role: direction_territoriale
     permission:
       columns:
@@ -378,6 +386,9 @@
     schema: public
     name: enquete_reponses
   object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: departement_id
   - name: enquete
     using:
       foreign_key_constraint_on: enquete_id
@@ -431,6 +442,7 @@
       - enquete_id
       - mandataire_id
       - service_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -450,6 +462,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -471,6 +484,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -498,6 +512,7 @@
       - enquete_id
       - mandataire_id
       - service_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -513,11 +528,8 @@
       - user_type
       - enquete_reponses_service_personnel_formation_id
       filter:
-        mandataire:
-          lb_user:
-            lb_departements:
-              departement_id:
-                _in: x-hasura-agrements
+        departement_id:
+          _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
     permission:
@@ -526,6 +538,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -553,6 +566,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -582,6 +596,7 @@
       - enquete_id
       - mandataire_id
       - service_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -609,6 +624,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -633,6 +649,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -657,6 +674,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
+      - departement_id
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -3385,6 +3403,15 @@
       - status
       - date_fin
       filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - created_at
+      - annee
+      - status
+      - date_fin
+      filter: {}
   - role: direction_territoriale
     permission:
       columns:
@@ -3772,6 +3799,19 @@
       - departement_financeur
       filter: {}
       allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - individuel
+      - prepose
+      - service
+      - ti
+      - departement_financeur
+      filter: {}
   - role: direction_territoriale
     permission:
       columns:
@@ -3868,6 +3908,17 @@
       - type
       filter: {}
       allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - type
+      - siret
+      filter: {}
   - role: direction_territoriale
     permission:
       columns:
@@ -4098,22 +4149,53 @@
   - role: direction
     permission:
       columns:
-      - id
-      - etablissement
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
+      - latitude
+      - longitude
+      - department_id
       - dispo_max
+      - id
+      - lb_user_id
+      - mesures_en_attente
+      - mesures_en_cours
       - user_id
-      - telephone_portable
+      - competences
       - created_at
       - date_mesure_update
       - email_send
+      - adresse
+      - code_postal
+      - etablissement
       - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
+      filter: {}
+      allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - lb_user_id
       - mesures_en_attente
+      - mesures_en_cours
+      - user_id
       - competences
+      - created_at
+      - date_mesure_update
+      - email_send
+      - adresse
+      - code_postal
+      - etablissement
+      - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
       filter: {}
       allow_aggregations: true
   - role: direction_territoriale
@@ -4140,7 +4222,16 @@
       - latitude
       - longitude
       - lb_user_id
-      filter: {}
+      filter:
+        _and:
+        - lb_user:
+            lb_departements:
+              departement_financeur:
+                _eq: true
+        - lb_user:
+            lb_departements:
+              departement_id:
+                _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
     permission:
@@ -5511,6 +5602,29 @@
       - siret
       filter: {}
       allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - competences
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      - siret
+      filter: {}
+      allow_aggregations: true
   - role: direction_territoriale
     permission:
       columns:
@@ -5532,7 +5646,9 @@
       - siret
       - telephone
       - ville
-      filter: {}
+      filter:
+        department_id:
+          _in: x-hasura-agrements
       allow_aggregations: true
   - role: service
     permission:
@@ -6043,6 +6159,23 @@
       - reset_password_token
       - type
       - username
+      filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - username
+      - password
+      - created_at
+      - type
+      - last_login
+      - active
+      - reset_password_token
+      - reset_password_expires
+      - nom
+      - prenom
+      - cabinet
+      - email
       filter: {}
   - role: direction_territoriale
     permission:

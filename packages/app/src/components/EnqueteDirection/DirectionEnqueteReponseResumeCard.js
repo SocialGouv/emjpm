@@ -49,53 +49,55 @@ const getStatusLabel = (status) => {
   }
 };
 
-export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => (
-  <Card key={item.reponse_id} sx={cardStyle} mb="2">
-    <Flex justifyContent="flex-start">
-      <Flex width="50%" flexDirection="column">
-        <Text sx={labelStyle}>{getTypeLabel(item.user_type)}</Text>
-        {item.user ? (
+export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => {
+  return (
+    <Card key={item.reponse_id} sx={cardStyle} mb="2">
+      <Flex justifyContent="flex-start">
+        <Flex width="50%" flexDirection="column">
+          <Text sx={labelStyle}>{getTypeLabel(item.user_type)}</Text>
+          {item.user ? (
+            <Flex>
+              <Text sx={descriptionStyle("important")}>
+                {item.user.nom ? item.user.nom.toUpperCase() : ""}
+              </Text>
+              <Text pl="1" sx={descriptionStyle("important")}>
+                {item.user.prenom}
+              </Text>
+            </Flex>
+          ) : item.etablissement ? (
+            <Text sx={descriptionStyle("important")}>{item.etablissement.toUpperCase()}</Text>
+          ) : null}
+        </Flex>
+        <Flex width="50%" flexDirection="column">
+          <Text sx={labelStyle}>{`Département`}</Text>
           <Flex>
-            <Text sx={descriptionStyle("important")}>
-              {item.user.nom ? item.user.nom.toUpperCase() : ""}
-            </Text>
-            <Text pl="1" sx={descriptionStyle("important")}>
-              {item.user.prenom}
+            <Text sx={descriptionStyle()}>
+              {item.departement ? `${item.departement.code} - ${item.departement.nom}` : "Inconnu"}
             </Text>
           </Flex>
-        ) : item.etablissement ? (
-          <Text sx={descriptionStyle("important")}>{item.etablissement.toUpperCase()}</Text>
-        ) : null}
-      </Flex>
-      <Flex width="50%" flexDirection="column">
-        <Text sx={labelStyle}>{`Département`}</Text>
-        <Flex>
+        </Flex>
+
+        <Flex width="50%" flexDirection="column">
+          <Text sx={labelStyle}>{`Ville`}</Text>
+          <Flex>
+            <Text sx={descriptionStyle()}>{item.ville}</Text>
+          </Flex>
+        </Flex>
+        <Flex width="50%" flexDirection="column">
+          <Text sx={labelStyle}>{`Statut`}</Text>
+          <Text sx={descriptionStyle("important")}>{getStatusLabel(item.status)}</Text>
           <Text sx={descriptionStyle()}>
-            {item.departement ? `${item.departement.code} - ${item.departement.nom}` : "Inconnu"}
+            {item.submitted_at
+              ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${
+                  item.uploaded_on ? "import" : "manuel"
+                })`
+              : ""}
           </Text>
         </Flex>
-      </Flex>
-
-      <Flex width="50%" flexDirection="column">
-        <Text sx={labelStyle}>{`Ville`}</Text>
-        <Flex>
-          <Text sx={descriptionStyle()}>{item.ville}</Text>
+        <Flex width="50%" flexDirection="column">
+          {renderActions ? renderActions(item) : null}
         </Flex>
       </Flex>
-      <Flex width="50%" flexDirection="column">
-        <Text sx={labelStyle}>{`Statut`}</Text>
-        <Text sx={descriptionStyle("important")}>{getStatusLabel(item.status)}</Text>
-        <Text sx={descriptionStyle()}>
-          {item.submitted_at
-            ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${
-                item.uploaded_on ? "import" : "manuel"
-              })`
-            : ""}
-        </Text>
-      </Flex>
-      <Flex width="50%" flexDirection="column">
-        {renderActions ? renderActions(item) : null}
-      </Flex>
-    </Flex>
-  </Card>
-);
+    </Card>
+  );
+};

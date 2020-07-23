@@ -42,13 +42,15 @@ module.exports = {
         id
         etablissement
         departement {
+          id
           nom
           region {
+            id
             nom
           }
         }
       }
-    }  
+    }
   `,
   ENQUETE_REPONSE_SERVICE: `
     query enquete_reponses_service($enqueteId: Int!, $serviceId: Int!) {
