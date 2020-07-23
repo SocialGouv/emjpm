@@ -77,6 +77,7 @@ module.exports = {
         } = queryResult.data.services_by_pk;
 
         defaultValues.region = departement.region.nom;
+        defaultValues.departementId = departement.id;
         defaultValues.departement = departement.nom;
         defaultValues.nom = etablissement;
       }
@@ -84,6 +85,7 @@ module.exports = {
       const value = {
         enqueteId,
         serviceId,
+        departementId: defaultValues.departementId,
         departement: defaultValues.departement,
         region: defaultValues.region,
         nom: defaultValues.nom,
