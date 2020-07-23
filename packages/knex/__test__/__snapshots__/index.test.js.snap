@@ -294,6 +294,12 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
+  "departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "enquete_id": Object {
     "defaultValue": null,
     "maxLength": null,
