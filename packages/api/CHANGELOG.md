@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.57.1](https://github.com/SocialGouv/emjpm/compare/v25.57.0...v25.57.1) (2020-07-23)
+
+
+### Bug Fixes
+
+* **signup:** use correct user roles ([5774800](https://github.com/SocialGouv/emjpm/commit/57748001c4c4e5271158f5f10e3958ccfccad782))
+
+
+
+
+
 # [25.57.0](https://github.com/SocialGouv/emjpm/compare/v25.56.0...v25.57.0) (2020-07-22)
 
 
