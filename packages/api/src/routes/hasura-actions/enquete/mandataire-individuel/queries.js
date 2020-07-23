@@ -40,10 +40,13 @@ module.exports = {
       mandataires_by_pk(id: $mandataireId) {
         id
         lb_user {
+          id
           nom
           prenom
           lb_departements(where: {departement_financeur: {_eq: true}}) {
+            id
             departement {
+              id
               nom
               region {
                 nom
@@ -276,6 +279,6 @@ module.exports = {
         last_update
       }
     }
-  }  
+  }
 `,
 };
