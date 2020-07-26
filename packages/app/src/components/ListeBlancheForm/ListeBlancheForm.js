@@ -43,8 +43,6 @@ export const ListeBlancheForm = (props) => {
     },
   });
 
-  console.log("values", formik.values);
-
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box mt={4}>
