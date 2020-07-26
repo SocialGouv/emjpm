@@ -86,7 +86,6 @@ export const ListeBlancheForm = (props) => {
             departements={formik.values.departements}
             editMode={editMode}
             onRemove={(id) => {
-              console.log("onRemove", id, formik.values.departements);
               formik.setFieldValue(
                 "departements",
                 formik.values.departements.filter((d) => d.id !== id)
