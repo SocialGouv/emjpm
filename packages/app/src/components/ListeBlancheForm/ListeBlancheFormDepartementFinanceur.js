@@ -4,7 +4,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../components/UserContext";
 
 function canModifyAgrement(user, departementId) {
   if (isAdmin(user)) {
@@ -32,7 +32,7 @@ export const ListeBlancheFormDepartementFinanceur = (props) => {
   return (
     <Fragment>
       <Text mt={2} mb={1}>
-        {"Sélectionner le département financeur:"}
+        {`Sélectionner le département financeur:`}
       </Text>
       <RadioGroup
         value={null}
