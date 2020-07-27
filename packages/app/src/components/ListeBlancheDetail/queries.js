@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const LB_USER = gql`
   query listeBlancheUser($id: Int!) {
-    lb_users(where: { id: { _eq: $id } }) {
+    lb_users_by_pk(id: $id) {
       id
       nom
       prenom
