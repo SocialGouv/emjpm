@@ -21,11 +21,13 @@ export const ListeBlancheForm = (props) => {
 
   const departements =
     data && data.lb_departements
-      ? data.lb_departements.map((lb_departement) => ({
-          id: lb_departement.id,
-          nom: DepartementFormUtil.formatDepartementLabel(lb_departement.departement),
-          departement_financeur: lb_departement.departement_financeur,
-        }))
+      ? data.lb_departements.map((item) => {
+          return {
+            id: item.departement_id,
+            nom: DepartementFormUtil.formatDepartementLabel(item.departement),
+            departement_financeur: item.departement_financeur,
+          };
+        })
       : [];
 
   const formik = useFormik({
