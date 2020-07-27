@@ -31,9 +31,19 @@ export const ListeBlancheForm = (props) => {
       : [];
 
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      await props.handleSubmit(values);
-      setSubmitting(false);
+    onSubmit: async (values, { setSubmitting, setFieldError }) => {
+      try {
+        await props.handleSubmit(values);
+        setSubmitting(false);
+      } catch (err) {
+        if (err.message.includes("lb_users_siret_unique")) {
+          setFieldError("siret", "Le siret renseigné est déjà existant");
+        }
+
+        if (err.message.includes("lb_users_email_unique")) {
+          setFieldError("email", "L'email renseigné est déjà existant");
+        }
+      }
     },
     validationSchema,
     initialValues: {
