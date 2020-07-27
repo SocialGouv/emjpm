@@ -19,6 +19,7 @@ export const LB_USER = gql`
       }
       lb_departements {
         id
+        departement_id
         departement_financeur
         ti
         service
