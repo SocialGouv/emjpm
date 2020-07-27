@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
+import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
@@ -81,11 +82,19 @@ const ListeBlancheSummary = () => {
 
   return (
     <Card>
-      <Heading2>
-        {!filterDepartement || filterDepartement.value === null
-          ? "Tous les départements"
-          : filterDepartement.label}
-      </Heading2>
+      <Flex>
+        <Box width={1 / 2}>
+          <Heading2>
+            {!filterDepartement || filterDepartement.value === null
+              ? "Tous les départements"
+              : filterDepartement.label}
+          </Heading2>
+        </Box>
+        <Box width={1 / 2} textAlign="right">
+          <Link href="/direction/liste-blanche/ajout">Ajouter un enregistrement</Link>
+        </Box>
+      </Flex>
+
       <Flex flexDirection="column" pt={1}>
         <LabelValue
           label="Mandataire individuel"

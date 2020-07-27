@@ -10,14 +10,8 @@ import { withAuthSync } from "../../../src/util/auth";
 
 const ListeBlancheDetailPage = (props) => {
   const { lbUserId } = props;
-
   const router = useRouter();
 
-  async function handleSubmit() {
-    await router.push("/admin/liste-blanche");
-
-    window.scrollTo(0, 0);
-  }
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
@@ -26,7 +20,13 @@ const ListeBlancheDetailPage = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <ListeBlancheDetail lbUserId={lbUserId} handleSubmit={handleSubmit} />
+        <ListeBlancheDetail
+          id={lbUserId}
+          handleSubmit={async () => {
+            await router.push("/admin/liste-blanche");
+            window.scrollTo(0, 0);
+          }}
+        />
       </BoxWrapper>
     </LayoutAdmin>
   );

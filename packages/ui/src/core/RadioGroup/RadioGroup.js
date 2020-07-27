@@ -14,10 +14,15 @@ export const RadioGroup = (props) => {
           return (
             <Box key={option.value} width={[1]} mb={1}>
               <Radio
-                onChange={() => onValueChange(option.value)}
+                onChange={() => {
+                  if (!option.disabled) {
+                    onValueChange(option.value);
+                  }
+                }}
                 id={option.value}
                 label={option.label}
                 checked={option.checked || option.value === value}
+                disabled={option.disabled}
                 name={option.name ? option.name : ''}
                 option={option}
                 renderRadioLabel={renderRadioLabel}
@@ -34,6 +39,7 @@ RadioGroup.propTypes = {
   onValueChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(
     PropTypes.shape({
+      disabled: PropTypes.boolean,
       label: PropTypes.string.isRequired,
       name: PropTypes.string,
       value: PropTypes.string.isRequired,

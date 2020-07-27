@@ -28,6 +28,7 @@ const RadioStyle = (props) => {
     border: '1px solid',
     borderColor: props.checked ? 'primary' : 'border',
     borderRadius: 'circle',
+    cursor: !props.disabled ? 'pointer' : 'normal',
     height: '20px',
     mr: '2',
     padding: '4x',
