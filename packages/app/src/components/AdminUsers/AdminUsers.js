@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { DIRECTION_TYPE, isDirection, isIndividuel, isPrepose } from "@emjpm/core";
 import { Button, Card } from "@emjpm/ui";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
@@ -10,7 +11,7 @@ import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
-  const { id, nom, prenom, email, type, active, mandataire } = item;
+  const { id, nom, prenom, email, type, active, mandataire, directions } = item;
 
   return (
     <>
@@ -35,10 +36,16 @@ const RowItem = ({ item }) => {
               <Text sx={labelStyle}>état</Text>
               <Text sx={descriptionStyle}>{active ? "activé" : "non activé"}</Text>
             </Flex>
-            {["individuel", "prepose"].includes(type) && (
+            {isIndividuel({ type } || isPrepose({ type })) && (
               <Flex width="100px" flexDirection="column">
                 <Text sx={labelStyle}>Liste Blanche</Text>
                 <Text sx={descriptionStyle}>{mandataire.lb_user_id ? "oui" : "non"}</Text>
+              </Flex>
+            )}
+            {isDirection({ type }) && (
+              <Flex width="100px" flexDirection="column">
+                <Text sx={labelStyle}>Direction</Text>
+                <Text sx={descriptionStyle}>{getDirectionLabel({ type, directions })}</Text>
               </Flex>
             )}
           </Flex>
@@ -98,3 +105,21 @@ const AdminUsers = () => {
 };
 
 export { AdminUsers };
+
+function getDirectionLabel({ type, directions }) {
+  let directionLabel = ` - `;
+  if (isDirection({ type })) {
+    const direction = directions[0];
+    if (direction) {
+      if (direction.type === DIRECTION_TYPE.national) {
+        directionLabel = "DGCS";
+      } else {
+        const directionRegion = direction.region ? direction.region.nom : undefined;
+        const directionDepartement = direction.departement ? direction.departement.nom : undefined;
+        const directionDetail = directionRegion ? directionRegion : directionDepartement;
+        directionLabel = `${directionDetail}`;
+      }
+    }
+  }
+  return directionLabel;
+}
