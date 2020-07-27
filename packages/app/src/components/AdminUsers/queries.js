@@ -27,7 +27,20 @@ export const USERS = gql`
       type
       email
       active
+      directions {
+        id
+        type
+        departement {
+          id
+          nom
+        }
+        region {
+          id
+          nom
+        }
+      }
       mandataire {
+        id
         lb_user_id
       }
     }

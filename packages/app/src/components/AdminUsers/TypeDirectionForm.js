@@ -92,7 +92,10 @@ export const TypeDirectionForm = (props) => {
                 placeholder="Département"
                 value={findOption(departementOptions, values.departement)}
                 options={departementOptions}
-                onChange={({ value }) => setFieldValue("departement", value)}
+                onChange={({ value }) => {
+                  setFieldValue("departement", value);
+                  setFieldValue("region", null);
+                }}
               />
               <InlineError fieldId="departement" message={errors.departement} />
             </Fragment>
@@ -105,7 +108,10 @@ export const TypeDirectionForm = (props) => {
                 placeholder="Région"
                 value={findOption(regionOptions, values.region)}
                 options={regionOptions}
-                onChange={({ value }) => setFieldValue("region", value)}
+                onChange={({ value }) => {
+                  setFieldValue("region", value);
+                  setFieldValue("departement", null);
+                }}
               />
               <InlineError fieldId="region" message={errors.region} />
             </Fragment>
