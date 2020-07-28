@@ -5,6 +5,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "../ListeBlancheFilter/context";
+import { UserContext } from "../UserContext";
 import { LB_SUMMARY } from "./queries";
 
 const boxStyle = {
@@ -40,6 +41,7 @@ const LabelValue = ({ label, value }) => (
 
 const ListeBlancheSummary = () => {
   const { selectedDepartements, filterDepartement } = useContext(FiltersContext);
+  const user = useContext(UserContext);
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
@@ -91,7 +93,7 @@ const ListeBlancheSummary = () => {
           </Heading2>
         </Box>
         <Box width={1 / 2} textAlign="right">
-          <Link href="/direction/liste-blanche/ajout">Ajouter un enregistrement</Link>
+          <Link href={`/${user.type}/liste-blanche/ajout`}>{"Ajouter un enregistrement"}</Link>
         </Box>
       </Flex>
 
