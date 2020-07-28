@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
+
+
+### Bug Fixes
+
+* **liste-blanche:** direction regionale ([#2095](https://github.com/SocialGouv/emjpm/issues/2095)) ([3298f8e](https://github.com/SocialGouv/emjpm/commit/3298f8eead84e0cde11e75e6f884ec0d3d78e16d))
+
+
+### Features
+
+* **admin-user:** display direction type ([#2097](https://github.com/SocialGouv/emjpm/issues/2097)) ([8ac5ff1](https://github.com/SocialGouv/emjpm/commit/8ac5ff1a123d39e13625322594c91281d51146e3))
+* **enquete:** enhance departement management ([#2090](https://github.com/SocialGouv/emjpm/issues/2090)) ([ea99718](https://github.com/SocialGouv/emjpm/commit/ea99718e2add0d49ff66306e78939d96b68a0fbe))
+* **liste-blanche:** siret check - it closes [#2055](https://github.com/SocialGouv/emjpm/issues/2055) ([#2096](https://github.com/SocialGouv/emjpm/issues/2096)) ([f45e14a](https://github.com/SocialGouv/emjpm/commit/f45e14ad29e7bf7bef67c5297c5ca5cb6985cdff))
+
+
+
+
+
 ## [25.57.1](https://github.com/SocialGouv/emjpm/compare/v25.57.0...v25.57.1) (2020-07-23)
 
 **Note:** Version bump only for package @emjpm/app
