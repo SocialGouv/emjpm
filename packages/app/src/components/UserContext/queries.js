@@ -92,7 +92,16 @@ export const DIRECTION_USERS = gql`
       type
       username
       directions {
+        id
         type
+        departement {
+          id
+          nom
+        }
+        region {
+          id
+          nom
+        }
       }
       user_roles {
         role {
