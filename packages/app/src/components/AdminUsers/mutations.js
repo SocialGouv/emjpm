@@ -11,6 +11,18 @@ export const ACTIVATE_USER = gql`
   }
 `;
 
+export const LISTE_BLANCHE_ASSOCIATION = gql`
+  mutation liste_blanche_association($mandataire_id: Int!, $lb_user_id: Int!) {
+    update_mandataires_by_pk(
+      pk_columns: { id: $mandataire_id }
+      _set: { lb_user_id: $lb_user_id }
+    ) {
+      id
+      lb_user_id
+    }
+  }
+`;
+
 export const CHANGE_DIRECTION_AGREMENT = gql`
   mutation change_direction_roles(
     $user_id: Int!
