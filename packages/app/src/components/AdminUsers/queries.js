@@ -111,6 +111,25 @@ export const MAGISTRAT = gql`
   }
 `;
 
+export const LB_USER = gql`
+  query lb_user($where: lb_users_bool_exp!) {
+    lb_users(where: $where) {
+      id
+      email
+      nom
+      prenom
+      lb_departements {
+        id
+        departement_financeur
+        departement {
+          id
+          code
+        }
+      }
+    }
+  }
+`;
+
 export const USER = gql`
   query user($userId: Int!) {
     directionRoles: role(where: { name: { _like: "direction%" } }) {
@@ -118,9 +137,9 @@ export const USER = gql`
       name
     }
     departements {
+      id
       code
       nom
-      id
     }
     regions {
       nom
@@ -133,7 +152,6 @@ export const USER = gql`
         role {
           id
           name
-          id
         }
       }
       directions {
@@ -151,6 +169,14 @@ export const USER = gql`
       mandataire {
         id
         siret
+        lb_user_id
+        lb_user {
+          id
+          nom
+          prenom
+          email
+          siret
+        }
       }
       magistrat {
         id

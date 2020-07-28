@@ -1,23 +1,55 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Heading3, Text } from "@emjpm/ui";
 import Link from "next/link";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
-import { isMandataire } from "../../../src/util";
+import { isIndividuel, isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
+import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
 import AdminUsersTribunaux from "./AdminUsersTribunaux";
 import { ACTIVATE_USER, CHANGE_DIRECTION_AGREMENT } from "./mutations";
-import { USER } from "./queries";
+import { LB_USER, USER } from "./queries";
 import { TypeDirectionForm } from "./TypeDirectionForm";
 
 const AdminUserInformations = (props) => {
   const { userId } = props;
-  const { data, loading, error } = useQuery(USER, { variables: { userId } });
 
-  const [activateUser] = useMutation(ACTIVATE_USER);
+  const [execQuery, queryResult] = useLazyQuery(LB_USER);
+  const { data, loading, error } = useQuery(USER, {
+    onCompleted: async (data) => {
+      if (data) {
+        const { type, email, mandataire } = data.users_by_pk;
+        if (isMandataire(type)) {
+          if (isIndividuel && mandataire.siret) {
+            await execQuery({
+              variables: {
+                where: {
+                  siret: { _eq: mandataire.siret },
+                },
+              },
+            });
+          } else {
+            await execQuery({
+              variables: {
+                where: {
+                  email: { _eq: email },
+                },
+              },
+            });
+          }
+        }
+      }
+    },
+    variables: { userId },
+  });
+
+  const [activateUser, { loading: activateUserLoading }] = useMutation(ACTIVATE_USER);
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
+
+  const lb_user =
+    queryResult.data && queryResult.data.lb_users.length ? queryResult.data.lb_users[0] : null;
 
   const toggleActivation = useCallback(() => {
     const { active, id } = data.users_by_pk;
@@ -34,6 +66,7 @@ const AdminUserInformations = (props) => {
   }
 
   if (error) {
+    console.error(error);
     return <div>Erreur</div>;
   }
 
@@ -136,14 +169,52 @@ const AdminUserInformations = (props) => {
         </Flex>
       )}
 
+      {isMandataire(type) && (
+        <Flex mb={4}>
+          <Box width={1 / 3} p={2} bg="cardSecondary">
+            Liste blanche
+          </Box>
+          <Box width={2 / 3} px={4} py={2}>
+            <AdminUserListeBlancheMandataireAssociation
+              mandataire={mandataire}
+              userId={userId}
+              lb_user={lb_user}
+            />
+          </Box>
+        </Flex>
+      )}
+
       <Flex>
         <Box width={1 / 3} p={2} bg="cardSecondary">
           Activer / Bloquer
         </Box>
         <Box width={2 / 3} px={4} py={2}>
-          <Button mr={2} bg={activateButtonStyle} onClick={toggleActivation}>
-            {activateButtonText}
-          </Button>
+          <Flex alignItems="center">
+            <Box>
+              <Button
+                disabled={isMandataire(type) && !mandataire.lb_user}
+                mr={2}
+                bg={activateButtonStyle}
+                onClick={toggleActivation}
+                isLoading={activateUserLoading}
+              >
+                {activateButtonText}
+              </Button>
+            </Box>
+
+            {isMandataire(type) && mandataire && !mandataire.lb_user && (
+              <Box ml={4} flex={1}>
+                <span aria-label="information" role="img">
+                  ℹ️
+                </span>
+                <Text ml={1} as="span">
+                  {
+                    " L'activation / désactivation requiert que l'utilisateur soit associé à un enregistrement dans la liste blanche."
+                  }
+                </Text>
+              </Box>
+            )}
+          </Flex>
         </Box>
       </Flex>
 
