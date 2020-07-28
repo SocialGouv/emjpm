@@ -46,7 +46,7 @@ export const MesureImportPanel = ({
     <Fragment>
       {importSummary && importSummary.unexpectedError && (
         <Box mt={2} mb={2}>
-          Erreur innatendue. Veuillez ré-essayer.
+          Erreur inatendue. Veuillez ré-essayer.
         </Box>
       )}
       <SingleImportFilePicker
