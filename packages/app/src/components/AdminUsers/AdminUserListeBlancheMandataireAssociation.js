@@ -44,7 +44,6 @@ export const AdminUserListeBlancheMandataireAssociation = (props) => {
                       },
                     });
                   } catch (err) {
-                    console.error(err.message);
                     if (err.message.includes("Uniqueness violation")) {
                       alert(
                         `Oups, l'utilisateur ${lb_user.prenom} ${lb_user.nom} (lb_user_id: ${lb_user.id}) est déja associé à un autre mandataire (liste blanche).`

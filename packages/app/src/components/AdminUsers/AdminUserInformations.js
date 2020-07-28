@@ -66,7 +66,6 @@ const AdminUserInformations = (props) => {
   }
 
   if (error) {
-    console.error(error);
     return <div>Erreur</div>;
   }
 
