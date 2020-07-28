@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
+
+
+### Features
+
+* **admin-user:** display direction type ([#2097](https://github.com/SocialGouv/emjpm/issues/2097)) ([8ac5ff1](https://github.com/SocialGouv/emjpm/commit/8ac5ff1a123d39e13625322594c91281d51146e3))
+
+
+
+
+
 ## [25.57.1](https://github.com/SocialGouv/emjpm/compare/v25.57.0...v25.57.1) (2020-07-23)
 
 **Note:** Version bump only for package @emjpm/core

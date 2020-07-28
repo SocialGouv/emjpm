@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
+
+
+### Features
+
+* **enquete:** enhance departement management ([#2090](https://github.com/SocialGouv/emjpm/issues/2090)) ([ea99718](https://github.com/SocialGouv/emjpm/commit/ea99718e2add0d49ff66306e78939d96b68a0fbe))
+
+
+
+
+
 ## [25.57.1](https://github.com/SocialGouv/emjpm/compare/v25.57.0...v25.57.1) (2020-07-23)
 
 **Note:** Version bump only for package @emjpm/knex
