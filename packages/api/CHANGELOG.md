@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.59.0](https://github.com/SocialGouv/emjpm/compare/v25.58.0...v25.59.0) (2020-07-28)
+
+
+### Bug Fixes
+
+* **api:** add departement condition ([#2098](https://github.com/SocialGouv/emjpm/issues/2098)) ([60ac51d](https://github.com/SocialGouv/emjpm/commit/60ac51d9056f736279b83fd21622014533fe8222))
+
+
+
+
+
 # [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
 
 

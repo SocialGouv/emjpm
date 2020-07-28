@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.59.0](https://github.com/SocialGouv/emjpm/compare/v25.58.0...v25.59.0) (2020-07-28)
+
+
+### Features
+
+* **liste-blanche:** association. it closes [#1930](https://github.com/SocialGouv/emjpm/issues/1930) ([#2100](https://github.com/SocialGouv/emjpm/issues/2100)) ([55dde5a](https://github.com/SocialGouv/emjpm/commit/55dde5afaa27fa8ef5f0970569ebc4d644342bb7))
+
+
+
+
+
 # [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
 
 **Note:** Version bump only for package @emjpm/ui

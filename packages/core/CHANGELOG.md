@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.59.0](https://github.com/SocialGouv/emjpm/compare/v25.58.0...v25.59.0) (2020-07-28)
+
+
+### Features
+
+* **direction:** display administration info in profil page ([92588f9](https://github.com/SocialGouv/emjpm/commit/92588f9933e9a82622c79e4076e9958f7ab19d9a))
+
+
+
+
+
 # [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
 
 
