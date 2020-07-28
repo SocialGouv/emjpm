@@ -66,16 +66,18 @@ const mesureCreate = async (req, res) => {
 
         if (lastEtat && lastEtat.code_postal) {
           const departement = await getDepartement(lastEtat.code_postal);
-          departementId = departement.id;
+          if (departement) {
+            departementId = departement.id;
 
-          const geoloc = await getGeoDatas(
-            lastEtat.code_postal,
-            lastEtat.ville
-          );
+            const geoloc = await getGeoDatas(
+              lastEtat.code_postal,
+              lastEtat.ville
+            );
 
-          if (geoloc) {
-            longitude = geoloc.longitude;
-            latitude = geoloc.latitude;
+            if (geoloc) {
+              longitude = geoloc.longitude;
+              latitude = geoloc.latitude;
+            }
           }
         }
 
