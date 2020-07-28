@@ -67,6 +67,7 @@ export const MESURES = gql`
       date_nomination
       created_at
       ti {
+        id
         etablissement
         ville
       }
@@ -126,8 +127,11 @@ export const USER = gql`
       id
     }
     users_by_pk(id: $userId) {
+      id
       user_roles {
+        id
         role {
+          id
           name
           id
         }
@@ -145,6 +149,7 @@ export const USER = gql`
       email
       active
       mandataire {
+        id
         siret
       }
       magistrat {
