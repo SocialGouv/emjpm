@@ -21,10 +21,17 @@ const content = (props) => {
   };
 };
 
+const btnStyle = ({ disabled }) => ({
+  ...buttonStyle,
+  cursor: !disabled ? 'pointer' : 'initial',
+  opacity: disabled ? 0.5 : 1,
+});
+
 const Button = (props) => {
   const { isLoading, children } = props;
+
   return (
-    <RebassButton sx={buttonStyle} {...props}>
+    <RebassButton sx={btnStyle(props)} {...props}>
       {isLoading && (
         <Box sx={spinnerStyle}>
           <Spinner variant="bgLight" />
@@ -41,11 +48,13 @@ export { Button };
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
   isLoading: PropTypes.bool,
   variant: PropTypes.string,
 };
 
 Button.defaultProps = {
+  disabled: false,
   isLoading: false,
   variant: null,
 };

@@ -82,11 +82,12 @@ const AdminUsers = () => {
   });
 
   if (loading) {
-    return <div>loading</div>;
+    return <Text>Chargement...</Text>;
   }
 
   if (error) {
-    return <div>error</div>;
+    console.error(error);
+    return <Text>Oups, une erreur est survenue.</Text>;
   }
 
   const { count } = data.users_aggregate.aggregate;
