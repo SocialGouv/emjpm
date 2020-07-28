@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.59.0](https://github.com/SocialGouv/emjpm/compare/v25.58.0...v25.59.0) (2020-07-28)
+
+
+### Bug Fixes
+
+* **admin-user:** add id in gql ([5fb4169](https://github.com/SocialGouv/emjpm/commit/5fb4169d258c56a18c047acd41acf16aa108b1b0))
+* **api:** add departement condition ([#2098](https://github.com/SocialGouv/emjpm/issues/2098)) ([60ac51d](https://github.com/SocialGouv/emjpm/commit/60ac51d9056f736279b83fd21622014533fe8222))
+* **liste-blanche:** use admin account ([#2099](https://github.com/SocialGouv/emjpm/issues/2099)) ([e5a3948](https://github.com/SocialGouv/emjpm/commit/e5a39489b162cedbff41fd47a18917b2d1b26445))
+* **typo:** typo ([2c4c423](https://github.com/SocialGouv/emjpm/commit/2c4c423c77ce6fdc0e95a87a80c5ab0fac73c673))
+
+
+### Features
+
+* **direction:** display administration info in profil page ([92588f9](https://github.com/SocialGouv/emjpm/commit/92588f9933e9a82622c79e4076e9958f7ab19d9a))
+* **liste-blanche:** association. it closes [#1930](https://github.com/SocialGouv/emjpm/issues/1930) ([#2100](https://github.com/SocialGouv/emjpm/issues/2100)) ([55dde5a](https://github.com/SocialGouv/emjpm/commit/55dde5afaa27fa8ef5f0970569ebc4d644342bb7))
+
+
+
+
+
 # [25.58.0](https://github.com/SocialGouv/emjpm/compare/v25.57.1...v25.58.0) (2020-07-28)
 
 
