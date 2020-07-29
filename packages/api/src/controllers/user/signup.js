@@ -1,9 +1,6 @@
 const { validationResult } = require("express-validator");
 const { User } = require("../../models/User");
 const { Mandataire } = require("../../models/Mandataire");
-const { IndividuelAgrement } = require("../../models/IndividuelAgrement");
-const { IndividuelExercice } = require("../../models/IndividuelExercice");
-const { IndividuelFormation } = require("../../models/IndividuelFormation");
 const { Magistrat } = require("../../models/Magistrat");
 const { UserTis } = require("../../models/UserTis");
 const { UserRole } = require("../../models/UserRole");
@@ -63,16 +60,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
       latitude,
       longitude,
     });
-
-  await IndividuelAgrement.query().allowInsert("[mandataire_id]").insert({
-    mandataire_id: mandataire.id,
-  });
-  await IndividuelExercice.query().allowInsert("[mandataire_id]").insert({
-    mandataire_id: mandataire.id,
-  });
-  await IndividuelFormation.query().allowInsert("[mandataire_id]").insert({
-    mandataire_id: mandataire.id,
-  });
 
   return mandataire;
 };

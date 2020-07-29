@@ -2,9 +2,6 @@ import { adminEditorSchema } from "./adminEditorSchema";
 import { adminTribunalSchema } from "./adminTribunalSchema";
 import { editorTokenSchema } from "./editorTokenSchema";
 import { forgotPasswordSchema } from "./forgotPasswordSchema";
-import { individuelAgrementSchema } from "./individuelAgrementSchema";
-import { individuelExerciceSchema } from "./individuelExerciceSchema";
-import { individuelFormationSchema } from "./individuelFormationSchema";
 import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
@@ -21,7 +18,6 @@ import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
 import { serviceMesureSchema } from "./serviceMesureSchema";
-import { servicePersonnelSchema } from "./servicePersonnelSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
 import { signupSchema } from "./signupSchema";
@@ -42,9 +38,6 @@ export {
   serviceAntenneSchema,
   serviceMesureSchema,
   mandataireSignupSchema,
-  individuelAgrementSchema,
-  individuelExerciceSchema,
-  individuelFormationSchema,
   serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,
   mandataireAcceptMesureSchema,
@@ -55,5 +48,4 @@ export {
   signupServiceSchema,
   editorTokenSchema,
   satisfactionCampaignSchema,
-  servicePersonnelSchema,
 };
