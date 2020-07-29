@@ -59,7 +59,6 @@ export const ADD_SERVICE = gql`
         latitude: $latitude
         longitude: $longitude
         siret: $siret
-        service_personnels: { data: [{}] }
       }
     ) {
       returning {
