@@ -41,20 +41,3 @@ const tables = JSON.parse(
 test.each(tables.map((name) => [name]))("%s table schema", async (name) => {
   expect(await knex.table(name).columnInfo()).toMatchSnapshot();
 });
-
-test("should rollback to nothing", async () => {
-  await knex.migrate.rollback();
-
-  const query = `
-    SELECT table_name FROM information_schema.tables
-    WHERE table_schema = current_schema() AND table_catalog = ?
-  `;
-  const results = await knex.raw(query, [knex.client.database()]);
-  expect(results.rows.map((row) => row.table_name).sort())
-    .toMatchInlineSnapshot(`
-Array [
-  "knex_migrations_v2",
-  "knex_migrations_v2_lock",
-]
-`);
-});
