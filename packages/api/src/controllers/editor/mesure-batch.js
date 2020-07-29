@@ -100,10 +100,10 @@ const mesureBatch = async (req, res) => {
             civilite: mesure.civilite,
             code_postal: lastEtat ? lastEtat.code_postal : null,
             date_fin_mesure: mesure.date_fin_mesure
-              ? new Date(mesure.date_fin_mesure).toISOString()
+              ? mesure.date_fin_mesure
               : null,
             date_nomination: mesure.date_nomination
-              ? new Date(mesure.date_nomination).toISOString()
+              ? mesure.date_nomination
               : null,
             department_id: departementId,
             etablissement: null,
@@ -116,10 +116,10 @@ const mesureBatch = async (req, res) => {
             ti_id: tis ? tis.id : null,
             ville: lastEtat ? lastEtat.ville : null,
             date_premier_mesure: mesure.date_premier_mesure
-              ? new Date(mesure.date_premier_mesure).toISOString()
+              ? mesure.date_premier_mesure
               : null,
             date_protection_en_cours: mesure.date_protection_en_cours
-              ? new Date(mesure.date_protection_en_cours).toISOString()
+              ? mesure.date_protection_en_cours
               : null,
             status: "en_cours",
             numero_dossier: mesure.numero_dossier,
