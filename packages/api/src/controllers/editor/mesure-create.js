@@ -89,10 +89,8 @@ const mesureCreate = async (req, res) => {
           champ_mesure: lastEtat ? lastEtat.champ_mesure : null,
           civilite: body.civilite,
           code_postal: lastEtat ? lastEtat.code_postal : null,
-          date_fin_mesure: body.date_fin_mesure
-            ? body.date_fin_mesure.toISOString()
-            : null,
-          date_nomination: body.date_nomination.toISOString(),
+          date_fin_mesure: body.date_fin_mesure,
+          date_nomination: body.date_nomination,
           department_id: departementId,
           etablissement: null,
           etablissement_id: null,
@@ -103,12 +101,8 @@ const mesureCreate = async (req, res) => {
           [`${type}_id`]: serviceOrMandataire.id,
           ti_id: tis ? tis.id : null,
           ville: lastEtat ? lastEtat.ville : null,
-          date_premier_mesure: body.date_premier_mesure
-            ? body.date_premier_mesure.toISOString()
-            : null,
-          date_protection_en_cours: body.date_protection_en_cours
-            ? body.date_protection_en_cours.toISOString()
-            : null,
+          date_premier_mesure: body.date_premier_mesure,
+          date_protection_en_cours: body.date_protection_en_cours,
           status: MESURE_PROTECTION_STATUS.en_cours,
           numero_dossier: body.numero_dossier,
           numero_rg: body.numero_rg,

@@ -117,6 +117,7 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
       });
+    expect(response.body).toMatchSnapshot();
     expect(response.status).toBe(201);
   });
 });
@@ -177,7 +178,6 @@ describe("POST /api/editors/mesures/batch", () => {
         ],
       });
 
-    console.log(response.body);
     expect(response.status).toBe(201);
   });
 });
