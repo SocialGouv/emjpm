@@ -10,17 +10,6 @@ const {
 } = require("../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../utils/getRegionCode");
 
-function formatMesure(data) {
-  const keys = Object.keys(data);
-  keys.forEach((key) => {
-    if (key.includes("date_")) {
-      data[key] = `${data[key].toISOString()}`;
-    }
-  });
-
-  return data;
-}
-
 const mesureUpdate = async (req, res) => {
   const errors = validationResult(req);
 
@@ -88,7 +77,7 @@ const mesureUpdate = async (req, res) => {
     }
 
     const mesureToUpdate = {
-      ...formatMesure(body),
+      ...body,
       ti_id: mesure.ti_id,
       [`${type}_id`]: serviceOrMandataire.id,
     };
