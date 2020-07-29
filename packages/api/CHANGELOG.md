@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.59.1](https://github.com/SocialGouv/emjpm/compare/v25.59.0...v25.59.1) (2020-07-29)
+
+
+### Bug Fixes
+
+* **mesure-api:** use date type ([22c139a](https://github.com/SocialGouv/emjpm/commit/22c139a7f827d2e4299b5b9255d764549aa665f3))
+* **mesure-model:** use date type ([b3744b0](https://github.com/SocialGouv/emjpm/commit/b3744b03fcacf0a9d159758b6103f7f26764c650))
+
+
+
+
+
 # [25.59.0](https://github.com/SocialGouv/emjpm/compare/v25.58.0...v25.59.0) (2020-07-28)
 
 
