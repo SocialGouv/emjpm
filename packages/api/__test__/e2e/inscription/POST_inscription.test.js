@@ -47,15 +47,6 @@ afterEach(async () => {
     .first();
 
   if (mandataire) {
-    await knex("individuel_agrements")
-      .where({ mandataire_id: mandataire.id })
-      .delete();
-    await knex("individuel_formations")
-      .where({ mandataire_id: mandataire.id })
-      .delete();
-    await knex("individuel_exercices")
-      .where({ mandataire_id: mandataire.id })
-      .delete();
     await knex("mandataires").where({ id: mandataire.id }).delete();
   }
 
