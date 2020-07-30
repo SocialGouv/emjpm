@@ -2,8 +2,8 @@ import { FlexWrapper, fourColumnStyle, Indicator } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-export const DirectionEnqueteDetailsInformationsClesIndicators = ({ directionEnqueteDetails }) => {
-  const { destinatairesCount, enqueteReponsesCount, daysBeforeClosing } = directionEnqueteDetails;
+export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
+  const { destinatairesCount, enqueteReponsesCount, daysBeforeClosing } = props;
 
   return (
     <FlexWrapper flexWrap={"wrap"}>

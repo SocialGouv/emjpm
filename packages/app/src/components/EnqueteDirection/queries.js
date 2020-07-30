@@ -71,6 +71,21 @@ export const ENQUETE_DETAILS_RESUME = gql`
 
 export const ENQUETE_DETAILS_LIST = gql`
   query enquete_details($enqueteId: Int!) {
+    mandataires_aggregate {
+      mandataires: aggregate {
+        count(columns: id)
+      }
+    }
+    services_aggregate {
+      services: aggregate {
+        count(columns: id)
+      }
+    }
+    enquete_reponses_aggregate(where: { enquete_id: { _eq: $enqueteId } }) {
+      enquete_reponses: aggregate {
+        count(columns: id)
+      }
+    }
     enquetes_by_pk(id: $enqueteId) {
       id
       created_at
