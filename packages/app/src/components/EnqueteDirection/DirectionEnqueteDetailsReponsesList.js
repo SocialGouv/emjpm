@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
+import { differenceInDays } from "date-fns";
 import Link from "next/link";
 import React, { useCallback, useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
@@ -7,6 +8,7 @@ import { Box, Button, Flex } from "rebass";
 import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
+import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
 import {
@@ -77,13 +79,40 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
             href: "/direction/enquetes/[enquete_id]",
             as: `/direction/enquetes/${enqueteId}`,
           },
-          {
-            label: "Toutes les réponses",
-          },
         ]}
       />
 
-      <Flex mb={4} mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+      <Flex mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+        <Heading2>{enqueteLabel}</Heading2>
+      </Flex>
+
+      <Flex mt={3} flexDirection="row">
+        <Heading2>Informations clés</Heading2>
+      </Flex>
+      <Box mt={2}>
+        {data && (
+          <DirectionEnqueteDetailsInformationsClesIndicators
+            destinatairesCount={
+              data.mandataires_aggregate.mandataires.count + data.services_aggregate.services.count
+            }
+            enqueteReponsesCount={data.enquete_reponses_aggregate.enquete_reponses.count}
+            daysBeforeClosing={
+              data.enquetes_by_pk && data.enquetes_by_pk.date_fin
+                ? differenceInDays(new Date(data.enquetes_by_pk.date_fin), new Date())
+                : undefined
+            }
+          />
+        )}
+      </Box>
+
+      <Flex
+        mb={4}
+        mt={"50px"}
+        px="1"
+        alignItems="flex-start"
+        flexDirection="column"
+        justifyContent="center"
+      >
         <Heading2>{`Réponses à l'enquête (${counts.responses}/${counts.all})`}</Heading2>
       </Flex>
 
