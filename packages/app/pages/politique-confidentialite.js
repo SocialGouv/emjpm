@@ -5,18 +5,18 @@ import { Card } from "rebass";
 
 import { LayoutPublic } from "../src/components/Layout";
 import { mdxComponents } from "../src/components/MdxComponents";
-import { MentionsLegales } from "../src/components/MentionsLegales";
+import { PolitiqueConfidentialite } from "../src/components/PolitiqueConfidentialite";
 
-const MentionsLegalesPage = () => (
+const PolitiqueConfidentialitePage = () => (
   <MDXProvider components={mdxComponents}>
     <LayoutPublic>
       <FlexWrapper p="4" my="50px">
         <Card p={3}>
-          <MentionsLegales />
+          <PolitiqueConfidentialite />
         </Card>
       </FlexWrapper>
     </LayoutPublic>
   </MDXProvider>
 );
 
-export default MentionsLegalesPage;
+export default PolitiqueConfidentialitePage;
