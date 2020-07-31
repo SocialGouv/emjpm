@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import Link from "next/link";
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
-import { FiltersContext } from "../ListeBlancheFilter/context";
+import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
 import { UserContext } from "../UserContext";
 import { LB_SUMMARY } from "./queries";
 
@@ -40,14 +40,24 @@ const LabelValue = ({ label, value }) => (
 );
 
 const ListeBlancheSummary = () => {
-  const { selectedDepartements, filterDepartement } = useContext(FiltersContext);
+  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { departement } = filters;
   const user = useContext(UserContext);
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementIds: selectedDepartements.map((d) => d.id),
+      departementIds: departements.map((d) => d.id),
     },
   });
+
+  const departementLabel = useMemo(() => {
+    if (!departement || departement === null) {
+      return "Tous les départements";
+    } else {
+      const { nom = "" } = departements.find((d) => d.id === departement);
+      return nom;
+    }
+  }, [departements, departement]);
 
   if (loading) {
     return (
@@ -86,11 +96,7 @@ const ListeBlancheSummary = () => {
     <Card>
       <Flex>
         <Box width={1 / 2}>
-          <Heading2>
-            {!filterDepartement || filterDepartement.value === null
-              ? "Tous les départements"
-              : filterDepartement.label}
-          </Heading2>
+          <Heading2>{departementLabel}</Heading2>
         </Box>
         <Box width={1 / 2} textAlign="right">
           <Link href={`/${user.type}/liste-blanche/ajout`}>{"Ajouter un enregistrement"}</Link>
