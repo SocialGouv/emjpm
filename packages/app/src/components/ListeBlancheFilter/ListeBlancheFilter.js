@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
-import { FiltersContext } from "./context";
+import { FiltersContextSerializable } from "./context";
 import { BoxStyle } from "./style";
 
 const TYPE_OPTIONS = [
@@ -13,23 +13,10 @@ const TYPE_OPTIONS = [
 ];
 
 const ListeBlancheFilter = () => {
-  const {
-    departements,
-    searchDepartement,
-    loading,
-    error,
-    departementFinanceur,
-    toogleDepartementFinanceur,
-    selectedType,
-    selectType,
-    searchNom,
-    searchPrenom,
-    changeSearchNom,
-    changeSearchPrenom,
-    searchSiret,
-    changeSearchSiret,
-    filterDepartement,
-  } = useContext(FiltersContext);
+  const { loading, error, filters, onFilterChange, departements = [] } = useContext(
+    FiltersContextSerializable
+  );
+  const { departementFinanceur, type, nom, prenom, siret } = filters;
 
   if (loading) {
     return <div>{"Chargement..."}</div>;
@@ -50,8 +37,12 @@ const ListeBlancheFilter = () => {
               size="small"
               options={departmentOptions}
               placeholder={"Département"}
-              value={filterDepartement}
-              onChange={(option) => searchDepartement(option)}
+              value={
+                filters.departement
+                  ? departmentOptions.find((d) => d.value === filters.departement)
+                  : undefined
+              }
+              onChange={(option) => onFilterChange("departement", option.value)}
             />
           </Box>
           <Box mr={1} pt={2} width="100px">
@@ -59,7 +50,7 @@ const ListeBlancheFilter = () => {
               label="Financé"
               name="departementFinanceur"
               isChecked={departementFinanceur}
-              onChange={() => toogleDepartementFinanceur(!departementFinanceur)}
+              onChange={() => onFilterChange("departementFinanceur", !departementFinanceur)}
             />
           </Box>
         </Flex>
@@ -69,16 +60,16 @@ const ListeBlancheFilter = () => {
               size="small"
               options={TYPE_OPTIONS}
               placeholder={"Type"}
-              value={selectedType}
-              onChange={(option) => selectType(option)}
+              value={TYPE_OPTIONS.find(({ value }) => value === type)}
+              onChange={(option) => onFilterChange("type", option.value)}
             />
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={searchNom}
+              value={nom}
               spellCheck="false"
               autoComplete="false"
-              onChange={(event) => changeSearchNom(event.target.value)}
+              onChange={(event) => onFilterChange("nom", event.target.value)}
               name="search"
               size="small"
               placeholder="Nom"
@@ -86,10 +77,10 @@ const ListeBlancheFilter = () => {
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={searchPrenom}
+              value={prenom}
               spellCheck="false"
               autoComplete="false"
-              onChange={(event) => changeSearchPrenom(event.target.value)}
+              onChange={(event) => onFilterChange("prenom", event.target.value)}
               name="search"
               size="small"
               placeholder="Prénom"
@@ -97,10 +88,10 @@ const ListeBlancheFilter = () => {
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={searchSiret}
+              value={siret}
               spellCheck="false"
               autoComplete="false"
-              onChange={(event) => changeSearchSiret(event.target.value)}
+              onChange={(event) => onFilterChange("siret", event.target.value)}
               name="search"
               size="small"
               placeholder="Siret"
