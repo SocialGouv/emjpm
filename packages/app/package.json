@@ -101,7 +101,7 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "json-loader": "^0.5.7",
-    "next-transpile-modules": "^2.3.1",
+    "next-transpile-modules": "^4.0.2",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
     "style-loader": "^0.23.1",
