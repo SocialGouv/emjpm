@@ -2,34 +2,36 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { useContext, useMemo, useState } from "react";
 
 import { LoadingWrapper } from "../Commons";
-import { FiltersContext } from "../ListeBlancheFilter/context";
+import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
 import { PaginatedList } from "../PaginatedList";
 import { ListeBlancheItemCard } from "./ListeBlancheItemCard";
 import { LB_USERS } from "./queries";
 
 const ListeBlanche = ({ onSelectLbUser }) => {
-  const {
-    selectedType,
-    debouncedSearchNom,
-    debouncedSearchSiret,
-    debouncedSearchPrenom,
-    departementFinanceur,
-    selectedDepartements,
-  } = useContext(FiltersContext);
+  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { departement } = filters;
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
+
+  const departementIds = useMemo(() => {
+    if (departement) {
+      return departements.filter(({ id }) => id === departement).map(({ id }) => id);
+    } else {
+      return departements.map(({ id }) => id);
+    }
+  }, [departements, departement]);
 
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      type: selectedType ? selectedType.value : null,
-      departementIds: selectedDepartements.map((d) => d.id),
-      nom: debouncedSearchNom ? `${debouncedSearchNom}%` : null,
-      prenom: debouncedSearchPrenom ? `${debouncedSearchPrenom}%` : null,
-      departementFinanceur: departementFinanceur ? true : null,
-      siret: debouncedSearchSiret ? `${debouncedSearchSiret}%` : null,
+      type: filters.type || null,
+      departementIds,
+      nom: filters.nom ? `${filters.nom}%` : null,
+      prenom: filters.prenom ? `${filters.prenom}%` : null,
+      departementFinanceur: filters.departementFinanceur ? true : null,
+      siret: filters.siret ? `${filters.siret}%` : null,
     },
   });
 
