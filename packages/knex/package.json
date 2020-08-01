@@ -22,7 +22,7 @@
     "bcryptjs": "^2.4.3",
     "knex": "^0.21.2",
     "objection": "^1.6.11",
-    "pg": "^7.18.2"
+    "pg": "^8.3.0"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^0.21.0",
