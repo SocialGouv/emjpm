@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, MandataireListItem, Select, Spinner } from "@emjpm/ui";
-import Router from "next/router";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
@@ -90,13 +89,7 @@ const MandatairesList = (props) => {
         return (
           <MandataireListItem
             key={gestionnaire.id}
-            onClick={() =>
-              Router.push(
-                "/magistrats/gestionnaires/[gestionnaire_id]",
-                `/magistrats/gestionnaires/${gestionnaire.id}`,
-                { shallow: true }
-              )
-            }
+            onClick={() => {}}
             gestionnaire={gestionnaire}
           />
         );
