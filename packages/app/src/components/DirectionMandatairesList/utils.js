@@ -9,6 +9,8 @@ export const formatMandatairesList = (mandatairesList) => {
       mesures_in_progress,
       service,
       mandataire,
+      mesures_awaiting,
+      gestionnaire_tis,
       id,
     } = row;
     return formatMandataire(
@@ -18,6 +20,8 @@ export const formatMandatairesList = (mandatairesList) => {
       mesures_in_progress,
       service,
       mandataire,
+      mesures_awaiting,
+      gestionnaire_tis,
       id
     );
   });
