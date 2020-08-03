@@ -1,12 +1,14 @@
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { useMutation } from "react-apollo";
 
 import { ListeBlancheForm } from "../ListeBlancheForm";
+import { UserContext } from "../UserContext";
 import { CREATE_LB_USER } from "./mutations";
 
 export const ListeBlancheAjout = () => {
   const router = useRouter();
+  const { type } = useContext(UserContext);
   const [create, { loading }] = useMutation(CREATE_LB_USER);
 
   return (
@@ -30,7 +32,7 @@ export const ListeBlancheAjout = () => {
         await create({
           variables,
         });
-        await router.push("/direction/liste-blanche");
+        await router.push(`/${type}/liste-blanche`);
       }}
     />
   );
