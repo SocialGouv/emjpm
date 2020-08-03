@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
+
+
+### Bug Fixes
+
+* **direction:** display service name ([852c591](https://github.com/SocialGouv/emjpm/commit/852c5917d93c5b423ebc2659c1d48aad381c096f))
+* **direction:** mandataire list item ([60abdcd](https://github.com/SocialGouv/emjpm/commit/60abdcdfc6ce4e4cf08cee5259654bd769a45a50))
+* **liste-blanche:** redirect to right url after creation ([8aab2b5](https://github.com/SocialGouv/emjpm/commit/8aab2b5cc3b6f50adeb16fe38f3c8f6089619223))
+* **liste-blanche:** use FiltersContextSerializableProvider ([6407086](https://github.com/SocialGouv/emjpm/commit/6407086c48c9493df19f667ad259d9fa98297456))
+
+
+### Features
+
+* **bdd:** delete old tables ([#2102](https://github.com/SocialGouv/emjpm/issues/2102)) ([16dc540](https://github.com/SocialGouv/emjpm/commit/16dc540a0f19c32aafd557a0364306c81a2f9b7b))
+* **db:** remove date_mesure_update col ([a3a2eeb](https://github.com/SocialGouv/emjpm/commit/a3a2eeb5b9c97e47294aa6c58950346a306b5d1e))
+* **enquete:** guide de remlissage ([1914bca](https://github.com/SocialGouv/emjpm/commit/1914bca1562002cdbd50ee75fbd615f6664cea61))
+* **enquete:** page de suivi ([#2104](https://github.com/SocialGouv/emjpm/issues/2104)) ([320f0ef](https://github.com/SocialGouv/emjpm/commit/320f0ef280071712ae4ca2f4323f3edc5697caff))
+* **liste-blanche:** serialize filters ([#2107](https://github.com/SocialGouv/emjpm/issues/2107)) ([3aa5ab8](https://github.com/SocialGouv/emjpm/commit/3aa5ab8e580b621b3961fe9e7a9bed33214ab47b))
+* **politique-confidentialite:** add politique confidentialite page ([#2105](https://github.com/SocialGouv/emjpm/issues/2105)) ([73a5655](https://github.com/SocialGouv/emjpm/commit/73a565567025f3f147149d7507bac41ad6883c6c))
+
+
+
+
+
 ## [25.59.1](https://github.com/SocialGouv/emjpm/compare/v25.59.0...v25.59.1) (2020-07-29)
 
 **Note:** Version bump only for package @emjpm/app
