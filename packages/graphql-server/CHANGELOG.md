@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
+
+
+### Features
+
+* **db:** remove date_mesure_update col ([a3a2eeb](https://github.com/SocialGouv/emjpm/commit/a3a2eeb5b9c97e47294aa6c58950346a306b5d1e))
+
+
+
+
+
 ## [25.59.1](https://github.com/SocialGouv/emjpm/compare/v25.59.0...v25.59.1) (2020-07-29)
 
 **Note:** Version bump only for package @emjpm/graphql-server
