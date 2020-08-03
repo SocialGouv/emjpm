@@ -49,7 +49,7 @@ const ListeBlancheFilter = () => {
             <CheckBox
               label="Financé"
               name="departementFinanceur"
-              isChecked={departementFinanceur}
+              isChecked={departementFinanceur || false}
               onChange={() => onFilterChange("departementFinanceur", !departementFinanceur)}
             />
           </Box>
@@ -66,7 +66,7 @@ const ListeBlancheFilter = () => {
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={nom}
+              value={nom || ""}
               spellCheck="false"
               autoComplete="false"
               onChange={(event) => onFilterChange("nom", event.target.value)}
@@ -77,7 +77,7 @@ const ListeBlancheFilter = () => {
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={prenom}
+              value={prenom || ""}
               spellCheck="false"
               autoComplete="false"
               onChange={(event) => onFilterChange("prenom", event.target.value)}
@@ -88,7 +88,7 @@ const ListeBlancheFilter = () => {
           </Box>
           <Box sx={BoxStyle}>
             <Input
-              value={siret}
+              value={siret || ""}
               spellCheck="false"
               autoComplete="false"
               onChange={(event) => onFilterChange("siret", event.target.value)}
