@@ -70,6 +70,16 @@ export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPre
           Importez votre enquête
         </LinkButton>
       </Flex>
+      <Flex flexDirection="column">
+        <Box mt="4" sx={textStyle}>
+          <Text as="span">{`Pour plus de détails, vous pouvez télécharger le `}</Text>
+          <Text as="span" sx={downloadStyle}>
+            <a
+              href={`/static/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf`}
+            >{`guide de remplissage des enquêtes.`}</a>
+          </Text>
+        </Box>
+      </Flex>
     </Flex>
   );
 };
