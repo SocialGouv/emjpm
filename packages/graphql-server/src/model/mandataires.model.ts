@@ -12,7 +12,6 @@ export interface Mandataires {
   user_id: NullableNumber;
   telephone_portable: NullableString;
   created_at: NullableDate;
-  date_mesure_update: NullableDate;
   email_send: NullableDate;
   genre: NullableString;
   mesures_en_attente: NullableNumber;

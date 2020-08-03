@@ -9,7 +9,6 @@ export const GET_SERVICES_ANTENNE = gql`
       address_zip_code
       latitude
       longitude
-      bak_mandataire_id
       contact_email
       service_id
       name
@@ -17,7 +16,6 @@ export const GET_SERVICES_ANTENNE = gql`
       mesures_in_progress
       mesures_awaiting
       id
-      date_mesure_update
       created_at
       contact_phone
       contact_lastname

@@ -2933,12 +2933,6 @@ Object {
     "nullable": true,
     "type": "timestamp with time zone",
   },
-  "date_mesure_update": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
   "department_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -3477,12 +3471,6 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
-  "bak_mandataire_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
   "contact_email": Object {
     "defaultValue": null,
     "maxLength": 255,
@@ -3511,12 +3499,6 @@ Object {
     "defaultValue": "CURRENT_TIMESTAMP",
     "maxLength": null,
     "nullable": false,
-    "type": "timestamp with time zone",
-  },
-  "date_mesure_update": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
     "type": "timestamp with time zone",
   },
   "id": Object {
