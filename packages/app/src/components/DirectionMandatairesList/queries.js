@@ -50,6 +50,7 @@ export const GET_MANDATAIRES = gql`
       }
       service {
         id
+        etablissement
         nom
         prenom
         ville
