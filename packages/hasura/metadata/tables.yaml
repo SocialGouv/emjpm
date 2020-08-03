@@ -3968,7 +3968,6 @@
       - adresse
       - code_postal
       - created_at
-      - date_mesure_update
       - department_id
       - dispo_max
       - email_send
@@ -3994,7 +3993,6 @@
       - adresse
       - code_postal
       - created_at
-      - date_mesure_update
       - dispo_max
       - email_send
       - etablissement
@@ -4034,7 +4032,6 @@
       - user_id
       - competences
       - created_at
-      - date_mesure_update
       - email_send
       - adresse
       - code_postal
@@ -4060,7 +4057,6 @@
       - user_id
       - competences
       - created_at
-      - date_mesure_update
       - email_send
       - adresse
       - code_postal
@@ -4086,7 +4082,6 @@
       - user_id
       - telephone_portable
       - created_at
-      - date_mesure_update
       - email_send
       - genre
       - mesures_en_attente
@@ -4121,7 +4116,6 @@
       - user_id
       - telephone_portable
       - created_at
-      - date_mesure_update
       - email_send
       - genre
       - mesures_en_attente
@@ -4146,7 +4140,6 @@
       - user_id
       - competences
       - created_at
-      - date_mesure_update
       - email_send
       - adresse
       - code_postal
@@ -4173,7 +4166,6 @@
       - user_id
       - telephone_portable
       - created_at
-      - date_mesure_update
       - email_send
       - genre
       - mesures_en_attente
@@ -4190,7 +4182,6 @@
       - adresse
       - code_postal
       - created_at
-      - date_mesure_update
       - department_id
       - dispo_max
       - email_send
@@ -4217,7 +4208,6 @@
       - adresse
       - code_postal
       - created_at
-      - date_mesure_update
       - department_id
       - dispo_max
       - email_send
@@ -5069,13 +5059,11 @@
       - address_city
       - address_street
       - address_zip_code
-      - bak_mandataire_id
       - contact_email
       - contact_firstname
       - contact_lastname
       - contact_phone
       - created_at
-      - date_mesure_update
       - id
       - latitude
       - longitude
@@ -5102,8 +5090,6 @@
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
       filter: {}
       allow_aggregations: true
   - role: individuel
@@ -5123,8 +5109,6 @@
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
       - address
       - latitude
       - longitude
@@ -5134,14 +5118,12 @@
       columns:
       - latitude
       - longitude
-      - bak_mandataire_id
       - id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
       - service_id
       - created_at
-      - date_mesure_update
       - address
       - address_city
       - address_street
@@ -5159,13 +5141,11 @@
       - address_city
       - address_street
       - address_zip_code
-      - bak_mandataire_id
       - contact_email
       - contact_firstname
       - contact_lastname
       - contact_phone
       - created_at
-      - date_mesure_update
       - id
       - latitude
       - longitude
@@ -5195,8 +5175,6 @@
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
-      - date_mesure_update
-      - bak_mandataire_id
       filter: {}
   update_permissions:
   - role: service
@@ -5206,13 +5184,11 @@
       - address_city
       - address_street
       - address_zip_code
-      - bak_mandataire_id
       - contact_email
       - contact_firstname
       - contact_lastname
       - contact_phone
       - created_at
-      - date_mesure_update
       - id
       - latitude
       - longitude
