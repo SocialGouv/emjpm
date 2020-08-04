@@ -3456,13 +3456,6 @@
     schema: public
     name: etablissements
   array_relationships:
-  - name: mandataire_etablissements
-    using:
-      foreign_key_constraint_on:
-        column: etablissement_id
-        table:
-          schema: public
-          name: mandataire_etablissements
   - name: mesures
     using:
       foreign_key_constraint_on:
@@ -3858,68 +3851,6 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
-    name: mandataire_etablissements
-  object_relationships:
-  - name: etablissement
-    using:
-      foreign_key_constraint_on: etablissement_id
-  - name: mandataire
-    using:
-      foreign_key_constraint_on: mandataire_id
-  insert_permissions:
-  - role: prepose
-    permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-  select_permissions:
-  - role: prepose
-    permission:
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-  - role: ti
-    permission:
-      columns:
-      - id
-      - etablissement_id
-      - mandataire_id
-      - created_at
-      filter: {}
-  update_permissions:
-  - role: prepose
-    permission:
-      columns:
-      - etablissement_id
-      - id
-      - mandataire_id
-      - created_at
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-      check: null
-  delete_permissions:
-  - role: prepose
-    permission:
-      filter:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
-- table:
-    schema: public
     name: mandataires
   object_relationships:
   - name: departement
@@ -3946,13 +3877,6 @@
         table:
           schema: public
           name: enquete_reponses
-  - name: mandataire_etablissements
-    using:
-      foreign_key_constraint_on:
-        column: mandataire_id
-        table:
-          schema: public
-          name: mandataire_etablissements
   - name: mesures
     using:
       foreign_key_constraint_on:
