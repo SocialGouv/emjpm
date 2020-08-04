@@ -2878,35 +2878,6 @@ Object {
 }
 `;
 
-exports[`mandataire_etablissements table schema 1`] = `
-Object {
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": false,
-    "type": "timestamp with time zone",
-  },
-  "etablissement_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "id": Object {
-    "defaultValue": "nextval('\\"mandatairesEtablissements_id_seq\\"'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "mandataire_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-}
-`;
-
 exports[`mandataires table schema 1`] = `
 Object {
   "adresse": Object {
@@ -3792,7 +3763,6 @@ Array [
   "lb_users",
   "logs_data",
   "magistrat",
-  "mandataire_etablissements",
   "mandataires",
   "mesure_etat",
   "mesure_ressources",
