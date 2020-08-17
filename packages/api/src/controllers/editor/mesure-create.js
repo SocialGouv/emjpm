@@ -9,6 +9,7 @@ const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
 const getGeoDatas = require("../../services/getGeoDatas");
 const getDepartement = require("../../services/getDepartement");
+const { sanitizeMesureProperties } = require("../../utils/mesure");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -152,7 +153,13 @@ const mesureCreate = async (req, res) => {
         return mesure;
       }
     );
-    return res.status(201).json(createdMesure);
+
+    const mesureQueryResult = await Mesure.query()
+      .withGraphFetched("[etats,ressources]")
+      .where("id", createdMesure.id)
+      .first();
+
+    return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {
     return res.status(422).json({ error: error.message });
   }
