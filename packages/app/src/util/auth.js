@@ -8,6 +8,9 @@ const clearToken = () => {
   cookie.remove("token");
   // to support logging out from all windows
   window.localStorage.removeItem("token");
+
+  // Clear user preferences & filters
+  window.localStorage.removeItem("filters");
 };
 
 export const logout = () => {
