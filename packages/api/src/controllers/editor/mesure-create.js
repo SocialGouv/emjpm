@@ -34,7 +34,6 @@ const mesureCreate = async (req, res) => {
   }
 
   try {
-    let tis = null;
     if (body.tribunal_siret) {
       tis = await Tis.query().where("siret", body.tribunal_siret).first();
     }
@@ -111,6 +110,7 @@ const mesureCreate = async (req, res) => {
           magistrat_id: null,
           type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
           resultat_revision: body.resultat_revision,
+          nature_mesure: lastEtat ? lastEtat.nature_mesure : null,
         };
 
         mesure = await Mesure.query().insert(mesureToCreate);

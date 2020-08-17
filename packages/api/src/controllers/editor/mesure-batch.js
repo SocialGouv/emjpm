@@ -129,6 +129,7 @@ const mesureBatch = async (req, res) => {
             magistrat_id: null,
             type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
             resultat_revision: mesure.resultat_revision,
+            nature_mesure: lastEtat ? lastEtat.nature_mesure : null,
           });
 
           createdMesure.ressources = [];
