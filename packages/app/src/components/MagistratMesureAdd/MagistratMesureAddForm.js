@@ -4,7 +4,7 @@ import { Button, Field, InlineError, Input, Select, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { IS_URGENT } from "../../constants/mesures";
@@ -25,8 +25,10 @@ export const MagistratMesureAddForm = (props) => {
     cabinet,
     magistrat: { id: magistratId, ti_id: tiId },
   } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
 
   const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
+    onError: () => setLoading(false),
     refetchQueries: [
       {
         query: MANDATAIRE,
@@ -42,6 +44,7 @@ export const MagistratMesureAddForm = (props) => {
     ],
   });
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
+    onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
 
@@ -58,6 +61,7 @@ export const MagistratMesureAddForm = (props) => {
   });
 
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
+    onError: () => setLoading(false),
     refetchQueries: [
       {
         query: SERVICE,
@@ -73,6 +77,7 @@ export const MagistratMesureAddForm = (props) => {
     ],
   });
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
+    onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
       await recalculateServiceMesures({
@@ -86,6 +91,7 @@ export const MagistratMesureAddForm = (props) => {
 
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
+      setLoading(true);
       if (mandataireId) {
         await chooseMandataire({
           refetchQueries: [
@@ -262,7 +268,7 @@ export const MagistratMesureAddForm = (props) => {
               </Button>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button type="submit" disabled={loading} isLoading={loading}>
                 Enregistrer
               </Button>
             </Box>
