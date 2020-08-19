@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
@@ -15,6 +15,10 @@ const RESULT_PER_PAGE = 20;
 const MagistratMesures = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+
+  useEffect(() => {
+    setCurrentOffset(0);
+  }, [natureMesure, mesureStatus, debouncedSearchText]);
 
   const queryVariables = {
     offset: currentOffset,
