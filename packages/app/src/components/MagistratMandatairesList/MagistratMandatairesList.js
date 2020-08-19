@@ -82,7 +82,10 @@ const MagistratMandatairesList = (props) => {
               <Select
                 size="small"
                 placeholder="Type de mandataire"
-                onChange={(option) => setType(option)}
+                onChange={(option) => {
+                  setCurrentOffset(0);
+                  setType(option);
+                }}
                 value={selectedType}
                 options={optionsType}
               />
@@ -92,7 +95,10 @@ const MagistratMandatairesList = (props) => {
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={(event) => changeSearchText(event.target.value)}
+                onChange={(event) => {
+                  setCurrentOffset(0);
+                  changeSearchText(event.target.value);
+                }}
                 name="search"
                 size="small"
                 placeholder="mandataire / service"

@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
 import { differenceInDays } from "date-fns";
 import Link from "next/link";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
@@ -58,6 +58,10 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       }),
     [criteria, enqueteReponseResumes, enqueteReponseResumesIndex]
   );
+
+  useEffect(() => {
+    setCurrentOffset(0);
+  }, [setCurrentOffset, filteredEnqueteReponseResumes]);
 
   const currentPageEntries = useMemo(() => {
     const start = criteria.currentOffset;
