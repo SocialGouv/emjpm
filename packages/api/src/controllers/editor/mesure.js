@@ -7,7 +7,7 @@ const mesure = async (req, res) => {
 
   try {
     const mesure = await Mesure.query()
-      .withGraphFetched("[etats]")
+      .withGraphFetched("[etats,ressources]")
       .where("id", id)
       .first();
 
