@@ -27,10 +27,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
     context: queryContext,
   });
 
-  const { enqueteLabel, counts, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(
-    data
-  );
-
+  const { enqueteLabel, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(data);
   const resultPerPage = 10;
 
   const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria({
@@ -117,7 +114,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading2>{`Réponses à l'enquête (${counts.responses}/${counts.all})`}</Heading2>
+        <Heading2>{`Réponses à l'enquête`}</Heading2>
       </Flex>
 
       <DirectionEnqueteReponsesCriteria criteria={criteria} updateCriteria={updateCriteria} />
