@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
@@ -17,6 +17,10 @@ const MandataireMesures = (props) => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+
+  useEffect(() => {
+    setCurrentOffset(0);
+  }, [natureMesure, mesureStatus, debouncedSearchText]);
 
   let currentMesureStatus = null;
   if (isOnlyWaiting) {

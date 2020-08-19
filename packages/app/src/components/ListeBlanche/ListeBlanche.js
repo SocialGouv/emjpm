@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import React, { useContext, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { LoadingWrapper } from "../Commons";
 import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
@@ -13,6 +13,10 @@ const ListeBlanche = ({ onSelectLbUser }) => {
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
+
+  useEffect(() => {
+    setCurrentOffset(0);
+  }, [filters]);
 
   const departementIds = useMemo(() => {
     if (departement) {
