@@ -96,7 +96,8 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
             destinatairesCount={
               data.mandataires_aggregate.mandataires.count + data.services_aggregate.services.count
             }
-            enqueteReponsesCount={data.enquete_reponses_aggregate.enquete_reponses.count}
+            enqueteDraftCount={data.enquete_draft_count.enquete_reponses.count}
+            enqueteSubmittedCount={data.enquete_submitted_count.enquete_reponses.count}
             daysBeforeClosing={
               data.enquetes_by_pk && data.enquetes_by_pk.date_fin
                 ? differenceInDays(new Date(data.enquetes_by_pk.date_fin), new Date())
