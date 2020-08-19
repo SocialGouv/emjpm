@@ -7,6 +7,7 @@ const { Departement } = require("../../models/Departement");
 const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
 const getRegionCode = require("../../utils/getRegionCode");
+const { sanitizeMesureProperties } = require("../../utils/mesure");
 
 const mesureBatch = async (req, res) => {
   const {
@@ -128,6 +129,7 @@ const mesureBatch = async (req, res) => {
             magistrat_id: null,
             type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
             resultat_revision: mesure.resultat_revision,
+            nature_mesure: lastEtat ? lastEtat.nature_mesure : null,
           });
 
           createdMesure.ressources = [];
@@ -166,7 +168,12 @@ const mesureBatch = async (req, res) => {
             }
           }
 
-          results.push(createdMesure);
+          const mesureQueryResult = await Mesure.query()
+            .withGraphFetched("[etats,ressources]")
+            .where("id", createdMesure.id)
+            .first();
+
+          results.push(sanitizeMesureProperties(mesureQueryResult));
         }
 
         return results;
