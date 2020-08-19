@@ -9,6 +9,7 @@ const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
 const getGeoDatas = require("../../services/getGeoDatas");
 const getDepartement = require("../../services/getDepartement");
+const { sanitizeMesureProperties } = require("../../utils/mesure");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -33,7 +34,6 @@ const mesureCreate = async (req, res) => {
   }
 
   try {
-    let tis = null;
     if (body.tribunal_siret) {
       tis = await Tis.query().where("siret", body.tribunal_siret).first();
     }
@@ -110,6 +110,7 @@ const mesureCreate = async (req, res) => {
           magistrat_id: null,
           type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
           resultat_revision: body.resultat_revision,
+          nature_mesure: lastEtat ? lastEtat.nature_mesure : null,
         };
 
         mesure = await Mesure.query().insert(mesureToCreate);
@@ -152,7 +153,13 @@ const mesureCreate = async (req, res) => {
         return mesure;
       }
     );
-    return res.status(201).json(createdMesure);
+
+    const mesureQueryResult = await Mesure.query()
+      .withGraphFetched("[etats,ressources]")
+      .where("id", createdMesure.id)
+      .first();
+
+    return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {
     return res.status(422).json({ error: error.message });
   }
