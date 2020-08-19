@@ -6,6 +6,7 @@ const { MESURE_PROTECTION } = require("@emjpm/core");
 const {
   mesures,
   mesure,
+  serviceAntennes,
   mesureCreate,
   mesureUpdate,
   mesureBatch,
@@ -13,6 +14,8 @@ const {
 } = require("../../../src/controllers/editor");
 
 router.get("/mesures", mesures);
+
+router.get("/service-antennes", serviceAntennes.getAntennes);
 
 router.post(
   "/mesures",
