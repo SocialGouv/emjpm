@@ -27,7 +27,7 @@ Object {
   "date_protection_en_cours": "2020-01-11",
   "etats": Array [
     Object {
-      "champ_mesure": null,
+      "champ_mesure": "protection_bien",
       "code_postal": "89000",
       "date_changement_etat": "2020-01-05",
       "etablissement_siret": "",
@@ -39,7 +39,7 @@ Object {
       "ville": "auxerre",
     },
     Object {
-      "champ_mesure": null,
+      "champ_mesure": "protection_bien",
       "code_postal": "89350",
       "date_changement_etat": "2020-01-06",
       "etablissement_siret": "",
@@ -73,6 +73,16 @@ Object {
       "msg": "date_nomination must be before or equivalent to date_protection_en_cours",
       "param": "date_nomination",
       "value": "2020-01-11",
+    },
+    Object {
+      "location": "body",
+      "msg": "champ_mesure is required",
+      "param": "etats[0].champ_mesure",
+    },
+    Object {
+      "location": "body",
+      "msg": "champ_mesure is required",
+      "param": "etats[1].champ_mesure",
     },
   ],
 }

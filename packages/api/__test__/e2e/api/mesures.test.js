@@ -100,6 +100,7 @@ describe("POST /api/editors/mesures", () => {
         ressources: [],
         etats: [
           {
+            champ_mesure: "protection_bien",
             date_changement_etat: "2020-01-05",
             lieu_vie: "domicile",
             pays: "FR",
@@ -108,6 +109,7 @@ describe("POST /api/editors/mesures", () => {
             ville: "auxerre",
           },
           {
+            champ_mesure: "protection_bien",
             date_changement_etat: "2020-01-06",
             lieu_vie: "domicile",
             pays: "FR",
@@ -184,6 +186,7 @@ describe("POST /api/editors/mesures", () => {
         ressources: [],
         etats: [
           {
+            champ_mesure: "protection_bien",
             date_changement_etat: "2020-01-05",
             lieu_vie: "domicile",
             pays: "FR",
@@ -192,6 +195,7 @@ describe("POST /api/editors/mesures", () => {
             ville: "auxerre",
           },
           {
+            champ_mesure: "protection_bien",
             date_changement_etat: "2020-01-06",
             lieu_vie: "domicile",
             pays: "FR",
@@ -201,6 +205,9 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
       });
+
+    console.log("response", response.body);
+
     expect(response.body).toMatchSnapshot();
     expect(response.status).toBe(201);
   });
