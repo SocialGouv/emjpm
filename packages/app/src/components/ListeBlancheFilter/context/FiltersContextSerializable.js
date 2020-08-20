@@ -9,6 +9,7 @@ export const Provider = (props) => {
   const { children, useLocalStorage } = props;
   const [filters, setFilters] = useState({
     departements: [],
+    type: "individuel",
   });
 
   useEffect(() => {

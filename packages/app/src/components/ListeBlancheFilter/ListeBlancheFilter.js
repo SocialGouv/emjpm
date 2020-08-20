@@ -7,8 +7,8 @@ import { FiltersContextSerializable } from "./context";
 import { BoxStyle } from "./style";
 
 const TYPE_OPTIONS = [
-  { label: "Tous les types", value: null },
   { label: "Mandataire individuel", value: "individuel" },
+  { label: "Service mandataire", value: "service" },
   { label: "Mandataire préposé d'établissement", value: "prepose" },
 ];
 
