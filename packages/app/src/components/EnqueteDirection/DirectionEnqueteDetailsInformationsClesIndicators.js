@@ -3,7 +3,7 @@ import React from "react";
 import { Box } from "rebass";
 
 export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
-  const { destinatairesCount, enqueteReponsesCount, daysBeforeClosing } = props;
+  const { destinatairesCount, enqueteDraftCount, enqueteSubmittedCount, daysBeforeClosing } = props;
 
   return (
     <FlexWrapper flexWrap={"wrap"}>
@@ -11,7 +11,10 @@ export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
         <Indicator title="Destinataires" indicator={destinatairesCount} />
       </Box>
       <Box sx={fourColumnStyle}>
-        <Indicator title="Réponses envoyées" indicator={enqueteReponsesCount} />
+        <Indicator title="Réponses en cours" indicator={enqueteDraftCount} />
+      </Box>
+      <Box sx={fourColumnStyle}>
+        <Indicator title="Réponses envoyées" indicator={enqueteSubmittedCount} />
       </Box>
       {daysBeforeClosing !== undefined && (
         <Box sx={fourColumnStyle}>
