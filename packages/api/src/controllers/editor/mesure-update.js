@@ -5,10 +5,30 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 const { Departement } = require("../../models/Departement");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { ServiceMember } = require("../../models/ServiceMember");
 const {
   GeolocalisationCodePostal,
 } = require("../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../utils/getRegionCode");
+
+async function antenneIdIsValid(antenneId, userId) {
+  const antennes = await ServiceAntenne.query()
+    .select("id")
+    .whereIn(
+      "service_id",
+      ServiceMember.query().select("service_id").where("user_id", userId)
+    );
+  if (!antennes && !antennes.length) {
+    return false;
+  }
+  return antennes.map(({ id }) => id).includes(antenneId);
+}
+
+async function tribunalSiretIsValid(siret) {
+  const tis = await Tis.query().where("siret", siret).first();
+  return !!tis;
+}
 
 const mesureUpdate = async (req, res) => {
   const errors = validationResult(req);
@@ -29,7 +49,23 @@ const mesureUpdate = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "User not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
+  }
+
+  if (body.antenne_id) {
+    const isValid = await antenneIdIsValid(body.antenne_id, user_id);
+    if (!isValid) {
+      return res.status(400).json({
+        errors: [
+          {
+            msg: `antenne_id does not match with your service.`,
+            param: "antenne_id",
+            value: body.antenne_id,
+            location: "body",
+          },
+        ],
+      });
+    }
   }
 
   const type = user.type === "service" ? "service" : "mandataire";
@@ -37,7 +73,7 @@ const mesureUpdate = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   try {
@@ -45,24 +81,18 @@ const mesureUpdate = async (req, res) => {
       .where({ [`${type}_id`]: serviceOrMandataire.id })
       .findById(id);
   } catch (error) {
-    return res.status(422).json({ error: "Mesure not found" });
+    return res.status(422).json({ errors: [{ msg: "mesure not found" }] });
   }
 
   if (body.tribunal_siret) {
-    try {
-      const tis = await Tis.query().where("siret", body.tribunal_siret).first();
-      if (!tis) {
-        throw "tribunal not found";
-      }
-      mesure.ti_id = tis.id;
-    } catch (error) {
-      return res.status(400).json({ error: "Siret does not valid" });
+    const isValid = await tribunalSiretIsValid(body.tribunal_siret);
+    if (!isValid) {
+      return res.status(400).json({ errors: [{ msg: "siret is not valid" }] });
     }
   }
 
   try {
     const etats = await MesureEtat.query().where({ mesure_id: id });
-
     if (body.etats) {
       for (const etat of body.etats) {
         const matchEtat = etats.find(
@@ -112,7 +142,9 @@ const mesureUpdate = async (req, res) => {
     mesure = await Mesure.query().where({ id }).first();
     mesure.etats = await MesureEtat.query().where({ mesure_id: id });
   } catch (error) {
-    return res.status(422).json({ error: error.message });
+    return res.status(422).json({
+      errors: [{ msg: "oups, something goes wrong. please contact support." }],
+    });
   }
 
   return res.status(200).json({ mesure });

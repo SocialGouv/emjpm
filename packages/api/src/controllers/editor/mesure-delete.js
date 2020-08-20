@@ -17,7 +17,7 @@ const deleteById = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "user not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";
@@ -25,7 +25,7 @@ const deleteById = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   const affectedRows = await transaction(
@@ -56,7 +56,7 @@ const deleteAll = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "user not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
   }
 
   try {
@@ -64,7 +64,7 @@ const deleteAll = async (req, res) => {
     try {
       serviceOrMandataire = await user.$relatedQuery(type);
     } catch (error) {
-      return res.status(422).json({ error: `${type} not found` });
+      return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
     }
 
     const mesures = await Mesure.query()
@@ -92,7 +92,7 @@ const deleteAll = async (req, res) => {
     );
     return res.status(200).json({ affected_rows: affectedRows });
   } catch (err) {
-    return res.status(401).end({ error: "something goes wrong" });
+    return res.status(401).end({ errors: [{ msg: "something goes wrong" }] });
   }
 };
 
