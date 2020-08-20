@@ -29,7 +29,7 @@ const mesureBatch = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "User not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";
@@ -37,7 +37,7 @@ const mesureBatch = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   try {
@@ -98,7 +98,7 @@ const mesureBatch = async (req, res) => {
               .first();
           }
           if (!tis) {
-            return res.status(400).json({ error: "siret is not valid" });
+            throw new Error(`siret (${mesure.tribunal_siret}) is not valid`);
           }
 
           if (
@@ -201,7 +201,7 @@ const mesureBatch = async (req, res) => {
 
     return res.status(201).json({ mesures: createdMesures });
   } catch (error) {
-    return res.status(422).json({ error: error.message });
+    return res.status(422).json({ errors: [{ msg: error.message }] });
   }
 };
 

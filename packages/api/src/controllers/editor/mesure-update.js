@@ -49,14 +49,21 @@ const mesureUpdate = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "User not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
   }
 
   if (body.antenne_id) {
     const isValid = await antenneIdIsValid(body.antenne_id, user_id);
     if (!isValid) {
       return res.status(400).json({
-        error: `antenne_id (${body.antenne_id}) does not match with your service.`,
+        errors: [
+          {
+            msg: `antenne_id does not match with your service.`,
+            param: "antenne_id",
+            value: body.antenne_id,
+            location: "body",
+          },
+        ],
       });
     }
   }
@@ -66,7 +73,7 @@ const mesureUpdate = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   try {
@@ -74,13 +81,13 @@ const mesureUpdate = async (req, res) => {
       .where({ [`${type}_id`]: serviceOrMandataire.id })
       .findById(id);
   } catch (error) {
-    return res.status(422).json({ error: "mesure not found" });
+    return res.status(422).json({ errors: [{ msg: "mesure not found" }] });
   }
 
   if (body.tribunal_siret) {
     const isValid = await tribunalSiretIsValid(body.tribunal_siret);
     if (!isValid) {
-      return res.status(400).json({ error: "siret is not valid" });
+      return res.status(400).json({ errors: [{ msg: "siret is not valid" }] });
     }
   }
 
@@ -135,7 +142,9 @@ const mesureUpdate = async (req, res) => {
     mesure = await Mesure.query().where({ id }).first();
     mesure.etats = await MesureEtat.query().where({ mesure_id: id });
   } catch (error) {
-    return res.status(422).json({ error: error.message });
+    return res.status(422).json({
+      errors: [{ msg: "oups, something goes wrong. please contact support." }],
+    });
   }
 
   return res.status(200).json({ mesure });

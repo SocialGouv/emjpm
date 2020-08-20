@@ -16,7 +16,9 @@ const mesure = async (req, res) => {
     }
     return res.status(200).json(mesure);
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return res.status(400).json({
+      errors: [{ msg: "oups, something goes wrong. please contact support." }],
+    });
   }
 };
 

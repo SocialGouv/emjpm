@@ -50,14 +50,22 @@ const mesureCreate = async (req, res) => {
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "User not found" });
+    return res
+      .status(422)
+      .json({ errors: [{ value: user_id, msg: "user not found" }] });
   }
 
   if (body.antenne_id) {
     const isValid = await antenneIdIsValid(body.antenne_id, user_id);
     if (!isValid) {
       return res.status(400).json({
-        error: `antenne_id (${body.antenne_id}) does not match with your service.`,
+        errors: [
+          {
+            value: body.antenne_id,
+            param: "antenne_id",
+            msg: `antenne_id does not match with your service.`,
+          },
+        ],
       });
     }
   }
@@ -65,7 +73,15 @@ const mesureCreate = async (req, res) => {
   if (body.tribunal_siret) {
     const isValid = await tribunalSiretIsValid(body.tribunal_siret);
     if (!isValid) {
-      return res.status(400).json({ error: "siret is not valid" });
+      return res.status(400).json({
+        errors: [
+          {
+            param: "siret",
+            value: body.tribunal_siret,
+            msg: "siret is not valid",
+          },
+        ],
+      });
     }
   }
 
@@ -74,7 +90,7 @@ const mesureCreate = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   try {
@@ -186,7 +202,7 @@ const mesureCreate = async (req, res) => {
 
     return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {
-    return res.status(422).json({ error: error.message });
+    return res.status(422).json({ errors: [{ msg: error.message }] });
   }
 };
 
