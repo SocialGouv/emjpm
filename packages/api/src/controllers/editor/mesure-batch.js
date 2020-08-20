@@ -8,6 +8,8 @@ const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
 const getRegionCode = require("../../utils/getRegionCode");
 const { sanitizeMesureProperties } = require("../../utils/mesure");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { ServiceMember } = require("../../models/ServiceMember");
 
 const mesureBatch = async (req, res) => {
   const {
@@ -17,10 +19,17 @@ const mesureBatch = async (req, res) => {
   let user;
   let serviceOrMandataire;
 
+  const antennes = await ServiceAntenne.query()
+    .select("id")
+    .whereIn(
+      "service_id",
+      ServiceMember.query().select("service_id").where("user_id", user_id)
+    );
+
   try {
     user = await User.query().findById(user_id);
   } catch (error) {
-    return res.status(422).json({ error: "User not found" });
+    return res.status(422).json({ errors: [{ msg: "user not found" }] });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";
@@ -28,7 +37,7 @@ const mesureBatch = async (req, res) => {
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
   } catch (error) {
-    return res.status(422).json({ error: `${type} not found` });
+    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
   try {
@@ -89,7 +98,17 @@ const mesureBatch = async (req, res) => {
               .first();
           }
           if (!tis) {
-            return res.status(400).json({ error: "Siret does not valid" });
+            throw new Error(`siret (${mesure.tribunal_siret}) is not valid`);
+          }
+
+          if (
+            mesure.antenne_id &&
+            (!antennes.length ||
+              !antennes.map(({ id }) => id).includes(mesure.antenne_id))
+          ) {
+            throw new Error(
+              `antenne_id (${mesure.antenne_id}) does not match with your service.`
+            );
           }
 
           const createdMesure = await Mesure.query().insert({
@@ -182,7 +201,7 @@ const mesureBatch = async (req, res) => {
 
     return res.status(201).json({ mesures: createdMesures });
   } catch (error) {
-    return res.status(422).json({ error: error.message });
+    return res.status(422).json({ errors: [{ msg: error.message }] });
   }
 };
 
