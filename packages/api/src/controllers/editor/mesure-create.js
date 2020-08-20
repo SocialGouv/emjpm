@@ -7,9 +7,29 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { ServiceMember } = require("../../models/ServiceMember");
 const getGeoDatas = require("../../services/getGeoDatas");
 const getDepartement = require("../../services/getDepartement");
 const { sanitizeMesureProperties } = require("../../utils/mesure");
+
+async function antenneIdIsValid(antenneId, userId) {
+  const antennes = await ServiceAntenne.query()
+    .select("id")
+    .whereIn(
+      "service_id",
+      ServiceMember.query().select("service_id").where("user_id", userId)
+    );
+  if (!antennes && !antennes.length) {
+    return false;
+  }
+  return antennes.map(({ id }) => id).includes(antenneId);
+}
+
+async function tribunalSiretIsValid(siret) {
+  const tis = await Tis.query().where("siret", siret).first();
+  return !!tis;
+}
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -33,15 +53,20 @@ const mesureCreate = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
-  try {
-    if (body.tribunal_siret) {
-      tis = await Tis.query().where("siret", body.tribunal_siret).first();
+  if (body.antenne_id) {
+    const isValid = await antenneIdIsValid(body.antenne_id, user_id);
+    if (!isValid) {
+      return res.status(400).json({
+        error: `antenne_id (${body.antenne_id}) does not match with your service.`,
+      });
     }
-    if (!tis) {
-      throw "tribunal not found";
+  }
+
+  if (body.tribunal_siret) {
+    const isValid = await tribunalSiretIsValid(body.tribunal_siret);
+    if (!isValid) {
+      return res.status(400).json({ error: "siret is not valid" });
     }
-  } catch (error) {
-    return res.status(400).json({ error: "Siret does not valid" });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";

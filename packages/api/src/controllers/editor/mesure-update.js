@@ -5,10 +5,30 @@ const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
 const { Tis } = require("../../models/Tis");
 const { Departement } = require("../../models/Departement");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { ServiceMember } = require("../../models/ServiceMember");
 const {
   GeolocalisationCodePostal,
 } = require("../../models/GeolocalisationCodePostal");
 const getRegionCode = require("../../utils/getRegionCode");
+
+async function antenneIdIsValid(antenneId, userId) {
+  const antennes = await ServiceAntenne.query()
+    .select("id")
+    .whereIn(
+      "service_id",
+      ServiceMember.query().select("service_id").where("user_id", userId)
+    );
+  if (!antennes && !antennes.length) {
+    return false;
+  }
+  return antennes.map(({ id }) => id).includes(antenneId);
+}
+
+async function tribunalSiretIsValid(siret) {
+  const tis = await Tis.query().where("siret", siret).first();
+  return !!tis;
+}
 
 const mesureUpdate = async (req, res) => {
   const errors = validationResult(req);
@@ -32,6 +52,15 @@ const mesureUpdate = async (req, res) => {
     return res.status(422).json({ error: "User not found" });
   }
 
+  if (body.antenne_id) {
+    const isValid = await antenneIdIsValid(body.antenne_id, user_id);
+    if (!isValid) {
+      return res.status(400).json({
+        error: `antenne_id (${body.antenne_id}) does not match with your service.`,
+      });
+    }
+  }
+
   const type = user.type === "service" ? "service" : "mandataire";
 
   try {
@@ -45,24 +74,18 @@ const mesureUpdate = async (req, res) => {
       .where({ [`${type}_id`]: serviceOrMandataire.id })
       .findById(id);
   } catch (error) {
-    return res.status(422).json({ error: "Mesure not found" });
+    return res.status(422).json({ error: "mesure not found" });
   }
 
   if (body.tribunal_siret) {
-    try {
-      const tis = await Tis.query().where("siret", body.tribunal_siret).first();
-      if (!tis) {
-        throw "tribunal not found";
-      }
-      mesure.ti_id = tis.id;
-    } catch (error) {
-      return res.status(400).json({ error: "Siret does not valid" });
+    const isValid = await tribunalSiretIsValid(body.tribunal_siret);
+    if (!isValid) {
+      return res.status(400).json({ error: "siret is not valid" });
     }
   }
 
   try {
     const etats = await MesureEtat.query().where({ mesure_id: id });
-
     if (body.etats) {
       for (const etat of body.etats) {
         const matchEtat = etats.find(

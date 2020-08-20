@@ -8,6 +8,8 @@ const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
 const getRegionCode = require("../../utils/getRegionCode");
 const { sanitizeMesureProperties } = require("../../utils/mesure");
+const { ServiceAntenne } = require("../../models/ServiceAntenne");
+const { ServiceMember } = require("../../models/ServiceMember");
 
 const mesureBatch = async (req, res) => {
   const {
@@ -16,6 +18,13 @@ const mesureBatch = async (req, res) => {
   } = req;
   let user;
   let serviceOrMandataire;
+
+  const antennes = await ServiceAntenne.query()
+    .select("id")
+    .whereIn(
+      "service_id",
+      ServiceMember.query().select("service_id").where("user_id", user_id)
+    );
 
   try {
     user = await User.query().findById(user_id);
@@ -89,7 +98,17 @@ const mesureBatch = async (req, res) => {
               .first();
           }
           if (!tis) {
-            return res.status(400).json({ error: "Siret does not valid" });
+            return res.status(400).json({ error: "siret is not valid" });
+          }
+
+          if (
+            mesure.antenne_id &&
+            (!antennes.length ||
+              !antennes.map(({ id }) => id).includes(mesure.antenne_id))
+          ) {
+            throw new Error(
+              `antenne_id (${mesure.antenne_id}) does not match with your service.`
+            );
           }
 
           const createdMesure = await Mesure.query().insert({
