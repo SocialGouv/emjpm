@@ -81,7 +81,16 @@ export const ENQUETE_DETAILS_LIST = gql`
         count(columns: id)
       }
     }
-    enquete_reponses_aggregate(where: { enquete_id: { _eq: $enqueteId } }) {
+    enquete_draft_count: enquete_reponses_aggregate(
+      where: { enquete_id: { _eq: $enqueteId }, status: { _eq: "draft" } }
+    ) {
+      enquete_reponses: aggregate {
+        count(columns: id)
+      }
+    }
+    enquete_submitted_count: enquete_reponses_aggregate(
+      where: { enquete_id: { _eq: $enqueteId }, status: { _eq: "submitted" } }
+    ) {
       enquete_reponses: aggregate {
         count(columns: id)
       }
