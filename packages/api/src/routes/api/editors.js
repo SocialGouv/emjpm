@@ -6,6 +6,7 @@ const { MESURE_PROTECTION } = require("@emjpm/core");
 const {
   mesures,
   mesure,
+  serviceAntennes,
   mesureCreate,
   mesureUpdate,
   mesureBatch,
@@ -13,6 +14,8 @@ const {
 } = require("../../../src/controllers/editor");
 
 router.get("/mesures", mesures);
+
+router.get("/service-antennes", serviceAntennes.getAntennes);
 
 router.post(
   "/mesures",
@@ -37,8 +40,63 @@ router.post(
   ],
   mesureCreate
 );
-router.put("/mesures/:id", mesureUpdate);
-router.post("/mesures/batch", mesureBatch);
+router.put(
+  "/mesures/:id",
+  [
+    body("numero_rg").optional().trim().escape(),
+    body("annee_naissance").optional().trim().escape(),
+    body("civilite").optional().isIn(MESURE_PROTECTION.CIVILITE.keys),
+    body("date_nomination").optional().isDate().toDate(),
+    body("date_fin_mesure").optional().isDate().toDate(),
+    body("date_premier_mesure").optional().isDate().toDate(),
+    body("date_protection_en_cours").optional().isDate().toDate(),
+    body("tribunal_siret").optional().trim().escape(),
+    body("antenne_id").optional().toInt(10),
+    body("cause_sortie").optional().isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
+    body("resultat_revision")
+      .optional()
+      .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
+    check("etats.*.pays").optional().isISO31661Alpha2(),
+    check("etats.*.date_changement_etat").optional().isDate().toDate(),
+    check("etats.*.nature_mesure")
+      .optional()
+      .isIn(MESURE_PROTECTION.NATURE_MESURE.keys),
+    check("etats.*.lieu_vie")
+      .optional()
+      .isIn(MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys),
+  ],
+  mesureUpdate
+);
+
+router.post(
+  "/mesures/batch",
+  [
+    body("mesures.*.numero_rg").not().isEmpty().trim().escape(),
+    body("mesures.*.annee_naissance").not().isEmpty().trim().escape(),
+    body("mesures.*.civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
+    body("mesures.*.date_nomination").isDate().toDate(),
+    body("mesures.*.date_fin_mesure").optional().isDate().toDate(),
+    body("mesures.*.date_premier_mesure").optional().isDate().toDate(),
+    body("mesures.*.date_protection_en_cours").optional().isDate().toDate(),
+    body("mesures.*.tribunal_siret").not().isEmpty().trim().escape(),
+    body("mesures.*.antenne_id").optional().toInt(10),
+    body("mesures.*.cause_sortie")
+      .optional()
+      .isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
+    body("mesures.*.resultat_revision")
+      .optional()
+      .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
+    check("mesures.*.etats.*.pays").isISO31661Alpha2(),
+    check("mesures.*.etats.*.date_changement_etat").isDate().toDate(),
+    check("mesures.*.etats.*.nature_mesure").isIn(
+      MESURE_PROTECTION.NATURE_MESURE.keys
+    ),
+    check("mesures.*.etats.*.lieu_vie").isIn(
+      MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys
+    ),
+  ],
+  mesureBatch
+);
 
 router.delete("/mesures/:id", mesureDelete.deleteById);
 router.delete("/mesures", mesureDelete.deleteAll);
