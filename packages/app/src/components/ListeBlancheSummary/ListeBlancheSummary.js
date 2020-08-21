@@ -41,7 +41,7 @@ const LabelValue = ({ label, value }) => (
 
 const ListeBlancheSummary = () => {
   const { filters, departements = [] } = useContext(FiltersContextSerializable);
-  const { departement } = filters;
+  const { departement, type } = filters;
   const user = useContext(UserContext);
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
@@ -99,7 +99,9 @@ const ListeBlancheSummary = () => {
           <Heading2>{departementLabel}</Heading2>
         </Box>
         <Box width={1 / 2} textAlign="right">
-          <Link href={`/${user.type}/liste-blanche/ajout`}>{"Ajouter un enregistrement"}</Link>
+          <Link href={`/${user.type}/liste-blanche/ajout-${type}`}>
+            {"Ajouter un enregistrement"}
+          </Link>
         </Box>
       </Flex>
 
