@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const { param, body, check } = require("express-validator");
 const { MESURE_PROTECTION } = require("@emjpm/core");
+const isBefore = require("date-fns/isBefore");
+const parseISO = require("date-fns/parseISO");
 
 const {
   mesures,
@@ -23,7 +25,69 @@ router.post(
     body("numero_rg").not().isEmpty().trim().escape(),
     body("annee_naissance").not().isEmpty().trim().escape(),
     body("civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
-    body("date_nomination").isDate().toDate(),
+
+    body("type_etablissement").custom((value, { req }) => {
+      if (req.body.etats && req.body.etats.length) {
+        const { lieu_vie } = req.body.etats[req.body.etats.length - 1];
+        if (
+          (lieu_vie === "etablissement" ||
+            lieu_vie === "etablissement_conservation_domicile") &&
+          !value
+        ) {
+          throw new Error("type_etablissement is required");
+        }
+      }
+      return true;
+    }),
+    body("date_nomination")
+      .custom((value, { req }) => {
+        if (value) {
+          if (
+            req.body.date_premier_mesure &&
+            isBefore(
+              parseISO(`${value}T00:00:00.000Z`),
+              parseISO(`${req.body.date_premier_mesure}T00:00:00.000Z`)
+            )
+          ) {
+            throw new Error(
+              "date_nomination must be after or equivalent to date_premier_mesure"
+            );
+          }
+
+          if (
+            req.body.date_protection_en_cours &&
+            isBefore(
+              parseISO(`${req.body.date_protection_en_cours}T00:00:00.000Z`),
+              parseISO(`${value}T00:00:00.000Z`)
+            )
+          ) {
+            throw new Error(
+              "date_nomination must be before or equivalent to date_protection_en_cours"
+            );
+          }
+        }
+
+        if (req.body.etats && req.body.etats.length) {
+          const lastEtat = req.body.etats[req.body.etats.length - 1];
+          if (lastEtat) {
+            if (
+              lastEtat.date_changement_etat &&
+              isBefore(
+                parseISO(`${value}T00:00:00.000Z`),
+                parseISO(`${lastEtat.date_changement_etat}T00:00:00.000Z`)
+              )
+            ) {
+              throw new Error(
+                "date_nomination must be after or equivalent to date_changement_etat"
+              );
+            }
+          }
+        }
+
+        return value;
+      })
+      .isDate()
+      .toDate(),
     body("date_fin_mesure").optional().isDate().toDate(),
     body("date_premier_mesure").optional().isDate().toDate(),
     body("date_protection_en_cours").optional().isDate().toDate(),
@@ -37,6 +101,29 @@ router.post(
     check("etats.*.date_changement_etat").isDate().toDate(),
     check("etats.*.nature_mesure").isIn(MESURE_PROTECTION.NATURE_MESURE.keys),
     check("etats.*.lieu_vie").isIn(MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys),
+
+    body("etats.*.champ_mesure").custom((value, { req }) => {
+      if (req.body.etats && req.body.etats.length) {
+        const { nature_mesure } = req.body.etats[req.body.etats.length - 1];
+        if (
+          (nature_mesure === "curatelle_simple" ||
+            nature_mesure === "curatelle_renforcee" ||
+            nature_mesure === "curatelle_renforcee") &&
+          !value
+        ) {
+          throw new Error("champ_mesure is required");
+        }
+
+        if (value && !MESURE_PROTECTION.CHAMP_MESURE.keys.includes(value)) {
+          throw new Error(
+            `champ_mesure must be equal to ${MESURE_PROTECTION.CHAMP_MESURE.keys.join(
+              " or "
+            )}`
+          );
+        }
+      }
+      return true;
+    }),
   ],
   mesureCreate
 );
