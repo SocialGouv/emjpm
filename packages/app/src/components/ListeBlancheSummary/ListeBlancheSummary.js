@@ -67,7 +67,7 @@ const ListeBlancheSummary = () => {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading4>{"Oups, une erreur s'est produite. Veuillez réessayer ultérieurement."}</Heading4>
       </Card>
     );
   }

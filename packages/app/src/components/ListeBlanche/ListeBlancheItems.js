@@ -1,0 +1,74 @@
+import { useQuery } from "@apollo/react-hooks";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+
+import { LoadingWrapper } from "../Commons";
+import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
+import { PaginatedList } from "../PaginatedList";
+import { ListeBlancheMandataire } from "./ListeBlancheMandataire";
+import { ListeBlancheService } from "./ListeBlancheService";
+import { LB_USERS } from "./queries";
+
+export const ListeBlancheItems = (props) => {
+  const { onSelect } = props;
+  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { departement, type } = filters;
+
+  const resultPerPage = 50;
+  const [currentOffset, setCurrentOffset] = useState(0);
+
+  useEffect(() => {
+    setCurrentOffset(0);
+  }, [filters]);
+
+  const departementIds = useMemo(() => {
+    if (departement) {
+      return departements.filter(({ id }) => id === departement).map(({ id }) => id);
+    } else {
+      return departements.map(({ id }) => id);
+    }
+  }, [departements, departement]);
+
+  const { data, error, loading } = useQuery(LB_USERS, {
+    variables: {
+      limit: resultPerPage,
+      offset: currentOffset,
+      type: filters.type || null,
+      departementIds,
+      nom: filters.nom ? `${filters.nom}%` : null,
+      prenom: filters.prenom ? `${filters.prenom}%` : null,
+      departementFinanceur: filters.departementFinanceur ? true : null,
+      siret: filters.siret ? `${filters.siret}%` : null,
+    },
+  });
+
+  const { count, users } = useMemo(() => {
+    if (data) {
+      const { count } = data.lb_users_aggregate.aggregate;
+      const users = data.lb_users;
+      return {
+        count,
+        users,
+      };
+    }
+    return {
+      count: 0,
+      users: [],
+    };
+  }, [data]);
+
+  return (
+    <LoadingWrapper loading={loading} error={error}>
+      <PaginatedList
+        entries={users}
+        RowItem={type === "service" ? ListeBlancheService : ListeBlancheMandataire}
+        count={count}
+        resultPerPage={resultPerPage}
+        currentOffset={currentOffset}
+        setCurrentOffset={setCurrentOffset}
+        onRowClick={onSelect}
+      />
+    </LoadingWrapper>
+  );
+};
+
+export default ListeBlancheItems;
