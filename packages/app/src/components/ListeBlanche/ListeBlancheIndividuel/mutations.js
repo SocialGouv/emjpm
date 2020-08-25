@@ -23,6 +23,38 @@ export const UPDATE_DEPARTEMENT_FINANCEUR = gql`
   }
 `;
 
+export const CREATE_LB_USER_INDIVIDUEL = gql`
+  mutation create_lb_user(
+    $nom: String!
+    $prenom: String!
+    $siret: String!
+    $email: String!
+    $departements: [lb_departements_insert_input!]!
+  ) {
+    insert_lb_users_one(
+      object: {
+        nom: $nom
+        prenom: $prenom
+        siret: $siret
+        email: $email
+        lb_departements: { data: $departements }
+      }
+    ) {
+      created_at
+      email
+      id
+      lb_departements {
+        id
+        departement_id
+      }
+      nom
+      prenom
+      siret
+      type
+    }
+  }
+`;
+
 export const UPDATE_LB_USER = gql`
   mutation update_lb_users(
     $id: Int!

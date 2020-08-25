@@ -13,6 +13,8 @@ exports.up = function (knex) {
       .references("id")
       .inTable("etablissements")
       .notNullable();
+
+    table.boolean("etablissement_rattachement").default(false);
   });
 };
 
