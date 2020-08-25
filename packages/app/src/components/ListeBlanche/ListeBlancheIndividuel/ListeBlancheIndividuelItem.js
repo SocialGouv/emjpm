@@ -2,18 +2,10 @@ import { Card, Text } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
-import { cardStyle, descriptionStyle, labelStyle } from "./style";
+import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
-const getType = (type) => {
-  if (type === "individuel") {
-    return "Mandataire individuel";
-  }
-  if (type === "prepose") {
-    return "Mandataire préposé d'établissement";
-  }
-};
-
-export const ListeBlancheItemCard = ({ item, onClick }) => {
+export const ListeBlancheIndividuelItem = (props) => {
+  const { item, onClick } = props;
   return (
     <Card
       key={item.id}
@@ -23,7 +15,7 @@ export const ListeBlancheItemCard = ({ item, onClick }) => {
     >
       <Flex justifyContent="flex-start">
         <Flex width="25%" flexDirection="column">
-          <Text sx={labelStyle}>{getType(item.type)}</Text>
+          <Text sx={labelStyle}>{"Mandataire individuel"}</Text>
           <Flex>
             <Text sx={descriptionStyle}>{item.nom ? item.nom.toUpperCase() : ""}</Text>
             <Text pl="1" sx={descriptionStyle}>
@@ -60,3 +52,5 @@ export const ListeBlancheItemCard = ({ item, onClick }) => {
     </Card>
   );
 };
+
+export default ListeBlancheIndividuelItem;

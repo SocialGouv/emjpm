@@ -2,17 +2,17 @@ import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { useMutation } from "react-apollo";
 
-import { ListeBlancheForm } from "../ListeBlancheForm";
-import { UserContext } from "../UserContext";
-import { CREATE_LB_USER } from "./mutations";
+import { UserContext } from "../../UserContext";
+import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
+import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
 
-export const ListeBlancheAjout = () => {
+export const ListeBlancheIndividuelCreate = () => {
   const router = useRouter();
   const { type } = useContext(UserContext);
-  const [create, { loading }] = useMutation(CREATE_LB_USER);
+  const [create, { loading }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
 
   return (
-    <ListeBlancheForm
+    <ListeBlancheIndividuelForm
       editMode={false}
       loading={loading}
       handleSubmit={async (values) => {
@@ -38,4 +38,4 @@ export const ListeBlancheAjout = () => {
   );
 };
 
-export default ListeBlancheAjout;
+export default ListeBlancheIndividuelCreate;
