@@ -16,11 +16,26 @@ function getRequestFilters(filters, departements) {
   }
 
   if (filters.departement) {
-    requestFilters.lb_departements = {
-      departement_id: {
-        _in: departements.filter(({ id }) => id === filters.departement).map(({ id }) => id),
+    var departementIds = departements
+      .filter(({ id }) => id === filters.departement)
+      .map(({ id }) => id);
+
+    requestFilters._or = [
+      {
+        lb_user_etablissements: {
+          etablissement: {
+            departement: { id: { _in: departementIds } },
+          },
+        },
       },
-    };
+      {
+        lb_departements: {
+          departement_id: {
+            _in: departementIds,
+          },
+        },
+      },
+    ];
   }
 
   if (filters.departementFinanceur !== undefined) {
