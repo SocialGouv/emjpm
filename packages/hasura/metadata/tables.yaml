@@ -3776,6 +3776,22 @@
       - etablissement_id
       - etablissement_rattachement
       filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - etablissement_rattachement
+      - etablissement_id
+      - id
+      - lb_user_id
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - etablissement_rattachement
+      - etablissement_id
+      - id
+      - lb_user_id
+      filter: {}
   update_permissions:
   - role: direction
     permission:
