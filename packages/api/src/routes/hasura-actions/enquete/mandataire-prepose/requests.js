@@ -69,15 +69,20 @@ module.exports = {
 
       if (queryResult.data.mandataires_by_pk) {
         const { lb_user } = queryResult.data.mandataires_by_pk;
-        if (
-          lb_user &&
-          lb_user.lb_departements &&
-          lb_user.lb_departements.length
-        ) {
-          const [{ departement }] = lb_user.lb_departements;
-          defaultValues.region = departement.region.nom;
-          defaultValues.departement_id = departement.id;
-          defaultValues.departement = departement.nom;
+        if (lb_user) {
+          const { lb_departements, lb_user_etablissements } = lb_user;
+          if (lb_user_etablissements && lb_user_etablissements.length > 0) {
+            const [{ etablissement }] = lb_user_etablissements;
+            const { departement } = etablissement;
+            defaultValues.region = departement.region.nom;
+            defaultValues.departement_id = departement.id;
+            defaultValues.departement = departement.nom;
+          } else if (lb_departements && lb_departements.length) {
+            const [{ departement }] = lb_user.lb_departements;
+            defaultValues.region = departement.region.nom;
+            defaultValues.departement_id = departement.id;
+            defaultValues.departement = departement.nom;
+          }
         }
       }
 
