@@ -3455,6 +3455,10 @@
 - table:
     schema: public
     name: etablissements
+  object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: departement_id
   array_relationships:
   - name: mesures
     using:
@@ -3782,6 +3786,10 @@
       - lb_user_id
       filter: {}
       check: null
+  delete_permissions:
+  - role: direction
+    permission:
+      filter: {}
 - table:
     schema: public
     name: lb_users
