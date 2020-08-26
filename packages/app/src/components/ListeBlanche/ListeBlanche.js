@@ -26,7 +26,7 @@ function getRequestFilters(filters, departements) {
   if (filters.departementFinanceur !== undefined) {
     requestFilters.lb_departements = {
       ...requestFilters.lb_departements,
-      departementFinanceur: filters.departementFinanceur === true,
+      departement_financeur: { _eq: filters.departementFinanceur === true },
     };
   }
 
