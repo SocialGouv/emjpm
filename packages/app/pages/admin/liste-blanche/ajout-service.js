@@ -16,7 +16,7 @@ const ListBlanchePage = () => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <Heading1 mb={4}>{"Ajout d'un engistrement à la liste blanche"}</Heading1>
+        <Heading1 mb={4}>{"Ajout d'un service à la liste blanche"}</Heading1>
         <ListeBlancheServiceCreate />
       </BoxWrapper>
     </LayoutDirection>

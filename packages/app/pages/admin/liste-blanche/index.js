@@ -34,6 +34,13 @@ const ListBlanchePage = () => {
                 </Link>
               </Button>
             </Box>
+            <Box>
+              <Button ml={4}>
+                <Link href={`/${user.type}/liste-blanche/ajout-service`}>
+                  {"Ajouter un service"}
+                </Link>
+              </Button>
+            </Box>
           </Flex>
           <Flex flexDirection="column">
             <Box mb="2">
