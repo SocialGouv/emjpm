@@ -26,19 +26,6 @@ router.post(
     body("annee_naissance").not().isEmpty().trim().escape(),
     body("civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
 
-    body("type_etablissement").custom((value, { req }) => {
-      if (req.body.etats && req.body.etats.length) {
-        const { lieu_vie } = req.body.etats[req.body.etats.length - 1];
-        if (
-          (lieu_vie === "etablissement" ||
-            lieu_vie === "etablissement_conservation_domicile") &&
-          !value
-        ) {
-          throw new Error("type_etablissement is required");
-        }
-      }
-      return true;
-    }),
     body("date_nomination")
       .custom((value, { req }) => {
         if (value) {
@@ -101,6 +88,17 @@ router.post(
     check("etats.*.date_changement_etat").isDate().toDate(),
     check("etats.*.nature_mesure").isIn(MESURE_PROTECTION.NATURE_MESURE.keys),
     check("etats.*.lieu_vie").isIn(MESURE_PROTECTION.LIEU_VIE_MAJEUR.keys),
+
+    body("etats.*").custom((value) => {
+      if (
+        (value.lieu_vie === "etablissement" ||
+          value.lieu_vie === "etablissement_conservation_domicile") &&
+        !value.type_etablissement
+      ) {
+        throw new Error("type_etablissement is required");
+      }
+      return true;
+    }),
 
     body("etats.*.champ_mesure").custom((value, { req }) => {
       if (req.body.etats && req.body.etats.length) {
