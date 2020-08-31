@@ -4,10 +4,10 @@ import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminServiceMesures } from "../../../src/components/AdminServices";
-import { AdminEditService } from "../../../src/components/AdminServices/AdminEditService";
 import { AdminServiceInformations } from "../../../src/components/AdminServices/AdminServiceInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MesureImportPanel } from "../../../src/components/MesureImport";
+import { ServiceEdit } from "../../../src/components/Service";
 import { withAuthSync } from "../../../src/util/auth";
 
 const Service = (props) => {
@@ -34,7 +34,7 @@ const Service = (props) => {
             <AdminServiceMesures serviceId={serviceId} />
           </TabPanel>
           <TabPanel>
-            <AdminEditService serviceId={serviceId} />
+            <ServiceEdit serviceId={serviceId} />
           </TabPanel>
           <TabPanel>
             <Heading4 mb={2}>Selectionnez le fichier</Heading4>
