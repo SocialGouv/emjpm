@@ -48,5 +48,10 @@ export const LB_SUMMARY = gql`
         count
       }
     }
+    service: services_aggregate(where: { department_id: { _in: $departementIds } }) {
+      aggregate {
+        count
+      }
+    }
   }
 `;

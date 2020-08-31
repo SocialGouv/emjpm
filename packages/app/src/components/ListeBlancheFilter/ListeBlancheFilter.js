@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { departementToOptions } from "../../util/option/OptionUtil";
 import { UserContext } from "../UserContext";
 import { FiltersContextSerializable } from "./context";
-import { BoxStyle, dropdownStyle, menuItemLinkStyle, menuItemStyle } from "./style";
+import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
   { label: "Mandataire", value: "mandataire" },
@@ -78,9 +78,9 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Link sx={menuItemLinkStyle} href={link.url}>
-                            {link.title}
-                          </Link>
+                          <Box menuItemLinkStyle>
+                            <Link href={link.url}>{link.title}</Link>
+                          </Box>
                         </Box>
                       );
                     })}
@@ -89,26 +89,6 @@ const ListeBlancheFilter = () => {
               )}
             </Fragment>
           )}
-
-          {/* {type === "mandataire" && (
-            <Fragment>
-              <Box>
-                <Button>
-                  <Link href={``}>
-                    {"Ajouter un mandataire invididuel"}
-                  </Link>
-                </Button>
-              </Box>
-              <Box>
-                <Button ml={4}>
-                  <Link href={`/${user.type}/liste-blanche/ajout-prepose`}>
-                    {"Ajouter un mandataire prepose"}
-                  </Link>
-                </Button>
-              </Box>
-            </Fragment>
-          )}
-           */}
         </Box>
 
         <Flex flexDirection="column">
