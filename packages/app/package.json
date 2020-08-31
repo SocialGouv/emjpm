@@ -23,7 +23,7 @@
   "dependencies": {
     "@emjpm/core": "^25.60.0",
     "@emjpm/ui": "^25.60.0",
-    "@emotion/core": "^10.0.28",
+    "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@mdx-js/loader": "^1.6.16",
     "@mdx-js/react": "^1.6.16",
@@ -76,7 +76,7 @@
     "recharts": "^1.8.5",
     "styled-components": "^4.4.1",
     "theme-ui": "^0.3.1",
-    "xlsx": "^0.16.5",
+    "xlsx": "^0.16.6",
     "yup": "^0.28.5"
   },
   "devDependencies": {
@@ -89,11 +89,11 @@
     "@testing-library/react": "^10.0.4",
     "@testing-library/user-event": "^10.3.5",
     "@types/node": "^14.0.27",
-    "@types/react": "^16.9.44",
+    "@types/react": "^16.9.48",
     "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
+    "enzyme-adapter-react-16": "^1.15.4",
     "eslint": "^6.8.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
