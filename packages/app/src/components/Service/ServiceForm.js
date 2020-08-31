@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 import { adminServiceSchema } from "../../lib/validationSchemas/adminServiceSchema";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
-export const AdminServiceForm = (props) => {
+export const ServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;
 
   const formik = useFormik({
@@ -17,7 +17,7 @@ export const AdminServiceForm = (props) => {
       etablissement: service ? service.etablissement : "",
       telephone: service ? service.telephone : "",
       geocode: geocodeInitialValue(service),
-      siret: service ? service.siret : "",
+      siret: service ? service.siret || "" : "",
     },
   });
 
@@ -119,3 +119,5 @@ export const AdminServiceForm = (props) => {
     </Flex>
   );
 };
+
+export default ServiceForm;

@@ -1,124 +1,41 @@
-import { useQuery } from "@apollo/react-hooks";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useRouter } from "next/router";
+import React, { useContext } from "react";
 
-import { LoadingWrapper } from "../Commons";
 import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
-import { PaginatedList } from "../PaginatedList";
-import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
-import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
-import { LB_USERS } from "./queries";
+import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
+import { ListeBlancheServices } from "./ListeBlancheServices";
 
-function getRequestFilters(filters, departements) {
-  var requestFilters = {};
-
-  if (filters.type) {
-    requestFilters.type = { _eq: filters.type };
+async function onSelectItem(router, { type, origin, id }) {
+  console.log("id", id);
+  if (type === "mandataire") {
+    await router.push(`/${origin}/liste-blanche/[id]`, `/${origin}/liste-blanche/${id}`);
+  } else if (type === "service") {
+    await router.push(
+      `/${origin}/liste-blanche/services/[id]`,
+      `/${origin}/liste-blanche/services/${id}`
+    );
   }
-
-  if (filters.departement) {
-    var departementIds = departements
-      .filter(({ id }) => id === filters.departement)
-      .map(({ id }) => id);
-
-    requestFilters._or = [
-      {
-        lb_user_etablissements: {
-          etablissement: {
-            departement: { id: { _in: departementIds } },
-          },
-        },
-      },
-      {
-        lb_departements: {
-          departement_id: {
-            _in: departementIds,
-          },
-        },
-      },
-    ];
-  }
-
-  if (filters.departementFinanceur !== undefined) {
-    requestFilters.lb_departements = {
-      ...requestFilters.lb_departements,
-      departement_financeur: { _eq: filters.departementFinanceur === true },
-    };
-  }
-
-  if (filters.siret) {
-    requestFilters.siret = { _ilike: `${filters.siret}%` };
-  }
-
-  if (filters.prenom) {
-    requestFilters.prenom = { _ilike: `${filters.prenom}%` };
-  }
-
-  if (filters.nom) {
-    requestFilters.nom = { _ilike: `${filters.nom}%` };
-  }
-
-  return requestFilters;
+  window.scrollTo(0, 0);
 }
 
 export const ListeBlanche = (props) => {
-  const { onSelectItem } = props;
-  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { origin } = props;
+  const { filters } = useContext(FiltersContextSerializable);
+  const router = useRouter();
 
-  const resultPerPage = 50;
-  const [currentOffset, setCurrentOffset] = useState(0);
+  const { type } = filters;
 
-  useEffect(() => {
-    setCurrentOffset(0);
-  }, [filters]);
-
-  const { data, error, loading } = useQuery(LB_USERS, {
-    variables: {
-      limit: resultPerPage,
-      offset: currentOffset,
-      filters: getRequestFilters(filters, departements),
-    },
-  });
-
-  const { count, users } = useMemo(() => {
-    if (data) {
-      const { count } = data.lb_users_aggregate.aggregate;
-      const users = data.lb_users;
-      return {
-        count,
-        users,
-      };
-    }
-    return {
-      count: 0,
-      users: [],
-    };
-  }, [data]);
-
-  return (
-    <LoadingWrapper loading={loading} error={error}>
-      <PaginatedList
-        entries={users}
-        RowItem={ListeBlancheItem}
-        count={count}
-        resultPerPage={resultPerPage}
-        currentOffset={currentOffset}
-        setCurrentOffset={setCurrentOffset}
-        onRowClick={onSelectItem}
-      />
-    </LoadingWrapper>
+  return type === "mandataire" ? (
+    <ListeBlancheMandataires
+      {...props}
+      onSelectItem={(item) => onSelectItem(router, { type, id: item.id, origin })}
+    />
+  ) : (
+    <ListeBlancheServices
+      {...props}
+      onSelectItem={(item) => onSelectItem(router, { type, id: item.id, origin })}
+    />
   );
-};
-
-const ListeBlancheItem = (props) => {
-  if (props.item) {
-    const { type } = props.item;
-    if (type === "individuel") {
-      return <ListeBlancheIndividuelItem {...props} />;
-    } else if (type === "prepose") {
-      return <ListeBlanchePreposeItem {...props} />;
-    }
-  }
-  return null;
 };
 
 export default ListeBlanche;

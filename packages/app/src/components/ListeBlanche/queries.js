@@ -44,8 +44,37 @@ export const LB_USER = gql`
   }
 `;
 
+export const LB_SERVICES = gql`
+  query liste_blanche_services($limit: Int, $offset: Int, $filters: services_bool_exp = {}) {
+    services_aggregate(where: $filters) {
+      aggregate {
+        count
+      }
+    }
+    services(
+      limit: $limit
+      offset: $offset
+      where: $filters
+      order_by: { etablissement: asc_nulls_last }
+    ) {
+      id
+      adresse
+      siret
+      etablissement
+      code_postal
+      created_at
+      departement {
+        id
+        nom
+      }
+      nom
+      telephone
+    }
+  }
+`;
+
 export const LB_USERS = gql`
-  query listeBlancheUsers($limit: Int, $offset: Int, $filters: lb_users_bool_exp = {}) {
+  query liste_blanche_users($limit: Int, $offset: Int, $filters: lb_users_bool_exp = {}) {
     lb_users_aggregate(where: $filters) {
       aggregate {
         count
