@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { departementToOptions } from "../../util/option/OptionUtil";
 import { UserContext } from "../UserContext";
 import { FiltersContextSerializable } from "./context";
-import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
+import { BoxStyle, dropdownStyle, menuItemLinkStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
   { label: "Mandataire", value: "mandataire" },
@@ -78,7 +78,7 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Box menuItemLinkStyle>
+                          <Box sx={menuItemLinkStyle}>
                             <Link href={link.url}>
                               <a>{link.title}</a>
                             </Link>
