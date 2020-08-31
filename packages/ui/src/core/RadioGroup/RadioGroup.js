@@ -9,7 +9,7 @@ export const RadioGroup = (props) => {
 
   return (
     <Box width="100%">
-      <Flex flexWrap="wrap">
+      <Flex alignItems="center" flexWrap="wrap">
         {options.map((option) => {
           return (
             <Box key={option.value} width={[1]} mb={1}>
