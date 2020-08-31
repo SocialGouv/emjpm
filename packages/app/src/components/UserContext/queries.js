@@ -203,6 +203,18 @@ export const MANDATAIRE_USERS = gql`
         competences
         lb_user {
           id
+          lb_user_etablissements {
+            etablissement_rattachement
+            etablissement {
+              id
+              nom
+              departement {
+                id
+                id_region
+                code
+              }
+            }
+          }
           lb_departements {
             id
             departement_financeur
