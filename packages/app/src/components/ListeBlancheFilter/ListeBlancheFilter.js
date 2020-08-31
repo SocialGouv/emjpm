@@ -1,12 +1,13 @@
 import { Button, Card, CheckBox, Input, Select } from "@emjpm/ui";
+import { ChevronDown } from "@styled-icons/evil/ChevronDown";
 import Link from "next/link";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect, useRef, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
 import { UserContext } from "../UserContext";
 import { FiltersContextSerializable } from "./context";
-import { BoxStyle } from "./style";
+import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
   { label: "Mandataire", value: "mandataire" },
@@ -14,11 +15,33 @@ const TYPE_OPTIONS = [
 ];
 
 const ListeBlancheFilter = () => {
+  const ref = useRef();
+  const [buttonsEnabled, setButtonsEnabled] = useState(false);
+  const user = useContext(UserContext);
   const { loading, error, filters, onFilterChange, departements = [] } = useContext(
     FiltersContextSerializable
   );
   const { departementFinanceur, type, nom, nom_service, siret } = filters;
-  const user = useContext(UserContext);
+
+  const buttonLinks = [
+    { title: "Mandataire individuel", url: `/${user.type}/liste-blanche/ajout-individuel` },
+    { title: "Mandataire préposé", url: `/${user.type}/liste-blanche/ajout-individuel` },
+  ];
+
+  useEffect(() => {
+    const listener = (event) => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      setButtonsEnabled(false);
+    };
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, setButtonsEnabled]);
 
   if (loading) {
     return <div>{"Chargement..."}</div>;
@@ -32,35 +55,42 @@ const ListeBlancheFilter = () => {
 
   return (
     <Fragment>
-      <Flex flex={1} mb={4} justifyContent="flex-end">
-        {type === "mandataire" && (
-          <Fragment>
-            <Box>
-              <Button>
-                <Link href={`/${user.type}/liste-blanche/ajout-individuel`}>
-                  {"Ajouter un mandataire invididuel"}
-                </Link>
-              </Button>
-            </Box>
+      <Card sx={{ position: "relative" }}>
+        <Box ref={ref} sx={{ position: "absolute", right: 2, top: 2 }}>
+          {type === "service" ? (
             <Box>
               <Button ml={4}>
-                <Link href={`/${user.type}/liste-blanche/ajout-prepose`}>
-                  {"Ajouter un mandataire prepose"}
+                <Link href={`/${user.type}/liste-blanche/ajout-service`}>
+                  {"Ajouter un service"}
                 </Link>
               </Button>
             </Box>
-          </Fragment>
-        )}
-        {type === "service" && (
-          <Box>
-            <Button ml={4}>
-              <Link href={`/${user.type}/liste-blanche/ajout-service`}>{"Ajouter un service"}</Link>
-            </Button>
-          </Box>
-        )}
-      </Flex>
+          ) : (
+            <Fragment>
+              <Button onClick={() => setButtonsEnabled(true)}>
+                Ajouter un mandataire
+                <ChevronDown size={20} />
+              </Button>
 
-      <Card>
+              {buttonsEnabled && (
+                <Box sx={dropdownStyle}>
+                  <Card p="0" variant="sideCard">
+                    {buttonLinks.map((link) => {
+                      return (
+                        <Box sx={menuItemStyle} key={link.title}>
+                          <Box menuItemLinkStyle>
+                            <Link href={link.url}>{link.title}</Link>
+                          </Box>
+                        </Box>
+                      );
+                    })}
+                  </Card>
+                </Box>
+              )}
+            </Fragment>
+          )}
+        </Box>
+
         <Flex flexDirection="column">
           <Flex>
             <Box sx={BoxStyle}>
