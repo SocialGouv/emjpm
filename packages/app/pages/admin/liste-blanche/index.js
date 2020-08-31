@@ -1,6 +1,5 @@
 import { BoxWrapper, Button } from "@emjpm/ui";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
@@ -13,7 +12,6 @@ import { UserContext } from "../../../src/components/UserContext";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
-  const router = useRouter();
   const user = useContext(UserContext);
   return (
     <LayoutAdmin>
@@ -34,6 +32,13 @@ const ListBlanchePage = () => {
                 </Link>
               </Button>
             </Box>
+            <Box>
+              <Button ml={4}>
+                <Link href={`/${user.type}/liste-blanche/ajout-service`}>
+                  {"Ajouter un service"}
+                </Link>
+              </Button>
+            </Box>
           </Flex>
           <Flex flexDirection="column">
             <Box mb="2">
@@ -43,12 +48,7 @@ const ListBlanchePage = () => {
               <ListeBlancheSummary />
             </Box>
             <Box mb="2">
-              <ListeBlanche
-                onSelectItem={async (item) => {
-                  await router.push("/admin/liste-blanche/[id]", `/admin/liste-blanche/${item.id}`);
-                  window.scrollTo(0, 0);
-                }}
-              />
+              <ListeBlanche origin="admin" />
             </Box>
           </Flex>
         </BoxWrapper>

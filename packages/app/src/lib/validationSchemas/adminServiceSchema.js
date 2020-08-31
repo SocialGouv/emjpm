@@ -1,4 +1,4 @@
-import yup from "./yup";
+import yup from "../validationSchemas/yup";
 
 const adminServiceSchema = yup.object().shape({
   email: yup.string().email(),
