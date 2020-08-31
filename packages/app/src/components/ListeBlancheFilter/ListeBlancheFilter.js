@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { departementToOptions } from "../../util/option/OptionUtil";
 import { UserContext } from "../UserContext";
 import { FiltersContextSerializable } from "./context";
-import { BoxStyle, dropdownStyle, menuItemLinkStyle, menuItemStyle } from "./style";
+import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
   { label: "Mandataire", value: "mandataire" },
