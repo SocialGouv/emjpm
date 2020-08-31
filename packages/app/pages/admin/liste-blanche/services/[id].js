@@ -5,7 +5,7 @@ import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutAdmin } from "../../../../src/components/Layout";
-import { ListeBlancheServiceUpdate } from "../../../../src/components/ListeBlanche";
+import { ServiceEdit } from "../../../../src/components/Service";
 import { withAuthSync } from "../../../../src/util/auth";
 
 const ListeBlancheDetailPage = (props) => {
@@ -21,7 +21,7 @@ const ListeBlancheDetailPage = (props) => {
           </StyledLink>
         </Link>
 
-        <ListeBlancheServiceUpdate
+        <ServiceEdit
           id={id}
           handleSubmit={async () => {
             await router.push("/admin/liste-blanche");

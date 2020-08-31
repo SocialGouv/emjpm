@@ -20,9 +20,6 @@ export const ListeBlancheServiceItem = (props) => {
             <Text sx={descriptionStyle}>
               {item.etablissement ? item.etablissement.toUpperCase() : ""}
             </Text>
-            <Text pl="1" sx={descriptionStyle}>
-              {item.siret}
-            </Text>
           </Flex>
         </Flex>
 

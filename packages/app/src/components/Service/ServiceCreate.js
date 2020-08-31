@@ -5,12 +5,13 @@ import React from "react";
 
 import { captureException } from "../../util/sentry";
 import serviceSiretExists from "../../util/serviceSiretExists";
-import { AdminServiceForm } from "./AdminServiceForm";
 import { ADD_SERVICE } from "./mutations";
 import { DEPARTEMENTS } from "./queries";
+import { ServiceForm } from "./ServiceForm";
 import { cardStyle } from "./style";
 
-export const AdminAddService = () => {
+export const ServiceCreate = (props) => {
+  const { handleCancel, onSuccess } = props;
   const client = useApolloClient();
 
   const [addService] = useMutation(ADD_SERVICE, {
@@ -59,6 +60,10 @@ export const AdminAddService = () => {
           siret: values.siret,
         },
       });
+
+      if (onSuccess) {
+        await onSuccess();
+      }
     } catch (error) {
       captureException(error);
       // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
@@ -67,13 +72,11 @@ export const AdminAddService = () => {
     setSubmitting(false);
   };
 
-  const handleCancel = () => {
-    Router.push("/admin/services");
-  };
-
   return (
     <Card sx={cardStyle} width="100%">
-      <AdminServiceForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <ServiceForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
     </Card>
   );
 };
+
+export default ServiceCreate;

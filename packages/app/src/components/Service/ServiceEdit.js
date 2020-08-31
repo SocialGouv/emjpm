@@ -2,12 +2,12 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
 import { captureException } from "../../util/sentry";
-import { AdminServiceForm } from "./AdminServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { DEPARTEMENTS, SERVICE } from "./queries";
+import { ServiceForm } from "./ServiceForm";
 
-export const AdminEditService = (props) => {
-  const { serviceId } = props;
+export const ServiceEdit = (props) => {
+  const { serviceId, onSuccess } = props;
   const serviceQuery = useQuery(SERVICE, { fetchPolicy: "network-only", variables: { serviceId } });
   const departmentsQuery = useQuery(DEPARTEMENTS);
   const [updateService] = useMutation(UPDATE_SERVICE);
@@ -52,6 +52,10 @@ export const AdminEditService = (props) => {
           longitude: longitude,
         },
       });
+
+      if (onSuccess) {
+        await onSuccess();
+      }
     } catch (error) {
       captureException(error);
       // TODO(plaunay) display "Une erreur est survenue, veuillez réessayer plus tard."
@@ -60,5 +64,7 @@ export const AdminEditService = (props) => {
     setSubmitting(false);
   };
 
-  return <AdminServiceForm handleSubmit={handleSubmit} service={service} />;
+  return <ServiceForm handleSubmit={handleSubmit} service={service} />;
 };
+
+export default ServiceEdit;
