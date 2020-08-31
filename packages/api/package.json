@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
-    "@socialgouv/eslint-config-recommended": "^0.21.0",
+    "@socialgouv/eslint-config-recommended": "^1.28.0",
     "@zeit/ncc": "^0.22.3",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
