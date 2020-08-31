@@ -5,11 +5,11 @@ import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { ListeBlancheDetail } from "../../../src/components/ListeBlancheDetail/ListeBlancheDetail";
+import { ListeBlancheEdit } from "../../../src/components/ListeBlanche";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListeBlancheDetailPage = (props) => {
-  const { lbUserId } = props;
+  const { id } = props;
   const router = useRouter();
 
   return (
@@ -20,8 +20,9 @@ const ListeBlancheDetailPage = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <ListeBlancheDetail
-          id={lbUserId}
+
+        <ListeBlancheEdit
+          id={id}
           handleSubmit={async () => {
             await router.push("/direction/liste-blanche");
             window.scrollTo(0, 0);
@@ -33,7 +34,7 @@ const ListeBlancheDetailPage = (props) => {
 };
 
 ListeBlancheDetailPage.getInitialProps = async ({ query }) => {
-  return { lbUserId: query.lb_user_id };
+  return { id: query.id };
 };
 
 export default withAuthSync(ListeBlancheDetailPage);

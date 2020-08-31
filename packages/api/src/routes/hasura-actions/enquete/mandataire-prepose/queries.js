@@ -36,26 +36,40 @@ function build3Combinaisons(prefixes, middles, suffixes, separator) {
 
 module.exports = {
   ENQUETE_REPONSE_DEFAULT_VALUES: `
-    query enquete_prepose_default_values($mandataireId: Int!) {
-      mandataires_by_pk(id: $mandataireId) {
+  query enquete_prepose_default_values($mandataireId: Int!) {
+    mandataires_by_pk(id: $mandataireId) {
+      id
+      lb_user {
         id
-        lb_user {
-          id
-          nom
-          prenom
-          lb_departements(where: {departement_financeur: {_eq: true}}) {
+        nom
+        prenom
+        lb_user_etablissements(where: {etablissement_rattachement: {_eq: true}}) {
+          etablissement {
+            nom
             id
             departement {
               id
               nom
               region {
+                id
                 nom
               }
             }
           }
         }
+        lb_departements(where: {departement_financeur: {_eq: true}}) {
+          id
+          departement {
+            id
+            nom
+            region {
+              nom
+            }
+          }
+        }
       }
     }
+  }
   `,
   ENQUETE_REPONSE_MANDATAIRE_PREPOSE: `
   query enquete_reponses_prepose($enqueteId: Int!, $mandataireId: Int!) {

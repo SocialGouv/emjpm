@@ -3455,6 +3455,10 @@
 - table:
     schema: public
     name: etablissements
+  object_relationships:
+  - name: departement
+    using:
+      foreign_key_constraint_on: departement_id
   array_relationships:
   - name: mesures
     using:
@@ -3463,6 +3467,23 @@
         table:
           schema: public
           name: mesures
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - id_finess
+      - nom
+      - adresse
+      - code_postal
+      - ville
+      - tel
+      - fax
+      - latitude
+      - longitude
+      - departement_id
+      backend_only: false
   select_permissions:
   - role: direction
     permission:
@@ -3731,6 +3752,62 @@
       filter: {}
 - table:
     schema: public
+    name: lb_user_etablissements
+  object_relationships:
+  - name: etablissement
+    using:
+      foreign_key_constraint_on: etablissement_id
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - id
+      - lb_user_id
+      - etablissement_id
+      - etablissement_rattachement
+      backend_only: false
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - lb_user_id
+      - etablissement_id
+      - etablissement_rattachement
+      filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - etablissement_rattachement
+      - etablissement_id
+      - id
+      - lb_user_id
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - etablissement_rattachement
+      - etablissement_id
+      - id
+      - lb_user_id
+      filter: {}
+  update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - etablissement_rattachement
+      - etablissement_id
+      - id
+      - lb_user_id
+      filter: {}
+      check: null
+  delete_permissions:
+  - role: direction
+    permission:
+      filter: {}
+- table:
+    schema: public
     name: lb_users
   object_relationships:
   - name: mandataire
@@ -3749,6 +3826,13 @@
         table:
           schema: public
           name: lb_departements
+  - name: lb_user_etablissements
+    using:
+      foreign_key_constraint_on:
+        column: lb_user_id
+        table:
+          schema: public
+          name: lb_user_etablissements
   insert_permissions:
   - role: direction
     permission:

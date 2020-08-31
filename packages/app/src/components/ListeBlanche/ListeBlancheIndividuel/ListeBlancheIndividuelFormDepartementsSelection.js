@@ -4,7 +4,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "../../components/UserContext";
+import { UserContext } from "../../../components/UserContext";
 
 function canModifyAgrement(user, departementId) {
   if (isAdmin(user)) {
@@ -16,7 +16,7 @@ function canModifyAgrement(user, departementId) {
   return user.agrements.includes(departementId);
 }
 
-export const ListeBlancheFormDepartementFinanceur = (props) => {
+export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
   const { departements, onRemove, editMode, setDepartementFinanceur } = props;
   const user = useContext(UserContext);
 
@@ -78,3 +78,5 @@ export const ListeBlancheFormDepartementFinanceur = (props) => {
     </Fragment>
   );
 };
+
+export default ListeBlancheIndividuelFormDepartementsSelection;
