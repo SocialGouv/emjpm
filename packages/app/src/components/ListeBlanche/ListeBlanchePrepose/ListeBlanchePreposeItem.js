@@ -32,7 +32,7 @@ export const ListeBlanchePreposeItem = (props) => {
 
         {etablissements.length > 0 && (
           <Flex width="30%" flexDirection="column">
-            <Text sx={labelStyle}>{`Départements`}</Text>
+            <Text sx={labelStyle}>{`Etablissements`}</Text>
             <Text sx={descriptionStyle}>
               {etablissements
                 .map((e) =>
