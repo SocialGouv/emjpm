@@ -1,6 +1,5 @@
-import { BoxWrapper, Button } from "@emjpm/ui";
-import Link from "next/link";
-import React, { useContext } from "react";
+import { BoxWrapper } from "@emjpm/ui";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutAdmin } from "../../../src/components/Layout";
@@ -8,38 +7,13 @@ import { ListeBlanche } from "../../../src/components/ListeBlanche";
 import { ListeBlancheFilter } from "../../../src/components/ListeBlancheFilter";
 import { FiltersContextSerializableProvider } from "../../../src/components/ListeBlancheFilter/context";
 import { ListeBlancheSummary } from "../../../src/components/ListeBlancheSummary";
-import { UserContext } from "../../../src/components/UserContext";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
-  const user = useContext(UserContext);
   return (
     <LayoutAdmin>
       <FiltersContextSerializableProvider useLocalStorage={true}>
         <BoxWrapper mt={4} px={1}>
-          <Flex flex={1} mb={4} justifyContent="flex-end">
-            <Box>
-              <Button>
-                <Link href={`/${user.type}/liste-blanche/ajout-individuel`}>
-                  {"Ajouter un mandataire invididuel"}
-                </Link>
-              </Button>
-            </Box>
-            <Box>
-              <Button ml={4}>
-                <Link href={`/${user.type}/liste-blanche/ajout-prepose`}>
-                  {"Ajouter un prepose à un établissement"}
-                </Link>
-              </Button>
-            </Box>
-            <Box>
-              <Button ml={4}>
-                <Link href={`/${user.type}/liste-blanche/ajout-service`}>
-                  {"Ajouter un service"}
-                </Link>
-              </Button>
-            </Box>
-          </Flex>
           <Flex flexDirection="column">
             <Box mb="2">
               <ListeBlancheFilter />

@@ -36,7 +36,7 @@ function getRequestFilters(filters, departements) {
     ];
   }
 
-  if (filters.departementFinanceur !== undefined) {
+  if (filters.departementFinanceur) {
     requestFilters.lb_departements = {
       ...requestFilters.lb_departements,
       departement_financeur: { _eq: filters.departementFinanceur === true },
