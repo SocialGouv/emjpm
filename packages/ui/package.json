@@ -62,7 +62,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@rollup/plugin-commonjs": "^11.1.0",
-    "@rollup/plugin-node-resolve": "^7.1.3",
+    "@rollup/plugin-node-resolve": "^9.0.0",
     "@storybook/addon-a11y": "^5.3.21",
     "@storybook/addon-actions": "^5.3.21",
     "@storybook/addon-docs": "^5.3.21",
