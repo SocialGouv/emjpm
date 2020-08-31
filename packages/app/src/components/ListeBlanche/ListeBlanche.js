@@ -4,12 +4,65 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { LoadingWrapper } from "../Commons";
 import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
 import { PaginatedList } from "../PaginatedList";
-import { ListeBlancheItemCard } from "./ListeBlancheItemCard";
+import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
+import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { LB_USERS } from "./queries";
 
-const ListeBlanche = ({ onSelectLbUser }) => {
+function getRequestFilters(filters, departements) {
+  var requestFilters = {};
+
+  if (filters.type) {
+    requestFilters.type = { _eq: filters.type };
+  }
+
+  if (filters.departement) {
+    var departementIds = departements
+      .filter(({ id }) => id === filters.departement)
+      .map(({ id }) => id);
+
+    requestFilters._or = [
+      {
+        lb_user_etablissements: {
+          etablissement: {
+            departement: { id: { _in: departementIds } },
+          },
+        },
+      },
+      {
+        lb_departements: {
+          departement_id: {
+            _in: departementIds,
+          },
+        },
+      },
+    ];
+  }
+
+  if (filters.departementFinanceur !== undefined) {
+    requestFilters.lb_departements = {
+      ...requestFilters.lb_departements,
+      departement_financeur: { _eq: filters.departementFinanceur === true },
+    };
+  }
+
+  if (filters.siret) {
+    requestFilters.siret = { _ilike: `${filters.siret}%` };
+  }
+
+  if (filters.prenom) {
+    requestFilters.prenom = { _ilike: `${filters.prenom}%` };
+  }
+
+  if (filters.nom) {
+    requestFilters.nom = { _ilike: `${filters.nom}%` };
+  }
+
+  return requestFilters;
+}
+
+export const ListeBlanche = (props) => {
+  const { onSelectItem } = props;
   const { filters, departements = [] } = useContext(FiltersContextSerializable);
-  const { departement } = filters;
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -18,24 +71,11 @@ const ListeBlanche = ({ onSelectLbUser }) => {
     setCurrentOffset(0);
   }, [filters]);
 
-  const departementIds = useMemo(() => {
-    if (departement) {
-      return departements.filter(({ id }) => id === departement).map(({ id }) => id);
-    } else {
-      return departements.map(({ id }) => id);
-    }
-  }, [departements, departement]);
-
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      type: filters.type || null,
-      departementIds,
-      nom: filters.nom ? `${filters.nom}%` : null,
-      prenom: filters.prenom ? `${filters.prenom}%` : null,
-      departementFinanceur: filters.departementFinanceur ? true : null,
-      siret: filters.siret ? `${filters.siret}%` : null,
+      filters: getRequestFilters(filters, departements),
     },
   });
 
@@ -58,15 +98,27 @@ const ListeBlanche = ({ onSelectLbUser }) => {
     <LoadingWrapper loading={loading} error={error}>
       <PaginatedList
         entries={users}
-        RowItem={ListeBlancheItemCard}
+        RowItem={ListeBlancheItem}
         count={count}
         resultPerPage={resultPerPage}
         currentOffset={currentOffset}
         setCurrentOffset={setCurrentOffset}
-        onRowClick={onSelectLbUser}
+        onRowClick={onSelectItem}
       />
     </LoadingWrapper>
   );
 };
 
-export { ListeBlanche };
+const ListeBlancheItem = (props) => {
+  if (props.item) {
+    const { type } = props.item;
+    if (type === "individuel") {
+      return <ListeBlancheIndividuelItem {...props} />;
+    } else if (type === "prepose") {
+      return <ListeBlanchePreposeItem {...props} />;
+    }
+  }
+  return null;
+};
+
+export default ListeBlanche;

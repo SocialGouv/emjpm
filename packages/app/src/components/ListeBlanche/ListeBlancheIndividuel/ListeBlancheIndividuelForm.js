@@ -3,12 +3,12 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Card, Flex } from "rebass";
 
-import yup from "../../lib/validationSchemas/yup";
-import { formatFormInput } from "../../util";
-import { DepartementFormUtil } from "../../util/departements";
-import { FormGroupInput } from "../AppForm";
-import { ListeBlancheFormDepartementAjout } from "./ListeBlancheFormDepartementAjout";
-import { ListeBlancheFormDepartementFinanceur } from "./ListeBlancheFormDepartementFinanceur";
+import yup from "../../../lib/validationSchemas/yup";
+import { formatFormInput } from "../../../util";
+import { DepartementFormUtil } from "../../../util/departements";
+import { FormGroupInput } from "../../AppForm";
+import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
+import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
 const validationSchema = yup.object().shape({
   nom: yup.string().required(),
@@ -16,7 +16,8 @@ const validationSchema = yup.object().shape({
   email: yup.string().required(),
   siret: yup.string().nullable(),
 });
-export const ListeBlancheForm = (props) => {
+
+export const ListeBlancheIndividuelForm = (props) => {
   const { handleCancel, data, editMode = false } = props;
 
   const departements =
@@ -94,7 +95,7 @@ export const ListeBlancheForm = (props) => {
         <Card>
           <Heading4 mb={1}>{"Départements"}</Heading4>
 
-          <ListeBlancheFormDepartementFinanceur
+          <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}
             onRemove={(id) => {
@@ -116,7 +117,7 @@ export const ListeBlancheForm = (props) => {
             }}
           />
 
-          <ListeBlancheFormDepartementAjout
+          <ListeBlancheIndividuelFormDepartementsSelector
             departements={formik.values.departements}
             onAdd={(departement) =>
               formik.setFieldValue(
@@ -140,7 +141,7 @@ export const ListeBlancheForm = (props) => {
           )}
           <Box>
             <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
-              Enregistrer
+              {editMode ? "Mettre à jour" : "Enregistrer"}
             </Button>
           </Box>
         </Flex>
@@ -148,3 +149,5 @@ export const ListeBlancheForm = (props) => {
     </form>
   );
 };
+
+export default ListeBlancheIndividuelForm;

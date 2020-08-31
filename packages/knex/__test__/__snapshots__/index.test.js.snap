@@ -2512,6 +2512,12 @@ Object {
     "nullable": true,
     "type": "character varying",
   },
+  "departement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
   "fax": Object {
     "defaultValue": null,
     "maxLength": 15,
@@ -2769,6 +2775,35 @@ Object {
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
+  },
+}
+`;
+
+exports[`lb_user_etablissements table schema 1`] = `
+Object {
+  "etablissement_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "etablissement_rattachement": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "id": Object {
+    "defaultValue": "nextval('lb_user_etablissements_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "lb_user_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
   },
 }
 `;
@@ -3760,6 +3795,7 @@ Array [
   "lb_departements",
   "lb_structures",
   "lb_tribunaux",
+  "lb_user_etablissements",
   "lb_users",
   "logs_data",
   "magistrat",

@@ -1,16 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
-import Link from "next/link";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
-import { UserContext } from "../UserContext";
 import { LB_SUMMARY } from "./queries";
 
 const boxStyle = {
-  // borderBottom: "1px solid",
-  // borderBottomColor: "mediumGray",
   mb: "1",
 };
 
@@ -42,7 +38,6 @@ const LabelValue = ({ label, value }) => (
 const ListeBlancheSummary = () => {
   const { filters, departements = [] } = useContext(FiltersContextSerializable);
   const { departement } = filters;
-  const user = useContext(UserContext);
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
@@ -97,9 +92,6 @@ const ListeBlancheSummary = () => {
       <Flex>
         <Box width={1 / 2}>
           <Heading2>{departementLabel}</Heading2>
-        </Box>
-        <Box width={1 / 2} textAlign="right">
-          <Link href={`/${user.type}/liste-blanche/ajout`}>{"Ajouter un enregistrement"}</Link>
         </Box>
       </Flex>
 

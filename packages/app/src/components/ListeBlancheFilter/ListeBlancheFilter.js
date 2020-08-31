@@ -16,7 +16,7 @@ const ListeBlancheFilter = () => {
   const { loading, error, filters, onFilterChange, departements = [] } = useContext(
     FiltersContextSerializable
   );
-  const { departementFinanceur, type, nom, prenom, siret } = filters;
+  const { departementFinanceur, type, nom, siret } = filters;
 
   if (loading) {
     return <div>{"Chargement..."}</div>;
@@ -34,6 +34,7 @@ const ListeBlancheFilter = () => {
         <Flex>
           <Box sx={BoxStyle}>
             <Select
+              instanceId={"filters-departement"}
               size="small"
               options={departmentOptions}
               placeholder={"Département"}
@@ -45,25 +46,7 @@ const ListeBlancheFilter = () => {
               onChange={(option) => onFilterChange("departement", option.value)}
             />
           </Box>
-          <Box mr={1} pt={2} width="100px">
-            <CheckBox
-              label="Financé"
-              name="departementFinanceur"
-              isChecked={departementFinanceur || false}
-              onChange={() => onFilterChange("departementFinanceur", !departementFinanceur)}
-            />
-          </Box>
-        </Flex>
-        <Flex mt={2}>
-          <Box sx={BoxStyle}>
-            <Select
-              size="small"
-              options={TYPE_OPTIONS}
-              placeholder={"Type"}
-              value={TYPE_OPTIONS.find(({ value }) => value === type)}
-              onChange={(option) => onFilterChange("type", option.value)}
-            />
-          </Box>
+
           <Box sx={BoxStyle}>
             <Input
               value={nom || ""}
@@ -72,18 +55,7 @@ const ListeBlancheFilter = () => {
               onChange={(event) => onFilterChange("nom", event.target.value)}
               name="search"
               size="small"
-              placeholder="Nom"
-            />
-          </Box>
-          <Box sx={BoxStyle}>
-            <Input
-              value={prenom || ""}
-              spellCheck="false"
-              autoComplete="false"
-              onChange={(event) => onFilterChange("prenom", event.target.value)}
-              name="search"
-              size="small"
-              placeholder="Prénom"
+              placeholder="Nom du mandataire"
             />
           </Box>
           <Box sx={BoxStyle}>
@@ -97,6 +69,29 @@ const ListeBlancheFilter = () => {
               placeholder="Siret"
             />
           </Box>
+        </Flex>
+        <Flex mt={2}>
+          <Box sx={BoxStyle}>
+            <Select
+              size="small"
+              instanceId={"filters-type"}
+              options={TYPE_OPTIONS}
+              placeholder={"Type"}
+              value={TYPE_OPTIONS.find(({ value }) => value === type)}
+              onChange={(option) => onFilterChange("type", option.value)}
+            />
+          </Box>
+          {type !== "prepose" && (
+            <Box mr={1} pt={2} width="100px">
+              <CheckBox
+                instanceId={"filters-departement-financeur"}
+                label="Financé"
+                name="departementFinanceur"
+                isChecked={departementFinanceur || false}
+                onChange={() => onFilterChange("departementFinanceur", !departementFinanceur)}
+              />
+            </Box>
+          )}
         </Flex>
       </Flex>
     </Card>
