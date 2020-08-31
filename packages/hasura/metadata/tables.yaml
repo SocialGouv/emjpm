@@ -5290,6 +5290,14 @@
     using:
       foreign_key_constraint_on: user_id
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - user_id
+      - service_id
+      - is_admin
+      filter: {}
   - role: service
     permission:
       columns:
@@ -5333,6 +5341,13 @@
     using:
       foreign_key_constraint_on: ti_id
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - ti_id
+      - service_id
+      filter: {}
   - role: service
     permission:
       columns:
@@ -5376,6 +5391,30 @@
         table:
           schema: public
           name: service_tis
+  insert_permissions:
+  - role: direction
+    permission:
+      check: {}
+      columns:
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
+      - etablissement
+      - nom
+      - prenom
+      - siret
+      - telephone
+      - ville
+      backend_only: false
   select_permissions:
   - role: anonymous
     permission:
@@ -5500,6 +5539,52 @@
       - longitude
       filter: {}
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - competences
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      - siret
+      filter: {}
+      check: null
+  - role: direction_nationale
+    permission:
+      columns:
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
+      - etablissement
+      - nom
+      - prenom
+      - siret
+      - telephone
+      - ville
+      filter: {}
+      check: null
   - role: service
     permission:
       columns:

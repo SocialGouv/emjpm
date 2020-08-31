@@ -13,19 +13,15 @@ const ListBlanchePage = () => {
   return (
     <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/direction/liste-blanche">
+        <Link href="/admin/liste-blanche">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
         </Link>
-
-        <Heading1 mb={4}>{"Ajout d'un engistrement à la liste blanche"}</Heading1>
+        <Heading1 mb={4}>{"Ajout d'un service à la liste blanche"}</Heading1>
         <ServiceCreate
           onSuccess={async () => {
-            await router.push("/direction/liste-blanche");
-          }}
-          handleCancel={async () => {
-            await router.push("/direction/liste-blanche");
+            await router.push(`/admin/liste-blanche`);
           }}
         />
       </BoxWrapper>
