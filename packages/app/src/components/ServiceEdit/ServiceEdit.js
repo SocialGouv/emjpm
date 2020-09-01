@@ -21,11 +21,11 @@ const ServiceEdit = () => {
   });
 
   if (loading) {
-    return <div>loading</div>;
+    return <div>Chargement...</div>;
   }
 
   if (error) {
-    return <div>error</div>;
+    return <div>Une erreur est survenue, veuillez réessayer plus tard</div>;
   }
 
   const [service] = data.services;

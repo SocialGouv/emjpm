@@ -30,6 +30,27 @@ export const UPDATE_SERVICE = gql`
       }
     ) {
       affected_rows
+      returning {
+        id
+        siret
+        adresse
+        code_postal
+        email
+        competences
+        created_at
+        department_id
+        dispo_max
+        etablissement
+        latitude
+        longitude
+        mesures_awaiting
+        mesures_in_progress
+        nom
+        prenom
+        siret
+        telephone
+        ville
+      }
     }
   }
 `;

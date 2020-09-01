@@ -22,21 +22,23 @@ async function updateEtablissementRattachement(formik, id) {
 export const ListeBlanchePreposeForm = (props) => {
   const { searchEtablissements, editMode, data = {}, handleSubmit } = props;
 
+  const initialValues = {
+    firstname: data.nom || "",
+    lastname: data.prenom || "",
+    email: data.email || "",
+    etablissements: data.lb_user_etablissements
+      ? data.lb_user_etablissements.map((e) => {
+          return {
+            id: e.etablissement.id,
+            nom: e.etablissement.nom,
+            etablissement_rattachement: e.etablissement_rattachement,
+          };
+        })
+      : [],
+  };
+
   const formik = useFormik({
-    initialValues: {
-      firstname: data.nom,
-      lastname: data.prenom,
-      email: data.email,
-      etablissements: data.lb_user_etablissements
-        ? data.lb_user_etablissements.map((e) => {
-            return {
-              id: e.etablissement.id,
-              nom: e.etablissement.nom,
-              etablissement_rattachement: e.etablissement_rattachement,
-            };
-          })
-        : [],
-    },
+    initialValues,
     onSubmit: async (values, { setFieldError, setSubmitting }) => {
       try {
         if (handleSubmit) {
