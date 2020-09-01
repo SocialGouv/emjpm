@@ -22,8 +22,8 @@ const ListeBlancheDetailPage = (props) => {
         </Link>
 
         <ServiceEdit
-          id={id}
-          handleSubmit={async () => {
+          serviceId={id}
+          onSuccess={async () => {
             await router.push("/admin/liste-blanche");
             window.scrollTo(0, 0);
           }}

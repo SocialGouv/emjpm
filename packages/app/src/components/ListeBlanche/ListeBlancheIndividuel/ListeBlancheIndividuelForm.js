@@ -34,7 +34,7 @@ export const ListeBlancheIndividuelForm = (props) => {
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
-        await props.handleSubmit(values);
+        props.handleSubmit(values);
         setSubmitting(false);
       } catch (err) {
         if (err.message.includes("lb_users_siret_unique")) {
