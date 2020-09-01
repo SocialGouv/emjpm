@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const EDIT_ANTENNE = gql`
-  mutation EditService(
+  mutation update_service(
     $adresse: String
     $code_postal: String
     $dispo_max: Int
@@ -32,6 +32,27 @@ export const EDIT_ANTENNE = gql`
       }
     ) {
       affected_rows
+      returning {
+        id
+        siret
+        adresse
+        code_postal
+        email
+        competences
+        created_at
+        department_id
+        dispo_max
+        etablissement
+        latitude
+        longitude
+        mesures_awaiting
+        mesures_in_progress
+        nom
+        prenom
+        siret
+        telephone
+        ville
+      }
     }
   }
 `;

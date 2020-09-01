@@ -25,7 +25,7 @@ const ListeBlancheFilter = () => {
 
   const buttonLinks = [
     { title: "Mandataire individuel", url: `/${user.type}/liste-blanche/ajout-individuel` },
-    { title: "Mandataire préposé", url: `/${user.type}/liste-blanche/ajout-individuel` },
+    { title: "Mandataire préposé", url: `/${user.type}/liste-blanche/ajout-prepose` },
   ];
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const ListeBlancheFilter = () => {
   return (
     <Fragment>
       <Card sx={{ position: "relative" }}>
-        <Box ref={ref} sx={{ position: "absolute", right: 2, top: 2 }}>
+        <Box ref={ref} sx={{ zIndex: 99, position: "absolute", right: 2, top: 2 }}>
           {type === "service" ? (
             <Box>
               <Button ml={4}>
@@ -79,7 +79,9 @@ const ListeBlancheFilter = () => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
                           <Box menuItemLinkStyle>
-                            <Link href={link.url}>{link.title}</Link>
+                            <Link href={link.url}>
+                              <a>{link.title}</a>
+                            </Link>
                           </Box>
                         </Box>
                       );
