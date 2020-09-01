@@ -41,7 +41,7 @@ const ListeBlancheSummary = () => {
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementIds: departements.map((d) => d.id),
+      departementIds: departement ? [departement] : departements.map((d) => d.id),
     },
   });
 

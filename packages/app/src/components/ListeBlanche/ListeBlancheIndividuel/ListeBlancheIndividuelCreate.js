@@ -16,21 +16,20 @@ export const ListeBlancheIndividuelCreate = () => {
       editMode={false}
       loading={loading}
       handleSubmit={async (values) => {
-        const variables = {
-          email: values.email,
-          nom: values.nom,
-          prenom: values.prenom,
-          siret: values.siret,
-          type: values.type,
-          departements: values.departements.map((d) => {
-            return {
-              departement_financeur: d.departement_financeur,
-              departement_id: d.id,
-            };
-          }),
-        };
         await create({
-          variables,
+          variables: {
+            email: values.email,
+            nom: values.nom,
+            prenom: values.prenom,
+            siret: values.siret,
+            type: values.type,
+            departements: values.departements.map((d) => {
+              return {
+                departement_financeur: d.departement_financeur,
+                departement_id: d.id,
+              };
+            }),
+          },
         });
         await router.push(`/${type}/liste-blanche`);
       }}

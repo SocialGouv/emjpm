@@ -38,6 +38,7 @@ export const CREATE_LB_USER_INDIVIDUEL = gql`
         siret: $siret
         email: $email
         lb_departements: { data: $departements }
+        type: "individuel"
       }
     ) {
       created_at
