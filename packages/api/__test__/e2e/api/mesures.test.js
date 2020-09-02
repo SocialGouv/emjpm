@@ -252,13 +252,13 @@ describe("POST /api/editors/mesures", () => {
         ],
       });
 
-    expect(response.body).toEqual({
+    const { created_at, ...expected } = response.body;
+    expect(expected).toEqual({
       annee_naissance: "1989",
       antenne_id: null,
       cause_sortie: "dessaisissement_famille",
       civilite: "monsieur",
       code_postal: "89350",
-      created_at: "2020-09-02",
       date_fin_mesure: "2020-04-04",
       date_nomination: "2020-01-11",
       date_premier_mesure: "2020-01-10",
