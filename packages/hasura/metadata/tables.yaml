@@ -3488,48 +3488,69 @@
   - role: direction
     permission:
       columns:
+      - latitude
+      - longitude
+      - departement_id
       - id
-      - id_finess
-      - nom
       - adresse
       - code_postal
-      - ville
-      - tel
       - fax
+      - id_finess
+      - nom
+      - tel
+      - ville
+      filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - latitude
+      - longitude
+      - departement_id
+      - id
+      - adresse
+      - code_postal
+      - fax
+      - id_finess
+      - nom
+      - tel
+      - ville
       filter: {}
   - role: prepose
     permission:
       columns:
-      - latitude
-      - longitude
       - id
-      - adresse
-      - code_postal
-      - fax
       - id_finess
       - nom
-      - tel
+      - adresse
+      - code_postal
       - ville
+      - tel
+      - fax
+      - latitude
+      - longitude
+      - departement_id
       filter: {}
   - role: service
     permission:
       columns:
-      - id
-      - id_finess
-      - nom
-      - adresse
-      - code_postal
-      - ville
-      - tel
-      - fax
       - latitude
       - longitude
+      - departement_id
+      - id
+      - adresse
+      - code_postal
+      - fax
+      - id_finess
+      - nom
+      - tel
+      - ville
       filter: {}
   - role: ti
     permission:
       columns:
       - latitude
       - longitude
+      - departement_id
       - id
       - adresse
       - code_postal
