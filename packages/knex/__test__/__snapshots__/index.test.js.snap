@@ -20,6 +20,18 @@ Object {
     "nullable": false,
     "type": "character varying",
   },
+  "expired": Object {
+    "defaultValue": "false",
+    "maxLength": null,
+    "nullable": true,
+    "type": "boolean",
+  },
+  "expired_on": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
   "id": Object {
     "defaultValue": "nextval('access_tokens_id_seq'::regclass)",
     "maxLength": null,
