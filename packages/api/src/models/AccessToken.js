@@ -21,6 +21,8 @@ class AccessToken extends Model {
         access_token: { type: "string" },
         editor_id: { type: "integrer" },
         editor_url: { type: "string" },
+        expired: { type: "boolean" },
+        expired_on: { type: "string" },
       },
     };
   }

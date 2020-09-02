@@ -15,6 +15,7 @@ const authEditorJwtStrategy = new BearerStrategy(async function (token, done) {
     try {
       const currentClient = await AccessToken.query()
         .where("access_token", accessToken)
+        .where("expired", false)
         .first();
       if (
         currentClient.user_id === userId &&
