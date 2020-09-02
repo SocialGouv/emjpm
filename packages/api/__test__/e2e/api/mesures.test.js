@@ -91,7 +91,7 @@ describe("POST /api/editors/mesures", () => {
         civilite: "monsieur",
         date_fin_mesure: "2020-04-04",
         date_nomination: "2020-01-01",
-        date_premier_mesure: "2020-01-10",
+        date_premier_mesure: "2020-01-05",
         date_protection_en_cours: "2020-01-10",
         numero_dossier: "45656456",
         numero_rg: "RG234534534",
@@ -120,6 +120,52 @@ describe("POST /api/editors/mesures", () => {
         ],
       });
     expect(response.body).toMatchSnapshot();
+    expect(response.status).toBe(422);
+  });
+
+  test("it returns date_nomination error", async () => {
+    const response = await request(server)
+      .post("/api/editors/mesures")
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` })
+      .send({
+        annee_naissance: 1989,
+        antenne_id: null,
+        cause_sortie: "dessaisissement_famille",
+        civilite: "monsieur",
+        date_fin_mesure: "2020-04-04",
+        date_nomination: "2020-01-11",
+        date_premier_mesure: "2020-01-10",
+        date_protection_en_cours: "2020-01-10",
+        numero_dossier: "45656456",
+        numero_rg: "RG234534534",
+        tribunal_siret: global.ti.siret,
+        tribunal_cabinet: null,
+        ressources: [],
+        etats: [
+          {
+            date_changement_etat: "2020-01-05",
+            lieu_vie: "domicile",
+            pays: "FR",
+            nature_mesure: "curatelle_simple",
+            code_postal: "89000",
+            ville: "auxerre",
+            champ_mesure: "protection_bien",
+          },
+        ],
+      });
+
+    expect(response.body).toEqual({
+      errors: [
+        {
+          location: "body",
+          msg:
+            "date_nomination must be before or equivalent to date_protection_en_cours",
+          param: "date_nomination",
+          value: "2020-01-11",
+        },
+      ],
+    });
     expect(response.status).toBe(422);
   });
 
