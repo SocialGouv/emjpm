@@ -3,8 +3,7 @@ import React from "react";
 import { Box } from "rebass";
 
 import { AvailabilityMap } from "../../src/components/DirectionAvailabilityMap";
-import { Filters } from "../../src/components/DirectionFilters";
-import { FiltersContextProvider } from "../../src/components/DirectionFilters/context";
+import { DirectionFilters } from "../../src/components/DirectionFilters";
 import {
   AvailableMesureIndicator,
   EtablissementIndicator,
@@ -12,18 +11,18 @@ import {
   ServicesIndicator,
 } from "../../src/components/DirectionIndicators";
 import { MandatairesActivity } from "../../src/components/DirectionMandatairesActivity";
-// import { MandatairesCapacity } from "../../src/components/MandatairesCapacity";
 import { MandatairesDisponibility } from "../../src/components/DirectionMandatairesDisponibility";
 import { MandatairesSubNavigation } from "../../src/components/DirectionMandatairesSubNavigation";
+import { FiltersContextSerializableProvider } from "../../src/components/FiltersContextSerializable";
 import { LayoutDirection } from "../../src/components/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {
   return (
-    <FiltersContextProvider>
+    <FiltersContextSerializableProvider>
       <LayoutDirection>
         <BoxWrapper mt={5} px="1">
-          <Filters />
+          <DirectionFilters />
         </BoxWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={fourColumnStyle}>
@@ -60,7 +59,7 @@ const Mandataires = () => {
           </Box> */}
         </FlexWrapper>
       </LayoutDirection>
-    </FiltersContextProvider>
+    </FiltersContextSerializableProvider>
   );
 };
 
