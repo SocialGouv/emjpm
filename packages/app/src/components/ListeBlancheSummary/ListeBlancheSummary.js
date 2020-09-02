@@ -3,7 +3,7 @@ import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
-import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { LB_SUMMARY } from "./queries";
 
 const boxStyle = {

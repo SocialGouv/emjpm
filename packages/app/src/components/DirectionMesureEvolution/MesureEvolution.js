@@ -3,24 +3,18 @@ import { Card, Heading2, Heading4, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { MesureEvolutionChart } from "./MesureEvolutionChart";
 import { GET_CATEGORY_EVOLUTION } from "./queries";
 
 export const MesureEvolution = () => {
-  const {
-    startDateValue,
-    endDateValue,
-    selectedRegionalValue,
-    selectedDepartementValue,
-  } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(GET_CATEGORY_EVOLUTION, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      end: endDateValue,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      end: filters.endDate,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
+      start: filters.startDate,
     },
   });
 

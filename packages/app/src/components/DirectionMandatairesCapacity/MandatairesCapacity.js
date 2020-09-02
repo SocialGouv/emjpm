@@ -3,7 +3,7 @@ import { Card, CheckBox, Heading2, Heading4, Select, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { MANDATAIRES_CAPACITY } from "./queries";
 
@@ -14,19 +14,13 @@ const options = [
 ];
 
 const MandatairesCapacity = (props) => {
-  const {
-    selectedRegionalValue,
-    startDateValue,
-    selectedDepartementValue,
-    endDateValue,
-  } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRES_CAPACITY, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      end: endDateValue,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      end: filters.endDate,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
+      start: filters.startDate,
     },
   });
 
