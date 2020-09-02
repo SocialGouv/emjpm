@@ -78,11 +78,9 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Box menuItemLinkStyle>
-                            <Link href={link.url}>
-                              <a>{link.title}</a>
-                            </Link>
-                          </Box>
+                          <Link href={link.url}>
+                            <a>{link.title}</a>
+                          </Link>
                         </Box>
                       );
                     })}
