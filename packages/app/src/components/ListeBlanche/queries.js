@@ -98,6 +98,11 @@ export const LB_USERS = gql`
       lb_user_etablissements {
         etablissement {
           nom
+          departement {
+            id
+            nom
+            code
+          }
         }
         etablissement_rattachement
       }

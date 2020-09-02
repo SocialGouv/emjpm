@@ -35,9 +35,16 @@ export const ListeBlanchePreposeItem = (props) => {
             <Text sx={labelStyle}>{`Etablissements`}</Text>
             <Text sx={descriptionStyle}>
               {etablissements
-                .map((e) =>
-                  e.etablissement.nom.concat(e.etablissement_rattachement ? " (Rattaché)" : "")
-                )
+                .map((e) => {
+                  let str = e.etablissement.nom;
+                  if (e.etablissement.departement) {
+                    str += ` (${e.etablissement.departement.code})`;
+                  }
+                  if (e.etablissement_rattachement) {
+                    str += " (Rattaché)";
+                  }
+                  return str;
+                })
                 .join(", ")}
             </Text>
           </Flex>
