@@ -18,9 +18,9 @@ export const LB_SUMMARY = gql`
     prepose_finance: lb_users_aggregate(
       where: {
         type: { _eq: "prepose" }
-        lb_departements: {
-          departement_id: { _in: $departementIds }
-          departement_financeur: { _eq: true }
+        lb_user_etablissements: {
+          etablissement: { departement_id: { _in: $departementIds } }
+          etablissement_rattachement: { _eq: true }
         }
       }
     ) {
@@ -41,7 +41,7 @@ export const LB_SUMMARY = gql`
     prepose: lb_users_aggregate(
       where: {
         type: { _eq: "prepose" }
-        lb_departements: { departement_id: { _in: $departementIds } }
+        lb_user_etablissements: { etablissement: { departement_id: { _in: $departementIds } } }
       }
     ) {
       aggregate {
