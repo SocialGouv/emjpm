@@ -12,6 +12,7 @@ const pkg = require("../package.json");
 const authRoutes = require("./routes/api/auth");
 const oauth2Routes = require("./routes/api/oauth2");
 const editorsRoutes = require("./routes/api/editors");
+const rateLimit = require("express-rate-limit");
 
 const corsOptions = {
   credentials: true,
@@ -22,6 +23,13 @@ const bodyParserOptions = {
 };
 
 const app = express();
+
+// TODO: rate limiter use inmemory-store.
+// EMJPM uses k8s, so we must replace it by a redis or postgre table store.
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100,
+});
 
 // middlewares
 app.use(expressPinoLogger({ logger }));
@@ -36,7 +44,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/oauth", oauth2Routes);
 app.use(
   "/api/editors",
-  [apiLog, passport.authenticate("editor-jwt", { session: false })],
+  [apiLimiter, apiLog, passport.authenticate("editor-jwt", { session: false })],
   editorsRoutes
 );
 
