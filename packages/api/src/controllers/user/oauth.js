@@ -43,11 +43,23 @@ const authorize = async (req, res) => {
   }
 
   try {
+    // Expiration de tous les access tokens de l'editeur
+
+    await AccessToken.query()
+      .patch({
+        expired: true,
+        expired_on: new Date().toISOString(),
+      })
+      .where({
+        editor_id: editorId,
+      });
+
     await AccessToken.query().insert({
       user_id: userId,
       editor_id: editorId,
       editor_url: redirectUrl,
       access_token: uid,
+      expired: false,
     });
   } catch (error) {
     logger.error(error);
