@@ -46,7 +46,7 @@ const ListeBlancheSummary = () => {
   });
 
   const departementLabel = useMemo(() => {
-    if (!departement || departement === null) {
+    if (!departement || departement === null || !departements) {
       return "Tous les départements";
     } else {
       const { nom = "" } = departements.find((d) => d.id === departement);
@@ -67,7 +67,7 @@ const ListeBlancheSummary = () => {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading4>Une erreur est survenue, veuillez réessayer plus tard.</Heading4>
       </Card>
     );
   }
@@ -82,8 +82,8 @@ const ListeBlancheSummary = () => {
     individuel_finance: {
       aggregate: { count: individuelFinanceCount },
     },
-    prepose_finance: {
-      aggregate: { count: preposeFinanceCount },
+    prepose_rattache: {
+      aggregate: { count: preposeRattacheCount },
     },
     service: {
       aggregate: { count: serviceCount },
@@ -105,7 +105,7 @@ const ListeBlancheSummary = () => {
         />
         <LabelValue
           label="Mandataire préposé à un établissement"
-          value={`${preposeCount} dont ${preposeFinanceCount} financés`}
+          value={`${preposeCount} dont ${preposeRattacheCount} rattachés`}
         />
         <LabelValue label="Services" value={`${serviceCount}`} />
       </Flex>

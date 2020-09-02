@@ -6,7 +6,6 @@ import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
 import { ListeBlancheServices } from "./ListeBlancheServices";
 
 async function onSelectItem(router, { type, origin, id }) {
-  console.log("id", id);
   if (type === "mandataire") {
     await router.push(`/${origin}/liste-blanche/[id]`, `/${origin}/liste-blanche/${id}`);
   } else if (type === "service") {
