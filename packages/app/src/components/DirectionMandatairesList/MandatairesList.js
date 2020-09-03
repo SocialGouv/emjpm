@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
@@ -25,23 +25,23 @@ const optionsCapacity = [
 const RESULT_PER_PAGE = 30;
 
 const MandatairesList = (props) => {
-  const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
+  const { filters } = useContext(FiltersContextSerializable);
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState(false);
   const [currentOffset, setCurrentOffset] = useState(0);
 
   useEffect(() => {
     setCurrentOffset(0);
-  }, [selectedDepartementValue, selectedRegionalValue, selectedType, selectedCapacity]);
+  }, [filters]);
 
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
     variables: {
-      departement: selectedDepartementValue ? selectedDepartementValue.value : null,
+      departement: filters.departement ? filters.departement.value : null,
       discriminator: selectedType ? selectedType.value : null,
       offset: currentOffset,
       limit: RESULT_PER_PAGE,
       order: selectedCapacity ? selectedCapacity.value : null,
-      region: selectedRegionalValue ? selectedRegionalValue.value : null,
+      region: filters.region ? filters.region.value : null,
     },
   });
 

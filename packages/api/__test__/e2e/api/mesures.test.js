@@ -252,9 +252,56 @@ describe("POST /api/editors/mesures", () => {
         ],
       });
 
-    console.log("response", response.body);
-
-    expect(response.body).toMatchSnapshot();
+    // eslint-disable-next-line no-unused-vars
+    const { created_at, ...expected } = response.body;
+    expect(expected).toEqual({
+      annee_naissance: "1989",
+      antenne_id: null,
+      cause_sortie: "dessaisissement_famille",
+      civilite: "monsieur",
+      code_postal: "89350",
+      date_fin_mesure: "2020-04-04",
+      date_nomination: "2020-01-11",
+      date_premier_mesure: "2020-01-10",
+      date_protection_en_cours: "2020-01-11",
+      etats: [
+        {
+          champ_mesure: "protection_bien",
+          code_postal: "89000",
+          date_changement_etat: "2020-01-05",
+          etablissement_siret: "",
+          id: 1,
+          lieu_vie: "domicile",
+          nature_mesure: "curatelle_simple",
+          pays: "FR",
+          type_etablissement: null,
+          ville: "auxerre",
+        },
+        {
+          champ_mesure: "protection_bien",
+          code_postal: "89350",
+          date_changement_etat: "2020-01-06",
+          etablissement_siret: "",
+          id: 2,
+          lieu_vie: "domicile",
+          nature_mesure: "curatelle_simple",
+          pays: "FR",
+          type_etablissement: null,
+          ville: "perrigny",
+        },
+      ],
+      id: 6,
+      latitude: null,
+      lieu_vie: "domicile",
+      longitude: null,
+      numero_dossier: "45656456",
+      numero_rg: "RG234534534",
+      pays: "FR",
+      ressources: [],
+      resultat_revision: null,
+      type_etablissement: null,
+      ville: "perrigny",
+    });
     expect(response.status).toBe(201);
   });
 });

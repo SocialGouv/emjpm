@@ -2,10 +2,10 @@ import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import { FiltersContextSerializableProvider } from "../../../src/components/FiltersContextSerializable";
 import { LayoutDirection } from "../../../src/components/Layout";
 import { ListeBlanche } from "../../../src/components/ListeBlanche";
 import { ListeBlancheFilter } from "../../../src/components/ListeBlancheFilter";
-import { FiltersContextSerializableProvider } from "../../../src/components/ListeBlancheFilter/context";
 import { ListeBlancheSummary } from "../../../src/components/ListeBlancheSummary";
 import { withAuthSync } from "../../../src/util/auth";
 

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 
-import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
 import { ListeBlancheServices } from "./ListeBlancheServices";
 
