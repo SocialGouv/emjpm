@@ -2,16 +2,15 @@ import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@emjpm/ui";
 import React, { useContext } from "react";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { GET_GESTIONNAIRE_NUMBER } from "./queries";
 
 const MandatairesIndicator = () => {
-  const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
       type: "MANDATAIRE_IND",
     },
   });

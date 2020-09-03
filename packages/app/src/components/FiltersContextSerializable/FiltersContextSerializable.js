@@ -1,31 +1,45 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-apollo";
 
-import { GET_DEPARTEMENTS } from "../queries";
+import { endDate, startDate } from "../../util/dates";
+import { GET_DEPARTEMENTS } from "./queries";
 
 export const Context = createContext({});
 
 export const Provider = (props) => {
-  const { children, useLocalStorage } = props;
+  const { children, useLocalStorage, initialFilters } = props;
+
   const [filters, setFilters] = useState({
     departements: [],
+    startDate,
+    endDate,
   });
 
   useEffect(() => {
+    let newFilters = {};
+
     if (useLocalStorage) {
       const storedItem = window.localStorage.getItem("filters");
       if (storedItem) {
-        setFilters(JSON.parse(storedItem));
+        newFilters = JSON.parse(storedItem);
       }
     }
-  }, [useLocalStorage]);
+
+    if (initialFilters) {
+      Object.keys(initialFilters).forEach((key) => {
+        if (!newFilters[key] && initialFilters[key]) {
+          newFilters[key] = initialFilters[key];
+        }
+      });
+    }
+
+    setFilters((f) => ({ ...f, ...newFilters }));
+  }, [useLocalStorage, initialFilters]);
 
   const { data, loading, error } = useQuery(GET_DEPARTEMENTS);
 
-  function onFilterChange(key, value) {
-    const newFilters = { ...filters };
-    newFilters[key] = value;
-
+  function onFilterChange(obj) {
+    const newFilters = { ...filters, ...obj };
     setFilters(newFilters);
     if (useLocalStorage) {
       window.localStorage.setItem(

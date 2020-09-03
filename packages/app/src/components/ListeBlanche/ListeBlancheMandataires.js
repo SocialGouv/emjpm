@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { LoadingWrapper } from "../Commons";
-import { FiltersContextSerializable } from "../ListeBlancheFilter/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { PaginatedList } from "../PaginatedList";
 import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";

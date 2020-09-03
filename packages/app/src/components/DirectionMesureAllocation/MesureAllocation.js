@@ -4,24 +4,18 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { getMesureCategoryNatureLabel } from "../../util/mesures";
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { MesureAllocationChart } from "./MesureAllocationChart";
 import { GET_CATEGORY_STATS } from "./queries";
 
 export const MesureAllocation = () => {
-  const {
-    selectedRegionalValue,
-    startDateValue,
-    selectedDepartementValue,
-    endDateValue,
-  } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(GET_CATEGORY_STATS, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      end: endDateValue,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      end: filters.endDate,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
+      start: filters.startDate,
     },
   });
 
