@@ -30,8 +30,6 @@ export const DirectionFilters = () => {
     return { regions: regionsData ? regionsData.regions : [], departements };
   }, [regionsData, filters]);
 
-  console.log({ regions, departements });
-
   if (loading) {
     return <div>Chargement...</div>;
   }

@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { useQuery } from "react-apollo";
 
+import { endDate, startDate } from "../../util/dates";
 import { GET_DEPARTEMENTS } from "./queries";
 
 export const Context = createContext({});
@@ -10,17 +11,30 @@ export const Provider = (props) => {
 
   const [filters, setFilters] = useState({
     departements: [],
-    ...initialFilters,
+    startDate,
+    endDate,
   });
 
   useEffect(() => {
+    let newFilters = {};
+
     if (useLocalStorage) {
       const storedItem = window.localStorage.getItem("filters");
       if (storedItem) {
-        setFilters(JSON.parse(storedItem));
+        newFilters = JSON.parse(storedItem);
       }
     }
-  }, [useLocalStorage]);
+
+    if (initialFilters) {
+      Object.keys(initialFilters).forEach((key) => {
+        if (!newFilters[key] && initialFilters[key]) {
+          newFilters[key] = initialFilters[key];
+        }
+      });
+    }
+
+    setFilters((f) => ({ ...f, ...newFilters }));
+  }, [useLocalStorage, initialFilters]);
 
   const { data, loading, error } = useQuery(GET_DEPARTEMENTS);
 

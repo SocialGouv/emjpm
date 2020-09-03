@@ -252,6 +252,7 @@ describe("POST /api/editors/mesures", () => {
         ],
       });
 
+    // eslint-disable-next-line no-unused-vars
     const { created_at, ...expected } = response.body;
     expect(expected).toEqual({
       annee_naissance: "1989",
