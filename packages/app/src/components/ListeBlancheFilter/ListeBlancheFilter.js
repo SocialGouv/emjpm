@@ -5,8 +5,8 @@ import React, { Fragment, useContext, useEffect, useRef, useState } from "react"
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { UserContext } from "../UserContext";
-import { FiltersContextSerializable } from "./context";
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
@@ -104,7 +104,7 @@ const ListeBlancheFilter = () => {
                     ? departmentOptions.find((d) => d.value === filters.departement)
                     : undefined
                 }
-                onChange={(option) => onFilterChange("departement", option.value)}
+                onChange={(option) => onFilterChange({ departement: option.value })}
               />
             </Box>
 
@@ -114,7 +114,7 @@ const ListeBlancheFilter = () => {
                   value={nom_service || ""}
                   spellCheck="false"
                   autoComplete="false"
-                  onChange={(event) => onFilterChange("nom_service", event.target.value)}
+                  onChange={(event) => onFilterChange({ nom_service: event.target.value })}
                   name="search_service"
                   size="small"
                   placeholder="Nom du service"
@@ -128,7 +128,7 @@ const ListeBlancheFilter = () => {
                   value={nom || ""}
                   spellCheck="false"
                   autoComplete="false"
-                  onChange={(event) => onFilterChange("nom", event.target.value)}
+                  onChange={(event) => onFilterChange({ nom: event.target.value })}
                   name="search_mandataire"
                   size="small"
                   placeholder="Nom du mandataire"
@@ -141,7 +141,7 @@ const ListeBlancheFilter = () => {
                 value={siret || ""}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={(event) => onFilterChange("siret", event.target.value)}
+                onChange={(event) => onFilterChange({ siret: event.target.value })}
                 name="search_siret"
                 size="small"
                 placeholder="Siret"
@@ -156,7 +156,7 @@ const ListeBlancheFilter = () => {
                 options={TYPE_OPTIONS}
                 placeholder={"Type d'utilisateur"}
                 value={TYPE_OPTIONS.find(({ value }) => value === type)}
-                onChange={(option) => onFilterChange("type", option.value)}
+                onChange={(option) => onFilterChange({ type: option.value })}
               />
             </Box>
             {type === "mandataire" && (
@@ -166,7 +166,7 @@ const ListeBlancheFilter = () => {
                   label="Financé"
                   name="departementFinanceur"
                   isChecked={departementFinanceur || false}
-                  onChange={() => onFilterChange("departementFinanceur", !departementFinanceur)}
+                  onChange={() => onFilterChange({ departementFinanceur: !departementFinanceur })}
                 />
               </Box>
             )}

@@ -4,17 +4,16 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { convertToPercentage } from "../../util/math";
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
 const MandatairesActivity = (props) => {
-  const { selectedRegionalValue, selectedDepartementValue } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
     },
   });
 

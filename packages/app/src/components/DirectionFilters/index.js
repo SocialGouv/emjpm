@@ -1,3 +1,1 @@
-import { Filters } from "./Filters";
-
-export { Filters };
+export { DirectionFilters } from "./DirectionFilters";

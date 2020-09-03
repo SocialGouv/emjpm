@@ -3,17 +3,16 @@ import { Card, Heading2, Heading4, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
 const MandatairesDisponibility = (props) => {
-  const { selectedDepartementValue, selectedRegionalValue } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
     },
   });
 
