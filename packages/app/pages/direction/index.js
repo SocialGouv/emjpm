@@ -1,10 +1,9 @@
 import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "@emjpm/ui";
-import React from "react";
+import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { AvailabilityMap } from "../../src/components/DirectionAvailabilityMap";
-import { Filters } from "../../src/components/DirectionFilters";
-import { FiltersContextProvider } from "../../src/components/DirectionFilters/context";
+import { DirectionFilters } from "../../src/components/DirectionFilters";
 import {
   AvailableMesureIndicator,
   EtablissementIndicator,
@@ -12,18 +11,29 @@ import {
   ServicesIndicator,
 } from "../../src/components/DirectionIndicators";
 import { MandatairesActivity } from "../../src/components/DirectionMandatairesActivity";
-// import { MandatairesCapacity } from "../../src/components/MandatairesCapacity";
 import { MandatairesDisponibility } from "../../src/components/DirectionMandatairesDisponibility";
 import { MandatairesSubNavigation } from "../../src/components/DirectionMandatairesSubNavigation";
+import { FiltersContextSerializableProvider } from "../../src/components/FiltersContextSerializable";
 import { LayoutDirection } from "../../src/components/Layout";
+import { UserContext } from "../../src/components/UserContext";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mandataires = () => {
+  const user = useContext(UserContext);
+  const [direction] = user.directions;
+  const initialFilters = {};
+
+  if (direction.type === "departemental") {
+    initialFilters.departement = { id: direction.departement.id, label: direction.departement.nom };
+  } else if (direction.type === "regional") {
+    initialFilters.region = { id: direction.region.id, label: direction.region.nom };
+  }
+
   return (
-    <FiltersContextProvider>
+    <FiltersContextSerializableProvider useLocalStorage={true} initialFilters={initialFilters}>
       <LayoutDirection>
         <BoxWrapper mt={5} px="1">
-          <Filters />
+          <DirectionFilters />
         </BoxWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={fourColumnStyle}>
@@ -60,7 +70,7 @@ const Mandataires = () => {
           </Box> */}
         </FlexWrapper>
       </LayoutDirection>
-    </FiltersContextProvider>
+    </FiltersContextSerializableProvider>
   );
 };
 

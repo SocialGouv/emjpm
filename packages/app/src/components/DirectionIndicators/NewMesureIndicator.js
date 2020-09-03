@@ -2,23 +2,17 @@ import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@emjpm/ui";
 import React, { useContext } from "react";
 
-import { FiltersContext } from "../DirectionFilters/context";
+import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { GET_NEW_MESURE_NUMBER } from "./queries";
 
 const NewMesureIndicator = () => {
-  const {
-    selectedRegionalValue,
-    selectedDepartementValue,
-    startDateValue,
-    endDateValue,
-  } = useContext(FiltersContext);
-
+  const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_NEW_MESURE_NUMBER, {
     variables: {
-      department: selectedDepartementValue ? parseInt(selectedDepartementValue.value) : undefined,
-      end: endDateValue,
-      region: selectedRegionalValue ? parseInt(selectedRegionalValue.value) : undefined,
-      start: startDateValue,
+      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      end: filters.endDate,
+      region: filters.region ? parseInt(filters.region.value) : undefined,
+      start: filters.startDate,
     },
   });
 

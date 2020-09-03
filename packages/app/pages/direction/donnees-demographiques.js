@@ -2,18 +2,18 @@ import { BoxWrapper, FlexWrapper, fourColumnStyle } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-import { Filters } from "../../src/components/DirectionFilters";
-import { FiltersContextProvider } from "../../src/components/DirectionFilters/context";
+import { DirectionFilters } from "../../src/components/DirectionFilters";
 import { ServicesIndicator } from "../../src/components/DirectionIndicators";
+import { FiltersContextSerializable } from "../../src/components/FiltersContextSerializable";
 import { LayoutDirection } from "../../src/components/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
 const DemographicDatas = () => {
   return (
-    <FiltersContextProvider>
+    <FiltersContextSerializable>
       <LayoutDirection>
         <BoxWrapper mt={5} px="1">
-          <Filters />
+          <DirectionFilters />
         </BoxWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={fourColumnStyle}>
@@ -21,7 +21,7 @@ const DemographicDatas = () => {
           </Box>
         </FlexWrapper>
       </LayoutDirection>
-    </FiltersContextProvider>
+    </FiltersContextSerializable>
   );
 };
 
