@@ -1,12 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading3, Heading5, Input, Select } from "@emjpm/ui";
+import { Button, Field, Heading3, Heading5, InlineError, Select } from "@emjpm/ui";
+import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
+import { Datepicker } from "../Datepicker";
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MESURE } from "./queries";
 
@@ -46,10 +48,10 @@ export const MandataireMesureCloseForm = (props) => {
       setSubmitting(false);
     },
     validationSchema: Yup.object().shape({
-      date_fin_mesure: Yup.date().required("Required"),
-      cause_sortie: Yup.string().required("Required"),
+      date_fin_mesure: Yup.date().required(),
+      cause_sortie: Yup.string().required(),
     }),
-    initialValues: { date_fin_mesure: "", cause_sortie: "" },
+    initialValues: { date_fin_mesure: null, cause_sortie: "" },
   });
 
   return (
@@ -65,20 +67,22 @@ export const MandataireMesureCloseForm = (props) => {
           <Heading3>Mettre fin au mandat</Heading3>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <Field>
-            <Input
-              value={formik.values.date_fin_mesure}
+          <Box mb={4}>
+            <Label mb={2} sx={{ fontSize: "12px", fontWeight: 600 }}>
+              Date de fin de la mesure de protection
+            </Label>
+            <Datepicker
               id="date_fin_mesure"
-              name="date_fin_mesure"
-              hasError={formik.errors.date_fin_mesure && formik.touched.date_fin_mesure}
-              type="date"
-              onChange={formik.handleChange}
-              placeholder="Date de fin de la mesure de protection"
+              selected={formik.values.date_fin_mesure}
+              hasError={formik.touched.date_fin_mesure && formik.errors.date_fin_mesure}
+              onBlur={formik.onBlur}
+              onChange={(date) => formik.setFieldValue("date_fin_mesure", date)}
             />
-          </Field>
+          </Box>
           <Field>
             <Select
               id="cause_sortie"
+              instanceId="cause_sortie"
               name="cause_sortie"
               placeholder="Raison de la fin de mandat"
               value={formik.values.cause_sortie}
