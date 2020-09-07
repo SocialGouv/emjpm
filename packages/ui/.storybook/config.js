@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import { withA11y } from '@storybook/addon-a11y';
 import { ThemeProvider } from 'theme-ui';
 import { presetEmjpm } from '../src/preset';
 import 'storybook-chromatic';
@@ -27,7 +26,6 @@ const ThemeDecorator = (storyFn) => {
   );
 };
 
-addDecorator(withA11y);
 addDecorator(ThemeDecorator);
 
 configure(require.context('../src', true, /\.stories\.(jsx|mdx)$/), module);
