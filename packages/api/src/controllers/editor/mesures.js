@@ -1,5 +1,6 @@
 const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
+const { sanitizeMesureProperties } = require("../../utils/mesure");
 
 const mesures = async (req, res) => {
   const {
@@ -27,7 +28,9 @@ const mesures = async (req, res) => {
     mesures = await Mesure.query().withGraphFetched("[etats]").where(filter);
   }
 
-  return res.status(200).json({ mesures: mesures });
+  return res.status(200).json({
+    mesures: mesures.map((m) => sanitizeMesureProperties(m)),
+  });
 };
 
 module.exports = mesures;

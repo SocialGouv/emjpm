@@ -7,6 +7,7 @@ const { Tis } = require("../../models/Tis");
 const { Departement } = require("../../models/Departement");
 const { ServiceAntenne } = require("../../models/ServiceAntenne");
 const { ServiceMember } = require("../../models/ServiceMember");
+const { sanitizeMesureProperties } = require("../../utils/mesure");
 const {
   GeolocalisationCodePostal,
 } = require("../../models/GeolocalisationCodePostal");
@@ -147,7 +148,7 @@ const mesureUpdate = async (req, res) => {
     });
   }
 
-  return res.status(200).json({ mesure });
+  return res.status(200).json({ mesure: sanitizeMesureProperties(mesure) });
 };
 
 module.exports = mesureUpdate;
