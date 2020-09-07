@@ -5,10 +5,16 @@ function sanitizeMesureProperties(mesure) {
     id: mesure.id,
     code_postal: mesure.code_postal,
     ville: mesure.ville,
-    created_at: format(mesure.created_at, "yyyy-MM-dd"),
+    created_at: mesure.created_at
+      ? format(mesure.created_at, "yyyy-MM-dd")
+      : mesure.created_at,
     annee_naissance: mesure.annee_naissance,
-    date_nomination: format(mesure.date_nomination, "yyyy-MM-dd"),
-    date_fin_mesure: format(mesure.date_fin_mesure, "yyyy-MM-dd"),
+    date_nomination: mesure.date_nomination
+      ? format(mesure.date_nomination, "yyyy-MM-dd")
+      : mesure.date_nomination,
+    date_fin_mesure: mesure.date_fin_mesure
+      ? format(mesure.date_fin_mesure, "yyyy-MM-dd")
+      : mesure.date_fin_mesure,
     numero_dossier: mesure.numero_dossier,
     numero_rg: mesure.numero_rg,
     antenne_id: mesure.antenne_id,
@@ -19,20 +25,20 @@ function sanitizeMesureProperties(mesure) {
     type_etablissement: mesure.type_etablissement,
     civilite: mesure.civilite,
     cause_sortie: mesure.cause_sortie,
-    date_premier_mesure: format(mesure.date_premier_mesure, "yyyy-MM-dd"),
-    date_protection_en_cours: format(
-      mesure.date_protection_en_cours,
-      "yyyy-MM-dd"
-    ),
+    date_premier_mesure: mesure.date_premier_mesure
+      ? format(mesure.date_premier_mesure, "yyyy-MM-dd")
+      : mesure.date_premier_mesure,
+    date_protection_en_cours: mesure.date_protection_en_cours
+      ? format(mesure.date_protection_en_cours, "yyyy-MM-dd")
+      : mesure.date_protection_en_cours,
     resultat_revision: mesure.resultat_revision,
     etats: mesure.etats
       ? mesure.etats.map((etat) => {
           return {
             id: etat.id,
-            date_changement_etat: format(
-              etat.date_changement_etat,
-              "yyyy-MM-dd"
-            ),
+            date_changement_etat: etat.date_changement_etat
+              ? format(etat.date_changement_etat, "yyyy-MM-dd")
+              : etat.date_changement_etat,
             nature_mesure: etat.nature_mesure,
             champ_mesure: etat.champ_protection,
             lieu_vie: etat.lieu_vie,
