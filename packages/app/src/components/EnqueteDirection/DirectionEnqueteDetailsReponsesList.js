@@ -56,10 +56,6 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
     [criteria, enqueteReponseResumes, enqueteReponseResumesIndex]
   );
 
-  useEffect(() => {
-    setCurrentOffset(0);
-  }, [setCurrentOffset, filteredEnqueteReponseResumes]);
-
   const currentPageEntries = useMemo(() => {
     const start = criteria.currentOffset;
     const end = start + resultPerPage;
