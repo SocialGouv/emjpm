@@ -1,5 +1,14 @@
 import gql from "graphql-tag";
 
+export const DEPARTEMENTS = gql`
+  query departements {
+    departements {
+      id
+      code
+    }
+  }
+`;
+
 export const ETABLISSEMENT = gql`
   query etablissement($id: Int!) {
     departements {

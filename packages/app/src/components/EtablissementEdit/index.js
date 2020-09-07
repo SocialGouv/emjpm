@@ -1,1 +1,0 @@
-export { EtablissementEdit } from "./EtablissementEdit";

@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { EtablissementEdit } from "../../../src/components/EtablissementEdit";
+import { EtablissementEdit } from "../../../src/components/Etablissement";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 

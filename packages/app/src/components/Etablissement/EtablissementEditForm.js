@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 import { Geocode } from "../Geocode";
 
 export const EtablissementEditForm = (props) => {
-  const { data, onSubmit, departements } = props;
+  const { data = {}, onSubmit, departements, loading } = props;
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       const { depcode, ...val } = values;
@@ -22,15 +22,15 @@ export const EtablissementEditForm = (props) => {
       setSubmitting(false);
     },
     initialValues: {
-      adresse: data.adresse,
-      fax: data.fax,
-      tel: data.tel,
-      latitude: data.latitude,
-      longitude: data.longitude,
-      code_postal: data.code_postal,
-      depcode: data.departement.code,
-      id_finess: data.id_finess,
-      nom: data.nom,
+      adresse: data.adresse || "",
+      fax: data.fax || "",
+      tel: data.tel || "",
+      latitude: data.latitude || "",
+      longitude: data.longitude || "",
+      code_postal: data.code_postal || "",
+      depcode: data.departement ? data.departement.code : "",
+      id_finess: data.id_finess || "",
+      nom: data.nom || "",
     },
   });
 
@@ -49,6 +49,7 @@ export const EtablissementEditForm = (props) => {
         </Box>
         <Box mb={2}>
           <Geocode
+            instanceId={"etablissement_geocode"}
             resource={data}
             onChange={(result) => {
               if (result) {
@@ -81,7 +82,7 @@ export const EtablissementEditForm = (props) => {
         <Input
           name="fax"
           type="text"
-          value={formik.values.tel}
+          value={formik.values.fax}
           placeholder="Fax"
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -99,7 +100,9 @@ export const EtablissementEditForm = (props) => {
       </Box>
       <Flex mt={4} justifyContent="flex-end">
         <Box>
-          <Button type="submit">Enregistrer</Button>
+          <Button isLoading={loading} type="submit">
+            Enregistrer
+          </Button>
         </Box>
       </Flex>
     </Box>

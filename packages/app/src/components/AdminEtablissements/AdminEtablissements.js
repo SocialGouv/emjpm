@@ -1,9 +1,10 @@
 import { Button, Card } from "@emjpm/ui";
 import Link from "next/link";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
+import { AdminFilterContext } from "../AdminFilterBar/context";
 import { PaginatedList } from "../PaginatedList";
 import { ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
@@ -50,11 +51,13 @@ const RowItem = (props) => {
 
 export const AdminEtablissements = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
+  const { debouncedSearchText } = useContext(AdminFilterContext);
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
+      search: debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     },
   });
 
