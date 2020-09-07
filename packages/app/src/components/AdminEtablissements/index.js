@@ -1,0 +1,1 @@
+export { AdminEtablissements } from "./AdminEtablissements";
