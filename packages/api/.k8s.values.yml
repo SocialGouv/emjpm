@@ -92,14 +92,15 @@ service:
 ingress:
   enabled: true
   annotations:
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.class: "azure/application-gateway"
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
   hosts:
-    - host: api-emjpm.dev.fabrique.social.gouv.fr
+    - host: api-emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
           servicePort: ${PORT}
   tls:
     - hosts:
-        - api-emjpm.dev.fabrique.social.gouv.fr
+        - api-emjpm.dev2.fabrique.social.gouv.fr
       secretName: api-certificate
