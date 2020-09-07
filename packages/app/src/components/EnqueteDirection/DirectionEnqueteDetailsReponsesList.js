@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
 import { differenceInDays } from "date-fns";
 import Link from "next/link";
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
