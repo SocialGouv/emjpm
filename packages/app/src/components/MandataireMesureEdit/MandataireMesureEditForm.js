@@ -1,5 +1,6 @@
 import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
+import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -8,6 +9,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { mandataireMesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
+import { Datepicker } from "../Datepicker";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
@@ -40,7 +42,7 @@ export const MandataireMesureEditForm = (props) => {
     initialValues: {
       annee_naissance: age,
       civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
-      date_nomination: dateNomination,
+      date_nomination: new Date(dateNomination),
       numero_dossier: numeroDossier,
       numero_rg: numeroRg,
       lieu_vie: findOption(MESURE_PROTECTION.LIEU_VIE_MAJEUR.options, lieuVie),
@@ -120,18 +122,23 @@ export const MandataireMesureEditForm = (props) => {
             />
             <InlineError message={formik.errors.numero_dossier} fieldId="numero_dossier" />
           </Field>
-          <Field>
-            <Input
-              value={formik.values.date_nomination}
+
+          <Box mb={4}>
+            <Label mb={2} sx={{ fontSize: "12px", fontWeight: 600 }}>
+              Date de jugement ou ordonnance de nomination
+            </Label>
+            <Datepicker
               id="date_nomination"
-              type="date"
-              name="date_nomination"
-              hasError={formik.errors.date_nomination && formik.touched.date_nomination}
-              onChange={formik.handleChange}
-              placeholder="Date de jugement ou ordonnance de nomination"
+              selected={formik.values.date_nomination}
+              hasError={formik.touched.date_nomination && formik.errors.date_nomination}
+              onBlur={formik.onBlur}
+              onChange={(date) => formik.setFieldValue("date_nomination", date)}
             />
-            <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
-          </Field>
+            {formik.touched.date_nomination && formik.errors.date_nomination && (
+              <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
+            )}
+          </Box>
+
           <Field>
             <Select
               instanceId={"nature_mesure"}
