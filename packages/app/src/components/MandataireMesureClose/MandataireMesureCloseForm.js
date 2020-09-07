@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading3, Heading5, InlineError, Select } from "@emjpm/ui";
+import { Button, Field, Heading3, Heading5, Select } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import Router from "next/router";
