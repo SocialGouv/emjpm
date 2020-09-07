@@ -16,6 +16,10 @@ const navigationLinks = [
     url: "/admin/services",
   },
   {
+    title: "Etablissements",
+    url: "/admin/etablissements",
+  },
+  {
     title: "Tribunaux",
     url: "/admin/tribunaux",
   },
