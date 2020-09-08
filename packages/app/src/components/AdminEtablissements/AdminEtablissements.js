@@ -13,7 +13,7 @@ const resultPerPage = 50;
 
 const RowItem = (props) => {
   const { item } = props;
-  const { id, nom, code_postal, ville } = item;
+  const { id, nom, code_postal, ville, departement } = item;
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
@@ -34,6 +34,10 @@ const RowItem = (props) => {
                   {ville} ({code_postal})
                 </Text>
               </Flex>
+              <Flex width="300px" flexDirection="column">
+                <Text sx={labelStyle}>Département</Text>
+                <Text sx={descriptionStyle}>{departement.nom}</Text>
+              </Flex>
             </Flex>
           </Box>
           <Box mr="1" width="120px">
@@ -51,13 +55,14 @@ const RowItem = (props) => {
 
 export const AdminEtablissements = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText } = useContext(AdminFilterContext);
+  const { debouncedSearchText, selectedDepartementId } = useContext(AdminFilterContext);
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
       search: debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+      departementId: selectedDepartementId ? selectedDepartementId : null,
     },
   });
 
