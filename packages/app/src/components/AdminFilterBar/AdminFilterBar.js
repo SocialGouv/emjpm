@@ -2,6 +2,9 @@ import { Button, Card, Input, Select, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
+import { useDepartementsOptions } from "../../util/departements";
+import { findOption } from "../../util/option/OptionUtil";
+import { LoadingWrapper } from "../Commons";
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";
 
@@ -15,48 +18,78 @@ const TYPE_OPTIONS = [
   { label: "Admin", value: "admin" },
 ];
 
-const AdminFilterBar = ({ onAddButtonClick, userTypeFilter }) => {
-  const { searchText, changeSearchText, selectedType, selectType } = useContext(AdminFilterContext);
+const departementsOptionsConfig = {
+  nullOption: {
+    label: "Tous les départements",
+  },
+};
+
+const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter }) => {
+  const { departementsOptions, error, loading } = useDepartementsOptions(departementsOptionsConfig);
+
+  const {
+    searchText,
+    changeSearchText,
+    selectedType,
+    selectType,
+    selectedDepartementId,
+    selectDepartementId,
+  } = useContext(AdminFilterContext);
+
   return (
-    <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
-      <Flex justifyContent={"space-between"} flexWrap="wrap">
-        <Box>
-          <Flex>
-            <Text sx={FilterTextStyle}>AFFINER LES RÉSULTATS</Text>
-            <Box width="170px" mr={1}>
-              <Input
-                value={searchText}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) => changeSearchText(event.target.value)}
-                name="search"
-                size="small"
-                placeholder="Filtre"
-              />
-            </Box>
-            {userTypeFilter && (
+    <LoadingWrapper error={error} loading={loading}>
+      <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
+        <Flex justifyContent={"space-between"} flexWrap="wrap">
+          <Box>
+            <Flex>
+              <Text sx={FilterTextStyle}>AFFINER LES RÉSULTATS</Text>
               <Box width="170px" mr={1}>
-                <Select
-                  value={TYPE_OPTIONS.find((elm) => elm.value === selectedType)}
-                  options={TYPE_OPTIONS}
-                  onChange={(option) => selectType(option.value)}
-                  name="type"
+                <Input
+                  value={searchText}
+                  spellCheck="false"
+                  autoComplete="false"
+                  onChange={(event) => changeSearchText(event.target.value)}
+                  name="search"
                   size="small"
-                  placeholder="Type"
+                  placeholder="Filtre"
                 />
               </Box>
-            )}
-          </Flex>
-        </Box>
-        {onAddButtonClick && (
-          <Box>
-            <Button width="120px" onClick={onAddButtonClick}>
-              Ajouter
-            </Button>
+              {userTypeFilter && (
+                <Box width="170px" mr={1}>
+                  <Select
+                    value={TYPE_OPTIONS.find((elm) => elm.value === selectedType)}
+                    options={TYPE_OPTIONS}
+                    onChange={(option) => selectType(option.value)}
+                    name="type"
+                    size="small"
+                    placeholder="Type"
+                  />
+                </Box>
+              )}
+              {useDepartementfilter && (
+                <Box width="250px" mr={1}>
+                  <Select
+                    value={findOption(departementsOptions, selectedDepartementId)}
+                    options={departementsOptions}
+                    onChange={(option) => selectDepartementId(option.value)}
+                    name="departement"
+                    size="small"
+                    placeholder="Département"
+                  />
+                </Box>
+              )}
+            </Flex>
           </Box>
-        )}
-      </Flex>
-    </Card>
+          {onAddButtonClick && (
+            <Box>
+              <Button width="120px" onClick={onAddButtonClick}>
+                Ajouter
+              </Button>
+            </Box>
+          )}
+        </Flex>
+      </Card>
+    </LoadingWrapper>
   );
 };
 
