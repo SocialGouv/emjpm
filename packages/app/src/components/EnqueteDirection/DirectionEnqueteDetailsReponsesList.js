@@ -2,66 +2,55 @@ import { useQuery } from "@apollo/react-hooks";
 import { Heading2 } from "@emjpm/ui";
 import { differenceInDays } from "date-fns";
 import Link from "next/link";
-import React, { useCallback, useMemo } from "react";
+import React from "react";
 import { Box, Button, Flex } from "rebass";
 
 import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
 import { Breadcrumb, LoadingWrapper } from "../Commons";
 import { PaginatedList } from "../PaginatedList";
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
-import { directionEnqueteReponseResumeBuilder } from "./directionEnqueteReponseResumeBuilder";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
 import {
   DirectionEnqueteReponsesCriteria,
   ENQUETE_REPONSE_STATUS_OPTIONS,
-  enqueteReponseResumesFilter,
   useDirectionEnqueteReponsesCriteria,
 } from "./DirectionEnqueteReponsesFilter";
 import { ENQUETE_DETAILS_LIST } from "./queries";
 
+const resultPerPage = 10;
+
+function buildQueryVariables(enqueteId, criteria) {
+  const variables = { enqueteId, offset: 0, limit: resultPerPage };
+  if (criteria.selectedDepartement && criteria.selectedDepartement.departement) {
+    variables.departementId = criteria.selectedDepartement.departement.id;
+  }
+
+  if (criteria.responseStatus && criteria.responseStatus.value) {
+    variables.status = criteria.responseStatus.value;
+  }
+
+  if (criteria.userType && criteria.userType.value) {
+    variables.userType = criteria.userType.value;
+  }
+  return variables;
+}
+
 export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
   const queryContext = useQueryContextWithHasuraRole("direction_");
-
-  const { data, loading, error } = useQuery(ENQUETE_DETAILS_LIST, {
-    variables: { enqueteId },
-    context: queryContext,
-  });
-
-  const { enqueteLabel, enqueteReponseResumes } = useDirectionEnqueteDetailsReponsesList(data);
-  const resultPerPage = 10;
 
   const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria({
     responseStatus: ENQUETE_REPONSE_STATUS_OPTIONS[0],
   });
 
-  const setCurrentOffset = useCallback(
-    (value) => {
-      updateCriteria("currentOffset", value);
-    },
-    [updateCriteria]
-  );
+  const { data, loading, error } = useQuery(ENQUETE_DETAILS_LIST, {
+    variables: buildQueryVariables(enqueteId, criteria),
+    context: queryContext,
+  });
 
-  const enqueteReponseResumesIndex = useMemo(
-    () => enqueteReponseResumesFilter.buildIndex(enqueteReponseResumes),
-    [enqueteReponseResumes]
-  );
-
-  const filteredEnqueteReponseResumes = useMemo(
-    () =>
-      enqueteReponseResumesFilter.filter({
-        enqueteReponseResumesIndex,
-        enqueteReponseResumes,
-        criteria,
-      }),
-    [criteria, enqueteReponseResumes, enqueteReponseResumesIndex]
-  );
-
-  const currentPageEntries = useMemo(() => {
-    const start = criteria.currentOffset;
-    const end = start + resultPerPage;
-    const items = filteredEnqueteReponseResumes.slice(start, end);
-    return items;
-  }, [criteria.currentOffset, filteredEnqueteReponseResumes]);
+  const enqueteLabel =
+    data && data.enquetes_by_pk
+      ? `Enquête ${data.enquetes_by_pk.annee} sur l'activité de ${data.enquetes_by_pk.annee - 1}`
+      : "";
 
   return (
     <LoadingWrapper error={error} loading={loading} errorRedirect={{ url: "/direction/enquetes" }}>
@@ -118,19 +107,23 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
 
       <Box mt={2}>
         <PaginatedList
-          entries={currentPageEntries}
+          entries={data && data.enquetes_by_pk ? data.enquetes_by_pk.enquete_reponses : []}
           RowItem={DirectionEnqueteReponseResumeCard}
-          count={filteredEnqueteReponseResumes.length}
+          count={
+            data && data.enquetes_by_pk
+              ? data.enquetes_by_pk.enquete_reponses_aggregate.aggregate.count
+              : 0
+          }
           resultPerPage={resultPerPage}
           currentOffset={criteria.currentOffset}
-          setCurrentOffset={setCurrentOffset}
-          renderActions={(enqueteReponseResume) => {
-            if (enqueteReponseResume.enqueteReponse.status === "submitted") {
+          setCurrentOffset={(value) => updateCriteria("currentOffset", value)}
+          renderActions={(item) => {
+            if (item.status === "submitted") {
               return (
                 <Box mt={1} textAlign="center">
                   <Link
                     href={`/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]`}
-                    as={`/direction/enquetes/${enqueteId}/reponse/${enqueteReponseResume.reponse_id}`}
+                    as={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
                     <a>
                       <Button>Visualiser</Button>
@@ -146,51 +139,3 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
     </LoadingWrapper>
   );
 };
-
-function useDirectionEnqueteDetailsReponsesList(data) {
-  return useMemo(() => {
-    if (data) {
-      const enqueteReponses = data.enquete_reponses;
-      const enquete = data.enquetes_by_pk;
-      const enqueteLabel = `Enquête ${enquete.annee} sur l'activité de ${enquete.annee - 1}`;
-      const resumes = directionEnqueteReponseResumeBuilder.buildMany(enqueteReponses);
-      const resumes_mandataires_sans_reponse = directionEnqueteReponseResumeBuilder.buildManyFromMandatairesSansReponse(
-        data.mandataires_sans_reponse
-      );
-      const resumes_services_sans_reponse = directionEnqueteReponseResumeBuilder.buildManyFromServicesSansReponse(
-        data.services_sans_reponse
-      );
-
-      const enqueteReponseResumes = resumes
-        .concat(resumes_mandataires_sans_reponse)
-        .concat(resumes_services_sans_reponse);
-
-      enqueteReponseResumes.sort(function (a, b) {
-        if (a.sortName < b.sortName) {
-          return -1;
-        }
-        if (a.sortName > b.sortName) {
-          return 1;
-        }
-        return a.uniqueId - b.uniqueId;
-      });
-
-      return {
-        enqueteLabel,
-        enqueteReponseResumes,
-        counts: {
-          responses: resumes.length,
-          all: enqueteReponseResumes.length,
-        },
-      };
-    }
-    return {
-      enqueteLabel: "",
-      enqueteReponseResumes: [],
-      counts: {
-        responses: 0,
-        all: 0,
-      },
-    };
-  }, [data]);
-}

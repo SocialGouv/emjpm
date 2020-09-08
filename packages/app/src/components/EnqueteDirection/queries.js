@@ -70,26 +70,41 @@ export const ENQUETE_DETAILS_RESUME = gql`
 `;
 
 export const ENQUETE_DETAILS_LIST = gql`
-  query enquete_details($enqueteId: Int!) {
-    mandataires_aggregate {
+  query enquete_details(
+    $enqueteId: Int!
+    $offset: Int!
+    $limit: Int!
+    $departementId: Int
+    $userType: String
+    $status: String
+  ) {
+    mandataires_aggregate(where: { department_id: { _eq: $departementId } }) {
       mandataires: aggregate {
         count(columns: id)
       }
     }
-    services_aggregate {
+    services_aggregate(where: { department_id: { _eq: $departementId } }) {
       services: aggregate {
         count(columns: id)
       }
     }
     enquete_draft_count: enquete_reponses_aggregate(
-      where: { enquete_id: { _eq: $enqueteId }, status: { _eq: "draft" } }
+      where: {
+        departement_id: { _eq: $departementId }
+        enquete_id: { _eq: $enqueteId }
+        status: { _eq: "draft" }
+      }
     ) {
       enquete_reponses: aggregate {
         count(columns: id)
       }
     }
     enquete_submitted_count: enquete_reponses_aggregate(
-      where: { enquete_id: { _eq: $enqueteId }, status: { _eq: "submitted" } }
+      where: {
+        departement_id: { _eq: $departementId }
+        enquete_id: { _eq: $enqueteId }
+        status: { _eq: "submitted" }
+      }
     ) {
       enquete_reponses: aggregate {
         count(columns: id)
@@ -100,36 +115,47 @@ export const ENQUETE_DETAILS_LIST = gql`
       created_at
       annee
       date_fin
-    }
-    enquete_reponses(
-      order_by: { submitted_at: desc, created_at: desc }
-      where: { enquete_id: { _eq: $enqueteId } }
-    ) {
-      reponse_id: id
-      status
-      created_at
-      submitted_at
-      uploaded_on
-      user_type
-      departement {
-        id
-        code
-        nom
-      }
-      mandataire {
-        id
-        user {
-          id
-          prenom
-          nom
-          type
+      enquete_reponses_aggregate {
+        aggregate {
+          count
         }
-        ville
       }
-      service {
-        id
-        etablissement
-        ville
+      enquete_reponses(
+        limit: $limit
+        offset: $offset
+        where: {
+          user_type: { _eq: $userType }
+          status: { _eq: $status }
+          departement_id: { _eq: $departementId }
+        }
+        order_by: { submitted_at: desc, created_at: desc }
+      ) {
+        reponse_id: id
+        status
+        created_at
+        submitted_at
+        uploaded_on
+        user_type
+        departement {
+          id
+          code
+          nom
+        }
+        mandataire {
+          id
+          user {
+            id
+            prenom
+            nom
+            type
+          }
+          ville
+        }
+        service {
+          id
+          etablissement
+          ville
+        }
       }
     }
     mandataires_sans_reponse: mandataires(
