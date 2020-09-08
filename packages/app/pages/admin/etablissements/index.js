@@ -17,7 +17,10 @@ const AdminEtablissementsPage = () => {
         <BoxWrapper mt={4} px={1}>
           <Heading1>Liste des établissements</Heading1>
           <Box mt={4} mb={4}>
-            <AdminFilterBar onAddButtonClick={() => router.push("/admin/etablissements/add")} />
+            <AdminFilterBar
+              useDepartementfilter
+              onAddButtonClick={() => router.push("/admin/etablissements/add")}
+            />
             <AdminEtablissements />
           </Box>
         </BoxWrapper>
