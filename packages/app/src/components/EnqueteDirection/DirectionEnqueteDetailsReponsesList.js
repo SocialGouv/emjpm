@@ -78,9 +78,9 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       <Box mt={2}>
         {data && (
           <DirectionEnqueteDetailsInformationsClesIndicators
-            destinatairesCount={
-              data.mandataires_aggregate.mandataires.count + data.services_aggregate.services.count
-            }
+            preposesCount={data.preposes_aggregate.mandataires.count}
+            individuelsCount={data.individuels_aggregate.mandataires.count}
+            servicesCount={data.services_aggregate.services.count}
             enqueteDraftCount={data.enquete_draft_count.enquete_reponses.count}
             enqueteSubmittedCount={data.enquete_submitted_count.enquete_reponses.count}
             daysBeforeClosing={

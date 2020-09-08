@@ -51,7 +51,6 @@ const getStatusLabel = (status) => {
 
 export const DirectionEnqueteReponseResumeCard = (props) => {
   const { item, renderActions } = props;
-  console.log("item.service", item.service);
   return (
     <Card key={item.reponse_id} sx={cardStyle} mb="2">
       <Flex justifyContent="flex-start">
