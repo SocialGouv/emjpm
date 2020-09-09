@@ -49,23 +49,26 @@ const getStatusLabel = (status) => {
   }
 };
 
-export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => {
+export const DirectionEnqueteReponseResumeCard = (props) => {
+  const { item, renderActions } = props;
   return (
     <Card key={item.reponse_id} sx={cardStyle} mb="2">
       <Flex justifyContent="flex-start">
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{getTypeLabel(item.user_type)}</Text>
-          {item.user ? (
+          {item.mandataire && item.mandataire.user ? (
             <Flex>
               <Text sx={descriptionStyle("important")}>
-                {item.user.nom ? item.user.nom.toUpperCase() : ""}
+                {item.mandataire.user.nom ? item.mandataire.user.nom.toUpperCase() : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle("important")}>
-                {item.user.prenom}
+                {item.mandataire.user.prenom}
               </Text>
             </Flex>
-          ) : item.etablissement ? (
-            <Text sx={descriptionStyle("important")}>{item.etablissement.toUpperCase()}</Text>
+          ) : item.service.etablissement ? (
+            <Text sx={descriptionStyle("important")}>
+              {item.service.etablissement.toUpperCase()}
+            </Text>
           ) : null}
         </Flex>
         <Flex width="50%" flexDirection="column">
@@ -80,7 +83,8 @@ export const DirectionEnqueteReponseResumeCard = ({ item, renderActions }) => {
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{`Ville`}</Text>
           <Flex>
-            <Text sx={descriptionStyle()}>{item.ville}</Text>
+            {item.mandataire && <Text sx={descriptionStyle()}>{item.mandataire.ville}</Text>}
+            {item.service && <Text sx={descriptionStyle()}>{item.service.ville}</Text>}
           </Flex>
         </Flex>
         <Flex width="50%" flexDirection="column">
