@@ -20,7 +20,7 @@ const Mandataires = () => {
     <FiltersContextSerializableProvider>
       <LayoutDirection>
         <BoxWrapper mt={5} px="1">
-          <DirectionFilters />
+          <DirectionFilters useNameFilter={true} />
         </BoxWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <Box sx={fourColumnStyle}>
