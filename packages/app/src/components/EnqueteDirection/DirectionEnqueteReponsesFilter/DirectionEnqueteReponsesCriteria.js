@@ -1,4 +1,4 @@
-import { Card, Input, Select } from "@emjpm/ui";
+import { Card, Select } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
@@ -30,17 +30,6 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
     <LoadingWrapper error={error} loading={loading}>
       <Card>
         <Flex flexDirection="row">
-          <Box sx={BoxStyle}>
-            <Input
-              value={criteria.searchText}
-              spellCheck="false"
-              autoComplete="OFF"
-              onChange={(event) => updateCriteria("searchText", event.target.value)}
-              name="search"
-              size="small"
-              placeholder="Recherche par nom, ville"
-            />
-          </Box>
           <Box sx={BoxStyle}>
             <Select
               size="small"
