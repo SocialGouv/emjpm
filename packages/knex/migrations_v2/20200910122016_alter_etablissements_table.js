@@ -27,6 +27,8 @@ exports.up = async function (knex) {
     table.string("telecopie");
     table.string("categetab");
     table.string("libcategetab");
+    table.string("categagretab");
+    table.string("libcategagretab");
     table.string("siret");
     table.string("codeape");
     table.string("codemft");

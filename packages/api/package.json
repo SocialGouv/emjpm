@@ -29,6 +29,7 @@
     "date-fns": "^2.15.0",
     "debug": "^4.1.1",
     "dotenv": "^8.2.0",
+    "event-stream": "^4.0.1",
     "express": "^4.17.1",
     "express-pino-logger": "^4.0.0",
     "express-rate-limit": "^5.1.3",

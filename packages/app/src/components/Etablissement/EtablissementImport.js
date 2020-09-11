@@ -1,10 +1,10 @@
+import { Button, Input } from "@emjpm/ui";
+import { useFormik } from "formik";
 import React from "react";
 import { useMutation } from "react-apollo";
-
-import { useFormik } from "formik";
-import { IMPORT_FINESS } from "./mutations";
-import { Button, Input } from "@emjpm/ui";
 import { Box, Flex } from "rebass";
+
+import { IMPORT_FINESS } from "./mutations";
 
 export const EtablissementImport = () => {
   const [importFiness] = useMutation(IMPORT_FINESS);
