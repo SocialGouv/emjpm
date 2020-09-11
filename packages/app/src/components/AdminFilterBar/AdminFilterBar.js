@@ -32,8 +32,8 @@ const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter
     changeSearchText,
     selectedType,
     selectType,
-    selectedDepartementId,
-    selectDepartementId,
+    selectedDepartementCode,
+    selectDepartementCode,
   } = useContext(AdminFilterContext);
 
   return (
@@ -69,9 +69,9 @@ const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter
               {useDepartementfilter && (
                 <Box width="250px" mr={1}>
                   <Select
-                    value={findOption(departementsOptions, selectedDepartementId)}
+                    value={findOption(departementsOptions, selectedDepartementCode)}
                     options={departementsOptions}
-                    onChange={(option) => selectDepartementId(option.value)}
+                    onChange={(option) => selectDepartementCode(option.value)}
                     name="departement"
                     size="small"
                     placeholder="Département"

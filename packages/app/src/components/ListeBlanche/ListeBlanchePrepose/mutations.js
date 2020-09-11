@@ -14,7 +14,8 @@ export const UPDATE_LB_USER_PREPOSE = gql`
       returning {
         id
         etablissement {
-          nom
+          id
+          rslongue
         }
         lb_user_id
         etablissement_id
@@ -30,7 +31,8 @@ export const UPDATE_LB_USER_PREPOSE = gql`
         etablissement_id
         lb_user_id
         etablissement {
-          nom
+          id
+          rslongue
         }
       }
       nom

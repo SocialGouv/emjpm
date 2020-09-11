@@ -21,7 +21,7 @@ export const LB_USER = gql`
         id
         etablissement {
           id
-          nom
+          rslongue
         }
         lb_user_id
         etablissement_rattachement
@@ -97,7 +97,8 @@ export const LB_USERS = gql`
       }
       lb_user_etablissements {
         etablissement {
-          nom
+          id
+          rslongue
           departement {
             id
             nom

@@ -166,7 +166,7 @@ export const ListeBlanchePreposeForm = (props) => {
               loadOptions={async (inputValue) => {
                 const values = await searchEtablissements(inputValue);
                 return values.map((e) => ({
-                  label: e.nom,
+                  label: `${e.rslongue} (${e.ligneacheminement})`,
                   value: e.id,
                 }));
               }}
