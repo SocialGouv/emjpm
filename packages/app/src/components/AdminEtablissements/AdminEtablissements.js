@@ -13,7 +13,7 @@ const resultPerPage = 50;
 
 const RowItem = (props) => {
   const { item } = props;
-  const { id, nom, code_postal, ville, departement } = item;
+  const { id, rslongue, commune, lieuditbp, departement } = item;
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
@@ -25,13 +25,13 @@ const RowItem = (props) => {
                 <Text sx={descriptionStyle}>{id}</Text>
               </Flex>
               <Flex width="350px" flexDirection="column">
-                <Text sx={labelStyle}>Nom</Text>
-                <Text sx={descriptionStyle}>{nom}</Text>
+                <Text sx={labelStyle}>Raison sociale</Text>
+                <Text sx={descriptionStyle}>{rslongue}</Text>
               </Flex>
               <Flex width="300px" flexDirection="column">
-                <Text sx={labelStyle}>Ville</Text>
+                <Text sx={labelStyle}>Commune</Text>
                 <Text sx={descriptionStyle}>
-                  {ville} ({code_postal})
+                  {commune} ({lieuditbp})
                 </Text>
               </Flex>
               <Flex width="300px" flexDirection="column">

@@ -1,10 +1,15 @@
 exports.up = async function (knex) {
-  await knex.raw("TRUNCATE TABLE lb_user_etablissements;");
-  await knex.dropTable("etablissements");
+  return knex.schema.table("etablissements", (table) => {
+    table.dropColumn("nom");
+    table.dropColumn("adresse");
+    table.dropColumn("code_postal");
+    table.dropColumn("ville");
+    table.dropColumn("tel");
+    table.dropColumn("fax");
+    table.dropColumn("latitude");
+    table.dropColumn("longitude");
 
-  await knex.schema.createTable("etablissements", (table) => {
-    table.increments("id");
-    table.string("nofinesset");
+    table.renameColumn("id_finess", "nofinesset");
     table.string("nofinessej");
     table.string("rs");
     table.string("rslongue");
@@ -16,7 +21,6 @@ exports.up = async function (knex) {
     table.string("compvoie");
     table.string("lieuditbp");
     table.string("commune");
-    table.string("departement");
     table.string("libdepartement");
     table.string("ligneacheminement");
     table.string("telephone");
@@ -31,20 +35,12 @@ exports.up = async function (knex) {
     table.string("libsph");
     table.string("dateouv");
     table.string("dateautor");
-    table.string("datemaj");
     table.string("numuai");
-    table.string("nofinesset");
-    table.string("coordxet");
-    table.string("coordyet");
+    table.float("coordxet");
+    table.float("coordyet");
     table.string("sourcecoordet");
-    table.string("datemaj");
   });
 };
 
 exports.down = async function (knex) {
-  await knex.dropTable("etablissements");
-  await knex.schema.createTable("etablissements", (table) => {
-    table.increments("id");
-    // TODO
-  });
 };

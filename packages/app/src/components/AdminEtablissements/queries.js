@@ -10,13 +10,13 @@ export const ETABLISSEMENTS = gql`
     etablissements(
       limit: $limit
       offset: $offset
-      where: { nom: { _ilike: $search }, departement: { id: { _eq: $departementId } } }
+      where: { rslongue: { _ilike: $search }, departement: { id: { _eq: $departementId } } }
       order_by: { departement: { code: asc } }
     ) {
       id
-      nom
-      ville
-      code_postal
+      rslongue
+      lieuditbp
+      commune
       departement {
         id
         nom

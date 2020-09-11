@@ -1,44 +1,8 @@
 import gql from "graphql-tag";
 
-export const CREATE_ETABLISSEMENT = gql`
-  mutation create_etablissement(
-    $adresse: String!
-    $code_postal: String!
-    $departement_id: Int
-    $fax: String
-    $id_finess: String
-    $latitude: Float
-    $longitude: Float
-    $nom: String!
-    $tel: String
-    $ville: String!
-  ) {
-    insert_etablissements_one(
-      object: {
-        adresse: $adresse
-        code_postal: $code_postal
-        departement_id: $departement_id
-        fax: $fax
-        id_finess: $id_finess
-        latitude: $latitude
-        longitude: $longitude
-        nom: $nom
-        tel: $tel
-        ville: $ville
-      }
-    ) {
-      id
-      id_finess
-      adresse
-      ville
-      latitude
-      longitude
-      departement_id
-      nom
-      fax
-      code_postal
-      tel
-    }
+export const IMPORT_FINESS = gql`
+  mutation importFiness($url: String!) {
+    import_base_finess(url: $url)
   }
 `;
 
