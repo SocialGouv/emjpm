@@ -4779,6 +4779,9 @@
       value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
+    name: processus_states
+- table:
+    schema: public
     name: regions
   array_relationships:
   - name: departements
