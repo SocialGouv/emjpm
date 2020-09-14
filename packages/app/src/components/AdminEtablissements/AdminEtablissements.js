@@ -13,30 +13,26 @@ const resultPerPage = 50;
 
 const RowItem = (props) => {
   const { item } = props;
-  const { id, nom, code_postal, ville, departement } = item;
+  const { id, siret, rslongue, ligneacheminement, departement } = item;
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
         <Flex justifyContent="space-between">
           <Box>
             <Flex justifyContent="space-start">
-              <Flex width="50px" flexDirection="column">
-                <Text sx={labelStyle}>id</Text>
-                <Text sx={descriptionStyle}>{id}</Text>
+              <Flex width="150px" flexDirection="column">
+                <Text sx={labelStyle}>SIRET</Text>
+                <Text sx={descriptionStyle}>{siret}</Text>
               </Flex>
-              <Flex width="350px" flexDirection="column">
-                <Text sx={labelStyle}>Nom</Text>
-                <Text sx={descriptionStyle}>{nom}</Text>
+              <Flex width="500px" flexDirection="column">
+                <Text sx={labelStyle}>Raison sociale</Text>
+                <Text sx={descriptionStyle}>{rslongue}</Text>
               </Flex>
-              <Flex width="300px" flexDirection="column">
-                <Text sx={labelStyle}>Ville</Text>
+              <Flex width="400px" flexDirection="column">
+                <Text sx={labelStyle}>Commune</Text>
                 <Text sx={descriptionStyle}>
-                  {ville} ({code_postal})
+                  {ligneacheminement} ({departement.nom})
                 </Text>
-              </Flex>
-              <Flex width="300px" flexDirection="column">
-                <Text sx={labelStyle}>Département</Text>
-                <Text sx={descriptionStyle}>{departement.nom}</Text>
               </Flex>
             </Flex>
           </Box>
@@ -55,14 +51,14 @@ const RowItem = (props) => {
 
 export const AdminEtablissements = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, selectedDepartementId } = useContext(AdminFilterContext);
+  const { debouncedSearchText, selectedDepartementCode } = useContext(AdminFilterContext);
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
       search: debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-      departementId: selectedDepartementId ? selectedDepartementId : null,
+      departementCode: selectedDepartementCode ? selectedDepartementCode : null,
     },
   });
 

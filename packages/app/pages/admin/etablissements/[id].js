@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { EtablissementEdit } from "../../../src/components/Etablissement";
+import { EtablissementView } from "../../../src/components/Etablissement";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -18,7 +18,7 @@ export const EditEtablissementPage = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <EtablissementEdit id={id} />
+        <EtablissementView id={id} />
       </BoxWrapper>
     </LayoutAdmin>
   );

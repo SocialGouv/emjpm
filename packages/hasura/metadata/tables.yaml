@@ -3472,93 +3472,69 @@
     permission:
       check: {}
       columns:
-      - id
-      - id_finess
-      - nom
-      - adresse
-      - code_postal
-      - ville
-      - tel
-      - fax
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
+      - id
+      - nofinesset
+      - rslongue
+      - commune
       backend_only: false
   select_permissions:
   - role: direction
     permission:
       columns:
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
-      - nom
-      - tel
-      - ville
+      - nofinesset
+      - rslongue
+      - commune
       filter: {}
   - role: individuel
     permission:
       columns:
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
-      - nom
-      - tel
-      - ville
+      - nofinesset
+      - rslongue
+      - commune
       filter: {}
   - role: prepose
     permission:
       columns:
-      - id
-      - id_finess
-      - nom
-      - adresse
-      - code_postal
-      - ville
-      - tel
-      - fax
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
+      - id
+      - nofinesset
+      - rslongue
+      - commune
       filter: {}
   - role: service
     permission:
       columns:
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
-      - nom
-      - tel
-      - ville
+      - nofinesset
+      - rslongue
+      - commune
       filter: {}
   - role: ti
     permission:
       columns:
-      - latitude
-      - longitude
+      - coordxet
+      - coordyet
       - departement_id
       - id
-      - adresse
-      - code_postal
-      - fax
-      - id_finess
-      - nom
-      - tel
-      - ville
+      - nofinesset
+      - rslongue
+      - commune
       filter: {}
 - table:
     schema: public
@@ -4801,6 +4777,9 @@
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+- table:
+    schema: public
+    name: processus_states
 - table:
     schema: public
     name: regions
