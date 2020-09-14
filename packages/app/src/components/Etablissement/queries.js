@@ -1,5 +1,15 @@
 import gql from "graphql-tag";
 
+export const PROCESSUS_STATE = gql`
+  query processus_states($id: String!) {
+    processus_states_by_pk(id: $id) {
+      id
+      start_date
+      end_date
+    }
+  }
+`;
+
 export const ETABLISSEMENT = gql`
   query etablissement($id: Int!) {
     etablissements_by_pk(id: $id) {
