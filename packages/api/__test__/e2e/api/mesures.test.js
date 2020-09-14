@@ -233,7 +233,7 @@ describe("POST /api/editors/mesures", () => {
         etats: [
           {
             champ_mesure: "protection_bien",
-            date_changement_etat: "2020-01-05",
+            date_changement_etat: "2020-03-05",
             lieu_vie: "domicile",
             pays: "FR",
             nature_mesure: "curatelle_simple",
@@ -242,7 +242,7 @@ describe("POST /api/editors/mesures", () => {
           },
           {
             champ_mesure: "protection_bien",
-            date_changement_etat: "2020-01-06",
+            date_changement_etat: "2020-05-06",
             lieu_vie: "domicile",
             pays: "FR",
             nature_mesure: "curatelle_simple",
@@ -268,7 +268,7 @@ describe("POST /api/editors/mesures", () => {
         {
           champ_mesure: "protection_bien",
           code_postal: "89000",
-          date_changement_etat: "2020-01-05",
+          date_changement_etat: "2020-03-05",
           etablissement_siret: "",
           id: 1,
           lieu_vie: "domicile",
@@ -280,7 +280,7 @@ describe("POST /api/editors/mesures", () => {
         {
           champ_mesure: "protection_bien",
           code_postal: "89350",
-          date_changement_etat: "2020-01-06",
+          date_changement_etat: "2020-05-06",
           etablissement_siret: "",
           id: 2,
           lieu_vie: "domicile",
