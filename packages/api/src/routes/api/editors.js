@@ -60,12 +60,12 @@ router.post(
             if (
               lastEtat.date_changement_etat &&
               isBefore(
-                parseISO(`${value}T00:00:00.000Z`),
-                parseISO(`${lastEtat.date_changement_etat}T00:00:00.000Z`)
+                parseISO(`${lastEtat.date_changement_etat}T00:00:00.000Z`),
+                parseISO(`${value}T00:00:00.000Z`)
               )
             ) {
               throw new Error(
-                "date_nomination must be after or equivalent to date_changement_etat"
+                "date_nomination must be before or equivalent to date_changement_etat"
               );
             }
           }
