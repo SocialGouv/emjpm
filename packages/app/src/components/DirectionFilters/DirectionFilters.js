@@ -8,7 +8,9 @@ import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { GET_REGIONS } from "./queries";
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 
-export const DirectionFilters = () => {
+export const DirectionFilters = (props) => {
+  const { useNameFilter = false } = props;
+
   const { data: regionsData, loading, error } = useQuery(GET_REGIONS);
   const { filters, onFilterChange } = useContext(FiltersContextSerializable);
 
@@ -44,6 +46,19 @@ export const DirectionFilters = () => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>Affiner</Text>
+            {useNameFilter && (
+              <Box sx={BoxStyle}>
+                <Input
+                  value={filters.nom}
+                  spellCheck="false"
+                  autoComplete="false"
+                  onChange={(event) => onFilterChange({ nom: event.target.value })}
+                  name="nom"
+                  size="small"
+                  placeholder="nom"
+                />
+              </Box>
+            )}
             <Box sx={BoxStyle}>
               <Select
                 size="small"

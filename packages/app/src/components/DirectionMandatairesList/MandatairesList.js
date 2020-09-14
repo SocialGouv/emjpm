@@ -34,15 +34,21 @@ const MandatairesList = (props) => {
     setCurrentOffset(0);
   }, [filters]);
 
+  const variables = {
+    departement: filters.departement ? filters.departement.value : null,
+    discriminator: selectedType ? selectedType.value : null,
+    offset: currentOffset,
+    limit: RESULT_PER_PAGE,
+    order: selectedCapacity ? selectedCapacity.value : null,
+    region: filters.region ? filters.region.value : null,
+  };
+
+  if (filters.nom) {
+    variables.nom = `${filters.nom}%`;
+  }
+
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
-    variables: {
-      departement: filters.departement ? filters.departement.value : null,
-      discriminator: selectedType ? selectedType.value : null,
-      offset: currentOffset,
-      limit: RESULT_PER_PAGE,
-      order: selectedCapacity ? selectedCapacity.value : null,
-      region: filters.region ? filters.region.value : null,
-    },
+    variables,
   });
 
   if (loading) {
