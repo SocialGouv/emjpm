@@ -77,7 +77,7 @@
     "recharts": "^1.8.5",
     "styled-components": "^4.4.1",
     "theme-ui": "^0.3.1",
-    "xlsx": "^0.16.6",
+    "xlsx": "^0.16.7",
     "yup": "^0.28.5"
   },
   "devDependencies": {

@@ -53,7 +53,7 @@
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",
     "tmp": "^0.2.1",
-    "xlsx": "^0.16.6",
+    "xlsx": "^0.16.7",
     "yup": "^0.28.5"
   },
   "devDependencies": {
