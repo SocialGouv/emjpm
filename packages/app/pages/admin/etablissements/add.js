@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { EtablissementCreate } from "../../../src/components/Etablissement";
+import { EtablissementImport } from "../../../src/components/Etablissement";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -16,7 +16,7 @@ export const AddEtablissementPage = () => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <EtablissementCreate />
+        <EtablissementImport />
       </BoxWrapper>
     </LayoutAdmin>
   );

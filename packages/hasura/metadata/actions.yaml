@@ -12,6 +12,14 @@ actions:
   - role: individuel
   - role: prepose
   - role: service
+- name: import_base_finess
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/etablissements/import-finess'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: submit_enquete_reponse
   definition:
     kind: synchronous
@@ -56,4 +64,5 @@ custom_types:
   - name: EnqueteReponseSubmitted
   - name: EnquetePreposeReponse
   - name: EnqueteReponseStatus
+  - name: ImportFinessOutput
   scalars: []

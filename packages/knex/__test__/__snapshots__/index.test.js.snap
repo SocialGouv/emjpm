@@ -2512,15 +2512,81 @@ Object {
 
 exports[`etablissements table schema 1`] = `
 Object {
-  "adresse": Object {
+  "categagretab": Object {
     "defaultValue": null,
     "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
-  "code_postal": Object {
+  "categetab": Object {
     "defaultValue": null,
-    "maxLength": 10,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "codeape": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "codemft": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "codesph": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "commune": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "compldistrib": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "complrs": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "compvoie": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "coordxet": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "coordyet": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "real",
+  },
+  "dateautor": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "dateouv": Object {
+    "defaultValue": null,
+    "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
@@ -2530,51 +2596,123 @@ Object {
     "nullable": true,
     "type": "integer",
   },
-  "fax": Object {
-    "defaultValue": null,
-    "maxLength": 15,
-    "nullable": true,
-    "type": "character varying",
-  },
   "id": Object {
     "defaultValue": "nextval('etablissements_id_seq'::regclass)",
     "maxLength": null,
     "nullable": false,
     "type": "integer",
   },
-  "id_finess": Object {
+  "libcategagretab": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "libcategetab": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "libdepartement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "libmft": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "libsph": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "lieuditbp": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "ligneacheminement": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "nofinessej": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "nofinesset": Object {
     "defaultValue": null,
     "maxLength": 20,
     "nullable": true,
     "type": "character varying",
   },
-  "latitude": Object {
+  "numuai": Object {
     "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "real",
-  },
-  "longitude": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "real",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 100,
-    "nullable": false,
-    "type": "character varying",
-  },
-  "tel": Object {
-    "defaultValue": null,
-    "maxLength": 15,
+    "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
-  "ville": Object {
+  "numvoie": Object {
     "defaultValue": null,
-    "maxLength": 100,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "rs": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "rslongue": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "siret": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "sourcecoordet": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "telecopie": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "telephone": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "typvoie": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "voie": Object {
+    "defaultValue": null,
+    "maxLength": 255,
     "nullable": true,
     "type": "character varying",
   },
@@ -3359,6 +3497,29 @@ Object {
 }
 `;
 
+exports[`processus_states table schema 1`] = `
+Object {
+  "end_date": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": false,
+    "type": "character varying",
+  },
+  "start_date": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+}
+`;
+
 exports[`regions table schema 1`] = `
 Object {
   "id": Object {
@@ -3815,6 +3976,7 @@ Array [
   "mesure_etat",
   "mesure_ressources",
   "mesures",
+  "processus_states",
   "regions",
   "role",
   "satisfaction_campaign_answers",
