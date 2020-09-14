@@ -8,9 +8,11 @@ export const GET_MANDATAIRES = gql`
     $region: Int
     $discriminator: String
     $order: order_by
+    $nom: String
   ) {
     count: view_mesure_gestionnaire_aggregate(
       where: {
+        mandataire: { user: { nom: { _ilike: $nom } } }
         discriminator: { _eq: $discriminator }
         departement: { id_region: { _eq: $region }, id: { _eq: $departement } }
       }
@@ -23,6 +25,7 @@ export const GET_MANDATAIRES = gql`
       limit: $limit
       offset: $offset
       where: {
+        mandataire: { user: { nom: { _ilike: $nom } } }
         discriminator: { _eq: $discriminator }
         departement: { id_region: { _eq: $region }, id: { _eq: $departement } }
       }
