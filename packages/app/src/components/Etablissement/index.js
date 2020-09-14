@@ -1,2 +1,2 @@
-export { EtablissementEdit } from "./EtablissementEdit";
-export { EtablissementCreate } from "./EtablissementCreate";
+export { EtablissementView } from "./EtablissementView";
+export { EtablissementImport } from "./EtablissementImport";

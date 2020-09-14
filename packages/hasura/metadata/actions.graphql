@@ -8,6 +8,13 @@ type Query {
 
 
 type Mutation {
+  import_base_finess (
+    url: String!
+  ): ImportFinessOutput
+}
+
+
+type Mutation {
   submit_enquete_reponse (
     enqueteId: Int!
   ): EnqueteReponseSubmitted
@@ -90,5 +97,9 @@ type EnqueteReponseStatus {
   enquete_reponse_validation_status : json!
   mandataire : json
   service : json
+}
+
+type ImportFinessOutput {
+  data : String!
 }
 

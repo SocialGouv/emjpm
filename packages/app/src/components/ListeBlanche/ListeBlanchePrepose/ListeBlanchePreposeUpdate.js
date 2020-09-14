@@ -32,7 +32,7 @@ export const ListeBlanchePreposeUpdate = (props) => {
         const { data } = await apolloClient.query({
           query: ETABLISSEMENTS,
           variables: {
-            input: `${value}%`,
+            input: `%${value}%`,
           },
         });
         return data ? data.etablissements : [];
