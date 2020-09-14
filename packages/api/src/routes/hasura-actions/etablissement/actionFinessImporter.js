@@ -15,8 +15,11 @@ async function importFinessFile(url) {
 
   const result = await fetch(url);
 
+  const inputStream = result.body;
+  inputStream.setEncoding("latin1");
+
   const rl = readline.createInterface({
-    input: result.body,
+    input: inputStream,
     crlfDelay: Infinity,
   });
 
