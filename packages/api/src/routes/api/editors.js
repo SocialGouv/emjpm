@@ -91,11 +91,18 @@ router.post(
 
     body("etats.*").custom((value) => {
       if (
-        (value.lieu_vie === "etablissement" ||
-          value.lieu_vie === "etablissement_conservation_domicile") &&
-        !value.type_etablissement
+        value.lieu_vie === "etablissement" ||
+        value.lieu_vie === "etablissement_conservation_domicile"
       ) {
-        throw new Error("type_etablissement is required");
+        if (!value.type_etablissement) {
+          throw new Error("type_etablissement is required");
+        } else if (
+          !MESURE_PROTECTION.TYPE_ETABLISSEMENT.keys.includes(
+            value.type_etablissement
+          )
+        ) {
+          throw new Error("type_etablissement is not valid");
+        }
       }
       return true;
     }),
