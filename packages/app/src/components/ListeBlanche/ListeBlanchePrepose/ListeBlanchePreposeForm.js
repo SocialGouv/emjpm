@@ -30,7 +30,7 @@ export const ListeBlanchePreposeForm = (props) => {
       ? data.lb_user_etablissements.map((e) => {
           return {
             id: e.etablissement.id,
-            nom: e.etablissement.nom,
+            rslongue: e.etablissement.rslongue,
             etablissement_rattachement: e.etablissement_rattachement,
           };
         })
@@ -59,7 +59,7 @@ export const ListeBlanchePreposeForm = (props) => {
   const etablissementIds = formik.values.etablissements.map((e) => e.id);
   const etablissementOptions = formik.values.etablissements.map((e) => {
     return {
-      label: e.nom,
+      label: e.rslongue,
       value: `${e.id}`,
       checked: e.etablissement_rattachement === true,
       disabled: false, // !canModifyAgrement(user, d.id),
