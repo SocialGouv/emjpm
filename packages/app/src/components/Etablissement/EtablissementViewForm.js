@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Flex, Text, Card } from "rebass";
+import { Box, Card, Flex, Text } from "rebass";
 
 const labelStyle = {
   color: "mediumGray",
@@ -66,7 +66,7 @@ export const EtablissementViewForm = (props) => {
   return (
     <Card>
       <Box mb={2}>
-        <LabelValue label="id" value={id}></LabelValue>
+        <LabelValue label="id" value={id} />
         <LabelValue value={siret} label="SIRET" />
         <LabelValue value={nofinesset} label="FINESS établissement" />
         <LabelValue value={nofinessej} label="FINESS juridique" />
