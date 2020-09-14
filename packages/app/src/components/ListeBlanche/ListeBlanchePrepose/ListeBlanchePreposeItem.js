@@ -36,7 +36,7 @@ export const ListeBlanchePreposeItem = (props) => {
             <Text sx={descriptionStyle}>
               {etablissements
                 .map((e) => {
-                  let str = e.etablissement.nom;
+                  let str = e.etablissement.rslongue;
                   if (e.etablissement.departement) {
                     str += ` (${e.etablissement.departement.code})`;
                   }
