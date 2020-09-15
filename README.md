@@ -291,7 +291,7 @@ See https://github.com/SocialGouv/emjpm/deployments
 - **Pre Prod** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
 - **Prod** : https://emjpm.fabrique.social.gouv.fr
 
-### One click tag release !
+### One click tag release !!
 
 [On a successful `tag` branch pipeline click on trigger the `Put to production` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines?scope=tags&page=1)
 
