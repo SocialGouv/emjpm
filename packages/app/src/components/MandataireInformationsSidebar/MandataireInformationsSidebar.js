@@ -7,11 +7,12 @@ import { UserContext } from "../UserContext";
 import { CardStyle, description, icon, partTitle, SidebarStyle, title } from "./style";
 
 const MandataireInformationsSidebar = (props) => {
-  const {
-    nom,
-    prenom,
-    mandataire: { dispo_max, mesures_en_cours, mesures_en_attente },
-  } = useContext(UserContext);
+  const user = useContext(UserContext);
+  const { nom, prenom, mandataire } = user;
+  if (!mandataire) {
+    console.log(`[MandataireInformationsSidebar] user ${JSON.stringify(user, undefined, 2)}`);
+  }
+  const { dispo_max, mesures_en_cours, mesures_en_attente } = mandataire;
   return (
     <Box sx={SidebarStyle} {...props}>
       <Flex alignItems="center" justifyContent="space-between" mb="3">
