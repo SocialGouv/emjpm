@@ -9,7 +9,7 @@ const ExtractJWT = passportJWT.ExtractJwt;
 
 const authUserJwtStrategy = new JWTStrategy(
   {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    jwtFromRequest: ExtractJWT.fromBodyField("access_token"),
     secretOrKey: jwtConfig.publicKey || "emjpm-jwtkey",
   },
   function (jwtPayload, cb) {

@@ -3,8 +3,13 @@ const { ServiceMember } = require("../../models/ServiceMember");
 
 const getAntennes = async (req, res) => {
   const {
-    user: { user_id },
-  } = req;
+    locals: {
+      oauth: { token },
+    },
+  } = res;
+  const {
+    user: { id: user_id },
+  } = token;
 
   const antennes = await ServiceAntenne.query().whereIn(
     "service_id",

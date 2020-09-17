@@ -365,21 +365,18 @@
     permission:
       columns:
       - id
-      - api_token
       - name
       filter: {}
   - role: prepose
     permission:
       columns:
       - id
-      - api_token
       - name
       filter: {}
   - role: service
     permission:
       columns:
       - id
-      - api_token
       - name
       filter: {}
 - table:
