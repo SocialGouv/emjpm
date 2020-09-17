@@ -207,7 +207,7 @@ export const MANDATAIRE_USERS = gql`
             etablissement_rattachement
             etablissement {
               id
-              nom
+              rslongue
               departement {
                 id
                 id_region
