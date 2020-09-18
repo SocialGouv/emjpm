@@ -40,7 +40,7 @@ function sanitizeMesureProperties(mesure) {
               ? format(etat.date_changement_etat, "yyyy-MM-dd")
               : etat.date_changement_etat,
             nature_mesure: etat.nature_mesure,
-            champ_mesure: etat.champ_protection,
+            champ_mesure: etat.champ_mesure,
             lieu_vie: etat.lieu_vie,
             code_postal: etat.code_postal,
             ville: etat.ville,

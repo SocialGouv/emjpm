@@ -3190,7 +3190,7 @@ Object {
 
 exports[`mesure_etat table schema 1`] = `
 Object {
-  "champ_protection": Object {
+  "champ_mesure": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,

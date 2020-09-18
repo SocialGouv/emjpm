@@ -131,7 +131,7 @@ const mesureUpdate = async (req, res) => {
         }
       }
 
-      mesureToUpdate.champ_protection = lastEtat.champ_protection;
+      mesureToUpdate.champ_mesure = lastEtat.champ_mesure;
       mesureToUpdate.code_postal = lastEtat.code_postal;
       mesureToUpdate.lieu_vie = lastEtat.lieu_vie;
       mesureToUpdate.ville = lastEtat.ville;

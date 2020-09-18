@@ -180,7 +180,7 @@ const mesureCreate = async (req, res) => {
               mesure_id: mesure.id,
               date_changement_etat: etat.date_changement_etat,
               nature_mesure: etat.nature_mesure,
-              champ_protection: etat.champ_mesure,
+              champ_mesure: etat.champ_mesure,
               lieu_vie: etat.lieu_vie || "",
               code_postal: etat.code_postal || "",
               ville: etat.ville || "",
