@@ -2,93 +2,58 @@ const { validationResult } = require("express-validator");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 const { transaction } = require("objection");
 
-const { User } = require("../../models/User");
 const { Mesure } = require("../../models/Mesure");
 const { MesureEtat } = require("../../models/MesureEtat");
-const { Tis } = require("../../models/Tis");
 const { MesureRessources } = require("../../models/MesureRessources");
-const { ServiceAntenne } = require("../../models/ServiceAntenne");
-const { ServiceMember } = require("../../models/ServiceMember");
-const getGeoDatas = require("../../services/getGeoDatas");
-const getDepartement = require("../../services/getDepartement");
+
 const { sanitizeMesureProperties } = require("../../utils/mesure");
-
-async function antenneIdIsValid(antenneId, userId) {
-  const antennes = await ServiceAntenne.query()
-    .select("id")
-    .whereIn(
-      "service_id",
-      ServiceMember.query().select("service_id").where("user_id", userId)
-    );
-  if (!antennes && !antennes.length) {
-    return false;
-  }
-  return antennes.map(({ id }) => id).includes(antenneId);
-}
-
-async function getTi(siret) {
-  const tis = await Tis.query().where("siret", siret).first();
-  return tis;
-}
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
     return res.status(422).json(errors);
   }
 
-  const {
-    body,
-    user: { user_id },
-  } = req;
+  const antenneId = req.antenne_id;
+  // const user = req.user;
+  const serviceOrMandataire = req.serviceOrMandataire;
+  const ti = req.ti;
+  const lastEtat = req.lastEtat;
+  const departement = req.departement;
+  const longitude = req.longitude;
+  const latitude = req.latitude;
+  const type = req.type;
 
-  let user;
-  let serviceOrMandataire;
-  let mesure;
+  const { body } = req;
 
-  try {
-    user = await User.query().findById(user_id);
-  } catch (error) {
-    return res
-      .status(422)
-      .json({ errors: [{ value: user_id, msg: "user not found" }] });
-  }
-
-  if (body.antenne_id) {
-    const isValid = await antenneIdIsValid(body.antenne_id, user_id);
-    if (!isValid) {
-      return res.status(400).json({
-        errors: [
-          {
-            value: body.antenne_id,
-            param: "antenne_id",
-            msg: `antenne_id does not match with your service.`,
-          },
-        ],
-      });
-    }
-  }
-
-  const ti = await getTi(body.tribunal_siret);
-  if (!ti) {
-    return res.status(400).json({
-      errors: [
-        {
-          param: "siret",
-          value: body.tribunal_siret,
-          msg: "siret is not valid",
-        },
-      ],
-    });
-  }
-
-  const type = user.type === "service" ? "service" : "mandataire";
-
-  try {
-    serviceOrMandataire = await user.$relatedQuery(type);
-  } catch (error) {
-    return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
-  }
+  const mesureToCreate = {
+    annee_naissance: body.annee_naissance,
+    antenne_id: antenneId,
+    cabinet: body.tribunal_cabinet,
+    cause_sortie: body.cause_sortie,
+    champ_mesure: lastEtat.champ_mesure,
+    civilite: body.civilite,
+    code_postal: lastEtat.code_postal,
+    date_fin_mesure: body.date_fin_mesure,
+    date_nomination: body.date_nomination,
+    department_id: departement.id,
+    latitude,
+    longitude,
+    lieu_vie: lastEtat.lieu_vie,
+    [`${type}_id`]: serviceOrMandataire.id,
+    ti_id: ti.id,
+    ville: lastEtat.ville,
+    date_premier_mesure: body.date_premier_mesure,
+    date_protection_en_cours: body.date_protection_en_cours,
+    status: MESURE_PROTECTION_STATUS.en_cours,
+    numero_dossier: body.numero_dossier,
+    numero_rg: body.numero_rg,
+    pays: lastEtat.pays,
+    type_etablissement: lastEtat.type_etablissement,
+    resultat_revision: body.resultat_revision,
+    nature_mesure: lastEtat.nature_mesure,
+  };
 
   try {
     const createdMesure = await transaction(
@@ -96,62 +61,7 @@ const mesureCreate = async (req, res) => {
       MesureEtat,
       MesureRessources,
       async (Mesure, MesureEtat, MesureRessources) => {
-        const lastEtat = body.etats ? body.etats[body.etats.length - 1] : null;
-
-        let departementId = null;
-        let longitude = null;
-        let latitude = null;
-
-        if (lastEtat && lastEtat.code_postal) {
-          const departement = await getDepartement(lastEtat.code_postal);
-          if (departement) {
-            departementId = departement.id;
-
-            const geoloc = await getGeoDatas(
-              lastEtat.code_postal,
-              lastEtat.ville
-            );
-
-            if (geoloc) {
-              longitude = geoloc.longitude;
-              latitude = geoloc.latitude;
-            }
-          }
-        }
-
-        const mesureToCreate = {
-          annee_naissance: body.annee_naissance,
-          antenne_id: body.antenne_id || null,
-          cabinet: body.tribunal_cabinet,
-          cause_sortie: body.cause_sortie,
-          champ_mesure: lastEtat ? lastEtat.champ_mesure : null,
-          civilite: body.civilite,
-          code_postal: lastEtat ? lastEtat.code_postal : null,
-          date_fin_mesure: body.date_fin_mesure,
-          date_nomination: body.date_nomination,
-          department_id: departementId,
-          etablissement: null,
-          etablissement_id: null,
-          judgment_date: null,
-          latitude,
-          longitude,
-          lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
-          [`${type}_id`]: serviceOrMandataire.id,
-          ti_id: ti.id,
-          ville: lastEtat ? lastEtat.ville : null,
-          date_premier_mesure: body.date_premier_mesure,
-          date_protection_en_cours: body.date_protection_en_cours,
-          status: MESURE_PROTECTION_STATUS.en_cours,
-          numero_dossier: body.numero_dossier,
-          numero_rg: body.numero_rg,
-          pays: lastEtat ? lastEtat.pays : null,
-          magistrat_id: null,
-          type_etablissement: lastEtat ? lastEtat.type_etablissement : null,
-          resultat_revision: body.resultat_revision,
-          nature_mesure: lastEtat ? lastEtat.nature_mesure : null,
-        };
-
-        mesure = await Mesure.query().insert(mesureToCreate);
+        const mesure = await Mesure.query().insert(mesureToCreate);
 
         mesure.ressources = [];
         if (body.ressources) {
@@ -178,10 +88,10 @@ const mesureCreate = async (req, res) => {
               date_changement_etat: etat.date_changement_etat,
               nature_mesure: etat.nature_mesure,
               champ_mesure: etat.champ_mesure,
-              lieu_vie: etat.lieu_vie || "",
-              code_postal: etat.code_postal || "",
-              ville: etat.ville || "",
-              pays: etat.pays || "",
+              lieu_vie: etat.lieu_vie,
+              code_postal: etat.code_postal,
+              ville: etat.ville,
+              pays: etat.pays,
               type_etablissement: etat.type_etablissement,
               etablissement_siret: etat.etablissement_siret || "",
             });
