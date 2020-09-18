@@ -44,7 +44,14 @@ const Authorize = (props) => {
           <input type="hidden" name="access_token" value={token} />
           <input type="hidden" name="state" value={state} />
           <Button type="submit">{`Authoriser la connexion avec l'éditeur`}</Button>
-          {/* <Button onClick={() => {}} type="button" ml="2" variant="outline">{`refuser`}</Button> */}
+          <Button
+            onClick={() => {
+              document.location.href = `${redirectUrl}?error_reason=user_denied&error=access_denied&error_description=Permissions+error`;
+            }}
+            type="button"
+            ml="2"
+            variant="outline"
+          >{`refuser`}</Button>
         </form>
         {/* {errorMessage && (
           <Text mt="3" color="red">

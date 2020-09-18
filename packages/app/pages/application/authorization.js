@@ -53,7 +53,7 @@ const AuthorizationPage = (props) => {
 AuthorizationPage.getInitialProps = async ({ token, query }) => {
   return {
     editorId: query["client_id"],
-    redirectUrl: query["redirect_url"],
+    redirectUrl: query["redirect_uri"],
     state: query["state"] || Math.random().toString(36).slice(2),
     token,
   };
