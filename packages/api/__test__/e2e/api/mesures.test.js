@@ -306,19 +306,6 @@ describe("POST /api/editors/mesures", () => {
   });
 });
 
-describe("PUT /api/editors/mesures", () => {
-  test("it returns 200", async () => {
-    // TODO(plaunay): move payload to proper fixture
-    const response = await request(server)
-      .put(`/api/editors/mesures/${global.mesure.id}`)
-      .set("Accept", "application/json")
-      .set({ Authorization: `Bearer ${global.token}` })
-      .send({ annee_naissance: "1983" });
-
-    expect(response.status).toBe(200);
-  });
-});
-
 describe("POST /api/editors/mesures/batch", () => {
   test("it returns 201", async () => {
     // TODO(plaunay): move payload to proper fixture
