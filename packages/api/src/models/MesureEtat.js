@@ -21,7 +21,7 @@ class MesureEtat extends Model {
         mesure_id: { type: "integer" },
         date_changement_etat: { type: "date" },
         nature_mesure: { type: "string" },
-        champ_protection: { type: "string" },
+        champ_mesure: { type: "string" },
         lieu_vie: { type: "string" },
         code_postal: { type: "string" },
         ville: { type: "string" },
