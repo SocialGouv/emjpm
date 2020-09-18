@@ -26,7 +26,7 @@ async function antenneIdIsValid(antenneId, userId) {
   return antennes.map(({ id }) => id).includes(antenneId);
 }
 
-async function tribunalSiretIsValid(siret) {
+async function getTi(siret) {
   const tis = await Tis.query().where("siret", siret).first();
   return !!tis;
 }
@@ -77,19 +77,23 @@ const mesureUpdate = async (req, res) => {
     return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
   }
 
-  try {
-    mesure = await Mesure.query()
-      .where({ [`${type}_id`]: serviceOrMandataire.id })
-      .findById(id);
-  } catch (error) {
-    return res.status(422).json({ errors: [{ msg: "mesure not found" }] });
+  mesure = await Mesure.query()
+    .where({ [`${type}_id`]: serviceOrMandataire.id })
+    .findById(id);
+
+  if (!mesure) {
+    return res.status(422).json({
+      errors: [
+        {
+          msg: `mesure with id = ${id} not found with ${type}_id = ${serviceOrMandataire.id}`,
+        },
+      ],
+    });
   }
 
-  if (body.tribunal_siret) {
-    const isValid = await tribunalSiretIsValid(body.tribunal_siret);
-    if (!isValid) {
-      return res.status(400).json({ errors: [{ msg: "siret is not valid" }] });
-    }
+  const ti = await getTi(body.tribunal_siret);
+  if (!ti) {
+    return res.status(400).json({ errors: [{ msg: "siret is not valid" }] });
   }
 
   try {
@@ -107,9 +111,11 @@ const mesureUpdate = async (req, res) => {
       }
     }
 
+    delete body.tribunal_siret;
+
     const mesureToUpdate = {
       ...body,
-      ti_id: mesure.ti_id,
+      ti_id: ti.id,
       [`${type}_id`]: serviceOrMandataire.id,
     };
 
@@ -139,12 +145,13 @@ const mesureUpdate = async (req, res) => {
       mesureToUpdate.type_etablissement = lastEtat.type_etablissement;
     }
 
-    await Mesure.query().where({ id: mesure.id }).patch(mesureToUpdate);
+    await Mesure.query().where({ id: mesure.id }).update(mesureToUpdate);
+
     mesure = await Mesure.query().where({ id }).first();
     mesure.etats = await MesureEtat.query().where({ mesure_id: id });
   } catch (error) {
     return res.status(422).json({
-      errors: [{ msg: "oups, something goes wrong. please contact support." }],
+      errors: [{ msg: error.message }],
     });
   }
 

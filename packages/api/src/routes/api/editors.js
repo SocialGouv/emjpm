@@ -142,7 +142,7 @@ router.put(
     body("date_fin_mesure").optional().isDate().toDate(),
     body("date_premier_mesure").optional().isDate().toDate(),
     body("date_protection_en_cours").optional().isDate().toDate(),
-    body("tribunal_siret").optional().trim().escape(),
+    body("tribunal_siret").not().isEmpty().trim().escape(),
     body("antenne_id").optional().toInt(10),
     body("cause_sortie").optional().isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
     body("resultat_revision")

@@ -26,9 +26,9 @@ async function antenneIdIsValid(antenneId, userId) {
   return antennes.map(({ id }) => id).includes(antenneId);
 }
 
-async function tribunalSiretIsValid(siret) {
+async function getTi(siret) {
   const tis = await Tis.query().where("siret", siret).first();
-  return !!tis;
+  return tis;
 }
 
 const mesureCreate = async (req, res) => {
@@ -45,7 +45,6 @@ const mesureCreate = async (req, res) => {
   let user;
   let serviceOrMandataire;
   let mesure;
-  let tis;
 
   try {
     user = await User.query().findById(user_id);
@@ -70,19 +69,17 @@ const mesureCreate = async (req, res) => {
     }
   }
 
-  if (body.tribunal_siret) {
-    const isValid = await tribunalSiretIsValid(body.tribunal_siret);
-    if (!isValid) {
-      return res.status(400).json({
-        errors: [
-          {
-            param: "siret",
-            value: body.tribunal_siret,
-            msg: "siret is not valid",
-          },
-        ],
-      });
-    }
+  const ti = await getTi(body.tribunal_siret);
+  if (!ti) {
+    return res.status(400).json({
+      errors: [
+        {
+          param: "siret",
+          value: body.tribunal_siret,
+          msg: "siret is not valid",
+        },
+      ],
+    });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";
@@ -140,7 +137,7 @@ const mesureCreate = async (req, res) => {
           longitude,
           lieu_vie: lastEtat ? lastEtat.lieu_vie : null,
           [`${type}_id`]: serviceOrMandataire.id,
-          ti_id: tis ? tis.id : null,
+          ti_id: ti.id,
           ville: lastEtat ? lastEtat.ville : null,
           date_premier_mesure: body.date_premier_mesure,
           date_protection_en_cours: body.date_protection_en_cours,
