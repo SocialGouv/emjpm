@@ -21,23 +21,36 @@ beforeAll(async () => {
   const [user] = await knex("users");
   const [mesure] = await knex("mesures");
 
-  await request(server).post("/api/auth/login").send({
+  const loginRes = await request(server).post("/api/auth/login").send({
     username: user.username,
     password: "johnson123",
   });
 
-  const res = await request(server).post("/api/oauth/authorize").send({
-    userId: user.id,
-    editorId: editor.id,
-    editorToken: editor.api_token,
-    redirectUrl: "http://localhost:3001",
-  });
+  const loginToken = await loginRes.body.token;
 
-  const {
-    body: { publicToken },
-  } = res;
+  await request(server)
+    .post("/api/oauth/authorize")
+    .set({ Authorization: `Bearer ${loginToken}` })
+    .set("Accept", "application/json")
+    .send({
+      client_id: editor.id,
+      redirect_uri: "http://localhost:3001",
+      access_token: loginToken,
+      state: "api-test",
+      response_type: "code",
+    });
 
-  global.token = publicToken;
+  const authorizationCode = await knex("authorization_codes").first();
+
+  const res = await request(server)
+    .post("/api/oauth/token")
+    .send(`client_id=${authorizationCode.client_id}`)
+    .send(`redirect_uri=${authorizationCode.redirect_uri}`)
+    .send(`code=${authorizationCode.code}`)
+    .send(`client_secret=test-token`)
+    .send(`grant_type=authorization_code`);
+
+  global.token = res.body.access_token;
   global.user = user;
   global.ti = ti;
   global.mesure = mesure;
@@ -60,7 +73,6 @@ describe("GET /api/editors/mesures", () => {
       .get("/api/editors/mesures")
       .set("Accept", "application/json")
       .set({ Authorization: `Bearer ${global.token}` });
-
     expect(response.status).toBe(200);
   });
 });

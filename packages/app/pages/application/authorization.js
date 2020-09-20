@@ -8,7 +8,8 @@ import { LayoutPublic } from "../../src/components/Layout";
 import { withAuthSync } from "../../src/util/auth";
 
 const AuthorizationPage = (props) => {
-  const { token, editorId, editorSecret, redirectUrl } = props;
+  const { token, state, editorId, redirectUrl } = props;
+
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -39,7 +40,7 @@ const AuthorizationPage = (props) => {
           }}
         >
           {token ? (
-            <Authorize editorId={editorId} editorSecret={editorSecret} redirectUrl={redirectUrl} />
+            <Authorize state={state} token={token} editorId={editorId} redirectUrl={redirectUrl} />
           ) : (
             <AuthorizationLogin />
           )}
@@ -51,9 +52,9 @@ const AuthorizationPage = (props) => {
 
 AuthorizationPage.getInitialProps = async ({ token, query }) => {
   return {
-    editorId: query["editor_id"],
-    editorSecret: query["editor_secret"],
-    redirectUrl: query["redirect_url"],
+    editorId: query["client_id"],
+    redirectUrl: query["redirect_uri"],
+    state: query["state"] || Math.random().toString(36).slice(2),
     token,
   };
 };
