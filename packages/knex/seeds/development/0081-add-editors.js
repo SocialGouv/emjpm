@@ -3,7 +3,11 @@ exports.seed = function (knex) {
     .del()
     .then(function () {
       return knex("editors").insert([
-        { name: "test-editor", api_token: "test-token" },
+        {
+          name: "test-editor",
+          api_token: "test-token",
+          redirect_uris: JSON.stringify(["http://localhost:3001"]),
+        },
       ]);
     });
 };

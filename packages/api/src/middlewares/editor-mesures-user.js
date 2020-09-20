@@ -2,8 +2,13 @@ const { User } = require("../models/User");
 
 const editorMesureUserMiddleWare = async (req, res, next) => {
   const {
-    user: { user_id },
-  } = req;
+    locals: {
+      oauth: { token },
+    },
+  } = res;
+  const {
+    user: { id: user_id },
+  } = token;
 
   let user;
   let serviceOrMandataire;

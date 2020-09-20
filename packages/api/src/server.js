@@ -3,6 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const expressPinoLogger = require("express-pino-logger");
+const rateLimit = require("express-rate-limit");
 
 const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
@@ -10,9 +11,8 @@ const apiLog = require("./middlewares/apiLog");
 const errorHandler = require("./middlewares/error-handler");
 const pkg = require("../package.json");
 const authRoutes = require("./routes/api/auth");
-const oauth2Routes = require("./routes/api/oauth2");
+const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
-const rateLimit = require("express-rate-limit");
 
 const corsOptions = {
   credentials: true,
@@ -39,12 +39,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
+const oauthServer = require("./oauth/server.js");
+
 // routes
 app.use("/api/auth", authRoutes);
-app.use("/api/oauth", oauth2Routes);
+app.use("/api/oauth", oauthRoutes);
+
 app.use(
   "/api/editors",
-  [apiLimiter, apiLog, passport.authenticate("editor-jwt", { session: false })],
+  [apiLimiter, apiLog, oauthServer.authenticate()],
   editorsRoutes
 );
 
