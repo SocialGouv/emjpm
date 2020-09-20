@@ -17,10 +17,6 @@ router.post(
 
 router.post(
   "/token",
-  (req, res, next) => {
-    console.log("Token");
-    next();
-  },
   oauthServer.token({
     requireClientAuthentication: {
       authorization_code: true,

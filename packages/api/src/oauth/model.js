@@ -39,10 +39,16 @@ module.exports = {
       access_token: token,
     });
 
+    if (!accessTokenResult) {
+      return null;
+    }
+
     return {
       accessToken: accessTokenResult.access_token,
-      accessTokenExpiresAt: accessTokenResult.expired_on,
-      refreshTokenExpiresAt: accessTokenResult.refresh_token_expires_on,
+      accessTokenExpiresAt: new Date(accessTokenResult.expired_on),
+      refreshTokenExpiresAt: new Date(
+        accessTokenResult.refresh_token_expires_on
+      ),
       refreshToken: accessTokenResult.refresh_token,
       user: { id: accessTokenResult.user_id },
       client: { id: accessTokenResult.editor_id },
@@ -52,6 +58,9 @@ module.exports = {
     const accessToken = await AccessToken.query().findOne({
       refresh_token: token,
     });
+    if (!accessToken) {
+      return null;
+    }
     return accessToken;
   },
   revokeToken: async (token) => {
@@ -85,7 +94,7 @@ module.exports = {
       client: { id: data.client_id },
       user: { id: data.user_id },
       redirectUri: data.redirect_uri,
-      expiresAt: data.expires_at,
+      expiresAt: new Date(data.expires_at),
     };
   },
   revokeAuthorizationCode: async (authorizationCode) => {
