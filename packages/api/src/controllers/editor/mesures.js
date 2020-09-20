@@ -5,9 +5,16 @@ const { sanitizeMesureProperties } = require("../../utils/mesure");
 const mesures = async (req, res) => {
   const {
     query: { status },
-    user: { user_id },
   } = req;
+  const {
+    locals: {
+      oauth: { token },
+    },
+  } = res;
 
+  const {
+    user: { id: user_id },
+  } = token;
   const user = await User.query().where("id", user_id).first();
 
   let mesures = null;

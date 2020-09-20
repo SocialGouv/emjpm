@@ -12,10 +12,17 @@ const { ServiceAntenne } = require("../../models/ServiceAntenne");
 const { ServiceMember } = require("../../models/ServiceMember");
 
 const mesureBatch = async (req, res) => {
+  const { body } = req;
+
   const {
-    body,
-    user: { user_id },
-  } = req;
+    locals: {
+      oauth: { token },
+    },
+  } = res;
+  const {
+    user: { id: user_id },
+  } = token;
+
   let user;
   let serviceOrMandataire;
 
