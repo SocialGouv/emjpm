@@ -8,8 +8,16 @@ const { MesureRessources } = require("../../models/MesureRessources");
 const deleteById = async (req, res) => {
   const {
     params: { id },
-    user: { user_id },
   } = req;
+
+  const {
+    locals: {
+      oauth: { token },
+    },
+  } = res;
+  const {
+    user: { id: user_id },
+  } = token;
 
   let user;
   let serviceOrMandataire;
@@ -47,8 +55,13 @@ const deleteById = async (req, res) => {
 
 const deleteAll = async (req, res) => {
   const {
-    user: { user_id },
-  } = req;
+    locals: {
+      oauth: { token },
+    },
+  } = res;
+  const {
+    user: { id: user_id },
+  } = token;
 
   let user;
   let serviceOrMandataire;

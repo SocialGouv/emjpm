@@ -38,6 +38,18 @@ Object {
     "nullable": false,
     "type": "integer",
   },
+  "refresh_token": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
+  "refresh_token_expires_on": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
   "user_id": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -294,6 +306,12 @@ Object {
     "maxLength": 255,
     "nullable": false,
     "type": "character varying",
+  },
+  "redirect_uris": Object {
+    "defaultValue": "'[]'::jsonb",
+    "maxLength": null,
+    "nullable": true,
+    "type": "jsonb",
   },
 }
 `;
@@ -3941,6 +3959,7 @@ exports[`should list all tables 1`] = `
 Array [
   "access_tokens",
   "api_logs",
+  "authorization_codes",
   "city",
   "commentaires",
   "departements",

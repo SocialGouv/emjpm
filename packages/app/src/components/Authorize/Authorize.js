@@ -1,68 +1,63 @@
 import { Button, Card, Heading4, Text } from "@emjpm/ui";
 import getConfig from "next/config";
-import React, { useContext, useState } from "react";
+import React from "react";
+import { useQuery } from "react-apollo";
 import { Box } from "rebass";
-import fetch from "unfetch";
 
-import { UserContext } from "../UserContext";
+import { EDITOR } from "./queries";
 
 const {
   publicRuntimeConfig: { API_URL },
 } = getConfig();
 
-const grantAuthorization = async (editorId, editorSecret, redirectUrl, id, toggleErrorMessage) => {
-  const url = `${API_URL}/api/oauth/authorize`;
-  try {
-    const response = await fetch(url, {
-      body: JSON.stringify({
-        editorId: editorId,
-        editorToken: editorSecret,
-        redirectUrl: redirectUrl,
-        userId: id,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-    if (response.status !== 200) {
-      const { errorMsg } = await response.json();
-      toggleErrorMessage(errorMsg);
-    } else {
-      const { publicToken } = await response.json();
-      window.location.replace(`${redirectUrl}?token=${publicToken}`);
-    }
-  } catch (errorMsg) {
-    toggleErrorMessage(errorMsg);
-  }
-};
+const url = `${API_URL}/api/oauth/authorize`;
 
 const Authorize = (props) => {
-  const { editorId, editorSecret, redirectUrl } = props;
-  const [errorMessage, toggleErrorMessage] = useState(false);
-  const { id } = useContext(UserContext);
+  const { editorId, token, redirectUrl, state } = props;
+  const { data, loading } = useQuery(EDITOR, {
+    variables: {
+      id: editorId,
+    },
+  });
+
+  if (loading) {
+    return <Box>Chargement...</Box>;
+  }
+
+  const { editors_by_pk: editor } = data;
+
   return (
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Connectez votre compte E-mjpm à votre logiciel métier.`}</Heading4>
+          <Heading4 mb="1">{`Autoriser ${editor.name} à accéder à votre compte E-mjpm.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez votre choix, vos informations E-mjpm seront partagé avec ce dernier, pour faciliter l'échange et la fluidité des services`}
+            {`Vos informations E-mjpm seront partagées avec ce dernier pour faciliter l'échange et la fluidité des services.`}
           </Text>
         </Box>
       </Box>
       <Box p="5">
-        <Button
-          onClick={() =>
-            grantAuthorization(editorId, editorSecret, redirectUrl, id, toggleErrorMessage)
-          }
-        >{`Authoriser la connexion avec l'éditeur`}</Button>
-        <Button ml="2" variant="outline">{`refuser`}</Button>
-        {errorMessage && (
+        <form method="post" action={url}>
+          <input type="hidden" name="response_type" value="code" />
+          <input type="hidden" name="client_id" value={editorId} />
+          <input type="hidden" name="redirect_uri" value={redirectUrl} />
+          <input type="hidden" name="access_token" value={token} />
+          <input type="hidden" name="state" value={state} />
+          <Button type="submit">{`Authoriser la connexion avec l'éditeur`}</Button>
+          <Button
+            onClick={() => {
+              document.location.href = `${redirectUrl}?error_reason=user_denied&error=access_denied&error_description=Permissions+error`;
+            }}
+            type="button"
+            ml="2"
+            variant="outline"
+          >{`refuser`}</Button>
+        </form>
+        {/* {errorMessage && (
           <Text mt="3" color="red">
             {errorMessage}
           </Text>
-        )}
+        )} */}
       </Box>
     </Card>
   );

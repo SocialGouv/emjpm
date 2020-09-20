@@ -19,6 +19,7 @@ class Editors extends Model {
         id: { type: "integer" },
         api_token: { type: "integrer" },
         name: { type: "string" },
+        redirect_uris: { type: "jsonb" },
       },
     };
   }
