@@ -241,7 +241,13 @@ describe("POST /api/editors/mesures", () => {
         numero_rg: "RG234534534",
         tribunal_siret: global.ti.siret,
         tribunal_cabinet: null,
-        ressources: [],
+        ressources: [
+          {
+            annee: 2020,
+            niveau_ressource: 14246,
+            prestations_sociales: ["AAH"],
+          },
+        ],
         etats: [
           {
             champ_mesure: "protection_bien",
@@ -267,11 +273,10 @@ describe("POST /api/editors/mesures", () => {
     // eslint-disable-next-line no-unused-vars
     const { created_at, ...expected } = response.body;
     expect(expected).toEqual({
-      annee_naissance: "1989",
+      annee_naissance: 1989,
       antenne_id: null,
       cause_sortie: "dessaisissement_famille",
       civilite: "monsieur",
-      code_postal: "89350",
       date_fin_mesure: "2020-04-04",
       date_nomination: "2020-01-11",
       date_premier_mesure: "2020-01-10",
@@ -282,7 +287,6 @@ describe("POST /api/editors/mesures", () => {
           code_postal: "89000",
           date_changement_etat: "2020-03-05",
           etablissement_siret: "",
-          id: 1,
           lieu_vie: "domicile",
           nature_mesure: "curatelle_simple",
           pays: "FR",
@@ -294,7 +298,6 @@ describe("POST /api/editors/mesures", () => {
           code_postal: "89350",
           date_changement_etat: "2020-05-06",
           etablissement_siret: "",
-          id: 2,
           lieu_vie: "domicile",
           nature_mesure: "curatelle_simple",
           pays: "FR",
@@ -304,15 +307,17 @@ describe("POST /api/editors/mesures", () => {
       ],
       id: 6,
       latitude: null,
-      lieu_vie: "domicile",
       longitude: null,
       numero_dossier: "45656456",
       numero_rg: "RG234534534",
-      pays: "FR",
-      ressources: [],
+      ressources: [
+        {
+          annee: 2020,
+          niveau_ressource: 14246,
+          prestations_sociales: ["AAH"],
+        },
+      ],
       resultat_revision: null,
-      type_etablissement: null,
-      ville: "perrigny",
     });
     expect(response.status).toBe(201);
   });
