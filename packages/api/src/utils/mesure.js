@@ -3,12 +3,10 @@ const { format } = require("date-fns");
 function sanitizeMesureProperties(mesure) {
   return {
     id: mesure.id,
-    code_postal: mesure.code_postal,
-    ville: mesure.ville,
-    created_at: mesure.created_at
-      ? format(mesure.created_at, "yyyy-MM-dd")
-      : mesure.created_at,
-    annee_naissance: mesure.annee_naissance,
+    created_at: mesure.created_at,
+    annee_naissance: mesure.annee_naissance
+      ? parseInt(mesure.annee_naissance)
+      : undefined,
     date_nomination: mesure.date_nomination
       ? format(mesure.date_nomination, "yyyy-MM-dd")
       : mesure.date_nomination,
@@ -20,9 +18,6 @@ function sanitizeMesureProperties(mesure) {
     antenne_id: mesure.antenne_id,
     latitude: mesure.latitude,
     longitude: mesure.longitude,
-    pays: mesure.pays,
-    lieu_vie: mesure.lieu_vie,
-    type_etablissement: mesure.type_etablissement,
     civilite: mesure.civilite,
     cause_sortie: mesure.cause_sortie,
     date_premier_mesure: mesure.date_premier_mesure
@@ -35,7 +30,6 @@ function sanitizeMesureProperties(mesure) {
     etats: mesure.etats
       ? mesure.etats.map((etat) => {
           return {
-            id: etat.id,
             date_changement_etat: etat.date_changement_etat
               ? format(etat.date_changement_etat, "yyyy-MM-dd")
               : etat.date_changement_etat,
@@ -53,7 +47,6 @@ function sanitizeMesureProperties(mesure) {
     ressources: mesure.ressources
       ? mesure.ressources.map((ressource) => {
           return {
-            id: ressource.id,
             annee: ressource.annee,
             niveau_ressource: ressource.niveau_ressource,
             prestations_sociales: ressource.prestations_sociales,
