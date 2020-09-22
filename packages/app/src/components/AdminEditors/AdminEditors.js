@@ -12,7 +12,7 @@ import { EDITORS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
-  const { id, name, api_token } = item;
+  const { id, name, api_token, redirect_uris } = item;
   const [removeEditor] = useMutation(REMOVE_EDITOR);
 
   const removeEditorFromList = async (id) => {
@@ -37,13 +37,17 @@ const RowItem = ({ item }) => {
             <Text sx={labelStyle}>ID</Text>
             <Text sx={descriptionStyle}>{id}</Text>
           </Flex>
-          <Flex width="100px" flexDirection="column">
+          <Flex width="200px" flexDirection="column">
             <Text sx={labelStyle}>Name</Text>
             <Text sx={descriptionStyle}>{name}</Text>
           </Flex>
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>API Token</Text>
             <Text sx={descriptionStyle}>{api_token}</Text>
+          </Flex>
+          <Flex width="400px" flexDirection="column">
+            <Text sx={labelStyle}>URLs de redirection</Text>
+            <Text sx={descriptionStyle}>{redirect_uris}</Text>
           </Flex>
         </Flex>
 

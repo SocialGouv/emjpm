@@ -11,16 +11,18 @@ export const EDITORS = gql`
       id
       name
       api_token
+      redirect_uris
     }
   }
 `;
 
 export const EDITOR = gql`
-  query editor($editorId: Int, $limit: Int, $offset: Int) {
-    editors(where: { id: { _eq: $editorId } }, limit: $limit, offset: $offset) {
+  query editor($id: Int!) {
+    editors_by_pk(id: $id) {
+      api_token
       id
       name
-      api_token
+      redirect_uris
     }
   }
 `;
