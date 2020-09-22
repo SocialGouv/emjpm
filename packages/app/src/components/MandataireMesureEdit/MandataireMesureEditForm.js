@@ -1,6 +1,5 @@
 import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
