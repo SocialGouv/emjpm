@@ -32,6 +32,8 @@ export const ServiceMesureCreateForm = (props) => {
     validationSchema: serviceMesureSchema,
   });
 
+  console.log(formik.values.date_nomination);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Field>
