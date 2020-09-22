@@ -79,7 +79,7 @@ stages:
   extends:
     - .base_stage
   environment:
-    name: fabrique-dev
+    name: fabrique-dev2
 
 ################################################################################################
 ###################################               ##############################################
@@ -165,7 +165,6 @@ Install app:
       jq 'del(.devDependencies)' > {}/package.json
       ; } < {}/package.json"
 
-
 #
 
 Install graphql-server:
@@ -186,7 +185,6 @@ Install ui:
   extends: .base_yarn_workspace_install
   variables:
     CONTEXT: ui
-
     #
 
 Install core:
@@ -671,6 +669,8 @@ Deploy api (dev):
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
       --set deployment.resources.requests.cpu=1m
+      --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=null
+      --set ingress.annotations.kubernetes\.io/tls-acme=null
 
 Deploy api (prod):
   extends:
@@ -702,6 +702,8 @@ Deploy app (dev):
   variables:
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
+      --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=null
+      --set ingress.annotations.kubernetes\.io/tls-acme=null
 
 Deploy app (prod):
   extends:
@@ -819,6 +821,8 @@ Deploy hasura (dev):
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
       --set deployment.resources.requests.cpu=5m
+      --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=null
+      --set ingress.annotations.kubernetes\.io/tls-acme=null
 
 Deploy hasura (prod):
   extends:

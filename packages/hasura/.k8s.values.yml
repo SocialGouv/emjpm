@@ -11,7 +11,6 @@ deployment:
       cpu: 10m
       memory: 1024Mi
 
-
   env:
     - name: PGSSLMODE
       value: "require"
@@ -20,7 +19,7 @@ deployment:
     - name: HASURA_GRAPHQL_ENABLE_CONSOLE
       value: "true"
     - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE
-      value: 'anonymous'
+      value: "anonymous"
     - name: HASURA_GRAPHQL_ADMIN_SECRET
       valueFrom:
         secretKeyRef:
@@ -48,24 +47,24 @@ deployment:
     - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
       value: "http://${API_SRV_HOST}/hasura/events/email-service-member-invitation"
     - name: WEB_HOOK_URL_TOKEN_REQUEST
-      value: "http://${API_SRV_HOST}/hasura/events/token-request"      
+      value: "http://${API_SRV_HOST}/hasura/events/token-request"
 
 service:
   port: ${PORT}
   targetPort: ${PORT}
 
-
 ingress:
   enabled: true
   annotations:
-    appgw.ingress.kubernetes.io/ssl-redirect: "true"
-    kubernetes.io/ingress.class: "azure/application-gateway"
+    kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
   hosts:
-    - host: hasura-emjpm.dev.fabrique.social.gouv.fr
+    - host: hasura-emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
           servicePort: ${PORT}
   tls:
     - hosts:
-        - hasura-emjpm.dev.fabrique.social.gouv.fr
+        - hasura-emjpm.dev2.fabrique.social.gouv.fr
       secretName: hasura-certificate
