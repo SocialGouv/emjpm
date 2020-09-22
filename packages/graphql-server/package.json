@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@koa/cors": "^3.0.0",
-    "apollo-datasource-rest": "^0.9.3",
+    "apollo-datasource-rest": "^0.9.4",
     "apollo-server-koa": "^2.13.1",
     "graphql": "^14.6.0",
     "koa": "^2.11.0",
