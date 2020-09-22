@@ -1,6 +1,5 @@
 import { GLOBAL, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -8,7 +7,6 @@ import { Box, Flex, Text } from "rebass";
 
 import { serviceMesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
-import { Datepicker } from "../Datepicker";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
@@ -130,15 +128,14 @@ export const ServiceMesureEditForm = (props) => {
           </Field>
 
           <Box mb={4}>
-            <Label mb={2} sx={{ fontSize: "12px", fontWeight: 600 }}>
-              Date de jugement ou ordonnance de nomination
-            </Label>
-            <Datepicker
+            <Input
+              value={formik.values.date_nomination}
               id="date_nomination"
-              selected={formik.values.date_nomination}
-              hasError={formik.touched.date_nomination && formik.errors.date_nomination}
-              onBlur={formik.onBlur}
-              onChange={(date) => formik.setFieldValue("date_nomination", date)}
+              type="date"
+              name="date_nomination"
+              hasError={formik.errors.date_nomination && formik.touched.date_nomination}
+              onChange={formik.handleChange}
+              placeholder="Date de jugement ou ordonnance de nomination"
             />
             {formik.touched.date_nomination && formik.errors.date_nomination && (
               <InlineError message={formik.errors.date_nomination} fieldId="date_nomination" />
