@@ -1,14 +1,12 @@
 import { useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading3, Heading5, Select } from "@emjpm/ui";
-import { Label } from "@rebass/forms";
+import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { Datepicker } from "../Datepicker";
 import { CLOSE_MESURE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { MANDATAIRE, MESURE } from "./queries";
 
@@ -68,16 +66,18 @@ export const MandataireMesureCloseForm = (props) => {
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <Box mb={4}>
-            <Label mb={2} sx={{ fontSize: "12px", fontWeight: 600 }}>
-              Date de fin de la mesure de protection
-            </Label>
-            <Datepicker
+            <Input
+              value={formik.values.date_fin_mesure}
               id="date_fin_mesure"
-              selected={formik.values.date_fin_mesure}
-              hasError={formik.touched.date_fin_mesure && formik.errors.date_fin_mesure}
-              onBlur={formik.onBlur}
-              onChange={(date) => formik.setFieldValue("date_fin_mesure", date)}
+              type="date"
+              name="date_fin_mesure"
+              hasError={formik.errors.date_fin_mesure && formik.touched.date_fin_mesure}
+              onChange={formik.handleChange}
+              placeholder="Date de fin de la mesure de protection"
             />
+            {formik.touched.date_fin_mesure && formik.errors.date_fin_mesure && (
+              <InlineError message={formik.errors.date_fin_mesure} fieldId="date_fin_mesure" />
+            )}
           </Box>
           <Field>
             <Select
@@ -90,6 +90,9 @@ export const MandataireMesureCloseForm = (props) => {
               onChange={(option) => formik.setFieldValue("cause_sortie", option)}
               options={MESURE_PROTECTION.CAUSE_SORTIE.options}
             />
+            {formik.touched.cause_sortie && formik.errors.cause_sortie && (
+              <InlineError message={formik.errors.cause_sortie} fieldId="cause_sortie" />
+            )}
           </Field>
           <Flex justifyContent="flex-end">
             <Box>
