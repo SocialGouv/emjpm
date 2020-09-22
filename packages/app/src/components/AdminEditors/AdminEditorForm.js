@@ -13,6 +13,7 @@ export const AdminEditorForm = (props) => {
     validationSchema: adminEditorSchema,
     initialValues: {
       name: editor ? editor.name : "",
+      redirect_uris: editor ? editor.redirect_uris : "",
     },
   });
 
@@ -39,6 +40,17 @@ export const AdminEditorForm = (props) => {
                 placeholder="Nom du service"
               />
               <InlineError message={formik.errors.name} fieldId="name" />
+            </Field>
+            <Field>
+              <Input
+                value={formik.values.redirect_uris}
+                id="redirect_uris"
+                name="redirect_uris"
+                hasError={formik.errors.redirect_uris && formik.touched.redirect_uris}
+                onChange={formik.handleChange}
+                placeholder="URI de redirection"
+              />
+              <InlineError message={formik.errors.redirect_uris} fieldId="redirect_uris" />
             </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (

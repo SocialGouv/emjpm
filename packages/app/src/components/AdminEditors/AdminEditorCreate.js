@@ -19,6 +19,7 @@ export const AdminEditorCreate = () => {
       await addEditor({
         variables: {
           name: values.name,
+          redirect_uris: values.redirect_uris,
           api_token,
         },
       });
