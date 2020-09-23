@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.61.3](https://github.com/SocialGouv/emjpm/compare/v25.61.2...v25.61.3) (2020-09-23)
+
+
+### Bug Fixes
+
+* **ci:** add ingress redirection for emjpm.num.* ([#2210](https://github.com/SocialGouv/emjpm/issues/2210)) ([fd97fae](https://github.com/SocialGouv/emjpm/commit/fd97faeb5a59faaf762d8fc701c58fec6fe7f369))
+* **ci:** fix redirect ingress namespace ([#2211](https://github.com/SocialGouv/emjpm/issues/2211)) ([74ac824](https://github.com/SocialGouv/emjpm/commit/74ac824467b311f60cb2abcd93a8f9aa886b657c))
+
+
+
+
+
 ## [25.61.2](https://github.com/SocialGouv/emjpm/compare/v25.61.1...v25.61.2) (2020-09-23)
 
 **Note:** Version bump only for package emjpm
