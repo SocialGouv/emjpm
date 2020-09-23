@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.61.0](https://github.com/SocialGouv/emjpm/compare/v25.60.0...v25.61.0) (2020-09-23)
+
+
+### Bug Fixes
+
+* **auth:** remove local storage after logout to clear user filters ([#2134](https://github.com/SocialGouv/emjpm/issues/2134)) ([cae56be](https://github.com/SocialGouv/emjpm/commit/cae56be7e86856e4106b71292cc409a82a029e7c))
+* **ci:** use cluster 2 ([#2178](https://github.com/SocialGouv/emjpm/issues/2178)) ([307dfc3](https://github.com/SocialGouv/emjpm/commit/307dfc3193b60acff2435bfa6937bf3164380d71))
+* **datepicker:** create datepicker component - it closes [#1715](https://github.com/SocialGouv/emjpm/issues/1715) ([#2174](https://github.com/SocialGouv/emjpm/issues/2174)) ([0367cd5](https://github.com/SocialGouv/emjpm/commit/0367cd53f0e26fe511b178caaa880a529abea539))
+* **direction:** enquete pagination ([#2207](https://github.com/SocialGouv/emjpm/issues/2207)) ([c977f92](https://github.com/SocialGouv/emjpm/commit/c977f925e748fce369ce8ed7f191e1c680843810))
+* **enquete:** direction enquete page ([#2177](https://github.com/SocialGouv/emjpm/issues/2177)) ([6eeaa49](https://github.com/SocialGouv/emjpm/commit/6eeaa49081670d82e222d83029aaee4fece4499e))
+* **list:** reset offset to 0 when filters change - it closes [#2122](https://github.com/SocialGouv/emjpm/issues/2122) ([#2138](https://github.com/SocialGouv/emjpm/issues/2138)) ([8983740](https://github.com/SocialGouv/emjpm/commit/89837403821f85f8ce7af1fc389ee8082f98e17e))
+* **liste-blanche:** preposes ([#2167](https://github.com/SocialGouv/emjpm/issues/2167)) ([9335506](https://github.com/SocialGouv/emjpm/commit/933550635f25c7c49af15fbe65004102216a93b9))
+* **liste-blanche:** services ([#2166](https://github.com/SocialGouv/emjpm/issues/2166)) ([527ea5c](https://github.com/SocialGouv/emjpm/commit/527ea5cf7fb0ffa65665062d07c1d0612af47b23))
+* **liste-blanche:** update prepose queries ([8048966](https://github.com/SocialGouv/emjpm/commit/804896639310ef7970fe021f5530980412e84539))
+* **mesure:** prevent double submission ([#2135](https://github.com/SocialGouv/emjpm/issues/2135)) ([2b216dd](https://github.com/SocialGouv/emjpm/commit/2b216dd0a9c8df78db63931aa2b64285a765d2c9))
+* **user-context:** update user query ([2e7862e](https://github.com/SocialGouv/emjpm/commit/2e7862e04bcdbf53e038394a83586fd54e6b59c5))
+
+
+### Features
+
+* **admin-etablissement:** allow filtering by departement ([c6c5d37](https://github.com/SocialGouv/emjpm/commit/c6c5d376bd608d2dc9713ae6b00110a742875553))
+* **api:** mesure dates ([#2179](https://github.com/SocialGouv/emjpm/issues/2179)) ([6d688d9](https://github.com/SocialGouv/emjpm/commit/6d688d983d2d94521460e2eec146fb8f3317d08d))
+* **date-picker:** remove date picker before fixing it ([209b1cd](https://github.com/SocialGouv/emjpm/commit/209b1cd96bbf059077e5062dc5fd0814a3c31946))
+* **direction:** add filter by mandataire name ([#2183](https://github.com/SocialGouv/emjpm/issues/2183)) ([f536fb8](https://github.com/SocialGouv/emjpm/commit/f536fb8a4fb273ae8d31bb86d3064ae1834c2685))
+* **editor:** allow edit editor properties ([74db784](https://github.com/SocialGouv/emjpm/commit/74db784210544a70b4598a47f08d40b100242661))
+* **enquete:** update enquete statistics - it closes [#2125](https://github.com/SocialGouv/emjpm/issues/2125) ([#2139](https://github.com/SocialGouv/emjpm/issues/2139)) ([d29b6fe](https://github.com/SocialGouv/emjpm/commit/d29b6fe7d72a0b429a913c578a88a807b77b19ca))
+* **etablissements:** create admin page ([#2175](https://github.com/SocialGouv/emjpm/issues/2175)) ([e857917](https://github.com/SocialGouv/emjpm/commit/e85791759068d04de9afc62a252b31087f29bbd7))
+* **import-finess:** add finess database import ([#2189](https://github.com/SocialGouv/emjpm/issues/2189)) ([c951faa](https://github.com/SocialGouv/emjpm/commit/c951faa8e3a9661c04af43bdded6f35a7519c876))
+* **liste-blanche:** gestion des établissements pour les préposés - it closes [#2126](https://github.com/SocialGouv/emjpm/issues/2126) ([#2141](https://github.com/SocialGouv/emjpm/issues/2141)) ([ca89fb0](https://github.com/SocialGouv/emjpm/commit/ca89fb0038d8a01435f01b52b1b145455c69a16e))
+* **liste-blanche:** services ([#2145](https://github.com/SocialGouv/emjpm/issues/2145)) ([2cc0fc8](https://github.com/SocialGouv/emjpm/commit/2cc0fc88e54197e9e0981a17b4d5eabe1f7b8c00))
+* **politique-confidentialite:** disable matomo tracking - it closes [#2106](https://github.com/SocialGouv/emjpm/issues/2106) ([#2143](https://github.com/SocialGouv/emjpm/issues/2143)) ([9bf5581](https://github.com/SocialGouv/emjpm/commit/9bf558138a3c28af1a6650e41ad0ecda890dcfe3))
+* **service:** liste blanche for services - it closes [#2124](https://github.com/SocialGouv/emjpm/issues/2124) ([#2142](https://github.com/SocialGouv/emjpm/issues/2142)) ([3a096b5](https://github.com/SocialGouv/emjpm/commit/3a096b5163234699e6bbc9a9789cbf0b684ce5c6))
+
+
+
+
+
 # [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
 
 

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.61.0](https://github.com/SocialGouv/emjpm/compare/v25.60.0...v25.61.0) (2020-09-23)
+
+
+### Bug Fixes
+
+* **datepicker:** create datepicker component - it closes [#1715](https://github.com/SocialGouv/emjpm/issues/1715) ([#2174](https://github.com/SocialGouv/emjpm/issues/2174)) ([0367cd5](https://github.com/SocialGouv/emjpm/commit/0367cd53f0e26fe511b178caaa880a529abea539))
+
+
+### Features
+
+* **liste-blanche:** gestion des établissements pour les préposés - it closes [#2126](https://github.com/SocialGouv/emjpm/issues/2126) ([#2141](https://github.com/SocialGouv/emjpm/issues/2141)) ([ca89fb0](https://github.com/SocialGouv/emjpm/commit/ca89fb0038d8a01435f01b52b1b145455c69a16e))
+
+
+
+
+
 # [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
 
 **Note:** Version bump only for package @emjpm/ui
