@@ -20,7 +20,7 @@ import { ENQUETE_DETAILS_LIST } from "./queries";
 const resultPerPage = 10;
 
 function buildQueryVariables(enqueteId, criteria) {
-  const variables = { enqueteId, offset: 0, limit: resultPerPage };
+  const variables = { enqueteId, offset: criteria.currentOffset, limit: resultPerPage };
   if (criteria.selectedDepartement && criteria.selectedDepartement.departement) {
     variables.departementId = criteria.selectedDepartement.departement.id;
   }
