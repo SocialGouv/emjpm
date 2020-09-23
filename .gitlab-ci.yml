@@ -70,7 +70,7 @@ stages:
 
 .incubateur_stage:
   environment:
-    name: prod
+    name: prod2
   only:
     variables:
       - $PRODUCTION
