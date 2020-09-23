@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.61.0](https://github.com/SocialGouv/emjpm/compare/v25.60.0...v25.61.0) (2020-09-23)
+
+
+### Features
+
+* **api:** apply type_etablissement modifications ([#2184](https://github.com/SocialGouv/emjpm/issues/2184)) ([ef1a3cf](https://github.com/SocialGouv/emjpm/commit/ef1a3cf503796a0691e2b1093cf7447b7ead2b6c))
+
+
+
+
+
 # [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
 
 **Note:** Version bump only for package @emjpm/core
