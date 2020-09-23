@@ -709,6 +709,10 @@ Deploy app (prod):
   extends:
     - .deploy_app_stage
     - .incubateur_stage
+  after_script:
+    - source ./.gitlab-ci/env.sh
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    - kubectl apply -f ./.k8s/app-redirect.yml -n ${K8S_NAMESPACE}
 
 ################ Deploy GRAPHQL SERVER ###########################
 
