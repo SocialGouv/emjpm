@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.61.1](https://github.com/SocialGouv/emjpm/compare/v25.61.0...v25.61.1) (2020-09-23)
+
+
+### Bug Fixes
+
+* **ci:** use prod2 ([#2209](https://github.com/SocialGouv/emjpm/issues/2209)) ([545e0df](https://github.com/SocialGouv/emjpm/commit/545e0dfb56d92c6a4498821ca47f47073bf05ec7))
+
+
+
+
+
 # [25.61.0](https://github.com/SocialGouv/emjpm/compare/v25.60.0...v25.61.0) (2020-09-23)
 
 
