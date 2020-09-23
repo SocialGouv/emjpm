@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/app",
-  "version": "25.61.2",
+  "version": "25.61.3",
   "private": true,
   "description": "",
   "main": "index.js",
@@ -21,8 +21,8 @@
   "keywords": [],
   "license": "Apache-2.0",
   "dependencies": {
-    "@emjpm/core": "^25.61.2",
-    "@emjpm/ui": "^25.61.2",
+    "@emjpm/core": "^25.61.3",
+    "@emjpm/ui": "^25.61.3",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@mdx-js/loader": "^1.6.18",
