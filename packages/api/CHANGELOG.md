@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.61.0](https://github.com/SocialGouv/emjpm/compare/v25.60.0...v25.61.0) (2020-09-23)
+
+
+### Bug Fixes
+
+* **api:** delete some properties to the created mesure ([#2133](https://github.com/SocialGouv/emjpm/issues/2133)) ([a6b1bdc](https://github.com/SocialGouv/emjpm/commit/a6b1bdc857335d49ab5d453ba2428818383976e3)), closes [#2131](https://github.com/SocialGouv/emjpm/issues/2131) [#2129](https://github.com/SocialGouv/emjpm/issues/2129)
+* **api:** type_etablissement ([#2144](https://github.com/SocialGouv/emjpm/issues/2144)) ([33fb084](https://github.com/SocialGouv/emjpm/commit/33fb084ff26d7f5a75cf535e9af0793e061f6992))
+* **api:** update date_nomination test ([9af9e94](https://github.com/SocialGouv/emjpm/commit/9af9e94d34bbd118e2c3ea8a5b8202a2381f57cf))
+* **api-editor:** refactor create and update endpoints ([#2191](https://github.com/SocialGouv/emjpm/issues/2191)) ([879cb31](https://github.com/SocialGouv/emjpm/commit/879cb3169656b36b737a75d40f21a0639541a83b))
+* **ci:** use cluster 2 ([#2178](https://github.com/SocialGouv/emjpm/issues/2178)) ([307dfc3](https://github.com/SocialGouv/emjpm/commit/307dfc3193b60acff2435bfa6937bf3164380d71))
+* **direction:** enquete pagination ([#2207](https://github.com/SocialGouv/emjpm/issues/2207)) ([c977f92](https://github.com/SocialGouv/emjpm/commit/c977f925e748fce369ce8ed7f191e1c680843810))
+* **liste-blanche:** preposes ([#2167](https://github.com/SocialGouv/emjpm/issues/2167)) ([9335506](https://github.com/SocialGouv/emjpm/commit/933550635f25c7c49af15fbe65004102216a93b9))
+* **mesure-etat:** rename champ_protection to champ_mesure ([#2190](https://github.com/SocialGouv/emjpm/issues/2190)) ([11a8c59](https://github.com/SocialGouv/emjpm/commit/11a8c59058f9919a1274b32777c6a34070381dd3))
+
+
+### Features
+
+* **api:** add checks for mesure creation ([#2136](https://github.com/SocialGouv/emjpm/issues/2136)) ([fabc6e6](https://github.com/SocialGouv/emjpm/commit/fabc6e61634496e53ba4ad30c6f1ea739f6bc56a))
+* **api:** apply type_etablissement modifications ([#2184](https://github.com/SocialGouv/emjpm/issues/2184)) ([ef1a3cf](https://github.com/SocialGouv/emjpm/commit/ef1a3cf503796a0691e2b1093cf7447b7ead2b6c))
+* **api:** create editor api to get service antennes - it closes [#2123](https://github.com/SocialGouv/emjpm/issues/2123) ([#2137](https://github.com/SocialGouv/emjpm/issues/2137)) ([9b7fdae](https://github.com/SocialGouv/emjpm/commit/9b7fdaeaf687bccb1e7420d188bdb011b2679068))
+* **api:** mesure dates ([#2179](https://github.com/SocialGouv/emjpm/issues/2179)) ([6d688d9](https://github.com/SocialGouv/emjpm/commit/6d688d983d2d94521460e2eec146fb8f3317d08d))
+* **api:** revoke tokens & add unit tests ([#2168](https://github.com/SocialGouv/emjpm/issues/2168)) ([efcfb9b](https://github.com/SocialGouv/emjpm/commit/efcfb9be6e8dfba9a46cad9c5d9d86a115586578))
+* **api:** sanitize mesure properties ([91f2bcc](https://github.com/SocialGouv/emjpm/commit/91f2bcc8851cbf511d6b8c7157060bf018b38108))
+* **api:** use rate limiter for /editors ([#2169](https://github.com/SocialGouv/emjpm/issues/2169)) ([6cc9efb](https://github.com/SocialGouv/emjpm/commit/6cc9efbe8ff41a408dc142000fb9e2a98346ef37))
+* **import-finess:** add finess database import ([#2189](https://github.com/SocialGouv/emjpm/issues/2189)) ([c951faa](https://github.com/SocialGouv/emjpm/commit/c951faa8e3a9661c04af43bdded6f35a7519c876))
+* **liste-blanche:** gestion des établissements pour les préposés - it closes [#2126](https://github.com/SocialGouv/emjpm/issues/2126) ([#2141](https://github.com/SocialGouv/emjpm/issues/2141)) ([ca89fb0](https://github.com/SocialGouv/emjpm/commit/ca89fb0038d8a01435f01b52b1b145455c69a16e))
+* **politique-confidentialite:** disable matomo tracking - it closes [#2106](https://github.com/SocialGouv/emjpm/issues/2106) ([#2143](https://github.com/SocialGouv/emjpm/issues/2143)) ([9bf5581](https://github.com/SocialGouv/emjpm/commit/9bf558138a3c28af1a6650e41ad0ecda890dcfe3))
+* **service:** liste blanche for services - it closes [#2124](https://github.com/SocialGouv/emjpm/issues/2124) ([#2142](https://github.com/SocialGouv/emjpm/issues/2142)) ([3a096b5](https://github.com/SocialGouv/emjpm/commit/3a096b5163234699e6bbc9a9789cbf0b684ce5c6))
+
+
+
+
+
 # [25.60.0](https://github.com/SocialGouv/emjpm/compare/v25.59.1...v25.60.0) (2020-08-03)
 
 
