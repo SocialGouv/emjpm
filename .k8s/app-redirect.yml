@@ -10,7 +10,7 @@ metadata:
     app.kubernetes.io/component: redirect
     app.kubernetes.io/name: app
   name: app-redirect
-  namespace: incubateur
+  namespace: emjpm
 spec:
   rules:
     - host: emjpm.num.social.gouv.fr
