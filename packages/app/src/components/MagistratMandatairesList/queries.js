@@ -39,7 +39,7 @@ export const GET_MANDATAIRES = gql`
     $tribunal: Int!
     $offset: Int!
     $discriminator: String
-    $order: order_by
+    $orderBy: [view_mesure_gestionnaire_tis_order_by!]
     $limit: Int
     $searchText: String
   ) {
@@ -56,7 +56,7 @@ export const GET_MANDATAIRES = gql`
     mandatairesList: view_mesure_gestionnaire_tis(
       limit: $limit
       offset: $offset
-      order_by: { gestionnaire: { remaining_capacity: $order } }
+      order_by: $orderBy
       where: {
         discriminator: { _eq: $discriminator }
         ti_id: { _eq: $tribunal }
