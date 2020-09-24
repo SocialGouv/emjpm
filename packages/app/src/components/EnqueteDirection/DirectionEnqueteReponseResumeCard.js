@@ -65,11 +65,13 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
                 {item.mandataire.user.prenom}
               </Text>
             </Flex>
-          ) : item.service.etablissement ? (
+          ) : (
             <Text sx={descriptionStyle("important")}>
-              {item.service.etablissement.toUpperCase()}
+              {item.service && item.service.etablissement
+                ? item.service.etablissement.toUpperCase()
+                : "---"}
             </Text>
-          ) : null}
+          )}
         </Flex>
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{`Département`}</Text>
