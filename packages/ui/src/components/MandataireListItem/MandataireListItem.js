@@ -30,6 +30,7 @@ const MandataireListItem = (props) => {
       isAvailable,
       nom,
       prenom,
+      codePostal,
       ville,
       etablissement,
       mesuresInProgress,
@@ -72,8 +73,8 @@ const MandataireListItem = (props) => {
             </Box>
           </Flex>
           <Flex width="100px" sx={columnStyle(true, true)}>
-            <Text sx={labelStyle}>Ville</Text>
-            <Text sx={descriptionStyle}>{ville}</Text>
+            <Text sx={labelStyle}>Localisation</Text>
+            <Text sx={descriptionStyle}>{`${codePostal} ${ville}`}</Text>
           </Flex>
 
           {!isMagistratMap && (
@@ -117,12 +118,14 @@ const MandataireListItem = (props) => {
 };
 
 MandataireListItem.defaultProps = {
+  codePostal: '',
   isMagistratMap: false,
   onClick: null,
 };
 
 MandataireListItem.propTypes = {
   gestionnaire: PropTypes.shape({
+    codePostal: PropTypes.string,
     currentAvailability: PropTypes.number.isRequired,
     cvLink: PropTypes.string.isRequired,
     dispoMax: PropTypes.number.isRequired,
