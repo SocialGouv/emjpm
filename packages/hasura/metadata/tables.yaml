@@ -6633,10 +6633,11 @@
   - role: ti
     permission:
       columns:
-      - id
-      - service_id
-      - mandataire_id
       - discriminator
+      - id
+      - mandataire_id
+      - name
+      - service_id
       - ti_id
       filter: {}
       allow_aggregations: true
