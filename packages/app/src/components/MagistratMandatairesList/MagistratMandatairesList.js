@@ -29,7 +29,37 @@ const optionsType = [
   { label: "Service", value: "SERVICE" },
 ];
 
+const orderByOptions = [
+  {
+    label: "disponibilité",
+    value: 0,
+  },
+  {
+    label: "ordre alphabétique (A-Z)",
+    value: 1,
+  },
+  {
+    label: "ordre alphabétique (Z-A)",
+    value: 2,
+  },
+];
+
 const RESULT_PER_PAGE = 20;
+
+function getOrderByVariable(orderBy) {
+  switch (orderBy) {
+    case 0:
+      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+    case 1:
+      return {
+        name: "asc",
+      };
+    case 2:
+      return {
+        name: "desc",
+      };
+  }
+}
 
 const MagistratMandatairesList = (props) => {
   const {
@@ -38,6 +68,7 @@ const MagistratMandatairesList = (props) => {
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
+  const [orderBy, setOrderBy] = useState(orderByOptions[0].value);
   const debouncedSearchText = useDebounce(searchText, 2000);
 
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
@@ -45,7 +76,7 @@ const MagistratMandatairesList = (props) => {
       discriminator: selectedType ? selectedType.value : null,
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
-      order: "desc_nulls_last",
+      orderBy: getOrderByVariable(orderBy),
       tribunal: ti_id,
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
     },
@@ -76,34 +107,48 @@ const MagistratMandatairesList = (props) => {
     <MandataireContextProvider>
       <Box sx={MagistratMandatairesListStyle} {...props}>
         <Card mb="2" mt="1">
-          <Flex flexWrap="wrap">
-            <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-            <Box width="200px" mr="2">
-              <Select
-                size="small"
-                placeholder="Type de mandataire"
-                onChange={(option) => {
-                  setCurrentOffset(0);
-                  setType(option);
-                }}
-                value={selectedType}
-                options={optionsType}
-              />
-            </Box>
-            <Box width="200px" mr={1}>
-              <Input
-                value={searchText}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) => {
-                  setCurrentOffset(0);
-                  changeSearchText(event.target.value);
-                }}
-                name="search"
-                size="small"
-                placeholder="mandataire / service"
-              />
-            </Box>
+          <Flex justifyContent="space-between" alignItems="center">
+            <Flex flexWrap="wrap">
+              <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
+              <Box width="200px" mr="2">
+                <Select
+                  size="small"
+                  placeholder="Type de mandataire"
+                  onChange={(option) => {
+                    setCurrentOffset(0);
+                    setType(option);
+                  }}
+                  value={selectedType}
+                  options={optionsType}
+                />
+              </Box>
+              <Box width="200px" mr={1}>
+                <Input
+                  value={searchText}
+                  spellCheck="false"
+                  autoComplete="false"
+                  onChange={(event) => {
+                    setCurrentOffset(0);
+                    changeSearchText(event.target.value);
+                  }}
+                  name="search"
+                  size="small"
+                  placeholder="mandataire / service"
+                />
+              </Box>
+            </Flex>
+
+            <Flex alignItems="center">
+              <Text mr={2}>Trier par:</Text>
+              <Box width="200px">
+                <Select
+                  size="small"
+                  onChange={({ value }) => setOrderBy(value)}
+                  value={orderByOptions.find(({ value }) => value === orderBy)}
+                  options={orderByOptions}
+                />
+              </Box>
+            </Flex>
           </Flex>
         </Card>
         {gestionnaires.map((gestionnaire) => {
