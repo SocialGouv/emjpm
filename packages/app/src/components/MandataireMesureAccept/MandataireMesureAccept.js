@@ -1,9 +1,11 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
+import { MANDATAIRE_MESURES } from "../MandataireMesures/queries";
 import { MesureContext } from "../MesureContext";
 import { MandataireMesureAcceptForm } from "./MandataireMesureAcceptForm";
 import { ACCEPT_MESURE, MANDATAIRE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
@@ -22,6 +24,7 @@ export const MandataireMesureAccept = (props) => {
       },
     ],
   });
+
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
@@ -56,7 +59,28 @@ export const MandataireMesureAccept = (props) => {
           }
 
           await updateMesure({
-            refetchQueries: ["mesures", "mesures_aggregate"],
+            refetchQueries: [
+              {
+                query: MANDATAIRE_MESURES,
+                variables: {
+                  limit: 20,
+                  offset: 0,
+                  searchText: null,
+                  status: MESURE_PROTECTION_STATUS.en_cours,
+                  natureMesure: null,
+                },
+              },
+              {
+                query: MANDATAIRE_MESURES,
+                variables: {
+                  limit: 20,
+                  offset: 0,
+                  searchText: null,
+                  status: MESURE_PROTECTION_STATUS.en_attente,
+                  natureMesure: null,
+                },
+              },
+            ],
             variables: {
               ...variables,
               date_nomination: values.date_nomination,
