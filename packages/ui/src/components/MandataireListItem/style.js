@@ -97,6 +97,7 @@ const cardStyle = {
   '&:hover': {
     bg: 'cardSecondary',
   },
+  cursor: 'pointer',
   mb: '1',
   overflow: 'hidden',
   pl: '16px',
