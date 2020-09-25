@@ -1,7 +1,10 @@
 const passport = require("passport");
 const authLoginPasswordStrategy = require("./strategies/authLoginPasswordStrategy");
 const authEditorJwtStrategy = require("./strategies/authEditorJwtStrategy");
-const authUserJwtStrategy = require("./strategies/authUserJwtStrategy");
+const {
+  authUserJwtStrategy,
+  authUserJwtStrategyFromQuery,
+} = require("./strategies/authUserJwtStrategy");
 const {
   strategy: authHasuraWebHookHeaderSecretStrategy,
   userSerializer: authHasuraUserSerializer,
@@ -51,6 +54,7 @@ init();
 passport.use("login-password", authLoginPasswordStrategy);
 passport.use("editor-jwt", authEditorJwtStrategy);
 passport.use("user-jwt", authUserJwtStrategy);
+passport.use("user-jwt-from-query-params", authUserJwtStrategyFromQuery);
 passport.use(
   "hasura-webhook-header-secret",
   authHasuraWebHookHeaderSecretStrategy

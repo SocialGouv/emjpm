@@ -13,6 +13,7 @@ const pkg = require("../package.json");
 const authRoutes = require("./routes/api/auth");
 const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
+const mesuresRoutes = require("./routes/api/mesures");
 
 const corsOptions = {
   credentials: true,
@@ -44,6 +45,12 @@ const oauthServer = require("./oauth/server.js");
 // routes
 app.use("/api/auth", authRoutes);
 app.use("/api/oauth", oauthRoutes);
+
+app.use(
+  "/api/mesures",
+  [passport.authenticate("user-jwt-from-query-params")],
+  mesuresRoutes
+);
 
 app.use(
   "/api/editors",
