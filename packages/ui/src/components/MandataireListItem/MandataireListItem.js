@@ -118,7 +118,6 @@ const MandataireListItem = (props) => {
 };
 
 MandataireListItem.defaultProps = {
-  codePostal: '',
   isMagistratMap: false,
   onClick: null,
 };
