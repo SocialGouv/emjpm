@@ -3,6 +3,7 @@ import { Card, Heading3, Heading5 } from "@emjpm/ui";
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { MyLocation } from "@styled-icons/material/MyLocation";
 import { Smartphone } from "@styled-icons/material/Smartphone";
+import { Building } from "@styled-icons/boxicons-regular/Building";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -25,11 +26,20 @@ const ServiceInformations = (props) => {
 
   // first of the array because it should be only one
   const [service] = data.services;
-  const { adresse, competences, email, etablissement, service_tis, telephone } = service;
+  const { adresse, competences, email, etablissement, service_tis, telephone, siret } = service;
   return (
     <Box {...props}>
       <Card p="5">
         <Heading3>{etablissement}</Heading3>
+        <Flex sx={flexStyle}>
+          <Box sx={boxStyle}>
+            <Heading5 mb="3">SIRET</Heading5>
+            <Flex mt="2">
+              <Building size="16" />
+              <Text sx={iconTextStyle}>{siret || ""}</Text>
+            </Flex>
+          </Box>
+        </Flex>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
             <Heading5 mb="3">Contact</Heading5>
