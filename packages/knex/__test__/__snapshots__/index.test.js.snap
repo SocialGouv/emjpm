@@ -4526,6 +4526,12 @@ Object {
     "nullable": true,
     "type": "integer",
   },
+  "name": Object {
+    "defaultValue": null,
+    "maxLength": 255,
+    "nullable": true,
+    "type": "character varying",
+  },
   "service_id": Object {
     "defaultValue": null,
     "maxLength": null,
