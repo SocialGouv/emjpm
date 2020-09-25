@@ -5494,23 +5494,24 @@
   - role: service
     permission:
       columns:
-      - id
-      - etablissement
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
       - adresse
-      - dispo_max
-      - created_at
+      - code_postal
       - competences
+      - created_at
       - department_id
-      - mesures_in_progress
-      - mesures_awaiting
+      - dispo_max
+      - email
+      - etablissement
+      - id
       - latitude
       - longitude
+      - mesures_awaiting
+      - mesures_in_progress
+      - nom
+      - prenom
+      - siret
+      - telephone
+      - ville
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -5587,12 +5588,12 @@
       columns:
       - adresse
       - code_postal
+      - competences
       - department_id
       - dispo_max
       - email
       - etablissement
       - id
-      - competences
       - latitude
       - longitude
       - mesures_awaiting
