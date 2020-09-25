@@ -148,20 +148,18 @@ export const MagistratMandataire = (props) => {
               <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
             </Box>
             <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Nombre de mesures souhaitées</Text>
-              <Text sx={MagistratContentMandataireStyle}>{dispoMax}</Text>
+              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
+              <Text sx={MagistratContentMandataireStyle}>{currentAvailability}</Text>
+            </Box>
+            <Box>
+              <Text sx={MagistratTitleMandataireStyle}>En cours / souhaitée</Text>
+              <Text sx={MagistratContentMandataireStyle}>
+                {mesuresInProgress} / {dispoMax}
+              </Text>
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
               <Text sx={MagistratContentMandataireStyle}>{mesuresAwaiting}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
-              <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text sx={MagistratContentMandataireStyle}>{currentAvailability}</Text>
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Observations sur le mandataire</Text>
