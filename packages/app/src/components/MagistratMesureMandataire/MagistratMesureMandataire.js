@@ -54,6 +54,7 @@ const MagistratMesureMandataire = (props) => {
   const {
     competences,
     dispoMax,
+    currentAvailability,
     etablissement,
     mesuresAwaiting,
     mesuresInProgress,
@@ -137,15 +138,17 @@ const MagistratMesureMandataire = (props) => {
               </Box>
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-                <Text sx={MagistratContentMandataireStyle}>{dispoMax}</Text>
+                <Text sx={MagistratContentMandataireStyle}>{currentAvailability}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>En cours / souhaitée</Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {mesuresInProgress} / {dispoMax}
+                </Text>
               </Box>
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
                 <Text sx={MagistratContentMandataireStyle}>{mesuresAwaiting}</Text>
-              </Box>
-              <Box>
-                <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
-                <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
               </Box>
             </Box>
           </Flex>
