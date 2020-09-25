@@ -22,7 +22,7 @@ const AdminUserInformations = (props) => {
       if (data) {
         const { type, email, mandataire } = data.users_by_pk;
         if (isMandataire(type)) {
-          if (isIndividuel && mandataire.siret) {
+          if (isIndividuel(type) && mandataire.siret) {
             await execQuery({
               variables: {
                 where: {
