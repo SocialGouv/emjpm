@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3, Heading5 } from "@emjpm/ui";
+import { Building } from "@styled-icons/boxicons-regular/Building";
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { MyLocation } from "@styled-icons/material/MyLocation";
 import { Smartphone } from "@styled-icons/material/Smartphone";
-import { Building } from "@styled-icons/boxicons-regular/Building";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
