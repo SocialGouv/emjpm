@@ -55,10 +55,11 @@ export const MagistratMandataire = (props) => {
   const formatedGestionnaire = formatGestionnaire(gestionnaire);
   const {
     competences,
-    dispoMax,
+    currentAvailability,
     etablissement,
     mesuresAwaiting,
     mesuresInProgress,
+    dispoMax,
     tis,
     adresse,
     codePostal,
@@ -147,7 +148,7 @@ export const MagistratMandataire = (props) => {
               <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
             </Box>
             <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
+              <Text sx={MagistratTitleMandataireStyle}>Nombre de mesures souhaitées</Text>
               <Text sx={MagistratContentMandataireStyle}>{dispoMax}</Text>
             </Box>
             <Box>
@@ -157,6 +158,10 @@ export const MagistratMandataire = (props) => {
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Mesure en cours</Text>
               <Text sx={MagistratContentMandataireStyle}>{mesuresInProgress}</Text>
+            </Box>
+            <Box>
+              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
+              <Text sx={MagistratContentMandataireStyle}>{currentAvailability}</Text>
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Observations sur le mandataire</Text>
