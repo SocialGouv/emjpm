@@ -94,7 +94,7 @@
     "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.10.7",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.4",
+    "enzyme-adapter-react-16": "^1.15.5",
     "eslint": "^6.8.0",
     "eslint-plugin-simple-import-sort": "^4.0.0",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
