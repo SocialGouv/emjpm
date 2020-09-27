@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.62.0](https://github.com/SocialGouv/emjpm/compare/v25.61.3...v25.62.0) (2020-09-27)
+
+
+### Bug Fixes
+
+* **admin:** prepose association ([bd10903](https://github.com/SocialGouv/emjpm/commit/bd10903b5d6077e01bba6f92b216fe4484f60464))
+* **enquete:** direction ([#2213](https://github.com/SocialGouv/emjpm/issues/2213)) ([8671983](https://github.com/SocialGouv/emjpm/commit/8671983647dfe01afea21adb2a5c04fcae72c780))
+* **mesures:** it closes [#2193](https://github.com/SocialGouv/emjpm/issues/2193) ([#2208](https://github.com/SocialGouv/emjpm/issues/2208)) ([4bb4b35](https://github.com/SocialGouv/emjpm/commit/4bb4b35bc3dd68fb117341f6cbb914ff06b646c2))
+* **service-edition:** update hasura metadata and display siret ([210c915](https://github.com/SocialGouv/emjpm/commit/210c915ceff3ffafe0d4336ebbdd7777ff3b912f))
+
+
+### Features
+
+* **mandataires:** add select filter to order mandataires ([#2216](https://github.com/SocialGouv/emjpm/issues/2216)) ([9aff1ee](https://github.com/SocialGouv/emjpm/commit/9aff1eece67d807e60fc200a3b1540be74c363b2))
+* **mandataires:** show zipcode - it closes [#2201](https://github.com/SocialGouv/emjpm/issues/2201) ([#2214](https://github.com/SocialGouv/emjpm/issues/2214)) ([0a0f394](https://github.com/SocialGouv/emjpm/commit/0a0f394ea9b5d89c4d95754620c3f209acefe3c1))
+
+
+
+
+
 ## [25.61.3](https://github.com/SocialGouv/emjpm/compare/v25.61.2...v25.61.3) (2020-09-23)
 
 **Note:** Version bump only for package @emjpm/app

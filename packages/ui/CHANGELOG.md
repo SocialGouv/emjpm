@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.62.0](https://github.com/SocialGouv/emjpm/compare/v25.61.3...v25.62.0) (2020-09-27)
+
+
+### Features
+
+* **mandataires:** add pointer cursor ([#2215](https://github.com/SocialGouv/emjpm/issues/2215)) ([46f824b](https://github.com/SocialGouv/emjpm/commit/46f824ba7712b127a3fd5c2bb55c2dc12f11bc75))
+* **mandataires:** show zipcode - it closes [#2201](https://github.com/SocialGouv/emjpm/issues/2201) ([#2214](https://github.com/SocialGouv/emjpm/issues/2214)) ([0a0f394](https://github.com/SocialGouv/emjpm/commit/0a0f394ea9b5d89c4d95754620c3f209acefe3c1))
+
+
+
+
+
 ## [25.61.3](https://github.com/SocialGouv/emjpm/compare/v25.61.2...v25.61.3) (2020-09-23)
 
 **Note:** Version bump only for package @emjpm/ui

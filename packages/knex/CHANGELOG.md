@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.62.0](https://github.com/SocialGouv/emjpm/compare/v25.61.3...v25.62.0) (2020-09-27)
+
+
+### Bug Fixes
+
+* **patch:** fix js syntax in migration file ([4213508](https://github.com/SocialGouv/emjpm/commit/4213508f62326f7ed20f8a762eb6d084c4656c3e))
+
+
+### Features
+
+* **mandataires:** add select filter to order mandataires ([#2216](https://github.com/SocialGouv/emjpm/issues/2216)) ([9aff1ee](https://github.com/SocialGouv/emjpm/commit/9aff1eece67d807e60fc200a3b1540be74c363b2))
+
+
+
+
+
 ## [25.61.3](https://github.com/SocialGouv/emjpm/compare/v25.61.2...v25.61.3) (2020-09-23)
 
 **Note:** Version bump only for package @emjpm/knex
