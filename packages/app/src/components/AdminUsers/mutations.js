@@ -100,6 +100,12 @@ export const ADD_USER_TIS = gql`
 
 export const DELETE_MESURES = gql`
   mutation admin_delete_mandataire_mesures($ids: [Int!]) {
+    delete_mesure_etat(where: { mesure_id: { _in: $ids } }) {
+      affected_rows
+    }
+    delete_mesure_ressources(where: { mesure_id: { _in: $ids } }) {
+      affected_rows
+    }
     delete_mesures(where: { id: { _in: $ids } }) {
       affected_rows
     }
