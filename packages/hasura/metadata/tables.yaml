@@ -4239,6 +4239,12 @@
       check: null
 - table:
     schema: public
+    name: mesure_etat
+- table:
+    schema: public
+    name: mesure_ressources
+- table:
+    schema: public
     name: mesures
   object_relationships:
   - name: departement
@@ -4259,6 +4265,21 @@
   - name: ti
     using:
       foreign_key_constraint_on: ti_id
+  array_relationships:
+  - name: mesure_etats
+    using:
+      foreign_key_constraint_on:
+        column: mesure_id
+        table:
+          schema: public
+          name: mesure_etat
+  - name: mesure_ressources
+    using:
+      foreign_key_constraint_on:
+        column: mesure_id
+        table:
+          schema: public
+          name: mesure_ressources
   insert_permissions:
   - role: individuel
     permission:
