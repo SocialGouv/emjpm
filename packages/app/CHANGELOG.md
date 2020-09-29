@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.63.0](https://github.com/SocialGouv/emjpm/compare/v25.62.0...v25.63.0) (2020-09-29)
+
+
+### Bug Fixes
+
+* **mesures:** delete mesure_etat & mesure_ressource (by cascade) - it… ([#2220](https://github.com/SocialGouv/emjpm/issues/2220)) ([d76865e](https://github.com/SocialGouv/emjpm/commit/d76865ee3861b9c36f53f69944962ef218ac9f2b)), closes [#2205](https://github.com/SocialGouv/emjpm/issues/2205)
+
+
+### Features
+
+* **magistrat-service:** enhance antenne visualisation [#2219](https://github.com/SocialGouv/emjpm/issues/2219) ([e91f06a](https://github.com/SocialGouv/emjpm/commit/e91f06a2066823932eb5e2627c5678d8bfeea04e))
+
+
+
+
+
 # [25.62.0](https://github.com/SocialGouv/emjpm/compare/v25.61.3...v25.62.0) (2020-09-27)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/knex",
-  "version": "25.62.0",
+  "version": "25.63.0",
   "private": true,
   "scripts": {
     "lint:pre-commit": "npm run lint:fix",
