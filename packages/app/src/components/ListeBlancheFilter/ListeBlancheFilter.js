@@ -21,7 +21,7 @@ const ListeBlancheFilter = () => {
   const { loading, error, filters, onFilterChange, departements = [] } = useContext(
     FiltersContextSerializable
   );
-  const { departementFinanceur, type, nom, nom_service, siret } = filters;
+  const { departementFinanceur, type = "mandataire", nom, nom_service, siret } = filters;
 
   const buttonLinks = [
     { title: "Mandataire individuel", url: `/${user.type}/liste-blanche/ajout-individuel` },
@@ -95,6 +95,16 @@ const ListeBlancheFilter = () => {
           <Flex>
             <Box sx={BoxStyle}>
               <Select
+                size="small"
+                instanceId={"filters-type"}
+                options={TYPE_OPTIONS}
+                placeholder={"Type d'utilisateur"}
+                value={TYPE_OPTIONS.find(({ value }) => value === type)}
+                onChange={(option) => onFilterChange({ type: option.value })}
+              />
+            </Box>
+            <Box sx={BoxStyle}>
+              <Select
                 instanceId={"filters-departement"}
                 size="small"
                 options={departmentOptions}
@@ -107,7 +117,19 @@ const ListeBlancheFilter = () => {
                 onChange={(option) => onFilterChange({ departement: option.value })}
               />
             </Box>
-
+          </Flex>
+          <Flex mt={2}>
+            <Box sx={BoxStyle}>
+              <Input
+                value={siret || ""}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={(event) => onFilterChange({ siret: event.target.value })}
+                name="search_siret"
+                size="small"
+                placeholder="Siret"
+              />
+            </Box>
             {type === "service" && (
               <Box sx={BoxStyle}>
                 <Input
@@ -121,54 +143,29 @@ const ListeBlancheFilter = () => {
                 />
               </Box>
             )}
-
             {type === "mandataire" && (
-              <Box sx={BoxStyle}>
-                <Input
-                  value={nom || ""}
-                  spellCheck="false"
-                  autoComplete="false"
-                  onChange={(event) => onFilterChange({ nom: event.target.value })}
-                  name="search_mandataire"
-                  size="small"
-                  placeholder="Nom du mandataire"
-                />
-              </Box>
-            )}
-
-            <Box sx={BoxStyle}>
-              <Input
-                value={siret || ""}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) => onFilterChange({ siret: event.target.value })}
-                name="search_siret"
-                size="small"
-                placeholder="Siret"
-              />
-            </Box>
-          </Flex>
-          <Flex mt={2}>
-            <Box sx={BoxStyle}>
-              <Select
-                size="small"
-                instanceId={"filters-type"}
-                options={TYPE_OPTIONS}
-                placeholder={"Type d'utilisateur"}
-                value={TYPE_OPTIONS.find(({ value }) => value === type)}
-                onChange={(option) => onFilterChange({ type: option.value })}
-              />
-            </Box>
-            {type === "mandataire" && (
-              <Box mr={1} pt={2} width="100px">
-                <CheckBox
-                  instanceId={"filters-departement-financeur"}
-                  label="Financé"
-                  name="departementFinanceur"
-                  isChecked={departementFinanceur || false}
-                  onChange={() => onFilterChange({ departementFinanceur: !departementFinanceur })}
-                />
-              </Box>
+              <>
+                <Box sx={BoxStyle}>
+                  <Input
+                    value={nom || ""}
+                    spellCheck="false"
+                    autoComplete="false"
+                    onChange={(event) => onFilterChange({ nom: event.target.value })}
+                    name="search_mandataire"
+                    size="small"
+                    placeholder="Nom du mandataire"
+                  />
+                </Box>
+                <Box mr={1} pt={2} width="100px">
+                  <CheckBox
+                    instanceId={"filters-departement-financeur"}
+                    label="Financé"
+                    name="departementFinanceur"
+                    isChecked={departementFinanceur || false}
+                    onChange={() => onFilterChange({ departementFinanceur: !departementFinanceur })}
+                  />
+                </Box>
+              </>
             )}
           </Flex>
         </Flex>
