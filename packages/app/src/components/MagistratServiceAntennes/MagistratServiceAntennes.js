@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/react-hooks";
 import { Antenne, Card, Heading3, Heading4, Spinner } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React from "react";
-import { Box } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { SERVICE_ANTENNES } from "./queries";
 
@@ -43,25 +43,19 @@ const MagistratServiceAntennes = (props) => {
       <Heading3 mt="4" mb="3">
         Liste des antennes du service
       </Heading3>
-      <Box
-        css={{
-          display: "grid",
-          gridGap: 15,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(4, 1fr)"],
-        }}
-      >
+      <Flex flexWrap="wrap" justifyContent="space-around">
         {service_antenne.map((antenne) => {
           antenne = { ...antenne, preferences: [] };
           return (
             <Antenne
-              sx={{ minHeight: "200px", p: "3" }}
+              sx={{ minHeight: "200px", p: "3", m: "1", width: "250px" }}
               key={antenne.id}
               antenne={antenne}
               hasButton={false}
             />
           );
         })}
-      </Box>
+      </Flex>
     </Box>
   );
 };

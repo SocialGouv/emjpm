@@ -172,7 +172,7 @@ export const MagistratMandataire = (props) => {
           </Box>
         </Flex>
       </Flex>
-
+      <Box>{serviceId && <MagistratServiceAntennes serviceId={serviceId} />}</Box>
       <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
         <MagistratMandataireMap
           longitude={longitude}
@@ -181,7 +181,6 @@ export const MagistratMandataire = (props) => {
           id={id}
         />
       </Box>
-      <Box>{serviceId && <MagistratServiceAntennes serviceId={serviceId} />}</Box>
     </Box>
   );
 };
