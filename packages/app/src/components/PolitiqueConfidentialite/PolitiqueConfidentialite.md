@@ -1,7 +1,7 @@
 # Politique de confidentialité 
 
 ## Traitement des données à caractère personnel
-La présente plateforme e-MJPM est à l'initiative du Ministère de la Santé et des solidarités, qui en est le responsable de traitements.
+La présente plateforme e-MJPM est à l'initiative du Ministère de la Santé et des solidarités, qui en est le responsable de traitement.
 
 ### Finalités
 
@@ -17,7 +17,7 @@ La plateforme peut traiter les données à caractère personnel suivantes :
 - **Données de profil de magistrats** : Nom ; Prénom ; Téléphone ; Adresse mail professionnelle 
 - **Données relatives à la liste des mandataires** : Nom d'usage ; nom de naissance ; Prénom ; adresse ; tribunal compétent
 - **Données relatives aux mandataires ayant fait l'objet d'une radiation** : Nom d'usage ; nom de naissance ; Prénom ; adresse ; décision de radiation
-- **Données relatives aux enquêtes** : informations relatives à l'agrément des mandataires, informations d'identification des mandataires, informations relatives à l'activité du mandataire (nombren types et issues de mesures, informations relatives aux personnes majeures à protéger)
+- **Données relatives aux enquêtes** : informations relatives à l'agrément des mandataires, informations d'identification des mandataires, informations relatives à l'activité du mandataire (nombre, types et issues de mesures, informations relatives aux personnes majeures à protéger)
 - **Données contenues dans les mesures judiciaires**
 - **Données d'hébergeur** : Identifiant de connexion ; Nature des opérations
 - **Cookies**
@@ -54,10 +54,12 @@ Pour les exercer, faites-nous parvenir une demande en précisant la date et l’
 
 ou par voie postale :
 
-*Direction des systèmes d’information
-Ministère des affaires sociales et de la santé
+```txt
+DNUM
+Ministère des Solidarités et de la santé
 39-43 Quai André Citroën
-75015 PARIS*.
+75015 PARIS
+```
 
 En raison de l’obligation de sécurité et de confidentialité dans le traitement des données à caractère personnel qui incombe au responsable de traitement,  votre demande ne sera traitée que si vous apportez la preuve de votre identité. 
 Pour vous aider dans votre démarche, vous trouverez ici [https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces](https://www.cnil.fr/fr/modele/courrier/exercer-son-droit-dacces), un modèle de courrier élaboré par la Cnil.
@@ -71,7 +73,7 @@ Le responsable de traitement s’engage à répondre dans un délai raisonnable 
 ### Destinataires des données
 
 
-Le responsable de traitement s'engage à ce que les données à caractères personnels soient traitées par les seules personnes autorisées.
+Le responsable de traitement s'engage à ce que les données à caractère personnel soient traitées par les seules personnes autorisées.
 
 ### Sous-traitants
 
@@ -91,7 +93,7 @@ Les mesures techniques et organisationnelles de sécurité adoptées pour assure
 
 - Pare feu système.
 - Pare feu applicatif (WAF).
-- Chiffrement des flux reseaux via certificat SSL.
+- Chiffrement des flux réseaux via certificat SSL.
 - Disque dur chiffré.
 - Services isolés dans des containers.
 - Gestion des journaux.
@@ -99,7 +101,7 @@ Les mesures techniques et organisationnelles de sécurité adoptées pour assure
 - Administration et monitoring centralisés des accès.
 - Accès aux ressources via clés SSH (pas de mot de passe post installation).
 - Sauvegarde des bases de données via solution de stockage Azur.
-- Accès aux données reservé aux membres de l'entité (hors restitution applicative publique des données).
+- Accès aux données réservé aux membres de l'entité (hors restitution applicative publique des données).
 - Accès aux données uniquement via un outil d'édition sécurisé (SSL + mot de passe) avec utilisation de comptes nominatifs.
 
 ## Utilisation de témoins de connexion (« cookies »)
