@@ -68,7 +68,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "jest-cli": "^24.9.0",
-    "jest-environment-knex": "^1.1.14",
+    "jest-environment-knex": "^3.0.1",
     "nodemailer-mock": "^1.5.3",
     "nodemon": "^1.19.4",
     "pg": "^7.18.2",
