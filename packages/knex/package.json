@@ -28,7 +28,7 @@
     "@socialgouv/eslint-config-recommended": "^0.21.0",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
-    "jest-environment-knex": "^1.1.14",
+    "jest-environment-knex": "^3.0.1",
     "prettier": "^2.0.5"
   }
 }
