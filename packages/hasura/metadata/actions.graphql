@@ -8,6 +8,14 @@ type Query {
 
 
 type Mutation {
+  export_mesures_file (
+    serviceId: Int
+    mandataireUserId: Int
+  ): FileOutput
+}
+
+
+type Mutation {
   import_base_finess (
     url: String!
   ): ImportFinessOutput

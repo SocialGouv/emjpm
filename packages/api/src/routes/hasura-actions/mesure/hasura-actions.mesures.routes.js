@@ -27,4 +27,20 @@ router.post(
   hasuraActionErrorHandler("Unexpected error processing file")
 );
 
+// hasura action: `export_mesures_file`
+router.post(
+  "/export",
+  async (req, res, next) => {
+    try {
+      const { userId, serviceId } = req.user;
+      console.log(userId);
+      return res.status(204);
+    } catch (err) {
+      console.log(err);
+      return next(err);
+    }
+  },
+  hasuraActionErrorHandler("Unexpected error processing file")
+);
+
 module.exports = router;
