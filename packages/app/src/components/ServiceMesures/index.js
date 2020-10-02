@@ -1,3 +1,4 @@
 import { ServiceMesures } from "./ServiceMesures";
+import { ServiceMesuresButtonBar } from "./ServiceMesuresButtonBar";
 
-export { ServiceMesures };
+export { ServiceMesures, ServiceMesuresButtonBar };

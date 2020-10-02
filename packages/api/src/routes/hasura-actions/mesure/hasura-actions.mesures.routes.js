@@ -63,7 +63,7 @@ router.post(
           lieu_vie,
           nature_mesure,
           champ_mesure,
-          tribunal: tis.etablissement,
+          tribunal: tis ? tis.etablissement : "",
           cabinet,
         };
       });
