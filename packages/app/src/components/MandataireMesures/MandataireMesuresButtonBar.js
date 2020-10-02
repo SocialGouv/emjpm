@@ -2,10 +2,19 @@ import { useMutation } from "@apollo/react-hooks";
 import { Export } from "@styled-icons/boxicons-regular/Export";
 import React, { useContext } from "react";
 import { Box, Button, Flex } from "rebass";
-
+import { b64toBlob } from "../../util/base64/b64toBlob";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
+
+const downloadMesuresFile = async (b64Data) => {
+  const element = document.createElement("a");
+  const file = b64toBlob(b64Data);
+  element.href = URL.createObjectURL(file);
+  element.download = `export_mesures_${new Date().toISOString()}.xlsx`;
+  document.body.appendChild(element); // Required for this to work in FireFox
+  element.click();
+};
 
 const MandataireMesuresButtonBar = () => {
   const { id: userId } = useContext(UserContext);
@@ -18,7 +27,7 @@ const MandataireMesuresButtonBar = () => {
         mandataireUserId: userId,
       },
     });
-    console.log(res);
+    downloadMesuresFile(res.data.export_mesures_file.data);
   };
 
   return (
