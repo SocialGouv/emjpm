@@ -1,10 +1,10 @@
 import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
-import { LayoutServices } from "../../../src/components/Layout";
-import { ServiceMesureImport } from "../../../src/components/ServiceMesureImport";
-import { UserContext } from "../../../src/components/UserContext";
-import { withAuthSync } from "../../../src/util/auth";
+import { LayoutServices } from "../../src/components/Layout";
+import { ServiceMesureImport } from "../../src/components/ServiceMesureImport";
+import { UserContext } from "../../src/components/UserContext";
+import { withAuthSync } from "../../src/util/auth";
 
 const ServiceMesuresImport = () => {
   const { service_members } = useContext(UserContext);
