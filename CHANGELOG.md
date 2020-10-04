@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.64.0](https://github.com/SocialGouv/emjpm/compare/v25.63.0...v25.64.0) (2020-10-04)
+
+
+### Bug Fixes
+
+* **api:** add missing ressources array ([66aadf8](https://github.com/SocialGouv/emjpm/commit/66aadf8d277e1850749b5cea773b494699beee4d))
+
+
+### Features
+
+* **export-mesure:** implement export excel ([#2235](https://github.com/SocialGouv/emjpm/issues/2235)) ([c27bc13](https://github.com/SocialGouv/emjpm/commit/c27bc1398be9449c228891ec117997647b616bec))
+* **liste-blanche:** organise filter ([7563d30](https://github.com/SocialGouv/emjpm/commit/7563d30c781c4a4982f9c498efb09ba3bbdf74fd))
+* **politique-confidentialité:** misprint ([46bbb91](https://github.com/SocialGouv/emjpm/commit/46bbb91a437e1d35d0f7f523ebfd6d9e3892aca2))
+
+
+
+
+
 # [25.63.0](https://github.com/SocialGouv/emjpm/compare/v25.62.0...v25.63.0) (2020-09-29)
 
 
