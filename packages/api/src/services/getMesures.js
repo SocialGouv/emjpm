@@ -1,6 +1,5 @@
 const { Mandataire } = require("../models/Mandataire");
 const { Mesure } = require("../models/Mesure");
-const { ServiceMember } = require("../models/ServiceMember");
 
 module.exports = async ({ userId, serviceId }) => {
   if (serviceId) {
