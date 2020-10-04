@@ -25,14 +25,18 @@ const mesures = async (req, res) => {
     if (status) {
       filter.status = status;
     }
-    mesures = await Mesure.query().withGraphFetched("[etats]").where(filter);
+    mesures = await Mesure.query()
+      .withGraphFetched("[etats,ressources]")
+      .where(filter);
   } else {
     const mandataire = await user.$relatedQuery("mandataire");
     const filter = { mandataire_id: mandataire.id };
     if (status) {
       filter.status = status;
     }
-    mesures = await Mesure.query().withGraphFetched("[etats]").where(filter);
+    mesures = await Mesure.query()
+      .withGraphFetched("[etats,ressources]")
+      .where(filter);
   }
 
   return res.status(200).json({
