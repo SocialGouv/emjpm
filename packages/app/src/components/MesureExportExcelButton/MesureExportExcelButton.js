@@ -1,9 +1,9 @@
 import { useMutation } from "@apollo/react-hooks";
 import { Export } from "@styled-icons/boxicons-regular/Export";
 import React, { useContext } from "react";
-import { Box, Button, Flex } from "rebass";
+import { Button } from "rebass";
+
 import { b64toBlob } from "../../util/base64/b64toBlob";
-import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
 
@@ -16,50 +16,41 @@ const downloadMesuresFile = async (b64Data) => {
   element.click();
 };
 
-const ServiceMesuresButtonBar = () => {
-  const { service_members } = useContext(UserContext);
-  const [{ service }] = service_members;
+const MesureExportExcelButton = (props) => {
+  const { id: userId, service_members = [] } = useContext(UserContext);
+  const [service_member] = service_members;
+  const service = service_member ? service_member.service : undefined;
 
   const [exportMesure] = useMutation(EXPORT_MESURES_EXCEL_FILE);
 
   const exportMesuresToExcel = async () => {
     const res = await exportMesure({
       variables: {
-        serviceId: service.id,
+        mandataireUserId: userId,
+        serviceId: service ? service.id : undefined,
       },
     });
     downloadMesuresFile(res.data.export_mesures_file.data);
   };
 
   return (
-    <Box>
-      <Flex flexDirection="row">
-        <Box>
-          <LinkButton href="/services/add-mesures">Ajouter une mesure</LinkButton>
-        </Box>
-        <Box ml={1}>
-          <LinkButton href="/services/import-mesures">Importez vos mesures</LinkButton>
-        </Box>
-        <Button
-          onClick={exportMesuresToExcel}
-          ml="1"
-          mr="2"
-          pt="0"
-          pb="0"
-          pl="1"
-          pr="1"
-          variant="outline"
-          sx={{
-            ":hover": {
-              opacity: "0.7",
-            },
-          }}
-        >
-          <Export size="24" />
-        </Button>
-      </Flex>
-    </Box>
+    <Button
+      {...props}
+      onClick={exportMesuresToExcel}
+      variant="outline"
+      pt="0"
+      pb="0"
+      pl="1"
+      pr="1"
+      sx={{
+        ":hover": {
+          opacity: "0.7",
+        },
+      }}
+    >
+      <Export size="24" />
+    </Button>
   );
 };
 
-export { ServiceMesuresButtonBar };
+export { MesureExportExcelButton };
