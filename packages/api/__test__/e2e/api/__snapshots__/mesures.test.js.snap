@@ -35,3 +35,107 @@ Object {
   ],
 }
 `;
+
+exports[`POST /api/editors/mesures/batch it returns 201 1`] = `
+Object {
+  "mesures": Array [
+    Object {
+      "annee_naissance": 1989,
+      "antenne_id": null,
+      "cause_sortie": "dessaisissement_famille",
+      "civilite": "monsieur",
+      "date_fin_mesure": "2020-04-04",
+      "date_nomination": "2020-01-01",
+      "date_premier_mesure": "2020-01-10",
+      "date_protection_en_cours": "2020-01-10",
+      "etats": Array [
+        Object {
+          "champ_mesure": null,
+          "code_postal": "89000",
+          "date_changement_etat": "2020-01-08",
+          "etablissement_siret": "",
+          "lieu_vie": "domicile",
+          "nature_mesure": "curatelle_simple",
+          "pays": "FR",
+          "type_etablissement": null,
+          "ville": "AUXERRE",
+        },
+      ],
+      "id": 7,
+      "latitude": null,
+      "longitude": null,
+      "numero_dossier": "45656456",
+      "numero_rg": "RG234534534",
+      "ressources": Array [
+        Object {
+          "annee": 2010,
+          "niveau_ressource": 300,
+          "prestations_sociales": Array [
+            "PCH",
+            "RSA",
+          ],
+        },
+      ],
+      "resultat_revision": null,
+    },
+    Object {
+      "annee_naissance": 1992,
+      "antenne_id": null,
+      "cause_sortie": null,
+      "civilite": "monsieur",
+      "date_fin_mesure": null,
+      "date_nomination": "2019-01-01",
+      "date_premier_mesure": "2018-01-10",
+      "date_protection_en_cours": "2020-01-10",
+      "etats": Array [
+        Object {
+          "champ_mesure": null,
+          "code_postal": "89000",
+          "date_changement_etat": "2019-01-08",
+          "etablissement_siret": "",
+          "lieu_vie": "domicile",
+          "nature_mesure": "tutelle",
+          "pays": "FR",
+          "type_etablissement": null,
+          "ville": "AUXERRE",
+        },
+        Object {
+          "champ_mesure": null,
+          "code_postal": "89000",
+          "date_changement_etat": "2020-01-08",
+          "etablissement_siret": "",
+          "lieu_vie": "domicile",
+          "nature_mesure": "curatelle_simple",
+          "pays": "FR",
+          "type_etablissement": null,
+          "ville": "AUXERRE",
+        },
+      ],
+      "id": 8,
+      "latitude": null,
+      "longitude": null,
+      "numero_dossier": "123456789",
+      "numero_rg": "A9&#x2F;1&#x2F;TEST",
+      "ressources": Array [
+        Object {
+          "annee": 2019,
+          "niveau_ressource": 300,
+          "prestations_sociales": Array [
+            "PCH",
+            "RSA",
+          ],
+        },
+        Object {
+          "annee": 2020,
+          "niveau_ressource": 300,
+          "prestations_sociales": Array [
+            "PCH",
+            "RSA",
+          ],
+        },
+      ],
+      "resultat_revision": null,
+    },
+  ],
+}
+`;

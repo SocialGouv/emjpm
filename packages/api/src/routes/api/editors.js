@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { param } = require("express-validator");
-const { rules } = require("./editors-rules");
+const { rules, batchRules } = require("./editors-rules");
 const editorMesureAntenne = require("../../middlewares/editor-mesures-antenne");
 const editorMesureTi = require("../../middlewares/editor-mesures-ti");
 const editorMesureUser = require("../../middlewares/editor-mesures-user");
@@ -38,7 +38,7 @@ router
     mesureUpdate
   );
 
-router.post("/mesures/batch", editorMesureUser, mesureBatch);
+router.post("/mesures/batch", batchRules, editorMesureUser, mesureBatch);
 
 router.delete("/mesures/:id", mesureDelete.deleteById);
 router.delete("/mesures", mesureDelete.deleteAll);

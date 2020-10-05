@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 
 const { sanitizeMesureProperties } = require("../../utils/mesure");
 
-const saveMesure = require("./service/saveMesure");
+const { saveMesure } = require("./service/saveMesure");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
