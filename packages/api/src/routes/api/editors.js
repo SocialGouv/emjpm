@@ -10,6 +10,7 @@ const {
   mesures,
   mesure,
   serviceAntennes,
+  tribunaux,
   mesureCreate,
   mesureUpdate,
   mesureBatch,
@@ -19,6 +20,7 @@ const {
 router.get("/mesures", mesures);
 
 router.get("/service-antennes", serviceAntennes.getAntennes);
+router.get("/tribunaux", tribunaux.getTribunaux);
 
 router
   .post(
