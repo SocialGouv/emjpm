@@ -39,6 +39,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.0.0",
     "knex": "^0.21.6",
+    "lodash.uniq": "^4.5.0",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.13",
     "objection": "^2.2.3",
