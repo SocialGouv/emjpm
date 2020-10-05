@@ -5,6 +5,7 @@ const mesureUpdate = require("./mesure-update");
 const mesureBatch = require("./mesure-batch");
 const mesureDelete = require("./mesure-delete");
 const serviceAntennes = require("./service-antennes");
+const tribunaux = require("./tribunaux");
 
 module.exports = {
   mesures,
@@ -14,4 +15,5 @@ module.exports = {
   mesureBatch,
   mesureDelete,
   serviceAntennes,
+  tribunaux,
 };
