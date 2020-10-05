@@ -21,8 +21,8 @@
     "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "knex": "^0.21.6",
-    "objection": "^1.6.11",
-    "pg": "^8.3.3"
+    "objection": "^2.2.3",
+    "pg": "^8.4.0"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^0.35.0",

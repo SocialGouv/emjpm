@@ -71,7 +71,7 @@
     "jest-environment-knex": "^3.0.1",
     "nodemailer-mock": "^1.5.3",
     "nodemon": "^1.19.4",
-    "pg": "^7.18.2",
+    "pg": "^8.4.0",
     "pg-query-stream": "^2.1.2",
     "pino-pretty": "^3.6.1",
     "prettier": "^2.1.2",
