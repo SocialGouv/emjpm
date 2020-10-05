@@ -363,10 +363,59 @@ describe("POST /api/editors/mesures/batch", () => {
               },
             ],
           },
+          {
+            annee_naissance: 1992,
+            antenne_id: null,
+            civilite: "monsieur",
+            date_nomination: "2019-01-01",
+            date_premier_mesure: "2018-01-10",
+            date_protection_en_cours: "2020-01-10",
+            numero_dossier: "123456789",
+            numero_rg: "A9/1/TEST",
+            tribunal_siret: "17590111501251",
+            tribunal_cabinet: "3A",
+            etats: [
+              {
+                date_changement_etat: "2020-01-08",
+                lieu_vie: "domicile",
+                pays: "FR",
+                nature_mesure: "curatelle_simple",
+                code_postal: "89000",
+                ville: "AUXERRE",
+              },
+              {
+                date_changement_etat: "2019-01-08",
+                lieu_vie: "domicile",
+                pays: "FR",
+                nature_mesure: "tutelle",
+                code_postal: "89000",
+                ville: "AUXERRE",
+              },
+            ],
+            ressources: [
+              {
+                annee: 2019,
+                niveau_ressource: 300,
+                prestations_sociales: ["PCH", "RSA"],
+              },
+              {
+                annee: 2020,
+                niveau_ressource: 300,
+                prestations_sociales: ["PCH", "RSA"],
+              },
+            ],
+          },
         ],
       });
 
     expect(response.status).toBe(201);
+    const { mesures } = response.body;
+    const expected = mesures.map((mesure) => {
+      // eslint-disable-next-line no-unused-vars
+      const { created_at, ...expected } = mesure;
+      return expected;
+    });
+    expect({ mesures: expected }).toMatchSnapshot();
   });
 });
 
