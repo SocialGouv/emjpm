@@ -10,6 +10,8 @@ const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresIm
 const { Tis } = require("../../../../models/Tis");
 const { Mesure } = require("../../../../models/Mesure");
 
+const mesureStatesService = require("../../../../services/updateMesureStates");
+
 const configuration = require("../../../../env");
 const inseeAPI = require("../../../../utils/insee-api");
 
@@ -197,13 +199,9 @@ const importMesures = async ({
     }
 
     if (mandataire) {
-      await actionsMesuresImporterMesureRepository.updateMandataireMesureStates(
-        mandataire.id
-      );
+      await mesureStatesService.updateMandataireMesureStates(mandataire.id);
     } else if (service) {
-      await actionsMesuresImporterMesureRepository.updateServiceMesureStates(
-        service.id
-      );
+      await mesureStatesService.updateServiceMesureStates(service.id);
     }
   }
 

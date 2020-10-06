@@ -6,6 +6,7 @@ const antenneIdIsValid = require("../../services/antenneIdIsValid");
 const { sanitizeMesureProperties } = require("../../utils/mesure");
 
 const { saveMesures } = require("./service/saveMesure");
+const updateMesureStates = require("./service/updateMesureStates");
 
 const mesureBatch = async (req, res) => {
   const errors = validationResult(req);
@@ -59,6 +60,9 @@ const mesureBatch = async (req, res) => {
     }
 
     const mesuresQueryResult = await saveMesures(allMesureDatas);
+
+    await updateMesureStates(serviceOrMandataire, type);
+
     return res.status(201).json({
       mesures: mesuresQueryResult.map((mqr) => sanitizeMesureProperties(mqr)),
     });
