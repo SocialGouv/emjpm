@@ -17,7 +17,7 @@ const {
   mesureDelete,
 } = require("../../../src/controllers/editor");
 
-router.get("/mesures", mesures);
+router.get("/mesures", editorMesureUser, mesures);
 
 router.get("/service-antennes", serviceAntennes.getAntennes);
 router.get("/tribunaux", tribunaux.getTribunaux);
@@ -42,8 +42,8 @@ router
 
 router.post("/mesures/batch", batchRules, editorMesureUser, mesureBatch);
 
-router.delete("/mesures/:id", mesureDelete.deleteById);
-router.delete("/mesures", mesureDelete.deleteAll);
-router.get("/mesures/:id", param("id").isInt(), mesure);
+router.delete("/mesures/:id", editorMesureUser, mesureDelete.deleteById);
+router.delete("/mesures", editorMesureUser, mesureDelete.deleteAll);
+router.get("/mesures/:id", param("id").isInt(), editorMesureUser, mesure);
 
 module.exports = router;
