@@ -3,10 +3,10 @@ import React from "react";
 import { Flex } from "rebass";
 
 import { LayoutMandataire } from "../../src/components/Layout";
-import { MandataireFilters } from "../../src/components/MandataireFilters";
-import { FiltersContextProvider } from "../../src/components/MandataireFilters/context";
-import { MandataireMesures } from "../../src/components/MandataireMesures";
 import { MesureButtonBar } from "../../src/components/MesureButtonBar";
+import { MesureList } from "../../src/components/MesureList";
+import { MesureListFilters } from "../../src/components/MesureListFilters";
+import { FiltersContextProvider } from "../../src/components/MesureListFilters/context";
 import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
@@ -24,14 +24,14 @@ const Mandataires = () => {
             <Heading1>Toutes vos mesures</Heading1>
             <MesureButtonBar />
           </Flex>
-          <MandataireFilters />
+          <MesureListFilters />
           <Flex
             sx={{
               flexWrap: "wrap",
               mt: "2",
             }}
           >
-            <MandataireMesures />
+            <MesureList />
           </Flex>
         </BoxWrapper>
       </LayoutMandataire>

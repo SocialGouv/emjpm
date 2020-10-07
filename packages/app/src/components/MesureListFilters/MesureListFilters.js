@@ -7,17 +7,30 @@ import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../constant
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
-const MandataireFilters = (props) => {
-  const { isStatusHidden } = props;
+const MesureListFilters = (props) => {
+  const { isStatusHidden, service_antennes = [] } = props;
 
   const {
     natureMesure,
     changeNatureMesure,
     mesureStatus,
     changeMesureStatus,
+    antenne,
+    changeAntenne,
     searchText,
     changeSearchText,
   } = useContext(FiltersContext);
+
+  const antenneOptions = [
+    {
+      label: "Toutes les antennes",
+      value: null,
+    },
+    ...service_antennes.map((antenne) => ({
+      label: antenne.name,
+      value: antenne.id,
+    })),
+  ];
 
   return (
     <Card mt="3">
@@ -25,12 +38,22 @@ const MandataireFilters = (props) => {
         <Box>
           <Flex>
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
+            {service_antennes.length >= 2 && (
+              <Box width="170px" mr={1}>
+                <Select
+                  size="small"
+                  options={antenneOptions}
+                  placeholder={"Antenne"}
+                  value={antenne}
+                  onChange={(option) => changeAntenne(option)}
+                />
+              </Box>
+            )}
             <Box width="200px" mr={1}>
               <Select
                 size="small"
-                instanceId={"natureMesure"}
                 options={[DEFAULT_MESURE_NATURE].concat(MESURE_PROTECTION.NATURE_MESURE.options)}
-                placeholder={"nature de la mesure"}
+                placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}
               />
@@ -39,9 +62,8 @@ const MandataireFilters = (props) => {
               <Box width="200px" mr={1}>
                 <Select
                   size="small"
-                  instanceId={"mesureStatus"}
                   options={MESURE_STATUS_LABEL_VALUE}
-                  placeholder={"état de la mesure"}
+                  placeholder={"État de la mesure"}
                   value={mesureStatus}
                   onChange={(option) => changeMesureStatus(option)}
                 />
@@ -57,7 +79,7 @@ const MandataireFilters = (props) => {
             onChange={(event) => changeSearchText(event.target.value)}
             name="search"
             size="small"
-            placeholder="n° RG ou n° dossier"
+            placeholder="Rechercher une mesure"
           />
         </Box>
       </Flex>
@@ -65,4 +87,4 @@ const MandataireFilters = (props) => {
   );
 };
 
-export { MandataireFilters };
+export { MesureListFilters };

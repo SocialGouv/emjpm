@@ -4,9 +4,9 @@ import { Flex } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { MesureButtonBar } from "../../src/components/MesureButtonBar";
-import { ServiceFilters } from "../../src/components/ServiceFilters";
-import { FiltersContextProvider } from "../../src/components/ServiceFilters/context";
-import { ServiceMesures } from "../../src/components/ServiceMesures";
+import { MesureList } from "../../src/components/MesureList";
+import { MesureListFilters } from "../../src/components/MesureListFilters";
+import { FiltersContextProvider } from "../../src/components/MesureListFilters/context";
 import { UserContext } from "../../src/components/UserContext";
 import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
@@ -33,14 +33,14 @@ const Mesures = () => {
             <MesureButtonBar />
           </Flex>
 
-          <ServiceFilters service_antennes={service_antennes} />
+          <MesureListFilters service_antennes={service_antennes} />
           <Flex
             sx={{
               flexWrap: "wrap",
               mt: "2",
             }}
           >
-            <ServiceMesures />
+            <MesureList />
           </Flex>
         </BoxWrapper>
       </LayoutServices>

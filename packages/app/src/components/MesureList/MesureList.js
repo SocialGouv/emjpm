@@ -6,17 +6,21 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import { getUserBasePath } from "../../constants";
 import { formatMesureListItems } from "../../util/mesures";
-import { FiltersContext } from "../MandataireFilters/context";
-import { MANDATAIRE_MESURES } from "./queries";
+import { FiltersContext } from "../MesureListFilters/context";
+import { UserContext } from "../UserContext";
+import { MESURES } from "./queries";
 import { MesureListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MandataireMesures = (props) => {
+const MesureList = (props) => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+  const { type } = useContext(UserContext);
+  const userBasePath = getUserBasePath({ type });
 
   useEffect(() => {
     setCurrentOffset(0);
@@ -26,7 +30,7 @@ const MandataireMesures = (props) => {
   if (isOnlyWaiting) {
     currentMesureStatus = MESURE_PROTECTION_STATUS.en_attente;
   } else {
-    currentMesureStatus = mesureStatus ? mesureStatus.value : null;
+    currentMesureStatus = mesureStatus ? mesureStatus.value : MESURE_PROTECTION_STATUS.en_cours;
   }
 
   const queryVariables = {
@@ -38,12 +42,12 @@ const MandataireMesures = (props) => {
     natureMesure: natureMesure ? natureMesure.value : null,
   };
 
-  const { data, error, loading } = useQuery(MANDATAIRE_MESURES, {
+  const { data, error, loading } = useQuery(MESURES, {
     variables: queryVariables,
   });
 
-  const selectMesure = ({ id }) => {
-    Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
+  const selectMesure = ({ id, userBasePath }) => {
+    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${id}`, {
       shallow: true,
     });
   };
@@ -70,7 +74,7 @@ const MandataireMesures = (props) => {
                 <MesureListItem
                   key={mesure.id}
                   mesure={mesure}
-                  onClick={({ mesure }) => selectMesure(mesure)}
+                  onClick={({ mesure }) => selectMesure({ id: mesure.id, userBasePath })}
                 />
               );
             })}
@@ -103,4 +107,4 @@ const MandataireMesures = (props) => {
   );
 };
 
-export { MandataireMesures };
+export { MesureList };
