@@ -21,6 +21,7 @@ export const ETABLISSEMENTS = gql`
       id
       nofinesset
       siret
+      rs
       rslongue
       ligneacheminement
       departement {

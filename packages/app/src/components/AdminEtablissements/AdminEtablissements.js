@@ -13,7 +13,7 @@ const resultPerPage = 50;
 
 const RowItem = (props) => {
   const { item } = props;
-  const { id, siret, rslongue, ligneacheminement, departement } = item;
+  const { id, siret, rs, rslongue, ligneacheminement, departement } = item;
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
@@ -26,7 +26,7 @@ const RowItem = (props) => {
               </Flex>
               <Flex width="500px" flexDirection="column">
                 <Text sx={labelStyle}>Raison sociale</Text>
-                <Text sx={descriptionStyle}>{rslongue}</Text>
+                <Text sx={descriptionStyle}>{rslongue ? rslongue : rs}</Text>
               </Flex>
               <Flex width="400px" flexDirection="column">
                 <Text sx={labelStyle}>Commune</Text>
