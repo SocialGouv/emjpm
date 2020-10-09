@@ -7,9 +7,10 @@ import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { EDIT_MESURE, RECALCULATE_SERVICE_MESURES } from "../ServiceMesures/mutations";
-import { SERVICE, SERVICE_TRIBUNAL } from "../ServiceMesures/queries";
+import { SERVICE } from "../ServiceMesures/queries";
 import { UserContext } from "../UserContext";
 import { GET_SERVICE_USERS } from "../UserContext/queries";
+import { SERVICE_TRIBUNAL } from "./queries";
 import { ServiceMesureEditForm } from "./ServiceMesureEditForm";
 import { ServiceMesureEditStyle } from "./style";
 
@@ -24,9 +25,7 @@ const ServiceMesureEdit = (props) => {
     },
   ] = service_members;
 
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL, {
-    variables: { serviceId },
-  });
+  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
   const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
     refetchQueries: [

@@ -1,5 +1,23 @@
 import gql from "graphql-tag";
 
+export const RECALCULATE_SERVICE_MESURES = gql`
+  mutation update_service_mesures($service_id: Int!) {
+    recalculateServiceMesuresCount(serviceId: $service_id) {
+      success
+      updatedRows
+    }
+  }
+`;
+
+export const RECALCULATE_MANDATAIRE_MESURES = gql`
+  mutation update_mandataire_mesures($mandataire_id: Int!) {
+    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
+      success
+      updatedRows
+    }
+  }
+`;
+
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
@@ -13,8 +31,8 @@ export const ADD_MESURE = gql`
     $annee_naissance: String!
     $numero_dossier: String!
     $numero_rg: String!
+    $antenne_id: Int
     $ti_id: Int!
-    $mandataireId: Int!
     $latitude: Float
     $longitude: Float
     $pays: String!
@@ -35,7 +53,7 @@ export const ADD_MESURE = gql`
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
         status: "en_cours"
-        mandataire_id: $mandataireId
+        antenne_id: $antenne_id
         latitude: $latitude
         longitude: $longitude
         pays: $pays
@@ -43,35 +61,12 @@ export const ADD_MESURE = gql`
       }
     ) {
       returning {
-        id
-        annee_naissance
         antenne_id
+        service_id
+        id
         cabinet
         civilite
         code_postal
-        created_at
-        date_nomination
-        department_id
-        etablissement
-        etablissement_id
-        date_fin_mesure
-        is_urgent
-        judgment_date
-        mandataire_id
-        numero_dossier
-        numero_rg
-        cause_sortie
-        lieu_vie
-        service_id
-        status
-        ti_id
-        nature_mesure
-        champ_mesure
-        ville
-        latitude
-        longitude
-        pays
-        cabinet
         departement {
           id
           nom
@@ -80,20 +75,21 @@ export const ADD_MESURE = gql`
             nom
           }
         }
-        ti {
-          id
-          etablissement
-        }
+        status
+        nature_mesure
+        champ_mesure
+        ville
+        latitude
+        longitude
+        lieu_vie
+        numero_rg
+        numero_dossier
+        etablissement
+        annee_naissance
+        date_nomination
+        pays
+        cabinet
       }
-    }
-  }
-`;
-
-export const RECALCULATE_MANDATAIRE_MESURES = gql`
-  mutation update_mandataire_mesures($mandataire_id: Int!) {
-    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
-      success
-      updatedRows
     }
   }
 `;

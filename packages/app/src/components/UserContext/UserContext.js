@@ -12,6 +12,7 @@ import {
   MAGISTRAT_USERS,
   MANDATAIRE_USERS,
 } from "./queries";
+import { isService } from "../../util";
 
 const QUERY_TYPE = {
   admin: ADMIN_USERS,
@@ -39,8 +40,18 @@ const UserProvider = (props) => {
     return <Fragment>Chargement...</Fragment>;
   }
 
+  const user = data.users_by_pk;
+  let currentService;
+  if (isService(user.type)) {
+    const {
+      service_members: [{ service }],
+    } = user;
+    currentService = service;
+  }
+
   const currentUser = {
-    ...data.users_by_pk,
+    ...user,
+    service: currentService,
     agrements,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
   };

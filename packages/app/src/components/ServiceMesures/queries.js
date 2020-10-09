@@ -35,17 +35,6 @@ export const SERVICE = gql`
   }
 `;
 
-export const SERVICE_TRIBUNAL = gql`
-  query ServiceTribunal($serviceId: Int!) {
-    service_tis(where: { service_id: { _eq: $serviceId } }) {
-      ti {
-        etablissement
-        id
-      }
-    }
-  }
-`;
-
 export const MESURES = gql`
   query mesures(
     $limit: Int

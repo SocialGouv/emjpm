@@ -24,7 +24,7 @@ const initialValues = {
   cabinet: "",
 };
 
-export const ServiceMesureCreateForm = (props) => {
+export const MesureCreateForm = (props) => {
   const { tribunaux, antenneOptions, handleSubmit } = props;
   const formik = useFormik({
     onSubmit: handleSubmit,
