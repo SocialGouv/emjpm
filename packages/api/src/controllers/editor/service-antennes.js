@@ -16,8 +16,8 @@ const getAntennes = async (req, res) => {
     ServiceMember.query().select("service_id").where("user_id", user_id)
   );
 
-  return res.status(200).json(
-    antennes.map((antenne) => {
+  return res.status(200).json({
+    antennes: antennes.map((antenne) => {
       return {
         id: antenne.id,
         nom: antenne.name,
@@ -25,8 +25,8 @@ const getAntennes = async (req, res) => {
         code_postal: antenne.address_zip_code,
         ville: antenne.address_city,
       };
-    })
-  );
+    }),
+  });
 };
 
 module.exports = { getAntennes };
