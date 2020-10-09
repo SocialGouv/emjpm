@@ -5,6 +5,37 @@ const { ProcessusStates } = require("../../../models/ProcessusStates");
 const { Departement } = require("../../../models/Departement");
 const logger = require("../../../utils/logger");
 
+const FILTERS = [
+  "355",
+  "292",
+  "106",
+  "362",
+  "412",
+  "444",
+  "697",
+  "252",
+  "253",
+  "255",
+  "370",
+  "382",
+  "395",
+  "437",
+  "448",
+  "246",
+  "379",
+  "445",
+  "446",
+  "202",
+  "500",
+  "501",
+  "502",
+  "381",
+  "214",
+  "219",
+  "380",
+  "165",
+];
+
 const actionsFinessImporter = {
   importFinessFile,
 };
@@ -122,9 +153,12 @@ async function importStructureEtablissement(properties, departements) {
     numuai,
   ] = properties;
 
-  const { id: departementId } = departements.find(
-    (elm) => elm.code === departement
-  );
+  if (!FILTERS.includes(categetab)) {
+    return;
+  }
+
+  const { id: departementId } =
+    departements.find((elm) => elm.code === departement) || {};
 
   const etablissement = {
     nofinesset,
