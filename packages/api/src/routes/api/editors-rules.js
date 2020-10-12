@@ -9,14 +9,19 @@ const rules = [
   body("civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
 
   body("date_nomination").custom(checkDateNomination).isDate().toDate(),
-  body("date_fin_mesure").optional().isDate().toDate(),
-  body("date_premier_mesure").optional().isDate().toDate(),
-  body("date_protection_en_cours").optional().isDate().toDate(),
+  body("date_fin_mesure").optional({ nullable: true }).isDate().toDate(),
+  body("date_premier_mesure").optional({ nullable: true }).isDate().toDate(),
+  body("date_protection_en_cours")
+    .optional({ nullable: true })
+    .isDate()
+    .toDate(),
   body("tribunal_siret").not().isEmpty().trim().escape(),
-  body("antenne_id").optional().toInt(10),
-  body("cause_sortie").optional().isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
+  body("antenne_id").optional({ nullable: true }).toInt(10),
+  body("cause_sortie")
+    .optional({ nullable: true })
+    .isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
   body("resultat_revision")
-    .optional()
+    .optional({ nullable: true })
     .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
   check("etats.*.pays").isISO31661Alpha2(),
   check("etats.*.date_changement_etat").isDate().toDate(),
@@ -35,16 +40,25 @@ const batchRules = [
     .custom(checkDateNomination)
     .isDate()
     .toDate(),
-  body("mesures.*.date_fin_mesure").optional().isDate().toDate(),
-  body("mesures.*.date_premier_mesure").optional().isDate().toDate(),
-  body("mesures.*.date_protection_en_cours").optional().isDate().toDate(),
+  body("mesures.*.date_fin_mesure")
+    .optional({ nullable: true })
+    .isDate()
+    .toDate(),
+  body("mesures.*.date_premier_mesure")
+    .optional({ nullable: true })
+    .isDate()
+    .toDate(),
+  body("mesures.*.date_protection_en_cours")
+    .optional({ nullable: true })
+    .isDate()
+    .toDate(),
   body("mesures.*.tribunal_siret").not().isEmpty().trim().escape(),
-  body("mesures.*.antenne_id").optional().toInt(10),
+  body("mesures.*.antenne_id").optional({ nullable: true }).toInt(10),
   body("mesures.*.cause_sortie")
-    .optional()
+    .optional({ nullable: true })
     .isIn(MESURE_PROTECTION.CAUSE_SORTIE.keys),
   body("mesures.*.resultat_revision")
-    .optional()
+    .optional({ nullable: true })
     .isIn(MESURE_PROTECTION.RESULTAT_REVISION.keys),
   check("mesures.*.etats.*.pays").isISO31661Alpha2(),
   check("mesures.*.etats.*.date_changement_etat").isDate().toDate(),
