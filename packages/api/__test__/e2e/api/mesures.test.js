@@ -318,6 +318,7 @@ describe("POST /api/editors/mesures", () => {
         },
       ],
       resultat_revision: null,
+      tribunal_siret: "17590111501251",
     });
     expect(response.status).toBe(201);
   });
