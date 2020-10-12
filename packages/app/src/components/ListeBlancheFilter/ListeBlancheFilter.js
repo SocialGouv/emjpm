@@ -10,8 +10,8 @@ import { UserContext } from "../UserContext";
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [
-  { label: "Mandataire", value: "mandataire" },
-  { label: "Service", value: "service" },
+  { label: "Mandataire (individuel, préposé)", value: "mandataire" },
+  { label: "Association tutélaire", value: "service" },
 ];
 
 const ListeBlancheFilter = () => {
@@ -21,7 +21,7 @@ const ListeBlancheFilter = () => {
   const { loading, error, filters, onFilterChange, departements = [] } = useContext(
     FiltersContextSerializable
   );
-  const { departementFinanceur, type = "mandataire", nom, nom_service, siret } = filters;
+  const { departementFinanceur, type = "mandataire", nom, nom_service, siret, email } = filters;
 
   const buttonLinks = [
     { title: "Mandataire individuel", url: `/${user.type}/liste-blanche/ajout-individuel` },
@@ -153,7 +153,18 @@ const ListeBlancheFilter = () => {
                     onChange={(event) => onFilterChange({ nom: event.target.value })}
                     name="search_mandataire"
                     size="small"
-                    placeholder="Nom du mandataire"
+                    placeholder="Nom"
+                  />
+                </Box>
+                <Box sx={BoxStyle}>
+                  <Input
+                    value={email || ""}
+                    spellCheck="false"
+                    autoComplete="false"
+                    onChange={(event) => onFilterChange({ email: event.target.value })}
+                    name="email"
+                    size="small"
+                    placeholder="email"
                   />
                 </Box>
                 <Box mr={1} pt={2} width="100px">

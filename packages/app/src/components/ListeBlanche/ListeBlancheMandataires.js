@@ -48,11 +48,15 @@ function getRequestFilters(filters, departements) {
   }
 
   if (filters.prenom) {
-    requestFilters.prenom = { _ilike: `${filters.prenom}%` };
+    requestFilters.prenom = { _ilike: `%${filters.prenom}%` };
   }
 
   if (filters.nom) {
-    requestFilters.nom = { _ilike: `${filters.nom}%` };
+    requestFilters.nom = { _ilike: `%${filters.nom}%` };
+  }
+
+  if (filters.email) {
+    requestFilters.email = { _ilike: `%${filters.email}%` };
   }
 
   return requestFilters;
@@ -60,7 +64,7 @@ function getRequestFilters(filters, departements) {
 
 export const ListeBlancheMandataires = (props) => {
   const { onSelectItem } = props;
-  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { filters, debounceFilters, departements = [] } = useContext(FiltersContextSerializable);
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -73,7 +77,7 @@ export const ListeBlancheMandataires = (props) => {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      filters: getRequestFilters(filters, departements),
+      filters: getRequestFilters(debounceFilters, departements),
     },
   });
 
