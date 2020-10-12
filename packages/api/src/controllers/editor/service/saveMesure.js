@@ -48,7 +48,7 @@ async function saveMesures(allMesureDatas) {
   );
 
   const mesuresQueryResult = await Mesure.query()
-    .withGraphFetched("[etats,ressources]")
+    .withGraphFetched("[etats,ressources, tis]")
     .whereIn("id", createdMesureIds);
   return mesuresQueryResult;
 }
@@ -85,7 +85,7 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
   );
 
   const mesureQueryResult = await Mesure.query()
-    .withGraphFetched("[etats,ressources]")
+    .withGraphFetched("[etats,ressources, tis]")
     .where("id", createdMesure.id)
     .first();
   return mesureQueryResult;
