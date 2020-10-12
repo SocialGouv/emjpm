@@ -22,7 +22,7 @@ export const ListeBlanche = (props) => {
   const { filters } = useContext(FiltersContextSerializable);
   const router = useRouter();
 
-  const { type } = filters;
+  const { type = "mandataire" } = filters;
 
   return type === "mandataire" ? (
     <ListeBlancheMandataires

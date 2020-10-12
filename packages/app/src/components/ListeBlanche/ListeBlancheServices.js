@@ -30,12 +30,12 @@ function getRequestFilters(filters) {
 export const ListeBlancheServices = (props) => {
   const { onSelectItem } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { filters } = useContext(FiltersContextSerializable);
+  const { filters, debounceFilters } = useContext(FiltersContextSerializable);
   const { data, loading, error } = useQuery(LB_SERVICES, {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      filters: getRequestFilters(filters),
+      filters: getRequestFilters(debounceFilters),
     },
   });
 

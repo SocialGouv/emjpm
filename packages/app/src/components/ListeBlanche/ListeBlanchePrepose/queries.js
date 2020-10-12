@@ -6,6 +6,7 @@ export const ETABLISSEMENTS = gql`
       id
       ligneacheminement
       rslongue
+      rs
     }
   }
 `;
