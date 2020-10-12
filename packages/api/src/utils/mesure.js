@@ -27,6 +27,7 @@ function sanitizeMesureProperties(mesure) {
       ? format(mesure.date_protection_en_cours, "yyyy-MM-dd")
       : mesure.date_protection_en_cours,
     resultat_revision: mesure.resultat_revision,
+    tribunal_siret: mesure.tis ? mesure.tis.siret : null,
     etats: mesure.etats
       ? mesure.etats.map((etat) => {
           return {

@@ -58,7 +58,7 @@ async function updateMesure({
   );
 
   const mesureQueryResult = await Mesure.query()
-    .withGraphFetched("[etats,ressources]")
+    .withGraphFetched("[etats,ressources, tis]")
     .where("id", mesureToUpdate.id)
     .first();
 
