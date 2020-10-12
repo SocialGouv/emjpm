@@ -15,7 +15,7 @@ const mesures = async (req, res) => {
   }
 
   const mesures = await Mesure.query()
-    .withGraphFetched("[etats,ressources]")
+    .withGraphFetched("[etats,ressources, tis]")
     .where(filter);
 
   return res.status(200).json({
