@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.65.0](https://github.com/SocialGouv/emjpm/compare/v25.64.0...v25.65.0) (2020-10-12)
+
+
+### Features
+
+* **finess:** import finess with filters ([9a35968](https://github.com/SocialGouv/emjpm/commit/9a35968555c434afb291be0dcacace14eb73205e))
+* **liste-blanche:** enhance filters, texts, ui ([45d5257](https://github.com/SocialGouv/emjpm/commit/45d52578ad4f786952525cdba791271f006a1878))
+
+
+
+
+
 # [25.64.0](https://github.com/SocialGouv/emjpm/compare/v25.63.0...v25.64.0) (2020-10-04)
 
 

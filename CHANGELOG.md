@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.65.0](https://github.com/SocialGouv/emjpm/compare/v25.64.0...v25.65.0) (2020-10-12)
+
+
+### Bug Fixes
+
+* **api:** accept nullable values ([01634a7](https://github.com/SocialGouv/emjpm/commit/01634a77a9bc522a5e797c4a898a8354ba362992))
+* **api:** set tribunal_siret ([81fb0c3](https://github.com/SocialGouv/emjpm/commit/81fb0c330c1b5205864b9807c6a3452fc87ef3d9))
+* **api:** update mesure state counter ([#2241](https://github.com/SocialGouv/emjpm/issues/2241)) ([3d6bfbe](https://github.com/SocialGouv/emjpm/commit/3d6bfbe658253343e2a3087fb78c56187b8739fe))
+
+
+### Features
+
+* **api:** add get tribunaux ([c484bf6](https://github.com/SocialGouv/emjpm/commit/c484bf60ea5bd9dba9472a158d62390fd24729a5))
+* **api:** define name for arrays ([#2242](https://github.com/SocialGouv/emjpm/issues/2242)) ([e87e3c4](https://github.com/SocialGouv/emjpm/commit/e87e3c4d0631bec9230e0b1480052eaca7bfe2c5))
+* **api:** implement batch creation properly ([#2238](https://github.com/SocialGouv/emjpm/issues/2238)) ([8273ef1](https://github.com/SocialGouv/emjpm/commit/8273ef10c2b081c44b0bdaf8c203f8d468e97cb8))
+* **finess:** import finess with filters ([9a35968](https://github.com/SocialGouv/emjpm/commit/9a35968555c434afb291be0dcacace14eb73205e))
+* **liste-blanche:** enhance filters, texts, ui ([45d5257](https://github.com/SocialGouv/emjpm/commit/45d52578ad4f786952525cdba791271f006a1878))
+
+
+
+
+
 # [25.64.0](https://github.com/SocialGouv/emjpm/compare/v25.63.0...v25.64.0) (2020-10-04)
 
 
