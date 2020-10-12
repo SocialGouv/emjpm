@@ -14,7 +14,7 @@ const validationSchema = yup.object().shape({
   nom: yup.string().required(),
   prenom: yup.string().required(),
   email: yup.string().required(),
-  siret: yup.string().nullable(),
+  siret: yup.string().required(),
 });
 
 export const ListeBlancheIndividuelForm = (props) => {
@@ -59,41 +59,35 @@ export const ListeBlancheIndividuelForm = (props) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box mt={4}>
-        <Flex pr={2} flexDirection="column">
-          <Flex flexDirection="row">
-            <Flex pr={2} flex={1 / 2} flexDirection="column">
-              <FormGroupInput
-                placeholder="Nom"
-                id="nom"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-              <FormGroupInput
-                placeholder="Adresse e-mail"
-                id="email"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-            </Flex>
-            <Flex flex={1 / 2} flexDirection="column">
-              <FormGroupInput
-                placeholder="Prénom"
-                id="prenom"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-              <FormGroupInput
-                placeholder="Siret"
-                id="siret"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-            </Flex>
-          </Flex>
-        </Flex>
-
         <Card>
-          <Heading4 mb={1}>{"Départements"}</Heading4>
+          <Flex pr={2} flexDirection="column">
+            <Heading4 mb={1}>{"Informations"}</Heading4>
+            <FormGroupInput
+              placeholder="Siret"
+              id="siret"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Nom"
+              id="nom"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Prénom"
+              id="prenom"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Adresse e-mail"
+              id="email"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Flex>
+          <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
 
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}

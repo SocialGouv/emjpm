@@ -1,9 +1,18 @@
-import { Button, Card, InlineError, Input, RadioGroup } from "@emjpm/ui";
+import { Button, Card, Heading4, RadioGroup } from "@emjpm/ui";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 import React, { Fragment } from "react";
 import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
+
+import yup from "../../../lib/validationSchemas/yup";
+import { FormGroupInput } from "../../AppForm";
+
+const validationSchema = yup.object().shape({
+  lastname: yup.string().required(),
+  firstname: yup.string().required(),
+  email: yup.string().required(),
+});
 
 async function updateEtablissementRattachement(formik, id) {
   if (formik.values.etablissements.length > 0) {
@@ -39,6 +48,7 @@ export const ListeBlanchePreposeForm = (props) => {
 
   const formik = useFormik({
     initialValues,
+    validationSchema,
     onSubmit: async (values, { setFieldError, setSubmitting }) => {
       try {
         if (handleSubmit) {
@@ -59,7 +69,7 @@ export const ListeBlanchePreposeForm = (props) => {
   const etablissementIds = formik.values.etablissements.map((e) => e.id);
   const etablissementOptions = formik.values.etablissements.map((e) => {
     return {
-      label: e.rslongue,
+      label: e.rslongue ? e.rslongue : e.rs,
       value: `${e.id}`,
       checked: e.etablissement_rattachement === true,
       disabled: false, // !canModifyAgrement(user, d.id),
@@ -68,127 +78,111 @@ export const ListeBlanchePreposeForm = (props) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Flex>
-        <Box mr={1} flex={1 / 2}>
-          <Input
-            value={formik.values.firstname}
-            id="firstname"
-            name="firstname"
-            required
-            hasError={formik.errors.firstname && formik.touched.firstname}
-            onChange={formik.handleChange}
-            placeholder="Prénom"
-          />
-          <InlineError message={formik.errors.firstname} fieldId="firstname" />
-        </Box>
-        <Box ml={1} flex={1 / 2}>
-          <Input
-            value={formik.values.lastname}
-            id="lastname"
-            name="lastname"
-            required
-            hasError={formik.errors.lastname && formik.touched.lastname}
-            onChange={formik.handleChange}
-            placeholder="Nom"
-          />
-          <InlineError message={formik.errors.lastname} fieldId="lastname" />
-        </Box>
-      </Flex>
       <Box mt={4}>
-        <Input
-          value={formik.values.email}
-          id="email"
-          name="email"
-          type="email"
-          hasError={formik.errors.email && formik.touched.email}
-          onChange={formik.handleChange}
-          placeholder="Email"
-        />
-        <InlineError message={formik.errors.email} fieldId="email" />
-      </Box>
+        <Card>
+          <Flex pr={2} flexDirection="column">
+            <Heading4 mb={1}>{"Informations"}</Heading4>
+            <FormGroupInput
+              placeholder="Nom"
+              id="lastname"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Prénom"
+              id="firstname"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Adresse e-mail du mandataire"
+              id="email"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Flex>
 
-      <Card mt={4}>
-        {formik.values.etablissements.length > 0 && (
-          <Box mb={4}>
-            <Text fontWeight="bold">Etablissements ajoutés</Text>
-
-            <Text mt={"20px"} mb={2}>{`Sélectionner l'établissement de rattachement:`}</Text>
-
-            <RadioGroup
-              options={etablissementOptions}
-              onValueChange={async (value) => {
-                await updateEtablissementRattachement(formik, Number(value));
-              }}
-              renderRadioLabel={(etablissement) => {
-                return (
-                  <Fragment>
-                    <Text>{etablissement.label}</Text>
-                    <Box
-                      ml={2}
-                      sx={{
-                        cursor: "pointer",
-                        color: "#777",
-                        ":hover": {
-                          color: "#aa2d2d",
-                        },
+          <Heading4 mb={1}>{"Liste des établissements"}</Heading4>
+          <Text mt={"20px"} mb={2}>
+            {`Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement.`}
+          </Text>
+          <RadioGroup
+            options={etablissementOptions}
+            onValueChange={async (value) => {
+              await updateEtablissementRattachement(formik, Number(value));
+            }}
+            renderRadioLabel={(etablissement) => {
+              return (
+                <Fragment>
+                  <Text>{etablissement.label}</Text>
+                  <Box
+                    ml={2}
+                    sx={{
+                      cursor: "pointer",
+                      color: "#777",
+                      ":hover": {
+                        color: "#aa2d2d",
+                      },
+                    }}
+                  >
+                    <XCircle
+                      size={24}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        formik.setFieldValue(
+                          "etablissements",
+                          formik.values.etablissements.filter(
+                            (value) => value.id !== Number(etablissement.id)
+                          )
+                        );
                       }}
-                    >
-                      <XCircle
-                        size={24}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          formik.setFieldValue(
-                            "etablissements",
-                            formik.values.etablissements.filter(
-                              (value) => value.id !== Number(etablissement.id)
-                            )
-                          );
-                        }}
-                      />
-                    </Box>
-                  </Fragment>
-                );
-              }}
-            />
-          </Box>
-        )}
+                    />
+                  </Box>
+                </Fragment>
+              );
+            }}
+          />
 
-        <Box>
-          <Text fontWeight="bold">Ajouter un établissement</Text>
-          <Box mt={2}>
-            <AsyncSelect
-              name="etablissement"
-              instanceId={`etablissement-${data.id || "new"}`}
-              cacheOptions
-              defaultOptions
-              placeholder={"Sélectionner un établissement"}
-              loadOptions={async (inputValue) => {
-                const values = await searchEtablissements(inputValue);
-                return values.map((e) => ({
-                  label: `${e.rslongue} (${e.ligneacheminement})`,
-                  value: e.id,
-                }));
-              }}
-              onChange={(option) => {
-                if (!etablissementIds.includes(option.value)) {
-                  formik.setFieldValue(
-                    "etablissements",
-                    formik.values.etablissements.concat({ id: option.value, nom: option.label })
-                  );
-                }
-              }}
-            />
+          <Box>
+            <Box mt={2}>
+              <AsyncSelect
+                name="etablissement"
+                instanceId={`etablissement-${data.id || "new"}`}
+                cacheOptions
+                defaultOptions
+                placeholder={"Ajouter un établissement"}
+                loadOptions={async (inputValue) => {
+                  const values = await searchEtablissements(inputValue);
+                  return values.map((e) => ({
+                    label: `${e.rslongue ? e.rslongue : e.rs} (${e.ligneacheminement})`,
+                    value: e.id,
+                  }));
+                }}
+                onChange={(option) => {
+                  if (!etablissementIds.includes(option.value)) {
+                    formik.setFieldValue(
+                      "etablissements",
+                      formik.values.etablissements.concat({
+                        id: option.value,
+                        rslongue: option.label,
+                      })
+                    );
+                  }
+                }}
+              />
+            </Box>
           </Box>
-        </Box>
-      </Card>
-      <Flex justifyContent="flex-end" mt={4}>
-        <Box>
-          <Button disabled={formik.isSubmitting} type="submit">
-            {editMode ? "Mettre à jour" : "Ajouter"}
-          </Button>
-        </Box>
-      </Flex>
+
+          <Flex justifyContent="flex-end" mt={4}>
+            <Box>
+              <Button disabled={formik.isSubmitting} type="submit">
+                {editMode ? "Mettre à jour" : "Ajouter"}
+              </Button>
+            </Box>
+          </Flex>
+        </Card>
+      </Box>
     </form>
   );
 };
