@@ -19,7 +19,7 @@ class MesureRessources extends Model {
       properties: {
         id: { type: "integer" },
         mesure_id: { type: "integer" },
-        annee: { type: ["integer", "null"] },
+        annee: { type: "integer" },
         niveau_ressource: { type: "integer" },
         prestations_sociales: { type: "json" },
       },
