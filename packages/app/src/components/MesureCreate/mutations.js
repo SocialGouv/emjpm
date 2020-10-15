@@ -63,6 +63,7 @@ export const ADD_MESURE = gql`
       returning {
         antenne_id
         service_id
+        mandataire_id
         id
         cabinet
         civilite

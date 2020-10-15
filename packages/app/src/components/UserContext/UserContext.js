@@ -5,6 +5,7 @@ import { setUser } from "../../util/sentry";
 
 export const Context = createContext({});
 
+import { isService } from "../../util";
 import {
   ADMIN_USERS,
   DIRECTION_USERS,
@@ -12,7 +13,6 @@ import {
   MAGISTRAT_USERS,
   MANDATAIRE_USERS,
 } from "./queries";
-import { isService } from "../../util";
 
 const QUERY_TYPE = {
   admin: ADMIN_USERS,

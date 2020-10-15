@@ -10,7 +10,7 @@ import { getUserBasePath } from "../../constants";
 import { formatMesureListItems } from "../../util/mesures";
 import { FiltersContext } from "../MesureListFilters/context";
 import { UserContext } from "../UserContext";
-import { MESURES } from "./queries";
+import { MESURES_QUERY } from "./queries";
 import { MesureListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
@@ -42,7 +42,7 @@ const MesureList = (props) => {
     natureMesure: natureMesure ? natureMesure.value : null,
   };
 
-  const { data, error, loading } = useQuery(MESURES, {
+  const { data, error, loading } = useQuery(MESURES_QUERY, {
     variables: queryVariables,
   });
 

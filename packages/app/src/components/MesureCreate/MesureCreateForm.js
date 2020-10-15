@@ -88,20 +88,22 @@ export const MesureCreateForm = (props) => {
           <InlineError message={formik.errors.numero_dossier} fieldId="numero_dossier" />
         )}
       </Field>
-      <Field>
-        <Select
-          id="antenne"
-          name="antenne"
-          placeholder="Antenne"
-          value={formik.values.antenne}
-          hasError={formik.errors.antenne_id && formik.touched.antenne_id}
-          onChange={(option) => formik.setFieldValue("antenne", option)}
-          options={antenneOptions}
-        />
-        {formik.touched.antenne_id && (
-          <InlineError message={formik.errors.antenne_id} fieldId="antenne" />
-        )}
-      </Field>
+      {antenneOptions.length > 0 && (
+        <Field>
+          <Select
+            id="antenne"
+            name="antenne"
+            placeholder="Antenne"
+            value={formik.values.antenne}
+            hasError={formik.errors.antenne_id && formik.touched.antenne_id}
+            onChange={(option) => formik.setFieldValue("antenne", option)}
+            options={antenneOptions}
+          />
+          {formik.touched.antenne_id && (
+            <InlineError message={formik.errors.antenne_id} fieldId="antenne" />
+          )}
+        </Field>
+      )}
       <Field>
         <Input
           value={formik.values.date_nomination}
@@ -134,7 +136,7 @@ export const MesureCreateForm = (props) => {
         <Select
           id="champ_mesure"
           name="champ_mesure"
-          placeholder="Nature de la mesure"
+          placeholder="Champs de la mesure"
           value={formik.values.champ_mesure}
           hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
           onChange={(option) => formik.setFieldValue("champ_mesure", option)}

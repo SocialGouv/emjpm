@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const MESURES = gql`
-  query MandataireMesures(
+export const MESURES_QUERY = gql`
+  query MESURES_QUERY(
     $limit: Int
     $natureMesure: nature_mesure_type
     $status: mesure_status_type!

@@ -1,44 +1,53 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
-import React, { useMemo, useContext } from "react";
+import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
+import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions, isMandataire } from "../../util";
-import { GET_SERVICE_USERS } from "../UserContext/queries";
+import { UserContext } from "../UserContext";
 import { MesureCreateForm } from "./MesureCreateForm";
 import {
   ADD_MESURE,
-  RECALCULATE_SERVICE_MESURES,
   RECALCULATE_MANDATAIRE_MESURES,
+  RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { SERVICE_TRIBUNAL, USER_TRIBUNAL } from "./queries";
-import { UserContext } from "../UserContext";
 
 export const MesureCreate = (props) => {
   const client = useApolloClient();
   const currentUser = useContext(UserContext);
 
-  const { service = {} } = currentUser;
-  const service_antennes = service ? service.service_antennes : [];
+  const { service = {}, type } = currentUser;
+  const { service_antennes = [] } = service;
 
-  const { loading, error, data } = useQuery(SERVICE_TRIBUNAL);
+  const GET_TRIBUNAL = isMandataire(type) ? USER_TRIBUNAL : SERVICE_TRIBUNAL;
+  const RECALCULATE_MESURES = isMandataire(type)
+    ? RECALCULATE_MANDATAIRE_MESURES
+    : RECALCULATE_SERVICE_MESURES;
 
-  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.service_tis) : []), [data]);
+  const { loading, error, data } = useQuery(GET_TRIBUNAL);
 
-  const [recalculateServiceMesure] = useMutation(RECALCULATE_SERVICE_MESURES);
+  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.tribunaux) : []), [data]);
+
+  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
   const [addMesure] = useMutation(ADD_MESURE, {
-    options: { refetchQueries: ["mesures", "mesures_aggregate"] },
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      await recalculateServiceMesure({
-        variables: { service_id: mesure.service_id },
+      await recalculateMesures({
+        refetchQueries: ["CURRENT_USER_QUERY"],
+        variables: { service_id: mesure.service_id, mandataire_id: mesure.mandataire_id },
       });
-      await Router.push("/services/mesures/[mesure_id]", `/services/mesures/${mesure.id}`, {
-        shallow: true,
-      });
+      await Router.push(
+        `${getUserBasePath({ type })}/mesures/[mesure_id]`,
+        `${getUserBasePath({ type })}/mesures/${mesure.id}`,
+        {
+          shallow: true,
+        }
+      );
     },
   });
 
@@ -68,7 +77,7 @@ export const MesureCreate = (props) => {
 
     addMesure({
       awaitRefetchQueries: true,
-      refetchQueries: ["mesures", "mesures_aggregate"],
+      refetchQueries: ["MESURES_QUERY"],
       variables: {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),

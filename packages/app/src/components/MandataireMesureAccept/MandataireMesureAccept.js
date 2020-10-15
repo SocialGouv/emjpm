@@ -5,8 +5,8 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
-import { MANDATAIRE_MESURES } from "../MandataireMesures/queries";
 import { MesureContext } from "../MesureContext";
+import { MESURES_QUERY } from "../MesureList/queries";
 import { MandataireMesureAcceptForm } from "./MandataireMesureAcceptForm";
 import { ACCEPT_MESURE, MANDATAIRE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
 import { ServiceMesureAcceptStyle } from "./style";
@@ -61,7 +61,7 @@ export const MandataireMesureAccept = (props) => {
           await updateMesure({
             refetchQueries: [
               {
-                query: MANDATAIRE_MESURES,
+                query: MESURES_QUERY,
                 variables: {
                   limit: 20,
                   offset: 0,
@@ -71,7 +71,7 @@ export const MandataireMesureAccept = (props) => {
                 },
               },
               {
-                query: MANDATAIRE_MESURES,
+                query: MESURES_QUERY,
                 variables: {
                   limit: 20,
                   offset: 0,
