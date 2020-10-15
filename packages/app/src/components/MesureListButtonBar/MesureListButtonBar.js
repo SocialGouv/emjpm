@@ -6,7 +6,7 @@ import { LinkButton } from "../Commons";
 import { MesureExportExcelButton } from "../MesureExportExcelButton";
 import { UserContext } from "../UserContext";
 
-const MesureButtonBar = () => {
+const MesureListButtonBar = () => {
   const { type } = useContext(UserContext);
 
   const path = getUserBasePath({ type });
@@ -26,4 +26,4 @@ const MesureButtonBar = () => {
   );
 };
 
-export { MesureButtonBar };
+export { MesureListButtonBar };

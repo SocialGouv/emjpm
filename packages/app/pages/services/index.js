@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { Flex } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
-import { MesureButtonBar } from "../../src/components/MesureButtonBar";
 import { MesureList } from "../../src/components/MesureList";
+import { MesureListButtonBar } from "../../src/components/MesureListButtonBar";
 import { MesureListFilters } from "../../src/components/MesureListFilters";
 import { FiltersContextProvider } from "../../src/components/MesureListFilters/context";
 import { UserContext } from "../../src/components/UserContext";
@@ -30,7 +30,7 @@ const Mesures = () => {
         <BoxWrapper mt={6} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
             <Heading1>Toutes vos mesures</Heading1>
-            <MesureButtonBar />
+            <MesureListButtonBar />
           </Flex>
 
           <MesureListFilters service_antennes={service_antennes} />
