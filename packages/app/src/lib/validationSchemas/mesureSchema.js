@@ -1,6 +1,6 @@
 import yup from "./yup";
 
-const serviceMesureSchema = yup.object().shape({
+const mesureSchema = yup.object().shape({
   annee_naissance: yup
     .number()
     .required()
@@ -9,13 +9,11 @@ const serviceMesureSchema = yup.object().shape({
   antenne: yup.string(),
   champ_mesure: yup.string().nullable(),
   city: yup.string().when("country", {
-    is: (country) => country.value && country.value === "FR",
+    is: (country) => country === "FR",
     then: yup.string().required(),
   }),
   civilite: yup.string().required(),
-  country: yup.object().shape({
-    value: yup.string().required(),
-  }),
+  country: yup.string().required(),
   date_nomination: yup.date().required(),
   lieu_vie: yup.string().required(),
   nature_mesure: yup.string().required(),
@@ -23,9 +21,9 @@ const serviceMesureSchema = yup.object().shape({
   numero_rg: yup.string().required(),
   tribunal: yup.string().required(),
   zipcode: yup.string().when("country", {
-    is: (country) => country.value && country.value === "FR",
+    is: (country) => country === "FR",
     then: yup.string().length(5).required(),
   }),
 });
 
-export { serviceMesureSchema };
+export { mesureSchema };

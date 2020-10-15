@@ -20,6 +20,7 @@ export const FormGroupInput = ({
   formik,
   hideErrors,
   validationSchema,
+  onChange,
 }) => {
   const { handleChange, handleBlur, values } = formik;
 
@@ -50,7 +51,7 @@ export const FormGroupInput = ({
           name={id}
           value={value}
           onBlur={handleBlur}
-          onChange={handleChange}
+          onChange={onChange ? onChange : handleChange}
           hasError={showError}
           type={type}
           min={min}

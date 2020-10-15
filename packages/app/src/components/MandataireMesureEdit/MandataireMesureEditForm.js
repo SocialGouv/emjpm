@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { mandataireMesureSchema } from "../../lib/validationSchemas";
+import { mesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -36,7 +36,7 @@ export const MandataireMesureEditForm = (props) => {
 
   const formik = useFormik({
     onSubmit,
-    validationSchema: mandataireMesureSchema,
+    validationSchema: mesureSchema,
     initialValues: {
       annee_naissance: age,
       civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),

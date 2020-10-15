@@ -5,7 +5,7 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { serviceMesureSchema } from "../../lib/validationSchemas";
+import { mesureSchema } from "../../lib/validationSchemas";
 import { findOption } from "../../util/option/OptionUtil";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
@@ -42,7 +42,7 @@ export const ServiceMesureEditForm = (props) => {
 
   const formik = useFormik({
     onSubmit,
-    validationSchema: serviceMesureSchema,
+    validationSchema: mesureSchema,
     initialValues: {
       annee_naissance: age,
       antenne_id: antenneId ? antenneOptions.find((o) => o.value === antenneId) : null,

@@ -9,15 +9,14 @@ import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
-import { mandataireMesureSchema } from "./mandataireMesureSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
+import { mesureSchema } from "./mesureSchema";
 import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
 import { satisfactionCampaignSchema } from "./satisfactionCampaignSchema";
 import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
-import { serviceMesureSchema } from "./serviceMesureSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
 import { signupSchema } from "./signupSchema";
@@ -33,10 +32,9 @@ export {
   magistratMesureDeleteSchema,
   magistratMandataireSchema,
   mandataireEditSchema,
-  mandataireMesureSchema,
   passwordSchema,
   serviceAntenneSchema,
-  serviceMesureSchema,
+  mesureSchema,
   mandataireSignupSchema,
   serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,

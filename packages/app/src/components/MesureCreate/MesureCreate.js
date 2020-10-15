@@ -75,22 +75,24 @@ export const MesureCreate = (props) => {
       }
     }
 
+    console.log(values);
+
     addMesure({
       awaitRefetchQueries: true,
       refetchQueries: ["MESURES_QUERY"],
       variables: {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),
-        antenne_id: values.antenne ? Number.parseInt(values.antenne.value) : null,
-        civilite: values.civilite.value,
+        antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
+        civilite: values.civilite,
         date_nomination: values.date_nomination,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
-        lieu_vie: values.lieu_vie.value,
+        lieu_vie: values.lieu_vie,
         ti_id: values.tribunal.value,
-        nature_mesure: values.nature_mesure.value,
-        champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
-        pays: values.country.value,
+        nature_mesure: values.nature_mesure,
+        champ_mesure: values.champ_mesure,
+        pays: values.country,
         cabinet: values.cabinet,
       },
     });
