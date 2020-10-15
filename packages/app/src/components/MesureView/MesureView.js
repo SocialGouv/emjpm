@@ -3,11 +3,13 @@ import { Card, Heading2 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { LinkButton } from "../../components/Commons";
+import { getUserBasePath } from "../../constants";
+import { LinkButton } from "../Commons";
 import { MesureContext } from "../MesureContext";
+import { UserContext } from "../UserContext";
 import { content, statusBox, subtitle } from "./style";
 
-export const MandataireMesure = (props) => {
+export const MesureView = (props) => {
   const {
     realAge,
     cabinet,
@@ -25,6 +27,9 @@ export const MandataireMesure = (props) => {
     antenne,
     id,
   } = useContext(MesureContext);
+
+  const { type } = useContext(UserContext);
+  const userBasePath = getUserBasePath({ type });
 
   return (
     <Box {...props}>
@@ -94,6 +99,13 @@ export const MandataireMesure = (props) => {
               <Text sx={content}>{dateNominationFormated}</Text>
             </Box>
 
+            {antenne && (
+              <Box mb={4}>
+                <Text sx={subtitle}>Antenne</Text>
+                <Text sx={content}>{antenne}</Text>
+              </Box>
+            )}
+
             <Box mb={4}>
               <Text sx={subtitle}>Numéro de dossier</Text>
               <Text sx={content}>{numeroDossier}</Text>
@@ -105,8 +117,8 @@ export const MandataireMesure = (props) => {
           {status === MESURE_PROTECTION_STATUS.en_attente && (
             <LinkButton
               outline={true}
-              href="/mandataires/mesures/[mesure_id]/accept"
-              asLink={`/mandataires/mesures/${id}/accept`}
+              href={`${userBasePath}/mesures/[mesure_id]/accept`}
+              asLink={`${userBasePath}/mesures/${id}/accept`}
             >
               Accepter la mesure
             </LinkButton>
@@ -118,16 +130,16 @@ export const MandataireMesure = (props) => {
                 outline={true}
                 bg="red"
                 color="white"
-                href="/mandataires/mesures/[mesure_id]/delete"
-                asLink={`/mandataires/mesures/${id}/delete`}
+                href={`${userBasePath}/mesures/[mesure_id]/delete`}
+                asLink={`${userBasePath}/mesures/${id}/delete`}
               >
                 Supprimer la mesure
               </LinkButton>
               <LinkButton
                 ml={3}
                 outline={true}
-                href="/mandataires/mesures/[mesure_id]/reactivate"
-                asLink={`/mandataires/mesures/${id}/reactivate`}
+                href={`${userBasePath}/mesures/[mesure_id]/reactivate`}
+                asLink={`${userBasePath}/mesures/${id}/reactivate`}
               >
                 Réouvrir la mesure
               </LinkButton>
@@ -140,8 +152,8 @@ export const MandataireMesure = (props) => {
                 bg="red"
                 color="white"
                 outline={true}
-                href="/mandataires/mesures/[mesure_id]/close"
-                asLink={`/mandataires/mesures/${id}/close`}
+                href={`${userBasePath}/mesures/[mesure_id]/close`}
+                asLink={`${userBasePath}/mesures/${id}/close`}
               >
                 Cloturer la mesure
               </LinkButton>
@@ -149,8 +161,8 @@ export const MandataireMesure = (props) => {
               <LinkButton
                 ml={3}
                 outline={true}
-                href="/mandataires/mesures/[mesure_id]/edit"
-                asLink={`/mandataires/mesures/${id}/edit`}
+                href={`${userBasePath}/mesures/[mesure_id]/edit`}
+                asLink={`${userBasePath}/mesures/${id}/edit`}
               >
                 Modifier la mesure
               </LinkButton>
@@ -162,4 +174,4 @@ export const MandataireMesure = (props) => {
   );
 };
 
-export default MandataireMesure;
+export default MesureView;
