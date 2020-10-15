@@ -7,14 +7,13 @@ import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
 import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
-import { mandataireAcceptMesureSchema } from "./mandataireAcceptMesureSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mandataireSignupSchema } from "./mandataireSignupSchema";
+import { mesureAcceptSchema } from "./mesureAcceptSchema";
 import { mesureSchema } from "./mesureSchema";
 import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
 import { satisfactionCampaignSchema } from "./satisfactionCampaignSchema";
-import { serviceAcceptMesureSchema } from "./serviceAcceptMesureSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
@@ -35,10 +34,9 @@ export {
   passwordSchema,
   serviceAntenneSchema,
   mesureSchema,
+  mesureAcceptSchema,
   mandataireSignupSchema,
-  serviceAcceptMesureSchema,
   serviceMemberInvitationSchema,
-  mandataireAcceptMesureSchema,
   resetPasswordSchema,
   signupDirectionSchema,
   signupMagistratSchema,

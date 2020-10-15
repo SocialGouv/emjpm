@@ -4,43 +4,64 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
+import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
+import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
-import { MandataireMesureAcceptForm } from "./MandataireMesureAcceptForm";
-import { ACCEPT_MESURE, MANDATAIRE, RECALCULATE_MANDATAIRE_MESURES } from "./mutations";
-import { ServiceMesureAcceptStyle } from "./style";
+import { UserContext } from "../UserContext";
+import { MesureAcceptForm } from "./MesureAcceptForm";
+import {
+  ACCEPT_MESURE,
+  RECALCULATE_MANDATAIRE_MESURES,
+  RECALCULATE_SERVICE_MESURES,
+} from "./mutations";
+import { MesureAcceptStyle } from "./style";
 
-export const MandataireMesureAccept = (props) => {
+export const MesureAccept = (props) => {
   const client = useApolloClient();
-  const mesure = useContext(MesureContext);
-  const { mandataireId, id } = mesure;
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
-    refetchQueries: [
-      {
-        query: MANDATAIRE,
-        variables: { id: mandataireId },
-      },
-    ],
-  });
+  const mesure = useContext(MesureContext);
+  const currentUser = useContext(UserContext);
+
+  const { service = {}, type } = currentUser;
+  const { service_antennes = [] } = service;
+  const { mandataireId, serviceId, id } = mesure;
+
+  const userBasePath = getUserBasePath({ type });
+
+  const RECALCULATE_MESURES = isMandataire(type)
+    ? RECALCULATE_MANDATAIRE_MESURES
+    : RECALCULATE_SERVICE_MESURES;
+
+  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mandataireId } });
+      await recalculateMesures({
+        variables: { mandataire_id: mandataireId, service_id: serviceId },
+        refetchQueries: ["CURRENT_USER_QUERY"],
+      });
     },
   });
 
+  const antenneOptions = service_antennes.map((antenne) => ({
+    label: antenne.name,
+    value: antenne.id,
+  }));
+
   return (
-    <Box sx={ServiceMesureAcceptStyle} {...props}>
-      <MandataireMesureAcceptForm
+    <Box sx={MesureAcceptStyle} {...props}>
+      <MesureAcceptForm
+        antenneOptions={antenneOptions}
+        userBasePath={userBasePath}
         onSubmit={async (values, { setSubmitting, setErrors }) => {
           const variables = {};
 
-          if (values.country.value === "FR") {
+          if (values.pays === "FR") {
             const location = await getLocation(client, {
-              zipcode: values.zipcode,
-              city: values.city,
+              zipcode: values.code_postal,
+              city: values.ville,
             });
 
             if (!location || !location.department) {
@@ -50,8 +71,8 @@ export const MandataireMesureAccept = (props) => {
               return setSubmitting(false);
             } else {
               const { department, geolocation } = location;
-              variables.code_postal = values.zipcode;
-              variables.ville = values.city.toUpperCase();
+              variables.code_postal = values.code_postal;
+              variables.ville = values.ville.toUpperCase();
               variables.latitude = geolocation ? geolocation.latitude : null;
               variables.longitude = geolocation ? geolocation.longitude : null;
               variables.department_id = department.id;
@@ -68,6 +89,7 @@ export const MandataireMesureAccept = (props) => {
                   searchText: null,
                   status: MESURE_PROTECTION_STATUS.en_cours,
                   natureMesure: null,
+                  antenne: null,
                 },
               },
               {
@@ -78,6 +100,7 @@ export const MandataireMesureAccept = (props) => {
                   searchText: null,
                   status: MESURE_PROTECTION_STATUS.en_attente,
                   natureMesure: null,
+                  antenne: null,
                 },
               },
             ],
@@ -85,15 +108,20 @@ export const MandataireMesureAccept = (props) => {
               ...variables,
               date_nomination: values.date_nomination,
               id,
-              lieu_vie: values.lieu_vie.value,
-              pays: values.country.value,
+              lieu_vie: values.lieu_vie,
+              pays: values.pays,
+              antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
             },
           });
 
           setSubmitting(false);
-          await Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-            shallow: true,
-          });
+          await Router.push(
+            `${userBasePath}/mesures/[mesure_id]`,
+            `${userBasePath}/mesures/${id}`,
+            {
+              shallow: true,
+            }
+          );
         }}
         mt="3"
         mesure={mesure}
@@ -102,4 +130,4 @@ export const MandataireMesureAccept = (props) => {
   );
 };
 
-export default MandataireMesureAccept;
+export default MesureAccept;
