@@ -1,4 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext, useMemo } from "react";
@@ -7,26 +8,39 @@ import { Box, Flex } from "rebass";
 import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions, isMandataire } from "../../util";
+import { MesureContext } from "../MesureContext";
+import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
-import { MesureCreateForm } from "./MesureCreateForm";
+import { MesureCreateOrEditForm } from "./MesureCreateOrEditForm";
 import {
   ADD_MESURE,
+  EDIT_MESURE,
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
 import { SERVICE_TRIBUNAL, USER_TRIBUNAL } from "./queries";
 
-export const MesureCreate = (props) => {
+export const MesureCreateOrEdit = (props) => {
+  let mesureToEdit = useContext(MesureContext);
+  const editMode = mesureToEdit && mesureToEdit.id ? true : false;
+  if (!editMode) {
+    mesureToEdit = null;
+  }
+
   const client = useApolloClient();
   const currentUser = useContext(UserContext);
 
-  const { service = {}, type } = currentUser;
+  const { service = {}, type, mandataire } = currentUser;
   const { service_antennes = [] } = service;
+
+  const userBasePath = getUserBasePath({ type });
 
   const GET_TRIBUNAL = isMandataire(type) ? USER_TRIBUNAL : SERVICE_TRIBUNAL;
   const RECALCULATE_MESURES = isMandataire(type)
     ? RECALCULATE_MANDATAIRE_MESURES
     : RECALCULATE_SERVICE_MESURES;
+
+  const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
 
   const { loading, error, data } = useQuery(GET_TRIBUNAL);
 
@@ -34,16 +48,19 @@ export const MesureCreate = (props) => {
 
   const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
-  const [addMesure] = useMutation(ADD_MESURE, {
-    onCompleted: async ({ insert_mesures }) => {
-      const [mesure] = insert_mesures.returning;
+  const [addOrUpdateMesure] = useMutation(ADD_OR_UPDATE_MESURE, {
+    onCompleted: async ({ add_or_update }) => {
+      const mesure = add_or_update.returning[0];
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
-        variables: { service_id: mesure.service_id, mandataire_id: mesure.mandataire_id },
+        variables: {
+          service_id: service ? service.id : null,
+          mandataire_id: mandataire ? mandataire.id : null,
+        },
       });
       await Router.push(
-        `${getUserBasePath({ type })}/mesures/[mesure_id]`,
-        `${getUserBasePath({ type })}/mesures/${mesure.id}`,
+        `${userBasePath}/mesures/[mesure_id]`,
+        `${userBasePath}/mesures/${mesure.id}`,
         {
           shallow: true,
         }
@@ -54,10 +71,10 @@ export const MesureCreate = (props) => {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const variables = {};
 
-    if (values.country.value === "FR") {
+    if (values.pays === "FR") {
       const location = await getLocation(client, {
-        zipcode: values.zipcode,
-        city: values.city,
+        zipcode: values.code_postal,
+        city: values.ville,
       });
 
       if (!location || !location.department) {
@@ -67,19 +84,33 @@ export const MesureCreate = (props) => {
         return setSubmitting(false);
       } else {
         const { department, geolocation } = location;
-        variables.code_postal = values.zipcode;
-        variables.ville = values.city.toUpperCase();
+        variables.code_postal = values.code_postal;
+        variables.ville = values.ville.toUpperCase();
         variables.latitude = geolocation ? geolocation.latitude : null;
         variables.longitude = geolocation ? geolocation.longitude : null;
         variables.department_id = department.id;
       }
     }
 
-    console.log(values);
+    if (editMode) {
+      variables.id = mesureToEdit.id;
+    }
 
-    addMesure({
+    addOrUpdateMesure({
       awaitRefetchQueries: true,
-      refetchQueries: ["MESURES_QUERY"],
+      refetchQueries: [
+        {
+          query: MESURES_QUERY,
+          variables: {
+            limit: 20,
+            offset: 0,
+            searchText: null,
+            status: MESURE_PROTECTION_STATUS.en_cours,
+            natureMesure: null,
+            antenne: null,
+          },
+        },
+      ],
       variables: {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),
@@ -91,8 +122,8 @@ export const MesureCreate = (props) => {
         lieu_vie: values.lieu_vie,
         ti_id: values.tribunal.value,
         nature_mesure: values.nature_mesure,
-        champ_mesure: values.champ_mesure,
-        pays: values.country,
+        champ_mesure: values.champ_mesure ? values.champ_mesure : null,
+        pays: values.pays,
         cabinet: values.cabinet,
       },
     });
@@ -132,10 +163,12 @@ export const MesureCreate = (props) => {
           </Box>
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
-          <MesureCreateForm
+          <MesureCreateOrEditForm
             handleSubmit={handleSubmit}
             tribunaux={tribunaux}
             antenneOptions={antenneOptions}
+            mesureToEdit={mesureToEdit}
+            userBasePath={userBasePath}
           />
         </Box>
       </Flex>

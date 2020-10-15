@@ -38,7 +38,7 @@ export const ADD_MESURE = gql`
     $pays: String!
     $cabinet: String
   ) {
-    insert_mesures(
+    add_or_update: insert_mesures(
       objects: {
         department_id: $department_id
         date_nomination: $date_nomination
@@ -61,9 +61,57 @@ export const ADD_MESURE = gql`
       }
     ) {
       returning {
+        id
+      }
+    }
+  }
+`;
+
+export const EDIT_MESURE = gql`
+  mutation editMesure(
+    $id: Int!
+    $department_id: Int
+    $antenne_id: Int
+    $date_nomination: date
+    $nature_mesure: nature_mesure_type!
+    $champ_mesure: champ_mesure_type
+    $lieu_vie: lieu_vie_type
+    $code_postal: String
+    $ville: String
+    $civilite: civilite_type
+    $annee_naissance: String
+    $numero_dossier: String
+    $numero_rg: String
+    $ti_id: Int!
+    $latitude: Float
+    $longitude: Float
+    $pays: String!
+    $cabinet: String
+  ) {
+    add_or_update: update_mesures(
+      where: { id: { _eq: $id } }
+      _set: {
+        date_nomination: $date_nomination
+        department_id: $department_id
+        nature_mesure: $nature_mesure
+        champ_mesure: $champ_mesure
+        antenne_id: $antenne_id
+        lieu_vie: $lieu_vie
+        code_postal: $code_postal
+        ville: $ville
+        civilite: $civilite
+        annee_naissance: $annee_naissance
+        ti_id: $ti_id
+        numero_dossier: $numero_dossier
+        numero_rg: $numero_rg
+        latitude: $latitude
+        longitude: $longitude
+        pays: $pays
+        cabinet: $cabinet
+      }
+    ) {
+      returning {
         antenne_id
-        service_id
-        mandataire_id
         id
         cabinet
         civilite

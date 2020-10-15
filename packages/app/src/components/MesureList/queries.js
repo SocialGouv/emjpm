@@ -7,12 +7,14 @@ export const MESURES_QUERY = gql`
     $status: mesure_status_type!
     $searchText: String
     $offset: Int
+    $antenne: Int
   ) {
     mesures_aggregate(
       where: {
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
+        antenne_id: { _eq: $antenne }
       }
     ) {
       aggregate {
@@ -27,6 +29,7 @@ export const MESURES_QUERY = gql`
         _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
+        antenne_id: { _eq: $antenne }
       }
     ) {
       annee_naissance

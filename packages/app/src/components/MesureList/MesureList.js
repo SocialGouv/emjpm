@@ -18,7 +18,7 @@ const RESULT_PER_PAGE = 20;
 const MesureList = (props) => {
   const { isOnlyWaiting } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+  const { antenne, natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
   const { type } = useContext(UserContext);
   const userBasePath = getUserBasePath({ type });
 
@@ -40,6 +40,7 @@ const MesureList = (props) => {
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
     status: currentMesureStatus,
     natureMesure: natureMesure ? natureMesure.value : null,
+    antenne: antenne ? antenne.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {

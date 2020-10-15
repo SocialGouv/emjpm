@@ -10,26 +10,31 @@ import { FormGroupInput, FormGroupSelect } from "../AppForm";
 import { GeocodeCities } from "../Geocode";
 import TribunalAutoComplete from "../TribunalAutoComplete";
 
-const initialValues = {
-  annee_naissance: "",
-  antenne: "",
-  civilite: "",
-  code_postal: "",
-  date_nomination: "",
-  numero_dossier: "",
-  numero_rg: "",
-  tribunal: undefined,
-  city: "",
-  zipcode: "",
-  country: "FR",
-  cabinet: "",
+const initialValues = (mesure) => {
+  return {
+    numero_rg: mesure ? mesure.numeroRg : "",
+    cabinet: mesure ? mesure.cabinet : "",
+    annee_naissance: mesure ? mesure.age : "",
+    antenne: mesure ? mesure.antenneId : "",
+    civilite: mesure ? mesure.civilite : "",
+    code_postal: mesure ? mesure.codePostal : "",
+    date_nomination: mesure ? mesure.dateNomination : "",
+    numero_dossier: mesure ? mesure.numeroDossier : "",
+    tribunal: mesure && mesure.tiId ? { label: mesure.tribunal, value: mesure.tiId } : null,
+    ville: mesure ? mesure.ville : "",
+    pays: mesure ? mesure.pays : "FR",
+    nature_mesure: mesure ? mesure.natureMesure : "",
+    champ_mesure: mesure ? mesure.champMesure : "",
+    lieu_vie: mesure ? mesure.lieuVie : "",
+  };
 };
 
-export const MesureCreateForm = (props) => {
-  const { tribunaux, antenneOptions, handleSubmit } = props;
+export const MesureCreateOrEditForm = (props) => {
+  const { tribunaux, antenneOptions, handleSubmit, mesureToEdit, userBasePath } = props;
+
   const formik = useFormik({
     onSubmit: handleSubmit,
-    initialValues,
+    initialValues: initialValues(mesureToEdit),
     validationSchema: mesureSchema,
   });
 
@@ -50,6 +55,8 @@ export const MesureCreateForm = (props) => {
           hasError={formik.errors.tribunal && formik.touched.tribunal}
           onChange={(option) => formik.setFieldValue("tribunal", option)}
           defaultOptions={tribunaux}
+          placeholder=""
+          tot
         />
         {formik.touched.tribunal && (
           <InlineError message={formik.errors.tribunal} fieldId="tribunal" />
@@ -129,7 +136,7 @@ export const MesureCreateForm = (props) => {
       />
 
       <FormGroupSelect
-        id="country"
+        id="pays"
         options={[
           {
             label: "France",
@@ -145,18 +152,18 @@ export const MesureCreateForm = (props) => {
         validationSchema={mesureSchema}
       />
 
-      {formik.values.country === "FR" && (
+      {formik.values.pays === "FR" && (
         <Flex justifyContent="space-between">
           <Box mr={1} flex={1 / 2}>
             <FormGroupInput
               placeholder="Code postal"
-              id="zipcode"
+              id="code_postal"
               formik={formik}
               validationSchema={mesureSchema}
               onChange={async (e) => {
                 const { value } = e.target;
-                await formik.setFieldValue("zipcode", value);
-                await formik.setFieldValue("city", "");
+                await formik.setFieldValue("code_postal", value);
+                await formik.setFieldValue("ville", "");
               }}
             />
           </Box>
@@ -164,14 +171,14 @@ export const MesureCreateForm = (props) => {
             <Field>
               <GeocodeCities
                 placeholder="Ville"
-                name="city"
-                id="city"
-                zipcode={formik.values.zipcode}
-                onChange={(value) => formik.setFieldValue("city", value)}
-                value={formik.values.city}
-                hasError={!!formik.errors.city}
+                name="ville"
+                id="ville"
+                zipcode={formik.values.code_postal}
+                onChange={(value) => formik.setFieldValue("ville", value)}
+                value={formik.values.ville}
+                hasError={!!formik.errors.ville}
               />
-              <InlineError message={formik.errors.city} fieldId="city" />
+              <InlineError message={formik.errors.ville} fieldId="ville" />
             </Field>
           </Box>
         </Flex>
@@ -179,7 +186,7 @@ export const MesureCreateForm = (props) => {
       <Flex justifyContent="flex-end">
         <Box>
           <Button mr="2" variant="outline">
-            <Link href="/services">
+            <Link href={userBasePath}>
               <a>Annuler</a>
             </Link>
           </Button>
