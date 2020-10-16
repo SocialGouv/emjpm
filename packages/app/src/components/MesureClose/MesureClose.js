@@ -7,6 +7,7 @@ import { Box } from "rebass";
 import { getUserBasePath } from "../../constants";
 import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
+import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureCloseForm } from "./MesureCloseForm";
@@ -33,7 +34,6 @@ const MesureClose = (props) => {
   const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
-    console.log(mesureId);
     Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
       shallow: true,
     });
@@ -56,6 +56,12 @@ const MesureClose = (props) => {
     await updateMesure({
       awaitRefetchQueries: true,
       refetchQueries: [
+        {
+          query: MESURE_CONTEXT_QUERY,
+          variables: {
+            id: mesure.id,
+          },
+        },
         {
           query: MESURES_QUERY,
           variables: {

@@ -4,12 +4,12 @@ import React, { createContext, Fragment } from "react";
 
 export const Context = createContext({});
 
-import { MESURES } from "./queries";
+import { MESURE_CONTEXT_QUERY } from "./queries";
 
 export const Provider = (props) => {
   const { children, mesureId } = props;
 
-  const { data } = useQuery(MESURES, {
+  const { data } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
     variables: {
       id: mesureId,

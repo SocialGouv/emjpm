@@ -7,6 +7,7 @@ import { Box } from "rebass";
 import { getUserBasePath } from "../../constants";
 import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
+import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureReactivateForm } from "./MesureReactivateForm";
@@ -50,6 +51,12 @@ const MesureReactivate = () => {
     await updateMesure({
       awaitRefetchQueries: true,
       refetchQueries: [
+        {
+          query: MESURE_CONTEXT_QUERY,
+          variables: {
+            id: mesure.id,
+          },
+        },
         {
           query: MESURES_QUERY,
           variables: {

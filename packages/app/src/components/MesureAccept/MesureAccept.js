@@ -8,6 +8,7 @@ import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
+import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureAcceptForm } from "./MesureAcceptForm";
@@ -83,6 +84,12 @@ export const MesureAccept = (props) => {
 
     await updateMesure({
       refetchQueries: [
+        {
+          query: MESURE_CONTEXT_QUERY,
+          variables: {
+            id: mesure.id,
+          },
+        },
         {
           query: MESURES_QUERY,
           variables: {
