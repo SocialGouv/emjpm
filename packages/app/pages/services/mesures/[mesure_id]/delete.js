@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../../src/components/Layout";
 import { MesureProvider } from "../../../../src/components/MesureContext";
-import { ServiceMesureDelete } from "../../../../src/components/ServiceMesureDelete";
+import { MesureDelete } from "../../../../src/components/MesureDelete";
 import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const DeleteMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <ServiceMesureDelete />
+              <MesureDelete />
             </Box>
           </Flex>
         </BoxWrapper>

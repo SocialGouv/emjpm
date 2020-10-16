@@ -11,7 +11,7 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query users($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
     enquetes(
       where: {
         status: { _eq: "created" }
@@ -80,7 +80,7 @@ export const GET_SERVICE_USERS = gql`
 `;
 
 export const DIRECTION_USERS = gql`
-  query users($userId: Int!) {
+  query CURRENT_USER_QUERY($userId: Int!) {
     users_by_pk(id: $userId) {
       email
       created_at
@@ -113,7 +113,7 @@ export const DIRECTION_USERS = gql`
 `;
 
 export const MAGISTRAT_USERS = gql`
-  query users($userId: Int!) {
+  query CURRENT_USER_QUERY($userId: Int!) {
     users_by_pk(id: $userId) {
       email
       created_at
@@ -145,7 +145,7 @@ export const MAGISTRAT_USERS = gql`
 `;
 
 export const ADMIN_USERS = gql`
-  query users($userId: Int!) {
+  query CURRENT_USER_QUERY($userId: Int!) {
     users_by_pk(id: $userId) {
       email
       created_at
@@ -160,7 +160,7 @@ export const ADMIN_USERS = gql`
 `;
 
 export const MANDATAIRE_USERS = gql`
-  query users($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
     enquetes(
       where: {
         status: { _eq: "created" }
