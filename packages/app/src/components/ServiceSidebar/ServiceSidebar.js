@@ -1,25 +1,14 @@
-import { useQuery } from "@apollo/react-hooks";
 import { Card, Heading3 } from "@emjpm/ui";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Text } from "rebass";
 
-import { GET_SERVICES_DISPONIBILITY } from "./queries";
+import { UserContext } from "../UserContext";
 import { PreferencesPanelStyle } from "./style";
 
 const ServiceSidebar = (props) => {
   const { isDescriptionHidden } = props;
-  const { data, error, loading } = useQuery(GET_SERVICES_DISPONIBILITY);
-
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
-  }
-
-  const [service] = data.services;
+  const { service } = useContext(UserContext);
 
   return (
     <Box sx={PreferencesPanelStyle} {...props}>

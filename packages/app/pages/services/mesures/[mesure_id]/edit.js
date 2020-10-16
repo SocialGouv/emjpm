@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../../src/components/Layout";
 import { MesureProvider } from "../../../../src/components/MesureContext";
-import { ServiceMesureEdit } from "../../../../src/components/ServiceMesureEdit";
+import { MesureCreateOrEdit } from "../../../../src/components/MesureCreateOrEdit";
 import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const EditMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <ServiceMesureEdit />
+              <MesureCreateOrEdit />
             </Box>
           </Flex>
         </BoxWrapper>

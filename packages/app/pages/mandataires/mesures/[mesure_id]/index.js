@@ -3,9 +3,9 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../../../src/components/Layout";
-import { MandataireMesure } from "../../../../src/components/MandataireMesure";
 import { MandataireMesureSidebar } from "../../../../src/components/MandataireMesureSidebar";
 import { MesureProvider } from "../../../../src/components/MesureContext";
+import { MesureView } from "../../../../src/components/MesureView";
 import { withAuthSync } from "../../../../src/util/auth";
 
 const MandataireMesurePage = (props) => {
@@ -36,7 +36,7 @@ const MandataireMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <MandataireMesure />
+              <MesureView />
             </Box>
           </Flex>
         </BoxWrapper>

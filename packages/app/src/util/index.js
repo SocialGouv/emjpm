@@ -3,12 +3,14 @@ export * from "./users/UserUtils";
 export * from "./option/OptionUtil";
 
 export const formatTribunauxOptions = (tribunaux) => {
-  return tribunaux.map(({ ti }) => {
-    return {
-      label: ti.etablissement,
-      value: ti.id,
-    };
-  });
+  return tribunaux
+    .filter(({ ti }) => ti)
+    .map(({ ti }) => {
+      return {
+        label: ti.etablissement,
+        value: ti.id,
+      };
+    });
 };
 
 export function parseFormFloat(value, defaultValue = null) {
