@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const REACTIVATE_MESURE = gql`
-  mutation reactivateMesure($id: Int) {
+  mutation reactivateMesure($id: Int!) {
     update_mesures(where: { id: { _eq: $id } }, _set: { status: "en_cours" }) {
       returning {
         id
@@ -32,12 +32,11 @@ export const REACTIVATE_MESURE = gql`
   }
 `;
 
-export const MANDATAIRE = gql`
-  query mandataire($id: Int) {
-    mandataires(where: { id: { _eq: $id } }) {
-      id
-      mesures_en_attente
-      mesures_en_cours
+export const RECALCULATE_SERVICE_MESURES = gql`
+  mutation update_service_mesures($service_id: Int!) {
+    recalculateServiceMesuresCount(serviceId: $service_id) {
+      success
+      updatedRows
     }
   }
 `;

@@ -32,6 +32,13 @@ const MesureClose = (props) => {
 
   const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
+  const redirectToMesure = (mesureId) => {
+    console.log(mesureId);
+    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
+      shallow: true,
+    });
+  };
+
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
@@ -41,9 +48,7 @@ const MesureClose = (props) => {
           mandataire_id: mandataire ? mandataire.id : null,
         },
       });
-      Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesure.id}`, {
-        shallow: true,
-      });
+      redirectToMesure(mesure.id);
     },
   });
 
@@ -68,7 +73,7 @@ const MesureClose = (props) => {
             limit: 20,
             offset: 0,
             searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_attente,
+            status: MESURE_PROTECTION_STATUS.eteinte,
             natureMesure: null,
             antenne: null,
           },
@@ -83,12 +88,17 @@ const MesureClose = (props) => {
     setSubmitting(false);
   };
 
+  const handleCancel = () => {
+    redirectToMesure(mesure.id);
+  };
+
   return (
     <Box sx={MesureCloseStyle} {...props}>
       <MesureCloseForm
         mt="3"
         mesure={mesure}
         handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
         userBasePath={userBasePath}
       />
     </Box>

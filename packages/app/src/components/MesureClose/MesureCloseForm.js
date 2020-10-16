@@ -1,7 +1,6 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
@@ -9,7 +8,7 @@ import * as Yup from "yup";
 import { FormGroupInput, FormGroupSelect } from "../AppForm";
 
 export const MesureCloseForm = (props) => {
-  const { mesure, handleSubmit, userBasePath } = props;
+  const { handleSubmit, handleCancel } = props;
 
   const validationSchema = Yup.object().shape({
     date_fin_mesure: Yup.date().required(),
@@ -52,19 +51,7 @@ export const MesureCloseForm = (props) => {
           />
           <Flex justifyContent="flex-end">
             <Box>
-              <Button
-                mr="2"
-                variant="outline"
-                onClick={() => {
-                  Router.push(
-                    `${userBasePath}/mesures/[mesure_id]`,
-                    `${userBasePath}/mesures/${mesure.id}`,
-                    {
-                      shallow: true,
-                    }
-                  );
-                }}
-              >
+              <Button mr="2" variant="outline" onClick={handleCancel}>
                 Annuler
               </Button>
             </Box>

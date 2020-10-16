@@ -9,15 +9,15 @@ import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
-import { MesureDeleteForm } from "./MesureDeleteForm";
+import { MesureReactivateForm } from "./MesureReactivateForm";
 import {
-  DELETE_MESURE,
+  REACTIVATE_MESURE,
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
-import { MesureDeleteStyle } from "./style";
+import { MesureReactivateStyle } from "./style";
 
-const MesureDelete = (props) => {
+const MesureReactivate = () => {
   const mesure = useContext(MesureContext);
   const { type, service = {}, mandataire } = useContext(UserContext);
   const userBasePath = getUserBasePath({ type });
@@ -33,7 +33,7 @@ const MesureDelete = (props) => {
       shallow: true,
     });
 
-  const [deleteMesure] = useMutation(DELETE_MESURE, {
+  const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
@@ -42,12 +42,12 @@ const MesureDelete = (props) => {
           mandataire_id: mandataire ? mandataire.id : null,
         },
       });
-      Router.push(userBasePath);
+      redirectToMesure(mesure.id);
     },
   });
 
   const handleSubmit = async () => {
-    await deleteMesure({
+    await updateMesure({
       awaitRefetchQueries: true,
       refetchQueries: [
         {
@@ -67,7 +67,7 @@ const MesureDelete = (props) => {
             limit: 20,
             offset: 0,
             searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_attente,
+            status: MESURE_PROTECTION_STATUS.eteinte,
             natureMesure: null,
             antenne: null,
           },
@@ -84,10 +84,15 @@ const MesureDelete = (props) => {
   };
 
   return (
-    <Box sx={MesureDeleteStyle} {...props}>
-      <MesureDeleteForm mt="3" handleCancel={handleCancel} handleSubmit={handleSubmit} />
+    <Box sx={MesureReactivateStyle}>
+      <MesureReactivateForm
+        mt="3"
+        mesure={mesure}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
     </Box>
   );
 };
 
-export { MesureDelete };
+export { MesureReactivate };

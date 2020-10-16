@@ -36,12 +36,19 @@ export const MesureAccept = (props) => {
 
   const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
 
+  const redirectToMesure = (mesureId) => {
+    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
+      shallow: true,
+    });
+  };
+
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
         variables: { mandataire_id: mandataireId, service_id: serviceId },
         refetchQueries: ["CURRENT_USER_QUERY"],
       });
+      redirectToMesure(mesure.id);
     },
   });
 
@@ -50,79 +57,78 @@ export const MesureAccept = (props) => {
     value: antenne.id,
   }));
 
+  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
+    const variables = {};
+
+    if (values.pays === "FR") {
+      const location = await getLocation(client, {
+        zipcode: values.code_postal,
+        city: values.ville,
+      });
+
+      if (!location || !location.department) {
+        setErrors({
+          zipcode: `Le code postal semble invalide.`,
+        });
+        return setSubmitting(false);
+      } else {
+        const { department, geolocation } = location;
+        variables.code_postal = values.code_postal;
+        variables.ville = values.ville.toUpperCase();
+        variables.latitude = geolocation ? geolocation.latitude : null;
+        variables.longitude = geolocation ? geolocation.longitude : null;
+        variables.department_id = department.id;
+      }
+    }
+
+    await updateMesure({
+      refetchQueries: [
+        {
+          query: MESURES_QUERY,
+          variables: {
+            limit: 20,
+            offset: 0,
+            searchText: null,
+            status: MESURE_PROTECTION_STATUS.en_cours,
+            natureMesure: null,
+            antenne: null,
+          },
+        },
+        {
+          query: MESURES_QUERY,
+          variables: {
+            limit: 20,
+            offset: 0,
+            searchText: null,
+            status: MESURE_PROTECTION_STATUS.en_attente,
+            natureMesure: null,
+            antenne: null,
+          },
+        },
+      ],
+      variables: {
+        ...variables,
+        date_nomination: values.date_nomination,
+        id,
+        lieu_vie: values.lieu_vie,
+        pays: values.pays,
+        antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
+      },
+    });
+    setSubmitting(false);
+  };
+
+  const handleCancel = () => {
+    redirectToMesure(mesure.id);
+  };
+
   return (
     <Box sx={MesureAcceptStyle} {...props}>
       <MesureAcceptForm
         antenneOptions={antenneOptions}
         userBasePath={userBasePath}
-        onSubmit={async (values, { setSubmitting, setErrors }) => {
-          const variables = {};
-
-          if (values.pays === "FR") {
-            const location = await getLocation(client, {
-              zipcode: values.code_postal,
-              city: values.ville,
-            });
-
-            if (!location || !location.department) {
-              setErrors({
-                zipcode: `Le code postal semble invalide.`,
-              });
-              return setSubmitting(false);
-            } else {
-              const { department, geolocation } = location;
-              variables.code_postal = values.code_postal;
-              variables.ville = values.ville.toUpperCase();
-              variables.latitude = geolocation ? geolocation.latitude : null;
-              variables.longitude = geolocation ? geolocation.longitude : null;
-              variables.department_id = department.id;
-            }
-          }
-
-          await updateMesure({
-            refetchQueries: [
-              {
-                query: MESURES_QUERY,
-                variables: {
-                  limit: 20,
-                  offset: 0,
-                  searchText: null,
-                  status: MESURE_PROTECTION_STATUS.en_cours,
-                  natureMesure: null,
-                  antenne: null,
-                },
-              },
-              {
-                query: MESURES_QUERY,
-                variables: {
-                  limit: 20,
-                  offset: 0,
-                  searchText: null,
-                  status: MESURE_PROTECTION_STATUS.en_attente,
-                  natureMesure: null,
-                  antenne: null,
-                },
-              },
-            ],
-            variables: {
-              ...variables,
-              date_nomination: values.date_nomination,
-              id,
-              lieu_vie: values.lieu_vie,
-              pays: values.pays,
-              antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
-            },
-          });
-
-          setSubmitting(false);
-          await Router.push(
-            `${userBasePath}/mesures/[mesure_id]`,
-            `${userBasePath}/mesures/${id}`,
-            {
-              shallow: true,
-            }
-          );
-        }}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
         mt="3"
         mesure={mesure}
       />

@@ -1,7 +1,6 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -10,10 +9,10 @@ import { FormGroupInput, FormGroupSelect } from "../AppForm";
 import { GeocodeCities } from "../Geocode";
 
 export const MesureAcceptForm = (props) => {
-  const { mesure, onSubmit, antenneOptions, userBasePath } = props;
+  const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
 
   const formik = useFormik({
-    onSubmit,
+    onSubmit: handleSubmit,
     validationSchema: mesureAcceptSchema,
     initialValues: {
       date_nomination: "",
@@ -121,19 +120,7 @@ export const MesureAcceptForm = (props) => {
 
           <Flex justifyContent="flex-end">
             <Box>
-              <Button
-                mr="2"
-                variant="outline"
-                onClick={() => {
-                  Router.push(
-                    `${userBasePath}/mesures/[mesure_id]`,
-                    `${userBasePath}/mesures/${mesure.id}`,
-                    {
-                      shallow: true,
-                    }
-                  );
-                }}
-              >
+              <Button mr="2" variant="outline" onClick={handleCancel}>
                 Annuler
               </Button>
             </Box>

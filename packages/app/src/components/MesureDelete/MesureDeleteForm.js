@@ -1,10 +1,9 @@
 import { Button, Heading3, Heading5 } from "@emjpm/ui";
-import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 export const MesureDeleteForm = (props) => {
-  const { userBasePath, handleSubmit } = props;
+  const { handleSubmit, handleCancel } = props;
 
   return (
     <Flex flexWrap="wrap">
@@ -25,13 +24,7 @@ export const MesureDeleteForm = (props) => {
         </Box>
         <Flex justifyContent="flex-end">
           <Box>
-            <Button
-              mr="2"
-              variant="outline"
-              onClick={() => {
-                Router.push(userBasePath);
-              }}
-            >
+            <Button mr="2" variant="outline" onClick={handleCancel}>
               Annuler
             </Button>
           </Box>

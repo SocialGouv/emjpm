@@ -1,7 +1,6 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import React from "react";
 import { Box, Flex } from "rebass";
 
@@ -30,7 +29,7 @@ const initialValues = (mesure) => {
 };
 
 export const MesureCreateOrEditForm = (props) => {
-  const { tribunaux, antenneOptions, handleSubmit, mesureToEdit, userBasePath } = props;
+  const { tribunaux, antenneOptions, handleSubmit, handleCancel, mesureToEdit } = props;
 
   const formik = useFormik({
     onSubmit: handleSubmit,
@@ -185,10 +184,8 @@ export const MesureCreateOrEditForm = (props) => {
       )}
       <Flex justifyContent="flex-end">
         <Box>
-          <Button mr="2" variant="outline">
-            <Link href={userBasePath}>
-              <a>Annuler</a>
-            </Link>
+          <Button mr="2" variant="outline" onClick={handleCancel}>
+            Annuler
           </Button>
         </Box>
         <Box>

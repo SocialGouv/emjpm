@@ -35,10 +35,11 @@ export const MesureCreateOrEdit = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const GET_TRIBUNAL = isMandataire(type) ? USER_TRIBUNAL : SERVICE_TRIBUNAL;
   const RECALCULATE_MESURES = isMandataire(type)
     ? RECALCULATE_MANDATAIRE_MESURES
     : RECALCULATE_SERVICE_MESURES;
+
+  const GET_TRIBUNAL = isMandataire(type) ? USER_TRIBUNAL : SERVICE_TRIBUNAL;
 
   const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
 
@@ -47,6 +48,11 @@ export const MesureCreateOrEdit = (props) => {
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.tribunaux) : []), [data]);
 
   const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
+
+  const redirectToMesure = (mesureId) =>
+    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
+      shallow: true,
+    });
 
   const [addOrUpdateMesure] = useMutation(ADD_OR_UPDATE_MESURE, {
     onCompleted: async ({ add_or_update }) => {
@@ -58,15 +64,17 @@ export const MesureCreateOrEdit = (props) => {
           mandataire_id: mandataire ? mandataire.id : null,
         },
       });
-      await Router.push(
-        `${userBasePath}/mesures/[mesure_id]`,
-        `${userBasePath}/mesures/${mesure.id}`,
-        {
-          shallow: true,
-        }
-      );
+      redirectToMesure(mesure.id);
     },
   });
+
+  if (loading) {
+    return <Box p={1}>Chargement...</Box>;
+  }
+
+  if (error) {
+    return <Box p={1}>Erreur...</Box>;
+  }
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const variables = {};
@@ -131,13 +139,13 @@ export const MesureCreateOrEdit = (props) => {
     setSubmitting(false);
   };
 
-  if (loading) {
-    return <Box p={1}>Chargement...</Box>;
-  }
-
-  if (error) {
-    return <Box p={1}>Erreur...</Box>;
-  }
+  const handleCancel = async () => {
+    if (editMode) {
+      redirectToMesure(mesureToEdit.id);
+    } else {
+      Router.push(userBasePath);
+    }
+  };
 
   const antenneOptions = service_antennes.map((antenne) => ({
     label: antenne.name,
@@ -165,6 +173,7 @@ export const MesureCreateOrEdit = (props) => {
         <Box p="5" width={[1, 3 / 5]}>
           <MesureCreateOrEditForm
             handleSubmit={handleSubmit}
+            handleCancel={handleCancel}
             tribunaux={tribunaux}
             antenneOptions={antenneOptions}
             mesureToEdit={mesureToEdit}
