@@ -5,6 +5,7 @@ import { setUser } from "../../util/sentry";
 
 export const Context = createContext({});
 
+import { isService } from "../../util";
 import {
   ADMIN_USERS,
   DIRECTION_USERS,
@@ -39,8 +40,18 @@ const UserProvider = (props) => {
     return <Fragment>Chargement...</Fragment>;
   }
 
+  const user = data.users_by_pk;
+  let currentService;
+  if (isService(user.type)) {
+    const {
+      service_members: [{ service }],
+    } = user;
+    currentService = service;
+  }
+
   const currentUser = {
-    ...data.users_by_pk,
+    ...user,
+    service: currentService,
     agrements,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
   };

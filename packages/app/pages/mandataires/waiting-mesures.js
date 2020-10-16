@@ -3,9 +3,9 @@ import React from "react";
 import { Flex } from "rebass";
 
 import { LayoutMandataire } from "../../src/components/Layout";
-import { MandataireFilters } from "../../src/components/MandataireFilters";
-import { FiltersContextProvider } from "../../src/components/MandataireFilters/context";
-import { MandataireMesures } from "../../src/components/MandataireMesures";
+import { MesureList } from "../../src/components/MesureList";
+import { MesureListFilters } from "../../src/components/MesureListFilters";
+import { FiltersContextProvider } from "../../src/components/MesureListFilters/context";
 import { DEFAULT_MESURE_NATURE } from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
@@ -19,14 +19,14 @@ const Mandataires = () => {
       <LayoutMandataire>
         <BoxWrapper mt={6} px="1">
           <Heading1>Vos mesures en attente</Heading1>
-          <MandataireFilters isStatusHidden />
+          <MesureListFilters isStatusHidden />
           <Flex
             sx={{
               flexWrap: "wrap",
               mt: "2",
             }}
           >
-            <MandataireMesures isOnlyWaiting />
+            <MesureList isOnlyWaiting />
           </Flex>
         </BoxWrapper>
       </LayoutMandataire>

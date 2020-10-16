@@ -1,12 +1,7 @@
 import gql from "graphql-tag";
 
-export const MESURES = gql`
-  query mesures($id: Int) {
-    mesures_aggregate(where: { id: { _eq: $id } }) {
-      aggregate {
-        count
-      }
-    }
+export const MESURE_CONTEXT_QUERY = gql`
+  query MESURE_CONTEXT_QUERY($id: Int) {
     mesures(
       where: { id: { _eq: $id } }
       limit: null

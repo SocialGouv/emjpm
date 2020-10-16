@@ -132,6 +132,10 @@ class User extends Model {
     return this.service ? this.service.id : null;
   }
 
+  getMandataire() {
+    return this.mandataire ? this.mandataire.id : null;
+  }
+
   async getDirectionAgrements() {
     if (!this.direction) {
       return [];
@@ -150,6 +154,7 @@ class User extends Model {
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": role,
       "x-hasura-user-id": `${this.id}`,
+      "x-hasura-mandataire-id": `${this.getMandataire()}`,
       "x-hasura-service-id": `${this.getService()}`,
       "x-hasura-agrements": `{${agrements.join(",")}}`,
     };

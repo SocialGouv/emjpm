@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../../../src/components/Layout";
-import { MandataireMesureClose } from "../../../../src/components/MandataireMesureClose";
 import { MandataireMesureSidebar } from "../../../../src/components/MandataireMesureSidebar";
+import { MesureClose } from "../../../../src/components/MesureClose";
 import { MesureProvider } from "../../../../src/components/MesureContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const CloseMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <MandataireMesureClose />
+              <MesureClose />
             </Box>
           </Flex>
         </BoxWrapper>
