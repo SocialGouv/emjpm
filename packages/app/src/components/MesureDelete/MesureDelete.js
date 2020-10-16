@@ -1,22 +1,21 @@
-import React, { useContext } from "react";
-import Router from "next/router";
-import { Box } from "rebass";
 import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import Router from "next/router";
+import React, { useContext } from "react";
+import { Box } from "rebass";
 
-import { MESURES_QUERY } from "../MesureList/queries";
-import { MesureContext } from "../MesureContext";
-import { MesureDeleteForm } from "./MesureDeleteForm";
-import { MesureDeleteStyle } from "./style";
-import { UserContext } from "../UserContext";
 import { getUserBasePath } from "../../constants";
-
+import { isMandataire } from "../../util";
+import { MesureContext } from "../MesureContext";
+import { MESURES_QUERY } from "../MesureList/queries";
+import { UserContext } from "../UserContext";
+import { MesureDeleteForm } from "./MesureDeleteForm";
 import {
   DELETE_MESURE,
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
-import { isMandataire } from "../../util";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { MesureDeleteStyle } from "./style";
 
 const MesureDelete = (props) => {
   const mesure = useContext(MesureContext);
