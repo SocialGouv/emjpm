@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../../src/components/Layout";
+import { MesureClose } from "../../../../src/components/MesureClose";
 import { MesureProvider } from "../../../../src/components/MesureContext";
-import { ServiceMesureClose } from "../../../../src/components/ServiceMesureClose";
 import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const CloseMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <ServiceMesureClose />
+              <MesureClose />
             </Box>
           </Flex>
         </BoxWrapper>

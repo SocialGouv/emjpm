@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../../../src/components/Layout";
 import { MesureProvider } from "../../../../src/components/MesureContext";
-import { ServiceMesureReactivate } from "../../../../src/components/ServiceMesureReactivate";
+import { MesureReactivate } from "../../../../src/components/MesureReactivate";
 import { ServiceMesureSidebar } from "../../../../src/components/ServiceMesureSidebar";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const ReactivateMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <ServiceMesureReactivate />
+              <MesureReactivate />
             </Box>
           </Flex>
         </BoxWrapper>

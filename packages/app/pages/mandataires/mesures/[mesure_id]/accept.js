@@ -3,8 +3,8 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../../../src/components/Layout";
-import { MandataireMesureAccept } from "../../../../src/components/MandataireMesureAccept";
 import { MandataireMesureSidebar } from "../../../../src/components/MandataireMesureSidebar";
+import { MesureAccept } from "../../../../src/components/MesureAccept";
 import { MesureProvider } from "../../../../src/components/MesureContext";
 import { withAuthSync } from "../../../../src/util/auth";
 
@@ -36,7 +36,7 @@ const AcceptMesurePage = (props) => {
                 p: 1,
               }}
             >
-              <MandataireMesureAccept />
+              <MesureAccept />
             </Box>
           </Flex>
         </BoxWrapper>

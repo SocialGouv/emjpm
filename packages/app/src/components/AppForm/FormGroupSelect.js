@@ -3,6 +3,7 @@ import React, { useMemo } from "react";
 
 import { findOption } from "../../util/option/OptionUtil";
 import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
+import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
 import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
 
 export const FormGroupSelect = ({
@@ -15,6 +16,7 @@ export const FormGroupSelect = ({
   formik,
   required,
   hideErrors,
+  validationSchema,
 }) => {
   const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
 
@@ -40,6 +42,8 @@ export const FormGroupSelect = ({
     formik,
     hideErrors,
   });
+
+  required = useAppFieldIsRequired({ id, required, validationSchema });
 
   return (
     <Field>
