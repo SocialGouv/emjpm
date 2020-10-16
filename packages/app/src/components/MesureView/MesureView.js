@@ -114,6 +114,17 @@ export const MesureView = (props) => {
         </Flex>
 
         <Box textAlign="center">
+          <LinkButton
+            outline={true}
+            mr={3}
+            bg="red"
+            color="white"
+            href={`${userBasePath}/mesures/[mesure_id]/delete`}
+            asLink={`${userBasePath}/mesures/${id}/delete`}
+          >
+            Supprimer la mesure
+          </LinkButton>
+
           {status === MESURE_PROTECTION_STATUS.en_attente && (
             <LinkButton
               outline={true}
@@ -125,25 +136,14 @@ export const MesureView = (props) => {
           )}
 
           {status === MESURE_PROTECTION_STATUS.eteinte && (
-            <Fragment>
-              <LinkButton
-                outline={true}
-                bg="red"
-                color="white"
-                href={`${userBasePath}/mesures/[mesure_id]/delete`}
-                asLink={`${userBasePath}/mesures/${id}/delete`}
-              >
-                Supprimer la mesure
-              </LinkButton>
-              <LinkButton
-                ml={3}
-                outline={true}
-                href={`${userBasePath}/mesures/[mesure_id]/reactivate`}
-                asLink={`${userBasePath}/mesures/${id}/reactivate`}
-              >
-                Réouvrir la mesure
-              </LinkButton>
-            </Fragment>
+            <LinkButton
+              ml={3}
+              outline={true}
+              href={`${userBasePath}/mesures/[mesure_id]/reactivate`}
+              asLink={`${userBasePath}/mesures/${id}/reactivate`}
+            >
+              Réouvrir la mesure
+            </LinkButton>
           )}
 
           {status === MESURE_PROTECTION_STATUS.en_cours && (
