@@ -159,41 +159,6 @@ Object {
 }
 `;
 
-exports[`city table schema 1`] = `
-Object {
-  "code_postal": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
-  },
-  "id": Object {
-    "defaultValue": "nextval('city_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "latitude": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
-  },
-  "longitude": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
-  },
-  "ville": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
-  },
-}
-`;
-
 exports[`commentaires table schema 1`] = `
 Object {
   "antenne_id": Object {
@@ -2930,70 +2895,6 @@ Object {
 }
 `;
 
-exports[`lb_structures table schema 1`] = `
-Object {
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "id": Object {
-    "defaultValue": "nextval('lb_structures_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "lb_departement_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "nom": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-  "type": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-}
-`;
-
-exports[`lb_tribunaux table schema 1`] = `
-Object {
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "id": Object {
-    "defaultValue": "nextval('lb_tribunaux_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "lb_departement_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "ville": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
-  },
-}
-`;
-
 exports[`lb_user_etablissements table schema 1`] = `
 Object {
   "etablissement_id": Object {
@@ -4007,7 +3908,6 @@ Array [
   "access_tokens",
   "api_logs",
   "authorization_codes",
-  "city",
   "commentaires",
   "departements",
   "direction",
@@ -4032,8 +3932,6 @@ Array [
   "knex_migrations_v2",
   "knex_migrations_v2_lock",
   "lb_departements",
-  "lb_structures",
-  "lb_tribunaux",
   "lb_user_etablissements",
   "lb_users",
   "logs_data",
