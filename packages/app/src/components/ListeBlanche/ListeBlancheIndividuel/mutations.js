@@ -2,12 +2,6 @@ import gql from "graphql-tag";
 
 export const DELETE_LB_DEPARTEMENTS = gql`
   mutation delete_lb_departements($ids: [Int!]!) {
-    delete_lb_tribunaux(where: { lb_departement_id: { _in: $ids } }) {
-      affected_rows
-    }
-    delete_lb_structures(where: { lb_departement_id: { _in: $ids } }) {
-      affected_rows
-    }
     delete_lb_departements(where: { id: { _in: $ids } }) {
       affected_rows
     }
@@ -70,12 +64,6 @@ export const UPDATE_LB_USER = gql`
       _set: { departement_financeur: false }
       where: { lb_user_id: { _eq: $id } }
     ) {
-      affected_rows
-    }
-    delete_lb_tribunaux(where: { lb_departement_id: { _in: $departementsToDelete } }) {
-      affected_rows
-    }
-    delete_lb_structures(where: { lb_departement_id: { _in: $departementsToDelete } }) {
       affected_rows
     }
     delete_lb_departements(where: { id: { _in: $departementsToDelete } }) {
