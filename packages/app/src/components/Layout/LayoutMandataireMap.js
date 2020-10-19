@@ -13,10 +13,6 @@ const navigationLinks = [
     url: "/mandataires",
   },
   {
-    title: "Vos mesures en attente",
-    url: "/mandataires/waiting-mesures",
-  },
-  {
     title: "La carte de vos mesures",
     url: "/mandataires/map",
   },

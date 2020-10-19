@@ -15,10 +15,6 @@ const navigationLinks = [
     url: "/services",
   },
   {
-    title: "Vos mesures en attente",
-    url: "/services/waiting-mesures",
-  },
-  {
     title: "La carte de vos mesures",
     url: "/services/map",
   },
