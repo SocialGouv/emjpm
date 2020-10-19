@@ -33,7 +33,7 @@ const MesureListFilters = (props) => {
   ];
 
   return (
-    <Card mt="3">
+    <Card mt="1">
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>

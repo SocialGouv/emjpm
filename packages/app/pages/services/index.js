@@ -1,8 +1,9 @@
 import { BoxWrapper, Heading1 } from "@emjpm/ui";
 import React, { useContext } from "react";
-import { Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
+import { MesureBadge } from "../../src/components/MesureBadge";
 import { MesureList } from "../../src/components/MesureList";
 import { MesureListButtonBar } from "../../src/components/MesureListButtonBar";
 import { MesureListFilters } from "../../src/components/MesureListFilters";
@@ -27,17 +28,28 @@ const Mesures = () => {
       }}
     >
       <LayoutServices>
-        <BoxWrapper mt={6} px="1">
+        <BoxWrapper mt={2} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
             <Heading1>Toutes vos mesures</Heading1>
             <MesureListButtonBar />
+          </Flex>
+          <Flex mt={1} flexDirection="row" justifyContent="flex-start">
+            {service_antennes.map((antenne) => (
+              <Box key={antenne.id} mr={2} sx={{ bg: "white", borderRadius: "20px", px: "2" }}>
+                <Text>{antenne.name}</Text>
+                <MesureBadge
+                  mesures_en_cours={antenne.mesures_in_progress}
+                  dispo_max={antenne.mesures_max}
+                />
+              </Box>
+            ))}
           </Flex>
 
           <MesureListFilters service_antennes={service_antennes} />
           <Flex
             sx={{
               flexWrap: "wrap",
-              mt: "2",
+              mt: "1",
             }}
           >
             <MesureList />

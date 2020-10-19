@@ -26,7 +26,16 @@ const ServiceInformations = (props) => {
 
   // first of the array because it should be only one
   const [service] = data.services;
-  const { adresse, competences, email, etablissement, service_tis, telephone, siret } = service;
+  const {
+    adresse,
+    competences,
+    email,
+    etablissement,
+    service_tis,
+    telephone,
+    siret,
+    dispo_max,
+  } = service;
   return (
     <Box {...props}>
       <Card p="5">
@@ -38,6 +47,11 @@ const ServiceInformations = (props) => {
               <Building size="16" />
               <Text sx={iconTextStyle}>{siret || ""}</Text>
             </Flex>
+          </Box>
+          <Box sx={boxStyle}>
+            <Heading5 mb="3">Mesures souhaitées</Heading5>
+            <Text sx={topTextStyle}>{dispo_max || ""}</Text>
+            <AccessToken />
           </Box>
         </Flex>
         <Flex sx={flexStyle}>
