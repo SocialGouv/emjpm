@@ -4190,10 +4190,9 @@
   insert_permissions:
   - role: individuel
     permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
+      check: {}
+      set:
+        mandataire_id: x-hasura-mandataire-id
       columns:
       - annee_naissance
       - antenne_id
@@ -4225,10 +4224,9 @@
       - ville
   - role: prepose
     permission:
-      check:
-        mandataire:
-          user_id:
-            _eq: X-Hasura-User-Id
+      check: {}
+      set:
+        mandataire_id: x-hasura-mandataire-id
       columns:
       - annee_naissance
       - antenne_id
