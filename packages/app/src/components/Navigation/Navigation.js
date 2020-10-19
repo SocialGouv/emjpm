@@ -1,25 +1,25 @@
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { isMandataire } from "../../util";
+import { isMandataire, isService } from "../../util";
+import { MesureBadge } from "../MesureBadge";
 import { UserContext } from "../UserContext";
 import Link from "./Link";
+
+const ServiceBadge = ({ service }) => {
+  const { mesures_in_progress: mesures_en_cours, dispo_max } = service;
+  return (
+    <Box pl="5">
+      <MesureBadge mesures_en_cours={mesures_en_cours} dispo_max={dispo_max} />
+    </Box>
+  );
+};
 
 const MandataireBadge = ({ mandataire }) => {
   const { mesures_en_cours, dispo_max } = mandataire;
   return (
-    <Box
-      sx={{
-        color: "white",
-        bg: mesures_en_cours > dispo_max ? "error" : "primary",
-        px: 1,
-        mb: 2,
-        ml: 3,
-        borderRadius: 9999,
-      }}
-      variant="badge"
-    >
-      {mesures_en_cours} / {dispo_max} mesures
+    <Box pl="5">
+      <MesureBadge mesures_en_cours={mesures_en_cours} dispo_max={dispo_max} />
     </Box>
   );
 };
@@ -39,6 +39,7 @@ export const Navigation = (props) => {
           </Box>
         ))}
         {isMandataire(type) && <MandataireBadge mandataire={user.mandataire} />}
+        {isService(type) && <ServiceBadge service={user.service} />}
       </Flex>
     </Box>
   );
