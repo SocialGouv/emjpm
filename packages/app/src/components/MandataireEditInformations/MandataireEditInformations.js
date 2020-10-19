@@ -71,7 +71,7 @@ const MandataireEditInformations = (props) => {
       });
     } else {
       editUser({
-        refetchQueries: ["users"],
+        refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
           id: user.id,
           nom: values.nom,
