@@ -96,7 +96,6 @@ const statusStyle = (status) => {
     color: TYPES[status],
     display: 'inline-block',
     fontSize: 0,
-    ml: 1,
   };
 };
 

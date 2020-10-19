@@ -15,8 +15,7 @@ import { MesureListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MesureList = (props) => {
-  const { isOnlyWaiting } = props;
+const MesureList = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { antenne, natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
   const { type } = useContext(UserContext);
@@ -26,12 +25,7 @@ const MesureList = (props) => {
     setCurrentOffset(0);
   }, [natureMesure, mesureStatus, debouncedSearchText]);
 
-  let currentMesureStatus = null;
-  if (isOnlyWaiting) {
-    currentMesureStatus = MESURE_PROTECTION_STATUS.en_attente;
-  } else {
-    currentMesureStatus = mesureStatus ? mesureStatus.value : MESURE_PROTECTION_STATUS.en_cours;
-  }
+  const currentMesureStatus = mesureStatus ? mesureStatus.value : MESURE_PROTECTION_STATUS.en_cours;
 
   const queryVariables = {
     limit: RESULT_PER_PAGE,
@@ -64,13 +58,22 @@ const MesureList = (props) => {
   const { count } = data.mesures_aggregate.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const mesures = formatMesureListItems(data.mesures);
+  const awaitingMesures = formatMesureListItems(data.awaiting_mesures || []);
+
+  const mesuresList = [];
+
+  if (currentOffset === 0) {
+    mesuresList.push(...awaitingMesures);
+  }
+
+  mesuresList.push(...mesures);
 
   return (
     <Box sx={MesureListStyle}>
       <Fragment>
-        {mesures.length > 0 ? (
+        {mesuresList.length > 0 ? (
           <Fragment>
-            {mesures.map((mesure) => {
+            {mesuresList.map((mesure) => {
               return (
                 <MesureListItem
                   key={mesure.id}
