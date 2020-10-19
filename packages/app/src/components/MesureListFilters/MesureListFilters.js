@@ -8,7 +8,7 @@ import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
 const MesureListFilters = (props) => {
-  const { isStatusHidden, service_antennes = [] } = props;
+  const { service_antennes = [] } = props;
 
   const {
     natureMesure,
@@ -58,17 +58,15 @@ const MesureListFilters = (props) => {
                 onChange={(option) => changeNatureMesure(option)}
               />
             </Box>
-            {!isStatusHidden && (
-              <Box width="200px" mr={1}>
-                <Select
-                  size="small"
-                  options={MESURE_STATUS_LABEL_VALUE}
-                  placeholder={"État de la mesure"}
-                  value={mesureStatus}
-                  onChange={(option) => changeMesureStatus(option)}
-                />
-              </Box>
-            )}
+            <Box width="200px" mr={1}>
+              <Select
+                size="small"
+                options={MESURE_STATUS_LABEL_VALUE}
+                placeholder={"État de la mesure"}
+                value={mesureStatus}
+                onChange={(option) => changeMesureStatus(option)}
+              />
+            </Box>
           </Flex>
         </Box>
         <Box width="250px">
