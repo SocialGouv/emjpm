@@ -1,18 +1,13 @@
 import { BoxWrapper, Heading2 } from "@emjpm/ui";
-import React, { useContext } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { ServiceAntennes } from "../../src/components/ServiceAntennes";
 import { ServiceInformations } from "../../src/components/ServiceInformations";
-import { ServiceSidebar } from "../../src/components/ServiceSidebar";
-import { UserContext } from "../../src/components/UserContext";
 import { withAuthSync } from "../../src/util/auth";
 
 const Informations = () => {
-  const { service_members } = useContext(UserContext);
-  const [{ service }] = service_members;
-
   return (
     <LayoutServices>
       <BoxWrapper mt={4}>
@@ -31,16 +26,6 @@ const Informations = () => {
           >
             <Heading2>Informations générales de votre service</Heading2>
             <ServiceInformations mt="3" />
-          </Box>
-          <Box
-            sx={{
-              flexBasis: 320,
-              flexGrow: 1,
-              p: 1,
-            }}
-          >
-            <Heading2>Mesures souhaitées</Heading2>
-            {service && <ServiceSidebar serviceId={service.id} mt="3" />}
           </Box>
         </Flex>
         <Box
