@@ -21,6 +21,46 @@ export const MESURES_QUERY = gql`
         count
       }
     }
+    awaiting_mesures: mesures(where: { status: { _eq: "en_attente" } }) {
+      annee_naissance
+      antenne_id
+      cabinet
+      civilite
+      code_postal
+      created_at
+      date_nomination
+      department_id
+      etablissement
+      etablissement_id
+      date_fin_mesure
+      id
+      is_urgent
+      judgment_date
+      mandataire_id
+      numero_dossier
+      numero_rg
+      cause_sortie
+      lieu_vie
+      service_id
+      status
+      ti_id
+      nature_mesure
+      champ_mesure
+      ville
+      departement {
+        id
+        nom
+        region {
+          id
+          nom
+        }
+      }
+      ti {
+        id
+        etablissement
+      }
+    }
+
     mesures(
       offset: $offset
       limit: $limit
