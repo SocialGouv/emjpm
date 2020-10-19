@@ -25,7 +25,7 @@ const MagistratEditInformations = () => {
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       await editUser({
-        refetchQueries: ["users"],
+        refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
           cabinet: values.cabinet,
           email: values.email.toLowerCase(),
