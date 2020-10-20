@@ -5,7 +5,6 @@ exports.seed = function (knex) {
       .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
-          etablissement: "UDAHF",
           code_postal: "62000",
           department_id: 6,
           ville: "Arras",
@@ -22,7 +21,6 @@ exports.seed = function (knex) {
       .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
-          etablissement: "test42",
           code_postal: "62000",
           department_id: 6,
           ville: "Paris",
@@ -40,7 +38,6 @@ exports.seed = function (knex) {
       .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
-          etablissement: "test43",
           code_postal: "75000",
           department_id: 7,
           ville: "Paris",
@@ -57,7 +54,6 @@ exports.seed = function (knex) {
       .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
-          etablissement: "test43",
           code_postal: "10000",
           department_id: 10,
           ville: "Paris",
@@ -75,7 +71,6 @@ exports.seed = function (knex) {
       .then(function () {
         // Inserts seed entries one by one in series
         return knex("mandataires").insert({
-          etablissement: "service-1",
           code_postal: "13000",
           department_id: 13,
           ville: "Marseille",
