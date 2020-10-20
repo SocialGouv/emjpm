@@ -32,16 +32,6 @@ const Antenne = (props) => {
         <Text sx={numberStyle}>{antenne.mesures_in_progress}</Text>
         <Text sx={mesureStyle}>mesures en cours</Text>
       </Flex>
-      <Text sx={subtitle}>Préférences géographiques</Text>
-      {antenne.preferences.length > 0 ? (
-        <Fragment>
-          {antenne.preferences.map((preference) => {
-            return <Text sx={preferenceText}>{preference}</Text>;
-          })}
-        </Fragment>
-      ) : (
-        <Text sx={preferenceText}>Non renseigné</Text>
-      )}
       {hasButton && (
         <Box mt="3">
           <Link href={href}>{linkText}</Link>

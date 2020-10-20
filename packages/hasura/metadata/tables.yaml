@@ -74,9 +74,6 @@
   - name: mandataire
     using:
       foreign_key_constraint_on: mandataire_id
-  - name: service_antenne
-    using:
-      foreign_key_constraint_on: antenne_id
   - name: ti
     using:
       foreign_key_constraint_on: ti_id
@@ -3567,10 +3564,6 @@
       - created_at
       - lb_user_id
       - departement_id
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_financeur
       backend_only: false
   select_permissions:
@@ -3581,10 +3574,6 @@
       - created_at
       - lb_user_id
       - departement_id
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_financeur
       filter: {}
       allow_aggregations: true
@@ -3595,10 +3584,6 @@
       - created_at
       - lb_user_id
       - departement_id
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_financeur
       filter: {}
   - role: direction_territoriale
@@ -3608,10 +3593,6 @@
       - created_at
       - lb_user_id
       - departement_id
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_financeur
       filter: {}
   - role: individuel
@@ -3621,20 +3602,12 @@
       - created_at
       - lb_user_id
       - departement_id
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_financeur
       filter: {}
   - role: prepose
     permission:
       columns:
       - departement_financeur
-      - individuel
-      - prepose
-      - service
-      - ti
       - departement_id
       - id
       - lb_user_id
@@ -3880,7 +3853,6 @@
       - department_id
       - dispo_max
       - email_send
-      - etablissement
       - genre
       - id
       - latitude
@@ -3904,7 +3876,6 @@
       - created_at
       - dispo_max
       - email_send
-      - etablissement
       - genre
       - id
       - latitude
@@ -3944,7 +3915,6 @@
       - email_send
       - adresse
       - code_postal
-      - etablissement
       - genre
       - siret
       - telephone
@@ -3969,7 +3939,6 @@
       - email_send
       - adresse
       - code_postal
-      - etablissement
       - genre
       - siret
       - telephone
@@ -3981,7 +3950,6 @@
     permission:
       columns:
       - id
-      - etablissement
       - code_postal
       - ville
       - telephone
@@ -4015,7 +3983,6 @@
     permission:
       columns:
       - id
-      - etablissement
       - code_postal
       - ville
       - telephone
@@ -4052,7 +4019,6 @@
       - email_send
       - adresse
       - code_postal
-      - etablissement
       - genre
       - siret
       - telephone
@@ -4065,7 +4031,6 @@
     permission:
       columns:
       - id
-      - etablissement
       - code_postal
       - ville
       - telephone
@@ -4094,7 +4059,6 @@
       - department_id
       - dispo_max
       - email_send
-      - etablissement
       - genre
       - id
       - latitude
@@ -4120,7 +4084,6 @@
       - department_id
       - dispo_max
       - email_send
-      - etablissement
       - genre
       - id
       - latitude
@@ -4157,7 +4120,7 @@
   - name: departement
     using:
       foreign_key_constraint_on: department_id
-  - name: etablissementByEtablissementId
+  - name: etablissement
     using:
       foreign_key_constraint_on: etablissement_id
   - name: mandataire
@@ -4202,7 +4165,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4236,7 +4198,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4272,7 +4233,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4304,7 +4264,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4335,7 +4294,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4368,7 +4326,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4405,7 +4362,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4441,7 +4397,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4476,7 +4431,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4515,7 +4469,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4552,7 +4505,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4588,7 +4540,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4623,7 +4574,6 @@
       - created_at
       - date_nomination
       - department_id
-      - etablissement
       - etablissement_id
       - date_fin_mesure
       - id
@@ -4967,13 +4917,6 @@
     using:
       foreign_key_constraint_on: service_id
   array_relationships:
-  - name: commentaires
-    using:
-      foreign_key_constraint_on:
-        column: antenne_id
-        table:
-          schema: public
-          name: commentaires
   - name: mesures
     using:
       foreign_key_constraint_on:
@@ -5324,6 +5267,7 @@
       - latitude
       - longitude
       - department_id
+      - etablissement
       - dispo_max
       - id
       - mesures_awaiting
@@ -5333,7 +5277,6 @@
       - code_postal
       - competences
       - email
-      - etablissement
       - nom
       - prenom
       - siret
@@ -5345,14 +5288,12 @@
     permission:
       columns:
       - code_postal
-      - etablissement
       - id
       filter: {}
   - role: direction
     permission:
       columns:
       - id
-      - etablissement
       - email
       - nom
       - prenom
@@ -5369,13 +5310,13 @@
       - latitude
       - longitude
       - siret
+      - etablissement
       filter: {}
       allow_aggregations: true
   - role: direction_nationale
     permission:
       columns:
       - id
-      - etablissement
       - email
       - nom
       - prenom
@@ -5392,6 +5333,7 @@
       - latitude
       - longitude
       - siret
+      - etablissement
       filter: {}
       allow_aggregations: true
   - role: direction_territoriale
@@ -5409,12 +5351,12 @@
       - code_postal
       - competences
       - email
-      - etablissement
       - nom
       - prenom
       - siret
       - telephone
       - ville
+      - etablissement
       filter:
         department_id:
           _in: x-hasura-agrements
@@ -5429,7 +5371,6 @@
       - department_id
       - dispo_max
       - email
-      - etablissement
       - id
       - latitude
       - longitude
@@ -5440,6 +5381,7 @@
       - siret
       - telephone
       - ville
+      - etablissement
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -5447,7 +5389,6 @@
     permission:
       columns:
       - id
-      - etablissement
       - email
       - nom
       - prenom
@@ -5463,13 +5404,13 @@
       - mesures_awaiting
       - latitude
       - longitude
+      - etablissement
       filter: {}
   update_permissions:
   - role: direction
     permission:
       columns:
       - id
-      - etablissement
       - email
       - nom
       - prenom
@@ -5486,6 +5427,7 @@
       - latitude
       - longitude
       - siret
+      - etablissement
       filter: {}
       check: null
   - role: direction_nationale
@@ -5503,12 +5445,12 @@
       - code_postal
       - competences
       - email
-      - etablissement
       - nom
       - prenom
       - siret
       - telephone
       - ville
+      - etablissement
       filter: {}
       check: null
   - role: service
@@ -5520,7 +5462,6 @@
       - department_id
       - dispo_max
       - email
-      - etablissement
       - id
       - latitude
       - longitude
@@ -5530,6 +5471,7 @@
       - prenom
       - telephone
       - ville
+      - etablissement
       filter:
         id:
           _eq: X-Hasura-Service-Id
@@ -5537,6 +5479,7 @@
   - role: ti
     permission:
       columns:
+      - etablissement
       - latitude
       - longitude
       - mesures_awaiting
@@ -5595,7 +5538,6 @@
       - date_ouverture
       - departement_id
       - email
-      - etablissement
       - id
       - immutable
       - latitude
@@ -5605,6 +5547,7 @@
       - type
       - updated_at
       - ville
+      - etablissement
       filter: {}
   - role: direction
     permission:
@@ -5623,11 +5566,11 @@
       - address2
       - code_postal
       - email
-      - etablissement
       - siret
       - telephone
       - type
       - ville
+      - etablissement
       filter: {}
   - role: individuel
     permission:
@@ -5646,11 +5589,11 @@
       - address2
       - code_postal
       - email
-      - etablissement
       - siret
       - telephone
       - type
       - ville
+      - etablissement
       filter: {}
   - role: prepose
     permission:
@@ -5669,11 +5612,11 @@
       - address2
       - code_postal
       - email
-      - etablissement
       - siret
       - telephone
       - type
       - ville
+      - etablissement
       filter: {}
   - role: service
     permission:
@@ -5692,11 +5635,11 @@
       - address2
       - code_postal
       - email
-      - etablissement
       - siret
       - telephone
       - type
       - ville
+      - etablissement
       filter: {}
   - role: ti
     permission:
@@ -5715,11 +5658,11 @@
       - address2
       - code_postal
       - email
-      - etablissement
       - siret
       - telephone
       - type
       - ville
+      - etablissement
       filter: {}
 - table:
     schema: public
