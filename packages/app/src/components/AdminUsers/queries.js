@@ -56,7 +56,6 @@ export const MESURES = gql`
     }
     mesures(where: { mandataire: { user_id: { _eq: $userId } } }) {
       id
-      etablissement
       annee_naissance
       nature_mesure
       champ_mesure

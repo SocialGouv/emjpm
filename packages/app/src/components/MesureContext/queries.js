@@ -45,7 +45,6 @@ export const MESURE_CONTEXT_QUERY = gql`
       lieu_vie
       numero_rg
       numero_dossier
-      etablissement
       annee_naissance
       date_nomination
     }

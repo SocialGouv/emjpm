@@ -14,7 +14,6 @@ export const MANDATAIRE = gql`
         latitude
         longitude
         dispo_max
-        etablissement
         genre
         siret
         telephone

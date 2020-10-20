@@ -38,7 +38,6 @@ export const MESURES = gql`
     }
     mesures(where: { service_id: { _eq: $serviceId } }) {
       id
-      etablissement
       numero_dossier
       annee_naissance
       lieu_vie
