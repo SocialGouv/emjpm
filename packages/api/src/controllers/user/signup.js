@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const { User } = require("../../models/User");
 const { Mandataire } = require("../../models/Mandataire");
 const { Magistrat } = require("../../models/Magistrat");
-const { UserTis } = require("../../models/UserTis");
+const { MandataireTis } = require("../../models/MandataireTis");
 const { UserRole } = require("../../models/UserRole");
 const {
   ServiceMemberInvitation,
@@ -64,14 +64,14 @@ const createMandataire = async (mandataireDatas, user_id) => {
   return mandataire;
 };
 
-const createUserTis = (tis, user_id) => {
+const createMandataireTis = (tis, mandataire_id) => {
   if (!tis || tis.length === 0) {
     return true;
   }
   Promise.all(
     tis.map((ti_id) =>
-      UserTis.query().allowInsert("[user_id, ti_id]").insert({
-        user_id,
+      MandataireTis.query().allowInsert("[mandataire_id, ti_id]").insert({
+        mandataire_id,
         ti_id,
       })
     )
@@ -127,8 +127,8 @@ const signup = async (req, res) => {
     switch (type) {
       case "individuel":
       case "prepose":
-        await createMandataire(body.mandataire, user.id);
-        await createUserTis(body.tis, user.id);
+        const mandataire = await createMandataire(body.mandataire, user.id);
+        await createMandataireTis(body.tis, mandataire.id);
         break;
       case "service": {
         const {

@@ -182,11 +182,6 @@ export const MANDATAIRE_USERS = gql`
       type
       username
       cabinet
-      user_tis {
-        ti {
-          etablissement
-        }
-      }
       mandataire {
         id
         dispo_max
@@ -201,6 +196,13 @@ export const MANDATAIRE_USERS = gql`
         ville
         code_postal
         competences
+        mandataire_tis {
+          id
+          ti {
+            id
+            etablissement
+          }
+        }
         lb_user {
           id
           lb_user_etablissements {

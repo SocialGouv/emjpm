@@ -49,6 +49,18 @@ class Mandataire extends Model {
           to: "users.id",
         },
       },
+      tis: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Tis,
+        join: {
+          from: "mandataires.id",
+          through: {
+            from: "mandataire_tis.mandataire_id",
+            to: "mandataire_tis.ti_id",
+          },
+          to: "tis.id",
+        },
+      },
       department: {
         relation: Model.BelongsToOneRelation,
         modelClass: Departement,

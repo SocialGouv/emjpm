@@ -163,7 +163,9 @@ const AdminUserInformations = (props) => {
           </Box>
           <Box width={2 / 3} px={4} py={2}>
             {type === "ti" && <AdminUsersMagistratTribunal id={id} />}
-            {(type === "individuel" || type === "prepose") && <AdminUsersTribunaux id={id} />}
+            {(type === "individuel" || type === "prepose") && (
+              <AdminUsersTribunaux mandataireId={mandataire.id} />
+            )}
           </Box>
         </Flex>
       )}

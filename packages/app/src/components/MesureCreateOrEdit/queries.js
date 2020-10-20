@@ -22,9 +22,9 @@ export const SERVICE_TRIBUNAL = gql`
   }
 `;
 
-export const USER_TRIBUNAL = gql`
-  query user_tribunal {
-    tribunaux: user_tis(order_by: { ti: { ville: asc } }) {
+export const MANDATAIRE_TRIBUNAL = gql`
+  query mandataireTribunaux {
+    tribunaux: mandataire_tis(order_by: { ti: { ville: asc } }) {
       id
       ti {
         etablissement

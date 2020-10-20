@@ -4,16 +4,16 @@ import React, { useState } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
 import { ADD_USER_TIS, DELETE_USER_TIS } from "./mutations";
-import { USER_TIS } from "./queries";
+import { MANDATAIRE_TIS } from "./queries";
 
 const AdminUsersTribunaux = (props) => {
-  const { id: userId } = props;
+  const { mandataireId } = props;
 
   const [selectedTribunal, setSelectedTribunal] = useState(undefined);
 
-  const { data, loading } = useQuery(USER_TIS, {
+  const { data, loading } = useQuery(MANDATAIRE_TIS, {
     variables: {
-      userId,
+      mandataireId,
     },
   });
 
@@ -24,11 +24,11 @@ const AdminUsersTribunaux = (props) => {
     return null;
   }
 
-  const { user_tis, tis } = data;
+  const { mandataire_tis, tis } = data;
 
   return (
     <Box>
-      {user_tis.map((relation) => {
+      {mandataire_tis.map((relation) => {
         const { ti, id } = relation;
 
         return (
@@ -56,7 +56,7 @@ const AdminUsersTribunaux = (props) => {
             placeholder="Ajouter un tribunal"
             onChange={({ value }) => setSelectedTribunal(value)}
             options={tis
-              .filter((ti) => !user_tis.some((relation) => relation.ti.id === ti.id))
+              .filter((ti) => !mandataire_tis.some((relation) => relation.ti.id === ti.id))
               .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
           />
         </Box>

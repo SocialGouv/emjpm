@@ -83,18 +83,6 @@ class User extends Model {
           to: "direction.user_id",
         },
       },
-      tis: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Tis,
-        join: {
-          from: "users.id",
-          through: {
-            from: "user_tis.user_id",
-            to: "user_tis.ti_id",
-          },
-          to: "tis.id",
-        },
-      },
     };
   }
 
