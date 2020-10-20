@@ -27,7 +27,6 @@ export const CLOSE_MESURE = gql`
         mandataire_id
         numero_rg
         numero_dossier
-        etablissement
         annee_naissance
         date_nomination
       }

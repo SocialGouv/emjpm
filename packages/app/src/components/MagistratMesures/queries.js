@@ -53,7 +53,6 @@ export const MESURES = gql`
       lieu_vie
       numero_rg
       numero_dossier
-      etablissement
       annee_naissance
       date_nomination
     }

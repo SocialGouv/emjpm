@@ -50,7 +50,6 @@ export const ACCEPT_MESURE = gql`
         lieu_vie
         numero_rg
         numero_dossier
-        etablissement
         annee_naissance
         date_nomination
         pays

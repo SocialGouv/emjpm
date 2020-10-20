@@ -161,12 +161,6 @@ Object {
 
 exports[`commentaires table schema 1`] = `
 Object {
-  "antenne_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
   "comment": Object {
     "defaultValue": null,
     "maxLength": null,
@@ -2862,35 +2856,11 @@ Object {
     "nullable": false,
     "type": "integer",
   },
-  "individuel": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
-  },
   "lb_user_id": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
     "type": "integer",
-  },
-  "prepose": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
-  },
-  "service": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
-  },
-  "ti": Object {
-    "defaultValue": "false",
-    "maxLength": null,
-    "nullable": true,
-    "type": "boolean",
   },
 }
 `;
@@ -3072,12 +3042,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "timestamp with time zone",
-  },
-  "etablissement": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": false,
-    "type": "character varying",
   },
   "genre": Object {
     "defaultValue": null,
@@ -3339,12 +3303,6 @@ Object {
     "maxLength": null,
     "nullable": true,
     "type": "integer",
-  },
-  "etablissement": Object {
-    "defaultValue": null,
-    "maxLength": 255,
-    "nullable": true,
-    "type": "character varying",
   },
   "etablissement_id": Object {
     "defaultValue": null,
