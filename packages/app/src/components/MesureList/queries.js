@@ -30,7 +30,6 @@ export const MESURES_QUERY = gql`
       created_at
       date_nomination
       department_id
-      etablissement
       etablissement_id
       date_fin_mesure
       id
@@ -80,7 +79,6 @@ export const MESURES_QUERY = gql`
       created_at
       date_nomination
       department_id
-      etablissement
       etablissement_id
       date_fin_mesure
       id

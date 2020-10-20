@@ -24,7 +24,6 @@ export const REACTIVATE_MESURE = gql`
         numero_rg
         numero_dossier
         mandataire_id
-        etablissement
         annee_naissance
         date_nomination
       }
