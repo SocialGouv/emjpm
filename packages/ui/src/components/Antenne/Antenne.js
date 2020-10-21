@@ -3,13 +3,7 @@ import React from 'react';
 import { Box, Flex } from 'rebass';
 
 import { Card, Heading4, Text } from '../../core';
-import {
-  antenneTitleStyle,
-  availabilityIndicatorStyle,
-  mesureStyle,
-  numberContainer,
-  numberStyle,
-} from './style';
+import { antenneTitleStyle, availabilityIndicatorStyle, mesureStyle, numberContainer, numberStyle } from './style';
 
 const Antenne = (props) => {
   const { Link, linkText, href, sx, antenne, hasButton } = props;
