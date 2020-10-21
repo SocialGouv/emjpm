@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Box, Flex } from 'rebass';
 
 import { Card, Heading4, Text } from '../../core';
@@ -9,8 +9,6 @@ import {
   mesureStyle,
   numberContainer,
   numberStyle,
-  preferenceText,
-  subtitle,
 } from './style';
 
 const Antenne = (props) => {
