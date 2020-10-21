@@ -18,7 +18,7 @@ import {
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
-import { SERVICE_TRIBUNAL, MANDATAIRE_TRIBUNAL } from "./queries";
+import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export const MesureCreateOrEdit = (props) => {
   let mesureToEdit = useContext(MesureContext);

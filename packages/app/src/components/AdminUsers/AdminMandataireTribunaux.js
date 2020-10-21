@@ -3,10 +3,10 @@ import { Select } from "@emjpm/ui";
 import React, { useState } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
-import { ADD_USER_TIS, DELETE_USER_TIS } from "./mutations";
+import { ADD_MANDATAIRE_TIS, DELETE_MANDATAIRE_TIS } from "./mutations";
 import { MANDATAIRE_TIS } from "./queries";
 
-const AdminUsersTribunaux = (props) => {
+const AdminMandataireTribunaux = (props) => {
   const { mandataireId } = props;
 
   const [selectedTribunal, setSelectedTribunal] = useState(undefined);
@@ -17,8 +17,8 @@ const AdminUsersTribunaux = (props) => {
     },
   });
 
-  const [deleteUserTribunalRelation] = useMutation(DELETE_USER_TIS);
-  const [addUserTribunalRelation] = useMutation(ADD_USER_TIS);
+  const [deleteMandataireTribunalRelation] = useMutation(DELETE_MANDATAIRE_TIS);
+  const [addMandataireTribunalRelation] = useMutation(ADD_MANDATAIRE_TIS);
 
   if (loading || !data) {
     return null;
@@ -37,9 +37,9 @@ const AdminUsersTribunaux = (props) => {
             <Box>
               <Button
                 onClick={() =>
-                  deleteUserTribunalRelation({
+                  deleteMandataireTribunalRelation({
                     variables: { id },
-                    refetchQueries: ["admin_user_tis"],
+                    refetchQueries: ["admin_mandataire_tis"],
                   })
                 }
               >
@@ -63,9 +63,9 @@ const AdminUsersTribunaux = (props) => {
         <Button
           onClick={() => {
             if (selectedTribunal) {
-              addUserTribunalRelation({
-                refetchQueries: ["admin_user_tis"],
-                variables: { userId, tiId: selectedTribunal },
+              addMandataireTribunalRelation({
+                refetchQueries: ["admin_mandataire_tis"],
+                variables: { mandataireId, tiId: selectedTribunal },
               });
             }
           }}
@@ -77,4 +77,4 @@ const AdminUsersTribunaux = (props) => {
   );
 };
 
-export default AdminUsersTribunaux;
+export default AdminMandataireTribunaux;

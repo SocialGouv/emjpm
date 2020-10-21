@@ -13,12 +13,9 @@ const label = (value) => {
 
 const MandataireInformations = () => {
   const user = useContext(UserContext);
-  const {
-    email,
-    nom,
-    prenom,
-    mandataire: { mandataire_tis },
-  } = user;
+  console.log(user);
+  const { email, nom, prenom, mandataire } = user;
+  const { mandataire_tis } = mandataire;
 
   return (
     <Box>

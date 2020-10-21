@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const USERS = gql`
-  query services($limit: Int, $searchText: String, $offset: Int, $type: String) {
+  query allUsers($limit: Int, $searchText: String, $offset: Int, $type: String) {
     users_aggregate(
       where: {
         type: { _eq: $type }
@@ -75,7 +75,7 @@ export const MESURES = gql`
 `;
 
 export const MANDATAIRE_TIS = gql`
-  query admin_mandataire_tis($userId: Int!) {
+  query admin_mandataire_tis($mandataireId: Int!) {
     tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
