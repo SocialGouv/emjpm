@@ -12,7 +12,6 @@ const { Role } = require("../../models/Role");
 const { Direction } = require("../../models/Direction");
 const { errorHandler } = require("../../db/errors");
 const { inscriptionEmail } = require("../../email/inscription");
-const { getTisNames } = require("../../db/queries/tis");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;
@@ -29,7 +28,6 @@ const createMagistrat = async (magistrat, user) => {
 
 const createMandataire = async (mandataireDatas, user_id) => {
   const {
-    etablissement,
     telephone,
     telephone_portable,
     adresse,
@@ -49,7 +47,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
     .insert({
       user_id,
       siret,
-      etablissement,
       telephone,
       telephone_portable,
       adresse,
@@ -173,10 +170,9 @@ const signup = async (req, res) => {
 
     const tis = body.magistrat ? [body.magistrat.ti] : body.tis;
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";
-    const tiNames = await getTisNames(tis);
 
     if (!user.active) {
-      inscriptionEmail(nom, prenom, email, code_postal, type, tiNames);
+      inscriptionEmail(nom, prenom, email, code_postal, type);
     }
 
     return res.json({ success: true });

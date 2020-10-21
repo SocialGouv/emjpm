@@ -1,5 +1,6 @@
 const knexConnection = require("../db/knex");
 const { Model } = require("objection");
+const { Tis } = require("./Tis");
 
 Model.knex(knexConnection);
 
@@ -16,7 +17,6 @@ class Mandataire extends Model {
     return {
       type: "object",
       properties: {
-        etablissement: { type: "string" },
         id: { type: "integer" },
         genre: {
           type: "string",

@@ -5326,6 +5326,7 @@
     permission:
       columns:
       - code_postal
+      - etablissement
       - id
       filter: {}
   - role: direction

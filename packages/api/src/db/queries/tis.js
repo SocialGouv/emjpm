@@ -11,18 +11,6 @@ const getAllTisByMandataire = (mandataireId) =>
       mandataire_id: parseInt(mandataireId),
     });
 
-const getTisNames = async (tis) => {
-  const getEtablissementByTi = (id) =>
-    getTiById(id).then((json) => json.etablissement);
-  if (tis) {
-    const tiNames = (await Promise.all(tis.map(getEtablissementByTi))).join(
-      ", "
-    );
-    return tiNames;
-  }
-};
-
 module.exports = {
   getAllTisByMandataire,
-  getTisNames,
 };
