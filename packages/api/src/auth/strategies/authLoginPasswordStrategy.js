@@ -11,7 +11,7 @@ const authLoginPasswordStrategy = new LocalStrategy(
       .where("username", username)
       .orWhere("email", username.toLowerCase().trim())
       .first()
-      .withGraphFetched("[roles, service, tis, direction, mandataire]")
+      .withGraphFetched("[roles, service, direction, mandataire]")
       .then(function (user) {
         if (!user) {
           return done("Unknown user");
