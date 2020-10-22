@@ -1,4 +1,12 @@
 type Mutation {
+  calculate_mesures (
+    serviceId: Int
+    mandataireId: Int
+  ): CalculateMesuresOutput
+}
+
+
+type Mutation {
   email_reservation (
     mesure_id: Int!
   ): EmailReservationOutput
@@ -124,5 +132,10 @@ type ImportFinessOutput {
 
 type EmailReservationOutput {
   result : String!
+}
+
+type CalculateMesuresOutput {
+  success : Boolean!
+  updatedRows : Int!
 }
 

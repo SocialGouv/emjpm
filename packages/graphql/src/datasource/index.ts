@@ -10,9 +10,9 @@ export interface DataSource {
   serviceAPI: ServiceAPI;
 }
 
-export default () => ({
+export default {
   departmentAvailabilityAPI: new DepartmentAvailabilityAPI(),
   mandataireAPI: new MandataireAPI(),
   mesureAPI: new MesureAPI(),
   serviceAPI: new ServiceAPI()
-});
+};

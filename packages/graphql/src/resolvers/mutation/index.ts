@@ -1,6 +1,6 @@
 import { AuthenticationError } from "apollo-server-koa";
 
-import { DataSource } from "../../datasource";
+import datasources from "../../datasource";
 import { logger } from "../../logger";
 import {
   MutationRecalculateMandataireMesuresCountArgs,
@@ -9,16 +9,14 @@ import {
 } from "../../types/resolvers-types";
 
 export const recalculateMandataireMesuresCount = async (
-  _: any,
-  args: MutationRecalculateMandataireMesuresCountArgs,
-  { dataSources }: { dataSources: DataSource }
+  args: MutationRecalculateMandataireMesuresCountArgs
 ): Promise<UpdatedRows> => {
   const { mandataireId } = args;
   logger.info(
     `Calculating the total number of mesures by mandataire (id: ${mandataireId})...`
   );
   try {
-    const { data } = await dataSources.mesureAPI.countMandataireMesures(
+    const { data } = await datasources.mesureAPI.countMandataireMesures(
       mandataireId
     );
     if (!data) {
@@ -62,7 +60,7 @@ export const recalculateMandataireMesuresCount = async (
       data: {
         update_mandataires: { affected_rows: updatedRows }
       }
-    } = await dataSources.mandataireAPI.updateMandataireMesures(
+    } = await datasources.mandataireAPI.updateMandataireMesures(
       mandataireId,
       awaitingMesuresCount,
       inprogressMesuresCount
@@ -81,14 +79,12 @@ export const recalculateMandataireMesuresCount = async (
 };
 
 export const recalculateServiceMesuresCount = async (
-  _: any,
-  args: MutationRecalculateServiceMesuresCountArgs,
-  { dataSources }: { dataSources: DataSource }
+  args: MutationRecalculateServiceMesuresCountArgs
 ): Promise<UpdatedRows> => {
   logger.info(`Calculating the total number of mesures by service...`);
   const { serviceId } = args;
   try {
-    const { data } = await dataSources.mesureAPI.countServiceMesures(serviceId);
+    const { data } = await datasources.mesureAPI.countServiceMesures(serviceId);
     if (!data) {
       throw new Error("Graphql request return wrong result");
     }
@@ -124,7 +120,7 @@ export const recalculateServiceMesuresCount = async (
       data: {
         update_services: { affected_rows: updatedRowsServices }
       }
-    } = await dataSources.serviceAPI.updateServiceMesures(
+    } = await datasources.serviceAPI.updateServiceMesures(
       serviceId,
       awaitingMesuresCount,
       inprogressMesuresCount
@@ -133,7 +129,7 @@ export const recalculateServiceMesuresCount = async (
     let updatedRowsServiceAntenne = 0;
     for (const antenne of service_antenne) {
       const { id, mesures_awaiting, mesures_in_progress } = antenne;
-      const response = await dataSources.serviceAPI.updateAntenneServiceMesures(
+      const response = await datasources.serviceAPI.updateAntenneServiceMesures(
         id,
         mesures_awaiting.aggregate.count,
         mesures_in_progress.aggregate.count

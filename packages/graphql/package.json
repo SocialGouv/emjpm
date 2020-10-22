@@ -16,6 +16,7 @@
     "apollo-server-koa": "^2.18.2",
     "graphql": "^15.3.0",
     "lodash": "^4.17.20",
+    "node-fetch": "^2.6.1",
     "pino": "^6.7.0"
   },
   "devDependencies": {

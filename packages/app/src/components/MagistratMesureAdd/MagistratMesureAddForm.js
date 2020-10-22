@@ -14,8 +14,7 @@ import { UserContext } from "../UserContext";
 import {
   CHOOSE_MANDATAIRE,
   CHOOSE_SERVICE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
+  CALCULATE_MESURES,
   SEND_EMAIL_RESERVATION,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
@@ -28,9 +27,17 @@ export const MagistratMesureAddForm = (props) => {
   } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES, {
+  const [sendEmailReservation] = useMutation(SEND_EMAIL_RESERVATION, {
+    onError: () => setLoading(false),
+  });
+
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES, {
     onError: () => setLoading(false),
     refetchQueries: [
+      {
+        query: SERVICE,
+        variables: { id: serviceId },
+      },
       {
         query: MANDATAIRE,
         variables: { id: mandataireId },
@@ -45,16 +52,12 @@ export const MagistratMesureAddForm = (props) => {
     ],
   });
 
-  const [sendEmailReservation] = useMutation(SEND_EMAIL_RESERVATION, {
-    onError: () => setLoading(false),
-  });
-
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
 
-      await recalculateMandataireMesures({
+      await recalculateMesures({
         variables: {
           mandataire_id: mandataireId,
         },
@@ -72,27 +75,11 @@ export const MagistratMesureAddForm = (props) => {
     },
   });
 
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
-    onError: () => setLoading(false),
-    refetchQueries: [
-      {
-        query: SERVICE,
-        variables: { id: serviceId },
-      },
-      {
-        query: GESTIONNAIRES,
-        variables: {
-          mandataire_id: mandataireId,
-          service_id: serviceId,
-        },
-      },
-    ],
-  });
   const [chooseService] = useMutation(CHOOSE_SERVICE, {
     onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
-      await recalculateServiceMesures({
+      await recalculateMesures({
         variables: { service_id: serviceId },
       });
 

@@ -2,9 +2,10 @@ import {
   CountMandataireMesuresQueryResult,
   CountServiceMesuresQueryResult,
   SearchMesureResult,
-  SearchMesuresParam,
+  SearchMesuresParam
 } from "../types";
 import { AuthDataSource } from "./auth-datasource";
+import { logger } from "../logger";
 
 const convertDates = (mesure: SearchMesureResult) => {
   mesure.date_nomination = mesure.date_nomination
@@ -36,7 +37,7 @@ export class MesureAPI extends AuthDataSource {
     }
   `;
 
-    return this.post("/", { query }).then((response) => {
+    return this.post("/", { query }).then(response => {
       return response.data.mesures.map(convertDates);
     });
   }
@@ -79,16 +80,17 @@ export class MesureAPI extends AuthDataSource {
         }
       }
     }`;
-
+    logger.info("countServiceMesures countServiceMesures countServiceMesures");
+    logger.info(this);
     const response = await this.post<CountServiceMesuresQueryResult>(
       "/",
       {
         operationName: "service_mesures",
         query,
-        variables: { serviceId },
+        variables: { serviceId }
       },
       {
-        headers: this.adminHeader,
+        headers: this.adminHeader
       }
     );
 
@@ -125,10 +127,10 @@ export class MesureAPI extends AuthDataSource {
       {
         operationName: "mandataire_mesures",
         query,
-        variables: { mandataireId },
+        variables: { mandataireId }
       },
       {
-        headers: this.adminHeader,
+        headers: this.adminHeader
       }
     );
     return response;
