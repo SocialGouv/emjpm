@@ -11,8 +11,16 @@
     "lint": "eslint -c .eslintrc.js --ext .ts .",
     "lint:fix": "eslint --cache --fix -c .eslintrc.js --ext .ts ."
   },
-  "dependencies": {},
+  "dependencies": {
+    "apollo-datasource-rest": "^0.9.4",
+    "apollo-server-koa": "^2.18.2",
+    "graphql": "^15.3.0",
+    "lodash": "^4.17.20",
+    "pino": "^6.7.0"
+  },
   "devDependencies": {
+    "@types/lodash": "^4.14.162",
+    "@types/pino": "^6.3.3",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/eslint-plugin-tslint": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
