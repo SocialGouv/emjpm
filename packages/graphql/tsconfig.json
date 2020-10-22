@@ -9,7 +9,7 @@
     "noEmit": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "preserveConstEnums": true,
     "removeComments": false,
     "skipLibCheck": true,
@@ -18,6 +18,5 @@
     "strict": true,
     "target": "esnext"
   },
-  "include": ["**/src/**/*.ts"],
   "files": ["./src/index.ts"]
 }

@@ -1,0 +1,22 @@
+{
+  "name": "@emjpm/graphql",
+  "version": "25.65.0",
+  "main": "lib/index.js",
+  "author": "Incubateur des Ministères Sociaux <dsi-incubateur@sg.social.gouv.fr> (https://incubateur.social.gouv.fr)",
+  "license": "Apache-2.0",
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "lint:pre-commit": "npm run lint:fix",
+    "lint": "eslint -c .eslintrc.js --ext .ts .",
+    "lint:fix": "eslint --cache --fix -c .eslintrc.js --ext .ts ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/eslint-plugin-tslint": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "eslint": "^7.11.0",
+    "typescript": "^4.0.3"
+  }
+}

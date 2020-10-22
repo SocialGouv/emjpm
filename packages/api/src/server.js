@@ -14,6 +14,9 @@ const authRoutes = require("./routes/api/auth");
 const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
 
+const resolvers = require("@emjpm/graphql");
+console.log(resolvers);
+
 const corsOptions = {
   credentials: true,
   origin: true,
