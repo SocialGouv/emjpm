@@ -45,6 +45,11 @@ export const RECALCULATE_MANDATAIRE_MESURES = gql`
     }
   }
 `;
+export const SEND_EMAIL_RESERVATION = gql`
+  mutation email_reservation($mesure_id: Int!) {
+    email_reservation(mesure_id: $mesure_id)
+  }
+`;
 
 export const RECALCULATE_SERVICE_MESURES = gql`
   mutation update_service_mesures($service_id: Int!) {
