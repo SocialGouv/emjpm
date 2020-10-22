@@ -30,10 +30,6 @@ export const LB_USER = gql`
         id
         departement_id
         departement_financeur
-        ti
-        service
-        prepose
-        individuel
         departement {
           id
           code
@@ -110,10 +106,6 @@ export const LB_USERS = gql`
       lb_departements {
         id
         departement_financeur
-        ti
-        service
-        prepose
-        individuel
         departement {
           id
           code

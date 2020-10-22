@@ -3,9 +3,9 @@ const { Model } = require("objection");
 
 Model.knex(knexConnection);
 
-class UserTis extends Model {
+class MandataireTis extends Model {
   static get tableName() {
-    return "user_tis";
+    return "mandataire_tis";
   }
 
   static get idColumn() {
@@ -17,11 +17,11 @@ class UserTis extends Model {
       type: "object",
       properties: {
         id: { type: "integer" },
-        user_id: { type: "integer" },
+        mandataire_id: { type: "integer" },
         ti_id: { type: "integer" },
       },
     };
   }
 }
 
-module.exports = { UserTis };
+module.exports = { MandataireTis };

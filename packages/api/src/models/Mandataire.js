@@ -1,5 +1,6 @@
 const knexConnection = require("../db/knex");
 const { Model } = require("objection");
+const { Tis } = require("./Tis");
 
 Model.knex(knexConnection);
 
@@ -16,7 +17,6 @@ class Mandataire extends Model {
     return {
       type: "object",
       properties: {
-        etablissement: { type: "string" },
         id: { type: "integer" },
         genre: {
           type: "string",
@@ -47,6 +47,18 @@ class Mandataire extends Model {
         join: {
           from: "mandataires.user_id",
           to: "users.id",
+        },
+      },
+      tis: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Tis,
+        join: {
+          from: "mandataires.id",
+          through: {
+            from: "mandataire_tis.mandataire_id",
+            to: "mandataire_tis.ti_id",
+          },
+          to: "tis.id",
         },
       },
       department: {

@@ -6,9 +6,9 @@ import { Box, Flex } from "rebass";
 
 import { isIndividuel, isMandataire } from "../../../src/util";
 import { AccessToken } from "../AccessToken";
+import AdminMandataireTribunaux from "./AdminMandataireTribunaux";
 import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
-import AdminUsersTribunaux from "./AdminUsersTribunaux";
 import { ACTIVATE_USER, CHANGE_DIRECTION_AGREMENT } from "./mutations";
 import { LB_USER, USER } from "./queries";
 import { TypeDirectionForm } from "./TypeDirectionForm";
@@ -163,7 +163,9 @@ const AdminUserInformations = (props) => {
           </Box>
           <Box width={2 / 3} px={4} py={2}>
             {type === "ti" && <AdminUsersMagistratTribunal id={id} />}
-            {(type === "individuel" || type === "prepose") && <AdminUsersTribunaux id={id} />}
+            {(type === "individuel" || type === "prepose") && (
+              <AdminMandataireTribunaux mandataireId={mandataire.id} />
+            )}
           </Box>
         </Flex>
       )}

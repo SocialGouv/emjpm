@@ -7,7 +7,6 @@ const jwtConfig = require("../config/jwt");
 const { Mandataire } = require("./Mandataire");
 const { Departement } = require("./Departement");
 const { Role } = require("./Role");
-const { Tis } = require("./Tis");
 const { Service } = require("./Service");
 const { Direction } = require("./Direction");
 
@@ -81,18 +80,6 @@ class User extends Model {
         join: {
           from: "users.id",
           to: "direction.user_id",
-        },
-      },
-      tis: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Tis,
-        join: {
-          from: "users.id",
-          through: {
-            from: "user_tis.user_id",
-            to: "user_tis.ti_id",
-          },
-          to: "tis.id",
         },
       },
     };
