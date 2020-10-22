@@ -7,7 +7,6 @@ const jwtConfig = require("../config/jwt");
 const { Mandataire } = require("./Mandataire");
 const { Departement } = require("./Departement");
 const { Role } = require("./Role");
-const { Tis } = require("./Tis");
 const { Service } = require("./Service");
 const { Direction } = require("./Direction");
 

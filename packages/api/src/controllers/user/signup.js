@@ -123,10 +123,11 @@ const signup = async (req, res) => {
 
     switch (type) {
       case "individuel":
-      case "prepose":
+      case "prepose": {
         const mandataire = await createMandataire(body.mandataire, user.id);
-        await createMandataireTis(body.tis, mandataire.id);
+        createMandataireTis(body.tis, mandataire.id);
         break;
+      }
       case "service": {
         const {
           invitation,
@@ -168,7 +169,6 @@ const signup = async (req, res) => {
         return;
     }
 
-    const tis = body.magistrat ? [body.magistrat.ti] : body.tis;
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";
 
     if (!user.active) {
