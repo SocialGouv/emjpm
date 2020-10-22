@@ -1,3 +1,10 @@
+type Mutation {
+  email_reservation (
+    mesure_id: Int!
+  ): EmailReservationOutput
+}
+
+
 type Query {
   enquete_reponse_validation_status (
     enqueteId: Int!
@@ -51,6 +58,10 @@ type Mutation {
 
 
 
+
+input EmailReservationInput {
+  mesure_id : Int!
+}
 
 type FileOutput {
   data : String!
@@ -109,5 +120,9 @@ type EnqueteReponseStatus {
 
 type ImportFinessOutput {
   data : String!
+}
+
+type EmailReservationOutput {
+  result : String!
 }
 
