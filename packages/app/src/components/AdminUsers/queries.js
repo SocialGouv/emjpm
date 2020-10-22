@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const USERS = gql`
-  query services($limit: Int, $searchText: String, $offset: Int, $type: String) {
+  query allUsers($limit: Int, $searchText: String, $offset: Int, $type: String) {
     users_aggregate(
       where: {
         type: { _eq: $type }
@@ -74,14 +74,14 @@ export const MESURES = gql`
   }
 `;
 
-export const USER_TIS = gql`
-  query admin_user_tis($userId: Int!) {
+export const MANDATAIRE_TIS = gql`
+  query admin_mandataire_tis($mandataireId: Int!) {
     tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal
     }
-    user_tis(where: { user_id: { _eq: $userId } }) {
+    mandataire_tis(where: { mandataire_id: { _eq: $mandataireId } }) {
       id
       ti {
         id
@@ -176,15 +176,15 @@ export const USER = gql`
           email
           siret
         }
-      }
-      magistrat {
-        id
-        ti {
+        mandataire_tis(order_by: { ti: { ville: asc } }) {
           id
-          ville
+          ti {
+            id
+            ville
+          }
         }
       }
-      user_tis(order_by: { ti: { ville: asc } }) {
+      magistrat {
         id
         ti {
           id

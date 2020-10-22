@@ -3,8 +3,8 @@ const serviceDetail = ({ service_members }) => {
   return { type: "Service", values };
 };
 
-const mandataireDetail = ({ user_tis }) => {
-  const values = user_tis.map((val) => val.ti.ville);
+const mandataireDetail = ({ mandataire_tis }) => {
+  const values = mandataire_tis.map((val) => val.ti.ville);
   return { type: "Tribunaux", values };
 };
 

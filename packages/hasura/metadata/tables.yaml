@@ -3809,6 +3809,37 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: mandataire_tis
+  object_relationships:
+  - name: mandataire
+    using:
+      foreign_key_constraint_on: mandataire_id
+  - name: ti
+    using:
+      foreign_key_constraint_on: ti_id
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - ti_id
+      - mandataire_id
+      - created_at
+      filter:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - ti_id
+      - mandataire_id
+      - created_at
+      filter:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+- table:
+    schema: public
     name: mandataires
   object_relationships:
   - name: departement
@@ -3835,6 +3866,13 @@
         table:
           schema: public
           name: enquete_reponses
+  - name: mandataire_tis
+    using:
+      foreign_key_constraint_on:
+        column: mandataire_id
+        table:
+          schema: public
+          name: mandataire_tis
   - name: mesures
     using:
       foreign_key_constraint_on:
@@ -5288,6 +5326,7 @@
     permission:
       columns:
       - code_postal
+      - etablissement
       - id
       filter: {}
   - role: direction
@@ -5518,13 +5557,6 @@
         table:
           schema: public
           name: service_tis
-  - name: user_tis
-    using:
-      foreign_key_constraint_on:
-        column: ti_id
-        table:
-          schema: public
-          name: user_tis
   select_permissions:
   - role: anonymous
     permission:
@@ -5719,37 +5751,6 @@
           _eq: X-Hasura-User-Id
 - table:
     schema: public
-    name: user_tis
-  object_relationships:
-  - name: ti
-    using:
-      foreign_key_constraint_on: ti_id
-  - name: user
-    using:
-      foreign_key_constraint_on: user_id
-  select_permissions:
-  - role: individuel
-    permission:
-      columns:
-      - id
-      - ti_id
-      - user_id
-      - created_at
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-  - role: prepose
-    permission:
-      columns:
-      - id
-      - ti_id
-      - user_id
-      - created_at
-      filter:
-        user_id:
-          _eq: X-Hasura-User-Id
-- table:
-    schema: public
     name: users
   object_relationships:
   - name: magistrat
@@ -5790,13 +5791,6 @@
         table:
           schema: public
           name: user_role
-  - name: user_tis
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table:
-          schema: public
-          name: user_tis
   insert_permissions:
   - role: direction
     permission:

@@ -1,17 +1,9 @@
 import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Box, Flex } from 'rebass';
 
 import { Card, Heading4, Text } from '../../core';
-import {
-  antenneTitleStyle,
-  availabilityIndicatorStyle,
-  mesureStyle,
-  numberContainer,
-  numberStyle,
-  preferenceText,
-  subtitle,
-} from './style';
+import { antenneTitleStyle, availabilityIndicatorStyle, mesureStyle, numberContainer, numberStyle } from './style';
 
 const Antenne = (props) => {
   const { Link, linkText, href, sx, antenne, hasButton } = props;

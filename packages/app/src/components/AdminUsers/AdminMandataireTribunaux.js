@@ -3,32 +3,32 @@ import { Select } from "@emjpm/ui";
 import React, { useState } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
-import { ADD_USER_TIS, DELETE_USER_TIS } from "./mutations";
-import { USER_TIS } from "./queries";
+import { ADD_MANDATAIRE_TIS, DELETE_MANDATAIRE_TIS } from "./mutations";
+import { MANDATAIRE_TIS } from "./queries";
 
-const AdminUsersTribunaux = (props) => {
-  const { id: userId } = props;
+const AdminMandataireTribunaux = (props) => {
+  const { mandataireId } = props;
 
   const [selectedTribunal, setSelectedTribunal] = useState(undefined);
 
-  const { data, loading } = useQuery(USER_TIS, {
+  const { data, loading } = useQuery(MANDATAIRE_TIS, {
     variables: {
-      userId,
+      mandataireId,
     },
   });
 
-  const [deleteUserTribunalRelation] = useMutation(DELETE_USER_TIS);
-  const [addUserTribunalRelation] = useMutation(ADD_USER_TIS);
+  const [deleteMandataireTribunalRelation] = useMutation(DELETE_MANDATAIRE_TIS);
+  const [addMandataireTribunalRelation] = useMutation(ADD_MANDATAIRE_TIS);
 
   if (loading || !data) {
     return null;
   }
 
-  const { user_tis, tis } = data;
+  const { mandataire_tis, tis } = data;
 
   return (
     <Box>
-      {user_tis.map((relation) => {
+      {mandataire_tis.map((relation) => {
         const { ti, id } = relation;
 
         return (
@@ -37,9 +37,9 @@ const AdminUsersTribunaux = (props) => {
             <Box>
               <Button
                 onClick={() =>
-                  deleteUserTribunalRelation({
+                  deleteMandataireTribunalRelation({
                     variables: { id },
-                    refetchQueries: ["admin_user_tis"],
+                    refetchQueries: ["admin_mandataire_tis"],
                   })
                 }
               >
@@ -56,16 +56,16 @@ const AdminUsersTribunaux = (props) => {
             placeholder="Ajouter un tribunal"
             onChange={({ value }) => setSelectedTribunal(value)}
             options={tis
-              .filter((ti) => !user_tis.some((relation) => relation.ti.id === ti.id))
+              .filter((ti) => !mandataire_tis.some((relation) => relation.ti.id === ti.id))
               .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
           />
         </Box>
         <Button
           onClick={() => {
             if (selectedTribunal) {
-              addUserTribunalRelation({
-                refetchQueries: ["admin_user_tis"],
-                variables: { userId, tiId: selectedTribunal },
+              addMandataireTribunalRelation({
+                refetchQueries: ["admin_mandataire_tis"],
+                variables: { mandataireId, tiId: selectedTribunal },
               });
             }
           }}
@@ -77,4 +77,4 @@ const AdminUsersTribunaux = (props) => {
   );
 };
 
-export default AdminUsersTribunaux;
+export default AdminMandataireTribunaux;

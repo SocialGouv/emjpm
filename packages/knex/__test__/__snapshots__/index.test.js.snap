@@ -2999,6 +2999,35 @@ Object {
 }
 `;
 
+exports[`mandataire_tis table schema 1`] = `
+Object {
+  "created_at": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "timestamp with time zone",
+  },
+  "id": Object {
+    "defaultValue": "nextval('mandataire_tis_id_seq'::regclass)",
+    "maxLength": null,
+    "nullable": false,
+    "type": "integer",
+  },
+  "mandataire_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+  "ti_id": Object {
+    "defaultValue": null,
+    "maxLength": null,
+    "nullable": true,
+    "type": "integer",
+  },
+}
+`;
+
 exports[`mandataires table schema 1`] = `
 Object {
   "adresse": Object {
@@ -3894,6 +3923,7 @@ Array [
   "lb_users",
   "logs_data",
   "magistrat",
+  "mandataire_tis",
   "mandataires",
   "mesure_etat",
   "mesure_ressources",
@@ -3910,7 +3940,6 @@ Array [
   "services",
   "tis",
   "user_role",
-  "user_tis",
   "users",
   "view_department_availability",
   "view_indicateur_inscrit",
@@ -4049,35 +4078,6 @@ Object {
     "type": "integer",
   },
   "role_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-  "user_id": Object {
-    "defaultValue": null,
-    "maxLength": null,
-    "nullable": true,
-    "type": "integer",
-  },
-}
-`;
-
-exports[`user_tis table schema 1`] = `
-Object {
-  "created_at": Object {
-    "defaultValue": "CURRENT_TIMESTAMP",
-    "maxLength": null,
-    "nullable": true,
-    "type": "timestamp with time zone",
-  },
-  "id": Object {
-    "defaultValue": "nextval('users_tis_id_seq'::regclass)",
-    "maxLength": null,
-    "nullable": false,
-    "type": "integer",
-  },
-  "ti_id": Object {
     "defaultValue": null,
     "maxLength": null,
     "nullable": true,
