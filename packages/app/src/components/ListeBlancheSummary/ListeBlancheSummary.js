@@ -46,7 +46,7 @@ const ListeBlancheSummary = () => {
   });
 
   const departementLabel = useMemo(() => {
-    if (!departement || departement === null || !departements) {
+    if (!departement || !departements?.length) {
       return "Tous les départements";
     } else {
       const { nom = "" } = departements.find((d) => d.id === departement);
