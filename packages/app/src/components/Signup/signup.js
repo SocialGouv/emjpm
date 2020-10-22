@@ -19,7 +19,7 @@ const postSignup = (body) => {
   return fetch(url, fetchParams).then((res) => res.json());
 };
 
-export default ({ body, onSuccess, onError, onComplete }) =>
+const signup = ({ body, onSuccess, onError, onComplete }) =>
   postSignup(body)
     .then((res) => {
       if (res.success) {
@@ -34,3 +34,5 @@ export default ({ body, onSuccess, onError, onComplete }) =>
       onError([error.message]);
       onComplete();
     });
+
+export default signup;

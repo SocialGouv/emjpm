@@ -13,7 +13,9 @@ const label = (value) => {
 
 const MandataireInformations = () => {
   const user = useContext(UserContext);
-  const { email, nom, prenom, user_tis, mandataire } = user;
+  console.log(user);
+  const { email, nom, prenom, mandataire } = user;
+  const { mandataire_tis } = mandataire;
 
   return (
     <Box>
@@ -82,7 +84,7 @@ const MandataireInformations = () => {
             Tribunaux d’instance
           </Heading4>
           <Box mr={4} mb="3">
-            {user_tis.map((ti, index) => {
+            {mandataire_tis.map((ti, index) => {
               return (
                 <Text key={index} sx={innerTextStyle}>
                   {ti.ti.etablissement}

@@ -1,14 +1,15 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { useState } from "react";
 
 import { fileReader } from "../../util/fileReader";
 import { UPLOAD_MESURES_EXCEL_FILE } from "../MesureImport/mutations";
+import { MESURES_QUERY } from "../MesureList/queries";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [file, setFile] = useState();
   const [uploadFile, { loading: mesuresImportLoading }] = useMutation(UPLOAD_MESURES_EXCEL_FILE);
-  const apolloClient = useApolloClient();
 
   function importMesureFileWithAntennesMap(antennesMap) {
     launchImport({ file, antennesMap });
@@ -35,6 +36,20 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
     readFile(file, ({ file, content }) => {
       const { name, type } = file;
       uploadFile({
+        refetchQueries: [
+          "CURRENT_USER_QUERY",
+          {
+            query: MESURES_QUERY,
+            variables: {
+              limit: 20,
+              offset: 0,
+              searchText: null,
+              status: MESURE_PROTECTION_STATUS.en_cours,
+              natureMesure: null,
+              antenne: null,
+            },
+          },
+        ],
         variables: {
           content,
           name,
@@ -50,7 +65,6 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
               upload_mesures_file: { data },
             },
           }) => {
-            apolloClient.clearStore();
             const importSummary = JSON.parse(data);
             setImportSummary(importSummary);
           }

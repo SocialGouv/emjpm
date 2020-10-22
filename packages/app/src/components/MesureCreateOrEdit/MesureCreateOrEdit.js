@@ -18,7 +18,7 @@ import {
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
 } from "./mutations";
-import { SERVICE_TRIBUNAL, USER_TRIBUNAL } from "./queries";
+import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export const MesureCreateOrEdit = (props) => {
   let mesureToEdit = useContext(MesureContext);
@@ -39,7 +39,7 @@ export const MesureCreateOrEdit = (props) => {
     ? RECALCULATE_MANDATAIRE_MESURES
     : RECALCULATE_SERVICE_MESURES;
 
-  const GET_TRIBUNAL = isMandataire(type) ? USER_TRIBUNAL : SERVICE_TRIBUNAL;
+  const GET_TRIBUNAL = isMandataire(type) ? MANDATAIRE_TRIBUNAL : SERVICE_TRIBUNAL;
 
   const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
 

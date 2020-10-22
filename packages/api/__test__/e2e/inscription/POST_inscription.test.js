@@ -34,19 +34,16 @@ afterEach(async () => {
     return;
   }
 
-  try {
-    await knex("user_role").where({ user_id: user.id }).delete();
-    await knex("user_tis").where({ user_id: user.id }).delete();
-  } catch (e) {
-    // NOTE(douglasduteil): We ignore the error here.
-    // Not all users have a `user_tis` relation.
-  }
+  await knex("user_role").where({ user_id: user.id }).delete();
 
   const mandataire = await knex("mandataires")
     .where({ user_id: user.id })
     .first();
 
   if (mandataire) {
+    await knex("mandataire_tis")
+      .where({ mandataire_id: mandataire.id })
+      .delete();
     await knex("mandataires").where({ id: mandataire.id }).delete();
   }
 
