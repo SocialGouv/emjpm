@@ -16,6 +16,7 @@ import {
   CHOOSE_SERVICE,
   RECALCULATE_MANDATAIRE_MESURES,
   RECALCULATE_SERVICE_MESURES,
+  SEND_EMAIL_RESERVATION,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
 
@@ -43,6 +44,11 @@ export const MagistratMesureAddForm = (props) => {
       },
     ],
   });
+
+  const [sendEmailReservation] = useMutation(SEND_EMAIL_RESERVATION, {
+    onError: () => setLoading(false),
+  });
+
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
     onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
@@ -51,6 +57,12 @@ export const MagistratMesureAddForm = (props) => {
       await recalculateMandataireMesures({
         variables: {
           mandataire_id: mandataireId,
+        },
+      });
+
+      await sendEmailReservation({
+        variables: {
+          mesure_id: mesure.id,
         },
       });
 
@@ -83,6 +95,13 @@ export const MagistratMesureAddForm = (props) => {
       await recalculateServiceMesures({
         variables: { service_id: serviceId },
       });
+
+      await sendEmailReservation({
+        variables: {
+          mesure_id: mesure.id,
+        },
+      });
+
       await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
         shallow: true,
       });

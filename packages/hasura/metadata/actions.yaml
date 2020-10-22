@@ -1,4 +1,14 @@
 actions:
+- name: email_reservation
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-reservation'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: ti
 - name: enquete_reponse_validation_status
   definition:
     kind: ""
@@ -68,7 +78,8 @@ actions:
   - role: service
 custom_types:
   enums: []
-  input_objects: []
+  input_objects:
+  - name: EmailReservationInput
   objects:
   - name: FileOutput
   - name: EnqueteIndividuelReponse
@@ -77,4 +88,5 @@ custom_types:
   - name: EnquetePreposeReponse
   - name: EnqueteReponseStatus
   - name: ImportFinessOutput
+  - name: EmailReservationOutput
   scalars: []
