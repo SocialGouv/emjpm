@@ -37,26 +37,18 @@ export const CHOOSE_MANDATAIRE = gql`
   }
 `;
 
-export const RECALCULATE_MANDATAIRE_MESURES = gql`
-  mutation update_mandataire_mesures($mandataire_id: Int!) {
-    recalculateMandataireMesuresCount(mandataireId: $mandataire_id) {
+export const CALCULATE_MESURES = gql`
+  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
+    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
       success
       updatedRows
     }
-  }
-`;
-export const SEND_EMAIL_RESERVATION = gql`
-  mutation email_reservation($mesure_id: Int!) {
-    email_reservation(mesure_id: $mesure_id)
   }
 `;
 
-export const RECALCULATE_SERVICE_MESURES = gql`
-  mutation update_service_mesures($service_id: Int!) {
-    recalculateServiceMesuresCount(serviceId: $service_id) {
-      success
-      updatedRows
-    }
+export const SEND_EMAIL_RESERVATION = gql`
+  mutation email_reservation($mesure_id: Int!) {
+    email_reservation(mesure_id: $mesure_id)
   }
 `;
 

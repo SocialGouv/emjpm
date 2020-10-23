@@ -9,19 +9,28 @@ const AvailableMesureIndicator = () => {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_AVAILABLE_MESURE_NUMBER, {
     variables: {
-      department: filters.departement ? parseInt(filters.departement.value) : undefined,
-      end: filters.endDate,
-      region: filters.region ? parseInt(filters.region.value) : undefined,
-      start: filters.startDate,
+      departementId: filters.departement ? parseInt(filters.departement.value) : undefined,
+      regionId: filters.region ? parseInt(filters.region.value) : undefined,
     },
   });
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  const {
+    stat_available_mesures: { available_mesures_nb },
+  } = data;
 
   return (
     <Indicator
       error={error}
       loading={loading}
       title="Disponibilités"
-      indicator={data && data.availableMesureNumber ? data.availableMesureNumber : 0}
+      indicator={available_mesures_nb ? available_mesures_nb : 0}
     />
   );
 };

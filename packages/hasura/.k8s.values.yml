@@ -29,8 +29,6 @@ deployment:
       value: '{"type": "RS256","jwk_url": "http://${API_SRV_HOST}/api/auth/jwks"}'
     - name: HASURA_GRAPHQL_SERVER_PORT
       value: "${PORT}"
-    - name: WHATEVER_URL
-      value: "http://${GQL_SERVER_SRV_HOST}/graphql"
     - name: HASURA_WEB_HOOK_BASE_URL
       value: "http://${API_SRV_HOST}"
     - name: HASURA_WEB_HOOK_SECRET

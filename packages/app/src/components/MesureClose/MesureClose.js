@@ -5,17 +5,12 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { getUserBasePath } from "../../constants";
-import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureCloseForm } from "./MesureCloseForm";
-import {
-  CLOSE_MESURE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
-} from "./mutations";
+import { CALCULATE_MESURES, CLOSE_MESURE } from "./mutations";
 import { MesureCloseStyle } from "./style";
 
 const MesureClose = (props) => {
@@ -27,11 +22,7 @@ const MesureClose = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const RECALCULATE_MESURES = isMandataire(type)
-    ? RECALCULATE_MANDATAIRE_MESURES
-    : RECALCULATE_SERVICE_MESURES;
-
-  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
     Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
@@ -44,8 +35,8 @@ const MesureClose = (props) => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          service_id: service ? service.id : null,
-          mandataire_id: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
+          mandataireId: mandataire ? mandataire.id : null,
         },
       });
       redirectToMesure(mesure.id);

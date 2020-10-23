@@ -64,7 +64,7 @@ function formatMesure(mesure) {
     mandataireId: mandataire_id,
     serviceId: service_id,
     longitude: longitude,
-    departmentId: departement ? departement.id : null,
+    departementId: departement ? departement.id : null,
     age: annee_naissance ? annee_naissance : "nc",
     realAge: annee_naissance ? currentYear - annee_naissance : "nc",
     antenne: service_antenne ? service_antenne.name : null,
