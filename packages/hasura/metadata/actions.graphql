@@ -46,12 +46,32 @@ type Query {
 
 
 type Query {
+  stat_awaiting_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatAwaitingMesuresOutput
+}
+
+
+type Query {
   stat_closed_mesures (
     departementId: Int
     regionId: Int
     start: date!
     end: date!
   ): StatClosedMesuresOutput
+}
+
+
+type Query {
+  stat_opened_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatOpenedMesuresOutput
 }
 
 
@@ -168,5 +188,17 @@ type StatAvailableMesuresOutput {
 
 type StatClosedMesuresOutput {
   closed_mesures_nb : Int!
+}
+
+type StatOpendMesuresOutput {
+  opened_mesures_nb : Int!
+}
+
+type StatOpenedMesuresOutput {
+  opened_mesures_nb : Int!
+}
+
+type StatAwaitingMesuresOutput {
+  awaiting_mesures_nb : Int!
 }
 

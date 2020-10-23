@@ -6,8 +6,10 @@ import { AvailabilityMap } from "../../src/components/DirectionAvailabilityMap";
 import { DirectionFilters } from "../../src/components/DirectionFilters";
 import {
   AvailableMesureIndicator,
+  ClosedMesureIndicator,
   EtablissementIndicator,
   MandatairesIndicator,
+  OpenMesureIndicator,
   ServicesIndicator,
 } from "../../src/components/DirectionIndicators";
 import { MandatairesActivity } from "../../src/components/DirectionMandatairesActivity";
@@ -47,6 +49,14 @@ const Mandataires = () => {
           </Box>
           <Box sx={fourColumnStyle}>
             <AvailableMesureIndicator />
+          </Box>
+        </FlexWrapper>
+        <FlexWrapper flexWrap={"wrap"} mt={5}>
+          <Box sx={fourColumnStyle}>
+            <OpenMesureIndicator />
+          </Box>
+          <Box sx={fourColumnStyle}>
+            <ClosedMesureIndicator />
           </Box>
         </FlexWrapper>
         <FlexWrapper flexWrap={"wrap"} mt={5}>

@@ -20,7 +20,6 @@
     "prettier:fix": "prettier --write '**/*.js'"
   },
   "dependencies": {
-    "@emjpm/graphql": "^25.65.0",
     "@emjpm/core": "^25.65.0",
     "@emjpm/knex": "^25.65.0",
     "@sentry/node": "5.24.2",
