@@ -185,9 +185,10 @@ type EmailReservationOutput {
 }
 
 type CalculateMesuresOutput {
-  success : Boolean!
-  updatedRows : Int!
+  en_cours : Int!
+  en_attente : Int!
 }
+
 type EmailCancelReservationOutput {
   result : String!
 }
@@ -212,8 +213,7 @@ type StatAwaitingMesuresOutput {
   awaiting_mesures_nb : Int!
 }
 
-
 type DeleteMesureActionOutput {
-  result : String!
+  success : Boolean!
 }
 

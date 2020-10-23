@@ -8,10 +8,13 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
   - role: ti
 - name: delete_mesure_action
   definition:
-    kind: asynchronous
+    kind: synchronous
     handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/delete'
     forward_client_headers: true
     headers:
@@ -158,11 +161,11 @@ custom_types:
   - name: ImportFinessOutput
   - name: EmailReservationOutput
   - name: CalculateMesuresOutput
+  - name: EmailCancelReservationOutput
   - name: StatAvailableMesuresOutput
   - name: StatClosedMesuresOutput
   - name: StatOpendMesuresOutput
   - name: StatOpenedMesuresOutput
   - name: StatAwaitingMesuresOutput
-  - name: EmailCancelReservationOutput
   - name: DeleteMesureActionOutput
   scalars: []

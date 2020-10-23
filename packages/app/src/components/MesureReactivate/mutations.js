@@ -34,8 +34,8 @@ export const REACTIVATE_MESURE = gql`
 export const CALCULATE_MESURES = gql`
   mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
     calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
-      success
-      updatedRows
+      en_cours
+      en_attente
     }
   }
 `;
