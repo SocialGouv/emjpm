@@ -6,14 +6,14 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
-import { CALCULATE_MESURES, DELETE_MANDATAIRE_MESURE, DELETE_SERVICE_MESURE } from "./mutations";
+import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MANDATAIRE } from "./queries";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
-  const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
+  const [deleteMandataireMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({ variables: { mandataireId: mesure.mandataireId } });
     },
@@ -25,7 +25,7 @@ export const MagistratMesureDeleteForm = (props) => {
     ],
   });
 
-  const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
+  const [deleteServiceMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({ variables: { serviceId: mesure.serviceId } });
     },
@@ -36,15 +36,13 @@ export const MagistratMesureDeleteForm = (props) => {
       if (mesure.mandataireId) {
         await deleteMandataireMesure({
           variables: {
-            id: mesure.id,
-            mandataire_id: mesure.mandataireId,
+            mesure_id: mesure.id,
           },
         });
       } else if (mesure.serviceId) {
         await deleteServiceMesure({
           variables: {
-            id: mesure.id,
-            service_id: mesure.serviceId,
+            mesure_id: mesure.id,
           },
         });
       }
