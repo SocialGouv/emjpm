@@ -7,29 +7,27 @@ import { Box, Flex } from "rebass";
 
 import { formatMesureListItems } from "../../util/mesures";
 import { FiltersContext } from "../MagistratFilters/context";
-import { MESURES } from "./queries";
+import { MAGISTRAT_MESURES_QUERY } from "./queries";
 import { MagistratListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
 const MagistratMesures = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+  const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
 
   useEffect(() => {
     setCurrentOffset(0);
-  }, [natureMesure, mesureStatus, debouncedSearchText]);
+  }, [natureMesure, debouncedSearchText]);
 
   const queryVariables = {
     offset: currentOffset,
     searchText:
       debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-    status: mesureStatus ? mesureStatus.value : null,
     natureMesure: natureMesure ? natureMesure.value : null,
   };
 
-  const { data, error, loading } = useQuery(MESURES, {
-    fetchPolicy: "cache-and-network",
+  const { data, error, loading } = useQuery(MAGISTRAT_MESURES_QUERY, {
     variables: queryVariables,
   });
 

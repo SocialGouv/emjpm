@@ -1,9 +1,8 @@
 import gql from "graphql-tag";
 
-export const MESURES = gql`
-  query magistratMesures(
+export const MAGISTRAT_MESURES_QUERY = gql`
+  query MAGISTRAT_MESURE_QUERY(
     $natureMesure: nature_mesure_type
-    $status: mesure_status_type
     $searchText: String
     $offset: Int
   ) {
