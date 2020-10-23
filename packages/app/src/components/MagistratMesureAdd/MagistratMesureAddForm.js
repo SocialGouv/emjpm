@@ -35,12 +35,8 @@ export const MagistratMesureAddForm = (props) => {
     onError: () => setLoading(false),
     refetchQueries: [
       {
-        query: SERVICE,
-        variables: { id: serviceId },
-      },
-      {
-        query: MANDATAIRE,
-        variables: { id: mandataireId },
+        query: serviceId ? SERVICE : MANDATAIRE,
+        variables: { id: serviceId ? serviceId : mandataireId },
       },
       {
         query: GESTIONNAIRES,
@@ -59,7 +55,7 @@ export const MagistratMesureAddForm = (props) => {
 
       await recalculateMesures({
         variables: {
-          mandataire_id: mandataireId,
+          mandataireId,
         },
       });
 
@@ -80,7 +76,7 @@ export const MagistratMesureAddForm = (props) => {
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
       await recalculateMesures({
-        variables: { service_id: serviceId },
+        variables: { serviceId },
       });
 
       await sendEmailReservation({

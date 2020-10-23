@@ -49,7 +49,7 @@ const ListeBlancheSummary = () => {
     if (!departement || !departements?.length) {
       return "Tous les départements";
     } else {
-      const { nom = "" } = departements.find((d) => d.id === departement);
+      const { nom = "" } = departements.find((d) => d.id === departement) || {};
       return nom;
     }
   }, [departements, departement]);
