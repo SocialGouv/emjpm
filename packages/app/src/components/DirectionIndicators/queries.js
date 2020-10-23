@@ -25,8 +25,10 @@ export const GET_OPEN_MESURE_NUMBER = gql`
 `;
 
 export const GET_AVAILABLE_MESURE_NUMBER = gql`
-  query AvailableMesureNumber($court: Int, $department: Int, $region: Int) {
-    availableMesureNumber(court: $court, department: $department, region: $region)
+  query AvailableMesureNumber($departementId: Int, $regionId: Int) {
+    stat_available_mesures(departementId: $departementId, regionId: $regionId) {
+      available_mesures_nb
+    }
   }
 `;
 

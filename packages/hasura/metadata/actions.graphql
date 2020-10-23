@@ -37,6 +37,14 @@ type Mutation {
 }
 
 
+type Query {
+  stat_available_mesures (
+    departementId: Int
+    regionId: Int
+  ): StatAvailableMesuresOutput
+}
+
+
 type Mutation {
   submit_enquete_reponse (
     enqueteId: Int!
@@ -69,6 +77,11 @@ type Mutation {
 
 input EmailReservationInput {
   mesure_id : Int!
+}
+
+input StatAvailableMesuresInput {
+  department : Int!
+  region : Int!
 }
 
 type FileOutput {
@@ -137,5 +150,9 @@ type EmailReservationOutput {
 type CalculateMesuresOutput {
   success : Boolean!
   updatedRows : Int!
+}
+
+type StatAvailableMesuresOutput {
+  available_mesures_nb : Int!
 }
 
