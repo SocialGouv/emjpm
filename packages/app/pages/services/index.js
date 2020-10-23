@@ -35,13 +35,19 @@ const Mesures = () => {
           </Flex>
           <Flex mt={1} flexDirection="row" justifyContent="flex-start">
             {service_antennes.map((antenne) => (
-              <Box key={antenne.id} mr={2} sx={{ bg: "white", borderRadius: "20px", px: "2" }}>
+              <Flex
+                flexDirection="column"
+                alignItems="flex-start"
+                key={antenne.id}
+                mr={2}
+                sx={{ bg: "white", borderRadius: "20px", px: "2" }}
+              >
                 <Text>{antenne.name}</Text>
                 <MesureBadge
                   mesures_en_cours={antenne.mesures_in_progress}
                   dispo_max={antenne.mesures_max}
                 />
-              </Box>
+              </Flex>
             ))}
           </Flex>
 
