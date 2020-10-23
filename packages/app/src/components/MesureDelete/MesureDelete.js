@@ -5,16 +5,11 @@ import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { getUserBasePath } from "../../constants";
-import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureDeleteForm } from "./MesureDeleteForm";
-import {
-  DELETE_MESURE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
-} from "./mutations";
+import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MesureDeleteStyle } from "./style";
 
 const MesureDelete = (props) => {
@@ -22,11 +17,7 @@ const MesureDelete = (props) => {
   const { type, service = {}, mandataire } = useContext(UserContext);
   const userBasePath = getUserBasePath({ type });
 
-  const RECALCULATE_MESURES = isMandataire(type)
-    ? RECALCULATE_MANDATAIRE_MESURES
-    : RECALCULATE_SERVICE_MESURES;
-
-  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
     Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
@@ -38,8 +29,8 @@ const MesureDelete = (props) => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          service_id: service ? service.id : null,
-          mandataire_id: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
+          mandataireId: mandataire ? mandataire.id : null,
         },
       });
       Router.push(userBasePath);

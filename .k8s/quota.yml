@@ -12,7 +12,6 @@ spec:
     # + 500m // app
     # +  50m // dataset (wait-for-postgres)
     # + 250m // dataset (inject)
-    # + 500m // graphql-server
     # + 550m // hasura
     # +  50m // hasura (check-db-ready)
     # + 100m // postgres
@@ -27,7 +26,6 @@ spec:
     # + 512Mi // app
     # +  32Mi // dataset (wait-for-postgres)
     # + 256Mi // dataset (inject)
-    # + 256Mi // graphql-server
     # + 256Mi // hasura
     # +  32Mi // hasura (check-db-ready)
     # + 256Mi // postgres

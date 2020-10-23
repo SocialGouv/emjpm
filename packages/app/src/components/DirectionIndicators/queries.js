@@ -1,50 +1,36 @@
 import gql from "graphql-tag";
 
-export const GET_NEW_MESURE_NUMBER = gql`
-  query NewMesureNumber(
-    $end: String!
-    $start: String!
-    $court: Int
-    $department: Int
-    $region: Int
-  ) {
-    newMesureNumber(
+export const GET_OPEN_MESURE_NUMBER = gql`
+  query opnedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+    stat_opened_mesures(
       end: $end
       start: $start
-      court: $court
-      department: $department
-      region: $region
-    )
-  }
-`;
-
-export const GET_OPEN_MESURE_NUMBER = gql`
-  query OpenMesureNumber($court: Int, $department: Int, $region: Int) {
-    openMesureNumber(court: $court, department: $department, region: $region)
+      departementId: $departementId
+      regionId: $regionId
+    ) {
+      opened_mesures_nb
+    }
   }
 `;
 
 export const GET_AVAILABLE_MESURE_NUMBER = gql`
-  query AvailableMesureNumber($court: Int, $department: Int, $region: Int) {
-    availableMesureNumber(court: $court, department: $department, region: $region)
+  query AvailableMesureNumber($departementId: Int, $regionId: Int) {
+    stat_available_mesures(departementId: $departementId, regionId: $regionId) {
+      available_mesures_nb
+    }
   }
 `;
 
 export const GET_CLOSED_MESURE_NUMBER = gql`
-  query closedMesureNumber(
-    $end: String!
-    $start: String!
-    $court: Int
-    $department: Int
-    $region: Int
-  ) {
-    closedMesureNumber(
+  query closedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+    stat_closed_mesures(
       end: $end
       start: $start
-      court: $court
-      department: $department
-      region: $region
-    )
+      departementId: $departementId
+      regionId: $regionId
+    ) {
+      closed_mesures_nb
+    }
   }
 `;
 

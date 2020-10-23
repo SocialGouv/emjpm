@@ -60,7 +60,6 @@ fi
 export API_HOST="api-${DOMAIN}";
 export API_SRV_HOST="api-nodejs";
 export FRONTEND_HOST="${DOMAIN}";
-export GQL_SERVER_SRV_HOST="graphql-server-nodejs";
 export HASURA_HOST="hasura-${DOMAIN}";
 export HASURA_SRV_HOST="hasura-nodejs";
 
@@ -95,7 +94,6 @@ printenv | grep \
   -e CERTIFICATE_NAME \
   -e FRONTEND_HOST \
   -e FRONTEND_URL \
-  -e GQL_SERVER_SRV_HOST \
   -e HASURA_HOST \
   -e HASURA_SRV_HOST \
   -e METABASE_HOST \

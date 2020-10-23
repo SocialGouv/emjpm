@@ -12,12 +12,8 @@ const LayoutDirection = ({ children }) => {
   const { type } = useContext(UserContext);
   const navigationLinks = [
     {
-      title: "Mandataires",
+      title: "Statistiques",
       url: "/direction",
-    },
-    {
-      title: "Mesures",
-      url: "/direction/mesures",
     },
     {
       title: "Liste blanche",

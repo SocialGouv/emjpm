@@ -1,4 +1,14 @@
 actions:
+- name: calculate_mesures
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/calculate-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: ti
 - name: email_reservation
   definition:
     kind: asynchronous
@@ -42,6 +52,50 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+- name: stat_available_mesures
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/available-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: direction
+  - role: direction_nationale
+  - role: direction_territoriale
+- name: stat_awaiting_mesures
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/awaiting·-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+- name: stat_closed_mesures
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/closed-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: direction
+  - role: direction_nationale
+  - role: direction_territoriale
+- name: stat_opened_mesures
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/opened-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: direction
+  - role: direction_nationale
+  - role: direction_territoriale
 - name: submit_enquete_reponse
   definition:
     kind: synchronous
@@ -80,6 +134,7 @@ custom_types:
   enums: []
   input_objects:
   - name: EmailReservationInput
+  - name: StatAvailableMesuresInput
   objects:
   - name: FileOutput
   - name: EnqueteIndividuelReponse
@@ -89,4 +144,10 @@ custom_types:
   - name: EnqueteReponseStatus
   - name: ImportFinessOutput
   - name: EmailReservationOutput
+  - name: CalculateMesuresOutput
+  - name: StatAvailableMesuresOutput
+  - name: StatClosedMesuresOutput
+  - name: StatOpendMesuresOutput
+  - name: StatOpenedMesuresOutput
+  - name: StatAwaitingMesuresOutput
   scalars: []
