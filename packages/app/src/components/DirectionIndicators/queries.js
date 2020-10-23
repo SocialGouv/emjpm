@@ -33,20 +33,15 @@ export const GET_AVAILABLE_MESURE_NUMBER = gql`
 `;
 
 export const GET_CLOSED_MESURE_NUMBER = gql`
-  query closedMesureNumber(
-    $end: String!
-    $start: String!
-    $court: Int
-    $department: Int
-    $region: Int
-  ) {
-    closedMesureNumber(
+  query closedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+    stat_closed_mesures(
       end: $end
       start: $start
-      court: $court
-      department: $department
-      region: $region
-    )
+      departementId: $departementId
+      regionId: $regionId
+    ) {
+      closed_mesures_nb
+    }
   }
 `;
 

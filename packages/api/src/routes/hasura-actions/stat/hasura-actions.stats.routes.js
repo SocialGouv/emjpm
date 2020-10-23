@@ -1,9 +1,38 @@
 const express = require("express");
 
+const { Departement } = require("../../../models/Departement");
+const { Mesure } = require("../../../models/Mesure");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const knex = require("../../../db/knex");
 
 const router = express.Router();
+
+router.post("/closed-mesures", async (req, res) => {
+  const { regionId, departementId, start, end } = req.body.input;
+  console.log(regionId, departementId, start, end);
+  let departementIds;
+  if (departementId) {
+    departementIds = [departementId];
+  } else if (regionId) {
+    departementIds = await Departement.query()
+      .where({ id_region: regionId })
+      .select("id");
+  }
+
+  const query = Mesure.query()
+    .count("id")
+    .where("date_fin_mesure", ">", start)
+    .where("date_fin_mesure", "<=", end);
+  if (departementIds) {
+    query.where("department_id", "in", departementIds);
+  }
+
+  const [closedMesuresNb] = await query;
+
+  return res.status(200).json({
+    closed_mesures_nb: closedMesuresNb.count,
+  });
+});
 
 router.post(
   "/available-mesures",

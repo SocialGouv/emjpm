@@ -45,6 +45,16 @@ type Query {
 }
 
 
+type Query {
+  stat_closed_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatClosedMesuresOutput
+}
+
+
 type Mutation {
   submit_enquete_reponse (
     enqueteId: Int!
@@ -154,5 +164,9 @@ type CalculateMesuresOutput {
 
 type StatAvailableMesuresOutput {
   available_mesures_nb : Int!
+}
+
+type StatClosedMesuresOutput {
+  closed_mesures_nb : Int!
 }
 

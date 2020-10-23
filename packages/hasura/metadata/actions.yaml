@@ -64,6 +64,18 @@ actions:
   - role: direction
   - role: direction_nationale
   - role: direction_territoriale
+- name: stat_closed_mesures
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/closed-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: direction
+  - role: direction_nationale
+  - role: direction_territoriale
 - name: submit_enquete_reponse
   definition:
     kind: synchronous
@@ -114,4 +126,5 @@ custom_types:
   - name: EmailReservationOutput
   - name: CalculateMesuresOutput
   - name: StatAvailableMesuresOutput
+  - name: StatClosedMesuresOutput
   scalars: []
