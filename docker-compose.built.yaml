@@ -7,7 +7,6 @@ version: "3"
 #
 #  - 3000 : frontend
 #  - 4000 : api
-#  - 4001 : graphql-server
 #  - 5000 : hasura
 #  - 5434 : postgres
 #
@@ -26,14 +25,6 @@ services:
     links:
       - db
 
-  graphql-server:
-    image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/graphql-server:master
-    env_file: .env.build
-    ports:
-      - 4001:4001
-    environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: secret
-
   frontend:
     image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app:master
     env_file: .env.build
@@ -45,14 +36,12 @@ services:
     depends_on:
       - api
       - db
-      - graphql-server
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       HASURA_GRAPHQL_ADMIN_SECRET: secret
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
-      WHATEVER_URL: http://graphql-server:4001/graphql
       HASURA_WEB_HOOK_BASE_URL: http://api:4000
       HASURA_WEB_HOOK_SECRET: z1VJ23P54jQF9JEU5lXJaSVwpuM2vr9NT3ZAuesCNFFx7hrs5F8jrdv16Z3apCaN
       WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION: http://api:4000/hasura/events/email-cancel-reservation

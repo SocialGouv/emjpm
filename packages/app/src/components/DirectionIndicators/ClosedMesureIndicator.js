@@ -9,19 +9,30 @@ const ClosedMesureIndicator = () => {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
-      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      departementId: filters.departement ? parseInt(filters.departement.value) : undefined,
       end: filters.endDate,
-      region: filters.region ? parseInt(filters.region.value) : undefined,
+      regionId: filters.region ? parseInt(filters.region.value) : undefined,
       start: filters.startDate,
     },
   });
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+  if (loading) {
+    return <div>loading...</div>;
+  }
+
+  const {
+    stat_closed_mesures: { closed_mesures_nb },
+  } = data;
 
   return (
     <Indicator
       error={error}
       loading={loading}
       title="Mesures éteintes"
-      indicator={data && data.closedMesureNumber ? data.closedMesureNumber : 0}
+      indicator={closed_mesures_nb ? closed_mesures_nb : 0}
     />
   );
 };

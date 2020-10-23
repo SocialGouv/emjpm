@@ -112,9 +112,9 @@ export const DELETE_MESURES = gql`
   }
 `;
 
-export const RECALCULATE_SERVICE_MESURES = gql`
-  mutation update_service_mesures($serviceId: Int!) {
-    recalculateServiceMesuresCount(serviceId: $serviceId) {
+export const CALCULATE_MESURES = gql`
+  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
+    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
       success
       updatedRows
     }

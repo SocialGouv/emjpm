@@ -1,4 +1,12 @@
 type Mutation {
+  calculate_mesures (
+    serviceId: Int
+    mandataireId: Int
+  ): CalculateMesuresOutput
+}
+
+
+type Mutation {
   email_reservation (
     mesure_id: Int!
   ): EmailReservationOutput
@@ -26,6 +34,44 @@ type Mutation {
   import_base_finess (
     url: String!
   ): ImportFinessOutput
+}
+
+
+type Query {
+  stat_available_mesures (
+    departementId: Int
+    regionId: Int
+  ): StatAvailableMesuresOutput
+}
+
+
+type Query {
+  stat_awaiting_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatAwaitingMesuresOutput
+}
+
+
+type Query {
+  stat_closed_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatClosedMesuresOutput
+}
+
+
+type Query {
+  stat_opened_mesures (
+    departementId: Int
+    regionId: Int
+    start: date!
+    end: date!
+  ): StatOpenedMesuresOutput
 }
 
 
@@ -61,6 +107,11 @@ type Mutation {
 
 input EmailReservationInput {
   mesure_id : Int!
+}
+
+input StatAvailableMesuresInput {
+  department : Int!
+  region : Int!
 }
 
 type FileOutput {
@@ -124,5 +175,30 @@ type ImportFinessOutput {
 
 type EmailReservationOutput {
   result : String!
+}
+
+type CalculateMesuresOutput {
+  success : Boolean!
+  updatedRows : Int!
+}
+
+type StatAvailableMesuresOutput {
+  available_mesures_nb : Int!
+}
+
+type StatClosedMesuresOutput {
+  closed_mesures_nb : Int!
+}
+
+type StatOpendMesuresOutput {
+  opened_mesures_nb : Int!
+}
+
+type StatOpenedMesuresOutput {
+  opened_mesures_nb : Int!
+}
+
+type StatAwaitingMesuresOutput {
+  awaiting_mesures_nb : Int!
 }
 

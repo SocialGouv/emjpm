@@ -6,21 +6,16 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
-import {
-  DELETE_MANDATAIRE_MESURE,
-  DELETE_SERVICE_MESURE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
-} from "./mutations";
-import { MANDATAIRE, SERVICE } from "./queries";
+import { CALCULATE_MESURES, DELETE_MANDATAIRE_MESURE, DELETE_SERVICE_MESURE } from "./mutations";
+import { MANDATAIRE } from "./queries";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
-  const [recalculateMandataireMesures] = useMutation(RECALCULATE_MANDATAIRE_MESURES);
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
   const [deleteMandataireMesure] = useMutation(DELETE_MANDATAIRE_MESURE, {
     onCompleted: async () => {
-      await recalculateMandataireMesures({ variables: { mandataire_id: mesure.mandataireId } });
+      await recalculateMesures({ variables: { mandataireId: mesure.mandataireId } });
     },
     refetchQueries: [
       {
@@ -30,17 +25,9 @@ export const MagistratMesureDeleteForm = (props) => {
     ],
   });
 
-  const [recalculateServiceMesures] = useMutation(RECALCULATE_SERVICE_MESURES, {
-    refetchQueries: [
-      {
-        query: SERVICE,
-        variables: { id: mesure.serviceId },
-      },
-    ],
-  });
   const [deleteServiceMesure] = useMutation(DELETE_SERVICE_MESURE, {
     onCompleted: async () => {
-      await recalculateServiceMesures({ variables: { service_id: mesure.serviceId } });
+      await recalculateMesures({ variables: { serviceId: mesure.serviceId } });
     },
   });
 
