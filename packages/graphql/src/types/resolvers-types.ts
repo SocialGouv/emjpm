@@ -83,7 +83,6 @@ export type Query = {
   availableMesureNumber: Scalars['Int'];
   mesureNatureCategoryStatistics: Array<MesureNatureCategoryStatistic>;
   mesureNatureCategoryEvolution: Array<MesureNatureCategoryEvolution>;
-  departmentAvailabilities: Array<DepartmentAvailibility>;
 };
 
 

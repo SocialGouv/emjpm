@@ -12,9 +12,9 @@ import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { UserContext } from "../UserContext";
 import {
+  CALCULATE_MESURES,
   CHOOSE_MANDATAIRE,
   CHOOSE_SERVICE,
-  CALCULATE_MESURES,
   SEND_EMAIL_RESERVATION,
 } from "./mutations";
 import { MANDATAIRE, MESURES, SERVICE } from "./queries";
