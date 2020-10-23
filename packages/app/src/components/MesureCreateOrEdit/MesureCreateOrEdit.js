@@ -12,12 +12,7 @@ import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureCreateOrEditForm } from "./MesureCreateOrEditForm";
-import {
-  ADD_MESURE,
-  EDIT_MESURE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
-} from "./mutations";
+import { ADD_MESURE, CALCULATE_MESURES, EDIT_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export const MesureCreateOrEdit = (props) => {
@@ -35,10 +30,6 @@ export const MesureCreateOrEdit = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const RECALCULATE_MESURES = isMandataire(type)
-    ? RECALCULATE_MANDATAIRE_MESURES
-    : RECALCULATE_SERVICE_MESURES;
-
   const GET_TRIBUNAL = isMandataire(type) ? MANDATAIRE_TRIBUNAL : SERVICE_TRIBUNAL;
 
   const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
@@ -47,7 +38,7 @@ export const MesureCreateOrEdit = (props) => {
 
   const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.tribunaux) : []), [data]);
 
-  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
     Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
@@ -60,8 +51,8 @@ export const MesureCreateOrEdit = (props) => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          service_id: service ? service.id : null,
-          mandataire_id: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
+          mandataireId: mandataire ? mandataire.id : null,
         },
       });
       redirectToMesure(mesure.id);

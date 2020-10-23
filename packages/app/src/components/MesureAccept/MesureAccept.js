@@ -6,17 +6,12 @@ import { Box } from "rebass";
 
 import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
-import { isMandataire } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
 import { MesureAcceptForm } from "./MesureAcceptForm";
-import {
-  ACCEPT_MESURE,
-  RECALCULATE_MANDATAIRE_MESURES,
-  RECALCULATE_SERVICE_MESURES,
-} from "./mutations";
+import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MesureAcceptStyle } from "./style";
 
 export const MesureAccept = (props) => {
@@ -31,11 +26,7 @@ export const MesureAccept = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const RECALCULATE_MESURES = isMandataire(type)
-    ? RECALCULATE_MANDATAIRE_MESURES
-    : RECALCULATE_SERVICE_MESURES;
-
-  const [recalculateMesures] = useMutation(RECALCULATE_MESURES);
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
     Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
@@ -46,7 +37,7 @@ export const MesureAccept = (props) => {
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
-        variables: { mandataire_id: mandataireId, service_id: serviceId },
+        variables: { mandataireId: mandataireId, serviceId: serviceId },
         refetchQueries: ["CURRENT_USER_QUERY"],
       });
       redirectToMesure(mesure.id);

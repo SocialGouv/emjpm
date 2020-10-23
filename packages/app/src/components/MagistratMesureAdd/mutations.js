@@ -38,13 +38,14 @@ export const CHOOSE_MANDATAIRE = gql`
 `;
 
 export const CALCULATE_MESURES = gql`
-  mutation calculateMesures($mandataire_id: Int, $service_id: Int) {
-    calculate_mesures(mandataireId: $mandataire_id, serviceId: $service_id) {
+  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
+    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
       success
       updatedRows
     }
   }
 `;
+
 export const SEND_EMAIL_RESERVATION = gql`
   mutation email_reservation($mesure_id: Int!) {
     email_reservation(mesure_id: $mesure_id)

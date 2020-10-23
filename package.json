@@ -23,7 +23,6 @@
     }
   },
   "workspaces": [
-    "packages/*",
-    "shared/*"
+    "packages/*"
   ]
 }
