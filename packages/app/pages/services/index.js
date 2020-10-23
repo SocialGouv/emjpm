@@ -1,6 +1,6 @@
 import { BoxWrapper, Heading1 } from "@emjpm/ui";
 import React, { useContext } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Flex, Text } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { MesureBadge } from "../../src/components/MesureBadge";
