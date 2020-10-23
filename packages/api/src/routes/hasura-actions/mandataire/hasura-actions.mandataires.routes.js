@@ -17,7 +17,7 @@ router.post(
       updatedRows = await recalculateServiceMesuresCount(serviceId);
     }
     if (mandataireId) {
-      updatedRows = await recalculateMandatairesMesuresCount(serviceId);
+      updatedRows = await recalculateMandatairesMesuresCount(mandataireId);
     }
     try {
       return res.status(200).json({

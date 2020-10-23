@@ -37,7 +37,7 @@ export const MesureAccept = (props) => {
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
-        variables: { mandataireId: mandataireId, serviceId: serviceId },
+        variables: { mandataireId, serviceId },
         refetchQueries: ["CURRENT_USER_QUERY"],
       });
       redirectToMesure(mesure.id);
