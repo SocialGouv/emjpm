@@ -121,7 +121,7 @@ router.post("/delete", async function (req, res) {
       cancelReservationEmail(ti, mesure, user)
     );
 
-    await Promise.all(emails);
+    Promise.all(emails);
   } catch (error) {
     console.error(error);
     hasuraActionErrorHandler("Unexpected error with delete mesure");

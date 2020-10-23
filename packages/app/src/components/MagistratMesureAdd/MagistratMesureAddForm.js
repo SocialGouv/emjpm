@@ -10,14 +10,9 @@ import { Box, Flex } from "rebass";
 import { IS_URGENT } from "../../constants/mesures";
 import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
+import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
 import { UserContext } from "../UserContext";
-import {
-  CALCULATE_MESURES,
-  CHOOSE_MANDATAIRE,
-  CHOOSE_SERVICE,
-  SEND_EMAIL_RESERVATION,
-} from "./mutations";
-import { MANDATAIRE, MESURES, SERVICE } from "./queries";
+import { CALCULATE_MESURES, CHOOSE_MANDATAIRE, SEND_EMAIL_RESERVATION } from "./mutations";
 
 export const MagistratMesureAddForm = (props) => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -31,52 +26,35 @@ export const MagistratMesureAddForm = (props) => {
     onError: () => setLoading(false),
   });
 
-  const [recalculateMesures] = useMutation(CALCULATE_MESURES, {
-    onError: () => setLoading(false),
-    refetchQueries: [
-      {
-        query: serviceId ? SERVICE : MANDATAIRE,
-        variables: { id: serviceId ? serviceId : mandataireId },
-      },
-      {
-        query: GESTIONNAIRES,
-        variables: {
-          mandataire_id: mandataireId,
-          service_id: serviceId,
-        },
-      },
-    ],
-  });
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const [chooseMandataire] = useMutation(CHOOSE_MANDATAIRE, {
-    onError: () => setLoading(false),
     onCompleted: async ({ insert_mesures }) => {
       const [mesure] = insert_mesures.returning;
 
       await recalculateMesures({
+        awaitRefetchQueries: true,
+        refetchQueries: [
+          {
+            query: GESTIONNAIRES,
+            variables: {
+              mandataire_id: mandataireId,
+              service_id: serviceId,
+            },
+          },
+          {
+            query: MAGISTRAT_MESURES_QUERY,
+            variables: {
+              offset: 0,
+              searchText: null,
+              natureMesure: null,
+            },
+          },
+        ],
         variables: {
           mandataireId,
+          serviceId,
         },
-      });
-
-      await sendEmailReservation({
-        variables: {
-          mesure_id: mesure.id,
-        },
-      });
-
-      await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
-        shallow: true,
-      });
-    },
-  });
-
-  const [chooseService] = useMutation(CHOOSE_SERVICE, {
-    onError: () => setLoading(false),
-    onCompleted: async ({ insert_mesures }) => {
-      const [mesure] = insert_mesures.returning;
-      await recalculateMesures({
-        variables: { serviceId },
       });
 
       await sendEmailReservation({
@@ -94,45 +72,22 @@ export const MagistratMesureAddForm = (props) => {
   const formik = useFormik({
     onSubmit: async (values, { setSubmitting }) => {
       setLoading(true);
-      if (mandataireId) {
-        await chooseMandataire({
-          refetchQueries: [
-            { query: MESURES, variables: { serviceId, mandataireId } },
-            "mesures_aggregate",
-            "view_mesure_gestionnaire",
-          ],
-          variables: {
-            annee_naissance: values.annee_naissance,
-            cabinet: values.cabinet,
-            civilite: values.civilite.value,
-            judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
-            mandataire_id: mandataireId,
-            magistrat_id: magistratId,
-            numero_rg: values.numero_rg,
-            ti: tiId,
-            nature_mesure: values.nature_mesure.value,
-            champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
-            urgent: values.urgent.value,
-          },
-        });
-      } else {
-        await chooseService({
-          refetchQueries: ["mesures", "mesures_aggregate", "view_mesure_gestionnaire"],
-          variables: {
-            annee_naissance: values.annee_naissance,
-            cabinet: values.cabinet,
-            civilite: values.civilite.value,
-            judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
-            numero_rg: values.numero_rg,
-            service_id: serviceId,
-            magistrat_id: magistratId,
-            ti: tiId,
-            nature_mesure: values.nature_mesure.value,
-            champ_mesure: values.champ_mesure.value,
-            urgent: values.urgent.value,
-          },
-        });
-      }
+      await chooseMandataire({
+        variables: {
+          annee_naissance: values.annee_naissance,
+          cabinet: values.cabinet,
+          civilite: values.civilite.value,
+          judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
+          mandataire_id: mandataireId,
+          service_id: serviceId,
+          magistrat_id: magistratId,
+          numero_rg: values.numero_rg,
+          ti: tiId,
+          nature_mesure: values.nature_mesure.value,
+          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
+          urgent: values.urgent.value,
+        },
+      });
 
       setSubmitting(false);
     },
