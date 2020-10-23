@@ -8,8 +8,7 @@ import { Box, Flex, Text } from "rebass";
 import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
-import { DELETE_MESURE, CALCULATE_MESURES } from "./mutations";
-import { MANDATAIRE, SERVICE } from "./queries";
+import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = (props) => {
