@@ -12,18 +12,29 @@ router.post(
   "/calculate-mesures",
   async (req, res, next) => {
     const { serviceId, mandataireId } = req.body.input;
-    let updatedRows = {};
+    let result;
     if (serviceId) {
-      updatedRows = await recalculateServiceMesuresCount(serviceId);
+      const {
+        mesures_in_progress: en_cours,
+        mesures_awaiting: en_attente,
+      } = await recalculateServiceMesuresCount(serviceId);
+      result = {
+        en_cours,
+        en_attente,
+      };
     }
     if (mandataireId) {
-      updatedRows = await recalculateMandatairesMesuresCount(mandataireId);
+      const {
+        mesures_en_cours: en_cours,
+        mesures_en_attente: en_attente,
+      } = await recalculateMandatairesMesuresCount(mandataireId);
+      result = {
+        en_cours,
+        en_attente,
+      };
     }
     try {
-      return res.status(200).json({
-        updatedRows,
-        success: true,
-      });
+      return res.status(200).json(result);
     } catch (err) {
       return next(err);
     }
@@ -40,21 +51,13 @@ async function recalculateMandatairesMesuresCount(mandataireId) {
     .count("id")
     .where({ mandataire_id: mandataireId });
 
-  return await Mandataire.query()
-    .findById(mandataireId)
-    .update({
-      mesures_en_cours: getCount(mandataireStates, "en_cours"),
-      mesures_en_attente: getCount(mandataireStates, "en_attente"),
-    });
+  return await Mandataire.query().updateAndFetchById(mandataireId, {
+    mesures_en_cours: getCount(mandataireStates, "en_cours"),
+    mesures_en_attente: getCount(mandataireStates, "en_attente"),
+  });
 }
 
 async function recalculateServiceMesuresCount(serviceId) {
-  const serviceStates = await Mesure.query()
-    .groupBy("status")
-    .select("status")
-    .count("id")
-    .where({ service_id: serviceId });
-
   const antennes = await ServiceAntenne.query().where({
     service_id: serviceId,
   });
@@ -73,15 +76,19 @@ async function recalculateServiceMesuresCount(serviceId) {
       });
   }
 
-  return await Service.query()
-    .findById(serviceId)
-    .update({
-      mesures_in_progress: getCount(serviceStates, "en_cours"),
-      mesures_awaiting: getCount(serviceStates, "en_attente"),
-    });
+  const serviceStates = await Mesure.query()
+    .groupBy("status")
+    .select("status")
+    .count("id")
+    .where({ service_id: serviceId });
+
+  return await Service.query().updateAndFetchById(serviceId, {
+    mesures_in_progress: getCount(serviceStates, "en_cours"),
+    mesures_awaiting: getCount(serviceStates, "en_attente"),
+  });
 }
 
 function getCount(states, status) {
-  const line = states.find((elm) => elm.status === status) || {};
+  const line = states.find((elm) => elm.status === status) || { count: 0 };
   return line.count;
 }

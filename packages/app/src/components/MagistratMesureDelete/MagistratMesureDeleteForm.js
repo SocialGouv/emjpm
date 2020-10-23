@@ -6,49 +6,60 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
-import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
-import { MANDATAIRE } from "./queries";
+import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
+import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
+import { DELETE_MESURE, CALCULATE_MESURES } from "./mutations";
+import { MANDATAIRE, SERVICE } from "./queries";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
-  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
-  const [deleteMandataireMesure] = useMutation(DELETE_MESURE, {
-    onCompleted: async () => {
-      await recalculateMesures({ variables: { mandataireId: mesure.mandataireId } });
-    },
-    refetchQueries: [
-      {
-        query: MANDATAIRE,
-        variables: { id: mesure.mandataireId },
-      },
-    ],
-  });
+  const { serviceId, mandataireId } = mesure;
 
-  const [deleteServiceMesure] = useMutation(DELETE_MESURE, {
+  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
+
+  const [deleteMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
-      await recalculateMesures({ variables: { serviceId: mesure.serviceId } });
+      await recalculateMesures({
+        refetchQueries: [
+          {
+            query: GESTIONNAIRES,
+            variables: {
+              mandataire_id: mandataireId,
+              service_id: serviceId,
+            },
+          },
+        ],
+        variables: {
+          mandataireId,
+          serviceId,
+        },
+      });
+
+      Router.push(`/magistrats/mesures`);
     },
   });
 
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
-      if (mesure.mandataireId) {
-        await deleteMandataireMesure({
-          variables: {
-            mesure_id: mesure.id,
+    onSubmit: async (_, { setSubmitting }) => {
+      await deleteMesure({
+        awaitRefetchQueries: true,
+        refetchQueries: [
+          {
+            query: MAGISTRAT_MESURES_QUERY,
+            variables: {
+              offset: 0,
+              searchText: null,
+              natureMesure: null,
+            },
           },
-        });
-      } else if (mesure.serviceId) {
-        await deleteServiceMesure({
-          variables: {
-            mesure_id: mesure.id,
-          },
-        });
-      }
+        ],
+        variables: {
+          mesureId: mesure.id,
+        },
+      });
 
       setSubmitting(false);
-      Router.push(`/magistrats/mesures`);
     },
     validationSchema: magistratMesureDeleteSchema,
     initialValues: {
