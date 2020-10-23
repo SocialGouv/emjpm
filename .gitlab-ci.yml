@@ -167,13 +167,6 @@ Install app:
 
 #
 
-Install graphql-server:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: graphql-server
-
-#
-
 Install knex:
   extends: .base_yarn_workspace_install
   variables:
@@ -254,28 +247,6 @@ Lint @emjpm/ui:
     - Install ui
   script:
     - yarn workspace @emjpm/ui lint
-
-#
-
-Lint @emjpm/graphql-server:
-  extends: .quality_stage
-  dependencies:
-    - Install graphql-server
-  needs:
-    - Install graphql-server
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/graphql-server lint
-
-# Lint @emjpm/knex:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   needs:
-#     - Install knex
-#   dependencies:
-#     - Install knex
-#   script:
-#     - yarn workspace @emjpm/knex lint
 
 Test @emjpm/api:
   extends: .quality_stage
@@ -407,22 +378,6 @@ Build @emjpm/app:
 
 #
 
-Build @emjpm/graphql-server:
-  extends: .build_stage
-  dependencies:
-    - Install graphql-server
-  needs:
-    - Install graphql-server
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/graphql-server build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/graphql-server/dist
-
-#
-
 Build @emjpm/ui:
   extends: .quality_stage
   dependencies:
@@ -532,21 +487,6 @@ Register app image:
       --shm-size 512M
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-
-################### Register GRAPHQL SERVER ##################
-
-Register graphql-server image:
-  extends:
-    - .base_register_stage
-    - .register_stage
-  dependencies:
-    - Build @emjpm/graphql-server
-  needs:
-    - Install graphql-server
-    - Build @emjpm/graphql-server
-  variables:
-    CONTEXT: packages/graphql-server
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/graphql-server
 
 ################### Register KNEX ##################
 
@@ -713,35 +653,6 @@ Deploy app (prod):
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     - kubectl apply -f ./.k8s/app-redirect.yml -n ${K8S_NAMESPACE}
-
-################ Deploy GRAPHQL SERVER ###########################
-
-.deploy_graphql-server_stage:
-  extends:
-    - .base_deploy_nodejs_chart_stage
-    - .deploy_stage
-  variables:
-    CONTEXT: graphql-server
-    PORT: 80
-    VALUES_FILE: ./packages/graphql-server/.k8s.values.yml
-  before_script:
-    - source ./.gitlab-ci/env.sh
-    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-
-#
-
-Deploy graphql-server (dev):
-  extends:
-    - .deploy_graphql-server_stage
-    - .dev_stage
-  variables:
-    HELM_RENDER_ARGS: >-
-      --set deployment.resources.requests.memory=128Mi
-
-Deploy graphql-server (prod):
-  extends:
-    - .deploy_graphql-server_stage
-    - .incubateur_stage
 
 ################ Deploy KNEX #################################
 

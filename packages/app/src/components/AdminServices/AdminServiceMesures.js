@@ -14,7 +14,7 @@ import {
 } from "../../constants/mesures";
 import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
 import ErrorBox from "../ErrorBox";
-import { DELETE_MESURES, RECALCULATE_SERVICE_MESURES } from "./mutations";
+import { CALCULATE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
 export const MESURES_OPTIONS = [
@@ -40,7 +40,7 @@ const AdminServiceMesures = (props) => {
   });
 
   const [recalculateServiceMesures, { loading: recalculateServiceMesuresLoading }] = useMutation(
-    RECALCULATE_SERVICE_MESURES,
+    CALCULATE_MESURES,
     {
       refetchQueries: [
         {
