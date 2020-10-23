@@ -7,6 +7,33 @@ const knex = require("../../../db/knex");
 
 const router = express.Router();
 
+router.post("/opened-mesures", async (req, res) => {
+  const { regionId, departementId, start, end } = req.body.input;
+  console.log(regionId, departementId, start, end);
+  let departementIds;
+  if (departementId) {
+    departementIds = [departementId];
+  } else if (regionId) {
+    departementIds = await Departement.query()
+      .where({ id_region: regionId })
+      .select("id");
+  }
+
+  const query = Mesure.query()
+    .count("id")
+    .where("date_nomination", ">", start)
+    .where("date_nomination", "<=", end);
+  if (departementIds) {
+    query.where("department_id", "in", departementIds);
+  }
+
+  const [openedMesuresNb] = await query;
+
+  return res.status(200).json({
+    opened_mesures_nb: openedMesuresNb.count,
+  });
+});
+
 router.post("/closed-mesures", async (req, res) => {
   const { regionId, departementId, start, end } = req.body.input;
   console.log(regionId, departementId, start, end);

@@ -19,9 +19,16 @@ export const GET_NEW_MESURE_NUMBER = gql`
 `;
 
 export const GET_OPEN_MESURE_NUMBER = gql`
-  query OpenMesureNumber($court: Int, $department: Int, $region: Int) {
-    openMesureNumber(court: $court, department: $department, region: $region)
-  }
+    query opnedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+      stat_opened_mesures(
+        end: $end
+        start: $start
+        departementId: $departementId
+        regionId: $regionId
+      ) {
+        opened_mesures_nb
+      }
+    }
 `;
 
 export const GET_AVAILABLE_MESURE_NUMBER = gql`
