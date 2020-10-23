@@ -44,7 +44,6 @@ services:
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/v2/auth/jwks"}'
       HASURA_WEB_HOOK_BASE_URL: http://api:4000
       HASURA_WEB_HOOK_SECRET: z1VJ23P54jQF9JEU5lXJaSVwpuM2vr9NT3ZAuesCNFFx7hrs5F8jrdv16Z3apCaN
-      WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION: http://api:4000/hasura/events/email-cancel-reservation
       WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION: http://api:4000/hasura/events/email-account-validation
       WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION: http://api:4000/hasura/events/email-service-member-invitation
       WEB_HOOK_URL_TOKEN_REQUEST: http://api:4000/hasura/events/token-request
