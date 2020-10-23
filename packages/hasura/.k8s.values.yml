@@ -38,8 +38,6 @@ deployment:
           key: HASURA_WEB_HOOK_SECRET
     - name: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
       value: "http://${API_SRV_HOST}/hasura/events/email-account-validation"
-    - name: WEB_HOOK_URL_EMAIL_CANCEL_RESERVATION
-      value: "http://${API_SRV_HOST}/hasura/events/email-cancel-reservation"
     - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
       value: "http://${API_SRV_HOST}/hasura/events/email-service-member-invitation"
     - name: WEB_HOOK_URL_TOKEN_REQUEST
