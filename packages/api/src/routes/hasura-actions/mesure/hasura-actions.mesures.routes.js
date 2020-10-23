@@ -5,6 +5,14 @@ const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter"
 const checkImportMesuresParameters = require("./hasura-actions.mesures-import.checker");
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
 const getMesures = require("../../../services/getMesures");
+const { Tis } = require("../../../models/Tis");
+const { Mesure } = require("../../../models/Mesure");
+const { isEnAttente } = require("@emjpm/core");
+const { getEmailUserDatas } = require("../../../email/email-user-data");
+const {
+  cancelReservationEmail,
+} = require("../../../email/cancel-reservation-email");
+
 const router = express.Router();
 
 // hasura action: `upload_mesures_file`
@@ -89,5 +97,39 @@ router.post(
   },
   hasuraActionErrorHandler("Unexpected error processing file")
 );
+
+// hasura action: `delete_mesure`
+router.post("/delete", async function (req, res) {
+  const { mesure_id } = req.body.input;
+
+  try {
+    const mesure = await Mesure.query().findById(mesure_id);
+    const { ti_id, service_id, mandataire_id, status } = mesure;
+
+    if (!isEnAttente({ status }))
+      throw new Error(
+        `Delete needs a mesure with en_attente status (The mesure_id ${mesure.id} has ${status} status)`
+      );
+
+    const nbDeleted = await Mesure.query().deleteById(mesure_id);
+
+    if (nbDeleted === 0) return res.json({ success: false });
+
+    const ti = await Tis.query().findById(ti_id);
+    const users = await getEmailUserDatas(mandataire_id, service_id);
+    const emails = users.map((user) =>
+      cancelReservationEmail(ti, mesure, user)
+    );
+
+    await Promise.all(emails);
+  } catch (error) {
+    console.error(error);
+    hasuraActionErrorHandler("Unexpected error with delete mesure");
+
+    return res.json({ success: false });
+  }
+
+  res.json({ success: true });
+});
 
 module.exports = router;

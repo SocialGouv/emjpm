@@ -7,6 +7,13 @@ type Mutation {
 
 
 type Mutation {
+  delete_mesure_action (
+    mesure_id: Int!
+  ): DeleteMesureActionOutput
+}
+
+
+type Mutation {
   email_reservation (
     mesure_id: Int!
   ): EmailReservationOutput
@@ -181,6 +188,9 @@ type CalculateMesuresOutput {
   success : Boolean!
   updatedRows : Int!
 }
+type EmailCancelReservationOutput {
+  result : String!
+}
 
 type StatAvailableMesuresOutput {
   available_mesures_nb : Int!
@@ -200,5 +210,10 @@ type StatOpenedMesuresOutput {
 
 type StatAwaitingMesuresOutput {
   awaiting_mesures_nb : Int!
+}
+
+
+type DeleteMesureActionOutput {
+  result : String!
 }
 
