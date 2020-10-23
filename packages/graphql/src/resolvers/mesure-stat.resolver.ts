@@ -1,8 +1,4 @@
 import {
-  recalculateMandataireMesuresCount,
-  recalculateServiceMesuresCount
-} from "./mutation";
-import {
   availableMesureNumber,
   closedMesureNumber,
   departmentAvailabilities,
@@ -13,10 +9,6 @@ import {
 } from "./query/mesure-stat";
 
 export const resolvers = {
-  Mutation: {
-    recalculateMandataireMesuresCount,
-    recalculateServiceMesuresCount
-  },
   Query: {
     availableMesureNumber,
     closedMesureNumber,
