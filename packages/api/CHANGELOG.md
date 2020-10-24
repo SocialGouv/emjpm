@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
+
+
+### Bug Fixes
+
+* **calculate-mesure:** change output ([25fe295](https://github.com/SocialGouv/emjpm/commit/25fe29504b6b761ab6a5887da762324e1199db00))
+* **calculate-mesure:** update hasura permission ([120a827](https://github.com/SocialGouv/emjpm/commit/120a82764357db25a55ee27a1ddd365f7df2b0e7))
+* **model:** make properties nullable ([60172ee](https://github.com/SocialGouv/emjpm/commit/60172ee072ee4e78b97e5de624e2fff9bc28e93d))
+
+
+### Features
+
+* **delete-mesure:** remove email-cancel-reservation event in action ([#2261](https://github.com/SocialGouv/emjpm/issues/2261)) ([52a929b](https://github.com/SocialGouv/emjpm/commit/52a929bd2e5613706db03e33783fa1a87dadf604))
+* add email_reservation action ([#2259](https://github.com/SocialGouv/emjpm/issues/2259)) ([c3b0669](https://github.com/SocialGouv/emjpm/commit/c3b0669ffac10d903d80819e47da8fd259f93e0a))
+
+
+
+
+
 # [25.65.0](https://github.com/SocialGouv/emjpm/compare/v25.64.0...v25.65.0) (2020-10-12)
 
 
