@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
+
+
+### Features
+
+* **mandataire:** display awaiting mesures in home page ([#2256](https://github.com/SocialGouv/emjpm/issues/2256)) ([611b1e4](https://github.com/SocialGouv/emjpm/commit/611b1e4db8fd3d2f39de48259c230a626f34e95e))
+
+
+
+
+
 # [25.65.0](https://github.com/SocialGouv/emjpm/compare/v25.64.0...v25.65.0) (2020-10-12)
 
 **Note:** Version bump only for package @emjpm/ui
