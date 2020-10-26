@@ -8,8 +8,8 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "emjpm",
-      password: "test",
+      user: "hasura",
+      password: "hasura",
       port: "5434",
       database: "emjpm",
     },
@@ -20,8 +20,8 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "emjpm",
-      password: "test",
+      user: "hasura",
+      password: "hasura",
       port: "5434",
       database: "emjpm",
     },
@@ -32,8 +32,8 @@ module.exports = {
     client: "pg",
     connection: process.env.DATABASE_URL || {
       host: "localhost",
-      user: "emjpm",
-      password: "test",
+      user: "hasura",
+      password: "hasura",
       port: "5434",
       database: "emjpm",
     },

@@ -28,7 +28,7 @@ delete from user_role where user_id in (select id from users where type = 'direc
 delete from users where type = 'direction' and id not in (select user_id from direction);
 
 -- CLEAN magistrat
-update mesures set mandataire_id = null;
+update mesures set magistrat_id = null;
 delete from magistrat where ti_id <> 22;
 delete from user_role where user_id in (select id from users where type = 'ti' and id not in (select user_id from magistrat));
 delete from users where type = 'ti' and id not in (select user_id from magistrat);

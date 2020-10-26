@@ -22,9 +22,6 @@ services:
       # master password
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=test
-      # API dedicated password
-      - POSTGRES_EMJPM_USER=emjpm
-      - POSTGRES_EMJPM_PASSWORD=test
       # Hasura dedicated user
       - POSTGRES_HASURA_USER=hasura
       - POSTGRES_HASURA_PASSWORD=hasura
