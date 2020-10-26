@@ -128,52 +128,7 @@ $ yarn --cwd optional/e2e/.runners/puppetteer
 $ yarn e2e test
 ```
 
-## Manual deployment
-
-To build and deploy manually some version :
-
-```sh
-# checkout your target branch
-git pull
-
-# edit docker-compose.override.yaml and .env
-
-# build locally main docker image as emjpm-base
-# you can override API_URL and SENTRY_PUBLIC_DSN env vars here
-docker build . -t emjpm-base
-
-# rebuild and launch instance using locally built image
-BASE_IMAGE=emjpm-base docker-compose up --build -d
-
-# run migrations and seeds
-BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run migrate
-BASE_IMAGE=emjpm-base docker-compose run knex yarn workspace @emjpm/knex run seeds
-```
-
-## Maintenance
-
 ### Database
-
-#### dump production database
-
-connect to PG pod
-
-```bash
-kubectl exec -it postgres-postgresql-0 sh
-```
-
-dump database
-
-```bash
-DUMP_FILE=emjpm_prod_`date +%d-%m-%Y"_"%H_%M_%S`.dump
-pg_dump emjpm -U postgres -Fc > /tmp/$DUMP_FILE
-```
-
-copy dump on local
-
-```bash
-kubectl cp postgres-postgresql-0:/tmp/$DUMP_FILE ./$DUMP_FILE
-```
 
 #### restore production dump on local
 
@@ -196,47 +151,6 @@ pg_restore -h localhost -p 5434 --if-exists --clean -e -Fc -d emjpm ./$DUMP_FILE
 psql -h localhost -p 5434 -c "ALTER SCHEMA public OWNER TO emjpm" -U $PGUSER emjpm
 
 rm reset-database.sql
-```
-
-#### restore production dump on k8s pod
-
-connect to PG pod
-
-```bash
-kubectl exec -it emjpm-postgres-your-feature sh
-```
-
-restore production dump
-
-```bash
-# drop database emjpm
-cat <<EOF > reset-database.sql
-SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
-DROP DATABASE IF EXISTS emjpm;
-CREATE DATABASE emjpm WITH OWNER = emjpm;
-EOF
-
-cat reset-database.sql | psql -h localhost -U postgres
-
-# restore production dump
-pg_restore -h localhost --if-exists --clean -e -Fc -U postgres -d emjpm ./$DUMP_FILE
-
-psql -h localhost -c "ALTER SCHEMA public OWNER TO emjpm" -U postgres emjpm
-```
-
-## FAQ
-
-- _If you have the `Can't take lock to run migrations: Migration table is already locked` error_
-
-```sh
-$ docker-compose exec db psql -U postgres -d emjpm_test -c 'UPDATE knex_migrations_v2_lock set is_locked=0;'
-UPDATE 1
-```
-
-- _If you have migration error_
-
-```sh
-$ docker-compose -f ./docker-compose.yaml -f ./docker-compose.dev.yaml exec api yarn knex migrate:rollback
 ```
 
 ## Release policy
