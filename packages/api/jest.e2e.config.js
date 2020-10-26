@@ -8,5 +8,5 @@ module.exports = {
   roots: ["<rootDir>/__test__/"],
   testTimeout: 30000,
   testEnvironment: "jest-environment-knex",
-  testEnvironmentOptions: require("@emjpm/knex/knexfile.js").test,
+  testEnvironmentOptions: require("./knexfile.js").test,
 };

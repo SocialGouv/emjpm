@@ -167,13 +167,6 @@ Install app:
 
 #
 
-Install knex:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: knex
-
-#
-
 Install ui:
   extends: .base_yarn_workspace_install
   variables:
@@ -297,31 +290,6 @@ Test @emjpm/api:
 #   script:
 #     - sh -x docker/postgres/postgres-init.sh
 #     - yarn workspace @emjpm/app test
-
-# Test @emjpm/knex:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   needs:
-#     - Install knex
-#   dependencies:
-#     - Install knex
-#   services:
-#     - name: postgres:10-alpine
-#   allow_failure: true
-#   retry: 1
-#   timeout: 2 minutes
-#   variables:
-#     DATABASE_URL: psql://postgres:@localhost/emjpm
-#     PGHOST: localhost
-#     PGUSER: postgres
-#   before_script:
-#     - apk add --update --no-cache postgresql=~11
-#     - psql --version
-#     #
-#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
-#   script:
-#     - sh -x docker/postgres/postgres-init.sh
-#     - yarn workspace @emjpm/knex test
 
 ################################################################################################
 ###################################                    #########################################
@@ -487,21 +455,6 @@ Register app image:
       --shm-size 512M
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-
-################### Register KNEX ##################
-
-Register knex image:
-  extends:
-    - .base_register_stage
-    - .register_stage
-  dependencies: []
-  needs:
-    - Install knex
-  before_script:
-    - cp yarn.lock packages/knex/yarn.lock
-  variables:
-    CONTEXT: packages/knex
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/knex
 
 ################### Register HASURA ########################
 
