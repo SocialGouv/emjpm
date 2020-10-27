@@ -624,14 +624,6 @@ Deploy app (prod):
     - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
     - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
     #
-    # Dataset job
-    - kubectl delete configmap dataset-configmap || true;
-    - kubectl create configmap dataset-configmap
-      --from-file=./.k8s/postgres/dataset/configmap
-    #
-    - kubectl delete job dataset || true;
-    - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
-    #
     # Backup cronjob
     - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
     - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
@@ -705,8 +697,6 @@ Restore postgres data:
     - .dev_stage
     - .deploy_stage
   when: manual
-  dependencies:
-    - "Register knex image"
   script:
     - source ./.gitlab-ci/env.sh
 
