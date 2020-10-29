@@ -2,6 +2,8 @@ const express = require("express");
 const { isEnAttente } = require("@emjpm/core");
 const { getEmailUserDatas } = require("../../../email/email-user-data");
 const { reservationEmail } = require("../../../email/reservation-email");
+const { validationEmail } = require("../../../email/validation-email");
+
 const { Tis } = require("../../../models/Tis");
 const { Mesure } = require("../../../models/Mesure");
 
@@ -20,6 +22,14 @@ router.post("/email-reservation", async function (req, res) {
 
     await Promise.all(emails);
   }
+
+  res.json({ success: true });
+});
+
+router.post("/email-account-validation", function (req, res) {
+  const { user_email } = req.body.input;
+
+  validationEmail(user_email, `${process.env.APP_URL}`);
 
   res.json({ success: true });
 });

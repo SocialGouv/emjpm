@@ -10,6 +10,11 @@ export const ACTIVATE_USER = gql`
     }
   }
 `;
+export const SEND_EMAIL_ACCOUNT_VALIDATION = gql`
+  mutation email_account_validation($user_email: String!) {
+    email_account_validation(user_email: $user_email)
+  }
+`;
 
 export const LISTE_BLANCHE_ASSOCIATION = gql`
   mutation liste_blanche_association($mandataire_id: Int!, $lb_user_id: Int!) {

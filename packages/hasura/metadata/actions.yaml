@@ -25,6 +25,13 @@ actions:
   - role: prepose
   - role: service
   - role: ti
+- name: email_account_validation
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-account-validation'
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: email_reservation
   definition:
     kind: asynchronous
@@ -168,4 +175,5 @@ custom_types:
   - name: StatOpenedMesuresOutput
   - name: StatAwaitingMesuresOutput
   - name: DeleteMesureActionOutput
+  - name: EmailAccountValidationOutput
   scalars: []
