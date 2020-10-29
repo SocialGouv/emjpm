@@ -504,8 +504,8 @@ Init Managed Database:
     - "[[ $(kubectl get po -l 'app=init-azure-pg-job' --field-selector status.phase=Succeeded --field-selector status.phase=Running --field-selector status.phase=Pending) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
 
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
+    - export HASURA_PG_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
+    - export HASURA_PG_PASSWORD=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD}' | base64 --decode)
 
     #
     - kubectl delete configmap ${K8S_PROJECT}-init-db-${BRANCH_HASH} || true
@@ -547,8 +547,8 @@ Init Managed Database:
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
+    - export HASURA_PG_USER_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER_ENCODED}' | base64 --decode)
+    - export HASURA_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD_ENCODED}' | base64 --decode)
     #
     - HOST=${API_HOST}
 
@@ -621,8 +621,6 @@ Deploy app (prod):
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
     #
     # Backup cronjob
     - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
@@ -703,11 +701,9 @@ Restore postgres data:
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
-    - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
 
-    - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
+    - export HASURA_PG_USER=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER}' | base64 --decode)
+    - export HASURA_PG_PASSWORD=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD}' | base64 --decode)
 
     - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
 

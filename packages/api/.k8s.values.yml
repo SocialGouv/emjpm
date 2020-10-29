@@ -32,7 +32,7 @@ deployment:
     - name: HASURA_GRAPHQL_URI
       value: "http://${HASURA_SRV_HOST}/v1/graphql"
     - name: DATABASE_URL
-      value: "psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
+      value: "psql://${HASURA_PG_USER_ENCODED}:${HASURA_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}"
     - name: PORT
       value: "80"
     - name: NODE_ENV

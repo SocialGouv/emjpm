@@ -37,11 +37,11 @@ spec:
             - name: PGSSLMODE
               value: "require"
             - name: PGUSER
-              value: ${EMJPM_PG_USER}
+              value: ${HASURA_PG_USER}
             - name: POSTGRES_DATABASE_EMJPM
               value: ${POSTGRES_DATABASE_EMJPM}
             - name: PGPASSWORD
-              value: "${EMJPM_PG_PASSWORD}"
+              value: "${HASURA_PG_PASSWORD}"
             - name: PGHOST
               value: ${PG_HOST}
             - name: BRANCH_HASH
