@@ -3,7 +3,10 @@ import { Heading2 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-import { CREATE_SERVICE_MEMBER_INVITATION } from "./mutations";
+import {
+  CREATE_SERVICE_MEMBER_INVITATION,
+  SEND_EMAIL_SERVICE_MEMBER_INVITATION,
+} from "./mutations";
 import { USER_EMAIL_EXISTS } from "./queries";
 import { ServiceMemberInvitationForm } from "./ServiceMemberInvitationForm";
 
@@ -12,6 +15,7 @@ const ServiceMemberInvitationCreate = (props) => {
 
   const client = useApolloClient();
   const [createServiceMemberInvitation] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
+  const [sendEmailServiceMemberInvitation] = useMutation(SEND_EMAIL_SERVICE_MEMBER_INVITATION);
 
   async function handleSubmit(values, { resetForm, setErrors }) {
     const { data } = await client.query({
@@ -24,13 +28,23 @@ const ServiceMemberInvitationCreate = (props) => {
       return;
     }
 
-    await createServiceMemberInvitation({
+    const result = await createServiceMemberInvitation({
       refetchQueries: ["ServiceMemberInvitations"],
       variables: {
         email: values.email,
         service_id: service.id,
       },
     });
+
+    const { id: invitationId } = result?.data?.insert_service_member_invitations?.returning?.[0];
+
+    if (invitationId) {
+      sendEmailServiceMemberInvitation({
+        variables: {
+          invitation_id: invitationId,
+        },
+      });
+    }
 
     resetForm();
   }

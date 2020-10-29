@@ -36,8 +36,6 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: HASURA_WEB_HOOK_SECRET
-    - name: WEB_HOOK_URL_EMAIL_SERVICE_MEMBER_INVITATION
-      value: "http://${API_SRV_HOST}/hasura/events/email-service-member-invitation"
     - name: WEB_HOOK_URL_TOKEN_REQUEST
       value: "http://${API_SRV_HOST}/hasura/events/token-request"
 

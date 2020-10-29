@@ -12,6 +12,12 @@ export const CREATE_SERVICE_MEMBER_INVITATION = gql`
   }
 `;
 
+export const SEND_EMAIL_SERVICE_MEMBER_INVITATION = gql`
+  mutation sendEmailServiceMemberInvitation($invitation_id: Int!) {
+    email_service_member_invitation(invitation_id: $invitation_id)
+  }
+`;
+
 export const DELETE_SERVICE_MEMBER_INVITATION = gql`
   mutation deleteServiceMemberInvitation($id: Int!) {
     delete_service_member_invitations(where: { id: { _eq: $id } }) {
