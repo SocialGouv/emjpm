@@ -6,7 +6,7 @@ Object {
   "cabinet": null,
   "created_at": Any<Object>,
   "email": "toto@toto.com",
-  "id": 11,
+  "id": 2103,
   "last_login": null,
   "nom": "testAd",
   "password": Any<String>,
@@ -16,6 +16,42 @@ Object {
   "type": "individuel",
   "username": "toto",
 }
+`;
+
+exports[`should add magistrat 2`] = `
+Array [
+  Object {
+    "bcc": undefined,
+    "from": "ne-pas-repondre@emjpm.gouv.fr",
+    "html": "
+Bonjour la super team eMJPM :),<br />
+Nous avons reçu une nouvelle inscription pour un utilisateur:<br />
+- type: ti <br />
+- nom: testPrenom testAd <br />
+- email: toto@toto.com <br />
+- code postal: 75010 <br /><br />
+
+Merci de vérifier cette nouvelle demande et de la valider.
+<br /><br />
+Bonne journée :)
+",
+    "subject": "Nouvelle inscription",
+    "text": "
+Bonjour la super team emjpm :) ,
+
+Nous avons reçu une nouvelle inscription pour un utilisateur:
+- type: ti
+- nom: testPrenom testAd
+- email: toto@toto.com
+- code postal: 75010
+
+Merci de vérifier cette nouvelle demande et de la valider.
+
+Bonne journée :)
+",
+    "to": "support.emjpm@fabrique.social.gouv.fr",
+  },
+]
 `;
 
 exports[`should add mandataire tis 1`] = `
@@ -47,42 +83,6 @@ Bonjour la super team emjpm :) ,
 
 Nous avons reçu une nouvelle inscription pour un utilisateur:
 - type: individuel
-- nom: testPrenom testAd
-- email: toto@toto.com
-- code postal: 75010
-
-Merci de vérifier cette nouvelle demande et de la valider.
-
-Bonne journée :)
-",
-    "to": "support.emjpm@fabrique.social.gouv.fr",
-  },
-]
-`;
-
-exports[`should add user tis 2`] = `
-Array [
-  Object {
-    "bcc": undefined,
-    "from": "ne-pas-repondre@emjpm.gouv.fr",
-    "html": "
-Bonjour la super team eMJPM :),<br />
-Nous avons reçu une nouvelle inscription pour un utilisateur:<br />
-- type: ti <br />
-- nom: testPrenom testAd <br />
-- email: toto@toto.com <br />
-- code postal: 75010 <br /><br />
-
-Merci de vérifier cette nouvelle demande et de la valider.
-<br /><br />
-Bonne journée :)
-",
-    "subject": "Nouvelle inscription",
-    "text": "
-Bonjour la super team emjpm :) ,
-
-Nous avons reçu une nouvelle inscription pour un utilisateur:
-- type: ti
 - nom: testPrenom testAd
 - email: toto@toto.com
 - code postal: 75010
