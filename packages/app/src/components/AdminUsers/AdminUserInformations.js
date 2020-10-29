@@ -9,7 +9,11 @@ import { AccessToken } from "../AccessToken";
 import AdminMandataireTribunaux from "./AdminMandataireTribunaux";
 import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
 import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
-import { ACTIVATE_USER, CHANGE_DIRECTION_AGREMENT } from "./mutations";
+import {
+  ACTIVATE_USER,
+  CHANGE_DIRECTION_AGREMENT,
+  SEND_EMAIL_ACCOUNT_VALIDATION,
+} from "./mutations";
 import { LB_USER, USER } from "./queries";
 import { TypeDirectionForm } from "./TypeDirectionForm";
 
@@ -46,20 +50,25 @@ const AdminUserInformations = (props) => {
   });
 
   const [activateUser, { loading: activateUserLoading }] = useMutation(ACTIVATE_USER);
+  const [sendEmailAccountValidation] = useMutation(SEND_EMAIL_ACCOUNT_VALIDATION);
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
 
   const lb_user =
     queryResult.data && queryResult.data.lb_users.length ? queryResult.data.lb_users[0] : null;
 
   const toggleActivation = useCallback(() => {
-    const { active, id } = data.users_by_pk;
+    const { active, id, email } = data.users_by_pk;
+    const newActiveValue = !active;
+
     activateUser({
       variables: {
-        active: !active,
+        active: newActiveValue,
         id,
       },
     });
-  }, [activateUser, data]);
+
+    if (newActiveValue) sendEmailAccountValidation({ variables: { user_email: email } });
+  }, [activateUser, sendEmailAccountValidation, data]);
 
   if (loading) {
     return <div>Chargement</div>;

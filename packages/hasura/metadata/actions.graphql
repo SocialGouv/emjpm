@@ -14,6 +14,13 @@ type Mutation {
 
 
 type Mutation {
+  email_account_validation (
+    user_email: String!
+  ): EmailAccountValidationOutput
+}
+
+
+type Mutation {
   email_reservation (
     mesure_id: Int!
   ): EmailReservationOutput
@@ -215,5 +222,9 @@ type StatAwaitingMesuresOutput {
 
 type DeleteMesureActionOutput {
   success : Boolean!
+}
+
+type EmailAccountValidationOutput {
+  result : String!
 }
 
