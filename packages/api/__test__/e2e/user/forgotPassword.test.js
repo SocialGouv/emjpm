@@ -1,4 +1,5 @@
 const request = require("supertest");
+const { seedData } = require("../../database/seed-data");
 
 const nodemailerMock = require("nodemailer-mock");
 jest.setMock("nodemailer", nodemailerMock);
@@ -7,16 +8,15 @@ jest.setMock("nodemailer", nodemailerMock);
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
-const { knex } = global;
+const { databaseName, knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
 
 beforeAll(async () => {
-  await knex.migrate.latest();
-  await knex.seed.run();
+  await seedData(databaseName);
 
-  const [user] = await knex("users");
+  const [user] = await knex("users").limit(1);
 
   global.user = user;
 });
