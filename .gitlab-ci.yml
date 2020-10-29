@@ -717,20 +717,15 @@ Restore postgres data:
 
     - kubectl delete job restore-job || true
     - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
+
     - kubectl wait --for=condition=complete job/restore-job  --timeout=600s
+    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
+    - kubectl wait  --for=condition=Ready deploy/${HASURA_SRV_HOST} --timeout=600s
 
-    - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
-
-    - kubectl delete job migrate-job || true
-    - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -
-
-    - kubectl wait --for=condition=complete job/migrate-job  --timeout=600s
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
-
     - kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
-    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
+
 
 #######################################################################################################
 ##########################################               ##############################################
