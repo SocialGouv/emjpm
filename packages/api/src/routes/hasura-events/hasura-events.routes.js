@@ -4,7 +4,6 @@ const { Service } = require("../../models/Service");
 const {
   ServiceMemberInvitation,
 } = require("../../models/ServiceMemberInvitation");
-const { validationEmail } = require("../../email/validation-email");
 const {
   serviceMemberInvitationMail,
 } = require("../../email/service-member-invitation-mail");
@@ -33,15 +32,6 @@ router.post("/token-request", function (req, res) {
   } = req;
   editorConfirmationEmail(email);
   editorConfirmationAdminEmail(email, name);
-  res.json({ success: true });
-});
-
-router.post("/email-account-validation", function (req, res) {
-  const newUser = req.body.event.data.new;
-  const oldUser = req.body.event.data.old;
-  if (newUser.active && !oldUser.active) {
-    validationEmail(newUser.email, `${process.env.APP_URL}`);
-  }
   res.json({ success: true });
 });
 

@@ -6095,21 +6095,6 @@
         id:
           _eq: X-Hasura-User-Id
       check: null
-  event_triggers:
-  - name: email-account-validation
-    definition:
-      enable_manual: false
-      update:
-        columns:
-        - active
-    retry_conf:
-      num_retries: 0
-      interval_sec: 10
-      timeout_sec: 60
-    webhook_from_env: WEB_HOOK_URL_EMAIL_ACCOUNT_VALIDATION
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: view_department_availability
