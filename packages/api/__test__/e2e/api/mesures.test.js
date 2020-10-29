@@ -11,10 +11,10 @@ const { knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
+const seedData = require("../../database/seed-data");
 
 beforeAll(async () => {
-  await knex.migrate.latest();
-  await knex.seed.run();
+  await seedData(databaseName);
 
   const [editor] = await knex("editors");
   const [ti] = await knex("tis");

@@ -9,15 +9,15 @@ jest.setMock("nodemailer", nodemailerMock);
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
-const { knex } = global;
+const { databaseName, knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
 const { getAllTisByMandataire } = require("@emjpm/api/src/db/queries/tis");
+const { seedData } = require("../../database/seed-data");
 
 beforeAll(async () => {
-  await knex.migrate.latest();
-  await knex.seed.run();
+  await seedData(databaseName);
 });
 
 beforeEach(async () => {
@@ -139,7 +139,7 @@ test("should NOT register when password!==passwordConfirmation", async () => {
 test("should NOT register when email already exist", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
-    .send(defaultRegister({ email: "marcel@paris.com" }));
+    .send(defaultRegister({ email: "individuel-53@justice.fr" }));
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -156,7 +156,7 @@ test("should NOT register when email already exist", async () => {
 test("should NOT register when username already exist", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
-    .send(defaultRegister({ username: "jeremy" }));
+    .send(defaultRegister({ username: "individuel-53@justice.fr" }));
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -190,7 +190,7 @@ test("should NOT register when empty username", async () => {
 test("should add mandataire tis", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
-    .send({ ...defaultRegister(), tis: [1, 2] });
+    .send({ ...defaultRegister(), tis: [22, 37] });
 
   expect(response.body).toMatchSnapshot();
   expect(response.status).toBe(200);
@@ -200,10 +200,10 @@ test("should add mandataire tis", async () => {
     .orderBy("created_at", "desc")
     .first();
   const tis = await getAllTisByMandataire(mandataire.id);
-  expect(tis.map((ti) => ti.id)).toEqual([1, 2]);
+  expect(tis.map((ti) => ti.id)).toEqual([22, 37]);
 });
 
-test("should add user tis", async () => {
+test("should add magistrat", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
     .send({
@@ -213,7 +213,7 @@ test("should add user tis", async () => {
       }),
       magistrat: {
         cabinet: "2A",
-        ti: 1,
+        ti: 22,
       },
     });
 
@@ -234,5 +234,5 @@ test("should add user tis", async () => {
     .where("user_id", user.id)
     .first();
   expect(magistrat.cabinet).toEqual("2A");
-  expect(magistrat.ti_id).toEqual(1);
+  expect(magistrat.ti_id).toEqual(22);
 });
