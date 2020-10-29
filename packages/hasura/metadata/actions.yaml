@@ -42,6 +42,15 @@ actions:
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
   - role: ti
+- name: email_service_member_invitation
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-service-member-invitation'
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: service
 - name: enquete_reponse_validation_status
   definition:
     kind: ""
@@ -176,4 +185,5 @@ custom_types:
   - name: StatAwaitingMesuresOutput
   - name: DeleteMesureActionOutput
   - name: EmailAccountValidationOutput
+  - name: EmailServiceMemberInvitationOutput
   scalars: []

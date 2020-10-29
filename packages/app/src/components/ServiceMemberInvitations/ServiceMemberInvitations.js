@@ -47,7 +47,7 @@ const ServiceMemberInvitations = (props) => {
           </Heading2>
           <Box>
             {serviceMemberInvitations.map((invitation, i) => (
-              <Flex sx={listStyle} index={i} key={invitation.email}>
+              <Flex sx={listStyle} index={i} key={invitation.id}>
                 <Box sx={listEmailStyle}>{invitation.email}</Box>
                 <Text sx={listDateStyle}>
                   {`Invité le ${format(new Date(invitation.created_at), "dd/MM/yyyy")}`}
