@@ -27,6 +27,13 @@ type Mutation {
 }
 
 
+type Mutation {
+  email_service_member_invitation (
+    invitation_id: Int!
+  ): EmailServiceMemberInvitationOutput
+}
+
+
 type Query {
   enquete_reponse_validation_status (
     enqueteId: Int!
@@ -225,6 +232,10 @@ type DeleteMesureActionOutput {
 }
 
 type EmailAccountValidationOutput {
+  result : String!
+}
+
+type EmailServiceMemberInvitationOutput {
   result : String!
 }
 
