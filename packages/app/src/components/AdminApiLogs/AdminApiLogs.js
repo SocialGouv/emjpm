@@ -10,48 +10,31 @@ import { API_LOGS, API_LOGS_SEARCH } from "./queries";
 
 const AdminApiLogs = () => {
   const [searchQuery, setSearchQuery] = useState(null);
-  const [isLoading, setLoading] = useState(0);
+  const [isLoading, setLoading] = useState(false);
   const [logs, setLogs] = useState([]);
-  const debouncedSearchQuery = useDebounce(searchQuery, 2000);
+  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
   const client = useApolloClient();
 
-  useEffect(() => {
-    const run = async () => {
-      const { data } = await client.query({ query: API_LOGS });
+  const fetchLogs = React.useCallback(
+    async (options) => {
+      const { data } = await client.query(options);
 
       setLogs(data.api_logs);
-    };
-
-    run();
-  }, [client]);
+      setLoading(false);
+    },
+    [client]
+  );
 
   useEffect(() => {
     setLoading(true);
 
     if (!debouncedSearchQuery) {
-      const run = async () => {
-        const { data } = await client.query({ query: API_LOGS });
-
-        setLogs(data.api_logs);
-        setLoading(false);
-      };
-
-      run();
+      fetchLogs({ query: API_LOGS });
       return;
     }
 
-    const run = async (query) => {
-      const { data } = await client.query({
-        query: API_LOGS_SEARCH,
-        variables: { query },
-      });
-
-      setLoading(false);
-      setLogs(data.api_logs);
-    };
-
-    run(debouncedSearchQuery);
-  }, [client, debouncedSearchQuery]);
+    fetchLogs({ query: API_LOGS_SEARCH, variables: { search: debouncedSearchQuery } });
+  }, [fetchLogs, debouncedSearchQuery]);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -143,7 +126,9 @@ const AdminApiLogs = () => {
           RESPONSE
         </Box>
       </Flex>
-      {logs.length ? (
+      {!logs.length ? (
+        <Box>Aucun résultats.</Box>
+      ) : (
         <Box>
           {logs.map((log) => (
             <Flex
@@ -224,8 +209,6 @@ const AdminApiLogs = () => {
             </Flex>
           ))}
         </Box>
-      ) : (
-        <Box>Aucun résultats.</Box>
       )}
     </Card>
   );

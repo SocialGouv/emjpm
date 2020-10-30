@@ -18,13 +18,13 @@ export const API_LOGS = gql`
 `;
 
 export const API_LOGS_SEARCH = gql`
-  query ApiLogSearch($query: String!) {
+  query ApiLogSearch($search: String!) {
     api_logs(
       where: {
         _or: [
-          { request_url: { _ilike: $query } }
-          { request_method: { _ilike: $query } }
-          { token: { _ilike: $query } }
+          { request_url: { _ilike: $search } }
+          { request_method: { _ilike: $search } }
+          { token: { _ilike: $search } }
         ]
       }
     ) {
