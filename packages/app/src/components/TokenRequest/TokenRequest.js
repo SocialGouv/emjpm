@@ -5,23 +5,29 @@ import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { editorTokenSchema } from "../../lib/validationSchemas";
-import { EDITOR_TOKEN_REQUEST } from "./mutations";
+import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
 
 const TokenRequest = () => {
-  const [EditorTokenRequest] = useMutation(EDITOR_TOKEN_REQUEST);
+  const [editorTokenRequest] = useMutation(EDITOR_TOKEN_REQUEST);
+  const [sendEmailTokenRequest] = useMutation(SEND_EMAIL_TOKEN_REQUEST);
   const [isMessageVisible, toggleMessage] = useState(false);
   const [isErrorMessageVisible, toggleErrorMessage] = useState(false);
 
   const formik = useFormik({
-    onSubmit: async (values, { setSubmitting }) => {
+    onSubmit: async (values, { setSubmitting, resetForm }) => {
+      const { email, name } = values;
+
       try {
-        await EditorTokenRequest({
-          variables: {
-            email: values.email,
-            name: values.name,
-          },
+        await editorTokenRequest({
+          variables: { email, name },
         });
+
+        await sendEmailTokenRequest({
+          variables: { email, name },
+        });
+
         toggleMessage(true);
+        resetForm();
       } catch {
         toggleErrorMessage(true);
       }

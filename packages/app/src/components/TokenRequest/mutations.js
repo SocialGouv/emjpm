@@ -7,3 +7,9 @@ export const EDITOR_TOKEN_REQUEST = gql`
     }
   }
 `;
+
+export const SEND_EMAIL_TOKEN_REQUEST = gql`
+  mutation EmailTokenRequest($email: String!, $name: String!) {
+    email_token_request(email: $email, name: $name)
+  }
+`;

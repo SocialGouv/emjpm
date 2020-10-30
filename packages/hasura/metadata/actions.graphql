@@ -34,6 +34,14 @@ type Mutation {
 }
 
 
+type Mutation {
+  email_token_request (
+    email: String!
+    name: String!
+  ): TokenRequestOutput
+}
+
+
 type Query {
   enquete_reponse_validation_status (
     enqueteId: Int!
@@ -236,6 +244,10 @@ type EmailAccountValidationOutput {
 }
 
 type EmailServiceMemberInvitationOutput {
+  result : String!
+}
+
+type TokenRequestOutput {
   result : String!
 }
 
