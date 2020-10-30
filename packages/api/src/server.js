@@ -52,12 +52,6 @@ app.use(
 );
 
 app.use(
-  "/hasura/events",
-  [passport.authenticate("hasura-webhook-header-secret")],
-  require("./routes/hasura-events/hasura-events.routes.js")
-);
-
-app.use(
   "/hasura/actions",
   [passport.authenticate("hasura-webhook-header-secret")],
   require("./routes/hasura-actions/hasura-actions.routes.js")
