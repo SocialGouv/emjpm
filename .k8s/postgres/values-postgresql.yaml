@@ -392,8 +392,3 @@ extraEnv:
       secretKeyRef:
         name: emjpm-secret
         key: HASURA_GRAPHQL_ADMIN_SECRET
-  - name: POSTGRES_HASURA_PASSWORD
-    valueFrom:
-      secretKeyRef:
-        name: emjpm-secret
-        key: POSTGRES_HASURA_PASSWORD
