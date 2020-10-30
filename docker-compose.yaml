@@ -22,9 +22,6 @@ services:
       # master password
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=test
-      # Hasura dedicated user
-      - POSTGRES_HASURA_USER=hasura
-      - POSTGRES_HASURA_PASSWORD=hasura
     ports:
       - "5434:5432"
     volumes:
@@ -47,7 +44,7 @@ services:
     # network_mode: "host"
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
-      HASURA_GRAPHQL_DATABASE_URL: postgres://hasura:hasura@db:5432/emjpm
+      HASURA_GRAPHQL_DATABASE_URL: postgres://emjpm:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/auth/jwks"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
