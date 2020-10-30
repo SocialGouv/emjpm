@@ -15,6 +15,13 @@ const {
 const { Tis } = require("../../../models/Tis");
 const { Mesure } = require("../../../models/Mesure");
 
+const {
+  editorConfirmationEmail,
+} = require("../../../email/editor-confirmation-email");
+const {
+  editorConfirmationAdminEmail,
+} = require("../../../email/editor-confirmation-admin-email");
+
 const router = express.Router();
 
 router.post("/email-reservation", async function (req, res) {
@@ -59,6 +66,14 @@ router.post("/email-service-member-invitation", async function (req, res) {
 
   serviceMemberInvitationMail(serviceMemberInvitation, service);
 
+  res.json({ success: true });
+});
+
+router.post("/token-request", function (req, res) {
+  const { email, name } = req.body.input;
+
+  editorConfirmationEmail(email);
+  editorConfirmationAdminEmail(email, name);
   res.json({ success: true });
 });
 
