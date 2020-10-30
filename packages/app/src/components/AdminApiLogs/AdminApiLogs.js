@@ -1,40 +1,135 @@
-import { useApolloClient } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading4, Spinner } from "@emjpm/ui";
 import { format } from "date-fns";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { useDebounce } from "../../lib/hooks";
-import { API_LOGS, API_LOGS_SEARCH } from "./queries";
+import { PaginatedList } from "../PaginatedList";
+import { API_LOGS_SEARCH } from "./queries";
+
+const RowItem = ({ item }) => {
+  const { id, created_at, request_method, request_url, token, response } = item;
+  return (
+    <>
+      <Flex
+        key={id}
+        sx={{
+          p: 2,
+          borderBottom: "1px solid",
+          borderColor: "whiteGray",
+        }}
+      >
+        <Box
+          sx={{
+            width: 120,
+            mr: 2,
+          }}
+        >
+          {format(new Date(created_at), "dd/MM/yyyy hh:mm")}
+        </Box>
+        <Box
+          sx={{
+            width: 80,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            BoxOverflow: "ellipsis",
+            mr: 2,
+          }}
+        >
+          {request_method}
+        </Box>
+        <Box
+          sx={{
+            width: 200,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            mr: 2,
+          }}
+        >
+          {request_url}
+        </Box>
+        <Box
+          sx={{
+            width: 150,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            mr: 2,
+          }}
+        >
+          {token}
+        </Box>
+        <Box
+          sx={{
+            width: 200,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {JSON.stringify(response, null, "\t")}
+        </Box>
+        <Flex
+          sx={{
+            width: 200,
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            margin: "auto",
+            justifyContent: "flex-end",
+          }}
+        >
+          <Link href={`/admin/api-logs/[api_log_id]`} as={`/admin/api-logs/${id}`}>
+            <a>
+              <Button>Voir</Button>
+            </a>
+          </Link>
+        </Flex>
+      </Flex>
+    </>
+  );
+};
 
 const AdminApiLogs = () => {
   const [searchQuery, setSearchQuery] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  const [logs, setLogs] = useState([]);
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
-  const client = useApolloClient();
 
-  const fetchLogs = React.useCallback(
-    async (options) => {
-      const { data } = await client.query(options);
+  const [currentOffset, setCurrentOffset] = useState(0);
+  const resultPerPage = 5;
 
-      setLogs(data.api_logs);
-      setLoading(false);
+  React.useEffect(() => {
+    setCurrentOffset(0);
+  }, [debouncedSearchQuery]);
+
+  const { data, loading, error } = useQuery(API_LOGS_SEARCH, {
+    fetchPolicy: "network-only",
+    variables: {
+      limit: resultPerPage,
+      offset: currentOffset,
+      search: debouncedSearchQuery || null,
     },
-    [client]
-  );
+  });
 
-  useEffect(() => {
-    setLoading(true);
+  if (loading) {
+    return <div>loading</div>;
+  }
 
-    if (!debouncedSearchQuery) {
-      fetchLogs({ query: API_LOGS });
-      return;
-    }
+  if (error) {
+    return (
+      <div>
+        Oups, une erreur est survenue
+        <span role="img" aria-hidden="true">
+          😕👇
+        </span>
+      </div>
+    );
+  }
 
-    fetchLogs({ query: API_LOGS_SEARCH, variables: { search: debouncedSearchQuery } });
-  }, [fetchLogs, debouncedSearchQuery]);
+  const { count } = data?.api_logs_aggregate?.aggregate;
+  const { api_logs } = data;
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -45,7 +140,7 @@ const AdminApiLogs = () => {
       <Flex alignItems="center" mt="2" mb="4">
         <Heading4>API Logs</Heading4>
         <Flex m="auto" alignItems="center" justifyContent="flex-end" sx={{ flexGrow: 1 }}>
-          {!isLoading || <Spinner />}
+          {!loading || <Spinner />}
           <Box
             as="input"
             placeholder="Rechercher..."
@@ -61,6 +156,7 @@ const AdminApiLogs = () => {
               p: 2,
             }}
             onChange={handleSearchChange}
+            value={searchQuery}
           />
         </Flex>
       </Flex>
@@ -126,90 +222,15 @@ const AdminApiLogs = () => {
           RESPONSE
         </Box>
       </Flex>
-      {!logs.length ? (
-        <Box>Aucun résultats.</Box>
-      ) : (
-        <Box>
-          {logs.map((log) => (
-            <Flex
-              key={log.id}
-              sx={{
-                p: 2,
-                borderBottom: "1px solid",
-                borderColor: "whiteGray",
-              }}
-            >
-              <Box
-                sx={{
-                  width: 120,
-                  mr: 2,
-                }}
-              >
-                {format(new Date(log.created_at), "dd/MM/yyyy hh:mm")}
-              </Box>
-              <Box
-                sx={{
-                  width: 80,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  BoxOverflow: "ellipsis",
-                  mr: 2,
-                }}
-              >
-                {log.request_method}
-              </Box>
-              <Box
-                sx={{
-                  width: 200,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  mr: 2,
-                }}
-              >
-                {log.request_url}
-              </Box>
-              <Box
-                sx={{
-                  width: 150,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  mr: 2,
-                }}
-              >
-                {log.token}
-              </Box>
-              <Box
-                sx={{
-                  width: 200,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {JSON.stringify(log.response, null, "\t")}
-              </Box>
-              <Flex
-                sx={{
-                  width: 200,
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  margin: "auto",
-                  justifyContent: "flex-end",
-                }}
-              >
-                <Link href={`/admin/api-logs/[api_log_id]`} as={`/admin/api-logs/${log.id}`}>
-                  <a>
-                    <Button>Voir</Button>
-                  </a>
-                </Link>
-              </Flex>
-            </Flex>
-          ))}
-        </Box>
-      )}
+
+      <PaginatedList
+        entries={api_logs}
+        RowItem={RowItem}
+        count={count}
+        resultPerPage={resultPerPage}
+        currentOffset={currentOffset}
+        setCurrentOffset={setCurrentOffset}
+      />
     </Card>
   );
 };
