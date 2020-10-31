@@ -22,6 +22,9 @@ psql -v ON_ERROR_STOP=1 ${EMJPM_DB}  <<-EOSQL
   GRANT CONNECT ON DATABASE ${EMJPM_DB} TO ${POSTGRES_EMJPM_USER};
   GRANT ALL PRIVILEGES ON DATABASE ${EMJPM_DB} TO ${POSTGRES_EMJPM_USER};
 
+  DELETE FROM hdb_catalog.event_invocation_logs;
+  DELETE FROM hdb_catalog.event_log;
+  DELETE FROM hdb_catalog.event_triggers ;
 EOSQL
 
 sleep 10s
