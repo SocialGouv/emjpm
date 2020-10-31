@@ -28,5 +28,5 @@ DELETE FROM hdb_catalog.event_log;
 DELETE FROM hdb_catalog.event_triggers ;
 EOF
 
-cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
-rm reset-database.sql
+cat clean-hasura.sql | psql -h localhost -p 5434 -U $PGUSER
+rm clean-hasura.sql
