@@ -716,7 +716,7 @@ Restore postgres data:
 
     - kubectl wait --for=condition=complete job/restore-job  --timeout=600s
     - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
-    - kubectl wait  --for=condition=Ready deploy/${HASURA_SRV_HOST} --timeout=600s
+    - kubectl wait  --for=condition=Ready pod/${HASURA_SRV_HOST} --timeout=600s
 
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
