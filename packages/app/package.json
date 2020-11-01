@@ -15,7 +15,7 @@
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",
-    "start:build": "next start -p 80",
+    "start:build": "next start -p 80"
   },
   "keywords": [],
   "license": "Apache-2.0",
