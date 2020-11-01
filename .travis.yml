@@ -4,6 +4,16 @@ language: minimal
 git:
   depth: 5
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "12"
+  apt:
+    packages:
+    - postgresql-client-12
+
+
 #
 
 _environments:
@@ -43,13 +53,9 @@ jobs:
         # Start the database first so it has the time to boot before we interact with it.
         - docker-compose up -d db
         - yarn --frozen-lockfile
-      before_script:
-        - yarn workspace @emjpm/knex knex migrate:latest --env test
-        - yarn workspace @emjpm/knex knex seed:run --env test
       script:
         - yarn build --stream
         - yarn lint --stream
-        - yarn workspace @emjpm/knex test
         # - yarn workspace @emjpm/app test --coverage --coverageReporters text-summary
         - JWT_KEY=lol yarn workspace @emjpm/api test --coverage --coverageReporters text-summary
       after_script:

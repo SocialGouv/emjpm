@@ -35,6 +35,8 @@ spec:
               value: /var/lib/cronjob/status
             - name: DUMP_DIR
               value: /mnt/data
+            - name: DUMP_DEV_DIR
+              value: /mnt/dev-data
             - name: PGDATABASE
               value: emjpm
             - name: PGUSER
@@ -46,6 +48,8 @@ spec:
           volumeMounts:
             - mountPath: "/mnt/data"
               name: data
+            - mountPath: "/mnt/dev-data"
+              name: dev-data
             - mountPath: "/mnt/script"
               name: script
         #
@@ -58,5 +62,10 @@ spec:
         - name: data
           azureFile:
             secretName: ${K8S_PROJECT}-azure-storage-${BRANCH_HASH}
+            shareName: ${K8S_PROJECT}-backup-restore
+            readOnly: false
+        - name: dev-data
+          azureFile:
+            secretName: ${K8S_PROJECT}-azure-storage-dev
             shareName: ${K8S_PROJECT}-backup-restore
             readOnly: false
