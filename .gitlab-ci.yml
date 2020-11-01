@@ -771,7 +771,7 @@ Delete useless k8s namespaces:
 Release:
   stage: Notify Finished Deployment
   dependencies: []
-  image: node:12.18-alpine3.10
+  image: node:12.19-alpine3.10
   variables:
     LERNA_ARGS: --force-publish --yes
     #
