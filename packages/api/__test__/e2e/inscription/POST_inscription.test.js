@@ -24,34 +24,6 @@ beforeEach(async () => {
   nodemailerMock.mock.reset();
 });
 
-afterEach(async () => {
-  // Remove created user
-  const user = await knex("users")
-    .where({ email: defaultRegister().user.email })
-    .first();
-
-  if (!user) {
-    return;
-  }
-
-  await knex("user_role").where({ user_id: user.id }).delete();
-
-  const mandataire = await knex("mandataires")
-    .where({ user_id: user.id })
-    .first();
-
-  if (mandataire) {
-    await knex("mandataire_tis")
-      .where({ mandataire_id: mandataire.id })
-      .delete();
-    await knex("mandataires").where({ id: mandataire.id }).delete();
-  }
-
-  await knex("magistrat").where({ user_id: user.id }).delete();
-
-  await knex("users").where({ id: user.id }).delete();
-});
-
 const defaultRegister = (params) => ({
   user: {
     username: params && params.username != undefined ? params.username : "toto",
@@ -79,7 +51,7 @@ const defaultRegister = (params) => ({
 test("should register with good values", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
-    .send(defaultRegister());
+    .send({ ...defaultRegister(), tis: [22, 37] });
   expect(response.body).toMatchInlineSnapshot(`
                 Object {
                   "success": true,
@@ -87,33 +59,19 @@ test("should register with good values", async () => {
         `);
   expect(response.status).toBe(200);
 
-  const lastInsert = await knex
-    .table("users")
+  const lastInsert = await knex("users").orderBy("created_at", "desc").first();
+  const mandataire = await knex("mandataires")
     .orderBy("created_at", "desc")
     .first();
-  expect(lastInsert.username).toEqual("toto");
-});
+  const tis = await getAllTisByMandataire(mandataire.id);
 
-test("should send an email with good values", async () => {
-  await request(server).post("/api/auth/signup").send(defaultRegister());
+  expect(tis.map((ti) => ti.id)).toEqual([22, 37]);
   expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
-});
-
-test("created user should NOT be active", async () => {
-  const response = await request(server)
-    .post("/api/auth/signup")
-    .send(defaultRegister());
-  expect(response.body.success).toBe(true);
-  expect(response.status).toBe(200);
-
-  const lastInsert = await knex
-    .table("users")
-    .orderBy("created_at", "desc")
-    .first();
   expect(lastInsert).toMatchSnapshot({
     created_at: expect.any(Object),
     password: expect.any(String),
+    username: "toto",
   });
 });
 
@@ -139,7 +97,7 @@ test("should NOT register when password!==passwordConfirmation", async () => {
 test("should NOT register when email already exist", async () => {
   const response = await request(server)
     .post("/api/auth/signup")
-    .send(defaultRegister({ email: "individuel-53@justice.fr" }));
+    .send(defaultRegister());
 
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Array) },
@@ -151,56 +109,6 @@ test("should NOT register when email already exist", async () => {
   );
   expect(nodemailerMock.mock.sentMail().length).toBe(0);
   expect(response.status).toBe(409);
-});
-
-test("should NOT register when username already exist", async () => {
-  const response = await request(server)
-    .post("/api/auth/signup")
-    .send(defaultRegister({ username: "individuel-53@justice.fr" }));
-
-  expect(response.body).toMatchInlineSnapshot(
-    { errors: expect.any(Array) },
-    `
-                        Object {
-                          "errors": Any<Array>,
-                        }
-            `
-  );
-  expect(response.status).toBe(409);
-  expect(nodemailerMock.mock.sentMail().length).toBe(0);
-});
-
-test("should NOT register when empty username", async () => {
-  const response = await request(server)
-    .post("/api/auth/signup")
-    .send(defaultRegister({ username: "" }));
-  expect(response.body).toMatchInlineSnapshot(
-    { errors: expect.any(Array) },
-    `
-                Object {
-                  "errors": Any<Array>,
-                }
-        `
-  );
-  expect(response.status).toBe(400);
-
-  expect(nodemailerMock.mock.sentMail().length).toBe(0);
-});
-
-test("should add mandataire tis", async () => {
-  const response = await request(server)
-    .post("/api/auth/signup")
-    .send({ ...defaultRegister(), tis: [22, 37] });
-
-  expect(response.body).toMatchSnapshot();
-  expect(response.status).toBe(200);
-  expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
-
-  const mandataire = await knex("mandataires")
-    .orderBy("created_at", "desc")
-    .first();
-  const tis = await getAllTisByMandataire(mandataire.id);
-  expect(tis.map((ti) => ti.id)).toEqual([22, 37]);
 });
 
 test("should add magistrat", async () => {
@@ -208,7 +116,8 @@ test("should add magistrat", async () => {
     .post("/api/auth/signup")
     .send({
       ...defaultRegister({
-        username: "user_ti",
+        email: "magistrat@emjpm.fr",
+        username: "magistrat",
         type: "ti",
       }),
       magistrat: {
@@ -227,7 +136,7 @@ test("should add magistrat", async () => {
 
   const user = await knex.table("users").orderBy("created_at", "desc").first();
 
-  expect(user.username).toEqual("user_ti");
+  expect(user.username).toEqual("magistrat");
   const magistrat = await knex
     .table("magistrat")
     .innerJoin("users", "users.id", "magistrat.user_id")
