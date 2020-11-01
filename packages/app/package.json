@@ -16,7 +16,6 @@
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",
     "start:build": "next start -p 80",
-    "generate": "hygen component new"
   },
   "keywords": [],
   "license": "Apache-2.0",
