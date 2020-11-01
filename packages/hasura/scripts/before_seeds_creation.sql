@@ -1,3 +1,9 @@
+--hasura
+ delete from hdb_catalog.event_log;
+ delete from hdb_catalog.event_invocation_logs;
+ delete from hdb_catalog.remote_schemas;
+ delete from hdb_catalog.event_triggers;
+
 -- commentaires
 truncate commentaires;
 truncate enquete_reponses;
