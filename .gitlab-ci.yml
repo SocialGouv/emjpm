@@ -167,13 +167,6 @@ Install app:
 
 #
 
-Install knex:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: knex
-
-#
-
 Install ui:
   extends: .base_yarn_workspace_install
   variables:
@@ -297,31 +290,6 @@ Test @emjpm/api:
 #   script:
 #     - sh -x docker/postgres/postgres-init.sh
 #     - yarn workspace @emjpm/app test
-
-# Test @emjpm/knex:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   needs:
-#     - Install knex
-#   dependencies:
-#     - Install knex
-#   services:
-#     - name: postgres:10-alpine
-#   allow_failure: true
-#   retry: 1
-#   timeout: 2 minutes
-#   variables:
-#     DATABASE_URL: psql://postgres:@localhost/emjpm
-#     PGHOST: localhost
-#     PGUSER: postgres
-#   before_script:
-#     - apk add --update --no-cache postgresql=~11
-#     - psql --version
-#     #
-#     - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
-#   script:
-#     - sh -x docker/postgres/postgres-init.sh
-#     - yarn workspace @emjpm/knex test
 
 ################################################################################################
 ###################################                    #########################################
@@ -488,21 +456,6 @@ Register app image:
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
 
-################### Register KNEX ##################
-
-Register knex image:
-  extends:
-    - .base_register_stage
-    - .register_stage
-  dependencies: []
-  needs:
-    - Install knex
-  before_script:
-    - cp yarn.lock packages/knex/yarn.lock
-  variables:
-    CONTEXT: packages/knex
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/knex
-
 ################### Register HASURA ########################
 
 Register hasura image:
@@ -668,16 +621,6 @@ Deploy app (prod):
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
-    #
-    # Dataset job
-    - kubectl delete configmap dataset-configmap || true;
-    - kubectl create configmap dataset-configmap
-      --from-file=./.k8s/postgres/dataset/configmap
-    #
-    - kubectl delete job dataset || true;
-    - cat ./.k8s/postgres/dataset/job-inject-dataset.yml | envsubst | kubectl apply -f -
     #
     # Backup cronjob
     - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
@@ -721,8 +664,8 @@ Deploy knex (prod):
     - HOST=${HASURA_HOST}
     #
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export POSTGRES_HASURA_USER_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_USER_ENCODED}' | base64 --decode)
-    - export POSTGRES_HASURA_PASSWORD_ENCODED=$(kubectl get secret azure-pg-hasura-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.HASURA_PG_PASSWORD_ENCODED}' | base64 --decode)
+    - export POSTGRES_EMJPM_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
+    - export POSTGRES_EMJPM_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
   after_script:
     - cat values.yaml
 
@@ -752,16 +695,12 @@ Restore postgres data:
     - .dev_stage
     - .deploy_stage
   when: manual
-  dependencies:
-    - "Register knex image"
   script:
     - source ./.gitlab-ci/env.sh
 
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
-    - export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
-    - export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
 
     - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
     - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
@@ -774,20 +713,15 @@ Restore postgres data:
 
     - kubectl delete job restore-job || true
     - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
+
     - kubectl wait --for=condition=complete job/restore-job  --timeout=600s
+    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
+    - kubectl rollout status deploy/${HASURA_SRV_HOST} --timeout=600s
 
-    - export EMJPM_PG_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
-    - export EMJPM_PG_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
-
-    - kubectl delete job migrate-job || true
-    - cat ./.k8s/postgres/restore/migrate-job.yml | envsubst | kubectl apply -f -
-
-    - kubectl wait --for=condition=complete job/migrate-job  --timeout=600s
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
-
     - kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
-    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
+
 
 #######################################################################################################
 ##########################################               ##############################################

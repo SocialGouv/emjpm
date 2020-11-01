@@ -1,0 +1,18 @@
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (32, 84, 1007, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (36, 28, 1047, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (2, NULL, 823, 76, 'departemental');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (93, 75, 1247, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (95, NULL, 1229, 76, 'departemental');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (54, NULL, 1538, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (26, NULL, 979, 76, 'departemental');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (6, NULL, 874, NULL, 'national');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (80, 84, 2030, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (77, NULL, 1949, NULL, 'national');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (75, 94, 1937, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (61, 53, 1629, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (55, 52, 1548, NULL, 'regional');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (27, NULL, 985, 76, 'departemental');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (79, NULL, 2020, NULL, 'national');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (76, NULL, 1945, NULL, 'national');
+INSERT INTO public.direction (id, region_id, user_id, department_id, type) VALUES (28, 84, 989, NULL, 'regional');
+SELECT pg_catalog.setval('public.direction_id_seq', 100, true);
