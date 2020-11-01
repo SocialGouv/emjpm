@@ -4,6 +4,9 @@ language: minimal
 git:
   depth: 5
 
+services:
+  - postgresql
+
 addons:
   postgresql: "10"
   apt:
