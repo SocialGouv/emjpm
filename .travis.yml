@@ -4,6 +4,13 @@ language: minimal
 git:
   depth: 5
 
+addons:
+  postgresql: "10"
+  apt:
+    packages:
+    - postgresql-client-10
+
+
 #
 
 _environments:
