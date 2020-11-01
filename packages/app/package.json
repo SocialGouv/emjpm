@@ -28,7 +28,7 @@
     "@mdx-js/loader": "^1.6.18",
     "@mdx-js/react": "^1.6.18",
     "@next/bundle-analyzer": "^10.0.0",
-    "@next/mdx": "^9.5.5",
+    "@next/mdx": "^10.0.0",
     "@rebass/forms": "^4.0.6",
     "@sentry/browser": "^5.24.2",
     "@sentry/node": "^5.24.2",
