@@ -4,7 +4,7 @@ import { getDataFromTree } from "react-apollo";
 
 import initApollo from "./init-apollo";
 
-export default (App) => {
+const WithApolloClient = App => {
   return class Apollo extends React.Component {
     static displayName = "withApollo(App)";
     static async getInitialProps(ctx) {
@@ -61,6 +61,8 @@ export default (App) => {
     }
   };
 };
+
+export default WithApolloClient;
 
 function safeStringify(obj) {
   // https://stackoverflow.com/questions/11616630/how-can-i-print-a-circular-structure-in-a-json-like-format
