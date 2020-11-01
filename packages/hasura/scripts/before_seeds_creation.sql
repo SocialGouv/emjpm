@@ -4,6 +4,9 @@
  delete from hdb_catalog.remote_schemas;
  delete from hdb_catalog.event_triggers;
 
+ -- editors
+ truncate editors cascades;
+
 -- commentaires
 truncate commentaires;
 truncate enquete_reponses;
