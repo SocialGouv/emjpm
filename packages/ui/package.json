@@ -36,7 +36,7 @@
     "@rebass/forms": "^4.0.6",
     "prop-types": "15.x",
     "react": "16.x",
-    "react-dom": "16.x",
+    "react-dom": "17.x",
     "rebass": "4.x",
     "styled-components": "4.x",
     "theme-ui": "0.x"
@@ -97,7 +97,7 @@
     "prettier-eslint": "^9.0.2",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.1",
     "rebass": "^4.0.7",
     "rollup": "^2.33.0",
     "rollup-plugin-babel": "^4.4.0",
