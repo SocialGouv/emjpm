@@ -7,23 +7,34 @@ jest.setMock("nodemailer", nodemailerMock);
 process.env.SMTP_FROM = "ne-pas-repondre@emjpm.gouv.fr";
 process.env.APP_URL = "https://emjpm.gouv.fr";
 
-const { knex } = global;
+const { databaseName, knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
+const { seedData } = require("../../database/seed-data");
 
 beforeAll(async () => {
-  await knex.migrate.latest();
-  await knex.seed.run();
+  await seedData(databaseName);
+
+  await knex("editors").insert({
+    name: "editor test",
+    redirect_uris: JSON.stringify(["http://localhost:3001"]),
+    api_token: "api_token",
+  });
 
   const [editor] = await knex("editors");
-  const [ti] = await knex("tis");
-  const [user] = await knex("users");
-  const [mesure] = await knex("mesures");
+  const [ti] = await knex("tis").where({ id: 22 });
+  const [user] = await knex("users").where({ type: "individuel" }).limit(1);
+  const [mandataire] = await knex("mandataires")
+    .where({ user_id: user.id })
+    .limit(1);
+  const [mesure] = await knex("mesures")
+    .where({ status: "en_cours", mandataire_id: mandataire.id })
+    .limit(1);
 
   const loginRes = await request(server).post("/api/auth/login").send({
     username: user.username,
-    password: "johnson123",
+    password: "emjpm2019",
   });
 
   const loginToken = await loginRes.body.token;
@@ -131,7 +142,9 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
       });
-    expect(response.body).toMatchSnapshot();
+    // eslint-disable-next-line no-unused-vars
+    const { id, ...expected } = response.body;
+    expect(expected).toMatchSnapshot();
     expect(response.status).toBe(422);
   });
 
@@ -219,7 +232,9 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
       });
-    expect(response.body).toMatchSnapshot();
+    // eslint-disable-next-line no-unused-vars
+    const { id, ...expected } = response.body;
+    expect(expected).toMatchSnapshot();
     expect(response.status).toBe(422);
   });
 
@@ -271,7 +286,7 @@ describe("POST /api/editors/mesures", () => {
       });
 
     // eslint-disable-next-line no-unused-vars
-    const { created_at, ...expected } = response.body;
+    const { created_at, id, ...expected } = response.body;
     expect(expected).toEqual({
       annee_naissance: 1989,
       antenne_id: null,
@@ -305,7 +320,6 @@ describe("POST /api/editors/mesures", () => {
           ville: "perrigny",
         },
       ],
-      id: 6,
       latitude: null,
       longitude: null,
       numero_dossier: "45656456",
@@ -318,7 +332,7 @@ describe("POST /api/editors/mesures", () => {
         },
       ],
       resultat_revision: null,
-      tribunal_siret: "17590111501251",
+      tribunal_siret: "17750111101763",
     });
     expect(response.status).toBe(201);
   });
@@ -326,7 +340,6 @@ describe("POST /api/editors/mesures", () => {
 
 describe("POST /api/editors/mesures/batch", () => {
   test("it returns 201", async () => {
-    // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
       .post("/api/editors/mesures/batch")
       .set("Accept", "application/json")
@@ -341,7 +354,7 @@ describe("POST /api/editors/mesures/batch", () => {
             date_premier_mesure: "2019-02-14",
             date_nomination: "2019-02-14",
             date_protection_en_cours: "2019-04-18",
-            tribunal_siret: "17590111501251",
+            tribunal_siret: "17750111101763",
             etats: [
               {
                 date_changement_etat: "2020-09-19",
@@ -370,7 +383,7 @@ describe("POST /api/editors/mesures/batch", () => {
             date_premier_mesure: "2014-01-01",
             date_nomination: "2018-02-01",
             date_protection_en_cours: "2020-05-12",
-            tribunal_siret: "17590111501251",
+            tribunal_siret: "17750111101763",
             etats: [
               {
                 date_changement_etat: "2020-05-12",
@@ -426,7 +439,7 @@ describe("POST /api/editors/mesures/batch", () => {
     const { mesures } = response.body;
     const expected = mesures.map((mesure) => {
       // eslint-disable-next-line no-unused-vars
-      const { created_at, ...expected } = mesure;
+      const { created_at, id, ...expected } = mesure;
       return expected;
     });
     expect({ mesures: expected }).toMatchSnapshot();
@@ -435,7 +448,6 @@ describe("POST /api/editors/mesures/batch", () => {
 
 describe("DELETE /api/editors/mesures/:id", () => {
   test("it returns 201", async () => {
-    // TODO(plaunay): move payload to proper fixture
     const response = await request(server)
       .delete(`/api/editors/mesures/${global.mesure.id}`)
       .set("Accept", "application/json")
