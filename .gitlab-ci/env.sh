@@ -67,7 +67,6 @@ export HASURA_SRV_HOST="hasura-nodejs";
 export API_URL="https://${API_HOST}"
 export FRONTEND_URL="https://${FRONTEND_HOST}"
 export HASURA_URL="https://${HASURA_HOST}"
-export METABASE_URL="https://${METABASE_HOST}"
 
 #
 
@@ -96,8 +95,6 @@ printenv | grep \
   -e FRONTEND_URL \
   -e HASURA_HOST \
   -e HASURA_SRV_HOST \
-  -e METABASE_HOST \
-  -e METABASE_URL \
   \
   -e CONTEXT \
   -e PORT \
