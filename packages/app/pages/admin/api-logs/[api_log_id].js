@@ -13,7 +13,7 @@ const ApiLogsViewPage = (props) => {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/admin/services">
+        <Link href="/admin/api-logs">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
