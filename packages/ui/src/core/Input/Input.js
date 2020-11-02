@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Box } from 'rebass';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Box } from "rebass";
 
-import { InputStyle, InputWrapperStyle, LabelStyle } from './Style';
+import { InputStyle, InputWrapperStyle, LabelStyle } from "./Style";
 
 const InputWrapper = (props) => {
   return <Box as="div" sx={InputWrapperStyle(props)} {...props} />;
@@ -21,22 +21,43 @@ const InputLabel = (props) => {
   );
 };
 
-
 function formatFormInput(value) {
   return value === null || value === undefined ? "" : value;
 }
 
 const Input = (props) => {
-  const { onChange, placeholder, isValid, hasError, name, required, size, value, type, onBlur, readOnly } = props;
+  const {
+    onChange,
+    placeholder,
+    isValid,
+    hasError,
+    name,
+    required,
+    size,
+    value,
+    type,
+    onBlur,
+    readOnly,
+  } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
-  const isActive = isFocus || hasValue || (value !== null && value !== undefined);
+  const isActive =
+    isFocus || hasValue || (value !== null && value !== undefined);
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
-      {placeholder && <InputLabel size={size} aria-label={name} htmlFor={name} isActive={isActive} required={required} readOnly={readOnly}>
-        {placeholder}
-      </InputLabel>}
+      {placeholder && (
+        <InputLabel
+          size={size}
+          aria-label={name}
+          htmlFor={name}
+          isActive={isActive}
+          required={required}
+          readOnly={readOnly}
+        >
+          {placeholder}
+        </InputLabel>
+      )}
       <InputElement
         size={size}
         type={type}
@@ -62,7 +83,6 @@ const Input = (props) => {
     </InputWrapper>
   );
 };
-
 
 InputLabel.propTypes = {
   children: PropTypes.node.isRequired,
@@ -92,7 +112,7 @@ Input.defaultProps = {
   },
   readOnly: false,
   required: false,
-  size: 'large',
+  size: "large",
   title: null,
   type: null,
   value: null,

@@ -1,53 +1,53 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Button } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Button } from "rebass";
 
-import { Card } from '../../core';
+import { Card } from "../../core";
 
 const menuItemStyle = {
-  '&:hover': {
-    bg: 'whiteGray',
+  "&:hover": {
+    bg: "whiteGray",
   },
-  color: 'black',
-  display: 'block',
+  color: "black",
+  display: "block",
   fontSize: 1,
   px: 3,
   py: 2,
-  textAlign: 'right',
+  textAlign: "right",
 };
 
 const menuStyle = {
-  minWidth: '180px',
-  position: 'absolute',
+  minWidth: "180px",
+  position: "absolute",
   right: 1,
-  top: '45px',
+  top: "45px",
 };
 
 const buttonStyle = {
-  '&:hover': {
-    bg: 'whiteGray',
+  "&:hover": {
+    bg: "whiteGray",
   },
-  background: 'none',
-  border: 'none',
+  background: "none",
+  border: "none",
   borderRadius: 0,
-  color: 'black',
-  display: 'block',
+  color: "black",
+  display: "block",
   fontSize: 1,
-  fontWeight: 'body',
-  outline: 'none',
+  fontWeight: "body",
+  outline: "none",
   p: 0,
   px: 3,
   py: 2,
-  textAlign: 'right',
-  width: '100%',
+  textAlign: "right",
+  width: "100%",
 };
 
 const separatorStyle = {
-  bg: 'whiteGray',
-  height: '1px',
-  mb: '3px',
-  mt: '3px',
-  width: '100%',
+  bg: "whiteGray",
+  height: "1px",
+  mb: "3px",
+  mt: "3px",
+  width: "100%",
 };
 
 const DropDownMenu = (props) => {
@@ -80,7 +80,7 @@ DropDownMenu.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       url: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
 };
 

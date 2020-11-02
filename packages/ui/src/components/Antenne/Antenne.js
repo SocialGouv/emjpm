@@ -1,19 +1,31 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Flex } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex } from "rebass";
 
-import { Card, Heading4, Text } from '../../core';
-import { antenneTitleStyle, availabilityIndicatorStyle, mesureStyle, numberContainer, numberStyle } from './style';
+import { Card, Heading4, Text } from "../../core";
+import {
+  antenneTitleStyle,
+  availabilityIndicatorStyle,
+  mesureStyle,
+  numberContainer,
+  numberStyle,
+} from "./style";
 
 const Antenne = (props) => {
   const { Link, linkText, href, sx, antenne, hasButton } = props;
   return (
     <Card sx={sx}>
       <Heading4 sx={antenneTitleStyle}>{antenne.name}</Heading4>
-      <Flex sx={{ alignItems: 'center', mb: '3' }}>
-        <Box sx={availabilityIndicatorStyle(antenne.mesures_max <= antenne.mesures_in_progress)} />
-        <Text sx={{ color: 'black', fontSize: '1', fontWeight: 'semibold' }}>
-          {antenne.mesures_max <= antenne.mesures_in_progress ? 'non disponible' : 'disponible'}
+      <Flex sx={{ alignItems: "center", mb: "3" }}>
+        <Box
+          sx={availabilityIndicatorStyle(
+            antenne.mesures_max <= antenne.mesures_in_progress
+          )}
+        />
+        <Text sx={{ color: "black", fontSize: "1", fontWeight: "semibold" }}>
+          {antenne.mesures_max <= antenne.mesures_in_progress
+            ? "non disponible"
+            : "disponible"}
         </Text>
       </Flex>
       <Flex sx={numberContainer}>

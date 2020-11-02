@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box } from "rebass";
 
-import { fieldStyle } from './style';
+import { fieldStyle } from "./style";
 
 const Field = (props) => {
   const { children, ...parentProps } = props;

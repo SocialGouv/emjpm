@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import ReactAsyncSelect from 'react-select/async';
+import PropTypes from "prop-types";
+import React from "react";
+import ReactAsyncSelect from "react-select/async";
 
-import { getStyle } from './style';
+import { getStyle } from "./style";
 
 export const AsyncSelect = (props) => {
   return <ReactAsyncSelect styles={getStyle(props)} {...props} />;
@@ -13,5 +13,5 @@ AsyncSelect.propTypes = {
 };
 
 AsyncSelect.defaultProps = {
-  size: 'large',
+  size: "large",
 };

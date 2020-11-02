@@ -1,17 +1,30 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Box } from 'rebass';
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Box } from "rebass";
 
-import { labelStyle, textareaStyle } from './style';
+import { labelStyle, textareaStyle } from "./style";
 
 const Textarea = (props) => {
   const [isFocused, setFocus] = useState(false);
 
-  const { id, error, onChange, onFocus, onBlur, label, placeholder, value } = props;
+  const {
+    id,
+    error,
+    onChange,
+    onFocus,
+    onBlur,
+    label,
+    placeholder,
+    value,
+  } = props;
 
   return (
     <Box mb="2">
-      <Box as="label" htmlFor={id} sx={(theme) => labelStyle({ ...props, isFocused }, theme)}>
+      <Box
+        as="label"
+        htmlFor={id}
+        sx={(theme) => labelStyle({ ...props, isFocused }, theme)}
+      >
         {label}
       </Box>
       <Box
@@ -19,7 +32,7 @@ const Textarea = (props) => {
         id={id}
         alignItems="center"
         py="2"
-        borderColor={error ? 'error' : 'inherit'}
+        borderColor={error ? "error" : "inherit"}
         onChange={onChange}
         onFocus={(event) => {
           onFocus(event);
@@ -53,7 +66,7 @@ Textarea.defaultProps = {
   onBlur: () => {},
   onChange: () => {},
   onFocus: () => {},
-  placeholder: '',
+  placeholder: "",
 };
 
 export { Textarea };

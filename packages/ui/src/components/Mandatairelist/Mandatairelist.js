@@ -1,10 +1,16 @@
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
 
-import { Mandataire } from './Mandataire';
+import { Mandataire } from "./Mandataire";
 
 const Mandatairelist = (props) => {
-  const { selectCurrentMandataire, mandataires, isMagistrat, isMagistratMap, ChooseComponent } = props;
+  const {
+    selectCurrentMandataire,
+    mandataires,
+    isMagistrat,
+    isMagistratMap,
+    ChooseComponent,
+  } = props;
   return (
     <Fragment>
       {mandataires.map((mandataire) => {
@@ -60,7 +66,7 @@ Mandatairelist.propTypes = {
       telephone: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       ville: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   selectCurrentMandataire: PropTypes.func,
 };

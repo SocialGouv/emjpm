@@ -26,24 +26,24 @@ const getBorderColorFromProps = (props, theme) => {
 
 export const labelStyle = (props, theme) => ({
   color: getColorFromProps(props, theme),
-  display: 'block',
+  display: "block",
   fontSize: 12,
   mb: 8,
 });
 
 export const textareaStyle = (props, theme) => ({
-  bg: 'transparent',
+  bg: "transparent",
   border: `1px solid ${getBorderColorFromProps(props, theme)}`,
-  borderRadius: 'default',
-  boxShadow: 'none',
-  color: 'text',
+  borderRadius: "default",
+  boxShadow: "none",
+  color: "text",
   fontSize: 1,
-  fontWeight: '500',
+  fontWeight: "500",
   height: 32 * LINE_COUNT,
-  outline: 'none',
+  outline: "none",
   pb: 1,
-  position: 'relative',
+  position: "relative",
   px: 2,
-  transition: '150ms ease-in-out all',
-  width: '100%',
+  transition: "150ms ease-in-out all",
+  width: "100%",
 });

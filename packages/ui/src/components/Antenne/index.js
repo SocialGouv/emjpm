@@ -1,3 +1,3 @@
-import { Antenne } from './Antenne';
+import { Antenne } from "./Antenne";
 
 export { Antenne };
