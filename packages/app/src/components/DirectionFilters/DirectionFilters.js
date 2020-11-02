@@ -3,7 +3,10 @@ import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { departementToOptions, regionsToOptions } from "../../util/option/OptionUtil";
+import {
+  departementToOptions,
+  regionsToOptions,
+} from "../../util/option/OptionUtil";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { GET_REGIONS } from "./queries";
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
@@ -19,7 +22,9 @@ export const DirectionFilters = (props) => {
       regionsData && regionsData.regions
         ? regionsData.regions
             .filter((r) =>
-              filters.region && filters.region.value ? r.id === filters.region.value : true
+              filters.region && filters.region.value
+                ? r.id === filters.region.value
+                : true
             )
             .reduce((acc, item) => {
               item.departements.forEach((departement) => {
@@ -29,7 +34,7 @@ export const DirectionFilters = (props) => {
             }, [])
         : [];
 
-    return { regions: regionsData ? regionsData.regions : [], departements };
+    return { departements, regions: regionsData ? regionsData.regions : [] };
   }, [regionsData, filters]);
 
   if (loading) {
@@ -52,7 +57,9 @@ export const DirectionFilters = (props) => {
                   value={filters.nom}
                   spellCheck="false"
                   autoComplete="false"
-                  onChange={(event) => onFilterChange({ nom: event.target.value })}
+                  onChange={(event) =>
+                    onFilterChange({ nom: event.target.value })
+                  }
                   name="nom"
                   size="small"
                   placeholder="nom"
@@ -66,7 +73,7 @@ export const DirectionFilters = (props) => {
                 placeholder={"region"}
                 value={filters.region}
                 onChange={(selectedOption) =>
-                  onFilterChange({ region: selectedOption, departement: null })
+                  onFilterChange({ departement: null, region: selectedOption })
                 }
               />
             </Box>
@@ -76,7 +83,9 @@ export const DirectionFilters = (props) => {
                 options={departementToOptions(departements)}
                 placeholder={"departement"}
                 value={filters.departement}
-                onChange={(selectedOption) => onFilterChange({ departement: selectedOption })}
+                onChange={(selectedOption) =>
+                  onFilterChange({ departement: selectedOption })
+                }
               />
             </Box>
           </Flex>
@@ -88,7 +97,9 @@ export const DirectionFilters = (props) => {
                 value={filters.startDate}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={(event) => onFilterChange({ startDate: event.target.value })}
+                onChange={(event) =>
+                  onFilterChange({ startDate: event.target.value })
+                }
                 name="startDate"
                 size="small"
                 type="date"
@@ -100,7 +111,9 @@ export const DirectionFilters = (props) => {
                 value={filters.endDate}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={(event) => onFilterChange({ endDate: event.target.value })}
+                onChange={(event) =>
+                  onFilterChange({ endDate: event.target.value })
+                }
                 name="endDate"
                 size="small"
                 type="date"

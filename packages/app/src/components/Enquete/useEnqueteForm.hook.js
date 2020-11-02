@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { useCallback, useEffect, useMemo } from "react";
+
 function isEmptyObject(obj) {
   return Object.keys(obj).length === 0 && obj.constructor === Object;
 }
@@ -28,6 +29,8 @@ export function useEnqueteForm({
   }, [data, dataToForm]);
 
   const formik = useFormik({
+    initialValues,
+    onChange: () => {},
     onSubmit: async (values, { setSubmitting }) => {
       values = formToData ? formToData(values) : values;
       await onSubmit(values);
@@ -35,8 +38,6 @@ export function useEnqueteForm({
       setSubmitting(false);
     },
     validationSchema,
-    initialValues,
-    onChange: () => {},
   });
 
   const {
@@ -52,15 +53,15 @@ export function useEnqueteForm({
   } = formik
     ? formik
     : {
-        submitForm: undefined,
-        handleChange: undefined,
-        handleBlur: undefined,
-        values: undefined,
-        errors: undefined,
-        setValues: undefined,
-        setFieldValue: undefined,
-        isValid: undefined,
         dirty: undefined,
+        errors: undefined,
+        handleBlur: undefined,
+        handleChange: undefined,
+        isValid: undefined,
+        setFieldValue: undefined,
+        setValues: undefined,
+        submitForm: undefined,
+        values: undefined,
       };
 
   const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
@@ -105,27 +106,33 @@ export function useEnqueteForm({
   const submit = useCallback(
     ({ action }) => {
       if (action === "click-previous") {
-        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "previous" });
+        dispatchEnqueteContextEvent({
+          type: "submit-and-navigate",
+          value: "previous",
+        });
       } else {
-        dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: "next" });
+        dispatchEnqueteContextEvent({
+          type: "submit-and-navigate",
+          value: "next",
+        });
       }
     },
     [dispatchEnqueteContextEvent]
   );
 
   return {
-    formik,
     enqueteContext,
-    validationSchema,
-    submitForm,
-    handleChange,
-    handleBlur,
-    values,
     errors,
-    setValues,
+    formik,
+    handleBlur,
+    handleChange,
+    readOnly,
     setFieldValue,
+    setValues,
     showError,
     submit,
-    readOnly,
+    submitForm,
+    validationSchema,
+    values,
   };
 }

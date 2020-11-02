@@ -6,8 +6,8 @@ export const titleStyle = {
 
 export const subtitle = {
   color: "#C1C1C1",
-  fontWeight: "500",
   fontSize: "12px",
+  fontWeight: "500",
   lineHeight: "1.4",
 };
 
@@ -16,16 +16,16 @@ export const content = {
   fontSize: 1,
   fontWeight: "600",
   lineHeight: "1.4",
-  mt: "1px",
   mb: 1,
+  mt: "1px",
 };
 
 export const statusBox = {
-  padding: "4px 10px",
-  margin: "auto",
-  display: "inline-block",
+  backgroundColor: "#2DA0FB",
   borderRadius: "2px",
   color: "#ffffff",
+  display: "inline-block",
   fontWeight: "bold",
-  backgroundColor: "#2DA0FB",
+  margin: "auto",
+  padding: "4px 10px",
 };

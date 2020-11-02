@@ -14,7 +14,9 @@ import { descriptionStyle, labelStyle } from "./style";
 
 const RowItem = ({ item }) => {
   const { id, name, started_at, ended_at, answers } = item;
-  const [removeSatisfactionCampaign] = useMutation(REMOVE_SATISFACTION_CAMPAIGN);
+  const [removeSatisfactionCampaign] = useMutation(
+    REMOVE_SATISFACTION_CAMPAIGN
+  );
 
   const removeSatisfactionCampaignFromList = async (id) => {
     try {
@@ -44,11 +46,15 @@ const RowItem = ({ item }) => {
           </Flex>
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>Date de début</Text>
-            <Text sx={descriptionStyle}>{format(new Date(started_at), "dd/MM/yyyy")}</Text>
+            <Text sx={descriptionStyle}>
+              {format(new Date(started_at), "dd/MM/yyyy")}
+            </Text>
           </Flex>
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>Date de fin</Text>
-            <Text sx={descriptionStyle}>{format(new Date(ended_at), "dd/MM/yyyy")}</Text>
+            <Text sx={descriptionStyle}>
+              {format(new Date(ended_at), "dd/MM/yyyy")}
+            </Text>
           </Flex>
           <Flex width="100px" flexDirection="column">
             <Text sx={labelStyle}>Réponses</Text>
@@ -91,7 +97,9 @@ const AdminSatisfactionCampaigns = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+        debouncedSearchText && debouncedSearchText !== ""
+          ? `${debouncedSearchText}%`
+          : null,
     },
   });
 

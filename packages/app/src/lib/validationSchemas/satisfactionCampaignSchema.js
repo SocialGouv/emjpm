@@ -7,7 +7,10 @@ const satisfactionCampaignSchema = yup.object().shape({
       "startedAt",
       (startDate, schema) =>
         startDate &&
-        schema.min(startDate, "La date de fin doit être postérieure à la date de début")
+        schema.min(
+          startDate,
+          "La date de fin doit être postérieure à la date de début"
+        )
     )
     .required(),
   name: yup.string().required(),

@@ -9,7 +9,10 @@ const LayoutPublic = (props) => {
 
   return (
     <Fragment>
-      <Box sx={{ height: "66px", position: "relative", "z-index": "1000" }} bg="cardPrimary">
+      <Box
+        sx={{ height: "66px", position: "relative", "z-index": "1000" }}
+        bg="cardPrimary"
+      >
         <Header isDisconnected />
       </Box>
       {children}

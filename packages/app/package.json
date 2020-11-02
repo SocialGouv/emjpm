@@ -11,7 +11,7 @@
     "test": "jest",
     "lint:pre-commit": "npm run lint:fix",
     "lint": "eslint pages src",
-    "lint:fix": "eslint --cache pages src --fix",
+    "lint:fix": "yarn lint --fix --cache",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",

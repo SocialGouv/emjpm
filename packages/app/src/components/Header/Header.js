@@ -34,8 +34,8 @@ const Header = (props) => {
 };
 
 Header.defaultProps = {
-  isDisconnected: false,
   dropDownLinks: [],
+  isDisconnected: false,
 };
 
 Header.propTypes = {

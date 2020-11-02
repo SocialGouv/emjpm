@@ -10,7 +10,10 @@ export const DELETE_SERVICE_MEMBER = gql`
 
 export const UPDATE_SERVICE_MEMBER_IS_ADMIN = gql`
   mutation updateServiceMemberIsAdmin($id: Int!, $is_admin: Boolean!) {
-    update_service_members(where: { id: { _eq: $id } }, _set: { is_admin: $is_admin }) {
+    update_service_members(
+      where: { id: { _eq: $id } }
+      _set: { is_admin: $is_admin }
+    ) {
       affected_rows
     }
   }

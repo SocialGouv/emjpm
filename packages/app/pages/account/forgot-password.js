@@ -8,7 +8,13 @@ import { withAuthSync } from "../../src/util/auth";
 const ForgotPasswordPage = () => {
   return (
     <LayoutPublic>
-      <FlexWrapper mt={6} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+      <FlexWrapper
+        mt={6}
+        px="1"
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+      >
         <Heading1>Demander un nouveau mot de passe</Heading1>
         <ForgotPassword mt="3" />
       </FlexWrapper>

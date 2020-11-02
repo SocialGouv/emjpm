@@ -23,7 +23,9 @@ import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
 const SignupMagistratForm = ({ tiDatas }) => {
-  const { user, magistrat, setMagistrat, validateStepOne } = useContext(SignupContext);
+  const { user, magistrat, setMagistrat, validateStepOne } = useContext(
+    SignupContext
+  );
 
   const tiOptions = tiDatas.map((ti) => ({
     label: ti.etablissement,
@@ -31,6 +33,10 @@ const SignupMagistratForm = ({ tiDatas }) => {
   }));
 
   const formik = useFormik({
+    initialValues: {
+      cabinet: magistrat ? magistrat.cabinet : "",
+      ti: magistrat ? magistrat.ti : "",
+    },
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         magistrat: {
@@ -51,10 +57,6 @@ const SignupMagistratForm = ({ tiDatas }) => {
       });
     },
     validationSchema: signupMagistratSchema,
-    initialValues: {
-      cabinet: magistrat ? magistrat.cabinet : "",
-      ti: magistrat ? magistrat.ti : "",
-    },
   });
 
   return (
@@ -83,7 +85,9 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   onChange={(option) => formik.setFieldValue("ti", option)}
                   options={tiOptions}
                 />
-                {formik.touched.ti && <InlineError message={formik.errors.ti} fieldId="ti" />}
+                {formik.touched.ti && (
+                  <InlineError message={formik.errors.ti} fieldId="ti" />
+                )}
               </Field>
               <Field>
                 <Input
@@ -95,7 +99,10 @@ const SignupMagistratForm = ({ tiDatas }) => {
                   onChange={formik.handleChange}
                 />
                 {formik.touched.cabinet && (
-                  <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
+                  <InlineError
+                    message={formik.errors.cabinet}
+                    fieldId="cabinet"
+                  />
                 )}
               </Field>
               <Flex justifyContent="flex-end">
@@ -137,7 +144,10 @@ const SignupMagistratForm = ({ tiDatas }) => {
 };
 
 const SignupMagistrat = (props) => (
-  <SignupDatas {...props} Component={(props) => <SignupMagistratForm {...props} />} />
+  <SignupDatas
+    {...props}
+    Component={(props) => <SignupMagistratForm {...props} />}
+  />
 );
 
 export { SignupMagistrat };

@@ -16,73 +16,76 @@ const RowItem = ({ item }) => {
       <Flex
         key={id}
         sx={{
-          p: 2,
           borderBottom: "1px solid",
           borderColor: "whiteGray",
+          p: 2,
         }}
       >
         <Box
           sx={{
-            width: 120,
             mr: 2,
+            width: 120,
           }}
         >
           {format(new Date(created_at), "dd/MM/yyyy hh:mm")}
         </Box>
         <Box
           sx={{
-            width: 80,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
             BoxOverflow: "ellipsis",
             mr: 2,
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            width: 80,
           }}
         >
           {request_method}
         </Box>
         <Box
           sx={{
-            width: 200,
-            whiteSpace: "nowrap",
+            mr: 2,
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2,
+            whiteSpace: "nowrap",
+            width: 200,
           }}
         >
           {request_url}
         </Box>
         <Box
           sx={{
-            width: 150,
-            whiteSpace: "nowrap",
+            mr: 2,
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2,
+            whiteSpace: "nowrap",
+            width: 150,
           }}
         >
           {token}
         </Box>
         <Box
           sx={{
-            width: 200,
-            whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            width: 200,
           }}
         >
           {JSON.stringify(response, null, "\t")}
         </Box>
         <Flex
           sx={{
-            width: 200,
-            whiteSpace: "nowrap",
+            justifyContent: "flex-end",
+            margin: "auto",
             overflow: "hidden",
             textOverflow: "ellipsis",
-            margin: "auto",
-            justifyContent: "flex-end",
+            whiteSpace: "nowrap",
+            width: 200,
           }}
         >
-          <Link href={`/admin/api-logs/[api_log_id]`} as={`/admin/api-logs/${id}`}>
+          <Link
+            href={`/admin/api-logs/[api_log_id]`}
+            as={`/admin/api-logs/${id}`}
+          >
             <a>
               <Button>Voir</Button>
             </a>
@@ -139,21 +142,26 @@ const AdminApiLogs = () => {
     <Card>
       <Flex alignItems="center" mt="2" mb="4">
         <Heading4>API Logs</Heading4>
-        <Flex m="auto" alignItems="center" justifyContent="flex-end" sx={{ flexGrow: 1 }}>
+        <Flex
+          m="auto"
+          alignItems="center"
+          justifyContent="flex-end"
+          sx={{ flexGrow: 1 }}
+        >
           {!loading || <Spinner />}
           <Box
             as="input"
             placeholder="Rechercher..."
             sx={{
               "&:focus": {
-                outline: "none",
                 borderColor: "textTertiary",
+                outline: "none",
               },
-              width: 300,
               border: "1px solid",
               borderColor: "whiteGray",
               borderRadius: 4,
               p: 2,
+              width: 300,
             }}
             onChange={handleSearchChange}
             value={searchQuery}
@@ -162,61 +170,61 @@ const AdminApiLogs = () => {
       </Flex>
       <Flex
         sx={{
-          mb: 2,
-          p: 2,
-          borderBottom: "1px solid whiteGray",
           bg: "muted",
+          borderBottom: "1px solid whiteGray",
           color: "mediumGray",
           fontWeight: "bold",
+          mb: 2,
+          p: 2,
         }}
       >
         <Box
           sx={{
-            width: 120,
             mr: 2,
+            width: 120,
           }}
         >
           DATE
         </Box>
         <Box
           sx={{
-            width: 80,
-            whiteSpace: "nowrap",
-            overflow: "hidden",
             BoxOverflow: "ellipsis",
             mr: 2,
+            overflow: "hidden",
+            whiteSpace: "nowrap",
+            width: 80,
           }}
         >
           METHOD
         </Box>
         <Box
           sx={{
-            width: 200,
-            whiteSpace: "nowrap",
+            mr: 2,
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2,
+            whiteSpace: "nowrap",
+            width: 200,
           }}
         >
           URL
         </Box>
         <Box
           sx={{
-            width: 150,
-            whiteSpace: "nowrap",
+            mr: 2,
             overflow: "hidden",
             textOverflow: "ellipsis",
-            mr: 2,
+            whiteSpace: "nowrap",
+            width: 150,
           }}
         >
           TOKEN
         </Box>
         <Box
           sx={{
-            width: 200,
-            whiteSpace: "nowrap",
             overflow: "hidden",
             textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            width: 200,
           }}
         >
           RESPONSE

@@ -5,7 +5,9 @@ const signupSchema = yup.object().shape({
     .string()
     .required()
     .label("Confirmation du mot de passe")
-    .test("passwords-match", "Les mots de passe ne sont pas égaux", function (value) {
+    .test("passwords-match", "Les mots de passe ne sont pas égaux", function (
+      value
+    ) {
       return this.parent.password === value;
     }),
   email: yup
@@ -21,7 +23,8 @@ const signupSchema = yup.object().shape({
     .matches(
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
       {
-        message: "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale",
+        message:
+          "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale",
       }
     ),
   prenom: yup.string().required(),

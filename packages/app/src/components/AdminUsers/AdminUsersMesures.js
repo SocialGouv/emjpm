@@ -39,20 +39,27 @@ const AdminUsersMesures = (props) => {
     },
   });
 
-  const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES);
-  const [calculateMandataireMesures, { loading: calculateMandataireMesuresLoading }] = useMutation(
-    CALCULATE_MANDATAIRE_MESURES
+  const [deleteMesures, { loading: mutationLoading }] = useMutation(
+    DELETE_MESURES
   );
+  const [
+    calculateMandataireMesures,
+    { loading: calculateMandataireMesuresLoading },
+  ] = useMutation(CALCULATE_MANDATAIRE_MESURES);
 
   const allMesures = data ? data.mesures : [];
 
-  const { inProgressMesuresCount, awaitingMesuresCount, extinctionMesuresCount } = useMemo(
-    () => buildMesuresCounts(allMesures),
-    [allMesures]
-  );
+  const {
+    inProgressMesuresCount,
+    awaitingMesuresCount,
+    extinctionMesuresCount,
+  } = useMemo(() => buildMesuresCounts(allMesures), [allMesures]);
 
   const filteredMesures = useMemo(
-    () => allMesures.filter((mesure) => mesure.status === selectedMesureStatus.value),
+    () =>
+      allMesures.filter(
+        (mesure) => mesure.status === selectedMesureStatus.value
+      ),
     [allMesures, selectedMesureStatus.value]
   );
 
@@ -88,9 +95,9 @@ const AdminUsersMesures = (props) => {
                 },
               ],
               variables: {
-                userId,
-                inProgressMesuresCount,
                 awaitingMesuresCount,
+                inProgressMesuresCount,
+                userId,
               },
             })
           }
@@ -106,7 +113,9 @@ const AdminUsersMesures = (props) => {
         buttonText="Supprimer"
         isLoading={mutationLoading}
         selectedItemsCount={Object.keys(selectedRows).length}
-        buttonEnable={filteredMesures.length !== 0 && Object.keys(selectedRows).length > 0}
+        buttonEnable={
+          filteredMesures.length !== 0 && Object.keys(selectedRows).length > 0
+        }
         title={
           mandataire
             ? `Mesures (${mandataire.mesures_en_cours} en cours • ${mandataire.mesures_en_attente} en attente • ${extinctionMesuresCount} éteintes)`
@@ -142,14 +151,6 @@ const AdminUsersMesures = (props) => {
 function buildTableColumns() {
   return [
     {
-      id: "selection",
-      Header: ({ getToggleAllRowsSelectedProps }) => {
-        return (
-          <Label>
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          </Label>
-        );
-      },
       Cell: ({ row }) => {
         const { checked, onChange } = row.getToggleRowSelectedProps();
         return (
@@ -158,6 +159,14 @@ function buildTableColumns() {
           </Label>
         );
       },
+      Header: ({ getToggleAllRowsSelectedProps }) => {
+        return (
+          <Label>
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          </Label>
+        );
+      },
+      id: "selection",
     },
     {
       Header: "n° RG",
@@ -210,9 +219,9 @@ function buildMesuresCounts(allMesures) {
       return acc;
     },
     {
-      inProgressMesuresCount: 0,
-      extinctionMesuresCount: 0,
       awaitingMesuresCount: 0,
+      extinctionMesuresCount: 0,
+      inProgressMesuresCount: 0,
     }
   );
 }

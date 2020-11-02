@@ -17,9 +17,12 @@ const MandataireEnquetePage = ({ enqueteId }) => {
   const { id: userId } = useContext(UserContext);
   const currentStep = useCurrentStepFromUrl();
 
-  const { data, loading, error } = useSubscription(ENQUETE_WITH_REPONSE_STATUS, {
-    variables: { enqueteId, userId },
-  });
+  const { data, loading, error } = useSubscription(
+    ENQUETE_WITH_REPONSE_STATUS,
+    {
+      variables: { enqueteId, userId },
+    }
+  );
 
   const { enquete, enqueteReponse } = useMemo(() => {
     const enquete = data ? data.enquetes_by_pk : {};
@@ -27,7 +30,10 @@ const MandataireEnquetePage = ({ enqueteId }) => {
     return { enquete, enqueteReponse };
   }, [data]);
 
-  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [enquete, loading]);
+  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [
+    enquete,
+    loading,
+  ]);
 
   async function navigateToStep({ step, substep }) {
     if (step === undefined || substep === undefined) {

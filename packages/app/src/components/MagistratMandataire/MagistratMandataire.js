@@ -19,7 +19,10 @@ import {
 import { formatGestionnaire } from "./utils";
 
 const MagistratMandataireMap = dynamic(
-  () => import("../MagistratMandataireMap").then((mod) => mod.MagistratMandataireMap),
+  () =>
+    import("../MagistratMandataireMap").then(
+      (mod) => mod.MagistratMandataireMap
+    ),
   { ssr: false }
 );
 
@@ -99,18 +102,28 @@ export const MagistratMandataire = (props) => {
           <Box width="50%">
             {mandataireId && (
               <Box>
-                <Text sx={MagistratTitleMandataireStyle}>Nom du mandataire</Text>
-                <Text sx={MagistratContentMandataireStyle}>{`${prenom} ${nom}`}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Nom du mandataire
+                </Text>
+                <Text
+                  sx={MagistratContentMandataireStyle}
+                >{`${prenom} ${nom}`}</Text>
               </Box>
             )}
             {serviceId && (
               <Box>
-                <Text sx={MagistratTitleMandataireStyle}>{`Nom de l'association`}</Text>
-                <Text sx={MagistratContentMandataireStyle}>{etablissement}</Text>
+                <Text
+                  sx={MagistratTitleMandataireStyle}
+                >{`Nom de l'association`}</Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {etablissement}
+                </Text>
               </Box>
             )}
             <Box>
-              <Text sx={MagistratTitleMandataireStyle}>{`Adresse d’activité`}</Text>
+              <Text
+                sx={MagistratTitleMandataireStyle}
+              >{`Adresse d’activité`}</Text>
               <Text
                 sx={MagistratContentMandataireStyle}
               >{`${adresse} ${codePostal} ${ville}`}</Text>
@@ -122,7 +135,9 @@ export const MagistratMandataire = (props) => {
               </Text>
             </Box>
             <Box mb={4}>
-              <Text sx={MagistratTitleMandataireStyle}>Tribunaux d’instance</Text>
+              <Text sx={MagistratTitleMandataireStyle}>
+                Tribunaux d’instance
+              </Text>
               {tis.map((ti) => {
                 return (
                   <Text key={ti.tis.id} sx={MagistratTribunal}>
@@ -149,20 +164,28 @@ export const MagistratMandataire = (props) => {
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text sx={MagistratContentMandataireStyle}>{currentAvailability}</Text>
+              <Text sx={MagistratContentMandataireStyle}>
+                {currentAvailability}
+              </Text>
             </Box>
             <Box>
-              <Text sx={MagistratTitleMandataireStyle}>En cours / souhaitée</Text>
+              <Text sx={MagistratTitleMandataireStyle}>
+                En cours / souhaitée
+              </Text>
               <Text sx={MagistratContentMandataireStyle}>
                 {mesuresInProgress} / {dispoMax}
               </Text>
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
-              <Text sx={MagistratContentMandataireStyle}>{mesuresAwaiting}</Text>
+              <Text sx={MagistratContentMandataireStyle}>
+                {mesuresAwaiting}
+              </Text>
             </Box>
             <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Observations sur le mandataire</Text>
+              <Text sx={MagistratTitleMandataireStyle}>
+                Observations sur le mandataire
+              </Text>
               <MagistratMandataireComments
                 tiId={tiId}
                 serviceId={serviceId}
@@ -172,7 +195,9 @@ export const MagistratMandataire = (props) => {
           </Box>
         </Flex>
       </Flex>
-      <Box>{serviceId && <MagistratServiceAntennes serviceId={serviceId} />}</Box>
+      <Box>
+        {serviceId && <MagistratServiceAntennes serviceId={serviceId} />}
+      </Box>
       <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
         <MagistratMandataireMap
           longitude={longitude}

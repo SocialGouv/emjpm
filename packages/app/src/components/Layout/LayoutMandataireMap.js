@@ -27,16 +27,20 @@ const LayoutMandataireMap = (props) => {
 
   if (user.enquete && isPayedByParis(user)) {
     links = navigationLinks.concat({
+      as: `/mandataires/enquetes/${user.enquete.id}`,
       title: `Enquête ${user.enquete.annee}`,
       url: "/mandataires/enquetes/[enquete_id]",
-      as: `/mandataires/enquetes/${user.enquete.id}`,
     });
   }
 
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header dropDownLinks={[{ title: "Vos informations", url: "/mandataires/informations" }]} />
+        <Header
+          dropDownLinks={[
+            { title: "Vos informations", url: "/mandataires/informations" },
+          ]}
+        />
         <BoxWrapper>
           <Navigation links={links} />
         </BoxWrapper>

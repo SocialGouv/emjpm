@@ -49,6 +49,14 @@ export const SignupForm = () => {
   const client = useApolloClient();
 
   const formik = useFormik({
+    initialValues: {
+      confirmPassword: user ? user.confirmPassword : "",
+      email: user ? user.email : "",
+      nom: user ? user.nom : "",
+      password: user ? user.password : "",
+      prenom: user ? user.prenom : "",
+      type: user ? TYPE_OPTIONS.find((val) => user.type === val.value) : "",
+    },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       const exists = await isEmailExists(client, values.email);
       if (exists) {
@@ -70,14 +78,6 @@ export const SignupForm = () => {
       setSubmitting(false);
     },
     validationSchema: signupSchema,
-    initialValues: {
-      confirmPassword: user ? user.confirmPassword : "",
-      email: user ? user.email : "",
-      nom: user ? user.nom : "",
-      password: user ? user.password : "",
-      prenom: user ? user.prenom : "",
-      type: user ? TYPE_OPTIONS.find((val) => user.type === val.value) : "",
-    },
   });
 
   return (
@@ -118,7 +118,9 @@ export const SignupForm = () => {
                   onChange={(option) => formik.setFieldValue("type", option)}
                   options={TYPE_OPTIONS}
                 />
-                {formik.touched.type && <InlineError message={formik.errors.type} fieldId="type" />}
+                {formik.touched.type && (
+                  <InlineError message={formik.errors.type} fieldId="type" />
+                )}
               </Field>
               <Field>
                 <Input
@@ -129,7 +131,9 @@ export const SignupForm = () => {
                   onChange={formik.handleChange}
                   placeholder="Nom"
                 />
-                {formik.touched.nom && <InlineError message={formik.errors.nom} fieldId="nom" />}
+                {formik.touched.nom && (
+                  <InlineError message={formik.errors.nom} fieldId="nom" />
+                )}
               </Field>
               <Field>
                 <Input
@@ -141,7 +145,10 @@ export const SignupForm = () => {
                   placeholder="Prénom"
                 />
                 {formik.touched.prenom && (
-                  <InlineError message={formik.errors.prenom} fieldId="prenom" />
+                  <InlineError
+                    message={formik.errors.prenom}
+                    fieldId="prenom"
+                  />
                 )}
               </Field>
               <Field>
@@ -168,7 +175,10 @@ export const SignupForm = () => {
                   placeholder="Mot de passe"
                 />
                 {formik.touched.password && (
-                  <InlineError message={formik.errors.password} fieldId="password" />
+                  <InlineError
+                    message={formik.errors.password}
+                    fieldId="password"
+                  />
                 )}
               </Field>
               <Field>
@@ -177,12 +187,18 @@ export const SignupForm = () => {
                   type="password"
                   id="confirmPassword"
                   name="confirmPassword"
-                  hasError={formik.errors.confirmPassword && formik.touched.confirmPassword}
+                  hasError={
+                    formik.errors.confirmPassword &&
+                    formik.touched.confirmPassword
+                  }
                   onChange={formik.handleChange}
                   placeholder="Confirmation du mot de passe"
                 />
                 {formik.touched.confirmPassword && (
-                  <InlineError message={formik.errors.confirmPassword} fieldId="confirmPassword" />
+                  <InlineError
+                    message={formik.errors.confirmPassword}
+                    fieldId="confirmPassword"
+                  />
                 )}
               </Field>
               <Flex justifyContent="flex-end">

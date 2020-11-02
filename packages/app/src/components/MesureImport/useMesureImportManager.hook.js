@@ -9,10 +9,12 @@ import { MESURES_QUERY } from "../MesureList/queries";
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [file, setFile] = useState();
-  const [uploadFile, { loading: mesuresImportLoading }] = useMutation(UPLOAD_MESURES_EXCEL_FILE);
+  const [uploadFile, { loading: mesuresImportLoading }] = useMutation(
+    UPLOAD_MESURES_EXCEL_FILE
+  );
 
   function importMesureFileWithAntennesMap(antennesMap) {
-    launchImport({ file, antennesMap });
+    launchImport({ antennesMap, file });
   }
 
   function importMesureFile(file) {
@@ -41,22 +43,22 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
           {
             query: MESURES_QUERY,
             variables: {
+              antenne: null,
               limit: 20,
+              natureMesure: null,
               offset: 0,
               searchText: null,
               status: MESURE_PROTECTION_STATUS.en_cours,
-              natureMesure: null,
-              antenne: null,
             },
           },
         ],
         variables: {
+          antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
           content,
+          mandataireUserId,
           name,
           serviceId,
-          antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
           type,
-          mandataireUserId,
         },
       })
         .then(

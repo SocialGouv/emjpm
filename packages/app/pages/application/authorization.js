@@ -40,7 +40,12 @@ const AuthorizationPage = (props) => {
           }}
         >
           {token ? (
-            <Authorize state={state} token={token} editorId={editorId} redirectUrl={redirectUrl} />
+            <Authorize
+              state={state}
+              token={token}
+              editorId={editorId}
+              redirectUrl={redirectUrl}
+            />
           ) : (
             <AuthorizationLogin />
           )}

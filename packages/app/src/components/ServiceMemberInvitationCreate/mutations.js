@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const CREATE_SERVICE_MEMBER_INVITATION = gql`
   mutation createServiceMemberInvitation($email: String!, $service_id: Int!) {
-    insert_service_member_invitations(objects: { email: $email, service_id: $service_id }) {
+    insert_service_member_invitations(
+      objects: { email: $email, service_id: $service_id }
+    ) {
       returning {
         id
         email

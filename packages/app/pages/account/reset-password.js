@@ -9,7 +9,13 @@ const ResetPasswordPage = (props) => {
   const { resetToken } = props;
   return (
     <LayoutPublic>
-      <FlexWrapper mt={6} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+      <FlexWrapper
+        mt={6}
+        px="1"
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+      >
         <Heading1>Modifier votre mot de passe</Heading1>
         <ResetPassword token={resetToken} mt="3" />
       </FlexWrapper>

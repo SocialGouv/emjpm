@@ -8,8 +8,8 @@ const MapPopup = (props) => {
       <Popup
         coordinates={[longitude, latitude]}
         offset={{
-          "bottom-left": [12, -38],
           bottom: [0, -28],
+          "bottom-left": [12, -38],
           "bottom-right": [-12, -38],
         }}
       >

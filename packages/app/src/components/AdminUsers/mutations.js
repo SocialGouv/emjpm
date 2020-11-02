@@ -51,7 +51,11 @@ export const CHANGE_DIRECTION_AGREMENT = gql`
     }
     update_direction_by_pk(
       pk_columns: { id: $direction_id }
-      _set: { department_id: $department_id, region_id: $region_id, type: $type }
+      _set: {
+        department_id: $department_id
+        region_id: $region_id
+        type: $type
+      }
     ) {
       id
       department_id
@@ -92,7 +96,9 @@ export const ADD_MAGISTRAT = gql`
 
 export const ADD_MANDATAIRE_TIS = gql`
   mutation admin_add_mandataire_tis($mandataireId: Int!, $tiId: Int!) {
-    insert_mandataire_tis(objects: { ti_id: $tiId, mandataire_id: $mandataireId }) {
+    insert_mandataire_tis(
+      objects: { ti_id: $tiId, mandataire_id: $mandataireId }
+    ) {
       affected_rows
       returning {
         id
@@ -125,7 +131,10 @@ export const CALCULATE_MANDATAIRE_MESURES = gql`
   ) {
     update_mandataires(
       where: { user_id: { _eq: $userId } }
-      _set: { mesures_en_cours: $inProgressMesuresCount, mesures_en_attente: $awaitingMesuresCount }
+      _set: {
+        mesures_en_cours: $inProgressMesuresCount
+        mesures_en_attente: $awaitingMesuresCount
+      }
     ) {
       affected_rows
       returning {

@@ -4,7 +4,9 @@ export const MANDATAIRE_ACTIVITY = gql`
   query mesureInProgressByGestionnaireNumber($department: Int, $region: Int) {
     service: view_mesure_gestionnaire_aggregate(
       where: {
-        departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+        departement: {
+          _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+        }
         discriminator: { _eq: "SERVICE" }
       }
     ) {
@@ -16,7 +18,9 @@ export const MANDATAIRE_ACTIVITY = gql`
     }
     mandataireIndividuel: view_mesure_gestionnaire_aggregate(
       where: {
-        departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+        departement: {
+          _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+        }
         discriminator: { _eq: "MANDATAIRE_IND" }
       }
     ) {
@@ -28,7 +32,9 @@ export const MANDATAIRE_ACTIVITY = gql`
     }
     mandatairePrepose: view_mesure_gestionnaire_aggregate(
       where: {
-        departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+        departement: {
+          _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+        }
         discriminator: { _eq: "MANDATAIRE_PRE" }
       }
     ) {

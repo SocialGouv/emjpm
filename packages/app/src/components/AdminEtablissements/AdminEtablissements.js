@@ -37,7 +37,10 @@ const RowItem = (props) => {
             </Flex>
           </Box>
           <Box mr="1" width="120px">
-            <Link href={`/admin/etablissements/[id]`} as={`/admin/etablissements/${id}`}>
+            <Link
+              href={`/admin/etablissements/[id]`}
+              as={`/admin/etablissements/${id}`}
+            >
               <a>
                 <Button>Voir</Button>
               </a>
@@ -51,14 +54,19 @@ const RowItem = (props) => {
 
 export const AdminEtablissements = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, selectedDepartementCode } = useContext(AdminFilterContext);
+  const { debouncedSearchText, selectedDepartementCode } = useContext(
+    AdminFilterContext
+  );
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
     variables: {
+      departementCode: selectedDepartementCode ? selectedDepartementCode : null,
       limit: resultPerPage,
       offset: currentOffset,
-      search: debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-      departementCode: selectedDepartementCode ? selectedDepartementCode : null,
+      search:
+        debouncedSearchText && debouncedSearchText !== ""
+          ? `${debouncedSearchText}%`
+          : null,
     },
   });
 
@@ -75,7 +83,9 @@ export const AdminEtablissements = () => {
       entries={data ? data.etablissements : []}
       RowItem={RowItem}
       count={
-        data && data.etablissements_aggregate ? data.etablissements_aggregate.aggregate.count : 0
+        data && data.etablissements_aggregate
+          ? data.etablissements_aggregate.aggregate.count
+          : 0
       }
       resultPerPage={resultPerPage}
       currentOffset={currentOffset}

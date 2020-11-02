@@ -2,7 +2,10 @@ import { Label } from "@rebass/forms";
 import React, { Fragment, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { EnqueteFormFieldErrorMessage, EnqueteFormInputField } from "../EnqueteForm";
+import {
+  EnqueteFormFieldErrorMessage,
+  EnqueteFormInputField,
+} from "../EnqueteForm";
 import styles from "./style";
 
 export function calculateTotal(firstProperty, secondProperty) {
@@ -10,18 +13,31 @@ export function calculateTotal(firstProperty, secondProperty) {
 }
 
 export const EnquetePopulationTrancheAgeField = (props) => {
-  const { values, errors, menFieldId, womenFieldId, label, enqueteContext, enqueteForm } = props;
-  const total = useMemo(() => calculateTotal(values[menFieldId], values[womenFieldId]), [
+  const {
     values,
+    errors,
     menFieldId,
     womenFieldId,
-  ]);
+    label,
+    enqueteContext,
+    enqueteForm,
+  } = props;
+  const total = useMemo(
+    () => calculateTotal(values[menFieldId], values[womenFieldId]),
+    [values, menFieldId, womenFieldId]
+  );
   return (
     <Fragment>
       <Box>
-        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id={menFieldId} />
+        <EnqueteFormFieldErrorMessage
+          enqueteForm={enqueteForm}
+          id={menFieldId}
+        />
         {!errors[menFieldId] && (
-          <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id={womenFieldId} />
+          <EnqueteFormFieldErrorMessage
+            enqueteForm={enqueteForm}
+            id={womenFieldId}
+          />
         )}
       </Box>
       <Flex alignItems="center">

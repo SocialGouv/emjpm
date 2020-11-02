@@ -7,7 +7,10 @@ import { ListeBlancheServices } from "./ListeBlancheServices";
 
 async function onSelectItem(router, { type, origin, id }) {
   if (type === "mandataire") {
-    await router.push(`/${origin}/liste-blanche/[id]`, `/${origin}/liste-blanche/${id}`);
+    await router.push(
+      `/${origin}/liste-blanche/[id]`,
+      `/${origin}/liste-blanche/${id}`
+    );
   } else if (type === "service") {
     await router.push(
       `/${origin}/liste-blanche/services/[id]`,
@@ -27,12 +30,16 @@ export const ListeBlanche = (props) => {
   return type === "mandataire" ? (
     <ListeBlancheMandataires
       {...props}
-      onSelectItem={(item) => onSelectItem(router, { type, id: item.id, origin })}
+      onSelectItem={(item) =>
+        onSelectItem(router, { id: item.id, origin, type })
+      }
     />
   ) : (
     <ListeBlancheServices
       {...props}
-      onSelectItem={(item) => onSelectItem(router, { type, id: item.id, origin })}
+      onSelectItem={(item) =>
+        onSelectItem(router, { id: item.id, origin, type })
+      }
     />
   );
 };

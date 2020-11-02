@@ -53,7 +53,9 @@ const RowItem = ({ item }) => {
           </Box>
         </Flex>
       </Card>
-      {editMode && <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />}
+      {editMode && (
+        <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />
+      )}
     </>
   );
 };
@@ -69,7 +71,9 @@ const AdminTribunaux = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+        debouncedSearchText && debouncedSearchText !== ""
+          ? `${debouncedSearchText}%`
+          : null,
     },
   });
 

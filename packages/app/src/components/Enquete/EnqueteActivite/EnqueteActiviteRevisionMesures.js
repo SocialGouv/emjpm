@@ -21,20 +21,23 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_REVISION_MESURES,
-        variables: {
-          id: activite_id,
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_REVISION_MESURES,
+          variables: {
+            id: activite_id,
+          },
+        },
+      ],
+    }
+  );
   const { data, loading } = useQuery(ENQUETE_REVISION_MESURES, {
     variables: {
       id: activite_id,
@@ -51,11 +54,11 @@ export const EnqueteActiviteRevisionMesures = (props) => {
     } = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
     return {
+      revisionsAutre,
+      revisionsChangement,
       revisionsMainLevee,
       revisionsMasp,
       revisionsReconduction,
-      revisionsChangement,
-      revisionsAutre,
     };
   }, [data]);
 

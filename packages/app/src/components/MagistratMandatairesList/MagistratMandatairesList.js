@@ -77,8 +77,8 @@ const MagistratMandatairesList = (props) => {
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
       orderBy: getOrderByVariable(orderBy),
-      tribunal: ti_id,
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
+      tribunal: ti_id,
     },
   });
 

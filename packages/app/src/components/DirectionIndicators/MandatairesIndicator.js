@@ -9,7 +9,9 @@ const MandatairesIndicator = () => {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
-      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      department: filters.departement
+        ? parseInt(filters.departement.value)
+        : undefined,
       region: filters.region ? parseInt(filters.region.value) : undefined,
       type: "MANDATAIRE_IND",
     },
@@ -20,7 +22,11 @@ const MandatairesIndicator = () => {
       error={error}
       loading={loading}
       title="Mandataires individuels"
-      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : 0}
+      indicator={
+        data && data.gestionnaireNumber
+          ? data.gestionnaireNumber.aggregate.count
+          : 0
+      }
     />
   );
 };

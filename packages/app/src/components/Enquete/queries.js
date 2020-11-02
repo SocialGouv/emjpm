@@ -13,7 +13,11 @@ export const ENQUETE = gql`
 
 // init reponse from userId or get response from reponseId
 export const ENQUETE_WITH_REPONSE_STATUS = gql`
-  query enquete_reponse_validation_status($enqueteId: Int!, $userId: Int, $reponseId: Int) {
+  query enquete_reponse_validation_status(
+    $enqueteId: Int!
+    $userId: Int
+    $reponseId: Int
+  ) {
     enquetes_by_pk(id: $enqueteId) {
       id
       created_at

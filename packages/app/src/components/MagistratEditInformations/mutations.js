@@ -1,7 +1,13 @@
 import gql from "graphql-tag";
 
 export const EDIT_USER = gql`
-  mutation EditUser($cabinet: String, $prenom: String!, $nom: String!, $email: String!, $id: Int!) {
+  mutation EditUser(
+    $cabinet: String
+    $prenom: String!
+    $nom: String!
+    $email: String!
+    $id: Int!
+  ) {
     update_users(
       _set: { cabinet: $cabinet, prenom: $prenom, nom: $nom, email: $email }
       where: { id: { _eq: $id } }

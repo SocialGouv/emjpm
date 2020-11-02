@@ -7,7 +7,9 @@ import { Box, Flex } from "rebass";
 import { API_LOG_BY_ID } from "./queries";
 
 const AdminApiLog = ({ id }) => {
-  const { data, loading, error } = useQuery(API_LOG_BY_ID, { variables: { id } });
+  const { data, loading, error } = useQuery(API_LOG_BY_ID, {
+    variables: { id },
+  });
 
   if (loading) {
     return "Loading...";

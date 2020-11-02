@@ -1,6 +1,13 @@
 import React from "react";
 import { Box, Flex, Text } from "rebass";
-import { Bar, BarChart, Cell, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  Cell,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+} from "recharts";
 
 import { textStyle } from "../DirectionMandatairesActivity/style";
 
@@ -9,7 +16,9 @@ const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 const MandatairesDisponibilityChart = ({ data }) => {
   return (
     <Box>
-      <Box sx={{ height: [300, 313, 300], position: "relative", width: "100%" }}>
+      <Box
+        sx={{ height: [300, 313, 300], position: "relative", width: "100%" }}
+      >
         <ResponsiveContainer>
           <BarChart
             data={data}
@@ -30,7 +39,10 @@ const MandatairesDisponibilityChart = ({ data }) => {
             <Bar barSize={40} dataKey="Disponibilité actuelle" stackId="a">
               {data.map((entry, index) => {
                 return (
-                  <Cell key={`cell-${index}`} fill={entry.overcapacity ? "#D63C31" : "#70D54F"} />
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={entry.overcapacity ? "#D63C31" : "#70D54F"}
+                  />
                 );
               })}
             </Bar>
@@ -41,7 +53,11 @@ const MandatairesDisponibilityChart = ({ data }) => {
         sx={{
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          gridTemplateColumns: [
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(3, 1fr)",
+          ],
           mt: "1",
         }}
       >
@@ -65,13 +81,23 @@ const MandatairesDisponibilityChart = ({ data }) => {
         sx={{
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          gridTemplateColumns: [
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(3, 1fr)",
+          ],
           mt: "1",
         }}
       >
         <Box>
           <Flex mt="5" mb="7px">
-            <Box bg="#3174D6" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
+            <Box
+              bg="#3174D6"
+              flexBasis="30px"
+              maxWidth="30px"
+              flexGrow="1"
+              height="10px"
+            />
             <Text ml="1" fontSize="10px">
               CAPACITÉ DES MANDATAIRES
             </Text>
@@ -79,7 +105,13 @@ const MandatairesDisponibilityChart = ({ data }) => {
         </Box>
         <Box>
           <Flex mt="5" mb="7px">
-            <Box bg="#D63C31" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
+            <Box
+              bg="#D63C31"
+              flexBasis="30px"
+              maxWidth="30px"
+              flexGrow="1"
+              height="10px"
+            />
             <Text ml="1" fontSize="10px">
               MANDATAIRES EN SURCAPACITÉ
             </Text>
@@ -87,7 +119,13 @@ const MandatairesDisponibilityChart = ({ data }) => {
         </Box>
         <Box>
           <Flex mt="5" mb="7px">
-            <Box bg="#70D54F" flexBasis="30px" maxWidth="30px" flexGrow="1" height="10px" />
+            <Box
+              bg="#70D54F"
+              flexBasis="30px"
+              maxWidth="30px"
+              flexGrow="1"
+              height="10px"
+            />
             <Text ml="1" fontSize="10px">
               MANDATAIRES DISPONIBILITE
             </Text>

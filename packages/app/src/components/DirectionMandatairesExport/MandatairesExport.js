@@ -18,7 +18,11 @@ const fetchMandatairesData = async (client, region, departement) => {
 };
 
 const doExport = async (client, regionalValue, departementalValue) => {
-  const all = await fetchMandatairesData(client, regionalValue, departementalValue);
+  const all = await fetchMandatairesData(
+    client,
+    regionalValue,
+    departementalValue
+  );
   const users = all.mandataires;
   const services = all.services;
   exportMandataires(users, services, regionalValue, departementalValue);
@@ -29,7 +33,10 @@ const MandatairesExport = () => {
   return (
     <ApolloConsumer>
       {(client) => (
-        <Button mr={0} onClick={() => doExport(client, filters.region, filters.departement)}>
+        <Button
+          mr={0}
+          onClick={() => doExport(client, filters.region, filters.departement)}
+        >
           Exporter toutes les données
         </Button>
       )}

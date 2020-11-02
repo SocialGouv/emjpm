@@ -21,7 +21,11 @@ const AdminServicesPage = () => {
               mt: "2",
             }}
           >
-            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/services/add-service")} />
+            <AdminFilterBar
+              onAddButtonClick={() =>
+                Router.push("/admin/services/add-service")
+              }
+            />
             <AdminServices />
           </Flex>
         </BoxWrapper>

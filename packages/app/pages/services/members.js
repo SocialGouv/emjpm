@@ -15,8 +15,12 @@ const ServiceMembersPage = () => {
     <LayoutServices>
       <BoxWrapper mt={6} px={2}>
         <ServiceMembers service={service} userId={id} isAdmin={is_admin} />
-        {is_admin && <ServiceMemberInvitations service={service} isAdmin={is_admin} />}
-        {is_admin && <ServiceMemberInvitationCreate service={service} isAdmin={is_admin} />}
+        {is_admin && (
+          <ServiceMemberInvitations service={service} isAdmin={is_admin} />
+        )}
+        {is_admin && (
+          <ServiceMemberInvitationCreate service={service} isAdmin={is_admin} />
+        )}
       </BoxWrapper>
     </LayoutServices>
   );

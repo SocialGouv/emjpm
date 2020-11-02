@@ -1,5 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading1, Heading2, Heading4, Indicator, Spinner } from "@emjpm/ui";
+import {
+  Card,
+  Heading1,
+  Heading2,
+  Heading4,
+  Indicator,
+  Spinner,
+} from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 

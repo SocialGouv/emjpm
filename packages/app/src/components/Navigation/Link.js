@@ -43,7 +43,8 @@ const ActiveLink = (props) => {
     isActive = pathname.startsWith(href);
   } else {
     isActive =
-      pathname === href || (pathname === "/direction/mandataires/list" && href === "/direction");
+      pathname === href ||
+      (pathname === "/direction/mandataires/list" && href === "/direction");
   }
 
   return (

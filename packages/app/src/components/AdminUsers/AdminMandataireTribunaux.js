@@ -32,14 +32,19 @@ const AdminMandataireTribunaux = (props) => {
         const { ti, id } = relation;
 
         return (
-          <Flex mb={10} alignItems="center" justifyContent="space-between" key={`aui-${id}`}>
+          <Flex
+            mb={10}
+            alignItems="center"
+            justifyContent="space-between"
+            key={`aui-${id}`}
+          >
             <Text>{ti.etablissement}</Text>
             <Box>
               <Button
                 onClick={() =>
                   deleteMandataireTribunalRelation({
-                    variables: { id },
                     refetchQueries: ["admin_mandataire_tis"],
+                    variables: { id },
                   })
                 }
               >
@@ -56,7 +61,10 @@ const AdminMandataireTribunaux = (props) => {
             placeholder="Ajouter un tribunal"
             onChange={({ value }) => setSelectedTribunal(value)}
             options={tis
-              .filter((ti) => !mandataire_tis.some((relation) => relation.ti.id === ti.id))
+              .filter(
+                (ti) =>
+                  !mandataire_tis.some((relation) => relation.ti.id === ti.id)
+              )
               .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
           />
         </Box>

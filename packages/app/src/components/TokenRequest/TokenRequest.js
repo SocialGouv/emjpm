@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -14,6 +22,10 @@ const TokenRequest = () => {
   const [isErrorMessageVisible, toggleErrorMessage] = useState(false);
 
   const formik = useFormik({
+    initialValues: {
+      email: "",
+      name: "",
+    },
     onSubmit: async (values, { setSubmitting, resetForm }) => {
       const { email, name } = values;
 
@@ -34,10 +46,6 @@ const TokenRequest = () => {
       setSubmitting(false);
     },
     validationSchema: editorTokenSchema,
-    initialValues: {
-      name: "",
-      email: "",
-    },
   });
 
   return (
@@ -90,7 +98,9 @@ const TokenRequest = () => {
               onChange={formik.handleChange}
               placeholder="Le nom de votre logiciel métier"
             />
-            {formik.touched.name && <InlineError message={formik.errors.name} fieldId="name" />}
+            {formik.touched.name && (
+              <InlineError message={formik.errors.name} fieldId="name" />
+            )}
           </Field>
           <Field>
             <Input
@@ -102,11 +112,17 @@ const TokenRequest = () => {
               onChange={formik.handleChange}
               placeholder="Votre email"
             />
-            {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
+            {formik.touched.email && (
+              <InlineError message={formik.errors.email} fieldId="email" />
+            )}
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 {`Demander une autorisation d'accès`}
               </Button>
             </Box>

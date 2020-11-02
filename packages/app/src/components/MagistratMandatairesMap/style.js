@@ -1,10 +1,10 @@
 const MagistratMandatairesMapStyle = () => {
   return {
-    position: "absolute",
     height: "100%",
-    width: "100%",
-    top: "0",
+    position: "absolute",
     pt: "115px",
+    top: "0",
+    width: "100%",
   };
 };
 
@@ -32,9 +32,9 @@ const labelStyle = {
   fontFamily: "body",
   fontSize: "11px",
   fontWeight: "600",
+  lineHeight: "1.4",
   mb: "0",
   mt: "10px",
-  lineHeight: "1.4",
 };
 
 const descriptionStyle = {

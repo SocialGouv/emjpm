@@ -43,7 +43,9 @@ export const EnqueteServiceInformations = (props) => {
       },
     ],
   });
-  const informations = data ? data.enquete_reponses_service_informations_by_pk || {} : {};
+  const informations = data
+    ? data.enquete_reponses_service_informations_by_pk || {}
+    : {};
 
   return loading ? null : (
     <EnqueteServiceInformationsForm
@@ -56,14 +58,14 @@ export const EnqueteServiceInformations = (props) => {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
+            affiliation_federation: values.affiliation_federation,
+            departement: values.departement,
             id: service_informations_id,
             last_update: new Date(),
-            region: values.region,
-            nom: values.nom,
             nb_structures_concernees: values.nb_structures_concernees,
-            departement: values.departement,
+            nom: values.nom,
+            region: values.region,
             type_organisme_gestionnaire: values.type_organisme_gestionnaire,
-            affiliation_federation: values.affiliation_federation,
           },
         });
       }}

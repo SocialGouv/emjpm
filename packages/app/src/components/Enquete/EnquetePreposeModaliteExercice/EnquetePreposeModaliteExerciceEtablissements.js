@@ -52,9 +52,10 @@ export const EnquetePreposeModaliteExerciceEtablissements = (props) => {
       onSubmit={async (values) => {
         await updateEtablissements({
           variables: {
-            id: modalites_exercice_id,
-            actions_information_tuteurs_familiaux: values.actions_information_tuteurs_familiaux,
+            actions_information_tuteurs_familiaux:
+              values.actions_information_tuteurs_familiaux,
             data: values.etablissements,
+            id: modalites_exercice_id,
           },
         });
       }}

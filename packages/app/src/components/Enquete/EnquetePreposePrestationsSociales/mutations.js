@@ -1,7 +1,10 @@
 import gql from "graphql-tag";
 
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE = gql`
-  mutation update_enquete_reponses_prestations_sociales_tutelle($id: Int!, $tutelle: jsonb!) {
+  mutation update_enquete_reponses_prestations_sociales_tutelle(
+    $id: Int!
+    $tutelle: jsonb!
+  ) {
     update_enquete_reponses_prepose_prestations_sociales_by_pk(
       pk_columns: { id: $id }
       _set: { tutelle: $tutelle }
@@ -93,7 +96,10 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_AUTRES_MESURES = gql`
 `;
 
 export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ = gql`
-  mutation update_enquete_reponses_prepose_prestations_sociales_maj($id: Int!, $maj: jsonb!) {
+  mutation update_enquete_reponses_prepose_prestations_sociales_maj(
+    $id: Int!
+    $maj: jsonb!
+  ) {
     update_enquete_reponses_prepose_prestations_sociales_by_pk(
       pk_columns: { id: $id }
       _set: { maj: $maj }

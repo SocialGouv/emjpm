@@ -7,7 +7,10 @@ import { MandataireMapPanelMesures } from "../../src/components/MandataireMapPan
 import { withAuthSync } from "../../src/util/auth";
 
 const MandataireMap = dynamic(
-  () => import("../../src/components/MandataireMap").then((mod) => mod.MandataireMap),
+  () =>
+    import("../../src/components/MandataireMap").then(
+      (mod) => mod.MandataireMap
+    ),
   { ssr: false }
 );
 
@@ -15,7 +18,15 @@ const Map = () => {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
   return (
     <LayoutMandataireMap>
-      <Flex sx={{ height: "100%", position: "absolute", pt: "115px", top: "0", width: "100%" }}>
+      <Flex
+        sx={{
+          height: "100%",
+          position: "absolute",
+          pt: "115px",
+          top: "0",
+          width: "100%",
+        }}
+      >
         {selectedMesuresIds.length ? (
           <Box
             sx={{

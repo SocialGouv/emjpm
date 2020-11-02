@@ -5,12 +5,19 @@ import { Box, Button, Flex } from "rebass";
 
 import { SERVICE_ANTENNES } from "./queries";
 
-const ServiceMesureAntennesMatcher = ({ serviceId, invalidAntenneNames, onSubmitAntennesMap }) => {
+const ServiceMesureAntennesMatcher = ({
+  serviceId,
+  invalidAntenneNames,
+  onSubmitAntennesMap,
+}) => {
   const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
     variables: { service_id: serviceId },
   });
 
-  const serviceAntennes = useMemo(() => (data && data.antennes ? data.antennes : []), [data]);
+  const serviceAntennes = useMemo(
+    () => (data && data.antennes ? data.antennes : []),
+    [data]
+  );
   const antenneOptions = useMemo(
     () => serviceAntennes.map((a) => ({ label: a.name, value: a.id })),
     [serviceAntennes]
@@ -58,7 +65,9 @@ const ServiceMesureAntennesMatcher = ({ serviceId, invalidAntenneNames, onSubmit
               <Select
                 name={`select-${index}`}
                 isSearchable={false}
-                defaultValue={antenneOptions.length ? antenneOptions[0] : undefined}
+                defaultValue={
+                  antenneOptions.length ? antenneOptions[0] : undefined
+                }
                 placeholder
                 options={antenneOptions}
                 size="small"

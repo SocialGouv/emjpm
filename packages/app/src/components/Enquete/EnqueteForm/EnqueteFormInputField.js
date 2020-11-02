@@ -34,11 +34,11 @@ export const EnqueteFormInputField = ({
   }
 
   const showError = useEnqueteFieldShowError({
-    id,
-    error,
-    enqueteForm,
     disableErrorMessage,
+    enqueteForm,
+    error,
     hideErrorMessageIfPristine,
+    id,
   });
 
   return (

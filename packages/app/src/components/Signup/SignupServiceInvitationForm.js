@@ -10,8 +10,6 @@ export const SignupServiceInvitationForm = (props) => {
   const { handleSubmit, invitation } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: signupSchema,
     initialValues: {
       confirmPassword: "",
       email: invitation.email,
@@ -20,6 +18,8 @@ export const SignupServiceInvitationForm = (props) => {
       prenom: "",
       type: "service",
     },
+    onSubmit: handleSubmit,
+    validationSchema: signupSchema,
   });
 
   return (
@@ -33,7 +33,9 @@ export const SignupServiceInvitationForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Nom"
         />
-        {formik.touched.nom && <InlineError message={formik.errors.nom} fieldId="nom" />}
+        {formik.touched.nom && (
+          <InlineError message={formik.errors.nom} fieldId="nom" />
+        )}
       </Field>
       <Field>
         <Input
@@ -44,10 +46,18 @@ export const SignupServiceInvitationForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Prénom"
         />
-        {formik.touched.prenom && <InlineError message={formik.errors.prenom} fieldId="prenom" />}
+        {formik.touched.prenom && (
+          <InlineError message={formik.errors.prenom} fieldId="prenom" />
+        )}
       </Field>
       <Field>
-        <Input disabled value={formik.values.email} id="email" name="email" placeholder="Email" />
+        <Input
+          disabled
+          value={formik.values.email}
+          id="email"
+          name="email"
+          placeholder="Email"
+        />
         <InlineError message={formik.errors.email} fieldId="email" />
       </Field>
       <Field>
@@ -70,12 +80,17 @@ export const SignupServiceInvitationForm = (props) => {
           type="password"
           id="confirmPassword"
           name="confirmPassword"
-          hasError={formik.errors.confirmPassword && formik.touched.confirmPassword}
+          hasError={
+            formik.errors.confirmPassword && formik.touched.confirmPassword
+          }
           onChange={formik.handleChange}
           placeholder="Confirmation du mot de passe"
         />
         {formik.touched.confirmPassword && (
-          <InlineError message={formik.errors.confirmPassword} fieldId="confirmPassword" />
+          <InlineError
+            message={formik.errors.confirmPassword}
+            fieldId="confirmPassword"
+          />
         )}
       </Field>
       <Flex justifyContent="flex-end">
@@ -87,7 +102,11 @@ export const SignupServiceInvitationForm = (props) => {
           </Button>
         </Box>
         <Box>
-          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
             Suivant
           </Button>
         </Box>

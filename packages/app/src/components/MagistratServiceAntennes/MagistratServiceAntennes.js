@@ -48,7 +48,7 @@ const MagistratServiceAntennes = (props) => {
           antenne = { ...antenne, preferences: [] };
           return (
             <Antenne
-              sx={{ minHeight: "200px", p: "3", m: "1", width: "250px" }}
+              sx={{ m: "1", minHeight: "200px", p: "3", width: "250px" }}
               key={antenne.id}
               antenne={antenne}
               hasButton={false}

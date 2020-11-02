@@ -14,7 +14,7 @@
     "build": "rollup -c",
     "build-storybook": "build-storybook",
     "lint:pre-commit": "npm run lint:fix",
-    "lint": "eslint --fix . && echo 'Lint complete.'",
+    "lint": "eslint .",
     "lint:fix": "eslint --cache --fix .",
     "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.html,.ts,.tsx,.mjs --report-unused-disable-directives",
     "lint:package": "sort-package-json",

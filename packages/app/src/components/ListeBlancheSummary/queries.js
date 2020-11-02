@@ -41,14 +41,18 @@ export const LB_SUMMARY = gql`
     prepose: lb_users_aggregate(
       where: {
         type: { _eq: "prepose" }
-        lb_user_etablissements: { etablissement: { departement_id: { _in: $departementIds } } }
+        lb_user_etablissements: {
+          etablissement: { departement_id: { _in: $departementIds } }
+        }
       }
     ) {
       aggregate {
         count
       }
     }
-    service: services_aggregate(where: { department_id: { _in: $departementIds } }) {
+    service: services_aggregate(
+      where: { department_id: { _in: $departementIds } }
+    ) {
       aggregate {
         count
       }
