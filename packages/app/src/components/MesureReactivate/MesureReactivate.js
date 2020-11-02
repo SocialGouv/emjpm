@@ -21,17 +21,21 @@ const MesureReactivate = () => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
-      shallow: true,
-    });
+    Router.push(
+      `${userBasePath}/mesures/[mesure_id]`,
+      `${userBasePath}/mesures/${mesureId}`,
+      {
+        shallow: true,
+      }
+    );
 
   const [updateMesure] = useMutation(REACTIVATE_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          serviceId: service ? service.id : null,
           mandataireId: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
         },
       });
       redirectToMesure(mesure.id);
@@ -51,23 +55,23 @@ const MesureReactivate = () => {
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.en_cours,
-            natureMesure: null,
-            antenne: null,
           },
         },
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.eteinte,
-            natureMesure: null,
-            antenne: null,
           },
         },
       ],

@@ -31,9 +31,9 @@ const LayoutServices = (props) => {
 
     if (code === "75") {
       links = navigationLinks.concat({
+        as: `/services/enquetes/${user.enquete.id}`,
         title: `Enquête ${user.enquete.annee}`,
         url: "/services/enquetes/[enquete_id]",
-        as: `/services/enquetes/${user.enquete.id}`,
       });
     }
   }
@@ -67,9 +67,8 @@ const LayoutServices = (props) => {
           </BoxWrapper>
         </Box>
       </Box>
-      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !== "true" && (
-        <SatisfactionCampaign />
-      )}
+      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !==
+        "true" && <SatisfactionCampaign />}
     </Fragment>
   );
 };

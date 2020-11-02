@@ -3,7 +3,10 @@ import gql from "graphql-tag";
 export const GESTIONNAIRES = gql`
   query view_mesure_gestionnaire($mandataire_id: Int, $service_id: Int) {
     gestionnaires: view_mesure_gestionnaire(
-      where: { mandataire_id: { _eq: $mandataire_id }, service_id: { _eq: $service_id } }
+      where: {
+        mandataire_id: { _eq: $mandataire_id }
+        service_id: { _eq: $service_id }
+      }
     ) {
       id
       discriminator

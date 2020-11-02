@@ -12,12 +12,12 @@ const MagistratMesureAdd = (props) => {
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
   const cancelActionRoute = gestionnaireId
     ? {
-        href: "/magistrats/gestionnaires/[gestionnaire_id]",
         as: `/magistrats/gestionnaires/${gestionnaireId}`,
+        href: "/magistrats/gestionnaires/[gestionnaire_id]",
       }
     : {
-        href: `/magistrats`,
         as: `/magistrats`,
+        href: `/magistrats`,
       };
 
   return (

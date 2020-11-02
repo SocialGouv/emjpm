@@ -1,7 +1,9 @@
 import { useMemo, useReducer, useState } from "react";
 
 export const useEnqueteContext = (props) => {
-  const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(false);
+  const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(
+    false
+  );
 
   const { enqueteReponse, currentStep, navigateToStep, sections } = props;
 
@@ -13,14 +15,14 @@ export const useEnqueteContext = (props) => {
 
   const enqueteContextInitialValue = useMemo(
     () => ({
-      form: {
-        submited: false,
-        dirty: false,
-        valid: true,
-        nextStep: getNextPageStep(sections, currentStep), // {section, step} | 'previous' | 'next'
-      },
       actions: {
         autoSubmit: false,
+      },
+      form: {
+        dirty: false,
+        nextStep: getNextPageStep(sections, currentStep),
+        submited: false,
+        valid: true, // {section, step} | 'previous' | 'next'
       },
     }),
     [currentStep, sections]
@@ -44,13 +46,13 @@ export const useEnqueteContext = (props) => {
           if (state.form.valid) {
             return {
               ...state,
-              form: {
-                ...state.form,
-                nextStep,
-              },
               actions: {
                 ...state.actions,
                 autoSubmit: true,
+              },
+              form: {
+                ...state.form,
+                nextStep,
               },
             };
           } else {
@@ -107,33 +109,40 @@ export const useEnqueteContext = (props) => {
   );
 
   return {
-    section,
-    step,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
-    saveAndNavigate,
     confirmExitInvalidFormDialog: {
-      open: openConfirmExitInvalidForm,
+      onCancel: () => {
+        setOpenConfirmExitInvalidForm(false);
+      },
       onConfirm: () => {
         setOpenConfirmExitInvalidForm(false);
         dispatchEnqueteContextEvent({ type: "navigate-to-next-page" });
       },
-      onCancel: () => {
-        setOpenConfirmExitInvalidForm(false);
-      },
+      open: openConfirmExitInvalidForm,
     },
+    dispatchEnqueteContextEvent,
+    enqueteContext,
+    saveAndNavigate,
+    section,
+    step,
   };
 
   async function saveAndNavigate({ step, substep }) {
-    dispatchEnqueteContextEvent({ type: "submit-and-navigate", value: { step, substep } });
+    dispatchEnqueteContextEvent({
+      type: "submit-and-navigate",
+      value: { step, substep },
+    });
   }
 
   function getNextPageStep(sections, currentStep) {
     const { step, substep } = currentStep;
-    const currentSection = sections && sections.length > step ? sections[step] : undefined;
+    const currentSection =
+      sections && sections.length > step ? sections[step] : undefined;
 
     if (currentSection) {
-      if (currentSection.steps.length <= 1 || substep + 1 === currentSection.steps.length) {
+      if (
+        currentSection.steps.length <= 1 ||
+        substep + 1 === currentSection.steps.length
+      ) {
         return { step: step + 1, substep: 0 };
       } else {
         return { step, substep: substep + 1 };

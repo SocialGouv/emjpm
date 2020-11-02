@@ -24,15 +24,15 @@ async function saveMesures(allMesureDatas) {
           latitude,
         } = await getLastEtatDatas(datas.etats);
         const mesureToCreate = buildMesure({
-          datas,
           antenneId,
-          lastEtat,
+          datas,
           departement,
-          longitude,
+          lastEtat,
           latitude,
+          longitude,
           serviceOrMandataire,
-          type,
           ti,
+          type,
         });
         const createdMesure = await persistMesure(
           Mesure,
@@ -58,15 +58,15 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
     datas.etats
   );
   const mesureToCreate = buildMesure({
-    datas,
     antenneId,
-    lastEtat,
+    datas,
     departement,
-    longitude,
+    lastEtat,
     latitude,
+    longitude,
     serviceOrMandataire,
-    type,
     ti,
+    type,
   });
 
   const createdMesure = await transaction(
@@ -91,7 +91,7 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
   return mesureQueryResult;
 }
 
-module.exports = { saveMesures, saveMesure };
+module.exports = { saveMesure, saveMesures };
 
 async function persistMesure(
   Mesure,
@@ -106,8 +106,8 @@ async function persistMesure(
   if (datas.ressources) {
     for (const ressource of datas.ressources) {
       const createdMesureRessource = await MesureRessources.query().insert({
-        mesure_id: mesure.id,
         annee: ressource.annee || null,
+        mesure_id: mesure.id,
         niveau_ressource: ressource.niveau_ressource,
         prestations_sociales: JSON.stringify(ressource.prestations_sociales),
       });
@@ -119,15 +119,15 @@ async function persistMesure(
   if (datas.etats) {
     for (const etat of datas.etats) {
       const mesureEtat = await MesureEtat.query().insert({
-        mesure_id: mesure.id,
-        date_changement_etat: etat.date_changement_etat,
-        nature_mesure: etat.nature_mesure,
         champ_mesure: etat.champ_mesure,
-        lieu_vie: etat.lieu_vie,
         code_postal: etat.code_postal,
-        ville: etat.ville,
+        date_changement_etat: etat.date_changement_etat,
+        lieu_vie: etat.lieu_vie,
+        mesure_id: mesure.id,
+        nature_mesure: etat.nature_mesure,
         pays: etat.pays,
         type_etablissement: etat.type_etablissement,
+        ville: etat.ville,
       });
       mesure.etats.push(mesureEtat);
     }

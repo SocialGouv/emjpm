@@ -23,7 +23,9 @@ export const MESURES_GESTIONNAIRE = gql`
 
 export const MESURES_GESTIONNAIRES = gql`
   query MesureGestionnaires($tiId: Int!) {
-    view_mesure_gestionnaire(where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }) {
+    view_mesure_gestionnaire(
+      where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }
+    ) {
       id
       discriminator
       mandataire {

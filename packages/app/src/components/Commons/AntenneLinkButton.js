@@ -34,7 +34,10 @@ const AntenneLinkButton = ({ router, ...props }) => {
   const isActive = router.pathname === props.href;
   const antenne_id = props.href;
   return (
-    <NextLink href="/services/antennes/[antenne_id]" as={`/services/antennes/${antenne_id}`}>
+    <NextLink
+      href="/services/antennes/[antenne_id]"
+      as={`/services/antennes/${antenne_id}`}
+    >
       <RebassLink sx={AntenneLinkButtonStyle(isActive, props.disabled)}>
         {props.children}
       </RebassLink>

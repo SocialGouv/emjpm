@@ -64,7 +64,9 @@ function getRequestFilters(filters, departements) {
 
 export const ListeBlancheMandataires = (props) => {
   const { onSelectItem } = props;
-  const { filters, debounceFilters, departements = [] } = useContext(FiltersContextSerializable);
+  const { filters, debounceFilters, departements = [] } = useContext(
+    FiltersContextSerializable
+  );
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -75,9 +77,9 @@ export const ListeBlancheMandataires = (props) => {
 
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
+      filters: getRequestFilters(debounceFilters, departements),
       limit: resultPerPage,
       offset: currentOffset,
-      filters: getRequestFilters(debounceFilters, departements),
     },
   });
 

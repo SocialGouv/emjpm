@@ -1,4 +1,12 @@
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -11,24 +19,29 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
   const geocode = geocodeInitialValue(tribunal);
 
   const formik = useFormik({
+    initialValues: {
+      email: tribunal && tribunal.email ? tribunal.email : "",
+      etablissement: tribunal ? tribunal.etablissement : "",
+      geocode,
+      siret: tribunal && tribunal.siret ? tribunal.siret : "",
+      telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
+    },
     onSubmit: (values, { setSubmitting }) => {
       onSubmit(values);
       setSubmitting(false);
     },
     validationSchema: adminTribunalSchema,
-    initialValues: {
-      email: tribunal && tribunal.email ? tribunal.email : "",
-      etablissement: tribunal ? tribunal.etablissement : "",
-      siret: tribunal && tribunal.siret ? tribunal.siret : "",
-      telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
-      geocode,
-    },
   });
 
   return (
     <Card sx={cardStyle} width="100%">
       <Flex flexWrap="wrap">
-        <Box width={[1, 2 / 5]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
+        <Box
+          width={[1, 2 / 5]}
+          bg="cardSecondary"
+          borderRadius="5px 0 0 5px"
+          p="5"
+        >
           <Box height="230px">
             <Heading4>{`Information du tribunal`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
@@ -50,11 +63,16 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   value={formik.values.etablissement}
                   id="etablissement"
                   name="etablissement"
-                  hasError={formik.errors.etablissement && formik.touched.etablissement}
+                  hasError={
+                    formik.errors.etablissement && formik.touched.etablissement
+                  }
                   onChange={formik.handleChange}
                   placeholder="Nom du tribunal"
                 />
-                <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
+                <InlineError
+                  message={formik.errors.etablissement}
+                  fieldId="etablissement"
+                />
               </Field>
               <Field>
                 <Input
@@ -87,14 +105,22 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
                   onChange={formik.handleChange}
                   placeholder="Téléphone"
                 />
-                <InlineError message={formik.errors.telephone} fieldId="telephone" />
+                <InlineError
+                  message={formik.errors.telephone}
+                  fieldId="telephone"
+                />
               </Field>
               <Field>
                 <Geocode
                   resource={tribunal}
-                  onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+                  onChange={(geocode) =>
+                    formik.setFieldValue("geocode", geocode)
+                  }
                 />
-                <InlineError message={formik.errors.geocode} fieldId="geocode" />
+                <InlineError
+                  message={formik.errors.geocode}
+                  fieldId="geocode"
+                />
               </Field>
               <Flex justifyContent="flex-end">
                 <Box>

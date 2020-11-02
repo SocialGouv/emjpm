@@ -10,7 +10,10 @@ export const DELETE_LB_DEPARTEMENTS = gql`
 
 export const UPDATE_DEPARTEMENT_FINANCEUR = gql`
   mutation set_departement_financeur($id: Int!) {
-    update_lb_departements_by_pk(pk_columns: { id: $id }, _set: { departement_financeur: true }) {
+    update_lb_departements_by_pk(
+      pk_columns: { id: $id }
+      _set: { departement_financeur: true }
+    ) {
       id
       departement_financeur
     }

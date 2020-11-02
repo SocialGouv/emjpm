@@ -1,11 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { createContext, Fragment } from "react";
 
-import { setUser } from "../../util/sentry";
-
-export const Context = createContext({});
-
 import { isService } from "../../util";
+import { setUser } from "../../util/sentry";
 import {
   ADMIN_USERS,
   DIRECTION_USERS,
@@ -13,6 +10,8 @@ import {
   MAGISTRAT_USERS,
   MANDATAIRE_USERS,
 } from "./queries";
+
+export const Context = createContext({});
 
 const QUERY_TYPE = {
   admin: ADMIN_USERS,
@@ -26,13 +25,13 @@ const QUERY_TYPE = {
 const UserProvider = (props) => {
   const { type, userId, agrements, children } = props;
   const { data } = useQuery(QUERY_TYPE[type], {
-    variables: {
-      userId: userId,
-    },
     onCompleted: ({ users_by_pk: user }) => {
       if (user) {
         setUser({ id: user.id, role: type });
       }
+    },
+    variables: {
+      userId: userId,
     },
   });
 
@@ -51,9 +50,9 @@ const UserProvider = (props) => {
 
   const currentUser = {
     ...user,
-    service: currentService,
     agrements,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
+    service: currentService,
   };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;

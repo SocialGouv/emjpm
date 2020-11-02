@@ -1,13 +1,26 @@
 import Fuse from "fuse.js";
 
-function filter({ enqueteReponseResumesIndex: fuse, enqueteReponseResumes, criteria }) {
+function filter({
+  enqueteReponseResumesIndex: fuse,
+  enqueteReponseResumes,
+  criteria,
+}) {
   const items = criteria.searchText
     ? fuse.search(criteria.searchText).map((x) => x.item)
     : enqueteReponseResumes;
 
-  if (items && (criteria.userType || criteria.selectedDepartement || criteria.responseStatus)) {
+  if (
+    items &&
+    (criteria.userType ||
+      criteria.selectedDepartement ||
+      criteria.responseStatus)
+  ) {
     return items.filter((r) => {
-      if (criteria.userType && criteria.userType.value && criteria.userType.value !== r.user_type) {
+      if (
+        criteria.userType &&
+        criteria.userType.value &&
+        criteria.userType.value !== r.user_type
+      ) {
         return false;
       }
       if (
@@ -20,7 +33,8 @@ function filter({ enqueteReponseResumesIndex: fuse, enqueteReponseResumes, crite
       if (
         criteria.selectedDepartement &&
         criteria.selectedDepartement.value &&
-        (!r.departement || criteria.selectedDepartement.value !== r.departement.code)
+        (!r.departement ||
+          criteria.selectedDepartement.value !== r.departement.code)
       ) {
         return false;
       }

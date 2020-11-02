@@ -32,23 +32,25 @@ export const ListeBlancheIndividuelUpdate = (props) => {
         });
 
         const departementsToDeleteIds = departementsToDelete.map((d) => d.id);
-        const departementFinanceur = values.departements.find((d) => d.departement_financeur);
+        const departementFinanceur = values.departements.find(
+          (d) => d.departement_financeur
+        );
 
         await updateListeBlanche({
           variables: {
+            departementsToAdd: departementsToAdd.map((d) => {
+              return {
+                departement_financeur: d.departement_financeur,
+                departement_id: d.id,
+                lb_user_id: id,
+              };
+            }),
+            departementsToDelete: departementsToDeleteIds,
+            email: values.email,
             id,
             nom: values.nom,
             prenom: values.prenom,
-            email: values.email,
             siret: values.siret,
-            departementsToDelete: departementsToDeleteIds,
-            departementsToAdd: departementsToAdd.map((d) => {
-              return {
-                lb_user_id: id,
-                departement_financeur: d.departement_financeur,
-                departement_id: d.id,
-              };
-            }),
           },
         });
 

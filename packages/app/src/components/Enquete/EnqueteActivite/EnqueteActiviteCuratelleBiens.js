@@ -47,14 +47,15 @@ export const EnqueteActiviteCuratelleBiens = (props) => {
     const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
 
     return {
-      etablissementDebutAnnee: r[`${PREFIX}_etablissement_debut_annee`],
-      etablissementFinAnnee: r[`${PREFIX}_etablissement_fin_annee`],
       domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
       domicileFinAnnee: r[`${PREFIX}_domicile_fin_annee`],
-      etablissementMesuresNouvelles: r[`${PREFIX}_etablissement_mesures_nouvelles`],
-      etablissementSortieMesures: r[`${PREFIX}_etablissement_sortie_mesures`],
       domicileMesuresNouvelles: r[`${PREFIX}_domicile_mesures_nouvelles`],
       domicileSortieMesures: r[`${PREFIX}_domicile_sortie_mesures`],
+      etablissementDebutAnnee: r[`${PREFIX}_etablissement_debut_annee`],
+      etablissementFinAnnee: r[`${PREFIX}_etablissement_fin_annee`],
+      etablissementMesuresNouvelles:
+        r[`${PREFIX}_etablissement_mesures_nouvelles`],
+      etablissementSortieMesures: r[`${PREFIX}_etablissement_sortie_mesures`],
     };
   }, [data]);
 

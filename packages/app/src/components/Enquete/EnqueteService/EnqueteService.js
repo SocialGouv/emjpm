@@ -9,9 +9,10 @@ import { enqueteServiceMenuBuilder } from "./EnqueteServiceMenuBuilder.service";
 export const EnqueteService = (props) => {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
-  const sections = useMemo(() => enqueteServiceMenuBuilder.buildMenuSections(enqueteReponse), [
-    enqueteReponse,
-  ]);
+  const sections = useMemo(
+    () => enqueteServiceMenuBuilder.buildMenuSections(enqueteReponse),
+    [enqueteReponse]
+  );
 
   const {
     section,
@@ -22,9 +23,9 @@ export const EnqueteService = (props) => {
     confirmExitInvalidFormDialog,
   } = useEnqueteContext({
     currentStep,
+    enqueteReponse,
     navigateToStep,
     sections,
-    enqueteReponse,
   });
 
   if (step === undefined || section === undefined) {
@@ -59,7 +60,9 @@ export const EnqueteService = (props) => {
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
 
-        <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
+        <EnqueteConfirmExitInvalidFormDialog
+          {...confirmExitInvalidFormDialog}
+        />
       </Box>
     </Flex>
   );

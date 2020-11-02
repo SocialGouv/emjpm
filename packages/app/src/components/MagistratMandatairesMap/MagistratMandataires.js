@@ -2,13 +2,20 @@ import { useQuery } from "@apollo/react-hooks";
 import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 
-import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
+import {
+  MANDATAIRE_IND,
+  MANDATAIRE_PRE,
+  SERVICE,
+} from "../../constants/discriminator";
 import { UserContext } from "../UserContext";
 import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
 const MagistratMapMandataires = dynamic(
-  () => import("./MagistratMandatairesMap").then((mod) => mod.MagistratMapMandataires),
+  () =>
+    import("./MagistratMandatairesMap").then(
+      (mod) => mod.MagistratMapMandataires
+    ),
   { ssr: false }
 );
 
@@ -17,10 +24,10 @@ const MagistratMandataires = () => {
   const { ti_id } = magistrat;
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRES, {
+    fetchPolicy: "network-only",
     variables: {
       tiId: ti_id,
     },
-    fetchPolicy: "network-only",
   });
 
   if (loading) {
@@ -33,9 +40,18 @@ const MagistratMandataires = () => {
 
   const mesureGestionnaires = data.view_mesure_gestionnaire;
 
-  const services = filterGestionnairesByDiscriminator(mesureGestionnaires, SERVICE);
-  const individuel = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_IND);
-  const prepose = filterGestionnairesByDiscriminator(mesureGestionnaires, MANDATAIRE_PRE);
+  const services = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    SERVICE
+  );
+  const individuel = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    MANDATAIRE_IND
+  );
+  const prepose = filterGestionnairesByDiscriminator(
+    mesureGestionnaires,
+    MANDATAIRE_PRE
+  );
 
   return (
     <MagistratMapMandataires

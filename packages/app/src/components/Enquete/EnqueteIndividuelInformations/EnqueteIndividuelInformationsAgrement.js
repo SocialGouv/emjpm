@@ -20,11 +20,14 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     enquete_reponse_ids: { agrements_formations_id },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
-  const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS, {
-    variables: {
-      id: agrements_formations_id,
-    },
-  });
+  const { data, loading } = useQuery(
+    ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
+    {
+      variables: {
+        id: agrements_formations_id,
+      },
+    }
+  );
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_AGREMENTS, {
     refetchQueries: [
@@ -39,7 +42,9 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
     ],
   });
 
-  const agrements = data ? data.enquete_reponses_agrements_formations_by_pk : undefined;
+  const agrements = data
+    ? data.enquete_reponses_agrements_formations_by_pk
+    : undefined;
   return loading ? null : (
     <EnqueteIndividuelInformationsAgrementForm
       data={agrements}

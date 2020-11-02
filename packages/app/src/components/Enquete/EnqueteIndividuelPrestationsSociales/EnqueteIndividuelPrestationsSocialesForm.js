@@ -21,23 +21,23 @@ export const validationSchema = yup.object().shape({
 function dataToForm(data) {
   return {
     aah: formatFormInput(data.aah),
-    pch: formatFormInput(data.pch),
-    asi: formatFormInput(data.asi),
-    rsa: formatFormInput(data.rsa),
     als_apl: formatFormInput(data.als_apl),
-    aspa: formatFormInput(data.aspa),
     apa: formatFormInput(data.apa),
+    asi: formatFormInput(data.asi),
+    aspa: formatFormInput(data.aspa),
+    pch: formatFormInput(data.pch),
+    rsa: formatFormInput(data.rsa),
   };
 }
 function formToData(values) {
   return {
     aah: parseFormFloat(values.aah),
-    pch: parseFormFloat(values.pch),
-    asi: parseFormFloat(values.asi),
-    rsa: parseFormFloat(values.rsa),
     als_apl: parseFormFloat(values.als_apl),
-    aspa: parseFormFloat(values.aspa),
     apa: parseFormFloat(values.apa),
+    asi: parseFormFloat(values.asi),
+    aspa: parseFormFloat(values.aspa),
+    pch: parseFormFloat(values.pch),
+    rsa: parseFormFloat(values.rsa),
   };
 }
 
@@ -52,15 +52,15 @@ export const EnqueteIndividuelPrestationsSocialesForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

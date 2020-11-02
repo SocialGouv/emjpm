@@ -8,7 +8,10 @@ import { EnqueteReponse } from "../Enquete";
 import { useCurrentStepFromUrl } from "../Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "../Enquete/queries";
 
-export const DirectionEnqueteDetailsReponsePreview = ({ enqueteId, enqueteReponseId }) => {
+export const DirectionEnqueteDetailsReponsePreview = ({
+  enqueteId,
+  enqueteReponseId,
+}) => {
   const router = useRouter();
   const currentStep = useCurrentStepFromUrl();
 
@@ -16,7 +19,12 @@ export const DirectionEnqueteDetailsReponsePreview = ({ enqueteId, enqueteRepons
     variables: { enqueteId, reponseId: enqueteReponseId },
   });
 
-  const { enquete, enqueteLabel, reponseLabel, enqueteReponse } = useMemo(() => {
+  const {
+    enquete,
+    enqueteLabel,
+    reponseLabel,
+    enqueteReponse,
+  } = useMemo(() => {
     const enquete = data ? data.enquetes_by_pk : {};
     const enqueteReponse = data ? data.enquete_reponse_validation_status : {};
     const enqueteLabel = !enquete.annee
@@ -26,7 +34,10 @@ export const DirectionEnqueteDetailsReponsePreview = ({ enqueteId, enqueteRepons
     return { enquete, enqueteLabel, enqueteReponse, reponseLabel };
   }, [data]);
 
-  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [enquete, loading]);
+  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [
+    enquete,
+    loading,
+  ]);
 
   return (
     <LoadingWrapper
@@ -38,13 +49,13 @@ export const DirectionEnqueteDetailsReponsePreview = ({ enqueteId, enqueteRepons
       <Breadcrumb
         crumbs={[
           {
-            label: "Enquêtes",
             href: "/direction/enquetes",
+            label: "Enquêtes",
           },
           {
-            label: enqueteLabel,
-            href: "/direction/enquetes/[enquete_id]",
             as: `/direction/enquetes/${enqueteId}`,
+            href: "/direction/enquetes/[enquete_id]",
+            label: enqueteLabel,
           },
           {
             label: reponseLabel,
@@ -67,10 +78,13 @@ export const DirectionEnqueteDetailsReponsePreview = ({ enqueteId, enqueteRepons
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push("/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]", {
-        pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
-        query: { step, substep },
-      });
+      await router.push(
+        "/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]",
+        {
+          pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
+          query: { step, substep },
+        }
+      );
       window.scrollTo(0, 0);
     }
   }

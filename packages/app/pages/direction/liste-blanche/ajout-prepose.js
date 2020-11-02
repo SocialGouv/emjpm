@@ -16,7 +16,9 @@ const ListBlanchePage = () => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <Heading1 mb={4}>{"Ajout d'un mandataire préposé à la liste blanche"}</Heading1>
+        <Heading1 mb={4}>
+          {"Ajout d'un mandataire préposé à la liste blanche"}
+        </Heading1>
         <ListeBlanchePreposeCreate />
       </BoxWrapper>
     </LayoutDirection>

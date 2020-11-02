@@ -21,7 +21,11 @@ const AdminTribunauxPage = () => {
               mt: "2",
             }}
           >
-            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/tribunaux/add-tribunal")} />
+            <AdminFilterBar
+              onAddButtonClick={() =>
+                Router.push("/admin/tribunaux/add-tribunal")
+              }
+            />
             <AdminTribunaux />
           </Flex>
         </BoxWrapper>

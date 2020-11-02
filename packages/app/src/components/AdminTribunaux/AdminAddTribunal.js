@@ -20,19 +20,21 @@ export const AdminAddTribunal = () => {
     <AdminTribunalForm
       onCancel={() => Router.push("/admin/tribunaux")}
       onSubmit={async (values) => {
-        const departement = data.departements.find(({ code }) => code === values.geocode.depcode);
+        const departement = data.departements.find(
+          ({ code }) => code === values.geocode.depcode
+        );
         await addTribunal({
           variables: {
             address: values.geocode.label,
             code_postal: values.geocode.postcode,
+            departement_id: departement.id,
             email: values.email,
             etablissement: values.etablissement,
+            latitude: values.geocode.latitude,
+            longitude: values.geocode.longitude,
             siret: values.siret,
             telephone: values.telephone,
             ville: values.geocode.city,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude,
-            departement_id: departement.id,
           },
         });
       }}

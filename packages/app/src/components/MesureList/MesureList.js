@@ -17,7 +17,12 @@ const RESULT_PER_PAGE = 20;
 
 const MesureList = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { antenne, natureMesure, mesureStatus, debouncedSearchText } = useContext(FiltersContext);
+  const {
+    antenne,
+    natureMesure,
+    mesureStatus,
+    debouncedSearchText,
+  } = useContext(FiltersContext);
   const { type } = useContext(UserContext);
   const userBasePath = getUserBasePath({ type });
 
@@ -25,16 +30,20 @@ const MesureList = () => {
     setCurrentOffset(0);
   }, [natureMesure, mesureStatus, debouncedSearchText]);
 
-  const currentMesureStatus = mesureStatus ? mesureStatus.value : MESURE_PROTECTION_STATUS.en_cours;
+  const currentMesureStatus = mesureStatus
+    ? mesureStatus.value
+    : MESURE_PROTECTION_STATUS.en_cours;
 
   const queryVariables = {
+    antenne: antenne ? antenne.value : null,
     limit: RESULT_PER_PAGE,
+    natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,
     searchText:
-      debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+      debouncedSearchText && debouncedSearchText !== ""
+        ? `${debouncedSearchText}%`
+        : null,
     status: currentMesureStatus,
-    natureMesure: natureMesure ? natureMesure.value : null,
-    antenne: antenne ? antenne.value : null,
   };
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {
@@ -42,9 +51,13 @@ const MesureList = () => {
   });
 
   const selectMesure = ({ id, userBasePath }) => {
-    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${id}`, {
-      shallow: true,
-    });
+    Router.push(
+      `${userBasePath}/mesures/[mesure_id]`,
+      `${userBasePath}/mesures/${id}`,
+      {
+        shallow: true,
+      }
+    );
   };
 
   if (loading) {
@@ -52,7 +65,11 @@ const MesureList = () => {
   }
 
   if (error) {
-    return <Box mt={3}>{"Une erreur s'est produite. Veuillez réessayer ultérieurement."}</Box>;
+    return (
+      <Box mt={3}>
+        {"Une erreur s'est produite. Veuillez réessayer ultérieurement."}
+      </Box>
+    );
   }
 
   const { count } = data.mesures_aggregate.aggregate;
@@ -78,7 +95,9 @@ const MesureList = () => {
                 <MesureListItem
                   key={mesure.id}
                   mesure={mesure}
-                  onClick={({ mesure }) => selectMesure({ id: mesure.id, userBasePath })}
+                  onClick={({ mesure }) =>
+                    selectMesure({ id: mesure.id, userBasePath })
+                  }
                 />
               );
             })}

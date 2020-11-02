@@ -1,12 +1,14 @@
-import { Upload } from '@styled-icons/boxicons-regular/Upload';
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Box, Flex } from 'rebass';
+import { Upload } from "@styled-icons/boxicons-regular/Upload";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
+import { Box, Flex } from "rebass";
 
-import { InputStyle, InputWrapperStyle, LabelStyle } from './Style';
+import { InputStyle, InputWrapperStyle, LabelStyle } from "./Style";
 
 const InputWrapper = (props) => {
-  return <Flex flexDirection="column" sx={InputWrapperStyle(props)} {...props} />;
+  return (
+    <Flex flexDirection="column" sx={InputWrapperStyle(props)} {...props} />
+  );
 };
 
 const InputElement = (props) => {
@@ -23,14 +25,29 @@ const InputLabel = (props) => {
 };
 
 const FilePicker = (props) => {
-  const { onChange, placeholder, isValid, hasError, name, required, size, value, type } = props;
+  const {
+    onChange,
+    placeholder,
+    isValid,
+    hasError,
+    name,
+    required,
+    size,
+    value,
+    type,
+  } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive = isFocus || hasValue || value;
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
-      <InputLabel size={size} aria-label={name} htmlFor={name} isActive={isActive}>
+      <InputLabel
+        size={size}
+        aria-label={name}
+        htmlFor={name}
+        isActive={isActive}
+      >
         <Flex flexDirection="column" alignItems="center">
           <Upload size="100" />
           {placeholder}
@@ -79,7 +96,7 @@ FilePicker.defaultProps = {
     return null;
   },
   required: false,
-  size: 'large',
+  size: "large",
   type: null,
   value: null,
 };

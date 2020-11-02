@@ -1,4 +1,12 @@
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -55,14 +63,14 @@ const AuthorizationLogin = (props) => {
   };
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setStatus }) => {
-      handleSubmit(values, setSubmitting, setStatus, token);
-    },
-    validationSchema: loginSchema,
     initialValues: {
       password: "",
       username: "",
     },
+    onSubmit: (values, { setSubmitting, setStatus }) => {
+      handleSubmit(values, setSubmitting, setStatus, token);
+    },
+    validationSchema: loginSchema,
   });
 
   return (
@@ -93,7 +101,10 @@ const AuthorizationLogin = (props) => {
               placeholder="Votre nom d'utilisateur"
             />
             {formik.touched.username && (
-              <InlineError message={formik.errors.username} fieldId="username" />
+              <InlineError
+                message={formik.errors.username}
+                fieldId="username"
+              />
             )}
           </Field>
           <Field>
@@ -107,12 +118,19 @@ const AuthorizationLogin = (props) => {
               placeholder="Votre mot de passe"
             />
             {formik.touched.password && (
-              <InlineError message={formik.errors.password} fieldId="password" />
+              <InlineError
+                message={formik.errors.password}
+                fieldId="password"
+              />
             )}
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Se connecter
               </Button>
             </Box>

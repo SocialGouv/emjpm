@@ -9,9 +9,9 @@ const antenneIdValidator = async (req, res, next) => {
       return res.status(422).json({
         errors: [
           {
-            value: body.antenne_id,
-            param: "antenne_id",
             msg: `antenne_id does not match with your service.`,
+            param: "antenne_id",
+            value: body.antenne_id,
           },
         ],
       });

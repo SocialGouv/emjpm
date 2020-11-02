@@ -22,13 +22,20 @@ const LayoutDirection = ({ children }) => {
   ];
 
   if (type === "admin" || type === "direction") {
-    navigationLinks.splice(2, 0, { title: "Enquêtes", url: "/direction/enquetes" });
+    navigationLinks.splice(2, 0, {
+      title: "Enquêtes",
+      url: "/direction/enquetes",
+    });
   }
 
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header dropDownLinks={[{ title: "Vos informations", url: "/direction/informations" }]} />
+        <Header
+          dropDownLinks={[
+            { title: "Vos informations", url: "/direction/informations" },
+          ]}
+        />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
         </BoxWrapper>
@@ -39,9 +46,8 @@ const LayoutDirection = ({ children }) => {
           <Footer />
         </BoxWrapper>
       </Box>
-      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !== "true" && (
-        <SatisfactionCampaign />
-      )}
+      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !==
+        "true" && <SatisfactionCampaign />}
     </Fragment>
   );
 };

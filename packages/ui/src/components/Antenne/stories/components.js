@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-import { Button } from '../../../core';
+import { Button } from "../../../core";
 
 export const Link = (props) => {
   const { href, children } = props;

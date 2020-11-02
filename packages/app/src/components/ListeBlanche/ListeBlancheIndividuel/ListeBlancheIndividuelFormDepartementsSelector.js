@@ -33,7 +33,9 @@ export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
       options={options}
       value={null}
       onChange={(option) => {
-        const departement = queryResults.departements.find((d) => d.id === option.value);
+        const departement = queryResults.departements.find(
+          (d) => d.id === option.value
+        );
         onAdd(departement);
       }}
     />

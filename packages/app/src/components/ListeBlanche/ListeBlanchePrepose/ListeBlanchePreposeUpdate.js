@@ -42,7 +42,6 @@ export const ListeBlanchePreposeUpdate = (props) => {
 
         await updateListeBlanche({
           variables: {
-            id: data.id,
             data: properties,
             etablissements: etablissements.map((e) => {
               return {
@@ -51,6 +50,7 @@ export const ListeBlanchePreposeUpdate = (props) => {
                 lb_user_id: data.id,
               };
             }),
+            id: data.id,
           },
         });
 

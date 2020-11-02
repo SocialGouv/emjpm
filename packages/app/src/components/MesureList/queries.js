@@ -11,7 +11,10 @@ export const MESURES_QUERY = gql`
   ) {
     mesures_aggregate(
       where: {
-        _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
+        _or: [
+          { numero_dossier: { _ilike: $searchText } }
+          { numero_rg: { _ilike: $searchText } }
+        ]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
@@ -65,7 +68,10 @@ export const MESURES_QUERY = gql`
       limit: $limit
       order_by: { date_nomination: desc_nulls_first }
       where: {
-        _or: [{ numero_dossier: { _ilike: $searchText } }, { numero_rg: { _ilike: $searchText } }]
+        _or: [
+          { numero_dossier: { _ilike: $searchText } }
+          { numero_rg: { _ilike: $searchText } }
+        ]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }

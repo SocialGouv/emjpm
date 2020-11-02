@@ -1,4 +1,9 @@
-import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "@emjpm/ui";
+import {
+  BoxWrapper,
+  FlexWrapper,
+  fourColumnStyle,
+  twoColumnStyle,
+} from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
@@ -26,13 +31,22 @@ const Mandataires = () => {
   const initialFilters = {};
 
   if (direction.type === "departemental") {
-    initialFilters.departement = { id: direction.departement.id, label: direction.departement.nom };
+    initialFilters.departement = {
+      id: direction.departement.id,
+      label: direction.departement.nom,
+    };
   } else if (direction.type === "regional") {
-    initialFilters.region = { id: direction.region.id, label: direction.region.nom };
+    initialFilters.region = {
+      id: direction.region.id,
+      label: direction.region.nom,
+    };
   }
 
   return (
-    <FiltersContextSerializableProvider useLocalStorage={true} initialFilters={initialFilters}>
+    <FiltersContextSerializableProvider
+      useLocalStorage={true}
+      initialFilters={initialFilters}
+    >
       <LayoutDirection>
         <BoxWrapper mt={5} px="1">
           <DirectionFilters />

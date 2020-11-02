@@ -5,7 +5,9 @@ export const formatUserFromToken = (currentUser) => {
 
     return {
       __typename: "CurrentUser",
-      agrements: agrements ? JSON.parse(agrements.replace("{", "[").replace("}", "]")) : [],
+      agrements: agrements
+        ? JSON.parse(agrements.replace("{", "[").replace("}", "]"))
+        : [],
       id: hasuraClaims["x-hasura-user-id"],
       role: hasuraClaims["x-hasura-default-role"],
       serviceId: hasuraClaims["x-hasura-service-id"],

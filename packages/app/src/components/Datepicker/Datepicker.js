@@ -15,8 +15,8 @@ export const Datepicker = (props) => {
     <DP
       placeholderText={placeholder}
       className={classNames({
-        dp_input: true,
         dp_error: hasError,
+        dp_input: true,
       })}
       dateFormat="dd/MM/yyyy"
       locale="fr"

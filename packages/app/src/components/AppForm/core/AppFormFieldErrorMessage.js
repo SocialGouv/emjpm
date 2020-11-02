@@ -11,10 +11,10 @@ export const AppFormFieldErrorMessage = ({ id, error, formik, hideErrors }) => {
   }
 
   const showError = useAppFieldShowError({
-    id,
     error,
     formik,
     hideErrors,
+    id,
   });
 
   return <InlineError showError={showError} message={error} fieldId={id} />;

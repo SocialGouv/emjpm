@@ -9,7 +9,9 @@ const France = (props) => {
   const [currentPanel, togglePanel] = useState(false);
   return (
     <Fragment>
-      {currentPanel.isActive && <Panel togglePanel={togglePanel} currentPanel={currentPanel} />}
+      {currentPanel.isActive && (
+        <Panel togglePanel={togglePanel} currentPanel={currentPanel} />
+      )}
       <SvgLoader svgXML={Map}>
         <SvgProxy selector="#carte" fill={color} />
         {departements.map((dpt, index) => (

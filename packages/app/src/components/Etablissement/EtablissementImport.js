@@ -17,6 +17,10 @@ export const EtablissementImport = () => {
   const [importFiness] = useMutation(IMPORT_FINESS);
 
   const formik = useFormik({
+    initialValues: {
+      url:
+        "https://www.data.gouv.fr/fr/datasets/r/16ee2cd3-b9fe-459e-8a57-46e03ba3adbd",
+    },
     onSubmit: async (values, { setSubmitting }) => {
       await importFiness({
         variables: {
@@ -25,9 +29,6 @@ export const EtablissementImport = () => {
       });
       setSubmitting(false);
       document.location.reload(true);
-    },
-    initialValues: {
-      url: "https://www.data.gouv.fr/fr/datasets/r/16ee2cd3-b9fe-459e-8a57-46e03ba3adbd",
     },
   });
 
@@ -65,7 +66,9 @@ export const EtablissementImport = () => {
           <Heading3 mb="2">{`Mise à jour de la base de données FINESS`}</Heading3>
           <Text mb="1" lineHeight="2">
             {`Dernière mise à jour de la base FINESS: ${
-              processusState ? format(new Date(processusState.end_date), "dd/MM/yyyy HH:mm") : ""
+              processusState
+                ? format(new Date(processusState.end_date), "dd/MM/yyyy HH:mm")
+                : ""
             }`}
           </Text>
           <Box as="form" onSubmit={formik.handleSubmit}>

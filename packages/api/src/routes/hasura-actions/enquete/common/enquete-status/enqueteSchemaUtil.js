@@ -28,7 +28,7 @@ async function getValidationStatus(
   const isValid = await schema.isValid(data);
 
   if (!isValid) {
-    await logValidationErrors(data, { schema, debugName, logDataWithErrors });
+    await logValidationErrors(data, { debugName, logDataWithErrors, schema });
   }
 
   return isValid ? "valid" : "invalid";
@@ -103,7 +103,7 @@ function getTopLevelGlobalStatus(status) {
 }
 
 module.exports = {
-  getValidationStatus,
   getGlobalStatus,
   getTopLevelGlobalStatus,
+  getValidationStatus,
 };

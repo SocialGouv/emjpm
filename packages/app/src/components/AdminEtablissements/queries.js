@@ -15,7 +15,10 @@ export const ETABLISSEMENTS = gql`
     etablissements(
       limit: $limit
       offset: $offset
-      where: { rslongue: { _ilike: $search }, departement: { code: { _eq: $departementCode } } }
+      where: {
+        rslongue: { _ilike: $search }
+        departement: { code: { _eq: $departementCode } }
+      }
       order_by: { departement: { code: asc } }
     ) {
       id

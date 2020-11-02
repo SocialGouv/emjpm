@@ -1,8 +1,13 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Flex, Text } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex, Text } from "rebass";
 
-import { InnerRadioStyle, RadioInputStyle, RadioStyle, RadioWrapperStyle } from './style';
+import {
+  InnerRadioStyle,
+  RadioInputStyle,
+  RadioStyle,
+  RadioWrapperStyle,
+} from "./style";
 
 const BaseRadio = (props) => {
   return (
@@ -17,10 +22,22 @@ export const Radio = (props) => {
   return (
     <Box sx={RadioWrapperStyle}>
       <Box htmlFor={id} as="label">
-        <Box sx={RadioInputStyle()} as="input" name={name} id={id} checked={checked} type="Radio" {...props} />
+        <Box
+          sx={RadioInputStyle()}
+          as="input"
+          name={name}
+          id={id}
+          checked={checked}
+          type="Radio"
+          {...props}
+        />
         <Flex sx={{ opacity: disabled ? 0.5 : 1 }}>
           <BaseRadio disabled={disabled} checked={checked} />
-          {renderRadioLabel ? renderRadioLabel(props) : <Text lineHeight="20px">{label}</Text>}
+          {renderRadioLabel ? (
+            renderRadioLabel(props)
+          ) : (
+            <Text lineHeight="20px">{label}</Text>
+          )}
         </Flex>
       </Box>
     </Box>
@@ -38,5 +55,5 @@ Radio.propTypes = {
 
 Radio.defaultProps = {
   disabled: false,
-  renderRadioLabel: 'null',
+  renderRadioLabel: "null",
 };

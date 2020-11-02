@@ -1,7 +1,12 @@
 import gql from "graphql-tag";
 
 export const ADD_COMMENT = gql`
-  mutation InsertComment($comment: String!, $service_id: Int, $ti_id: Int!, $mandataire_id: Int) {
+  mutation InsertComment(
+    $comment: String!
+    $service_id: Int
+    $ti_id: Int!
+    $mandataire_id: Int
+  ) {
     insert_commentaires(
       objects: {
         comment: $comment
@@ -25,7 +30,10 @@ export const ADD_COMMENT = gql`
 
 export const EDIT_COMMENT = gql`
   mutation UpdateComment($comment: String!, $id: Int) {
-    update_commentaires(_set: { comment: $comment }, where: { id: { _eq: $id } }) {
+    update_commentaires(
+      _set: { comment: $comment }
+      where: { id: { _eq: $id } }
+    ) {
       affected_rows
       returning {
         comment

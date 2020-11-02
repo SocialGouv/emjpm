@@ -20,10 +20,10 @@ async function checkEnqueteContext(req) {
 
   const context = {
     enqueteId,
+    mandataireId: undefined,
+    serviceId: undefined,
     userId,
     user_type: undefined,
-    serviceId: undefined,
-    mandataireId: undefined,
   };
 
   switch (role) {

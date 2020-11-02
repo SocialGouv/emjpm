@@ -48,25 +48,25 @@ async function initEnqueteMandataireIndividuel({
 
   const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
   const ids = {
+    activite_id: enqueteReponse.enquete_reponses_activite_id,
+    agrements_formations_id:
+      enqueteReponse.enquete_reponses_agrements_formations_id,
     id: enqueteReponse.id,
     informations_mandataire_id:
       enqueteReponse.enquete_reponses_informations_mandataire_id,
+    populations_id: enqueteReponse.enquete_reponses_populations_id,
     prestations_sociale_id:
       enqueteReponse.enquete_reponses_prestations_sociale_id,
-    agrements_formations_id:
-      enqueteReponse.enquete_reponses_agrements_formations_id,
-    activite_id: enqueteReponse.enquete_reponses_activite_id,
-    populations_id: enqueteReponse.enquete_reponses_populations_id,
   };
 
   return {
-    status: enqueteReponse.status,
-    mandataire: enqueteReponse.mandataire,
-    user_type: enqueteReponse.user_type,
-    submitted_at: enqueteReponse.submitted_at,
     enquete_id: enqueteReponse.enquete_id,
-    enquete_reponse_validation_status: status,
     enquete_reponse_ids: ids,
+    enquete_reponse_validation_status: status,
+    mandataire: enqueteReponse.mandataire,
+    status: enqueteReponse.status,
+    submitted_at: enqueteReponse.submitted_at,
+    user_type: enqueteReponse.user_type,
   };
 }
 

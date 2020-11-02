@@ -20,8 +20,15 @@ import { ENQUETE_DETAILS_LIST } from "./queries";
 const resultPerPage = 10;
 
 function buildQueryVariables(enqueteId, criteria) {
-  const variables = { enqueteId, offset: criteria.currentOffset, limit: resultPerPage };
-  if (criteria.selectedDepartement && criteria.selectedDepartement.departement) {
+  const variables = {
+    enqueteId,
+    limit: resultPerPage,
+    offset: criteria.currentOffset,
+  };
+  if (
+    criteria.selectedDepartement &&
+    criteria.selectedDepartement.departement
+  ) {
     variables.departementId = criteria.selectedDepartement.departement.id;
   }
 
@@ -43,32 +50,44 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
   });
 
   const { data, loading, error } = useQuery(ENQUETE_DETAILS_LIST, {
-    variables: buildQueryVariables(enqueteId, criteria),
     context: queryContext,
+    variables: buildQueryVariables(enqueteId, criteria),
   });
 
   const enqueteLabel =
     data && data.enquetes_by_pk
-      ? `Enquête ${data.enquetes_by_pk.annee} sur l'activité de ${data.enquetes_by_pk.annee - 1}`
+      ? `Enquête ${data.enquetes_by_pk.annee} sur l'activité de ${
+          data.enquetes_by_pk.annee - 1
+        }`
       : "";
 
   return (
-    <LoadingWrapper error={error} loading={loading} errorRedirect={{ url: "/direction/enquetes" }}>
+    <LoadingWrapper
+      error={error}
+      loading={loading}
+      errorRedirect={{ url: "/direction/enquetes" }}
+    >
       <Breadcrumb
         crumbs={[
           {
-            label: "Enquêtes",
             href: "/direction/enquetes",
+            label: "Enquêtes",
           },
           {
-            label: enqueteLabel,
-            href: "/direction/enquetes/[enquete_id]",
             as: `/direction/enquetes/${enqueteId}`,
+            href: "/direction/enquetes/[enquete_id]",
+            label: enqueteLabel,
           },
         ]}
       />
 
-      <Flex mt={4} px="1" alignItems="center" flexDirection="column" justifyContent="center">
+      <Flex
+        mt={4}
+        px="1"
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+      >
         <Heading2>{enqueteLabel}</Heading2>
       </Flex>
 
@@ -82,10 +101,15 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
             individuelsCount={data.individuels_aggregate.mandataires.count}
             servicesCount={data.services_aggregate.services.count}
             enqueteDraftCount={data.enquete_draft_count.enquete_reponses.count}
-            enqueteSubmittedCount={data.enquete_submitted_count.enquete_reponses.count}
+            enqueteSubmittedCount={
+              data.enquete_submitted_count.enquete_reponses.count
+            }
             daysBeforeClosing={
               data.enquetes_by_pk && data.enquetes_by_pk.date_fin
-                ? differenceInDays(new Date(data.enquetes_by_pk.date_fin), new Date())
+                ? differenceInDays(
+                    new Date(data.enquetes_by_pk.date_fin),
+                    new Date()
+                  )
                 : undefined
             }
           />
@@ -103,11 +127,18 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         <Heading2>{`Réponses à l'enquête`}</Heading2>
       </Flex>
 
-      <DirectionEnqueteReponsesCriteria criteria={criteria} updateCriteria={updateCriteria} />
+      <DirectionEnqueteReponsesCriteria
+        criteria={criteria}
+        updateCriteria={updateCriteria}
+      />
 
       <Box mt={2}>
         <PaginatedList
-          entries={data && data.enquetes_by_pk ? data.enquetes_by_pk.enquete_reponses : []}
+          entries={
+            data && data.enquetes_by_pk
+              ? data.enquetes_by_pk.enquete_reponses
+              : []
+          }
           RowItem={DirectionEnqueteReponseResumeCard}
           count={
             data && data.enquetes_by_pk
@@ -125,9 +156,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
                     href={`/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]`}
                     as={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
-                    <a>
-                      <Button>Visualiser</Button>
-                    </a>
+                    <Button>Visualiser</Button>
                   </Link>
                 </Box>
               );

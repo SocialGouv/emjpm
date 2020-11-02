@@ -23,6 +23,9 @@ export const MagistratMandataireCommentForm = (props) => {
   const [editComment] = useMutation(EDIT_COMMENT);
 
   const formik = useFormik({
+    initialValues: {
+      comment: comment || null,
+    },
     onSubmit: (values, { setSubmitting }) => {
       if (isEditing) {
         editComment({
@@ -51,15 +54,13 @@ export const MagistratMandataireCommentForm = (props) => {
     validationSchema: Yup.object().shape({
       comment: Yup.string().required(),
     }),
-    initialValues: {
-      comment: comment || null,
-    },
   });
 
   return (
     <Box mt="3" mb="3" width="100%">
       <Text mb="1" lineHeight="1.5">
-        Les observations sont visibles uniquement par les magistrats de votre tribunal
+        Les observations sont visibles uniquement par les magistrats de votre
+        tribunal
       </Text>
       <form onSubmit={formik.handleSubmit}>
         <Field>
@@ -89,7 +90,11 @@ export const MagistratMandataireCommentForm = (props) => {
             </Button>
           </Box>
           <Box>
-            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
               Enregistrer
             </Button>
           </Box>

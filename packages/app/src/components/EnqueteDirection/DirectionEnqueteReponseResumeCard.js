@@ -59,7 +59,9 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           {item.mandataire && item.mandataire.user ? (
             <Flex>
               <Text sx={descriptionStyle("important")}>
-                {item.mandataire.user.nom ? item.mandataire.user.nom.toUpperCase() : ""}
+                {item.mandataire.user.nom
+                  ? item.mandataire.user.nom.toUpperCase()
+                  : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle("important")}>
                 {item.mandataire.user.prenom}
@@ -77,7 +79,9 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           <Text sx={labelStyle}>{`Département`}</Text>
           <Flex>
             <Text sx={descriptionStyle()}>
-              {item.departement ? `${item.departement.code} - ${item.departement.nom}` : "Inconnu"}
+              {item.departement
+                ? `${item.departement.code} - ${item.departement.nom}`
+                : "Inconnu"}
             </Text>
           </Flex>
         </Flex>
@@ -85,13 +89,19 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{`Ville`}</Text>
           <Flex>
-            {item.mandataire && <Text sx={descriptionStyle()}>{item.mandataire.ville}</Text>}
-            {item.service && <Text sx={descriptionStyle()}>{item.service.ville}</Text>}
+            {item.mandataire && (
+              <Text sx={descriptionStyle()}>{item.mandataire.ville}</Text>
+            )}
+            {item.service && (
+              <Text sx={descriptionStyle()}>{item.service.ville}</Text>
+            )}
           </Flex>
         </Flex>
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{`Statut`}</Text>
-          <Text sx={descriptionStyle("important")}>{getStatusLabel(item.status)}</Text>
+          <Text sx={descriptionStyle("important")}>
+            {getStatusLabel(item.status)}
+          </Text>
           <Text sx={descriptionStyle()}>
             {item.submitted_at
               ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${

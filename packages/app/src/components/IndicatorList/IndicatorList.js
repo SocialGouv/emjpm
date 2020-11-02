@@ -1,5 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading1, Heading2, Heading4, Indicator, Spinner } from "@emjpm/ui";
+import {
+  Card,
+  Heading1,
+  Heading2,
+  Heading4,
+  Indicator,
+  Spinner,
+} from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
@@ -7,14 +14,15 @@ import { formatSatisfactionPourcent } from "./helpers";
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
-const filterArray = (array, type) => array.filter((element) => element.type === type);
+const filterArray = (array, type) =>
+  array.filter((element) => element.type === type);
 const filterArrays = (arrays) => {
   return arrays.map((array) => {
     const [service] = filterArray(array, "service");
     const [prepose] = filterArray(array, "prepose");
     const [individuel] = filterArray(array, "individuel");
     const [ti] = filterArray(array, "ti");
-    return { service, prepose, individuel, ti };
+    return { individuel, prepose, service, ti };
   });
 };
 
@@ -49,7 +57,11 @@ const IndicatorList = (props) => {
     departements,
   } = data;
   const [department] = departements;
-  const [loginData, inscritData, satisfactionData] = filterArrays([login, inscrit, satisfaction]);
+  const [loginData, inscritData, satisfactionData] = filterArrays([
+    login,
+    inscrit,
+    satisfaction,
+  ]);
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
@@ -115,7 +127,9 @@ const IndicatorList = (props) => {
           loading={false}
           title="Services mandataires"
           indicator={formatSatisfactionPourcent(
-            satisfactionData.service ? satisfactionData.service.value : undefined
+            satisfactionData.service
+              ? satisfactionData.service.value
+              : undefined
           )}
         />
         <Indicator
@@ -123,7 +137,9 @@ const IndicatorList = (props) => {
           loading={false}
           title="Préposés à un établissement"
           indicator={formatSatisfactionPourcent(
-            satisfactionData.prepose ? satisfactionData.prepose.value : undefined
+            satisfactionData.prepose
+              ? satisfactionData.prepose.value
+              : undefined
           )}
         />
         <Indicator
@@ -131,7 +147,9 @@ const IndicatorList = (props) => {
           loading={false}
           title="Mandataires individuels"
           indicator={formatSatisfactionPourcent(
-            satisfactionData.individuel ? satisfactionData.individuel.value : undefined
+            satisfactionData.individuel
+              ? satisfactionData.individuel.value
+              : undefined
           )}
         />
         <Indicator

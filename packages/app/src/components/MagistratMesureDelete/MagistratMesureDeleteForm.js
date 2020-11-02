@@ -40,6 +40,9 @@ export const MagistratMesureDeleteForm = (props) => {
   });
 
   const formik = useFormik({
+    initialValues: {
+      reason_delete: "",
+    },
     onSubmit: async (_, { setSubmitting }) => {
       await deleteMesure({
         awaitRefetchQueries: true,
@@ -47,9 +50,9 @@ export const MagistratMesureDeleteForm = (props) => {
           {
             query: MAGISTRAT_MESURES_QUERY,
             variables: {
+              natureMesure: null,
               offset: 0,
               searchText: null,
-              natureMesure: null,
             },
           },
         ],
@@ -61,9 +64,6 @@ export const MagistratMesureDeleteForm = (props) => {
       setSubmitting(false);
     },
     validationSchema: magistratMesureDeleteSchema,
-    initialValues: {
-      reason_delete: "",
-    },
   });
 
   return (
@@ -84,13 +84,18 @@ export const MagistratMesureDeleteForm = (props) => {
           <Box mb="2">
             <Input
               value={formik.values.reason_delete}
-              hasError={formik.errors.reason_delete && formik.touched.reason_delete}
+              hasError={
+                formik.errors.reason_delete && formik.touched.reason_delete
+              }
               id="reason_delete"
               name="reason_delete"
               onChange={formik.handleChange}
               placeholder="Raison de la suppression"
             />
-            <InlineError message={formik.errors.reason_delete} fieldId="reason_delete" />
+            <InlineError
+              message={formik.errors.reason_delete}
+              fieldId="reason_delete"
+            />
           </Box>
           <Flex justifyContent="flex-end">
             <Box>
@@ -110,7 +115,11 @@ export const MagistratMesureDeleteForm = (props) => {
               </Button>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Supprimer la mesure
               </Button>
             </Box>

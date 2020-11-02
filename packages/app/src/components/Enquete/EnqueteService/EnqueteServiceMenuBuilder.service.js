@@ -31,8 +31,8 @@ function buildMenuSections(enqueteReponse) {
       status: "valid",
       steps: [
         {
-          label: "Bienvenue",
           component: EnqueteServiceWelcome,
+          label: "Bienvenue",
           status: "valid",
         },
       ],
@@ -41,8 +41,8 @@ function buildMenuSections(enqueteReponse) {
       status: status.informations.global,
       steps: [
         {
-          label: "Informations service",
           component: EnqueteServiceInformations,
+          label: "Informations service",
           status: status.informations.informations,
         },
       ],
@@ -51,8 +51,8 @@ function buildMenuSections(enqueteReponse) {
       status: status.personnelFormation.global,
       steps: [
         {
-          label: "Personnel et formation",
           component: EnqueteServicePersonnelFormation,
+          label: "Personnel et formation",
           status: status.personnelFormation.personnelFormation,
         },
       ],
@@ -62,58 +62,58 @@ function buildMenuSections(enqueteReponse) {
       status: status.activite.global,
       steps: [
         {
-          label: "Curatelle renforcée",
           component: EnqueteActiviteCuratelleRenforcee,
+          label: "Curatelle renforcée",
           status: status.activite.curatelleRenforcee,
         },
         {
-          label: "Curatelle simple",
           component: EnqueteActiviteCuratelleSimple,
+          label: "Curatelle simple",
           status: status.activite.curatelleSimple,
         },
         {
-          label: "Tutelle",
           component: EnqueteActiviteTutelle,
+          label: "Tutelle",
           status: status.activite.tutelle,
         },
         {
-          label: "Mesure d'accompagnement judiciaire",
           component: EnqueteActiviteAccompagnementJudiciaire,
+          label: "Mesure d'accompagnement judiciaire",
           status: status.activite.accompagnementJudiciaire,
         },
         {
-          label: "Tutelle ou curatelle aux biens",
           component: EnqueteActiviteCuratelleBiens,
+          label: "Tutelle ou curatelle aux biens",
           status: status.activite.curatelleBiens,
         },
         {
-          label: "Tutelle ou curatelle à la personne",
           component: EnqueteActiviteCuratellePersonne,
+          label: "Tutelle ou curatelle à la personne",
           status: status.activite.curatellePersonne,
         },
         {
-          label: "Subrogé tuteur ou curateur",
           component: EnqueteActiviteSubrogeTuteurCreateur,
+          label: "Subrogé tuteur ou curateur",
           status: status.activite.subrogeTuteurCreateur,
         },
         {
-          label: "Sauvegarde de justice",
           component: EnqueteActiviteSauvegardeJustice,
+          label: "Sauvegarde de justice",
           status: status.activite.sauvegardeJustice,
         },
         {
-          label: "Mandat ad hoc majeur",
           component: EnqueteActiviteMandatHadocMajeur,
+          label: "Mandat ad hoc majeur",
           status: status.activite.mandatHadocMajeur,
         },
         {
-          label: "Issues des révisions de mesures",
           component: EnqueteActiviteRevisionMesures,
+          label: "Issues des révisions de mesures",
           status: status.activite.revisionMesures,
         },
         {
-          label: "Causes des sorties du dispositif",
           component: EnqueteActiviteCausesSortiesDispositif,
+          label: "Causes des sorties du dispositif",
           status: status.activite.causesSortiesDispositif,
         },
       ],
@@ -123,28 +123,28 @@ function buildMenuSections(enqueteReponse) {
       status: status.populations.global,
       steps: [
         {
-          label: "Curatelle",
           component: EnquetePopulationsCuratelle,
+          label: "Curatelle",
           status: status.populations.curatelle,
         },
         {
-          label: "Tutelle",
           component: EnquetePopulationsTutelle,
+          label: "Tutelle",
           status: status.populations.tutelle,
         },
         {
-          label: "Mesure d'accompagnement de justice",
           component: EnquetePopulationsMAJ,
+          label: "Mesure d'accompagnement de justice",
           status: status.populations.accompagnementJudiciaire,
         },
         {
-          label: "Sauvegarde de justice",
           component: EnquetePopulationsSauvegardeJustice,
+          label: "Sauvegarde de justice",
           status: status.populations.sauvegardeJustice,
         },
         {
-          label: "Autre",
           component: EnquetePopulationsAutreMesures,
+          label: "Autre",
           status: status.populations.autresMesures,
         },
       ],
@@ -153,8 +153,8 @@ function buildMenuSections(enqueteReponse) {
       status: enqueteReponse.status === "draft" ? "empty" : "valid",
       steps: [
         {
-          label: "Envoi de vos réponses",
           component: EnqueteServiceSubmit,
+          label: "Envoi de vos réponses",
           status: status.global === "valid" ? "valid" : "empty",
         },
       ],

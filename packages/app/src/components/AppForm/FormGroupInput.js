@@ -32,10 +32,10 @@ export const FormGroupInput = ({
   }
 
   const showError = useAppFieldShowError({
-    id,
     error,
     formik,
     hideErrors,
+    id,
   });
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
@@ -60,7 +60,12 @@ export const FormGroupInput = ({
         {children ? <Box>{children}</Box> : null}
       </Flex>
 
-      <AppFormFieldErrorMessage id={id} error={error} formik={formik} hideErrors={hideErrors} />
+      <AppFormFieldErrorMessage
+        id={id}
+        error={error}
+        formik={formik}
+        hideErrors={hideErrors}
+      />
     </Field>
   );
 };

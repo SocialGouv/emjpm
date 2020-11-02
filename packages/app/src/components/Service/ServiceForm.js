@@ -10,15 +10,15 @@ export const ServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: adminServiceSchema,
     initialValues: {
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
-      telephone: service ? service.telephone : "",
       geocode: geocodeInitialValue(service),
       siret: service ? service.siret || "" : "",
+      telephone: service ? service.telephone : "",
     },
+    onSubmit: handleSubmit,
+    validationSchema: adminServiceSchema,
   });
 
   return (
@@ -58,12 +58,17 @@ export const ServiceForm = (props) => {
                 value={formik.values.etablissement}
                 id="etablissement"
                 name="etablissement"
-                hasError={formik.errors.etablissement && formik.touched.etablissement}
+                hasError={
+                  formik.errors.etablissement && formik.touched.etablissement
+                }
                 onChange={formik.handleChange}
                 placeholder="Nom du service"
               />
               {formik.touched.etablissement && (
-                <InlineError message={formik.errors.etablissement} fieldId="etablissement" />
+                <InlineError
+                  message={formik.errors.etablissement}
+                  fieldId="etablissement"
+                />
               )}
             </Field>
             <Field>
@@ -86,7 +91,10 @@ export const ServiceForm = (props) => {
                 onChange={formik.handleChange}
                 placeholder="Téléphone"
               />
-              <InlineError message={formik.errors.telephone} fieldId="telephone" />
+              <InlineError
+                message={formik.errors.telephone}
+                fieldId="telephone"
+              />
             </Field>
             <Field>
               <Geocode

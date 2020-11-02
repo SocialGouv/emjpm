@@ -7,8 +7,14 @@ import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();
-  const [uploadFile, { loading: enqueteImportLoading }] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
-  const { data: enqueteData, loading: enqueteLoading, error: enqueteError } = useQuery(ENQUETE, {
+  const [uploadFile, { loading: enqueteImportLoading }] = useMutation(
+    UPLOAD_ENQUETE_EXCEL_FILE
+  );
+  const {
+    data: enqueteData,
+    loading: enqueteLoading,
+    error: enqueteError,
+  } = useQuery(ENQUETE, {
     variables: { id: enqueteId },
   });
   const enquete = enqueteData ? enqueteData.enquetes_by_pk : undefined;
@@ -64,12 +70,12 @@ function useEnqueteImportManager({ enqueteId, userId }) {
   return {
     enquete,
     enqueteReponse,
+    error: enqueteReponseError || enqueteError,
     importEnqueteFile,
     importSummary,
     loading: enqueteReponseLoading || enqueteLoading,
-    error: enqueteReponseError || enqueteError,
-    uploading: enqueteImportLoading,
     reset,
+    uploading: enqueteImportLoading,
   };
 }
 

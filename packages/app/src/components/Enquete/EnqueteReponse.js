@@ -5,7 +5,12 @@ import { EnqueteIndividuel } from "./EnqueteIndividuel";
 import { EnquetePrepose } from "./EnquetePrepose";
 import { EnqueteService } from "./EnqueteService";
 
-export const EnqueteReponse = ({ enquete, enqueteReponse, currentStep, navigateToStep }) => {
+export const EnqueteReponse = ({
+  enquete,
+  enqueteReponse,
+  currentStep,
+  navigateToStep,
+}) => {
   return (
     <Fragment>
       {enqueteReponse.user_type === "individuel" && (
@@ -39,7 +44,7 @@ export const EnqueteReponse = ({ enquete, enqueteReponse, currentStep, navigateT
 };
 
 EnqueteReponse.propTypes = {
+  currentStep: PropTypes.object.isRequired,
   enquete: PropTypes.object.isRequired,
   enqueteReponse: PropTypes.object.isRequired,
-  currentStep: PropTypes.object.isRequired,
 };

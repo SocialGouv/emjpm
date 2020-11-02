@@ -1,5 +1,5 @@
 const DropdownmenuStyle = {
-  bg: 'blue',
+  bg: "blue",
 };
 
 export { DropdownmenuStyle };

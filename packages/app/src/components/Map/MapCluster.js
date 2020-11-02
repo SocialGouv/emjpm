@@ -2,24 +2,24 @@ import React from "react";
 import { Cluster, Marker } from "react-mapbox-gl";
 
 const styles = {
-  marker: {
-    width: 30,
-    height: 30,
-    borderRadius: "50%",
-    backgroundColor: "#51D5A0",
-    border: "2px solid #56C498",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-  },
   clickable: {
     cursor: "pointer",
   },
+  marker: {
+    alignItems: "center",
+    backgroundColor: "#51D5A0",
+    border: "2px solid #56C498",
+    borderRadius: "50%",
+    color: "white",
+    display: "flex",
+    height: 30,
+    justifyContent: "center",
+    width: 30,
+  },
   selected: {
-    fontWeight: "bold",
     backgroundColor: "rgb(213, 112, 81)",
     border: "2px solid rgb(196, 86, 86)",
+    fontWeight: "bold",
   },
 };
 
@@ -27,7 +27,9 @@ const MapCluster = (props) => {
   const { items, type, onMarkerClick, onClusterClick } = props;
 
   const clusterMarker = (coordinates, pointCount, getLeaves) => {
-    const isSelected = getLeaves().some((x) => x.props.className === "selected");
+    const isSelected = getLeaves().some(
+      (x) => x.props.className === "selected"
+    );
 
     return (
       <Marker
@@ -42,9 +44,9 @@ const MapCluster = (props) => {
           if (onMarkerClick !== undefined) {
             const markers = getLeaves().map((x) => ({
               id: parseInt(x.key),
-              type,
-              longitude: x.props.coordinates[0],
               latitude: x.props.coordinates[1],
+              longitude: x.props.coordinates[0],
+              type,
             }));
             onClusterClick(markers);
           }
@@ -68,7 +70,7 @@ const MapCluster = (props) => {
           coordinates={[longitude, latitude]}
           onClick={() => {
             if (onMarkerClick !== undefined) {
-              onMarkerClick({ id, type, longitude, latitude });
+              onMarkerClick({ id, latitude, longitude, type });
             }
           }}
           key={id} // do not modify the key: this id will be passed to onClusterClick

@@ -1,5 +1,14 @@
 import { DIRECTION } from "@emjpm/core";
-import { Button, Card, Field, Heading1, Heading4, InlineError, Select, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading1,
+  Heading4,
+  InlineError,
+  Select,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -13,9 +22,14 @@ import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
 export const SignupDirection = () => {
-  const { user, direction, setDirection, validateStepOne } = useContext(SignupContext);
+  const { user, direction, setDirection, validateStepOne } = useContext(
+    SignupContext
+  );
 
   const formik = useFormik({
+    initialValues: {
+      directionType: direction ? direction.directionType : "",
+    },
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         direction: {
@@ -35,9 +49,6 @@ export const SignupDirection = () => {
       });
     },
     validationSchema: signupDirectionSchema,
-    initialValues: {
-      directionType: direction ? direction.directionType : "",
-    },
   });
 
   return (
@@ -63,21 +74,29 @@ export const SignupDirection = () => {
                     name="directionType"
                     placeholder="Type de direction"
                     value={formik.values.directionType}
-                    hasError={formik.errors.directionType && formik.touched.directionType}
-                    onChange={(option) => formik.setFieldValue("directionType", option)}
+                    hasError={
+                      formik.errors.directionType &&
+                      formik.touched.directionType
+                    }
+                    onChange={(option) =>
+                      formik.setFieldValue("directionType", option)
+                    }
                     options={DIRECTION.DIRECTION_TYPE.options}
                   />
                   {formik.touched.directionType && (
-                    <InlineError message={formik.errors.directionType} fieldId="directionType" />
+                    <InlineError
+                      message={formik.errors.directionType}
+                      fieldId="directionType"
+                    />
                   )}
                 </Field>
                 <Flex justifyContent="flex-end">
                   <Box>
-                    <Button mr="2" variant="outline">
-                      <Link href="/">
-                        <a>Annuler</a>
-                      </Link>
-                    </Button>
+                    <Link href="/">
+                      <Button mr="2" variant="outline">
+                        Annuler
+                      </Button>
+                    </Link>
                   </Box>
                   <Box>
                     <Button
@@ -88,7 +107,7 @@ export const SignupDirection = () => {
                         validateStepOne(false);
                       }}
                     >
-                      <a>Retour</a>
+                      Retour
                     </Button>
                   </Box>
                   <Box>

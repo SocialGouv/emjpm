@@ -1,7 +1,12 @@
 import gql from "graphql-tag";
 
 export const GET_OPEN_MESURE_NUMBER = gql`
-  query opnedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+  query opnedMesureNumber(
+    $end: date!
+    $start: date!
+    $departementId: Int
+    $regionId: Int
+  ) {
     stat_opened_mesures(
       end: $end
       start: $start
@@ -22,7 +27,12 @@ export const GET_AVAILABLE_MESURE_NUMBER = gql`
 `;
 
 export const GET_CLOSED_MESURE_NUMBER = gql`
-  query closedMesureNumber($end: date!, $start: date!, $departementId: Int, $regionId: Int) {
+  query closedMesureNumber(
+    $end: date!
+    $start: date!
+    $departementId: Int
+    $regionId: Int
+  ) {
     stat_closed_mesures(
       end: $end
       start: $start
@@ -39,7 +49,9 @@ export const GET_GESTIONNAIRE_NUMBER = gql`
     gestionnaireNumber: view_mesure_gestionnaire_aggregate(
       where: {
         discriminator: { _eq: $type }
-        departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+        departement: {
+          _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+        }
       }
     ) {
       aggregate {

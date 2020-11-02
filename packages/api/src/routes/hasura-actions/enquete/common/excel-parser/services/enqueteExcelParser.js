@@ -1,11 +1,11 @@
 const enqueteExcelParser = {
-  raw,
-  integer,
-  float,
-  select,
   boolean,
-  string,
+  float,
+  integer,
   integerAsBoolean,
+  raw,
+  select,
+  string,
 };
 
 module.exports = enqueteExcelParser;
@@ -81,7 +81,7 @@ function _validateMinMax(value, options) {
   if (value === undefined) {
     return value;
   }
-  const { min, max } = options ? options : { min: undefined, max: undefined };
+  const { min, max } = options ? options : { max: undefined, min: undefined };
   if (min !== undefined && value <= min) {
     return undefined;
   }

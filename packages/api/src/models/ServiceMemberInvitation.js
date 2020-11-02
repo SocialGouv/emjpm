@@ -14,13 +14,13 @@ class ServiceMemberInvitation extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
         email: { type: "string" },
+        id: { type: "integer" },
         service_id: { type: "integer" },
         token: { type: "string" },
       },
+      type: "object",
     };
   }
 }

@@ -8,7 +8,10 @@ import { ServiceForm } from "./ServiceForm";
 
 export const ServiceEdit = (props) => {
   const { serviceId, onSuccess } = props;
-  const serviceQuery = useQuery(SERVICE, { fetchPolicy: "network-only", variables: { serviceId } });
+  const serviceQuery = useQuery(SERVICE, {
+    fetchPolicy: "network-only",
+    variables: { serviceId },
+  });
   const departmentsQuery = useQuery(DEPARTEMENTS);
   const [updateService] = useMutation(UPDATE_SERVICE);
 
@@ -26,7 +29,14 @@ export const ServiceEdit = (props) => {
   const { departements } = departmentsQuery.data;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    const { city, depcode, label, longitude, latitude, postcode } = values.geocode;
+    const {
+      city,
+      depcode,
+      label,
+      longitude,
+      latitude,
+      postcode,
+    } = values.geocode;
     const department = departements.find((d) => d.code === depcode);
 
     if (!department) {
@@ -39,17 +49,17 @@ export const ServiceEdit = (props) => {
       await updateService({
         refetchQueries: ["services", "services_aggregate"],
         variables: {
-          id: service.id,
           adresse: label,
           code_postal: postcode,
           department_id: department.id,
           email: values.email,
           etablissement: values.etablissement,
+          id: service.id,
+          latitude: latitude,
+          longitude: longitude,
           siret: values.siret,
           telephone: values.telephone,
           ville: city,
-          latitude: latitude,
-          longitude: longitude,
         },
       });
 

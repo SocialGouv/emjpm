@@ -8,7 +8,9 @@ import { SATISFACTION_CAMPAIGN } from "./queries";
 
 const AdminSatisfactionCampaignInformations = (props) => {
   const { id } = props;
-  const { data, loading, error } = useQuery(SATISFACTION_CAMPAIGN, { variables: { id } });
+  const { data, loading, error } = useQuery(SATISFACTION_CAMPAIGN, {
+    variables: { id },
+  });
 
   if (loading) {
     return <div>Chargement</div>;
@@ -43,7 +45,9 @@ const AdminSatisfactionCampaignInformations = (props) => {
           Date de début
         </Box>
         <Box width={2 / 3} px={4} py={2}>
-          <Text>{format(new Date(satisfactionCampaign.started_at), "dd/MM/yyyy")}</Text>
+          <Text>
+            {format(new Date(satisfactionCampaign.started_at), "dd/MM/yyyy")}
+          </Text>
         </Box>
       </Flex>
       <Flex mb={4}>
@@ -51,7 +55,9 @@ const AdminSatisfactionCampaignInformations = (props) => {
           Date de fin
         </Box>
         <Box width={2 / 3} px={4} py={2}>
-          <Text>{format(new Date(satisfactionCampaign.ended_at), "dd/MM/yyyy")}</Text>
+          <Text>
+            {format(new Date(satisfactionCampaign.ended_at), "dd/MM/yyyy")}
+          </Text>
         </Box>
       </Flex>
       <Flex mb={4}>
@@ -68,7 +74,9 @@ const AdminSatisfactionCampaignInformations = (props) => {
         </Box>
         <Box width={2 / 3} px={4} py={2}>
           {satisfactionCampaign.answers.aggregate.avg.value && (
-            <Text>{satisfactionCampaign.answers.aggregate.avg.value.toFixed(2)}</Text>
+            <Text>
+              {satisfactionCampaign.answers.aggregate.avg.value.toFixed(2)}
+            </Text>
           )}
         </Box>
       </Flex>

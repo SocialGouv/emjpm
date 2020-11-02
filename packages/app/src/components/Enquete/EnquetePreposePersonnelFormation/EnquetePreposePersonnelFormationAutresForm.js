@@ -20,14 +20,14 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
+    dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
+    loading,
+    onSubmit,
     step,
     validationSchema,
-    dataToForm,
-    loading,
   });
 
   const { submitForm, values, errors, submit } = enqueteForm;
@@ -60,38 +60,38 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
         </Heading5>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n1",
             label: "Niveau 1",
+            niveau: "n1",
           })}
         </Box>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n2",
             label: "Niveau 2",
+            niveau: "n2",
           })}
         </Box>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n3",
             label: "Niveau 3",
+            niveau: "n3",
           })}
         </Box>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n4",
             label: "Niveau 4",
+            niveau: "n4",
           })}
         </Box>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n5",
             label: "Niveau 5",
+            niveau: "n5",
           })}
         </Box>
         <Box>
           {renderNiveauxQualificationBox({
-            niveau: "n6",
             label: "Niveau 6",
+            niveau: "n6",
           })}
         </Box>
       </Box>
@@ -158,7 +158,8 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
               id={`niveaux_qualification.${niveau}.nb_preposes`}
               value={values.niveaux_qualification[niveau].nb_preposes}
               error={
-                errors.niveaux_qualification && errors.formation_preposes_mjpm[niveau]
+                errors.niveaux_qualification &&
+                errors.formation_preposes_mjpm[niveau]
                   ? errors.formation_preposes_mjpm[niveau].nb_preposes
                   : ""
               }

@@ -13,6 +13,7 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 export const validationSchema = yup.object().shape({
   cnc_annee_obtention: yup.number().positive().integer().required(),
   cnc_heures_formation: yup.number().positive().required(),
+  informations_generales_secretaire_specialise_etp: yup.number().nullable(),
   niveau_qualification: yup.number().min(1).max(6).integer().required(),
   secretaire_specialise_etp_n1: yup.number().min(0).nullable(),
   secretaire_specialise_etp_n2: yup.number().min(0).nullable(),
@@ -20,22 +21,33 @@ export const validationSchema = yup.object().shape({
   secretaire_specialise_etp_n4: yup.number().min(0).nullable(),
   secretaire_specialise_etp_n5: yup.number().min(0).nullable(),
   secretaire_specialise_etp_n6: yup.number().min(0).nullable(),
-  informations_generales_secretaire_specialise_etp: yup.number().nullable(),
 });
 
 function dataToForm(data) {
   return {
-    informations_generales_secretaire_specialise_etp:
-      data.informations_generales_secretaire_specialise_etp,
     cnc_annee_obtention: formatFormInput(data.cnc_annee_obtention),
     cnc_heures_formation: formatFormInput(data.cnc_heures_formation),
+    informations_generales_secretaire_specialise_etp:
+      data.informations_generales_secretaire_specialise_etp,
     niveau_qualification: formatFormInput(data.niveau_qualification),
-    secretaire_specialise_etp_n1: formatFormInput(data.secretaire_specialise_etp_n1),
-    secretaire_specialise_etp_n2: formatFormInput(data.secretaire_specialise_etp_n2),
-    secretaire_specialise_etp_n3: formatFormInput(data.secretaire_specialise_etp_n3),
-    secretaire_specialise_etp_n4: formatFormInput(data.secretaire_specialise_etp_n4),
-    secretaire_specialise_etp_n5: formatFormInput(data.secretaire_specialise_etp_n5),
-    secretaire_specialise_etp_n6: formatFormInput(data.secretaire_specialise_etp_n6),
+    secretaire_specialise_etp_n1: formatFormInput(
+      data.secretaire_specialise_etp_n1
+    ),
+    secretaire_specialise_etp_n2: formatFormInput(
+      data.secretaire_specialise_etp_n2
+    ),
+    secretaire_specialise_etp_n3: formatFormInput(
+      data.secretaire_specialise_etp_n3
+    ),
+    secretaire_specialise_etp_n4: formatFormInput(
+      data.secretaire_specialise_etp_n4
+    ),
+    secretaire_specialise_etp_n5: formatFormInput(
+      data.secretaire_specialise_etp_n5
+    ),
+    secretaire_specialise_etp_n6: formatFormInput(
+      data.secretaire_specialise_etp_n6
+    ),
   };
 }
 
@@ -44,12 +56,24 @@ function formToData(data) {
     cnc_annee_obtention: parseFormInt(data.cnc_annee_obtention),
     cnc_heures_formation: parseFormInt(data.cnc_heures_formation),
     niveau_qualification: parseFormInt(data.niveau_qualification),
-    secretaire_specialise_etp_n1: parseFormFloat(data.secretaire_specialise_etp_n1),
-    secretaire_specialise_etp_n2: parseFormFloat(data.secretaire_specialise_etp_n2),
-    secretaire_specialise_etp_n3: parseFormFloat(data.secretaire_specialise_etp_n3),
-    secretaire_specialise_etp_n4: parseFormFloat(data.secretaire_specialise_etp_n4),
-    secretaire_specialise_etp_n5: parseFormFloat(data.secretaire_specialise_etp_n5),
-    secretaire_specialise_etp_n6: parseFormFloat(data.secretaire_specialise_etp_n6),
+    secretaire_specialise_etp_n1: parseFormFloat(
+      data.secretaire_specialise_etp_n1
+    ),
+    secretaire_specialise_etp_n2: parseFormFloat(
+      data.secretaire_specialise_etp_n2
+    ),
+    secretaire_specialise_etp_n3: parseFormFloat(
+      data.secretaire_specialise_etp_n3
+    ),
+    secretaire_specialise_etp_n4: parseFormFloat(
+      data.secretaire_specialise_etp_n4
+    ),
+    secretaire_specialise_etp_n5: parseFormFloat(
+      data.secretaire_specialise_etp_n5
+    ),
+    secretaire_specialise_etp_n6: parseFormFloat(
+      data.secretaire_specialise_etp_n6
+    ),
   };
 }
 
@@ -64,15 +88,15 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
   const { submitForm, submit } = enqueteForm;
   return (
@@ -108,7 +132,9 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
           max={5}
         />
         <Text mt={7} mb={4} fontWeight="bold" color="#595959">
-          {"Activité des secrétaires spécialisés par niveau en équivalent temps plein (ETP)"}
+          {
+            "Activité des secrétaires spécialisés par niveau en équivalent temps plein (ETP)"
+          }
         </Text>
         <Flex mt={4}>
           <Flex alignItems="center" flex={1 / 2}>

@@ -1,10 +1,16 @@
 import { Button, Card, CheckBox, Input, Select } from "@emjpm/ui";
 import { ChevronDown } from "@styled-icons/evil/ChevronDown";
-import Link from "next/link";
-import React, { Fragment, useContext, useEffect, useRef, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
+import { Link } from "../Commons";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { UserContext } from "../UserContext";
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
@@ -18,14 +24,31 @@ const ListeBlancheFilter = () => {
   const ref = useRef();
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
   const user = useContext(UserContext);
-  const { loading, error, filters, onFilterChange, departements = [] } = useContext(
-    FiltersContextSerializable
-  );
-  const { departementFinanceur, type = "mandataire", nom, nom_service, siret, email } = filters;
+  const {
+    loading,
+    error,
+    filters,
+    onFilterChange,
+    departements = [],
+  } = useContext(FiltersContextSerializable);
+  const {
+    departementFinanceur,
+    type = "mandataire",
+    nom,
+    nom_service,
+    siret,
+    email,
+  } = filters;
 
   const buttonLinks = [
-    { title: "Mandataire individuel", url: `/${user.type}/liste-blanche/ajout-individuel` },
-    { title: "Mandataire préposé", url: `/${user.type}/liste-blanche/ajout-prepose` },
+    {
+      title: "Mandataire individuel",
+      url: `/${user.type}/liste-blanche/ajout-individuel`,
+    },
+    {
+      title: "Mandataire préposé",
+      url: `/${user.type}/liste-blanche/ajout-prepose`,
+    },
   ];
 
   useEffect(() => {
@@ -48,7 +71,11 @@ const ListeBlancheFilter = () => {
   }
 
   if (error) {
-    return <div>{"Oups, une erreur s'est produite. Veuillez réessayer ultérieurement."}</div>;
+    return (
+      <div>
+        {"Oups, une erreur s'est produite. Veuillez réessayer ultérieurement."}
+      </div>
+    );
   }
 
   const departmentOptions = departementToOptions(departements);
@@ -56,7 +83,10 @@ const ListeBlancheFilter = () => {
   return (
     <Fragment>
       <Card sx={{ position: "relative" }}>
-        <Box ref={ref} sx={{ zIndex: 99, position: "absolute", right: 2, top: 2 }}>
+        <Box
+          ref={ref}
+          sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}
+        >
           {type === "service" ? (
             <Box>
               <Button ml={4}>
@@ -78,9 +108,7 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Link href={link.url}>
-                            <a>{link.title}</a>
-                          </Link>
+                          <Link href={link.url}>{link.title}</Link>
                         </Box>
                       );
                     })}
@@ -111,10 +139,14 @@ const ListeBlancheFilter = () => {
                 placeholder={"Département"}
                 value={
                   filters.departement
-                    ? departmentOptions.find((d) => d.value === filters.departement)
+                    ? departmentOptions.find(
+                        (d) => d.value === filters.departement
+                      )
                     : undefined
                 }
-                onChange={(option) => onFilterChange({ departement: option.value })}
+                onChange={(option) =>
+                  onFilterChange({ departement: option.value })
+                }
               />
             </Box>
           </Flex>
@@ -124,7 +156,9 @@ const ListeBlancheFilter = () => {
                 value={siret || ""}
                 spellCheck="false"
                 autoComplete="false"
-                onChange={(event) => onFilterChange({ siret: event.target.value })}
+                onChange={(event) =>
+                  onFilterChange({ siret: event.target.value })
+                }
                 name="search_siret"
                 size="small"
                 placeholder="Siret"
@@ -136,7 +170,9 @@ const ListeBlancheFilter = () => {
                   value={nom_service || ""}
                   spellCheck="false"
                   autoComplete="false"
-                  onChange={(event) => onFilterChange({ nom_service: event.target.value })}
+                  onChange={(event) =>
+                    onFilterChange({ nom_service: event.target.value })
+                  }
                   name="search_service"
                   size="small"
                   placeholder="Nom du service"
@@ -150,7 +186,9 @@ const ListeBlancheFilter = () => {
                     value={nom || ""}
                     spellCheck="false"
                     autoComplete="false"
-                    onChange={(event) => onFilterChange({ nom: event.target.value })}
+                    onChange={(event) =>
+                      onFilterChange({ nom: event.target.value })
+                    }
                     name="search_mandataire"
                     size="small"
                     placeholder="Nom"
@@ -161,7 +199,9 @@ const ListeBlancheFilter = () => {
                     value={email || ""}
                     spellCheck="false"
                     autoComplete="false"
-                    onChange={(event) => onFilterChange({ email: event.target.value })}
+                    onChange={(event) =>
+                      onFilterChange({ email: event.target.value })
+                    }
                     name="email"
                     size="small"
                     placeholder="email"
@@ -173,7 +213,11 @@ const ListeBlancheFilter = () => {
                     label="Financé"
                     name="departementFinanceur"
                     isChecked={departementFinanceur || false}
-                    onChange={() => onFilterChange({ departementFinanceur: !departementFinanceur })}
+                    onChange={() =>
+                      onFilterChange({
+                        departementFinanceur: !departementFinanceur,
+                      })
+                    }
                   />
                 </Box>
               </>

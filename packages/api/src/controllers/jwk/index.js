@@ -9,8 +9,8 @@ exports.getJwks = async (req, res) => {
   const jwk = {
     ...rasha.importSync({ pem: jwtConfig.publicKey }),
     alg: "RS256",
-    use: "sig",
     kid: jwtConfig.publicKey,
+    use: "sig",
   };
   const jwks = {
     keys: [jwk],

@@ -5,8 +5,8 @@ export default {
     fontWeight: "bold",
   },
   strongLabel: {
+    color: "#007AD9",
     display: "inline-block",
     fontWeight: "bold",
-    color: "#007AD9",
   },
 };

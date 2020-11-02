@@ -15,14 +15,15 @@ class EnqueteReponsesServicePersonnelFormation extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         nb_delegues: { type: "number" },
-        nb_delegues_etp: { type: "float" },
         nb_delegues_cnc: { type: "number" },
         nb_delegues_en_formation: { type: "number" },
-        total_heures_delegues_en_formation: { type: "float" },
-        nb_delegues_non_formes: { type: "number" },
+        nb_delegues_etp: { type: "float" },
+        nb_delegues_femme: { type: "number" },
+        nb_delegues_femme_etp: { type: "float" },
+        nb_delegues_homme: { type: "number" },
+        nb_delegues_homme_etp: { type: "float" },
         nb_delegues_niveau1: { type: "number" },
         nb_delegues_niveau1_etp: { type: "float" },
         nb_delegues_niveau2: { type: "number" },
@@ -35,11 +36,10 @@ class EnqueteReponsesServicePersonnelFormation extends Model {
         nb_delegues_niveau5_etp: { type: "float" },
         nb_delegues_niveau6: { type: "number" },
         nb_delegues_niveau6_etp: { type: "float" },
-        nb_delegues_homme: { type: "number" },
-        nb_delegues_homme_etp: { type: "float" },
-        nb_delegues_femme: { type: "number" },
-        nb_delegues_femme_etp: { type: "float" },
+        nb_delegues_non_formes: { type: "number" },
+        total_heures_delegues_en_formation: { type: "float" },
       },
+      type: "object",
     };
   }
 }

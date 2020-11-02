@@ -15,8 +15,8 @@ const parse = async ({ content }) => {
     cellDates: true,
     dateNF: "dd/mm/yyyy",
     locale: "fr-FR",
-    type: "base64",
     raw: false,
+    type: "base64",
   });
 
   // vérification du nom des onglets
@@ -30,17 +30,17 @@ const parse = async ({ content }) => {
   ]);
 
   const res = {
-    informationsMandataire: enqueteExcelParserInformationsMandataire.parse(
-      workbook.Sheets["info mandataire-exerc. activité"]
-    ),
-    populations: enqueteExcelParserAgrementsPopulations.parse(
-      workbook.Sheets["Populations "]
-    ),
     activite: enqueteExcelParserActivite.parse(
       workbook.Sheets[workbook.SheetNames[2]]
     ),
     agrementsFormations: enqueteExcelParserAgrementsFormations.parse(
       workbook.Sheets["info mandataire-exerc. activité"]
+    ),
+    informationsMandataire: enqueteExcelParserInformationsMandataire.parse(
+      workbook.Sheets["info mandataire-exerc. activité"]
+    ),
+    populations: enqueteExcelParserAgrementsPopulations.parse(
+      workbook.Sheets["Populations "]
     ),
     prestationsSociales: enqueteExcelParserPrestationsSociales.parse(
       workbook.Sheets["Prestations sociales "]

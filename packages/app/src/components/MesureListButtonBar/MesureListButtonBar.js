@@ -15,10 +15,14 @@ const MesureListButtonBar = () => {
     <Box>
       <Flex flexDirection="row">
         <Box>
-          <LinkButton href={`${path}/add-mesures`}>Ajouter une mesure</LinkButton>
+          <LinkButton href={`${path}/add-mesures`}>
+            Ajouter une mesure
+          </LinkButton>
         </Box>
         <Box ml={1}>
-          <LinkButton href={`${path}/import-mesures`}>Importez vos mesures</LinkButton>
+          <LinkButton href={`${path}/import-mesures`}>
+            Importez vos mesures
+          </LinkButton>
         </Box>
         <MesureExportExcelButton ml={1} mr={2} />
       </Flex>

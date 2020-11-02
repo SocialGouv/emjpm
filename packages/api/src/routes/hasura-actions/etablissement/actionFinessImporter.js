@@ -59,8 +59,8 @@ async function startImport() {
     return false;
   }
   await ProcessusStates.query().where({ id: "import_finess" }).update({
-    start_date: new Date(),
     end_date: null,
+    start_date: new Date(),
   });
   return true;
 }
@@ -79,8 +79,8 @@ async function importFinessFile(url) {
   inputStream.setEncoding("latin1");
 
   const rl = readline.createInterface({
-    input: inputStream,
     crlfDelay: Infinity,
+    input: inputStream,
   });
 
   let counter = 0;
@@ -121,36 +121,36 @@ async function importGeolocalisation(properties) {
 
 async function importStructureEtablissement(properties, departements) {
   const [
-    nofinesset,
-    nofinessej,
-    rs,
-    rslongue,
-    complrs,
-    compldistrib,
-    numvoie,
-    typvoie,
-    voie,
-    compvoie,
-    lieuditbp,
-    commune,
-    departement,
-    libdepartement,
-    ligneacheminement,
-    telephone,
-    telecopie,
-    categetab,
-    libcategetab,
     categagretab,
-    libcategagretab,
-    siret,
+    categetab,
     codeape,
     codemft,
-    libmft,
     codesph,
-    libsph,
-    dateouv,
+    commune,
+    compldistrib,
+    complrs,
+    compvoie,
     dateautor,
+    dateouv,
+    departement,
+    libcategagretab,
+    libcategetab,
+    libdepartement,
+    libmft,
+    libsph,
+    lieuditbp,
+    ligneacheminement,
+    nofinessej,
+    nofinesset,
     numuai,
+    numvoie,
+    rs,
+    rslongue,
+    siret,
+    telecopie,
+    telephone,
+    typvoie,
+    voie,
   ] = properties;
 
   if (!FILTERS.includes(categetab)) {
@@ -161,36 +161,36 @@ async function importStructureEtablissement(properties, departements) {
     departements.find((elm) => elm.code === departement) || {};
 
   const etablissement = {
-    nofinesset,
-    nofinessej,
-    rs,
-    rslongue,
-    complrs,
-    compldistrib,
-    numvoie,
-    typvoie,
-    voie,
-    compvoie,
-    lieuditbp,
-    commune,
-    departement_id: departementId,
-    libdepartement,
-    ligneacheminement,
-    telephone,
-    telecopie,
-    categetab,
-    libcategetab,
     categagretab,
-    libcategagretab,
-    siret,
+    categetab,
     codeape,
     codemft,
-    libmft,
     codesph,
-    libsph,
-    dateouv,
+    commune,
+    compldistrib,
+    complrs,
+    compvoie,
     dateautor,
+    dateouv,
+    departement_id: departementId,
+    libcategagretab,
+    libcategetab,
+    libdepartement,
+    libmft,
+    libsph,
+    lieuditbp,
+    ligneacheminement,
+    nofinessej,
+    nofinesset,
     numuai,
+    numvoie,
+    rs,
+    rslongue,
+    siret,
+    telecopie,
+    telephone,
+    typvoie,
+    voie,
   };
 
   const result = await Etablissements.query().findOne({ nofinesset });

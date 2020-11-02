@@ -20,9 +20,9 @@ const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
         ? []
         : data.mesures.map((mesure) => ({
             id: mesure.id,
-            longitude: mesure.longitude,
-            latitude: mesure.latitude,
             isSelected: selectedMesuresIds.includes(mesure.id),
+            latitude: mesure.latitude,
+            longitude: mesure.longitude,
           })),
     [data, selectedMesuresIds]
   );

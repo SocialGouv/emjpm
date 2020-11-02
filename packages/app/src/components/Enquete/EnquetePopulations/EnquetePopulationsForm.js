@@ -27,31 +27,37 @@ function formToData(values) {
 }
 function dataToForm(data) {
   return {
-    age_inf_25_ans_homme: formatFormInput(data.age_inf_25_ans_homme),
-    age_inf_25_ans_femme: formatFormInput(data.age_inf_25_ans_femme),
-    age_25_39_ans_homme: formatFormInput(data.age_25_39_ans_homme),
     age_25_39_ans_femme: formatFormInput(data.age_25_39_ans_femme),
-    age_40_59_ans_homme: formatFormInput(data.age_40_59_ans_homme),
+    age_25_39_ans_homme: formatFormInput(data.age_25_39_ans_homme),
     age_40_59_ans_femme: formatFormInput(data.age_40_59_ans_femme),
-    age_60_74_ans_homme: formatFormInput(data.age_60_74_ans_homme),
+    age_40_59_ans_homme: formatFormInput(data.age_40_59_ans_homme),
     age_60_74_ans_femme: formatFormInput(data.age_60_74_ans_femme),
-    age_sup_75_ans_homme: formatFormInput(data.age_sup_75_ans_homme),
+    age_60_74_ans_homme: formatFormInput(data.age_60_74_ans_homme),
+    age_inf_25_ans_femme: formatFormInput(data.age_inf_25_ans_femme),
+    age_inf_25_ans_homme: formatFormInput(data.age_inf_25_ans_homme),
     age_sup_75_ans_femme: formatFormInput(data.age_sup_75_ans_femme),
-    anciennete_inf_1_an: formatFormInput(data.anciennete_inf_1_an),
+    age_sup_75_ans_homme: formatFormInput(data.age_sup_75_ans_homme),
     anciennete_1_3_ans: formatFormInput(data.anciennete_1_3_ans),
     anciennete_3_5_ans: formatFormInput(data.anciennete_3_5_ans),
     anciennete_5_10_ans: formatFormInput(data.anciennete_5_10_ans),
+    anciennete_inf_1_an: formatFormInput(data.anciennete_inf_1_an),
     anciennete_sup_10_ans: formatFormInput(data.anciennete_sup_10_ans),
-    etablissement_personne_handicapee: formatFormInput(data.etablissement_personne_handicapee),
-    service_personne_handicapee: formatFormInput(data.service_personne_handicapee),
-    ehpad: formatFormInput(data.ehpad),
-    autre_etablissement_personne_agee: formatFormInput(data.autre_etablissement_personne_agee),
+    autre_etablissement_personne_agee: formatFormInput(
+      data.autre_etablissement_personne_agee
+    ),
+    autre_service: formatFormInput(data.autre_service),
     chrs: formatFormInput(data.chrs),
+    ehpad: formatFormInput(data.ehpad),
+    etablissement_personne_handicapee: formatFormInput(
+      data.etablissement_personne_handicapee
+    ),
     service_hospitalier_soins_longue_duree: formatFormInput(
       data.service_hospitalier_soins_longue_duree
     ),
+    service_personne_handicapee: formatFormInput(
+      data.service_personne_handicapee
+    ),
     service_psychiatrique: formatFormInput(data.service_psychiatrique),
-    autre_service: formatFormInput(data.autre_service),
   };
 }
 
@@ -67,15 +73,15 @@ export const EnquetePopulationsForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
   const { submitForm, handleChange, values, errors, submit } = enqueteForm;
 

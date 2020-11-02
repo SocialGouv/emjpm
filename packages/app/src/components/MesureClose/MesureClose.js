@@ -25,9 +25,13 @@ const MesureClose = (props) => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
-    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
-      shallow: true,
-    });
+    Router.push(
+      `${userBasePath}/mesures/[mesure_id]`,
+      `${userBasePath}/mesures/${mesureId}`,
+      {
+        shallow: true,
+      }
+    );
   };
 
   const [updateMesure] = useMutation(CLOSE_MESURE, {
@@ -35,8 +39,8 @@ const MesureClose = (props) => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          serviceId: service ? service.id : null,
           mandataireId: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
         },
       });
       redirectToMesure(mesure.id);
@@ -56,30 +60,30 @@ const MesureClose = (props) => {
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.en_cours,
-            natureMesure: null,
-            antenne: null,
           },
         },
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.eteinte,
-            natureMesure: null,
-            antenne: null,
           },
         },
       ],
       variables: {
+        cause_sortie: values.cause_sortie,
         date_fin_mesure: values.date_fin_mesure,
         id: mesure.id,
-        cause_sortie: values.cause_sortie,
       },
     });
     setSubmitting(false);

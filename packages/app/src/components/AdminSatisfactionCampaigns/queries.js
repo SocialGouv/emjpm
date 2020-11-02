@@ -26,7 +26,11 @@ export const SATISFACTION_CAMPAIGNS = gql`
 
 export const SATISFACTION_CAMPAIGN = gql`
   query satisfactionCampaign($id: Int, $limit: Int, $offset: Int) {
-    satisfaction_campaigns(where: { id: { _eq: $id } }, limit: $limit, offset: $offset) {
+    satisfaction_campaigns(
+      where: { id: { _eq: $id } }
+      limit: $limit
+      offset: $offset
+    ) {
       id
       name
       started_at

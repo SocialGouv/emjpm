@@ -3,8 +3,8 @@ const { User } = require("../../models/User");
 
 const authLoginPasswordStrategy = new LocalStrategy(
   {
-    usernameField: "username",
     passwordField: "password",
+    usernameField: "username",
   },
   function (username, password, done) {
     User.query()

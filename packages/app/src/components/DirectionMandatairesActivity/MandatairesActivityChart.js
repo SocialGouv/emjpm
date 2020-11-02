@@ -2,7 +2,13 @@ import React from "react";
 import { Box, Text } from "rebass";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
-import { legendStyle, numberStyle, percentStyle, pieTextStyle, textStyle } from "./style";
+import {
+  legendStyle,
+  numberStyle,
+  percentStyle,
+  pieTextStyle,
+  textStyle,
+} from "./style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
@@ -13,7 +19,8 @@ const MandatairesActivityChart = (props) => {
   const servicePercentage = props.data.service.percentage;
 
   const mandataireIndividuelSum = props.data.mandataireIndividuel.sum;
-  const mandataireIndividuelPercentage = props.data.mandataireIndividuel.percentage;
+  const mandataireIndividuelPercentage =
+    props.data.mandataireIndividuel.percentage;
 
   const mandatairePreposeSum = props.data.mandatairePrepose.sum;
   const mandatairePreposePercentage = props.data.mandatairePrepose.percentage;
@@ -26,7 +33,9 @@ const MandatairesActivityChart = (props) => {
 
   return (
     <Box>
-      <Box sx={{ height: [300, 300, 300], position: "relative", width: "100%" }}>
+      <Box
+        sx={{ height: [300, 300, 300], position: "relative", width: "100%" }}
+      >
         <Text sx={pieTextStyle}>
           {total}
           <Text sx={legendStyle}>mesures</Text>
@@ -42,7 +51,10 @@ const MandatairesActivityChart = (props) => {
               dataKey="value"
             >
               {pieChartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
               ))}
             </Pie>
           </PieChart>
@@ -52,7 +64,11 @@ const MandatairesActivityChart = (props) => {
         sx={{
           display: "grid",
           gridGap: 3,
-          gridTemplateColumns: ["repeat(1, 1fr)", "repeat(1, 1fr)", "repeat(3, 1fr)"],
+          gridTemplateColumns: [
+            "repeat(1, 1fr)",
+            "repeat(1, 1fr)",
+            "repeat(3, 1fr)",
+          ],
           mt: "1",
         }}
       >

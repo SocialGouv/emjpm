@@ -14,13 +14,13 @@ class Editors extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
         api_token: { type: "integrer" },
+        id: { type: "integer" },
         name: { type: "string" },
         redirect_uris: { type: "jsonb" },
       },
+      type: "object",
     };
   }
 }

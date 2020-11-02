@@ -11,27 +11,6 @@ const {
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
-  submitEnqueteReponse: async (id) => {
-    try {
-      const { data, errors } = await graphqlFetch(
-        {
-          id,
-          submittedAt: new Date(),
-        },
-        SUBMIT_ENQUETE_REPONSE,
-        backendAuthHeaders
-      );
-
-      if (errors && errors.length) {
-        errors.map((error) => logger.error(error));
-      }
-      return data.update_enquete_reponses_by_pk;
-    } catch (err) {
-      logger.error(err);
-      return null;
-    }
-  },
-
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
     try {
       const queryResult = await graphqlFetch(
@@ -41,9 +20,9 @@ module.exports = {
       );
 
       const defaultValues = {
+        departement: null,
         nom: null,
         region: null,
-        departement: null,
       };
 
       if (queryResult.data.mandataires_by_pk) {
@@ -63,11 +42,11 @@ module.exports = {
       }
 
       const value = {
+        departement: defaultValues.departement,
+        departementId: defaultValues.departementId,
         enqueteId,
         mandataireId,
         nom: defaultValues.nom,
-        departementId: defaultValues.departementId,
-        departement: defaultValues.departement,
         region: defaultValues.region,
       };
 
@@ -109,6 +88,27 @@ module.exports = {
     } catch (err) {
       logger.error(err);
       throw err;
+    }
+  },
+
+  submitEnqueteReponse: async (id) => {
+    try {
+      const { data, errors } = await graphqlFetch(
+        {
+          id,
+          submittedAt: new Date(),
+        },
+        SUBMIT_ENQUETE_REPONSE,
+        backendAuthHeaders
+      );
+
+      if (errors && errors.length) {
+        errors.map((error) => logger.error(error));
+      }
+      return data.update_enquete_reponses_by_pk;
+    } catch (err) {
+      logger.error(err);
+      return null;
     }
   },
 };

@@ -1,8 +1,8 @@
 import { BoxWrapper } from "@emjpm/ui";
-import Link from "next/link";
 import React from "react";
-import { Link as StyledLink } from "rebass";
+import { Box } from "rebass";
 
+import { Link } from "../../../src/components/Commons";
 import { EtablissementView } from "../../../src/components/Etablissement";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
@@ -13,11 +13,9 @@ export const EditEtablissementPage = (props) => {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/admin/etablissements">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Box mb="4">
+          <Link href="/admin/etablissements">&larr; Retour</Link>
+        </Box>
         <EtablissementView id={id} />
       </BoxWrapper>
     </LayoutAdmin>

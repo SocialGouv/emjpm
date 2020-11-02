@@ -20,23 +20,29 @@ export const EnqueteIndividuelInformationsFormation = (props) => {
     enquete: { id: enqueteId },
   } = props;
   const {
-    enquete_reponse_ids: { agrements_formations_id, informations_mandataire_id },
+    enquete_reponse_ids: {
+      agrements_formations_id,
+      informations_mandataire_id,
+    },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
-  const { data, loading } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION, {
-    variables: {
-      id: agrements_formations_id,
-    },
-  });
-
-  const { data: dataInformationsGenerales, loading: loadingInformationsGenerales } = useQuery(
-    ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
+  const { data, loading } = useQuery(
+    ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
     {
       variables: {
-        id: informations_mandataire_id,
+        id: agrements_formations_id,
       },
     }
   );
+
+  const {
+    data: dataInformationsGenerales,
+    loading: loadingInformationsGenerales,
+  } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
+    variables: {
+      id: informations_mandataire_id,
+    },
+  });
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_FORMATION, {
     refetchQueries: [
@@ -53,7 +59,8 @@ export const EnqueteIndividuelInformationsFormation = (props) => {
 
   const initialValues = useMemo(() => {
     if (data && dataInformationsGenerales) {
-      const agrementsFormations = data.enquete_reponses_agrements_formations_by_pk;
+      const agrementsFormations =
+        data.enquete_reponses_agrements_formations_by_pk;
 
       const informationsGenerales =
         dataInformationsGenerales.enquete_reponses_informations_mandataire_by_pk;

@@ -29,9 +29,9 @@ function errorHandler(err, res) {
         res.status(400).send({
           errors: [
             {
+              data: err.data,
               msg: err.message,
               type: "ModelValidation",
-              data: err.data,
             },
           ],
         });
@@ -40,9 +40,9 @@ function errorHandler(err, res) {
         res.status(400).send({
           errors: [
             {
+              data: {},
               msg: err.message,
               type: "InvalidRelationExpression",
-              data: {},
             },
           ],
         });
@@ -51,9 +51,9 @@ function errorHandler(err, res) {
         res.status(400).send({
           errors: [
             {
+              data: {},
               msg: err.message,
               type: "UnallowedRelation",
-              data: {},
             },
           ],
         });
@@ -62,9 +62,9 @@ function errorHandler(err, res) {
         res.status(400).send({
           errors: [
             {
+              data: {},
               msg: err.message,
               type: "InvalidGraph",
-              data: {},
             },
           ],
         });
@@ -73,9 +73,9 @@ function errorHandler(err, res) {
         res.status(400).send({
           errors: [
             {
+              data: {},
               msg: err.message,
               type: "UnknownValidationError",
-              data: {},
             },
           ],
         });
@@ -85,9 +85,9 @@ function errorHandler(err, res) {
     res.status(404).send({
       errors: [
         {
+          data: {},
           msg: err.message,
           type: "NotFound",
-          data: {},
         },
       ],
     });
@@ -95,13 +95,13 @@ function errorHandler(err, res) {
     res.status(409).send({
       errors: [
         {
-          msg: err.message,
-          type: "UniqueViolation",
           data: {
             columns: err.columns,
-            table: err.table,
             constraint: err.constraint,
+            table: err.table,
           },
+          msg: err.message,
+          type: "UniqueViolation",
         },
       ],
     });
@@ -109,12 +109,12 @@ function errorHandler(err, res) {
     res.status(400).send({
       errors: [
         {
-          msg: err.message,
-          type: "NotNullViolation",
           data: {
             column: err.column,
             table: err.table,
           },
+          msg: err.message,
+          type: "NotNullViolation",
         },
       ],
     });
@@ -122,12 +122,12 @@ function errorHandler(err, res) {
     res.status(409).send({
       errors: [
         {
+          data: {
+            constraint: err.constraint,
+            table: err.table,
+          },
           msg: err.message,
           type: "ForeignKeyViolation",
-          data: {
-            table: err.table,
-            constraint: err.constraint,
-          },
         },
       ],
     });
@@ -135,12 +135,12 @@ function errorHandler(err, res) {
     res.status(400).send({
       errors: [
         {
+          data: {
+            constraint: err.constraint,
+            table: err.table,
+          },
           msg: err.message,
           type: "CheckViolation",
-          data: {
-            table: err.table,
-            constraint: err.constraint,
-          },
         },
       ],
     });
@@ -148,9 +148,9 @@ function errorHandler(err, res) {
     res.status(400).send({
       errors: [
         {
+          data: {},
           msg: err.message,
           type: "InvalidData",
-          data: {},
         },
       ],
     });
@@ -158,9 +158,9 @@ function errorHandler(err, res) {
     res.status(500).send({
       errors: [
         {
+          data: {},
           msg: err.message,
           type: "UnknownDatabaseError",
-          data: {},
         },
       ],
     });
@@ -169,13 +169,13 @@ function errorHandler(err, res) {
     res.status(409).send({
       errors: [
         {
-          msg: message,
-          type: "UniqueViolation",
           data: {
             columns: err.columns,
-            table: err.table,
             constraint: err.constraint,
+            table: err.table,
           },
+          msg: message,
+          type: "UniqueViolation",
         },
       ],
     });
@@ -183,9 +183,9 @@ function errorHandler(err, res) {
     res.status(500).send({
       errors: [
         {
+          data: err,
           msg: err.message,
           type: "UnknownError",
-          data: err,
         },
       ],
     });

@@ -9,8 +9,12 @@ export const Provider = (props) => {
   const { children, initialValues = {} } = props;
 
   // Use State to keep the values
-  const [natureMesure, changeNatureMesure] = useState(initialValues.natureMesure);
-  const [searchText, changeSearchText] = useState(initialValues.searchText || "");
+  const [natureMesure, changeNatureMesure] = useState(
+    initialValues.natureMesure
+  );
+  const [searchText, changeSearchText] = useState(
+    initialValues.searchText || ""
+  );
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 

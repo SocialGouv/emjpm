@@ -5,10 +5,10 @@ import iconServiceMarker from "../../../public/static/images/map-icon-service@2x
 import { MANDATAIRE_IND, MANDATAIRE_PRE, MESURE, SERVICE } from "./constants";
 
 const iconsSrc = [
-  { src: iconIndividuelMarker, name: MANDATAIRE_IND },
-  { src: iconPreposeMarker, name: MANDATAIRE_PRE },
-  { src: iconServiceMarker, name: SERVICE },
-  { src: iconMesureMarker, name: MESURE },
+  { name: MANDATAIRE_IND, src: iconIndividuelMarker },
+  { name: MANDATAIRE_PRE, src: iconPreposeMarker },
+  { name: SERVICE, src: iconServiceMarker },
+  { name: MESURE, src: iconMesureMarker },
 ];
 
 export const mapMarkersIcons = () => {
@@ -24,6 +24,6 @@ const [iconIndividuel, iconPrepose, iconService, mesure] = mapMarkersIcons();
 export const mapImages = {
   MANDATAIRE_IND: iconIndividuel,
   MANDATAIRE_PRE: iconPrepose,
-  SERVICE: iconService,
   MESURE: mesure,
+  SERVICE: iconService,
 };
