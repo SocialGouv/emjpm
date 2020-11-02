@@ -22,33 +22,35 @@ const directionTypeOptions = [
 ];
 
 const validationSchema = yup.object({
-  type: yup.string().required(),
-  region: yup.string().when("type", {
-    is: "regional",
-    then: yup.string().required(),
-    otherwise: yup.string().nullable(),
-  }),
   departement: yup.string().when("type", {
     is: "departemental",
-    then: yup.string().required(),
     otherwise: yup.string().nullable(),
+    then: yup.string().required(),
   }),
+  region: yup.string().when("type", {
+    is: "regional",
+    otherwise: yup.string().nullable(),
+    then: yup.string().required(),
+  }),
+  type: yup.string().required(),
 });
 
 export const TypeDirectionForm = (props) => {
   const { direction, departements, regions, onSubmit } = props;
-  const { values, submitting, handleSubmit, errors, setFieldValue } = useFormik({
-    initialValues: {
-      type: direction.type || "",
-      region: direction.region_id || "",
-      departement: direction.department_id || "",
-    },
-    validationSchema,
-    onSubmit: async (data, { setSubmitting }) => {
-      await onSubmit(data);
-      setSubmitting(false);
-    },
-  });
+  const { values, submitting, handleSubmit, errors, setFieldValue } = useFormik(
+    {
+      initialValues: {
+        departement: direction.department_id || "",
+        region: direction.region_id || "",
+        type: direction.type || "",
+      },
+      onSubmit: async (data, { setSubmitting }) => {
+        await onSubmit(data);
+        setSubmitting(false);
+      },
+      validationSchema,
+    }
+  );
 
   const departementOptions = useMemo(() => {
     return departements.map(({ nom, code, id }) => ({

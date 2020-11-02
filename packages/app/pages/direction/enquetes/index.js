@@ -14,7 +14,9 @@ const DirectionEnquetesPage = () => {
         <Flex mb={3} flexDirection="row" justifyContent="space-between">
           <Heading2>Enquêtes</Heading2>
           <Box>
-            <LinkButton href="/direction/enquetes/create">Ajouter une enquête</LinkButton>
+            <LinkButton href="/direction/enquetes/create">
+              Ajouter une enquête
+            </LinkButton>
           </Box>
         </Flex>
         <DirectionEnquetesList />

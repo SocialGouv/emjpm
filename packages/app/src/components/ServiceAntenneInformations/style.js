@@ -33,4 +33,11 @@ const flexStyle = {
   mt: 5,
 };
 
-export { titleStyle, innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
+export {
+  titleStyle,
+  innerTextStyle,
+  topTextStyle,
+  iconTextStyle,
+  boxStyle,
+  flexStyle,
+};

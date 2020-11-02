@@ -14,15 +14,15 @@ class Departement extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
+        code: { type: "string" },
         id: { type: "integer" },
         id_finess: {
           type: "string",
         },
         nom: { type: "string" },
-        code: { type: "string" },
       },
+      type: "object",
     };
   }
 }

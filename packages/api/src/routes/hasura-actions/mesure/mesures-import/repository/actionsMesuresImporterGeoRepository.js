@@ -49,8 +49,8 @@ async function findDepartment({
 }
 
 const actionsMesuresImporterGeoRepository = {
-  getGeoDatas,
   findDepartment,
+  getGeoDatas,
 };
 
 module.exports = actionsMesuresImporterGeoRepository;

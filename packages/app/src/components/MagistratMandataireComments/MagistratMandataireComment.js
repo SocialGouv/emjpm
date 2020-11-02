@@ -53,7 +53,10 @@ const MagistratMandataireComment = (props) => {
             <Box
               sx={{ cursor: "pointer", width: "16px" }}
               onClick={() => {
-                RemoveComment({ refetchQueries: ["MandataireComments"], variables: { id: id } });
+                RemoveComment({
+                  refetchQueries: ["MandataireComments"],
+                  variables: { id: id },
+                });
               }}
             >
               <XCircle size="16" />

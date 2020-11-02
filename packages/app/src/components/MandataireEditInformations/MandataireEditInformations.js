@@ -49,8 +49,8 @@ const MandataireEditInformations = (props) => {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const location = await getLocation(client, {
       address: values.address,
-      zipcode: values.zipcode,
       city: values.city,
+      zipcode: values.zipcode,
     });
 
     if (!location || !location.department) {
@@ -61,11 +61,17 @@ const MandataireEditInformations = (props) => {
 
     const { department, geolocation } = location;
 
-    if (values.siret != mandataire.siret && (await isSiretExists(client, values.siret))) {
+    if (
+      values.siret != mandataire.siret &&
+      (await isSiretExists(client, values.siret))
+    ) {
       setErrors({
         siret: "Ce SIRET existe déjà",
       });
-    } else if (values.email != user.email && (await isEmailExists(client, values.email))) {
+    } else if (
+      values.email != user.email &&
+      (await isEmailExists(client, values.email))
+    ) {
       setErrors({
         email: "Cet email existe déjà",
       });
@@ -73,22 +79,22 @@ const MandataireEditInformations = (props) => {
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          id: user.id,
-          nom: values.nom,
-          prenom: values.prenom,
-          email: values.email,
           adresse: values.address,
           code_postal: values.zipcode,
+          competences: values.competences,
           department_id: department.id,
           dispo_max: parseInt(values.dispo_max),
+          email: values.email,
           genre: values.genre.value,
+          id: user.id,
+          latitude: geolocation ? geolocation.latitude : null,
+          longitude: geolocation ? geolocation.longitude : null,
+          nom: values.nom,
+          prenom: values.prenom,
           siret: values.siret,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
           ville: values.city.toUpperCase(),
-          latitude: geolocation ? geolocation.latitude : null,
-          longitude: geolocation ? geolocation.longitude : null,
-          competences: values.competences,
         },
       });
     }

@@ -30,14 +30,19 @@ const AdminUsersMagistratTribunal = (props) => {
         const { ti, id } = magistrat;
 
         return (
-          <Flex mb={10} alignItems="center" justifyContent="space-between" key={`aui-${id}`}>
+          <Flex
+            mb={10}
+            alignItems="center"
+            justifyContent="space-between"
+            key={`aui-${id}`}
+          >
             <Text>{ti.etablissement}</Text>
             <Box>
               <Button
                 onClick={() =>
                   deleteMagistrat({
-                    variables: { id },
                     refetchQueries: ["admin_magistrat"],
+                    variables: { id },
                   })
                 }
               >
@@ -54,7 +59,10 @@ const AdminUsersMagistratTribunal = (props) => {
             <Select
               placeholder="Ajouter un tribunal"
               onChange={({ value }) => setSelectedTribunal(value)}
-              options={data.tis.map((ti) => ({ label: ti.etablissement, value: ti.id }))}
+              options={data.tis.map((ti) => ({
+                label: ti.etablissement,
+                value: ti.id,
+              }))}
             />
           </Box>
           <Button
@@ -62,7 +70,7 @@ const AdminUsersMagistratTribunal = (props) => {
               if (selectedTribunal) {
                 addMagistrat({
                   refetchQueries: ["admin_magistrat"],
-                  variables: { userId, tiId: selectedTribunal },
+                  variables: { tiId: selectedTribunal, userId },
                 });
               }
             }}

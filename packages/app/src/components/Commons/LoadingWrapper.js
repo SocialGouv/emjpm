@@ -4,14 +4,23 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box, Card } from "rebass";
 
-export const LoadingWrapper = ({ children, error, errorCode, loading, errorRedirect }) => {
+export const LoadingWrapper = ({
+  children,
+  error,
+  errorCode,
+  loading,
+  errorRedirect,
+}) => {
   const router = useRouter();
 
   const errorRedirectionEnabled = errorRedirect && errorRedirect.url;
 
   useMemo(() => {
     if (error) {
-      console.error("[LoadingWrapper] Unexpected error loading component:", error);
+      console.error(
+        "[LoadingWrapper] Unexpected error loading component:",
+        error
+      );
       if (errorRedirectionEnabled) {
         router.push(errorRedirect.url, errorRedirect.as, errorRedirect.options);
       }

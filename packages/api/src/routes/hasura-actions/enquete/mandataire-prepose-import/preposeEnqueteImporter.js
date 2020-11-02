@@ -20,9 +20,9 @@ async function importEnqueteFile({
 
   // save data to database
   await preposeEnqueteRepository.update(enqueteId, {
-    tabs,
-    mandataireId,
     isUpload: true,
+    mandataireId,
+    tabs,
   });
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);

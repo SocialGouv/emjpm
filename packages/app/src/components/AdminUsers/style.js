@@ -4,11 +4,11 @@ const AdminUsersStyle = {
 
 const cardStyle = (active) => {
   return {
+    borderLeft: active ? "2px solid green" : "2px solid red",
     mb: "1",
     overflow: "hidden",
     pl: "16px",
     position: "relative",
-    borderLeft: active ? "2px solid green" : "2px solid red",
   };
 };
 
@@ -39,4 +39,10 @@ const activateButtonStyle = (active) => {
       };
 };
 
-export { AdminUsersStyle, cardStyle, labelStyle, descriptionStyle, activateButtonStyle };
+export {
+  AdminUsersStyle,
+  cardStyle,
+  labelStyle,
+  descriptionStyle,
+  activateButtonStyle,
+};

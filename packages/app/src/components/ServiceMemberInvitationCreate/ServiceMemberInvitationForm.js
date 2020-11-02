@@ -32,11 +32,17 @@ const ServiceMemberInvitationForm = (props) => {
             onChange={formik.handleChange}
             placeholder="Email"
           />
-          {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
+          {formik.touched.email && (
+            <InlineError message={formik.errors.email} fieldId="email" />
+          )}
         </Field>
         <Flex alignItems="center" justifyContent="flex-end">
           <Box>
-            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
               Inviter
             </Button>
           </Box>

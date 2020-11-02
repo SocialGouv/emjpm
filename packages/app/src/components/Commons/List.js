@@ -24,7 +24,11 @@ const ListItem = (props) => {
 
 const ListTitle = (props) => {
   return (
-    <Text as="li" {...props} sx={props.sx ? { ...ListTitleStyle, ...props.sx } : ListTitleStyle} />
+    <Text
+      as="li"
+      {...props}
+      sx={props.sx ? { ...ListTitleStyle, ...props.sx } : ListTitleStyle}
+    />
   );
 };
 

@@ -11,13 +11,13 @@ module.exports = async (enqueteReponse) => {
     informations: await getValidationStatus(
       enqueteReponse.enquete_reponses_service_information,
       {
-        schema: yup.object().shape({
-          nom: yup.string().required(),
-          departement: yup.string().required(),
-          region: yup.string().required(),
-        }),
         debugName: `${debugGroupName}`,
         logDataWithErrors: false,
+        schema: yup.object().shape({
+          departement: yup.string().required(),
+          nom: yup.string().required(),
+          region: yup.string().required(),
+        }),
       }
     ),
   };

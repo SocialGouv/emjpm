@@ -51,11 +51,11 @@ const mesureBatch = async (req, res) => {
       const ti = findTribunal(tribunaux, mesure.tribunal_siret);
 
       allMesureDatas.push({
-        datas: mesure,
-        type,
         antenneId: antenne_id ? antenne_id : null,
+        datas: mesure,
         serviceOrMandataire,
         ti,
+        type,
       });
     }
 
@@ -81,9 +81,9 @@ async function fetchTribunaux(mesures) {
     const ti = await getTi(tribunalSiret);
     if (!ti) {
       errors.push({
+        msg: `siret is not valid`,
         param: "tribunal_siret",
         value: tribunalSiret,
-        msg: `siret is not valid`,
       });
     } else {
       tribunaux.push(ti);
@@ -102,9 +102,9 @@ async function checkAntenneIdValidity(mesures, userId) {
   for (const antenneId of antenneIds) {
     if (antenneId && !(await antenneIdIsValid(antenneId, userId))) {
       errors.push({
+        msg: `antenne_id is not valid`,
         param: "antenne_id",
         value: antenneId,
-        msg: `antenne_id is not valid`,
       });
     }
   }

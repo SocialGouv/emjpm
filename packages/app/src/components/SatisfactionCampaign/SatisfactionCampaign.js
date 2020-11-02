@@ -13,7 +13,9 @@ const SatisfactionCampaign = () => {
   const [isDone, setDone] = useState(false);
   const [isClosed, setClosed] = useState(false);
 
-  const [addSatisfactionCampaignAnswer] = useMutation(ADD_SATISFACTION_CAMPAIGN_ANSWER);
+  const [addSatisfactionCampaignAnswer] = useMutation(
+    ADD_SATISFACTION_CAMPAIGN_ANSWER
+  );
 
   const { data, loading, error } = useQuery(CURRENT_SATISFACTION_CAMPAIGN, {
     variables: {

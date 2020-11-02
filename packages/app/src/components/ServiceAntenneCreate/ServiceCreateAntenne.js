@@ -21,15 +21,15 @@ const ServiceCreateAntenne = () => {
       await createAntenne({
         refetchQueries: ["service_antenne"],
         variables: {
-          address_city: values.geocode.city,
           address: values.geocode.label,
+          address_city: values.geocode.city,
           address_zip_code: values.geocode.postcode,
-          latitude: values.geocode.latitude,
-          longitude: values.geocode.latitude,
           contact_email: values.contact_email,
           contact_firstname: values.contact_firstname,
           contact_lastname: values.contact_lastname,
           contact_phone: values.contact_phone,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.latitude,
           mesures_max: values.mesures_max,
           name: values.name,
           service_id: service_id,

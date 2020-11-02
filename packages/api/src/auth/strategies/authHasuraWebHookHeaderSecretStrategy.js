@@ -27,8 +27,8 @@ function buildHasuraUser(req) {
     return {
       __auth_type__: "hasura",
       role,
-      userId: userId !== "null" ? parseInt(userId) : undefined,
       serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined,
+      userId: userId !== "null" ? parseInt(userId) : undefined,
     };
   };
   if (!req) {
@@ -65,8 +65,8 @@ function deserializeUser(str) {
     const hasuraUser = {
       __auth_type__: "hasura",
       role: chunks[1],
-      userId: chunks[2] !== "" ? parseInt(chunks[2]) : undefined,
       serviceId: chunks[3] !== "" ? parseInt(chunks[3]) : undefined,
+      userId: chunks[2] !== "" ? parseInt(chunks[2]) : undefined,
     };
     return hasuraUser;
   }
@@ -76,8 +76,8 @@ function deserializeUser(str) {
 module.exports = {
   strategy,
   userSerializer: {
-    serialize: serializeUser,
-    deserialize: deserializeUser,
     PREFIX: SERIALIZED_PREFIX,
+    deserialize: deserializeUser,
+    serialize: serializeUser,
   },
 };

@@ -19,10 +19,10 @@ const MagistratMandatairesMapPopup = () => {
     currentMarker: { id },
   } = useContext(MapContext);
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
+    fetchPolicy: "network-only",
     variables: {
       id: id,
     },
-    fetchPolicy: "network-only",
   });
 
   if (loading) {

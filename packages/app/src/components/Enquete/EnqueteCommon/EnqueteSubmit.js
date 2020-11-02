@@ -26,65 +26,116 @@ export const EnqueteSubmit = ({
       <Heading1 textAlign="center">Envoi de vos réponses</Heading1>
 
       {globalStatus === "invalid" ? (
-        <Box sx={{ textAlign: "left", lineHeight: "30px", marginTop: 40, marginX: 50 }}>
+        <Box
+          sx={{
+            lineHeight: "30px",
+            marginTop: 40,
+            marginX: 50,
+            textAlign: "left",
+          }}
+        >
           <Flex>
             <Box mr={2}>
               <EnqueteStatusInvalidIcon />
             </Box>
             <Text fontWeight="bold">Certaines réponses sont invalides.</Text>
           </Flex>
-          <Text>Les rubriques à corriger sont indiquées à gauche de votre écran.</Text>
+          <Text>
+            Les rubriques à corriger sont indiquées à gauche de votre écran.
+          </Text>
           {enquete.date_fin && (
-            <Text>Vous avez jusqu’au {format(new Date(enquete.date_fin), "dd/MM/yyyy")}.</Text>
+            <Text>
+              Vous avez jusqu’au{" "}
+              {format(new Date(enquete.date_fin), "dd/MM/yyyy")}.
+            </Text>
           )}
         </Box>
       ) : globalStatus === "empty" ? (
-        <Box sx={{ textAlign: "left", lineHeight: "30px", marginTop: 40, marginX: 50 }}>
+        <Box
+          sx={{
+            lineHeight: "30px",
+            marginTop: 40,
+            marginX: 50,
+            textAlign: "left",
+          }}
+        >
           <Flex>
             <Box mr={2}>
               <EnqueteStatusStarIcon />
             </Box>
-            <Text fontWeight="bold">{"Vous n'avez pas répondu à l'enquête."}</Text>
+            <Text fontWeight="bold">
+              {"Vous n'avez pas répondu à l'enquête."}
+            </Text>
           </Flex>
-          <Text>Les rubriques à renseigner sont indiquées à gauche de votre écran.</Text>
+          <Text>
+            Les rubriques à renseigner sont indiquées à gauche de votre écran.
+          </Text>
           {enquete.date_fin && (
             <Text>
               {"Vous avez jusqu’au "}
-              <strong>{format(new Date(enquete.date_fin), "dd/MM/yyyy")}</strong>.
+              <strong>
+                {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
+              </strong>
+              .
             </Text>
           )}
         </Box>
       ) : (
         <Box>
-          <Box sx={{ textAlign: "left", lineHeight: "30px", marginTop: 40, marginX: 50 }}>
+          <Box
+            sx={{
+              lineHeight: "30px",
+              marginTop: 40,
+              marginX: 50,
+              textAlign: "left",
+            }}
+          >
             {globalStatus === "empty-half" ? (
               <Fragment>
                 <Flex>
                   <Box mr={2}>
                     <EnqueteStatusHalfStarIcon />
                   </Box>
-                  <Text fontWeight="bold">{"Vous n'avez pas répondu à toutes les questions."}</Text>
+                  <Text fontWeight="bold">
+                    {"Vous n'avez pas répondu à toutes les questions."}
+                  </Text>
                 </Flex>
-                <Text>Les rubriques à compléter sont indiquées à gauche de votre écran.</Text>
+                <Text>
+                  Les rubriques à compléter sont indiquées à gauche de votre
+                  écran.
+                </Text>
                 {enquete.date_fin && (
                   <Text>
                     {"Vous avez jusqu’au "}
-                    <strong>{format(new Date(enquete.date_fin), "dd/MM/yyyy")}</strong>.
+                    <strong>
+                      {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
+                    </strong>
+                    .
                   </Text>
                 )}
                 <Text>
-                  Si vous avez terminé, vous pouvez cependant envoyer vos réponses maintenant.
+                  Si vous avez terminé, vous pouvez cependant envoyer vos
+                  réponses maintenant.
                 </Text>
-                <Text>Celles-ci seront transmises à votre direction régionale.</Text>
+                <Text>
+                  Celles-ci seront transmises à votre direction régionale.
+                </Text>
               </Fragment>
             ) : (
               <Fragment>
-                <Text>Vous avez répondu à toutes les questions de l’enquête.</Text>
-                <Text>Celles-ci seront transmises à votre direction régionale.</Text>
+                <Text>
+                  Vous avez répondu à toutes les questions de l’enquête.
+                </Text>
+                <Text>
+                  Celles-ci seront transmises à votre direction régionale.
+                </Text>
                 {enquete.date_fin && (
                   <Text>
                     {"Vous avez jusqu’au "}
-                    <strong>{format(new Date(enquete.date_fin), "dd/MM/yyyy")}</strong>.
+                    <strong>
+                      {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
+                    </strong>
+                    .
                   </Text>
                 )}
               </Fragment>

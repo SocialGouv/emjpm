@@ -44,9 +44,10 @@ export const EnquetePopulationsCuratelle = (props) => {
   });
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
-  const reponsePopulations = useMemo(() => removeAttributesPrefix(populations, "curatelle_"), [
-    populations,
-  ]);
+  const reponsePopulations = useMemo(
+    () => removeAttributesPrefix(populations, "curatelle_"),
+    [populations]
+  );
 
   return (
     <EnquetePopulationsForm

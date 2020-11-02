@@ -19,6 +19,7 @@ const {
   initEnqueteService,
   submitEnqueteService,
 } = require("./service/enqueteService");
+
 const router = express.Router();
 
 router.post(
@@ -95,18 +96,18 @@ router.post(
       let result;
       if (enqueteContext.user_type === "individuel") {
         result = await mandataireIndividuelEnqueteImporter.importEnqueteFile({
-          file,
           enqueteContext,
+          file,
         });
       } else if (enqueteContext.user_type === "prepose") {
         result = await preposeEnqueteImporter.importEnqueteFile({
-          file,
           enqueteContext,
+          file,
         });
       } else if (enqueteContext.user_type === "service") {
         result = await serviceEnqueteImporter.importEnqueteFile({
-          file,
           enqueteContext,
+          file,
         });
       } else {
         logger.error("Unexpected user_type", enqueteContext.user_type);

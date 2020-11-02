@@ -9,7 +9,9 @@ import { SERVICE } from "./queries";
 const AdminServiceInformations = (props) => {
   const { serviceId } = props;
   const [selectedTribunal, setSelectedTribunal] = useState(undefined);
-  const { data, loading, error } = useQuery(SERVICE, { variables: { serviceId } });
+  const { data, loading, error } = useQuery(SERVICE, {
+    variables: { serviceId },
+  });
   const [deleteServiceTribunalRelation] = useMutation(DELETE_SERVICE_TIS);
   const [addServiceTribunalRelation] = useMutation(ADD_SERVICE_TIS);
 
@@ -22,7 +24,14 @@ const AdminServiceInformations = (props) => {
   }
 
   const [service] = data.services;
-  const { id, etablissement, code_postal, ville, service_tis, service_members } = service;
+  const {
+    id,
+    etablissement,
+    code_postal,
+    ville,
+    service_tis,
+    service_members,
+  } = service;
 
   return (
     <Card>
@@ -66,7 +75,12 @@ const AdminServiceInformations = (props) => {
           {service_members &&
             service_members.map(({ user }) => {
               return (
-                <Flex mb={10} alignItems="center" justifyContent="space-between" key={user.id}>
+                <Flex
+                  mb={10}
+                  alignItems="center"
+                  justifyContent="space-between"
+                  key={user.id}
+                >
                   <Text>{`${user.nom} ${user.prenom} > #${user.id} > ${user.email}`}</Text>
                 </Flex>
               );
@@ -95,8 +109,8 @@ const AdminServiceInformations = (props) => {
                       <Button
                         onClick={() =>
                           deleteServiceTribunalRelation({
-                            variables: { id },
                             refetchQueries: ["admin_service"],
+                            variables: { id },
                           })
                         }
                       >
@@ -113,7 +127,12 @@ const AdminServiceInformations = (props) => {
                   placeholder="Ajouter un tribunal"
                   onChange={({ value }) => setSelectedTribunal(value)}
                   options={data.tis
-                    .filter((ti) => !service_tis.some((relation) => relation.ti.id === ti.id))
+                    .filter(
+                      (ti) =>
+                        !service_tis.some(
+                          (relation) => relation.ti.id === ti.id
+                        )
+                    )
                     .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
                 />
               </Box>

@@ -1,5 +1,5 @@
 const HeaderStyle = {
-  bg: 'blue',
+  bg: "blue",
 };
 
 export { HeaderStyle };

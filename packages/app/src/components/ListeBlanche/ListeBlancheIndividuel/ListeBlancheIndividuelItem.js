@@ -17,7 +17,9 @@ export const ListeBlancheIndividuelItem = (props) => {
         <Flex width="25%" flexDirection="column">
           <Text sx={labelStyle}>{"Mandataire individuel"}</Text>
           <Flex>
-            <Text sx={descriptionStyle}>{item.nom ? item.nom.toUpperCase() : ""}</Text>
+            <Text sx={descriptionStyle}>
+              {item.nom ? item.nom.toUpperCase() : ""}
+            </Text>
             <Text pl="1" sx={descriptionStyle}>
               {item.prenom}
             </Text>
@@ -41,9 +43,9 @@ export const ListeBlancheIndividuelItem = (props) => {
           <Text sx={descriptionStyle}>
             {item.lb_departements
               .map((lbDep) =>
-                `${lbDep.departement ? lbDep.departement.nom : "Inconnu"}`.concat(
-                  lbDep.departement_financeur ? " (Financeur)" : ""
-                )
+                `${
+                  lbDep.departement ? lbDep.departement.nom : "Inconnu"
+                }`.concat(lbDep.departement_financeur ? " (Financeur)" : "")
               )
               .join(", ")}
           </Text>

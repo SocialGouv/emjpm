@@ -4,36 +4,50 @@ import { Box, Flex } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat } from "../../../util";
-import { EnqueteFormFieldErrorMessage, EnqueteFormInputField } from "../EnqueteForm";
+import {
+  EnqueteFormFieldErrorMessage,
+  EnqueteFormInputField,
+} from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 function dataToForm(data) {
   return {
+    aide_sociale_conseil_departemental: formatFormInput(
+      data.aide_sociale_conseil_departemental
+    ),
+    autre_produits: formatFormInput(data.autre_produits),
+    charges_fonctionnement: formatFormInput(data.charges_fonctionnement),
     charges_personnel: formatFormInput(data.charges_personnel),
     charges_preposes: formatFormInput(data.charges_preposes),
-    charges_fonctionnement: formatFormInput(data.charges_fonctionnement),
-    produits_bareme_prelevements: formatFormInput(data.produits_bareme_prelevements),
-    autre_produits: formatFormInput(data.autre_produits),
     financement_public: formatFormInput(data.financement_public),
-    aide_sociale_conseil_departemental: formatFormInput(data.aide_sociale_conseil_departemental),
+    produits_bareme_prelevements: formatFormInput(
+      data.produits_bareme_prelevements
+    ),
   };
 }
 
 function formToData(values) {
   return {
-    aide_sociale_conseil_departemental: parseFormFloat(values.aide_sociale_conseil_departemental),
+    aide_sociale_conseil_departemental: parseFormFloat(
+      values.aide_sociale_conseil_departemental
+    ),
     autre_produits: parseFormFloat(values.autre_produits),
     charges_fonctionnement: parseFormFloat(values.charges_fonctionnement),
     charges_personnel: parseFormFloat(values.charges_personnel),
     charges_preposes: parseFormFloat(values.charges_preposes),
     financement_public: parseFormFloat(values.financement_public),
-    produits_bareme_prelevements: parseFormFloat(values.produits_bareme_prelevements),
+    produits_bareme_prelevements: parseFormFloat(
+      values.produits_bareme_prelevements
+    ),
   };
 }
 
 // schéma identique à enquetePreposeFinancementStatus côté hasura action
 const validationSchema = yup.object().shape({
+  aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
+  autre_produits: yup.number().min(0).nullable(),
+  charges_fonctionnement: yup.number().min(0).nullable(),
   charges_personnel: yup.number().min(0).nullable(),
   charges_preposes: yup
     .number()
@@ -47,11 +61,8 @@ const validationSchema = yup.object().shape({
         return chargePersonnel >= (value | 0);
       }
     ),
-  charges_fonctionnement: yup.number().min(0).nullable(),
-  produits_bareme_prelevements: yup.number().min(0).nullable(),
-  autre_produits: yup.number().min(0).nullable(),
   financement_public: yup.number().min(0).nullable(),
-  aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
+  produits_bareme_prelevements: yup.number().min(0).nullable(),
 });
 
 export const EnquetePreposeFinancementForm = (props) => {
@@ -65,15 +76,15 @@ export const EnquetePreposeFinancementForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;
@@ -120,9 +131,18 @@ export const EnquetePreposeFinancementForm = (props) => {
         </Box>
       </Flex>
       <Box>
-        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_personnel" />
-        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_preposes" />
-        <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="charges_fonctionnement" />
+        <EnqueteFormFieldErrorMessage
+          enqueteForm={enqueteForm}
+          id="charges_personnel"
+        />
+        <EnqueteFormFieldErrorMessage
+          enqueteForm={enqueteForm}
+          id="charges_preposes"
+        />
+        <EnqueteFormFieldErrorMessage
+          enqueteForm={enqueteForm}
+          id="charges_fonctionnement"
+        />
       </Box>
 
       <Box mt={"50px"}>
@@ -156,7 +176,10 @@ export const EnquetePreposeFinancementForm = (props) => {
             enqueteForm={enqueteForm}
             id="produits_bareme_prelevements"
           />
-          <EnqueteFormFieldErrorMessage enqueteForm={enqueteForm} id="autre_produits" />
+          <EnqueteFormFieldErrorMessage
+            enqueteForm={enqueteForm}
+            id="autre_produits"
+          />
         </Box>
         <Flex mt={4}>
           <Box width={1 / 2}>

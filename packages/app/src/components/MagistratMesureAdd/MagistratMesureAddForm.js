@@ -12,7 +12,11 @@ import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
 import { UserContext } from "../UserContext";
-import { CALCULATE_MESURES, CHOOSE_MANDATAIRE, SEND_EMAIL_RESERVATION } from "./mutations";
+import {
+  CALCULATE_MESURES,
+  CHOOSE_MANDATAIRE,
+  SEND_EMAIL_RESERVATION,
+} from "./mutations";
 
 export const MagistratMesureAddForm = (props) => {
   const { serviceId, mandataireId, cancelActionRoute } = props;
@@ -45,9 +49,9 @@ export const MagistratMesureAddForm = (props) => {
           {
             query: MAGISTRAT_MESURES_QUERY,
             variables: {
+              natureMesure: null,
               offset: 0,
               searchText: null,
-              natureMesure: null,
             },
           },
         ],
@@ -63,28 +67,42 @@ export const MagistratMesureAddForm = (props) => {
         },
       });
 
-      await Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${mesure.id}`, {
-        shallow: true,
-      });
+      await Router.push(
+        "/magistrats/mesures/[mesure_id]",
+        `/magistrats/mesures/${mesure.id}`,
+        {
+          shallow: true,
+        }
+      );
     },
   });
 
   const formik = useFormik({
+    initialValues: {
+      annee_naissance: "",
+      cabinet,
+      champ_mesure: "",
+      civilite: "",
+      judgmentDate: "",
+      nature_mesure: "",
+      numero_rg: "",
+      urgent: IS_URGENT.find((lv) => lv.value == false),
+    },
     onSubmit: async (values, { setSubmitting }) => {
       setLoading(true);
       await chooseMandataire({
         variables: {
           annee_naissance: values.annee_naissance,
           cabinet: values.cabinet,
+          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
           civilite: values.civilite.value,
           judgmentDate: values.judgmentDate === "" ? null : values.judgmentDate,
-          mandataire_id: mandataireId,
-          service_id: serviceId,
           magistrat_id: magistratId,
-          numero_rg: values.numero_rg,
-          ti: tiId,
+          mandataire_id: mandataireId,
           nature_mesure: values.nature_mesure.value,
-          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
+          numero_rg: values.numero_rg,
+          service_id: serviceId,
+          ti: tiId,
           urgent: values.urgent.value,
         },
       });
@@ -92,21 +110,11 @@ export const MagistratMesureAddForm = (props) => {
       setSubmitting(false);
     },
     validationSchema: magistratMandataireSchema,
-    initialValues: {
-      annee_naissance: "",
-      cabinet,
-      civilite: "",
-      judgmentDate: "",
-      numero_rg: "",
-      nature_mesure: "",
-      champ_mesure: "",
-      urgent: IS_URGENT.find((lv) => lv.value == false),
-    },
   });
 
   return (
     <Flex flexWrap="wrap">
-      <Box bg="cardSecondary" p="5" sx={{ flexGrow: 1, flexBasis: 380 }}>
+      <Box bg="cardSecondary" p="5" sx={{ flexBasis: 380, flexGrow: 1 }}>
         <Text lineHeight="1.5">
           {`Le formulaire ci-contre vous permet de réserver une mesure aupres d'un mandataire.`}
         </Text>
@@ -114,7 +122,7 @@ export const MagistratMesureAddForm = (props) => {
           {`Une fois les informations souhaitées remplies, cliquer sur "Enregistrer".`}
         </Text>
       </Box>
-      <Box p="5" sx={{ flexGrow: 99999, flexBasis: 0, minWidth: 320 }}>
+      <Box p="5" sx={{ flexBasis: 0, flexGrow: 99999, minWidth: 320 }}>
         <form onSubmit={formik.handleSubmit}>
           <Field>
             <Select
@@ -122,11 +130,18 @@ export const MagistratMesureAddForm = (props) => {
               name="nature_mesure"
               placeholder="Nature de la mesure"
               value={formik.values.nature_mesure}
-              hasError={formik.errors.nature_mesure && formik.touched.nature_mesure}
-              onChange={(option) => formik.setFieldValue("nature_mesure", option)}
+              hasError={
+                formik.errors.nature_mesure && formik.touched.nature_mesure
+              }
+              onChange={(option) =>
+                formik.setFieldValue("nature_mesure", option)
+              }
               options={MESURE_PROTECTION.NATURE_MESURE.options}
             />
-            <InlineError message={formik.errors.nature_mesure} fieldId="nature_mesure" />
+            <InlineError
+              message={formik.errors.nature_mesure}
+              fieldId="nature_mesure"
+            />
           </Field>
           <Field>
             <Select
@@ -134,12 +149,19 @@ export const MagistratMesureAddForm = (props) => {
               name="champ_mesure"
               placeholder="Champ de la mesure"
               value={formik.values.champ_mesure}
-              hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
-              onChange={(option) => formik.setFieldValue("champ_mesure", option)}
+              hasError={
+                formik.errors.champ_mesure && formik.touched.champ_mesure
+              }
+              onChange={(option) =>
+                formik.setFieldValue("champ_mesure", option)
+              }
               clearable={true}
               options={MESURE_PROTECTION.CHAMP_MESURE.options}
             />
-            <InlineError message={formik.errors.champ_mesure} fieldId="champ_mesure" />
+            <InlineError
+              message={formik.errors.champ_mesure}
+              fieldId="champ_mesure"
+            />
           </Field>
           <Field>
             <Select
@@ -158,11 +180,16 @@ export const MagistratMesureAddForm = (props) => {
               value={formik.values.annee_naissance}
               id="annee_naissance"
               name="annee_naissance"
-              hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
+              hasError={
+                formik.errors.annee_naissance && formik.touched.annee_naissance
+              }
               onChange={formik.handleChange}
               placeholder="Année de naissance"
             />
-            <InlineError message={formik.errors.annee_naissance} fieldId="annee_naissance" />
+            <InlineError
+              message={formik.errors.annee_naissance}
+              fieldId="annee_naissance"
+            />
           </Field>
           <Field>
             <Input
@@ -173,7 +200,10 @@ export const MagistratMesureAddForm = (props) => {
               onChange={formik.handleChange}
               placeholder="Numéro RG"
             />
-            <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
+            <InlineError
+              message={formik.errors.numero_rg}
+              fieldId="numero_rg"
+            />
           </Field>
           <Field>
             <Input
@@ -203,12 +233,17 @@ export const MagistratMesureAddForm = (props) => {
               value={formik.values.judgmentDate}
               id="judgmentDate"
               name="judgmentDate"
-              hasError={formik.errors.judgmentDate && formik.touched.judgmentDate}
+              hasError={
+                formik.errors.judgmentDate && formik.touched.judgmentDate
+              }
               type="date"
               onChange={formik.handleChange}
               placeholder="Date prévisionnelle du jugement (optionnel)"
             />
-            <InlineError message={formik.errors.judgmentDate} fieldId="judgmentDate" />
+            <InlineError
+              message={formik.errors.judgmentDate}
+              fieldId="judgmentDate"
+            />
           </Field>
           <Flex justifyContent="flex-end">
             <Box>
@@ -217,7 +252,9 @@ export const MagistratMesureAddForm = (props) => {
                 variant="outline"
                 onClick={() => {
                   if (cancelActionRoute) {
-                    Router.push(cancelActionRoute.href, cancelActionRoute.as, { shallow: true });
+                    Router.push(cancelActionRoute.href, cancelActionRoute.as, {
+                      shallow: true,
+                    });
                   }
                 }}
               >
@@ -238,6 +275,6 @@ export const MagistratMesureAddForm = (props) => {
 
 MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,
-  mandataireId: PropTypes.number,
   cancelActionRoute: PropTypes.object,
+  mandataireId: PropTypes.number,
 };

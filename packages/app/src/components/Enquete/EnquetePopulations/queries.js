@@ -34,14 +34,22 @@ function buildEnquetePopulationQuery(prefix) {
   `;
 }
 
-export const ENQUETE_REPONSE_POPULATIONS_CURATELLE = buildEnquetePopulationQuery("curatelle");
+export const ENQUETE_REPONSE_POPULATIONS_CURATELLE = buildEnquetePopulationQuery(
+  "curatelle"
+);
 
-export const ENQUETE_REPONSE_POPULATIONS_TUTELLE = buildEnquetePopulationQuery("tutelle");
+export const ENQUETE_REPONSE_POPULATIONS_TUTELLE = buildEnquetePopulationQuery(
+  "tutelle"
+);
 
-export const ENQUETE_REPONSE_POPULATIONS_MAJ = buildEnquetePopulationQuery("maj");
+export const ENQUETE_REPONSE_POPULATIONS_MAJ = buildEnquetePopulationQuery(
+  "maj"
+);
 
 export const ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE = buildEnquetePopulationQuery(
   "sauvegarde_justice"
 );
 
-export const ENQUETE_REPONSE_POPULATIONS_AUTRE = buildEnquetePopulationQuery("autre_mesures");
+export const ENQUETE_REPONSE_POPULATIONS_AUTRE = buildEnquetePopulationQuery(
+  "autre_mesures"
+);

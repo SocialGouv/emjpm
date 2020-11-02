@@ -14,21 +14,21 @@ class Service extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
-        etablissement: { type: "string" },
-        telephone: { type: "string" },
         adresse: { type: "string" },
         code_postal: { type: "string" },
-        ville: { type: "string" },
-        dispo_max: {
-          type: "integer",
-        },
         competences: {
           type: "string",
         },
+        dispo_max: {
+          type: "integer",
+        },
+        etablissement: { type: "string" },
+        id: { type: "integer" },
+        telephone: { type: "string" },
+        ville: { type: "string" },
       },
+      type: "object",
     };
   }
 }

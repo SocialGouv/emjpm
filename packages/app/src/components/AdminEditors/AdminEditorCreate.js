@@ -18,14 +18,16 @@ export const AdminEditorCreate = () => {
     try {
       await addEditor({
         variables: {
+          api_token,
           name: values.name,
           redirect_uris: values.redirect_uris,
-          api_token,
         },
       });
     } catch (error) {
       captureException(error);
-      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
+      setStatus({
+        error: "Une erreur est survenue, veuillez réessayer plus tard.",
+      });
     }
 
     setSubmitting(false);
@@ -38,7 +40,10 @@ export const AdminEditorCreate = () => {
 
   return (
     <Card sx={cardStyle} p="0" width="100%">
-      <AdminEditorForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <AdminEditorForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
     </Card>
   );
 };

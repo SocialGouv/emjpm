@@ -1,8 +1,18 @@
 import gql from "graphql-tag";
 
 export const ADD_EDITOR = gql`
-  mutation addEditor($name: String!, $api_token: String!, $redirect_uris: jsonb!) {
-    insert_editors(objects: { name: $name, api_token: $api_token, redirect_uris: $redirect_uris }) {
+  mutation addEditor(
+    $name: String!
+    $api_token: String!
+    $redirect_uris: jsonb!
+  ) {
+    insert_editors(
+      objects: {
+        name: $name
+        api_token: $api_token
+        redirect_uris: $redirect_uris
+      }
+    ) {
       returning {
         name
         api_token

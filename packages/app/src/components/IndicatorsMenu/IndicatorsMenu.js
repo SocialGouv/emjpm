@@ -8,12 +8,12 @@ import { Box, Link as StyledLink } from "rebass";
 import { INDICATORS } from "./queries";
 
 const linkStyle = {
-  fontWeight: "bold",
-  fontSize: "2",
   color: "black",
-  mb: "0",
-  fontFamily: "heading",
   display: "block",
+  fontFamily: "heading",
+  fontSize: "2",
+  fontWeight: "bold",
+  mb: "0",
 };
 
 const IndicatorsMenu = (props) => {
@@ -48,13 +48,20 @@ const IndicatorsMenu = (props) => {
         </Card>
         {departements.map((departement, index) => {
           return (
-            <Card key={`${index}-${departement.code}`} p="1" mb="1" sx={{ borderRadius: "15px" }}>
+            <Card
+              key={`${index}-${departement.code}`}
+              p="1"
+              mb="1"
+              sx={{ borderRadius: "15px" }}
+            >
               <Link
                 prefetch={false}
                 href={`/stats/[departement_code]`}
                 as={`/stats/${departement.code}`}
               >
-                <StyledLink sx={linkStyle}>{`${departement.code} - ${departement.nom}`}</StyledLink>
+                <StyledLink
+                  sx={linkStyle}
+                >{`${departement.code} - ${departement.nom}`}</StyledLink>
               </Link>
             </Card>
           );

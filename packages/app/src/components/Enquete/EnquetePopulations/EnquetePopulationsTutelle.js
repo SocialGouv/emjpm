@@ -41,9 +41,10 @@ export const EnquetePopulationsTutelle = (props) => {
   });
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
-  const reponsePopulations = useMemo(() => removeAttributesPrefix(populations, "tutelle_"), [
-    populations,
-  ]);
+  const reponsePopulations = useMemo(
+    () => removeAttributesPrefix(populations, "tutelle_"),
+    [populations]
+  );
 
   return (
     <EnquetePopulationsForm

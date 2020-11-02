@@ -10,20 +10,23 @@ export const EnquetePreposeSubmit = (props) => {
   const { enquete, enqueteReponse, goToFirstPage } = props;
   const { id: enqueteId } = enquete;
   const { id: userId } = useContext(UserContext);
-  const [submitEnqueteReponse, { loading }] = useMutation(SUBMIT_ENQUETE_REPONSE, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
+  const [submitEnqueteReponse, { loading }] = useMutation(
+    SUBMIT_ENQUETE_REPONSE,
+    {
+      onCompleted: () => {
+        // TODO: it must be changed, but actually SUBMIT_ENQUETE_REPONSE
+        // use useSubscription method with graphql query 🤷
+        // The problem is refetchQueries doesn't works with useSubscription.
+        document.location.reload(true);
       },
-    ],
-    onCompleted: () => {
-      // TODO: it must be changed, but actually SUBMIT_ENQUETE_REPONSE
-      // use useSubscription method with graphql query 🤷
-      // The problem is refetchQueries doesn't works with useSubscription.
-      document.location.reload(true);
-    },
-  });
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
+        },
+      ],
+    }
+  );
 
   return (
     <EnqueteSubmit

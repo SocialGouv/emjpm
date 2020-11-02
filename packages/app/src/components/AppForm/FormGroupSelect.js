@@ -37,10 +37,10 @@ export const FormGroupSelect = ({
   }, [options, readOnly, value]);
 
   const showError = useAppFieldShowError({
-    id,
     error,
     formik,
     hideErrors,
+    id,
   });
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
@@ -72,7 +72,12 @@ export const FormGroupSelect = ({
         />
       )}
 
-      <AppFormFieldErrorMessage id={id} error={error} formik={formik} hideErrors={hideErrors} />
+      <AppFormFieldErrorMessage
+        id={id}
+        error={error}
+        formik={formik}
+        hideErrors={hideErrors}
+      />
     </Field>
   );
 };

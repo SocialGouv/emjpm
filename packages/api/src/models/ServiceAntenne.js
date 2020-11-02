@@ -14,10 +14,14 @@ class ServiceAntenne extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
-        name: {
+        adresse: {
+          type: "string",
+        },
+        code_postal: {
+          type: "string",
+        },
+        contact_email: {
           type: "string",
         },
         contact_firstname: {
@@ -26,25 +30,21 @@ class ServiceAntenne extends Model {
         contact_lastname: {
           type: "string",
         },
-        contact_email: {
+        id: { type: "integer" },
+        mesure_max: {
+          type: "integer",
+        },
+        name: {
           type: "string",
         },
         telephone: {
           type: "string",
         },
-        adresse: {
-          type: "string",
-        },
-        code_postal: {
-          type: "string",
-        },
         ville: {
           type: "string",
         },
-        mesure_max: {
-          type: "integer",
-        },
       },
+      type: "object",
     };
   }
 
@@ -53,12 +53,12 @@ class ServiceAntenne extends Model {
 
     return {
       service: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Service,
         join: {
           from: "service_antenne.service_id",
           to: "users.id",
         },
+        modelClass: Service,
+        relation: Model.BelongsToOneRelation,
       },
     };
   }

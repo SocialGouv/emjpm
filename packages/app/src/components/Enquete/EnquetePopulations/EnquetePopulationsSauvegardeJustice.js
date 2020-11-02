@@ -21,24 +21,30 @@ export const EnquetePopulationsSauvegardeJustice = (props) => {
     enquete_reponse_ids: { populations_id },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
-  const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE, {
-    variables: {
-      id: populations_id,
-    },
-  });
+  const { data, loading } = useQuery(
+    ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
+    {
+      variables: {
+        id: populations_id,
+      },
+    }
+  );
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
-        variables: { id: populations_id },
-      },
-    ],
-  });
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
+        },
+        {
+          query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
+          variables: { id: populations_id },
+        },
+      ],
+    }
+  );
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
   const reponsePopulations = useMemo(

@@ -24,8 +24,14 @@ const departementsOptionsConfig = {
   },
 };
 
-const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter }) => {
-  const { departementsOptions, error, loading } = useDepartementsOptions(departementsOptionsConfig);
+const AdminFilterBar = ({
+  onAddButtonClick,
+  userTypeFilter,
+  useDepartementfilter,
+}) => {
+  const { departementsOptions, error, loading } = useDepartementsOptions(
+    departementsOptionsConfig
+  );
 
   const {
     searchText,
@@ -57,7 +63,9 @@ const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter
               {userTypeFilter && (
                 <Box width="170px" mr={1}>
                   <Select
-                    value={TYPE_OPTIONS.find((elm) => elm.value === selectedType)}
+                    value={TYPE_OPTIONS.find(
+                      (elm) => elm.value === selectedType
+                    )}
                     options={TYPE_OPTIONS}
                     onChange={(option) => selectType(option.value)}
                     name="type"
@@ -69,7 +77,10 @@ const AdminFilterBar = ({ onAddButtonClick, userTypeFilter, useDepartementfilter
               {useDepartementfilter && (
                 <Box width="250px" mr={1}>
                   <Select
-                    value={findOption(departementsOptions, selectedDepartementCode)}
+                    value={findOption(
+                      departementsOptions,
+                      selectedDepartementCode
+                    )}
                     options={departementsOptions}
                     onChange={(option) => selectDepartementCode(option.value)}
                     name="departement"

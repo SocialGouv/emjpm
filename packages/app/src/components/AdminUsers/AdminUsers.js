@@ -1,5 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { DIRECTION_TYPE, isDirection, isIndividuel, isPrepose } from "@emjpm/core";
+import {
+  DIRECTION_TYPE,
+  isDirection,
+  isIndividuel,
+  isPrepose,
+} from "@emjpm/core";
 import { Button, Card } from "@emjpm/ui";
 import Link from "next/link";
 import React, { useContext, useState } from "react";
@@ -34,18 +39,24 @@ const RowItem = ({ item }) => {
             </Flex>
             <Flex width="100px" flexDirection="column">
               <Text sx={labelStyle}>état</Text>
-              <Text sx={descriptionStyle}>{active ? "activé" : "non activé"}</Text>
+              <Text sx={descriptionStyle}>
+                {active ? "activé" : "non activé"}
+              </Text>
             </Flex>
             {isIndividuel({ type } || isPrepose({ type })) && (
               <Flex width="100px" flexDirection="column">
                 <Text sx={labelStyle}>Liste Blanche</Text>
-                <Text sx={descriptionStyle}>{mandataire.lb_user_id ? "oui" : "non"}</Text>
+                <Text sx={descriptionStyle}>
+                  {mandataire.lb_user_id ? "oui" : "non"}
+                </Text>
               </Flex>
             )}
             {isDirection({ type }) && (
               <Flex width="100px" flexDirection="column">
                 <Text sx={labelStyle}>Direction</Text>
-                <Text sx={descriptionStyle}>{getDirectionLabel({ type, directions })}</Text>
+                <Text sx={descriptionStyle}>
+                  {getDirectionLabel({ directions, type })}
+                </Text>
               </Flex>
             )}
           </Flex>
@@ -54,9 +65,7 @@ const RowItem = ({ item }) => {
               href={`/admin/users/[user_id]?type=${type}&active=${active}`}
               as={`/admin/users/${id}?type=${type}&active=${active}`}
             >
-              <a>
-                <Button>Voir</Button>
-              </a>
+              <Button>Voir</Button>
             </Link>
           </Box>
         </Flex>
@@ -76,7 +85,9 @@ const AdminUsers = () => {
       limit: resultPerPage,
       offset: currentOffset,
       searchText:
-        debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
+        debouncedSearchText && debouncedSearchText !== ""
+          ? `${debouncedSearchText}%`
+          : null,
       type: selectedType,
     },
   });
@@ -115,9 +126,15 @@ function getDirectionLabel({ type, directions }) {
       if (direction.type === DIRECTION_TYPE.national) {
         directionLabel = "DGCS";
       } else {
-        const directionRegion = direction.region ? direction.region.nom : undefined;
-        const directionDepartement = direction.departement ? direction.departement.nom : undefined;
-        const directionDetail = directionRegion ? directionRegion : directionDepartement;
+        const directionRegion = direction.region
+          ? direction.region.nom
+          : undefined;
+        const directionDepartement = direction.departement
+          ? direction.departement.nom
+          : undefined;
+        const directionDetail = directionRegion
+          ? directionRegion
+          : directionDepartement;
         directionLabel = `${directionDetail}`;
       }
     }

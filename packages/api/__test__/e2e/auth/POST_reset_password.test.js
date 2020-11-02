@@ -4,6 +4,7 @@ const request = require("supertest");
 
 // Mock nodemailer before importing the server !
 const nodemailerMock = require("nodemailer-mock");
+
 jest.setMock("nodemailer", nodemailerMock);
 
 // Fake env
@@ -29,10 +30,10 @@ beforeEach(async () => {
   await knex("users")
     .where({ id: 52 })
     .update({
-      password: "changeme",
       email: "reset@password.com",
-      reset_password_token: "LpWpzK4Jla9I87Aq",
+      password: "changeme",
       reset_password_expires: knex.raw(`now() + interval '1 second'`),
+      reset_password_token: "LpWpzK4Jla9I87Aq",
     });
 });
 
@@ -40,9 +41,9 @@ test("reset a password", async () => {
   const response = await request(server)
     .post("/api/auth/reset-password-with-token")
     .send({
-      token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
       new_password_confirmation: "test123456?",
+      token: "LpWpzK4Jla9I87Aq",
     });
   expect(response.body).toMatchSnapshot();
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
@@ -53,9 +54,9 @@ test("fail because the inputs don't match", async () => {
   const response = await request(server)
     .post("/api/auth/reset-password-with-token")
     .send({
-      token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
       new_password_confirmation: "test123456",
+      token: "LpWpzK4Jla9I87Aq",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -73,9 +74,9 @@ test("fail because nekot is not a valid token", async () => {
   const response = await request(server)
     .post("/api/auth/reset-password-with-token")
     .send({
-      token: "nekot",
       new_password: "test123456?",
       new_password_confirmation: "test123456?",
+      token: "nekot",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -99,9 +100,9 @@ test("fail because the token has expired", async () => {
   const response = await request(server)
     .post("/api/auth/reset-password-with-token")
     .send({
-      token: "LpWpzK4Jla9I87Aq",
       new_password: "test123456?",
       new_password_confirmation: "test123456?",
+      token: "LpWpzK4Jla9I87Aq",
     });
   expect(response.body).toMatchInlineSnapshot(
     { errors: expect.any(Object) },
@@ -126,9 +127,9 @@ test("should empty user token+expiration on password reset", async () => {
   const response = await request(server)
     .post("/api/auth/reset-password-with-token")
     .send({
-      token: "abcdef",
       new_password: "test123456?",
       new_password_confirmation: "test123456?",
+      token: "abcdef",
     });
 
   const userData = await knex("users").where({ id: 52 }).first();

@@ -1,33 +1,5 @@
 extends:
   - "@socialgouv/eslint-config-react"
-
-plugins:
-  - sort-keys-fix
-  - simple-import-sort
-
 rules:
-  react/self-closing-comp:
-    - error
-    - component: true
-      html: true
-  prefer-const: 2
-  jsx-a11y/anchor-is-valid: off
-  jsx-a11y/label-has-for: off
+  # We might do it through typescript in the future...
   react/prop-types: off
-  jsx-a11y/click-events-have-key-events: off
-  jsx-a11y/no-static-element-interactions: off
-  jsx-a11y/no-noninteractive-tabindex: off
-  # prettier/prettier: off
-  # import/namespace: off
-  # react/no-unknown-property: off
-  # import/named: off
-  simple-import-sort/sort: warn
-  sort-keys-fix/sort-keys-fix:
-    - error
-    - asc
-
-overrides:
-  - files:
-      - src/components/**/*.js
-    rules:
-      sort-keys-fix/sort-keys-fix: off

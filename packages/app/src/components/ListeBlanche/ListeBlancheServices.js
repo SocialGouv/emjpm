@@ -33,9 +33,9 @@ export const ListeBlancheServices = (props) => {
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
   const { data, loading, error } = useQuery(LB_SERVICES, {
     variables: {
+      filters: getRequestFilters(debounceFilters),
       limit: resultPerPage,
       offset: currentOffset,
-      filters: getRequestFilters(debounceFilters),
     },
   });
 

@@ -34,8 +34,14 @@ export default class MyDocument extends Document {
           <link rel="stylesheet" href="/static/css/font.css" />
           <link rel="stylesheet" href="/static/css/pagination.css" />
           {this.props.styleTags}
-          <script type="text/javascript" src="/static/tarteaucitron/tarteaucitron.js" />
-          <script type="text/javascript" src="/static/tarteaucitron/initTarteaucitron.js" />
+          <script
+            type="text/javascript"
+            src="/static/tarteaucitron/tarteaucitron.js"
+          />
+          <script
+            type="text/javascript"
+            src="/static/tarteaucitron/initTarteaucitron.js"
+          />
         </Head>
         <body>
           {/* @socialgouv global style */}

@@ -9,18 +9,18 @@ const ServiceEditForm = (props) => {
   const { handleSubmit, service } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: serviceSchema,
     initialValues: {
       competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
+      geocode: geocodeInitialValue(service),
       information: service.information || "",
       nom: service.nom || "",
       prenom: service.prenom || "",
       telephone: service.telephone || "",
-      geocode: geocodeInitialValue(service),
     },
+    onSubmit: handleSubmit,
+    validationSchema: serviceSchema,
   });
 
   return (
@@ -97,10 +97,17 @@ const ServiceEditForm = (props) => {
           label="Informations à destination du magistrat"
           placeholder="Préférences géographiques, compétences, langues parlées, ..."
         />
-        <InlineError message={formik.errors.competences} fieldId="competences" />
+        <InlineError
+          message={formik.errors.competences}
+          fieldId="competences"
+        />
       </Field>
       <Field>
-        <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+        <Button
+          type="submit"
+          disabled={formik.isSubmitting}
+          isLoading={formik.isSubmitting}
+        >
           Enregistrer
         </Button>
       </Field>

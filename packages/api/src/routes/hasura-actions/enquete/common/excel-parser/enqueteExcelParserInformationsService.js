@@ -3,8 +3,8 @@ const { enqueteExcelParser: parser } = require("./services");
 function parse(ws) {
   const result = {
     departement: parser.string(ws["B1"]),
-    region: parser.string(ws["B2"]),
     nom: parser.string(ws["B3"]),
+    region: parser.string(ws["B2"]),
   };
 
   if (parser.integer(ws["C9"]) === 1) {

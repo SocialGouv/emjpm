@@ -1,6 +1,7 @@
 const request = require("supertest");
 
 const nodemailerMock = require("nodemailer-mock");
+
 jest.setMock("nodemailer", nodemailerMock);
 
 // Fake env
@@ -17,9 +18,9 @@ beforeAll(async () => {
   await seedData(databaseName);
 
   await knex("editors").insert({
+    api_token: "api_token",
     name: "editor test",
     redirect_uris: JSON.stringify(["http://localhost:3001"]),
-    api_token: "api_token",
   });
 
   const [editor] = await knex("editors");
@@ -29,12 +30,12 @@ beforeAll(async () => {
     .where({ user_id: user.id })
     .limit(1);
   const [mesure] = await knex("mesures")
-    .where({ status: "en_cours", mandataire_id: mandataire.id })
+    .where({ mandataire_id: mandataire.id, status: "en_cours" })
     .limit(1);
 
   const loginRes = await request(server).post("/api/auth/login").send({
-    username: user.username,
     password: "emjpm2019",
+    username: user.username,
   });
 
   const loginToken = await loginRes.body.token;
@@ -44,11 +45,11 @@ beforeAll(async () => {
     .set({ Authorization: `Bearer ${loginToken}` })
     .set("Accept", "application/json")
     .send({
+      access_token: loginToken,
       client_id: editor.id,
       redirect_uri: "http://localhost:3001",
-      access_token: loginToken,
-      state: "api-test",
       response_type: "code",
+      state: "api-test",
     });
 
   const authorizationCode = await knex("authorization_codes").first();
@@ -116,31 +117,31 @@ describe("POST /api/editors/mesures", () => {
         date_nomination: "2020-01-01",
         date_premier_mesure: "2020-01-05",
         date_protection_en_cours: "2020-01-10",
-        numero_dossier: "45656456",
-        numero_rg: "RG234534534",
-        tribunal_siret: global.ti.siret,
-        tribunal_cabinet: null,
-        ressources: [],
         etats: [
           {
             champ_mesure: "protection_bien",
+            code_postal: "89000",
             date_changement_etat: "2020-01-05",
             lieu_vie: "domicile",
-            pays: "FR",
             nature_mesure: "curatelle_simple",
-            code_postal: "89000",
+            pays: "FR",
             ville: "auxerre",
           },
           {
             champ_mesure: "protection_bien",
+            code_postal: "89350",
             date_changement_etat: "2020-01-06",
             lieu_vie: "domicile",
-            pays: "FR",
             nature_mesure: "curatelle_simple",
-            code_postal: "89350",
+            pays: "FR",
             ville: "perrigny",
           },
         ],
+        numero_dossier: "45656456",
+        numero_rg: "RG234534534",
+        ressources: [],
+        tribunal_cabinet: null,
+        tribunal_siret: global.ti.siret,
       });
     // eslint-disable-next-line no-unused-vars
     const { id, ...expected } = response.body;
@@ -162,22 +163,22 @@ describe("POST /api/editors/mesures", () => {
         date_nomination: "2020-01-11",
         date_premier_mesure: "2020-01-10",
         date_protection_en_cours: "2020-01-10",
-        numero_dossier: "45656456",
-        numero_rg: "RG234534534",
-        tribunal_siret: global.ti.siret,
-        tribunal_cabinet: null,
-        ressources: [],
         etats: [
           {
+            champ_mesure: "protection_bien",
+            code_postal: "89000",
             date_changement_etat: "2020-01-05",
             lieu_vie: "domicile",
-            pays: "FR",
             nature_mesure: "curatelle_simple",
-            code_postal: "89000",
+            pays: "FR",
             ville: "auxerre",
-            champ_mesure: "protection_bien",
           },
         ],
+        numero_dossier: "45656456",
+        numero_rg: "RG234534534",
+        ressources: [],
+        tribunal_cabinet: null,
+        tribunal_siret: global.ti.siret,
       });
 
     expect(response.body).toEqual({
@@ -208,29 +209,29 @@ describe("POST /api/editors/mesures", () => {
         date_nomination: "2020-01-11",
         date_premier_mesure: "2020-01-10",
         date_protection_en_cours: "2020-01-10",
-        numero_dossier: "45656456",
-        numero_rg: "RG234534534",
-        tribunal_siret: global.ti.siret,
-        tribunal_cabinet: null,
-        ressources: [],
         etats: [
           {
+            code_postal: "89000",
             date_changement_etat: "2020-01-05",
             lieu_vie: "domicile",
-            pays: "FR",
             nature_mesure: "curatelle_simple",
-            code_postal: "89000",
+            pays: "FR",
             ville: "auxerre",
           },
           {
+            code_postal: "89350",
             date_changement_etat: "2020-01-06",
             lieu_vie: "domicile",
-            pays: "FR",
             nature_mesure: "curatelle_simple",
-            code_postal: "89350",
+            pays: "FR",
             ville: "perrigny",
           },
         ],
+        numero_dossier: "45656456",
+        numero_rg: "RG234534534",
+        ressources: [],
+        tribunal_cabinet: null,
+        tribunal_siret: global.ti.siret,
       });
     // eslint-disable-next-line no-unused-vars
     const { id, ...expected } = response.body;
@@ -252,10 +253,28 @@ describe("POST /api/editors/mesures", () => {
         date_nomination: "2020-01-11",
         date_premier_mesure: "2020-01-10",
         date_protection_en_cours: "2020-01-11",
+        etats: [
+          {
+            champ_mesure: "protection_bien",
+            code_postal: "89000",
+            date_changement_etat: "2020-03-05",
+            lieu_vie: "domicile",
+            nature_mesure: "curatelle_simple",
+            pays: "FR",
+            ville: "auxerre",
+          },
+          {
+            champ_mesure: "protection_bien",
+            code_postal: "89350",
+            date_changement_etat: "2020-05-06",
+            lieu_vie: "domicile",
+            nature_mesure: "curatelle_simple",
+            pays: "FR",
+            ville: "perrigny",
+          },
+        ],
         numero_dossier: "45656456",
         numero_rg: "RG234534534",
-        tribunal_siret: global.ti.siret,
-        tribunal_cabinet: null,
         ressources: [
           {
             annee: 2020,
@@ -263,26 +282,8 @@ describe("POST /api/editors/mesures", () => {
             prestations_sociales: ["AAH"],
           },
         ],
-        etats: [
-          {
-            champ_mesure: "protection_bien",
-            date_changement_etat: "2020-03-05",
-            lieu_vie: "domicile",
-            pays: "FR",
-            nature_mesure: "curatelle_simple",
-            code_postal: "89000",
-            ville: "auxerre",
-          },
-          {
-            champ_mesure: "protection_bien",
-            date_changement_etat: "2020-05-06",
-            lieu_vie: "domicile",
-            pays: "FR",
-            nature_mesure: "curatelle_simple",
-            code_postal: "89350",
-            ville: "perrigny",
-          },
-        ],
+        tribunal_cabinet: null,
+        tribunal_siret: global.ti.siret,
       });
 
     // eslint-disable-next-line no-unused-vars
@@ -345,26 +346,25 @@ describe("POST /api/editors/mesures/batch", () => {
       .send({
         mesures: [
           {
-            numero_rg: "2020202020",
-            numero_dossier: "TESTES",
             annee_naissance: 1957,
             civilite: "monsieur",
-            date_premier_mesure: "2019-02-14",
             date_nomination: "2019-02-14",
+            date_premier_mesure: "2019-02-14",
             date_protection_en_cours: "2019-04-18",
-            tribunal_siret: "17750111101763",
             etats: [
               {
-                date_changement_etat: "2020-09-19",
-                nature_mesure: "curatelle_simple",
                 champ_mesure: "protection_bien_personne",
-                lieu_vie: "domicile",
                 code_postal: "22190",
-                ville: "PLRIN SUR MER",
+                date_changement_etat: "2020-09-19",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
                 pays: "FR",
                 type_etablissement: "etablissement_handicapes",
+                ville: "PLRIN SUR MER",
               },
             ],
+            numero_dossier: "TESTES",
+            numero_rg: "2020202020",
             ressources: [
               {
                 annee: 2019,
@@ -372,46 +372,46 @@ describe("POST /api/editors/mesures/batch", () => {
                 prestations_sociales: [],
               },
             ],
+            tribunal_siret: "17750111101763",
           },
           {
-            numero_rg: "18/A/3245",
-            numero_dossier: "20190512",
             annee_naissance: 1982,
             civilite: "monsieur",
-            date_premier_mesure: "2014-01-01",
             date_nomination: "2018-02-01",
+            date_premier_mesure: "2014-01-01",
             date_protection_en_cours: "2020-05-12",
-            tribunal_siret: "17750111101763",
             etats: [
               {
-                date_changement_etat: "2020-05-12",
-                nature_mesure: "curatelle_renforcee",
                 champ_mesure: "protection_bien_personne",
-                lieu_vie: "etablissement",
                 code_postal: "22190",
-                ville: "PLRIN SUR MER",
+                date_changement_etat: "2020-05-12",
+                lieu_vie: "etablissement",
+                nature_mesure: "curatelle_renforcee",
                 pays: "FR",
                 type_etablissement: "autre_etablissement_s_ms",
+                ville: "PLRIN SUR MER",
               },
               {
-                date_changement_etat: "2019-09-19",
-                nature_mesure: "curatelle_simple",
                 champ_mesure: "protection_bien_personne",
-                lieu_vie: "domicile",
                 code_postal: "75005",
-                ville: "PARIS",
+                date_changement_etat: "2019-09-19",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
                 pays: "FR",
+                ville: "PARIS",
               },
               {
-                date_changement_etat: "2018-02-01",
-                nature_mesure: "curatelle_simple",
                 champ_mesure: "protection_personne",
-                lieu_vie: "domicile",
                 code_postal: "75005",
-                ville: "PARIS",
+                date_changement_etat: "2018-02-01",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
                 pays: "FR",
+                ville: "PARIS",
               },
             ],
+            numero_dossier: "20190512",
+            numero_rg: "18/A/3245",
             ressources: [
               {
                 annee: 2020,
@@ -429,6 +429,7 @@ describe("POST /api/editors/mesures/batch", () => {
                 prestations_sociales: [],
               },
             ],
+            tribunal_siret: "17750111101763",
           },
         ],
       });

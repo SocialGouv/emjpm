@@ -1,5 +1,13 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Antenne, BoxWrapper, Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
+import {
+  Antenne,
+  BoxWrapper,
+  Card,
+  Heading2,
+  Heading4,
+  Spinner,
+  Text,
+} from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
@@ -10,7 +18,9 @@ import { AntennesStyle } from "./style";
 
 const ServiceAntennes = (props) => {
   const { isAntenneCreationHidden } = props;
-  const { data, loading, error } = useQuery(ANTENNE, { fetchPolicy: "cache-and-network" });
+  const { data, loading, error } = useQuery(ANTENNE, {
+    fetchPolicy: "cache-and-network",
+  });
 
   if (loading) {
     return (
@@ -47,10 +57,13 @@ const ServiceAntennes = (props) => {
                 <img src="/static/images/enterprise.svg" alt="entreprise" />
               </Box>
               <Box ml="5">
-                <Heading4 mb="1">Créer des antennes pour votre service</Heading4>
+                <Heading4 mb="1">
+                  Créer des antennes pour votre service
+                </Heading4>
                 <Text lineHeight="1.5">
-                  Si votre service est découpés en antennes indépendantes, eMJPM vous permet de
-                  gérer des mesures et des préférences d’affectation pour chacune d’entre elles.
+                  Si votre service est découpés en antennes indépendantes, eMJPM
+                  vous permet de gérer des mesures et des préférences
+                  d’affectation pour chacune d’entre elles.
                 </Text>
               </Box>
               <Box
@@ -69,7 +82,12 @@ const ServiceAntennes = (props) => {
       )}
       {service_antenne.length > 0 && (
         <Fragment>
-          <Flex flexWrap="wrap" mb="3" alignItems="center" justifyContent="space-between">
+          <Flex
+            flexWrap="wrap"
+            mb="3"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <Heading2 mt="1">Antennes</Heading2>
             {!isAntenneCreationHidden && (
               <LinkButton href="/services/antennes/create" ml="1">

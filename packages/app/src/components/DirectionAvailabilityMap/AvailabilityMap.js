@@ -50,7 +50,14 @@ const AvailabilityMap = () => {
       <Box>
         <Heading2>Disponibilités par territoire</Heading2>
       </Box>
-      <Box sx={{ height: ["auto", "auto", "434px"], mt: "2", p: "2", position: "relative" }}>
+      <Box
+        sx={{
+          height: ["auto", "auto", "434px"],
+          mt: "2",
+          p: "2",
+          position: "relative",
+        }}
+      >
         <MapComponent departements={departements} />
       </Box>
     </Card>

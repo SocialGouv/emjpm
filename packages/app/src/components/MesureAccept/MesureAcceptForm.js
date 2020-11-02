@@ -12,15 +12,15 @@ export const MesureAcceptForm = (props) => {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: mesureAcceptSchema,
     initialValues: {
+      code_postal: mesure.code_postal,
       date_nomination: "",
       lieu_vie: "",
-      ville: mesure.ville,
-      code_postal: mesure.code_postal,
       pays: "FR",
+      ville: mesure.ville,
     },
+    onSubmit: handleSubmit,
+    validationSchema: mesureAcceptSchema,
   });
 
   console.log(formik.errors);
@@ -125,7 +125,11 @@ export const MesureAcceptForm = (props) => {
               </Button>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Valider la mesure
               </Button>
             </Box>

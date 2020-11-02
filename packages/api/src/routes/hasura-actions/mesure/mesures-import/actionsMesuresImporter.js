@@ -32,15 +32,15 @@ async function importMesuresFile({
   logger.info(`[IMPORT MESURES] START`);
 
   const mesuresToImport = excelParser.parseSheetByIndex({
-    sheetIndex: 0,
     content,
     parseOptions: {
       cellDates: true,
       dateNF: "dd/mm/yyyy",
       locale: "fr-FR",
-      type: type === "csv" ? "string" : "base64",
       raw: type === "csv" ? true : false,
+      type: type === "csv" ? "string" : "base64",
     },
+    sheetIndex: 0,
   });
 
   mesuresToImport.forEach((data) => {
@@ -62,11 +62,11 @@ async function importMesuresFile({
   } = actionsMesuresImporterSchemaValidator.validateImportData(mesuresToImport);
 
   const importSummary = await importMesures({
+    antennesMap,
     errors,
     mandataireUserId,
-    serviceId,
     mesuresWithLine,
-    antennesMap,
+    serviceId,
   });
 
   importSummary.errors.sort((a, b) => a.line - b.line);
@@ -88,13 +88,13 @@ async function importMesuresFile({
   }
 
   return {
-    errors: importSummary.errors,
     creationNumber: importSummary.create.length,
-    updateNumber: importSummary.update.length,
+    errors: importSummary.errors,
     invalidAntenneNames:
       importSummary.errors.length === 0
         ? importSummary.invalidAntenneNames
         : [],
+    updateNumber: importSummary.update.length,
   };
 }
 
@@ -107,9 +107,9 @@ const importMesures = async ({
 }) => {
   const importSummary = {
     create: [],
-    update: [],
     errors,
     invalidAntenneNames: [],
+    update: [],
   };
 
   let mandataire;
@@ -124,10 +124,10 @@ const importMesures = async ({
   }
 
   const cache = {
-    tribunalBySiret: {},
     departmentById: {},
     departmentByRegionCode: {},
     serviceAntenneByName: {},
+    tribunalBySiret: {},
   };
 
   // save or update mesures
@@ -157,20 +157,20 @@ const importMesures = async ({
 
     const mesureDatas = {
       ...mesure,
-      nature_mesure,
       champ_mesure,
       civilite,
-      lieu_vie,
       date_nomination: toDate(mesure.date_ouverture),
+      lieu_vie,
       mandataire,
+      nature_mesure,
       service,
       status: MESURE_PROTECTION_STATUS.en_cours,
     };
     await prepareMesure(mesureDatas, {
-      line,
-      cache,
       antennesMap,
+      cache,
       importSummary,
+      line,
       serviceId,
     });
     counter++;
@@ -221,10 +221,10 @@ const prepareMesure = async (
   } = mesureDatas;
 
   const department = await actionsMesuresImporterGeoRepository.findDepartment({
+    cache,
+    code_postal,
     mandataire,
     service,
-    code_postal,
-    cache,
   });
 
   const pays = getMesurePays(code_postal);
@@ -297,41 +297,41 @@ const prepareMesure = async (
   }
 
   const data = {
-    date_nomination: mesureDatas.date_nomination,
-    ville: mesureDatas.ville,
-    nature_mesure: mesureDatas.nature_mesure,
-    champ_mesure: mesureDatas.champ_mesure,
-    status: mesureDatas.status,
-    code_postal: mesureDatas.code_postal,
-    civilite: mesureDatas.civilite,
     annee_naissance: mesureDatas.annee,
-    numero_rg: mesureDatas.numero_rg,
-    numero_dossier: mesureDatas.numero_dossier,
-    mandataire_id: mandataire ? mandataire.id : null,
-    service_id: service ? service.id : null,
     antenne_id: mesureDatas.antenne_id,
-    lieu_vie: mesureDatas.lieu_vie,
-    department_id: department.id,
-    ti_id: ti ? ti.id : null,
     cabinet: mesureDatas.tribunal_cabinet,
-    pays,
-    longitude,
+    champ_mesure: mesureDatas.champ_mesure,
+    civilite: mesureDatas.civilite,
+    code_postal: mesureDatas.code_postal,
+    date_nomination: mesureDatas.date_nomination,
+    department_id: department.id,
     latitude,
+    lieu_vie: mesureDatas.lieu_vie,
+    longitude,
+    mandataire_id: mandataire ? mandataire.id : null,
+    nature_mesure: mesureDatas.nature_mesure,
+    numero_dossier: mesureDatas.numero_dossier,
+    numero_rg: mesureDatas.numero_rg,
+    pays,
+    service_id: service ? service.id : null,
+    status: mesureDatas.status,
+    ti_id: ti ? ti.id : null,
+    ville: mesureDatas.ville,
   };
 
   const [mesure] = await Mesure.query().where({
-    numero_rg: data.numero_rg,
-    ti_id: ti.id,
-    service_id: service ? service.id : null,
     mandataire_id: mandataire ? mandataire.id : null,
+    numero_rg: data.numero_rg,
+    service_id: service ? service.id : null,
+    ti_id: ti.id,
   });
 
   if (!mesure) {
     importSummary.create.push(data);
   } else if (mesure.mandataire_id === data.mandataire_id) {
     importSummary.update.push({
-      id: mesure.id,
       data,
+      id: mesure.id,
     });
   } else {
     importSummary.errors.push({

@@ -3,20 +3,25 @@ const { enqueteExcelParser: parser } = require("./services");
 
 function parse(ws) {
   return {
+    annee_agrement: parser.integer(ws["C37"], {
+      max: 2018,
+      min: 2009,
+    }),
+
+    // formation
+    cnc_annee_obtention: parser.integer(ws["B47"]),
+
+    cnc_heures_formation: parser.float(ws["B48"]),
+
     // agrements
     debut_activite_avant_2009: parser.boolean(ws["C35"]),
-    annee_agrement: parser.integer(ws["C37"], {
-      min: 2009,
-      max: 2018,
-    }),
+
     nb_departements: parser.select(ws["C39"], {
       map: ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.byValue,
     }),
-    nb_mesures_dep_finance: parser.integer(ws["C41"]),
+
     nb_mesures_dep_autres: parser.integer(ws["C43"]),
-    // formation
-    cnc_annee_obtention: parser.integer(ws["B47"]),
-    cnc_heures_formation: parser.float(ws["B48"]),
+    nb_mesures_dep_finance: parser.integer(ws["C41"]),
     niveau_qualification: parseNiveauQualification(ws),
     secretaire_specialise_etp_n1: parser.float(ws["B53"], { min: 0 }),
     secretaire_specialise_etp_n2: parser.float(ws["C53"], { min: 0 }),

@@ -11,7 +11,9 @@ import { cardStyle } from "./style";
 
 const AdminEditorEdit = (props) => {
   const { editorId } = props;
-  const { data, loading, error } = useQuery(EDITOR, { variables: { id: editorId } });
+  const { data, loading, error } = useQuery(EDITOR, {
+    variables: { id: editorId },
+  });
   const [editEditor] = useMutation(EDIT_EDITOR);
 
   if (loading) {
@@ -34,7 +36,9 @@ const AdminEditorEdit = (props) => {
       });
     } catch (error) {
       captureException(error);
-      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
+      setStatus({
+        error: "Une erreur est survenue, veuillez réessayer plus tard.",
+      });
     }
 
     setSubmitting(false);
@@ -47,7 +51,11 @@ const AdminEditorEdit = (props) => {
 
   return (
     <Card sx={cardStyle} p="0" width="100%">
-      <AdminEditorForm editor={editor} handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <AdminEditorForm
+        editor={editor}
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
     </Card>
   );
 };

@@ -11,14 +11,14 @@ export const MesureCloseForm = (props) => {
   const { handleSubmit, handleCancel } = props;
 
   const validationSchema = Yup.object().shape({
-    date_fin_mesure: Yup.date().required(),
     cause_sortie: Yup.string().required(),
+    date_fin_mesure: Yup.date().required(),
   });
 
   const formik = useFormik({
+    initialValues: { cause_sortie: "", date_fin_mesure: null },
     onSubmit: handleSubmit,
     validationSchema,
-    initialValues: { date_fin_mesure: null, cause_sortie: "" },
   });
 
   return (
@@ -56,7 +56,11 @@ export const MesureCloseForm = (props) => {
               </Button>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Confirmer la fin du mandat
               </Button>
             </Box>

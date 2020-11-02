@@ -15,14 +15,16 @@ export const AdminSatisfactionCampaignCreate = () => {
     try {
       await addSatisfactionCampaign({
         variables: {
+          ended_at: values.endedAt,
           name: values.name,
           started_at: values.startedAt,
-          ended_at: values.endedAt,
         },
       });
     } catch (error) {
       captureException(error);
-      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard" });
+      setStatus({
+        error: "Une erreur est survenue, veuillez réessayer plus tard",
+      });
     }
 
     setSubmitting(false);
@@ -35,7 +37,10 @@ export const AdminSatisfactionCampaignCreate = () => {
 
   return (
     <Card sx={cardStyle} p="0" width="100%">
-      <AdminSatisfactionCampaignForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
+      <AdminSatisfactionCampaignForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
     </Card>
   );
 };

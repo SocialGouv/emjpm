@@ -11,11 +11,13 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
   nb_delegues: yup.number().min(0).integer().nullable(),
-  nb_delegues_etp: yup.number().min(0).nullable(),
   nb_delegues_cnc: yup.number().integer().min(0).nullable(),
   nb_delegues_en_formation: yup.number().integer().min(0).nullable(),
-  total_heures_delegues_en_formation: yup.number().min(0).nullable(),
-  nb_delegues_non_formes: yup.number().integer().min(0).nullable(),
+  nb_delegues_etp: yup.number().min(0).nullable(),
+  nb_delegues_femme: yup.number().integer().min(0).nullable(),
+  nb_delegues_femme_etp: yup.number().min(0).nullable(),
+  nb_delegues_homme: yup.number().integer().min(0).nullable(),
+  nb_delegues_homme_etp: yup.number().min(0).nullable(),
   nb_delegues_niveau1: yup.number().integer().min(0).nullable(),
   nb_delegues_niveau1_etp: yup.number().min(0).nullable(),
   nb_delegues_niveau2: yup.number().integer().min(0).nullable(),
@@ -28,20 +30,20 @@ const validationSchema = yup.object().shape({
   nb_delegues_niveau5_etp: yup.number().min(0).nullable(),
   nb_delegues_niveau6: yup.number().integer().min(0).nullable(),
   nb_delegues_niveau6_etp: yup.number().min(0).nullable(),
-  nb_delegues_homme: yup.number().integer().min(0).nullable(),
-  nb_delegues_homme_etp: yup.number().min(0).nullable(),
-  nb_delegues_femme: yup.number().integer().min(0).nullable(),
-  nb_delegues_femme_etp: yup.number().min(0).nullable(),
+  nb_delegues_non_formes: yup.number().integer().min(0).nullable(),
+  total_heures_delegues_en_formation: yup.number().min(0).nullable(),
 });
 
 function dataToForm(data) {
   const formData = {
     nb_delegues: formatFormInput(data.nb_delegues),
-    nb_delegues_etp: formatFormInput(data.nb_delegues_etp),
     nb_delegues_cnc: formatFormInput(data.nb_delegues_cnc),
     nb_delegues_en_formation: formatFormInput(data.nb_delegues_en_formation),
-    total_heures_delegues_en_formation: formatFormInput(data.total_heures_delegues_en_formation),
-    nb_delegues_non_formes: formatFormInput(data.nb_delegues_non_formes),
+    nb_delegues_etp: formatFormInput(data.nb_delegues_etp),
+    nb_delegues_femme: formatFormInput(data.nb_delegues_femme),
+    nb_delegues_femme_etp: formatFormInput(data.nb_delegues_femme_etp),
+    nb_delegues_homme: formatFormInput(data.nb_delegues_homme),
+    nb_delegues_homme_etp: formatFormInput(data.nb_delegues_homme_etp),
     nb_delegues_niveau1: formatFormInput(data.nb_delegues_niveau1),
     nb_delegues_niveau1_etp: formatFormInput(data.nb_delegues_niveau1_etp),
     nb_delegues_niveau2: formatFormInput(data.nb_delegues_niveau2),
@@ -54,10 +56,10 @@ function dataToForm(data) {
     nb_delegues_niveau5_etp: formatFormInput(data.nb_delegues_niveau5_etp),
     nb_delegues_niveau6: formatFormInput(data.nb_delegues_niveau6),
     nb_delegues_niveau6_etp: formatFormInput(data.nb_delegues_niveau6_etp),
-    nb_delegues_homme: formatFormInput(data.nb_delegues_homme),
-    nb_delegues_homme_etp: formatFormInput(data.nb_delegues_homme_etp),
-    nb_delegues_femme: formatFormInput(data.nb_delegues_femme),
-    nb_delegues_femme_etp: formatFormInput(data.nb_delegues_femme_etp),
+    nb_delegues_non_formes: formatFormInput(data.nb_delegues_non_formes),
+    total_heures_delegues_en_formation: formatFormInput(
+      data.total_heures_delegues_en_formation
+    ),
   };
   return formData;
 }
@@ -65,11 +67,13 @@ function dataToForm(data) {
 function formToData(data) {
   return {
     nb_delegues: parseFormInt(data.nb_delegues),
-    nb_delegues_etp: parseFormFloat(data.nb_delegues_etp),
     nb_delegues_cnc: parseFormInt(data.nb_delegues_cnc),
     nb_delegues_en_formation: parseFormInt(data.nb_delegues_en_formation),
-    total_heures_delegues_en_formation: parseFormFloat(data.total_heures_delegues_en_formation),
-    nb_delegues_non_formes: parseFormInt(data.nb_delegues_non_formes),
+    nb_delegues_etp: parseFormFloat(data.nb_delegues_etp),
+    nb_delegues_femme: parseFormInt(data.nb_delegues_femme),
+    nb_delegues_femme_etp: parseFormFloat(data.nb_delegues_femme_etp),
+    nb_delegues_homme: parseFormInt(data.nb_delegues_homme),
+    nb_delegues_homme_etp: parseFormFloat(data.nb_delegues_homme_etp),
     nb_delegues_niveau1: parseFormInt(data.nb_delegues_niveau1),
     nb_delegues_niveau1_etp: parseFormFloat(data.nb_delegues_niveau1_etp),
     nb_delegues_niveau2: parseFormInt(data.nb_delegues_niveau2),
@@ -82,10 +86,10 @@ function formToData(data) {
     nb_delegues_niveau5_etp: parseFormFloat(data.nb_delegues_niveau5_etp),
     nb_delegues_niveau6: parseFormInt(data.nb_delegues_niveau6),
     nb_delegues_niveau6_etp: parseFormFloat(data.nb_delegues_niveau6_etp),
-    nb_delegues_homme: parseFormInt(data.nb_delegues_homme),
-    nb_delegues_homme_etp: parseFormFloat(data.nb_delegues_homme_etp),
-    nb_delegues_femme: parseFormInt(data.nb_delegues_femme),
-    nb_delegues_femme_etp: parseFormFloat(data.nb_delegues_femme_etp),
+    nb_delegues_non_formes: parseFormInt(data.nb_delegues_non_formes),
+    total_heures_delegues_en_formation: parseFormFloat(
+      data.total_heures_delegues_en_formation
+    ),
   };
 }
 
@@ -100,15 +104,15 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

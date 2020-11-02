@@ -18,9 +18,12 @@ const EnquetePage = ({ enqueteId }) => {
 
   const currentStep = useCurrentStepFromUrl();
 
-  const { data, loading, error } = useSubscription(ENQUETE_WITH_REPONSE_STATUS, {
-    variables: { enqueteId, userId },
-  });
+  const { data, loading, error } = useSubscription(
+    ENQUETE_WITH_REPONSE_STATUS,
+    {
+      variables: { enqueteId, userId },
+    }
+  );
 
   const { enquete, enqueteReponse } = useMemo(() => {
     const enquete = data ? data.enquetes_by_pk : {};
@@ -28,7 +31,10 @@ const EnquetePage = ({ enqueteId }) => {
     return { enquete, enqueteReponse };
   }, [data]);
 
-  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [enquete, loading]);
+  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [
+    enquete,
+    loading,
+  ]);
 
   return (
     <LayoutServices>

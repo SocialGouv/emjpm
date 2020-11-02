@@ -14,11 +14,15 @@ export const formatTribunauxOptions = (tribunaux) => {
 };
 
 export function parseFormFloat(value, defaultValue = null) {
-  return value !== "" && !isNaN(parseFloat(value)) ? parseFloat(value) : defaultValue;
+  return value !== "" && !isNaN(parseFloat(value))
+    ? parseFloat(value)
+    : defaultValue;
 }
 
 export function parseFormInt(value, defaultValue = null) {
-  return value !== "" && !isNaN(parseInt(value, 10)) ? parseInt(value, 10) : defaultValue;
+  return value !== "" && !isNaN(parseInt(value, 10))
+    ? parseInt(value, 10)
+    : defaultValue;
 }
 
 export function parseFormInput(value, defaultValue = null) {

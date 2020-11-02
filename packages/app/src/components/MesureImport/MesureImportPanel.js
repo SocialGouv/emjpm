@@ -25,8 +25,8 @@ export const MesureImportPanel = ({
   if (mesuresImportLoading) {
     return (
       <Box p={4}>
-        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez patienter (cela peut
-        prendre jusqu&apos;à 2mn pour les gros fichiers)...
+        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez
+        patienter (cela peut prendre jusqu&apos;à 2mn pour les gros fichiers)...
       </Box>
     );
   }
@@ -37,7 +37,9 @@ export const MesureImportPanel = ({
         reset={() => reset()}
         importSummary={importSummary}
         serviceId={serviceId}
-        onSubmitAntennesMap={({ antennesMap }) => importMesureFileWithAntennesMap(antennesMap)}
+        onSubmitAntennesMap={({ antennesMap }) =>
+          importMesureFileWithAntennesMap(antennesMap)
+        }
       />
     );
   }

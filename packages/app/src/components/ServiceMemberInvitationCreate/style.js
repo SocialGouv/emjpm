@@ -1,15 +1,15 @@
 export const listStyle = (i) => ({
-  borderRadius: 4,
   alignItems: "center",
   bg: i % 2 ? "" : "muted",
+  borderRadius: 4,
+  mb: 1,
   px: 2,
   py: 4,
-  mb: 1,
 });
 
 export const listEmailStyle = {
-  textOverflow: "ellipsis",
   overflow: "hidden",
+  textOverflow: "ellipsis",
   width: 250,
 };
 
@@ -24,13 +24,13 @@ export const listDateStyle = {
 };
 
 export const listActionStyle = {
-  width: 24,
-  mx: 2,
-  cursor: "pointer",
-  color: "primary",
   ":hover": {
     color: "text",
   },
+  color: "primary",
+  cursor: "pointer",
+  mx: 2,
+  width: 24,
 };
 
 export const listActionsStyle = {
@@ -38,6 +38,6 @@ export const listActionsStyle = {
 };
 
 export const listAdminStyle = {
-  width: 200,
   mr: 4,
+  width: 200,
 };

@@ -27,8 +27,9 @@ const app = express();
 // TODO: rate limiter use inmemory-store.
 // EMJPM uses k8s, so we must replace it by a redis or postgre table store.
 const apiLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
+  // 15 minutes
   max: 100,
+  windowMs: 15 * 60 * 1000,
 });
 
 // middlewares
@@ -59,9 +60,9 @@ app.use(
 
 app.get("/", function (req, res) {
   res.json({
+    NODE_ENV: process.env.NODE_ENV || "development",
     title: "API eMJPM",
     version: pkg.version,
-    NODE_ENV: process.env.NODE_ENV || "development",
   });
 });
 

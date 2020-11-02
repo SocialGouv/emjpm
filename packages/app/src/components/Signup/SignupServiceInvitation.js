@@ -13,7 +13,9 @@ import { cardStyle, grayBox } from "./style";
 export const SignupServiceInvitation = (props) => {
   const { token } = props;
   const client = useApolloClient();
-  const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, { variables: { token } });
+  const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, {
+    variables: { token },
+  });
 
   if (loading) {
     return "Loading...";
@@ -34,6 +36,9 @@ export const SignupServiceInvitation = (props) => {
       signup({
         body: {
           invitation,
+          service: {
+            service_id: invitation.service_id,
+          },
           user: {
             confirmPassword: values.confirmPassword,
             email: values.email,
@@ -42,9 +47,6 @@ export const SignupServiceInvitation = (props) => {
             prenom: values.prenom,
             type: "service",
             username: values.email,
-          },
-          service: {
-            service_id: invitation.service_id,
           },
         },
         onComplete: () => {
@@ -83,7 +85,10 @@ export const SignupServiceInvitation = (props) => {
             </Box>
           </Box>
           <Box p="5" pb={0} mb="4" width={[1, 3 / 5]}>
-            <SignupServiceInvitationForm handleSubmit={handleSubmit} invitation={invitation} />
+            <SignupServiceInvitationForm
+              handleSubmit={handleSubmit}
+              invitation={invitation}
+            />
           </Box>
         </Flex>
       </Card>

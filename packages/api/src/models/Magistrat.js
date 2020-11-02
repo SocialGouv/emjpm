@@ -14,12 +14,12 @@ class Magistrat extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         id: { type: "integer" },
-        user_id: { type: "integer" },
         ti_id: { type: "integer" },
+        user_id: { type: "integer" },
       },
+      type: "object",
     };
   }
 }

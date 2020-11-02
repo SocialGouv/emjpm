@@ -1,7 +1,7 @@
 const MagistratMesureRemoveStyle = {
   bg: "white",
-  width: "100%",
   flexWrap: "wrap",
+  width: "100%",
 };
 
 export { MagistratMesureRemoveStyle };

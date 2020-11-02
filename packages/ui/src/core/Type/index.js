@@ -1,3 +1,3 @@
-import { Text } from './Type';
+import { Text } from "./Type";
 
 export { Text };
