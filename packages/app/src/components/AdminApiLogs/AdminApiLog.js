@@ -6,20 +6,17 @@ import { Box, Flex } from "rebass";
 
 import { API_LOG_BY_ID } from "./queries";
 
-const AdminApiLog = (props) => {
-  const { id } = props;
-
+const AdminApiLog = ({ id }) => {
   const { data, loading, error } = useQuery(API_LOG_BY_ID, { variables: { id } });
 
   if (loading) {
     return "Loading...";
   }
+  const [log] = data?.api_logs;
 
-  if (error || !data.api_logs.length) {
+  if (error || !log) {
     return "Error...";
   }
-
-  const [log] = data.api_logs;
 
   return (
     <Card mt={2}>
@@ -33,7 +30,7 @@ const AdminApiLog = (props) => {
       </Flex>
       <Flex mb={4}>
         <Box width={1 / 3} p={2} bg="cardSecondary">
-          ID
+          Date
         </Box>
         <Box width={2 / 3} px={4} py={2}>
           <Text>{format(new Date(log.created_at), "dd/MM/yyyy")}</Text>

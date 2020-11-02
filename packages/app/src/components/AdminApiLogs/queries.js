@@ -1,32 +1,31 @@
 import gql from "graphql-tag";
 
-export const API_LOGS = gql`
-  query ApiLogs {
-    api_logs {
-      id
-      request_url
-      request_method
-      response
-      token
-      created_at
-      editor {
-        id
-        name
-      }
-    }
-  }
-`;
-
 export const API_LOGS_SEARCH = gql`
-  query ApiLogSearch($query: String!) {
-    api_logs(
+  query ApiLogSearch($search: String, $limit: Int = 100, $offset: Int = 0) {
+    api_logs_aggregate(
       where: {
         _or: [
-          { request_url: { _ilike: $query } }
-          { request_method: { _ilike: $query } }
-          { token: { _ilike: $query } }
+          { request_url: { _ilike: $search } }
+          { request_method: { _ilike: $search } }
+          { token: { _ilike: $search } }
         ]
       }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    api_logs(
+      limit: $limit
+      offset: $offset
+      where: {
+        _or: [
+          { request_url: { _ilike: $search } }
+          { request_method: { _ilike: $search } }
+          { token: { _ilike: $search } }
+        ]
+      }
+      order_by: { created_at: desc }
     ) {
       id
       request_url
