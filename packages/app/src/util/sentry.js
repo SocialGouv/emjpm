@@ -2,18 +2,21 @@ import * as Sentry from "@sentry/node";
 import getConfig from "next/config";
 
 const {
-  publicRuntimeConfig: { PACKAGE_VERSION, SENTRY_PUBLIC_DSN },
+  publicRuntimeConfig: { PACKAGE_VERSION, SENTRY_PUBLIC_DSN, NODE_ENV },
 } = getConfig();
 
-try {
-  Sentry.init({
-    attachStacktrace: true,
-    dsn: SENTRY_PUBLIC_DSN,
-    release: PACKAGE_VERSION,
-  });
-} catch (error) {
-  console.log(`SENTRY: ${error.message}`);
-}
+export const initSentry = () => {
+  try {
+    Sentry.init({
+      attachStacktrace: true,
+      dsn: SENTRY_PUBLIC_DSN,
+      enabled: NODE_ENV === "production",
+      release: PACKAGE_VERSION,
+    });
+  } catch (error) {
+    console.log(`SENTRY: ${error.message}`);
+  }
+};
 
 export const captureException = (error, context = {}) => {
   Sentry.configureScope((scope) => {
