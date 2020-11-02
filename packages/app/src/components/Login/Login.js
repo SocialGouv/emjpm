@@ -10,7 +10,6 @@ import fetch from "unfetch";
 import { loginSchema } from "../../lib/validationSchemas";
 import { matopush } from "../../matomo";
 import { login } from "../../util/auth";
-// import { setUser } from "../../util/sentry";
 import { Link } from "../Commons";
 
 const {
@@ -36,7 +35,6 @@ const checkStatus = async (apolloClient, response, setSubmitting, setStatus) => 
   Router.push(json.url);
   matopush(["trackEvent", "login", "success"]);
 
-  // trackUser();
   return json;
 };
 
