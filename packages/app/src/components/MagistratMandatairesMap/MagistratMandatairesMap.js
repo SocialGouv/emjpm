@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 
+import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
 import { MapLayer, MapPopup } from "../Map";
 import { MapContext } from "../Map/context";
+import { mapImages } from "../Map/utils";
 import { MagistratMandatairesMapPopup } from "./MagistratMandatairesMapPopup";
 
 const Map = ReactMapboxGl({ accessToken: "" });
-import { MANDATAIRE_IND, MANDATAIRE_PRE, SERVICE } from "../../constants/discriminator";
-import { mapImages } from "../Map/utils";
 
 const MagistratMapMandataires = (props) => {
   const { services, individuel, prepose } = props;

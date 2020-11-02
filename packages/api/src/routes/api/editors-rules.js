@@ -73,8 +73,8 @@ const batchRules = [
 ];
 
 module.exports = {
-  rules,
   batchRules,
+  rules,
 };
 
 function checkChampMesure(value, { req }) {

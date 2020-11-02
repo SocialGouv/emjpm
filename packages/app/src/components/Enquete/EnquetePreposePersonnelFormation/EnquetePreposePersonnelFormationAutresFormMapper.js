@@ -1,4 +1,5 @@
 import { formatFormInput } from "../../../util";
+
 function mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data) {
   return {
     nb_preposes: formatFormInput(!data ? null : data.nb_preposes),

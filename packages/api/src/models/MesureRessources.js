@@ -15,14 +15,14 @@ class MesureRessources extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
+        annee: { type: "integer" },
         id: { type: "integer" },
         mesure_id: { type: "integer" },
-        annee: { type: "integer" },
         niveau_ressource: { type: "integer" },
         prestations_sociales: { type: "json" },
       },
+      type: "object",
     };
   }
 }

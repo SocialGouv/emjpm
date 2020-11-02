@@ -32,8 +32,8 @@ const forgotPassword = async (req, res) => {
 
   try {
     await User.query().where("id", user.id).update({
-      reset_password_token: token,
       reset_password_expires: endOfTomorrow(),
+      reset_password_token: token,
     });
   } catch (error) {
     Sentry.captureException(error);

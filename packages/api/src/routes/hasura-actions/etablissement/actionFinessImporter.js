@@ -59,8 +59,8 @@ async function startImport() {
     return false;
   }
   await ProcessusStates.query().where({ id: "import_finess" }).update({
-    start_date: new Date(),
     end_date: null,
+    start_date: new Date(),
   });
   return true;
 }
@@ -79,8 +79,8 @@ async function importFinessFile(url) {
   inputStream.setEncoding("latin1");
 
   const rl = readline.createInterface({
-    input: inputStream,
     crlfDelay: Infinity,
+    input: inputStream,
   });
 
   let counter = 0;
@@ -161,36 +161,36 @@ async function importStructureEtablissement(properties, departements) {
     departements.find((elm) => elm.code === departement) || {};
 
   const etablissement = {
-    nofinesset,
-    nofinessej,
-    rs,
-    rslongue,
-    complrs,
     compldistrib,
-    numvoie,
-    typvoie,
-    voie,
-    compvoie,
-    lieuditbp,
+    complrs,
     commune,
+    compvoie,
     departement_id: departementId,
+    nofinessej,
     libdepartement,
-    ligneacheminement,
-    telephone,
-    telecopie,
+    nofinesset,
+    lieuditbp,
+    numvoie,
     categetab,
-    libcategetab,
+    rs,
     categagretab,
+    rslongue,
     libcategagretab,
-    siret,
     codeape,
+    typvoie,
     codemft,
-    libmft,
+    voie,
     codesph,
-    libsph,
     dateouv,
+    ligneacheminement,
     dateautor,
+    telecopie,
+    libcategetab,
+    telephone,
+    libmft,
+    libsph,
     numuai,
+    siret,
   };
 
   const result = await Etablissements.query().findOne({ nofinesset });

@@ -29,25 +29,25 @@ async function initEnqueteMandatairePrepose({
   }
   const status = await enqueteMandatairePreposeStatus(enqueteReponse);
   const ids = {
+    activite_id: enqueteReponse.enquete_reponses_activite_id,
+    financement_id: enqueteReponse.enquete_reponses_financement_id,
     id: enqueteReponse.id,
     modalites_exercice_id:
       enqueteReponse.enquete_reponses_modalites_exercice_id,
-    populations_id: enqueteReponse.enquete_reponses_populations_id,
-    financement_id: enqueteReponse.enquete_reponses_financement_id,
-    activite_id: enqueteReponse.enquete_reponses_activite_id,
     personel_formation_id:
       enqueteReponse.enquete_reponses_prepose_personel_formation_id,
+    populations_id: enqueteReponse.enquete_reponses_populations_id,
     prestations_sociales_id:
       enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
   };
   return {
-    status: enqueteReponse.status,
-    mandataire: enqueteReponse.mandataire,
-    user_type: enqueteReponse.user_type,
     enquete_id: enqueteReponse.enquete_id,
-    submitted_at: enqueteReponse.submitted_at,
-    enquete_reponse_validation_status: status,
     enquete_reponse_ids: ids,
+    enquete_reponse_validation_status: status,
+    mandataire: enqueteReponse.mandataire,
+    status: enqueteReponse.status,
+    submitted_at: enqueteReponse.submitted_at,
+    user_type: enqueteReponse.user_type,
   };
 }
 

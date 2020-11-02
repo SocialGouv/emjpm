@@ -21,8 +21,8 @@ const createMagistrat = async (magistrat, user) => {
     );
   }
   return Magistrat.query().allowInsert("[user_id, ti_id]").insert({
-    user_id: user.id,
     ti_id: ti,
+    user_id: user.id,
   });
 };
 
@@ -45,17 +45,17 @@ const createMandataire = async (mandataireDatas, user_id) => {
       "[etablissement,siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
     )
     .insert({
-      user_id,
-      siret,
-      telephone,
-      telephone_portable,
       adresse,
       code_postal,
       department_id,
-      ville,
       dispo_max,
       latitude,
       longitude,
+      siret,
+      telephone,
+      telephone_portable,
+      user_id,
+      ville,
     });
 
   return mandataire;
@@ -77,16 +77,16 @@ const createMandataireTis = (tis, mandataire_id) => {
 
 const createDirection = (userId, type) => {
   return Direction.query().insert({
-    user_id: userId,
     type,
+    user_id: userId,
   });
 };
 
 const createRole = async (userId, type) => {
   const [role] = await Role.query().where("name", type);
   return UserRole.query().allowInsert("[user_id,role_id]").insert({
-    user_id: userId,
     role_id: role.id,
+    user_id: userId,
   });
 };
 
@@ -110,13 +110,13 @@ const signup = async (req, res) => {
     const user = await User.query()
       .allowInsert("[username, password,role,nom,prenom,email]")
       .insert({
-        username,
-        password,
-        type,
-        nom,
-        prenom,
         active: invitation ? true : false,
         email: email.toLowerCase().trim(),
+        nom,
+        password,
+        prenom,
+        type,
+        username,
       });
 
     await createRole(user.id, type);
@@ -135,8 +135,8 @@ const signup = async (req, res) => {
         } = body;
 
         await ServiceMember.query().allowInsert("[user_id,service_id]").insert({
-          user_id: user.id,
           service_id,
+          user_id: user.id,
         });
 
         if (invitation) {

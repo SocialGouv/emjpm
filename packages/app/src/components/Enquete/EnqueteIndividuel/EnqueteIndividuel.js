@@ -5,6 +5,7 @@ import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
+
 export const EnqueteIndividuel = (props) => {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 

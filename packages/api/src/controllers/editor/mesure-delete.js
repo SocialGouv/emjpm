@@ -70,6 +70,6 @@ const deleteAll = async (req, res) => {
 };
 
 module.exports = {
-  deleteById,
   deleteAll,
+  deleteById,
 };

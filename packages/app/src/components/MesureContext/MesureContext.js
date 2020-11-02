@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { format } from "date-fns";
 import React, { createContext, Fragment } from "react";
 
-export const Context = createContext({});
-
 import { MESURE_CONTEXT_QUERY } from "./queries";
+
+export const Context = createContext({});
 
 export const Provider = (props) => {
   const { children, mesureId } = props;

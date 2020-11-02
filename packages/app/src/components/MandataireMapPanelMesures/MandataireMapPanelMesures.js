@@ -9,6 +9,7 @@ import { Box, Flex } from "rebass";
 import { formatMesureListItems } from "../../util/mesures";
 import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
+
 const RESULT_PER_PAGE = 20;
 
 const MandataireMapPanelMesures = ({ mesuresIds }) => {

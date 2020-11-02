@@ -20,7 +20,7 @@ const editorMesureUserMiddleWare = async (req, res, next) => {
     console.log(error);
     return res
       .status(422)
-      .json({ errors: [{ value: user_id, msg: "user not found" }] });
+      .json({ errors: [{ msg: "user not found", value: user_id }] });
   }
 
   const type = user.type === "service" ? "service" : "mandataire";

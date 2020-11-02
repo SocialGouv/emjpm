@@ -8,12 +8,12 @@ const serviceAntennes = require("./service-antennes");
 const tribunaux = require("./tribunaux");
 
 module.exports = {
-  mesures,
   mesure,
-  mesureCreate,
-  mesureUpdate,
   mesureBatch,
+  mesureCreate,
   mesureDelete,
+  mesureUpdate,
+  mesures,
   serviceAntennes,
   tribunaux,
 };

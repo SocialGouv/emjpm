@@ -14,13 +14,13 @@ class ServiceMember extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         id: { type: "integer" },
+        is_admin: { type: "boolean" },
         service_id: { type: "integer" },
         user_id: { type: "integer" },
-        is_admin: { type: "boolean" },
       },
+      type: "object",
     };
   }
 }

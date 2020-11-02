@@ -14,22 +14,22 @@ class EnqueteReponsesInformationsMandataire extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        departement: { type: "string" },
-        region: { type: "string" },
-        nom: { type: "string" },
-        benevole: { type: "boolean" },
-        forme_juridique: { type: "string" },
-        sexe: { type: "string" },
         anciennete: { type: "string" },
-        tranche_age: { type: "string" },
-        exerce_seul_activite: { type: "boolean" },
+        benevole: { type: "boolean" },
+        departement: { type: "string" },
         estimation_etp: { type: "string" },
         exerce_secretaires_specialises: { type: "boolean" },
-        secretaire_specialise_etp: { type: "number" },
+        exerce_seul_activite: { type: "boolean" },
+        forme_juridique: { type: "string" },
         local_professionnel: { type: "boolean" },
+        nom: { type: "string" },
+        region: { type: "string" },
+        secretaire_specialise_etp: { type: "number" },
+        sexe: { type: "string" },
+        tranche_age: { type: "string" },
       },
+      type: "object",
     };
   }
 }
