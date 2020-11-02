@@ -12,10 +12,10 @@ const formatGestionnaires = (gestionnaires) => {
         ? gestionnaire.service.longitude || 2.3488
         : gestionnaire.mandataire.longitude || 48.8534;
     return {
+      discriminator: gestionnaire.discriminator,
       id,
       latitude,
       longitude,
-      discriminator: gestionnaire.discriminator,
     };
   });
 };

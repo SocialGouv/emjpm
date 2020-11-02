@@ -1,5 +1,13 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { useContext } from "react";
@@ -23,6 +31,12 @@ const MagistratEditInformations = () => {
   });
 
   const formik = useFormik({
+    initialValues: {
+      cabinet: cabinet || "",
+      email: email || "",
+      nom: nom || "",
+      prenom: prenom || "",
+    },
     onSubmit: async (values, { setSubmitting }) => {
       await editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
@@ -38,18 +52,17 @@ const MagistratEditInformations = () => {
       setSubmitting(false);
     },
     validationSchema: magistratEditSchema,
-    initialValues: {
-      cabinet: cabinet || "",
-      email: email || "",
-      nom: nom || "",
-      prenom: prenom || "",
-    },
   });
 
   return (
     <Card mt="5" p="0">
       <Flex>
-        <Box width={[1, 2 / 5]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
+        <Box
+          width={[1, 2 / 5]}
+          bg="cardSecondary"
+          borderRadius="5px 0 0 5px"
+          p="5"
+        >
           <Box height="80px">
             <Heading4>{`Modifier vos informations`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
@@ -69,7 +82,10 @@ const MagistratEditInformations = () => {
                   onChange={formik.handleChange}
                   placeholder="Cabinet (optionnel)"
                 />
-                <InlineError message={formik.errors.cabinet} fieldId="cabinet" />
+                <InlineError
+                  message={formik.errors.cabinet}
+                  fieldId="cabinet"
+                />
               </Field>
               <Field>
                 <Input

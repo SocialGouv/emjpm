@@ -42,7 +42,9 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
     }
   );
 
-  const initialData = data ? data.enquete_reponses_prepose_personel_formation_by_pk || {} : {};
+  const initialData = data
+    ? data.enquete_reponses_prepose_personel_formation_by_pk || {}
+    : {};
 
   return (
     <EnquetePreposePersonnelFormationMjpmForm
@@ -57,21 +59,21 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
               en_poste_cnc: parseNbPreposeHeuresFormationFromForm(
                 values.formation_preposes_mjpm.en_poste_cnc
               ),
-              non_formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
-                values.formation_preposes_mjpm.non_formation_non_cnc
-              ),
               formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
                 values.formation_preposes_mjpm.formation_non_cnc
+              ),
+              non_formation_non_cnc: parseNbPreposeHeuresFormationFromForm(
+                values.formation_preposes_mjpm.non_formation_non_cnc
               ),
             }
           : null;
 
         await sendEnqueteReponseInformations({
           variables: {
+            formation_preposes_mjpm,
             id: personel_formation_id,
             nb_preposes_mjpm: parseFormInt(values.nb_preposes_mjpm),
             nb_preposes_mjpm_etp: parseFormFloat(values.nb_preposes_mjpm_etp),
-            formation_preposes_mjpm,
           },
         });
       }}
@@ -82,7 +84,7 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
 export default EnquetePreposePersonnelFormationMjpm;
 function parseNbPreposeHeuresFormationFromForm(val) {
   return {
-    nb_preposes: val ? parseFormInt(val.nb_preposes, 10) : null,
     heures_formation: val ? parseFormFloat(val.heures_formation) : null,
+    nb_preposes: val ? parseFormInt(val.nb_preposes, 10) : null,
   };
 }

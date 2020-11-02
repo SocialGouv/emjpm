@@ -1,19 +1,21 @@
 export function isAdmin(user) {
-  return user.type === 'admin';
+  return user.type === "admin";
 }
 
 export function isIndividuel(user) {
-  return user.type === 'individuel';
+  return user.type === "individuel";
 }
 
 export function isPrepose(user) {
-  return user.type === 'prepose';
+  return user.type === "prepose";
 }
 
 export function isDirection(user) {
-  return user.type === 'direction';
+  return user.type === "direction";
 }
 
 export function isDirectionNationale(user) {
-  return user.user_roles.map((ur) => ur.role.name).includes('direction_nationale');
+  return user.user_roles
+    .map((ur) => ur.role.name)
+    .includes("direction_nationale");
 }

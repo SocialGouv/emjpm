@@ -24,7 +24,8 @@ export const login = async ({ token }) => {
 };
 
 // Gets the display name of a JSX component for dev tools
-const getDisplayName = (Component) => Component.displayName || Component.name || "Component";
+const getDisplayName = (Component) =>
+  Component.displayName || Component.name || "Component";
 
 export const withAuthSync = (WrappedComponent) =>
   class extends Component {
@@ -34,7 +35,8 @@ export const withAuthSync = (WrappedComponent) =>
       const token = auth(ctx);
 
       const componentProps =
-        WrappedComponent.getInitialProps && (await WrappedComponent.getInitialProps(ctx));
+        WrappedComponent.getInitialProps &&
+        (await WrappedComponent.getInitialProps(ctx));
 
       return { ...componentProps, token };
     }

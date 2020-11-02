@@ -11,6 +11,8 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object().shape({
   tranche1: yup.number().min(0).nullable(),
+  tranche10: yup.number().min(0).nullable(),
+  tranche11: yup.number().min(0).nullable(),
   tranche2: yup.number().min(0).nullable(),
   tranche3: yup.number().min(0).nullable(),
   tranche4: yup.number().min(0).nullable(),
@@ -19,8 +21,6 @@ const validationSchema = yup.object().shape({
   tranche7: yup.number().min(0).nullable(),
   tranche8: yup.number().min(0).nullable(),
   tranche9: yup.number().min(0).nullable(),
-  tranche10: yup.number().min(0).nullable(),
-  tranche11: yup.number().min(0).nullable(),
 });
 
 function dataToForm(data = {}) {
@@ -52,15 +52,15 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;
@@ -76,7 +76,9 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 textAlign="center">{"Revenus / Prestations sociales en 2019"}</Heading1>
+        <Heading1 textAlign="center">
+          {"Revenus / Prestations sociales en 2019"}
+        </Heading1>
         <Text
           sx={{
             color: "titleSecondary",

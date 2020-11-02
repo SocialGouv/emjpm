@@ -9,7 +9,9 @@ const ServicesIndicator = () => {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
-      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      department: filters.departement
+        ? parseInt(filters.departement.value)
+        : undefined,
       region: filters.region ? parseInt(filters.region.value) : undefined,
       type: "SERVICE",
     },
@@ -20,7 +22,11 @@ const ServicesIndicator = () => {
       error={error}
       loading={loading}
       title="Services mandataires"
-      indicator={data && data.gestionnaireNumber ? data.gestionnaireNumber.aggregate.count : 0}
+      indicator={
+        data && data.gestionnaireNumber
+          ? data.gestionnaireNumber.aggregate.count
+          : 0
+      }
     />
   );
 };

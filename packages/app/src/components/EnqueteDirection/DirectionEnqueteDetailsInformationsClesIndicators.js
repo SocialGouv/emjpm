@@ -28,14 +28,23 @@ export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
         <Indicator title="Réponses en cours" indicator={enqueteDraftCount} />
       </Box>
       <Box sx={fourColumnStyle}>
-        <Indicator title="Réponses envoyées" indicator={enqueteSubmittedCount} />
+        <Indicator
+          title="Réponses envoyées"
+          indicator={enqueteSubmittedCount}
+        />
       </Box>
       {daysBeforeClosing !== undefined && (
         <Box sx={fourColumnStyle}>
           {daysBeforeClosing >= 0 ? (
-            <Indicator title="Jours avant cloture" indicator={daysBeforeClosing} />
+            <Indicator
+              title="Jours avant cloture"
+              indicator={daysBeforeClosing}
+            />
           ) : (
-            <Indicator title="Jours depuis la cloture" indicator={-daysBeforeClosing} />
+            <Indicator
+              title="Jours depuis la cloture"
+              indicator={-daysBeforeClosing}
+            />
           )}
         </Box>
       )}

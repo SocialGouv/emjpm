@@ -18,9 +18,9 @@ const RowItem = ({ item }) => {
       await addEditor({
         refetchQueries: ["editors", "editorRequests"],
         variables: {
-          name: name,
-          id: id,
           api_token,
+          id: id,
+          name: name,
         },
       });
     } catch (error) {
@@ -46,7 +46,9 @@ const RowItem = ({ item }) => {
           <Text sx={descriptionStyle}>{email}</Text>
         </Flex>
         <Flex>
-          <Button onClick={() => authorizeEditor(id, name, email)}>Autoriser</Button>
+          <Button onClick={() => authorizeEditor(id, name, email)}>
+            Autoriser
+          </Button>
         </Flex>
       </Flex>
     </Card>

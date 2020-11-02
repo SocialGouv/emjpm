@@ -13,10 +13,10 @@ const LinkButtonStyle = (isActive, props) => {
   let properties = {
     ...props.sx,
     bg,
-    borderRadius: "default",
-    color,
     border: props.outline ? `1px solid` : "",
     borderColor: props.outline ? color : "",
+    borderRadius: "default",
+    color,
     cursor: "pointer",
     display: "inline-block",
     fontSize: 1,

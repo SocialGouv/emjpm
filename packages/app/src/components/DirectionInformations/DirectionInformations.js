@@ -33,17 +33,23 @@ const DirectionInformations = (props) => {
             </Flex>
             <Flex mt="2">
               <PersonOutline size="20" />
-              <Text sx={iconTextStyle}>{`${prenom ? prenom : ""} ${nom ? nom : ""} `} </Text>
+              <Text sx={iconTextStyle}>
+                {`${prenom ? prenom : ""} ${nom ? nom : ""} `}{" "}
+              </Text>
             </Flex>
           </Box>
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton href="/direction/edit-informations">Modifier vos informations</LinkButton>
+            <LinkButton href="/direction/edit-informations">
+              Modifier vos informations
+            </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/direction/edit-password">Modifier votre mot de passe</LinkButton>
+          <LinkButton href="/direction/edit-password">
+            Modifier votre mot de passe
+          </LinkButton>
         </Flex>
       </Card>
     </Box>

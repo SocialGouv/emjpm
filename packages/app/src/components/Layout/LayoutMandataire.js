@@ -28,9 +28,9 @@ const LayoutMandataire = (props) => {
 
   if (user.enquete && isPayedByParis(user)) {
     links = navigationLinks.concat({
+      as: `/mandataires/enquetes/${user.enquete.id}`,
       title: `Enquête ${user.enquete.annee}`,
       url: "/mandataires/enquetes/[enquete_id]",
-      as: `/mandataires/enquetes/${user.enquete.id}`,
     });
   }
 
@@ -39,7 +39,9 @@ const LayoutMandataire = (props) => {
       <Box sx={{ position: "relative", "z-index": "1000" }}>
         <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
           <Header
-            dropDownLinks={[{ title: "Vos informations", url: "/mandataires/informations" }]}
+            dropDownLinks={[
+              { title: "Vos informations", url: "/mandataires/informations" },
+            ]}
           />
           {hasNavigation && (
             <BoxWrapper>
@@ -54,9 +56,8 @@ const LayoutMandataire = (props) => {
           </BoxWrapper>
         </Box>
       </Box>
-      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !== "true" && (
-        <SatisfactionCampaign />
-      )}
+      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !==
+        "true" && <SatisfactionCampaign />}
     </Fragment>
   );
 };

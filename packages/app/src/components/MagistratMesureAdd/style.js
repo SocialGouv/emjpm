@@ -4,10 +4,10 @@ const MagistratMandataireStyle = {
 };
 
 const MagistratCommentsStyle = {
-  overFlow: "hidden",
   flexWrap: "wrap",
-  position: "relative",
   mt: "6",
+  overFlow: "hidden",
+  position: "relative",
 };
 
 export { MagistratMandataireStyle, MagistratCommentsStyle };

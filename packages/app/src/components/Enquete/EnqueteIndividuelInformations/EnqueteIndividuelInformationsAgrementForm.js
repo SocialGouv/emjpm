@@ -3,7 +3,11 @@ import React from "react";
 import { Box } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormBoolean, formatFormInput, parseFormInt } from "../../../util";
+import {
+  formatFormBoolean,
+  formatFormInput,
+  parseFormInt,
+} from "../../../util";
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import {
   EnqueteFormInputField,
@@ -15,30 +19,35 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteAgrementsFormationsStatus (côté hasura actions)
 export const validationSchema = yup.object().shape({
-  debut_activite_avant_2009: yup.boolean().required(),
   annee_agrement: yup.number().integer().min(2009).required(),
-  nb_departements: yup.mixed().oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys).required(),
-  nb_mesures_dep_finance: yup.number().integer().required(),
+  debut_activite_avant_2009: yup.boolean().required(),
+  nb_departements: yup
+    .mixed()
+    .oneOf(ENQ_REP_AGREMENTS_FORMATIONS.NB_DEPARTEMENTS.keys)
+    .required(),
   nb_mesures_dep_autres: yup.number().integer().required(),
+  nb_mesures_dep_finance: yup.number().integer().required(),
 });
 
 function dataToForm(data) {
   return {
-    debut_activite_avant_2009: formatFormBoolean(data.debut_activite_avant_2009),
     annee_agrement: formatFormInput(data.annee_agrement),
+    debut_activite_avant_2009: formatFormBoolean(
+      data.debut_activite_avant_2009
+    ),
     nb_departements: formatFormInput(data.nb_departements),
-    nb_mesures_dep_finance: formatFormInput(data.nb_mesures_dep_finance),
     nb_mesures_dep_autres: formatFormInput(data.nb_mesures_dep_autres),
+    nb_mesures_dep_finance: formatFormInput(data.nb_mesures_dep_finance),
   };
 }
 
 function formToData(values) {
   return {
-    debut_activite_avant_2009: values.debut_activite_avant_2009,
     annee_agrement: parseFormInt(values.annee_agrement),
+    debut_activite_avant_2009: values.debut_activite_avant_2009,
     nb_departements: values.nb_departements,
-    nb_mesures_dep_finance: parseFormInt(values.nb_mesures_dep_finance),
     nb_mesures_dep_autres: parseFormInt(values.nb_mesures_dep_autres),
+    nb_mesures_dep_finance: parseFormInt(values.nb_mesures_dep_finance),
   };
 }
 export const EnqueteIndividuelInformationsAgrementForm = (props) => {
@@ -52,15 +61,15 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

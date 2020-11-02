@@ -25,20 +25,23 @@ export const EnquetePreposePrestationsSocialesMAJ = (props) => {
     },
   });
 
-  const [updatePrestationsSociales] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
-        variables: {
-          id: prestations_sociales_id,
+  const [updatePrestationsSociales] = useMutation(
+    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
+          variables: {
+            id: prestations_sociales_id,
+          },
+        },
+      ],
+    }
+  );
 
   const prestationsSociales = data
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}

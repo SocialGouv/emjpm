@@ -12,7 +12,11 @@ const DynamicTable = (props) => {
     {
       columns,
       data,
-      initialState: { pageIndex: 0, pageSize: 20, selectedRowPaths: selectedRows },
+      initialState: {
+        pageIndex: 0,
+        pageSize: 20,
+        selectedRowPaths: selectedRows,
+      },
     },
     useSortBy,
     usePagination,
@@ -67,7 +71,11 @@ const DynamicTable = (props) => {
                 >
                   <Box>{column.render("Header")}</Box>
                   <Text ml={10}>
-                    {column.isSorted ? (column.isSortedDesc ? " 🔽" : " 🔼") : ""}
+                    {column.isSorted
+                      ? column.isSortedDesc
+                        ? " 🔽"
+                        : " 🔼"
+                      : ""}
                   </Text>
                 </Flex>
               );

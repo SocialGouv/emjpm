@@ -21,20 +21,21 @@ const validationSchema = yup.object().shape({
   etablissements: yup.array().of(
     yup.object().shape({
       finess: yup.string().required(),
+      nombre_journees_esms: yup.number().min(0).required(),
       nombre_journees_hospitalisation: yup.number().min(0).required(),
       nombre_lits: yup.number().min(0).required(),
+      nombre_mesures: yup.number().min(0).required(),
       raison_sociale: yup.string().required(),
       statut: yup.string().required(),
       type: yup.string().required(),
-      nombre_journees_esms: yup.number().min(0).required(),
-      nombre_mesures: yup.number().min(0).required(),
     })
   ),
 });
 
 function dataToForm(data) {
   const result = {
-    actions_information_tuteurs_familiaux: data.actions_information_tuteurs_familiaux || false,
+    actions_information_tuteurs_familiaux:
+      data.actions_information_tuteurs_familiaux || false,
   };
 
   if (!data.nombre_lits_journee_hospitalisation) {
@@ -43,13 +44,13 @@ function dataToForm(data) {
       etablissements: [
         {
           finess: "",
+          nombre_journees_esms: "",
           nombre_journees_hospitalisation: "",
           nombre_lits: "",
+          nombre_mesures: "",
           raison_sociale: "",
           statut: "",
           type: "",
-          nombre_journees_esms: "",
-          nombre_mesures: "",
         },
       ],
     };
@@ -60,13 +61,15 @@ function dataToForm(data) {
       etablissements: items.map((item) => {
         return {
           finess: formatFormInput(item.finess),
-          nombre_journees_hospitalisation: formatFormInput(item.nombre_journees_hospitalisation),
+          nombre_journees_esms: formatFormInput(item.nombre_journees_esms),
+          nombre_journees_hospitalisation: formatFormInput(
+            item.nombre_journees_hospitalisation
+          ),
           nombre_lits: formatFormInput(item.nombre_lits),
+          nombre_mesures: formatFormInput(item.nombre_mesures),
           raison_sociale: formatFormInput(item.raison_sociale),
           statut: formatFormInput(item.statut),
           type: formatFormInput(item.type),
-          nombre_journees_esms: formatFormInput(item.nombre_journees_esms),
-          nombre_mesures: formatFormInput(item.nombre_mesures),
         };
       }),
     };
@@ -85,14 +88,14 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
+    dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
+    loading,
+    onSubmit,
     step,
     validationSchema,
-    dataToForm,
-    loading,
   });
   const { submitForm, readOnly, values, errors, submit, formik } = enqueteForm;
 
@@ -126,13 +129,13 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
                       onClick={() => {
                         arrayHelpers.push({
                           finess: "",
+                          nombre_journees_esms: "",
                           nombre_journees_hospitalisation: "",
                           nombre_lits: "",
+                          nombre_mesures: "",
                           raison_sociale: "",
                           statut: "",
                           type: "",
-                          nombre_journees_esms: "",
-                          nombre_mesures: "",
                         });
                       }}
                     >
@@ -143,19 +146,28 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
               </Flex>
               {values.etablissements.map((etablissement, index) => {
                 const value = etablissement ? etablissement : {};
-                const error = errors.etablissements ? errors.etablissements[index] || {} : {};
+                const error = errors.etablissements
+                  ? errors.etablissements[index] || {}
+                  : {};
 
                 return (
-                  <Card mb={4} key={`etablissement-${index}`} sx={{ position: "relative" }}>
+                  <Card
+                    mb={4}
+                    key={`etablissement-${index}`}
+                    sx={{ position: "relative" }}
+                  >
                     {!readOnly && (
                       <Box
                         sx={{
+                          cursor: "pointer",
                           position: "absolute",
                           right: 2,
-                          cursor: "pointer",
                         }}
                       >
-                        <SquaredCross width={"20px"} onClick={() => arrayHelpers.remove(index)} />
+                        <SquaredCross
+                          width={"20px"}
+                          onClick={() => arrayHelpers.remove(index)}
+                        />
                       </Box>
                     )}
                     <Flex mt={4} mb={4}>

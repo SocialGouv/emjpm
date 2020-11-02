@@ -32,10 +32,10 @@ async function enqueteServiceStatus(enqueteReponse) {
   );
 
   const status = {
-    informations,
     activite,
-    populations,
+    informations,
     personnelFormation,
+    populations,
   };
 
   status.global = getTopLevelGlobalStatus(status);

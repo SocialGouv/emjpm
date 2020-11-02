@@ -19,8 +19,8 @@ router.post(
         mesures_awaiting: en_attente,
       } = await recalculateServiceMesuresCount(serviceId);
       result = {
-        en_cours,
         en_attente,
+        en_cours,
       };
     }
     if (mandataireId) {
@@ -29,8 +29,8 @@ router.post(
         mesures_en_attente: en_attente,
       } = await recalculateMandatairesMesuresCount(mandataireId);
       result = {
-        en_cours,
         en_attente,
+        en_cours,
       };
     }
     try {
@@ -52,8 +52,8 @@ async function recalculateMandatairesMesuresCount(mandataireId) {
     .where({ mandataire_id: mandataireId });
 
   return await Mandataire.query().updateAndFetchById(mandataireId, {
-    mesures_en_cours: getCount(mandataireStates, "en_cours"),
     mesures_en_attente: getCount(mandataireStates, "en_attente"),
+    mesures_en_cours: getCount(mandataireStates, "en_cours"),
   });
 }
 
@@ -71,8 +71,8 @@ async function recalculateServiceMesuresCount(serviceId) {
     await ServiceAntenne.query()
       .findById(antenneId)
       .update({
-        mesures_in_progress: getCount(antenneStates, "en_cours"),
         mesures_awaiting: getCount(antenneStates, "en_attente"),
+        mesures_in_progress: getCount(antenneStates, "en_cours"),
       });
   }
 
@@ -83,8 +83,8 @@ async function recalculateServiceMesuresCount(serviceId) {
     .where({ service_id: serviceId });
 
   return await Service.query().updateAndFetchById(serviceId, {
-    mesures_in_progress: getCount(serviceStates, "en_cours"),
     mesures_awaiting: getCount(serviceStates, "en_attente"),
+    mesures_in_progress: getCount(serviceStates, "en_cours"),
   });
 }
 

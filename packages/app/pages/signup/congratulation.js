@@ -21,7 +21,9 @@ const CongratulationPage = () => {
             {"Merci ! Votre demande a bien été prise en compte."}
           </Text>
           <Text mb="1" lineHeight="2">
-            {"Notre équipe a été informée et vous recevrez une confirmation très prochainement."}
+            {
+              "Notre équipe a été informée et vous recevrez une confirmation très prochainement."
+            }
           </Text>
           <Flex mt={5}>
             <Box>

@@ -11,7 +11,10 @@ const passwordSchema = yup.object().shape({
     .required(),
   newPasswordConfirmation: yup
     .string()
-    .oneOf([yup.ref("newPassword"), null], "Les mots de passe ne sont pas égaux")
+    .oneOf(
+      [yup.ref("newPassword"), null],
+      "Les mots de passe ne sont pas égaux"
+    )
     .required(),
   password: yup.string().required(),
 });

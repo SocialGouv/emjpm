@@ -1,14 +1,12 @@
 import { Card } from "@emjpm/ui";
-import Link from "next/link";
 import React from "react";
+
+import { Link } from "../Commons";
 
 const MapError = () => (
   <Card mt={2} mr={2}>
     Votre adresse est invalide, veuillez la renseigner
-    <Link href="/mandataires/edit-informations">
-      <a> ici</a>
-    </Link>
-    .
+    <Link href="/mandataires/edit-informations">ici</Link>.
   </Card>
 );
 

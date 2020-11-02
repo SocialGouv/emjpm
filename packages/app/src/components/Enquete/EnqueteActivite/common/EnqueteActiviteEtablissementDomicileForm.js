@@ -10,37 +10,45 @@ import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
 import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesures";
 
 const strongStyle = {
+  color: "#007AD9",
   display: "inline-block",
   fontWeight: "bold",
-  color: "#007AD9",
 };
 
 // validation identique à celle de enqueteActiviteStatus
-const validationSchema = yup.object(buildMesureGroupsAttributes(["etablissement", "domicile"]));
+const validationSchema = yup.object(
+  buildMesureGroupsAttributes(["etablissement", "domicile"])
+);
 
 function dataToForm(data) {
   return {
-    etablissementDebutAnnee: formatFormInput(data.etablissementDebutAnnee),
-    etablissementFinAnnee: formatFormInput(data.etablissementFinAnnee),
     domicileDebutAnnee: formatFormInput(data.domicileDebutAnnee),
     domicileFinAnnee: formatFormInput(data.domicileFinAnnee),
-    etablissementMesuresNouvelles: formatFormInput(data.etablissementMesuresNouvelles),
-    etablissementSortieMesures: formatFormInput(data.etablissementSortieMesures),
     domicileMesuresNouvelles: formatFormInput(data.domicileMesuresNouvelles),
     domicileSortieMesures: formatFormInput(data.domicileSortieMesures),
+    etablissementDebutAnnee: formatFormInput(data.etablissementDebutAnnee),
+    etablissementFinAnnee: formatFormInput(data.etablissementFinAnnee),
+    etablissementMesuresNouvelles: formatFormInput(
+      data.etablissementMesuresNouvelles
+    ),
+    etablissementSortieMesures: formatFormInput(
+      data.etablissementSortieMesures
+    ),
   };
 }
 
 function formToData(data) {
   return {
-    etablissementDebutAnnee: parseFormInt(data.etablissementDebutAnnee),
-    etablissementFinAnnee: parseFormInt(data.etablissementFinAnnee),
     domicileDebutAnnee: parseFormInt(data.domicileDebutAnnee),
     domicileFinAnnee: parseFormInt(data.domicileFinAnnee),
-    etablissementMesuresNouvelles: parseFormInt(data.etablissementMesuresNouvelles),
-    etablissementSortieMesures: parseFormInt(data.etablissementSortieMesures),
     domicileMesuresNouvelles: parseFormInt(data.domicileMesuresNouvelles),
     domicileSortieMesures: parseFormInt(data.domicileSortieMesures),
+    etablissementDebutAnnee: parseFormInt(data.etablissementDebutAnnee),
+    etablissementFinAnnee: parseFormInt(data.etablissementFinAnnee),
+    etablissementMesuresNouvelles: parseFormInt(
+      data.etablissementMesuresNouvelles
+    ),
+    etablissementSortieMesures: parseFormInt(data.etablissementSortieMesures),
   };
 }
 
@@ -56,22 +64,24 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, values, errors, showError, submit } = enqueteForm;
 
-  const totalDebutAnnee = (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
+  const totalDebutAnnee =
+    (values.etablissementDebutAnnee || 0) + (values.domicileDebutAnnee || 0);
 
-  const totalFinAnnee = (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
+  const totalFinAnnee =
+    (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
 
   return (
     <form onSubmit={submitForm}>
@@ -106,8 +116,9 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
       />
 
       <Box sx={{ color: "#595959", fontWeight: "bold" }} mt={"50px"}>
-        Soit un total de <Text sx={strongStyle}>{totalDebutAnnee}</Text> mesures au 01/01/2019 et de{" "}
-        <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/2019.
+        Soit un total de <Text sx={strongStyle}>{totalDebutAnnee}</Text> mesures
+        au 01/01/2019 et de <Text sx={strongStyle}>{totalFinAnnee}</Text>{" "}
+        mesures au 31/12/2019.
       </Box>
 
       <EnqueteStepperButtons submit={submit} disabled={loading} />

@@ -20,20 +20,23 @@ export const EnqueteActiviteCausesSortiesDispositif = (props) => {
     enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
   const { id: userId } = useContext(UserContext);
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_CAUSES_SORTIE_DISPOSITIF,
-        variables: {
-          id: activite_id,
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_CAUSES_SORTIE_DISPOSITIF,
+          variables: {
+            id: activite_id,
+          },
+        },
+      ],
+    }
+  );
   const { data, loading } = useQuery(ENQUETE_CAUSES_SORTIE_DISPOSITIF, {
     variables: {
       id: activite_id,
@@ -46,8 +49,8 @@ export const EnqueteActiviteCausesSortiesDispositif = (props) => {
       : {};
 
     return {
-      sortiesMainLevee: sorties_main_levee,
       sortiesDeces: sorties_deces,
+      sortiesMainLevee: sorties_main_levee,
       sortiesMasp: sorties_masp,
     };
   }, [data]);

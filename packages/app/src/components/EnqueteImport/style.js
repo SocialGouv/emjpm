@@ -9,9 +9,13 @@ const importErrorsWrapperStyle = {
   bg: "cardSecondary",
   borderRadius: "5px 0 0 5px",
   m: "2",
-  p: "5",
   maxHeight: "500px",
   overflow: "auto",
+  p: "5",
 };
 
-export { ServiceEnqueteImportStyle, ServiceEnqueteImportResultStyle, importErrorsWrapperStyle };
+export {
+  ServiceEnqueteImportStyle,
+  ServiceEnqueteImportResultStyle,
+  importErrorsWrapperStyle,
+};

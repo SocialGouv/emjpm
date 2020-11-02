@@ -5,12 +5,14 @@ import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
 import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvalidFormDialog";
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteIndividuelMenuBuilder } from "./enqueteIndividuelMenuBuilder.service";
+
 export const EnqueteIndividuel = (props) => {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
-  const sections = useMemo(() => enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse), [
-    enqueteReponse,
-  ]);
+  const sections = useMemo(
+    () => enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse),
+    [enqueteReponse]
+  );
 
   const {
     section,
@@ -21,9 +23,9 @@ export const EnqueteIndividuel = (props) => {
     confirmExitInvalidFormDialog,
   } = useEnqueteContext({
     currentStep,
+    enqueteReponse,
     navigateToStep,
     sections,
-    enqueteReponse,
   });
 
   if (step === undefined || section === undefined) {
@@ -57,7 +59,9 @@ export const EnqueteIndividuel = (props) => {
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
-        <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
+        <EnqueteConfirmExitInvalidFormDialog
+          {...confirmExitInvalidFormDialog}
+        />
       </Box>
     </Flex>
   );

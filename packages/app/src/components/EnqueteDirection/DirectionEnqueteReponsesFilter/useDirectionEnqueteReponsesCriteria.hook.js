@@ -11,29 +11,29 @@ export function useDirectionEnqueteReponsesCriteria({
       case "responseStatus": {
         return {
           ...state,
-          responseStatus: action.value,
           currentOffset: 0,
+          responseStatus: action.value,
         };
       }
       case "userType": {
         return {
           ...state,
-          userType: action.value,
           currentOffset: 0,
+          userType: action.value,
         };
       }
       case "searchText": {
         return {
           ...state,
-          searchText: action.value,
           currentOffset: 0,
+          searchText: action.value,
         };
       }
       case "selectedDepartement": {
         return {
           ...state,
-          selectedDepartement: action.value,
           currentOffset: 0,
+          selectedDepartement: action.value,
         };
       }
       case "currentOffset": {
@@ -47,11 +47,11 @@ export function useDirectionEnqueteReponsesCriteria({
   }
 
   const [criteria, setCriteria] = useReducer(criteriaReducer, {
+    currentOffset: 0,
     responseStatus,
-    userType,
     searchText: searchText || "",
     selectedDepartement,
-    currentOffset: 0,
+    userType,
   });
 
   return {

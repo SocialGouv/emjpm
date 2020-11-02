@@ -21,14 +21,16 @@ const Geocode = (props) => {
   const geocode = {
     city: ville || address_city,
     depcode: departement_id,
-    postcode: code_postal || address_zip_code,
     label: address || adresse || ville || address_city,
     latitude,
     longitude,
+    postcode: code_postal || address_zip_code,
   };
 
   const isValid = !!latitude && !!longitude;
-  const defaultValue = isValid ? { label: geocode.label, value: geocode } : null;
+  const defaultValue = isValid
+    ? { label: geocode.label, value: geocode }
+    : null;
 
   return (
     <AsyncSelect

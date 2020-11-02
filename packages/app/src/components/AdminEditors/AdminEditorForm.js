@@ -9,12 +9,12 @@ export const AdminEditorForm = (props) => {
   const { handleCancel, handleSubmit, editor } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: adminEditorSchema,
     initialValues: {
       name: editor ? editor.name : "",
       redirect_uris: editor ? editor.redirect_uris : "",
     },
+    onSubmit: handleSubmit,
+    validationSchema: adminEditorSchema,
   });
 
   return (
@@ -46,16 +46,26 @@ export const AdminEditorForm = (props) => {
                 value={formik.values.redirect_uris}
                 id="redirect_uris"
                 name="redirect_uris"
-                hasError={formik.errors.redirect_uris && formik.touched.redirect_uris}
+                hasError={
+                  formik.errors.redirect_uris && formik.touched.redirect_uris
+                }
                 onChange={formik.handleChange}
                 placeholder="URI de redirection"
               />
-              <InlineError message={formik.errors.redirect_uris} fieldId="redirect_uris" />
+              <InlineError
+                message={formik.errors.redirect_uris}
+                fieldId="redirect_uris"
+              />
             </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (
                 <Box>
-                  <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+                  <Button
+                    type="button"
+                    mr="2"
+                    variant="outline"
+                    onClick={handleCancel}
+                  >
                     Annuler
                   </Button>
                 </Box>

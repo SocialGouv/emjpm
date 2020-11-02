@@ -49,12 +49,18 @@ const AdminUserInformations = (props) => {
     variables: { userId },
   });
 
-  const [activateUser, { loading: activateUserLoading }] = useMutation(ACTIVATE_USER);
-  const [sendEmailAccountValidation] = useMutation(SEND_EMAIL_ACCOUNT_VALIDATION);
+  const [activateUser, { loading: activateUserLoading }] = useMutation(
+    ACTIVATE_USER
+  );
+  const [sendEmailAccountValidation] = useMutation(
+    SEND_EMAIL_ACCOUNT_VALIDATION
+  );
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
 
   const lb_user =
-    queryResult.data && queryResult.data.lb_users.length ? queryResult.data.lb_users[0] : null;
+    queryResult.data && queryResult.data.lb_users.length
+      ? queryResult.data.lb_users[0]
+      : null;
 
   const toggleActivation = useCallback(() => {
     const { active, id, email } = data.users_by_pk;
@@ -67,7 +73,8 @@ const AdminUserInformations = (props) => {
       },
     });
 
-    if (newActiveValue) sendEmailAccountValidation({ variables: { user_email: email } });
+    if (newActiveValue)
+      sendEmailAccountValidation({ variables: { user_email: email } });
   }, [activateUser, sendEmailAccountValidation, data]);
 
   if (loading) {
@@ -234,19 +241,25 @@ const AdminUserInformations = (props) => {
           <TypeDirectionForm
             onSubmit={async (values) => {
               const newDirectionRoleName =
-                values.type !== "national" ? "direction_territoriale" : "direction_nationale";
-              const newDirectionRole = directionRoles.find((d) => d.name === newDirectionRoleName);
-              const directionRole = directionRoles.find((d) => d.name === "direction");
+                values.type !== "national"
+                  ? "direction_territoriale"
+                  : "direction_nationale";
+              const newDirectionRole = directionRoles.find(
+                (d) => d.name === newDirectionRoleName
+              );
+              const directionRole = directionRoles.find(
+                (d) => d.name === "direction"
+              );
 
               await changeDirectionAgrements({
                 variables: {
-                  user_id: userId,
+                  department_id: values.departement || null,
                   direction_id: direction.id,
                   direction_role_id: newDirectionRole.id,
                   new_direction_role_id: directionRole.id,
-                  type: values.type,
-                  department_id: values.departement || null,
                   region_id: values.region || null,
+                  type: values.type,
+                  user_id: userId,
                 },
               });
             }}

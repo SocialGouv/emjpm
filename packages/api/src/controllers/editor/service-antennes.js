@@ -19,10 +19,10 @@ const getAntennes = async (req, res) => {
   return res.status(200).json({
     antennes: antennes.map((antenne) => {
       return {
-        id: antenne.id,
-        nom: antenne.name,
         adresse: antenne.address_street,
         code_postal: antenne.address_zip_code,
+        id: antenne.id,
+        nom: antenne.name,
         ville: antenne.address_city,
       };
     }),

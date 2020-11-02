@@ -22,10 +22,10 @@ export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
 
   const options = departements.map((d) => {
     return {
-      label: d.nom,
-      value: `${d.id}`,
       checked: d.departement_financeur === true,
       disabled: !canModifyAgrement(user, d.id),
+      label: d.nom,
+      value: `${d.id}`,
     };
   });
 
@@ -45,21 +45,21 @@ export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
           return (
             <Flex
               sx={{
-                width: "240px",
                 flexBasis: "240px",
                 flexDirection: "row",
                 justifyContent: "space-between",
+                width: "240px",
               }}
             >
               <Text lineHeight="20px">{label}</Text>
               {(!editMode || canModifyAgrement(user, id)) && (
                 <Box
                   sx={{
-                    cursor: "pointer",
-                    color: "#777",
                     ":hover": {
                       color: "#aa2d2d",
                     },
+                    color: "#777",
+                    cursor: "pointer",
                   }}
                 >
                   <XCircle

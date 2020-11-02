@@ -9,7 +9,9 @@ const mandataireDetail = ({ mandataire_tis }) => {
 };
 
 const magistratDetail = ({ magistrat }) => {
-  const values = [magistrat && magistrat.ti ? magistrat.ti.ville : "Non renseigné"];
+  const values = [
+    magistrat && magistrat.ti ? magistrat.ti.ville : "Non renseigné",
+  ];
 
   return { type: "Tribunal", values };
 };

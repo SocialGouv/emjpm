@@ -9,6 +9,7 @@ import { Box, Flex } from "rebass";
 import { formatMesureListItems } from "../../util/mesures";
 import { MESURES } from "./queries";
 import { MandataireMapPanelMesuresStyle } from "./style";
+
 const RESULT_PER_PAGE = 20;
 
 const MandataireMapPanelMesures = ({ mesuresIds }) => {
@@ -16,21 +17,31 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
 
   const { data, error, loading } = useQuery(MESURES, {
     variables: {
+      ids: mesuresIds,
       limit: RESULT_PER_PAGE,
       offset: currentOffset,
-      ids: mesuresIds,
     },
   });
 
   const selectMesure = ({ id }) => {
-    Router.push("/mandataires/mesures/[mesure_id]", `/mandataires/mesures/${id}`, {
-      shallow: true,
-    });
+    Router.push(
+      "/mandataires/mesures/[mesure_id]",
+      `/mandataires/mesures/${id}`,
+      {
+        shallow: true,
+      }
+    );
   };
 
-  const mesures = useMemo(() => (data ? formatMesureListItems(data.mesures) : []), [data]);
+  const mesures = useMemo(
+    () => (data ? formatMesureListItems(data.mesures) : []),
+    [data]
+  );
 
-  const count = useMemo(() => (data ? data.mesures_aggregate.aggregate.count : 0), [data]);
+  const count = useMemo(
+    () => (data ? data.mesures_aggregate.aggregate.count : 0),
+    [data]
+  );
   const totalPage = useMemo(() => Math.ceil(count / RESULT_PER_PAGE), [count]);
 
   if (loading) {
@@ -43,7 +54,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
 
   return (
     <Box sx={MandataireMapPanelMesuresStyle}>
-      <Scrollbar style={{ width: "100%", height: "100%" }}>
+      <Scrollbar style={{ height: "100%", width: "100%" }}>
         <Box p="2">
           {mesures.length > 0 ? (
             <Fragment>

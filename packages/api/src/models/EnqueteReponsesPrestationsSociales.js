@@ -15,16 +15,16 @@ class EnqueteReponsesPrestationsSociales extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         aah: { type: "number" },
-        pch: { type: "number" },
-        asi: { type: "number" },
-        rsa: { type: "number" },
         als_apl: { type: "number" },
-        aspa: { type: "number" },
         apa: { type: "number" },
+        asi: { type: "number" },
+        aspa: { type: "number" },
+        pch: { type: "number" },
+        rsa: { type: "number" },
       },
+      type: "object",
     };
   }
 }

@@ -11,9 +11,9 @@ import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheI
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
 const validationSchema = yup.object().shape({
+  email: yup.string().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
-  email: yup.string().required(),
   siret: yup.string().required(),
 });
 
@@ -24,14 +24,21 @@ export const ListeBlancheIndividuelForm = (props) => {
     data && data.lb_departements
       ? data.lb_departements.map((item) => {
           return {
+            departement_financeur: item.departement_financeur,
             id: item.departement_id,
             nom: DepartementFormUtil.formatDepartementLabel(item.departement),
-            departement_financeur: item.departement_financeur,
           };
         })
       : [];
 
   const formik = useFormik({
+    initialValues: {
+      departements,
+      email: data ? formatFormInput(data.email) : "",
+      nom: data ? formatFormInput(data.nom) : "",
+      prenom: data ? formatFormInput(data.prenom) : "",
+      siret: data ? formatFormInput(data.siret) : "",
+    },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
         props.handleSubmit(values);
@@ -47,13 +54,6 @@ export const ListeBlancheIndividuelForm = (props) => {
       }
     },
     validationSchema,
-    initialValues: {
-      nom: data ? formatFormInput(data.nom) : "",
-      prenom: data ? formatFormInput(data.prenom) : "",
-      email: data ? formatFormInput(data.email) : "",
-      siret: data ? formatFormInput(data.siret) : "",
-      departements,
-    },
   });
 
   return (
@@ -128,13 +128,22 @@ export const ListeBlancheIndividuelForm = (props) => {
         <Flex mt={4} justifyContent="flex-end">
           {handleCancel && (
             <Box>
-              <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+              <Button
+                type="button"
+                mr="2"
+                variant="outline"
+                onClick={handleCancel}
+              >
                 Annuler
               </Button>
             </Box>
           )}
           <Box>
-            <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
               {editMode ? "Mettre à jour" : "Enregistrer"}
             </Button>
           </Box>

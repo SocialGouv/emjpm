@@ -12,22 +12,22 @@ const MandataireEditInformationsForm = (props) => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: mandataireEditSchema,
     initialValues: {
+      address: mandataire.adresse || "",
+      city: mandataire.ville || "",
+      competences: mandataire.competences || "",
+      dispo_max: mandataire.dispo_max || "",
       email: user.email || "",
+      genre: GENDER_OPTIONS.find((el) => el.value === mandataire.genre),
       nom: user.nom || "",
       prenom: user.prenom || "",
-      dispo_max: mandataire.dispo_max || "",
-      genre: GENDER_OPTIONS.find((el) => el.value === mandataire.genre),
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      competences: mandataire.competences || "",
-      address: mandataire.adresse || "",
-      city: mandataire.ville || "",
       zipcode: mandataire.code_postal || "",
     },
+    onSubmit: handleSubmit,
+    validationSchema: mandataireEditSchema,
   });
 
   return (
@@ -109,7 +109,10 @@ const MandataireEditInformationsForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Téléphone portable"
         />
-        <InlineError message={formik.errors.telephone_portable} fieldId="telephone_portable" />
+        <InlineError
+          message={formik.errors.telephone_portable}
+          fieldId="telephone_portable"
+        />
       </Field>
       <Field>
         <Input
@@ -173,7 +176,10 @@ const MandataireEditInformationsForm = (props) => {
           label="Informations à destination du magistrat"
           placeholder="Préférences géographiques, compétences, langues parlées, ..."
         />
-        <InlineError message={formik.errors.competences} fieldId="competences" />
+        <InlineError
+          message={formik.errors.competences}
+          fieldId="competences"
+        />
       </Field>
 
       <Flex alignItems="center" justifyContent="flex-end">
@@ -181,7 +187,11 @@ const MandataireEditInformationsForm = (props) => {
           <Link href={cancelLink}>Annuler</Link>
         </Box>
         <Box>
-          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
             Enregistrer
           </Button>
         </Box>

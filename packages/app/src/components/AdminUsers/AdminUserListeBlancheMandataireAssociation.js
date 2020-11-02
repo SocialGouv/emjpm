@@ -10,9 +10,12 @@ import { USER } from "./queries";
 export const AdminUserListeBlancheMandataireAssociation = (props) => {
   const { userId, lb_user, mandataire } = props;
   const user = useContext(UserContext);
-  const [updateMandataire, { loading }] = useMutation(LISTE_BLANCHE_ASSOCIATION, {
-    refetchQueries: [{ query: USER, variables: { userId } }],
-  });
+  const [updateMandataire, { loading }] = useMutation(
+    LISTE_BLANCHE_ASSOCIATION,
+    {
+      refetchQueries: [{ query: USER, variables: { userId } }],
+    }
+  );
 
   if (loading) {
     return <Box>Chargement...</Box>;
@@ -24,7 +27,9 @@ export const AdminUserListeBlancheMandataireAssociation = (props) => {
         <a href={`/${user.type}/liste-blanche/${mandataire.lb_user.id}`}>
           <Text fontWeight="bold">{`${mandataire.lb_user.prenom} ${mandataire.lb_user.nom}`}</Text>
           <Text>{`${mandataire.lb_user.email}`}</Text>
-          {mandataire.lb_user.siret && <Text>{`SIRET: ${mandataire.lb_user.siret}`}</Text>}
+          {mandataire.lb_user.siret && (
+            <Text>{`SIRET: ${mandataire.lb_user.siret}`}</Text>
+          )}
         </a>
       ) : (
         <Fragment>
@@ -39,8 +44,8 @@ export const AdminUserListeBlancheMandataireAssociation = (props) => {
                   try {
                     await updateMandataire({
                       variables: {
-                        mandataire_id: mandataire.id,
                         lb_user_id: lb_user.id,
+                        mandataire_id: mandataire.id,
                       },
                     });
                   } catch (err) {
@@ -57,7 +62,9 @@ export const AdminUserListeBlancheMandataireAssociation = (props) => {
             </Flex>
           ) : (
             <Box>
-              <Text fontWeight="bold">{"Aucune correspondance dans la liste blanche."}</Text>
+              <Text fontWeight="bold">
+                {"Aucune correspondance dans la liste blanche."}
+              </Text>
             </Box>
           )}
         </Fragment>

@@ -18,11 +18,11 @@ const refreshAccessToken = async () => {
   params.append("grant_type", "client_credentials");
 
   const res = await fetch(INSEE_API_TOKEN_URL, {
-    method: "post",
+    body: params,
     headers: {
       Authorization: `Basic ${INSEE_API_BASIC_TOKEN}`,
     },
-    body: params,
+    method: "post",
   });
 
   let json;
@@ -65,10 +65,10 @@ const find = async (siret) => {
   }
 
   const res = await fetch(`${INSEE_SIREN_API_URL}/siret/${siret}`, {
-    method: "get",
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
+    method: "get",
   });
 
   let json;

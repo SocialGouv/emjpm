@@ -77,7 +77,9 @@ const MagistratMesure = (props) => {
               <Text sx={MagistratMesureContentStyle}>{cabinet}</Text>
             </Box>
             <Box>
-              <Text sx={MagistratMesureTitleStyle}>Date prévisionnelle de jugement</Text>
+              <Text sx={MagistratMesureTitleStyle}>
+                Date prévisionnelle de jugement
+              </Text>
               <Text sx={MagistratMesureContentStyle}>{judgmentDate}</Text>
             </Box>
           </Box>
@@ -89,16 +91,24 @@ const MagistratMesure = (props) => {
               </Text>
             </Box>
             <Box>
-              <Text sx={MagistratMesureTitleStyle}>Age de la personne a protéger</Text>
+              <Text sx={MagistratMesureTitleStyle}>
+                Age de la personne a protéger
+              </Text>
               <Text sx={MagistratMesureContentStyle}>{realAge}</Text>
             </Box>
             <Box>
-              <Text sx={MagistratMesureTitleStyle}>Mesure à caractère urgent</Text>
-              <Text sx={MagistratMesureContentStyle}>{isUrgent ? "oui" : "non"}</Text>
+              <Text sx={MagistratMesureTitleStyle}>
+                Mesure à caractère urgent
+              </Text>
+              <Text sx={MagistratMesureContentStyle}>
+                {isUrgent ? "oui" : "non"}
+              </Text>
             </Box>
             <Box>
               <Text sx={MagistratMesureTitleStyle}>Status de la mesure</Text>
-              <Text sx={MagistratMesureContentStyle}>{MESURE_PROTECTION.STATUS.byKey[status]}</Text>
+              <Text sx={MagistratMesureContentStyle}>
+                {MESURE_PROTECTION.STATUS.byKey[status]}
+              </Text>
             </Box>
           </Box>
         </Flex>

@@ -19,7 +19,9 @@ export const ListeBlanchePreposeItem = (props) => {
         <Flex width="25%" flexDirection="column">
           <Text sx={labelStyle}>{"Mandataire préposé d'établissement"}</Text>
           <Flex>
-            <Text sx={descriptionStyle}>{item.nom ? item.nom.toUpperCase() : ""}</Text>
+            <Text sx={descriptionStyle}>
+              {item.nom ? item.nom.toUpperCase() : ""}
+            </Text>
             <Text pl="1" sx={descriptionStyle}>
               {item.prenom}
             </Text>

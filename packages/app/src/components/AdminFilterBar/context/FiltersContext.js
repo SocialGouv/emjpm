@@ -20,10 +20,10 @@ export const Provider = (props) => {
     changeSearchText,
     debouncedSearchText,
     searchText,
-    selectedType,
+    selectDepartementCode,
     selectType,
     selectedDepartementCode,
-    selectDepartementCode,
+    selectedType,
   };
 
   // pass the value in provider and return

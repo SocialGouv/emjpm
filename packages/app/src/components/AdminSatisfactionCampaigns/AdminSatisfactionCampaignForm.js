@@ -10,13 +10,13 @@ export const AdminSatisfactionCampaignForm = (props) => {
   const { name, started_at, ended_at } = satisfaction_campaign || {};
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: satisfactionCampaignSchema,
     initialValues: {
+      endedAt: ended_at || "",
       name: name || "",
       startedAt: started_at || "",
-      endedAt: ended_at || "",
     },
+    onSubmit: handleSubmit,
+    validationSchema: satisfactionCampaignSchema,
   });
 
   return (
@@ -38,7 +38,9 @@ export const AdminSatisfactionCampaignForm = (props) => {
                 onChange={formik.handleChange}
                 placeholder="Nom de la campagne"
               />
-              {formik.touched.name && <InlineError message={formik.errors.name} fieldId="name" />}
+              {formik.touched.name && (
+                <InlineError message={formik.errors.name} fieldId="name" />
+              )}
             </Field>
             <Field>
               <Input
@@ -51,7 +53,10 @@ export const AdminSatisfactionCampaignForm = (props) => {
                 placeholder="Date de début"
               />
               {formik.touched.startedAt && (
-                <InlineError message={formik.errors.startedAt} fieldId="startedAt" />
+                <InlineError
+                  message={formik.errors.startedAt}
+                  fieldId="startedAt"
+                />
               )}
             </Field>
             <Field>
@@ -65,13 +70,21 @@ export const AdminSatisfactionCampaignForm = (props) => {
                 placeholder="Date de fin"
               />
               {formik.touched.endedAt && (
-                <InlineError message={formik.errors.endedAt} fieldId="endedAt" />
+                <InlineError
+                  message={formik.errors.endedAt}
+                  fieldId="endedAt"
+                />
               )}
             </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (
                 <Box>
-                  <Button type="button" mr="2" variant="outline" onClick={handleCancel}>
+                  <Button
+                    type="button"
+                    mr="2"
+                    variant="outline"
+                    onClick={handleCancel}
+                  >
                     Annuler
                   </Button>
                 </Box>

@@ -28,7 +28,9 @@ import { SignupGeneralError } from "./SignupGeneralError";
 import { grayBox } from "./style";
 
 const SignupMandataireForm = ({ tiDatas }) => {
-  const { user, mandataire, setMandataire, validateStepOne } = useContext(SignupContext);
+  const { user, mandataire, setMandataire, validateStepOne } = useContext(
+    SignupContext
+  );
 
   const tiOptions = tiDatas.map((ti) => ({
     label: ti.etablissement,
@@ -38,11 +40,22 @@ const SignupMandataireForm = ({ tiDatas }) => {
   const client = useApolloClient();
 
   const formik = useFormik({
+    initialValues: {
+      address: mandataire ? mandataire.adresse : "",
+      city: mandataire ? mandataire.city : "",
+      dispo_max: mandataire ? mandataire.dispo_max : "",
+      genre: mandataire ? mandataire.genre : "",
+      siret: mandataire ? mandataire.siret : "",
+      telephone: mandataire ? mandataire.telephone : "",
+      telephone_portable: mandataire ? mandataire.telephone_portable : "",
+      tis: mandataire ? mandataire.tis : "",
+      zipcode: mandataire ? mandataire.code_postal : "",
+    },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       const location = await getLocation(client, {
         address: values.address,
-        zipcode: values.zipcode,
         city: values.city,
+        zipcode: values.zipcode,
       });
       if (!location || !location.department) {
         setErrors({
@@ -60,12 +73,12 @@ const SignupMandataireForm = ({ tiDatas }) => {
             dispo_max: parseInt(values.dispo_max),
             etablissement: "",
             genre: values.genre.value,
+            latitude: geolocation ? geolocation.latitude : null,
+            longitude: geolocation ? geolocation.longitude : null,
             siret: values.siret,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
             ville: values.city.toUpperCase(),
-            latitude: geolocation ? geolocation.latitude : null,
-            longitude: geolocation ? geolocation.longitude : null,
           },
           tis: values.tis.map((ti) => ti.value),
           user: {
@@ -84,17 +97,6 @@ const SignupMandataireForm = ({ tiDatas }) => {
       setSubmitting(false);
     },
     validationSchema: mandataireSignupSchema,
-    initialValues: {
-      address: mandataire ? mandataire.adresse : "",
-      dispo_max: mandataire ? mandataire.dispo_max : "",
-      genre: mandataire ? mandataire.genre : "",
-      city: mandataire ? mandataire.city : "",
-      zipcode: mandataire ? mandataire.code_postal : "",
-      siret: mandataire ? mandataire.siret : "",
-      telephone: mandataire ? mandataire.telephone : "",
-      telephone_portable: mandataire ? mandataire.telephone_portable : "",
-      tis: mandataire ? mandataire.tis : "",
-    },
   });
 
   return (
@@ -155,7 +157,9 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     options={tiOptions}
                     isMulti
                   />
-                  {formik.touched.tis && <InlineError message={formik.errors.tis} fieldId="tis" />}
+                  {formik.touched.tis && (
+                    <InlineError message={formik.errors.tis} fieldId="tis" />
+                  )}
                 </Field>
                 <Field>
                   <Select
@@ -168,7 +172,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     options={GENDER_OPTIONS}
                   />
                   {formik.touched.genre && (
-                    <InlineError message={formik.errors.genre} fieldId="genre" />
+                    <InlineError
+                      message={formik.errors.genre}
+                      fieldId="genre"
+                    />
                   )}
                 </Field>
                 <Field>
@@ -181,7 +188,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     placeholder="SIRET"
                   />
                   {formik.touched.siret && (
-                    <InlineError message={formik.errors.siret} fieldId="siret" />
+                    <InlineError
+                      message={formik.errors.siret}
+                      fieldId="siret"
+                    />
                   )}
                 </Field>
                 <Field>
@@ -189,12 +199,17 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     value={formik.values.telephone}
                     id="telephone"
                     name="telephone"
-                    hasError={formik.errors.telephone && formik.touched.telephone}
+                    hasError={
+                      formik.errors.telephone && formik.touched.telephone
+                    }
                     onChange={formik.handleChange}
                     placeholder="Téléphone"
                   />
                   {formik.touched.telephone && (
-                    <InlineError message={formik.errors.telephone} fieldId="telephone" />
+                    <InlineError
+                      message={formik.errors.telephone}
+                      fieldId="telephone"
+                    />
                   )}
                 </Field>
                 <Field>
@@ -215,7 +230,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     onChange={formik.handleChange}
                     placeholder="Adresse"
                   />
-                  <InlineError message={formik.errors.address} fieldId="address" />
+                  <InlineError
+                    message={formik.errors.address}
+                    fieldId="address"
+                  />
                 </Field>
                 <Flex justifyContent="space-between">
                   <Box mr={1} flex={1 / 2}>
@@ -231,7 +249,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
                         }}
                         placeholder="Code postal"
                       />
-                      <InlineError message={formik.errors.zipcode} fieldId="zipcode" />
+                      <InlineError
+                        message={formik.errors.zipcode}
+                        fieldId="zipcode"
+                      />
                     </Field>
                   </Box>
                   <Box ml={1} flex={1 / 2}>
@@ -241,10 +262,15 @@ const SignupMandataireForm = ({ tiDatas }) => {
                         name="city"
                         id="city"
                         zipcode={formik.values.zipcode}
-                        onChange={(value) => formik.setFieldValue("city", value)}
+                        onChange={(value) =>
+                          formik.setFieldValue("city", value)
+                        }
                         value={formik.values.city}
                       />
-                      <InlineError message={formik.errors.city} fieldId="city" />
+                      <InlineError
+                        message={formik.errors.city}
+                        fieldId="city"
+                      />
                     </Field>
                   </Box>
                 </Flex>
@@ -253,33 +279,37 @@ const SignupMandataireForm = ({ tiDatas }) => {
                     value={formik.values.dispo_max}
                     id="dispo_max"
                     name="dispo_max"
-                    hasError={formik.errors.dispo_max && formik.touched.dispo_max}
+                    hasError={
+                      formik.errors.dispo_max && formik.touched.dispo_max
+                    }
                     onChange={formik.handleChange}
                     placeholder="Nombre de mesures souhaité"
                   />
                   {formik.touched.dispo_max && (
-                    <InlineError message={formik.errors.dispo_max} fieldId="dispo_max" />
+                    <InlineError
+                      message={formik.errors.dispo_max}
+                      fieldId="dispo_max"
+                    />
                   )}
                 </Field>
                 <Flex justifyContent="flex-end">
                   <Box>
-                    <Button mr="2" variant="outline">
-                      <Link href="/">
-                        <a>Annuler</a>
-                      </Link>
-                    </Button>
+                    <Link href="/">
+                      <Button mr="2" variant="outline">
+                        Annuler
+                      </Button>
+                    </Link>
                   </Box>
                   <Box>
                     <Button
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        // TODO: ask help
                         setMandataire(formik.values);
                         validateStepOne(false);
                       }}
                     >
-                      <a>Retour</a>
+                      Retour
                     </Button>
                   </Box>
                   <Box>
@@ -302,7 +332,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
 };
 
 const SignupMandataire = (props) => (
-  <SignupDatas {...props} Component={(props) => <SignupMandataireForm {...props} />} />
+  <SignupDatas
+    {...props}
+    Component={(props) => <SignupMandataireForm {...props} />}
+  />
 );
 
 export { SignupMandataire };

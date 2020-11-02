@@ -9,7 +9,9 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
 
   const idDebutAnnee = prefix ? `${prefix}DebutAnnee` : "debutAnnee";
   const idFinAnnee = prefix ? `${prefix}FinAnnee` : "finAnnee";
-  const idMesuresNouvelles = prefix ? `${prefix}MesuresNouvelles` : "mesuresNouvelles";
+  const idMesuresNouvelles = prefix
+    ? `${prefix}MesuresNouvelles`
+    : "mesuresNouvelles";
   const idSortieMesures = prefix ? `${prefix}SortieMesures` : "sortieMesures";
 
   return (

@@ -9,9 +9,10 @@ import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
 export const EnquetePrepose = (props) => {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
-  const sections = useMemo(() => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse), [
-    enqueteReponse,
-  ]);
+  const sections = useMemo(
+    () => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse),
+    [enqueteReponse]
+  );
 
   const {
     section,
@@ -22,9 +23,9 @@ export const EnquetePrepose = (props) => {
     confirmExitInvalidFormDialog,
   } = useEnqueteContext({
     currentStep,
+    enqueteReponse,
     navigateToStep,
     sections,
-    enqueteReponse,
   });
 
   if (step === undefined || section === undefined) {
@@ -58,7 +59,9 @@ export const EnquetePrepose = (props) => {
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}
         />
-        <EnqueteConfirmExitInvalidFormDialog {...confirmExitInvalidFormDialog} />
+        <EnqueteConfirmExitInvalidFormDialog
+          {...confirmExitInvalidFormDialog}
+        />
       </Box>
     </Flex>
   );

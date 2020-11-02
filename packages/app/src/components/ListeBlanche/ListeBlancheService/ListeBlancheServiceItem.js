@@ -25,7 +25,9 @@ export const ListeBlancheServiceItem = (props) => {
 
         <Flex width="30%" flexDirection="column">
           <Text sx={labelStyle}>Département</Text>
-          {item.departement && <Text sx={descriptionStyle}>{item.departement.nom}</Text>}
+          {item.departement && (
+            <Text sx={descriptionStyle}>{item.departement.nom}</Text>
+          )}
         </Flex>
 
         {item.siret && (

@@ -11,10 +11,18 @@ import { Box, Flex, Text } from "rebass";
 import { AccessToken } from "../AccessToken";
 import { LinkButton, ServiceEditLinkButton } from "../Commons";
 import { GET_SERVICES } from "./queries";
-import { boxStyle, flexStyle, iconTextStyle, innerTextStyle, topTextStyle } from "./style";
+import {
+  boxStyle,
+  flexStyle,
+  iconTextStyle,
+  innerTextStyle,
+  topTextStyle,
+} from "./style";
 
 const ServiceInformations = (props) => {
-  const { data, error, loading } = useQuery(GET_SERVICES, { fetchPolicy: "cache-and-network" });
+  const { data, error, loading } = useQuery(GET_SERVICES, {
+    fetchPolicy: "cache-and-network",
+  });
 
   if (loading) {
     return <div>loading</div>;
@@ -95,10 +103,14 @@ const ServiceInformations = (props) => {
           </Box>
         )}
         <Flex mt="5">
-          <ServiceEditLinkButton>Modifier les informations de votre service</ServiceEditLinkButton>
+          <ServiceEditLinkButton>
+            Modifier les informations de votre service
+          </ServiceEditLinkButton>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/services/edit-password">Modifier votre mot de passe</LinkButton>
+          <LinkButton href="/services/edit-password">
+            Modifier votre mot de passe
+          </LinkButton>
         </Flex>
       </Card>
     </Box>

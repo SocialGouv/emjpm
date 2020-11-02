@@ -17,9 +17,9 @@ async function importEnqueteFile({
 
   // save data to database
   await serviceEnqueteRepository.update(enqueteId, {
-    tabs,
-    serviceId,
     isUpload: true,
+    serviceId,
+    tabs,
   });
 
   const durationInSeconds = Math.ceil((Date.now() - start) / 1000);

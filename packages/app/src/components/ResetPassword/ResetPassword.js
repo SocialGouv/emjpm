@@ -21,7 +21,12 @@ const grayBox = {
   p: "5",
 };
 
-const checkStatus = async (response, setSubmitting, setStatus, toggleMessage) => {
+const checkStatus = async (
+  response,
+  setSubmitting,
+  setStatus,
+  toggleMessage
+) => {
   let json = null;
   setSubmitting(false);
   try {
@@ -47,7 +52,13 @@ const ResetPassword = (props) => {
   const [isMessageVisible, toggleMessage] = useState(false);
   const url = `${API_URL}/api/auth/reset-password-with-token`;
 
-  const handleSubmit = async (values, setSubmitting, setStatus, token, toggleMessage) => {
+  const handleSubmit = async (
+    values,
+    setSubmitting,
+    setStatus,
+    token,
+    toggleMessage
+  ) => {
     const response = await fetch(url, {
       body: JSON.stringify({
         new_password: values.newPassword,
@@ -91,7 +102,13 @@ const ResetPassword = (props) => {
         <Box sx={{ position: "relative", zIndex: "1" }}>
           <Formik
             onSubmit={(values, { setSubmitting, setStatus }) =>
-              handleSubmit(values, setSubmitting, setStatus, token, toggleMessage)
+              handleSubmit(
+                values,
+                setSubmitting,
+                setStatus,
+                token,
+                toggleMessage
+              )
             }
             validationSchema={resetPasswordSchema}
             initialValues={{
@@ -127,7 +144,10 @@ const ResetPassword = (props) => {
                       placeholder="Entrez votre nouveau mot de passe"
                     />
                     {touched.newPassword && (
-                      <InlineError message={errors.newPassword} fieldId="newPassword" />
+                      <InlineError
+                        message={errors.newPassword}
+                        fieldId="newPassword"
+                      />
                     )}
                   </Box>
                   <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
@@ -136,7 +156,10 @@ const ResetPassword = (props) => {
                       id="newPasswordConfirmation"
                       name="newPasswordConfirmation"
                       type="password"
-                      hasError={errors.newPasswordConfirmation && touched.newPasswordConfirmation}
+                      hasError={
+                        errors.newPasswordConfirmation &&
+                        touched.newPasswordConfirmation
+                      }
                       onChange={handleChange}
                       placeholder="Confirmer votre nouveau mot de passe"
                     />
@@ -152,7 +175,11 @@ const ResetPassword = (props) => {
                       <Link href="/login">Annuler</Link>
                     </Box>
                     <Box>
-                      <Button type="submit" disabled={isSubmitting} isLoading={isSubmitting}>
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting}
+                        isLoading={isSubmitting}
+                      >
                         Enregistrer mon nouveau mot de passe
                       </Button>
                     </Box>

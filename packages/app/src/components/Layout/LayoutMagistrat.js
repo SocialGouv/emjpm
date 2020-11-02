@@ -29,7 +29,9 @@ const LayoutMagistrat = (props) => {
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           {...props}
-          dropDownLinks={[{ title: "Vos informations", url: "/magistrats/informations" }]}
+          dropDownLinks={[
+            { title: "Vos informations", url: "/magistrats/informations" },
+          ]}
         />
         <BoxWrapper>
           <Navigation links={navigationLinks} />
@@ -41,9 +43,8 @@ const LayoutMagistrat = (props) => {
           <Footer />
         </BoxWrapper>
       </Box>
-      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !== "true" && (
-        <SatisfactionCampaign />
-      )}
+      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !==
+        "true" && <SatisfactionCampaign />}
     </Fragment>
   );
 };

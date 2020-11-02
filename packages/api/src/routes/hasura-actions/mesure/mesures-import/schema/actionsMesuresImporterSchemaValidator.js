@@ -44,8 +44,8 @@ module.exports = {
       try {
         actionsMesuresImporterSchema.validateSync(row);
         mesuresWithLine.push({
-          mesure: row,
           line: i + 2,
+          mesure: row,
         });
       } catch (error) {
         errors.push({

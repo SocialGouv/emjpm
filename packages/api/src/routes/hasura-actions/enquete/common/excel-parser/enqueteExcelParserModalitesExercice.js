@@ -29,41 +29,41 @@ function parse(ws) {
     ) {
       nombre_lits_journee_hospitalisation.push({
         finess,
+        nombre_journees_esms,
+        nombre_journees_hospitalisation,
+        nombre_lits,
+        nombre_mesures,
         raison_sociale,
         statut,
         type,
-        nombre_lits,
-        nombre_journees_hospitalisation,
-        nombre_mesures,
-        nombre_journees_esms,
       });
     }
   }
 
   return {
-    departement: parser.string(ws["B1"]),
-    region: parser.string(ws["B2"]),
-    raison_sociale: parser.string(ws["B3"]),
-    personnalite_juridique_etablissement: parser.select(ws["E8"], {
-      map: ENQ_REP_MODALITE_EXERCICE.PERSONNALITE_JURIDIQUE.byValue,
-    }),
+    actions_information_tuteurs_familiaux: parser.integerAsBoolean(ws["E52"]),
     activite_exercee_par:
       parser.integer(ws["C13"]) === 1
         ? "personne-physique"
         : parser.integer(ws["C15"]) === 1
         ? "service"
         : undefined,
+    departement: parser.string(ws["B1"]),
     etablissements_type:
       parser.integer(ws["E18"]) === 1
         ? "personne-morale"
         : parser.integer(ws["E20"]) === 1
         ? "convention-groupement"
         : undefined,
-    total_mesures_etablissements: parser.integer(ws["E22"]),
     nombre_lits_journee_hospitalisation: JSON.stringify(
       nombre_lits_journee_hospitalisation
     ),
-    actions_information_tuteurs_familiaux: parser.integerAsBoolean(ws["E52"]),
+    personnalite_juridique_etablissement: parser.select(ws["E8"], {
+      map: ENQ_REP_MODALITE_EXERCICE.PERSONNALITE_JURIDIQUE.byValue,
+    }),
+    raison_sociale: parser.string(ws["B3"]),
+    region: parser.string(ws["B2"]),
+    total_mesures_etablissements: parser.integer(ws["E22"]),
   };
 }
 

@@ -7,14 +7,14 @@ const backendAuthHeaders = {
 
 const graphqlFetch = async (variables, operation, headers = {}) => {
   const fetchResponse = await fetch(process.env.HASURA_GRAPHQL_URI, {
-    headers,
-    method: "POST",
     body: JSON.stringify({
       query: operation,
       variables,
     }),
+    headers,
+    method: "POST",
   });
   return await fetchResponse.json();
 };
 
-module.exports = { graphqlFetch, backendAuthHeaders };
+module.exports = { backendAuthHeaders, graphqlFetch };

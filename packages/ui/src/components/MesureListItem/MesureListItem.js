@@ -1,14 +1,14 @@
-import styled from '@emotion/styled';
-import { Female } from '@styled-icons/fa-solid/Female';
-import { Male } from '@styled-icons/fa-solid/Male';
-import { Warning } from '@styled-icons/material/Warning';
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import { Box, Flex } from 'rebass';
+import styled from "@emotion/styled";
+import { Female } from "@styled-icons/fa-solid/Female";
+import { Male } from "@styled-icons/fa-solid/Male";
+import { Warning } from "@styled-icons/material/Warning";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { Box, Flex } from "rebass";
 
-import { Card, Text } from '../../core';
-import { isMonsieur } from '../../util';
-import { MESURE_TYPE } from './constants/type';
+import { Card, Text } from "../../core";
+import { isMonsieur } from "../../util";
+import { MESURE_TYPE } from "./constants/type";
 import {
   cardStyle,
   columnStyle,
@@ -19,14 +19,14 @@ import {
   natureStyle,
   statusStyle,
   titleStyle,
-} from './style';
+} from "./style";
 
 const GrayMale = styled(Male)`
-  color: '#333333';
+  color: "#333333";
 `;
 
 const GrayFemale = styled(Female)`
-  color: '#333333';
+  color: "#333333";
 `;
 
 const currentYear = new Date().getFullYear();
@@ -62,17 +62,19 @@ const MesureListItem = (props) => {
         <Flex sx={mesureListItemStyle}>
           <Box minWidth="220px" mr="1">
             <Text sx={titleStyle}>
-              {numeroRg || ''}
-              <Text sx={statusStyle(status)}>{currentStatus || ''}</Text>
+              {numeroRg || ""}
+              <Text sx={statusStyle(status)}>{currentStatus || ""}</Text>
             </Text>
-            <Text sx={natureStyle}>{`${natureMesure} ${champMesure || ''}`}</Text>
+            <Text sx={natureStyle}>{`${natureMesure} ${
+              champMesure || ""
+            }`}</Text>
           </Box>
 
           {hasTribunal && (
             <Flex width="280px" sx={columnStyle(true, true)}>
               <Text sx={labelStyle}>Tribunal</Text>
               <Text sx={descriptionStyle}>
-                {tribunal || ''} {cabinet}
+                {tribunal || ""} {cabinet}
               </Text>
             </Flex>
           )}
@@ -80,25 +82,31 @@ const MesureListItem = (props) => {
           <Flex minWidth="50px" mr="1">
             <Box alignSelf="center" pt="4px" mr="1">
               {civilite && (
-                <Fragment>{isMonsieur({ civilite }) ? <GrayMale size="24" /> : <GrayFemale size="24" />}</Fragment>
+                <Fragment>
+                  {isMonsieur({ civilite }) ? (
+                    <GrayMale size="24" />
+                  ) : (
+                    <GrayFemale size="24" />
+                  )}
+                </Fragment>
               )}
             </Box>
             <Box>
               <Text sx={labelStyle}>Age</Text>
-              <Text sx={descriptionStyle}>{currentYear - age || 'nc'}</Text>
+              <Text sx={descriptionStyle}>{currentYear - age || "nc"}</Text>
             </Box>
           </Flex>
 
           {hasFolderNumber && (
             <Flex width="90px" sx={columnStyle(true, true)}>
               <Text sx={labelStyle}>Dossier</Text>
-              <Text sx={descriptionStyle}>{numeroDossier || ''}</Text>
+              <Text sx={descriptionStyle}>{numeroDossier || ""}</Text>
             </Flex>
           )}
 
           <Flex width="280px" sx={columnStyle(true, true)}>
             <Text sx={labelStyle}>Commune</Text>
-            <Text sx={descriptionStyle}>{ville || ''}</Text>
+            <Text sx={descriptionStyle}>{ville || ""}</Text>
           </Flex>
 
           {status === MESURE_TYPE.WAITING && (
@@ -117,17 +125,25 @@ const MesureListItem = (props) => {
                   </Fragment>
                 </Box>
               </Flex>
-              <Flex width="120px" textAlign="left" sx={columnStyle(false, false)}>
+              <Flex
+                width="120px"
+                textAlign="left"
+                sx={columnStyle(false, false)}
+              >
                 <Text sx={labelStyle}>Date prév. juge.</Text>
-                <Text sx={descriptionStyle}>{judgmentDate || ''}</Text>
+                <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
               </Flex>
             </Fragment>
           )}
 
           {status !== MESURE_TYPE.WAITING && (
-            <Flex minWidth="70px" textAlign="left" sx={columnStyle(false, false)}>
+            <Flex
+              minWidth="70px"
+              textAlign="left"
+              sx={columnStyle(false, false)}
+            >
               <Text sx={labelStyle}>Decision du</Text>
-              <Text sx={descriptionStyle}>{dateNominationFormated || ''}</Text>
+              <Text sx={descriptionStyle}>{dateNominationFormated || ""}</Text>
             </Flex>
           )}
         </Flex>

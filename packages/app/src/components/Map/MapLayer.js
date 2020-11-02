@@ -22,7 +22,7 @@ const MapLayer = (props) => {
           <Feature
             onClick={() => {
               if (onMarkerClick !== undefined) {
-                onMarkerClick({ id, type, longitude, latitude });
+                onMarkerClick({ id, latitude, longitude, type });
               }
             }}
             key={id}

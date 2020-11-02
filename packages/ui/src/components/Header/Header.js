@@ -1,18 +1,25 @@
-import styled from '@emotion/styled';
-import { ChevronDown } from '@styled-icons/evil/ChevronDown';
-import { UserCircle } from '@styled-icons/fa-regular/UserCircle';
-import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
-import { Box, Flex, Text } from 'rebass';
+import styled from "@emotion/styled";
+import { ChevronDown } from "@styled-icons/evil/ChevronDown";
+import { UserCircle } from "@styled-icons/fa-regular/UserCircle";
+import PropTypes from "prop-types";
+import React, { useRef, useState } from "react";
+import { Box, Flex, Text } from "rebass";
 
-import { Logo, useOnClickOutside } from '../../core';
+import { Logo, useOnClickOutside } from "../../core";
 
 const BlueUserCircle = styled(UserCircle)`
   color: #006be6;
 `;
 
 const Header = (props) => {
-  const { DropDownMenu, username, dropDownLinks, Link, disconnect, isDisconnected } = props;
+  const {
+    DropDownMenu,
+    username,
+    dropDownLinks,
+    Link,
+    disconnect,
+    isDisconnected,
+  } = props;
   const ref = useRef();
   const [state, setState] = useState(false);
   useOnClickOutside(ref, () => setState(false));
@@ -28,8 +35,8 @@ const Header = (props) => {
         <Logo hasTitle />
       </Box>
       {!isDisconnected && (
-        <Box ref={ref} p={1} sx={{ position: 'relative' }}>
-          <Flex onClick={toggle} sx={{ cursor: 'pointer' }} alignItems="center">
+        <Box ref={ref} p={1} sx={{ position: "relative" }}>
+          <Flex onClick={toggle} sx={{ cursor: "pointer" }} alignItems="center">
             <Box height="25px">
               <BlueUserCircle size={25} />
             </Box>
@@ -42,7 +49,13 @@ const Header = (props) => {
               <ChevronDown size={25} />
             </Box>
           </Flex>
-          {state && <DropDownMenu disconnect={disconnect} Link={Link} dropDownLinks={dropDownLinks} />}
+          {state && (
+            <DropDownMenu
+              disconnect={disconnect}
+              Link={Link}
+              dropDownLinks={dropDownLinks}
+            />
+          )}
         </Box>
       )}
     </Flex>
@@ -66,7 +79,7 @@ Header.propTypes = {
     PropTypes.shape({
       title: PropTypes.string,
       url: PropTypes.string,
-    }),
+    })
   ),
   isDisconnected: PropTypes.bool,
   username: PropTypes.string,

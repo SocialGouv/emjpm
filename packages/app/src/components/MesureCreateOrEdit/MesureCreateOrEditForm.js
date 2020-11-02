@@ -11,29 +11,38 @@ import TribunalAutoComplete from "../TribunalAutoComplete";
 
 const initialValues = (mesure) => {
   return {
-    numero_rg: mesure ? mesure.numeroRg : "",
-    cabinet: mesure ? mesure.cabinet : "",
     annee_naissance: mesure ? mesure.age : "",
     antenne: mesure ? mesure.antenneId : "",
+    cabinet: mesure ? mesure.cabinet : "",
+    champ_mesure: mesure ? mesure.champMesure : "",
     civilite: mesure ? mesure.civilite : "",
     code_postal: mesure ? mesure.codePostal : "",
     date_nomination: mesure ? mesure.dateNomination : "",
-    numero_dossier: mesure ? mesure.numeroDossier : "",
-    tribunal: mesure && mesure.tiId ? { label: mesure.tribunal, value: mesure.tiId } : null,
-    ville: mesure ? mesure.ville : "",
-    pays: mesure ? mesure.pays : "FR",
-    nature_mesure: mesure ? mesure.natureMesure : "",
-    champ_mesure: mesure ? mesure.champMesure : "",
     lieu_vie: mesure ? mesure.lieuVie : "",
+    nature_mesure: mesure ? mesure.natureMesure : "",
+    numero_dossier: mesure ? mesure.numeroDossier : "",
+    numero_rg: mesure ? mesure.numeroRg : "",
+    pays: mesure ? mesure.pays : "FR",
+    tribunal:
+      mesure && mesure.tiId
+        ? { label: mesure.tribunal, value: mesure.tiId }
+        : null,
+    ville: mesure ? mesure.ville : "",
   };
 };
 
 export const MesureCreateOrEditForm = (props) => {
-  const { tribunaux, antenneOptions, handleSubmit, handleCancel, mesureToEdit } = props;
+  const {
+    tribunaux,
+    antenneOptions,
+    handleSubmit,
+    handleCancel,
+    mesureToEdit,
+  } = props;
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
     initialValues: initialValues(mesureToEdit),
+    onSubmit: handleSubmit,
     validationSchema: mesureSchema,
   });
 
@@ -189,7 +198,11 @@ export const MesureCreateOrEditForm = (props) => {
           </Button>
         </Box>
         <Box>
-          <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
             Enregistrer
           </Button>
         </Box>

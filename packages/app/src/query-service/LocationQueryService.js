@@ -27,7 +27,10 @@ export const getLocation = async (client, { address, zipcode, city }) => {
     // 1. If address parameter is specified we try to find the location via geocode api
 
     if (address) {
-      const geocodeResults = await geocode({ postcode: zipcode, q: `${address}, ${city}` });
+      const geocodeResults = await geocode({
+        postcode: zipcode,
+        q: `${address}, ${city}`,
+      });
       if (geocodeResults.length) {
         const [{ latitude, longitude }] = geocodeResults;
         geolocation = { latitude, longitude };
@@ -44,9 +47,14 @@ export const getLocation = async (client, { address, zipcode, city }) => {
 
     // 3. If address parameter is not specified we get "geolocalisation_code_postal" rows and try to match via city name
 
-    const { geolocalisation_code_postal: geolocations, departements: departments } = data;
+    const {
+      geolocalisation_code_postal: geolocations,
+      departements: departments,
+    } = data;
     if (geolocation === null && geolocations.length) {
-      geolocation = geolocations.find(({ cities }) => cities.includes(city.toUpperCase().trim()));
+      geolocation = geolocations.find(({ cities }) =>
+        cities.includes(city.toUpperCase().trim())
+      );
       if (!geolocation) {
         const [{ latitude, longitude }] = geolocations;
         geolocation = {

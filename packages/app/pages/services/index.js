@@ -9,7 +9,10 @@ import { MesureListButtonBar } from "../../src/components/MesureListButtonBar";
 import { MesureListFilters } from "../../src/components/MesureListFilters";
 import { FiltersContextProvider } from "../../src/components/MesureListFilters/context";
 import { UserContext } from "../../src/components/UserContext";
-import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../src/constants/mesures";
+import {
+  DEFAULT_MESURE_NATURE,
+  MESURE_STATUS_LABEL_VALUE,
+} from "../../src/constants/mesures";
 import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {

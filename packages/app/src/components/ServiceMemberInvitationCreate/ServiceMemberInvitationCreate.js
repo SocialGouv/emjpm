@@ -14,8 +14,12 @@ const ServiceMemberInvitationCreate = (props) => {
   const { service, isAdmin } = props;
 
   const client = useApolloClient();
-  const [createServiceMemberInvitation] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
-  const [sendEmailServiceMemberInvitation] = useMutation(SEND_EMAIL_SERVICE_MEMBER_INVITATION);
+  const [createServiceMemberInvitation] = useMutation(
+    CREATE_SERVICE_MEMBER_INVITATION
+  );
+  const [sendEmailServiceMemberInvitation] = useMutation(
+    SEND_EMAIL_SERVICE_MEMBER_INVITATION
+  );
 
   async function handleSubmit(values, { resetForm, setErrors }) {
     const { data } = await client.query({
@@ -36,7 +40,9 @@ const ServiceMemberInvitationCreate = (props) => {
       },
     });
 
-    const { id: invitationId } = result?.data?.insert_service_member_invitations?.returning?.[0];
+    const {
+      id: invitationId,
+    } = result?.data?.insert_service_member_invitations?.returning?.[0];
 
     if (invitationId) {
       sendEmailServiceMemberInvitation({
@@ -54,7 +60,9 @@ const ServiceMemberInvitationCreate = (props) => {
       <Heading2 width={[1]} mb="2">
         Inviter une personne
       </Heading2>
-      <Box bg="white">{isAdmin && <ServiceMemberInvitationForm handleSubmit={handleSubmit} />}</Box>
+      <Box bg="white">
+        {isAdmin && <ServiceMemberInvitationForm handleSubmit={handleSubmit} />}
+      </Box>
     </Box>
   );
 };

@@ -1,5 +1,14 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Field, Heading1, Heading4, InlineError, Select, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading1,
+  Heading4,
+  InlineError,
+  Select,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -38,10 +47,16 @@ function getServiceOptions(services, departments, selectedValue) {
 }
 
 const SignupServiceForm = ({ serviceDatas }) => {
-  const { user, service, setService, validateStepOne } = useContext(SignupContext);
+  const { user, service, setService, validateStepOne } = useContext(
+    SignupContext
+  );
   const { data, loading } = useQuery(DEPARTMENTS);
 
   const formik = useFormik({
+    initialValues: {
+      departement: service ? service.departement : null,
+      service: service ? service.service : null,
+    },
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         service: {
@@ -60,10 +75,6 @@ const SignupServiceForm = ({ serviceDatas }) => {
       });
     },
     validationSchema: signupServiceSchema,
-    initialValues: {
-      departement: service ? service.departement : null,
-      service: service ? service.service : null,
-    },
   });
 
   if (loading) {
@@ -71,8 +82,14 @@ const SignupServiceForm = ({ serviceDatas }) => {
   }
 
   const { departements: departments = [] } = data;
-  const selectedValue = formik.values.departement ? formik.values.departement.value : undefined;
-  const serviceOptions = getServiceOptions(serviceDatas, departments, selectedValue);
+  const selectedValue = formik.values.departement
+    ? formik.values.departement.value
+    : undefined;
+  const serviceOptions = getServiceOptions(
+    serviceDatas,
+    departments,
+    selectedValue
+  );
   const departmentsOptions = departments.map(({ nom, id }) => ({
     label: nom,
     value: id,
@@ -100,12 +117,19 @@ const SignupServiceForm = ({ serviceDatas }) => {
                   name="departement"
                   placeholder="Département de votre service"
                   value={formik.values.departement}
-                  hasError={formik.errors.departement && formik.touched.departement}
-                  onChange={(option) => formik.setFieldValue("departement", option)}
+                  hasError={
+                    formik.errors.departement && formik.touched.departement
+                  }
+                  onChange={(option) =>
+                    formik.setFieldValue("departement", option)
+                  }
                   options={departmentsOptions}
                 />
                 {formik.touched.departement && (
-                  <InlineError message={formik.errors.departement} fieldId="departement" />
+                  <InlineError
+                    message={formik.errors.departement}
+                    fieldId="departement"
+                  />
                 )}
               </Field>
               <Field>
@@ -119,16 +143,19 @@ const SignupServiceForm = ({ serviceDatas }) => {
                   options={serviceOptions}
                 />
                 {formik.touched.service && (
-                  <InlineError message={formik.errors.service} fieldId="service" />
+                  <InlineError
+                    message={formik.errors.service}
+                    fieldId="service"
+                  />
                 )}
               </Field>
               <Flex justifyContent="flex-end">
                 <Box>
-                  <Button mr="2" variant="outline">
-                    <Link href="/">
-                      <a>Annuler</a>
-                    </Link>
-                  </Button>
+                  <Link href="/">
+                    <Button mr="2" variant="outline">
+                      Annuler
+                    </Button>
+                  </Link>
                 </Box>
                 <Box>
                   <Button
@@ -139,7 +166,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
                       validateStepOne(false);
                     }}
                   >
-                    <a>Retour</a>
+                    Retour
                   </Button>
                 </Box>
                 <Box>
@@ -161,7 +188,10 @@ const SignupServiceForm = ({ serviceDatas }) => {
 };
 
 const SignupService = (props) => (
-  <SignupDatas {...props} Component={(props) => <SignupServiceForm {...props} />} />
+  <SignupDatas
+    {...props}
+    Component={(props) => <SignupServiceForm {...props} />}
+  />
 );
 
 export { SignupService };

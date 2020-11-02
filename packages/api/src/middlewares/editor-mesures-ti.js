@@ -8,9 +8,9 @@ const editorMesureTiMiddleWare = async (req, res, next) => {
     return res.status(422).json({
       errors: [
         {
+          msg: "siret is not valid",
           param: "tribunal_siret",
           value: body.tribunal_siret,
-          msg: "siret is not valid",
         },
       ],
     });

@@ -1,4 +1,12 @@
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -55,21 +63,26 @@ const EditPassword = () => {
   };
 
   const formik = useFormik({
-    onSubmit: (values, { setSubmitting, setStatus }) => {
-      handleSubmit(values, setSubmitting, setStatus, type);
-    },
-    validationSchema: passwordSchema,
     initialValues: {
       newPassword: "",
       newPasswordConfirmation: "",
       password: "",
     },
+    onSubmit: (values, { setSubmitting, setStatus }) => {
+      handleSubmit(values, setSubmitting, setStatus, type);
+    },
+    validationSchema: passwordSchema,
   });
 
   return (
     <Card mt="5" p="0">
       <Flex>
-        <Box width={[1, 1 / 2]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
+        <Box
+          width={[1, 1 / 2]}
+          bg="cardSecondary"
+          borderRadius="5px 0 0 5px"
+          p="5"
+        >
           <Box height="80px">
             <Heading4>{`Modifier votre mot de passe`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
@@ -95,7 +108,10 @@ const EditPassword = () => {
                   onChange={formik.handleChange}
                   placeholder="Votre mot de passe actuel"
                 />
-                <InlineError message={formik.errors.password} fieldId="password" />
+                <InlineError
+                  message={formik.errors.password}
+                  fieldId="password"
+                />
               </Field>
               <Field>
                 <Input
@@ -103,11 +119,16 @@ const EditPassword = () => {
                   id="newPassword"
                   name="newPassword"
                   type="password"
-                  hasError={formik.errors.newPassword && formik.touched.newPassword}
+                  hasError={
+                    formik.errors.newPassword && formik.touched.newPassword
+                  }
                   onChange={formik.handleChange}
                   placeholder="Votre nouveau mot de passe"
                 />
-                <InlineError message={formik.errors.newPassword} fieldId="newPassword" />
+                <InlineError
+                  message={formik.errors.newPassword}
+                  fieldId="newPassword"
+                />
               </Field>
               <Field>
                 <Input
@@ -116,7 +137,8 @@ const EditPassword = () => {
                   name="newPasswordConfirmation"
                   type="password"
                   hasError={
-                    formik.errors.newPasswordConfirmation && formik.touched.newPasswordConfirmation
+                    formik.errors.newPasswordConfirmation &&
+                    formik.touched.newPasswordConfirmation
                   }
                   onChange={formik.handleChange}
                   placeholder="Confirmation de votre nouveau mot de passe"

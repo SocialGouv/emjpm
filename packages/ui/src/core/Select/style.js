@@ -1,4 +1,4 @@
-import { useThemeUI } from 'theme-ui';
+import { useThemeUI } from "theme-ui";
 
 const getBorderColor = (hasError, state, colors) => {
   if (hasError) {
@@ -18,6 +18,7 @@ const getHoverBorderColor = (hasError, state, colors) => {
 
 export const getStyle = (props) => {
   const { size, hasError = false } = props;
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const context = useThemeUI();
   const { fontSizes, fonts, colors } = context.theme;
 
@@ -26,15 +27,15 @@ export const getStyle = (props) => {
       const currentBorderColor = getBorderColor(hasError, state, colors);
       return {
         ...provided,
-        '&:hover': {
+        "&:hover": {
           borderColor: getHoverBorderColor(hasError, state, colors),
         },
         borderColor: currentBorderColor,
-        boxShadow: '0',
+        boxShadow: "0",
         fontFamily: fonts.body,
         fontSize: fontSizes[1],
-        minHeight: size === 'small' ? '44px' : '54px',
-        padding: '0 2px',
+        minHeight: size === "small" ? "44px" : "54px",
+        padding: "0 2px",
       };
     },
   };

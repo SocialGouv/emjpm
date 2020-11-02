@@ -42,7 +42,9 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
     }
   );
 
-  const initialData = data ? data.enquete_reponses_prepose_personel_formation_by_pk || {} : {};
+  const initialData = data
+    ? data.enquete_reponses_prepose_personel_formation_by_pk || {}
+    : {};
 
   return (
     <EnquetePreposePersonnelFormationAutresForm
@@ -78,10 +80,12 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
         await sendEnqueteReponseInformations({
           variables: {
             id: personel_formation_id,
-            nb_preposes_homme: parseFormInt(values.nb_preposes_homme),
-            nb_preposes_femme: parseFormInt(values.nb_preposes_femme),
             nb_autre_personnel: parseFormInt(values.nb_autre_personnel),
-            nb_autre_personnel_etp: parseFormFloat(values.nb_autre_personnel_etp),
+            nb_autre_personnel_etp: parseFormFloat(
+              values.nb_autre_personnel_etp
+            ),
+            nb_preposes_femme: parseFormInt(values.nb_preposes_femme),
+            nb_preposes_homme: parseFormInt(values.nb_preposes_homme),
             niveaux_qualification,
           },
         });

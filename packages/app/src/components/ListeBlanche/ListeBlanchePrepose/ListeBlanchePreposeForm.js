@@ -9,9 +9,9 @@ import yup from "../../../lib/validationSchemas/yup";
 import { FormGroupInput } from "../../AppForm";
 
 const validationSchema = yup.object().shape({
-  lastname: yup.string().required(),
-  firstname: yup.string().required(),
   email: yup.string().required(),
+  firstname: yup.string().required(),
+  lastname: yup.string().required(),
 });
 
 async function updateEtablissementRattachement(formik, id) {
@@ -32,23 +32,22 @@ export const ListeBlanchePreposeForm = (props) => {
   const { searchEtablissements, editMode, data = {}, handleSubmit } = props;
 
   const initialValues = {
-    firstname: data.nom || "",
-    lastname: data.prenom || "",
     email: data.email || "",
     etablissements: data.lb_user_etablissements
       ? data.lb_user_etablissements.map((e) => {
           return {
+            etablissement_rattachement: e.etablissement_rattachement,
             id: e.etablissement.id,
             rslongue: e.etablissement.rslongue,
-            etablissement_rattachement: e.etablissement_rattachement,
           };
         })
       : [],
+    firstname: data.nom || "",
+    lastname: data.prenom || "",
   };
 
   const formik = useFormik({
     initialValues,
-    validationSchema,
     onSubmit: async (values, { setFieldError, setSubmitting }) => {
       try {
         if (handleSubmit) {
@@ -64,15 +63,16 @@ export const ListeBlanchePreposeForm = (props) => {
       }
       setSubmitting(false);
     },
+    validationSchema,
   });
 
   const etablissementIds = formik.values.etablissements.map((e) => e.id);
   const etablissementOptions = formik.values.etablissements.map((e) => {
     return {
-      label: e.rslongue ? e.rslongue : e.rs,
-      value: `${e.id}`,
       checked: e.etablissement_rattachement === true,
-      disabled: false, // !canModifyAgrement(user, d.id),
+      disabled: false,
+      label: e.rslongue ? e.rslongue : e.rs,
+      value: `${e.id}`, // !canModifyAgrement(user, d.id),
     };
   });
 
@@ -118,11 +118,11 @@ export const ListeBlanchePreposeForm = (props) => {
                   <Box
                     ml={2}
                     sx={{
-                      cursor: "pointer",
-                      color: "#777",
                       ":hover": {
                         color: "#aa2d2d",
                       },
+                      color: "#777",
+                      cursor: "pointer",
                     }}
                   >
                     <XCircle
@@ -155,7 +155,9 @@ export const ListeBlanchePreposeForm = (props) => {
                 loadOptions={async (inputValue) => {
                   const values = await searchEtablissements(inputValue);
                   return values.map((e) => ({
-                    label: `${e.rslongue ? e.rslongue : e.rs} (${e.ligneacheminement})`,
+                    label: `${e.rslongue ? e.rslongue : e.rs} (${
+                      e.ligneacheminement
+                    })`,
                     value: e.id,
                   }));
                 }}

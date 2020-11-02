@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Flex } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex } from "rebass";
 
-import { Radio } from '../Radio';
+import { Radio } from "../Radio";
 
 export const RadioGroup = (props) => {
   const { options, onValueChange, value, renderRadioLabel } = props;
@@ -23,7 +23,7 @@ export const RadioGroup = (props) => {
                 label={option.label}
                 checked={option.checked || option.value === value}
                 disabled={option.disabled}
-                name={option.name ? option.name : ''}
+                name={option.name ? option.name : ""}
                 option={option}
                 renderRadioLabel={renderRadioLabel}
               />
@@ -43,13 +43,13 @@ RadioGroup.propTypes = {
       label: PropTypes.string.isRequired,
       name: PropTypes.string,
       value: PropTypes.string.isRequired,
-    }),
+    })
   ).isRequired,
   renderRadioLabel: PropTypes.func,
   value: PropTypes.string,
 };
 
 RadioGroup.defaultProps = {
-  renderRadioLabel: 'null',
-  value: 'null',
+  renderRadioLabel: "null",
+  value: "null",
 };

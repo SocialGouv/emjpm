@@ -61,7 +61,8 @@ const MagistratMandataireComments = (props) => {
         </Box>
       ) : (
         <Text mt="2">
-          Aucune observation, cliquer sur ajouter une observation pour en créer un nouvelle
+          Aucune observation, cliquer sur ajouter une observation pour en créer
+          un nouvelle
         </Text>
       )}
       {isOpen ? (

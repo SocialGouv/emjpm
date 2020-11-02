@@ -1,7 +1,7 @@
-import React from 'react';
-import { Heading as RebassHeading } from 'rebass';
+import React from "react";
+import { Heading as RebassHeading } from "rebass";
 
-import { baseStyle } from './Style';
+import { baseStyle } from "./Style";
 
 const Heading0 = (props) => {
   return <RebassHeading as="div" fontSize={7} sx={baseStyle} {...props} />;

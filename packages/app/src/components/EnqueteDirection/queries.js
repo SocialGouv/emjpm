@@ -79,14 +79,20 @@ export const ENQUETE_DETAILS_LIST = gql`
     $status: String
   ) {
     individuels_aggregate: mandataires_aggregate(
-      where: { user: { type: { _eq: "individuel" } }, department_id: { _eq: $departementId } }
+      where: {
+        user: { type: { _eq: "individuel" } }
+        department_id: { _eq: $departementId }
+      }
     ) {
       mandataires: aggregate {
         count(columns: id)
       }
     }
     preposes_aggregate: mandataires_aggregate(
-      where: { user: { type: { _eq: "prepose" } }, department_id: { _eq: $departementId } }
+      where: {
+        user: { type: { _eq: "prepose" } }
+        department_id: { _eq: $departementId }
+      }
     ) {
       mandataires: aggregate {
         count(columns: id)

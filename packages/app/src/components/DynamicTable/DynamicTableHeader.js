@@ -3,7 +3,14 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 export const DynamicTableHeader = (props) => {
-  const { title, buttonEnable, selectedItemsCount, buttonText, isLoading, onClick } = props;
+  const {
+    title,
+    buttonEnable,
+    selectedItemsCount,
+    buttonText,
+    isLoading,
+    onClick,
+  } = props;
 
   return (
     <Flex my={3} justifyContent="space-between" alignItems="center">

@@ -7,7 +7,9 @@ import { EnquetePreposePrestationsSocialesRepartitionPersonnesForm } from "./Enq
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (props) => {
+export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (
+  props
+) => {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -25,20 +27,23 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (props) => 
     },
   });
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
-        variables: {
-          id: prestations_sociales_id,
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
+          variables: {
+            id: prestations_sociales_id,
+          },
+        },
+      ],
+    }
+  );
 
   const prestationsSociales = data
     ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}

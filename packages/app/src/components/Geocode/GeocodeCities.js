@@ -17,8 +17,8 @@ export const GeocodeCities = (props) => {
     const { geolocalisation_code_postal } = data;
     options = geolocalisation_code_postal.map((item) => {
       return {
-        value: item.cities,
         label: item.cities,
+        value: item.cities,
       };
     });
   }

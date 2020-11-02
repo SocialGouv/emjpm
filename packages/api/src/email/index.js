@@ -9,27 +9,27 @@ const smtpFrom = configuration.smtpFrom;
 
 const smtpConfig = {
   host: smtpHost,
-  port: smtpPort,
   ignoreTLS: true,
+  port: smtpPort,
   secure: false,
 };
 
 if (smtpUser) {
   smtpConfig.auth = {
-    user: smtpUser,
     pass: smtpPass,
+    user: smtpUser,
   };
 }
 
 const sendEmail = (sendTo, subject, text, html, bcc) => {
   const transporter = nodemailer.createTransport(smtpConfig);
   const mailOptions = {
+    bcc,
     from: smtpFrom,
-    to: sendTo,
+    html,
     subject,
     text,
-    html,
-    bcc,
+    to: sendTo,
   };
   return transporter.sendMail(mailOptions);
 };

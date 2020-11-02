@@ -24,7 +24,7 @@ export const YesNoComboBox = (props) => {
             }
           }}
         />
-        <Box sx={FieldValue({ readOnly, isChecked: value === false })}>Non</Box>
+        <Box sx={FieldValue({ isChecked: value === false, readOnly })}>Non</Box>
       </Label>
       <Label alignItems="center" width={[1 / 2]} p={2}>
         <Radio
@@ -40,7 +40,7 @@ export const YesNoComboBox = (props) => {
             }
           }}
         />
-        <Box sx={FieldValue({ readOnly, isChecked: value === true })}>Oui</Box>
+        <Box sx={FieldValue({ isChecked: value === true, readOnly })}>Oui</Box>
       </Label>
     </Flex>
   );

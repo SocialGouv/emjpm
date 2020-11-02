@@ -11,7 +11,9 @@ const MandatairesDisponibility = (props) => {
   const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
-      department: filters.departement ? parseInt(filters.departement.value) : undefined,
+      department: filters.departement
+        ? parseInt(filters.departement.value)
+        : undefined,
       region: filters.region ? parseInt(filters.region.value) : undefined,
     },
   });

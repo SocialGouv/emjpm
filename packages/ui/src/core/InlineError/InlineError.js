@@ -1,7 +1,7 @@
-import { Exclamation } from '@styled-icons/evil/Exclamation';
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Flex, Text } from 'rebass';
+import { Exclamation } from "@styled-icons/evil/Exclamation";
+import PropTypes from "prop-types";
+import React from "react";
+import { Flex, Text } from "rebass";
 
 const InlineError = ({ message, fieldId, showError }) => {
   return (
@@ -18,7 +18,7 @@ const InlineError = ({ message, fieldId, showError }) => {
 };
 
 InlineError.defaultProps = {
-  message: '',
+  message: "",
   showError: true,
 };
 

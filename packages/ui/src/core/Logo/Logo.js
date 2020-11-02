@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Flex, Text } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex, Text } from "rebass";
 
-import { Marianne } from './Marianne';
-import { LogoStyle, logoTextStyle } from './style';
+import { Marianne } from "./Marianne";
+import { LogoStyle, logoTextStyle } from "./style";
 
 const Logo = (props) => {
   const { hasTitle, title } = props;
@@ -29,7 +29,7 @@ Logo.propTypes = {
 
 Logo.defaultProps = {
   hasTitle: true,
-  title: 'e-MJPM',
+  title: "e-MJPM",
 };
 
 export { Logo };

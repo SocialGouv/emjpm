@@ -14,7 +14,8 @@ const LinkStyle = () => {
   };
 };
 
-const isExternalLink = (href) => href && (href.startsWith("http") || href.startsWith("mailto"));
+const isExternalLink = (href) =>
+  href && (href.startsWith("http") || href.startsWith("mailto"));
 
 const Link = (props) => {
   if (isExternalLink(props.href)) {

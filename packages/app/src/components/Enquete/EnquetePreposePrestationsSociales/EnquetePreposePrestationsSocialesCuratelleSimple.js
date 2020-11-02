@@ -57,8 +57,8 @@ export const EnquetePreposePrestationsSocialesCuratelleSimple = (props) => {
       onSubmit={async (values) => {
         await updatePrestationsSociales({
           variables: {
-            id: prestations_sociales_id,
             curatelle_simple: values,
+            id: prestations_sociales_id,
           },
         });
       }}

@@ -19,7 +19,9 @@ const ListBlanchePage = () => {
           </StyledLink>
         </Link>
 
-        <Heading1 mb={4}>{"Ajout d'un engistrement à la liste blanche"}</Heading1>
+        <Heading1 mb={4}>
+          {"Ajout d'un engistrement à la liste blanche"}
+        </Heading1>
         <ServiceCreate
           onSuccess={async () => {
             await router.push("/direction/liste-blanche");

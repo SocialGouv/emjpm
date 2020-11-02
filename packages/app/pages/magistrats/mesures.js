@@ -11,7 +11,9 @@ import { withAuthSync } from "../../src/util/auth";
 
 const Mesures = () => {
   return (
-    <FiltersContextProvider initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
+    <FiltersContextProvider
+      initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
+    >
       <LayoutMagistrat>
         <BoxWrapper mt={6} px="1">
           <Heading1>Toutes vos mesures</Heading1>

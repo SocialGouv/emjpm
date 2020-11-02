@@ -27,7 +27,9 @@ const LayoutMagistratMap = (props) => {
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           {...props}
-          dropDownLinks={[{ title: "Vos informations", url: "/magistrats/informations" }]}
+          dropDownLinks={[
+            { title: "Vos informations", url: "/magistrats/informations" },
+          ]}
         />
         <BoxWrapper>
           <Navigation links={navigationLinks} />

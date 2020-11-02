@@ -9,23 +9,23 @@ import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 const validationSchema = yup.object({
-  sortiesMainLevee: yup.number().min(0).integer().nullable(),
   sortiesDeces: yup.number().min(0).integer().nullable(),
+  sortiesMainLevee: yup.number().min(0).integer().nullable(),
   sortiesMasp: yup.number().min(0).integer().nullable(),
 });
 
 function dataToForm(data) {
   return {
-    sortiesMainLevee: formatFormInput(data.sortiesMainLevee),
     sortiesDeces: formatFormInput(data.sortiesDeces),
+    sortiesMainLevee: formatFormInput(data.sortiesMainLevee),
     sortiesMasp: formatFormInput(data.sortiesMasp),
   };
 }
 
 function formToData(data) {
   return {
-    sortiesMainLevee: parseFormInt(data.sortiesMainLevee),
     sortiesDeces: parseFormInt(data.sortiesDeces),
+    sortiesMainLevee: parseFormInt(data.sortiesMainLevee),
     sortiesMasp: parseFormInt(data.sortiesMasp),
   };
 }
@@ -41,15 +41,15 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

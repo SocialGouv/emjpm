@@ -33,7 +33,9 @@ export const DirectionEnquetesList = () => {
         >
           <Flex alignItems="center" justifyContent="flex-start">
             <Text fontWeight="bold" color="primary">
-              {`Enquête ${enquete.annee} sur l'activité de ${enquete.annee - 1}`}
+              {`Enquête ${enquete.annee} sur l'activité de ${
+                enquete.annee - 1
+              }`}
             </Text>
             <Text fontWeight="bold" pl={5}>{`Du${format(
               new Date(enquete.created_at),

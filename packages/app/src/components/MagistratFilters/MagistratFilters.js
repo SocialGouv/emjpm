@@ -8,9 +8,12 @@ import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
 const MagistratFilters = () => {
-  const { natureMesure, changeNatureMesure, searchText, changeSearchText } = useContext(
-    FiltersContext
-  );
+  const {
+    natureMesure,
+    changeNatureMesure,
+    searchText,
+    changeSearchText,
+  } = useContext(FiltersContext);
 
   return (
     <Card mt="3">
@@ -21,7 +24,9 @@ const MagistratFilters = () => {
             <Box width="200px" mr={1}>
               <Select
                 size="small"
-                options={[DEFAULT_MESURE_NATURE].concat(MESURE_PROTECTION.NATURE_MESURE.options)}
+                options={[DEFAULT_MESURE_NATURE].concat(
+                  MESURE_PROTECTION.NATURE_MESURE.options
+                )}
                 placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}
