@@ -8,7 +8,7 @@ const SERVICE_BY_SIRET = gql`
   }
 `;
 
-export default async (client, siret) => {
+const findSiret = async (client, siret) => {
   const { data } = await client.query({
     context: {
       headers: {
@@ -24,3 +24,5 @@ export default async (client, siret) => {
 
   return data.services.length > 0;
 };
+
+export default findSiret;
