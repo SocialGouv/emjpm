@@ -1,7 +1,7 @@
-import { MESURE_PROTECTION_STATUS } from '../keys/MESURE_PROTECTION.key';
+import { MESURE_PROTECTION_STATUS } from "../keys/MESURE_PROTECTION.key";
 
 export function isMonsieur({ civilite }) {
-  if (civilite === 'monsieur') {
+  if (civilite === "monsieur") {
     return true;
   }
   return false;

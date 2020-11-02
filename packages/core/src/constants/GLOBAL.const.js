@@ -1,8 +1,8 @@
-import { buildKeys } from './keysBuilder.service';
+import { buildKeys } from "./keysBuilder.service";
 
 export const GLOBAL = {
   COUNTRIES: buildKeys({
-    BE: 'Belgique',
-    FR: 'France',
+    BE: "Belgique",
+    FR: "France",
   }),
 };
