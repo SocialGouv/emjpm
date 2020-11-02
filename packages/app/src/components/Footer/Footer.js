@@ -47,7 +47,10 @@ function Footer(props) {
           <List sx={FooterItemStyle}>
             <ListTitle>Aidez-nous à améliorer cet outil</ListTitle>
             <ListItem>
-              <Link target="_blank" href="mailto:support.emjpm@fabrique.social.gouv.fr">
+              <Link
+                target="_blank"
+                href="mailto:support.emjpm@fabrique.social.gouv.fr"
+              >
                 Contact
               </Link>
             </ListItem>

@@ -29,8 +29,8 @@ const fetchTribunalDatas = async (tribunal_siret) => {
     address: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
     code_postal: codePostalEtablissement,
     etablissement: enseigne1Etablissement,
-    ville: libelleCommuneEtablissement,
     siret: tribunal_siret,
+    ville: libelleCommuneEtablissement,
   };
 };
 

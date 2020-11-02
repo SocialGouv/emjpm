@@ -4,7 +4,10 @@ import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { DELETE_SERVICE_MEMBER, UPDATE_SERVICE_MEMBER_IS_ADMIN } from "./mutations";
+import {
+  DELETE_SERVICE_MEMBER,
+  UPDATE_SERVICE_MEMBER_IS_ADMIN,
+} from "./mutations";
 import { SERVICE_MEMBERS } from "./queries";
 import {
   listActionsStyle,
@@ -18,7 +21,9 @@ import {
 const ServiceMembers = (props) => {
   const { isAdmin, service, userId } = props;
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
-  const [updateServiceMemberIsAdmin] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
+  const [updateServiceMemberIsAdmin] = useMutation(
+    UPDATE_SERVICE_MEMBER_IS_ADMIN
+  );
 
   const { loading, error, data } = useQuery(SERVICE_MEMBERS, {
     variables: { serviceId: service.id },
@@ -64,7 +69,9 @@ const ServiceMembers = (props) => {
               {format(new Date(member.user.created_at), "dd/MM/yyyy")}
             </Text>
             <Text sx={listDateStyle}>
-              {member.user.active ? "Utilisateur actif" : "En attente de d'activation"}
+              {member.user.active
+                ? "Utilisateur actif"
+                : "En attente de d'activation"}
             </Text>
             <Box sx={listAdminStyle}>
               {isAdmin ? (
@@ -77,7 +84,9 @@ const ServiceMembers = (props) => {
                     <Box sx={{ cursor: "pointer" }}>
                       <CheckBox
                         isChecked={member.is_admin}
-                        onChange={() => handleIsAdminUpdate(member.id, !member.is_admin)}
+                        onChange={() =>
+                          handleIsAdminUpdate(member.id, !member.is_admin)
+                        }
                         label="Administrateur"
                       />
                     </Box>
@@ -91,7 +100,10 @@ const ServiceMembers = (props) => {
             </Box>
             {isAdmin && userId !== member.user_id && (
               <Box sx={listActionsStyle}>
-                <Box sx={listActionStyle} onClick={() => handleDelete(member.id)}>
+                <Box
+                  sx={listActionStyle}
+                  onClick={() => handleDelete(member.id)}
+                >
                   Supprimer l’utilisateur
                 </Box>
               </Box>

@@ -12,11 +12,11 @@ async function enqueteMandataireIndividuelStatus(enqueteReponse) {
   };
   // IMPORTANT: construire les status dans l'ordre d'affichage car un statut "empty" devient "invalid" si au moins un onglet précédent a été renseigné
   const status = {
+    activite: await enqueteActiviteStatus(enqueteReponse),
     informations: await enqueteInformationsMandatairesStatus(
       enqueteReponse,
       statusBuildContext
     ),
-    activite: await enqueteActiviteStatus(enqueteReponse),
     populations: await populationsStatus(enqueteReponse),
     prestationsSociales: await prestationsSocialesStatus(
       enqueteReponse,

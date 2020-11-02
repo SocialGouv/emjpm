@@ -18,7 +18,9 @@ function buildEnqueteEtablissementDomicileQuery(prefix) {
   `;
 }
 
-export const ENQUETE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileQuery("curatelle_simple");
+export const ENQUETE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_simple"
+);
 
 export const ENQUETE_CURATELLE_RENFORCEE = buildEnqueteEtablissementDomicileQuery(
   "curatelle_renforcee"
@@ -28,13 +30,17 @@ export const ENQUETE_CURATELLE_PERSONNE = buildEnqueteEtablissementDomicileQuery
   "curatelle_personne"
 );
 
-export const ENQUETE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileQuery("curatelle_biens");
+export const ENQUETE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileQuery(
+  "curatelle_biens"
+);
 
 export const ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomicileQuery(
   "accompagnement_judiciaire"
 );
 
-export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery("tutelle");
+export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery(
+  "tutelle"
+);
 
 // prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
 function buildEnqueteMesuresQuery(prefix) {
@@ -49,9 +55,15 @@ function buildEnqueteMesuresQuery(prefix) {
     }
   `;
 }
-export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery("subroge_tuteur_createur");
-export const ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresQuery("mandat_adhoc_majeur");
-export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery("sauvegarde_justice");
+export const ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresQuery(
+  "subroge_tuteur_createur"
+);
+export const ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresQuery(
+  "mandat_adhoc_majeur"
+);
+export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery(
+  "sauvegarde_justice"
+);
 
 export const ENQUETE_REVISION_MESURES = gql`
   query enquete_reponses_activite_revision_mesures($id: Int!) {

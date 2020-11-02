@@ -21,7 +21,12 @@ const SignupDatas = (props) => {
   const roleDatas = data.role;
 
   return (
-    <Component tiDatas={tiDatas} serviceDatas={serviceDatas} roleDatas={roleDatas} {...props} />
+    <Component
+      tiDatas={tiDatas}
+      serviceDatas={serviceDatas}
+      roleDatas={roleDatas}
+      {...props}
+    />
   );
 };
 

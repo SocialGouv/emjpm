@@ -10,8 +10,12 @@ export const Provider = (props) => {
 
   // Use State to keep the values
   const [antenne, changeAntenne] = useState(false);
-  const [natureMesure, changeNatureMesure] = useState(initialValues.natureMesure);
-  const [mesureStatus, changeMesureStatus] = useState(initialValues.mesureStatus);
+  const [natureMesure, changeNatureMesure] = useState(
+    initialValues.natureMesure
+  );
+  const [mesureStatus, changeMesureStatus] = useState(
+    initialValues.mesureStatus
+  );
   const [searchText, changeSearchText] = useState("");
 
   const debouncedSearchText = useDebounce(searchText, 1000);

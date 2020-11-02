@@ -41,7 +41,9 @@ const ListeBlancheSummary = () => {
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementIds: departement ? [departement] : departements.map((d) => d.id),
+      departementIds: departement
+        ? [departement]
+        : departements.map((d) => d.id),
     },
   });
 
@@ -67,7 +69,9 @@ const ListeBlancheSummary = () => {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>Une erreur est survenue, veuillez réessayer plus tard.</Heading4>
+        <Heading4>
+          Une erreur est survenue, veuillez réessayer plus tard.
+        </Heading4>
       </Card>
     );
   }

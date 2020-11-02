@@ -12,8 +12,8 @@ export const Provider = (props) => {
 
   const [filters, setFilters] = useState({
     departements: [],
-    startDate,
     endDate,
+    startDate,
   });
 
   const debounceFilters = useDebounce(filters, 2000);
@@ -56,11 +56,11 @@ export const Provider = (props) => {
   }
 
   const filtersContext = {
-    loading,
-    error,
-    filters,
     debounceFilters,
     departements: data ? data.departements : [],
+    error,
+    filters,
+    loading,
     onFilterChange,
   };
 

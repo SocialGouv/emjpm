@@ -18,7 +18,8 @@ export function useEnqueteFieldShowError({
   }
 
   hideErrorMessageIfPristine = useMemo(
-    () => (!hideErrorMessageIfPristine ? error === FORM_REQUIRED_MESSAGE : false),
+    () =>
+      !hideErrorMessageIfPristine ? error === FORM_REQUIRED_MESSAGE : false,
     [error, hideErrorMessageIfPristine]
   );
 

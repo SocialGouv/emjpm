@@ -42,12 +42,12 @@ TribunalAutoComplete.defaultProps = {
 };
 
 TribunalAutoComplete.propTypes = {
-  name: PropTypes.string,
-  value: PropTypes.object,
-  id: PropTypes.string,
-  hasError: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
   defaultOptions: PropTypes.arrayOf(PropTypes.object),
+  hasError: PropTypes.bool,
+  id: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.object,
 };
 
 export default TribunalAutoComplete;

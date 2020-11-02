@@ -29,16 +29,20 @@ export const MesureAccept = (props) => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
-    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
-      shallow: true,
-    });
+    Router.push(
+      `${userBasePath}/mesures/[mesure_id]`,
+      `${userBasePath}/mesures/${mesureId}`,
+      {
+        shallow: true,
+      }
+    );
   };
 
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
       await recalculateMesures({
-        variables: { mandataireId, serviceId },
         refetchQueries: ["CURRENT_USER_QUERY"],
+        variables: { mandataireId, serviceId },
       });
       redirectToMesure(mesure.id);
     },
@@ -54,8 +58,8 @@ export const MesureAccept = (props) => {
 
     if (values.pays === "FR") {
       const location = await getLocation(client, {
-        zipcode: values.code_postal,
         city: values.ville,
+        zipcode: values.code_postal,
       });
 
       if (!location || !location.department) {
@@ -84,33 +88,33 @@ export const MesureAccept = (props) => {
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.en_cours,
-            natureMesure: null,
-            antenne: null,
           },
         },
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.en_attente,
-            natureMesure: null,
-            antenne: null,
           },
         },
       ],
       variables: {
         ...variables,
+        antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
         date_nomination: values.date_nomination,
         id,
         lieu_vie: values.lieu_vie,
         pays: values.pays,
-        antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
       },
     });
     setSubmitting(false);

@@ -23,26 +23,32 @@ export const EnqueteServicePersonnelFormation = (props) => {
     enquete_reponse_ids: { personnel_formation_id },
   } = enqueteReponse;
 
-  const { data, loading } = useQuery(ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION, {
-    variables: {
-      id: personnel_formation_id,
-    },
-  });
+  const { data, loading } = useQuery(
+    ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION,
+    {
+      variables: {
+        id: personnel_formation_id,
+      },
+    }
+  );
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION,
-        variables: {
-          id: personnel_formation_id,
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION,
+          variables: {
+            id: personnel_formation_id,
+          },
+        },
+      ],
+    }
+  );
 
   const personnelFormation = data
     ? data.enquete_reponses_service_personnel_formation_by_pk || {}

@@ -1,11 +1,11 @@
-import { BuildingHouse } from '@styled-icons/boxicons-solid/BuildingHouse';
-import { Female } from '@styled-icons/fa-solid/Female';
-import { Male } from '@styled-icons/fa-solid/Male';
-import PropTypes from 'prop-types';
-import React, { Fragment } from 'react';
-import { Box, Flex } from 'rebass';
+import { BuildingHouse } from "@styled-icons/boxicons-solid/BuildingHouse";
+import { Female } from "@styled-icons/fa-solid/Female";
+import { Male } from "@styled-icons/fa-solid/Male";
+import PropTypes from "prop-types";
+import React, { Fragment } from "react";
+import { Box, Flex } from "rebass";
 
-import { Card, Text } from '../../core';
+import { Card, Text } from "../../core";
 import {
   availabilityIndicatorStyle,
   cardStyle,
@@ -17,7 +17,7 @@ import {
   MandatairelistStyle,
   subtitleStyle,
   titleStyle,
-} from './style';
+} from "./style";
 
 const Mandataire = (props) => {
   const {
@@ -44,16 +44,18 @@ const Mandataire = (props) => {
         <Flex sx={MandatairelistStyle}>
           <Flex>
             <Box alignSelf="center" my="1px" mr="1">
-              {type === 'service' ? (
+              {type === "service" ? (
                 <BuildingHouse size="24" />
               ) : (
-                <Fragment>{genre === 'F' ? <Female size="24" /> : <Male size="24" />}</Fragment>
+                <Fragment>
+                  {genre === "F" ? <Female size="24" /> : <Male size="24" />}
+                </Fragment>
               )}
               {isAvailable}
             </Box>
             <Box>
               <Text sx={titleStyle}>
-                {type === 'service' ? (
+                {type === "service" ? (
                   <Fragment>{etablissement}</Fragment>
                 ) : (
                   <Fragment>
@@ -89,14 +91,16 @@ const Mandataire = (props) => {
             <Flex sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>Disponibilité</Text>
               <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-                {currentAvailability === undefined ? 'NC' : currentAvailability}
+                {currentAvailability === undefined ? "NC" : currentAvailability}
               </Text>
             </Flex>
             <Flex sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>En cours / souhaitée</Text>
               <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-                {mesuresInProgress === 0 && dispoMax === 0 ? 'NC' : mesuresInProgress}/
-                {mesuresInProgress === 0 && dispoMax === 0 ? 'NC' : dispoMax}
+                {mesuresInProgress === 0 && dispoMax === 0
+                  ? "NC"
+                  : mesuresInProgress}
+                /{mesuresInProgress === 0 && dispoMax === 0 ? "NC" : dispoMax}
               </Text>
             </Flex>
 

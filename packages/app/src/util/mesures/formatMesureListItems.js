@@ -36,7 +36,9 @@ const formatMesureListItems = (mesureList) => {
         : null,
       id: id,
       isUrgent: is_urgent,
-      judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyy") : null,
+      judgmentDate: judgment_date
+        ? format(new Date(judgment_date), "dd/MM/yyy")
+        : null,
       lieuVie: formatter.formatLieuVie(lieu_vie),
       natureMesure: formatter.formatNatureMesure(nature_mesure),
       numeroDossier: numero_dossier ? numero_dossier : "-",

@@ -15,33 +15,21 @@ module.exports = async (enqueteReponse) => {
   };
 
   const status = {
-    tutelle: await getValidationStatus(get("tutelle"), {
+    curatelle_renforcee: await getValidationStatus(get("curatelle_renforcee"), {
+      debugName: `${debugGroupName}/curatelle_renforcee`,
       schema: tranches1a11(),
-      debugName: `${debugGroupName}/tutelle`,
-      logDataWithErrors: false,
-      logDataIfEmpty: true,
-      logData: true,
     }),
     curatelle_simple: await getValidationStatus(get("curatelle_simple"), {
-      schema: tranches1a11(),
       debugName: `${debugGroupName}/curatelle_simple`,
-    }),
-    curatelle_renforcee: await getValidationStatus(get("curatelle_renforcee"), {
       schema: tranches1a11(),
-      debugName: `${debugGroupName}/curatelle_renforcee`,
     }),
-    sauvegarde_autres_mesures: await getValidationStatus(
-      get("sauvegarde_autres_mesures"),
-      {
-        schema: tranches1a11(),
-        debugName: `${debugGroupName}/sauvegarde_autres_mesures`,
-      }
-    ),
     maj: await getValidationStatus(get("maj"), {
-      schema: tranches1a11(),
       debugName: `${debugGroupName}/maj`,
+      schema: tranches1a11(),
     }),
     repartition: await getValidationStatus(prestationsSociale, {
+      debugName: `${debugGroupName}/repartition`,
+      logDataWithErrors: false,
       schema: yup.object({
         aah: yup.number().min(0).nullable(),
         als_apl: yup.number().min(0).nullable(),
@@ -51,8 +39,20 @@ module.exports = async (enqueteReponse) => {
         pch: yup.number().min(0).nullable(),
         rsa: yup.number().min(0).nullable(),
       }),
-      debugName: `${debugGroupName}/repartition`,
+    }),
+    sauvegarde_autres_mesures: await getValidationStatus(
+      get("sauvegarde_autres_mesures"),
+      {
+        debugName: `${debugGroupName}/sauvegarde_autres_mesures`,
+        schema: tranches1a11(),
+      }
+    ),
+    tutelle: await getValidationStatus(get("tutelle"), {
+      debugName: `${debugGroupName}/tutelle`,
+      logData: true,
+      logDataIfEmpty: true,
       logDataWithErrors: false,
+      schema: tranches1a11(),
     }),
   };
 
@@ -63,6 +63,8 @@ module.exports = async (enqueteReponse) => {
 function tranches1a11() {
   return yup.object({
     tranche1: yup.number().min(0).nullable(),
+    tranche10: yup.number().min(0).nullable(),
+    tranche11: yup.number().min(0).nullable(),
     tranche2: yup.number().min(0).nullable(),
     tranche3: yup.number().min(0).nullable(),
     tranche4: yup.number().min(0).nullable(),
@@ -71,7 +73,5 @@ function tranches1a11() {
     tranche7: yup.number().min(0).nullable(),
     tranche8: yup.number().min(0).nullable(),
     tranche9: yup.number().min(0).nullable(),
-    tranche10: yup.number().min(0).nullable(),
-    tranche11: yup.number().min(0).nullable(),
   });
 }

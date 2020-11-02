@@ -12,7 +12,7 @@ const parseSheets = ({ content, parseOptions }) => {
 
 // https://github.com/SheetJS/sheetjs/issues/764
 function update_sheet_range(ws) {
-  var range = { s: { r: 20000000, c: 20000000 }, e: { r: 0, c: 0 } };
+  var range = { e: { c: 0, r: 0 }, s: { c: 20000000, r: 20000000 } };
   Object.keys(ws)
     .filter(function (x) {
       return x.charAt(0) != "!";
@@ -50,8 +50,8 @@ function _parseSheetByName(worksheet) {
 }
 
 const excelParser = {
-  parseSheets,
   parseSheetByIndex,
+  parseSheets,
 };
 
 module.exports = excelParser;

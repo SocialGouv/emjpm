@@ -36,12 +36,15 @@ export const Provider = (props) => {
   //   }
   // }
 
-  const { data: departementsData, loading, error } = useQuery(GET_DEPARTEMENTS, {
-    onCompleted: (result) => {
-      setDepartements(result ? result.departements : []);
-      setSelectedDepartements(result ? result.departements : []);
-    },
-  });
+  const { data: departementsData, loading, error } = useQuery(
+    GET_DEPARTEMENTS,
+    {
+      onCompleted: (result) => {
+        setDepartements(result ? result.departements : []);
+        setSelectedDepartements(result ? result.departements : []);
+      },
+    }
+  );
 
   // Use State to keep the values
   const [selectedDepartements, setSelectedDepartements] = useState([]);
@@ -60,31 +63,33 @@ export const Provider = (props) => {
     if (option.value === null) {
       setSelectedDepartements(departementsData.departements);
     } else {
-      const departements = departementsData.departements.filter((item) => item.id === option.value);
+      const departements = departementsData.departements.filter(
+        (item) => item.id === option.value
+      );
       setSelectedDepartements(departements);
     }
   }
 
   // Make the context object:
   const filtersContext = {
-    loading,
-    error,
+    changeSearchNom,
+    changeSearchPrenom,
+    changeSearchSiret,
+    debouncedSearchNom,
+    debouncedSearchPrenom,
+    debouncedSearchSiret,
+    departementFinanceur,
     departements,
-    searchDepartement,
+    error,
     filterDepartement,
+    loading,
+    searchDepartement,
+    searchPrenom,
+    searchSiret,
+    selectType,
     selectedDepartements,
     selectedType,
-    selectType,
-    changeSearchNom,
-    debouncedSearchNom,
-    departementFinanceur,
     toogleDepartementFinanceur,
-    searchSiret,
-    changeSearchSiret,
-    debouncedSearchSiret,
-    searchPrenom,
-    changeSearchPrenom,
-    debouncedSearchPrenom,
   };
 
   // pass the value in provider and return

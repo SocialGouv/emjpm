@@ -17,7 +17,9 @@ import {
 const ServiceMemberInvitations = (props) => {
   const { service, isAdmin } = props;
 
-  const [deleteServiceMemberInvitation] = useMutation(DELETE_SERVICE_MEMBER_INVITATION);
+  const [deleteServiceMemberInvitation] = useMutation(
+    DELETE_SERVICE_MEMBER_INVITATION
+  );
   const { loading, error, data } = useQuery(SERVICE_MEMBER_INVITATIONS, {
     variables: { serviceId: service.id },
   });
@@ -50,11 +52,17 @@ const ServiceMemberInvitations = (props) => {
               <Flex sx={listStyle} index={i} key={invitation.id}>
                 <Box sx={listEmailStyle}>{invitation.email}</Box>
                 <Text sx={listDateStyle}>
-                  {`Invité le ${format(new Date(invitation.created_at), "dd/MM/yyyy")}`}
+                  {`Invité le ${format(
+                    new Date(invitation.created_at),
+                    "dd/MM/yyyy"
+                  )}`}
                 </Text>
                 <Box sx={listActionsStyle}>
                   {isAdmin && (
-                    <Box sx={listActionStyle} onClick={() => handleDelete(invitation.id)}>
+                    <Box
+                      sx={listActionStyle}
+                      onClick={() => handleDelete(invitation.id)}
+                    >
                       {`Supprimer l'invitation`}
                     </Box>
                   )}

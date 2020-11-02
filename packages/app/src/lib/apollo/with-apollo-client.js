@@ -22,7 +22,12 @@ const WithApolloClient = (App) => {
         try {
           // Run all GraphQL queries
           await getDataFromTree(
-            <App {...appProps} Component={Component} router={router} apolloClient={apollo} />
+            <App
+              {...appProps}
+              Component={Component}
+              router={router}
+              apolloClient={apollo}
+            />
           );
         } catch (error) {
           // Prevent Apollo Client GraphQL errors from crashing SSR.
@@ -30,7 +35,9 @@ const WithApolloClient = (App) => {
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           console.error("Error while running `getDataFromTree`", error);
           console.error(
-            `Error while running "getDataFromTree" on ${Component.displayName} with appProps ${
+            `Error while running "getDataFromTree" on ${
+              Component.displayName
+            } with appProps ${
               appProps ? safeStringify(appProps) : ""
             } and context ${ctx ? safeStringify(ctx) : ""}`,
             error

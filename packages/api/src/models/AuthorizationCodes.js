@@ -14,16 +14,16 @@ class AuthorizationCodes extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
-        created_at: { type: "string" },
-        code: { type: "string" },
-        redirect_uri: { type: "string" },
         client_id: { type: "integer" },
-        user_id: { type: "integer" },
+        code: { type: "string" },
+        created_at: { type: "string" },
         expiresAt: { type: "string" },
+        id: { type: "integer" },
+        redirect_uri: { type: "string" },
+        user_id: { type: "integer" },
       },
+      type: "object",
     };
   }
 }

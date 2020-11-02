@@ -8,15 +8,15 @@ const { Editors } = require("../../models/Editors");
 
 const generateToken = (editorId, editorToken, redirectUrl, userId, uid) => {
   const signOptions = {
-    subject: uid,
     algorithm: "RS256",
+    subject: uid,
   };
   const claim = {
-    url: redirectUrl,
-    uid: uid,
-    userId: userId,
     editorId: editorId,
     editorToken: editorToken,
+    uid: uid,
+    url: redirectUrl,
+    userId: userId,
   };
   return jwt.sign(claim, jwtConfig.key, signOptions);
 };
@@ -55,11 +55,11 @@ const authorize = async (req, res) => {
       });
 
     await AccessToken.query().insert({
-      user_id: userId,
+      access_token: uid,
       editor_id: editorId,
       editor_url: redirectUrl,
-      access_token: uid,
       expired: false,
+      user_id: userId,
     });
   } catch (error) {
     logger.error(error);

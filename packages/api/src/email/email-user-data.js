@@ -9,9 +9,9 @@ const getEmailUserDatas = async (mandataire_id, service_id) => {
     const [currentUser] = await User.query().where("id", mandataire.user_id);
     return [
       {
-        mesures_en_cours: mandataire.mesures_en_cours,
         dispo_max: mandataire.dispo_max,
         email: currentUser.email,
+        mesures_en_cours: mandataire.mesures_en_cours,
       },
     ];
   } else {
@@ -23,9 +23,9 @@ const getEmailUserDatas = async (mandataire_id, service_id) => {
     const userIds = serviceAdmins.map((sa) => sa.user_id);
     const users = await User.query().findByIds(userIds);
     return users.map((user) => ({
-      mesures_en_cours: service.mesures_in_progress,
       dispo_max: service.dispo_max,
       email: user.email,
+      mesures_en_cours: service.mesures_in_progress,
     }));
   }
 };

@@ -53,11 +53,11 @@ export const ServiceCreate = (props) => {
           department_id: department.id,
           email: values.email,
           etablissement: values.etablissement,
-          telephone: values.telephone,
-          ville: values.geocode.city,
           latitude: values.geocode.latitude,
           longitude: values.geocode.longitude,
           siret: values.siret,
+          telephone: values.telephone,
+          ville: values.geocode.city,
         },
       });
 

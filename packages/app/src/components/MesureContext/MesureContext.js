@@ -2,9 +2,9 @@ import { useQuery } from "@apollo/react-hooks";
 import { format } from "date-fns";
 import React, { createContext, Fragment } from "react";
 
-export const Context = createContext({});
-
 import { MESURE_CONTEXT_QUERY } from "./queries";
+
+export const Context = createContext({});
 
 export const Provider = (props) => {
   const { children, mesureId } = props;
@@ -60,34 +60,38 @@ function formatMesure(mesure) {
   const currentYear = new Date().getFullYear();
 
   return {
-    latitude: latitude,
-    mandataireId: mandataire_id,
-    serviceId: service_id,
-    longitude: longitude,
-    departementId: departement ? departement.id : null,
     age: annee_naissance ? annee_naissance : "nc",
-    realAge: annee_naissance ? currentYear - annee_naissance : "nc",
     antenne: service_antenne ? service_antenne.name : null,
+    antenneId: antenne_id,
     cabinet: cabinet ? cabinet : null,
+    champMesure: champ_mesure ? champ_mesure : "",
     civilite: civilite ? civilite : null,
     codePostal: code_postal ? code_postal : "",
     dateNomination: date_nomination ? date_nomination : "",
-    dateNominationFormated: date_nomination ? format(new Date(date_nomination), "dd/MM/yyyy") : "",
+    dateNominationFormated: date_nomination
+      ? format(new Date(date_nomination), "dd/MM/yyyy")
+      : "",
+    departementId: departement ? departement.id : null,
     id: id,
-    antenneId: antenne_id,
     isUrgent: is_urgent,
-    service: { service_id: service_id },
+    judgmentDate: judgment_date
+      ? format(new Date(judgment_date), "dd/MM/yyyy")
+      : "",
+    latitude: latitude,
+    lieuVie: lieu_vie ? lieu_vie : "",
+    longitude: longitude,
     mandataire: { mandataire_id: mandataire_id },
-    judgmentDate: judgment_date ? format(new Date(judgment_date), "dd/MM/yyyy") : "",
+    mandataireId: mandataire_id,
+    natureMesure: nature_mesure ? nature_mesure : "",
     numeroDossier: numero_dossier ? numero_dossier : "",
     numeroRg: numero_rg ? numero_rg : "",
-    lieuVie: lieu_vie ? lieu_vie : "",
+    pays,
+    realAge: annee_naissance ? currentYear - annee_naissance : "nc",
+    service: { service_id: service_id },
+    serviceId: service_id,
     status: status ? currentStatus : "",
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal ",
-    natureMesure: nature_mesure ? nature_mesure : "",
-    champMesure: champ_mesure ? champ_mesure : "",
     ville: ville ? ville : "ville ",
-    pays,
   };
 }

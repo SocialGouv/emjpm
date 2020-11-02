@@ -12,10 +12,14 @@ const MandatairesSubNavigation = ({ router, ...props }) => {
       <Flex>
         <LinkButton href="/direction">Vue globale</LinkButton>
         <Box ml="1">
-          <LinkButton href="/direction/mandataires/list">Vue détaillée</LinkButton>
+          <LinkButton href="/direction/mandataires/list">
+            Vue détaillée
+          </LinkButton>
         </Box>
       </Flex>
-      {router.pathname === "/direction/mandataires/list" && <MandatairesExport />}
+      {router.pathname === "/direction/mandataires/list" && (
+        <MandatairesExport />
+      )}
     </Flex>
   );
 };

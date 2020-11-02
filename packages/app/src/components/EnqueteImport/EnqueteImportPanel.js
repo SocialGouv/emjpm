@@ -9,8 +9,8 @@ import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 
 const textStyle = {
-  textAlign: "center",
   lineHeight: "30px",
+  textAlign: "center",
 };
 
 export const EnqueteImportPanel = (props) => {
@@ -49,7 +49,8 @@ export const EnqueteImportPanel = (props) => {
   if (uploading) {
     return (
       <Box p={4}>
-        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez patienter...
+        <LoaderCircle size="16" /> Traitement du fichier en cours, veuillez
+        patienter...
       </Box>
     );
   }
@@ -81,7 +82,8 @@ export const EnqueteImportPanel = (props) => {
           )}
           {enqueteReponse &&
             enqueteReponse.enquete_reponse_validation_status &&
-            enqueteReponse.enquete_reponse_validation_status.global !== "empty" && (
+            enqueteReponse.enquete_reponse_validation_status.global !==
+              "empty" && (
               <Box mt={2} mb={2} fontWeight="bold">
                 Attention, les données déjà renseignée seront écrasées.
               </Box>
@@ -102,8 +104,8 @@ function renderSectionTitle(enqueteId, goToStep) {
       <Flex
         sx={{
           color: "#007AD9",
-          fontWeight: "bold",
           cursor: "pointer",
+          fontWeight: "bold",
         }}
         alignItems="center"
         onClick={() => goToStep(enqueteId, { step: 1, substep: 0 })}

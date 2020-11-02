@@ -79,9 +79,12 @@ export const formatMandataire = (
   } else {
     currentDiscriminator = {
       adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "",
-      codePostal: mandataire.code_postal ? capitalize(mandataire.code_postal) : "",
+      codePostal: mandataire.code_postal
+        ? capitalize(mandataire.code_postal)
+        : "",
       competences: mandataire.competences || "",
-      email: mandataire.user && mandataire.user.email ? mandataire.user.email : "",
+      email:
+        mandataire.user && mandataire.user.email ? mandataire.user.email : "",
       genre: mandataire.genre ? mandataire.genre : "F",
       id: id,
       lastLogin:
@@ -89,12 +92,20 @@ export const formatMandataire = (
           ? formatLastLogin(mandataire.user.last_login)
           : "",
       lastLoginIsCritical:
-        mandataire.user && mandataire.user.last_login && isCriticalDate(mandataire.user.last_login),
+        mandataire.user &&
+        mandataire.user.last_login &&
+        isCriticalDate(mandataire.user.last_login),
       latitude: mandataire.latitude || null,
       longitude: mandataire.longitude || null,
       mandataireId: mandataire.id,
-      nom: mandataire.user && mandataire.user.nom ? capitalize(mandataire.user.nom) : "",
-      prenom: mandataire.user && mandataire.user.prenom ? capitalize(mandataire.user.prenom) : "",
+      nom:
+        mandataire.user && mandataire.user.nom
+          ? capitalize(mandataire.user.nom)
+          : "",
+      prenom:
+        mandataire.user && mandataire.user.prenom
+          ? capitalize(mandataire.user.prenom)
+          : "",
       telephone: mandataire.telephone,
       ville: mandataire.ville ? capitalize(mandataire.ville) : "",
     };

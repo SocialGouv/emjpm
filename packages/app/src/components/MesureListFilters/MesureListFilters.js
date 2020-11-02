@@ -3,7 +3,10 @@ import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { DEFAULT_MESURE_NATURE, MESURE_STATUS_LABEL_VALUE } from "../../constants/mesures";
+import {
+  DEFAULT_MESURE_NATURE,
+  MESURE_STATUS_LABEL_VALUE,
+} from "../../constants/mesures";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
@@ -52,7 +55,9 @@ const MesureListFilters = (props) => {
             <Box width="200px" mr={1}>
               <Select
                 size="small"
-                options={[DEFAULT_MESURE_NATURE].concat(MESURE_PROTECTION.NATURE_MESURE.options)}
+                options={[DEFAULT_MESURE_NATURE].concat(
+                  MESURE_PROTECTION.NATURE_MESURE.options
+                )}
                 placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}

@@ -15,17 +15,17 @@ const serviceInformationsStatus = require("./service-informations/enqueteService
 const servicePersonnelFormationStatus = require("./service-personnel-formation/enqueteServicePersonnelFormationStatus");
 
 module.exports = {
-  getTopLevelGlobalStatus,
-  getGlobalStatus,
-  getValidationStatus,
   enqueteActiviteStatus,
   enqueteInformationsMandatairesStatus,
-  populationsStatus,
-  prestationsSocialesStatus,
   enqueteModalitesExerciceStatus,
+  getGlobalStatus,
+  getTopLevelGlobalStatus,
+  getValidationStatus,
+  populationsStatus,
+  preposeFinancementStatus,
   preposePersonnelFormationStatus,
   preposePrestationsSocialesStatus,
-  preposeFinancementStatus,
+  prestationsSocialesStatus,
   serviceInformationsStatus,
   servicePersonnelFormationStatus,
 };

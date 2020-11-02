@@ -3,7 +3,10 @@ import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 
-import { AdminEditorRequest, AdminEditors } from "../../../src/components/AdminEditors";
+import {
+  AdminEditorRequest,
+  AdminEditors,
+} from "../../../src/components/AdminEditors";
 import { AdminFilterBar } from "../../../src/components/AdminFilterBar";
 import { AdminFilterProvider } from "../../../src/components/AdminFilterBar/context";
 import { LayoutAdmin } from "../../../src/components/Layout";
@@ -21,7 +24,9 @@ const AdminEditorsPage = () => {
               mt: "2",
             }}
           >
-            <AdminFilterBar onAddButtonClick={() => Router.push("/admin/editors/create ")} />
+            <AdminFilterBar
+              onAddButtonClick={() => Router.push("/admin/editors/create ")}
+            />
             <AdminEditors />
             <AdminEditorRequest />
           </Flex>

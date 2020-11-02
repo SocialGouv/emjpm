@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box } from "rebass";
 
-import { Card, Heading0, Heading4, Spinner } from '../../core';
-import { IndicatorTextStyle } from './style';
+import { Card, Heading0, Heading4, Spinner } from "../../core";
+import { IndicatorTextStyle } from "./style";
 
 const Indicator = (props) => {
   const { error, loading, indicator, title } = props;
@@ -30,7 +30,12 @@ const Indicator = (props) => {
   }
 
   return (
-    <Card justifyContent="space-between" flexDirection="column" display="flex" height="100%">
+    <Card
+      justifyContent="space-between"
+      flexDirection="column"
+      display="flex"
+      height="100%"
+    >
       <Heading4>{title}</Heading4>
       <Heading0 sx={IndicatorTextStyle(indicator < 0)}>{indicator}</Heading0>
     </Card>

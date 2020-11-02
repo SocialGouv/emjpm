@@ -52,12 +52,12 @@ async function checkImportMesuresParameters(req) {
   }
 
   const importMesuresParameters = {
+    antennesMap: antennesMap ? JSON.parse(antennesMap) : undefined,
     file: {
       content,
       type: name.endsWith(".xls") || name.endsWith(".xlsx") ? "xls" : "csv",
     },
     importContext,
-    antennesMap: antennesMap ? JSON.parse(antennesMap) : undefined,
   };
   return importMesuresParameters;
 }

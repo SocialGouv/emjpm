@@ -38,12 +38,12 @@ async function enqueteMandatairePreposeStatus(enqueteReponse) {
     statusBuildContext
   );
   const status = {
-    modalitesExercice,
     activite,
-    populations,
-    personnelFormation,
-    prestationsSociales,
     financement,
+    modalitesExercice,
+    personnelFormation,
+    populations,
+    prestationsSociales,
   };
 
   status.global = getTopLevelGlobalStatus(status);

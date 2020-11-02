@@ -1,6 +1,14 @@
 import { useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading3, Heading5, InlineError, Input, Select } from "@emjpm/ui";
+import {
+  Button,
+  Field,
+  Heading3,
+  Heading5,
+  InlineError,
+  Input,
+  Select,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { useContext } from "react";
@@ -13,42 +21,58 @@ import { EDIT_MESURE } from "./mutations";
 import { MagistratMesureEditStyle } from "./style";
 
 export const MagistratMesureEdit = () => {
-  const { id, age, civilite, numeroRg, natureMesure, champMesure, cabinet } = useContext(
-    MesureContext
-  );
+  const {
+    id,
+    age,
+    civilite,
+    numeroRg,
+    natureMesure,
+    champMesure,
+    cabinet,
+  } = useContext(MesureContext);
   const [updateMesure] = useMutation(EDIT_MESURE, {
     onCompleted() {
-      Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
-        shallow: true,
-      });
+      Router.push(
+        "/magistrats/mesures/[mesure_id]",
+        `/magistrats/mesures/${id}`,
+        {
+          shallow: true,
+        }
+      );
     },
   });
 
   const formik = useFormik({
+    initialValues: {
+      annee_naissance: age,
+      cabinet: cabinet ? cabinet : "",
+      champ_mesure: findOption(
+        MESURE_PROTECTION.CHAMP_MESURE.options,
+        champMesure
+      ),
+      civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
+      nature_mesure: findOption(
+        MESURE_PROTECTION.NATURE_MESURE.options,
+        natureMesure
+      ),
+      numero_rg: numeroRg,
+    },
     onSubmit: async (values, { setSubmitting }) => {
       await updateMesure({
         variables: {
           annee_naissance: values.annee_naissance,
           cabinet: values.cabinet,
+          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
           civilite: values.civilite.value,
           id: id,
-          numero_rg: values.numero_rg,
           nature_mesure: values.nature_mesure.value,
-          champ_mesure: values.champ_mesure ? values.champ_mesure.value : null,
+          numero_rg: values.numero_rg,
         },
       });
 
       setSubmitting(false);
     },
     validationSchema: magistratMesureEditSchema,
-    initialValues: {
-      annee_naissance: age,
-      cabinet: cabinet ? cabinet : "",
-      civilite: findOption(MESURE_PROTECTION.CIVILITE.options, civilite),
-      numero_rg: numeroRg,
-      nature_mesure: findOption(MESURE_PROTECTION.NATURE_MESURE.options, natureMesure),
-      champ_mesure: findOption(MESURE_PROTECTION.CHAMP_MESURE.options, champMesure),
-    },
   });
 
   return (
@@ -73,11 +97,18 @@ export const MagistratMesureEdit = () => {
               name="nature_mesure"
               placeholder="Nature de la mesure"
               value={formik.values.nature_mesure}
-              hasError={formik.errors.nature_mesure && formik.touched.nature_mesure}
-              onChange={(option) => formik.setFieldValue("nature_mesure", option)}
+              hasError={
+                formik.errors.nature_mesure && formik.touched.nature_mesure
+              }
+              onChange={(option) =>
+                formik.setFieldValue("nature_mesure", option)
+              }
               options={MESURE_PROTECTION.NATURE_MESURE.options}
             />
-            <InlineError message={formik.errors.nature_mesure} fieldId="nature_mesure" />
+            <InlineError
+              message={formik.errors.nature_mesure}
+              fieldId="nature_mesure"
+            />
           </Field>
           <Field>
             <Select
@@ -85,12 +116,19 @@ export const MagistratMesureEdit = () => {
               name="champ_mesure"
               placeholder="Champ de la mesure"
               value={formik.values.champ_mesure}
-              hasError={formik.errors.champ_mesure && formik.touched.champ_mesure}
-              onChange={(option) => formik.setFieldValue("champ_mesure", option)}
+              hasError={
+                formik.errors.champ_mesure && formik.touched.champ_mesure
+              }
+              onChange={(option) =>
+                formik.setFieldValue("champ_mesure", option)
+              }
               isClearable={true}
               options={MESURE_PROTECTION.CHAMP_MESURE.options}
             />
-            <InlineError message={formik.errors.champ_mesure} fieldId="champ_mesure" />
+            <InlineError
+              message={formik.errors.champ_mesure}
+              fieldId="champ_mesure"
+            />
           </Field>
           <Field>
             <Select
@@ -109,11 +147,16 @@ export const MagistratMesureEdit = () => {
               value={formik.values.annee_naissance}
               id="annee_naissance"
               name="annee_naissance"
-              hasError={formik.errors.annee_naissance && formik.touched.annee_naissance}
+              hasError={
+                formik.errors.annee_naissance && formik.touched.annee_naissance
+              }
               onChange={formik.handleChange}
               placeholder="Année de naissance"
             />
-            <InlineError message={formik.errors.annee_naissance} fieldId="annee_naissance" />
+            <InlineError
+              message={formik.errors.annee_naissance}
+              fieldId="annee_naissance"
+            />
           </Field>
           <Field>
             <Input
@@ -124,7 +167,10 @@ export const MagistratMesureEdit = () => {
               onChange={formik.handleChange}
               placeholder="Numéro RG"
             />
-            <InlineError message={formik.errors.numero_rg} fieldId="numero_rg" />
+            <InlineError
+              message={formik.errors.numero_rg}
+              fieldId="numero_rg"
+            />
           </Field>
           <Field>
             <Input
@@ -143,16 +189,24 @@ export const MagistratMesureEdit = () => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, {
-                    shallow: true,
-                  });
+                  Router.push(
+                    "/magistrats/mesures/[mesure_id]",
+                    `/magistrats/mesures/${id}`,
+                    {
+                      shallow: true,
+                    }
+                  );
                 }}
               >
                 Annuler
               </Button>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Enregistrer
               </Button>
             </Box>

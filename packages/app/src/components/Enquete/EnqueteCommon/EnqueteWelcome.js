@@ -9,8 +9,8 @@ import { isIndividuel, isPrepose, isService } from "../../../util";
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
 const textStyle = {
-  textAlign: "center",
   lineHeight: "30px",
+  textAlign: "center",
 };
 
 const downloadStyle = { color: "blue", textDecoration: "underline" };
@@ -27,7 +27,12 @@ const getExcelName = (type) => {
   }
 };
 
-export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPrefix }) => {
+export const EnqueteWelcome = ({
+  goToFirstPage,
+  enquete,
+  enqueteReponse,
+  pathPrefix,
+}) => {
   const { id: enqueteId } = enquete;
 
   const { type } = useContext(UserContext);
@@ -43,7 +48,10 @@ export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPre
           <Text sx={{ fontWeight: "700" }}>
             jusqu’au {format(new Date(enquete.date_fin), "dd/MM/yyyy")}.
           </Text>
-          <Text>Vous pouvez appuyer sur la touche tab pour passer d’un champ à un autre.</Text>
+          <Text>
+            Vous pouvez appuyer sur la touche tab pour passer d’un champ à un
+            autre.
+          </Text>
         </Flex>
         <Button onClick={() => goToFirstPage()} mx="auto">
           Répondre
@@ -53,7 +61,9 @@ export const EnqueteWelcome = ({ goToFirstPage, enquete, enqueteReponse, pathPre
         <Box mt="4" sx={textStyle}>
           <Text as="span">{`Vous avez déjà rempli le `}</Text>
           <Text as="span" sx={downloadStyle}>
-            <a href={`/static/docs/enquetes/${getExcelName(type)}`}>{`fichier excel`}</a>
+            <a
+              href={`/static/docs/enquetes/${getExcelName(type)}`}
+            >{`fichier excel`}</a>
           </Text>
 
           <Text as="span">{` envoyé par votre direction départementale?`}</Text>

@@ -19,17 +19,17 @@ const ServiceAntenneForm = (props) => {
   const geocode = geocodeInitialValue(antenne);
 
   const formik = useFormik({
-    onSubmit: handleSubmit,
-    validationSchema: serviceAntenneSchema,
     initialValues: {
       contact_email: contact_email || "",
       contact_firstname: contact_firstname || "",
       contact_lastname: contact_lastname || "",
       contact_phone: contact_phone || "",
+      geocode,
       mesures_max: mesures_max || "",
       name: name || "",
-      geocode,
     },
+    onSubmit: handleSubmit,
+    validationSchema: serviceAntenneSchema,
   });
 
   return (
@@ -50,22 +50,32 @@ const ServiceAntenneForm = (props) => {
           value={formik.values.contact_lastname}
           id="contact_lastname"
           name="contact_lastname"
-          hasError={formik.errors.contact_lastname && formik.touched.contact_lastname}
+          hasError={
+            formik.errors.contact_lastname && formik.touched.contact_lastname
+          }
           onChange={formik.handleChange}
           placeholder="Nom du responsable"
         />
-        <InlineError message={formik.errors.contact_lastname} fieldId="contact_lastname" />
+        <InlineError
+          message={formik.errors.contact_lastname}
+          fieldId="contact_lastname"
+        />
       </Field>
       <Field>
         <Input
           value={formik.values.contact_firstname}
           id="contact_firstname"
           name="contact_firstname"
-          hasError={formik.errors.contact_firstname && formik.touched.contact_firstname}
+          hasError={
+            formik.errors.contact_firstname && formik.touched.contact_firstname
+          }
           onChange={formik.handleChange}
           placeholder="Prénom du responsable"
         />
-        <InlineError message={formik.errors.contact_firstname} fieldId="contact_firstname" />
+        <InlineError
+          message={formik.errors.contact_firstname}
+          fieldId="contact_firstname"
+        />
       </Field>
       <Field>
         <Input
@@ -76,7 +86,10 @@ const ServiceAntenneForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Mesures maximum"
         />
-        <InlineError message={formik.errors.mesures_max} fieldId="mesures_max" />
+        <InlineError
+          message={formik.errors.mesures_max}
+          fieldId="mesures_max"
+        />
       </Field>
       <Field>
         <Input
@@ -87,7 +100,10 @@ const ServiceAntenneForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Numéro de téléphone"
         />
-        <InlineError message={formik.errors.contact_phone} fieldId="contact_phone" />
+        <InlineError
+          message={formik.errors.contact_phone}
+          fieldId="contact_phone"
+        />
       </Field>
       <Field>
         <Input
@@ -98,7 +114,10 @@ const ServiceAntenneForm = (props) => {
           onChange={formik.handleChange}
           placeholder="Adresse email"
         />
-        <InlineError message={formik.errors.contact_email} fieldId="contact_email" />
+        <InlineError
+          message={formik.errors.contact_email}
+          fieldId="contact_email"
+        />
       </Field>
       <Field>
         <Geocode
@@ -108,7 +127,11 @@ const ServiceAntenneForm = (props) => {
         <InlineError message={formik.errors.geocode} fieldId="geocode" />
       </Field>
       <Box>
-        <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+        <Button
+          type="submit"
+          disabled={formik.isSubmitting}
+          isLoading={formik.isSubmitting}
+        >
           Enregistrer
         </Button>
       </Box>

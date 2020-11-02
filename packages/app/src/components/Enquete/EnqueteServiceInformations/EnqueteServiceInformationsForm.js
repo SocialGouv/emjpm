@@ -11,23 +11,27 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 function dataToForm(data) {
   return {
-    nom: formatFormInput(data.nom),
-    departement: formatFormInput(data.departement),
-    region: formatFormInput(data.region),
-    type_organisme_gestionnaire: formatFormInput(data.type_organisme_gestionnaire),
-    nb_structures_concernees: formatFormInput(data.nb_structures_concernees),
     affiliation_federation: formatFormInput(data.affiliation_federation),
+    departement: formatFormInput(data.departement),
+    nb_structures_concernees: formatFormInput(data.nb_structures_concernees),
+    nom: formatFormInput(data.nom),
+    region: formatFormInput(data.region),
+    type_organisme_gestionnaire: formatFormInput(
+      data.type_organisme_gestionnaire
+    ),
   };
 }
 
 function formToData(data) {
   return {
-    nom: parseFormInput(data.nom),
-    departement: parseFormInput(data.departement),
-    region: parseFormInput(data.region),
-    type_organisme_gestionnaire: parseFormInput(data.type_organisme_gestionnaire),
-    nb_structures_concernees: parseFormInt(data.nb_structures_concernees),
     affiliation_federation: parseFormInput(data.affiliation_federation),
+    departement: parseFormInput(data.departement),
+    nb_structures_concernees: parseFormInt(data.nb_structures_concernees),
+    nom: parseFormInput(data.nom),
+    region: parseFormInput(data.region),
+    type_organisme_gestionnaire: parseFormInput(
+      data.type_organisme_gestionnaire
+    ),
   };
 }
 
@@ -42,21 +46,21 @@ export const EnqueteServiceInformationsForm = (props) => {
   } = props;
 
   const validationSchema = yup.object().shape({
-    nom: yup.string().required(),
     departement: yup.string().required(),
+    nom: yup.string().required(),
     region: yup.string().required(),
   });
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

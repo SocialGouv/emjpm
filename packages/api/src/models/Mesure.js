@@ -19,44 +19,43 @@ class Mesure extends Model {
 
   static get relationMappings() {
     return {
-      service: {
-        relation: Model.HasOneRelation,
-        modelClass: Service,
-        join: {
-          from: "mesures.service_id",
-          to: "services.id",
-        },
-      },
-      tis: {
-        relation: Model.HasOneRelation,
-        modelClass: Tis,
-        join: {
-          from: "mesures.ti_id",
-          to: "tis.id",
-        },
-      },
       etats: {
-        relation: Model.HasManyRelation,
-        modelClass: MesureEtat,
         join: {
           from: "mesures.id",
           to: "mesure_etat.mesure_id",
         },
+        modelClass: MesureEtat,
+        relation: Model.HasManyRelation,
       },
       ressources: {
-        relation: Model.HasManyRelation,
-        modelClass: MesureRessources,
         join: {
           from: "mesures.id",
           to: "mesure_ressources.mesure_id",
         },
+        modelClass: MesureRessources,
+        relation: Model.HasManyRelation,
+      },
+      service: {
+        join: {
+          from: "mesures.service_id",
+          to: "services.id",
+        },
+        modelClass: Service,
+        relation: Model.HasOneRelation,
+      },
+      tis: {
+        join: {
+          from: "mesures.ti_id",
+          to: "tis.id",
+        },
+        modelClass: Tis,
+        relation: Model.HasOneRelation,
       },
     };
   }
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         annee_naissance: { type: ["string", null] },
         antenne_id: { type: ["integer", null] },
@@ -85,13 +84,14 @@ class Mesure extends Model {
         numero_dossier: { type: ["string", null] },
         numero_rg: { type: ["string", null] },
         pays: { type: "string" },
+        resultat_revision: { type: ["string", null] },
         service_id: { type: ["integer", null] },
         status: { type: ["string", null] },
         ti_id: { type: ["integer", null] },
         type_etablissement: { type: ["string", null] },
         ville: { type: ["string", null] },
-        resultat_revision: { type: ["string", null] },
       },
+      type: "object",
     };
   }
 }

@@ -21,10 +21,12 @@ const MagistratMesures = () => {
   }, [natureMesure, debouncedSearchText]);
 
   const queryVariables = {
+    natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,
     searchText:
-      debouncedSearchText && debouncedSearchText !== "" ? `${debouncedSearchText}%` : null,
-    natureMesure: natureMesure ? natureMesure.value : null,
+      debouncedSearchText && debouncedSearchText !== ""
+        ? `${debouncedSearchText}%`
+        : null,
   };
 
   const { data, error, loading } = useQuery(MAGISTRAT_MESURES_QUERY, {
@@ -32,7 +34,11 @@ const MagistratMesures = () => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push("/magistrats/mesures/[mesure_id]", `/magistrats/mesures/${id}`, { shallow: true });
+    Router.push(
+      "/magistrats/mesures/[mesure_id]",
+      `/magistrats/mesures/${id}`,
+      { shallow: true }
+    );
   };
 
   if (loading) {

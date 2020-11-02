@@ -6,8 +6,9 @@ export const ENQ_REP_MODALITE_EXERCICE = {
     service: "Un service au sens de l'article L312-1 du CASF",
   }),
   ETABLISSEMENTS_TYPE: enqueteKeysBuilder.buildKeys({
-    "personne-morale": "Un ou plusieurs établissements dépendant de la même personne morale.",
     "convention-groupement":
       "Plusieurs établissements dans le cadre d'une convention ou d'un groupement (SIH, GCS, GCSMS, GIP).",
+    "personne-morale":
+      "Un ou plusieurs établissements dépendant de la même personne morale.",
   }),
 };

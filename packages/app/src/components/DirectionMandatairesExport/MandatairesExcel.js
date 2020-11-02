@@ -20,21 +20,33 @@ const getMandataireRows = (datas, type) => {
   return datas
     .filter((user) => user.type === type)
     .map((data) => {
-      const inProgress = data.mandataire ? data.mandataire.mesures_en_cours : undefined;
-      const awaiting = data.mandataire ? data.mandataire.mesures_en_attente : undefined;
+      const inProgress = data.mandataire
+        ? data.mandataire.mesures_en_cours
+        : undefined;
+      const awaiting = data.mandataire
+        ? data.mandataire.mesures_en_attente
+        : undefined;
       const max = data.mandataire ? data.mandataire.dispo_max : undefined;
       return {
-        Adresse: cellValue(data.mandataire ? data.mandataire.adresse : undefined),
-        "Code postal": cellValue(data.mandataire ? data.mandataire.code_postal : undefined),
+        Adresse: cellValue(
+          data.mandataire ? data.mandataire.adresse : undefined
+        ),
+        "Code postal": cellValue(
+          data.mandataire ? data.mandataire.code_postal : undefined
+        ),
         "Disponibilité actuelle": remainingCapacity(max, awaiting, inProgress),
         "Disponibilité max": cellValue(max),
         Genre: cellValue(data.mandataire ? data.mandataire.genre : undefined),
         "Mesures en attente": cellValue(awaiting),
         "Mesures en cours": cellValue(inProgress),
         Nom: cellValue(data.nom),
-        Portable: cellValue(data.mandataire ? data.mandataire.portable : undefined),
+        Portable: cellValue(
+          data.mandataire ? data.mandataire.portable : undefined
+        ),
         Prénom: cellValue(data.prenom),
-        Télephone: cellValue(data.mandataire ? data.mandataire.telephone : undefined),
+        Télephone: cellValue(
+          data.mandataire ? data.mandataire.telephone : undefined
+        ),
         Ville: cellValue(data.mandataire ? data.mandataire.ville : undefined),
       };
     });
@@ -78,10 +90,14 @@ const writeSheet = (wb, region, department, title, datas) => {
   ];
 
   wb.SheetNames.push(title);
-  wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], [{ title: title }], {
-    origin: "B2",
-    skipHeader: true,
-  });
+  wb.Sheets[title] = XLSX.utils.sheet_add_json(
+    wb.Sheets[title],
+    [{ title: title }],
+    {
+      origin: "B2",
+      skipHeader: true,
+    }
+  );
   wb.Sheets[title] = XLSX.utils.sheet_add_json(wb.Sheets[title], filterData, {
     origin: "B4",
     skipHeader: false,
@@ -106,7 +122,13 @@ export const exportMandataires = (users, services, region, department) => {
     "Mandataires individuels",
     getMandataireRows(users, "individuel")
   );
-  writeSheet(wb, region, department, "Mandataires préposés", getMandataireRows(users, "prepose"));
+  writeSheet(
+    wb,
+    region,
+    department,
+    "Mandataires préposés",
+    getMandataireRows(users, "prepose")
+  );
   writeSheet(wb, region, department, "Services", getServiceRows(services));
 
   const regionLabel = region ? region.label : "France";

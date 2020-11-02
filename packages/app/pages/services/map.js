@@ -16,7 +16,15 @@ const Map = () => {
 
   return (
     <LayoutServicesMap>
-      <Flex sx={{ height: "100%", position: "absolute", pt: "115px", top: "0", width: "100%" }}>
+      <Flex
+        sx={{
+          height: "100%",
+          position: "absolute",
+          pt: "115px",
+          top: "0",
+          width: "100%",
+        }}
+      >
         {selectedMesuresIds.length ? (
           <Box
             sx={{

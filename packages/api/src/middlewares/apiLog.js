@@ -26,9 +26,9 @@ module.exports = async (req, res, next) => {
     res.send = async function asyncSend(response) {
       await ApiLog.query().insert({
         editor_id: editorId,
-        request_url: originalUrl,
         request_method: method,
         request_params: params,
+        request_url: originalUrl,
         response,
         token,
       });
@@ -37,9 +37,9 @@ module.exports = async (req, res, next) => {
     };
   } else {
     await ApiLog.query().insert({
-      request_url: originalUrl,
       request_method: method,
       request_params: params,
+      request_url: originalUrl,
       token,
     });
   }

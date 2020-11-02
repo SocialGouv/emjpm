@@ -43,9 +43,10 @@ export const EnquetePopulationsAutreMesures = (props) => {
   });
 
   const populations = data ? data.enquete_reponses_populations_by_pk || {} : {};
-  const reponsePopulations = useMemo(() => removeAttributesPrefix(populations, "autre_mesures_"), [
-    populations,
-  ]);
+  const reponsePopulations = useMemo(
+    () => removeAttributesPrefix(populations, "autre_mesures_"),
+    [populations]
+  );
 
   return (
     <EnquetePopulationsForm

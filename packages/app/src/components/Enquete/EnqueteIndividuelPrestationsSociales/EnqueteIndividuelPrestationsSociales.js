@@ -26,20 +26,25 @@ export const EnqueteIndividuelPrestationsSociales = (props) => {
     },
   });
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId },
-      },
-      {
-        query: ENQUETE_REPONSE_PRESTATIONS_SOCIALES,
-        variables: { id: prestations_sociale_id },
-      },
-    ],
-  });
+  const [updateEnquete] = useMutation(
+    UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId },
+        },
+        {
+          query: ENQUETE_REPONSE_PRESTATIONS_SOCIALES,
+          variables: { id: prestations_sociale_id },
+        },
+      ],
+    }
+  );
 
-  const prestationsSociales = data ? data.enquete_reponses_prestations_sociales_by_pk || {} : {};
+  const prestationsSociales = data
+    ? data.enquete_reponses_prestations_sociales_by_pk || {}
+    : {};
   return (
     <EnqueteIndividuelPrestationsSocialesForm
       loading={loading}

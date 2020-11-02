@@ -2,6 +2,7 @@ const request = require("supertest");
 const { seedData } = require("../../database/seed-data");
 
 const nodemailerMock = require("nodemailer-mock");
+
 jest.setMock("nodemailer", nodemailerMock);
 
 // Fake env

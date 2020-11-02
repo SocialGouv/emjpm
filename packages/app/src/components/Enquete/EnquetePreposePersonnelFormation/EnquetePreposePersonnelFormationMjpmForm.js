@@ -19,14 +19,14 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
+    dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
+    loading,
+    onSubmit,
     step,
     validationSchema,
-    dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
-    loading,
   });
 
   const { submitForm, values, errors, submit } = enqueteForm;
@@ -81,20 +81,20 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
         <Heading3>{"La formation des préposés MJPM"}</Heading3>
         <Box>
           {renderFormationPreposeBox({
-            prefix: "en_poste_cnc",
             label: "Nombre de préposés en poste ayant le CNC",
+            prefix: "en_poste_cnc",
           })}
         </Box>
         <Box>
           {renderFormationPreposeBox({
-            prefix: "formation_non_cnc",
             label: "Nombre de préposés en poste et en formation",
+            prefix: "formation_non_cnc",
           })}
         </Box>
         <Box>
           {renderFormationPreposeBox({
-            prefix: "non_formation_non_cnc",
             label: "Nombre de préposés en poste ni formés, ni en formation",
+            prefix: "non_formation_non_cnc",
           })}
         </Box>
       </Box>
@@ -116,7 +116,8 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
               id={`formation_preposes_mjpm.${prefix}.nb_preposes`}
               value={values.formation_preposes_mjpm[prefix].nb_preposes}
               error={
-                errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
+                errors.formation_preposes_mjpm &&
+                errors.formation_preposes_mjpm[prefix]
                   ? errors.formation_preposes_mjpm[prefix].nb_preposes
                   : ""
               }
@@ -130,7 +131,8 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
               id={`formation_preposes_mjpm.${prefix}.heures_formation`}
               value={values.formation_preposes_mjpm[prefix].heures_formation}
               error={
-                errors.formation_preposes_mjpm && errors.formation_preposes_mjpm[prefix]
+                errors.formation_preposes_mjpm &&
+                errors.formation_preposes_mjpm[prefix]
                   ? errors.formation_preposes_mjpm[prefix].heures_formation
                   : ""
               }

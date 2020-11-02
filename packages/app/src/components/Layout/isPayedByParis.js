@@ -15,7 +15,9 @@ function isPayedByParis({ mandataire }) {
       );
     });
   } else if (lb_departements && lb_departements.length > 0) {
-    return lb_departements.some((e) => e.departement_financeur && e.departement.code === "75");
+    return lb_departements.some(
+      (e) => e.departement_financeur && e.departement.code === "75"
+    );
   }
   return false;
 }

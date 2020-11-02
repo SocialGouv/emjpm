@@ -8,10 +8,10 @@ export const Provider = (props) => {
 
   // Use State to keep the values
   const [currentMarker, setCurrentMarker] = useState({
+    id: null,
     isActive: false,
     latitude: latitude,
     longitude: longitude,
-    id: null,
     type: null,
   });
 

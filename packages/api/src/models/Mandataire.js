@@ -15,43 +15,41 @@ class Mandataire extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
+        adresse: { type: "string" },
+        code_postal: { type: "string" },
+        dispo_max: {
+          type: "integer",
+        },
         genre: {
           type: "string",
         },
+        id: { type: "integer" },
         telephone: { type: "string" },
         telephone_portable: {
           type: "string",
         },
-        adresse: { type: "string" },
-        code_postal: { type: "string" },
         ville: { type: "string" },
-        dispo_max: {
-          type: "integer",
-        },
         zip: {
           type: "string",
         },
       },
+      type: "object",
     };
   }
   static get relationMappings() {
     const { User } = require("./User");
     const { Departement } = require("./Departement");
     return {
-      users: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: User,
+      department: {
         join: {
-          from: "mandataires.user_id",
-          to: "users.id",
+          from: "mandataires.department_id",
+          to: "departements.id",
         },
+        modelClass: Departement,
+        relation: Model.BelongsToOneRelation,
       },
       tis: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Tis,
         join: {
           from: "mandataires.id",
           through: {
@@ -60,14 +58,16 @@ class Mandataire extends Model {
           },
           to: "tis.id",
         },
+        modelClass: Tis,
+        relation: Model.ManyToManyRelation,
       },
-      department: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Departement,
+      users: {
         join: {
-          from: "mandataires.department_id",
-          to: "departements.id",
+          from: "mandataires.user_id",
+          to: "users.id",
         },
+        modelClass: User,
+        relation: Model.BelongsToOneRelation,
       },
     };
   }

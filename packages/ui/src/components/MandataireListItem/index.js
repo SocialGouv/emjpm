@@ -1,3 +1,3 @@
-import { MandataireListItem } from './MandataireListItem';
+import { MandataireListItem } from "./MandataireListItem";
 
 export { MandataireListItem };

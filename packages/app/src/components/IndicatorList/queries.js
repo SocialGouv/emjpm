@@ -29,35 +29,45 @@ export const INDICATORS = gql`
 
 export const FRANCE_INDICATORS = gql`
   query AllIndicators {
-    serviceLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "service" } }) {
+    serviceLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "service" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    individuelLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "individuel" } }) {
+    individuelLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "individuel" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    preposeLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "prepose" } }) {
+    preposeLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "prepose" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    magistratLoginCount: view_indicateur_login_aggregate(where: { type: { _eq: "ti" } }) {
+    magistratLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "ti" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    serviceInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "service" } }) {
+    serviceInscritCount: view_indicateur_inscrit_aggregate(
+      where: { type: { _eq: "service" } }
+    ) {
       aggregate {
         sum {
           count
@@ -73,21 +83,27 @@ export const FRANCE_INDICATORS = gql`
         }
       }
     }
-    preposeInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "prepose" } }) {
+    preposeInscritCount: view_indicateur_inscrit_aggregate(
+      where: { type: { _eq: "prepose" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    magistratInscritCount: view_indicateur_inscrit_aggregate(where: { type: { _eq: "ti" } }) {
+    magistratInscritCount: view_indicateur_inscrit_aggregate(
+      where: { type: { _eq: "ti" } }
+    ) {
       aggregate {
         sum {
           count
         }
       }
     }
-    magistratStatisfaction: view_indicateur_satisfaction_campaign_aggregate(where: {}) {
+    magistratStatisfaction: view_indicateur_satisfaction_campaign_aggregate(
+      where: {}
+    ) {
       aggregate {
         avg {
           value

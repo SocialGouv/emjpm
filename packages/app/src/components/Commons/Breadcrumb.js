@@ -1,7 +1,8 @@
 import { Text } from "@emjpm/ui";
-import Link from "next/link";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
+
+import { Link } from "./Link";
 
 export const Breadcrumb = ({ crumbs }) => {
   return (
@@ -14,10 +15,8 @@ export const Breadcrumb = ({ crumbs }) => {
             </Box>
           )}
           {href ? (
-            <Link href={href} as={as}>
-              <a>
-                <Text color="primary">{label}</Text>
-              </a>
+            <Link href={href} asLink={as}>
+              {label}
             </Link>
           ) : (
             <Text>{label}</Text>

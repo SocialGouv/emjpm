@@ -39,39 +39,46 @@ const AdminServiceMesures = (props) => {
     },
   });
 
-  const [recalculateServiceMesures, { loading: recalculateServiceMesuresLoading }] = useMutation(
-    CALCULATE_MESURES,
-    {
-      refetchQueries: [
-        {
-          query: MESURES,
-          variables: {
-            serviceId,
-          },
-        },
-      ],
-    }
-  );
-
-  const [deleteMesures, { loading: mutationLoading }] = useMutation(DELETE_MESURES, {
-    onCompleted: async () => {
-      await recalculateServiceMesures({
+  const [
+    recalculateServiceMesures,
+    { loading: recalculateServiceMesuresLoading },
+  ] = useMutation(CALCULATE_MESURES, {
+    refetchQueries: [
+      {
+        query: MESURES,
         variables: {
           serviceId,
         },
-      });
-    },
+      },
+    ],
   });
+
+  const [deleteMesures, { loading: mutationLoading }] = useMutation(
+    DELETE_MESURES,
+    {
+      onCompleted: async () => {
+        await recalculateServiceMesures({
+          variables: {
+            serviceId,
+          },
+        });
+      },
+    }
+  );
 
   const allMesures = data ? data.mesures : [];
 
-  const { inProgressMesuresCount, awaitingMesuresCount, extinctionMesuresCount } = useMemo(
-    () => buildMesuresCounts(allMesures),
-    [allMesures]
-  );
+  const {
+    inProgressMesuresCount,
+    awaitingMesuresCount,
+    extinctionMesuresCount,
+  } = useMemo(() => buildMesuresCounts(allMesures), [allMesures]);
 
   const filteredMesures = useMemo(
-    () => allMesures.filter((mesure) => mesure.status === selectedMesureStatus.value),
+    () =>
+      allMesures.filter(
+        (mesure) => mesure.status === selectedMesureStatus.value
+      ),
     [allMesures, selectedMesureStatus.value]
   );
 
@@ -121,7 +128,9 @@ const AdminServiceMesures = (props) => {
         buttonText="Supprimer"
         isLoading={mutationLoading}
         selectedItemsCount={Object.keys(selectedRows).length}
-        buttonEnable={filteredMesures.length !== 0 && Object.keys(selectedRows).length > 0}
+        buttonEnable={
+          filteredMesures.length !== 0 && Object.keys(selectedRows).length > 0
+        }
         title={`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente • ${extinctionMesuresCount} éteintes)`}
       />
       <Flex flexDirection="row">
@@ -169,14 +178,6 @@ const AdminServiceMesures = (props) => {
 function buildTableColumns() {
   return [
     {
-      id: "selection",
-      Header: ({ getToggleAllRowsSelectedProps }) => {
-        return (
-          <Label>
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          </Label>
-        );
-      },
       Cell: ({ row }) => {
         const { checked, onChange } = row.getToggleRowSelectedProps();
         return (
@@ -185,6 +186,14 @@ function buildTableColumns() {
           </Label>
         );
       },
+      Header: ({ getToggleAllRowsSelectedProps }) => {
+        return (
+          <Label>
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          </Label>
+        );
+      },
+      id: "selection",
     },
     {
       Header: "n° RG",
@@ -220,7 +229,8 @@ function buildTableColumns() {
     },
     {
       Header: "Antenne",
-      accessor: (data) => (data.service_antenne ? data.service_antenne.name : ""),
+      accessor: (data) =>
+        data.service_antenne ? data.service_antenne.name : "",
     },
   ];
 }
@@ -241,9 +251,9 @@ function buildMesuresCounts(allMesures) {
       return acc;
     },
     {
-      inProgressMesuresCount: 0,
-      extinctionMesuresCount: 0,
       awaitingMesuresCount: 0,
+      extinctionMesuresCount: 0,
+      inProgressMesuresCount: 0,
     }
   );
 }

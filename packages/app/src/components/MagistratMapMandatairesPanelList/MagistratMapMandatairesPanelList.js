@@ -25,9 +25,9 @@ const MagistratMapMandatairesPanelList = () => {
     MESURES_GESTIONNAIRE,
     {
       variables: {
-        tiId: tiId,
-        offset: currentOffset,
         limit: RESULT_PER_PAGE,
+        offset: currentOffset,
+        tiId: tiId,
       },
     },
     {
@@ -45,11 +45,11 @@ const MagistratMapMandatairesPanelList = () => {
 
   const selectMarker = ({ id, discriminator, longitude, latitude }) => {
     setCurrentMarker({
-      isActive: true,
       id: id,
-      type: discriminator,
-      longitude: longitude,
+      isActive: true,
       latitude: latitude,
+      longitude: longitude,
+      type: discriminator,
     });
   };
 
@@ -58,7 +58,7 @@ const MagistratMapMandatairesPanelList = () => {
   const gestionnaires = formatMandatairesList(data.mandatairesList);
   return (
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
-      <Scrollbar style={{ width: "100%", height: "100%" }}>
+      <Scrollbar style={{ height: "100%", width: "100%" }}>
         <Box mr="1" mb="4">
           {gestionnaires.map((gestionnaire) => {
             return (

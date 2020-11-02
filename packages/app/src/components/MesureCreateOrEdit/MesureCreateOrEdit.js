@@ -30,20 +30,29 @@ export const MesureCreateOrEdit = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const GET_TRIBUNAL = isMandataire(type) ? MANDATAIRE_TRIBUNAL : SERVICE_TRIBUNAL;
+  const GET_TRIBUNAL = isMandataire(type)
+    ? MANDATAIRE_TRIBUNAL
+    : SERVICE_TRIBUNAL;
 
   const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
 
   const { loading, error, data } = useQuery(GET_TRIBUNAL);
 
-  const tribunaux = useMemo(() => (data ? formatTribunauxOptions(data.tribunaux) : []), [data]);
+  const tribunaux = useMemo(
+    () => (data ? formatTribunauxOptions(data.tribunaux) : []),
+    [data]
+  );
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    Router.push(`${userBasePath}/mesures/[mesure_id]`, `${userBasePath}/mesures/${mesureId}`, {
-      shallow: true,
-    });
+    Router.push(
+      `${userBasePath}/mesures/[mesure_id]`,
+      `${userBasePath}/mesures/${mesureId}`,
+      {
+        shallow: true,
+      }
+    );
 
   const [addOrUpdateMesure] = useMutation(ADD_OR_UPDATE_MESURE, {
     onCompleted: async ({ add_or_update }) => {
@@ -51,8 +60,8 @@ export const MesureCreateOrEdit = (props) => {
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          serviceId: service ? service.id : null,
           mandataireId: mandataire ? mandataire.id : null,
+          serviceId: service ? service.id : null,
         },
       });
       redirectToMesure(mesure.id);
@@ -72,8 +81,8 @@ export const MesureCreateOrEdit = (props) => {
 
     if (values.pays === "FR") {
       const location = await getLocation(client, {
-        zipcode: values.code_postal,
         city: values.ville,
+        zipcode: values.code_postal,
       });
 
       if (!location || !location.department) {
@@ -101,12 +110,12 @@ export const MesureCreateOrEdit = (props) => {
         {
           query: MESURES_QUERY,
           variables: {
+            antenne: null,
             limit: 20,
+            natureMesure: null,
             offset: 0,
             searchText: null,
             status: MESURE_PROTECTION_STATUS.en_cours,
-            natureMesure: null,
-            antenne: null,
           },
         },
       ],
@@ -114,16 +123,16 @@ export const MesureCreateOrEdit = (props) => {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
+        cabinet: values.cabinet,
+        champ_mesure: values.champ_mesure ? values.champ_mesure : null,
         civilite: values.civilite,
         date_nomination: values.date_nomination,
+        lieu_vie: values.lieu_vie,
+        nature_mesure: values.nature_mesure,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
-        lieu_vie: values.lieu_vie,
-        ti_id: values.tribunal.value,
-        nature_mesure: values.nature_mesure,
-        champ_mesure: values.champ_mesure ? values.champ_mesure : null,
         pays: values.pays,
-        cabinet: values.cabinet,
+        ti_id: values.tribunal.value,
       },
     });
 
@@ -156,8 +165,8 @@ export const MesureCreateOrEdit = (props) => {
           <Box height="280px">
             <Heading4>{`Caractéristique de la mesure`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              Ces informations nous permettent de vous présenter les mesures de mandataires les plus
-              adaptés.
+              Ces informations nous permettent de vous présenter les mesures de
+              mandataires les plus adaptés.
             </Text>
           </Box>
         </Box>

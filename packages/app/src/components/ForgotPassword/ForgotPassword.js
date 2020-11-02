@@ -1,4 +1,12 @@
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import {
+  Button,
+  Card,
+  Field,
+  Heading4,
+  InlineError,
+  Input,
+  Text,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import React, { useState } from "react";
@@ -35,7 +43,9 @@ const ForgotPassword = () => {
       json = await response.json();
     } catch (error) {
       captureException(error);
-      setStatus({ error: "Une erreur est survenue, veuillez réessayer plus tard." });
+      setStatus({
+        error: "Une erreur est survenue, veuillez réessayer plus tard.",
+      });
       return;
     }
 
@@ -48,13 +58,13 @@ const ForgotPassword = () => {
   };
 
   const formik = useFormik({
+    initialValues: {
+      email: "",
+    },
     onSubmit: (values, { setSubmitting, setStatus }) => {
       handleSubmit(values, setSubmitting, setStatus);
     },
     validationSchema: forgotPasswordSchema,
-    initialValues: {
-      email: "",
-    },
   });
 
   return (
@@ -98,14 +108,20 @@ const ForgotPassword = () => {
               onChange={formik.handleChange}
               placeholder="Entrez votre email"
             />
-            {formik.touched.email && <InlineError message={formik.errors.email} fieldId="email" />}
+            {formik.touched.email && (
+              <InlineError message={formik.errors.email} fieldId="email" />
+            )}
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box mr="2">
               <Link href="/login">Annuler</Link>
             </Box>
             <Box>
-              <Button type="submit" disabled={formik.isSubmitting} isLoading={formik.isSubmitting}>
+              <Button
+                type="submit"
+                disabled={formik.isSubmitting}
+                isLoading={formik.isSubmitting}
+              >
                 Obtenir le lien de réinitialisation
               </Button>
             </Box>

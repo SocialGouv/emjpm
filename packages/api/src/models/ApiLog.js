@@ -14,15 +14,15 @@ class ApiLog extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         id: { type: "integer" },
-        request_url: { type: "string" },
         request_method: { type: "string" },
         request_params: { type: "jsonb" },
+        request_url: { type: "string" },
         response: { type: "jsonb" },
         token: { type: "string" },
       },
+      type: "object",
     };
   }
 }

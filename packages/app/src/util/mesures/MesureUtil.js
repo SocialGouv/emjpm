@@ -25,6 +25,7 @@ const VALUE_LABEL = {
   TUTELLE: "tutelle",
 };
 
-export const getMesureCategoryNatureColor = (nature) => MESURE_CATEGORY_NATURE_COLORS[nature];
+export const getMesureCategoryNatureColor = (nature) =>
+  MESURE_CATEGORY_NATURE_COLORS[nature];
 
 export const getMesureCategoryNatureLabel = (nature) => VALUE_LABEL[nature];

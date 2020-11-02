@@ -47,11 +47,15 @@ export const MesureView = (props) => {
           <Box flex="1">
             <Box mb={4}>
               <Text sx={subtitle}>Nature de la mesure</Text>
-              <Text sx={content}>{mesureFormatter.formatNatureMesure(natureMesure)}</Text>
+              <Text sx={content}>
+                {mesureFormatter.formatNatureMesure(natureMesure)}
+              </Text>
             </Box>
             <Box mb={4}>
               <Text sx={subtitle}>Champ de la mesure</Text>
-              <Text sx={content}>{mesureFormatter.formatChampMesure(champMesure)}</Text>
+              <Text sx={content}>
+                {mesureFormatter.formatChampMesure(champMesure)}
+              </Text>
             </Box>
 
             <Box mb={4}>
@@ -61,7 +65,9 @@ export const MesureView = (props) => {
 
             <Box mb={4}>
               <Text sx={subtitle}>Majeur protégé</Text>
-              <Text sx={content}>{mesureFormatter.formatMajeurProtege(civilite, realAge)}</Text>
+              <Text sx={content}>
+                {mesureFormatter.formatMajeurProtege(civilite, realAge)}
+              </Text>
             </Box>
 
             <Box mb={4}>

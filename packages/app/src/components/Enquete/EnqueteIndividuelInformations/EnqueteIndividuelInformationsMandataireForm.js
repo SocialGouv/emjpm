@@ -3,7 +3,12 @@ import React from "react";
 import { Box, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { formatFormBoolean, formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
+import {
+  formatFormBoolean,
+  formatFormInput,
+  parseFormFloat,
+  parseFormInput,
+} from "../../../util";
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import {
   EnqueteFormInputField,
@@ -15,18 +20,10 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 
 // schema identique à enqueteInformationsMandatairesStatus (côté hasura actions)
 const validationSchema = yup.object().shape({
-  nom: yup.string().required(),
-  departement: yup.string().required(),
-  region: yup.string().required(),
-  benevole: yup.boolean().required(),
-  forme_juridique: yup.string().when("benevole", {
-    is: false,
-    then: yup.string().required(),
-    otherwise: yup.string().nullable(),
-  }),
   anciennete: yup.string().required(),
+  benevole: yup.boolean().required(),
+  departement: yup.string().required(),
   estimation_etp: yup.string().required(),
-  exerce_seul_activite: yup.boolean().required(),
   exerce_secretaires_specialises: yup
     .boolean()
     .required()
@@ -41,56 +38,71 @@ const validationSchema = yup.object().shape({
           (value) => value === false
         ),
     }),
-  secretaire_specialise_etp: yup.number().when("exerce_secretaires_specialises", {
-    is: true,
-    then: yup.number().positive().required(), // > 0
-    otherwise: yup
-      .number()
-      .test(
-        "empty-or-0",
-        'Vous avez répondu "non" à la question précédente, donc ce champ doit être vide.',
-        function (value) {
-          return value == null; // 0, null, undefined
-        }
-      )
-      .nullable(), // 0 or empty
+  exerce_seul_activite: yup.boolean().required(),
+  forme_juridique: yup.string().when("benevole", {
+    is: false,
+    otherwise: yup.string().nullable(),
+    then: yup.string().required(),
   }),
   local_professionnel: yup.boolean().required(),
+  nom: yup.string().required(),
+  region: yup.string().required(),
+  secretaire_specialise_etp: yup
+    .number()
+    .when("exerce_secretaires_specialises", {
+      is: true,
+      // > 0
+      otherwise: yup
+        .number()
+        .test(
+          "empty-or-0",
+          'Vous avez répondu "non" à la question précédente, donc ce champ doit être vide.',
+          function (value) {
+            return value == null; // 0, null, undefined
+          }
+        )
+        .nullable(),
+      then: yup.number().positive().required(), // 0 or empty
+    }),
 });
 
 function dataToForm(data) {
   return {
-    departement: formatFormInput(data.departement),
-    region: formatFormInput(data.region),
-    nom: formatFormInput(data.nom),
-    benevole: formatFormBoolean(data.benevole),
     anciennete: formatFormInput(data.anciennete),
+    benevole: formatFormBoolean(data.benevole),
+    departement: formatFormInput(data.departement),
     estimation_etp: formatFormInput(data.estimation_etp),
-    forme_juridique: formatFormInput(data.forme_juridique),
+    exerce_secretaires_specialises: formatFormBoolean(
+      data.exerce_secretaires_specialises
+    ),
     exerce_seul_activite: formatFormBoolean(data.exerce_seul_activite),
-    exerce_secretaires_specialises: formatFormBoolean(data.exerce_secretaires_specialises),
-    secretaire_specialise_etp: formatFormInput(data.secretaire_specialise_etp),
+    forme_juridique: formatFormInput(data.forme_juridique),
     local_professionnel: formatFormBoolean(data.local_professionnel),
-    tranche_age: data.tranche_age,
+    nom: formatFormInput(data.nom),
+    region: formatFormInput(data.region),
+    secretaire_specialise_etp: formatFormInput(data.secretaire_specialise_etp),
     sexe: data.sexe,
+    tranche_age: data.tranche_age,
   };
 }
 
 function formToData(data) {
   return {
-    nom: parseFormInput(data.nom),
-    departement: parseFormInput(data.departement),
-    region: parseFormInput(data.region),
-    sexe: parseFormInput(data.sexe),
-    tranche_age: parseFormInput(data.tranche_age),
     anciennete: parseFormInput(data.anciennete),
     benevole: parseFormInput(data.benevole),
+    departement: parseFormInput(data.departement),
     estimation_etp: parseFormInput(data.estimation_etp),
+    exerce_secretaires_specialises: parseFormInput(
+      data.exerce_secretaires_specialises
+    ),
+    exerce_seul_activite: parseFormInput(data.exerce_seul_activite),
     forme_juridique: parseFormInput(data.forme_juridique),
     local_professionnel: parseFormInput(data.local_professionnel),
-    exerce_seul_activite: parseFormInput(data.exerce_seul_activite),
-    exerce_secretaires_specialises: parseFormInput(data.exerce_secretaires_specialises),
+    nom: parseFormInput(data.nom),
+    region: parseFormInput(data.region),
     secretaire_specialise_etp: parseFormFloat(data.secretaire_specialise_etp),
+    sexe: parseFormInput(data.sexe),
+    tranche_age: parseFormInput(data.tranche_age),
   };
 }
 
@@ -105,15 +117,15 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, values, errors, submit } = enqueteForm;
@@ -214,7 +226,8 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
           enqueteForm={enqueteForm}
         />
 
-        {(values.exerce_secretaires_specialises || !!errors.secretaire_specialise_etp) && (
+        {(values.exerce_secretaires_specialises ||
+          !!errors.secretaire_specialise_etp) && (
           <EnqueteFormInputField
             id="secretaire_specialise_etp"
             label="Estimation de l'activité en ETP du secrétariat spécialisé"

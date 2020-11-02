@@ -30,15 +30,15 @@ async function updateMesure({
     datas.etats
   );
   const mesureDatas = buildMesure({
-    datas: datas,
     antenneId,
-    lastEtat,
+    datas: datas,
     departement,
-    longitude,
+    lastEtat,
     latitude,
+    longitude,
     serviceOrMandataire,
-    type,
     ti,
+    type,
   });
 
   await transaction(
@@ -77,8 +77,8 @@ async function processRessources(MesureRessources, mesureId, body) {
     const { annee, niveau_ressource, prestations_sociales } = ressource;
 
     const ressourceDatas = {
-      mesure_id: mesureId,
       annee,
+      mesure_id: mesureId,
       niveau_ressource,
       prestations_sociales: JSON.stringify(prestations_sociales),
     };
@@ -127,15 +127,15 @@ async function processEtats(MesureEtat, mesureId, body) {
     } = etat;
 
     const etatDatas = {
-      mesure_id: mesureId,
-      date_changement_etat,
-      nature_mesure,
       champ_mesure,
-      lieu_vie,
       code_postal,
-      ville,
+      date_changement_etat,
+      lieu_vie,
+      mesure_id: mesureId,
+      nature_mesure,
       pays,
       type_etablissement,
+      ville,
     };
     const etatToUpdate = findEtat(loadedEtats, etat);
     if (etatToUpdate) {

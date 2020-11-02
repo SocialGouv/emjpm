@@ -24,7 +24,9 @@ const departementsOptionsConfig = {
   },
 };
 const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
-  const { departementsOptions, error, loading } = useDepartementsOptions(departementsOptionsConfig);
+  const { departementsOptions, error, loading } = useDepartementsOptions(
+    departementsOptionsConfig
+  );
 
   return (
     <LoadingWrapper error={error} loading={loading}>
@@ -36,7 +38,9 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
               options={departementsOptions}
               placeholder={"Département"}
               value={criteria.selectedDepartement}
-              onChange={(option) => updateCriteria("selectedDepartement", option)}
+              onChange={(option) =>
+                updateCriteria("selectedDepartement", option)
+              }
             />
           </Box>
           <Box sx={BoxStyle}>

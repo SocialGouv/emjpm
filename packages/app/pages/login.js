@@ -9,7 +9,9 @@ import { withAuthSync } from "../src/util/auth";
 
 const ExcludeBrowserBanner = dynamic(
   async () => {
-    const { ExcludeBrowserBanner } = await import("../src/components/ExcludeBrowserBanner");
+    const { ExcludeBrowserBanner } = await import(
+      "../src/components/ExcludeBrowserBanner"
+    );
     return ExcludeBrowserBanner;
   },
   {

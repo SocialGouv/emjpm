@@ -18,11 +18,11 @@ export const EnqueteFormFieldErrorMessage = ({
   }
 
   const showError = useEnqueteFieldShowError({
-    id,
-    error,
-    enqueteForm,
     disableErrorMessage,
+    enqueteForm,
+    error,
     hideErrorMessageIfPristine,
+    id,
   });
 
   return <InlineError showError={showError} message={error} fieldId={id} />;

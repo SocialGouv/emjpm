@@ -24,7 +24,10 @@ export const SERVICES = gql`
 
 export const MESURES = gql`
   query mesures($serviceId: Int!) {
-    service_antenne_aggregate(distinct_on: id, where: { service_id: { _eq: $serviceId } }) {
+    service_antenne_aggregate(
+      distinct_on: id
+      where: { service_id: { _eq: $serviceId } }
+    ) {
       nodes {
         name
         mesures_awaiting

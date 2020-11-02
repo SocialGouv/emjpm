@@ -24,20 +24,20 @@ const validationSchema = yup.object(
 
 function dataToForm(data) {
   return {
+    revisionsAutre: formatFormInput(data.revisionsAutre),
+    revisionsChangement: formatFormInput(data.revisionsChangement),
     revisionsMainLevee: formatFormInput(data.revisionsMainLevee),
     revisionsMasp: formatFormInput(data.revisionsMasp),
     revisionsReconduction: formatFormInput(data.revisionsReconduction),
-    revisionsChangement: formatFormInput(data.revisionsChangement),
-    revisionsAutre: formatFormInput(data.revisionsAutre),
   };
 }
 function formToData(values) {
   return {
+    revisionsAutre: parseFormInt(values.revisionsAutre),
+    revisionsChangement: parseFormInt(values.revisionsChangement),
     revisionsMainLevee: parseFormInt(values.revisionsMainLevee),
     revisionsMasp: parseFormInt(values.revisionsMasp),
     revisionsReconduction: parseFormInt(values.revisionsReconduction),
-    revisionsChangement: parseFormInt(values.revisionsChangement),
-    revisionsAutre: parseFormInt(values.revisionsAutre),
   };
 }
 export const EnqueteActiviteRevisionMesuresForm = (props) => {
@@ -51,15 +51,15 @@ export const EnqueteActiviteRevisionMesuresForm = (props) => {
   } = props;
 
   const enqueteForm = useEnqueteForm({
-    onSubmit,
-    enqueteContext,
-    dispatchEnqueteContextEvent,
     data,
-    step,
-    validationSchema,
     dataToForm,
+    dispatchEnqueteContextEvent,
+    enqueteContext,
     formToData,
     loading,
+    onSubmit,
+    step,
+    validationSchema,
   });
 
   const { submitForm, submit } = enqueteForm;

@@ -11,7 +11,12 @@ module.exports = async (enqueteReponse) => {
     financement: await getValidationStatus(
       enqueteReponse.enquete_reponses_financement,
       {
+        debugName: `${debugGroupName}`,
+        logDataWithErrors: false,
         schema: yup.object().shape({
+          aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
+          autre_produits: yup.number().min(0).nullable(),
+          charges_fonctionnement: yup.number().min(0).nullable(),
           charges_personnel: yup.number().min(0).nullable(),
           charges_preposes: yup
             .number()
@@ -26,14 +31,9 @@ module.exports = async (enqueteReponse) => {
                 return chargesPersonnel >= chargesPrepose;
               }
             ),
-          charges_fonctionnement: yup.number().min(0).nullable(),
-          produits_bareme_prelevements: yup.number().min(0).nullable(),
-          autre_produits: yup.number().min(0).nullable(),
           financement_public: yup.number().min(0).nullable(),
-          aide_sociale_conseil_departemental: yup.number().min(0).nullable(),
+          produits_bareme_prelevements: yup.number().min(0).nullable(),
         }),
-        debugName: `${debugGroupName}`,
-        logDataWithErrors: false,
       }
     ),
   };

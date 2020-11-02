@@ -6,7 +6,10 @@ import { DirectionEnqueteDetailsReponsePreview } from "../../../../../src/compon
 import { LayoutDirection } from "../../../../../src/components/Layout";
 import { withAuthSync } from "../../../../../src/util/auth";
 
-const DirectionEnqueteReponsePreviewPage = ({ enqueteId, enqueteReponseId }) => {
+const DirectionEnqueteReponsePreviewPage = ({
+  enqueteId,
+  enqueteReponseId,
+}) => {
   return (
     <LayoutDirection>
       <BoxWrapper mt={1} px="1">

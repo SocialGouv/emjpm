@@ -9,7 +9,9 @@ const AvailableMesureIndicator = () => {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_AVAILABLE_MESURE_NUMBER, {
     variables: {
-      departementId: filters.departement ? parseInt(filters.departement.value) : undefined,
+      departementId: filters.departement
+        ? parseInt(filters.departement.value)
+        : undefined,
       regionId: filters.region ? parseInt(filters.region.value) : undefined,
     },
   });

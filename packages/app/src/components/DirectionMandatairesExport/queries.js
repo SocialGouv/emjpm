@@ -5,7 +5,9 @@ export const MANDATAIRES = gql`
     mandataires: users(
       where: {
         mandataire: {
-          departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } }
+          departement: {
+            _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+          }
         }
       }
     ) {
@@ -27,7 +29,11 @@ export const MANDATAIRES = gql`
       }
     }
     services: services(
-      where: { departement: { _or: { id: { _eq: $department }, id_region: { _eq: $region } } } }
+      where: {
+        departement: {
+          _or: { id: { _eq: $department }, id_region: { _eq: $region } }
+        }
+      }
     ) {
       id
       etablissement

@@ -5,11 +5,11 @@ const MesureBadge = ({ mesures_en_cours, dispo_max }) => {
   return (
     <Box
       sx={{
-        color: "white",
         bg: mesures_en_cours > dispo_max ? "error" : "primary",
-        px: 1,
-        mb: 2,
         borderRadius: 9999,
+        color: "white",
+        mb: 2,
+        px: 1,
       }}
     >
       {mesures_en_cours} / {dispo_max}

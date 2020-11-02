@@ -1,52 +1,52 @@
 const antenneTitleStyle = {
-  color: 'lightGray',
-  fontWeight: 'bold',
-  mb: '3',
-  mt: '6px',
-  textAlign: 'center',
+  color: "lightGray",
+  fontWeight: "bold",
+  mb: "3",
+  mt: "6px",
+  textAlign: "center",
 };
 
 const numberStyle = {
-  color: 'lightGray',
+  color: "lightGray",
   fontSize: 3,
-  fontWeight: 'bold',
-  mr: '1',
+  fontWeight: "bold",
+  mr: "1",
 };
 
 const mesureStyle = {
-  color: 'textTertiary',
+  color: "textTertiary",
   fontSize: 1,
-  fontWeight: 'semibold',
+  fontWeight: "semibold",
 };
 
 const numberContainer = {
-  alignItems: 'flex-end',
-  mb: '5px',
+  alignItems: "flex-end",
+  mb: "5px",
 };
 
 const subtitle = {
-  color: 'lightGray',
+  color: "lightGray",
   fontSize: 1,
-  fontWeight: 'bold',
-  lineHeight: '16px',
-  mb: '2',
-  mt: '4',
+  fontWeight: "bold",
+  lineHeight: "16px",
+  mb: "2",
+  mt: "4",
 };
 
 const preferenceText = {
-  color: 'mediumGray',
+  color: "mediumGray",
   fontSize: 1,
-  fontWeight: 'semibold',
-  mb: '5px',
+  fontWeight: "semibold",
+  mb: "5px",
 };
 
 const availabilityIndicatorStyle = (isAvailable) => {
   return {
-    bg: isAvailable ? 'error' : 'success',
-    borderRadius: 'default',
-    height: '10px',
-    mr: '1',
-    width: '10px',
+    bg: isAvailable ? "error" : "success",
+    borderRadius: "default",
+    height: "10px",
+    mr: "1",
+    width: "10px",
   };
 };
 

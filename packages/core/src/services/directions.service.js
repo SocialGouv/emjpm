@@ -1,4 +1,4 @@
-import { DIRECTION_TYPE } from '../keys';
+import { DIRECTION_TYPE } from "../keys";
 
 export function isDirectionTypeNational(direction) {
   return direction.type === DIRECTION_TYPE.national;

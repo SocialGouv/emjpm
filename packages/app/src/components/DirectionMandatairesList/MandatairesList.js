@@ -1,5 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4, MandataireListItem, Select, Spinner } from "@emjpm/ui";
+import {
+  Card,
+  Heading2,
+  Heading4,
+  MandataireListItem,
+  Select,
+  Spinner,
+} from "@emjpm/ui";
 import React, { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
@@ -37,8 +44,8 @@ const MandatairesList = (props) => {
   const variables = {
     departement: filters.departement ? filters.departement.value : null,
     discriminator: selectedType ? selectedType.value : null,
-    offset: currentOffset,
     limit: RESULT_PER_PAGE,
+    offset: currentOffset,
     order: selectedCapacity ? selectedCapacity.value : null,
     region: filters.region ? filters.region.value : null,
   };

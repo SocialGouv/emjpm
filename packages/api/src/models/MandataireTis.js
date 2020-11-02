@@ -14,12 +14,12 @@ class MandataireTis extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
         id: { type: "integer" },
         mandataire_id: { type: "integer" },
         ti_id: { type: "integer" },
       },
+      type: "object",
     };
   }
 }

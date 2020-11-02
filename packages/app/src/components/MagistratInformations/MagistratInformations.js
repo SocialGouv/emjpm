@@ -25,16 +25,22 @@ const MagistratInformations = (props) => {
             </Flex>
             <Text sx={innerTextStyle}>{nom ? nom : ""} </Text>
             <Text sx={innerTextStyle}>{prenom ? prenom : ""}</Text>
-            <Text sx={innerTextStyle}>{cabinet ? `Cabinet: ${cabinet}` : ""}</Text>
+            <Text sx={innerTextStyle}>
+              {cabinet ? `Cabinet: ${cabinet}` : ""}
+            </Text>
           </Box>
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton href="/magistrats/edit-informations">Modifier vos informations</LinkButton>
+            <LinkButton href="/magistrats/edit-informations">
+              Modifier vos informations
+            </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/magistrats/edit-password">Modifier votre mot de passe</LinkButton>
+          <LinkButton href="/magistrats/edit-password">
+            Modifier votre mot de passe
+          </LinkButton>
         </Flex>
       </Card>
     </Box>

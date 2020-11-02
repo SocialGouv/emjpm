@@ -27,14 +27,14 @@ export const ListeBlanchePreposeCreate = () => {
           await createLbPrepose({
             variables: {
               email: values.email,
-              nom: values.lastname,
-              prenom: values.firstname,
               etablissements: values.etablissements.map((e) => {
                 return {
                   etablissement_id: e.id,
                   etablissement_rattachement: e.etablissement_rattachement,
                 };
               }),
+              nom: values.lastname,
+              prenom: values.firstname,
             },
           });
         }}

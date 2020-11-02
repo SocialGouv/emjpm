@@ -17,18 +17,37 @@ const ButtonStyle = {
 const Panel = (props) => {
   const { currentPanel, togglePanel } = props;
   const available =
-    currentPanel.mesures_max - currentPanel.mesures_in_progress - currentPanel.mesures_awaiting;
+    currentPanel.mesures_max -
+    currentPanel.mesures_in_progress -
+    currentPanel.mesures_awaiting;
   return (
-    <Box sx={{ bottom: "10px", left: "0", minWidth: "230px", position: "absolute" }}>
+    <Box
+      sx={{
+        bottom: "10px",
+        left: "0",
+        minWidth: "230px",
+        position: "absolute",
+      }}
+    >
       <Card variant="sideCard">
-        <Button sx={ButtonStyle} onClick={() => togglePanel({ isActive: false })}>
+        <Button
+          sx={ButtonStyle}
+          onClick={() => togglePanel({ isActive: false })}
+        >
           <XCircle size={25} />
         </Button>
         <Heading4 mb="2">{currentPanel.department.nom}</Heading4>
         <Text mb="6px">{"Mesures en cours"}</Text>
-        <Text fontWeight="bold" mb="2">{`${currentPanel.mesures_in_progress}`}</Text>
+        <Text
+          fontWeight="bold"
+          mb="2"
+        >{`${currentPanel.mesures_in_progress}`}</Text>
         <Text mb="6px">{"Disponibilités"}</Text>
-        <Text fontWeight="bold" mb="2" color={available > 0 ? "success" : "error"}>
+        <Text
+          fontWeight="bold"
+          mb="2"
+          color={available > 0 ? "success" : "error"}
+        >
           {available}
         </Text>
         <Text mb="6px">{"Mesures max"}</Text>

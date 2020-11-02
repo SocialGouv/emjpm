@@ -1,29 +1,29 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Box, Button as RebassButton } from 'rebass';
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Button as RebassButton } from "rebass";
 
-import { Spinner } from '../Spinner';
-import { buttonStyle } from './style';
+import { Spinner } from "../Spinner";
+import { buttonStyle } from "./style";
 
 const spinnerStyle = () => {
   return {
-    left: '50%',
-    ml: '-35px',
-    position: 'absolute',
-    right: '0',
+    left: "50%",
+    ml: "-35px",
+    position: "absolute",
+    right: "0",
   };
 };
 
 const content = (props) => {
   const { isLoading } = props;
   return {
-    opacity: isLoading ? '0' : '1',
+    opacity: isLoading ? "0" : "1",
   };
 };
 
 const btnStyle = ({ disabled }) => ({
   ...buttonStyle,
-  cursor: !disabled ? 'pointer' : 'initial',
+  cursor: !disabled ? "pointer" : "initial",
   opacity: disabled ? 0.5 : 1,
 });
 

@@ -41,13 +41,13 @@ const ServiceEdit = () => {
           dispo_max: values.dispo_max,
           email: values.email,
           etablissement: values.etablissement,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude,
           nom: values.nom,
           prenom: values.prenom,
           service_id: service.id,
           telephone: values.telephone,
           ville: values.geocode.city,
-          latitude: values.geocode.latitude,
-          longitude: values.geocode.longitude,
         },
       });
     } catch (error) {

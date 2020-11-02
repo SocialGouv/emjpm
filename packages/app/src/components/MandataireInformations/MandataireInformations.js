@@ -107,11 +107,15 @@ const MandataireInformations = () => {
       </Flex>
       <Flex mt="5">
         <Box>
-          <LinkButton href="/mandataires/edit-informations">Modifier vos informations</LinkButton>
+          <LinkButton href="/mandataires/edit-informations">
+            Modifier vos informations
+          </LinkButton>
         </Box>
       </Flex>
       <Flex mt="1">
-        <LinkButton href="/mandataires/edit-password">Modifier votre mot de passe</LinkButton>
+        <LinkButton href="/mandataires/edit-password">
+          Modifier votre mot de passe
+        </LinkButton>
       </Flex>
     </Box>
   );
