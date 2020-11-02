@@ -3,6 +3,7 @@ import "../src/polyfills";
 import { presetEmjpm } from "@emjpm/ui";
 import jwtDecode from "jwt-decode";
 import App from "next/app";
+import Head from "next/head";
 import React from "react";
 import { ApolloProvider } from "react-apollo";
 import { ThemeProvider } from "theme-ui";
@@ -29,14 +30,19 @@ class MyApp extends App {
     apolloClient.cache.writeData({ data });
 
     return (
-      <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={presetEmjpm}>
-          <UserProvider user={user}>
-            {/* Workaround for https://github.com/vercel/next.js/issues/8592 */}
-            <Component {...pageProps} err={err} />
-          </UserProvider>
-        </ThemeProvider>
-      </ApolloProvider>
+      <>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        </Head>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={presetEmjpm}>
+            <UserProvider user={user}>
+              {/* Workaround for https://github.com/vercel/next.js/issues/8592 */}
+              <Component {...pageProps} err={err} />
+            </UserProvider>
+          </ThemeProvider>
+        </ApolloProvider>
+      </>
     );
   }
 }
