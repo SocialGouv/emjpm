@@ -41,7 +41,7 @@ services:
       - 5000:8080
     depends_on:
       - db
-    # network_mode: "host"
+    restart: always
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
       HASURA_GRAPHQL_DATABASE_URL: postgres://emjpm:test@db:5432/emjpm
