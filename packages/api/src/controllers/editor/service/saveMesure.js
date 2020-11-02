@@ -128,7 +128,6 @@ async function persistMesure(
         ville: etat.ville,
         pays: etat.pays,
         type_etablissement: etat.type_etablissement,
-        etablissement_siret: etat.etablissement_siret || "",
       });
       mesure.etats.push(mesureEtat);
     }

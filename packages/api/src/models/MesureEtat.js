@@ -27,7 +27,6 @@ class MesureEtat extends Model {
         ville: { type: "string" },
         pays: { type: "string" },
         type_etablissement: { type: ["string", null] },
-        etablissement_siret: { type: ["string", null] },
       },
     };
   }
