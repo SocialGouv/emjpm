@@ -53,9 +53,7 @@ const RowItem = ({ item }) => {
 
         <Box mr="1" width="220px">
           <Link href={`/admin/editors/[editor_id]`} as={`/admin/editors/${id}`}>
-            <a>
-              <Button>Voir</Button>
-            </a>
+            <Button>Voir</Button>
           </Link>
           <Button ml="3" onClick={() => removeEditorFromList(id)}>
             supprimer

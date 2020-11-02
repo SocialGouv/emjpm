@@ -1,6 +1,5 @@
 import { Button, Card, CheckBox, Input, Select } from "@emjpm/ui";
 import { ChevronDown } from "@styled-icons/evil/ChevronDown";
-import Link from "next/link";
 import React, {
   Fragment,
   useContext,
@@ -11,6 +10,7 @@ import React, {
 import { Box, Flex } from "rebass";
 
 import { departementToOptions } from "../../util/option/OptionUtil";
+import { Link } from "../Commons";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { UserContext } from "../UserContext";
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
@@ -108,9 +108,7 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Link href={link.url}>
-                            <a>{link.title}</a>
-                          </Link>
+                          <Link href={link.url}>{link.title}</Link>
                         </Box>
                       );
                     })}

@@ -38,9 +38,7 @@ const RowItem = ({ item }) => {
               href={`/admin/services/[service_id]`}
               as={`/admin/services/${id}`}
             >
-              <a>
-                <Button>Voir</Button>
-              </a>
+              <Button>Voir</Button>
             </Link>
           </Box>
         </Flex>

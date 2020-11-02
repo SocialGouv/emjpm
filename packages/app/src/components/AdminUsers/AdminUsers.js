@@ -65,9 +65,7 @@ const RowItem = ({ item }) => {
               href={`/admin/users/[user_id]?type=${type}&active=${active}`}
               as={`/admin/users/${id}?type=${type}&active=${active}`}
             >
-              <a>
-                <Button>Voir</Button>
-              </a>
+              <Button>Voir</Button>
             </Link>
           </Box>
         </Flex>

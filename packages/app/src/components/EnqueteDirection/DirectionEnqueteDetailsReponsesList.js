@@ -156,9 +156,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
                     href={`/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]`}
                     as={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
-                    <a>
-                      <Button>Visualiser</Button>
-                    </a>
+                    <Button>Visualiser</Button>
                   </Link>
                 </Box>
               );

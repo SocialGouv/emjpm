@@ -92,11 +92,11 @@ export const SignupDirection = () => {
                 </Field>
                 <Flex justifyContent="flex-end">
                   <Box>
-                    <Button mr="2" variant="outline">
-                      <Link href="/">
-                        <a>Annuler</a>
-                      </Link>
-                    </Button>
+                    <Link href="/">
+                      <Button mr="2" variant="outline">
+                        Annuler
+                      </Button>
+                    </Link>
                   </Box>
                   <Box>
                     <Button
@@ -107,7 +107,7 @@ export const SignupDirection = () => {
                         validateStepOne(false);
                       }}
                     >
-                      <a>Retour</a>
+                      Retour
                     </Button>
                   </Box>
                   <Box>

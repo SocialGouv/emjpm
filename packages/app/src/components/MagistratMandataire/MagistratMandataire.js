@@ -91,9 +91,7 @@ export const MagistratMandataire = (props) => {
           href={`/magistrats/gestionnaires/[gestionnaire_id]/reservation`}
           as={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
         >
-          <a>
-            <Button>Réserver une mesure</Button>
-          </a>
+          <Button>Réserver une mesure</Button>
         </Link>
       </Flex>
 

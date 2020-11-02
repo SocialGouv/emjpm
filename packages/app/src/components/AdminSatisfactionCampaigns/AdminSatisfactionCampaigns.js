@@ -73,9 +73,7 @@ const RowItem = ({ item }) => {
             href={`/admin/satisfaction-campaigns/[satisfaction_campaign_id]`}
             as={`/admin/satisfaction-campaigns/${id}`}
           >
-            <a>
-              <Button>Voir</Button>
-            </a>
+            <Button>Voir</Button>
           </Link>
           <Button ml="3" onClick={() => removeSatisfactionCampaignFromList(id)}>
             supprimer
