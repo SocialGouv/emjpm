@@ -4,7 +4,7 @@ import { getDataFromTree } from "react-apollo";
 
 import initApollo from "./init-apollo";
 
-const WithApolloClient = App => {
+const WithApolloClient = (App) => {
   return class Apollo extends React.Component {
     static displayName = "withApollo(App)";
     static async getInitialProps(ctx) {
