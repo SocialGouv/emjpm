@@ -42,7 +42,7 @@ router.post(
   async (req, res, next) => {
     try {
       const { userId, serviceId } = req.user;
-      const mesures = await getMesures({ userId, serviceId });
+      const mesures = await getMesures({ serviceId, userId });
       const exportedMesures = mesures.map((mesure) => {
         const {
           numero_rg,
@@ -60,19 +60,19 @@ router.post(
           cabinet,
         } = mesure;
         return {
-          numero_rg,
-          numero_dossier,
-          date_nomination,
-          code_postal,
-          ville,
-          pays,
-          civilite,
           annee_naissance,
+          champ_mesure,
+          civilite,
+          cabinet,
+          code_postal,
+          date_nomination,
           lieu_vie,
           nature_mesure,
-          champ_mesure,
+          numero_dossier,
+          numero_rg,
+          pays,
           tribunal: tis ? tis.etablissement : "",
-          cabinet,
+          ville,
         };
       });
       if (mesures.length) {
@@ -84,7 +84,7 @@ router.post(
         res.header("Content-Type", "application/octet-stream");
         res.attachment("export_mesures.xlsx");
 
-        var wopts = { bookType: "xlsx", bookSST: false, type: "base64" };
+        var wopts = { bookSST: false, bookType: "xlsx", type: "base64" };
         var wbout = XLSX.write(wb, wopts);
 
         return res.send({ data: wbout });

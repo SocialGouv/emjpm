@@ -26,12 +26,12 @@ const mesureUpdate = async (req, res) => {
 
   try {
     const mesureQueryResult = await updateMesure({
-      id,
-      datas: body,
-      type,
       antenneId,
+      datas: body,
+      id,
       serviceOrMandataire,
       ti,
+      type,
     });
 
     await updateMesureStates(serviceOrMandataire, type);

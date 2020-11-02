@@ -3,6 +3,7 @@
 const request = require("supertest");
 
 const nodemailerMock = require("nodemailer-mock");
+
 jest.setMock("nodemailer", nodemailerMock);
 
 // Fake env
@@ -25,26 +26,26 @@ beforeEach(async () => {
 });
 
 const defaultRegister = (params) => ({
+  mandataire: {
+    adresse: "",
+    code_postal: "75010",
+    department_id: 1,
+    etablissement: "",
+    telephone: "",
+    ville: "",
+  },
   user: {
-    username: params && params.username != undefined ? params.username : "toto",
-    nom: params && params.nom != undefined ? params.nom : "testAd",
-    prenom: params && params.prenom != undefined ? params.prenom : "testPrenom",
     email: params && params.email != undefined ? params.email : "toto@toto.com",
-    type: params && params.type != undefined ? params.type : "individuel",
+    nom: params && params.nom != undefined ? params.nom : "testAd",
     password:
       params && params.password != undefined ? params.password : "test123456?",
     passwordConfirmation:
       params && params.passwordConfirmation != undefined
         ? params.passwordConfirmation
         : "test123456?",
-  },
-  mandataire: {
-    etablissement: "",
-    adresse: "",
-    code_postal: "75010",
-    department_id: 1,
-    ville: "",
-    telephone: "",
+    prenom: params && params.prenom != undefined ? params.prenom : "testPrenom",
+    type: params && params.type != undefined ? params.type : "individuel",
+    username: params && params.username != undefined ? params.username : "toto",
   },
 });
 
@@ -117,8 +118,8 @@ test("should add magistrat", async () => {
     .send({
       ...defaultRegister({
         email: "magistrat@emjpm.fr",
-        username: "magistrat",
         type: "ti",
+        username: "magistrat",
       }),
       magistrat: {
         cabinet: "2A",

@@ -16,25 +16,25 @@ class Direction extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
+        department_id: { type: "integrer" },
         id: { type: "integer" },
         region_id: { type: "integrer" },
         user_id: { type: "integrer" },
-        department_id: { type: "integrer" },
       },
+      type: "object",
     };
   }
 
   static get relationMappings() {
     return {
       users: {
-        relation: Model.HasManyRelation,
-        modelClass: User,
         join: {
           from: "direction.user_id",
           to: "users.id",
         },
+        modelClass: User,
+        relation: Model.HasManyRelation,
       },
     };
   }

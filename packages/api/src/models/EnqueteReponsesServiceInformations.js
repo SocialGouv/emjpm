@@ -15,15 +15,15 @@ class EnqueteReponsesServiceInformations extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        departement: { type: "string" },
-        region: { type: "string" },
-        nom: { type: "string" },
-        nb_structures_concernees: { type: "number" },
         affiliation_federation: { type: "string" },
+        departement: { type: "string" },
+        nb_structures_concernees: { type: "number" },
+        nom: { type: "string" },
+        region: { type: "string" },
         type_organisme_gestionnaire: { type: "string" },
       },
+      type: "object",
     };
   }
 }

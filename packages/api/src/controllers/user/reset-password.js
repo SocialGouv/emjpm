@@ -29,17 +29,17 @@ const resetPassword = async (req, res) => {
         logger.error(err);
         return res.status(400).json({
           errors: {
-            msg: "Une erreur est survenue",
             location: "body",
+            msg: "Une erreur est survenue",
           },
         });
       }
       if (!passwordCorrect) {
         return res.status(401).json({
           errors: {
-            param: "password",
-            msg: "votre mot de passe actuel n'est pas le bon",
             location: "body",
+            msg: "votre mot de passe actuel n'est pas le bon",
+            param: "password",
           },
         });
       }
@@ -58,9 +58,9 @@ const resetPassword = async (req, res) => {
     logger.error(err);
     return res.status(400).json({
       errors: {
-        msg: "Une erreur est survenue",
-        location: "body",
         error: err,
+        location: "body",
+        msg: "Une erreur est survenue",
       },
     });
   }

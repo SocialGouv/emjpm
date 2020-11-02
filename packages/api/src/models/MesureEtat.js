@@ -15,19 +15,19 @@ class MesureEtat extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        id: { type: "integer" },
-        mesure_id: { type: "integer" },
-        date_changement_etat: { type: "date" },
-        nature_mesure: { type: "string" },
         champ_mesure: { type: ["string", null] },
-        lieu_vie: { type: "string" },
         code_postal: { type: "string" },
-        ville: { type: "string" },
+        date_changement_etat: { type: "date" },
+        id: { type: "integer" },
+        lieu_vie: { type: "string" },
+        mesure_id: { type: "integer" },
+        nature_mesure: { type: "string" },
         pays: { type: "string" },
         type_etablissement: { type: ["string", null] },
+        ville: { type: "string" },
       },
+      type: "object",
     };
   }
 }

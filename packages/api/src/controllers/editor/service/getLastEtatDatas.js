@@ -20,10 +20,10 @@ async function getLastEtatDatas(etats) {
   }
 
   return {
-    lastEtat,
     departement,
-    longitude,
+    lastEtat,
     latitude,
+    longitude,
   };
 }
 

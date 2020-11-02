@@ -15,21 +15,21 @@ class EnqueteReponsesPreposePrestationsSociales extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
-        tutelle: { type: "jsonb" },
-        curatelle_simple: { type: "jsonb" },
-        curatelle_renforcee: { type: "jsonb" },
-        sauvegarde_autres_mesures: { type: "jsonb" },
-        maj: { type: "jsonb" },
         aah: { type: "float" },
-        pch: { type: "float" },
         asi: { type: "float" },
-        rsa: { type: "float" },
         als_apl: { type: "float" },
-        aspa: { type: "float" },
+        curatelle_renforcee: { type: "jsonb" },
         apa: { type: "float" },
+        curatelle_simple: { type: "jsonb" },
+        aspa: { type: "float" },
+        maj: { type: "jsonb" },
+        pch: { type: "float" },
+        tutelle: { type: "jsonb" },
+        rsa: { type: "float" },
+        sauvegarde_autres_mesures: { type: "jsonb" },
       },
+      type: "object",
     };
   }
 }

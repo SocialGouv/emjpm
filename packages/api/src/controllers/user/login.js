@@ -17,9 +17,9 @@ const login = async (req, res, next) => {
     if (err) {
       return res.status(401).json({
         errors: {
-          msg: "Vos informations de connexion sont erronées",
-          location: "body",
           error: err,
+          location: "body",
+          msg: "Vos informations de connexion sont erronées",
         },
       });
     }
@@ -29,9 +29,9 @@ const login = async (req, res, next) => {
         .update({ last_login: new Date().toISOString() });
 
       await Logs.query().insert({
-        user_id: user.id,
         action: "connexion",
         result: "success",
+        user_id: user.id,
       });
 
       const userResult = await user.getUser();

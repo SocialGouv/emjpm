@@ -31,8 +31,8 @@ const resetPasswordWithToken = async (req, res) => {
     try {
       await User.query().where("id", user.id).update({
         password: newPasswordHash,
-        reset_password_token: null,
         reset_password_expires: null,
+        reset_password_token: null,
       });
       res.status(200).json({ status: "ok" });
       return confirmationPasswordEmail(user.email);
@@ -43,9 +43,9 @@ const resetPasswordWithToken = async (req, res) => {
   } catch (err) {
     return res.status(419).json({
       errors: {
-        msg: "Votre lien de réinitialisation a expiré",
-        location: "body",
         error: err,
+        location: "body",
+        msg: "Votre lien de réinitialisation a expiré",
       },
     });
   }

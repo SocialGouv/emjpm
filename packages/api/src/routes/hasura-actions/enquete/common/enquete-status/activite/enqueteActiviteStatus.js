@@ -15,84 +15,77 @@ module.exports = async (enqueteReponse) => {
   const data = enqueteReponse.enquete_reponses_activite;
 
   const activiteStatus = {
-    curatelleRenforcee: await getValidationStatus(data, {
-      schema: yup.object(
-        buildMesureGroupsAttributes([
-          "curatelle_renforcee_etablissement",
-          "curatelle_renforcee_domicile",
-        ])
-      ),
-      debugName: "activite/curatelleRenforcee",
-      logDataWithErrors: false,
-    }),
-    curatelleSimple: await getValidationStatus(data, {
-      schema: yup.object(
-        buildMesureGroupsAttributes([
-          "curatelle_simple_etablissement",
-          "curatelle_simple_domicile",
-        ])
-      ),
-      debugName: "activite/curatelleSimple",
-      logDataWithErrors: false,
-    }),
-    tutelle: await getValidationStatus(data, {
-      schema: yup.object(
-        buildMesureGroupsAttributes([
-          "tutelle_etablissement",
-          "tutelle_domicile",
-        ])
-      ),
-      debugName: "activite/tutelle",
-      logDataWithErrors: false,
-    }),
     accompagnementJudiciaire: await getValidationStatus(data, {
+      debugName: "activite/accompagnementJudiciaire",
+      logDataWithErrors: false,
       schema: yup.object(
         buildMesureGroupsAttributes([
           "accompagnement_judiciaire_etablissement",
           "accompagnement_judiciaire_domicile",
         ])
       ),
-      debugName: "activite/accompagnementJudiciaire",
+    }),
+    causesSortiesDispositif: await getValidationStatus(data, {
+      debugName: "activite/causesSortiesDispositif",
+      schema: yup.object(
+        ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce(
+          (acc, attrName) => {
+            acc[attrName] = yup.number().min(0).integer().nullable();
+            return acc;
+          },
+          []
+        )
+      ),
       logDataWithErrors: false,
     }),
     curatelleBiens: await getValidationStatus(data, {
+      debugName: "activite/curatelleBiens",
+      logDataWithErrors: false,
       schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_biens_etablissement",
           "curatelle_biens_domicile",
         ])
       ),
-      debugName: "activite/curatelleBiens",
-      logDataWithErrors: false,
     }),
     curatellePersonne: await getValidationStatus(data, {
+      debugName: "activite/curatellePersonne",
+      logDataWithErrors: false,
       schema: yup.object(
         buildMesureGroupsAttributes([
           "curatelle_personne_etablissement",
           "curatelle_personne_domicile",
         ])
       ),
-      debugName: "activite/curatellePersonne",
-      logDataWithErrors: false,
     }),
-    subrogeTuteurCreateur: await getValidationStatus(data, {
+    curatelleRenforcee: await getValidationStatus(data, {
+      debugName: "activite/curatelleRenforcee",
+      logDataWithErrors: false,
       schema: yup.object(
-        buildMesureGroupsAttributes(["subroge_tuteur_createur"])
+        buildMesureGroupsAttributes([
+          "curatelle_renforcee_etablissement",
+          "curatelle_renforcee_domicile",
+        ])
       ),
-      debugName: "activite/subrogeTuteurCreateur",
-      logDataWithErrors: false,
     }),
-    sauvegardeJustice: await getValidationStatus(data, {
-      schema: yup.object(buildMesureGroupsAttributes(["sauvegarde_justice"])),
-      debugName: "activite/sauvegardeJustice",
+    curatelleSimple: await getValidationStatus(data, {
+      debugName: "activite/curatelleSimple",
       logDataWithErrors: false,
+      schema: yup.object(
+        buildMesureGroupsAttributes([
+          "curatelle_simple_etablissement",
+          "curatelle_simple_domicile",
+        ])
+      ),
     }),
     mandatHadocMajeur: await getValidationStatus(data, {
-      schema: yup.object(buildMesureGroupsAttributes(["mandat_adhoc_majeur"])),
       debugName: "activite/mandatHadocMajeur",
       logDataWithErrors: false,
+      schema: yup.object(buildMesureGroupsAttributes(["mandat_adhoc_majeur"])),
     }),
     revisionMesures: await getValidationStatus(data, {
+      debugName: "activite/revisionMesures",
+      logDataWithErrors: false,
       schema: yup.object(
         [
           "revisions_main_levee",
@@ -105,21 +98,28 @@ module.exports = async (enqueteReponse) => {
           return acc;
         }, [])
       ),
-      debugName: "activite/revisionMesures",
-      logDataWithErrors: false,
     }),
-    causesSortiesDispositif: await getValidationStatus(data, {
-      schema: yup.object(
-        ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce(
-          (acc, attrName) => {
-            acc[attrName] = yup.number().min(0).integer().nullable();
-            return acc;
-          },
-          []
-        )
-      ),
-      debugName: "activite/causesSortiesDispositif",
+    sauvegardeJustice: await getValidationStatus(data, {
+      debugName: "activite/sauvegardeJustice",
       logDataWithErrors: false,
+      schema: yup.object(buildMesureGroupsAttributes(["sauvegarde_justice"])),
+    }),
+    subrogeTuteurCreateur: await getValidationStatus(data, {
+      debugName: "activite/subrogeTuteurCreateur",
+      logDataWithErrors: false,
+      schema: yup.object(
+        buildMesureGroupsAttributes(["subroge_tuteur_createur"])
+      ),
+    }),
+    tutelle: await getValidationStatus(data, {
+      debugName: "activite/tutelle",
+      logDataWithErrors: false,
+      schema: yup.object(
+        buildMesureGroupsAttributes([
+          "tutelle_etablissement",
+          "tutelle_domicile",
+        ])
+      ),
     }),
   };
 

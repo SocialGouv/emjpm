@@ -22,11 +22,11 @@ const mesureCreate = async (req, res) => {
 
   try {
     const mesureQueryResult = await saveMesure({
-      datas: body,
-      type,
       antenneId,
+      datas: body,
       serviceOrMandataire,
       ti,
+      type,
     });
 
     await updateMesureStates(serviceOrMandataire, type);

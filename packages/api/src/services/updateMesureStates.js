@@ -18,8 +18,8 @@ async function updateServiceMesureStates(service_id) {
   );
 
   await Service.query().findById(service_id).patch({
-    mesures_in_progress,
     mesures_awaiting,
+    mesures_in_progress,
   });
 
   const antennes = await ServiceAntenne.query().where({
@@ -43,8 +43,8 @@ async function updateAntenneMesureState(antenne) {
   );
 
   await ServiceAntenne.query().findById(antenne.id).patch({
-    mesures_in_progress,
     mesures_awaiting,
+    mesures_in_progress,
   });
 }
 
@@ -78,8 +78,8 @@ async function updateMandataireMesureStates(mandataire_id) {
   );
 
   await Mandataire.query().findById(mandataire_id).patch({
-    mesures_en_cours,
     mesures_en_attente,
+    mesures_en_cours,
   });
 }
 
@@ -89,6 +89,6 @@ function countMesuresInState(mesures, state) {
 }
 
 module.exports = {
-  updateServiceMesureStates,
   updateMandataireMesureStates,
+  updateServiceMesureStates,
 };

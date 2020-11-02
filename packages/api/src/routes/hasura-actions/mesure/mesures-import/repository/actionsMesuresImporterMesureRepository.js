@@ -18,8 +18,8 @@ async function findAntenne({ service_id, antenne_name }, cache) {
   let antenne = cache[antenne_name];
   if (!antenne) {
     antenne = await ServiceAntenne.query().findOne({
-      service_id,
       name: antenne_name,
+      service_id,
     });
   }
   if (antenne) {
@@ -29,8 +29,8 @@ async function findAntenne({ service_id, antenne_name }, cache) {
 }
 
 const actionsMesuresImporterMesureRepository = {
-  findTribunalBySiret,
   findAntenne,
+  findTribunalBySiret,
 };
 
 module.exports = actionsMesuresImporterMesureRepository;

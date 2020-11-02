@@ -22,13 +22,13 @@ const MAIN_ROLES = [
 ];
 
 const redirs = {
+  admin: "/admin",
+  default: "/",
+  direction: "/direction",
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",
   ti: "/magistrats",
-  admin: "/admin",
-  direction: "/direction",
-  default: "/",
 };
 
 class User extends Model {
@@ -42,9 +42,23 @@ class User extends Model {
 
   static get relationMappings() {
     return {
+      direction: {
+        join: {
+          from: "users.id",
+          to: "direction.user_id",
+        },
+        modelClass: Direction,
+        relation: Model.BelongsToOneRelation,
+      },
+      mandataire: {
+        join: {
+          from: "users.id",
+          to: "mandataires.user_id",
+        },
+        modelClass: Mandataire,
+        relation: Model.BelongsToOneRelation,
+      },
       roles: {
-        relation: Model.ManyToManyRelation,
-        modelClass: Role,
         join: {
           from: "users.id",
           through: {
@@ -53,18 +67,10 @@ class User extends Model {
           },
           to: "role.id",
         },
-      },
-      mandataire: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Mandataire,
-        join: {
-          from: "users.id",
-          to: "mandataires.user_id",
-        },
+        modelClass: Role,
+        relation: Model.ManyToManyRelation,
       },
       service: {
-        relation: Model.HasOneThroughRelation,
-        modelClass: Service,
         join: {
           from: "users.id",
           through: {
@@ -73,14 +79,8 @@ class User extends Model {
           },
           to: "services.id",
         },
-      },
-      direction: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Direction,
-        join: {
-          from: "users.id",
-          to: "direction.user_id",
-        },
+        modelClass: Service,
+        relation: Model.HasOneThroughRelation,
       },
     };
   }
@@ -106,12 +106,14 @@ class User extends Model {
     const token = await this.getJwt();
     return {
       id: this.id,
-      username: this.username,
       roles: this.getRoles(),
       token: token,
+      type: this.type,
+
       // TODO: remove when full graphql auth
       url: redirs[this.type] || redirs.default,
-      type: this.type,
+
+      username: this.username,
     };
   }
 
@@ -138,29 +140,29 @@ class User extends Model {
     const role = this.getDefaultRole();
     const agrements = await this.getDirectionAgrements();
     return {
+      "x-hasura-agrements": `{${agrements.join(",")}}`,
       "x-hasura-allowed-roles": this.getRoles(),
       "x-hasura-default-role": role,
-      "x-hasura-user-id": `${this.id}`,
       "x-hasura-mandataire-id": `${this.getMandataire()}`,
       "x-hasura-service-id": `${this.getService()}`,
-      "x-hasura-agrements": `{${agrements.join(",")}}`,
+      "x-hasura-user-id": `${this.id}`,
     };
   }
 
   async getJwt() {
     const signOptions = {
-      subject: this.id.toString(),
-      expiresIn: "30d",
       algorithm: "RS256",
+      expiresIn: "30d",
+      subject: this.id.toString(),
     };
 
     const hasuraClaims = await this.getHasuraClaims();
     const claim = {
-      name: this.username,
-      id: this.id,
-      url: redirs[this.type] || redirs.default,
-      role: this.getDefaultRole(),
       "https://hasura.io/jwt/claims": hasuraClaims,
+      id: this.id,
+      name: this.username,
+      role: this.getDefaultRole(),
+      url: redirs[this.type] || redirs.default,
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
@@ -180,15 +182,15 @@ class User extends Model {
 
   static get jsonSchema() {
     return {
-      type: "object",
       properties: {
+        cabinet: { type: "string" },
+        email: { type: "string" },
         id: { type: "integer" },
-        username: { type: "string", minLength: 1, maxLength: 255 },
         nom: { type: "string" },
         prenom: { type: "string" },
-        email: { type: "string" },
-        cabinet: { type: "string" },
+        username: { maxLength: 255, minLength: 1, type: "string" },
       },
+      type: "object",
     };
   }
 }
