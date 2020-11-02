@@ -124,7 +124,6 @@ async function processEtats(MesureEtat, mesureId, body) {
       ville,
       pays,
       type_etablissement,
-      etablissement_siret,
     } = etat;
 
     const etatDatas = {
@@ -137,7 +136,6 @@ async function processEtats(MesureEtat, mesureId, body) {
       ville,
       pays,
       type_etablissement,
-      etablissement_siret,
     };
     const etatToUpdate = findEtat(loadedEtats, etat);
     if (etatToUpdate) {
