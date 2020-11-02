@@ -61,9 +61,9 @@ router.post(
         } = mesure;
         return {
           annee_naissance,
+          cabinet,
           champ_mesure,
           civilite,
-          cabinet,
           code_postal,
           date_nomination,
           lieu_vie,

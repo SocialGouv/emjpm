@@ -16,6 +16,7 @@ class EnqueteReponsesActivite extends Model {
   static get jsonSchema() {
     return {
       properties: {
+        /* eslint-disable sort-keys-fix/sort-keys-fix */
         curatelle_renforcee_domicile_debut_annee: { TYPE: "NUMBER" },
         curatelle_renforcee_domicile_fin_annee: { TYPE: "NUMBER" },
         curatelle_renforcee_domicile_mesures_nouvelles: { TYPE: "NUMBER" },

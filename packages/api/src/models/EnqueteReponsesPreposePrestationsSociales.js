@@ -17,17 +17,17 @@ class EnqueteReponsesPreposePrestationsSociales extends Model {
     return {
       properties: {
         aah: { type: "float" },
-        asi: { type: "float" },
         als_apl: { type: "float" },
-        curatelle_renforcee: { type: "jsonb" },
         apa: { type: "float" },
-        curatelle_simple: { type: "jsonb" },
+        asi: { type: "float" },
         aspa: { type: "float" },
+        curatelle_renforcee: { type: "jsonb" },
+        curatelle_simple: { type: "jsonb" },
         maj: { type: "jsonb" },
         pch: { type: "float" },
-        tutelle: { type: "jsonb" },
         rsa: { type: "float" },
         sauvegarde_autres_mesures: { type: "jsonb" },
+        tutelle: { type: "jsonb" },
       },
       type: "object",
     };

@@ -6,8 +6,8 @@ function sanitizeMesureProperties(mesure) {
       ? parseInt(mesure.annee_naissance)
       : undefined,
     antenne_id: mesure.antenne_id,
-    civilite: mesure.civilite,
     cause_sortie: mesure.cause_sortie,
+    civilite: mesure.civilite,
     created_at: mesure.created_at,
     date_fin_mesure: mesure.date_fin_mesure
       ? format(mesure.date_fin_mesure, "yyyy-MM-dd")

@@ -75,16 +75,16 @@ function parse(ws) {
   return {
     aah: parser.integer(ws["D22"]),
     als_apl: parser.integer(ws["D26"]),
-    asi: parser.integer(ws["D24"]),
     apa: parser.integer(ws["D28"]),
-    curatelle_renforcee,
+    asi: parser.integer(ws["D24"]),
     aspa: parser.integer(ws["D27"]),
+    curatelle_renforcee,
     curatelle_simple,
     maj,
     pch: parser.integer(ws["D23"]),
     rsa: parser.integer(ws["D25"]),
-    tutelle,
     sauvegarde_autres_mesures,
+    tutelle,
   };
 }
 

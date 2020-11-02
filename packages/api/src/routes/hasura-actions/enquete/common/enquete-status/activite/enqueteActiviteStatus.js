@@ -27,6 +27,7 @@ module.exports = async (enqueteReponse) => {
     }),
     causesSortiesDispositif: await getValidationStatus(data, {
       debugName: "activite/causesSortiesDispositif",
+      logDataWithErrors: false,
       schema: yup.object(
         ["sorties_main_levee", "sorties_deces", "sorties_masp"].reduce(
           (acc, attrName) => {
@@ -36,7 +37,6 @@ module.exports = async (enqueteReponse) => {
           []
         )
       ),
-      logDataWithErrors: false,
     }),
     curatelleBiens: await getValidationStatus(data, {
       debugName: "activite/curatelleBiens",

@@ -165,9 +165,9 @@ describe("POST /api/editors/mesures", () => {
         date_protection_en_cours: "2020-01-10",
         etats: [
           {
+            champ_mesure: "protection_bien",
             code_postal: "89000",
             date_changement_etat: "2020-01-05",
-            champ_mesure: "protection_bien",
             lieu_vie: "domicile",
             nature_mesure: "curatelle_simple",
             pays: "FR",

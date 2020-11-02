@@ -1,6 +1,7 @@
 const { enqueteExcelParser: parser } = require("./services");
 
 function parse(ws) {
+  /* eslint-disable sort-keys-fix/sort-keys-fix */
   return {
     tutelle_age_25_39_ans_femme: parser.integer(ws["D9"]),
     curatelle_age_inf_25_ans_femme: parser.integer(ws["C11"]),

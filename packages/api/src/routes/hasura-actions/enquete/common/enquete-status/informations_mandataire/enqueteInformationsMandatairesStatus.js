@@ -52,14 +52,14 @@ module.exports = async (enqueteReponse) => {
                 ),
             }),
           exerce_seul_activite: yup.boolean().required(),
-          nom: yup.string().required(),
           forme_juridique: yup.string().when("benevole", {
             is: false,
             otherwise: yup.string().nullable(),
             then: yup.string().required(),
           }),
-          region: yup.string().required(),
           local_professionnel: yup.boolean().required(),
+          nom: yup.string().required(),
+          region: yup.string().required(),
           secretaire_specialise_etp: yup
             .number()
             .when("exerce_secretaires_specialises", {

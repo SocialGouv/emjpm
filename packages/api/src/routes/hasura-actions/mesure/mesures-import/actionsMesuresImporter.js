@@ -298,25 +298,25 @@ const prepareMesure = async (
 
   const data = {
     annee_naissance: mesureDatas.annee,
+    antenne_id: mesureDatas.antenne_id,
+    cabinet: mesureDatas.tribunal_cabinet,
     champ_mesure: mesureDatas.champ_mesure,
     civilite: mesureDatas.civilite,
     code_postal: mesureDatas.code_postal,
-    antenne_id: mesureDatas.antenne_id,
     date_nomination: mesureDatas.date_nomination,
     department_id: department.id,
-    mandataire_id: mandataire ? mandataire.id : null,
-    cabinet: mesureDatas.tribunal_cabinet,
-    nature_mesure: mesureDatas.nature_mesure,
-    lieu_vie: mesureDatas.lieu_vie,
-    ville: mesureDatas.ville,
     latitude,
+    lieu_vie: mesureDatas.lieu_vie,
     longitude,
-    status: mesureDatas.status,
+    mandataire_id: mandataire ? mandataire.id : null,
+    nature_mesure: mesureDatas.nature_mesure,
     numero_dossier: mesureDatas.numero_dossier,
     numero_rg: mesureDatas.numero_rg,
     pays,
     service_id: service ? service.id : null,
+    status: mesureDatas.status,
     ti_id: ti ? ti.id : null,
+    ville: mesureDatas.ville,
   };
 
   const [mesure] = await Mesure.query().where({

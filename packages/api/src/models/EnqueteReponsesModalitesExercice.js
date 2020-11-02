@@ -16,8 +16,8 @@ class EnqueteReponsesModalitesExercice extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        activite_exercee_par: { type: "string" },
         actions_information_tuteurs_familiaux: { type: "boolean" },
+        activite_exercee_par: { type: "string" },
         departement: { type: "string" },
         etablissements_type: { type: "string" },
         nombre_etablissements: { type: "number" },
