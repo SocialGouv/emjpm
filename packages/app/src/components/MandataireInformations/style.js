@@ -24,18 +24,18 @@ const iconTextStyle = {
 
 const subtitle = {
   color: "mediumGray",
+  flex: 1 / 3,
   fontSize: 1,
   fontWeight: "500",
   lineHeight: "1.4",
-  flex: 1 / 3,
 };
 
 const content = {
   color: "black",
+  flex: 2 / 3,
   fontSize: 1,
   fontWeight: "600",
   lineHeight: "1.4",
-  flex: 2 / 3,
 };
 
 export {
