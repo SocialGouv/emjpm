@@ -1,4 +1,4 @@
-export const getRegionCode = (zipcode) => {
+export function getDepartementCode(zipcode) {
   if (!zipcode || zipcode.length !== 5) {
     throw new Error("zip code is invalid");
   }
@@ -11,4 +11,4 @@ export const getRegionCode = (zipcode) => {
   } else {
     return zipcode.substring(0, 2);
   }
-};
+}
