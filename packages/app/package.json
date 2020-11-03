@@ -49,8 +49,6 @@
     "date-fns": "^2.16.1",
     "detect-browser": "^5.2.0",
     "dotenv": "^8.2.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
     "formik": "^2.2.1",
     "fuse.js": "^6.4.3",
     "graphql": "^14.7.0",
