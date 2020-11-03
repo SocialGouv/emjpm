@@ -24,9 +24,10 @@ const iconTextStyle = {
 
 const subtitle = {
   color: "mediumGray",
-  fontSize: "12px",
+  fontSize: 1,
   fontWeight: "500",
   lineHeight: "1.4",
+  flex: 1 / 3,
 };
 
 const content = {
@@ -34,12 +35,7 @@ const content = {
   fontSize: 1,
   fontWeight: "600",
   lineHeight: "1.4",
-  mb: 1,
-  mt: "1px",
-};
-
-const boxStyle = {
-  flexGrow: 1,
+  flex: 2 / 3,
 };
 
 export {
@@ -49,5 +45,4 @@ export {
   innerTextStyle,
   topTextStyle,
   iconTextStyle,
-  boxStyle,
 };
