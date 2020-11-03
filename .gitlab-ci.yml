@@ -48,7 +48,7 @@ variables:
 
 stages:
   - "Prepare"
-  - "Code Quality"
+  - "Build internal dependencies"
   - "Build Image"
   - "Registration"
   - "Deploy"
@@ -178,118 +178,50 @@ Install core:
   variables:
     CONTEXT: core
 
-################################################################################################
-###################################                    #########################################
-###################################     CODE QUALITY   #########################################
-###################################                    #########################################
-################################################################################################
+##########################################################################################
+#############################                                    #########################
+#############################     BUILD INTERNAL DEPENDENCIES    #########################
+#############################                                    #########################
+##########################################################################################
 
-.quality_stage:
+.build_internal_depencies_stage:
   extends: .base_stage
-  stage: Code Quality
+  stage: Build internal dependencies
   dependencies: []
 
-#
 
-Lint @emjpm/api:
-  extends: .quality_stage
-  image: node:12-alpine
-  dependencies:
-    - Install api
-  needs:
-    - Install api
-  script:
-    - yarn workspace @emjpm/api lint
-
-#
-
-Lint @emjpm/core:
-  extends: .quality_stage
-  image: node:12-alpine
-  dependencies:
-    - Install core
-  needs:
-    - Install core
-  script:
-    - yarn workspace @emjpm/core lint
-
-#
-
-Lint @emjpm/app:
-  extends: .build_stage
-  image: node:12-alpine
-  dependencies:
-    - Install app
-    - Build @emjpm/ui
-    - Build @emjpm/core
-  needs:
-    - Install app
-    - Build @emjpm/ui
-    - Build @emjpm/core
-  script:
-    - yarn workspace @emjpm/app lint
-
-#
-
-Lint @emjpm/ui:
-  extends: .quality_stage
-  image: node:12-alpine
+Build @emjpm/ui:
+  extends: .build_internal_depencies_stage
   dependencies:
     - Install ui
   needs:
     - Install ui
-  script:
-    - yarn workspace @emjpm/ui lint
-
-Test @emjpm/api:
-  extends: .quality_stage
-  image: node:12-alpine
-  dependencies:
-    - Install api
-  needs:
-    - Install api
-  services:
-    - name: postgres:10-alpine
-  allow_failure: true
-  retry: 1
   variables:
-    DATABASE_URL: psql://postgres:@localhost/emjpm
-    PGHOST: localhost
-    PGUSER: postgres
-    TZ: Europe/Paris
-  before_script:
-    - apk add --update --no-cache postgresql=~12
-    - psql --version
-    #
-    - npx wait-for-postgres --host localhost --port 5432 --username=${PGUSER}
+    CONTEXT: ui
+  image: node:12-alpine
   script:
-    - sh -x docker/postgres/postgres-init.sh
-    - yarn workspace @emjpm/api test
+    - yarn workspace @emjpm/${CONTEXT} build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/${CONTEXT}/dist
+#
 
-# Test @emjpm/app:
-#   extends: .quality_stage
-#   image: node:12-alpine
-#   dependencies:
-#     - Install app
-#   needs:
-#     - Install app
-#   services:
-#     - name: postgres:10-alpine
-#   allow_failure: true
-#   retry: 1
-#   variables:
-#     DATABASE_URL: psql://postgres:@localhost/emjpm
-#     PGHOST: localhost
-#     PGUSER: postgres
-#     TZ: Europe/Paris
-#   before_script:
-#     - apk add --update --no-cache postgresql=~11
-#     - psql --version
-#     #
-#     - pg_isready -h localhost
-#   script:
-#     - sh -x docker/postgres/postgres-init.sh
-#     - yarn workspace @emjpm/app test
+Build @emjpm/core:
+  extends: .build_internal_depencies_stage
+  dependencies:
+    - Install core
+  needs:
+    - Install core
+  variables:
+    CONTEXT: core
+  image: node:12-alpine
+  script:
+    - yarn workspace @emjpm/${CONTEXT} build
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/${CONTEXT}/dist
 
 ################################################################################################
 ###################################                    #########################################
@@ -345,40 +277,6 @@ Build @emjpm/app:
       - packages/app/.next
 
 #
-
-Build @emjpm/ui:
-  extends: .quality_stage
-  dependencies:
-    - Install ui
-  needs:
-    - Install ui
-  variables:
-    CONTEXT: ui
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/${CONTEXT} build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/${CONTEXT}/dist
-
-#
-
-Build @emjpm/core:
-  extends: .quality_stage
-  dependencies:
-    - Install core
-  needs:
-    - Install core
-  variables:
-    CONTEXT: core
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/${CONTEXT} build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/${CONTEXT}/dist
 
 ################################################################################################
 ###################################                    #########################################
