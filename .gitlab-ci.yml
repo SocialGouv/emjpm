@@ -103,27 +103,12 @@ stages:
       prefix: ${CI_JOB_NAME}
     paths:
       - $CI_PROJECT_DIR/.cache
-  before_script:
-    - "[[ type jq ]] || apk add jq=~1"
-
-    # HACK(douglasduteil): remove all packages dependencies
-    # To make the installation blazing fast, we remove all packages dependencies
-    # Only the root package.json dependencies will be installed
-    - find packages -maxdepth 1 -type d -not -name ${CONTEXT} | tail -n +2 |
-      xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
-      rm {}/package.json ;
-      jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
-      ; } < {}/package.json"
   script:
-    - "[[ type jq ]] || apk add jq=~1"
-
-    # NOTE(dougladuteil): remove dependencies and devDependencies
-    # As we only install one package, we do not need the cross packages dependencies
-    # like lerna or husky...
-    - "{ rm package.json; jq 'del(.dependencies) | del(.devDependencies)' > package.json; } < package.json"
-
     - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
-    - yarn --frozen-lockfile --prefer-offline
+    - yarn global add @socialgouv/yarn-workspace-focus-install
+    - $(yarn global bin)/yarn-workspace-focus-install
+      --cwd packages/${CONTEXT}
+      --prefer-offline
   artifacts:
     expire_in: 1 day
     paths:
@@ -143,27 +128,6 @@ Install app:
   extends: .base_yarn_workspace_install
   variables:
     CONTEXT: app
-  before_script:
-    - "[[ type jq ]] || apk add jq=~1"
-
-    # HACK(douglasduteil): remove all packages dependencies
-    # To make the installation blazing fast, we remove all packages dependencies
-    # Only the root package.json dependencies will be installed
-    - find packages -maxdepth 1
-      -not -name ${CONTEXT}
-      -not -name ui
-      -not -name core
-      -type d | tail -n +2 |
-      xargs -I {} rm -rf {}
-
-    # HACK(douglasduteil): remove all linked dependencies
-    # To make the installation blazing fast, we remove all packages dependencies
-    # Only the root package.json dependencies will be installed
-    - find packages -maxdepth 1 -type d -not -name ${CONTEXT} | tail -n +2 |
-      xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
-      rm {}/package.json ;
-      jq 'del(.devDependencies)' > {}/package.json
-      ; } < {}/package.json"
 
 #
 
@@ -619,7 +583,6 @@ Restore postgres data:
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
     - kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
-
 
 #######################################################################################################
 ##########################################               ##############################################
