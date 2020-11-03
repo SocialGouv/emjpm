@@ -3,7 +3,10 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { IndicatorListTotal } from "../../src/components/IndicatorList";
-import { IndicatorsMenu } from "../../src/components/IndicatorsMenu";
+import {
+  IndicatorsMenu,
+  IndicatorsMap,
+} from "../../src/components/IndicatorsMenu";
 import { LayoutPublic } from "../../src/components/Layout";
 
 const StatsPage = () => {
@@ -35,6 +38,7 @@ const StatsPage = () => {
             <IndicatorListTotal />
           </Box>
         </Flex>
+        <IndicatorsMap></IndicatorsMap>
         <Box />
       </BoxWrapper>
     </LayoutPublic>
