@@ -1,4 +1,4 @@
-import { getDepartementCode } from "./directions.service";
+import { getDepartementCode } from "./departements.service";
 
 test("it should return common codes", () => {
   expect(getDepartementCode("92350")).toBe("92");
