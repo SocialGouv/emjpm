@@ -1,6 +1,6 @@
+import { getDepartementCode } from "@emjpm/core";
 import gql from "graphql-tag";
 
-import { getRegionCode } from "../util/departements";
 import { geocode } from "../util/geocode";
 
 export const LOCATIONS = gql`
@@ -39,7 +39,7 @@ export const getLocation = async (client, { address, zipcode, city }) => {
 
     // 2. We get the associated department id
 
-    const code = getRegionCode(zipcode);
+    const code = getDepartementCode(zipcode);
     const { data } = await client.query({
       query: LOCATIONS,
       variables: { code, zipcode },
