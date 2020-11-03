@@ -1,8 +1,7 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext } from "react";
-import { Box, Flex } from "rebass";
+import { Box } from "rebass";
 
 import { PATH } from "../../constants/basePath";
 import { isEmailExists } from "../../query-service/EmailQueryService";
@@ -12,9 +11,8 @@ import { UserContext } from "../UserContext";
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
-import { grayBox } from "./style";
 
-const MandataireEditInformations = (props) => {
+const MandataireEditInformations = () => {
   const { id, type } = useContext(UserContext);
 
   const { data, error, loading } = useQuery(MANDATAIRE, {
@@ -85,7 +83,7 @@ const MandataireEditInformations = (props) => {
           department_id: department.id,
           dispo_max: parseInt(values.dispo_max),
           email: values.email,
-          genre: values.genre.value,
+          genre: values.genre,
           id: user.id,
           latitude: geolocation ? geolocation.latitude : null,
           longitude: geolocation ? geolocation.longitude : null,
@@ -103,54 +101,15 @@ const MandataireEditInformations = (props) => {
   };
 
   return (
-    <Card mt="5" p="0">
-      <Flex {...props}>
-        <Box width={[1, 2 / 5]} sx={grayBox}>
-          <Box height="220px">
-            <Heading4>{`Modifier vos informations`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Vos informations`}
-            </Text>
-          </Box>
-          <Box height="80px">
-            <Heading4>{`Civilité`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Votre civilité`}
-            </Text>
-          </Box>
-          <Box height="210px">
-            <Heading4>{`Informations professionelles`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
-                d'autres systèmes (OCMI par exemple)`}
-            </Text>
-          </Box>
-          <Box height="80px">
-            <Heading4>{`Adresse professionelle`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`L'adresse de votre siège social`}
-            </Text>
-          </Box>
-          <Box height="80px">
-            <Heading4>{`Activité`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives à votre activité`}
-            </Text>
-          </Box>
-        </Box>
-        <Box p="5" width={[1, 3 / 5]}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <MandataireEditInformationsForm
-              mandataire={mandataire}
-              client={client}
-              handleSubmit={handleSubmit}
-              user={user}
-              cancelLink={cancelLink}
-            />
-          </Box>
-        </Box>
-      </Flex>
-    </Card>
+    <Box p="5">
+      <MandataireEditInformationsForm
+        mandataire={mandataire}
+        client={client}
+        handleSubmit={handleSubmit}
+        user={user}
+        cancelLink={cancelLink}
+      />
+    </Box>
   );
 };
 
