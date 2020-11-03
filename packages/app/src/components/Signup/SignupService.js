@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { getDepartementCode } from "@emjpm/core";
 import {
   Button,
   Card,
@@ -16,7 +17,6 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupServiceSchema } from "../../lib/validationSchemas";
-import { getRegionCode } from "../../util/departements";
 import { SignupContext } from "./context";
 import { DEPARTMENTS } from "./queries";
 import signup from "./signup";
@@ -35,7 +35,7 @@ function getServiceOptions(services, departments, selectedValue) {
     .filter(({ code_postal }) => {
       // Permet de gérer les code postaux invalides en base de données
       try {
-        return getRegionCode(code_postal) === code;
+        return getDepartementCode(code_postal) === code;
       } catch (err) {
         return false;
       }

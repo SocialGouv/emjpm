@@ -1,4 +1,4 @@
-import { getRegionCode } from "../../util/departements";
+import { getDepartementCode } from "@emjpm/core";
 
 const geocodeInitialValue = (resource = {}) => {
   if (!resource.latitude || !resource.longitude) {
@@ -14,7 +14,7 @@ const geocodeInitialValue = (resource = {}) => {
 
   const postcode =
     resource.code_postal || resource.address_zip_code || resource.codePostal;
-  const depcode = getRegionCode(postcode);
+  const depcode = getDepartementCode(postcode);
   return {
     city: resource.ville || resource.address_city,
     depcode,
