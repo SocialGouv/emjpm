@@ -1,4 +1,4 @@
-const getRegionCode = require("../../../../../utils/getRegionCode");
+const { getDepartementCode } = require("@emjpm/core");
 const getGeoDatas = require("../../../../../services/getGeoDatas");
 const { Departement } = require("../../../../../models/Departement");
 
@@ -9,7 +9,7 @@ const findDepartmentFromPostalCode = async (
   let department = null;
   let regionCode = null;
   if (code_postal && code_postal.length === 5) {
-    regionCode = getRegionCode(code_postal);
+    regionCode = getDepartementCode(code_postal);
     department = departmentByRegionCode[regionCode];
     if (!department) {
       department = await Departement.query().findOne({
