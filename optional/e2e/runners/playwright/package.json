@@ -1,0 +1,21 @@
+{
+  "name": "@optional/e2e.runner.playwright",
+  "version": "0.0.0",
+  "description": "",
+  "main": "codecept.conf.js",
+  "license": "Apache-2.0",
+  "scripts": {
+    "test": "yarn codeceptjs:headless",
+    "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps",
+    "codeceptjs:ui": "codecept-ui --app",
+    "codeceptjs:demo": "codeceptjs run --steps -c node_modules/@codeceptjs/examples",
+    "codeceptjs:demo:headless": "HEADLESS=true codeceptjs run --steps -c node_modules/@codeceptjs/examples",
+    "codeceptjs:demo:ui": "codecept-ui --app  -c node_modules/@codeceptjs/examples"
+  },
+  "devDependencies": {
+    "@codeceptjs/configure": "^0.6.0",
+    "@codeceptjs/ui": "^0.4.2",
+    "codeceptjs": "^3.0.0",
+    "playwright": "^1.5.2"
+  }
+}
