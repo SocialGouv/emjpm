@@ -3599,6 +3599,15 @@
       - lb_user_id
       - created_at
       filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - departement_financeur
+      filter: {}
   update_permissions:
   - role: direction
     permission:
@@ -3652,6 +3661,14 @@
       - id
       - lb_user_id
       filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - lb_user_id
+      - etablissement_id
+      - etablissement_rattachement
+      filter: {}
   update_permissions:
   - role: direction
     permission:
@@ -3703,59 +3720,68 @@
       - email
       - nom
       - prenom
-      - siret
       - type
+      - siret
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       backend_only: false
   select_permissions:
   - role: direction
     permission:
       columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
-      - id
       - nom
       - prenom
       - siret
       - type
       filter: {}
       allow_aggregations: true
-  - role: direction_nationale
-    permission:
-      columns:
-      - id
-      - created_at
-      - email
-      - nom
-      - prenom
-      - type
-      - siret
-      filter: {}
-  - role: direction_territoriale
-    permission:
-      columns:
-      - id
-      - created_at
-      - email
-      - nom
-      - prenom
-      - type
-      - siret
-      filter: {}
   - role: individuel
     permission:
       columns:
       - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
       - nom
       - prenom
-      - type
       - siret
+      - type
       filter: {}
   - role: prepose
     permission:
       columns:
       - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      - created_at
+      - email
+      - nom
+      - prenom
+      - siret
+      - type
+      filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
       - nom
@@ -3767,10 +3793,17 @@
   - role: direction
     permission:
       columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      - created_at
       - email
       - nom
       - prenom
       - siret
+      - type
       filter: {}
       check: null
 - table:
