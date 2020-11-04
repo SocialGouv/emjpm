@@ -10,9 +10,7 @@ export const UPDATE_SERVICE = gql`
     $email: String
     $telephone: String
     $department_id: Int!
-    $adresse: String!
-    $latitude: Float!
-    $longitude: Float!
+    $adresse: String! # $latitude: Float! # $longitude: Float!
   ) {
     update_services(
       where: { id: { _eq: $id } }
@@ -25,8 +23,8 @@ export const UPDATE_SERVICE = gql`
         email: $email
         telephone: $telephone
         adresse: $adresse
-        latitude: $latitude
-        longitude: $longitude
+        # latitude: $latitude
+        # longitude: $longitude
       }
     ) {
       affected_rows
@@ -64,8 +62,8 @@ export const ADD_SERVICE = gql`
     $telephone: String
     $department_id: Int!
     $adresse: String!
-    $latitude: Float!
-    $longitude: Float!
+    # $latitude: Float!
+    # $longitude: Float!
     $siret: String!
   ) {
     insert_services(
@@ -77,8 +75,8 @@ export const ADD_SERVICE = gql`
         department_id: $department_id
         telephone: $telephone
         adresse: $adresse
-        latitude: $latitude
-        longitude: $longitude
+        # latitude: $latitude
+        # longitude: $longitude
         siret: $siret
       }
     ) {

@@ -1,130 +1,119 @@
-import { Button, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
+import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box, Card, Flex } from "rebass";
 
 import { adminServiceSchema } from "../../lib/validationSchemas/adminServiceSchema";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import { useDepartementsOptions } from "../../util/departements";
+import { FormGroupInput, FormGroupSelect } from "../AppForm";
 
 export const ServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;
+  const { departementsOptions } = useDepartementsOptions();
 
   const formik = useFormik({
     initialValues: {
+      adresse: service ? service.adresse : "",
+      code_postal: service ? service.code_postal : "",
+      departement: service ? "" + service.departement.code : "",
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
-      geocode: geocodeInitialValue(service),
       siret: service ? service.siret || "" : "",
       telephone: service ? service.telephone : "",
+      ville: service ? service.ville : "",
     },
     onSubmit: handleSubmit,
     validationSchema: adminServiceSchema,
   });
 
   return (
-    <Flex flexWrap="wrap">
-      <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-        <Box height="230px">
-          <Heading4>{`Information du service`}</Heading4>
-          <Text lineHeight="1.5" color="textSecondary">
-            {`Informations relatives au service`}
-          </Text>
+    <form onSubmit={formik.handleSubmit}>
+      <Card m={1}>
+        <Heading4 mb={1}>{`Service tutellaire`}</Heading4>
+        <FormGroupInput
+          placeholder="Siret"
+          id="siret"
+          formik={formik}
+          validationSchema={adminServiceSchema}
+        />
+        <FormGroupInput
+          placeholder="Nom du service"
+          id="etablissement"
+          formik={formik}
+          validationSchema={adminServiceSchema}
+        />
+        <FormGroupSelect
+          id="departement"
+          options={departementsOptions}
+          placeholder="Département du service"
+          value={formik.values.departement}
+          formik={formik}
+          validationSchema={adminServiceSchema}
+        />
+      </Card>
+      <Flex flexDirection={["column", "row", "row"]}>
+        <Card m={1} flex={[1, 1 / 3, 1 / 3]}>
+          <Heading4 mb={1}>{`Contact`}</Heading4>
+          <FormGroupInput
+            placeholder="Email"
+            id="email"
+            formik={formik}
+            validationSchema={adminServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Téléphone"
+            id="telephone"
+            formik={formik}
+            validationSchema={adminServiceSchema}
+          />
+        </Card>
+        <Card m={1} flex={[1, 2 / 3, 2 / 3]}>
+          <Heading4 mb={1}>{`Adresse postale`}</Heading4>
+          <FormGroupInput
+            placeholder="Adresse"
+            id="adresse"
+            formik={formik}
+            validationSchema={adminServiceSchema}
+          />
+          <Flex>
+            <Box flex={1 / 2}>
+              <FormGroupInput
+                placeholder="Code postal"
+                id="code_postal"
+                formik={formik}
+                validationSchema={adminServiceSchema}
+              />
+            </Box>
+            <Box flex={1 / 2} pl={1}>
+              <FormGroupInput
+                placeholder="Ville"
+                id="ville"
+                formik={formik}
+                validationSchema={adminServiceSchema}
+              />
+            </Box>
+          </Flex>
+        </Card>
+      </Flex>
+      <Flex justifyContent="flex-end">
+        {handleCancel && (
+          <Box>
+            <Button mr="2" variant="outline" onClick={handleCancel}>
+              Annuler
+            </Button>
+          </Box>
+        )}
+        <Box>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
+            Enregistrer
+          </Button>
         </Box>
-        <Box height="150px">
-          <Heading4>{`Contact du service`}</Heading4>
-          <Text lineHeight="1.5" color="textSecondary">
-            Contact du service
-          </Text>
-        </Box>
-      </Box>
-      <Box p="5" width={[1, 3 / 5]}>
-        <Box mb="2">
-          <form onSubmit={formik.handleSubmit}>
-            <Field>
-              <Input
-                value={formik.values.siret}
-                id="siret"
-                name="siret"
-                hasError={formik.errors.siret && formik.touched.siret}
-                onChange={formik.handleChange}
-                placeholder="SIRET"
-              />
-              {formik.touched.siret && (
-                <InlineError message={formik.errors.siret} fieldId="siret" />
-              )}
-            </Field>
-            <Field>
-              <Input
-                value={formik.values.etablissement}
-                id="etablissement"
-                name="etablissement"
-                hasError={
-                  formik.errors.etablissement && formik.touched.etablissement
-                }
-                onChange={formik.handleChange}
-                placeholder="Nom du service"
-              />
-              {formik.touched.etablissement && (
-                <InlineError
-                  message={formik.errors.etablissement}
-                  fieldId="etablissement"
-                />
-              )}
-            </Field>
-            <Field>
-              <Input
-                value={formik.values.email}
-                id="email"
-                name="email"
-                hasError={formik.errors.email && formik.touched.email}
-                onChange={formik.handleChange}
-                placeholder="Email"
-              />
-              <InlineError message={formik.errors.email} fieldId="email" />
-            </Field>
-            <Field>
-              <Input
-                value={formik.values.telephone}
-                id="telephone"
-                name="telephone"
-                hasError={formik.errors.telephone && formik.touched.telephone}
-                onChange={formik.handleChange}
-                placeholder="Téléphone"
-              />
-              <InlineError
-                message={formik.errors.telephone}
-                fieldId="telephone"
-              />
-            </Field>
-            <Field>
-              <Geocode
-                resource={service}
-                onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
-              />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
-            </Field>
-            <Flex justifyContent="flex-end">
-              {handleCancel && (
-                <Box>
-                  <Button mr="2" variant="outline" onClick={handleCancel}>
-                    Annuler
-                  </Button>
-                </Box>
-              )}
-              <Box>
-                <Button
-                  type="submit"
-                  disabled={formik.isSubmitting}
-                  isLoading={formik.isSubmitting}
-                >
-                  Enregistrer
-                </Button>
-              </Box>
-            </Flex>
-          </form>
-        </Box>
-      </Box>
-    </Flex>
+      </Flex>
+    </form>
   );
 };
 
