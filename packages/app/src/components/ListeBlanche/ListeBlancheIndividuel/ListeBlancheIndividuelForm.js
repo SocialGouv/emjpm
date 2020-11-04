@@ -11,10 +11,17 @@ import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheI
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
 const validationSchema = yup.object().shape({
+  adresse1: yup.string().required(),
+  adresse2: yup.string().optional(),
+  code_postal: yup
+    .string()
+    .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
+    .required(),
   email: yup.string().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
   siret: yup.string().required(),
+  ville: yup.string().required(),
 });
 
 export const ListeBlancheIndividuelForm = (props) => {
@@ -33,11 +40,15 @@ export const ListeBlancheIndividuelForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
+      adresse1: data ? formatFormInput(data.adresse1) : "",
+      adresse2: data ? formatFormInput(data.adresse2) : "",
+      code_postal: data ? formatFormInput(data.code_postal) : "",
       departements,
       email: data ? formatFormInput(data.email) : "",
       nom: data ? formatFormInput(data.nom) : "",
       prenom: data ? formatFormInput(data.prenom) : "",
       siret: data ? formatFormInput(data.siret) : "",
+      ville: data ? formatFormInput(data.ville) : "",
     },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
@@ -59,36 +70,79 @@ export const ListeBlancheIndividuelForm = (props) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Box mt={4}>
-        <Card>
-          <Flex pr={2} flexDirection="column">
-            <Heading4 mb={1}>{"Informations"}</Heading4>
+        <Flex>
+          <Card m={1} flex={1 / 2}>
+            <Heading4 mb={1}>{"Mandataire"}</Heading4>
             <FormGroupInput
               placeholder="Siret"
               id="siret"
               formik={formik}
               validationSchema={validationSchema}
             />
-            <FormGroupInput
-              placeholder="Nom"
-              id="nom"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-            <FormGroupInput
-              placeholder="Prénom"
-              id="prenom"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
+            <Flex>
+              <Box flex={1 / 2}>
+                <FormGroupInput
+                  placeholder="Nom"
+                  id="nom"
+                  formik={formik}
+                  validationSchema={validationSchema}
+                />
+              </Box>
+              <Box pl={1} flex={1 / 2}>
+                <FormGroupInput
+                  placeholder="Prénom"
+                  id="prenom"
+                  formik={formik}
+                  validationSchema={validationSchema}
+                />
+              </Box>
+            </Flex>
+
             <FormGroupInput
               placeholder="Adresse e-mail"
               id="email"
               formik={formik}
               validationSchema={validationSchema}
             />
-          </Flex>
+          </Card>
+          <Card m={1} flex={1 / 2}>
+            <Flex pr={2} flexDirection="column">
+              <Heading4 mb={1}>{"Adresse"}</Heading4>
+              <FormGroupInput
+                placeholder="Adresse 1"
+                id="adresse1"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+              <FormGroupInput
+                placeholder="Complément"
+                id="adresse2"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+              <Flex>
+                <Box flex={1 / 2}>
+                  <FormGroupInput
+                    placeholder="Code postal"
+                    id="code_postal"
+                    formik={formik}
+                    validationSchema={validationSchema}
+                  />
+                </Box>
+                <Box pl={1} flex={1 / 2}>
+                  <FormGroupInput
+                    placeholder="Ville"
+                    id="ville"
+                    formik={formik}
+                    validationSchema={validationSchema}
+                  />
+                </Box>
+              </Flex>
+            </Flex>
+          </Card>
+        </Flex>
+        <Card m={1}>
           <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
-
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}
