@@ -78,6 +78,11 @@ export const SERVICE = gql`
       siret
       code_postal
       ville
+      org_gestionnaire
+      org_nom
+      org_adresse
+      org_code_postal
+      org_ville
       departement {
         id
         code

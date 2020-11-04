@@ -8,7 +8,7 @@ import { SERVICE } from "./queries";
 import { ServiceForm } from "./ServiceForm";
 
 export const ServiceEdit = (props) => {
-  const { serviceId, onSuccess } = props;
+  const { serviceId, onSuccess, handleCancel } = props;
   const serviceQuery = useQuery(SERVICE, {
     fetchPolicy: "network-only",
     variables: { serviceId },
@@ -41,6 +41,11 @@ export const ServiceEdit = (props) => {
           email: values.email,
           etablissement: values.etablissement,
           id: service.id,
+          org_adresse: values.org_adresse,
+          org_code_postal: values.org_code_postal,
+          org_gestionnaire: values.org_gestionnaire,
+          org_nom: values.org_nom,
+          org_ville: values.org_ville,
           siret: values.siret,
           telephone: values.telephone,
           ville: values.ville,
@@ -58,7 +63,13 @@ export const ServiceEdit = (props) => {
     setSubmitting(false);
   };
 
-  return <ServiceForm handleSubmit={handleSubmit} service={service} />;
+  return (
+    <ServiceForm
+      handleSubmit={handleSubmit}
+      handleCancel={handleCancel}
+      service={service}
+    />
+  );
 };
 
 export default ServiceEdit;

@@ -18,6 +18,9 @@ const AddServicePage = () => {
             onSuccess={async () => {
               await router.push(`/admin/liste-blanche`);
             }}
+            handleCancel={async () => {
+              await router.push("/admin/liste-blanche");
+            }}
           />
         </Flex>
       </BoxWrapper>

@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { LayoutAdmin } from "../../../src/components/Layout";
+import { LayoutDirection } from "../../../src/components/Layout";
 import { ListeBlancheEdit } from "../../../src/components/ListeBlanche";
 import { withAuthSync } from "../../../src/util/auth";
 
@@ -13,7 +13,7 @@ const ListeBlancheDetailPage = (props) => {
   const router = useRouter();
 
   return (
-    <LayoutAdmin>
+    <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
         <Link href="/direction/liste-blanche">
           <StyledLink mb={4} display="block">
@@ -29,7 +29,7 @@ const ListeBlancheDetailPage = (props) => {
           }}
         />
       </BoxWrapper>
-    </LayoutAdmin>
+    </LayoutDirection>
   );
 };
 
