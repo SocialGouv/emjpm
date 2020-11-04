@@ -4,14 +4,14 @@ import { useRouter } from "next/router";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { LayoutDirection } from "../../../src/components/Layout";
+import { LayoutAdmin } from "../../../src/components/Layout";
 import { ServiceCreate } from "../../../src/components/Service";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
   const router = useRouter();
   return (
-    <LayoutDirection>
+    <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
         <Link href="/admin/liste-blanche">
           <StyledLink mb={4} display="block">
@@ -25,7 +25,7 @@ const ListBlanchePage = () => {
           }}
         />
       </BoxWrapper>
-    </LayoutDirection>
+    </LayoutAdmin>
   );
 };
 
