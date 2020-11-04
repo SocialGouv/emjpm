@@ -38,6 +38,9 @@ export const ListeBlancheIndividuelUpdate = (props) => {
 
         await updateListeBlanche({
           variables: {
+            adresse1: values.adresse1,
+            adresse2: values.adresse2,
+            code_postal: values.code_postal,
             departementsToAdd: departementsToAdd.map((d) => {
               return {
                 departement_financeur: d.departement_financeur,
@@ -51,6 +54,7 @@ export const ListeBlancheIndividuelUpdate = (props) => {
             nom: values.nom,
             prenom: values.prenom,
             siret: values.siret,
+            ville: values.ville,
           },
         });
 
