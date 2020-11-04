@@ -20,6 +20,7 @@ class Direction extends Model {
         department_id: { type: "integrer" },
         id: { type: "integer" },
         region_id: { type: "integrer" },
+        type: { type: "string" },
         user_id: { type: "integrer" },
       },
       type: "object",

@@ -77,8 +77,10 @@ const createMandataireTis = (tis, mandataire_id) => {
   );
 };
 
-const createDirection = (userId, type) => {
+const createDirection = (userId, type, regionId, departmentId) => {
   return Direction.query().insert({
+    department_id: departmentId,
+    region_id: regionId,
     type,
     user_id: userId,
   });
@@ -156,14 +158,18 @@ const signup = async (req, res) => {
         break;
       }
       case "direction": {
-        const { directionType } = body.direction;
+        const {
+          direction: { directionType },
+          departmentId,
+          regionId,
+        } = body;
 
         let roleName = "direction_nationale";
         if (directionType === "regional" || directionType === "departemental") {
           roleName = "direction_territoriale";
         }
         await createRole(user.id, roleName);
-        await createDirection(user.id, directionType);
+        await createDirection(user.id, directionType, regionId, departmentId);
 
         break;
       }
