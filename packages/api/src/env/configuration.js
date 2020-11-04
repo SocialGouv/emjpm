@@ -1,13 +1,4 @@
-const isInseeAPITribunal = (env) => {
-  const value = env.INSEE_API_TRIBUNAL;
-  if (!value) {
-    return false;
-  }
-  return value === "true";
-};
-
 exports.getConfiguration = (env) => ({
-  inseeAPITribunal: isInseeAPITribunal(env),
   sentryEnvironment: env.SENTRY_ENV,
   sentryPublicDSN: env.SENTRY_PUBLIC_DSN,
   smtpFrom: env.SMTP_FROM,
