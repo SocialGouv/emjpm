@@ -7,13 +7,9 @@ const actionsMesuresImporterGeoRepository = require("./repository/actionsMesures
 const actionsMesuresImporterMesureRepository = require("./repository/actionsMesuresImporterMesureRepository");
 const { Mandataire } = require("../../../../models/Mandataire");
 const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
-const { Tis } = require("../../../../models/Tis");
 const { Mesure } = require("../../../../models/Mesure");
 
 const mesureStatesService = require("../../../../services/updateMesureStates");
-
-const configuration = require("../../../../env");
-const inseeAPI = require("../../../../utils/insee-api");
 
 const actionsMesuresImporter = {
   importMesuresFile,
@@ -235,30 +231,10 @@ const prepareMesure = async (
   } = await actionsMesuresImporterGeoRepository.getGeoDatas(code_postal, ville);
 
   // ti
-  let ti = await actionsMesuresImporterMesureRepository.findTribunalBySiret(
+  const ti = await actionsMesuresImporterMesureRepository.findTribunalBySiret(
     tribunal_siret,
     cache.tribunalBySiret
   );
-
-  if (!ti && configuration.inseeAPITribunal) {
-    const tiDatas = await inseeAPI.fetchTribunalDatas(tribunal_siret);
-    if (tiDatas) {
-      const tiGeoDatas = await actionsMesuresImporterGeoRepository.getGeoDatas(
-        tiDatas.code_postal,
-        tiDatas.ville
-      );
-      const tiDepartment = await actionsMesuresImporterGeoRepository.findDepartmentFromPostalCode(
-        tiDatas.code_postal,
-        cache.departmentByRegionCode
-      );
-      ti = await Tis.query().insert({
-        ...tiDatas,
-        departement_id: tiDepartment.id,
-        latitude: tiGeoDatas ? tiGeoDatas.latitude : null,
-        longitude: tiGeoDatas ? tiGeoDatas.longitude : null,
-      });
-    }
-  }
 
   if (!ti) {
     importSummary.errors.push({
