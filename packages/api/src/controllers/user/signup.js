@@ -38,6 +38,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
     siret,
     latitude,
     longitude,
+    genre,
   } = mandataireDatas;
 
   const mandataire = await Mandataire.query()
@@ -56,6 +57,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
       telephone_portable,
       user_id,
       ville,
+      genre,
     });
 
   return mandataire;
