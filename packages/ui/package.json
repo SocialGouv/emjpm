@@ -22,8 +22,6 @@
     "lint:package": "sort-package-json",
     "storybook": "start-storybook -p 6006",
     "dev": "rollup -c -w",
-    "test": "cross-env CI=1 react-scripts test --env=jsdom",
-    "test:watch": "react-scripts test --env=jsdom",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'"
   },
