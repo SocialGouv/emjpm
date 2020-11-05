@@ -2,13 +2,17 @@ import { Button, Field, Heading4, InlineError, Textarea } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
-import { Box, Card, Flex, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormGroupSelect,
+  FormInputBox,
+} from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
-import { grayBox } from "./style";
 
 const MandataireEditInformationsForm = (props) => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
@@ -33,10 +37,10 @@ const MandataireEditInformationsForm = (props) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Flex>
-        <Box sx={grayBox} width={[1, 2 / 5]}>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Informations personnelles"}</Heading4>
-        </Box>
-        <Card width={[1, 3 / 5]}>
+        </FormGrayBox>
+        <FormInputBox>
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}
@@ -57,13 +61,13 @@ const MandataireEditInformationsForm = (props) => {
             formik={formik}
             validationSchema={mandataireEditSchema}
           />
-        </Card>
+        </FormInputBox>
       </Flex>
       <Flex>
-        <Box sx={grayBox} width={[1, 2 / 5]}>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Coordonnées"}</Heading4>
-        </Box>
-        <Card width={[1, 3 / 5]}>
+        </FormGrayBox>
+        <FormInputBox>
           <FormGroupInput
             placeholder="Email"
             id="email"
@@ -88,16 +92,16 @@ const MandataireEditInformationsForm = (props) => {
               />
             </Box>
           </Flex>
-        </Card>
+        </FormInputBox>
       </Flex>
       <Flex>
-        <Box width={[1, 2 / 5]} sx={grayBox}>
+        <FormGrayBox>
           <Heading4>{`Adresse`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Cette adresse permettra de vous localiser sur la carte des mesures`}
           </Text>
-        </Box>
-        <Card width={[1, 3 / 5]}>
+        </FormGrayBox>
+        <FormInputBox>
           <Field>
             <Geocode
               resource={mandataire}
@@ -105,16 +109,16 @@ const MandataireEditInformationsForm = (props) => {
             />
             <InlineError message={formik.errors.geocode} fieldId="geocode" />
           </Field>
-        </Card>
+        </FormInputBox>
       </Flex>
       <Flex>
-        <Box sx={grayBox} width={[1, 2 / 5]}>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Activité"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Ces informations seront visibles par les magistrats.`}
           </Text>
-        </Box>
-        <Card width={[1, 3 / 5]}>
+        </FormGrayBox>
+        <FormInputBox>
           <FormGroupInput
             placeholder="Nombre de mesures souhaité"
             id="dispo_max"
@@ -136,7 +140,7 @@ const MandataireEditInformationsForm = (props) => {
               fieldId="competences"
             />
           </Box>
-        </Card>
+        </FormInputBox>
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">

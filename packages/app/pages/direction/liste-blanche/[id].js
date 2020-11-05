@@ -27,6 +27,10 @@ const ListeBlancheDetailPage = (props) => {
             await router.push("/direction/liste-blanche");
             window.scrollTo(0, 0);
           }}
+          handleCancel={async () => {
+            await router.push("/direction/liste-blanche");
+            window.scrollTo(0, 0);
+          }}
         />
       </BoxWrapper>
     </LayoutDirection>
