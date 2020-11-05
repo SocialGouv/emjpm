@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
+import { Card } from "rebass";
 
 import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { captureException } from "../../util/sentry";
@@ -33,14 +34,15 @@ export const ServiceEdit = (props) => {
       await updateService({
         refetchQueries: ["services", "services_aggregate"],
         variables: {
-          adresse: values.adresse,
-          code_postal: values.code_postal,
           department_id: departements.find(
             (dep) => dep.code === values.departement
           ).id,
           email: values.email,
           etablissement: values.etablissement,
           id: service.id,
+          lb_adresse: values.lb_adresse,
+          lb_code_postal: values.lb_code_postal,
+          lb_ville: values.lb_ville,
           org_adresse: values.org_adresse,
           org_code_postal: values.org_code_postal,
           org_gestionnaire: values.org_gestionnaire,
@@ -48,7 +50,6 @@ export const ServiceEdit = (props) => {
           org_ville: values.org_ville,
           siret: values.siret,
           telephone: values.telephone,
-          ville: values.ville,
         },
       });
 
@@ -64,11 +65,13 @@ export const ServiceEdit = (props) => {
   };
 
   return (
-    <ServiceForm
-      handleSubmit={handleSubmit}
-      handleCancel={handleCancel}
-      service={service}
-    />
+    <Card p={5}>
+      <ServiceForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+        service={service}
+      />
+    </Card>
   );
 };
 

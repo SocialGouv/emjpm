@@ -1,30 +1,23 @@
-const topTextStyle = {
-  color: "mediumGray",
-  fontWeight: "600",
-  lineHeight: "1.4",
-  mt: "5px",
-};
-
 const innerTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
-  lineHeight: "1.4",
-  mt: "5px",
+  mt: "1",
 };
 
-const iconTextStyle = {
+const subtitle = {
   color: "mediumGray",
+  flex: 1 / 3,
+  fontSize: 1,
+  fontWeight: "500",
+  lineHeight: "1.4",
+};
+
+const content = {
+  color: "black",
+  flex: 2 / 3,
+  fontSize: 1,
   fontWeight: "600",
-  ml: "1",
+  lineHeight: "1.4",
 };
 
-const boxStyle = {
-  width: "50%",
-};
-
-const flexStyle = {
-  flexWrap: "wrap",
-  mt: 5,
-};
-
-export { innerTextStyle, topTextStyle, iconTextStyle, boxStyle, flexStyle };
+export { content, subtitle, innerTextStyle };
