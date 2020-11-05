@@ -17,16 +17,12 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupDirectionSchema } from "../../lib/validationSchemas";
+import { toOptions } from "../../util/option/OptionUtil";
 import { SignupContext } from "./context";
 import { DEPARTMENTS, REGIONS } from "./queries";
 import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
-
-const makeOption = ({ id, nom }) => ({ label: nom, value: id });
-
-const makeOptions = (array) =>
-  !array?.length ? [] : array.map((elt) => makeOption(elt));
 
 export const SignupDirection = () => {
   const { user, department, direction, region, validateStepOne } = useContext(
@@ -85,8 +81,8 @@ export const SignupDirection = () => {
   const { data: departments } = useQuery(DEPARTMENTS);
   const { data: regions } = useQuery(REGIONS);
 
-  const departmentOptions = makeOptions(departments?.departements);
-  const regionOptions = makeOptions(regions?.regions);
+  const departmentOptions = toOptions(departments?.departements, "id", "nom");
+  const regionOptions = toOptions(regions?.regions, "id", "nom");
 
   return (
     <Fragment>
