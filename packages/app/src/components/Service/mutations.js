@@ -10,9 +10,12 @@ export const UPDATE_SERVICE = gql`
     $email: String
     $telephone: String
     $department_id: Int!
-    $adresse: String!
-    $latitude: Float!
-    $longitude: Float!
+    $adresse: String! # $latitude: Float! # $longitude: Float!
+    $org_gestionnaire: Boolean!
+    $org_nom: String
+    $org_adresse: String
+    $org_code_postal: String
+    $org_ville: String
   ) {
     update_services(
       where: { id: { _eq: $id } }
@@ -25,8 +28,13 @@ export const UPDATE_SERVICE = gql`
         email: $email
         telephone: $telephone
         adresse: $adresse
-        latitude: $latitude
-        longitude: $longitude
+        # latitude: $latitude
+        # longitude: $longitude
+        org_gestionnaire: $org_gestionnaire
+        org_nom: $org_nom
+        org_adresse: $org_adresse
+        org_code_postal: $org_code_postal
+        org_ville: $org_ville
       }
     ) {
       affected_rows
@@ -50,6 +58,11 @@ export const UPDATE_SERVICE = gql`
         siret
         telephone
         ville
+        org_gestionnaire
+        org_nom
+        org_adresse
+        org_code_postal
+        org_ville
       }
     }
   }
@@ -64,9 +77,14 @@ export const ADD_SERVICE = gql`
     $telephone: String
     $department_id: Int!
     $adresse: String!
-    $latitude: Float!
-    $longitude: Float!
+    # $latitude: Float!
+    # $longitude: Float!
     $siret: String!
+    $org_gestionnaire: Boolean!
+    $org_nom: String
+    $org_adresse: String
+    $org_code_postal: String
+    $org_ville: String
   ) {
     insert_services(
       objects: {
@@ -77,9 +95,14 @@ export const ADD_SERVICE = gql`
         department_id: $department_id
         telephone: $telephone
         adresse: $adresse
-        latitude: $latitude
-        longitude: $longitude
+        # latitude: $latitude
+        # longitude: $longitude
         siret: $siret
+        org_gestionnaire: $org_gestionnaire
+        org_nom: $org_nom
+        org_adresse: $org_adresse
+        org_code_postal: $org_code_postal
+        org_ville: $org_ville
       }
     ) {
       returning {
@@ -93,6 +116,11 @@ export const ADD_SERVICE = gql`
         latitude
         longitude
         siret
+        org_gestionnaire
+        org_nom
+        org_adresse
+        org_code_postal
+        org_ville
       }
     }
   }
