@@ -18,11 +18,12 @@ export const ServiceForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      adresse: service ? service.adresse : "",
-      code_postal: service ? service.code_postal : "",
       departement: service ? "" + service.departement.code : "",
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
+      lb_adresse: service ? service.lb_adresse : "",
+      lb_code_postal: service ? service.lb_code_postal : "",
+      lb_ville: service ? service.lb_ville : "",
       org_adresse: service ? service.org_adresse : "",
       org_code_postal: service ? service.org_code_postal : "",
       org_gestionnaire: service ? service.org_gestionnaire : "",
@@ -30,7 +31,6 @@ export const ServiceForm = (props) => {
       org_ville: service ? service.org_ville : "",
       siret: service ? service.siret || "" : "",
       telephone: service ? service.telephone : "",
-      ville: service ? service.ville : "",
     },
     onSubmit: handleSubmit,
     validationSchema: adminServiceSchema,
@@ -44,7 +44,7 @@ export const ServiceForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{`Service tutellaire`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Renseigner le département qui finance le service tutellaire.`}
+            {`Renseignez le département qui finance le service tutellaire.`}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -72,7 +72,7 @@ export const ServiceForm = (props) => {
           />
           <FormGroupInput
             placeholder="Adresse"
-            id="adresse"
+            id="lb_adresse"
             formik={formik}
             validationSchema={adminServiceSchema}
           />
@@ -80,7 +80,7 @@ export const ServiceForm = (props) => {
             <Box flex={1 / 2}>
               <FormGroupInput
                 placeholder="Code postal"
-                id="code_postal"
+                id="lb_code_postal"
                 formik={formik}
                 validationSchema={adminServiceSchema}
               />
@@ -88,7 +88,7 @@ export const ServiceForm = (props) => {
             <Box flex={1 / 2} pl={1}>
               <FormGroupInput
                 placeholder="Ville"
-                id="ville"
+                id="lb_ville"
                 formik={formik}
                 validationSchema={adminServiceSchema}
               />

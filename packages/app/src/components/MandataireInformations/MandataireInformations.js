@@ -23,7 +23,7 @@ const MandataireInformations = () => {
       <Heading3>
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading3>
-      <Flex p={1} mt={2} flexDirection={["column", "column", "column"]}>
+      <Flex p={1} mt={2} flexDirection="column">
         <Box mb={2}>
           <Heading5>Structure juridique</Heading5>
           <Flex my={1}>
@@ -77,7 +77,7 @@ const MandataireInformations = () => {
         <Box>
           <Box mb={2}>
             <Heading5>Géolocalisation</Heading5>
-            <Text color="textSecondary">
+            <Text>
               {`Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats`}
             </Text>
           </Box>

@@ -1,25 +1,7 @@
-const titleStyle = {
-  color: "mediumGray",
-  fontSize: "2",
-  fontStyle: "italic",
-};
-
-const topTextStyle = {
-  color: "mediumGray",
-  fontWeight: "600",
-  mt: "2",
-};
-
 const innerTextStyle = {
   color: "mediumGray",
   fontWeight: "600",
   mt: "1",
-};
-
-const iconTextStyle = {
-  color: "mediumGray",
-  fontWeight: "600",
-  ml: "1",
 };
 
 const subtitle = {
@@ -38,11 +20,4 @@ const content = {
   lineHeight: "1.4",
 };
 
-export {
-  titleStyle,
-  content,
-  subtitle,
-  innerTextStyle,
-  topTextStyle,
-  iconTextStyle,
-};
+export { content, subtitle, innerTextStyle };
