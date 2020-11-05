@@ -89,11 +89,9 @@ const ListeBlancheFilter = () => {
         >
           {type === "service" ? (
             <Box>
-              <Button ml={4}>
-                <Link href={`/${user.type}/liste-blanche/ajout-service`}>
-                  {"Ajouter un service"}
-                </Link>
-              </Button>
+              <Link href={`/${user.type}/liste-blanche/ajout-service`}>
+                <Button ml={4}>{"Ajouter un service"}</Button>
+              </Link>
             </Box>
           ) : (
             <Fragment>
