@@ -18,6 +18,7 @@ export const FormGroupSelect = ({
   hideErrors,
   validationSchema,
   onChange,
+  isClearable = false,
 }) => {
   const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
 
@@ -70,12 +71,13 @@ export const FormGroupSelect = ({
           onChange={
             onChange
               ? onChange
-              : ({ value }) => {
-                  setFieldValue(id, value);
+              : (props) => {
+                  setFieldValue(id, props?.value || "");
                 }
           }
           value={findOption(options, value)}
           options={options}
+          isClearable={isClearable}
         />
       )}
 
