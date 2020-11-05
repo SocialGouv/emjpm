@@ -1,12 +1,12 @@
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Card, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput } from "../../../util";
 import { DepartementFormUtil } from "../../../util/departements";
-import { FormGroupInput } from "../../AppForm";
+import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
@@ -69,80 +69,83 @@ export const ListeBlancheIndividuelForm = (props) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box mt={4}>
-        <Flex>
-          <Card m={1} flex={1 / 2}>
-            <Heading4 mb={1}>{"Mandataire"}</Heading4>
-            <FormGroupInput
-              placeholder="Siret"
-              id="siret"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-            <Flex>
-              <Box flex={1 / 2}>
-                <FormGroupInput
-                  placeholder="Nom"
-                  id="nom"
-                  formik={formik}
-                  validationSchema={validationSchema}
-                />
-              </Box>
-              <Box pl={1} flex={1 / 2}>
-                <FormGroupInput
-                  placeholder="Prénom"
-                  id="prenom"
-                  formik={formik}
-                  validationSchema={validationSchema}
-                />
-              </Box>
-            </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{"Structure juridique"}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            placeholder="Siret"
+            id="siret"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Adresse 1"
+            id="adresse1"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Complément"
+            id="adresse2"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <Flex>
+            <Box flex={1 / 2}>
+              <FormGroupInput
+                placeholder="Code postal"
+                id="code_postal"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            </Box>
+            <Box pl={1} flex={1 / 2}>
+              <FormGroupInput
+                placeholder="Ville"
+                id="ville"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            </Box>
+          </Flex>
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{"Mandataire"}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            placeholder="Nom"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="prenom"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
 
-            <FormGroupInput
-              placeholder="Adresse e-mail"
-              id="email"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-          </Card>
-          <Card m={1} flex={1 / 2}>
-            <Flex pr={2} flexDirection="column">
-              <Heading4 mb={1}>{"Adresse"}</Heading4>
-              <FormGroupInput
-                placeholder="Adresse 1"
-                id="adresse1"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-              <FormGroupInput
-                placeholder="Complément"
-                id="adresse2"
-                formik={formik}
-                validationSchema={validationSchema}
-              />
-              <Flex>
-                <Box flex={1 / 2}>
-                  <FormGroupInput
-                    placeholder="Code postal"
-                    id="code_postal"
-                    formik={formik}
-                    validationSchema={validationSchema}
-                  />
-                </Box>
-                <Box pl={1} flex={1 / 2}>
-                  <FormGroupInput
-                    placeholder="Ville"
-                    id="ville"
-                    formik={formik}
-                    validationSchema={validationSchema}
-                  />
-                </Box>
-              </Flex>
-            </Flex>
-          </Card>
-        </Flex>
-        <Card m={1}>
+          <FormGroupInput
+            placeholder="Adresse e-mail"
+            id="email"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
+          <Text mt={2} mb={1}>
+            {`Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur.`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}
@@ -177,32 +180,32 @@ export const ListeBlancheIndividuelForm = (props) => {
               )
             }
           />
-        </Card>
+        </FormInputBox>
+      </Flex>
 
-        <Flex mt={4} justifyContent="flex-end">
-          {handleCancel && (
-            <Box>
-              <Button
-                type="button"
-                mr="2"
-                variant="outline"
-                onClick={handleCancel}
-              >
-                Annuler
-              </Button>
-            </Box>
-          )}
+      <Flex mt={4} justifyContent="flex-end">
+        {handleCancel && (
           <Box>
             <Button
-              type="submit"
-              disabled={formik.isSubmitting}
-              isLoading={formik.isSubmitting}
+              type="button"
+              mr="2"
+              variant="outline"
+              onClick={handleCancel}
             >
-              {editMode ? "Mettre à jour" : "Enregistrer"}
+              Annuler
             </Button>
           </Box>
-        </Flex>
-      </Box>
+        )}
+        <Box>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
+            {editMode ? "Mettre à jour" : "Enregistrer"}
+          </Button>
+        </Box>
+      </Flex>
     </form>
   );
 };
