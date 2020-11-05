@@ -1,7 +1,8 @@
 const grayBox = {
   bg: "cardSecondary",
   borderRadius: "5px 0 0 5px",
-  p: "5",
+  px: "3",
+  py: "2",
 };
 
 export { grayBox };
