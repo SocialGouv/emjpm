@@ -24,7 +24,7 @@ const MandataireInformations = () => {
       </Heading3>
       <Flex p={1} mt={2} flexDirection={["column", "column", "column"]}>
         <Box flex={1 / 2}>
-          <Heading5>Personne morale</Heading5>
+          <Heading5>Structure juridique</Heading5>
           <Flex my={1}>
             <Text sx={subtitle}>{"Siret"}</Text>
             <Text sx={content}>{label(mandataire.siret)}</Text>
