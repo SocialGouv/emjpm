@@ -6,12 +6,11 @@ export const EDIT_USER = gql`
     $telephone: String
     $telephone_portable: String
     $ville: String
-    $longitude: Float
-    $latitude: Float
-    $adresse: String
+    $longitude: Float!
+    $latitude: Float!
+    $adresse: String!
     $code_postal: String!
     $genre: String
-    $siret: String!
     $prenom: String!
     $nom: String!
     $email: String!
@@ -22,7 +21,6 @@ export const EDIT_USER = gql`
     update_mandataires(
       _set: {
         dispo_max: $dispo_max
-        siret: $siret
         telephone: $telephone
         telephone_portable: $telephone_portable
         ville: $ville
@@ -39,7 +37,7 @@ export const EDIT_USER = gql`
       affected_rows
     }
     update_users(
-      _set: { prenom: $prenom, nom: $nom, email: $email }
+      _set: { prenom: $prenom, nom: $nom, email: $email, username: $email }
       where: { id: { _eq: $id } }
     ) {
       affected_rows

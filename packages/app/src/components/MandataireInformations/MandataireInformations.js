@@ -16,6 +16,7 @@ const MandataireInformations = () => {
   const user = useContext(UserContext);
   const { email, nom, prenom, mandataire } = user;
   const { mandataire_tis } = mandataire;
+  const { lb_user } = mandataire;
 
   return (
     <Box>
@@ -23,26 +24,40 @@ const MandataireInformations = () => {
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading3>
       <Flex p={1} mt={2} flexDirection={["column", "column", "column"]}>
-        <Box flex={1 / 2}>
+        <Box mb={2}>
           <Heading5>Structure juridique</Heading5>
           <Flex my={1}>
             <Text sx={subtitle}>{"Siret"}</Text>
-            <Text sx={content}>{label(mandataire.siret)}</Text>
+            <Text sx={content}>{label(lb_user.siret)}</Text>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
-            <Text sx={content}>{label(mandataire.adresse)}</Text>
-          </Flex>
-          <Flex my={1}>
-            <Text sx={subtitle}>{"Code postal"}</Text>
-            <Text sx={content}>{label(mandataire.code_postal)}</Text>
-          </Flex>
-          <Flex my={1}>
-            <Text sx={subtitle}>{"Ville"}</Text>
-            <Text sx={content}>{label(mandataire.ville)}</Text>
+            <Box flex={2 / 3}>
+              <Text sx={content}>{label(lb_user.adresse1)}</Text>
+              <Text sx={content}>{label(lb_user.adresse2)}</Text>
+              <Text sx={content}>
+                {label(lb_user.code_postal)} {label(lb_user.ville)}
+              </Text>
+            </Box>
           </Flex>
         </Box>
-        <Box flex={1 / 2}>
+        <Box mb={2}>
+          <Heading5>Agrément</Heading5>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Liste des départements"}</Text>
+            <Box flex={2 / 3}>
+              {lb_user?.lb_departements.map((lbd, index) => {
+                return (
+                  <Text key={index} sx={content}>
+                    {lbd.departement.code} - {lbd.departement.nom}{" "}
+                    {lbd.departement_financeur ? "(financeur)" : ""}
+                  </Text>
+                );
+              })}
+            </Box>
+          </Flex>
+        </Box>
+        <Box mb={2}>
           <Heading5>Coordonnées</Heading5>
           <Box flex={1 / 2}>
             <Flex my={1}>
@@ -59,6 +74,19 @@ const MandataireInformations = () => {
             </Flex>
           </Box>
         </Box>
+        <Box>
+          <Box mb={2}>
+            <Heading5>Géolocalisation</Heading5>
+            <Text color="textSecondary">
+              {`Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats`}
+            </Text>
+          </Box>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Adresse"}</Text>
+            <Text sx={content}>{label(mandataire.adresse)}</Text>
+          </Flex>
+        </Box>
+
         <Box>
           <Heading5 mt={2} mb="2">
             Votre activité
