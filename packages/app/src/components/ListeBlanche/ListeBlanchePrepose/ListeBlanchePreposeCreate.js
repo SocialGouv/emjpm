@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 import { useApolloClient, useMutation } from "react-apollo";
-import { Box } from "rebass";
+import { Card } from "rebass";
 
 import { UserContext } from "../../UserContext";
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
@@ -20,7 +20,7 @@ export const ListeBlanchePreposeCreate = () => {
   });
 
   return (
-    <Box mt={4}>
+    <Card p={5}>
       <ListeBlanchePreposeForm
         editMode={false}
         handleSubmit={async (values) => {
@@ -48,7 +48,7 @@ export const ListeBlanchePreposeCreate = () => {
           return data ? data.etablissements : [];
         }}
       />
-    </Box>
+    </Card>
   );
 };
 
