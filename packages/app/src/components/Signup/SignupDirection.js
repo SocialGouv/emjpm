@@ -78,11 +78,15 @@ export const SignupDirection = () => {
     validationSchema: signupDirectionSchema,
   });
 
-  const { data: departments } = useQuery(DEPARTMENTS);
-  const { data: regions } = useQuery(REGIONS);
+  const { data: dataDepartments } = useQuery(DEPARTMENTS);
+  const { data: dataRegions } = useQuery(REGIONS);
 
-  const departmentOptions = toOptions(departments?.departements, "id", "nom");
-  const regionOptions = toOptions(regions?.regions, "id", "nom");
+  const departmentOptions = toOptions(
+    dataDepartments?.departements,
+    "id",
+    "nom"
+  );
+  const regionOptions = toOptions(dataRegions?.regions, "id", "nom");
 
   return (
     <Fragment>
