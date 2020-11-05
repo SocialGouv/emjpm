@@ -1,13 +1,13 @@
-import { Button, Heading4, InlineError, Textarea } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Textarea } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React from "react";
-import { Box, Card, Flex } from "rebass";
+import { Box, Card, Flex, Text } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { FormGroupInput, FormGroupSelect } from "../AppForm";
-import { GeocodeCities } from "../Geocode";
+import { Geocode, geocodeInitialValue } from "../Geocode";
 import { grayBox } from "./style";
 
 const MandataireEditInformationsForm = (props) => {
@@ -15,18 +15,16 @@ const MandataireEditInformationsForm = (props) => {
 
   const formik = useFormik({
     initialValues: {
-      address: mandataire.adresse || "",
-      city: mandataire.ville || "",
       competences: mandataire.competences || "",
       dispo_max: mandataire.dispo_max || "",
       email: user.email || "",
       genre: mandataire.genre,
+      geocode: geocodeInitialValue(mandataire),
       nom: user.nom || "",
       prenom: user.prenom || "",
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
-      zipcode: mandataire.code_postal || "",
     },
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
@@ -63,53 +61,7 @@ const MandataireEditInformationsForm = (props) => {
       </Flex>
       <Flex>
         <Box sx={grayBox} width={[1, 2 / 5]}>
-          <Heading4 mb={1}>{"Structure juridique"}</Heading4>
-        </Box>
-
-        <Card width={[1, 3 / 5]}>
-          <FormGroupInput
-            placeholder="SIRET"
-            id="siret"
-            formik={formik}
-            validationSchema={mandataireEditSchema}
-          />
-          <FormGroupInput
-            placeholder="Adresse"
-            id="address"
-            formik={formik}
-            validationSchema={mandataireEditSchema}
-          />
-          <Flex justifyContent="space-between">
-            <Box flex={1 / 2}>
-              <FormGroupInput
-                placeholder="Code postal"
-                id="zipcode"
-                formik={formik}
-                validationSchema={mandataireEditSchema}
-                onChange={async (e) => {
-                  const { value } = e.target;
-                  await formik.setFieldValue("zipcode", value);
-                  await formik.setFieldValue("city", "");
-                }}
-              />
-            </Box>
-            <Box ml={1} flex={1 / 2}>
-              <GeocodeCities
-                name="city"
-                id="city"
-                zipcode={formik.values.zipcode}
-                onChange={(value) => formik.setFieldValue("city", value)}
-                value={formik.values.city}
-                hasError={!!formik.errors.city}
-              />
-              <InlineError message={formik.errors.city} fieldId="city" />
-            </Box>
-          </Flex>
-        </Card>
-      </Flex>
-      <Flex>
-        <Box sx={grayBox} width={[1, 2 / 5]}>
-          <Heading4 mb={1}>{"Contacts"}</Heading4>
+          <Heading4 mb={1}>{"Coordonnées"}</Heading4>
         </Box>
         <Card width={[1, 3 / 5]}>
           <FormGroupInput
@@ -139,8 +91,28 @@ const MandataireEditInformationsForm = (props) => {
         </Card>
       </Flex>
       <Flex>
+        <Box width={[1, 2 / 5]} sx={grayBox}>
+          <Heading4>{`Adresse`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Cette adresse permettra de vous localiser sur la carte des mesures`}
+          </Text>
+        </Box>
+        <Card width={[1, 3 / 5]}>
+          <Field>
+            <Geocode
+              resource={mandataire}
+              onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+            />
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
+        </Card>
+      </Flex>
+      <Flex>
         <Box sx={grayBox} width={[1, 2 / 5]}>
-          <Heading4 mb={1}>{"Activité de mandataire"}</Heading4>
+          <Heading4 mb={1}>{"Activité"}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Ces informations seront visibles par les magistrats.`}
+          </Text>
         </Box>
         <Card width={[1, 3 / 5]}>
           <FormGroupInput
