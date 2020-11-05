@@ -1,11 +1,12 @@
-import { Heading3, Heading4 } from "@emjpm/ui";
+import { Button, Heading3, Heading5 } from "@emjpm/ui";
+import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AccessToken } from "../AccessToken";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
-import { boxStyle, content, innerTextStyle, subtitle } from "./style";
+import { content, innerTextStyle, subtitle } from "./style";
 
 const label = (value) => {
   return value ? value : "";
@@ -13,109 +14,91 @@ const label = (value) => {
 
 const MandataireInformations = () => {
   const user = useContext(UserContext);
-  console.log(user);
   const { email, nom, prenom, mandataire } = user;
   const { mandataire_tis } = mandataire;
 
   return (
     <Box>
       <Heading3>
-        {nom ? nom : ""} {prenom ? prenom : ""}
+        {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading3>
-      <Flex>
-        <Flex flexDirection="column" mr={6}>
-          <Box sx={boxStyle}>
-            <Heading4 mt={2} mb="2">
-              Vos informations
-            </Heading4>
-            <Flex flexDirection="column">
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Siret"}</Text>
-                <Text sx={content}>{label(mandataire.siret)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Email"}</Text>
-                <Text sx={content}>{label(email)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Nom"}</Text>
-                <Text sx={content}>{label(nom)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Prénom"}</Text>
-                <Text sx={content}>{label(prenom)}</Text>
-              </Box>
+      <Flex p={1} mt={2} flexDirection={["column", "column", "column"]}>
+        <Box flex={1 / 2}>
+          <Heading5>Structure juridique</Heading5>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Siret"}</Text>
+            <Text sx={content}>{label(mandataire.siret)}</Text>
+          </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Adresse"}</Text>
+            <Text sx={content}>{label(mandataire.adresse)}</Text>
+          </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Code postal"}</Text>
+            <Text sx={content}>{label(mandataire.code_postal)}</Text>
+          </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Ville"}</Text>
+            <Text sx={content}>{label(mandataire.ville)}</Text>
+          </Flex>
+        </Box>
+        <Box flex={1 / 2}>
+          <Heading5>Coordonnées</Heading5>
+          <Box flex={1 / 2}>
+            <Flex my={1}>
+              <Text sx={subtitle}>{"Email"}</Text>
+              <Text sx={content}>{label(email)}</Text>
             </Flex>
-          </Box>
-        </Flex>
-        <Flex ml={6} flexDirection="column">
-          <Box sx={boxStyle}>
-            <Heading4 mt={2} mb="2">
-              Contact
-            </Heading4>
-            <Flex flexDirection="column">
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Adresse"}</Text>
-                <Text sx={content}>{label(mandataire.adresse)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Code postal"}</Text>
-                <Text sx={content}>{label(mandataire.code_postal)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Ville"}</Text>
-                <Text sx={content}>{label(mandataire.ville)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Téléphone"}</Text>
-                <Text sx={content}>{label(mandataire.telephone)}</Text>
-              </Box>
-              <Box mr={4}>
-                <Text sx={subtitle}>{"Téléphone portable"}</Text>
-                <Text sx={content}>{label(mandataire.telephone_portable)}</Text>
-              </Box>
+            <Flex my={1}>
+              <Text sx={subtitle}>{"Téléphone"}</Text>
+              <Text sx={content}>{label(mandataire.telephone)}</Text>
             </Flex>
-          </Box>
-        </Flex>
-      </Flex>
-      <Flex flexDirection="column">
-        <Box sx={boxStyle}>
-          <Heading4 mt={2} mb="2">
-            Tribunaux d’instance
-          </Heading4>
-          <Box mr={4} mb="3">
-            {mandataire_tis.map((ti, index) => {
-              return (
-                <Text key={index} sx={innerTextStyle}>
-                  {ti.ti.etablissement}
-                </Text>
-              );
-            })}
+            <Flex my={1}>
+              <Text sx={subtitle}>{"Téléphone portable"}</Text>
+              <Text sx={content}>{label(mandataire.telephone_portable)}</Text>
+            </Flex>
           </Box>
         </Box>
-        <Box sx={boxStyle}>
-          <Heading4 mt={2} mb="2">
-            Informations à destination du magistrat
-          </Heading4>
-          <Flex justifyContent="flex-start">
-            <Box mr={4}>
-              <Text sx={content}>{label(mandataire.competences)}</Text>
-            </Box>
+        <Box>
+          <Heading5 mt={2} mb="2">
+            Votre activité
+          </Heading5>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
+            <Text sx={content}>{label(mandataire.dispo_max)}</Text>
           </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>
+              {"Informations à destination du magistrat"}
+            </Text>
+            <Text sx={content}>{label(mandataire.competences)}</Text>
+          </Flex>
+        </Box>
+      </Flex>
+      <Flex p={1} flexDirection="column">
+        <Heading5>Tribunaux d’instance</Heading5>
+        <Box>
+          {mandataire_tis.map((ti, index) => {
+            return (
+              <Text key={index} sx={innerTextStyle}>
+                {ti.ti.etablissement}
+              </Text>
+            );
+          })}
         </Box>
         <AccessToken />
       </Flex>
-      <Flex mt="5">
+      <Flex mt="5" justifyContent="center">
         <Box>
+          <Link href="/mandataires/edit-password">
+            <Button variant="outline">Modifier votre mot de passe</Button>
+          </Link>
+        </Box>
+        <Box ml={1}>
           <LinkButton href="/mandataires/edit-informations">
             Modifier vos informations
           </LinkButton>
         </Box>
-      </Flex>
-      <Flex mt="1">
-        <LinkButton href="/mandataires/edit-password">
-          Modifier votre mot de passe
-        </LinkButton>
       </Flex>
     </Box>
   );

@@ -37,14 +37,11 @@
     "@styled-icons/fa-regular": "^10.22.0",
     "@styled-icons/material": "^10.18.0",
     "@styled-icons/remix-line": "^10.18.0",
-    "@testing-library/dom": "^7.26.3",
-    "@testing-library/react": "^11.1.0",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "apollo-boost": "^0.4.9",
     "apollo-client": "^2.6.10",
     "apollo-link-context": "^1.0.20",
-    "babel-eslint": "^10.1.0",
     "babel-plugin-styled-components": "^1.11.1",
     "classnames": "^2.2.6",
     "compare-versions": "^3.6.0",
@@ -52,8 +49,6 @@
     "date-fns": "^2.16.1",
     "detect-browser": "^5.2.0",
     "dotenv": "^8.2.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
     "formik": "^2.2.1",
     "fuse.js": "^6.4.3",
     "graphql": "^14.7.0",
@@ -84,14 +79,8 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/cli": "^7.12.1",
-    "@babel/core": "^7.12.3",
-    "@babel/node": "^7.12.1",
     "@socialgouv/eslint-config-react": "^1.46.0",
-    "@testing-library/dom": "^7.26.3",
     "@testing-library/jest-dom": "^5.11.5",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^10.4.1",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
     "eslint": "^7.12.1",
@@ -101,7 +90,6 @@
     "next-transpile-modules": "^2.3.1",
     "postcss-loader": "^4.0.4",
     "prettier": "^2.1.2",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.3.2"
+    "style-loader": "^2.0.0"
   }
 }

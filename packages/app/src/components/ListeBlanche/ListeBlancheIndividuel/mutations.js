@@ -26,6 +26,10 @@ export const CREATE_LB_USER_INDIVIDUEL = gql`
     $prenom: String!
     $siret: String!
     $email: String!
+    $adresse1: String!
+    $adresse2: String
+    $code_postal: String!
+    $ville: String!
     $departements: [lb_departements_insert_input!]!
   ) {
     insert_lb_users_one(
@@ -34,6 +38,10 @@ export const CREATE_LB_USER_INDIVIDUEL = gql`
         prenom: $prenom
         siret: $siret
         email: $email
+        adresse1: $adresse1
+        adresse2: $adresse2
+        code_postal: $code_postal
+        ville: $ville
         lb_departements: { data: $departements }
         type: "individuel"
       }
@@ -60,6 +68,10 @@ export const UPDATE_LB_USER = gql`
     $prenom: String
     $email: String
     $siret: String
+    $adresse1: String!
+    $adresse2: String
+    $code_postal: String!
+    $ville: String!
     $departementsToDelete: [Int!]
     $departementsToAdd: [lb_departements_insert_input!]!
   ) {
@@ -77,7 +89,16 @@ export const UPDATE_LB_USER = gql`
     }
     update_lb_users_by_pk(
       pk_columns: { id: $id }
-      _set: { nom: $nom, prenom: $prenom, email: $email, siret: $siret }
+      _set: {
+        nom: $nom
+        prenom: $prenom
+        email: $email
+        siret: $siret
+        adresse1: $adresse1
+        adresse2: $adresse2
+        code_postal: $code_postal
+        ville: $ville
+      }
     ) {
       id
       email

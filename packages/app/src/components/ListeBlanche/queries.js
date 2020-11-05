@@ -8,6 +8,10 @@ export const LB_USER = gql`
       prenom
       email
       siret
+      adresse1
+      adresse2
+      code_postal
+      ville
       type
       mandataire {
         id

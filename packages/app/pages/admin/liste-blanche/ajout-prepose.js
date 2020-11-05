@@ -3,13 +3,13 @@ import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
-import { LayoutDirection } from "../../../src/components/Layout";
+import { LayoutAdmin } from "../../../src/components/Layout";
 import { ListeBlanchePreposeCreate } from "../../../src/components/ListeBlanche";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
   return (
-    <LayoutDirection>
+    <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
         <Link href="/admin/liste-blanche">
           <StyledLink mb={4} display="block">
@@ -21,7 +21,7 @@ const ListBlanchePage = () => {
         </Heading1>
         <ListeBlanchePreposeCreate />
       </BoxWrapper>
-    </LayoutDirection>
+    </LayoutAdmin>
   );
 };
 

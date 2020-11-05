@@ -18,6 +18,9 @@ export const ListeBlancheIndividuelCreate = () => {
       handleSubmit={async (values) => {
         await create({
           variables: {
+            adresse1: values.adresse1,
+            adresse2: values.adresse2,
+            code_postal: values.code_postal,
             departements: values.departements.map((d) => {
               return {
                 departement_financeur: d.departement_financeur,
@@ -29,6 +32,7 @@ export const ListeBlancheIndividuelCreate = () => {
             prenom: values.prenom,
             siret: values.siret,
             type: values.type,
+            ville: values.ville,
           },
         });
         await router.push(`/${type}/liste-blanche`);

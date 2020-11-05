@@ -1,10 +1,12 @@
 import yup from "./yup";
 
 const mandataireSignupSchema = yup.object().shape({
-  address: yup.string().required(),
-  city: yup.string().required(),
   dispo_max: yup.number().required(),
-  genre: yup.string().required(),
+  geocode: yup
+    .object()
+    .test("geocode", "Veuillez renseigner ce champ.", function (value) {
+      return value.latitude && value.longitude && value.label;
+    }),
   siret: yup
     .string()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
@@ -12,7 +14,6 @@ const mandataireSignupSchema = yup.object().shape({
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
   tis: yup.mixed().required(),
-  zipcode: yup.string().length(5).required(),
 });
 
 export { mandataireSignupSchema };

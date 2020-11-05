@@ -3599,6 +3599,15 @@
       - lb_user_id
       - created_at
       filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - created_at
+      - lb_user_id
+      - departement_id
+      - departement_financeur
+      filter: {}
   update_permissions:
   - role: direction
     permission:
@@ -3652,6 +3661,14 @@
       - id
       - lb_user_id
       filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - lb_user_id
+      - etablissement_id
+      - etablissement_rattachement
+      filter: {}
   update_permissions:
   - role: direction
     permission:
@@ -3703,59 +3720,68 @@
       - email
       - nom
       - prenom
-      - siret
       - type
+      - siret
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       backend_only: false
   select_permissions:
   - role: direction
     permission:
       columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
-      - id
       - nom
       - prenom
       - siret
       - type
       filter: {}
       allow_aggregations: true
-  - role: direction_nationale
-    permission:
-      columns:
-      - id
-      - created_at
-      - email
-      - nom
-      - prenom
-      - type
-      - siret
-      filter: {}
-  - role: direction_territoriale
-    permission:
-      columns:
-      - id
-      - created_at
-      - email
-      - nom
-      - prenom
-      - type
-      - siret
-      filter: {}
   - role: individuel
     permission:
       columns:
       - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
       - nom
       - prenom
-      - type
       - siret
+      - type
       filter: {}
   - role: prepose
     permission:
       columns:
       - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      - created_at
+      - email
+      - nom
+      - prenom
+      - siret
+      - type
+      filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
       - created_at
       - email
       - nom
@@ -3767,10 +3793,17 @@
   - role: direction
     permission:
       columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      - created_at
       - email
       - nom
       - prenom
       - siret
+      - type
       filter: {}
       check: null
 - table:
@@ -5247,24 +5280,29 @@
     permission:
       check: {}
       columns:
-      - latitude
-      - longitude
-      - department_id
-      - etablissement
-      - dispo_max
       - id
-      - mesures_awaiting
-      - mesures_in_progress
-      - created_at
-      - adresse
-      - code_postal
-      - competences
+      - etablissement
       - email
       - nom
       - prenom
-      - siret
-      - telephone
+      - code_postal
       - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - competences
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      - siret
+      - org_gestionnaire
+      - org_adresse
+      - org_code_postal
+      - org_ville
+      - org_nom
       backend_only: false
   select_permissions:
   - role: anonymous
@@ -5277,146 +5315,90 @@
   - role: direction
     permission:
       columns:
-      - id
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - competences
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
+      - org_gestionnaire
       - latitude
       - longitude
-      - siret
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - org_adresse
+      - org_code_postal
+      - org_nom
+      - org_ville
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
       - etablissement
+      - nom
+      - prenom
+      - siret
+      - telephone
+      - ville
       filter: {}
-      allow_aggregations: true
-  - role: direction_nationale
-    permission:
-      columns:
-      - id
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - competences
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
-      - latitude
-      - longitude
-      - siret
-      - etablissement
-      filter: {}
-      allow_aggregations: true
-  - role: direction_territoriale
-    permission:
-      columns:
-      - latitude
-      - longitude
-      - department_id
-      - dispo_max
-      - id
-      - mesures_awaiting
-      - mesures_in_progress
-      - created_at
-      - adresse
-      - code_postal
-      - competences
-      - email
-      - nom
-      - prenom
-      - siret
-      - telephone
-      - ville
-      - etablissement
-      filter:
-        department_id:
-          _in: x-hasura-agrements
       allow_aggregations: true
   - role: service
     permission:
       columns:
+      - org_gestionnaire
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - org_adresse
+      - org_code_postal
+      - org_ville
+      - created_at
       - adresse
       - code_postal
       - competences
-      - created_at
-      - department_id
-      - dispo_max
       - email
-      - id
-      - latitude
-      - longitude
-      - mesures_awaiting
-      - mesures_in_progress
+      - etablissement
       - nom
       - prenom
       - siret
       - telephone
       - ville
-      - etablissement
       filter:
         id:
           _eq: X-Hasura-Service-Id
   - role: ti
     permission:
       columns:
-      - id
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - competences
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
+      - org_gestionnaire
       - latitude
       - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - org_adresse
+      - org_code_postal
+      - org_ville
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
       - etablissement
+      - nom
+      - prenom
+      - siret
+      - telephone
+      - ville
       filter: {}
   update_permissions:
   - role: direction
     permission:
       columns:
-      - id
-      - email
-      - nom
-      - prenom
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - dispo_max
-      - created_at
-      - competences
-      - department_id
-      - mesures_in_progress
-      - mesures_awaiting
-      - latitude
-      - longitude
-      - siret
-      - etablissement
-      filter: {}
-      check: null
-  - role: direction_nationale
-    permission:
-      columns:
+      - org_gestionnaire
       - latitude
       - longitude
       - department_id
@@ -5424,17 +5406,21 @@
       - id
       - mesures_awaiting
       - mesures_in_progress
+      - org_adresse
+      - org_code_postal
+      - org_nom
+      - org_ville
       - created_at
       - adresse
       - code_postal
       - competences
       - email
+      - etablissement
       - nom
       - prenom
       - siret
       - telephone
       - ville
-      - etablissement
       filter: {}
       check: null
   - role: service

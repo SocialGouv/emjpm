@@ -1,24 +1,16 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import {
-  Button,
-  Card,
-  Field,
-  Heading1,
-  Heading4,
-  InlineError,
-  Input,
-  Select,
-  Text,
-} from "@emjpm/ui";
+import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
+import { GENDER_OPTIONS } from "../../constants/user";
 import { signupSchema } from "../../lib/validationSchemas";
 import { isEmailExists } from "../../query-service/EmailQueryService";
+import { FormGroupInput, FormGroupSelect } from "../AppForm";
 import { SignupContext } from "./context";
-import { cardStyle, grayBox } from "./style";
+import { grayBox } from "./style";
 
 const TYPE_OPTIONS = [
   {
@@ -52,10 +44,11 @@ export const SignupForm = () => {
     initialValues: {
       confirmPassword: user ? user.confirmPassword : "",
       email: user ? user.email : "",
+      genre: "",
       nom: user ? user.nom : "",
       password: user ? user.password : "",
       prenom: user ? user.prenom : "",
-      type: user ? TYPE_OPTIONS.find((val) => user.type === val.value) : "",
+      type: user ? user.type : "",
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       const exists = await isEmailExists(client, values.email);
@@ -67,10 +60,11 @@ export const SignupForm = () => {
         setUser({
           confirmPassword: values.confirmPassword,
           email: values.email,
+          genre: values.genre,
           nom: values.nom,
           password: values.password,
           prenom: values.prenom,
-          type: values.type.value,
+          type: values.type,
         });
         validateStepOne(true);
       }
@@ -83,146 +77,105 @@ export const SignupForm = () => {
   return (
     <Fragment>
       <Heading1 px="1">{`Création de compte`}</Heading1>
-      <Card sx={cardStyle}>
-        <Flex mt="3">
+      <form onSubmit={formik.handleSubmit}>
+        <Flex>
           <Box width={[1, 2 / 5]} sx={grayBox}>
-            <Box height="80px">
-              <Heading4>{`Information professionelle`}</Heading4>
-              <Text lineHeight="1.5" color="textSecondary">
-                {`Quel type d'utilisateur êtes-vous ?`}
-              </Text>
-            </Box>
-            <Box height="140px">
-              <Heading4>{`Information personnelle`}</Heading4>
-              <Text lineHeight="1.5" color="textSecondary">
-                Ces informations permettent de vous identifier.
-              </Text>
-            </Box>
-            <Box height="160px">
-              <Heading4>{`Identifiants de connexion`}</Heading4>
-              <Text lineHeight="1.5" color="textSecondary">
-                {`Ces informations permettront de vous connecter à votre compte. L'adresse email
-                renseignée sera votre identifiant.`}
-              </Text>
-            </Box>
+            <Heading4>{`Information professionelle`}</Heading4>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Quel type d'utilisateur êtes-vous ?`}
+            </Text>
           </Box>
-          <Box p="5" pb={0} mb="4" width={[1, 3 / 5]}>
-            <form onSubmit={formik.handleSubmit}>
-              <Field>
-                <Select
-                  id="type"
-                  name="type"
-                  placeholder="Vous êtes..."
-                  value={formik.values.type}
-                  hasError={formik.errors.type && formik.touched.type}
-                  onChange={(option) => formik.setFieldValue("type", option)}
-                  options={TYPE_OPTIONS}
-                />
-                {formik.touched.type && (
-                  <InlineError message={formik.errors.type} fieldId="type" />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.nom}
-                  id="nom"
-                  name="nom"
-                  hasError={formik.errors.nom && formik.touched.nom}
-                  onChange={formik.handleChange}
-                  placeholder="Nom"
-                />
-                {formik.touched.nom && (
-                  <InlineError message={formik.errors.nom} fieldId="nom" />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.prenom}
-                  id="prenom"
-                  name="prenom"
-                  hasError={formik.errors.prenom && formik.touched.prenom}
-                  onChange={formik.handleChange}
-                  placeholder="Prénom"
-                />
-                {formik.touched.prenom && (
-                  <InlineError
-                    message={formik.errors.prenom}
-                    fieldId="prenom"
-                  />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.email}
-                  id="email"
-                  name="email"
-                  hasError={formik.errors.email && formik.touched.email}
-                  onChange={formik.handleChange}
-                  placeholder="Email"
-                />
-                {formik.touched.email && (
-                  <InlineError message={formik.errors.email} fieldId="email" />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.password}
-                  type="password"
-                  id="password"
-                  name="password"
-                  hasError={formik.errors.password && formik.touched.password}
-                  onChange={formik.handleChange}
-                  placeholder="Mot de passe"
-                />
-                {formik.touched.password && (
-                  <InlineError
-                    message={formik.errors.password}
-                    fieldId="password"
-                  />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.confirmPassword}
-                  type="password"
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  hasError={
-                    formik.errors.confirmPassword &&
-                    formik.touched.confirmPassword
-                  }
-                  onChange={formik.handleChange}
-                  placeholder="Confirmation du mot de passe"
-                />
-                {formik.touched.confirmPassword && (
-                  <InlineError
-                    message={formik.errors.confirmPassword}
-                    fieldId="confirmPassword"
-                  />
-                )}
-              </Field>
-              <Flex justifyContent="flex-end">
-                <Box>
-                  <Link href="/">
-                    <Button mr="2" variant="outline">
-                      Annuler
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Button
-                    type="submit"
-                    disabled={formik.isSubmitting}
-                    isLoading={formik.isSubmitting}
-                  >
-                    Suivant
-                  </Button>
-                </Box>
-              </Flex>
-            </form>
+          <Card width={[1, 3 / 5]}>
+            <FormGroupSelect
+              id="type"
+              formik={formik}
+              placeholder="Vous êtes..."
+              value={formik.values.type}
+              options={TYPE_OPTIONS}
+              validationSchema={signupSchema}
+            />
+          </Card>
+        </Flex>
+        <Flex>
+          <Box width={[1, 2 / 5]} sx={grayBox}>
+            <Heading4>{`Information personnelle`}</Heading4>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Ces informations permettent de vous identifier.`}
+            </Text>
+          </Box>
+          <Card width={[1, 3 / 5]}>
+            <FormGroupSelect
+              id="genre"
+              formik={formik}
+              placeholder="Civilité"
+              value={formik.values.genre}
+              options={GENDER_OPTIONS}
+              validationSchema={signupSchema}
+            />
+            <FormGroupInput
+              placeholder="Prénom"
+              id="prenom"
+              formik={formik}
+              validationSchema={signupSchema}
+            />
+            <FormGroupInput
+              placeholder="Nom"
+              id="nom"
+              formik={formik}
+              validationSchema={signupSchema}
+            />
+          </Card>
+        </Flex>
+        <Flex>
+          <Box width={[1, 2 / 5]} sx={grayBox}>
+            <Heading4>{`Identifiants de connexion`}</Heading4>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Ces informations permettront de vous connecter à votre compte. L'adresse email
+                renseignée sera votre identifiant.`}
+            </Text>
+          </Box>
+          <Card width={[1, 3 / 5]}>
+            <FormGroupInput
+              placeholder="Email"
+              id="email"
+              formik={formik}
+              validationSchema={signupSchema}
+            />
+            <FormGroupInput
+              placeholder="Mot de passe"
+              type="password"
+              id="password"
+              formik={formik}
+              validationSchema={signupSchema}
+            />
+            <FormGroupInput
+              placeholder="Confirmation du mot de passe"
+              type="password"
+              id="confirmPassword"
+              formik={formik}
+              validationSchema={signupSchema}
+            />
+          </Card>
+        </Flex>
+        <Flex justifyContent="flex-end" p={1}>
+          <Box>
+            <Link href="/">
+              <Button mr="2" variant="outline">
+                Annuler
+              </Button>
+            </Link>
+          </Box>
+          <Box>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
+              Suivant
+            </Button>
           </Box>
         </Flex>
-      </Card>
+      </form>
     </Fragment>
   );
 };
