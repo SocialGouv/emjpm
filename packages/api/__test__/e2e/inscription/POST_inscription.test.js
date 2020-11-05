@@ -15,7 +15,7 @@ jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
 const { getAllTisByMandataire } = require("@emjpm/api/src/db/queries/tis");
-const { seedData } = require("../../database/seed-data");
+const { seedData } = require("@emjpm/api/database/seed-data");
 
 beforeAll(async () => {
   await seedData(databaseName);

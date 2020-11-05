@@ -1,5 +1,5 @@
 const request = require("supertest");
-const { seedData } = require("../../database/seed-data");
+const { seedData } = require("@emjpm/api/database/seed-data");
 
 const nodemailerMock = require("nodemailer-mock");
 
