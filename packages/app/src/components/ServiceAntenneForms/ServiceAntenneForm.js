@@ -1,9 +1,10 @@
-import { Button, Field, InlineError, Input } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box } from "rebass";
+import { Box, Flex, Link, Text } from "rebass";
 
 import { serviceAntenneSchema } from "../../lib/validationSchemas";
+import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const ServiceAntenneForm = (props) => {
@@ -34,107 +35,106 @@ const ServiceAntenneForm = (props) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Field>
-        <Input
-          value={formik.values.name}
-          id="name"
-          name="name"
-          hasError={formik.errors.name && formik.touched.name}
-          onChange={formik.handleChange}
-          placeholder="Nom de l'antenne"
-        />
-        <InlineError message={formik.errors.name} fieldId="name" />
-      </Field>
-      <Field>
-        <Input
-          value={formik.values.contact_lastname}
-          id="contact_lastname"
-          name="contact_lastname"
-          hasError={
-            formik.errors.contact_lastname && formik.touched.contact_lastname
-          }
-          onChange={formik.handleChange}
-          placeholder="Nom du responsable"
-        />
-        <InlineError
-          message={formik.errors.contact_lastname}
-          fieldId="contact_lastname"
-        />
-      </Field>
-      <Field>
-        <Input
-          value={formik.values.contact_firstname}
-          id="contact_firstname"
-          name="contact_firstname"
-          hasError={
-            formik.errors.contact_firstname && formik.touched.contact_firstname
-          }
-          onChange={formik.handleChange}
-          placeholder="Prénom du responsable"
-        />
-        <InlineError
-          message={formik.errors.contact_firstname}
-          fieldId="contact_firstname"
-        />
-      </Field>
-      <Field>
-        <Input
-          value={formik.values.mesures_max.toString()}
-          id="mesures_max"
-          name="mesures_max"
-          hasError={formik.errors.mesures_max && formik.touched.mesures_max}
-          onChange={formik.handleChange}
-          placeholder="Mesures maximum"
-        />
-        <InlineError
-          message={formik.errors.mesures_max}
-          fieldId="mesures_max"
-        />
-      </Field>
-      <Field>
-        <Input
-          value={formik.values.contact_phone}
-          id="contact_phone"
-          name="contact_phone"
-          hasError={formik.errors.contact_phone && formik.touched.contact_phone}
-          onChange={formik.handleChange}
-          placeholder="Numéro de téléphone"
-        />
-        <InlineError
-          message={formik.errors.contact_phone}
-          fieldId="contact_phone"
-        />
-      </Field>
-      <Field>
-        <Input
-          value={formik.values.contact_email}
-          id="contact_email"
-          name="contact_email"
-          hasError={formik.errors.contact_email && formik.touched.contact_email}
-          onChange={formik.handleChange}
-          placeholder="Adresse email"
-        />
-        <InlineError
-          message={formik.errors.contact_email}
-          fieldId="contact_email"
-        />
-      </Field>
-      <Field>
-        <Geocode
-          onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
-          resource={antenne}
-        />
-        <InlineError message={formik.errors.geocode} fieldId="geocode" />
-      </Field>
-      <Box>
-        <Button
-          type="submit"
-          disabled={formik.isSubmitting}
-          isLoading={formik.isSubmitting}
-        >
-          Enregistrer
-        </Button>
-      </Box>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Antenne`}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            value={formik.values.name}
+            id="name"
+            placeholder="Nom de l'antenne"
+            formik={formik}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Responsable`}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            value={formik.values.contact_firstname}
+            id="contact_firstname"
+            placeholder="Nom du responsable"
+            formik={formik}
+          />
+          <FormGroupInput
+            value={formik.values.contact_lastname}
+            id="contact_lastname"
+            placeholder="Prénom du responsable"
+            formik={formik}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Coordonnées`}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            value={formik.values.contact_phone}
+            id="contact_phone"
+            placeholder="Téléphone"
+            formik={formik}
+          />
+          <FormGroupInput
+            value={formik.values.contact_email}
+            id="contact_email"
+            placeholder="Email"
+            formik={formik}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4>{`Adresse`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Cette adresse permettra de localiser l'antenne sur la carte des mesures`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <Field>
+            <Geocode
+              onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+              resource={antenne}
+            />
+            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Activité`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            Ces informations seront visibles par les magistrats.
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            value={formik.values.mesures_max}
+            id="mesures_max"
+            placeholder="nombre de mesures souhaité"
+            formik={formik}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex p={2} alignItems="center" justifyContent="flex-end">
+        <Box mr="2">
+          <Link href="/services/informations">
+            <Button variant="outline">Annuler</Button>
+          </Link>
+        </Box>
+        <Box>
+          <Button
+            type="submit"
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+          >
+            Enregistrer
+          </Button>
+        </Box>
+      </Flex>
     </form>
   );
 };
