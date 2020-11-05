@@ -20,6 +20,7 @@ jobs:
       postgres:
         image: postgres:11-alpine
         env:
+          POSTGRES_USER: emjpm
           POSTGRES_PASSWORD: test
         options: >-
           --health-cmd pg_isready
