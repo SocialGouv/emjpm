@@ -23,6 +23,9 @@ const ListBlanchePage = () => {
           onSuccess={async () => {
             await router.push(`/admin/liste-blanche`);
           }}
+          handleCancel={async () => {
+            await router.push("/admin/liste-blanche");
+          }}
         />
       </BoxWrapper>
     </LayoutAdmin>

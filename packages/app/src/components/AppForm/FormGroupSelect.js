@@ -17,6 +17,7 @@ export const FormGroupSelect = ({
   required,
   hideErrors,
   validationSchema,
+  onChange,
 }) => {
   const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
 
@@ -66,7 +67,13 @@ export const FormGroupSelect = ({
           placeholder={placeholder}
           required={required}
           hasError={showError}
-          onChange={({ value }) => setFieldValue(id, value)}
+          onChange={
+            onChange
+              ? onChange
+              : ({ value }) => {
+                  setFieldValue(id, value);
+                }
+          }
           value={findOption(options, value)}
           options={options}
         />

@@ -78,7 +78,15 @@ export const SERVICE = gql`
       siret
       code_postal
       ville
-      department_id
+      org_gestionnaire
+      org_nom
+      org_adresse
+      org_code_postal
+      org_ville
+      departement {
+        id
+        code
+      }
       adresse
       latitude
       longitude
@@ -100,16 +108,6 @@ export const SERVICE = gql`
           etablissement
         }
       }
-    }
-  }
-`;
-
-export const DEPARTEMENTS = gql`
-  {
-    departements(order_by: { nom: asc }) {
-      id
-      code
-      nom
     }
   }
 `;
