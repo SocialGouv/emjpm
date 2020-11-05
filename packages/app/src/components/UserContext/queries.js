@@ -205,6 +205,11 @@ export const MANDATAIRE_USERS = gql`
         }
         lb_user {
           id
+          siret
+          adresse1
+          adresse2
+          code_postal
+          ville
           lb_user_etablissements {
             etablissement_rattachement
             etablissement {
@@ -221,6 +226,8 @@ export const MANDATAIRE_USERS = gql`
             id
             departement_financeur
             departement {
+              id
+              nom
               code
             }
           }

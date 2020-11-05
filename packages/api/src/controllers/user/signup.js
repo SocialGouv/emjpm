@@ -50,6 +50,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
       code_postal,
       department_id,
       dispo_max,
+      genre,
       latitude,
       longitude,
       siret,
@@ -57,7 +58,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
       telephone_portable,
       user_id,
       ville,
-      genre,
     });
 
   return mandataire;
