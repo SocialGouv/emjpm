@@ -15,6 +15,9 @@ export const ListeBlancheIndividuelCreate = () => {
     <ListeBlancheIndividuelForm
       editMode={false}
       loading={loading}
+      handleCancel={() => {
+        router.push(`/${type}/liste-blanche`);
+      }}
       handleSubmit={async (values) => {
         await create({
           variables: {
