@@ -57,7 +57,7 @@ const ServiceInformations = () => {
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
-            <Box>
+            <Box flex={2 / 3}>
               <Text sx={content}>{lb_adresse || ""}</Text>
               <Text sx={content}>
                 {lb_code_postal || ""} {lb_ville || ""}

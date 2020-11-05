@@ -1,8 +1,7 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Card, Heading4, Text } from "@emjpm/ui";
+import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
-import { Box, Flex } from "rebass";
 
 import { captureException } from "../../util/sentry";
 import { ServiceAntenneForm } from "../ServiceAntenneForms";
@@ -54,32 +53,8 @@ const ServiceAntenneEdit = (props) => {
   };
 
   return (
-    <Card m="1" mt="5" p="5">
-      <Flex flexWrap="wrap">
-        <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-          <Box height="80px">
-            <Heading4>{`Information de cette  antenne`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Information de cette antenne`}
-            </Text>
-          </Box>
-          <Box height="220px">
-            <Heading4>{`Information du responsable`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Ces informations permettent d'identifier la personne en charge de cette antenne.`}
-            </Text>
-          </Box>
-          <Box height="200px">
-            <Heading4>{`Contact de l'antenne`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Ces informations permettent de renseigner les coordonnées de cette antenne.`}
-            </Text>
-          </Box>
-        </Box>
-        <Box p="5" mb="2" width={[1, 3 / 5]}>
-          <ServiceAntenneForm antenne={antenne} handleSubmit={handleSubmit} />
-        </Box>
-      </Flex>
+    <Card p="5">
+      <ServiceAntenneForm antenne={antenne} handleSubmit={handleSubmit} />
     </Card>
   );
 };

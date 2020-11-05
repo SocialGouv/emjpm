@@ -74,7 +74,7 @@ const ServiceEditForm = (props) => {
         <FormGrayBox>
           <Heading4>{`Adresse`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Cette adresse permettra de vous localiser sur la carte des mesures`}
+            {`Cette adresse permettra de localiser le service sur la carte des mesures`}
           </Text>
         </FormGrayBox>
         <FormInputBox>
