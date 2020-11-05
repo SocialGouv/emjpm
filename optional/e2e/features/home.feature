@@ -3,7 +3,7 @@
 @home
 Fonctionnalité: Page d'acceuil
 
-Pour pouvoir découvrir ce que fait Domifa
+Pour pouvoir découvrir ce que fait EMJPM
 En tant que visiteur
 Je veux être pouvoir consulter la page d'acceuil
 

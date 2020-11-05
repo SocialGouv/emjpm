@@ -23,7 +23,7 @@ exports.config = {
   translation: "fr-FR",
   gherkin: {
     features: "../../features/**/*.feature",
-    steps: ["./step_definitions/global.js"],
+    steps: ["./step_definitions/database.js", "./step_definitions/global.js"],
   },
   plugins: {
     pauseOnFail: {},

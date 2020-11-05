@@ -1,16 +1,16 @@
 const { Soit, Quand, Alors } = require("./_fr");
-const { I, loginAs } = inject();
+const { I } = inject();
 
 Soit("un navigateur web sur le site", () => {
   I.amOnPage("/");
 });
 
-Soit("un utilisateur connecté avec le profil {string}", (role) => {
-  loginAs(role);
-});
-
 Quand("je clique sur {string}", (text) => {
   I.click(text);
+});
+
+Quand("je tape {string} dans le champ {string}", (text, input) => {
+  I.fillField(input, text);
 });
 
 Alors("je vois {string}", (text) => {
