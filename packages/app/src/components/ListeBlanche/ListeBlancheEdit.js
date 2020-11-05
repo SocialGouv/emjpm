@@ -7,7 +7,7 @@ import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
 import { LB_USER } from "./queries";
 
 export const ListeBlancheEdit = (props) => {
-  const { id, handleSubmit } = props;
+  const { id, handleSubmit, handleCancel } = props;
   const { data, error, loading } = useQuery(LB_USER, {
     variables: {
       id,
@@ -29,6 +29,7 @@ export const ListeBlancheEdit = (props) => {
             <ListeBlancheIndividuelUpdate
               id={id}
               handleSubmit={handleSubmit}
+              handleCancel={handleCancel}
               data={data.lb_users_by_pk}
             />
           )}

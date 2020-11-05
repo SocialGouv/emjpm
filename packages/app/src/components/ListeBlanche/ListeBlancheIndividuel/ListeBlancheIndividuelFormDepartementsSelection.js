@@ -31,9 +31,6 @@ export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
 
   return (
     <Fragment>
-      <Text mt={2} mb={1}>
-        {`Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur.`}
-      </Text>
       <RadioGroup
         value={null}
         onValueChange={(value) => {

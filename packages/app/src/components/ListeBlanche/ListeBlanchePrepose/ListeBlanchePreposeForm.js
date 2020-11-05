@@ -1,4 +1,4 @@
-import { Button, Card, Heading4, RadioGroup } from "@emjpm/ui";
+import { Button, Heading4, RadioGroup } from "@emjpm/ui";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 import React, { Fragment } from "react";
@@ -6,7 +6,7 @@ import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
-import { FormGroupInput } from "../../AppForm";
+import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required(),
@@ -78,34 +78,39 @@ export const ListeBlanchePreposeForm = (props) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Box mt={4}>
-        <Card>
-          <Flex pr={2} flexDirection="column">
-            <Heading4 mb={1}>{"Informations"}</Heading4>
-            <FormGroupInput
-              placeholder="Nom"
-              id="lastname"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-            <FormGroupInput
-              placeholder="Prénom"
-              id="firstname"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-            <FormGroupInput
-              placeholder="Adresse e-mail du mandataire"
-              id="email"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
-          </Flex>
-
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{"Informations"}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            placeholder="Nom"
+            id="lastname"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="firstname"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail du mandataire"
+            id="email"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Liste des établissements"}</Heading4>
           <Text mt={"20px"} mb={2}>
             {`Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement.`}
           </Text>
+        </FormGrayBox>
+        <FormInputBox>
           <RadioGroup
             options={etablissementOptions}
             onValueChange={async (value) => {
@@ -175,16 +180,15 @@ export const ListeBlanchePreposeForm = (props) => {
               />
             </Box>
           </Box>
-
-          <Flex justifyContent="flex-end" mt={4}>
-            <Box>
-              <Button disabled={formik.isSubmitting} type="submit">
-                {editMode ? "Mettre à jour" : "Ajouter"}
-              </Button>
-            </Box>
-          </Flex>
-        </Card>
-      </Box>
+        </FormInputBox>
+      </Flex>
+      <Flex justifyContent="flex-end" mt={4}>
+        <Box>
+          <Button disabled={formik.isSubmitting} type="submit">
+            {editMode ? "Mettre à jour" : "Ajouter"}
+          </Button>
+        </Box>
+      </Flex>
     </form>
   );
 };
