@@ -18,6 +18,14 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
+      lb_adresse
+      lb_code_postal
+      lb_ville
+      org_gestionnaire
+      org_nom
+      org_adresse
+      org_code_postal
+      org_ville
       service_tis {
         id
         ti {

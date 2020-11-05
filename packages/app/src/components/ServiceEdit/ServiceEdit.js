@@ -1,8 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Text } from "@emjpm/ui";
+import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
-import { Box, Flex } from "rebass";
 
 import { captureException } from "../../util/sentry";
 import { EDIT_ANTENNE } from "./mutations";
@@ -57,30 +56,9 @@ const ServiceEdit = () => {
 
     setSubmitting(false);
   };
-
   return (
-    <Card m="1" mt="5" p="0">
-      <Flex flexWrap="wrap">
-        <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-          <Box height="220px">
-            <Heading4>{`Information du responsable`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Ces informations permettent d'identifier la personne en charge de ce service.`}
-            </Text>
-          </Box>
-          <Box height="200px">
-            <Heading4>{`Contact du service`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Ces informations permettent de renseigner les coordonnées de ce service.`}
-            </Text>
-          </Box>
-        </Box>
-        <Box p="5" width={[1, 3 / 5]}>
-          <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
-            <ServiceEditForm handleSubmit={handleSubmit} service={service} />
-          </Box>
-        </Box>
-      </Flex>
+    <Card p="5">
+      <ServiceEditForm handleSubmit={handleSubmit} service={service} />
     </Card>
   );
 };
