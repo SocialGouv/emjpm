@@ -6,7 +6,7 @@ import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { UPDATE_DEPARTEMENT_FINANCEUR, UPDATE_LB_USER } from "./mutations";
 
 export const ListeBlancheIndividuelUpdate = (props) => {
-  const { id, data, handleSubmit } = props;
+  const { id, data, handleSubmit, handleCancel } = props;
 
   const [updateListeBlanche] = useMutation(UPDATE_LB_USER, {
     refetchQueries: [{ query: LB_USER, variables: { id } }],
@@ -20,6 +20,7 @@ export const ListeBlancheIndividuelUpdate = (props) => {
     <ListeBlancheIndividuelForm
       editMode={true}
       data={data}
+      handleCancel={handleCancel}
       handleSubmit={async (values) => {
         const { lb_departements } = data;
 

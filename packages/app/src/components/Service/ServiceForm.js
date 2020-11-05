@@ -1,11 +1,16 @@
 import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
-import { Box, Card, Flex } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { adminServiceSchema } from "../../lib/validationSchemas/adminServiceSchema";
 import { useDepartementsOptions } from "../../util/departements";
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormGroupSelect,
+  FormInputBox,
+} from "../AppForm";
 
 export const ServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;
@@ -35,75 +40,36 @@ export const ServiceForm = (props) => {
 
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Card m={1}>
-        <Heading4 mb={1}>{`Service tutellaire`}</Heading4>
-        <FormGroupInput
-          placeholder="Siret"
-          id="siret"
-          formik={formik}
-          validationSchema={adminServiceSchema}
-        />
-        <FormGroupInput
-          placeholder="Nom du service"
-          id="etablissement"
-          formik={formik}
-          validationSchema={adminServiceSchema}
-        />
-        <Box>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Service tutellaire`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Quel est le département du service?`}
+            {`Renseigner le département qui finance le service tutellaire.`}
           </Text>
-          <FormGroupSelect
-            id="departement"
-            options={departementsOptions}
-            placeholder="Département du service"
-            value={formik.values.departement}
-            formik={formik}
-            validationSchema={adminServiceSchema}
-          />
-        </Box>
-        <Box>
-          <Text lineHeight="1.5" color="textSecondary">
-            {`L'organisme gestionnaire est-il différent du service?`}
-          </Text>
-          <FormGroupSelect
-            id="org_gestionnaire"
-            options={[
-              { label: "L'organisme gestionnaire est identique", value: false },
-              { label: "L'organisme gestionnaire est différent", value: true },
-            ]}
-            placeholder="L'organisme gestionnaire est-il différent du service?"
-            value={formik.values.org_gestionnaire}
-            formik={formik}
-            validationSchema={adminServiceSchema}
-            onChange={({ value }) => {
-              setFieldValue("org_gestionnaire", value);
-              setFieldValue("org_nom", "");
-              setFieldValue("org_adresse", "");
-              setFieldValue("org_code_postal", "");
-              setFieldValue("org_ville", "");
-            }}
-          />
-        </Box>
-      </Card>
-      <Flex flexDirection={["column", "row", "row"]}>
-        <Card m={1} flex={[1, 1 / 3, 1 / 3]}>
-          <Heading4 mb={1}>{`Contact`}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <Box>
+            <FormGroupSelect
+              id="departement"
+              options={departementsOptions}
+              placeholder="Département du service"
+              value={formik.values.departement}
+              formik={formik}
+              validationSchema={adminServiceSchema}
+            />
+          </Box>
           <FormGroupInput
-            placeholder="Email"
-            id="email"
+            placeholder="Siret"
+            id="siret"
             formik={formik}
             validationSchema={adminServiceSchema}
           />
           <FormGroupInput
-            placeholder="Téléphone"
-            id="telephone"
+            placeholder="Nom du service"
+            id="etablissement"
             formik={formik}
             validationSchema={adminServiceSchema}
           />
-        </Card>
-        <Card m={1} flex={[1, 2 / 3, 2 / 3]}>
-          <Heading4 mb={1}>{`Adresse postale`}</Heading4>
           <FormGroupInput
             placeholder="Adresse"
             id="adresse"
@@ -128,44 +94,97 @@ export const ServiceForm = (props) => {
               />
             </Box>
           </Flex>
-        </Card>
+        </FormInputBox>
       </Flex>
-      {formik.values.org_gestionnaire === true && (
-        <Card m={1}>
+      <Flex>
+        <FormGrayBox>
+          <Heading4 mb={1}>{`Contact`}</Heading4>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupInput
+            placeholder="Email"
+            id="email"
+            formik={formik}
+            validationSchema={adminServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Téléphone"
+            id="telephone"
+            formik={formik}
+            validationSchema={adminServiceSchema}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
           <Heading4 mb={1}>{`Organisme gestionnaire`}</Heading4>
-          <FormGroupInput
-            placeholder="Nom"
-            id="org_nom"
+          <Text lineHeight="1.5" color="textSecondary">
+            {`L'organisme gestionnaire est-il différent du service?`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupSelect
+            id="org_gestionnaire"
+            options={[
+              {
+                label: "L'organisme gestionnaire est identique",
+                value: false,
+              },
+              {
+                label: "L'organisme gestionnaire est différent",
+                value: true,
+              },
+            ]}
+            placeholder="L'organisme gestionnaire est-il différent du service?"
+            value={formik.values.org_gestionnaire}
             formik={formik}
             validationSchema={adminServiceSchema}
+            onChange={({ value }) => {
+              setFieldValue("org_gestionnaire", value);
+              setFieldValue("org_nom", "");
+              setFieldValue("org_adresse", "");
+              setFieldValue("org_code_postal", "");
+              setFieldValue("org_ville", "");
+            }}
           />
-          <FormGroupInput
-            placeholder="Adresse"
-            id="org_adresse"
-            formik={formik}
-            validationSchema={adminServiceSchema}
-          />
-          <Flex>
-            <Box flex={1 / 2}>
+          {formik.values.org_gestionnaire === true && (
+            <>
               <FormGroupInput
-                placeholder="Code postal"
-                id="org_code_postal"
+                placeholder="Nom"
+                id="org_nom"
                 formik={formik}
                 validationSchema={adminServiceSchema}
               />
-            </Box>
-            <Box flex={1 / 2} pl={1}>
               <FormGroupInput
-                placeholder="Ville"
-                id="org_ville"
+                placeholder="Adresse"
+                id="org_adresse"
                 formik={formik}
                 validationSchema={adminServiceSchema}
               />
-            </Box>
-          </Flex>
-        </Card>
-      )}
-      <Flex justifyContent="center">
+              <Flex>
+                <Box flex={1 / 2}>
+                  <FormGroupInput
+                    placeholder="Code postal"
+                    id="org_code_postal"
+                    formik={formik}
+                    validationSchema={adminServiceSchema}
+                  />
+                </Box>
+                <Box flex={1 / 2} pl={1}>
+                  <FormGroupInput
+                    placeholder="Ville"
+                    id="org_ville"
+                    formik={formik}
+                    validationSchema={adminServiceSchema}
+                  />
+                </Box>
+              </Flex>
+            </>
+          )}
+        </FormInputBox>
+      </Flex>
+
+      <Flex justifyContent="flex-end" p={1}>
         {handleCancel && (
           <Box>
             <Button mr="2" variant="outline" onClick={handleCancel}>
