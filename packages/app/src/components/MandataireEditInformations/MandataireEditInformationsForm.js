@@ -1,13 +1,14 @@
 import { Button, Heading4, InlineError, Textarea } from "@emjpm/ui";
 import { useFormik } from "formik";
+import Link from "next/link";
 import React from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
 import { FormGroupInput, FormGroupSelect } from "../AppForm";
-import { Link } from "../Commons";
 import { GeocodeCities } from "../Geocode";
+import { grayBox } from "./style";
 
 const MandataireEditInformationsForm = (props) => {
   const { cancelLink, mandataire, handleSubmit, user } = props;
@@ -34,8 +35,10 @@ const MandataireEditInformationsForm = (props) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <Flex>
-        <Card p={1} m={1} flex={1 / 2}>
-          <Heading4 mb={1}>{"Personne physique"}</Heading4>
+        <Box sx={grayBox} width={[1, 2 / 5]}>
+          <Heading4 mb={1}>{"Informations personnelles"}</Heading4>
+        </Box>
+        <Card width={[1, 3 / 5]}>
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}
@@ -57,8 +60,13 @@ const MandataireEditInformationsForm = (props) => {
             validationSchema={mandataireEditSchema}
           />
         </Card>
-        <Card p={1} m={1} flex={1 / 2}>
-          <Heading4 mb={1}>{"Personne morale"}</Heading4>
+      </Flex>
+      <Flex>
+        <Box sx={grayBox} width={[1, 2 / 5]}>
+          <Heading4 mb={1}>{"Structure juridique"}</Heading4>
+        </Box>
+
+        <Card width={[1, 3 / 5]}>
           <FormGroupInput
             placeholder="SIRET"
             id="siret"
@@ -99,60 +107,70 @@ const MandataireEditInformationsForm = (props) => {
           </Flex>
         </Card>
       </Flex>
-      <Card p={1} m={1}>
-        <Heading4 mb={1}>{"Coordonnées"}</Heading4>
-        <FormGroupInput
-          placeholder="Email"
-          id="email"
-          formik={formik}
-          validationSchema={mandataireEditSchema}
-        />
-        <Flex justifyContent="space-between">
-          <Box flex={1 / 2}>
-            <FormGroupInput
-              placeholder="Téléphone"
-              id="telephone"
-              formik={formik}
-              validationSchema={mandataireEditSchema}
-            />
-          </Box>
-          <Box ml={1} flex={1 / 2}>
-            <FormGroupInput
-              placeholder="Téléphone portable"
-              id="telephone_portable"
-              formik={formik}
-              validationSchema={mandataireEditSchema}
-            />
-          </Box>
-        </Flex>
-      </Card>
-      <Card p={1} m={1}>
-        <Heading4 mb={1}>{"Votre activité"}</Heading4>
-        <FormGroupInput
-          placeholder="Nombre de mesures souhaité"
-          id="dispo_max"
-          formik={formik}
-          validationSchema={mandataireEditSchema}
-        />
-        <Box>
-          <Textarea
-            value={formik.values.competences}
-            id="competences"
-            name="competences"
-            error={formik.errors.competences}
-            onChange={formik.handleChange}
-            label="Informations à destination du magistrat"
-            placeholder="Préférences géographiques, compétences, langues parlées, ..."
-          />
-          <InlineError
-            message={formik.errors.competences}
-            fieldId="competences"
-          />
+      <Flex>
+        <Box sx={grayBox} width={[1, 2 / 5]}>
+          <Heading4 mb={1}>{"Contacts"}</Heading4>
         </Box>
-      </Card>
-      <Flex alignItems="center" justifyContent="center">
+        <Card width={[1, 3 / 5]}>
+          <FormGroupInput
+            placeholder="Email"
+            id="email"
+            formik={formik}
+            validationSchema={mandataireEditSchema}
+          />
+          <Flex justifyContent="space-between">
+            <Box flex={1 / 2}>
+              <FormGroupInput
+                placeholder="Téléphone"
+                id="telephone"
+                formik={formik}
+                validationSchema={mandataireEditSchema}
+              />
+            </Box>
+            <Box ml={1} flex={1 / 2}>
+              <FormGroupInput
+                placeholder="Téléphone portable"
+                id="telephone_portable"
+                formik={formik}
+                validationSchema={mandataireEditSchema}
+              />
+            </Box>
+          </Flex>
+        </Card>
+      </Flex>
+      <Flex>
+        <Box sx={grayBox} width={[1, 2 / 5]}>
+          <Heading4 mb={1}>{"Activité de mandataire"}</Heading4>
+        </Box>
+        <Card width={[1, 3 / 5]}>
+          <FormGroupInput
+            placeholder="Nombre de mesures souhaité"
+            id="dispo_max"
+            formik={formik}
+            validationSchema={mandataireEditSchema}
+          />
+          <Box>
+            <Textarea
+              value={formik.values.competences}
+              id="competences"
+              name="competences"
+              error={formik.errors.competences}
+              onChange={formik.handleChange}
+              label="Informations à destination du magistrat"
+              placeholder="Préférences géographiques, compétences, langues parlées, ..."
+            />
+            <InlineError
+              message={formik.errors.competences}
+              fieldId="competences"
+            />
+          </Box>
+        </Card>
+      </Flex>
+      <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={cancelLink}>Annuler</Link>
+          <Link href={cancelLink}>
+            <Button variant="outline">Annuler</Button>
+          </Link>
         </Box>
         <Box>
           <Button
