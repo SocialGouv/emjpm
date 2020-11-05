@@ -13,8 +13,9 @@ const signupSchema = yup.object().shape({
   email: yup
     .string()
     .email("Le format de votre email n'est pas correct")
-    .required("Champ obligatoire"),
-  nom: yup.string().required("Champ obligatoire"),
+    .required(),
+  genre: yup.string().required(),
+  nom: yup.string().required(),
   password: yup
     .string()
     .label("Mot de passe")
