@@ -5,8 +5,7 @@ import { Box } from "rebass";
 
 import { PATH } from "../../constants/basePath";
 import { isEmailExists } from "../../query-service/EmailQueryService";
-import { getLocation } from "../../query-service/LocationQueryService";
-import { isSiretExists } from "../../query-service/SiretQueryService";
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { UserContext } from "../UserContext";
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
@@ -30,6 +29,8 @@ const MandataireEditInformations = () => {
     },
   });
 
+  const { departements } = useDepartements();
+
   const client = useApolloClient();
 
   if (loading) {
@@ -45,28 +46,7 @@ const MandataireEditInformations = () => {
   const mandataire = user.mandataire;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    const location = await getLocation(client, {
-      address: values.address,
-      city: values.city,
-      zipcode: values.zipcode,
-    });
-
-    if (!location || !location.department) {
-      setErrors({
-        code_postal: "Merci de renseigner un code postal valide",
-      });
-    }
-
-    const { department, geolocation } = location;
-
     if (
-      values.siret != mandataire.siret &&
-      (await isSiretExists(client, values.siret))
-    ) {
-      setErrors({
-        siret: "Ce SIRET existe déjà",
-      });
-    } else if (
       values.email != user.email &&
       (await isEmailExists(client, values.email))
     ) {
@@ -74,25 +54,29 @@ const MandataireEditInformations = () => {
         email: "Cet email existe déjà",
       });
     } else {
+      const codeDepartement = values.geocode.depcode;
+      const departement = departements.find(
+        (dep) => dep.code === codeDepartement
+      );
+
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          adresse: values.address,
-          code_postal: values.zipcode,
+          adresse: values.geocode.label,
+          code_postal: values.geocode.postcode,
           competences: values.competences,
-          department_id: department.id,
+          department_id: departement.id,
           dispo_max: parseInt(values.dispo_max),
           email: values.email,
           genre: values.genre,
           id: user.id,
-          latitude: geolocation ? geolocation.latitude : null,
-          longitude: geolocation ? geolocation.longitude : null,
+          latitude: values.geocode.latitude,
+          longitude: values.geocode.longitude,
           nom: values.nom,
           prenom: values.prenom,
-          siret: values.siret,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
-          ville: values.city.toUpperCase(),
+          ville: values.geocode.city,
         },
       });
     }

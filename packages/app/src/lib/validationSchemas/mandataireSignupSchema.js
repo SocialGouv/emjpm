@@ -2,11 +2,7 @@ import yup from "./yup";
 
 const mandataireSignupSchema = yup.object().shape({
   dispo_max: yup.number().required(),
-  geocode: yup
-    .object()
-    .test("geocode", "Veuillez renseigner ce champ.", function (value) {
-      return value.latitude && value.longitude && value.label;
-    }),
+  geocode: yup.object().nullable().required(),
   siret: yup
     .string()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
