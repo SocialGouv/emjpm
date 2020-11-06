@@ -1,17 +1,32 @@
-import { AsyncSelect } from "@emjpm/ui";
+import { AsyncSelect, Spinner } from "@emjpm/ui";
 import React from "react";
+import { Box } from "rebass";
 
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { debouncedGeocode } from "../../util/geocode";
+
+const { findDepartementByCodeOrId } = require("@emjpm/core");
 
 const Geocode = (props) => {
   const { hasError, onChange, placeholder, resource, instanceId } = props;
 
+  const { departements, error, loading } = useDepartements({ all: true });
+  if (error) {
+    return <Box>{error}</Box>;
+  }
+  if (loading) {
+    return <Spinner />;
+  }
+
   const { adresse, code_postal, departement_id, latitude, longitude, ville } =
     resource || {};
 
+  const departement =
+    findDepartementByCodeOrId(departements, { id: departement_id }) || {};
+
   const geocode = {
     city: ville,
-    depcode: departement_id,
+    depcode: departement.code,
     label: adresse,
     latitude,
     longitude,
