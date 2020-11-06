@@ -2,7 +2,6 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId } from "@emjpm/core";
 import {
   Button,
-  Card,
   Field,
   Heading1,
   Heading4,
@@ -19,13 +18,12 @@ import { Box, Flex } from "rebass";
 import { mandataireSignupSchema } from "../../lib/validationSchemas";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { FormGroupInput } from "../AppForm";
+import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import { grayBox } from "./style";
 
 const SignupMandataireForm = ({ tiDatas }) => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(
@@ -93,20 +91,20 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
   return (
     <Fragment>
-      <Heading1 px="1">
+      <Heading1 p="1" m="1">
         {`Demande de création d'un compte de mandataire individuel`}
       </Heading1>
 
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Tribunaux`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Sélectionner l'ensemble des tribunaux sur lesquels vous êtes agréés`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <Field>
               <Select
                 id="tis"
@@ -122,17 +120,17 @@ const SignupMandataireForm = ({ tiDatas }) => {
                 <InlineError message={formik.errors.tis} fieldId="tis" />
               )}
             </Field>
-          </Card>
+          </FormInputBox>
         </Flex>
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Information professionelle`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupInput
               id="siret"
               formik={formik}
@@ -140,14 +138,14 @@ const SignupMandataireForm = ({ tiDatas }) => {
               value={formik.values.siret}
               validationSchema={mandataireSignupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
 
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Téléphone`}</Heading4>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupInput
               id="telephone"
               formik={formik}
@@ -162,17 +160,17 @@ const SignupMandataireForm = ({ tiDatas }) => {
               value={formik.values.telephone_portable}
               validationSchema={mandataireSignupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
 
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Adresse`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Cette adresse permettra de vous localiser sur la carte des mesures`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <Field>
               <Geocode
                 resource={mandataire}
@@ -180,17 +178,17 @@ const SignupMandataireForm = ({ tiDatas }) => {
               />
               <InlineError message={formik.errors.geocode} fieldId="geocode" />
             </Field>
-          </Card>
+          </FormInputBox>
         </Flex>
 
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Capacité`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Indiquez le nombre de mesures maximal souhaité`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupInput
               id="dispo_max"
               formik={formik}
@@ -198,7 +196,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
               value={formik.values.dispo_max}
               validationSchema={mandataireSignupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">

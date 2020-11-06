@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import React, { Fragment, useContext } from "react";
@@ -8,9 +8,13 @@ import { Box, Flex } from "rebass";
 import { GENDER_OPTIONS } from "../../constants/user";
 import { signupSchema } from "../../lib/validationSchemas";
 import { isEmailExists } from "../../query-service/EmailQueryService";
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormGroupSelect,
+  FormInputBox,
+} from "../AppForm";
 import { SignupContext } from "./context";
-import { grayBox } from "./style";
 
 const TYPE_OPTIONS = [
   {
@@ -76,16 +80,16 @@ export const SignupForm = () => {
 
   return (
     <Fragment>
-      <Heading1 px="1">{`Création de compte`}</Heading1>
+      <Heading1 p="1" m="1">{`Création de compte`}</Heading1>
       <form onSubmit={formik.handleSubmit}>
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Information professionelle`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Quel type d'utilisateur êtes-vous ?`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupSelect
               id="type"
               formik={formik}
@@ -94,16 +98,16 @@ export const SignupForm = () => {
               options={TYPE_OPTIONS}
               validationSchema={signupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Information personnelle`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Ces informations permettent de vous identifier.`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupSelect
               id="genre"
               formik={formik}
@@ -124,17 +128,17 @@ export const SignupForm = () => {
               formik={formik}
               validationSchema={signupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
+          <FormGrayBox>
             <Heading4>{`Identifiants de connexion`}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}
             </Text>
-          </Box>
-          <Card width={[1, 3 / 5]}>
+          </FormGrayBox>
+          <FormInputBox>
             <FormGroupInput
               placeholder="Email"
               id="email"
@@ -155,7 +159,7 @@ export const SignupForm = () => {
               formik={formik}
               validationSchema={signupSchema}
             />
-          </Card>
+          </FormInputBox>
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
