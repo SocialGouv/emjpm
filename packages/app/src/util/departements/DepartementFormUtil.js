@@ -1,17 +1,17 @@
-const departementToOptions = (datas, config) => {
+const departementToOptions = (datas, config = {}) => {
+  const { valueKey = "code", nullOption } = config;
   let options = datas.map((departement) => ({
     departement,
     label: formatDepartementLabel(departement),
-    value: departement["code"],
+    value: departement[valueKey],
   }));
   options.sort(function (a, b) {
     return a.label.localeCompare(b.label);
   });
   if (
-    config &&
-    config.nullOption &&
-    config.nullOption.label !== null &&
-    config.nullOption.label !== undefined
+    nullOption &&
+    nullOption.label !== null &&
+    nullOption.label !== undefined
   ) {
     const nullOption = {
       label: config.nullOption.label,
