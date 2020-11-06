@@ -1,17 +1,18 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import React from "react";
 
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";
-import { DEPARTEMENTS } from "./queries";
 
 export const AdminEditTribunal = ({ tribunal, closePanel }) => {
-  const { data, loading } = useQuery(DEPARTEMENTS);
+  const { departements, loading } = useDepartements();
   const [updateTribunal] = useMutation(UPDATE_TRIBUNAL, {
     onCompleted: closePanel,
   });
 
-  if (loading && !data) {
+  if (loading) {
     return null;
   }
 
@@ -20,9 +21,9 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
       tribunal={tribunal}
       onCancel={closePanel}
       onSubmit={async (values) => {
-        const departement = data.departements.find(
-          ({ code }) => code === values.geocode.depcode
-        );
+        const departement = findDepartementByCodeOrId(departements, {
+          code: values.geocode.depcode,
+        });
         await updateTribunal({
           refetchQueries: ["tis", "tis_aggregate"],
           variables: {

@@ -1,4 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
@@ -55,9 +56,9 @@ const MandataireEditInformations = () => {
       });
     } else {
       const codeDepartement = values.geocode.depcode;
-      const departement = departements.find(
-        (dep) => dep.code === codeDepartement
-      );
+      const departement = findDepartementByCodeOrId(departements, {
+        code: codeDepartement,
+      });
 
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
