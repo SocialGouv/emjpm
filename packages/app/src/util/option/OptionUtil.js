@@ -24,11 +24,13 @@ export const departementToOptions = (datas) => {
   return all;
 };
 
-export const toOptions = (datas, idKey, labelKey) =>
-  datas.map((data) => ({
-    label: data[labelKey],
-    value: data[idKey],
-  }));
+export const toOptions = (data, valueKey, labelKey) =>
+  !data?.length
+    ? []
+    : data.map((elt) => ({
+        label: elt[labelKey],
+        value: elt[valueKey],
+      }));
 
 export const findOption = (options, value) => {
   if (!options || !options.length) {
