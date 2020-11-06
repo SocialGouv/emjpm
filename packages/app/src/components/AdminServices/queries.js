@@ -56,8 +56,8 @@ export const MESURES = gql`
       }
       service_antenne {
         name
-        address_city
-        address_zip_code
+        ville
+        code_postal
         mesures_awaiting
         mesures_in_progress
       }

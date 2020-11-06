@@ -32,7 +32,7 @@ const ServiceAntenneInformations = (props) => {
     contact_email,
     contact_phone,
     mesures_max,
-    address,
+    adresse,
     contact_firstname,
     contact_lastname,
   } = antenne;
@@ -67,7 +67,7 @@ const ServiceAntenneInformations = (props) => {
             </Box>
             <Flex my={1}>
               <Text sx={subtitle}>{"Adresse"}</Text>
-              <Text sx={content}>{address}</Text>
+              <Text sx={content}>{adresse}</Text>
             </Flex>
           </Box>
           <Box mb={2}>
