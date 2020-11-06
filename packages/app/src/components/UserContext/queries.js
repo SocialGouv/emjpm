@@ -66,9 +66,9 @@ export const GET_SERVICE_USERS = gql`
             contact_lastname
             contact_firstname
             contact_email
-            address_zip_code
-            address_city
-            address
+            code_postal
+            ville
+            adresse
             longitude
             latitude
           }
@@ -134,7 +134,7 @@ export const MAGISTRAT_USERS = gql`
           etablissement
           email
           code_postal
-          address
+          adresse
           latitude
           longitude
         }

@@ -4959,9 +4959,9 @@
     permission:
       check: {}
       columns:
-      - address
-      - address_city
-      - address_zip_code
+      - adresse
+      - ville
+      - code_postal
       - contact_email
       - contact_firstname
       - contact_lastname
@@ -4983,8 +4983,8 @@
       - service_id
       - name
       - created_at
-      - address_zip_code
-      - address_city
+      - code_postal
+      - ville
       - contact_lastname
       - contact_firstname
       - contact_email
@@ -5001,8 +5001,8 @@
       - service_id
       - name
       - created_at
-      - address_zip_code
-      - address_city
+      - code_postal
+      - ville
       - contact_lastname
       - contact_firstname
       - contact_email
@@ -5010,7 +5010,7 @@
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
-      - address
+      - adresse
       - latitude
       - longitude
       filter: {}
@@ -5025,9 +5025,9 @@
       - mesures_max
       - service_id
       - created_at
-      - address
-      - address_city
-      - address_zip_code
+      - adresse
+      - ville
+      - code_postal
       - contact_email
       - contact_firstname
       - contact_lastname
@@ -5037,9 +5037,9 @@
   - role: service
     permission:
       columns:
-      - address
-      - address_city
-      - address_zip_code
+      - adresse
+      - ville
+      - code_postal
       - contact_email
       - contact_firstname
       - contact_lastname
@@ -5064,8 +5064,8 @@
       - service_id
       - name
       - created_at
-      - address_zip_code
-      - address_city
+      - code_postal
+      - ville
       - contact_lastname
       - contact_firstname
       - contact_email
@@ -5078,9 +5078,9 @@
   - role: service
     permission:
       columns:
-      - address
-      - address_city
-      - address_zip_code
+      - adresse
+      - ville
+      - code_postal
       - contact_email
       - contact_firstname
       - contact_lastname

@@ -9,9 +9,9 @@ export const CREATE_ANTENNE = gql`
     $contact_lastname: String
     $contact_firstname: String
     $contact_email: String
-    $address_zip_code: String
-    $address: String
-    $address_city: String
+    $code_postal: String
+    $adresse: String
+    $ville: String
     $latitude: Float
     $longitude: Float
   ) {
@@ -24,17 +24,17 @@ export const CREATE_ANTENNE = gql`
         contact_lastname: $contact_lastname
         contact_firstname: $contact_firstname
         contact_email: $contact_email
-        address_zip_code: $address_zip_code
-        address: $address
-        address_city: $address_city
+        code_postal: $code_postal
+        adresse: $adresse
+        ville: $ville
         latitude: $latitude
         longitude: $longitude
       }
     ) {
       returning {
-        address_city
-        address
-        address_zip_code
+        ville
+        adresse
+        code_postal
         latitude
         longitude
         contact_email

@@ -3,9 +3,9 @@ import gql from "graphql-tag";
 export const GET_SERVICES_ANTENNE = gql`
   query service_antenne($antenneId: Int!) {
     service_antenne(where: { id: { _eq: $antenneId } }) {
-      address
-      address_city
-      address_zip_code
+      adresse
+      ville
+      code_postal
       latitude
       longitude
       contact_email

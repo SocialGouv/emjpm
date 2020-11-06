@@ -6,25 +6,16 @@ import { debouncedGeocode } from "../../util/geocode";
 const Geocode = (props) => {
   const { hasError, onChange, placeholder, resource, instanceId } = props;
 
-  const {
-    address,
-    adresse,
-    address_city,
-    address_zip_code,
-    code_postal,
-    departement_id,
-    latitude,
-    longitude,
-    ville,
-  } = resource || {};
+  const { adresse, code_postal, departement_id, latitude, longitude, ville } =
+    resource || {};
 
   const geocode = {
-    city: ville || address_city,
+    city: ville,
     depcode: departement_id,
-    label: address || adresse || ville || address_city,
+    label: adresse,
     latitude,
     longitude,
-    postcode: code_postal || address_zip_code,
+    postcode: code_postal,
   };
 
   const isValid = !!latitude && !!longitude;

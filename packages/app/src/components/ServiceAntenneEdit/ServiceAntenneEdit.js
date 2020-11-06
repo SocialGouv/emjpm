@@ -21,10 +21,9 @@ const ServiceAntenneEdit = (props) => {
       await editAntenne({
         refetchQueries: ["service_antenne"],
         variables: {
-          address: values.geocode.label,
-          address_city: values.geocode.city,
-          address_zip_code: values.geocode.postcode,
+          adresse: values.geocode.label,
           antenne_id: antenneId,
+          code_postal: values.geocode.postcode,
           contact_email: values.contact_email,
           contact_firstname: values.contact_firstname,
           contact_lastname: values.contact_lastname,
@@ -33,6 +32,7 @@ const ServiceAntenneEdit = (props) => {
           longitude: values.geocode.longitude,
           mesures_max: values.mesures_max,
           name: values.name,
+          ville: values.geocode.city,
           service_id: service.id,
           user_id: user.id,
         },
