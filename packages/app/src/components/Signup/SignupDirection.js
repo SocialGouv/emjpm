@@ -1,14 +1,6 @@
+import { useQuery } from "@apollo/react-hooks";
 import { DIRECTION } from "@emjpm/core";
-import {
-  Button,
-  Card,
-  Field,
-  Heading1,
-  Heading4,
-  InlineError,
-  Select,
-  Text,
-} from "@emjpm/ui";
+import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -16,25 +8,44 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupDirectionSchema } from "../../lib/validationSchemas";
+import { toOptions } from "../../util/option/OptionUtil";
+import { FormGroupSelect } from "../AppForm";
 import { SignupContext } from "./context";
+import { DEPARTMENTS, REGIONS } from "./queries";
 import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
 export const SignupDirection = () => {
-  const { user, direction, setDirection, validateStepOne } = useContext(
+  const { user, department, direction, region, validateStepOne } = useContext(
     SignupContext
   );
 
   const formik = useFormik({
     initialValues: {
-      directionType: direction ? direction.directionType : "",
+      department: department || "",
+      directionType: direction?.directionType || "",
+      region: region || "",
     },
     onSubmit: (values, { setSubmitting, setErrors }) => {
+      if (values.directionType === "regional" && !values.region) {
+        setErrors({ region: "La région est obligatoire" });
+        setSubmitting(false);
+        return;
+      }
+      if (values.directionType === "departemental" && !values.department) {
+        setErrors({ department: "Le département est obligatoire" });
+        setSubmitting(false);
+        return;
+      }
       const body = {
+        departmentId:
+          values.directionType === "departemental" ? values.department : null,
+
         direction: {
-          directionType: values.directionType.value,
+          directionType: values.directionType,
         },
+        regionId: values.directionType === "regional" ? values.region : null,
         user: {
           username: user.email,
           ...user,
@@ -50,6 +61,16 @@ export const SignupDirection = () => {
     },
     validationSchema: signupDirectionSchema,
   });
+
+  const { data: dataDepartments } = useQuery(DEPARTMENTS);
+  const { data: dataRegions } = useQuery(REGIONS);
+
+  const departmentOptions = toOptions(
+    dataDepartments?.departements,
+    "id",
+    "nom"
+  );
+  const regionOptions = toOptions(dataRegions?.regions, "id", "nom");
 
   return (
     <Fragment>
@@ -68,28 +89,31 @@ export const SignupDirection = () => {
             <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
               <form onSubmit={formik.handleSubmit}>
                 <SignupGeneralError errors={formik.errors} />
-                <Field>
-                  <Select
-                    id="directionType"
-                    name="directionType"
-                    placeholder="Type de direction"
-                    value={formik.values.directionType}
-                    hasError={
-                      formik.errors.directionType &&
-                      formik.touched.directionType
-                    }
-                    onChange={(option) =>
-                      formik.setFieldValue("directionType", option)
-                    }
-                    options={DIRECTION.DIRECTION_TYPE.options}
+
+                <FormGroupSelect
+                  id="directionType"
+                  placeholder="Type de direction"
+                  formik={formik}
+                  options={DIRECTION.DIRECTION_TYPE.options}
+                />
+                {formik.values.directionType === "regional" && (
+                  <FormGroupSelect
+                    id="region"
+                    placeholder="Région"
+                    formik={formik}
+                    options={regionOptions}
+                    isClearable={true}
                   />
-                  {formik.touched.directionType && (
-                    <InlineError
-                      message={formik.errors.directionType}
-                      fieldId="directionType"
-                    />
-                  )}
-                </Field>
+                )}
+                {formik.values.directionType === "departemental" && (
+                  <FormGroupSelect
+                    id="department"
+                    placeholder="Département"
+                    formik={formik}
+                    options={departmentOptions}
+                    isClearable={true}
+                  />
+                )}
                 <Flex justifyContent="flex-end">
                   <Box>
                     <Link href="/">
@@ -103,7 +127,6 @@ export const SignupDirection = () => {
                       mr="2"
                       variant="outline"
                       onClick={() => {
-                        setDirection(formik.values);
                         validateStepOne(false);
                       }}
                     >
