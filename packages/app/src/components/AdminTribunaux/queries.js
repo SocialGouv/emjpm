@@ -27,20 +27,3 @@ export const TRIBUNAUX = gql`
     }
   }
 `;
-
-export const DEPARTEMENT = gql`
-  query departements($code: String!) {
-    departements(where: { code: { _eq: $code } }) {
-      id
-    }
-  }
-`;
-
-export const DEPARTEMENTS = gql`
-  query departements {
-    departements {
-      id
-      code
-    }
-  }
-`;

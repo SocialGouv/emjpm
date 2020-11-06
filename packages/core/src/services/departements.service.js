@@ -12,3 +12,13 @@ export function getDepartementCode(zipcode) {
     return zipcode.substring(0, 2);
   }
 }
+
+export function findDepartementByCodeOrId(departements, { id, code }) {
+  if (code) {
+    return departements.find((elm) => elm.code === code) || {};
+  }
+  if (id) {
+    return departements.find((elm) => elm.id === id) || {};
+  }
+  return {};
+}

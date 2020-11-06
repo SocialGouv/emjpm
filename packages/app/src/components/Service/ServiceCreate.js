@@ -1,4 +1,5 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React from "react";
 import { Box } from "rebass";
@@ -28,14 +29,16 @@ export const ServiceCreate = (props) => {
       return;
     }
 
+    const departement = findDepartementByCodeOrId(departements, {
+      code: values.departement,
+    });
+
     try {
       await addService({
         variables: {
           adresse: values.adresse,
           code_postal: values.code_postal,
-          department_id: departements.find(
-            (dep) => dep.code === values.departement
-          ).id,
+          department_id: departement.id,
           email: values.email,
           etablissement: values.etablissement,
           org_adresse: values.org_adresse,

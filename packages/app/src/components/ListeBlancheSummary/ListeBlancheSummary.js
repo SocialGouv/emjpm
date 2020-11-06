@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
@@ -51,7 +52,9 @@ const ListeBlancheSummary = () => {
     if (!departement || !departements?.length) {
       return "Tous les départements";
     } else {
-      const { nom = "" } = departements.find((d) => d.id === departement) || {};
+      const { nom = "" } = findDepartementByCodeOrId(departements, {
+        id: departement,
+      });
       return nom;
     }
   }, [departements, departement]);

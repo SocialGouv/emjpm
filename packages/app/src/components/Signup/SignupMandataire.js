@@ -1,4 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import {
   Button,
   Card,
@@ -54,9 +55,9 @@ const SignupMandataireForm = ({ tiDatas }) => {
         setErrors({ siret: "Ce SIRET existe déjà" });
       } else {
         const codeDepartement = values.geocode.depcode;
-        const departement = departements.find(
-          (dep) => dep.code === codeDepartement
-        );
+        const departement = findDepartementByCodeOrId(departements, {
+          code: codeDepartement,
+        });
         const body = {
           mandataire: {
             adresse: values.geocode.label,
