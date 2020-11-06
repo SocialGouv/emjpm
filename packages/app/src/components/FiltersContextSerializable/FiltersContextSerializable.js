@@ -1,9 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
-import { useQuery } from "react-apollo";
 
 import { useDebounce } from "../../lib/hooks";
 import { endDate, startDate } from "../../util/dates";
-import { GET_DEPARTEMENTS } from "./queries";
 
 export const Context = createContext({});
 
@@ -39,8 +37,6 @@ export const Provider = (props) => {
     setFilters((f) => ({ ...f, ...newFilters }));
   }, [useLocalStorage, initialFilters]);
 
-  const { data, loading, error } = useQuery(GET_DEPARTEMENTS);
-
   function onFilterChange(obj) {
     const newFilters = { ...filters, ...obj };
     setFilters(newFilters);
@@ -57,10 +53,7 @@ export const Provider = (props) => {
 
   const filtersContext = {
     debounceFilters,
-    departements: data ? data.departements : [],
-    error,
     filters,
-    loading,
     onFilterChange,
   };
 

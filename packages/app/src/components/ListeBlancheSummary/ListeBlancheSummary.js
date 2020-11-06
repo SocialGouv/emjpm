@@ -4,6 +4,7 @@ import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { LB_SUMMARY } from "./queries";
 
@@ -37,16 +38,16 @@ const LabelValue = ({ label, value }) => (
 );
 
 const ListeBlancheSummary = () => {
-  const { filters, departements = [] } = useContext(FiltersContextSerializable);
+  const { filters } = useContext(FiltersContextSerializable);
   const { departement } = filters;
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementIds: departement
-        ? [departement]
-        : departements.map((d) => d.id),
+      departementId: departement,
     },
   });
+
+  const { departements } = useDepartements({ all: true });
 
   const departementLabel = useMemo(() => {
     if (!departement || !departements?.length) {

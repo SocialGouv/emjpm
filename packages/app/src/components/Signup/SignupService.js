@@ -17,7 +17,7 @@ import { cardStyle, grayBox } from "./style";
 
 function getServiceOptions(services, departementId) {
   const servicesByDepartement = services.filter(
-    (s) => s.departement_id === departementId
+    (s) => s.department_id === departementId
   );
 
   return toOptions(servicesByDepartement, "id", "etablissement");
