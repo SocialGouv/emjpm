@@ -59,7 +59,10 @@ export const SignupDirection = () => {
 
   return (
     <Fragment>
-      <Heading1 px="1">{`Création d'un compte d'agent de l'état`}</Heading1>
+      <Heading1
+        p="1"
+        m="1"
+      >{`Création d'un compte d'agent de l'état`}</Heading1>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
@@ -105,7 +108,7 @@ export const SignupDirection = () => {
           </FormInputBox>
         </Flex>
 
-        <Flex justifyContent="flex-end">
+        <Flex justifyContent="flex-end" p={1}>
           <Box>
             <Link href="/">
               <Button mr="2" variant="outline">
