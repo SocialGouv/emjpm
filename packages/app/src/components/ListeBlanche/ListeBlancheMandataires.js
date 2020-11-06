@@ -8,28 +8,25 @@ import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { LB_USERS } from "./queries";
 
-function getRequestFilters(filters, departements) {
+function getRequestFilters(filters) {
   var requestFilters = {
     type: { _in: ["individuel", "prepose"] },
   };
 
   if (filters.departement) {
-    var departementIds = departements
-      .filter(({ id }) => id === filters.departement)
-      .map(({ id }) => id);
-
+    const departementId = filters.departement;
     requestFilters._or = [
       {
         lb_user_etablissements: {
           etablissement: {
-            departement: { id: { _in: departementIds } },
+            departement: { id: { _eq: departementId } },
           },
         },
       },
       {
         lb_departements: {
           departement_id: {
-            _in: departementIds,
+            _eq: departementId,
           },
         },
       },
@@ -64,9 +61,7 @@ function getRequestFilters(filters, departements) {
 
 export const ListeBlancheMandataires = (props) => {
   const { onSelectItem } = props;
-  const { filters, debounceFilters, departements = [] } = useContext(
-    FiltersContextSerializable
-  );
+  const { filters, debounceFilters } = useContext(FiltersContextSerializable);
 
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -77,7 +72,7 @@ export const ListeBlancheMandataires = (props) => {
 
   const { data, error, loading } = useQuery(LB_USERS, {
     variables: {
-      filters: getRequestFilters(debounceFilters, departements),
+      filters: getRequestFilters(debounceFilters),
       limit: resultPerPage,
       offset: currentOffset,
     },

@@ -5305,6 +5305,7 @@
     permission:
       columns:
       - code_postal
+      - department_id
       - etablissement
       - id
       filter: {}
