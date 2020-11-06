@@ -3424,13 +3424,40 @@
   - role: direction
     permission:
       columns:
-      - coordxet
-      - coordyet
-      - departement_id
       - id
       - nofinesset
+      - departement_id
+      - nofinessej
+      - rs
       - rslongue
+      - complrs
+      - compldistrib
+      - numvoie
+      - typvoie
+      - voie
+      - compvoie
+      - lieuditbp
       - commune
+      - libdepartement
+      - ligneacheminement
+      - telephone
+      - telecopie
+      - categetab
+      - libcategetab
+      - categagretab
+      - libcategagretab
+      - siret
+      - codeape
+      - codemft
+      - libmft
+      - codesph
+      - libsph
+      - dateouv
+      - dateautor
+      - numuai
+      - coordxet
+      - coordyet
+      - sourcecoordet
       filter: {}
   - role: individuel
     permission:
@@ -3439,9 +3466,36 @@
       - coordyet
       - departement_id
       - id
-      - nofinesset
-      - rslongue
+      - categagretab
+      - categetab
+      - codeape
+      - codemft
+      - codesph
       - commune
+      - compldistrib
+      - complrs
+      - compvoie
+      - dateautor
+      - dateouv
+      - libcategagretab
+      - libcategetab
+      - libdepartement
+      - libmft
+      - libsph
+      - lieuditbp
+      - ligneacheminement
+      - nofinessej
+      - nofinesset
+      - numuai
+      - numvoie
+      - rs
+      - rslongue
+      - siret
+      - sourcecoordet
+      - telecopie
+      - telephone
+      - typvoie
+      - voie
       filter: {}
   - role: prepose
     permission:
@@ -3450,9 +3504,36 @@
       - coordyet
       - departement_id
       - id
-      - nofinesset
-      - rslongue
+      - categagretab
+      - categetab
+      - codeape
+      - codemft
+      - codesph
       - commune
+      - compldistrib
+      - complrs
+      - compvoie
+      - dateautor
+      - dateouv
+      - libcategagretab
+      - libcategetab
+      - libdepartement
+      - libmft
+      - libsph
+      - lieuditbp
+      - ligneacheminement
+      - nofinessej
+      - nofinesset
+      - numuai
+      - numvoie
+      - rs
+      - rslongue
+      - siret
+      - sourcecoordet
+      - telecopie
+      - telephone
+      - typvoie
+      - voie
       filter: {}
   - role: service
     permission:
