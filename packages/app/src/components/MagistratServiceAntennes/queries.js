@@ -12,9 +12,9 @@ export const SERVICE_ANTENNES = gql`
       mesures_in_progress
       name
       id
-      address_zip_code
-      address
-      address_city
+      code_postal
+      adresse
+      ville
     }
   }
 `;

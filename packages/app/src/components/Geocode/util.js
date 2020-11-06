@@ -13,16 +13,12 @@ const geocodeInitialValue = (resource = {}) => {
   }
 
   const postcode =
-    resource.code_postal || resource.address_zip_code || resource.codePostal;
+    resource.code_postal || resource.code_postal || resource.codePostal;
   const depcode = getDepartementCode(postcode);
   return {
-    city: resource.ville || resource.address_city,
+    city: resource.ville,
     depcode,
-    label:
-      resource.address ||
-      resource.adresse ||
-      resource.ville ||
-      resource.address_city,
+    label: resource.adresse,
     latitude: resource.latitude,
     longitude: resource.longitude,
     postcode,
