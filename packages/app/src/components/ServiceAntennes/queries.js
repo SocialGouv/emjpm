@@ -15,7 +15,6 @@ export const ANTENNE = gql`
       mesures_awaiting
       address
       address_city
-      address_street
       address_zip_code
       contact_email
       contact_firstname

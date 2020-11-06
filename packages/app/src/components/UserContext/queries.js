@@ -67,7 +67,6 @@ export const GET_SERVICE_USERS = gql`
             contact_firstname
             contact_email
             address_zip_code
-            address_street
             address_city
             address
             longitude
