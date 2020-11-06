@@ -1,3 +1,3 @@
-import { ServiceInformations } from "./ServiceInformations";
+import { ServiceAntenneInformations } from "./ServiceAntenneInformations";
 
-export { ServiceInformations };
+export { ServiceAntenneInformations };
