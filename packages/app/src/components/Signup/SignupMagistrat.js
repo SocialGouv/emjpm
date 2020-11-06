@@ -1,4 +1,4 @@
-import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -6,12 +6,16 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupMagistratSchema } from "../../lib/validationSchemas";
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormGroupSelect,
+  FormInputBox,
+} from "../AppForm";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
-import { cardStyle, grayBox } from "./style";
 
 const SignupMagistratForm = ({ tiDatas }) => {
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(
@@ -52,69 +56,64 @@ const SignupMagistratForm = ({ tiDatas }) => {
 
   return (
     <Fragment>
-      <Heading1 px="1">{`Création d'un compte de magistrat`}</Heading1>
-      <Card sx={cardStyle}>
+      <Heading1 p="1" m="1">{`Création d'un compte de magistrat`}</Heading1>
+      <form onSubmit={formik.handleSubmit}>
+        <SignupGeneralError errors={formik.errors} />
         <Flex>
-          <Box width={[1, 2 / 5]} sx={grayBox}>
-            <Box height="80px" pt={1}>
-              <Heading4>{`Tribunal`}</Heading4>
-              <Text lineHeight="1.5" color="textSecondary">
-                {`Dans quel tribunal exercez-vous?`}
-              </Text>
-            </Box>
+          <FormGrayBox>
+            <Heading4>{`Tribunal`}</Heading4>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Dans quel tribunal exercez-vous?`}
+            </Text>
+          </FormGrayBox>
+          <FormInputBox>
+            <FormGroupSelect
+              formik={formik}
+              id="ti"
+              placeholder="Tribunal d'instance"
+              options={tiOptions}
+              isClearable={true}
+            />
+
+            <FormGroupInput
+              id="cabinet"
+              placeholder="Cabinet (optionnel)"
+              formik={formik}
+            />
+          </FormInputBox>
+        </Flex>
+
+        <Flex justifyContent="flex-end" p={1}>
+          <Box>
+            <Link href="/">
+              <Button mr="2" variant="outline">
+                Annuler
+              </Button>
+            </Link>
           </Box>
-          <Box p="5" pb={0} mb="4" width={[1, 3 / 5]}>
-            <form onSubmit={formik.handleSubmit}>
-              <SignupGeneralError errors={formik.errors} />
-
-              <FormGroupSelect
-                formik={formik}
-                id="ti"
-                placeholder="Tribunal d'instance"
-                options={tiOptions}
-                isClearable={true}
-              />
-
-              <FormGroupInput
-                id="cabinet"
-                placeholder="Cabinet (optionnel)"
-                formik={formik}
-              />
-
-              <Flex justifyContent="flex-end">
-                <Box>
-                  <Link href="/">
-                    <Button mr="2" variant="outline">
-                      Annuler
-                    </Button>
-                  </Link>
-                </Box>
-                <Box>
-                  <Button
-                    mr="2"
-                    variant="outline"
-                    onClick={() => {
-                      setMagistrat(formik.values);
-                      validateStepOne(false);
-                    }}
-                  >
-                    Retour
-                  </Button>
-                </Box>
-                <Box>
-                  <Button
-                    type="submit"
-                    disabled={formik.isSubmitting}
-                    isLoading={formik.isSubmitting}
-                  >
-                    Enregistrer
-                  </Button>
-                </Box>
-              </Flex>
-            </form>
+          <Box>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={() => {
+                setMagistrat(formik.values);
+                validateStepOne(false);
+              }}
+            >
+              Retour
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
+              Enregistrer
+            </Button>
           </Box>
         </Flex>
-      </Card>
+      </form>
     </Fragment>
   );
 };
