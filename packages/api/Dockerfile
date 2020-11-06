@@ -6,8 +6,8 @@ ENV NODE_ENV=production
 
 COPY package.json /app/
 
-COPY ./private.pem /app/private.pem
-COPY ./public.pem /app/public.pem
+COPY ./config/private.pem /app/config/private.pem
+COPY ./config/public.pem /app/config/public.pem
 
 COPY ./dist /app/dist
 
