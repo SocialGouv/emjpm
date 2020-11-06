@@ -9,7 +9,7 @@
     "start": "next dev",
     "dev": "next",
     "test": "jest",
-    "lint:pre-commit": "npm run lint:fix",
+    "lint:pre-commit": "yarn lint:fix",
     "lint": "eslint pages src",
     "lint:fix": "yarn lint --fix --cache",
     "prettier": "prettier --check '**/*.js'",
