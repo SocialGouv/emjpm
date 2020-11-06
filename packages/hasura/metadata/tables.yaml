@@ -4961,7 +4961,6 @@
       columns:
       - address
       - address_city
-      - address_street
       - address_zip_code
       - contact_email
       - contact_firstname
@@ -4984,7 +4983,6 @@
       - service_id
       - name
       - created_at
-      - address_street
       - address_zip_code
       - address_city
       - contact_lastname
@@ -5003,7 +5001,6 @@
       - service_id
       - name
       - created_at
-      - address_street
       - address_zip_code
       - address_city
       - contact_lastname
@@ -5030,7 +5027,6 @@
       - created_at
       - address
       - address_city
-      - address_street
       - address_zip_code
       - contact_email
       - contact_firstname
@@ -5043,7 +5039,6 @@
       columns:
       - address
       - address_city
-      - address_street
       - address_zip_code
       - contact_email
       - contact_firstname
@@ -5069,7 +5064,6 @@
       - service_id
       - name
       - created_at
-      - address_street
       - address_zip_code
       - address_city
       - contact_lastname
@@ -5086,7 +5080,6 @@
       columns:
       - address
       - address_city
-      - address_street
       - address_zip_code
       - contact_email
       - contact_firstname

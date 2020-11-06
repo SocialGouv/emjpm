@@ -13,7 +13,7 @@ export const SERVICE_ANTENNES = gql`
       name
       id
       address_zip_code
-      address_street
+      address
       address_city
     }
   }
