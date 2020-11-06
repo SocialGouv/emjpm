@@ -9,7 +9,8 @@ import React, {
 } from "react";
 import { Box, Flex } from "rebass";
 
-import { departementToOptions } from "../../util/option/OptionUtil";
+import { useDepartements } from "../../util/departements/useDepartements.hook";
+import { departementToOptions, findOption } from "../../util/option/OptionUtil";
 import { Link } from "../Commons";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
 import { UserContext } from "../UserContext";
@@ -24,13 +25,9 @@ const ListeBlancheFilter = () => {
   const ref = useRef();
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
   const user = useContext(UserContext);
-  const {
-    loading,
-    error,
-    filters,
-    onFilterChange,
-    departements = [],
-  } = useContext(FiltersContextSerializable);
+  const { loading, error, filters, onFilterChange } = useContext(
+    FiltersContextSerializable
+  );
   const {
     departementFinanceur,
     type = "mandataire",
@@ -39,6 +36,8 @@ const ListeBlancheFilter = () => {
     siret,
     email,
   } = filters;
+
+  const { departements } = useDepartements({ all: true });
 
   const buttonLinks = [
     {
@@ -137,9 +136,7 @@ const ListeBlancheFilter = () => {
                 placeholder={"Département"}
                 value={
                   filters.departement
-                    ? departmentOptions.find(
-                        (d) => d.value === filters.departement
-                      )
+                    ? findOption(departmentOptions, filters.departement)
                     : undefined
                 }
                 onChange={(option) =>
