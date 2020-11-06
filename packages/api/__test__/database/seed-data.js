@@ -9,7 +9,7 @@ const seedData = (databaseName) => {
       "--port",
       "5434",
       "--username",
-      "postgres",
+      "emjpm",
       "-e",
       "--if-exists",
       "--clean",
