@@ -48,9 +48,9 @@ export const MANDATAIRES = gql`
       service_antennes {
         id
         name
-        address
-        address_zip_code
-        address_city
+        adresse
+        code_postal
+        ville
         mesures_in_progress
         mesures_awaiting
         mesures_max
