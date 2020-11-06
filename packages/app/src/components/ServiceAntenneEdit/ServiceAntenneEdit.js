@@ -32,9 +32,9 @@ const ServiceAntenneEdit = (props) => {
           longitude: values.geocode.longitude,
           mesures_max: values.mesures_max,
           name: values.name,
-          ville: values.geocode.city,
           service_id: service.id,
           user_id: user.id,
+          ville: values.geocode.city,
         },
       });
     } catch (error) {

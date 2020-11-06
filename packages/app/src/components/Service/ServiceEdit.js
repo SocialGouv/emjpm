@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import React from "react";
 import { Card } from "rebass";
 
@@ -30,13 +31,15 @@ export const ServiceEdit = (props) => {
   } = serviceQuery.data;
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    const departement = findDepartementByCodeOrId(departements, {
+      code: values.departement,
+    });
+
     try {
       await updateService({
         refetchQueries: ["services", "services_aggregate"],
         variables: {
-          department_id: departements.find(
-            (dep) => dep.code === values.departement
-          ).id,
+          department_id: departement.id,
           email: values.email,
           etablissement: values.etablissement,
           id: service.id,

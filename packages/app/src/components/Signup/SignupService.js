@@ -1,5 +1,3 @@
-import { useQuery } from "@apollo/react-hooks";
-import { getDepartementCode } from "@emjpm/core";
 import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
@@ -9,40 +7,27 @@ import { Box, Flex } from "rebass";
 
 import { signupServiceSchema } from "../../lib/validationSchemas";
 import { toOptions } from "../../util";
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { FormGroupSelect } from "../AppForm";
 import { SignupContext } from "./context";
-import { DEPARTMENTS } from "./queries";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
 
-function getServiceOptions(services, departments, selectedValue) {
-  const department = departments.find(
-    (department) => department.id === selectedValue
+function getServiceOptions(services, departementId) {
+  const servicesByDepartement = services.filter(
+    (s) => s.departement_id === departementId
   );
-  if (!department) {
-    return [];
-  }
 
-  const { code } = department;
-  const compatibleServices = services.filter(({ code_postal }) => {
-    // Permet de gérer les code postaux invalides en base de données
-    try {
-      return getDepartementCode(code_postal) === code;
-    } catch (err) {
-      return false;
-    }
-  });
-
-  return toOptions(compatibleServices, "id", "etablissement");
+  return toOptions(servicesByDepartement, "id", "etablissement");
 }
 
 const SignupServiceForm = ({ serviceDatas }) => {
   const { user, service, setService, validateStepOne } = useContext(
     SignupContext
   );
-  const { data, loading } = useQuery(DEPARTMENTS);
+  const { departements, loading } = useDepartements();
 
   const formik = useFormik({
     initialValues: {
@@ -73,15 +58,12 @@ const SignupServiceForm = ({ serviceDatas }) => {
     return null;
   }
 
-  const { departements: departments = [] } = data;
-
   const serviceOptions = getServiceOptions(
     serviceDatas,
-    departments,
     formik.values.departement
   );
 
-  const departmentsOptions = toOptions(departments, "id", "nom");
+  const departementsOptions = toOptions(departements, "id", "nom");
 
   return (
     <Fragment>
@@ -103,7 +85,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
                 id="departement"
                 formik={formik}
                 placeholder="Département de votre service"
-                options={departmentsOptions}
+                options={departementsOptions}
               />
               <FormGroupSelect
                 id="service"

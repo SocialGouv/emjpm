@@ -1,3 +1,4 @@
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import { Select } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
@@ -33,8 +34,11 @@ export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
       options={options}
       value={null}
       onChange={(option) => {
-        const departement = queryResults.departements.find(
-          (d) => d.id === option.value
+        const departement = findDepartementByCodeOrId(
+          queryResults.departements,
+          {
+            id: option.value,
+          }
         );
         onAdd(departement);
       }}

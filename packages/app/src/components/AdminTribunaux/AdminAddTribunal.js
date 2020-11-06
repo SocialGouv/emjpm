@@ -1,18 +1,19 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
+import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React from "react";
 
+import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
-import { DEPARTEMENTS } from "./queries";
 
 export const AdminAddTribunal = () => {
-  const { data, loading } = useQuery(DEPARTEMENTS);
+  const { departements, loading } = useDepartements();
   const [addTribunal] = useMutation(ADD_TRIBUNAL, {
     onCompleted: () => Router.push("/admin/tribunaux"),
   });
 
-  if (loading && !data) {
+  if (loading) {
     return null;
   }
 
@@ -20,9 +21,9 @@ export const AdminAddTribunal = () => {
     <AdminTribunalForm
       onCancel={() => Router.push("/admin/tribunaux")}
       onSubmit={async (values) => {
-        const departement = data.departements.find(
-          ({ code }) => code === values.geocode.depcode
-        );
+        const departement = findDepartementByCodeOrId(departements, {
+          code: values.geocode.depcode,
+        });
         await addTribunal({
           variables: {
             address: values.geocode.label,
