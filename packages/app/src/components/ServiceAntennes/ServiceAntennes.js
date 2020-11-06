@@ -9,12 +9,11 @@ import {
   Text,
 } from "@emjpm/ui";
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import React from "react";
 import { Box, Flex } from "rebass";
 
 import { AntenneLinkButton, LinkButton } from "../Commons";
 import { ANTENNE } from "./queries";
-import { AntennesStyle } from "./style";
 
 const ServiceAntennes = (props) => {
   const { isAntenneCreationHidden } = props;
@@ -43,75 +42,24 @@ const ServiceAntennes = (props) => {
   const { service_antenne } = data;
   return (
     <BoxWrapper>
-      {service_antenne.length < 1 && !isAntenneCreationHidden && (
-        <Fragment>
-          <Heading2 mt="1">Antennes</Heading2>
-          <Card p="6" mt="3">
-            <Flex alignItems="center">
-              <Box
-                sx={{
-                  flexBasis: 120,
-                  flexGrow: 1,
-                }}
-              >
-                <img src="/static/images/enterprise.svg" alt="entreprise" />
-              </Box>
-              <Box ml="5">
-                <Heading4 mb="1">
-                  Créer des antennes pour votre service
-                </Heading4>
-                <Text lineHeight="1.5">
-                  Si votre service est découpés en antennes indépendantes, eMJPM
-                  vous permet de gérer des mesures et des préférences
-                  d’affectation pour chacune d’entre elles.
-                </Text>
-              </Box>
-              <Box
-                sx={{
-                  flexBasis: 260,
-                  flexGrow: 1,
-                }}
-              >
-                <LinkButton href="/services/antennes/create" ml="1">
-                  Créer une antenne
-                </LinkButton>
-              </Box>
-            </Flex>
-          </Card>
-        </Fragment>
-      )}
-      {service_antenne.length > 0 && (
-        <Fragment>
-          <Flex
-            flexWrap="wrap"
-            mb="3"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Heading2 mt="1">Antennes</Heading2>
-            {!isAntenneCreationHidden && (
+      <Card p="5">
+        <Flex mt="1" mb={3} justifyContent="space-between">
+          <Heading2>Antennes</Heading2>
+          {!isAntenneCreationHidden && (
+            <Box>
               <LinkButton href="/services/antennes/create" ml="1">
                 Créer une antenne
               </LinkButton>
-            )}
-          </Flex>
-          <Box sx={AntennesStyle} {...props}>
-            {service_antenne.map((antenne) => {
-              antenne = { ...antenne, preferences: [] };
-              return (
-                <Antenne
-                  sx={{ minHeight: "300px", p: "3" }}
-                  key={antenne.id}
-                  antenne={antenne}
-                  linkText="Voir l'antenne"
-                  href={parseInt(antenne.id, 10)}
-                  Link={AntenneLinkButton}
-                />
-              );
-            })}
-          </Box>
-        </Fragment>
-      )}
+            </Box>
+          )}
+        </Flex>
+        {service_antenne.length < 1 && !isAntenneCreationHidden && (
+          <NoAntenne />
+        )}
+        {service_antenne.length > 0 && (
+          <AntenneList {...props} service_antenne={service_antenne} />
+        )}
+      </Card>
     </BoxWrapper>
   );
 };
@@ -125,3 +73,46 @@ ServiceAntennes.propTypes = {
 };
 
 export { ServiceAntennes };
+
+function AntenneList({ service_antenne }) {
+  return (
+    <Flex p={5} sx={{ bg: "gray" }}>
+      {service_antenne.map((antenne) => {
+        antenne = { ...antenne, preferences: [] };
+        return (
+          <Antenne
+            sx={{ minHeight: "300px", p: "3" }}
+            key={antenne.id}
+            antenne={antenne}
+            linkText="Voir l'antenne"
+            href={parseInt(antenne.id, 10)}
+            Link={AntenneLinkButton}
+          />
+        );
+      })}
+    </Flex>
+  );
+}
+
+function NoAntenne() {
+  return (
+    <Flex alignItems="center">
+      <Box
+        sx={{
+          flexBasis: 120,
+          flexGrow: 1,
+        }}
+      >
+        <img src="/static/images/enterprise.svg" alt="entreprise" />
+      </Box>
+      <Box ml="5">
+        <Heading4 mb="1">Créer des antennes pour votre service</Heading4>
+        <Text lineHeight="1.5">
+          Si votre service est découpés en antennes indépendantes, eMJPM vous
+          permet de gérer des mesures et des préférences d’affectation pour
+          chacune d’entre elles.
+        </Text>
+      </Box>
+    </Flex>
+  );
+}
