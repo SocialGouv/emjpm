@@ -1,14 +1,4 @@
-import {
-  Button,
-  Card,
-  Field,
-  Heading1,
-  Heading4,
-  InlineError,
-  Input,
-  Select,
-  Text,
-} from "@emjpm/ui";
+import { Button, Card, Heading1, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -16,6 +6,7 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupMagistratSchema } from "../../lib/validationSchemas";
+import { FormGroupInput, FormGroupSelect } from "../AppForm";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
@@ -41,7 +32,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
       const body = {
         magistrat: {
           cabinet: values.cabinet,
-          ti: values.ti.value,
+          ti: values.ti,
         },
         user: {
           username: user.email,
@@ -75,36 +66,21 @@ const SignupMagistratForm = ({ tiDatas }) => {
           <Box p="5" pb={0} mb="4" width={[1, 3 / 5]}>
             <form onSubmit={formik.handleSubmit}>
               <SignupGeneralError errors={formik.errors} />
-              <Field>
-                <Select
-                  id="ti"
-                  name="ti"
-                  placeholder="Tribunal d'instance"
-                  value={formik.values.ti}
-                  hasError={formik.errors.ti && formik.touched.ti}
-                  onChange={(option) => formik.setFieldValue("ti", option)}
-                  options={tiOptions}
-                />
-                {formik.touched.ti && (
-                  <InlineError message={formik.errors.ti} fieldId="ti" />
-                )}
-              </Field>
-              <Field>
-                <Input
-                  id="cabinet"
-                  name="cabinet"
-                  placeholder="Cabinet (optionnel)"
-                  value={formik.values.cabinet}
-                  hasError={formik.errors.cabinet && formik.touched.cabinet}
-                  onChange={formik.handleChange}
-                />
-                {formik.touched.cabinet && (
-                  <InlineError
-                    message={formik.errors.cabinet}
-                    fieldId="cabinet"
-                  />
-                )}
-              </Field>
+
+              <FormGroupSelect
+                formik={formik}
+                id="ti"
+                placeholder="Tribunal d'instance"
+                options={tiOptions}
+                isClearable={true}
+              />
+
+              <FormGroupInput
+                id="cabinet"
+                placeholder="Cabinet (optionnel)"
+                formik={formik}
+              />
+
               <Flex justifyContent="flex-end">
                 <Box>
                   <Link href="/">

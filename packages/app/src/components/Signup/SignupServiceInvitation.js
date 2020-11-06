@@ -53,8 +53,7 @@ export const SignupServiceInvitation = (props) => {
           setSubmitting(false);
         },
         onError: (errors) => {
-          console.log("error");
-          console.log(errors);
+          console.error(errors);
           setErrors(errors);
         },
         onSuccess: () => {
