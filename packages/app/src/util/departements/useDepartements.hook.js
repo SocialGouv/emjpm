@@ -46,11 +46,11 @@ export const GET_DIRECTION_REGION_DEPARTEMENT = gql`
   }
 `;
 
-export function useDepartements() {
+export function useDepartements({ all = false } = {}) {
   const user = useContext(UserContext);
 
   const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
-    skip: user.type !== "direction",
+    skip: all || user?.type !== "direction",
     variables: {
       userId: user.id,
     },
