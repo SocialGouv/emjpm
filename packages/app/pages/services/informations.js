@@ -1,6 +1,6 @@
 import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
-import { Card } from "rebass";
+import { Box, Card } from "rebass";
 
 import { LayoutServices } from "../../src/components/Layout";
 import { ServiceAntennes } from "../../src/components/ServiceAntennes";
@@ -14,9 +14,9 @@ const Informations = () => {
         <Card p="5" m={2}>
           <ServiceInformations mt="3" />
         </Card>
-        <Card p="5" m={2}>
+        <Box m={2}>
           <ServiceAntennes />
-        </Card>
+        </Box>
       </BoxWrapper>
     </LayoutServices>
   );

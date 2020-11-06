@@ -85,7 +85,7 @@ const ServiceInformations = () => {
         )}
 
         <Box mb={2}>
-          <Heading5 mb="3">Coordonnées</Heading5>
+          <Heading5 mb="3">Contact</Heading5>
           <Flex my={1}>
             <Text sx={subtitle}>{"Responsable"}</Text>
             <Text sx={content}>

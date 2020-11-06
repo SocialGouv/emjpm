@@ -1,7 +1,8 @@
 import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
+import router from "next/router";
 import React from "react";
-import { Box, Flex, Link, Text } from "rebass";
+import { Box, Flex, Text } from "rebass";
 
 import { serviceAntenneSchema } from "../../lib/validationSchemas";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
@@ -121,9 +122,14 @@ const ServiceAntenneForm = (props) => {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href="/services/informations">
-            <Button variant="outline">Annuler</Button>
-          </Link>
+          <Button
+            variant="outline"
+            onClick={() => {
+              router.push("/services/informations");
+            }}
+          >
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button
