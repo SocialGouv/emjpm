@@ -8,10 +8,11 @@ import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { signupDirectionSchema } from "../../lib/validationSchemas";
+import { useDepartementsOptions } from "../../util/departements";
 import { toOptions } from "../../util/option/OptionUtil";
 import { FormGroupSelect } from "../AppForm";
 import { SignupContext } from "./context";
-import { DEPARTMENTS, REGIONS } from "./queries";
+import { REGIONS } from "./queries";
 import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
 import { cardStyle, grayBox } from "./style";
@@ -62,14 +63,9 @@ export const SignupDirection = () => {
     validationSchema: signupDirectionSchema,
   });
 
-  const { data: dataDepartments } = useQuery(DEPARTMENTS);
+  const { departementsOptions } = useDepartementsOptions();
   const { data: dataRegions } = useQuery(REGIONS);
 
-  const departmentOptions = toOptions(
-    dataDepartments?.departements,
-    "id",
-    "nom"
-  );
   const regionOptions = toOptions(dataRegions?.regions, "id", "nom");
 
   return (
@@ -110,7 +106,7 @@ export const SignupDirection = () => {
                     id="department"
                     placeholder="Département"
                     formik={formik}
-                    options={departmentOptions}
+                    options={departementsOptions}
                     isClearable={true}
                   />
                 )}

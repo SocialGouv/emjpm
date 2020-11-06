@@ -20,17 +20,6 @@ export const SIGNUP_DATA = gql`
   }
 `;
 
-export const DEPARTMENTS = gql`
-  query departments {
-    departements(order_by: { nom: asc }) {
-      id
-      id_region
-      nom
-      code
-    }
-  }
-`;
-
 export const REGIONS = gql`
   query regions {
     regions(order_by: { nom: asc }) {
