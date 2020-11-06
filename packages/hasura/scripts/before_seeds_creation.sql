@@ -46,5 +46,3 @@ delete from users where type = 'ti' and id not in (select user_id from magistrat
 delete from lb_departements lbd where not exists (select m.lb_user_id from mandataires m where m.lb_user_id = lbd.lb_user_id);
 delete from lb_user_etablissements;
 delete from lb_users lbu where not exists (select m.lb_user_id from mandataires m where m.lb_user_id = lbu.id);
-
-
