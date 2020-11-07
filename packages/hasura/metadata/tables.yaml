@@ -5580,8 +5580,8 @@
   - role: anonymous
     permission:
       columns:
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - created_at
       - date_fermeture
@@ -5613,8 +5613,8 @@
       - id
       - created_at
       - updated_at
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - email
       - siret
@@ -5636,8 +5636,8 @@
       - id
       - created_at
       - updated_at
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - email
       - siret
@@ -5659,8 +5659,8 @@
       - id
       - created_at
       - updated_at
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - email
       - siret
@@ -5682,8 +5682,8 @@
       - id
       - created_at
       - updated_at
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - email
       - siret
@@ -5705,8 +5705,8 @@
       - id
       - created_at
       - updated_at
-      - address
-      - address2
+      - adresse
+      - adresse2
       - code_postal
       - email
       - siret
