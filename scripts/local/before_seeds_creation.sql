@@ -1,15 +1,39 @@
 --hasura
- delete from hdb_catalog.event_log;
- delete from hdb_catalog.event_invocation_logs;
- delete from hdb_catalog.remote_schemas;
- delete from hdb_catalog.event_triggers;
+ truncate hdb_catalog.event_log cascade;
+ truncate hdb_catalog.event_invocation_logs cascade;
+ truncate hdb_catalog.remote_schemas cascade;
+ truncate hdb_catalog.event_triggers cascade;
+
 
  -- editors
- truncate editors cascade;
+truncate editors cascade;
+truncate access_tokens cascade;
+truncate api_logs cascade;
+truncate editor_token_requests cascade;
 
 -- commentaires
 truncate commentaires;
-truncate enquete_reponses;
+
+-- invitation
+truncate service_member_invitations cascade;
+
+-- log
+truncate logs_data cascade;
+
+-- ENQUETE
+truncate enquetes cascade;
+truncate enquete_reponses cascade;
+truncate enquete_reponses_activite cascade;
+truncate enquete_reponses_agrements_formations cascade;
+truncate enquete_reponses_financement cascade;
+truncate enquete_reponses_informations_mandataire cascade;
+truncate enquete_reponses_modalites_exercice cascade;
+truncate enquete_reponses_populations cascade;
+truncate enquete_reponses_prepose_personel_formation cascade;
+truncate enquete_reponses_prepose_prestations_sociales cascade;
+truncate enquete_reponses_prestations_sociales cascade;
+truncate enquete_reponses_service_informations cascade;
+truncate enquete_reponses_service_personnel_formation cascade;
 
 -- CLEAN tis
 delete from mesures where ti_id in (select id from tis where immutable = false);
