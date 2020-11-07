@@ -319,8 +319,8 @@ describe("POST /api/editors/mesures", () => {
           ville: "perrigny",
         },
       ],
-      latitude: null,
-      longitude: null,
+      latitude: 47.78,
+      longitude: 3.07776,
       numero_dossier: "45656456",
       numero_rg: "RG234534534",
       ressources: [
