@@ -6,7 +6,7 @@ const getTribunaux = async (req, res) => {
   return res.status(200).json({
     tribunaux: tribunaux.map((tribunal) => {
       return {
-        address: tribunal.address,
+        adresse: tribunal.adresse,
         code_postal: tribunal.code_postal,
         latitude: tribunal.latitude,
         longitude: tribunal.longitude,

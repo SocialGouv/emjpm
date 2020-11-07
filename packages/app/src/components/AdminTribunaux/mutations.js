@@ -9,7 +9,7 @@ export const UPDATE_TRIBUNAL = gql`
     $email: String
     $telephone: String
     $siret: String
-    $address: String!
+    $adresse: String!
     $latitude: Float!
     $longitude: Float!
     $departement_id: Int!
@@ -23,7 +23,7 @@ export const UPDATE_TRIBUNAL = gql`
         email: $email
         telephone: $telephone
         siret: $siret
-        address: $address
+        adresse: $adresse
         latitude: $latitude
         longitude: $longitude
         departement_id: $departement_id
@@ -39,7 +39,7 @@ export const ADD_TRIBUNAL = gql`
     $etablissement: String!
     $code_postal: String!
     $ville: String!
-    $address: String!
+    $adresse: String!
     $latitude: Float!
     $longitude: Float!
     $email: String!
@@ -55,7 +55,7 @@ export const ADD_TRIBUNAL = gql`
         email: $email
         telephone: $telephone
         siret: $siret
-        address: $address
+        adresse: $adresse
         latitude: $latitude
         longitude: $longitude
         departement_id: $departement_id
@@ -68,7 +68,7 @@ export const ADD_TRIBUNAL = gql`
         ville
         telephone
         email
-        address
+        adresse
         latitude
         longitude
       }
