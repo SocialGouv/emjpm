@@ -20,7 +20,7 @@ export const TRIBUNAUX = gql`
       telephone
       email
       siret
-      address
+      adresse
       latitude
       longitude
       immutable
