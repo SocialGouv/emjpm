@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.67.0](https://github.com/SocialGouv/emjpm/compare/v25.66.0...v25.67.0) (2020-11-07)
+
+
+### Bug Fixes
+
+* **service:** fix mesure import ([4586087](https://github.com/SocialGouv/emjpm/commit/4586087d5971ad762fabff060842c980d16ac4e5))
+
+
+### Features
+
+* **email-account-validation:** transform event in action in Hasura ([#2264](https://github.com/SocialGouv/emjpm/issues/2264)) ([9e41cde](https://github.com/SocialGouv/emjpm/commit/9e41cdea83d1b59c2d3346fc4b5dc4887fc497b0))
+* **email-service-member-invitation:** transform event in Hasura action ([#2266](https://github.com/SocialGouv/emjpm/issues/2266)) ([8957b3e](https://github.com/SocialGouv/emjpm/commit/8957b3e3fa2f367ad2dc1859bbf0771303baec22))
+* **hasura:** delete hasura seeds ([cb00557](https://github.com/SocialGouv/emjpm/commit/cb00557b0f37c3fa95d1112dd109bbd80e0fa5c0))
+* **hasura:** use hasura migration and delete knex pod ([#2263](https://github.com/SocialGouv/emjpm/issues/2263)) ([eb4918e](https://github.com/SocialGouv/emjpm/commit/eb4918e79e9dad4a2018ff8712846581945334a0))
+* **mandataire:** handle address and geolocalisation ([#2300](https://github.com/SocialGouv/emjpm/issues/2300)) ([e111d93](https://github.com/SocialGouv/emjpm/commit/e111d9366a8445d5bb43dd93fde2fcdb0814146d))
+* **mandataire:** rework information page to display agrement and geoloc ([#2301](https://github.com/SocialGouv/emjpm/issues/2301)) ([68947f7](https://github.com/SocialGouv/emjpm/commit/68947f75b3db1b74c7b736c9fcd68f6690b6fa47))
+* **mesure_etat:** remove etablissement_siret ([0b0395c](https://github.com/SocialGouv/emjpm/commit/0b0395c9c344d74784ee11a06e92f6a7179d0b89))
+* **service-antenne:** delete address_street ([08a456a](https://github.com/SocialGouv/emjpm/commit/08a456aa835d09065942cb61a72fff6296b16d6e))
+* **service-antenne:** rename address cols ([25fb9d5](https://github.com/SocialGouv/emjpm/commit/25fb9d59c69b7ee2cbcae6e2e0c5f6ce349348c5))
+* **signup:** add department and region in form ([#2298](https://github.com/SocialGouv/emjpm/issues/2298)) ([9868214](https://github.com/SocialGouv/emjpm/commit/98682148d0efbb13afc5581b0c6930652119ae1c))
+* **token-request:** transform event in Hasura action ([#2267](https://github.com/SocialGouv/emjpm/issues/2267)) ([69fa617](https://github.com/SocialGouv/emjpm/commit/69fa617153108e3ed27705c1424d424b9dcf5b10))
+
+
+
+
+
 # [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
 
 
