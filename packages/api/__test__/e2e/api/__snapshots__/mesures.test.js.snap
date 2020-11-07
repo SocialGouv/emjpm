@@ -60,8 +60,8 @@ Object {
           "ville": "PLRIN SUR MER",
         },
       ],
-      "latitude": null,
-      "longitude": null,
+      "latitude": 48.5442,
+      "longitude": -2.77005,
       "numero_dossier": "TESTES",
       "numero_rg": "2020202020",
       "ressources": Array [
@@ -115,8 +115,8 @@ Object {
           "ville": "PLRIN SUR MER",
         },
       ],
-      "latitude": null,
-      "longitude": null,
+      "latitude": 48.5442,
+      "longitude": -2.77005,
       "numero_dossier": "20190512",
       "numero_rg": "18&#x2F;A&#x2F;3245",
       "ressources": Array [
