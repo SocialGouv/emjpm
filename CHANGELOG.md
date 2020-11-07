@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.67.0](https://github.com/SocialGouv/emjpm/compare/v25.66.0...v25.67.0) (2020-11-07)
+
+
+### Bug Fixes
+
+* **admin:** use correct layout for liste blanche ([e388e28](https://github.com/SocialGouv/emjpm/commit/e388e2855b5c1da7e976c3fc3a66f5b240cae1e1))
+* **app:** https://nextjs.link/codemod-ndc ([0e4f201](https://github.com/SocialGouv/emjpm/commit/0e4f201d950451b9165678607a19176de6df3f44))
+* **filter:** use departement inside filters ([a446f84](https://github.com/SocialGouv/emjpm/commit/a446f8475c0363b53ea1029e093025120cde6bc2))
+* **geocode:** convert id into code ([8ce37da](https://github.com/SocialGouv/emjpm/commit/8ce37dadf18d07b24505f7c064f8cbc5430ee1a7))
+* **liste-blanche:** update hasura metadata ([7fb7d3f](https://github.com/SocialGouv/emjpm/commit/7fb7d3f11a2696de1267608c64511762fc6b7bb9))
+* **service:** fix mesure import ([4586087](https://github.com/SocialGouv/emjpm/commit/4586087d5971ad762fabff060842c980d16ac4e5))
+* **service:** fix service creation ([b9a7cba](https://github.com/SocialGouv/emjpm/commit/b9a7cba327e60d5a12512eb4f179a3c72af03fb1))
+
+
+### Features
+
+* **api-logs:** add pagination for logs ([#2268](https://github.com/SocialGouv/emjpm/issues/2268)) ([b0d5d73](https://github.com/SocialGouv/emjpm/commit/b0d5d739d841ba2566a6f97d513c7c38c89d2d5d))
+* **app:** enhance sentry configuration ([#2282](https://github.com/SocialGouv/emjpm/issues/2282)) ([5f587e6](https://github.com/SocialGouv/emjpm/commit/5f587e6a2f2f87a2de8da6f9ea6f2c20c58ae2c7))
+* **email-account-validation:** transform event in action in Hasura ([#2264](https://github.com/SocialGouv/emjpm/issues/2264)) ([9e41cde](https://github.com/SocialGouv/emjpm/commit/9e41cdea83d1b59c2d3346fc4b5dc4887fc497b0))
+* **email-service-member-invitation:** transform event in Hasura action ([#2266](https://github.com/SocialGouv/emjpm/issues/2266)) ([8957b3e](https://github.com/SocialGouv/emjpm/commit/8957b3e3fa2f367ad2dc1859bbf0771303baec22))
+* **form:** introduce FormGrayBox / FormInputBox ([#2302](https://github.com/SocialGouv/emjpm/issues/2302)) ([a7eaa5e](https://github.com/SocialGouv/emjpm/commit/a7eaa5e1ad4b533d91c36ba4a10a4b207e3ee375))
+* **hasura:** delete hasura seeds ([cb00557](https://github.com/SocialGouv/emjpm/commit/cb00557b0f37c3fa95d1112dd109bbd80e0fa5c0))
+* **hasura:** drop hasura triggers ([d9f4557](https://github.com/SocialGouv/emjpm/commit/d9f4557680ffbd131870aa9a6648d2e1ec44d521))
+* **hasura:** update metadata ([5c5cf0d](https://github.com/SocialGouv/emjpm/commit/5c5cf0dfc9cc1f33beb3e0ba6ccc386d4aa86615))
+* **hasura:** use hasura migration and delete knex pod ([#2263](https://github.com/SocialGouv/emjpm/issues/2263)) ([eb4918e](https://github.com/SocialGouv/emjpm/commit/eb4918e79e9dad4a2018ff8712846581945334a0))
+* **liste-blanche:** add adresse ([#2296](https://github.com/SocialGouv/emjpm/issues/2296)) ([5efd6d4](https://github.com/SocialGouv/emjpm/commit/5efd6d4214518bb34a8e1c59b2c0987fef025907))
+* **liste-blanche:** add organisme gestionnaire ([#2299](https://github.com/SocialGouv/emjpm/issues/2299)) ([e5bf037](https://github.com/SocialGouv/emjpm/commit/e5bf0371737143584055f56a436099bed2ab2e4b))
+* **mandataire:** handle address and geolocalisation ([#2300](https://github.com/SocialGouv/emjpm/issues/2300)) ([e111d93](https://github.com/SocialGouv/emjpm/commit/e111d9366a8445d5bb43dd93fde2fcdb0814146d))
+* **mandataire:** rework information page to display agrement and geoloc ([#2301](https://github.com/SocialGouv/emjpm/issues/2301)) ([68947f7](https://github.com/SocialGouv/emjpm/commit/68947f75b3db1b74c7b736c9fcd68f6690b6fa47))
+* **mandataire:** update information ui ([#2294](https://github.com/SocialGouv/emjpm/issues/2294)) ([442958f](https://github.com/SocialGouv/emjpm/commit/442958f81ada65632133acd1d509c794ecb00855))
+* **mesure_etat:** remove etablissement_siret ([0b0395c](https://github.com/SocialGouv/emjpm/commit/0b0395c9c344d74784ee11a06e92f6a7179d0b89))
+* **service:** handle adresse and geolocalisation ([f9f24de](https://github.com/SocialGouv/emjpm/commit/f9f24de308853a845f2f9b2ea2fdc0c43bb050c5))
+* **service:** rework service antenne form ([2e6845d](https://github.com/SocialGouv/emjpm/commit/2e6845d27542fe58dceb9fa8a64440ddc16cec6c))
+* **service-antenne:** delete address_street ([08a456a](https://github.com/SocialGouv/emjpm/commit/08a456aa835d09065942cb61a72fff6296b16d6e))
+* **service-antenne:** rename address cols ([25fb9d5](https://github.com/SocialGouv/emjpm/commit/25fb9d59c69b7ee2cbcae6e2e0c5f6ce349348c5))
+* **service-antenne:** rework ui ([5805f90](https://github.com/SocialGouv/emjpm/commit/5805f90099a02cfe56499b258b2dc8abde7346b2))
+* **signup:** add department and region in form ([#2298](https://github.com/SocialGouv/emjpm/issues/2298)) ([9868214](https://github.com/SocialGouv/emjpm/commit/98682148d0efbb13afc5581b0c6930652119ae1c))
+* **token-request:** transform event in Hasura action ([#2267](https://github.com/SocialGouv/emjpm/issues/2267)) ([69fa617](https://github.com/SocialGouv/emjpm/commit/69fa617153108e3ed27705c1424d424b9dcf5b10))
+
+
+### BREAKING CHANGES
+
+* **hasura:** drop hasura triggers and relies on hasura actions
+
+
+
+
+
 # [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.67.0](https://github.com/SocialGouv/emjpm/compare/v25.66.0...v25.67.0) (2020-11-07)
+
+
+### Features
+
+* **mandataire:** handle address and geolocalisation ([#2300](https://github.com/SocialGouv/emjpm/issues/2300)) ([e111d93](https://github.com/SocialGouv/emjpm/commit/e111d9366a8445d5bb43dd93fde2fcdb0814146d))
+
+
+
+
+
 # [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
 
 
