@@ -5,7 +5,7 @@
  delete from hdb_catalog.event_triggers;
 
  -- editors
- truncate editors cascades;
+ truncate editors cascade;
 
 -- commentaires
 truncate commentaires;
@@ -46,3 +46,12 @@ delete from users where type = 'ti' and id not in (select user_id from magistrat
 delete from lb_departements lbd where not exists (select m.lb_user_id from mandataires m where m.lb_user_id = lbd.lb_user_id);
 delete from lb_user_etablissements;
 delete from lb_users lbu where not exists (select m.lb_user_id from mandataires m where m.lb_user_id = lbu.id);
+
+-- CLEAN mesures
+delete from mesures where status = 'eteinte';
+delete from mesures where mandataire_id in (select id from mandataires where mesures_en_cours > 100);
+delete from mesures where service_id in (select id from services where mesures_in_progress > 500);
+update mandataires m set mesures_en_cours = (select count(*) from mesures where mandataire_id = m.id and status = 'en_cours');
+update mandataires m set mesures_en_attente = (select count(*) from mesures where mandataire_id = m.id and status = 'en_attente');
+update services m set mesures_in_progress = (select count(*) from mesures where service_id = m.id and status = 'en_cours');
+update services m set mesures_awaiting = (select count(*) from mesures where service_id = m.id and status = 'en_attente');
