@@ -27,7 +27,7 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
         await updateTribunal({
           refetchQueries: ["tis", "tis_aggregate"],
           variables: {
-            address: values.geocode.label,
+            adresse: values.geocode.label,
             code_postal: values.geocode.postcode,
             departement_id: departement.id,
             email: values.email,

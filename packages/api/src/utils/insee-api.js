@@ -26,7 +26,7 @@ const fetchTribunalDatas = async (tribunal_siret) => {
   const { enseigne1Etablissement } = periode || {};
 
   return {
-    address: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
+    adresse: `${numeroVoieEtablissement} ${typeVoieEtablissement} ${libelleVoieEtablissement}`,
     code_postal: codePostalEtablissement,
     etablissement: enseigne1Etablissement,
     siret: tribunal_siret,

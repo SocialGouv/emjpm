@@ -25,7 +25,8 @@ pg_restore -h localhost -p 5434 --if-exists --clean --no-owner --no-acl -e -Fc -
 cat <<EOF > clean-hasura.sql
 DELETE FROM hdb_catalog.event_invocation_logs;
 DELETE FROM hdb_catalog.event_log;
-DELETE FROM hdb_catalog.event_triggers ;
+DELETE FROM hdb_catalog.event_triggers;
+DELETE FROM hdb_catalog.remote_schema;
 EOF
 
 cat clean-hasura.sql | psql -h localhost -p 5434 -U $PGUSER
