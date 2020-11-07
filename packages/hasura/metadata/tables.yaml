@@ -3825,6 +3825,44 @@
       - type
       filter: {}
       allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - created_at
+      - email
+      - nom
+      - prenom
+      - type
+      - siret
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - id
+      - adresse1
+      - adresse2
+      - code_postal
+      - ville
+      - created_at
+      - email
+      - nom
+      - prenom
+      - siret
+      - type
+      filter:
+        lb_departements:
+          _and:
+          - departement_financeur:
+              _eq: true
+          - departement_id:
+              _in: x-hasura-agrements
+      allow_aggregations: true
   - role: individuel
     permission:
       columns:
@@ -4087,34 +4125,32 @@
   - role: direction_territoriale
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - telephone
-      - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
-      - created_at
-      - email_send
-      - genre
-      - mesures_en_attente
-      - competences
-      - department_id
-      - siret
       - latitude
       - longitude
+      - department_id
+      - dispo_max
+      - id
       - lb_user_id
+      - mesures_en_attente
+      - mesures_en_cours
+      - user_id
+      - competences
+      - created_at
+      - email_send
+      - adresse
+      - code_postal
+      - genre
+      - siret
+      - telephone
+      - telephone_portable
+      - ville
       filter:
-        _and:
-        - lb_user:
-            lb_departements:
-              departement_financeur:
+        lb_user:
+          lb_departements:
+            _and:
+            - departement_financeur:
                 _eq: true
-        - lb_user:
-            lb_departements:
-              departement_id:
+            - departement_id:
                 _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
@@ -5078,6 +5114,18 @@
       - ville
       filter: {}
       allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - name
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - name
+      filter: {}
   - role: service
     permission:
       columns:
@@ -5361,6 +5409,68 @@
       - id
       filter: {}
   - role: direction
+    permission:
+      columns:
+      - org_gestionnaire
+      - latitude
+      - longitude
+      - department_id
+      - dispo_max
+      - id
+      - mesures_awaiting
+      - mesures_in_progress
+      - created_at
+      - adresse
+      - code_postal
+      - competences
+      - email
+      - etablissement
+      - lb_adresse
+      - lb_code_postal
+      - lb_ville
+      - nom
+      - org_adresse
+      - org_code_postal
+      - org_nom
+      - org_ville
+      - prenom
+      - siret
+      - telephone
+      - ville
+      filter: {}
+      allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - etablissement
+      - email
+      - nom
+      - prenom
+      - code_postal
+      - ville
+      - telephone
+      - adresse
+      - dispo_max
+      - created_at
+      - competences
+      - department_id
+      - mesures_in_progress
+      - mesures_awaiting
+      - latitude
+      - longitude
+      - siret
+      - org_gestionnaire
+      - org_nom
+      - org_adresse
+      - org_code_postal
+      - org_ville
+      - lb_adresse
+      - lb_code_postal
+      - lb_ville
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
     permission:
       columns:
       - org_gestionnaire
