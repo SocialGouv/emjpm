@@ -22,14 +22,11 @@ export const UPDATE_SERVICE = gql`
       _set: {
         etablissement: $etablissement
         siret: $siret
-        code_postal: $code_postal
         lb_code_postal: $lb_code_postal
         department_id: $department_id
-        ville: $ville
         lb_ville: $lb_ville
         email: $email
         telephone: $telephone
-        adresse: $adresse
         lb_adresse: $lb_adresse
         org_gestionnaire: $org_gestionnaire
         org_nom: $org_nom
