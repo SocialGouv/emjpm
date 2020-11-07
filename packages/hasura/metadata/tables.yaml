@@ -5060,61 +5060,24 @@
   - role: direction
     permission:
       columns:
+      - latitude
+      - longitude
       - id
-      - service_id
-      - name
-      - created_at
-      - code_postal
-      - ville
-      - contact_lastname
-      - contact_firstname
-      - contact_email
-      - contact_phone
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      - service_id
+      - created_at
+      - adresse
+      - code_postal
+      - contact_email
+      - contact_firstname
+      - contact_lastname
+      - contact_phone
+      - name
+      - ville
       filter: {}
       allow_aggregations: true
-  - role: individuel
-    permission:
-      columns:
-      - id
-      - service_id
-      - name
-      - created_at
-      - code_postal
-      - ville
-      - contact_lastname
-      - contact_firstname
-      - contact_email
-      - contact_phone
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - adresse
-      - latitude
-      - longitude
-      filter: {}
-  - role: prepose
-    permission:
-      columns:
-      - latitude
-      - longitude
-      - id
-      - mesures_awaiting
-      - mesures_in_progress
-      - mesures_max
-      - service_id
-      - created_at
-      - adresse
-      - ville
-      - code_postal
-      - contact_email
-      - contact_firstname
-      - contact_lastname
-      - contact_phone
-      - name
-      filter: {}
   - role: service
     permission:
       columns:
@@ -5154,6 +5117,9 @@
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
+      - adresse
+      - latitude
+      - longitude
       filter: {}
   update_permissions:
   - role: service
@@ -5175,7 +5141,9 @@
       - mesures_max
       - name
       - service_id
-      filter: {}
+      filter:
+        service_id:
+          _eq: x-hasura-service-id
       check: null
   - role: ti
     permission:
@@ -5187,7 +5155,9 @@
   delete_permissions:
   - role: service
     permission:
-      filter: {}
+      filter:
+        service_id:
+          _eq: x-hasura-service-id
 - table:
     schema: public
     name: service_member_invitations

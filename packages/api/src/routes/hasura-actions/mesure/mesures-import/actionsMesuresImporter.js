@@ -260,7 +260,10 @@ const prepareMesure = async (
         mesureDatas.antenne_id = antenne.id;
       } else {
         if (!antenne && antennesMap) {
-          mesureDatas.antenne_id = antennesMap[antenne_name];
+          const key = antennesMap[antenne_name];
+          if (key) {
+            mesureDatas.antenne_id = parseInt(key);
+          }
         }
         if (!mesureDatas.antenne_id) {
           if (!importSummary.invalidAntenneNames.includes(antenne_name)) {
