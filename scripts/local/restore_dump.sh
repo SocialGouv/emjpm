@@ -26,7 +26,7 @@ cat <<EOF > clean-hasura.sql
 DELETE FROM hdb_catalog.event_invocation_logs;
 DELETE FROM hdb_catalog.event_log;
 DELETE FROM hdb_catalog.event_triggers;
-DELETE FROM hdb_catalog.remote_schema;
+DELETE FROM hdb_catalog.remote_schemas;
 EOF
 
 cat clean-hasura.sql | psql -h localhost -p 5434 -U $PGUSER
