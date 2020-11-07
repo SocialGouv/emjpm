@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.67.0](https://github.com/SocialGouv/emjpm/compare/v25.66.0...v25.67.0) (2020-11-07)
+
+**Note:** Version bump only for package @emjpm/core
+
+
+
+
+
 # [25.66.0](https://github.com/SocialGouv/emjpm/compare/v25.65.0...v25.66.0) (2020-10-24)
 
 **Note:** Version bump only for package @emjpm/core
