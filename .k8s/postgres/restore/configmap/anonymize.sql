@@ -7,7 +7,6 @@ update mandataires set telephone = '0140506070'
   , siret = null;
 update service_antenne set contact_email = null, contact_firstname = null, contact_lastname = null, contact_phone = null;
 update services set email = concat('service-', id, '@justice.fr'), nom = null, prenom = null, telephone = '0140506070', competences = null;
-delete from sessions;
 update tis set telephone = '0140506070';
 update mesures set numero_dossier = null, annee_naissance = 1968;
 update users set username = concat("type",'-',id, '@justice.fr'), nom = "type", prenom = 'Paula', email = concat("type",'-',id, '@justice.fr');
