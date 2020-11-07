@@ -130,27 +130,20 @@ $ yarn e2e test
 
 ### Database
 
-#### restore production dump on local
+**restore production dump on local**
 
 ```bash
-export PGUSER=postgres
+./scripts/local/restore_dump.sh chemin-du-dump
+```
+
+**création d'une base de données de test**
+
+```bash
+export PGUSER=emjpm
 export PGPASSWORD=test
-
-cat <<EOF > reset-database.sql
-SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
-DROP DATABASE IF EXISTS emjpm;
-CREATE DATABASE emjpm WITH OWNER = emjpm;
-EOF
-
-# drop / create database emjpm
-cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
-
-# restore production dump
-pg_restore -h localhost -p 5434 --if-exists --clean -e -Fc -d emjpm ./$DUMP_FILE
-
-psql -h localhost -p 5434 -c "ALTER SCHEMA public OWNER TO emjpm" -U $PGUSER emjpm
-
-rm reset-database.sql
+psql -h localhost -p 5434 < ./scripts/local/before_seeds_creation.sql
+psql -h localhost -p 5434 < ./.k8s/postgres/restore/configmap/anonymize.sql
+pg_dump -h localhost -p 5434 -Fc > ./packages/api/__test__/database/test-seed.dump
 ```
 
 ## Release policy
