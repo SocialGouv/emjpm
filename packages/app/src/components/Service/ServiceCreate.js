@@ -36,11 +36,12 @@ export const ServiceCreate = (props) => {
     try {
       await addService({
         variables: {
-          adresse: values.adresse,
-          code_postal: values.code_postal,
           department_id: departement.id,
           email: values.email,
           etablissement: values.etablissement,
+          lb_adresse: values.lb_adresse,
+          lb_code_postal: values.lb_code_postal,
+          lb_ville: values.lb_ville,
           org_adresse: values.org_adresse,
           org_code_postal: values.org_code_postal,
           org_gestionnaire: values.org_gestionnaire,
@@ -48,7 +49,6 @@ export const ServiceCreate = (props) => {
           org_ville: values.org_ville,
           siret: values.siret,
           telephone: values.telephone,
-          ville: values.ville,
         },
       });
 
