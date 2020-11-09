@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { findDepartementByCodeOrId } from "@emjpm/core";
+import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/core";
 import {
   Button,
   Field,
@@ -41,6 +41,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
   const formik = useFormik({
     initialValues: {
+      user: user,
       dispo_max: mandataire ? mandataire.dispo_max : "",
       geocode: geocodeInitialValue(mandataire),
       siret: mandataire ? mandataire.siret : "",
@@ -89,10 +90,12 @@ const SignupMandataireForm = ({ tiDatas }) => {
     validationSchema: mandataireSignupSchema,
   });
 
+  console.log(formik.errors);
+
   return (
     <Fragment>
       <Heading1 p="1" m="1">
-        {`Demande de création d'un compte de mandataire individuel`}
+        {`Demande de création d'un compte de mandataire`}
       </Heading1>
 
       <form onSubmit={formik.handleSubmit}>
@@ -122,25 +125,26 @@ const SignupMandataireForm = ({ tiDatas }) => {
             </Field>
           </FormInputBox>
         </Flex>
-        <Flex>
-          <FormGrayBox>
-            <Heading4>{`Information professionelle`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
+        {isIndividuel(user) && (
+          <Flex>
+            <FormGrayBox>
+              <Heading4>{`Information professionelle`}</Heading4>
+              <Text lineHeight="1.5" color="textSecondary">
+                {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
-            </Text>
-          </FormGrayBox>
-          <FormInputBox>
-            <FormGroupInput
-              id="siret"
-              formik={formik}
-              placeholder="SIRET"
-              value={formik.values.siret}
-              validationSchema={mandataireSignupSchema}
-            />
-          </FormInputBox>
-        </Flex>
-
+              </Text>
+            </FormGrayBox>
+            <FormInputBox>
+              <FormGroupInput
+                id="siret"
+                formik={formik}
+                placeholder="SIRET"
+                value={formik.values.siret}
+                validationSchema={mandataireSignupSchema}
+              />
+            </FormInputBox>
+          </Flex>
+        )}
         <Flex>
           <FormGrayBox>
             <Heading4>{`Téléphone`}</Heading4>
@@ -176,7 +180,10 @@ const SignupMandataireForm = ({ tiDatas }) => {
                 resource={mandataire}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
               />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <InlineError
+                message={formik.errors.geocode}
+                fieldId="geocode"
+              />
             </Field>
           </FormInputBox>
         </Flex>

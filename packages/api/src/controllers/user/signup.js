@@ -43,7 +43,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
 
   const mandataire = await Mandataire.query()
     .allowInsert(
-      "[etablissement,siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
+      "[siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
     )
     .insert({
       adresse,
