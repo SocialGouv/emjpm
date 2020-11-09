@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { isIndividuel, isPrepose } from "../../util";
 import { AccessToken } from "../AccessToken";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
@@ -24,39 +25,10 @@ const MandataireInformations = () => {
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading3>
       <Flex p={1} mt={2} flexDirection="column">
-        <Box mb={2}>
-          <Heading5>Structure juridique</Heading5>
-          <Flex my={1}>
-            <Text sx={subtitle}>{"Siret"}</Text>
-            <Text sx={content}>{label(lb_user.siret)}</Text>
-          </Flex>
-          <Flex my={1}>
-            <Text sx={subtitle}>{"Adresse"}</Text>
-            <Box flex={2 / 3}>
-              <Text sx={content}>{label(lb_user.adresse1)}</Text>
-              <Text sx={content}>{label(lb_user.adresse2)}</Text>
-              <Text sx={content}>
-                {label(lb_user.code_postal)} {label(lb_user.ville)}
-              </Text>
-            </Box>
-          </Flex>
-        </Box>
-        <Box mb={2}>
-          <Heading5>Agrément</Heading5>
-          <Flex my={1}>
-            <Text sx={subtitle}>{"Liste des départements"}</Text>
-            <Box flex={2 / 3}>
-              {lb_user?.lb_departements.map((lbd, index) => {
-                return (
-                  <Text key={index} sx={content}>
-                    {lbd.departement.code} - {lbd.departement.nom}{" "}
-                    {lbd.departement_financeur ? "(financeur)" : ""}
-                  </Text>
-                );
-              })}
-            </Box>
-          </Flex>
-        </Box>
+        {isIndividuel(user.type) && (
+          <IndividuelInformations lb_user={lb_user} />
+        )}
+        {isPrepose(user.type) && <PreposeInformations lb_user={lb_user} />}
         <Box mb={2}>
           <Heading5>Coordonnées</Heading5>
           <Box flex={1 / 2}>
@@ -133,3 +105,66 @@ const MandataireInformations = () => {
 };
 
 export { MandataireInformations };
+
+const PreposeInformations = ({ lb_user }) => {
+  return (
+    <Box mb={2}>
+      <Heading5>Etablissements</Heading5>
+      <Flex my={1}>
+        <Text sx={subtitle}>{"Liste des établissements"}</Text>
+        <Box flex={2 / 3}>
+          {lb_user?.lb_user_etablissements?.map((lbue, index) => {
+            const { etablissement } = lbue;
+            return (
+              <Text key={index} sx={content}>
+                {etablissement.rslongue}
+                {lbue.etablissement_rattachement ? " (rattachement)" : ""}
+              </Text>
+            );
+          })}
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
+
+const IndividuelInformations = ({ lb_user }) => {
+  return (
+    <>
+      <Box mb={2}>
+        <Heading5>Structure juridique</Heading5>
+        <Flex my={1}>
+          <Text sx={subtitle}>{"Siret"}</Text>
+          <Text sx={content}>{label(lb_user.siret)}</Text>
+        </Flex>
+        <Flex my={1}>
+          <Text sx={subtitle}>{"Adresse"}</Text>
+          <Box flex={2 / 3}>
+            <Text sx={content}>{label(lb_user.adresse1)}</Text>
+            <Text sx={content}>{label(lb_user.adresse2)}</Text>
+            <Text sx={content}>
+              {label(lb_user.code_postal)} {label(lb_user.ville)}
+            </Text>
+          </Box>
+        </Flex>
+      </Box>
+
+      <Box mb={2}>
+        <Heading5>Agrément</Heading5>
+        <Flex my={1}>
+          <Text sx={subtitle}>{"Liste des départements"}</Text>
+          <Box flex={2 / 3}>
+            {lb_user?.lb_departements.map((lbd, index) => {
+              return (
+                <Text key={index} sx={content}>
+                  {lbd.departement.code} - {lbd.departement.nom}{" "}
+                  {lbd.departement_financeur ? "(financeur)" : ""}
+                </Text>
+              );
+            })}
+          </Box>
+        </Flex>
+      </Box>
+    </>
+  );
+};
