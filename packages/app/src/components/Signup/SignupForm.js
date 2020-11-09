@@ -48,7 +48,7 @@ export const SignupForm = () => {
     initialValues: {
       confirmPassword: user ? user.confirmPassword : "",
       email: user ? user.email : "",
-      genre: "",
+      genre: user ? user.genre : "",
       nom: user ? user.nom : "",
       password: user ? user.password : "",
       prenom: user ? user.prenom : "",

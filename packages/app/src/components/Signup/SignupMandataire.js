@@ -19,7 +19,7 @@ import { mandataireSignupSchema } from "../../lib/validationSchemas";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import { Geocode } from "../Geocode";
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
@@ -42,7 +42,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
   const formik = useFormik({
     initialValues: {
       dispo_max: mandataire ? mandataire.dispo_max : "",
-      geocode: geocodeInitialValue(mandataire),
+      geocode: "",
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
@@ -50,7 +50,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
       user: user,
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      if (await isSiretExists(client, values.siret)) {
+      if (isIndividuel(user) && (await isSiretExists(client, values.siret))) {
         setErrors({ siret: "Ce SIRET existe déjà" });
       } else {
         const codeDepartement = values.geocode.depcode;
@@ -66,7 +66,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
             genre: user.genre,
             latitude: values.geocode.latitude,
             longitude: values.geocode.longitude,
-            siret: values.siret,
+            siret: isIndividuel(user) ? values.siret : null,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
             ville: values.geocode.city,
@@ -89,8 +89,6 @@ const SignupMandataireForm = ({ tiDatas }) => {
     },
     validationSchema: mandataireSignupSchema,
   });
-
-  console.log(formik.errors);
 
   return (
     <Fragment>
