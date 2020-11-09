@@ -30,7 +30,7 @@ const TYPE_OPTIONS = [
     value: "service",
   },
   {
-    label: "Tribunal d'instance",
+    label: "Juge des tutelles",
     value: "ti",
   },
   {
