@@ -9,15 +9,7 @@ const router = express.Router();
 
 router.post("/opened-mesures", async (req, res) => {
   const { regionId, departementId, start, end } = req.body.input;
-  console.log(regionId, departementId, start, end);
-  let departementIds;
-  if (departementId) {
-    departementIds = [departementId];
-  } else if (regionId) {
-    departementIds = await Departement.query()
-      .where({ id_region: regionId })
-      .select("id");
-  }
+  const departementIds = await getDepartementIds(regionId, departementId);
 
   const query = Mesure.query()
     .count("id")
@@ -36,15 +28,8 @@ router.post("/opened-mesures", async (req, res) => {
 
 router.post("/closed-mesures", async (req, res) => {
   const { regionId, departementId, start, end } = req.body.input;
-  console.log(regionId, departementId, start, end);
-  let departementIds;
-  if (departementId) {
-    departementIds = [departementId];
-  } else if (regionId) {
-    departementIds = await Departement.query()
-      .where({ id_region: regionId })
-      .select("id");
-  }
+
+  const departementIds = await getDepartementIds(regionId, departementId);
 
   const query = Mesure.query()
     .count("id")
@@ -94,3 +79,16 @@ router.post(
 );
 
 module.exports = router;
+
+async function getDepartementIds(regionId, departementId) {
+  let departementIds;
+  if (departementId) {
+    departementIds = [departementId];
+  } else if (regionId) {
+    const queryResult =
+      (await Departement.query().where({ id_region: regionId }).select("id")) ||
+      [];
+    departementIds = queryResult.map((res) => res.id);
+  }
+  return departementIds;
+}
