@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.68.0](https://github.com/SocialGouv/emjpm/compare/v25.67.0...v25.68.0) (2020-11-09)
+
+
+### Bug Fixes
+
+* **direction:** use value in filters ([916a02d](https://github.com/SocialGouv/emjpm/commit/916a02d690e1ca4e9387c8cc97cd05fecd36229e))
+* **direction:** use value in filters ([ae13098](https://github.com/SocialGouv/emjpm/commit/ae130986942a4a65edd9c93683336da321580d3a))
+
+
+
+
+
 # [25.67.0](https://github.com/SocialGouv/emjpm/compare/v25.66.0...v25.67.0) (2020-11-07)
 
 
