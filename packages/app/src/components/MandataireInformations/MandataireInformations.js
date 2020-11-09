@@ -25,10 +25,12 @@ const MandataireInformations = () => {
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading3>
       <Flex p={1} mt={2} flexDirection="column">
-        {isIndividuel(user.type) && (
+        {isIndividuel(user.type) && lb_user && (
           <IndividuelInformations lb_user={lb_user} />
         )}
-        {isPrepose(user.type) && <PreposeInformations lb_user={lb_user} />}
+        {isPrepose(user.type) && lb_user && (
+          <PreposeInformations lb_user={lb_user} />
+        )}
         <Box mb={2}>
           <Heading5>Coordonnées</Heading5>
           <Box flex={1 / 2}>
