@@ -5,6 +5,7 @@ import { Box, Flex, Text } from "rebass";
 
 import {
   departementToOptions,
+  findOption,
   regionsToOptions,
 } from "../../util/option/OptionUtil";
 import { FiltersContextSerializable } from "../FiltersContextSerializable";
@@ -18,23 +19,22 @@ export const DirectionFilters = (props) => {
   const { filters, onFilterChange } = useContext(FiltersContextSerializable);
 
   const { regions, departements } = useMemo(() => {
-    const departements =
-      regionsData && regionsData.regions
-        ? regionsData.regions
-            .filter((r) =>
-              filters.region && filters.region.value
-                ? r.id === filters.region.value
-                : true
-            )
-            .reduce((acc, item) => {
-              item.departements.forEach((departement) => {
-                acc.push(departement);
-              });
-              return acc;
-            }, [])
-        : [];
+    const regions = regionsData?.regions || [];
 
-    return { departements, regions: regionsData ? regionsData.regions : [] };
+    if (!filters?.region) {
+      return { departements: [], regions };
+    }
+
+    const departements = regions
+      .filter((r) => r.id === filters.region)
+      .reduce((acc, item) => {
+        item.departements.forEach((departement) => {
+          acc.push(departement);
+        });
+        return acc;
+      }, []);
+
+    return { departements, regions };
   }, [regionsData, filters]);
 
   if (loading) {
@@ -44,6 +44,9 @@ export const DirectionFilters = (props) => {
   if (error) {
     return <div>Une erreur est survenue, veuillez réessayer plus tard.</div>;
   }
+
+  const regionOptions = regionsToOptions(regions);
+  const departementOptions = departementToOptions(departements);
 
   return (
     <Card>
@@ -69,22 +72,25 @@ export const DirectionFilters = (props) => {
             <Box sx={BoxStyle}>
               <Select
                 size="small"
-                options={regionsToOptions(regions)}
+                options={regionOptions}
                 placeholder={"region"}
-                value={filters.region}
-                onChange={(selectedOption) =>
-                  onFilterChange({ departement: null, region: selectedOption })
+                value={findOption(regionOptions, filters.region)}
+                onChange={(option) =>
+                  onFilterChange({
+                    departement: null,
+                    region: option.value,
+                  })
                 }
               />
             </Box>
             <Box sx={BoxStyle}>
               <Select
                 size="small"
-                options={departementToOptions(departements)}
+                options={departementOptions}
                 placeholder={"departement"}
-                value={filters.departement}
-                onChange={(selectedOption) =>
-                  onFilterChange({ departement: selectedOption })
+                value={findOption(departementOptions, filters.departement)}
+                onChange={(option) =>
+                  onFilterChange({ departement: option.value })
                 }
               />
             </Box>

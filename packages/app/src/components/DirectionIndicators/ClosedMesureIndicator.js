@@ -10,10 +10,10 @@ const ClosedMesureIndicator = () => {
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
       departementId: filters.departement
-        ? parseInt(filters.departement.value)
+        ? parseInt(filters.departement)
         : undefined,
       end: filters.endDate,
-      regionId: filters.region ? parseInt(filters.region.value) : undefined,
+      regionId: filters.region ? parseInt(filters.region) : undefined,
       start: filters.startDate,
     },
   });
