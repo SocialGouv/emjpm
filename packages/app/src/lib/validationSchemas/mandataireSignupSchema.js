@@ -1,5 +1,5 @@
 import { isIndividuel } from "@emjpm/core";
-import { isMandataire } from "../../util";
+
 import yup from "./yup";
 
 const mandataireSignupSchema = yup.object().shape({

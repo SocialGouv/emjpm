@@ -41,13 +41,13 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
   const formik = useFormik({
     initialValues: {
-      user: user,
       dispo_max: mandataire ? mandataire.dispo_max : "",
       geocode: geocodeInitialValue(mandataire),
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
       tis: mandataire ? mandataire.tis : "",
+      user: user,
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
       if (await isSiretExists(client, values.siret)) {
@@ -180,10 +180,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                 resource={mandataire}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
               />
-              <InlineError
-                message={formik.errors.geocode}
-                fieldId="geocode"
-              />
+              <InlineError message={formik.errors.geocode} fieldId="geocode" />
             </Field>
           </FormInputBox>
         </Flex>
