@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.68.1](https://github.com/SocialGouv/emjpm/compare/v25.68.0...v25.68.1) (2020-11-09)
+
+
+### Bug Fixes
+
+* **mandataire:** test if lb_user exists ([e7f8557](https://github.com/SocialGouv/emjpm/commit/e7f85574d28c756b38744482c57c09cd7927dbe8))
+* **signup:** use correct word for user type ti ([a9f4979](https://github.com/SocialGouv/emjpm/commit/a9f4979a55ce8f006a9f628c7fd7123e522c9389))
+
+
+
+
+
 # [25.68.0](https://github.com/SocialGouv/emjpm/compare/v25.67.0...v25.68.0) (2020-11-09)
 
 
