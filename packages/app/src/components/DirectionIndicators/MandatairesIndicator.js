@@ -10,9 +10,9 @@ const MandatairesIndicator = () => {
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
       department: filters.departement
-        ? parseInt(filters.departement.value)
+        ? parseInt(filters.departement)
         : undefined,
-      region: filters.region ? parseInt(filters.region.value) : undefined,
+      region: filters.region ? parseInt(filters.region) : undefined,
       type: "MANDATAIRE_IND",
     },
   });

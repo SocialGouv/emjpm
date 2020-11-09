@@ -18,10 +18,10 @@ const MandatairesCapacity = (props) => {
   const { data, error, loading } = useQuery(MANDATAIRES_CAPACITY, {
     variables: {
       department: filters.departement
-        ? parseInt(filters.departement.value)
+        ? parseInt(filters.departement)
         : undefined,
       end: filters.endDate,
-      region: filters.region ? parseInt(filters.region.value) : undefined,
+      region: filters.region ? parseInt(filters.region) : undefined,
       start: filters.startDate,
     },
   });

@@ -13,9 +13,9 @@ const MandatairesActivity = (props) => {
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
       department: filters.departement
-        ? parseInt(filters.departement.value)
+        ? parseInt(filters.departement)
         : undefined,
-      region: filters.region ? parseInt(filters.region.value) : undefined,
+      region: filters.region ? parseInt(filters.region) : undefined,
     },
   });
 

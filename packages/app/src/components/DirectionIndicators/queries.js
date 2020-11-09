@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const GET_OPEN_MESURE_NUMBER = gql`
-  query opnedMesureNumber(
+  query openedMesureNumber(
     $end: date!
     $start: date!
     $departementId: Int
@@ -19,7 +19,7 @@ export const GET_OPEN_MESURE_NUMBER = gql`
 `;
 
 export const GET_AVAILABLE_MESURE_NUMBER = gql`
-  query AvailableMesureNumber($departementId: Int, $regionId: Int) {
+  query stat_available_mesures($departementId: Int, $regionId: Int) {
     stat_available_mesures(departementId: $departementId, regionId: $regionId) {
       available_mesures_nb
     }
