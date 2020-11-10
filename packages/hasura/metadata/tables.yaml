@@ -4799,6 +4799,9 @@
               _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: ocmi_mandataires
+- table:
+    schema: public
     name: processus_states
 - table:
     schema: public

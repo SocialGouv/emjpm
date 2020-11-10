@@ -58,6 +58,12 @@ app.use(
   require("./routes/hasura-actions/hasura-actions.routes.js")
 );
 
+app.use(
+  "/hasura/triggers",
+  [passport.authenticate("hasura-webhook-header-secret")],
+  require("./routes/hasura-triggers/hasura-triggers.routes.js")
+);
+
 app.get("/", function (req, res) {
   res.json({
     NODE_ENV: process.env.NODE_ENV || "development",

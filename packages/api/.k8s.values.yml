@@ -77,6 +77,21 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: INSEE_API_SECRET
+    - name: AZURE_ACCOUNT_NAME
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: AZURE_ACCOUNT_NAME
+    - name: AZURE_ACCOUNT_KEY
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: AZURE_ACCOUNT_KEY
+    - name: OCMI_FILE_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: OCMI_FILE_PASSWORD
     - name: SENTRY_ENV
       value: "${NODE_ENV}"
 
