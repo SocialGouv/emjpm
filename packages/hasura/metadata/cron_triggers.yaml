@@ -1,1 +1,10 @@
-[]
+- name: ocmi-sync-trigger
+  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/ocmi/sync-file'
+  schedule: 0 * * * *
+  include_in_metadata: true
+  payload:
+    session_variables:
+      x-hasura-role: admin
+  headers:
+  - name: HASURA_WEB_HOOK_SECRET
+    value_from_env: HASURA_WEB_HOOK_SECRET
