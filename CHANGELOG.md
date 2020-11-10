@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.69.0](https://github.com/SocialGouv/emjpm/compare/v25.68.1...v25.69.0) (2020-11-10)
+
+
+### Features
+
+* **ocmi:** sync ocmi mandataire ([#2303](https://github.com/SocialGouv/emjpm/issues/2303)) ([c5a967e](https://github.com/SocialGouv/emjpm/commit/c5a967ef658b4620dd351095c3808a0f55b72041))
+
+
+
+
+
 ## [25.68.1](https://github.com/SocialGouv/emjpm/compare/v25.68.0...v25.68.1) (2020-11-09)
 
 
