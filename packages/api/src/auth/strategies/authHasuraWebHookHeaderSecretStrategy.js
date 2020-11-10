@@ -44,6 +44,8 @@ function buildHasuraUser(req) {
     return buildHasuraUser(req.body.session_variables);
   } else if (body.event && body.event.session_variables) {
     return buildHasuraUser(body.event.session_variables);
+  } else if (body.payload && body.payload.session_variables) {
+    return buildHasuraUser(body.payload.session_variables);
   }
 
   return false;
