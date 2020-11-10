@@ -20,6 +20,7 @@
     "prettier:fix": "prettier --write '**/*.js'"
   },
   "dependencies": {
+    "@azure/storage-blob": "^12.2.1",
     "@emjpm/core": "^25.68.1",
     "@sentry/node": "5.27.2",
     "axios": "^0.21.0",
@@ -40,6 +41,7 @@
     "jwt-decode": "^3.0.0",
     "knex": "^0.21.11",
     "lodash.uniq": "^4.5.0",
+    "node-7z": "^2.1.2",
     "node-fetch": "^2.6.1",
     "nodemailer": "^6.4.14",
     "objection": "^2.2.3",
