@@ -2,9 +2,8 @@ FROM node:10-alpine
 
 WORKDIR /app
 
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends p7zip-full && \
-    apt-get clean && \
+RUN apk update && \
+    apk add p7zip && \
     rm -rf /var/lib/apt/lists/* && \
     7z -h
 
