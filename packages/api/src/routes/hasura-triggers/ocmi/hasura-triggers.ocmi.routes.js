@@ -17,10 +17,17 @@ const {
 
 const logger = require("../../../utils/logger");
 
+const ocmiSyncFileEnabled = configuration.ocmiSyncFileEnabled || false;
 const account = configuration.azureAccountName || null;
 const accountKey = configuration.azureAccountKey || null;
 
 router.post("/sync-file", async (req, res) => {
+  if (!ocmiSyncFileEnabled) {
+    logger.info(`[OCMI] ocmi sync file is not enabled`);
+    return res.json({
+      state: "AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined",
+    });
+  }
   if (!account || !accountKey) {
     logger.info(`[OCMI] AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined`);
     return res.json({
@@ -68,29 +75,35 @@ module.exports = router;
 async function processBlob(container, { name, properties: { contentLength } }) {
   const tempDir = os.tmpdir();
   const zipFilePath = join(tempDir, name);
-  const unzippedFilePath = zipFilePath.replace(".zip", "");
 
   logger.info(`[OCMI] loading file from azure ${name}`);
   const buffer = await readBlob(container, name, contentLength);
+
   fs.writeFileSync(zipFilePath, buffer);
   logger.info(`[OCMI] unzipping file ${zipFilePath}`);
-  await Seven.extract(zipFilePath, tempDir, {
+  const stream = Seven.extract(zipFilePath, tempDir, {
     password: configuration.ocmiFilePassword,
     recursive: true,
   });
-  logger.info(`[OCMI] file unzipped  ${unzippedFilePath}`);
-  const mesures = JSON.parse(fs.readFileSync(unzippedFilePath, "utf8"));
-  const ocmiMandataires = getOcmiMandataires(mesures);
-  const keys = Object.keys(ocmiMandataires);
-  const size = keys.length;
-  for (let index = 0; index < keys.length; index++) {
-    const key = keys[index];
-    const ocmiMandataire = ocmiMandataires[key];
-    logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
-    await createOrUpdateOcmiMandataire(ocmiMandataire);
-  }
-  logger.info(`[OCMI] sync file finished`);
-  await completeImport();
+  stream.on("data", async function ({ file }) {
+    const unzippedFile = join(tempDir, file);
+    logger.info(`[OCMI] file unzipped  ${unzippedFile}`);
+    const mesures = JSON.parse(fs.readFileSync(unzippedFile, "utf8"));
+    const ocmiMandataires = getOcmiMandataires(mesures);
+    const keys = Object.keys(ocmiMandataires);
+    const size = keys.length;
+    for (let index = 0; index < keys.length; index++) {
+      const key = keys[index];
+      const ocmiMandataire = ocmiMandataires[key];
+      logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
+      await createOrUpdateOcmiMandataire(ocmiMandataire);
+    }
+    logger.info(`[OCMI] sync file finished`);
+    await completeImport();
+  });
+  stream.on("error", function (err) {
+    logger.error(err);
+  });
 }
 
 async function createOrUpdateOcmiMandataire(ocmiMandataire) {
