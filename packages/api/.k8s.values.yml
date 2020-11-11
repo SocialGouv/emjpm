@@ -6,7 +6,8 @@ deployment:
   resources:
     limits:
       cpu: 250m
-      memory: 512Mi
+      # memory: 512Mi
+      memory: 1024Mi # only to handle ocmi sync
     requests:
       cpu: 10m
       memory: 384Mi
