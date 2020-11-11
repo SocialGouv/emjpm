@@ -2,10 +2,7 @@ FROM node:10-alpine
 
 WORKDIR /app
 
-RUN apk update && \
-    apk add p7zip && \
-    rm -rf /var/lib/apt/lists/* && \
-    7z -h
+RUN apk add --update --no-cache p7zip
 
 ENV NODE_ENV=production
 
