@@ -17,10 +17,17 @@ const {
 
 const logger = require("../../../utils/logger");
 
+const ocmiSyncFileEnabled = configuration.ocmiSyncFileEnabled || false;
 const account = configuration.azureAccountName || null;
 const accountKey = configuration.azureAccountKey || null;
 
 router.post("/sync-file", async (req, res) => {
+  if (!ocmiSyncFileEnabled) {
+    logger.info(`[OCMI] ocmi sync file is not enabled`);
+    return res.json({
+      state: "AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined",
+    });
+  }
   if (!account || !accountKey) {
     logger.info(`[OCMI] AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined`);
     return res.json({
