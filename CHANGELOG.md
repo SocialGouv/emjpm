@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.69.1](https://github.com/SocialGouv/emjpm/compare/v25.69.0...v25.69.1) (2020-11-11)
+
+
+### Bug Fixes
+
+* **dev:** update secret ([0f351ad](https://github.com/SocialGouv/emjpm/commit/0f351ada3d4466ba0d7b441c7f164c4a90ac048c))
+* **ocmi-sync:** update secret and stream file ([#2304](https://github.com/SocialGouv/emjpm/issues/2304)) ([9fafe84](https://github.com/SocialGouv/emjpm/commit/9fafe8470e4898f7789edcc2dab7a986a6df9e1d))
+
+
+
+
+
 # [25.69.0](https://github.com/SocialGouv/emjpm/compare/v25.68.1...v25.69.0) (2020-11-10)
 
 
