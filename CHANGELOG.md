@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.70.0](https://github.com/SocialGouv/emjpm/compare/v25.69.1...v25.70.0) (2020-11-11)
+
+
+### Features
+
+* **api:** install p7zip in container api ([#2305](https://github.com/SocialGouv/emjpm/issues/2305)) ([cf13c5a](https://github.com/SocialGouv/emjpm/commit/cf13c5a2c681be12059b84ce539bd73fee8ccfbf))
+
+
+
+
+
 ## [25.69.1](https://github.com/SocialGouv/emjpm/compare/v25.69.0...v25.69.1) (2020-11-11)
 
 
