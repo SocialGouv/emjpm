@@ -16,7 +16,10 @@ export const ETABLISSEMENTS = gql`
       limit: $limit
       offset: $offset
       where: {
-        rslongue: { _ilike: $search }
+        _or: [
+          { rslongue: { _ilike: $search } }
+          { ligneacheminement: { _ilike: $search } }
+        ]
         departement: { code: { _eq: $departementCode } }
       }
       order_by: { departement: { code: asc } }
