@@ -63,7 +63,7 @@ export const AdminEtablissements = () => {
       offset: currentOffset,
       search:
         debouncedSearchText && debouncedSearchText !== ""
-          ? `${debouncedSearchText}%`
+          ? `%${debouncedSearchText}%`
           : null,
     },
   });
