@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.71.0](https://github.com/SocialGouv/emjpm/compare/v25.70.0...v25.71.0) (2020-11-12)
+
+
+### Features
+
+* **etablissement:** search by name and city ([3165a88](https://github.com/SocialGouv/emjpm/commit/3165a88fffbc873fc74f275da0125cd3165dacab))
+
+
+
+
+
 # [25.70.0](https://github.com/SocialGouv/emjpm/compare/v25.69.1...v25.70.0) (2020-11-11)
 
 
