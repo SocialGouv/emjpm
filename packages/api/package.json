@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/api",
-  "version": "25.71.0",
+  "version": "25.72.0",
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@azure/storage-blob": "^12.2.1",
-    "@emjpm/core": "^25.71.0",
+    "@emjpm/core": "^25.72.0",
     "@sentry/node": "5.27.2",
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
