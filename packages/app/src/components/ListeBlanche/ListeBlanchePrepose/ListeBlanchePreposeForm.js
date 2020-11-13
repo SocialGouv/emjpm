@@ -71,7 +71,7 @@ export const ListeBlanchePreposeForm = (props) => {
     return {
       checked: e.etablissement_rattachement === true,
       disabled: false,
-      label: e.rslongue ? e.rslongue : e.rs,
+      label: `${e.rslongue} (${e.ligneacheminement})`,
       value: `${e.id}`, // !canModifyAgrement(user, d.id),
     };
   });
@@ -160,9 +160,7 @@ export const ListeBlanchePreposeForm = (props) => {
                 loadOptions={async (inputValue) => {
                   const values = await searchEtablissements(inputValue);
                   return values.map((e) => ({
-                    label: `${e.rslongue ? e.rslongue : e.rs} (${
-                      e.ligneacheminement
-                    })`,
+                    label: `${e.rslongue} (${e.ligneacheminement})`,
                     value: e.id,
                   }));
                 }}

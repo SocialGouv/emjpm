@@ -187,7 +187,7 @@ async function importStructureEtablissement(properties, departements) {
     numuai,
     numvoie,
     rs,
-    rslongue,
+    rslongue: rslongue && rslongue != "" ? rslongue : rs,
     siret,
     telecopie,
     telephone,
