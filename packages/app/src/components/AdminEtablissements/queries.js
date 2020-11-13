@@ -19,6 +19,7 @@ export const ETABLISSEMENTS = gql`
         _or: [
           { rslongue: { _ilike: $search } }
           { ligneacheminement: { _ilike: $search } }
+          { nofinesset: { _ilike: $search } }
         ]
         departement: { code: { _eq: $departementCode } }
       }

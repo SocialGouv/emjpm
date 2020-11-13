@@ -38,6 +38,7 @@ export const ListeBlanchePreposeForm = (props) => {
           return {
             etablissement_rattachement: e.etablissement_rattachement,
             id: e.etablissement.id,
+            ligneacheminement: e.etablissement.ligneacheminement,
             rslongue: e.etablissement.rslongue,
           };
         })
@@ -156,13 +157,17 @@ export const ListeBlanchePreposeForm = (props) => {
                 instanceId={`etablissement-${data.id || "new"}`}
                 cacheOptions
                 defaultOptions
-                placeholder={"Ajouter un établissement"}
+                placeholder={"recherche par nom, finess, code postal, ville."}
                 loadOptions={async (inputValue) => {
                   const values = await searchEtablissements(inputValue);
-                  return values.map((e) => ({
-                    label: `${e.rslongue} (${e.ligneacheminement})`,
-                    value: e.id,
-                  }));
+                  return values.map((e) => {
+                    return {
+                      label: `${e.rslongue} (${e.ligneacheminement})`,
+                      ligneacheminement: e.ligneacheminement,
+                      rslongue: e.rslongue,
+                      value: e.id,
+                    };
+                  });
                 }}
                 onChange={(option) => {
                   if (!etablissementIds.includes(option.value)) {
@@ -170,7 +175,8 @@ export const ListeBlanchePreposeForm = (props) => {
                       "etablissements",
                       formik.values.etablissements.concat({
                         id: option.value,
-                        rslongue: option.label,
+                        ligneacheminement: option.ligneacheminement,
+                        rslongue: option.rslongue,
                       })
                     );
                   }
