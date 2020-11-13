@@ -63,11 +63,14 @@ const RowItem = ({ item }) => {
 const AdminTribunaux = () => {
   const resultPerPage = 20;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText } = useContext(AdminFilterContext);
+  const { debouncedSearchText, selectedDepartementCode } = useContext(
+    AdminFilterContext
+  );
 
   const { data, error, loading } = useQuery(TRIBUNAUX, {
     fetchPolicy: "network-only",
     variables: {
+      departementCode: selectedDepartementCode,
       limit: resultPerPage,
       offset: currentOffset,
       searchText:

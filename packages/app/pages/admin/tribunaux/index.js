@@ -25,6 +25,7 @@ const AdminTribunauxPage = () => {
               onAddButtonClick={() =>
                 Router.push("/admin/tribunaux/add-tribunal")
               }
+              useDepartementfilter={true}
             />
             <AdminTribunaux />
           </Flex>
