@@ -7,6 +7,7 @@ export const ETABLISSEMENTS = gql`
         _or: [
           { rslongue: { _ilike: $input } }
           { ligneacheminement: { _ilike: $input } }
+          { nofinesset: { _ilike: $input } }
         ]
       }
       limit: 50
