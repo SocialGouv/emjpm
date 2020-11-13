@@ -16,7 +16,6 @@ export const ETABLISSEMENT = gql`
       id
       nofinesset
       nofinessej
-      rs
       rslongue
       complrs
       compldistrib
