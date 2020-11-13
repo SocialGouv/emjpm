@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.72.0](https://github.com/SocialGouv/emjpm/compare/v25.71.0...v25.72.0) (2020-11-13)
+
+
+### Bug Fixes
+
+* **liste-blanche:** add missing property in query ([bc0c356](https://github.com/SocialGouv/emjpm/commit/bc0c3568b86e004cb50c9c8b968b97990b43982d))
+
+
+### Features
+
+* **admin:** add departement filter for tis ([0f4812c](https://github.com/SocialGouv/emjpm/commit/0f4812c8310b9847e333d352f8f564211c1a5605))
+* **etablissement:** homogenize display ([366ff3d](https://github.com/SocialGouv/emjpm/commit/366ff3ddb0a542c81f34020a0c771c02abaa769a))
+* **etablissement:** search by finess ([d5d2450](https://github.com/SocialGouv/emjpm/commit/d5d2450ba602ac22feb7e54c36ad729a807ecf34))
+
+
+
+
+
 # [25.71.0](https://github.com/SocialGouv/emjpm/compare/v25.70.0...v25.71.0) (2020-11-12)
 
 

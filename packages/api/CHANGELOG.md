@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.72.0](https://github.com/SocialGouv/emjpm/compare/v25.71.0...v25.72.0) (2020-11-13)
+
+
+### Features
+
+* **etablissement:** homogenize display ([366ff3d](https://github.com/SocialGouv/emjpm/commit/366ff3ddb0a542c81f34020a0c771c02abaa769a))
+
+
+
+
+
 # [25.71.0](https://github.com/SocialGouv/emjpm/compare/v25.70.0...v25.71.0) (2020-11-12)
 
 **Note:** Version bump only for package @emjpm/api
