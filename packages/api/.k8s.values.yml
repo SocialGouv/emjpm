@@ -89,7 +89,10 @@ deployment:
           name: emjpm-secret
           key: AZURE_ACCOUNT_KEY
     - name: OCMI_SYNC_FILE_ENABLED
-      value: "true"
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: OCMI_SYNC_FILE_ENABLED
     - name: OCMI_FILE_PASSWORD
       valueFrom:
         secretKeyRef:
