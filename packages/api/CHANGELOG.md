@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.72.1](https://github.com/SocialGouv/emjpm/compare/v25.72.0...v25.72.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* **k8s:** configure correctly OCMI_SYNC_FILE_ENABLED ([3c2d0dd](https://github.com/SocialGouv/emjpm/commit/3c2d0dd17031dd477c9f46c9ee3d5518d6d4bfe5))
+
+
+
+
+
 # [25.72.0](https://github.com/SocialGouv/emjpm/compare/v25.71.0...v25.72.0) (2020-11-13)
 
 
