@@ -1,103 +1,70 @@
 type Mutation {
-  calculate_mesures (
-    serviceId: Int
-    mandataireId: Int
-  ): CalculateMesuresOutput
+  calculate_mesures(serviceId: Int, mandataireId: Int): CalculateMesuresOutput
 }
-
 
 type Query {
-  check_email_exists (
-    email: String
-  ): CheckEmailExistsOutput
+  check_email_exists(email: String): CheckEmailExistsOutput
 }
 
-
 type Mutation {
-  delete_mesure_action (
-    mesure_id: Int!
-  ): DeleteMesureActionOutput
+  delete_mesure_action(mesure_id: Int!): DeleteMesureActionOutput
 }
 
-
 type Mutation {
-  delete_mesure_etat_action (
-    id: Int!
-    mesure_id: Int!
-  ): DeleteMesureEtatOutput
+  delete_mesure_etat_action(id: Int!, mesure_id: Int!): DeleteMesureEtatOutput
 }
 
-
 type Mutation {
-  email_account_validation (
-    user_email: String!
-  ): EmailAccountValidationOutput
+  email_account_validation(user_email: String!): EmailAccountValidationOutput
 }
 
-
 type Mutation {
-  email_reservation (
-    mesure_id: Int!
-  ): EmailReservationOutput
+  email_reservation(mesure_id: Int!): EmailReservationOutput
 }
 
-
 type Mutation {
-  email_service_member_invitation (
+  email_service_member_invitation(
     invitation_id: Int!
   ): EmailServiceMemberInvitationOutput
 }
 
-
 type Mutation {
-  email_token_request (
-    email: String!
-    name: String!
-  ): TokenRequestOutput
+  email_token_request(email: String!, name: String!): TokenRequestOutput
 }
 
-
 type Query {
-  enquete_reponse_validation_status (
+  enquete_reponse_validation_status(
     enqueteId: Int!
     userId: Int
     reponseId: Int
   ): EnqueteReponseStatus
 }
 
+type Mutation {
+  export_mesures_file(serviceId: Int, mandataireUserId: Int): FileOutput
+}
 
 type Mutation {
-  export_mesures_file (
-    serviceId: Int
-    mandataireUserId: Int
-  ): FileOutput
+  import_base_finess(url: String!): ImportFinessOutput
 }
-
 
 type Mutation {
-  import_base_finess (
-    url: String!
-  ): ImportFinessOutput
+  import_ocmi_mesures: ImportOcmiMesuresOutput
 }
 
-
 type Query {
-  mandataire_statistics (
-    userId: Int!
-  ): MandataireStatisticsOutput
+  mandataire_statistics(userId: Int!): MandataireStatisticsOutput
 }
 
-
 type Query {
-  stat_available_mesures (
+  stat_available_mesures(
     departementId: Int
     regionId: Int
   ): StatAvailableMesuresOutput
 }
 
-
 type Query {
-  stat_awaiting_mesures (
+  stat_awaiting_mesures(
     departementId: Int
     regionId: Int
     start: date!
@@ -105,9 +72,8 @@ type Query {
   ): StatAwaitingMesuresOutput
 }
 
-
 type Query {
-  stat_closed_mesures (
+  stat_closed_mesures(
     departementId: Int
     regionId: Int
     start: date!
@@ -115,9 +81,8 @@ type Query {
   ): StatClosedMesuresOutput
 }
 
-
 type Query {
-  stat_opened_mesures (
+  stat_opened_mesures(
     departementId: Int
     regionId: Int
     start: date!
@@ -125,25 +90,20 @@ type Query {
   ): StatOpenedMesuresOutput
 }
 
-
 type Mutation {
-  submit_enquete_reponse (
-    enqueteId: Int!
-  ): EnqueteReponseSubmitted
+  submit_enquete_reponse(enqueteId: Int!): EnqueteReponseSubmitted
 }
 
-
 type Mutation {
-  upload_enquete_file (
+  upload_enquete_file(
     content: String!
     enqueteId: Int!
     userId: Int
   ): FileOutput
 }
 
-
 type Mutation {
-  upload_mesures_file (
+  upload_mesures_file(
     name: String!
     type: String!
     content: String!
@@ -153,9 +113,8 @@ type Mutation {
   ): FileOutput
 }
 
-
 type Mutation {
-  upsert_mesure_etat (
+  upsert_mesure_etat(
     champ_mesure: String
     code_postal: String
     date_changement_etat: date!
@@ -169,145 +128,145 @@ type Mutation {
   ): UpsertMesureEtatOutput!
 }
 
-
-
-
 input EmailReservationInput {
-  mesure_id : Int!
+  mesure_id: Int!
 }
 
 input StatAvailableMesuresInput {
-  department : Int!
-  region : Int!
+  department: Int!
+  region: Int!
 }
 
 type FileOutput {
-  data : String!
+  data: String!
 }
 
 type EnqueteIndividuelReponse {
-  enquete_id : Int!
-  submitted_at : timestamptz
-  enquete_reponses_id : Int!
-  enquete_reponses_status : json!
-  enquete_reponses_informations_mandataire_id : Int
-  enquete_reponses_prestations_sociale_id : Int
-  enquete_reponses_agrements_formations_id : Int
-  enquete_reponses_activite_id : Int
-  enquete_reponses_populations_id : Int
+  enquete_id: Int!
+  submitted_at: timestamptz
+  enquete_reponses_id: Int!
+  enquete_reponses_status: json!
+  enquete_reponses_informations_mandataire_id: Int
+  enquete_reponses_prestations_sociale_id: Int
+  enquete_reponses_agrements_formations_id: Int
+  enquete_reponses_activite_id: Int
+  enquete_reponses_populations_id: Int
 }
 
 type SubmittedEnqueteReponse {
-  id : Int!
-  submitted_at : timestamptz!
+  id: Int!
+  submitted_at: timestamptz!
 }
 
 type EnqueteReponseSubmitted {
-  enquete_id : Int!
-  enquete_reponses_id : Int!
-  submitted_at : timestamptz
+  enquete_id: Int!
+  enquete_reponses_id: Int!
+  submitted_at: timestamptz
 }
 
 type EnquetePreposeReponse {
-  enquete_id : Int!
-  submitted_at : timestamptz
-  enquete_reponses_id : Int!
-  enquete_reponses_status : json!
-  enquete_reponses_modalites_exercice_id : Int
-  enquete_reponses_modalites_exercice_status : Int!
-  enquete_reponses_populations_id : Int
-  enquete_reponses_populations_curatelle_status : Int!
-  enquete_reponses_populations_tutelle_status : Int!
-  enquete_reponses_populations_accompagnement_judiciaire_status : Int!
-  enquete_reponses_populations_sauvegarde_justice_status : Int!
-  enquete_reponses_populations_autre_status : Int!
-  enquete_reponses_financement_id : Int!
-  enquete_reponses_activite_id : Int!
+  enquete_id: Int!
+  submitted_at: timestamptz
+  enquete_reponses_id: Int!
+  enquete_reponses_status: json!
+  enquete_reponses_modalites_exercice_id: Int
+  enquete_reponses_modalites_exercice_status: Int!
+  enquete_reponses_populations_id: Int
+  enquete_reponses_populations_curatelle_status: Int!
+  enquete_reponses_populations_tutelle_status: Int!
+  enquete_reponses_populations_accompagnement_judiciaire_status: Int!
+  enquete_reponses_populations_sauvegarde_justice_status: Int!
+  enquete_reponses_populations_autre_status: Int!
+  enquete_reponses_financement_id: Int!
+  enquete_reponses_activite_id: Int!
 }
 
 type EnqueteReponseStatus {
-  enquete_id : Int!
-  submitted_at : timestamptz
-  status : String!
-  user_type : String!
-  enquete_reponse_ids : json!
-  enquete_reponse_validation_status : json!
-  mandataire : json
-  service : json
+  enquete_id: Int!
+  submitted_at: timestamptz
+  status: String!
+  user_type: String!
+  enquete_reponse_ids: json!
+  enquete_reponse_validation_status: json!
+  mandataire: json
+  service: json
 }
 
 type ImportFinessOutput {
-  data : String!
+  data: String!
 }
 
 type EmailReservationOutput {
-  result : String!
+  result: String!
 }
 
 type CalculateMesuresOutput {
-  en_cours : Int!
-  en_attente : Int!
+  en_cours: Int!
+  en_attente: Int!
 }
 
 type EmailCancelReservationOutput {
-  result : String!
+  result: String!
 }
 
 type StatAvailableMesuresOutput {
-  available_mesures_nb : Int!
+  available_mesures_nb: Int!
 }
 
 type StatClosedMesuresOutput {
-  closed_mesures_nb : Int!
+  closed_mesures_nb: Int!
 }
 
 type StatOpendMesuresOutput {
-  opened_mesures_nb : Int!
+  opened_mesures_nb: Int!
 }
 
 type StatOpenedMesuresOutput {
-  opened_mesures_nb : Int!
+  opened_mesures_nb: Int!
 }
 
 type StatAwaitingMesuresOutput {
-  awaiting_mesures_nb : Int!
+  awaiting_mesures_nb: Int!
 }
 
 type DeleteMesureActionOutput {
-  success : Boolean!
+  success: Boolean!
 }
 
 type EmailAccountValidationOutput {
-  result : String!
+  result: String!
 }
 
 type EmailServiceMemberInvitationOutput {
-  result : String!
+  result: String!
 }
 
 type TokenRequestOutput {
-  result : String!
+  result: String!
 }
 
 type CheckEmailExistsOutput {
-  exist : Boolean!
+  exist: Boolean!
 }
 
 type MandataireStatisticsOutput {
-  natureStatistics : json!
+  natureStatistics: json!
 }
 
 type MandataireStatistic {
-  value : Int!
-  name : String!
+  value: Int!
+  name: String!
 }
 
 type UpsertMesureEtatOutput {
-  id : Int!
-  mesure_id : Int!
+  id: Int!
+  mesure_id: Int!
 }
 
 type DeleteMesureEtatOutput {
-  affectedRows : Int!
+  affectedRows: Int!
 }
-
+type ImportOcmiMesuresOutput {
+  en_cours: Int
+  eteinte: Int
+}

@@ -7,6 +7,7 @@ const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const { saveMesures } = require("./service/saveMesure");
 const updateMesureStates = require("./service/updateMesureStates");
+const fetchTribunaux = require("./service/fetchTribunaux");
 
 const mesureBatch = async (req, res) => {
   const errors = validationResult(req);
@@ -72,25 +73,6 @@ const mesureBatch = async (req, res) => {
 };
 
 module.exports = mesureBatch;
-
-async function fetchTribunaux(mesures) {
-  const errors = [];
-  const tribunaux = [];
-  const tribunalSirets = uniq(mesures.map((m) => m.tribunal_siret));
-  for (const tribunalSiret of tribunalSirets) {
-    const ti = await getTi(tribunalSiret);
-    if (!ti) {
-      errors.push({
-        msg: `siret is not valid`,
-        param: "tribunal_siret",
-        value: tribunalSiret,
-      });
-    } else {
-      tribunaux.push(ti);
-    }
-  }
-  return { errors, tribunaux };
-}
 
 function findTribunal(tribunaux, tribunalSiret) {
   return tribunaux.find((t) => t.siret === tribunalSiret);
