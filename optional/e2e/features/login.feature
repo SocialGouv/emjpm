@@ -7,12 +7,12 @@ Fonctionnalité: Se connecter à EMJJM
   En tant que visiteur
   Je veux être pouvoir me connecter
 
-  Contexte: La page d'acceuil
+  Scénario: Context par default
     Soit une nouvelle base de donnée
-    Et un navigateur web sur le site
 
   @login_role
   Plan du scénario: Se connecter en tant que <role>
+    Soit un navigateur web sur le site
     Quand je tape "<email>" dans le champ "Votre nom d'utilisateur"
     Et je tape "emjpm2019" dans le champ "Votre mot de passe"
     Quand je clique sur "Se connecter"

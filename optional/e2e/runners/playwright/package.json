@@ -12,10 +12,12 @@
     "test": "yarn codeceptjs:headless"
   },
   "devDependencies": {
-    "@emjpm/database": "link:../../../../packages/api/database",
     "@codeceptjs/configure": "^0.6.0",
     "@codeceptjs/ui": "^0.4.2",
+    "@emjpm/database": "link:../../../../packages/api/database",
+    "chai": "^4.2.0",
     "codeceptjs": "^3.0.0",
+    "got": "^11.8.0",
     "playwright": "^1.5.2"
   }
 }

@@ -13,6 +13,12 @@ Quand("je tape {string} dans le champ {string}", (text, input) => {
   I.fillField(input, text);
 });
 
+Quand("je remplie les champs suivants", table => {
+  table.rows.forEach(({ cells: [{ value: label }, { value }] }) => {
+    I.fillField(label, value);
+  });
+});
+
 Alors("je vois {string}", (text) => {
   I.see(text, "#__next");
 });

@@ -1,9 +1,11 @@
 exports.getConfiguration = (env) => ({
   sentryEnvironment: env.SENTRY_ENV,
   sentryPublicDSN: env.SENTRY_PUBLIC_DSN,
-  smtpFrom: env.SMTP_FROM,
-  smtpHost: env.SMTP_HOST || "127.0.0.1",
+  smtpFrom: env.SMTP_FROM || "support.emjpm@fabrique.social.gouv.fr",
+  smtpHost: env.SMTP_HOST || "localhost",
   smtpPass: env.SMTP_PASS,
-  smtpPort: env.SMTP_PORT || "25",
+  // use maildev local smpt port
+  // see docker-compose.yaml
+  smtpPort: env.SMTP_PORT || "1025",
   smtpUser: env.SMTP_USER,
 });
