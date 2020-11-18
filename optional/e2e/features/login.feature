@@ -26,5 +26,3 @@ Fonctionnalité: Se connecter à EMJJM
       | prepose    | prepose-63@justice.fr     | /mandataires |
       | service    | service-2042@justice.fr   | /services    |
       | ti         | ti-136@justice.fr         | /magistrats  |
-
-

@@ -5,9 +5,8 @@
   "main": "codecept.conf.js",
   "license": "Apache-2.0",
   "scripts": {
-    "codeceptjs:demo:headless": "HEADLESS=true codeceptjs run --steps -c node_modules/@codeceptjs/examples",
-    "codeceptjs:demo:ui": "codecept-ui --app  -c node_modules/@codeceptjs/examples",
-    "codeceptjs:demo": "codeceptjs run --steps -c node_modules/@codeceptjs/examples",
+    "codeceptjs:run:headless": "HEADLESS=true codeceptjs run --steps",
+    "codeceptjs:run": "codeceptjs run --steps",
     "codeceptjs:headless": "HEADLESS=true codeceptjs run --steps",
     "codeceptjs:ui": "codecept-ui --app",
     "test": "yarn codeceptjs:headless"
