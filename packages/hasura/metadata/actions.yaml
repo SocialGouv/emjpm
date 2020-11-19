@@ -12,6 +12,21 @@ actions:
   - role: prepose
   - role: service
   - role: ti
+- name: check_email_exists
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/check-email-exists'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: anonymous
+  - role: direction
+  - role: individuel
+  - role: prepose
+  - role: service
+  - role: ti
 - name: delete_mesure_action
   definition:
     kind: synchronous
@@ -196,4 +211,5 @@ custom_types:
   - name: EmailAccountValidationOutput
   - name: EmailServiceMemberInvitationOutput
   - name: TokenRequestOutput
+  - name: CheckEmailExistsOutput
   scalars: []

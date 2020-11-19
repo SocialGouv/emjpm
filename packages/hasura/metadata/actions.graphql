@@ -6,6 +6,13 @@ type Mutation {
 }
 
 
+type Query {
+  check_email_exists (
+    email: String
+  ): CheckEmailExistsOutput
+}
+
+
 type Mutation {
   delete_mesure_action (
     mesure_id: Int!
@@ -249,5 +256,9 @@ type EmailServiceMemberInvitationOutput {
 
 type TokenRequestOutput {
   result : String!
+}
+
+type CheckEmailExistsOutput {
+  exist : Boolean!
 }
 
