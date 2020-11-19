@@ -75,6 +75,8 @@ export const MESURES = gql`
       numero_rg
       status
       date_nomination
+      code_postal
+      ville
       created_at
       ti {
         id
