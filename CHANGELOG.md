@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.73.0](https://github.com/SocialGouv/emjpm/compare/v25.72.1...v25.73.0) (2020-11-19)
+
+
+### Bug Fixes
+
+* **email-unicity:** add check email unicity action ([d4c6e25](https://github.com/SocialGouv/emjpm/commit/d4c6e250c0446f0961e5bd5d43d30d6142322efc))
+* **magistrat:** display mesures of mandataires on the map ([7e7bc54](https://github.com/SocialGouv/emjpm/commit/7e7bc54421f8bf83ec6bd4676b15800f0d655f88))
+
+
+### Features
+
+* **admin:** display magistrat by ti ([0440da4](https://github.com/SocialGouv/emjpm/commit/0440da46cdb9c3e2c893d5572c819178b2156162))
+* **admin:** display ville / code_postal ([3d4c1f6](https://github.com/SocialGouv/emjpm/commit/3d4c1f6f6dbdbcf2853b1067d86b7003fca3e17d))
+
+
+
+
+
 ## [25.72.1](https://github.com/SocialGouv/emjpm/compare/v25.72.0...v25.72.1) (2020-11-16)
 
 
