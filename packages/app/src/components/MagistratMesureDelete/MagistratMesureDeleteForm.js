@@ -2,18 +2,23 @@ import { useMutation } from "@apollo/react-hooks";
 import { Button, Heading3, Heading5, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
 import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
+import { UserContext } from "../UserContext";
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
   const { serviceId, mandataireId } = mesure;
+
+  const {
+    magistrat: { ti_id: tiId },
+  } = useContext(UserContext);
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
@@ -53,6 +58,7 @@ export const MagistratMesureDeleteForm = (props) => {
               natureMesure: null,
               offset: 0,
               searchText: null,
+              tiId: tiId,
             },
           },
         ],

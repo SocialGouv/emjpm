@@ -4625,11 +4625,7 @@
       - nature_mesure
       - champ_mesure
       - ville
-      filter:
-        ti:
-          magistrats:
-            user_id:
-              _eq: X-Hasura-User-Id
+      filter: {}
       allow_aggregations: true
   update_permissions:
   - role: individuel

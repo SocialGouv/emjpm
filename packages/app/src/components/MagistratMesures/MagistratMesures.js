@@ -7,6 +7,7 @@ import { Box, Flex } from "rebass";
 
 import { formatMesureListItems } from "../../util/mesures";
 import { FiltersContext } from "../MagistratFilters/context";
+import { UserContext } from "../UserContext";
 import { MAGISTRAT_MESURES_QUERY } from "./queries";
 import { MagistratListStyle } from "./style";
 
@@ -15,6 +16,9 @@ const RESULT_PER_PAGE = 20;
 const MagistratMesures = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
+  const {
+    magistrat: { ti_id: tiId },
+  } = useContext(UserContext);
 
   useEffect(() => {
     setCurrentOffset(0);
@@ -27,6 +31,7 @@ const MagistratMesures = () => {
       debouncedSearchText && debouncedSearchText !== ""
         ? `${debouncedSearchText}%`
         : null,
+    tiId,
   };
 
   const { data, error, loading } = useQuery(MAGISTRAT_MESURES_QUERY, {
