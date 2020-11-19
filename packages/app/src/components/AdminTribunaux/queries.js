@@ -37,6 +37,20 @@ export const TRIBUNAUX = gql`
       latitude
       longitude
       immutable
+      magistrats {
+        id
+        user {
+          id
+          email
+          nom
+          prenom
+        }
+      }
+      magistrats_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
   }
 `;
