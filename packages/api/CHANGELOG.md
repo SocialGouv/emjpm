@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.73.0](https://github.com/SocialGouv/emjpm/compare/v25.72.1...v25.73.0) (2020-11-19)
+
+
+### Bug Fixes
+
+* **email-unicity:** add check email unicity action ([d4c6e25](https://github.com/SocialGouv/emjpm/commit/d4c6e250c0446f0961e5bd5d43d30d6142322efc))
+
+
+
+
+
 ## [25.72.1](https://github.com/SocialGouv/emjpm/compare/v25.72.0...v25.72.1) (2020-11-16)
 
 
