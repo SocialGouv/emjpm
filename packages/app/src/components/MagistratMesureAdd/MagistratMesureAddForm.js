@@ -52,6 +52,7 @@ export const MagistratMesureAddForm = (props) => {
               natureMesure: null,
               offset: 0,
               searchText: null,
+              tiId: tiId,
             },
           },
         ],
