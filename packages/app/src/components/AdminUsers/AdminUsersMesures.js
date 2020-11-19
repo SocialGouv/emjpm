@@ -177,6 +177,14 @@ function buildTableColumns() {
       accessor: "numero_dossier",
     },
     {
+      Header: "Code postal",
+      accessor: "code_postal",
+    },
+    {
+      Header: "Ville",
+      accessor: "ville",
+    },
+    {
       Header: "Nature",
       accessor: "nature_mesure",
     },
