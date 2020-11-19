@@ -14,5 +14,6 @@ router.use(
   "/etablissements",
   require("./etablissement/hasura-actions.etablissements.routes.js")
 );
+router.use("/users", require("./user/hasura-actions.users.routes.js"));
 
 module.exports = router;
