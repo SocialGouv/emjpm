@@ -9,6 +9,7 @@ const mandataireEditSchema = yup.object().shape({
   geocode: yup
     .object()
     .required()
+    .nullable()
     .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
   nom: yup.string().required(),
   prenom: yup.string().required(),
