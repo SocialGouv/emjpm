@@ -1,10 +1,15 @@
 import { isIndividuel } from "@emjpm/core";
 
-import yup from "./yup";
+import { validateGeocode } from "./fieldValidators";
+import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
 const mandataireSignupSchema = yup.object().shape({
   dispo_max: yup.number().required(),
-  geocode: yup.object().nullable().required(),
+  geocode: yup
+    .object()
+    .required()
+    .nullable()
+    .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
   siret: yup.string().when("user", {
     is: (user) => isIndividuel(user),
     then: yup
