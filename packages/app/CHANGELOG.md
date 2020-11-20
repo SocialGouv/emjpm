@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.73.1](https://github.com/SocialGouv/emjpm/compare/v25.73.0...v25.73.1) (2020-11-20)
+
+
+### Bug Fixes
+
+* **geocode:** add custom geocode validation ([#2309](https://github.com/SocialGouv/emjpm/issues/2309)) ([d330dec](https://github.com/SocialGouv/emjpm/commit/d330decc075fb1430c6a50ea38814ac85141d126))
+* **mandataire-edition:** update yup schema ([61f39c8](https://github.com/SocialGouv/emjpm/commit/61f39c8c2f79c1471510b5ca52fb760b69a5fa9c))
+
+
+
+
+
 # [25.73.0](https://github.com/SocialGouv/emjpm/compare/v25.72.1...v25.73.0) (2020-11-19)
 
 
