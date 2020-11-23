@@ -15,7 +15,7 @@ module.exports = async (code_postal, ville) => {
   if (!geoDatas.length) {
     return {};
   }
-  let geoData = geoDatas.find((el) => el.ville === ville.toUpperCase().trim());
+  let geoData = geoDatas.find((el) => el.cities === ville.toUpperCase().trim());
   if (!geoData) {
     geoData = geoDatas[0];
   }
