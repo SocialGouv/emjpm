@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.73.2](https://github.com/SocialGouv/emjpm/compare/v25.73.1...v25.73.2) (2020-11-23)
+
+
+### Bug Fixes
+
+* **geolocalisation:** use correct column name ([41e1f18](https://github.com/SocialGouv/emjpm/commit/41e1f18efb07801cb542ad3508bf40b31cd46591))
+
+
+
+
+
 ## [25.73.1](https://github.com/SocialGouv/emjpm/compare/v25.73.0...v25.73.1) (2020-11-20)
 
 **Note:** Version bump only for package @emjpm/api
