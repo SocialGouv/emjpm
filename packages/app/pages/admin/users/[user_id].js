@@ -10,6 +10,7 @@ import { AdminUserActivation } from "../../../src/components/AdminUsers/AdminUse
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
 import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
 import { LayoutAdmin } from "../../../src/components/Layout";
+import { MagistratEditInformations } from "../../../src/components/MagistratEditInformations";
 import { MandataireEditInformations } from "../../../src/components/MandataireEditInformations";
 import { MesureImportPanel } from "../../../src/components/MesureImport";
 import { isMagistrat, isMandataire, isService } from "../../../src/util";
@@ -34,16 +35,20 @@ const User = (props) => {
 
             <MandataireEditInformations
               userId={userId}
-              userType={type}
               cancelLink="/admin/users"
-              mt="3"
               isAdmin
+              mt="3"
             />
           </Box>
         )}
         {isMagistrat(type) && (
           <Box my={1} width="100%">
-            <AdminUserInformations userId={userId} />
+            <MagistratEditInformations
+              userId={userId}
+              cancelLink="/admin/users"
+              isAdmin
+              mt="3"
+            />
           </Box>
         )}
         {isService(type) && (

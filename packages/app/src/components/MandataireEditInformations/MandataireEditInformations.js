@@ -11,7 +11,7 @@ import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 
 const MandataireEditInformations = ({
-  userId: id,
+  userId,
   cancelLink,
   successLink,
   isAdmin = false,
@@ -20,7 +20,7 @@ const MandataireEditInformations = ({
   const { data, error, loading } = useQuery(MANDATAIRE, {
     fetchPolicy: "network-only",
     variables: {
-      userId: id,
+      userId,
     },
   });
 
@@ -96,7 +96,6 @@ const MandataireEditInformations = ({
     <Box p="5">
       <MandataireEditInformationsForm
         mandataire={mandataire}
-        client={client}
         handleSubmit={handleSubmit}
         user={user}
         cancelLink={cancelLink}
