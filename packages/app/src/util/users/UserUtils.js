@@ -13,3 +13,7 @@ export const isPrepose = (type) => {
 export const isService = (type) => {
   return type === "service";
 };
+
+export const isMagistrat = (type) => {
+  return type === "ti";
+};

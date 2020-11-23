@@ -81,19 +81,6 @@ export const DELETE_MANDATAIRE_TIS = gql`
   }
 `;
 
-export const ADD_MAGISTRAT = gql`
-  mutation admin_add_magistrat($userId: Int!, $tiId: Int!) {
-    insert_magistrat(objects: { ti_id: $tiId, mandataire_id: $mandataireId }) {
-      affected_rows
-      returning {
-        id
-        ti_id
-        mandataire_id
-      }
-    }
-  }
-`;
-
 export const ADD_MANDATAIRE_TIS = gql`
   mutation admin_add_mandataire_tis($mandataireId: Int!, $tiId: Int!) {
     insert_mandataire_tis(

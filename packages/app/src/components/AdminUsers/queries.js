@@ -88,13 +88,16 @@ export const MESURES = gql`
 `;
 
 export const MANDATAIRE_TIS = gql`
-  query admin_mandataire_tis($mandataireId: Int!) {
+  query admin_mandataire_tis($userId: Int!) {
     tis(where: { immutable: { _eq: true } }) {
       id
       etablissement
       code_postal
     }
-    mandataire_tis(where: { mandataire_id: { _eq: $mandataireId } }) {
+    mandataires(limit: 1, where: { user_id: { _eq: $userId } }) {
+      id
+    }
+    mandataire_tis(where: { mandataire: { user_id: { _eq: $userId } } }) {
       id
       ti {
         id

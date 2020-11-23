@@ -1,20 +1,22 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
-import React, { useContext } from "react";
+import React, { useState } from "react";
 import { Box } from "rebass";
 
-import { PATH } from "../../constants/basePath";
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { UserContext } from "../UserContext";
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";
 
-const MandataireEditInformations = () => {
-  const { id, type } = useContext(UserContext);
-
+const MandataireEditInformations = ({
+  userId: id,
+  cancelLink,
+  successLink,
+  isAdmin = false,
+}) => {
+  const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(MANDATAIRE, {
     fetchPolicy: "network-only",
     variables: {
@@ -23,10 +25,15 @@ const MandataireEditInformations = () => {
   });
 
   const [editUser] = useMutation(EDIT_USER, {
+    onError(error) {
+      setErrorMessage(error);
+    },
     update() {
-      Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
-        shallow: true,
-      });
+      if (successLink) {
+        Router.push(`${successLink}`, `${successLink}`, {
+          shallow: true,
+        });
+      }
     },
   });
 
@@ -42,7 +49,6 @@ const MandataireEditInformations = () => {
     return <div>error</div>;
   }
 
-  const cancelLink = `${PATH[type]}/informations`;
   const user = data.users[0];
   const mandataire = user.mandataire;
 
@@ -75,6 +81,7 @@ const MandataireEditInformations = () => {
           longitude: values.geocode.longitude,
           nom: values.nom,
           prenom: values.prenom,
+          siret: values.siret,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
           ville: values.geocode.city,
@@ -93,6 +100,8 @@ const MandataireEditInformations = () => {
         handleSubmit={handleSubmit}
         user={user}
         cancelLink={cancelLink}
+        errorMessage={errorMessage}
+        isAdmin={isAdmin}
       />
     </Box>
   );

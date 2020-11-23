@@ -1,81 +1,21 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Heading3, Text } from "@emjpm/ui";
+import { useMutation, useQuery } from "@apollo/react-hooks";
+import { Heading3, Text } from "@emjpm/ui";
 import Link from "next/link";
-import React, { Fragment, useCallback } from "react";
+import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { isIndividuel, isMandataire } from "../../../src/util";
-import { AccessToken } from "../AccessToken";
-import AdminMandataireTribunaux from "./AdminMandataireTribunaux";
-import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
-import AdminUsersMagistratTribunal from "./AdminUsersMagistratTribunal";
-import {
-  ACTIVATE_USER,
-  CHANGE_DIRECTION_AGREMENT,
-  SEND_EMAIL_ACCOUNT_VALIDATION,
-} from "./mutations";
-import { LB_USER, USER } from "./queries";
+import { CHANGE_DIRECTION_AGREMENT } from "./mutations";
+import { USER } from "./queries";
 import { TypeDirectionForm } from "./TypeDirectionForm";
 
 const AdminUserInformations = (props) => {
   const { userId } = props;
 
-  const [execQuery, queryResult] = useLazyQuery(LB_USER);
   const { data, loading, error } = useQuery(USER, {
-    onCompleted: async (data) => {
-      if (data) {
-        const { type, email, mandataire } = data.users_by_pk;
-        if (isMandataire(type)) {
-          if (isIndividuel(type) && mandataire.siret) {
-            await execQuery({
-              variables: {
-                where: {
-                  siret: { _eq: mandataire.siret },
-                },
-              },
-            });
-          } else {
-            await execQuery({
-              variables: {
-                where: {
-                  email: { _eq: email },
-                },
-              },
-            });
-          }
-        }
-      }
-    },
     variables: { userId },
   });
 
-  const [activateUser, { loading: activateUserLoading }] = useMutation(
-    ACTIVATE_USER
-  );
-  const [sendEmailAccountValidation] = useMutation(
-    SEND_EMAIL_ACCOUNT_VALIDATION
-  );
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
-
-  const lb_user =
-    queryResult.data && queryResult.data.lb_users.length
-      ? queryResult.data.lb_users[0]
-      : null;
-
-  const toggleActivation = useCallback(() => {
-    const { active, id, email } = data.users_by_pk;
-    const newActiveValue = !active;
-
-    activateUser({
-      variables: {
-        active: newActiveValue,
-        id,
-      },
-    });
-
-    if (newActiveValue)
-      sendEmailAccountValidation({ variables: { user_email: email } });
-  }, [activateUser, sendEmailAccountValidation, data]);
 
   if (loading) {
     return <div>Chargement</div>;
@@ -88,11 +28,9 @@ const AdminUserInformations = (props) => {
   const { users_by_pk, regions, departements, directionRoles } = data;
 
   const {
-    active,
     id,
     type,
     service_members,
-    mandataire,
     nom,
     prenom,
     email,
@@ -100,8 +38,6 @@ const AdminUserInformations = (props) => {
   } = users_by_pk;
 
   const [direction] = directions;
-  const activateButtonStyle = active ? "warning" : "primary";
-  const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
     <Fragment>
@@ -140,18 +76,8 @@ const AdminUserInformations = (props) => {
           </Text>
         </Box>
       </Flex>
-      {isMandataire(type) && (
-        <Flex mb={4}>
-          <Box width={1 / 3} p={2} bg="cardSecondary">
-            SIRET
-          </Box>
-          <Box width={2 / 3} px={4} py={2}>
-            <Text>{mandataire.siret}</Text>
-          </Box>
-        </Flex>
-      )}
 
-      {type === "service" ? (
+      {type === "service" && (
         <Flex mb={4}>
           <Box width={1 / 3} p={2} bg="cardSecondary">
             Service
@@ -172,68 +98,7 @@ const AdminUserInformations = (props) => {
               })}
           </Box>
         </Flex>
-      ) : (
-        <Flex mb={4}>
-          <Box width={1 / 3} p={2} bg="cardSecondary">
-            Tribunaux
-          </Box>
-          <Box width={2 / 3} px={4} py={2}>
-            {type === "ti" && <AdminUsersMagistratTribunal id={id} />}
-            {(type === "individuel" || type === "prepose") && (
-              <AdminMandataireTribunaux mandataireId={mandataire.id} />
-            )}
-          </Box>
-        </Flex>
       )}
-
-      {isMandataire(type) && (
-        <Flex mb={4}>
-          <Box width={1 / 3} p={2} bg="cardSecondary">
-            Liste blanche
-          </Box>
-          <Box width={2 / 3} px={4} py={2}>
-            <AdminUserListeBlancheMandataireAssociation
-              mandataire={mandataire}
-              userId={userId}
-              lb_user={lb_user}
-            />
-          </Box>
-        </Flex>
-      )}
-
-      <Flex>
-        <Box width={1 / 3} p={2} bg="cardSecondary">
-          Activer / Bloquer
-        </Box>
-        <Box width={2 / 3} px={4} py={2}>
-          <Flex alignItems="center">
-            <Box>
-              <Button
-                disabled={isMandataire(type) && !mandataire.lb_user}
-                mr={2}
-                bg={activateButtonStyle}
-                onClick={toggleActivation}
-                isLoading={activateUserLoading}
-              >
-                {activateButtonText}
-              </Button>
-            </Box>
-
-            {isMandataire(type) && mandataire && !mandataire.lb_user && (
-              <Box ml={4} flex={1}>
-                <span aria-label="information" role="img">
-                  ℹ️
-                </span>
-                <Text ml={1} as="span">
-                  {
-                    " L'activation / désactivation requiert que l'utilisateur soit associé à un enregistrement dans la liste blanche."
-                  }
-                </Text>
-              </Box>
-            )}
-          </Flex>
-        </Box>
-      </Flex>
 
       {type === "direction" && (
         <Box mt={4}>
@@ -269,10 +134,6 @@ const AdminUserInformations = (props) => {
           />
         </Box>
       )}
-
-      <Box mt="2">
-        <AccessToken bg="cardSecondary" isAdmin userId={id} />
-      </Box>
     </Fragment>
   );
 };
