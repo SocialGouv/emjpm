@@ -185,6 +185,7 @@ actions:
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
   - role: individuel
+  - role: prepose
   - role: service
 custom_types:
   enums: []
