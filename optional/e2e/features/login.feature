@@ -1,44 +1,28 @@
+# language: fr
+
 @login
-Feature: Login to EMJJM
-  In order use EMJJM
-  As a user
-  I want to be able to login
+Fonctionnalité: Se connecter à EMJJM
 
-  Background: Navigate to HomePage
-    Given a clean test database
-    Given a web browser is on EMJJM
+  Pour pouvoir utiliser EMJPM
+  En tant que visiteur
+  Je veux être pouvoir me connecter
 
-  @login_individuel
-  Scenario: Individuel login
-    When I enter "jeremy" as "Votre nom d'utilisateur"
-    When I enter "johnson123" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/mandataires" page
+  Scénario: Context par default
+    Soit une nouvelle base de donnée
 
-  @login_prepose
-  Scenario: Prepose login
-    When I enter "kelly" as "Votre nom d'utilisateur"
-    When I enter "bryant123" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/mandataires" page
+  @login_role
+  Plan du scénario: Se connecter en tant que <role>
+    Soit un navigateur web sur le site
+    Quand je tape "<email>" dans le champ "Votre nom d'utilisateur"
+    Et je tape "emjpm2019" dans le champ "Votre mot de passe"
+    Quand je clique sur "Se connecter"
+    Alors je suis redirigé vers la page: "<page>"
 
-  @login_service
-  Scenario: Service login
-    When I enter "service1" as "Votre nom d'utilisateur"
-    When I enter "service1" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/services" page
-
-  @login_admin
-  Scenario: Admin login
-    When I enter "admin" as "Votre nom d'utilisateur"
-    When I enter "admin" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/admin" page
-
-  @login_ti
-  Scenario: Tribunal d'instance login
-    When I enter "ti1" as "Votre nom d'utilisateur"
-    When I enter "ti1" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/magistrats" page
+    Exemples:
+      | role       | email                     | page         |
+      | admin      | admin-45@justice.fr       | /admin       |
+      | direction  | direction-823@justice.fr  | /direction   |
+      | individuel | individuel-134@justice.fr | /mandataires |
+      | prepose    | prepose-63@justice.fr     | /mandataires |
+      | service    | service-2042@justice.fr   | /services    |
+      | ti         | ti-136@justice.fr         | /magistrats  |

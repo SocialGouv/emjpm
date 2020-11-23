@@ -1,48 +1,57 @@
+#language: fr
+
 @forgot_password
-Feature: Forgot password
-  In order to recover a forgotten password
-  As a registered user
-  I want to be able to reset my password
+Fonctionnalité: Mot de passe oublié
 
-  Background: Navigate to HomePage
-    Given a clean test database
-    Given a web browser is on EMJJM
-    And an empty inbox
+  Dans le cas où j'ai oublié mon mot de passe
+  En tant qu'utilisateur
+  Je veux pouvour réinitialisation mon mot de passe
 
-  Scenario: Adrien (ud@ud.com) forgot his password
-    When I click on "J'ai oublié mon mot de passe et / ou mon identifiant"
-    Then I should redirected to "/account/forgot-password" page
-    Then I see "Demander un nouveau mot de passe"
-    
-    When I enter "ud@ud.com" as "Entrez votre email"
-    Then I click on "Obtenir le lien de réinitialisation"
+  Scénario: Context par default
+    Soit une nouvelle base de donnée
+    Et un navigateur web sur le site
+    Et une boite mail vide
 
-    Then I have one unread message in my indox
-    And I consult the last unread message
-    Given the last email as the following info
-      | subject         | Nouveau mot de passe pour e-MJPM |
-      | from[0].address | support.emjpm@fabrique.social.gouv.fr |
-      | to[0].address   | ud@ud.com |
-    Given I see "Un email avec un lien de réinitialisation vient de vous être envoyé."
+  Scénario: Je vais cliquer sur le lien dans la page d'accueil
+    Quand je clique sur "J'ai oublié mon mot de passe et / ou mon identifiant"
+    Alors je suis redirigé vers la page: "/account/forgot-password"
+    Et je vois "Demander un nouveau mot de passe"
 
-    When I click on the "\/account/reset-password\?token=.{16}" link in the last email
-    When I fill in the following
-      | Entrez votre nouveau mot de passe      | JaimeLesChips123456? |
+  Scénario: Je remplie le formulaire de réinitialisation
+    Quand je tape "individuel-134@justice.fr" dans le champ "Entrez votre email"
+    Et je clique sur "Obtenir le lien de réinitialisation"
+    Alors je vois "Un email avec un lien de réinitialisation vient de vous être envoyé."
+
+  Scénario: Je reçois un mail de réinitialisation
+    Quand j'ai un message non lu dans ma boite mail
+    Et j'ouvre le dernier mail non lu
+    Alors je vois dans le mail
+      | subject                | Nouveau mot de passe pour e-MJPM      |
+      | envelope.from.address  | support.emjpm@fabrique.social.gouv.fr |
+      | envelope.to[0].address | individuel-134@justice.fr             |
+
+    Quand dans le mail, je clique sur le lien "\/account/reset-password\?token=.{16}"
+    Alors je suis redirigé vers la page: "/account/reset-password"
+    Et je vois "Modifier votre mot de passe"
+
+  Scénario: Je choisie mon nouveau mot de passe
+    Quand je remplie les champs suivants
+      | Entrez votre nouveau mot de passe    | JaimeLesChips123456? |
       | Confirmer votre nouveau mot de passe | JaimeLesChips123456? |
-    Then I click on "Enregistrer mon nouveau mot de passe"
-    Given I see "Votre mot de passe a bien été changé, vous allez être redirigé vers la page de connexion"
-    Then I should redirected to "/login" page
+    Et je clique sur "Enregistrer mon nouveau mot de passe"
+    Alors je vois "Votre mot de passe a bien été changé, vous allez être redirigé vers la page de connexion"
+    Et je suis redirigé vers la page: "/login"
 
-    Then I have one unread message in my indox
-    And I consult the last unread message
-    Given the last email as the following info
-      | subject         | Confirmation du mot de passe |
-      | from[0].address | support.emjpm@fabrique.social.gouv.fr   |
-      | to[0].address   | ud@ud.com                    |
+    Quand j'ai un message non lu dans ma boite mail
+    Et j'ouvre le dernier mail non lu
+    Alors je vois dans le mail
+      | subject                | Confirmation du mot de passe          |
+      | envelope.from.address  | support.emjpm@fabrique.social.gouv.fr |
+      | envelope.to[0].address | individuel-134@justice.fr             |
 
-    Given a web browser is on EMJJM
-    When I enter "jeremy" as "Votre nom d'utilisateur"
-    When I enter "JaimeLesChips123456?" as "Votre mot de passe"
-    And I click on "Se connecter"
-    Then I should redirected to "/mandataires" page
-    
+  Scénario: Je test mon nouveau mot de passe
+    Soit un navigateur web sur le site
+    Quand je tape "individuel-134@justice.fr" dans le champ "Votre nom d'utilisateur"
+    Et je tape "JaimeLesChips123456?" dans le champ "Votre mot de passe"
+    Et je clique sur "Se connecter"
+    Alors je suis redirigé vers la page: "/mandataires"

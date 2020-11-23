@@ -6,6 +6,8 @@ const Sentry = require("../../utils/sentry");
 const { resetPasswordEmail } = require("../../email/forgot-password-email");
 const { User } = require("../../models/User");
 
+const APP_URL = process.env.APP_URL || "localhost:3000";
+
 const forgotPassword = async (req, res) => {
   const errors = validationResult(req);
 
@@ -44,7 +46,7 @@ const forgotPassword = async (req, res) => {
     resetPasswordEmail(
       user,
       email,
-      `${process.env.APP_URL}/account/reset-password?token=${token}`
+      `${APP_URL}/account/reset-password?token=${token}`
     );
   } catch (error) {
     Sentry.captureException(error);

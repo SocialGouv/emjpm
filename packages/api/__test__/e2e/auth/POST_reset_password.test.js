@@ -14,7 +14,7 @@ const { databaseName, knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
-const { seedData } = require("../../database/seed-data");
+const { seedData } = require("@emjpm/api/database/seed-data");
 
 //
 

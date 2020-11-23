@@ -33,7 +33,9 @@ const apiLimiter = rateLimit({
 });
 
 // middlewares
-app.use(expressPinoLogger({ logger }));
+if (process.env.NODE_ENV !== "test") {
+  app.use(expressPinoLogger({ logger }));
+}
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -24,8 +24,8 @@ Use primarily your machine to host emjpm
 
 1.  Open
 
-  - localhost:3000 for the frontend
-  - localhost:5000 for the hasura
+- localhost:3000 for the frontend
+- localhost:5000 for the hasura
 
 #### Docker images based
 
@@ -51,8 +51,8 @@ Use the Dockerfiles to host emjpm
 
 1.  Open
 
-  - localhost:3000 for the frontend
-  - localhost:5000 for the hasura
+- localhost:3000 for the frontend
+- localhost:5000 for the hasura
 
 #### Built images based
 
@@ -78,16 +78,16 @@ Use the built image on our registry.gitlab.factory.social.gouv.fr/socialgouv/emj
 
 1.  Open
 
-  - localhost:3000 for the frontend
-  - localhost:5000 for the hasura
+- localhost:3000 for the frontend
+- localhost:5000 for the hasura
 
 ### Database
 
 1.  Ensure that the database is migrated and populated
 
     ```
-    $ yarn workspace @emjpm/knex run migrate --env test
-    $ yarn workspace @emjpm/knex run seeds --env test
+    $ cd packages/hasura
+    $ npx hasura-cli seeds apply
     ```
 
 ## Testing

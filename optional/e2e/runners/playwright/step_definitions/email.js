@@ -1,9 +1,13 @@
 //
+
 const { I } = inject();
-const got = require("got");
+
+const { Alors, Quand, Soit } = require("./_fr");
+
 const MAILDEV_API_URL = process.env.MAILDEV_API_URL || "http://localhost:1080";
+/*
 const event = require("codeceptjs").event;
-const recorder = require("codeceptjs").recorder;
+*/
 
 //
 
@@ -14,15 +18,14 @@ Before(() => {
 });
 
 //
-
-Given("an empty inbox", async () => {
+Soit("une boite mail vide", async () => {
   const isDone = await mailDev("DELETE", "/email/all");
   require("chai")
     .expect(isDone)
     .to.eq(true);
 });
 
-Given("the last email as the following info", async table => {
+Alors("je vois dans le mail", async table => {
   const { expect } = require("chai");
   expect(state.lastUnreadMessage, "No email found").to.exist;
   table.rows.forEach(({ cells: [{ value: path }, { value }] }) => {
@@ -32,10 +35,11 @@ Given("the last email as the following info", async table => {
 
 //
 
-When("I have one unread message in my indox", async () => {
+Alors("j'ai un message non lu dans ma boite mail", async () => {
+  const recorder = require("codeceptjs").recorder;
   const { expect } = require("chai");
 
-  recorder.retry({ retries: 5 });
+  recorder.retry({ retries: 15 });
 
   recorder.add(async () => {
     const emails = await mailDev("GET", "/email");
@@ -48,13 +52,13 @@ When("I have one unread message in my indox", async () => {
   recorder.reset();
 });
 
-When("I consult the last unread message", async () => {
+Quand("j'ouvre le dernier mail non lu", async () => {
   const emails = await mailDev("GET", "/email");
   const [{ id }] = emails.filter(email => !email.read).reverse();
   state.lastUnreadMessage = await mailDev("GET", "/email/" + id);
 });
 
-When("I click on the {string} link in the last email", regexStr => {
+Quand("dans le mail, je clique sur le lien {string}", regexStr => {
   const { expect } = require("chai");
   expect(state.lastUnreadMessage, "No email found").to.exist;
   const reg = new RegExp(regexStr);
@@ -66,6 +70,7 @@ When("I click on the {string} link in the last email", regexStr => {
 
 async function mailDev(method, resource) {
   const { output } = require("codeceptjs");
+  const got = require("got");
   try {
     output.log(`MAILDEV | ${method} "${MAILDEV_API_URL}${resource}"`);
     const { body } = await got(`${MAILDEV_API_URL}${resource}`, {
