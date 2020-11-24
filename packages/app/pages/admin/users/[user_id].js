@@ -5,12 +5,12 @@ import React from "react";
 import { Box, Card, Flex, Link as StyledLink } from "rebass";
 
 import { AccessToken } from "../../../src/components/AccessToken";
+import { AdminUserActivation } from "../../../src/components/AdminUserActivation";
+import { AdminDirectionType } from "../../../src/components/AdminUserDirection";
 import {
   AdminMandataireMesures,
   AdminMandataireTribunaux,
-} from "../../../src/components/AdminMandataire";
-import { AdminUserActivation } from "../../../src/components/AdminUserActivation";
-import { AdminDirectionType } from "../../../src/components/AdminUsers/AdminDirectionType";
+} from "../../../src/components/AdminUserMandataire";
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
 import { DirectionEditInformations } from "../../../src/components/DirectionEditInformations/DirectionEditInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
