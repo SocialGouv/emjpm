@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Heading4, Select } from "@emjpm/ui";
+import { Trash } from "@styled-icons/boxicons-regular/Trash";
 import React, { useState } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Link, Text } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "../AppForm";
 import { ADD_MANDATAIRE_TIS, DELETE_MANDATAIRE_TIS } from "./mutations";
@@ -43,22 +44,23 @@ const AdminMandataireTribunaux = (props) => {
             <Flex
               mb={10}
               alignItems="center"
-              justifyContent="space-between"
+              justifyContent="flex-start"
               key={`aui-${id}`}
             >
-              <Text>{ti.etablissement}</Text>
-              <Box>
-                <Button
-                  onClick={() =>
-                    deleteMandataireTribunalRelation({
-                      refetchQueries: ["admin_mandataire_tis"],
-                      variables: { id },
-                    })
-                  }
-                >
-                  Supprimer
-                </Button>
+              <Box width={1 / 2}>
+                <Text>{ti.etablissement}</Text>
               </Box>
+              <Link
+                onClick={() =>
+                  deleteMandataireTribunalRelation({
+                    refetchQueries: ["admin_mandataire_tis"],
+                    variables: { id },
+                  })
+                }
+              >
+                <Trash size="20" width="100%" />
+              </Link>
+              <Box />
             </Flex>
           );
         })}
@@ -76,18 +78,20 @@ const AdminMandataireTribunaux = (props) => {
                 .map((ti) => ({ label: ti.etablissement, value: ti.id }))}
             />
           </Box>
-          <Button
-            onClick={() => {
-              if (selectedTribunal) {
-                addMandataireTribunalRelation({
-                  refetchQueries: ["admin_mandataire_tis"],
-                  variables: { mandataireId, tiId: selectedTribunal },
-                });
-              }
-            }}
-          >
-            Ajouter
-          </Button>
+          <Box>
+            <Button
+              onClick={() => {
+                if (selectedTribunal) {
+                  addMandataireTribunalRelation({
+                    refetchQueries: ["admin_mandataire_tis"],
+                    variables: { mandataireId, tiId: selectedTribunal },
+                  });
+                }
+              }}
+            >
+              Ajouter
+            </Button>
+          </Box>
         </Flex>
       </FormInputBox>
     </Flex>

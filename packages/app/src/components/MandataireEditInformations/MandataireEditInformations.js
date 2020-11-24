@@ -2,7 +2,6 @@ import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React, { useState } from "react";
-import { Box } from "rebass";
 
 import { isEmailExists } from "../../query-service/EmailQueryService";
 import { useDepartements } from "../../util/departements/useDepartements.hook";
@@ -93,16 +92,14 @@ const MandataireEditInformations = ({
   };
 
   return (
-    <Box p="5">
-      <MandataireEditInformationsForm
-        mandataire={mandataire}
-        handleSubmit={handleSubmit}
-        user={user}
-        cancelLink={cancelLink}
-        errorMessage={errorMessage}
-        isAdmin={isAdmin}
-      />
-    </Box>
+    <MandataireEditInformationsForm
+      mandataire={mandataire}
+      handleSubmit={handleSubmit}
+      user={user}
+      cancelLink={cancelLink}
+      errorMessage={errorMessage}
+      isAdmin={isAdmin}
+    />
   );
 };
 

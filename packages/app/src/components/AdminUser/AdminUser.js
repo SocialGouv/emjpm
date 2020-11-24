@@ -1,6 +1,6 @@
 import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/core";
 import React from "react";
-import { Box, Card, Flex } from "rebass";
+import { Box, Card } from "rebass";
 
 import { AccessToken } from "../AccessToken";
 import { AdminUserActivation } from "../AdminUserActivation";
@@ -9,6 +9,7 @@ import {
   AdminMandataireMesures,
   AdminMandataireTribunaux,
 } from "../AdminUserMandataire";
+import { AdminUserService } from "../AdminUserService";
 import { DirectionEditInformations } from "../DirectionEditInformations";
 import { MagistratEditInformations } from "../MagistratEditInformations";
 import { MandataireEditInformations } from "../MandataireEditInformations";
@@ -19,19 +20,33 @@ const AdminUser = (props) => {
 
   return (
     <Box>
+      <Box my={1} width="100%">
+        <AdminUserActivation userId={userId} />
+      </Box>
       {isMandataire({ type }) && (
-        <Box my={1} width="100%">
-          <Box p="5">
+        <>
+          <Box my={1} width="100%">
             <AdminMandataireTribunaux userId={userId} />
           </Box>
-
-          <MandataireEditInformations
-            userId={userId}
-            cancelLink="/admin/users"
-            isAdmin
-            mt="3"
-          />
-        </Box>
+          <Box my={1} width="100%">
+            <MandataireEditInformations
+              userId={userId}
+              cancelLink="/admin/users"
+              isAdmin
+              mt="3"
+            />
+            {active && (
+              <>
+                <Card my={1}>
+                  <AdminMandataireMesures userId={userId} />
+                </Card>
+                <Card my={1}>
+                  <MesureImportPanel mandataireUserId={userId} />
+                </Card>
+              </>
+            )}
+          </Box>
+        </>
       )}
       {isMagistrat({ type }) && (
         <Box my={1} width="100%">
@@ -56,29 +71,12 @@ const AdminUser = (props) => {
       )}
       {isService({ type }) && (
         <Box my={1} width="100%">
-          {/* <AdminUserInformations userId={userId} /> */}
+          <AdminUserService userId={userId} cancelLink="/admin/users" />
         </Box>
       )}
-      <Box my={1} width="100%">
-        <AdminUserActivation userId={userId} />
-      </Box>
 
       <Box my={1} width="100%">
         <AccessToken isAdmin userId={userId} />
-      </Box>
-      <Box px={1}>
-        <Flex flexDirection="column">
-          {active && isMandataire({ type }) && (
-            <Card my={1}>
-              <AdminMandataireMesures userId={userId} />
-            </Card>
-          )}
-          {active && isMandataire({ type }) && (
-            <Card my={1}>
-              <MesureImportPanel mandataireUserId={userId} />
-            </Card>
-          )}
-        </Flex>
       </Box>
     </Box>
   );
