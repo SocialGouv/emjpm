@@ -7,7 +7,7 @@ import { UserContext } from "../UserContext";
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 import { USER } from "./queries";
 
-export const AdminUserListeBlancheMandataireAssociation = (props) => {
+export const AdminMandataireListeBlanche = (props) => {
   const { userId, lb_user, mandataire } = props;
   const user = useContext(UserContext);
   const [updateMandataire, { loading }] = useMutation(
@@ -73,4 +73,4 @@ export const AdminUserListeBlancheMandataireAssociation = (props) => {
   );
 };
 
-export default AdminUserListeBlancheMandataireAssociation;
+export default AdminMandataireListeBlanche;

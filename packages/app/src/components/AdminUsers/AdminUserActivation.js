@@ -5,7 +5,7 @@ import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "../AppForm";
-import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
+import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
 
@@ -90,7 +90,7 @@ const AdminUserActivation = (props) => {
             <Heading4 mb={1}>{"Liste blanche"}</Heading4>
           </FormGrayBox>
           <FormInputBox>
-            <AdminUserListeBlancheMandataireAssociation
+            <AdminMandataireListeBlanche
               mandataire={mandataire}
               userId={userId}
               lb_user={lb_user}
