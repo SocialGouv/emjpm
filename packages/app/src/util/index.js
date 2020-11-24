@@ -1,5 +1,4 @@
 export * from "./browser";
-export * from "./users/UserUtils";
 export * from "./option/OptionUtil";
 
 export const formatTribunauxOptions = (tribunaux) => {

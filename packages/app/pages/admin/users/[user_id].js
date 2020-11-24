@@ -1,23 +1,26 @@
-import { isDirection } from "@emjpm/core";
+import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/core";
 import { BoxWrapper } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 import { Box, Card, Flex, Link as StyledLink } from "rebass";
 
 import { AccessToken } from "../../../src/components/AccessToken";
+import { AdminDirectionType } from "../../../src/components/AdminUsers/AdminDirectionType";
 import AdminMandataireTribunaux from "../../../src/components/AdminUsers/AdminMandataireTribunaux";
 import { AdminUserActivation } from "../../../src/components/AdminUsers/AdminUserActivation";
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
 import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
+import { DirectionEditInformations } from "../../../src/components/DirectionEditInformations/DirectionEditInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MagistratEditInformations } from "../../../src/components/MagistratEditInformations";
 import { MandataireEditInformations } from "../../../src/components/MandataireEditInformations";
 import { MesureImportPanel } from "../../../src/components/MesureImport";
-import { isMagistrat, isMandataire, isService } from "../../../src/util";
 import { withAuthSync } from "../../../src/util/auth";
 
 const User = (props) => {
   const { userId, type, active } = props;
+
+  console.log(type);
 
   return (
     <LayoutAdmin>
@@ -27,7 +30,7 @@ const User = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        {isMandataire(type) && (
+        {isMandataire({ type }) && (
           <Box my={1} width="100%">
             <Box p="5">
               <AdminMandataireTribunaux userId={userId} />
@@ -41,7 +44,7 @@ const User = (props) => {
             />
           </Box>
         )}
-        {isMagistrat(type) && (
+        {isMagistrat({ type }) && (
           <Box my={1} width="100%">
             <MagistratEditInformations
               userId={userId}
@@ -51,12 +54,18 @@ const User = (props) => {
             />
           </Box>
         )}
-        {isService(type) && (
+        {isDirection({ type }) && (
           <Box my={1} width="100%">
-            <AdminUserInformations userId={userId} />
+            <DirectionEditInformations
+              userId={userId}
+              cancelLink="/admin/users"
+              isAdmin
+              mt="3"
+            />
+            <AdminDirectionType userId={userId} />
           </Box>
         )}
-        {isDirection(type) && (
+        {isService({ type }) && (
           <Box my={1} width="100%">
             <AdminUserInformations userId={userId} />
           </Box>

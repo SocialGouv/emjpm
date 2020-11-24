@@ -1,9 +1,9 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
+import { isIndividuel, isMandataire } from "@emjpm/core";
 import { Button, Heading4, Text } from "@emjpm/ui";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
-import { isIndividuel, isMandataire } from "../../util";
 import { FormGrayBox, FormInputBox } from "../AppForm";
 import { AdminUserListeBlancheMandataireAssociation } from "./AdminUserListeBlancheMandataireAssociation";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
@@ -17,8 +17,8 @@ const AdminUserActivation = (props) => {
     onCompleted: async (data) => {
       if (data) {
         const { type, email, mandataire } = data.users_by_pk;
-        if (isMandataire(type)) {
-          if (isIndividuel(type) && mandataire.siret) {
+        if (isMandataire({ type })) {
+          if (isIndividuel({ type }) && mandataire.siret) {
             await execQuery({
               variables: {
                 where: {
