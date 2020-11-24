@@ -5,11 +5,13 @@ import React from "react";
 import { Box, Card, Flex, Link as StyledLink } from "rebass";
 
 import { AccessToken } from "../../../src/components/AccessToken";
+import {
+  AdminMandataireMesures,
+  AdminMandataireTribunaux,
+} from "../../../src/components/AdminMandataire";
+import { AdminUserActivation } from "../../../src/components/AdminUserActivation";
 import { AdminDirectionType } from "../../../src/components/AdminUsers/AdminDirectionType";
-import AdminMandataireTribunaux from "../../../src/components/AdminUsers/AdminMandataireTribunaux";
-import { AdminUserActivation } from "../../../src/components/AdminUsers/AdminUserActivation";
 import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
-import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
 import { DirectionEditInformations } from "../../../src/components/DirectionEditInformations/DirectionEditInformations";
 import { LayoutAdmin } from "../../../src/components/Layout";
 import { MagistratEditInformations } from "../../../src/components/MagistratEditInformations";
@@ -80,12 +82,12 @@ const User = (props) => {
       </BoxWrapper>
       <Box px={1}>
         <Flex flexDirection="column">
-          {active && isMandataire(type) && (
+          {active && isMandataire({ type }) && (
             <Card my={1}>
-              <AdminUsersMesures userId={userId} />
+              <AdminMandataireMesures userId={userId} />
             </Card>
           )}
-          {active && isMandataire(type) && (
+          {active && isMandataire({ type }) && (
             <Card my={1}>
               <MesureImportPanel mandataireUserId={userId} />
             </Card>

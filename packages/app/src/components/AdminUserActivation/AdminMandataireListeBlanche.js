@@ -5,16 +5,12 @@ import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "../UserContext";
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
-import { USER } from "./queries";
 
 export const AdminMandataireListeBlanche = (props) => {
-  const { userId, lb_user, mandataire } = props;
+  const { lb_user, mandataire } = props;
   const user = useContext(UserContext);
   const [updateMandataire, { loading }] = useMutation(
-    LISTE_BLANCHE_ASSOCIATION,
-    {
-      refetchQueries: [{ query: USER, variables: { userId } }],
-    }
+    LISTE_BLANCHE_ASSOCIATION
   );
 
   if (loading) {

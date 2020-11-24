@@ -4,9 +4,12 @@ import { Button, Heading4, Text } from "@emjpm/ui";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
+import {
+  ACTIVATE_USER,
+  SEND_EMAIL_ACCOUNT_VALIDATION,
+} from "../AdminUsers/mutations";
 import { FormGrayBox, FormInputBox } from "../AppForm";
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
-import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
 
 const AdminUserActivation = (props) => {
@@ -84,7 +87,7 @@ const AdminUserActivation = (props) => {
 
   return (
     <Fragment>
-      {isMandataire(type) && (
+      {isMandataire({ type }) && (
         <Flex>
           <FormGrayBox>
             <Heading4 mb={1}>{"Liste blanche"}</Heading4>
@@ -92,7 +95,6 @@ const AdminUserActivation = (props) => {
           <FormInputBox>
             <AdminMandataireListeBlanche
               mandataire={mandataire}
-              userId={userId}
               lb_user={lb_user}
             />
           </FormInputBox>
@@ -105,7 +107,7 @@ const AdminUserActivation = (props) => {
         <FormInputBox>
           <Box>
             <Button
-              disabled={isMandataire(type) && !mandataire.lb_user}
+              disabled={isMandataire({ type }) && !mandataire.lb_user}
               mr={2}
               bg={activateButtonStyle}
               onClick={toggleActivation}
@@ -115,7 +117,7 @@ const AdminUserActivation = (props) => {
             </Button>
           </Box>
 
-          {isMandataire(type) && mandataire && !mandataire.lb_user && (
+          {isMandataire({ type }) && mandataire && !mandataire.lb_user && (
             <Box ml={4} flex={1}>
               <span aria-label="information" role="img">
                 ℹ️
