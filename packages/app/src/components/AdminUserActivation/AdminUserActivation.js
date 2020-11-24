@@ -4,12 +4,9 @@ import { Button, Heading4, Text } from "@emjpm/ui";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
-import {
-  ACTIVATE_USER,
-  SEND_EMAIL_ACCOUNT_VALIDATION,
-} from "../AdminUsers/mutations";
 import { FormGrayBox, FormInputBox } from "../AppForm";
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
+import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
 
 const AdminUserActivation = (props) => {
