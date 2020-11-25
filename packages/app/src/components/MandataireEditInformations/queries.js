@@ -20,6 +20,30 @@ export const MANDATAIRE = gql`
         telephone_portable
         ville
         competences
+        lb_user {
+          id
+          lb_departements {
+            id
+            tis(where: { immutable: { _eq: true } }) {
+              id
+              etablissement
+            }
+          }
+          lb_user_etablissements {
+            id
+            etablissement {
+              id
+              tis(where: { immutable: { _eq: true } }) {
+                id
+                etablissement
+              }
+            }
+          }
+        }
+        mandataire_tis {
+          id
+          ti_id
+        }
       }
     }
   }

@@ -14,7 +14,6 @@ const { databaseName, knex } = global;
 jest.setMock("@emjpm/api/src/db/knex", knex);
 
 const server = require("@emjpm/api/src/server");
-const { getAllTisByMandataire } = require("@emjpm/api/src/db/queries/tis");
 const { seedData } = require("../../database/seed-data");
 
 beforeAll(async () => {
@@ -61,12 +60,8 @@ test("should register with good values", async () => {
   expect(response.status).toBe(200);
 
   const lastInsert = await knex("users").orderBy("created_at", "desc").first();
-  const mandataire = await knex("mandataires")
-    .orderBy("created_at", "desc")
-    .first();
-  const tis = await getAllTisByMandataire(mandataire.id);
+  await knex("mandataires").orderBy("created_at", "desc").first();
 
-  expect(tis.map((ti) => ti.id)).toEqual([22, 37]);
   expect(nodemailerMock.mock.sentMail().length).toBe(1);
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
   expect(lastInsert).toMatchSnapshot({

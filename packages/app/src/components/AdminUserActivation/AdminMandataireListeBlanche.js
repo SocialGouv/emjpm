@@ -39,6 +39,7 @@ export const AdminMandataireListeBlanche = (props) => {
                 onClick={async () => {
                   try {
                     await updateMandataire({
+                      refetchQueries: ["adminUserQuery"],
                       variables: {
                         lb_user_id: lb_user.id,
                         mandataire_id: mandataire.id,
