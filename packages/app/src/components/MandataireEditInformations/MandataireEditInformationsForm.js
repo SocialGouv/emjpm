@@ -1,11 +1,19 @@
-import { Button, Field, Heading4, InlineError, Textarea } from "@emjpm/ui";
+import {
+  Button,
+  Field,
+  Heading4,
+  InlineError,
+  Select,
+  Textarea,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
+import { findOptions } from "../../util/option/OptionUtil";
 import {
   FormGrayBox,
   FormGroupInput,
@@ -24,6 +32,22 @@ const MandataireEditInformationsForm = (props) => {
     errorMessage,
   } = props;
 
+  const { lb_user = {}, mandataire_tis = [] } = mandataire;
+  const { lb_departements = [] } = lb_user || {};
+
+  const { tiOptions } = useMemo(() => {
+    const tiOptions = [];
+    lb_departements.forEach((lbd) => {
+      lbd.tis.forEach((ti) => {
+        tiOptions.push({
+          label: ti.etablissement,
+          value: ti.id,
+        });
+      });
+    });
+    return { tiOptions };
+  }, [lb_departements]);
+
   const formik = useFormik({
     initialValues: {
       competences: mandataire.competences || "",
@@ -36,6 +60,7 @@ const MandataireEditInformationsForm = (props) => {
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
+      tis: mandataire_tis.map((mti) => mti.ti_id),
     },
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
@@ -115,6 +140,36 @@ const MandataireEditInformationsForm = (props) => {
               onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
             />
             <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4>{`Tribunaux`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <Field>
+            <Select
+              id="tis"
+              name="tis"
+              placeholder="Tribunaux dans lesquels vous exercez"
+              value={findOptions(tiOptions, formik.values.tis)}
+              hasError={formik.errors.tis && formik.touched.tis}
+              onChange={(options) => {
+                formik.setFieldValue(
+                  "tis",
+                  options.map((o) => o.value)
+                );
+              }}
+              options={tiOptions}
+              isMulti
+            />
+            {formik.touched.tis && (
+              <InlineError message={formik.errors.tis} fieldId="tis" />
+            )}
           </Field>
         </FormInputBox>
       </Flex>

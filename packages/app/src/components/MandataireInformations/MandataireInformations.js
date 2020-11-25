@@ -7,7 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import { AccessToken } from "../AccessToken";
 import { LinkButton } from "../Commons";
 import { UserContext } from "../UserContext";
-import { content, innerTextStyle, subtitle } from "./style";
+import { content, subtitle } from "./style";
 
 const label = (value) => {
   return value ? value : "";
@@ -31,6 +31,7 @@ const MandataireInformations = () => {
         {isPrepose(user) && lb_user && (
           <PreposeInformations lb_user={lb_user} />
         )}
+        <TribunauxInformations mandataireTis={mandataire_tis} />
         <Box mb={2}>
           <Heading5>Coordonnées</Heading5>
           <Box flex={1 / 2}>
@@ -78,16 +79,6 @@ const MandataireInformations = () => {
         </Box>
       </Flex>
       <Flex p={1} flexDirection="column">
-        <Heading5>Tribunaux d’instance</Heading5>
-        <Box>
-          {mandataire_tis.map((ti, index) => {
-            return (
-              <Text key={index} sx={innerTextStyle}>
-                {ti.ti.etablissement}
-              </Text>
-            );
-          })}
-        </Box>
         <AccessToken />
       </Flex>
       <Flex mt="5" justifyContent="center">
@@ -107,6 +98,31 @@ const MandataireInformations = () => {
 };
 
 export { MandataireInformations };
+
+const TribunauxInformations = ({ mandataireTis }) => {
+  return (
+    <Box mb={2}>
+      <Heading5>Tribunaux</Heading5>
+      <Flex my={1}>
+        <Text sx={subtitle}>
+          {
+            "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
+          }
+        </Text>
+        <Box flex={2 / 3}>
+          {mandataireTis?.map((mti, index) => {
+            const { ti } = mti;
+            return (
+              <Text key={index} sx={content}>
+                {ti.etablissement}
+              </Text>
+            );
+          })}
+        </Box>
+      </Flex>
+    </Box>
+  );
+};
 
 const PreposeInformations = ({ lb_user }) => {
   return (

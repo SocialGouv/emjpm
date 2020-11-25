@@ -3622,6 +3622,15 @@
   - name: departement
     using:
       foreign_key_constraint_on: departement_id
+  array_relationships:
+  - name: tis
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: tis
+        column_mapping:
+          departement_id: departement_id
   insert_permissions:
   - role: direction
     permission:
@@ -3964,6 +3973,29 @@
   - name: ti
     using:
       foreign_key_constraint_on: ti_id
+  insert_permissions:
+  - role: individuel
+    permission:
+      check:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+      columns:
+      - created_at
+      - id
+      - mandataire_id
+      - ti_id
+      backend_only: false
+  - role: prepose
+    permission:
+      check:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+      columns:
+      - created_at
+      - id
+      - mandataire_id
+      - ti_id
+      backend_only: false
   select_permissions:
   - role: individuel
     permission:
@@ -3982,6 +4014,17 @@
       - ti_id
       - mandataire_id
       - created_at
+      filter:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  delete_permissions:
+  - role: individuel
+    permission:
+      filter:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  - role: prepose
+    permission:
       filter:
         mandataire_id:
           _eq: X-Hasura-Mandataire-Id

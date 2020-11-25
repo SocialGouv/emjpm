@@ -78,6 +78,11 @@ const MandataireEditInformations = ({
           id: user.id,
           latitude: values.geocode.latitude,
           longitude: values.geocode.longitude,
+          mandataire_id: mandataire.id,
+          mandataire_tis: values.tis.map((ti) => ({
+            mandataire_id: mandataire.id,
+            ti_id: ti,
+          })),
           nom: values.nom,
           prenom: values.prenom,
           siret: values.siret,

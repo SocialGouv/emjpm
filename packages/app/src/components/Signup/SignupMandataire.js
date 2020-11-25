@@ -6,7 +6,6 @@ import {
   Heading1,
   Heading4,
   InlineError,
-  Select,
   Text,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
@@ -15,7 +14,7 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { mandataireSignupSchema } from "../../lib/validationSchemas";
+import { signupMandataireSchema } from "../../lib/validationSchemas";
 import { isSiretExists } from "../../query-service/SiretQueryService";
 import { useDepartements } from "../../util/departements/useDepartements.hook";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
@@ -25,17 +24,12 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-const SignupMandataireForm = ({ tiDatas }) => {
+const SignupMandataireForm = () => {
   const { user, mandataire, setMandataire, validateStepOne } = useContext(
     SignupContext
   );
 
   const { departements } = useDepartements();
-
-  const tiOptions = tiDatas.map((ti) => ({
-    label: ti.etablissement,
-    value: ti.id,
-  }));
 
   const client = useApolloClient();
 
@@ -46,7 +40,6 @@ const SignupMandataireForm = ({ tiDatas }) => {
       siret: mandataire ? mandataire.siret : "",
       telephone: mandataire ? mandataire.telephone : "",
       telephone_portable: mandataire ? mandataire.telephone_portable : "",
-      tis: mandataire ? mandataire.tis : "",
       user: user,
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
@@ -71,7 +64,6 @@ const SignupMandataireForm = ({ tiDatas }) => {
             telephone_portable: values.telephone_portable,
             ville: values.geocode.city,
           },
-          tis: values.tis.map((ti) => ti.value),
           user: {
             username: user.email,
             ...user,
@@ -87,7 +79,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
       }
       setSubmitting(false);
     },
-    validationSchema: mandataireSignupSchema,
+    validationSchema: signupMandataireSchema,
   });
 
   return (
@@ -98,31 +90,6 @@ const SignupMandataireForm = ({ tiDatas }) => {
 
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
-        <Flex>
-          <FormGrayBox>
-            <Heading4>{`Tribunaux`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Sélectionner l'ensemble des tribunaux sur lesquels vous êtes agréés`}
-            </Text>
-          </FormGrayBox>
-          <FormInputBox>
-            <Field>
-              <Select
-                id="tis"
-                name="tis"
-                placeholder="Tribunaux dans lesquels vous exercez"
-                value={formik.values.tis}
-                hasError={formik.errors.tis && formik.touched.tis}
-                onChange={(option) => formik.setFieldValue("tis", option)}
-                options={tiOptions}
-                isMulti
-              />
-              {formik.touched.tis && (
-                <InlineError message={formik.errors.tis} fieldId="tis" />
-              )}
-            </Field>
-          </FormInputBox>
-        </Flex>
         {isIndividuel(user) && (
           <Flex>
             <FormGrayBox>
@@ -138,7 +105,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
                 formik={formik}
                 placeholder="SIRET"
                 value={formik.values.siret}
-                validationSchema={mandataireSignupSchema}
+                validationSchema={signupMandataireSchema}
               />
             </FormInputBox>
           </Flex>
@@ -153,14 +120,14 @@ const SignupMandataireForm = ({ tiDatas }) => {
               formik={formik}
               placeholder="Téléphone"
               value={formik.values.telephone}
-              validationSchema={mandataireSignupSchema}
+              validationSchema={signupMandataireSchema}
             />
             <FormGroupInput
               id="telephone_portable"
               formik={formik}
               placeholder="Téléphone portable"
               value={formik.values.telephone_portable}
-              validationSchema={mandataireSignupSchema}
+              validationSchema={signupMandataireSchema}
             />
           </FormInputBox>
         </Flex>
@@ -196,7 +163,7 @@ const SignupMandataireForm = ({ tiDatas }) => {
               formik={formik}
               placeholder="Nombre de mesures souhaité"
               value={formik.values.dispo_max}
-              validationSchema={mandataireSignupSchema}
+              validationSchema={signupMandataireSchema}
             />
           </FormInputBox>
         </Flex>

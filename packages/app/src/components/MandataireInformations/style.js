@@ -1,9 +1,3 @@
-const innerTextStyle = {
-  color: "mediumGray",
-  fontWeight: "600",
-  mt: "1",
-};
-
 const subtitle = {
   color: "mediumGray",
   flex: 1 / 3,
@@ -20,4 +14,4 @@ const content = {
   lineHeight: "1.4",
 };
 
-export { content, subtitle, innerTextStyle };
+export { content, subtitle };

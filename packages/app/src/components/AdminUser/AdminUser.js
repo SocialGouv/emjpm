@@ -5,10 +5,7 @@ import { Box, Card } from "rebass";
 import { AccessToken } from "../AccessToken";
 import { AdminUserActivation } from "../AdminUserActivation";
 import { AdminDirectionType } from "../AdminUserDirection";
-import {
-  AdminMandataireMesures,
-  AdminMandataireTribunaux,
-} from "../AdminUserMandataire";
+import { AdminMandataireMesures } from "../AdminUserMandataire";
 import { AdminUserService } from "../AdminUserService";
 import { DirectionEditInformations } from "../DirectionEditInformations";
 import { MagistratEditInformations } from "../MagistratEditInformations";
@@ -25,9 +22,6 @@ const AdminUser = (props) => {
       </Box>
       {isMandataire({ type }) && (
         <>
-          <Box my={1} width="100%">
-            <AdminMandataireTribunaux userId={userId} />
-          </Box>
           <Box my={1} width="100%">
             <MandataireEditInformations
               userId={userId}
