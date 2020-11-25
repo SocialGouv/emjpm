@@ -3407,6 +3407,14 @@
         table:
           schema: public
           name: mesures
+  - name: tis
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: tis
+        column_mapping:
+          departement_id: departement_id
   insert_permissions:
   - role: direction
     permission:

@@ -29,6 +29,16 @@ export const MANDATAIRE = gql`
               etablissement
             }
           }
+          lb_user_etablissements {
+            id
+            etablissement {
+              id
+              tis(where: { immutable: { _eq: true } }) {
+                id
+                etablissement
+              }
+            }
+          }
         }
         mandataire_tis {
           id

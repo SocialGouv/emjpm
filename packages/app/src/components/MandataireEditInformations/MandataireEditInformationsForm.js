@@ -22,6 +22,21 @@ import {
 } from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
+const buildTiOptions = (lb_departements, lb_user_etablissements) => {
+  const tiList = [];
+  lb_user_etablissements.forEach(({ etablissement: { tis } }) => {
+    tiList.push.apply(tiList, tis);
+  });
+  lb_departements.forEach(({ tis }) => {
+    tiList.push.apply(tiList, tis);
+  });
+  const tiOptions = tiList.map((ti) => ({
+    label: ti.etablissement,
+    value: ti.id,
+  }));
+  return { tiOptions };
+};
+
 const MandataireEditInformationsForm = (props) => {
   const {
     cancelLink,
@@ -33,20 +48,11 @@ const MandataireEditInformationsForm = (props) => {
   } = props;
 
   const { lb_user = {}, mandataire_tis = [] } = mandataire;
-  const { lb_departements = [] } = lb_user || {};
+  const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
 
   const { tiOptions } = useMemo(() => {
-    const tiOptions = [];
-    lb_departements.forEach((lbd) => {
-      lbd.tis.forEach((ti) => {
-        tiOptions.push({
-          label: ti.etablissement,
-          value: ti.id,
-        });
-      });
-    });
-    return { tiOptions };
-  }, [lb_departements]);
+    return buildTiOptions(lb_departements, lb_user_etablissements);
+  }, [lb_departements, lb_user_etablissements]);
 
   const formik = useFormik({
     initialValues: {
