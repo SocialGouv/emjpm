@@ -1,15 +1,14 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import Router from "next/router";
 import React, { useState } from "react";
-import { Box } from "rebass";
 
-import { MagistratEditInformationsForm } from "./MagistratEditInformationsForm";
+import { AdminUserServiceForm } from "./AdminUserServiceForm";
 import { EDIT_USER } from "./mutations";
-import { MAGISTRAT } from "./queries";
+import { USER_SERVICE } from "./queries";
 
-const MagistratEditInformations = ({ userId, successLink, cancelLink }) => {
+const AdminUserService = ({ userId, successLink, cancelLink }) => {
   const [errorMessage, setErrorMessage] = useState(false);
-  const { data, error, loading } = useQuery(MAGISTRAT, {
+  const { data, error, loading } = useQuery(USER_SERVICE, {
     fetchPolicy: "network-only",
     variables: {
       userId: userId,
@@ -37,18 +36,15 @@ const MagistratEditInformations = ({ userId, successLink, cancelLink }) => {
     return <div>error</div>;
   }
 
-  const { users_by_pk: user, tis: tribunaux } = data;
+  const { users_by_pk: user } = data;
 
   const handleSubmit = async (values, { setSubmitting }) => {
     await editUser({
-      refetchQueries: ["CURRENT_USER_QUERY"],
       variables: {
-        cabinet: values.cabinet,
         email: values.email.toLowerCase(),
         id: userId,
         nom: values.nom,
         prenom: values.prenom,
-        tiId: values.ti,
       },
     });
 
@@ -56,16 +52,13 @@ const MagistratEditInformations = ({ userId, successLink, cancelLink }) => {
   };
 
   return (
-    <Box p="5">
-      <MagistratEditInformationsForm
-        user={user}
-        handleSubmit={handleSubmit}
-        tribunaux={tribunaux}
-        cancelLink={cancelLink}
-        errorMessage={errorMessage}
-      />
-    </Box>
+    <AdminUserServiceForm
+      user={user}
+      handleSubmit={handleSubmit}
+      cancelLink={cancelLink}
+      errorMessage={errorMessage}
+    />
   );
 };
 
-export { MagistratEditInformations };
+export { AdminUserService };

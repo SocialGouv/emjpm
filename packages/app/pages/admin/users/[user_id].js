@@ -1,13 +1,10 @@
 import { BoxWrapper } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
-import { Box, Card, Flex, Link as StyledLink } from "rebass";
+import { Link as StyledLink } from "rebass";
 
-import { AdminUserInformations } from "../../../src/components/AdminUsers/AdminUserInformations";
-import AdminUsersMesures from "../../../src/components/AdminUsers/AdminUsersMesures";
+import { AdminUser } from "../../../src/components/AdminUser";
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { MesureImportPanel } from "../../../src/components/MesureImport";
-import { isMandataire } from "../../../src/util";
 import { withAuthSync } from "../../../src/util/auth";
 
 const User = (props) => {
@@ -21,24 +18,8 @@ const User = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <Card my={1} width="100%">
-          <AdminUserInformations userId={userId} />
-        </Card>
+        <AdminUser userId={userId} active={active} type={type} />
       </BoxWrapper>
-      <Box px={1}>
-        <Flex flexDirection="column">
-          {active && isMandataire(type) && (
-            <Card my={1}>
-              <AdminUsersMesures userId={userId} />
-            </Card>
-          )}
-          {active && isMandataire(type) && (
-            <Card my={1}>
-              <MesureImportPanel mandataireUserId={userId} />
-            </Card>
-          )}
-        </Flex>
-      </Box>
     </LayoutAdmin>
   );
 };

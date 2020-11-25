@@ -1,3 +1,4 @@
+import { isIndividuel, isPrepose, isService } from "@emjpm/core";
 import { Heading1 } from "@emjpm/ui";
 import { format } from "date-fns";
 import React, { useContext } from "react";
@@ -5,7 +6,6 @@ import { Box, Button, Flex, Text } from "rebass";
 
 import { UserContext } from "../../../../src/components/UserContext";
 import { LinkButton } from "../../../components/Commons";
-import { isIndividuel, isPrepose, isService } from "../../../util";
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
 const textStyle = {
@@ -16,13 +16,13 @@ const textStyle = {
 const downloadStyle = { color: "blue", textDecoration: "underline" };
 
 const getExcelName = (type) => {
-  if (isService(type)) {
+  if (isService({ type })) {
     return "annexe_3-2019.xls";
   }
-  if (isIndividuel(type)) {
+  if (isIndividuel({ type })) {
     return "annexe_5-2019.xls";
   }
-  if (isPrepose(type)) {
+  if (isPrepose({ type })) {
     return "annexe_7-2019.xls";
   }
 };

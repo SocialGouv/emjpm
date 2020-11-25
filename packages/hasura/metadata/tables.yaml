@@ -3945,6 +3945,15 @@
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+  update_permissions:
+  - role: ti
+    permission:
+      columns:
+      - ti_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+      check: null
 - table:
     schema: public
     name: mandataire_tis

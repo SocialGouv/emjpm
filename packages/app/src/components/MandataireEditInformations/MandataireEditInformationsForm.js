@@ -15,7 +15,14 @@ import {
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
 const MandataireEditInformationsForm = (props) => {
-  const { cancelLink, mandataire, handleSubmit, user } = props;
+  const {
+    cancelLink,
+    mandataire,
+    handleSubmit,
+    user,
+    isAdmin = false,
+    errorMessage,
+  } = props;
 
   const formik = useFormik({
     initialValues: {
@@ -142,6 +149,25 @@ const MandataireEditInformationsForm = (props) => {
           </Box>
         </FormInputBox>
       </Flex>
+      {isAdmin && (
+        <Flex>
+          <FormGrayBox>
+            <Heading4 mb={1}>{"Administrateur"}</Heading4>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Information uniquement accessible par l'administrateur`}
+            </Text>
+          </FormGrayBox>
+          <FormInputBox>
+            <FormGroupInput
+              placeholder="SIRET"
+              id="siret"
+              formik={formik}
+              validationSchema={mandataireEditSchema}
+            />
+          </FormInputBox>
+        </Flex>
+      )}
+      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link href={cancelLink}>

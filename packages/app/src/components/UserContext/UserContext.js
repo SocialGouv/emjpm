@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/react-hooks";
+import { isService } from "@emjpm/core";
 import React, { createContext, Fragment } from "react";
 
-import { isService } from "../../util";
 import { setUser } from "../../util/sentry";
 import {
   ADMIN_USERS,
@@ -41,7 +41,7 @@ const UserProvider = (props) => {
 
   const user = data.users_by_pk;
   let currentService;
-  if (isService(user.type)) {
+  if (isService(user)) {
     const {
       service_members: [{ service }],
     } = user;
