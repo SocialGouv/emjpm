@@ -39,6 +39,16 @@ export const findOption = (options, value) => {
   return options.find((option) => option.value === value);
 };
 
+export const findOptions = (options, values) => {
+  if (!options || !options.length) {
+    return undefined;
+  }
+  if (!values) {
+    return undefined;
+  }
+  return options.filter((option) => values.includes(option.value));
+};
+
 export const getOptionValue = (option) => {
   return option ? option.value : null;
 };

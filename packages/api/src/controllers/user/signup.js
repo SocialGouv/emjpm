@@ -2,7 +2,6 @@ const { validationResult } = require("express-validator");
 const { User } = require("../../models/User");
 const { Mandataire } = require("../../models/Mandataire");
 const { Magistrat } = require("../../models/Magistrat");
-const { MandataireTis } = require("../../models/MandataireTis");
 const { UserRole } = require("../../models/UserRole");
 const {
   ServiceMemberInvitation,
@@ -63,20 +62,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
   return mandataire;
 };
 
-const createMandataireTis = (tis, mandataire_id) => {
-  if (!tis || tis.length === 0) {
-    return true;
-  }
-  Promise.all(
-    tis.map((ti_id) =>
-      MandataireTis.query().allowInsert("[mandataire_id, ti_id]").insert({
-        mandataire_id,
-        ti_id,
-      })
-    )
-  );
-};
-
 const createDirection = (userId, type, regionId, departementId) => {
   return Direction.query().insert({
     department_id: departementId,
@@ -128,8 +113,7 @@ const signup = async (req, res) => {
     switch (type) {
       case "individuel":
       case "prepose": {
-        const mandataire = await createMandataire(body.mandataire, user.id);
-        createMandataireTis(body.tis, mandataire.id);
+        await createMandataire(body.mandataire, user.id);
         break;
       }
       case "service": {
