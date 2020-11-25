@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const LB_USER = gql`
-  query lb_user($where: lb_users_bool_exp!) {
+  query adminUserMandataireLBUser($where: lb_users_bool_exp!) {
     lb_users(where: $where) {
       id
       email
@@ -20,7 +20,7 @@ export const LB_USER = gql`
 `;
 
 export const USER = gql`
-  query user($userId: Int!) {
+  query adminUserQuery($userId: Int!) {
     users_by_pk(id: $userId) {
       id
       nom

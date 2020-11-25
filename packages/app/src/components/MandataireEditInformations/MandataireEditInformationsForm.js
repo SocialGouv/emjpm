@@ -1,11 +1,19 @@
-import { Button, Field, Heading4, InlineError, Textarea } from "@emjpm/ui";
+import {
+  Button,
+  Field,
+  Heading4,
+  InlineError,
+  Select,
+  Textarea,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { GENDER_OPTIONS } from "../../constants/user";
 import { mandataireEditSchema } from "../../lib/validationSchemas";
+import { findOptions } from "../../util/option/OptionUtil";
 import {
   FormGrayBox,
   FormGroupInput,
@@ -13,6 +21,21 @@ import {
   FormInputBox,
 } from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
+
+const buildTiOptions = (lb_departements, lb_user_etablissements) => {
+  const tiList = [];
+  lb_user_etablissements.forEach(({ etablissement: { tis } }) => {
+    tiList.push.apply(tiList, tis);
+  });
+  lb_departements.forEach(({ tis }) => {
+    tiList.push.apply(tiList, tis);
+  });
+  const tiOptions = tiList.map((ti) => ({
+    label: ti.etablissement,
+    value: ti.id,
+  }));
+  return { tiOptions };
+};
 
 const MandataireEditInformationsForm = (props) => {
   const {
@@ -23,6 +46,13 @@ const MandataireEditInformationsForm = (props) => {
     isAdmin = false,
     errorMessage,
   } = props;
+
+  const { lb_user = {}, mandataire_tis = [] } = mandataire;
+  const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
+
+  const { tiOptions } = useMemo(() => {
+    return buildTiOptions(lb_departements, lb_user_etablissements);
+  }, [lb_departements, lb_user_etablissements]);
 
   const formik = useFormik({
     initialValues: {
@@ -36,6 +66,7 @@ const MandataireEditInformationsForm = (props) => {
       siret: mandataire.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
+      tis: mandataire_tis.map((mti) => mti.ti_id),
     },
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
@@ -115,6 +146,36 @@ const MandataireEditInformationsForm = (props) => {
               onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
             />
             <InlineError message={formik.errors.geocode} fieldId="geocode" />
+          </Field>
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading4>{`Tribunaux`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <Field>
+            <Select
+              id="tis"
+              name="tis"
+              placeholder="Tribunaux dans lesquels vous exercez"
+              value={findOptions(tiOptions, formik.values.tis)}
+              hasError={formik.errors.tis && formik.touched.tis}
+              onChange={(options) => {
+                formik.setFieldValue(
+                  "tis",
+                  options.map((o) => o.value)
+                );
+              }}
+              options={tiOptions}
+              isMulti
+            />
+            {formik.touched.tis && (
+              <InlineError message={formik.errors.tis} fieldId="tis" />
+            )}
           </Field>
         </FormInputBox>
       </Flex>

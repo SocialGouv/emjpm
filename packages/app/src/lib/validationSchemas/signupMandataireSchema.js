@@ -3,7 +3,7 @@ import { isIndividuel } from "@emjpm/core";
 import { validateGeocode } from "./fieldValidators";
 import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
-const mandataireSignupSchema = yup.object().shape({
+const signupMandataireSchema = yup.object().shape({
   dispo_max: yup.number().required(),
   geocode: yup
     .object()
@@ -19,7 +19,6 @@ const mandataireSignupSchema = yup.object().shape({
   }),
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
-  tis: yup.mixed().required(),
 });
 
-export { mandataireSignupSchema };
+export { signupMandataireSchema };

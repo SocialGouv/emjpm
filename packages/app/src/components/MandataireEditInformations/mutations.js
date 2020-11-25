@@ -15,10 +15,23 @@ export const EDIT_USER = gql`
     $nom: String!
     $email: String!
     $id: Int!
+    $mandataire_id: Int!
+    $mandataire_tis: [mandataire_tis_insert_input!]!
     $department_id: Int!
     $competences: String
     $siret: String
   ) {
+    delete_mandataire_tis(where: { mandataire_id: { _eq: $mandataire_id } }) {
+      affected_rows
+    }
+    insert_mandataire_tis(objects: $mandataire_tis) {
+      affected_rows
+      returning {
+        id
+        ti_id
+        mandataire_id
+      }
+    }
     update_mandataires(
       _set: {
         dispo_max: $dispo_max
