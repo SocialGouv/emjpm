@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const EDIT_ANTENNE = gql`
+export const EDIT_SERVICE = gql`
   mutation update_service(
     $adresse: String
     $code_postal: String

@@ -1,7 +1,7 @@
+import { isMandataire, isService } from "@emjpm/core";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { isMandataire, isService } from "../../util";
 import { MesureBadge } from "../MesureBadge";
 import { UserContext } from "../UserContext";
 import Link from "./Link";
@@ -27,7 +27,6 @@ const MandataireBadge = ({ mandataire }) => {
 export const Navigation = (props) => {
   const { links } = props;
   const user = useContext(UserContext);
-  const { type } = user;
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
@@ -38,8 +37,8 @@ export const Navigation = (props) => {
             </Link>
           </Box>
         ))}
-        {isMandataire(type) && <MandataireBadge mandataire={user.mandataire} />}
-        {isService(type) && <ServiceBadge service={user.service} />}
+        {isMandataire(user) && <MandataireBadge mandataire={user.mandataire} />}
+        {isService(user) && <ServiceBadge service={user.service} />}
       </Flex>
     </Box>
   );

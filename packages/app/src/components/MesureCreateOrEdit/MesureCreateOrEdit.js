@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext, useMemo } from "react";
@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 
 import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
-import { formatTribunauxOptions, isMandataire } from "../../util";
+import { formatTribunauxOptions } from "../../util";
 import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
@@ -30,7 +30,7 @@ export const MesureCreateOrEdit = (props) => {
 
   const userBasePath = getUserBasePath({ type });
 
-  const GET_TRIBUNAL = isMandataire(type)
+  const GET_TRIBUNAL = isMandataire({ type })
     ? MANDATAIRE_TRIBUNAL
     : SERVICE_TRIBUNAL;
 

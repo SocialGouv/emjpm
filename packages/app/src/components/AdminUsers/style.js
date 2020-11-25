@@ -1,7 +1,3 @@
-const AdminUsersStyle = {
-  bg: "blue",
-};
-
 const cardStyle = (active) => {
   return {
     borderLeft: active ? "2px solid green" : "2px solid red",
@@ -30,19 +26,4 @@ const descriptionStyle = {
   whiteSpace: "nowrap",
 };
 
-const activateButtonStyle = (active) => {
-  return active
-    ? {}
-    : {
-        borderColor: "success",
-        color: "success",
-      };
-};
-
-export {
-  AdminUsersStyle,
-  cardStyle,
-  labelStyle,
-  descriptionStyle,
-  activateButtonStyle,
-};
+export { cardStyle, labelStyle, descriptionStyle };
