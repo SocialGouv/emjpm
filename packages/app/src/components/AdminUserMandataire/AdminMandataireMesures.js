@@ -23,7 +23,7 @@ export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
-const AdminUsersMesures = (props) => {
+const AdminMandataireMesures = (props) => {
   const { userId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -234,4 +234,4 @@ function buildMesuresCounts(allMesures) {
   );
 }
 
-export default AdminUsersMesures;
+export default AdminMandataireMesures;

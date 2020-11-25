@@ -4,14 +4,14 @@ import Router from "next/router";
 import React from "react";
 
 import { captureException } from "../../util/sentry";
-import { EDIT_ANTENNE } from "./mutations";
+import { EDIT_SERVICE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditForm } from "./ServiceEditForm";
 
 const ServiceEdit = () => {
   const { data, error, loading } = useQuery(GET_SERVICES);
 
-  const [editAntenne] = useMutation(EDIT_ANTENNE, {
+  const [editService] = useMutation(EDIT_SERVICE, {
     update() {
       Router.push("/services/informations", `/services/informations`, {
         shallow: true,
@@ -31,7 +31,7 @@ const ServiceEdit = () => {
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
-      await editAntenne({
+      await editService({
         refetchQueries: ["Service", "users"],
         variables: {
           adresse: values.geocode.label,
