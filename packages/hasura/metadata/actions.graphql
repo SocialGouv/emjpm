@@ -74,6 +74,13 @@ type Mutation {
 
 
 type Query {
+  mandataire_statistics (
+    userId: Int!
+  ): MandataireStatisticsOutput
+}
+
+
+type Query {
   stat_available_mesures (
     departementId: Int
     regionId: Int
@@ -260,5 +267,14 @@ type TokenRequestOutput {
 
 type CheckEmailExistsOutput {
   exist : Boolean!
+}
+
+type MandataireStatisticsOutput {
+  natureStatistics : json!
+}
+
+type MandataireStatistic {
+  value : Int!
+  name : String!
 }
 
