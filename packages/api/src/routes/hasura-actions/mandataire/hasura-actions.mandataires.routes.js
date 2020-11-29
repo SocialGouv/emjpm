@@ -5,17 +5,20 @@ const { Service } = require("../../../models/Service");
 const { ServiceAntenne } = require("../../../models/ServiceAntenne");
 
 const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
+const { User } = require("../../../models/User");
+const { isMandataire } = require("@emjpm/core");
 
 const router = express.Router();
 
 router.post("/stats", async (req, res) => {
   const { userId } = req.body.input;
 
+  const user = await User.query().findById(userId);
+  const type = isMandataire(user) ? "mandataire" : "service";
+  const serviceOrMandataire = await user.$relatedQuery(type);
+
   const natureStats = await Mesure.query()
-    .whereIn(
-      "mandataire_id",
-      Mandataire.query().findOne({ user_id: userId }).select("id")
-    )
+    .where({ [`${type}_id`]: serviceOrMandataire.id })
     .andWhere({ status: "en_cours" })
     .groupBy("nature_mesure")
     .select("nature_mesure")

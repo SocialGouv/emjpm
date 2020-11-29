@@ -119,6 +119,7 @@ actions:
   permissions:
   - role: individuel
   - role: prepose
+  - role: service
 - name: stat_available_mesures
   definition:
     kind: ""
