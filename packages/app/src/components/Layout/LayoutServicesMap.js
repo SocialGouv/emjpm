@@ -8,11 +8,15 @@ import { Navigation } from "../Navigation";
 
 const navigationLinks = [
   {
-    title: "Vos mesures",
+    title: "Tableau de bord",
     url: "/services",
   },
   {
-    title: "La carte de vos mesures",
+    title: "Mesures",
+    url: "/services/mesures",
+  },
+  {
+    title: "Carte",
     url: "/services/map",
   },
 ];

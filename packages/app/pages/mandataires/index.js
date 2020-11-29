@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "../../src/components/Layout";
 import { MandataireBoard } from "../../src/components/MandataireBoard";
-import { MandataireStatisticMesureNature } from "../../src/components/MandataireBoardStat/MandataireStatisticMesureNature";
+import { StatisticMesureNature } from "../../src/components/StatisticMesureNature";
 import { withAuthSync } from "../../src/util/auth";
 
 const MandataireBoardView = () => {
@@ -16,7 +16,7 @@ const MandataireBoardView = () => {
             <MandataireBoard />
           </Box>
           <Box width={2 / 3}>
-            <MandataireStatisticMesureNature />
+            <StatisticMesureNature />
           </Box>
         </Flex>
       </BoxWrapper>

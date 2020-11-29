@@ -144,7 +144,7 @@ const ServiceInformations = () => {
             </Link>
           </Box>
           <Box ml={1}>
-            <LinkButton href="/services/edit">
+            <LinkButton href="/services/edit-informations">
               Modifier les informations du service
             </LinkButton>
           </Box>

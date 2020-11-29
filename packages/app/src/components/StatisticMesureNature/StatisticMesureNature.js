@@ -60,7 +60,7 @@ const COLORS = [
   "#6666FF",
 ];
 
-const MandataireStatisticMesureNature = () => {
+const StatisticMesureNature = () => {
   const user = useContext(UserContext);
   const { statistics = {} } = user;
   const { natureStatistics = [] } = statistics;
@@ -120,4 +120,4 @@ const MandataireStatisticMesureNature = () => {
   );
 };
 
-export { MandataireStatisticMesureNature };
+export { StatisticMesureNature };
