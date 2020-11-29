@@ -171,6 +171,9 @@ export const MANDATAIRE_USERS = gql`
       date_fin
       id
     }
+    statistics: mandataire_statistics(userId: $userId) {
+      natureStatistics
+    }
     users_by_pk(id: $userId) {
       email
       created_at

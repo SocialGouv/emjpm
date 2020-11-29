@@ -8,6 +8,29 @@ const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-hand
 
 const router = express.Router();
 
+router.post("/stats", async (req, res) => {
+  const { userId } = req.body.input;
+
+  const natureStats = await Mesure.query()
+    .whereIn(
+      "mandataire_id",
+      Mandataire.query().findOne({ user_id: userId }).select("id")
+    )
+    .andWhere({ status: "en_cours" })
+    .groupBy("nature_mesure")
+    .select("nature_mesure")
+    .count();
+
+  const statistics = {
+    natureStatistics: natureStats.map((stat) => ({
+      name: stat.nature_mesure,
+      value: stat.count,
+    })),
+  };
+
+  return res.json(statistics);
+});
+
 router.post(
   "/calculate-mesures",
   async (req, res, next) => {
