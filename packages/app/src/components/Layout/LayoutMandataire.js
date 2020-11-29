@@ -11,11 +11,15 @@ import isPayedByParis from "./isPayedByParis";
 
 const navigationLinks = [
   {
-    title: "Vos mesures",
+    title: "Tableau de bord",
     url: "/mandataires",
   },
   {
-    title: "La carte de vos mesures",
+    title: "Mesures",
+    url: "/mandataires/mesures",
+  },
+  {
+    title: "Carte",
     url: "/mandataires/map",
   },
 ];

@@ -53,6 +53,7 @@ const UserProvider = (props) => {
     agrements,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
     service: currentService,
+    statistics: data.statistics,
   };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
