@@ -108,6 +108,17 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+- name: mandataire_statistics
+  definition:
+    kind: ""
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/stats'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
 - name: stat_available_mesures
   definition:
     kind: ""
@@ -213,4 +224,6 @@ custom_types:
   - name: EmailServiceMemberInvitationOutput
   - name: TokenRequestOutput
   - name: CheckEmailExistsOutput
+  - name: MandataireStatisticsOutput
+  - name: MandataireStatistic
   scalars: []
