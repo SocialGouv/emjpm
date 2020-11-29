@@ -23,6 +23,9 @@ export const GET_SERVICE_USERS = gql`
       date_fin
       id
     }
+    statistics: mandataire_statistics(userId: $userId) {
+      natureStatistics
+    }
     users_by_pk(id: $userId) {
       email
       created_at
@@ -55,6 +58,13 @@ export const GET_SERVICE_USERS = gql`
           departement {
             id
             code
+          }
+          service_tis {
+            id
+            ti {
+              id
+              etablissement
+            }
           }
           service_antennes(order_by: { name: asc }) {
             name

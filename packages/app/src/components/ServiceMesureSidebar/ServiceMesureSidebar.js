@@ -8,7 +8,7 @@ const linkStyle = { color: "black", fontSize: "1", my: "3" };
 const ServiceMesureSidebar = (props) => {
   return (
     <Box {...props}>
-      <Link href="/services">
+      <Link href="/services/mesures">
         <StyledLink sx={linkStyle} display="block">
           <Flex>
             <ArrowBack size="16" />
