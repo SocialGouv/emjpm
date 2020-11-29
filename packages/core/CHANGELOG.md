@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.74.0](https://github.com/SocialGouv/emjpm/compare/v25.73.2...v25.74.0) (2020-11-29)
+
+
+### Features
+
+* **admin:** allow edit user data ([#2310](https://github.com/SocialGouv/emjpm/issues/2310)) ([821e84b](https://github.com/SocialGouv/emjpm/commit/821e84beb11b7ced51dfb0964e4a957dd158eb4c))
+
+
+
+
+
 ## [25.73.2](https://github.com/SocialGouv/emjpm/compare/v25.73.1...v25.73.2) (2020-11-23)
 
 **Note:** Version bump only for package @emjpm/core

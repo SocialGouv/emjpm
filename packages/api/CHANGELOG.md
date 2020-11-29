@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.74.0](https://github.com/SocialGouv/emjpm/compare/v25.73.2...v25.74.0) (2020-11-29)
+
+
+### Features
+
+* **mandataire:** add board page ([#2315](https://github.com/SocialGouv/emjpm/issues/2315)) ([f877bcb](https://github.com/SocialGouv/emjpm/commit/f877bcb7ae6fcdebd41374d79a865905505c80d9))
+* **mandataire:** add board page ([#2316](https://github.com/SocialGouv/emjpm/issues/2316)) ([29135bf](https://github.com/SocialGouv/emjpm/commit/29135bf58627b206fc9737f0941eec82e94b5f77))
+* **mandataire:** allow editing tis ([#2313](https://github.com/SocialGouv/emjpm/issues/2313)) ([831e299](https://github.com/SocialGouv/emjpm/commit/831e299b535dc286bc7cb15136d5789e403cfdc2))
+
+
+
+
+
 ## [25.73.2](https://github.com/SocialGouv/emjpm/compare/v25.73.1...v25.73.2) (2020-11-23)
 
 
