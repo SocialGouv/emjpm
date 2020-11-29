@@ -1,3 +1,4 @@
+import { isIndividuel, isPrepose } from "@emjpm/core";
 import { Heading4, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
@@ -6,7 +7,7 @@ import { Link } from "../Commons";
 import { UserContext } from "../UserContext";
 
 const MandataireBoard = () => {
-  const { mandataire } = useContext(UserContext);
+  const { type, mandataire } = useContext(UserContext);
   const {
     mesures_en_cours = 0,
     mesures_en_attente = 0,
@@ -47,29 +48,62 @@ const MandataireBoard = () => {
         </Card>
       </Flex>
 
-      <Flex p={1} flexDirection="column" width="300px">
-        <Box bg="cardSecondary">
-          <Box p={1}>
-            <Heading4>Vos agréments</Heading4>
+      {isIndividuel({ type }) && (
+        <Flex p={1} flexDirection="column" width="300px">
+          <Box bg="cardSecondary">
+            <Box p={1}>
+              <Heading4>Vos agréments</Heading4>
+            </Box>
           </Box>
-        </Box>
-        <Card>
-          {lbUser.lb_departements.map(
-            ({ departement, departement_financeur }) => {
-              return (
-                <Flex px={1} mb={1} key={departement.id} alignItems="center">
-                  <Text>{departement.nom} </Text>
-                  {departement_financeur && (
-                    <Text ml={1} fontSize="12px" fontWeight="bold">
-                      {"département financeur"}
-                    </Text>
-                  )}
-                </Flex>
-              );
-            }
-          )}
-        </Card>
-      </Flex>
+          <Card>
+            {lbUser.lb_departements.map(
+              ({ departement, departement_financeur }) => {
+                return (
+                  <Flex px={1} mb={1} key={departement.id} alignItems="center">
+                    <Text>{departement.nom} </Text>
+                    {departement_financeur && (
+                      <Text ml={1} fontSize="12px" fontWeight="bold">
+                        {"département financeur"}
+                      </Text>
+                    )}
+                  </Flex>
+                );
+              }
+            )}
+          </Card>
+        </Flex>
+      )}
+
+      {isPrepose({ type }) && (
+        <Flex p={1} flexDirection="column" width="300px">
+          <Box bg="cardSecondary">
+            <Box p={1}>
+              <Heading4>Vos établissements</Heading4>
+            </Box>
+          </Box>
+          <Card>
+            {lbUser.lb_user_etablissements.map(
+              ({ etablissement, etablissement_rattachement }) => {
+                return (
+                  <Flex
+                    px={1}
+                    mb={1}
+                    key={etablissement.id}
+                    alignItems="center"
+                  >
+                    <Text fontSize="10px">{etablissement.rslongue} </Text>
+                    {etablissement_rattachement && (
+                      <Text ml={1} fontSize="8px" fontWeight="bold">
+                        {"établissement de rattachement"}
+                      </Text>
+                    )}
+                  </Flex>
+                );
+              }
+            )}
+          </Card>
+        </Flex>
+      )}
 
       <Flex p={1} flexDirection="column" width="300px">
         <Box bg="cardSecondary">
