@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/core",
-  "version": "25.73.2",
+  "version": "25.74.0",
   "private": true,
   "description": "",
   "source": "src/index.js",
