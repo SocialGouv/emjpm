@@ -35,7 +35,7 @@ async function checkImportMesuresParameters(req) {
       throw new HttpError(403, "Access denied: invalid serviceId");
     }
     importContext = { serviceId };
-  } else if (role === "individuel") {
+  } else if (role === "individuel" || role === "prepose") {
     // MANDATAIRE INDIVIDUEL
     if (!mandataireUserId) {
       throw new HttpError(
