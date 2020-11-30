@@ -1,15 +1,40 @@
-import { Button, Field, Heading4, InlineError, Textarea } from "@emjpm/ui";
+import {
+  Button,
+  Field,
+  Heading4,
+  InlineError,
+  Select,
+  Textarea,
+} from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { serviceSchema } from "../../lib/validationSchemas/serviceSchema";
+import { findOptions } from "../../util/option/OptionUtil";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
 import { Geocode, geocodeInitialValue } from "../Geocode";
 
-const ServiceEditForm = (props) => {
-  const { handleSubmit, service } = props;
+const buildTiOptions = (tis) => {
+  const tiOptions = tis.map((ti) => ({
+    label: ti.etablissement,
+    value: ti.id,
+  }));
+  return { tiOptions };
+};
+
+const ServiceEditInformationsForm = (props) => {
+  const { handleSubmit, cancelLink, service, errorMessage } = props;
+
+  const {
+    departement: { tis },
+    service_tis,
+  } = service;
+
+  const { tiOptions } = useMemo(() => {
+    return buildTiOptions(tis);
+  }, [tis]);
 
   const formik = useFormik({
     initialValues: {
@@ -21,6 +46,7 @@ const ServiceEditForm = (props) => {
       nom: service.nom || "",
       prenom: service.prenom || "",
       telephone: service.telephone || "",
+      tis: service_tis.map(({ ti }) => ti.id),
     },
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,
@@ -89,6 +115,36 @@ const ServiceEditForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
+          <Heading4>{`Tribunaux`}</Heading4>
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats`}
+          </Text>
+        </FormGrayBox>
+        <FormInputBox>
+          <Field>
+            <Select
+              id="tis"
+              name="tis"
+              placeholder="Tribunaux dans lesquels vous exercez"
+              value={findOptions(tiOptions, formik.values.tis)}
+              hasError={formik.errors.tis && formik.touched.tis}
+              onChange={(options) => {
+                formik.setFieldValue(
+                  "tis",
+                  options.map((o) => o.value)
+                );
+              }}
+              options={tiOptions}
+              isMulti
+            />
+            {formik.touched.tis && (
+              <InlineError message={formik.errors.tis} fieldId="tis" />
+            )}
+          </Field>
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
           <Heading4 mb={1}>{"Activité"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Ces informations seront visibles par les magistrats.`}
@@ -118,9 +174,10 @@ const ServiceEditForm = (props) => {
           </Box>
         </FormInputBox>
       </Flex>
+      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href="/services/informations">
+          <Link href={cancelLink}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>
@@ -138,4 +195,4 @@ const ServiceEditForm = (props) => {
   );
 };
 
-export { ServiceEditForm };
+export { ServiceEditInformationsForm };

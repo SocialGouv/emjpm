@@ -258,4 +258,4 @@ function buildMesuresCounts(allMesures) {
   );
 }
 
-export default AdminServiceMesures;
+export { AdminServiceMesures };
