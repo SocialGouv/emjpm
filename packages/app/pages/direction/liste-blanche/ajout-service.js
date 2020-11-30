@@ -5,7 +5,7 @@ import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutDirection } from "../../../src/components/Layout";
-import { ServiceCreate } from "../../../src/components/Service";
+import { ListeBlancheServiceCreate } from "../../../src/components/ListeBlanche";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
@@ -22,7 +22,7 @@ const ListBlanchePage = () => {
         <Heading1 mb={4}>
           {"Ajout d'un engistrement à la liste blanche"}
         </Heading1>
-        <ServiceCreate
+        <ListeBlancheServiceCreate
           onSuccess={async () => {
             await router.push("/direction/liste-blanche");
           }}

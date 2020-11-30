@@ -2,16 +2,15 @@ import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React from "react";
-import { Box } from "rebass";
+import { Card } from "rebass";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { captureException } from "../../util/sentry";
-import serviceSiretExists from "../../util/serviceSiretExists";
+import { useDepartements } from "../../../util/departements/useDepartements.hook";
+import { captureException } from "../../../util/sentry";
+import serviceSiretExists from "../../../util/serviceSiretExists";
+import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { ADD_SERVICE } from "./mutations";
-import { ServiceForm } from "./ServiceForm";
-import { cardStyle } from "./style";
 
-export const ServiceCreate = (props) => {
+export const ListeBlancheServiceCreate = (props) => {
   const { handleCancel, onSuccess } = props;
   const client = useApolloClient();
   const { departements } = useDepartements();
@@ -64,10 +63,13 @@ export const ServiceCreate = (props) => {
   };
 
   return (
-    <Box sx={cardStyle} width="100%">
-      <ServiceForm handleSubmit={handleSubmit} handleCancel={handleCancel} />
-    </Box>
+    <Card p={5}>
+      <ListeBlancheServiceForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+      />
+    </Card>
   );
 };
 
-export default ServiceCreate;
+export default ListeBlancheServiceCreate;

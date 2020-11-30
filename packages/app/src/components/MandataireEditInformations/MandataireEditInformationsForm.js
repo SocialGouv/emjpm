@@ -164,7 +164,7 @@ const MandataireEditInformationsForm = (props) => {
               placeholder="Tribunaux dans lesquels vous exercez"
               value={findOptions(tiOptions, formik.values.tis)}
               hasError={formik.errors.tis && formik.touched.tis}
-              onChange={(options) => {
+              onChange={(options = []) => {
                 formik.setFieldValue(
                   "tis",
                   options.map((o) => o.value)

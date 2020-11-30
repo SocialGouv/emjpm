@@ -5,7 +5,7 @@ import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutAdmin } from "../../../src/components/Layout";
-import { ServiceCreate } from "../../../src/components/Service";
+import { ListeBlancheServiceCreate } from "../../../src/components/ListeBlanche";
 import { withAuthSync } from "../../../src/util/auth";
 
 const ListBlanchePage = () => {
@@ -19,7 +19,7 @@ const ListBlanchePage = () => {
           </StyledLink>
         </Link>
         <Heading1 mb={4}>{"Ajout d'un service à la liste blanche"}</Heading1>
-        <ServiceCreate
+        <ListeBlancheServiceCreate
           onSuccess={async () => {
             await router.push(`/admin/liste-blanche`);
           }}
