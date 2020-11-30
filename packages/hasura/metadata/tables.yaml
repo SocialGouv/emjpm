@@ -171,6 +171,13 @@
         table:
           schema: public
           name: services
+  - name: tis
+    using:
+      foreign_key_constraint_on:
+        column: departement_id
+        table:
+          schema: public
+          name: tis
   select_permissions:
   - role: anonymous
     permission:
@@ -5373,6 +5380,17 @@
   - name: ti
     using:
       foreign_key_constraint_on: ti_id
+  insert_permissions:
+  - role: service
+    permission:
+      check:
+        service_id:
+          _eq: X-Hasura-Service-Id
+      columns:
+      - id
+      - service_id
+      - ti_id
+      backend_only: false
   select_permissions:
   - role: direction
     permission:
@@ -5387,6 +5405,12 @@
       - id
       - service_id
       - ti_id
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  delete_permissions:
+  - role: service
+    permission:
       filter:
         service_id:
           _eq: X-Hasura-Service-Id
