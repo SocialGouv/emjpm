@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.75.0](https://github.com/SocialGouv/emjpm/compare/v25.74.0...v25.75.0) (2020-11-30)
+
+
+### Features
+
+* **service:** add board page ([2953642](https://github.com/SocialGouv/emjpm/commit/295364207517057812fc24705321cb1c8960d6aa))
+* **service:** factorize service edit information ([5bfac4d](https://github.com/SocialGouv/emjpm/commit/5bfac4d2a0d994c9c9b2be54a94f64fd00d81202))
+
+
+
+
+
 # [25.74.0](https://github.com/SocialGouv/emjpm/compare/v25.73.2...v25.74.0) (2020-11-29)
 
 
