@@ -13,6 +13,7 @@ const serviceSchema = yup.object().shape({
   nom: yup.string().required(),
   prenom: yup.string().required(),
   telephone: yup.string(),
+  tis: yup.mixed().required(),
 });
 
 export { serviceSchema };

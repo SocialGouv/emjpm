@@ -125,12 +125,3 @@ export const ADD_SERVICE = gql`
     }
   }
 `;
-
-export const CALCULATE_MESURES = gql`
-  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
-    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
-      en_cours
-      en_attente
-    }
-  }
-`;

@@ -3,32 +3,30 @@ import { findDepartementByCodeOrId } from "@emjpm/core";
 import React from "react";
 import { Card } from "rebass";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { captureException } from "../../util/sentry";
+import { useDepartements } from "../../../util/departements/useDepartements.hook";
+import { captureException } from "../../../util/sentry";
+import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { SERVICE } from "./queries";
-import { ServiceForm } from "./ServiceForm";
 
-export const ServiceEdit = (props) => {
+export const ListeBlancheServiceUpdate = (props) => {
   const { serviceId, onSuccess, handleCancel } = props;
-  const serviceQuery = useQuery(SERVICE, {
+  const { data, loading, error } = useQuery(SERVICE, {
     fetchPolicy: "network-only",
     variables: { serviceId },
   });
   const { departements } = useDepartements();
   const [updateService] = useMutation(UPDATE_SERVICE);
 
-  if (serviceQuery.loading) {
+  if (loading) {
     return <div>loading...</div>;
   }
 
-  if (serviceQuery.error) {
+  if (error) {
     return <div>error</div>;
   }
 
-  const {
-    services: [service],
-  } = serviceQuery.data;
+  const { services_by_pk: service } = data;
 
   const handleSubmit = async (values, { setSubmitting }) => {
     const departement = findDepartementByCodeOrId(departements, {
@@ -69,7 +67,7 @@ export const ServiceEdit = (props) => {
 
   return (
     <Card p={5}>
-      <ServiceForm
+      <ListeBlancheServiceForm
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
         service={service}
@@ -78,4 +76,4 @@ export const ServiceEdit = (props) => {
   );
 };
 
-export default ServiceEdit;
+export default ListeBlancheServiceUpdate;
