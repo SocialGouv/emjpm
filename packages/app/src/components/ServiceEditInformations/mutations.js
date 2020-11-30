@@ -14,7 +14,19 @@ export const EDIT_SERVICE = gql`
     $telephone: String
     $latitude: Float
     $longitude: Float
+    $service_tis: [service_tis_insert_input!]!
   ) {
+    delete_service_tis(where: { service_id: { _eq: $service_id } }) {
+      affected_rows
+    }
+    insert_service_tis(objects: $service_tis) {
+      affected_rows
+      returning {
+        id
+        ti_id
+        service_id
+      }
+    }
     update_services(
       where: { id: { _eq: $service_id } }
       _set: {
