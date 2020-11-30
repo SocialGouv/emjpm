@@ -3,16 +3,16 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { adminServiceSchema } from "../../lib/validationSchemas/adminServiceSchema";
-import { useDepartementsOptions } from "../../util/departements";
+import { adminServiceSchema } from "../../../lib/validationSchemas/adminServiceSchema";
+import { useDepartementsOptions } from "../../../util/departements";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
+} from "../../AppForm";
 
-export const ServiceForm = (props) => {
+export const ListeBlancheServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;
   const { departementsOptions } = useDepartementsOptions();
 
@@ -53,7 +53,6 @@ export const ServiceForm = (props) => {
               id="departement"
               options={departementsOptions}
               placeholder="Département du service"
-              value={formik.values.departement}
               formik={formik}
               validationSchema={adminServiceSchema}
             />
@@ -206,4 +205,4 @@ export const ServiceForm = (props) => {
   );
 };
 
-export default ServiceForm;
+export default ListeBlancheServiceForm;

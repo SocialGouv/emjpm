@@ -1,5 +1,4 @@
 import { BoxWrapper, Heading1 } from "@emjpm/ui";
-import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -21,11 +20,7 @@ const AdminServicesPage = () => {
               mt: "2",
             }}
           >
-            <AdminFilterBar
-              onAddButtonClick={() =>
-                Router.push("/admin/services/add-service")
-              }
-            />
+            <AdminFilterBar />
             <AdminServices />
           </Flex>
         </BoxWrapper>
