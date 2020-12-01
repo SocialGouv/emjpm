@@ -53,6 +53,8 @@ function formatMesure(mesure) {
     service_id,
     mandataire_id,
     pays,
+    mesure_etats = [],
+    mesure_ressources = [],
   } = mesure;
 
   const currentStatus = status;
@@ -82,6 +84,23 @@ function formatMesure(mesure) {
     longitude: longitude,
     mandataire: { mandataire_id: mandataire_id },
     mandataireId: mandataire_id,
+    mesureEtats: mesure_etats.map((etat) => ({
+      champMesure: etat.champ_mesure,
+      codePostal: etat.code_postal,
+      dateChangementEtat: etat.date_changement_etat,
+      id: etat.id,
+      lieuVie: etat.lieu_vie,
+      natureMesure: etat.nature_mesure,
+      pays: etat.pays,
+      typeEtablissement: etat.type_etablissement,
+      ville: etat.ville,
+    })),
+    mesureRessources: mesure_ressources.map((ressource) => ({
+      annee: ressource.annee,
+      id: ressource.id,
+      niveauRessource: ressource.niveau_ressource,
+      prestationsSociales: ressource.prestations_sociales,
+    })),
     natureMesure: nature_mesure ? nature_mesure : "",
     numeroDossier: numero_dossier ? numero_dossier : "",
     numeroRg: numero_rg ? numero_rg : "",
@@ -92,6 +111,6 @@ function formatMesure(mesure) {
     status: status ? currentStatus : "",
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal ",
-    ville: ville ? ville : "ville ",
+    ville: ville ? ville : "",
   };
 }
