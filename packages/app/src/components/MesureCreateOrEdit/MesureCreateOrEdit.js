@@ -153,7 +153,7 @@ export const MesureCreateOrEdit = (props) => {
   }));
 
   return (
-    <Card m="1" mt="5" p="0">
+    <Card m="1" mt="2" p="0">
       <Flex flexWrap="wrap" {...props}>
         <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
           <Box height="280px">

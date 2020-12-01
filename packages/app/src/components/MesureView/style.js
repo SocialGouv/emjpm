@@ -20,12 +20,19 @@ export const content = {
   mt: "1px",
 };
 
-export const statusBox = {
-  backgroundColor: "#2DA0FB",
+export const title = { ":first-letter": { textTransform: "capitalize" } };
+
+export const statusBox = (status) => ({
+  backgroundColor:
+    status === "en_attente"
+      ? "warning"
+      : status === "eteinte"
+      ? "gray"
+      : "primary",
   borderRadius: "2px",
   color: "#ffffff",
   display: "inline-block",
   fontWeight: "bold",
   margin: "auto",
   padding: "4px 10px",
-};
+});
