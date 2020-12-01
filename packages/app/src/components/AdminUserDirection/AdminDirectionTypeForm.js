@@ -129,5 +129,3 @@ export const AdminDirectionTypeForm = (props) => {
     </form>
   );
 };
-
-export default AdminDirectionTypeForm;
