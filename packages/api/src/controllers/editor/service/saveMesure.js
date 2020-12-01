@@ -17,12 +17,18 @@ async function saveMesures(allMesureDatas) {
       for (const mesureDatas of allMesureDatas) {
         const { datas, type, antenneId, serviceOrMandataire, ti } = mesureDatas;
 
+        const defaultCodePostal = serviceOrMandataire.code_postal;
+        const defaultVille = serviceOrMandataire.ville;
+
         const {
           lastEtat,
           departement,
           longitude,
           latitude,
-        } = await getLastEtatDatas(datas.etats);
+        } = await getLastEtatDatas(datas.etats, {
+          defaultCodePostal,
+          defaultVille,
+        });
         const mesureToCreate = buildMesure({
           antenneId,
           datas,
@@ -39,7 +45,12 @@ async function saveMesures(allMesureDatas) {
           MesureEtat,
           MesureRessources,
           mesureToCreate,
-          datas
+          datas,
+          {
+            defaultCodePostal,
+            defaultPays: "FR",
+            defaultVille,
+          }
         );
         createdMesureIds.push(createdMesure.id);
       }
@@ -57,6 +68,10 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
   const { lastEtat, departement, longitude, latitude } = await getLastEtatDatas(
     datas.etats
   );
+
+  const defaultCodePostal = serviceOrMandataire.code_postal;
+  const defaultVille = serviceOrMandataire.ville;
+
   const mesureToCreate = buildMesure({
     antenneId,
     datas,
@@ -79,7 +94,12 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
         MesureEtat,
         MesureRessources,
         mesureToCreate,
-        datas
+        datas,
+        {
+          defaultCodePostal,
+          defaultPays: "FR",
+          defaultVille,
+        }
       );
     }
   );
@@ -98,7 +118,8 @@ async function persistMesure(
   MesureEtat,
   MesureRessources,
   mesureToCreate,
-  datas
+  datas,
+  config = {}
 ) {
   const mesure = await Mesure.query().insert(mesureToCreate);
 
@@ -127,14 +148,14 @@ async function persistMesure(
     for (const etat of datas.etats) {
       const mesureEtat = await MesureEtat.query().insert({
         champ_mesure: etat.champ_mesure,
-        code_postal: etat.code_postal,
+        code_postal: etat.code_postal || config.defaultCodePostal,
         date_changement_etat: etat.date_changement_etat,
         lieu_vie: etat.lieu_vie,
         mesure_id: mesure.id,
         nature_mesure: etat.nature_mesure,
-        pays: etat.pays,
+        pays: etat.pays || config.defaultPays,
         type_etablissement: etat.type_etablissement,
-        ville: etat.ville,
+        ville: etat.ville || config.defaultVille,
       });
       mesure.etats.push(mesureEtat);
     }

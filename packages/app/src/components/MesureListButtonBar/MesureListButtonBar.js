@@ -7,10 +7,8 @@ import { UserContext } from "~/components/UserContext";
 import { getUserBasePath } from "~/constants";
 
 const MesureListButtonBar = () => {
-  const {
-    type,
-    mandataire: { lb_user = {} },
-  } = useContext(UserContext);
+  const { type, mandataire = {} } = useContext(UserContext);
+  const { lb_user = {} } = mandataire;
   const { ocmi_mandataire } = lb_user;
 
   const path = getUserBasePath({ type });
