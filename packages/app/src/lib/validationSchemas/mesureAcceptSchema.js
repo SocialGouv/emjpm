@@ -1,5 +1,6 @@
-import yup from "./yup";
 import { isTypeEtablissementRequired } from "@emjpm/core";
+
+import yup from "./yup";
 
 const mesureAcceptSchema = yup.object().shape({
   antenne: yup.string().nullable(),
@@ -9,6 +10,7 @@ const mesureAcceptSchema = yup.object().shape({
   }),
   date_nomination: yup.date().required(),
   lieu_vie: yup.string().required(),
+  pays: yup.string().required(),
   type_etablissement: yup
     .string()
     .nullable()
@@ -16,7 +18,6 @@ const mesureAcceptSchema = yup.object().shape({
       is: (lieu_vie) => isTypeEtablissementRequired(lieu_vie),
       then: yup.string().nullable().required(),
     }),
-  pays: yup.string().required(),
   ville: yup.string().when("pays", {
     is: (pays) => pays === "FR",
     then: yup.string().required(),

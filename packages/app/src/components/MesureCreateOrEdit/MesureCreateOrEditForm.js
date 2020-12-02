@@ -63,8 +63,7 @@ export const MesureCreateOrEditForm = (props) => {
           hasError={formik.errors.tribunal && formik.touched.tribunal}
           onChange={(option) => formik.setFieldValue("tribunal", option)}
           defaultOptions={tribunaux}
-          placeholder=""
-          tot
+          placeholder="Tribunal"
         />
         {formik.touched.tribunal && (
           <InlineError message={formik.errors.tribunal} fieldId="tribunal" />

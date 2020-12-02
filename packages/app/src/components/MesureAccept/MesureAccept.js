@@ -111,11 +111,11 @@ export const MesureAccept = (props) => {
       variables: {
         ...variables,
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
-        date_nomination: values.date_nomination,
-        nature_mesure: mesure.natureMesure,
         champ_mesure: mesure.champMesure,
+        date_nomination: values.date_nomination,
         id,
         lieu_vie: values.lieu_vie,
+        nature_mesure: mesure.natureMesure,
         pays: values.pays,
       },
     });

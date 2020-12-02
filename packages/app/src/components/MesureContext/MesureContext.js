@@ -70,13 +70,13 @@ function formatMesure(mesure) {
     champMesure: champ_mesure ? champ_mesure : "",
     civilite: civilite ? civilite : null,
     codePostal: code_postal ? code_postal : "",
-    dateProtectionEnCours: date_protection_en_cours,
-    dateProtectionEnCoursFormatted: date_protection_en_cours
-      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
-      : "",
     dateNomination: date_nomination ? date_nomination : "",
     dateNominationFormated: date_nomination
       ? format(new Date(date_nomination), "dd/MM/yyyy")
+      : "",
+    dateProtectionEnCours: date_protection_en_cours,
+    dateProtectionEnCoursFormatted: date_protection_en_cours
+      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
       : "",
     departementId: departement ? departement.id : null,
     id: id,
