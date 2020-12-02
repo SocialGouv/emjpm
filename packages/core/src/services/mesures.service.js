@@ -18,3 +18,7 @@ export function isEnCours({ status }) {
 export function isEteinte({ status }) {
   return status === MESURE_PROTECTION_STATUS.eteinte;
 }
+
+export function isTypeEtablissementRequired(lieuVie) {
+  return ["etablissement"].includes(lieuVie);
+}

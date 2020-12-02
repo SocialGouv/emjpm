@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading3, Heading5, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
@@ -14,7 +14,7 @@ export const MesureAcceptForm = (props) => {
   const formik = useFormik({
     initialValues: {
       code_postal: mesure.code_postal,
-      date_nomination: "",
+      date_nomination: mesure.judgmentDate || "",
       lieu_vie: "",
       pays: "FR",
       ville: mesure.ville,
@@ -22,8 +22,6 @@ export const MesureAcceptForm = (props) => {
     onSubmit: handleSubmit,
     validationSchema: mesureAcceptSchema,
   });
-
-  console.log(formik.errors);
 
   return (
     <Flex flexWrap="wrap">
@@ -43,7 +41,7 @@ export const MesureAcceptForm = (props) => {
 
         <form onSubmit={formik.handleSubmit}>
           <FormGroupInput
-            placeholder="Date de jugement ou ordonnance de nomination"
+            placeholder="Date de nomination"
             type="date"
             id="date_nomination"
             formik={formik}
@@ -67,7 +65,21 @@ export const MesureAcceptForm = (props) => {
             placeholder="Lieu de vie du majeur"
             formik={formik}
             validationSchema={mesureAcceptSchema}
+            onChange={(option) => {
+              formik.setFieldValue("lieu_vie", option.value);
+              formik.setFieldValue("type_etablissement", null);
+            }}
           />
+
+          {isTypeEtablissementRequired(formik.values.lieu_vie) && (
+            <FormGroupSelect
+              id="type_etablissement"
+              options={MESURE_PROTECTION.TYPE_ETABLISSEMENT.options}
+              placeholder="Type d'établissement"
+              formik={formik}
+              validationSchema={mesureAcceptSchema}
+            />
+          )}
 
           <FormGroupSelect
             id="pays"

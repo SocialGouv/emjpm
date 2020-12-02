@@ -4480,6 +4480,21 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
+  - role: ti
+    permission:
+      columns:
+      - id
+      - mesure_id
+      - date_changement_etat
+      - nature_mesure
+      - champ_mesure
+      - lieu_vie
+      - code_postal
+      - ville
+      - pays
+      - type_etablissement
+      filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: individuel
     permission:
@@ -4639,6 +4654,15 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
+  - role: ti
+    permission:
+      columns:
+      - id
+      - annee
+      - niveau_ressource
+      - prestations_sociales
+      - mesure_id
+      filter: {}
   update_permissions:
   - role: individuel
     permission:

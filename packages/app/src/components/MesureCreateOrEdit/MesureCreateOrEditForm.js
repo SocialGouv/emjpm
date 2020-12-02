@@ -97,7 +97,7 @@ export const MesureCreateOrEditForm = (props) => {
       )}
 
       <FormGroupInput
-        placeholder="Date de jugement ou ordonnance de nomination"
+        placeholder="Date de nomination"
         type="date"
         id="date_nomination"
         formik={formik}

@@ -5,7 +5,10 @@ export const ACCEPT_MESURE = gql`
     $id: Int!
     $department_id: Int
     $date_nomination: date!
+    $nature_mesure: nature_mesure_enum!
+    $champ_mesure: champ_mesure_enum!
     $lieu_vie: lieu_vie_majeur_enum!
+    $type_etablissement: type_etablissement_enum
     $code_postal: String
     $ville: String
     $antenne_id: Int
@@ -13,6 +16,23 @@ export const ACCEPT_MESURE = gql`
     $longitude: Float
     $pays: String!
   ) {
+    insert_mesure_etat(
+      objects: {
+        mesure_id: $id
+        date_changement_etat: $date_nomination
+        nature_mesure: $nature_mesure
+        champ_mesure: $champ_mesure
+        lieu_vie: $lieu_vie
+        type_etablissement: $type_etablissement
+        code_postal: $code_postal
+        ville: $ville
+        pays: $pays
+      }
+    ) {
+      returning {
+        id
+      }
+    }
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {

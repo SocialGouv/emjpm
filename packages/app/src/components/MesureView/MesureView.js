@@ -15,6 +15,7 @@ export const MesureView = (props) => {
     cabinet,
     civilite,
     dateNominationFormated,
+    dateProtectionEnCoursFormated,
     numeroDossier,
     numeroRg,
     lieuVie,
@@ -95,8 +96,15 @@ export const MesureView = (props) => {
 
               {dateNominationFormated && (
                 <Box mb={2}>
-                  <Text sx={subtitle}>Decision du</Text>
+                  <Text sx={subtitle}>Date de nomination</Text>
                   <Text sx={content}>{dateNominationFormated}</Text>
+                </Box>
+              )}
+
+              {dateProtectionEnCoursFormated && (
+                <Box mb={2}>
+                  <Text sx={subtitle}>Date de protection en cours</Text>
+                  <Text sx={content}>{dateProtectionEnCoursFormated}</Text>
                 </Box>
               )}
 
@@ -118,13 +126,13 @@ export const MesureView = (props) => {
         </Box>
         {mesureEtats.length > 0 && (
           <Box px="3" pt="1">
-            <Heading3>{`Changement d'états`}</Heading3>
+            <Heading3>{`Etats de la mesure`}</Heading3>
             <Flex flexDirection="column" my={1}>
               {mesureEtats.map((etat) => (
                 <Flex key={etat.id} justifyContent="flex-start" mb={1}>
                   <Box width="150px">
                     <Text sx={subtitle}>{`Changement d'état`}</Text>
-                    <Text sx={content}>{etat.dateChangementEtat}</Text>
+                    <Text sx={content}>{etat.dateChangementEtatFormatted}</Text>
                   </Box>
                   <Box width="200px">
                     <Text sx={subtitle}>Mesure</Text>

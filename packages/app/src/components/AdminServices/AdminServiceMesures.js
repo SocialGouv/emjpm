@@ -216,7 +216,7 @@ function buildTableColumns() {
       accessor: "annee_naissance",
     },
     {
-      Header: "Date de jugement ou ordonnance de nomination",
+      Header: "Date de nomination",
       accessor: (data) => format(new Date(data.date_nomination), "dd/MM/yyy"),
     },
     {

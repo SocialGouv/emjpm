@@ -112,6 +112,8 @@ export const MesureAccept = (props) => {
         ...variables,
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
         date_nomination: values.date_nomination,
+        nature_mesure: mesure.natureMesure,
+        champ_mesure: mesure.champMesure,
         id,
         lieu_vie: values.lieu_vie,
         pays: values.pays,
