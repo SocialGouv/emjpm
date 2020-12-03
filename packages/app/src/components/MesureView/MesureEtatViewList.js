@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { MesureEtatCreateOrEdit } from "../MesureEtatCreateOrEdit";
+
 const { Heading3, Button } = require("@emjpm/ui");
 const { Flex, Box } = require("rebass");
 const { MesureEtatView } = require("./MesureEtatView");
@@ -28,6 +30,14 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
             Ajouter un changement
           </Button>
         </Flex>
+      )}
+      {creationMode && (
+        <MesureEtatCreateOrEdit
+          mesure={mesure}
+          onSuccess={() => {
+            setCreationMode(false);
+          }}
+        />
       )}
     </Box>
   );

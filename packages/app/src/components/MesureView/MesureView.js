@@ -1,3 +1,4 @@
+import { isEnCours } from "@emjpm/core";
 import { Card, Heading3 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -14,7 +15,10 @@ export const MesureView = (props) => {
   return (
     <Card p={4} {...props}>
       <MesureDetailView mesure={mesure} px="3" pt="1" />
-      <MesureEtatViewList mesure={mesure} px="3" pt="1" />
+
+      {isEnCours(mesure) && (
+        <MesureEtatViewList mesure={mesure} px="3" pt="1" />
+      )}
 
       {mesureRessources.length > 0 && (
         <Box px="3" pt="1">
