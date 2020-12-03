@@ -1,8 +1,7 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
-import { Card, Heading4, Text } from "@emjpm/ui";
 import React from "react";
-import { Box, Flex } from "rebass";
+import { Box } from "rebass";
 
 import { getLocation } from "../../query-service/LocationQueryService";
 import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
@@ -14,7 +13,7 @@ export const MesureEtatCreateOrEdit = ({
   mesure,
   mesureEtat,
   onSuccess,
-  ...props
+  onCancel,
 }) => {
   const editMode = mesureEtat && mesureEtat.id ? true : false;
   if (!editMode) {
@@ -100,34 +99,17 @@ export const MesureEtatCreateOrEdit = ({
     setSubmitting(false);
   };
 
-  const handleCancel = async () => {};
+  const handleCancel = async () => {
+    onCancel();
+  };
 
   return (
-    <Card m="1" mt="2" p="0">
-      <Flex flexWrap="wrap" {...props}>
-        <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-          <Box height="280px">
-            <Heading4>{`Informations générales`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives à votre mesure`}
-            </Text>
-          </Box>
-          <Box height="280px">
-            <Heading4>{`Caractéristique de la mesure`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              Ces informations nous permettent de vous présenter les mesures de
-              mandataires les plus adaptés.
-            </Text>
-          </Box>
-        </Box>
-        <Box p="5" width={[1, 3 / 5]}>
-          <MesureEtatCreateOrEditForm
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel}
-            mesureEtatToEdit={mesureEtat}
-          />
-        </Box>
-      </Flex>
-    </Card>
+    <Box px="2" mx="7" py="2" bg="cardSecondary">
+      <MesureEtatCreateOrEditForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+        mesureEtatToEdit={mesureEtat}
+      />
+    </Box>
   );
 };

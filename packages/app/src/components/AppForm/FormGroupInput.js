@@ -21,6 +21,7 @@ export const FormGroupInput = ({
   hideErrors,
   validationSchema,
   onChange,
+  size,
 }) => {
   const { handleChange, handleBlur, values } = formik;
 
@@ -56,6 +57,7 @@ export const FormGroupInput = ({
           type={type}
           min={min}
           max={max}
+          size={size ? size : ""}
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>
