@@ -13,12 +13,12 @@ export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
     $department_id: Int
-    $nature_mesure: nature_mesure_type!
-    $champ_mesure: champ_mesure_type
-    $lieu_vie: lieu_vie_type!
+    $nature_mesure: nature_mesure_enum!
+    $champ_mesure: champ_mesure_enum
+    $lieu_vie: lieu_vie_majeur_enum!
     $code_postal: String
     $ville: String
-    $civilite: civilite_type!
+    $civilite: civilite_enum!
     $annee_naissance: String!
     $numero_dossier: String!
     $numero_rg: String!
@@ -43,7 +43,7 @@ export const ADD_MESURE = gql`
         annee_naissance: $annee_naissance
         numero_dossier: $numero_dossier
         numero_rg: $numero_rg
-        status: "en_cours"
+        status: en_cours
         antenne_id: $antenne_id
         latitude: $latitude
         longitude: $longitude
@@ -64,12 +64,12 @@ export const EDIT_MESURE = gql`
     $department_id: Int
     $antenne_id: Int
     $date_nomination: date
-    $nature_mesure: nature_mesure_type!
-    $champ_mesure: champ_mesure_type
-    $lieu_vie: lieu_vie_type
+    $nature_mesure: nature_mesure_enum!
+    $champ_mesure: champ_mesure_enum
+    $lieu_vie: lieu_vie_majeur_enum
     $code_postal: String
     $ville: String
-    $civilite: civilite_type
+    $civilite: civilite_enum
     $annee_naissance: String
     $numero_dossier: String
     $numero_rg: String
