@@ -34,33 +34,17 @@ export const MesureEtatCreateOrEdit = ({
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const variables = {
+      id: mesureEtat?.id,
       mesure_id: mesure.id,
+      champ_mesure: values?.champ_mesure || null,
+      date_changement_etat: values.date_changement_etat,
+      lieu_vie: values.lieu_vie,
+      nature_mesure: values.nature_mesure,
+      pays: values.pays,
+      type_etablissement: values?.type_etablissement || null,
+      code_postal: values.code_postal,
+      ville: values.ville.toUpperCase(),
     };
-
-    if (values.pays === "FR") {
-      const location = await getLocation(client, {
-        city: values.ville,
-        zipcode: values.code_postal,
-      });
-
-      if (!location || !location.department) {
-        setErrors({
-          zipcode: `Le code postal semble invalide.`,
-        });
-        return setSubmitting(false);
-      } else {
-        const { department, geolocation } = location;
-        variables.code_postal = values.code_postal;
-        variables.ville = values.ville.toUpperCase();
-        variables.latitude = geolocation ? geolocation.latitude : null;
-        variables.longitude = geolocation ? geolocation.longitude : null;
-        variables.department_id = department.id;
-      }
-    }
-
-    if (editMode) {
-      variables.id = mesureEtat.id;
-    }
 
     addOrUpdateMesureEtat({
       awaitRefetchQueries: true,
@@ -83,17 +67,7 @@ export const MesureEtatCreateOrEdit = ({
           },
         },
       ],
-      variables: {
-        ...variables,
-        champ_mesure: values.champ_mesure ? values.champ_mesure : null,
-        date_changement_etat: values.date_changement_etat,
-        lieu_vie: values.lieu_vie,
-        nature_mesure: values.nature_mesure,
-        pays: values.pays,
-        type_etablissement: values.type_etablissement
-          ? values.type_etablissement
-          : null,
-      },
+      variables,
     });
 
     setSubmitting(false);
