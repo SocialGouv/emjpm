@@ -48,6 +48,26 @@ const MandataireBoard = () => {
         </Card>
       </Flex>
 
+      <Flex p={1} flexDirection="column" width="300px">
+        <Box bg="cardSecondary">
+          <Box p={1}>
+            <Heading4>Vos tribunaux</Heading4>
+          </Box>
+        </Box>
+        <Card>
+          {mandataireTis.map(({ ti }) => {
+            return (
+              <Text px={1} mb={1} key={ti.id}>
+                {ti.etablissement}
+              </Text>
+            );
+          })}
+          <Flex justifyContent="flex-end">
+            <Link href="/mandataires/edit-informations">{`modifier`}</Link>
+          </Flex>
+        </Card>
+      </Flex>
+
       {isIndividuel({ type }) && (
         <Flex p={1} flexDirection="column" width="300px">
           <Box bg="cardSecondary">
@@ -104,26 +124,6 @@ const MandataireBoard = () => {
           </Card>
         </Flex>
       )}
-
-      <Flex p={1} flexDirection="column" width="300px">
-        <Box bg="cardSecondary">
-          <Box p={1}>
-            <Heading4>Vos tribunaux</Heading4>
-          </Box>
-        </Box>
-        <Card>
-          {mandataireTis.map(({ ti }) => {
-            return (
-              <Text px={1} mb={1} key={ti.id}>
-                {ti.etablissement}
-              </Text>
-            );
-          })}
-          <Flex justifyContent="flex-end">
-            <Link href="/mandataires/edit-informations">{`modifier`}</Link>
-          </Flex>
-        </Card>
-      </Flex>
     </Box>
   );
 };

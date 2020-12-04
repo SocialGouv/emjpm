@@ -5,7 +5,7 @@ const mandataireEditSchema = yup.object().shape({
   competences: yup.string(),
   dispo_max: yup.number().required(),
   email: yup.string().email().required(),
-  genre: yup.string().required(),
+  genre: yup.string().nullable().required(),
   geocode: yup
     .object()
     .required()

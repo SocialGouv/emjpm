@@ -7,6 +7,7 @@ import {
   Textarea,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
+import { uniq } from "lodash";
 import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -30,7 +31,8 @@ const buildTiOptions = (lb_departements, lb_user_etablissements) => {
   lb_departements.forEach(({ tis }) => {
     tiList.push.apply(tiList, tis);
   });
-  const tiOptions = tiList.map((ti) => ({
+  const tis = uniq(tiList);
+  const tiOptions = tis.map((ti) => ({
     label: ti.etablissement,
     value: ti.id,
   }));
