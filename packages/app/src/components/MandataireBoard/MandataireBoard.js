@@ -13,7 +13,7 @@ const MandataireBoard = () => {
     mesures_en_attente = 0,
     dispo_max = 0,
     mandataire_tis: mandataireTis,
-    lb_user: lbUser = {},
+    lb_user: lbUser,
   } = mandataire;
   return (
     <Box>
@@ -76,7 +76,7 @@ const MandataireBoard = () => {
             </Box>
           </Box>
           <Card>
-            {lbUser.lb_departements.map(
+            {lbUser?.lb_departements?.map(
               ({ departement, departement_financeur }) => {
                 return (
                   <Flex px={1} mb={1} key={departement.id} alignItems="center">
@@ -102,7 +102,7 @@ const MandataireBoard = () => {
             </Box>
           </Box>
           <Card>
-            {lbUser.lb_user_etablissements.map(
+            {lbUser?.lb_user_etablissements?.map(
               ({ etablissement, etablissement_rattachement }) => {
                 return (
                   <Flex
