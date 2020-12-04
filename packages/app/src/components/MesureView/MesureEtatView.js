@@ -17,7 +17,7 @@ const MesureEtatView = ({ etat, ...props }) => {
         <Text sx={subtitle}>{`Changement d'état`}</Text>
         <Text sx={content}>{etat.dateChangementEtatFormatted}</Text>
       </Box>
-      <Box width="200px">
+      <Box width="250px">
         <Text sx={subtitle}>Mesure</Text>
         <Box sx={content}>
           <Text>{formatNatureMesure(etat.natureMesure)}</Text>

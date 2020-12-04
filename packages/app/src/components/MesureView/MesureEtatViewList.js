@@ -24,14 +24,16 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
       <Heading3>{`Evolution de la protection`}</Heading3>
       <Flex flexDirection="column" my={1}>
         {mesureEtats.map((etat) => (
-          <Box
-            key={etat.id}
-            onClick={() => {
-              setSelectedMesureEtat(etat);
-              setCreationMode(false);
-            }}
-          >
+          <Box key={etat.id}>
             <MesureEtatView
+              onClick={() => {
+                if (isSelectedMesureEtat(etat)) {
+                  setSelectedMesureEtat(null);
+                } else {
+                  setSelectedMesureEtat(etat);
+                }
+                setCreationMode(false);
+              }}
               etat={etat}
               p={1}
               sx={{
