@@ -69,6 +69,18 @@
       foreign_key_constraint_on: editor_id
 - table:
     schema: public
+    name: cause_sortie_mesure
+  is_enum: true
+- table:
+    schema: public
+    name: champ_mesure
+  is_enum: true
+- table:
+    schema: public
+    name: civilite
+  is_enum: true
+- table:
+    schema: public
     name: commentaires
   object_relationships:
   - name: mandataire
@@ -3951,6 +3963,10 @@
       check: null
 - table:
     schema: public
+    name: lieu_vie_majeur
+  is_enum: true
+- table:
+    schema: public
     name: magistrat
   object_relationships:
   - name: ti
@@ -4687,6 +4703,9 @@
             _eq: X-Hasura-Service-Id
 - table:
     schema: public
+    name: mesure_status
+- table:
+    schema: public
     name: mesures
   object_relationships:
   - name: departement
@@ -5193,6 +5212,10 @@
               _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: nature_mesure
+  is_enum: true
+- table:
+    schema: public
     name: ocmi_mandataires
 - table:
     schema: public
@@ -5245,6 +5268,10 @@
       - id
       - nom
       filter: {}
+- table:
+    schema: public
+    name: resultat_revision_mesure
+  is_enum: true
 - table:
     schema: public
     name: role
@@ -6213,6 +6240,10 @@
       - ville
       - etablissement
       filter: {}
+- table:
+    schema: public
+    name: type_etablissement
+  is_enum: true
 - table:
     schema: public
     name: user_role

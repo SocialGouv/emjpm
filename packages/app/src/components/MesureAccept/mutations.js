@@ -5,7 +5,7 @@ export const ACCEPT_MESURE = gql`
     $id: Int!
     $department_id: Int
     $date_nomination: date!
-    $lieu_vie: lieu_vie_type!
+    $lieu_vie: lieu_vie_majeur_enum!
     $code_postal: String
     $ville: String
     $antenne_id: Int
@@ -18,7 +18,7 @@ export const ACCEPT_MESURE = gql`
       _set: {
         antenne_id: $antenne_id
         department_id: $department_id
-        status: "en_cours"
+        status: en_cours
         date_nomination: $date_nomination
         lieu_vie: $lieu_vie
         code_postal: $code_postal

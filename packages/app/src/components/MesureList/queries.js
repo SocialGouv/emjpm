@@ -3,8 +3,8 @@ import gql from "graphql-tag";
 export const MESURES_QUERY = gql`
   query MESURES_QUERY(
     $limit: Int
-    $natureMesure: nature_mesure_type
-    $status: mesure_status_type!
+    $natureMesure: nature_mesure_enum
+    $status: mesure_status_enum!
     $searchText: String
     $offset: Int
     $antenne: Int
@@ -24,7 +24,7 @@ export const MESURES_QUERY = gql`
         count
       }
     }
-    awaiting_mesures: mesures(where: { status: { _eq: "en_attente" } }) {
+    awaiting_mesures: mesures(where: { status: { _eq: en_attente } }) {
       annee_naissance
       antenne_id
       cabinet
