@@ -30,7 +30,7 @@ module.exports = async function (req, res, next) {
 
     Promise.all(emails);
   } catch (error) {
-    return next(err);
+    return next(error);
   }
 
   res.json({ success: true });
