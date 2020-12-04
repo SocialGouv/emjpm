@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.76.0](https://github.com/SocialGouv/emjpm/compare/v25.75.1...v25.76.0) (2020-12-04)
+
+
+### Bug Fixes
+
+* **mandataire:** test lb user is defined ([4148905](https://github.com/SocialGouv/emjpm/commit/4148905467700a2ba7e3b1ded0bfb6c07ea875c7))
+* **prepose:** edit prepose information ([43f2e7b](https://github.com/SocialGouv/emjpm/commit/43f2e7bcf7a79db3805e50b391660c0ec510b639))
+
+
+### Features
+
+* **mesure-view:** display etats and ressources ([#2317](https://github.com/SocialGouv/emjpm/issues/2317)) ([2ee84c8](https://github.com/SocialGouv/emjpm/commit/2ee84c8f9d660e9396f626ddb85b4cc67a1a3e2c))
+
+
+
+
+
 ## [25.75.1](https://github.com/SocialGouv/emjpm/compare/v25.75.0...v25.75.1) (2020-12-01)
 
 
