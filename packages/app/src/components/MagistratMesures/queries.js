@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const MAGISTRAT_MESURES_QUERY = gql`
   query MAGISTRAT_MESURE_QUERY(
     $tiId: Int!
-    $natureMesure: nature_mesure_type
+    $natureMesure: nature_mesure_enum
     $searchText: String
     $offset: Int
   ) {

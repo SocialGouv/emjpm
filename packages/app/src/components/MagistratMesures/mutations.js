@@ -3,9 +3,9 @@ import gql from "graphql-tag";
 export const EDIT_MESURE = gql`
   mutation editMesure(
     $id: Int!
-    $nature_mesure: nature_mesure_type
-    $champ_mesure: champ_mesure_type
-    $civilite: civilite_type
+    $nature_mesure: nature_mesure_enum
+    $champ_mesure: champ_mesure_enum
+    $civilite: civilite_enum
     $annee_naissance: String
     $numero_rg: String
     $cabinet: String

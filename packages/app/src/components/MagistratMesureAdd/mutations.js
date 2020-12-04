@@ -6,9 +6,9 @@ export const CHOOSE_MANDATAIRE = gql`
     $mandataire_id: Int
     $service_id: Int
     $magistrat_id: Int!
-    $nature_mesure: nature_mesure_type!
-    $champ_mesure: champ_mesure_type
-    $civilite: civilite_type!
+    $nature_mesure: nature_mesure_enum!
+    $champ_mesure: champ_mesure_enum
+    $civilite: civilite_enum!
     $annee_naissance: String!
     $cabinet: String
     $urgent: Boolean!
