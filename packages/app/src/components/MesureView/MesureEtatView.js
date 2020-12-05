@@ -12,7 +12,7 @@ const MesureEtatView = ({ etat, ...props }) => {
     formatPays,
   } = mesureFormatter;
   return (
-    <Flex justifyContent="flex-start" {...props}>
+    <Flex justifyContent="flex-start" {...props} my={1}>
       <Box width="150px">
         <Text sx={subtitle}>{`Changement d'état`}</Text>
         <Text sx={content}>{etat.dateChangementEtatFormatted}</Text>
@@ -35,7 +35,7 @@ const MesureEtatView = ({ etat, ...props }) => {
           {etat.codePostal} {etat.ville} ({formatPays(etat.pays)})
         </Text>
       </Box>
-      <Box>
+      <Box width="250px">
         <Text sx={subtitle}>Etablissement</Text>
         <Text sx={content}>
           {mesureFormatter.formatTypeEtablissement(etat.typeEtablissement)}

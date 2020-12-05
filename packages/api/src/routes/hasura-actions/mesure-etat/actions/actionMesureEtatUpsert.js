@@ -1,50 +1,46 @@
 const { MesureEtat } = require("../../../../models/MesureEtat");
 
+const updateCurrentDataOfMesure = require("./updateCurrentDataOfMesure");
+
 module.exports = async (req, res) => {
   const {
-    // id,
-    mesure_id,
     champ_mesure,
+    code_postal,
     date_changement_etat,
+    id,
     lieu_vie,
+    mesure_id: mesureId,
     nature_mesure,
     pays,
     type_etablissement,
-    code_postal,
     ville,
-  } = req.body;
+  } = req.body.input;
 
-  const etat = MesureEtat.query().insertAndFetch({
+  let mesureEtatId = id;
+
+  const datas = {
     champ_mesure,
     code_postal,
     date_changement_etat,
     lieu_vie,
-    mesure_id,
+    mesure_id: mesureId,
     nature_mesure,
     pays,
     type_etablissement,
     ville,
+  };
+
+  if (!id) {
+    const { id: etatId } = await MesureEtat.query().insertAndFetch(datas);
+    mesureEtatId = etatId;
+  } else {
+    await MesureEtat.query().update(datas).where({ id: mesureEtatId });
+  }
+
+  await updateCurrentDataOfMesure(mesureId);
+
+  return res.json({
+    id: mesureEtatId,
+    mesure_id: mesureId,
   });
-
-  return res.json(...etat);
-
-  // if (values.pays === "FR") {
-  //   const location = await getLocation(client, {
-  //     city: values.ville,
-  //     zipcode: values.code_postal,
-  //   });
-
-  //   if (!location || !location.department) {
-  //     setErrors({
-  //       zipcode: `Le code postal semble invalide.`,
-  //     });
-  //     return setSubmitting(false);
-  //   } else {
-  //     const { department, geolocation } = location;
-
-  //     variables.latitude = geolocation ? geolocation.latitude : null;
-  //     variables.longitude = geolocation ? geolocation.longitude : null;
-  //     variables.department_id = department.id;
-  //   }
-  // }
 };

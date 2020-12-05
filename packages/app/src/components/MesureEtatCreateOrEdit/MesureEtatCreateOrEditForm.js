@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/core";
 import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
@@ -27,7 +27,13 @@ const initialValues = (mesureEtat) => {
 };
 
 export const MesureEtatCreateOrEditForm = (props) => {
-  const { handleSubmit, handleCancel, mesureEtatToEdit } = props;
+  const {
+    handleSubmit,
+    handleDelete,
+    handleCancel,
+    mesureEtatToEdit,
+    isDeletable,
+  } = props;
 
   const formik = useFormik({
     initialValues: initialValues(mesureEtatToEdit),
@@ -77,16 +83,22 @@ export const MesureEtatCreateOrEditForm = (props) => {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            onChange={(option) => {
+              formik.setFieldValue("lieu_vie", option.value);
+              formik.setFieldValue("type_etablissement", null);
+            }}
           />
 
-          <FormGroupSelect
-            id="type_etablissement"
-            options={MESURE_PROTECTION.TYPE_ETABLISSEMENT.options}
-            placeholder="Type d'établissement"
-            formik={formik}
-            validationSchema={mesureEtatSchema}
-            size="small"
-          />
+          {isTypeEtablissementRequired(formik.values.lieu_vie) && (
+            <FormGroupSelect
+              id="type_etablissement"
+              options={MESURE_PROTECTION.TYPE_ETABLISSEMENT.options}
+              placeholder="Type d'établissement"
+              formik={formik}
+              validationSchema={mesureEtatSchema}
+              size="small"
+            />
+          )}
 
           <FormGroupSelect
             id="pays"
@@ -142,21 +154,32 @@ export const MesureEtatCreateOrEditForm = (props) => {
         </FormInputBox>
       </Flex>
 
-      <Flex justifyContent="flex-end" py={2}>
-        <Box>
-          <Button mr="2" variant="outline" onClick={handleCancel}>
-            Annuler
-          </Button>
-        </Box>
-        <Box>
-          <Button
-            type="submit"
-            disabled={formik.isSubmitting}
-            isLoading={formik.isSubmitting}
-          >
-            Enregistrer
-          </Button>
-        </Box>
+      <Flex justifyContent="space-between" py={2}>
+        {isDeletable ? (
+          <Box>
+            <Button bg="error" onClick={handleDelete}>
+              Supprimer
+            </Button>
+          </Box>
+        ) : (
+          <Box />
+        )}
+        <Flex justifyContent="flex-end">
+          <Box>
+            <Button mr="2" variant="outline" onClick={handleCancel}>
+              Annuler
+            </Button>
+          </Box>
+          <Box>
+            <Button
+              type="submit"
+              disabled={formik.isSubmitting}
+              isLoading={formik.isSubmitting}
+            >
+              Enregistrer
+            </Button>
+          </Box>
+        </Flex>
       </Flex>
     </form>
   );

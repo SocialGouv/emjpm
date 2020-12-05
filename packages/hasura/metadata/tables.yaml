@@ -4480,21 +4480,6 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
-  - role: ti
-    permission:
-      columns:
-      - id
-      - mesure_id
-      - date_changement_etat
-      - nature_mesure
-      - champ_mesure
-      - lieu_vie
-      - code_postal
-      - ville
-      - pays
-      - type_etablissement
-      filter: {}
-      allow_aggregations: true
   update_permissions:
   - role: individuel
     permission:
@@ -4654,15 +4639,6 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
-  - role: ti
-    permission:
-      columns:
-      - id
-      - annee
-      - niveau_ressource
-      - prestations_sociales
-      - mesure_id
-      filter: {}
   update_permissions:
   - role: individuel
     permission:
@@ -4728,6 +4704,48 @@
 - table:
     schema: public
     name: mesure_status
+  is_enum: true
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: service
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: ti
+    permission:
+      columns:
+      - value
+      filter: {}
 - table:
     schema: public
     name: mesures

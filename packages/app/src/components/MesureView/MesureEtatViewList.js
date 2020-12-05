@@ -37,16 +37,14 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
               etat={etat}
               p={1}
               sx={{
-                "&:hover": {
-                  bg: isSelectedMesureEtat(etat) ? "gray" : "cardSecondary",
-                },
-                bg: isSelectedMesureEtat(etat) ? "gray" : "",
+                bg: isSelectedMesureEtat(etat) ? "cardSecondary" : "gray",
                 cursor: "pointer",
               }}
             />
             {isSelectedMesureEtat(etat) && (
               <Box mx={5}>
                 <MesureEtatCreateOrEdit
+                  bg="cardSecondary"
                   mesure={mesure}
                   mesureEtat={etat}
                   onSuccess={() => {
