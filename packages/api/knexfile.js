@@ -19,10 +19,10 @@ module.exports = {
   development: {
     client: "pg",
     connection: process.env.DATABASE_URL || {
-      host: "localhost",
+      host: "db",
       user: "emjpm",
       password: "test",
-      port: "5434",
+      port: "5432",
       database: "emjpm",
     },
     migrations: {},
