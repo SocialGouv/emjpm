@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 #
 # In development we only start postgres server
@@ -60,6 +60,7 @@ services:
       - ./:/home/node/app
     ports:
       - 3000:3000
+      - 4000:4000
     restart: always
     command: "yarn dev"
 
