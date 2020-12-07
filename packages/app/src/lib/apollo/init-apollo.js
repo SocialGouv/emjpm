@@ -30,7 +30,7 @@ const getToken = (context) => {
 };
 
 const {
-  publicRuntimeConfig: { GRAPHQL_SERVER_URI },
+  publicRuntimeConfig: { GRAPHQL_SERVER_URI, GRAPHQL_SERVER_URI_DOCKER },
 } = getConfig();
 
 function create(initialState, context) {
@@ -52,9 +52,14 @@ function create(initialState, context) {
     };
   });
 
+  const adjustedUri =
+    isBrowser() && process.env.NODE_ENV === `development`
+      ? GRAPHQL_SERVER_URI
+      : GRAPHQL_SERVER_URI_DOCKER;
+
   const httpLink = createHttpLink({
     credentials: "same-origin",
-    uri: GRAPHQL_SERVER_URI,
+    uri: adjustedUri,
   });
 
   // Check out https://github.com/zeit/next.js/pull/4611 if you want to use the AWSAppSyncClient
