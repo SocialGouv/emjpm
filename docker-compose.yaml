@@ -41,6 +41,7 @@ services:
       - 5000:8080
     depends_on:
       - db
+      - emjpm
     restart: always
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
@@ -50,6 +51,17 @@ services:
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
       HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
+
+  emjpm:
+    image: node:10-alpine
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./:/home/node/app
+    ports:
+      - 3000:3000
+    restart: always
+    command: "yarn dev"
 
 volumes:
   emjpm-pgdata:
