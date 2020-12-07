@@ -7,9 +7,9 @@ const InlineError = ({ message, fieldId, showError }) => {
   return (
     showError !== false &&
     message && (
-      <Flex id={fieldId} alignItems="center" pt="1" color="error">
-        <Exclamation size="20" />
-        <Text mx="1" fontSize="1">
+      <Flex id={fieldId} alignItems="center" color="error">
+        <Exclamation size="18" />
+        <Text mx="1" fontSize="12px">
           {message}
         </Text>
       </Flex>

@@ -47,6 +47,8 @@ export const MESURE_CONTEXT_QUERY = gql`
       numero_dossier
       annee_naissance
       date_nomination
+      date_protection_en_cours
+      date_premier_mesure
       mesure_etats(order_by: { date_changement_etat: desc }) {
         champ_mesure
         code_postal

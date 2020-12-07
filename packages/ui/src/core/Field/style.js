@@ -1,5 +1,5 @@
 const fieldStyle = {
-  mb: 2,
+  mb: 1,
 };
 
 export { fieldStyle };

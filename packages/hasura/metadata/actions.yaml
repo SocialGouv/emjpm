@@ -40,6 +40,18 @@ actions:
   - role: prepose
   - role: service
   - role: ti
+- name: delete_mesure_etat_action
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/delete'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
 - name: email_account_validation
   definition:
     kind: asynchronous
@@ -199,6 +211,18 @@ actions:
   - role: individuel
   - role: prepose
   - role: service
+- name: upsert_mesure_etat
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/upsert'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
 custom_types:
   enums: []
   input_objects:
@@ -227,4 +251,21 @@ custom_types:
   - name: CheckEmailExistsOutput
   - name: MandataireStatisticsOutput
   - name: MandataireStatistic
+  - name: UpsertMesureEtatOutput
+    relationships:
+    - remote_table:
+        schema: public
+        name: mesures
+      name: mesure
+      type: object
+      field_mapping:
+        mesure_id: id
+    - remote_table:
+        schema: public
+        name: mesure_etat
+      name: mesure_etat
+      type: array
+      field_mapping:
+        id: id
+  - name: DeleteMesureEtatOutput
   scalars: []

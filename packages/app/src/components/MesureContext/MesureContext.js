@@ -42,6 +42,7 @@ function formatMesure(mesure) {
     antenne_id,
     civilite,
     date_nomination,
+    date_protection_en_cours,
     numero_rg,
     is_urgent,
     judgment_date,
@@ -73,10 +74,15 @@ function formatMesure(mesure) {
     dateNominationFormated: date_nomination
       ? format(new Date(date_nomination), "dd/MM/yyyy")
       : "",
+    dateProtectionEnCours: date_protection_en_cours,
+    dateProtectionEnCoursFormatted: date_protection_en_cours
+      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
+      : "",
     departementId: departement ? departement.id : null,
     id: id,
     isUrgent: is_urgent,
-    judgmentDate: judgment_date
+    judgmentDate: judgment_date,
+    judgmentDateFormatted: judgment_date
       ? format(new Date(judgment_date), "dd/MM/yyyy")
       : "",
     latitude: latitude,
@@ -88,6 +94,9 @@ function formatMesure(mesure) {
       champMesure: etat.champ_mesure,
       codePostal: etat.code_postal,
       dateChangementEtat: etat.date_changement_etat,
+      dateChangementEtatFormatted: etat.date_changement_etat
+        ? format(new Date(etat.date_changement_etat), "dd/MM/yyyy")
+        : "",
       id: etat.id,
       lieuVie: etat.lieu_vie,
       natureMesure: etat.nature_mesure,

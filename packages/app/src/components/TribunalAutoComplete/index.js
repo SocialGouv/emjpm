@@ -8,7 +8,7 @@ import { TRIBUNAL } from "./queries";
 
 const TribunalAutoComplete = (props) => {
   const client = useApolloClient();
-  const { defaultOptions, hasError, value, name, id, onChange } = props;
+  const { defaultOptions, hasError, value, name, id, onChange, size } = props;
   return (
     <AsyncSelect
       instanceId={name}
@@ -33,6 +33,7 @@ const TribunalAutoComplete = (props) => {
       }, 500)}
       placeholder={"Tribunal"}
       onChange={onChange}
+      size={size || ""}
     />
   );
 };
