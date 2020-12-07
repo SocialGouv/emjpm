@@ -47,6 +47,23 @@ export const MESURE_CONTEXT_QUERY = gql`
       numero_dossier
       annee_naissance
       date_nomination
+      mesure_etats(order_by: { date_changement_etat: desc }) {
+        champ_mesure
+        code_postal
+        date_changement_etat
+        id
+        lieu_vie
+        nature_mesure
+        pays
+        type_etablissement
+        ville
+      }
+      mesure_ressources(order_by: { annee: desc }) {
+        id
+        annee
+        niveau_ressource
+        prestations_sociales
+      }
     }
   }
 `;

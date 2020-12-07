@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const CLOSE_MESURE = gql`
   mutation closeMesure(
     $id: Int!
-    $cause_sortie: cause_sortie_type!
+    $cause_sortie: cause_sortie_mesure_enum!
     $date_fin_mesure: date!
   ) {
     update_mesures(
@@ -11,7 +11,7 @@ export const CLOSE_MESURE = gql`
       _set: {
         date_fin_mesure: $date_fin_mesure
         cause_sortie: $cause_sortie
-        status: "eteinte"
+        status: eteinte
       }
     ) {
       returning {

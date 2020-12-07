@@ -14,7 +14,7 @@ CREATE TYPE public.civilite_type AS ENUM (
     'monsieur',
     'madame'
 );
-CREATE TYPE public.lieu_vie_type AS ENUM (
+CREATE TYPE public.lieu_vie_majeur_enum AS ENUM (
     'domicile',
     'etablissement',
     'etablissement_conservation_domicile',
@@ -902,7 +902,7 @@ CREATE TABLE public.mesure_etat (
     date_changement_etat date NOT NULL,
     nature_mesure public.nature_mesure_type NOT NULL,
     champ_mesure public.champ_mesure_type,
-    lieu_vie public.lieu_vie_type NOT NULL,
+    lieu_vie public.lieu_vie_majeur_enum NOT NULL,
     code_postal character varying(255) NOT NULL,
     ville character varying(255) NOT NULL,
     pays character varying(255) NOT NULL,
@@ -955,7 +955,7 @@ CREATE TABLE public.mesures (
     longitude real,
     pays character varying(255) DEFAULT 'FR'::character varying NOT NULL,
     magistrat_id integer,
-    lieu_vie public.lieu_vie_type,
+    lieu_vie public.lieu_vie_majeur_enum,
     type_etablissement public.type_etablissement_type,
     civilite public.civilite_type,
     cause_sortie public.cause_sortie_type,

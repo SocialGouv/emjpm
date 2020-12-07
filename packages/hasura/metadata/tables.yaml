@@ -69,6 +69,18 @@
       foreign_key_constraint_on: editor_id
 - table:
     schema: public
+    name: cause_sortie_mesure
+  is_enum: true
+- table:
+    schema: public
+    name: champ_mesure
+  is_enum: true
+- table:
+    schema: public
+    name: civilite
+  is_enum: true
+- table:
+    schema: public
     name: commentaires
   object_relationships:
   - name: mandataire
@@ -3951,6 +3963,10 @@
       check: null
 - table:
     schema: public
+    name: lieu_vie_majeur
+  is_enum: true
+- table:
+    schema: public
     name: magistrat
   object_relationships:
   - name: ti
@@ -4351,9 +4367,343 @@
 - table:
     schema: public
     name: mesure_etat
+  object_relationships:
+  - name: mesure
+    using:
+      foreign_key_constraint_on: mesure_id
+  insert_permissions:
+  - role: individuel
+    permission:
+      check:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      backend_only: false
+  - role: prepose
+    permission:
+      check:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      backend_only: false
+  - role: service
+    permission:
+      check:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      backend_only: false
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - mesure_id
+      - date_changement_etat
+      - nature_mesure
+      - champ_mesure
+      - lieu_vie
+      - code_postal
+      - ville
+      - pays
+      - type_etablissement
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+  update_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      check: null
+  - role: prepose
+    permission:
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      check: null
+  - role: service
+    permission:
+      columns:
+      - champ_mesure
+      - date_changement_etat
+      - id
+      - mesure_id
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+      check: null
+  delete_permissions:
+  - role: individuel
+    permission:
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+  - role: prepose
+    permission:
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+  - role: service
+    permission:
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
 - table:
     schema: public
     name: mesure_ressources
+  object_relationships:
+  - name: mesure
+    using:
+      foreign_key_constraint_on: mesure_id
+  insert_permissions:
+  - role: individuel
+    permission:
+      check:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      columns:
+      - id
+      - annee
+      - niveau_ressource
+      - prestations_sociales
+      - mesure_id
+      backend_only: false
+  - role: prepose
+    permission:
+      check:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      backend_only: false
+  - role: service
+    permission:
+      check:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      backend_only: false
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+  - role: service
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+  update_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      check: null
+  - role: prepose
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+      check: null
+  - role: service
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+      check:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+  delete_permissions:
+  - role: individuel
+    permission:
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+  - role: prepose
+    permission:
+      filter:
+        mesure:
+          mandataire_id:
+            _eq: X-Hasura-Mandataire-Id
+  - role: service
+    permission:
+      filter:
+        mesure:
+          service_id:
+            _eq: X-Hasura-Service-Id
+- table:
+    schema: public
+    name: mesure_status
 - table:
     schema: public
     name: mesures
@@ -4862,6 +5212,10 @@
               _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: nature_mesure
+  is_enum: true
+- table:
+    schema: public
     name: ocmi_mandataires
 - table:
     schema: public
@@ -4914,6 +5268,10 @@
       - id
       - nom
       filter: {}
+- table:
+    schema: public
+    name: resultat_revision_mesure
+  is_enum: true
 - table:
     schema: public
     name: role
@@ -5882,6 +6240,10 @@
       - ville
       - etablissement
       filter: {}
+- table:
+    schema: public
+    name: type_etablissement
+  is_enum: true
 - table:
     schema: public
     name: user_role

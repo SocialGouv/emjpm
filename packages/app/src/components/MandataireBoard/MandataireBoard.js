@@ -13,7 +13,7 @@ const MandataireBoard = () => {
     mesures_en_attente = 0,
     dispo_max = 0,
     mandataire_tis: mandataireTis,
-    lb_user: lbUser = {},
+    lb_user: lbUser,
   } = mandataire;
   return (
     <Box>
@@ -48,6 +48,26 @@ const MandataireBoard = () => {
         </Card>
       </Flex>
 
+      <Flex p={1} flexDirection="column" width="300px">
+        <Box bg="cardSecondary">
+          <Box p={1}>
+            <Heading4>Vos tribunaux</Heading4>
+          </Box>
+        </Box>
+        <Card>
+          {mandataireTis.map(({ ti }) => {
+            return (
+              <Text px={1} mb={1} key={ti.id}>
+                {ti.etablissement}
+              </Text>
+            );
+          })}
+          <Flex justifyContent="flex-end">
+            <Link href="/mandataires/edit-informations">{`modifier`}</Link>
+          </Flex>
+        </Card>
+      </Flex>
+
       {isIndividuel({ type }) && (
         <Flex p={1} flexDirection="column" width="300px">
           <Box bg="cardSecondary">
@@ -56,7 +76,7 @@ const MandataireBoard = () => {
             </Box>
           </Box>
           <Card>
-            {lbUser.lb_departements.map(
+            {lbUser?.lb_departements?.map(
               ({ departement, departement_financeur }) => {
                 return (
                   <Flex px={1} mb={1} key={departement.id} alignItems="center">
@@ -82,7 +102,7 @@ const MandataireBoard = () => {
             </Box>
           </Box>
           <Card>
-            {lbUser.lb_user_etablissements.map(
+            {lbUser?.lb_user_etablissements?.map(
               ({ etablissement, etablissement_rattachement }) => {
                 return (
                   <Flex
@@ -104,26 +124,6 @@ const MandataireBoard = () => {
           </Card>
         </Flex>
       )}
-
-      <Flex p={1} flexDirection="column" width="300px">
-        <Box bg="cardSecondary">
-          <Box p={1}>
-            <Heading4>Vos tribunaux</Heading4>
-          </Box>
-        </Box>
-        <Card>
-          {mandataireTis.map(({ ti }) => {
-            return (
-              <Text px={1} mb={1} key={ti.id}>
-                {ti.etablissement}
-              </Text>
-            );
-          })}
-          <Flex justifyContent="flex-end">
-            <Link href="/mandataires/edit-informations">{`modifier`}</Link>
-          </Flex>
-        </Card>
-      </Flex>
     </Box>
   );
 };

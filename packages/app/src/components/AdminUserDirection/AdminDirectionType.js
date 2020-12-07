@@ -1,7 +1,7 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import AdminDirectionTypeForm from "./AdminDirectionTypeForm";
+import { AdminDirectionTypeForm } from "./AdminDirectionTypeForm";
 import { CHANGE_DIRECTION_AGREMENT } from "./mutations";
 import { USER } from "./queries";
 
