@@ -10,6 +10,8 @@ const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresIm
 const { Mesure } = require("../../../../models/Mesure");
 
 const mesureStatesService = require("../../../../services/updateMesureStates");
+const { MesureEtat } = require("../../../../models/MesureEtat");
+const { MesureRessources } = require("../../../../models/MesureRessources");
 
 const actionsMesuresImporter = {
   importMesuresFile,
@@ -176,22 +178,18 @@ const importMesures = async ({
     importSummary.errors.length === 0 &&
     importSummary.invalidAntenneNames.length === 0
   ) {
-    // persist changes
-    if (importSummary.create.length) {
-      logger.info(
-        `[IMPORT MESURES] creating ${importSummary.create.length} mesures...`
-      );
-      // batch insert
-      await Mesure.query().insert(importSummary.create);
-    }
+    const type = service ? "service" : "mandataire";
+    const filters = {
+      status: "en_cours",
+      [`${type}_id`]: service ? service.id : mandataire.id,
+    };
+    const subQuery = Mesure.query().select("id").where(filters);
+    await MesureEtat.query().delete().whereIn("mesure_id", subQuery);
+    await MesureRessources.query().delete().whereIn("mesure_id", subQuery);
+    await Mesure.query().delete().where(filters);
 
-    if (importSummary.update.length) {
-      logger.info(
-        `[IMPORT MESURES] updating ${importSummary.update.length} mesures...`
-      );
-      for (const { id, data } of importSummary.update) {
-        await Mesure.query().findById(id).patch(data);
-      }
+    for (const data of importSummary.create) {
+      await Mesure.query().insertGraph(data);
     }
 
     if (mandataire) {
@@ -284,6 +282,17 @@ const prepareMesure = async (
     code_postal: mesureDatas.code_postal,
     date_nomination: mesureDatas.date_nomination,
     department_id: department.id,
+    etats: [
+      {
+        champ_mesure: mesureDatas.champ_mesure,
+        code_postal: mesureDatas.code_postal,
+        date_changement_etat: mesureDatas.date_nomination,
+        lieu_vie: mesureDatas.lieu_vie,
+        nature_mesure: mesureDatas.nature_mesure,
+        pays,
+        ville: mesureDatas.ville,
+      },
+    ],
     latitude,
     lieu_vie: mesureDatas.lieu_vie,
     longitude,
@@ -298,26 +307,7 @@ const prepareMesure = async (
     ville: mesureDatas.ville,
   };
 
-  const [mesure] = await Mesure.query().where({
-    mandataire_id: mandataire ? mandataire.id : null,
-    numero_rg: data.numero_rg,
-    service_id: service ? service.id : null,
-    ti_id: ti.id,
-  });
-
-  if (!mesure) {
-    importSummary.create.push(data);
-  } else if (mesure.mandataire_id === data.mandataire_id) {
-    importSummary.update.push({
-      data,
-      id: mesure.id,
-    });
-  } else {
-    importSummary.errors.push({
-      line: line,
-      message: `La mesure avec le numéro RG ${mesure.numero_rg} et le tribunal de ${ti.ville} est gérée par un autre MJPM.`,
-    });
-  }
+  importSummary.create.push(data);
 };
 
 const getMesurePays = (code_postal) => {

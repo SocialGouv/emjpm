@@ -19,7 +19,7 @@ const MagistratMesure = (props) => {
     realAge,
     cabinet,
     civilite,
-    judgmentDate,
+    judgmentDateFormatted,
     numeroRg,
     status,
     tribunal,
@@ -80,7 +80,9 @@ const MagistratMesure = (props) => {
               <Text sx={MagistratMesureTitleStyle}>
                 Date prévisionnelle de jugement
               </Text>
-              <Text sx={MagistratMesureContentStyle}>{judgmentDate}</Text>
+              <Text sx={MagistratMesureContentStyle}>
+                {judgmentDateFormatted}
+              </Text>
             </Box>
           </Box>
           <Box width="50%">

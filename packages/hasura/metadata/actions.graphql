@@ -21,6 +21,14 @@ type Mutation {
 
 
 type Mutation {
+  delete_mesure_etat_action (
+    id: Int!
+    mesure_id: Int!
+  ): DeleteMesureEtatOutput
+}
+
+
+type Mutation {
   email_account_validation (
     user_email: String!
   ): EmailAccountValidationOutput
@@ -143,6 +151,22 @@ type Mutation {
     serviceId: Int
     mandataireUserId: Int
   ): FileOutput
+}
+
+
+type Mutation {
+  upsert_mesure_etat (
+    champ_mesure: String
+    code_postal: String
+    date_changement_etat: date!
+    id: Int
+    lieu_vie: String
+    mesure_id: Int!
+    nature_mesure: String!
+    pays: String!
+    type_etablissement: String
+    ville: String
+  ): UpsertMesureEtatOutput!
 }
 
 
@@ -276,5 +300,14 @@ type MandataireStatisticsOutput {
 type MandataireStatistic {
   value : Int!
   name : String!
+}
+
+type UpsertMesureEtatOutput {
+  id : Int!
+  mesure_id : Int!
+}
+
+type DeleteMesureEtatOutput {
+  affectedRows : Int!
 }
 
