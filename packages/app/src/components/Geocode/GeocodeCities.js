@@ -5,7 +5,7 @@ import { useQuery } from "react-apollo";
 import { CODE_POSTAL } from "./queries";
 
 export const GeocodeCities = (props) => {
-  const { onChange, hasError, zipcode, value, name } = props;
+  const { onChange, hasError, zipcode, value, name, size } = props;
   const { data, loading } = useQuery(CODE_POSTAL, {
     variables: {
       zipcode: zipcode,
@@ -32,6 +32,7 @@ export const GeocodeCities = (props) => {
       hasError={hasError}
       onChange={(item) => onChange(item.value)}
       options={options}
+      size={size ? size : ""}
     />
   );
 };
