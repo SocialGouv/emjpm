@@ -87,19 +87,15 @@ const MesureDetailView = ({ mesure, ...props }) => {
             </Text>
           </Box>
 
-          {dateNominationFormated && (
-            <Box mb={2}>
-              <Text sx={subtitle}>Date de nomination</Text>
-              <Text sx={content}>{dateNominationFormated}</Text>
-            </Box>
-          )}
+          <Box mb={2}>
+            <Text sx={subtitle}>Date de nomination</Text>
+            <Text sx={content}>{dateNominationFormated}</Text>
+          </Box>
 
-          {dateProtectionEnCoursFormated && (
-            <Box mb={2}>
-              <Text sx={subtitle}>Date de protection en cours</Text>
-              <Text sx={content}>{dateProtectionEnCoursFormated}</Text>
-            </Box>
-          )}
+          <Box mb={2}>
+            <Text sx={subtitle}>Date de protection en cours</Text>
+            <Text sx={content}>{dateProtectionEnCoursFormated}</Text>
+          </Box>
 
           {antenne && (
             <Box mb={2}>

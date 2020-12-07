@@ -1,27 +1,19 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
 import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/core";
-import { Card, Heading4, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext, useMemo } from "react";
-import { Box, Flex } from "rebass";
+import { Box } from "rebass";
 
 import { getUserBasePath } from "../../constants";
 import { getLocation } from "../../query-service/LocationQueryService";
 import { formatTribunauxOptions } from "../../util";
-import { MesureContext } from "../MesureContext";
 import { MESURES_QUERY } from "../MesureList/queries";
 import { UserContext } from "../UserContext";
-import { MesureCreateOrEditForm } from "./MesureCreateOrEditForm";
-import { ADD_MESURE, CALCULATE_MESURES, EDIT_MESURE } from "./mutations";
+import { MesureCreateForm } from "./MesureCreateForm";
+import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
-export const MesureCreateOrEdit = (props) => {
-  let mesureToEdit = useContext(MesureContext);
-  const editMode = mesureToEdit && mesureToEdit.id ? true : false;
-  if (!editMode) {
-    mesureToEdit = null;
-  }
-
+export const MesureCreate = () => {
   const client = useApolloClient();
   const currentUser = useContext(UserContext);
 
@@ -33,8 +25,6 @@ export const MesureCreateOrEdit = (props) => {
   const GET_TRIBUNAL = isMandataire({ type })
     ? MANDATAIRE_TRIBUNAL
     : SERVICE_TRIBUNAL;
-
-  const ADD_OR_UPDATE_MESURE = editMode ? EDIT_MESURE : ADD_MESURE;
 
   const { loading, error, data } = useQuery(GET_TRIBUNAL);
 
@@ -54,7 +44,7 @@ export const MesureCreateOrEdit = (props) => {
       }
     );
 
-  const [addOrUpdateMesure] = useMutation(ADD_OR_UPDATE_MESURE, {
+  const [addMesure] = useMutation(ADD_MESURE, {
     onCompleted: async ({ add_or_update }) => {
       const mesure = add_or_update.returning[0];
       await recalculateMesures({
@@ -100,11 +90,7 @@ export const MesureCreateOrEdit = (props) => {
       }
     }
 
-    if (editMode) {
-      variables.id = mesureToEdit.id;
-    }
-
-    addOrUpdateMesure({
+    addMesure({
       awaitRefetchQueries: true,
       refetchQueries: [
         {
@@ -127,12 +113,17 @@ export const MesureCreateOrEdit = (props) => {
         champ_mesure: values.champ_mesure ? values.champ_mesure : null,
         civilite: values.civilite,
         date_nomination: values.date_nomination,
+        date_premier_mesure: values.date_premier_mesure,
+        date_protection_en_cours: values.date_nomination,
         lieu_vie: values.lieu_vie,
         nature_mesure: values.nature_mesure,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
         pays: values.pays,
         ti_id: values.tribunal.value,
+        type_etablissement: values.type_etablissement
+          ? values.type_etablissement
+          : null,
       },
     });
 
@@ -140,11 +131,7 @@ export const MesureCreateOrEdit = (props) => {
   };
 
   const handleCancel = async () => {
-    if (editMode) {
-      redirectToMesure(mesureToEdit.id);
-    } else {
-      Router.push(userBasePath);
-    }
+    Router.push(userBasePath);
   };
 
   const antenneOptions = service_antennes.map((antenne) => ({
@@ -153,34 +140,14 @@ export const MesureCreateOrEdit = (props) => {
   }));
 
   return (
-    <Card m="1" mt="2" p="0">
-      <Flex flexWrap="wrap" {...props}>
-        <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
-          <Box height="280px">
-            <Heading4>{`Informations générales`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives à votre mesure`}
-            </Text>
-          </Box>
-          <Box height="280px">
-            <Heading4>{`Caractéristique de la mesure`}</Heading4>
-            <Text lineHeight="1.5" color="textSecondary">
-              Ces informations nous permettent de vous présenter les mesures de
-              mandataires les plus adaptés.
-            </Text>
-          </Box>
-        </Box>
-        <Box p="5" width={[1, 3 / 5]}>
-          <MesureCreateOrEditForm
-            handleSubmit={handleSubmit}
-            handleCancel={handleCancel}
-            tribunaux={tribunaux}
-            antenneOptions={antenneOptions}
-            mesureToEdit={mesureToEdit}
-            userBasePath={userBasePath}
-          />
-        </Box>
-      </Flex>
-    </Card>
+    <Box m="1" mt="2" p="0">
+      <MesureCreateForm
+        handleSubmit={handleSubmit}
+        handleCancel={handleCancel}
+        tribunaux={tribunaux}
+        antenneOptions={antenneOptions}
+        userBasePath={userBasePath}
+      />
+    </Box>
   );
 };

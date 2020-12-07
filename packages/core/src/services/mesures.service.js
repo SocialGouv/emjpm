@@ -20,5 +20,7 @@ export function isEteinte({ status }) {
 }
 
 export function isTypeEtablissementRequired(lieuVie) {
-  return ["etablissement"].includes(lieuVie);
+  return ["etablissement", "etablissement_conservation_domicile"].includes(
+    lieuVie
+  );
 }

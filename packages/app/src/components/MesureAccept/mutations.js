@@ -49,30 +49,7 @@ export const ACCEPT_MESURE = gql`
       }
     ) {
       returning {
-        antenne_id
-        service_id
         id
-        cabinet
-        civilite
-        code_postal
-        departement {
-          id
-          nom
-          region {
-            id
-            nom
-          }
-        }
-        status
-        nature_mesure
-        champ_mesure
-        ville
-        lieu_vie
-        numero_rg
-        numero_dossier
-        annee_naissance
-        date_nomination
-        pays
       }
     }
   }
