@@ -37,11 +37,11 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
               etat={etat}
               p={1}
               sx={{
+                ":hover": {
+                  borderLeft: "solid 3px gray",
+                },
                 bg: isSelectedMesureEtat(etat) ? "cardSecondary" : "",
                 cursor: "pointer",
-                ":hover": {
-                  borderLeft: "solid 3px gray"
-                }
               }}
             />
             {isSelectedMesureEtat(etat) && (
