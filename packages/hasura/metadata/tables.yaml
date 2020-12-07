@@ -4704,6 +4704,48 @@
 - table:
     schema: public
     name: mesure_status
+  is_enum: true
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction_nationale
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: individuel
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: prepose
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: service
+    permission:
+      columns:
+      - value
+      filter: {}
+  - role: ti
+    permission:
+      columns:
+      - value
+      filter: {}
 - table:
     schema: public
     name: mesures
@@ -4751,29 +4793,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
   - role: prepose
     permission:
@@ -4784,29 +4830,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
   - role: service
     permission:
@@ -4819,29 +4869,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
   - role: ti
     permission:
@@ -4909,33 +4963,38 @@
   - role: individuel
     permission:
       columns:
-      - annee_naissance
-      - antenne_id
-      - cabinet
-      - civilite
-      - code_postal
-      - created_at
-      - date_nomination
-      - department_id
-      - etablissement_id
-      - date_fin_mesure
       - id
+      - code_postal
+      - ville
+      - mandataire_id
+      - created_at
+      - annee_naissance
+      - date_nomination
+      - date_fin_mesure
+      - etablissement_id
+      - ti_id
+      - numero_dossier
+      - cabinet
+      - numero_rg
+      - department_id
+      - antenne_id
+      - service_id
       - is_urgent
       - judgment_date
       - latitude
       - longitude
-      - mandataire_id
-      - numero_dossier
-      - numero_rg
       - pays
-      - cause_sortie
+      - magistrat_id
       - lieu_vie
-      - service_id
-      - status
-      - ti_id
+      - type_etablissement
+      - civilite
+      - cause_sortie
       - nature_mesure
       - champ_mesure
-      - ville
+      - status
+      - date_premier_mesure
+      - date_protection_en_cours
+      - resultat_revision
       filter:
         mandataire:
           user:
@@ -4948,29 +5007,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter:
         mandataire:
@@ -5017,30 +5080,34 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - magistrat_id
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter: {}
       allow_aggregations: true
@@ -5051,29 +5118,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter:
         mandataire:
@@ -5087,29 +5158,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter:
         mandataire:
@@ -5122,29 +5197,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter:
         service_id:

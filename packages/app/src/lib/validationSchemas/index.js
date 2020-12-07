@@ -10,6 +10,7 @@ import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
 import { magistratMesureEditSchema } from "./magistratMesureEditSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mesureAcceptSchema } from "./mesureAcceptSchema";
+import { mesureEtatSchema } from "./mesureEtatSchema";
 import { mesureSchema } from "./mesureSchema";
 import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
@@ -46,4 +47,5 @@ export {
   signupServiceSchema,
   editorTokenSchema,
   satisfactionCampaignSchema,
+  mesureEtatSchema,
 };

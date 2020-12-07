@@ -4,6 +4,11 @@ const router = express.Router();
 
 router.use("/enquetes", require("./enquete/hasura-actions.enquetes.routes.js"));
 router.use("/mesures", require("./mesure/hasura-actions.mesures.routes.js"));
+router.use(
+  "/mesure-etats",
+  require("./mesure-etat/hasura-actions.mesure-etats.routes.js")
+);
+
 router.use("/emails", require("./email/hasura-actions.emails.routes.js"));
 router.use(
   "/mandataires",
