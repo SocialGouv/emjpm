@@ -18,6 +18,13 @@ export const MESURE_STATUS_LABEL_VALUE = [
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
+export const MESURE_SORTBY_LABEL_VALUE = [
+  // { label: "Année de naissance", value: "annee_naissance" },
+  // { label: "Date de nomination", value: "date_nomination" },
+  { label: "Âge", value: "annee_naissance" },
+  { label: "Date de décision", value: "date_nomination" },
+];
+
 export const DEFAULT_MESURE_NATURE = {
   label: "Toutes les natures",
   value: null,
