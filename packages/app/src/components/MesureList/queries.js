@@ -8,6 +8,7 @@ export const MESURES_QUERY = gql`
     $searchText: String
     $offset: Int
     $antenne: Int
+    $orderBy: mesures_order_by!
   ) {
     mesures_aggregate(
       where: {
@@ -66,7 +67,7 @@ export const MESURES_QUERY = gql`
     mesures(
       offset: $offset
       limit: $limit
-      order_by: { date_nomination: desc_nulls_first }
+      order_by: [$orderBy]
       where: {
         _or: [
           { numero_dossier: { _ilike: $searchText } }
