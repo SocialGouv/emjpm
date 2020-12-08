@@ -6,6 +6,7 @@ const knexConnection = require("../db/knex");
 const jwtConfig = require("../config/jwt");
 const { Mandataire } = require("./Mandataire");
 const { Departement } = require("./Departement");
+const { Region } = require("./Region");
 const { Role } = require("./Role");
 const { Service } = require("./Service");
 const { Direction } = require("./Direction");
@@ -49,6 +50,30 @@ class User extends Model {
         },
         modelClass: Direction,
         relation: Model.BelongsToOneRelation,
+      },
+      direction_departement: {
+        join: {
+          from: "users.id",
+          through: {
+            from: "direction.user_id",
+            to: "direction.department_id",
+          },
+          to: "departements.id",
+        },
+        modelClass: Departement,
+        relation: Model.HasOneThroughRelation,
+      },
+      direction_region: {
+        join: {
+          from: "users.id",
+          through: {
+            from: "direction.user_id",
+            to: "direction.region_id",
+          },
+          to: "regions.id",
+        },
+        modelClass: Region,
+        relation: Model.HasOneThroughRelation,
       },
       mandataire: {
         join: {
