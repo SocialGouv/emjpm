@@ -55,7 +55,6 @@ export const MesureEtatCreateOrEditForm = (props) => {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
-            readOnly={mesureEtatToEdit ? true : false}
           />
 
           <FormGroupSelect

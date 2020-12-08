@@ -8,10 +8,7 @@ const magistratMandataireSchema = yup.object().shape({
   judgmentDate: yup.date(),
   nature_mesure: yup.string().required(),
   numero_rg: yup.string().required(),
-  urgent: yup.object().shape({
-    label: yup.string(),
-    value: yup.boolean(),
-  }),
+  urgent: yup.boolean().nullable(),
 });
 
 export { magistratMandataireSchema };
