@@ -14,6 +14,7 @@ const mesureEditSchema = yup.object().shape({
   }),
   date_nomination: yup.date().required(),
   date_premier_mesure: yup.date(),
+  date_protection_en_cours: yup.date().required(),
   numero_dossier: yup.string(),
   numero_rg: yup.string().required(),
   tribunal: yup.string().required(),

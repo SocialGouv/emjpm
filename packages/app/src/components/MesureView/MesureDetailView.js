@@ -59,6 +59,12 @@ const MesureDetailView = ({ mesure, ...props }) => {
       </Flex>
       <Flex>
         <Box flex="1">
+          {numeroDossier && (
+            <Box mb={2}>
+              <Text sx={subtitle}>Numéro de dossier</Text>
+              <Text sx={content}>{numeroDossier}</Text>
+            </Box>
+          )}
           <Box mb={2}>
             <Text sx={subtitle}>Majeur protégé</Text>
             <Text sx={content}>{formatMajeurProtege(civilite, realAge)}</Text>
@@ -102,13 +108,6 @@ const MesureDetailView = ({ mesure, ...props }) => {
             <Box mb={2}>
               <Text sx={subtitle}>Antenne</Text>
               <Text sx={content}>{antenne}</Text>
-            </Box>
-          )}
-
-          {numeroDossier && (
-            <Box mb={2}>
-              <Text sx={subtitle}>Numéro de dossier</Text>
-              <Text sx={content}>{numeroDossier}</Text>
             </Box>
           )}
         </Box>
