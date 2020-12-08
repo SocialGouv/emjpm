@@ -10,7 +10,7 @@ export const MAGISTRAT_MESURES_QUERY = gql`
     mesures_aggregate(
       where: {
         numero_rg: { _ilike: $searchText }
-        status: { _eq: "en_attente" }
+        status: { _eq: en_attente }
         nature_mesure: { _eq: $natureMesure }
         ti_id: { _eq: $tiId }
       }
@@ -22,7 +22,7 @@ export const MAGISTRAT_MESURES_QUERY = gql`
     mesures(
       where: {
         numero_rg: { _ilike: $searchText }
-        status: { _eq: "en_attente" }
+        status: { _eq: en_attente }
         nature_mesure: { _eq: $natureMesure }
         ti_id: { _eq: $tiId }
       }
