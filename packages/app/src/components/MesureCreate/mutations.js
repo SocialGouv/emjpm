@@ -36,6 +36,8 @@ export const ADD_MESURE = gql`
       objects: {
         department_id: $department_id
         date_nomination: $date_nomination
+        date_protection_en_cours: $date_protection_en_cours
+        date_premier_mesure: $date_premier_mesure
         nature_mesure: $nature_mesure
         champ_mesure: $champ_mesure
         ti_id: $ti_id

@@ -40,6 +40,7 @@ export const ACCEPT_MESURE = gql`
         department_id: $department_id
         status: en_cours
         date_nomination: $date_nomination
+        date_protection_en_cours: $date_nomination
         lieu_vie: $lieu_vie
         code_postal: $code_postal
         ville: $ville
