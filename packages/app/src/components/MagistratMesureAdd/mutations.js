@@ -29,7 +29,7 @@ export const CHOOSE_MANDATAIRE = gql`
         civilite: $civilite
         annee_naissance: $annee_naissance
         numero_rg: $numero_rg
-        status: "en_attente"
+        status: en_attente
       }
     ) {
       returning {

@@ -4480,6 +4480,20 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
+  - role: ti
+    permission:
+      columns:
+      - date_changement_etat
+      - id
+      - mesure_id
+      - champ_mesure
+      - lieu_vie
+      - nature_mesure
+      - type_etablissement
+      - code_postal
+      - pays
+      - ville
+      filter: {}
   update_permissions:
   - role: individuel
     permission:
@@ -4639,6 +4653,15 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
+  - role: ti
+    permission:
+      columns:
+      - annee
+      - id
+      - mesure_id
+      - niveau_ressource
+      - prestations_sociales
+      filter: {}
   update_permissions:
   - role: individuel
     permission:
@@ -5046,29 +5069,33 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
+      - resultat_revision
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
+      - type_etablissement
       - ville
       filter:
         service_id:
