@@ -1,6 +1,6 @@
 import { Button, Card, Heading4, Text } from "@emjpm/ui";
 import getConfig from "next/config";
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-apollo";
 import { Box } from "rebass";
 
@@ -14,25 +14,36 @@ const url = `${API_URL}/api/oauth/authorize`;
 
 const Authorize = (props) => {
   const { editorId, token, redirectUrl, state } = props;
-  const { data, loading } = useQuery(EDITOR, {
+  const { data, loading, error } = useQuery(EDITOR, {
     variables: {
       id: editorId,
     },
   });
 
+  useEffect(() => {
+    const { accessTokens = [] } = data;
+    if (accessTokens?.length > 0) {
+      const form = document.forms[0];
+      form.submit();
+    }
+  });
+
+  if (error) {
+    return <Box>Erreur...</Box>;
+  }
   if (loading) {
     return <Box>Chargement...</Box>;
   }
 
-  const { editors_by_pk: editor } = data;
+  const { editor } = data;
 
   return (
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Autoriser ${editor.name} à accéder à votre compte E-mjpm.`}</Heading4>
+          <Heading4 mb="1">{`Autoriser ${editor.name} à accéder à votre compte eMJPM.`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Vos informations E-mjpm seront partagées avec ce dernier pour faciliter l'échange et la fluidité des services.`}
+            {`Vos informations eMJPM seront accessibles par ce dernier pour faciliter l'échange et la fluidité des services.`}
           </Text>
         </Box>
       </Box>
@@ -43,7 +54,7 @@ const Authorize = (props) => {
           <input type="hidden" name="redirect_uri" value={redirectUrl} />
           <input type="hidden" name="access_token" value={token} />
           <input type="hidden" name="state" value={state} />
-          <Button type="submit">{`Authoriser la connexion avec l'éditeur`}</Button>
+          <Button type="submit">{`Autoriser`}</Button>
           <Button
             onClick={() => {
               document.location.href = `${redirectUrl}?error_reason=user_denied&error=access_denied&error_description=Permissions+error`;
@@ -53,11 +64,6 @@ const Authorize = (props) => {
             variant="outline"
           >{`refuser`}</Button>
         </form>
-        {/* {errorMessage && (
-          <Text mt="3" color="red">
-            {errorMessage}
-          </Text>
-        )} */}
       </Box>
     </Card>
   );
