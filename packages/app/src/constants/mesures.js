@@ -19,10 +19,11 @@ export const MESURE_STATUS_LABEL_VALUE = [
 ];
 
 export const MESURE_SORTBY_LABEL_VALUE = [
-  // { label: "Année de naissance", value: "annee_naissance" },
-  // { label: "Date de nomination", value: "date_nomination" },
-  { label: "Âge", value: "annee_naissance" },
-  { label: "Date de décision", value: "date_nomination" },
+  { label: "Aucun Tri", value: "" },
+  { label: "Âge (croissant)", value: "annee_naissance_desc" },
+  { label: "Âge (décroissant)", value: "annee_naissance_asc" },
+  { label: "Date de nomination (ascendant)", value: "date_nomination_asc" },
+  { label: "Date de nomination (descendant)", value: "date_nomination_desc" },
 ];
 
 export const DEFAULT_MESURE_NATURE = {

@@ -22,23 +22,43 @@ const MesureList = () => {
     natureMesure,
     mesureStatus,
     debouncedSearchText,
+    sortBy,
   } = useContext(FiltersContext);
   const { type } = useContext(UserContext);
   const userBasePath = getUserBasePath({ type });
 
   useEffect(() => {
     setCurrentOffset(0);
-  }, [natureMesure, mesureStatus, debouncedSearchText]);
+  }, [natureMesure, mesureStatus, debouncedSearchText, sortBy]);
 
   const currentMesureStatus = mesureStatus
     ? mesureStatus.value
     : MESURE_PROTECTION_STATUS.en_cours;
+
+  let orderBy;
+  switch (sortBy.value) {
+    case "annee_naissance_asc":
+      orderBy = { annee_naissance: "asc" };
+      break;
+    case "annee_naissance_desc":
+      orderBy = { annee_naissance: "desc" };
+      break;
+    case "date_nomination_asc":
+      orderBy = { date_nomination: "asc" };
+      break;
+    case "date_nomination_desc":
+      orderBy = { date_nomination: "desc" };
+      break;
+    default:
+      orderBy = { date_nomination: "desc_nulls_first" };
+  }
 
   const queryVariables = {
     antenne: antenne ? antenne.value : null,
     limit: RESULT_PER_PAGE,
     natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,
+    orderBy,
     searchText:
       debouncedSearchText && debouncedSearchText !== ""
         ? `${debouncedSearchText}%`
