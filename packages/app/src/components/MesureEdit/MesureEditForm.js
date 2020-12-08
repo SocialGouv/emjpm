@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { mesureSchema } from "../../lib/validationSchemas";
+import { mesureEditSchema } from "../../lib/validationSchemas";
 import {
   FormGrayBox,
   FormGroupInput,
@@ -41,7 +41,7 @@ export const MesureEditForm = (props) => {
   const formik = useFormik({
     initialValues: initialValues(mesureToEdit),
     onSubmit: handleSubmit,
-    validationSchema: mesureSchema,
+    validationSchema: mesureEditSchema,
   });
 
   return (
@@ -58,7 +58,7 @@ export const MesureEditForm = (props) => {
                 id="numero_rg"
                 formik={formik}
                 size="small"
-                validationSchema={mesureSchema}
+                validationSchema={mesureEditSchema}
               />
             </Box>
             <Box pl="1px">
@@ -67,7 +67,7 @@ export const MesureEditForm = (props) => {
                 id="numero_dossier"
                 formik={formik}
                 size="small"
-                validationSchema={mesureSchema}
+                validationSchema={mesureEditSchema}
               />
             </Box>
           </Flex>
@@ -77,7 +77,7 @@ export const MesureEditForm = (props) => {
             placeholder="Civilité"
             formik={formik}
             size="small"
-            validationSchema={mesureSchema}
+            validationSchema={mesureEditSchema}
           />
 
           <FormGroupInput
@@ -85,7 +85,7 @@ export const MesureEditForm = (props) => {
             id="annee_naissance"
             formik={formik}
             size="small"
-            validationSchema={mesureSchema}
+            validationSchema={mesureEditSchema}
           />
           <FormGroupInput
             placeholder="Date de première mise sous protection (optionnel)"
@@ -93,7 +93,7 @@ export const MesureEditForm = (props) => {
             id="date_premier_mesure"
             formik={formik}
             size="small"
-            validationSchema={mesureSchema}
+            validationSchema={mesureEditSchema}
           />
         </FormInputBox>
       </Flex>
@@ -131,7 +131,7 @@ export const MesureEditForm = (props) => {
                 id="cabinet"
                 formik={formik}
                 size="small"
-                validationSchema={mesureSchema}
+                validationSchema={mesureEditSchema}
               />
             </Box>
           </Flex>
@@ -141,7 +141,7 @@ export const MesureEditForm = (props) => {
             id="date_nomination"
             formik={formik}
             size="small"
-            validationSchema={mesureSchema}
+            validationSchema={mesureEditSchema}
           />
           <FormGroupInput
             placeholder="Date de la protection en cours"
@@ -149,7 +149,7 @@ export const MesureEditForm = (props) => {
             id="date_protection_en_cours"
             formik={formik}
             size="small"
-            validationSchema={mesureSchema}
+            validationSchema={mesureEditSchema}
           />
         </FormInputBox>
       </Flex>
@@ -166,7 +166,7 @@ export const MesureEditForm = (props) => {
               value={formik.values.antenne}
               formik={formik}
               size="small"
-              validationSchema={mesureSchema}
+              validationSchema={mesureEditSchema}
             />
           </FormInputBox>
         </Flex>

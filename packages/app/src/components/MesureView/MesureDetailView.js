@@ -14,7 +14,8 @@ const MesureDetailView = ({ mesure, ...props }) => {
     cabinet,
     civilite,
     dateNominationFormated,
-    dateProtectionEnCoursFormated,
+    dateProtectionEnCoursFormatted,
+    datePremierMesureFormatted,
     numeroDossier,
     numeroRg,
     lieuVie,
@@ -62,21 +63,21 @@ const MesureDetailView = ({ mesure, ...props }) => {
             <Text sx={subtitle}>Majeur protégé</Text>
             <Text sx={content}>{formatMajeurProtege(civilite, realAge)}</Text>
           </Box>
-          {lieuVie && (
-            <Box mb={2}>
-              <Text sx={subtitle}>Lieu de vie du majeur</Text>
-              <Text sx={content}>{formatLieuVie(lieuVie)}</Text>
-            </Box>
-          )}
+          <Box mb={2}>
+            <Text sx={subtitle}>Lieu de vie du majeur</Text>
+            <Text sx={content}>{formatLieuVie(lieuVie)}</Text>
+          </Box>
 
-          {codePostal && (
-            <Box mb={2}>
-              <Text sx={subtitle}>Commune</Text>
-              <Text sx={content}>
-                {codePostal} {ville} ({formatPays(pays)})
-              </Text>
-            </Box>
-          )}
+          <Box mb={2}>
+            <Text sx={subtitle}>Commune</Text>
+            <Text sx={content}>
+              {codePostal} {ville} ({formatPays(pays)})
+            </Text>
+          </Box>
+          <Box mb={2}>
+            <Text sx={subtitle}>Date de première mise sous protection</Text>
+            <Text sx={content}>{datePremierMesureFormatted}</Text>
+          </Box>
         </Box>
 
         <Box flex="1">
@@ -94,7 +95,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
 
           <Box mb={2}>
             <Text sx={subtitle}>Date de protection en cours</Text>
-            <Text sx={content}>{dateProtectionEnCoursFormated}</Text>
+            <Text sx={content}>{dateProtectionEnCoursFormatted}</Text>
           </Box>
 
           {antenne && (

@@ -43,6 +43,7 @@ function formatMesure(mesure) {
     civilite,
     date_nomination,
     date_protection_en_cours,
+    date_premier_mesure,
     numero_rg,
     is_urgent,
     judgment_date,
@@ -73,6 +74,10 @@ function formatMesure(mesure) {
     dateNomination: date_nomination ? date_nomination : "",
     dateNominationFormated: date_nomination
       ? format(new Date(date_nomination), "dd/MM/yyyy")
+      : "",
+    datePremierMesure: date_premier_mesure,
+    datePremierMesureFormatted: date_premier_mesure
+      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
       : "",
     dateProtectionEnCours: date_protection_en_cours,
     dateProtectionEnCoursFormatted: date_protection_en_cours
