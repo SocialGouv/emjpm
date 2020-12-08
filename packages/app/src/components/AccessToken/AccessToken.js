@@ -41,11 +41,11 @@ const AccessToken = (props) => {
           <Heading5 mt={3} mb="2">
             {isAdmin ? (
               <Fragment>
-                Logiciels métiers authorisés à accéder à ce compte utilisateur
+                Logiciels métiers autorisés à accéder à ce compte utilisateur
               </Fragment>
             ) : (
               <Fragment>
-                Logiciels métiers authorisés à accéder à votre compte
+                Logiciels métiers autorisés à accéder à votre compte
               </Fragment>
             )}
           </Heading5>
@@ -53,8 +53,21 @@ const AccessToken = (props) => {
             {access_tokens.map((token) => {
               return (
                 <Flex sx={innerTextStyle} alignItem="center" key={token.id}>
-                  <Text>{token.editors.name}</Text>
-                  <AccessTokenDelete id={token.id} />
+                  <Box p={1}>
+                    <Text>{`Editeur`}</Text>
+                    <Text>{token.editors.name}</Text>
+                  </Box>
+                  <Box p={1}>
+                    <Text>{`Token`}</Text>
+                    <Text>{token.access_token}</Text>
+                  </Box>
+                  <Box p={1}>
+                    <Text>{`Refresh token`}</Text>
+                    <Text>{token.refresh_token}</Text>
+                  </Box>
+                  <Box p={1}>
+                    <AccessTokenDelete id={token.id} />
+                  </Box>
                 </Flex>
               );
             })}

@@ -11,6 +11,21 @@
         column_mapping:
           editor_id: id
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - expired
+      - editor_id
+      - id
+      - user_id
+      - expired_on
+      - refresh_token_expires_on
+      - access_token
+      - editor_url
+      - refresh_token
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
   - role: individuel
     permission:
       columns:
@@ -19,32 +34,49 @@
       - access_token
       - editor_id
       - editor_url
+      - expired
+      - expired_on
+      - refresh_token
+      - refresh_token_expires_on
       filter:
         user_id:
           _eq: X-Hasura-User-Id
   - role: prepose
     permission:
       columns:
+      - expired
       - editor_id
       - id
       - user_id
+      - expired_on
+      - refresh_token_expires_on
       - access_token
       - editor_url
+      - refresh_token
       filter:
         user_id:
           _eq: X-Hasura-User-Id
   - role: service
     permission:
       columns:
+      - expired
       - editor_id
       - id
       - user_id
+      - expired_on
+      - refresh_token_expires_on
       - access_token
       - editor_url
+      - refresh_token
       filter:
         user_id:
           _eq: X-Hasura-User-Id
   delete_permissions:
+  - role: direction
+    permission:
+      filter:
+        id:
+          _eq: X-Hasura-User-Id
   - role: individuel
     permission:
       filter:
@@ -323,6 +355,12 @@
     schema: public
     name: editors
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - name
+      filter: {}
   - role: individuel
     permission:
       columns:

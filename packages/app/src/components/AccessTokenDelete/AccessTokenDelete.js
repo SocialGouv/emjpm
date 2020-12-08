@@ -11,7 +11,8 @@ const AccessTokenDelete = (props) => {
 
   return (
     <Box
-      sx={{ cursor: "pointer", ml: "2" }}
+      sx={{ cursor: "pointer", p: "2" }}
+      color="error"
       onClick={() => {
         RemoveAccessToken({
           refetchQueries: ["AccessToken"],
@@ -21,7 +22,7 @@ const AccessTokenDelete = (props) => {
         });
       }}
     >
-      <XCircle size="16" />
+      <XCircle size="24" />
     </Box>
   );
 };

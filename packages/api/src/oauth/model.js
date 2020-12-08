@@ -89,6 +89,10 @@ module.exports = {
     return code;
   },
   saveToken: async (token, client, user) => {
+    await AccessToken.query().delete().where({
+      editor_id: client.id,
+      user_id: user.id,
+    });
     await AccessToken.query().insert({
       access_token: token.accessToken,
       editor_id: client.id,
