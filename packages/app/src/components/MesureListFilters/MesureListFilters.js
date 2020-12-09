@@ -5,6 +5,7 @@ import { Box, Flex, Text } from "rebass";
 
 import {
   DEFAULT_MESURE_NATURE,
+  MESURE_SORTBY_LABEL_VALUE,
   MESURE_STATUS_LABEL_VALUE,
 } from "../../constants/mesures";
 import { FiltersContext } from "./context";
@@ -22,6 +23,8 @@ const MesureListFilters = (props) => {
     changeAntenne,
     searchText,
     changeSearchText,
+    sortBy,
+    changeSortBy,
   } = useContext(FiltersContext);
 
   const antenneOptions = [
@@ -70,6 +73,15 @@ const MesureListFilters = (props) => {
                 placeholder={"État de la mesure"}
                 value={mesureStatus}
                 onChange={(option) => changeMesureStatus(option)}
+              />
+            </Box>
+            <Box width="200px" mr={1}>
+              <Select
+                size="small"
+                options={MESURE_SORTBY_LABEL_VALUE}
+                placeholder={"Trier par"}
+                value={sortBy}
+                onChange={(option) => changeSortBy(option)}
               />
             </Box>
           </Flex>
