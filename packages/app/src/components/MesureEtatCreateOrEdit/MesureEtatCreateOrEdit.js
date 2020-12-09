@@ -36,7 +36,6 @@ export const MesureEtatCreateOrEdit = ({
     const etatWithSameDate = mesure?.mesureEtats?.find(
       (elm) => elm.dateChangementEtat === values.date_changement_etat
     );
-    console.log(etatWithSameDate);
     if (etatWithSameDate && etatWithSameDate.id !== mesureEtat?.id) {
       setErrors({
         date_changement_etat: "la date de changement d'état doit être unique",
@@ -52,7 +51,7 @@ export const MesureEtatCreateOrEdit = ({
         nature_mesure: values.nature_mesure,
         pays: values.pays,
         type_etablissement: values?.type_etablissement || null,
-        ville: values.ville.toUpperCase(),
+        ville: values.ville?.toUpperCase(),
       };
 
       upsertMesureEtat({
