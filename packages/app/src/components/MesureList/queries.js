@@ -8,7 +8,7 @@ export const MESURES_QUERY = gql`
     $searchText: String
     $offset: Int
     $antenne: Int
-    $orderBy: mesures_order_by!
+    $orderBy: mesures_order_by! = { date_nomination: desc_nulls_first }
   ) {
     mesures_aggregate(
       where: {
