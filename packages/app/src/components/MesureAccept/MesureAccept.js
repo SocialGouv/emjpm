@@ -100,7 +100,7 @@ export const MesureAccept = (props) => {
       variables: {
         ...variables,
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
-        champ_mesure: mesure.champMesure,
+        champ_mesure: mesure.champMesure ? mesure.champMesure : null,
         date_nomination: values.date_nomination,
         id,
         lieu_vie: values.lieu_vie,
