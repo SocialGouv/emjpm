@@ -56,17 +56,6 @@ const MesureDelete = (props) => {
             status: MESURE_PROTECTION_STATUS.en_cours,
           },
         },
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_attente,
-          },
-        },
       ],
       variables: {
         id: mesure.id,
