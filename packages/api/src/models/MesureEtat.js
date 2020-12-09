@@ -17,7 +17,7 @@ class MesureEtat extends Model {
     return {
       properties: {
         champ_mesure: { type: ["string", null] },
-        code_postal: { type: "string" },
+        code_postal: { type: ["string", null] },
         date_changement_etat: { type: "date" },
         id: { type: "integer" },
         lieu_vie: { type: "string" },
@@ -25,7 +25,7 @@ class MesureEtat extends Model {
         nature_mesure: { type: "string" },
         pays: { type: "string" },
         type_etablissement: { type: ["string", null] },
-        ville: { type: "string" },
+        ville: { type: ["string", null] },
       },
       type: "object",
     };
