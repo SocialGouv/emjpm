@@ -6,7 +6,7 @@ export const ACCEPT_MESURE = gql`
     $department_id: Int
     $date_nomination: date!
     $nature_mesure: nature_mesure_enum!
-    $champ_mesure: champ_mesure_enum!
+    $champ_mesure: champ_mesure_enum
     $lieu_vie: lieu_vie_majeur_enum!
     $type_etablissement: type_etablissement_enum
     $code_postal: String

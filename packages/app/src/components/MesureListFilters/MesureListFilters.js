@@ -1,7 +1,7 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
 import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import {
   DEFAULT_MESURE_NATURE,
@@ -9,7 +9,6 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "../../constants/mesures";
 import { FiltersContext } from "./context";
-import { TextStyle } from "./style";
 
 const MesureListFilters = (props) => {
   const { service_antennes = [] } = props;
@@ -43,7 +42,6 @@ const MesureListFilters = (props) => {
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>
-            <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
             {service_antennes.length >= 2 && (
               <Box width="170px" mr={1}>
                 <Select
