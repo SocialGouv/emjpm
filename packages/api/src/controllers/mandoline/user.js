@@ -1,25 +1,25 @@
 const { User } = require("../../models/User");
+const { isService } = require("@emjpm/core");
 
 const getUserDirection = (user) => {
-  const { direction, direction_region, direction_departement } = user;
+  const { direction } = user;
   if (direction === null) {
     return null;
   }
   const data = {
     type: direction.type,
   };
-  switch (direction.type) {
-    case "regional":
-      data.region = {
-        nom: direction_region.nom,
-      };
-      break;
-    case "departemental":
-      data.departement = {
-        code: direction_departement.code,
-        nom: direction_departement.nom,
-      };
-      break;
+  const { region, departement } = direction;
+  if (region) {
+    data.region = {
+      nom: region.nom,
+    };
+  }
+  if (departement) {
+    data.departement = {
+      code: departement.code,
+      nom: departement.nom,
+    };
   }
   return data;
 };
@@ -42,8 +42,6 @@ const getUserService = (user) => {
     org_nom,
     org_ville,
     dispo_max,
-    latitude,
-    longitude,
     lb_adresse,
     lb_code_postal,
     lb_ville,
@@ -60,11 +58,9 @@ const getUserService = (user) => {
     dispo_max,
     email,
     etablissement,
-    latitude,
     lb_adresse,
     lb_code_postal,
     lb_ville,
-    longitude,
     mesures_en_attente,
     mesures_en_cours,
     nom,
@@ -95,26 +91,27 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction, service.[departement], direction_departement, direction_region]"
+        "[direction.[departement, region], service.[departement]]"
       )
       .whereIn("type", ["service", "direction"]);
-    req.user = user;
   } catch (error) {
-    console.log(error);
-    return res
-      .status(422)
-      .json({ errors: [{ msg: "user not found", value: user_id }] });
+    return res.status(422).json({
+      errors: [{ error: `${error}` }],
+    });
   }
 
   const userData = {
-    direction: getUserDirection(user),
     email: user.email,
     id: user.id,
     nom: user.nom,
     prenom: user.prenom,
-    service: getUserService(user),
     type: user.type,
   };
+  if (isService(user)) {
+    userData.service = getUserService(user);
+  } else {
+    userData.direction = getUserDirection(user);
+  }
 
   return res.status(200).json(userData);
 };
