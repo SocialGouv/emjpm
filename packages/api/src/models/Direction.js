@@ -2,6 +2,8 @@ const { Model } = require("objection");
 
 const knexConnection = require("../db/knex");
 const { User } = require("./User");
+const { Departement } = require("./Departement");
+const { Region } = require("./Region");
 
 Model.knex(knexConnection);
 
@@ -29,13 +31,29 @@ class Direction extends Model {
 
   static get relationMappings() {
     return {
+      departement: {
+        join: {
+          from: "direction.department_id",
+          to: "departements.id",
+        },
+        modelClass: Departement,
+        relation: Model.HasOneRelation,
+      },
+      region: {
+        join: {
+          from: "direction.region_id",
+          to: "regions.id",
+        },
+        modelClass: Region,
+        relation: Model.HasOneRelation,
+      },
       users: {
         join: {
           from: "direction.user_id",
           to: "users.id",
         },
         modelClass: User,
-        relation: Model.HasManyRelation,
+        relation: Model.HasOneRelation,
       },
     };
   }

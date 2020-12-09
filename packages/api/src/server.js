@@ -13,6 +13,7 @@ const pkg = require("../package.json");
 const authRoutes = require("./routes/api/auth");
 const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
+const mandolineRoutes = require("./routes/api/mandoline");
 
 const corsOptions = {
   credentials: true,
@@ -50,6 +51,12 @@ app.use(
   "/api/editors",
   [apiLimiter, apiLog, oauthServer.authenticate()],
   editorsRoutes
+);
+
+app.use(
+  "/api/mandoline",
+  [apiLimiter, oauthServer.authenticate()],
+  mandolineRoutes
 );
 
 app.use(
