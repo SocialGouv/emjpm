@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { MesureEtatCreateOrEdit } from "../MesureEtatCreateOrEdit";
 
-const { Heading3, Button } = require("@emjpm/ui");
+const { Heading3, Button, Text } = require("@emjpm/ui");
 const { Flex, Box } = require("rebass");
 const { MesureEtatView } = require("./MesureEtatView");
 
@@ -21,7 +21,10 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
 
   return (
     <Box {...props}>
-      <Heading3>{`Evolution de la protection`}</Heading3>
+      <Heading3>{`Etats de la mesure de protection`}</Heading3>
+      <Text lineHeight="1.5" color="textSecondary">
+        {`Vous pouvez ajouter, modifier et supprimer les états de la mesure de protection`}
+      </Text>
       <Flex flexDirection="column" my={1}>
         {mesureEtats.map((etat) => (
           <Box key={etat.id}>

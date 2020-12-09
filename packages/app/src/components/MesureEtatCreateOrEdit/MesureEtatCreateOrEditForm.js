@@ -1,5 +1,5 @@
 import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -45,7 +45,13 @@ export const MesureEtatCreateOrEditForm = (props) => {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Evolution de la protection"}</Heading4>
+          {mesureEtatToEdit?.id && (
+            <Heading4 mb={1}>{"Modification de l'état"}</Heading4>
+          )}
+          {!mesureEtatToEdit && <Heading4 mb={1}>{"Ajout d'un état"}</Heading4>}
+          <Text lineHeight="1.5" color="textSecondary">
+            {`Merci de renseigner les informations de l'état de la mesure de la protection`}
+          </Text>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
