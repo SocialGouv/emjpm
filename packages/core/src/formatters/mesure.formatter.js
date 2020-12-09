@@ -10,12 +10,6 @@ export const mesureFormatter = {
     }
     return MESURE_PROTECTION.CHAMP_MESURE.byKey[champMesure];
   },
-  formatTypeEtablissement(typeEtablissement) {
-    if (!typeEtablissement) {
-      return "";
-    }
-    return MESURE_PROTECTION.TYPE_ETABLISSEMENT.byKey[typeEtablissement];
-  },
   formatJudgmentDate(judgmentDate) {
     if (!judgmentDate) {
       return "";
@@ -53,5 +47,11 @@ export const mesureFormatter = {
       return "";
     }
     return MESURE_PROTECTION.STATUS.byKey[status];
+  },
+  formatTypeEtablissement(typeEtablissement) {
+    if (!typeEtablissement) {
+      return "";
+    }
+    return MESURE_PROTECTION.TYPE_ETABLISSEMENT.byKey[typeEtablissement];
   },
 };
