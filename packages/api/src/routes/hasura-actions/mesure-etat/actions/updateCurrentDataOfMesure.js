@@ -10,12 +10,13 @@ module.exports = async function updateCurrentDataOfMesure(mesureId) {
     lieu_vie,
     ville,
     code_postal,
+    pays,
   } = await MesureEtat.query()
     .findOne({ mesure_id: mesureId })
     .orderBy("date_changement_etat", "desc");
 
   const geodata = (await getGeoDatas(code_postal, ville)) || {};
-  const departement = (await getDepartement(code_postal)) || {};
+  const departement = code_postal ? await getDepartement(code_postal) : {};
 
   await Mesure.query()
     .update({
@@ -26,6 +27,7 @@ module.exports = async function updateCurrentDataOfMesure(mesureId) {
       lieu_vie,
       longitude: geodata.longitude,
       nature_mesure,
+      pays,
       ville,
     })
     .where({ id: mesureId });

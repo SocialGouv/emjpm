@@ -121,6 +121,11 @@ export const MesureEtatCreateOrEditForm = (props) => {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            onChange={(option) => {
+              formik.setFieldValue("pays", option.value);
+              formik.setFieldValue("code_postal", null);
+              formik.setFieldValue("ville", null);
+            }}
           />
 
           {formik.values.pays === "FR" && (
