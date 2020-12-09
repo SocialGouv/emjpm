@@ -26,6 +26,7 @@ services:
       - "5434:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
+    restart: always
 
   maildev:
     image: djfarrelly/maildev
@@ -33,6 +34,7 @@ services:
     ports:
       - "1025:1025"
       - "1080:1080"
+    restart: always
 
   graphql-engine:
     build:
