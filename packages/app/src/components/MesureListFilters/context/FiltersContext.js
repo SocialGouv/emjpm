@@ -17,6 +17,7 @@ export const Provider = (props) => {
     initialValues.mesureStatus
   );
   const [searchText, changeSearchText] = useState("");
+  const [sortBy, changeSortBy] = useState("");
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 
@@ -27,10 +28,12 @@ export const Provider = (props) => {
     changeMesureStatus,
     changeNatureMesure,
     changeSearchText,
+    changeSortBy,
     debouncedSearchText,
     mesureStatus,
     natureMesure,
     searchText,
+    sortBy,
   };
 
   // pass the value in provider and return
