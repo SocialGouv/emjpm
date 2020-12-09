@@ -9,6 +9,7 @@ const {
 const fetchTribunaux = require("../../../controllers/editor/service/fetchTribunaux");
 const { MesureRessources } = require("../../../models/MesureRessources");
 const { MesureEtat } = require("../../../models/MesureEtat");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 
 module.exports = async (req, res) => {
   const { userId } = req.user;
