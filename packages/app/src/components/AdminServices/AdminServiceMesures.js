@@ -66,7 +66,7 @@ const AdminServiceMesures = (props) => {
     }
   );
 
-  const allMesures = data ? data.mesures : [];
+  const allMesures = useMemo(() => (data ? data.mesures : []), [data]);
 
   const {
     inProgressMesuresCount,

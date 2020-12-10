@@ -47,7 +47,7 @@ const AdminMandataireMesures = (props) => {
     { loading: calculateMandataireMesuresLoading },
   ] = useMutation(CALCULATE_MANDATAIRE_MESURES);
 
-  const allMesures = data ? data.mesures : [];
+  const allMesures = useMemo(() => (data ? data.mesures : []), [data]);
 
   const {
     inProgressMesuresCount,
