@@ -8,7 +8,7 @@ import { LayoutAdmin } from "../../../src/components/Layout";
 import { withAuthSync } from "../../../src/util/auth";
 
 const User = (props) => {
-  const { userId, type, active } = props;
+  const { userId } = props;
 
   return (
     <LayoutAdmin>
@@ -18,14 +18,14 @@ const User = (props) => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <AdminUser userId={userId} active={active} type={type} />
+        <AdminUser userId={userId} />
       </BoxWrapper>
     </LayoutAdmin>
   );
 };
 
 User.getInitialProps = async ({ query }) => {
-  return { active: query.active, type: query.type, userId: query.user_id };
+  return { userId: query.user_id };
 };
 
 export default withAuthSync(User);

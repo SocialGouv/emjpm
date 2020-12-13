@@ -5,6 +5,7 @@ import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "../AppForm";
+import { Link } from "../Commons";
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
@@ -102,16 +103,30 @@ const AdminUserActivation = (props) => {
           <Heading4 mb={1}>{"Activer / Bloquer"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
-          <Box>
-            <Button
-              disabled={isMandataire({ type }) && !mandataire.lb_user}
-              mr={2}
-              bg={activateButtonStyle}
-              onClick={toggleActivation}
-              isLoading={activateUserLoading}
-            >
-              {activateButtonText}
-            </Button>
+          <Box display="inline-flex">
+            <Box>
+              <Button
+                disabled={isMandataire({ type }) && !mandataire.lb_user}
+                mr={2}
+                bg={activateButtonStyle}
+                onClick={toggleActivation}
+                isLoading={activateUserLoading}
+              >
+                {activateButtonText}
+              </Button>
+            </Box>
+            {!active && (
+              <Box>
+                <Link
+                  href={`/admin/users/[user_id]/delete`}
+                  asLink={`/admin/users/${userId}/delete`}
+                >
+                  <Button mr={2} bg={"red"}>
+                    {"Supprimer cet utilisateur"}
+                  </Button>
+                </Link>
+              </Box>
+            )}
           </Box>
 
           {isMandataire({ type }) && mandataire && !mandataire.lb_user && (
