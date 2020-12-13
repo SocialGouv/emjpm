@@ -23,21 +23,11 @@ export const AdminUserDeleteForm = (props) => {
     initialValues: {},
     onSubmit: async (_, { setSubmitting }) => {
       await deleteUser({
-        // awaitRefetchQueries: true,
-        // refetchQueries: [
-        //   {
-        //     query: USERS,
-        //     variables: {
-        //       offset: 0,
-        //     },
-        //   },
-        // ],
         variables: {
           userId: userId,
         },
       });
       setSubmitting(false);
-      Router.push(`/admin/users`);
     },
     validationSchema: adminUserDeleteSchema,
   });
