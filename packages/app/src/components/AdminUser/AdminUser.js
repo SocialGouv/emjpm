@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/react-hooks";
 import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/core";
 import React from "react";
 import { Box, Card } from "rebass";
@@ -11,9 +12,27 @@ import { DirectionEditInformations } from "../DirectionEditInformations";
 import { MagistratEditInformations } from "../MagistratEditInformations";
 import { MandataireEditInformations } from "../MandataireEditInformations";
 import { MesureImportPanel } from "../MesureImport";
+import { USER } from "./queries";
 
 const AdminUser = (props) => {
-  const { userId, type, active } = props;
+  const { userId } = props;
+
+  const { data, loading, error } = useQuery(USER, {
+    variables: {
+      userId: userId,
+    },
+  });
+
+  if (loading) {
+    return <div>loading</div>;
+  }
+
+  if (error) {
+    return <div>error</div>;
+  }
+
+  const { users_by_pk: user } = data;
+  const { type, active } = user;
 
   return (
     <Box>
