@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.77.0](https://github.com/SocialGouv/emjpm/compare/v25.76.0...v25.77.0) (2020-12-13)
+
+
+### Features
+
+* **mesure:** handle etat ([#2318](https://github.com/SocialGouv/emjpm/issues/2318)) ([5e187dc](https://github.com/SocialGouv/emjpm/commit/5e187dcc1b9ee32f8099d172ffa99bc9b5bbb5d7))
+
+
+
+
+
 # [25.76.0](https://github.com/SocialGouv/emjpm/compare/v25.75.1...v25.76.0) (2020-12-04)
 
 **Note:** Version bump only for package @emjpm/ui
