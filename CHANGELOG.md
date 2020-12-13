@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.77.0](https://github.com/SocialGouv/emjpm/compare/v25.76.0...v25.77.0) (2020-12-13)
+
+
+### Bug Fixes
+
+* **accept-mesure:** champ mesure is not required ([f70f98e](https://github.com/SocialGouv/emjpm/commit/f70f98e2e522f850f609e99800e622934e91531c))
+* **app-in-docker-compose:** can now connect and use app as before ([#2324](https://github.com/SocialGouv/emjpm/issues/2324)) ([e9ca443](https://github.com/SocialGouv/emjpm/commit/e9ca4436428c68078d04be9f386694897f0ff110)), closes [#2322](https://github.com/SocialGouv/emjpm/issues/2322)
+* **docker-compose-machine-reboot:** always restart services ([#2337](https://github.com/SocialGouv/emjpm/issues/2337)) ([7a665aa](https://github.com/SocialGouv/emjpm/commit/7a665aaa8b6513a13a2174534be348afe188455b))
+* **mesure-sort:** set default order by ([19da108](https://github.com/SocialGouv/emjpm/commit/19da10846c6fc29e7a565e7803e6a640adf4d016))
+* **oauth:** test query result ([18aff73](https://github.com/SocialGouv/emjpm/commit/18aff73d569c49e89574433a9bb619cd64493dbd))
+
+
+### Features
+
+* **admin-user:** delete inactive user ([#2345](https://github.com/SocialGouv/emjpm/issues/2345)) ([55d0027](https://github.com/SocialGouv/emjpm/commit/55d00274bb8ccdadbd9f31470f5f8cf2197627b5)), closes [#2338](https://github.com/SocialGouv/emjpm/issues/2338)
+* **app-in-docker-compose:** fixing cross-os networking ([#2322](https://github.com/SocialGouv/emjpm/issues/2322)) ([#2323](https://github.com/SocialGouv/emjpm/issues/2323)) ([a10709a](https://github.com/SocialGouv/emjpm/commit/a10709a7759b2e87e0db2a6d63bd152cac7221b6))
+* **hasura:** use hasura enum ([#2321](https://github.com/SocialGouv/emjpm/issues/2321)) ([aebef6f](https://github.com/SocialGouv/emjpm/commit/aebef6f790b4ab65b12ed9e0e090494ae26cd5d6))
+* **mandataire:** update UI for mesure etat list ([fe161f1](https://github.com/SocialGouv/emjpm/commit/fe161f1ce2ac3006606b3319274900a36ac7c498))
+* **mandoline:** add user api for mandoline ([#2332](https://github.com/SocialGouv/emjpm/issues/2332)) ([5bd78e8](https://github.com/SocialGouv/emjpm/commit/5bd78e85eb3e1e2c42bd9a646d78e0925fddfb8c))
+* **mandoline-test:** ok ([#2333](https://github.com/SocialGouv/emjpm/issues/2333)) ([#2335](https://github.com/SocialGouv/emjpm/issues/2335)) ([16f944d](https://github.com/SocialGouv/emjpm/commit/16f944de087f8f336fd7ca433b81e65491157da1))
+* **mesure:** enhance mesure booking process ([#2325](https://github.com/SocialGouv/emjpm/issues/2325)) ([d1ffc0c](https://github.com/SocialGouv/emjpm/commit/d1ffc0c303fc2854dfe45e0ee6eac3d8c71f7dd1))
+* **mesure:** handle etat ([#2318](https://github.com/SocialGouv/emjpm/issues/2318)) ([5e187dc](https://github.com/SocialGouv/emjpm/commit/5e187dcc1b9ee32f8099d172ffa99bc9b5bbb5d7))
+* **mesure:** remove not null constraint for ville, code_postal ([#2334](https://github.com/SocialGouv/emjpm/issues/2334)) ([e443a09](https://github.com/SocialGouv/emjpm/commit/e443a0951707976d64d4c8f91790005fd3a5d0c1))
+* **mesure-etat:** change UI ([0666a19](https://github.com/SocialGouv/emjpm/commit/0666a1973b9346f635544f53ae43422b5d8e28d1))
+* **mesure-sort:** ok ([68ed771](https://github.com/SocialGouv/emjpm/commit/68ed771e81617331d6c3c2b8aff60a6b1aa281e3))
+* **mesure-sort:** wip ([#2331](https://github.com/SocialGouv/emjpm/issues/2331)) ([49af291](https://github.com/SocialGouv/emjpm/commit/49af291824382183256598ed631f8fe9c082c96a))
+* **oauth:** post authorization form automatically ([#2328](https://github.com/SocialGouv/emjpm/issues/2328)) ([1b8cbaf](https://github.com/SocialGouv/emjpm/commit/1b8cbaf7836568315aaa7e3a717ba681fea6df38))
+
+
+
+
+
 # [25.76.0](https://github.com/SocialGouv/emjpm/compare/v25.75.1...v25.76.0) (2020-12-04)
 
 

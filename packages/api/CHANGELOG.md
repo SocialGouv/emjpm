@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.77.0](https://github.com/SocialGouv/emjpm/compare/v25.76.0...v25.77.0) (2020-12-13)
+
+
+### Bug Fixes
+
+* **app-in-docker-compose:** can now connect and use app as before ([#2324](https://github.com/SocialGouv/emjpm/issues/2324)) ([e9ca443](https://github.com/SocialGouv/emjpm/commit/e9ca4436428c68078d04be9f386694897f0ff110)), closes [#2322](https://github.com/SocialGouv/emjpm/issues/2322)
+
+
+### Features
+
+* **mandoline:** add user api for mandoline ([#2332](https://github.com/SocialGouv/emjpm/issues/2332)) ([5bd78e8](https://github.com/SocialGouv/emjpm/commit/5bd78e85eb3e1e2c42bd9a646d78e0925fddfb8c))
+* **mandoline-test:** ok ([#2333](https://github.com/SocialGouv/emjpm/issues/2333)) ([#2335](https://github.com/SocialGouv/emjpm/issues/2335)) ([16f944d](https://github.com/SocialGouv/emjpm/commit/16f944de087f8f336fd7ca433b81e65491157da1))
+* **mesure:** handle etat ([#2318](https://github.com/SocialGouv/emjpm/issues/2318)) ([5e187dc](https://github.com/SocialGouv/emjpm/commit/5e187dcc1b9ee32f8099d172ffa99bc9b5bbb5d7))
+* **mesure:** remove not null constraint for ville, code_postal ([#2334](https://github.com/SocialGouv/emjpm/issues/2334)) ([e443a09](https://github.com/SocialGouv/emjpm/commit/e443a0951707976d64d4c8f91790005fd3a5d0c1))
+* **oauth:** post authorization form automatically ([#2328](https://github.com/SocialGouv/emjpm/issues/2328)) ([1b8cbaf](https://github.com/SocialGouv/emjpm/commit/1b8cbaf7836568315aaa7e3a717ba681fea6df38))
+
+
+
+
+
 # [25.76.0](https://github.com/SocialGouv/emjpm/compare/v25.75.1...v25.76.0) (2020-12-04)
 
 **Note:** Version bump only for package @emjpm/api
