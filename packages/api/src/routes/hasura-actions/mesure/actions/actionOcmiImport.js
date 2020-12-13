@@ -1,14 +1,14 @@
-const { Mesure } = require("../../../models/Mesure");
-const { OcmiMandataire } = require("../../../models/OcmiMandataire");
-const { LbUser } = require("../../../models/LbUser");
-const { Mandataire } = require("../../../models/Mandataire");
-const mesureStatesService = require("../../../services/updateMesureStates");
+const { Mesure } = require("../../../../models/Mesure");
+const { OcmiMandataire } = require("../../../../models/OcmiMandataire");
+const { LbUser } = require("../../../../models/LbUser");
+const { Mandataire } = require("../../../../models/Mandataire");
+const mesureStatesService = require("../../../../services/updateMesureStates");
 const {
   saveMesures,
-} = require("../../../controllers/editor/service/saveMesure");
-const fetchTribunaux = require("../../../controllers/editor/service/fetchTribunaux");
-const { MesureRessources } = require("../../../models/MesureRessources");
-const { MesureEtat } = require("../../../models/MesureEtat");
+} = require("../../../../controllers/editor/service/saveMesure");
+const fetchTribunaux = require("../../../../controllers/editor/service/fetchTribunaux");
+const { MesureRessources } = require("../../../../models/MesureRessources");
+const { MesureEtat } = require("../../../../models/MesureEtat");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
 
 module.exports = async (req, res) => {
