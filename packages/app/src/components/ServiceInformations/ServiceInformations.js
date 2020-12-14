@@ -50,7 +50,7 @@ const ServiceInformations = () => {
       <Heading3>{etablissement}</Heading3>
       <Flex p={1} mt={2} flexDirection="column">
         <Box mb={2}>
-          <Heading5>Service tutellaire</Heading5>
+          <Heading5>Service tutelaire</Heading5>
           <Flex my={1}>
             <Text sx={subtitle}>{"Siret"}</Text>
             <Text sx={content}>{siret || ""}</Text>
@@ -105,7 +105,7 @@ const ServiceInformations = () => {
           <Box>
             <Heading5>Géolocalisation</Heading5>
             <Text>
-              {`Cette adresse permettra de localiser le service tutellaire sur les cartes de votre compte et des magistrats`}
+              {`Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats`}
             </Text>
           </Box>
           <Flex my={1}>

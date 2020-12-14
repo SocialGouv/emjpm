@@ -42,9 +42,9 @@ export const ListeBlancheServiceForm = (props) => {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Service tutellaire`}</Heading4>
+          <Heading4 mb={1}>{`Service tutelaire`}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Renseignez le département qui finance le service tutellaire.`}
+            {`Renseignez le département qui finance le service tutelaire.`}
           </Text>
         </FormGrayBox>
         <FormInputBox>

@@ -21,7 +21,7 @@ const MesureListButtonBar = () => {
         </Box>
         <Box ml={1}>
           <LinkButton href={`${path}/import-mesures`}>
-            Importez vos mesures
+            Importer vos mesures
           </LinkButton>
         </Box>
         <MesureExportExcelButton ml={1} mr={2} />
