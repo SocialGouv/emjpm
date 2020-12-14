@@ -51,7 +51,7 @@ function Footer(props) {
                 target="_blank"
                 href="mailto:support.emjpm@fabrique.social.gouv.fr"
               >
-                Contact
+                support.emjpm@fabrique.social.gouv.fr
               </Link>
             </ListItem>
             <ListItem>
