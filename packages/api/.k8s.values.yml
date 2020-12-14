@@ -68,16 +68,6 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: SENTRY_PUBLIC_DSN
-    - name: INSEE_API_KEY
-      valueFrom:
-        secretKeyRef:
-          name: emjpm-secret
-          key: INSEE_API_KEY
-    - name: INSEE_API_SECRET
-      valueFrom:
-        secretKeyRef:
-          name: emjpm-secret
-          key: INSEE_API_SECRET
     - name: AZURE_ACCOUNT_NAME
       valueFrom:
         secretKeyRef:
