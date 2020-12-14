@@ -15,7 +15,6 @@ import { mesureEditSchema } from "./mesureEditSchema";
 import { mesureEtatSchema } from "./mesureEtatSchema";
 import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
-import { satisfactionCampaignSchema } from "./satisfactionCampaignSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
@@ -48,6 +47,5 @@ export {
   signupSchema,
   signupServiceSchema,
   editorTokenSchema,
-  satisfactionCampaignSchema,
   mesureEtatSchema,
 };
