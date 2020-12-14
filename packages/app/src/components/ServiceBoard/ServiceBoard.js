@@ -13,6 +13,9 @@ const ServiceBoard = () => {
     dispo_max = 0,
     service_tis: serviceTis,
   } = service;
+
+  const isTribunal = serviceTis?.length > 0;
+
   return (
     <Box>
       <Flex p={1} flexDirection="column" width="300px">
@@ -60,8 +63,15 @@ const ServiceBoard = () => {
               </Text>
             );
           })}
+          {!isTribunal && (
+            <Text px={1} mb={1}>
+              {`Vous n'êtes pas visible par les juges des tutelles`}
+            </Text>
+          )}
           <Flex justifyContent="flex-end">
-            <Link href="/services/edit-informations">{`modifier`}</Link>
+            <Link href="/services/edit-informations">
+              {isTribunal ? `Modifier` : `Ajouter des tribunaux`}
+            </Link>
           </Flex>
         </Card>
       </Flex>

@@ -15,6 +15,9 @@ const MandataireBoard = () => {
     mandataire_tis: mandataireTis,
     lb_user: lbUser,
   } = mandataire;
+
+  const isTribunal = mandataireTis?.length > 0;
+
   return (
     <Box>
       <Flex p={1} flexDirection="column" width="300px">
@@ -62,8 +65,15 @@ const MandataireBoard = () => {
               </Text>
             );
           })}
+          {!isTribunal && (
+            <Text px={1} mb={1}>
+              {`Vous n'êtes pas visible par les juges des tutelles`}
+            </Text>
+          )}
           <Flex justifyContent="flex-end">
-            <Link href="/mandataires/edit-informations">{`modifier`}</Link>
+            <Link href="/mandataires/edit-informations">
+              {isTribunal ? `Modifier` : `Ajouter des tribunaux`}
+            </Link>
           </Flex>
         </Card>
       </Flex>
