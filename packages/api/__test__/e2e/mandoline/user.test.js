@@ -98,7 +98,7 @@ describe("POST /api/mandoline/user", () => {
           dispo_max: 325,
           email: "service-50@justice.fr",
           etablissement: "service-50",
-          lb_adresse: "Rue du service tutellaire",
+          lb_adresse: "Rue du service tutelaire",
           lb_code_postal: "75010",
           lb_ville: "Paris",
           mesures_en_attente: 330,
