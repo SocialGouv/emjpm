@@ -10,7 +10,6 @@ import {
 import React from "react";
 import { Box } from "rebass";
 
-import { formatSatisfactionPourcent } from "./helpers";
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
@@ -53,15 +52,10 @@ const IndicatorList = (props) => {
   const {
     view_indicateur_login: login,
     view_indicateur_inscrit: inscrit,
-    view_indicateur_satisfaction_campaign: satisfaction,
     departements,
   } = data;
   const [department] = departements;
-  const [loginData, inscritData, satisfactionData] = filterArrays([
-    login,
-    inscrit,
-    satisfaction,
-  ]);
+  const [loginData, inscritData] = filterArrays([login, inscrit]);
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
@@ -118,47 +112,6 @@ const IndicatorList = (props) => {
           loading={false}
           title="Magistrats"
           indicator={loginData.ti ? loginData.ti.count : 0}
-        />
-      </Box>
-      <Heading2>Satisfaction</Heading2>
-      <Box my={4} sx={IndicatorBoxStyle}>
-        <Indicator
-          error={false}
-          loading={false}
-          title="Services mandataires"
-          indicator={formatSatisfactionPourcent(
-            satisfactionData.service
-              ? satisfactionData.service.value
-              : undefined
-          )}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Préposés à un établissement"
-          indicator={formatSatisfactionPourcent(
-            satisfactionData.prepose
-              ? satisfactionData.prepose.value
-              : undefined
-          )}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Mandataires individuels"
-          indicator={formatSatisfactionPourcent(
-            satisfactionData.individuel
-              ? satisfactionData.individuel.value
-              : undefined
-          )}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Magistrats"
-          indicator={formatSatisfactionPourcent(
-            satisfactionData.ti ? satisfactionData.ti.value : undefined
-          )}
         />
       </Box>
     </Box>
