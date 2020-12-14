@@ -358,7 +358,7 @@ Init Managed Database:
   extends:
     - .base_docker_helm_image_stage
     - .dev_stage
-    - .register_stage
+    - .deploy_stage
   script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
