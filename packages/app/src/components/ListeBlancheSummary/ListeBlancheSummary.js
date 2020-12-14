@@ -90,9 +90,6 @@ const ListeBlancheSummary = () => {
     individuel_finance: {
       aggregate: { count: individuelFinanceCount },
     },
-    prepose_rattache: {
-      aggregate: { count: preposeRattacheCount },
-    },
     service: {
       aggregate: { count: serviceCount },
     },
@@ -113,7 +110,7 @@ const ListeBlancheSummary = () => {
         />
         <LabelValue
           label="Mandataire préposé à un établissement"
-          value={`${preposeCount} dont ${preposeRattacheCount} rattachés`}
+          value={`${preposeCount}`}
         />
         <LabelValue label="Services" value={`${serviceCount}`} />
       </Flex>

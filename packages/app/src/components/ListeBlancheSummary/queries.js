@@ -15,19 +15,6 @@ export const LB_SUMMARY = gql`
         count
       }
     }
-    prepose_rattache: lb_users_aggregate(
-      where: {
-        type: { _eq: "prepose" }
-        lb_user_etablissements: {
-          etablissement: { departement_id: { _eq: $departementId } }
-          etablissement_rattachement: { _eq: true }
-        }
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
     individuel: lb_users_aggregate(
       where: {
         type: { _eq: "individuel" }
