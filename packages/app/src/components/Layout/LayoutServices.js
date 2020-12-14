@@ -5,7 +5,6 @@ import { Box } from "rebass";
 import { Footer } from "../Footer";
 import { Header } from "../Header";
 import { Navigation } from "../Navigation";
-import { SatisfactionCampaign } from "../SatisfactionCampaign";
 import { UserContext } from "../UserContext";
 
 const navigationLinks = [
@@ -71,8 +70,6 @@ const LayoutServices = (props) => {
           </BoxWrapper>
         </Box>
       </Box>
-      {process.env.NEXT_PUBLIC_EMJPM_APP_DISABLE_SATISFACTION_CAMPAIGN !==
-        "true" && <SatisfactionCampaign />}
     </Fragment>
   );
 };

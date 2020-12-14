@@ -35,10 +35,6 @@ const navigationLinks = [
     title: "API Logs",
     url: "/admin/api-logs",
   },
-  {
-    title: "Campagnes de satisfaction",
-    url: "/admin/satisfaction-campaigns",
-  },
 ];
 
 const LayoutAdmin = (props) => {

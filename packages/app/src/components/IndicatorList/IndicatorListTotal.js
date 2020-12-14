@@ -10,7 +10,6 @@ import {
 import React from "react";
 import { Box } from "rebass";
 
-import { formatSatisfactionPourcent } from "./helpers";
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
 
@@ -75,26 +74,6 @@ const IndicatorListTotal = () => {
         sum: { count: magistratInscritCount },
       },
     },
-    magistratStatisfaction: {
-      aggregate: {
-        avg: { value: magistratStatisfactionValue },
-      },
-    },
-    serviceStatisfaction: {
-      aggregate: {
-        avg: { value: serviceStatisfactionValue },
-      },
-    },
-    preposeStatisfaction: {
-      aggregate: {
-        avg: { value: preposeStatisfactionValue },
-      },
-    },
-    individuelStatisfaction: {
-      aggregate: {
-        avg: { value: individuelStatisfactionValue },
-      },
-    },
   } = data;
   return (
     <Box>
@@ -151,33 +130,6 @@ const IndicatorListTotal = () => {
           loading={false}
           title="Magistrats"
           indicator={magistratLoginCount ? magistratLoginCount : 0}
-        />
-      </Box>
-      <Heading2>Satisfaction</Heading2>
-      <Box my={4} sx={IndicatorBoxStyle}>
-        <Indicator
-          error={false}
-          loading={false}
-          title="Services mandataires"
-          indicator={formatSatisfactionPourcent(serviceStatisfactionValue)}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Préposés à un établissement"
-          indicator={formatSatisfactionPourcent(preposeStatisfactionValue)}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Mandataires individuels"
-          indicator={formatSatisfactionPourcent(individuelStatisfactionValue)}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Magistrats"
-          indicator={formatSatisfactionPourcent(magistratStatisfactionValue)}
         />
       </Box>
     </Box>
