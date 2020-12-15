@@ -24,7 +24,7 @@
       - editor_url
       - refresh_token
       filter:
-        id:
+        user_id:
           _eq: X-Hasura-User-Id
   - role: individuel
     permission:
@@ -75,7 +75,7 @@
   - role: direction
     permission:
       filter:
-        id:
+        user_id:
           _eq: X-Hasura-User-Id
   - role: individuel
     permission:
