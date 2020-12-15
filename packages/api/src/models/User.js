@@ -2,8 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Model } = require("objection");
 
-const knexConnection = require("../db/knex");
-const jwtConfig = require("../config/jwt");
+const knexConnection = require("~/db/knex");
+const jwtConfig = require("~/config/jwt");
 const { Mandataire } = require("./Mandataire");
 const { Departement } = require("./Departement");
 const { Role } = require("./Role");

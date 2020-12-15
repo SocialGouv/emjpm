@@ -3,9 +3,9 @@ const Seven = require("node-7z");
 const fs = require("fs");
 const { join } = require("path");
 const os = require("os");
-const configuration = require("../../../env");
-const { OcmiMandataire } = require("../../../models/OcmiMandataire");
-const { ProcessusStates } = require("../../../models/ProcessusStates");
+const configuration = require("~/env");
+const { OcmiMandataire } = require("~/models/OcmiMandataire");
+const { ProcessusStates } = require("~/models/ProcessusStates");
 
 const router = express.Router();
 
@@ -13,9 +13,9 @@ const {
   readBlob,
   getBlobContainer,
   listBlobsOrderByLastModifiedDesc,
-} = require("../../../utils/azure");
+} = require("~/utils/azure");
 
-const logger = require("../../../utils/logger");
+const logger = require("~/utils/logger");
 
 const ocmiSyncFileEnabled = configuration.ocmiSyncFileEnabled || false;
 const account = configuration.azureAccountName || null;

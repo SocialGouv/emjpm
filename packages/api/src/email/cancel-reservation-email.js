@@ -1,7 +1,7 @@
 const { format } = require("date-fns");
 
-const sentry = require("../utils/sentry");
-const logger = require("../utils/logger");
+const sentry = require("~/utils/sentry");
+const logger = require("~/utils/logger");
 const { mesureFormatter } = require("@emjpm/core");
 const { sendEmail } = require(".");
 

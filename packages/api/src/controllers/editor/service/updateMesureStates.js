@@ -1,4 +1,4 @@
-const updater = require("../../../services/updateMesureStates");
+const updater = require("~/services/updateMesureStates");
 
 async function updateMesureStates(serviceOrMandataire, type) {
   if (type === "mandataire") {

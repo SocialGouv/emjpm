@@ -1,4 +1,4 @@
-const knexConnection = require("../db/knex");
+const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
 
 const { Departement } = require("./Departement");

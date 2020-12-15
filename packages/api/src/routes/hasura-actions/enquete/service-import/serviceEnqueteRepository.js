@@ -1,22 +1,20 @@
-const { EnqueteReponses } = require("../../../../models/EnqueteReponses");
-const {
-  EnqueteReponsesActivite,
-} = require("../../../../models/EnqueteReponsesActivite");
+const { EnqueteReponses } = require("~/models/EnqueteReponses");
+const { EnqueteReponsesActivite } = require("~/models/EnqueteReponsesActivite");
 const {
   EnqueteReponsesPopulations,
-} = require("../../../../models/EnqueteReponsesPopulations");
+} = require("~/models/EnqueteReponsesPopulations");
 const {
   EnqueteReponsesServiceInformations,
-} = require("../../../../models/EnqueteReponsesServiceInformations");
+} = require("~/models/EnqueteReponsesServiceInformations");
 const {
   EnqueteReponsesServicePersonnelFormation,
-} = require("../../../../models/EnqueteReponsesServicePersonnelFormation");
+} = require("~/models/EnqueteReponsesServicePersonnelFormation");
 
 const {
   getEnqueteReponseService,
   createEmptyEnqueteReponse,
 } = require("../service/requests");
-const HttpError = require("../../../../utils/error/HttpError");
+const HttpError = require("~/utils/error/HttpError");
 
 async function update(enqueteId, { tabs, serviceId, isUpload = false }) {
   const { activite, populations, informations, personnelFormation } = tabs;

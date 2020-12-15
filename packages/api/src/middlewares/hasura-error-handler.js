@@ -1,6 +1,6 @@
-const sentry = require("../utils/sentry");
-const logger = require("../utils/logger");
-const HttpError = require("../utils/error/HttpError");
+const sentry = require("~/utils/sentry");
+const logger = require("~/utils/logger");
+const HttpError = require("~/utils/error/HttpError");
 
 // https://hasura.io/docs/1.0/graphql/manual/actions/action-handlers.html#returning-an-error-response
 const hasuraActionErrorHandler = (message) => (err, req, res, next) => {

@@ -1,7 +1,7 @@
-const { Mesure } = require("../../../../models/Mesure");
-const { MesureEtat } = require("../../../../models/MesureEtat");
-const getGeoDatas = require("../../../../services/getGeoDatas");
-const getDepartement = require("../../../../services/getDepartement");
+const { Mesure } = require("~/models/Mesure");
+const { MesureEtat } = require("~/models/MesureEtat");
+const getGeoDatas = require("~/services/getGeoDatas");
+const getDepartement = require("~/services/getDepartement");
 
 module.exports = async function updateCurrentDataOfMesure(mesureId) {
   const {

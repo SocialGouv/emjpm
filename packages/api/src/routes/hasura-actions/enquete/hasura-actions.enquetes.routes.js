@@ -1,12 +1,12 @@
 const express = require("express");
-const HttpError = require("../../../utils/error/HttpError");
+const HttpError = require("~/utils/error/HttpError");
 
-const logger = require("../../../utils/logger");
+const logger = require("~/utils/logger");
 const mandataireIndividuelEnqueteImporter = require("./mandataire-individuel-import/mandataireIndividuelEnqueteImporter");
 const preposeEnqueteImporter = require("./mandataire-prepose-import/preposeEnqueteImporter");
 const serviceEnqueteImporter = require("./service-import/serviceEnqueteImporter");
 const checkEnqueteContext = require("./hasura-actions.enquetes.checker");
-const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
+const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 const {
   initEnqueteMandataireIndividuel,
   submitEnqueteMandataireIndividuel,

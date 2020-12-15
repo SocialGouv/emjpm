@@ -1,6 +1,6 @@
 const XLSX = require("xlsx");
 
-const getMesures = require("../../../../services/getMesures");
+const getMesures = require("~/services/getMesures");
 
 module.exports = async (req, res, next) => {
   try {

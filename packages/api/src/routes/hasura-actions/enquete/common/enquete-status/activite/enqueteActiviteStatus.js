@@ -4,7 +4,7 @@ const {
   getGlobalStatus,
 } = require("../enqueteSchemaUtil");
 const yup = require("yup");
-const logger = require("../../../../../../utils/logger");
+const logger = require("~/utils/logger");
 
 module.exports = async (enqueteReponse) => {
   logger.info(
