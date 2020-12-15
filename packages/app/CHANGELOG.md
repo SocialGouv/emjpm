@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.78.0](https://github.com/SocialGouv/emjpm/compare/v25.77.0...v25.78.0) (2020-12-15)
+
+
+### Bug Fixes
+
+* **liste-blanche:** delete mandataire only viewable by admin ([#2373](https://github.com/SocialGouv/emjpm/issues/2373)) ([140730f](https://github.com/SocialGouv/emjpm/commit/140730f16822189993d525159762c2a6dd9b460c))
+
+
+### Features
+
+* **admin-lb-delete:** admin list-blanche delete mandataire ([#2363](https://github.com/SocialGouv/emjpm/issues/2363)) ([b6b2a92](https://github.com/SocialGouv/emjpm/commit/b6b2a92a5be7ba87ed6432ab466eb72f44fb3634)), closes [#2320](https://github.com/SocialGouv/emjpm/issues/2320)
+* **mandataire:** display message if no court selected ([4f4e408](https://github.com/SocialGouv/emjpm/commit/4f4e408d694912663b9f1f6f8b2ee3394b986175))
+
+
+
+
+
 # [25.77.0](https://github.com/SocialGouv/emjpm/compare/v25.76.0...v25.77.0) (2020-12-13)
 
 
