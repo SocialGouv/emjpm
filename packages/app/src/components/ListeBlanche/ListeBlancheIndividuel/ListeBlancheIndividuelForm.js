@@ -1,6 +1,7 @@
+import { isAdmin } from "@emjpm/core";
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import React from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {
@@ -9,6 +10,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput } from "~/util";
 import { DepartementFormUtil } from "~/util/departements";
@@ -72,6 +74,8 @@ export const ListeBlancheIndividuelForm = (props) => {
     },
     validationSchema,
   });
+
+  const user = useContext(UserContext);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -190,16 +194,18 @@ export const ListeBlancheIndividuelForm = (props) => {
       </Flex>
 
       <Flex mt={4} justifyContent="flex-end">
-        <Box>
-          <Link
-            href={`/admin/liste-blanche/[id]/delete`}
-            asLink={`/admin/liste-blanche/${data.id}/delete`}
-          >
-            <Button mr="2" bg="red">
-              Supprimer
-            </Button>
-          </Link>
-        </Box>
+        {isAdmin(user) && (
+          <Box>
+            <Link
+              href={`/admin/liste-blanche/[id]/delete`}
+              asLink={`/admin/liste-blanche/${data.id}/delete`}
+            >
+              <Button mr="2" bg="red">
+                Supprimer
+              </Button>
+            </Link>
+          </Box>
+        )}
         {handleCancel && (
           <Box>
             <Button
