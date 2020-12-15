@@ -7,8 +7,7 @@
     "lint": "lerna run lint --parallel",
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "lerna run start --parallel",
-    "test": "lerna run test --parallel",
-    "postinstall": "node_modules/.bin/lerna run postinstall"
+    "test": "lerna run test --parallel"
   },
   "license": "Apache-2.0",
   "devDependencies": {
