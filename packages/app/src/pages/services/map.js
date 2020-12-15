@@ -7,7 +7,7 @@ import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
 import { withAuthSync } from "~/util/auth";
 
 const ServiceMap = dynamic(
-  () => import("}</ServiceMap").then((mod) => mod.ServiceMap),
+  () => import("~/components/ServiceMap").then((mod) => mod.ServiceMap),
   { ssr: false }
 );
 

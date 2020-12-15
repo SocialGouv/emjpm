@@ -7,7 +7,7 @@ import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesure
 import { withAuthSync } from "~/util/auth";
 
 const MandataireMap = dynamic(
-  () => import("}</MandataireMap").then((mod) => mod.MandataireMap),
+  () => import("~/components/MandataireMap").then((mod) => mod.MandataireMap),
   { ssr: false }
 );
 
