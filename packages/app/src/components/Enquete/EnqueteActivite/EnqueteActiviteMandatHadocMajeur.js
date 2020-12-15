@@ -2,7 +2,8 @@ import React, { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 import { Box } from "rebass";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteMesuresForm } from "./common";
 import { UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR } from "./mutations";

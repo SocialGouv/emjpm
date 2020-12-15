@@ -7,13 +7,14 @@ import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { DynamicTable, DynamicTableHeader } from "~/components/DynamicTable";
+import ErrorBox from "~/components/ErrorBox";
 import {
   MESURE_STATUS_LABEL_VALUE_ATTENTE,
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
-} from "../../constants/mesures";
-import { DynamicTable, DynamicTableHeader } from "../DynamicTable";
-import ErrorBox from "../ErrorBox";
+} from "~/constants/mesures";
+
 import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 
@@ -198,11 +199,13 @@ function buildTableColumns() {
     },
     {
       Header: "Date de nomination",
-      accessor: (data) => format(new Date(data.date_nomination), "dd/MM/yyy"),
+      accessor: (data) =>
+        format(new Date(data.date_nomination), "~/components/MM/yyy"),
     },
     {
       Header: "Date de création",
-      accessor: (data) => format(new Date(data.created_at), "dd/MM/yyy hh:mm"),
+      accessor: (data) =>
+        format(new Date(data.created_at), "~/components/MM/yyy hh:mm"),
     },
     {
       Header: "Tribunal",

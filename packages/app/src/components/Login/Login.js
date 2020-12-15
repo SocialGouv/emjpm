@@ -15,10 +15,10 @@ import { useApolloClient } from "react-apollo";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
-import { loginSchema } from "../../lib/validationSchemas";
-import { matopush } from "../../matomo";
-import { login } from "../../util/auth";
-import { Link } from "../Commons";
+import { Link } from "~/components/Commons";
+import { loginSchema } from "~/lib/validationSchemas";
+import { matopush } from "~/matomo";
+import { login } from "~/util/auth";
 
 const {
   publicRuntimeConfig: { API_URL },

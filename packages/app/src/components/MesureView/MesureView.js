@@ -3,7 +3,8 @@ import { Card, Heading3 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { MesureContext } from "../MesureContext";
+import { MesureContext } from "~/components/MesureContext";
+
 import { MesureDetailView } from "./MesureDetailView";
 import { MesureEtatViewList } from "./MesureEtatViewList";
 import { MesureRessourceView } from "./MesureRessourceView";

@@ -3,8 +3,9 @@ import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React, { useState } from "react";
 
-import { isEmailExists } from "../../query-service/EmailQueryService";
-import { useDepartements } from "../../util/departements/useDepartements.hook";
+import { isEmailExists } from "~/query-service/EmailQueryService";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MANDATAIRE } from "./queries";

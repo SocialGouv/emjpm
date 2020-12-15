@@ -3,8 +3,9 @@ import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 
-import { captureException } from "../../util/sentry";
-import { ServiceAntenneForm } from "../ServiceAntenneForms";
+import { ServiceAntenneForm } from "~/components/ServiceAntenneForms";
+import { captureException } from "~/util/sentry";
+
 import { EDIT_ANTENNE } from "./mutations";
 
 const ServiceAntenneEdit = (props) => {

@@ -3,7 +3,8 @@ import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { DEFAULT_MESURE_NATURE } from "../../constants/mesures";
+import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
+
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 

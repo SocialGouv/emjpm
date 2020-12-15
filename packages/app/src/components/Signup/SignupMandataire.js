@@ -14,11 +14,16 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { signupMandataireSchema } from "../../lib/validationSchemas";
-import { isSiretExists } from "../../query-service/SiretQueryService";
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
-import { Geocode } from "../Geocode";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Geocode } from "~/components/Geocode";
+import { signupMandataireSchema } from "~/lib/validationSchemas";
+import { isSiretExists } from "~/query-service/SiretQueryService";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";

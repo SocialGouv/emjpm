@@ -3,9 +3,9 @@ import { DropDownMenu, Header as HeaderComponent } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
 
-import { logout } from "../../util/auth";
-import { Link } from "../Commons";
-import { UserContext } from "../UserContext";
+import { Link } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+import { logout } from "~/util/auth";
 
 export const defaultLinks = [
   // { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }

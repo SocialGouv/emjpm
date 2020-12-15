@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import React from "react";
 import { Flex, Text } from "rebass";
 
-import { LinkButton } from "../Commons";
+import { LinkButton } from "~/components/Commons";
 
 const LineBox = styled.div`
   position: relative;

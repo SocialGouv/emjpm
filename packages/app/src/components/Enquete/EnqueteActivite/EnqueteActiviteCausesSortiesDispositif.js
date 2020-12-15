@@ -1,7 +1,8 @@
 import React, { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCausesSortiesDispositifForm";
 import { UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF } from "./mutations";

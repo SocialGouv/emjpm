@@ -104,9 +104,10 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           </Text>
           <Text sx={descriptionStyle()}>
             {item.submitted_at
-              ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${
-                  item.uploaded_on ? "import" : "manuel"
-                })`
+              ? `${format(
+                  new Date(item.submitted_at),
+                  "~/components/MM/yyyy"
+                )} (${item.uploaded_on ? "import" : "manuel"})`
               : ""}
           </Text>
         </Flex>

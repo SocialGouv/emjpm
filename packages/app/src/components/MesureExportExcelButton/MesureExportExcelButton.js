@@ -3,8 +3,9 @@ import { Export } from "@styled-icons/boxicons-regular/Export";
 import React, { useContext } from "react";
 import { Button } from "rebass";
 
-import { b64toBlob } from "../../util/base64/b64toBlob";
-import { UserContext } from "../UserContext";
+import { UserContext } from "~/components/UserContext";
+import { b64toBlob } from "~/util/base64/b64toBlob";
+
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
 
 const downloadMesuresFile = async (b64Data) => {

@@ -4,9 +4,13 @@ import router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { serviceAntenneSchema } from "../../lib/validationSchemas";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { serviceAntenneSchema } from "~/lib/validationSchemas";
 
 const ServiceAntenneForm = (props) => {
   const { antenne = {}, handleSubmit } = props;

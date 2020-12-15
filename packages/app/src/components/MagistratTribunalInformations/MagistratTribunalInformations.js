@@ -4,7 +4,8 @@ import { Smartphone } from "@styled-icons/material/Smartphone";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 
 const MagistratTribunalInformations = (props) => {

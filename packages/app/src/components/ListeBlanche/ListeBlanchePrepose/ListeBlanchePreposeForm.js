@@ -5,9 +5,13 @@ import React, { Fragment } from "react";
 import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
-import { Link } from "../../Commons";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Link } from "~/components/Commons";
+import yup from "~/lib/validationSchemas/yup";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required(),

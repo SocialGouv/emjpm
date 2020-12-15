@@ -5,7 +5,7 @@ import React, { useContext } from "react";
 import { Box, Card, Flex, Link as RebassLink } from "rebass";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
-import { UserContext } from "../UserContext";
+import { UserContext } from "~/components/UserContext";
 
 const COLORS = [
   "#FF6633",

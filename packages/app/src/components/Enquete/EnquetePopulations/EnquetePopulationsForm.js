@@ -3,7 +3,8 @@ import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { formatFormInput, parseFormInt } from "../../../util";
+import { formatFormInput, parseFormInt } from "~/util";
+
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";

@@ -4,11 +4,12 @@ import Router from "next/router";
 import React, { useContext, useMemo } from "react";
 import { Box } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { getLocation } from "../../query-service/LocationQueryService";
-import { formatTribunauxOptions } from "../../util";
-import { MESURES_QUERY } from "../MesureList/queries";
-import { UserContext } from "../UserContext";
+import { MESURES_QUERY } from "~/components/MesureList/queries";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
+import { getLocation } from "~/query-service/LocationQueryService";
+import { formatTribunauxOptions } from "~/util";
+
 import { MesureCreateForm } from "./MesureCreateForm";
 import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";

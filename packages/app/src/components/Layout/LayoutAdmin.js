@@ -2,9 +2,9 @@ import { BoxWrapper } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
 
-import { Footer } from "../Footer";
-import { Header } from "../Header";
-import { Navigation } from "../Navigation";
+import { Footer } from "~/components/Footer";
+import { Header } from "~/components/Header";
+import { Navigation } from "~/components/Navigation";
 
 const navigationLinks = [
   {

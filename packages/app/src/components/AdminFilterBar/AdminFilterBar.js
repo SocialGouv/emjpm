@@ -2,9 +2,10 @@ import { Button, Card, Input, Select, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { useDepartementsOptions } from "../../util/departements";
-import { findOption } from "../../util/option/OptionUtil";
-import { LoadingWrapper } from "../Commons";
+import { LoadingWrapper } from "~/components/Commons";
+import { useDepartementsOptions } from "~/util/departements";
+import { findOption } from "~/util/option/OptionUtil";
+
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";
 

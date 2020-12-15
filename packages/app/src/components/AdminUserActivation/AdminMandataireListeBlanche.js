@@ -3,7 +3,8 @@ import React, { Fragment, useContext } from "react";
 import { useMutation } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 
 export const AdminMandataireListeBlanche = (props) => {

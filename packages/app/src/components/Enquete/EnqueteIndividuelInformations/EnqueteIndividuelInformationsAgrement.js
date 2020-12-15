@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useContext } from "react";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteIndividuelInformationsAgrementForm } from "./EnqueteIndividuelInformationsAgrementForm";
 import { UPDATE_ENQUETE_INFORMATIONS_AGREMENTS } from "./mutations";

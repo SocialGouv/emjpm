@@ -12,7 +12,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { AntenneLinkButton, LinkButton } from "../Commons";
+import { AntenneLinkButton, LinkButton } from "~/components/Commons";
+
 import { ANTENNE } from "./queries";
 
 const ServiceAntennes = (props) => {

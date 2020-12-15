@@ -2,7 +2,8 @@ import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useContext, useMemo } from "react";
 import { Box } from "rebass";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_TUTELLE } from "./mutations";

@@ -3,12 +3,13 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { formatGestionnaireId } from "../../util/mandataires";
-import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
-import { MagistratMesureMandataireTitle } from "../MagistratMesureMandataireTitle";
-import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
-import { MagistratMesureServiceTitle } from "../MagistratMesureServiceTitle";
-import { UserContext } from "../UserContext";
+import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
+import { MagistratMesureMandataireTitle } from "~/components/MagistratMesureMandataireTitle";
+import { MAGISTRAT_MESURES_QUERY } from "~/components/MagistratMesures/queries";
+import { MagistratMesureServiceTitle } from "~/components/MagistratMesureServiceTitle";
+import { UserContext } from "~/components/UserContext";
+import { formatGestionnaireId } from "~/util/mandataires";
+
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
 import {
   CALCULATE_MESURES,

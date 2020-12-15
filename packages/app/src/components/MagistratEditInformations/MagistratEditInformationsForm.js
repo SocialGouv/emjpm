@@ -3,14 +3,14 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { magistratEditSchema } from "../../lib/validationSchemas";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
-import { Link } from "../Commons";
+} from "~/components/AppForm";
+import { Link } from "~/components/Commons";
+import { magistratEditSchema } from "~/lib/validationSchemas";
 
 const MagistratEditInformationsForm = (props) => {
   const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;

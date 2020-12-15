@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import React, { useContext, useMemo } from "react";
 
-import { MapCluster, MapContainer } from "../Map";
-import { UserContext } from "../UserContext";
+import { MapCluster, MapContainer } from "~/components/Map";
+import { UserContext } from "~/components/UserContext";
+
 import { MESURES_SERVICE } from "./queries";
 
 const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {

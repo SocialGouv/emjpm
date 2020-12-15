@@ -5,8 +5,9 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { useDebounce } from "../../lib/hooks";
-import { PaginatedList } from "../PaginatedList";
+import { PaginatedList } from "~/components/PaginatedList";
+import { useDebounce } from "~/lib/hooks";
+
 import { API_LOGS_SEARCH } from "./queries";
 
 const RowItem = ({ item }) => {
@@ -27,7 +28,7 @@ const RowItem = ({ item }) => {
             width: 120,
           }}
         >
-          {format(new Date(created_at), "dd/MM/yyyy hh:mm")}
+          {format(new Date(created_at), "~/components/MM/yyyy hh:mm")}
         </Box>
         <Box
           sx={{

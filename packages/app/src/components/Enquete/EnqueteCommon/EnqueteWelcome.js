@@ -4,8 +4,9 @@ import { format } from "date-fns";
 import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
-import { UserContext } from "../../../../src/components/UserContext";
-import { LinkButton } from "../../../components/Commons";
+import { LinkButton } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
 const textStyle = {

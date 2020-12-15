@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useMutation } from "react-apollo";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { EnqueteSubmit } from "../EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_REPONSE } from "./mutations";

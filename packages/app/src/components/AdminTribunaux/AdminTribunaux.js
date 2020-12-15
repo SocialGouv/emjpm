@@ -4,8 +4,9 @@ import { Lock } from "@styled-icons/boxicons-solid/Lock";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { AdminFilterContext } from "../AdminFilterBar/context";
-import { PaginatedList } from "../PaginatedList";
+import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { PaginatedList } from "~/components/PaginatedList";
+
 import { AdminEditTribunal } from "./AdminEditTribunal";
 import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
 import { TRIBUNAUX } from "./queries";

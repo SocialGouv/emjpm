@@ -3,7 +3,8 @@ import { findDepartementByCodeOrId } from "@emjpm/core";
 import Router from "next/router";
 import React from "react";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
 

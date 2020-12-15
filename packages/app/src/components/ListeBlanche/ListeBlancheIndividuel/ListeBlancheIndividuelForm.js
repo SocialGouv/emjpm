@@ -3,11 +3,16 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput } from "../../../util";
-import { DepartementFormUtil } from "../../../util/departements";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
-import { Link } from "../../Commons";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Link } from "~/components/Commons";
+import yup from "~/lib/validationSchemas/yup";
+import { formatFormInput } from "~/util";
+import { DepartementFormUtil } from "~/util/departements";
+
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 

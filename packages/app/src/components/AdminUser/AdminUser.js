@@ -3,15 +3,16 @@ import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/core";
 import React from "react";
 import { Box, Card } from "rebass";
 
-import { AccessToken } from "../AccessToken";
-import { AdminUserActivation } from "../AdminUserActivation";
-import { AdminDirectionType } from "../AdminUserDirection";
-import { AdminMandataireMesures } from "../AdminUserMandataire";
-import { AdminUserService } from "../AdminUserService";
-import { DirectionEditInformations } from "../DirectionEditInformations";
-import { MagistratEditInformations } from "../MagistratEditInformations";
-import { MandataireEditInformations } from "../MandataireEditInformations";
-import { MesureImportPanel } from "../MesureImport";
+import { AccessToken } from "~/components/AccessToken";
+import { AdminUserActivation } from "~/components/AdminUserActivation";
+import { AdminDirectionType } from "~/components/AdminUserDirection";
+import { AdminMandataireMesures } from "~/components/AdminUserMandataire";
+import { AdminUserService } from "~/components/AdminUserService";
+import { DirectionEditInformations } from "~/components/DirectionEditInformations";
+import { MagistratEditInformations } from "~/components/MagistratEditInformations";
+import { MandataireEditInformations } from "~/components/MandataireEditInformations";
+import { MesureImportPanel } from "~/components/MesureImport";
+
 import { USER } from "./queries";
 
 const AdminUser = (props) => {
