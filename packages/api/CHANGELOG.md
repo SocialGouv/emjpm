@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.78.0](https://github.com/SocialGouv/emjpm/compare/v25.77.0...v25.78.0) (2020-12-15)
+
+
+### Features
+
+* **mesures:** trigger cron delete expired pending ([#2344](https://github.com/SocialGouv/emjpm/issues/2344)) ([#2351](https://github.com/SocialGouv/emjpm/issues/2351)) ([cb576a5](https://github.com/SocialGouv/emjpm/commit/cb576a569796344d9f0d84163f7a78c711358362))
+
+
+
+
+
 # [25.77.0](https://github.com/SocialGouv/emjpm/compare/v25.76.0...v25.77.0) (2020-12-13)
 
 

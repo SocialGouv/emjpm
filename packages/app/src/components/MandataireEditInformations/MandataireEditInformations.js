@@ -86,7 +86,7 @@ const MandataireEditInformations = ({
           })),
           nom: values.nom,
           prenom: values.prenom,
-          siret: values.siret,
+          siret: values.siret ? values.siret : null,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
           ville: values.geocode.city,

@@ -1,7 +1,8 @@
+import { isAdmin } from "@emjpm/core";
 import { Button, Heading4, RadioGroup } from "@emjpm/ui";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
 
@@ -11,6 +12,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
 
 const validationSchema = yup.object().shape({
@@ -81,6 +83,8 @@ export const ListeBlanchePreposeForm = (props) => {
       value: `${e.id}`, // !canModifyAgrement(user, d.id),
     };
   });
+
+  const user = useContext(UserContext);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -192,16 +196,18 @@ export const ListeBlanchePreposeForm = (props) => {
         </FormInputBox>
       </Flex>
       <Flex justifyContent="flex-end" mt={4}>
-        <Box>
-          <Link
-            href={`/admin/liste-blanche/[id]/delete`}
-            asLink={`/admin/liste-blanche/${data.id}/delete`}
-          >
-            <Button mr="2" bg="red">
-              Supprimer
-            </Button>
-          </Link>
-        </Box>
+        {isAdmin(user) && (
+          <Box>
+            <Link
+              href={`/admin/liste-blanche/[id]/delete`}
+              asLink={`/admin/liste-blanche/${data.id}/delete`}
+            >
+              <Button mr="2" bg="red">
+                Supprimer
+              </Button>
+            </Link>
+          </Box>
+        )}
         <Box>
           <Button disabled={formik.isSubmitting} type="submit">
             {editMode ? "Mettre à jour" : "Ajouter"}
