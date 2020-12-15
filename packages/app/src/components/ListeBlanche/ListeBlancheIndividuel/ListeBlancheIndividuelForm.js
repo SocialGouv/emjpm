@@ -7,6 +7,7 @@ import yup from "../../../lib/validationSchemas/yup";
 import { formatFormInput } from "../../../util";
 import { DepartementFormUtil } from "../../../util/departements";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
+import { Link } from "../../Commons";
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
@@ -184,6 +185,16 @@ export const ListeBlancheIndividuelForm = (props) => {
       </Flex>
 
       <Flex mt={4} justifyContent="flex-end">
+        <Box>
+          <Link
+            href={`/admin/liste-blanche/[id]/delete`}
+            asLink={`/admin/liste-blanche/${data.id}/delete`}
+          >
+            <Button mr="2" bg="red">
+              Supprimer
+            </Button>
+          </Link>
+        </Box>
         {handleCancel && (
           <Box>
             <Button

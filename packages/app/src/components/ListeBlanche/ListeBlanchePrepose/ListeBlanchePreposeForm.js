@@ -7,6 +7,7 @@ import { Box, Flex, Text } from "rebass";
 
 import yup from "../../../lib/validationSchemas/yup";
 import { FormGrayBox, FormGroupInput, FormInputBox } from "../../AppForm";
+import { Link } from "../../Commons";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required(),
@@ -187,6 +188,16 @@ export const ListeBlanchePreposeForm = (props) => {
         </FormInputBox>
       </Flex>
       <Flex justifyContent="flex-end" mt={4}>
+        <Box>
+          <Link
+            href={`/admin/liste-blanche/[id]/delete`}
+            asLink={`/admin/liste-blanche/${data.id}/delete`}
+          >
+            <Button mr="2" bg="red">
+              Supprimer
+            </Button>
+          </Link>
+        </Box>
         <Box>
           <Button disabled={formik.isSubmitting} type="submit">
             {editMode ? "Mettre à jour" : "Ajouter"}

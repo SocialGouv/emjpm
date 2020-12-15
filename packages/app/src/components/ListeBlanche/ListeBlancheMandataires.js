@@ -71,6 +71,7 @@ export const ListeBlancheMandataires = (props) => {
   }, [filters]);
 
   const { data, error, loading } = useQuery(LB_USERS, {
+    fetchPolicy: "cache-and-network",
     variables: {
       filters: getRequestFilters(debounceFilters),
       limit: resultPerPage,
