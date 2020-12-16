@@ -235,6 +235,7 @@ Build @emjpm/app:
     paths:
       - packages/app/.next/cache
   script:
+    - yarn workspace @emjpm/app postinstall
     - yarn workspace @emjpm/app build
   artifacts:
     expire_in: 1 day
