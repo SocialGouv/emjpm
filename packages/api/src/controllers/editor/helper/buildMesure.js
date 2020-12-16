@@ -23,7 +23,7 @@ function buildMesure({
     date_nomination: datas.date_nomination,
     date_premier_mesure: datas.date_premier_mesure,
     date_protection_en_cours: datas.date_protection_en_cours,
-    department_id: departement.id,
+    department_id: departement ? departement.id : null,
     latitude: latitude,
     [`${type}_id`]: serviceOrMandataire.id,
     lieu_vie: lastEtat.lieu_vie,
