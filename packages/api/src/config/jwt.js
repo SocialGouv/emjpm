@@ -1,15 +1,17 @@
 var fs = require("fs");
 var fnv = require("fnv-plus");
 
-// TODO: why does rsaPemToJwk work with a file but not with a variable?
-// WARNING: .pem files are here for exemple don't use them in production
-exports.key = (
-  process.env.AUTH_PRIVATE_KEY || fs.readFileSync("./private.pem").toString()
-).replace(/\\n/g, "\n");
+const { env } = process;
+if (env.AUTH_PRIVATE_KEY_FILE) {
+  env.AUTH_PRIVATE_KEY = fs.readFileSync(env.AUTH_PRIVATE_KEY_FILE).toString();
+}
+if (env.AUTH_PUBLIC_KEY_FILE) {
+  env.AUTH_PUBLIC_KEY = fs.readFileSync(env.AUTH_PUBLIC_KEY_FILE).toString();
+}
 
-exports.publicKey = (
-  process.env.AUTH_PUBLIC_KEY || fs.readFileSync("./public.pem").toString()
-).replace(/\\n/g, "\n");
+exports.key = env.AUTH_PRIVATE_KEY.replace(/\\n/g, "\n");
+
+exports.publicKey = env.AUTH_PUBLIC_KEY.replace(/\\n/g, "\n");
 
 // Key Identifier – Acts as an ‘alias’ for the key
-exports.kid = process.env.AUTH_KEY_ID || fnv.hash(this.publicKey, 128).hex();
+exports.kid = env.AUTH_KEY_ID || fnv.hash(this.publicKey, 128).hex();

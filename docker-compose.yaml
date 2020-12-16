@@ -59,12 +59,16 @@ services:
     user: "node"
     working_dir: /home/node/app
     volumes:
+      - ./.docker-compose/secrets:/secrets:ro
       - ./:/home/node/app
     ports:
       - 3000:3000
       - 4000:4000
     restart: always
     command: "yarn dev"
+    environment:
+      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
 
 volumes:
   emjpm-pgdata:

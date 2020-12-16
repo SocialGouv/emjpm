@@ -24,6 +24,11 @@ services:
       - db
     links:
       - db
+    volumes:
+      - ./.docker-compose/secrets:/secrets:ro
+    environment:
+      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
 
   frontend:
     image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app:master
