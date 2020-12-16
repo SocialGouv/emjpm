@@ -126,8 +126,7 @@ const importMesures = async ({
   }
 
   const cache = {
-    departmentById: {},
-    departmentByRegionCode: {},
+    departmentByCode: {},
     serviceAntenneByName: {},
     tribunalBySiret: {},
   };
@@ -218,12 +217,11 @@ const prepareMesure = async (
     tribunal_siret,
   } = mesureDatas;
 
-  const department = await actionsMesuresImporterGeoRepository.findDepartment({
-    cache,
-    code_postal,
-    mandataire,
-    service,
-  });
+  const department =
+    (await actionsMesuresImporterGeoRepository.findDepartment({
+      cache,
+      code_postal,
+    })) || {};
 
   const pays = getMesurePays(code_postal);
 

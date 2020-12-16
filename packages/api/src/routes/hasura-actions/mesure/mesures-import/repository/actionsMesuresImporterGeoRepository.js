@@ -17,30 +17,14 @@ const findDepartmentFromPostalCode = async (code_postal, departmentByCode) => {
   return { departementCode, department };
 };
 
-async function findDepartment({
-  mandataire,
-  service,
-  code_postal,
-  cache: { departmentById, departmentByCode },
-}) {
-  const department_id = mandataire
-    ? mandataire.department_id
-    : service.department_id;
-
+async function findDepartment({ code_postal, cache: { departmentByCode } }) {
   // eslint-disable-next-line prefer-const
-  let { department, regionCode } = await findDepartmentFromPostalCode(
+  let { department, departementCode } = await findDepartmentFromPostalCode(
     code_postal,
     departmentByCode
   );
-  if (!department) {
-    department = departmentById[department_id];
-  }
-  if (!department) {
-    department = await Departement.query().findById(department_id);
-  }
   if (department) {
-    departmentById[department.id] = department;
-    departmentByCode[regionCode] = department;
+    departmentByCode[departementCode] = department;
   }
   return department;
 }
