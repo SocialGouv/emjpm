@@ -230,7 +230,7 @@ const prepareMesure = async (
   let latitude;
   let longitude;
 
-  if (isFrance()) {
+  if (isFrance(pays)) {
     const geoData = await actionsMesuresImporterGeoRepository.getGeoDatas(
       code_postal,
       ville
@@ -254,7 +254,6 @@ const prepareMesure = async (
   }
 
   if (serviceId && importSummary.errors.length === 0) {
-    // if any arror yet: not necessary to provide invalid antennes names
     const antenne_name = mesureDatas.antenne;
     if (antenne_name) {
       const antenne = await actionsMesuresImporterMesureRepository.findAntenne(
