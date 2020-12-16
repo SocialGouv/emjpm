@@ -62,42 +62,6 @@ docker-compose up --build -d
 
 [On a successful `master` branch pipeline click on trigger the `Release` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines)
 
-### Auto
-
-Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the `master` branch with a custom config:
-
-```yml
-env:
-  global:
-    - RELEASE=true
-```
-
-You can change the lerna arguments though the `LERNA_ARGS` variable.
-
-```yml
-env:
-  global:
-    - LERNA_ARGS="--force-publish --yes"
-    - RELEASE=true
-```
-
-### Manual
-
-You need an [Github token](https://github.com/settings/tokens/new) to release.
-
-```sh
-#
-# Bump, push to git and publish to npm
-$ yarn lerna version
-
-#
-# Publish the tag change log on the Github Release
-$ CONVENTIONAL_GITHUB_RELEASER_TOKEN==************ npx conventional-github-releaser -p angular
-
-#
-# You might want to add a Gif to your release to make it groovy ;)
-```
-
 ## Deployment policy
 
 All branches and tags are automatically deployed
@@ -111,25 +75,6 @@ See https://github.com/SocialGouv/emjpm/deployments
 ### One click tag release !!
 
 [On a successful `tag` branch pipeline click on trigger the `Put to production` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines?scope=tags&page=1)
-
-### Auto
-
-Trigger a custom build on [Travis](https://travis-ci.com/SocialGouv/emjpm) (in the "More options" right menu) on the tag `v*` you with a custom config:
-
-```yml
-env:
-  global:
-    - PRODUCTION=true
-```
-
-### Manual
-
-```sh
-# Run the k8s files
-$ kubectl apply -f ./.k8s/frontend/deployment.yml
-$ kubectl apply -f ./.k8s/frontend/service.yml
-$ kubectl apply -f ./.k8s/frontend/ingress.yml
-```
 
 ## Branch name
 
