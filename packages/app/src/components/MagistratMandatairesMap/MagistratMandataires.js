@@ -2,12 +2,13 @@ import { useQuery } from "@apollo/react-hooks";
 import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 
+import { UserContext } from "~/components/UserContext";
 import {
   MANDATAIRE_IND,
   MANDATAIRE_PRE,
   SERVICE,
-} from "../../constants/discriminator";
-import { UserContext } from "../UserContext";
+} from "~/constants/discriminator";
+
 import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 

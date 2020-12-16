@@ -2,10 +2,11 @@ import { BoxWrapper } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
-import { Footer } from "../Footer";
-import { Header } from "../Header";
-import { Navigation } from "../Navigation";
-import { UserContext } from "../UserContext";
+import { Footer } from "~/components/Footer";
+import { Header } from "~/components/Header";
+import { Navigation } from "~/components/Navigation";
+import { UserContext } from "~/components/UserContext";
+
 import isPayedByParis from "./isPayedByParis";
 
 const navigationLinks = [

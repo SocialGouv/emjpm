@@ -4,8 +4,8 @@ const {
   submitEnqueteReponse,
 } = require("./requests");
 const enqueteServiceStatus = require("./enqueteServiceStatus");
-const logger = require("../../../../utils/logger");
-const HttpError = require("../../../../utils/error/HttpError");
+const logger = require("~/utils/logger");
+const HttpError = require("~/utils/error/HttpError");
 
 async function initEnqueteService(context) {
   const { enqueteId, serviceId } = context;

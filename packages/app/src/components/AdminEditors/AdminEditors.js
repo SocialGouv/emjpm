@@ -4,9 +4,10 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { captureException } from "../../util/sentry";
-import { AdminFilterContext } from "../AdminFilterBar/context";
-import { PaginatedList } from "../PaginatedList";
+import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { PaginatedList } from "~/components/PaginatedList";
+import { captureException } from "~/util/sentry";
+
 import { REMOVE_EDITOR } from "./mutations";
 import { EDITORS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";

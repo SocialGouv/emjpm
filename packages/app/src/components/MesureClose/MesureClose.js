@@ -4,11 +4,12 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { MesureContext } from "../MesureContext";
-import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
-import { MESURES_QUERY } from "../MesureList/queries";
-import { UserContext } from "../UserContext";
+import { MesureContext } from "~/components/MesureContext";
+import { MESURE_CONTEXT_QUERY } from "~/components/MesureContext/queries";
+import { MESURES_QUERY } from "~/components/MesureList/queries";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
+
 import { MesureCloseForm } from "./MesureCloseForm";
 import { CALCULATE_MESURES, CLOSE_MESURE } from "./mutations";
 import { MesureCloseStyle } from "./style";

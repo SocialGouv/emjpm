@@ -6,7 +6,8 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { formatMesureListItems } from "../../util/mesures";
+import { formatMesureListItems } from "~/util/mesures";
+
 import { MESURES } from "./queries";
 import { ServiceMapPanelMesuresStyle } from "./style";
 

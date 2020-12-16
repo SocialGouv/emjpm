@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { AccessTokenDelete } from "../AccessTokenDelete";
+import { AccessTokenDelete } from "~/components/AccessTokenDelete";
+
 import { USER_TOKEN } from "./queries";
 
 const innerTextStyle = {

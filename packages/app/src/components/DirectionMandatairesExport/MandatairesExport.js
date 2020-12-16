@@ -2,7 +2,8 @@ import { Button } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { ApolloConsumer } from "react-apollo";
 
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+
 import { exportMandataires } from "./MandatairesExcel";
 import { MANDATAIRES } from "./queries";
 

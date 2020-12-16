@@ -1,5 +1,5 @@
 const preposeEnqueteExcelParser = require("./preposeEnqueteExcelParser");
-const logger = require("../../../../utils/logger");
+const logger = require("~/utils/logger");
 const preposeEnqueteRepository = require("./preposeEnqueteRepository");
 
 const preposeEnqueteImporter = {

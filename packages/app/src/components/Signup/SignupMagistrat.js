@@ -5,13 +5,14 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { signupMagistratSchema } from "../../lib/validationSchemas";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
+} from "~/components/AppForm";
+import { signupMagistratSchema } from "~/lib/validationSchemas";
+
 import { SignupContext } from "./context";
 import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";

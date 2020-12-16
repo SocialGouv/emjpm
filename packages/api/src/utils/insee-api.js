@@ -1,6 +1,6 @@
-const sentry = require("../utils/sentry");
-const siret = require("../utils/siret");
-const logger = require("../utils/logger");
+const sentry = require("~/utils/sentry");
+const siret = require("~/utils/siret");
+const logger = require("~/utils/logger");
 
 const fetchTribunalDatas = async (tribunal_siret) => {
   const { error, data } = await siret.find(tribunal_siret);

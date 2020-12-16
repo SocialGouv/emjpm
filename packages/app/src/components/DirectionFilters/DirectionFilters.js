@@ -3,12 +3,13 @@ import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 import {
   departementToOptions,
   findOption,
   regionsToOptions,
-} from "../../util/option/OptionUtil";
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+} from "~/util/option/OptionUtil";
+
 import { GET_REGIONS } from "./queries";
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 

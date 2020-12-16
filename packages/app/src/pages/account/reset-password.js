@@ -1,0 +1,30 @@
+import { FlexWrapper, Heading1 } from "@emjpm/ui";
+import React from "react";
+
+import { LayoutPublic } from "~/components/Layout";
+import { ResetPassword } from "~/components/ResetPassword";
+import { withAuthSync } from "~/util/auth";
+
+const ResetPasswordPage = (props) => {
+  const { resetToken } = props;
+  return (
+    <LayoutPublic>
+      <FlexWrapper
+        mt={6}
+        px="1"
+        alignItems="center"
+        flexDirection="column"
+        justifyContent="center"
+      >
+        <Heading1>Modifier votre mot de passe</Heading1>
+        <ResetPassword token={resetToken} mt="3" />
+      </FlexWrapper>
+    </LayoutPublic>
+  );
+};
+
+ResetPasswordPage.getInitialProps = async ({ query }) => {
+  return { resetToken: query.token };
+};
+
+export default withAuthSync(ResetPasswordPage);

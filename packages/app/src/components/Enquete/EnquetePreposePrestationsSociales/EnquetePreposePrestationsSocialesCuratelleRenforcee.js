@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useMutation, useQuery } from "react-apollo";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE } from "./mutations";

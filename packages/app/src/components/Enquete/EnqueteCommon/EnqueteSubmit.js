@@ -1,5 +1,5 @@
+import { stdFormatter } from "@emjpm/core";
 import { Button, Heading1 } from "@emjpm/ui";
-import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -45,8 +45,7 @@ export const EnqueteSubmit = ({
           </Text>
           {enquete.date_fin && (
             <Text>
-              Vous avez jusqu’au{" "}
-              {format(new Date(enquete.date_fin), "dd/MM/yyyy")}.
+              Vous avez jusqu’au {stdFormatter.formatDateUI(enquete.date_fin)}.
             </Text>
           )}
         </Box>
@@ -73,10 +72,7 @@ export const EnqueteSubmit = ({
           {enquete.date_fin && (
             <Text>
               {"Vous avez jusqu’au "}
-              <strong>
-                {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
-              </strong>
-              .
+              <strong>{stdFormatter.formatDateUI(enquete.date_fin)}</strong>.
             </Text>
           )}
         </Box>
@@ -108,7 +104,7 @@ export const EnqueteSubmit = ({
                   <Text>
                     {"Vous avez jusqu’au "}
                     <strong>
-                      {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
+                      {stdFormatter.formatDateUI(enquete.date_fin)}
                     </strong>
                     .
                   </Text>
@@ -133,7 +129,7 @@ export const EnqueteSubmit = ({
                   <Text>
                     {"Vous avez jusqu’au "}
                     <strong>
-                      {format(new Date(enquete.date_fin), "dd/MM/yyyy")}
+                      {stdFormatter.formatDateUI(enquete.date_fin)}
                     </strong>
                     .
                   </Text>

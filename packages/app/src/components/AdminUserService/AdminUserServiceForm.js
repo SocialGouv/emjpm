@@ -3,9 +3,13 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { adminUserServiceSchema } from "../../lib/validationSchemas";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
-import { Link } from "../Commons";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Link } from "~/components/Commons";
+import { adminUserServiceSchema } from "~/lib/validationSchemas";
 
 const AdminUserServiceForm = (props) => {
   const { cancelLink, user, handleSubmit, errorMessage } = props;

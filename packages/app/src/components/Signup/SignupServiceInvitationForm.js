@@ -4,8 +4,12 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { signupSchema } from "../../lib/validationSchemas";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { signupSchema } from "~/lib/validationSchemas";
 
 export const SignupServiceInvitationForm = (props) => {
   const { handleSubmit, invitation } = props;

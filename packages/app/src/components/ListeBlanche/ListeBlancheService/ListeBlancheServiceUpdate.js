@@ -3,8 +3,9 @@ import { findDepartementByCodeOrId } from "@emjpm/core";
 import React from "react";
 import { Card } from "rebass";
 
-import { useDepartements } from "../../../util/departements/useDepartements.hook";
-import { captureException } from "../../../util/sentry";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { captureException } from "~/util/sentry";
+
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { SERVICE } from "./queries";

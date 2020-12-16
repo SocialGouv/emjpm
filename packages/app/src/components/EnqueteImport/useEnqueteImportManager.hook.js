@@ -1,9 +1,12 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { useState } from "react";
 
-import { fileReader } from "../../util/fileReader";
-import { ENQUETE, ENQUETE_WITH_REPONSE_STATUS } from "../Enquete/queries";
-import { UPLOAD_ENQUETE_EXCEL_FILE } from "../EnqueteImport/mutations";
+import {
+  ENQUETE,
+  ENQUETE_WITH_REPONSE_STATUS,
+} from "~/components/Enquete/queries";
+import { UPLOAD_ENQUETE_EXCEL_FILE } from "~/components/EnqueteImport/mutations";
+import { fileReader } from "~/util/fileReader";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();

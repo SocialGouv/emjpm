@@ -3,7 +3,8 @@ import getConfig from "next/config";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { Link, List, ListItem, ListTitle } from "../Commons";
+import { Link, List, ListItem, ListTitle } from "~/components/Commons";
+
 import { FooterItemStyle, FooterWrapperStyle } from "./style";
 
 const { publicRuntimeConfig } = getConfig();

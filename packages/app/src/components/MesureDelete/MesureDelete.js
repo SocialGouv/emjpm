@@ -4,10 +4,11 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { MesureContext } from "../MesureContext";
-import { MESURES_QUERY } from "../MesureList/queries";
-import { UserContext } from "../UserContext";
+import { MesureContext } from "~/components/MesureContext";
+import { MESURES_QUERY } from "~/components/MesureList/queries";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
+
 import { MesureDeleteForm } from "./MesureDeleteForm";
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MesureDeleteStyle } from "./style";

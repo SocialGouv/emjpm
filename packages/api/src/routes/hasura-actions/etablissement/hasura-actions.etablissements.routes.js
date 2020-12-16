@@ -2,7 +2,7 @@ const express = require("express");
 
 const { importFinessFile } = require("./actionFinessImporter");
 
-const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
+const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 
 const router = express.Router();
 

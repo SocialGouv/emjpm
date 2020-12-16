@@ -3,8 +3,9 @@ import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import React from "react";
 import { Box } from "rebass";
 
-import { MESURE_CONTEXT_QUERY } from "../MesureContext/queries";
-import { MESURES_QUERY } from "../MesureList/queries";
+import { MESURE_CONTEXT_QUERY } from "~/components/MesureContext/queries";
+import { MESURES_QUERY } from "~/components/MesureList/queries";
+
 import { MesureEtatCreateOrEditForm } from "./MesureEtatCreateOrEditForm";
 import { DELETE_MESURE_ETAT, UPSERT_MESURE_ETAT } from "./mutations";
 

@@ -7,10 +7,10 @@ const {
   userSerializer: authHasuraUserSerializer,
 } = require("./strategies/authHasuraWebHookHeaderSecretStrategy");
 
-const logger = require("../utils/logger");
-const jwtConfig = require("../config/jwt");
+const logger = require("~/utils/logger");
+const jwtConfig = require("~/config/jwt");
 
-const knex = require("../db/knex");
+const knex = require("~/db/knex");
 
 if (!jwtConfig.publicKey) {
   logger.error("Invalid jwtConfig.publicKey, check process.env.JWT_KEY");

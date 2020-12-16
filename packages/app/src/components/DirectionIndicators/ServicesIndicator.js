@@ -2,7 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { Indicator } from "@emjpm/ui";
 import React, { useContext } from "react";
 
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+
 import { GET_GESTIONNAIRE_NUMBER } from "./queries";
 
 const ServicesIndicator = () => {

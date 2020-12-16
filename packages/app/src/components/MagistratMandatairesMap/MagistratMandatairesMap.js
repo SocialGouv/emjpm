@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import ReactMapboxGl from "react-mapbox-gl";
 
+import { MapLayer, MapPopup } from "~/components/Map";
+import { MapContext } from "~/components/Map/context";
+import { mapImages } from "~/components/Map/utils";
 import {
   MANDATAIRE_IND,
   MANDATAIRE_PRE,
   SERVICE,
-} from "../../constants/discriminator";
-import { MapLayer, MapPopup } from "../Map";
-import { MapContext } from "../Map/context";
-import { mapImages } from "../Map/utils";
+} from "~/constants/discriminator";
+
 import { MagistratMandatairesMapPopup } from "./MagistratMandatairesMapPopup";
 
 const Map = ReactMapboxGl({ accessToken: "" });

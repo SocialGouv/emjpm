@@ -2,8 +2,9 @@ import { Heading1 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput, parseFormInput, parseFormInt } from "../../../util";
+import yup from "~/lib/validationSchemas/yup";
+import { formatFormInput, parseFormInput, parseFormInt } from "~/util";
+
 import { ENQ_REP_INFO_SERVICE } from "../constants/ENQ_REQ_INFO_SERVICE.const";
 import { EnqueteFormInputField, EnqueteFormSelectField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";

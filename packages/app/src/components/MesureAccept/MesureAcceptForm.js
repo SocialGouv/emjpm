@@ -4,9 +4,9 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { mesureAcceptSchema } from "../../lib/validationSchemas";
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
-import { GeocodeCities } from "../Geocode";
+import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
+import { GeocodeCities } from "~/components/Geocode";
+import { mesureAcceptSchema } from "~/lib/validationSchemas";
 
 export const MesureAcceptForm = (props) => {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;

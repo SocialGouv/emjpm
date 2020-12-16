@@ -4,8 +4,9 @@ import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
-import { AdminFilterContext } from "../AdminFilterBar/context";
-import { PaginatedList } from "../PaginatedList";
+import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { PaginatedList } from "~/components/PaginatedList";
+
 import { ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 

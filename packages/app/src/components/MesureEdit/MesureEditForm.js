@@ -4,14 +4,14 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { mesureEditSchema } from "../../lib/validationSchemas";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
-import TribunalAutoComplete from "../TribunalAutoComplete";
+} from "~/components/AppForm";
+import TribunalAutoComplete from "~/components/TribunalAutoComplete";
+import { mesureEditSchema } from "~/lib/validationSchemas";
 
 const initialValues = (mesure) => {
   return {

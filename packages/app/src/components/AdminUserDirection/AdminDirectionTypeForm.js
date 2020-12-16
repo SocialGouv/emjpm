@@ -4,8 +4,12 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
-import yup from "../../lib/validationSchemas/yup";
-import { FormGrayBox, FormGroupSelect, FormInputBox } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupSelect,
+  FormInputBox,
+} from "~/components/AppForm";
+import yup from "~/lib/validationSchemas/yup";
 
 const directionTypeOptions = [
   {

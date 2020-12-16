@@ -1,7 +1,8 @@
 import React, { Fragment } from "react";
 import { useQuery } from "react-apollo";
 
-import { LoadingWrapper } from "../Commons";
+import { LoadingWrapper } from "~/components/Commons";
+
 import { ListeBlancheIndividuelUpdate } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
 import { LB_USER } from "./queries";

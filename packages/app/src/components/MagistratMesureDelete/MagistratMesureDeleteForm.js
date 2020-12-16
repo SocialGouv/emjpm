@@ -5,10 +5,11 @@ import Router from "next/router";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { magistratMesureDeleteSchema } from "../../lib/validationSchemas";
-import { GESTIONNAIRES } from "../MagistratMesureMandataire/queries";
-import { MAGISTRAT_MESURES_QUERY } from "../MagistratMesures/queries";
-import { UserContext } from "../UserContext";
+import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
+import { MAGISTRAT_MESURES_QUERY } from "~/components/MagistratMesures/queries";
+import { UserContext } from "~/components/UserContext";
+import { magistratMesureDeleteSchema } from "~/lib/validationSchemas";
+
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 

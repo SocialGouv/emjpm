@@ -2,8 +2,9 @@ import { Card, Select } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { useDepartementsOptions } from "../../../util/departements";
-import { LoadingWrapper } from "../../Commons";
+import { LoadingWrapper } from "~/components/Commons";
+import { useDepartementsOptions } from "~/util/departements";
+
 import { BoxStyle } from "./style";
 
 const USER_TYPE_OPTIONS = [

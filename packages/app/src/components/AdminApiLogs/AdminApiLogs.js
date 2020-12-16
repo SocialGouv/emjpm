@@ -1,13 +1,15 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading4, Spinner } from "@emjpm/ui";
-import { format } from "date-fns";
 import Link from "next/link";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { useDebounce } from "../../lib/hooks";
-import { PaginatedList } from "../PaginatedList";
+import { PaginatedList } from "~/components/PaginatedList";
+import { useDebounce } from "~/lib/hooks";
+
 import { API_LOGS_SEARCH } from "./queries";
+
+const { stdFormatter } = require("@emjpm/core");
 
 const RowItem = ({ item }) => {
   const { id, created_at, request_method, request_url, token, response } = item;
@@ -27,7 +29,7 @@ const RowItem = ({ item }) => {
             width: 120,
           }}
         >
-          {format(new Date(created_at), "dd/MM/yyyy hh:mm")}
+          {stdFormatter.formatDateTimeUI(created_at)}
         </Box>
         <Box
           sx={{

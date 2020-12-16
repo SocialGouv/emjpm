@@ -2,8 +2,8 @@ import { Heading4, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
-import { Link } from "../Commons";
-import { UserContext } from "../UserContext";
+import { Link } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
 
 const ServiceBoard = () => {
   const { service } = useContext(UserContext);

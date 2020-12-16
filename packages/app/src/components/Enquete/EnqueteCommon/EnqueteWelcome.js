@@ -1,11 +1,11 @@
-import { isIndividuel, isPrepose, isService } from "@emjpm/core";
+import { isIndividuel, isPrepose, isService, stdFormatter } from "@emjpm/core";
 import { Heading1 } from "@emjpm/ui";
-import { format } from "date-fns";
 import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
-import { UserContext } from "../../../../src/components/UserContext";
-import { LinkButton } from "../../../components/Commons";
+import { LinkButton } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
 const textStyle = {
@@ -46,7 +46,7 @@ export const EnqueteWelcome = ({
         <Flex flexDirection="column" mt="4" mb="3" sx={textStyle}>
           <Text>Vous pouvez revenir à tout moment compléter le formulaire</Text>
           <Text sx={{ fontWeight: "700" }}>
-            jusqu’au {format(new Date(enquete.date_fin), "dd/MM/yyyy")}.
+            jusqu’au {stdFormatter.formatDateUI(enquete.date_fin)}.
           </Text>
           <Text>
             Vous pouvez appuyer sur la touche tab pour passer d’un champ à un

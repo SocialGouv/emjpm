@@ -3,8 +3,9 @@ import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { Link } from "../Commons";
-import { MesureContext } from "../MesureContext";
+import { Link } from "~/components/Commons";
+import { MesureContext } from "~/components/MesureContext";
+
 import {
   MagistratMesureContentStyle,
   MagistratMesureLinksStyle,

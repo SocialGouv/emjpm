@@ -4,11 +4,11 @@ import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
+import { MesureImportPanel } from "~/components/MesureImport";
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE,
-} from "../../constants/import";
-import { MesureImportPanel } from "../MesureImport";
+} from "~/constants/import";
 
 const DocumentLink = (props) => {
   const { children, document } = props;

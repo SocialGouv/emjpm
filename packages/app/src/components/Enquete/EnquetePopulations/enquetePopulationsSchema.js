@@ -1,4 +1,4 @@
-import yup from "../../../lib/validationSchemas/yup";
+import yup from "~/lib/validationSchemas/yup";
 
 // schema identique à enquetePopulationsSchema (côté hasura actions)
 export const enquetePopulationsSchema = yup.object().shape({

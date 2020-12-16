@@ -2,8 +2,9 @@ import { isMandataire, isService } from "@emjpm/core";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { MesureBadge } from "../MesureBadge";
-import { UserContext } from "../UserContext";
+import { MesureBadge } from "~/components/MesureBadge";
+import { UserContext } from "~/components/UserContext";
+
 import Link from "./Link";
 
 const ServiceBadge = ({ service }) => {

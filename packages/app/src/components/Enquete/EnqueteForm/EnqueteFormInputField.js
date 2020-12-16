@@ -2,7 +2,8 @@ import { Field, Input } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { SmallInput } from "../../Commons/SmallInput";
+import { SmallInput } from "~/components/Commons/SmallInput";
+
 import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
 import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";

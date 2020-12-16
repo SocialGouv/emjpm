@@ -1,6 +1,6 @@
-const { Editors } = require("../models/Editors");
-const { AuthorizationCodes } = require("../models/AuthorizationCodes");
-const { AccessToken } = require("../models/AccessToken");
+const { Editors } = require("~/models/Editors");
+const { AuthorizationCodes } = require("~/models/AuthorizationCodes");
+const { AccessToken } = require("~/models/AccessToken");
 
 module.exports = {
   getAccessToken: async (token) => {

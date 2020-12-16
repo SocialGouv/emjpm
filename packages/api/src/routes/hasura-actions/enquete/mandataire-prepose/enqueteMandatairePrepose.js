@@ -4,8 +4,8 @@ const {
   submitEnqueteReponse,
 } = require("./requests");
 const enqueteMandatairePreposeStatus = require("./enqueteMandatairePreposeStatus");
-const logger = require("../../../../utils/logger");
-const HttpError = require("../../../../utils/error/HttpError");
+const logger = require("~/utils/logger");
+const HttpError = require("~/utils/error/HttpError");
 
 async function initEnqueteMandatairePrepose({
   // eslint-disable-next-line no-unused-vars

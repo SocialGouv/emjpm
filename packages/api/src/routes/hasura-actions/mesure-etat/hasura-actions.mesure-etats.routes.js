@@ -1,7 +1,7 @@
 const express = require("express");
 
 const { actionMesureEtatUpsert, actionMesureEtatDelete } = require("./actions");
-const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
+const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 
 const router = express.Router();
 

@@ -12,7 +12,8 @@ import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { editorTokenSchema } from "../../lib/validationSchemas";
+import { editorTokenSchema } from "~/lib/validationSchemas";
+
 import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
 
 const TokenRequest = () => {

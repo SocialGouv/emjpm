@@ -4,8 +4,8 @@ const {
   submitEnqueteReponse,
 } = require("./requests");
 const enqueteMandataireIndividuelStatus = require("./enqueteMandataireIndividuelStatus");
-const logger = require("../../../../utils/logger");
-const HttpError = require("../../../../utils/error/HttpError");
+const logger = require("~/utils/logger");
+const HttpError = require("~/utils/error/HttpError");
 
 async function submitEnqueteMandataireIndividuel({
   enqueteContext: { enqueteId, mandataireId },

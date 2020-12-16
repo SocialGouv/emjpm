@@ -13,9 +13,9 @@ import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
-import { forgotPasswordSchema } from "../../lib/validationSchemas";
-import { captureException } from "../../util/sentry";
-import { Link } from "../Commons";
+import { Link } from "~/components/Commons";
+import { forgotPasswordSchema } from "~/lib/validationSchemas";
+import { captureException } from "~/util/sentry";
 
 const {
   publicRuntimeConfig: { API_URL },

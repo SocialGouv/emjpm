@@ -3,7 +3,8 @@ import { Card, CheckBox, Heading2, Heading4, Select, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+
 import { MandatairesCapacityChart } from "./MandatairesCapacityChart";
 import { MANDATAIRES_CAPACITY } from "./queries";
 

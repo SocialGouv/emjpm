@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
 import React from "react";
 
-import { formatGestionnaireId } from "../../util/mandataires";
+import { formatGestionnaireId } from "~/util/mandataires";
+
 import { MagistratMandataireMapContent } from "./MagistratMandataireMapContent";
 import { MESURES } from "./queries";
 

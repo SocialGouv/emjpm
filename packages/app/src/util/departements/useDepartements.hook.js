@@ -2,7 +2,7 @@ import { gql } from "apollo-boost";
 import { useContext } from "react";
 import { useQuery } from "react-apollo";
 
-import { UserContext } from "../../components/UserContext";
+import { UserContext } from "~/components/UserContext";
 
 const GET_FILTERED_DEPARTEMENTS = gql`
   query filtered_departements($filterIds: [Int!]) {

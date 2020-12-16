@@ -1,5 +1,5 @@
-const sentry = require("../utils/sentry");
-const logger = require("../utils/logger");
+const sentry = require("~/utils/sentry");
+const logger = require("~/utils/logger");
 const { sendEmail } = require(".");
 
 const EMAIL_RELANCE_TEXT = `

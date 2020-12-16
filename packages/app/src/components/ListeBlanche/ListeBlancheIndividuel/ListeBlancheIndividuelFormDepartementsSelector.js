@@ -3,7 +3,7 @@ import { Select } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-import { useDepartements } from "../../../util/departements/useDepartements.hook";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
   const { departements = [], onAdd } = props;
