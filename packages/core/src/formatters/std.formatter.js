@@ -11,6 +11,6 @@ export const stdFormatter = {
     if (!date) {
       return "";
     }
-    return stdFormatter.formatDateUI(date);
+    return format(new Date(date), "dd/MM/yyyy");
   },
 };
