@@ -19,8 +19,7 @@
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
-    "~": "src",
-    "~public": "public"
+    "~": "src"
   },
   "keywords": [],
   "license": "Apache-2.0",

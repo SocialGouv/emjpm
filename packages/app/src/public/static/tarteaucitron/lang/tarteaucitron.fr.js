@@ -5,20 +5,20 @@ tarteaucitron.lang = {
     "Bonjour! Ce site joue la transparence et vous donne le choix des services tiers à activer.",
   adblock_call:
     "Merci de désactiver votre adblocker pour commencer la personnalisation.",
-  alertBig:
-    "vous acceptez l'utilisation de services tiers pouvant installer des cookies",
-
-  alertBigClick: "En poursuivant votre navigation,",
-  alertBigPrivacy:
-    "Ce site utilise des cookies et vous donne le contrôle sur ce que vous souhaitez activer",
-  alertBigScroll: "En continuant de défiler,",
-
-  alertSmall: "Gestion des services",
   ads: {
     details:
       "Les régies publicitaires permettent de générer des revenus en commercialisant les espaces publicitaires du site.",
     title: "Régies publicitaires",
   },
+
+  alertBig:
+    "vous acceptez l'utilisation de services tiers pouvant installer des cookies",
+  alertBigClick: "En poursuivant votre navigation,",
+  alertBigPrivacy:
+    "Ce site utilise des cookies et vous donne le contrôle sur ce que vous souhaitez activer",
+
+  alertBigScroll: "En continuant de défiler,",
+  alertSmall: "Gestion des services",
   all: "Préférences pour tous les services",
   allow: "Autoriser",
   allowAll: "Autoriser tous les cookies",
@@ -29,13 +29,13 @@ tarteaucitron.lang = {
     title: "Mesure d'audience",
   },
 
-  close: "Fermer",
-
   api: {
     details:
       "Les APIs permettent de charger des scripts : géolocalisation, moteurs de recherche, traductions, ...",
     title: "APIs",
   },
+
+  close: "Fermer",
   comment: {
     details:
       "Les gestionnaires de commentaires facilitent le dépôt de vos commentaires et luttent contre le spam.",

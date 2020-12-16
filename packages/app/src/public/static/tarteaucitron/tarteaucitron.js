@@ -27,6 +27,19 @@ var scripts = document.getElementsByTagName("script"),
   tarteaucitronNoAdBlocker = false;
 
 var tarteaucitron = {
+  AddOrUpdate: function (source, custom) {
+    /**
+         Utility function to Add or update the fields of obj1 with the ones in obj2
+         */
+    for (key in custom) {
+      if (custom[key] instanceof Object) {
+        source[key] = tarteaucitron.AddOrUpdate(source[key], custom[key]);
+      } else {
+        source[key] = custom[key];
+      }
+    }
+    return source;
+  },
   addScript: function (url, id, callback, execute, attrName, attrVal) {
     "use strict";
     var script,
@@ -524,19 +537,6 @@ var tarteaucitron = {
       }
       return "";
     },
-  },
-  AddOrUpdate: function (source, custom) {
-    /**
-         Utility function to Add or update the fields of obj1 with the ones in obj2
-         */
-    for (key in custom) {
-      if (custom[key] instanceof Object) {
-        source[key] = tarteaucitron.AddOrUpdate(source[key], custom[key]);
-      } else {
-        source[key] = custom[key];
-      }
-    }
-    return source;
   },
   engage: function (id) {
     "use strict";
@@ -1498,9 +1498,7 @@ var tarteaucitron = {
     "use strict";
     setTimeout(tarteaucitron.proPing, 500);
   },
-  services: {},
   reloadThePage: false,
-  version: 20191031,
   sendEvent: function (event_key) {
     if (event_key !== undefined) {
       //ie compatibility
@@ -1516,6 +1514,7 @@ var tarteaucitron = {
       document.dispatchEvent(send_event_item);
     }
   },
+  services: {},
   state: [],
   user: {},
   userInterface: {
@@ -2184,4 +2183,5 @@ var tarteaucitron = {
       }
     },
   },
+  version: 20191031,
 };

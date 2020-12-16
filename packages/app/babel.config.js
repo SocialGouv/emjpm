@@ -10,7 +10,6 @@ module.exports = {
       {
         alias: {
           "~": "./src",
-          "~public": "./public",
         },
         root: ["."],
       },

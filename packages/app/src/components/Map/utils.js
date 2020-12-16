@@ -1,7 +1,7 @@
-import iconIndividuelMarker from "~public/static/images/map-icon-individuel-man@2x.png";
-import iconMesureMarker from "~public/static/images/map-icon-mesure@2x.png";
-import iconPreposeMarker from "~public/static/images/map-icon-propose-man@2x.png";
-import iconServiceMarker from "~public/static/images/map-icon-service@2x.png";
+import iconIndividuelMarker from "~/public/static/images/map-icon-individuel-man@2x.png";
+import iconMesureMarker from "~/public/static/images/map-icon-mesure@2x.png";
+import iconPreposeMarker from "~/public/static/images/map-icon-propose-man@2x.png";
+import iconServiceMarker from "~/public/static/images/map-icon-service@2x.png";
 
 import { MANDATAIRE_IND, MANDATAIRE_PRE, MESURE, SERVICE } from "./constants";
 
