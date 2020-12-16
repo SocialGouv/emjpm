@@ -4,8 +4,8 @@ const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
 
 const rules = [
-  body("numero_rg").not().isEmpty().trim().escape(),
-  body("annee_naissance").not().isEmpty().trim().escape(),
+  body("numero_rg").not().isEmpty().trim(),
+  body("annee_naissance").not().isEmpty().trim(),
   body("civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
 
   body("date_nomination").custom(checkDateNomination).isDate().toDate(),
@@ -15,7 +15,7 @@ const rules = [
     .optional({ nullable: true })
     .isDate()
     .toDate(),
-  body("tribunal_siret").not().isEmpty().trim().escape(),
+  body("tribunal_siret").not().isEmpty().trim(),
   body("antenne_id").optional({ nullable: true }).toInt(10),
   body("cause_sortie")
     .optional({ nullable: true })
@@ -32,8 +32,8 @@ const rules = [
 ];
 
 const batchRules = [
-  body("mesures.*.numero_rg").not().isEmpty().trim().escape(),
-  body("mesures.*.annee_naissance").not().isEmpty().trim().escape(),
+  body("mesures.*.numero_rg").not().isEmpty().trim(),
+  body("mesures.*.annee_naissance").not().isEmpty().trim(),
   body("mesures.*.civilite").isIn(MESURE_PROTECTION.CIVILITE.keys),
 
   body("mesures.*.date_nomination")
@@ -52,7 +52,7 @@ const batchRules = [
     .optional({ nullable: true })
     .isDate()
     .toDate(),
-  body("mesures.*.tribunal_siret").not().isEmpty().trim().escape(),
+  body("mesures.*.tribunal_siret").not().isEmpty().trim(),
   body("mesures.*.antenne_id").optional({ nullable: true }).toInt(10),
   body("mesures.*.cause_sortie")
     .optional({ nullable: true })
