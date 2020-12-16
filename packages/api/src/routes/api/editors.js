@@ -6,6 +6,7 @@ const { rules, batchRules } = require("./editors-rules");
 const editorMesureAntenne = require("~/middlewares/editor-mesures-antenne");
 const editorMesureTi = require("~/middlewares/editor-mesures-ti");
 const editorMesureUser = require("~/middlewares/editor-mesures-user");
+const contentTypeValidator = require("~/middlewares/editor-contenttype-json");
 
 const {
   mesures,
@@ -26,6 +27,7 @@ router.get("/tribunaux", tribunaux.getTribunaux);
 router
   .post(
     "/mesures",
+    contentTypeValidator,
     rules,
     editorMesureUser,
     editorMesureTi,
@@ -34,6 +36,7 @@ router
   )
   .put(
     "/mesures/:id",
+    contentTypeValidator,
     rules,
     editorMesureUser,
     editorMesureTi,
@@ -41,7 +44,13 @@ router
     mesureUpdate
   );
 
-router.post("/mesures/batch", batchRules, editorMesureUser, mesureBatch);
+router.post(
+  "/mesures/batch",
+  contentTypeValidator,
+  batchRules,
+  editorMesureUser,
+  mesureBatch
+);
 
 router.delete("/mesures/:id", editorMesureUser, mesureDelete.deleteById);
 router.delete("/mesures", editorMesureUser, mesureDelete.deleteAll);
