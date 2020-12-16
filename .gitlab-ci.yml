@@ -208,6 +208,7 @@ Build @emjpm/api:
     - Build @emjpm/core
   image: node:12-alpine
   script:
+    - yarn workspace @emjpm/api postinstall
     - yarn workspace @emjpm/api build
   artifacts:
     expire_in: 1 day
