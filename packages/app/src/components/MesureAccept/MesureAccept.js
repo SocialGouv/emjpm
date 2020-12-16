@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { isFrance, MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";
@@ -57,7 +57,7 @@ export const MesureAccept = (props) => {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const variables = {};
 
-    if (values.pays === "FR") {
+    if (isFrance(values.pays)) {
       const location = await getLocation(client, {
         city: values.ville,
         zipcode: values.code_postal,
