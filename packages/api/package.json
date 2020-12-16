@@ -27,6 +27,7 @@
     "@azure/storage-blob": "^12.2.1",
     "@emjpm/core": "^25.78.0",
     "@sentry/node": "5.27.2",
+    "@vercel/ncc": "^0.25.1",
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -69,7 +70,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@socialgouv/eslint-config-recommended": "^1.46.0",
-    "@zeit/ncc": "^0.22.3",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",

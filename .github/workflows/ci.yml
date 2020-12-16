@@ -66,9 +66,6 @@ jobs:
       - name: Installing
         run: yarn --frozen-lockfile --link-duplicates --perfer-offline
 
-      - name: Postinstall
-        run: yarn postinstall
-
       - name: Build
         run: yarn build
 
