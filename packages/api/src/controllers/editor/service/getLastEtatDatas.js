@@ -1,5 +1,6 @@
 const getDepartement = require("~/services/getDepartement");
 const getGeoDatas = require("~/services/getGeoDatas");
+const { isFrance } = require("@emjpm/core");
 
 async function getLastEtatDatas(etats) {
   etats.sort((a, b) => {
@@ -7,6 +8,11 @@ async function getLastEtatDatas(etats) {
   });
   const lastEtat = etats ? etats[etats.length - 1] : null;
 
+  if (!isFrance(lastEtat.pays)) {
+    return {
+      lastEtat,
+    };
+  }
   const departement = await getDepartement(lastEtat.code_postal);
 
   const geoloc = await getGeoDatas(lastEtat.code_postal, lastEtat.ville);

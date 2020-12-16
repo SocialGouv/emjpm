@@ -1,4 +1,8 @@
-const { MESURE_PROTECTION, MESURE_PROTECTION_STATUS } = require("@emjpm/core");
+const {
+  MESURE_PROTECTION,
+  MESURE_PROTECTION_STATUS,
+  isFrance,
+} = require("@emjpm/core");
 const excelParser = require("~/utils/file/excelParser");
 const logger = require("~/utils/logger");
 
@@ -223,10 +227,17 @@ const prepareMesure = async (
 
   const pays = getMesurePays(code_postal);
 
-  const {
-    latitude,
-    longitude,
-  } = await actionsMesuresImporterGeoRepository.getGeoDatas(code_postal, ville);
+  let latitude;
+  let longitude;
+
+  if (isFrance()) {
+    const geoData = await actionsMesuresImporterGeoRepository.getGeoDatas(
+      code_postal,
+      ville
+    );
+    latitude = geoData.latitude;
+    longitude = geoData.longitude;
+  }
 
   // ti
   const ti = await actionsMesuresImporterMesureRepository.findTribunalBySiret(

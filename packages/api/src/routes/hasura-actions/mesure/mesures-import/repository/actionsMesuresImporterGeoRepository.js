@@ -2,29 +2,26 @@ const { getDepartementCode } = require("@emjpm/core");
 const getGeoDatas = require("~/services/getGeoDatas");
 const { Departement } = require("~/models/Departement");
 
-const findDepartmentFromPostalCode = async (
-  code_postal,
-  departmentByRegionCode
-) => {
+const findDepartmentFromPostalCode = async (code_postal, departmentByCode) => {
   let department = null;
-  let regionCode = null;
+  let departementCode = null;
   if (code_postal && code_postal.length === 5) {
-    regionCode = getDepartementCode(code_postal);
-    department = departmentByRegionCode[regionCode];
+    departementCode = getDepartementCode(code_postal);
+    department = departmentByCode[departementCode];
     if (!department) {
       department = await Departement.query().findOne({
-        code: regionCode,
+        code: departementCode,
       });
     }
   }
-  return { department, regionCode };
+  return { departementCode, department };
 };
 
 async function findDepartment({
   mandataire,
   service,
   code_postal,
-  cache: { departmentById, departmentByRegionCode },
+  cache: { departmentById, departmentByCode },
 }) {
   const department_id = mandataire
     ? mandataire.department_id
@@ -33,7 +30,7 @@ async function findDepartment({
   // eslint-disable-next-line prefer-const
   let { department, regionCode } = await findDepartmentFromPostalCode(
     code_postal,
-    departmentByRegionCode
+    departmentByCode
   );
   if (!department) {
     department = departmentById[department_id];
@@ -43,7 +40,7 @@ async function findDepartment({
   }
   if (department) {
     departmentById[department.id] = department;
-    departmentByRegionCode[regionCode] = department;
+    departmentByCode[regionCode] = department;
   }
   return department;
 }
