@@ -1,5 +1,5 @@
-const { ServiceAntenne } = require("../models/ServiceAntenne");
-const { ServiceMember } = require("../models/ServiceMember");
+const { ServiceAntenne } = require("~/models/ServiceAntenne");
+const { ServiceMember } = require("~/models/ServiceMember");
 
 module.exports = async (antenneId, userId) => {
   const antennes = await ServiceAntenne.query()

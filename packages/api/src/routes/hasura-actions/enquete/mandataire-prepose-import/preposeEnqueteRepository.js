@@ -1,28 +1,26 @@
-const { EnqueteReponses } = require("../../../../models/EnqueteReponses");
+const { EnqueteReponses } = require("~/models/EnqueteReponses");
 const {
   EnqueteReponsesPopulations,
-} = require("../../../../models/EnqueteReponsesPopulations");
+} = require("~/models/EnqueteReponsesPopulations");
 const {
   EnqueteReponsesModalitesExercice,
-} = require("../../../../models/EnqueteReponsesModalitesExercice");
+} = require("~/models/EnqueteReponsesModalitesExercice");
 const {
   EnqueteReponsesPreposePersonnelFormation,
-} = require("../../../../models/EnqueteReponsesPreposePersonnelFormation");
+} = require("~/models/EnqueteReponsesPreposePersonnelFormation");
 const {
   EnqueteReponsesPreposePrestationsSociales,
-} = require("../../../../models/EnqueteReponsesPreposePrestationsSociales");
+} = require("~/models/EnqueteReponsesPreposePrestationsSociales");
 const {
   EnqueteReponsesFinancement,
-} = require("../../../../models/EnqueteReponsesFinancement");
-const {
-  EnqueteReponsesActivite,
-} = require("../../../../models/EnqueteReponsesActivite");
+} = require("~/models/EnqueteReponsesFinancement");
+const { EnqueteReponsesActivite } = require("~/models/EnqueteReponsesActivite");
 
 const {
   getEnqueteReponseMandatairePrepose,
   createEmptyEnqueteReponse,
 } = require("../mandataire-prepose/requests");
-const HttpError = require("../../../../utils/error/HttpError");
+const HttpError = require("~/utils/error/HttpError");
 
 async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   const {

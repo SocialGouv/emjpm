@@ -2,7 +2,7 @@ import { BoxWrapper, Header } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
 
-import { Footer } from "../Footer";
+import { Footer } from "~/components/Footer";
 
 const LayoutPublic = (props) => {
   const { children } = props;

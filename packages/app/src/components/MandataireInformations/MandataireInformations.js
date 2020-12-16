@@ -4,9 +4,10 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { AccessToken } from "../AccessToken";
-import { LinkButton } from "../Commons";
-import { UserContext } from "../UserContext";
+import { AccessToken } from "~/components/AccessToken";
+import { LinkButton } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+
 import { content, subtitle } from "./style";
 
 const label = (value) => {

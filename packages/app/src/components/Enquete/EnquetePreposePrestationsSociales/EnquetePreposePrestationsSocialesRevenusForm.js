@@ -3,8 +3,9 @@ import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { parseFormFloat } from "../../../util";
+import yup from "~/lib/validationSchemas/yup";
+import { parseFormFloat } from "~/util";
+
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
 import { useEnqueteForm } from "../useEnqueteForm.hook";

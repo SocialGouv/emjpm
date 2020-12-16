@@ -1,10 +1,10 @@
 const { validationResult } = require("express-validator");
 const { endOfTomorrow } = require("date-fns");
 const uid = require("rand-token").uid;
-const Sentry = require("../../utils/sentry");
+const Sentry = require("~/utils/sentry");
 
-const { resetPasswordEmail } = require("../../email/forgot-password-email");
-const { User } = require("../../models/User");
+const { resetPasswordEmail } = require("~/email/forgot-password-email");
+const { User } = require("~/models/User");
 
 const forgotPassword = async (req, res) => {
   const errors = validationResult(req);

@@ -5,8 +5,9 @@ import { FieldArray, FormikProvider } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput } from "../../../util";
+import yup from "~/lib/validationSchemas/yup";
+import { formatFormInput } from "~/util";
+
 import { STATUTS, TYPES } from "../constants";
 import {
   EnqueteFormInputField,

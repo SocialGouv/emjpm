@@ -1,4 +1,4 @@
-const { useUrlQueryValues } = require("../../../util/url");
+const { useUrlQueryValues } = require("~/util/url");
 
 export function useCurrentStepFromUrl() {
   return useUrlQueryValues([

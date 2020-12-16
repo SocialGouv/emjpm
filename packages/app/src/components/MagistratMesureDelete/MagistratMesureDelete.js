@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Flex } from "rebass";
 
-import { MesureContext } from "../MesureContext";
+import { MesureContext } from "~/components/MesureContext";
+
 import { MagistratMesureDeleteForm } from "./MagistratMesureDeleteForm";
 import { MagistratMesureRemoveStyle } from "./style";
 

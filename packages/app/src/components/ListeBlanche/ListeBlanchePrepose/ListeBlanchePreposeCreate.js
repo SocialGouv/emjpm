@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { useApolloClient, useMutation } from "react-apollo";
 import { Card } from "rebass";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
 import { CREATE_LB_USER_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";

@@ -1,9 +1,9 @@
 const express = require("express");
 
-const { Departement } = require("../../../models/Departement");
-const { Mesure } = require("../../../models/Mesure");
-const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
-const knex = require("../../../db/knex");
+const { Departement } = require("~/models/Departement");
+const { Mesure } = require("~/models/Mesure");
+const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
+const knex = require("~/db/knex");
 
 const router = express.Router();
 

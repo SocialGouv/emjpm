@@ -4,7 +4,8 @@ import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import menuStepperStyle from "../Enquete/EnqueteCommon/EnqueteMenuStepper/style";
+import menuStepperStyle from "~/components/Enquete/EnqueteCommon/EnqueteMenuStepper/style";
+
 import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
 

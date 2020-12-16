@@ -12,7 +12,15 @@
     You don't need to add any html code, if the service is autorized, the javascript is added. otherwise no.
  */
 tarteaucitron.services.matomo = {
-  cookies: ["_pk_ref", "_pk_cvar", "_pk_id", "_pk_ses", "_pk_hsr", "piwik_ignore", "_pk_uid"],
+  cookies: [
+    "_pk_ref",
+    "_pk_cvar",
+    "_pk_id",
+    "_pk_ses",
+    "_pk_hsr",
+    "piwik_ignore",
+    "_pk_uid",
+  ],
   js: function () {
     "use strict";
     if (tarteaucitron.user.matomoId === undefined) {
@@ -21,7 +29,10 @@ tarteaucitron.services.matomo = {
 
     window._paq = window._paq || [];
     window._paq.push(["setSiteId", tarteaucitron.user.matomoId]);
-    window._paq.push(["setTrackerUrl", tarteaucitron.user.matomoHost + "piwik.php"]);
+    window._paq.push([
+      "setTrackerUrl",
+      tarteaucitron.user.matomoHost + "piwik.php",
+    ]);
     window._paq.push(["setDoNotTrack", 1]);
     window._paq.push(["trackPageView"]);
     window._paq.push(["setIgnoreClasses", ["no-tracking", "colorbox"]]);
@@ -91,11 +102,6 @@ tarteaucitron.services.matomo = {
     You don't need to add any html code, if the service is autorized, the javascript is added. otherwise no.
   */
 tarteaucitron.services.hotjar = {
-  key: "hotjar",
-  type: "analytic",
-  name: "Hotjar",
-  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar",
-  needConsent: true,
   cookies: [
     "hjClosedSurveyInvites",
     "_hjDonePolls",
@@ -108,7 +114,10 @@ tarteaucitron.services.hotjar = {
   ],
   js: function () {
     "use strict";
-    if (tarteaucitron.user.hotjarId === undefined || tarteaucitron.user.HotjarSv === undefined) {
+    if (
+      tarteaucitron.user.hotjarId === undefined ||
+      tarteaucitron.user.HotjarSv === undefined
+    ) {
       return;
     }
     window.hj =
@@ -122,6 +131,13 @@ tarteaucitron.services.hotjar = {
     };
     var uri = "https://static.hotjar.com/c/hotjar-";
     var extension = ".js?sv=";
-    tarteaucitron.addScript(uri + window._hjSettings.hjid + extension + window._hjSettings.hjsv);
+    tarteaucitron.addScript(
+      uri + window._hjSettings.hjid + extension + window._hjSettings.hjsv
+    );
   },
+  key: "hotjar",
+  name: "Hotjar",
+  needConsent: true,
+  type: "analytic",
+  uri: "https://help.hotjar.com/hc/en-us/categories/115001323967-About-Hotjar",
 };

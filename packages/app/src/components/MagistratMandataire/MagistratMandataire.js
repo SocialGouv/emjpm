@@ -5,9 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { formatGestionnaireId } from "../../../src/util/mandataires";
-import { MagistratMandataireComments } from "../MagistratMandataireComments";
-import { MagistratServiceAntennes } from "../MagistratServiceAntennes";
+import { MagistratMandataireComments } from "~/components/MagistratMandataireComments";
+import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
+import { formatGestionnaireId } from "~/util/mandataires";
+
 import { GESTIONNAIRES } from "./queries";
 import {
   MagistratContentMandataireStyle,
@@ -20,7 +21,7 @@ import { formatGestionnaire } from "./utils";
 
 const MagistratMandataireMap = dynamic(
   () =>
-    import("../MagistratMandataireMap").then(
+    import("~/components/MagistratMandataireMap").then(
       (mod) => mod.MagistratMandataireMap
     ),
   { ssr: false }

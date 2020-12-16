@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { FORM_REQUIRED_MESSAGE } from "../../../lib/validationSchemas/yup";
+import { FORM_REQUIRED_MESSAGE } from "~/lib/validationSchemas/yup";
 
 export function useEnqueteFieldShowError({
   id,

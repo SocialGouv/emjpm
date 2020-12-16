@@ -1,7 +1,7 @@
 import React from "react";
 
-import { MapCluster, MapContainer, MapLayer } from "../Map";
-import { mapImages } from "../Map/utils";
+import { MapCluster, MapContainer, MapLayer } from "~/components/Map";
+import { mapImages } from "~/components/Map/utils";
 
 const MagistratMandataireMapContent = (props) => {
   const { latitude, longitude, id, discriminator, mesures } = props;

@@ -1,5 +1,5 @@
 const serviceEnqueteExcelParser = require("./serviceEnqueteExcelParser");
-const logger = require("../../../../utils/logger");
+const logger = require("~/utils/logger");
 const serviceEnqueteRepository = require("./serviceEnqueteRepository");
 
 async function importEnqueteFile({

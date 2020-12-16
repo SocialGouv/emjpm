@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars */
 
-const {
-  graphqlFetch,
-  backendAuthHeaders,
-} = require("../../../../utils/graphql-fetcher");
+const { graphqlFetch, backendAuthHeaders } = require("~/utils/graphql-fetcher");
 const {
   ENQUETE_REPONSE_SERVICE,
   ENQUETE_REPONSE_DEFAULT_VALUES,
 } = require("./queries");
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
-const logger = require("../../../../utils/logger");
+const logger = require("~/utils/logger");
 
 module.exports = {
   createEmptyEnqueteReponse: async ({ enqueteId, serviceId }) => {

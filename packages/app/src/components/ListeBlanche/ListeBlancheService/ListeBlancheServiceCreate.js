@@ -4,9 +4,10 @@ import Router from "next/router";
 import React from "react";
 import { Card } from "rebass";
 
-import { useDepartements } from "../../../util/departements/useDepartements.hook";
-import { captureException } from "../../../util/sentry";
-import serviceSiretExists from "../../../util/serviceSiretExists";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { captureException } from "~/util/sentry";
+import serviceSiretExists from "~/util/serviceSiretExists";
+
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { ADD_SERVICE } from "./mutations";
 

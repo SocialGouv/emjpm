@@ -3,9 +3,10 @@ import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { LinkButton } from "../Commons";
-import { UserContext } from "../UserContext";
+import { LinkButton } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
+
 import { content, statusBox, subtitle, title } from "./style";
 
 const MesureDetailView = ({ mesure, ...props }) => {

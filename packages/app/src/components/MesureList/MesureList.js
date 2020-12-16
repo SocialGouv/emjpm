@@ -6,10 +6,11 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { formatMesureListItems } from "../../util/mesures";
-import { FiltersContext } from "../MesureListFilters/context";
-import { UserContext } from "../UserContext";
+import { FiltersContext } from "~/components/MesureListFilters/context";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
+import { formatMesureListItems } from "~/util/mesures";
+
 import { MESURES_QUERY } from "./queries";
 import { MesureListStyle } from "./style";
 

@@ -10,12 +10,17 @@
     "dev": "next",
     "test": "jest",
     "lint:pre-commit": "yarn lint:fix",
-    "lint": "eslint pages src",
+    "lint": "eslint src",
     "lint:fix": "yarn lint --fix --cache",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",
-    "start:build": "next start -p 80"
+    "start:build": "next start -p 80",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "~": "src",
+    "~public": "public"
   },
   "keywords": [],
   "license": "Apache-2.0",
@@ -55,6 +60,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.0.0",
+    "link-module-alias": "^1.2.0",
     "lodash.flow": "^3.5.0",
     "mapbox-gl": "^1.12.0",
     "next": "^10.0.0",
@@ -83,6 +89,7 @@
     "@testing-library/jest-dom": "^5.11.5",
     "@types/node": "^14.14.6",
     "@types/react": "^16.9.55",
+    "babel-plugin-module-resolver": "^4.1.0",
     "eslint": "^7.12.1",
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",

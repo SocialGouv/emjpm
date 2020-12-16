@@ -2,8 +2,8 @@ import { AsyncSelect, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { debouncedGeocode } from "../../util/geocode";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { debouncedGeocode } from "~/util/geocode";
 
 const { findDepartementByCodeOrId } = require("@emjpm/core");
 

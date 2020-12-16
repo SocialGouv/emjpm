@@ -3,7 +3,8 @@ import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 
-import { captureException } from "../../util/sentry";
+import { captureException } from "~/util/sentry";
+
 import { AdminEditorForm } from "./AdminEditorForm";
 import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";

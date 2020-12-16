@@ -7,10 +7,15 @@ import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { signupDirectionSchema } from "../../lib/validationSchemas";
-import { useDepartementsOptions } from "../../util/departements";
-import { toOptions } from "../../util/option/OptionUtil";
-import { FormGrayBox, FormGroupSelect, FormInputBox } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupSelect,
+  FormInputBox,
+} from "~/components/AppForm";
+import { signupDirectionSchema } from "~/lib/validationSchemas";
+import { useDepartementsOptions } from "~/util/departements";
+import { toOptions } from "~/util/option/OptionUtil";
+
 import { SignupContext } from "./context";
 import { REGIONS } from "./queries";
 import signup from "./signup";

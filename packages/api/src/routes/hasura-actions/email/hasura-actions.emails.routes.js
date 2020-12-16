@@ -2,25 +2,23 @@ const express = require("express");
 const { isEnAttente } = require("@emjpm/core");
 const uid = require("rand-token").uid;
 
-const { getEmailUserDatas } = require("../../../email/email-user-data");
-const { reservationEmail } = require("../../../email/reservation-email");
-const { validationEmail } = require("../../../email/validation-email");
+const { getEmailUserDatas } = require("~/email/email-user-data");
+const { reservationEmail } = require("~/email/reservation-email");
+const { validationEmail } = require("~/email/validation-email");
 const {
   serviceMemberInvitationMail,
-} = require("../../../email/service-member-invitation-mail");
-const { Service } = require("../../../models/Service");
-const {
-  ServiceMemberInvitation,
-} = require("../../../models/ServiceMemberInvitation");
-const { Tis } = require("../../../models/Tis");
-const { Mesure } = require("../../../models/Mesure");
+} = require("~/email/service-member-invitation-mail");
+const { Service } = require("~/models/Service");
+const { ServiceMemberInvitation } = require("~/models/ServiceMemberInvitation");
+const { Tis } = require("~/models/Tis");
+const { Mesure } = require("~/models/Mesure");
 
 const {
   editorConfirmationEmail,
-} = require("../../../email/editor-confirmation-email");
+} = require("~/email/editor-confirmation-email");
 const {
   editorConfirmationAdminEmail,
-} = require("../../../email/editor-confirmation-admin-email");
+} = require("~/email/editor-confirmation-admin-email");
 
 const router = express.Router();
 

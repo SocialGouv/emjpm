@@ -5,8 +5,9 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { AccessToken } from "../AccessToken";
-import { LinkButton } from "../Commons";
+import { AccessToken } from "~/components/AccessToken";
+import { LinkButton } from "~/components/Commons";
+
 import { GET_SERVICES } from "./queries";
 import { content, subtitle } from "./style";
 

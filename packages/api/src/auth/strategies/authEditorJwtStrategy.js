@@ -1,7 +1,7 @@
 const jwtDecode = require("jwt-decode");
 const passportBearer = require("passport-http-bearer");
 
-const { AccessToken } = require("../../models/AccessToken");
+const { AccessToken } = require("~/models/AccessToken");
 
 const BearerStrategy = passportBearer.Strategy;
 

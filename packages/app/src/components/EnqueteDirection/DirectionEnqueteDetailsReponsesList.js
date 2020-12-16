@@ -5,9 +5,10 @@ import Link from "next/link";
 import React from "react";
 import { Box, Button, Flex } from "rebass";
 
-import useQueryContextWithHasuraRole from "../../hooks/useQueryContextWithHasuraRole";
-import { Breadcrumb, LoadingWrapper } from "../Commons";
-import { PaginatedList } from "../PaginatedList";
+import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
+import { PaginatedList } from "~/components/PaginatedList";
+import useQueryContextWithHasuraRole from "~/hooks/useQueryContextWithHasuraRole";
+
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
 import {

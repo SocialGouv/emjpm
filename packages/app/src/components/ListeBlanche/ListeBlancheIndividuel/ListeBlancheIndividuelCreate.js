@@ -3,7 +3,8 @@ import React, { useContext } from "react";
 import { useMutation } from "react-apollo";
 import { Card } from "rebass";
 
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
 

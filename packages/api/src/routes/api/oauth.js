@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 
-const oauthServer = require("../../oauth/server.js");
+const oauthServer = require("~/oauth/server.js");
 
 const router = express.Router();
 

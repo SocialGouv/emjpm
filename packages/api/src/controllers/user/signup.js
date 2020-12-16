@@ -1,16 +1,14 @@
 const { validationResult } = require("express-validator");
-const { User } = require("../../models/User");
-const { Mandataire } = require("../../models/Mandataire");
-const { Magistrat } = require("../../models/Magistrat");
-const { UserRole } = require("../../models/UserRole");
-const {
-  ServiceMemberInvitation,
-} = require("../../models/ServiceMemberInvitation");
-const { ServiceMember } = require("../../models/ServiceMember");
-const { Role } = require("../../models/Role");
-const { Direction } = require("../../models/Direction");
-const { errorHandler } = require("../../db/errors");
-const { inscriptionEmail } = require("../../email/inscription");
+const { User } = require("~/models/User");
+const { Mandataire } = require("~/models/Mandataire");
+const { Magistrat } = require("~/models/Magistrat");
+const { UserRole } = require("~/models/UserRole");
+const { ServiceMemberInvitation } = require("~/models/ServiceMemberInvitation");
+const { ServiceMember } = require("~/models/ServiceMember");
+const { Role } = require("~/models/Role");
+const { Direction } = require("~/models/Direction");
+const { errorHandler } = require("~/db/errors");
+const { inscriptionEmail } = require("~/email/inscription");
 
 const createMagistrat = async (magistrat, user) => {
   const { ti } = magistrat;

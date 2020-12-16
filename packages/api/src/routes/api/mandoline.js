@@ -1,5 +1,5 @@
 const express = require("express");
-const { getUser } = require("../../../src/controllers/mandoline/user");
+const { getUser } = require("~/controllers/mandoline/user");
 
 const router = express.Router();
 

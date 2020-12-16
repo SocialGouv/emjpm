@@ -5,7 +5,7 @@ import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { FormGroupInput, FormGroupSelect } from "../AppForm";
+import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
 
 export const MesureCloseForm = (props) => {
   const { handleSubmit, handleCancel } = props;

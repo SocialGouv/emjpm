@@ -11,10 +11,14 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { serviceSchema } from "../../lib/validationSchemas/serviceSchema";
-import { findOptions } from "../../util/option/OptionUtil";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { serviceSchema } from "~/lib/validationSchemas/serviceSchema";
+import { findOptions } from "~/util/option/OptionUtil";
 
 const buildTiOptions = (tis) => {
   const tiOptions = tis.map((ti) => ({

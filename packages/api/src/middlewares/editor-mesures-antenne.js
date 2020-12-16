@@ -1,4 +1,4 @@
-const antenneIdIsValid = require("../services/antenneIdIsValid");
+const antenneIdIsValid = require("~/services/antenneIdIsValid");
 
 const antenneIdValidator = async (req, res, next) => {
   const { body, user } = req;

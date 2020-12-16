@@ -1,7 +1,6 @@
-import { format } from "date-fns";
-
 import { GLOBAL, MESURE_PROTECTION } from "../constants";
 import { isMonsieur } from "../services";
+import { stdFormatter } from "./std.formatter";
 
 export const mesureFormatter = {
   formatChampMesure(champMesure) {
@@ -11,10 +10,7 @@ export const mesureFormatter = {
     return MESURE_PROTECTION.CHAMP_MESURE.byKey[champMesure];
   },
   formatJudgmentDate(judgmentDate) {
-    if (!judgmentDate) {
-      return "";
-    }
-    return format(new Date(judgmentDate), "dd/MM/yyyy");
+    return stdFormatter.formatDate(judgmentDate);
   },
   formatLieuVie(lieuVie) {
     if (!lieuVie) {

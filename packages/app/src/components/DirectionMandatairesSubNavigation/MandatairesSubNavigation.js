@@ -2,8 +2,9 @@ import { withRouter } from "next/router";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { LinkButton } from "../Commons";
-import { MandatairesExport } from "../DirectionMandatairesExport";
+import { LinkButton } from "~/components/Commons";
+import { MandatairesExport } from "~/components/DirectionMandatairesExport";
+
 import { MandatairesSubNavigationStyle } from "./style";
 
 const MandatairesSubNavigation = ({ router, ...props }) => {

@@ -9,11 +9,12 @@ import React, {
 } from "react";
 import { Box, Flex } from "rebass";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { departementToOptions, findOption } from "../../util/option/OptionUtil";
-import { Link } from "../Commons";
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
-import { UserContext } from "../UserContext";
+import { Link } from "~/components/Commons";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { UserContext } from "~/components/UserContext";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { departementToOptions, findOption } from "~/util/option/OptionUtil";
+
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
 const TYPE_OPTIONS = [

@@ -3,10 +3,10 @@ import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box } from "rebass";
 
-import { Breadcrumb, LoadingWrapper } from "../Commons";
-import { EnqueteReponse } from "../Enquete";
-import { useCurrentStepFromUrl } from "../Enquete/EnqueteCommon";
-import { ENQUETE_WITH_REPONSE_STATUS } from "../Enquete/queries";
+import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
+import { EnqueteReponse } from "~/components/Enquete";
+import { useCurrentStepFromUrl } from "~/components/Enquete/EnqueteCommon";
+import { ENQUETE_WITH_REPONSE_STATUS } from "~/components/Enquete/queries";
 
 export const DirectionEnqueteDetailsReponsePreview = ({
   enqueteId,

@@ -3,7 +3,8 @@ import { Heading1 } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment } from "react";
 
-import { isEmailExists } from "../../query-service/EmailQueryService";
+import { isEmailExists } from "~/query-service/EmailQueryService";
+
 import { SERVICE_MEMBER_INVITATION } from "./queries";
 import signup from "./signup";
 import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";

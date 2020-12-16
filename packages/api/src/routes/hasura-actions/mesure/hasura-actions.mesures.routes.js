@@ -4,7 +4,7 @@ const { actionMesuresDelete } = require("./actions");
 const { actionMesuresExport } = require("./actions");
 const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
 const checkImportMesuresParameters = require("./hasura-actions.mesures-import.checker");
-const hasuraActionErrorHandler = require("../../../middlewares/hasura-error-handler");
+const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 
 const router = express.Router();
 

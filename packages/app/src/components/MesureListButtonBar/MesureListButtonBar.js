@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { getUserBasePath } from "../../constants";
-import { LinkButton } from "../Commons";
-import { MesureExportExcelButton } from "../MesureExportExcelButton";
-import { UserContext } from "../UserContext";
+import { LinkButton } from "~/components/Commons";
+import { MesureExportExcelButton } from "~/components/MesureExportExcelButton";
+import { UserContext } from "~/components/UserContext";
+import { getUserBasePath } from "~/constants";
 
 const MesureListButtonBar = () => {
   const { type } = useContext(UserContext);

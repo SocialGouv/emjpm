@@ -20,7 +20,11 @@
     "lint:package": "sort-package-json",
     "dev": "rollup -c -w",
     "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'"
+    "prettier:fix": "prettier --write '**/*.js'",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "~": "src"
   },
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.12.1",
@@ -37,6 +41,7 @@
     "sort-package-json": "^1.46.1"
   },
   "dependencies": {
-    "date-fns": "^2.16.1"
+    "date-fns": "^2.16.1",
+    "link-module-alias": "^1.2.0"
   }
 }

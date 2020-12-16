@@ -3,7 +3,8 @@ import Router from "next/router";
 import React from "react";
 import { Card } from "rebass";
 
-import { captureException } from "../../util/sentry";
+import { captureException } from "~/util/sentry";
+
 import { AdminEditorForm } from "./AdminEditorForm";
 import { EDIT_EDITOR } from "./mutations";
 import { EDITOR } from "./queries";

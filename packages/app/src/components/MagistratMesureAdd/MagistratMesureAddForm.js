@@ -6,14 +6,14 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { IS_URGENT } from "../../constants/mesures";
-import { magistratMandataireSchema } from "../../lib/validationSchemas";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
+} from "~/components/AppForm";
+import { IS_URGENT } from "~/constants/mesures";
+import { magistratMandataireSchema } from "~/lib/validationSchemas";
 
 export const MagistratMesureAddForm = (props) => {
   const { cancelActionRoute, handleSubmit, cabinet } = props;

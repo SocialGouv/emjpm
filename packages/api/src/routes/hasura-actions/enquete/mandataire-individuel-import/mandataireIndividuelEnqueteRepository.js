@@ -1,24 +1,22 @@
-const { EnqueteReponses } = require("../../../../models/EnqueteReponses");
+const { EnqueteReponses } = require("~/models/EnqueteReponses");
 const {
   EnqueteReponsesPopulations,
-} = require("../../../../models/EnqueteReponsesPopulations");
+} = require("~/models/EnqueteReponsesPopulations");
 const {
   EnqueteReponsesPrestationsSociales,
-} = require("../../../../models/EnqueteReponsesPrestationsSociales");
+} = require("~/models/EnqueteReponsesPrestationsSociales");
 const {
   EnqueteReponsesAgrementsFormations,
-} = require("../../../../models/EnqueteReponsesAgrementsFormations");
+} = require("~/models/EnqueteReponsesAgrementsFormations");
 const {
   EnqueteReponsesInformationsMandataire,
-} = require("../../../../models/EnqueteReponsesInformationsMandataire");
-const {
-  EnqueteReponsesActivite,
-} = require("../../../../models/EnqueteReponsesActivite");
+} = require("~/models/EnqueteReponsesInformationsMandataire");
+const { EnqueteReponsesActivite } = require("~/models/EnqueteReponsesActivite");
 const {
   getEnqueteReponse,
   createEmptyEnqueteReponse,
 } = require("../mandataire-individuel/requests");
-const HttpError = require("../../../../utils/error/HttpError");
+const HttpError = require("~/utils/error/HttpError");
 
 async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   const {

@@ -2,9 +2,9 @@ import { BoxWrapper } from "@emjpm/ui";
 import React, { Fragment /*, useContext*/ } from "react";
 import { Box } from "rebass";
 
-import { Header } from "../Header";
-import { Navigation } from "../Navigation";
-// import { UserContext } from "../UserContext";
+import { Header } from "~/components/Header";
+import { Navigation } from "~/components/Navigation";
+// import { UserContext } from "~/components/UserContext";
 
 const navigationLinks = [
   {
