@@ -67,7 +67,7 @@ jobs:
         run: yarn --frozen-lockfile --link-duplicates --perfer-offline
 
       - name: Postinstall
-        run: lerna run postinstall
+        run: yarn postinstall:run
 
       - name: Build
         run: yarn build
