@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { MesureEtatCreateOrEdit } from "../MesureEtatCreateOrEdit";
+import { MesureEtatCreateOrEdit } from "~/components/MesureEtatCreateOrEdit";
 
 const { Heading3, Button, Text } = require("@emjpm/ui");
 const { Flex, Box } = require("rebass");

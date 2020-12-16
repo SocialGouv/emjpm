@@ -2,9 +2,9 @@ import { useMutation } from "@apollo/react-hooks";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
 import { useState } from "react";
 
-import { fileReader } from "../../util/fileReader";
-import { UPLOAD_MESURES_EXCEL_FILE } from "../MesureImport/mutations";
-import { MESURES_QUERY } from "../MesureList/queries";
+import { UPLOAD_MESURES_EXCEL_FILE } from "~/components/MesureImport/mutations";
+import { MESURES_QUERY } from "~/components/MesureList/queries";
+import { fileReader } from "~/util/fileReader";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();

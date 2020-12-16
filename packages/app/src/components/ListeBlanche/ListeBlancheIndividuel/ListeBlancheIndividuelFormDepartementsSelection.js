@@ -4,7 +4,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "../../../components/UserContext";
+import { UserContext } from "~/components/UserContext";
 
 function canModifyAgrement(user, departementId) {
   if (isAdmin(user)) {

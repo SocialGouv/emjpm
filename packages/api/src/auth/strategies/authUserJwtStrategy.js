@@ -1,8 +1,8 @@
 const passportJWT = require("passport-jwt");
 
-const logger = require("../../utils/logger");
-const knex = require("../../db/knex");
-const jwtConfig = require("../../config/jwt");
+const logger = require("~/utils/logger");
+const knex = require("~/db/knex");
+const jwtConfig = require("~/config/jwt");
 
 const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;

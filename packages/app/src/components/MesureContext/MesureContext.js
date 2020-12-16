@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { format } from "date-fns";
+import { stdFormatter } from "@emjpm/core";
 import React, { createContext, Fragment } from "react";
 
 import { MESURE_CONTEXT_QUERY } from "./queries";
@@ -73,22 +73,22 @@ function formatMesure(mesure) {
     codePostal: code_postal ? code_postal : "",
     dateNomination: date_nomination ? date_nomination : "",
     dateNominationFormated: date_nomination
-      ? format(new Date(date_nomination), "dd/MM/yyyy")
+      ? stdFormatter.formatDateUI(date_nomination)
       : "",
     datePremierMesure: date_premier_mesure,
     datePremierMesureFormatted: date_premier_mesure
-      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
+      ? stdFormatter.formatDateUI(date_protection_en_cours)
       : "",
     dateProtectionEnCours: date_protection_en_cours,
     dateProtectionEnCoursFormatted: date_protection_en_cours
-      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
+      ? stdFormatter.formatDateUI(date_protection_en_cours)
       : "",
     departementId: departement ? departement.id : null,
     id: id,
     isUrgent: is_urgent,
     judgmentDate: judgment_date,
     judgmentDateFormatted: judgment_date
-      ? format(new Date(judgment_date), "dd/MM/yyyy")
+      ? stdFormatter.formatDateUI(judgment_date)
       : "",
     latitude: latitude,
     lieuVie: lieu_vie ? lieu_vie : "",
@@ -100,7 +100,7 @@ function formatMesure(mesure) {
       codePostal: etat.code_postal,
       dateChangementEtat: etat.date_changement_etat,
       dateChangementEtatFormatted: etat.date_changement_etat
-        ? format(new Date(etat.date_changement_etat), "dd/MM/yyyy")
+        ? stdFormatter.formatDateUI(etat.date_changement_etat)
         : "",
       id: etat.id,
       lieuVie: etat.lieu_vie,

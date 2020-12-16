@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const configuration = require("../env");
+const configuration = require("~/env");
 
 const smtpHost = configuration.smtpHost;
 const smtpPort = configuration.smtpPort;

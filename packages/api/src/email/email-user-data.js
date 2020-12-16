@@ -1,7 +1,7 @@
-const { Service } = require("../models/Service");
-const { ServiceMember } = require("../models/ServiceMember");
-const { Mandataire } = require("../models/Mandataire");
-const { User } = require("../models/User");
+const { Service } = require("~/models/Service");
+const { ServiceMember } = require("~/models/ServiceMember");
+const { Mandataire } = require("~/models/Mandataire");
+const { User } = require("~/models/User");
 
 const getEmailUserDatas = async (mandataire_id, service_id) => {
   if (mandataire_id) {

@@ -12,16 +12,16 @@ import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { GENDER_OPTIONS } from "../../constants/user";
-import { mandataireEditSchema } from "../../lib/validationSchemas";
-import { findOptions } from "../../util/option/OptionUtil";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+} from "~/components/AppForm";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { GENDER_OPTIONS } from "~/constants/user";
+import { mandataireEditSchema } from "~/lib/validationSchemas";
+import { findOptions } from "~/util/option/OptionUtil";
 
 const buildTiOptions = (lb_departements, lb_user_etablissements) => {
   const tiList = [];

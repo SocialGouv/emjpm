@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 
-const { sanitizeMesureProperties } = require("../../utils/mesure");
+const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const updateMesureStates = require("./service/updateMesureStates");
 

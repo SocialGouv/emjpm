@@ -2,13 +2,14 @@ import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Text } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
+import yup from "~/lib/validationSchemas/yup";
 import {
   formatFormBoolean,
   formatFormInput,
   parseFormFloat,
   parseFormInput,
-} from "../../../util";
+} from "~/util";
+
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import {
   EnqueteFormInputField,

@@ -4,7 +4,7 @@ const {
   StorageSharedKeyCredential,
 } = require("@azure/storage-blob");
 const { AbortController } = require("@azure/abort-controller");
-const configuration = require("../env");
+const configuration = require("~/env");
 
 const account = configuration.azureAccountName || "";
 const accountKey = configuration.azureAccountKey || "";

@@ -4,8 +4,9 @@ import { Card, Heading2, Heading4, Spinner, Text } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+
 import { LB_SUMMARY } from "./queries";
 
 const boxStyle = {

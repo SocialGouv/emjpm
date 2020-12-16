@@ -2,8 +2,9 @@ import { Heading1, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import yup from "../../../lib/validationSchemas/yup";
-import { formatFormInput, parseFormFloat, parseFormInput } from "../../../util";
+import yup from "~/lib/validationSchemas/yup";
+import { formatFormInput, parseFormFloat, parseFormInput } from "~/util";
+
 import {
   ENQ_REP_MODALITE_EXERCICE,
   PERSONNALITE_JURIDIQUE,

@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { serviceMemberInvitationSchema } from "../../lib/validationSchemas";
+import { serviceMemberInvitationSchema } from "~/lib/validationSchemas";
 
 const ServiceMemberInvitationForm = (props) => {
   const { handleSubmit } = props;

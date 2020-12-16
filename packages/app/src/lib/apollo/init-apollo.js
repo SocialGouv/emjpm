@@ -6,7 +6,7 @@ import cookie from "js-cookie";
 import nextCookies from "next-cookies";
 import getConfig from "next/config";
 
-import { isBrowser } from "../../util";
+import { isBrowser } from "~/util";
 
 let apolloClient = null;
 

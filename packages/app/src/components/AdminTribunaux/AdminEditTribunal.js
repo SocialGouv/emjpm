@@ -2,7 +2,8 @@ import { useMutation } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId } from "@emjpm/core";
 import React from "react";
 
-import { useDepartements } from "../../util/departements/useDepartements.hook";
+import { useDepartements } from "~/util/departements/useDepartements.hook";
+
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";
 

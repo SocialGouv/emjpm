@@ -6,8 +6,8 @@ var {
   enqueteExcelParserPersonnelFormationService,
 } = require("../common/excel-parser");
 
-// var HttpError = require("../../../../utils/error/HttpError");
-const logger = require("../../../../utils/logger");
+// var HttpError = require("~/utils/error/HttpError");
+const logger = require("~/utils/logger");
 
 const parse = async ({ content }) => {
   const workbook = XLSX.read(content, {

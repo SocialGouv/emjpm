@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import React, { useContext } from "react";
 
-import { parseFormFloat, parseFormInt } from "../../../util";
-import { UserContext } from "../../UserContext";
+import { UserContext } from "~/components/UserContext";
+import { parseFormFloat, parseFormInt } from "~/util";
+
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationMjpmForm } from "./EnquetePreposePersonnelFormationMjpmForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM } from "./mutations";

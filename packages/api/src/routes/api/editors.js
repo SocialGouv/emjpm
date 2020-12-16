@@ -3,9 +3,9 @@ const express = require("express");
 const router = express.Router();
 const { param } = require("express-validator");
 const { rules, batchRules } = require("./editors-rules");
-const editorMesureAntenne = require("../../middlewares/editor-mesures-antenne");
-const editorMesureTi = require("../../middlewares/editor-mesures-ti");
-const editorMesureUser = require("../../middlewares/editor-mesures-user");
+const editorMesureAntenne = require("~/middlewares/editor-mesures-antenne");
+const editorMesureTi = require("~/middlewares/editor-mesures-ti");
+const editorMesureUser = require("~/middlewares/editor-mesures-user");
 
 const {
   mesures,
@@ -16,7 +16,7 @@ const {
   mesureUpdate,
   mesureBatch,
   mesureDelete,
-} = require("../../../src/controllers/editor");
+} = require("~/controllers/editor");
 
 router.get("/mesures", editorMesureUser, mesures);
 

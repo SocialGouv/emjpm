@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useQuery } from "react-apollo";
 
-import { LoadingWrapper } from "../Commons";
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
-import { PaginatedList } from "../PaginatedList";
+import { LoadingWrapper } from "~/components/Commons";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { PaginatedList } from "~/components/PaginatedList";
+
 import { ListeBlancheServiceItem } from "./ListeBlancheService";
 import { LB_SERVICES } from "./queries";
 

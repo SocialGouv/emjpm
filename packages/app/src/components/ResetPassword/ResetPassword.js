@@ -6,8 +6,8 @@ import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
-import { resetPasswordSchema } from "../../lib/validationSchemas";
-import { Link } from "../Commons";
+import { Link } from "~/components/Commons";
+import { resetPasswordSchema } from "~/lib/validationSchemas";
 
 const {
   publicRuntimeConfig: { API_URL },

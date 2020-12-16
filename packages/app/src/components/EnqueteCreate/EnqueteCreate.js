@@ -4,7 +4,8 @@ import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 
-import yup from "../../lib/validationSchemas/yup";
+import yup from "~/lib/validationSchemas/yup";
+
 import { CREATE_ENQUETE } from "./mutations";
 import { ENQUETES } from "./queries";
 

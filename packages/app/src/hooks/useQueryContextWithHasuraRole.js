@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 
-import { UserContext } from "../components/UserContext";
+import { UserContext } from "~/components/UserContext";
 
 function useQueryContextWithHasuraRole(rolePrefix) {
   const { user_roles: roles } = useContext(UserContext);

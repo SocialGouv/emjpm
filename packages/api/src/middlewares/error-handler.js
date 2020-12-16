@@ -1,5 +1,5 @@
-const sentry = require("../utils/sentry");
-const logger = require("../utils/logger");
+const sentry = require("~/utils/sentry");
+const logger = require("~/utils/logger");
 
 const errorHandler = (error, req, res, next) => {
   if (error) {

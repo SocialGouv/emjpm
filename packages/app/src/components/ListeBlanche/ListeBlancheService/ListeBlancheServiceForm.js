@@ -3,14 +3,14 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { adminServiceSchema } from "../../../lib/validationSchemas/adminServiceSchema";
-import { useDepartementsOptions } from "../../../util/departements";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../../AppForm";
+} from "~/components/AppForm";
+import { adminServiceSchema } from "~/lib/validationSchemas/adminServiceSchema";
+import { useDepartementsOptions } from "~/util/departements";
 
 export const ListeBlancheServiceForm = (props) => {
   const { handleCancel, handleSubmit, service } = props;

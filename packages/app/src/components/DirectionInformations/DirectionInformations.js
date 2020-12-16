@@ -6,8 +6,9 @@ import { PersonOutline } from "@styled-icons/material/PersonOutline";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { LinkButton } from "../Commons";
-import { UserContext } from "../UserContext";
+import { LinkButton } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+
 import { boxStyle, flexStyle, iconTextStyle } from "./style";
 
 const DirectionInformations = (props) => {

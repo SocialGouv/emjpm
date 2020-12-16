@@ -11,7 +11,8 @@ import React, { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { FiltersContextSerializable } from "../FiltersContextSerializable";
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";

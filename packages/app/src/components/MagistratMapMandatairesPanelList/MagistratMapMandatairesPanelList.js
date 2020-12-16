@@ -5,9 +5,10 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { formatMandatairesList } from "../MagistratMandatairesList/utils";
-import { MapContext } from "../Map/context";
-import { UserContext } from "../UserContext";
+import { formatMandatairesList } from "~/components/MagistratMandatairesList/utils";
+import { MapContext } from "~/components/Map/context";
+import { UserContext } from "~/components/UserContext";
+
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";
 

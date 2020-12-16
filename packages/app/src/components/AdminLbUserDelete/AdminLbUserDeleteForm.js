@@ -5,8 +5,9 @@ import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { adminUserDeleteSchema } from "../../lib/validationSchemas";
-import { LB_USERS } from "../ListeBlanche/queries";
+import { LB_USERS } from "~/components/ListeBlanche/queries";
+import { adminUserDeleteSchema } from "~/lib/validationSchemas";
+
 import { DELETE_LB_USER } from "./mutations";
 import { AdminLbUserDeleteRemoveStyle } from "./style";
 

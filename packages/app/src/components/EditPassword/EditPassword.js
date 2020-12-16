@@ -14,10 +14,10 @@ import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
-import { PATH } from "../../constants/basePath";
-import { passwordSchema } from "../../lib/validationSchemas";
-import { Link } from "../Commons";
-import { UserContext } from "../UserContext";
+import { Link } from "~/components/Commons";
+import { UserContext } from "~/components/UserContext";
+import { PATH } from "~/constants/basePath";
+import { passwordSchema } from "~/lib/validationSchemas";
 
 const {
   publicRuntimeConfig: { API_URL },

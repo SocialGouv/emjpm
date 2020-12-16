@@ -1,5 +1,5 @@
-const { ServiceAntenne } = require("../../../../../models/ServiceAntenne");
-const { Tis } = require("../../../../../models/Tis");
+const { ServiceAntenne } = require("~/models/ServiceAntenne");
+const { Tis } = require("~/models/Tis");
 
 async function findTribunalBySiret(siret, cache) {
   let ti = cache[siret];

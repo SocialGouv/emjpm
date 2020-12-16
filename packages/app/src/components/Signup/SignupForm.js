@@ -5,15 +5,16 @@ import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { GENDER_OPTIONS } from "../../constants/user";
-import { signupSchema } from "../../lib/validationSchemas";
-import { isEmailExists } from "../../query-service/EmailQueryService";
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "../AppForm";
+} from "~/components/AppForm";
+import { GENDER_OPTIONS } from "~/constants/user";
+import { signupSchema } from "~/lib/validationSchemas";
+import { isEmailExists } from "~/query-service/EmailQueryService";
+
 import { SignupContext } from "./context";
 
 const TYPE_OPTIONS = [

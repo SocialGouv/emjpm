@@ -10,8 +10,9 @@ import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { AdminFilterContext } from "../AdminFilterBar/context";
-import { PaginatedList } from "../PaginatedList";
+import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { PaginatedList } from "~/components/PaginatedList";
+
 import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 

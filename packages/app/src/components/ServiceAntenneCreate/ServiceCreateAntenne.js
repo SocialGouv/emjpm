@@ -3,9 +3,10 @@ import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext } from "react";
 
-import { captureException } from "../../util/sentry";
-import { ServiceAntenneForm } from "../ServiceAntenneForms";
-import { UserContext } from "../UserContext";
+import { ServiceAntenneForm } from "~/components/ServiceAntenneForms";
+import { UserContext } from "~/components/UserContext";
+import { captureException } from "~/util/sentry";
+
 import { CREATE_ANTENNE } from "./mutations";
 
 const ServiceCreateAntenne = () => {

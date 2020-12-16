@@ -9,7 +9,7 @@ import {
   XAxis,
 } from "recharts";
 
-import { textStyle } from "../DirectionMandatairesActivity/style";
+import { textStyle } from "~/components/DirectionMandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 

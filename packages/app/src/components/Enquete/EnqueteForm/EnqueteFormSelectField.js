@@ -1,7 +1,8 @@
 import { Field, Input, Select } from "@emjpm/ui";
 import React, { useMemo } from "react";
 
-import { findOption } from "../../../util/option/OptionUtil";
+import { findOption } from "~/util/option/OptionUtil";
+
 import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
 import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";

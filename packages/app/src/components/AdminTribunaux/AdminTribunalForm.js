@@ -11,8 +11,9 @@ import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
-import { adminTribunalSchema } from "../../lib/validationSchemas";
-import { Geocode, geocodeInitialValue } from "../Geocode";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { adminTribunalSchema } from "~/lib/validationSchemas";
+
 import { cardStyle } from "./style";
 
 export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {

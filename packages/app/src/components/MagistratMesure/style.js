@@ -1,4 +1,4 @@
-import mesure from "../../../public/static/images/mesure.svg";
+import mesure from "~public/static/images/mesure.svg";
 
 const MagistratMesureStyle = {
   bg: "white",

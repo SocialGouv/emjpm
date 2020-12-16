@@ -1,9 +1,9 @@
 const { transaction } = require("objection");
 const { getYear, getMonth, getDay } = require("date-fns");
 
-const { Mesure } = require("../../../models/Mesure");
-const { MesureEtat } = require("../../../models/MesureEtat");
-const { MesureRessources } = require("../../../models/MesureRessources");
+const { Mesure } = require("~/models/Mesure");
+const { MesureEtat } = require("~/models/MesureEtat");
+const { MesureRessources } = require("~/models/MesureRessources");
 
 const getLastEtatDatas = require("./getLastEtatDatas");
 const buildMesure = require("../helper/buildMesure");

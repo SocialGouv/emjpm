@@ -1,9 +1,9 @@
 const { validationResult } = require("express-validator");
 const uniq = require("lodash.uniq");
 
-const getTi = require("../../services/getTi");
-const antenneIdIsValid = require("../../services/antenneIdIsValid");
-const { sanitizeMesureProperties } = require("../../utils/mesure");
+const getTi = require("~/services/getTi");
+const antenneIdIsValid = require("~/services/antenneIdIsValid");
+const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const { saveMesures } = require("./service/saveMesure");
 const updateMesureStates = require("./service/updateMesureStates");

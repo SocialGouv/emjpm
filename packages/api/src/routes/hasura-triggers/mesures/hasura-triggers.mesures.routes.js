@@ -1,10 +1,10 @@
 const express = require("express");
-const knex = require("../../../db/knex");
-const { Mesure } = require("../../../models/Mesure");
+const knex = require("~/db/knex");
+const { Mesure } = require("~/models/Mesure");
 
 const router = express.Router();
 
-const logger = require("../../../utils/logger");
+const logger = require("~/utils/logger");
 
 router.post("/delete-expired-pending", async (req, res) => {
   logger.info(`[TRIGGER_MESURES] start cleaning expired pending mesures`);

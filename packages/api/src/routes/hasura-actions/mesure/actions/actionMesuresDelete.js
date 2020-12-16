@@ -1,10 +1,8 @@
-const { Tis } = require("../../../../models/Tis");
-const { Mesure } = require("../../../../models/Mesure");
+const { Tis } = require("~/models/Tis");
+const { Mesure } = require("~/models/Mesure");
 const { isEnAttente } = require("@emjpm/core");
-const { getEmailUserDatas } = require("../../../../email/email-user-data");
-const {
-  cancelReservationEmail,
-} = require("../../../../email/cancel-reservation-email");
+const { getEmailUserDatas } = require("~/email/email-user-data");
+const { cancelReservationEmail } = require("~/email/cancel-reservation-email");
 
 module.exports = async function (req, res, next) {
   const { mesure_id } = req.body.input;

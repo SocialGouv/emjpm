@@ -2,7 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import { isService } from "@emjpm/core";
 import React, { createContext, Fragment } from "react";
 
-import { setUser } from "../../util/sentry";
+import { setUser } from "~/util/sentry";
+
 import {
   ADMIN_USERS,
   DIRECTION_USERS,

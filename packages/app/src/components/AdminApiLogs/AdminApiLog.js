@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
+import { stdFormatter } from "@emjpm/core";
 import { Card, Text } from "@emjpm/ui";
-import { format } from "date-fns";
 import React from "react";
 import { Box, Flex } from "rebass";
 
@@ -35,7 +35,7 @@ const AdminApiLog = ({ id }) => {
           Date
         </Box>
         <Box width={2 / 3} px={4} py={2}>
-          <Text>{format(new Date(log.created_at), "dd/MM/yyyy")}</Text>
+          <Text>{stdFormatter.formatDateUI(log.created_at)}</Text>
         </Box>
       </Flex>
       <Flex mb={4}>

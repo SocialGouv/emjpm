@@ -1,4 +1,4 @@
-import { SERVICE } from "../../constants/discriminator";
+import { SERVICE } from "~/constants/discriminator";
 
 const formatGestionnaires = (gestionnaires) => {
   return gestionnaires.map((gestionnaire) => {

@@ -17,12 +17,17 @@
     "lint": "eslint __test__ src",
     "lint:fix": "yarn lint --cache --fix",
     "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'"
+    "prettier:fix": "prettier --write '**/*.js'",
+    "postinstall": "link-module-alias"
+  },
+  "_moduleAliases": {
+    "~": "src"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.2.1",
     "@emjpm/core": "^25.78.0",
     "@sentry/node": "5.27.2",
+    "@vercel/ncc": "^0.25.1",
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
@@ -40,6 +45,7 @@
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.0.0",
     "knex": "^0.21.11",
+    "link-module-alias": "^1.2.0",
     "lodash.uniq": "^4.5.0",
     "node-7z": "^2.1.2",
     "node-fetch": "^2.6.1",
@@ -64,7 +70,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.3",
     "@socialgouv/eslint-config-recommended": "^1.46.0",
-    "@zeit/ncc": "^0.22.3",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",

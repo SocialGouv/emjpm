@@ -1,5 +1,5 @@
 const mandataireIndividuelEnqueteExcelParser = require("./mandataireIndividuelEnqueteExcelParser");
-const logger = require("../../../../utils/logger");
+const logger = require("~/utils/logger");
 const mandataireIndividuelEnqueteRepository = require("./mandataireIndividuelEnqueteRepository");
 
 const mandataireIndividuelEnqueteImporter = {

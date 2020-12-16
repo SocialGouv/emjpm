@@ -4,8 +4,12 @@ import Link from "next/link";
 import { React } from "react";
 import { Box, Flex } from "rebass";
 
-import { directionEditSchema } from "../../lib/validationSchemas/directionEditSchema";
-import { FormGrayBox, FormGroupInput, FormInputBox } from "../AppForm";
+import {
+  FormGrayBox,
+  FormGroupInput,
+  FormInputBox,
+} from "~/components/AppForm";
+import { directionEditSchema } from "~/lib/validationSchemas/directionEditSchema";
 
 const DirectionEditInformationsForm = ({
   user,

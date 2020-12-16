@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { AntenneEditLinkButton } from "../Commons";
+import { AntenneEditLinkButton } from "~/components/Commons";
+
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { content, subtitle } from "./style";
 

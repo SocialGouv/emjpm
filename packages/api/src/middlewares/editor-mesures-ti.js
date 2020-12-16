@@ -1,4 +1,4 @@
-const getTi = require("../services/getTi");
+const getTi = require("~/services/getTi");
 
 const editorMesureTiMiddleWare = async (req, res, next) => {
   const { body } = req;

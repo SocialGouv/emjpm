@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
-const logger = require("../../../../utils/logger");
-const {
-  graphqlFetch,
-  backendAuthHeaders,
-} = require("../../../../utils/graphql-fetcher");
+const logger = require("~/utils/logger");
+const { graphqlFetch, backendAuthHeaders } = require("~/utils/graphql-fetcher");
 const {
   ENQUETE_REPONSE_MANDATAIRE_PREPOSE,
   ENQUETE_REPONSE_DEFAULT_VALUES,

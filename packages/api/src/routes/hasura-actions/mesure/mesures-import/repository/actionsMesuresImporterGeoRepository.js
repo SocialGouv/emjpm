@@ -1,6 +1,6 @@
 const { getDepartementCode } = require("@emjpm/core");
-const getGeoDatas = require("../../../../../services/getGeoDatas");
-const { Departement } = require("../../../../../models/Departement");
+const getGeoDatas = require("~/services/getGeoDatas");
+const { Departement } = require("~/models/Departement");
 
 const findDepartmentFromPostalCode = async (
   code_postal,

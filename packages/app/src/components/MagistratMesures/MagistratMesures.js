@@ -5,9 +5,10 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { formatMesureListItems } from "../../util/mesures";
-import { FiltersContext } from "../MagistratFilters/context";
-import { UserContext } from "../UserContext";
+import { FiltersContext } from "~/components/MagistratFilters/context";
+import { UserContext } from "~/components/UserContext";
+import { formatMesureListItems } from "~/util/mesures";
+
 import { MAGISTRAT_MESURES_QUERY } from "./queries";
 import { MagistratListStyle } from "./style";
 

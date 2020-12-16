@@ -1,7 +1,7 @@
 import { Card } from "@emjpm/ui";
 import React from "react";
 
-import { Link } from "../Commons";
+import { Link } from "~/components/Commons";
 
 const MapError = () => (
   <Card mt={2} mr={2}>

@@ -2,9 +2,10 @@ import { useQuery } from "@apollo/react-hooks";
 import React, { useContext } from "react";
 import { Box, Text } from "rebass";
 
-import { TYPES } from "../../constants/mandataire";
-import { LinkButton } from "../Commons";
-import { MapContext } from "../Map/context";
+import { LinkButton } from "~/components/Commons";
+import { MapContext } from "~/components/Map/context";
+import { TYPES } from "~/constants/mandataire";
+
 import { MESURES_GESTIONNAIRE } from "./queries";
 import {
   descriptionStyle,

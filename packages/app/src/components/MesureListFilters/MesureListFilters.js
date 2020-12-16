@@ -7,7 +7,8 @@ import {
   DEFAULT_MESURE_NATURE,
   MESURE_SORTBY_LABEL_VALUE,
   MESURE_STATUS_LABEL_VALUE,
-} from "../../constants/mesures";
+} from "~/constants/mesures";
+
 import { FiltersContext } from "./context";
 
 const MesureListFilters = (props) => {

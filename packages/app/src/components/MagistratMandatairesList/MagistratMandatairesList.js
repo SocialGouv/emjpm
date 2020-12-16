@@ -14,8 +14,9 @@ import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
-import { useDebounce } from "../../lib/hooks";
-import { UserContext } from "../UserContext";
+import { UserContext } from "~/components/UserContext";
+import { useDebounce } from "~/lib/hooks";
+
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";
 import { formatMandatairesList } from "./utils";

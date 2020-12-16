@@ -4,8 +4,9 @@ import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { MagistratServiceAntennes } from "../MagistratServiceAntennes";
-import { MesureContext } from "../MesureContext";
+import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
+import { MesureContext } from "~/components/MesureContext";
+
 import { GESTIONNAIRES } from "./queries";
 import {
   MagistratContentMandataireStyle,
@@ -19,7 +20,7 @@ import { formatGestionnaire } from "./utils";
 
 const MagistratMandataireMap = dynamic(
   () =>
-    import("../MagistratMandataireMap").then(
+    import("~/components/MagistratMandataireMap").then(
       (mod) => mod.MagistratMandataireMap
     ),
   { ssr: false }

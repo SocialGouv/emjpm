@@ -1,5 +1,5 @@
-const getDepartement = require("../../../services/getDepartement");
-const getGeoDatas = require("../../../services/getGeoDatas");
+const getDepartement = require("~/services/getDepartement");
+const getGeoDatas = require("~/services/getGeoDatas");
 
 async function getLastEtatDatas(etats) {
   etats.sort((a, b) => {

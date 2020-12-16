@@ -1,5 +1,5 @@
+import { stdFormatter } from "@emjpm/core";
 import { Card, Text } from "@emjpm/ui";
-import { format } from "date-fns";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -104,7 +104,7 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           </Text>
           <Text sx={descriptionStyle()}>
             {item.submitted_at
-              ? `${format(new Date(item.submitted_at), "dd/MM/yyyy")} (${
+              ? `${stdFormatter.formatDateUI(item.submitted_at)} (${
                   item.uploaded_on ? "import" : "manuel"
                 })`
               : ""}
