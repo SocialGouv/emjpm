@@ -1,6 +1,6 @@
 const logger = require("~/utils/logger");
 const { AccessToken } = require("~/models/AccessToken");
-const jwtConfig = require("~/config/jwt");
+const { jwtConfig } = require("~/config");
 const jwt = require("jsonwebtoken");
 const getUid = require("~/utils/getUid");
 const { validationResult } = require("express-validator");

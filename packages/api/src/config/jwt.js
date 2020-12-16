@@ -1,15 +1,45 @@
-var fs = require("fs");
-var fnv = require("fnv-plus");
+const fs = require("fs");
+const path = require("path");
+const fnv = require("fnv-plus");
 
-// TODO: why does rsaPemToJwk work with a file but not with a variable?
-// WARNING: .pem files are here for exemple don't use them in production
-exports.key = (
-  process.env.AUTH_PRIVATE_KEY || fs.readFileSync("./private.pem").toString()
-).replace(/\\n/g, "\n");
+module.exports = (env) => {
+  let {
+    AUTH_PRIVATE_KEY,
+    AUTH_PRIVATE_KEY_FILE,
+    AUTH_PUBLIC_KEY,
+    AUTH_PUBLIC_KEY_FILE,
+  } = env;
 
-exports.publicKey = (
-  process.env.AUTH_PUBLIC_KEY || fs.readFileSync("./public.pem").toString()
-).replace(/\\n/g, "\n");
+  // dev (yarn test) and CI
+  if (!(AUTH_PRIVATE_KEY || AUTH_PRIVATE_KEY_FILE)) {
+    AUTH_PRIVATE_KEY_FILE = path.join(
+      __dirname,
+      "../../../../.dev-secrets/private.pem"
+    );
+  }
+  if (!(AUTH_PUBLIC_KEY || AUTH_PUBLIC_KEY_FILE)) {
+    AUTH_PUBLIC_KEY_FILE = path.join(
+      __dirname,
+      "../../../../.dev-secrets/public.pem"
+    );
+  }
 
-// Key Identifier – Acts as an ‘alias’ for the key
-exports.kid = process.env.AUTH_KEY_ID || fnv.hash(this.publicKey, 128).hex();
+  if (AUTH_PRIVATE_KEY_FILE) {
+    AUTH_PRIVATE_KEY = fs.readFileSync(AUTH_PRIVATE_KEY_FILE).toString();
+  }
+  if (AUTH_PUBLIC_KEY_FILE) {
+    AUTH_PUBLIC_KEY = fs.readFileSync(AUTH_PUBLIC_KEY_FILE).toString();
+  }
+
+  const key = AUTH_PRIVATE_KEY.replace(/\\n/g, "\n");
+  const publicKey = AUTH_PUBLIC_KEY.replace(/\\n/g, "\n");
+
+  // Key Identifier – Acts as an ‘alias’ for the key
+  const kid = env.AUTH_KEY_ID || fnv.hash(publicKey, 128).hex();
+
+  return {
+    key,
+    kid,
+    publicKey,
+  };
+};

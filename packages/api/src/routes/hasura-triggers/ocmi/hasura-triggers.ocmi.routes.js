@@ -3,7 +3,7 @@ const Seven = require("node-7z");
 const fs = require("fs");
 const { join } = require("path");
 const os = require("os");
-const configuration = require("~/env");
+const config = require("~/config");
 const { OcmiMandataire } = require("~/models/OcmiMandataire");
 const { ProcessusStates } = require("~/models/ProcessusStates");
 
@@ -17,9 +17,9 @@ const {
 
 const logger = require("~/utils/logger");
 
-const ocmiSyncFileEnabled = configuration.ocmiSyncFileEnabled || false;
-const account = configuration.azureAccountName || null;
-const accountKey = configuration.azureAccountKey || null;
+const ocmiSyncFileEnabled = config.ocmiSyncFileEnabled || false;
+const account = config.azureAccountName || null;
+const accountKey = config.azureAccountKey || null;
 
 router.post("/sync-file", async (req, res) => {
   if (!ocmiSyncFileEnabled) {
@@ -82,7 +82,7 @@ async function processBlob(container, { name, properties: { contentLength } }) {
   fs.writeFileSync(zipFilePath, buffer);
   logger.info(`[OCMI] unzipping file ${zipFilePath}`);
   const stream = Seven.extract(zipFilePath, tempDir, {
-    password: configuration.ocmiFilePassword,
+    password: config.ocmiFilePassword,
     recursive: true,
   });
   stream.on("data", async function ({ file }) {

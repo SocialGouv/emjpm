@@ -90,6 +90,16 @@ deployment:
           key: OCMI_FILE_PASSWORD
     - name: SENTRY_ENV
       value: "${NODE_ENV}"
+    - name: AUTH_PRIVATE_KEY
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: AUTH_PRIVATE_KEY
+    - name: AUTH_PUBLIC_KEY
+      valueFrom:
+        secretKeyRef:
+          name: emjpm-secret
+          key: AUTH_PUBLIC_KEY
 
 service:
   port: ${PORT}
