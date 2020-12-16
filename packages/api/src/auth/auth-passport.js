@@ -8,7 +8,7 @@ const {
 } = require("./strategies/authHasuraWebHookHeaderSecretStrategy");
 
 const logger = require("~/utils/logger");
-const jwtConfig = require("~/config/jwt");
+const { jwtConfig } = require("~/config");
 
 const knex = require("~/db/knex");
 

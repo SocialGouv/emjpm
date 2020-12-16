@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const { Model } = require("objection");
 
 const knexConnection = require("~/db/knex");
-const jwtConfig = require("~/config/jwt");
+const { jwtConfig } = require("~/config");
 const { Mandataire } = require("./Mandataire");
 const { Departement } = require("./Departement");
 const { Role } = require("./Role");

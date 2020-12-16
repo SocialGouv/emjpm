@@ -1,25 +1,45 @@
-var fs = require("fs");
-var fnv = require("fnv-plus");
+const fs = require("fs");
+const path = require("path");
+const fnv = require("fnv-plus");
 
-const { env } = process;
+module.exports = (env) => {
+  let {
+    AUTH_PRIVATE_KEY,
+    AUTH_PRIVATE_KEY_FILE,
+    AUTH_PUBLIC_KEY,
+    AUTH_PUBLIC_KEY_FILE,
+  } = env;
 
-if (!(env.AUTH_PRIVATE_KEY || !env.AUTH_PRIVATE_KEY_FILE)) {
-  env.AUTH_PUBLIC_KEY_FILE = "../../../../.dev-secrets";
-}
-if (!(env.AUTH_PUBLIC_KEY_FILE || !env.AUTH_PUBLIC_KEY_FILE)) {
-  env.AUTH_PUBLIC_KEY_FILE = "../../../../.dev-secrets";
-}
+  // dev (yarn test) and CI
+  if (!(AUTH_PRIVATE_KEY || AUTH_PRIVATE_KEY_FILE)) {
+    AUTH_PRIVATE_KEY_FILE = path.join(
+      __dirname,
+      "../../../../.dev-secrets/private.pem"
+    );
+  }
+  if (!(AUTH_PUBLIC_KEY || AUTH_PUBLIC_KEY_FILE)) {
+    AUTH_PUBLIC_KEY_FILE = path.join(
+      __dirname,
+      "../../../../.dev-secrets/public.pem"
+    );
+  }
 
-if (env.AUTH_PRIVATE_KEY_FILE) {
-  env.AUTH_PRIVATE_KEY = fs.readFileSync(env.AUTH_PRIVATE_KEY_FILE).toString();
-}
-if (env.AUTH_PUBLIC_KEY_FILE) {
-  env.AUTH_PUBLIC_KEY = fs.readFileSync(env.AUTH_PUBLIC_KEY_FILE).toString();
-}
+  if (AUTH_PRIVATE_KEY_FILE) {
+    AUTH_PRIVATE_KEY = fs.readFileSync(AUTH_PRIVATE_KEY_FILE).toString();
+  }
+  if (AUTH_PUBLIC_KEY_FILE) {
+    AUTH_PUBLIC_KEY = fs.readFileSync(AUTH_PUBLIC_KEY_FILE).toString();
+  }
 
-exports.key = env.AUTH_PRIVATE_KEY.replace(/\\n/g, "\n");
+  const key = AUTH_PRIVATE_KEY.replace(/\\n/g, "\n");
+  const publicKey = AUTH_PUBLIC_KEY.replace(/\\n/g, "\n");
 
-exports.publicKey = env.AUTH_PUBLIC_KEY.replace(/\\n/g, "\n");
+  // Key Identifier – Acts as an ‘alias’ for the key
+  const kid = env.AUTH_KEY_ID || fnv.hash(publicKey, 128).hex();
 
-// Key Identifier – Acts as an ‘alias’ for the key
-exports.kid = env.AUTH_KEY_ID || fnv.hash(this.publicKey, 128).hex();
+  return {
+    key,
+    kid,
+    publicKey,
+  };
+};
