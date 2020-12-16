@@ -1,5 +1,5 @@
 const rasha = require("rasha");
-const jwtConfig = require("~/config/jwt");
+const { jwtConfig } = require("~/config");
 
 /**
  * Sends the JWT key set

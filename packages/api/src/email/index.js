@@ -1,11 +1,11 @@
 const nodemailer = require("nodemailer");
-const configuration = require("~/env");
+const config = require("~/config");
 
-const smtpHost = configuration.smtpHost;
-const smtpPort = configuration.smtpPort;
-const smtpUser = configuration.smtpUser;
-const smtpPass = configuration.smtpPass;
-const smtpFrom = configuration.smtpFrom;
+const smtpHost = config.smtpHost;
+const smtpPort = config.smtpPort;
+const smtpUser = config.smtpUser;
+const smtpPass = config.smtpPass;
+const smtpFrom = config.smtpFrom;
 
 const smtpConfig = {
   host: smtpHost,
