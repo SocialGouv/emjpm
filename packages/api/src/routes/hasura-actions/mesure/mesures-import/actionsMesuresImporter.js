@@ -1,4 +1,8 @@
-const { MESURE_PROTECTION, MESURE_PROTECTION_STATUS } = require("@emjpm/core");
+const {
+  MESURE_PROTECTION,
+  MESURE_PROTECTION_STATUS,
+  isFrance,
+} = require("@emjpm/core");
 const excelParser = require("~/utils/file/excelParser");
 const logger = require("~/utils/logger");
 
@@ -122,8 +126,7 @@ const importMesures = async ({
   }
 
   const cache = {
-    departmentById: {},
-    departmentByRegionCode: {},
+    departmentByCode: {},
     serviceAntenneByName: {},
     tribunalBySiret: {},
   };
@@ -214,19 +217,25 @@ const prepareMesure = async (
     tribunal_siret,
   } = mesureDatas;
 
-  const department = await actionsMesuresImporterGeoRepository.findDepartment({
-    cache,
-    code_postal,
-    mandataire,
-    service,
-  });
+  const department =
+    (await actionsMesuresImporterGeoRepository.findDepartment({
+      cache,
+      code_postal,
+    })) || {};
 
   const pays = getMesurePays(code_postal);
 
-  const {
-    latitude,
-    longitude,
-  } = await actionsMesuresImporterGeoRepository.getGeoDatas(code_postal, ville);
+  let latitude;
+  let longitude;
+
+  if (isFrance(pays)) {
+    const geoData = await actionsMesuresImporterGeoRepository.getGeoDatas(
+      code_postal,
+      ville
+    );
+    latitude = geoData.latitude;
+    longitude = geoData.longitude;
+  }
 
   // ti
   const ti = await actionsMesuresImporterMesureRepository.findTribunalBySiret(
@@ -243,7 +252,6 @@ const prepareMesure = async (
   }
 
   if (serviceId && importSummary.errors.length === 0) {
-    // if any arror yet: not necessary to provide invalid antennes names
     const antenne_name = mesureDatas.antenne;
     if (antenne_name) {
       const antenne = await actionsMesuresImporterMesureRepository.findAntenne(
