@@ -1,5 +1,5 @@
 const { User } = require("~/models/User");
-const { isService } = require("@emjpm/core");
+const { isService, isDirection } = require("@emjpm/core");
 
 const getUserDirection = (user) => {
   const { direction } = user;
@@ -12,6 +12,7 @@ const getUserDirection = (user) => {
   const { region, departement } = direction;
   if (region) {
     data.region = {
+      id: region.id,
       nom: region.nom,
     };
   }
@@ -92,11 +93,16 @@ const getUser = async (req, res) => {
       .findById(user_id)
       .withGraphFetched(
         "[direction.[departement, region], service.[departement]]"
-      )
-      .whereIn("type", ["service", "direction"]);
+      );
   } catch (error) {
     return res.status(422).json({
       errors: [{ error: `${error}` }],
+    });
+  }
+
+  if (!user) {
+    return res.status(400).json({
+      errors: [{ error: `no user find for this token` }],
     });
   }
 
@@ -109,7 +115,7 @@ const getUser = async (req, res) => {
   };
   if (isService(user)) {
     userData.service = getUserService(user);
-  } else {
+  } else if (isDirection(user)) {
     userData.direction = getUserDirection(user);
   }
 
