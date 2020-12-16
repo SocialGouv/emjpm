@@ -29,7 +29,7 @@ RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
 COPY ./packages/ui/dist /app/packages/ui/dist/
 COPY ./packages/core/dist /app/packages/core/dist/
-COPY ./packages/app/src/public /app/packages/app/src/public/
+COPY ./packages/app/public /app/packages/app/public/
 COPY ./packages/app/next.config.js /app/packages/app/next.config.js
 COPY ./packages/app/.next /app/packages/app/.next/
 
