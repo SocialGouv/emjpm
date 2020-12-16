@@ -20,9 +20,9 @@ export const ExcludeBrowserBanner = () => {
           <a
             rel="noopener noreferrer"
             target="_blank"
-            href="https://www.google.com/intl/fr_fr/chrome"
+            href="https://www.mozilla.org/fr/firefox/"
           >
-            {`La plateforme e-MJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}). Nous vous conseillons d'utiliser une version récente de Chrome pour profiter pleinement des fonctionnalités d'eMJPM. Veuillez cliquer ici pour installer ou mettre à jour ce navigateur.`}
+            {`La plateforme e-MJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}). Nous vous conseillons d'utiliser une version récente de Firefox pour profiter pleinement des fonctionnalités d'eMJPM. Veuillez cliquer ici pour installer ou mettre à jour ce navigateur libre.`}
           </a>
         </Text>
       </Card>
