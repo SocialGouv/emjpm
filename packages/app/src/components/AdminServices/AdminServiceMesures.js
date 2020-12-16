@@ -218,13 +218,11 @@ function buildTableColumns() {
     },
     {
       Header: "Date de nomination",
-      accessor: (data) =>
-        format(new Date(data.date_nomination), "dd/MM/yyy"),
+      accessor: (data) => format(new Date(data.date_nomination), "dd/MM/yyy"),
     },
     {
       Header: "Date de création",
-      accessor: (data) =>
-        format(new Date(data.created_at), "dd/MM/yyy hh:mm"),
+      accessor: (data) => format(new Date(data.created_at), "dd/MM/yyy hh:mm"),
     },
     {
       Header: "Tribunal",

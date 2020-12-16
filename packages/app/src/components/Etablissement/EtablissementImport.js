@@ -67,10 +67,7 @@ export const EtablissementImport = () => {
           <Text mb="1" lineHeight="2">
             {`Dernière mise à jour de la base FINESS: ${
               processusState
-                ? format(
-                    new Date(processusState.end_date),
-                    "dd/MM/yyyy HH:mm"
-                  )
+                ? format(new Date(processusState.end_date), "dd/MM/yyyy HH:mm")
                 : ""
             }`}
           </Text>
