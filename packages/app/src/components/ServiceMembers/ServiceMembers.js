@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
+import { stdFormatter } from "@emjpm/core";
 import { CheckBox, Heading2, Text } from "@emjpm/ui";
-import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
@@ -66,7 +66,7 @@ const ServiceMembers = (props) => {
             <Box sx={listEmailStyle}>{member.user.email}</Box>
             <Text sx={listDateStyle}>
               {`Inscrit le `}
-              {format(new Date(member.user.created_at), "dd/MM/yyyy")}
+              {stdFormatter.formatDateUI(member.user.created_at)}
             </Text>
             <Text sx={listDateStyle}>
               {member.user.active

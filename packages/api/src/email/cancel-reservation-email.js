@@ -1,16 +1,12 @@
-const { format } = require("date-fns");
-
 const sentry = require("~/utils/sentry");
 const logger = require("~/utils/logger");
-const { mesureFormatter } = require("@emjpm/core");
+const { mesureFormatter, stdFormatter } = require("@emjpm/core");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti, user, mesure) =>
   `Madame, Monsieur,
 
-Le ${format(new Date(mesure.created_at), "dd/MM/yyyy")}, le ${
-    ti.etablissement
-  } ${
+Le ${stdFormatter.formatDateUI(mesure.created_at)}, le ${ti.etablissement} ${
     (mesure.cabinet && `cabinet ${mesure.cabinet}`) || ""
   }, vous a confié une nouvelle mesure :
 - "nature de la mesure": ${mesureFormatter.formatNatureMesure(

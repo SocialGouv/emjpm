@@ -1,4 +1,5 @@
-import { compareDesc, differenceInMonths, format } from "date-fns";
+import { stdFormatter } from "@emjpm/core";
+import { compareDesc, differenceInMonths } from "date-fns";
 
 const TYPES = {
   MANDATAIRE_IND: "individuel",
@@ -11,7 +12,7 @@ const capitalize = (string) => {
 };
 
 const formatLastLogin = (date) => {
-  return format(new Date(date), "dd/MM/yyyy");
+  return stdFormatter.formatDateUI(date);
 };
 
 const newestLastLogin = (admins) => {
