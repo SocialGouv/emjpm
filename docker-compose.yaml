@@ -59,7 +59,7 @@ services:
     user: "node"
     working_dir: /home/node/app
     volumes:
-      - ./.docker-compose/secrets:/secrets:ro
+      - ./.dev-secrets:/secrets:ro
       - ./:/home/node/app
     ports:
       - 3000:3000

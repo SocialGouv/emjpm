@@ -2,6 +2,14 @@ var fs = require("fs");
 var fnv = require("fnv-plus");
 
 const { env } = process;
+
+if (!(env.AUTH_PRIVATE_KEY || !env.AUTH_PRIVATE_KEY_FILE)) {
+  env.AUTH_PUBLIC_KEY_FILE = "../../../../.dev-secrets";
+}
+if (!(env.AUTH_PUBLIC_KEY_FILE || !env.AUTH_PUBLIC_KEY_FILE)) {
+  env.AUTH_PUBLIC_KEY_FILE = "../../../../.dev-secrets";
+}
+
 if (env.AUTH_PRIVATE_KEY_FILE) {
   env.AUTH_PRIVATE_KEY = fs.readFileSync(env.AUTH_PRIVATE_KEY_FILE).toString();
 }
