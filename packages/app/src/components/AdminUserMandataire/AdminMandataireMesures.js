@@ -200,12 +200,12 @@ function buildTableColumns() {
     {
       Header: "Date de nomination",
       accessor: (data) =>
-        format(new Date(data.date_nomination), "~/components/MM/yyy"),
+        format(new Date(data.date_nomination), "dd/MM/yyy"),
     },
     {
       Header: "Date de création",
       accessor: (data) =>
-        format(new Date(data.created_at), "~/components/MM/yyy hh:mm"),
+        format(new Date(data.created_at), "dd/MM/yyy hh:mm"),
     },
     {
       Header: "Tribunal",

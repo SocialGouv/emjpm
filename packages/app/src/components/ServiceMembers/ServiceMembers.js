@@ -66,7 +66,7 @@ const ServiceMembers = (props) => {
             <Box sx={listEmailStyle}>{member.user.email}</Box>
             <Text sx={listDateStyle}>
               {`Inscrit le `}
-              {format(new Date(member.user.created_at), "~/components/MM/yyyy")}
+              {format(new Date(member.user.created_at), "dd/MM/yyyy")}
             </Text>
             <Text sx={listDateStyle}>
               {member.user.active

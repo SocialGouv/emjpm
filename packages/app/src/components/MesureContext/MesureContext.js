@@ -73,22 +73,22 @@ function formatMesure(mesure) {
     codePostal: code_postal ? code_postal : "",
     dateNomination: date_nomination ? date_nomination : "",
     dateNominationFormated: date_nomination
-      ? format(new Date(date_nomination), "~/components/MM/yyyy")
+      ? format(new Date(date_nomination), "dd/MM/yyyy")
       : "",
     datePremierMesure: date_premier_mesure,
     datePremierMesureFormatted: date_premier_mesure
-      ? format(new Date(date_protection_en_cours), "~/components/MM/yyyy")
+      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
       : "",
     dateProtectionEnCours: date_protection_en_cours,
     dateProtectionEnCoursFormatted: date_protection_en_cours
-      ? format(new Date(date_protection_en_cours), "~/components/MM/yyyy")
+      ? format(new Date(date_protection_en_cours), "dd/MM/yyyy")
       : "",
     departementId: departement ? departement.id : null,
     id: id,
     isUrgent: is_urgent,
     judgmentDate: judgment_date,
     judgmentDateFormatted: judgment_date
-      ? format(new Date(judgment_date), "~/components/MM/yyyy")
+      ? format(new Date(judgment_date), "dd/MM/yyyy")
       : "",
     latitude: latitude,
     lieuVie: lieu_vie ? lieu_vie : "",
@@ -100,7 +100,7 @@ function formatMesure(mesure) {
       codePostal: etat.code_postal,
       dateChangementEtat: etat.date_changement_etat,
       dateChangementEtatFormatted: etat.date_changement_etat
-        ? format(new Date(etat.date_changement_etat), "~/components/MM/yyyy")
+        ? format(new Date(etat.date_changement_etat), "dd/MM/yyyy")
         : "",
       id: etat.id,
       lieuVie: etat.lieu_vie,

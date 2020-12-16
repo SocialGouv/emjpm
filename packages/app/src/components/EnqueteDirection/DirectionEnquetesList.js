@@ -39,7 +39,7 @@ export const DirectionEnquetesList = () => {
             </Text>
             <Text fontWeight="bold" pl={5}>{`Du${format(
               new Date(enquete.created_at),
-              "~/components/MM/yyyy"
+              "dd/MM/yyyy"
             )}  au ${format(new Date(enquete.date_fin), "}</MM/yyyy")}`}</Text>
             <Text
               fontSize={1}

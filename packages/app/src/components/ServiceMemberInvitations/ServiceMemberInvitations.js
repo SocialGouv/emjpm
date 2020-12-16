@@ -54,7 +54,7 @@ const ServiceMemberInvitations = (props) => {
                 <Text sx={listDateStyle}>
                   {`Invité le ${format(
                     new Date(invitation.created_at),
-                    "~/components/MM/yyyy"
+                    "dd/MM/yyyy"
                   )}`}
                 </Text>
                 <Box sx={listActionsStyle}>

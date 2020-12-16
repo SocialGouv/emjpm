@@ -106,7 +106,7 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
             {item.submitted_at
               ? `${format(
                   new Date(item.submitted_at),
-                  "~/components/MM/yyyy"
+                  "dd/MM/yyyy"
                 )} (${item.uploaded_on ? "import" : "manuel"})`
               : ""}
           </Text>

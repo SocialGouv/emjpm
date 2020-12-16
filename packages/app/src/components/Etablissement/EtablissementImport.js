@@ -50,7 +50,7 @@ export const EtablissementImport = () => {
             <Text mb="1" lineHeight="2">
               {`Un import des données de FINESS est en cours. Date de début ${format(
                 new Date(processusState.start_date),
-                "~/components/MM/yyyy HH:mm"
+                "dd/MM/yyyy HH:mm"
               )}`}
             </Text>
           </Box>
@@ -69,7 +69,7 @@ export const EtablissementImport = () => {
               processusState
                 ? format(
                     new Date(processusState.end_date),
-                    "~/components/MM/yyyy HH:mm"
+                    "dd/MM/yyyy HH:mm"
                   )
                 : ""
             }`}

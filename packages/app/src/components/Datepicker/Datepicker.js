@@ -18,7 +18,7 @@ export const Datepicker = (props) => {
         dp_error: hasError,
         dp_input: true,
       })}
-      dateFormat="~/components/MM/yyyy"
+      dateFormat="dd/MM/yyyy"
       locale="fr"
       selected={selected}
       onChange={onChange}

@@ -28,7 +28,7 @@ const RowItem = ({ item }) => {
             width: 120,
           }}
         >
-          {format(new Date(created_at), "~/components/MM/yyyy hh:mm")}
+          {format(new Date(created_at), "dd/MM/yyyy hh:mm")}
         </Box>
         <Box
           sx={{
