@@ -1,6 +1,8 @@
-import { Heading1, Heading5 } from "@emjpm/ui";
+import { Heading5 } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
+
+import { HeadingTitle } from "~/components/HeadingTitle";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -43,7 +45,7 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 mb={1}>{"Personnel et formation en 2019"}</Heading1>
+        <HeadingTitle mb={1}>{"Personnel et formation en 2019"}</HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",

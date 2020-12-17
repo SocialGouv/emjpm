@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
-import { Button, Card, Heading1, Heading3 } from "@emjpm/ui";
+import { Button, Card, Heading3 } from "@emjpm/ui";
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import { FieldArray, FormikProvider } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput } from "~/util";
 
@@ -103,9 +104,9 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
   return (
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
-        <Heading1 textAlign="center" mb={"50px"}>
+        <HeadingTitle textAlign="center" mb={"50px"}>
           {"Modalité d'exercice en 2019"}
-        </Heading1>
+        </HeadingTitle>
         <Box mb={4}>
           <EnqueteFormYesNoField
             id={`actions_information_tuteurs_familiaux`}

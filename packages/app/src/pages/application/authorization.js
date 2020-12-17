@@ -1,9 +1,10 @@
-import { BoxWrapper, FlexWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper, FlexWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Image } from "rebass";
 
 import { AuthorizationLogin } from "~/components/AuthorizationLogin";
 import { Authorize } from "~/components/Authorize";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { withAuthSync } from "~/util/auth";
 
@@ -13,9 +14,9 @@ const AuthorizationPage = (props) => {
   return (
     <LayoutPublic>
       <BoxWrapper>
-        <Heading1 mt={"80px"} textAlign="center">
+        <HeadingTitle mt={"80px"} textAlign="center">
           Se connecter à une application métier
-        </Heading1>
+        </HeadingTitle>
       </BoxWrapper>
       <FlexWrapper my="50px">
         <Box

@@ -1,8 +1,9 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -97,7 +98,7 @@ export const EnquetePopulationsForm = (props) => {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 mb={1}>{"Populations en 2019"}</Heading1>
+        <HeadingTitle mb={1}>{"Populations en 2019"}</HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",

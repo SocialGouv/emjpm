@@ -1,13 +1,6 @@
 import { useApolloClient } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/core";
-import {
-  Button,
-  Field,
-  Heading1,
-  Heading4,
-  InlineError,
-  Text,
-} from "@emjpm/ui";
+import { Button, Field, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -20,6 +13,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Geocode } from "~/components/Geocode";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { signupMandataireSchema } from "~/lib/validationSchemas";
 import { isSiretExists } from "~/query-service/SiretQueryService";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
@@ -89,9 +83,9 @@ const SignupMandataireForm = () => {
 
   return (
     <Fragment>
-      <Heading1 p="1" m="1">
+      <HeadingTitle p="1" m="1">
         {`Demande de création d'un compte de mandataire`}
-      </Heading1>
+      </HeadingTitle>
 
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />

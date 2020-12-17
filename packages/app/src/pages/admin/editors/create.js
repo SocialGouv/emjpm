@@ -1,8 +1,9 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
 import { AdminEditorCreate } from "~/components/AdminEditors/AdminEditorCreate";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { withAuthSync } from "~/util/auth";
 
@@ -10,7 +11,7 @@ const AdminEditorsCreatePage = () => {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <Heading1>{`Création d'un éditeur`}</Heading1>
+        <HeadingTitle>{`Création d'un éditeur`}</HeadingTitle>
         <Flex
           sx={{
             flexWrap: "wrap",

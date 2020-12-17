@@ -1,7 +1,8 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInput } from "~/util";
 
@@ -90,9 +91,9 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
 
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"50px"}>
+      <HeadingTitle textAlign="center" mb={"50px"}>
         {"Modalité d'exercice en 2019"}
-      </Heading1>
+      </HeadingTitle>
       <Heading3>{"Informations générales"}</Heading3>
       <Box mt={4}>
         <Flex alignItems="start">

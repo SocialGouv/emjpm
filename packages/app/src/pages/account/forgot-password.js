@@ -1,7 +1,8 @@
-import { FlexWrapper, Heading1 } from "@emjpm/ui";
+import { FlexWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { ForgotPassword } from "~/components/ForgotPassword";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { withAuthSync } from "~/util/auth";
 
@@ -15,7 +16,7 @@ const ForgotPasswordPage = () => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading1>Demander un nouveau mot de passe</Heading1>
+        <HeadingTitle>Demander un nouveau mot de passe</HeadingTitle>
         <ForgotPassword mt="3" />
       </FlexWrapper>
     </LayoutPublic>

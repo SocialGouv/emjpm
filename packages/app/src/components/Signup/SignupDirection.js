@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
 import { DIRECTION } from "@emjpm/core";
-import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -12,6 +12,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { signupDirectionSchema } from "~/lib/validationSchemas";
 import { useDepartementsOptions } from "~/util/departements";
 import { toOptions } from "~/util/option/OptionUtil";
@@ -64,10 +65,10 @@ export const SignupDirection = () => {
 
   return (
     <Fragment>
-      <Heading1
+      <HeadingTitle
         p="1"
         m="1"
-      >{`Création d'un compte d'agent de l'état`}</Heading1>
+      >{`Création d'un compte d'agent de l'état`}</HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>

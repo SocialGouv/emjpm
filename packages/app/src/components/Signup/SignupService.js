@@ -1,4 +1,4 @@
-import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Link from "next/link";
 import Router from "next/router";
@@ -10,6 +10,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { signupServiceSchema } from "~/lib/validationSchemas";
 import { toOptions } from "~/util";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
@@ -71,10 +72,10 @@ const SignupServiceForm = ({ serviceDatas }) => {
 
   return (
     <Fragment>
-      <Heading1
+      <HeadingTitle
         p="1"
         m="1"
-      >{`Création d'un compte de service mandataire`}</Heading1>
+      >{`Création d'un compte de service mandataire`}</HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>

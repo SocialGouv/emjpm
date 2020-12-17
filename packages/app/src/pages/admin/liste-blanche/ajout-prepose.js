@@ -1,8 +1,9 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { ListeBlanchePreposeCreate } from "~/components/ListeBlanche";
 import { withAuthSync } from "~/util/auth";
@@ -16,9 +17,9 @@ const ListBlanchePage = () => {
             &larr; Retour
           </StyledLink>
         </Link>
-        <Heading1 mb={4}>
+        <HeadingTitle mb={4}>
           {"Ajout d'un mandataire préposé à la liste blanche"}
-        </Heading1>
+        </HeadingTitle>
         <ListeBlanchePreposeCreate />
       </BoxWrapper>
     </LayoutAdmin>

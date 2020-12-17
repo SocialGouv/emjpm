@@ -1,7 +1,8 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneEdit } from "~/components/ServiceAntenneEdit";
 import { UserContext } from "~/components/UserContext";
@@ -15,7 +16,7 @@ const ServiceAntenneEditPage = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
-        <Heading1 mx="1">{`Modification de l'antenne`}</Heading1>
+        <HeadingTitle mx="1">{`Modification de l'antenne`}</HeadingTitle>
         <ServiceAntenneEdit user={user} antenneId={antenneId} mt="3" />
       </BoxWrapper>
     </LayoutServices>
