@@ -1,7 +1,9 @@
 import { stdFormatter } from "@emjpm/core";
-import { Button, Heading1 } from "@emjpm/ui";
+import { Button } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
+
+import { HeadingTitle } from "~/components/HeadingTitle";
 
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 import {
@@ -23,7 +25,7 @@ export const EnqueteSubmit = ({
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />
   ) : (
     <Flex flexDirection="column" justifyContent="center">
-      <Heading1 textAlign="center">Envoi de vos réponses</Heading1>
+      <HeadingTitle textAlign="center">Envoi de vos réponses</HeadingTitle>
 
       {globalStatus === "invalid" ? (
         <Box

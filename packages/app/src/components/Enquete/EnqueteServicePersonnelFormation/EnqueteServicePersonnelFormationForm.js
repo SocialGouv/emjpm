@@ -1,7 +1,7 @@
-import { Heading1 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInt } from "~/util";
 
@@ -121,7 +121,7 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
   return (
     <form onSubmit={submitForm}>
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 mb={1}>{"Personnel et Formation"}</Heading1>
+        <HeadingTitle mb={1}>{"Personnel et Formation"}</HeadingTitle>
       </Box>
       <Box mt={4}>
         <Text fontWeight="bold" my={4}>

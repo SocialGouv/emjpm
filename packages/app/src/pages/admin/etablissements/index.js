@@ -1,4 +1,4 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
 import { Box } from "rebass";
@@ -6,6 +6,7 @@ import { Box } from "rebass";
 import { AdminEtablissements } from "~/components/AdminEtablissements";
 import { AdminFilterBar } from "~/components/AdminFilterBar";
 import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { withAuthSync } from "~/util/auth";
 
@@ -15,7 +16,7 @@ const AdminEtablissementsPage = () => {
     <AdminFilterProvider>
       <LayoutAdmin>
         <BoxWrapper mt={4} px={1}>
-          <Heading1>Liste des établissements</Heading1>
+          <HeadingTitle>Liste des établissements</HeadingTitle>
           <Box mt={4} mb={4}>
             <AdminFilterBar
               useDepartementfilter

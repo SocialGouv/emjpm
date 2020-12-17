@@ -1,10 +1,10 @@
 import { BoxWrapper } from "@emjpm/ui";
-import Link from "next/link";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminApiLog } from "~/components/AdminApiLogs/AdminApiLog";
 import { LayoutAdmin } from "~/components/Layout";
+import { Link } from "~/components/Link";
 import { withAuthSync } from "~/util/auth";
 
 const ApiLogsViewPage = (props) => {

@@ -1,8 +1,9 @@
-import { BoxWrapper, FlexWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper, FlexWrapper } from "@emjpm/ui";
 import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import { Box, Image } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { Login, LoginCreateAccount } from "~/components/Login";
 import { withAuthSync } from "~/util/auth";
@@ -24,9 +25,9 @@ const LoginPage = () => {
     <Fragment>
       <LayoutPublic>
         <BoxWrapper>
-          <Heading1 mt={"80px"} textAlign="center">
+          <HeadingTitle mt={"80px"} textAlign="center">
             Trouvez le bon professionnel pour les majeurs à protéger
-          </Heading1>
+          </HeadingTitle>
         </BoxWrapper>
         <FlexWrapper my="50px">
           <Box

@@ -1,9 +1,11 @@
-import { Heading1, Heading2, Heading3, Text } from "@emjpm/ui";
+import { Heading2, Heading3, Text } from "@emjpm/ui";
 import React from "react";
 import { Link } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
+
 const A = (props) => <Link {...props} />;
-const H1 = (props) => <Heading1 {...props} mb={3} />;
+const H1 = (props) => <HeadingTitle {...props} mb={3} />;
 const H2 = (props) => <Heading2 {...props} mb={2} mt={2} />;
 const H3 = (props) => <Heading3 {...props} mb={1} mt={1} />;
 const ListItem = (props) => (

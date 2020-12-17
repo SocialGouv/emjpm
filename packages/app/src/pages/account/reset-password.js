@@ -1,6 +1,7 @@
-import { FlexWrapper, Heading1 } from "@emjpm/ui";
+import { FlexWrapper } from "@emjpm/ui";
 import React from "react";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
 import { withAuthSync } from "~/util/auth";
@@ -16,7 +17,7 @@ const ResetPasswordPage = (props) => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading1>Modifier votre mot de passe</Heading1>
+        <HeadingTitle>Modifier votre mot de passe</HeadingTitle>
         <ResetPassword token={resetToken} mt="3" />
       </FlexWrapper>
     </LayoutPublic>

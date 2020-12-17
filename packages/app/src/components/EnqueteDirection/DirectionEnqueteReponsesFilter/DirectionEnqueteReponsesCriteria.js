@@ -35,6 +35,7 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
         <Flex flexDirection="row">
           <Box sx={BoxStyle}>
             <Select
+              instanceId={"departement-filter"}
               size="small"
               options={departementsOptions}
               placeholder={"Département"}
@@ -46,6 +47,7 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
           </Box>
           <Box sx={BoxStyle}>
             <Select
+              instanceId={"user-type-filter"}
               size="small"
               options={USER_TYPE_OPTIONS}
               placeholder={"Type"}
@@ -55,6 +57,7 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
           </Box>
           <Box sx={BoxStyle}>
             <Select
+              instanceId={"enquete-reponse-statut-filter"}
               size="small"
               options={ENQUETE_REPONSE_STATUS_OPTIONS}
               placeholder={"Statut"}

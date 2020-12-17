@@ -1,7 +1,8 @@
-import NextLink from "next/link";
 import { withRouter } from "next/router";
 import React from "react";
 import { Link as RebassLink } from "rebass";
+
+import { Link as NextLink } from "~/components/Link";
 
 const AntenneLinkButtonStyle = (isActive, disabled) => {
   return {

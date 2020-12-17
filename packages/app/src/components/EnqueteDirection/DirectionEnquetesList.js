@@ -9,7 +9,7 @@ import { ENQUETES } from "./queries";
 
 export const DirectionEnquetesList = () => {
   const router = useRouter();
-  const { data, loading } = useQuery(ENQUETES);
+  const { data, loading } = useQuery(ENQUETES, { ssr: false });
 
   if (loading) {
     return <Box p={2}>Chargement...</Box>;

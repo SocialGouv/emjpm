@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading4, Spinner } from "@emjpm/ui";
-import Link from "next/link";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import { useDebounce } from "~/lib/hooks";
 

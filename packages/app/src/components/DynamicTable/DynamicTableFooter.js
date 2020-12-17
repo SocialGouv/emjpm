@@ -23,6 +23,7 @@ const DynamicTableFooter = (props) => {
       />
 
       <Select
+        instanceId={"dynamic-table-footer" + (props.instanceId || "")}
         ml={20}
         width="200px"
         value={pageSize}

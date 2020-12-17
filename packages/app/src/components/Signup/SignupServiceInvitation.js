@@ -1,8 +1,8 @@
 import { useApolloClient, useQuery } from "@apollo/react-hooks";
-import { Heading1 } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment } from "react";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { isEmailExists } from "~/query-service/EmailQueryService";
 
 import { SERVICE_MEMBER_INVITATION } from "./queries";
@@ -64,10 +64,10 @@ export const SignupServiceInvitation = (props) => {
 
   return (
     <Fragment>
-      <Heading1
+      <HeadingTitle
         p="1"
         m={1}
-      >{`Création de compte - ${invitation.service.etablissement}`}</Heading1>
+      >{`Création de compte - ${invitation.service.etablissement}`}</HeadingTitle>
       <SignupServiceInvitationForm
         handleSubmit={handleSubmit}
         invitation={invitation}

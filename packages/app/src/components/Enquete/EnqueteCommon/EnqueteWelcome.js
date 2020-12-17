@@ -1,9 +1,9 @@
 import { isIndividuel, isPrepose, isService, stdFormatter } from "@emjpm/core";
-import { Heading1 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { UserContext } from "~/components/UserContext";
 
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
@@ -42,7 +42,7 @@ export const EnqueteWelcome = ({
   ) : (
     <Flex flexDirection="column">
       <Flex flexDirection="column" mb="5">
-        <Heading1 textAlign="center">Bienvenue</Heading1>
+        <HeadingTitle textAlign="center">Bienvenue</HeadingTitle>
         <Flex flexDirection="column" mt="4" mb="3" sx={textStyle}>
           <Text>Vous pouvez revenir à tout moment compléter le formulaire</Text>
           <Text sx={{ fontWeight: "700" }}>

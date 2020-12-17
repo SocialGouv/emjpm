@@ -52,6 +52,7 @@ const MandatairesCapacity = (props) => {
       <Heading2>Capacité des mandataires</Heading2>
       <Box mt="3">
         <Select
+          instanceId={"mandataire-surcapacite-filter"}
           placeholder="Mandataire en surcapacité par ordre décroissant"
           options={options}
           value={"selectedValue"}

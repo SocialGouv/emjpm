@@ -1,7 +1,8 @@
-import { BoxWrapper, FlexWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper, FlexWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Image } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { TokenRequest } from "~/components/TokenRequest";
 import { withAuthSync } from "~/util/auth";
@@ -10,9 +11,9 @@ const AuthorizationPage = () => {
   return (
     <LayoutPublic>
       <BoxWrapper>
-        <Heading1 mt={"80px"} textAlign="center">
+        <HeadingTitle mt={"80px"} textAlign="center">
           {`Demander des accès à l'api Emjpm`}
-        </Heading1>
+        </HeadingTitle>
       </BoxWrapper>
       <FlexWrapper my="50px">
         <Box

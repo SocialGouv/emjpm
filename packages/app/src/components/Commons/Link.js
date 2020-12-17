@@ -1,6 +1,7 @@
-import NextLink from "next/link";
 import React from "react";
 import { Link as RebassLink } from "rebass";
+
+import { Link as NextLink } from "~/components/Link";
 
 const LinkStyle = () => {
   return {

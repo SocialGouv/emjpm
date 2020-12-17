@@ -63,6 +63,7 @@ const ServiceMesureAntennesMatcher = ({
             </Box>
             <Box width={200}>
               <Select
+                instanceId={`antenne-select-${index}`}
                 name={`select-${index}`}
                 isSearchable={false}
                 defaultValue={

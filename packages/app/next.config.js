@@ -1,6 +1,5 @@
 const flow = require("lodash.flow");
 const webpack = require("webpack");
-const withCSS = require("@zeit/next-css");
 const withImages = require("next-images");
 
 require("dotenv").config({ path: "../../.env" });
@@ -19,7 +18,6 @@ const withMDX = require("@next/mdx")({
 
 module.exports = flow(
   withMDX,
-  withCSS,
   withImages,
   withSourceMaps,
   withBundleAnalyzer

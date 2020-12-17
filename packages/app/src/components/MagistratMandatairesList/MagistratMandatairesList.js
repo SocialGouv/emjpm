@@ -113,6 +113,7 @@ const MagistratMandatairesList = (props) => {
               <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
               <Box width="200px" mr="2">
                 <Select
+                  instanceId={"type-mandataire-filter"}
                   size="small"
                   placeholder="Type de mandataire"
                   onChange={(option) => {
@@ -143,6 +144,7 @@ const MagistratMandatairesList = (props) => {
               <Text mr={2}>Trier par:</Text>
               <Box width="200px">
                 <Select
+                  instanceId={"mandataire-sort"}
                   size="small"
                   onChange={({ value }) => setOrderBy(value)}
                   value={orderByOptions.find(({ value }) => value === orderBy)}

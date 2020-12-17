@@ -1,8 +1,9 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { parseFormFloat } from "~/util";
 
@@ -77,9 +78,9 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 textAlign="center">
+        <HeadingTitle textAlign="center">
           {"Revenus / Prestations sociales en 2019"}
-        </Heading1>
+        </HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",
