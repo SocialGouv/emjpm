@@ -127,6 +127,7 @@ const ServiceEditInformationsForm = (props) => {
         <FormInputBox>
           <Field>
             <Select
+              instanceId={"tis-filter"}
               id="tis"
               name="tis"
               placeholder="Tribunaux dans lesquels vous exercez"

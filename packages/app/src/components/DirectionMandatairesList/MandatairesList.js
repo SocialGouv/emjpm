@@ -87,6 +87,7 @@ const MandatairesList = (props) => {
       <Flex mb="3">
         <Box width="200px" mr="2">
           <Select
+            instanceId={"type-mandataire-filter"}
             size="small"
             placeholder="Type de mandataire"
             onChange={(option) => setType(option)}
@@ -96,6 +97,7 @@ const MandatairesList = (props) => {
         </Box>
         <Box width="200px">
           <Select
+            instanceId={"capacity-sort"}
             size="small"
             placeholder="trier par capacité"
             onChange={(capacity) => setCapacity(capacity)}

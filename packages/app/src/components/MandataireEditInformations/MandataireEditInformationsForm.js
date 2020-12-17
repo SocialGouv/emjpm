@@ -161,6 +161,7 @@ const MandataireEditInformationsForm = (props) => {
         <FormInputBox>
           <Field>
             <Select
+              instanceId={"tis-select"}
               id="tis"
               name="tis"
               placeholder="Tribunaux dans lesquels vous exercez"

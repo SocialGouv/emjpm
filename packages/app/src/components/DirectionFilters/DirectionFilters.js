@@ -72,6 +72,7 @@ export const DirectionFilters = (props) => {
             )}
             <Box sx={BoxStyle}>
               <Select
+                instanceId={"direction-region-filter"}
                 size="small"
                 options={regionOptions}
                 placeholder={"region"}
@@ -86,6 +87,7 @@ export const DirectionFilters = (props) => {
             </Box>
             <Box sx={BoxStyle}>
               <Select
+                instanceId={"direction-departement-filter"}
                 size="small"
                 options={departementOptions}
                 placeholder={"departement"}

@@ -28,6 +28,7 @@ export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
 
   return (
     <Select
+      instanceId={"add-department"}
       placeholder={"Ajouter un département"}
       size="small"
       sx={{ width: "100%" }}
