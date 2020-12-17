@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Card, Heading2, Heading4, Spinner } from "@emjpm/ui";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { Link } from "~/components/Link";
 import { MagistratMandataireComments } from "~/components/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
 import { formatGestionnaireId } from "~/util/mandataires";

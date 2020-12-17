@@ -1,6 +1,5 @@
 import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
@@ -9,6 +8,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
+import { Link } from "~/components/Link";
 import yup from "~/lib/validationSchemas/yup";
 
 const directionTypeOptions = [

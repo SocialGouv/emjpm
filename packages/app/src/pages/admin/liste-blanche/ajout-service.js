@@ -1,11 +1,11 @@
 import { BoxWrapper } from "@emjpm/ui";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
+import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/components/ListeBlanche";
 import { withAuthSync } from "~/util/auth";
 

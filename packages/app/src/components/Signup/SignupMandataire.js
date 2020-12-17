@@ -2,7 +2,6 @@ import { useApolloClient } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/core";
 import { Button, Field, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -14,6 +13,7 @@ import {
 } from "~/components/AppForm";
 import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/components/HeadingTitle";
+import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/lib/validationSchemas";
 import { isSiretExists } from "~/query-service/SiretQueryService";
 import { useDepartements } from "~/util/departements/useDepartements.hook";

@@ -1,7 +1,6 @@
 import { useApolloClient } from "@apollo/react-hooks";
 import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
@@ -12,6 +11,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/components/HeadingTitle";
+import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/lib/validationSchemas";
 import { isEmailExists } from "~/query-service/EmailQueryService";

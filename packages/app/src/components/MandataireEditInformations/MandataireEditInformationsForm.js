@@ -8,7 +8,6 @@ import {
 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import { uniq } from "lodash";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -19,6 +18,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/lib/validationSchemas";
 import { findOptions } from "~/util/option/OptionUtil";

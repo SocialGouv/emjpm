@@ -1,10 +1,10 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { Button, Card } from "@emjpm/ui";
-import Link from "next/link";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import { captureException } from "~/util/sentry";
 
