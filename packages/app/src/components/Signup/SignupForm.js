@@ -1,7 +1,6 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
 
@@ -11,6 +10,8 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
+import { HeadingTitle } from "~/components/HeadingTitle";
+import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/lib/validationSchemas";
 import { isEmailExists } from "~/query-service/EmailQueryService";
@@ -81,7 +82,7 @@ export const SignupForm = () => {
 
   return (
     <Fragment>
-      <Heading1 p="1" m="1">{`Création de compte`}</Heading1>
+      <HeadingTitle p="1" m="1">{`Création de compte`}</HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>

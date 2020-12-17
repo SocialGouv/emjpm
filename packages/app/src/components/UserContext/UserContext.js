@@ -31,6 +31,7 @@ const UserProvider = (props) => {
         setUser({ id: user.id, role: type });
       }
     },
+    ssr: false,
     variables: {
       userId: userId,
     },

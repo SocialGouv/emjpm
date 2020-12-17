@@ -15,6 +15,7 @@ const url = `${API_URL}/api/oauth/authorize`;
 const Authorize = (props) => {
   const { editorId, token, redirectUrl, state } = props;
   const { data, loading, error } = useQuery(EDITOR, {
+    ssr: false,
     variables: {
       id: editorId,
     },

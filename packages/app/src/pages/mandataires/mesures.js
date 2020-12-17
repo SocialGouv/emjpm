@@ -1,7 +1,8 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutMandataire } from "~/components/Layout";
 import { MesureList } from "~/components/MesureList";
 import { MesureListButtonBar } from "~/components/MesureListButtonBar";
@@ -24,7 +25,7 @@ const MesuresListView = () => {
       <LayoutMandataire>
         <BoxWrapper mt={6} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
-            <Heading1>Toutes vos mesures</Heading1>
+            <HeadingTitle>Toutes vos mesures</HeadingTitle>
             <MesureListButtonBar />
           </Flex>
           <MesureListFilters />

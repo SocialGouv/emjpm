@@ -1,4 +1,4 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 import { Flex } from "rebass";
@@ -6,6 +6,7 @@ import { Flex } from "rebass";
 import { AdminEditorRequest, AdminEditors } from "~/components/AdminEditors";
 import { AdminFilterBar } from "~/components/AdminFilterBar";
 import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { withAuthSync } from "~/util/auth";
 
@@ -14,7 +15,7 @@ const AdminEditorsPage = () => {
     <AdminFilterProvider>
       <LayoutAdmin>
         <BoxWrapper mt={6} px="1">
-          <Heading1>Liste des éditeurs</Heading1>
+          <HeadingTitle>Liste des éditeurs</HeadingTitle>
           <Flex
             sx={{
               flexWrap: "wrap",

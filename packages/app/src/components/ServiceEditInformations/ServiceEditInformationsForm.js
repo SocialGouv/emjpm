@@ -7,7 +7,6 @@ import {
   Textarea,
 } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import React, { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -17,6 +16,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { Link } from "~/components/Link";
 import { serviceSchema } from "~/lib/validationSchemas/serviceSchema";
 import { findOptions } from "~/util/option/OptionUtil";
 
@@ -127,6 +127,7 @@ const ServiceEditInformationsForm = (props) => {
         <FormInputBox>
           <Field>
             <Select
+              instanceId={"tis-filter"}
               id="tis"
               name="tis"
               placeholder="Tribunaux dans lesquels vous exercez"

@@ -1,6 +1,5 @@
 import { Button, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import { React } from "react";
 import { Box, Flex } from "rebass";
 
@@ -9,6 +8,7 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
+import { Link } from "~/components/Link";
 import { directionEditSchema } from "~/lib/validationSchemas/directionEditSchema";
 
 const DirectionEditInformationsForm = ({

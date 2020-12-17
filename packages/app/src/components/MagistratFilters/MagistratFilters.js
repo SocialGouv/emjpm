@@ -24,6 +24,7 @@ const MagistratFilters = () => {
             <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
             <Box width="200px" mr={1}>
               <Select
+                instanceId={"nature-mesure-filter"}
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options

@@ -9,6 +9,7 @@ export const EtablissementView = (props) => {
   const { id } = props;
 
   const { data, loading, error } = useQuery(ETABLISSEMENT, {
+    ssr: false,
     variables: { id },
   });
 

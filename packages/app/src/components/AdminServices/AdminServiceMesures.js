@@ -137,6 +137,7 @@ const AdminServiceMesures = (props) => {
       <Flex flexDirection="row">
         <Box width="200px">
           <Select
+            instanceId={"service-mesure-statut-filter"}
             size="small"
             placeholder="filter par statut"
             onChange={(status) => setSelectedMesureStatus(status)}

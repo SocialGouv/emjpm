@@ -1,7 +1,8 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Flex, Text } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { MesureBadge } from "~/components/MesureBadge";
 import { MesureList } from "~/components/MesureList";
@@ -33,7 +34,7 @@ const Mesures = () => {
       <LayoutServices>
         <BoxWrapper mt={2} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
-            <Heading1>Toutes vos mesures</Heading1>
+            <HeadingTitle>Toutes vos mesures</HeadingTitle>
             <MesureListButtonBar />
           </Flex>
           <Flex mt={1} flexDirection="row" justifyContent="flex-start">

@@ -126,6 +126,7 @@ const AdminMandataireMesures = (props) => {
       <Flex flexDirection="row">
         <Box width="200px">
           <Select
+            instanceId={"mandataire-mesure-statut-filter"}
             size="small"
             placeholder="filter par statut"
             onChange={(status) => setSelectedMesureStatus(status)}

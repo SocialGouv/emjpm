@@ -1,10 +1,10 @@
 import { BoxWrapper } from "@emjpm/ui";
-import Link from "next/link";
 import React from "react";
 import { Box, Card, Link as StyledLink } from "rebass";
 
 import { AdminServiceMesures } from "~/components/AdminServices";
 import { LayoutAdmin } from "~/components/Layout";
+import { Link } from "~/components/Link";
 import { MesureImportPanel } from "~/components/MesureImport";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { withAuthSync } from "~/util/auth";

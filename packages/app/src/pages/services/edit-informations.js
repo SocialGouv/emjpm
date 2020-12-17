@@ -1,6 +1,7 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { UserContext } from "~/components/UserContext";
@@ -13,7 +14,9 @@ const EditInformations = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
-        <Heading1 mx="1">Editer les informations de votre service</Heading1>
+        <HeadingTitle mx="1">
+          Editer les informations de votre service
+        </HeadingTitle>
         <ServiceEditInformations
           mt="3"
           serviceId={serviceId}

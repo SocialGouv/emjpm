@@ -1,10 +1,10 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { Heading1 } from "@emjpm/ui";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import React, { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import menuStepperStyle from "~/components/Enquete/EnqueteCommon/EnqueteMenuStepper/style";
+import { HeadingTitle } from "~/components/HeadingTitle";
 
 import { SingleImportFilePicker } from "./SingleImportFilePicker";
 import { useEnqueteImportManager } from "./useEnqueteImportManager.hook";
@@ -69,7 +69,7 @@ export const EnqueteImportPanel = (props) => {
       </Box>
       <Box py={"50px"} pl={"35px"} flex={1}>
         <Flex flexDirection="column" mb="5">
-          <Heading1 textAlign="center">Import des données</Heading1>
+          <HeadingTitle textAlign="center">Import des données</HeadingTitle>
           <Flex flexDirection="column" mt="4" mb="3" sx={textStyle}>
             <Text>
               {`Vous pouvez sélectionner le tableur excel envoyé par votre direction départementale

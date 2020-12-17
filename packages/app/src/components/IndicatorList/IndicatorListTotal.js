@@ -1,14 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import {
-  Card,
-  Heading1,
-  Heading2,
-  Heading4,
-  Indicator,
-  Spinner,
-} from "@emjpm/ui";
+import { Card, Heading2, Heading4, Indicator, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { HeadingTitle } from "~/components/HeadingTitle";
 
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
@@ -77,7 +72,7 @@ const IndicatorListTotal = () => {
   } = data;
   return (
     <Box>
-      <Heading1 py="4">{`France entière`}</Heading1>
+      <HeadingTitle py="4">{`France entière`}</HeadingTitle>
       <Heading2>Inscrits</Heading2>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator

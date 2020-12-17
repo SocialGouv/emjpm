@@ -1,6 +1,7 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading3 } from "@emjpm/ui";
 import React from "react";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput, parseFormInt } from "~/util";
 
@@ -55,9 +56,9 @@ export const EnqueteActiviteMesuresForm = (props) => {
   const { submitForm, errors, showError, submit } = enqueteForm;
   return (
     <form onSubmit={submitForm}>
-      <Heading1 textAlign="center" mb={"50px"}>
+      <HeadingTitle textAlign="center" mb={"50px"}>
         {"Votre activité en 2019"}
-      </Heading1>
+      </HeadingTitle>
 
       {title && <Heading3>{title}</Heading3>}
 
