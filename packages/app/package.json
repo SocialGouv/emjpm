@@ -42,7 +42,6 @@
     "@styled-icons/fa-regular": "^10.22.0",
     "@styled-icons/material": "^10.18.0",
     "@styled-icons/remix-line": "^10.18.0",
-    "@zeit/next-css": "^1.0.1",
     "@zeit/next-source-maps": "0.0.4-canary.1",
     "apollo-boost": "^0.4.9",
     "apollo-client": "^2.6.10",
