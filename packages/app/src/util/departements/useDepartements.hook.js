@@ -46,7 +46,7 @@ export const GET_DIRECTION_REGION_DEPARTEMENT = gql`
   }
 `;
 
-export function useDepartements({ all = false } = {}) {
+export function useDepartements({ all = false, ...queryOptions } = {}) {
   const user = useContext(UserContext);
 
   const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
@@ -54,6 +54,7 @@ export function useDepartements({ all = false } = {}) {
     variables: {
       userId: user.id,
     },
+    ...queryOptions,
   });
 
   let departementsIds = null;

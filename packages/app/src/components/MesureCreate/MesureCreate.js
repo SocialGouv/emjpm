@@ -27,7 +27,7 @@ export const MesureCreate = () => {
     ? MANDATAIRE_TRIBUNAL
     : SERVICE_TRIBUNAL;
 
-  const { loading, error, data } = useQuery(GET_TRIBUNAL);
+  const { loading, error, data } = useQuery(GET_TRIBUNAL, { ssr: false });
 
   const tribunaux = useMemo(
     () => (data ? formatTribunauxOptions(data.tribunaux) : []),

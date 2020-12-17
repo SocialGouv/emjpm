@@ -58,6 +58,7 @@ export const AdminEtablissements = () => {
   );
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
+    ssr: false,
     variables: {
       departementCode: selectedDepartementCode ? selectedDepartementCode : null,
       limit: resultPerPage,

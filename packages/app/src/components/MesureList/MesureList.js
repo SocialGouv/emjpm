@@ -68,6 +68,7 @@ const MesureList = () => {
   };
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {
+    ssr: false,
     variables: queryVariables,
   });
 

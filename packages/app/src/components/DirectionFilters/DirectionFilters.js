@@ -16,7 +16,9 @@ import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 export const DirectionFilters = (props) => {
   const { useNameFilter = false } = props;
 
-  const { data: regionsData, loading, error } = useQuery(GET_REGIONS);
+  const { data: regionsData, loading, error } = useQuery(GET_REGIONS, {
+    ssr: false,
+  });
   const { filters, onFilterChange } = useContext(FiltersContextSerializable);
 
   const { regions, departements } = useMemo(() => {

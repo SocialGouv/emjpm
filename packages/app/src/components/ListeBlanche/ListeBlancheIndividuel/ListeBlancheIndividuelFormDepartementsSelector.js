@@ -7,7 +7,7 @@ import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
   const { departements = [], onAdd } = props;
-  const queryResults = useDepartements();
+  const queryResults = useDepartements({ ssr: false });
 
   if (queryResults.DepartementFormUtilloading) {
     return <Box>Chargement...</Box>;

@@ -79,6 +79,7 @@ const AdminUsers = () => {
 
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
+    ssr: false,
     variables: {
       limit: resultPerPage,
       offset: currentOffset,

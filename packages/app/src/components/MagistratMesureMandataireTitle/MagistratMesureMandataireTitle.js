@@ -10,6 +10,7 @@ const MagistratMesureMandataireTitle = (props) => {
   const { id } = props;
 
   const { data, loading } = useQuery(MANDATAIRE, {
+    ssr: false,
     variables: {
       id,
     },

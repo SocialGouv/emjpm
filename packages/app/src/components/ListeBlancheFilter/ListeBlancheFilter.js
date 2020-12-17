@@ -38,7 +38,7 @@ const ListeBlancheFilter = () => {
     email,
   } = filters;
 
-  const { departements } = useDepartements({ all: true });
+  const { departements } = useDepartements({ all: true, ssr: false });
 
   const buttonLinks = [
     {
