@@ -1,7 +1,8 @@
-import { BoxWrapper, Heading1 } from "@emjpm/ui";
+import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratFilters } from "~/components/MagistratFilters";
 import { FiltersContextProvider } from "~/components/MagistratFilters/context";
@@ -16,7 +17,7 @@ const Mesures = () => {
     >
       <LayoutMagistrat>
         <BoxWrapper mt={6} px="1">
-          <Heading1>Toutes vos mesures</Heading1>
+          <HeadingTitle>Toutes vos mesures</HeadingTitle>
           <MagistratFilters />
           <Flex
             sx={{

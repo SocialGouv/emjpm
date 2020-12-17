@@ -11,6 +11,7 @@ import { PROCESSUS_STATE } from "./queries";
 export const EtablissementImport = () => {
   const { data, loading, error } = useQuery(PROCESSUS_STATE, {
     fetchPolicy: "network-only",
+    ssr: false,
     variables: { id: "import_finess" },
   });
 

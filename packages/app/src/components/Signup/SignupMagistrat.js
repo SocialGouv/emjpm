@@ -1,6 +1,5 @@
-import { Button, Heading1, Heading4, Text } from "@emjpm/ui";
+import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
-import Link from "next/link";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -11,6 +10,8 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
+import { HeadingTitle } from "~/components/HeadingTitle";
+import { Link } from "~/components/Link";
 import { signupMagistratSchema } from "~/lib/validationSchemas";
 
 import { SignupContext } from "./context";
@@ -57,7 +58,10 @@ const SignupMagistratForm = ({ tiDatas }) => {
 
   return (
     <Fragment>
-      <Heading1 p="1" m="1">{`Création d'un compte de magistrat`}</Heading1>
+      <HeadingTitle
+        p="1"
+        m="1"
+      >{`Création d'un compte de magistrat`}</HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>

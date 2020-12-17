@@ -1,14 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import {
-  Card,
-  Heading1,
-  Heading2,
-  Heading4,
-  Indicator,
-  Spinner,
-} from "@emjpm/ui";
+import { Card, Heading2, Heading4, Indicator, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { HeadingTitle } from "~/components/HeadingTitle";
 
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
@@ -59,7 +54,7 @@ const IndicatorList = (props) => {
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
-      <Heading1 py="4">{`${department.code} - ${department.nom}`}</Heading1>
+      <HeadingTitle py="4">{`${department.code} - ${department.nom}`}</HeadingTitle>
       <Heading2>Inscrits</Heading2>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator

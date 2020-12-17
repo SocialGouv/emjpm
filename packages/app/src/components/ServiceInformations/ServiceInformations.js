@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/react-hooks";
 import { Button, Heading3, Heading5 } from "@emjpm/ui";
-import Link from "next/link";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AccessToken } from "~/components/AccessToken";
 import { LinkButton } from "~/components/Commons";
+import { Link } from "~/components/Link";
 
 import { GET_SERVICES } from "./queries";
 import { content, subtitle } from "./style";

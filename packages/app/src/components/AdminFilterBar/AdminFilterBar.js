@@ -64,6 +64,7 @@ const AdminFilterBar = ({
               {userTypeFilter && (
                 <Box width="170px" mr={1}>
                   <Select
+                    instanceId={"user-type-filter"}
                     value={TYPE_OPTIONS.find(
                       (elm) => elm.value === selectedType
                     )}
@@ -78,6 +79,7 @@ const AdminFilterBar = ({
               {useDepartementfilter && (
                 <Box width="250px" mr={1}>
                   <Select
+                    instanceId={"departement-filter"}
                     value={findOption(
                       departementsOptions,
                       selectedDepartementCode

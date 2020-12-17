@@ -46,6 +46,7 @@ const MesureListFilters = (props) => {
             {service_antennes.length >= 2 && (
               <Box width="170px" mr={1}>
                 <Select
+                  instanceId={"antenne-filter"}
                   size="small"
                   options={antenneOptions}
                   placeholder={"Antenne"}
@@ -56,6 +57,7 @@ const MesureListFilters = (props) => {
             )}
             <Box width="200px" mr={1}>
               <Select
+                instanceId={"mesure-nature-filter"}
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options
@@ -67,6 +69,7 @@ const MesureListFilters = (props) => {
             </Box>
             <Box width="200px" mr={1}>
               <Select
+                instanceId={"mesure-status-filter"}
                 size="small"
                 options={MESURE_STATUS_LABEL_VALUE}
                 placeholder={"État de la mesure"}
@@ -76,6 +79,7 @@ const MesureListFilters = (props) => {
             </Box>
             <Box width="200px" mr={1}>
               <Select
+                instanceId={"mesure-sort"}
                 size="small"
                 options={MESURE_SORTBY_LABEL_VALUE}
                 placeholder={"Trier par"}

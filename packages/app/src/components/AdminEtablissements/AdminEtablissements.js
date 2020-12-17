@@ -1,10 +1,10 @@
 import { Button, Card } from "@emjpm/ui";
-import Link from "next/link";
 import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 
 import { ETABLISSEMENTS } from "./queries";
@@ -58,6 +58,7 @@ export const AdminEtablissements = () => {
   );
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
+    ssr: false,
     variables: {
       departementCode: selectedDepartementCode ? selectedDepartementCode : null,
       limit: resultPerPage,

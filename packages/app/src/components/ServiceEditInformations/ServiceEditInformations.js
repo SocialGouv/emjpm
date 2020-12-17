@@ -9,6 +9,7 @@ import { ServiceEditInformationsForm } from "./ServiceEditInformationsForm";
 
 const ServiceEditInformations = ({ serviceId, cancelLink, successLink }) => {
   const { data, error, loading } = useQuery(GET_SERVICES, {
+    ssr: false,
     variables: {
       serviceId,
     },

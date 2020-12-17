@@ -1,7 +1,8 @@
-import { Heading1, Heading3 } from "@emjpm/ui";
+import { Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { formatFormInput, parseFormInt } from "~/util";
 
@@ -76,7 +77,7 @@ export const EnqueteActiviteRevisionMesuresForm = (props) => {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <Heading1 mb={1}>{"Votre activité en 2019"}</Heading1>
+        <HeadingTitle mb={1}>{"Votre activité en 2019"}</HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",
