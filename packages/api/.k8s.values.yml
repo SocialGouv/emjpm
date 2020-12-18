@@ -111,6 +111,8 @@ ingress:
     kubernetes.io/ingress.class: nginx
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/limit-connections: "2"
+    nginx.ingress.kubernetes.io/limit-rpm: "60"
   hosts:
     - host: api-emjpm.dev2.fabrique.social.gouv.fr
       paths:
