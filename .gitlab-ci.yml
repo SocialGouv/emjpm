@@ -26,5 +26,20 @@ K8S Test:
 Build:
   extends: .autodevops_build
 
-Register image:
+Register api image:
   extends: .autodevops_register_image
+  variables:
+    CONTEXT: packages/api
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+
+Register app image:
+  extends: .autodevops_register_image
+  variables:
+    CONTEXT: packages/app
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+
+Register hasura image:
+  extends: .autodevops_register_image
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
