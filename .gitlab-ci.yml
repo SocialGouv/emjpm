@@ -1,5 +1,30 @@
 ---
 include:
   - project: SocialGouv/gitlab-ci-yml
-    file: /autodevops.yml
+    file: /base_autodevops.yml
     ref: v20.1.2
+
+Install:
+  extends:
+    - .autodevops_install
+
+Lint:
+  extends: .autodevops_lint
+
+Test:
+  extends: .autodevops_test
+  variables:
+    POSTGRES_USER: emjpm
+    POSTGRES_PASSWORD: test
+  services:
+    postgres: 11-alpine
+
+
+K8S Test:
+  extends: .autodevops_k8s_test
+
+Build:
+  extends: .autodevops_build
+
+Register image:
+  extends: .autodevops_register_image
