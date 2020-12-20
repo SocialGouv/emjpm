@@ -17,7 +17,7 @@ Test:
     POSTGRES_USER: emjpm
     POSTGRES_PASSWORD: test
   services:
-    postgres: 11-alpine
+    - postgres: 11-alpine
 
 
 K8S Test:

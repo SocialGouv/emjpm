@@ -3,27 +3,14 @@
 const { join } = require("path");
 
 module.exports = {
-  test: {
-    // debug: true,
-    client: "pg",
-    connection: process.env.DATABASE_URL || {
-      host: "localhost",
-      user: "emjpm",
-      password: "test",
-      port: "5432",
-      database: "emjpm",
-    },
-    migrations: {},
-    seeds: {},
-  },
   development: {
     client: "pg",
     connection: process.env.DATABASE_URL || {
+      database: "emjpm",
       host: "db",
-      user: "emjpm",
       password: "test",
       port: "5432",
-      database: "emjpm",
+      user: "emjpm",
     },
     migrations: {},
     seeds: {},
@@ -31,12 +18,25 @@ module.exports = {
   production: {
     client: "pg",
     connection: process.env.DATABASE_URL || {
+      database: "emjpm",
       host: "localhost",
-      user: "emjpm",
       password: "test",
       port: "5432",
-      database: "emjpm",
+      user: "emjpm",
     },
     migrations: {},
+  },
+  test: {
+    // debug: true,
+    client: "pg",
+    connection: process.env.DATABASE_URL || {
+      database: "emjpm",
+      host: "localhost",
+      password: "test",
+      port: "5432",
+      user: "emjpm",
+    },
+    migrations: {},
+    seeds: {},
   },
 };
