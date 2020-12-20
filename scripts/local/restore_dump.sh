@@ -12,14 +12,14 @@ DROP DATABASE IF EXISTS emjpm;
 CREATE DATABASE emjpm WITH OWNER = $NEW_OWNER;
 EOF
 
-cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
+cat reset-database.sql | psql -h localhost -p 5432 -U $PGUSER
 rm reset-database.sql
 
 export PGUSER=emjpm
 export PGPASSWORD=test
 
 # restore production dump
-pg_restore -h localhost -p 5434 --if-exists --clean --no-owner --no-acl -e -Fc -d emjpm $DUMP_FILE
+pg_restore -h localhost -p 5432 --if-exists --clean --no-owner --no-acl -e -Fc -d emjpm $DUMP_FILE
 
 # clear hasura
 cat <<EOF > clean-hasura.sql
@@ -29,5 +29,5 @@ DELETE FROM hdb_catalog.event_triggers;
 DELETE FROM hdb_catalog.remote_schemas;
 EOF
 
-cat clean-hasura.sql | psql -h localhost -p 5434 -U $PGUSER
+cat clean-hasura.sql | psql -h localhost -p 5432 -U $PGUSER
 rm clean-hasura.sql

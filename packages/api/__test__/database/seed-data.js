@@ -7,7 +7,7 @@ const seedData = (databaseName) => {
       "--host",
       "localhost",
       "--port",
-      "5434",
+      "5432",
       "--username",
       "emjpm",
       "-e",

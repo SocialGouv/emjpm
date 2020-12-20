@@ -6,9 +6,9 @@
 ```bash
 export PGUSER=emjpm
 export PGPASSWORD=test
-psql -h localhost -p 5434 < ./scripts/local/before_seeds_creation.sql
-psql -h localhost -p 5434 < ./.k8s/postgres/restore/configmap/anonymize.sql
-pg_dump -h localhost -p 5434 -Fc > ./packages/api/__test__/database/test-seed.dump
+psql -h localhost -p 5432 < ./scripts/local/before_seeds_creation.sql
+psql -h localhost -p 5432 < ./.k8s/postgres/restore/configmap/anonymize.sql
+pg_dump -h localhost -p 5432 -Fc > ./packages/api/__test__/database/test-seed.dump
 ```
 
 ## Test
@@ -47,11 +47,11 @@ $ docker-compose up db
 $ yarn workspace @emjpm/knex run migrate --env test
 $ yarn workspace @emjpm/knex run seeds --env test
 # Instantiate the initial seed
-$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_dump --host localhost --port 5432 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
 
 # Or if you have the test-seed.dump
 # The e2e script will retore the db before each scenario with
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5432 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
 
 # start the dev server
 $ yarn dev
@@ -67,7 +67,7 @@ $ yarn --cwd optional/e2e/.runners/puppetteer
 $ yarn e2e test
 
 #if your db is broken
-$ psql --host localhost --port 5434 --username postgres --dbname emjpm -e -f./optional/e2e/.runners/puppetteer/drop.sql
+$ psql --host localhost --port 5432 --username postgres --dbname emjpm -e -f./optional/e2e/.runners/puppetteer/drop.sql
 ```
 
 **Remote**
@@ -93,11 +93,11 @@ $ yarn workspace @emjpm/knex run migrate --env test
 $ yarn workspace @emjpm/knex run seeds --env test
 
 # Instantiate the initial seed
-$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_dump --host localhost --port 5432 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
 
 # Optional
 # The e2e script will retore the db before each scenario with
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5432 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
 
 $ docker-compose stop
 

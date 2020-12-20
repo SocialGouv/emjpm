@@ -5,7 +5,7 @@ version: "3.8"
 #
 # Listening ports :
 #  - 5000 : hasura
-#  - 5434 : postgres
+#  - 5432 : postgres
 #
 
 services:
@@ -23,7 +23,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=test
     ports:
-      - "5434:5432"
+      - "5432:5432"
     volumes:
       - emjpm-pgdata:/var/lib/postgresql/data
     restart: always

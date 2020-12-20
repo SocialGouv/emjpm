@@ -7,7 +7,7 @@ version: "3"
 #  - 3000 : frontend
 #  - 4000 : api
 #  - 5000 : hasura
-#  - 5434 : postgres
+#  - 5432 : postgres
 #
 services:
   db:
