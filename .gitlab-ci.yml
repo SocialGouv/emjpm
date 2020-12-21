@@ -87,11 +87,6 @@ stages:
 ###################################               ##############################################
 ################################################################################################
 
-.prepare_stage:
-  extends: .base_stage
-  stage: Prepare
-  dependencies: []
-
 .base_yarn:
   stage: Prepare
   image: node:15-alpine
@@ -164,15 +159,11 @@ Build @emjpm/app:
   image: node:15-alpine
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-    paths:
-      - packages/app/.next/cache
   script:
     - yarn workspace @emjpm/app postinstall
     - yarn workspace @emjpm/app build
   artifacts:
     expire_in: 1 day
-    paths:
-      - packages/app/.next
 
 #
 
