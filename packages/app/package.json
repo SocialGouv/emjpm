@@ -16,7 +16,7 @@
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",
     "start:build": "next start -p 80",
-    "postinstall": "link-module-alias"
+    "postinstall:run": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src",
@@ -93,6 +93,7 @@
     "jest": "^24.9.0",
     "jest-cli": "^24.9.0",
     "json-loader": "^0.5.7",
+    "next-transpile-modules": "^2.3.1",
     "postcss-loader": "^4.0.4",
     "prettier": "^2.1.2",
     "style-loader": "^2.0.0"
