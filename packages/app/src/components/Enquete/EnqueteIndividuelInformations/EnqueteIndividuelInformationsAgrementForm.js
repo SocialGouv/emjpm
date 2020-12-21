@@ -1,9 +1,9 @@
-import { Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
+import { Heading3 } from "~/ui";
 import { formatFormBoolean, formatFormInput, parseFormInt } from "~/util";
 
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";

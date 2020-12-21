@@ -1,8 +1,8 @@
-import { Heading5 } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
+import { Heading5 } from "~/ui";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";

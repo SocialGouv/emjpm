@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Heading2 } from "@emjpm/ui";
 import { differenceInDays } from "date-fns";
 import React from "react";
 import { Box, Button, Flex } from "rebass";
@@ -8,6 +7,7 @@ import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import useQueryContextWithHasuraRole from "~/hooks/useQueryContextWithHasuraRole";
+import { Heading2 } from "~/ui";
 
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";

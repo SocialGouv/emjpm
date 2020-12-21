@@ -1,5 +1,4 @@
 import { isIndividuel, isPrepose } from "@emjpm/core";
-import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -7,6 +6,7 @@ import { AccessToken } from "~/components/AccessToken";
 import { LinkButton } from "~/components/Commons";
 import { Link } from "~/components/Link";
 import { UserContext } from "~/components/UserContext";
+import { Button, Heading3, Heading5 } from "~/ui";
 
 import { content, subtitle } from "./style";
 

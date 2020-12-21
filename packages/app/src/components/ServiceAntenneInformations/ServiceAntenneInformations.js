@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading3, Heading5 } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AntenneEditLinkButton } from "~/components/Commons";
+import { Card, Heading3, Heading5 } from "~/ui";
 
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { content, subtitle } from "./style";

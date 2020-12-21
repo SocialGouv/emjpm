@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireMesureImport } from "~/components/MandataireMesureImport";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ImportMesures = () => {

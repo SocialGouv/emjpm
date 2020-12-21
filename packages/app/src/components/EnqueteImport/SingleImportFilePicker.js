@@ -1,6 +1,7 @@
-import { FilePicker } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { FilePicker } from "~/ui";
 
 const inputStyle = {
   display: "0.1px",

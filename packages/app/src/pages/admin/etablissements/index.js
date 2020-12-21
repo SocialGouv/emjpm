@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
 import { Box } from "rebass";
@@ -8,6 +7,7 @@ import { AdminFilterBar } from "~/components/AdminFilterBar";
 import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const AdminEtablissementsPage = () => {

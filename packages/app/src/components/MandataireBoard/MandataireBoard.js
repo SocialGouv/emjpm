@@ -1,10 +1,10 @@
 import { isIndividuel, isPrepose } from "@emjpm/core";
-import { Heading4, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
+import { Heading4, Text } from "~/ui";
 
 const MandataireBoard = () => {
   const { type, mandataire } = useContext(UserContext);

@@ -1,6 +1,5 @@
 import "~/polyfills";
 
-import { presetEmjpm } from "@emjpm/ui";
 import jwtDecode from "jwt-decode";
 import App from "next/app";
 import Head from "next/head";
@@ -11,6 +10,7 @@ import { ThemeProvider } from "theme-ui";
 import { UserProvider } from "~/components/UserContext/index";
 import { withApolloClient } from "~/lib/apollo";
 import { initMatomo } from "~/matomo";
+import { presetEmjpm } from "~/ui";
 import { formatUserFromToken } from "~/util/formatUserFromToken";
 import { initSentry } from "~/util/sentry";
 

@@ -1,6 +1,7 @@
-import { Text } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { Text } from "~/ui";
 
 const SignupGeneralError = ({ errors }) => {
   return (

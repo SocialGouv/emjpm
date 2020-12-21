@@ -1,8 +1,8 @@
 import { findDepartementByCodeOrId } from "@emjpm/core";
-import { Select } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
+import { Select } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {

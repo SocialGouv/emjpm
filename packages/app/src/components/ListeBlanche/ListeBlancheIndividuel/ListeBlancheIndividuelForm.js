@@ -1,5 +1,4 @@
 import { isAdmin } from "@emjpm/core";
-import { Button, Heading4 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -12,6 +11,7 @@ import {
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
+import { Button, Heading4 } from "~/ui";
 import { formatFormInput } from "~/util";
 import { DepartementFormUtil } from "~/util/departements";
 

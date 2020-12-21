@@ -1,4 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
+import PropTypes from "prop-types";
+import React from "react";
+import { Box, Flex } from "rebass";
+
+import { AntenneLinkButton, LinkButton } from "~/components/Commons";
 import {
   Antenne,
   BoxWrapper,
@@ -7,12 +12,7 @@ import {
   Heading4,
   Spinner,
   Text,
-} from "@emjpm/ui";
-import PropTypes from "prop-types";
-import React from "react";
-import { Box, Flex } from "rebass";
-
-import { AntenneLinkButton, LinkButton } from "~/components/Commons";
+} from "~/ui";
 
 import { ANTENNE } from "./queries";
 

@@ -1,10 +1,10 @@
-import { Heading3 } from "@emjpm/ui";
 import { Label } from "@rebass/forms";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
+import { Heading3 } from "~/ui";
 import { parseFormFloat } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";

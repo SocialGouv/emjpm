@@ -1,9 +1,9 @@
-import { Button } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { useMutation } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
+import { Button } from "~/ui";
 
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 

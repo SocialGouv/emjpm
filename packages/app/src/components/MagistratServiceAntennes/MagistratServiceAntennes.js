@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Antenne, Card, Heading3, Heading4, Spinner } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex } from "rebass";
+
+import { Antenne, Card, Heading3, Heading4, Spinner } from "~/ui";
 
 import { SERVICE_ANTENNES } from "./queries";
 

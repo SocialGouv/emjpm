@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { Card, Heading2, Spinner } from "~/ui";
 
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";

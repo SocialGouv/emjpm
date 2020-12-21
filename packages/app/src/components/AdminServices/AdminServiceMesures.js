@@ -1,7 +1,6 @@
 /* eslint-disable react/display-name */
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { isEnAttente, isEnCours, isEteinte } from "@emjpm/core";
-import { Heading4, Select } from "@emjpm/ui";
 import { Checkbox, Label } from "@rebass/forms";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
@@ -14,6 +13,7 @@ import {
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 } from "~/constants/mesures";
+import { Heading4, Select } from "~/ui";
 
 import { CALCULATE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";

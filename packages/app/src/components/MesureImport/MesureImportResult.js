@@ -1,6 +1,7 @@
-import { Button, Heading2, Text } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
+
+import { Button, Heading2, Text } from "~/ui";
 
 import { MesureImportErrors } from "./MesureImportErrors";
 import { ServiceMesureAntennesMatcher } from "./ServiceMesureAntennesMatcher";

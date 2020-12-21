@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMandatairesList } from "~/components/MagistratMandatairesList";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Mandataires = () => {
