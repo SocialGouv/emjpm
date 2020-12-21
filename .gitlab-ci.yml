@@ -281,7 +281,6 @@ Register app image:
     - Build @emjpm/core
   needs:
     - Install app
-    - Install ui
     - Install core
     - Build @emjpm/app
     - Build @emjpm/core
