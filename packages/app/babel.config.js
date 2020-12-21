@@ -30,7 +30,6 @@ module.exports = {
       { displayName: true, preprocess: false, ssr: true },
     ],
     ["@babel/plugin-transform-runtime"],
-    ["@emotion"],
   ],
   presets: [
     "@babel/preset-env",
