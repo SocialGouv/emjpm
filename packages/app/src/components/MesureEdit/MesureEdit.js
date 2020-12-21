@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import Router from "next/router";
 import React, { useContext, useMemo } from "react";
 import { Box } from "rebass";

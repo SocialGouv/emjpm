@@ -28,4 +28,4 @@ class AuthorizationCodes extends Model {
   }
 }
 
-module.exports = { AuthorizationCodes };
+module.exports = AuthorizationCodes;

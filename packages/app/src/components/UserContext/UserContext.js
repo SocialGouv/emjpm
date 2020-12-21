@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { isService } from "@emjpm/core";
+import { isService } from "@emjpm/biz";
 import React, { createContext, Fragment } from "react";
 
 import { setUser } from "~/util/sentry";

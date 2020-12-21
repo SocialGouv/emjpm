@@ -1,9 +1,9 @@
-const { Service } = require("~/models/Service");
-const { Mandataire } = require("~/models/Mandataire");
-const { ServiceAntenne } = require("~/models/ServiceAntenne");
+const { Service } = require("~/models");
+const { Mandataire } = require("~/models");
+const { ServiceAntenne } = require("~/models");
 const { raw } = require("objection");
-const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
-const { Mesure } = require("~/models/Mesure");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
+const { Mesure } = require("~/models");
 
 async function updateServiceMesureStates(service_id) {
   const counters = await getMesureStates(null, service_id, null);

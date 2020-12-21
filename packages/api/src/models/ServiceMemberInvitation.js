@@ -25,4 +25,4 @@ class ServiceMemberInvitation extends Model {
   }
 }
 
-module.exports = { ServiceMemberInvitation };
+module.exports = ServiceMemberInvitation;

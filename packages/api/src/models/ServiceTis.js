@@ -24,4 +24,4 @@ class ServiceTis extends Model {
   }
 }
 
-module.exports = { ServiceTis };
+module.exports = ServiceTis;

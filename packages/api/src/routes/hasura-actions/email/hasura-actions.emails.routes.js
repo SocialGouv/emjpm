@@ -1,5 +1,5 @@
 const express = require("express");
-const { isEnAttente } = require("@emjpm/core");
+const { isEnAttente } = require("@emjpm/biz");
 const uid = require("rand-token").uid;
 
 const { getEmailUserDatas } = require("~/email/email-user-data");
@@ -8,10 +8,10 @@ const { validationEmail } = require("~/email/validation-email");
 const {
   serviceMemberInvitationMail,
 } = require("~/email/service-member-invitation-mail");
-const { Service } = require("~/models/Service");
-const { ServiceMemberInvitation } = require("~/models/ServiceMemberInvitation");
-const { Tis } = require("~/models/Tis");
-const { Mesure } = require("~/models/Mesure");
+const { Service } = require("~/models");
+const { ServiceMemberInvitation } = require("~/models");
+const { Tis } = require("~/models");
+const { Mesure } = require("~/models");
 
 const {
   editorConfirmationEmail,

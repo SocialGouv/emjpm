@@ -32,4 +32,4 @@ class MesureEtat extends Model {
   }
 }
 
-module.exports = { MesureEtat };
+module.exports = MesureEtat;

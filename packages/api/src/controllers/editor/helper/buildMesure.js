@@ -1,4 +1,4 @@
-const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 function buildMesure({
   datas,

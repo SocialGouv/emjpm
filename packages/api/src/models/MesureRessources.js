@@ -27,4 +27,4 @@ class MesureRessources extends Model {
   }
 }
 
-module.exports = { MesureRessources };
+module.exports = MesureRessources;

@@ -1,4 +1,4 @@
-import { mesureFormatter as formatter } from "@emjpm/core";
+import { mesureFormatter as formatter } from "@emjpm/biz";
 import { format } from "date-fns";
 
 const formatMesureListItems = (mesureList) => {

@@ -1,8 +1,9 @@
-import { GLOBAL, MESURE_PROTECTION } from "../constants";
-import { isMonsieur } from "../services";
-import { stdFormatter } from "./std.formatter";
+const { GLOBAL, MESURE_PROTECTION } = require("../constants");
+const { isMonsieur } = require("../services");
 
-export const mesureFormatter = {
+const { stdFormatter } = require("./std");
+
+const mesureFormatter = {
   formatChampMesure(champMesure) {
     if (!champMesure) {
       return "";
@@ -51,3 +52,5 @@ export const mesureFormatter = {
     return MESURE_PROTECTION.TYPE_ETABLISSEMENT.byKey[typeEtablissement];
   },
 };
+
+module.exports = { mesureFormatter };

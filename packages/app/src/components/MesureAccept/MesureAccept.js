@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import { isFrance, MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { isFrance, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import Router from "next/router";
 import React, { useContext } from "react";
 import { Box } from "rebass";

@@ -1,4 +1,4 @@
-import { isMandataire, isService } from "@emjpm/core";
+import { isMandataire, isService } from "@emjpm/biz";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 

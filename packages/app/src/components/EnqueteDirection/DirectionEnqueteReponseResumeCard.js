@@ -1,4 +1,4 @@
-import { stdFormatter } from "@emjpm/core";
+import { stdFormatter } from "@emjpm/biz";
 import React from "react";
 import { Flex } from "rebass";
 

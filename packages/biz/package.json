@@ -1,42 +1,31 @@
 {
-  "name": "@emjpm/core",
+  "name": "@emjpm/biz",
   "version": "25.79.0",
   "private": true,
   "description": "",
   "source": "src/index.js",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
+  "main": "src/index.js",
   "license": "Apache-2.0",
   "files": [
     "src"
   ],
   "scripts": {
-    "build": "rollup -c",
     "lint:pre-commit": "yarn lint:fix",
     "lint": "eslint .",
     "lint:fix": "yarn lint --cache --fix",
     "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.html,.ts,.tsx,.mjs --report-unused-disable-directives",
     "lint:package": "sort-package-json",
-    "dev": "rollup -c -w",
-    "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
-    "postinstall": "link-module-alias"
+    "postinstall": "yarn postinstall:${NODE_ENV:-development}",
+    "postinstall:test": "yarn postinstall:development",
+    "postinstall:development": "link-module-alias",
+    "postinstall:production": "exit 0"
   },
   "_moduleAliases": {
     "~": "src"
   },
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
-    "@rollup/plugin-babel": "^5.2.1",
-    "@rollup/plugin-commonjs": "^16.0.0",
-    "@rollup/plugin-node-resolve": "^10.0.0",
     "@socialgouv/eslint-config-recommended": "^1.46.0",
     "eslint": "^7.12.1",
-    "jest": "^24.9.0",
-    "prettier": "^2.1.2",
-    "rollup": "^2.33.0",
-    "rollup-plugin-babel": "^4.4.0",
     "sort-package-json": "^1.46.1"
   },
   "dependencies": {

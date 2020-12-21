@@ -1,4 +1,4 @@
-import { getDepartementCode } from "@emjpm/core";
+import { getDepartementCode } from "@emjpm/biz";
 import gql from "graphql-tag";
 
 import { geocode } from "~/util/geocode";

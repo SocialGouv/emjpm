@@ -1,7 +1,7 @@
 const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
 
-const { Departement } = require("./Departement");
+const Models = require(".");
 
 Model.knex(knexConnection);
 
@@ -21,7 +21,7 @@ class Service extends Model {
           from: "services.department_id",
           to: "departements.id",
         },
-        modelClass: Departement,
+        modelClass: Models.Departement,
         relation: Model.HasOneRelation,
       },
     };
@@ -48,4 +48,4 @@ class Service extends Model {
   }
 }
 
-module.exports = { Service };
+module.exports = Service;

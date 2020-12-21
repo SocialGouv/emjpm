@@ -13,4 +13,4 @@ class UserRole extends Model {
   }
 }
 
-module.exports = { UserRole };
+module.exports = UserRole;

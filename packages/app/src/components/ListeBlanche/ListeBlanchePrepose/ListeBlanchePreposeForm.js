@@ -1,4 +1,4 @@
-import { isAdmin } from "@emjpm/core";
+import { isAdmin } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 import React, { Fragment, useContext } from "react";

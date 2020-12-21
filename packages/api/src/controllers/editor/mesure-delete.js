@@ -1,8 +1,8 @@
 const { transaction } = require("objection");
 
-const { Mesure } = require("~/models/Mesure");
-const { MesureEtat } = require("~/models/MesureEtat");
-const { MesureRessources } = require("~/models/MesureRessources");
+const { Mesure } = require("~/models");
+const { MesureEtat } = require("~/models");
+const { MesureRessources } = require("~/models");
 
 const updateMesureStates = require("./service/updateMesureStates");
 

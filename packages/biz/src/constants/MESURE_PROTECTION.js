@@ -1,6 +1,6 @@
-import { buildKeys } from "./keysBuilder.service";
+const { buildKeys } = require("../utils/keysBuilder");
 
-export const MESURE_PROTECTION = {
+const MESURE_PROTECTION = {
   CAUSE_SORTIE: buildKeys({
     caducite: "caducité",
     deces: "décès",
@@ -61,3 +61,5 @@ export const MESURE_PROTECTION = {
     etablissement_psychiatrique: "Etablissement psychiatrique",
   }),
 };
+
+module.exports = { MESURE_PROTECTION };

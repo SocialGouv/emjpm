@@ -4,8 +4,8 @@ const fs = require("fs");
 const { join } = require("path");
 const os = require("os");
 const config = require("~/config");
-const { OcmiMandataire } = require("~/models/OcmiMandataire");
-const { ProcessusStates } = require("~/models/ProcessusStates");
+const { OcmiMandataire } = require("~/models");
+const { ProcessusStates } = require("~/models");
 
 const router = express.Router();
 
