@@ -21,7 +21,7 @@
     "dev": "rollup -c -w",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
-    "postinstall:run": "link-module-alias"
+    "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src"
