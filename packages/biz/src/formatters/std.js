@@ -1,6 +1,6 @@
-import { format } from "date-fns";
+const { format } = require("date-fns");
 
-export const stdFormatter = {
+const stdFormatter = {
   formatDateTimeUI(date) {
     if (!date) {
       return "";
@@ -14,3 +14,5 @@ export const stdFormatter = {
     return format(new Date(date), "dd/MM/yyyy");
   },
 };
+
+module.exports = { stdFormatter };

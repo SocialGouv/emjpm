@@ -13,4 +13,4 @@ class Logs extends Model {
   }
 }
 
-module.exports = { Logs };
+module.exports = Logs;

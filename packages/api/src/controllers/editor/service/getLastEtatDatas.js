@@ -1,6 +1,6 @@
 const getDepartement = require("~/services/getDepartement");
 const getGeoDatas = require("~/services/getGeoDatas");
-const { isFrance } = require("~core");
+const { isFrance } = require("@emjpm/biz");
 
 async function getLastEtatDatas(etats) {
   etats.sort((a, b) => {

@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/react-hooks";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useState } from "react";
 
 import { UPLOAD_MESURES_EXCEL_FILE } from "~/components/MesureImport/mutations";

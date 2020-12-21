@@ -1,5 +1,5 @@
 const yup = require("yup");
-const { MESURE_PROTECTION } = require("~core");
+const { MESURE_PROTECTION } = require("@emjpm/biz");
 
 const MESURE_TYPES = [
   "curatelle",

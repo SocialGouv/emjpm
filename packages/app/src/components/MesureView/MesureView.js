@@ -1,4 +1,4 @@
-import { isEnCours } from "@emjpm/core";
+import { isEnCours } from "@emjpm/biz";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 

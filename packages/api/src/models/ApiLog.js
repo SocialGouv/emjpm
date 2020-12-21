@@ -27,4 +27,4 @@ class ApiLog extends Model {
   }
 }
 
-module.exports = { ApiLog };
+module.exports = ApiLog;

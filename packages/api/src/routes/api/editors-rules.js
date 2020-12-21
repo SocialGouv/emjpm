@@ -1,5 +1,5 @@
 const { body, check } = require("express-validator");
-const { MESURE_PROTECTION } = require("~core");
+const { MESURE_PROTECTION } = require("@emjpm/biz");
 const isBefore = require("date-fns/isBefore");
 const parseISO = require("date-fns/parseISO");
 

@@ -1,10 +1,10 @@
 const logger = require("~/utils/logger");
-const { AccessToken } = require("~/models/AccessToken");
+const { AccessToken } = require("~/models");
 const { jwtConfig } = require("~/config");
 const jwt = require("jsonwebtoken");
 const getUid = require("~/utils/getUid");
 const { validationResult } = require("express-validator");
-const { Editors } = require("~/models/Editors");
+const { Editors } = require("~/models");
 
 const generateToken = (editorId, editorToken, redirectUrl, userId, uid) => {
   const signOptions = {

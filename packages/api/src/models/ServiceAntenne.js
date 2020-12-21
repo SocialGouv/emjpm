@@ -1,6 +1,8 @@
 const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
 
+const Models = require(".");
+
 Model.knex(knexConnection);
 
 class ServiceAntenne extends Model {
@@ -49,19 +51,17 @@ class ServiceAntenne extends Model {
   }
 
   static get relationMappings() {
-    const { Service } = require("./Service");
-
     return {
       service: {
         join: {
           from: "service_antenne.service_id",
           to: "users.id",
         },
-        modelClass: Service,
+        modelClass: Models.Service,
         relation: Model.BelongsToOneRelation,
       },
     };
   }
 }
 
-module.exports = { ServiceAntenne };
+module.exports = ServiceAntenne;

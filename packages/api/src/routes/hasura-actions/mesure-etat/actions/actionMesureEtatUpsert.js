@@ -1,4 +1,4 @@
-const { MesureEtat } = require("~/models/MesureEtat");
+const { MesureEtat } = require("~/models");
 
 const updateCurrentDataOfMesure = require("./updateCurrentDataOfMesure");
 

@@ -1,4 +1,4 @@
-const { Tis } = require("~/models/Tis");
+const { Tis } = require("~/models");
 
 const getTribunaux = async (req, res) => {
   const tribunaux = await Tis.query().where("immutable", true);

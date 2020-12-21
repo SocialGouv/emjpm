@@ -13,4 +13,4 @@ class Tis extends Model {
   }
 }
 
-module.exports = { Tis };
+module.exports = Tis;

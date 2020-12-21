@@ -36,4 +36,4 @@ class EnqueteReponsesAgrementsFormations extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesAgrementsFormations };
+module.exports = EnqueteReponsesAgrementsFormations;

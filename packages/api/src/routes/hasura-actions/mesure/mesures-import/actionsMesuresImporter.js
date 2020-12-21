@@ -2,20 +2,20 @@ const {
   MESURE_PROTECTION,
   MESURE_PROTECTION_STATUS,
   isFrance,
-} = require("~core");
+} = require("@emjpm/biz");
 const excelParser = require("~/utils/file/excelParser");
 const logger = require("~/utils/logger");
 
-const { Service } = require("~/models/Service");
+const { Service } = require("~/models");
 const actionsMesuresImporterGeoRepository = require("./repository/actionsMesuresImporterGeoRepository");
 const actionsMesuresImporterMesureRepository = require("./repository/actionsMesuresImporterMesureRepository");
-const { Mandataire } = require("~/models/Mandataire");
+const { Mandataire } = require("~/models");
 const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
-const { Mesure } = require("~/models/Mesure");
+const { Mesure } = require("~/models");
 
 const mesureStatesService = require("~/services/updateMesureStates");
-const { MesureEtat } = require("~/models/MesureEtat");
-const { MesureRessources } = require("~/models/MesureRessources");
+const { MesureEtat } = require("~/models");
+const { MesureRessources } = require("~/models");
 
 const actionsMesuresImporter = {
   importMesuresFile,

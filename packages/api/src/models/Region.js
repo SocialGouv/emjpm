@@ -23,4 +23,4 @@ class Region extends Model {
   }
 }
 
-module.exports = { Region };
+module.exports = Region;

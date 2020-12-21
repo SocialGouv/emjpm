@@ -24,4 +24,4 @@ class MandataireTis extends Model {
   }
 }
 
-module.exports = { MandataireTis };
+module.exports = MandataireTis;

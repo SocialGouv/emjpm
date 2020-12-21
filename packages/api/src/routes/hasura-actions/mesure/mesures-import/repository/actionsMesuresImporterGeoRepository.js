@@ -1,6 +1,6 @@
-const { getDepartementCode } = require("~core");
+const { getDepartementCode } = require("@emjpm/biz");
 const getGeoDatas = require("~/services/getGeoDatas");
-const { Departement } = require("~/models/Departement");
+const { Departement } = require("~/models");
 
 const findDepartmentFromPostalCode = async (code_postal, departmentByCode) => {
   let department = null;
