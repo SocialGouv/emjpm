@@ -8,7 +8,8 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel",
-    "postinstall:run": "lerna run postinstall"
+    "postinstall": "lerna run postinstall:run",
+    "postinstall:run": "lerna run postinstall:run"
   },
   "license": "Apache-2.0",
   "devDependencies": {
