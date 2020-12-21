@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.79.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.79.0) (2020-12-21)
+
+
+### Bug Fixes
+
+* **api:** do not escape input string ([091ce14](https://github.com/SocialGouv/emjpm/commit/091ce1442bdbc95d223b61280d5ebd2737677a0d))
+* **api:** return explicit error message if bad content type ([9ef6953](https://github.com/SocialGouv/emjpm/commit/9ef69531d0fef4ee7ceb9ac5a57b36b9a3fff457))
+
+
+### Features
+
+* **mandoline:** authorize all users to access get user api ([#2378](https://github.com/SocialGouv/emjpm/issues/2378)) ([61edadc](https://github.com/SocialGouv/emjpm/commit/61edadc31fe77d0b181f3867e3543eff2438421e))
+* **mesure:** handle null zip code and foreign countries ([#2381](https://github.com/SocialGouv/emjpm/issues/2381)) ([5aaac32](https://github.com/SocialGouv/emjpm/commit/5aaac3268d11472c7b4ab85bc076cba8bed3550b))
+* **rate-limit-k8s:** ingress ddos protection ([#2307](https://github.com/SocialGouv/emjpm/issues/2307)) ([56d8094](https://github.com/SocialGouv/emjpm/commit/56d80940a72f45505b897f65cbc6160c9ee4e346))
+
+
+### Reverts
+
+* Revert "fix(trigger-release): try a workaround" ([0be5ff8](https://github.com/SocialGouv/emjpm/commit/0be5ff8ffccd9c9e481943da9033d525ec38b13f))
+
+
+
+
+
 # [25.78.0](https://github.com/SocialGouv/emjpm/compare/v25.77.0...v25.78.0) (2020-12-15)
 
 
