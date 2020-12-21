@@ -196,7 +196,7 @@ export const ListeBlanchePreposeForm = (props) => {
         </FormInputBox>
       </Flex>
       <Flex justifyContent="flex-end" mt={4}>
-        {isAdmin(user) && (
+        {editMode && isAdmin(user) && (
           <Box>
             <Link
               href={`/admin/liste-blanche/[id]/delete`}

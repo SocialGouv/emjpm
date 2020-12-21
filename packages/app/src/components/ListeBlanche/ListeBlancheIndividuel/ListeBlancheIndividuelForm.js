@@ -194,7 +194,7 @@ export const ListeBlancheIndividuelForm = (props) => {
       </Flex>
 
       <Flex mt={4} justifyContent="flex-end">
-        {isAdmin(user) && (
+        {editMode && isAdmin(user) && (
           <Box>
             <Link
               href={`/admin/liste-blanche/[id]/delete`}
