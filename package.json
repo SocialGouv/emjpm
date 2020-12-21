@@ -12,11 +12,13 @@
     "postinstall:run": "lerna run postinstall:run"
   },
   "license": "Apache-2.0",
+  "dependencies": {
+    "lerna": "^3.22.1"
+  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "husky": "^4.3.0",
-    "lerna": "^3.22.1"
+    "husky": "^4.3.0"
   },
   "husky": {
     "hooks": {
