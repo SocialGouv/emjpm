@@ -4,14 +4,33 @@ include:
     file: /base_autodevops.yml
     ref: v20.1.2
 
+stages:
+  - Install
+  - Build
+  - Test
+  - Registration
+  - Release
+  - Deploy
+
 Install:
   extends:
     - .autodevops_install
 
+Build:
+  stage: Build
+  extends: .autodevops_build
+
+# Build api image:
+  # stage: Build
+  # extends: .autodevops_build
+  # variables:
+
 Lint:
+  stage: Test
   extends: .autodevops_lint
 
 Test:
+  stage: Test
   extends: .autodevops_test
   variables:
     POSTGRES_USER: emjpm
@@ -20,11 +39,9 @@ Test:
     - postgres:11-alpine
 
 
-K8S Test:
-  extends: .autodevops_k8s_test
+# K8S Test:
+#   extends: .autodevops_k8s_test
 
-Build:
-  extends: .autodevops_build
 
 Register api image:
   extends: .autodevops_register_image
