@@ -1,4 +1,21 @@
 {
+  "name": "@emjpm/app",
+  "version": "25.78.0",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next",
+    "lint": "eslint src",
+    "lint:fix": "yarn lint --fix --cache",
+    "lint:pre-commit": "yarn lint:fix",
+    "postinstall": "link-module-alias",
+    "prettier": "prettier --check '**/*.js'",
+    "prettier:fix": "prettier --write '**/*.js'",
+    "start": "next dev",
+    "start:build": "next start -p 80",
+    "test": "jest"
+  },
+  "homepage": "https://github.com/SocialGouv/emjpm",
   "_moduleAliases": {
     "~": "src",
     "~public": "public"
@@ -106,23 +123,6 @@
     "styled-components": "^4.4.1",
     "theme-ui": "^0.3.1"
   },
-  "homepage": "https://github.com/SocialGouv/emjpm",
   "keywords": [],
-  "license": "Apache-2.0",
-  "name": "@emjpm/app",
-  "private": true,
-  "scripts": {
-    "build": "next build",
-    "dev": "next",
-    "lint": "eslint src",
-    "lint:fix": "yarn lint --fix --cache",
-    "lint:pre-commit": "yarn lint:fix",
-    "postinstall": "link-module-alias",
-    "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
-    "start": "next dev",
-    "start:build": "next start -p 80",
-    "test": "jest"
-  },
-  "version": "25.78.0"
+  "license": "Apache-2.0"
 }

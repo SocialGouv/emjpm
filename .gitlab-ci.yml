@@ -92,42 +92,27 @@ stages:
   stage: Prepare
   dependencies: []
 
-.base_yarn_workspace_install:
-  extends: .prepare_stage
+.base_yarn:
+  stage: Install
   image: node:15-alpine
-  interruptible: true
   cache:
     key:
       files:
         - yarn.lock
       prefix: ${CI_JOB_NAME}
     paths:
-      - $CI_PROJECT_DIR/.cache
+      - .cache
   script:
     - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
-    - yarn global add @socialgouv/yarn-workspace-focus-install
-    - $(yarn global bin)/yarn-workspace-focus-install
-      --cwd packages/${CONTEXT}
-      --prefer-offline
+    - yarn install --frozen-lockfile --prefer-offline
   artifacts:
-    expire_in: 1 day
+    expire_in: 1 week
     paths:
       - node_modules
-      - packages/${CONTEXT}/node_modules
-
 #
 
-Install api:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: api
-
-#
-
-Install app:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: app
+Install:
+  extends: .base_yarn
 
 ##########################################################################################
 #############################                                    #########################
@@ -154,9 +139,9 @@ Install app:
 Build @emjpm/api:
   extends: .build_stage
   dependencies:
-    - Install api
+    - Install
   needs:
-    - Install api
+    - Install
   image: node:15-alpine
   script:
     - yarn workspace @emjpm/api postinstall
@@ -173,9 +158,9 @@ Build @emjpm/app:
   variables:
     INVALID_GIT_FILES_CHANGES: "true"
   dependencies:
-    - Install app
+    - Install
   needs:
-    - Install app
+    - Install
   image: node:15-alpine
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
@@ -235,7 +220,7 @@ Register api image:
   dependencies:
     - Build @emjpm/api
   needs:
-    - Install api
+    - Install
     - Build @emjpm/api
   before_script:
     - cp yarn.lock packages/api/yarn.lock
@@ -252,7 +237,7 @@ Register app image:
   dependencies:
     - Build @emjpm/app
   needs:
-    - Install app
+    - Install
     - Build @emjpm/app
   variables:
     CONTEXT: .
