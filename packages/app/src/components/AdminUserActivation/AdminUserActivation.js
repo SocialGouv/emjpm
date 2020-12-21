@@ -1,11 +1,11 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
 import { isIndividuel, isMandataire } from "@emjpm/core";
-import { Button, Heading4, Text } from "@emjpm/ui";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
+import { Button, Heading4, Text } from "~/ui";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";

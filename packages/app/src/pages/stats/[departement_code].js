@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { IndicatorList } from "~/components/IndicatorList";
 import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 
 const DepartmentStatsPage = (props) => {
   const { departementCode } = props;

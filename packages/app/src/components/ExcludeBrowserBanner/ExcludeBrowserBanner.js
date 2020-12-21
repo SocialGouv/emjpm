@@ -1,8 +1,8 @@
-import { Card, Text } from "@emjpm/ui";
 import { detect as detectBrowser } from "detect-browser";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { Card, Text } from "~/ui";
 import { isUnsupportedBrowser } from "~/util/browser";
 
 const excludedBrowsers = [

@@ -1,4 +1,3 @@
-import { Button, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -11,6 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
 import { magistratEditSchema } from "~/lib/validationSchemas";
+import { Button, Heading4, InlineError, Text } from "~/ui";
 
 const MagistratEditInformationsForm = (props) => {
   const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;

@@ -1,11 +1,11 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
+import { Button, Heading3, Heading5 } from "~/ui";
 
 export const MesureCloseForm = (props) => {
   const { handleSubmit, handleCancel } = props;

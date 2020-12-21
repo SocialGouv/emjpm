@@ -1,11 +1,11 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Heading4, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Card, Flex, Link as RebassLink } from "rebass";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 import { Link } from "~/components/Link";
 import { UserContext } from "~/components/UserContext";
+import { Heading4, Text } from "~/ui";
 
 const COLORS = [
   "#FF6633",

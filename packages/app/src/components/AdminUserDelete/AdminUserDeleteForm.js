@@ -1,11 +1,11 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { adminUserDeleteSchema } from "~/lib/validationSchemas";
+import { Button, Heading3, Heading5 } from "~/ui";
 
 // import { USERS } from "~/components/AdminUsers/queries";
 import { DELETE_USER } from "./mutations";

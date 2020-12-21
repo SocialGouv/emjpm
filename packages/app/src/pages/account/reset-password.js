@@ -1,9 +1,9 @@
-import { FlexWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
+import { FlexWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ResetPasswordPage = (props) => {

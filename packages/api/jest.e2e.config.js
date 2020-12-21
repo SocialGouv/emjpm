@@ -5,8 +5,11 @@ module.exports = {
     "src/routes/**/*.js",
   ],
   coverageDirectory: process.env.JEST_COVERAGE_DIRECTORY,
+  moduleNameMapper: {
+    "~/(.*)": "<rootDir>/src/$1",
+  },
   roots: ["<rootDir>/__test__/"],
-  testTimeout: 30000,
   testEnvironment: "jest-environment-knex",
   testEnvironmentOptions: require("./knexfile.js").test,
+  testTimeout: 30000,
 };

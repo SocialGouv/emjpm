@@ -1,6 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
 import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/core";
-import { Button, Field, Heading4, InlineError, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
@@ -16,6 +15,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/lib/validationSchemas";
 import { isSiretExists } from "~/query-service/SiretQueryService";
+import { Button, Field, Heading4, InlineError, Text } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";

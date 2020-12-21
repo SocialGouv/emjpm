@@ -1,8 +1,8 @@
-import { Card, Select } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LoadingWrapper } from "~/components/Commons";
+import { Card, Select } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 
 import { BoxStyle } from "./style";

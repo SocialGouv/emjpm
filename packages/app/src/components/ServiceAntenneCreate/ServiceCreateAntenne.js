@@ -1,10 +1,10 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useContext } from "react";
 
 import { ServiceAntenneForm } from "~/components/ServiceAntenneForms";
 import { UserContext } from "~/components/UserContext";
+import { Card } from "~/ui";
 import { captureException } from "~/util/sentry";
 
 import { CREATE_ANTENNE } from "./mutations";

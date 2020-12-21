@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
@@ -7,6 +6,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { LB_USERS } from "~/components/ListeBlanche/queries";
 import { adminUserDeleteSchema } from "~/lib/validationSchemas";
+import { Button, Heading3, Heading5 } from "~/ui";
 
 import { DELETE_LB_USER } from "./mutations";
 import { AdminLbUserDeleteRemoveStyle } from "./style";

@@ -1,6 +1,7 @@
-import { Card, Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Flex, Text } from "rebass";
+
+import { Card, Heading3 } from "~/ui";
 
 import { importErrorsWrapperStyle } from "./style";
 

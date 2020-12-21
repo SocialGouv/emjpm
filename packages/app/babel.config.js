@@ -2,10 +2,6 @@ module.exports = {
   ignore: ["dist"],
   plugins: [
     [
-      "babel-plugin-styled-components",
-      { displayName: true, preprocess: false, ssr: true },
-    ],
-    [
       "module-resolver",
       {
         alias: {
@@ -15,8 +11,15 @@ module.exports = {
         root: ["."],
       },
     ],
+    [
+      "babel-plugin-styled-components",
+      { displayName: true, preprocess: false, ssr: true },
+    ],
+    ["@babel/plugin-transform-runtime"],
+    ["@emotion"],
   ],
   presets: [
+    "@babel/preset-env",
     [
       "next/babel",
       {

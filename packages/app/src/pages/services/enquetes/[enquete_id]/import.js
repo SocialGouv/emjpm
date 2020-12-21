@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
 
 import { EnqueteImportPanel } from "~/components/EnqueteImport";
 import { LayoutServices } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ImportEnquetePage = ({ enqueteId }) => {

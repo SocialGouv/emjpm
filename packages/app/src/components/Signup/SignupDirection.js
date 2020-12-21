@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
 import { DIRECTION } from "@emjpm/core";
-import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
@@ -14,6 +13,7 @@ import {
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupDirectionSchema } from "~/lib/validationSchemas";
+import { Button, Heading4, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 import { toOptions } from "~/util/option/OptionUtil";
 

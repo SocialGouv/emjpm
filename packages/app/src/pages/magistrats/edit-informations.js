@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratEditInformations } from "~/components/MagistratEditInformations";
 import { UserContext } from "~/components/UserContext";
 import { PATH } from "~/constants/basePath";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {

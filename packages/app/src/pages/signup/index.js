@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { LayoutPublic } from "~/components/Layout";
 import Signup from "~/components/Signup";
 import { SignupContextProvider } from "~/components/Signup/context";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const SignupPage = () => {

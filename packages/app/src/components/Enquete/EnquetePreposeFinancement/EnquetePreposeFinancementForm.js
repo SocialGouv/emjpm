@@ -1,9 +1,9 @@
-import { Heading3 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
+import { Heading3 } from "~/ui";
 import { formatFormInput, parseFormFloat } from "~/util";
 
 import {

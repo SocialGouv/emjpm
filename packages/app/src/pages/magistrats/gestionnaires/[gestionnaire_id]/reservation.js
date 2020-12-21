@@ -1,8 +1,8 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMesureAdd } from "~/components/MagistratMesureAdd";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Reservation = (props) => {

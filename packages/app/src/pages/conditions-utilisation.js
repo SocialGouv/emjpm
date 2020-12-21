@@ -1,4 +1,3 @@
-import { FlexWrapper } from "@emjpm/ui";
 import { MDXProvider } from "@mdx-js/react";
 import React from "react";
 import { Card } from "rebass";
@@ -6,6 +5,7 @@ import { Card } from "rebass";
 import { ConditionsUtilisation } from "~/components/ConditionsUtilisation";
 import { LayoutPublic } from "~/components/Layout";
 import { mdxComponents } from "~/components/MdxComponents";
+import { FlexWrapper } from "~/ui";
 
 const ConditionsUtilistionPage = () => (
   <MDXProvider components={mdxComponents}>

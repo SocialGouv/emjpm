@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminUser } from "~/components/AdminUser";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const User = (props) => {

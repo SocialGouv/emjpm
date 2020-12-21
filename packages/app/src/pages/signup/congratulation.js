@@ -1,9 +1,9 @@
-import { BoxWrapper, Button, Card, Heading2, Text } from "@emjpm/ui";
 import Router from "next/router";
 import React from "react";
 import { Box, Flex, Link } from "rebass";
 
 import { LayoutPublic } from "~/components/Layout";
+import { BoxWrapper, Button, Card, Heading2, Text } from "~/ui";
 
 const backLogin = () => {
   Router.push("/login");

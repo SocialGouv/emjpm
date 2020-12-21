@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
 import { Header } from "~/components/Header";
 import { Navigation } from "~/components/Navigation";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 
 import isPayedByParis from "./isPayedByParis";
 

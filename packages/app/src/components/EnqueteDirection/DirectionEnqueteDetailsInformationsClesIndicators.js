@@ -1,6 +1,7 @@
-import { FlexWrapper, fourColumnStyle, Indicator } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { FlexWrapper, fourColumnStyle, Indicator } from "~/ui";
 
 export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
   const {

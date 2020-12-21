@@ -1,7 +1,8 @@
-import { GlobalStyle } from "@emjpm/ui";
 import { css, Global } from "@emotion/core";
 import Document, { Head, Html, Main, NextScript } from "next/document";
 import React from "react";
+
+import { GlobalStyle } from "~/ui";
 
 export default class MyDocument extends Document {
   render() {

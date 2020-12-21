@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 
 import { EditPassword } from "~/components/EditPassword";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutMagistrat } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {
