@@ -28,6 +28,8 @@ Build:
 Lint:
   stage: Test
   extends: .autodevops_lint
+  needs:
+    - Build
 
 Test:
   stage: Test
@@ -37,6 +39,8 @@ Test:
     POSTGRES_PASSWORD: test
   services:
     - postgres:11-alpine
+  needs:
+    - Build
 
 
 # K8S Test:
