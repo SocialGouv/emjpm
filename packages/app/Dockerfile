@@ -16,8 +16,6 @@ RUN set -ex \
   # `--production` is not working on workspaces T-T
   # node_modules ~ 211Mo
   && node scripts/remove_devdeps.js /app/package.json \
-  # node_modules ~ 178Mo
-  && node scripts/remove_devdeps.js /app/packages/ui/package.json \
   # node_modules
   && node scripts/remove_devdeps.js /app/packages/core/package.json \
   # node_modules ~ 178Mo
