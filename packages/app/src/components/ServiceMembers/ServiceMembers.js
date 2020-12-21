@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { stdFormatter } from "@emjpm/core";
-import { CheckBox, Heading2, Text } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
+
+import { CheckBox, Heading2, Text } from "~/ui";
 
 import {
   DELETE_SERVICE_MEMBER,

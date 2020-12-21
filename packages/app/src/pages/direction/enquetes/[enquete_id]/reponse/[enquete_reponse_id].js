@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { resetIdCounter } from "react-tabs";
 
 import { DirectionEnqueteDetailsReponsePreview } from "~/components/EnqueteDirection/DirectionEnqueteDetailsReponsePreview";
 import { LayoutDirection } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const DirectionEnqueteReponsePreviewPage = ({

@@ -1,4 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
+import React, { useContext, useEffect, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { Box, Flex } from "rebass";
+
+import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 import {
   Card,
   Heading2,
@@ -6,12 +11,7 @@ import {
   MandataireListItem,
   Select,
   Spinner,
-} from "@emjpm/ui";
-import React, { useContext, useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
-import { Box, Flex } from "rebass";
-
-import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+} from "~/ui";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";

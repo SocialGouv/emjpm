@@ -1,6 +1,7 @@
-import { Select } from "@emjpm/ui";
 import React from "react";
 import { useQuery } from "react-apollo";
+
+import { Select } from "~/ui";
 
 import { CODE_POSTAL } from "./queries";
 

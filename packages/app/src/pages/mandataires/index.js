@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireBoard } from "~/components/MandataireBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const MandataireBoardView = () => {

@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Card, Link as StyledLink } from "rebass";
 
@@ -7,6 +6,7 @@ import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { MesureImportPanel } from "~/components/MesureImport";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Service = (props) => {

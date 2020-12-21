@@ -1,8 +1,8 @@
-import { Heading3 } from "@emjpm/ui";
 import React from "react";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
+import { Heading3 } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";

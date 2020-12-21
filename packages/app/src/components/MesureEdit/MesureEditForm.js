@@ -1,5 +1,4 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -12,6 +11,7 @@ import {
 } from "~/components/AppForm";
 import TribunalAutoComplete from "~/components/TribunalAutoComplete";
 import { mesureEditSchema } from "~/lib/validationSchemas";
+import { Button, Field, Heading4, InlineError } from "~/ui";
 
 const initialValues = (mesure) => {
   return {

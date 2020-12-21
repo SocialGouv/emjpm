@@ -1,8 +1,8 @@
-import { BoxWrapper, Card } from "@emjpm/ui";
 import React from "react";
 
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireInformations } from "~/components/MandataireInformations";
+import { BoxWrapper, Card } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Informations = () => (

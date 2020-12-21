@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Card } from "rebass";
 
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntennes } from "~/components/ServiceAntennes";
 import { ServiceInformations } from "~/components/ServiceInformations";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Informations = () => {

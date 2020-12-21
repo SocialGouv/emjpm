@@ -1,12 +1,3 @@
-import {
-  Button,
-  Card,
-  Field,
-  Heading4,
-  InlineError,
-  Input,
-  Text,
-} from "@emjpm/ui";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import Router from "next/router";
@@ -18,6 +9,7 @@ import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { PATH } from "~/constants/basePath";
 import { passwordSchema } from "~/lib/validationSchemas";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
 const {
   publicRuntimeConfig: { API_URL },

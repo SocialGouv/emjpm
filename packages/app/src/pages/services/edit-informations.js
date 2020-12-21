@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {

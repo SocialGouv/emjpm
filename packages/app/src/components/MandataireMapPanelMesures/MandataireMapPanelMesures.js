@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
+import { MesureListItem } from "~/ui";
 import { formatMesureListItems } from "~/util/mesures";
 
 import { MESURES } from "./queries";

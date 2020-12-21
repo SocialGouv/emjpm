@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Heading2, Heading4 } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
+
+import { Heading2, Heading4 } from "~/ui";
 
 import { SERVICE } from "./queries";
 

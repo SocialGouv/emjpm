@@ -1,10 +1,11 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Field, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+
+import { Button, Field, Input } from "~/ui";
 
 import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 

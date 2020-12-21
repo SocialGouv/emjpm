@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -8,6 +7,7 @@ import { MagistratFilters } from "~/components/MagistratFilters";
 import { FiltersContextProvider } from "~/components/MagistratFilters/context";
 import { MagistratMesures } from "~/components/MagistratMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Mesures = () => {

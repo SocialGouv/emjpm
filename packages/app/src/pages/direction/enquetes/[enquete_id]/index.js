@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { resetIdCounter } from "react-tabs";
 
 import { DirectionEnqueteDetailsReponsesList } from "~/components/EnqueteDirection/DirectionEnqueteDetailsReponsesList";
 import { LayoutDirection } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const DirectionEnqueteDetailsPage = ({ enqueteId }) => {

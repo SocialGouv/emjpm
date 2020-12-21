@@ -1,9 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Button, Card, Heading5 } from "@emjpm/ui";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { PaginatedList } from "~/components/PaginatedList";
+import { Button, Card, Heading5 } from "~/ui";
 import { captureException } from "~/util/sentry";
 
 import { ADD_EDITOR_FROM_REQUEST } from "./mutations";

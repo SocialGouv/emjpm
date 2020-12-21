@@ -153,24 +153,6 @@ Install core:
   stage: Build internal dependencies
   dependencies: []
 
-
-Build @emjpm/ui:
-  extends: .build_internal_depencies_stage
-  dependencies:
-    - Install ui
-  needs:
-    - Install ui
-  variables:
-    CONTEXT: ui
-  image: node:12-alpine
-  script:
-    - yarn workspace @emjpm/${CONTEXT} build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/${CONTEXT}/dist
-#
-
 Build @emjpm/core:
   extends: .build_internal_depencies_stage
   dependencies:
@@ -223,11 +205,9 @@ Build @emjpm/app:
     INVALID_GIT_FILES_CHANGES: "true"
   dependencies:
     - Install app
-    - Build @emjpm/ui
     - Build @emjpm/core
   needs:
     - Install app
-    - Build @emjpm/ui
     - Build @emjpm/core
   image: node:12-alpine
   cache:
@@ -303,14 +283,12 @@ Register app image:
     - .base_register_stage
     - .register_stage
   dependencies:
-    - Build @emjpm/ui
     - Build @emjpm/app
     - Build @emjpm/core
   needs:
     - Install app
     - Install ui
     - Install core
-    - Build @emjpm/ui
     - Build @emjpm/app
     - Build @emjpm/core
   variables:

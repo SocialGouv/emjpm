@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { MesureEtatCreateOrEdit } from "~/components/MesureEtatCreateOrEdit";
 
-const { Heading3, Button, Text } = require("@emjpm/ui");
+const { Heading3, Button, Text } = require("~/ui");
 const { Flex, Box } = require("rebass");
 const { MesureEtatView } = require("./MesureEtatView");
 

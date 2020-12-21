@@ -1,6 +1,7 @@
-import { Text } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
+
+import { Text } from "~/ui";
 
 import { Link } from "./Link";
 

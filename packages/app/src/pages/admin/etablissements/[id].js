@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
 import { Link } from "~/components/Commons";
 import { EtablissementView } from "~/components/Etablissement";
 import { LayoutAdmin } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 export const EditEtablissementPage = (props) => {

@@ -1,7 +1,7 @@
-import { AsyncSelect, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
+import { AsyncSelect, Spinner } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/util/geocode";
 

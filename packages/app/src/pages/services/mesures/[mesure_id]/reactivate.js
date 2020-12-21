@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -6,6 +5,7 @@ import { LayoutServices } from "~/components/Layout";
 import { MesureProvider } from "~/components/MesureContext";
 import { MesureReactivate } from "~/components/MesureReactivate";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ReactivateMesurePage = (props) => {

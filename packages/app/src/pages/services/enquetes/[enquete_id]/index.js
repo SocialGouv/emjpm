@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
 import { useSubscription } from "react-apollo";
@@ -10,6 +9,7 @@ import { useCurrentStepFromUrl } from "~/components/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/components/Enquete/queries";
 import { LayoutServices } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const EnquetePage = ({ enqueteId }) => {

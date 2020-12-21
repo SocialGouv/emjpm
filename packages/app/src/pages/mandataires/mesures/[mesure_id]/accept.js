@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
@@ -6,6 +5,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
 import { MesureAccept } from "~/components/MesureAccept";
 import { MesureProvider } from "~/components/MesureContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const AcceptMesurePage = (props) => {

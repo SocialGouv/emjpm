@@ -1,4 +1,3 @@
-import { Button, Field, Heading4, InlineError } from "@emjpm/ui";
 import { useFormik } from "formik";
 import router from "next/router";
 import React from "react";
@@ -11,6 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/lib/validationSchemas";
+import { Button, Field, Heading4, InlineError } from "~/ui";
 
 const ServiceAntenneForm = (props) => {
   const { antenne = {}, handleSubmit } = props;

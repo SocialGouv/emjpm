@@ -1,6 +1,7 @@
-import { Input } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { Input } from "~/ui";
 
 const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
   return (

@@ -1,6 +1,7 @@
-import { Card, Text } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
+
+import { Card, Text } from "~/ui";
 
 import { cardStyle, descriptionStyle, labelStyle } from "../style";
 

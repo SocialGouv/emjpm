@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import { useRouter } from "next/router";
 import React from "react";
 
 import { LayoutPublic } from "~/components/Layout";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { SignupServiceInvitation } from "~/components/Signup/SignupServiceInvitation";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const SignupInvitationPage = () => {

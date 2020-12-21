@@ -1,9 +1,3 @@
-import {
-  BoxWrapper,
-  FlexWrapper,
-  fourColumnStyle,
-  twoColumnStyle,
-} from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
@@ -23,6 +17,7 @@ import { MandatairesSubNavigation } from "~/components/DirectionMandatairesSubNa
 import { FiltersContextSerializableProvider } from "~/components/FiltersContextSerializable";
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Mandataires = () => {

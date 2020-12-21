@@ -1,9 +1,9 @@
-import { Button, Field, Heading4, InlineError, Input, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { serviceMemberInvitationSchema } from "~/lib/validationSchemas";
+import { Button, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
 const ServiceMemberInvitationForm = (props) => {
   const { handleSubmit } = props;

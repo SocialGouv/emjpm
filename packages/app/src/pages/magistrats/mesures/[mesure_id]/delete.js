@@ -1,10 +1,10 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMesureDelete } from "~/components/MagistratMesureDelete";
 import { MesureProvider } from "~/components/MesureContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const MagistratMesureDeletePage = (props) => {

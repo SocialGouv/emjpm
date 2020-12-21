@@ -1,7 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Select, Text } from "@emjpm/ui";
 import React, { useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
+
+import { Select, Text } from "~/ui";
 
 import { SERVICE_ANTENNES } from "./queries";
 
