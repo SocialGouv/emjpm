@@ -16,7 +16,7 @@
     "prettier:fix": "prettier --write '**/*.js'",
     "build": "next build",
     "start:build": "next start -p 80",
-    "postinstall:run": "link-module-alias"
+    "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src",
