@@ -13,4 +13,4 @@ class GeolocalisationCodePostal extends Model {
   }
 }
 
-module.exports = { GeolocalisationCodePostal };
+module.exports = GeolocalisationCodePostal;

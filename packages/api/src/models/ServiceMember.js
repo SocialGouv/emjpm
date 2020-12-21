@@ -25,4 +25,4 @@ class ServiceMember extends Model {
   }
 }
 
-module.exports = { ServiceMember };
+module.exports = ServiceMember;

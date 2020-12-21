@@ -27,4 +27,4 @@ function buildKeys(byKey) {
   };
 }
 
-export { buildKeys };
+module.exports = { buildKeys };

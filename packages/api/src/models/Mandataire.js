@@ -1,6 +1,6 @@
 const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
-const { Tis } = require("./Tis");
+const Models = require(".");
 
 Model.knex(knexConnection);
 
@@ -38,15 +38,13 @@ class Mandataire extends Model {
     };
   }
   static get relationMappings() {
-    const { User } = require("./User");
-    const { Departement } = require("./Departement");
     return {
       department: {
         join: {
           from: "mandataires.department_id",
           to: "departements.id",
         },
-        modelClass: Departement,
+        modelClass: Models.Departement,
         relation: Model.BelongsToOneRelation,
       },
       tis: {
@@ -58,7 +56,7 @@ class Mandataire extends Model {
           },
           to: "tis.id",
         },
-        modelClass: Tis,
+        modelClass: Models.Departement,
         relation: Model.ManyToManyRelation,
       },
       users: {
@@ -66,11 +64,11 @@ class Mandataire extends Model {
           from: "mandataires.user_id",
           to: "users.id",
         },
-        modelClass: User,
+        modelClass: Models.Departement,
         relation: Model.BelongsToOneRelation,
       },
     };
   }
 }
 
-module.exports = { Mandataire };
+module.exports = Mandataire;

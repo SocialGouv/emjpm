@@ -1,4 +1,4 @@
-import { isTypeEtablissementRequired } from "@emjpm/core";
+import { isTypeEtablissementRequired } from "@emjpm/biz";
 
 import yup from "./yup";
 

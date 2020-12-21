@@ -1,4 +1,4 @@
-import { isIndividuel, isPrepose, isService, stdFormatter } from "@emjpm/core";
+import { isIndividuel, isPrepose, isService, stdFormatter } from "@emjpm/biz";
 import React, { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 

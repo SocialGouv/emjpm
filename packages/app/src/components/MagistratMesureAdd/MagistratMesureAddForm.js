@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";

@@ -1,4 +1,4 @@
-import { getDepartementCode } from "@emjpm/core";
+import { getDepartementCode } from "@emjpm/biz";
 
 const geocodeInitialValue = (resource = {}) => {
   if (!resource.latitude || !resource.longitude) {

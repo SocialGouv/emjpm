@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/core";
+import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/biz";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";

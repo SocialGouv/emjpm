@@ -1,4 +1,4 @@
-import { isAdmin, isDirectionNationale } from "@emjpm/core";
+import { isAdmin, isDirectionNationale } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";

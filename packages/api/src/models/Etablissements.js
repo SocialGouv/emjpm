@@ -13,4 +13,4 @@ class Etablissements extends Model {
   }
 }
 
-module.exports = { Etablissements };
+module.exports = Etablissements;

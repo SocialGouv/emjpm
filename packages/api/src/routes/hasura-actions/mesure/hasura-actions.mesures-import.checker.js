@@ -1,5 +1,5 @@
 const HttpError = require("~/utils/error/HttpError");
-const { Service } = require("~/models/Service");
+const { Service } = require("~/models");
 
 async function checkImportMesuresParameters(req) {
   const { role, userId } = req.user;

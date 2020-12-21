@@ -1,4 +1,4 @@
-export function getDepartementCode(zipcode) {
+function getDepartementCode(zipcode) {
   if (!zipcode || zipcode.length !== 5) {
     throw new Error("zip code is invalid");
   }
@@ -13,7 +13,7 @@ export function getDepartementCode(zipcode) {
   }
 }
 
-export function findDepartementByCodeOrId(departements, { id, code }) {
+function findDepartementByCodeOrId(departements, { id, code }) {
   if (code) {
     return departements.find((elm) => elm.code === code) || {};
   }
@@ -22,3 +22,8 @@ export function findDepartementByCodeOrId(departements, { id, code }) {
   }
   return {};
 }
+
+module.exports = {
+  findDepartementByCodeOrId,
+  getDepartementCode,
+};

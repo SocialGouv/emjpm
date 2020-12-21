@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
-import { isIndividuel, isMandataire } from "@emjpm/core";
+import { isIndividuel, isMandataire } from "@emjpm/biz";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 

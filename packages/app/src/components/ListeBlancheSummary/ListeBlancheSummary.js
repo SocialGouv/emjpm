@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { findDepartementByCodeOrId } from "@emjpm/core";
+import { findDepartementByCodeOrId } from "@emjpm/biz";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
