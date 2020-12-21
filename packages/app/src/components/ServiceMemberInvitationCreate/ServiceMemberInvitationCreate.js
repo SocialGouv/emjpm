@@ -1,7 +1,8 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import { Heading2 } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
+
+import { Heading2 } from "~/ui";
 
 import {
   CREATE_SERVICE_MEMBER_INVITATION,

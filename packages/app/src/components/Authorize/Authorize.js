@@ -1,8 +1,9 @@
-import { Button, Card, Heading4, Text } from "@emjpm/ui";
 import getConfig from "next/config";
 import React, { useEffect } from "react";
 import { useQuery } from "react-apollo";
 import { Box } from "rebass";
+
+import { Button, Card, Heading4, Text } from "~/ui";
 
 import { EDITOR } from "./queries";
 

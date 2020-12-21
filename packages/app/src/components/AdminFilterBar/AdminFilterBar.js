@@ -1,8 +1,8 @@
-import { Button, Card, Input, Select, Text } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { LoadingWrapper } from "~/components/Commons";
+import { Button, Card, Input, Select, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 import { findOption } from "~/util/option/OptionUtil";
 

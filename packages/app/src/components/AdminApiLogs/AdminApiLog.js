@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
 import { stdFormatter } from "@emjpm/core";
-import { Card, Text } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
+
+import { Card, Text } from "~/ui";
 
 import { API_LOG_BY_ID } from "./queries";
 

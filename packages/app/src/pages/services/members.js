@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { LayoutServices } from "~/components/Layout";
@@ -6,6 +5,7 @@ import { ServiceMemberInvitationCreate } from "~/components/ServiceMemberInvitat
 import { ServiceMemberInvitations } from "~/components/ServiceMemberInvitations";
 import { ServiceMembers } from "~/components/ServiceMembers";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ServiceMembersPage = () => {

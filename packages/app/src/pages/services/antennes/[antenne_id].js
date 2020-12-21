@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Card } from "rebass";
 
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneInformations } from "~/components/ServiceAntenneInformations";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Antennes = (props) => {

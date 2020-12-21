@@ -1,4 +1,3 @@
-import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -10,6 +9,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { adminServiceSchema } from "~/lib/validationSchemas/adminServiceSchema";
+import { Button, Heading4, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 
 export const ListeBlancheServiceForm = (props) => {

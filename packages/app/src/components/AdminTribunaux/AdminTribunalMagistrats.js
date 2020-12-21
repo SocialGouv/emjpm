@@ -1,6 +1,7 @@
-import { Card, Heading4, Text } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
+
+import { Card, Heading4, Text } from "~/ui";
 
 export const AdminTribunalMagistrats = ({ magistrats }) => {
   return (

@@ -1,4 +1,3 @@
-import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";
@@ -12,6 +11,7 @@ import {
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/lib/validationSchemas";
+import { Button, Heading4, Text } from "~/ui";
 import { toOptions } from "~/util";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 

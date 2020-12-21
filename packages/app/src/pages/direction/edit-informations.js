@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { DirectionEditInformations } from "~/components/DirectionEditInformations";
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {

@@ -1,18 +1,10 @@
-import {
-  Button,
-  Card,
-  Field,
-  Heading4,
-  InlineError,
-  Input,
-  Text,
-} from "@emjpm/ui";
 import { useFormik } from "formik";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { adminTribunalSchema } from "~/lib/validationSchemas";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
 import { cardStyle } from "./style";
 

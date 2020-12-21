@@ -1,5 +1,4 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Button, Heading4, Text } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import PropTypes from "prop-types";
@@ -14,6 +13,7 @@ import {
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/lib/validationSchemas";
+import { Button, Heading4, Text } from "~/ui";
 
 export const MagistratMesureAddForm = (props) => {
   const { cancelActionRoute, handleSubmit, cabinet } = props;

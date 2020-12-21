@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Card } from "@emjpm/ui";
 import Router from "next/router";
 import React, { useState } from "react";
+
+import { Card } from "~/ui";
 
 import { EDIT_SERVICE } from "./mutations";
 import { GET_SERVICES } from "./queries";

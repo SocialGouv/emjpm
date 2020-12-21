@@ -1,5 +1,6 @@
-import { InlineError } from "@emjpm/ui";
 import React from "react";
+
+import { InlineError } from "~/ui";
 
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
 

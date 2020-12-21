@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
-import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -9,6 +8,7 @@ import { Box, Flex } from "rebass";
 import { FiltersContext } from "~/components/MesureListFilters/context";
 import { UserContext } from "~/components/UserContext";
 import { getUserBasePath } from "~/constants";
+import { MesureListItem } from "~/ui";
 import { formatMesureListItems } from "~/util/mesures";
 
 import { MESURES_QUERY } from "./queries";

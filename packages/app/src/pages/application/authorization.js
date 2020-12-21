@@ -1,4 +1,3 @@
-import { BoxWrapper, FlexWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Image } from "rebass";
 
@@ -6,6 +5,7 @@ import { AuthorizationLogin } from "~/components/AuthorizationLogin";
 import { Authorize } from "~/components/Authorize";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
+import { BoxWrapper, FlexWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const AuthorizationPage = (props) => {

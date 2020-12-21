@@ -1,7 +1,8 @@
 import { stdFormatter } from "@emjpm/core";
-import { Card, Text } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
+
+import { Card, Text } from "~/ui";
 
 const cardStyle = {
   mb: "1",

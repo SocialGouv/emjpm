@@ -1,9 +1,9 @@
-import { BoxWrapper, Logo } from "@emjpm/ui";
 import getConfig from "next/config";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/components/Commons";
+import { BoxWrapper, Logo } from "~/ui";
 
 import { FooterItemStyle, FooterWrapperStyle } from "./style";
 

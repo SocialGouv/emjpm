@@ -1,4 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
+import Router from "next/router";
+import React, { useContext, useState } from "react";
+import ReactPaginate from "react-paginate";
+import { Box, Flex } from "rebass";
+
+import { UserContext } from "~/components/UserContext";
+import { useDebounce } from "~/lib/hooks";
 import {
   Card,
   Heading4,
@@ -8,14 +15,7 @@ import {
   Select,
   Spinner,
   Text,
-} from "@emjpm/ui";
-import Router from "next/router";
-import React, { useContext, useState } from "react";
-import ReactPaginate from "react-paginate";
-import { Box, Flex } from "rebass";
-
-import { UserContext } from "~/components/UserContext";
-import { useDebounce } from "~/lib/hooks";
+} from "~/ui";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";

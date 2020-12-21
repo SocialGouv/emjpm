@@ -1,10 +1,10 @@
 import { MESURE_PROTECTION } from "@emjpm/core";
-import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { Link } from "~/components/Commons";
 import { MesureContext } from "~/components/MesureContext";
+import { Heading3 } from "~/ui";
 
 import {
   MagistratMesureContentStyle,

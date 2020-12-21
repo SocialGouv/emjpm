@@ -1,10 +1,10 @@
 import { useApolloClient, useMutation } from "@apollo/react-hooks";
-import { Button, Field, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React from "react";
 
 import yup from "~/lib/validationSchemas/yup";
+import { Button, Field, InlineError, Input } from "~/ui";
 
 import { CREATE_ENQUETE } from "./mutations";
 import { ENQUETES } from "./queries";

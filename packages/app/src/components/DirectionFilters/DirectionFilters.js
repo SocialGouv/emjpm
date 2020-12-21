@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Input, Select } from "@emjpm/ui";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { Card, Input, Select } from "~/ui";
 import {
   departementToOptions,
   findOption,

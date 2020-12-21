@@ -1,5 +1,4 @@
 import { directionFormatter } from "@emjpm/core";
-import { Card, Heading3, Heading5 } from "@emjpm/ui";
 import { Building } from "@styled-icons/fa-regular/Building";
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { PersonOutline } from "@styled-icons/material/PersonOutline";
@@ -8,6 +7,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
+import { Card, Heading3, Heading5 } from "~/ui";
 
 import { boxStyle, flexStyle, iconTextStyle } from "./style";
 
