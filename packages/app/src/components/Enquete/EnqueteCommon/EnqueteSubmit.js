@@ -1,9 +1,9 @@
 import { stdFormatter } from "@emjpm/core";
-import { Button } from "@emjpm/ui";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
+import { Button } from "~/ui";
 
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 import {

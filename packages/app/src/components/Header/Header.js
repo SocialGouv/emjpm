@@ -1,10 +1,10 @@
 import { useApolloClient } from "@apollo/react-hooks";
-import { DropDownMenu, Header as HeaderComponent } from "@emjpm/ui";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
 
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
+import { DropDownMenu, Header as HeaderComponent } from "~/ui";
 import { logout } from "~/util/auth";
 
 export const defaultLinks = [

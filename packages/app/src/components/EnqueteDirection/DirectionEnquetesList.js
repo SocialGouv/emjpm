@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card } from "@emjpm/ui";
 import { format } from "date-fns";
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
+
+import { Card } from "~/ui";
 
 import { ENQUETES } from "./queries";
 

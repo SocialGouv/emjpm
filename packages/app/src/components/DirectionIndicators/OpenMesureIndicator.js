@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Indicator } from "@emjpm/ui";
 import React, { useContext } from "react";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { Indicator } from "~/ui";
 
 import { GET_OPEN_MESURE_NUMBER } from "./queries";
 

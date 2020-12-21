@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Button, Card, Text } from "@emjpm/ui";
 import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
+import { Button, Card, Text } from "~/ui";
 
 import { SERVICES } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";

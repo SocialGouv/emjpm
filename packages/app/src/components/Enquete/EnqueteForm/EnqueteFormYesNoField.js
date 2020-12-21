@@ -1,8 +1,8 @@
-import { Field } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { YesNoComboBox } from "~/components/Commons";
+import { Field } from "~/ui";
 
 import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
 import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";

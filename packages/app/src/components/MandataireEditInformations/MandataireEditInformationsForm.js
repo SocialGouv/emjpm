@@ -1,11 +1,3 @@
-import {
-  Button,
-  Field,
-  Heading4,
-  InlineError,
-  Select,
-  Textarea,
-} from "@emjpm/ui";
 import { useFormik } from "formik";
 import { uniq } from "lodash";
 import React, { useMemo } from "react";
@@ -21,6 +13,7 @@ import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/lib/validationSchemas";
+import { Button, Field, Heading4, InlineError, Select, Textarea } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
 const buildTiOptions = (lb_departements, lb_user_etablissements) => {

@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading4, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
 import { Link } from "~/components/Link";
+import { Card, Heading4, Spinner } from "~/ui";
 
 import { INDICATORS } from "./queries";
 

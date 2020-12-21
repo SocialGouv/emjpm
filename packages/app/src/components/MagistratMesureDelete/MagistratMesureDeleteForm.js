@@ -1,5 +1,4 @@
 import { useMutation } from "@apollo/react-hooks";
-import { Button, Heading3, Heading5, InlineError, Input } from "@emjpm/ui";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { useContext } from "react";
@@ -9,6 +8,7 @@ import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "~/components/MagistratMesures/queries";
 import { UserContext } from "~/components/UserContext";
 import { magistratMesureDeleteSchema } from "~/lib/validationSchemas";
+import { Button, Heading3, Heading5, InlineError, Input } from "~/ui";
 
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";

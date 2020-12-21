@@ -1,4 +1,3 @@
-import { BoxWrapper, FlexWrapper } from "@emjpm/ui";
 import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import { Box, Image } from "rebass";
@@ -6,6 +5,7 @@ import { Box, Image } from "rebass";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { Login, LoginCreateAccount } from "~/components/Login";
+import { BoxWrapper, FlexWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ExcludeBrowserBanner = dynamic(

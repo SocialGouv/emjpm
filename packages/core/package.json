@@ -12,7 +12,6 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "build-storybook": "build-storybook",
     "lint:pre-commit": "yarn lint:fix",
     "lint": "eslint .",
     "lint:fix": "yarn lint --cache --fix",

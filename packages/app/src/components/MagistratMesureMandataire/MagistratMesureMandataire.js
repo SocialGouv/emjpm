@@ -1,11 +1,11 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading3, Heading4, Spinner } from "@emjpm/ui";
 import dynamic from "next/dynamic";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
 import { MesureContext } from "~/components/MesureContext";
+import { Card, Heading3, Heading4, Spinner } from "~/ui";
 
 import { GESTIONNAIRES } from "./queries";
 import {

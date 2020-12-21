@@ -1,11 +1,11 @@
 import { MESURE_PROTECTION_STATUS, mesureFormatter } from "@emjpm/core";
-import { Heading3 } from "@emjpm/ui";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { getUserBasePath } from "~/constants";
+import { Heading3 } from "~/ui";
 
 import { content, statusBox, subtitle, title } from "./style";
 

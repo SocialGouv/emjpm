@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4, Spinner } from "@emjpm/ui";
 import React, { useContext } from "react";
 import { Box } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
+import { Card, Heading2, Heading4, Spinner } from "~/ui";
 
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";

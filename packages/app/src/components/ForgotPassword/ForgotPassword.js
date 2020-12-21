@@ -1,12 +1,3 @@
-import {
-  Button,
-  Card,
-  Field,
-  Heading4,
-  InlineError,
-  Input,
-  Text,
-} from "@emjpm/ui";
 import { useFormik } from "formik";
 import getConfig from "next/config";
 import React, { useState } from "react";
@@ -15,6 +6,7 @@ import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
 import { forgotPasswordSchema } from "~/lib/validationSchemas";
+import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 import { captureException } from "~/util/sentry";
 
 const {

@@ -1,6 +1,7 @@
-import { Heading1 } from "@emjpm/ui";
 import Head from "next/head";
 import React from "react";
+
+import { Heading1 } from "~/ui";
 
 function HeadingTitle(props) {
   return (

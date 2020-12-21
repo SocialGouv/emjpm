@@ -1,4 +1,3 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
@@ -7,6 +6,7 @@ import { LayoutDirection } from "~/components/Layout";
 import { ListeBlanche } from "~/components/ListeBlanche";
 import { ListeBlancheFilter } from "~/components/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/components/ListeBlancheSummary";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const ListBlanchePage = () => {

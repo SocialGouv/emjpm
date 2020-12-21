@@ -1,6 +1,7 @@
-import { Button, Heading3, Heading5 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
+
+import { Button, Heading3, Heading5 } from "~/ui";
 
 export const MesureDeleteForm = (props) => {
   const { handleSubmit, handleCancel } = props;

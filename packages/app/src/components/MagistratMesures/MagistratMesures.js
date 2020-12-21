@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MesureListItem } from "@emjpm/ui";
 import Router from "next/router";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -7,6 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "~/components/MagistratFilters/context";
 import { UserContext } from "~/components/UserContext";
+import { MesureListItem } from "~/ui";
 import { formatMesureListItems } from "~/util/mesures";
 
 import { MAGISTRAT_MESURES_QUERY } from "./queries";

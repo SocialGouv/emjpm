@@ -1,4 +1,3 @@
-import { Card, Heading3, Text } from "@emjpm/ui";
 import { FileExcel } from "@styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
 import React, { Fragment } from "react";
@@ -10,6 +9,7 @@ import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "~/constants/import";
+import { Card, Heading3, Text } from "~/ui";
 
 const ServiceMesureImport = ({ serviceId }) => {
   return (

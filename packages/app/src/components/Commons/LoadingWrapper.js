@@ -1,8 +1,9 @@
-import { Heading4, Spinner } from "@emjpm/ui";
 import Error from "next/error";
 import { useRouter } from "next/router";
 import React, { useMemo } from "react";
 import { Box, Card } from "rebass";
+
+import { Heading4, Spinner } from "~/ui";
 
 export const LoadingWrapper = ({
   children,

@@ -1,6 +1,7 @@
-import { Field, Input } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
+
+import { Field, Input } from "~/ui";
 
 import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
 import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";

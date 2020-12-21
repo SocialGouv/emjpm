@@ -1,4 +1,3 @@
-import { Button, Card } from "@emjpm/ui";
 import React, { Fragment, useContext, useState } from "react";
 import { useQuery } from "react-apollo";
 import { Box, Flex, Text } from "rebass";
@@ -6,6 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
+import { Button, Card } from "~/ui";
 
 import { ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";

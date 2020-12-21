@@ -1,8 +1,9 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { Heading2, Text } from "@emjpm/ui";
 import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
+
+import { Heading2, Text } from "~/ui";
 
 import { DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
 import { SERVICE_MEMBER_INVITATIONS } from "./queries";

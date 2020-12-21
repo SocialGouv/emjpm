@@ -1,9 +1,9 @@
-import { BoxWrapper } from "@emjpm/ui";
 import React from "react";
 import { Flex } from "rebass";
 
 import { AdminUserDelete } from "~/components/AdminUserDelete";
 import { LayoutAdmin } from "~/components/Layout";
+import { BoxWrapper } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const AdminUserDeletePage = (props) => {

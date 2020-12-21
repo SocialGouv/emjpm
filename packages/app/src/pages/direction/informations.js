@@ -1,9 +1,9 @@
-import { BoxWrapper, Heading2 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { DirectionInformations } from "~/components/DirectionInformations";
 import { LayoutDirection } from "~/components/Layout";
+import { BoxWrapper, Heading2 } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const Informations = () => {

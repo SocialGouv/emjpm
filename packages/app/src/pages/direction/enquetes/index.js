@@ -1,10 +1,10 @@
-import { BoxWrapper, Heading2 } from "@emjpm/ui";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
 import { DirectionEnquetesList } from "~/components/EnqueteDirection";
 import { LayoutDirection } from "~/components/Layout";
+import { BoxWrapper, Heading2 } from "~/ui";
 import { withAuthSync } from "~/util/auth";
 
 const DirectionEnquetesPage = () => {

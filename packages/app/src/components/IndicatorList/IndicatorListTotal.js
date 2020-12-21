@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/react-hooks";
-import { Card, Heading2, Heading4, Indicator, Spinner } from "@emjpm/ui";
 import React from "react";
 import { Box } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
+import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
 
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
