@@ -1,4 +1,4 @@
-import { MESURE_PROTECTION } from "@emjpm/core";
+import { MESURE_PROTECTION } from "@emjpm/biz";
 import React, { useContext } from "react";
 import { Box, Card, Flex, Link as RebassLink } from "rebass";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";

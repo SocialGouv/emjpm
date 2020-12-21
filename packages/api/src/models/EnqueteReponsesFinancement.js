@@ -29,4 +29,4 @@ class EnqueteReponsesFinancement extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesFinancement };
+module.exports = EnqueteReponsesFinancement;

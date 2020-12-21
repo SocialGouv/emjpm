@@ -1,10 +1,10 @@
-import {
+const {
   isDirectionTypeDepartemental,
   isDirectionTypeNational,
   isDirectionTypeRegional,
-} from "../services";
+} = require("../services");
 
-export const directionFormatter = {
+const directionFormatter = {
   formatAdministrationInfo(direction) {
     if (isDirectionTypeNational(direction)) {
       return "DGCS";
@@ -22,3 +22,5 @@ export const directionFormatter = {
     return "-";
   },
 };
+
+module.exports = { directionFormatter };

@@ -30,4 +30,4 @@ class EnqueteReponsesPreposePersonnelFormation extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesPreposePersonnelFormation };
+module.exports = EnqueteReponsesPreposePersonnelFormation;

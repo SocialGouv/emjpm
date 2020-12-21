@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { findDepartementByCodeOrId } from "@emjpm/core";
+import { findDepartementByCodeOrId } from "@emjpm/biz";
 import React from "react";
 import { Card } from "rebass";
 

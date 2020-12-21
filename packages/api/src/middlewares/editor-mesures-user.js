@@ -1,4 +1,4 @@
-const { User } = require("~/models/User");
+const { User } = require("~/models");
 
 const editorMesureUserMiddleWare = async (req, res, next) => {
   const {

@@ -1,5 +1,5 @@
-const { Mesure } = require("~/models/Mesure");
-const { MesureEtat } = require("~/models/MesureEtat");
+const { Mesure } = require("~/models");
+const { MesureEtat } = require("~/models");
 const getGeoDatas = require("~/services/getGeoDatas");
 const getDepartement = require("~/services/getDepartement");
 

@@ -1,10 +1,7 @@
 const { Model } = require("objection");
 
 const knexConnection = require("~/db/knex");
-const { MesureEtat } = require("./MesureEtat");
-const { MesureRessources } = require("./MesureRessources");
-const { Service } = require("./Service");
-const { Tis } = require("./Tis");
+const Models = require(".");
 
 Model.knex(knexConnection);
 
@@ -24,7 +21,7 @@ class Mesure extends Model {
           from: "mesures.id",
           to: "mesure_etat.mesure_id",
         },
-        modelClass: MesureEtat,
+        modelClass: Models.MesureEtat,
         relation: Model.HasManyRelation,
       },
       ressources: {
@@ -32,7 +29,7 @@ class Mesure extends Model {
           from: "mesures.id",
           to: "mesure_ressources.mesure_id",
         },
-        modelClass: MesureRessources,
+        modelClass: Models.MesureRessources,
         relation: Model.HasManyRelation,
       },
       service: {
@@ -40,7 +37,7 @@ class Mesure extends Model {
           from: "mesures.service_id",
           to: "services.id",
         },
-        modelClass: Service,
+        modelClass: Models.Service,
         relation: Model.HasOneRelation,
       },
       tis: {
@@ -48,7 +45,7 @@ class Mesure extends Model {
           from: "mesures.ti_id",
           to: "tis.id",
         },
-        modelClass: Tis,
+        modelClass: Models.Tis,
         relation: Model.HasOneRelation,
       },
     };
@@ -96,4 +93,4 @@ class Mesure extends Model {
   }
 }
 
-module.exports = { Mesure };
+module.exports = Mesure;

@@ -1,8 +1,8 @@
 const HttpError = require("~/utils/error/HttpError");
-const { Service } = require("~/models/Service");
-const { ServiceMember } = require("~/models/ServiceMember");
-const { Mandataire } = require("~/models/Mandataire");
-const { EnqueteReponses } = require("~/models/EnqueteReponses");
+const { Service } = require("~/models");
+const { ServiceMember } = require("~/models");
+const { Mandataire } = require("~/models");
+const { EnqueteReponses } = require("~/models");
 const logger = require("~/utils/logger");
 
 async function checkEnqueteContext(req) {

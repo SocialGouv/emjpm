@@ -2,7 +2,7 @@ const logger = require("~/utils/logger");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const { confirmationPasswordEmail } = require("~/email/password-confirmation");
-const { User } = require("~/models/User");
+const { User } = require("~/models");
 
 /**
  * Reset password using username, password, new_password and new_password_confirmation return ok

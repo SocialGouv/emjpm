@@ -129,13 +129,6 @@ Install app:
   variables:
     CONTEXT: app
 
-#
-
-Install core:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: core
-
 ##########################################################################################
 #############################                                    #########################
 #############################     BUILD INTERNAL DEPENDENCIES    #########################
@@ -146,22 +139,6 @@ Install core:
   extends: .base_stage
   stage: Build internal dependencies
   dependencies: []
-
-Build @emjpm/core:
-  extends: .build_internal_depencies_stage
-  dependencies:
-    - Install core
-  needs:
-    - Install core
-  variables:
-    CONTEXT: core
-  image: node:15-alpine
-  script:
-    - yarn workspace @emjpm/${CONTEXT} build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/${CONTEXT}/dist
 
 ################################################################################################
 ###################################                    #########################################
@@ -178,10 +155,8 @@ Build @emjpm/api:
   extends: .build_stage
   dependencies:
     - Install api
-    - Build @emjpm/core
   needs:
     - Install api
-    - Build @emjpm/core
   image: node:15-alpine
   script:
     - yarn workspace @emjpm/api postinstall
@@ -199,10 +174,8 @@ Build @emjpm/app:
     INVALID_GIT_FILES_CHANGES: "true"
   dependencies:
     - Install app
-    - Build @emjpm/core
   needs:
     - Install app
-    - Build @emjpm/core
   image: node:15-alpine
   cache:
     key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
@@ -278,12 +251,9 @@ Register app image:
     - .register_stage
   dependencies:
     - Build @emjpm/app
-    - Build @emjpm/core
   needs:
     - Install app
-    - Install core
     - Build @emjpm/app
-    - Build @emjpm/core
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-

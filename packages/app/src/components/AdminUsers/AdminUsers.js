@@ -4,7 +4,7 @@ import {
   isDirection,
   isIndividuel,
   isPrepose,
-} from "@emjpm/core";
+} from "@emjpm/biz";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 

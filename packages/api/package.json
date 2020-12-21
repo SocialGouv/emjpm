@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "build": "ncc build src/start.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
-    "dev": "nodemon src/start.js --inspect",
+    "dev": "nodemon --watch src --watch $(realpath ../biz) --inspect --exec node --trace-warnings src/start.js",
     "dev:knex-debug-query": "DEBUG=knex:query nodemon src/start.js --inspect",
     "test": "yarn test:unit && yarn test:e2e",
     "test:watch": "yarn test:unit:watch",
@@ -21,12 +21,11 @@
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
-    "~": "src",
-    "~core": "../core"
+    "~": "src"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.2.1",
-    "@emjpm/core": "^25.79.0",
+    "@emjpm/biz": "^25.79.0",
     "@sentry/node": "5.27.2",
     "@vercel/ncc": "^0.25.1",
     "axios": "^0.21.0",

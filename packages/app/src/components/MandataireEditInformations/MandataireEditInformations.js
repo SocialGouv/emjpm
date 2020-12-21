@@ -1,5 +1,5 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
-import { findDepartementByCodeOrId } from "@emjpm/core";
+import { findDepartementByCodeOrId } from "@emjpm/biz";
 import Router from "next/router";
 import React, { useState } from "react";
 

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { DIRECTION } from "@emjpm/core";
+import { DIRECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 import Router from "next/router";
 import React, { Fragment, useContext } from "react";

@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
+import { stdFormatter } from "@emjpm/biz";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
@@ -8,8 +9,6 @@ import { useDebounce } from "~/lib/hooks";
 import { Button, Card, Heading4, Spinner } from "~/ui";
 
 import { API_LOGS_SEARCH } from "./queries";
-
-const { stdFormatter } = require("@emjpm/core");
 
 const RowItem = ({ item }) => {
   const { id, created_at, request_method, request_url, token, response } = item;

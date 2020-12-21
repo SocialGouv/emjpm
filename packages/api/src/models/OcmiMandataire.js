@@ -35,4 +35,4 @@ class OcmiMandataire extends Model {
   }
 }
 
-module.exports = { OcmiMandataire };
+module.exports = OcmiMandataire;

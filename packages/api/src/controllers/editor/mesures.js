@@ -1,4 +1,4 @@
-const { Mesure } = require("~/models/Mesure");
+const { Mesure } = require("~/models");
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const mesures = async (req, res) => {

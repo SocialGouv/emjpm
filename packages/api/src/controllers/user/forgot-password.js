@@ -4,7 +4,7 @@ const uid = require("rand-token").uid;
 const Sentry = require("~/utils/sentry");
 
 const { resetPasswordEmail } = require("~/email/forgot-password-email");
-const { User } = require("~/models/User");
+const { User } = require("~/models");
 
 const forgotPassword = async (req, res) => {
   const errors = validationResult(req);

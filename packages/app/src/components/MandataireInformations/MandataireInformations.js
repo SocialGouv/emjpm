@@ -1,4 +1,4 @@
-import { isIndividuel, isPrepose } from "@emjpm/core";
+import { isIndividuel, isPrepose } from "@emjpm/biz";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 

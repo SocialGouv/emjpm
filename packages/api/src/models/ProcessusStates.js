@@ -24,4 +24,4 @@ class ProcessusStates extends Model {
   }
 }
 
-module.exports = { ProcessusStates };
+module.exports = ProcessusStates;

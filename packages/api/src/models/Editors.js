@@ -25,4 +25,4 @@ class Editors extends Model {
   }
 }
 
-module.exports = { Editors };
+module.exports = Editors;

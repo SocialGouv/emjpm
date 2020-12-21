@@ -1,5 +1,5 @@
-const { ServiceAntenne } = require("~/models/ServiceAntenne");
-const { ServiceMember } = require("~/models/ServiceMember");
+const { ServiceAntenne } = require("~/models");
+const { ServiceMember } = require("~/models");
 
 const getAntennes = async (req, res) => {
   const {

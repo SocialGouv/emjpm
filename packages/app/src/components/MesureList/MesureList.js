@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/core";
+import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import Router from "next/router";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
