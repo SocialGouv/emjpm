@@ -22,7 +22,7 @@ RUN set -ex \
   && node scripts/remove_devdeps.js /app/packages/app/package.json \
   ;
 
-RUN NOYARNPOSTINSTALL=1 yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
 COPY ./packages/app/public /app/packages/app/public/
 COPY ./packages/app/next.config.js /app/packages/app/next.config.js
