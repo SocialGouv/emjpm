@@ -1,6 +1,6 @@
 const sentry = require("~/utils/sentry");
 const logger = require("~/utils/logger");
-const { mesureFormatter } = require("@emjpm/core");
+const { mesureFormatter } = require("~core");
 const { sendEmail } = require(".");
 
 const EMAIL_RESERVATION_TEXT = (ti = {}, user, mesure) =>

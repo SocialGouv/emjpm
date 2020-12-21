@@ -4,7 +4,7 @@ const { Etablissements } = require("~/models/Etablissements");
 const { ProcessusStates } = require("~/models/ProcessusStates");
 const { Departement } = require("~/models/Departement");
 const logger = require("~/utils/logger");
-const { findDepartementByCodeOrId } = require("@emjpm/core");
+const { findDepartementByCodeOrId } = require("~core");
 
 const FILTERS = [
   "355",

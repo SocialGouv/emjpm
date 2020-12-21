@@ -2,7 +2,7 @@ const { Service } = require("~/models/Service");
 const { Mandataire } = require("~/models/Mandataire");
 const { ServiceAntenne } = require("~/models/ServiceAntenne");
 const { raw } = require("objection");
-const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
+const { MESURE_PROTECTION_STATUS } = require("~core");
 const { Mesure } = require("~/models/Mesure");
 
 async function updateServiceMesureStates(service_id) {

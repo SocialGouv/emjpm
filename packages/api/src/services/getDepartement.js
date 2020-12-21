@@ -1,5 +1,5 @@
 const { Departement } = require("~/models/Departement");
-const { getDepartementCode } = require("@emjpm/core");
+const { getDepartementCode } = require("~core");
 
 module.exports = async (code_postal) => {
   const departementCode = getDepartementCode(code_postal);

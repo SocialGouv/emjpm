@@ -4,8 +4,8 @@
   "private": true,
   "description": "",
   "source": "src/index.js",
-  "main": "dist/index.js",
-  "module": "dist/index.module.js",
+  "main": "src/index.js",
+  "module": "src/index.module.js",
   "license": "Apache-2.0",
   "files": [
     "src"
