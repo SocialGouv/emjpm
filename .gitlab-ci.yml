@@ -131,12 +131,6 @@ Install app:
 
 #
 
-Install ui:
-  extends: .base_yarn_workspace_install
-  variables:
-    CONTEXT: ui
-    #
-
 Install core:
   extends: .base_yarn_workspace_install
   variables:

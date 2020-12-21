@@ -6,7 +6,6 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 COPY ./scripts /app/scripts
-COPY ./packages/ui/package.json /app/packages/ui/
 COPY ./packages/core/package.json /app/packages/core/
 COPY ./packages/app/package.json /app/packages/app/
 COPY ./package.json ./yarn.lock /app/
@@ -27,7 +26,6 @@ RUN set -ex \
 
 RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
-COPY ./packages/ui/dist /app/packages/ui/dist/
 COPY ./packages/core/dist /app/packages/core/dist/
 COPY ./packages/app/public /app/packages/app/public/
 COPY ./packages/app/next.config.js /app/packages/app/next.config.js
