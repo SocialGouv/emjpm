@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.79.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.79.0) (2020-12-21)
+
+
+### Features
+
+* **mesure:** handle null zip code and foreign countries ([#2381](https://github.com/SocialGouv/emjpm/issues/2381)) ([5aaac32](https://github.com/SocialGouv/emjpm/commit/5aaac3268d11472c7b4ab85bc076cba8bed3550b))
+
+
+### Reverts
+
+* Revert "fix(trigger-release): try a workaround" ([0be5ff8](https://github.com/SocialGouv/emjpm/commit/0be5ff8ffccd9c9e481943da9033d525ec38b13f))
+
+
+
+
+
 # [25.78.0](https://github.com/SocialGouv/emjpm/compare/v25.77.0...v25.78.0) (2020-12-15)
 
 **Note:** Version bump only for package @emjpm/core
