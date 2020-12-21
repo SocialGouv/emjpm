@@ -1603,7 +1603,7 @@
   resolved "https://registry.yarnpkg.com/@commitlint/types/-/types-11.0.0.tgz#719cf05fcc1abb6533610a2e0f5dd1e61eac14fe"
   integrity sha512-VoNqai1vR5anRF5Tuh/+SWDFk7xi7oMwHrHrbm1BprYXjB2RJsWLhUrStMssDxEl5lW/z3EUdg8RvH/IUBccSQ==
 
-"@emotion/babel-plugin@^11.1.2":
+"@emotion/babel-plugin@^11.0.0", "@emotion/babel-plugin@^11.1.2":
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/@emotion/babel-plugin/-/babel-plugin-11.1.2.tgz#68fe1aa3130099161036858c64ee92056c6730b7"
   integrity sha512-Nz1k7b11dWw8Nw4Z1R99A9mlB6C6rRsCtZnwNUOj4NsoZdrO2f2A/83ST7htJORD5zpOiLKY59aJN23092949w==
@@ -1674,6 +1674,13 @@
   integrity sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==
   dependencies:
     "@emotion/memoize" "0.7.4"
+
+"@emotion/is-prop-valid@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.0.0.tgz#1dbe82e52a12c065d416a702e2d106e552cde5be"
+  integrity sha512-G5X0t7eR9pkhUvAY32QS3lToP9JyNF8It5CcmMvbWjmC9/Yq7IhevaKqxl+me2BKR93iTPiL/h3En1ZX/1G3PQ==
+  dependencies:
+    "@emotion/memoize" "^0.7.4"
 
 "@emotion/memoize@0.7.4", "@emotion/memoize@^0.7.1":
   version "0.7.4"
@@ -1747,6 +1754,17 @@
   dependencies:
     "@emotion/styled-base" "^10.0.27"
     babel-plugin-emotion "^10.0.27"
+
+"@emotion/styled@^11.0.0":
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/@emotion/styled/-/styled-11.0.0.tgz#698196c2822746360a8644a73a5d842b2d1a78a5"
+  integrity sha512-498laccxJlBiJqrr2r/fx9q+Pr55D0URP2UyOkoSGLjevb8LLAFWueqthsQ5XijE66iGo7y3rzzEYdA7CHmZEQ==
+  dependencies:
+    "@babel/runtime" "^7.7.2"
+    "@emotion/babel-plugin" "^11.0.0"
+    "@emotion/is-prop-valid" "^1.0.0"
+    "@emotion/serialize" "^1.0.0"
+    "@emotion/utils" "^1.0.0"
 
 "@emotion/stylis@0.8.5":
   version "0.8.5"
