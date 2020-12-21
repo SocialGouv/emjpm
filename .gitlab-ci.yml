@@ -93,7 +93,7 @@ stages:
   dependencies: []
 
 .base_yarn:
-  stage: Install
+  stage: Prepare
   image: node:15-alpine
   cache:
     key:
