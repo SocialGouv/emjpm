@@ -8,17 +8,14 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel",
-    "postinstall": "lerna run postinstall:run",
-    "postinstall:run": "lerna run postinstall:run"
+    "postinstall:run": "lerna run postinstall"
   },
   "license": "Apache-2.0",
-  "dependencies": {
-    "lerna": "^3.22.1"
-  },
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "husky": "^4.3.0"
+    "husky": "^4.3.0",
+    "lerna": "^3.22.1"
   },
   "husky": {
     "hooks": {
