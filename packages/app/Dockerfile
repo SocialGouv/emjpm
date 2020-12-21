@@ -22,9 +22,10 @@ RUN set -ex \
   && node scripts/remove_devdeps.js /app/packages/app/package.json \
   ;
 
+COPY ./packages/biz/src /app/packages/biz/src/
+
 RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
-COPY ./packages/biz/src /app/packages/biz/src/
 COPY ./packages/app/public /app/packages/app/public/
 COPY ./packages/app/next.config.js /app/packages/app/next.config.js
 COPY ./packages/app/.next /app/packages/app/.next/
