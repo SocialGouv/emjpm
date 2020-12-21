@@ -18,7 +18,7 @@
     "lint:fix": "yarn lint --cache --fix",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'",
-    "postinstall": "link-module-alias"
+    "postinstall:run": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src"
