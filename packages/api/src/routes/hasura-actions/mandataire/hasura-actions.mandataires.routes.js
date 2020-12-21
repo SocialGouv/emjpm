@@ -1,12 +1,12 @@
 const express = require("express");
-const { Mandataire } = require("~/models/Mandataire");
-const { Mesure } = require("~/models/Mesure");
-const { Service } = require("~/models/Service");
-const { ServiceAntenne } = require("~/models/ServiceAntenne");
+const { Mandataire } = require("~/models");
+const { Mesure } = require("~/models");
+const { Service } = require("~/models");
+const { ServiceAntenne } = require("~/models");
 
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
-const { User } = require("~/models/User");
-const { isMandataire } = require("@emjpm/core");
+const { User } = require("~/models");
+const { isMandataire } = require("@emjpm/biz");
 
 const router = express.Router();
 

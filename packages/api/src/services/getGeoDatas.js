@@ -1,6 +1,4 @@
-const {
-  GeolocalisationCodePostal,
-} = require("~/models/GeolocalisationCodePostal");
+const { GeolocalisationCodePostal } = require("~/models");
 
 module.exports = async (code_postal, ville) => {
   if (!code_postal) {

@@ -1,14 +1,8 @@
-const { EnqueteReponses } = require("~/models/EnqueteReponses");
-const { EnqueteReponsesActivite } = require("~/models/EnqueteReponsesActivite");
-const {
-  EnqueteReponsesPopulations,
-} = require("~/models/EnqueteReponsesPopulations");
-const {
-  EnqueteReponsesServiceInformations,
-} = require("~/models/EnqueteReponsesServiceInformations");
-const {
-  EnqueteReponsesServicePersonnelFormation,
-} = require("~/models/EnqueteReponsesServicePersonnelFormation");
+const { EnqueteReponses } = require("~/models");
+const { EnqueteReponsesActivite } = require("~/models");
+const { EnqueteReponsesPopulations } = require("~/models");
+const { EnqueteReponsesServiceInformations } = require("~/models");
+const { EnqueteReponsesServicePersonnelFormation } = require("~/models");
 
 const {
   getEnqueteReponseService,

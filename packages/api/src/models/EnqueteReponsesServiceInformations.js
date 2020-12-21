@@ -28,4 +28,4 @@ class EnqueteReponsesServiceInformations extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesServiceInformations };
+module.exports = EnqueteReponsesServiceInformations;

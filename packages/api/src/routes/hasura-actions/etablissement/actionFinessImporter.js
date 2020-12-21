@@ -1,10 +1,10 @@
 const fetch = require("node-fetch");
 const readline = require("readline");
-const { Etablissements } = require("~/models/Etablissements");
-const { ProcessusStates } = require("~/models/ProcessusStates");
-const { Departement } = require("~/models/Departement");
+const { Etablissements } = require("~/models");
+const { ProcessusStates } = require("~/models");
+const { Departement } = require("~/models");
 const logger = require("~/utils/logger");
-const { findDepartementByCodeOrId } = require("@emjpm/core");
+const { findDepartementByCodeOrId } = require("@emjpm/biz");
 
 const FILTERS = [
   "355",

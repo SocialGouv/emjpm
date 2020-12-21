@@ -24,4 +24,4 @@ class Magistrat extends Model {
   }
 }
 
-module.exports = { Magistrat };
+module.exports = Magistrat;

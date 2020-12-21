@@ -4,11 +4,8 @@ const { Model } = require("objection");
 
 const knexConnection = require("~/db/knex");
 const { jwtConfig } = require("~/config");
-const { Mandataire } = require("./Mandataire");
-const { Departement } = require("./Departement");
-const { Role } = require("./Role");
-const { Service } = require("./Service");
-const { Direction } = require("./Direction");
+
+const Models = require(".");
 
 Model.knex(knexConnection);
 
@@ -47,7 +44,7 @@ class User extends Model {
           from: "users.id",
           to: "direction.user_id",
         },
-        modelClass: Direction,
+        modelClass: Models.Direction,
         relation: Model.BelongsToOneRelation,
       },
       mandataire: {
@@ -55,7 +52,7 @@ class User extends Model {
           from: "users.id",
           to: "mandataires.user_id",
         },
-        modelClass: Mandataire,
+        modelClass: Models.Mandataire,
         relation: Model.BelongsToOneRelation,
       },
       roles: {
@@ -67,7 +64,7 @@ class User extends Model {
           },
           to: "role.id",
         },
-        modelClass: Role,
+        modelClass: Models.Role,
         relation: Model.ManyToManyRelation,
       },
       service: {
@@ -79,7 +76,7 @@ class User extends Model {
           },
           to: "services.id",
         },
-        modelClass: Service,
+        modelClass: Models.Service,
         relation: Model.HasOneThroughRelation,
       },
     };
@@ -130,7 +127,7 @@ class User extends Model {
       return [];
     }
     const { region_id, department_id } = this.direction;
-    const departements = await Departement.query()
+    const departements = await Models.Departement.query()
       .where({ id_region: region_id })
       .orWhere({ id: department_id });
     return departements.map((d) => d.id);
@@ -195,4 +192,4 @@ class User extends Model {
   }
 }
 
-module.exports = { User };
+module.exports = User;

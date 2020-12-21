@@ -1,9 +1,7 @@
 const { Model } = require("objection");
 
 const knexConnection = require("~/db/knex");
-const { User } = require("./User");
-const { Departement } = require("./Departement");
-const { Region } = require("./Region");
+const Models = require(".");
 
 Model.knex(knexConnection);
 
@@ -36,7 +34,7 @@ class Direction extends Model {
           from: "direction.department_id",
           to: "departements.id",
         },
-        modelClass: Departement,
+        modelClass: Models.Departement,
         relation: Model.HasOneRelation,
       },
       region: {
@@ -44,7 +42,7 @@ class Direction extends Model {
           from: "direction.region_id",
           to: "regions.id",
         },
-        modelClass: Region,
+        modelClass: Models.Region,
         relation: Model.HasOneRelation,
       },
       users: {
@@ -52,11 +50,11 @@ class Direction extends Model {
           from: "direction.user_id",
           to: "users.id",
         },
-        modelClass: User,
+        modelClass: Models.Departement,
         relation: Model.HasOneRelation,
       },
     };
   }
 }
 
-module.exports = { Direction };
+module.exports = Direction;

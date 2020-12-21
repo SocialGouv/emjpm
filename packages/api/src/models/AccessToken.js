@@ -28,4 +28,4 @@ class AccessToken extends Model {
   }
 }
 
-module.exports = { AccessToken };
+module.exports = AccessToken;

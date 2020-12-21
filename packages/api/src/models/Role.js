@@ -13,4 +13,4 @@ class Role extends Model {
   }
 }
 
-module.exports = { Role };
+module.exports = Role;

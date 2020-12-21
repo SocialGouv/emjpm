@@ -1,4 +1,4 @@
-import { mesureFormatter } from "@emjpm/core";
+import { mesureFormatter } from "@emjpm/biz";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 

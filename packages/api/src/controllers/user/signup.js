@@ -1,12 +1,12 @@
 const { validationResult } = require("express-validator");
-const { User } = require("~/models/User");
-const { Mandataire } = require("~/models/Mandataire");
-const { Magistrat } = require("~/models/Magistrat");
-const { UserRole } = require("~/models/UserRole");
-const { ServiceMemberInvitation } = require("~/models/ServiceMemberInvitation");
-const { ServiceMember } = require("~/models/ServiceMember");
-const { Role } = require("~/models/Role");
-const { Direction } = require("~/models/Direction");
+const { User } = require("~/models");
+const { Mandataire } = require("~/models");
+const { Magistrat } = require("~/models");
+const { UserRole } = require("~/models");
+const { ServiceMemberInvitation } = require("~/models");
+const { ServiceMember } = require("~/models");
+const { Role } = require("~/models");
+const { Direction } = require("~/models");
 const { errorHandler } = require("~/db/errors");
 const { inscriptionEmail } = require("~/email/inscription");
 

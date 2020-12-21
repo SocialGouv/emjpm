@@ -145,4 +145,4 @@ class EnqueteReponsesPopulations extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesPopulations };
+module.exports = EnqueteReponsesPopulations;

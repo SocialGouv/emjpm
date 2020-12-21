@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/react-hooks";
-import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/core";
+import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
 import React from "react";
 import { Box, Card } from "rebass";
 

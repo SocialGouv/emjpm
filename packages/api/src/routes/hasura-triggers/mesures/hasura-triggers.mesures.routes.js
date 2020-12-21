@@ -1,6 +1,6 @@
 const express = require("express");
 const knex = require("~/db/knex");
-const { Mesure } = require("~/models/Mesure");
+const { Mesure } = require("~/models");
 
 const router = express.Router();
 

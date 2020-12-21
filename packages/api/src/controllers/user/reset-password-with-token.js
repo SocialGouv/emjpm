@@ -2,7 +2,7 @@ const logger = require("~/utils/logger");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
 const createError = require("http-errors");
-const { User } = require("~/models/User");
+const { User } = require("~/models");
 const { confirmationPasswordEmail } = require("~/email/password-confirmation");
 
 /**

@@ -32,4 +32,4 @@ class EnqueteReponsesModalitesExercice extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesModalitesExercice };
+module.exports = EnqueteReponsesModalitesExercice;

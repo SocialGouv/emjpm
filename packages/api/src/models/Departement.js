@@ -27,4 +27,4 @@ class Departement extends Model {
   }
 }
 
-module.exports = { Departement };
+module.exports = Departement;

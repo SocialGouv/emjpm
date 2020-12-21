@@ -107,4 +107,4 @@ class EnqueteReponsesActivite extends Model {
   }
 }
 
-module.exports = { EnqueteReponsesActivite };
+module.exports = EnqueteReponsesActivite;

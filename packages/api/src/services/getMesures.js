@@ -1,5 +1,5 @@
-const { Mandataire } = require("~/models/Mandataire");
-const { Mesure } = require("~/models/Mesure");
+const { Mandataire } = require("~/models");
+const { Mesure } = require("~/models");
 
 module.exports = async ({ userId, serviceId }) => {
   if (serviceId) {

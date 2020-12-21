@@ -1,11 +1,10 @@
+import { findDepartementByCodeOrId } from "@emjpm/biz";
 import React from "react";
 import { Box } from "rebass";
 
 import { AsyncSelect, Spinner } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/util/geocode";
-
-const { findDepartementByCodeOrId } = require("@emjpm/core");
 
 const Geocode = (props) => {
   const { hasError, onChange, placeholder, resource, instanceId } = props;

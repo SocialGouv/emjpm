@@ -55,7 +55,7 @@ services:
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
   emjpm:
-    image: node:10-alpine
+    image: node:15-alpine
     user: "node"
     working_dir: /home/node/app
     volumes:
