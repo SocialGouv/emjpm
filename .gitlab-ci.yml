@@ -1,33 +1,9 @@
 ---
-#
-
-include:
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_deploy_nodejs_chart_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_docker_kubectl_image_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_docker_helm_image_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_create_namespace_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_register_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_notify_github_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_delete_useless_k8s_ns_stage.yml
-    ref: v8.0.0
-  - project: SocialGouv/gitlab-ci-yml
-    file: /base_delete_useless_managed_postgresql_stage.yml
-    ref: v8.0.0
-
 variables:
+  HELM_CHART_VERSION: "3.0.0"
+  K8S_NAMESPACE: "${KUBE_NAMESPACE}"
+  REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
+
   # CI variables
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://localhost:2375
@@ -55,6 +31,242 @@ stages:
   - "Notify Finished Deployment"
 
 #
+
+.base_deploy_nodejs_chart_stage:
+  extends: .base_docker_helm_image_stage
+  script:
+    - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
+    - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+    #
+    - helm init --client-only
+    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
+    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
+
+    - echo "helm just fetch socialgouv/nodejs#${HELM_CHART_VERSION}"
+    - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
+
+    - envsubst < $VALUES_FILE > ./values.yaml
+    # Set own wildcard when deploying in dev environment
+    - >-
+      HELM_RENDER_ARGS="
+        --set image.tag=${IMAGE_TAG}
+        --set ingress.hosts[0].host=${HOST}
+        --set ingress.tls[0].hosts[0]=${HOST}
+        ${HELM_RENDER_ARGS}"
+    # Set own certificate when deploying in prod environment
+    - |-
+      if [[ -n "${PRODUCTION+x}" ]]; then
+        HELM_RENDER_ARGS=" \
+          --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
+          --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+          ${HELM_RENDER_ARGS}"
+      else
+        HELM_RENDER_ARGS=" \
+          --set ingress.tls[0].secretName=wildcard-crt \
+          ${HELM_RENDER_ARGS}"
+      fi
+
+    - echo "$ helm just render ${CONTEXT} nodejs ${HELM_RENDER_ARGS} --values ./values.yaml"
+
+    - helm just render ${CONTEXT} nodejs
+      ${HELM_RENDER_ARGS}
+      --values ./values.yaml
+    - helm just apply ${CONTEXT}
+
+.base_docker_kubectl_image_stage:
+  image:
+    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl:0.24.0
+    entrypoint: [""]
+
+.base_docker_helm_image_stage:
+  extends: .base_docker_kubectl_image_stage
+  image:
+    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:0.24.0
+    entrypoint: [""]
+
+
+.base_create_namespace_stage:
+  extends: .base_docker_kubectl_image_stage
+  stage: "Registration"
+  environment:
+    name: review/${CI_COMMIT_REF_NAME}-dev
+    url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
+  dependencies: []
+  script:
+    - echo "kubectl get namespace ${K8S_NAMESPACE}"
+    # Skip the job if the namespace exists
+    - "[[ $(kubectl get namespace ${K8S_NAMESPACE}) ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    #
+    - kubectl create namespace ${K8S_NAMESPACE}
+    #
+    # Use wildcard certificate
+    - kubectl label namespace ${K8S_NAMESPACE} cert=wildcard
+    #
+    # Add git metadata to be able to auto destroy that namespaces
+    # see https://github.com/SocialGouv/docker/tree/v0.18.0/k8s-ns-killer
+    - kubectl annotate namespace ${K8S_NAMESPACE} git/remote=${REMOTE_URL}
+    - kubectl annotate namespace ${K8S_NAMESPACE} git/branch=${CI_COMMIT_REF_NAME}
+    #
+    # Fake rancher namespace creation
+    - "[[ -z ${RANCHER_PROJECT_ID} ]] && exit ${CI_JOB_SKIP_EXIT_CODE:-0}"
+    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/projectId=${RANCHER_PROJECT_ID}
+    - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
+
+.base_docker_image_stage:
+  image: docker:19
+  services:
+    - docker:19-dind
+
+.base_register_stage:
+  stage: "Registration"
+  extends: .base_docker_image_stage
+  script:
+    # NOTE(douglasduteil): use echo "$CI_JOB_TOKEN" to remove docker login warning.
+    # `WARNING! Using --password via the CLI is insecure. Use --password-stdin`
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    - >-
+      if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
+        echo "Register ${CI_COMMIT_TAG} tag as ${TAG}"
+      else
+        export TAG=$CI_COMMIT_REF_SLUG
+        echo "Register ${TAG} branch"
+      fi
+    #
+    # NOTE(douglasduteil): aggressive caching strategy.
+    # As we don't know which image is the closest to the one we are registering
+    # we pull all the images that can help.
+    # From the previous commit, to the current branch or the master branch, the
+    # first to be defined will be our cache :)
+    - |
+      [[ -n "${TRACE}" ]] && set -x
+
+      function set_cache_image() {
+        if docker pull ${IMAGE_NAME}:$1; then
+          export CACHE_TAG=$1
+        fi
+      }
+
+      echo ""
+      echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
+      set_cache_image "${CI_COMMIT_BEFORE_SHA}"
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking current branch/tag (${TAG}) cache"
+        set_cache_image "${TAG}"
+      fi
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
+        set_cache_image "${CI_DEFAULT_BRANCH}"
+      fi
+
+      echo ""
+      if [[ -n "${CACHE_TAG}" ]] ; then
+        echo "Using ${CACHE_TAG} tag as cache"
+      else
+        echo "No cache ! Naked build :("
+      fi
+
+    - echo "
+      docker build
+      --cache-from ${IMAGE_NAME}:${CACHE_TAG}
+      -t ${IMAGE_NAME}:${CI_COMMIT_SHA}
+      -t ${IMAGE_NAME}:${TAG}
+      $DOCKER_BUILD_ARGS
+      $CONTEXT"
+    - docker build
+      --cache-from ${IMAGE_NAME}:${CACHE_TAG}
+      -t ${IMAGE_NAME}:${CI_COMMIT_SHA}
+      -t ${IMAGE_NAME}:${TAG}
+      $DOCKER_BUILD_ARGS
+      $CONTEXT
+    - docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+    - docker push ${IMAGE_NAME}:${TAG}
+
+#
+# feature-branches deployments
+# these jobs interact with the GitHub API to post the deployment URL and status to the pull-request
+#
+
+#
+.notify_stage: &notify_stage
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
+  dependencies: []
+
+.base_notify_pending_stage:
+  <<: *notify_stage
+  script:
+    #
+    - create-deployment
+    - cat /tmp/deploy_payload.json
+    #
+    - extract-deploy-id
+    - echo "GitHub deployment id '$(cat DEPLOY_ID)'"
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - DEPLOY_ID
+
+.resolve_deploy_environment: &resolve_deploy_environment |
+  set -x
+
+  if [[ -n "${PRODUCTION+x}" ]]; then
+    export ENVIRONMENT="production"
+  else
+    export ENVIRONMENT=${ENVIRONMENT:-"staging"}
+  fi
+
+.base_notify_fail_stage:
+  <<: *notify_stage
+  allow_failure: true
+  when: on_failure
+  script:
+    - *resolve_deploy_environment
+    - update-deployment $(cat DEPLOY_ID) "${HOST}" failure
+
+.base_notify_success_stage:
+  <<: *notify_stage
+  when: on_success
+  script:
+    - *resolve_deploy_environment
+    - update-deployment $(cat DEPLOY_ID) "${HOST}" success
+
+#
+
+variables:
+  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
+
+.base_delete_useless_k8s_ns_stage:
+  stage: Notify Finished Deployment
+  dependencies: []
+  allow_failure: true
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.24.0
+  environment: fabrique-dev
+  script:
+    - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
+    - echo "k8s-ns-killer ${K8S_NAMESPACE_PREFIX}"
+    # - k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
+    # Debug mode
+    - sh -x /bin/k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
+  only:
+    - master
+
+#
+
+.base_delete_useless_managed_postgresql_stage:
+  stage: Notify Finished Deployment
+  dependencies: []
+  allow_failure: true
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/pg-cleaner:0.24.0
+  environment: fabrique-dev
+  script:
+    - python /bin/pg-cleaner.py
+  only:
+    - master
+
 
 .base_stage:
   except:
