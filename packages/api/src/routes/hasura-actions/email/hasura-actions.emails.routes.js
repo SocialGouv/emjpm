@@ -1,5 +1,5 @@
 const express = require("express");
-const { isEnAttente } = require("@emjpm/core");
+const { isEnAttente } = require("~core");
 const uid = require("rand-token").uid;
 
 const { getEmailUserDatas } = require("~/email/email-user-data");

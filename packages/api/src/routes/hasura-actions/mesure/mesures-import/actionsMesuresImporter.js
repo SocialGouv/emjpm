@@ -2,7 +2,7 @@ const {
   MESURE_PROTECTION,
   MESURE_PROTECTION_STATUS,
   isFrance,
-} = require("@emjpm/core");
+} = require("~core");
 const excelParser = require("~/utils/file/excelParser");
 const logger = require("~/utils/logger");
 

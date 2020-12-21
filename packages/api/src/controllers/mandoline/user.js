@@ -1,5 +1,5 @@
 const { User } = require("~/models/User");
-const { isService, isDirection } = require("@emjpm/core");
+const { isService, isDirection } = require("~core");
 
 const getUserDirection = (user) => {
   const { direction } = user;

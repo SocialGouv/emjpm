@@ -1,6 +1,6 @@
 const { Tis } = require("~/models/Tis");
 const { Mesure } = require("~/models/Mesure");
-const { isEnAttente } = require("@emjpm/core");
+const { isEnAttente } = require("~core");
 const { getEmailUserDatas } = require("~/email/email-user-data");
 const { cancelReservationEmail } = require("~/email/cancel-reservation-email");
 

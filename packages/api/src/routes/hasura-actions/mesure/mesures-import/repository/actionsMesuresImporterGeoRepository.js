@@ -1,4 +1,4 @@
-const { getDepartementCode } = require("@emjpm/core");
+const { getDepartementCode } = require("~core");
 const getGeoDatas = require("~/services/getGeoDatas");
 const { Departement } = require("~/models/Departement");
 

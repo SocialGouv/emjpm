@@ -6,7 +6,7 @@ const { ServiceAntenne } = require("~/models/ServiceAntenne");
 
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 const { User } = require("~/models/User");
-const { isMandataire } = require("@emjpm/core");
+const { isMandataire } = require("~core");
 
 const router = express.Router();
 

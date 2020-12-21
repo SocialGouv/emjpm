@@ -21,7 +21,8 @@
     "postinstall": "link-module-alias"
   },
   "_moduleAliases": {
-    "~": "src"
+    "~": "src",
+    "~core": "../core"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.2.1",
