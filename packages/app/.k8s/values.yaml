@@ -57,7 +57,7 @@ ingress:
     - host: emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
-          servicePort: '${PORT}'
+          servicePort: ${PORT}
   tls:
     - hosts:
         - emjpm.dev2.fabrique.social.gouv.fr
@@ -66,5 +66,5 @@ fullnameOverride: ''
 nameOverride: ''
 service:
   type: ClusterIP
-  port: '${PORT}'
-  targetPort: '${PORT}'
+  port: ${PORT}
+  targetPort: ${PORT}
