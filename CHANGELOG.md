@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.81.1](https://github.com/SocialGouv/emjpm/compare/v25.81.0...v25.81.1) (2020-12-22)
+
+
+### Bug Fixes
+
+* **jwt-invalid:** logout and clear apollo store ([#2400](https://github.com/SocialGouv/emjpm/issues/2400)) ([e5a07b8](https://github.com/SocialGouv/emjpm/commit/e5a07b821c276fe4b2f34e72e7a0db07fd55508d))
+
+
+
+
+
 # [25.81.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.81.0) (2020-12-22)
 
 
