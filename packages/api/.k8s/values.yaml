@@ -35,7 +35,6 @@ deployment:
           name: emjpm-secret
           key: APP_URL
     - name: HASURA_GRAPHQL_ADMIN_SECRET
-      value: production
       valueFrom:
         secretKeyRef:
           name: emjpm-secret
