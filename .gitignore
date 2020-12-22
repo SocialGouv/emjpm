@@ -8,3 +8,4 @@ dump
 .vscode
 *.log
 .eslintcache
+.k8s/manifests/chart-generated.yaml

@@ -9,3 +9,4 @@ db/seeds/developement_test/ne_pas_prendre.js
 mandataire.csv
 test1.csv
 .env
+.k8s/manifests/chart-generated.yaml
