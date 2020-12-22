@@ -2,8 +2,8 @@ import { useApolloClient, useQuery } from "@apollo/react-hooks";
 import { isService } from "@emjpm/biz";
 import React, { createContext, Fragment } from "react";
 
-import { captureException, setUser } from "~/util/sentry";
 import { logout } from "~/util/auth";
+import { captureException, setUser } from "~/util/sentry";
 
 import {
   ADMIN_USERS,
@@ -34,6 +34,7 @@ const UserProvider = (props) => {
       }
     },
     onError: (error) => {
+      // tglatt: to handle JWSInvalidSignature
       captureException(error);
       apolloClient.clearStore();
       logout();
