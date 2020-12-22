@@ -6,3 +6,4 @@ out
 .vscode
 .env
 .env.local
+.k8s/manifests/chart-generated.yaml

@@ -58,10 +58,10 @@ else
 fi
 
 export API_HOST="api-${DOMAIN}";
-export API_SRV_HOST="api-nodejs";
+export API_SRV_HOST="api-api";
 export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura-${DOMAIN}";
-export HASURA_SRV_HOST="hasura-nodejs";
+export HASURA_SRV_HOST="hasura-hasura";
 
 
 export API_URL="https://${API_HOST}"
