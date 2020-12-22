@@ -45,7 +45,7 @@ deployment:
     - name: HASURA_GRAPHQL_JWT_SECRET
       value: '{"type": "RS256","jwk_url": "http://${API_SRV_HOST}/api/auth/jwks"}'
     - name: HASURA_GRAPHQL_SERVER_PORT
-      value: '${PORT}'
+      value: ${PORT}
     - name: HASURA_WEB_HOOK_BASE_URL
       value: 'http://${API_SRV_HOST}'
     - name: HASURA_WEB_HOOK_SECRET
@@ -69,7 +69,7 @@ ingress:
     - host: hasura-emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
-          servicePort: '${PORT}'
+          servicePort: ${PORT}
   tls:
     - hosts:
         - hasura-emjpm.dev2.fabrique.social.gouv.fr
@@ -78,5 +78,5 @@ fullnameOverride: ''
 nameOverride: ''
 service:
   type: ClusterIP
-  port: '${PORT}'
-  targetPort: '${PORT}'
+  port: ${PORT}
+  targetPort: ${PORT}
