@@ -1,0 +1,14 @@
+apiVersion: v1
+name: api
+version: 1.0.0
+appVersion: 1.0
+home: https://github.com/SocialGouv/emjpm/tree/master/packages/api/.k8s
+description: eMJPM api Helm template for Kubernetes
+icon: https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Node.js_logo.svg/200px-Node.js_logo.svg.png
+keywords:
+  - nodejs
+sources:
+  - https://github.com/SocialGouv/helm-charts/tree/master/charts/nodejs
+maintainers:
+  - name: Incubateur des Ministères Sociaux
+    email: dsi-incubateur@sg.social.gouv.fr

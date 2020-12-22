@@ -1,6 +1,5 @@
 ---
 variables:
-  HELM_CHART_VERSION: "3.0.0"
   K8S_NAMESPACE: "${KUBE_NAMESPACE}"
   REMOTE_URL: "https://github.com/${CI_PROJECT_PATH}.git"
 
@@ -32,20 +31,12 @@ stages:
 
 #
 
-.base_deploy_nodejs_chart_stage:
-  extends: .base_docker_helm_image_stage
+.base_deploy_chart_stage:
+  extends: .base_docker_kubectl_image_stage
   script:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
-    #
-    - helm init --client-only
-    - curl -L https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}/helm-just-linux-${HELM_CHART_VERSION}.tgz | tar -C $(helm home) -xzv
-    - helm repo add socialgouv https://github.com/SocialGouv/helm-charts/releases/download/v${HELM_CHART_VERSION}
 
-    - echo "helm just fetch socialgouv/nodejs#${HELM_CHART_VERSION}"
-    - helm just fetch "socialgouv/nodejs#${HELM_CHART_VERSION}"
-
-    - envsubst < $VALUES_FILE > ./values.yaml
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
@@ -66,24 +57,16 @@ stages:
           ${HELM_RENDER_ARGS}"
       fi
 
-    - echo "$ helm just render ${CONTEXT} nodejs ${HELM_RENDER_ARGS} --values ./values.yaml"
+    # generate manifest using helm template
+    - envsubst < packages/$CONTEXT/.k8s/values.yaml | helm template ${HELM_RENDER_ARGS} ${CONTEXT} .k8s > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
-    - helm just render ${CONTEXT} nodejs
-      ${HELM_RENDER_ARGS}
-      --values ./values.yaml
-    - helm just apply ${CONTEXT}
+    # apply manifests
+    - kubectl apply -f packages/$CONTEXT/.k8s/manifests
 
 .base_docker_kubectl_image_stage:
   image:
-    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/kubectl:0.24.0
+    name: registry.gitlab.factory.social.gouv.fr/devthejo/docker-kubectl-helm:1.0.0
     entrypoint: [""]
-
-.base_docker_helm_image_stage:
-  extends: .base_docker_kubectl_image_stage
-  image:
-    name: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/helm:0.24.0
-    entrypoint: [""]
-
 
 .base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
@@ -491,7 +474,7 @@ Backup PG before production (incubateur):
 
 Init Managed Database:
   extends:
-    - .base_docker_helm_image_stage
+    - .base_docker_kubectl_image_stage
     - .dev_stage
     - .deploy_stage
   script:
@@ -532,13 +515,12 @@ Init Managed Database:
 
 .deploy_api_stage:
   extends:
-    - .base_deploy_nodejs_chart_stage
+    - .base_deploy_chart_stage
     - .deploy_stage
   dependencies: []
   variables:
     CONTEXT: api
     PORT: 80
-    VALUES_FILE: ./packages/api/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -571,12 +553,11 @@ Deploy api (prod):
 
 .deploy_app_stage:
   extends:
-    - .base_deploy_nodejs_chart_stage
+    - .base_deploy_chart_stage
     - .deploy_stage
   variables:
     CONTEXT: app
     PORT: 80
-    VALUES_FILE: ./packages/app/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -648,12 +629,11 @@ Deploy knex (prod):
 
 .deploy_hasura_stage:
   extends:
-    - .base_deploy_nodejs_chart_stage
+    - .base_deploy_chart_stage
     - .deploy_stage
   variables:
     CONTEXT: hasura
     PORT: 80
-    VALUES_FILE: ./packages/hasura/.k8s.values.yml
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -663,8 +643,6 @@ Deploy knex (prod):
     - export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
     - export POSTGRES_EMJPM_USER_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER_ENCODED}' | base64 --decode)
     - export POSTGRES_EMJPM_PASSWORD_ENCODED=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD_ENCODED}' | base64 --decode)
-  after_script:
-    - cat values.yaml
 
 #
 
@@ -688,7 +666,7 @@ Deploy hasura (prod):
 
 Restore postgres data:
   extends:
-    - .base_docker_helm_image_stage
+    - .base_docker_kubectl_image_stage
     - .dev_stage
     - .deploy_stage
   when: manual

@@ -1,8 +1,25 @@
 image:
   repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
   tag: latest
-
+  pullPolicy: IfNotPresent
+labels: {}
 deployment:
+  annotations: {}
+  replicaCount: 1
+  imagePullSecrets: []
+  port: 80
+  livenessProbe:
+    initialDelaySeconds: 5
+    path: /
+    periodSeconds: 10
+    failureThreshold: 10
+    timeoutSeconds: 10
+  readinessProbe:
+    initialDelaySeconds: 5
+    path: /
+    periodSeconds: 10
+    failureThreshold: 10
+    timeoutSeconds: 10
   resources:
     limits:
       cpu: 500m
@@ -10,40 +27,44 @@ deployment:
     requests:
       cpu: 10m
       memory: 512Mi
-
   env:
     - name: PORT
-      value: "80"
+      value: '80'
     - name: NODE_ENV
-      value: "production"
+      value: production
     - name: API_URL
-      value: "//${API_HOST}"
+      value: '//${API_HOST}'
     - name: GRAPHQL_SERVER_URI
-      value: "//${HASURA_HOST}/v1/graphql"
+      value: '//${HASURA_HOST}/v1/graphql'
     - name: VERSION
-      value: "${VERSION}"
+      value: '${VERSION}'
     - name: SENTRY_PUBLIC_DSN
       valueFrom:
         secretKeyRef:
           name: emjpm-secret
           key: SENTRY_PUBLIC_DSN
-
-service:
-  port: ${PORT}
-  targetPort: ${PORT}
-
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  initContainers: []
 ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
     certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: "true"
+    kubernetes.io/tls-acme: 'true'
   hosts:
     - host: emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
-          servicePort: ${PORT}
+          servicePort: '${PORT}'
   tls:
     - hosts:
         - emjpm.dev2.fabrique.social.gouv.fr
       secretName: app-certificate
+fullnameOverride: ''
+nameOverride: ''
+service:
+  type: ClusterIP
+  port: '${PORT}'
+  targetPort: '${PORT}'
