@@ -11,7 +11,7 @@ const mesureFormatter = {
     return MESURE_PROTECTION.CHAMP_MESURE.byKey[champMesure];
   },
   formatJudgmentDate(judgmentDate) {
-    return stdFormatter.formatDate(judgmentDate);
+    return stdFormatter.formatDateUI(judgmentDate);
   },
   formatLieuVie(lieuVie) {
     if (!lieuVie) {
