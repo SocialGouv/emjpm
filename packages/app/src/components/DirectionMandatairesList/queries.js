@@ -1,18 +1,16 @@
 import gql from "graphql-tag";
 
 export const GET_MANDATAIRES = gql`
-  query view_mesure_gestionnaire(
+  query viewMesureGestionnaireByDepartement(
     $offset: Int!
     $limit: Int!
     $departement: Int
     $region: Int
     $discriminator: String
     $order: order_by
-    $nom: String
   ) {
-    count: view_mesure_gestionnaire_aggregate(
+    count: view_mesure_gestionnaire_departement_aggregate(
       where: {
-        mandataire: { user: { nom: { _ilike: $nom } } }
         discriminator: { _eq: $discriminator }
         departement: { id_region: { _eq: $region }, id: { _eq: $departement } }
       }
@@ -21,11 +19,10 @@ export const GET_MANDATAIRES = gql`
         count
       }
     }
-    mandatairesList: view_mesure_gestionnaire(
+    mandatairesList: view_mesure_gestionnaire_departement(
       limit: $limit
       offset: $offset
       where: {
-        mandataire: { user: { nom: { _ilike: $nom } } }
         discriminator: { _eq: $discriminator }
         departement: { id_region: { _eq: $region }, id: { _eq: $departement } }
       }
