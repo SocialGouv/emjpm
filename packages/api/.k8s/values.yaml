@@ -29,7 +29,6 @@ deployment:
       memory: 384Mi
   env:
     - name: APP_URL
-      value: '80'
       valueFrom:
         secretKeyRef:
           name: emjpm-secret
