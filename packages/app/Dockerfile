@@ -24,8 +24,12 @@ RUN set -ex \
 
 RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
 
+COPY ./packages/biz /app/packages/biz/
 COPY ./packages/app/public /app/packages/app/public/
 COPY ./packages/app/next.config.js /app/packages/app/next.config.js
 COPY ./packages/app/.next /app/packages/app/.next/
+
+RUN mkdir -p /app/node_modules/@emjpm/biz \
+  && ln -s ./packages/biz /app/node_modules/@emjpm/biz
 
 ENTRYPOINT ["yarn", "workspace", "@emjpm/app", "start:build"]
