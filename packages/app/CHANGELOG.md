@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.81.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.81.0) (2020-12-22)
+
+
+### Bug Fixes
+
+* **admin:** avoid to store empty mandataire siret ([811f22d](https://github.com/SocialGouv/emjpm/commit/811f22d5dee19de6ee29e7f1aa1086a0a4988e7c))
+* **liste-blanche:** convert departement id to int ([96e70d6](https://github.com/SocialGouv/emjpm/commit/96e70d606c6569d1531dcb62c1048a73e20449cc))
+* **liste-blanche:** display delete button in edit mode only ([d232f29](https://github.com/SocialGouv/emjpm/commit/d232f2980e919567e2588d819500a8522e0793f9))
+* **version:** update package version manually ([70cc0fb](https://github.com/SocialGouv/emjpm/commit/70cc0fbd78930a7840ad10b905e94bf1fd4d769c))
+
+
+### Features
+
+* **mesure:** handle null zip code and foreign countries ([#2381](https://github.com/SocialGouv/emjpm/issues/2381)) ([5aaac32](https://github.com/SocialGouv/emjpm/commit/5aaac3268d11472c7b4ab85bc076cba8bed3550b))
+* **nextjs-enhancements:** add pages title + fix nextjs warnings ([#2383](https://github.com/SocialGouv/emjpm/issues/2383)) ([ba0b4e8](https://github.com/SocialGouv/emjpm/commit/ba0b4e8eafb06fca463594ac3aab73e2e5ee07ab)), closes [vercel/next.js/issues/7915#issuecomment-747433561](https://github.com/vercel/next.js/issues/7915/issues/issuecomment-747433561)
+
+
+### Reverts
+
+* Revert "fix(trigger-release): try a workaround" ([0be5ff8](https://github.com/SocialGouv/emjpm/commit/0be5ff8ffccd9c9e481943da9033d525ec38b13f))
+
+
+
+
+
 # [25.79.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.79.0) (2020-12-21)
 
 
