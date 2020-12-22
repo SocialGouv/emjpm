@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.80.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.80.0) (2020-12-22)
+
+
+### Bug Fixes
+
+* **admin:** avoid to store empty mandataire siret ([811f22d](https://github.com/SocialGouv/emjpm/commit/811f22d5dee19de6ee29e7f1aa1086a0a4988e7c))
+* **api:** do not escape input string ([091ce14](https://github.com/SocialGouv/emjpm/commit/091ce1442bdbc95d223b61280d5ebd2737677a0d))
+* **api:** return explicit error message if bad content type ([9ef6953](https://github.com/SocialGouv/emjpm/commit/9ef69531d0fef4ee7ceb9ac5a57b36b9a3fff457))
+* **liste-blanche:** convert departement id to int ([96e70d6](https://github.com/SocialGouv/emjpm/commit/96e70d606c6569d1531dcb62c1048a73e20449cc))
+* **liste-blanche:** display delete button in edit mode only ([d232f29](https://github.com/SocialGouv/emjpm/commit/d232f2980e919567e2588d819500a8522e0793f9))
+
+
+### Features
+
+* **mandoline:** authorize all users to access get user api ([#2378](https://github.com/SocialGouv/emjpm/issues/2378)) ([61edadc](https://github.com/SocialGouv/emjpm/commit/61edadc31fe77d0b181f3867e3543eff2438421e))
+* **mesure:** handle null zip code and foreign countries ([#2381](https://github.com/SocialGouv/emjpm/issues/2381)) ([5aaac32](https://github.com/SocialGouv/emjpm/commit/5aaac3268d11472c7b4ab85bc076cba8bed3550b))
+* **nextjs-enhancements:** add pages title + fix nextjs warnings ([#2383](https://github.com/SocialGouv/emjpm/issues/2383)) ([ba0b4e8](https://github.com/SocialGouv/emjpm/commit/ba0b4e8eafb06fca463594ac3aab73e2e5ee07ab)), closes [vercel/next.js/issues/7915#issuecomment-747433561](https://github.com/vercel/next.js/issues/7915/issues/issuecomment-747433561)
+* **rate-limit-k8s:** ingress ddos protection ([#2307](https://github.com/SocialGouv/emjpm/issues/2307)) ([56d8094](https://github.com/SocialGouv/emjpm/commit/56d80940a72f45505b897f65cbc6160c9ee4e346))
+
+
+### Reverts
+
+* Revert "fix(trigger-release): try a workaround" ([0be5ff8](https://github.com/SocialGouv/emjpm/commit/0be5ff8ffccd9c9e481943da9033d525ec38b13f))
+* Revert "fix(trigger-release): move lerna in dependencies" ([a6d4325](https://github.com/SocialGouv/emjpm/commit/a6d4325a98da80eb824b51b75fc599db707e4ef2))
+* Revert "fix(trigger-release): wip" ([7c3efe3](https://github.com/SocialGouv/emjpm/commit/7c3efe3a228b5688984d7b81ad963382d1a6afb1))
+
+
+
+
+
 # [25.79.0](https://github.com/SocialGouv/emjpm/compare/v25.78.0...v25.79.0) (2020-12-21)
 
 
