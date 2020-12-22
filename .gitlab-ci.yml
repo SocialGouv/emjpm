@@ -58,7 +58,7 @@ stages:
       fi
 
     # generate manifest using helm template
-    - envsubst < packages/$CONTEXT/.k8s/values.yaml | helm template ${HELM_RENDER_ARGS} ${CONTEXT} .k8s > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
+    - envsubst < packages/$CONTEXT/.k8s/values.yaml  | helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
     # apply manifests
     - kubectl apply -f packages/$CONTEXT/.k8s/manifests
