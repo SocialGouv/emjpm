@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.81.3](https://github.com/SocialGouv/emjpm/compare/v25.81.2...v25.81.3) (2020-12-28)
+
+
+### Bug Fixes
+
+* **login:** reimplement sync logout clean ([#2407](https://github.com/SocialGouv/emjpm/issues/2407)) ([06f6a6a](https://github.com/SocialGouv/emjpm/commit/06f6a6adf10e92f8a5bb56f95d17d0a368be8d9e))
+
+
+
+
+
 ## [25.81.2](https://github.com/SocialGouv/emjpm/compare/v25.81.1...v25.81.2) (2020-12-28)
 
 
