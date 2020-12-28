@@ -1,9 +1,8 @@
-import { useApolloClient, useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/react-hooks";
 import { isService } from "@emjpm/biz";
 import React, { createContext, Fragment } from "react";
 
-import { logout } from "~/util/auth";
-import { captureException, setUser } from "~/util/sentry";
+import { setUser } from "~/util/sentry";
 
 import {
   ADMIN_USERS,
@@ -25,19 +24,12 @@ const QUERY_TYPE = {
 };
 
 const UserProvider = (props) => {
-  const apolloClient = useApolloClient();
   const { type, userId, agrements, children } = props;
   const { data } = useQuery(QUERY_TYPE[type], {
     onCompleted: ({ users_by_pk: user }) => {
       if (user) {
         setUser({ id: user.id, role: type });
       }
-    },
-    onError: (error) => {
-      // tglatt: to handle JWSInvalidSignature
-      captureException(error);
-      apolloClient.clearStore();
-      logout();
     },
     ssr: false,
     variables: {
