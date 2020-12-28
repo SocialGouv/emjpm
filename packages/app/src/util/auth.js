@@ -7,7 +7,7 @@ import React, { Component } from "react";
 const clearToken = () => {
   cookie.remove("token");
   // to support logging out from all windows
-  window.localStorage.removeItem("token");
+  localStorage.setItem("logged", "0");
 
   // Clear user preferences & filters
   window.localStorage.removeItem("filters");
@@ -20,7 +20,7 @@ export const logout = () => {
 
 export const login = async ({ token }) => {
   cookie.set("token", token, { expires: 1 });
-  localStorage.setItem("token", token);
+  localStorage.setItem("logged", "1");
 };
 
 // Gets the display name of a JSX component for dev tools
@@ -53,11 +53,10 @@ export const withAuthSync = (WrappedComponent) =>
 
     componentWillUnmount() {
       window.removeEventListener("storage", this.syncLogout);
-      window.localStorage.removeItem("logout");
     }
 
     syncLogout(event) {
-      if (event.key === "logout") {
+      if (event.key === "logged" && event.newValue === "0") {
         console.log("logged out from storage!");
         Router.push("/login");
       }
