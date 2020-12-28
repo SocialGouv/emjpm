@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.81.2](https://github.com/SocialGouv/emjpm/compare/v25.81.1...v25.81.2) (2020-12-28)
+
+
+### Bug Fixes
+
+* **login:** rollback as invalid jwt has expired ([#2403](https://github.com/SocialGouv/emjpm/issues/2403)) ([4d54713](https://github.com/SocialGouv/emjpm/commit/4d5471330b3f9e0bcd2a3a069b6f76d5e23335c4))
+
+
+
+
+
 ## [25.81.1](https://github.com/SocialGouv/emjpm/compare/v25.81.0...v25.81.1) (2020-12-22)
 
 
