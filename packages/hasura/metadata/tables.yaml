@@ -4621,11 +4621,10 @@
           mandataire_id:
             _eq: X-Hasura-Mandataire-Id
       columns:
-      - id
       - annee
-      - niveau_ressource
-      - prestations_sociales
+      - id
       - mesure_id
+      - niveau_ressource
       backend_only: false
   - role: prepose
     permission:
@@ -4638,7 +4637,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       backend_only: false
   - role: service
     permission:
@@ -4651,7 +4649,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       backend_only: false
   select_permissions:
   - role: individuel
@@ -4661,7 +4658,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           mandataire_id:
@@ -4674,7 +4670,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           mandataire_id:
@@ -4686,7 +4681,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           service_id:
@@ -4698,7 +4692,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter: {}
   update_permissions:
   - role: individuel
@@ -4708,7 +4701,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           mandataire_id:
@@ -4721,7 +4713,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           mandataire_id:
@@ -4734,7 +4725,6 @@
       - id
       - mesure_id
       - niveau_ressource
-      - prestations_sociales
       filter:
         mesure:
           service_id:
@@ -4762,6 +4752,9 @@
         mesure:
           service_id:
             _eq: X-Hasura-Service-Id
+- table:
+    schema: public
+    name: mesure_ressources_prestations_sociales
 - table:
     schema: public
     name: mesure_status
@@ -5361,6 +5354,10 @@
 - table:
     schema: public
     name: ocmi_mandataires
+- table:
+    schema: public
+    name: prestations_sociales
+  is_enum: true
 - table:
     schema: public
     name: processus_states
