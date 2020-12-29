@@ -7,7 +7,11 @@ import { MESURE_CONTEXT_QUERY } from "~/components/MesureContext/queries";
 import { MESURES_QUERY } from "~/components/MesureList/queries";
 
 import { MesureRessourceCreateOrEditForm } from "./MesureRessourceCreateOrEditForm";
-import { DELETE_MESURE_RESSOURCE, UPSERT_MESURE_RESSOURCE } from "./mutations";
+import {
+  DELETE_MESURE_RESSOURCE,
+  INSERT_MESURE_RESSOURCE,
+  UPDATE_MESURE_RESSOURCE,
+} from "./mutations";
 
 export const MesureRessourceCreateOrEdit = ({
   mesure,
@@ -21,7 +25,13 @@ export const MesureRessourceCreateOrEdit = ({
     mesureRessource = null;
   }
 
-  const [upsertMesureRessource] = useMutation(UPSERT_MESURE_RESSOURCE, {
+  const [updateMesureRessource] = useMutation(UPDATE_MESURE_RESSOURCE, {
+    onCompleted: async () => {
+      onSuccess();
+    },
+  });
+
+  const [insertMesureRessource] = useMutation(INSERT_MESURE_RESSOURCE, {
     onCompleted: async () => {
       onSuccess();
     },
@@ -33,54 +43,82 @@ export const MesureRessourceCreateOrEdit = ({
     },
   });
 
-  const handleSubmit = async (values, { setSubmitting, setErrors }) => {
-    const ressourceWithSameDate = mesure?.mesureRessources?.find(
-      (elm) => elm.dateChangementRessource === values.date_changement_ressource
-    );
-    if (
-      ressourceWithSameDate &&
-      ressourceWithSameDate.id !== mesureRessource?.id
-    ) {
-      setErrors({
-        date_changement_ressource:
-          "la date de changement d'état doit être unique",
-      });
+  const handleInsert = async (values) => {
+    const variables = {
+      annee: values.annee,
+      mesure_id: mesure.id,
+      niveau_ressource: values.niveau_ressource,
+      prestations_sociales: values.prestations_sociales.map((v) => ({
+        prestations_sociales: v,
+      })),
+    };
+    insertMesureRessource({
+      awaitRefetchQueries: true,
+      refetchQueries: [
+        {
+          query: MESURES_QUERY,
+          variables: {
+            antenne: null,
+            limit: 20,
+            natureMesure: null,
+            offset: 0,
+            searchText: null,
+            status: MESURE_PROTECTION_STATUS.en_cours,
+          },
+        },
+        {
+          query: MESURE_CONTEXT_QUERY,
+          variables: {
+            id: mesure.id,
+          },
+        },
+      ],
+      variables,
+    });
+  };
+  const handleUpdate = async (values) => {
+    const variables = {
+      annee: values.annee,
+      id: mesureRessource.id,
+      niveau_ressource: values.niveau_ressource,
+      prestations_sociales: values.prestations_sociales.map((v) => v),
+      prestations_sociales_insert_input: values.prestations_sociales.map(
+        (prestations_sociales) => ({
+          mesure_ressources_id: mesureRessource.id,
+          prestations_sociales,
+        })
+      ),
+    };
+    updateMesureRessource({
+      awaitRefetchQueries: true,
+      refetchQueries: [
+        {
+          query: MESURES_QUERY,
+          variables: {
+            antenne: null,
+            limit: 20,
+            natureMesure: null,
+            offset: 0,
+            searchText: null,
+            status: MESURE_PROTECTION_STATUS.en_cours,
+          },
+        },
+        {
+          query: MESURE_CONTEXT_QUERY,
+          variables: {
+            id: mesure.id,
+          },
+        },
+      ],
+      variables,
+    });
+  };
+
+  const handleSubmit = async (values, { setSubmitting }) => {
+    if (mesureRessource) {
+      handleUpdate(values);
     } else {
-      const variables = {
-        annee: values.annee,
-        id: mesureRessource?.id,
-        mesure_id: mesure.id,
-        niveau_ressource: values.niveau_ressource,
-        prestations_sociales: values.prestations_sociales.map((v) => ({
-          prestations_sociales: v,
-        })),
-      };
-
-      console.log({ variables });
-
-      upsertMesureRessource({
-        awaitRefetchQueries: true,
-        refetchQueries: [
-          {
-            query: MESURES_QUERY,
-            variables: {
-              antenne: null,
-              limit: 20,
-              natureMesure: null,
-              offset: 0,
-              searchText: null,
-              status: MESURE_PROTECTION_STATUS.en_cours,
-            },
-          },
-          {
-            query: MESURE_CONTEXT_QUERY,
-            variables: {
-              id: mesure.id,
-            },
-          },
-        ],
-        variables,
-      });
+      handleInsert(values);
     }
 
     setSubmitting(false);
@@ -99,7 +137,6 @@ export const MesureRessourceCreateOrEdit = ({
       ],
       variables: {
         id: mesureRessource.id,
-        mesure_id: mesure.id,
       },
     });
   };
@@ -115,7 +152,6 @@ export const MesureRessourceCreateOrEdit = ({
         handleDelete={handleDelete}
         handleCancel={handleCancel}
         mesureRessourceToEdit={mesureRessource}
-        isDeletable={mesure?.mesureRessources?.length > 1}
       />
     </Box>
   );

@@ -31,19 +31,49 @@ const MesureRessourceViewList = ({ mesure, ...props }) => {
             <Heading3>{`Ressources`}</Heading3>
             <Flex flexDirection="column">
               {mesureRessources.map((ressource) => (
-                <MesureRessourceView
-                  onClick={() => {
-                    if (isSelectedMesureRessource(ressource)) {
-                      setSelectedMesureRessource(null);
-                    } else {
-                      setSelectedMesureRessource(ressource);
-                    }
-                    setCreationMode(false);
-                  }}
-                  key={ressource.id}
-                  mt={1}
-                  ressource={ressource}
-                />
+                <Box key={ressource.id}>
+                  <MesureRessourceView
+                    onClick={() => {
+                      if (isSelectedMesureRessource(ressource)) {
+                        setSelectedMesureRessource(null);
+                      } else {
+                        setSelectedMesureRessource(ressource);
+                      }
+                      setCreationMode(false);
+                    }}
+                    key={ressource.id}
+                    mt={1}
+                    p={1}
+                    sx={{
+                      ":hover": {
+                        borderLeft: "solid 3px gray",
+                      },
+                      bg: isSelectedMesureRessource(ressource)
+                        ? "cardSecondary"
+                        : "",
+                      cursor: "pointer",
+                    }}
+                    ressource={ressource}
+                  />
+
+                  {isSelectedMesureRessource(ressource) && (
+                    <Box mx={5}>
+                      <MesureRessourceCreateOrEdit
+                        bg="cardSecondary"
+                        mesure={mesure}
+                        mesureRessource={ressource}
+                        onSuccess={() => {
+                          setSelectedMesureRessource(null);
+                          setCreationMode(false);
+                        }}
+                        onCancel={() => {
+                          setSelectedMesureRessource(null);
+                          setCreationMode(false);
+                        }}
+                      />
+                    </Box>
+                  )}
+                </Box>
               ))}
             </Flex>
           </Box>

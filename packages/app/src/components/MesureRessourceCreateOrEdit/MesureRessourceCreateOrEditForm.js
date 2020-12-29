@@ -14,11 +14,9 @@ import { findOptions } from "~/util/option/OptionUtil";
 
 const initialValues = (mesureRessource) => {
   return {
-    annee: mesureRessource ? mesureRessource.annee : "",
-    niveau_ressource: mesureRessource ? mesureRessource.niveau_ressource : "",
-    prestations_sociales: mesureRessource
-      ? mesureRessource.prestations_sociales
-      : "",
+    annee: mesureRessource?.annee || "",
+    niveau_ressource: mesureRessource?.niveauRessource || "",
+    prestations_sociales: mesureRessource?.prestationsSociales || [],
   };
 };
 
@@ -28,7 +26,6 @@ export const MesureRessourceCreateOrEditForm = (props) => {
     handleDelete,
     handleCancel,
     mesureRessourceToEdit,
-    isDeletable,
   } = props;
 
   const formik = useFormik({
@@ -100,9 +97,9 @@ export const MesureRessourceCreateOrEditForm = (props) => {
       </Flex>
 
       <Flex justifyContent="space-between" py={2}>
-        {isDeletable ? (
+        {mesureRessourceToEdit ? (
           <Box>
-            <Button bg="error" onClick={handleDelete}>
+            <Button bg="error" type="button" onClick={handleDelete}>
               Supprimer
             </Button>
           </Box>
