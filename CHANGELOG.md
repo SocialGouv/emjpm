@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.82.0](https://github.com/SocialGouv/emjpm/compare/v25.81.3...v25.82.0) (2020-12-29)
+
+
+### Bug Fixes
+
+* **login-on-ff52:** fetch credentials include ([#2417](https://github.com/SocialGouv/emjpm/issues/2417)) ([066938c](https://github.com/SocialGouv/emjpm/commit/066938ce09fcf0253e266946a3a8d8a53f8a3c3d))
+
+
+### Features
+
+* **mesure-ressources:** manage ressources for mesures ([#2416](https://github.com/SocialGouv/emjpm/issues/2416)) ([943d9ba](https://github.com/SocialGouv/emjpm/commit/943d9ba000fcd4381cc26eaa13354c1ba2f77f18))
+
+
+
+
+
 ## [25.81.3](https://github.com/SocialGouv/emjpm/compare/v25.81.2...v25.81.3) (2020-12-28)
 
 
