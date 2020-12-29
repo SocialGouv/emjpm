@@ -65,6 +65,7 @@ const ResetPassword = (props) => {
         new_password_confirmation: values.newPasswordConfirmation,
         token: token,
       }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
