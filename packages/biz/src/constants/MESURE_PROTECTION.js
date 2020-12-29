@@ -35,6 +35,16 @@ const MESURE_PROTECTION = {
     subroge_tuteur: "subrogé tuteur",
     tutelle: "tutelle",
   }),
+  PRESTATION_SOCIALES: buildKeys({
+    AAH: "AAH",
+    ALS: "ALS",
+    APA: "APA",
+    APL: "APL",
+    ASI: "ASI",
+    ASPA: "ASPA",
+    PCH: "PCH",
+    RSA: "RSA",
+  }),
   RESULTAT_REVISION: buildKeys({
     aggravation: "aggravation",
     allegement: "allègement",
