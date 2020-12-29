@@ -1,17 +1,15 @@
 import { isEnCours } from "@emjpm/biz";
 import React, { useContext } from "react";
-import { Box, Flex } from "rebass";
 
 import { MesureContext } from "~/components/MesureContext";
-import { Card, Heading3 } from "~/ui";
+import { Card } from "~/ui";
 
 import { MesureDetailView } from "./MesureDetailView";
 import { MesureEtatViewList } from "./MesureEtatViewList";
-import { MesureRessourceView } from "./MesureRessourceView";
+import { MesureRessourceViewList } from "./MesureRessourceViewList";
 
 export const MesureView = (props) => {
   const mesure = useContext(MesureContext);
-  const { mesureRessources } = mesure;
 
   return (
     <Card p={4} {...props}>
@@ -21,20 +19,7 @@ export const MesureView = (props) => {
         <MesureEtatViewList mesure={mesure} px="3" pt="1" />
       )}
 
-      {mesureRessources.length > 0 && (
-        <Box px="3" pt="1">
-          <Heading3>{`Ressources`}</Heading3>
-          <Flex flexDirection="column">
-            {mesureRessources.map((ressource) => (
-              <MesureRessourceView
-                key={ressource.id}
-                mt={1}
-                ressource={ressource}
-              />
-            ))}
-          </Flex>
-        </Box>
-      )}
+      <MesureRessourceViewList mesure={mesure} px="3" pt="1" />
     </Card>
   );
 };

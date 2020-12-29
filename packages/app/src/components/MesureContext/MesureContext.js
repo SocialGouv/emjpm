@@ -11,6 +11,7 @@ export const Provider = (props) => {
 
   const { data } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
+    ssr: false,
     variables: {
       id: mesureId,
     },
@@ -113,7 +114,9 @@ function formatMesure(mesure) {
       annee: ressource.annee,
       id: ressource.id,
       niveauRessource: ressource.niveau_ressource,
-      prestationsSociales: ressource.prestations_sociales,
+      prestationsSociales: ressource.mesure_ressources_prestations_sociales.map(
+        ({ prestations_sociales }) => prestations_sociales
+      ),
     })),
     natureMesure: nature_mesure ? nature_mesure : "",
     numeroDossier: numero_dossier ? numero_dossier : "",

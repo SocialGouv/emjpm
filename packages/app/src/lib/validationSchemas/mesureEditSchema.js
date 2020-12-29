@@ -1,11 +1,13 @@
 import yup from "./yup";
 
+const currentYear = new Date().getFullYear();
+
 const mesureEditSchema = yup.object().shape({
   annee_naissance: yup
     .number()
     .required()
     .min(1900, "l'année choisi doit être au minimum 1900")
-    .max(2019, "l'année choisi doit être au maximum 2019"),
+    .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
   antenne: yup.string().nullable(),
   civilite: yup.string().required(),
   code_postal: yup.string().when("pays", {
