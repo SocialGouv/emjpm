@@ -10,6 +10,7 @@ const postSignup = (body) => {
 
   const fetchParams = {
     body: JSON.stringify(body),
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },

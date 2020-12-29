@@ -46,6 +46,7 @@ const EditPassword = () => {
         password: values.password,
         username: username,
       }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
