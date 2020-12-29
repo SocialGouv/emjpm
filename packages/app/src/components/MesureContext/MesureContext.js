@@ -11,6 +11,7 @@ export const Provider = (props) => {
 
   const { data } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
+    ssr: false,
     variables: {
       id: mesureId,
     },

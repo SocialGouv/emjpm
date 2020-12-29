@@ -64,7 +64,9 @@ export const MESURE_CONTEXT_QUERY = gql`
         id
         annee
         niveau_ressource
-        prestations_sociales
+        prestations_sociales {
+          prestations_sociales
+        }
       }
     }
   }
