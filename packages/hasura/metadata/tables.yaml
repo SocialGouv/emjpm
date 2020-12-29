@@ -4613,6 +4613,14 @@
   - name: mesure
     using:
       foreign_key_constraint_on: mesure_id
+  array_relationships:
+  - name: prestations_sociales
+    using:
+      foreign_key_constraint_on:
+        column: mesure_ressources_id
+        table:
+          schema: public
+          name: mesure_ressources_prestations_sociales
   insert_permissions:
   - role: individuel
     permission:
@@ -4755,6 +4763,162 @@
 - table:
     schema: public
     name: mesure_ressources_prestations_sociales
+  object_relationships:
+  - name: mesure_ressource
+    using:
+      foreign_key_constraint_on: mesure_ressources_id
+  - name: prestations_sociale
+    using:
+      foreign_key_constraint_on: prestations_sociales
+  insert_permissions:
+  - role: individuel
+    permission:
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      backend_only: false
+  - role: prepose
+    permission:
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      backend_only: false
+  - role: service
+    permission:
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      backend_only: false
+  select_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: service
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: ti
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter: {}
+  update_permissions:
+  - role: individuel
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: prepose
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: service
+    permission:
+      columns:
+      - id
+      - mesure_ressources_id
+      - prestations_sociales
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+      check:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  delete_permissions:
+  - role: individuel
+    permission:
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: prepose
+    permission:
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
+  - role: service
+    permission:
+      filter:
+        mesure_ressource:
+          mesure:
+            mandataire_id:
+              _eq: X-Hasura-User-Id
 - table:
     schema: public
     name: mesure_status
