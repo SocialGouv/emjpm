@@ -17,7 +17,15 @@ const MesureRessourceView = ({ ressource, ...props }) => {
 
       <Box>
         <Text sx={subtitle}>Prestations soc.</Text>
-        <Text sx={content}>{ressource.prestationsSociales}</Text>
+        <Box>
+          {ressource.prestationsSociales.map((prestationsSociale) => {
+            return (
+              <Text key={prestationsSociale} sx={content}>
+                {prestationsSociale}
+              </Text>
+            );
+          })}
+        </Box>
       </Box>
     </Flex>
   );
