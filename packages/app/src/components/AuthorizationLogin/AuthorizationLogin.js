@@ -46,6 +46,7 @@ const AuthorizationLogin = (props) => {
         password: values.password,
         username: values.username,
       }),
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
