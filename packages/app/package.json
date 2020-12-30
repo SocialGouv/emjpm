@@ -98,6 +98,7 @@
     "@emotion/babel-plugin": "^11.1.2",
     "@rollup/plugin-commonjs": "^16.0.0",
     "@rollup/plugin-node-resolve": "^10.0.0",
+    "@sentry/webpack-plugin": "^1.14.0",
     "@socialgouv/eslint-config-react": "^1.46.0",
     "@testing-library/jest-dom": "^5.11.5",
     "@types/node": "^14.14.6",

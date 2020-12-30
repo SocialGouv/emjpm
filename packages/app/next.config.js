@@ -1,6 +1,7 @@
 const flow = require("lodash.flow");
 const webpack = require("webpack");
 const withImages = require("next-images");
+const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 
 require("dotenv").config({ path: "../../.env" });
 
@@ -40,6 +41,15 @@ module.exports = flow(
     }
 
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+    config.plugins.push(
+      new SentryWebpackPlugin({
+        authToken: process.env.SENTRY_AUTH_TOKEN,
+        include: "src",
+        org: "incubateur",
+        project: "emjpm",
+        url: "https://sentry.fabrique.social.gouv.fr",
+      })
+    );
 
     return config;
   },

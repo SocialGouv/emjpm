@@ -43,6 +43,8 @@ deployment:
         secretKeyRef:
           name: emjpm-secret
           key: SENTRY_PUBLIC_DSN
+    - name: SENTRY_AUTH_TOKEN
+      value: 3efd6ce06b2b496796e94894ea2428892c75bd3551ca4d8b8d078a35ff907f44
   nodeSelector: {}
   tolerations: []
   affinity: {}
