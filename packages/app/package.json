@@ -30,7 +30,6 @@
     "@emotion/styled-base": "^11.0.0",
     "@mdx-js/loader": "^1.6.19",
     "@mdx-js/react": "^1.6.19",
-    "@next/bundle-analyzer": "^10.0.0",
     "@next/mdx": "^10.0.0",
     "@rebass/forms": "^4.0.6",
     "@sentry/browser": "^5.27.2",

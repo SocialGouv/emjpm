@@ -13,7 +13,12 @@ const withSourceMaps = require("@zeit/next-source-maps")({});
 
 const withTranspileModule = require("next-transpile-modules")(["@emjpm/biz"]);
 
+const withMDX = require("@next/mdx")({
+  extension: /\.mdx?$/,
+});
+
 module.exports = flow(
+  withMDX,
   withTranspileModule,
   withImages,
   withBundleAnalyzer,
