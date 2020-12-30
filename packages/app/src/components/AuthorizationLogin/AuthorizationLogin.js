@@ -29,10 +29,8 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
     return json;
   }
   const params = location.search;
-  login({ token: json.token });
+  login(json);
   Router.push(`/application/authorization${params}`);
-  matopush(["trackEvent", "login", "success"]);
-  // trackUser();
   return json;
 };
 
