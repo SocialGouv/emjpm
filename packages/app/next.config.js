@@ -1,6 +1,7 @@
 const flow = require("lodash.flow");
 const webpack = require("webpack");
 const withImages = require("next-images");
+const SentryWebpackPlugin = require("@sentry/webpack-plugin");
 
 require("dotenv").config({ path: "../../.env" });
 
@@ -8,19 +9,15 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withSourceMaps = require("@zeit/next-source-maps")({
-  devtool: "hidden-source-map",
-});
+const withSourceMaps = require("@zeit/next-source-maps")({});
 
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
-});
+const withTranspileModule = require("next-transpile-modules")(["@emjpm/biz"]);
 
 module.exports = flow(
-  withMDX,
+  withTranspileModule,
   withImages,
-  withSourceMaps,
-  withBundleAnalyzer
+  withBundleAnalyzer,
+  withSourceMaps
 )({
   publicRuntimeConfig: {
     API_URL: process.env.API_URL || "http://127.0.0.1:4000",
@@ -40,6 +37,18 @@ module.exports = flow(
     }
 
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
+
+    if (process.env.SENTRY_AUTH_TOKEN) {
+      config.plugins.push(
+        new SentryWebpackPlugin({
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          include: "src",
+          org: "incubateur",
+          project: "emjpm",
+          url: "https://sentry.fabrique.social.gouv.fr",
+        })
+      );
+    }
 
     return config;
   },
