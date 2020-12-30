@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.82.1](https://github.com/SocialGouv/emjpm/compare/v25.82.0...v25.82.1) (2020-12-30)
+
+
+### Bug Fixes
+
+* **build:** babel config ([b47619d](https://github.com/SocialGouv/emjpm/commit/b47619d5c0e8475582379df40f81248806f8d6cf))
+* **build:** package and next-config ([#2420](https://github.com/SocialGouv/emjpm/issues/2420)) ([5369e7a](https://github.com/SocialGouv/emjpm/commit/5369e7a66f749b6cdd7d6620c42e7039d267bf68))
+* **ff52:** fix js transpilation ([#2419](https://github.com/SocialGouv/emjpm/issues/2419)) ([9140306](https://github.com/SocialGouv/emjpm/commit/91403061f1d3b36f16ad7f15ebef691f845038ff))
+
+
+
+
+
 # [25.82.0](https://github.com/SocialGouv/emjpm/compare/v25.81.3...v25.82.0) (2020-12-29)
 
 
