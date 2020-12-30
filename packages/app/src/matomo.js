@@ -1,21 +1,4 @@
-import cookie from "js-cookie";
 import Router from "next/router";
-
-function getJWTPayloadFormLocalStorageIdToken() {
-  const token = cookie.get("token");
-  if (!token) return { type: null, username: null };
-  const [, payloadPart = ""] = token.split(".");
-  // prevent some token decoding exceptions
-  // "Failed to execute 'atob' on 'Window': The string to be decoded is not correctly encoded."
-  try {
-    return JSON.parse(atob(payloadPart) || "{}");
-  } catch (error) {
-    /* eslint-disable no-console */
-    console.log("Error decoding JWT", error);
-    /* eslint-enable no-console */
-    return {};
-  }
-}
 
 export function initMatomo() {
   window._paq = window._paq || [];
@@ -60,12 +43,6 @@ export function initMatomo() {
     }, 0);
   });
 }
-
-export const trackUser = () => {
-  const { username, type } = getJWTPayloadFormLocalStorageIdToken();
-  username && matopush(["setUserId", username]);
-  type && matopush(["setCustomVariable", 1, "type", type, "visit"]);
-};
 
 export function matopush(args) {
   window._paq.push(args);

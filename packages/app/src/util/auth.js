@@ -1,26 +1,44 @@
-import cookie from "js-cookie";
 import jwtDecode from "jwt-decode";
-import nextCookie from "next-cookies";
 import Router from "next/router";
 import React, { Component } from "react";
 
-const clearToken = () => {
-  cookie.remove("token");
+import { matopush } from "~/matomo";
+
+// see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+
+export const authCredentials = {
+  token: null,
+  user_id: null,
+  user_type: null,
+};
+
+const clearSession = () => {
+  authCredentials.token = null;
+  authCredentials.user_id = null;
+  authCredentials.user_type = null;
+
   // to support logging out from all windows
-  localStorage.setItem("logged", "0");
+  localStorage.setItem("logout", Date.now());
 
   // Clear user preferences & filters
-  window.localStorage.removeItem("filters");
+  localStorage.removeItem("filters");
 };
 
 export const logout = () => {
-  clearToken();
+  clearSession();
   Router.push("/login", "/login");
 };
 
-export const login = async ({ token }) => {
-  cookie.set("token", token, { expires: 1 });
-  localStorage.setItem("logged", "1");
+export const login = async ({ token, id, type }) => {
+  authCredentials.token = token;
+  authCredentials.user_id = id;
+  authCredentials.user_type = type;
+
+  matopush(["trackEvent", "login", "success"]);
+  matopush(["setUserId", id]);
+  if (type) {
+    matopush(["setCustomVariable", 1, "type", type, "visit"]);
+  }
 };
 
 // Gets the display name of a JSX component for dev tools
@@ -56,7 +74,7 @@ export const withAuthSync = (WrappedComponent) =>
     }
 
     syncLogout(event) {
-      if (event.key === "logged" && event.newValue === "0") {
+      if (event.key === "logout") {
         console.log("logged out from storage!");
         Router.push("/login");
       }
@@ -77,7 +95,7 @@ const routes = {
 };
 
 export const auth = (ctx) => {
-  const { token } = nextCookie(ctx);
+  const { token } = authCredentials;
   const { pathname } = ctx;
   const isPublic =
     pathname === "/login" ||
@@ -93,12 +111,12 @@ export const auth = (ctx) => {
   const isOauth = pathname === "/application/authorization";
 
   if (token) {
-    const { url, role } = jwtDecode(token);
+    const { url, role } = jwtDecode(authCredentials.token);
     const isTokenPath = pathname.indexOf(routes[role]) !== -1;
     if (isOauth) {
       return token;
     } else if (!url) {
-      clearToken();
+      clearSession();
       if (ctx.req) {
         ctx.res.writeHead(302, { Location: "/login" });
         ctx.res.end();
