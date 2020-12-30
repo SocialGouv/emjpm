@@ -9,22 +9,15 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
   enabled: process.env.ANALYZE === "true",
 });
 
-const withSourceMaps = require("@zeit/next-source-maps")({
-  // devtool: "hidden-source-map",
-});
+const withSourceMaps = require("@zeit/next-source-maps")({});
 
-const withTranspileModule = require("next-transpile-modules")(["fuse.js"]);
-
-const withMDX = require("@next/mdx")({
-  extension: /\.mdx?$/,
-});
+const withTranspileModule = require("next-transpile-modules")(["@emjpm/biz"]);
 
 module.exports = flow(
   withTranspileModule,
-  withMDX,
   withImages,
-  withSourceMaps,
-  withBundleAnalyzer
+  withBundleAnalyzer,
+  withSourceMaps
 )({
   publicRuntimeConfig: {
     API_URL: process.env.API_URL || "http://127.0.0.1:4000",
