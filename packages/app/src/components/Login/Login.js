@@ -36,9 +36,8 @@ const checkStatus = async (
   }
 
   apolloClient.clearStore();
-  login({ token: json.token });
+  login(json);
   Router.push(json.url);
-  matopush(["trackEvent", "login", "success"]);
 
   return json;
 };

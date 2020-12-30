@@ -2,11 +2,10 @@ import { ApolloClient, InMemoryCache } from "apollo-boost";
 import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
-import cookie from "js-cookie";
-import nextCookies from "next-cookies";
 import getConfig from "next/config";
 
 import { isBrowser } from "~/util";
+import { authCredentials } from "~/util/auth";
 
 let apolloClient = null;
 
@@ -15,14 +14,8 @@ if (!isBrowser()) {
   global.fetch = fetch;
 }
 
-const getToken = (context) => {
-  let token = null;
-  if (typeof document === "undefined") {
-    const cookies = nextCookies(context.ctx);
-    token = cookies.token;
-  } else {
-    token = cookie.get("token");
-  }
+const getToken = () => {
+  const { token } = authCredentials;
   if (!token) {
     return null;
   }
@@ -33,9 +26,9 @@ const {
   publicRuntimeConfig: { GRAPHQL_SERVER_URI, GRAPHQL_SERVER_URI_DOCKER },
 } = getConfig();
 
-function create(initialState, context) {
+function create(initialState) {
   const authLink = setContext((_, { headers }) => {
-    const token = getToken(context);
+    const token = getToken();
     if (token) {
       return {
         headers: {
