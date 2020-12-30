@@ -10,14 +10,17 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 });
 
 const withSourceMaps = require("@zeit/next-source-maps")({
-  devtool: "hidden-source-map",
+  // devtool: "hidden-source-map",
 });
+
+const withTranspileModule = require("next-transpile-modules")(["fuse.js"]);
 
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,
 });
 
 module.exports = flow(
+  withTranspileModule,
   withMDX,
   withImages,
   withSourceMaps,
@@ -41,15 +44,18 @@ module.exports = flow(
     }
 
     config.plugins.push(new webpack.EnvironmentPlugin(process.env));
-    config.plugins.push(
-      new SentryWebpackPlugin({
-        authToken: process.env.SENTRY_AUTH_TOKEN,
-        include: "src",
-        org: "incubateur",
-        project: "emjpm",
-        url: "https://sentry.fabrique.social.gouv.fr",
-      })
-    );
+
+    if (process.env.SENTRY_AUTH_TOKEN) {
+      config.plugins.push(
+        new SentryWebpackPlugin({
+          authToken: process.env.SENTRY_AUTH_TOKEN,
+          include: "src",
+          org: "incubateur",
+          project: "emjpm",
+          url: "https://sentry.fabrique.social.gouv.fr",
+        })
+      );
+    }
 
     return config;
   },

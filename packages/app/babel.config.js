@@ -38,10 +38,11 @@ module.exports = {
       {
         "preset-env": {
           targets: {
-            browsers: ["last 5 Chrome version", "ie >= 11"],
+            browsers: ["last 5 Chrome version", "ie >= 11", "firefox >= 52"],
           },
         },
       },
     ],
   ],
+  sourceMaps: "both",
 };
