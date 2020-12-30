@@ -14,8 +14,6 @@ module.exports = {
       "babel-plugin-styled-components",
       { displayName: true, preprocess: false, ssr: true },
     ],
-    "@babel/plugin-proposal-object-rest-spread",
-    "@emotion",
     ["@babel/plugin-transform-runtime"],
   ],
   presets: [
