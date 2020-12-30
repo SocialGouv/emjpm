@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.82.2](https://github.com/SocialGouv/emjpm/compare/v25.82.1...v25.82.2) (2020-12-30)
+
+
+### Bug Fixes
+
+* **build:** ff52 wip ([dc1b6dc](https://github.com/SocialGouv/emjpm/commit/dc1b6dcda6bb15dd82c8ffdebb75de0786fdb1a6))
+* **build:** ff52 wip ([03de569](https://github.com/SocialGouv/emjpm/commit/03de5699ba96bc5427e4a3828a6ab3a69d6ebe37))
+
+
+
+
+
 ## [25.82.1](https://github.com/SocialGouv/emjpm/compare/v25.82.0...v25.82.1) (2020-12-30)
 
 
