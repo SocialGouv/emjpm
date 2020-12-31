@@ -43,7 +43,7 @@ services:
       - 5000:8080
     depends_on:
       - db
-      - emjpm
+      - api
     restart: always
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
@@ -54,18 +54,36 @@ services:
       HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
-  emjpm:
-    image: node:15-alpine
+  app:
+    build:
+      context: .
+      dockerfile: ./packages/app/Dockerfile.dev
+      shm_size: '2gb'
+    shm_size: '2gb'
     user: "node"
-    working_dir: /home/node/app
     volumes:
       - ./.dev-secrets:/secrets:ro
-      - ./:/home/node/app
+      - ./:/app
     ports:
       - 3000:3000
-      - 4000:4000
     restart: always
     command: "yarn dev"
+    environment:
+      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
+  api:
+    build:
+      context: .
+      dockerfile: ./packages/api/Dockerfile.dev
+      shm_size: '2gb'
+    shm_size: '2gb'
+    user: "node"
+    volumes:
+      - ./.dev-secrets:/secrets:ro
+      - ./:/app
+    ports:
+      - 4000:4000
+    restart: always
     environment:
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
