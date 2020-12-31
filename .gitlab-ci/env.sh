@@ -58,7 +58,7 @@ else
 fi
 
 export API_HOST="api-${DOMAIN}";
-export API_SRV_HOST="api";
+export API_SRV_HOST="api:4000";
 export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura-${DOMAIN}";
 export HASURA_SRV_HOST="hasura";
