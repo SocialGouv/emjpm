@@ -72,8 +72,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
-      shm_size: '2gb'
-    shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:

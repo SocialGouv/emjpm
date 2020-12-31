@@ -310,10 +310,10 @@ Register api image:
   extends:
     - .base_register_stage
     - .register_stage
-  before_script:
-    - cp yarn.lock packages/api/yarn.lock
   variables:
-    CONTEXT: packages/api
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      -f ./packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
 ################### Register APP ##################
