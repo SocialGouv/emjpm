@@ -1,0 +1,17 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$GH_TOKEN" ] && [ -f .gh-token ]; then
+  export GH_TOKEN=`cat .gh-token`
+fi
+if [ -z "$GH_TOKEN" ]; then
+  echo "missing \$GH_TOKEN env variable"
+  echo "go to https://github.com/settings/tokens to generate one with 'repo' scope"
+  echo "then store it in .gh-token"
+  exit 1;
+fi
+
+lerna run test
+
+lerna version --force-publish --yes
