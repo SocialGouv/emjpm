@@ -1,0 +1,8 @@
+FROM node:15-alpine
+
+WORKDIR /app
+
+ENV NODE_ENV=development
+ENV NEXT_TELEMETRY_DISABLED=1
+
+CMD [ "yarn", "workspace", "@emjpm/app", "dev" ]
