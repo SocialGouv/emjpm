@@ -31,7 +31,7 @@ spec:
           - path: {{ .path }}
             backend:
               serviceName: {{ $fullName }}
-              servicePort: {{ .servicePort | default 80 }}
+              servicePort: {{ .servicePort | default 3000 }}
         {{- end }}
   {{- end }}
 {{- end }}

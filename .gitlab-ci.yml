@@ -410,7 +410,7 @@ Init Managed Database:
   dependencies: []
   variables:
     CONTEXT: api
-    PORT: 80
+    PORT: 4000
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -447,7 +447,7 @@ Deploy api (prod):
     - .deploy_stage
   variables:
     CONTEXT: app
-    PORT: 80
+    PORT: 3000
   before_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
