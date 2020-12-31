@@ -57,10 +57,11 @@ services:
   app:
     build:
       context: .
-      dockerfile: ./packages/app/Dockerfile.dev
+      dockerfile: ./packages/app/Dockerfile
+      shm_size: '2gb'
+    shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
-      - ./:/app
     ports:
       - 3000:3000
     restart: always
@@ -70,16 +71,18 @@ services:
   api:
     build:
       context: .
-      dockerfile: ./packages/api/Dockerfile.dev
+      dockerfile: ./packages/api/Dockerfile
+      shm_size: '2gb'
+    shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
-      - ./:/app
     ports:
       - 4000:4000
     restart: always
     environment:
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
+      DATABASE_URL: $DATABASE_URL
 
 volumes:
   emjpm-pgdata:

@@ -11,7 +11,11 @@ const withBundleAnalyzer = require("@next/bundle-analyzer")({
 
 const withSourceMaps = require("@zeit/next-source-maps")({});
 
-const withTranspileModule = require("next-transpile-modules")(["@emjpm/biz"]);
+const withTranspileModule = require("next-transpile-modules")([
+  "fuse.js",
+  "p-debounce",
+  "@emjpm/biz",
+]);
 
 const withMDX = require("@next/mdx")({
   extension: /\.mdx?$/,

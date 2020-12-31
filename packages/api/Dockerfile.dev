@@ -8,4 +8,6 @@ RUN apk add --update --no-cache p7zip
 
 ENV NODE_ENV=development
 
+USER node
+
 CMD [ "yarn", "workspace", "@emjpm/api", "dev" ]
