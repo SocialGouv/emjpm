@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 set -e
 
@@ -15,3 +15,18 @@ fi
 lerna run test
 
 lerna version --force-publish --yes
+
+
+url="https://api-emjpm.fabrique.social.gouv.fr"
+interval_in_seconds=2
+result=$(cat lerna.json | jq -r ".version");
+path=".version"
+printf "waiting '$url' for '$result'\n"
+while true; do
+	x=$(curl $url -s | jq -r $path);
+	printf "\r$(date +%H:%M:%S): $x";
+	if [[ "$x" == "$result" ]]; then
+		break;
+	fi;
+	sleep $interval_in_seconds;
+done
