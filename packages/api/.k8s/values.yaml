@@ -7,7 +7,7 @@ deployment:
   annotations: {}
   replicaCount: 1
   imagePullSecrets: []
-  port: 80
+  port: 4000
   livenessProbe:
     initialDelaySeconds: 5
     path: /
@@ -51,7 +51,7 @@ deployment:
       value: >-
         psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}
     - name: PORT
-      value: '80'
+      value: '4000'
     - name: NODE_ENV
       value: production
     - name: SMTP_HOST
