@@ -45,10 +45,9 @@ function create(initialState) {
     };
   });
 
-  const adjustedUri =
-    isBrowser() && process.env.NODE_ENV === `development`
-      ? GRAPHQL_SERVER_URI
-      : GRAPHQL_SERVER_URI_DOCKER;
+  const adjustedUri = isBrowser()
+    ? GRAPHQL_SERVER_URI
+    : GRAPHQL_SERVER_URI_DOCKER;
 
   const httpLink = createHttpLink({
     credentials: "same-origin",
