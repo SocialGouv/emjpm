@@ -8,7 +8,8 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "lerna run start --parallel",
     "test": "lerna run test --parallel",
-    "postinstall:run": "lerna run postinstall"
+    "postinstall:run": "lerna run postinstall",
+    "release": "scripts/gitops/release"
   },
   "license": "Apache-2.0",
   "devDependencies": {

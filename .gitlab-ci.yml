@@ -675,13 +675,11 @@ Trigger production:
   extends: .base_stage
   stage: Notify Finished Deployment
   image: curlimages/curl:7.73.0
-  when: manual
   variables:
     GIT_STRATEGY: none
   only:
     refs:
       - tags
-      - master # temporary implementation, TODO: find a way to deploy without to run 2 full pipeline
   script:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
@@ -700,7 +698,7 @@ Trigger release:
     GIT_STRATEGY: none
   only:
     refs:
-      - branches
+      - master
   script:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
