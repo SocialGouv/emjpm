@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.82.3](https://github.com/SocialGouv/emjpm/compare/v25.82.2...v25.82.3) (2020-12-31)
+
+
+### Bug Fixes
+
+* **ci:** api context ([40f158f](https://github.com/SocialGouv/emjpm/commit/40f158f3b3930282cc1d4d13ad0923865d757a88))
+* **ci:** api port from internal ([de404c1](https://github.com/SocialGouv/emjpm/commit/de404c177b3aef5350879d644480342fe5176307))
+* **ci:** local docker-compose ([57427d3](https://github.com/SocialGouv/emjpm/commit/57427d39251d4646f73d2a6dcddec38d9cc45deb))
+* **ci:** ports ([60c67ab](https://github.com/SocialGouv/emjpm/commit/60c67abe2ff55aff81b349fda633b09578225933))
+
+
+
+
+
 ## [25.82.2](https://github.com/SocialGouv/emjpm/compare/v25.82.1...v25.82.2) (2020-12-30)
 
 
