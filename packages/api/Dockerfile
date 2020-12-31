@@ -1,15 +1,43 @@
-FROM node:15-alpine
+FROM node:15-alpine as node
+
+# BUILDER
+FROM node as builder
+
+ENV NODE_ENV=production
 
 WORKDIR /app
+
+## INSTALL
+
+COPY package.json lerna.json yarn.lock /app/
+COPY packages/api/package.json /app/packages/api/package.json
+COPY packages/biz/package.json /app/packages/biz/package.json
+
+RUN mkdir /.yarn-cache
+RUN yarn config set cache-folder /.yarn-cache
+RUN yarn --frozen-lockfile --ignore-scripts --production=false
+
+## BUILD
+
+COPY packages/api/ /app/packages/api/
+COPY packages/biz/ /app/packages/biz/
+
+RUN yarn workspace @emjpm/api run postinstall
+RUN yarn workspace @emjpm/api build
+
+# SERVER
+FROM node as server
+
+ENV NODE_ENV=production
 
 # p7zip is used to unzip encrypted file from OCMI
 # p7zip is required by https://github.com/quentinrossetti/node-7z#installation
 RUN apk add --update --no-cache p7zip
 
-ENV NODE_ENV=production
+WORKDIR /app
 
-COPY package.json /app/
+COPY --from=builder /app/packages/api/dist/ /app/dist/
 
-COPY ./dist /app/dist
+USER node
 
-ENTRYPOINT [ "yarn", "start" ]
+CMD ["node","/app/dist/index.js"]

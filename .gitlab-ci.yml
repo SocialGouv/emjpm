@@ -22,9 +22,6 @@ variables:
 #
 
 stages:
-  - "Prepare"
-  - "Build internal dependencies"
-  - "Build Image"
   - "Registration"
   - "Deploy"
   - "Notify Finished Deployment"
@@ -276,79 +273,6 @@ variables:
   environment:
     name: fabrique-dev2
 
-# PREPARE
-
-Install:
-  extends: .base_stage
-  stage: Prepare
-  image: node:15-alpine
-  cache:
-    key:
-      files:
-        - yarn.lock
-      prefix: ${CI_JOB_NAME}
-    paths:
-      - .cache
-  script:
-    - yarn config set cache-folder $CI_PROJECT_DIR/.cache/yarn
-    - yarn install --frozen-lockfile --prefer-offline
-  artifacts:
-    expire_in: 1 week
-    paths:
-      - node_modules
-
-# BUILD INTERNAL DEPENDENCIES
-
-.build_internal_depencies_stage:
-  extends: .base_stage
-  stage: Build internal dependencies
-  dependencies: []
-
-# BUILD IMAGE
-
-.build_stage:
-  extends: .base_stage
-  stage: Build Image
-  dependencies: []
-
-Build @emjpm/api:
-  extends: .build_stage
-  dependencies:
-    - Install
-  needs:
-    - Install
-  image: node:15-alpine
-  script:
-    - yarn workspace @emjpm/api postinstall
-    - yarn workspace @emjpm/api build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/api/dist
-
-#
-
-Build @emjpm/app:
-  extends: .build_stage
-  variables:
-    INVALID_GIT_FILES_CHANGES: "true"
-  dependencies:
-    - Install
-  needs:
-    - Install
-  image: node:15-alpine
-  cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
-    paths:
-      - packages/app/.next/cache
-  script:
-    - yarn workspace @emjpm/app postinstall
-    - yarn workspace @emjpm/app build
-  artifacts:
-    expire_in: 1 day
-    paths:
-      - packages/app/.next
-
 # REGISTRATION
 
 .register_stage:
@@ -386,11 +310,6 @@ Register api image:
   extends:
     - .base_register_stage
     - .register_stage
-  dependencies:
-    - Build @emjpm/api
-  needs:
-    - Install
-    - Build @emjpm/api
   before_script:
     - cp yarn.lock packages/api/yarn.lock
   variables:
@@ -403,11 +322,6 @@ Register app image:
   extends:
     - .base_register_stage
     - .register_stage
-  dependencies:
-    - Build @emjpm/app
-  needs:
-    - Install
-    - Build @emjpm/app
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
@@ -741,15 +655,6 @@ Release:
     # Use github as origin
     - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
 
-    # HACK(douglasduteil): remove all packages dependencies
-    # To make the installation blazing fast, we remove all packages dependencies
-    # Only the root package.json dependencies will be installed
-    # - find packages -maxdepth 1 -type d | tail -n +2 |
-    #   xargs -I {} sh -c "[[ -f "{}/package.json" ]] || exit 0 ; {
-    #   rm {}/package.json ;
-    #   jq 'del(.dependencies) | del(.devDependencies)' > {}/package.json
-    #   ; } < {}/package.json"
-
     # Use local yarn cache
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     # Should only install workspace dependencies
@@ -776,6 +681,7 @@ Trigger production:
   only:
     refs:
       - tags
+      - master # temporary implementation, TODO: find a way to deploy without to run 2 full pipeline
   script:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"

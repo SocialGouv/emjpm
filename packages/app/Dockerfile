@@ -1,35 +1,46 @@
-FROM node:15-alpine
+FROM node:15-alpine as node
 
-WORKDIR /app
+# BUILDER
+FROM node as builder
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
-COPY ./scripts /app/scripts
-COPY ./packages/biz/package.json /app/packages/biz/
-COPY ./packages/app/package.json /app/packages/app/
-COPY ./package.json ./yarn.lock /app/
+WORKDIR /app
 
-RUN set -ex \
-  # The row monorepo install is more that 1Go of node_modules T-T
-  # `scripts/remove_devdeps.js` will manually remove dev dependencies as
-  # `--production` is not working on workspaces T-T
-  # node_modules ~ 211Mo
-  && node scripts/remove_devdeps.js /app/package.json \
-  # node_modules
-  && node scripts/remove_devdeps.js /app/packages/biz/package.json \
-  # node_modules ~ 178Mo
-  && node scripts/remove_devdeps.js /app/packages/app/package.json \
-  ;
+## INSTALL
+COPY package.json lerna.json yarn.lock /app/
+COPY packages/app/package.json /app/packages/app/package.json
+COPY packages/biz/package.json /app/packages/biz/package.json
 
-RUN yarn --frozen-lockfile --cache-folder /dev/shm/yarn
+RUN mkdir /.yarn-cache
+RUN yarn config set cache-folder /.yarn-cache
+RUN yarn --frozen-lockfile --ignore-scripts --production=false
 
-COPY ./packages/biz /app/packages/biz/
-COPY ./packages/app/public /app/packages/app/public/
-COPY ./packages/app/next.config.js /app/packages/app/next.config.js
-COPY ./packages/app/.next /app/packages/app/.next/
+## BUILD
+COPY packages/app/ /app/packages/app/
+COPY packages/biz/ /app/packages/biz/
 
-RUN mkdir -p /app/node_modules/@emjpm/biz \
-  && ln -s ./packages/biz /app/node_modules/@emjpm/biz
+RUN yarn workspace @emjpm/app run postinstall
+RUN yarn workspace @emjpm/app build
 
-ENTRYPOINT ["yarn", "workspace", "@emjpm/app", "start:build"]
+# SERVER
+FROM node as server
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+WORKDIR /app
+
+COPY --from=builder /app/package.json /app/lerna.json /app/
+COPY --from=builder /app/node_modules /app/node_modules/
+COPY --from=builder /app/packages/app/node_modules /app/packages/app/node_modules/
+COPY --from=builder /app/packages/app/public /app/packages/app/public/
+COPY --from=builder /app/packages/app/next.config.js /app/packages/app/next.config.js
+COPY --from=builder /app/packages/app/package.json /app/packages/app/package.json
+COPY --from=builder /app/packages/app/.next /app/packages/app/.next/
+COPY --from=builder /app/packages/biz /app/packages/biz
+
+USER node
+
+CMD ["yarn", "workspace", "@emjpm/app", "start:build"]
