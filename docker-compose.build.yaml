@@ -4,7 +4,7 @@ version: "3"
 #
 # Listening ports :
 #
-#  - 3000 : frontend
+#  - 3000 : app
 #  - 4000 : api
 #  - 5000 : hasura
 #  - 5434 : postgres
@@ -44,13 +44,13 @@ services:
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
 
-  frontend:
+  app:
     env_file: .env.build
     build:
       context: ./packages/app
       dockerfile: Dockerfile
     ports:
-      - 3000:80
+      - 3000:3000
     volumes:
       - ./nginx-logs:/var/log/nginx
   graphql-engine:
