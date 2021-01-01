@@ -97,7 +97,7 @@ stages:
   services:
     - docker:19-dind
 
-.base_register_stage:
+.base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
   script:
@@ -105,10 +105,10 @@ stages:
     - >-
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-        echo "Register ${CI_COMMIT_TAG} tag as ${TAG}"
+        echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
       else
         export TAG=$CI_COMMIT_REF_SLUG
-        echo "Register ${TAG} branch"
+        echo "Build ${TAG} branch"
       fi
     #
     # NOTE(douglasduteil): aggressive caching strategy.
@@ -181,12 +181,6 @@ stages:
           -t ${IMAGE_NAME}:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}.dependencies:${TAG}
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}.builder:${TAG}
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}:${TAG}
       else
         docker build \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
@@ -194,10 +188,32 @@ stages:
           -t ${IMAGE_NAME}:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
+      fi
+
+.base_register_stage:
+  stage: "Register"
+  extends: .base_docker_image_stage
+  script:
+    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    - >-
+      if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
+        echo "Register ${CI_COMMIT_TAG} tag as ${TAG}"
+      else
+        export TAG=$CI_COMMIT_REF_SLUG
+        echo "Register ${TAG} branch"
+      fi
+      if [[ -n "${MULTISTAGE_BUILD}" ]]; then
+        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}.dependencies:${TAG}
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}.builder:${TAG}
+        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}:${TAG}
+      else
         docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
         docker push ${IMAGE_NAME}:${TAG}
       fi
-
 #
 # feature-branches deployments
 # these jobs interact with the GitHub API to post the deployment URL and status to the pull-request
@@ -336,16 +352,54 @@ Create namespace:
     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
 
+################### Build API ##################
+
+Build api image:
+  extends:
+    - .base_build_stage
+    - .build_stage
+  variables:
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      -f ./packages/api/Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    MULTISTAGE_BUILD: "true"
+
+################### Build APP ##################
+
+Build app image:
+  extends:
+    - .base_build_stage
+    - .build_stage
+  variables:
+    CONTEXT: .
+    DOCKER_BUILD_ARGS: >-
+      --shm-size 512M
+      -f ./packages/app/Dockerfile
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    MULTISTAGE_BUILD: "true"
+
+################### Build HASURA ########################
+
+Build hasura image:
+  extends:
+    - .base_build_stage
+    - .build_stage
+  variables:
+    CONTEXT: packages/hasura
+    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+
 ################### Register API ##################
 
 Register api image:
   extends:
     - .base_register_stage
     - .register_stage
+  dependencies:
+    - "Build api image"
+  needs:
+    - "Build api image"
   variables:
-    CONTEXT: .
-    DOCKER_BUILD_ARGS: >-
-      -f ./packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
     MULTISTAGE_BUILD: "true"
 
@@ -355,11 +409,11 @@ Register app image:
   extends:
     - .base_register_stage
     - .register_stage
+  dependencies:
+    - "Build app image"
+  needs:
+    - "Build app image"
   variables:
-    CONTEXT: .
-    DOCKER_BUILD_ARGS: >-
-      --shm-size 512M
-      -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
 
@@ -369,8 +423,11 @@ Register hasura image:
   extends:
     - .base_register_stage
     - .register_stage
+  dependencies:
+    - "Build hasura image"
+  needs:
+    - "Build hasura image"
   variables:
-    CONTEXT: packages/hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
 
 ################### Backup PG before production #############################
