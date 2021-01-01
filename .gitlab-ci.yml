@@ -22,7 +22,7 @@ variables:
 #
 
 stages:
-  - "Registration"
+  - "Build"
   - "Deploy"
   - "Notify Finished Deployment"
 
@@ -67,7 +67,7 @@ stages:
 
 .base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
-  stage: "Registration"
+  stage: "Build"
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
@@ -98,7 +98,7 @@ stages:
     - docker:19-dind
 
 .base_register_stage:
-  stage: "Registration"
+  stage: "Build"
   extends: .base_docker_image_stage
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
@@ -160,14 +160,14 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
-          --target dependencies
+          --target dependencies \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.dependencies:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
         docker build \
-          --target builder
+          --target builder \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
@@ -309,7 +309,7 @@ variables:
 
 .register_stage:
   extends: .base_stage
-  stage: Registration
+  stage: Build
   interruptible: true
   dependencies: []
 
@@ -379,7 +379,7 @@ Backup PG before production (incubateur):
   extends:
     - .base_docker_kubectl_image_stage
     - .incubateur_stage
-  stage: Registration
+  stage: Build
   interruptible: true
   script:
     - source ./.gitlab-ci/env.sh
