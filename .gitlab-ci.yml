@@ -124,8 +124,9 @@ stages:
       function set_cache_image() {
         if docker pull ${IMAGE_NAME}:$1; then
           if [ "$MULTISTAGE_BUILD" ]; then
-            docker pull ${IMAGE_NAME}.dependencies:$1
-            docker pull ${IMAGE_NAME}.builder:$1
+            if docker pull ${IMAGE_NAME}.dependencies:$1; then
+              docker pull ${IMAGE_NAME}.builder:$1
+            fi
           fi
           export CACHE_TAG=$1
         fi
