@@ -23,6 +23,7 @@ variables:
 
 stages:
   - "Build"
+  - "Register"
   - "Deploy"
   - "Notify Finished Deployment"
 
@@ -321,11 +322,15 @@ variables:
   environment:
     name: fabrique-dev2
 
-# REGISTRATION
+.build_stage:
+  extends: .base_stage
+  stage: Build
+  interruptible: true
+  dependencies: []
 
 .register_stage:
   extends: .base_stage
-  stage: Build
+  stage: Register
   interruptible: true
   dependencies: []
 
