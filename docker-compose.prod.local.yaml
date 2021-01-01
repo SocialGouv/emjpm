@@ -10,7 +10,7 @@ version: "3.8"
 
 services:
   db:
-    container_name: emjpm-postgres
+    image: emjpm_postgres_prod
     build:
       context: ./docker/postgres
     healthcheck:
@@ -37,6 +37,7 @@ services:
     restart: always
 
   graphql-engine:
+    image: emjpm_hasura_prod
     build:
       context: ./packages/hasura
     ports:
@@ -55,11 +56,11 @@ services:
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
   app:
+    image: emjpm_app_prod
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
       shm_size: '2gb'
-    shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
@@ -71,6 +72,7 @@ services:
       GRAPHQL_SERVER_URI: $GRAPHQL_SERVER_URI
       GRAPHQL_SERVER_URI_DOCKER: $GRAPHQL_SERVER_URI_DOCKER
   api:
+    image: emjpm_api_prod
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile

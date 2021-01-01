@@ -10,7 +10,7 @@ version: "3.8"
 
 services:
   db:
-    container_name: emjpm-postgres
+    image: emjpm_postgres
     build:
       context: ./docker/postgres
     healthcheck:
@@ -37,6 +37,7 @@ services:
     restart: always
 
   graphql-engine:
+    image: emjpm_hasura
     build:
       context: ./packages/hasura
     ports:
@@ -55,9 +56,11 @@ services:
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
   app:
+    image: emjpm_app
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile.dev
+      shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
       - ./:/app
@@ -69,6 +72,7 @@ services:
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       GRAPHQL_SERVER_URI_DOCKER: $GRAPHQL_SERVER_URI_DOCKER
   api:
+    image: emjpm_api
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile.dev
@@ -82,6 +86,16 @@ services:
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       DATABASE_URL: $DATABASE_URL
+
+  bootstrap:
+    restart: "no"
+    image: node:15-alpine
+    working_dir: /home/node/app
+    user: node
+    volumes:
+      - ./:/home/node/app
+    command: |
+      sh -c "[ -d node_modules ] || npx lerna bootstrap"
 
 volumes:
   emjpm-pgdata:
