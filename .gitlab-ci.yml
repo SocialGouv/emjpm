@@ -344,7 +344,7 @@ Register api image:
     DOCKER_BUILD_ARGS: >-
       -f ./packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    MULTISTAGE_BUILD: true
+    MULTISTAGE_BUILD: "true"
 
 ################### Register APP ##################
 
@@ -358,7 +358,7 @@ Register app image:
       --shm-size 512M
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    MULTISTAGE_BUILD: true
+    MULTISTAGE_BUILD: "true"
 
 ################### Register HASURA ########################
 
