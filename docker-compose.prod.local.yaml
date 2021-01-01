@@ -60,7 +60,7 @@ services:
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
-      shm_size: '512mb'
+      shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
