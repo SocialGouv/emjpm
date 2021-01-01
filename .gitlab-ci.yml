@@ -150,7 +150,7 @@ stages:
         echo "No cache ! Naked build :("
       fi
 
-      if [[ -n "${CACHE_TAG}" ]] && [[ -n "$MULTISTAGE_BUILD" ]]; then
+      if [[ -n "${CACHE_TAG}" ]] && [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           || echo "no dependencies cache"
         docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} \
@@ -158,7 +158,7 @@ stages:
       fi
 
     - |
-      if [[ -n "$MULTISTAGE_BUILD" ]]; then
+      if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
           --target dependencies
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
