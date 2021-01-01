@@ -123,11 +123,6 @@ stages:
 
       function set_cache_image() {
         if docker pull ${IMAGE_NAME}:$1; then
-          if [ "$MULTISTAGE_BUILD" ]; then
-            if docker pull ${IMAGE_NAME}.dependencies:$1; then
-              docker pull ${IMAGE_NAME}.builder:$1
-            fi
-          fi
           export CACHE_TAG=$1
         fi
       }
@@ -155,8 +150,15 @@ stages:
         echo "No cache ! Naked build :("
       fi
 
+      if [[ -n "${CACHE_TAG}" ]] && [[ -n "$MULTISTAGE_BUILD" ]]; then
+        docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          || echo "no dependencies cache"
+        docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} \
+          || echo "no builder cache"
+      fi
+
     - |
-      if [ "$MULTISTAGE_BUILD" ]; then
+      if [[ -n "$MULTISTAGE_BUILD" ]]; then
         docker build \
           --target dependencies
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
