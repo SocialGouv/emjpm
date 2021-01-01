@@ -374,7 +374,7 @@ Build app image:
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
-      --shm-size 512M
+      --shm-size 2G
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
