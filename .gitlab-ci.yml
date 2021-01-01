@@ -101,8 +101,6 @@ stages:
   stage: "Registration"
   extends: .base_docker_image_stage
   script:
-    # NOTE(douglasduteil): use echo "$CI_JOB_TOKEN" to remove docker login warning.
-    # `WARNING! Using --password via the CLI is insecure. Use --password-stdin`
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >-
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
@@ -118,11 +116,17 @@ stages:
     # we pull all the images that can help.
     # From the previous commit, to the current branch or the master branch, the
     # first to be defined will be our cache :)
+    # NOTE(devthejo): aggressive caching strategy 2 implementation of multistage
+    # build strategy.
     - |
       [[ -n "${TRACE}" ]] && set -x
 
       function set_cache_image() {
         if docker pull ${IMAGE_NAME}:$1; then
+          if [ "$MULTISTAGE_BUILD" ]; then
+            docker pull ${IMAGE_NAME}.dependencies:$1
+            docker pull ${IMAGE_NAME}.builder:$1
+          fi
           export CACHE_TAG=$1
         fi
       }
@@ -150,21 +154,46 @@ stages:
         echo "No cache ! Naked build :("
       fi
 
-    - echo "
-      docker build
-      --cache-from ${IMAGE_NAME}:${CACHE_TAG}
-      -t ${IMAGE_NAME}:${CI_COMMIT_SHA}
-      -t ${IMAGE_NAME}:${TAG}
-      $DOCKER_BUILD_ARGS
-      $CONTEXT"
-    - docker build
-      --cache-from ${IMAGE_NAME}:${CACHE_TAG}
-      -t ${IMAGE_NAME}:${CI_COMMIT_SHA}
-      -t ${IMAGE_NAME}:${TAG}
-      $DOCKER_BUILD_ARGS
-      $CONTEXT
-    - docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-    - docker push ${IMAGE_NAME}:${TAG}
+    - |
+      if [ "$MULTISTAGE_BUILD" ]; then
+        docker build \
+          --target dependencies
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.dependencies:${TAG} \
+          $DOCKER_BUILD_ARGS \
+          $CONTEXT
+        docker build \
+          --target builder
+          --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
+          -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.builder:${TAG} \
+          $DOCKER_BUILD_ARGS \
+          $CONTEXT
+        docker build \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
+          -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}:${TAG} \
+          $DOCKER_BUILD_ARGS \
+          $CONTEXT
+        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}.dependencies:${TAG}
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}.builder:${TAG}
+        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}:${TAG}
+      else
+        docker build \
+          --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
+          -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}:${TAG} \
+          $DOCKER_BUILD_ARGS \
+          $CONTEXT
+        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}:${TAG}
+      fi
 
 #
 # feature-branches deployments
@@ -315,6 +344,7 @@ Register api image:
     DOCKER_BUILD_ARGS: >-
       -f ./packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    MULTISTAGE_BUILD: true
 
 ################### Register APP ##################
 
@@ -328,6 +358,7 @@ Register app image:
       --shm-size 512M
       -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    MULTISTAGE_BUILD: true
 
 ################### Register HASURA ########################
 

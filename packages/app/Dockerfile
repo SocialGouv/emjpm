@@ -1,28 +1,30 @@
 FROM node:15-alpine as node
 
-# BUILDER
-FROM node as builder
+# DEPENDENCIES
+FROM node as dependencies
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
+RUN apk add --update --no-cache curl bash
+RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
+
 WORKDIR /app
+COPY package.json lerna.json yarn.lock ./
+COPY packages/app/package.json ./packages/app/package.json
+COPY packages/biz/package.json ./packages/biz/package.json
 
-## INSTALL
-COPY package.json lerna.json yarn.lock /app/
-COPY packages/app/package.json /app/packages/app/package.json
-COPY packages/biz/package.json /app/packages/biz/package.json
+RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
 
-RUN mkdir /.yarn-cache
-RUN yarn config set cache-folder /.yarn-cache
-RUN yarn --frozen-lockfile --ignore-scripts --production=false
-
-## BUILD
+# BUILDER
+FROM dependencies as builder
 COPY packages/app/ /app/packages/app/
 COPY packages/biz/ /app/packages/biz/
 
 RUN yarn workspace @emjpm/app run postinstall
 RUN yarn workspace @emjpm/app build
+
+RUN node-prune
 
 # SERVER
 FROM node as server
