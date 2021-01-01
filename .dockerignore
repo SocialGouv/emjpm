@@ -15,3 +15,4 @@ packages/app/.next/server/static/development
 .eslintcache
 packages/**/Dockerfile
 packages/**/Dockerfile.dev
+.npm
