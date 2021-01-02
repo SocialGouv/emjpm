@@ -1,20 +1,8 @@
-CREATE TYPE public.cause_sortie_type AS ENUM (
-    'mainlevee',
-    'deces',
-    'caducite',
-    'dessaisissement_famille',
-    'dessaisissement_autre_mjpm'
-);
-CREATE TYPE public.champ_mesure_type AS ENUM (
-    'protection_bien',
-    'protection_personne',
-    'protection_bien_personne'
-);
 CREATE TYPE public.civilite_type AS ENUM (
     'monsieur',
     'madame'
 );
-CREATE TYPE public.lieu_vie_majeur_enum AS ENUM (
+CREATE TYPE public.lieu_vie_type AS ENUM (
     'domicile',
     'etablissement',
     'etablissement_conservation_domicile',
@@ -24,33 +12,6 @@ CREATE TYPE public.mesure_status_type AS ENUM (
     'en_attente',
     'en_cours',
     'eteinte'
-);
-CREATE TYPE public.nature_mesure_type AS ENUM (
-    'curatelle_simple',
-    'curatelle_renforcee',
-    'tutelle',
-    'sauvegarde_justice',
-    'mesure_accompagnement_judiciaire',
-    'subroge_curateur',
-    'subroge_tuteur',
-    'mandat_protection_future',
-    'mesure_ad_hoc'
-);
-CREATE TYPE public.resultat_revision_type AS ENUM (
-    'aggravation',
-    'allegement',
-    'dessaisissement_autre_mjpm',
-    'dessaisissement_famille',
-    'mainlevee',
-    'reconduction'
-);
-CREATE TYPE public.type_etablissement_type AS ENUM (
-    'etablissement_handicapes',
-    'autre_etablissement_s_ms',
-    'etablissement_hospitalier',
-    'etablissement_psychiatrique',
-    'autre_etablissement',
-    'etablissement_personne_agee'
 );
 CREATE TABLE public.access_tokens (
     id integer NOT NULL,
@@ -106,6 +67,17 @@ CREATE SEQUENCE public.authorization_codes_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.authorization_codes_id_seq OWNED BY public.authorization_codes.id;
+CREATE TABLE public.cause_sortie_mesure (
+    value text NOT NULL,
+    label text NOT NULL
+);
+CREATE TABLE public.champ_mesure (
+    value text NOT NULL,
+    label text NOT NULL
+);
+CREATE TABLE public.civilite (
+    value text NOT NULL
+);
 CREATE TABLE public.geolocalisation_code_postal (
     id integer NOT NULL,
     code_postal character varying(255),
@@ -736,49 +708,6 @@ CREATE SEQUENCE public.etablissements_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.etablissements_id_seq OWNED BY public.etablissements.id;
-CREATE TABLE public.knex_migrations (
-    id integer NOT NULL,
-    name character varying(255),
-    batch integer,
-    migration_time timestamp with time zone
-);
-CREATE SEQUENCE public.knex_migrations_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE public.knex_migrations_id_seq OWNED BY public.knex_migrations.id;
-CREATE TABLE public.knex_migrations_lock (
-    is_locked integer
-);
-CREATE TABLE public.knex_migrations_v2 (
-    id integer NOT NULL,
-    name character varying(255),
-    batch integer,
-    migration_time timestamp with time zone
-);
-CREATE SEQUENCE public.knex_migrations_v2_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE public.knex_migrations_v2_id_seq OWNED BY public.knex_migrations_v2.id;
-CREATE TABLE public.knex_migrations_v2_lock (
-    index integer NOT NULL,
-    is_locked integer
-);
-CREATE SEQUENCE public.knex_migrations_v2_lock_index_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE public.knex_migrations_v2_lock_index_seq OWNED BY public.knex_migrations_v2_lock.index;
 CREATE TABLE public.lb_departements (
     id integer NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
@@ -815,7 +744,11 @@ CREATE TABLE public.lb_users (
     nom character varying(255),
     prenom character varying(255),
     type character varying,
-    siret character varying(255)
+    siret character varying(255),
+    adresse1 text,
+    adresse2 text,
+    code_postal text,
+    ville text
 );
 CREATE SEQUENCE public.lb_users_id_seq
     AS integer
@@ -825,6 +758,10 @@ CREATE SEQUENCE public.lb_users_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.lb_users_id_seq OWNED BY public.lb_users.id;
+CREATE TABLE public.lieu_vie_majeur (
+    value text NOT NULL,
+    label text NOT NULL
+);
 CREATE TABLE public.logs_data (
     id integer NOT NULL,
     user_id integer,
@@ -900,14 +837,13 @@ CREATE TABLE public.mesure_etat (
     id integer NOT NULL,
     mesure_id integer NOT NULL,
     date_changement_etat date NOT NULL,
-    nature_mesure public.nature_mesure_type NOT NULL,
-    champ_mesure public.champ_mesure_type,
-    lieu_vie public.lieu_vie_majeur_enum NOT NULL,
-    code_postal character varying(255) NOT NULL,
-    ville character varying(255) NOT NULL,
+    nature_mesure text NOT NULL,
+    champ_mesure text,
+    lieu_vie text NOT NULL,
+    code_postal character varying(255),
+    ville character varying(255),
     pays character varying(255) NOT NULL,
-    type_etablissement public.type_etablissement_type,
-    etablissement_siret character varying(255)
+    type_etablissement text
 );
 CREATE SEQUENCE public.mesure_etat_id_seq
     AS integer
@@ -920,8 +856,7 @@ ALTER SEQUENCE public.mesure_etat_id_seq OWNED BY public.mesure_etat.id;
 CREATE TABLE public.mesure_ressources (
     id integer NOT NULL,
     annee integer,
-    niveau_ressource integer NOT NULL,
-    prestations_sociales jsonb NOT NULL,
+    niveau_ressource numeric NOT NULL,
     mesure_id integer NOT NULL
 );
 CREATE SEQUENCE public.mesure_ressources_id_seq
@@ -932,6 +867,22 @@ CREATE SEQUENCE public.mesure_ressources_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.mesure_ressources_id_seq OWNED BY public.mesure_ressources.id;
+CREATE TABLE public.mesure_ressources_prestations_sociales (
+    id integer NOT NULL,
+    mesure_ressources_id integer NOT NULL,
+    prestations_sociales text NOT NULL
+);
+CREATE SEQUENCE public.mesure_ressources_prestations_sociales_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ALTER SEQUENCE public.mesure_ressources_prestations_sociales_id_seq OWNED BY public.mesure_ressources_prestations_sociales.id;
+CREATE TABLE public.mesure_status (
+    value text NOT NULL
+);
 CREATE TABLE public.mesures (
     id integer NOT NULL,
     code_postal character varying(255),
@@ -955,16 +906,16 @@ CREATE TABLE public.mesures (
     longitude real,
     pays character varying(255) DEFAULT 'FR'::character varying NOT NULL,
     magistrat_id integer,
-    lieu_vie public.lieu_vie_majeur_enum,
-    type_etablissement public.type_etablissement_type,
-    civilite public.civilite_type,
-    cause_sortie public.cause_sortie_type,
-    nature_mesure public.nature_mesure_type,
-    champ_mesure public.champ_mesure_type,
-    status public.mesure_status_type,
+    lieu_vie text,
+    type_etablissement text,
+    civilite text,
+    cause_sortie text,
+    nature_mesure text,
+    champ_mesure text,
+    status text,
     date_premier_mesure date,
     date_protection_en_cours date,
-    resultat_revision public.resultat_revision_type
+    resultat_revision text
 );
 CREATE SEQUENCE public.mesures_id_seq
     AS integer
@@ -974,6 +925,25 @@ CREATE SEQUENCE public.mesures_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.mesures_id_seq OWNED BY public.mesures.id;
+CREATE TABLE public.nature_mesure (
+    value text NOT NULL,
+    label text NOT NULL
+);
+CREATE TABLE public.ocmi_mandataires (
+    nom character varying NOT NULL,
+    prenom character varying NOT NULL,
+    email character varying NOT NULL,
+    siret character varying NOT NULL,
+    adresse1 character varying NOT NULL,
+    adresse2 character varying,
+    code_postal character varying NOT NULL,
+    ville character varying NOT NULL,
+    mesures jsonb DEFAULT jsonb_build_array() NOT NULL,
+    departement_financeur character varying NOT NULL
+);
+CREATE TABLE public.prestations_sociales (
+    value text NOT NULL
+);
 CREATE TABLE public.processus_states (
     id character varying(255) NOT NULL,
     start_date timestamp with time zone,
@@ -991,6 +961,10 @@ CREATE SEQUENCE public.regions_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.regions_id_seq OWNED BY public.regions.id;
+CREATE TABLE public.resultat_revision_mesure (
+    value text NOT NULL,
+    label text NOT NULL
+);
 CREATE TABLE public.role (
     id integer NOT NULL,
     name character varying(255) NOT NULL
@@ -1003,36 +977,6 @@ CREATE SEQUENCE public.role_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.role_id_seq OWNED BY public.role.id;
-CREATE TABLE public.satisfaction_campaign_answers (
-    id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    satisfaction_campaign_id integer NOT NULL,
-    user_id integer NOT NULL,
-    value integer NOT NULL
-);
-CREATE SEQUENCE public.satisfaction_campaign_answers_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE public.satisfaction_campaign_answers_id_seq OWNED BY public.satisfaction_campaign_answers.id;
-CREATE TABLE public.satisfaction_campaigns (
-    id integer NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    name character varying(255) NOT NULL,
-    started_at timestamp with time zone NOT NULL,
-    ended_at timestamp with time zone NOT NULL
-);
-CREATE SEQUENCE public.satisfaction_campaigns_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-ALTER SEQUENCE public.satisfaction_campaigns_id_seq OWNED BY public.satisfaction_campaigns.id;
 CREATE TABLE public.service_members (
     id integer NOT NULL,
     user_id integer,
@@ -1052,9 +996,8 @@ CREATE TABLE public.service_antenne (
     service_id integer NOT NULL,
     name character varying(255),
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    address_street character varying(255),
-    address_zip_code character varying(255),
-    address_city character varying(255),
+    code_postal character varying(255),
+    ville character varying(255),
     contact_lastname character varying(255),
     contact_firstname character varying(255),
     contact_email character varying(255),
@@ -1062,7 +1005,7 @@ CREATE TABLE public.service_antenne (
     mesures_awaiting integer DEFAULT 0 NOT NULL,
     mesures_in_progress integer DEFAULT 0 NOT NULL,
     mesures_max integer DEFAULT 0 NOT NULL,
-    address character varying(255),
+    adresse character varying(255),
     latitude real,
     longitude real
 );
@@ -1121,7 +1064,15 @@ CREATE TABLE public.services (
     mesures_awaiting integer,
     latitude real,
     longitude real,
-    siret character varying(255)
+    siret character varying(255),
+    org_gestionnaire boolean,
+    org_nom character varying,
+    org_adresse character varying,
+    org_code_postal character varying,
+    org_ville character varying,
+    lb_adresse character varying,
+    lb_code_postal character varying,
+    lb_ville character varying
 );
 CREATE SEQUENCE public.services_id_seq
     AS integer
@@ -1131,11 +1082,6 @@ CREATE SEQUENCE public.services_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.services_id_seq OWNED BY public.services.id;
-CREATE TABLE public.sessions (
-    sid character varying(255) NOT NULL,
-    sess json NOT NULL,
-    expired timestamp with time zone NOT NULL
-);
 CREATE TABLE public.tis (
     id integer NOT NULL,
     etablissement character varying(255) NOT NULL,
@@ -1145,12 +1091,12 @@ CREATE TABLE public.tis (
     telephone character varying(255),
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     siret character varying(255),
-    address character varying(255),
+    adresse character varying(255),
     latitude real,
     longitude real,
     departement_id integer,
     immutable boolean DEFAULT false NOT NULL,
-    address2 character varying(255),
+    adresse2 character varying(255),
     updated_at timestamp with time zone,
     date_ouverture date,
     date_fermeture date,
@@ -1165,6 +1111,10 @@ CREATE SEQUENCE public.tis_id_seq
     NO MAXVALUE
     CACHE 1;
 ALTER SEQUENCE public.tis_id_seq OWNED BY public.tis.id;
+CREATE TABLE public.type_etablissement (
+    value text NOT NULL,
+    label text NOT NULL
+);
 CREATE TABLE public.user_role (
     id integer NOT NULL,
     role_id integer,
@@ -1288,47 +1238,6 @@ UNION
      JOIN public.users u ON ((u.id = m.user_id)))
   WHERE ((u.active = true) AND (u.last_login > (now() - '1 mon'::interval)))
   GROUP BY d.code, d.nom, u.type;
-CREATE VIEW public.view_indicateur_satisfaction_campaign AS
- SELECT d.code,
-    d.nom,
-    u.type,
-    avg(sca.value) AS value
-   FROM ((((public.satisfaction_campaign_answers sca
-     JOIN public.users u ON ((u.id = sca.user_id)))
-     JOIN public.magistrat m ON ((m.user_id = u.id)))
-     JOIN public.tis t ON ((t.id = m.ti_id)))
-     JOIN public.departements d ON ((d.id = t.departement_id)))
-  WHERE ((sca.satisfaction_campaign_id = ( SELECT satisfaction_campaigns.id
-           FROM public.satisfaction_campaigns
-          WHERE ((now() >= satisfaction_campaigns.started_at) AND (satisfaction_campaigns.ended_at >= now())))) AND (u.active = true))
-  GROUP BY d.code, d.nom, u.type
-UNION
- SELECT d.code,
-    d.nom,
-    u.type,
-    avg(sca.value) AS value
-   FROM (((public.satisfaction_campaign_answers sca
-     JOIN public.users u ON ((u.id = sca.user_id)))
-     JOIN public.mandataires m ON ((m.user_id = u.id)))
-     JOIN public.departements d ON ((d.id = m.department_id)))
-  WHERE ((sca.satisfaction_campaign_id = ( SELECT satisfaction_campaigns.id
-           FROM public.satisfaction_campaigns
-          WHERE ((now() >= satisfaction_campaigns.started_at) AND (satisfaction_campaigns.ended_at >= now())))) AND (u.active = true))
-  GROUP BY d.code, d.nom, u.type
-UNION
- SELECT d.code,
-    d.nom,
-    u.type,
-    avg(sca.value) AS value
-   FROM ((((public.satisfaction_campaign_answers sca
-     JOIN public.users u ON ((u.id = sca.user_id)))
-     JOIN public.service_members sm ON ((sm.user_id = u.id)))
-     JOIN public.services s ON ((sm.service_id = s.id)))
-     JOIN public.departements d ON ((d.id = s.department_id)))
-  WHERE ((sca.satisfaction_campaign_id = ( SELECT satisfaction_campaigns.id
-           FROM public.satisfaction_campaigns
-          WHERE ((now() >= satisfaction_campaigns.started_at) AND (satisfaction_campaigns.ended_at >= now())))) AND (u.active = true))
-  GROUP BY d.code, d.nom, u.type;
 CREATE VIEW public.view_mesure_gestionnaire_tis AS
  SELECT concat(u.type, '-', m.id) AS id,
     NULL::integer AS service_id,
@@ -1377,9 +1286,6 @@ ALTER TABLE ONLY public.enquete_services ALTER COLUMN id SET DEFAULT nextval('pu
 ALTER TABLE ONLY public.enquetes ALTER COLUMN id SET DEFAULT nextval('public.enquetes_id_seq'::regclass);
 ALTER TABLE ONLY public.etablissements ALTER COLUMN id SET DEFAULT nextval('public.etablissements_id_seq'::regclass);
 ALTER TABLE ONLY public.geolocalisation_code_postal ALTER COLUMN id SET DEFAULT nextval('public."codePostalLatLngs_id_seq"'::regclass);
-ALTER TABLE ONLY public.knex_migrations ALTER COLUMN id SET DEFAULT nextval('public.knex_migrations_id_seq'::regclass);
-ALTER TABLE ONLY public.knex_migrations_v2 ALTER COLUMN id SET DEFAULT nextval('public.knex_migrations_v2_id_seq'::regclass);
-ALTER TABLE ONLY public.knex_migrations_v2_lock ALTER COLUMN index SET DEFAULT nextval('public.knex_migrations_v2_lock_index_seq'::regclass);
 ALTER TABLE ONLY public.lb_departements ALTER COLUMN id SET DEFAULT nextval('public.lb_departements_id_seq'::regclass);
 ALTER TABLE ONLY public.lb_user_etablissements ALTER COLUMN id SET DEFAULT nextval('public.lb_user_etablissements_id_seq'::regclass);
 ALTER TABLE ONLY public.lb_users ALTER COLUMN id SET DEFAULT nextval('public.lb_users_id_seq'::regclass);
@@ -1389,11 +1295,10 @@ ALTER TABLE ONLY public.mandataire_tis ALTER COLUMN id SET DEFAULT nextval('publ
 ALTER TABLE ONLY public.mandataires ALTER COLUMN id SET DEFAULT nextval('public.mandataires_id_seq'::regclass);
 ALTER TABLE ONLY public.mesure_etat ALTER COLUMN id SET DEFAULT nextval('public.mesure_etat_id_seq'::regclass);
 ALTER TABLE ONLY public.mesure_ressources ALTER COLUMN id SET DEFAULT nextval('public.mesure_ressources_id_seq'::regclass);
+ALTER TABLE ONLY public.mesure_ressources_prestations_sociales ALTER COLUMN id SET DEFAULT nextval('public.mesure_ressources_prestations_sociales_id_seq'::regclass);
 ALTER TABLE ONLY public.mesures ALTER COLUMN id SET DEFAULT nextval('public.mesures_id_seq'::regclass);
 ALTER TABLE ONLY public.regions ALTER COLUMN id SET DEFAULT nextval('public.regions_id_seq'::regclass);
 ALTER TABLE ONLY public.role ALTER COLUMN id SET DEFAULT nextval('public.role_id_seq'::regclass);
-ALTER TABLE ONLY public.satisfaction_campaign_answers ALTER COLUMN id SET DEFAULT nextval('public.satisfaction_campaign_answers_id_seq'::regclass);
-ALTER TABLE ONLY public.satisfaction_campaigns ALTER COLUMN id SET DEFAULT nextval('public.satisfaction_campaigns_id_seq'::regclass);
 ALTER TABLE ONLY public.service_antenne ALTER COLUMN id SET DEFAULT nextval('public.service_antenne_id_seq'::regclass);
 ALTER TABLE ONLY public.service_member_invitations ALTER COLUMN id SET DEFAULT nextval('public.service_member_invitations_id_seq'::regclass);
 ALTER TABLE ONLY public.service_members ALTER COLUMN id SET DEFAULT nextval('public.service_admin_id_seq'::regclass);
@@ -1408,6 +1313,12 @@ ALTER TABLE ONLY public.api_logs
     ADD CONSTRAINT api_logs_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.authorization_codes
     ADD CONSTRAINT authorization_codes_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.cause_sortie_mesure
+    ADD CONSTRAINT cause_sortie_pkey PRIMARY KEY (value);
+ALTER TABLE ONLY public.champ_mesure
+    ADD CONSTRAINT champ_mesure_pkey PRIMARY KEY (value);
+ALTER TABLE ONLY public.civilite
+    ADD CONSTRAINT civilite_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.geolocalisation_code_postal
     ADD CONSTRAINT "codePostalLatLngs_pkey" PRIMARY KEY (id);
 ALTER TABLE ONLY public.commentaires
@@ -1452,12 +1363,6 @@ ALTER TABLE ONLY public.enquetes
     ADD CONSTRAINT enquetes_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.etablissements
     ADD CONSTRAINT etablissements_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.knex_migrations
-    ADD CONSTRAINT knex_migrations_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.knex_migrations_v2_lock
-    ADD CONSTRAINT knex_migrations_v2_lock_pkey PRIMARY KEY (index);
-ALTER TABLE ONLY public.knex_migrations_v2
-    ADD CONSTRAINT knex_migrations_v2_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.lb_departements
     ADD CONSTRAINT lb_departements_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.lb_user_etablissements
@@ -1468,6 +1373,8 @@ ALTER TABLE ONLY public.lb_users
     ADD CONSTRAINT lb_users_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.lb_users
     ADD CONSTRAINT lb_users_siret_unique UNIQUE (siret);
+ALTER TABLE ONLY public.lieu_vie_majeur
+    ADD CONSTRAINT lieu_vie_majeur_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.logs_data
     ADD CONSTRAINT logs_data_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.magistrat
@@ -1490,20 +1397,32 @@ ALTER TABLE ONLY public.mesure_etat
     ADD CONSTRAINT mesure_etat_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.mesure_ressources
     ADD CONSTRAINT mesure_ressources_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.mesure_ressources_prestations_sociales
+    ADD CONSTRAINT mesure_ressources_prestations_sociales_mesure_ressources_id_pre UNIQUE (mesure_ressources_id, prestations_sociales);
+ALTER TABLE ONLY public.mesure_ressources_prestations_sociales
+    ADD CONSTRAINT mesure_ressources_prestations_sociales_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.mesure_status
+    ADD CONSTRAINT mesure_status_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.nature_mesure
+    ADD CONSTRAINT nature_mesure_pkey PRIMARY KEY (value);
+ALTER TABLE ONLY public.ocmi_mandataires
+    ADD CONSTRAINT ocmi_mandataires_pkey PRIMARY KEY (siret);
+ALTER TABLE ONLY public.ocmi_mandataires
+    ADD CONSTRAINT ocmi_mandataires_siret_key UNIQUE (siret);
+ALTER TABLE ONLY public.prestations_sociales
+    ADD CONSTRAINT prestations_sociales_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.processus_states
     ADD CONSTRAINT processus_states_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.regions
     ADD CONSTRAINT regions_pkey1 PRIMARY KEY (id);
+ALTER TABLE ONLY public.resultat_revision_mesure
+    ADD CONSTRAINT resultat_revision_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT role_name_unique UNIQUE (name);
 ALTER TABLE ONLY public.role
     ADD CONSTRAINT role_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.satisfaction_campaign_answers
-    ADD CONSTRAINT satisfaction_campaign_answers_pkey PRIMARY KEY (id);
-ALTER TABLE ONLY public.satisfaction_campaigns
-    ADD CONSTRAINT satisfaction_campaigns_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.service_members
     ADD CONSTRAINT service_admin_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.service_members
@@ -1520,12 +1439,12 @@ ALTER TABLE ONLY public.services
     ADD CONSTRAINT services_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.services
     ADD CONSTRAINT services_siret_unique UNIQUE (siret);
-ALTER TABLE ONLY public.sessions
-    ADD CONSTRAINT sessions_pkey PRIMARY KEY (sid);
 ALTER TABLE ONLY public.tis
     ADD CONSTRAINT tis_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.tis
     ADD CONSTRAINT tis_siret_unique UNIQUE (siret);
+ALTER TABLE ONLY public.type_etablissement
+    ADD CONSTRAINT type_etablissement_pkey PRIMARY KEY (value);
 ALTER TABLE ONLY public.user_role
     ADD CONSTRAINT user_role_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users
@@ -1540,7 +1459,6 @@ CREATE INDEX geolocalisation_code_postal_code_postal_idx ON public.geolocalisati
 CREATE INDEX mesures_numero_rg_idx ON public.mesures USING btree (numero_rg, service_id, mandataire_id, ti_id);
 CREATE INDEX service_admin_service_id_index ON public.service_members USING btree (service_id);
 CREATE INDEX service_admin_user_id_index ON public.service_members USING btree (user_id);
-CREATE INDEX sessions_expired_index ON public.sessions USING btree (expired);
 CREATE UNIQUE INDEX tis_siret_idx ON public.tis USING btree (siret);
 CREATE INDEX user_role_role_id_index ON public.user_role USING btree (role_id);
 CREATE INDEX user_role_user_id_index ON public.user_role USING btree (user_id);
@@ -1586,7 +1504,7 @@ ALTER TABLE ONLY public.authorization_codes
 ALTER TABLE ONLY public.authorization_codes
     ADD CONSTRAINT authorization_codes_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
 ALTER TABLE ONLY public.commentaires
-    ADD CONSTRAINT commentaires_mandataire_id_foreign FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id);
+    ADD CONSTRAINT commentaires_mandataire_id_fkey FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.commentaires
     ADD CONSTRAINT commentaires_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
 ALTER TABLE ONLY public.commentaires
@@ -1594,13 +1512,13 @@ ALTER TABLE ONLY public.commentaires
 ALTER TABLE ONLY public.departements
     ADD CONSTRAINT departements_id_region_foreign FOREIGN KEY (id_region) REFERENCES public.regions(id);
 ALTER TABLE ONLY public.direction
-    ADD CONSTRAINT direction_department_id_foreign FOREIGN KEY (department_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT direction_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.direction
     ADD CONSTRAINT direction_region_id_foreign FOREIGN KEY (region_id) REFERENCES public.regions(id);
 ALTER TABLE ONLY public.direction
-    ADD CONSTRAINT direction_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT direction_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.enquete_reponses
-    ADD CONSTRAINT enquete_reponses_departement_id_foreign FOREIGN KEY (departement_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT enquete_reponses_departement_id_fkey FOREIGN KEY (departement_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.enquete_reponses
     ADD CONSTRAINT enquete_reponses_enquete_id_foreign FOREIGN KEY (enquete_id) REFERENCES public.enquetes(id);
 ALTER TABLE ONLY public.enquete_reponses
@@ -1632,68 +1550,200 @@ ALTER TABLE ONLY public.enquete_reponses
 ALTER TABLE ONLY public.enquete_services
     ADD CONSTRAINT enquete_services_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
 ALTER TABLE ONLY public.etablissements
-    ADD CONSTRAINT etablissements_departement_id_foreign FOREIGN KEY (departement_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT etablissements_departement_id_fkey FOREIGN KEY (departement_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.lb_departements
-    ADD CONSTRAINT lb_departements_departement_id_foreign FOREIGN KEY (departement_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT lb_departements_departement_id_fkey FOREIGN KEY (departement_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.lb_departements
-    ADD CONSTRAINT lb_departements_lb_user_id_foreign FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id);
+    ADD CONSTRAINT lb_departements_lb_user_id_fkey FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.lb_user_etablissements
     ADD CONSTRAINT lb_user_etablissements_etablissement_id_foreign FOREIGN KEY (etablissement_id) REFERENCES public.etablissements(id);
 ALTER TABLE ONLY public.lb_user_etablissements
-    ADD CONSTRAINT lb_user_etablissements_lb_user_id_foreign FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id);
+    ADD CONSTRAINT lb_user_etablissements_lb_user_id_fkey FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.magistrat
     ADD CONSTRAINT magistrat_ti_id_foreign FOREIGN KEY (ti_id) REFERENCES public.tis(id);
 ALTER TABLE ONLY public.magistrat
-    ADD CONSTRAINT magistrat_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT magistrat_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mandataire_tis
-    ADD CONSTRAINT mandataire_tis_mandataire_id_foreign FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id);
+    ADD CONSTRAINT mandataire_tis_mandataire_id_fkey FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mandataire_tis
     ADD CONSTRAINT mandataire_tis_ti_id_foreign FOREIGN KEY (ti_id) REFERENCES public.tis(id);
 ALTER TABLE ONLY public.mandataires
-    ADD CONSTRAINT mandataires_department_id_foreign FOREIGN KEY (department_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT mandataires_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.mandataires
-    ADD CONSTRAINT mandataires_lb_user_id_foreign FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id);
+    ADD CONSTRAINT mandataires_lb_user_id_fkey FOREIGN KEY (lb_user_id) REFERENCES public.lb_users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mandataires
-    ADD CONSTRAINT mandataires_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT mandataires_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mesure_etat
-    ADD CONSTRAINT mesure_etat_mesure_id_foreign FOREIGN KEY (mesure_id) REFERENCES public.mesures(id);
+    ADD CONSTRAINT mesure_etat_champ_mesure_fkey FOREIGN KEY (champ_mesure) REFERENCES public.champ_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesure_etat
+    ADD CONSTRAINT mesure_etat_lieu_vie_fkey FOREIGN KEY (lieu_vie) REFERENCES public.lieu_vie_majeur(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesure_etat
+    ADD CONSTRAINT mesure_etat_mesure_id_fkey FOREIGN KEY (mesure_id) REFERENCES public.mesures(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.mesure_etat
+    ADD CONSTRAINT mesure_etat_nature_mesure_fkey FOREIGN KEY (nature_mesure) REFERENCES public.nature_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesure_etat
+    ADD CONSTRAINT mesure_etat_type_etablissement_fkey FOREIGN KEY (type_etablissement) REFERENCES public.type_etablissement(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.mesure_ressources
-    ADD CONSTRAINT mesure_ressources_mesure_id_foreign FOREIGN KEY (mesure_id) REFERENCES public.mesures(id);
+    ADD CONSTRAINT mesure_ressources_mesure_id_fkey FOREIGN KEY (mesure_id) REFERENCES public.mesures(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.mesure_ressources_prestations_sociales
+    ADD CONSTRAINT mesure_ressources_prestations_sociale_mesure_ressources_id_fkey FOREIGN KEY (mesure_ressources_id) REFERENCES public.mesure_ressources(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.mesure_ressources_prestations_sociales
+    ADD CONSTRAINT mesure_ressources_prestations_sociales_prestations_sociales_ FOREIGN KEY (prestations_sociales) REFERENCES public.prestations_sociales(value) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_antenne_id_foreign FOREIGN KEY (antenne_id) REFERENCES public.service_antenne(id);
 ALTER TABLE ONLY public.mesures
-    ADD CONSTRAINT mesures_department_id_foreign FOREIGN KEY (department_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT mesures_cause_sortie_fkey FOREIGN KEY (cause_sortie) REFERENCES public.cause_sortie_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_champ_mesure_fkey FOREIGN KEY (champ_mesure) REFERENCES public.champ_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_civilite_fkey FOREIGN KEY (civilite) REFERENCES public.civilite(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_etablissement_id_foreign FOREIGN KEY (etablissement_id) REFERENCES public.etablissements(id);
 ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_lieu_vie_fkey FOREIGN KEY (lieu_vie) REFERENCES public.lieu_vie_majeur(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_magistrat_id_foreign FOREIGN KEY (magistrat_id) REFERENCES public.magistrat(id);
 ALTER TABLE ONLY public.mesures
-    ADD CONSTRAINT mesures_mandataire_id_foreign FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id);
+    ADD CONSTRAINT mesures_mandataire_id_fkey FOREIGN KEY (mandataire_id) REFERENCES public.mandataires(id) ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_nature_mesure_fkey FOREIGN KEY (nature_mesure) REFERENCES public.nature_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_resultat_revision_fkey FOREIGN KEY (resultat_revision) REFERENCES public.resultat_revision_mesure(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
 ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_status_fkey FOREIGN KEY (status) REFERENCES public.mesure_status(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
+ALTER TABLE ONLY public.mesures
     ADD CONSTRAINT mesures_ti_id_foreign FOREIGN KEY (ti_id) REFERENCES public.tis(id);
-ALTER TABLE ONLY public.satisfaction_campaign_answers
-    ADD CONSTRAINT satisfaction_campaign_answers_satisfaction_campaign_id_foreign FOREIGN KEY (satisfaction_campaign_id) REFERENCES public.satisfaction_campaigns(id);
-ALTER TABLE ONLY public.satisfaction_campaign_answers
-    ADD CONSTRAINT satisfaction_campaign_answers_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+ALTER TABLE ONLY public.mesures
+    ADD CONSTRAINT mesures_type_etablissement_fkey FOREIGN KEY (type_etablissement) REFERENCES public.type_etablissement(value) ON UPDATE RESTRICT ON DELETE RESTRICT;
 ALTER TABLE ONLY public.service_members
     ADD CONSTRAINT service_admin_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
-ALTER TABLE ONLY public.service_members
-    ADD CONSTRAINT service_admin_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
 ALTER TABLE ONLY public.service_antenne
     ADD CONSTRAINT service_antenne_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
 ALTER TABLE ONLY public.service_member_invitations
     ADD CONSTRAINT service_member_invitations_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id) ON DELETE CASCADE;
+ALTER TABLE ONLY public.service_members
+    ADD CONSTRAINT service_members_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE ONLY public.service_tis
     ADD CONSTRAINT service_tis_service_id_foreign FOREIGN KEY (service_id) REFERENCES public.services(id);
 ALTER TABLE ONLY public.service_tis
     ADD CONSTRAINT service_tis_ti_id_foreign FOREIGN KEY (ti_id) REFERENCES public.tis(id);
 ALTER TABLE ONLY public.services
-    ADD CONSTRAINT services_department_id_foreign FOREIGN KEY (department_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT services_department_id_fkey FOREIGN KEY (department_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.tis
-    ADD CONSTRAINT tis_departement_id_foreign FOREIGN KEY (departement_id) REFERENCES public.departements(id);
+    ADD CONSTRAINT tis_departement_id_fkey FOREIGN KEY (departement_id) REFERENCES public.departements(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.user_role
     ADD CONSTRAINT user_role_role_id_foreign FOREIGN KEY (role_id) REFERENCES public.role(id);
 ALTER TABLE ONLY public.user_role
-    ADD CONSTRAINT user_role_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+    ADD CONSTRAINT user_role_user_id_fkey FOREIGN KEY (user_id) REFERENCES public.users(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+/*
+following inserted via
+pg_dump -h localhost -p 5434 -U emjpm -d emjpm --column-inserts --data-only \
+  -t cause_sortie_mesure \
+  -t champ_mesure \
+  -t civilite \
+  -t mesure_status \
+  -t nature_mesure \
+  -t prestations_sociales \
+  -t resultat_revision_mesure \
+  -t type_etablissement \
+  >> packages/hasura/migrations/1609563558335_init/up.sql
+adding -t flags for all the enum tables
+https://github.com/hasura/graphql-engine/issues/3142#issuecomment-542367937
+*/
+
+--
+-- Data for Name: cause_sortie_mesure; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.cause_sortie_mesure (value, label) VALUES ('mainlevee', 'mainlevée');
+INSERT INTO public.cause_sortie_mesure (value, label) VALUES ('deces', 'décès');
+INSERT INTO public.cause_sortie_mesure (value, label) VALUES ('caducite', 'caducité');
+INSERT INTO public.cause_sortie_mesure (value, label) VALUES ('dessaisissement_famille', 'désaissement en faveur de la famille');
+INSERT INTO public.cause_sortie_mesure (value, label) VALUES ('dessaisissement_autre_mjpm', 'désaississement en faveur d''un autre MJPM');
+
+
+--
+-- Data for Name: champ_mesure; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.champ_mesure (value, label) VALUES ('protection_bien', 'protection des biens');
+INSERT INTO public.champ_mesure (value, label) VALUES ('protection_personne', 'protection de la personne');
+INSERT INTO public.champ_mesure (value, label) VALUES ('protection_bien_personne', 'protection des biens et de la personne');
+
+
+--
+-- Data for Name: civilite; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.civilite (value) VALUES ('madame');
+INSERT INTO public.civilite (value) VALUES ('monsieur');
+
+
+--
+-- Data for Name: mesure_status; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.mesure_status (value) VALUES ('en_attente');
+INSERT INTO public.mesure_status (value) VALUES ('en_cours');
+INSERT INTO public.mesure_status (value) VALUES ('eteinte');
+
+
+--
+-- Data for Name: nature_mesure; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.nature_mesure (value, label) VALUES ('curatelle_simple', 'curatelle simple');
+INSERT INTO public.nature_mesure (value, label) VALUES ('curatelle_renforcee', 'curatelle renforcée');
+INSERT INTO public.nature_mesure (value, label) VALUES ('tutelle', 'tutelle');
+INSERT INTO public.nature_mesure (value, label) VALUES ('sauvegarde_justice', 'sauvegarde justice avec mandat spécial');
+INSERT INTO public.nature_mesure (value, label) VALUES ('mesure_accompagnement_judiciaire', 'mesure d''accompagnement judiciaire');
+INSERT INTO public.nature_mesure (value, label) VALUES ('subroge_curateur', 'subrogé curateur');
+INSERT INTO public.nature_mesure (value, label) VALUES ('subroge_tuteur', 'subrogé tuteur');
+INSERT INTO public.nature_mesure (value, label) VALUES ('mandat_protection_future', 'mandat protection future');
+INSERT INTO public.nature_mesure (value, label) VALUES ('mesure_ad_hoc', 'mesure ad hoc');
+
+
+--
+-- Data for Name: prestations_sociales; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.prestations_sociales (value) VALUES ('AAH');
+INSERT INTO public.prestations_sociales (value) VALUES ('PCH');
+INSERT INTO public.prestations_sociales (value) VALUES ('ASI');
+INSERT INTO public.prestations_sociales (value) VALUES ('RSA');
+INSERT INTO public.prestations_sociales (value) VALUES ('ALS');
+INSERT INTO public.prestations_sociales (value) VALUES ('APL');
+INSERT INTO public.prestations_sociales (value) VALUES ('ASPA');
+INSERT INTO public.prestations_sociales (value) VALUES ('APA');
+
+
+--
+-- Data for Name: resultat_revision_mesure; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('mainlevee', 'mainlevée');
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('reconduction', 'reconduction de la mesure');
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('aggravation', 'aggravation');
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('allegement', 'allégement');
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('dessaisissement_famille', 'désaissement en faveur de la famille');
+INSERT INTO public.resultat_revision_mesure (value, label) VALUES ('dessaisissement_autre_mjpm', 'désaississement en faveur d''un autre MJPM');
+
+
+--
+-- Data for Name: type_etablissement; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.type_etablissement (value, label) VALUES ('etablissement_handicapes', 'établissement ou service pour handicapés');
+INSERT INTO public.type_etablissement (value, label) VALUES ('etablissement_personne_agee', 'établissement pour personnes agées');
+INSERT INTO public.type_etablissement (value, label) VALUES ('etablissement_conservation_domicile', 'établissement avec conservation domicile');
+INSERT INTO public.type_etablissement (value, label) VALUES ('autre_etablissement_s_ms', 'autre établissement social ou médico-social');
+INSERT INTO public.type_etablissement (value, label) VALUES ('etablissement_hospitalier', 'établissement hospitalier');
+INSERT INTO public.type_etablissement (value, label) VALUES ('etablissement_psychiatrique', 'établissement psychiatrique');
+INSERT INTO public.type_etablissement (value, label) VALUES ('autre_etablissement', 'autre établissement');
+
