@@ -169,6 +169,7 @@ stages:
           $CONTEXT
         docker build \
           --target builder \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
