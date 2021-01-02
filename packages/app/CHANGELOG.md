@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.82.4](https://github.com/SocialGouv/emjpm/compare/v25.82.3...v25.82.4) (2021-01-02)
+
+
+### Bug Fixes
+
+* **ssr:** graphql uri ([72ebbaf](https://github.com/SocialGouv/emjpm/commit/72ebbafb86cc298b373390634ef52b7f3d12168c))
+
+
+
+
+
 ## [25.82.3](https://github.com/SocialGouv/emjpm/compare/v25.82.2...v25.82.3) (2020-12-31)
 
 
