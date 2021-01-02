@@ -1647,6 +1647,7 @@ pg_dump -h localhost -p 5434 -U emjpm -d emjpm --column-inserts --data-only \
   -t cause_sortie_mesure \
   -t champ_mesure \
   -t civilite \
+  -t lieu_vie_majeur \
   -t mesure_status \
   -t nature_mesure \
   -t prestations_sociales \
@@ -1657,6 +1658,7 @@ adding -t flags for all the enum tables
 https://github.com/hasura/graphql-engine/issues/3142#issuecomment-542367937
 */
 
+--
 --
 -- Data for Name: cause_sortie_mesure; Type: TABLE DATA; Schema: public; Owner: emjpm
 --
@@ -1683,6 +1685,16 @@ INSERT INTO public.champ_mesure (value, label) VALUES ('protection_bien_personne
 
 INSERT INTO public.civilite (value) VALUES ('madame');
 INSERT INTO public.civilite (value) VALUES ('monsieur');
+
+
+--
+-- Data for Name: lieu_vie_majeur; Type: TABLE DATA; Schema: public; Owner: emjpm
+--
+
+INSERT INTO public.lieu_vie_majeur (value, label) VALUES ('domicile', 'domicile');
+INSERT INTO public.lieu_vie_majeur (value, label) VALUES ('etablissement', 'établissement');
+INSERT INTO public.lieu_vie_majeur (value, label) VALUES ('etablissement_conservation_domicile', 'établissement avec conservation domicile');
+INSERT INTO public.lieu_vie_majeur (value, label) VALUES ('sdf', 'SDF');
 
 
 --
