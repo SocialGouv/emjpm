@@ -46,7 +46,7 @@ export const GET_CLOSED_MESURE_NUMBER = gql`
 
 export const GET_GESTIONNAIRE_NUMBER = gql`
   query gestionnaireNumber($type: String, $department: Int, $region: Int) {
-    gestionnaireNumber: view_mesure_gestionnaire_aggregate(
+    gestionnaireNumber: view_mesure_gestionnaire_departement_aggregate(
       where: {
         discriminator: { _eq: $type }
         departement: {
