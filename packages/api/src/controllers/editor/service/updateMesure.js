@@ -79,8 +79,9 @@ async function processRessources(MesureRessources, mesureId, body) {
     const ressourceDatas = {
       annee,
       mesure_id: mesureId,
+
       niveau_ressource,
-      prestations_sociales: JSON.stringify(prestations_sociales),
+      prestations_sociales,
     };
     const ressourceToUpdate = findRessource(loadedRessources, ressource);
     if (ressourceToUpdate) {
@@ -90,7 +91,7 @@ async function processRessources(MesureRessources, mesureId, body) {
         .where("id", ressourceToUpdate.id);
     } else {
       //insert
-      await MesureRessources.query().insert(ressourceDatas);
+      await MesureRessources.query().insertGraph(ressourceDatas);
     }
   }
 
