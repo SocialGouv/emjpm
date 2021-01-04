@@ -67,11 +67,10 @@ describe("POST /api/mandoline/user", () => {
 
       expect(response.body).toMatchObject({
         direction: {
-          departement: { code: "75", nom: "Paris" },
-          type: "departemental",
+          type: "national",
         },
-        email: "direction-979@justice.fr",
-        id: 979,
+        email: "direction-874@justice.fr",
+        id: 874,
         nom: "direction",
         prenom: "Paula",
         type: "direction",
@@ -89,19 +88,19 @@ describe("POST /api/mandoline/user", () => {
         .set({ Authorization: `Bearer ${token}` });
 
       expect(response.body).toMatchObject({
-        email: "service-2042@justice.fr",
-        id: 2042,
+        email: "service-2050@justice.fr",
+        id: 2050,
         nom: "service",
         prenom: "Paula",
         service: {
           departement: { code: "75", nom: "Paris" },
-          dispo_max: 325,
-          email: "service-50@justice.fr",
-          etablissement: "service-50",
-          lb_adresse: "Rue du service tutellaire",
-          lb_code_postal: "75010",
+          dispo_max: 1135,
+          email: "service-152@justice.fr",
+          etablissement: "service-152",
+          lb_adresse: "Rue du service tutelaire",
+          lb_code_postal: "75017",
           lb_ville: "Paris",
-          mesures_en_attente: 330,
+          mesures_en_attente: 0,
           mesures_en_cours: 0,
           nom: null,
           org_adresse: "Rue de l'organisme gestionnaire",
