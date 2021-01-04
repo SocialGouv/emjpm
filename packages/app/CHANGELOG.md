@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.83.0](https://github.com/SocialGouv/emjpm/compare/v25.82.4...v25.83.0) (2021-01-04)
+
+
+### Bug Fixes
+
+* **geocode-cors:** remove credentials ([#2426](https://github.com/SocialGouv/emjpm/issues/2426)) ([f681e0b](https://github.com/SocialGouv/emjpm/commit/f681e0ba1df1707c159917e67b97c9b2f12857cd))
+
+
+
+
+
 ## [25.82.4](https://github.com/SocialGouv/emjpm/compare/v25.82.3...v25.82.4) (2021-01-02)
 
 
