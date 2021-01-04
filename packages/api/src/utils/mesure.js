@@ -47,7 +47,9 @@ function sanitizeMesureProperties(mesure) {
           return {
             annee: ressource.annee,
             niveau_ressource: ressource.niveau_ressource,
-            prestations_sociales: ressource.prestations_sociales,
+            prestations_sociales: ressource.prestations_sociales?.map(
+              ({ value }) => value
+            ),
           };
         })
       : [],
