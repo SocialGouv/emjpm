@@ -433,7 +433,6 @@ describe("POST /api/editors/mesures/batch", () => {
           },
         ],
       });
-    console.log(response.body);
     expect(response.status).toBe(201);
     const { mesures } = response.body;
     const expected = mesures.map((mesure) => {
