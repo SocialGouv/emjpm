@@ -1,0 +1,35 @@
+name: eMJPM
+homepage: https://emjpm.fabrique.social.gouv.fr
+
+# List your code repos
+repositories:
+  eMJPM: https://github.com/SocialGouv/emjpm
+  Doc API eMJPM: https://github.com/SocialGouv/emjpm-api-doc
+  Schéma de données PJM: https://github.com/SocialGouv/schema-pjm
+  Portail de la PJM: https://github.com/SocialGouv/emjpm-portail
+
+# List all docs links
+documentation:
+  NextCloud EMJPM: https://nextcloud.fabrique.social.gouv.fr
+
+# List all the tools used by the team
+tools:
+  ticketing: https://github.com/SocialGouv/emjpm/issues
+  sentry: https://sentry.fabrique.social.gouv.fr/incubateur/emjpm
+  matomo: https://matomo.fabrique.social.gouv.fr
+  mailjet (prod): https://app.mailjet.com/
+  mailtrap (dev): https://mailtrap.io/
+
+# Overall technical stack
+stack:
+  frontend:
+    - NextJS
+  backend:
+    - hasura
+    - PostgreSQL
+  tests:
+    - No frontend tests
+    - Jest integration tests on the backend
+  ci:
+    - Github Actions (tests)
+    - Gitlab-ci (deploys)
