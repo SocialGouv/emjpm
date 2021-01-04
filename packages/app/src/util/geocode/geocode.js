@@ -15,9 +15,7 @@ export const geocode = async (options) => {
   let response;
 
   try {
-    response = await fetch(`${API_URL}?${queryParameters}`, {
-      credentials: "include",
-    });
+    response = await fetch(`${API_URL}?${queryParameters}`);
   } catch (error) {
     return [];
   }
