@@ -85,7 +85,7 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
   );
 
   const mesureQueryResult = await Mesure.query()
-    .withGraphFetched("[etats,ressources, tis]")
+    .withGraphFetched("[etats, ressources.[prestations_sociales], tis]")
     .where("id", createdMesure.id)
     .first();
   return mesureQueryResult;
@@ -105,12 +105,19 @@ async function persistMesure(
   mesure.ressources = [];
   if (datas.ressources) {
     for (const ressource of datas.ressources) {
-      const createdMesureRessource = await MesureRessources.query().insert({
-        annee: ressource.annee || null,
-        mesure_id: mesure.id,
-        niveau_ressource: ressource.niveau_ressource,
-        prestations_sociales: JSON.stringify(ressource.prestations_sociales),
-      });
+      const createdMesureRessource = await MesureRessources.query().insertGraph(
+        {
+          annee: ressource.annee || null,
+          mesure_id: mesure.id,
+
+          mesure_ressources_prestations_sociales: ressource.prestations_sociales.map(
+            (prestations_sociales) => ({
+              prestations_sociales,
+            })
+          ),
+          niveau_ressource: ressource.niveau_ressource,
+        }
+      );
       mesure.ressources.push(createdMesureRessource);
     }
   }

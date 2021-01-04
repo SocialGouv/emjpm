@@ -278,7 +278,7 @@ describe("POST /api/editors/mesures", () => {
         ressources: [
           {
             annee: 2020,
-            niveau_ressource: 14246,
+            niveau_ressource: "14246",
             prestations_sociales: ["AAH"],
           },
         ],
@@ -326,7 +326,7 @@ describe("POST /api/editors/mesures", () => {
       ressources: [
         {
           annee: 2020,
-          niveau_ressource: 14246,
+          niveau_ressource: "14246",
           prestations_sociales: ["AAH"],
         },
       ],
@@ -368,7 +368,7 @@ describe("POST /api/editors/mesures/batch", () => {
             ressources: [
               {
                 annee: 2019,
-                niveau_ressource: 14246,
+                niveau_ressource: "14246",
                 prestations_sociales: [],
               },
             ],
@@ -415,17 +415,17 @@ describe("POST /api/editors/mesures/batch", () => {
             ressources: [
               {
                 annee: 2020,
-                niveau_ressource: 25000,
+                niveau_ressource: "25000",
                 prestations_sociales: [],
               },
               {
                 annee: 2019,
-                niveau_ressource: 28000,
+                niveau_ressource: "28000",
                 prestations_sociales: [],
               },
               {
                 annee: 2018,
-                niveau_ressource: 30000,
+                niveau_ressource: "30000",
                 prestations_sociales: [],
               },
             ],
@@ -433,7 +433,7 @@ describe("POST /api/editors/mesures/batch", () => {
           },
         ],
       });
-
+    console.log(response.body);
     expect(response.status).toBe(201);
     const { mesures } = response.body;
     const expected = mesures.map((mesure) => {
