@@ -23,7 +23,6 @@ variables:
 
 stages:
   - "Build"
-  - "Register"
   - "Deploy"
   - "Notify Finished Deployment"
 
@@ -152,10 +151,9 @@ stages:
       fi
 
       if [[ -n "${CACHE_TAG}" ]] && [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
-          || echo "no dependencies cache"
-        docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          || echo "no builder cache"
+        docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} &
+        docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} &
+        wait
       fi
 
     - |
@@ -167,13 +165,18 @@ stages:
           -t ${IMAGE_NAME}.dependencies:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
+        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} &
+
         docker build \
           --target builder \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
+
         docker build \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
@@ -182,6 +185,7 @@ stages:
           -t ${IMAGE_NAME}:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
+        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
       else
         docker build \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
@@ -189,49 +193,16 @@ stages:
           -t ${IMAGE_NAME}:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
       fi
 
-      if [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}.dependencies:${TAG}
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}.builder:${TAG}
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}:${TAG}
-      else
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-        docker push ${IMAGE_NAME}:${TAG}
-      fi
+      wait
 
-# .base_register_stage:
-#   stage: "Register"
-#   extends: .base_docker_image_stage
-#   script:
-#     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-#     - |
-#       if [[ -n "${CI_COMMIT_TAG}" ]]; then
-#         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-#         echo "Register ${CI_COMMIT_TAG} tag as ${TAG}"
-#       else
-#         export TAG=$CI_COMMIT_REF_SLUG
-#         echo "Register ${TAG} branch"
-#       fi
-#       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
-#         docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-#         docker push ${IMAGE_NAME}.dependencies:${TAG}
-#         docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
-#         docker push ${IMAGE_NAME}.builder:${TAG}
-#         docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-#         docker push ${IMAGE_NAME}:${TAG}
-#       else
-#         docker push ${IMAGE_NAME}:${CI_COMMIT_SHA}
-#         docker push ${IMAGE_NAME}:${TAG}
-#       fi
-#
-# feature-branches deployments
-# these jobs interact with the GitHub API to post the deployment URL and status to the pull-request
-#
+      docker push ${IMAGE_NAME}.dependencies:${TAG} &
+      docker push ${IMAGE_NAME}.builder:${TAG} &
+      docker push ${IMAGE_NAME}:${TAG} &
+
+      wait
 
 #
 .notify_stage: &notify_stage
@@ -341,12 +312,6 @@ variables:
   interruptible: true
   dependencies: []
 
-# .register_stage:
-#   extends: .base_stage
-#   stage: Register
-#   interruptible: true
-#   dependencies: []
-
 ################### CREATE NAMESPACE ##############
 
 Create namespace:
@@ -406,49 +371,6 @@ Build hasura image:
   variables:
     CONTEXT: packages/hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-
-################### Register API ##################
-
-# Register api image:
-#   extends:
-#     - .base_register_stage
-#     - .register_stage
-#   dependencies:
-#     - "Build api image"
-#   needs:
-#     - "Build api image"
-#   variables:
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-#     MULTISTAGE_BUILD: "true"
-
-################### Register APP ##################
-
-# Register app image:
-#   extends:
-#     - .base_register_stage
-#     - .register_stage
-#   dependencies:
-#     - "Build app image"
-#   needs:
-#     - "Build app image"
-#   variables:
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-#     MULTISTAGE_BUILD: "true"
-
-################### Register HASURA ########################
-
-# Register hasura image:
-#   extends:
-#     - .base_register_stage
-#     - .register_stage
-#   dependencies:
-#     - "Build hasura image"
-#   needs:
-#     - "Build hasura image"
-#   variables:
-#     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
-
-################### Backup PG before production #############################
 
 Backup PG before production (incubateur):
   extends:
