@@ -1,15 +1,15 @@
-const { Mesure } = require("../../../../models/Mesure");
-const { OcmiMandataire } = require("../../../../models/OcmiMandataire");
-const { LbUser } = require("../../../../models/LbUser");
-const { Mandataire } = require("../../../../models/Mandataire");
+const { Mesure } = require("~/models");
+const { OcmiMandataire } = require("~/models");
+const { LbUser } = require("~/models");
+const { Mandataire } = require("~/models");
 const mesureStatesService = require("../../../../services/updateMesureStates");
 const {
   saveMesures,
 } = require("../../../../controllers/editor/service/saveMesure");
 const fetchTribunaux = require("../../../../controllers/editor/service/fetchTribunaux");
-const { MesureRessources } = require("../../../../models/MesureRessources");
-const { MesureEtat } = require("../../../../models/MesureEtat");
-const { MESURE_PROTECTION_STATUS } = require("@emjpm/core");
+const { MesureRessources } = require("~/models");
+const { MesureEtat } = require("~/models");
+const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 module.exports = async (req, res) => {
   const { userId } = req.user;
