@@ -2,7 +2,7 @@ const getDepartement = require("~/services/getDepartement");
 const getGeoDatas = require("~/services/getGeoDatas");
 const { isFrance } = require("@emjpm/biz");
 
-async function getLastEtatDatas(etats, config = {}) {
+async function getLastEtatDatas(etats) {
   etats.sort((a, b) => {
     return a.date_changement_etat.getTime() - b.date_changement_etat.getTime();
   });
@@ -15,9 +15,7 @@ async function getLastEtatDatas(etats, config = {}) {
   }
   const departement = await getDepartement(lastEtat.code_postal);
 
-  const departement = await getDepartement(codePostal);
-
-  const geoloc = await getGeoDatas(codePostal, ville);
+  const geoloc = await getGeoDatas(lastEtat.code_postal, lastEtat.ville);
 
   let longitude;
   let latitude;
