@@ -42,6 +42,9 @@ const MandataireOcmiMesureImport = () => {
         <Text mb="1" lineHeight="2">
           {`Pour importer vos mesures de votre compte OCMI dans votre compte eMJPM, sélectionnez le bouton ci-dessous.`}
         </Text>
+        <Text mb="1" lineHeight="2">
+          {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI.`}
+        </Text>
       </Box>
       <Flex justifyContent="center">
         <Button
