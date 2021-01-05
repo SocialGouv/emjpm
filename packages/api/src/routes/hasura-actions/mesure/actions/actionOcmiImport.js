@@ -2,11 +2,9 @@ const { Mesure } = require("~/models");
 const { OcmiMandataire } = require("~/models");
 const { LbUser } = require("~/models");
 const { Mandataire } = require("~/models");
-const mesureStatesService = require("../../../../services/updateMesureStates");
-const {
-  saveMesures,
-} = require("../../../../controllers/editor/service/saveMesure");
-const fetchTribunaux = require("../../../../controllers/editor/service/fetchTribunaux");
+const mesureStatesService = require("~/services/updateMesureStates");
+const { saveMesures } = require("~/controllers/editor/service/saveMesure");
+const fetchTribunaux = require("~/controllers/editor/service/fetchTribunaux");
 const { MesureRessources } = require("~/models");
 const { MesureEtat } = require("~/models");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
@@ -38,6 +36,7 @@ module.exports = async (req, res) => {
       etats: mesure.etats.map((etat) => ({
         ...etat,
         date_changement_etat: new Date(etat.date_changement_etat),
+        pays: etat.pays || "FR",
       })),
     },
     serviceOrMandataire: mandataire,
@@ -48,13 +47,6 @@ module.exports = async (req, res) => {
   await saveMesures(allMesureDatas);
 
   await mesureStatesService.updateMandataireMesureStates(mandataireId);
-
-  /*
-  // In case of errors:
-  return res.status(400).json({
-    message: "error happened"
-  })
-  */
 
   // success
   return res.json({
@@ -68,18 +60,6 @@ function findTribunal(tribunaux, tribunalSiret) {
 }
 
 async function deleteAllMesures(mandataireId) {
-  const mesureIdsQuery = Mesure.query()
-    .select("id")
-    .where({ mandataire_id: mandataireId })
-    .andWhere("status", "in", [
-      MESURE_PROTECTION_STATUS.en_cours,
-      MESURE_PROTECTION_STATUS.eteinte,
-    ]);
-
-  await MesureEtat.query().delete().whereIn("mesure_id", mesureIdsQuery);
-
-  await MesureRessources.query().delete().whereIn("mesure_id", mesureIdsQuery);
-
   await Mesure.query()
     .delete()
     .where({ mandataire_id: mandataireId })

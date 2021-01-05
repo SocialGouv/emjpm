@@ -111,7 +111,7 @@ async function persistMesure(
           annee: ressource.annee || null,
           mesure_id: mesure.id,
 
-          mesure_ressources_prestations_sociales: ressource.prestations_sociales.map(
+          mesure_ressources_prestations_sociales: ressource.prestations_sociales?.map(
             (prestations_sociales) => ({
               prestations_sociales,
             })
