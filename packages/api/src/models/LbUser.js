@@ -33,4 +33,4 @@ class LbUser extends Model {
   }
 }
 
-module.exports = { LbUser };
+module.exports = LbUser;
