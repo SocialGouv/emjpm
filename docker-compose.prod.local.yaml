@@ -61,6 +61,7 @@ services:
       context: .
       dockerfile: ./packages/app/Dockerfile
       shm_size: '2gb'
+    shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
