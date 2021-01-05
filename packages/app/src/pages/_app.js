@@ -14,6 +14,15 @@ import { presetEmjpm } from "~/ui";
 import { formatUserFromToken } from "~/util/formatUserFromToken";
 import { initSentry } from "~/util/sentry";
 
+// disable SSR
+function SafeHydrate({ children }) {
+  return (
+    <div suppressHydrationWarning>
+      {typeof window === "undefined" ? null : children}
+    </div>
+  );
+}
+
 class MyApp extends App {
   componentDidMount() {
     initMatomo();
@@ -51,4 +60,14 @@ class MyApp extends App {
   }
 }
 
-export default withApolloClient(MyApp);
+const ApolloApp = withApolloClient(MyApp);
+
+function FullNavApp(props) {
+  return (
+    <SafeHydrate>
+      <ApolloApp {...props} />
+    </SafeHydrate>
+  );
+}
+
+export default FullNavApp;

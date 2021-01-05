@@ -1,24 +1,32 @@
+import cookie from "js-cookie";
 import jwtDecode from "jwt-decode";
+import nextCookie from "next-cookies";
+import getConfig from "next/config";
 import Router from "next/router";
 import React, { Component } from "react";
 
 import { matopush } from "~/matomo";
 
+const {
+  publicRuntimeConfig: { API_URL },
+} = getConfig();
+
 // see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 
 export const authCredentials = {
   token: null,
-  user_id: null,
-  user_type: null,
 };
 
 const clearSession = () => {
   authCredentials.token = null;
-  authCredentials.user_id = null;
-  authCredentials.user_type = null;
 
   // to support logging out from all windows
   localStorage.setItem("logout", Date.now());
+
+  // clear user data
+  cookie.remove("logged");
+  localStorage.removeItem("user_id");
+  localStorage.removeItem("user_type");
 
   // Clear user preferences & filters
   localStorage.removeItem("filters");
@@ -31,8 +39,10 @@ export const logout = () => {
 
 export const login = async ({ token, id, type }) => {
   authCredentials.token = token;
-  authCredentials.user_id = id;
-  authCredentials.user_type = type;
+
+  cookie.set("logged", "1");
+  localStorage.setItem("user_id", id);
+  localStorage.setItem("user_type", type);
 
   matopush(["trackEvent", "login", "success"]);
   matopush(["setUserId", id]);
@@ -50,7 +60,11 @@ export const withAuthSync = (WrappedComponent) =>
     static displayName = `withAuthSync(${getDisplayName(WrappedComponent)})`;
 
     static async getInitialProps(ctx) {
-      const token = auth(ctx);
+      let token;
+      if (!ctx.req) {
+        // client side
+        token = await auth(ctx);
+      }
 
       const componentProps =
         WrappedComponent.getInitialProps &&
@@ -94,8 +108,25 @@ const routes = {
   ti: "/magistrats",
 };
 
-export const auth = (ctx) => {
+const auth = async (ctx) => {
+  if (!authCredentials.token) {
+    const { logged } = nextCookie(ctx);
+    if (logged === "1") {
+      const response = await fetch(`${API_URL}/api/auth/get-token`, {
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "GET",
+      });
+      if (response.status === 200) {
+        const { token } = response.json();
+        authCredentials.token = token;
+      }
+    }
+  }
   const { token } = authCredentials;
+
   const { pathname } = ctx;
   const isPublic =
     pathname === "/login" ||

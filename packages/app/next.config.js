@@ -30,6 +30,10 @@ module.exports = flow(
 )({
   publicRuntimeConfig: {
     API_URL: process.env.API_URL || "http://127.0.0.1:4000",
+    API_URL_DOCKER:
+      process.env.API_URL_DOCKER ||
+      process.env.API_URL ||
+      "http://127.0.0.1:4000",
     GRAPHQL_SERVER_URI:
       process.env.GRAPHQL_SERVER_URI || "http://localhost:5000/v1/graphql",
     GRAPHQL_SERVER_URI_DOCKER:
@@ -40,6 +44,16 @@ module.exports = flow(
     PACKAGE_VERSION: process.env.VERSION || require("./package.json").version,
     SENTRY_PUBLIC_DSN: process.env.SENTRY_PUBLIC_DSN,
   },
+  async rewrites() {
+    return [
+      // Rewrite everything to `pages/index`
+      {
+        destination: "/",
+        source: "/:any*",
+      },
+    ];
+  },
+  target: "serverless",
   webpack: (config, { isServer }) => {
     if (!isServer) {
       config.resolve.alias["@sentry/node"] = "@sentry/browser";
