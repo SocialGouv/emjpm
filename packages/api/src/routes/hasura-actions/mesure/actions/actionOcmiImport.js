@@ -5,8 +5,6 @@ const { Mandataire } = require("~/models");
 const mesureStatesService = require("~/services/updateMesureStates");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const fetchTribunaux = require("~/controllers/editor/service/fetchTribunaux");
-const { MesureRessources } = require("~/models");
-const { MesureEtat } = require("~/models");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 module.exports = async (req, res) => {
