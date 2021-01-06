@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
 
 import { LoadingWrapper } from "~/components/Commons";
 
@@ -8,7 +9,8 @@ import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
 import { LB_USER } from "./queries";
 
 export const ListeBlancheEdit = (props) => {
-  const { id, handleSubmit, handleCancel } = props;
+  const { handleSubmit, handleCancel } = props;
+  const { id } = useParams();
   const { data, error, loading } = useQuery(LB_USER, {
     variables: {
       id,

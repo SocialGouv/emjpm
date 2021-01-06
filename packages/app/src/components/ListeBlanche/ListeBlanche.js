@@ -8,15 +8,9 @@ import { ListeBlancheServices } from "./ListeBlancheServices";
 
 async function onSelectItem(history, { type, origin, id }) {
   if (type === "mandataire") {
-    await history.push(
-      `/${origin}/liste-blanche/[id]`,
-      `/${origin}/liste-blanche/${id}`
-    );
+    await history.push(`/${origin}/liste-blanche/${id}`);
   } else if (type === "service") {
-    await history.push(
-      `/${origin}/liste-blanche/services/[id]`,
-      `/${origin}/liste-blanche/services/${id}`
-    );
+    await history.push(`/${origin}/liste-blanche/services/${id}`);
   }
   window.scrollTo(0, 0);
 }
