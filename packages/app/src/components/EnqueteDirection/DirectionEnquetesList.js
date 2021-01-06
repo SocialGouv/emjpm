@@ -19,9 +19,7 @@ export const DirectionEnquetesList = () => {
   const { enquetes } = data;
 
   function openEnqueteDetails(enqueteId) {
-    history.push("/direction/enquetes/[enquete_id]", {
-      pathname: `/direction/enquetes/${enqueteId}`,
-    });
+    history.push(`/direction/enquetes/${enqueteId}`);
   }
   return (
     <Fragment>

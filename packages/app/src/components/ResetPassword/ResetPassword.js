@@ -39,9 +39,7 @@ const checkStatus = async (
   }
   toggleMessage(true);
   setTimeout(function () {
-    history.push("/login", "/login", {
-      shallow: true,
-    });
+    history.push("/login");
   }, 3000);
   return json;
 };
