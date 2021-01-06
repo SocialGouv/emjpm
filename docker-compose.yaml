@@ -88,15 +88,5 @@ services:
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       DATABASE_URL: $DATABASE_URL
 
-  bootstrap:
-    restart: "no"
-    image: node:15-alpine
-    working_dir: /home/node/app
-    user: node
-    volumes:
-      - ./:/home/node/app
-    command: |
-      sh -c "[ -d node_modules ] || npx lerna bootstrap"
-
 volumes:
   emjpm-pgdata:
