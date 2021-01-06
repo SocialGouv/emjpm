@@ -2,7 +2,10 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
-    "dev": "lerna run dev --parallel",
+    "dev:server": "docker-compose up --build -d",
+    "dev:server:log": "docker-compose logs -f",
+    "dev:app": "yarn workspace @emjpm/app start",
+    "dev": "yarn dev:server && yarn dev:app",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
