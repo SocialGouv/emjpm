@@ -84,9 +84,6 @@ const Mandataires = () => {
           <Box sx={twoColumnStyle}>
             <AvailabilityMap />
           </Box>
-          {/* <Box sx={twoColumnStyle}>
-            <MandatairesCapacity />
-          </Box> */}
         </FlexWrapper>
       </LayoutDirection>
     </FiltersContextSerializableProvider>

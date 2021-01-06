@@ -50,8 +50,8 @@ export const ListeBlanchePreposeForm = (props) => {
           };
         })
       : [],
-    firstname: data.nom || "",
-    lastname: data.prenom || "",
+    firstname: data.prenom || "",
+    lastname: data.nom || "",
   };
 
   const formik = useFormik({

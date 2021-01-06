@@ -43,12 +43,12 @@ const MandatairesList = (props) => {
   }, [filters]);
 
   const variables = {
-    departement: filters.departement ? filters.departement : null,
+    departement: filters.departement ? parseInt(filters.departement) : null,
     discriminator: selectedType ? selectedType.value : null,
     limit: RESULT_PER_PAGE,
     offset: currentOffset,
     order: selectedCapacity ? selectedCapacity.value : null,
-    region: filters.region ? filters.region : null,
+    region: filters.region ? parseInt(filters.region) : null,
   };
 
   if (filters.nom) {
