@@ -11,6 +11,8 @@ export const useMatomo = () => {
     if (previousPathRef.current === pathname) {
       return;
     }
+    previousPathRef.current = pathname;
+    // console.log({ pathname, title: document.title });
 
     // In order to ensure that the page title had been updated,
     // we delayed pushing the tracking to the next tick.
@@ -29,7 +31,6 @@ export const useMatomo = () => {
         matopush(["trackPageView"]);
       }
       matopush(["enableLinkTracking"]);
-      previousPathRef.current = pathname;
     }, 0);
   }, [location]);
 };

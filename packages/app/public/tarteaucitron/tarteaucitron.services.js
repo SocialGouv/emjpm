@@ -1,5 +1,5 @@
-/*global tarteaucitron, Piwik*/
-/*jslint regexp: true, nomen: true*/
+/* global tarteaucitron, Piwik */
+/* jslint regexp: true, nomen: true */
 // google analytics
 
 /*
@@ -28,25 +28,27 @@ tarteaucitron.services.matomo = {
     }
 
     window._paq = window._paq || [];
-    window._paq.push(["setSiteId", tarteaucitron.user.matomoId]);
-    window._paq.push([
-      "setTrackerUrl",
-      tarteaucitron.user.matomoHost + "piwik.php",
-    ]);
-    window._paq.push(["setDoNotTrack", 1]);
-    window._paq.push(["trackPageView"]);
-    window._paq.push(["setIgnoreClasses", ["no-tracking", "colorbox"]]);
-    window._paq.push(["enableLinkTracking"]);
-    window._paq.push([
+
+    function matopush(args) {
+      window._paq.push(args);
+    }
+
+    matopush(["setSiteId", tarteaucitron.user.matomoId]);
+    matopush(["setTrackerUrl", tarteaucitron.user.matomoHost + "piwik.php"]);
+    matopush(["setDoNotTrack", 1]);
+    matopush(["trackPageView"]);
+    matopush(["setIgnoreClasses", ["no-tracking", "colorbox"]]);
+    // matopush(["enableLinkTracking"]);
+    matopush([
       function () {
-        var self = this;
+        const self = this;
         function getOriginalVisitorCookieTimeout() {
-          var now = new Date(),
+          const now = new Date(),
             nowTs = Math.round(now.getTime() / 1000),
             visitorInfo = self.getVisitorInfo();
-          var createTs = parseInt(visitorInfo[2]);
-          var cookieTimeout = 33696000; // 13 mois en secondes
-          var originalTimeout = createTs + cookieTimeout - nowTs;
+          const createTs = parseInt(visitorInfo[2]);
+          const cookieTimeout = 33696000; // 13 mois en secondes
+          const originalTimeout = createTs + cookieTimeout - nowTs;
           return originalTimeout;
         }
         this.setVisitorCookieTimeout(getOriginalVisitorCookieTimeout());
@@ -63,7 +65,7 @@ tarteaucitron.services.matomo = {
     );
 
     // waiting for piwik to be ready to check first party cookies
-    var interval = setInterval(function () {
+    const interval = setInterval(function () {
       if (typeof Piwik === "undefined") return;
 
       clearInterval(interval);
@@ -72,10 +74,10 @@ tarteaucitron.services.matomo = {
       Piwik.getTracker();
 
       // looping throught cookies
-      var theCookies = document.cookie.split(";");
-      for (var i = 1; i <= theCookies.length; i++) {
-        var cookie = theCookies[i - 1].split("=");
-        var cookieName = cookie[0].trim();
+      const theCookies = document.cookie.split(";");
+      for (let i = 1; i <= theCookies.length; i++) {
+        const cookie = theCookies[i - 1].split("=");
+        const cookieName = cookie[0].trim();
 
         // if cookie starts like a piwik one, register it
         if (cookieName.indexOf("_pk_") === 0) {
