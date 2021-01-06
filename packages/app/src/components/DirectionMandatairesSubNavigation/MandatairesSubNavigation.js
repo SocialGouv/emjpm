@@ -3,11 +3,10 @@ import React from "react";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
-import { MandatairesExport } from "~/components/DirectionMandatairesExport";
 
 import { MandatairesSubNavigationStyle } from "./style";
 
-const MandatairesSubNavigation = ({ router, ...props }) => {
+const MandatairesSubNavigation = (props) => {
   return (
     <Flex sx={MandatairesSubNavigationStyle} {...props}>
       <Flex>
@@ -18,9 +17,6 @@ const MandatairesSubNavigation = ({ router, ...props }) => {
           </LinkButton>
         </Box>
       </Flex>
-      {router.pathname === "/direction/mandataires/list" && (
-        <MandatairesExport />
-      )}
     </Flex>
   );
 };

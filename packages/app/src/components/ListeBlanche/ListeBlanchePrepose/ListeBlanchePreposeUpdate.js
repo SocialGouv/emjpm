@@ -9,10 +9,10 @@ import { ETABLISSEMENTS } from "./queries";
 function getPropertiesToUpdate(values) {
   const propertiesToUpdate = {};
   if (values.firstname) {
-    propertiesToUpdate.nom = values.firstname;
+    propertiesToUpdate.prenom = values.firstname;
   }
   if (values.lastname) {
-    propertiesToUpdate.prenom = values.lastname;
+    propertiesToUpdate.nom = values.lastname;
   }
   if (values.email) {
     propertiesToUpdate.email = values.email;

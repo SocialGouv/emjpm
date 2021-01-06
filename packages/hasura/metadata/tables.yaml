@@ -7190,6 +7190,51 @@
       allow_aggregations: true
 - table:
     schema: public
+    name: view_mesure_gestionnaire_departement
+  object_relationships:
+  - name: departement
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: departements
+        column_mapping:
+          department_id: id
+  - name: mandataire
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: mandataires
+        column_mapping:
+          mandataire_id: id
+  - name: service
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: services
+        column_mapping:
+          service_id: id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - service_id
+      - mandataire_id
+      - discriminator
+      - nom
+      - department_id
+      - dep_nom
+      - mesures_max
+      - mesures_awaiting
+      - mesures_in_progress
+      - remaining_capacity
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: view_mesure_gestionnaire_tis
   object_relationships:
   - name: gestionnaire
