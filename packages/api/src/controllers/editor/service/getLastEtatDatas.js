@@ -8,7 +8,7 @@ async function getLastEtatDatas(etats) {
   });
   const lastEtat = etats ? etats[etats.length - 1] : null;
 
-  if (!isFrance(lastEtat.pays)) {
+  if (!isFrance(lastEtat.pays) || !lastEtat.code_postal) {
     return {
       lastEtat,
     };
