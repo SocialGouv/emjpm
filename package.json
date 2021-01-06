@@ -2,15 +2,14 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
-    "dev:server": "yarn dev server:up && yarn dev server:log",
-    "dev:server:up": "docker-compose up --build -d",
+    "dev:server": "docker-compose up --build -d",
     "dev:server:log": "docker-compose logs -f",
     "dev:app": "yarn workspace @emjpm/app start",
-    "dev": "yarn dev:server:up && yarn dev:app",
+    "dev": "yarn dev:server && yarn dev:app",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
-    "start": "yarn dev",
+    "start": "lerna run start --parallel",
     "test": "lerna run test --parallel",
     "postinstall:run": "lerna run postinstall",
     "release": "scripts/gitops/release"
