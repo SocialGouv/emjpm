@@ -13,10 +13,7 @@ export const CURRENT_USER = gql`
 export const GET_SERVICE_USERS = gql`
   query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
     enquetes(
-      where: {
-        status: { _eq: "created" }
-        _or: [{ date_fin: { _lt: $endDate } }, { date_fin: { _is_null: true } }]
-      }
+      where: { status: { _eq: "created" }, date_fin: { _gt: $endDate } }
     ) {
       annee
       status
@@ -169,12 +166,9 @@ export const ADMIN_USERS = gql`
 `;
 
 export const MANDATAIRE_USERS = gql`
-  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz!) {
     enquetes(
-      where: {
-        status: { _eq: "created" }
-        _or: [{ date_fin: { _lt: $endDate } }, { date_fin: { _is_null: true } }]
-      }
+      where: { status: { _eq: "created" }, date_fin: { _gt: $endDate } }
     ) {
       annee
       status

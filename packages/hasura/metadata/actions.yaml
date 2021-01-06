@@ -120,6 +120,16 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+- name: import_ocmi_mesures
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/import-ocmi-mesures'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
 - name: mandataire_statistics
   definition:
     kind: ""
@@ -132,16 +142,6 @@ actions:
   - role: individuel
   - role: prepose
   - role: service
-- name: import_ocmi_mesures
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/import-ocmi-mesures'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
 - name: stat_available_mesures
   definition:
     kind: ""

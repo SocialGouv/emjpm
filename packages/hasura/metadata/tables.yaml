@@ -5560,6 +5560,13 @@
       columns:
       - siret
       filter: {}
+      limit: 1
+  - role: prepose
+    permission:
+      columns:
+      - siret
+      filter: {}
+      limit: 0
 - table:
     schema: public
     name: prestations_sociales
