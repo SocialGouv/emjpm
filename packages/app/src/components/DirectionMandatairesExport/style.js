@@ -1,3 +1,0 @@
-const MandatairesExportStyle = {};
-
-export { MandatairesExportStyle };
