@@ -81,8 +81,7 @@
     "lint:pre-commit": "yarn lint:fix",
     "postinstall": "link-module-alias",
     "prettier": "prettier --check '**/*.js'",
-    "prettier:fix": "prettier --write '**/*.js'",
-    "start:build": "serve -s build"
+    "prettier:fix": "prettier --write '**/*.js'"
   },
   "eslintConfig": {
     "extends": [
