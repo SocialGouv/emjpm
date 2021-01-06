@@ -109,7 +109,7 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
         </HeadingTitle>
         <Box mb={4}>
           <EnqueteFormYesNoField
-            id={`actions_information_tuteurs_familiaux`}
+            id={"actions_information_tuteurs_familiaux"}
             label="Vous menez des actions d'information des tuteurs familiaux"
             enqueteContext={enqueteContext}
             enqueteForm={enqueteForm}

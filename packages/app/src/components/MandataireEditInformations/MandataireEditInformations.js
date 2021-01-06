@@ -55,7 +55,7 @@ const MandataireEditInformations = ({
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     if (
-      values.email != user.email &&
+      values.email !== user.email &&
       (await isEmailExists(client, values.email))
     ) {
       setErrors({

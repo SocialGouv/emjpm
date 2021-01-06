@@ -59,17 +59,16 @@ const SignupMagistratForm = ({ tiDatas }) => {
 
   return (
     <Fragment>
-      <HeadingTitle
-        p="1"
-        m="1"
-      >{`Création d'un compte de magistrat`}</HeadingTitle>
+      <HeadingTitle p="1" m="1">
+        {"Création d'un compte de magistrat"}
+      </HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Tribunal`}</Heading4>
+            <Heading4>{"Tribunal"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Dans quel tribunal exercez-vous?`}
+              {"Dans quel tribunal exercez-vous?"}
             </Text>
           </FormGrayBox>
           <FormInputBox>

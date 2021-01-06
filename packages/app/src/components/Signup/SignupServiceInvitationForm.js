@@ -31,7 +31,7 @@ export const SignupServiceInvitationForm = (props) => {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Information personnelle`}</Heading4>
+          <Heading4>{"Information personnelle"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             Ces informations permettent de vous identifier.
           </Text>
@@ -53,7 +53,7 @@ export const SignupServiceInvitationForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Identifiants de connexion`}</Heading4>
+          <Heading4>{"Identifiants de connexion"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}

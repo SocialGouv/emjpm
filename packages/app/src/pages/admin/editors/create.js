@@ -10,7 +10,7 @@ const AdminEditorsCreatePage = () => {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <HeadingTitle>{`Création d'un éditeur`}</HeadingTitle>
+        <HeadingTitle>{"Création d'un éditeur"}</HeadingTitle>
         <Flex
           sx={{
             flexWrap: "wrap",

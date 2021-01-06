@@ -118,7 +118,7 @@ const AdminUsers = () => {
 export { AdminUsers };
 
 function getDirectionLabel({ type, directions }) {
-  let directionLabel = ` - `;
+  let directionLabel = " - ";
   if (isDirection({ type })) {
     const direction = directions[0];
     if (direction) {

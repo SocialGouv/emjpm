@@ -117,7 +117,9 @@ export const ListeBlanchePreposeForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Liste des établissements"}</Heading4>
           <Text mt={"20px"} mb={2}>
-            {`Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement.`}
+            {
+              "Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement."
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>

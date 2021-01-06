@@ -39,7 +39,7 @@ const checkStatus = async (
   }
   toggleMessage(true);
   setTimeout(function () {
-    history.push(`/login`, `/login`, {
+    history.push("/login", "/login", {
       shallow: true,
     });
   }, 3000);
@@ -78,9 +78,11 @@ const ResetPassword = (props) => {
     <Card sx={cardStyle} maxWidth={["100%", "60%", "50%"]}>
       <Box sx={grayBox}>
         <Box>
-          <Heading4 mb="1">{`Nouveau mot de passe`}</Heading4>
+          <Heading4 mb="1">{"Nouveau mot de passe"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Pour changer votre mot de passe, saisissez les deux champs ci-dessous.`}
+            {
+              "Pour changer votre mot de passe, saisissez les deux champs ci-dessous."
+            }
           </Text>
           {isMessageVisible && (
             <Box

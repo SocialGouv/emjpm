@@ -19,7 +19,7 @@ export const DirectionEnquetesList = () => {
   const { enquetes } = data;
 
   function openEnqueteDetails(enqueteId) {
-    history.push(`/direction/enquetes/[enquete_id]`, {
+    history.push("/direction/enquetes/[enquete_id]", {
       pathname: `/direction/enquetes/${enqueteId}`,
     });
   }
@@ -42,10 +42,11 @@ export const DirectionEnquetesList = () => {
               new Date(enquete.created_at),
               "dd/MM/yyyy"
             )}  au ${format(new Date(enquete.date_fin), "}</MM/yyyy")}`}</Text>
-            <Text
-              fontSize={1}
-              pl={5}
-            >{`durant cette période le formulaire est visible dans l'espace des mandataires.`}</Text>
+            <Text fontSize={1} pl={5}>
+              {
+                "durant cette période le formulaire est visible dans l'espace des mandataires."
+              }
+            </Text>
           </Flex>
         </Card>
       ))}

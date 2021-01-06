@@ -21,9 +21,9 @@ export const AdminEditorForm = (props) => {
     <Flex flexWrap="wrap">
       <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
         <Box height="230px">
-          <Heading4>{`Information de l'éditeur`}</Heading4>
+          <Heading4>{"Information de l'éditeur"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Informations relatives à l'éditeur`}
+            {"Informations relatives à l'éditeur"}
           </Text>
         </Box>
       </Box>

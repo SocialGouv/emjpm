@@ -50,7 +50,9 @@ export const MesureEtatCreateOrEditForm = (props) => {
           )}
           {!mesureEtatToEdit && <Heading4 mb={1}>{"Ajout d'un état"}</Heading4>}
           <Text lineHeight="1.5" color="textSecondary">
-            {`Merci de renseigner les informations de l'état de la mesure de la protection`}
+            {
+              "Merci de renseigner les informations de l'état de la mesure de la protection"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>

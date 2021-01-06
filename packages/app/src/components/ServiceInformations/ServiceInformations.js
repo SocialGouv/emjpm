@@ -106,7 +106,9 @@ const ServiceInformations = () => {
           <Box>
             <Heading5>Géolocalisation</Heading5>
             <Text>
-              {`Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats`}
+              {
+                "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
+              }
             </Text>
           </Box>
           <Flex my={1}>

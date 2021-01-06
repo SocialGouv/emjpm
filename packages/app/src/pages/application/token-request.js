@@ -11,7 +11,7 @@ const AuthorizationPage = () => {
     <LayoutPublic>
       <BoxWrapper>
         <HeadingTitle mt={"80px"} textAlign="center">
-          {`Demander des accès à l'api Emjpm`}
+          {"Demander des accès à l'api Emjpm"}
         </HeadingTitle>
       </BoxWrapper>
       <FlexWrapper my="50px">

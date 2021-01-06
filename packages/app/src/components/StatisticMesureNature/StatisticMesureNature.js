@@ -77,7 +77,7 @@ const StatisticMesureNature = () => {
       </Box>
       {data?.length === 0 && (
         <Flex pt={7}>
-          <Text>{`Aucune donnée disponible. Merci de renseigner `}</Text>
+          <Text>{"Aucune donnée disponible. Merci de renseigner "}</Text>
           <Link to="mandataires/mesures">
             <RebassLink pl="4px">vos mesures</RebassLink>
           </Link>

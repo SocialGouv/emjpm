@@ -75,9 +75,9 @@ const AuthorizationLogin = (props) => {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Connectez-vous à votre compte.`}</Heading4>
+          <Heading4 mb="1">{"Connectez-vous à votre compte."}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez votre email et votre mot de passe pour vous connecter.`}
+            {"Indiquez votre email et votre mot de passe pour vous connecter."}
           </Text>
         </Box>
       </Box>
@@ -134,12 +134,14 @@ const AuthorizationLogin = (props) => {
             </Box>
           </Flex>
           <Box my="2">
-            <Link to="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
+            <Link to="/account/forgot-password">
+              {"J'ai oublié mon mot de passe et / ou mon identifiant"}
+            </Link>
           </Box>
           <Box>
-            <Link
-              to={"mailto:support.emjpm@fabrique.social.gouv.fr"}
-            >{`Contactez-nous en cas de difficulté de connexion`}</Link>
+            <Link to={"mailto:support.emjpm@fabrique.social.gouv.fr"}>
+              {"Contactez-nous en cas de difficulté de connexion"}
+            </Link>
           </Box>
         </form>
       </Box>

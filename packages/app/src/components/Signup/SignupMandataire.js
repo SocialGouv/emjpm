@@ -85,7 +85,7 @@ const SignupMandataireForm = () => {
   return (
     <Fragment>
       <HeadingTitle p="1" m="1">
-        {`Demande de création d'un compte de mandataire`}
+        {"Demande de création d'un compte de mandataire"}
       </HeadingTitle>
 
       <form onSubmit={formik.handleSubmit}>
@@ -93,7 +93,7 @@ const SignupMandataireForm = () => {
         {isIndividuel(user) && (
           <Flex>
             <FormGrayBox>
-              <Heading4>{`Information professionelle`}</Heading4>
+              <Heading4>{"Information professionelle"}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
                 {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
@@ -112,7 +112,7 @@ const SignupMandataireForm = () => {
         )}
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Téléphone`}</Heading4>
+            <Heading4>{"Téléphone"}</Heading4>
           </FormGrayBox>
           <FormInputBox>
             <FormGroupInput
@@ -134,9 +134,11 @@ const SignupMandataireForm = () => {
 
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Adresse`}</Heading4>
+            <Heading4>{"Adresse"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Cette adresse permettra de vous localiser sur la carte des mesures`}
+              {
+                "Cette adresse permettra de vous localiser sur la carte des mesures"
+              }
             </Text>
           </FormGrayBox>
           <FormInputBox>
@@ -152,9 +154,9 @@ const SignupMandataireForm = () => {
 
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Capacité`}</Heading4>
+            <Heading4>{"Capacité"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Indiquez le nombre de mesures maximal souhaité`}
+              {"Indiquez le nombre de mesures maximal souhaité"}
             </Text>
           </FormGrayBox>
           <FormInputBox>

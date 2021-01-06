@@ -23,7 +23,7 @@ const ListBlanchePage = () => {
         </HeadingTitle>
         <ListeBlancheServiceCreate
           onSuccess={async () => {
-            await history.push(`/admin/liste-blanche`);
+            await history.push("/admin/liste-blanche");
           }}
           handleCancel={async () => {
             await history.push("/admin/liste-blanche");

@@ -32,7 +32,11 @@ const MagistratMesureServiceTitle = (props) => {
     <Fragment>
       <Heading2 mb="1">{`Réserver une mesure auprès de ${etablissement}`}</Heading2>
       {limitReached && (
-        <Heading4 color="error">{`Pour votre information, le mandataire a atteint le nombre de mesures souhaitées`}</Heading4>
+        <Heading4 color="error">
+          {
+            "Pour votre information, le mandataire a atteint le nombre de mesures souhaitées"
+          }
+        </Heading4>
       )}
     </Fragment>
   );

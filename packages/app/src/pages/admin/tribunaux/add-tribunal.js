@@ -10,7 +10,7 @@ const AddTribunauxPage = () => {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <HeadingTitle>{`Création d'un tribunal`}</HeadingTitle>
+        <HeadingTitle>{"Création d'un tribunal"}</HeadingTitle>
         <Flex
           sx={{
             flexWrap: "wrap",

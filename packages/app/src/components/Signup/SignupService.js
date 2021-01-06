@@ -73,17 +73,18 @@ const SignupServiceForm = ({ serviceDatas }) => {
 
   return (
     <Fragment>
-      <HeadingTitle
-        p="1"
-        m="1"
-      >{`Création d'un compte de service mandataire`}</HeadingTitle>
+      <HeadingTitle p="1" m="1">
+        {"Création d'un compte de service mandataire"}
+      </HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Votre service`}</Heading4>
+            <Heading4>{"Votre service"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez.`}
+              {
+                "Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez."
+              }
             </Text>
           </FormGrayBox>
           <FormInputBox>

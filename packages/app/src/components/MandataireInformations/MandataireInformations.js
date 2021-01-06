@@ -54,7 +54,9 @@ const MandataireInformations = () => {
           <Box mb={2}>
             <Heading5>Géolocalisation</Heading5>
             <Text>
-              {`Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats`}
+              {
+                "Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats"
+              }
             </Text>
           </Box>
           <Flex my={1}>

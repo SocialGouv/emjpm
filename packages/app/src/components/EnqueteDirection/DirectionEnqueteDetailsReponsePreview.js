@@ -114,7 +114,7 @@ function formatReponseLabel(enqueteReponse) {
           : ""
       }"`;
     case "service":
-      return `Service`;
+      return "Service";
   }
   return "";
 }

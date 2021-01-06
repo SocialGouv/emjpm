@@ -15,7 +15,7 @@ const ServiceAntenneEditPage = () => {
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
-        <HeadingTitle mx="1">{`Modification de l'antenne`}</HeadingTitle>
+        <HeadingTitle mx="1">{"Modification de l'antenne"}</HeadingTitle>
         <ServiceAntenneEdit user={user} antenneId={antenneId} mt="3" />
       </BoxWrapper>
     </LayoutServices>

@@ -40,7 +40,7 @@ export const ListeBlancheIndividuelItem = (props) => {
         </Flex>
 
         <Flex width="30%" flexDirection="column">
-          <Text sx={labelStyle}>{`Départements`}</Text>
+          <Text sx={labelStyle}>{"Départements"}</Text>
           <Text sx={descriptionStyle}>
             {item.lb_departements
               .map((lbDep) =>

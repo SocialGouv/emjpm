@@ -64,7 +64,7 @@ const ServiceMemberInvitations = (props) => {
                       sx={listActionStyle}
                       onClick={() => handleDelete(invitation.id)}
                     >
-                      {`Supprimer l'invitation`}
+                      {"Supprimer l'invitation"}
                     </Box>
                   )}
                 </Box>

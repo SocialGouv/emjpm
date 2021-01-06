@@ -14,7 +14,7 @@ const LinkButtonStyle = (isActive, props) => {
   let properties = {
     ...props.sx,
     bg,
-    border: props.outline ? `1px solid` : "",
+    border: props.outline ? "1px solid" : "",
     borderColor: props.outline ? color : "",
     borderRadius: "default",
     color,

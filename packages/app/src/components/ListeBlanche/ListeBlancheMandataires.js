@@ -10,7 +10,7 @@ import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { LB_USERS } from "./queries";
 
 function getRequestFilters(filters) {
-  var requestFilters = {
+  const requestFilters = {
     type: { _in: ["individuel", "prepose"] },
   };
 

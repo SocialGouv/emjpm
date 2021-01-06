@@ -81,7 +81,7 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
 
       <Box mt={4}>
         <EnqueteFormYesNoField
-          id={`debut_activite_avant_2009`}
+          id={"debut_activite_avant_2009"}
           label="Exerciez vous l'activité de mandataire avant le 01/01/2009 ?"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}

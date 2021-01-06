@@ -108,8 +108,8 @@ const MagistratMesureAdd = (props) => {
         href: "/magistrats/gestionnaires/[gestionnaire_id]",
       }
     : {
-        as: `/magistrats`,
-        href: `/magistrats`,
+        as: "/magistrats",
+        href: "/magistrats",
       };
 
   return (

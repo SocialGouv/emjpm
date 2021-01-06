@@ -152,7 +152,9 @@ export const ListeBlancheIndividuelForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
           <Text mt={2} mb={1}>
-            {`Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur.`}
+            {
+              "Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur."
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>

@@ -31,12 +31,12 @@ function Footer(props) {
             </ListItem>
             <ListItem>
               <Link target="_blank" to="/politique-confidentialite">
-                {`Politique de confidentialité`}
+                {"Politique de confidentialité"}
               </Link>
             </ListItem>
             <ListItem>
               <Link target="_blank" to="/conditions-utilisation">
-                {`Conditions d'utilisation`}
+                {"Conditions d'utilisation"}
               </Link>
             </ListItem>
             <ListItem>
@@ -79,12 +79,12 @@ function Footer(props) {
                 target="_blank"
                 to="https://solidarites-sante.gouv.fr/ministere/organisation/organisation-des-directions-et-services/article/organisation-de-la-direction-generale-de-la-cohesion-sociale-dgcs"
               >
-                {`La Direction Générale de la Cohésion Sociale`}
+                {"La Direction Générale de la Cohésion Sociale"}
               </Link>
             </ListItem>
             <ListItem>
               <Link target="_blank" to={"https://www.fabrique.social.gouv.fr/"}>
-                {`La fabrique numérique des ministères sociaux`}
+                {"La fabrique numérique des ministères sociaux"}
               </Link>
             </ListItem>
           </List>

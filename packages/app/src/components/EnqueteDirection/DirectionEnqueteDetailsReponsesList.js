@@ -125,7 +125,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading2>{`Réponses à l'enquête`}</Heading2>
+        <Heading2>{"Réponses à l'enquête"}</Heading2>
       </Flex>
 
       <DirectionEnqueteReponsesCriteria

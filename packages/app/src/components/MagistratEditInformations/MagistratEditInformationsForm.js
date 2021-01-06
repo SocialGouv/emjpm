@@ -65,7 +65,7 @@ const MagistratEditInformationsForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Tribunal"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Veuillez renseigner le tribunal dans lequel vous exercez.`}
+            {"Veuillez renseigner le tribunal dans lequel vous exercez."}
           </Text>
         </FormGrayBox>
         <FormInputBox>

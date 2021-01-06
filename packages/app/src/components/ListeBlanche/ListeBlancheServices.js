@@ -11,7 +11,7 @@ import { LB_SERVICES } from "./queries";
 const resultPerPage = 50;
 
 function getRequestFilters(filters) {
-  var requestFilters = {};
+  const requestFilters = {};
 
   if (filters.departement) {
     requestFilters.department_id = { _eq: filters.departement };

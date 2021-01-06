@@ -107,18 +107,18 @@ const MagistratMesureMandataire = (props) => {
               )}
               {serviceId && (
                 <Box>
-                  <Text
-                    sx={MagistratTitleMandataireStyle}
-                  >{`Nom de l'association`}</Text>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    {"Nom de l'association"}
+                  </Text>
                   <Text sx={MagistratContentMandataireStyle}>
                     {etablissement}
                   </Text>
                 </Box>
               )}
               <Box>
-                <Text
-                  sx={MagistratTitleMandataireStyle}
-                >{`Adresse d’activité`}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  {"Adresse d’activité"}
+                </Text>
                 <Text
                   sx={MagistratContentMandataireStyle}
                 >{`${adresse} ${codePostal} ${ville}`}</Text>

@@ -17,7 +17,7 @@ export const AdminUserDeleteForm = (props) => {
 
   const [deleteUser] = useMutation(DELETE_USER, {
     onCompleted: async () => {
-      history.push(`/admin/users`);
+      history.push("/admin/users");
     },
   });
 
@@ -39,10 +39,18 @@ export const AdminUserDeleteForm = (props) => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">{"Supprimer l'utilisateur"}</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement un utilisateur du système eMJPM. Toute suppression est irréversible.`}
+          {
+            "Vous êtes sur le point de supprimer définitivement un utilisateur du système eMJPM. Toute suppression est irréversible."
+          }
         </Text>
-        <Text lineHeight="1.5">{`Si vous souhaitez supprimer cet utilisateur, cliquez sur "Supprimer l'utilisateur".`}</Text>
-        <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
+        <Text lineHeight="1.5">
+          {
+            'Si vous souhaitez supprimer cet utilisateur, cliquez sur "Supprimer l\'utilisateur".'
+          }
+        </Text>
+        <Text lineHeight="1.5">
+          {'Dans le cas contraire, cliquez sur "Annuler".'}
+        </Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">

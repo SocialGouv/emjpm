@@ -31,9 +31,9 @@ const DirectionEditInformationsForm = ({
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Modifier vos informations`}</Heading4>
+          <Heading4>{"Modifier vos informations"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Vos informations`}
+            {"Vos informations"}
           </Text>
         </FormGrayBox>
         <FormInputBox>

@@ -72,7 +72,7 @@ const IndicatorListTotal = () => {
   } = data;
   return (
     <Box>
-      <HeadingTitle py="4">{`France entière`}</HeadingTitle>
+      <HeadingTitle py="4">{"France entière"}</HeadingTitle>
       <Heading2>Inscrits</Heading2>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator

@@ -45,7 +45,9 @@ export const MesureRessourceCreateOrEditForm = (props) => {
             <Heading4 mb={1}>{"Ajout d'une ressource"}</Heading4>
           )}
           <Text lineHeight="1.5" color="textSecondary">
-            {`Merci de renseigner les informations de la ressource de la mesure de la protection`}
+            {
+              "Merci de renseigner les informations de la ressource de la mesure de la protection"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>

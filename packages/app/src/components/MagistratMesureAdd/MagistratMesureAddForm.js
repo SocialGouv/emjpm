@@ -38,7 +38,7 @@ export const MagistratMesureAddForm = (props) => {
       <Flex>
         <FormGrayBox>
           <Heading4>Jugement</Heading4>
-          <Text lineHeight="1.5">{`Information sur le jugement.`}</Text>
+          <Text lineHeight="1.5">{"Information sur le jugement."}</Text>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -69,7 +69,7 @@ export const MagistratMesureAddForm = (props) => {
       <Flex>
         <FormGrayBox>
           <Heading4>Majeur protégé</Heading4>
-          <Text lineHeight="1.5">{`Informations sur le majeur protégé`}</Text>
+          <Text lineHeight="1.5">{"Informations sur le majeur protégé"}</Text>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupSelect
@@ -93,7 +93,7 @@ export const MagistratMesureAddForm = (props) => {
         <FormGrayBox>
           <Heading4>Mesure de protection</Heading4>
           <Text lineHeight="1.5">
-            {`Informations sur la mesure de protection`}
+            {"Informations sur la mesure de protection"}
           </Text>
         </FormGrayBox>
         <FormInputBox>

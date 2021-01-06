@@ -66,7 +66,7 @@ export const MesureAccept = (props) => {
 
       if (!location || !location.department) {
         setErrors({
-          zipcode: `Le code postal semble invalide.`,
+          zipcode: "Le code postal semble invalide.",
         });
         return setSubmitting(false);
       } else {

@@ -66,7 +66,7 @@ const ServiceMembers = (props) => {
           <Flex sx={listStyle} index={i} key={member.user.email}>
             <Box sx={listEmailStyle}>{member.user.email}</Box>
             <Text sx={listDateStyle}>
-              {`Inscrit le `}
+              {"Inscrit le "}
               {stdFormatter.formatDateUI(member.user.created_at)}
             </Text>
             <Text sx={listDateStyle}>

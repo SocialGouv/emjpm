@@ -66,17 +66,16 @@ export const SignupDirection = () => {
 
   return (
     <Fragment>
-      <HeadingTitle
-        p="1"
-        m="1"
-      >{`Création d'un compte d'agent de l'état`}</HeadingTitle>
+      <HeadingTitle p="1" m="1">
+        {"Création d'un compte d'agent de l'état"}
+      </HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Institution`}</Heading4>
+            <Heading4>{"Institution"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Pour quelle direction travaillez-vous?`}
+              {"Pour quelle direction travaillez-vous?"}
             </Text>
           </FormGrayBox>
           <FormInputBox>

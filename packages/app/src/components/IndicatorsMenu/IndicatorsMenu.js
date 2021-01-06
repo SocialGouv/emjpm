@@ -43,7 +43,7 @@ const IndicatorsMenu = (props) => {
     <Scrollbar style={{ height: "100%", width: "100%" }}>
       <Box {...props} mr="1">
         <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
-          <Link to={`/stats`}>
+          <Link to={"/stats"}>
             <StyledLink sx={linkStyle}>France entière</StyledLink>
           </Link>
         </Card>
