@@ -47,7 +47,7 @@ const LoginCreateAccount = () => {
           OU
         </Text>
       </LineBox>
-      <LinkButton px="5" py="3" href="/signup">
+      <LinkButton px="5" py="3" to="/signup">
         Créer votre compte emjpm
       </LinkButton>
     </Flex>

@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
-import { useRouter } from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
@@ -12,7 +12,7 @@ export const DirectionEnqueteDetailsReponsePreview = ({
   enqueteId,
   enqueteReponseId,
 }) => {
-  const router = useRouter();
+  const history = useHistory();
   const currentStep = useCurrentStepFromUrl();
 
   const { data, loading, error } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
@@ -78,7 +78,7 @@ export const DirectionEnqueteDetailsReponsePreview = ({
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push(
+      await history.push(
         "/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]",
         {
           pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,

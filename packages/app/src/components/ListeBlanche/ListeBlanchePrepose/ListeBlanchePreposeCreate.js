@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import { useApolloClient, useMutation } from "react-apollo";
+import { useApolloClient, useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
@@ -12,11 +12,11 @@ import { ETABLISSEMENTS } from "./queries";
 export const ListeBlanchePreposeCreate = () => {
   const apolloClient = useApolloClient();
   const { type } = useContext(UserContext);
-  const router = useRouter();
+  const history = useHistory();
 
   const [createLbPrepose] = useMutation(CREATE_LB_USER_PREPOSE, {
     onCompleted: async () => {
-      await router.push(`/${type}/liste-blanche`);
+      await history.push(`/${type}/liste-blanche`);
     },
   });
 

@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { format } from "date-fns";
-import { useRouter } from "next/router";
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { Card } from "~/ui";
@@ -9,7 +9,7 @@ import { Card } from "~/ui";
 import { ENQUETES } from "./queries";
 
 export const DirectionEnquetesList = () => {
-  const router = useRouter();
+  const history = useHistory();
   const { data, loading } = useQuery(ENQUETES, { ssr: false });
 
   if (loading) {
@@ -19,7 +19,7 @@ export const DirectionEnquetesList = () => {
   const { enquetes } = data;
 
   function openEnqueteDetails(enqueteId) {
-    router.push(`/direction/enquetes/[enquete_id]`, {
+    history.push(`/direction/enquetes/[enquete_id]`, {
       pathname: `/direction/enquetes/${enqueteId}`,
     });
   }

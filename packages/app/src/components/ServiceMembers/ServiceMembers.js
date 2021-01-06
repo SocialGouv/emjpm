@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";

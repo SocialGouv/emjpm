@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation } from "@apollo/client";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
@@ -20,6 +20,8 @@ import { MagistratMandataireStyle } from "./style";
 
 const MagistratMesureAdd = (props) => {
   const { gestionnaireId } = props;
+
+  const history = useHistory();
 
   const {
     cabinet,
@@ -68,7 +70,7 @@ const MagistratMesureAdd = (props) => {
         },
       });
 
-      await Router.push(
+      await history.push(
         "/magistrats/mesures/[mesure_id]",
         `/magistrats/mesures/${mesure.id}`,
         {

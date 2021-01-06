@@ -1,12 +1,13 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { DirectionEditInformationsForm } from "./DirectionEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { DIRECTION } from "./queries";
 
 const DirectionEditInformations = ({ userId, successLink, cancelLink }) => {
+  const history = useHistory();
   const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(DIRECTION, {
     fetchPolicy: "network-only",
@@ -21,7 +22,7 @@ const DirectionEditInformations = ({ userId, successLink, cancelLink }) => {
     },
     update() {
       if (successLink) {
-        Router.push(successLink, successLink, {
+        history.push(successLink, successLink, {
           shallow: true,
         });
       }

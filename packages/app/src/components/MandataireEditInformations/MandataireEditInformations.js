@@ -1,7 +1,7 @@
-import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import Router from "next/router";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { isEmailExists } from "~/query-service/EmailQueryService";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
@@ -16,6 +16,7 @@ const MandataireEditInformations = ({
   successLink,
   isAdmin = false,
 }) => {
+  const history = useHistory();
   const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(MANDATAIRE, {
     fetchPolicy: "network-only",
@@ -30,7 +31,7 @@ const MandataireEditInformations = ({
     },
     update() {
       if (successLink) {
-        Router.push(`${successLink}`, `${successLink}`, {
+        history.push(`${successLink}`, `${successLink}`, {
           shallow: true,
         });
       }

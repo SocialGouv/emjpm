@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -140,12 +140,12 @@ const ServiceInformations = () => {
         </Box>
         <Flex mt="5" justifyContent="center">
           <Box>
-            <Link href="/services/edit-password">
+            <Link to="/services/edit-password">
               <Button variant="outline">Modifier votre mot de passe</Button>
             </Link>
           </Box>
           <Box ml={1}>
-            <LinkButton href="/services/edit-informations">
+            <LinkButton to="/services/edit-informations">
               Modifier les informations du service
             </LinkButton>
           </Box>

@@ -12,7 +12,7 @@ import {
 } from "./style";
 
 const Antenne = (props) => {
-  const { Link, linkText, href, sx, antenne, hasButton } = props;
+  const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
     <Card sx={sx}>
       <Heading4 sx={antenneTitleStyle}>{antenne.name}</Heading4>
@@ -38,7 +38,7 @@ const Antenne = (props) => {
       </Flex>
       {hasButton && (
         <Box mt="3">
-          <Link href={href}>{linkText}</Link>
+          <Link to={to}>{linkText}</Link>
         </Box>
       )}
     </Card>
@@ -48,9 +48,9 @@ const Antenne = (props) => {
 Antenne.defaultProps = {
   Link: null,
   hasButton: true,
-  href: null,
   linkText: null,
   sx: null,
+  to: null,
 };
 
 Antenne.propTypes = {
@@ -62,10 +62,11 @@ Antenne.propTypes = {
     preferences: PropTypes.arrayOf(PropTypes.string),
   }).isRequired,
   hasButton: PropTypes.bool,
-  href: PropTypes.string,
   linkText: PropTypes.string,
   // eslint-disable-next-line react/forbid-prop-types
   sx: PropTypes.object,
+
+  to: PropTypes.string,
 };
 
 export { Antenne };

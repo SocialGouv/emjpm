@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex } from "rebass";
@@ -48,7 +48,7 @@ const ServiceAntennes = (props) => {
           <Heading2>Antennes</Heading2>
           {!isAntenneCreationHidden && (
             <Box>
-              <LinkButton href="/services/antennes/create" ml="1">
+              <LinkButton to="/services/antennes/create" ml="1">
                 Créer une antenne
               </LinkButton>
             </Box>
@@ -86,7 +86,7 @@ function AntenneList({ service_antenne }) {
             key={antenne.id}
             antenne={antenne}
             linkText="Voir l'antenne"
-            href={parseInt(antenne.id, 10)}
+            to={parseInt(antenne.id, 10)}
             Link={AntenneLinkButton}
           />
         );
@@ -104,7 +104,7 @@ function NoAntenne() {
           flexGrow: 1,
         }}
       >
-        <img src="/static/images/enterprise.svg" alt="entreprise" />
+        <img src="/images/enterprise.svg" alt="entreprise" />
       </Box>
       <Box ml="5">
         <Heading4 mb="1">Créer des antennes pour votre service</Heading4>

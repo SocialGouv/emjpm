@@ -1,17 +1,17 @@
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Link } from "rebass";
 
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper, Button, Card, Heading2, Text } from "~/ui";
 
-const backLogin = () => {
-  Router.push("/login");
-};
-
 const cardStyle = { m: "1", mt: "5", p: "5" };
 
 const CongratulationPage = () => {
+  const history = useHistory();
+  const backLogin = () => {
+    history.push("/login");
+  };
   return (
     <LayoutPublic>
       <BoxWrapper mt={6} px="1" p={"150px"}>

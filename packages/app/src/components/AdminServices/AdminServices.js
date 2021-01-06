@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import React, { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
@@ -35,10 +35,7 @@ const RowItem = ({ item }) => {
             </Flex>
           </Box>
           <Box mr="1" width="120px">
-            <Link
-              href={`/admin/services/[service_id]`}
-              as={`/admin/services/${id}`}
-            >
+            <Link to={`/admin/services/${id}`}>
               <Button>Voir</Button>
             </Link>
           </Box>

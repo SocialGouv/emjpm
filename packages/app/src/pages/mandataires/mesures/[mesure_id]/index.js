@@ -6,10 +6,11 @@ import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
 import { MesureProvider } from "~/components/MesureContext";
 import { MesureView } from "~/components/MesureView";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const MandataireMesurePage = (props) => {
-  const { mesureId } = props;
+import useQuery from "~/util/useQuery";
+
+const MandataireMesurePage = () => {
+  const { mesure_id: mesureId } = useQuery();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>
@@ -24,8 +25,4 @@ const MandataireMesurePage = (props) => {
   );
 };
 
-MandataireMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(MandataireMesurePage);
+export default MandataireMesurePage;

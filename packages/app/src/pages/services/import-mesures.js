@@ -4,7 +4,6 @@ import { LayoutServices } from "~/components/Layout";
 import { ServiceMesureImport } from "~/components/ServiceMesureImport";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ServiceMesuresImport = () => {
   const { service_members } = useContext(UserContext);
@@ -19,4 +18,4 @@ const ServiceMesuresImport = () => {
   );
 };
 
-export default withAuthSync(ServiceMesuresImport);
+export default ServiceMesuresImport;

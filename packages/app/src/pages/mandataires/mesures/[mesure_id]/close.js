@@ -6,10 +6,11 @@ import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
 import { MesureClose } from "~/components/MesureClose";
 import { MesureProvider } from "~/components/MesureContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const CloseMesurePage = (props) => {
-  const { mesureId } = props;
+import useQuery from "~/util/useQuery";
+
+const CloseMesurePage = () => {
+  const { mesure_id: mesureId } = useQuery();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>
@@ -24,8 +25,4 @@ const CloseMesurePage = (props) => {
   );
 };
 
-CloseMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(CloseMesurePage);
+export default CloseMesurePage;

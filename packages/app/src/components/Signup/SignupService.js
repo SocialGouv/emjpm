@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -29,6 +29,7 @@ function getServiceOptions(services, departementId) {
 }
 
 const SignupServiceForm = ({ serviceDatas }) => {
+  const history = useHistory();
   const { user, service, setService, validateStepOne } = useContext(
     SignupContext
   );
@@ -53,7 +54,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
         body,
         onComplete: () => setSubmitting(false),
         onError: (errors) => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation"),
+        onSuccess: () => history.push("/signup/congratulation"),
       });
     },
     validationSchema: signupServiceSchema,
@@ -103,7 +104,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

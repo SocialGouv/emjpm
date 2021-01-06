@@ -84,12 +84,12 @@ const MandataireInformations = () => {
       </Flex>
       <Flex mt="5" justifyContent="center">
         <Box>
-          <Link href="/mandataires/edit-password">
+          <Link to="/mandataires/edit-password">
             <Button variant="outline">Modifier votre mot de passe</Button>
           </Link>
         </Box>
         <Box ml={1}>
-          <LinkButton href="/mandataires/edit-informations">
+          <LinkButton to="/mandataires/edit-informations">
             Modifier vos informations
           </LinkButton>
         </Box>

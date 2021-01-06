@@ -4,7 +4,6 @@ import { Box, Flex } from "rebass";
 import { DirectionInformations } from "~/components/DirectionInformations";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Heading2 } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Informations = () => {
   return (
@@ -32,4 +31,4 @@ const Informations = () => {
   );
 };
 
-export default withAuthSync(Informations);
+export default Informations;

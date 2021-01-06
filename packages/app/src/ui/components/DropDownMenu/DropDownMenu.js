@@ -58,7 +58,7 @@ const DropDownMenu = (props) => {
         {dropDownLinks.map((link) => {
           return (
             <Box key={link.title}>
-              <Link sx={menuItemStyle} href={link.url}>
+              <Link sx={menuItemStyle} to={link.to}>
                 {link.title}
               </Link>
             </Box>
@@ -79,7 +79,7 @@ DropDownMenu.propTypes = {
   dropDownLinks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
+      to: PropTypes.string.isRequired,
     })
   ).isRequired,
 };

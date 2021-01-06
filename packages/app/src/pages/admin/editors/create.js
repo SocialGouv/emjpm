@@ -5,7 +5,6 @@ import { AdminEditorCreate } from "~/components/AdminEditors/AdminEditorCreate";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminEditorsCreatePage = () => {
   return (
@@ -25,4 +24,4 @@ const AdminEditorsCreatePage = () => {
   );
 };
 
-export default withAuthSync(AdminEditorsCreatePage);
+export default AdminEditorsCreatePage;

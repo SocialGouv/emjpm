@@ -4,10 +4,11 @@ import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMandataire } from "~/components/MagistratMandataire";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const Gestionnaire = (props) => {
-  const { gestionnaireId } = props;
+import useQuery from "~/util/useQuery";
+
+const Gestionnaire = () => {
+  const { gestionnaire_id: gestionnaireId } = useQuery();
   const {
     magistrat: { ti_id: tiId },
   } = useContext(UserContext);
@@ -21,8 +22,4 @@ const Gestionnaire = (props) => {
   );
 };
 
-Gestionnaire.getInitialProps = async ({ query }) => {
-  return { gestionnaireId: query.gestionnaire_id };
-};
-
-export default withAuthSync(Gestionnaire);
+export default Gestionnaire;

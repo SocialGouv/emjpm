@@ -1,13 +1,13 @@
-import getConfig from "next/config";
 import React from "react";
 import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/components/Commons";
+import config from "~/config";
 import { BoxWrapper, Logo } from "~/ui";
 
 import { FooterItemStyle, FooterWrapperStyle } from "./style";
 
-const { publicRuntimeConfig } = getConfig();
+const { PACKAGE_VERSION } = config;
 
 function Footer(props) {
   const { hasMarginTop = true } = props;
@@ -25,22 +25,22 @@ function Footer(props) {
           <List sx={FooterItemStyle}>
             <ListTitle>eMJPM</ListTitle>
             <ListItem>
-              <Link target="_blank" href="/mentions-legales">
+              <Link target="_blank" to="/mentions-legales">
                 Mentions légales
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/politique-confidentialite">
+              <Link target="_blank" to="/politique-confidentialite">
                 {`Politique de confidentialité`}
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/conditions-utilisation">
+              <Link target="_blank" to="/conditions-utilisation">
                 {`Conditions d'utilisation`}
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="/stats">
+              <Link target="_blank" to="/stats">
                 Statistique de connexion
               </Link>
             </ListItem>
@@ -50,7 +50,7 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                href="mailto:support.emjpm@fabrique.social.gouv.fr"
+                to="mailto:support.emjpm@fabrique.social.gouv.fr"
               >
                 support.emjpm@fabrique.social.gouv.fr
               </Link>
@@ -58,7 +58,7 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                href={`https://github.com/SocialGouv/emjpm/tree/${publicRuntimeConfig.PACKAGE_VERSION}`}
+                to={`https://github.com/SocialGouv/emjpm/tree/${PACKAGE_VERSION}`}
               >
                 Contribuer sur GitHub
               </Link>
@@ -66,7 +66,7 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                href={`https://github.com/SocialGouv/emjpm/releases/tag/${publicRuntimeConfig.PACKAGE_VERSION}`}
+                to={`https://github.com/SocialGouv/emjpm/releases/tag/${PACKAGE_VERSION}`}
               >
                 Journal des modifications
               </Link>
@@ -77,13 +77,13 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                href="https://solidarites-sante.gouv.fr/ministere/organisation/organisation-des-directions-et-services/article/organisation-de-la-direction-generale-de-la-cohesion-sociale-dgcs"
+                to="https://solidarites-sante.gouv.fr/ministere/organisation/organisation-des-directions-et-services/article/organisation-de-la-direction-generale-de-la-cohesion-sociale-dgcs"
               >
                 {`La Direction Générale de la Cohésion Sociale`}
               </Link>
             </ListItem>
             <ListItem>
-              <Link target="_blank" href="https://www.fabrique.social.gouv.fr/">
+              <Link target="_blank" to={"https://www.fabrique.social.gouv.fr/"}>
                 {`La fabrique numérique des ministères sociaux`}
               </Link>
             </ListItem>

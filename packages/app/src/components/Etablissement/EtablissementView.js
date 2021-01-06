@@ -1,15 +1,15 @@
 import React from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
+import { useParams } from "react-router-dom";
 import { Box, Text } from "rebass";
 
 import { EtablissementViewForm } from "./EtablissementViewForm";
 import { ETABLISSEMENT } from "./queries";
 
-export const EtablissementView = (props) => {
-  const { id } = props;
+export const EtablissementView = () => {
+  const { id } = useParams();
 
   const { data, loading, error } = useQuery(ETABLISSEMENT, {
-    ssr: false,
     variables: { id },
   });
 

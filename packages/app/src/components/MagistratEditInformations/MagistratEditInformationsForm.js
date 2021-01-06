@@ -89,7 +89,7 @@ const MagistratEditInformationsForm = (props) => {
       {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={cancelLink}>
+          <Link to={cancelLink}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>

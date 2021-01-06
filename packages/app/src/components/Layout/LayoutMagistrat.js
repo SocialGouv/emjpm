@@ -9,15 +9,15 @@ import { BoxWrapper } from "~/ui";
 const navigationLinks = [
   {
     title: "Vos mandataires",
-    url: "/magistrats",
+    to: "/magistrats",
   },
   {
     title: "La carte des mandataires",
-    url: "/magistrats/map",
+    to: "/magistrats/map",
   },
   {
     title: "Vos mesures",
-    url: "/magistrats/mesures",
+    to: "/magistrats/mesures",
   },
 ];
 
@@ -29,7 +29,7 @@ const LayoutMagistrat = (props) => {
         <Header
           {...props}
           dropDownLinks={[
-            { title: "Vos informations", url: "/magistrats/informations" },
+            { title: "Vos informations", to: "/magistrats/informations" },
           ]}
         />
         <BoxWrapper>

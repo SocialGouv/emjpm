@@ -1,16 +1,15 @@
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import { useParams } from "react-router-dom";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneEdit } from "~/components/ServiceAntenneEdit";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ServiceAntenneEditPage = () => {
-  const router = useRouter();
-  const antenneId = parseInt(router.query.antenne_id);
+  const params = useParams();
+  const antenneId = parseInt(params.antenne_id);
   const user = useContext(UserContext);
 
   return (
@@ -23,4 +22,4 @@ const ServiceAntenneEditPage = () => {
   );
 };
 
-export default withAuthSync(ServiceAntenneEditPage);
+export default ServiceAntenneEditPage;

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import {
   DIRECTION_TYPE,
   isDirection,
@@ -62,7 +62,7 @@ const RowItem = ({ item }) => {
             )}
           </Flex>
           <Box mr="1" width="120px">
-            <Link href={`/admin/users/[user_id]`} as={`/admin/users/${id}`}>
+            <Link to={`/admin/users/${id}`}>
               <Button>Voir</Button>
             </Link>
           </Box>
@@ -79,7 +79,7 @@ const AdminUsers = () => {
 
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
-    ssr: false,
+
     variables: {
       limit: resultPerPage,
       offset: currentOffset,

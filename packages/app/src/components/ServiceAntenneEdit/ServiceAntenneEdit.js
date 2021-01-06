@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation } from "@apollo/client";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { ServiceAntenneForm } from "~/components/ServiceAntenneForms";
 import { Card } from "~/ui";
@@ -9,6 +9,7 @@ import { captureException } from "~/util/sentry";
 import { EDIT_ANTENNE } from "./mutations";
 
 const ServiceAntenneEdit = (props) => {
+  const history = useHistory();
   const { user, antenneId } = props;
   const { service_members } = user;
   const [{ service }] = service_members;
@@ -44,7 +45,7 @@ const ServiceAntenneEdit = (props) => {
     }
 
     setSubmitting(false);
-    Router.push(
+    history.push(
       "/services/antennes/[antenne_id]",
       `/services/antennes/${antenneId}`,
       {

@@ -5,9 +5,10 @@ import { IndicatorList } from "~/components/IndicatorList";
 import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
+import useQuery from "~/util/useQuery";
 
-const DepartmentStatsPage = (props) => {
-  const { departementCode } = props;
+const DepartmentStatsPage = () => {
+  const { departement_code: departementCode } = useQuery();
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -40,10 +41,6 @@ const DepartmentStatsPage = (props) => {
       </BoxWrapper>
     </LayoutPublic>
   );
-};
-
-DepartmentStatsPage.getInitialProps = async ({ query }) => {
-  return { departementCode: query.departement_code };
 };
 
 export default DepartmentStatsPage;

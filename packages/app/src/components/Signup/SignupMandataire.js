@@ -1,8 +1,8 @@
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient } from "@apollo/client";
 import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/biz";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -24,6 +24,7 @@ import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
 const SignupMandataireForm = () => {
+  const history = useHistory();
   const { user, mandataire, setMandataire, validateStepOne } = useContext(
     SignupContext
   );
@@ -73,7 +74,7 @@ const SignupMandataireForm = () => {
           body,
           onComplete: () => setSubmitting(false),
           onError: (errors) => setErrors(errors),
-          onSuccess: () => Router.push("/signup/congratulation"),
+          onSuccess: () => history.push("/signup/congratulation"),
         });
       }
       setSubmitting(false);
@@ -168,7 +169,7 @@ const SignupMandataireForm = () => {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">
-            <Link href="/">
+            <Link to="/">
               <Button variant="outline">Annuler</Button>
             </Link>
           </Box>

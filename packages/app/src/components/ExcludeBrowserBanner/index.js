@@ -1,1 +1,1 @@
-export { ExcludeBrowserBanner } from "./ExcludeBrowserBanner";
+export { ExcludeBrowserBanner as default } from "./ExcludeBrowserBanner";

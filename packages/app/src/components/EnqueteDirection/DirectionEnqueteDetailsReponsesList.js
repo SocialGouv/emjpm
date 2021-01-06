@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { differenceInDays } from "date-fns";
 import React from "react";
 import { Box, Button, Flex } from "rebass";
@@ -154,8 +154,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
               return (
                 <Box mt={1} textAlign="center">
                   <Link
-                    href={`/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]`}
-                    as={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
+                    to={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
                     <Button>Visualiser</Button>
                   </Link>

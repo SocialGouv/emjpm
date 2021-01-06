@@ -3,7 +3,6 @@ import React from "react";
 import { EnqueteCreate } from "~/components/EnqueteCreate";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Card, Heading2 } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const CreateEnquete = () => {
   return (
@@ -18,4 +17,4 @@ const CreateEnquete = () => {
   );
 };
 
-export default withAuthSync(CreateEnquete);
+export default CreateEnquete;

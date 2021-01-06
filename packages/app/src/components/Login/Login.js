@@ -1,26 +1,26 @@
 import { useFormik } from "formik";
-import getConfig from "next/config";
-import Router from "next/router";
 import React from "react";
-import { useApolloClient } from "react-apollo";
+import { useApolloClient } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
+import config from "~/config";
 import { loginSchema } from "~/lib/validationSchemas";
-import { matopush } from "~/matomo";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
-import { login } from "~/util/auth";
+import { useAuth } from "~/routes/Auth";
+import { matopush } from "~/util/matomo";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const checkStatus = async (
   apolloClient,
   response,
   setSubmitting,
-  setStatus
+  setStatus,
+  history,
+  login
 ) => {
   let json = null;
   setSubmitting(false);
@@ -37,7 +37,7 @@ const checkStatus = async (
 
   apolloClient.clearStore();
   login(json);
-  Router.push(json.url);
+  history.push(json.url);
 
   return json;
 };
@@ -46,6 +46,8 @@ const Login = (props) => {
   const { token } = props;
   const url = `${API_URL}/api/auth/login`;
 
+  const history = useHistory();
+  const { login } = useAuth();
   const apolloClient = useApolloClient();
 
   const handleSubmit = async (values, setSubmitting, setStatus) => {
@@ -60,7 +62,14 @@ const Login = (props) => {
       },
       method: "POST",
     });
-    checkStatus(apolloClient, response, setSubmitting, setStatus);
+    checkStatus(
+      apolloClient,
+      response,
+      setSubmitting,
+      setStatus,
+      history,
+      login
+    );
   };
 
   const formik = useFormik({
@@ -137,10 +146,12 @@ const Login = (props) => {
             </Box>
           </Flex>
           <Box my="2">
-            <Link href="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
+            <Link to="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
           </Box>
           <Box>
-            <Link href="mailto:support.emjpm@fabrique.social.gouv.fr">{`Contactez-nous en cas de difficulté de connexion`}</Link>
+            <Link
+              to={"mailto:support.emjpm@fabrique.social.gouv.fr"}
+            >{`Contactez-nous en cas de difficulté de connexion`}</Link>
           </Box>
         </form>
       </Box>

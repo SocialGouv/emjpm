@@ -5,7 +5,6 @@ import { AdminAddTribunal } from "~/components/AdminTribunaux/AdminAddTribunal";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AddTribunauxPage = () => {
   return (
@@ -25,4 +24,4 @@ const AddTribunauxPage = () => {
   );
 };
 
-export default withAuthSync(AddTribunauxPage);
+export default AddTribunauxPage;

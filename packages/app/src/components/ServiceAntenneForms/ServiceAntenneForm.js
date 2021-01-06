@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -129,7 +128,7 @@ const ServiceAntenneForm = (props) => {
           <Button
             variant="outline"
             onClick={() => {
-              router.push("/services/informations");
+              history.push("/services/informations");
             }}
           >
             Annuler

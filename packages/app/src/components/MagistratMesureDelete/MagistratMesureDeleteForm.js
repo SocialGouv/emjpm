@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
@@ -16,6 +16,8 @@ import { MagistratMesureRemoveStyle } from "./style";
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
   const { serviceId, mandataireId } = mesure;
+
+  const history = useHistory();
 
   const {
     magistrat: { ti_id: tiId },
@@ -41,7 +43,7 @@ export const MagistratMesureDeleteForm = (props) => {
         },
       });
 
-      Router.push(`/magistrats/mesures`);
+      history.push(`/magistrats/mesures`);
     },
   });
 
@@ -111,7 +113,7 @@ export const MagistratMesureDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
+                  history.push(
                     "/magistrats/mesures/[mesure_id]",
                     `/magistrats/mesures/${mesure.id}`,
                     { shallow: true }

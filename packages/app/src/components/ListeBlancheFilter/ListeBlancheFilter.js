@@ -38,16 +38,16 @@ const ListeBlancheFilter = () => {
     email,
   } = filters;
 
-  const { departements } = useDepartements({ all: true, ssr: false });
+  const { departements } = useDepartements({ all: true });
 
   const buttonLinks = [
     {
       title: "Mandataire individuel",
-      url: `/${user.type}/liste-blanche/ajout-individuel`,
+      to: `/${user.type}/liste-blanche/ajout-individuel`,
     },
     {
       title: "Mandataire préposé",
-      url: `/${user.type}/liste-blanche/ajout-prepose`,
+      to: `/${user.type}/liste-blanche/ajout-prepose`,
     },
   ];
 
@@ -89,7 +89,7 @@ const ListeBlancheFilter = () => {
         >
           {type === "service" ? (
             <Box>
-              <Link href={`/${user.type}/liste-blanche/ajout-service`}>
+              <Link to={`/${user.type}/liste-blanche/ajout-service`}>
                 <Button ml={4}>{"Ajouter un service"}</Button>
               </Link>
             </Box>
@@ -106,7 +106,7 @@ const ListeBlancheFilter = () => {
                     {buttonLinks.map((link) => {
                       return (
                         <Box sx={menuItemStyle} key={link.title}>
-                          <Link href={link.url}>{link.title}</Link>
+                          <Link to={link.to}>{link.title}</Link>
                         </Box>
                       );
                     })}

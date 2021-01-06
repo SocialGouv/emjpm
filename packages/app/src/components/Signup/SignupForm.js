@@ -1,4 +1,4 @@
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -165,7 +165,7 @@ export const SignupForm = () => {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

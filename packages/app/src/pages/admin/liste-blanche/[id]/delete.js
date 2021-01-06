@@ -4,10 +4,11 @@ import { Flex } from "rebass";
 import { AdminLbUserDelete } from "~/components/AdminLbUserDelete";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const AdminUserDeletePage = (props) => {
-  const { lbUserId } = props;
+import useQuery from "~/util/useQuery";
+
+const AdminUserDeletePage = () => {
+  const { id: lbUserId } = useQuery();
 
   return (
     <LayoutAdmin>
@@ -20,8 +21,4 @@ const AdminUserDeletePage = (props) => {
   );
 };
 
-AdminUserDeletePage.getInitialProps = async ({ query }) => {
-  return { lbUserId: query.id };
-};
-
-export default withAuthSync(AdminUserDeletePage);
+export default AdminUserDeletePage;

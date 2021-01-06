@@ -1,9 +1,8 @@
-import getConfig from "next/config";
 import fetch from "unfetch";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+import config from "~/config";
+
+const { API_URL } = config;
 
 const postSignup = (body) => {
   const url = `${API_URL}/api/auth/signup`;

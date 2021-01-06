@@ -1,17 +1,15 @@
 import { useFormik } from "formik";
-import getConfig from "next/config";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
+import config from "~/config";
 import { forgotPasswordSchema } from "~/lib/validationSchemas";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 import { captureException } from "~/util/sentry";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const ForgotPassword = () => {
   const url = `${API_URL}/api/auth/forgot-password`;
@@ -107,7 +105,7 @@ const ForgotPassword = () => {
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box mr="2">
-              <Link href="/login">Annuler</Link>
+              <Link to="/login">Annuler</Link>
             </Box>
             <Box>
               <Button

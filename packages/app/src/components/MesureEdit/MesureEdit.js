@@ -1,7 +1,7 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
 import React, { useContext, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MesureContext } from "~/components/MesureContext";
@@ -15,6 +15,7 @@ import { CALCULATE_MESURES, EDIT_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export const MesureEdit = () => {
+  const history = useHistory();
   const mesureToEdit = useContext(MesureContext);
 
   const currentUser = useContext(UserContext);
@@ -38,7 +39,7 @@ export const MesureEdit = () => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    Router.push(
+    history.push(
       `${userBasePath}/mesures/[mesure_id]`,
       `${userBasePath}/mesures/${mesureId}`,
       {

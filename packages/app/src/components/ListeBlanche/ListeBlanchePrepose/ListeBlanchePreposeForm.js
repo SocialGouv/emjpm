@@ -198,10 +198,7 @@ export const ListeBlanchePreposeForm = (props) => {
       <Flex justifyContent="flex-end" mt={4}>
         {editMode && isAdmin(user) && (
           <Box>
-            <Link
-              href={`/admin/liste-blanche/[id]/delete`}
-              asLink={`/admin/liste-blanche/${data.id}/delete`}
-            >
+            <Link to={`/admin/liste-blanche/${data.id}/delete`}>
               <Button mr="2" bg="red">
                 Supprimer
               </Button>

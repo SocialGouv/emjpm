@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import React, { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -16,9 +16,7 @@ import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 export const DirectionFilters = (props) => {
   const { useNameFilter = false } = props;
 
-  const { data: regionsData, loading, error } = useQuery(GET_REGIONS, {
-    ssr: false,
-  });
+  const { data: regionsData, loading, error } = useQuery(GET_REGIONS, {});
   const { filters, onFilterChange } = useContext(FiltersContextSerializable);
 
   const { regions, departements } = useMemo(() => {

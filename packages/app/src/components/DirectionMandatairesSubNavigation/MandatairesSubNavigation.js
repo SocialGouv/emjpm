@@ -1,5 +1,5 @@
-import { withRouter } from "next/router";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
@@ -10,9 +10,9 @@ const MandatairesSubNavigation = (props) => {
   return (
     <Flex sx={MandatairesSubNavigationStyle} {...props}>
       <Flex>
-        <LinkButton href="/direction">Vue globale</LinkButton>
+        <LinkButton to="/direction">Vue globale</LinkButton>
         <Box ml="1">
-          <LinkButton href="/direction/mandataires/list">
+          <LinkButton to="/direction/mandataires/list">
             Vue détaillée
           </LinkButton>
         </Box>

@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { LB_USERS } from "~/components/ListeBlanche/queries";
@@ -14,10 +14,12 @@ import { AdminLbUserDeleteRemoveStyle } from "./style";
 export const AdminLbUserDeleteForm = (props) => {
   const { lbUserId } = props;
 
+  const history = useHistory();
+
   const [deleteUser] = useMutation(DELETE_LB_USER, {
     awaitRefetchQueries: true,
     onCompleted: async () => {
-      Router.push(`/admin/liste-blanche`);
+      history.push(`/admin/liste-blanche`);
     },
     refetchQueries: [
       {
@@ -61,7 +63,7 @@ export const AdminLbUserDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
+                  history.push(
                     "/admin/list-blanche/[id]",
                     `/admin/list-blanche/${lbUserId}`,
                     { shallow: true }

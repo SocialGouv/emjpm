@@ -1,7 +1,7 @@
-import { useApolloClient, useMutation, useQuery } from "@apollo/react-hooks";
+import { useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { isFrance, isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
 import React, { useContext, useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MESURES_QUERY } from "~/components/MesureList/queries";
@@ -15,6 +15,8 @@ import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export const MesureCreate = () => {
+  const history = useHistory();
+
   const client = useApolloClient();
   const currentUser = useContext(UserContext);
 
@@ -37,7 +39,7 @@ export const MesureCreate = () => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    Router.push(
+    history.push(
       `${userBasePath}/mesures/[mesure_id]`,
       `${userBasePath}/mesures/${mesureId}`,
       {
@@ -132,7 +134,7 @@ export const MesureCreate = () => {
   };
 
   const handleCancel = async () => {
-    Router.push(userBasePath);
+    history.push(userBasePath);
   };
 
   const antenneOptions = service_antennes.map((antenne) => ({

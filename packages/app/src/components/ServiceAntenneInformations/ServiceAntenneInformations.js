@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -80,7 +80,7 @@ const ServiceAntenneInformations = (props) => {
           </Box>
         </Flex>
         <Flex mt="5">
-          <AntenneEditLinkButton href={antenne_id}>
+          <AntenneEditLinkButton antenne_id={antenne_id}>
             {`Modifier les informations de l'antenne`}
           </AntenneEditLinkButton>
         </Flex>

@@ -1,21 +1,22 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutDirection } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheEdit } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ListeBlancheDetailPage = (props) => {
-  const { id } = props;
-  const router = useRouter();
+import useQuery from "~/util/useQuery";
+
+const ListeBlancheDetailPage = () => {
+  const { id } = useQuery();
+  const history = useHistory();
 
   return (
     <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/direction/liste-blanche">
+        <Link to="/direction/liste-blanche">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -24,11 +25,11 @@ const ListeBlancheDetailPage = (props) => {
         <ListeBlancheEdit
           id={id}
           handleSubmit={async () => {
-            await router.push("/direction/liste-blanche");
+            await history.push("/direction/liste-blanche");
             window.scrollTo(0, 0);
           }}
           handleCancel={async () => {
-            await router.push("/direction/liste-blanche");
+            await history.push("/direction/liste-blanche");
             window.scrollTo(0, 0);
           }}
         />
@@ -37,8 +38,4 @@ const ListeBlancheDetailPage = (props) => {
   );
 };
 
-ListeBlancheDetailPage.getInitialProps = async ({ query }) => {
-  return { id: query.id };
-};
-
-export default withAuthSync(ListeBlancheDetailPage);
+export default ListeBlancheDetailPage;

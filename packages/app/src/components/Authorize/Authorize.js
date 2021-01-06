@@ -1,22 +1,19 @@
-import getConfig from "next/config";
 import React, { useEffect } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
+import config from "~/config";
 import { Button, Card, Heading4, Text } from "~/ui";
 
 import { EDITOR } from "./queries";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const url = `${API_URL}/api/oauth/authorize`;
 
 const Authorize = (props) => {
   const { editorId, token, redirectUrl, state } = props;
   const { data, loading, error } = useQuery(EDITOR, {
-    ssr: false,
     variables: {
       id: editorId,
     },

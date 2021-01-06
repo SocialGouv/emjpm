@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -20,6 +20,7 @@ import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
 const SignupMagistratForm = ({ tiDatas }) => {
+  const history = useHistory();
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(
     SignupContext
   );
@@ -50,7 +51,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
         body,
         onComplete: () => setSubmitting(false),
         onError: (errors) => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation"),
+        onSuccess: () => history.push("/signup/congratulation"),
       });
     },
     validationSchema: signupMagistratSchema,
@@ -90,7 +91,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
 
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

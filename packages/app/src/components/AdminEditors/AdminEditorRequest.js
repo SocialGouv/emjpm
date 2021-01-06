@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 

@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { DIRECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -23,6 +23,7 @@ import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
 
 export const SignupDirection = () => {
+  const history = useHistory();
   const { user, departement, direction, region, validateStepOne } = useContext(
     SignupContext
   );
@@ -50,7 +51,7 @@ export const SignupDirection = () => {
         body,
         onComplete: () => setSubmitting(false),
         onError: (errors) => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation"),
+        onSuccess: () => history.push("/signup/congratulation"),
       });
     },
     validationSchema: signupDirectionSchema,
@@ -116,7 +117,7 @@ export const SignupDirection = () => {
 
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

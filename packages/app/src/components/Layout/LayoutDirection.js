@@ -12,18 +12,18 @@ const LayoutDirection = ({ children }) => {
   const navigationLinks = [
     {
       title: "Statistiques",
-      url: "/direction",
+      to: "/direction",
     },
     {
       title: "Liste blanche",
-      url: "/direction/liste-blanche",
+      to: "/direction/liste-blanche",
     },
   ];
 
   if (type === "admin" || type === "direction") {
     navigationLinks.splice(2, 0, {
       title: "Enquêtes",
-      url: "/direction/enquetes",
+      to: "/direction/enquetes",
     });
   }
 
@@ -32,7 +32,7 @@ const LayoutDirection = ({ children }) => {
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           dropDownLinks={[
-            { title: "Vos informations", url: "/direction/informations" },
+            { title: "Vos informations", to: "/direction/informations" },
           ]}
         />
         <BoxWrapper>

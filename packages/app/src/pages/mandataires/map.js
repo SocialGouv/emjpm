@@ -1,14 +1,11 @@
-import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataireMap } from "~/components/Layout";
 import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesures";
-import { withAuthSync } from "~/util/auth";
 
-const MandataireMap = dynamic(
-  () => import("~/components/MandataireMap").then((mod) => mod.MandataireMap),
-  { ssr: false }
+const MandataireMap = lazy(() =>
+  import("~/components/MandataireMap").then((mod) => mod.MandataireMap)
 );
 
 const Map = () => {
@@ -42,14 +39,16 @@ const Map = () => {
             minWidth: 320,
           }}
         >
-          <MandataireMap
-            selectMesures={(ids) => setSelectedMesuresIds(ids)}
-            selectedMesuresIds={selectedMesuresIds}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <MandataireMap
+              selectMesures={(ids) => setSelectedMesuresIds(ids)}
+              selectedMesuresIds={selectedMesuresIds}
+            />
+          </Suspense>
         </Box>
       </Flex>
     </LayoutMandataireMap>
   );
 };
 
-export default withAuthSync(Map);
+export default Map;

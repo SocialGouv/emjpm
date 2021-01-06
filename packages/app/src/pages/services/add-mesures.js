@@ -4,7 +4,6 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { MesureCreate } from "~/components/MesureCreate";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AddMesures = () => {
   return (
@@ -17,4 +16,4 @@ const AddMesures = () => {
   );
 };
 
-export default withAuthSync(AddMesures);
+export default AddMesures;

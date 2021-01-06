@@ -7,14 +7,15 @@ import { Link } from "~/components/Link";
 import { MesureImportPanel } from "~/components/MesureImport";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const Service = (props) => {
-  const { serviceId } = props;
+import useQuery from "~/util/useQuery";
+
+const Service = () => {
+  const { service_id: serviceId } = useQuery();
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/admin/services">
+        <Link to="/admin/services">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -36,8 +37,4 @@ const Service = (props) => {
   );
 };
 
-Service.getInitialProps = async ({ query }) => {
-  return { serviceId: query.service_id };
-};
-
-export default withAuthSync(Service);
+export default Service;

@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
@@ -10,7 +10,6 @@ import { SERVICE } from "./queries";
 const MagistratMesureServiceTitle = (props) => {
   const { id } = props;
   const { data, loading } = useQuery(SERVICE, {
-    ssr: false,
     variables: {
       id,
     },

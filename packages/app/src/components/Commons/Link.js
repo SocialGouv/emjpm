@@ -1,7 +1,7 @@
 import React from "react";
 import { Link as RebassLink } from "rebass";
 
-import { Link as NextLink } from "~/components/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 const LinkStyle = () => {
   return {
@@ -15,23 +15,27 @@ const LinkStyle = () => {
   };
 };
 
-const isExternalLink = (href) =>
-  href && (href.startsWith("http") || href.startsWith("mailto"));
+const isExternalLink = (to) => {
+  return to && (to.startsWith("http") || to.startsWith("mailto"));
+};
 
-const Link = (props) => {
-  if (isExternalLink(props.href)) {
+const Link = ({ to, ...props }) => {
+  if (isExternalLink(to)) {
     return (
-      <RebassLink sx={LinkStyle()} {...props}>
+      <RebassLink sx={LinkStyle()} {...props} href={to}>
         {props.children}
       </RebassLink>
     );
   }
   return (
-    <NextLink as={props.asLink} href={props.href}>
-      <RebassLink sx={LinkStyle()} {...props}>
-        {props.children}
-      </RebassLink>
-    </NextLink>
+    <RouterLink
+      to={to}
+      component={({ navigate }) => (
+        <RebassLink sx={LinkStyle()} {...props} onClick={() => navigate(to)}>
+          {props.children}
+        </RebassLink>
+      )}
+    />
   );
 };
 

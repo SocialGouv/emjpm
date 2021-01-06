@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -53,7 +53,7 @@ const RowItem = ({ item }) => {
         </Flex>
 
         <Box mr="1" width="220px">
-          <Link href={`/admin/editors/[editor_id]`} as={`/admin/editors/${id}`}>
+          <Link to={`/admin/editors/${id}`}>
             <Button>Voir</Button>
           </Link>
           <Button ml="3" onClick={() => removeEditorFromList(id)}>

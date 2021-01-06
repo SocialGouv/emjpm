@@ -5,7 +5,6 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { TokenRequest } from "~/components/TokenRequest";
 import { BoxWrapper, FlexWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AuthorizationPage = () => {
   return (
@@ -23,7 +22,7 @@ const AuthorizationPage = () => {
           }}
         >
           <Image
-            src="/static/images/login-application.png"
+            src="/images/login-application.png"
             sx={{
               mt: "80px",
               p: "3",
@@ -44,13 +43,4 @@ const AuthorizationPage = () => {
   );
 };
 
-AuthorizationPage.getInitialProps = async ({ token, query }) => {
-  return {
-    editorId: query["editor_id"],
-    editorSecret: query["editor_secret"],
-    redirectUrl: query["redirect_url"],
-    token,
-  };
-};
-
-export default withAuthSync(AuthorizationPage);
+export default AuthorizationPage;

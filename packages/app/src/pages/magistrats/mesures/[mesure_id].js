@@ -7,10 +7,11 @@ import { MagistratMesureMandataire } from "~/components/MagistratMesureMandatair
 import { MesureProvider } from "~/components/MesureContext";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const Mandataires = (props) => {
-  const { mesureId } = props;
+import useQuery from "~/util/useQuery";
+
+const Mandataires = () => {
+  const { mesure_id: mesureId } = useQuery();
   return (
     <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
       <BoxWrapper mt={6} px="1">
@@ -30,8 +31,4 @@ const Mandataires = (props) => {
   );
 };
 
-Mandataires.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(Mandataires);
+export default Mandataires;

@@ -116,7 +116,7 @@ export const AdminDirectionTypeForm = (props) => {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={"/admin/users"}>
+          <Link to={"/admin/users"}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>

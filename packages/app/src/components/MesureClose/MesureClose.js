@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MesureContext } from "~/components/MesureContext";
@@ -15,6 +15,7 @@ import { CALCULATE_MESURES, CLOSE_MESURE } from "./mutations";
 import { MesureCloseStyle } from "./style";
 
 const MesureClose = (props) => {
+  const history = useHistory();
   const mesure = useContext(MesureContext);
 
   const currentUser = useContext(UserContext);
@@ -26,7 +27,7 @@ const MesureClose = (props) => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
-    Router.push(
+    history.push(
       `${userBasePath}/mesures/[mesure_id]`,
       `${userBasePath}/mesures/${mesureId}`,
       {

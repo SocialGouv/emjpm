@@ -1,19 +1,19 @@
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 
 import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
 import { ListeBlancheServices } from "./ListeBlancheServices";
 
-async function onSelectItem(router, { type, origin, id }) {
+async function onSelectItem(history, { type, origin, id }) {
   if (type === "mandataire") {
-    await router.push(
+    await history.push(
       `/${origin}/liste-blanche/[id]`,
       `/${origin}/liste-blanche/${id}`
     );
   } else if (type === "service") {
-    await router.push(
+    await history.push(
       `/${origin}/liste-blanche/services/[id]`,
       `/${origin}/liste-blanche/services/${id}`
     );
@@ -24,7 +24,7 @@ async function onSelectItem(router, { type, origin, id }) {
 export const ListeBlanche = (props) => {
   const { origin } = props;
   const { filters } = useContext(FiltersContextSerializable);
-  const router = useRouter();
+  const history = useHistory();
 
   const { type = "mandataire" } = filters;
 
@@ -32,14 +32,14 @@ export const ListeBlanche = (props) => {
     <ListeBlancheMandataires
       {...props}
       onSelectItem={(item) =>
-        onSelectItem(router, { id: item.id, origin, type })
+        onSelectItem(history, { id: item.id, origin, type })
       }
     />
   ) : (
     <ListeBlancheServices
       {...props}
       onSelectItem={(item) =>
-        onSelectItem(router, { id: item.id, origin, type })
+        onSelectItem(history, { id: item.id, origin, type })
       }
     />
   );

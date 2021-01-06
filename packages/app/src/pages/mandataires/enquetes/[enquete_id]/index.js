@@ -1,7 +1,6 @@
-import { useRouter } from "next/router";
 import React, { useContext, useMemo } from "react";
-import { useSubscription } from "react-apollo";
-import { resetIdCounter } from "react-tabs";
+import { useSubscription } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 
 import { LoadingWrapper } from "~/components/Commons";
 import { EnqueteReponse } from "~/components/Enquete";
@@ -10,12 +9,16 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "~/components/Enquete/queries";
 import { LayoutMandataire } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const MandataireEnquetePage = ({ enqueteId }) => {
-  const router = useRouter();
+import useQuery from "~/util/useQuery";
+
+const MandataireEnquetePage = () => {
+  const history = useHistory();
   const { id: userId } = useContext(UserContext);
   const currentStep = useCurrentStepFromUrl();
+
+  const query = useQuery();
+  const enqueteId = Number(query.enquete_id);
 
   const { data, loading, error } = useSubscription(
     ENQUETE_WITH_REPONSE_STATUS,
@@ -40,7 +43,7 @@ const MandataireEnquetePage = ({ enqueteId }) => {
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push("/mandataires/enquetes/[enquete_id]", {
+      await history.push("/mandataires/enquetes/[enquete_id]", {
         pathname: `/mandataires/enquetes/${enquete.id}`,
         query: { step, substep },
       });
@@ -64,10 +67,4 @@ const MandataireEnquetePage = ({ enqueteId }) => {
   );
 };
 
-MandataireEnquetePage.getInitialProps = async (params) => {
-  const { query } = params;
-  resetIdCounter();
-  return { enqueteId: Number(query.enquete_id) };
-};
-
-export default withAuthSync(MandataireEnquetePage);
+export default MandataireEnquetePage;

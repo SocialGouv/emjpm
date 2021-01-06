@@ -85,7 +85,7 @@ export const SignupServiceInvitationForm = (props) => {
       </Flex>
       <Flex justifyContent="flex-end" p={1}>
         <Box>
-          <Link href="/">
+          <Link to="/">
             <Button mr="2" variant="outline">
               Annuler
             </Button>

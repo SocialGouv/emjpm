@@ -1,8 +1,8 @@
-import { withRouter } from "next/router";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Link as RebassLink } from "rebass";
 
-import { Link as NextLink } from "~/components/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 const LinkButtonStyle = (isActive, props) => {
   const initialColor = props.color || "white";
@@ -48,21 +48,24 @@ const LinkButtonStyle = (isActive, props) => {
   return properties;
 };
 
-const LinkButton = ({ router, ...props }) => {
-  const isActive = router && router.pathname === props.href;
+const LinkButton = ({ location, ...props }) => {
+  const isActive = location && location.pathname === props.to;
   // eslint-disable-next-line no-unused-vars
   const { bg, color, ...attr } = props;
 
   return (
-    <NextLink as={props.asLink} href={props.disabled ? "" : props.href}>
-      <RebassLink
-        {...attr}
-        href={props.disabled ? "" : props.href}
-        sx={LinkButtonStyle(isActive, props)}
-      >
-        {props.children}
-      </RebassLink>
-    </NextLink>
+    <RouterLink
+      to={props.disabled ? "" : props.to}
+      component={({ navigate }) => (
+        <RebassLink
+          {...attr}
+          sx={LinkButtonStyle(isActive, props)}
+          onClick={() => props.disabled || navigate(props.to)}
+        >
+          {props.children}
+        </RebassLink>
+      )}
+    />
   );
 };
 

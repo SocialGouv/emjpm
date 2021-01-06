@@ -28,20 +28,20 @@ const ServiceBoard = () => {
           <Box>
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{dispo_max}</Text>
-              <Link href="/services/edit-informations">
+              <Link to="/services/edit-informations">
                 <Text ml={1}>{`mesures souhaitées`}</Text>
               </Link>
             </Flex>
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{mesures_in_progress}</Text>
-              <Link href="/services/mesures">
+              <Link to="/services/mesures">
                 <Text ml={1}>{`mesures en cours`}</Text>
               </Link>
             </Flex>
 
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{mesures_awaiting}</Text>
-              <Link href="/services/mesures">
+              <Link to="/services/mesures">
                 <Text ml={1}>{`mesures en attente`}</Text>
               </Link>
             </Flex>
@@ -69,7 +69,7 @@ const ServiceBoard = () => {
             </Text>
           )}
           <Flex justifyContent="flex-end">
-            <Link href="/services/edit-informations">
+            <Link to="/services/edit-informations">
               {isTribunal ? `Modifier` : `Ajouter des tribunaux`}
             </Link>
           </Flex>

@@ -62,7 +62,7 @@ export const EnqueteWelcome = ({
           <Text as="span">{`Vous avez déjà rempli le `}</Text>
           <Text as="span" sx={downloadStyle}>
             <a
-              href={`/static/docs/enquetes/${getExcelName(type)}`}
+              href={`/docs/enquetes/${getExcelName(type)}`}
             >{`fichier excel`}</a>
           </Text>
 
@@ -73,8 +73,7 @@ export const EnqueteWelcome = ({
           mx="auto"
           pt={15}
           mt={4}
-          href={`${pathPrefix}/[enquete_id]/import`}
-          asLink={`${pathPrefix}/${enqueteId}/import`}
+          to={`${pathPrefix}/${enqueteId}/import`}
           outline
         >
           Importez votre enquête
@@ -85,7 +84,7 @@ export const EnqueteWelcome = ({
           <Text as="span">{`Pour plus de détails, vous pouvez télécharger le `}</Text>
           <Text as="span" sx={downloadStyle}>
             <a
-              href={`/static/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf`}
+              href={`/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf`}
             >{`guide de remplissage des enquêtes.`}</a>
           </Text>
         </Box>

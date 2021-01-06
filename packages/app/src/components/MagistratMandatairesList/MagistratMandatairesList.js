@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
@@ -63,6 +63,7 @@ function getOrderByVariable(orderBy) {
 }
 
 const MagistratMandatairesList = (props) => {
+  const history = useHistory();
   const {
     magistrat: { ti_id },
   } = useContext(UserContext);
@@ -159,7 +160,7 @@ const MagistratMandatairesList = (props) => {
             <MandataireListItem
               key={gestionnaire.id}
               onClick={() =>
-                Router.push(
+                history.push(
                   "/magistrats/gestionnaires/[gestionnaire_id]",
                   `/magistrats/gestionnaires/${gestionnaire.id}`,
                   { shallow: true }

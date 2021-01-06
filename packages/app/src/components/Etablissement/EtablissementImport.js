@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import React from "react";
-import { useMutation, useQuery } from "react-apollo";
+import { useMutation, useQuery } from "@apollo/client";
 import { Box, Card, Flex } from "rebass";
 
 import { Button, Heading3, Input, Text } from "~/ui";
@@ -12,7 +12,7 @@ import { PROCESSUS_STATE } from "./queries";
 export const EtablissementImport = () => {
   const { data, loading, error } = useQuery(PROCESSUS_STATE, {
     fetchPolicy: "network-only",
-    ssr: false,
+
     variables: { id: "import_finess" },
   });
 

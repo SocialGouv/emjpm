@@ -15,13 +15,7 @@ export const Breadcrumb = ({ crumbs }) => {
               &gt;
             </Box>
           )}
-          {href ? (
-            <Link href={href} asLink={as}>
-              {label}
-            </Link>
-          ) : (
-            <Text>{label}</Text>
-          )}
+          {href ? <Link to={as}>{label}</Link> : <Text>{label}</Text>}
         </Fragment>
       ))}
     </Flex>

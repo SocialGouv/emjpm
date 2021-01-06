@@ -34,13 +34,14 @@ ENV NEXT_TELEMETRY_DISABLED=1
 
 WORKDIR /app
 
+RUN npm install -g serve
+
 COPY --from=builder /app/package.json /app/lerna.json /app/
 COPY --from=builder /app/node_modules /app/node_modules/
 COPY --from=builder /app/packages/app/node_modules /app/packages/app/node_modules/
 COPY --from=builder /app/packages/app/public /app/packages/app/public/
-COPY --from=builder /app/packages/app/next.config.js /app/packages/app/next.config.js
 COPY --from=builder /app/packages/app/package.json /app/packages/app/package.json
-COPY --from=builder /app/packages/app/.next /app/packages/app/.next/
+COPY --from=builder /app/packages/app/build /app/packages/app/build/
 COPY --from=builder /app/packages/biz /app/packages/biz
 
 USER node

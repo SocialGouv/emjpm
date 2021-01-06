@@ -5,7 +5,6 @@ import { LinkButton } from "~/components/Commons";
 import { DirectionEnquetesList } from "~/components/EnqueteDirection";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Heading2 } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const DirectionEnquetesPage = () => {
   return (
@@ -14,7 +13,7 @@ const DirectionEnquetesPage = () => {
         <Flex mb={3} flexDirection="row" justifyContent="space-between">
           <Heading2>Enquêtes</Heading2>
           <Box>
-            <LinkButton href="/direction/enquetes/create">
+            <LinkButton to="/direction/enquetes/create">
               Ajouter une enquête
             </LinkButton>
           </Box>
@@ -25,4 +24,4 @@ const DirectionEnquetesPage = () => {
   );
 };
 
-export default withAuthSync(DirectionEnquetesPage);
+export default DirectionEnquetesPage;

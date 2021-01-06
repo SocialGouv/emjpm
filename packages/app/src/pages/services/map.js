@@ -1,14 +1,11 @@
-import dynamic from "next/dynamic";
-import React, { useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServicesMap } from "~/components/Layout";
 import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
-import { withAuthSync } from "~/util/auth";
 
-const ServiceMap = dynamic(
-  () => import("~/components/ServiceMap").then((mod) => mod.ServiceMap),
-  { ssr: false }
+const ServiceMap = lazy(() =>
+  import("~/components/ServiceMap").then((mod) => mod.ServiceMap)
 );
 
 const Map = () => {
@@ -43,14 +40,16 @@ const Map = () => {
             minWidth: 320,
           }}
         >
-          <ServiceMap
-            selectMesures={(ids) => setSelectedMesuresIds(ids)}
-            selectedMesuresIds={selectedMesuresIds}
-          />
+          <Suspense fallback={<div>Loading...</div>}>
+            <ServiceMap
+              selectMesures={(ids) => setSelectedMesuresIds(ids)}
+              selectedMesuresIds={selectedMesuresIds}
+            />
+          </Suspense>
         </Box>
       </Flex>
     </LayoutServicesMap>
   );
 };
 
-export default withAuthSync(Map);
+export default Map;

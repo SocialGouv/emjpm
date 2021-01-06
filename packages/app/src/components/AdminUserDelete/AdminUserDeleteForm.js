@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { adminUserDeleteSchema } from "~/lib/validationSchemas";
@@ -13,10 +13,11 @@ import { AdminUserDeleteRemoveStyle } from "./style";
 
 export const AdminUserDeleteForm = (props) => {
   const { userId } = props;
+  const history = useHistory();
 
   const [deleteUser] = useMutation(DELETE_USER, {
     onCompleted: async () => {
-      Router.push(`/admin/users`);
+      history.push(`/admin/users`);
     },
   });
 
@@ -55,7 +56,7 @@ export const AdminUserDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
+                  history.push(
                     "/admin/users/[user_id]",
                     `/admin/users/${userId}`,
                     { shallow: true }

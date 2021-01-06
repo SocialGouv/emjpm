@@ -1,5 +1,5 @@
 import React from "react";
-import { useApolloClient, useMutation } from "react-apollo";
+import { useApolloClient, useMutation } from "@apollo/client";
 import { Card } from "rebass";
 
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
