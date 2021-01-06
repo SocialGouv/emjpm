@@ -45,7 +45,7 @@ module.exports = {
         prenom
         lb_user_etablissements(where: {etablissement_rattachement: {_eq: true}}) {
           etablissement {
-            nom
+            rslongue
             id
             departement {
               id

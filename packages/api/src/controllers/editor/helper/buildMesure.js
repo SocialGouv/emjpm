@@ -33,7 +33,9 @@ function buildMesure({
     numero_rg: datas.numero_rg,
     pays: lastEtat.pays,
     resultat_revision: datas.resultat_revision,
-    status: MESURE_PROTECTION_STATUS.en_cours,
+    status: datas.date_fin_mesure
+      ? MESURE_PROTECTION_STATUS.eteinte
+      : MESURE_PROTECTION_STATUS.en_cours,
     ti_id: ti.id,
     type_etablissement: lastEtat.type_etablissement,
     ville: lastEtat.ville,
