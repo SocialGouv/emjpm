@@ -57,6 +57,7 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
   const { lastEtat, departement, longitude, latitude } = await getLastEtatDatas(
     datas.etats
   );
+
   const mesureToCreate = buildMesure({
     antenneId,
     datas,
@@ -110,7 +111,7 @@ async function persistMesure(
           annee: ressource.annee || null,
           mesure_id: mesure.id,
 
-          mesure_ressources_prestations_sociales: ressource.prestations_sociales.map(
+          mesure_ressources_prestations_sociales: ressource.prestations_sociales?.map(
             (prestations_sociales) => ({
               prestations_sociales,
             })

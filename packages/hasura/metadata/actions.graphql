@@ -81,6 +81,11 @@ type Mutation {
 }
 
 
+type Mutation {
+  import_ocmi_mesures : ImportOcmiMesuresOutput
+}
+
+
 type Query {
   mandataire_statistics (
     userId: Int!
@@ -309,5 +314,10 @@ type UpsertMesureEtatOutput {
 
 type DeleteMesureEtatOutput {
   affectedRows : Int!
+}
+
+type ImportOcmiMesuresOutput {
+  en_cours : Int
+  eteinte : Int
 }
 

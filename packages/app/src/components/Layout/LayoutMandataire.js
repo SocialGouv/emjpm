@@ -7,8 +7,6 @@ import { Navigation } from "~/components/Navigation";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-import isPayedByParis from "./isPayedByParis";
-
 const navigationLinks = [
   {
     title: "Tableau de bord",
@@ -30,7 +28,7 @@ const LayoutMandataire = (props) => {
 
   let links = navigationLinks;
 
-  if (user.enquete && isPayedByParis(user)) {
+  if (user.enquete) {
     links = navigationLinks.concat({
       as: `/mandataires/enquetes/${user.enquete.id}`,
       title: `Enquête ${user.enquete.annee}`,

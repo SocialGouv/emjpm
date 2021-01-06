@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/react-hooks";
-import { isService } from "@emjpm/biz";
-import React, { createContext, Fragment } from "react";
+import { isMandataire, isService } from "@emjpm/biz";
+import React, { createContext, Fragment, useMemo } from "react";
 
 import { setUser } from "~/util/sentry";
 
@@ -25,6 +25,13 @@ const QUERY_TYPE = {
 
 const UserProvider = (props) => {
   const { type, userId, agrements, children } = props;
+  const variables = {
+    userId,
+  };
+  const endDate = useMemo(() => new Date(), []);
+  if (isMandataire({ type }) || isService({ type })) {
+    variables.endDate = endDate;
+  }
   const { data } = useQuery(QUERY_TYPE[type], {
     onCompleted: ({ users_by_pk: user }) => {
       if (user) {
@@ -32,9 +39,7 @@ const UserProvider = (props) => {
       }
     },
     ssr: false,
-    variables: {
-      userId: userId,
-    },
+    variables,
   });
 
   if (!data) {

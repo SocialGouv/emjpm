@@ -1,7 +1,10 @@
 const express = require("express");
 
-const { actionMesuresDelete } = require("./actions");
-const { actionMesuresExport } = require("./actions");
+const {
+  actionMesuresDelete,
+  actionOcmiImport,
+  actionMesuresExport,
+} = require("./actions");
 const actionsMesuresImporter = require("./mesures-import/actionsMesuresImporter");
 const checkImportMesuresParameters = require("./hasura-actions.mesures-import.checker");
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
@@ -41,6 +44,12 @@ router.post(
   "/delete",
   actionMesuresDelete,
   hasuraActionErrorHandler("Unexpected error deleting mesure")
+);
+
+router.post(
+  "/import-ocmi-mesures",
+  actionOcmiImport,
+  hasuraActionErrorHandler("Unexpected error importing mesure for ocmi")
 );
 
 module.exports = router;
