@@ -64,7 +64,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-yarn-
       - name: Installing
-        run: yarn --frozen-lockfile --link-duplicates --perfer-offline
+        run: yarn --frozen-lockfile --perfer-offline
 
       - name: Postinstall
         run: yarn postinstall:run
