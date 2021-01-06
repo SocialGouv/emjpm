@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const MANDATAIRE_ACTIVITY = gql`
   query activityByGestionnaireType($department: Int, $region: Int) {
-    service: view_mesure_gestionnaire_aggregate(
+    service: view_mesure_gestionnaire_departement_aggregate(
       where: {
         departement: {
           _or: { id: { _eq: $department }, id_region: { _eq: $region } }
@@ -18,7 +18,7 @@ export const MANDATAIRE_ACTIVITY = gql`
         }
       }
     }
-    mandataireIndividuel: view_mesure_gestionnaire_aggregate(
+    mandataireIndividuel: view_mesure_gestionnaire_departement_aggregate(
       where: {
         departement: {
           _or: { id: { _eq: $department }, id_region: { _eq: $region } }
@@ -34,7 +34,7 @@ export const MANDATAIRE_ACTIVITY = gql`
         }
       }
     }
-    mandatairePrepose: view_mesure_gestionnaire_aggregate(
+    mandatairePrepose: view_mesure_gestionnaire_departement_aggregate(
       where: {
         departement: {
           _or: { id: { _eq: $department }, id_region: { _eq: $region } }

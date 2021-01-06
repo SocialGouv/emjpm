@@ -1,4 +1,7 @@
 const TYPES = {
+  MANDATAIRE_IND: "#D6317D",
+  MANDATAIRE_PRE: "#D29E10",
+  SERVICE: "#3174D6",
   individuel: "#D6317D",
   préposé: "#D29E10",
   service: "#3174D6",
