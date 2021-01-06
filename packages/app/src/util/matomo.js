@@ -30,7 +30,6 @@ export const useMatomo = () => {
       } else {
         matopush(["trackPageView"]);
       }
-      matopush(["enableLinkTracking"]);
     }, 0);
   }, [location]);
 };

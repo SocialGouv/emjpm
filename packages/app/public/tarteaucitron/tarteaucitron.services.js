@@ -38,7 +38,7 @@ tarteaucitron.services.matomo = {
     matopush(["setDoNotTrack", 1]);
     matopush(["trackPageView"]);
     matopush(["setIgnoreClasses", ["no-tracking", "colorbox"]]);
-    // matopush(["enableLinkTracking"]);
+    matopush(["enableLinkTracking"]);
     matopush([
       function () {
         const self = this;
