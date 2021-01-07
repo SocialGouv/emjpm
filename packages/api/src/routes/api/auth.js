@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 const { check, body } = require("express-validator");
@@ -16,7 +17,7 @@ router.post(
   login
 );
 
-router.get("/get-token", getToken);
+router.get("/get-token", cookieParser(), getToken);
 
 router.post(
   "/forgot-password",
