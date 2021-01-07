@@ -5,10 +5,10 @@ import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
 import { FlexWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const ResetPasswordPage = () => {
-  const { token } = useQuery();
+  const { token } = useParams();
   return (
     <LayoutPublic>
       <FlexWrapper

@@ -8,10 +8,10 @@ import { MesureProvider } from "~/components/MesureContext";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const Mandataires = () => {
-  const { mesure_id: mesureId } = useQuery();
+  const { mesure_id: mesureId } = useParams();
   return (
     <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
       <BoxWrapper mt={6} px="1">

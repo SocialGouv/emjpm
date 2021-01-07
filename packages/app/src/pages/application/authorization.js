@@ -7,12 +7,12 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper, FlexWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const AuthorizationPage = (props) => {
   const { token } = props;
 
-  const query = useQuery();
+  const query = useParams();
   const editorId = query["client_id"];
   const redirectUrl = query["redirect_uri"];
   const state = query["state"] || Math.random().toString(36).slice(2);

@@ -5,10 +5,10 @@ import { MagistratMandataire } from "~/components/MagistratMandataire";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const Gestionnaire = () => {
-  const { gestionnaire_id: gestionnaireId } = useQuery();
+  const { gestionnaire_id: gestionnaireId } = useParams();
   const {
     magistrat: { ti_id: tiId },
   } = useContext(UserContext);

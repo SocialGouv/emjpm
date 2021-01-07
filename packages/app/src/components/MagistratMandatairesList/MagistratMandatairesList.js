@@ -107,86 +107,90 @@ const MagistratMandatairesList = (props) => {
   const gestionnaires = formatMandatairesList(data.mandatairesList);
   return (
     <MandataireContextProvider>
-      <Box sx={MagistratMandatairesListStyle} {...props}>
-        <Card mb="2" mt="1">
-          <Flex justifyContent="space-between" alignItems="center">
-            <Flex flexWrap="wrap">
-              <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
-              <Box width="200px" mr="2">
-                <Select
-                  instanceId={"type-mandataire-filter"}
-                  size="small"
-                  placeholder="Type de mandataire"
-                  onChange={(option) => {
-                    setCurrentOffset(0);
-                    setType(option);
-                  }}
-                  value={selectedType}
-                  options={optionsType}
-                />
-              </Box>
-              <Box width="200px" mr={1}>
-                <Input
-                  value={searchText}
-                  spellCheck="false"
-                  autoComplete="false"
-                  onChange={(event) => {
-                    setCurrentOffset(0);
-                    changeSearchText(event.target.value);
-                  }}
-                  name="search"
-                  size="small"
-                  placeholder="mandataire / service"
-                />
-              </Box>
-            </Flex>
+      <>
+        <Box sx={MagistratMandatairesListStyle} {...props}>
+          <Card mb="2" mt="1">
+            <Flex justifyContent="space-between" alignItems="center">
+              <Flex flexWrap="wrap">
+                <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
+                <Box width="200px" mr="2">
+                  <Select
+                    instanceId={"type-mandataire-filter"}
+                    size="small"
+                    placeholder="Type de mandataire"
+                    onChange={(option) => {
+                      setCurrentOffset(0);
+                      setType(option);
+                    }}
+                    value={selectedType}
+                    options={optionsType}
+                  />
+                </Box>
+                <Box width="200px" mr={1}>
+                  <Input
+                    value={searchText}
+                    spellCheck="false"
+                    autoComplete="false"
+                    onChange={(event) => {
+                      setCurrentOffset(0);
+                      changeSearchText(event.target.value);
+                    }}
+                    name="search"
+                    size="small"
+                    placeholder="mandataire / service"
+                  />
+                </Box>
+              </Flex>
 
-            <Flex alignItems="center">
-              <Text mr={2}>Trier par:</Text>
-              <Box width="200px">
-                <Select
-                  instanceId={"mandataire-sort"}
-                  size="small"
-                  onChange={({ value }) => setOrderBy(value)}
-                  value={orderByOptions.find(({ value }) => value === orderBy)}
-                  options={orderByOptions}
-                />
-              </Box>
+              <Flex alignItems="center">
+                <Text mr={2}>Trier par:</Text>
+                <Box width="200px">
+                  <Select
+                    instanceId={"mandataire-sort"}
+                    size="small"
+                    onChange={({ value }) => setOrderBy(value)}
+                    value={orderByOptions.find(
+                      ({ value }) => value === orderBy
+                    )}
+                    options={orderByOptions}
+                  />
+                </Box>
+              </Flex>
             </Flex>
-          </Flex>
-        </Card>
-        {gestionnaires.map((gestionnaire) => {
-          return (
-            <MandataireListItem
-              key={gestionnaire.id}
-              onClick={() =>
-                history.push(`/magistrats/gestionnaires/${gestionnaire.id}`)
-              }
-              gestionnaire={gestionnaire}
-            />
-          );
-        })}
-        {count > RESULT_PER_PAGE && (
-          <Flex alignItems="center" justifyContent="center">
-            <ReactPaginate
-              previousLabel={"Précédent"}
-              nextLabel={"Suivant"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={totalPage}
-              containerClassName={"react-paginate"}
-              marginPagesDisplayed={2}
-              forcePage={currentOffset / RESULT_PER_PAGE}
-              pageRangeDisplayed={5}
-              onPageChange={(data) => {
-                setCurrentOffset(data.selected * RESULT_PER_PAGE);
-              }}
-              subContainerClassName={"pages pagination"}
-              activeClassName={"active"}
-            />
-          </Flex>
-        )}
-      </Box>
+          </Card>
+          {gestionnaires.map((gestionnaire) => {
+            return (
+              <MandataireListItem
+                key={gestionnaire.id}
+                onClick={() =>
+                  history.push(`/magistrats/gestionnaires/${gestionnaire.id}`)
+                }
+                gestionnaire={gestionnaire}
+              />
+            );
+          })}
+          {count > RESULT_PER_PAGE && (
+            <Flex alignItems="center" justifyContent="center">
+              <ReactPaginate
+                previousLabel={"Précédent"}
+                nextLabel={"Suivant"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={totalPage}
+                containerClassName={"react-paginate"}
+                marginPagesDisplayed={2}
+                forcePage={currentOffset / RESULT_PER_PAGE}
+                pageRangeDisplayed={5}
+                onPageChange={(data) => {
+                  setCurrentOffset(data.selected * RESULT_PER_PAGE);
+                }}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
+            </Flex>
+          )}
+        </Box>
+      </>
     </MandataireContextProvider>
   );
 };

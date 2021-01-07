@@ -32,9 +32,9 @@ const AntenneLinkButtonStyle = (isActive, disabled) => {
 };
 
 const AntenneLinkButton = ({ location, ...props }) => {
-  const isActive = location.pathname === props.href;
-  const antenne_id = props.href;
+  const antenne_id = props.to;
   const to = `/services/antennes/${antenne_id}`;
+  const isActive = location.pathname === to;
   return (
     <RouterLink
       to={to}

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { lazy, Suspense, useContext } from "react";
+import React, { useContext } from "react";
 
 import { UserContext } from "~/components/UserContext";
 import {
@@ -11,9 +11,7 @@ import {
 import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
-const MagistratMapMandataires = lazy(() =>
-  import("./MagistratMandatairesMap").then((mod) => mod.MagistratMandatairesMap)
-);
+import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
 
 const MagistratMandataires = () => {
   const { magistrat } = useContext(UserContext);
@@ -50,14 +48,12 @@ const MagistratMandataires = () => {
   );
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <MagistratMapMandataires
-        magistrat={magistrat}
-        services={services}
-        individuel={individuel}
-        prepose={prepose}
-      />
-    </Suspense>
+    <MagistratMandatairesMap
+      magistrat={magistrat}
+      services={services}
+      individuel={individuel}
+      prepose={prepose}
+    />
   );
 };
 

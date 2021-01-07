@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutDirection } from "~/components/Layout";
@@ -7,10 +7,8 @@ import { Link } from "~/components/Link";
 import { ListeBlancheServiceUpdate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
-
 const ListeBlancheDetailPage = () => {
-  const { id } = useQuery();
+  const { id } = useParams();
   const history = useHistory();
 
   return (

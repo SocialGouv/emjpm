@@ -8,10 +8,10 @@ import { MesureImportPanel } from "~/components/MesureImport";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const Service = () => {
-  const { service_id: serviceId } = useQuery();
+  const { service_id: serviceId } = useParams();
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>

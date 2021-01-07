@@ -1,6 +1,6 @@
 import React, { useContext, useMemo } from "react";
 import { useSubscription } from "@apollo/client";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { LoadingWrapper } from "~/components/Commons";
 import { EnqueteReponse } from "~/components/Enquete";
@@ -10,14 +10,12 @@ import { LayoutMandataire } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
-
 const MandataireEnquetePage = () => {
   const history = useHistory();
   const { id: userId } = useContext(UserContext);
   const currentStep = useCurrentStepFromUrl();
 
-  const query = useQuery();
+  const query = useParams();
   const enqueteId = Number(query.enquete_id);
 
   const { data, loading, error } = useSubscription(

@@ -4,10 +4,10 @@ import { DirectionEnqueteDetailsReponsesList } from "~/components/EnqueteDirecti
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const DirectionEnqueteDetailsPage = () => {
-  const { enquete_id: enqueteId } = useQuery();
+  const { enquete_id: enqueteId } = useParams();
   return (
     <LayoutDirection>
       <BoxWrapper mt={1} px="1">

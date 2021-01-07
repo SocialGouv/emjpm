@@ -4,10 +4,10 @@ import { DirectionEnqueteDetailsReponsePreview } from "~/components/EnqueteDirec
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const DirectionEnqueteReponsePreviewPage = () => {
-  const query = useQuery();
+  const query = useParams();
   const enqueteId = Number(query.enquete_id);
   const enqueteReponseId = Number(query.enquete_reponse_id);
 

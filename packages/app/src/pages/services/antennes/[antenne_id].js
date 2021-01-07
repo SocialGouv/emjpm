@@ -5,10 +5,10 @@ import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneInformations } from "~/components/ServiceAntenneInformations";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const Antennes = () => {
-  const { antenne_id: antenneId } = useQuery();
+  const { antenne_id: antenneId } = useParams();
 
   return (
     <LayoutServices>

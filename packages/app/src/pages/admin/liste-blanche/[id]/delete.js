@@ -5,10 +5,10 @@ import { AdminLbUserDelete } from "~/components/AdminLbUserDelete";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const AdminUserDeletePage = () => {
-  const { id: lbUserId } = useQuery();
+  const { id: lbUserId } = useParams();
 
   return (
     <LayoutAdmin>

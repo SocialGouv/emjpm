@@ -14,11 +14,11 @@ const routes = [
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/accept")
       .default,
-    path: "/mandataires/mesures/:mesure_id/accept",
+    path: "/mandataires/mesures/:mesure_id(\\d+)/accept",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/accept").default,
-    path: "/services/mesures/:mesure_id/accept",
+    path: "/services/mesures/:mesure_id(\\d+)/accept",
   },
   {
     Component: require("~/pages/admin/etablissements/add").default,
@@ -63,11 +63,11 @@ const routes = [
   },
   {
     Component: require("~/pages/services/antennes/[antenne_id]").default,
-    path: "/services/antennes/:antenne_id",
+    path: "/services/antennes/:antenne_id(\\d+)",
   },
   {
     Component: require("~/pages/admin/api-logs/[api_log_id]").default,
-    path: "/admin/api-logs/:api_log_id",
+    path: "/admin/api-logs/:api_log_id(\\d+)",
   },
   {
     Component: require("~/pages/application/authorization").default,
@@ -75,11 +75,11 @@ const routes = [
   },
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/close").default,
-    path: "/mandataires/mesures/:mesure_id/close",
+    path: "/mandataires/mesures/:mesure_id(\\d+)/close",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/close").default,
-    path: "/services/mesures/:mesure_id/close",
+    path: "/services/mesures/:mesure_id(\\d+)/close",
   },
   {
     Component: require("~/pages/conditions-utilisation").default,
@@ -103,24 +103,24 @@ const routes = [
   },
   {
     Component: require("~/pages/admin/liste-blanche/[id]/delete").default,
-    path: "/admin/liste-blanche/:id/delete",
+    path: "/admin/liste-blanche/:id(\\d+)/delete",
   },
   {
     Component: require("~/pages/admin/users/[user_id]/delete").default,
-    path: "/admin/users/:user_id/delete",
+    path: "/admin/users/:user_id(\\d+)/delete",
   },
   {
     Component: require("~/pages/magistrats/mesures/[mesure_id]/delete").default,
-    path: "/magistrats/mesures/:mesure_id/delete",
+    path: "/magistrats/mesures/:mesure_id(\\d+)/delete",
   },
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/delete")
       .default,
-    path: "/mandataires/mesures/:mesure_id/delete",
+    path: "/mandataires/mesures/:mesure_id(\\d+)/delete",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/delete").default,
-    path: "/services/mesures/:mesure_id/delete",
+    path: "/services/mesures/:mesure_id(\\d+)/delete",
   },
   {
     Component: require("~/pages/stats/[departement_code]").default,
@@ -132,15 +132,15 @@ const routes = [
   },
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/edit").default,
-    path: "/mandataires/mesures/:mesure_id/edit",
+    path: "/mandataires/mesures/:mesure_id(\\d+)/edit",
   },
   {
     Component: require("~/pages/services/antennes/[antenne_id]/edit").default,
-    path: "/services/antennes/:antenne_id/edit",
+    path: "/services/antennes/:antenne_id(\\d+)/edit",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/edit").default,
-    path: "/services/mesures/:mesure_id/edit",
+    path: "/services/mesures/:mesure_id(\\d+)/edit",
   },
   {
     Component: require("~/pages/direction/edit-informations").default,
@@ -160,7 +160,7 @@ const routes = [
   },
   {
     Component: require("~/pages/admin/editors/[editor_id]").default,
-    path: "/admin/editors/:editor_id",
+    path: "/admin/editors/:editor_id(\\d+)",
   },
   {
     Component: require("~/pages/direction/edit-password").default,
@@ -181,7 +181,8 @@ const routes = [
   {
     Component: require("~/pages/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]")
       .default,
-    path: "/direction/enquetes/:enquete_id/reponse/:enquete_reponse_id",
+    path:
+      "/direction/enquetes/:enquete_id(\\d+)/reponse/:enquete_reponse_id(\\d+)",
   },
   {
     Component: require("~/pages/account/forgot-password").default,
@@ -189,32 +190,32 @@ const routes = [
   },
   {
     Component: require("~/pages/admin/etablissements/[id]").default,
-    path: "/admin/etablissements/:id",
+    path: "/admin/etablissements/:id(\\d+)",
   },
   {
     Component: require("~/pages/admin/liste-blanche/[id]").default,
-    path: "/admin/liste-blanche/:id",
+    path: "/admin/liste-blanche/:id(\\d+)",
   },
   {
     Component: require("~/pages/admin/liste-blanche/services/[id]").default,
-    path: "/admin/liste-blanche/services/:id",
+    path: "/admin/liste-blanche/services/:id(\\d+)",
   },
   {
     Component: require("~/pages/direction/liste-blanche/[id]").default,
-    path: "/direction/liste-blanche/:id",
+    path: "/direction/liste-blanche/:id(\\d+)",
   },
   {
     Component: require("~/pages/direction/liste-blanche/services/[id]").default,
-    path: "/direction/liste-blanche/services/:id",
+    path: "/direction/liste-blanche/services/:id(\\d+)",
   },
   {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/import")
       .default,
-    path: "/mandataires/enquetes/:enquete_id/import",
+    path: "/mandataires/enquetes/:enquete_id(\\d+)/import",
   },
   {
     Component: require("~/pages/services/enquetes/[enquete_id]/import").default,
-    path: "/services/enquetes/:enquete_id/import",
+    path: "/services/enquetes/:enquete_id(\\d+)/import",
   },
   {
     Component: require("~/pages/mandataires/import-mesures").default,
@@ -263,7 +264,7 @@ const routes = [
   },
   {
     Component: require("~/pages/direction/enquetes/[enquete_id]/index").default,
-    path: "/direction/enquetes/:enquete_id",
+    path: "/direction/enquetes/:enquete_id(\\d+)",
   },
   {
     Component: require("~/pages/direction/liste-blanche/index").default,
@@ -289,11 +290,11 @@ const routes = [
   {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/index")
       .default,
-    path: "/mandataires/enquetes/:enquete_id",
+    path: "/mandataires/enquetes/:enquete_id(\\d+)",
   },
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/index").default,
-    path: "/mandataires/mesures/:mesure_id",
+    path: "/mandataires/mesures/:mesure_id(\\d+)",
   },
   {
     Component: require("~/pages/services/index").default,
@@ -301,11 +302,11 @@ const routes = [
   },
   {
     Component: require("~/pages/services/enquetes/[enquete_id]/index").default,
-    path: "/services/enquetes/:enquete_id",
+    path: "/services/enquetes/:enquete_id(\\d+)",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/index").default,
-    path: "/services/mesures/:mesure_id",
+    path: "/services/mesures/:mesure_id(\\d+)",
   },
   {
     Component: require("~/pages/signup/index").default,
@@ -359,7 +360,7 @@ const routes = [
   },
   {
     Component: require("~/pages/magistrats/mesures/[mesure_id]").default,
-    path: "/magistrats/mesures/:mesure_id",
+    path: "/magistrats/mesures/:mesure_id(\\d+)",
   },
   {
     Component: require("~/pages/magistrats/mesures").default,
@@ -380,12 +381,12 @@ const routes = [
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/reactivate")
       .default,
-    path: "/mandataires/mesures/:mesure_id/reactivate",
+    path: "/mandataires/mesures/:mesure_id(\\d+)/reactivate",
   },
   {
     Component: require("~/pages/services/mesures/[mesure_id]/reactivate")
       .default,
-    path: "/services/mesures/:mesure_id/reactivate",
+    path: "/services/mesures/:mesure_id(\\d+)/reactivate",
   },
   {
     Component: require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/reservation")
@@ -398,7 +399,7 @@ const routes = [
   },
   {
     Component: require("~/pages/admin/services/[service_id]").default,
-    path: "/admin/services/:service_id",
+    path: "/admin/services/:service_id(\\d+)",
   },
   {
     Component: require("~/pages/application/token-request").default,
@@ -406,7 +407,7 @@ const routes = [
   },
   {
     Component: require("~/pages/admin/users/[user_id]").default,
-    path: "/admin/users/:user_id",
+    path: "/admin/users/:user_id(\\d+)",
   },
 ];
 
@@ -451,41 +452,3 @@ function Routes() {
 }
 
 export default Routes;
-
-/*
-const auth = async () => {
-  if (!authCredentials.token) {
-    const logged = cookie.get("logged");
-    if (logged === "1") {
-      const response = await fetch(`${API_URL}/api/auth/get-token`, {
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET",
-      });
-      if (response.status === 200) {
-        const { token } = response.json();
-        authCredentials.token = token;
-      }
-    }
-  }
-
-  const isOauth = pathname === "/application/authorization";
-
-  if (token) {
-    const { url, role } = jwtDecode(authCredentials.token);
-    const isTokenPath = pathname.indexOf(routes[role]) !== -1;
-    if (isOauth) {
-      return token;
-    } else if (!url) {
-      logout();
-    } else if (!isTokenPath) {
-      history.push(routes[role);
-    }
-  }
-
-  return token;
-};
-
-*/

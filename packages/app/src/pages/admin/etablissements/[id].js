@@ -6,10 +6,10 @@ import { EtablissementView } from "~/components/Etablissement";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 export const EditEtablissementPage = () => {
-  const { id } = useQuery();
+  const { id } = useParams();
 
   return (
     <LayoutAdmin>

@@ -7,10 +7,10 @@ import { MesureProvider } from "~/components/MesureContext";
 import { MesureEdit } from "~/components/MesureEdit";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const EditMesurePage = () => {
-  const { mesure_id: mesureId } = useQuery();
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>

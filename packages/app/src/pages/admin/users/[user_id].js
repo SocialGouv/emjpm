@@ -6,10 +6,10 @@ import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const User = () => {
-  const { user_id: userId } = useQuery();
+  const { user_id: userId } = useParams();
 
   return (
     <LayoutAdmin>

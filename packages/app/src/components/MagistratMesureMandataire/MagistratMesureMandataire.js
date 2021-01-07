@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { lazy, Suspense, useContext } from "react";
+import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
@@ -17,11 +17,7 @@ import {
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
-const MagistratMandataireMap = lazy(() =>
-  import("~/components/MagistratMandataireMap").then(
-    (mod) => mod.MagistratMandataireMap
-  )
-);
+import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
 const MagistratMesureMandataire = (props) => {
   const { serviceId, mandataireId } = useContext(MesureContext);
@@ -83,14 +79,12 @@ const MagistratMesureMandataire = (props) => {
       </Heading3>
       <Flex sx={MagistratMandataireStyle}>
         <Box sx={MagistratSideStyle} height="400px">
-          <Suspense fallback={<div>Loading...</div>}>
-            <MagistratMandataireMap
-              longitude={longitude}
-              discriminator={discriminator}
-              latitude={latitude}
-              id={id}
-            />
-          </Suspense>
+          <MagistratMandataireMap
+            longitude={longitude}
+            discriminator={discriminator}
+            latitude={latitude}
+            id={id}
+          />
         </Box>
         <Flex sx={MagistratMainStyle} flexDirection="column">
           <Flex>

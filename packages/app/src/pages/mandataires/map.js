@@ -1,12 +1,10 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataireMap } from "~/components/Layout";
 import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesures";
 
-const MandataireMap = lazy(() =>
-  import("~/components/MandataireMap").then((mod) => mod.MandataireMap)
-);
+import { MandataireMap } from "~/components/MandataireMap";
 
 const Map = () => {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
@@ -39,12 +37,10 @@ const Map = () => {
             minWidth: 320,
           }}
         >
-          <Suspense fallback={<div>Loading...</div>}>
-            <MandataireMap
-              selectMesures={(ids) => setSelectedMesuresIds(ids)}
-              selectedMesuresIds={selectedMesuresIds}
-            />
-          </Suspense>
+          <MandataireMap
+            selectMesures={(ids) => setSelectedMesuresIds(ids)}
+            selectedMesuresIds={selectedMesuresIds}
+          />
         </Box>
       </Flex>
     </LayoutMandataireMap>

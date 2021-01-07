@@ -1,12 +1,10 @@
-import React, { lazy, Suspense, useState } from "react";
+import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServicesMap } from "~/components/Layout";
 import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
 
-const ServiceMap = lazy(() =>
-  import("~/components/ServiceMap").then((mod) => mod.ServiceMap)
-);
+import { ServiceMap } from "~/components/ServiceMap";
 
 const Map = () => {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
@@ -40,12 +38,10 @@ const Map = () => {
             minWidth: 320,
           }}
         >
-          <Suspense fallback={<div>Loading...</div>}>
-            <ServiceMap
-              selectMesures={(ids) => setSelectedMesuresIds(ids)}
-              selectedMesuresIds={selectedMesuresIds}
-            />
-          </Suspense>
+          <ServiceMap
+            selectMesures={(ids) => setSelectedMesuresIds(ids)}
+            selectedMesuresIds={selectedMesuresIds}
+          />
         </Box>
       </Flex>
     </LayoutServicesMap>

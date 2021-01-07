@@ -1,4 +1,4 @@
-import React, { Fragment, lazy, Suspense } from "react";
+import React, { Fragment } from "react";
 import { Box, Image } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
@@ -6,9 +6,7 @@ import { LayoutPublic } from "~/components/Layout";
 import { Login, LoginCreateAccount } from "~/components/Login";
 import { BoxWrapper, FlexWrapper } from "~/ui";
 
-const ExcludeBrowserBanner = lazy(() =>
-  import("~/components/ExcludeBrowserBanner")
-);
+import { ExcludeBrowserBanner } from "~/components/ExcludeBrowserBanner";
 
 const LoginPage = () => {
   return (
@@ -49,9 +47,7 @@ const LoginPage = () => {
               p: "3",
             }}
           >
-            <Suspense fallback={""}>
-              <ExcludeBrowserBanner />
-            </Suspense>
+            <ExcludeBrowserBanner />
             <Login />
             <LoginCreateAccount />
           </Box>

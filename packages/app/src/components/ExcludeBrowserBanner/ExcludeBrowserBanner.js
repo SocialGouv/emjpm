@@ -12,7 +12,7 @@ const excludedBrowsers = [
 ];
 const currentBrowser = detectBrowser();
 
-export const ExcludeBrowserBanner = () => {
+export function ExcludeBrowserBanner() {
   if (isUnsupportedBrowser(currentBrowser, excludedBrowsers)) {
     return (
       <Card p={3}>
@@ -29,7 +29,7 @@ export const ExcludeBrowserBanner = () => {
     );
   }
   return null;
-};
+}
 
 ExcludeBrowserBanner.propTypes = {
   excludedBrowsers: PropTypes.arrayOf(PropTypes.string),
@@ -38,5 +38,3 @@ ExcludeBrowserBanner.propTypes = {
 ExcludeBrowserBanner.defaultProps = {
   excludedBrowsers: [],
 };
-
-export default ExcludeBrowserBanner;

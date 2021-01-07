@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import React, { lazy, Suspense } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { Link } from "~/components/Link";
@@ -18,11 +17,7 @@ import {
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
-const MagistratMandataireMap = lazy(() =>
-  import("~/components/MagistratMandataireMap").then(
-    (mod) => mod.MagistratMandataireMap
-  )
-);
+import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
 export const MagistratMandataire = (props) => {
   const { gestionnaireId, tiId } = props;
@@ -192,14 +187,12 @@ export const MagistratMandataire = (props) => {
         {serviceId && <MagistratServiceAntennes serviceId={serviceId} />}
       </Box>
       <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
-        <Suspense fallback={<div>Loading...</div>}>
-          <MagistratMandataireMap
-            longitude={longitude}
-            discriminator={discriminator}
-            latitude={latitude}
-            id={id}
-          />
-        </Suspense>
+        <MagistratMandataireMap
+          longitude={longitude}
+          discriminator={discriminator}
+          latitude={latitude}
+          id={id}
+        />
       </Box>
     </Box>
   );

@@ -21,7 +21,7 @@ const ServiceAntenneEdit = (props) => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await editAntenne({
-        refetchQueries: ["service_antenne"],
+        refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
           adresse: values.geocode.label,
           antenne_id: antenneId,

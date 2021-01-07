@@ -7,10 +7,10 @@ import { MesureClose } from "~/components/MesureClose";
 import { MesureProvider } from "~/components/MesureContext";
 import { BoxWrapper } from "~/ui";
 
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const CloseMesurePage = () => {
-  const { mesure_id: mesureId } = useQuery();
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>

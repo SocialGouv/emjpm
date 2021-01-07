@@ -5,10 +5,10 @@ import { IndicatorList } from "~/components/IndicatorList";
 import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import useQuery from "~/util/useQuery";
+import { useParams } from "react-router-dom";
 
 const DepartmentStatsPage = () => {
-  const { departement_code: departementCode } = useQuery();
+  const { departement_code: departementCode } = useParams();
   return (
     <LayoutPublic>
       <BoxWrapper>
