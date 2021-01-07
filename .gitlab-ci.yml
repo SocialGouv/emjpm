@@ -151,7 +151,6 @@ stages:
       fi
 
       if [[ -n "${CACHE_TAG}" ]] && [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} &
         docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} &
         wait
       fi
@@ -159,30 +158,17 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
-          --target dependencies \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
-          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.dependencies:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} &
-
-        docker build \
           --target builder \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
 
         docker build \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
           -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
@@ -202,7 +188,6 @@ stages:
 
       wait
 
-      docker push ${IMAGE_NAME}.dependencies:${TAG} &
       docker push ${IMAGE_NAME}.builder:${TAG} &
       docker push ${IMAGE_NAME}:${TAG} &
 
@@ -250,6 +235,29 @@ stages:
   script:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success
+
+#
+
+.base_trivy_scan:
+  stage: Deploy
+  services:
+    - docker:dind
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
+  allow_failure: true
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_SHA
+  script:
+    # Build report
+    - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+    # Print report and fail on error
+    - trivy --cache-dir .trivycache/ image --exit-code 1 --no-progress $IMAGE
+  cache:
+    paths:
+      - .trivycache/
+  # Enables https://docs.gitlab.com/ee/user/application_security/container_scanning/ (Container Scanning report is available on GitLab EE Ultimate or GitLab.com Gold)
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
 
 #
 
@@ -740,3 +748,19 @@ Trigger release:
       --form token="${CI_JOB_TOKEN}"
       --form variables[RELEASE]="true"
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
+
+############ Security scans ########################
+Trivy Scan api:
+  extends: .base_trivy_scan
+  variables:
+    CONTEXT: api
+
+Trivy Scan app:
+  extends: .base_trivy_scan
+  variables:
+    CONTEXT: app
+
+Trivy Scan hasura:
+  extends: .base_trivy_scan
+  variables:
+    CONTEXT: hasura
