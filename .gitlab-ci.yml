@@ -253,6 +253,27 @@ stages:
 
 #
 
+.base_trivy_scan:
+  stage: Deploy
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
+  allow_failure: true
+  variables:
+    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+  script:
+    # Build report
+    - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+    # Print report and fail on error
+    - trivy --cache-dir .trivycache/ image --exit-code 1 --no-progress $IMAGE
+  cache:
+    paths:
+      - .trivycache/
+  # Enables https://docs.gitlab.com/ee/user/application_security/container_scanning/ (Container Scanning report is available on GitLab EE Ultimate or GitLab.com Gold)
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
+
+#
+
 variables:
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
