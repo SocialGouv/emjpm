@@ -1,20 +1,23 @@
 import React, {
   useContext,
   createContext,
-  useState,
   useEffect,
   useCallback,
   useRef,
+  useReducer,
 } from "react";
 import { Redirect, Route } from "react-router-dom";
 import cookie from "js-cookie";
 import jwtDecode from "jwt-decode";
+import { LoadingWrapper } from "~/components/Commons";
 
 // see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 
 import { matopush } from "~/util/matomo";
-
+import config from "~/config";
 import history from "~/routes/history";
+
+const { API_URL } = config;
 
 export const authContext = createContext();
 
@@ -51,13 +54,43 @@ const routeByRole = {
   ti: "/magistrats",
 };
 
+const authInitialState = {
+  id: null,
+  loading: cookie.get("logged") === "1",
+  logged: false,
+  token: null,
+  type: null,
+};
+
+function authReducer(state, { type, payload }) {
+  switch (type) {
+    case "logout": {
+      return {
+        ...state,
+        id: null,
+        loading: false,
+        logged: false,
+        token: null,
+        type: null,
+      };
+    }
+    case "login": {
+      const { id, type, token } = payload;
+      return { ...state, id, loading: false, logged: true, token, type };
+    }
+    case "loaded": {
+      return { ...state, loading: false };
+    }
+    default:
+      throw new Error("unknown auth action '" + type + "'");
+  }
+}
+
 export function useProvideAuth() {
-  const [authStore, setAuthStore] = useState({
-    id: null,
-    logged: false,
-    token: null,
-    type: null,
-  });
+  const [authStore, dispatchAuthStore] = useReducer(
+    authReducer,
+    authInitialState
+  );
 
   const logout = useCallback(() => {
     // to support logging out from all windows
@@ -69,13 +102,8 @@ export function useProvideAuth() {
     localStorage.removeItem("user_type");
     localStorage.removeItem("filters");
 
-    setAuthStore({
-      id: null,
-      logged: false,
-      token: null,
-      type: null,
-    });
-  }, [setAuthStore]);
+    dispatchAuthStore({ type: "logout" });
+  }, [dispatchAuthStore]);
 
   const login = useCallback(
     ({ token, id, type }) => {
@@ -89,16 +117,19 @@ export function useProvideAuth() {
         matopush(["setCustomVariable", 1, "type", authStore.type, "visit"]);
       }
 
-      setAuthStore({
-        id,
-        logged: true,
-        token,
-        type,
+      dispatchAuthStore({
+        payload: {
+          id,
+          token,
+          type,
+        },
+        type: "login",
       });
     },
-    [authStore, setAuthStore]
+    [authStore, dispatchAuthStore]
   );
 
+  // login redirect
   const prevLoggedStateRef = useRef(() => authStore.logged);
   useEffect(() => {
     if (authStore.logged && prevLoggedStateRef.current !== authStore.logged) {
@@ -117,6 +148,34 @@ export function useProvideAuth() {
     }
   }, [authStore, logout]);
 
+  // load token in memory
+  useEffect(() => {
+    (async () => {
+      if (cookie.get("logged")) {
+        const response = await fetch(`${API_URL}/api/auth/get-token`, {
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "GET",
+        });
+        const { token } = await response.json();
+        if (token) {
+          dispatchAuthStore({
+            payload: {
+              id: localStorage.getItem("id"),
+              token,
+              type: localStorage.getItem("type"),
+            },
+            type: "login",
+          });
+        } else {
+          dispatchAuthStore({ type: "logout" });
+        }
+      }
+    })();
+  }, [dispatchAuthStore]);
+
   return {
     authStore,
     login,
@@ -127,20 +186,22 @@ export function useProvideAuth() {
 export function PrivateRoute({ children, ...rest }) {
   const { authStore } = useAuth();
   return (
-    <Route
-      {...rest}
-      render={({ location }) =>
-        authStore.logged ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: "/login",
-              state: { from: location },
-            }}
-          />
-        )
-      }
-    />
+    <LoadingWrapper loading={authStore.loading}>
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authStore.logged ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location },
+              }}
+            />
+          )
+        }
+      />
+    </LoadingWrapper>
   );
 }
