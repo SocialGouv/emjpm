@@ -41,11 +41,7 @@ const MagistratMesures = () => {
   });
 
   const selectMesure = ({ id }) => {
-    history.push(
-      "/magistrats/mesures/[mesure_id]",
-      `/magistrats/mesures/${id}`,
-      { shallow: true }
-    );
+    history.push(`/magistrats/mesures/${id}`);
   };
 
   if (loading) {

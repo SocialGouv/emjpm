@@ -26,13 +26,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
   });
 
   const selectMesure = ({ id }) => {
-    history.push(
-      "/mandataires/mesures/[mesure_id]",
-      `/mandataires/mesures/${id}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`/mandataires/mesures/${id}`);
   };
 
   const mesures = useMemo(

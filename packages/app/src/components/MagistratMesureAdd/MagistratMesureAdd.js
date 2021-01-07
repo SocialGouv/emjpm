@@ -70,13 +70,7 @@ const MagistratMesureAdd = (props) => {
         },
       });
 
-      await history.push(
-        "/magistrats/mesures/[mesure_id]",
-        `/magistrats/mesures/${mesure.id}`,
-        {
-          shallow: true,
-        }
-      );
+      await history.push(`/magistrats/mesures/${mesure.id}`);
     },
   });
 

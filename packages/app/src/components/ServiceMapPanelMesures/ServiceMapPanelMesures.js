@@ -29,9 +29,7 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
   });
 
   const selectMesure = ({ id }) => {
-    history.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-      shallow: true,
-    });
+    history.push(`/services/mesures/${id}`);
   };
 
   const mesures = useMemo(

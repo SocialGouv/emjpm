@@ -73,13 +73,7 @@ const MesureList = () => {
   });
 
   const selectMesure = ({ id, userBasePath }) => {
-    history.push(
-      `${userBasePath}/mesures/[mesure_id]`,
-      `${userBasePath}/mesures/${id}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`${userBasePath}/mesures/${id}`);
   };
 
   if (loading) {

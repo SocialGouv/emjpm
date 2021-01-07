@@ -39,13 +39,7 @@ export const MesureCreate = () => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    history.push(
-      `${userBasePath}/mesures/[mesure_id]`,
-      `${userBasePath}/mesures/${mesureId}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`${userBasePath}/mesures/${mesureId}`);
 
   const [addMesure] = useMutation(ADD_MESURE, {
     onCompleted: async ({ add_or_update }) => {

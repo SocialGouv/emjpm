@@ -22,13 +22,7 @@ const MesureDelete = (props) => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) =>
-    history.push(
-      `${userBasePath}/mesures/[mesure_id]`,
-      `${userBasePath}/mesures/${mesureId}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`${userBasePath}/mesures/${mesureId}`);
 
   const [deleteMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {

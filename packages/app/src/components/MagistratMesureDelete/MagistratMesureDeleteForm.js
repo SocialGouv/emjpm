@@ -121,11 +121,7 @@ export const MagistratMesureDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  history.push(
-                    "/magistrats/mesures/[mesure_id]",
-                    `/magistrats/mesures/${mesure.id}`,
-                    { shallow: true }
-                  );
+                  history.push(`/magistrats/mesures/${mesure.id}`);
                 }}
               >
                 Annuler
