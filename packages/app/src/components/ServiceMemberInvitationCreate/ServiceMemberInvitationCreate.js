@@ -1,4 +1,4 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/client";
 import React from "react";
 import { Box } from "rebass";
 

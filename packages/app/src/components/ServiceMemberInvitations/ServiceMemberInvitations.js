@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { format } from "date-fns";
 import React, { Fragment } from "react";
 import { Box, Flex } from "rebass";
@@ -64,7 +64,7 @@ const ServiceMemberInvitations = (props) => {
                       sx={listActionStyle}
                       onClick={() => handleDelete(invitation.id)}
                     >
-                      {`Supprimer l'invitation`}
+                      {"Supprimer l'invitation"}
                     </Box>
                   )}
                 </Box>

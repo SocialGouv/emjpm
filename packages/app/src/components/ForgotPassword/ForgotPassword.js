@@ -1,17 +1,15 @@
 import { useFormik } from "formik";
-import getConfig from "next/config";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
+import config from "~/config";
 import { forgotPasswordSchema } from "~/lib/validationSchemas";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 import { captureException } from "~/util/sentry";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const ForgotPassword = () => {
   const url = `${API_URL}/api/auth/forgot-password`;
@@ -64,9 +62,13 @@ const ForgotPassword = () => {
     <Card mt="5" p="0" maxWidth={["100%", "60%", "50%"]}>
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Demande de réinitialisation du mot de passe`}</Heading4>
+          <Heading4 mb="1">
+            {"Demande de réinitialisation du mot de passe"}
+          </Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm`}
+            {
+              "Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm"
+            }
           </Text>
           {mailSent && (
             <Box
@@ -79,7 +81,9 @@ const ForgotPassword = () => {
                 p: "1",
               }}
             >
-              {`Un email avec un lien de réinitialisation vient de vous être envoyé.`}
+              {
+                "Un email avec un lien de réinitialisation vient de vous être envoyé."
+              }
             </Box>
           )}
         </Box>
@@ -107,7 +111,7 @@ const ForgotPassword = () => {
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box mr="2">
-              <Link href="/login">Annuler</Link>
+              <Link to="/login">Annuler</Link>
             </Box>
             <Box>
               <Button

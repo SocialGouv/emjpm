@@ -17,7 +17,7 @@ const MesureImportResult = ({
     <div p={7} sx={ServiceMesureImportResultStyle}>
       <Flex alignItems="center">
         <Flex flexDirection="column">
-          <Heading2>{`Résultat de l'import`}</Heading2>
+          <Heading2>{"Résultat de l'import"}</Heading2>
           {errors.length ? (
             <Text m={2} fontSize={2}>{`Erreur lors de l'import des mesures (${
               errors.length

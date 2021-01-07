@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useHistory } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
@@ -14,6 +14,7 @@ import { ServiceMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
 const ServiceMapPanelMesures = ({ mesuresIds }) => {
+  const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
 
   const queryVariables = {
@@ -28,9 +29,7 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push("/services/mesures/[mesure_id]", `/services/mesures/${id}`, {
-      shallow: true,
-    });
+    history.push(`/services/mesures/${id}`);
   };
 
   const mesures = useMemo(

@@ -1,16 +1,11 @@
-import { useRouter } from "next/router";
 import { useMemo } from "react";
-
-import { urlQueryParser } from "./urlQueryParser.service";
+import { useParams } from "react-router-dom";
 
 export const useUrlQueryValues = (params) => {
-  const router = useRouter();
+  const routeParams = useParams();
 
-  return useMemo(
-    () =>
-      urlQueryParser.parseQueryValues(params, {
-        path: router && router.asPath ? router.asPath : "",
-      }),
-    [params, router]
-  );
+  return useMemo(() => {
+    Object.assign(params, routeParams);
+    return params;
+  }, [params, routeParams]);
 };

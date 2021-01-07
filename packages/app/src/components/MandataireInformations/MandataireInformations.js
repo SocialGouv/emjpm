@@ -54,7 +54,9 @@ const MandataireInformations = () => {
           <Box mb={2}>
             <Heading5>Géolocalisation</Heading5>
             <Text>
-              {`Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats`}
+              {
+                "Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats"
+              }
             </Text>
           </Box>
           <Flex my={1}>
@@ -84,12 +86,12 @@ const MandataireInformations = () => {
       </Flex>
       <Flex mt="5" justifyContent="center">
         <Box>
-          <Link href="/mandataires/edit-password">
+          <Link to="/mandataires/edit-password">
             <Button variant="outline">Modifier votre mot de passe</Button>
           </Link>
         </Box>
         <Box ml={1}>
-          <LinkButton href="/mandataires/edit-informations">
+          <LinkButton to="/mandataires/edit-informations">
             Modifier vos informations
           </LinkButton>
         </Box>

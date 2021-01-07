@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -83,10 +83,7 @@ const RowItem = ({ item }) => {
             width: 200,
           }}
         >
-          <Link
-            href={`/admin/api-logs/[api_log_id]`}
-            as={`/admin/api-logs/${id}`}
-          >
+          <Link to={`/admin/api-logs/${id}`}>
             <Button>Voir</Button>
           </Link>
         </Flex>

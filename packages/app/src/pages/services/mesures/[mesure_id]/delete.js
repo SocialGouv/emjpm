@@ -6,10 +6,11 @@ import { MesureProvider } from "~/components/MesureContext";
 import { MesureDelete } from "~/components/MesureDelete";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const DeleteMesurePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const DeleteMesurePage = () => {
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutServices>
@@ -24,8 +25,4 @@ const DeleteMesurePage = (props) => {
   );
 };
 
-DeleteMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(DeleteMesurePage);
+export default DeleteMesurePage;

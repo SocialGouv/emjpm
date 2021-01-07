@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import React, { Fragment } from "react";
 import { Box, Image } from "rebass";
 
@@ -6,19 +5,8 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { Login, LoginCreateAccount } from "~/components/Login";
 import { BoxWrapper, FlexWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ExcludeBrowserBanner = dynamic(
-  async () => {
-    const { ExcludeBrowserBanner } = await import(
-      "~/components/ExcludeBrowserBanner"
-    );
-    return ExcludeBrowserBanner;
-  },
-  {
-    ssr: false,
-  }
-);
+import { ExcludeBrowserBanner } from "~/components/ExcludeBrowserBanner";
 
 const LoginPage = () => {
   return (
@@ -37,7 +25,7 @@ const LoginPage = () => {
             }}
           >
             <Image
-              src="/static/images/login.png"
+              src="/images/login.png"
               sx={{
                 p: "3",
                 width: ["100%"],
@@ -69,4 +57,4 @@ const LoginPage = () => {
   );
 };
 
-export default withAuthSync(LoginPage);
+export default LoginPage;

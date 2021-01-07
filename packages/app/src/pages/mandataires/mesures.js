@@ -12,7 +12,6 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const MesuresListView = () => {
   return (
@@ -47,4 +46,4 @@ const MandataireMesuresList = () => {
   return <MesuresListView />;
 };
 
-export default withAuthSync(MandataireMesuresList);
+export default MandataireMesuresList;

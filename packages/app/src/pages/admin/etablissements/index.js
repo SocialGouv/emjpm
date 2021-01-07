@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { AdminEtablissements } from "~/components/AdminEtablissements";
@@ -8,10 +8,9 @@ import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminEtablissementsPage = () => {
-  const router = useRouter();
+  const history = useHistory();
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
@@ -20,7 +19,7 @@ const AdminEtablissementsPage = () => {
           <Box mt={4} mb={4}>
             <AdminFilterBar
               useDepartementfilter
-              onAddButtonClick={() => router.push("/admin/etablissements/add")}
+              onAddButtonClick={() => history.push("/admin/etablissements/add")}
             />
             <AdminEtablissements />
           </Box>
@@ -30,4 +29,4 @@ const AdminEtablissementsPage = () => {
   );
 };
 
-export default withAuthSync(AdminEtablissementsPage);
+export default AdminEtablissementsPage;

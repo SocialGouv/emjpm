@@ -7,7 +7,6 @@ import { ListeBlanche } from "~/components/ListeBlanche";
 import { ListeBlancheFilter } from "~/components/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/components/ListeBlancheSummary";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ListBlanchePage = () => {
   return (
@@ -31,4 +30,4 @@ const ListBlanchePage = () => {
   );
 };
 
-export default withAuthSync(ListBlanchePage);
+export default ListBlanchePage;

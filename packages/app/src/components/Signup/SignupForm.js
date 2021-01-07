@@ -1,4 +1,4 @@
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
 import React, { Fragment, useContext } from "react";
 import { Box, Flex } from "rebass";
@@ -82,13 +82,15 @@ export const SignupForm = () => {
 
   return (
     <Fragment>
-      <HeadingTitle p="1" m="1">{`Création de compte`}</HeadingTitle>
+      <HeadingTitle p="1" m="1">
+        {"Création de compte"}
+      </HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Information professionelle`}</Heading4>
+            <Heading4>{"Information professionelle"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Quel type d'utilisateur êtes-vous ?`}
+              {"Quel type d'utilisateur êtes-vous ?"}
             </Text>
           </FormGrayBox>
           <FormInputBox>
@@ -104,9 +106,9 @@ export const SignupForm = () => {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Information personnelle`}</Heading4>
+            <Heading4>{"Information personnelle"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Ces informations permettent de vous identifier.`}
+              {"Ces informations permettent de vous identifier."}
             </Text>
           </FormGrayBox>
           <FormInputBox>
@@ -134,7 +136,7 @@ export const SignupForm = () => {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Identifiants de connexion`}</Heading4>
+            <Heading4>{"Identifiants de connexion"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}
@@ -165,7 +167,7 @@ export const SignupForm = () => {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

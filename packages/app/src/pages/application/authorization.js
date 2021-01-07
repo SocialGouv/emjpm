@@ -6,10 +6,16 @@ import { Authorize } from "~/components/Authorize";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper, FlexWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
+
+import { useParams } from "react-router-dom";
 
 const AuthorizationPage = (props) => {
-  const { token, state, editorId, redirectUrl } = props;
+  const { token } = props;
+
+  const query = useParams();
+  const editorId = query["client_id"];
+  const redirectUrl = query["redirect_uri"];
+  const state = query["state"] || Math.random().toString(36).slice(2);
 
   return (
     <LayoutPublic>
@@ -26,7 +32,7 @@ const AuthorizationPage = (props) => {
           }}
         >
           <Image
-            src="/static/images/login-application.png"
+            src="/images/login-application.png"
             sx={{
               mt: "80px",
               p: "3",
@@ -56,13 +62,4 @@ const AuthorizationPage = (props) => {
   );
 };
 
-AuthorizationPage.getInitialProps = async ({ token, query }) => {
-  return {
-    editorId: query["client_id"],
-    redirectUrl: query["redirect_uri"],
-    state: query["state"] || Math.random().toString(36).slice(2),
-    token,
-  };
-};
-
-export default withAuthSync(AuthorizationPage);
+export default AuthorizationPage;

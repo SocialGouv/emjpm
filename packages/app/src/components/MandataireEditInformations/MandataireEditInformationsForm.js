@@ -129,9 +129,11 @@ const MandataireEditInformationsForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Adresse`}</Heading4>
+          <Heading4>{"Adresse"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Cette adresse permettra de vous localiser sur la carte des mesures`}
+            {
+              "Cette adresse permettra de vous localiser sur la carte des mesures"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -146,9 +148,11 @@ const MandataireEditInformationsForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Tribunaux`}</Heading4>
+          <Heading4>{"Tribunaux"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats`}
+            {
+              "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -179,7 +183,7 @@ const MandataireEditInformationsForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Activité"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Ces informations seront visibles par les magistrats.`}
+            {"Ces informations seront visibles par les magistrats."}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -211,7 +215,7 @@ const MandataireEditInformationsForm = (props) => {
           <FormGrayBox>
             <Heading4 mb={1}>{"Administrateur"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Information uniquement accessible par l'administrateur`}
+              {"Information uniquement accessible par l'administrateur"}
             </Text>
           </FormGrayBox>
           <FormInputBox>
@@ -227,7 +231,7 @@ const MandataireEditInformationsForm = (props) => {
       {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={cancelLink}>
+          <Link to={cancelLink}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>

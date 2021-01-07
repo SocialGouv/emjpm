@@ -28,10 +28,14 @@ export const MesureAcceptForm = (props) => {
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
         <Heading5 mb="1">Accepter la mesure</Heading5>
         <Text lineHeight="1.5">
-          {`A reception de la notification de la decision du juge par courrier, le formulaire ci-contre vous permet de valider que cette mesure vous a ete attribuee.`}
+          {
+            "A reception de la notification de la decision du juge par courrier, le formulaire ci-contre vous permet de valider que cette mesure vous a ete attribuee."
+          }
         </Text>
         <Text lineHeight="1.5">
-          {`Afin de rendre cette mesure active, vous devez imperativement remplir tous les champs de ce formulaire, puis cliquer sur "Valider la mesure".`}
+          {
+            'Afin de rendre cette mesure active, vous devez imperativement remplir tous les champs de ce formulaire, puis cliquer sur "Valider la mesure".'
+          }
         </Text>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>

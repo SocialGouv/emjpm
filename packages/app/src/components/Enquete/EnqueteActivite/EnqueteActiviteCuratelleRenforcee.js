@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from "react";
-import { useMutation, useQuery } from "react-apollo";
+import { useMutation, useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
 import { UserContext } from "~/components/UserContext";

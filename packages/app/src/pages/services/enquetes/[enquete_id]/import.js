@@ -1,21 +1,22 @@
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
 import { EnqueteImportPanel } from "~/components/EnqueteImport";
 import { LayoutServices } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ImportEnquetePage = ({ enqueteId }) => {
+const ImportEnquetePage = () => {
+  const query = useParams();
+  const enqueteId = Number(query.enquete_id);
   const user = useContext(UserContext);
-  const router = useRouter();
+  const history = useHistory();
   return (
     <LayoutServices>
       <BoxWrapper>
         <EnqueteImportPanel
           goToStep={(enqueteId, { step, substep }) => {
-            router.push("/services/enquetes/[enquete_id]", {
+            history.push({
               pathname: `/services/enquetes/${enqueteId}`,
               query: { step, substep },
             });
@@ -28,8 +29,4 @@ const ImportEnquetePage = ({ enqueteId }) => {
   );
 };
 
-ImportEnquetePage.getInitialProps = async ({ query }) => {
-  return { enqueteId: Number(query.enquete_id) };
-};
-
-export default withAuthSync(ImportEnquetePage);
+export default ImportEnquetePage;

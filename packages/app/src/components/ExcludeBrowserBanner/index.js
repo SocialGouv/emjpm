@@ -1,1 +1,3 @@
-export { ExcludeBrowserBanner } from "./ExcludeBrowserBanner";
+import { ExcludeBrowserBanner } from "./ExcludeBrowserBanner";
+
+export { ExcludeBrowserBanner };

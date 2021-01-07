@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import router from "next/router";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -42,7 +41,7 @@ const ServiceAntenneForm = (props) => {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Antenne`}</Heading4>
+          <Heading4 mb={1}>{"Antenne"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -55,7 +54,7 @@ const ServiceAntenneForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Responsable`}</Heading4>
+          <Heading4 mb={1}>{"Responsable"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -74,7 +73,7 @@ const ServiceAntenneForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Coordonnées`}</Heading4>
+          <Heading4 mb={1}>{"Coordonnées"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -93,9 +92,11 @@ const ServiceAntenneForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Adresse`}</Heading4>
+          <Heading4>{"Adresse"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Cette adresse permettra de localiser l'antenne sur la carte des mesures`}
+            {
+              "Cette adresse permettra de localiser l'antenne sur la carte des mesures"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -110,7 +111,7 @@ const ServiceAntenneForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Activité`}</Heading4>
+          <Heading4 mb={1}>{"Activité"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
             Ces informations seront visibles par les magistrats.
           </Text>
@@ -129,7 +130,7 @@ const ServiceAntenneForm = (props) => {
           <Button
             variant="outline"
             onClick={() => {
-              router.push("/services/informations");
+              history.push("/services/informations");
             }}
           >
             Annuler

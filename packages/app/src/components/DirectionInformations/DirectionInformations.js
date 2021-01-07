@@ -42,13 +42,13 @@ const DirectionInformations = (props) => {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton href="/direction/edit-informations">
+            <LinkButton to="/direction/edit-informations">
               Modifier vos informations
             </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton href="/direction/edit-password">
+          <LinkButton to="/direction/edit-password">
             Modifier votre mot de passe
           </LinkButton>
         </Flex>

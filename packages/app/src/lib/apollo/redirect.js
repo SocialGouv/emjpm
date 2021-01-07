@@ -1,5 +1,3 @@
-import Router from "next/router";
-
 const redirect = (context, target) => {
   if (context.res) {
     // server
@@ -8,7 +6,7 @@ const redirect = (context, target) => {
     context.res.end();
   } else {
     // In the browser, we just pretend like this never even happened ;)
-    Router.replace(target);
+    location.replace(target);
   }
 };
 

@@ -3,6 +3,7 @@ const express = require("express");
 const router = express.Router();
 const { check, body } = require("express-validator");
 const login = require("~/controllers/user/login");
+const getToken = require("~/controllers/user/get-token");
 const signup = require("~/controllers/user/signup");
 const resetPassword = require("~/controllers/user/reset-password");
 const forgotPassword = require("~/controllers/user/forgot-password");
@@ -14,6 +15,8 @@ router.post(
   [body("username").not().isEmpty(), body("password").not().isEmpty()],
   login
 );
+
+router.get("/get-token", getToken);
 
 router.post(
   "/forgot-password",

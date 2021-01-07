@@ -1,16 +1,13 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useParams } from "react-router-dom";
 
 import { LayoutPublic } from "~/components/Layout";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { SignupServiceInvitation } from "~/components/Signup/SignupServiceInvitation";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const SignupInvitationPage = () => {
-  const {
-    query: { token },
-  } = useRouter();
+  const { token } = useParams();
 
   return (
     <SignupContextProvider>
@@ -23,4 +20,4 @@ const SignupInvitationPage = () => {
   );
 };
 
-export default withAuthSync(SignupInvitationPage);
+export default SignupInvitationPage;

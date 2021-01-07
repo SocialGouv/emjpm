@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/react-hooks";
-import { isMandataire, isService } from "@emjpm/biz";
+import { useQuery } from "@apollo/client";
+import { isService, isMandataire } from "@emjpm/biz";
 import React, { createContext, Fragment, useMemo } from "react";
 
 import { setUser } from "~/util/sentry";
@@ -38,7 +38,6 @@ const UserProvider = (props) => {
         setUser({ id: user.id, role: type });
       }
     },
-    ssr: false,
     variables,
   });
 

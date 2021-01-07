@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import { AdminUserServiceForm } from "./AdminUserServiceForm";
 import { EDIT_USER } from "./mutations";
@@ -8,6 +8,7 @@ import { USER_SERVICE } from "./queries";
 
 const AdminUserService = ({ userId, successLink, cancelLink }) => {
   const [errorMessage, setErrorMessage] = useState(false);
+  const history = useHistory();
   const { data, error, loading } = useQuery(USER_SERVICE, {
     fetchPolicy: "network-only",
     variables: {
@@ -21,7 +22,7 @@ const AdminUserService = ({ userId, successLink, cancelLink }) => {
     },
     update() {
       if (successLink) {
-        Router.push(successLink, successLink, {
+        history.push(successLink, successLink, {
           shallow: true,
         });
       }

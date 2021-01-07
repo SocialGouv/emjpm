@@ -1,17 +1,15 @@
 import { Formik } from "formik";
-import getConfig from "next/config";
-import Router from "next/router";
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
+import config from "~/config";
 import { resetPasswordSchema } from "~/lib/validationSchemas";
 import { Button, Card, Heading4, InlineError, Input, Text } from "~/ui";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const cardStyle = { mt: "5", p: "0" };
 
@@ -25,7 +23,8 @@ const checkStatus = async (
   response,
   setSubmitting,
   setStatus,
-  toggleMessage
+  toggleMessage,
+  history
 ) => {
   let json = null;
   setSubmitting(false);
@@ -40,14 +39,13 @@ const checkStatus = async (
   }
   toggleMessage(true);
   setTimeout(function () {
-    Router.push(`/login`, `/login`, {
-      shallow: true,
-    });
+    history.push("/login");
   }, 3000);
   return json;
 };
 
 const ResetPassword = (props) => {
+  const history = useHistory();
   const { token } = props;
   const [isMessageVisible, toggleMessage] = useState(false);
   const url = `${API_URL}/api/auth/reset-password-with-token`;
@@ -71,16 +69,18 @@ const ResetPassword = (props) => {
       },
       method: "POST",
     });
-    checkStatus(response, setSubmitting, setStatus, toggleMessage);
+    checkStatus(response, setSubmitting, setStatus, toggleMessage, history);
   };
 
   return (
     <Card sx={cardStyle} maxWidth={["100%", "60%", "50%"]}>
       <Box sx={grayBox}>
         <Box>
-          <Heading4 mb="1">{`Nouveau mot de passe`}</Heading4>
+          <Heading4 mb="1">{"Nouveau mot de passe"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Pour changer votre mot de passe, saisissez les deux champs ci-dessous.`}
+            {
+              "Pour changer votre mot de passe, saisissez les deux champs ci-dessous."
+            }
           </Text>
           {isMessageVisible && (
             <Box
@@ -173,7 +173,7 @@ const ResetPassword = (props) => {
                   </Box>
                   <Flex alignItems="center" justifyContent="flex-end">
                     <Box mr="2">
-                      <Link href="/login">Annuler</Link>
+                      <Link to="/login">Annuler</Link>
                     </Box>
                     <Box>
                       <Button

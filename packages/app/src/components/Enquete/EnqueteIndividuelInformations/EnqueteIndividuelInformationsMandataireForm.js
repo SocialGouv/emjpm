@@ -163,7 +163,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
         </Text>
 
         <EnqueteFormYesNoField
-          id={`benevole`}
+          id={"benevole"}
           label="Exercez-vous cette activité à titre bénévole ?"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
@@ -207,7 +207,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
           {"CONDITIONS D'EXERCICE DE L'ACTIVITE"}
         </Text>
         <EnqueteFormYesNoField
-          id={`exerce_seul_activite`}
+          id={"exerce_seul_activite"}
           label="Exercez-vous seul l'activité ?"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
@@ -222,7 +222,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
       </Box>
       <Box>
         <EnqueteFormYesNoField
-          id={`exerce_secretaires_specialises`}
+          id={"exerce_secretaires_specialises"}
           label="Exercez-vous avec un secrétariat spécialisé ?"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
@@ -239,7 +239,7 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
           />
         )}
         <EnqueteFormYesNoField
-          id={`local_professionnel`}
+          id={"local_professionnel"}
           label="Exercez-vous votre activité dans un local professionnnel ?"
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}

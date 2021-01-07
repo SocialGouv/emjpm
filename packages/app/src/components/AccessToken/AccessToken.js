@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -55,15 +55,15 @@ const AccessToken = (props) => {
               return (
                 <Flex sx={innerTextStyle} alignItem="center" key={token.id}>
                   <Box p={1}>
-                    <Text>{`Editeur`}</Text>
+                    <Text>{"Editeur"}</Text>
                     <Text>{token.editors.name}</Text>
                   </Box>
                   <Box p={1}>
-                    <Text>{`Token`}</Text>
+                    <Text>{"Token"}</Text>
                     <Text>{token.access_token}</Text>
                   </Box>
                   <Box p={1}>
-                    <Text>{`Refresh token`}</Text>
+                    <Text>{"Refresh token"}</Text>
                     <Text>{token.refresh_token}</Text>
                   </Box>
                   <Box p={1}>

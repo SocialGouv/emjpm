@@ -152,7 +152,9 @@ export const ListeBlancheIndividuelForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
           <Text mt={2} mb={1}>
-            {`Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur.`}
+            {
+              "Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur."
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -196,10 +198,7 @@ export const ListeBlancheIndividuelForm = (props) => {
       <Flex mt={4} justifyContent="flex-end">
         {editMode && isAdmin(user) && (
           <Box>
-            <Link
-              href={`/admin/liste-blanche/[id]/delete`}
-              asLink={`/admin/liste-blanche/${data.id}/delete`}
-            >
+            <Link to={`/admin/liste-blanche/${data.id}/delete`}>
               <Button mr="2" bg="red">
                 Supprimer
               </Button>

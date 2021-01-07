@@ -21,9 +21,11 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
 
   return (
     <Box {...props}>
-      <Heading3>{`Etats de la mesure de protection`}</Heading3>
+      <Heading3>{"Etats de la mesure de protection"}</Heading3>
       <Text lineHeight="1.5" color="textSecondary">
-        {`Vous pouvez ajouter, modifier et supprimer les états de la mesure de protection`}
+        {
+          "Vous pouvez ajouter, modifier et supprimer les états de la mesure de protection"
+        }
       </Text>
       <Flex flexDirection="column" my={1}>
         {mesureEtats.map((etat) => (

@@ -1,8 +1,9 @@
 import React, { Fragment, useContext } from "react";
-import { useMutation } from "react-apollo";
+import { useMutation } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
+import { Link } from "~/components/Link";
 import { Button } from "~/ui";
 
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
@@ -21,13 +22,13 @@ export const AdminMandataireListeBlanche = (props) => {
   return (
     <Fragment>
       {mandataire.lb_user ? (
-        <a href={`/${user.type}/liste-blanche/${mandataire.lb_user.id}`}>
+        <Link to={`/${user.type}/liste-blanche/${mandataire.lb_user.id}`}>
           <Text fontWeight="bold">{`${mandataire.lb_user.prenom} ${mandataire.lb_user.nom}`}</Text>
           <Text>{`${mandataire.lb_user.email}`}</Text>
           {mandataire.lb_user.siret && (
             <Text>{`SIRET: ${mandataire.lb_user.siret}`}</Text>
           )}
-        </a>
+        </Link>
       ) : (
         <Fragment>
           {lb_user ? (

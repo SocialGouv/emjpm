@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useMemo, useState } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 
 import { LoadingWrapper } from "~/components/Commons";
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
@@ -11,7 +11,7 @@ import { LB_SERVICES } from "./queries";
 const resultPerPage = 50;
 
 function getRequestFilters(filters) {
-  var requestFilters = {};
+  const requestFilters = {};
 
   if (filters.departement) {
     requestFilters.department_id = { _eq: filters.departement };

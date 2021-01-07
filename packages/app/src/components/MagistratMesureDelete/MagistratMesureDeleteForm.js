@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
@@ -16,6 +16,8 @@ import { MagistratMesureRemoveStyle } from "./style";
 export const MagistratMesureDeleteForm = (props) => {
   const { mesure } = props;
   const { serviceId, mandataireId } = mesure;
+
+  const history = useHistory();
 
   const {
     magistrat: { ti_id: tiId },
@@ -41,7 +43,7 @@ export const MagistratMesureDeleteForm = (props) => {
         },
       });
 
-      Router.push(`/magistrats/mesures`);
+      history.push("/magistrats/mesures");
     },
   });
 
@@ -78,10 +80,18 @@ export const MagistratMesureDeleteForm = (props) => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">Supprimer la mesure</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement une mesure réservée du système eMJPM. Toute suppression est irréversible.`}
+          {
+            "Vous êtes sur le point de supprimer définitivement une mesure réservée du système eMJPM. Toute suppression est irréversible."
+          }
         </Text>
-        <Text lineHeight="1.5">{`Si vous souhaitez supprimer cette mesure réservée, cliquez sur "Supprimer la mesure".`}</Text>
-        <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
+        <Text lineHeight="1.5">
+          {
+            'Si vous souhaitez supprimer cette mesure réservée, cliquez sur "Supprimer la mesure".'
+          }
+        </Text>
+        <Text lineHeight="1.5">
+          {'Dans le cas contraire, cliquez sur "Annuler".'}
+        </Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
@@ -111,11 +121,7 @@ export const MagistratMesureDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
-                    "/magistrats/mesures/[mesure_id]",
-                    `/magistrats/mesures/${mesure.id}`,
-                    { shallow: true }
-                  );
+                  history.push(`/magistrats/mesures/${mesure.id}`);
                 }}
               >
                 Annuler

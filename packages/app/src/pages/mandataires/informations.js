@@ -3,7 +3,6 @@ import React from "react";
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireInformations } from "~/components/MandataireInformations";
 import { BoxWrapper, Card } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Informations = () => (
   <LayoutMandataire>
@@ -15,4 +14,4 @@ const Informations = () => (
   </LayoutMandataire>
 );
 
-export default withAuthSync(Informations);
+export default Informations;

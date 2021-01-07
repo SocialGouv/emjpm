@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -79,7 +79,7 @@ const AdminEditorRequest = () => {
 
   return (
     <Box width="100%" mt="5">
-      <Heading5 mb="3">{`Liste des demandes d'accès`}</Heading5>
+      <Heading5 mb="3">{"Liste des demandes d'accès"}</Heading5>
       <PaginatedList
         entries={editorTokenRequests}
         RowItem={RowItem}

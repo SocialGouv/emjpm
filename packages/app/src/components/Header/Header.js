@@ -1,32 +1,34 @@
-import { useApolloClient } from "@apollo/react-hooks";
+import { useApolloClient } from "@apollo/client";
 import PropTypes from "prop-types";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { DropDownMenu, Header as HeaderComponent } from "~/ui";
-import { logout } from "~/util/auth";
+import { useAuth } from "~/routes/Auth";
 
 export const defaultLinks = [
-  // { title: "Centre d'assistance", url: "https://emjpm-blog.azurewebsites.net" }
+  // { title: "Centre d'assistance", to: "https://emjpm-blog.azurewebsites.net" }
 ];
-
-const handleLogout = (apolloClient) => {
-  apolloClient.clearStore();
-  logout();
-};
 
 const Header = (props) => {
   const { username } = useContext(UserContext);
   const apolloClient = useApolloClient();
   const { dropDownLinks } = props;
+  const history = useHistory();
+  const { logout } = useAuth();
+  const handleLogout = () => {
+    apolloClient.clearStore();
+    logout(history);
+  };
   return (
     <Fragment>
       <HeaderComponent
         username={username}
         Link={Link}
         dropDownLinks={defaultLinks.concat(dropDownLinks)}
-        disconnect={() => handleLogout(apolloClient)}
+        disconnect={handleLogout}
         DropDownMenu={DropDownMenu}
       />
     </Fragment>
@@ -42,7 +44,7 @@ Header.propTypes = {
   dropDownLinks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
-      url: PropTypes.string.isRequired,
+      to: PropTypes.string.isRequired,
     })
   ),
   isDisconnected: PropTypes.bool,

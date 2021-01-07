@@ -10,15 +10,15 @@ import { BoxWrapper } from "~/ui";
 const navigationLinks = [
   {
     title: "Tableau de bord",
-    url: "/services",
+    to: "/services",
   },
   {
     title: "Mesures",
-    url: "/services/mesures",
+    to: "/services/mesures",
   },
   {
     title: "Carte",
-    url: "/services/map",
+    to: "/services/map",
   },
 ];
 
@@ -34,9 +34,8 @@ const LayoutServices = (props) => {
 
     if (code === "75") {
       links = navigationLinks.concat({
-        as: `/services/enquetes/${user.enquete.id}`,
         title: `Enquête ${user.enquete.annee}`,
-        url: "/services/enquetes/[enquete_id]",
+        to: `/services/enquetes/${user.enquete.id}`,
       });
     }
   }
@@ -49,11 +48,11 @@ const LayoutServices = (props) => {
             dropDownLinks={[
               {
                 title: "Vos informations",
-                url: "/services/informations",
+                to: "/services/informations",
               },
               {
                 title: "Gestion des comptes",
-                url: "/services/members",
+                to: "/services/members",
               },
             ]}
           />

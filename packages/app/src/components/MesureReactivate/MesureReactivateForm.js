@@ -13,7 +13,9 @@ export const MesureReactivateForm = (props) => {
       </Box>
       <Box>
         <Text lineHeight="1.5">
-          {`Si vous souhaitez réouvrir la mesure, cliquez sur le bouton "Réouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler`}
+          {
+            'Si vous souhaitez réouvrir la mesure, cliquez sur le bouton "Réouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler'
+          }
         </Text>
       </Box>
       <Flex justifyContent="flex-end">

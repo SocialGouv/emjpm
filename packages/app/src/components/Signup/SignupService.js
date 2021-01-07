@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
-import Router from "next/router";
 import React, { Fragment, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -29,6 +29,7 @@ function getServiceOptions(services, departementId) {
 }
 
 const SignupServiceForm = ({ serviceDatas }) => {
+  const history = useHistory();
   const { user, service, setService, validateStepOne } = useContext(
     SignupContext
   );
@@ -53,7 +54,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
         body,
         onComplete: () => setSubmitting(false),
         onError: (errors) => setErrors(errors),
-        onSuccess: () => Router.push("/signup/congratulation"),
+        onSuccess: () => history.push("/signup/congratulation"),
       });
     },
     validationSchema: signupServiceSchema,
@@ -72,17 +73,18 @@ const SignupServiceForm = ({ serviceDatas }) => {
 
   return (
     <Fragment>
-      <HeadingTitle
-        p="1"
-        m="1"
-      >{`Création d'un compte de service mandataire`}</HeadingTitle>
+      <HeadingTitle p="1" m="1">
+        {"Création d'un compte de service mandataire"}
+      </HeadingTitle>
       <form onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{`Votre service`}</Heading4>
+            <Heading4>{"Votre service"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez.`}
+              {
+                "Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez."
+              }
             </Text>
           </FormGrayBox>
           <FormInputBox>
@@ -103,7 +105,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link href="/">
+            <Link to="/">
               <Button mr="2" variant="outline">
                 Annuler
               </Button>

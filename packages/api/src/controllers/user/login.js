@@ -1,7 +1,6 @@
 const passport = require("~/auth/auth-passport");
 const { validationResult } = require("express-validator");
-const { User } = require("~/models");
-const { Logs } = require("~/models");
+const { User, Logs } = require("~/models");
 
 /**
  * Sign in using username and password and returns JWT
@@ -35,7 +34,14 @@ const login = async (req, res, next) => {
       });
 
       const userResult = await user.getUser();
-      return res.status(200).json(userResult);
+
+      return res
+        .cookie("token", userResult.token, {
+          httpOnly: true,
+          secure: req.secure,
+        })
+        .status(200)
+        .json(userResult);
     }
   })(req, res, next);
 };

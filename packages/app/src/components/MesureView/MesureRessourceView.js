@@ -7,7 +7,7 @@ const MesureRessourceView = ({ ressource, ...props }) => {
   return (
     <Flex {...props} justifyContent="flex-start">
       <Box width="100px">
-        <Text sx={subtitle}>{`Année`}</Text>
+        <Text sx={subtitle}>{"Année"}</Text>
         <Text sx={content}>{ressource.annee}</Text>
       </Box>
       <Box width="150px">

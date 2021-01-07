@@ -1,8 +1,8 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
-import Router from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import {
@@ -17,7 +17,7 @@ import { Button, Heading4, Text } from "~/ui";
 
 export const MagistratMesureAddForm = (props) => {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
-
+  const history = useHistory();
   const formik = useFormik({
     initialValues: {
       annee_naissance: "",
@@ -38,7 +38,7 @@ export const MagistratMesureAddForm = (props) => {
       <Flex>
         <FormGrayBox>
           <Heading4>Jugement</Heading4>
-          <Text lineHeight="1.5">{`Information sur le jugement.`}</Text>
+          <Text lineHeight="1.5">{"Information sur le jugement."}</Text>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -69,7 +69,7 @@ export const MagistratMesureAddForm = (props) => {
       <Flex>
         <FormGrayBox>
           <Heading4>Majeur protégé</Heading4>
-          <Text lineHeight="1.5">{`Informations sur le majeur protégé`}</Text>
+          <Text lineHeight="1.5">{"Informations sur le majeur protégé"}</Text>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupSelect
@@ -93,7 +93,7 @@ export const MagistratMesureAddForm = (props) => {
         <FormGrayBox>
           <Heading4>Mesure de protection</Heading4>
           <Text lineHeight="1.5">
-            {`Informations sur la mesure de protection`}
+            {"Informations sur la mesure de protection"}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -130,9 +130,7 @@ export const MagistratMesureAddForm = (props) => {
             variant="outline"
             onClick={() => {
               if (cancelActionRoute) {
-                Router.push(cancelActionRoute.href, cancelActionRoute.as, {
-                  shallow: true,
-                });
+                history.push(cancelActionRoute.to);
               }
             }}
           >

@@ -1,15 +1,10 @@
-import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutServicesMap } from "~/components/Layout";
 import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
-import { withAuthSync } from "~/util/auth";
 
-const ServiceMap = dynamic(
-  () => import("~/components/ServiceMap").then((mod) => mod.ServiceMap),
-  { ssr: false }
-);
+import { ServiceMap } from "~/components/ServiceMap";
 
 const Map = () => {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
@@ -53,4 +48,4 @@ const Map = () => {
   );
 };
 
-export default withAuthSync(Map);
+export default Map;

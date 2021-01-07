@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { Lock } from "@styled-icons/boxicons-solid/Lock";
 import React, { useContext, useState } from "react";
 import { Box, Flex } from "rebass";

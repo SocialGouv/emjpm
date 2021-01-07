@@ -4,10 +4,11 @@ import { Card } from "rebass";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneInformations } from "~/components/ServiceAntenneInformations";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const Antennes = (props) => {
-  const { antenneId } = props;
+import { useParams } from "react-router-dom";
+
+const Antennes = () => {
+  const { antenne_id: antenneId } = useParams();
 
   return (
     <LayoutServices>
@@ -20,8 +21,4 @@ const Antennes = (props) => {
   );
 };
 
-Antennes.getInitialProps = async ({ query }) => {
-  return { antenneId: query.antenne_id };
-};
-
-export default withAuthSync(Antennes);
+export default Antennes;

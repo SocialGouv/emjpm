@@ -4,7 +4,6 @@ FROM node:15-alpine as node
 FROM node as dependencies
 
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apk add --update --no-cache curl bash
 RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
@@ -24,25 +23,17 @@ COPY packages/biz/ /app/packages/biz/
 RUN yarn workspace @emjpm/app run postinstall
 RUN yarn workspace @emjpm/app build
 
-RUN node-prune
-
 # SERVER
 FROM node as server
 
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 
 WORKDIR /app
 
-COPY --from=builder /app/package.json /app/lerna.json /app/
-COPY --from=builder /app/node_modules /app/node_modules/
-COPY --from=builder /app/packages/app/node_modules /app/packages/app/node_modules/
-COPY --from=builder /app/packages/app/public /app/packages/app/public/
-COPY --from=builder /app/packages/app/next.config.js /app/packages/app/next.config.js
-COPY --from=builder /app/packages/app/package.json /app/packages/app/package.json
-COPY --from=builder /app/packages/app/.next /app/packages/app/.next/
-COPY --from=builder /app/packages/biz /app/packages/biz
+RUN yarn global add serve
+
+COPY --from=builder /app/packages/app/build /app/build/
 
 USER node
 
-CMD ["yarn", "workspace", "@emjpm/app", "start:build"]
+CMD ["serve","-s","build"]

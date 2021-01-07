@@ -42,9 +42,9 @@ export const ListeBlancheServiceForm = (props) => {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Service tutelaire`}</Heading4>
+          <Heading4 mb={1}>{"Service tutelaire"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Renseignez le département qui finance le service tutelaire.`}
+            {"Renseignez le département qui finance le service tutelaire."}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -97,7 +97,7 @@ export const ListeBlancheServiceForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Contact`}</Heading4>
+          <Heading4 mb={1}>{"Contact"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -116,9 +116,9 @@ export const ListeBlancheServiceForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`Organisme gestionnaire`}</Heading4>
+          <Heading4 mb={1}>{"Organisme gestionnaire"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`L'organisme gestionnaire est-il différent du service?`}
+            {"L'organisme gestionnaire est-il différent du service?"}
           </Text>
         </FormGrayBox>
         <FormInputBox>

@@ -1,7 +1,7 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/client";
 import { isFrance, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MesureContext } from "~/components/MesureContext";
@@ -16,6 +16,7 @@ import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MesureAcceptStyle } from "./style";
 
 export const MesureAccept = (props) => {
+  const history = useHistory();
   const client = useApolloClient();
 
   const mesure = useContext(MesureContext);
@@ -30,13 +31,7 @@ export const MesureAccept = (props) => {
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
   const redirectToMesure = (mesureId) => {
-    Router.push(
-      `${userBasePath}/mesures/[mesure_id]`,
-      `${userBasePath}/mesures/${mesureId}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`${userBasePath}/mesures/${mesureId}`);
   };
 
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
@@ -65,7 +60,7 @@ export const MesureAccept = (props) => {
 
       if (!location || !location.department) {
         setErrors({
-          zipcode: `Le code postal semble invalide.`,
+          zipcode: "Le code postal semble invalide.",
         });
         return setSubmitting(false);
       } else {

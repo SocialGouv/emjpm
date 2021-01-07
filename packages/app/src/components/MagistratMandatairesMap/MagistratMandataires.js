@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
-import dynamic from "next/dynamic";
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
 
 import { UserContext } from "~/components/UserContext";
@@ -12,13 +11,7 @@ import {
 import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
 
-const MagistratMapMandataires = dynamic(
-  () =>
-    import("./MagistratMandatairesMap").then(
-      (mod) => mod.MagistratMapMandataires
-    ),
-  { ssr: false }
-);
+import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
 
 const MagistratMandataires = () => {
   const { magistrat } = useContext(UserContext);
@@ -55,7 +48,7 @@ const MagistratMandataires = () => {
   );
 
   return (
-    <MagistratMapMandataires
+    <MagistratMandatairesMap
       magistrat={magistrat}
       services={services}
       individuel={individuel}
