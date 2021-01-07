@@ -151,7 +151,6 @@ stages:
       fi
 
       if [[ -n "${CACHE_TAG}" ]] && [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker pull ${IMAGE_NAME}.dependencies:${CACHE_TAG} &
         docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} &
         wait
       fi
@@ -159,19 +158,8 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
-          --target dependencies \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
-          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.dependencies:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-
-        docker build \
           --target builder \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
@@ -180,9 +168,7 @@ stages:
         docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
 
         docker build \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
           -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
@@ -202,7 +188,6 @@ stages:
 
       wait
 
-      docker push ${IMAGE_NAME}.dependencies:${TAG} &
       docker push ${IMAGE_NAME}.builder:${TAG} &
       docker push ${IMAGE_NAME}:${TAG} &
 
