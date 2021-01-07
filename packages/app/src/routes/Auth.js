@@ -4,29 +4,32 @@ import React, {
   useState,
   useEffect,
   useCallback,
+  useRef,
 } from "react";
 import { Redirect, Route } from "react-router-dom";
 import cookie from "js-cookie";
 import jwtDecode from "jwt-decode";
 
-// import config from "~/config";
+// see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+
 import { matopush } from "~/util/matomo";
 
 import history from "~/routes/history";
-
-// const { API_URL } = config;
 
 export const authContext = createContext();
 
 export function ProvideAuth({ children }) {
   const auth = useProvideAuth();
 
-  const syncLogout = useCallback((event) => {
-    if (event.key === "logout") {
-      console.log("logged out from storage!");
-      history.push("/login");
-    }
-  }, []);
+  const syncLogout = useCallback(
+    (event) => {
+      if (event.key === "logout") {
+        console.log("logged out from storage!");
+        auth.logout();
+      }
+    },
+    [auth]
+  );
   useEffect(() => {
     window.addEventListener("storage", syncLogout);
     return () => window.removeEventListener("storage", syncLogout);
@@ -57,6 +60,15 @@ export function useProvideAuth() {
   });
 
   const logout = useCallback(() => {
+    // to support logging out from all windows
+    localStorage.setItem("logout", Date.now());
+
+    // clear user data
+    cookie.remove("logged");
+    localStorage.removeItem("user_id");
+    localStorage.removeItem("user_type");
+    localStorage.removeItem("filters");
+
     setAuthStore({
       id: null,
       logged: false,
@@ -66,19 +78,7 @@ export function useProvideAuth() {
   }, [setAuthStore]);
 
   const login = useCallback(
-    async ({ token, id, type }) => {
-      setAuthStore({
-        id,
-        logged: true,
-        token,
-        type,
-      });
-    },
-    [setAuthStore]
-  );
-
-  useEffect(() => {
-    if (authStore.logged) {
+    ({ token, id, type }) => {
       cookie.set("logged", "1");
       localStorage.setItem("user_id", authStore.id);
       localStorage.setItem("user_type", authStore.type);
@@ -89,31 +89,31 @@ export function useProvideAuth() {
         matopush(["setCustomVariable", 1, "type", authStore.type, "visit"]);
       }
 
+      setAuthStore({
+        id,
+        logged: true,
+        token,
+        type,
+      });
+    },
+    [authStore, setAuthStore]
+  );
+
+  const prevLoggedStateRef = useRef(() => authStore.logged);
+  useEffect(() => {
+    if (authStore.logged && prevLoggedStateRef.current !== authStore.logged) {
       const { pathname } = window.location;
       const isOauth = pathname === "/application/authorization";
-      const { url, role } = jwtDecode(authStore.token);
-      const isTokenPath = pathname.indexOf(routeByRole[role]) !== -1;
       if (!isOauth) {
+        const { url, role } = jwtDecode(authStore.token);
         if (!url) {
           logout();
         }
+        const isTokenPath = pathname.indexOf(routeByRole[role]) !== -1;
         if (!isTokenPath) {
           history.push(routeByRole[role]);
         }
       }
-    } else {
-      // to support logging out from all windows
-      localStorage.setItem("logout", Date.now());
-
-      // clear user data
-      cookie.remove("logged");
-      localStorage.removeItem("user_id");
-      localStorage.removeItem("user_type");
-
-      // Clear user preferences & filters
-      localStorage.removeItem("filters");
-
-      history.push("/login", "/login");
     }
   }, [authStore, logout]);
 
@@ -124,10 +124,6 @@ export function useProvideAuth() {
   };
 }
 
-// see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
-
-// A wrapper for <Route> that redirects to the login
-// screen if you're not yet authenticated.
 export function PrivateRoute({ children, ...rest }) {
   const { authStore } = useAuth();
   return (
