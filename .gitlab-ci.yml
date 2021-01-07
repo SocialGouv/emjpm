@@ -240,6 +240,8 @@ stages:
 
 .base_trivy_scan:
   stage: Deploy
+  services:
+    - docker:dind
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
   variables:
