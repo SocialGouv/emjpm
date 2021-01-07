@@ -165,7 +165,7 @@ stages:
           -t ${IMAGE_NAME}.dependencies:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} &
+        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
 
         docker build \
           --target builder \
@@ -177,7 +177,7 @@ stages:
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
 
         docker build \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
