@@ -160,11 +160,7 @@ const MagistratMandatairesList = (props) => {
             <MandataireListItem
               key={gestionnaire.id}
               onClick={() =>
-                history.push(
-                  "/magistrats/gestionnaires/[gestionnaire_id]",
-                  `/magistrats/gestionnaires/${gestionnaire.id}`,
-                  { shallow: true }
-                )
+                history.push(`/magistrats/gestionnaires/${gestionnaire.id}`)
               }
               gestionnaire={gestionnaire}
             />

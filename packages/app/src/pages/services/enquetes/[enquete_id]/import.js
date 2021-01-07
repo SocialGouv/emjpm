@@ -18,7 +18,7 @@ const ImportEnquetePage = () => {
       <BoxWrapper>
         <EnqueteImportPanel
           goToStep={(enqueteId, { step, substep }) => {
-            history.push("/services/enquetes/[enquete_id]", {
+            history.push({
               pathname: `/services/enquetes/${enqueteId}`,
               query: { step, substep },
             });

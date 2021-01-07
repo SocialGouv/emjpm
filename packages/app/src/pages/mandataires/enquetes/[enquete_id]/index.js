@@ -43,7 +43,7 @@ const MandataireEnquetePage = () => {
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await history.push("/mandataires/enquetes/[enquete_id]", {
+      await history.push({
         pathname: `/mandataires/enquetes/${enquete.id}`,
         query: { step, substep },
       });

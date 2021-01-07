@@ -98,12 +98,10 @@ const MagistratMesureAdd = (props) => {
 
   const cancelActionRoute = gestionnaireId
     ? {
-        as: `/magistrats/gestionnaires/${gestionnaireId}`,
-        href: "/magistrats/gestionnaires/[gestionnaire_id]",
+        to: `/magistrats/gestionnaires/${gestionnaireId}`,
       }
     : {
-        as: "/magistrats",
-        href: "/magistrats",
+        to: "/magistrats",
       };
 
   return (

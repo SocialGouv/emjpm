@@ -45,13 +45,7 @@ const ServiceAntenneEdit = (props) => {
     }
 
     setSubmitting(false);
-    history.push(
-      "/services/antennes/[antenne_id]",
-      `/services/antennes/${antenneId}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`/services/antennes/${antenneId}`);
   };
 
   return (

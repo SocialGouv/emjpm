@@ -59,7 +59,7 @@ const EnquetePage = () => {
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await history.push("/services/enquetes/[enquete_id]", {
+      await history.push({
         pathname: `/services/enquetes/${enquete.id}`,
         query: { step, substep },
       });

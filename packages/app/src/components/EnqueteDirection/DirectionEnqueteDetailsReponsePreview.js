@@ -49,13 +49,12 @@ export const DirectionEnqueteDetailsReponsePreview = ({
       <Breadcrumb
         crumbs={[
           {
-            href: "/direction/enquetes",
             label: "Enquêtes",
+            to: "/direction/enquetes",
           },
           {
-            as: `/direction/enquetes/${enqueteId}`,
-            href: "/direction/enquetes/[enquete_id]",
             label: enqueteLabel,
+            to: `/direction/enquetes/${enqueteId}`,
           },
           {
             label: reponseLabel,
@@ -78,13 +77,10 @@ export const DirectionEnqueteDetailsReponsePreview = ({
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await history.push(
-        "/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]",
-        {
-          pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
-          query: { step, substep },
-        }
-      );
+      await history.push({
+        pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
+        query: { step, substep },
+      });
       window.scrollTo(0, 0);
     }
   }

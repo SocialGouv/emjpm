@@ -8,14 +8,14 @@ import { Link } from "./Link";
 export const Breadcrumb = ({ crumbs }) => {
   return (
     <Flex>
-      {crumbs.map(({ label, href, as }, i) => (
+      {crumbs.map(({ label, to }, i) => (
         <Fragment key={`${i}`}>
           {i !== 0 && (
             <Box mx={10} color="#999">
               &gt;
             </Box>
           )}
-          {href ? <Link to={as}>{label}</Link> : <Text>{label}</Text>}
+          {to ? <Link to={to}>{label}</Link> : <Text>{label}</Text>}
         </Fragment>
       ))}
     </Flex>

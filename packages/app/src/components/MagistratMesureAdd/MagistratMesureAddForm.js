@@ -130,9 +130,7 @@ export const MagistratMesureAddForm = (props) => {
             variant="outline"
             onClick={() => {
               if (cancelActionRoute) {
-                history.push(cancelActionRoute.href, cancelActionRoute.as, {
-                  shallow: true,
-                });
+                history.push(cancelActionRoute.to);
               }
             }}
           >

@@ -64,11 +64,7 @@ export const AdminUserDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  history.push(
-                    "/admin/users/[user_id]",
-                    `/admin/users/${userId}`,
-                    { shallow: true }
-                  );
+                  history.push(`/admin/users/${userId}`);
                 }}
               >
                 Annuler

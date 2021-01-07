@@ -71,13 +71,12 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       <Breadcrumb
         crumbs={[
           {
-            href: "/direction/enquetes",
             label: "Enquêtes",
+            to: "/direction/enquetes",
           },
           {
-            as: `/direction/enquetes/${enqueteId}`,
-            href: "/direction/enquetes/[enquete_id]",
             label: enqueteLabel,
+            to: `/direction/enquetes/${enqueteId}`,
           },
         ]}
       />
