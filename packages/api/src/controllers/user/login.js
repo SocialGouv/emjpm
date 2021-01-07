@@ -38,6 +38,7 @@ const login = async (req, res, next) => {
       return res
         .cookie("token", userResult.token, {
           httpOnly: true,
+          path: "/api/auth",
           secure: req.secure,
         })
         .status(200)
