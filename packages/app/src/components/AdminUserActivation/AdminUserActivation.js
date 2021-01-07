@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation, useQuery } from "@apollo/react-hooks";
+import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { isIndividuel, isMandataire } from "@emjpm/biz";
 import React, { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
@@ -118,10 +118,7 @@ const AdminUserActivation = (props) => {
             </Box>
             {!active && (
               <Box>
-                <Link
-                  href={`/admin/users/[user_id]/delete`}
-                  asLink={`/admin/users/${userId}/delete`}
-                >
+                <Link to={`/admin/users/${userId}/delete`}>
                   <Button mr={2} bg={"red"}>
                     {"Supprimer cet utilisateur"}
                   </Button>

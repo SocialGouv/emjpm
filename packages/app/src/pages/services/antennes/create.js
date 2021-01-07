@@ -4,7 +4,6 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceCreateAntenne } from "~/components/ServiceAntenneCreate";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AddAntennes = () => {
   return (
@@ -17,4 +16,4 @@ const AddAntennes = () => {
   );
 };
 
-export default withAuthSync(AddAntennes);
+export default AddAntennes;

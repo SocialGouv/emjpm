@@ -1,6 +1,6 @@
 import { gql } from "apollo-boost";
 import { useContext } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 
 import { UserContext } from "~/components/UserContext";
 

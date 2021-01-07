@@ -17,9 +17,9 @@ const ServiceMemberInvitationForm = (props) => {
   return (
     <Flex mb={4}>
       <Box width={[1 / 2]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
-        <Heading4>{`Invitez un nouveau membre au service`}</Heading4>
+        <Heading4>{"Invitez un nouveau membre au service"}</Heading4>
         <Text lineHeight="1.5" color="textSecondary">
-          {`Un email contenant les instructions d'inscription sera envoyé.`}
+          {"Un email contenant les instructions d'inscription sera envoyé."}
         </Text>
       </Box>
       <Box as="form" onSubmit={formik.handleSubmit} p={5} width={[1 / 2]}>

@@ -6,10 +6,11 @@ import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
 import { MesureProvider } from "~/components/MesureContext";
 import { MesureReactivate } from "~/components/MesureReactivate";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ReactivateMesurePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const ReactivateMesurePage = () => {
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>
@@ -24,8 +25,4 @@ const ReactivateMesurePage = (props) => {
   );
 };
 
-ReactivateMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(ReactivateMesurePage);
+export default ReactivateMesurePage;

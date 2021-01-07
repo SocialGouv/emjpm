@@ -19,7 +19,9 @@ export const MesureView = (props) => {
         <MesureEtatViewList mesure={mesure} px="3" pt="1" />
       )}
 
-      <MesureRessourceViewList mesure={mesure} px="3" pt="1" />
+      {isEnCours(mesure) && (
+        <MesureRessourceViewList mesure={mesure} px="3" pt="1" />
+      )}
     </Card>
   );
 };

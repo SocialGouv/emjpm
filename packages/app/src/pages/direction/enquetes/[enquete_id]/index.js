@@ -1,12 +1,13 @@
 import React from "react";
-import { resetIdCounter } from "react-tabs";
 
 import { DirectionEnqueteDetailsReponsesList } from "~/components/EnqueteDirection/DirectionEnqueteDetailsReponsesList";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const DirectionEnqueteDetailsPage = ({ enqueteId }) => {
+import { useParams } from "react-router-dom";
+
+const DirectionEnqueteDetailsPage = () => {
+  const { enquete_id: enqueteId } = useParams();
   return (
     <LayoutDirection>
       <BoxWrapper mt={1} px="1">
@@ -16,10 +17,4 @@ const DirectionEnqueteDetailsPage = ({ enqueteId }) => {
   );
 };
 
-DirectionEnqueteDetailsPage.getInitialProps = async (params) => {
-  const { query } = params;
-  resetIdCounter();
-  return { enqueteId: Number(query.enquete_id) };
-};
-
-export default withAuthSync(DirectionEnqueteDetailsPage);
+export default DirectionEnqueteDetailsPage;

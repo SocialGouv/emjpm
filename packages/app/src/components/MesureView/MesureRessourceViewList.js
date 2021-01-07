@@ -21,14 +21,16 @@ const MesureRessourceViewList = ({ mesure, ...props }) => {
 
   return (
     <Box {...props}>
-      <Heading3>{`Ressources de la mesure de protection`}</Heading3>
+      <Heading3>{"Ressources de la mesure de protection"}</Heading3>
       <Text lineHeight="1.5" color="textSecondary">
-        {`Vous pouvez ajouter, modifier et supprimer les ressources de la mesure de protection`}
+        {
+          "Vous pouvez ajouter, modifier et supprimer les ressources de la mesure de protection"
+        }
       </Text>
       <Flex flexDirection="column" my={1}>
         {mesureRessources.length > 0 && (
           <Box px="3" pt="1">
-            <Heading3>{`Ressources`}</Heading3>
+            <Heading3>{"Ressources"}</Heading3>
             <Flex flexDirection="column">
               {mesureRessources.map((ressource) => (
                 <Box key={ressource.id}>

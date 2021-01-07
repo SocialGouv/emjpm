@@ -1,22 +1,19 @@
-import getConfig from "next/config";
 import React, { useEffect } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
+import config from "~/config";
 import { Button, Card, Heading4, Text } from "~/ui";
 
 import { EDITOR } from "./queries";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
 const url = `${API_URL}/api/oauth/authorize`;
 
 const Authorize = (props) => {
   const { editorId, token, redirectUrl, state } = props;
   const { data, loading, error } = useQuery(EDITOR, {
-    ssr: false,
     variables: {
       id: editorId,
     },
@@ -47,7 +44,9 @@ const Authorize = (props) => {
             <Box>
               <Heading4 mb="1">{`Autoriser ${editor.name} à accéder à votre compte eMJPM.`}</Heading4>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Vos informations eMJPM seront accessibles par ce dernier pour faciliter l'échange et la fluidité des services.`}
+                {
+                  "Vos informations eMJPM seront accessibles par ce dernier pour faciliter l'échange et la fluidité des services."
+                }
               </Text>
             </Box>
           </Box>
@@ -58,7 +57,7 @@ const Authorize = (props) => {
               <input type="hidden" name="redirect_uri" value={redirectUrl} />
               <input type="hidden" name="access_token" value={token} />
               <input type="hidden" name="state" value={state} />
-              <Button type="submit">{`Autoriser`}</Button>
+              <Button type="submit">{"Autoriser"}</Button>
               <Button
                 onClick={() => {
                   document.location.href = `${redirectUrl}?error_reason=user_denied&error=access_denied&error_description=Permissions+error`;
@@ -66,7 +65,9 @@ const Authorize = (props) => {
                 type="button"
                 ml="2"
                 variant="outline"
-              >{`refuser`}</Button>
+              >
+                {"refuser"}
+              </Button>
             </form>
           </Box>
         </>
@@ -76,7 +77,7 @@ const Authorize = (props) => {
           <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
             <Box>
               <Text lineHeight="1.5" color="textSecondary">
-                {`Aucun client ne correspond aux informations transmises.`}
+                {"Aucun client ne correspond aux informations transmises."}
               </Text>
             </Box>
           </Box>

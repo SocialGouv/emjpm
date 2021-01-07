@@ -5,10 +5,11 @@ import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMesureDelete } from "~/components/MagistratMesureDelete";
 import { MesureProvider } from "~/components/MesureContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const MagistratMesureDeletePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const MagistratMesureDeletePage = () => {
+  const { mesure_id: mesureId } = useParams();
 
   return (
     <LayoutMagistrat>
@@ -23,8 +24,4 @@ const MagistratMesureDeletePage = (props) => {
   );
 };
 
-MagistratMesureDeletePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(MagistratMesureDeletePage);
+export default MagistratMesureDeletePage;

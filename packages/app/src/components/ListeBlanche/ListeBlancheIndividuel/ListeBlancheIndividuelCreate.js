@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
 import React, { useContext } from "react";
-import { useMutation } from "react-apollo";
+import { useMutation } from "@apollo/client";
+import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
@@ -9,7 +9,7 @@ import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
 
 export const ListeBlancheIndividuelCreate = () => {
-  const router = useRouter();
+  const history = useHistory();
   const { type } = useContext(UserContext);
   const [create, { loading }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
 
@@ -19,7 +19,7 @@ export const ListeBlancheIndividuelCreate = () => {
         editMode={false}
         loading={loading}
         handleCancel={() => {
-          router.push(`/${type}/liste-blanche`);
+          history.push(`/${type}/liste-blanche`);
         }}
         handleSubmit={async (values) => {
           await create({
@@ -41,7 +41,7 @@ export const ListeBlancheIndividuelCreate = () => {
               ville: values.ville,
             },
           });
-          await router.push(`/${type}/liste-blanche`);
+          await history.push(`/${type}/liste-blanche`);
         }}
       />
     </Card>

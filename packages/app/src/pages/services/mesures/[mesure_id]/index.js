@@ -6,10 +6,11 @@ import { MesureProvider } from "~/components/MesureContext";
 import { MesureView } from "~/components/MesureView";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ServiceMesurePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const ServiceMesurePage = () => {
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutServices>
@@ -24,8 +25,4 @@ const ServiceMesurePage = (props) => {
   );
 };
 
-ServiceMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(ServiceMesurePage);
+export default ServiceMesurePage;

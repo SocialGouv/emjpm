@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation } from "@apollo/client";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { Card } from "~/ui";
 import { captureException } from "~/util/sentry";
@@ -11,6 +11,7 @@ import { cardStyle } from "./style";
 
 export const AdminEditorCreate = () => {
   const [addEditor] = useMutation(ADD_EDITOR);
+  const history = useHistory();
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     // TODO(paullaunay): generate key on server-side via hasura webhook or postgres func
@@ -32,11 +33,11 @@ export const AdminEditorCreate = () => {
     }
 
     setSubmitting(false);
-    Router.push("/admin/editors");
+    history.push("/admin/editors");
   };
 
   const handleCancel = () => {
-    Router.push("/admin/editors");
+    history.push("/admin/editors");
   };
 
   return (

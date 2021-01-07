@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { captureException } from "~/util/sentry";
@@ -11,6 +11,8 @@ import { EDITOR } from "./queries";
 import { cardStyle } from "./style";
 
 const AdminEditorEdit = (props) => {
+  const history = useHistory();
+
   const { editorId } = props;
   const { data, loading, error } = useQuery(EDITOR, {
     variables: { id: editorId },
@@ -43,11 +45,11 @@ const AdminEditorEdit = (props) => {
     }
 
     setSubmitting(false);
-    Router.push("/admin/editors");
+    history.push("/admin/editors");
   };
 
   const handleCancel = () => {
-    Router.push("/admin/editors");
+    history.push("/admin/editors");
   };
 
   return (

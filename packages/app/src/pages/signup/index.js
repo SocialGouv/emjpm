@@ -4,7 +4,6 @@ import { LayoutPublic } from "~/components/Layout";
 import Signup from "~/components/Signup";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const SignupPage = () => {
   return (
@@ -18,4 +17,4 @@ const SignupPage = () => {
   );
 };
 
-export default withAuthSync(SignupPage);
+export default SignupPage;

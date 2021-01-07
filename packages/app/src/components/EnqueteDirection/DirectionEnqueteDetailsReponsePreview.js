@@ -1,6 +1,6 @@
-import { useQuery } from "@apollo/react-hooks";
-import { useRouter } from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
@@ -12,7 +12,7 @@ export const DirectionEnqueteDetailsReponsePreview = ({
   enqueteId,
   enqueteReponseId,
 }) => {
-  const router = useRouter();
+  const history = useHistory();
   const currentStep = useCurrentStepFromUrl();
 
   const { data, loading, error } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
@@ -49,13 +49,12 @@ export const DirectionEnqueteDetailsReponsePreview = ({
       <Breadcrumb
         crumbs={[
           {
-            href: "/direction/enquetes",
             label: "Enquêtes",
+            to: "/direction/enquetes",
           },
           {
-            as: `/direction/enquetes/${enqueteId}`,
-            href: "/direction/enquetes/[enquete_id]",
             label: enqueteLabel,
+            to: `/direction/enquetes/${enqueteId}`,
           },
           {
             label: reponseLabel,
@@ -78,13 +77,10 @@ export const DirectionEnqueteDetailsReponsePreview = ({
       return;
     }
     if (step !== currentStep.step || substep !== currentStep.substep) {
-      await router.push(
-        "/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]",
-        {
-          pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
-          query: { step, substep },
-        }
-      );
+      await history.push({
+        pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
+        query: { step, substep },
+      });
       window.scrollTo(0, 0);
     }
   }
@@ -114,7 +110,7 @@ function formatReponseLabel(enqueteReponse) {
           : ""
       }"`;
     case "service":
-      return `Service`;
+      return "Service";
   }
   return "";
 }

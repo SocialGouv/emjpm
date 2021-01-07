@@ -4,7 +4,6 @@ import { EditPassword } from "~/components/EditPassword";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {
   return (
@@ -17,4 +16,4 @@ const EditInformations = () => {
   );
 };
 
-export default withAuthSync(EditInformations);
+export default EditInformations;

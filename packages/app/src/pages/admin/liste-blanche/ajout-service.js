@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
@@ -7,14 +7,13 @@ import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ListBlanchePage = () => {
-  const router = useRouter();
+  const history = useHistory();
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/admin/liste-blanche">
+        <Link to="/admin/liste-blanche">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -24,10 +23,10 @@ const ListBlanchePage = () => {
         </HeadingTitle>
         <ListeBlancheServiceCreate
           onSuccess={async () => {
-            await router.push(`/admin/liste-blanche`);
+            await history.push("/admin/liste-blanche");
           }}
           handleCancel={async () => {
-            await router.push("/admin/liste-blanche");
+            await history.push("/admin/liste-blanche");
           }}
         />
       </BoxWrapper>
@@ -35,4 +34,4 @@ const ListBlanchePage = () => {
   );
 };
 
-export default withAuthSync(ListBlanchePage);
+export default ListBlanchePage;

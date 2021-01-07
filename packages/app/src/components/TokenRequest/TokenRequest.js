@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
@@ -45,9 +45,9 @@ const TokenRequest = () => {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Demande d'accès à l'api métier Emjpm.`}</Heading4>
+          <Heading4 mb="1">{"Demande d'accès à l'api métier Emjpm."}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez le nom de votre logiciel métier et votre email.`}
+            {"Indiquez le nom de votre logiciel métier et votre email."}
           </Text>
           {isMessageVisible && (
             <Box
@@ -60,7 +60,7 @@ const TokenRequest = () => {
                 p: "1",
               }}
             >
-              {`Votre demande a bien été prise en compte`}
+              {"Votre demande a bien été prise en compte"}
             </Box>
           )}
           {isErrorMessageVisible && (
@@ -74,7 +74,7 @@ const TokenRequest = () => {
                 p: "1",
               }}
             >
-              {`Un problème est survenu, merci de ressayer`}
+              {"Un problème est survenu, merci de ressayer"}
             </Box>
           )}
         </Box>
@@ -116,7 +116,7 @@ const TokenRequest = () => {
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
               >
-                {`Demander une autorisation d'accès`}
+                {"Demander une autorisation d'accès"}
               </Button>
             </Box>
           </Flex>

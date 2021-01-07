@@ -10,15 +10,15 @@ import { BoxWrapper } from "~/ui";
 const navigationLinks = [
   {
     title: "Tableau de bord",
-    url: "/mandataires",
+    to: "/mandataires",
   },
   {
     title: "Mesures",
-    url: "/mandataires/mesures",
+    to: "/mandataires/mesures",
   },
   {
     title: "Carte",
-    url: "/mandataires/map",
+    to: "/mandataires/map",
   },
 ];
 
@@ -30,9 +30,8 @@ const LayoutMandataire = (props) => {
 
   if (user.enquete) {
     links = navigationLinks.concat({
-      as: `/mandataires/enquetes/${user.enquete.id}`,
       title: `Enquête ${user.enquete.annee}`,
-      url: "/mandataires/enquetes/[enquete_id]",
+      to: `/mandataires/enquetes/${user.enquete.id}`,
     });
   }
 
@@ -42,7 +41,7 @@ const LayoutMandataire = (props) => {
         <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
           <Header
             dropDownLinks={[
-              { title: "Vos informations", url: "/mandataires/informations" },
+              { title: "Vos informations", to: "/mandataires/informations" },
             ]}
           />
           {hasNavigation && (

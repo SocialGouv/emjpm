@@ -117,7 +117,9 @@ export const ListeBlanchePreposeForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Liste des établissements"}</Heading4>
           <Text mt={"20px"} mb={2}>
-            {`Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement.`}
+            {
+              "Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement."
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -198,10 +200,7 @@ export const ListeBlanchePreposeForm = (props) => {
       <Flex justifyContent="flex-end" mt={4}>
         {editMode && isAdmin(user) && (
           <Box>
-            <Link
-              href={`/admin/liste-blanche/[id]/delete`}
-              asLink={`/admin/liste-blanche/${data.id}/delete`}
-            >
+            <Link to={`/admin/liste-blanche/${data.id}/delete`}>
               <Button mr="2" bg="red">
                 Supprimer
               </Button>

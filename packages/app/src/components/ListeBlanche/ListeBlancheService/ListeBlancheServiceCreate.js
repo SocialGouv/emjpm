@@ -1,7 +1,7 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";
@@ -13,11 +13,12 @@ import { ADD_SERVICE } from "./mutations";
 
 export const ListeBlancheServiceCreate = (props) => {
   const { handleCancel, onSuccess } = props;
+  const history = useHistory();
   const client = useApolloClient();
   const { departements } = useDepartements();
 
   const [addService] = useMutation(ADD_SERVICE, {
-    onCompleted: () => Router.push("/admin/services"),
+    onCompleted: () => history.push("/admin/services"),
   });
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {

@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation, useQuery } from "@apollo/client";
 import React, { useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
 
 import { Card } from "~/ui";
 
@@ -8,9 +8,10 @@ import { EDIT_SERVICE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditInformationsForm } from "./ServiceEditInformationsForm";
 
-const ServiceEditInformations = ({ serviceId, cancelLink, successLink }) => {
+const ServiceEditInformations = ({ cancelLink, successLink }) => {
+  const { service_id: serviceId } = useParams();
+  const history = useHistory();
   const { data, error, loading } = useQuery(GET_SERVICES, {
-    ssr: false,
     variables: {
       serviceId,
     },
@@ -22,7 +23,7 @@ const ServiceEditInformations = ({ serviceId, cancelLink, successLink }) => {
     },
     update() {
       if (successLink) {
-        Router.push(successLink, successLink, {
+        history.push(successLink, successLink, {
           shallow: true,
         });
       }

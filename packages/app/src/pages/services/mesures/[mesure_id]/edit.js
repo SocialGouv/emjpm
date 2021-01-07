@@ -6,10 +6,11 @@ import { MesureProvider } from "~/components/MesureContext";
 import { MesureEdit } from "~/components/MesureEdit";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const EditMesurePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const EditMesurePage = () => {
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutServices>
@@ -24,8 +25,4 @@ const EditMesurePage = (props) => {
   );
 };
 
-EditMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(EditMesurePage);
+export default EditMesurePage;

@@ -171,6 +171,8 @@ stages:
           --target builder \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+          --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
@@ -180,6 +182,8 @@ stages:
         docker build \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+          --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
           -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}:${TAG} \

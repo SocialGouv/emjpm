@@ -1,8 +1,8 @@
-import Error from "next/error";
-import { useRouter } from "next/router";
 import React, { useMemo } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Card } from "rebass";
 
+import Error from "~/components/Error";
 import { Heading4, Spinner } from "~/ui";
 
 export const LoadingWrapper = ({
@@ -12,7 +12,7 @@ export const LoadingWrapper = ({
   loading,
   errorRedirect,
 }) => {
-  const router = useRouter();
+  const history = useHistory();
 
   const errorRedirectionEnabled = errorRedirect && errorRedirect.url;
 
@@ -23,10 +23,10 @@ export const LoadingWrapper = ({
         error
       );
       if (errorRedirectionEnabled) {
-        router.push(errorRedirect.url, errorRedirect.as, errorRedirect.options);
+        history.push(errorRedirect.url);
       }
     }
-  }, [error, errorRedirect, errorRedirectionEnabled, router]);
+  }, [error, errorRedirect, errorRedirectionEnabled, history]);
 
   return errorCode ? (
     <Error code={errorCode} />

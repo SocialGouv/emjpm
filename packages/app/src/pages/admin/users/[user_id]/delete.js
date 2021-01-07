@@ -4,10 +4,11 @@ import { Flex } from "rebass";
 import { AdminUserDelete } from "~/components/AdminUserDelete";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const AdminUserDeletePage = (props) => {
-  const { userId } = props;
+import { useParams } from "react-router-dom";
+
+const AdminUserDeletePage = () => {
+  const { user_id: userId } = useParams();
 
   return (
     <LayoutAdmin>
@@ -20,8 +21,4 @@ const AdminUserDeletePage = (props) => {
   );
 };
 
-AdminUserDeletePage.getInitialProps = async ({ query }) => {
-  return { userId: query.user_id };
-};
-
-export default withAuthSync(AdminUserDeletePage);
+export default AdminUserDeletePage;

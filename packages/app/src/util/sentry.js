@@ -1,9 +1,19 @@
-import * as Sentry from "@sentry/node";
-import getConfig from "next/config";
+import * as Sentry from "@sentry/browser";
+import React from "react";
 
-const {
-  publicRuntimeConfig: { PACKAGE_VERSION, SENTRY_PUBLIC_DSN, NODE_ENV },
-} = getConfig();
+import config from "~/config";
+
+const { PACKAGE_VERSION, SENTRY_PUBLIC_DSN, NODE_ENV } = config;
+
+export const useSentry = () => {
+  const onceRunRef = React.useRef(false);
+  React.useEffect(() => {
+    if (!onceRunRef.current) {
+      initSentry();
+    }
+    onceRunRef.current = true;
+  });
+};
 
 export const initSentry = () => {
   try {

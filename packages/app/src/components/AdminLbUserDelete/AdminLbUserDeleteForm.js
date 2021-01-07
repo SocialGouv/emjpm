@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { LB_USERS } from "~/components/ListeBlanche/queries";
@@ -14,10 +14,12 @@ import { AdminLbUserDeleteRemoveStyle } from "./style";
 export const AdminLbUserDeleteForm = (props) => {
   const { lbUserId } = props;
 
+  const history = useHistory();
+
   const [deleteUser] = useMutation(DELETE_LB_USER, {
     awaitRefetchQueries: true,
     onCompleted: async () => {
-      Router.push(`/admin/liste-blanche`);
+      history.push("/admin/liste-blanche");
     },
     refetchQueries: [
       {
@@ -44,10 +46,18 @@ export const AdminLbUserDeleteForm = (props) => {
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading5 mb="1">{"Supprimer l'utilisateur"}</Heading5>
         <Text mb="2" lineHeight="1.5">
-          {`Vous êtes sur le point de supprimer définitivement un mandataire du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à ce mandataire et celui-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'État.`}
+          {
+            "Vous êtes sur le point de supprimer définitivement un mandataire du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à ce mandataire et celui-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'État."
+          }
         </Text>
-        <Text lineHeight="1.5">{`Si vous souhaitez définitivement supprimer ce mandataire, cliquez sur "Supprimer le mandataire".`}</Text>
-        <Text lineHeight="1.5">{`Dans le cas contraire, cliquez sur "Annuler".`}</Text>
+        <Text lineHeight="1.5">
+          {
+            'Si vous souhaitez définitivement supprimer ce mandataire, cliquez sur "Supprimer le mandataire".'
+          }
+        </Text>
+        <Text lineHeight="1.5">
+          {'Dans le cas contraire, cliquez sur "Annuler".'}
+        </Text>
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
@@ -61,11 +71,7 @@ export const AdminLbUserDeleteForm = (props) => {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  Router.push(
-                    "/admin/list-blanche/[id]",
-                    `/admin/list-blanche/${lbUserId}`,
-                    { shallow: true }
-                  );
+                  history.push(`/admin/list-blanche/${lbUserId}`);
                 }}
               >
                 Annuler

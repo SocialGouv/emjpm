@@ -1,5 +1,5 @@
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Flex } from "rebass";
 
 import { AdminEditorRequest, AdminEditors } from "~/components/AdminEditors";
@@ -8,9 +8,9 @@ import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminEditorsPage = () => {
+  const history = useHistory();
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
@@ -23,7 +23,7 @@ const AdminEditorsPage = () => {
             }}
           >
             <AdminFilterBar
-              onAddButtonClick={() => Router.push("/admin/editors/create ")}
+              onAddButtonClick={() => history.push("/admin/editors/create ")}
             />
             <AdminEditors />
             <AdminEditorRequest />
@@ -34,4 +34,4 @@ const AdminEditorsPage = () => {
   );
 };
 
-export default withAuthSync(AdminEditorsPage);
+export default AdminEditorsPage;

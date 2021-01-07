@@ -1,3 +1,3 @@
-import { default as MandatairesSubNavigation } from "./MandatairesSubNavigation";
+import MandatairesSubNavigation from "./MandatairesSubNavigation";
 
 export { MandatairesSubNavigation };

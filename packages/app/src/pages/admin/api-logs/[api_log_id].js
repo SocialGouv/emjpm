@@ -5,15 +5,16 @@ import { AdminApiLog } from "~/components/AdminApiLogs/AdminApiLog";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ApiLogsViewPage = (props) => {
-  const { id } = props;
+import { useParams } from "react-router-dom";
+
+const ApiLogsViewPage = () => {
+  const { api_log_id: id } = useParams();
 
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/admin/api-logs">
+        <Link to="/admin/api-logs">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -24,8 +25,4 @@ const ApiLogsViewPage = (props) => {
   );
 };
 
-ApiLogsViewPage.getInitialProps = async ({ query }) => ({
-  id: query.api_log_id,
-});
-
-export default withAuthSync(ApiLogsViewPage);
+export default ApiLogsViewPage;

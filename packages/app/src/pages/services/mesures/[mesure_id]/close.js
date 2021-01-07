@@ -6,10 +6,11 @@ import { MesureClose } from "~/components/MesureClose";
 import { MesureProvider } from "~/components/MesureContext";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const CloseMesurePage = (props) => {
-  const { mesureId } = props;
+import { useParams } from "react-router-dom";
+
+const CloseMesurePage = () => {
+  const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutServices>
@@ -24,8 +25,4 @@ const CloseMesurePage = (props) => {
   );
 };
 
-CloseMesurePage.getInitialProps = async ({ query }) => {
-  return { mesureId: query.mesure_id };
-};
-
-export default withAuthSync(CloseMesurePage);
+export default CloseMesurePage;

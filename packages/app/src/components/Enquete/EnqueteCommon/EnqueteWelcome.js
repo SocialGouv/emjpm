@@ -59,22 +59,21 @@ export const EnqueteWelcome = ({
       </Flex>
       <Flex flexDirection="column">
         <Box mt="4" sx={textStyle}>
-          <Text as="span">{`Vous avez déjà rempli le `}</Text>
+          <Text as="span">{"Vous avez déjà rempli le "}</Text>
           <Text as="span" sx={downloadStyle}>
-            <a
-              href={`/static/docs/enquetes/${getExcelName(type)}`}
-            >{`fichier excel`}</a>
+            <a href={`/docs/enquetes/${getExcelName(type)}`}>
+              {"fichier excel"}
+            </a>
           </Text>
 
-          <Text as="span">{` envoyé par votre direction départementale?`}</Text>
+          <Text as="span">{" envoyé par votre direction départementale?"}</Text>
         </Box>
 
         <LinkButton
           mx="auto"
           pt={15}
           mt={4}
-          href={`${pathPrefix}/[enquete_id]/import`}
-          asLink={`${pathPrefix}/${enqueteId}/import`}
+          to={`${pathPrefix}/${enqueteId}/import`}
           outline
         >
           Importez votre enquête
@@ -82,11 +81,17 @@ export const EnqueteWelcome = ({
       </Flex>
       <Flex flexDirection="column">
         <Box mt="4" sx={textStyle}>
-          <Text as="span">{`Pour plus de détails, vous pouvez télécharger le `}</Text>
+          <Text as="span">
+            {"Pour plus de détails, vous pouvez télécharger le "}
+          </Text>
           <Text as="span" sx={downloadStyle}>
             <a
-              href={`/static/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf`}
-            >{`guide de remplissage des enquêtes.`}</a>
+              href={
+                "/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf"
+              }
+            >
+              {"guide de remplissage des enquêtes."}
+            </a>
           </Text>
         </Box>
       </Flex>

@@ -1,15 +1,10 @@
-import dynamic from "next/dynamic";
 import React, { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataireMap } from "~/components/Layout";
 import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesures";
-import { withAuthSync } from "~/util/auth";
 
-const MandataireMap = dynamic(
-  () => import("~/components/MandataireMap").then((mod) => mod.MandataireMap),
-  { ssr: false }
-);
+import { MandataireMap } from "~/components/MandataireMap";
 
 const Map = () => {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
@@ -52,4 +47,4 @@ const Map = () => {
   );
 };
 
-export default withAuthSync(Map);
+export default Map;

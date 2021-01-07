@@ -5,7 +5,6 @@ import { LayoutServices } from "~/components/Layout";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {
   const {
@@ -28,4 +27,4 @@ const EditInformations = () => {
   );
 };
 
-export default withAuthSync(EditInformations);
+export default EditInformations;

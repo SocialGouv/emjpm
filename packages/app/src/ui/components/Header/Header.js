@@ -78,7 +78,7 @@ Header.propTypes = {
   dropDownLinks: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string,
-      url: PropTypes.string,
+      to: PropTypes.string,
     })
   ),
   isDisconnected: PropTypes.bool,

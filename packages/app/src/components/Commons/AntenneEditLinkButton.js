@@ -1,8 +1,8 @@
-import { withRouter } from "next/router";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Link as RebassLink } from "rebass";
 
-import { Link as NextLink } from "~/components/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 const AntenneLinkButtonStyle = (isActive, disabled) => {
   return {
@@ -31,18 +31,14 @@ const AntenneLinkButtonStyle = (isActive, disabled) => {
   };
 };
 
-const AntenneEditLinkButton = ({ router, ...props }) => {
-  const isActive = router.pathname === props.href;
-  const antenne_id = props.href;
+const AntenneEditLinkButton = ({ antenne_id, location, ...props }) => {
+  const isActive = location.pathname === `/services/antennes/${antenne_id}`;
   return (
-    <NextLink
-      href="/services/antennes/[antenne_id]/edit"
-      as={`/services/antennes/${antenne_id}/edit`}
-    >
+    <RouterLink to={`/services/antennes/${antenne_id}/edit`}>
       <RebassLink sx={AntenneLinkButtonStyle(isActive, props.disabled)}>
         {props.children}
       </RebassLink>
-    </NextLink>
+    </RouterLink>
   );
 };
 

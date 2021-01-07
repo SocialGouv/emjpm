@@ -1,6 +1,6 @@
-import { useApolloClient, useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useApolloClient, useQuery } from "@apollo/client";
 import React, { Fragment } from "react";
+import { useHistory } from "react-router-dom";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { isEmailExists } from "~/query-service/EmailQueryService";
@@ -10,6 +10,7 @@ import signup from "./signup";
 import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";
 
 export const SignupServiceInvitation = (props) => {
+  const history = useHistory();
   const { token } = props;
   const client = useApolloClient();
   const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, {
@@ -21,7 +22,7 @@ export const SignupServiceInvitation = (props) => {
   }
 
   if (error || !data.service_member_invitations.length) {
-    return Router.push("/login");
+    return history.push("/login");
   }
 
   const [invitation] = data.service_member_invitations;
@@ -56,7 +57,7 @@ export const SignupServiceInvitation = (props) => {
           setErrors(errors);
         },
         onSuccess: () => {
-          Router.push("/login");
+          history.push("/login");
         },
       });
     }

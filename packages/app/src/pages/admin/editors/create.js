@@ -5,13 +5,12 @@ import { AdminEditorCreate } from "~/components/AdminEditors/AdminEditorCreate";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminEditorsCreatePage = () => {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
-        <HeadingTitle>{`Création d'un éditeur`}</HeadingTitle>
+        <HeadingTitle>{"Création d'un éditeur"}</HeadingTitle>
         <Flex
           sx={{
             flexWrap: "wrap",
@@ -25,4 +24,4 @@ const AdminEditorsCreatePage = () => {
   );
 };
 
-export default withAuthSync(AdminEditorsCreatePage);
+export default AdminEditorsCreatePage;
