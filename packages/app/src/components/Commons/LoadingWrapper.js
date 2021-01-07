@@ -5,13 +5,13 @@ import { Box, Card } from "rebass";
 import Error from "~/components/Error";
 import { Heading4, Spinner } from "~/ui";
 
-export const LoadingWrapper = ({
+export function LoadingWrapper({
   children,
   error,
   errorCode,
   loading,
   errorRedirect,
-}) => {
+}) {
   const history = useHistory();
 
   const errorRedirectionEnabled = errorRedirect && errorRedirect.url;
@@ -53,4 +53,4 @@ export const LoadingWrapper = ({
   ) : (
     <div>{children}</div>
   );
-};
+}
