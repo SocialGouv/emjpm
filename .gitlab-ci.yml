@@ -245,7 +245,7 @@ stages:
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
   variables:
-    IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHA
+    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_SHA
   script:
     # Build report
     - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
@@ -750,5 +750,17 @@ Trigger release:
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 ############ Security scans ########################
-Trivy Scan:
+Trivy Scan api:
   extends: .base_trivy_scan
+  variables:
+    CONTEXT: api
+
+Trivy Scan app:
+  extends: .base_trivy_scan
+  variables:
+    CONTEXT: app
+
+Trivy Scan hasura:
+  extends: .base_trivy_scan
+  variables:
+    CONTEXT: hasura
