@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { useFormik } from "formik";
 import React from "react";
-import { useMutation, useQuery } from "react-apollo";
+import { useMutation, useQuery } from "@apollo/client";
 import { Box, Card, Flex } from "rebass";
 
 import { Button, Heading3, Input, Text } from "~/ui";
@@ -12,7 +12,7 @@ import { PROCESSUS_STATE } from "./queries";
 export const EtablissementImport = () => {
   const { data, loading, error } = useQuery(PROCESSUS_STATE, {
     fetchPolicy: "network-only",
-    ssr: false,
+
     variables: { id: "import_finess" },
   });
 
@@ -48,7 +48,9 @@ export const EtablissementImport = () => {
       <Card mb="5">
         <Flex flexDirection="column">
           <Box mt={2}>
-            <Heading3 mb="2">{`Mise à jour de la base de données FINESS`}</Heading3>
+            <Heading3 mb="2">
+              {"Mise à jour de la base de données FINESS"}
+            </Heading3>
             <Text mb="1" lineHeight="2">
               {`Un import des données de FINESS est en cours. Date de début ${format(
                 new Date(processusState.start_date),
@@ -65,7 +67,9 @@ export const EtablissementImport = () => {
     <Card mb="5">
       <Flex flexDirection="column">
         <Box mt={2}>
-          <Heading3 mb="2">{`Mise à jour de la base de données FINESS`}</Heading3>
+          <Heading3 mb="2">
+            {"Mise à jour de la base de données FINESS"}
+          </Heading3>
           <Text mb="1" lineHeight="2">
             {`Dernière mise à jour de la base FINESS: ${
               processusState

@@ -31,11 +31,9 @@ export const Navigation = (props) => {
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
-        {links.map(({ title, url, as }) => (
+        {links.map(({ title, to }) => (
           <Box key={title} px={1}>
-            <Link href={url} as={as}>
-              {title}
-            </Link>
+            <Link to={to}>{title}</Link>
           </Box>
         ))}
         {isMandataire(user) && <MandataireBadge mandataire={user.mandataire} />}

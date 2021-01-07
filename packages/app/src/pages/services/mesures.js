@@ -14,7 +14,6 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Mesures = () => {
   const { service_members } = useContext(UserContext);
@@ -70,4 +69,4 @@ const Mesures = () => {
   );
 };
 
-export default withAuthSync(Mesures);
+export default Mesures;

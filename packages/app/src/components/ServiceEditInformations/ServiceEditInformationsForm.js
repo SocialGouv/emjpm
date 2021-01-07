@@ -95,9 +95,11 @@ const ServiceEditInformationsForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Adresse`}</Heading4>
+          <Heading4>{"Adresse"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Cette adresse permettra de localiser le service sur la carte des mesures`}
+            {
+              "Cette adresse permettra de localiser le service sur la carte des mesures"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -112,9 +114,11 @@ const ServiceEditInformationsForm = (props) => {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Tribunaux`}</Heading4>
+          <Heading4>{"Tribunaux"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats`}
+            {
+              "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
+            }
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -145,7 +149,7 @@ const ServiceEditInformationsForm = (props) => {
         <FormGrayBox>
           <Heading4 mb={1}>{"Activité"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Ces informations seront visibles par les magistrats.`}
+            {"Ces informations seront visibles par les magistrats."}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -175,7 +179,7 @@ const ServiceEditInformationsForm = (props) => {
       {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={cancelLink}>
+          <Link to={cancelLink}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>

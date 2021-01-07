@@ -14,7 +14,7 @@ const MesureEtatView = ({ etat, ...props }) => {
   return (
     <Flex justifyContent="flex-start" {...props} my={1}>
       <Box width="150px">
-        <Text sx={subtitle}>{`Changement d'état`}</Text>
+        <Text sx={subtitle}>{"Changement d'état"}</Text>
         <Text sx={content}>{etat.dateChangementEtatFormatted}</Text>
       </Box>
       <Box width="250px">

@@ -1,5 +1,5 @@
 import React, { Fragment, useContext, useState } from "react";
-import { useQuery } from "react-apollo";
+import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
@@ -38,10 +38,7 @@ const RowItem = (props) => {
             </Flex>
           </Box>
           <Box mr="1" width="120px">
-            <Link
-              href={`/admin/etablissements/[id]`}
-              as={`/admin/etablissements/${id}`}
-            >
+            <Link to={`/admin/etablissements/${id}`}>
               <Button>Voir</Button>
             </Link>
           </Box>
@@ -58,7 +55,6 @@ export const AdminEtablissements = () => {
   );
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {
-    ssr: false,
     variables: {
       departementCode: selectedDepartementCode ? selectedDepartementCode : null,
       limit: resultPerPage,

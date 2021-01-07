@@ -6,13 +6,12 @@ import { LayoutDirection } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlanchePreposeCreate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ListBlanchePage = () => {
   return (
     <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
-        <Link href="/direction/liste-blanche">
+        <Link to="/direction/liste-blanche">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -26,4 +25,4 @@ const ListBlanchePage = () => {
   );
 };
 
-export default withAuthSync(ListBlanchePage);
+export default ListBlanchePage;

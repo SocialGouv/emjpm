@@ -5,9 +5,10 @@ import { IndicatorList } from "~/components/IndicatorList";
 import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
+import { useParams } from "react-router-dom";
 
-const DepartmentStatsPage = (props) => {
-  const { departementCode } = props;
+const DepartmentStatsPage = () => {
+  const { departement_code: departementCode } = useParams();
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -40,10 +41,6 @@ const DepartmentStatsPage = (props) => {
       </BoxWrapper>
     </LayoutPublic>
   );
-};
-
-DepartmentStatsPage.getInitialProps = async ({ query }) => {
-  return { departementCode: query.departement_code };
 };
 
 export default DepartmentStatsPage;

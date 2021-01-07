@@ -5,7 +5,6 @@ import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratInformations } from "~/components/MagistratInformations";
 import { MagistratTribunalInformations } from "~/components/MagistratTribunalInformations";
 import { BoxWrapper, Heading2 } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Informations = () => {
   return (
@@ -43,4 +42,4 @@ const Informations = () => {
   );
 };
 
-export default withAuthSync(Informations);
+export default Informations;

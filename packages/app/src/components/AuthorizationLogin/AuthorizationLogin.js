@@ -1,21 +1,25 @@
 import { useFormik } from "formik";
-import getConfig from "next/config";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
+import config from "~/config";
 import { loginSchema } from "~/lib/validationSchemas";
-import { matopush } from "~/matomo";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
-import { login } from "~/util/auth";
+import { useAuth } from "~/routes/Auth";
+import { matopush } from "~/util/matomo";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
-const checkStatus = async (response, setSubmitting, setStatus) => {
+const checkStatus = async (
+  response,
+  setSubmitting,
+  setStatus,
+  history,
+  login
+) => {
   let json = null;
   setSubmitting(false);
   try {
@@ -30,13 +34,16 @@ const checkStatus = async (response, setSubmitting, setStatus) => {
   }
   const params = location.search;
   login(json);
-  Router.push(`/application/authorization${params}`);
+  history.push(`/application/authorization${params}`);
   return json;
 };
 
 const AuthorizationLogin = (props) => {
   const { token } = props;
   const url = `${API_URL}/api/auth/login`;
+
+  const history = useHistory();
+  const { login } = useAuth();
 
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {
@@ -50,7 +57,7 @@ const AuthorizationLogin = (props) => {
       },
       method: "POST",
     });
-    checkStatus(response, setSubmitting, setStatus);
+    checkStatus(response, setSubmitting, setStatus, history, login);
   };
 
   const formik = useFormik({
@@ -68,9 +75,9 @@ const AuthorizationLogin = (props) => {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{`Connectez-vous à votre compte.`}</Heading4>
+          <Heading4 mb="1">{"Connectez-vous à votre compte."}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Indiquez votre email et votre mot de passe pour vous connecter.`}
+            {"Indiquez votre email et votre mot de passe pour vous connecter."}
           </Text>
         </Box>
       </Box>
@@ -127,10 +134,14 @@ const AuthorizationLogin = (props) => {
             </Box>
           </Flex>
           <Box my="2">
-            <Link href="/account/forgot-password">{`J'ai oublié mon mot de passe et / ou mon identifiant`}</Link>
+            <Link to="/account/forgot-password">
+              {"J'ai oublié mon mot de passe et / ou mon identifiant"}
+            </Link>
           </Box>
           <Box>
-            <Link href="mailto:support.emjpm@fabrique.social.gouv.fr">{`Contactez-nous en cas de difficulté de connexion`}</Link>
+            <Link to={"mailto:support.emjpm@fabrique.social.gouv.fr"}>
+              {"Contactez-nous en cas de difficulté de connexion"}
+            </Link>
           </Box>
         </form>
       </Box>

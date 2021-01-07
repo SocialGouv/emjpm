@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { differenceInDays } from "date-fns";
 import React from "react";
 import { Box, Button, Flex } from "rebass";
@@ -71,13 +71,12 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       <Breadcrumb
         crumbs={[
           {
-            href: "/direction/enquetes",
             label: "Enquêtes",
+            to: "/direction/enquetes",
           },
           {
-            as: `/direction/enquetes/${enqueteId}`,
-            href: "/direction/enquetes/[enquete_id]",
             label: enqueteLabel,
+            to: `/direction/enquetes/${enqueteId}`,
           },
         ]}
       />
@@ -125,7 +124,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading2>{`Réponses à l'enquête`}</Heading2>
+        <Heading2>{"Réponses à l'enquête"}</Heading2>
       </Flex>
 
       <DirectionEnqueteReponsesCriteria
@@ -154,8 +153,7 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
               return (
                 <Box mt={1} textAlign="center">
                   <Link
-                    href={`/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]`}
-                    as={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
+                    to={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
                     <Button>Visualiser</Button>
                   </Link>

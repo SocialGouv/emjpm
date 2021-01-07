@@ -1,8 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "~/components/MesureListFilters/context";
@@ -17,6 +17,7 @@ import { MesureListStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
 const MesureList = () => {
+  const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
   const {
     antenne,
@@ -68,18 +69,11 @@ const MesureList = () => {
   };
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {
-    ssr: false,
     variables: queryVariables,
   });
 
   const selectMesure = ({ id, userBasePath }) => {
-    Router.push(
-      `${userBasePath}/mesures/[mesure_id]`,
-      `${userBasePath}/mesures/${id}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`${userBasePath}/mesures/${id}`);
   };
 
   if (loading) {

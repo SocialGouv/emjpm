@@ -4,10 +4,11 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
 import { FlexWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ResetPasswordPage = (props) => {
-  const { resetToken } = props;
+import { useParams } from "react-router-dom";
+
+const ResetPasswordPage = () => {
+  const { token } = useParams();
   return (
     <LayoutPublic>
       <FlexWrapper
@@ -18,14 +19,10 @@ const ResetPasswordPage = (props) => {
         justifyContent="center"
       >
         <HeadingTitle>Modifier votre mot de passe</HeadingTitle>
-        <ResetPassword token={resetToken} mt="3" />
+        <ResetPassword token={token} mt="3" />
       </FlexWrapper>
     </LayoutPublic>
   );
 };
 
-ResetPasswordPage.getInitialProps = async ({ query }) => {
-  return { resetToken: query.token };
-};
-
-export default withAuthSync(ResetPasswordPage);
+export default ResetPasswordPage;

@@ -1,5 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
-import dynamic from "next/dynamic";
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -18,13 +17,7 @@ import {
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
-const MagistratMandataireMap = dynamic(
-  () =>
-    import("~/components/MagistratMandataireMap").then(
-      (mod) => mod.MagistratMandataireMap
-    ),
-  { ssr: false }
-);
+import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
 const MagistratMesureMandataire = (props) => {
   const { serviceId, mandataireId } = useContext(MesureContext);
@@ -108,18 +101,18 @@ const MagistratMesureMandataire = (props) => {
               )}
               {serviceId && (
                 <Box>
-                  <Text
-                    sx={MagistratTitleMandataireStyle}
-                  >{`Nom de l'association`}</Text>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    {"Nom de l'association"}
+                  </Text>
                   <Text sx={MagistratContentMandataireStyle}>
                     {etablissement}
                   </Text>
                 </Box>
               )}
               <Box>
-                <Text
-                  sx={MagistratTitleMandataireStyle}
-                >{`Adresse d’activité`}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  {"Adresse d’activité"}
+                </Text>
                 <Text
                   sx={MagistratContentMandataireStyle}
                 >{`${adresse} ${codePostal} ${ville}`}</Text>

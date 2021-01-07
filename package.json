@@ -2,21 +2,29 @@
   "private": true,
   "scripts": {
     "build": "lerna run build",
-    "dev": "lerna run dev --parallel",
+    "dev:server": "yarn dev server:up && yarn dev server:log",
+    "dev:server:up": "docker-compose up --build -d",
+    "dev:server:log": "docker-compose logs -f",
+    "dev:app": "yarn workspace @emjpm/app start",
+    "dev": "yarn dev:server:up && yarn dev:app",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
-    "start": "lerna run start --parallel",
+    "start": "yarn dev",
     "test": "lerna run test --parallel",
     "postinstall:run": "lerna run postinstall",
+    "postinstall": "husky install",
     "release": "scripts/gitops/release"
   },
   "license": "Apache-2.0",
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^8.3.4",
-    "husky": "^4.3.0",
+    "husky": "^5.0.6",
     "lerna": "^3.22.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": "eslint"
   },
   "husky": {
     "hooks": {

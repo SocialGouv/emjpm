@@ -119,8 +119,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
           mr={3}
           bg="red"
           color="white"
-          href={`${userBasePath}/mesures/[mesure_id]/delete`}
-          asLink={`${userBasePath}/mesures/${id}/delete`}
+          to={`${userBasePath}/mesures/${id}/delete`}
         >
           Supprimer la mesure
         </LinkButton>
@@ -128,8 +127,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
         {status === MESURE_PROTECTION_STATUS.en_attente && (
           <LinkButton
             outline={true}
-            href={`${userBasePath}/mesures/[mesure_id]/accept`}
-            asLink={`${userBasePath}/mesures/${id}/accept`}
+            to={`${userBasePath}/mesures/${id}/accept`}
           >
             Accepter la mesure
           </LinkButton>
@@ -139,8 +137,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
           <LinkButton
             ml={3}
             outline={true}
-            href={`${userBasePath}/mesures/[mesure_id]/reactivate`}
-            asLink={`${userBasePath}/mesures/${id}/reactivate`}
+            to={`${userBasePath}/mesures/${id}/reactivate`}
           >
             Réouvrir la mesure
           </LinkButton>
@@ -152,8 +149,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
               bg="red"
               color="white"
               outline={true}
-              href={`${userBasePath}/mesures/[mesure_id]/close`}
-              asLink={`${userBasePath}/mesures/${id}/close`}
+              to={`${userBasePath}/mesures/${id}/close`}
             >
               Cloturer la mesure
             </LinkButton>
@@ -161,8 +157,7 @@ const MesureDetailView = ({ mesure, ...props }) => {
             <LinkButton
               ml={3}
               outline={true}
-              href={`${userBasePath}/mesures/[mesure_id]/edit`}
-              asLink={`${userBasePath}/mesures/${id}/edit`}
+              to={`${userBasePath}/mesures/${id}/edit`}
             >
               Modifier la mesure
             </LinkButton>

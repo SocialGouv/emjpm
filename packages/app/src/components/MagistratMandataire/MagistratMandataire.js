@@ -1,6 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
-import dynamic from "next/dynamic";
-import React from "react";
+import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { Link } from "~/components/Link";
@@ -19,13 +17,7 @@ import {
 } from "./style";
 import { formatGestionnaire } from "./utils";
 
-const MagistratMandataireMap = dynamic(
-  () =>
-    import("~/components/MagistratMandataireMap").then(
-      (mod) => mod.MagistratMandataireMap
-    ),
-  { ssr: false }
-);
+import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
 export const MagistratMandataire = (props) => {
   const { gestionnaireId, tiId } = props;
@@ -88,10 +80,7 @@ export const MagistratMandataire = (props) => {
         {serviceId && <Heading2>{etablissement}</Heading2>}
         {mandataireId && <Heading2>{`${prenom} ${nom}`}</Heading2>}
 
-        <Link
-          href={`/magistrats/gestionnaires/[gestionnaire_id]/reservation`}
-          as={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
-        >
+        <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
           <Button>Réserver une mesure</Button>
         </Link>
       </Flex>
@@ -111,18 +100,18 @@ export const MagistratMandataire = (props) => {
             )}
             {serviceId && (
               <Box>
-                <Text
-                  sx={MagistratTitleMandataireStyle}
-                >{`Nom de l'association`}</Text>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  {"Nom de l'association"}
+                </Text>
                 <Text sx={MagistratContentMandataireStyle}>
                   {etablissement}
                 </Text>
               </Box>
             )}
             <Box>
-              <Text
-                sx={MagistratTitleMandataireStyle}
-              >{`Adresse d’activité`}</Text>
+              <Text sx={MagistratTitleMandataireStyle}>
+                {"Adresse d’activité"}
+              </Text>
               <Text
                 sx={MagistratContentMandataireStyle}
               >{`${adresse} ${codePostal} ${ville}`}</Text>

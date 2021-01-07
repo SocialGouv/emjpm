@@ -1,9 +1,10 @@
 /* eslint-disable react/display-name */
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { isEnAttente, isEnCours, isEteinte } from "@emjpm/biz";
 import { Checkbox, Label } from "@rebass/forms";
 import { format } from "date-fns";
 import React, { useMemo, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { DynamicTable, DynamicTableHeader } from "~/components/DynamicTable";
@@ -24,8 +25,9 @@ export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
-const AdminServiceMesures = (props) => {
-  const serviceId = Number(props.serviceId);
+const AdminServiceMesures = () => {
+  const query = useParams();
+  const serviceId = Number(query.service_id);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const [selectedMesureStatus, setSelectedMesureStatus] = useState(

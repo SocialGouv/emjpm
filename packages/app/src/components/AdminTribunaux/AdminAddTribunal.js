@@ -1,7 +1,7 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
@@ -9,9 +9,11 @@ import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
 
 export const AdminAddTribunal = () => {
+  const history = useHistory();
+
   const { departements, loading } = useDepartements();
   const [addTribunal] = useMutation(ADD_TRIBUNAL, {
-    onCompleted: () => Router.push("/admin/tribunaux"),
+    onCompleted: () => history.push("/admin/tribunaux"),
   });
 
   if (loading) {
@@ -20,7 +22,7 @@ export const AdminAddTribunal = () => {
 
   return (
     <AdminTribunalForm
-      onCancel={() => Router.push("/admin/tribunaux")}
+      onCancel={() => history.push("/admin/tribunaux")}
       onSubmit={async (values) => {
         const departement = findDepartementByCodeOrId(departements, {
           code: values.geocode.depcode,

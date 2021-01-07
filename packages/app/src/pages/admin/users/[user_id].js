@@ -5,15 +5,16 @@ import { AdminUser } from "~/components/AdminUser";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const User = (props) => {
-  const { userId } = props;
+import { useParams } from "react-router-dom";
+
+const User = () => {
+  const { user_id: userId } = useParams();
 
   return (
     <LayoutAdmin>
       <BoxWrapper py={1}>
-        <Link href="/admin/users">
+        <Link to="/admin/users">
           <StyledLink mb={4} display="block">
             &larr; Retour
           </StyledLink>
@@ -24,8 +25,4 @@ const User = (props) => {
   );
 };
 
-User.getInitialProps = async ({ query }) => {
-  return { userId: query.user_id };
-};
-
-export default withAuthSync(User);
+export default User;

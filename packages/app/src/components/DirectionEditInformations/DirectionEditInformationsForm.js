@@ -31,9 +31,9 @@ const DirectionEditInformationsForm = ({
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>{`Modifier vos informations`}</Heading4>
+          <Heading4>{"Modifier vos informations"}</Heading4>
           <Text lineHeight="1.5" color="textSecondary">
-            {`Vos informations`}
+            {"Vos informations"}
           </Text>
         </FormGrayBox>
         <FormInputBox>
@@ -60,7 +60,7 @@ const DirectionEditInformationsForm = ({
       {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link href={cancelLink}>
+          <Link to={cancelLink}>
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>

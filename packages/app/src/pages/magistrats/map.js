@@ -6,7 +6,6 @@ import { MagistratMandatairesMap } from "~/components/MagistratMandatairesMap";
 import { MagistratMapMandatairesPanelList } from "~/components/MagistratMapMandatairesPanelList";
 import { MapContextProvider } from "~/components/Map/context";
 import { UserContext } from "~/components/UserContext";
-import { withAuthSync } from "~/util/auth";
 
 const Map = () => {
   const { magistrat } = useContext(UserContext);
@@ -37,4 +36,4 @@ const Map = () => {
   );
 };
 
-export default withAuthSync(Map);
+export default Map;

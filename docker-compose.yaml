@@ -55,23 +55,22 @@ services:
       HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
-  app:
-    image: emjpm_app
-    build:
-      context: .
-      dockerfile: ./packages/app/Dockerfile.dev
-      shm_size: '2gb'
-    shm_size: '2gb'
-    volumes:
-      - ./.dev-secrets:/secrets:ro
-      - ./:/app
-    ports:
-      - 3000:3000
-    restart: always
-    environment:
-      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
-      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
-      GRAPHQL_SERVER_URI_DOCKER: $GRAPHQL_SERVER_URI_DOCKER
+  # app:
+  #   image: emjpm_app
+  #   build:
+  #     context: .
+  #     dockerfile: ./packages/app/Dockerfile.dev
+  #     shm_size: '2gb'
+  #   shm_size: '2gb'
+  #   volumes:
+  #     - ./.dev-secrets:/secrets:ro
+  #     - ./:/app
+  #   ports:
+  #     - 3000:3000
+  #   restart: always
+  #   environment:
+  #     AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+  #     AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
   api:
     image: emjpm_api
     build:
@@ -87,16 +86,6 @@ services:
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       DATABASE_URL: $DATABASE_URL
-
-  bootstrap:
-    restart: "no"
-    image: node:15-alpine
-    working_dir: /home/node/app
-    user: node
-    volumes:
-      - ./:/home/node/app
-    command: |
-      sh -c "[ -d node_modules ] || npx lerna bootstrap"
 
 volumes:
   emjpm-pgdata:

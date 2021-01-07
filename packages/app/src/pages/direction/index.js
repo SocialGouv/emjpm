@@ -18,7 +18,6 @@ import { FiltersContextSerializableProvider } from "~/components/FiltersContextS
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Mandataires = () => {
   const user = useContext(UserContext);
@@ -90,4 +89,4 @@ const Mandataires = () => {
   );
 };
 
-export default withAuthSync(Mandataires);
+export default Mandataires;

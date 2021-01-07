@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import React, { useContext, useEffect, useMemo, useState } from "react";
 
 import { LoadingWrapper } from "~/components/Commons";
@@ -10,7 +10,7 @@ import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { LB_USERS } from "./queries";
 
 function getRequestFilters(filters) {
-  var requestFilters = {
+  const requestFilters = {
     type: { _in: ["individuel", "prepose"] },
   };
 

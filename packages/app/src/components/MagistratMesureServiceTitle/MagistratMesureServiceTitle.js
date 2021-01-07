@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React, { Fragment } from "react";
 import { Box } from "rebass";
@@ -10,7 +10,6 @@ import { SERVICE } from "./queries";
 const MagistratMesureServiceTitle = (props) => {
   const { id } = props;
   const { data, loading } = useQuery(SERVICE, {
-    ssr: false,
     variables: {
       id,
     },
@@ -33,7 +32,11 @@ const MagistratMesureServiceTitle = (props) => {
     <Fragment>
       <Heading2 mb="1">{`Réserver une mesure auprès de ${etablissement}`}</Heading2>
       {limitReached && (
-        <Heading4 color="error">{`Pour votre information, le mandataire a atteint le nombre de mesures souhaitées`}</Heading4>
+        <Heading4 color="error">
+          {
+            "Pour votre information, le mandataire a atteint le nombre de mesures souhaitées"
+          }
+        </Heading4>
       )}
     </Fragment>
   );

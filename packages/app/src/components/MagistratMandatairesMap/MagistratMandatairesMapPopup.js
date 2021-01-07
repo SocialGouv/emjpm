@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import React, { useContext } from "react";
 import { Box, Text } from "rebass";
 
@@ -61,8 +61,7 @@ const MagistratMandatairesMapPopup = () => {
         mt="2"
         width="100%"
         textAlign="center"
-        href={`/magistrats/gestionnaires/[gestionnaire_id]`}
-        asLink={`/magistrats/gestionnaires/${id}`}
+        to={`/magistrats/gestionnaires/${id}`}
       >
         Réserver une mesure
       </LinkButton>

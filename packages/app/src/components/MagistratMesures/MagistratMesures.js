@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "~/components/MagistratFilters/context";
@@ -15,6 +15,7 @@ import { MagistratListStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
 const MagistratMesures = () => {
+  const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
   const {
@@ -40,11 +41,7 @@ const MagistratMesures = () => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(
-      "/magistrats/mesures/[mesure_id]",
-      `/magistrats/mesures/${id}`,
-      { shallow: true }
-    );
+    history.push(`/magistrats/mesures/${id}`);
   };
 
   if (loading) {

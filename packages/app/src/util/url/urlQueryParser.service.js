@@ -38,9 +38,10 @@ function _parseQueryValueFromVars(param, vars) {
       return acc;
     }
     const pair = v.split("=");
-    if (decodeURIComponent(pair[0]) == name) {
+    if (decodeURIComponent(pair[0]) === name) {
       return decodeURIComponent(pair[1]);
     }
+    return undefined;
   }, undefined);
   return value;
 }

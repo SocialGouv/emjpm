@@ -8,7 +8,6 @@ import { FiltersContextProvider } from "~/components/MagistratFilters/context";
 import { MagistratMesures } from "~/components/MagistratMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const Mesures = () => {
   return (
@@ -33,4 +32,4 @@ const Mesures = () => {
   );
 };
 
-export default withAuthSync(Mesures);
+export default Mesures;

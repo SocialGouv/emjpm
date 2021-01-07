@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import Router from "next/router";
+import { useHistory } from "react-router-dom";
 import React from "react";
 import { Box, Button, Flex } from "rebass";
 
@@ -10,9 +10,10 @@ import { Text } from "~/ui";
 import { IMPORT_OCMI_MESURES } from "./mutations";
 
 const MandataireOcmiMesureImport = () => {
+  const history = useHistory();
   const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES, {
     onCompleted: async () => {
-      Router.push(`/mandataires/mesures`);
+      history.push(`/mandataires/mesures`);
     },
   });
 

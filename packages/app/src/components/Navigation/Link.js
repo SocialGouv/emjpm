@@ -1,8 +1,8 @@
-import { withRouter } from "next/router";
 import React from "react";
+import { withRouter } from "react-router-dom";
 import { Box, Link } from "rebass";
 
-import { Link as NextLink } from "~/components/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 const LinkStyle = (isActive) => {
   return {
@@ -36,26 +36,31 @@ const BoxStyle = {
 };
 
 const ActiveLink = (props) => {
-  const { router, isNestedLinks, href, as } = props;
-  if (!router) return null;
-  const { pathname } = router;
+  const { location, isNestedLinks, to } = props;
+  if (!location) return null;
+  const { pathname } = location;
   let isActive;
   if (isNestedLinks) {
-    isActive = pathname.startsWith(href);
+    isActive = pathname.startsWith(to);
   } else {
     isActive =
-      pathname === href ||
-      (pathname === "/direction/mandataires/list" && href === "/direction");
+      pathname === to ||
+      (pathname === "/direction/mandataires/list" && to === "/direction");
   }
 
   return (
     <Box sx={BoxStyle}>
-      <NextLink href={href} as={as}>
-        <Link href={href} sx={LinkStyle(isActive)}>
-          {props.children}
-          {isActive && <Box sx={LineStyle} />}
-        </Link>
-      </NextLink>
+      <RouterLink
+        to={to}
+        component={({ navigate }) => {
+          return (
+            <Link sx={LinkStyle(isActive)} onClick={() => navigate(to)}>
+              {props.children}
+              {isActive && <Box sx={LineStyle} />}
+            </Link>
+          );
+        }}
+      />
     </Box>
   );
 };

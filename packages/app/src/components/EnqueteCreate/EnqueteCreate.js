@@ -1,7 +1,7 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 
 import yup from "~/lib/validationSchemas/yup";
 import { Button, Field, InlineError, Input } from "~/ui";
@@ -11,8 +11,9 @@ import { ENQUETES } from "./queries";
 
 export const EnqueteCreate = () => {
   const client = useApolloClient();
+  const history = useHistory();
   const [createEnquete] = useMutation(CREATE_ENQUETE, {
-    onCompleted: () => Router.push("/direction/enquetes"),
+    onCompleted: () => history.push("/direction/enquetes"),
     refetchQueries: [{ query: ENQUETES }],
   });
   const formik = useFormik({
@@ -26,7 +27,7 @@ export const EnqueteCreate = () => {
         data &&
         data.enquetes.some((e) => Number(e.annee) === Number(values.year))
       ) {
-        Router.push("/direction/enquetes");
+        history.push("/direction/enquetes");
       }
 
       await createEnquete({

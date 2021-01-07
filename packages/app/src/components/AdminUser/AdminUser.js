@@ -1,7 +1,8 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
 import React from "react";
 import { Box, Card } from "rebass";
+import { useParams } from "react-router-dom";
 
 import { AccessToken } from "~/components/AccessToken";
 import { AdminUserActivation } from "~/components/AdminUserActivation";
@@ -15,8 +16,8 @@ import { MesureImportPanel } from "~/components/MesureImport";
 
 import { USER } from "./queries";
 
-const AdminUser = (props) => {
-  const { userId } = props;
+const AdminUser = () => {
+  const { user_id: userId } = useParams();
 
   const { data, loading, error } = useQuery(USER, {
     variables: {

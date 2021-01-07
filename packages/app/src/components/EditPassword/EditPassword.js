@@ -1,21 +1,25 @@
 import { useFormik } from "formik";
-import getConfig from "next/config";
-import Router from "next/router";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
+import config from "~/config";
 import { PATH } from "~/constants/basePath";
 import { passwordSchema } from "~/lib/validationSchemas";
 import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
-const {
-  publicRuntimeConfig: { API_URL },
-} = getConfig();
+const { API_URL } = config;
 
-const checkStatus = async (response, setSubmitting, setStatus, type) => {
+const checkStatus = async (
+  response,
+  setSubmitting,
+  setStatus,
+  type,
+  history
+) => {
   let json = null;
   setSubmitting(false);
   try {
@@ -28,13 +32,14 @@ const checkStatus = async (response, setSubmitting, setStatus, type) => {
     return json;
   }
   setSubmitting(false);
-  Router.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
+  history.push(`${PATH[type]}/informations`, `${PATH[type]}/informations`, {
     shallow: true,
   });
   return json;
 };
 
 const EditPassword = () => {
+  const history = useHistory();
   const { username, type } = useContext(UserContext);
   const url = `${API_URL}/api/auth/reset-password`;
 
@@ -52,7 +57,7 @@ const EditPassword = () => {
       },
       method: "POST",
     });
-    checkStatus(response, setSubmitting, setStatus, type);
+    checkStatus(response, setSubmitting, setStatus, type, history);
   };
 
   const formik = useFormik({
@@ -77,9 +82,11 @@ const EditPassword = () => {
           p="5"
         >
           <Box height="80px">
-            <Heading4>{`Modifier votre mot de passe`}</Heading4>
+            <Heading4>{"Modifier votre mot de passe"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial.`}
+              {
+                "Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial."
+              }
             </Text>
           </Box>
         </Box>
@@ -143,7 +150,7 @@ const EditPassword = () => {
               </Field>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">
-                  <Link href={`${PATH[type]}/informations`}>Annuler</Link>
+                  <Link to={`${PATH[type]}/informations`}>Annuler</Link>
                 </Box>
                 <Box>
                   <Button

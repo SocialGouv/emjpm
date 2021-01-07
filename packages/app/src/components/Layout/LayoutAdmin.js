@@ -9,31 +9,31 @@ import { BoxWrapper } from "~/ui";
 const navigationLinks = [
   {
     title: "Utilisateurs",
-    url: "/admin",
+    to: "/admin",
   },
   {
     title: "Services",
-    url: "/admin/services",
+    to: "/admin/services",
   },
   {
     title: "Etablissements",
-    url: "/admin/etablissements",
+    to: "/admin/etablissements",
   },
   {
     title: "Tribunaux",
-    url: "/admin/tribunaux",
+    to: "/admin/tribunaux",
   },
   {
     title: "Liste blanche",
-    url: "/admin/liste-blanche",
+    to: "/admin/liste-blanche",
   },
   {
     title: "Editeurs",
-    url: "/admin/editors",
+    to: "/admin/editors",
   },
   {
     title: "API Logs",
-    url: "/admin/api-logs",
+    to: "/admin/api-logs",
   },
 ];
 

@@ -5,7 +5,6 @@ import { MandataireEditInformations } from "~/components/MandataireEditInformati
 import { UserContext } from "~/components/UserContext";
 import { PATH } from "~/constants/basePath";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {
   const { id, type } = useContext(UserContext);
@@ -27,4 +26,4 @@ const EditInformations = () => {
   );
 };
 
-export default withAuthSync(EditInformations);
+export default EditInformations;

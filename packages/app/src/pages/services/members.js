@@ -6,7 +6,6 @@ import { ServiceMemberInvitations } from "~/components/ServiceMemberInvitations"
 import { ServiceMembers } from "~/components/ServiceMembers";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ServiceMembersPage = () => {
   const { service_members, id } = useContext(UserContext);
@@ -26,4 +25,4 @@ const ServiceMembersPage = () => {
   );
 };
 
-export default withAuthSync(ServiceMembersPage);
+export default ServiceMembersPage;

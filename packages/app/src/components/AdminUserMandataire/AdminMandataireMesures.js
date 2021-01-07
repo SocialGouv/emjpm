@@ -1,5 +1,5 @@
 /* eslint-disable react/display-name */
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/client";
 import { isEnAttente, isEnCours, isEteinte } from "@emjpm/biz";
 import { Checkbox, Label } from "@rebass/forms";
 import { format } from "date-fns";

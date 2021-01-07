@@ -1,6 +1,6 @@
-import { useMutation } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useMutation } from "@apollo/client";
 import React, { useContext } from "react";
+import { useHistory } from "react-router-dom";
 
 import { ServiceAntenneForm } from "~/components/ServiceAntenneForms";
 import { UserContext } from "~/components/UserContext";
@@ -10,6 +10,7 @@ import { captureException } from "~/util/sentry";
 import { CREATE_ANTENNE } from "./mutations";
 
 const ServiceCreateAntenne = () => {
+  const history = useHistory();
   const { service_members } = useContext(UserContext);
   const [currentUserService] = service_members;
   const { service_id } = currentUserService;
@@ -19,7 +20,7 @@ const ServiceCreateAntenne = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       await createAntenne({
-        refetchQueries: ["service_antenne"],
+        refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
           adresse: values.geocode.label,
           code_postal: values.geocode.postcode,
@@ -41,7 +42,7 @@ const ServiceCreateAntenne = () => {
     }
 
     setSubmitting(false);
-    Router.push("/services/informations");
+    history.push("/services/informations");
   };
 
   return (

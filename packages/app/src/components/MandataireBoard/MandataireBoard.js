@@ -30,21 +30,21 @@ const MandataireBoard = () => {
           <Box>
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{dispo_max}</Text>
-              <Link href="/mandataires/edit-informations">
-                <Text ml={1}>{`mesures souhaitées`}</Text>
+              <Link to="/mandataires/edit-informations">
+                <Text ml={1}>{"mesures souhaitées"}</Text>
               </Link>
             </Flex>
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{mesures_en_cours}</Text>
-              <Link href="/mandataires/mesures">
-                <Text ml={1}>{`mesures en cours`}</Text>
+              <Link to="/mandataires/mesures">
+                <Text ml={1}>{"mesures en cours"}</Text>
               </Link>
             </Flex>
 
             <Flex px={1} mb={1}>
               <Text fontWeight="bold">{mesures_en_attente}</Text>
-              <Link href="/mandataires/mesures">
-                <Text ml={1}>{`mesures en attente`}</Text>
+              <Link to="/mandataires/mesures">
+                <Text ml={1}>{"mesures en attente"}</Text>
               </Link>
             </Flex>
           </Box>
@@ -67,12 +67,12 @@ const MandataireBoard = () => {
           })}
           {!isTribunal && (
             <Text px={1} mb={1}>
-              {`Vous n'êtes pas visible par les juges des tutelles`}
+              {"Vous n'êtes pas visible par les juges des tutelles"}
             </Text>
           )}
           <Flex justifyContent="flex-end">
-            <Link href="/mandataires/edit-informations">
-              {isTribunal ? `Modifier` : `Ajouter des tribunaux`}
+            <Link to="/mandataires/edit-informations">
+              {isTribunal ? "Modifier" : "Ajouter des tribunaux"}
             </Link>
           </Flex>
         </Card>

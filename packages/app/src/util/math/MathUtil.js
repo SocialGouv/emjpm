@@ -1,5 +1,5 @@
 export const convertToPercentage = (value, total) => {
-  if (!total || total == 0) {
+  if (!total || total === 0) {
     return;
   }
   return round((value / total) * 100);

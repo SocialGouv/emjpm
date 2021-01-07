@@ -1,5 +1,5 @@
-import Router from "next/router";
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Flex } from "rebass";
 
 import { AdminFilterBar } from "~/components/AdminFilterBar";
@@ -8,9 +8,9 @@ import { AdminTribunaux } from "~/components/AdminTribunaux";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminTribunauxPage = () => {
+  const history = useHistory();
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
@@ -24,7 +24,7 @@ const AdminTribunauxPage = () => {
           >
             <AdminFilterBar
               onAddButtonClick={() =>
-                Router.push("/admin/tribunaux/add-tribunal")
+                history.push("/admin/tribunaux/add-tribunal")
               }
               useDepartementfilter={true}
             />
@@ -36,4 +36,4 @@ const AdminTribunauxPage = () => {
   );
 };
 
-export default withAuthSync(AdminTribunauxPage);
+export default AdminTribunauxPage;

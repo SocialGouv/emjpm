@@ -7,7 +7,6 @@ import { AdminUsers } from "~/components/AdminUsers";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const AdminUsersPage = () => {
   return (
@@ -30,4 +29,4 @@ const AdminUsersPage = () => {
   );
 };
 
-export default withAuthSync(AdminUsersPage);
+export default AdminUsersPage;

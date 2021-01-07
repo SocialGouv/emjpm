@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
 import React from "react";
 import { Box, Flex, Text } from "rebass";
@@ -106,7 +106,9 @@ const ServiceInformations = () => {
           <Box>
             <Heading5>Géolocalisation</Heading5>
             <Text>
-              {`Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats`}
+              {
+                "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
+              }
             </Text>
           </Box>
           <Flex my={1}>
@@ -140,12 +142,12 @@ const ServiceInformations = () => {
         </Box>
         <Flex mt="5" justifyContent="center">
           <Box>
-            <Link href="/services/edit-password">
+            <Link to="/services/edit-password">
               <Button variant="outline">Modifier votre mot de passe</Button>
             </Link>
           </Box>
           <Box ml={1}>
-            <LinkButton href="/services/edit-informations">
+            <LinkButton to="/services/edit-informations">
               Modifier les informations du service
             </LinkButton>
           </Box>

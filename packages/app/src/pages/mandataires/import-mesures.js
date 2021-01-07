@@ -7,9 +7,8 @@ import { MandataireMesureImport } from "~/components/MandataireMesureImport";
 import { MandataireOcmiMesureImport } from "~/components/MandataireOcmiMesureImport";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
-const ImportMesures = () => {
+function ImportMesures() {
   const user = useContext(UserContext);
   const { mandataire = {} } = user;
   const { lb_user = {} } = mandataire;
@@ -57,6 +56,6 @@ const ImportMesures = () => {
       </BoxWrapper>
     </LayoutMandataire>
   );
-};
+}
 
-export default withAuthSync(ImportMesures);
+export default ImportMesures;

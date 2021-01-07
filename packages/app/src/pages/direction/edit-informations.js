@@ -4,7 +4,6 @@ import { DirectionEditInformations } from "~/components/DirectionEditInformation
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const EditInformations = () => {
   const redirectLink = "/direction/informations";
@@ -23,4 +22,4 @@ const EditInformations = () => {
   );
 };
 
-export default withAuthSync(EditInformations);
+export default EditInformations;

@@ -36,13 +36,13 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
           p="5"
         >
           <Box height="230px">
-            <Heading4>{`Information du tribunal`}</Heading4>
+            <Heading4>{"Information du tribunal"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
-              {`Informations relatives au tribunal`}
+              {"Informations relatives au tribunal"}
             </Text>
           </Box>
           <Box height="150px">
-            <Heading4>{`Contact du tribunal`}</Heading4>
+            <Heading4>{"Contact du tribunal"}</Heading4>
             <Text lineHeight="1.5" color="textSecondary">
               Contact du tribunal
             </Text>

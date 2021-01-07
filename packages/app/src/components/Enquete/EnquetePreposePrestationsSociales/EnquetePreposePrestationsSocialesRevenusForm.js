@@ -27,7 +27,7 @@ const validationSchema = yup.object().shape({
 
 function dataToForm(data = {}) {
   const result = {};
-  for (var i = 1; i <= 11; ++i) {
+  for (let i = 1; i <= 11; ++i) {
     const key = `tranche${i}`;
     result[key] = !data || !data[key] ? "" : data[key];
   }

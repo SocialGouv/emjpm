@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import React, { useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
@@ -52,7 +52,9 @@ const ServiceMesureAntennesMatcher = ({
     <form onSubmit={handleSubmit}>
       <Box mb={4}>
         <Text color="textSecondary" mb={4} width="50%" lineHeight={1.5}>
-          {`Certaines antennes ne sont pas reconnues, associez les à des antennes eMJPM existantes pour continuer l'import.`}
+          {
+            "Certaines antennes ne sont pas reconnues, associez les à des antennes eMJPM existantes pour continuer l'import."
+          }
         </Text>
         {invalidAntenneNames.map((antenne, index) => (
           <Flex key={antenne} mb={1} alignItems="center">
@@ -77,7 +79,9 @@ const ServiceMesureAntennesMatcher = ({
             </Box>
           </Flex>
         ))}
-        <Button type="submit" mb={1}>{`Importez les mesures`}</Button>
+        <Button type="submit" mb={1}>
+          {"Importez les mesures"}
+        </Button>
       </Box>
     </form>
   );

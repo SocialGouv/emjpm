@@ -5,7 +5,6 @@ import { LayoutServices } from "~/components/Layout";
 import { ServiceBoard } from "~/components/ServiceBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
 import { BoxWrapper } from "~/ui";
-import { withAuthSync } from "~/util/auth";
 
 const ServiceBoardView = () => {
   return (
@@ -24,4 +23,4 @@ const ServiceBoardView = () => {
   );
 };
 
-export default withAuthSync(ServiceBoardView);
+export default ServiceBoardView;

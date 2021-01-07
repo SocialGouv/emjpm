@@ -77,7 +77,7 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           )}
         </Flex>
         <Flex width="50%" flexDirection="column">
-          <Text sx={labelStyle}>{`Département`}</Text>
+          <Text sx={labelStyle}>{"Département"}</Text>
           <Flex>
             <Text sx={descriptionStyle()}>
               {item.departement
@@ -88,7 +88,7 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
         </Flex>
 
         <Flex width="50%" flexDirection="column">
-          <Text sx={labelStyle}>{`Ville`}</Text>
+          <Text sx={labelStyle}>{"Ville"}</Text>
           <Flex>
             {item.mandataire && (
               <Text sx={descriptionStyle()}>{item.mandataire.ville}</Text>
@@ -99,7 +99,7 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
           </Flex>
         </Flex>
         <Flex width="50%" flexDirection="column">
-          <Text sx={labelStyle}>{`Statut`}</Text>
+          <Text sx={labelStyle}>{"Statut"}</Text>
           <Text sx={descriptionStyle("important")}>
             {getStatusLabel(item.status)}
           </Text>

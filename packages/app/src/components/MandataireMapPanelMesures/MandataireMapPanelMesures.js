@@ -1,7 +1,7 @@
-import { useQuery } from "@apollo/react-hooks";
-import Router from "next/router";
+import { useQuery } from "@apollo/client";
 import React, { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
+import { useHistory } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
@@ -14,6 +14,7 @@ import { MandataireMapPanelMesuresStyle } from "./style";
 const RESULT_PER_PAGE = 20;
 
 const MandataireMapPanelMesures = ({ mesuresIds }) => {
+  const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
 
   const { data, error, loading } = useQuery(MESURES, {
@@ -25,13 +26,7 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
   });
 
   const selectMesure = ({ id }) => {
-    Router.push(
-      "/mandataires/mesures/[mesure_id]",
-      `/mandataires/mesures/${id}`,
-      {
-        shallow: true,
-      }
-    );
+    history.push(`/mandataires/mesures/${id}`);
   };
 
   const mesures = useMemo(

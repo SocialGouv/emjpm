@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
 import React from "react";
 import { Box, Flex } from "rebass";
