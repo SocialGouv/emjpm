@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.1](https://github.com/SocialGouv/emjpm/compare/v25.84.0...v25.84.1) (2021-01-08)
+
+
+### Bug Fixes
+
+* **dependencies:** cookie-parser ([1c1f970](https://github.com/SocialGouv/emjpm/commit/1c1f9705704e4d7e99e61531a988f6102ca2efec))
+
+
+
+
+
 # [25.84.0](https://github.com/SocialGouv/emjpm/compare/v25.83.0...v25.84.0) (2021-01-08)
 
 
