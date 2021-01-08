@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.84.0](https://github.com/SocialGouv/emjpm/compare/v25.83.0...v25.84.0) (2021-01-08)
+
+
+### Bug Fixes
+
+* **many-things:** docs, pagination, auth, syntax clean, dev helpers ([#2437](https://github.com/SocialGouv/emjpm/issues/2437)) ([9dd9319](https://github.com/SocialGouv/emjpm/commit/9dd9319e5ad158b04c4247de71df249ef5342e5a))
+
+
+### Features
+
+* **auth:** persist + fix public routes ([#2435](https://github.com/SocialGouv/emjpm/issues/2435)) ([44d7b72](https://github.com/SocialGouv/emjpm/commit/44d7b72081677d049a5c90a9722e0d513308c705))
+* **mandataire-departement:** use view to list all mandataires by departments ([#2429](https://github.com/SocialGouv/emjpm/issues/2429)) ([191cb34](https://github.com/SocialGouv/emjpm/commit/191cb34ffc3c2b29a2722d972b4c80e02d5638ab))
+* **ocmi:** allow mesures import ([#2306](https://github.com/SocialGouv/emjpm/issues/2306)) ([127c7a3](https://github.com/SocialGouv/emjpm/commit/127c7a38c50d946bdc6539aca800c58b25d9c479))
+
+
+
+
+
 # [25.83.0](https://github.com/SocialGouv/emjpm/compare/v25.82.4...v25.83.0) (2021-01-04)
 
 
