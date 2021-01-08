@@ -1,6 +1,6 @@
 import { isAdmin } from "@emjpm/biz";
 import { useFormik } from "formik";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {

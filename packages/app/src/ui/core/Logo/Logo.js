@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import { Marianne } from "./Marianne";

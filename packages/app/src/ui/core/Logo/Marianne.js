@@ -1,5 +1,3 @@
-import React from "react";
-
 const Marianne = () => {
   return (
     <svg width="77px" height="46px" viewBox="0 0 77 46">

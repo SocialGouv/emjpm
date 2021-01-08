@@ -1,4 +1,3 @@
-import React from "react";
 import { Heading as RebassHeading } from "rebass";
 
 import { baseStyle } from "./Style";

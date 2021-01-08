@@ -1,5 +1,3 @@
-import React from "react";
-
 import { EnqueteWelcome } from "../EnqueteCommon";
 
 export const EnquetePreposeWelcome = (props) => {

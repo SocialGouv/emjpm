@@ -1,4 +1,3 @@
-import React from "react";
 import { Feature, Layer } from "react-mapbox-gl";
 
 const MapLayer = (props) => {

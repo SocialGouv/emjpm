@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import ReactSelect from "react-select";
 
 import { getStyle } from "./style";

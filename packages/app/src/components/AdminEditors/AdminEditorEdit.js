@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
+
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 

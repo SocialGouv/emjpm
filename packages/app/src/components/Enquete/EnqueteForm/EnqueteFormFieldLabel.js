@@ -1,5 +1,5 @@
 import { Label } from "@rebass/forms";
-import React, { Fragment, useMemo } from "react";
+import { Fragment, useMemo } from "react";
 import { Box, Text } from "rebass";
 
 const FieldLabel = ({ isRequired, readOnly }) =>

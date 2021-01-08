@@ -1,5 +1,3 @@
-import React from "react";
-
 import { MapCluster, MapContainer, MapLayer } from "~/components/Map";
 import { mapImages } from "~/components/Map/utils";
 

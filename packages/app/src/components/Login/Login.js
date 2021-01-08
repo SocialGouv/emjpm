@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+
 import { useApolloClient } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";

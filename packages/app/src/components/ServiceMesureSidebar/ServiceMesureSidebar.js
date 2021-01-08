@@ -1,5 +1,5 @@
 import { ArrowBack } from "@styled-icons/boxicons-regular/ArrowBack";
-import React from "react";
+
 import { Box, Flex, Link as StyledLink, Text } from "rebass";
 
 import { Link } from "~/components/Link";

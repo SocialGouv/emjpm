@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 import { Indicator } from "~/ui";

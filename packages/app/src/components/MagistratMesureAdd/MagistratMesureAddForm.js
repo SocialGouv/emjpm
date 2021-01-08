@@ -1,7 +1,7 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 

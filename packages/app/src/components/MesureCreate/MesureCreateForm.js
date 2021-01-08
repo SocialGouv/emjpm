@@ -1,6 +1,6 @@
 import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import {

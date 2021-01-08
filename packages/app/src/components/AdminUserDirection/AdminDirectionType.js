@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React from "react";
 
 import { AdminDirectionTypeForm } from "./AdminDirectionTypeForm";
 import { CHANGE_DIRECTION_AGREMENT } from "./mutations";

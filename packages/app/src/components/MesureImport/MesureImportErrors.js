@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex, Text } from "rebass";
 
 import { Card, Heading3 } from "~/ui";

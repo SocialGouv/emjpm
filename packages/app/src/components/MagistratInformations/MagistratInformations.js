@@ -1,5 +1,5 @@
 import { MailOutline } from "@styled-icons/material/MailOutline";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";

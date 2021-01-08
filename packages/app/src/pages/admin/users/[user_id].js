@@ -1,4 +1,3 @@
-import React from "react";
 import { Link as StyledLink } from "rebass";
 
 import { AdminUser } from "~/components/AdminUser";

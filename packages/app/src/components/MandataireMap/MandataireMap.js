@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 
 import { MapCluster, MapContainer } from "~/components/Map";
 import { UserContext } from "~/components/UserContext";

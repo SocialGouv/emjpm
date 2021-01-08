@@ -23,13 +23,16 @@ tools:
 # Overall technical stack
 stack:
   frontend:
-    - NextJS
+    - Create React App
   backend:
-    - hasura
+    - Hasura
+    - NodeJS
     - PostgreSQL
   tests:
     - No frontend tests
     - Jest integration tests on the backend
+    - Units tests on the backend
+    - E2E tests on the backend
   ci:
     - Github Actions (tests)
     - Gitlab-ci (deploys)

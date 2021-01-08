@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { format } from "date-fns";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 

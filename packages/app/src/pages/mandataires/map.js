@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMandataireMap } from "~/components/Layout";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { ForgotPassword } from "~/components/ForgotPassword";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";

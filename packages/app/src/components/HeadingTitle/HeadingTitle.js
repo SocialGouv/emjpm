@@ -1,4 +1,3 @@
-import React from "react";
 import DocumentTitle from "react-document-title";
 
 import { Heading1 } from "~/ui";

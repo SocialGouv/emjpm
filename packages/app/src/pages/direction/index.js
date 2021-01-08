@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box } from "rebass";
 
 import { AvailabilityMap } from "~/components/DirectionAvailabilityMap";

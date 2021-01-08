@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Image } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

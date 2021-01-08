@@ -1,6 +1,6 @@
 import { isAdmin, isDirectionNationale } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
-import React, { Fragment, useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "~/components/UserContext";

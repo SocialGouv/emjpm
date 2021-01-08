@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import { Field, Input, Select } from "~/ui";
 import { findOption } from "~/util/option/OptionUtil";

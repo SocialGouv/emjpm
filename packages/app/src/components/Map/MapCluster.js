@@ -1,4 +1,3 @@
-import React from "react";
 import { Cluster, Marker } from "react-mapbox-gl";
 
 const styles = {
