@@ -7,6 +7,8 @@ import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import { Button, Card } from "~/ui";
 
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
+
 import { ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
@@ -52,6 +54,15 @@ export const AdminEtablissements = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
     AdminFilterContext
+  );
+
+  useEffectObjectValuesChangeCallback(
+    { debouncedSearchText, selectedDepartementCode },
+    () => {
+      if (currentOffset !== 0) {
+        setCurrentOffset(0);
+      }
+    }
   );
 
   const { data, error, loading } = useQuery(ETABLISSEMENTS, {

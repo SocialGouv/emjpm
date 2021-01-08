@@ -30,8 +30,10 @@ export const USERS = gql`
       where: {
         type: { _eq: $type }
         _or: [
+          { id: { _eq: $searchId } }
           { email: { _ilike: $searchText } }
           { nom: { _ilike: $searchText } }
+          { prenom: { _ilike: $searchText } }
         ]
       }
     ) {

@@ -7,6 +7,8 @@ import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import { Button, Card, Text } from "~/ui";
 
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
+
 import { SERVICES } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
@@ -49,6 +51,12 @@ const AdminServices = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 50;
   const { debouncedSearchText } = useContext(AdminFilterContext);
+
+  useEffectObjectValuesChangeCallback({ debouncedSearchText }, () => {
+    if (currentOffset !== 0) {
+      setCurrentOffset(0);
+    }
+  });
 
   const { data, error, loading } = useQuery(SERVICES, {
     fetchPolicy: "network-only",

@@ -8,6 +8,8 @@ import { PaginatedList } from "~/components/PaginatedList";
 import { Button, Card } from "~/ui";
 import { captureException } from "~/util/sentry";
 
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
+
 import { REMOVE_EDITOR } from "./mutations";
 import { EDITORS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
@@ -69,6 +71,12 @@ const AdminEditors = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 20;
   const { debouncedSearchText } = useContext(AdminFilterContext);
+
+  useEffectObjectValuesChangeCallback({ debouncedSearchText }, () => {
+    if (currentOffset !== 0) {
+      setCurrentOffset(0);
+    }
+  });
 
   const { data, error, loading } = useQuery(EDITORS, {
     fetchPolicy: "network-only",

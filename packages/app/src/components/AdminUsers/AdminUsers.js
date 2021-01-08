@@ -1,3 +1,4 @@
+import React, { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import {
   DIRECTION_TYPE,
@@ -5,7 +6,9 @@ import {
   isIndividuel,
   isPrepose,
 } from "@emjpm/biz";
-import React, { useContext, useState } from "react";
+
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
+
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
@@ -77,6 +80,15 @@ const AdminUsers = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, debouncedSearchId, selectedType } = useContext(
     AdminFilterContext
+  );
+
+  useEffectObjectValuesChangeCallback(
+    { debouncedSearchText, selectedType },
+    () => {
+      if (currentOffset !== 0) {
+        setCurrentOffset(0);
+      }
+    }
   );
 
   const { data, error, loading } = useQuery(USERS, {

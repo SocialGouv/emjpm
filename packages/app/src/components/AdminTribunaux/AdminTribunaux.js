@@ -7,6 +7,8 @@ import { AdminFilterContext } from "~/components/AdminFilterBar/context";
 import { PaginatedList } from "~/components/PaginatedList";
 import { Button, Card, Text } from "~/ui";
 
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
+
 import { AdminEditTribunal } from "./AdminEditTribunal";
 import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
 import { TRIBUNAUX } from "./queries";
@@ -86,6 +88,15 @@ const AdminTribunaux = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
     AdminFilterContext
+  );
+
+  useEffectObjectValuesChangeCallback(
+    { debouncedSearchText, selectedDepartementCode },
+    () => {
+      if (currentOffset !== 0) {
+        setCurrentOffset(0);
+      }
+    }
   );
 
   const { data, error, loading } = useQuery(TRIBUNAUX, {
