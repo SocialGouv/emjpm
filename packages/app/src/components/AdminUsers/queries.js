@@ -4,6 +4,7 @@ export const USERS = gql`
   query allUsers(
     $limit: Int
     $searchText: String
+    $searchId: Int
     $offset: Int
     $type: String
   ) {
@@ -11,8 +12,10 @@ export const USERS = gql`
       where: {
         type: { _eq: $type }
         _or: [
+          { id: { _eq: $searchId } }
           { email: { _ilike: $searchText } }
           { nom: { _ilike: $searchText } }
+          { prenom: { _ilike: $searchText } }
         ]
       }
     ) {

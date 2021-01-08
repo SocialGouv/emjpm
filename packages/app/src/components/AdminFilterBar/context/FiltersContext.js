@@ -15,9 +15,14 @@ export const Provider = (props) => {
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 
+  const debouncedSearchId = Number.isInteger(searchText)
+    ? parseInt(searchText)
+    : null;
+
   // Make the context object:
   const filtersContext = {
     changeSearchText,
+    debouncedSearchId,
     debouncedSearchText,
     searchText,
     selectDepartementCode,

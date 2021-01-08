@@ -75,7 +75,9 @@ const RowItem = ({ item }) => {
 const AdminUsers = () => {
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, selectedType } = useContext(AdminFilterContext);
+  const { debouncedSearchText, debouncedSearchId, selectedType } = useContext(
+    AdminFilterContext
+  );
 
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
@@ -83,9 +85,10 @@ const AdminUsers = () => {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
+      searchId: debouncedSearchId,
       searchText:
         debouncedSearchText && debouncedSearchText !== ""
-          ? `${debouncedSearchText}%`
+          ? `%${debouncedSearchText}%`
           : null,
       type: selectedType,
     },
