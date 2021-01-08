@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.2](https://github.com/SocialGouv/emjpm/compare/v25.84.1...v25.84.2) (2021-01-08)
+
+
+### Bug Fixes
+
+* **ci:** bump bash-curl sed fix ([883b3f9](https://github.com/SocialGouv/emjpm/commit/883b3f91c942de741f6a7245f359e3938fd10fdc))
+
+
+
+
+
 ## [25.84.1](https://github.com/SocialGouv/emjpm/compare/v25.84.0...v25.84.1) (2021-01-08)
 
 
