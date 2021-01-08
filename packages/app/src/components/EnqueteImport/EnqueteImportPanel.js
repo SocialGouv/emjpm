@@ -1,6 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
-import React, { Fragment, useEffect } from "react";
+import { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import menuStepperStyle from "~/components/Enquete/EnqueteCommon/EnqueteMenuStepper/style";

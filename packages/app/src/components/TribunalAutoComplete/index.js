@@ -1,7 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import debounce from "p-debounce";
 import PropTypes from "prop-types";
-import React from "react";
 
 import { AsyncSelect } from "~/ui";
 

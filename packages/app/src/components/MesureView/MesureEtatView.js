@@ -1,5 +1,5 @@
 import { mesureFormatter } from "@emjpm/biz";
-import React from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import { content, subtitle } from "./style";

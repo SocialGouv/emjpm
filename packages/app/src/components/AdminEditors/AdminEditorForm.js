@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import { adminEditorSchema } from "~/lib/validationSchemas";

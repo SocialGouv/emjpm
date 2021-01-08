@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "rebass";
 
 import { DirectionFilters } from "~/components/DirectionFilters";

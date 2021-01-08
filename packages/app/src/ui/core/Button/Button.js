@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Button as RebassButton } from "rebass";
 
 import { Spinner } from "../Spinner";

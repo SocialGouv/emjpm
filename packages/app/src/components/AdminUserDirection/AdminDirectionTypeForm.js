@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import {

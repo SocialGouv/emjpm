@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { Text } from "~/ui";

@@ -1,6 +1,6 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { isFrance, isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 

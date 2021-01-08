@@ -1,6 +1,6 @@
 import { Upload } from "@styled-icons/boxicons-regular/Upload";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { InputStyle, InputWrapperStyle, LabelStyle } from "./Style";

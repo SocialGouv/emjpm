@@ -1,5 +1,5 @@
 import { stdFormatter } from "@emjpm/biz";
-import React from "react";
+
 import { Flex } from "rebass";
 
 import { Card, Text } from "~/ui";

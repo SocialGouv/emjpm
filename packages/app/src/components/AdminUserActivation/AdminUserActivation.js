@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation, useQuery } from "@apollo/client";
 import { isIndividuel, isMandataire } from "@emjpm/biz";
-import React, { Fragment, useCallback } from "react";
+import { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "~/components/AppForm";

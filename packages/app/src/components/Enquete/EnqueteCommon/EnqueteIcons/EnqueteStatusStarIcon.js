@@ -1,5 +1,5 @@
 import { Star } from "@styled-icons/fa-regular/Star";
-import React from "react";
+
 import { Box } from "rebass";
 
 export const EnqueteStatusStarIcon = () => (

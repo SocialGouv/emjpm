@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import React from "react";
+
 import { Box } from "rebass";
 
 import { MESURE_CONTEXT_QUERY } from "~/components/MesureContext/queries";

@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { format } from "date-fns";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { Heading2, Text } from "~/ui";

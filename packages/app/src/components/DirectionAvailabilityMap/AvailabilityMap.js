@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+
 import { Box } from "rebass";
 
 import { Card, Heading2, Spinner } from "~/ui";

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
 import { FieldArray, FormikProvider } from "formik";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

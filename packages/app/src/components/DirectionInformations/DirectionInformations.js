@@ -2,7 +2,7 @@ import { directionFormatter } from "@emjpm/biz";
 import { Building } from "@styled-icons/fa-regular/Building";
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { PersonOutline } from "@styled-icons/material/PersonOutline";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";

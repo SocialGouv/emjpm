@@ -1,6 +1,6 @@
 import { format } from "date-fns";
 import { useFormik } from "formik";
-import React from "react";
+
 import { useMutation, useQuery } from "@apollo/client";
 import { Box, Card, Flex } from "rebass";
 

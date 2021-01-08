@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { useSubscription } from "@apollo/client";
 import { useHistory, useParams } from "react-router-dom";
 

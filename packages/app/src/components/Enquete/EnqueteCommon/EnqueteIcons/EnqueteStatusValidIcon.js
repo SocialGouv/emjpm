@@ -1,5 +1,5 @@
 import { Check } from "@styled-icons/fa-solid/Check";
-import React from "react";
+
 import { Box } from "rebass";
 
 export const EnqueteStatusValidIcon = () => (

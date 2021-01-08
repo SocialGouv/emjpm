@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "~/components/Footer";

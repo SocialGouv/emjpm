@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { isService, isMandataire } from "@emjpm/biz";
-import React, { createContext, Fragment, useMemo } from "react";
+import { createContext, Fragment, useMemo } from "react";
 
 import { setUser } from "~/util/sentry";
 

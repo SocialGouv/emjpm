@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import React from "react";
+
 import { useHistory } from "react-router-dom";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";

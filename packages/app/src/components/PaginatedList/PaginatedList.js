@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 

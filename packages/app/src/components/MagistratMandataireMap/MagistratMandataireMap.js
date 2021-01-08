@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
 
 import { formatGestionnaireId } from "~/util/mandataires";
 

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { InlineError } from "~/ui";
 
 import { useAppFieldShowError } from "./useAppFieldShowError.hook";

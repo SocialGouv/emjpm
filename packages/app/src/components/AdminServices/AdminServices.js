@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { Fragment, useContext, useState } from "react";
+import { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";

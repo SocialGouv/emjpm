@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { isEnAttente, isEnCours, isEteinte } from "@emjpm/biz";
 import { Checkbox, Label } from "@rebass/forms";
 import { format } from "date-fns";
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { DynamicTable, DynamicTableHeader } from "~/components/DynamicTable";

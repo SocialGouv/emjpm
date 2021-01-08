@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { SvgLoader, SvgProxy } from "react-svgmt";
 
 import Map from "./MapSvg";
