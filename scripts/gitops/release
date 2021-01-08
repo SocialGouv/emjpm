@@ -12,7 +12,7 @@ if [ -z "$GH_TOKEN" ]; then
   exit 1;
 fi
 
-lerna run test
+yarn test
 
 lerna version --force-publish --yes
 
