@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { PaginatedList } from "~/components/PaginatedList";

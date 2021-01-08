@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import { Card, Text } from "~/ui";

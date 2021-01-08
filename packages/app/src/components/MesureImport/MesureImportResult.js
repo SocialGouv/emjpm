@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex } from "rebass";
 
 import { Button, Heading2, Text } from "~/ui";

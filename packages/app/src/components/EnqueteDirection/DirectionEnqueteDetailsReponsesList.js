@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { differenceInDays } from "date-fns";
-import React from "react";
+
 import { Box, Button, Flex } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "~/components/Commons";

@@ -1,5 +1,3 @@
-import React from "react";
-
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMesureAdd } from "~/components/MagistratMesureAdd";
 import { BoxWrapper } from "~/ui";

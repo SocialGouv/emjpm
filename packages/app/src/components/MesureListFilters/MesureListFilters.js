@@ -1,5 +1,5 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import {

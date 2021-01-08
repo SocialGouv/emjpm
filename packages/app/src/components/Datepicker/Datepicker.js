@@ -4,7 +4,7 @@ import "./style.css";
 import classNames from "classnames";
 import { fr } from "date-fns/locale";
 import PropTypes from "prop-types";
-import React from "react";
+
 import DP, { registerLocale } from "react-datepicker";
 
 registerLocale("fr", fr);

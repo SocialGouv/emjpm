@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/components/Commons";

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Flex } from "rebass";
 
 import { SmallInput } from "~/components/Commons/SmallInput";

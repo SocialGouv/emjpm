@@ -1,6 +1,6 @@
 import { keyframes } from "@emotion/core";
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box } from "rebass";
 
 const animation = keyframes`

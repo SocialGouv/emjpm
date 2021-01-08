@@ -1,4 +1,3 @@
-import React from "react";
 import ReactMapboxGl, { ScaleControl, ZoomControl } from "react-mapbox-gl";
 
 import { MapError } from "./MapError";

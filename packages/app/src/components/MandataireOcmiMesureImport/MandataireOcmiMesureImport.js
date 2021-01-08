@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useHistory } from "react-router-dom";
-import React from "react";
+
 import { Box, Button, Flex } from "rebass";
 
 import { MESURES_QUERY } from "~/components/MesureList/queries";

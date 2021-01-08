@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";

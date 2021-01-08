@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
-import React, { useState } from "react";
+
 import { Box, Flex } from "rebass";
 
 import { Link } from "~/components/Link";
@@ -99,7 +100,7 @@ const AdminApiLogs = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 5;
 
-  React.useEffect(() => {
+  useEffect(() => {
     setCurrentOffset(0);
   }, [debouncedSearchQuery]);
 

@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import React from "react";
+
 import { Card } from "rebass";
 
 import { LB_USER } from "../queries";

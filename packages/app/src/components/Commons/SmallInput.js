@@ -1,6 +1,5 @@
 import { Input } from "@rebass/forms";
 import PropTypes from "prop-types";
-import React from "react";
 
 function getBorderProps({ hasError, hasWarning }) {
   if (hasWarning) {

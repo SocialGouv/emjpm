@@ -1,5 +1,5 @@
 import { Select } from "@rebass/forms";
-import React from "react";
+
 import ReactPaginate from "react-paginate";
 import { Flex } from "rebass";
 

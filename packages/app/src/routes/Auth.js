@@ -108,8 +108,9 @@ export function useProvideAuth() {
   const login = useCallback(
     ({ token, id, type }) => {
       cookie.set("logged", "1");
-      localStorage.setItem("user_id", authStore.id);
-      localStorage.setItem("user_type", authStore.type);
+
+      localStorage.setItem("user_id", id);
+      localStorage.setItem("user_type", type);
 
       matopush(["trackEvent", "login", "success"]);
       matopush(["setUserId", authStore.id]);
@@ -163,9 +164,9 @@ export function useProvideAuth() {
         if (token) {
           dispatchAuthStore({
             payload: {
-              id: localStorage.getItem("id"),
+              id: localStorage.getItem("user_id"),
               token,
-              type: localStorage.getItem("type"),
+              type: localStorage.getItem("user_type"),
             },
             type: "login",
           });

@@ -1,11 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { Lock } from "@styled-icons/boxicons-solid/Lock";
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "~/components/AdminFilterBar/context";
 import { PaginatedList } from "~/components/PaginatedList";
 import { Button, Card, Text } from "~/ui";
+
+import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
 import { AdminEditTribunal } from "./AdminEditTribunal";
 import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
@@ -86,6 +88,15 @@ const AdminTribunaux = () => {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
     AdminFilterContext
+  );
+
+  useEffectObjectValuesChangeCallback(
+    { debouncedSearchText, selectedDepartementCode },
+    () => {
+      if (currentOffset !== 0) {
+        setCurrentOffset(0);
+      }
+    }
   );
 
   const { data, error, loading } = useQuery(TRIBUNAUX, {

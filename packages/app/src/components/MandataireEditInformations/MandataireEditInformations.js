@@ -1,6 +1,6 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import { isEmailExists } from "~/query-service/EmailQueryService";

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import { Select, Text } from "~/ui";

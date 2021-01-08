@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 

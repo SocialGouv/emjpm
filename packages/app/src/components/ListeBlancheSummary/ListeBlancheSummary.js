@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import React, { useContext, useMemo } from "react";
+import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";

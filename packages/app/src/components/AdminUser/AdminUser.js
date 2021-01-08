@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
-import React from "react";
+
 import { Box, Card } from "rebass";
 import { useParams } from "react-router-dom";
 

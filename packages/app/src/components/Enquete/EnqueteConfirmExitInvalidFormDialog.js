@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React from "react";
+
 import { Box, Card, Flex } from "rebass";
 
 import { Button, Heading2, Heading3 } from "~/ui";

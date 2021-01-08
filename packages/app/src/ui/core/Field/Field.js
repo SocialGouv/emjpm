@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box } from "rebass";
 
 import { fieldStyle } from "./style";

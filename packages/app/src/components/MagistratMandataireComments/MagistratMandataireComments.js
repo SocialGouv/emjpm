@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import React, { Fragment, useState } from "react";
+import { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
 
 import { Button, Card, Heading4, Spinner } from "~/ui";

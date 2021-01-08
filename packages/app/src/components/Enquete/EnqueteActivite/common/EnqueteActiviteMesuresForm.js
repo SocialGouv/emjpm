@@ -1,5 +1,3 @@
-import React from "react";
-
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
 import { Heading3 } from "~/ui";

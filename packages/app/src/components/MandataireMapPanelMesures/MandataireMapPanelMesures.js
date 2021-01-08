@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { Fragment, useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";

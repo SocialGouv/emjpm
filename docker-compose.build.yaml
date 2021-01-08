@@ -1,68 +1,90 @@
-version: "3"
+version: "3.8"
+
 #
-# In development we can start more services
+# In development we only start postgres server
 #
 # Listening ports :
-#
-#  - 3000 : app
-#  - 4000 : api
 #  - 5000 : hasura
 #  - 5434 : postgres
 #
+
 services:
   db:
-    command:
-      [
-        "-c",
-        "fsync=off",
-        "-c",
-        "synchronous_commit=off",
-        "-c",
-        "full_page_writes=off",
-      ]
+    image: emjpm_postgres_prod
+    build:
+      context: ./docker/postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    environment:
+      # master password
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test
+    ports:
+      - "5434:5432"
+    volumes:
+      - emjpm-pgdata:/var/lib/postgresql/data
+    restart: always
+
   maildev:
     image: djfarrelly/maildev
+    command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
     ports:
-      - 25:25
-      - 1080:1080
-  api:
-    build:
-      context: packages/api
-      dockerfile: Dockerfile
-    env_file: .env.build
-    ports:
-      - 4000:4000
-    depends_on:
-      - db
-      - maildev
-    links:
-      - db
-      - maildev
-    volumes:
-      - ./.dev-secrets:/secrets:ro
-    environment:
-      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
-      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
+      - "1025:1025"
+      - "1080:1080"
+    restart: always
 
-  app:
-    env_file: .env.build
-    build:
-      context: ./packages/app
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    volumes:
-      - ./nginx-logs:/var/log/nginx
   graphql-engine:
-    env_file: .env.build
-    restart: unless-stopped
+    image: emjpm_hasura_prod
+    build:
+      context: ./packages/hasura
     ports:
-      - 5000:5000
+      - 5000:8080
     depends_on:
       - db
       - api
+    restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
-      HASURA_GRAPHQL_ADMIN_SECRET: secret
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/auth/jwks"}'
+      HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
+      HASURA_GRAPHQL_DATABASE_URL: postgres://emjpm:test@db:5432/emjpm
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/auth/jwks"}'
+      HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
+      HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
+      HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
+
+  app:
+    image: emjpm_app_prod
+    build:
+      context: .
+      dockerfile: ./packages/app/Dockerfile
+      shm_size: '2gb'
+    shm_size: '2gb'
+    volumes:
+      - ./.dev-secrets:/secrets:ro
+    ports:
+      - 3000:3000
+    restart: always
+    environment:
+      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
+      GRAPHQL_SERVER_URI: $GRAPHQL_SERVER_URI
+  api:
+    image: emjpm_api_prod
+    build:
+      context: .
+      dockerfile: ./packages/api/Dockerfile
+    volumes:
+      - ./.dev-secrets:/secrets:ro
+    ports:
+      - 4000:4000
+    restart: always
+    environment:
+      AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
+      AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
+      DATABASE_URL: $DATABASE_URL
+
+volumes:
+  emjpm-pgdata:

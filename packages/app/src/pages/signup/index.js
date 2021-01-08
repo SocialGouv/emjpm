@@ -1,5 +1,3 @@
-import React from "react";
-
 import { LayoutPublic } from "~/components/Layout";
 import Signup from "~/components/Signup";
 import { SignupContextProvider } from "~/components/Signup/context";

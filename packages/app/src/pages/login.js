@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Image } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

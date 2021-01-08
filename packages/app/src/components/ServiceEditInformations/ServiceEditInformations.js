@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { Card } from "~/ui";

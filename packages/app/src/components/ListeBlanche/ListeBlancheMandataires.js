@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 import { LoadingWrapper } from "~/components/Commons";
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";

@@ -1,5 +1,5 @@
 import { Label, Radio } from "@rebass/forms";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 const FieldValue = ({ isChecked, readOnly }) => ({

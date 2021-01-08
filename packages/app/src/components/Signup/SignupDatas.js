@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
 
 import { SIGNUP_DATA } from "./queries";
 

@@ -1,5 +1,5 @@
 import { findDepartementByCodeOrId } from "@emjpm/biz";
-import React from "react";
+
 import { Box } from "rebass";
 
 import { AsyncSelect, Spinner } from "~/ui";

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import { Card, Heading4, Text } from "../../core";

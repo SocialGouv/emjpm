@@ -3,7 +3,7 @@ import { Female } from "@styled-icons/fa-solid/Female";
 import { Male } from "@styled-icons/fa-solid/Male";
 import { Warning } from "@styled-icons/material/Warning";
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
 import { Card, Text } from "../../core";

@@ -1,5 +1,5 @@
 import { useApolloClient, useQuery } from "@apollo/client";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

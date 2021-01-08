@@ -1,6 +1,6 @@
 import { Check } from "@styled-icons/fa-solid/Check";
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import {

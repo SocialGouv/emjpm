@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";

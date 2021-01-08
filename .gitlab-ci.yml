@@ -158,16 +158,29 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
+          --target dependencies \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.dependencies:${TAG} \
+          $DOCKER_BUILD_ARGS \
+          $CONTEXT
+        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} &
+
+        docker build \
           --target builder \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA}
+        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
 
         docker build \
+          --target server \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
@@ -236,6 +249,7 @@ stages:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success
 
+
 #
 
 .base_trivy_scan:
@@ -258,6 +272,32 @@ stages:
   artifacts:
     reports:
       container_scanning: gl-container-scanning-report.json
+
+#
+
+.base_notify_mattermost:
+  image: curlimages/curl
+  dependencies: []
+  variables:
+    MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-"s/emjpm/notifs"}
+  before_script:
+    - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
+
+.base_notify_deploying_production_mattermost:
+  extends: .base_notify_mattermost
+  when: on_success
+  stage: Notify Finished Deployment
+  only:
+    refs:
+      - tags
+  script:
+    - |
+      NOTIF_MSG=$(echo "
+      `./scripts/gitops/get-last-version-changes`
+      -----
+      ${HOST}
+      " | sed -z 's/\n/\\n/g')
+      curl -i -X POST --data-urlencode 'payload={"channel": "'${MATTERMOST_CHANNEL}'", "username":"SocialGroovyBot", "icon_url":"https://avatars2.githubusercontent.com/u/45039513", "text": "'$NOTIF_MSG'"}' ${MATTERMOST_WEBHOOK}
 
 #
 
@@ -764,3 +804,8 @@ Trivy Scan hasura:
   extends: .base_trivy_scan
   variables:
     CONTEXT: hasura
+
+############ Notify production ########################
+
+Notify Production (mattermost):
+  extends: .base_notify_deploying_production_mattermost

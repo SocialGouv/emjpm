@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Text } from "rebass";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 
