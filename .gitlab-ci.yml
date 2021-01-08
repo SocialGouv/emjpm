@@ -276,7 +276,7 @@ stages:
 #
 
 .base_notify_mattermost:
-  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.0
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.1
   dependencies: []
   variables:
     MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-"s/emjpm/notifs"}
