@@ -4,7 +4,6 @@
 codecov.yml
 commitlint.config.js
 docker-compose.build.yaml
-docker-compose.built.yaml
 docker-compose.yaml
 LICENSE
 optional
