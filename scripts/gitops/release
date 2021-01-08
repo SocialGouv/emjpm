@@ -12,6 +12,8 @@ if [ -z "$GH_TOKEN" ]; then
   exit 1;
 fi
 
+export CI=true
+
 yarn test
 
 lerna version --force-publish --yes
