@@ -1,5 +1,3 @@
-import React from "react";
-
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceCreateAntenne } from "~/components/ServiceAntenneCreate";

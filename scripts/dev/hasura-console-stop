@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+ppath="hasura console"
+ppid=$(pgrep -x -f "$ppath" | head -n1 | awk '{print $1;}')
+kill -SIGTERM $ppid

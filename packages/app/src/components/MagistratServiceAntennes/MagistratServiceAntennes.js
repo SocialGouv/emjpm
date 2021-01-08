@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Flex } from "rebass";
 
 import { Antenne, Card, Heading3, Heading4, Spinner } from "~/ui";

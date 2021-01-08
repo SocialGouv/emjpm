@@ -1,5 +1,5 @@
 import { Label } from "@rebass/forms";
-import React from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

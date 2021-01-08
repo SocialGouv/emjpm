@@ -1,5 +1,5 @@
 import { isIndividuel, isPrepose } from "@emjpm/biz";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AccessToken } from "~/components/AccessToken";

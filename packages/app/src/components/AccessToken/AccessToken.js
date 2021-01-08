@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AccessTokenDelete } from "~/components/AccessTokenDelete";

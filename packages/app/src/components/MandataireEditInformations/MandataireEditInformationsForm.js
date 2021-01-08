@@ -1,6 +1,6 @@
 import { useFormik } from "formik";
 import { uniq } from "lodash";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {

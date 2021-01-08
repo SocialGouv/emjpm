@@ -1,5 +1,3 @@
-import React from "react";
-
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireInformations } from "~/components/MandataireInformations";
 import { BoxWrapper, Card } from "~/ui";

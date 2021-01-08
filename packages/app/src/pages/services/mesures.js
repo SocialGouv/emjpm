@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";

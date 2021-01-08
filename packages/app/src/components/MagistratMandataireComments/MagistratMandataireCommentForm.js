@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { useFormik } from "formik";
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 

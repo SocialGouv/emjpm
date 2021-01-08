@@ -1,4 +1,3 @@
-import React from "react";
 import { Flex } from "rebass";
 
 const DocumentLink = ({ children, document }) => (

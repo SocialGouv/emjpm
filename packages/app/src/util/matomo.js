@@ -1,12 +1,12 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 export const useMatomo = () => {
   const location = useLocation();
 
-  const previousPathRef = React.useRef(null);
+  const previousPathRef = useRef(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const { pathname } = location;
     if (previousPathRef.current === pathname) {
       return;

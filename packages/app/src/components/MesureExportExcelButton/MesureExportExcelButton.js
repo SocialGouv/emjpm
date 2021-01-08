@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Export } from "@styled-icons/boxicons-regular/Export";
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Button } from "rebass";
 
 import { UserContext } from "~/components/UserContext";

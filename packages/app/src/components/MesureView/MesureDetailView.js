@@ -1,5 +1,5 @@
 import { MESURE_PROTECTION_STATUS, mesureFormatter } from "@emjpm/biz";
-import React, { Fragment, useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";

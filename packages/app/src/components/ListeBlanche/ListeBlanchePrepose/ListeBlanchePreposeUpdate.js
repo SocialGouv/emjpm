@@ -1,4 +1,3 @@
-import React from "react";
 import { useApolloClient, useMutation } from "@apollo/client";
 import { Card } from "rebass";
 

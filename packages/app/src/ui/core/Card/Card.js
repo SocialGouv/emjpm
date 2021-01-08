@@ -1,4 +1,3 @@
-import React from "react";
 import { Card as RebassCard } from "rebass";
 
 const Card = (props) => (

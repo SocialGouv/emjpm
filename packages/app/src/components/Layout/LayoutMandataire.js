@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "~/components/Footer";

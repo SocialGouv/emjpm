@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import { UserContext } from "~/components/UserContext";

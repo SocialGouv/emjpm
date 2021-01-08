@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { usePagination, useRowSelect, useSortBy, useTable } from "react-table";
 import { Box, Flex, Text } from "rebass";
 

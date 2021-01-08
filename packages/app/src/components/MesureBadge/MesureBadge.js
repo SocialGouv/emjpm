@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "rebass";
 
 const MesureBadge = ({ mesures_en_cours, dispo_max }) => {

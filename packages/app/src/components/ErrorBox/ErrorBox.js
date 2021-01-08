@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Button, Text } from "rebass";
 
 // TODO(remiroyc): create error box into emjpm-ui

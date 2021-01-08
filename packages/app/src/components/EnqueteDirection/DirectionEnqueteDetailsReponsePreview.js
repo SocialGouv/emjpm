@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 

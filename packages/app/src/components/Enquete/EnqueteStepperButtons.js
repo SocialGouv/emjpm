@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Button, Flex } from "rebass";
 
 export const EnqueteStepperButtons = (props) => {

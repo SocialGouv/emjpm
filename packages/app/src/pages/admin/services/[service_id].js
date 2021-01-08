@@ -1,4 +1,3 @@
-import React from "react";
 import { Box, Card, Link as StyledLink } from "rebass";
 
 import { AdminServiceMesures } from "~/components/AdminServices";

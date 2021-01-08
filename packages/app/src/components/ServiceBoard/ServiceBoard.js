@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/components/Commons";

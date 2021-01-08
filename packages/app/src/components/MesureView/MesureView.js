@@ -1,5 +1,5 @@
 import { isEnCours } from "@emjpm/biz";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import { MesureContext } from "~/components/MesureContext";
 import { Card } from "~/ui";

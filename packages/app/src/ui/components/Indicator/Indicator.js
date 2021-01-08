@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React from "react";
+
 import { Box } from "rebass";
 
 import { Card, Heading0, Heading4, Spinner } from "../../core";

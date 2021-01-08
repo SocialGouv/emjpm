@@ -1,13 +1,13 @@
+import { useEffect, useRef } from "react";
 import * as Sentry from "@sentry/browser";
-import React from "react";
 
 import config from "~/config";
 
 const { PACKAGE_VERSION, SENTRY_PUBLIC_DSN, NODE_ENV } = config;
 
 export const useSentry = () => {
-  const onceRunRef = React.useRef(false);
-  React.useEffect(() => {
+  const onceRunRef = useRef(false);
+  useEffect(() => {
     if (!onceRunRef.current) {
       initSentry();
     }

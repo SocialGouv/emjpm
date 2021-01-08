@@ -1,5 +1,3 @@
-import React from "react";
-
 import { DirectionEnqueteDetailsReponsesList } from "~/components/EnqueteDirection/DirectionEnqueteDetailsReponsesList";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";

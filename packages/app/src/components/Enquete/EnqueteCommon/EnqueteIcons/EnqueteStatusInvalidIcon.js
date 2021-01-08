@@ -1,5 +1,5 @@
 import { SquaredCross } from "@styled-icons/entypo/SquaredCross";
-import React from "react";
+
 import { Box } from "rebass";
 
 export const EnqueteStatusInvalidIcon = () => (

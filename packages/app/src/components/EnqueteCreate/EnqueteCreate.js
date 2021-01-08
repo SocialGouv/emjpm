@@ -1,6 +1,6 @@
 import { useApolloClient, useMutation } from "@apollo/client";
 import { useFormik } from "formik";
-import React from "react";
+
 import { useHistory } from "react-router-dom";
 
 import yup from "~/lib/validationSchemas/yup";

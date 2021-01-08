@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import React from "react";
+
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 

@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "rebass";
 
 import { LayoutServices } from "~/components/Layout";
