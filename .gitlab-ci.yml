@@ -431,7 +431,7 @@ Build app image (prod):
   extends:
     - .build_app
   variables:
-    PRODUCTION: true
+    PRODUCTION: "true"
   only:
     refs:
       - tags
