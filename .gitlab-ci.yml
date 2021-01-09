@@ -103,7 +103,7 @@ stages:
   artifacts:
     expire_in: 1 week
     paths:
-      - nodes_modules
+      - node_modules
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >-
@@ -165,7 +165,8 @@ stages:
           $CONTEXT
         docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
         docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -v nodes_modules:/app/nodes_modules \
+          -v node_modules:/app/node_modules \
+          -v node_modules:/app/node_modules \
           yarn --frozen-lockfile --ignore-scripts --production=false
         CONTAINER_ID=$(docker ps -aqn 1)
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
