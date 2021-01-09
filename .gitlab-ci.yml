@@ -445,9 +445,8 @@ Build app image (prod):
   only:
     refs:
       - tags
-  except:
   variables:
-    PRODUCTION: "true"
+    BUILD_PRODUCTION: "true"
 
 ################### Build HASURA ########################
 
