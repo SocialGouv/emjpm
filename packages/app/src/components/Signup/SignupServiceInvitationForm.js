@@ -38,12 +38,14 @@ export const SignupServiceInvitationForm = (props) => {
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
+            formik={formik}
             value={formik.values.nom}
             id="nom"
             placeholder="Nom"
             validationSchema={signupSchema}
           />
           <FormGroupInput
+            formik={formik}
             value={formik.values.prenom}
             id="prenom"
             placeholder="Prénom"
@@ -61,6 +63,7 @@ export const SignupServiceInvitationForm = (props) => {
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
+            formik={formik}
             disabled
             value={formik.values.email}
             id="email"
@@ -68,6 +71,7 @@ export const SignupServiceInvitationForm = (props) => {
             validationSchema={signupSchema}
           />
           <FormGroupInput
+            formik={formik}
             value={formik.values.password}
             type="password"
             id="password"
@@ -75,6 +79,7 @@ export const SignupServiceInvitationForm = (props) => {
             validationSchema={signupSchema}
           />
           <FormGroupInput
+            formik={formik}
             value={formik.values.confirmPassword}
             type="password"
             id="confirmPassword"

@@ -1,12 +1,12 @@
-import { useParams } from "react-router-dom";
+import useSearchParams from "~/hooks/useSearchParams";
 
 import { LayoutPublic } from "~/components/Layout";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { SignupServiceInvitation } from "~/components/Signup/SignupServiceInvitation";
 import { BoxWrapper } from "~/ui";
 
-const SignupInvitationPage = () => {
-  const { token } = useParams();
+function SignupInvitationPage() {
+  const { token } = useSearchParams();
 
   return (
     <SignupContextProvider>
@@ -17,6 +17,6 @@ const SignupInvitationPage = () => {
       </LayoutPublic>
     </SignupContextProvider>
   );
-};
+}
 
 export default SignupInvitationPage;
