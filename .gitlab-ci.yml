@@ -407,6 +407,7 @@ Build app image:
     - .base_build_stage
     - .build_stage
   before_script:
+    - export PRODUCTION=true
     - source ./.gitlab-ci/env.sh
     - >-
       export DOCKER_BUILD_ARGS="
