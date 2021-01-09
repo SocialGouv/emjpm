@@ -32,19 +32,6 @@ deployment:
       value: '3000'
     - name: NODE_ENV
       value: production
-    - name: API_URL
-      value: '//${API_HOST}'
-    - name: GRAPHQL_SERVER_URI
-      value: '//${HASURA_HOST}/v1/graphql'
-    - name: VERSION
-      value: '${VERSION}'
-    - name: SENTRY_PUBLIC_DSN
-      valueFrom:
-        secretKeyRef:
-          name: emjpm-secret
-          key: SENTRY_PUBLIC_DSN
-    - name: SENTRY_AUTH_TOKEN
-      value: 3efd6ce06b2b496796e94894ea2428892c75bd3551ca4d8b8d078a35ff907f44
   nodeSelector: {}
   tolerations: []
   affinity: {}
