@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.6](https://github.com/SocialGouv/emjpm/compare/v25.84.5...v25.84.6) (2021-01-09)
+
+
+### Bug Fixes
+
+* **ci:** init-db script ([26c2fae](https://github.com/SocialGouv/emjpm/commit/26c2fae26715d9ae24648d103e48c8ad028cff2f))
+* **ci:** source env.sh ([82cb287](https://github.com/SocialGouv/emjpm/commit/82cb28716fa560338d9a98883f1d36f897041318))
+
+
+
+
+
 ## [25.84.5](https://github.com/SocialGouv/emjpm/compare/v25.84.4...v25.84.5) (2021-01-09)
 
 **Note:** Version bump only for package emjpm
