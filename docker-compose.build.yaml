@@ -71,6 +71,7 @@ services:
       - 3000:3000
     restart: always
     environment:
+      PORT: 3000
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       GRAPHQL_SERVER_URI: $GRAPHQL_SERVER_URI
