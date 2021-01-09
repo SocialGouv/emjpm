@@ -1,7 +1,7 @@
 FROM node:15-alpine as node
 
 # DEPENDENCIES
-FROM node as dependencies
+FROM node as pre-dependencies
 
 ENV NODE_ENV=production
 
@@ -11,9 +11,8 @@ COPY package.json lerna.json yarn.lock /app/
 COPY packages/api/package.json /app/packages/api/package.json
 COPY packages/biz/package.json /app/packages/biz/package.json
 
-RUN mkdir /.yarn-cache
-RUN yarn config set cache-folder /.yarn-cache
-RUN yarn --frozen-lockfile --ignore-scripts --production=false
+FROM pre-dependencies as dependencies
+RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
 
 # BUILDER
 FROM dependencies as builder

@@ -100,6 +100,10 @@ stages:
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - nodes_modules
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >-
@@ -158,14 +162,21 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
-          --target dependencies \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.dependencies:${TAG} \
+          --target pre-dependencies \
+          --cache-from ${IMAGE_NAME}.pre-dependencies:${CACHE_TAG} \
+          --cache-from ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
+          -t ${IMAGE_NAME}.pre-dependencies:${TAG} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} &
+        docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
+        docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
+          -v nodes_modules:/app/nodes_modules \
+          yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
+        CONTAINER_ID=$(docker ps -aqn 1)
+        docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
+        docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${TAG}
+        docker rm ${CONTAINER_ID}
 
         docker build \
           --target builder \
@@ -363,17 +374,17 @@ variables:
   stage: Build
   interruptible: true
   dependencies: []
-  artifacts:
-    paths:
-      - /*.docker.tar.gz
-    expire_in: 1 week
-  before_script:
-  - |
-    if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
-      docker load --input /$BUILD_NAME.docker.tar.gz
-    fi
-  after_script:
-    - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
+  # artifacts:
+  #   paths:
+  #     - /*.docker.tar.gz
+  #   expire_in: 1 week
+  # before_script:
+  # - |
+  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
+  #     docker load --input /$BUILD_NAME.docker.tar.gz
+  #   fi
+  # after_script:
+  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
 
 ################### CREATE NAMESPACE ##############
 
