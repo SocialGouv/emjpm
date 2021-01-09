@@ -107,6 +107,7 @@ stages:
   #   expire_in: 1 week
   before_script:
     - 'export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared"'
+    - 'echo $SHARED_PATH'
   # - |
   #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
   #     docker load --input /$BUILD_NAME.docker.tar.gz
