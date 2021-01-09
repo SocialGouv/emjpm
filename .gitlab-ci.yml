@@ -172,7 +172,7 @@ stages:
         docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
         docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
           -v nodes_modules:/app/nodes_modules \
-          yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
+          yarn --frozen-lockfile --ignore-scripts --production=false
         CONTAINER_ID=$(docker ps -aqn 1)
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${TAG}
