@@ -12,7 +12,7 @@ COPY packages/api/package.json /app/packages/api/package.json
 COPY packages/biz/package.json /app/packages/biz/package.json
 
 FROM pre-dependencies as dependencies
-RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
+RUN yarn --frozen-lockfile --ignore-scripts --production=false
 
 # BUILDER
 FROM dependencies as builder
