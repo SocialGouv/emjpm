@@ -369,9 +369,9 @@ variables:
     expire_in: 1 week
   before_script:
     - |
-    if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
-      docker load --input $BUILD_NAME.docker.tar.gz
-    fi
+      if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
+        docker load --input $BUILD_NAME.docker.tar.gz
+      fi
   after_script:
     - docker save $DOCKER_CI_IMAGE | gzip > $BUILD_NAME.docker.tar.gz
 
@@ -436,18 +436,14 @@ Build api image:
 Build app image (dev):
   extends:
     - .build_app
-  except:
-    refs:
-      - tags
+    - .dev_stage
 
 Build app image (prod):
   extends:
     - .build_app
+    - .incubateur_stage
   variables:
     PRODUCTION: "true"
-  only:
-    refs:
-      - tags
 
 ################### Build HASURA ########################
 
