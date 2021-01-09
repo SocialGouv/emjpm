@@ -176,7 +176,6 @@ stages:
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${TAG} \
           $DOCKER_BUILD_ARGS \
-          $DOCKER_BUILD_ARGS_BUILDER \
           $CONTEXT
         docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
 
@@ -410,12 +409,11 @@ Build app image:
   variables:
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
-      --shm-size 2G
-      -f ./packages/app/Dockerfile
-    DOCKER_BUILD_ARGS_BUILDER: >-
       --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
       --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
       --build-arg REACT_APP_API_URL=//${API_HOST}
+      --shm-size 2G
+      -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
 
