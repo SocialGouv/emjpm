@@ -402,12 +402,11 @@ Build api image:
 
 ################### Build APP ##################
 
-Build app image:
+.build_app:
   extends:
     - .base_build_stage
     - .build_stage
   before_script:
-    - export PRODUCTION=true
     - source ./.gitlab-ci/env.sh
     - >-
       export DOCKER_BUILD_ARGS="
@@ -420,6 +419,22 @@ Build app image:
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
+
+Build app image (dev):
+  extends:
+    - .build_app
+  except:
+    refs:
+      - tags
+
+Build app image (prod):
+  extends:
+    - .build_app
+  variables:
+    PRODUCTION: true
+  only:
+    refs:
+      - tags
 
 ################### Build HASURA ########################
 
