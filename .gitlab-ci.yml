@@ -171,8 +171,8 @@ stages:
           $CONTEXT
         docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
         docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -v ./node_modules:/app/node_modules \
-          -v ./packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules \
+          -v ./node_modules:/app/node_modules:rw \
+          -v ./packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules:rw \
           yarn --frozen-lockfile --ignore-scripts --production=false
         CONTAINER_ID=$(docker ps -aqn 1)
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
