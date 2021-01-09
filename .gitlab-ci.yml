@@ -363,8 +363,6 @@ variables:
   stage: Build
   interruptible: true
   dependencies: []
-  before_script:
-    - source ./.gitlab-ci/env.sh
 
 ################### CREATE NAMESPACE ##############
 
@@ -408,14 +406,17 @@ Build app image:
   extends:
     - .base_build_stage
     - .build_stage
+  before_script:
+    - source ./.gitlab-ci/env.sh
+    - >-
+      export DOCKER_BUILD_ARGS="
+        --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
+        --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
+        --build-arg REACT_APP_API_URL=//${API_HOST}
+        --shm-size 2G
+        -f ./packages/app/Dockerfile"
   variables:
     CONTEXT: .
-    DOCKER_BUILD_ARGS: >-
-      --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
-      --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
-      --build-arg REACT_APP_API_URL=//${API_HOST}
-      --shm-size 2G
-      -f ./packages/app/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
 
