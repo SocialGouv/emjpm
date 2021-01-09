@@ -436,12 +436,14 @@ Build api image:
 Build app image (dev):
   extends:
     - .build_app
-    - .dev_stage
+  except:
+    - tags
 
 Build app image (prod):
   extends:
     - .build_app
-    - .incubateur_stage
+  only:
+    - tags
   variables:
     PRODUCTION: "true"
 
