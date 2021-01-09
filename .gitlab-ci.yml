@@ -414,7 +414,7 @@ Build app image:
       -f ./packages/app/Dockerfile
     DOCKER_BUILD_ARGS_BUILDER: >-
       --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
-      --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}
+      --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
       --build-arg REACT_APP_API_URL=//${API_HOST}
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
