@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.18](https://github.com/SocialGouv/emjpm/compare/v25.84.17...v25.84.18) (2021-01-09)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
 ## [25.84.17](https://github.com/SocialGouv/emjpm/compare/v25.84.16...v25.84.17) (2021-01-09)
 
 **Note:** Version bump only for package @emjpm/api
