@@ -172,13 +172,11 @@ stages:
           yarn --frozen-lockfile --ignore-scripts --production=false
         CONTAINER_ID=$(docker ps -aqn 1)
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-        docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${TAG}
         docker rm ${CONTAINER_ID}
         cp -R ${SHARED_PATH}/app/ app/
 
         docker build \
           --target builder \
-          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
           --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
