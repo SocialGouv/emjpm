@@ -131,25 +131,25 @@ stages:
       echo ""
       echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
       set_cache_image "${CI_COMMIT_BEFORE_SHA}"
-      #
-      # if [[ -z "${CACHE_TAG}" ]]; then
-      #   echo ""
-      #   echo "Checking current branch/tag (${TAG}) cache"
-      #   set_cache_image "${TAG}"
-      # fi
-      #
-      # if [[ -z "${CACHE_TAG}" ]]; then
-      #   echo ""
-      #   echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
-      #   set_cache_image "${CI_DEFAULT_BRANCH}"
-      # fi
-      #
-      # echo ""
-      # if [[ -n "${CACHE_TAG}" ]] ; then
-      #   echo "Using ${CACHE_TAG} tag as cache"
-      # else
-      #   echo "No cache ! Naked build :("
-      # fi
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking current branch/tag (${TAG}) cache"
+        set_cache_image "${TAG}"
+      fi
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
+        set_cache_image "${CI_DEFAULT_BRANCH}"
+      fi
+
+      echo ""
+      if [[ -n "${CACHE_TAG}" ]] ; then
+        echo "Using ${CACHE_TAG} tag as cache"
+      else
+        echo "No cache ! Naked build :("
+      fi
 
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
