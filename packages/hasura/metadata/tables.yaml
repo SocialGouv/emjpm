@@ -5896,7 +5896,9 @@
       - id
       - service_id
       - token
-      filter: {}
+      filter:
+        token:
+          _eq: X-Hasura-Invitation-Token
   - role: service
     permission:
       columns:

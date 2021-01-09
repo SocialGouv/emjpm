@@ -417,25 +417,25 @@ function Routes() {
       <Route path="/login">
         <LoginPage />
       </Route>
-      <Route path="/signup">
+      <Route path="/signup" exact>
         <SignupPage />
       </Route>
-      <Route path="/signup/invitation">
+      <Route path="/signup/invitation" exact>
         <SignupInvitationPage />
       </Route>
-      <Route path="/inscription">
+      <Route path="/inscription" exact>
         <InscriptionPage />
       </Route>
-      <Route path="/account/reset-password">
+      <Route path="/account/reset-password" exact>
         <AccountResetPasswordPage />
       </Route>
-      <Route path="/account/forgot-password">
+      <Route path="/account/forgot-password" exact>
         <AccountForgotPasswordPage />
       </Route>
-      <Route path="/application/authorization">
+      <Route path="/application/authorization" exact>
         <ApplicationAuthorizationPage />
       </Route>
-      <Route path="/application/token-request">
+      <Route path="/application/token-request" exact>
         <ApplicationTokenRequestPage />
       </Route>
       <PrivateRoute>
