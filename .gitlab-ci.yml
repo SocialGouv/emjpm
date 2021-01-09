@@ -105,7 +105,8 @@ stages:
   #   paths:
   #     - /*.docker.tar.gz
   #   expire_in: 1 week
-  # before_script:
+  before_script:
+    - 'export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared"'
   # - |
   #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
   #     docker load --input /$BUILD_NAME.docker.tar.gz
@@ -114,7 +115,7 @@ stages:
   #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
   variables:
     # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52029664
-    SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
+    # SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
   cache:
     key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
