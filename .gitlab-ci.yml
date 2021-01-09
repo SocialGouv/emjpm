@@ -13,20 +13,21 @@ variables:
   IMAGE_INFRA_BASE_NAME: infra/images-docker
 
   # Globals
-  DOCKER_VERSION: "18"
-  PYTHON_VERSION: "3.6-alpine"
+  DOCKER_VERSION: "19"
 
   PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
 
-#
+  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
+
+# STAGES
 
 stages:
   - "Build"
   - "Deploy"
   - "Notify Finished Deployment"
 
-#
+# Bases Definitions to extends from
 
 .base_deploy_chart_stage:
   extends: .base_docker_kubectl_image_stage
@@ -93,18 +94,39 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image: docker:19
+  image: docker:${DOCKER_VERSION}
   services:
-    - docker:19-dind
+    - docker:${DOCKER_VERSION}-dind
 
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
-  artifacts:
-    expire_in: 1 week
+  # artifacts:
+  #   paths:
+  #     - /*.docker.tar.gz
+  #   expire_in: 1 week
+  # before_script:
+  # - |
+  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
+  #     docker load --input /$BUILD_NAME.docker.tar.gz
+  #   fi
+  # after_script:
+  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
+  variables:
+    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52029664
+    # SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
+    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
+    SHARED_PATH: /builds/SocialGouv/shared/${PROJECT}
+  cache:
+    key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
-      - node_modules
-      - packages/$BUILD_NAME/node_modules
+      - app/node_modules/
+      - app/packages/$BUILD_NAME/node_modules/
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - app/node_modules/
+      - app/packages/$BUILD_NAME/node_modules/
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >-
@@ -115,14 +137,6 @@ stages:
         export TAG=$CI_COMMIT_REF_SLUG
         echo "Build ${TAG} branch"
       fi
-    #
-    # NOTE(douglasduteil): aggressive caching strategy.
-    # As we don't know which image is the closest to the one we are registering
-    # we pull all the images that can help.
-    # From the previous commit, to the current branch or the master branch, the
-    # first to be defined will be our cache :)
-    # NOTE(devthejo): aggressive caching strategy 2 implementation of multistage
-    # build strategy.
     - |
       [[ -n "${TRACE}" ]] && set -x
 
@@ -165,14 +179,20 @@ stages:
           $DOCKER_BUILD_ARGS \
           $CONTEXT
         docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
+        mkdir -p ${SHARED_PATH}/app/node_modules
+        mkdir -p ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules
+        mkdir -p app/node_modules
+        mkdir -p app/packages/$BUILD_NAME/node_modules
+        cp -R app/ ${SHARED_PATH}/app/
         docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -v ./node_modules:/app/node_modules \
-          -v ./packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules \
+          -v ${SHARED_PATH}/app/node_modules:/app/node_modules:rw \
+          -v ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules:rw \
           yarn --frozen-lockfile --ignore-scripts --production=false
         CONTAINER_ID=$(docker ps -aqn 1)
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
         docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${TAG}
         docker rm ${CONTAINER_ID}
+        cp -R ${SHARED_PATH}/app/ app/
 
         docker build \
           --target builder \
@@ -212,7 +232,6 @@ stages:
 
       wait
 
-#
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
   dependencies: []
@@ -255,9 +274,6 @@ stages:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success
 
-
-#
-
 .base_trivy_scan:
   stage: Deploy
   services:
@@ -278,8 +294,6 @@ stages:
   artifacts:
     reports:
       container_scanning: gl-container-scanning-report.json
-
-#
 
 .base_notify_mattermost:
   image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.1
@@ -305,16 +319,12 @@ stages:
       echo '{"username":"SocialGroovyBot","icon_url":"https://avatars2.githubusercontent.com/u/45039513","text":"'${NOTIF_MSG}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
-#
-
-variables:
-  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
 .base_delete_useless_k8s_ns_stage:
   stage: Notify Finished Deployment
   dependencies: []
   allow_failure: true
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.24.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:2.9.0
   environment: fabrique-dev
   script:
     - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
@@ -324,8 +334,6 @@ variables:
     - sh -x /bin/k8s-ns-killer ${K8S_NAMESPACE_PREFIX}
   only:
     - master
-
-#
 
 .base_delete_useless_managed_postgresql_stage:
   stage: Notify Finished Deployment
@@ -338,7 +346,6 @@ variables:
   only:
     - master
 
-
 .base_stage:
   except:
     variables:
@@ -348,8 +355,6 @@ variables:
       - $PRODUCTION
       # Don't run when tagging a commit
       - $RELEASE
-
-# #
 
 .incubateur_stage:
   environment:
@@ -369,17 +374,6 @@ variables:
   stage: Build
   interruptible: true
   dependencies: []
-  # artifacts:
-  #   paths:
-  #     - /*.docker.tar.gz
-  #   expire_in: 1 week
-  # before_script:
-  # - |
-  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
-  #     docker load --input /$BUILD_NAME.docker.tar.gz
-  #   fi
-  # after_script:
-  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
 
 ################### CREATE NAMESPACE ##############
 
