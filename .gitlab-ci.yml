@@ -363,6 +363,16 @@ variables:
   stage: Build
   interruptible: true
   dependencies: []
+  artifacts:
+    paths:
+      - *.docker.tar.gz
+  before_script:
+    - |
+    if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
+      docker load --input $BUILD_NAME.docker.tar.gz
+    fi
+  after_script:
+    - docker save $DOCKER_CI_IMAGE | gzip > $BUILD_NAME.docker.tar.gz
 
 ################### CREATE NAMESPACE ##############
 
@@ -394,6 +404,7 @@ Build api image:
     - .base_build_stage
     - .build_stage
   variables:
+    BUILD_NAME: api
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
       -f ./packages/api/Dockerfile
@@ -416,6 +427,7 @@ Build api image:
         --shm-size 2G
         -f ./packages/app/Dockerfile"
   variables:
+    BUILD_NAME: app
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     MULTISTAGE_BUILD: "true"
@@ -443,6 +455,7 @@ Build hasura image:
     - .base_build_stage
     - .build_stage
   variables:
+    BUILD_NAME: hasura
     CONTEXT: packages/hasura
     IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
 
