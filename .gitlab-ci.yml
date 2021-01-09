@@ -101,11 +101,6 @@ stages:
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
-  cache:
-    key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
-    paths:
-      - app/node_modules/
-      - app/packages/$BUILD_NAME/node_modules/
   artifacts:
     expire_in: 1 month
     paths:
@@ -115,6 +110,7 @@ stages:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
     - export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared/${PROJECT}"
+    - echo $SHARED_PATH
     - >-
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
@@ -292,7 +288,7 @@ stages:
     variables:
       - $PRODUCTION
   script:
-    - NOTIF_MSG=$(./scripts/gitops/get-release-note)
+    - NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
     - |
       echo '{"text":"'${NOTIF_MSG}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
