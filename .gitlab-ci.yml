@@ -20,14 +20,14 @@ variables:
 
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
-#
+# STAGES
 
 stages:
   - "Build"
   - "Deploy"
   - "Notify Finished Deployment"
 
-#
+# Bases Definitions to extends from
 
 .base_deploy_chart_stage:
   extends: .base_docker_kubectl_image_stage
@@ -101,7 +101,19 @@ stages:
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
+  # artifacts:
+  #   paths:
+  #     - /*.docker.tar.gz
+  #   expire_in: 1 week
+  # before_script:
+  # - |
+  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
+  #     docker load --input /$BUILD_NAME.docker.tar.gz
+  #   fi
+  # after_script:
+  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
   variables:
+    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52029664
     SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
   cache:
     key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
@@ -123,14 +135,6 @@ stages:
         export TAG=$CI_COMMIT_REF_SLUG
         echo "Build ${TAG} branch"
       fi
-    #
-    # NOTE(douglasduteil): aggressive caching strategy.
-    # As we don't know which image is the closest to the one we are registering
-    # we pull all the images that can help.
-    # From the previous commit, to the current branch or the master branch, the
-    # first to be defined will be our cache :)
-    # NOTE(devthejo): aggressive caching strategy 2 implementation of multistage
-    # build strategy.
     - |
       [[ -n "${TRACE}" ]] && set -x
 
@@ -173,8 +177,8 @@ stages:
           $DOCKER_BUILD_ARGS \
           $CONTEXT
         docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
-        mkdir -p /app/node_modules
-        mkdir -p /app/packages/$BUILD_NAME/node_modules
+        mkdir -p ${SHARED_PATH}/app/node_modules
+        mkdir -p ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules
         docker run ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
           -v ${SHARED_PATH}/app/node_modules:/app/node_modules:rw \
           -v ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules:rw \
@@ -222,7 +226,6 @@ stages:
 
       wait
 
-#
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
   dependencies: []
@@ -265,9 +268,6 @@ stages:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success
 
-
-#
-
 .base_trivy_scan:
   stage: Deploy
   services:
@@ -288,8 +288,6 @@ stages:
   artifacts:
     reports:
       container_scanning: gl-container-scanning-report.json
-
-#
 
 .base_notify_mattermost:
   image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.1
@@ -315,7 +313,6 @@ stages:
       echo '{"username":"SocialGroovyBot","icon_url":"https://avatars2.githubusercontent.com/u/45039513","text":"'${NOTIF_MSG}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
-#
 
 .base_delete_useless_k8s_ns_stage:
   stage: Notify Finished Deployment
@@ -332,8 +329,6 @@ stages:
   only:
     - master
 
-#
-
 .base_delete_useless_managed_postgresql_stage:
   stage: Notify Finished Deployment
   dependencies: []
@@ -345,7 +340,6 @@ stages:
   only:
     - master
 
-
 .base_stage:
   except:
     variables:
@@ -355,8 +349,6 @@ stages:
       - $PRODUCTION
       # Don't run when tagging a commit
       - $RELEASE
-
-# #
 
 .incubateur_stage:
   environment:
@@ -376,17 +368,6 @@ stages:
   stage: Build
   interruptible: true
   dependencies: []
-  # artifacts:
-  #   paths:
-  #     - /*.docker.tar.gz
-  #   expire_in: 1 week
-  # before_script:
-  # - |
-  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
-  #     docker load --input /$BUILD_NAME.docker.tar.gz
-  #   fi
-  # after_script:
-  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
 
 ################### CREATE NAMESPACE ##############
 
