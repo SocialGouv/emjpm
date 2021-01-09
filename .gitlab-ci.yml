@@ -13,11 +13,12 @@ variables:
   IMAGE_INFRA_BASE_NAME: infra/images-docker
 
   # Globals
-  DOCKER_VERSION: "18"
-  PYTHON_VERSION: "3.6-alpine"
+  DOCKER_VERSION: "19"
 
   PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
+
+  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
 #
 
@@ -93,18 +94,22 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image: docker:19
+  image: docker:${DOCKER_VERSION}
   services:
-    - docker:19-dind
+    - docker:${DOCKER_VERSION}-dind
 
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
+  cache:
+    key: ${CI_BUILD_REF_NAME}/$BUILD_NAME
+    paths:
+      - node_modules/
   artifacts:
     expire_in: 1 week
     paths:
-      - node_modules
-      - packages/$BUILD_NAME/node_modules
+      - node_modules/
+      - packages/$BUILD_NAME/node_modules/
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     - >-
@@ -307,14 +312,11 @@ stages:
 
 #
 
-variables:
-  K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
-
 .base_delete_useless_k8s_ns_stage:
   stage: Notify Finished Deployment
   dependencies: []
   allow_failure: true
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:0.24.0
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/k8s-ns-killer:2.9.0
   environment: fabrique-dev
   script:
     - git remote set-url origin https://github.com/${CI_PROJECT_PATH}.git
