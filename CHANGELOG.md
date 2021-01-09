@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.24](https://github.com/SocialGouv/emjpm/compare/v25.84.23...v25.84.24) (2021-01-09)
+
+
+### Bug Fixes
+
+* **ci:** pipeline cache ([1d5c83a](https://github.com/SocialGouv/emjpm/commit/1d5c83a8fe3d662647ab63ffcbe5e71f772e1db7))
+
+
+
+
+
 ## [25.84.23](https://github.com/SocialGouv/emjpm/compare/v25.84.22...v25.84.23) (2021-01-09)
 
 
