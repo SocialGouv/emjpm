@@ -102,7 +102,7 @@ stages:
   stage: "Build"
   extends: .base_docker_image_stage
   cache:
-    key: ${CI_BUILD_REF_NAME}-${BUILD_NAME}
+    key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
       - node_modules/
   artifacts:
