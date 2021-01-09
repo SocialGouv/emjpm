@@ -278,8 +278,6 @@ stages:
 .base_notify_mattermost:
   image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.1
   dependencies: []
-  variables:
-    MATTERMOST_CHANNEL: ${MATTERMOST_CHANNEL:-"s/emjpm/notifs"}
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
@@ -297,7 +295,9 @@ stages:
       -----
       ${HOST}
       " | sed -z 's/\n/\\n/g')
-      curl -i -X POST --data-urlencode 'payload={"channel": "'${MATTERMOST_CHANNEL}'", "username":"SocialGroovyBot", "icon_url":"https://avatars2.githubusercontent.com/u/45039513", "text": "'$NOTIF_MSG'"}' ${MATTERMOST_WEBHOOK}
+    - |
+      echo '{"username":"SocialGroovyBot","icon_url":"https://avatars2.githubusercontent.com/u/45039513","text":"'${NOTIF_MSG}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 #
 
