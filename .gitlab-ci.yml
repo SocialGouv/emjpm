@@ -366,6 +366,7 @@ variables:
   artifacts:
     paths:
       - *.docker.tar.gz
+    expire_in: 1 week
   before_script:
     - |
     if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
