@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/api",
-  "version": "25.84.14",
+  "version": "25.84.15",
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@azure/storage-blob": "^12.2.1",
-    "@emjpm/biz": "^25.84.14",
+    "@emjpm/biz": "^25.84.15",
     "@sentry/node": "5.27.2",
     "@vercel/ncc": "^0.25.1",
     "bcryptjs": "^2.4.3",
