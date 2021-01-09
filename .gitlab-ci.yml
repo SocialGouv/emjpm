@@ -125,34 +125,34 @@ stages:
     - |
       [[ -n "${TRACE}" ]] && set -x
 
-      # function set_cache_image() {
-      #   if docker pull ${IMAGE_NAME}:$1; then
-      #     export CACHE_TAG=$1
-      #   fi
-      # }
-      #
-      # echo ""
-      # echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
-      # set_cache_image "${CI_COMMIT_BEFORE_SHA}"
-      #
-      # if [[ -z "${CACHE_TAG}" ]]; then
-      #   echo ""
-      #   echo "Checking current branch/tag (${TAG}) cache"
-      #   set_cache_image "${TAG}"
-      # fi
-      #
-      # if [[ -z "${CACHE_TAG}" ]]; then
-      #   echo ""
-      #   echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
-      #   set_cache_image "${CI_DEFAULT_BRANCH}"
-      # fi
-      #
-      # echo ""
-      # if [[ -n "${CACHE_TAG}" ]] ; then
-      #   echo "Using ${CACHE_TAG} tag as cache"
-      # else
-      #   echo "No cache ! Naked build :("
-      # fi
+      function set_cache_image() {
+        if docker pull ${IMAGE_NAME}:$1; then
+          export CACHE_TAG=$1
+        fi
+      }
+
+      echo ""
+      echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
+      set_cache_image "${CI_COMMIT_BEFORE_SHA}"
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking current branch/tag (${TAG}) cache"
+        set_cache_image "${TAG}"
+      fi
+
+      if [[ -z "${CACHE_TAG}" ]]; then
+        echo ""
+        echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
+        set_cache_image "${CI_DEFAULT_BRANCH}"
+      fi
+
+      echo ""
+      if [[ -n "${CACHE_TAG}" ]] ; then
+        echo "Using ${CACHE_TAG} tag as cache"
+      else
+        echo "No cache ! Naked build :("
+      fi
 
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
@@ -510,7 +510,7 @@ Init Managed Database:
     #
     - kubectl delete job init-azure-pg-job || true
     - cat ./.k8s/postgres/init/init-azure-pg-job.yml | envsubst | kubectl apply -f -
-    # - kubectl wait --for=condition=complete job/init-azure-pg-job  --timeout=300s
+    - kubectl wait --for=condition=complete job/init-azure-pg-job  --timeout=300s
 
 
 # DEPLOY
