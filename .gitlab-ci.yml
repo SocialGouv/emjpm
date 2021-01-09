@@ -101,22 +101,6 @@ stages:
 .base_build_stage:
   stage: "Build"
   extends: .base_docker_image_stage
-  # artifacts:
-  #   paths:
-  #     - /*.docker.tar.gz
-  #   expire_in: 1 week
-  # before_script:
-  # - |
-  #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
-  #     docker load --input /$BUILD_NAME.docker.tar.gz
-  #   fi
-  # after_script:
-  #   - docker save $DOCKER_CI_IMAGE | gzip > /$BUILD_NAME.docker.tar.gz
-  variables:
-    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52029664
-    # SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
-    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
-    SHARED_PATH: /builds/SocialGouv/shared/${PROJECT}
   cache:
     key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
@@ -129,6 +113,8 @@ stages:
       - app/packages/$BUILD_NAME/node_modules/
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
+    - export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared/${PROJECT}"
     - >-
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
@@ -239,10 +225,8 @@ stages:
 .base_notify_pending_stage:
   <<: *notify_stage
   script:
-    #
     - create-deployment
     - cat /tmp/deploy_payload.json
-    #
     - extract-deploy-id
     - echo "GitHub deployment id '$(cat DEPLOY_ID)'"
   artifacts:
@@ -252,7 +236,6 @@ stages:
 
 .resolve_deploy_environment: &resolve_deploy_environment |
   set -x
-
   if [[ -n "${PRODUCTION+x}" ]]; then
     export ENVIRONMENT="production"
   else
@@ -296,7 +279,7 @@ stages:
       container_scanning: gl-container-scanning-report.json
 
 .base_notify_mattermost:
-  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.0.1
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.1.0
   dependencies: []
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
@@ -309,14 +292,9 @@ stages:
     refs:
       - tags
   script:
+    - NOTIF_MSG=$(./scripts/gitops/get-release-note)
     - |
-      NOTIF_MSG=$(echo "
-      `./scripts/gitops/get-last-version-changes`
-      -----
-      ${HOST}
-      " | sed -z 's/\n/\\n/g')
-    - |
-      echo '{"username":"SocialGroovyBot","icon_url":"https://avatars2.githubusercontent.com/u/45039513","text":"'${NOTIF_MSG}'"}' \
+      echo '{"text":"'${NOTIF_MSG}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 
