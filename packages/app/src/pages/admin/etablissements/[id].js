@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-export const EditEtablissementPage = () => {
+export function EditEtablissementPage() {
   const { id } = useParams();
 
   return (
@@ -20,6 +20,6 @@ export const EditEtablissementPage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default EditEtablissementPage;

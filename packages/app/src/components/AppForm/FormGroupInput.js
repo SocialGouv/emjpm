@@ -6,7 +6,7 @@ import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
 import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
 import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
 
-export const FormGroupInput = ({
+export function FormGroupInput({
   id,
   value,
   placeholder,
@@ -22,7 +22,7 @@ export const FormGroupInput = ({
   validationSchema,
   onChange,
   size,
-}) => {
+}) {
   const { handleChange, handleBlur, values } = formik;
 
   if (!type || readOnly) {
@@ -70,4 +70,4 @@ export const FormGroupInput = ({
       />
     </Field>
   );
-};
+}

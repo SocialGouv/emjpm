@@ -5,7 +5,7 @@ import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/ui";
 
-export const AddEtablissementPage = () => {
+export function AddEtablissementPage() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
@@ -18,6 +18,6 @@ export const AddEtablissementPage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default AddEtablissementPage;

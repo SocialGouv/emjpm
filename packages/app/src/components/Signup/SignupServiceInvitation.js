@@ -9,11 +9,17 @@ import { SERVICE_MEMBER_INVITATION } from "./queries";
 import signup from "./signup";
 import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";
 
-export const SignupServiceInvitation = (props) => {
+export function SignupServiceInvitation(props) {
   const history = useHistory();
   const { token } = props;
   const client = useApolloClient();
+
   const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, {
+    context: {
+      headers: {
+        "X-Hasura-Invitation-Token": token,
+      },
+    },
     variables: { token },
   });
 
@@ -22,7 +28,8 @@ export const SignupServiceInvitation = (props) => {
   }
 
   if (error || !data.service_member_invitations.length) {
-    return history.push("/login");
+    // history.push("/login");
+    return null;
   }
 
   const [invitation] = data.service_member_invitations;
@@ -75,4 +82,4 @@ export const SignupServiceInvitation = (props) => {
       />
     </Fragment>
   );
-};
+}
