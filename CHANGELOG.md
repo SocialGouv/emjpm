@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.84.4](https://github.com/SocialGouv/emjpm/compare/v25.84.3...v25.84.4) (2021-01-09)
+
+
+### Bug Fixes
+
+* **dev:prod:** port ([46baac3](https://github.com/SocialGouv/emjpm/commit/46baac38f68369af92d62a2cf89455f8a4a0b396))
+* **dev:prod:** script ([eb452de](https://github.com/SocialGouv/emjpm/commit/eb452de80e1480286bfee7029fcf77d8e9b6b77c))
+* **prod-config:** env ([98da509](https://github.com/SocialGouv/emjpm/commit/98da509660a28205020419a7941a429bcc43a827))
+
+
+
+
+
 ## [25.84.3](https://github.com/SocialGouv/emjpm/compare/v25.84.2...v25.84.3) (2021-01-09)
 
 
