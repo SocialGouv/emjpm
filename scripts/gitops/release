@@ -14,7 +14,9 @@ fi
 
 export CI=true
 
-yarn test
+if [ -z "$SKIP_TEST" ]; then
+  yarn test
+fi
 
 lerna version --force-publish --yes
 
