@@ -154,11 +154,6 @@ stages:
         echo "No cache ! Naked build :("
       fi
 
-      if [[ -n "${CACHE_TAG}" ]] && [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker pull ${IMAGE_NAME}.builder:${CACHE_TAG} &
-        wait
-      fi
-
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
