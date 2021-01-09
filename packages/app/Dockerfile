@@ -17,6 +17,14 @@ RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /d
 
 # BUILDER
 FROM dependencies as builder
+ARG REACT_APP_SENTRY_PUBLIC_DSN=https://d9ba9b75ff784cba87abd847b6162b02@sentry.fabrique.social.gouv.fr/3
+ARG REACT_APP_GRAPHQL_SERVER_URI=//hasura-emjpm.fabrique.social.gouv.fr/v1/graphql
+ARG REACT_APP_API_URL=//api-emjpm.fabrique.social.gouv.fr
+
+ENV REACT_APP_SENTRY_PUBLIC_DSN=$REACT_APP_SENTRY_PUBLIC_DSN
+ENV REACT_APP_GRAPHQL_SERVER_URI=$REACT_APP_GRAPHQL_SERVER_URI
+ENV REACT_APP_API_URL=$REACT_APP_API_URL
+
 COPY packages/app/ /app/packages/app/
 COPY packages/biz/ /app/packages/biz/
 
