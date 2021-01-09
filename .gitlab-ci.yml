@@ -153,6 +153,7 @@ stages:
 
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
+        export DOCKER_BUILDKIT=1
         docker build \
           --target pre-dependencies \
           --cache-from ${IMAGE_NAME}.pre-dependencies:${CACHE_TAG} \
