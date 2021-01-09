@@ -516,7 +516,7 @@ Init Managed Database:
     #
     - kubectl delete job init-azure-pg-job || true
     - cat ./.k8s/postgres/init/init-azure-pg-job.yml | envsubst | kubectl apply -f -
-    - kubectl wait --for=condition=complete job/init-azure-pg-job  --timeout=300s
+    # - kubectl wait --for=condition=complete job/init-azure-pg-job  --timeout=300s
 
 
 # DEPLOY
