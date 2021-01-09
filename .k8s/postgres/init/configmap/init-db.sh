@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
 set -e
 
 POSTGRES_EMJPM_USER=emjpm
