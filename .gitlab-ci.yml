@@ -104,7 +104,8 @@ stages:
   cache:
     key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
-      - node_modules/
+      - ./node_modules/
+      - ./packages/$BUILD_NAME/node_modules/
   artifacts:
     expire_in: 1 month
     paths:
