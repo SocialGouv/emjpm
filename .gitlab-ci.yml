@@ -105,9 +105,7 @@ stages:
   #   paths:
   #     - /*.docker.tar.gz
   #   expire_in: 1 week
-  before_script:
-    - 'export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared"'
-    - 'echo $SHARED_PATH'
+  # before_script:
   # - |
   #   if [ -f "$BUILD_NAME.docker.tar.gz" ]; then
   #     docker load --input /$BUILD_NAME.docker.tar.gz
@@ -117,6 +115,8 @@ stages:
   variables:
     # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52029664
     # SHARED_PATH: /builds/shared/$CI_PROJECT_PATH
+    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
+    SHARED_PATH: /builds/SocialGouv/shared
   cache:
     key: ${CI_COMMIT_REF_NAME}-${BUILD_NAME}
     paths:
