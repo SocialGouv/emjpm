@@ -279,7 +279,7 @@ stages:
       container_scanning: gl-container-scanning-report.json
 
 .base_notify_mattermost:
-  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.1.0
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.2.0
   dependencies: []
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
@@ -289,8 +289,8 @@ stages:
   when: on_success
   stage: Notify Finished Deployment
   only:
-    refs:
-      - tags
+    variables:
+      - $PRODUCTION
   script:
     - NOTIF_MSG=$(./scripts/gitops/get-release-note)
     - |
