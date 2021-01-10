@@ -97,7 +97,6 @@ stages:
   image: docker:${DOCKER_VERSION}
   services:
     - name: docker:${DOCKER_VERSION}-dind
-      command: ["--experimental"]
 
 .base_build_stage:
   stage: "Build"
@@ -176,7 +175,7 @@ stages:
         docker rm ${CONTAINER_ID}
         cp -R ${SHARED_PATH}/app/ app/
 
-        DOCKER_BUILDKIT=1 docker build \
+        docker build \
           --target builder \
           --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
