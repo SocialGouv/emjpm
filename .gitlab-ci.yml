@@ -154,7 +154,6 @@ stages:
 
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        export DOCKER_BUILDKIT=1
         docker build \
           --target pre-dependencies \
           --cache-from ${IMAGE_NAME}.pre-dependencies:${CACHE_TAG} \
@@ -177,7 +176,7 @@ stages:
         docker rm ${CONTAINER_ID}
         cp -R ${SHARED_PATH}/app/ app/
 
-        docker build \
+        DOCKER_BUILDKIT=1 docker build \
           --target builder \
           --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
