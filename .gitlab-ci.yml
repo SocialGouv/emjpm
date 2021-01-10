@@ -122,10 +122,8 @@ stages:
   artifacts:
     expire_in: 1 month
     paths:
-      - path: node_modules
-        downloadable: false
-      - path: "packages/*/node_modules"
-        downloadable: false
+      - node_modules
+      - "packages/*/node_modules"
   script:
     - yarn --frozen-lockfile --production=false --ignore-scripts
 
