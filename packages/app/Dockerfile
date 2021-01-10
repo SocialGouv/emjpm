@@ -29,7 +29,7 @@ ONBUILD COPY packages/app/node_modules packages/app/node_modules/
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
 ENV CI=true
-RUN yarn --frozen-lockfile --no-production --cache-folder /dev/shm/yarn_cache
+RUN yarn --frozen-lockfile --no-production --no-scripts --cache-folder /dev/shm/yarn_cache
 
 
 # BUILDER
