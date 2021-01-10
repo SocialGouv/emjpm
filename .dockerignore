@@ -1,6 +1,5 @@
 .*
 *.md
-**/node_modules*
 codecov.yml
 commitlint.config.js
 docker-compose.build.yaml

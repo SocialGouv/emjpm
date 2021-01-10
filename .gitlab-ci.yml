@@ -109,8 +109,7 @@ stages:
   script:
     - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
     # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
-    - export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared/${PROJECT}"
-    - echo $SHARED_PATH
+    # - export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared/${PROJECT}"
     - >-
       if [[ -n "${CI_COMMIT_TAG}" ]]; then
         export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
@@ -154,26 +153,17 @@ stages:
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
         docker build \
-          --target pre-dependencies \
-          --cache-from ${IMAGE_NAME}.pre-dependencies:${CACHE_TAG} \
-          -t ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.pre-dependencies:${TAG} \
+          --target dependencies \
+          --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
+          -t ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
           $DOCKER_BUILD_ARGS \
           $CONTEXT
-        docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
-        mkdir -p ${SHARED_PATH}/app/node_modules
-        mkdir -p ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules
-        mkdir -p app/node_modules
-        mkdir -p app/packages/$BUILD_NAME/node_modules
-        cp -R app/ ${SHARED_PATH}/app/
-        docker run --name "deps-${BUILD_NAME}" ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -v ${SHARED_PATH}/app/node_modules:/app/node_modules:rw \
-          -v ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules:rw \
-          yarn --frozen-lockfile --ignore-scripts --production=false
-        CONTAINER_ID=$(docker ps -aqf "name=deps-${BUILD_NAME}")
-        docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
+
+        docker run --name "dependencies-${BUILD_NAME}" ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
+        CONTAINER_ID=$(docker ps -aqf "name=dependencies-${BUILD_NAME}")
+        docker cp ${CONTAINER_ID}:/app/node_modules app/nodes_modules
+        docker cp ${CONTAINER_ID}:/app/packages/$BUILD_NAME/node_modules app/$BUILD_NAME/nodes_modules
         docker rm ${CONTAINER_ID}
-        cp -R ${SHARED_PATH}/app/ app/
 
         docker build \
           --target builder \

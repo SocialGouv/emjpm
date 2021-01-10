@@ -14,6 +14,13 @@ COPY packages/app/package.json ./packages/app/package.json
 COPY packages/biz/package.json ./packages/biz/package.json
 
 FROM pre-dependencies as dependencies
+ARG BUILD_CLEAN
+ENV BUILD_CLEAN=$BUILD_CLEAN
+COPY node_modules/ node_modules/
+COPY packages/app/node_modules/ packages/app/node_modules/
+RUN [ -n "${BUILD_CLEAN}" ] && \
+  rm -rf node_modules/ && \
+  rm -rf packages/app/node_modules/
 RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
 
 # BUILDER

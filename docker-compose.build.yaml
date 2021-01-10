@@ -64,6 +64,7 @@ services:
       args:
         REACT_APP_GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
         REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
+        BUILD_CLEAN: 1
     shm_size: '2gb'
     volumes:
       - ./.dev-secrets:/secrets:ro
@@ -80,6 +81,8 @@ services:
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
+      args:
+        BUILD_CLEAN: 1
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
