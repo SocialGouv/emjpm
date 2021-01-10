@@ -54,7 +54,6 @@ function AppApollo() {
   const apolloClient = useInitApolloClient({}, token);
 
   const currentUser = token ? jwtDecode(token) : null;
-  // const data = { currentUser: formatUserFromToken(currentUser) };
   const user = formatUserFromToken(currentUser);
 
   return (

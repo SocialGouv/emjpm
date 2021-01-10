@@ -1962,6 +1962,7 @@ __metadata:
     "@apollo/client": ^3.3.6
     "@emjpm/biz": ^25.84.24
     "@emotion/babel-plugin": ^11.1.2
+    "@emotion/core": ^11.0.0
     "@emotion/react": ^11.1.3
     "@emotion/styled": ^11.0.0
     "@emotion/styled-base": ^11.0.0
@@ -1980,12 +1981,14 @@ __metadata:
     "@styled-icons/fa-solid": ^10.22.0
     "@styled-icons/material": ^10.18.0
     "@styled-icons/remix-line": ^10.18.0
-    "@testing-library/jest-dom": ^5.11.8
+    "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
     "@testing-library/user-event": ^12.1.10
     apollo-boost: ^0.4.9
     apollo-client: ^2.6.10
     apollo-link-context: ^1.0.20
+    apollo-link-http: ^1.3.1
+    apollo-utilities: ^1.3.4
     classnames: ^2.2.6
     compare-versions: ^3.6.0
     core-js: ^3.6.5
@@ -2006,8 +2009,10 @@ __metadata:
     formik: ^2.2.1
     fuse.js: ^6.4.3
     graphql: ^14.7.0
+    history: ^4.9.0
     hygen: ^6.0.4
     isomorphic-unfetch: ^3.1.0
+    jest: ^24.9.0
     js-cookie: ^2.2.1
     json-loader: ^0.5.7
     jwt-decode: ^3.0.0
@@ -2128,6 +2133,13 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: 78fec4a70569be2291180eafe3a882303a05285d68fec4d6b6974710f47fa1cc3b105468607e544e4a92bf7a9f94d9e5d2bfd735523a38b90f2d5dd4ce27e308
+  languageName: node
+  linkType: hard
+
+"@emotion/core@npm:^11.0.0":
+  version: 11.0.0
+  resolution: "@emotion/core@npm:11.0.0"
+  checksum: 814026f08ca46fc19f1343c40f733bdfc4ffcfb7dd95f75b89353c987950db90ce181550e3d404784da764af523f3807c2e892c8859c24229789a91225906d34
   languageName: node
   linkType: hard
 
@@ -4763,7 +4775,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.11.8":
+"@testing-library/jest-dom@npm:^5.11.4":
   version: 5.11.8
   resolution: "@testing-library/jest-dom@npm:5.11.8"
   dependencies:
@@ -21394,13 +21406,13 @@ fsevents@^1.2.7:
   linkType: hard
 
 "regjsparser@npm:^0.6.4":
-  version: 0.6.4
-  resolution: "regjsparser@npm:0.6.4"
+  version: 0.6.6
+  resolution: "regjsparser@npm:0.6.6"
   dependencies:
     jsesc: ~0.5.0
   bin:
     regjsparser: bin/parser
-  checksum: cf7838462ebe0256ef25618eab5981dc080501efde6458906a47ee1c017c93f7e27723d4a56f658014d5c8381a60d189e19f05198ef343e106343642471b1594
+  checksum: 3d04357a7a29e3d3f04845aca75822cc5b050acd55f23fa10742a4533962198d051ed451e4e1dcdb01037d6806feec8c340438750f4d5135debb8884769a3a50
   languageName: node
   linkType: hard
 
