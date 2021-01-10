@@ -162,7 +162,7 @@ stages:
       - node_modules
       - "packages/*/node_modules"
   script:
-    - yarn --frozen-lockfile --no-production  --no-scripts --cache-folder /dev/shm/yarn_cache
+    - yarn --frozen-lockfile --no-production  --no-scripts
 
 
 .base_build_stage:
