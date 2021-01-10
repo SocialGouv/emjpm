@@ -82,7 +82,8 @@
     "lint": "eslint src",
     "lint:fix": "yarn lint --fix --cache",
     "lint:pre-commit": "yarn lint:fix",
-    "postinstall": "link-module-alias",
+    "postinstall": "[ -n \"${CI:-}\" ] || yarn postinstall:run",
+    "postinstall:run": "link-module-alias",
     "prettier": "prettier --check '**/*.js'",
     "prettier:fix": "prettier --write '**/*.js'"
   },

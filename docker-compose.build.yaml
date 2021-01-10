@@ -1,13 +1,4 @@
 version: "3.8"
-
-#
-# In development we only start postgres server
-#
-# Listening ports :
-#  - 5000 : hasura
-#  - 5434 : postgres
-#
-
 services:
   db:
     image: emjpm_postgres_prod
@@ -60,12 +51,10 @@ services:
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
-      shm_size: '2gb'
       args:
         REACT_APP_GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
         REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
-        BUILD_CLEAN: 1
-    shm_size: '2gb'
+        BUILD_ENV: ${BUILD_ENV:-local}
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
@@ -75,14 +64,14 @@ services:
       PORT: 3000
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
-      GRAPHQL_SERVER_URI: $GRAPHQL_SERVER_URI
+      GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
   api:
     image: emjpm_api_prod
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
       args:
-        BUILD_CLEAN: 1
+        BUILD_ENV: ${BUILD_ENV:-local}
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:

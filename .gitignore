@@ -11,3 +11,10 @@ dump
 .k8s/manifests/chart-generated.yaml
 .gh-token
 .npm
+
+.yarn/*
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+yarn dev:server:up
+yarn hasura:console &
+yarn dev:app

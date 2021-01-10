@@ -1,13 +1,4 @@
 version: "3.8"
-
-#
-# In development we only start postgres server
-#
-# Listening ports :
-#  - 5000 : hasura
-#  - 5434 : postgres
-#
-
 services:
   db:
     image: emjpm_postgres

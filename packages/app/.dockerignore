@@ -1,6 +1,5 @@
-node_modules
 Dockerfile
 Dockerfile.dev
 .eslintcache
 
-.next
+/build
