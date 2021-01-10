@@ -146,7 +146,7 @@ stages:
 
       /kaniko/executor \
         --cache=true \
-        --context $CI_PROJECT_DIR \
+        --context ${CONTEXT} \
         --dockerfile ${KANIKO_DOCKERFILE} \
         ${DOCKER_BUILD_ARGS} \
         --destination $IMAGE_NAME:$TAG
@@ -336,7 +336,7 @@ Build api image:
     - Install Node Dependencies
   variables:
     BUILD_NAME: api
-    CONTEXT: .
+    CONTEXT: $CI_PROJECT_DIR
     KANIKO_DOCKERFILE: $CI_PROJECT_DIR/packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
@@ -358,7 +358,7 @@ Build api image:
         --build-arg REACT_APP_API_URL=//${API_HOST}"
   variables:
     BUILD_NAME: app
-    CONTEXT: .
+    CONTEXT: $CI_PROJECT_DIR
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
     KANIKO_DOCKERFILE: $CI_PROJECT_DIR/packages/app/Dockerfile
 
