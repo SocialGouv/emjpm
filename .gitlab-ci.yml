@@ -20,9 +20,12 @@ variables:
 
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
+  NODE_IMAGE: node:15-alpine
+
 # STAGES
 
 stages:
+  - "Prepare"
   - "Build"
   - "Deploy"
   - "Notify Finished Deployment"
@@ -44,7 +47,7 @@ stages:
         ${HELM_RENDER_ARGS}"
     # Set own certificate when deploying in prod environment
     - |-
-      if [[ -n "${PRODUCTION+x}" ]]; then
+      if [[ -n ${PRODUCTION+x} ]]; then
         HELM_RENDER_ARGS=" \
           --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
           --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
@@ -98,118 +101,97 @@ stages:
   services:
     - name: docker:${DOCKER_VERSION}-dind
 
-.base_build_stage:
-  stage: "Build"
-  extends: .base_docker_image_stage
+.before_script_build: &before_script_build |
+  echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+
+  if [[ -n "${CI_COMMIT_TAG}" ]]; then
+    export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
+    echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
+  else
+    export TAG=$CI_COMMIT_REF_SLUG
+    echo "Build ${TAG} branch"
+  fi
+
+  [[ -n "${TRACE}" ]] && set -x
+
+  function set_cache_image() {
+    if docker pull ${IMAGE_NAME}:$1; then
+      export CACHE_TAG=$1
+    fi
+  }
+
+  echo ""
+  echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
+  set_cache_image "${CI_COMMIT_BEFORE_SHA}"
+
+  if [[ -z "${CACHE_TAG}" ]]; then
+    echo ""
+    echo "Checking current branch/tag (${TAG}) cache"
+    set_cache_image "${TAG}"
+  fi
+
+  if [[ -z "${CACHE_TAG}" ]]; then
+    echo ""
+    echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
+    set_cache_image "${CI_DEFAULT_BRANCH}"
+  fi
+
+  echo ""
+  if [[ -n "${CACHE_TAG}" ]] ; then
+    echo "Using ${CACHE_TAG} tag as cache"
+  else
+    echo "No cache ! Naked build :("
+  fi
+
+.prepare_stage:
+  extends: .base_stage
+  stage: Prepare
+  dependencies: []
+
+.base_yarn:
+  extends: .prepare_stage
+  image: ${NODE_IMAGE}
+  interruptible: true
+  cache:
+    paths:
+      - node_modules
+      - "packages/*/node_modules"
   artifacts:
     expire_in: 1 month
     paths:
-      - app/node_modules/
-      - app/packages/$BUILD_NAME/node_modules/
+      - node_modules
+      - "packages/*/node_modules"
   script:
-    - echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-    # see https://gitlab.com/gitlab-org/gitlab-foss/-/issues/41227#note_52092575
-    - export SHARED_PATH="$(dirname ${CI_PROJECT_DIR})/shared/${PROJECT}"
-    - echo $SHARED_PATH
-    - >-
-      if [[ -n "${CI_COMMIT_TAG}" ]]; then
-        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-        echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
-      else
-        export TAG=$CI_COMMIT_REF_SLUG
-        echo "Build ${TAG} branch"
-      fi
+    - yarn --frozen-lockfile --production=false --ignore-scripts
+
+
+.base_build_stage:
+  stage: "Build"
+  extends: .base_docker_image_stage
+  before_script:
+    - *before_script_build
+  script:
     - |
-      [[ -n "${TRACE}" ]] && set -x
+      docker build \
+        --build-arg BUILD_ENV=gitlab_ci \
+        --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
+        -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
+        -t ${IMAGE_NAME}:${TAG} \
+        $DOCKER_BUILD_ARGS \
+        $CONTEXT
 
-      function set_cache_image() {
-        if docker pull ${IMAGE_NAME}:$1; then
-          export CACHE_TAG=$1
-        fi
-      }
-
-      echo ""
-      echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
-      set_cache_image "${CI_COMMIT_BEFORE_SHA}"
-
-      if [[ -z "${CACHE_TAG}" ]]; then
-        echo ""
-        echo "Checking current branch/tag (${TAG}) cache"
-        set_cache_image "${TAG}"
-      fi
-
-      if [[ -z "${CACHE_TAG}" ]]; then
-        echo ""
-        echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
-        set_cache_image "${CI_DEFAULT_BRANCH}"
-      fi
-
-      echo ""
-      if [[ -n "${CACHE_TAG}" ]] ; then
-        echo "Using ${CACHE_TAG} tag as cache"
-      else
-        echo "No cache ! Naked build :("
-      fi
-
-    - |
-      if [[ -n "${MULTISTAGE_BUILD}" ]]; then
-        docker build \
-          --target pre-dependencies \
-          --cache-from ${IMAGE_NAME}.pre-dependencies:${CACHE_TAG} \
-          -t ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.pre-dependencies:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} &
-        mkdir -p ${SHARED_PATH}/app/node_modules
-        mkdir -p ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules
-        mkdir -p app/node_modules
-        mkdir -p app/packages/$BUILD_NAME/node_modules
-        cp -R app/ ${SHARED_PATH}/app/
-        docker run --name "deps-${BUILD_NAME}" ${IMAGE_NAME}.pre-dependencies:${CI_COMMIT_SHA} \
-          -v ${SHARED_PATH}/app/node_modules:/app/node_modules:rw \
-          -v ${SHARED_PATH}/app/packages/$BUILD_NAME/node_modules:/app/packages/$BUILD_NAME/node_modules:rw \
-          yarn --frozen-lockfile --ignore-scripts --production=false
-        CONTAINER_ID=$(docker ps -aqf "name=deps-${BUILD_NAME}")
-        docker commit ${CONTAINER_ID} ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA}
-        docker rm ${CONTAINER_ID}
-        cp -R ${SHARED_PATH}/app/ app/
-
-        docker build \
-          --target builder \
-          --cache-from ${IMAGE_NAME}.dependencies:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}.builder:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} &
-
-        docker build \
-          --target server \
-          --cache-from ${IMAGE_NAME}.builder:${CACHE_TAG} \
-          --cache-from ${IMAGE_NAME}.builder:${CI_COMMIT_SHA} \
-          --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
-          -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
-      else
-        docker build \
-          --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
-          -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
-          -t ${IMAGE_NAME}:${TAG} \
-          $DOCKER_BUILD_ARGS \
-          $CONTEXT
-        docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
-      fi
-
-      wait
-
-      docker push ${IMAGE_NAME}.builder:${TAG} &
+      docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
       docker push ${IMAGE_NAME}:${TAG} &
-
       wait
+
+.base_build_stage_node:
+  extends: .base_build_stage
+  cache:
+    paths:
+      - node_modules
+      - "packages/*/node_modules"
+  before_script:
+    - *before_script_build
 
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
@@ -229,7 +211,7 @@ stages:
 
 .resolve_deploy_environment: &resolve_deploy_environment |
   set -x
-  if [[ -n "${PRODUCTION+x}" ]]; then
+  if [[ -n ${PRODUCTION+x} ]]; then
     export ENVIRONMENT="production"
   else
     export ENVIRONMENT=${ENVIRONMENT:-"staging"}
@@ -369,40 +351,50 @@ Create namespace:
     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
 
+################### Prepare ##################
+Install Node Dependencies:
+  extends:
+    - .base_yarn
+
+
+################### BUILD ##################
+
 ################### Build API ##################
 
 Build api image:
   extends:
-    - .base_build_stage
+    - .base_build_stage_node
     - .build_stage
+  dependencies:
+    - Install Node Dependencies
   variables:
     BUILD_NAME: api
     CONTEXT: .
     DOCKER_BUILD_ARGS: >-
       -f ./packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
-    MULTISTAGE_BUILD: "true"
 
 ################### Build APP ##################
 
 .build_app:
   extends:
-    - .base_build_stage
+    - .base_build_stage_node
     - .build_stage
+  dependencies:
+    - Install Node Dependencies
   before_script:
+    - *before_script_build
     - source ./.gitlab-ci/env.sh
     - >-
       export DOCKER_BUILD_ARGS="
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
         --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
         --build-arg REACT_APP_API_URL=//${API_HOST}
-        --shm-size 2G
         -f ./packages/app/Dockerfile"
   variables:
     BUILD_NAME: app
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
-    MULTISTAGE_BUILD: "true"
 
 Build app image (dev):
   extends:
@@ -587,7 +579,7 @@ Deploy app (prod):
     - kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH}
       --from-file=./.k8s/postgres/backup/configmap
     #
-    - if [ -n "${PRODUCTION+x}" ]; then
+    - if [ -n ${PRODUCTION+x} ]; then
       kubectl delete cronjob ${K8S_PROJECT}-backup-${BRANCH_HASH} || true;
       cat ./.k8s/postgres/backup/cronjob.yml | envsubst | kubectl apply -f -;
       fi
@@ -718,7 +710,7 @@ Delete useless k8s namespaces:
 Release:
   stage: Notify Finished Deployment
   dependencies: []
-  image: node:15-alpine
+  image: ${NODE_IMAGE}
   variables:
     LERNA_ARGS: --force-publish --yes
     #
@@ -747,7 +739,7 @@ Release:
     # Use local yarn cache
     - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
     # Should only install workspace dependencies
-    - yarn --frozen-lockfile
+    - yarn
 
     # HACK(douglasduteil): remove all packages dependencies
     # Restore the package files before bumping versions.
