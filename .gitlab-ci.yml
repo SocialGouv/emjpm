@@ -162,7 +162,7 @@ stages:
       - node_modules
       - "packages/*/node_modules"
   script:
-    - yarn --frozen-lockfile --no-production  --no-scripts
+    - yarn --frozen-lockfile --no-production --ignore-scripts
 
 
 .base_build_stage:
