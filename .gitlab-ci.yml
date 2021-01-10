@@ -154,16 +154,13 @@ stages:
   interruptible: true
   cache:
     paths:
-      #- node_modules
-      #- "packages/*/node_modules"
-      # - ".pnp.*"
-      - .pnp.js
-      - .yarn
+      - node_modules
+      - "packages/*/node_modules"
   artifacts:
     expire_in: 1 month
     paths:
-      - .pnp.js
-      - .yarn
+      - node_modules
+      - "packages/*/node_modules"
   script:
     - yarn
 
@@ -191,8 +188,8 @@ stages:
   extends: .base_build_stage
   cache:
     paths:
-      - .pnp.js
-      - .yarn
+      - node_modules
+      - "packages/*/node_modules"
   before_script:
     - *before_script_build
 

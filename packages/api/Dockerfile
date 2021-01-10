@@ -21,16 +21,11 @@ RUN lerna link
 # DEPENDENCIES ENVIRONMENTS
 FROM pre-dependencies as dependencies_local
 
-## using node_modules method (local dev compliant)
-FROM pre-dependencies as dependencies_gitlab_ci_node_modules
+FROM pre-dependencies as dependencies_gitlab_ci
 ONBUILD COPY node_modules node_modules/
 ONBUILD COPY packages/api/node_modules packages/api/node_modules/
+ONBUILD COPY packages/biz/node_modules packages/biz/node_modules/
 
-## using yarn 2 PNP method (fast and furious)
-FROM pre-dependencies as dependencies_gitlab_ci
-ONBUILD COPY .yarnrc.ci.yml .yarnrc.yml
-ONBUILD COPY .yarn .yarn/
-ONBUILD COPY .pnp.* ./
 
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies

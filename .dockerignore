@@ -21,11 +21,11 @@ packages/**/Dockerfile.dev
 .gitlab-ci.yml
 
 .yarn/*
-!.yarn/cache
 !.yarn/releases
 !.yarn/plugins
 !.yarn/sdks
 !.yarn/versions
+.pnp.*
 
 packages/api/dist
 packages/app/build
