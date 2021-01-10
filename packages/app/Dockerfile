@@ -14,7 +14,6 @@ WORKDIR /app
 RUN npm i -g lerna
 
 COPY package.json lerna.json .yarnrc.yml yarn.lock /app/
-COPY .yarn/ /app/.yarn/
 COPY packages/app/package.json /app/packages/app/package.json
 COPY packages/biz/package.json /app/packages/biz/package.json
 RUN lerna link
