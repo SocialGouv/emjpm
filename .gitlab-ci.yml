@@ -97,51 +97,13 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image: docker:${DOCKER_VERSION}
-  services:
-    - name: docker:${DOCKER_VERSION}-dind
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
 
 .before_script_build: &before_script_build |
-  echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-
-  if [[ -n "${CI_COMMIT_TAG}" ]]; then
-    export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-    echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
-  else
-    export TAG=$CI_COMMIT_REF_SLUG
-    echo "Build ${TAG} branch"
-  fi
-
-  [[ -n "${TRACE}" ]] && set -x
-
-  function set_cache_image() {
-    if docker pull ${IMAGE_NAME}:$1; then
-      export CACHE_TAG=$1
-    fi
-  }
-
-  echo ""
-  echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
-  set_cache_image "${CI_COMMIT_BEFORE_SHA}"
-
-  if [[ -z "${CACHE_TAG}" ]]; then
-    echo ""
-    echo "Checking current branch/tag (${TAG}) cache"
-    set_cache_image "${TAG}"
-  fi
-
-  if [[ -z "${CACHE_TAG}" ]]; then
-    echo ""
-    echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
-    set_cache_image "${CI_DEFAULT_BRANCH}"
-  fi
-
-  echo ""
-  if [[ -n "${CACHE_TAG}" ]] ; then
-    echo "Using ${CACHE_TAG} tag as cache"
-  else
-    echo "No cache ! Naked build :("
-  fi
+  mkdir -p /kaniko/.docker
+  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
 
 .prepare_stage:
   extends: .base_stage
@@ -170,19 +132,24 @@ stages:
   extends: .base_docker_image_stage
   before_script:
     - *before_script_build
+  variables:
+    KANIKO_DOCKERFILE: $CI_PROJECT_DIR/Dockerfile
   script:
     - |
-      docker build \
-        --build-arg BUILD_ENV=gitlab_ci \
-        --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
-        -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
-        -t ${IMAGE_NAME}:${TAG} \
-        $DOCKER_BUILD_ARGS \
-        $CONTEXT
+      if [[ -n "${CI_COMMIT_TAG}" ]]; then
+        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
+        echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
+      else
+        export TAG=$CI_COMMIT_REF_SLUG
+        echo "Build ${TAG} branch"
+      fi
 
-      docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
-      docker push ${IMAGE_NAME}:${TAG} &
-      wait
+      /kaniko/executor \
+        --cache=true \
+        --context $CI_PROJECT_DIR \
+        --dockerfile ${KANIKO_DOCKERFILE} \
+        ${DOCKER_BUILD_ARGS} \
+        --destination $IMAGE_NAME:$TAG
 
 .base_build_stage_node:
   extends: .base_build_stage
@@ -370,8 +337,7 @@ Build api image:
   variables:
     BUILD_NAME: api
     CONTEXT: .
-    DOCKER_BUILD_ARGS: >-
-      -f ./packages/api/Dockerfile
+    KANIKO_DOCKERFILE: $CI_PROJECT_DIR/packages/api/Dockerfile
     IMAGE_NAME: $CI_REGISTRY_IMAGE/api
 
 ################### Build APP ##################
@@ -389,12 +355,12 @@ Build api image:
       export DOCKER_BUILD_ARGS="
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
         --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
-        --build-arg REACT_APP_API_URL=//${API_HOST}
-        -f ./packages/app/Dockerfile"
+        --build-arg REACT_APP_API_URL=//${API_HOST}"
   variables:
     BUILD_NAME: app
     CONTEXT: .
     IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    KANIKO_DOCKERFILE: $CI_PROJECT_DIR/packages/app/Dockerfile
 
 Build app image (dev):
   extends:
