@@ -115,14 +115,17 @@ stages:
   image: ${NODE_IMAGE}
   interruptible: true
   cache:
+    key: ${CI_PROJECT_ID}
     paths:
       - node_modules
       - "packages/*/node_modules"
   artifacts:
     expire_in: 1 month
     paths:
-      - node_modules
-      - "packages/*/node_modules"
+      - path: node_modules
+        downloadable: false
+      - path: "packages/*/node_modules"
+        downloadable: false
   script:
     - yarn --frozen-lockfile --production=false --ignore-scripts
 
@@ -154,6 +157,7 @@ stages:
 .base_build_stage_node:
   extends: .base_build_stage
   cache:
+    key: ${CI_PROJECT_ID}
     paths:
       - node_modules
       - "packages/*/node_modules"
