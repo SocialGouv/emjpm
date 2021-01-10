@@ -29,7 +29,7 @@ ONBUILD COPY packages/api/node_modules packages/api/node_modules/
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
 ENV CI=true
-RUN yarn --frozen-lockfile --no-production --ignore-scripts
+RUN yarn --frozen-lockfile --production=false --ignore-scripts
 
 
 # BUILDER
