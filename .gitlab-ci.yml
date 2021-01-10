@@ -152,6 +152,8 @@ stages:
 
     - |
       if [[ -n "${MULTISTAGE_BUILD}" ]]; then
+        mkdir -p node_modules
+        mkdir -p packages/$BUILD_NAME/node_modules
         docker build \
           --target dependencies \
           --cache-from ${IMAGE_NAME}.dependencies:${CACHE_TAG} \
