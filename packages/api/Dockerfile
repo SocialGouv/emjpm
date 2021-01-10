@@ -24,7 +24,6 @@ FROM pre-dependencies as dependencies_local
 FROM pre-dependencies as dependencies_gitlab_ci
 ONBUILD COPY node_modules node_modules/
 ONBUILD COPY packages/api/node_modules packages/api/node_modules/
-ONBUILD COPY packages/biz/node_modules packages/biz/node_modules/
 
 
 # DEPENDENCIES
