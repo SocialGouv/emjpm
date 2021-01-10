@@ -45,8 +45,8 @@ ENV REACT_APP_API_URL=$REACT_APP_API_URL
 COPY packages/app /app/packages/app/
 COPY packages/biz /app/packages/biz/
 
-RUN yarn workspace @emjpm/app run postinstall:run
-RUN yarn workspace @emjpm/biz run postinstall:run
+RUN yarn workspace @emjpm/app run postinstall
+RUN yarn workspace @emjpm/biz run postinstall
 RUN yarn workspace @emjpm/app build
 
 

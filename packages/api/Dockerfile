@@ -38,8 +38,8 @@ FROM dependencies as builder
 COPY packages/api /app/packages/api/
 COPY packages/biz /app/packages/biz/
 
-RUN yarn workspace @emjpm/api run postinstall:run
-RUN yarn workspace @emjpm/biz run postinstall:run
+RUN yarn workspace @emjpm/api run postinstall
+RUN yarn workspace @emjpm/biz run postinstall
 RUN yarn workspace @emjpm/api build
 
 
