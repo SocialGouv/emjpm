@@ -30,7 +30,7 @@ ONBUILD COPY packages/biz/node_modules packages/biz/node_modules/
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
 ENV CI=true
-RUN yarn
+RUN yarn --immutable
 
 
 # BUILDER
