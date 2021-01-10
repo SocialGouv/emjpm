@@ -15,10 +15,8 @@
     "lint:fix": "yarn lint --cache --fix",
     "lint:js": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.html,.ts,.tsx,.mjs --report-unused-disable-directives",
     "lint:package": "sort-package-json",
-    "postinstall": "yarn postinstall:${NODE_ENV:-development}",
-    "postinstall:test": "yarn postinstall:development",
-    "postinstall:development": "link-module-alias",
-    "postinstall:production": "exit 0"
+    "postinstall": "[ -n \"${CI:-}\" ] || yarn postinstall:run",
+    "postinstall:run": "link-module-alias"
   },
   "_moduleAliases": {
     "~": "src"
