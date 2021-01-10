@@ -13,7 +13,7 @@ import { useInitApolloClient } from "~/lib/apollo";
 import { GlobalStyle, presetEmjpm } from "~/ui";
 import { formatUserFromToken } from "~/util/formatUserFromToken";
 import { useSentry } from "~/util/sentry";
-import { Router } from "react-router";
+import { Router } from "react-router-dom";
 
 import { useMatomo } from "~/util/matomo";
 
