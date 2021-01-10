@@ -1,20 +1,36 @@
-FROM node:15-alpine as node
+ARG BUILD_ENV=local
+ARG NODE_VERSION=15-alpine
+FROM node:$NODE_VERSION as node
 
-# DEPENDENCIES
+
+# PRE-DEPENDENCIES
 FROM node as pre-dependencies
 
 ENV NODE_ENV=production
 
-RUN apk add --update --no-cache curl bash
-RUN curl -sfL https://install.goreleaser.com/github.com/tj/node-prune.sh | bash -s -- -b /usr/local/bin
-
 WORKDIR /app
-COPY package.json lerna.json yarn.lock ./
-COPY packages/app/package.json ./packages/app/package.json
-COPY packages/biz/package.json ./packages/biz/package.json
 
-FROM pre-dependencies as dependencies
-RUN yarn --frozen-lockfile --ignore-scripts --production=false --cache-folder /dev/shm/yarn_cache
+RUN npm i -g lerna
+
+COPY package.json lerna.json yarn.lock /app/
+COPY packages/app/package.json /app/packages/app/package.json
+COPY packages/biz/package.json /app/packages/biz/package.json
+RUN lerna link
+
+
+# DEPENDENCIES ENVIRONMENTS
+FROM pre-dependencies as dependencies_local
+
+FROM pre-dependencies as dependencies_gitlab_ci
+ONBUILD COPY node_modules node_modules/
+ONBUILD COPY packages/app/node_modules packages/app/node_modules/
+
+
+# DEPENDENCIES
+FROM dependencies_${BUILD_ENV} as dependencies
+ENV CI=true
+RUN yarn --frozen-lockfile --no-production --cache-folder /dev/shm/yarn_cache
+
 
 # BUILDER
 FROM dependencies as builder
@@ -26,11 +42,13 @@ ENV REACT_APP_SENTRY_PUBLIC_DSN=$REACT_APP_SENTRY_PUBLIC_DSN
 ENV REACT_APP_GRAPHQL_SERVER_URI=$REACT_APP_GRAPHQL_SERVER_URI
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
-COPY packages/app/ /app/packages/app/
-COPY packages/biz/ /app/packages/biz/
+COPY packages/app /app/packages/app/
+COPY packages/biz /app/packages/biz/
 
-RUN yarn workspace @emjpm/app run postinstall
+RUN yarn workspace @emjpm/app run postinstall:run
+RUN yarn workspace @emjpm/biz run postinstall:run
 RUN yarn workspace @emjpm/app build
+
 
 # SERVER
 FROM node as server
@@ -39,10 +57,10 @@ ENV NODE_ENV=production
 
 WORKDIR /app
 
-RUN yarn global add serve
-
-COPY --from=builder /app/packages/app/build /app/build/
+RUN npm i -g serve
 
 USER node
 
 CMD ["serve","-s","build"]
+
+COPY --from=builder /app/packages/app/build /app/build/

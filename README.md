@@ -18,9 +18,13 @@
 - [lerna](https://github.com/lerna/lerna)
 
 ### Install all the packages
-This will trigger some build on the `postinstall` script
 ```sh
-lerna bootstrap
+yarn
+```
+This will trigger some build on the `postinstall` script:
+```sh
+husky install
+lerna link
 ```
 
 ### Development
@@ -60,23 +64,24 @@ to remove db
 docker volume rm emjpm_emjpm-pgdata
 ```
 
+### Test production build
+this work without any previous install
+```sh
+yarn dev:prod
+```
+
+to rely on local installation (gitlab-ci emulation):
+```sh
+export BUILD_ENV=gitlab_ci
+yarn dev:prod
+```
+
 ## Database
 
 ### Restaurer un dump
 
 ```bash
-# stop docker-compose if necessary
-docker-compose down
-
-# start only postgres
-docker-compose up db
-
-# restore data
-./scripts/local/restore_dump.sh chemin-du-dump
-
-# restart all containers
-docker-compose down
-docker-compose up --build -d
+yarn dev:restore_dump my-path-to-emjpm.dump
 ```
 
 ## Test
