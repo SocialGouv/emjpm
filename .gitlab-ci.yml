@@ -96,7 +96,8 @@ stages:
 .base_docker_image_stage:
   image: docker:${DOCKER_VERSION}
   services:
-    - docker:${DOCKER_VERSION}-dind
+    - name: docker:${DOCKER_VERSION}-dind
+      command: ["--experimental"]
 
 .base_build_stage:
   stage: "Build"
