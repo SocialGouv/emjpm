@@ -1,7 +1,6 @@
 ARG BUILD_ENV=local
 ARG NODE_VERSION=15-alpine
 FROM node:$NODE_VERSION as node
-RUN yarn set version berry
 
 
 # PRE-DEPENDENCIES
@@ -13,8 +12,9 @@ WORKDIR /app
 
 RUN npm i -g lerna
 
-COPY package.json lerna.json .yarnrc.yml yarn.lock /app/
+COPY package.json lerna.json yarn.lock /app/
 COPY packages/app/package.json /app/packages/app/package.json
+COPY packages/biz/package.json /app/packages/biz/package.json
 RUN lerna link
 
 
@@ -29,7 +29,7 @@ ONBUILD COPY packages/app/node_modules packages/app/node_modules/
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
 ENV CI=true
-RUN yarn --immutable
+RUN yarn --frozen-lockfile --no-production --cache-folder /dev/shm/yarn_cache
 
 
 # BUILDER

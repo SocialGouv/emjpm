@@ -55,6 +55,8 @@ services:
         REACT_APP_GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
         REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
         BUILD_ENV: ${BUILD_ENV:-local}
+      shm_size: 2gb
+    shm_size: 2gb
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:

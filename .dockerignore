@@ -9,7 +9,6 @@ LICENSE
 .eslintcache
 packages/**/Dockerfile
 packages/**/Dockerfile.dev
-!.yarnrc.yml
 
 .dockerignore
 .editorconfig
@@ -19,13 +18,6 @@ packages/**/Dockerfile.dev
 .gh-token
 .gitignore
 .gitlab-ci.yml
-
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
 
 packages/api/dist
 packages/app/build

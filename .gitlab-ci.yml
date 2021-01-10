@@ -20,7 +20,7 @@ variables:
 
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
-  NODE_IMAGE: registry.gitlab.factory.social.gouv.fr/devthejo/node-yarn2:15-alpine
+  NODE_IMAGE: node:15-alpine
 
 # STAGES
 
@@ -162,7 +162,7 @@ stages:
       - node_modules
       - "packages/*/node_modules"
   script:
-    - yarn --immutable
+    - yarn --frozen-lockfile --no-production --cache-folder /dev/shm/yarn_cache
 
 
 .base_build_stage:
