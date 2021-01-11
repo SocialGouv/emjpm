@@ -64,7 +64,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ matrix.node-version }}-yarn-
       - name: Installing
-        run: yarn --production --ignore-scripts
+        run: yarn --frozen-lockfile --production --ignore-scripts
 
       - name: Postinstall
         run: yarn workspaces run postinstall
