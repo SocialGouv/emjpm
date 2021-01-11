@@ -1,0 +1,46 @@
+#!/usr/bin/env node
+
+// keep docker cache efficient !
+
+const glob = require('glob');
+const fs = require('fs').promises;
+const path = require('path');
+
+const cwd = process.cwd()
+
+const workspacePatterns = require(cwd+"/package.json").workspaces
+
+async function zeroifyVersion(){
+  await Promise.all(workspacePatterns.map(async (workspacePattern)=>{
+    const packages = glob.sync(workspacePattern+'/package.json')
+    const packagesByName = {}
+    const packagesDirByName = {}
+
+    packages.forEach(packageFile => {
+      const workspace = path.dirname(packageFile)
+      const package = require(cwd+"/"+packageFile)
+      packagesDirByName[package.name] = workspace
+      packagesByName[package.name] = package
+    })
+
+    await Promise.all(Object.entries(packagesByName).map(async ([k, package]) => {
+      await Promise.all(Object.keys(packagesByName).map(async (k) => {
+        if (package.dependencies && package.dependencies[k]){
+          package.dependencies[k] = "0.0.0"
+        }
+        if (package.devDependencies && package.devDependencies[k]){
+          package.devDependencies[k] = "0.0.0"
+        }
+      }))
+
+      package.version = "0.0.0"
+      const workspace = packagesDirByName[k]
+      await fs.writeFile(cwd+"/"+workspace+'/package.json', JSON.stringify(package));
+
+    }))
+
+
+  }))
+}
+
+zeroifyVersion()
