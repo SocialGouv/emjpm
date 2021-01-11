@@ -75,7 +75,7 @@ jobs:
         run: npx lerna run build --parallel
 
       - name: Lint
-        run: yarn lint
+        run: npx lerna run lint --parallel
 
       - name: Test
-        run: yarn test
+        run: npx lerna run test --parallel
