@@ -149,6 +149,8 @@ stages:
 
 .base_build_stage_node:
   extends: .base_build_stage
+  variables:
+    BUILD_ENV: gitlab_ci
   cache:
     key: ${CI_PROJECT_ID}
     paths:

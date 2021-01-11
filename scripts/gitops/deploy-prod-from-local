@@ -1,30 +1,150 @@
 #!/usr/bin/env bash
-set -x
+set -e
+
+PKG_VERSION=`node -p "require('./lerna.json').version"`
 
 # global build and push variables
-export IMAGE_TAG=${IMAGE_TAG:-"local_build"}
+export IMAGE_TAG=${IMAGE_TAG:-"local_build-$PKG_VERSION"}
 export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
 export API_TAG=${API_TAG:-"$IMAGE_TAG"}
 export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
+export DOCKER_REGISTRY_ROOT="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm"
 
-# build
-docker-compose -f docker-compose.build.yaml build
+# build and push to registry
+# docker-compose -f docker-compose.build.yaml build
+# docker-compose -f docker-compose.build.yaml push hasura api app
 
-# push to registry
-docker-compose -f docker-compose.build.yaml push hasura api app
+export BUILD_ENV=${BUILD_ENV:-local}
+
+# build hasura
+docker build \
+  -t $DOCKER_REGISTRY_ROOT/hasura:$HASURA_TAG \
+  --cache-from $DOCKER_REGISTRY_ROOT/hasura:latest \
+  --cache-from $DOCKER_REGISTRY_ROOT/hasura:$HASURA_TAG \
+  ./packages/hasura
+docker push $DOCKER_REGISTRY_ROOT/hasura:$HASURA_TAG &
+
+function build_node_multistage {
+  CONTEXT=$1
+  TAG=$2
+  BUILD_ARGS=$3
+
+  ## build pre-dependencies
+  docker build \
+    -f ./packages/$CONTEXT/Dockerfile \
+    --target pre-dependencies \
+    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.pre-dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies \
+    .
+  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies &
+
+  ## build dependencies_${BUILD_ENV}
+  docker build \
+    -f ./packages/$CONTEXT/Dockerfile \
+    --target dependencies_${BUILD_ENV} \
+    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies_${BUILD_ENV} \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.dependencies_${BUILD_ENV} \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.pre-dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies_${BUILD_ENV} \
+    .
+  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies_${BUILD_ENV} &
+
+  ## build dependencies
+  docker build \
+    -f ./packages/$CONTEXT/Dockerfile \
+    --target dependencies \
+    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.dependencies_${BUILD_ENV} \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies \
+    .
+  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies &
+
+  ## build builder
+  docker build \
+    -f ./packages/$CONTEXT/Dockerfile \
+    --target builder \
+    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.builder \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.dependencies \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder \
+    .
+  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder &
+
+  ## build server
+  docker build \
+    -f ./packages/$CONTEXT/Dockerfile \
+    --target server \
+    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest.builder \
+    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG \
+    $BUILD_ARGS \
+  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG &
+
+  wait
+}
+
+build_node_multistage api $API_TAG
+build_node_multistage app $APP_TAG "
+ --build-arg REACT_APP_GRAPHQL_SERVER_URI=$REACT_APP_GRAPHQL_SERVER_URI
+ --build-arg REACT_APP_API_URL=$REACT_APP_API_URL
+ --build-arg BUILD_ENV=$BUILD_ENV
+"
+
+
 
 # global deploy variables
+function urlencode {
+  STDIN=`cat /dev/stdin`
+  local length="${#STDIN}"
+  for (( i = 0; i < length; i++ )); do
+      local c="${STDIN:i:1}"
+      case $c in
+          [a-zA-Z0-9.~_-]) printf "$c" ;;
+          *) printf '%s' "$c" | xxd -p -c1 |
+                 while read c; do printf '%%%s' "$c"; done ;;
+      esac
+  done
+}
+
 export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
 export K8S_NAMESPACE=${K8S_NAMESPACE:-"emjpm"}
 export DOMAIN="emjpm.fabrique.social.gouv.fr";
 if [ -f ".kubeconfig" ]; then
   export KUBECONFIG=".kubeconfig:$KUBECONFIG"
 fi
+export API_SRV_HOST="api:4000";
+export HASURA_SRV_HOST="hasura";
+export NODE_ENV="production"
+source .env.prod
+if [ -z "$PG_HOST" ]; then
+  echo "missing PG_HOST env variable, provid it in .env.prod"
+  exit 1
+fi
+if [ -z "$EMJPM_PG_USER" ]; then
+  echo "missing EMJPM_PG_USER env variable, provid it in .env.prod"
+  exit 1
+fi
+if [ -z "$EMJPM_PG_PASSWORD" ]; then
+  echo "missing EMJPM_PG_PASSWORD env variable, provid it in .env.prod"
+  exit 1
+fi
+export POSTGRES_EMJPM_USER_ENCODED=$(echo "$EMJPM_PG_USER" | urlencode)
+export POSTGRES_EMJPM_PASSWORD_ENCODED=$(echo "$EMJPM_PG_PASSWORD" | urlencode)
+export POSTGRES_DATABASE_EMJPM=${POSTGRES_DATABASE_EMJPM:-"emjpm"}
+export EMJPM_PG_USER_ENCODED=$POSTGRES_EMJPM_USER_ENCODED
+export EMJPM_PG_PASSWORD_ENCODED=$POSTGRES_EMJPM_PASSWORD_ENCODED
+export PG_HOST=$PG_HOST
+export REACT_APP_GRAPHQL_SERVER_URI="https://$DOMAIN:5000/v1/graphql"
+export REACT_APP_API_URL="https://$DOMAIN:4000"
 
 # deploy
 function deploy_production {
   CONTEXT=$1
-  HOST=$2
+  export HOST=$2
+  export PORT=$3
 
   HELM_RENDER_ARGS="
     --set image.tag=${IMAGE_TAG}
@@ -44,9 +164,14 @@ function deploy_production {
 }
 
 API_HOST="api-${DOMAIN}";
-APP_HOST="${DOMAIN}";
-HASURA_HOST="hasura-${DOMAIN}";
+API_PORT="4000";
+deploy_production "api" "$API_HOST" "$API_PORT"
 
-deploy_production hasura $HASURA_HOST
-deploy_production api $API_HOST
-deploy_production app $APP_HOST
+APP_HOST="${DOMAIN}";
+APP_PORT="3000";
+deploy_production "app" "$APP_HOST" "$APP_PORT"
+
+HASURA_HOST="hasura-${DOMAIN}";
+HASURA_PORT="80";
+deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
+
