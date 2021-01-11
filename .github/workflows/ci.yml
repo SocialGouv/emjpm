@@ -67,7 +67,7 @@ jobs:
         run: yarn --production --ignore-scripts
 
       - name: Postinstall
-        run: yarn postinstall:run
+        run: yarn workspaces run postinstall
 
       - name: Build
         run: yarn build

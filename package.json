@@ -18,7 +18,6 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "yarn dev",
     "test": "lerna run test --parallel",
-    "postinstall:run": "lerna run postinstall",
     "postinstall": "husky install",
     "prod:deploy_local_build": "scripts/gitops/deploy-prod-from-local",
     "release": "scripts/gitops/release"
