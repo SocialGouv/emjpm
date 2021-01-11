@@ -441,7 +441,7 @@ Build hasura image:
     - .build_stage
   variables:
     BUILD_NAME: hasura
-    CONTEXT: packages/hasura
+    CONTEXT: .
     DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
 
 Backup PG before production (incubateur):
