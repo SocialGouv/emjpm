@@ -80,8 +80,9 @@ yarn dev:prod
 
 ### Restaurer un dump
 
+default path for dump is dump/db.dump
 ```bash
-yarn dev:restore_dump my-path-to-emjpm.dump
+yarn dev:restore_dump [my-path-to-emjpm.dump]
 ```
 
 ## Test
@@ -98,10 +99,20 @@ Be carefull: New releases are deployed on production when pipeline end with succ
 
 
 To increase production deployment and avoid to run two pipeline,
-you can trigger release locally using
+You can trigger release locally using `yarn release` script.
+You have to provide a github token by providing `GH_TOKEN` env var,
+or put your token in untracked `.gh-token` file at root path of the projet.
 ```sh
 yarn release
 ```
+
+### Deploy from local build (fast and furious)
+You have to provide a K8S credentials by providing `KUBECONFIG` env var,
+or put your token in untracked `.kubeconfig` file at root path of the projet.
+```sh
+yarn prod:deploy_local_build
+```
+*With great power there must also come great responsibility*
 
 ## Deployment policy
 

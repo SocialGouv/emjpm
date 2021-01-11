@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-export IMAGE_TAG=${IMAGE_TAG:-"local_build"}
-
-export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
-export API_TAG=${API_TAG:-"$IMAGE_TAG"}
-export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
-
-docker-compose -f docker-compose.build.yaml push hasura api app
