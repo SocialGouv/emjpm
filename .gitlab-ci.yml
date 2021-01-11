@@ -119,13 +119,15 @@ stages:
     paths:
       - node_modules
       - "packages/*/node_modules"
+      - .yarn
   artifacts:
     expire_in: 1 month
     paths:
       - node_modules
       - "packages/*/node_modules"
+      - .yarn
   script:
-    - yarn --frozen-lockfile --production=false --ignore-scripts
+    - yarn --frozen-lockfile --production --ignore-scripts --cache-folder .yarn
 
 
 .base_build_stage:
@@ -152,6 +154,7 @@ stages:
     paths:
       - node_modules
       - "packages/*/node_modules"
+      - .yarn
   before_script:
     - *before_script_build
 
