@@ -67,7 +67,9 @@ jobs:
         run: yarn --frozen-lockfile --production --ignore-scripts
 
       - name: Postinstall
-        run: yarn workspaces run postinstall
+        run: |
+          npx lerna link
+          yarn workspaces run postinstall
 
       - name: Build
         run: yarn build
