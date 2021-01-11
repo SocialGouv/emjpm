@@ -13,3 +13,4 @@ dump
 .env
 .gh-token
 .kubeconfig
+.env.prod

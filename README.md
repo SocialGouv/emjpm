@@ -109,6 +109,7 @@ yarn release
 ### Deploy from local build (fast and furious)
 You have to provide a K8S credentials by providing `KUBECONFIG` env var,
 or put your token in untracked `.kubeconfig` file at root path of the projet.
+And providing untracked `.env.prod` with variables viewable in `.env.prod.sample`
 ```sh
 yarn prod:deploy_local_build
 ```
