@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+./scripts/gitops/docker-compose-push
+
+export K8S_NAMESPACE=${K8S_NAMESPACE:-"emjpm"}
+export IMAGE_TAG=${IMAGE_TAG:-"local_build"}
+export DOMAIN="emjpm.fabrique.social.gouv.fr";
+
+export API_HOST="api-${DOMAIN}";
+export API_SRV_HOST="api:4000";
+export FRONTEND_HOST="${DOMAIN}";
+export HASURA_HOST="hasura-${DOMAIN}";
+export HASURA_SRV_HOST="hasura";
+
+function deploy_production {
+  CONTEXT=$1
+  kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+  HELM_RENDER_ARGS="
+    --set image.tag=${IMAGE_TAG}
+    --set ingress.hosts[0].host=${HOST}
+    --set ingress.tls[0].hosts[0]=${HOST}
+    --set ingress.annotations.certmanager.k8s.iocluster-issuer=letsencrypt-prod
+    --set-string ingress.annotations.kubernetes.io/tls-acme=true
+  "
+
+  envsubst < packages/$CONTEXT/.k8s/values.yaml \
+    | helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s \
+      --values - \
+      > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
+
+  kubectl apply -f packages/$CONTEXT/.k8s/manifests
+}
+
+deploy_production hasura
+deploy_production api
+deploy_production app

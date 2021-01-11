@@ -141,8 +141,7 @@ export function useProvideAuth() {
         if (!url) {
           logout();
         }
-        const isTokenPath = pathname.indexOf(routeByRole[role]) !== -1;
-        if (!isTokenPath) {
+        if (pathname === "/login") {
           history.push(routeByRole[role]);
         }
       }

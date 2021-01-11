@@ -11,7 +11,7 @@ import {
   numberStyle,
 } from "./style";
 
-const Antenne = (props) => {
+function Antenne(props) {
   const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
     <Card sx={sx}>
@@ -43,7 +43,7 @@ const Antenne = (props) => {
       )}
     </Card>
   );
-};
+}
 
 Antenne.defaultProps = {
   Link: null,
