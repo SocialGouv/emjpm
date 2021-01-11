@@ -138,20 +138,12 @@ stages:
     KANIKO_DOCKERFILE: Dockerfile
   script:
     - |
-      if [[ -n "${CI_COMMIT_TAG}" ]]; then
-        export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-        echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
-      else
-        export TAG=$CI_COMMIT_REF_SLUG
-        echo "Build ${TAG} branch"
-      fi
-
       /kaniko/executor \
         --cache=true \
         --context ${CONTEXT} \
         --dockerfile ${KANIKO_DOCKERFILE} \
         ${DOCKER_BUILD_ARGS} \
-        --destination $IMAGE_NAME:$TAG
+        --destination $DESTINATION
 
 .base_build_stage_node:
   extends: .base_build_stage
@@ -341,7 +333,7 @@ Build api image:
     BUILD_NAME: api
     CONTEXT: .
     KANIKO_DOCKERFILE: packages/api/Dockerfile
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    DESTINATION: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
 
 ################### Build APP ##################
 
@@ -362,7 +354,7 @@ Build api image:
   variables:
     BUILD_NAME: app
     CONTEXT: .
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    DESTINATION: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
     KANIKO_DOCKERFILE: packages/app/Dockerfile
 
 Build app image (dev):
@@ -389,7 +381,7 @@ Build hasura image:
   variables:
     BUILD_NAME: hasura
     CONTEXT: packages/hasura
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
 
 Backup PG before production (incubateur):
   extends:
