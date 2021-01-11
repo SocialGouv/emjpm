@@ -228,6 +228,19 @@ stages:
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
+.base_notify_deploying_dev_mattermost:
+  extends: .base_notify_mattermost
+  when: on_success
+  stage: Notify Finished Deployment
+  except:
+    variables:
+      - $PRODUCTION
+  script:
+    - export URL=https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.dev2.${KUBE_INGRESS_BASE_DOMAIN}
+    - |
+      echo '{"text":"dev version deployed at '${URL}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+
 .base_notify_deploying_production_mattermost:
   extends: .base_notify_mattermost
   when: on_success
@@ -268,7 +281,22 @@ stages:
   only:
     - master
 
+.enable_stage:
+  stage: Enable
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.2.0
+  except:
+    variables:
+      # Don't run when running e2e tests
+      - $E2E_TEST
+      # Don't run when deploying in production an existing image
+      - $PRODUCTION
+      # Don't run when tagging a commit
+      - $RELEASE
+
 .base_stage:
+  only:
+    variables:
+      - $RUN_PIPELINE
   except:
     variables:
       # Don't run when running e2e tests
@@ -299,13 +327,26 @@ stages:
 
 ############ RUN PIPELINE ########################
 
+Notify New Pipeline:
+  extends:
+    - .enable_stage
+    - .base_notify_mattermost
+  script:
+    - |
+      echo '{"text":"🦊 pipeline ready to run at '${CI_PIPELINE_URL}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+
 Run Pipeline:
-  extends: .base_stage
-  stage: Enable
+  extends:
+    - .enable_stage
   when: manual
-  script: |
-    echo '{"text":"🦊 pipeline ready to run at '${CI_PIPELINE_URL}'"}' \
-      | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+  script:
+    - |
+      curl --request POST
+        --form ref="${CI_COMMIT_REF_NAME}"
+        --form token="${CI_JOB_TOKEN}"
+        --form variables[RUN_PIPELINE]="true"
+        ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 
 ################### CREATE NAMESPACE ##############
@@ -732,7 +773,7 @@ Release:
 Trigger production:
   extends: .base_stage
   stage: Notify Finished Deployment
-  image: curlimages/curl:7.73.0
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.2.0
   when: manual
   variables:
     GIT_STRATEGY: none
@@ -751,7 +792,7 @@ Trigger production:
 Trigger release:
   extends: .base_stage
   stage: Notify Finished Deployment
-  image: curlimages/curl:7.73.0
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.2.0
   when: manual
   variables:
     GIT_STRATEGY: none
@@ -780,6 +821,11 @@ Trivy Scan hasura:
   extends: .base_trivy_scan
   variables:
     CONTEXT: hasura
+
+############ Notify dev ########################
+
+Notify Dev (mattermost):
+  extends: .base_notify_deploying_dev_mattermost
 
 ############ Notify production ########################
 
