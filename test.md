@@ -55,7 +55,7 @@ $ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e
 
 # start the dev server
 $ yarn dev
-$ docker-compose up graphql-engine
+$ docker-compose up hasura
 $ docker-compose up maildev
 
 # Install the e2e runner env

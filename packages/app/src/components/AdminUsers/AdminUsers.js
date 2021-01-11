@@ -75,7 +75,7 @@ const RowItem = ({ item }) => {
   );
 };
 
-const AdminUsers = () => {
+function AdminUsers() {
   const resultPerPage = 50;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, debouncedSearchId, selectedType } = useContext(
@@ -128,7 +128,7 @@ const AdminUsers = () => {
       setCurrentOffset={setCurrentOffset}
     />
   );
-};
+}
 
 export { AdminUsers };
 

@@ -36,7 +36,7 @@ services:
       - "1080:1080"
     restart: always
 
-  graphql-engine:
+  hasura:
     image: emjpm_hasura
     build:
       context: ./packages/hasura
