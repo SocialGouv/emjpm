@@ -1,15 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./Auth";
 
-import LoginPage from "~/pages/login";
-import SignupPage from "~/pages/signup";
-import SignupInvitationPage from "~/pages/signup/invitation";
-import InscriptionPage from "~/pages/inscription";
-import AccountResetPasswordPage from "~/pages/account/reset-password";
-import AccountForgotPasswordPage from "~/pages/account/forgot-password";
-import ApplicationAuthorizationPage from "~/pages/application/authorization";
-import ApplicationTokenRequestPage from "~/pages/application/token-request";
-
 const routes = [
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/accept")
@@ -121,10 +112,6 @@ const routes = [
   {
     Component: require("~/pages/services/mesures/[mesure_id]/delete").default,
     path: "/services/mesures/:mesure_id(\\d+)/delete",
-  },
-  {
-    Component: require("~/pages/stats/[departement_code]").default,
-    path: "/stats/:departement_code",
   },
   {
     Component: require("~/pages/direction/donnees-demographiques").default,
@@ -312,7 +299,6 @@ const routes = [
     Component: require("~/pages/signup/index").default,
     path: "/signup",
   },
-  { Component: require("~/pages/stats/index").default, path: "/stats" },
   {
     Component: require("~/pages/direction/informations").default,
     path: "/direction/informations",
@@ -411,33 +397,56 @@ const routes = [
   },
 ];
 
+const publicRoutes = [
+  {
+    Component: require("~/pages/login").default,
+    path: "/login",
+  },
+  {
+    Component: require("~/pages/signup").default,
+    path: "/signup",
+  },
+  {
+    Component: require("~/pages/signup/invitation").default,
+    path: "/signup/invitation",
+  },
+  {
+    Component: require("~/pages/inscription").default,
+    path: "/inscription",
+  },
+  {
+    Component: require("~/pages/account/reset-password").default,
+    path: "/account/reset-password",
+  },
+  {
+    Component: require("~/pages/account/forgot-password").default,
+    path: "/account/forgot-password",
+  },
+  {
+    Component: require("~/pages/application/authorization").default,
+    path: "/application/authorization",
+  },
+  {
+    Component: require("~/pages/application/token-request").default,
+    path: "/application/token-request",
+  },
+  {
+    Component: require("~/pages/stats/[departement_code]").default,
+    path: "/stats/:departement_code",
+  },
+  { Component: require("~/pages/stats/index").default, path: "/stats" },
+];
+
 function Routes() {
   return (
     <Switch>
-      <Route path="/login">
-        <LoginPage />
-      </Route>
-      <Route path="/signup" exact>
-        <SignupPage />
-      </Route>
-      <Route path="/signup/invitation" exact>
-        <SignupInvitationPage />
-      </Route>
-      <Route path="/inscription" exact>
-        <InscriptionPage />
-      </Route>
-      <Route path="/account/reset-password" exact>
-        <AccountResetPasswordPage />
-      </Route>
-      <Route path="/account/forgot-password" exact>
-        <AccountForgotPasswordPage />
-      </Route>
-      <Route path="/application/authorization" exact>
-        <ApplicationAuthorizationPage />
-      </Route>
-      <Route path="/application/token-request" exact>
-        <ApplicationTokenRequestPage />
-      </Route>
+      {publicRoutes.map(({ path, Component, exact = true }) => {
+        return (
+          <Route key={path} path={path} exact={exact}>
+            <Component />
+          </Route>
+        );
+      })}
       <PrivateRoute>
         {routes.map(({ path, Component, exact = true }) => {
           return (

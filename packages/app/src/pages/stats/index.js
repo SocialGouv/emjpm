@@ -5,7 +5,7 @@ import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-const StatsPage = () => {
+function StatsPage() {
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -38,6 +38,6 @@ const StatsPage = () => {
       </BoxWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default StatsPage;
