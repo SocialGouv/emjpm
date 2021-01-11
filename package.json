@@ -3,6 +3,7 @@
   "scripts": {
     "build": "lerna run build",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build -d",
+    "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
     "dev:server": "yarn dev server:up && yarn dev server:log",
     "dev:server:up": "docker-compose up --build -d",
     "dev:server:log": "docker-compose logs -f",
