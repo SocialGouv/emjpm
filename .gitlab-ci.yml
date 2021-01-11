@@ -303,6 +303,10 @@ Run Pipeline:
   extends: .base_stage
   stage: Enable
   when: manual
+  script: |
+    echo '{"text":"🦊 pipeline ready to run at '${CI_PIPELINE_URL}'"}' \
+      | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+
 
 ################### CREATE NAMESPACE ##############
 
