@@ -687,10 +687,11 @@ Release:
     variables:
       - $RELEASE
   cache:
-    key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+    key: ${CI_PROJECT_ID}
     paths:
       - node_modules
-      - $CI_PROJECT_DIR/.yarn
+      - "packages/*/node_modules"
+      - .yarn
   before_script:
   script:
     # Ensure to have "git" and "jq"
@@ -700,10 +701,7 @@ Release:
     # Use github as origin
     - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
 
-    # Use local yarn cache
-    - yarn config set cache-folder $CI_PROJECT_DIR/.yarn
-    # Should only install workspace dependencies
-    - yarn
+    - yarn --frozen-lockfile --production --ignore-scripts --cache-folder .yarn
 
     # HACK(douglasduteil): remove all packages dependencies
     # Restore the package files before bumping versions.

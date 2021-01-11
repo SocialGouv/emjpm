@@ -3,7 +3,7 @@ export PGPASSWORD=test
 
 DB=emjpm
 NEW_OWNER=emjpm
-DUMP_FILE=$1
+DUMP_FILE=${1:-"dump/db.dump"}
 
 # drop / create database emjpm
 cat <<EOF > reset-database.sql

@@ -4,6 +4,7 @@
     "build": "lerna run build",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build -d",
     "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
+    "dev:restore_dump": "scripts/local/restore_dump.sh",
     "dev:server": "yarn dev server:up && yarn dev server:log",
     "dev:server:up": "docker-compose up --build -d",
     "dev:server:log": "docker-compose logs -f",
@@ -19,6 +20,7 @@
     "test": "lerna run test --parallel",
     "postinstall:run": "lerna run postinstall",
     "postinstall": "husky install",
+    "prod:deploy_local_build": "scripts/gitops/deploy-prod-from-local",
     "release": "scripts/gitops/release"
   },
   "license": "Apache-2.0",

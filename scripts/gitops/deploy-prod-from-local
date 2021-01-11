@@ -1,27 +1,44 @@
 #!/usr/bin/env bash
+set -x
 
-./scripts/gitops/docker-compose-push
-
-export K8S_NAMESPACE=${K8S_NAMESPACE:-"emjpm"}
+# global build and push variables
 export IMAGE_TAG=${IMAGE_TAG:-"local_build"}
-export DOMAIN="emjpm.fabrique.social.gouv.fr";
+export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
+export API_TAG=${API_TAG:-"$IMAGE_TAG"}
+export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
 
-export API_HOST="api-${DOMAIN}";
-export API_SRV_HOST="api:4000";
-export FRONTEND_HOST="${DOMAIN}";
-export HASURA_HOST="hasura-${DOMAIN}";
-export HASURA_SRV_HOST="hasura";
+# build
+docker-compose -f docker-compose.build.yaml build
+
+# push to registry
+docker-compose -f docker-compose.build.yaml push hasura api app
+
+# global deploy variables
+export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
+export K8S_NAMESPACE=${K8S_NAMESPACE:-"emjpm"}
+export DOMAIN="emjpm.fabrique.social.gouv.fr";
+if [ -f ".kubeconfig" ]; then
+  export KUBECONFIG=".kubeconfig:$KUBECONFIG"
+fi
+
+# deploy
+API_HOST="api-${DOMAIN}";
+APP_HOST="${DOMAIN}";
+HASURA_HOST="hasura-${DOMAIN}";
+deploy_production hasura $HASURA_HOST
+deploy_production api $API_HOST
+deploy_production app $APP_HOST
 
 function deploy_production {
   CONTEXT=$1
-  kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+  HOST=$2
 
   HELM_RENDER_ARGS="
     --set image.tag=${IMAGE_TAG}
     --set ingress.hosts[0].host=${HOST}
     --set ingress.tls[0].hosts[0]=${HOST}
-    --set ingress.annotations.certmanager.k8s.iocluster-issuer=letsencrypt-prod
-    --set-string ingress.annotations.kubernetes.io/tls-acme=true
+    --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
+    --set-string ingress.annotations.kubernetes\.io/tls-acme=true
   "
 
   envsubst < packages/$CONTEXT/.k8s/values.yaml \
@@ -29,9 +46,6 @@ function deploy_production {
       --values - \
       > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
-  kubectl apply -f packages/$CONTEXT/.k8s/manifests
+  kubectl config use-context $KUBECTL_CONTEXT
+  # kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
-
-deploy_production hasura
-deploy_production api
-deploy_production app
