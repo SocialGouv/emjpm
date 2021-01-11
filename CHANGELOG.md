@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.85.0](https://github.com/SocialGouv/emjpm/compare/v25.84.24...v25.85.0) (2021-01-11)
+
+
+### Bug Fixes
+
+* **ci:** enable buildkit ([1bcb067](https://github.com/SocialGouv/emjpm/commit/1bcb067e0a2212238688e7092449deddd584a58c))
+* **ci:** fix buildkit ([2647cb9](https://github.com/SocialGouv/emjpm/commit/2647cb9f584bf6b3fd9ff4103d9872490c5f760d))
+* **ci:** pipeline cache ([5aa6bcb](https://github.com/SocialGouv/emjpm/commit/5aa6bcb6bfbb8a982669ad5fa63e52f879550a8f))
+* **ci:** pipeline cache ([3c1095f](https://github.com/SocialGouv/emjpm/commit/3c1095fa0ff2b6e75378e4e39906200e90802888))
+* **ci:** wip optimize ([22a0824](https://github.com/SocialGouv/emjpm/commit/22a082437c07dc40cd1269c1551237af9d494929))
+* **things:** typo ([1dde8e2](https://github.com/SocialGouv/emjpm/commit/1dde8e284d6486c5e60c257d113540779bcb3027))
+
+
+### Features
+
+* **improve-docker-cache:** and fix things ([#2445](https://github.com/SocialGouv/emjpm/issues/2445)) ([0bdbbca](https://github.com/SocialGouv/emjpm/commit/0bdbbcaac55bb57d35cf14ae3136a2729d3197f7))
+
+
+
+
+
 ## [25.84.24](https://github.com/SocialGouv/emjpm/compare/v25.84.23...v25.84.24) (2021-01-09)
 
 

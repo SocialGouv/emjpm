@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.85.0](https://github.com/SocialGouv/emjpm/compare/v25.84.24...v25.85.0) (2021-01-11)
+
+
+### Features
+
+* **improve-docker-cache:** and fix things ([#2445](https://github.com/SocialGouv/emjpm/issues/2445)) ([0bdbbca](https://github.com/SocialGouv/emjpm/commit/0bdbbcaac55bb57d35cf14ae3136a2729d3197f7))
+
+
+
+
+
 ## [25.84.24](https://github.com/SocialGouv/emjpm/compare/v25.84.23...v25.84.24) (2021-01-09)
 
 **Note:** Version bump only for package @emjpm/app
