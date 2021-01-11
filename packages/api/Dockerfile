@@ -1,4 +1,4 @@
-ARG BUILD_ENV=local
+ARG BUILD_ENV=pure
 ARG NODE_VERSION=15-alpine
 FROM node:$NODE_VERSION as node
 
@@ -33,7 +33,6 @@ ONBUILD COPY packages/api/node_modules packages/api/node_modules/
 
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
-ENV CI=true
 RUN yarn --frozen-lockfile --production --ignore-scripts
 
 
