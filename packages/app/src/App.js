@@ -1,4 +1,4 @@
-import { css, Global } from "@emotion/core";
+import { Global, css } from "@emotion/react";
 import * as Sentry from "@sentry/react";
 import jwtDecode from "jwt-decode";
 

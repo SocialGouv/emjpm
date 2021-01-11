@@ -1,4 +1,4 @@
-import { css, Global } from "@emotion/core";
+import { css, Global } from "@emotion/react";
 import emotionNormalize from "emotion-normalize";
 
 const styles = css`
