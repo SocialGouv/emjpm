@@ -1,7 +1,13 @@
 #!/usr/bin/env bash
 set -e
 
+if ((BASH_VERSINFO[0] < 4)); then
+    echo "Sorry, you need at least bash-4.0 to run this script." >&2
+exit 1; fi
+
 export PKG_VERSION=`node -p "require('./lerna.json').version"`
+export IMAGE_TAG=${IMAGE_TAG:-"$PKG_VERSION-local_build"}
+echo "Building and deploying eMJPM $IMAGE_TAG"
 
 # global variables
 export DOMAIN="emjpm.fabrique.social.gouv.fr";
@@ -14,7 +20,6 @@ export HASURA_PORT="80";
 
 # build and push variables
 export BUILD_ENV=${BUILD_ENV:-"pure"}
-export IMAGE_TAG=${IMAGE_TAG:-"local_build-$PKG_VERSION"}
 export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
 export API_TAG=${API_TAG:-"$IMAGE_TAG"}
 export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
@@ -33,15 +38,15 @@ export HASURA_SRV_HOST="hasura";
 export NODE_ENV="production"
 source .env.prod
 if [ -z "$PG_HOST" ]; then
-  echo "missing PG_HOST env variable, provid it in .env.prod"
+  echo "missing PG_HOST env variable, provid it in .env.prod" >&2
   exit 1
 fi
 if [ -z "$EMJPM_PG_USER" ]; then
-  echo "missing EMJPM_PG_USER env variable, provid it in .env.prod"
+  echo "missing EMJPM_PG_USER env variable, provid it in .env.prod" >&2
   exit 1
 fi
 if [ -z "$EMJPM_PG_PASSWORD" ]; then
-  echo "missing EMJPM_PG_PASSWORD env variable, provid it in .env.prod"
+  echo "missing EMJPM_PG_PASSWORD env variable, provid it in .env.prod" >&2
   exit 1
 fi
 function urlencode {

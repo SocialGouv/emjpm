@@ -93,10 +93,7 @@ yarn dev:restore_dump [my-path-to-emjpm.dump]
 
 ### Semantic releases
 
-Be carefull: New releases are deployed on production when pipeline end with success
-
 [On a successful `master` branch pipeline click on trigger the `Release` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines)
-
 
 To increase production deployment and avoid to run two pipeline,
 You can trigger release locally using `yarn release` script.

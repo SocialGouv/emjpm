@@ -720,6 +720,7 @@ Trigger production:
   extends: .base_stage
   stage: Notify Finished Deployment
   image: curlimages/curl:7.73.0
+  when: manual
   variables:
     GIT_STRATEGY: none
   only:
