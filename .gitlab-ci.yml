@@ -201,7 +201,7 @@ stages:
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
   variables:
-    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_SHA
+    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG
   script:
     # Build report
     - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
@@ -726,7 +726,7 @@ Trigger production:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
       --form token="${CI_JOB_TOKEN}"
-      --form variables[PRODUCTION]="true"
+      --form variables[PRODUCTION]="true"CI_COMMIT_REF_NAME
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 ############ Trigger release ########################
