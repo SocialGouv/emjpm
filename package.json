@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "yarn workspaces run build",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build -d",
     "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
     "dev:restore_dump": "scripts/local/restore_dump.sh",
