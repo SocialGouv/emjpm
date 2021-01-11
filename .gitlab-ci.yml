@@ -25,6 +25,7 @@ variables:
 # STAGES
 
 stages:
+  - "Enable"
   - "Prepare"
   - "Build"
   - "Deploy"
@@ -108,7 +109,8 @@ stages:
 .prepare_stage:
   extends: .base_stage
   stage: Prepare
-  dependencies: []
+  dependencies:
+    - Run Pipeline
 
 .base_yarn:
   extends: .prepare_stage
@@ -294,6 +296,13 @@ stages:
   stage: Build
   interruptible: true
   dependencies: []
+
+############ RUN PIPELINE ########################
+
+Run Pipeline:
+  extends: .base_stage
+  stage: Enable
+  when: manual
 
 ################### CREATE NAMESPACE ##############
 
