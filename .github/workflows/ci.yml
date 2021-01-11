@@ -69,10 +69,10 @@ jobs:
       - name: Postinstall
         run: |
           npx lerna link
-          yarn workspaces run postinstall
+          npx lerna run postinstall
 
       - name: Build
-        run: yarn build
+        run: npx lerna run build --parallel
 
       - name: Lint
         run: yarn lint
