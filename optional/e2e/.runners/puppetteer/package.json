@@ -7,7 +7,7 @@
     "test": "codeceptjs run --features --verbose"
   },
   "dependencies": {
-    "codeceptjs": "^3.0.1",
+    "codeceptjs": "^3.0.4",
     "got": "^10.7.0"
   }
 }
