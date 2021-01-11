@@ -1,2 +1,1 @@
-import "./polyfills";
 import "./readAsBinaryString";

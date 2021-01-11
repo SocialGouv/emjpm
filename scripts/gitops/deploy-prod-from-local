@@ -23,7 +23,7 @@ export BUILD_ENV=${BUILD_ENV:-"pure"}
 export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
 export API_TAG=${API_TAG:-"$IMAGE_TAG"}
 export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
-export DOCKER_REGISTRY_ROOT="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm"
+export DOCKER_REGISTRY_ROOT="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
 export REACT_APP_GRAPHQL_SERVER_URI="https://$DOMAIN:5000/v1/graphql"
 export REACT_APP_API_URL="https://$DOMAIN:4000"
 
