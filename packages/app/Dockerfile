@@ -15,8 +15,8 @@ RUN npm i -g lerna
 COPY package.json lerna.json yarn.lock /app/
 COPY packages/app/package.json /app/packages/app/package.json
 COPY packages/biz/package.json /app/packages/biz/package.json
-COPY ./scripts/gitops/version-zero
-RUN ./scripts/gitops/version-zero
+COPY ./scripts/gitops/version-zero /app/scripts/gitops/version-zero
+RUN /app/scripts/gitops/version-zero
 RUN lerna link
 
 
