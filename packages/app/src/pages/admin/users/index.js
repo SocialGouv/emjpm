@@ -7,7 +7,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-const AdminUsersPage = () => {
+function AdminUsersPage() {
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
@@ -26,6 +26,6 @@ const AdminUsersPage = () => {
       </LayoutAdmin>
     </AdminFilterProvider>
   );
-};
+}
 
 export default AdminUsersPage;
