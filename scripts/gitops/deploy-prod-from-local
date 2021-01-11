@@ -22,13 +22,6 @@ if [ -f ".kubeconfig" ]; then
 fi
 
 # deploy
-API_HOST="api-${DOMAIN}";
-APP_HOST="${DOMAIN}";
-HASURA_HOST="hasura-${DOMAIN}";
-deploy_production hasura $HASURA_HOST
-deploy_production api $API_HOST
-deploy_production app $APP_HOST
-
 function deploy_production {
   CONTEXT=$1
   HOST=$2
@@ -47,5 +40,13 @@ function deploy_production {
       > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
   kubectl config use-context $KUBECTL_CONTEXT
-  # kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
+  kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
+
+API_HOST="api-${DOMAIN}";
+APP_HOST="${DOMAIN}";
+HASURA_HOST="hasura-${DOMAIN}";
+
+deploy_production hasura $HASURA_HOST
+deploy_production api $API_HOST
+deploy_production app $APP_HOST
