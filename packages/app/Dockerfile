@@ -1,4 +1,4 @@
-ARG BUILD_ENV=local
+ARG BUILD_ENV=pure
 ARG NODE_VERSION=15-alpine
 FROM node:$NODE_VERSION as node
 
@@ -24,16 +24,15 @@ RUN lerna link
 
 
 # DEPENDENCIES ENVIRONMENTS
-FROM pre-dependencies as dependencies_local
+FROM pre-dependencies as dependencies_pure
 
-FROM pre-dependencies as dependencies_gitlab_ci
+FROM pre-dependencies as dependencies_usecache
 ONBUILD COPY node_modules node_modules/
 ONBUILD COPY packages/app/node_modules packages/app/node_modules/
 
 
 # DEPENDENCIES
 FROM dependencies_${BUILD_ENV} as dependencies
-ENV CI=true
 RUN yarn --frozen-lockfile --production --ignore-scripts
 
 

@@ -17,7 +17,7 @@ module.exports = {
     ecmaVersion: 2021,
     sourceType: "module",
   },
-  plugins: ["prettier", "sort-keys-fix", "jsx-a11y", "react"],
+  plugins: ["sort-keys-fix", "react"],
   rules: {},
   settings: {
     react: {

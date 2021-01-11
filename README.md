@@ -72,7 +72,7 @@ yarn dev:prod
 
 to rely on local installation (gitlab-ci emulation):
 ```sh
-export BUILD_ENV=gitlab_ci
+export BUILD_ENV=usecache
 yarn dev:prod
 ```
 

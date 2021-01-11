@@ -39,7 +39,8 @@ services:
   hasura:
     image: emjpm_hasura
     build:
-      context: ./packages/hasura
+      context: .
+      dockerfile: ./packages/hasura/Dockerfile
     ports:
       - 5000:8080
     depends_on:
