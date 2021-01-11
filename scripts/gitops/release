@@ -14,13 +14,13 @@ fi
 
 export CI=true
 
-if [ -z "$YARN_RELEASE_ENABLE_TEST" ]; then
+if [ -n "$YARN_RELEASE_ENABLE_TEST" ]; then
   yarn test
 fi
 
 lerna version --force-publish --yes
 
-if [ -z "$YARN_RELEASE_ENABLE_WAIT" ]; then
+if [ -n "$YARN_RELEASE_ENABLE_WAIT" ]; then
   url="https://api-emjpm.fabrique.social.gouv.fr"
   interval_in_seconds=2
   result=$(cat lerna.json | jq -r ".version");
