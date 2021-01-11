@@ -1,13 +1,13 @@
-import { keyframes } from "@emotion/core";
+import { keyframes } from "@emotion/react";
 import PropTypes from "prop-types";
 
 import { Box } from "rebass";
 
 const animation = keyframes`
-  0%, 80%, 100% { 
+  0%, 80%, 100% {
     -webkit-transform: scale(0);
     transform: scale(0);
-  } 40% { 
+  } 40% {
     -webkit-transform: scale(1.0);
     transform: scale(1.0);
   }
