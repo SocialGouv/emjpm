@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+rm -rf node_modules
+rm -rf packages/api/node_modules
+rm -rf packages/app/node_modules
+rm -rf packages/biz/node_modules

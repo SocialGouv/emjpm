@@ -1,10 +1,20 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
+import useScript, { SCRIPT_STATUS } from "~/hooks/useScript";
+
+import initTarteaucitron from "~/util/initTarteaucitron";
 
 export const useMatomo = () => {
   const location = useLocation();
 
   const previousPathRef = useRef(null);
+
+  const status = useScript("/tarteaucitron/tarteaucitron.js");
+  useEffect(() => {
+    if (status === SCRIPT_STATUS.READY) {
+      initTarteaucitron();
+    }
+  }, [status]);
 
   useEffect(() => {
     const { pathname } = location;

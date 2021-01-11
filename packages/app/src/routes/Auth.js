@@ -141,7 +141,7 @@ export function useProvideAuth() {
         if (!url) {
           logout();
         }
-        if (pathname === "/login") {
+        if (pathname === "/" || pathname === "/login") {
           history.push(routeByRole[role]);
         }
       }

@@ -5,9 +5,7 @@ const signupSchema = yup.object().shape({
     .string()
     .required()
     .label("Confirmation du mot de passe")
-    .test("passwords-match", "Les mots de passe ne sont pas égaux", function (
-      value
-    ) {
+    .test("passwords-match", "Les mots de passe ne sont pas égaux", (value) => {
       return this.parent.password === value;
     }),
   email: yup
