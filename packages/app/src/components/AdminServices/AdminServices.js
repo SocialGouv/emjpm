@@ -47,7 +47,7 @@ const RowItem = ({ item }) => {
   );
 };
 
-const AdminServices = () => {
+function AdminServices() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 50;
   const { debouncedSearchText } = useContext(AdminFilterContext);
@@ -91,6 +91,6 @@ const AdminServices = () => {
       setCurrentOffset={setCurrentOffset}
     />
   );
-};
+}
 
 export { AdminServices };
