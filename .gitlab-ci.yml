@@ -97,51 +97,13 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image: docker:${DOCKER_VERSION}
-  services:
-    - name: docker:${DOCKER_VERSION}-dind
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
 
 .before_script_build: &before_script_build |
-  echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
-
-  if [[ -n "${CI_COMMIT_TAG}" ]]; then
-    export TAG=$(printf "${CI_COMMIT_TAG}" | sed "s/^v//")
-    echo "Build ${CI_COMMIT_TAG} tag as ${TAG}"
-  else
-    export TAG=$CI_COMMIT_REF_SLUG
-    echo "Build ${TAG} branch"
-  fi
-
-  [[ -n "${TRACE}" ]] && set -x
-
-  function set_cache_image() {
-    if docker pull ${IMAGE_NAME}:$1; then
-      export CACHE_TAG=$1
-    fi
-  }
-
-  echo ""
-  echo "Checking last commit (${CI_COMMIT_BEFORE_SHA}) cache"
-  set_cache_image "${CI_COMMIT_BEFORE_SHA}"
-
-  if [[ -z "${CACHE_TAG}" ]]; then
-    echo ""
-    echo "Checking current branch/tag (${TAG}) cache"
-    set_cache_image "${TAG}"
-  fi
-
-  if [[ -z "${CACHE_TAG}" ]]; then
-    echo ""
-    echo "Checking default branch (${CI_DEFAULT_BRANCH}) cache"
-    set_cache_image "${CI_DEFAULT_BRANCH}"
-  fi
-
-  echo ""
-  if [[ -n "${CACHE_TAG}" ]] ; then
-    echo "Using ${CACHE_TAG} tag as cache"
-  else
-    echo "No cache ! Naked build :("
-  fi
+  mkdir -p /kaniko/.docker
+  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
 
 .prepare_stage:
   extends: .base_stage
@@ -153,6 +115,7 @@ stages:
   image: ${NODE_IMAGE}
   interruptible: true
   cache:
+    key: ${CI_PROJECT_ID}
     paths:
       - node_modules
       - "packages/*/node_modules"
@@ -170,23 +133,22 @@ stages:
   extends: .base_docker_image_stage
   before_script:
     - *before_script_build
+  variables:
+    CONTEXT: .
+    KANIKO_DOCKERFILE: Dockerfile
   script:
     - |
-      docker build \
-        --build-arg BUILD_ENV=gitlab_ci \
-        --cache-from ${IMAGE_NAME}:${CACHE_TAG} \
-        -t ${IMAGE_NAME}:${CI_COMMIT_SHA} \
-        -t ${IMAGE_NAME}:${TAG} \
-        $DOCKER_BUILD_ARGS \
-        $CONTEXT
-
-      docker push ${IMAGE_NAME}:${CI_COMMIT_SHA} &
-      docker push ${IMAGE_NAME}:${TAG} &
-      wait
+      /kaniko/executor \
+        --cache=true \
+        --context ${CONTEXT} \
+        --dockerfile ${KANIKO_DOCKERFILE} \
+        ${DOCKER_BUILD_ARGS} \
+        --destination $DESTINATION
 
 .base_build_stage_node:
   extends: .base_build_stage
   cache:
+    key: ${CI_PROJECT_ID}
     paths:
       - node_modules
       - "packages/*/node_modules"
@@ -239,7 +201,7 @@ stages:
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
   variables:
-    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_SHA
+    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG
   script:
     # Build report
     - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
@@ -370,9 +332,8 @@ Build api image:
   variables:
     BUILD_NAME: api
     CONTEXT: .
-    DOCKER_BUILD_ARGS: >-
-      -f ./packages/api/Dockerfile
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/api
+    KANIKO_DOCKERFILE: packages/api/Dockerfile
+    DESTINATION: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
 
 ################### Build APP ##################
 
@@ -389,12 +350,12 @@ Build api image:
       export DOCKER_BUILD_ARGS="
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
         --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
-        --build-arg REACT_APP_API_URL=//${API_HOST}
-        -f ./packages/app/Dockerfile"
+        --build-arg REACT_APP_API_URL=//${API_HOST}"
   variables:
     BUILD_NAME: app
     CONTEXT: .
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/app
+    DESTINATION: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
+    KANIKO_DOCKERFILE: packages/app/Dockerfile
 
 Build app image (dev):
   extends:
@@ -420,7 +381,7 @@ Build hasura image:
   variables:
     BUILD_NAME: hasura
     CONTEXT: packages/hasura
-    IMAGE_NAME: $CI_REGISTRY_IMAGE/hasura
+    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
 
 Backup PG before production (incubateur):
   extends:
@@ -479,7 +440,7 @@ Init Managed Database:
   services:
     - docker:dind
   variables:
-    IMAGE_TAG: ${CI_COMMIT_SHA}
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
     REGISTRY: ${CI_REGISTRY_IMAGE}
 
 ############### Deploy API ###########################
@@ -765,7 +726,7 @@ Trigger production:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
       --form token="${CI_JOB_TOKEN}"
-      --form variables[PRODUCTION]="true"
+      --form variables[PRODUCTION]="true"CI_COMMIT_REF_NAME
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 ############ Trigger release ########################
