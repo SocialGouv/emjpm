@@ -346,8 +346,7 @@ Run Pipeline:
   variables:
     GIT_STRATEGY: none
   script:
-    - |
-      curl --request POST
+    - curl --request POST
         --form ref="${CI_COMMIT_REF_NAME}"
         --form token="${CI_JOB_TOKEN}"
         --form variables[RUN_PIPELINE]="true"
