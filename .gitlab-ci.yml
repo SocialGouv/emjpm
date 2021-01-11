@@ -440,7 +440,7 @@ Init Managed Database:
   services:
     - docker:dind
   variables:
-    IMAGE_TAG: ${CI_COMMIT_SHA}
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
     REGISTRY: ${CI_REGISTRY_IMAGE}
 
 ############### Deploy API ###########################
