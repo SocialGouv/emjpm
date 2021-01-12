@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.85.2](https://github.com/SocialGouv/emjpm/compare/v25.85.1...v25.85.2) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ci:** improve release ([52b01b8](https://github.com/SocialGouv/emjpm/commit/52b01b8cf05fffa27866735c9f82f8667702a482))
+* **ci:** typo ([78d7284](https://github.com/SocialGouv/emjpm/commit/78d7284611afa6486712de624bcf2da386f7b18c))
+* **ci:** typo ([a69fd8b](https://github.com/SocialGouv/emjpm/commit/a69fd8b438d3e04b93bef0f35834b262bdc37976))
+* **ci:** wip ([20d4438](https://github.com/SocialGouv/emjpm/commit/20d44386e9e5a0ef1126d853f18af173305fdb97))
+* **ci:** wip ([6dc21c4](https://github.com/SocialGouv/emjpm/commit/6dc21c474f3c667dd58951a0433a3067a0db9d0a))
+* **ci:** wip ([804d0c2](https://github.com/SocialGouv/emjpm/commit/804d0c2de231ff8a79316689fe4898e8dd897a73))
+* **ci:** wip ([594b284](https://github.com/SocialGouv/emjpm/commit/594b2846792153f9c4378d80d7500e74175579ea))
+* **ci:** wip ([c0551d5](https://github.com/SocialGouv/emjpm/commit/c0551d52430001799244b5f0f24c5c69305e2c71))
+* **ci:** wip ([e177ea4](https://github.com/SocialGouv/emjpm/commit/e177ea4e0acc63aca92ac9e8a7533e48bf5b81a3))
+
+
+
+
+
 ## [25.85.1](https://github.com/SocialGouv/emjpm/compare/v25.85.0...v25.85.1) (2021-01-12)
 
 
