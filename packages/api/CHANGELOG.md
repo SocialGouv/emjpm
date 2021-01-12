@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.85.1](https://github.com/SocialGouv/emjpm/compare/v25.85.0...v25.85.1) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ci:** api build ([8b95e9e](https://github.com/SocialGouv/emjpm/commit/8b95e9e0ee749ccd87fe73ec9ac6a81c707b4db3))
+* **deploy-prod:** from local ([4ce3008](https://github.com/SocialGouv/emjpm/commit/4ce3008962ef5f1b63f1d223c395ad9d391035ca))
+
+
+
+
+
 # [25.85.0](https://github.com/SocialGouv/emjpm/compare/v25.84.24...v25.85.0) (2021-01-11)
 
 
