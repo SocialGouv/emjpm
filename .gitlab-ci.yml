@@ -863,6 +863,8 @@ Trivy Scan app (dev):
   extends: .base_trivy_scan
   needs:
     - Build app image (dev)
+  except:
+    - tags
   variables:
     CONTEXT: app
 
@@ -870,6 +872,9 @@ Trivy Scan app (prod):
   extends: .base_trivy_scan
   needs:
     - Build app image (prod)
+  only:
+    refs:
+      - tags
   variables:
     CONTEXT: app
 
