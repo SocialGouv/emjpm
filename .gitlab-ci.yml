@@ -163,32 +163,6 @@ stages:
   before_script:
     - HOST="https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_NAME}.${KUBE_INGRESS_BASE_DOMAIN}"
 
-.base_notify_deploying_dev_mattermost:
-  extends:
-    - .base_stage
-    - .base_notify_mattermost
-  when: on_success
-  stage: Notify Finished Deployment
-  script:
-    - |
-      source ./.gitlab-ci/env.sh
-      echo '{"text":"✨ dev version deployed at '${FRONTEND_URL}'"}' \
-        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
-
-.base_notify_deploying_production_mattermost:
-  extends: .base_notify_mattermost
-  when: on_success
-  stage: Notify Finished Deployment
-  only:
-    variables:
-      - $PRODUCTION
-  script:
-    - NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
-    - |
-      echo '{"text":"'${NOTIF_MSG}'"}' \
-        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
-
-
 .base_delete_useless_k8s_ns_stage:
   stage: Notify Finished Deployment
   dependencies: []
@@ -725,6 +699,7 @@ Restore postgres data (feat):
       - $RELEASE
 
 Restore postgres data (dev):
+  allow_failure: true
   extends:
     - .base_restore_pgdata
   only:
@@ -891,6 +866,7 @@ Notify Ready to Prod:
   extends:
     - .base_notify_mattermost
   stage: Notify Finished Deployment
+  allow_failure: true
   variables:
     GIT_STRATEGY: none
   only:
@@ -903,11 +879,37 @@ Notify Ready to Prod:
 
 
 ############ Notify dev ########################
+.base_notify_deploying_dev_mattermost:
+  allow_failure: true
+  extends:
+    - .base_stage
+    - .base_notify_mattermost
+  when: on_success
+  stage: Notify Finished Deployment
+  script:
+    - |
+      source ./.gitlab-ci/env.sh
+      echo '{"text":"✨ dev version deployed at '${FRONTEND_URL}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 Notify Dev (mattermost):
   extends: .base_notify_deploying_dev_mattermost
 
 ############ Notify production ########################
+.base_notify_deploying_production_mattermost:
+  extends: .base_notify_mattermost
+  allow_failure: true
+  when: on_success
+  stage: Notify Finished Deployment
+  only:
+    variables:
+      - $PRODUCTION
+  script:
+    - NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
+    - |
+      echo '{"text":"'${NOTIF_MSG}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+
 
 Notify Production (mattermost):
   extends: .base_notify_deploying_production_mattermost
