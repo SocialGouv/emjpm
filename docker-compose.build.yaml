@@ -42,7 +42,7 @@ services:
       HASURA_GRAPHQL_ADMIN_SECRET: $HASURA_GRAPHQL_ADMIN_SECRET
       HASURA_GRAPHQL_DATABASE_URL: postgres://emjpm:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
-      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "$API_URL_DOCKER/api/auth/jwks"}'
+      HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/auth/jwks"}'
       HASURA_GRAPHQL_UNAUTHORIZED_ROLE: "anonymous"
       HASURA_WEB_HOOK_BASE_URL: $HASURA_WEB_HOOK_BASE_URL
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
@@ -53,8 +53,6 @@ services:
       context: .
       dockerfile: ./packages/app/Dockerfile
       args:
-        REACT_APP_GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
-        REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
         BUILD_ENV: ${BUILD_ENV:-pure}
       shm_size: 2gb
     shm_size: 2gb
@@ -67,7 +65,6 @@ services:
       PORT: 3000
       AUTH_PUBLIC_KEY_FILE: /secrets/public.pem
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
-      GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
 
   api:
     image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local_build_test}

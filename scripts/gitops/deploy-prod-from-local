@@ -23,10 +23,6 @@ export HASURA_PORT="80";
 # build and push variables
 export BUILD_ENV=${BUILD_ENV:-"pure"}
 export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
-export REACT_APP_GRAPHQL_SERVER_URI="https://$HASURA_HOST/v1/graphql"
-export REACT_APP_API_URL="https://$API_HOST"
-export GRAPHQL_SERVER_URI="$REACT_APP_GRAPHQL_SERVER_URI"
-export APP_API_URL="$REACT_APP_API_URL"
 
 # deploy variables
 export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
@@ -68,6 +64,7 @@ export POSTGRES_DATABASE_EMJPM=${POSTGRES_DATABASE_EMJPM:-"emjpm"}
 export EMJPM_PG_USER_ENCODED=$POSTGRES_EMJPM_USER_ENCODED
 export EMJPM_PG_PASSWORD_ENCODED=$POSTGRES_EMJPM_PASSWORD_ENCODED
 export PG_HOST=$PG_HOST
+export SENTRY_PUBLIC_DSN=$SENTRY_PUBLIC_DSN
 
 
 function docker_build {
@@ -142,17 +139,15 @@ docker_build_node_multistage api &
 CHILD_PID_2=$!
 trap "kill $CHILD_PID_2;" SIGTERM SIGINT
 
-docker_build_node_multistage app "
-  --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
-  --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}" &
+docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}" &
 CHILD_PID_3=$!
 trap "kill $CHILD_PID_3;" SIGTERM SIGINT
 
 wait $CHILD_PID_1 $CHILD_PID_2 $CHILD_PID_3
 
-deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
-deploy_production "api" "$API_HOST" "$API_PORT"
-deploy_production "app" "$APP_HOST" "$APP_PORT"
+# deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
+# deploy_production "api" "$API_HOST" "$API_PORT"
+# deploy_production "app" "$APP_HOST" "$APP_PORT"
 
 current_time=$(date +%s)
 seconds_elapsed=$(( $current_time - $start_time ))
