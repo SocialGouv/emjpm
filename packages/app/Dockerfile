@@ -34,7 +34,7 @@ ENV REACT_APP_API_URL=$REACT_APP_API_URL
 RUN yarn workspaces run postinstall
 RUN yarn workspace @emjpm/app build
 
-FROM dependencies as build_usecache
+FROM node as build_usecache
 ONBUILD COPY packages/app/build packages/app/build/
 
 # BUILDER
