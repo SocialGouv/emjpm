@@ -1,2 +1,4 @@
 extends:
   - "@socialgouv/eslint-config-recommended"
+ignorePatterns:
+  - node_modules

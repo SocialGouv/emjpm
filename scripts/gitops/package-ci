@@ -35,7 +35,7 @@ async function zeroifyVersion(){
 
       package.version = "0.0.0"
       const workspace = packagesDirByName[k]
-      await fs.writeFile(cwd+"/"+workspace+'/package.json', JSON.stringify(package));
+      await fs.writeFile(cwd+"/"+workspace+'/package.ci.json', JSON.stringify(package));
 
     }))
 

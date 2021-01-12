@@ -18,7 +18,7 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "yarn dev",
     "test": "lerna run test --parallel",
-    "postinstall": "husky install",
+    "postinstall": "husky install && scripts/gitops/package-ci",
     "prod:deploy_local_build": "scripts/gitops/deploy-prod-from-local",
     "release": "scripts/gitops/release"
   },
@@ -28,6 +28,9 @@
     "@commitlint/config-conventional": "^8.3.4",
     "husky": "^5.0.6",
     "lerna": "^3.22.1"
+  },
+  "dependencies": {
+    "glob": "^7.1.6"
   },
   "lint-staged": {
     "*.{js,jsx}": "eslint"

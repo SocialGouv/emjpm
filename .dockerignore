@@ -6,8 +6,9 @@ docker-compose.build.yaml
 docker-compose.yaml
 LICENSE
 optional
-packages/api/dist
-packages/app/build
+
+node_modules
+packages/*/node_modules
 
 .dockerignore
 .eslintcache

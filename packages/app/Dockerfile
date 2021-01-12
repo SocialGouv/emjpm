@@ -1,57 +1,44 @@
-ARG BUILD_ENV=pure
 ARG NODE_VERSION=15-alpine
+ARG BUILD_ENV=pure
 FROM node:$NODE_VERSION as node
-
-
-# PRE-DEPENDENCIES
-FROM node as pre-dependencies
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-RUN npm i -g lerna
+# BUILD ENVIRONMENTS
+FROM node as build_pure
 
-COPY package.json lerna.json yarn.lock /app/
-COPY packages/app/package.json /app/packages/app/package.json
-COPY packages/biz/package.json /app/packages/biz/package.json
+COPY package.json yarn.lock /app/
+COPY packages/app/package.ci.json  /app/packages/app/package.json
+COPY packages/biz/package.ci.json /app/packages/biz/package.json
 
-RUN npm i -g glob
-COPY ./scripts/gitops/version-zero /app/scripts/gitops/version-zero
-RUN NODE_PATH=$(npm root -g) /app/scripts/gitops/version-zero
-
-RUN lerna link
-
-
-# DEPENDENCIES ENVIRONMENTS
-FROM pre-dependencies as dependencies_pure
-
-FROM pre-dependencies as dependencies_usecache
-ONBUILD COPY node_modules node_modules/
-ONBUILD COPY packages/app/node_modules packages/app/node_modules/
-
-
-# DEPENDENCIES
-FROM dependencies_${BUILD_ENV} as dependencies
 RUN yarn --frozen-lockfile --production --ignore-scripts
 
 
-# BUILDER
-FROM dependencies as builder
+COPY packages/app/src /app/packages/app/src/
+COPY packages/app/.eslintrc.yml  /app/packages/app/.eslintrc.yml
+COPY packages/app/public /app/packages/app/public/
+COPY lerna.json /app/packages/app/src/lerna.ci.json
+
+COPY packages/biz/src /app/packages/biz/src/
+COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
+
 ARG REACT_APP_SENTRY_PUBLIC_DSN
 ARG REACT_APP_GRAPHQL_SERVER_URI
 ARG REACT_APP_API_URL
-
 ENV REACT_APP_SENTRY_PUBLIC_DSN=$REACT_APP_SENTRY_PUBLIC_DSN
 ENV REACT_APP_GRAPHQL_SERVER_URI=$REACT_APP_GRAPHQL_SERVER_URI
 ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
-COPY packages/app /app/packages/app/
-COPY packages/biz /app/packages/biz/
-
-RUN yarn workspace @emjpm/app run postinstall
-RUN yarn workspace @emjpm/biz run postinstall
+RUN yarn workspaces run postinstall
 RUN yarn workspace @emjpm/app build
+
+FROM dependencies as build_usecache
+ONBUILD COPY packages/app/build packages/app/build/
+
+# BUILDER
+FROM build_${BUILD_ENV} as builder
 
 
 # SERVER

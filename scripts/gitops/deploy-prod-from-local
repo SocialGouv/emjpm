@@ -5,6 +5,8 @@ if ((BASH_VERSINFO[0] < 4)); then
     echo "Sorry, you need at least bash-4.0 to run this script." >&2
 exit 1; fi
 
+export DOCKER_BUILDKIT=1
+
 export PKG_VERSION=`node -p "require('./lerna.json').version"`
 export TAG=${TAG:-"$PKG_VERSION-local_build"}
 echo "Building and deploying eMJPM $TAG"
@@ -71,11 +73,11 @@ export PG_HOST=$PG_HOST
 function docker_build {
   local CONTEXT=$1
   local BUILD_ARGS=$2
+  echo "BUILD $CONTEXT"
+
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     -t $REGISTRY/$CONTEXT:$TAG \
-    --cache-from $REGISTRY/$CONTEXT:latest \
-    --cache-from $REGISTRY/$CONTEXT:$TAG \
     $BUILD_ARGS \
     .
   docker push $REGISTRY/$CONTEXT:$TAG
@@ -84,46 +86,17 @@ function docker_build {
 function docker_build_node_multistage {
   local CONTEXT=$1
   local BUILDER_BUILD_ARGS=$2
+  echo "BUILD $CONTEXT"
 
-  ## build pre-dependencies
-  docker build \
-    -f ./packages/$CONTEXT/Dockerfile \
-    --target pre-dependencies \
-    -t $REGISTRY/$CONTEXT.pre-dependencies \
-    -t $REGISTRY/$CONTEXT.pre-dependencies:$TAG \
-    .
-  # docker push $REGISTRY/$CONTEXT.pre-dependencies:$TAG
-
-  ## build dependencies_${BUILD_ENV}
-  docker build \
-    -f ./packages/$CONTEXT/Dockerfile \
-    --target dependencies_${BUILD_ENV} \
-    -t $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV}:$TAG \
-    --cache-from $REGISTRY/$CONTEXT.pre-dependencies \
-    .
-  # docker push $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV}:$TAG
-
-  ## build dependencies
-  docker build \
-    -f ./packages/$CONTEXT/Dockerfile \
-    --target dependencies \
-    --build-arg BUILD_ENV=${BUILD_ENV} \
-    -t $REGISTRY/$CONTEXT.dependencies:$TAG \
-    --cache-from $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV} \
-    .
-  # docker push $REGISTRY/$CONTEXT.dependencies:$TAG
-
-  ## build builder
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target builder \
+    -t $REGISTRY/$CONTEXT.builder \
     -t $REGISTRY/$CONTEXT.builder:$TAG \
-    --cache-from $REGISTRY/$CONTEXT.dependencies \
+    --build-arg BUILD_ENV=$BUILD_ENV \
     $BUILDER_BUILD_ARGS \
     .
-  # docker push $REGISTRY/$CONTEXT:$TAG.builder
 
-  ## build server
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target server \
@@ -131,6 +104,7 @@ function docker_build_node_multistage {
     --cache-from $REGISTRY/$CONTEXT.builder \
     .
   docker push $REGISTRY/$CONTEXT:$TAG
+
 }
 
 function deploy_production {
@@ -157,20 +131,24 @@ function deploy_production {
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
 
-# docker_build hasura
-docker-compose -f docker-compose.build.yaml build hasura
-docker-compose -f docker-compose.build.yaml push hasura
+start_time=$(date +%s)
 
-# docker_build_node_multistage api
-docker-compose -f docker-compose.build.yaml build api
-docker-compose -f docker-compose.build.yaml push api
+docker_build hasura
 
-# docker_build_node_multistage app "
-#   --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
-#   --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
-docker-compose -f docker-compose.build.yaml build app
-docker-compose -f docker-compose.build.yaml push app
+docker_build_node_multistage api
 
-deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
-deploy_production "api" "$API_HOST" "$API_PORT"
-deploy_production "app" "$APP_HOST" "$APP_PORT"
+docker_build_node_multistage app "
+  --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
+  --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
+
+# deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
+# deploy_production "api" "$API_HOST" "$API_PORT"
+# deploy_production "app" "$APP_HOST" "$APP_PORT"
+
+
+current_time=$(date +%s)
+seconds_elapsed=$(( $current_time - $start_time ))
+timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
+IFS=':' read -r day hour minute second <<< "$timestamp"
+hour="$(( $hour+24*($day-1) ))"
+printf "\r%02d:%02d:%02d" $hour $minute $second
