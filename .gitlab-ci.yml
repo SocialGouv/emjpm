@@ -443,6 +443,7 @@ Build hasura image:
     BUILD_NAME: hasura
     CONTEXT: .
     DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
+    KANIKO_DOCKERFILE: packages/hasura/Dockerfile
 
 Backup PG before production (incubateur):
   extends:
