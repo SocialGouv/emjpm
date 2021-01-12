@@ -25,11 +25,7 @@ COPY packages/biz/src /app/packages/biz/src/
 COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
 
 ARG REACT_APP_SENTRY_PUBLIC_DSN
-ARG REACT_APP_GRAPHQL_SERVER_URI
-ARG REACT_APP_API_URL
 ENV REACT_APP_SENTRY_PUBLIC_DSN=$REACT_APP_SENTRY_PUBLIC_DSN
-ENV REACT_APP_GRAPHQL_SERVER_URI=$REACT_APP_GRAPHQL_SERVER_URI
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
 
 RUN yarn workspaces run postinstall
 RUN yarn workspace @emjpm/app build

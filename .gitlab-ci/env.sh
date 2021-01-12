@@ -44,7 +44,7 @@ fi
 
 #
 
-if [[ -n "${PRODUCTION+x}" ]] || [[ -n "${BUILD_PRODUCTION+x}"  ]]; then
+if [[ -n "${PRODUCTION+x}" ]]; then
   export ENVIRONMENT="production"
   export BRANCH_HASH=prod;
   export K8S_NAMESPACE="emjpm"

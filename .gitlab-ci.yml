@@ -404,28 +404,15 @@ Build api image:
       export DOCKER_BUILD_ARGS="
         --build-arg BUILD_ENV=${BUILD_ENV}
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
-        --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
-        --build-arg REACT_APP_API_URL=//${API_HOST}"
   variables:
     BUILD_NAME: app
     CONTEXT: .
     DESTINATION: $CI_REGISTRY_IMAGE/app:$IMAGE_TAG
     KANIKO_DOCKERFILE: packages/app/Dockerfile
 
-Build app image (dev):
+Build app image:
   extends:
     - .build_app
-  except:
-    - tags
-
-Build app image (prod):
-  extends:
-    - .build_app
-  only:
-    refs:
-      - tags
-  variables:
-    BUILD_PRODUCTION: "true"
 
 ################### Build Docker HASURA ########################
 
@@ -561,7 +548,7 @@ Deploy app (dev):
     - .deploy_app_stage
     - .dev_stage
   needs:
-    - Build app image (dev)
+    - Build app image
   variables:
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
@@ -573,7 +560,7 @@ Deploy app (prod):
     - .deploy_app_stage
     - .incubateur_stage
   needs:
-    - Build app image (prod)
+    - Build app image
   after_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -840,22 +827,10 @@ Trivy Scan api:
   variables:
     CONTEXT: api
 
-Trivy Scan app (dev):
+Trivy Scan app:
   extends: .base_trivy_scan
   needs:
-    - Build app image (dev)
-  except:
-    - tags
-  variables:
-    CONTEXT: app
-
-Trivy Scan app (prod):
-  extends: .base_trivy_scan
-  needs:
-    - Build app image (prod)
-  only:
-    refs:
-      - tags
+    - Build app image
   variables:
     CONTEXT: app
 
