@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.85.1](https://github.com/SocialGouv/emjpm/compare/v25.85.0...v25.85.1) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ci:** api build ([8b95e9e](https://github.com/SocialGouv/emjpm/commit/8b95e9e0ee749ccd87fe73ec9ac6a81c707b4db3))
+* **ci:** cleanup subprocess ([999aebf](https://github.com/SocialGouv/emjpm/commit/999aebf11564515d0a4cdea90ab928d7db0536f5))
+* **ci:** deploy from local ([6ccc0e0](https://github.com/SocialGouv/emjpm/commit/6ccc0e0c0078a77525bd733e09c1167a687066bd))
+* **ci:** dev version message ([7a23e1c](https://github.com/SocialGouv/emjpm/commit/7a23e1ce965e82681d3eca7d61c63afa0c2b2cf1))
+* **ci:** hasura build ([a43e530](https://github.com/SocialGouv/emjpm/commit/a43e5301152c0a5be712669a7f0747a7cda6a2b2))
+* **ci:** hasura build ([417a069](https://github.com/SocialGouv/emjpm/commit/417a069807297d553ee6bacd062aaf9cda19545a))
+* **ci:** release ([2d91b8a](https://github.com/SocialGouv/emjpm/commit/2d91b8a3809abf2d476e561fbb574a8b6bbebf68))
+* **ci:** tests ([de98dee](https://github.com/SocialGouv/emjpm/commit/de98dee2a3790f9e50fe479bde3e469f66682b51))
+* **ci:** tests ([5008b94](https://github.com/SocialGouv/emjpm/commit/5008b946e7724a64ebf9e199e5eba80d705cdc02))
+* **ci:** tests ([ed372ab](https://github.com/SocialGouv/emjpm/commit/ed372ab884f5efda72367f7bdf97242957adef1e))
+* **ci:** tests ([eb14bb4](https://github.com/SocialGouv/emjpm/commit/eb14bb4841f9bdc7934c0584e45e8cf9a7f68c31))
+* **ci:** tests ([090f17b](https://github.com/SocialGouv/emjpm/commit/090f17baed128220ccd4793cccf157f49de619fc))
+* **ci:** tests ([ef50528](https://github.com/SocialGouv/emjpm/commit/ef505282a1cdf9a7b059094ea98d6039c19930f6))
+* **ci:** tests ([e28ff65](https://github.com/SocialGouv/emjpm/commit/e28ff655ae009d16b65091e67e5844446230a074))
+* **ci:** tests ([221e642](https://github.com/SocialGouv/emjpm/commit/221e642b42635272153d83d0ab249de14f750e71))
+* **ci:** tests ([fbe98ff](https://github.com/SocialGouv/emjpm/commit/fbe98ffb0e0c325190addc46b22af680d663ab34))
+* **ci:** tests ([8e863ca](https://github.com/SocialGouv/emjpm/commit/8e863caa085d8f15a561ee3df214662ebcf3e278))
+* **ci:** url ([8625f9f](https://github.com/SocialGouv/emjpm/commit/8625f9f46be8fd3041f981f11416504b3a426598))
+* **ci:** yaml ([8b019b8](https://github.com/SocialGouv/emjpm/commit/8b019b8894d5df5d7509ef5d5d2f75f46a4d232c))
+* **deploy-prod:** from local ([4ce3008](https://github.com/SocialGouv/emjpm/commit/4ce3008962ef5f1b63f1d223c395ad9d391035ca))
+* **deploy-prod:** from local ([5c44e29](https://github.com/SocialGouv/emjpm/commit/5c44e29acefbe194b541d1eff6d844a0957311a2))
+* **notif:** ready to prod ([68f6a4c](https://github.com/SocialGouv/emjpm/commit/68f6a4c828ddefe51e0d2889ccf4f7faac16f146))
+* **things:** ci + scripts ([99a8167](https://github.com/SocialGouv/emjpm/commit/99a8167e9fb58bbc261fd667d1c0bca23b158e4b))
+* **things:** deploy fast'n'furious ([d7b6aa9](https://github.com/SocialGouv/emjpm/commit/d7b6aa97cf68d84d430fe098e72b637b8e27d2cd))
+
+
+
+
+
 # [25.85.0](https://github.com/SocialGouv/emjpm/compare/v25.84.24...v25.85.0) (2021-01-11)
 
 
