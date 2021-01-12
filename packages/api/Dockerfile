@@ -24,9 +24,9 @@ RUN lerna link
 
 
 # DEPENDENCIES ENVIRONMENTS
-FROM pre-dependencies as dependencies_local
+FROM pre-dependencies as dependencies_pure
 
-FROM pre-dependencies as dependencies_gitlab_ci
+FROM pre-dependencies as dependencies_usecache
 ONBUILD COPY node_modules node_modules/
 ONBUILD COPY packages/api/node_modules packages/api/node_modules/
 
