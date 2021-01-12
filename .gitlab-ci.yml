@@ -22,12 +22,23 @@ variables:
 
   NODE_IMAGE: node:15-alpine
 
+# GLOBAL CACHE
+cache:
+  key:
+    files:
+      - yarn.lock
+  paths:
+    - node_modules
+    - "packages/*/node_modules"
+    - .yarn
+
 # STAGES
 
 stages:
   - "Enable"
-  - "Prepare"
-  - "Build"
+  - "Dependencies"
+  - "Build JS"
+  - "Build Docker"
   - "Deploy"
   - "Notify Finished Deployment"
 
@@ -72,7 +83,7 @@ stages:
 
 .base_create_namespace_stage:
   extends: .base_docker_kubectl_image_stage
-  stage: "Build"
+  stage: "Build Docker"
   environment:
     name: review/${CI_COMMIT_REF_NAME}-dev
     url: https://${CI_ENVIRONMENT_SLUG}-${CI_PROJECT_ID}.${KUBE_INGRESS_BASE_DOMAIN}
@@ -105,62 +116,6 @@ stages:
 .before_script_build: &before_script_build |
   mkdir -p /kaniko/.docker
   echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-
-.prepare_stage:
-  extends: .base_stage
-  stage: Prepare
-  dependencies:
-    - Run Pipeline
-
-.base_yarn:
-  extends: .prepare_stage
-  image: ${NODE_IMAGE}
-  interruptible: true
-  cache:
-    key: ${CI_PROJECT_ID}
-    paths:
-      - node_modules
-      - "packages/*/node_modules"
-      - .yarn
-  artifacts:
-    expire_in: 1 month
-    paths:
-      - node_modules
-      - "packages/*/node_modules"
-      - .yarn
-  script:
-    - yarn --frozen-lockfile --production --ignore-scripts --cache-folder .yarn
-
-
-.base_build_stage:
-  stage: "Build"
-  extends: .base_docker_image_stage
-  before_script:
-    - *before_script_build
-  variables:
-    CONTEXT: .
-    KANIKO_DOCKERFILE: Dockerfile
-  script:
-    - |
-      /kaniko/executor \
-        --cache=true \
-        --context ${CONTEXT} \
-        --dockerfile ${KANIKO_DOCKERFILE} \
-        ${DOCKER_BUILD_ARGS} \
-        --destination $DESTINATION
-
-.base_build_stage_node:
-  extends: .base_build_stage
-  variables:
-    BUILD_ENV: usecache
-  cache:
-    key: ${CI_PROJECT_ID}
-    paths:
-      - node_modules
-      - "packages/*/node_modules"
-      - .yarn
-  before_script:
-    - *before_script_build
 
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
@@ -201,28 +156,6 @@ stages:
     - *resolve_deploy_environment
     - update-deployment $(cat DEPLOY_ID) "${HOST}" success
 
-.base_trivy_scan:
-  extends:
-    - .base_stage
-  stage: Deploy
-  services:
-    - docker:dind
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
-  allow_failure: true
-  variables:
-    IMAGE: $CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG
-  script:
-    # Build report
-    - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
-    # Print report and fail on error
-    - trivy --cache-dir .trivycache/ image --exit-code 1 --no-progress $IMAGE
-  cache:
-    paths:
-      - .trivycache/
-  # Enables https://docs.gitlab.com/ee/user/application_security/container_scanning/ (Container Scanning report is available on GitLab EE Ultimate or GitLab.com Gold)
-  artifacts:
-    reports:
-      container_scanning: gl-container-scanning-report.json
 
 .base_notify_mattermost:
   image: registry.gitlab.factory.social.gouv.fr/devthejo/bash-curl:1.2.0
@@ -320,15 +253,6 @@ stages:
   environment:
     name: fabrique-dev2
 
-.build_stage:
-  extends: .base_stage
-  stage: Build
-  interruptible: true
-  dependencies: []
-  before_script:
-    - *before_script_build
-    - source ./.gitlab-ci/env.sh
-
 ############ RUN PIPELINE ########################
 
 Notify New Pipeline:
@@ -379,41 +303,126 @@ Create namespace:
     - envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
     - kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
 
-################### Prepare ##################
+################### Dependencies ##################
+.dependencies_stage:
+  extends: .base_stage
+  stage: Dependencies
+  dependencies:
+    - Run Pipeline
+
+.base_yarn_install:
+  extends: .dependencies_stage
+  image: ${NODE_IMAGE}
+  interruptible: true
+  only:
+    changes:
+      - yarn.lock
+  artifacts:
+    expire_in: 1 month
+    paths:
+      - node_modules
+      - "packages/*/node_modules"
+      - .yarn
+  script:
+    - yarn --frozen-lockfile --production --ignore-scripts --cache-folder .yarn
+
 Install Node Dependencies:
   extends:
-    - .base_yarn
+    - .base_yarn_install
 
 
-################### BUILD ##################
+################### BUILD JS ##################
+.buildjs_stage:
+  extends: .base_stage
+  stage: Build JS
+  dependencies:
+    - Run Pipeline
 
-################### Build API ##################
+.base_buildjs_install:
+  extends: .dependencies_stage
+  image: ${NODE_IMAGE}
+  interruptible: true
+  script:
+    - yarn workspace @emjpm/$CONTEXT build
+
+Build JS api:
+  extends:
+    - .base_buildjs_install
+  variables:
+    CONTEXT: api
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/api/dist
+
+Build JS app:
+  extends:
+    - .base_buildjs_install
+  variables:
+    CONTEXT: app
+  artifacts:
+    expire_in: 1 day
+    paths:
+      - packages/app/build
+
+
+################### BUILD Docker ##################
+.base_build_stage:
+  stage: "Build Docker"
+  extends:
+    - .base_docker_image_stage
+    - .base_stage
+  before_script:
+    - *before_script_build
+    - source ./.gitlab-ci/env.sh
+  variables:
+    CONTEXT: .
+    KANIKO_DOCKERFILE: Dockerfile
+  script:
+    - |
+      /kaniko/executor \
+        --cache=true \
+        --context ${CONTEXT} \
+        --dockerfile ${KANIKO_DOCKERFILE} \
+        ${DOCKER_BUILD_ARGS} \
+        --destination $DESTINATION
+
+.base_build_stage_node:
+  extends: .base_build_stage
+  variables:
+    BUILD_ENV: usecache
+
+
+################### Build Docker API ##################
 
 Build api image:
   extends:
     - .base_build_stage_node
-    - .build_stage
-  dependencies:
-    - Install Node Dependencies
+  needs:
+    - Build JS api
   variables:
     BUILD_NAME: api
     CONTEXT: .
     KANIKO_DOCKERFILE: packages/api/Dockerfile
     DESTINATION: $CI_REGISTRY_IMAGE/api:$IMAGE_TAG
+  before_script:
+    - *before_script_build
+    - source ./.gitlab-ci/env.sh
+    - export DOCKER_BUILD_ARGS="--build-arg BUILD_ENV=${BUILD_ENV}"
 
-################### Build APP ##################
+################### Build Docker APP ##################
 
 .build_app:
   extends:
     - .base_build_stage_node
-    - .build_stage
-  dependencies:
-    - Install Node Dependencies
+  needs:
+    - Build JS app
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
     - >-
       export DOCKER_BUILD_ARGS="
+        --build-arg BUILD_ENV=${BUILD_ENV}
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
         --build-arg REACT_APP_GRAPHQL_SERVER_URI=//${HASURA_HOST}/v1/graphql
         --build-arg REACT_APP_API_URL=//${API_HOST}"
@@ -438,12 +447,12 @@ Build app image (prod):
   variables:
     BUILD_PRODUCTION: "true"
 
-################### Build HASURA ########################
+################### Build Docker HASURA ########################
 
 Build hasura image:
   extends:
     - .base_build_stage
-    - .build_stage
+  needs: []
   variables:
     BUILD_NAME: hasura
     CONTEXT: .
@@ -454,7 +463,7 @@ Backup PG before production (incubateur):
   extends:
     - .base_docker_kubectl_image_stage
     - .incubateur_stage
-  stage: Build
+  stage: Build Docker
   interruptible: true
   script:
     - source ./.gitlab-ci/env.sh
@@ -517,6 +526,8 @@ Init Managed Database:
     - .base_deploy_chart_stage
     - .deploy_stage
   dependencies: []
+  needs:
+    - Build api image
   variables:
     CONTEXT: api
     PORT: 4000
@@ -554,6 +565,9 @@ Deploy api (prod):
   extends:
     - .base_deploy_chart_stage
     - .deploy_stage
+  needs:
+    - Build app image (dev)
+    - Build app image (prod)
   variables:
     CONTEXT: app
     PORT: 3000
@@ -630,6 +644,8 @@ Deploy knex (prod):
   extends:
     - .base_deploy_chart_stage
     - .deploy_stage
+  needs:
+    - Build hasura image
   variables:
     CONTEXT: hasura
     PORT: 80
@@ -766,12 +782,6 @@ Release:
   only:
     variables:
       - $RELEASE
-  cache:
-    key: ${CI_PROJECT_ID}
-    paths:
-      - node_modules
-      - "packages/*/node_modules"
-      - .yarn
   before_script:
   script:
     - git checkout ${CI_COMMIT_REF_NAME}
@@ -818,18 +828,48 @@ Trigger release:
       ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 ############ Security scans ########################
+.base_trivy_scan:
+  extends:
+    - .base_stage
+  stage: Deploy
+  services:
+    - docker:dind
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
+  allow_failure: true
+  script:
+    - source ./.gitlab-ci/env.sh
+    - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG:$IMAGE_TAG
+    # Build report
+    - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+    # Print report and fail on error
+    - trivy --cache-dir .trivycache/ image --exit-code 1 --no-progress $IMAGE
+  cache:
+    paths:
+      - .trivycache/
+  # Enables https://docs.gitlab.com/ee/user/application_security/container_scanning/ (Container Scanning report is available on GitLab EE Ultimate or GitLab.com Gold)
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
+
 Trivy Scan api:
   extends: .base_trivy_scan
+  needs:
+    - Build api image
   variables:
     CONTEXT: api
 
 Trivy Scan app:
   extends: .base_trivy_scan
+  needs:
+    - Build app image (dev)
+    - Build app image (prod)
   variables:
     CONTEXT: app
 
 Trivy Scan hasura:
   extends: .base_trivy_scan
+  needs:
+    - Build hasura image
   variables:
     CONTEXT: hasura
 

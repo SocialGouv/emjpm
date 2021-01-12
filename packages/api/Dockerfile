@@ -1,50 +1,34 @@
-ARG BUILD_ENV=pure
 ARG NODE_VERSION=15-alpine
+ARG BUILD_ENV=pure
 FROM node:$NODE_VERSION as node
-
-
-# PRE-DEPENDENCIES
-FROM node as pre-dependencies
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
-RUN npm i -g lerna
+# BUILD ENVIRONMENTS
+FROM node as build_pure
 
-COPY package.json lerna.json yarn.lock /app/
-COPY packages/api/package.json /app/packages/api/package.json
-COPY packages/biz/package.json /app/packages/biz/package.json
+COPY package.json yarn.lock /app/
+COPY packages/api/package.ci.json  /app/packages/api/package.json
+COPY packages/biz/package.ci.json /app/packages/biz/package.json
 
-RUN npm i -g glob
-COPY ./scripts/gitops/version-zero /app/scripts/gitops/version-zero
-RUN NODE_PATH=$(npm root -g) /app/scripts/gitops/version-zero
-
-RUN lerna link
-
-
-# DEPENDENCIES ENVIRONMENTS
-FROM pre-dependencies as dependencies_pure
-
-FROM pre-dependencies as dependencies_usecache
-ONBUILD COPY node_modules node_modules/
-ONBUILD COPY packages/api/node_modules packages/api/node_modules/
-
-
-# DEPENDENCIES
-FROM dependencies_${BUILD_ENV} as dependencies
 RUN yarn --frozen-lockfile --production --ignore-scripts
 
+COPY packages/api/src /app/packages/api/src/
+COPY packages/api/.eslintrc.yml  /app/packages/api/.eslintrc.yml
+
+COPY packages/biz/src /app/packages/biz/src/
+COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
+
+RUN yarn workspaces run postinstall
+RUN yarn workspace @emjpm/api build
+
+FROM dependencies as build_usecache
+ONBUILD COPY packages/api/dist packages/api/dist/
 
 # BUILDER
-FROM dependencies as builder
-
-COPY packages/api /app/packages/api/
-COPY packages/biz /app/packages/biz/
-
-RUN yarn workspace @emjpm/api run postinstall
-RUN yarn workspace @emjpm/biz run postinstall
-RUN yarn workspace @emjpm/api build
+FROM build_${BUILD_ENV} as builder
 
 
 # SERVER
