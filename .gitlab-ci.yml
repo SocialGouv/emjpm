@@ -658,7 +658,7 @@ Deploy hasura (prod):
 
 ################### Restore DATA #############################
 
-.base_restore_pgdata
+.base_restore_pgdata:
   extends:
     - .base_docker_kubectl_image_stage
     - .dev_stage
