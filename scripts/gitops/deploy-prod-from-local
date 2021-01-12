@@ -133,18 +133,25 @@ function deploy_production {
 
 start_time=$(date +%s)
 
-docker_build hasura
+docker_build hasura &
+CHILD_PID_1=$!
+trap "kill $CHILD_PID_1;" SIGTERM SIGINT
 
-docker_build_node_multistage api
+docker_build_node_multistage api &
+CHILD_PID_2=$!
+trap "kill $CHILD_PID_2;" SIGTERM SIGINT
 
 docker_build_node_multistage app "
   --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
-  --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
+  --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}" &
+CHILD_PID_3=$!
+trap "kill $CHILD_PID_3;" SIGTERM SIGINT
 
-# deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
-# deploy_production "api" "$API_HOST" "$API_PORT"
-# deploy_production "app" "$APP_HOST" "$APP_PORT"
+wait $CHILD_PID_1 $CHILD_PID_2 $CHILD_PID_3
 
+deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
+deploy_production "api" "$API_HOST" "$API_PORT"
+deploy_production "app" "$APP_HOST" "$APP_PORT"
 
 current_time=$(date +%s)
 seconds_elapsed=$(( $current_time - $start_time ))

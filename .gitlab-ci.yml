@@ -565,9 +565,6 @@ Deploy api (prod):
   extends:
     - .base_deploy_chart_stage
     - .deploy_stage
-  needs:
-    - Build app image (dev)
-    - Build app image (prod)
   variables:
     CONTEXT: app
     PORT: 3000
@@ -583,6 +580,8 @@ Deploy app (dev):
   extends:
     - .deploy_app_stage
     - .dev_stage
+  needs:
+    - Build app image (dev)
   variables:
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
@@ -593,6 +592,8 @@ Deploy app (prod):
   extends:
     - .deploy_app_stage
     - .incubateur_stage
+  needs:
+    - Build app image (prod)
   after_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -858,10 +859,16 @@ Trivy Scan api:
   variables:
     CONTEXT: api
 
-Trivy Scan app:
+Trivy Scan app (dev):
   extends: .base_trivy_scan
   needs:
     - Build app image (dev)
+  variables:
+    CONTEXT: app
+
+Trivy Scan app (prod):
+  extends: .base_trivy_scan
+  needs:
     - Build app image (prod)
   variables:
     CONTEXT: app
