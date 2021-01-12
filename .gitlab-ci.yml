@@ -325,6 +325,7 @@ stages:
   interruptible: true
   dependencies: []
   before_script:
+    - *before_script_build
     - source ./.gitlab-ci/env.sh
 
 ############ RUN PIPELINE ########################
