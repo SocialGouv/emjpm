@@ -317,6 +317,7 @@ Install Node Dependencies:
   image: ${NODE_IMAGE}
   interruptible: true
   script:
+    - yarn workspaces run postinstall
     - yarn workspace @emjpm/$CONTEXT build
 
 Build JS api:
