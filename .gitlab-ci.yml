@@ -22,18 +22,7 @@ variables:
 
   NODE_IMAGE: node:15-alpine
 
-# GLOBAL CACHE
-cache:
-  key:
-    files:
-      - yarn.lock
-  paths:
-    - node_modules
-    - "packages/*/node_modules"
-    - .yarn
-
 # STAGES
-
 stages:
   - "Enable"
   - "Dependencies"
@@ -283,6 +272,14 @@ Create namespace:
   stage: Dependencies
   dependencies:
     - Run Pipeline
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+      - "packages/*/node_modules"
+      - .yarn
 
 .base_yarn_install:
   extends: .dependencies_stage
@@ -316,6 +313,14 @@ Install Node Dependencies:
   extends: .buildjs_stage
   image: ${NODE_IMAGE}
   interruptible: true
+  cache:
+    key:
+      files:
+        - yarn.lock
+    paths:
+      - node_modules
+      - "packages/*/node_modules"
+      - .yarn
   script:
     - yarn workspaces run postinstall
     - yarn workspace @emjpm/$CONTEXT build
