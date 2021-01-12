@@ -113,9 +113,9 @@ export function useProvideAuth() {
       localStorage.setItem("user_type", type);
 
       matopush(["trackEvent", "login", "success"]);
-      matopush(["setUserId", authStore.id]);
+      matopush(["setUserId", id]);
       if (authStore.type) {
-        matopush(["setCustomVariable", 1, "type", authStore.type, "visit"]);
+        matopush(["setCustomVariable", 1, "type", type, "visit"]);
       }
 
       dispatchAuthStore({
