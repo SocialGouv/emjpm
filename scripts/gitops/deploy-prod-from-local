@@ -101,6 +101,7 @@ function docker_build_node_multistage {
     -f ./packages/$CONTEXT/Dockerfile \
     --target server \
     -t $REGISTRY/$CONTEXT:$TAG \
+    --build-arg BUILD_ENV=$BUILD_ENV \
     --cache-from $REGISTRY/$CONTEXT.builder \
     .
   docker push $REGISTRY/$CONTEXT:$TAG
