@@ -19,7 +19,7 @@ import { Button, Card } from "~/ui";
 import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;
 
   return (
@@ -73,7 +73,7 @@ const RowItem = ({ item }) => {
       </Card>
     </>
   );
-};
+}
 
 function AdminUsers() {
   const resultPerPage = 50;

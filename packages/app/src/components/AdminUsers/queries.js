@@ -11,14 +11,12 @@ export const USERS = gql`
     users_aggregate(
       where: {
         type: { _eq: $type }
-        _and: {
-          id: { _eq: $searchId }
-          _or: [
-            { email: { _ilike: $searchText } }
-            { nom: { _ilike: $searchText } }
-            { prenom: { _ilike: $searchText } }
-          ]
-        }
+        _or: [
+          { id: { _eq: $searchId } }
+          { email: { _ilike: $searchText } }
+          { nom: { _ilike: $searchText } }
+          { prenom: { _ilike: $searchText } }
+        ]
       }
     ) {
       aggregate {
@@ -31,14 +29,12 @@ export const USERS = gql`
       offset: $offset
       where: {
         type: { _eq: $type }
-        _and: {
-          id: { _eq: $searchId }
-          _or: [
-            { email: { _ilike: $searchText } }
-            { nom: { _ilike: $searchText } }
-            { prenom: { _ilike: $searchText } }
-          ]
-        }
+        _or: [
+          { id: { _eq: $searchId } }
+          { email: { _ilike: $searchText } }
+          { nom: { _ilike: $searchText } }
+          { prenom: { _ilike: $searchText } }
+        ]
       }
     ) {
       id
