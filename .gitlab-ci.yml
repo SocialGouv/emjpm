@@ -290,7 +290,6 @@ stages:
       - $E2E_TEST
       - $PRODUCTION
       - $RELEASE
-      - $RUN_PIPELINE
     refs:
       - tags
 
