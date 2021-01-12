@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.85.3](https://github.com/SocialGouv/emjpm/compare/v25.85.2...v25.85.3) (2021-01-12)
+
+
+### Bug Fixes
+
+* **ci:** going to sleep ([d1b6f68](https://github.com/SocialGouv/emjpm/commit/d1b6f68e0961beb38e5d64e5f4371f12c2624717))
+* **ci:** wip ([49807af](https://github.com/SocialGouv/emjpm/commit/49807af7ed7a228ce7fee78d17953d1adfec1f69))
+* **ci:** wip ([88450c7](https://github.com/SocialGouv/emjpm/commit/88450c7a21795a12b581369c1ca725706a949136))
+
+
+
+
+
 ## [25.85.2](https://github.com/SocialGouv/emjpm/compare/v25.85.1...v25.85.2) (2021-01-12)
 
 
