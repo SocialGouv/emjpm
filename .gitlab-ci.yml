@@ -790,6 +790,7 @@ Trigger production:
   only:
     refs:
       - tags
+      - master
   script:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
@@ -845,7 +846,7 @@ Notify Ready to Prod:
       - tags
   script:
     - |
-      echo '{"text":"🔥 ready to trigger production at '${CI_PIPELINE_URL}'"}' \
+      echo '{"text":"🔥 release ready to production at '${CI_PIPELINE_URL}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 

@@ -157,18 +157,19 @@ function deploy_production {
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
 
-# docker-compose -f docker-compose.build.yaml build hasura api app
-# docker-compose -f docker-compose.build.yaml push hasura api app
-
-# docker-compose -f docker-compose.build.yaml build app
-# docker-compose -f docker-compose.build.yaml push app
-
 # docker_build hasura
+docker-compose -f docker-compose.build.yaml build hasura
+docker-compose -f docker-compose.build.yaml push hasura
+
 # docker_build_node_multistage api
+docker-compose -f docker-compose.build.yaml build api
+docker-compose -f docker-compose.build.yaml push api
+
 # docker_build_node_multistage app "
 #   --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
 #   --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
-
+docker-compose -f docker-compose.build.yaml build app
+docker-compose -f docker-compose.build.yaml push app
 
 deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
 deploy_production "api" "$API_HOST" "$API_PORT"
