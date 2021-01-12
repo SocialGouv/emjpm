@@ -657,12 +657,11 @@ Deploy hasura (prod):
 
 ################### Restore DATA #############################
 
-Restore postgres data:
+.base_restore_pgdata
   extends:
     - .base_docker_kubectl_image_stage
     - .dev_stage
     - .deploy_stage
-  when: manual
   script:
     - source ./.gitlab-ci/env.sh
 
@@ -689,6 +688,25 @@ Restore postgres data:
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
     - kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
+
+Restore postgres data (feat):
+  extends:
+    - .base_restore_pgdata
+  when: manual
+  except:
+    refs:
+      - tags
+    variables:
+      - $E2E_TEST
+      - $PRODUCTION
+      - $RELEASE
+
+Restore postgres data (dev):
+  extends:
+    - .base_restore_pgdata
+  only:
+    refs:
+      - tags
 
 # NOTIFY
 
