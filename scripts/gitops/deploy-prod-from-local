@@ -6,8 +6,8 @@ if ((BASH_VERSINFO[0] < 4)); then
 exit 1; fi
 
 export PKG_VERSION=`node -p "require('./lerna.json').version"`
-export IMAGE_TAG=${IMAGE_TAG:-"$PKG_VERSION-local_build"}
-echo "Building and deploying eMJPM $IMAGE_TAG"
+export TAG=${TAG:-"$PKG_VERSION-local_build"}
+echo "Building and deploying eMJPM $TAG"
 
 # global variables
 export DOMAIN="emjpm.fabrique.social.gouv.fr";
@@ -20,12 +20,11 @@ export HASURA_PORT="80";
 
 # build and push variables
 export BUILD_ENV=${BUILD_ENV:-"pure"}
-export HASURA_TAG=${HASURA_TAG:-"$IMAGE_TAG"}
-export API_TAG=${API_TAG:-"$IMAGE_TAG"}
-export APP_TAG=${APP_TAG:-"$IMAGE_TAG"}
-export DOCKER_REGISTRY_ROOT="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
-export REACT_APP_GRAPHQL_SERVER_URI="https://$DOMAIN:5000/v1/graphql"
-export REACT_APP_API_URL="https://$DOMAIN:4000"
+export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
+export REACT_APP_GRAPHQL_SERVER_URI="https://$HASURA_HOST/v1/graphql"
+export REACT_APP_API_URL="https://$API_HOST"
+export GRAPHQL_SERVER_URI="$REACT_APP_GRAPHQL_SERVER_URI"
+export APP_API_URL="$REACT_APP_API_URL"
 
 # deploy variables
 export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
@@ -71,73 +70,67 @@ export PG_HOST=$PG_HOST
 
 function docker_build {
   local CONTEXT=$1
-  local TAG=$2
-  local BUILD_ARGS=$3
+  local BUILD_ARGS=$2
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG \
+    -t $REGISTRY/$CONTEXT:$TAG \
+    --cache-from $REGISTRY/$CONTEXT:latest \
+    --cache-from $REGISTRY/$CONTEXT:$TAG \
     $BUILD_ARGS \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG
+  docker push $REGISTRY/$CONTEXT:$TAG
 }
 
 function docker_build_node_multistage {
   local CONTEXT=$1
-  local TAG=$2
-  local BUILDER_BUILD_ARGS=$3
+  local BUILDER_BUILD_ARGS=$2
 
   ## build pre-dependencies
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target pre-dependencies \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:latest \
+    -t $REGISTRY/$CONTEXT.pre-dependencies \
+    -t $REGISTRY/$CONTEXT.pre-dependencies:$TAG \
     .
-  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:$TAG
+  # docker push $REGISTRY/$CONTEXT.pre-dependencies:$TAG
 
   ## build dependencies_${BUILD_ENV}
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target dependencies_${BUILD_ENV} \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:latest \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:latest \
+    -t $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV}:$TAG \
+    --cache-from $REGISTRY/$CONTEXT.pre-dependencies \
     .
-  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:$TAG
+  # docker push $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV}:$TAG
 
   ## build dependencies
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target dependencies \
     --build-arg BUILD_ENV=${BUILD_ENV} \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:latest \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:latest \
+    -t $REGISTRY/$CONTEXT.dependencies:$TAG \
+    --cache-from $REGISTRY/$CONTEXT.dependencies_${BUILD_ENV} \
     .
-  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:$TAG
+  # docker push $REGISTRY/$CONTEXT.dependencies:$TAG
 
   ## build builder
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target builder \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT.builder:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.builder:latest \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:latest \
+    -t $REGISTRY/$CONTEXT.builder:$TAG \
+    --cache-from $REGISTRY/$CONTEXT.dependencies \
     $BUILDER_BUILD_ARGS \
     .
-  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder
+  # docker push $REGISTRY/$CONTEXT:$TAG.builder
 
   ## build server
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target server \
-    -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT:latest \
-    --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.builder:latest \
+    -t $REGISTRY/$CONTEXT:$TAG \
+    --cache-from $REGISTRY/$CONTEXT.builder \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG
+  docker push $REGISTRY/$CONTEXT:$TAG
 }
 
 function deploy_production {
@@ -146,7 +139,9 @@ function deploy_production {
   export PORT=$3
 
   HELM_RENDER_ARGS="
-    --set image.tag=${IMAGE_TAG}
+    --set image.repository=${REGISTRY}/${CONTEXT}
+    --set image.tag=${TAG}
+    --set image.pullPolicy=Always
     --set ingress.hosts[0].host=${HOST}
     --set ingress.tls[0].hosts[0]=${HOST}
     --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
@@ -162,21 +157,19 @@ function deploy_production {
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
 
+# docker-compose -f docker-compose.build.yaml build hasura api app
+# docker-compose -f docker-compose.build.yaml push hasura api app
+
+# docker-compose -f docker-compose.build.yaml build app
+# docker-compose -f docker-compose.build.yaml push app
+
+# docker_build hasura
+# docker_build_node_multistage api
+# docker_build_node_multistage app "
+#   --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
+#   --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
 
 
-function build {
-  docker_build hasura $HASURA_TAG
-  docker_build_node_multistage api $API_TAG
-  docker_build_node_multistage app $APP_TAG "
-    --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
-    --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
-}
-
-function deploy {
-  deploy_production "api" "$API_HOST" "$API_PORT"
-  deploy_production "app" "$APP_HOST" "$APP_PORT"
-  deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
-}
-
-build
-deploy
+deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
+deploy_production "api" "$API_HOST" "$API_PORT"
+deploy_production "app" "$APP_HOST" "$APP_PORT"

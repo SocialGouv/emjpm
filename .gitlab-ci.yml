@@ -297,6 +297,7 @@ stages:
   only:
     variables:
       - $RUN_PIPELINE
+      - $CI_COMMIT_TAG
   except:
     variables:
       # Don't run when running e2e tests
@@ -398,7 +399,7 @@ Build api image:
     BUILD_NAME: api
     CONTEXT: .
     KANIKO_DOCKERFILE: packages/api/Dockerfile
-    DESTINATION: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
+    DESTINATION: $CI_REGISTRY_IMAGE/api:$IMAGE_TAG
 
 ################### Build APP ##################
 
@@ -419,7 +420,7 @@ Build api image:
   variables:
     BUILD_NAME: app
     CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
+    DESTINATION: $CI_REGISTRY_IMAGE/app:$IMAGE_TAG
     KANIKO_DOCKERFILE: packages/app/Dockerfile
 
 Build app image (dev):
@@ -446,7 +447,7 @@ Build hasura image:
   variables:
     BUILD_NAME: hasura
     CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
+    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$IMAGE_TAG
     KANIKO_DOCKERFILE: packages/hasura/Dockerfile
 
 Backup PG before production (incubateur):
