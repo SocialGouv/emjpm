@@ -291,11 +291,15 @@ stages:
       - $PRODUCTION
       - $RELEASE
       - $RUN_PIPELINE
+    refs:
+      - tags
 
 .base_stage:
   only:
     variables:
       - $RUN_PIPELINE
+    refs:
+      tags
   except:
     variables:
       # Don't run when running e2e tests
@@ -773,19 +777,8 @@ Release:
   script:
     # Ensure to have "git" and "jq"
     - apk add --no-cache git=~2 jq=~1
-    # Set git to a branch
     - git checkout ${CI_COMMIT_REF_NAME}
-    # Use github as origin
     - git remote set-url origin https://${GITHUB_TOKEN}@github.com/${CI_PROJECT_PATH}.git
-
-    - yarn --frozen-lockfile --production --ignore-scripts --cache-folder .yarn
-
-    # HACK(douglasduteil): remove all packages dependencies
-    # Restore the package files before bumping versions.
-    # As Lerna will commit, we need to restore the files as they were
-    - git checkout -- .
-
-    # Run lerna version
     - echo "npx lerna version ${LERNA_ARGS}"
     - GH_TOKEN=${GITHUB_TOKEN} npx lerna version ${LERNA_ARGS}
 
