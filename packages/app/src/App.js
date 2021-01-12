@@ -17,6 +17,8 @@ import { Router } from "react-router";
 
 import { useMatomo } from "~/util/matomo";
 
+import AutoReload from "~/components/AutoReload";
+
 function App() {
   useSentry();
 
@@ -35,7 +37,6 @@ function App() {
           }
         `}
       />
-
       <ThemeProvider theme={presetEmjpm}>
         <Sentry.ErrorBoundary fallback={"Une erreur s'est produite"}>
           <ProvideAuth>
@@ -43,6 +44,7 @@ function App() {
           </ProvideAuth>
         </Sentry.ErrorBoundary>
       </ThemeProvider>
+      <AutoReload />
     </>
   );
 }
