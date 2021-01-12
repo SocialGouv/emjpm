@@ -187,4 +187,6 @@ function main {
   deploy
 }
 
+trap 'kill $(jobs -p)' EXIT
+
 main
