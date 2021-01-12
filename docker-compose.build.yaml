@@ -32,8 +32,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/hasura/Dockerfile
-      cache_from:
-        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/hasura:${TAG:-local_build_test}
     ports:
       - 5000:8080
     depends_on:
@@ -58,8 +56,6 @@ services:
         REACT_APP_GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
         REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
         BUILD_ENV: ${BUILD_ENV:-pure}
-      cache_from:
-        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/app:${TAG:-local_build_test}
       shm_size: 2gb
     shm_size: 2gb
     volumes:
@@ -80,8 +76,6 @@ services:
       dockerfile: ./packages/api/Dockerfile
       args:
         BUILD_ENV: ${BUILD_ENV:-pure}
-      cache_from:
-        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local_build_test}
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:

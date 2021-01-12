@@ -6,8 +6,8 @@ docker-compose.build.yaml
 docker-compose.yaml
 LICENSE
 optional
-packages/app/.next/cache
-packages/app/.next/server/static/development
+packages/api/dist
+packages/app/build
 
 .dockerignore
 .eslintcache
