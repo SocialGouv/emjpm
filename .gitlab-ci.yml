@@ -313,7 +313,7 @@ Install Node Dependencies:
     - Run Pipeline
 
 .base_buildjs_install:
-  extends: .dependencies_stage
+  extends: .buildjs_stage
   image: ${NODE_IMAGE}
   interruptible: true
   script:
