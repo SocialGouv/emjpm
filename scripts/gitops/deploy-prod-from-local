@@ -111,6 +111,7 @@ function docker_build_node_multistage {
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target dependencies \
+    --build-arg BUILD_ENV=${BUILD_ENV} \
     -t $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:$TAG \
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:latest \
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:latest \
@@ -168,8 +169,7 @@ function build {
   docker_build_node_multistage api $API_TAG
   docker_build_node_multistage app $APP_TAG "
     --build-arg REACT_APP_GRAPHQL_SERVER_URI=${REACT_APP_GRAPHQL_SERVER_URI}
-    --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}
-    --build-arg BUILD_ENV=${BUILD_ENV}"
+    --build-arg REACT_APP_API_URL=${REACT_APP_API_URL}"
 }
 
 function deploy {
