@@ -95,7 +95,7 @@ function docker_build_node_multistage {
     -t $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies \
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:latest \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies
+  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.pre-dependencies
 
   ## build dependencies_${BUILD_ENV}
   docker build \
@@ -105,7 +105,7 @@ function docker_build_node_multistage {
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:latest \
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.pre-dependencies:latest \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies_${BUILD_ENV}
+  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies_${BUILD_ENV}
 
   ## build dependencies
   docker build \
@@ -115,7 +115,7 @@ function docker_build_node_multistage {
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:latest \
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies_${BUILD_ENV}:latest \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies
+  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.dependencies
 
   ## build builder
   docker build \
@@ -126,7 +126,7 @@ function docker_build_node_multistage {
     --cache-from $DOCKER_REGISTRY_ROOT/$CONTEXT.dependencies:latest \
     $BUILDER_BUILD_ARGS \
     .
-  docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder
+  # docker push $DOCKER_REGISTRY_ROOT/$CONTEXT:$TAG.builder
 
   ## build server
   docker build \
