@@ -843,6 +843,23 @@ Trivy Scan hasura:
   variables:
     CONTEXT: hasura
 
+##### Notify ready to trigger production #######
+
+Notify Ready to Prod:
+  extends:
+    - .base_notify_mattermost
+  stage: Notify Finished Deployment
+  variables:
+    GIT_STRATEGY: none
+  only:
+    refs:
+      - tags
+  script:
+    - |
+      echo '{"text":"🔥 ready to trigger production at '${CI_PIPELINE_URL}'"}' \
+        | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+
+
 ############ Notify dev ########################
 
 Notify Dev (mattermost):
