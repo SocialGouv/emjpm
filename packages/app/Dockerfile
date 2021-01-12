@@ -26,9 +26,9 @@ RUN lerna link
 # DEPENDENCIES ENVIRONMENTS
 FROM pre-dependencies as dependencies_pure
 
-FROM pre-dependencies as dependencies_usecache
-ONBUILD COPY node_modules node_modules/
-ONBUILD COPY packages/app/node_modules packages/app/node_modules/
+#FROM pre-dependencies as dependencies_usecache
+#ONBUILD COPY node_modules node_modules/
+#ONBUILD COPY packages/app/node_modules packages/app/node_modules/
 
 
 # DEPENDENCIES

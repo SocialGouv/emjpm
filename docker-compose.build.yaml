@@ -28,12 +28,12 @@ services:
     restart: always
 
   hasura:
-    image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/hasura:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/hasura:${TAG:-local_build_test}
     build:
       context: .
       dockerfile: ./packages/hasura/Dockerfile
       cache_from:
-        - registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/hasura:${TAG:-local_build_test}
+        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/hasura:${TAG:-local_build_test}
     ports:
       - 5000:8080
     depends_on:
@@ -50,7 +50,7 @@ services:
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
   app:
-    image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/app:${TAG:-local_build_test}
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
@@ -59,7 +59,7 @@ services:
         REACT_APP_API_URL: ${APP_API_URL:-http://localhost:4000}
         BUILD_ENV: ${BUILD_ENV:-pure}
       cache_from:
-        - registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app:${TAG:-local_build_test}
+        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/app:${TAG:-local_build_test}
       shm_size: 2gb
     shm_size: 2gb
     volumes:
@@ -74,14 +74,14 @@ services:
       GRAPHQL_SERVER_URI: ${GRAPHQL_SERVER_URI:-http://localhost:5000/v1/graphql}
 
   api:
-    image: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/api:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local_build_test}
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
       args:
         BUILD_ENV: ${BUILD_ENV:-pure}
       cache_from:
-        - registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/api:${TAG:-local_build_test}
+        - ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local_build_test}
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
