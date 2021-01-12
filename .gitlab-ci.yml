@@ -786,8 +786,8 @@ Release:
     - git checkout -- .
 
     # Run lerna version
-    - echo "yarn lerna version ${LERNA_ARGS}"
-    - GH_TOKEN=${GITHUB_TOKEN} yarn lerna version ${LERNA_ARGS}
+    - echo "npx lerna version ${LERNA_ARGS}"
+    - GH_TOKEN=${GITHUB_TOKEN} npx lerna version ${LERNA_ARGS}
 
 ############ Trigger production ###################
 
