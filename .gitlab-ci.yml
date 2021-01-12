@@ -290,8 +290,8 @@ stages:
       - $E2E_TEST
       - $PRODUCTION
       - $RELEASE
-    refs:
-      - tags
+      - $CI_COMMIT_TAG
+      - $RUN_PIPELINE
 
 .base_stage:
   only:
