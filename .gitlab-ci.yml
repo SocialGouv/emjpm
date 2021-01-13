@@ -809,9 +809,11 @@ Trigger release:
     - docker:dind
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
+  variables:
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
   script:
     - source ./.gitlab-ci/env.sh
-    - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG:$IMAGE_TAG
+    - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$IMAGE_TAG
     # Build report
     - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
     # Print report and fail on error
