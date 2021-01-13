@@ -15,7 +15,7 @@ import {
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
 
-const Mesures = () => {
+export default function Mesures() {
   const { service_members } = useContext(UserContext);
   const [
     {
@@ -67,6 +67,4 @@ const Mesures = () => {
       </LayoutServices>
     </FiltersContextProvider>
   );
-};
-
-export default Mesures;
+}

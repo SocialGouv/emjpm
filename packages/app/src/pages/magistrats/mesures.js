@@ -8,7 +8,7 @@ import { MagistratMesures } from "~/components/MagistratMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
 
-const Mesures = () => {
+export default function Mesures() {
   return (
     <FiltersContextProvider
       initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
@@ -29,6 +29,4 @@ const Mesures = () => {
       </LayoutMagistrat>
     </FiltersContextProvider>
   );
-};
-
-export default Mesures;
+}
