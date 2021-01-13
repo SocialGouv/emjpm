@@ -403,7 +403,7 @@ Build api image:
     - >-
       export DOCKER_BUILD_ARGS="
         --build-arg BUILD_ENV=${BUILD_ENV}
-        --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}
+        --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}"
   variables:
     BUILD_NAME: app
     CONTEXT: .
