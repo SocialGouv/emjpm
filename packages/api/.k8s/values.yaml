@@ -46,7 +46,7 @@ deployment:
     - name: PGSSLMODE
       value: require
     - name: HASURA_GRAPHQL_URI
-      value: 'http://${HASURA_SRV_HOST}/v1/graphql'
+      value: 'http://hasura/v1/graphql'
     - name: DATABASE_URL
       value: >-
         psql://${EMJPM_PG_USER_ENCODED}:${EMJPM_PG_PASSWORD_ENCODED}@${PG_HOST}/${POSTGRES_DATABASE_EMJPM}
