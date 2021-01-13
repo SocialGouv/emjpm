@@ -494,6 +494,7 @@ Init Managed Database:
     - .deploy_stage
   dependencies: []
   needs:
+    - Create namespace
     - Build api image
   variables:
     CONTEXT: api
@@ -548,6 +549,7 @@ Deploy app (dev):
     - .deploy_app_stage
     - .dev_stage
   needs:
+    - Create namespace
     - Build app image
   variables:
     HELM_RENDER_ARGS: >-
@@ -560,6 +562,7 @@ Deploy app (prod):
     - .deploy_app_stage
     - .incubateur_stage
   needs:
+    - Create namespace
     - Build app image
   after_script:
     - source ./.gitlab-ci/env.sh
@@ -613,6 +616,7 @@ Deploy knex (prod):
     - .base_deploy_chart_stage
     - .deploy_stage
   needs:
+    - Create namespace
     - Build hasura image
   variables:
     CONTEXT: hasura
