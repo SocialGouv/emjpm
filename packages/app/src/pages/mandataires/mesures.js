@@ -12,7 +12,7 @@ import {
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/ui";
 
-const MesuresListView = () => {
+function MesuresListView() {
   return (
     <FiltersContextProvider
       initialValues={{
@@ -39,10 +39,10 @@ const MesuresListView = () => {
       </LayoutMandataire>
     </FiltersContextProvider>
   );
-};
+}
 
-const MandataireMesuresList = () => {
+function MandataireMesuresList() {
   return <MesuresListView />;
-};
+}
 
 export default MandataireMesuresList;

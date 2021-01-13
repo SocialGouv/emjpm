@@ -22,7 +22,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutServices = (props) => {
+function LayoutServices(props) {
   const { children, hasNavigation = true } = props;
   const user = useContext(UserContext);
 
@@ -71,6 +71,6 @@ const LayoutServices = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutServices };

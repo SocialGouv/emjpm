@@ -7,26 +7,25 @@ import { UserContext } from "~/components/UserContext";
 
 import Link from "./Link";
 
-const ServiceBadge = ({ service }) => {
+function ServiceBadge({ service }) {
   const { mesures_in_progress: mesures_en_cours, dispo_max } = service;
   return (
     <Box pl="5">
       <MesureBadge mesures_en_cours={mesures_en_cours} dispo_max={dispo_max} />
     </Box>
   );
-};
+}
 
-const MandataireBadge = ({ mandataire }) => {
+function MandataireBadge({ mandataire }) {
   const { mesures_en_cours, dispo_max } = mandataire;
   return (
     <Box pl="5">
       <MesureBadge mesures_en_cours={mesures_en_cours} dispo_max={dispo_max} />
     </Box>
   );
-};
+}
 
-export const Navigation = (props) => {
-  const { links } = props;
+function Navigation({ links }) {
   const user = useContext(UserContext);
   return (
     <Box mt="2">
@@ -41,4 +40,6 @@ export const Navigation = (props) => {
       </Flex>
     </Box>
   );
-};
+}
+
+export { Navigation };
