@@ -6,7 +6,7 @@ import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const EditInformations = () => {
+export default function EditInformations() {
   const {
     service: { id: serviceId },
   } = useContext(UserContext);
@@ -25,6 +25,4 @@ const EditInformations = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
-
-export default EditInformations;
+}
