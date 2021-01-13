@@ -58,10 +58,8 @@ else
 fi
 
 export API_HOST="api-${DOMAIN}";
-export API_SRV_HOST="api:4000";
 export FRONTEND_HOST="${DOMAIN}";
 export HASURA_HOST="hasura-${DOMAIN}";
-export HASURA_SRV_HOST="hasura";
 
 
 export API_URL="https://${API_HOST}"
@@ -88,13 +86,11 @@ printenv | grep \
   -e REGISTRY \
   \
   -e API_HOST \
-  -e API_SRV_HOST \
   -e API_URL \
   -e CERTIFICATE_NAME \
   -e FRONTEND_HOST \
   -e FRONTEND_URL \
   -e HASURA_HOST \
-  -e HASURA_SRV_HOST \
   \
   -e CONTEXT \
   -e PORT \

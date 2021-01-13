@@ -43,11 +43,11 @@ deployment:
           name: emjpm-secret
           key: HASURA_GRAPHQL_ADMIN_SECRET
     - name: HASURA_GRAPHQL_JWT_SECRET
-      value: '{"type": "RS256","jwk_url": "http://${API_SRV_HOST}/api/auth/jwks"}'
+      value: '{"type": "RS256","jwk_url": "http://api:4000/api/auth/jwks"}'
     - name: HASURA_GRAPHQL_SERVER_PORT
       value: '${PORT}'
     - name: HASURA_WEB_HOOK_BASE_URL
-      value: 'http://${API_SRV_HOST}'
+      value: 'http://api:4000'
     - name: HASURA_WEB_HOOK_SECRET
       valueFrom:
         secretKeyRef:

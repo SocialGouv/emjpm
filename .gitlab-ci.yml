@@ -662,7 +662,7 @@ Deploy hasura (prod):
     - export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
     - export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
 
-    - kubectl scale --replicas=0 deploy/${HASURA_SRV_HOST}
+    - kubectl scale --replicas=0 deploy/hasura
 
     - kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
     - kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
@@ -672,8 +672,8 @@ Deploy hasura (prod):
     - cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
 
     - kubectl wait --for=condition=complete job/restore-job  --timeout=600s
-    - kubectl scale --replicas=1 deploy/${HASURA_SRV_HOST}
-    - kubectl rollout status deploy/${HASURA_SRV_HOST} --timeout=600s
+    - kubectl scale --replicas=1 deploy/hasura
+    - kubectl rollout status deploy/hasura --timeout=600s
 
     - kubectl delete job anonymise-job || true
     - cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
@@ -855,7 +855,7 @@ Notify Ready to Prod:
       - tags
   script:
     - |
-      echo '{"text":"🔥 release ready to production at '${CI_PIPELINE_URL}'"}' \
+      echo '{"text":"🔥 release ready for production at '${CI_PIPELINE_URL}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 
