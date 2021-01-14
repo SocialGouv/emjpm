@@ -27,8 +27,11 @@ export function ProvideAuth({ children }) {
   const syncLogout = useCallback(
     (event) => {
       if (event.key === "logout") {
-        console.log("logged out from storage!");
-        auth.logout();
+        const { authStore } = auth;
+        if (authStore.logged) {
+          console.log("logged out from storage!");
+          auth.logout();
+        }
       }
     },
     [auth]

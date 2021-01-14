@@ -10,6 +10,7 @@
     3. HTML
     You don't need to add any html code, if the service is autorized, the javascript is added. otherwise no.
  */
+const matomoService = { initialized: false };
 tarteaucitron.services.matomo = {
   cookies: [
     "_pk_ref",
@@ -25,6 +26,10 @@ tarteaucitron.services.matomo = {
     if (tarteaucitron.user.matomoId === undefined) {
       return;
     }
+    if (matomoService.initialized) {
+      return;
+    }
+    matomoService.initialized = true;
 
     window._paq = window._paq || [];
 
