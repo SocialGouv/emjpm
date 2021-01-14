@@ -21,7 +21,7 @@ variables:
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
   NODE_IMAGE: node:15-alpine
-  IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
+  IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
 
 # STAGES
 stages:
