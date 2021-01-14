@@ -11,7 +11,9 @@ exit 1; fi
 export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
 export COMMIT_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
 export VERSION=$(printf "${COMMIT_TAG}" | sed "s/^v//")
-export TAG=${TAG:-"$VERSION-local_build"}
+export BRANCH_NAME=$(git branch --show-current)
+export REF_SLUG=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9]/-/g;s/^-*//g;s/-*$//g' | cut -c1-63) # like CI_COMMIT_REF_SLUG in gitlab
+export IMAGE_TAG=${IMAGE_TAG:-"$REF_SLUG"}
 
 # HELPER FUNCTION
 function urlencode {
@@ -36,11 +38,11 @@ function docker_build {
 
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
-    -t $REGISTRY/$CONTEXT:$TAG \
+    -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
     $BUILD_ARGS \
     --progress plain \
     .
-  docker push $REGISTRY/$CONTEXT:$TAG
+  docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 }
 
 function docker_build_node_multistage {
@@ -52,7 +54,7 @@ function docker_build_node_multistage {
     -f ./packages/$CONTEXT/Dockerfile \
     --target builder \
     -t $REGISTRY/$CONTEXT.builder \
-    -t $REGISTRY/$CONTEXT.builder:$TAG \
+    -t $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
     --build-arg BUILD_ENV=$BUILD_ENV \
     $BUILDER_BUILD_ARGS \
     --progress plain \
@@ -61,19 +63,19 @@ function docker_build_node_multistage {
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     --target server \
-    -t $REGISTRY/$CONTEXT:$TAG \
+    -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
     --build-arg BUILD_ENV=$BUILD_ENV \
     --cache-from $REGISTRY/$CONTEXT.builder \
     --progress plain \
     .
-  docker push $REGISTRY/$CONTEXT:$TAG
+  docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 }
 
 function docker_build_all {
   start_time=$(date +%s)
 
-  echo "# BUILDING eMJPM $TAG"
+  echo "# BUILDING eMJPM $IMAGE_TAG"
 
   export DOCKER_BUILDKIT=1
   export BUILD_ENV=${BUILD_ENV:-"pure"}
@@ -202,7 +204,7 @@ function k8s_deploy_package {
 
   HELM_RENDER_ARGS="
     --set image.repository=${REGISTRY}/${CONTEXT}
-    --set image.tag=${TAG}
+    --set image.tag=${IMAGE_TAG}
     --set image.pullPolicy=Always
     --set ingress.hosts[0].host=${HOST}
     --set ingress.tls[0].hosts[0]=${HOST}
@@ -225,13 +227,13 @@ function k8s_deploy_package {
       > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
 
-  echo "### DEPLOYING $CONTEXT/$TAG ON $HOST"
+  echo "### DEPLOYING $CONTEXT/$IMAGE_TAG ON $HOST"
   echo "#### manifests: packages/$CONTEXT/.k8s/manifests"
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
 
 function k8s_deploy_packages_branch {
-  echo "## DEPLOYING eMJPM $TAG on branch ${BRANCH_NAME}"
+  echo "## DEPLOYING eMJPM $IMAGE_TAG on branch ${BRANCH_NAME}"
 
   if [ "${BRANCH_NAME}" = "master" ]; then
     export BRANCH_HASH=master;
@@ -256,7 +258,7 @@ function k8s_deploy_packages_branch {
 }
 
 function k8s_deploy_packages_release {
-  echo "## DEPLOYING eMJPM $TAG on release"
+  echo "## DEPLOYING eMJPM $IMAGE_TAG on release"
 
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
   export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
@@ -271,7 +273,7 @@ function k8s_deploy_packages_release {
 }
 
 function k8s_deploy_packages_prod {
-  echo "## DEPLOYING eMJPM $TAG on production !"
+  echo "## DEPLOYING eMJPM $IMAGE_TAG on production !"
 
   export K8S_NAMESPACE="emjpm"
   export BRANCH_HASH=prod;
@@ -318,8 +320,7 @@ function k8s_deploy_env_prod {
 
 function k8s_deploy_all {
 
-  echo "# DEPLOYING eMJPM $TAG"
-  export BRANCH_NAME=$(git branch --show-current)
+  echo "# DEPLOYING eMJPM $IMAGE_TAG"
   export K8S_PROJECT="emjpm"
   export NODE_ENV="production"
 
