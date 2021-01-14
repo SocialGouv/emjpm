@@ -45,7 +45,7 @@ deployment:
     - name: HASURA_GRAPHQL_JWT_SECRET
       value: '{"type": "RS256","jwk_url": "http://api:4000/api/auth/jwks"}'
     - name: HASURA_GRAPHQL_SERVER_PORT
-      value: '${PORT}'
+      value: '80'
     - name: HASURA_WEB_HOOK_BASE_URL
       value: 'http://api:4000'
     - name: HASURA_WEB_HOOK_SECRET
@@ -61,8 +61,6 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
     nginx.ingress.kubernetes.io/limit-connections: '20'
     nginx.ingress.kubernetes.io/limit-rps: '50'
     nginx.ingress.kubernetes.io/limit-burst-multiplier: '5'
@@ -70,7 +68,7 @@ ingress:
     - host: hasura-emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
-          servicePort: ${PORT}
+          servicePort: 80
   tls:
     - hosts:
         - hasura-emjpm.dev2.fabrique.social.gouv.fr
@@ -79,5 +77,5 @@ fullnameOverride: ''
 nameOverride: ''
 service:
   type: ClusterIP
-  port: ${PORT}
-  targetPort: ${PORT}
+  port: 80
+  targetPort: 80

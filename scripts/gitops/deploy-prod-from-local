@@ -1,51 +1,19 @@
 #!/usr/bin/env bash
+
+# INIT
 set -e
 
 if ((BASH_VERSINFO[0] < 4)); then
     echo "Sorry, you need at least bash-4.0 to run this script." >&2
 exit 1; fi
 
-export DOCKER_BUILDKIT=1
-
-export PKG_VERSION=`node -p "require('./lerna.json').version"`
-export TAG=${TAG:-"$PKG_VERSION-local_build"}
-echo "Building and deploying eMJPM $TAG"
-
-# global variables
-export DOMAIN="emjpm.fabrique.social.gouv.fr";
-export API_HOST="api-${DOMAIN}";
-export API_PORT="4000";
-export APP_HOST="${DOMAIN}";
-export APP_PORT="3000";
-export HASURA_HOST="hasura-${DOMAIN}";
-export HASURA_PORT="80";
-
-# build and push variables
-export BUILD_ENV=${BUILD_ENV:-"pure"}
+# GLOBAL VARIABLES
 export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
+export COMMIT_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+export VERSION=$(printf "${COMMIT_TAG}" | sed "s/^v//")
+export TAG=${TAG:-"$VERSION-local_build"}
 
-# deploy variables
-export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
-export K8S_NAMESPACE=${K8S_NAMESPACE:-"emjpm"}
-if [ -f ".kubeconfig" ]; then
-  export KUBECONFIG=".kubeconfig:$KUBECONFIG"
-fi
-export API_SRV_HOST="api:4000";
-export HASURA_SRV_HOST="hasura";
-export NODE_ENV="production"
-source .env.prod
-if [ -z "$PG_HOST" ]; then
-  echo "missing PG_HOST env variable, provid it in .env.prod" >&2
-  exit 1
-fi
-if [ -z "$EMJPM_PG_USER" ]; then
-  echo "missing EMJPM_PG_USER env variable, provid it in .env.prod" >&2
-  exit 1
-fi
-if [ -z "$EMJPM_PG_PASSWORD" ]; then
-  echo "missing EMJPM_PG_PASSWORD env variable, provid it in .env.prod" >&2
-  exit 1
-fi
+# HELPER FUNCTION
 function urlencode {
   STDIN=`cat /dev/stdin`
   local length="${#STDIN}"
@@ -58,15 +26,9 @@ function urlencode {
       esac
   done
 }
-export POSTGRES_EMJPM_USER_ENCODED=$(echo "$EMJPM_PG_USER" | urlencode)
-export POSTGRES_EMJPM_PASSWORD_ENCODED=$(echo "$EMJPM_PG_PASSWORD" | urlencode)
-export POSTGRES_DATABASE_EMJPM=${POSTGRES_DATABASE_EMJPM:-"emjpm"}
-export EMJPM_PG_USER_ENCODED=$POSTGRES_EMJPM_USER_ENCODED
-export EMJPM_PG_PASSWORD_ENCODED=$POSTGRES_EMJPM_PASSWORD_ENCODED
-export PG_HOST=$PG_HOST
-export SENTRY_PUBLIC_DSN=$SENTRY_PUBLIC_DSN
 
 
+# DOCKER BUILD FUNCTIONS
 function docker_build {
   local CONTEXT=$1
   local BUILD_ARGS=$2
@@ -76,6 +38,7 @@ function docker_build {
     -f ./packages/$CONTEXT/Dockerfile \
     -t $REGISTRY/$CONTEXT:$TAG \
     $BUILD_ARGS \
+    --progress plain \
     .
   docker push $REGISTRY/$CONTEXT:$TAG
 }
@@ -92,6 +55,7 @@ function docker_build_node_multistage {
     -t $REGISTRY/$CONTEXT.builder:$TAG \
     --build-arg BUILD_ENV=$BUILD_ENV \
     $BUILDER_BUILD_ARGS \
+    --progress plain \
     .
 
   docker build \
@@ -100,15 +64,141 @@ function docker_build_node_multistage {
     -t $REGISTRY/$CONTEXT:$TAG \
     --build-arg BUILD_ENV=$BUILD_ENV \
     --cache-from $REGISTRY/$CONTEXT.builder \
+    --progress plain \
     .
   docker push $REGISTRY/$CONTEXT:$TAG
 
 }
 
-function deploy_production {
+function docker_build_all {
+  start_time=$(date +%s)
+
+  echo "# BUILDING eMJPM $TAG"
+
+  export DOCKER_BUILDKIT=1
+  export BUILD_ENV=${BUILD_ENV:-"pure"}
+  source .env.build
+
+  docker_build hasura &
+  CHILD_PID_1=$!
+  trap "kill $CHILD_PID_1;" SIGTERM SIGINT
+
+  docker_build_node_multistage api &
+  CHILD_PID_2=$!
+  trap "kill $CHILD_PID_2;" SIGTERM SIGINT
+
+  docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}" &
+  CHILD_PID_3=$!
+  trap "kill $CHILD_PID_3;" SIGTERM SIGINT
+
+  wait -n $CHILD_PID_1
+  wait -n $CHILD_PID_2
+  wait -n $CHILD_PID_3
+
+  current_time=$(date +%s)
+  seconds_elapsed=$(( $current_time - $start_time ))
+  timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
+  IFS=':' read -r day hour minute second <<< "$timestamp"
+  hour="$(( $hour+24*($day-1) ))"
+  printf "buit in \r%02d:%02d:%02d" $hour $minute $second
+}
+
+# K8S DEPLOY FUNCTIONS
+
+function k8s_create_namespace {
+
+  # Create namespace
+  kubectl apply -f - <<EOF
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    field.cattle.io/creatorId: gitlab
+    field.cattle.io/projectId: ${RANCHER_PROJECT_ID}
+    git/branch: ${BRANCH_HASH}
+    git/remote: ${DOMAIN}
+  labels:
+    cert: wildcard
+    field.cattle.io/projectId: ${RANCHER_PROJECT_ID}
+  name: ${K8S_NAMESPACE}
+EOF
+
+  # Create secrets
+  export APP_URL_B64=$(echo $DOMAIN | base64)
+  envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
+  kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+
+  # Create azure volume secrets for anonymized export
+  export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
+  export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
+  envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
+  kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
+}
+
+function k8s_deploy_package {
+
+  if [ "${PRODUCTION}" = "true" ]; then
+
+    if [ -z "$PROD_PGHOST" ]; then
+      echo "missing PROD_PGHOST env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export PG_HOST=$PROD_PGHOST
+    if [ -z "$PROD_PGUSER" ]; then
+      echo "missing PROD_PGUSER env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export POSTGRES_EMJPM_USER_ENCODED=$(echo "$PROD_PGUSER" | urlencode)
+    if [ -z "$PROD_PGPASSWORD" ]; then
+      echo "missing PROD_PGPASSWORD env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export POSTGRES_EMJPM_PASSWORD_ENCODED=$(echo "$PROD_PGPASSWORD" | urlencode)
+
+    export POSTGRES_DATABASE_EMJPM=${POSTGRES_DATABASE_EMJPM:-"emjpm"}
+    export EMJPM_PG_USER_ENCODED=$POSTGRES_EMJPM_USER_ENCODED
+    export EMJPM_PG_PASSWORD_ENCODED=$POSTGRES_EMJPM_PASSWORD_ENCODED
+
+  else
+
+    if [ -z "$STAGING_PGHOST" ]; then
+      echo "missing STAGING_PGHOST env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export PG_HOST=$STAGING_PGHOST
+    if [ -z "$STAGING_PGUSER" ]; then
+      echo "missing STAGING_PGUSER env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export POSTGRES_EMJPM_USER_ENCODED=$(echo "$STAGING_PGUSER" | urlencode)
+    if [ -z "$STAGING_PGPASSWORD" ]; then
+      echo "missing EMJPM_PGPASSWORD env variable, provid it in .env.deploy" >&2
+      exit 1
+    fi
+    export POSTGRES_EMJPM_PASSWORD_ENCODED=$(echo "$STAGING_PGPASSWORD" | urlencode)
+
+    export POSTGRES_DATABASE_EMJPM=${POSTGRES_DATABASE_EMJPM:-"emjpm"}
+    export EMJPM_PG_USER_ENCODED=$POSTGRES_EMJPM_USER_ENCODED
+    export EMJPM_PG_PASSWORD_ENCODED=$POSTGRES_EMJPM_PASSWORD_ENCODED
+
+  fi
+
+  local app_host="${DOMAIN}";
+  local api_host="api-${DOMAIN}";
+  local hasura_host="hasura-${DOMAIN}";
+
+  ### CONTEXT ###
   local CONTEXT=$1
-  export HOST=$2
-  export PORT=$3
+  if [ -z "$CONTEXT" ]; then
+    echo "missing CONTEXT argument to k8s_deploy function" >&2
+    exit 1
+  fi
+  local context_host_varname="${CONTEXT}_host"
+  export HOST=$(eval echo \$$context_host_varname)
+  if [ -z "$HOST" ]; then
+    echo "unkown HOST for CONTEXT '$CONTEXT' in k8s_deploy function" >&2
+    exit 1
+  fi
 
   HELM_RENDER_ARGS="
     --set image.repository=${REGISTRY}/${CONTEXT}
@@ -116,42 +206,156 @@ function deploy_production {
     --set image.pullPolicy=Always
     --set ingress.hosts[0].host=${HOST}
     --set ingress.tls[0].hosts[0]=${HOST}
-    --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
-    --set-string ingress.annotations.kubernetes\.io/tls-acme=true
   "
+
+  if [ "$PRODUCTION" = "true" ]; then
+    HELM_RENDER_ARGS=" \
+      --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
+      --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+      ${HELM_RENDER_ARGS}"
+  else
+    HELM_RENDER_ARGS=" \
+      --set ingress.tls[0].secretName=wildcard-crt \
+      ${HELM_RENDER_ARGS}"
+  fi
 
   envsubst < packages/$CONTEXT/.k8s/values.yaml \
     | helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s \
       --values - \
       > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
 
-  kubectl config use-context $KUBECTL_CONTEXT
+
+  echo "### DEPLOYING $CONTEXT/$TAG ON $HOST"
+  echo "#### manifests: packages/$CONTEXT/.k8s/manifests"
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 }
 
-start_time=$(date +%s)
+function k8s_deploy_packages_branch {
+  echo "## DEPLOYING eMJPM $TAG on branch ${BRANCH_NAME}"
 
-docker_build hasura &
-CHILD_PID_1=$!
-trap "kill $CHILD_PID_1;" SIGTERM SIGINT
+  if [ "${BRANCH_NAME}" = "master" ]; then
+    export BRANCH_HASH=master;
+    export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
+  elif [ "${BRANCH_NAME}" = "apitest" ]; then
+    export BRANCH_HASH=apitest;
+    export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
+  else
+    export BRANCH_HASH=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-7 )
+    export K8S_NAMESPACE="emjpm-feature-${BRANCH_HASH}"
+  fi
+  export DOMAIN="${BRANCH_HASH}-${ROOT_DOMAIN}";
+  export POSTGRES_DATABASE_EMJPM="emjpm_$( printf "${BRANCH_HASH}" | sed "s/\-//g" )"
 
-docker_build_node_multistage api &
-CHILD_PID_2=$!
-trap "kill $CHILD_PID_2;" SIGTERM SIGINT
+  if [ "${BRANCH_NAME}" != "master" ]; then
+    k8s_create_namespace
+  fi
 
-docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}" &
-CHILD_PID_3=$!
-trap "kill $CHILD_PID_3;" SIGTERM SIGINT
+  k8s_deploy_package "hasura"
+  k8s_deploy_package "api"
+  k8s_deploy_package "app"
+}
 
-wait $CHILD_PID_1 $CHILD_PID_2 $CHILD_PID_3
+function k8s_deploy_packages_release {
+  echo "## DEPLOYING eMJPM $TAG on release"
 
-# deploy_production "hasura" "$HASURA_HOST" "$HASURA_PORT"
-# deploy_production "api" "$API_HOST" "$API_PORT"
-# deploy_production "app" "$APP_HOST" "$APP_PORT"
+  export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
+  export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
+  export DOMAIN="${BRANCH_HASH}-${ROOT_DOMAIN}";
+  export POSTGRES_DATABASE_EMJPM="emjpm_$( printf "${BRANCH_HASH}" | sed "s/\-//g" )"
 
-current_time=$(date +%s)
-seconds_elapsed=$(( $current_time - $start_time ))
-timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
-IFS=':' read -r day hour minute second <<< "$timestamp"
-hour="$(( $hour+24*($day-1) ))"
-printf "\r%02d:%02d:%02d" $hour $minute $second
+  k8s_create_namespace
+
+  k8s_deploy_package "hasura"
+  k8s_deploy_package "api"
+  k8s_deploy_package "app"
+}
+
+function k8s_deploy_packages_prod {
+  echo "## DEPLOYING eMJPM $TAG on production !"
+
+  export K8S_NAMESPACE="emjpm"
+  export BRANCH_HASH=prod;
+  export DOMAIN="${ROOT_DOMAIN}";
+  export POSTGRES_DATABASE_EMJPM="emjpm"
+
+  k8s_deploy_package "hasura"
+  k8s_deploy_package "api"
+  k8s_deploy_package "app"
+}
+
+function k8s_deploy_env_dev {
+
+  export ROOT_DOMAIN="emjpm.dev2.fabrique.social.gouv.fr";
+  export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"dev2"}
+  # export RANCHER_CLUSTER_ID="c-bd7z2"
+  export RANCHER_PROJECT_ID="p-57mxc"
+
+  kubectl config use-context $KUBECTL_CONTEXT
+
+  # k8s_deploy_packages_branch
+
+  if [ "${BRANCH_NAME}" = "master" ]; then
+    k8s_deploy_packages_release
+  fi
+
+}
+
+function k8s_deploy_env_prod {
+
+  export ROOT_DOMAIN="emjpm.fabrique.social.gouv.fr";
+  export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
+  export PRODUCTION="true"
+  export RANCHER_CLUSTER_ID="c-kk8xm"
+  export RANCHER_PROJECT_ID="p-dpgpt"
+
+  kubectl config use-context $KUBECTL_CONTEXT
+
+  if [ "${BRANCH_NAME}" = "master" ]; then
+    k8s_deploy_packages_prod
+  fi
+
+}
+
+function k8s_deploy_all {
+
+  echo "# DEPLOYING eMJPM $TAG"
+  export BRANCH_NAME=$(git branch --show-current)
+  export K8S_PROJECT="emjpm"
+  export NODE_ENV="production"
+
+  source .env.deploy
+  [ -f ".kubeconfig" ] && KUBECONFIG=".kubeconfig:$KUBECONFIG"
+  export KUBECONFIG=$KUBECONFIG
+
+  k8s_deploy_env_dev
+  # k8s_deploy_env_prod
+
+}
+
+# MAIN
+run_main() {
+  while [[ "$#" -gt 0 ]]
+  do
+    case $1 in
+      -b|--build)
+        local BUILD="true"
+        ;;
+      -d|--dry)
+        local DRY="true"
+        ;;
+    esac
+    shift
+  done
+
+  if [ "$BUILD" = "true" ]; then
+    docker_build_all $@
+  fi
+  if [ "$DRY" != "true" ]; then
+    k8s_deploy_all $@
+  fi
+
+
+}
+
+# RUN MAIN
+run_main $@

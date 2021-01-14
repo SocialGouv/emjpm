@@ -9,7 +9,7 @@ const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
 const apiLog = require("./middlewares/apiLog");
 const errorHandler = require("./middlewares/error-handler");
-const pkg = require("../package.json");
+const { version } = require("./lerna.ci.json");
 const authRoutes = require("./routes/api/auth");
 const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
@@ -75,7 +75,7 @@ app.get("/", function (req, res) {
   res.json({
     NODE_ENV: process.env.NODE_ENV || "development",
     title: "API eMJPM",
-    version: pkg.version,
+    version: version,
   });
 });
 

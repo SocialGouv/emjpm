@@ -18,6 +18,7 @@ RUN yarn --frozen-lockfile --production --ignore-scripts
 COPY packages/api/src /app/packages/api/src/
 COPY packages/api/.eslintrc.yml  /app/packages/api/.eslintrc.yml
 COPY packages/api/knexfile.js  /app/packages/api/knexfile.js
+COPY lerna.json /app/packages/api/src/lerna.ci.json
 
 COPY packages/biz/src /app/packages/biz/src/
 COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
