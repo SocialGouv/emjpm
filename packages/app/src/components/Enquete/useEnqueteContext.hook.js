@@ -137,7 +137,6 @@ export const useEnqueteContext = (props) => {
     const { step, substep } = currentStep;
     const currentSection =
       sections && sections.length > step ? sections[step] : undefined;
-
     if (currentSection) {
       if (
         currentSection.steps.length <= 1 ||
