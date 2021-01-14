@@ -8,7 +8,7 @@ import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePr
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesCuratelleSimple = (props) => {
+export function EnquetePreposePrestationsSocialesCuratelleSimple(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -66,6 +66,6 @@ export const EnquetePreposePrestationsSocialesCuratelleSimple = (props) => {
       title="Curatelle simple"
     />
   );
-};
+}
 
 export default EnquetePreposePrestationsSocialesCuratelleSimple;

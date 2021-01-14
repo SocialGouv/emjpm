@@ -8,7 +8,7 @@ import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading3, Heading5, InlineError } from "~/ui";
 
-export const MesureAcceptForm = (props) => {
+export function MesureAcceptForm(props) {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
 
   const formik = useFormik({
@@ -154,6 +154,6 @@ export const MesureAcceptForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export default MesureAcceptForm;

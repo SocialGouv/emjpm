@@ -10,7 +10,7 @@ import {
   IconWrapperStyle,
 } from "./style";
 
-const BaseCheckBox = (props) => {
+function BaseCheckBox(props) {
   return (
     <Box sx={CheckboxStyle(props)}>
       <Box sx={IconWrapperStyle(props)}>
@@ -18,9 +18,9 @@ const BaseCheckBox = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
-const CheckBox = (props) => {
+function CheckBox(props) {
   const { label, name, isChecked, onChange } = props;
   return (
     <Box sx={CheckboxWrapperStyle}>
@@ -41,7 +41,7 @@ const CheckBox = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 CheckBox.propTypes = {
   isChecked: PropTypes.bool.isRequired,

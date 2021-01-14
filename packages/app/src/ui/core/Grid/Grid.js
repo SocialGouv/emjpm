@@ -4,23 +4,23 @@ import { Box, Flex } from "rebass";
 
 import { wrapperStyle } from "./style";
 
-const FlexWrapper = (props) => {
+function FlexWrapper(props) {
   const { children } = props;
   return (
     <Flex sx={wrapperStyle} {...props}>
       {children}
     </Flex>
   );
-};
+}
 
-const BoxWrapper = (props) => {
+function BoxWrapper(props) {
   const { children } = props;
   return (
     <Box sx={wrapperStyle} {...props}>
       {children}
     </Box>
   );
-};
+}
 
 BoxWrapper.propTypes = {
   children: PropTypes.node.isRequired,

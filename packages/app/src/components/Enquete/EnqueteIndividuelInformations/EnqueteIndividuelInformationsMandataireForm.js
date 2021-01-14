@@ -107,7 +107,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteIndividuelInformationsMandataireForm = (props) => {
+export function EnqueteIndividuelInformationsMandataireForm(props) {
   const {
     data = {},
     loading = false,
@@ -247,6 +247,6 @@ export const EnqueteIndividuelInformationsMandataireForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
-};
+}
 
 export default EnqueteIndividuelInformationsMandataireForm;

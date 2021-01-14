@@ -6,7 +6,7 @@ import { AsyncSelect, Spinner } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/util/geocode";
 
-const Geocode = (props) => {
+function Geocode(props) {
   const { hasError, onChange, placeholder, resource, instanceId } = props;
 
   const { departements, error, loading } = useDepartements({ all: true });
@@ -49,6 +49,6 @@ const Geocode = (props) => {
       onChange={onChange}
     />
   );
-};
+}
 
 export { Geocode };

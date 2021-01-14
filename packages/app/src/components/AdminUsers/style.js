@@ -1,4 +1,4 @@
-const cardStyle = (active) => {
+function cardStyle(active) {
   return {
     borderLeft: active ? "2px solid green" : "2px solid red",
     mb: "1",
@@ -6,7 +6,7 @@ const cardStyle = (active) => {
     pl: "16px",
     position: "relative",
   };
-};
+}
 
 const labelStyle = {
   color: "mediumGray",

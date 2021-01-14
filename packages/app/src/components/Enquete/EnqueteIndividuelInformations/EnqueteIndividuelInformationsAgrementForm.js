@@ -47,7 +47,7 @@ function formToData(values) {
     nb_mesures_dep_finance: parseFormInt(values.nb_mesures_dep_finance),
   };
 }
-export const EnqueteIndividuelInformationsAgrementForm = (props) => {
+export function EnqueteIndividuelInformationsAgrementForm(props) {
   const {
     data = {},
     loading = false,
@@ -120,6 +120,6 @@ export const EnqueteIndividuelInformationsAgrementForm = (props) => {
       </Box>
     </form>
   );
-};
+}
 
 export default EnqueteIndividuelInformationsAgrementForm;

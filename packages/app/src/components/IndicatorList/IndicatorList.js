@@ -10,7 +10,7 @@ import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
 const filterArray = (array, type) =>
   array.filter((element) => element.type === type);
-const filterArrays = (arrays) => {
+function filterArrays(arrays) {
   return arrays.map((array) => {
     const [service] = filterArray(array, "service");
     const [prepose] = filterArray(array, "prepose");
@@ -18,9 +18,9 @@ const filterArrays = (arrays) => {
     const [ti] = filterArray(array, "ti");
     return { individuel, prepose, service, ti };
   });
-};
+}
 
-const IndicatorList = (props) => {
+function IndicatorList(props) {
   const { departementCode } = props;
   const { data, error, loading } = useQuery(INDICATORS, {
     variables: { code: departementCode },
@@ -111,6 +111,6 @@ const IndicatorList = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { IndicatorList };

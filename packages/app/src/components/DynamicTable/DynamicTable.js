@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import DynamicTableFooter from "./DynamicTableFooter";
 import { TableRowStyle } from "./style";
 
-const DynamicTable = (props) => {
+function DynamicTable(props) {
   const { columns, data, selectedRows, setSelectedRows } = props;
 
   const table = useTable(
@@ -129,6 +129,6 @@ const DynamicTable = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default DynamicTable;

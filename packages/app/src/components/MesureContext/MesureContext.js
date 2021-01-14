@@ -6,7 +6,7 @@ import { MESURE_CONTEXT_QUERY } from "./queries";
 
 export const Context = createContext({});
 
-export const Provider = (props) => {
+export function Provider(props) {
   const { children, mesureId } = props;
 
   const { data } = useQuery(MESURE_CONTEXT_QUERY, {
@@ -24,7 +24,7 @@ export const Provider = (props) => {
   const [mesure] = data.mesures;
   const formatedMesure = formatMesure(mesure);
   return <Context.Provider value={formatedMesure}>{children}</Context.Provider>;
-};
+}
 
 export const { Consumer } = Context;
 

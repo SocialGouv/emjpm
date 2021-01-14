@@ -14,7 +14,7 @@ const textStyle = {
   textAlign: "center",
 };
 
-export const EnqueteImportPanel = (props) => {
+export function EnqueteImportPanel(props) {
   const { enqueteId, userId, goToStep } = props;
   const apolloClient = useApolloClient();
 
@@ -97,7 +97,7 @@ export const EnqueteImportPanel = (props) => {
       </Box>
     </Flex>
   );
-};
+}
 
 function renderSectionTitle(enqueteId, goToStep) {
   return (

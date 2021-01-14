@@ -13,15 +13,15 @@ import { serviceSchema } from "~/lib/validationSchemas/serviceSchema";
 import { Button, Field, Heading4, InlineError, Select, Textarea } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
-const buildTiOptions = (tis) => {
+function buildTiOptions(tis) {
   const tiOptions = tis.map((ti) => ({
     label: ti.etablissement,
     value: ti.id,
   }));
   return { tiOptions };
-};
+}
 
-const ServiceEditInformationsForm = (props) => {
+function ServiceEditInformationsForm(props) {
   const { handleSubmit, cancelLink, service, errorMessage } = props;
 
   const {
@@ -195,6 +195,6 @@ const ServiceEditInformationsForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export { ServiceEditInformationsForm };

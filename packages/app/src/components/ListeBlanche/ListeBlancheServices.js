@@ -28,7 +28,7 @@ function getRequestFilters(filters) {
   return requestFilters;
 }
 
-export const ListeBlancheServices = (props) => {
+export function ListeBlancheServices(props) {
   const { onSelectItem } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
@@ -70,6 +70,6 @@ export const ListeBlancheServices = (props) => {
       />
     </LoadingWrapper>
   );
-};
+}
 
 export default ListeBlancheServices;

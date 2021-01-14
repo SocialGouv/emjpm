@@ -12,16 +12,16 @@ export const defaultLinks = [
   // { title: "Centre d'assistance", to: "https://emjpm-blog.azurewebsites.net" }
 ];
 
-const Header = (props) => {
+function Header(props) {
   const { username } = useContext(UserContext);
   const apolloClient = useApolloClient();
   const { dropDownLinks } = props;
   const history = useHistory();
   const { logout } = useAuth();
-  const handleLogout = () => {
+  function handleLogout() {
     apolloClient.clearStore();
     logout(history);
-  };
+  }
   return (
     <Fragment>
       <HeaderComponent
@@ -33,7 +33,7 @@ const Header = (props) => {
       />
     </Fragment>
   );
-};
+}
 
 Header.defaultProps = {
   dropDownLinks: [],

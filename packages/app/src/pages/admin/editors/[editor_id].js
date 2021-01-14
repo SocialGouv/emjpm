@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Editor = () => {
+function Editor() {
   const { editor_id: editorId } = useParams();
 
   return (
@@ -22,6 +22,6 @@ const Editor = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default Editor;

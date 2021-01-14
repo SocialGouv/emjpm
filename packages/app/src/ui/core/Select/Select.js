@@ -4,9 +4,9 @@ import ReactSelect from "react-select";
 
 import { getStyle } from "./style";
 
-export const Select = (props) => {
+export function Select(props) {
   return <ReactSelect styles={getStyle(props)} {...props} />;
-};
+}
 
 Select.propTypes = {
   hasError: PropTypes.bool,

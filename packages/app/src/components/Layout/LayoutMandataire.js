@@ -22,7 +22,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutMandataire = (props) => {
+function LayoutMandataire(props) {
   const { children, hasNavigation = true, hasFooterMargins = true } = props;
   const user = useContext(UserContext);
 
@@ -59,6 +59,6 @@ const LayoutMandataire = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutMandataire };

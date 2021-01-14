@@ -6,18 +6,18 @@ const { Heading3, Button, Text } = require("~/ui");
 const { Flex, Box } = require("rebass");
 const { MesureEtatView } = require("./MesureEtatView");
 
-const MesureEtatViewList = ({ mesure, ...props }) => {
+function MesureEtatViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
   const [selectedMesureEtat, setSelectedMesureEtat] = useState(false);
 
   const { mesureEtats } = mesure;
 
-  const isSelectedMesureEtat = (etat) => {
+  function isSelectedMesureEtat(etat) {
     if (!selectedMesureEtat) {
       return false;
     }
     return selectedMesureEtat.id === etat.id;
-  };
+  }
 
   return (
     <Box {...props}>
@@ -98,6 +98,6 @@ const MesureEtatViewList = ({ mesure, ...props }) => {
       )}
     </Box>
   );
-};
+}
 
 export { MesureEtatViewList };

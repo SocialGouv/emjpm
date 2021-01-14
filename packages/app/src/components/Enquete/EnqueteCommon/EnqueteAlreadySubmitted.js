@@ -2,7 +2,7 @@ import { Box, Button, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 
-export const EnqueteAlreadySubmitted = ({ enquete, goToFirstPage }) => {
+export function EnqueteAlreadySubmitted({ enquete, goToFirstPage }) {
   return (
     <Box py={"50px"}>
       <HeadingTitle textAlign="center">
@@ -25,4 +25,4 @@ export const EnqueteAlreadySubmitted = ({ enquete, goToFirstPage }) => {
       </Box>
     </Box>
   );
-};
+}

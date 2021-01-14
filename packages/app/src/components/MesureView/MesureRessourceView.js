@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { content, subtitle } from "./style";
 
-const MesureRessourceView = ({ ressource, ...props }) => {
+function MesureRessourceView({ ressource, ...props }) {
   return (
     <Flex {...props} justifyContent="flex-start">
       <Box width="100px">
@@ -28,6 +28,6 @@ const MesureRessourceView = ({ ressource, ...props }) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export { MesureRessourceView };

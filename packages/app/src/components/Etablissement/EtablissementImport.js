@@ -9,7 +9,7 @@ import { Button, Heading3, Input, Text } from "~/ui";
 import { IMPORT_FINESS } from "./mutations";
 import { PROCESSUS_STATE } from "./queries";
 
-export const EtablissementImport = () => {
+export function EtablissementImport() {
   const { data, loading, error } = useQuery(PROCESSUS_STATE, {
     fetchPolicy: "network-only",
 
@@ -100,6 +100,6 @@ export const EtablissementImport = () => {
       </Flex>
     </Card>
   );
-};
+}
 
 export default EtablissementImport;

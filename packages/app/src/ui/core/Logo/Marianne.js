@@ -1,4 +1,4 @@
-const Marianne = () => {
+function Marianne() {
   return (
     <svg width="77px" height="46px" viewBox="0 0 77 46">
       <title>Marianne</title>
@@ -46,6 +46,6 @@ const Marianne = () => {
       </g>
     </svg>
   );
-};
+}
 
 export { Marianne };

@@ -6,7 +6,7 @@ import { MesureExportExcelButton } from "~/components/MesureExportExcelButton";
 import { UserContext } from "~/components/UserContext";
 import { getUserBasePath } from "~/constants";
 
-const MesureListButtonBar = () => {
+function MesureListButtonBar() {
   const { type } = useContext(UserContext);
 
   const path = getUserBasePath({ type });
@@ -26,6 +26,6 @@ const MesureListButtonBar = () => {
       </Flex>
     </Box>
   );
-};
+}
 
 export { MesureListButtonBar };

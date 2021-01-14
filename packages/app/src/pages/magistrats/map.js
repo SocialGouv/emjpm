@@ -7,7 +7,7 @@ import { MagistratMapMandatairesPanelList } from "~/components/MagistratMapManda
 import { MapContextProvider } from "~/components/Map/context";
 import { UserContext } from "~/components/UserContext";
 
-const Map = () => {
+function Map() {
   const { magistrat } = useContext(UserContext);
   const {
     ti: { latitude, longitude },
@@ -34,6 +34,6 @@ const Map = () => {
       </LayoutMagistratMap>
     </MapContextProvider>
   );
-};
+}
 
 export default Map;

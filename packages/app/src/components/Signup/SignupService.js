@@ -28,7 +28,7 @@ function getServiceOptions(services, departementId) {
   return toOptions(servicesByDepartement, "id", "etablissement");
 }
 
-const SignupServiceForm = ({ serviceDatas }) => {
+function SignupServiceForm({ serviceDatas }) {
   const history = useHistory();
   const { user, service, setService, validateStepOne } = useContext(
     SignupContext
@@ -136,7 +136,7 @@ const SignupServiceForm = ({ serviceDatas }) => {
       </form>
     </Fragment>
   );
-};
+}
 
 const SignupService = (props) => (
   <SignupDatas

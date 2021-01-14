@@ -13,15 +13,15 @@ const animation = keyframes`
   }
 `;
 
-const SpinnerStyle = () => {
+function SpinnerStyle() {
   return {
     height: "22px",
     textAlign: "center",
     width: "70px",
   };
-};
+}
 
-const Bounce = (delay) => {
+function Bounce(delay) {
   return {
     animation: `${animation} 1.4s infinite ease-in-out both`,
     animationDelay: delay,
@@ -31,9 +31,9 @@ const Bounce = (delay) => {
     m: "5px",
     width: "12px",
   };
-};
+}
 
-export const Spinner = (props) => {
+export function Spinner(props) {
   const { variant } = props;
   return (
     <Box sx={SpinnerStyle}>
@@ -42,7 +42,7 @@ export const Spinner = (props) => {
       <Box sx={Bounce("-0.32s", variant)} variant={variant} />
     </Box>
   );
-};
+}
 
 Spinner.propTypes = {
   variant: PropTypes.string,

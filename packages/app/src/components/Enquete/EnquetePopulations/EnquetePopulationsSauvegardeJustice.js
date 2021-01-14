@@ -9,7 +9,7 @@ import { UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./queries";
 import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
 
-export const EnquetePopulationsSauvegardeJustice = (props) => {
+export function EnquetePopulationsSauvegardeJustice(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -75,6 +75,6 @@ export const EnquetePopulationsSauvegardeJustice = (props) => {
       title={"Sauvegarde de justice"}
     />
   );
-};
+}
 
 export default EnquetePopulationsSauvegardeJustice;

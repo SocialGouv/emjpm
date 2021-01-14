@@ -23,7 +23,7 @@ const departementsOptionsConfig = {
     label: "Tous les départements",
   },
 };
-const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
+function DirectionEnqueteReponsesCriteria({ criteria, updateCriteria }) {
   const { departementsOptions, error, loading } = useDepartementsOptions(
     departementsOptionsConfig
   );
@@ -68,6 +68,6 @@ const DirectionEnqueteReponsesCriteria = ({ criteria, updateCriteria }) => {
       </Card>
     </LoadingWrapper>
   );
-};
+}
 
 export { DirectionEnqueteReponsesCriteria };

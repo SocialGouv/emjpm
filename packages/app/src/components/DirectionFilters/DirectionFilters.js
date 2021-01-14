@@ -13,7 +13,7 @@ import {
 import { GET_REGIONS } from "./queries";
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 
-export const DirectionFilters = (props) => {
+export function DirectionFilters(props) {
   const { useNameFilter = false } = props;
 
   const { data: regionsData, loading, error } = useQuery(GET_REGIONS, {});
@@ -134,6 +134,6 @@ export const DirectionFilters = (props) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export default DirectionFilters;

@@ -3,7 +3,7 @@ import { LayoutServices } from "~/components/Layout";
 import { ServiceCreateAntenne } from "~/components/ServiceAntenneCreate";
 import { BoxWrapper } from "~/ui";
 
-const AddAntennes = () => {
+function AddAntennes() {
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>
@@ -12,6 +12,6 @@ const AddAntennes = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default AddAntennes;

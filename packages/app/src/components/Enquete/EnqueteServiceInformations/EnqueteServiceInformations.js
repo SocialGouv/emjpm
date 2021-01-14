@@ -8,7 +8,7 @@ import { EnqueteServiceInformationsForm } from "./EnqueteServiceInformationsForm
 import { UPDATE_ENQUETE_SERVICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_SERVICE_INFORMATIONS } from "./queries";
 
-export const EnqueteServiceInformations = (props) => {
+export function EnqueteServiceInformations(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -72,6 +72,6 @@ export const EnqueteServiceInformations = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnqueteServiceInformations;

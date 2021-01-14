@@ -5,7 +5,7 @@ import { ServiceBoard } from "~/components/ServiceBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
 import { BoxWrapper } from "~/ui";
 
-const ServiceBoardView = () => {
+function ServiceBoardView() {
   return (
     <LayoutServices>
       <BoxWrapper mt={6} px="1">
@@ -20,6 +20,6 @@ const ServiceBoardView = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default ServiceBoardView;

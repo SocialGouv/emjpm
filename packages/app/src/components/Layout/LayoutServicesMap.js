@@ -21,7 +21,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutServicesMap = (props) => {
+function LayoutServicesMap(props) {
   const { children } = props;
 
   // const user = useContext(UserContext);
@@ -62,6 +62,6 @@ const LayoutServicesMap = (props) => {
       {children}
     </Fragment>
   );
-};
+}
 
 export { LayoutServicesMap };

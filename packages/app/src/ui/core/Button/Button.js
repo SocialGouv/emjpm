@@ -5,21 +5,21 @@ import { Box, Button as RebassButton } from "rebass";
 import { Spinner } from "../Spinner";
 import { buttonStyle } from "./style";
 
-const spinnerStyle = () => {
+function spinnerStyle() {
   return {
     left: "50%",
     ml: "-35px",
     position: "absolute",
     right: "0",
   };
-};
+}
 
-const content = (props) => {
+function content(props) {
   const { isLoading } = props;
   return {
     opacity: isLoading ? "0" : "1",
   };
-};
+}
 
 const btnStyle = ({ disabled }) => ({
   ...buttonStyle,
@@ -27,7 +27,7 @@ const btnStyle = ({ disabled }) => ({
   opacity: disabled ? 0.5 : 1,
 });
 
-const Button = (props) => {
+function Button(props) {
   const { isLoading, children } = props;
 
   return (
@@ -42,7 +42,7 @@ const Button = (props) => {
       </Box>
     </RebassButton>
   );
-};
+}
 
 export { Button };
 

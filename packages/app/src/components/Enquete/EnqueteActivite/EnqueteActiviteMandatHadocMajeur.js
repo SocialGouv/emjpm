@@ -11,7 +11,7 @@ import { ENQUETE_MANDAT_ADHOC_MAJEUR } from "./queries";
 
 const PREFIX = "mandat_adhoc_majeur";
 
-export const EnqueteActiviteMandatHadocMajeur = (props) => {
+export function EnqueteActiviteMandatHadocMajeur(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -76,6 +76,6 @@ export const EnqueteActiviteMandatHadocMajeur = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteMandatHadocMajeur;

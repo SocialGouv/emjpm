@@ -41,7 +41,7 @@ const TYPE_OPTIONS = [
   },
 ];
 
-export const SignupForm = () => {
+export function SignupForm() {
   const { user, setUser, validateStepOne } = useContext(SignupContext);
 
   const client = useApolloClient();
@@ -186,4 +186,4 @@ export const SignupForm = () => {
       </form>
     </Fragment>
   );
-};
+}

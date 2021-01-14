@@ -13,7 +13,7 @@ import { Button, Heading3, Heading5, InlineError, Input } from "~/ui";
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 
-export const MagistratMesureDeleteForm = (props) => {
+export function MagistratMesureDeleteForm(props) {
   const { mesure } = props;
   const { serviceId, mandataireId } = mesure;
 
@@ -141,4 +141,4 @@ export const MagistratMesureDeleteForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

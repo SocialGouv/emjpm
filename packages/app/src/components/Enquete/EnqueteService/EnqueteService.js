@@ -6,7 +6,7 @@ import { EnqueteConfirmExitInvalidFormDialog } from "../EnqueteConfirmExitInvali
 import { useEnqueteContext } from "../useEnqueteContext.hook";
 import { enqueteServiceMenuBuilder } from "./EnqueteServiceMenuBuilder.service";
 
-export const EnqueteService = (props) => {
+export function EnqueteService(props) {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
   const sections = useMemo(
@@ -66,6 +66,6 @@ export const EnqueteService = (props) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export default EnqueteService;

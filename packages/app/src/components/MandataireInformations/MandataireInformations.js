@@ -10,11 +10,11 @@ import { Button, Heading3, Heading5 } from "~/ui";
 
 import { content, subtitle } from "./style";
 
-const label = (value) => {
+function label(value) {
   return value ? value : "";
-};
+}
 
-const MandataireInformations = () => {
+function MandataireInformations() {
   const user = useContext(UserContext);
   const { email, nom, prenom, mandataire } = user;
   const { mandataire_tis } = mandataire;
@@ -98,11 +98,11 @@ const MandataireInformations = () => {
       </Flex>
     </Box>
   );
-};
+}
 
 export { MandataireInformations };
 
-const TribunauxInformations = ({ mandataireTis }) => {
+function TribunauxInformations({ mandataireTis }) {
   return (
     <Box mb={2}>
       <Heading5>Tribunaux</Heading5>
@@ -125,9 +125,9 @@ const TribunauxInformations = ({ mandataireTis }) => {
       </Flex>
     </Box>
   );
-};
+}
 
-const PreposeInformations = ({ lb_user }) => {
+function PreposeInformations({ lb_user }) {
   return (
     <Box mb={2}>
       <Heading5>Etablissements</Heading5>
@@ -147,9 +147,9 @@ const PreposeInformations = ({ lb_user }) => {
       </Flex>
     </Box>
   );
-};
+}
 
-const IndividuelInformations = ({ lb_user }) => {
+function IndividuelInformations({ lb_user }) {
   return (
     <>
       <Box mb={2}>
@@ -188,4 +188,4 @@ const IndividuelInformations = ({ lb_user }) => {
       </Box>
     </>
   );
-};
+}

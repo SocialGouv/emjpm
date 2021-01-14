@@ -3,7 +3,7 @@ import Signup from "~/components/Signup";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { BoxWrapper } from "~/ui";
 
-const SignupPage = () => {
+function SignupPage() {
   return (
     <SignupContextProvider>
       <LayoutPublic>
@@ -13,6 +13,6 @@ const SignupPage = () => {
       </LayoutPublic>
     </SignupContextProvider>
   );
-};
+}
 
 export default SignupPage;

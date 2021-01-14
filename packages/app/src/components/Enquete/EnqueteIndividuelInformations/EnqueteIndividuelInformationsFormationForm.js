@@ -78,7 +78,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteIndividuelInformationsFormationForm = (props) => {
+export function EnqueteIndividuelInformationsFormationForm(props) {
   const {
     data = {},
     loading = false,
@@ -204,6 +204,6 @@ export const EnqueteIndividuelInformationsFormationForm = (props) => {
       </Box>
     </form>
   );
-};
+}
 
 export default EnqueteIndividuelInformationsFormationForm;

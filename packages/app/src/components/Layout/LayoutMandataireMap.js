@@ -21,7 +21,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutMandataireMap = (props) => {
+function LayoutMandataireMap(props) {
   const { children } = props;
 
   const user = useContext(UserContext);
@@ -50,6 +50,6 @@ const LayoutMandataireMap = (props) => {
       {children}
     </Fragment>
   );
-};
+}
 
 export { LayoutMandataireMap };

@@ -9,7 +9,7 @@ import { MagistratMandataireComment } from "./MagistratMandataireComment";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { MANDATAIRE_COMMENTS } from "./queries";
 
-const MagistratMandataireComments = (props) => {
+function MagistratMandataireComments(props) {
   const { tiId, serviceId, mandataireId } = props;
   const { data, error, loading } = useQuery(MANDATAIRE_COMMENTS, {
     variables: {
@@ -91,7 +91,7 @@ const MagistratMandataireComments = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 MagistratMandataireComments.propTypes = {
   mandataireId: PropTypes.number,

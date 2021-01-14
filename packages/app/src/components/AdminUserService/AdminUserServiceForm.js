@@ -11,7 +11,7 @@ import { Link } from "~/components/Commons";
 import { adminUserServiceSchema } from "~/lib/validationSchemas";
 import { Button, Heading4, InlineError } from "~/ui";
 
-const AdminUserServiceForm = (props) => {
+function AdminUserServiceForm(props) {
   const { cancelLink, user, handleSubmit, errorMessage } = props;
 
   const { nom, prenom, email, service_members } = user;
@@ -76,6 +76,6 @@ const AdminUserServiceForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export { AdminUserServiceForm };

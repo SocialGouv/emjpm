@@ -93,7 +93,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteServicePersonnelFormationForm = (props) => {
+export function EnqueteServicePersonnelFormationForm(props) {
   const {
     data = {},
     loading = false,
@@ -485,6 +485,6 @@ export const EnqueteServicePersonnelFormationForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
-};
+}
 
 export default EnqueteServicePersonnelFormationForm;

@@ -31,7 +31,7 @@ const GrayFemale = styled(Female)`
 
 const currentYear = new Date().getFullYear();
 
-const MesureListItem = (props) => {
+function MesureListItem(props) {
   const {
     mesure: {
       age,
@@ -150,7 +150,7 @@ const MesureListItem = (props) => {
       </Card>
     </Fragment>
   );
-};
+}
 
 MesureListItem.defaultProps = {
   hasFolderNumber: true,

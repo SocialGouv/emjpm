@@ -9,7 +9,7 @@ import { captureException } from "~/util/sentry";
 
 import { CREATE_ANTENNE } from "./mutations";
 
-const ServiceCreateAntenne = () => {
+function ServiceCreateAntenne() {
   const history = useHistory();
   const { service_members } = useContext(UserContext);
   const [currentUserService] = service_members;
@@ -50,6 +50,6 @@ const ServiceCreateAntenne = () => {
       <ServiceAntenneForm handleSubmit={handleSubmit} />
     </Card>
   );
-};
+}
 
 export { ServiceCreateAntenne };

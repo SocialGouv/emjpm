@@ -6,7 +6,7 @@ import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";
 
-export const AdminEditTribunal = ({ tribunal, closePanel }) => {
+export function AdminEditTribunal({ tribunal, closePanel }) {
   const { departements, loading } = useDepartements();
   const [updateTribunal] = useMutation(UPDATE_TRIBUNAL, {
     onCompleted: closePanel,
@@ -43,4 +43,4 @@ export const AdminEditTribunal = ({ tribunal, closePanel }) => {
       }}
     />
   );
-};
+}

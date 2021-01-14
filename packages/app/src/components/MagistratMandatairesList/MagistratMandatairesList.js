@@ -62,7 +62,7 @@ function getOrderByVariable(orderBy) {
   }
 }
 
-const MagistratMandatairesList = (props) => {
+function MagistratMandatairesList(props) {
   const history = useHistory();
   const {
     magistrat: { ti_id },
@@ -193,6 +193,6 @@ const MagistratMandatairesList = (props) => {
       </>
     </MandataireContextProvider>
   );
-};
+}
 
 export { MagistratMandatairesList };

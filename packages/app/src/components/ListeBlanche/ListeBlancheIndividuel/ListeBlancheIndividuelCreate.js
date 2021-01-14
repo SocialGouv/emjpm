@@ -8,7 +8,7 @@ import { UserContext } from "~/components/UserContext";
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
 
-export const ListeBlancheIndividuelCreate = () => {
+export function ListeBlancheIndividuelCreate() {
   const history = useHistory();
   const { type } = useContext(UserContext);
   const [create, { loading }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
@@ -46,6 +46,6 @@ export const ListeBlancheIndividuelCreate = () => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlancheIndividuelCreate;

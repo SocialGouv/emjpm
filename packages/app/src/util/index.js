@@ -1,7 +1,7 @@
 export * from "./browser";
 export * from "./option/OptionUtil";
 
-export const formatTribunauxOptions = (tribunaux) => {
+export function formatTribunauxOptions(tribunaux) {
   return tribunaux
     .filter(({ ti }) => ti)
     .map(({ ti }) => {
@@ -10,7 +10,7 @@ export const formatTribunauxOptions = (tribunaux) => {
         value: ti.id,
       };
     });
-};
+}
 
 export function parseFormFloat(value, defaultValue = null) {
   return value !== "" && !isNaN(parseFloat(value))

@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Gestionnaire = () => {
+function Gestionnaire() {
   const { gestionnaire_id: gestionnaireId } = useParams();
   const {
     magistrat: { ti_id: tiId },
@@ -20,6 +20,6 @@ const Gestionnaire = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default Gestionnaire;

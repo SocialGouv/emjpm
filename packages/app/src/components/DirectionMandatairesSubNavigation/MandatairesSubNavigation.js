@@ -5,7 +5,7 @@ import { LinkButton } from "~/components/Commons";
 
 import { MandatairesSubNavigationStyle } from "./style";
 
-const MandatairesSubNavigation = (props) => {
+function MandatairesSubNavigation(props) {
   return (
     <Flex sx={MandatairesSubNavigationStyle} {...props}>
       <Flex>
@@ -18,6 +18,6 @@ const MandatairesSubNavigation = (props) => {
       </Flex>
     </Flex>
   );
-};
+}
 
 export default withRouter(MandatairesSubNavigation);

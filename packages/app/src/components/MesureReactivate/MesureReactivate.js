@@ -14,7 +14,7 @@ import { MesureReactivateForm } from "./MesureReactivateForm";
 import { CALCULATE_MESURES, REACTIVATE_MESURE } from "./mutations";
 import { MesureReactivateStyle } from "./style";
 
-const MesureReactivate = () => {
+function MesureReactivate() {
   const history = useHistory();
   const mesure = useContext(MesureContext);
   const { type, service = {}, mandataire } = useContext(UserContext);
@@ -77,9 +77,9 @@ const MesureReactivate = () => {
     });
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     redirectToMesure(mesure.id);
-  };
+  }
 
   return (
     <Box sx={MesureReactivateStyle}>
@@ -91,6 +91,6 @@ const MesureReactivate = () => {
       />
     </Box>
   );
-};
+}
 
 export { MesureReactivate };

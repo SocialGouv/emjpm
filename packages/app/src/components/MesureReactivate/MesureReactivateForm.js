@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { Button, Heading3 } from "~/ui";
 
-export const MesureReactivateForm = (props) => {
+export function MesureReactivateForm(props) {
   const { handleSubmit, handleCancel } = props;
 
   return (
@@ -29,4 +29,4 @@ export const MesureReactivateForm = (props) => {
       </Flex>
     </Box>
   );
-};
+}

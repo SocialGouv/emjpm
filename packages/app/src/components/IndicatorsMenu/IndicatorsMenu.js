@@ -17,7 +17,7 @@ const linkStyle = {
   mb: "0",
 };
 
-const IndicatorsMenu = (props) => {
+function IndicatorsMenu(props) {
   const { data, error, loading } = useQuery(INDICATORS);
 
   if (loading) {
@@ -66,6 +66,6 @@ const IndicatorsMenu = (props) => {
       </Box>
     </Scrollbar>
   );
-};
+}
 
 export { IndicatorsMenu };

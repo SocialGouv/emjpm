@@ -5,7 +5,7 @@ import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { Heading4, Text } from "~/ui";
 
-const ServiceBoard = () => {
+function ServiceBoard() {
   const { service } = useContext(UserContext);
   const {
     mesures_in_progress = 0,
@@ -77,6 +77,6 @@ const ServiceBoard = () => {
       </Flex>
     </Box>
   );
-};
+}
 
 export { ServiceBoard };

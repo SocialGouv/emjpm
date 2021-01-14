@@ -1,7 +1,7 @@
 import { MapCluster, MapContainer, MapLayer } from "~/components/Map";
 import { mapImages } from "~/components/Map/utils";
 
-const MagistratMandataireMapContent = (props) => {
+function MagistratMandataireMapContent(props) {
   const { latitude, longitude, id, discriminator, mesures } = props;
   return (
     <MapContainer latitude={latitude} longitude={longitude}>
@@ -13,6 +13,6 @@ const MagistratMandataireMapContent = (props) => {
       />
     </MapContainer>
   );
-};
+}
 
 export { MagistratMandataireMapContent };

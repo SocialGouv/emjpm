@@ -1,6 +1,6 @@
 import { getDepartementCode } from "@emjpm/biz";
 
-const geocodeInitialValue = (resource = {}) => {
+function geocodeInitialValue(resource = {}) {
   if (!resource.latitude || !resource.longitude) {
     return {
       city: "",
@@ -22,6 +22,6 @@ const geocodeInitialValue = (resource = {}) => {
     longitude: resource.longitude,
     postcode,
   };
-};
+}
 
 export { geocodeInitialValue };

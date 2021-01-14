@@ -19,7 +19,7 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-const SignupMagistratForm = ({ tiDatas }) => {
+function SignupMagistratForm({ tiDatas }) {
   const history = useHistory();
   const { user, magistrat, setMagistrat, validateStepOne } = useContext(
     SignupContext
@@ -121,7 +121,7 @@ const SignupMagistratForm = ({ tiDatas }) => {
       </form>
     </Fragment>
   );
-};
+}
 
 const SignupMagistrat = (props) => (
   <SignupDatas

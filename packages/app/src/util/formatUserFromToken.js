@@ -1,4 +1,4 @@
-export const formatUserFromToken = (currentUser) => {
+export function formatUserFromToken(currentUser) {
   if (currentUser) {
     const hasuraClaims = currentUser["https://hasura.io/jwt/claims"];
     const agrements = hasuraClaims["x-hasura-agrements"];
@@ -15,4 +15,4 @@ export const formatUserFromToken = (currentUser) => {
   } else {
     return null;
   }
-};
+}

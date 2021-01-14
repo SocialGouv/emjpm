@@ -5,7 +5,7 @@ import { Box } from "rebass";
 import { Select } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
-export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
+export function ListeBlancheIndividuelFormDepartementsSelector(props) {
   const { departements = [], onAdd } = props;
   const queryResults = useDepartements({ ssr: false });
 
@@ -45,6 +45,6 @@ export const ListeBlancheIndividuelFormDepartementsSelector = (props) => {
       }}
     />
   );
-};
+}
 
 export default ListeBlancheIndividuelFormDepartementsSelector;

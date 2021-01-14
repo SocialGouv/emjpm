@@ -19,7 +19,7 @@ function getPropertiesToUpdate(values) {
   return propertiesToUpdate;
 }
 
-export const ListeBlanchePreposeUpdate = (props) => {
+export function ListeBlanchePreposeUpdate(props) {
   const { data, handleSubmit } = props;
   const apolloClient = useApolloClient();
   const [updateListeBlanche] = useMutation(UPDATE_LB_USER_PREPOSE);
@@ -62,6 +62,6 @@ export const ListeBlanchePreposeUpdate = (props) => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlanchePreposeUpdate;

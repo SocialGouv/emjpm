@@ -13,7 +13,7 @@ import TribunalAutoComplete from "~/components/TribunalAutoComplete";
 import { mesureEditSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError } from "~/ui";
 
-const initialValues = (mesure) => {
+function initialValues(mesure) {
   return {
     annee_naissance: mesure.age,
     antenne: mesure.antenneId || "",
@@ -27,9 +27,9 @@ const initialValues = (mesure) => {
       ? { label: mesure.tribunal, value: mesure.tiId }
       : null,
   };
-};
+}
 
-export const MesureEditForm = (props) => {
+export function MesureEditForm(props) {
   const {
     tribunaux,
     antenneOptions,
@@ -190,4 +190,4 @@ export const MesureEditForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

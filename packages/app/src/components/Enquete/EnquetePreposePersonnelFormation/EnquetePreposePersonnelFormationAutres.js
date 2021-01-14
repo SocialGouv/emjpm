@@ -9,7 +9,7 @@ import { EnquetePreposePersonnelFormationAutresForm } from "./EnquetePreposePers
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
-export const EnquetePreposePersonnelFormationAutres = (props) => {
+export function EnquetePreposePersonnelFormationAutres(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -93,7 +93,7 @@ export const EnquetePreposePersonnelFormationAutres = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnquetePreposePersonnelFormationAutres;
 function parseNbPreposeNombrePreposesParNiveauQualificationFromForm(val) {

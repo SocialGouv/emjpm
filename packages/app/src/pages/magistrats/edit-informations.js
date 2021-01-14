@@ -6,7 +6,7 @@ import { UserContext } from "~/components/UserContext";
 import { PATH } from "~/constants/basePath";
 import { BoxWrapper } from "~/ui";
 
-const EditInformations = () => {
+function EditInformations() {
   const { id: userId, type } = useContext(UserContext);
   const redirectLink = `${PATH[type]}/informations`;
   return (
@@ -21,6 +21,6 @@ const EditInformations = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default EditInformations;

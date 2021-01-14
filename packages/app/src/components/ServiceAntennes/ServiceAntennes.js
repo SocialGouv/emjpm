@@ -16,7 +16,7 @@ import {
 
 import { ANTENNE } from "./queries";
 
-const ServiceAntennes = (props) => {
+function ServiceAntennes(props) {
   const { isAntenneCreationHidden } = props;
   const { data, loading, error } = useQuery(ANTENNE, {
     fetchPolicy: "cache-and-network",
@@ -63,7 +63,7 @@ const ServiceAntennes = (props) => {
       </Card>
     </BoxWrapper>
   );
-};
+}
 
 ServiceAntennes.defaultProps = {
   isAntenneCreationHidden: false,

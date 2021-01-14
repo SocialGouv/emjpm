@@ -83,7 +83,7 @@ export const MesureEtatCreateOrEdit = ({
     setSubmitting(false);
   };
 
-  const handleDelete = () => {
+  function handleDelete() {
     deleteMesureEtat({
       awaitRefetchQueries: true,
       refetchQueries: [
@@ -99,7 +99,7 @@ export const MesureEtatCreateOrEdit = ({
         mesure_id: mesure.id,
       },
     });
-  };
+  }
 
   const handleCancel = async () => {
     onCancel();

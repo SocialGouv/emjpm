@@ -5,7 +5,7 @@ import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const EditInformations = () => {
+function EditInformations() {
   const redirectLink = "/direction/informations";
   const { id: userId } = useContext(UserContext);
   return (
@@ -20,6 +20,6 @@ const EditInformations = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default EditInformations;

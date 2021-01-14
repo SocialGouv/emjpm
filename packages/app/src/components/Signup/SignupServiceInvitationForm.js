@@ -11,7 +11,7 @@ import { Link } from "~/components/Link";
 import { signupSchema } from "~/lib/validationSchemas";
 import { Button, Heading4, Text } from "~/ui";
 
-export const SignupServiceInvitationForm = (props) => {
+export function SignupServiceInvitationForm(props) {
   const { handleSubmit, invitation } = props;
 
   const formik = useFormik({
@@ -108,4 +108,4 @@ export const SignupServiceInvitationForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

@@ -6,7 +6,7 @@ import { Link } from "~/components/Link";
 import { ListeBlancheEdit } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
 
-const ListeBlancheDetailPage = () => {
+function ListeBlancheDetailPage() {
   const { id } = useParams();
   const history = useHistory();
 
@@ -32,6 +32,6 @@ const ListeBlancheDetailPage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default ListeBlancheDetailPage;

@@ -6,7 +6,7 @@ import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 import { useParams } from "react-router-dom";
 
-const DepartmentStatsPage = () => {
+function DepartmentStatsPage() {
   const { departement_code: departementCode } = useParams();
   return (
     <LayoutPublic>
@@ -40,6 +40,6 @@ const DepartmentStatsPage = () => {
       </BoxWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default DepartmentStatsPage;

@@ -38,7 +38,7 @@ const LabelValue = ({ label, value }) => (
   </Flex>
 );
 
-const ListeBlancheSummary = () => {
+function ListeBlancheSummary() {
   const { filters } = useContext(FiltersContextSerializable);
   const { departement } = filters;
 
@@ -117,6 +117,6 @@ const ListeBlancheSummary = () => {
       </Flex>
     </Card>
   );
-};
+}
 
 export { ListeBlancheSummary };

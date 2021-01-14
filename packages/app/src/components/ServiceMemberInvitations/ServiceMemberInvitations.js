@@ -15,7 +15,7 @@ import {
   listStyle,
 } from "./styles";
 
-const ServiceMemberInvitations = (props) => {
+function ServiceMemberInvitations(props) {
   const { service, isAdmin } = props;
 
   const [deleteServiceMemberInvitation] = useMutation(
@@ -75,6 +75,6 @@ const ServiceMemberInvitations = (props) => {
       ) : null}
     </Fragment>
   );
-};
+}
 
 export { ServiceMemberInvitations };

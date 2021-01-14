@@ -53,7 +53,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteActiviteEtablissementDomicileForm = (props) => {
+export function EnqueteActiviteEtablissementDomicileForm(props) {
   const {
     title,
     data = {},
@@ -125,6 +125,6 @@ export const EnqueteActiviteEtablissementDomicileForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
-};
+}
 
 export default EnqueteActiviteEtablissementDomicileForm;

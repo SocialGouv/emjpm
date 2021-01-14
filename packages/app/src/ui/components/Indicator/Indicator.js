@@ -5,7 +5,7 @@ import { Box } from "rebass";
 import { Card, Heading0, Heading4, Spinner } from "../../core";
 import { IndicatorTextStyle } from "./style";
 
-const Indicator = (props) => {
+function Indicator(props) {
   const { error, loading, indicator, title } = props;
   if (error) {
     return (
@@ -40,7 +40,7 @@ const Indicator = (props) => {
       <Heading0 sx={IndicatorTextStyle(indicator < 0)}>{indicator}</Heading0>
     </Card>
   );
-};
+}
 
 Indicator.defaultProps = {
   error: false,

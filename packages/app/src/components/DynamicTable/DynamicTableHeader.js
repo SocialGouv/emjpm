@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { Button, Heading3 } from "~/ui";
 
-export const DynamicTableHeader = (props) => {
+export function DynamicTableHeader(props) {
   const {
     title,
     buttonEnable,
@@ -27,6 +27,6 @@ export const DynamicTableHeader = (props) => {
       )}
     </Flex>
   );
-};
+}
 
 export default DynamicTableHeader;

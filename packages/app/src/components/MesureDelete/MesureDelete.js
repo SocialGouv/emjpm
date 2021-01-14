@@ -13,7 +13,7 @@ import { MesureDeleteForm } from "./MesureDeleteForm";
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MesureDeleteStyle } from "./style";
 
-const MesureDelete = (props) => {
+function MesureDelete(props) {
   const history = useHistory();
   const mesure = useContext(MesureContext);
   const { type, service = {}, mandataire } = useContext(UserContext);
@@ -59,9 +59,9 @@ const MesureDelete = (props) => {
     });
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     redirectToMesure(mesure.id);
-  };
+  }
 
   return (
     <Box sx={MesureDeleteStyle} {...props}>
@@ -72,6 +72,6 @@ const MesureDelete = (props) => {
       />
     </Box>
   );
-};
+}
 
 export { MesureDelete };

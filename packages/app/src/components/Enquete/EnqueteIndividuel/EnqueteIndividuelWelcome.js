@@ -1,7 +1,7 @@
 import { EnqueteWelcome } from "../EnqueteCommon";
 
-export const EnqueteIndividuelWelcome = (props) => {
+export function EnqueteIndividuelWelcome(props) {
   return <EnqueteWelcome {...props} pathPrefix="/mandataires/enquetes" />;
-};
+}
 
 export default EnqueteIndividuelWelcome;

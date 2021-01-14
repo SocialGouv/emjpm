@@ -19,7 +19,7 @@ import {
   titleStyle,
 } from "./style";
 
-const MandataireListItem = (props) => {
+function MandataireListItem(props) {
   const {
     gestionnaire: {
       currentAvailability,
@@ -121,7 +121,7 @@ const MandataireListItem = (props) => {
       </Card>
     </Fragment>
   );
-};
+}
 
 MandataireListItem.defaultProps = {
   isMagistratMap: false,

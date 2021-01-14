@@ -1,4 +1,4 @@
-const InputWrapperStyle = (props) => {
+function InputWrapperStyle(props) {
   return {
     bg: "cardPrimary",
     border: "2px dashed",
@@ -13,7 +13,7 @@ const InputWrapperStyle = (props) => {
     isolation: "isolate",
     zIndex: 0,
   };
-};
+}
 
 const InputStyle = {
   display: "0.1px",
@@ -24,7 +24,7 @@ const InputStyle = {
   zIndex: "-1",
 };
 
-const LabelStyle = (props) => {
+function LabelStyle(props) {
   return {
     color: () => {
       if (props.isActive) return "primary";
@@ -36,6 +36,6 @@ const LabelStyle = (props) => {
     textAlign: "center",
     zIndex: 0,
   };
-};
+}
 
 export { InputWrapperStyle, InputStyle, LabelStyle };

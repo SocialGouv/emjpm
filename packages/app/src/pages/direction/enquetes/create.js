@@ -2,7 +2,7 @@ import { EnqueteCreate } from "~/components/EnqueteCreate";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Card, Heading2 } from "~/ui";
 
-const CreateEnquete = () => {
+function CreateEnquete() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
@@ -13,6 +13,6 @@ const CreateEnquete = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default CreateEnquete;

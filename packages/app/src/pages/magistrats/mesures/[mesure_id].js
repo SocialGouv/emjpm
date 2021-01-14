@@ -9,7 +9,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Mandataires = () => {
+function Mandataires() {
   const { mesure_id: mesureId } = useParams();
   return (
     <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
@@ -28,6 +28,6 @@ const Mandataires = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default Mandataires;

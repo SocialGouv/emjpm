@@ -1,4 +1,4 @@
-const RadioInputStyle = () => {
+function RadioInputStyle() {
   return {
     border: "0",
     clip: "rect(0 0 0 0)",
@@ -11,18 +11,18 @@ const RadioInputStyle = () => {
     whiteSpace: "nowrap",
     width: "1px",
   };
-};
+}
 
-const RadioWrapperStyle = () => {
+function RadioWrapperStyle() {
   return {
     display: "inline-block",
     fontFamily: "body",
     fontWeight: "600",
     verticalAlign: "middle",
   };
-};
+}
 
-const RadioStyle = (props) => {
+function RadioStyle(props) {
   return {
     bg: "cardPrimary",
     border: "1px solid",
@@ -35,9 +35,9 @@ const RadioStyle = (props) => {
     verticalAlign: "middle",
     width: "20px",
   };
-};
+}
 
-const InnerRadioStyle = (props) => {
+function InnerRadioStyle(props) {
   return {
     bg: props.checked ? "primary" : "cardPrimary",
     borderRadius: "circle",
@@ -45,6 +45,6 @@ const InnerRadioStyle = (props) => {
     margin: "4px",
     width: "10px",
   };
-};
+}
 
 export { RadioInputStyle, RadioWrapperStyle, RadioStyle, InnerRadioStyle };

@@ -4,7 +4,7 @@ import { Card, Text } from "~/ui";
 
 import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
-export const ListeBlanchePreposeItem = (props) => {
+export function ListeBlanchePreposeItem(props) {
   const { item, onClick } = props;
   const { lb_user_etablissements: etablissements = [] } = item;
 
@@ -54,6 +54,6 @@ export const ListeBlanchePreposeItem = (props) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export default ListeBlanchePreposeItem;

@@ -32,7 +32,7 @@ const optionsCapacity = [
 
 const RESULT_PER_PAGE = 30;
 
-const MandatairesList = (props) => {
+function MandatairesList(props) {
   const { filters } = useContext(FiltersContextSerializable);
   const [selectedType, setType] = useState(false);
   const [selectedCapacity, setCapacity] = useState(false);
@@ -137,6 +137,6 @@ const MandatairesList = (props) => {
       )}
     </Box>
   );
-};
+}
 
 export { MandatairesList };

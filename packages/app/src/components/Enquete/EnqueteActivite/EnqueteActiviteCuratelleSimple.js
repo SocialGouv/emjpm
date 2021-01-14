@@ -11,7 +11,7 @@ import { ENQUETE_CURATELLE_SIMPLE } from "./queries";
 
 const PREFIX = "curatelle_simple";
 
-export const EnqueteActiviteCuratelleSimple = (props) => {
+export function EnqueteActiviteCuratelleSimple(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -85,6 +85,6 @@ export const EnqueteActiviteCuratelleSimple = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteCuratelleSimple;

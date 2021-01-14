@@ -8,7 +8,7 @@ import { BoxWrapper, FlexWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const AuthorizationPage = (props) => {
+function AuthorizationPage(props) {
   const { token } = props;
 
   const query = useParams();
@@ -59,6 +59,6 @@ const AuthorizationPage = (props) => {
       </FlexWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default AuthorizationPage;

@@ -12,7 +12,7 @@ import { adminServiceSchema } from "~/lib/validationSchemas/adminServiceSchema";
 import { Button, Heading4, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 
-export const ListeBlancheServiceForm = (props) => {
+export function ListeBlancheServiceForm(props) {
   const { handleCancel, handleSubmit, service } = props;
   const { departementsOptions } = useDepartementsOptions();
 
@@ -203,6 +203,6 @@ export const ListeBlancheServiceForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export default ListeBlancheServiceForm;

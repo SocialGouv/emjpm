@@ -5,7 +5,7 @@ import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMandatairesList } from "~/components/MagistratMandatairesList";
 import { BoxWrapper } from "~/ui";
 
-const Mandataires = () => {
+function Mandataires() {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="1">
@@ -21,6 +21,6 @@ const Mandataires = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default Mandataires;

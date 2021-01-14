@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 import { adminEditorSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
-export const AdminEditorForm = (props) => {
+export function AdminEditorForm(props) {
   const { handleCancel, handleSubmit, editor } = props;
 
   const formik = useFormik({
@@ -85,4 +85,4 @@ export const AdminEditorForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

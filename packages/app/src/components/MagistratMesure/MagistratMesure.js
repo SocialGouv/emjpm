@@ -15,7 +15,7 @@ import {
   MagistratMesureTitleStyle,
 } from "./style";
 
-const MagistratMesure = (props) => {
+function MagistratMesure(props) {
   const {
     realAge,
     cabinet,
@@ -108,6 +108,6 @@ const MagistratMesure = (props) => {
       </Flex>
     </Fragment>
   );
-};
+}
 
 export { MagistratMesure };

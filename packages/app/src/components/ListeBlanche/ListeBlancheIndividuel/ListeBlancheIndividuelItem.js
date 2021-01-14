@@ -4,7 +4,7 @@ import { Card, Text } from "~/ui";
 
 import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
-export const ListeBlancheIndividuelItem = (props) => {
+export function ListeBlancheIndividuelItem(props) {
   const { item, onClick } = props;
   return (
     <Card
@@ -53,6 +53,6 @@ export const ListeBlancheIndividuelItem = (props) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export default ListeBlancheIndividuelItem;

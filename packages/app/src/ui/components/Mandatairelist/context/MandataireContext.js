@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 
 export const Context = createContext({});
 
-export const Provider = (props) => {
+export function Provider(props) {
   // Initial values are obtained from the props
   const { children } = props;
 
@@ -21,7 +21,7 @@ export const Provider = (props) => {
 
   // pass the value in provider and return
   return <Context.Provider value={mesureContext}>{children}</Context.Provider>;
-};
+}
 
 Provider.propTypes = {
   children: PropTypes.elementType.isRequired,

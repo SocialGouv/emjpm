@@ -11,7 +11,7 @@ import { ENQUETE_SAUVEGARDE_JUSTICE } from "./queries";
 
 const PREFIX = "sauvegarde_justice";
 
-export const EnqueteActiviteSauvegardeJustice = (props) => {
+export function EnqueteActiviteSauvegardeJustice(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -76,6 +76,6 @@ export const EnqueteActiviteSauvegardeJustice = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteSauvegardeJustice;

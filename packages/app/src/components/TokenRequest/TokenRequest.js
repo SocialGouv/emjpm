@@ -8,7 +8,7 @@ import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
 import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
 
-const TokenRequest = () => {
+function TokenRequest() {
   const [editorTokenRequest] = useMutation(EDITOR_TOKEN_REQUEST);
   const [sendEmailTokenRequest] = useMutation(SEND_EMAIL_TOKEN_REQUEST);
   const [isMessageVisible, toggleMessage] = useState(false);
@@ -124,6 +124,6 @@ const TokenRequest = () => {
       </Box>
     </Card>
   );
-};
+}
 
 export { TokenRequest };

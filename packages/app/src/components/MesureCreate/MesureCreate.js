@@ -14,7 +14,7 @@ import { MesureCreateForm } from "./MesureCreateForm";
 import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
-export const MesureCreate = () => {
+export function MesureCreate() {
   const history = useHistory();
 
   const client = useApolloClient();
@@ -147,4 +147,4 @@ export const MesureCreate = () => {
       />
     </Box>
   );
-};
+}

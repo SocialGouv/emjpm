@@ -6,7 +6,7 @@ import { UserContext } from "~/components/UserContext";
 
 import { MESURES } from "./queries";
 
-const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
+function MandataireMap({ selectMesures, selectedMesuresIds }) {
   const {
     mandataire: { longitude, latitude },
   } = useContext(UserContext);
@@ -44,6 +44,6 @@ const MandataireMap = ({ selectMesures, selectedMesuresIds }) => {
       />
     </MapContainer>
   );
-};
+}
 
 export { MandataireMap };

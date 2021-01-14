@@ -15,7 +15,7 @@ import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/lib/validationSchemas";
 import { Button, Heading4, Text } from "~/ui";
 
-export const MagistratMesureAddForm = (props) => {
+export function MagistratMesureAddForm(props) {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
   const history = useHistory();
   const formik = useFormik({
@@ -149,7 +149,7 @@ export const MagistratMesureAddForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 MagistratMesureAddForm.propTypes = {
   antenneId: PropTypes.number,

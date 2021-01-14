@@ -14,7 +14,7 @@ import TribunalAutoComplete from "~/components/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError } from "~/ui";
 
-const initialValues = () => {
+function initialValues() {
   return {
     annee_naissance: "",
     antenne: "",
@@ -31,9 +31,9 @@ const initialValues = () => {
     tribunal: null,
     ville: "",
   };
-};
+}
 
-export const MesureCreateForm = (props) => {
+export function MesureCreateForm(props) {
   const { tribunaux, antenneOptions, handleSubmit, handleCancel } = props;
 
   const formik = useFormik({
@@ -271,4 +271,4 @@ export const MesureCreateForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

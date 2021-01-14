@@ -1,6 +1,6 @@
 import { Feature, Layer } from "react-mapbox-gl";
 
-const MapLayer = (props) => {
+function MapLayer(props) {
   const { items, type, image, onMarkerClick } = props;
   return (
     <Layer
@@ -31,6 +31,6 @@ const MapLayer = (props) => {
       })}
     </Layer>
   );
-};
+}
 
 export { MapLayer };

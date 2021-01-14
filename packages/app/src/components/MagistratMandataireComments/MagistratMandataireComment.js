@@ -8,7 +8,7 @@ import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm
 import { REMOVE_COMMENT } from "./mutations";
 import { topTextStyle } from "./style";
 
-const MagistratMandataireComment = (props) => {
+function MagistratMandataireComment(props) {
   const {
     setCurrentComment,
     currentComment,
@@ -66,6 +66,6 @@ const MagistratMandataireComment = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 export { MagistratMandataireComment };

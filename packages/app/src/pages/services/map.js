@@ -6,7 +6,7 @@ import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
 
 import { ServiceMap } from "~/components/ServiceMap";
 
-const Map = () => {
+function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
 
   return (
@@ -46,6 +46,6 @@ const Map = () => {
       </Flex>
     </LayoutServicesMap>
   );
-};
+}
 
 export default Map;

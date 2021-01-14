@@ -6,7 +6,7 @@ import { Link } from "~/components/Link";
 
 const linkStyle = { color: "black", fontSize: "1", my: "3" };
 
-const ServiceMesureSidebar = (props) => {
+function ServiceMesureSidebar(props) {
   return (
     <Box {...props}>
       <Link to="/services/mesures">
@@ -21,6 +21,6 @@ const ServiceMesureSidebar = (props) => {
       </Link>
     </Box>
   );
-};
+}
 
 export { ServiceMesureSidebar };

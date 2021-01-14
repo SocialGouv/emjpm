@@ -79,7 +79,7 @@ function dataToForm(data) {
 }
 
 // nested arrays: https://jaredpalmer.com/formik/docs/guides/arrays
-export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
+export function EnquetePreposeModaliteExerciceEtablissementsForm(props) {
   const {
     data = {},
     loading = false,
@@ -280,6 +280,6 @@ export const EnquetePreposeModaliteExerciceEtablissementsForm = (props) => {
       </form>
     </FormikProvider>
   );
-};
+}
 
 export default EnquetePreposeModaliteExerciceEtablissementsForm;

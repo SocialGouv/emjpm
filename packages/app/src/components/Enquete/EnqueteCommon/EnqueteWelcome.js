@@ -15,7 +15,7 @@ const textStyle = {
 
 const downloadStyle = { color: "blue", textDecoration: "underline" };
 
-const getExcelName = (type) => {
+function getExcelName(type) {
   if (isService({ type })) {
     return "annexe_3-2019.xls";
   }
@@ -25,7 +25,7 @@ const getExcelName = (type) => {
   if (isPrepose({ type })) {
     return "annexe_7-2019.xls";
   }
-};
+}
 
 export const EnqueteWelcome = ({
   goToFirstPage,

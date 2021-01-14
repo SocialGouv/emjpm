@@ -25,7 +25,7 @@ export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
-const AdminServiceMesures = () => {
+function AdminServiceMesures() {
   const query = useParams();
   const serviceId = Number(query.service_id);
   const [selectedRows, setSelectedRows] = useState([]);
@@ -177,7 +177,7 @@ const AdminServiceMesures = () => {
       )}
     </Box>
   );
-};
+}
 
 function buildTableColumns() {
   return [

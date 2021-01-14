@@ -8,7 +8,7 @@ import { Button } from "~/ui";
 
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 
-export const AdminMandataireListeBlanche = (props) => {
+export function AdminMandataireListeBlanche(props) {
   const { lb_user, mandataire } = props;
   const user = useContext(UserContext);
   const [updateMandataire, { loading }] = useMutation(
@@ -70,6 +70,6 @@ export const AdminMandataireListeBlanche = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 export default AdminMandataireListeBlanche;

@@ -8,7 +8,7 @@ import { EnqueteIndividuelInformationsAgrementForm } from "./EnqueteIndividuelIn
 import { UPDATE_ENQUETE_INFORMATIONS_AGREMENTS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS } from "./queries";
 
-export const EnqueteIndividuelInformationsAgrement = (props) => {
+export function EnqueteIndividuelInformationsAgrement(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -63,6 +63,6 @@ export const EnqueteIndividuelInformationsAgrement = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnqueteIndividuelInformationsAgrement;

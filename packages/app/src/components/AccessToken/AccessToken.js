@@ -18,7 +18,7 @@ const boxStyle = {
   flexGrow: 1,
 };
 
-const AccessToken = (props) => {
+function AccessToken(props) {
   const { userId, isAdmin } = props;
   const { data, loading, error } = useQuery(USER_TOKEN, {
     variables: {
@@ -77,7 +77,7 @@ const AccessToken = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 AccessToken.defaultProps = {
   isAdmin: false,

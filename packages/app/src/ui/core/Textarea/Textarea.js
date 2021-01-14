@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import { labelStyle, textareaStyle } from "./style";
 
-const Textarea = (props) => {
+function Textarea(props) {
   const [isFocused, setFocus] = useState(false);
 
   const {
@@ -48,7 +48,7 @@ const Textarea = (props) => {
       />
     </Box>
   );
-};
+}
 
 Textarea.propTypes = {
   error: PropTypes.string,

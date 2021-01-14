@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { Button, Heading3, Heading5 } from "~/ui";
 
-export const MesureDeleteForm = (props) => {
+export function MesureDeleteForm(props) {
   const { handleSubmit, handleCancel } = props;
 
   return (
@@ -45,4 +45,4 @@ export const MesureDeleteForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

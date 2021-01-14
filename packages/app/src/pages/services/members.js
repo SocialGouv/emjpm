@@ -7,7 +7,7 @@ import { ServiceMembers } from "~/components/ServiceMembers";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const ServiceMembersPage = () => {
+function ServiceMembersPage() {
   const { service_members, id } = useContext(UserContext);
   const [{ is_admin, service }] = service_members;
   return (
@@ -23,6 +23,6 @@ const ServiceMembersPage = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default ServiceMembersPage;

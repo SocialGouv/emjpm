@@ -10,7 +10,7 @@ import { ADD_EDITOR_FROM_REQUEST } from "./mutations";
 import { EDITOR_REQUESTS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const [addEditor] = useMutation(ADD_EDITOR_FROM_REQUEST);
 
   const authorizeEditor = async (id, name) => {
@@ -54,9 +54,9 @@ const RowItem = ({ item }) => {
       </Flex>
     </Card>
   );
-};
+}
 
-const AdminEditorRequest = () => {
+function AdminEditorRequest() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 20;
   const { data, error, loading } = useQuery(EDITOR_REQUESTS, {
@@ -90,6 +90,6 @@ const AdminEditorRequest = () => {
       />
     </Box>
   );
-};
+}
 
 export { AdminEditorRequest };

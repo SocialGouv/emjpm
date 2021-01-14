@@ -11,7 +11,7 @@ const BlueUserCircle = styled(UserCircle)`
   color: #006be6;
 `;
 
-const Header = (props) => {
+function Header(props) {
   const {
     DropDownMenu,
     username,
@@ -60,7 +60,7 @@ const Header = (props) => {
       )}
     </Flex>
   );
-};
+}
 
 Header.defaultProps = {
   DropDownMenu: null,

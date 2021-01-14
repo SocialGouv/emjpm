@@ -8,7 +8,7 @@ import { ListeBlancheIndividuelUpdate } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
 import { LB_USER } from "./queries";
 
-export const ListeBlancheEdit = (props) => {
+export function ListeBlancheEdit(props) {
   const { handleSubmit, handleCancel } = props;
   const { id } = useParams();
   const { data, error, loading } = useQuery(LB_USER, {
@@ -40,6 +40,6 @@ export const ListeBlancheEdit = (props) => {
       )}
     </LoadingWrapper>
   );
-};
+}
 
 export default ListeBlancheEdit;

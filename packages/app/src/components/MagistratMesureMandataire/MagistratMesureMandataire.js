@@ -19,7 +19,7 @@ import { formatGestionnaire } from "./utils";
 
 import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
-const MagistratMesureMandataire = (props) => {
+function MagistratMesureMandataire(props) {
   const { serviceId, mandataireId } = useContext(MesureContext);
   const { data, error, loading } = useQuery(GESTIONNAIRES, {
     variables: {
@@ -187,6 +187,6 @@ const MagistratMesureMandataire = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { MagistratMesureMandataire };

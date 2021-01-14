@@ -6,7 +6,7 @@ import { DirectionEditInformationsForm } from "./DirectionEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { DIRECTION } from "./queries";
 
-const DirectionEditInformations = ({ userId, successLink, cancelLink }) => {
+function DirectionEditInformations({ userId, successLink, cancelLink }) {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(DIRECTION, {
@@ -61,6 +61,6 @@ const DirectionEditInformations = ({ userId, successLink, cancelLink }) => {
       errorMessage={errorMessage}
     />
   );
-};
+}
 
 export { DirectionEditInformations };

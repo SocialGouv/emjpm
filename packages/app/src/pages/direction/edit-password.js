@@ -3,7 +3,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-const EditInformations = () => {
+function EditInformations() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
@@ -12,6 +12,6 @@ const EditInformations = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default EditInformations;

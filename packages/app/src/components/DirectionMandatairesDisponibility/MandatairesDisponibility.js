@@ -8,7 +8,7 @@ import { Card, Heading2, Heading4, Spinner } from "~/ui";
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
-const MandatairesDisponibility = (props) => {
+function MandatairesDisponibility(props) {
   const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
@@ -71,5 +71,5 @@ const MandatairesDisponibility = (props) => {
       <MandatairesDisponibilityChart data={activityChartData} />
     </Card>
   );
-};
+}
 export { MandatairesDisponibility };

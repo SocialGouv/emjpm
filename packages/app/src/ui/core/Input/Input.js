@@ -4,28 +4,28 @@ import { Box } from "rebass";
 
 import { InputStyle, InputWrapperStyle, LabelStyle } from "./Style";
 
-const InputWrapper = (props) => {
+function InputWrapper(props) {
   return <Box as="div" sx={InputWrapperStyle(props)} {...props} />;
-};
+}
 
-const InputElement = (props) => {
+function InputElement(props) {
   return <Box as="input" sx={InputStyle(props)} {...props} />;
-};
+}
 
-const InputLabel = (props) => {
+function InputLabel(props) {
   const { children } = props;
   return (
     <Box as="label" sx={LabelStyle(props)} {...props}>
       {children}
     </Box>
   );
-};
+}
 
 function formatFormInput(value) {
   return value === null || value === undefined ? "" : value;
 }
 
-const Input = (props) => {
+function Input(props) {
   const {
     onChange,
     placeholder,
@@ -82,7 +82,7 @@ const Input = (props) => {
       />
     </InputWrapper>
   );
-};
+}
 
 InputLabel.propTypes = {
   children: PropTypes.node.isRequired,

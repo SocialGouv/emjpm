@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { Marianne } from "./Marianne";
 import { LogoStyle, logoTextStyle } from "./style";
 
-const Logo = (props) => {
+function Logo(props) {
   const { hasTitle, title } = props;
 
   return (
@@ -20,7 +20,7 @@ const Logo = (props) => {
       )}
     </Flex>
   );
-};
+}
 
 Logo.propTypes = {
   hasTitle: PropTypes.bool,

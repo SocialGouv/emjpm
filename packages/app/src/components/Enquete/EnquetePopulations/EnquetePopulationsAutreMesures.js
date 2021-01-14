@@ -9,7 +9,7 @@ import { UPDATE_ENQUETE_POPULATIONS_AUTRE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_AUTRE } from "./queries";
 import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
 
-export const EnquetePopulationsAutreMesures = (props) => {
+export function EnquetePopulationsAutreMesures(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -71,6 +71,6 @@ export const EnquetePopulationsAutreMesures = (props) => {
       title={"Autre mesures"}
     />
   );
-};
+}
 
 export default EnquetePopulationsAutreMesures;

@@ -7,7 +7,7 @@ import { Card, Text } from "~/ui";
 
 import { API_LOG_BY_ID } from "./queries";
 
-const AdminApiLog = ({ id }) => {
+function AdminApiLog({ id }) {
   const { data, loading, error } = useQuery(API_LOG_BY_ID, {
     variables: { id },
   });
@@ -81,6 +81,6 @@ const AdminApiLog = ({ id }) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export { AdminApiLog };

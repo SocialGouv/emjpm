@@ -5,7 +5,7 @@ import { MandataireBoard } from "~/components/MandataireBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
 import { BoxWrapper } from "~/ui";
 
-const MandataireBoardView = () => {
+function MandataireBoardView() {
   return (
     <LayoutMandataire>
       <BoxWrapper mt={6} px="1">
@@ -20,10 +20,10 @@ const MandataireBoardView = () => {
       </BoxWrapper>
     </LayoutMandataire>
   );
-};
+}
 
-const Mandataires = () => {
+function Mandataires() {
   return <MandataireBoardView />;
-};
+}
 
 export default Mandataires;

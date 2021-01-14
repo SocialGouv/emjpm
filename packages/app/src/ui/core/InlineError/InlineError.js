@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Flex, Text } from "rebass";
 
-const InlineError = ({ message, fieldId, showError }) => {
+function InlineError({ message, fieldId, showError }) {
   return (
     showError !== false &&
     message && (
@@ -15,7 +15,7 @@ const InlineError = ({ message, fieldId, showError }) => {
       </Flex>
     )
   );
-};
+}
 
 InlineError.defaultProps = {
   message: "",

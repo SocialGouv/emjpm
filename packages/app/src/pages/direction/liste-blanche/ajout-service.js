@@ -7,7 +7,7 @@ import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
 
-const ListBlanchePage = () => {
+function ListBlanchePage() {
   const history = useHistory();
   return (
     <LayoutDirection>
@@ -32,6 +32,6 @@ const ListBlanchePage = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default ListBlanchePage;

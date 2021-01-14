@@ -10,7 +10,7 @@ import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { SERVICE } from "./queries";
 
-export const ListeBlancheServiceUpdate = (props) => {
+export function ListeBlancheServiceUpdate(props) {
   const { serviceId, onSuccess, handleCancel } = props;
   const { data, loading, error } = useQuery(SERVICE, {
     fetchPolicy: "network-only",
@@ -75,6 +75,6 @@ export const ListeBlancheServiceUpdate = (props) => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlancheServiceUpdate;

@@ -1,7 +1,7 @@
 import { Box, Button, Text } from "rebass";
 
 // TODO(remiroyc): create error box into emjpm-ui
-const ErrorBox = (props) => {
+function ErrorBox(props) {
   const { title, message, onClick, buttonText, isLoading } = props;
   return (
     <Box
@@ -23,6 +23,6 @@ const ErrorBox = (props) => {
       </Button>
     </Box>
   );
-};
+}
 
 export default ErrorBox;

@@ -14,7 +14,7 @@ import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const resultPerPage = 50;
 
-const RowItem = (props) => {
+function RowItem(props) {
   const { item } = props;
   const { id, siret, rslongue, ligneacheminement, departement } = item;
   return (
@@ -48,9 +48,9 @@ const RowItem = (props) => {
       </Card>
     </Fragment>
   );
-};
+}
 
-export const AdminEtablissements = () => {
+export function AdminEtablissements() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
     AdminFilterContext
@@ -99,6 +99,6 @@ export const AdminEtablissements = () => {
       setCurrentOffset={setCurrentOffset}
     />
   );
-};
+}
 
 export default AdminEtablissements;

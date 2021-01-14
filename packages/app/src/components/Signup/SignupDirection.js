@@ -22,7 +22,7 @@ import { REGIONS } from "./queries";
 import signup from "./signup";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-export const SignupDirection = () => {
+export function SignupDirection() {
   const history = useHistory();
   const { user, departement, direction, region, validateStepOne } = useContext(
     SignupContext
@@ -146,4 +146,4 @@ export const SignupDirection = () => {
       </form>
     </Fragment>
   );
-};
+}

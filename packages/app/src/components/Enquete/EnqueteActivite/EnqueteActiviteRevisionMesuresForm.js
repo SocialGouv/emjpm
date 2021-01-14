@@ -41,7 +41,7 @@ function formToData(values) {
     revisionsReconduction: parseFormInt(values.revisionsReconduction),
   };
 }
-export const EnqueteActiviteRevisionMesuresForm = (props) => {
+export function EnqueteActiviteRevisionMesuresForm(props) {
   const {
     data = {},
     loading = false,
@@ -156,6 +156,6 @@ export const EnqueteActiviteRevisionMesuresForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteRevisionMesuresForm;

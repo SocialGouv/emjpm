@@ -12,7 +12,7 @@ import { Link } from "~/components/Commons";
 import { magistratEditSchema } from "~/lib/validationSchemas";
 import { Button, Heading4, InlineError, Text } from "~/ui";
 
-const MagistratEditInformationsForm = (props) => {
+function MagistratEditInformationsForm(props) {
   const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;
 
   const { magistrat } = user;
@@ -105,6 +105,6 @@ const MagistratEditInformationsForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export { MagistratEditInformationsForm };

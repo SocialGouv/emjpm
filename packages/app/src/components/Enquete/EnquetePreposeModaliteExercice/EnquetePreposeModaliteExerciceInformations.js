@@ -8,7 +8,7 @@ import { EnquetePreposeModaliteExerciceInformationsForm } from "./EnquetePrepose
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
-export const EnquetePreposeModaliteExerciceInformations = (props) => {
+export function EnquetePreposeModaliteExerciceInformations(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -61,6 +61,6 @@ export const EnquetePreposeModaliteExerciceInformations = (props) => {
       />
     )
   );
-};
+}
 
 export default EnquetePreposeModaliteExerciceInformations;

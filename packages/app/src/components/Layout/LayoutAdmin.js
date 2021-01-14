@@ -37,7 +37,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutAdmin = (props) => {
+function LayoutAdmin(props) {
   const { children, hasNavigation = true } = props;
 
   return (
@@ -58,6 +58,6 @@ const LayoutAdmin = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutAdmin };

@@ -21,7 +21,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutMagistrat = (props) => {
+function LayoutMagistrat(props) {
   const { children } = props;
   return (
     <Fragment>
@@ -44,6 +44,6 @@ const LayoutMagistrat = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutMagistrat };

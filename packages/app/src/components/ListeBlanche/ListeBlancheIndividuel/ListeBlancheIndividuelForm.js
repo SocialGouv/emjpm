@@ -32,7 +32,7 @@ const validationSchema = yup.object().shape({
   ville: yup.string().required(),
 });
 
-export const ListeBlancheIndividuelForm = (props) => {
+export function ListeBlancheIndividuelForm(props) {
   const { handleCancel, data, editMode = false } = props;
 
   const departements =
@@ -229,6 +229,6 @@ export const ListeBlancheIndividuelForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export default ListeBlancheIndividuelForm;

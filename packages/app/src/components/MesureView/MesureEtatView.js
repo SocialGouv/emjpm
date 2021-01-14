@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { content, subtitle } from "./style";
 
-const MesureEtatView = ({ etat, ...props }) => {
+function MesureEtatView({ etat, ...props }) {
   const {
     formatNatureMesure,
     formatChampMesure,
@@ -43,6 +43,6 @@ const MesureEtatView = ({ etat, ...props }) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export { MesureEtatView };

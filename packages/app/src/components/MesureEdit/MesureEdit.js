@@ -14,7 +14,7 @@ import { MesureEditForm } from "./MesureEditForm";
 import { CALCULATE_MESURES, EDIT_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
-export const MesureEdit = () => {
+export function MesureEdit() {
   const history = useHistory();
   const mesureToEdit = useContext(MesureContext);
 
@@ -118,4 +118,4 @@ export const MesureEdit = () => {
       />
     </Box>
   );
-};
+}

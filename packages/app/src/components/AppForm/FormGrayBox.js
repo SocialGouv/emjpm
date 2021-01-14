@@ -7,13 +7,13 @@ const grayBoxStyle = {
   py: "2",
 };
 
-const FormGrayBox = (props) => {
+function FormGrayBox(props) {
   const { children } = props;
   return (
     <Box sx={grayBoxStyle} width={[1, 2 / 5]} {...props}>
       {children}
     </Box>
   );
-};
+}
 
 export { FormGrayBox };

@@ -42,7 +42,7 @@ const checkStatus = async (
   return json;
 };
 
-const Login = (props) => {
+function Login(props) {
   const { token } = props;
   const url = `${API_URL}/api/auth/login`;
 
@@ -159,6 +159,6 @@ const Login = (props) => {
       </Box>
     </Card>
   );
-};
+}
 
 export { Login };

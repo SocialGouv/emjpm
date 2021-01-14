@@ -2,7 +2,7 @@ import { Box } from "rebass";
 
 import { FlexWrapper, fourColumnStyle, Indicator } from "~/ui";
 
-export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
+export function DirectionEnqueteDetailsInformationsClesIndicators(props) {
   const {
     preposesCount,
     individuelsCount,
@@ -50,4 +50,4 @@ export const DirectionEnqueteDetailsInformationsClesIndicators = (props) => {
       )}
     </FlexWrapper>
   );
-};
+}

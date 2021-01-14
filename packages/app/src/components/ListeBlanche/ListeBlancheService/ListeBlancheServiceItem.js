@@ -4,7 +4,7 @@ import { Card, Text } from "~/ui";
 
 import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
-export const ListeBlancheServiceItem = (props) => {
+export function ListeBlancheServiceItem(props) {
   const { item, onClick } = props;
   return (
     <Card
@@ -39,6 +39,6 @@ export const ListeBlancheServiceItem = (props) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export default ListeBlancheServiceItem;

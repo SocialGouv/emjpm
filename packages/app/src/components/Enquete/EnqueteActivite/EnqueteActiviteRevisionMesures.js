@@ -9,7 +9,7 @@ import { EnqueteActiviteRevisionMesuresForm } from "./EnqueteActiviteRevisionMes
 import { UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES } from "./mutations";
 import { ENQUETE_REVISION_MESURES } from "./queries";
 
-export const EnqueteActiviteRevisionMesures = (props) => {
+export function EnqueteActiviteRevisionMesures(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -83,5 +83,5 @@ export const EnqueteActiviteRevisionMesures = (props) => {
       />
     </Box>
   );
-};
+}
 export default EnqueteActiviteRevisionMesures;

@@ -5,7 +5,7 @@ import { FlexWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const ResetPasswordPage = () => {
+function ResetPasswordPage() {
   const { token } = useParams();
   return (
     <LayoutPublic>
@@ -21,6 +21,6 @@ const ResetPasswordPage = () => {
       </FlexWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default ResetPasswordPage;

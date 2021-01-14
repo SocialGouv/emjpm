@@ -6,7 +6,7 @@ import { Indicator } from "~/ui";
 
 import { GET_GESTIONNAIRE_NUMBER } from "./queries";
 
-const ServicesIndicator = () => {
+function ServicesIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
@@ -30,6 +30,6 @@ const ServicesIndicator = () => {
       }
     />
   );
-};
+}
 
 export { ServicesIndicator };

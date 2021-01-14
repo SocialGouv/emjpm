@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 
 export const Context = createContext({});
 
-export const Provider = (props) => {
+export function Provider(props) {
   // Initial values are obtained from the props
   const { children, longitude = 2.3488, latitude = 48.8534 } = props;
 
@@ -23,6 +23,6 @@ export const Provider = (props) => {
 
   // pass the value in provider and return
   return <Context.Provider value={mapContext}>{children}</Context.Provider>;
-};
+}
 
 export const { Consumer } = Context;

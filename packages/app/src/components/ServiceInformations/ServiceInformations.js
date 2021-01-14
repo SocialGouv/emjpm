@@ -11,7 +11,7 @@ import { Button, Heading3, Heading5 } from "~/ui";
 import { GET_SERVICES } from "./queries";
 import { content, subtitle } from "./style";
 
-const ServiceInformations = () => {
+function ServiceInformations() {
   const { data, error, loading } = useQuery(GET_SERVICES, {
     fetchPolicy: "cache-and-network",
   });
@@ -155,7 +155,7 @@ const ServiceInformations = () => {
       </Flex>
     </Box>
   );
-};
+}
 
 ServiceInformations.defaultProps = {
   currentAntenne: null,

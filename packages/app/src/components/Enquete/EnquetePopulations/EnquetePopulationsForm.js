@@ -63,7 +63,7 @@ function dataToForm(data) {
   };
 }
 
-export const EnquetePopulationsForm = (props) => {
+export function EnquetePopulationsForm(props) {
   const {
     title,
     data = {},
@@ -391,6 +391,6 @@ export const EnquetePopulationsForm = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default EnquetePopulationsForm;

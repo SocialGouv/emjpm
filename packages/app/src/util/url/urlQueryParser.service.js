@@ -65,9 +65,9 @@ function _transformValue(value, param) {
   return defaultValue;
 }
 
-const transformToInteger = ({ value }) => {
+function transformToInteger({ value }) {
   const intValue = parseInt(value);
   if (!isNaN(intValue)) {
     return intValue;
   }
-};
+}

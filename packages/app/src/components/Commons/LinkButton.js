@@ -3,7 +3,7 @@ import { Link as RebassLink } from "rebass";
 
 import { Link as RouterLink } from "~/components/Link";
 
-const LinkButtonStyle = (isActive, props) => {
+function LinkButtonStyle(isActive, props) {
   const initialColor = props.color || "white";
   const initialBg = props.bg || "primary";
 
@@ -45,9 +45,9 @@ const LinkButtonStyle = (isActive, props) => {
   }
 
   return properties;
-};
+}
 
-const LinkButton = ({ location, ...props }) => {
+function LinkButton({ location, ...props }) {
   const isActive = location && location.pathname === props.to;
   // eslint-disable-next-line no-unused-vars
   const { bg, color, ...attr } = props;
@@ -66,6 +66,6 @@ const LinkButton = ({ location, ...props }) => {
       )}
     />
   );
-};
+}
 
 export default withRouter(LinkButton);

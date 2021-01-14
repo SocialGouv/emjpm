@@ -3,7 +3,7 @@ import { LayoutServices } from "~/components/Layout";
 import { MesureCreate } from "~/components/MesureCreate";
 import { BoxWrapper } from "~/ui";
 
-const AddMesures = () => {
+function AddMesures() {
   return (
     <LayoutServices hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
@@ -12,6 +12,6 @@ const AddMesures = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default AddMesures;

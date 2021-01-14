@@ -15,7 +15,7 @@ async function onSelectItem(history, { type, origin, id }) {
   window.scrollTo(0, 0);
 }
 
-export const ListeBlanche = (props) => {
+export function ListeBlanche(props) {
   const { origin } = props;
   const { filters } = useContext(FiltersContextSerializable);
   const history = useHistory();
@@ -37,6 +37,6 @@ export const ListeBlanche = (props) => {
       }
     />
   );
-};
+}
 
 export default ListeBlanche;

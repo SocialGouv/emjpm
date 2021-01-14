@@ -23,7 +23,7 @@ const QUERY_TYPE = {
   ti: MAGISTRAT_USERS,
 };
 
-const UserProvider = (props) => {
+function UserProvider(props) {
   const { type, userId, agrements, children } = props;
   const variables = {
     userId,
@@ -63,9 +63,9 @@ const UserProvider = (props) => {
   };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;
-};
+}
 
-export const Provider = (props) => {
+export function Provider(props) {
   const { children, user } = props;
   const type = user ? user.role : null;
   const userId = user ? user.id : null;
@@ -80,6 +80,6 @@ export const Provider = (props) => {
   }
 
   return <Fragment>{children}</Fragment>;
-};
+}
 
 export const { Consumer } = Context;

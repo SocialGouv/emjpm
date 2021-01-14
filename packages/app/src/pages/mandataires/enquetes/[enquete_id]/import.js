@@ -6,7 +6,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const ImportEnquetePage = () => {
+function ImportEnquetePage() {
   const user = useContext(UserContext);
   const history = useHistory();
 
@@ -29,6 +29,6 @@ const ImportEnquetePage = () => {
       </BoxWrapper>
     </LayoutMandataire>
   );
-};
+}
 
 export default ImportEnquetePage;

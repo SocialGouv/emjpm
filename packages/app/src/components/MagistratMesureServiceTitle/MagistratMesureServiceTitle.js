@@ -7,7 +7,7 @@ import { Heading2, Heading4 } from "~/ui";
 
 import { SERVICE } from "./queries";
 
-const MagistratMesureServiceTitle = (props) => {
+function MagistratMesureServiceTitle(props) {
   const { id } = props;
   const { data, loading } = useQuery(SERVICE, {
     variables: {
@@ -40,7 +40,7 @@ const MagistratMesureServiceTitle = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 MagistratMesureServiceTitle.propTypes = {
   id: PropTypes.number,

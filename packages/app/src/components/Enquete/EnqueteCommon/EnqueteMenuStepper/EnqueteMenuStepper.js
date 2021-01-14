@@ -9,7 +9,7 @@ import {
 } from "../EnqueteIcons";
 import styles from "./style";
 
-export const EnqueteMenuStepper = (props) => {
+export function EnqueteMenuStepper(props) {
   const { readOnly, sections, currentStep, onClickLink } = props;
 
   return (
@@ -61,7 +61,7 @@ export const EnqueteMenuStepper = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 function renderSectionTitle({
   menuSection,
   index,

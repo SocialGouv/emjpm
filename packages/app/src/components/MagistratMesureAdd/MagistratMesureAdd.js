@@ -18,7 +18,7 @@ import {
 } from "./mutations";
 import { MagistratMandataireStyle } from "./style";
 
-const MagistratMesureAdd = (props) => {
+function MagistratMesureAdd(props) {
   const { gestionnaireId } = props;
 
   const history = useHistory();
@@ -117,6 +117,6 @@ const MagistratMesureAdd = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { MagistratMesureAdd };

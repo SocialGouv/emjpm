@@ -6,7 +6,7 @@ import { Link } from "~/components/Link";
 import { ListeBlancheIndividuelCreate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
 
-const ListBlanchePage = () => {
+function ListBlanchePage() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
@@ -22,6 +22,6 @@ const ListBlanchePage = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default ListBlanchePage;

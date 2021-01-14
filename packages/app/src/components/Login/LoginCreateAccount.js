@@ -20,7 +20,7 @@ const LineBox = styled.div`
   }
 `;
 
-const LoginCreateAccount = () => {
+function LoginCreateAccount() {
   return (
     <Flex
       sx={{
@@ -52,6 +52,6 @@ const LoginCreateAccount = () => {
       </LinkButton>
     </Flex>
   );
-};
+}
 
 export { LoginCreateAccount };

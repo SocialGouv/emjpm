@@ -4,9 +4,9 @@ import ReactAsyncSelect from "react-select/async";
 
 import { getStyle } from "./style";
 
-export const AsyncSelect = (props) => {
+export function AsyncSelect(props) {
   return <ReactAsyncSelect styles={getStyle(props)} {...props} />;
-};
+}
 
 AsyncSelect.propTypes = {
   size: PropTypes.string,

@@ -11,7 +11,7 @@ import {
 import { USER_EMAIL_EXISTS } from "./queries";
 import { ServiceMemberInvitationForm } from "./ServiceMemberInvitationForm";
 
-const ServiceMemberInvitationCreate = (props) => {
+function ServiceMemberInvitationCreate(props) {
   const { service, isAdmin } = props;
 
   const client = useApolloClient();
@@ -66,6 +66,6 @@ const ServiceMemberInvitationCreate = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { ServiceMemberInvitationCreate };

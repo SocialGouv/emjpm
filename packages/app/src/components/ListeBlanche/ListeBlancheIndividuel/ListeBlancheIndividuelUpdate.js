@@ -6,7 +6,7 @@ import { LB_USER } from "../queries";
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { UPDATE_DEPARTEMENT_FINANCEUR, UPDATE_LB_USER } from "./mutations";
 
-export const ListeBlancheIndividuelUpdate = (props) => {
+export function ListeBlancheIndividuelUpdate(props) {
   const { id, data, handleSubmit, handleCancel } = props;
 
   const [updateListeBlanche] = useMutation(UPDATE_LB_USER, {
@@ -74,6 +74,6 @@ export const ListeBlancheIndividuelUpdate = (props) => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlancheIndividuelUpdate;

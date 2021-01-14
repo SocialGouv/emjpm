@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const ApiLogsViewPage = () => {
+function ApiLogsViewPage() {
   const { api_log_id: id } = useParams();
 
   return (
@@ -22,6 +22,6 @@ const ApiLogsViewPage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default ApiLogsViewPage;

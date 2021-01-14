@@ -11,7 +11,7 @@ import { Button, Heading3, Heading5 } from "~/ui";
 import { DELETE_USER } from "./mutations";
 import { AdminUserDeleteRemoveStyle } from "./style";
 
-export const AdminUserDeleteForm = (props) => {
+export function AdminUserDeleteForm(props) {
   const { userId } = props;
   const history = useHistory();
 
@@ -84,4 +84,4 @@ export const AdminUserDeleteForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

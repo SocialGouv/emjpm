@@ -7,7 +7,7 @@ import { ListeBlancheFilter } from "~/components/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/components/ListeBlancheSummary";
 import { BoxWrapper } from "~/ui";
 
-const ListBlanchePage = () => {
+function ListBlanchePage() {
   return (
     <LayoutDirection>
       <FiltersContextSerializableProvider useLocalStorage={true}>
@@ -27,6 +27,6 @@ const ListBlanchePage = () => {
       </FiltersContextSerializableProvider>
     </LayoutDirection>
   );
-};
+}
 
 export default ListBlanchePage;

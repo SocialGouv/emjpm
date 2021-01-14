@@ -4,7 +4,7 @@ import { Box } from "rebass";
 import { Footer } from "~/components/Footer";
 import { BoxWrapper, Header } from "~/ui";
 
-const LayoutPublic = (props) => {
+function LayoutPublic(props) {
   const { children } = props;
 
   return (
@@ -23,6 +23,6 @@ const LayoutPublic = (props) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutPublic };

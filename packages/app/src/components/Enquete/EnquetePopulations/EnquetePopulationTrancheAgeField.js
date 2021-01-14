@@ -12,7 +12,7 @@ export function calculateTotal(firstProperty, secondProperty) {
   return Number(firstProperty || 0) + Number(secondProperty || 0);
 }
 
-export const EnquetePopulationTrancheAgeField = (props) => {
+export function EnquetePopulationTrancheAgeField(props) {
   const {
     values,
     errors,
@@ -71,4 +71,4 @@ export const EnquetePopulationTrancheAgeField = (props) => {
       </Flex>
     </Fragment>
   );
-};
+}

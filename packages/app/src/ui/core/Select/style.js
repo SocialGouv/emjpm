@@ -1,22 +1,22 @@
 import { useThemeUI } from "theme-ui";
 
-const getBorderColor = (hasError, state, colors) => {
+function getBorderColor(hasError, state, colors) {
   if (hasError) {
     return colors.error;
   }
   if (state.isDisabled) return colors.muted;
   if (state.isFocused) return colors.primary;
   return colors.border;
-};
+}
 
-const getHoverBorderColor = (hasError, state, colors) => {
+function getHoverBorderColor(hasError, state, colors) {
   if (hasError) {
     return colors.error;
   }
   return state.isFocused ? colors.primary : colors.border;
-};
+}
 
-export const getStyle = (props) => {
+export function getStyle(props) {
   const { size, hasError = false } = props;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const context = useThemeUI();
@@ -39,4 +39,4 @@ export const getStyle = (props) => {
       };
     },
   };
-};
+}

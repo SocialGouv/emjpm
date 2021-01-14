@@ -11,7 +11,7 @@ import { ENQUETE_TUTELLE } from "./queries";
 
 const PREFIX = "tutelle";
 
-export const EnqueteActiviteTutelle = (props) => {
+export function EnqueteActiviteTutelle(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -82,6 +82,6 @@ export const EnqueteActiviteTutelle = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteTutelle;

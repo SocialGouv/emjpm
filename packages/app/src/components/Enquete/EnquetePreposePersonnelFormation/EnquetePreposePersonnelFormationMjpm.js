@@ -9,7 +9,7 @@ import { EnquetePreposePersonnelFormationMjpmForm } from "./EnquetePreposePerson
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
 
-export const EnquetePreposePersonnelFormationMjpm = (props) => {
+export function EnquetePreposePersonnelFormationMjpm(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -80,7 +80,7 @@ export const EnquetePreposePersonnelFormationMjpm = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnquetePreposePersonnelFormationMjpm;
 function parseNbPreposeHeuresFormationFromForm(val) {

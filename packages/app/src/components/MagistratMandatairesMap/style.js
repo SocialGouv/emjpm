@@ -1,4 +1,4 @@
-const MagistratMandatairesMapStyle = () => {
+function MagistratMandatairesMapStyle() {
   return {
     height: "100%",
     position: "absolute",
@@ -6,7 +6,7 @@ const MagistratMandatairesMapStyle = () => {
     top: "0",
     width: "100%",
   };
-};
+}
 
 const titleStyle = {
   color: "black",
@@ -47,7 +47,7 @@ const descriptionStyle = {
   whiteSpace: "nowrap",
 };
 
-const dispoDescriptionStyle = (isPositive) => {
+function dispoDescriptionStyle(isPositive) {
   return {
     color: isPositive ? "success" : "error",
     fontFamily: "heading",
@@ -57,7 +57,7 @@ const dispoDescriptionStyle = (isPositive) => {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   };
-};
+}
 
 export {
   MagistratMandatairesMapStyle,

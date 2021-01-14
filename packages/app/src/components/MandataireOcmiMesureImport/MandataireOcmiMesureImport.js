@@ -9,7 +9,7 @@ import { Text } from "~/ui";
 
 import { IMPORT_OCMI_MESURES } from "./mutations";
 
-const MandataireOcmiMesureImport = () => {
+function MandataireOcmiMesureImport() {
   const history = useHistory();
   const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES, {
     onCompleted: async () => {
@@ -62,6 +62,6 @@ const MandataireOcmiMesureImport = () => {
       </Flex>
     </Flex>
   );
-};
+}
 
 export { MandataireOcmiMesureImport };

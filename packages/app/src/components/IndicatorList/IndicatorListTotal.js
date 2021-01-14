@@ -8,7 +8,7 @@ import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
 
-const IndicatorListTotal = () => {
+function IndicatorListTotal() {
   const { data, error, loading } = useQuery(FRANCE_INDICATORS);
 
   if (loading) {
@@ -129,6 +129,6 @@ const IndicatorListTotal = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export { IndicatorListTotal };

@@ -19,7 +19,7 @@ import {
   listStyle,
 } from "./styles";
 
-const ServiceMembers = (props) => {
+function ServiceMembers(props) {
   const { isAdmin, service, userId } = props;
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
   const [updateServiceMemberIsAdmin] = useMutation(
@@ -114,6 +114,6 @@ const ServiceMembers = (props) => {
       })}
     </Box>
   );
-};
+}
 
 export { ServiceMembers };

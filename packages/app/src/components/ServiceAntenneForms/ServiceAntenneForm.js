@@ -11,7 +11,7 @@ import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError } from "~/ui";
 
-const ServiceAntenneForm = (props) => {
+function ServiceAntenneForm(props) {
   const { antenne = {}, handleSubmit } = props;
   const {
     contact_email,
@@ -148,6 +148,6 @@ const ServiceAntenneForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export { ServiceAntenneForm };

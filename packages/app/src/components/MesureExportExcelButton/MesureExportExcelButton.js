@@ -17,7 +17,7 @@ const downloadMesuresFile = async (b64Data) => {
   element.click();
 };
 
-const MesureExportExcelButton = (props) => {
+function MesureExportExcelButton(props) {
   const { id: userId, service_members = [] } = useContext(UserContext);
   const [service_member] = service_members;
   const service = service_member ? service_member.service : undefined;
@@ -52,6 +52,6 @@ const MesureExportExcelButton = (props) => {
       <Export size="24" />
     </Button>
   );
-};
+}
 
 export { MesureExportExcelButton };

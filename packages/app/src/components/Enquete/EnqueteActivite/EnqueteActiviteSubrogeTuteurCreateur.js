@@ -11,7 +11,7 @@ import { ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./queries";
 
 const PREFIX = "subroge_tuteur_createur";
 
-export const EnqueteActiviteSubrogeTuteurCreateur = (props) => {
+export function EnqueteActiviteSubrogeTuteurCreateur(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -77,6 +77,6 @@ export const EnqueteActiviteSubrogeTuteurCreateur = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteSubrogeTuteurCreateur;

@@ -8,7 +8,7 @@ import { MesureDetailView } from "./MesureDetailView";
 import { MesureEtatViewList } from "./MesureEtatViewList";
 import { MesureRessourceViewList } from "./MesureRessourceViewList";
 
-export const MesureView = (props) => {
+export function MesureView(props) {
   const mesure = useContext(MesureContext);
 
   return (
@@ -24,6 +24,6 @@ export const MesureView = (props) => {
       )}
     </Card>
   );
-};
+}
 
 export default MesureView;

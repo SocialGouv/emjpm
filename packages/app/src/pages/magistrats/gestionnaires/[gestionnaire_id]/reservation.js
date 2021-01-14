@@ -4,7 +4,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Reservation = () => {
+function Reservation() {
   const { gestionnaire_id: gestionnaireId } = useParams();
 
   return (
@@ -14,6 +14,6 @@ const Reservation = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default Reservation;

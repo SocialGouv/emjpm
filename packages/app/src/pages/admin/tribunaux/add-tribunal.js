@@ -5,7 +5,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-const AddTribunauxPage = () => {
+function AddTribunauxPage() {
   return (
     <LayoutAdmin hasNavigation={false}>
       <BoxWrapper mt={6} px="1">
@@ -21,6 +21,6 @@ const AddTribunauxPage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default AddTribunauxPage;

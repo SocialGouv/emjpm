@@ -7,7 +7,7 @@ import { Heading2, Heading4 } from "~/ui";
 
 import { MANDATAIRE } from "./queries";
 
-const MagistratMesureMandataireTitle = (props) => {
+function MagistratMesureMandataireTitle(props) {
   const { id } = props;
 
   const { data, loading } = useQuery(MANDATAIRE, {
@@ -37,7 +37,7 @@ const MagistratMesureMandataireTitle = (props) => {
       )}
     </Fragment>
   );
-};
+}
 
 MagistratMesureMandataireTitle.propTypes = {
   id: PropTypes.number,

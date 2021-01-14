@@ -3,7 +3,7 @@ import { Fragment } from "react";
 
 import { Mandataire } from "./Mandataire";
 
-const Mandatairelist = (props) => {
+function Mandatairelist(props) {
   const {
     selectCurrentMandataire,
     mandataires,
@@ -27,7 +27,7 @@ const Mandatairelist = (props) => {
       })}
     </Fragment>
   );
-};
+}
 
 Mandatairelist.defaultProps = {
   ChooseComponent: null,

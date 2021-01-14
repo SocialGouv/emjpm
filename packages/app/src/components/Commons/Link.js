@@ -2,7 +2,7 @@ import { Link as RebassLink } from "rebass";
 
 import { Link as RouterLink } from "~/components/Link";
 
-const LinkStyle = () => {
+function LinkStyle() {
   return {
     "&:hover": {
       textDecoration: "underline",
@@ -12,13 +12,13 @@ const LinkStyle = () => {
     fontSize: "13px",
     fontWeight: 600,
   };
-};
+}
 
-const isExternalLink = (to) => {
+function isExternalLink(to) {
   return to && (to.startsWith("http") || to.startsWith("mailto"));
-};
+}
 
-const Link = ({ to, ...props }) => {
+function Link({ to, ...props }) {
   if (isExternalLink(to)) {
     return (
       <RebassLink sx={LinkStyle()} {...props} href={to}>
@@ -36,6 +36,6 @@ const Link = ({ to, ...props }) => {
       )}
     />
   );
-};
+}
 
 export { Link };

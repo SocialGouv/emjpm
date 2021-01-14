@@ -25,7 +25,7 @@ const LabelValue = ({ label, value }) => (
   </Flex>
 );
 
-export const EtablissementViewForm = (props) => {
+export function EtablissementViewForm(props) {
   const { data = {} } = props;
   const {
     id,
@@ -102,6 +102,6 @@ export const EtablissementViewForm = (props) => {
       </Box>
     </Card>
   );
-};
+}
 
 export default EtablissementViewForm;
