@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.86.1](https://github.com/SocialGouv/emjpm/compare/v25.86.0...v25.86.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **ci:** wip ([b4c736a](https://github.com/SocialGouv/emjpm/commit/b4c736abe980fdd32aedd5967d6d7e2b79971019))
+* **ci:** wip ([ad73524](https://github.com/SocialGouv/emjpm/commit/ad735248f00fe9a5eea810bf1a4d9859d9711b10))
+* **enquete:** pass step as params ([ab96940](https://github.com/SocialGouv/emjpm/commit/ab969408d194910e82da607f1957f19434ff6f97))
+* **react:** name to functions ([f2259d5](https://github.com/SocialGouv/emjpm/commit/f2259d533ee81f724209f218c774c842949d98b4))
+* **things:** wip ([b490bc5](https://github.com/SocialGouv/emjpm/commit/b490bc5814aeafc97c5da54c7cff9ceb51412eda))
+* **things:** wip ([24fcf69](https://github.com/SocialGouv/emjpm/commit/24fcf6947e57c6420cafd9fe0eae6a5b7dc70aed))
+* **things:** wip ([af4f0f0](https://github.com/SocialGouv/emjpm/commit/af4f0f058807f9c658eb357616a44deae4c86cd1))
+* **things:** wip ([774d300](https://github.com/SocialGouv/emjpm/commit/774d300bf0148604dbba29f168f1ad47d0cdeba8))
+* **things:** wip + upgrade deps ([bcb8769](https://github.com/SocialGouv/emjpm/commit/bcb87695aaa36bb272b71e02150eaffb9fff2150))
+
+
+
+
+
 # [25.86.0](https://github.com/SocialGouv/emjpm/compare/v25.85.3...v25.86.0) (2021-01-14)
 
 

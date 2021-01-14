@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.86.1](https://github.com/SocialGouv/emjpm/compare/v25.86.0...v25.86.1) (2021-01-14)
+
+
+### Bug Fixes
+
+* **ci:** wip ([b4c736a](https://github.com/SocialGouv/emjpm/commit/b4c736abe980fdd32aedd5967d6d7e2b79971019))
+* **mandoline:** inversion mesures counts ([bd771b6](https://github.com/SocialGouv/emjpm/commit/bd771b67dd927d7c6b5770e1b079f12104b7e6f6))
+* **oauth:** handle refresh_token ([b63a3b5](https://github.com/SocialGouv/emjpm/commit/b63a3b573f82a7941c7dedf55b439917cba5523c))
+* **things:** wip ([af4f0f0](https://github.com/SocialGouv/emjpm/commit/af4f0f058807f9c658eb357616a44deae4c86cd1))
+
+
+
+
+
 # [25.86.0](https://github.com/SocialGouv/emjpm/compare/v25.85.3...v25.86.0) (2021-01-14)
 
 
