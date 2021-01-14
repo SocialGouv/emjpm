@@ -350,7 +350,7 @@ run_main() {
     docker_build_all $@
   fi
 
-  k8s_deploy $@
+  k8s_deploy_all $@
 
 }
 
