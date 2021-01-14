@@ -869,7 +869,7 @@ Notify Ready to Prod:
   script:
     - |
       source ./.gitlab-ci/env.sh
-      echo '{"text":"✨ dev version deployed at '${FRONTEND_URL}'"}' \
+      echo '{"text":"✨ dev version deployed at '${APP_URL}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 Notify Dev (mattermost):
