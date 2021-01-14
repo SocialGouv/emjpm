@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.86.0](https://github.com/SocialGouv/emjpm/compare/v25.85.3...v25.86.0) (2021-01-14)
+
+
+### Features
+
+* **ci:** crazy kung-fu ([9278cf1](https://github.com/SocialGouv/emjpm/commit/9278cf14ed6474293b10c9b764e85edf14426aa5))
+* **ci:** deploy from local ([1e27b6f](https://github.com/SocialGouv/emjpm/commit/1e27b6f537ed684294d0b10152bc1f9842580818))
+
+
+
+
+
 ## [25.85.3](https://github.com/SocialGouv/emjpm/compare/v25.85.2...v25.85.3) (2021-01-12)
 
 **Note:** Version bump only for package @emjpm/api
