@@ -359,6 +359,7 @@ Build JS app:
   variables:
     CONTEXT: .
     KANIKO_DOCKERFILE: Dockerfile
+    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
   script:
     - |
       /kaniko/executor \
