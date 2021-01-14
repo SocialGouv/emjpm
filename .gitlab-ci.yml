@@ -35,9 +35,8 @@ stages:
 
 .base_deploy_chart_stage:
   extends: .base_docker_kubectl_image_stage
-  variables:
-    IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
   script:
+    - source ./.gitlab-ci/env.sh
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
 
@@ -360,7 +359,6 @@ Build JS app:
   variables:
     CONTEXT: .
     KANIKO_DOCKERFILE: Dockerfile
-    IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
   script:
     - |
       /kaniko/executor \
@@ -423,6 +421,8 @@ Build hasura image:
   extends:
     - .base_build_stage
   needs: []
+  before_script:
+    - source ./.gitlab-ci/env.sh
   variables:
     BUILD_NAME: hasura
     CONTEXT: .
@@ -485,9 +485,6 @@ Init Managed Database:
   dependencies: []
   services:
     - docker:dind
-  variables:
-    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
-    REGISTRY: ${CI_REGISTRY_IMAGE}
 
 ############### Deploy API ###########################
 
@@ -806,8 +803,6 @@ Trigger release:
     - docker:dind
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
-  variables:
-    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
   script:
     - source ./.gitlab-ci/env.sh
     - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$IMAGE_TAG

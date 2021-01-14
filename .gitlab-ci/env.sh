@@ -13,6 +13,8 @@ export PROJECT_PATH=${PROJECT_PATH:=$CI_PROJECT_PATH}
 export VERSION=${VERSION:=$CI_COMMIT_REF_NAME}
 export HELM_POSTGRES_CHART_VERSION=6.4.0
 
+export IMAGE_TAG=${IMAGE_TAG:-$CI_COMMIT_REF_SLUG}
+
 BRANCH_NAME_HASHED=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-${HASH_SIZE} )
 export BRANCH_HASH=${BRANCH_HASH:="$BRANCH_NAME_HASHED"}
 
@@ -37,7 +39,6 @@ fi
 if [[ -n "${COMMIT_TAG}" ]]; then
   export ENVIRONMENT="preproduction"
   export NODE_ENV="production"
-  export IMAGE_TAG=$(printf "${COMMIT_TAG}" | sed "s/^v//")
   export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
   export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
 fi
