@@ -43,7 +43,7 @@ stages:
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
-        --set image.tag=${IMAGE_TAG}
+        --set image.tag=$CI_COMMIT_REF_SLUG
         --set ingress.hosts[0].host=${HOST}
         --set ingress.tls[0].hosts[0]=${HOST}
         ${HELM_RENDER_ARGS}"
@@ -359,7 +359,6 @@ Build JS app:
   variables:
     CONTEXT: .
     KANIKO_DOCKERFILE: Dockerfile
-    IMAGE_TAG: ${CI_COMMIT_REF_SLUG}
   script:
     - |
       /kaniko/executor \
@@ -386,7 +385,7 @@ Build api image:
     BUILD_NAME: api
     CONTEXT: .
     KANIKO_DOCKERFILE: packages/api/Dockerfile
-    DESTINATION: $CI_REGISTRY_IMAGE/api:$IMAGE_TAG
+    DESTINATION: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
@@ -409,7 +408,7 @@ Build api image:
   variables:
     BUILD_NAME: app
     CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/app:$IMAGE_TAG
+    DESTINATION: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
     KANIKO_DOCKERFILE: packages/app/Dockerfile
 
 Build app image:
@@ -427,7 +426,7 @@ Build hasura image:
   variables:
     BUILD_NAME: hasura
     CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$IMAGE_TAG
+    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
     KANIKO_DOCKERFILE: packages/hasura/Dockerfile
 
 Backup PG before production (incubateur):
@@ -806,7 +805,7 @@ Trigger release:
   allow_failure: true
   script:
     - source ./.gitlab-ci/env.sh
-    - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$IMAGE_TAG
+    - export IMAGE=$CI_REGISTRY_IMAGE/$CONTEXT:$CI_COMMIT_REF_SLUG
     # Build report
     - trivy --cache-dir .trivycache/ image --exit-code 0 --no-progress --format template --template "@/tmp/contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
     # Print report and fail on error
