@@ -34,7 +34,7 @@ const BoxStyle = {
   overflow: "hidden",
 };
 
-const ActiveLink = (props) => {
+function ActiveLink(props) {
   const { location, isNestedLinks, to } = props;
   if (!location) return null;
   const { pathname } = location;
@@ -62,6 +62,6 @@ const ActiveLink = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default withRouter(ActiveLink);

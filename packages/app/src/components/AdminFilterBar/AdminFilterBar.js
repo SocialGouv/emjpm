@@ -25,11 +25,11 @@ const departementsOptionsConfig = {
   },
 };
 
-const AdminFilterBar = ({
+function AdminFilterBar({
   onAddButtonClick,
   userTypeFilter,
   useDepartementfilter,
-}) => {
+}) {
   const { departementsOptions, error, loading } = useDepartementsOptions(
     departementsOptionsConfig
   );
@@ -105,6 +105,6 @@ const AdminFilterBar = ({
       </Card>
     </LoadingWrapper>
   );
-};
+}
 
 export { AdminFilterBar };

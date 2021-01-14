@@ -12,6 +12,10 @@ echo "waiting for hasura"
 while ! nc -z localhost 5000; do
   sleep 1
 done
+sleep 2
+while ! nc -z localhost 5000; do
+  sleep 1
+done
 echo "hasura ready"
 
 if nc -z localhost 9695; then
