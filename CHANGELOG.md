@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.86.0](https://github.com/SocialGouv/emjpm/compare/v25.85.3...v25.86.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* **matomo:** track user id ([c96011a](https://github.com/SocialGouv/emjpm/commit/c96011aad87e4f77709008c84f5f8a26841613d3))
+* **missing-id:** service ([82ae128](https://github.com/SocialGouv/emjpm/commit/82ae12889a15c513d6598871f9d7c657d0d930ca))
+* **react:** name comp func ([3d4062e](https://github.com/SocialGouv/emjpm/commit/3d4062e0adca58940100a59a637993662eaa05c4))
+
+
+### Features
+
+* **auto-reload:** on app update ([0a5244d](https://github.com/SocialGouv/emjpm/commit/0a5244d3c218b2e14a469a447edf37983fa63c16))
+* **ci:** crazy kung-fu ([9278cf1](https://github.com/SocialGouv/emjpm/commit/9278cf14ed6474293b10c9b764e85edf14426aa5))
+* **ci:** deploy from local ([1e27b6f](https://github.com/SocialGouv/emjpm/commit/1e27b6f537ed684294d0b10152bc1f9842580818))
+* **one-build:** url inference ([14f7490](https://github.com/SocialGouv/emjpm/commit/14f749068dd825344b4c3563559e3a29e948a5eb))
+* **user-search:** by id ([e97e433](https://github.com/SocialGouv/emjpm/commit/e97e433d87c4f28509966afaf3ce700153f58a7e))
+
+
+
+
+
 ## [25.85.3](https://github.com/SocialGouv/emjpm/compare/v25.85.2...v25.85.3) (2021-01-12)
 
 
