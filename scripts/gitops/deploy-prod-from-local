@@ -125,14 +125,14 @@ EOF
 
   # Create secrets
   export APP_URL_B64=$(echo $DOMAIN | base64)
-  envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
-  kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
+  envsubst < ./.k8s/secret-dev.yml > ./.k8s/manifests/secret-dev-generated.yml
+  kubectl apply -f ./.k8s/manifests/secret-dev-generated.yml -n ${K8S_NAMESPACE}
 
   # Create azure volume secrets for anonymized export
   export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
   export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-  envsubst < .k8s/azure-volume-secret.yml > ./azure-volume-secret.yml
-  kubectl apply -f ./azure-volume-secret.yml -n ${K8S_NAMESPACE}
+  envsubst < .k8s/azure-volume-secret.yml > ./.k8s/manifests/azure-volume-secret-generated.yml
+  kubectl apply -f ./.k8s/manifests/azure-volume-secret-generated.yml -n ${K8S_NAMESPACE}
 }
 
 function k8s_deploy_package {
