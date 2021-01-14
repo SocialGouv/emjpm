@@ -70,6 +70,8 @@ jobs:
         run: |
           npx lerna link
           npx lerna run postinstall
+          cp lerna.json packages/app/src/lerna.ci.json
+          cp lerna.json packages/api/src/lerna.ci.json
 
       - name: Build
         run: npx lerna run build --parallel

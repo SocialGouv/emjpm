@@ -19,7 +19,7 @@ RUN yarn --frozen-lockfile --production --ignore-scripts
 COPY packages/app/src /app/packages/app/src/
 COPY packages/app/.eslintrc.yml  /app/packages/app/.eslintrc.yml
 COPY packages/app/public /app/packages/app/public/
-COPY lerna.json /app/packages/app/src/config/lerna.ci.json
+COPY lerna.json /app/packages/app/src/lerna.ci.json
 
 COPY packages/biz/src /app/packages/biz/src/
 COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
