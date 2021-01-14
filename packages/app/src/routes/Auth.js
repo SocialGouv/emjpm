@@ -125,7 +125,7 @@ export function useProvideAuth() {
         type: "login",
       });
     },
-    [authStore, dispatchAuthStore]
+    [dispatchAuthStore]
   );
 
   // login redirect
