@@ -124,8 +124,6 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
-    kubernetes.io/tls-acme: 'true'
     nginx.ingress.kubernetes.io/limit-connections: '4'
     nginx.ingress.kubernetes.io/limit-rps: '10'
     nginx.ingress.kubernetes.io/limit-burst-multiplier: '5'
@@ -133,7 +131,7 @@ ingress:
     - host: api-emjpm.dev2.fabrique.social.gouv.fr
       paths:
         - path: /
-          servicePort: ${PORT}
+          servicePort: 4000
   tls:
     - hosts:
         - api-emjpm.dev2.fabrique.social.gouv.fr
@@ -142,5 +140,5 @@ fullnameOverride: ''
 nameOverride: ''
 service:
   type: ClusterIP
-  port: ${PORT}
-  targetPort: ${PORT}
+  port: 4000
+  targetPort: 4000

@@ -58,16 +58,13 @@ else
 fi
 
 export API_HOST="api-${DOMAIN}";
-export FRONTEND_HOST="${DOMAIN}";
+export APP_HOST="${DOMAIN}";
 export HASURA_HOST="hasura-${DOMAIN}";
 
-
 export API_URL="https://${API_HOST}"
-export FRONTEND_URL="https://${FRONTEND_HOST}"
-export HASURA_URL="https://${HASURA_HOST}"
+export APP_URL="https://${APP_HOST}"
 
 #
-
 printenv | grep \
   -e BRANCH_HASH \
   -e BRANCH_NAME \
@@ -83,16 +80,13 @@ printenv | grep \
   -e NODE_ENV \
   -e PROJECT_PATH \
   -e REGISTRY \
-  -e REGISTRY \
   \
   -e API_HOST \
   -e API_URL \
   -e CERTIFICATE_NAME \
-  -e FRONTEND_HOST \
-  -e FRONTEND_URL \
+  -e APP_URL \
   -e HASURA_HOST \
   \
   -e CONTEXT \
   -e PORT \
-  -e IMAGE_NAME \
   | sort

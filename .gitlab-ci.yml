@@ -256,7 +256,7 @@ Create namespace:
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     # Create secrets
-    - export APP_URL=$(echo $FRONTEND_URL | base64)
+    - export APP_URL_B64=$(echo $APP_URL | base64)
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
     #
@@ -540,7 +540,7 @@ Deploy api (prod):
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
-    - HOST=${FRONTEND_HOST}
+    - HOST=${APP_HOST}
 
 #
 
@@ -720,7 +720,7 @@ Notify Fail:
     - Notify Starting Deployment
   before_script:
     - source ./.gitlab-ci/env.sh
-    - HOST=${FRONTEND_HOST}
+    - HOST=${APP_HOST}
 
 Notify Success:
   extends:
@@ -731,7 +731,7 @@ Notify Success:
     - Notify Starting Deployment
   before_script:
     - source ./.gitlab-ci/env.sh
-    - HOST=${FRONTEND_HOST}
+    - HOST=${APP_HOST}
 
 ############ Delete useless K8s ns #################
 
