@@ -11,7 +11,7 @@ import {
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
-const MandatairesActivityChart = (props) => {
+function MandatairesActivityChart(props) {
   const total = props.data.total;
 
   const serviceSum = props.data.service.sum;
@@ -95,6 +95,6 @@ const MandatairesActivityChart = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { MandatairesActivityChart };

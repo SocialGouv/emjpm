@@ -6,7 +6,7 @@ import { Indicator } from "~/ui";
 
 import { GET_OPEN_MESURE_NUMBER } from "./queries";
 
-const OpenMesureIndicator = () => {
+function OpenMesureIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
     variables: {
@@ -38,6 +38,6 @@ const OpenMesureIndicator = () => {
       indicator={opened_mesures_nb ? opened_mesures_nb : 0}
     />
   );
-};
+}
 
 export { OpenMesureIndicator };

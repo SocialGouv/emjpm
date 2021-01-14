@@ -6,7 +6,7 @@ import { FiltersContextSerializable } from "~/components/FiltersContextSerializa
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui";
 
-const DemographicDatas = () => {
+function DemographicDatas() {
   return (
     <FiltersContextSerializable>
       <LayoutDirection>
@@ -21,6 +21,6 @@ const DemographicDatas = () => {
       </LayoutDirection>
     </FiltersContextSerializable>
   );
-};
+}
 
 export default DemographicDatas;

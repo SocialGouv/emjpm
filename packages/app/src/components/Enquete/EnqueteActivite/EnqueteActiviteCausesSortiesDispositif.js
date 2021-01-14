@@ -8,7 +8,7 @@ import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCau
 import { UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF } from "./mutations";
 import { ENQUETE_CAUSES_SORTIE_DISPOSITIF } from "./queries";
 
-export const EnqueteActiviteCausesSortiesDispositif = (props) => {
+export function EnqueteActiviteCausesSortiesDispositif(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -74,6 +74,6 @@ export const EnqueteActiviteCausesSortiesDispositif = (props) => {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
     />
   );
-};
+}
 
 export default EnqueteActiviteCausesSortiesDispositif;

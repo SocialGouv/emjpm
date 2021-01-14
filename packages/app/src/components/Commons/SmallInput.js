@@ -11,7 +11,7 @@ function getBorderProps({ hasError, hasWarning }) {
   return {};
 }
 
-export const SmallInput = (props) => {
+export function SmallInput(props) {
   return (
     <Input
       {...props}
@@ -27,7 +27,7 @@ export const SmallInput = (props) => {
       }}
     />
   );
-};
+}
 
 SmallInput.defaultProps = {
   hasError: false,

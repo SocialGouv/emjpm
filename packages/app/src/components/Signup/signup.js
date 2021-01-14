@@ -4,7 +4,7 @@ import config from "~/config";
 
 const { API_URL } = config;
 
-const postSignup = (body) => {
+function postSignup(body) {
   const url = `${API_URL}/api/auth/signup`;
 
   const fetchParams = {
@@ -17,7 +17,7 @@ const postSignup = (body) => {
   };
 
   return fetch(url, fetchParams).then((res) => res.json());
-};
+}
 
 const signup = ({ body, onSuccess, onError, onComplete }) =>
   postSignup(body)

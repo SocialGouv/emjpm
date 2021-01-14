@@ -5,7 +5,7 @@ import { ServiceMesureImport } from "~/components/ServiceMesureImport";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const ServiceMesuresImport = () => {
+function ServiceMesuresImport() {
   const { service_members } = useContext(UserContext);
   const [{ service_id }] = service_members;
 
@@ -16,6 +16,6 @@ const ServiceMesuresImport = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default ServiceMesuresImport;

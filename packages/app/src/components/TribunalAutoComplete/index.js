@@ -6,7 +6,7 @@ import { AsyncSelect } from "~/ui";
 
 import { TRIBUNAL } from "./queries";
 
-const TribunalAutoComplete = (props) => {
+function TribunalAutoComplete(props) {
   const client = useApolloClient();
   const { defaultOptions, hasError, value, name, id, onChange, size } = props;
   return (
@@ -36,7 +36,7 @@ const TribunalAutoComplete = (props) => {
       size={size || ""}
     />
   );
-};
+}
 
 TribunalAutoComplete.defaultProps = {
   hasError: false,

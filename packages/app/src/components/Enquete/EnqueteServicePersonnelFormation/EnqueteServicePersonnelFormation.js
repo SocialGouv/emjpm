@@ -8,7 +8,7 @@ import { EnqueteServicePersonnelFormationForm } from "./EnqueteServicePersonnelF
 import { UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION } from "./mutations";
 import { ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION } from "./queries";
 
-export const EnqueteServicePersonnelFormation = (props) => {
+export function EnqueteServicePersonnelFormation(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -73,6 +73,6 @@ export const EnqueteServicePersonnelFormation = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnqueteServicePersonnelFormation;

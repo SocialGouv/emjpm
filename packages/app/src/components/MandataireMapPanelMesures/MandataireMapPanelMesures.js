@@ -13,7 +13,7 @@ import { MandataireMapPanelMesuresStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MandataireMapPanelMesures = ({ mesuresIds }) => {
+function MandataireMapPanelMesures({ mesuresIds }) {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
 
@@ -25,9 +25,9 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
     },
   });
 
-  const selectMesure = ({ id }) => {
+  function selectMesure({ id }) {
     history.push(`/mandataires/mesures/${id}`);
-  };
+  }
 
   const mesures = useMemo(
     () => (data ? formatMesureListItems(data.mesures) : []),
@@ -94,6 +94,6 @@ const MandataireMapPanelMesures = ({ mesuresIds }) => {
       </Scrollbar>
     </Box>
   );
-};
+}
 
 export { MandataireMapPanelMesures };

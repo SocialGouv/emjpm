@@ -9,7 +9,7 @@ import DP, { registerLocale } from "react-datepicker";
 
 registerLocale("fr", fr);
 
-export const Datepicker = (props) => {
+export function Datepicker(props) {
   const { selected, onChange, placeholder, hasError } = props;
   return (
     <DP
@@ -24,7 +24,7 @@ export const Datepicker = (props) => {
       onChange={onChange}
     />
   );
-};
+}
 
 Datepicker.defaultProps = {
   placeholder: undefined,

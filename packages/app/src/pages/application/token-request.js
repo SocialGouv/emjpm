@@ -5,7 +5,7 @@ import { LayoutPublic } from "~/components/Layout";
 import { TokenRequest } from "~/components/TokenRequest";
 import { BoxWrapper, FlexWrapper } from "~/ui";
 
-const AuthorizationPage = () => {
+function AuthorizationPage() {
   return (
     <LayoutPublic>
       <BoxWrapper>
@@ -40,6 +40,6 @@ const AuthorizationPage = () => {
       </FlexWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default AuthorizationPage;

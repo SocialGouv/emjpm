@@ -3,7 +3,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { FlexWrapper } from "~/ui";
 
-const ForgotPasswordPage = () => {
+function ForgotPasswordPage() {
   return (
     <LayoutPublic>
       <FlexWrapper
@@ -18,6 +18,6 @@ const ForgotPasswordPage = () => {
       </FlexWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default ForgotPasswordPage;

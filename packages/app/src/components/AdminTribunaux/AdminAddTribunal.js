@@ -8,7 +8,7 @@ import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
 
-export const AdminAddTribunal = () => {
+export function AdminAddTribunal() {
   const history = useHistory();
 
   const { departements, loading } = useDepartements();
@@ -44,4 +44,4 @@ export const AdminAddTribunal = () => {
       }}
     />
   );
-};
+}

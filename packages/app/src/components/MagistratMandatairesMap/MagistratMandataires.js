@@ -13,7 +13,7 @@ import { filterGestionnairesByDiscriminator } from "./utils";
 
 import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
 
-const MagistratMandataires = () => {
+function MagistratMandataires() {
   const { magistrat } = useContext(UserContext);
   const { ti_id } = magistrat;
 
@@ -55,6 +55,6 @@ const MagistratMandataires = () => {
       prepose={prepose}
     />
   );
-};
+}
 
 export { MagistratMandataires };

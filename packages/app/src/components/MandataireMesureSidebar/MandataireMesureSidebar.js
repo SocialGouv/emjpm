@@ -6,7 +6,7 @@ import { Link } from "~/components/Link";
 
 const linkStyle = { color: "black", fontSize: "1", my: "3" };
 
-export const MandataireMesureSidebar = (props) => {
+export function MandataireMesureSidebar(props) {
   return (
     <Box {...props}>
       <Link to="/mandataires/mesures">
@@ -21,6 +21,6 @@ export const MandataireMesureSidebar = (props) => {
       </Link>
     </Box>
   );
-};
+}
 
 export default MandataireMesureSidebar;

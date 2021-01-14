@@ -1,6 +1,6 @@
 const LINE_COUNT = 3;
 
-const getColorFromProps = (props, theme) => {
+function getColorFromProps(props, theme) {
   if (props.error) {
     return theme.colors.error;
   }
@@ -10,9 +10,9 @@ const getColorFromProps = (props, theme) => {
   }
 
   return theme.colors.text;
-};
+}
 
-const getBorderColorFromProps = (props, theme) => {
+function getBorderColorFromProps(props, theme) {
   if (props.error) {
     return theme.colors.error;
   }
@@ -22,7 +22,7 @@ const getBorderColorFromProps = (props, theme) => {
   }
 
   return theme.colors.border;
-};
+}
 
 export const labelStyle = (props, theme) => ({
   color: getColorFromProps(props, theme),

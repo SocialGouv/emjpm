@@ -10,7 +10,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const MandataireEnquetePage = () => {
+function MandataireEnquetePage() {
   const history = useHistory();
   const { id: userId } = useContext(UserContext);
   const currentStep = useCurrentStepFromUrl();
@@ -63,6 +63,6 @@ const MandataireEnquetePage = () => {
       </BoxWrapper>
     </LayoutMandataire>
   );
-};
+}
 
 export default MandataireEnquetePage;

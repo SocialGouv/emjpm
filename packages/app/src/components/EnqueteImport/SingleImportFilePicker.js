@@ -11,7 +11,7 @@ const inputStyle = {
   zIndex: "-1",
 };
 
-const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
+function SingleImportFilePicker({ onFileChosen, placeholder }) {
   return (
     <Box mb="2">
       <FilePicker
@@ -28,6 +28,6 @@ const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
       />
     </Box>
   );
-};
+}
 
 export { SingleImportFilePicker };

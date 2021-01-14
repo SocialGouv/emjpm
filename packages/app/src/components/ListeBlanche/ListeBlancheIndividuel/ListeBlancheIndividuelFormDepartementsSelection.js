@@ -16,7 +16,7 @@ function canModifyAgrement(user, departementId) {
   return user.agrements.includes(parseInt(departementId));
 }
 
-export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
+export function ListeBlancheIndividuelFormDepartementsSelection(props) {
   const { departements, onRemove, editMode, setDepartementFinanceur } = props;
   const user = useContext(UserContext);
 
@@ -74,6 +74,6 @@ export const ListeBlancheIndividuelFormDepartementsSelection = (props) => {
       />
     </Fragment>
   );
-};
+}
 
 export default ListeBlancheIndividuelFormDepartementsSelection;

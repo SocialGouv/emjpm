@@ -1,6 +1,6 @@
 import { Popup } from "react-mapbox-gl";
 
-const MapPopup = (props) => {
+function MapPopup(props) {
   const { children, longitude, latitude } = props;
   return (
     <div>
@@ -16,6 +16,6 @@ const MapPopup = (props) => {
       </Popup>
     </div>
   );
-};
+}
 
 export { MapPopup };

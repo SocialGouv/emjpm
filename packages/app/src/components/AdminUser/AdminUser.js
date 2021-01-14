@@ -16,7 +16,7 @@ import { MesureImportPanel } from "~/components/MesureImport";
 
 import { USER } from "./queries";
 
-const AdminUser = () => {
+function AdminUser() {
   const { user_id: userId } = useParams();
 
   const { data, loading, error } = useQuery(USER, {
@@ -95,6 +95,6 @@ const AdminUser = () => {
       </Box>
     </Box>
   );
-};
+}
 
 export { AdminUser };

@@ -35,7 +35,7 @@ async function updateEtablissementRattachement(formik, id) {
   }
 }
 
-export const ListeBlanchePreposeForm = (props) => {
+export function ListeBlanchePreposeForm(props) {
   const { searchEtablissements, editMode, data = {}, handleSubmit } = props;
 
   const initialValues = {
@@ -215,6 +215,6 @@ export const ListeBlanchePreposeForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export default ListeBlanchePreposeForm;

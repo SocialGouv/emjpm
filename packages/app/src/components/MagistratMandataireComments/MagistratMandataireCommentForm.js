@@ -9,7 +9,7 @@ import { Button, Field, Input } from "~/ui";
 
 import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 
-export const MagistratMandataireCommentForm = (props) => {
+export function MagistratMandataireCommentForm(props) {
   const {
     tiId,
     serviceId,
@@ -103,7 +103,7 @@ export const MagistratMandataireCommentForm = (props) => {
       </form>
     </Box>
   );
-};
+}
 
 MagistratMandataireCommentForm.defaultProps = {
   antenneId: null,

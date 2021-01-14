@@ -1,5 +1,5 @@
-const Error = (props) => {
+function Error(props) {
   return <div {...props} />;
-};
+}
 
 export default Error;

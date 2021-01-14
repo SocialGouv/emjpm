@@ -6,7 +6,7 @@ import { UserContext } from "~/components/UserContext";
 
 import { MESURES_SERVICE } from "./queries";
 
-const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
+function ServiceMap({ selectMesures, selectedMesuresIds }) {
   const { service_members } = useContext(UserContext);
   const [service_member] = service_members;
   const {
@@ -46,6 +46,6 @@ const ServiceMap = ({ selectMesures, selectedMesuresIds }) => {
       />
     </MapContainer>
   );
-};
+}
 
 export { ServiceMap };

@@ -9,7 +9,7 @@ import { Heading3 } from "~/ui";
 
 import { content, statusBox, subtitle, title } from "./style";
 
-const MesureDetailView = ({ mesure, ...props }) => {
+function MesureDetailView({ mesure, ...props }) {
   const {
     realAge,
     cabinet,
@@ -166,6 +166,6 @@ const MesureDetailView = ({ mesure, ...props }) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { MesureDetailView };

@@ -8,7 +8,7 @@ import { BoxWrapper, FlexWrapper } from "~/ui";
 
 import { ExcludeBrowserBanner } from "~/components/ExcludeBrowserBanner";
 
-const LoginPage = () => {
+function LoginPage() {
   return (
     <Fragment>
       <LayoutPublic>
@@ -55,6 +55,6 @@ const LoginPage = () => {
       </LayoutPublic>
     </Fragment>
   );
-};
+}
 
 export default LoginPage;

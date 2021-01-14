@@ -9,7 +9,7 @@ import { UPDATE_ENQUETE_POPULATIONS_MAJ } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_MAJ } from "./queries";
 import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
 
-export const EnquetePopulationsMAJ = (props) => {
+export function EnquetePopulationsMAJ(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -69,6 +69,6 @@ export const EnquetePopulationsMAJ = (props) => {
       title={"Mesure d'accompagnement de justice"}
     />
   );
-};
+}
 
 export default EnquetePopulationsMAJ;

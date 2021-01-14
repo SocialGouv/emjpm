@@ -43,7 +43,7 @@ function buildQueryVariables(enqueteId, criteria) {
   return variables;
 }
 
-export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
+export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
   const queryContext = useQueryContextWithHasuraRole("direction_");
 
   const { criteria, updateCriteria } = useDirectionEnqueteReponsesCriteria({
@@ -166,4 +166,4 @@ export const DirectionEnqueteDetailsReponsesList = ({ enqueteId }) => {
       </Box>
     </LoadingWrapper>
   );
-};
+}

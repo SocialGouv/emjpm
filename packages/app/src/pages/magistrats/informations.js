@@ -5,7 +5,7 @@ import { MagistratInformations } from "~/components/MagistratInformations";
 import { MagistratTribunalInformations } from "~/components/MagistratTribunalInformations";
 import { BoxWrapper, Heading2 } from "~/ui";
 
-const Informations = () => {
+function Informations() {
   return (
     <LayoutMagistrat>
       <BoxWrapper mt={6} px="0">
@@ -39,6 +39,6 @@ const Informations = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default Informations;

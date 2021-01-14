@@ -19,7 +19,7 @@ import { formatGestionnaire } from "./utils";
 
 import { MagistratMandataireMap } from "~/components/MagistratMandataireMap";
 
-export const MagistratMandataire = (props) => {
+export function MagistratMandataire(props) {
   const { gestionnaireId, tiId } = props;
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
   const { data, error, loading } = useQuery(GESTIONNAIRES, {
@@ -196,6 +196,6 @@ export const MagistratMandataire = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 export default MagistratMandataire;

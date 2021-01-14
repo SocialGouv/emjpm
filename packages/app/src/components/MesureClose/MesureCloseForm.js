@@ -7,7 +7,7 @@ import * as Yup from "yup";
 import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
 import { Button, Heading3, Heading5 } from "~/ui";
 
-export const MesureCloseForm = (props) => {
+export function MesureCloseForm(props) {
   const { handleSubmit, handleCancel } = props;
 
   const validationSchema = Yup.object().shape({
@@ -81,4 +81,4 @@ export const MesureCloseForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

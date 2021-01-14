@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { EnqueteFormInputField } from "../../EnqueteForm";
 
-export const EnqueteActiviteFormGroupMesures = (props) => {
+export function EnqueteActiviteFormGroupMesures(props) {
   // prefix: 'etablissement' | 'domicile' | ''
   const { prefix, enqueteContext, enqueteForm } = props;
 
@@ -65,6 +65,6 @@ export const EnqueteActiviteFormGroupMesures = (props) => {
       </Flex>
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteFormGroupMesures;

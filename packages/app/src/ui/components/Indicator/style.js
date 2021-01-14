@@ -1,5 +1,5 @@
-const IndicatorTextStyle = (isNegative) => {
+function IndicatorTextStyle(isNegative) {
   return { color: isNegative ? "error" : "black" };
-};
+}
 
 export { IndicatorTextStyle };

@@ -6,7 +6,7 @@ import { Indicator } from "~/ui";
 
 import { GET_AVAILABLE_MESURE_NUMBER } from "./queries";
 
-const AvailableMesureIndicator = () => {
+function AvailableMesureIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_AVAILABLE_MESURE_NUMBER, {
     variables: {
@@ -36,6 +36,6 @@ const AvailableMesureIndicator = () => {
       indicator={available_mesures_nb ? available_mesures_nb : 0}
     />
   );
-};
+}
 
 export { AvailableMesureIndicator };

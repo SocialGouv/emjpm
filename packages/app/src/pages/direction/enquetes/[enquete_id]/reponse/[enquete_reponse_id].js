@@ -4,7 +4,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const DirectionEnqueteReponsePreviewPage = () => {
+function DirectionEnqueteReponsePreviewPage() {
   const query = useParams();
   const enqueteId = Number(query.enquete_id);
   const enqueteReponseId = Number(query.enquete_reponse_id);
@@ -19,6 +19,6 @@ const DirectionEnqueteReponsePreviewPage = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default DirectionEnqueteReponsePreviewPage;

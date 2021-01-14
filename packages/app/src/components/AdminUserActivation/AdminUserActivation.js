@@ -11,7 +11,7 @@ import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
 
-const AdminUserActivation = (props) => {
+function AdminUserActivation(props) {
   const { userId } = props;
 
   const [execQuery, queryResult] = useLazyQuery(LB_USER);
@@ -143,6 +143,6 @@ const AdminUserActivation = (props) => {
       </Flex>
     </Fragment>
   );
-};
+}
 
 export { AdminUserActivation };

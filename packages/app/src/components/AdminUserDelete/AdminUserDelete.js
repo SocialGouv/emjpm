@@ -3,7 +3,7 @@ import { Flex } from "rebass";
 import { AdminUserDeleteForm } from "./AdminUserDeleteForm";
 import { AdminUserDeleteRemoveStyle } from "./style";
 
-export const AdminUserDelete = (props) => {
+export function AdminUserDelete(props) {
   const { userId } = props;
 
   return (
@@ -11,4 +11,4 @@ export const AdminUserDelete = (props) => {
       <AdminUserDeleteForm userId={userId} />
     </Flex>
   );
-};
+}

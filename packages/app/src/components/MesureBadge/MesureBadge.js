@@ -1,6 +1,6 @@
 import { Box } from "rebass";
 
-const MesureBadge = ({ mesures_en_cours, dispo_max }) => {
+function MesureBadge({ mesures_en_cours, dispo_max }) {
   return (
     <Box
       sx={{
@@ -14,6 +14,6 @@ const MesureBadge = ({ mesures_en_cours, dispo_max }) => {
       {mesures_en_cours} / {dispo_max}
     </Box>
   );
-};
+}
 
 export { MesureBadge };

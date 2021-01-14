@@ -15,7 +15,7 @@ import { MesureAcceptForm } from "./MesureAcceptForm";
 import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MesureAcceptStyle } from "./style";
 
-export const MesureAccept = (props) => {
+export function MesureAccept(props) {
   const history = useHistory();
   const client = useApolloClient();
 
@@ -30,9 +30,9 @@ export const MesureAccept = (props) => {
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
-  const redirectToMesure = (mesureId) => {
+  function redirectToMesure(mesureId) {
     history.push(`${userBasePath}/mesures/${mesureId}`);
-  };
+  }
 
   const [updateMesure] = useMutation(ACCEPT_MESURE, {
     onCompleted: async () => {
@@ -107,9 +107,9 @@ export const MesureAccept = (props) => {
     setSubmitting(false);
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     redirectToMesure(mesure.id);
-  };
+  }
 
   return (
     <Box sx={MesureAcceptStyle} {...props}>
@@ -123,6 +123,6 @@ export const MesureAccept = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default MesureAccept;

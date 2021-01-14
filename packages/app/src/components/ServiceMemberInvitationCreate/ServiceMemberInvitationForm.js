@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 import { serviceMemberInvitationSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
-const ServiceMemberInvitationForm = (props) => {
+function ServiceMemberInvitationForm(props) {
   const { handleSubmit } = props;
 
   const formik = useFormik({
@@ -50,6 +50,6 @@ const ServiceMemberInvitationForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export { ServiceMemberInvitationForm };

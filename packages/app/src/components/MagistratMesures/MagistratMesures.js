@@ -14,7 +14,7 @@ import { MagistratListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MagistratMesures = () => {
+function MagistratMesures() {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
   const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
@@ -40,9 +40,9 @@ const MagistratMesures = () => {
     variables: queryVariables,
   });
 
-  const selectMesure = ({ id }) => {
+  function selectMesure({ id }) {
     history.push(`/magistrats/mesures/${id}`);
-  };
+  }
 
   if (loading) {
     return <div>loading</div>;
@@ -99,6 +99,6 @@ const MagistratMesures = () => {
       </Fragment>
     </Box>
   );
-};
+}
 
 export { MagistratMesures };

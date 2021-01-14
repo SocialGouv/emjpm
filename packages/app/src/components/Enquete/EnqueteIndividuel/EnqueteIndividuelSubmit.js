@@ -7,7 +7,7 @@ import { EnqueteSubmit } from "../EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_REPONSE } from "./mutations";
 
-export const EnqueteIndividuelSubmit = (props) => {
+export function EnqueteIndividuelSubmit(props) {
   const { enquete, enqueteReponse, goToFirstPage } = props;
   const { id: enqueteId } = enquete;
   const { id: userId } = useContext(UserContext);
@@ -38,6 +38,6 @@ export const EnqueteIndividuelSubmit = (props) => {
       submitEnqueteReponse={submitEnqueteReponse}
     />
   );
-};
+}
 
 export default EnqueteIndividuelSubmit;

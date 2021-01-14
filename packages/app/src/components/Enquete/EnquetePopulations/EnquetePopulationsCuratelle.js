@@ -9,7 +9,7 @@ import { UPDATE_ENQUETE_POPULATIONS_CURATELLE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_CURATELLE } from "./queries";
 import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
 
-export const EnquetePopulationsCuratelle = (props) => {
+export function EnquetePopulationsCuratelle(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -72,6 +72,6 @@ export const EnquetePopulationsCuratelle = (props) => {
       title={"Curatelle"}
     />
   );
-};
+}
 
 export default EnquetePopulationsCuratelle;

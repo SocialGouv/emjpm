@@ -15,7 +15,7 @@ const ButtonStyle = {
   top: 0,
 };
 
-const Panel = (props) => {
+function Panel(props) {
   const { currentPanel, togglePanel } = props;
   const available =
     currentPanel.mesures_max -
@@ -62,6 +62,6 @@ const Panel = (props) => {
       </Card>
     </Box>
   );
-};
+}
 
 export { Panel };

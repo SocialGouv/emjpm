@@ -15,7 +15,7 @@ import {
   titleStyle,
 } from "./style";
 
-const MagistratMandatairesMapPopup = () => {
+function MagistratMandatairesMapPopup() {
   const {
     currentMarker: { id },
   } = useContext(MapContext);
@@ -67,6 +67,6 @@ const MagistratMandatairesMapPopup = () => {
       </LinkButton>
     </Box>
   );
-};
+}
 
 export { MagistratMandatairesMapPopup };

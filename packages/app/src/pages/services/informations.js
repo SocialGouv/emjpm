@@ -5,7 +5,7 @@ import { ServiceAntennes } from "~/components/ServiceAntennes";
 import { ServiceInformations } from "~/components/ServiceInformations";
 import { BoxWrapper } from "~/ui";
 
-const Informations = () => {
+function Informations() {
   return (
     <LayoutServices>
       <BoxWrapper m={2} px="1">
@@ -18,6 +18,6 @@ const Informations = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default Informations;

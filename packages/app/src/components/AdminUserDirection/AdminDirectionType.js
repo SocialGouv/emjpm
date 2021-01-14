@@ -4,7 +4,7 @@ import { AdminDirectionTypeForm } from "./AdminDirectionTypeForm";
 import { CHANGE_DIRECTION_AGREMENT } from "./mutations";
 import { USER } from "./queries";
 
-const AdminDirectionType = (props) => {
+function AdminDirectionType(props) {
   const { userId } = props;
 
   const { data, loading, error } = useQuery(USER, {
@@ -58,6 +58,6 @@ const AdminDirectionType = (props) => {
       direction={direction}
     />
   );
-};
+}
 
 export { AdminDirectionType };

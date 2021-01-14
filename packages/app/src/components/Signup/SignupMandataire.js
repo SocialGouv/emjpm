@@ -23,7 +23,7 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-const SignupMandataireForm = () => {
+function SignupMandataireForm() {
   const history = useHistory();
   const { user, mandataire, setMandataire, validateStepOne } = useContext(
     SignupContext
@@ -199,7 +199,7 @@ const SignupMandataireForm = () => {
       </form>
     </Fragment>
   );
-};
+}
 
 const SignupMandataire = (props) => (
   <SignupDatas

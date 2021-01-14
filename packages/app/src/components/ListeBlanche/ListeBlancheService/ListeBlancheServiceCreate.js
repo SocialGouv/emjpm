@@ -11,7 +11,7 @@ import serviceSiretExists from "~/util/serviceSiretExists";
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { ADD_SERVICE } from "./mutations";
 
-export const ListeBlancheServiceCreate = (props) => {
+export function ListeBlancheServiceCreate(props) {
   const { handleCancel, onSuccess } = props;
   const history = useHistory();
   const client = useApolloClient();
@@ -72,6 +72,6 @@ export const ListeBlancheServiceCreate = (props) => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlancheServiceCreate;

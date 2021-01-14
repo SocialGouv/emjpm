@@ -11,7 +11,7 @@ const MandatairelistStyle = {
   justifyContent: "space-between",
 };
 
-const columnStyle = (isMobileHidden, isTabletHidden) => {
+function columnStyle(isMobileHidden, isTabletHidden) {
   return {
     "@media screen and (max-width: 40em)": {
       display: isMobileHidden ? "none" : "flex",
@@ -21,9 +21,9 @@ const columnStyle = (isMobileHidden, isTabletHidden) => {
     },
     flexDirection: "column",
   };
-};
+}
 
-const availabilityIndicatorStyle = (isAvailable) => {
+function availabilityIndicatorStyle(isAvailable) {
   return {
     bg: isAvailable ? "success" : "error",
     borderRadius: "default",
@@ -31,7 +31,7 @@ const availabilityIndicatorStyle = (isAvailable) => {
     mr: "1",
     width: "10px",
   };
-};
+}
 
 const titleStyle = {
   color: "black",
@@ -61,7 +61,7 @@ const labelStyle = {
   mt: "7px",
 };
 
-const dispoDescriptionStyle = (isPositive) => {
+function dispoDescriptionStyle(isPositive) {
   return {
     color: isPositive ? "success" : "error",
     fontFamily: "heading",
@@ -71,9 +71,9 @@ const dispoDescriptionStyle = (isPositive) => {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   };
-};
+}
 
-const descriptionStyle = (isPositive) => {
+function descriptionStyle(isPositive) {
   return {
     color: isPositive ? "black" : "error",
     fontFamily: "heading",
@@ -83,9 +83,9 @@ const descriptionStyle = (isPositive) => {
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   };
-};
+}
 
-const decorationStyle = (type) => {
+function decorationStyle(type) {
   return {
     bg: TYPES[type],
     height: "100%",
@@ -94,7 +94,7 @@ const decorationStyle = (type) => {
     top: 0,
     width: "3px",
   };
-};
+}
 
 const cardStyle = {
   "&:hover": {

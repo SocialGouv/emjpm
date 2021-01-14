@@ -7,7 +7,7 @@ import { Card, Heading2, Spinner } from "~/ui";
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
 
-const AvailabilityMap = () => {
+function AvailabilityMap() {
   const { data, loading, error } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);
 
   if (loading) {
@@ -63,6 +63,6 @@ const AvailabilityMap = () => {
       </Box>
     </Card>
   );
-};
+}
 
 export { AvailabilityMap };

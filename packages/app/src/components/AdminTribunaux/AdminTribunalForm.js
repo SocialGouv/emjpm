@@ -8,7 +8,7 @@ import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
 
 import { cardStyle } from "./style";
 
-export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
+export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
   const geocode = geocodeInitialValue(tribunal);
 
   const formik = useFormik({
@@ -137,4 +137,4 @@ export const AdminTribunalForm = ({ tribunal, onSubmit, onCancel }) => {
       </Flex>
     </Card>
   );
-};
+}

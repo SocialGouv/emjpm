@@ -9,15 +9,15 @@ import {
   RadioWrapperStyle,
 } from "./style";
 
-const BaseRadio = (props) => {
+function BaseRadio(props) {
   return (
     <Box sx={RadioStyle(props)}>
       <Box sx={InnerRadioStyle(props)} />
     </Box>
   );
-};
+}
 
-export const Radio = (props) => {
+export function Radio(props) {
   const { label, id, name, checked, disabled, renderRadioLabel } = props;
   return (
     <Box sx={RadioWrapperStyle}>
@@ -42,7 +42,7 @@ export const Radio = (props) => {
       </Box>
     </Box>
   );
-};
+}
 
 Radio.propTypes = {
   checked: PropTypes.bool.isRequired,

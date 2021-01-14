@@ -11,7 +11,7 @@ import {
 } from "~/constants/import";
 import { Card, Heading3, Text } from "~/ui";
 
-const ServiceMesureImport = ({ serviceId }) => {
+function ServiceMesureImport({ serviceId }) {
   return (
     <Fragment>
       <Card mb="5">
@@ -61,6 +61,6 @@ const ServiceMesureImport = ({ serviceId }) => {
       </Card>
     </Fragment>
   );
-};
+}
 
 export { ServiceMesureImport };

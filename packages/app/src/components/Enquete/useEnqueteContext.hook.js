@@ -1,6 +1,6 @@
 import { useMemo, useReducer, useState } from "react";
 
-export const useEnqueteContext = (props) => {
+export function useEnqueteContext(props) {
   const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(
     false
   );
@@ -158,4 +158,4 @@ export const useEnqueteContext = (props) => {
       return { step: currentStep.step - 1, substep: substep - 1 };
     }
   }
-};
+}

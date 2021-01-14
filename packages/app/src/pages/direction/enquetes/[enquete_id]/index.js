@@ -4,7 +4,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const DirectionEnqueteDetailsPage = () => {
+function DirectionEnqueteDetailsPage() {
   const { enquete_id: enqueteId } = useParams();
   return (
     <LayoutDirection>
@@ -13,6 +13,6 @@ const DirectionEnqueteDetailsPage = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default DirectionEnqueteDetailsPage;

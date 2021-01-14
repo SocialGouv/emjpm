@@ -6,7 +6,7 @@ import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { Heading4, Text } from "~/ui";
 
-const MandataireBoard = () => {
+function MandataireBoard() {
   const { type, mandataire } = useContext(UserContext);
   const {
     mesures_en_cours = 0,
@@ -136,6 +136,6 @@ const MandataireBoard = () => {
       )}
     </Box>
   );
-};
+}
 
 export { MandataireBoard };

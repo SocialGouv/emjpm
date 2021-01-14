@@ -18,7 +18,7 @@ function ImportMesures() {
     ocmi_mandataire ? "ocmi" : "file"
   );
 
-  const ImportTypeTab = ({ type, children }) => {
+  function ImportTypeTab({ type, children }) {
     return (
       <NavLink
         sx={{
@@ -32,7 +32,7 @@ function ImportMesures() {
         {children}
       </NavLink>
     );
-  };
+  }
 
   return (
     <LayoutMandataire>

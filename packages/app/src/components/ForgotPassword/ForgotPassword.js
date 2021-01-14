@@ -11,7 +11,7 @@ import { captureException } from "~/util/sentry";
 
 const { API_URL } = config;
 
-const ForgotPassword = () => {
+function ForgotPassword() {
   const url = `${API_URL}/api/auth/forgot-password`;
   const [mailSent, setMailSent] = useState(false);
 
@@ -127,6 +127,6 @@ const ForgotPassword = () => {
       </Box>
     </Card>
   );
-};
+}
 
 export { ForgotPassword };

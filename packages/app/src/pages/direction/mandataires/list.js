@@ -17,7 +17,7 @@ import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui";
 
-const Mandataires = () => {
+function Mandataires() {
   const user = useContext(UserContext);
   const [direction] = user.directions;
   const initialFilters = {};
@@ -73,6 +73,6 @@ const Mandataires = () => {
       </LayoutDirection>
     </FiltersContextSerializableProvider>
   );
-};
+}
 
 export default Mandataires;

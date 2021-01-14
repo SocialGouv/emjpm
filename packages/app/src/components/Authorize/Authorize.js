@@ -11,7 +11,7 @@ const { API_URL } = config;
 
 const url = `${API_URL}/api/oauth/authorize`;
 
-const Authorize = (props) => {
+function Authorize(props) {
   const { editorId, token, redirectUrl, state } = props;
   const { data, loading, error } = useQuery(EDITOR, {
     variables: {
@@ -85,6 +85,6 @@ const Authorize = (props) => {
       )}
     </Card>
   );
-};
+}
 
 export { Authorize };

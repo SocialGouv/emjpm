@@ -2,7 +2,7 @@ import { Box } from "rebass";
 
 import { Input } from "~/ui";
 
-const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
+function SingleImportFilePicker({ onFileChosen, placeholder }) {
   return (
     <Box mb="2">
       <Input
@@ -18,6 +18,6 @@ const SingleImportFilePicker = ({ onFileChosen, placeholder }) => {
       />
     </Box>
   );
-};
+}
 
 export { SingleImportFilePicker };

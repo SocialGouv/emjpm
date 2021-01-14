@@ -11,7 +11,7 @@ import { ENQUETE_CURATELLE_RENFORCEE } from "./queries";
 
 const PREFIX = "curatelle_renforcee";
 
-export const EnqueteActiviteCuratelleRenforcee = (props) => {
+export function EnqueteActiviteCuratelleRenforcee(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -85,6 +85,6 @@ export const EnqueteActiviteCuratelleRenforcee = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteCuratelleRenforcee;

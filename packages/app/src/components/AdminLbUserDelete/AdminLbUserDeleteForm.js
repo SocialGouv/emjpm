@@ -11,7 +11,7 @@ import { Button, Heading3, Heading5 } from "~/ui";
 import { DELETE_LB_USER } from "./mutations";
 import { AdminLbUserDeleteRemoveStyle } from "./style";
 
-export const AdminLbUserDeleteForm = (props) => {
+export function AdminLbUserDeleteForm(props) {
   const { lbUserId } = props;
 
   const history = useHistory();
@@ -91,4 +91,4 @@ export const AdminLbUserDeleteForm = (props) => {
       </Box>
     </Flex>
   );
-};
+}

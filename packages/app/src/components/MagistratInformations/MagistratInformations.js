@@ -8,7 +8,7 @@ import { Card, Heading3, Heading5 } from "~/ui";
 
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
-const MagistratInformations = (props) => {
+function MagistratInformations(props) {
   const { email, cabinet, nom, prenom } = useContext(UserContext);
 
   return (
@@ -46,6 +46,6 @@ const MagistratInformations = (props) => {
       </Card>
     </Box>
   );
-};
+}
 
 export { MagistratInformations };

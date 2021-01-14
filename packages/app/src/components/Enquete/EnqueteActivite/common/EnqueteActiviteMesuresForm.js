@@ -29,7 +29,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteActiviteMesuresForm = (props) => {
+export function EnqueteActiviteMesuresForm(props) {
   const {
     title,
     data = {},
@@ -71,6 +71,6 @@ export const EnqueteActiviteMesuresForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
-};
+}
 
 export default EnqueteActiviteMesuresForm;

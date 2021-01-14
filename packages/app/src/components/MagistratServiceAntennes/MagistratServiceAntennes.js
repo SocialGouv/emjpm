@@ -7,7 +7,7 @@ import { Antenne, Card, Heading3, Heading4, Spinner } from "~/ui";
 
 import { SERVICE_ANTENNES } from "./queries";
 
-const MagistratServiceAntennes = (props) => {
+function MagistratServiceAntennes(props) {
   const { serviceId } = props;
   const { data, error, loading } = useQuery(SERVICE_ANTENNES, {
     variables: {
@@ -59,7 +59,7 @@ const MagistratServiceAntennes = (props) => {
       </Flex>
     </Box>
   );
-};
+}
 
 MagistratServiceAntennes.propTypes = {
   serviceId: PropTypes.number,

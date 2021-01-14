@@ -9,7 +9,7 @@ import { AdminEditorForm } from "./AdminEditorForm";
 import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";
 
-export const AdminEditorCreate = () => {
+export function AdminEditorCreate() {
   const [addEditor] = useMutation(ADD_EDITOR);
   const history = useHistory();
 
@@ -36,9 +36,9 @@ export const AdminEditorCreate = () => {
     history.push("/admin/editors");
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     history.push("/admin/editors");
-  };
+  }
 
   return (
     <Card sx={cardStyle} p="0" width="100%">
@@ -48,4 +48,4 @@ export const AdminEditorCreate = () => {
       />
     </Card>
   );
-};
+}

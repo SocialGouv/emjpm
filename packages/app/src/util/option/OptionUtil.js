@@ -1,4 +1,4 @@
-export const regionsToOptions = (datas) => {
+export function regionsToOptions(datas) {
   const all = [
     {
       label: "Toutes les régions",
@@ -7,9 +7,9 @@ export const regionsToOptions = (datas) => {
   ];
   Array.prototype.push.apply(all, toOptions(datas, "id", "nom"));
   return all;
-};
+}
 
-export const departementToOptions = (datas) => {
+export function departementToOptions(datas) {
   const all = [];
   if (datas && datas.length > 1) {
     all.push({
@@ -22,7 +22,7 @@ export const departementToOptions = (datas) => {
     return a.label - b.label;
   });
   return all;
-};
+}
 
 export const toOptions = (data, valueKey, labelKey) =>
   !data?.length
@@ -32,14 +32,14 @@ export const toOptions = (data, valueKey, labelKey) =>
         value: elt[valueKey],
       }));
 
-export const findOption = (options, value) => {
+export function findOption(options, value) {
   if (!options || !options.length) {
     return undefined;
   }
   return options.find((option) => option.value === value);
-};
+}
 
-export const findOptions = (options, values) => {
+export function findOptions(options, values) {
   if (!options || !options.length) {
     return undefined;
   }
@@ -47,8 +47,8 @@ export const findOptions = (options, values) => {
     return undefined;
   }
   return options.filter((option) => values.includes(option.value));
-};
+}
 
-export const getOptionValue = (option) => {
+export function getOptionValue(option) {
   return option ? option.value : null;
-};
+}

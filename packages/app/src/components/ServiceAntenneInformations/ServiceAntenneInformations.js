@@ -9,7 +9,7 @@ import { Card, Heading3, Heading5 } from "~/ui";
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { content, subtitle } from "./style";
 
-const ServiceAntenneInformations = (props) => {
+function ServiceAntenneInformations(props) {
   const { antenne_id } = props;
   const { data, error, loading } = useQuery(GET_SERVICES_ANTENNE, {
     fetchPolicy: "cache-and-network",
@@ -89,7 +89,7 @@ const ServiceAntenneInformations = (props) => {
       </Card>
     </Box>
   );
-};
+}
 
 ServiceAntenneInformations.defaultProps = {
   currentAntenne: null,

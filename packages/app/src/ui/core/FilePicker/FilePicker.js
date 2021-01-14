@@ -5,26 +5,26 @@ import { Box, Flex } from "rebass";
 
 import { InputStyle, InputWrapperStyle, LabelStyle } from "./Style";
 
-const InputWrapper = (props) => {
+function InputWrapper(props) {
   return (
     <Flex flexDirection="column" sx={InputWrapperStyle(props)} {...props} />
   );
-};
+}
 
-const InputElement = (props) => {
+function InputElement(props) {
   return <Box as="input" sx={InputStyle} {...props} />;
-};
+}
 
-const InputLabel = (props) => {
+function InputLabel(props) {
   const { children } = props;
   return (
     <Box as="label" sx={LabelStyle(props)} {...props}>
       {children}
     </Box>
   );
-};
+}
 
-const FilePicker = (props) => {
+function FilePicker(props) {
   const {
     onChange,
     placeholder,
@@ -71,7 +71,7 @@ const FilePicker = (props) => {
       />
     </InputWrapper>
   );
-};
+}
 
 InputLabel.propTypes = {
   children: PropTypes.node.isRequired,

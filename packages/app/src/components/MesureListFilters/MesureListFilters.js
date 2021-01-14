@@ -11,7 +11,7 @@ import { Card, Input, Select } from "~/ui";
 
 import { FiltersContext } from "./context";
 
-const MesureListFilters = (props) => {
+function MesureListFilters(props) {
   const { service_antennes = [] } = props;
 
   const {
@@ -103,6 +103,6 @@ const MesureListFilters = (props) => {
       </Flex>
     </Card>
   );
-};
+}
 
 export { MesureListFilters };

@@ -3,7 +3,7 @@ import { Box, Link } from "rebass";
 
 import { Link as RouterLink } from "~/components/Link";
 
-const LinkStyle = (isActive) => {
+function LinkStyle(isActive) {
   return {
     "&:hover": {
       textDecoration: "none",
@@ -17,7 +17,7 @@ const LinkStyle = (isActive) => {
     p: "2px",
     position: "relative",
   };
-};
+}
 
 const LineStyle = {
   bg: "primary",

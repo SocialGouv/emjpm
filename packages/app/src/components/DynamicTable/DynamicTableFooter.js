@@ -3,7 +3,7 @@ import { Select } from "@rebass/forms";
 import ReactPaginate from "react-paginate";
 import { Flex } from "rebass";
 
-const DynamicTableFooter = (props) => {
+function DynamicTableFooter(props) {
   const { gotoPage, pageIndex, pageSize, pageCount, setPageSize } = props;
   return (
     <Flex justifyContent="flex-end" alignItems="center">
@@ -37,6 +37,6 @@ const DynamicTableFooter = (props) => {
       </Select>
     </Flex>
   );
-};
+}
 
 export default DynamicTableFooter;

@@ -20,7 +20,7 @@ const navigationLinks = [
   },
 ];
 
-const LayoutMagistratMap = (props) => {
+function LayoutMagistratMap(props) {
   const { children } = props;
   return (
     <Fragment>
@@ -38,6 +38,6 @@ const LayoutMagistratMap = (props) => {
       {children}
     </Fragment>
   );
-};
+}
 
 export { LayoutMagistratMap };

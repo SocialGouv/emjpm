@@ -6,7 +6,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const AdminUserDeletePage = () => {
+function AdminUserDeletePage() {
   const { id: lbUserId } = useParams();
 
   return (
@@ -18,6 +18,6 @@ const AdminUserDeletePage = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default AdminUserDeletePage;

@@ -11,7 +11,7 @@ import { Button, Card, Heading4, Spinner } from "~/ui";
 
 import { API_LOGS_SEARCH } from "./queries";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const { id, created_at, request_method, request_url, token, response } = item;
   return (
     <>
@@ -91,9 +91,9 @@ const RowItem = ({ item }) => {
       </Flex>
     </>
   );
-};
+}
 
-const AdminApiLogs = () => {
+function AdminApiLogs() {
   const [searchQuery, setSearchQuery] = useState(null);
   const debouncedSearchQuery = useDebounce(searchQuery, 1000);
 
@@ -131,9 +131,9 @@ const AdminApiLogs = () => {
   const { count } = data?.api_logs_aggregate?.aggregate;
   const { api_logs } = data;
 
-  const handleSearchChange = (event) => {
+  function handleSearchChange(event) {
     setSearchQuery(event.target.value);
-  };
+  }
 
   return (
     <Card>
@@ -238,6 +238,6 @@ const AdminApiLogs = () => {
       />
     </Card>
   );
-};
+}
 
 export { AdminApiLogs };

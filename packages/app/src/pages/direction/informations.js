@@ -4,7 +4,7 @@ import { DirectionInformations } from "~/components/DirectionInformations";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Heading2 } from "~/ui";
 
-const Informations = () => {
+function Informations() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="0">
@@ -28,6 +28,6 @@ const Informations = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default Informations;

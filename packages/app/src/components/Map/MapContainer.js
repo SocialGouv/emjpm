@@ -4,7 +4,7 @@ import { MapError } from "./MapError";
 
 const Map = ReactMapboxGl({ accessToken: "" });
 
-const MapContainer = (props) => {
+function MapContainer(props) {
   const { children, latitude, longitude } = props;
 
   if (!latitude || !longitude) {
@@ -25,6 +25,6 @@ const MapContainer = (props) => {
       {children}
     </Map>
   );
-};
+}
 
 export { MapContainer };

@@ -35,7 +35,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteServiceInformationsForm = (props) => {
+export function EnqueteServiceInformationsForm(props) {
   const {
     data = {},
     loading = false,
@@ -117,6 +117,6 @@ export const EnqueteServiceInformationsForm = (props) => {
       </Box>
     </form>
   );
-};
+}
 
 export default EnqueteServiceInformationsForm;

@@ -12,7 +12,7 @@ import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesCh
 import { SERVICES } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const { id, etablissement, code_postal, ville } = item;
   return (
     <Fragment>
@@ -45,7 +45,7 @@ const RowItem = ({ item }) => {
       </Card>
     </Fragment>
   );
-};
+}
 
 function AdminServices() {
   const [currentOffset, setCurrentOffset] = useState(0);

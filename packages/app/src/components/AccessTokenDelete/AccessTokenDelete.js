@@ -5,7 +5,7 @@ import { Box } from "rebass";
 
 import { REMOVE_ACCESS_TOKEN } from "./Mutation";
 
-const AccessTokenDelete = (props) => {
+function AccessTokenDelete(props) {
   const { id } = props;
   const [RemoveAccessToken] = useMutation(REMOVE_ACCESS_TOKEN);
 
@@ -25,6 +25,6 @@ const AccessTokenDelete = (props) => {
       <XCircle size="24" />
     </Box>
   );
-};
+}
 
 export { AccessTokenDelete };

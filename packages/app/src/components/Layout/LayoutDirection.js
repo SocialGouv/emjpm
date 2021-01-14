@@ -7,7 +7,7 @@ import { Navigation } from "~/components/Navigation";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const LayoutDirection = ({ children }) => {
+function LayoutDirection({ children }) {
   const { type } = useContext(UserContext);
   const navigationLinks = [
     {
@@ -47,6 +47,6 @@ const LayoutDirection = ({ children }) => {
       </Box>
     </Fragment>
   );
-};
+}
 
 export { LayoutDirection };

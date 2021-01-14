@@ -1,6 +1,6 @@
 import { formatMandataire } from "~/util/mandataires/MandataireUtils";
 
-export const formatMandatairesList = (mandatairesList) => {
+export function formatMandatairesList(mandatairesList) {
   return mandatairesList.map((row) => {
     const {
       remaining_capacity,
@@ -25,4 +25,4 @@ export const formatMandatairesList = (mandatairesList) => {
       id
     );
   });
-};
+}

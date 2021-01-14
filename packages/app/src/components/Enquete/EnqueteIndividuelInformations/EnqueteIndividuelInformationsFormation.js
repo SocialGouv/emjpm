@@ -11,7 +11,7 @@ import {
   ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
 } from "./queries";
 
-export const EnqueteIndividuelInformationsFormation = (props) => {
+export function EnqueteIndividuelInformationsFormation(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -98,6 +98,6 @@ export const EnqueteIndividuelInformationsFormation = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnqueteIndividuelInformationsFormation;

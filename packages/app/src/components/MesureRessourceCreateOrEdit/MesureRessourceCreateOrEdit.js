@@ -124,7 +124,7 @@ export const MesureRessourceCreateOrEdit = ({
     setSubmitting(false);
   };
 
-  const handleDelete = () => {
+  function handleDelete() {
     deleteMesureRessource({
       awaitRefetchQueries: true,
       refetchQueries: [
@@ -139,7 +139,7 @@ export const MesureRessourceCreateOrEdit = ({
         id: mesureRessource.id,
       },
     });
-  };
+  }
 
   const handleCancel = async () => {
     onCancel();

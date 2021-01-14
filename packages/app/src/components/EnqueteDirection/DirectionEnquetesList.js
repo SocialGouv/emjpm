@@ -8,7 +8,7 @@ import { Card } from "~/ui";
 
 import { ENQUETES } from "./queries";
 
-export const DirectionEnquetesList = () => {
+export function DirectionEnquetesList() {
   const history = useHistory();
   const { data, loading } = useQuery(ENQUETES, { ssr: false });
 
@@ -50,6 +50,6 @@ export const DirectionEnquetesList = () => {
       ))}
     </Fragment>
   );
-};
+}
 
 export default DirectionEnquetesList;

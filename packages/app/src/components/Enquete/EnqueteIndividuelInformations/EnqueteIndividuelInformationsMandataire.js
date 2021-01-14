@@ -8,7 +8,7 @@ import { EnqueteIndividuelInformationsMandataireForm } from "./EnqueteIndividuel
 import { UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS } from "./mutations";
 import { ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE } from "./queries";
 
-export const EnqueteIndividuelInformationsMandataire = (props) => {
+export function EnqueteIndividuelInformationsMandataire(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -64,6 +64,6 @@ export const EnqueteIndividuelInformationsMandataire = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnqueteIndividuelInformationsMandataire;

@@ -12,15 +12,15 @@ import { mesureRessourceSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError, Select, Text } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
-const initialValues = (mesureRessource) => {
+function initialValues(mesureRessource) {
   return {
     annee: mesureRessource?.annee || "",
     niveau_ressource: mesureRessource?.niveauRessource || "",
     prestations_sociales: mesureRessource?.prestationsSociales || [],
   };
-};
+}
 
-export const MesureRessourceCreateOrEditForm = (props) => {
+export function MesureRessourceCreateOrEditForm(props) {
   const {
     handleSubmit,
     handleDelete,
@@ -127,4 +127,4 @@ export const MesureRessourceCreateOrEditForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

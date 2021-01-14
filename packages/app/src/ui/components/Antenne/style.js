@@ -40,7 +40,7 @@ const preferenceText = {
   mb: "5px",
 };
 
-const availabilityIndicatorStyle = (isAvailable) => {
+function availabilityIndicatorStyle(isAvailable) {
   return {
     bg: isAvailable ? "error" : "success",
     borderRadius: "default",
@@ -48,7 +48,7 @@ const availabilityIndicatorStyle = (isAvailable) => {
     mr: "1",
     width: "10px",
   };
-};
+}
 
 export {
   antenneTitleStyle,

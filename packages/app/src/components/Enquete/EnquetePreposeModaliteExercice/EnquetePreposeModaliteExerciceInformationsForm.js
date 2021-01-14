@@ -64,7 +64,7 @@ function formToData(values) {
   };
 }
 
-export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
+export function EnquetePreposeModaliteExerciceInformationsForm(props) {
   const {
     data = {},
     loading = false,
@@ -168,6 +168,6 @@ export const EnquetePreposeModaliteExerciceInformationsForm = (props) => {
       </Box>
     </form>
   );
-};
+}
 
 export default EnquetePreposeModaliteExerciceInformationsForm;

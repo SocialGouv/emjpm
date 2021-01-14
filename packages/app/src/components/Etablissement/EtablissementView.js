@@ -5,7 +5,7 @@ import { Box, Text } from "rebass";
 import { EtablissementViewForm } from "./EtablissementViewForm";
 import { ETABLISSEMENT } from "./queries";
 
-export const EtablissementView = () => {
+export function EtablissementView() {
   const { id } = useParams();
 
   const { data, loading, error } = useQuery(ETABLISSEMENT, {
@@ -24,6 +24,6 @@ export const EtablissementView = () => {
     const etablissement = data.etablissements_by_pk;
     return <EtablissementViewForm data={etablissement} />;
   }
-};
+}
 
 export default EtablissementView;

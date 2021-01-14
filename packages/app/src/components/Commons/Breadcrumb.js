@@ -5,7 +5,7 @@ import { Text } from "~/ui";
 
 import { Link } from "./Link";
 
-export const Breadcrumb = ({ crumbs }) => {
+export function Breadcrumb({ crumbs }) {
   return (
     <Flex>
       {crumbs.map(({ label, to }, i) => (
@@ -20,4 +20,4 @@ export const Breadcrumb = ({ crumbs }) => {
       ))}
     </Flex>
   );
-};
+}

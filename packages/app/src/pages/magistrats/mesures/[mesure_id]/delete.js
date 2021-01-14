@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const MagistratMesureDeletePage = () => {
+function MagistratMesureDeletePage() {
   const { mesure_id: mesureId } = useParams();
 
   return (
@@ -21,6 +21,6 @@ const MagistratMesureDeletePage = () => {
       </BoxWrapper>
     </LayoutMagistrat>
   );
-};
+}
 
 export default MagistratMesureDeletePage;

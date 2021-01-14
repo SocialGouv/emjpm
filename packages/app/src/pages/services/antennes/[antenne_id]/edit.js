@@ -7,7 +7,7 @@ import { ServiceAntenneEdit } from "~/components/ServiceAntenneEdit";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const ServiceAntenneEditPage = () => {
+function ServiceAntenneEditPage() {
   const params = useParams();
   const antenneId = parseInt(params.antenne_id);
   const user = useContext(UserContext);
@@ -20,6 +20,6 @@ const ServiceAntenneEditPage = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default ServiceAntenneEditPage;

@@ -9,7 +9,7 @@ import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
 import { CREATE_LB_USER_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";
 
-export const ListeBlanchePreposeCreate = () => {
+export function ListeBlanchePreposeCreate() {
   const apolloClient = useApolloClient();
   const { type } = useContext(UserContext);
   const history = useHistory();
@@ -51,6 +51,6 @@ export const ListeBlanchePreposeCreate = () => {
       />
     </Card>
   );
-};
+}
 
 export default ListeBlanchePreposeCreate;

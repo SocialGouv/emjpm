@@ -11,7 +11,7 @@ import { Card, Heading3, Heading5 } from "~/ui";
 
 import { boxStyle, flexStyle, iconTextStyle } from "./style";
 
-const DirectionInformations = (props) => {
+function DirectionInformations(props) {
   const { email, nom, prenom, directions } = useContext(UserContext);
   return (
     <Box {...props}>
@@ -55,6 +55,6 @@ const DirectionInformations = (props) => {
       </Card>
     </Box>
   );
-};
+}
 
 export { DirectionInformations };

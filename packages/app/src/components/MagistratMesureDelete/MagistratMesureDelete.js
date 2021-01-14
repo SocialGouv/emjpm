@@ -6,7 +6,7 @@ import { MesureContext } from "~/components/MesureContext";
 import { MagistratMesureDeleteForm } from "./MagistratMesureDeleteForm";
 import { MagistratMesureRemoveStyle } from "./style";
 
-export const MagistratMesureDelete = () => {
+export function MagistratMesureDelete() {
   const mesure = useContext(MesureContext);
 
   return (
@@ -14,4 +14,4 @@ export const MagistratMesureDelete = () => {
       <MagistratMesureDeleteForm mesure={mesure} />
     </Flex>
   );
-};
+}

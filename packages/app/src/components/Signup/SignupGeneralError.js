@@ -2,7 +2,7 @@ import { Box } from "rebass";
 
 import { Text } from "~/ui";
 
-const SignupGeneralError = ({ errors }) => {
+function SignupGeneralError({ errors }) {
   return (
     <>
       {errors && errors.general && (
@@ -22,6 +22,6 @@ const SignupGeneralError = ({ errors }) => {
       )}
     </>
   );
-};
+}
 
 export { SignupGeneralError };

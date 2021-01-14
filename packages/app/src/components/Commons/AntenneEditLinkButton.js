@@ -3,7 +3,7 @@ import { Link as RebassLink } from "rebass";
 
 import { Link as RouterLink } from "~/components/Link";
 
-const AntenneLinkButtonStyle = (isActive, disabled) => {
+function AntenneLinkButtonStyle(isActive, disabled) {
   return {
     "&:active": {
       color: "white",
@@ -28,9 +28,9 @@ const AntenneLinkButtonStyle = (isActive, disabled) => {
     py: 2,
     transition: "150ms ease-in-out opacity",
   };
-};
+}
 
-const AntenneEditLinkButton = ({ antenne_id, location, ...props }) => {
+function AntenneEditLinkButton({ antenne_id, location, ...props }) {
   const isActive = location.pathname === `/services/antennes/${antenne_id}`;
   return (
     <RouterLink to={`/services/antennes/${antenne_id}/edit`}>
@@ -39,6 +39,6 @@ const AntenneEditLinkButton = ({ antenne_id, location, ...props }) => {
       </RebassLink>
     </RouterLink>
   );
-};
+}
 
 export default withRouter(AntenneEditLinkButton);

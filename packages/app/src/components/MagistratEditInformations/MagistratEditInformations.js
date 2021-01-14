@@ -7,7 +7,7 @@ import { MagistratEditInformationsForm } from "./MagistratEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MAGISTRAT } from "./queries";
 
-const MagistratEditInformations = ({ userId, successLink, cancelLink }) => {
+function MagistratEditInformations({ userId, successLink, cancelLink }) {
   const history = useHistory();
   const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(MAGISTRAT, {
@@ -67,6 +67,6 @@ const MagistratEditInformations = ({ userId, successLink, cancelLink }) => {
       />
     </Box>
   );
-};
+}
 
 export { MagistratEditInformations };

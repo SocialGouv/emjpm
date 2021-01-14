@@ -66,7 +66,7 @@ const validationSchema = yup.object().shape({
   produits_bareme_prelevements: yup.number().min(0).nullable(),
 });
 
-export const EnquetePreposeFinancementForm = (props) => {
+export function EnquetePreposeFinancementForm(props) {
   const {
     data = {},
     loading = false,
@@ -212,6 +212,6 @@ export const EnquetePreposeFinancementForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </form>
   );
-};
+}
 
 export default EnquetePreposeFinancementForm;

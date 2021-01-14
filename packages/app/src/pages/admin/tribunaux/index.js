@@ -8,7 +8,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { BoxWrapper } from "~/ui";
 
-const AdminTribunauxPage = () => {
+function AdminTribunauxPage() {
   const history = useHistory();
   return (
     <AdminFilterProvider>
@@ -33,6 +33,6 @@ const AdminTribunauxPage = () => {
       </LayoutAdmin>
     </AdminFilterProvider>
   );
-};
+}
 
 export default AdminTribunauxPage;

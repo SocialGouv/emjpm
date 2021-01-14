@@ -14,15 +14,15 @@ import { MagistratMandatairesMapPopup } from "./MagistratMandatairesMapPopup";
 
 const Map = ReactMapboxGl({ accessToken: "" });
 
-const MagistratMandatairesMap = (props) => {
+function MagistratMandatairesMap(props) {
   const { services, individuel, prepose } = props;
 
   const { currentMarker, setCurrentMarker } = useContext(MapContext);
   const { latitude, longitude } = currentMarker;
 
-  const selectMarker = (clickedMarker) => {
+  function selectMarker(clickedMarker) {
     setCurrentMarker({ ...clickedMarker, isActive: true });
-  };
+  }
 
   return (
     <Map
@@ -58,6 +58,6 @@ const MagistratMandatairesMap = (props) => {
       />
     </Map>
   );
-};
+}
 
 export { MagistratMandatairesMap };

@@ -7,7 +7,7 @@ import { SignupMagistrat } from "./SignupMagistrat";
 import { SignupMandataire } from "./SignupMandataire";
 import { SignupService } from "./SignupService";
 
-const Signup = (props) => {
+function Signup(props) {
   const { user, isStepOneValidate } = useContext(SignupContext);
   return (
     <>
@@ -19,6 +19,6 @@ const Signup = (props) => {
       {isStepOneValidate && user.type === "direction" && <SignupDirection />}
     </>
   );
-};
+}
 
 export default Signup;

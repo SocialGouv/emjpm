@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { Radio } from "../Radio";
 
-export const RadioGroup = (props) => {
+export function RadioGroup(props) {
   const { options, onValueChange, value, renderRadioLabel } = props;
 
   return (
@@ -33,7 +33,7 @@ export const RadioGroup = (props) => {
       </Flex>
     </Box>
   );
-};
+}
 
 RadioGroup.propTypes = {
   onValueChange: PropTypes.func.isRequired,

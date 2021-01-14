@@ -8,7 +8,7 @@ import { EnquetePreposeFinancementForm } from "./EnquetePreposeFinancementForm";
 import { UPDATE_ENQUETE_REPONSES_FINANCEMENT } from "./mutations";
 import { ENQUETE_REPONSES_FINANCEMENT } from "./queries";
 
-export const EnquetePreposeFinancement = (props) => {
+export function EnquetePreposeFinancement(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -58,6 +58,6 @@ export const EnquetePreposeFinancement = (props) => {
       loading={loading}
     />
   );
-};
+}
 
 export default EnquetePreposeFinancement;

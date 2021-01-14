@@ -16,7 +16,7 @@ import { MesureListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MesureList = () => {
+function MesureList() {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
   const {
@@ -72,9 +72,9 @@ const MesureList = () => {
     variables: queryVariables,
   });
 
-  const selectMesure = ({ id, userBasePath }) => {
+  function selectMesure({ id, userBasePath }) {
     history.push(`${userBasePath}/mesures/${id}`);
-  };
+  }
 
   if (loading) {
     return <Box mt={3}>{"Chargement..."}</Box>;
@@ -144,6 +144,6 @@ const MesureList = () => {
       </Fragment>
     </Box>
   );
-};
+}
 
 export { MesureList };

@@ -31,7 +31,7 @@ function formToData(data) {
   };
 }
 
-export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
+export function EnqueteActiviteCausesSortiesDispositifForm(props) {
   const {
     data = {},
     loading = false,
@@ -123,6 +123,6 @@ export const EnqueteActiviteCausesSortiesDispositifForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteCausesSortiesDispositifForm;

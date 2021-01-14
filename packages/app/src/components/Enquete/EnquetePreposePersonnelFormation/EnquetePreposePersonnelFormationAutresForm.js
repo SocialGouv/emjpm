@@ -11,7 +11,7 @@ import { enquetePreposePersonnelFormationAutresFormMapper } from "./EnquetePrepo
 import { enquetePreposePersonnelFormationAutresFormSchema as validationSchema } from "./EnquetePreposePersonnelFormationAutresFormSchema";
 
 const dataToForm = enquetePreposePersonnelFormationAutresFormMapper.dataToForm;
-export const EnquetePreposePersonnelFormationAutresForm = (props) => {
+export function EnquetePreposePersonnelFormationAutresForm(props) {
   const {
     data = {},
     loading = false,
@@ -188,6 +188,6 @@ export const EnquetePreposePersonnelFormationAutresForm = (props) => {
       </Fragment>
     );
   }
-};
+}
 
 export default EnquetePreposePersonnelFormationAutresForm;

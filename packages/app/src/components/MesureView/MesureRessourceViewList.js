@@ -6,18 +6,18 @@ const { Heading3, Button, Text } = require("~/ui");
 const { Flex, Box } = require("rebass");
 const { MesureRessourceView } = require("./MesureRessourceView");
 
-const MesureRessourceViewList = ({ mesure, ...props }) => {
+function MesureRessourceViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
   const [selectedMesureRessource, setSelectedMesureRessource] = useState(false);
 
   const { mesureRessources } = mesure;
 
-  const isSelectedMesureRessource = (ressource) => {
+  function isSelectedMesureRessource(ressource) {
     if (!selectedMesureRessource) {
       return false;
     }
     return selectedMesureRessource.id === ressource.id;
-  };
+  }
 
   return (
     <Box {...props}>
@@ -110,6 +110,6 @@ const MesureRessourceViewList = ({ mesure, ...props }) => {
       )}
     </Box>
   );
-};
+}
 
 export { MesureRessourceViewList };

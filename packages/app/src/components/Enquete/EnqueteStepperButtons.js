@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Button, Flex } from "rebass";
 
-export const EnqueteStepperButtons = (props) => {
+export function EnqueteStepperButtons(props) {
   const { submit, disabled = false } = props;
   return (
     <Flex mt={"80px"} alignItems="center" flexDirection="column">
@@ -40,6 +40,6 @@ export const EnqueteStepperButtons = (props) => {
       </Box> */}
     </Flex>
   );
-};
+}
 
 export default EnqueteStepperButtons;

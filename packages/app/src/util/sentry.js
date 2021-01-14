@@ -5,7 +5,7 @@ import config from "~/config";
 
 const { PACKAGE_VERSION, SENTRY_PUBLIC_DSN, NODE_ENV } = config;
 
-export const useSentry = () => {
+export function useSentry() {
   const onceRunRef = useRef(false);
   useEffect(() => {
     if (!onceRunRef.current) {
@@ -13,9 +13,9 @@ export const useSentry = () => {
     }
     onceRunRef.current = true;
   });
-};
+}
 
-export const initSentry = () => {
+export function initSentry() {
   try {
     Sentry.init({
       attachStacktrace: true,
@@ -26,9 +26,9 @@ export const initSentry = () => {
   } catch (error) {
     console.log(`SENTRY: ${error.message}`);
   }
-};
+}
 
-export const captureException = (error, context = {}) => {
+export function captureException(error, context = {}) {
   Sentry.configureScope((scope) => {
     if (error.message) {
       scope.setFingerprint([error.message]);
@@ -43,11 +43,11 @@ export const captureException = (error, context = {}) => {
   });
 
   Sentry.captureException(error);
-};
+}
 
-export const setUser = (id, role) => {
+export function setUser(id, role) {
   Sentry.configureScope((scope) => {
     scope.setUser({ id });
     scope.setTag("role", role);
   });
-};
+}

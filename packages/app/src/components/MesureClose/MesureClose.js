@@ -14,7 +14,7 @@ import { MesureCloseForm } from "./MesureCloseForm";
 import { CALCULATE_MESURES, CLOSE_MESURE } from "./mutations";
 import { MesureCloseStyle } from "./style";
 
-const MesureClose = (props) => {
+function MesureClose(props) {
   const history = useHistory();
   const mesure = useContext(MesureContext);
 
@@ -26,9 +26,9 @@ const MesureClose = (props) => {
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 
-  const redirectToMesure = (mesureId) => {
+  function redirectToMesure(mesureId) {
     history.push(`${userBasePath}/mesures/${mesureId}`);
-  };
+  }
 
   const [updateMesure] = useMutation(CLOSE_MESURE, {
     onCompleted: async () => {
@@ -74,9 +74,9 @@ const MesureClose = (props) => {
     setSubmitting(false);
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     redirectToMesure(mesure.id);
-  };
+  }
 
   return (
     <Box sx={MesureCloseStyle} {...props}>
@@ -89,6 +89,6 @@ const MesureClose = (props) => {
       />
     </Box>
   );
-};
+}
 
 export { MesureClose };

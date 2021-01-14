@@ -7,15 +7,15 @@ const TYPES = {
   SERVICE: "service",
 };
 
-const capitalize = (string) => {
+function capitalize(string) {
   return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
-};
+}
 
-const formatLastLogin = (date) => {
+function formatLastLogin(date) {
   return stdFormatter.formatDateUI(date);
-};
+}
 
-const newestLastLogin = (admins) => {
+function newestLastLogin(admins) {
   const dates = admins
     .map(({ user: { last_login } }) => last_login)
     .filter(Boolean)
@@ -23,11 +23,11 @@ const newestLastLogin = (admins) => {
   const [newest] = dates.sort(compareDesc);
 
   return newest;
-};
+}
 
-const isCriticalDate = (date) => {
+function isCriticalDate(date) {
   return differenceInMonths(new Date(), new Date(date)) >= 1;
-};
+}
 
 export const formatMandataire = (
   remaining_capacity,
@@ -117,7 +117,7 @@ export const formatMandataire = (
   };
 };
 
-export const formatGestionnaireId = (gestionnaireId) => {
+export function formatGestionnaireId(gestionnaireId) {
   const [discriminator, id] = gestionnaireId.split("-");
   let mandataireId = null;
   let serviceId = null;
@@ -127,4 +127,4 @@ export const formatGestionnaireId = (gestionnaireId) => {
     mandataireId = Number(id);
   }
   return { mandataireId, serviceId };
-};
+}

@@ -8,7 +8,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const MandataireMesurePage = () => {
+function MandataireMesurePage() {
   const { mesure_id: mesureId } = useParams();
   return (
     <MesureProvider mesureId={mesureId}>
@@ -22,6 +22,6 @@ const MandataireMesurePage = () => {
       </LayoutMandataire>
     </MesureProvider>
   );
-};
+}
 
 export default MandataireMesurePage;

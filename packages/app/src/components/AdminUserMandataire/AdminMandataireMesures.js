@@ -24,7 +24,7 @@ export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 ];
 
-const AdminMandataireMesures = (props) => {
+function AdminMandataireMesures(props) {
   const { userId } = props;
   const [selectedRows, setSelectedRows] = useState([]);
 
@@ -148,7 +148,7 @@ const AdminMandataireMesures = (props) => {
       )}
     </Box>
   );
-};
+}
 
 function buildTableColumns() {
   return [

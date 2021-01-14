@@ -6,7 +6,7 @@ import { AdminUserServiceForm } from "./AdminUserServiceForm";
 import { EDIT_USER } from "./mutations";
 import { USER_SERVICE } from "./queries";
 
-const AdminUserService = ({ userId, successLink, cancelLink }) => {
+function AdminUserService({ userId, successLink, cancelLink }) {
   const [errorMessage, setErrorMessage] = useState(false);
   const history = useHistory();
   const { data, error, loading } = useQuery(USER_SERVICE, {
@@ -60,6 +60,6 @@ const AdminUserService = ({ userId, successLink, cancelLink }) => {
       errorMessage={errorMessage}
     />
   );
-};
+}
 
 export { AdminUserService };

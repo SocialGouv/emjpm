@@ -22,10 +22,10 @@ const styles = {
   },
 };
 
-const MapCluster = (props) => {
+function MapCluster(props) {
   const { items, type, onMarkerClick, onClusterClick } = props;
 
-  const clusterMarker = (coordinates, pointCount, getLeaves) => {
+  function clusterMarker(coordinates, pointCount, getLeaves) {
     const isSelected = getLeaves().some(
       (x) => x.props.className === "selected"
     );
@@ -54,7 +54,7 @@ const MapCluster = (props) => {
         <div>{pointCount}</div>
       </Marker>
     );
-  };
+  }
 
   return (
     <Cluster ClusterMarkerFactory={clusterMarker}>
@@ -79,6 +79,6 @@ const MapCluster = (props) => {
       ))}
     </Cluster>
   );
-};
+}
 
 export { MapCluster };

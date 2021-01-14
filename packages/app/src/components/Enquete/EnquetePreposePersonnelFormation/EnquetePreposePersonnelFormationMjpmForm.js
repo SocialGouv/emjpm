@@ -10,7 +10,7 @@ import { useEnqueteForm } from "../useEnqueteForm.hook";
 import { enquetePreposePersonnelFormationMjpmFormMapper } from "./EnquetePreposePersonnelFormationMjpmFormMapper";
 import { enquetePreposePersonnelFormationMjpmFormSchema as validationSchema } from "./EnquetePreposePersonnelFormationMjpmFormSchema";
 
-export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
+export function EnquetePreposePersonnelFormationMjpmForm(props) {
   const {
     data = {},
     loading = false,
@@ -147,6 +147,6 @@ export const EnquetePreposePersonnelFormationMjpmForm = (props) => {
       </Fragment>
     );
   }
-};
+}
 
 export default EnquetePreposePersonnelFormationMjpmForm;

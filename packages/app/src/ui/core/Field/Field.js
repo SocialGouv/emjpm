@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import { fieldStyle } from "./style";
 
-const Field = (props) => {
+function Field(props) {
   const { children, ...parentProps } = props;
 
   return (
@@ -12,7 +12,7 @@ const Field = (props) => {
       {children}
     </Box>
   );
-};
+}
 
 Field.propTypes = {
   children: PropTypes.node.isRequired,

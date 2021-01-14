@@ -6,7 +6,7 @@ import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesure
 
 import { MandataireMap } from "~/components/MandataireMap";
 
-const Map = () => {
+function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
   return (
     <LayoutMandataireMap>
@@ -45,6 +45,6 @@ const Map = () => {
       </Flex>
     </LayoutMandataireMap>
   );
-};
+}
 
 export default Map;

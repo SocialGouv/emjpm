@@ -19,7 +19,7 @@ import {
   titleStyle,
 } from "./style";
 
-const Mandataire = (props) => {
+function Mandataire(props) {
   const {
     mandataire: {
       currentAvailability,
@@ -113,7 +113,7 @@ const Mandataire = (props) => {
       </Card>
     </Fragment>
   );
-};
+}
 
 Mandataire.propTypes = {
   mandataire: PropTypes.shape({

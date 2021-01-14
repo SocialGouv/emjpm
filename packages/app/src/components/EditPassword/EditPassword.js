@@ -38,7 +38,7 @@ const checkStatus = async (
   return json;
 };
 
-const EditPassword = () => {
+function EditPassword() {
   const history = useHistory();
   const { username, type } = useContext(UserContext);
   const url = `${API_URL}/api/auth/reset-password`;
@@ -168,6 +168,6 @@ const EditPassword = () => {
       </Flex>
     </Card>
   );
-};
+}
 
 export { EditPassword };

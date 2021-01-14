@@ -1,4 +1,4 @@
-const InputWrapperStyle = (props) => {
+function InputWrapperStyle(props) {
   return {
     bg: "cardPrimary",
     border: "1px solid",
@@ -17,9 +17,9 @@ const InputWrapperStyle = (props) => {
     width: "100%",
     zIndex: 0,
   };
-};
+}
 
-const InputStyle = (props) => {
+function InputStyle(props) {
   return {
     bg: props.readOnly ? "#f0f0f0" : "transparent",
     border: "0",
@@ -39,9 +39,9 @@ const InputStyle = (props) => {
     width: "100%",
     zIndex: props.isActive ? 1 : 0,
   };
-};
+}
 
-const LabelStyle = ({ required, readOnly, isActive, size }) => {
+function LabelStyle({ required, readOnly, isActive, size }) {
   return {
     "&:after":
       required && !readOnly
@@ -70,6 +70,6 @@ const LabelStyle = ({ required, readOnly, isActive, size }) => {
     width: "100%",
     zIndex: 0,
   };
-};
+}
 
 export { InputWrapperStyle, InputStyle, LabelStyle };

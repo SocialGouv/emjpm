@@ -30,7 +30,7 @@ const descriptionStyle = (style) => ({
   whiteSpace: "nowrap",
 });
 
-const getTypeLabel = (user_type) => {
+function getTypeLabel(user_type) {
   switch (user_type) {
     case "individuel":
       return "Mandataire individuel";
@@ -39,18 +39,18 @@ const getTypeLabel = (user_type) => {
     case "service":
       return "Service";
   }
-};
+}
 
-const getStatusLabel = (status) => {
+function getStatusLabel(status) {
   if (status === "draft") {
     return "En cours";
   }
   if (status === "submitted") {
     return "Réponse reçue";
   }
-};
+}
 
-export const DirectionEnqueteReponseResumeCard = (props) => {
+export function DirectionEnqueteReponseResumeCard(props) {
   const { item, renderActions } = props;
   return (
     <Card key={item.reponse_id} sx={cardStyle} mb="2">
@@ -117,4 +117,4 @@ export const DirectionEnqueteReponseResumeCard = (props) => {
       </Flex>
     </Card>
   );
-};
+}

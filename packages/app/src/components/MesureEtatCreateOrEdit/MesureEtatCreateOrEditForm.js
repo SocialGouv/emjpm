@@ -13,7 +13,7 @@ import { GeocodeCities } from "~/components/Geocode";
 import { mesureEtatSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError, Text } from "~/ui";
 
-const initialValues = (mesureEtat) => {
+function initialValues(mesureEtat) {
   return {
     champ_mesure: mesureEtat ? mesureEtat.champMesure : "",
     code_postal: mesureEtat ? mesureEtat.codePostal : "",
@@ -24,9 +24,9 @@ const initialValues = (mesureEtat) => {
     type_etablissement: mesureEtat ? mesureEtat.typeEtablissement : "",
     ville: mesureEtat ? mesureEtat.ville : "",
   };
-};
+}
 
-export const MesureEtatCreateOrEditForm = (props) => {
+export function MesureEtatCreateOrEditForm(props) {
   const {
     handleSubmit,
     handleDelete,
@@ -195,4 +195,4 @@ export const MesureEtatCreateOrEditForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

@@ -4,7 +4,7 @@ import { Card, Heading3 } from "~/ui";
 
 import { importErrorsWrapperStyle } from "./style";
 
-const EnqueteImportErrors = (props) => {
+function EnqueteImportErrors(props) {
   const { errors } = props;
 
   return (
@@ -20,6 +20,6 @@ const EnqueteImportErrors = (props) => {
       ))}
     </Card>
   );
-};
+}
 
 export { EnqueteImportErrors };

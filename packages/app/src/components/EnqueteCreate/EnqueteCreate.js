@@ -9,7 +9,7 @@ import { Button, Field, InlineError, Input } from "~/ui";
 import { CREATE_ENQUETE } from "./mutations";
 import { ENQUETES } from "./queries";
 
-export const EnqueteCreate = () => {
+export function EnqueteCreate() {
   const client = useApolloClient();
   const history = useHistory();
   const [createEnquete] = useMutation(CREATE_ENQUETE, {
@@ -76,6 +76,6 @@ export const EnqueteCreate = () => {
       <Button type="submit">Créer</Button>
     </form>
   );
-};
+}
 
 export default EnqueteCreate;

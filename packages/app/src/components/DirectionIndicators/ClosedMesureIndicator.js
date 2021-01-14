@@ -6,7 +6,7 @@ import { Indicator } from "~/ui";
 
 import { GET_CLOSED_MESURE_NUMBER } from "./queries";
 
-const ClosedMesureIndicator = () => {
+function ClosedMesureIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
@@ -38,6 +38,6 @@ const ClosedMesureIndicator = () => {
       indicator={closed_mesures_nb ? closed_mesures_nb : 0}
     />
   );
-};
+}
 
 export { ClosedMesureIndicator };

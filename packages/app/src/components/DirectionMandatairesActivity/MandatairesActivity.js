@@ -9,7 +9,7 @@ import { convertToPercentage } from "~/util/math";
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
 
-const MandatairesActivity = (props) => {
+function MandatairesActivity(props) {
   const { filters } = useContext(FiltersContextSerializable);
   const { data, error, loading } = useQuery(MANDATAIRE_ACTIVITY, {
     variables: {
@@ -69,6 +69,6 @@ const MandatairesActivity = (props) => {
       <MandatairesActivityChart data={activityChartData} />
     </Card>
   );
-};
+}
 
 export { MandatairesActivity };

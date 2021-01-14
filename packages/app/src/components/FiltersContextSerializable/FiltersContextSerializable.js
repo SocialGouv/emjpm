@@ -5,7 +5,7 @@ import { endDate, startDate } from "~/util/dates";
 
 export const Context = createContext({});
 
-export const Provider = (props) => {
+export function Provider(props) {
   const { children, useLocalStorage, initialFilters } = props;
 
   const [filters, setFilters] = useState({
@@ -58,6 +58,6 @@ export const Provider = (props) => {
   };
 
   return <Context.Provider value={filtersContext}>{children}</Context.Provider>;
-};
+}
 
 export const { Consumer } = Context;

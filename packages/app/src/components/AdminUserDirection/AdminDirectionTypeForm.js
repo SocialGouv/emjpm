@@ -40,7 +40,7 @@ const validationSchema = yup.object({
   type: yup.string().required(),
 });
 
-export const AdminDirectionTypeForm = (props) => {
+export function AdminDirectionTypeForm(props) {
   const { direction, departements, regions, onSubmit } = props;
   const formik = useFormik({
     initialValues: {
@@ -132,4 +132,4 @@ export const AdminDirectionTypeForm = (props) => {
       </Flex>
     </form>
   );
-};
+}

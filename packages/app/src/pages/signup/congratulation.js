@@ -6,11 +6,11 @@ import { BoxWrapper, Button, Card, Heading2, Text } from "~/ui";
 
 const cardStyle = { m: "1", mt: "5", p: "5" };
 
-const CongratulationPage = () => {
+function CongratulationPage() {
   const history = useHistory();
-  const backLogin = () => {
+  function backLogin() {
     history.push("/login");
-  };
+  }
   return (
     <LayoutPublic>
       <BoxWrapper mt={6} px="1" p={"150px"}>
@@ -35,6 +35,6 @@ const CongratulationPage = () => {
       </BoxWrapper>
     </LayoutPublic>
   );
-};
+}
 
 export default CongratulationPage;

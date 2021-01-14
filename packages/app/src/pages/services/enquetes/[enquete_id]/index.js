@@ -10,7 +10,7 @@ import { LayoutServices } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
 import { BoxWrapper } from "~/ui";
 
-const EnquetePage = () => {
+function EnquetePage() {
   const query = useParams();
   const enqueteId = Number(query.enquete_id);
 
@@ -64,6 +64,6 @@ const EnquetePage = () => {
       window.scrollTo(0, 0);
     }
   }
-};
+}
 
 export default EnquetePage;

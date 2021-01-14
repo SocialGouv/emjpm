@@ -1,4 +1,4 @@
-const departementToOptions = (datas, config = {}) => {
+function departementToOptions(datas, config = {}) {
   const { valueKey = "code", nullOption } = config;
   let options = datas.map((departement) => ({
     departement,
@@ -21,7 +21,7 @@ const departementToOptions = (datas, config = {}) => {
   }
 
   return options;
-};
+}
 
 function formatDepartementLabel(departement) {
   return `${departement["code"]} - ${departement["nom"]}`;

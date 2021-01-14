@@ -13,7 +13,7 @@ import { ServiceMapPanelMesuresStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const ServiceMapPanelMesures = ({ mesuresIds }) => {
+function ServiceMapPanelMesures({ mesuresIds }) {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
 
@@ -28,9 +28,9 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
     variables: queryVariables,
   });
 
-  const selectMesure = ({ id }) => {
+  function selectMesure({ id }) {
     history.push(`/services/mesures/${id}`);
-  };
+  }
 
   const mesures = useMemo(
     () => (data ? formatMesureListItems(data.mesures) : []),
@@ -95,6 +95,6 @@ const ServiceMapPanelMesures = ({ mesuresIds }) => {
       </Scrollbar>
     </Box>
   );
-};
+}
 
 export { ServiceMapPanelMesures };

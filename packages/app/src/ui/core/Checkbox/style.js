@@ -1,4 +1,4 @@
-const CheckboxInputStyle = () => {
+function CheckboxInputStyle() {
   return {
     border: "0",
     clip: "rect(0 0 0 0)",
@@ -11,18 +11,18 @@ const CheckboxInputStyle = () => {
     whiteSpace: "nowrap",
     width: "1px",
   };
-};
+}
 
-const CheckboxWrapperStyle = () => {
+function CheckboxWrapperStyle() {
   return {
     display: "inline-block",
     fontFamily: "body",
     fontWeight: "600",
     verticalAlign: "middle",
   };
-};
+}
 
-const CheckboxStyle = (props) => {
+function CheckboxStyle(props) {
   return {
     bg: props.checked ? "primary" : "cardPrimary",
     border: "1px solid",
@@ -34,16 +34,16 @@ const CheckboxStyle = (props) => {
     verticalAlign: "middle",
     width: "20px",
   };
-};
+}
 
-const IconWrapperStyle = (props) => {
+function IconWrapperStyle(props) {
   return {
     display: props.checked ? "block" : "none",
     height: "10px",
     lineHeight: "8px",
     verticalAlign: ".125em",
   };
-};
+}
 
 export {
   CheckboxInputStyle,

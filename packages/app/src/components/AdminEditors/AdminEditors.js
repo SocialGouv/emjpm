@@ -14,7 +14,7 @@ import { REMOVE_EDITOR } from "./mutations";
 import { EDITORS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const { id, name, api_token, redirect_uris } = item;
   const [removeEditor] = useMutation(REMOVE_EDITOR);
 
@@ -65,9 +65,9 @@ const RowItem = ({ item }) => {
       </Flex>
     </Card>
   );
-};
+}
 
-const AdminEditors = () => {
+function AdminEditors() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 20;
   const { debouncedSearchText } = useContext(AdminFilterContext);
@@ -110,6 +110,6 @@ const AdminEditors = () => {
       setCurrentOffset={setCurrentOffset}
     />
   );
-};
+}
 
 export { AdminEditors };

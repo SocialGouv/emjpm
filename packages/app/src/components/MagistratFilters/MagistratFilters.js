@@ -8,7 +8,7 @@ import { Card, Input, Select } from "~/ui";
 import { FiltersContext } from "./context";
 import { TextStyle } from "./style";
 
-const MagistratFilters = () => {
+function MagistratFilters() {
   const {
     natureMesure,
     changeNatureMesure,
@@ -50,5 +50,5 @@ const MagistratFilters = () => {
       </Flex>
     </Card>
   );
-};
+}
 export { MagistratFilters };

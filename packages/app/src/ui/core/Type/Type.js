@@ -1,8 +1,8 @@
 import { Text as RebassText } from "rebass";
 
 // Basic Text
-const Text = (props) => {
+function Text(props) {
   return <RebassText {...props} />;
-};
+}
 
 export { Text };

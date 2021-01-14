@@ -22,7 +22,7 @@ const TYPE_OPTIONS = [
   { label: "Association tutélaire", value: "service" },
 ];
 
-const ListeBlancheFilter = () => {
+function ListeBlancheFilter() {
   const ref = useRef();
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
   const user = useContext(UserContext);
@@ -52,12 +52,12 @@ const ListeBlancheFilter = () => {
   ];
 
   useEffect(() => {
-    const listener = (event) => {
+    function listener(event) {
       if (!ref.current || ref.current.contains(event.target)) {
         return;
       }
       setButtonsEnabled(false);
-    };
+    }
     document.addEventListener("mousedown", listener);
     document.addEventListener("touchstart", listener);
     return () => {
@@ -223,6 +223,6 @@ const ListeBlancheFilter = () => {
       </Card>
     </Fragment>
   );
-};
+}
 
 export { ListeBlancheFilter };

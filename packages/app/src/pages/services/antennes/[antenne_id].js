@@ -6,7 +6,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Antennes = () => {
+function Antennes() {
   const { antenne_id: antenneId } = useParams();
 
   return (
@@ -18,6 +18,6 @@ const Antennes = () => {
       </BoxWrapper>
     </LayoutServices>
   );
-};
+}
 
 export default Antennes;

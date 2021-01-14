@@ -10,7 +10,7 @@ import {
 } from "~/constants/import";
 import { Heading3, Text } from "~/ui";
 
-const DocumentLink = (props) => {
+function DocumentLink(props) {
   const { children, document } = props;
   return (
     <a href={document}>
@@ -32,9 +32,9 @@ const DocumentLink = (props) => {
       </Flex>
     </a>
   );
-};
+}
 
-const MandataireMesureImport = ({ mandataireUserId }) => {
+function MandataireMesureImport({ mandataireUserId }) {
   return (
     <Flex flexDirection="column">
       <Box mb={2}>
@@ -72,6 +72,6 @@ const MandataireMesureImport = ({ mandataireUserId }) => {
       </Box>
     </Flex>
   );
-};
+}
 
 export { MandataireMesureImport };

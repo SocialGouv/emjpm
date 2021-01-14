@@ -12,13 +12,13 @@ const iconsSrc = [
   { name: MESURE, src: iconMesureMarker },
 ];
 
-export const mapMarkersIcons = () => {
+export function mapMarkersIcons() {
   return iconsSrc.map((icon) => {
     const image = new Image(60, 72);
     image.src = icon.src;
     return [icon.name, image, { pixelRatio: 2 }];
   });
-};
+}
 
 const [iconIndividuel, iconPrepose, iconService, mesure] = mapMarkersIcons();
 

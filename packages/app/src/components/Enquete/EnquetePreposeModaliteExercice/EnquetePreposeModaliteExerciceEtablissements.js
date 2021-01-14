@@ -8,7 +8,7 @@ import { EnquetePreposeModaliteExerciceEtablissementsForm } from "./EnquetePrepo
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
 
-export const EnquetePreposeModaliteExerciceEtablissements = (props) => {
+export function EnquetePreposeModaliteExerciceEtablissements(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -62,6 +62,6 @@ export const EnquetePreposeModaliteExerciceEtablissements = (props) => {
       }}
     />
   );
-};
+}
 
 export default EnquetePreposeModaliteExerciceEtablissements;

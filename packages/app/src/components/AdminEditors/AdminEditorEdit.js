@@ -10,7 +10,7 @@ import { EDIT_EDITOR } from "./mutations";
 import { EDITOR } from "./queries";
 import { cardStyle } from "./style";
 
-const AdminEditorEdit = (props) => {
+function AdminEditorEdit(props) {
   const history = useHistory();
 
   const { editorId } = props;
@@ -48,9 +48,9 @@ const AdminEditorEdit = (props) => {
     history.push("/admin/editors");
   };
 
-  const handleCancel = () => {
+  function handleCancel() {
     history.push("/admin/editors");
-  };
+  }
 
   return (
     <Card sx={cardStyle} p="0" width="100%">
@@ -61,6 +61,6 @@ const AdminEditorEdit = (props) => {
       />
     </Card>
   );
-};
+}
 
 export { AdminEditorEdit };

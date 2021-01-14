@@ -16,7 +16,7 @@ import { mandataireEditSchema } from "~/lib/validationSchemas";
 import { Button, Field, Heading4, InlineError, Select, Textarea } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
-const buildTiOptions = (lb_departements, lb_user_etablissements) => {
+function buildTiOptions(lb_departements, lb_user_etablissements) {
   const tiList = [];
   lb_user_etablissements.forEach(({ etablissement: { tis } }) => {
     tiList.push.apply(tiList, tis);
@@ -30,9 +30,9 @@ const buildTiOptions = (lb_departements, lb_user_etablissements) => {
     value: ti.id,
   }));
   return { tiOptions };
-};
+}
 
-const MandataireEditInformationsForm = (props) => {
+function MandataireEditInformationsForm(props) {
   const {
     cancelLink,
     mandataire,
@@ -247,6 +247,6 @@ const MandataireEditInformationsForm = (props) => {
       </Flex>
     </form>
   );
-};
+}
 
 export { MandataireEditInformationsForm };

@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { Card, Heading4, Text } from "~/ui";
 
-export const AdminTribunalMagistrats = ({ magistrats }) => {
+export function AdminTribunalMagistrats({ magistrats }) {
   return (
     <Card>
       <Heading4>{"Liste des magistrats"}</Heading4>
@@ -17,4 +17,4 @@ export const AdminTribunalMagistrats = ({ magistrats }) => {
       </Flex>
     </Card>
   );
-};
+}

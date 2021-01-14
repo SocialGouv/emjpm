@@ -6,7 +6,7 @@ const FieldValue = ({ isChecked, readOnly }) => ({
   color: readOnly && !isChecked ? "#999" : "inherit",
 });
 
-export const YesNoComboBox = (props) => {
+export function YesNoComboBox(props) {
   const { onChange = () => {}, name = "", value, readOnly } = props;
   return (
     <Flex width={1 / 2}>
@@ -44,6 +44,6 @@ export const YesNoComboBox = (props) => {
       </Label>
     </Flex>
   );
-};
+}
 
 export default YesNoComboBox;

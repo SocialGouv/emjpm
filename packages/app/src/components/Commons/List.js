@@ -13,15 +13,15 @@ const ListTitleStyle = {
   mb: "3",
 };
 
-const List = (props) => {
+function List(props) {
   return <Box as="ul" {...props} sx={ListStyle} />;
-};
+}
 
-const ListItem = (props) => {
+function ListItem(props) {
   return <Text as="li" {...props} sx={ListStyle} />;
-};
+}
 
-const ListTitle = (props) => {
+function ListTitle(props) {
   return (
     <Text
       as="li"
@@ -29,6 +29,6 @@ const ListTitle = (props) => {
       sx={props.sx ? { ...ListTitleStyle, ...props.sx } : ListTitleStyle}
     />
   );
-};
+}
 
 export { List, ListItem, ListTitle };

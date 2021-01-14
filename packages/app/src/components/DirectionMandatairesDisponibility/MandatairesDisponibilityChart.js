@@ -12,7 +12,7 @@ import { textStyle } from "~/components/DirectionMandatairesActivity/style";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
-const MandatairesDisponibilityChart = ({ data }) => {
+function MandatairesDisponibilityChart({ data }) {
   return (
     <Box>
       <Box
@@ -133,6 +133,6 @@ const MandatairesDisponibilityChart = ({ data }) => {
       </Box>
     </Box>
   );
-};
+}
 
 export { MandatairesDisponibilityChart };

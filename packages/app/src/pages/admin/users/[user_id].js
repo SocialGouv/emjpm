@@ -7,7 +7,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const User = () => {
+function User() {
   const { user_id: userId } = useParams();
 
   return (
@@ -22,6 +22,6 @@ const User = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default User;

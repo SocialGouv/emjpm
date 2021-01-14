@@ -44,7 +44,7 @@ const checkStatus = async (
   return json;
 };
 
-const ResetPassword = (props) => {
+function ResetPassword(props) {
   const history = useHistory();
   const { token } = props;
   const [isMessageVisible, toggleMessage] = useState(false);
@@ -193,6 +193,6 @@ const ResetPassword = (props) => {
       </Box>
     </Card>
   );
-};
+}
 
 export { ResetPassword };

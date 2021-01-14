@@ -42,7 +42,7 @@ function formToData(values) {
   return data;
 }
 
-export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
+export function EnquetePreposePrestationsSocialesRevenusForm(props) {
   const {
     title,
     data,
@@ -223,6 +223,6 @@ export const EnquetePreposePrestationsSocialesRevenusForm = (props) => {
       <EnqueteStepperButtons submit={submit} disabled={loading} />
     </Box>
   );
-};
+}
 
 export default EnquetePreposePrestationsSocialesRevenusForm;

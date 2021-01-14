@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 
 import { SIGNUP_DATA } from "./queries";
 
-const SignupDatas = (props) => {
+function SignupDatas(props) {
   const { Component } = props;
 
   const { data, loading, error } = useQuery(SIGNUP_DATA);
@@ -27,6 +27,6 @@ const SignupDatas = (props) => {
       {...props}
     />
   );
-};
+}
 
 export { SignupDatas };

@@ -60,7 +60,7 @@ function getRequestFilters(filters) {
   return requestFilters;
 }
 
-export const ListeBlancheMandataires = (props) => {
+export function ListeBlancheMandataires(props) {
   const { onSelectItem } = props;
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
 
@@ -108,9 +108,9 @@ export const ListeBlancheMandataires = (props) => {
       />
     </LoadingWrapper>
   );
-};
+}
 
-const ListeBlancheItem = (props) => {
+function ListeBlancheItem(props) {
   if (props.item) {
     const { type } = props.item;
     if (type === "individuel") {
@@ -120,6 +120,6 @@ const ListeBlancheItem = (props) => {
     }
   }
   return null;
-};
+}
 
 export default ListeBlancheMandataires;

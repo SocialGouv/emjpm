@@ -14,7 +14,7 @@ import { MagistratMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-const MagistratMapMandatairesPanelList = () => {
+function MagistratMapMandatairesPanelList() {
   const {
     magistrat: { ti_id: tiId },
   } = useContext(UserContext);
@@ -44,7 +44,7 @@ const MagistratMapMandatairesPanelList = () => {
     return <div>error</div>;
   }
 
-  const selectMarker = ({ id, discriminator, longitude, latitude }) => {
+  function selectMarker({ id, discriminator, longitude, latitude }) {
     setCurrentMarker({
       id: id,
       isActive: true,
@@ -52,7 +52,7 @@ const MagistratMapMandatairesPanelList = () => {
       longitude: longitude,
       type: discriminator,
     });
-  };
+  }
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
@@ -95,6 +95,6 @@ const MagistratMapMandatairesPanelList = () => {
       </Scrollbar>
     </Box>
   );
-};
+}
 
 export { MagistratMapMandatairesPanelList };

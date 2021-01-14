@@ -11,7 +11,7 @@ import { ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE } from "./queries";
 
 const PREFIX = "accompagnement_judiciaire";
 
-export const EnqueteActiviteAccompagnementJudiciaire = (props) => {
+export function EnqueteActiviteAccompagnementJudiciaire(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -85,6 +85,6 @@ export const EnqueteActiviteAccompagnementJudiciaire = (props) => {
       />
     </Box>
   );
-};
+}
 
 export default EnqueteActiviteAccompagnementJudiciaire;

@@ -50,7 +50,7 @@ const separatorStyle = {
   width: "100%",
 };
 
-const DropDownMenu = (props) => {
+function DropDownMenu(props) {
   const { dropDownLinks, Link, disconnect } = props;
   return (
     <Box sx={menuStyle}>
@@ -71,7 +71,7 @@ const DropDownMenu = (props) => {
       </Card>
     </Box>
   );
-};
+}
 
 DropDownMenu.propTypes = {
   Link: PropTypes.elementType.isRequired,

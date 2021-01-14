@@ -5,7 +5,7 @@ import { DirectionEnquetesList } from "~/components/EnqueteDirection";
 import { LayoutDirection } from "~/components/Layout";
 import { BoxWrapper, Heading2 } from "~/ui";
 
-const DirectionEnquetesPage = () => {
+function DirectionEnquetesPage() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
@@ -21,6 +21,6 @@ const DirectionEnquetesPage = () => {
       </BoxWrapper>
     </LayoutDirection>
   );
-};
+}
 
 export default DirectionEnquetesPage;

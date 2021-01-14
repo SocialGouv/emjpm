@@ -14,7 +14,7 @@ import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
 import { TRIBUNAUX } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const RowItem = ({ item }) => {
+function RowItem({ item }) {
   const {
     id,
     etablissement,
@@ -81,9 +81,9 @@ const RowItem = ({ item }) => {
       )}
     </>
   );
-};
+}
 
-const AdminTribunaux = () => {
+function AdminTribunaux() {
   const resultPerPage = 20;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
@@ -133,6 +133,6 @@ const AdminTribunaux = () => {
       setCurrentOffset={setCurrentOffset}
     />
   );
-};
+}
 
 export { AdminTribunaux };

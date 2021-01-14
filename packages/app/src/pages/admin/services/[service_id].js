@@ -9,7 +9,7 @@ import { BoxWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
 
-const Service = () => {
+function Service() {
   const { service_id: serviceId } = useParams();
   return (
     <LayoutAdmin>
@@ -34,6 +34,6 @@ const Service = () => {
       </BoxWrapper>
     </LayoutAdmin>
   );
-};
+}
 
 export default Service;

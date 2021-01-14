@@ -4,7 +4,7 @@ import useScript, { SCRIPT_STATUS } from "~/hooks/useScript";
 
 import initTarteaucitron from "~/util/initTarteaucitron";
 
-export const useMatomo = () => {
+export function useMatomo() {
   const location = useLocation();
 
   const previousPathRef = useRef(null);
@@ -42,7 +42,7 @@ export const useMatomo = () => {
       }
     }, 0);
   }, [location]);
-};
+}
 
 window._paq = window._paq || [];
 export function matopush(args) {

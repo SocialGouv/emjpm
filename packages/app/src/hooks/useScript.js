@@ -36,12 +36,12 @@ export default function useScript(src) {
 
       // Store status in attribute on script
       // This can be read by other instances of this hook
-      const setAttributeFromEvent = (event) => {
+      function setAttributeFromEvent(event) {
         script.setAttribute(
           "data-status",
           event.type === "load" ? READY : ERROR
         );
-      };
+      }
 
       script.addEventListener("load", setAttributeFromEvent);
       script.addEventListener("error", setAttributeFromEvent);
@@ -54,9 +54,9 @@ export default function useScript(src) {
     // Note: Even if the script already exists we still need to add
     // event handlers to update the state for *this* hook instance.
 
-    const setStateFromEvent = (event) => {
+    function setStateFromEvent(event) {
       setStatus(event.type === "load" ? READY : ERROR);
-    };
+    }
 
     script.addEventListener("load", setStateFromEvent);
     script.addEventListener("error", setStateFromEvent);

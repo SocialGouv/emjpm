@@ -8,7 +8,7 @@ import { captureException } from "~/util/sentry";
 
 import { EDIT_ANTENNE } from "./mutations";
 
-const ServiceAntenneEdit = (props) => {
+function ServiceAntenneEdit(props) {
   const history = useHistory();
   const { user, antenneId } = props;
   const { service_members } = user;
@@ -53,6 +53,6 @@ const ServiceAntenneEdit = (props) => {
       <ServiceAntenneForm antenne={antenne} handleSubmit={handleSubmit} />
     </Card>
   );
-};
+}
 
 export { ServiceAntenneEdit };
