@@ -79,7 +79,7 @@ export const DirectionEnqueteDetailsReponsePreview = ({
     if (step !== currentStep.step || substep !== currentStep.substep) {
       await history.push({
         pathname: `/direction/enquetes/${enqueteId}/reponse/${enqueteReponseId}`,
-        query: { step, substep },
+        search: `?step=${step}&substep=${substep}`,
       });
       window.scrollTo(0, 0);
     }
