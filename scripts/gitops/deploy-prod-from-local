@@ -257,21 +257,6 @@ function k8s_deploy_packages_branch {
   k8s_deploy_package "app"
 }
 
-function k8s_deploy_packages_release {
-  echo "## DEPLOYING eMJPM $IMAGE_TAG on release"
-
-  export BRANCH_HASH=$( printf "${COMMIT_TAG}" | sed "s/\./-/g" );
-  export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
-  export DOMAIN="${BRANCH_HASH}-${ROOT_DOMAIN}";
-  export POSTGRES_DATABASE_EMJPM="emjpm_$( printf "${BRANCH_HASH}" | sed "s/\-//g" )"
-
-  k8s_create_namespace
-
-  k8s_deploy_package "hasura"
-  k8s_deploy_package "api"
-  k8s_deploy_package "app"
-}
-
 function k8s_deploy_packages_prod {
   echo "## DEPLOYING eMJPM $IMAGE_TAG on production !"
 
@@ -294,11 +279,7 @@ function k8s_deploy_env_dev {
 
   kubectl config use-context $KUBECTL_CONTEXT
 
-  # k8s_deploy_packages_branch
-
-  if [ "${BRANCH_NAME}" = "master" ]; then
-    k8s_deploy_packages_release
-  fi
+  k8s_deploy_packages_branch
 
 }
 

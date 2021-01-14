@@ -21,7 +21,6 @@ variables:
   K8S_NAMESPACE_PREFIX: "${PROJECT}-feature"
 
   NODE_IMAGE: node:15-alpine
-  IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
 
 # STAGES
 stages:
@@ -36,6 +35,8 @@ stages:
 
 .base_deploy_chart_stage:
   extends: .base_docker_kubectl_image_stage
+  variables:
+    IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
   script:
     - echo "kubectl config set-context --current --namespace=${K8S_NAMESPACE}"
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
@@ -359,6 +360,7 @@ Build JS app:
   variables:
     CONTEXT: .
     KANIKO_DOCKERFILE: Dockerfile
+    IMAGE_TAG: "${CI_COMMIT_REF_SLUG}"
   script:
     - |
       /kaniko/executor \
