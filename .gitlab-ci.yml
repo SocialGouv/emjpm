@@ -422,6 +422,7 @@ Build hasura image:
     - .base_build_stage
   needs: []
   before_script:
+    - *before_script_build
     - source ./.gitlab-ci/env.sh
   variables:
     BUILD_NAME: hasura

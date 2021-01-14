@@ -139,7 +139,7 @@ EOF
 
 function k8s_deploy_package {
 
-  if [ "${PRODUCTION}" = "true" ]; then
+  if [ -n "${PRODUCTION}" ]; then
 
     if [ -z "$PROD_PGHOST" ]; then
       echo "missing PROD_PGHOST env variable, provid it in .env.deploy" >&2
@@ -210,7 +210,7 @@ function k8s_deploy_package {
     --set ingress.tls[0].hosts[0]=${HOST}
   "
 
-  if [ "$PRODUCTION" = "true" ]; then
+  if [ -n "$PRODUCTION" ]; then
     HELM_RENDER_ARGS=" \
       --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
       --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
@@ -272,6 +272,8 @@ function k8s_deploy_packages_prod {
 
 function k8s_deploy_env_dev {
 
+  echo "# DEPLOYING eMJPM $IMAGE_TAG on dev"
+
   export ROOT_DOMAIN="emjpm.dev2.fabrique.social.gouv.fr";
   export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"dev2"}
   # export RANCHER_CLUSTER_ID="c-bd7z2"
@@ -285,9 +287,11 @@ function k8s_deploy_env_dev {
 
 function k8s_deploy_env_prod {
 
+  echo "# DEPLOYING eMJPM $IMAGE_TAG on production"
+
   export ROOT_DOMAIN="emjpm.fabrique.social.gouv.fr";
   export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"prod2"}
-  export PRODUCTION="true"
+  export PRODUCTION="1"
   export RANCHER_CLUSTER_ID="c-kk8xm"
   export RANCHER_PROJECT_ID="p-dpgpt"
 
@@ -301,41 +305,52 @@ function k8s_deploy_env_prod {
 
 function k8s_deploy_all {
 
-  echo "# DEPLOYING eMJPM $IMAGE_TAG"
+
   export K8S_PROJECT="emjpm"
   export NODE_ENV="production"
-
   source .env.deploy
   [ -f ".kubeconfig" ] && KUBECONFIG=".kubeconfig:$KUBECONFIG"
   export KUBECONFIG=$KUBECONFIG
 
-  k8s_deploy_env_dev
-  # k8s_deploy_env_prod
+  if [ -n "$DEPLOY_DEV" ]; then
+    k8s_deploy_env_dev
+  fi
+
+  if [ -n "$DEPLOY_PROD" ]; then
+    k8s_deploy_env_prod
+  fi
 
 }
 
 # MAIN
 run_main() {
+  export BUILD="1"
+
   while [[ "$#" -gt 0 ]]
   do
     case $1 in
-      -b|--build)
-        local BUILD="true"
+      -a|--all)
+        export DEPLOY_DEV="1"
+        export DEPLOY_PROD="1"
         ;;
-      -d|--dry)
-        local DRY="true"
+      --dev)
+        export DEPLOY_DEV="1"
+        ;;
+      --prod)
+        export DEPLOY_PROD="1"
+        ;;
+      --skip-build)
+        export BUILD=""
         ;;
     esac
     shift
   done
 
-  if [ "$BUILD" = "true" ]; then
+  if [ -n "$BUILD" ]; then
     docker_build_all $@
   fi
-  if [ "$DRY" != "true" ]; then
-    k8s_deploy_all $@
-  fi
 
+  k8s_deploy $@
 
 }
 
