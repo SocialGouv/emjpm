@@ -1,6 +1,5 @@
 /* global tarteaucitron, Piwik */
 /* jslint regexp: true, nomen: true */
-// google analytics
 
 /*
     1. Set the following variable before the initialization :
