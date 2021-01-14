@@ -44,7 +44,7 @@ module.exports = {
     if (editor) {
       const client = {
         clientSecret: editor.api_token,
-        grants: ["authorization_code"],
+        grants: ["authorization_code", "refresh_token"],
         id: editor.id,
         redirectUris: editor.redirect_uris || [],
       };
@@ -53,13 +53,23 @@ module.exports = {
     return null;
   },
   getRefreshToken: async (token) => {
-    const accessToken = await AccessToken.query().findOne({
+    const accessTokenResult = await AccessToken.query().findOne({
       refresh_token: token,
     });
-    if (!accessToken) {
+    if (!accessTokenResult) {
       return null;
     }
-    return accessToken;
+
+    return {
+      accessToken: accessTokenResult.access_token,
+      accessTokenExpiresAt: new Date(accessTokenResult.expired_on),
+      client: { id: accessTokenResult.editor_id },
+      refreshToken: accessTokenResult.refresh_token,
+      refreshTokenExpiresAt: new Date(
+        accessTokenResult.refresh_token_expires_on
+      ),
+      user: { id: accessTokenResult.user_id },
+    };
   },
   revokeAuthorizationCode: async (authorizationCode) => {
     await AuthorizationCodes.query()
