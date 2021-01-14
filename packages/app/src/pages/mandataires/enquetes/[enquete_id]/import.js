@@ -20,7 +20,7 @@ const ImportEnquetePage = () => {
           goToStep={(enqueteId, { step, substep }) => {
             history.push({
               pathname: `/mandataires/enquetes/${enqueteId}`,
-              query: { step, substep },
+              search: `?step=${step}&substep=${substep}`,
             });
           }}
           enqueteId={enqueteId}
