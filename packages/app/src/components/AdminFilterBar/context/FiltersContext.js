@@ -1,17 +1,9 @@
 import { createContext, useState } from "react";
 
 import { useDebounce } from "~/lib/hooks";
+import castInt from "~/util/castInt";
 
 export const Context = createContext({});
-
-function isInt(value) {
-  return (
-    !isNaN(value) &&
-    (function (x) {
-      return (x | 0) === x;
-    })(parseFloat(value))
-  );
-}
 
 export const Provider = (props) => {
   // Initial values are obtained from the props
@@ -24,9 +16,7 @@ export const Provider = (props) => {
 
   const debouncedSearchText = useDebounce(searchText, 1000);
 
-  const debouncedSearchId = isInt(debouncedSearchText)
-    ? parseInt(debouncedSearchText)
-    : 0;
+  const debouncedSearchId = castInt(debouncedSearchText, 0);
 
   // Make the context object:
   const filtersContext = {

@@ -1,16 +1,10 @@
-const { useUrlQueryValues } = require("~/util/url");
+import useSearchParams from "~/hooks/useSearchParams";
+import castInt from "~/util/castInt";
 
 export function useCurrentStepFromUrl() {
-  return useUrlQueryValues([
-    {
-      defaultValue: 0,
-      name: "step",
-      type: "integer",
-    },
-    {
-      defaultValue: 0,
-      name: "substep",
-      type: "integer",
-    },
-  ]);
+  const { step, substep } = useSearchParams();
+  return {
+    step: castInt(step, 0),
+    substep: castInt(substep, 0),
+  };
 }
