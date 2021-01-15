@@ -437,7 +437,6 @@ Build app image:
 Build hasura image:
   extends:
     - .base_build_stage
-  needs: []
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
@@ -508,9 +507,6 @@ Init Managed Database:
     - .base_deploy_chart_stage
     - .deploy_stage
   dependencies: []
-  needs:
-    - Create namespace
-    - Build api image
   variables:
     CONTEXT: api
     PORT: 4000
@@ -561,9 +557,6 @@ Deploy app (dev):
   extends:
     - .deploy_app_stage
     - .dev_stage
-  needs:
-    - Create namespace
-    - Build app image
   variables:
     HELM_RENDER_ARGS: >-
       --set deployment.resources.requests.memory=128Mi
@@ -623,9 +616,6 @@ Deploy knex (prod):
   extends:
     - .base_deploy_chart_stage
     - .deploy_stage
-  needs:
-    - Create namespace
-    - Build hasura image
   variables:
     CONTEXT: hasura
     PORT: 80
