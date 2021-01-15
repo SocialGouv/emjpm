@@ -15,6 +15,7 @@ variables:
   # Globals
   DOCKER_VERSION: "19.03.8"
   DOCKER_BUILDKIT: 1
+  DOCKER_CLI_EXPERIMENTAL: enabled
 
   PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
