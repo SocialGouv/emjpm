@@ -67,16 +67,19 @@ function docker_build_node_multistage {
     -f ./packages/$CONTEXT/Dockerfile \
     --target server \
     -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
+    -t $REGISTRY/$CONTEXT:$COMMIT_SHA \
     --build-arg BUILD_ENV=$BUILD_ENV \
     --cache-from $REGISTRY/$CONTEXT.builder \
     --progress plain \
     .
+
+  docker push $REGISTRY/$CONTEXT:$COMMIT_SHA
   docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 }
 
 function docker_build_all {
-  start_time=$(date +%s)
+  local start_time=$(date +%s)
 
   echo "# BUILDING eMJPM $IMAGE_TAG"
 
@@ -84,33 +87,43 @@ function docker_build_all {
   export BUILD_ENV=${BUILD_ENV:-"pure"}
   source .env.build
 
-  docker_build hasura &
-  CHILD_PID_1=$!
-  trap "kill $CHILD_PID_1;" SIGTERM SIGINT
+  if [ -n "$PARALLEL" ]; then
+    docker_build hasura &
+    local CHILD_PID_1=$!
+    trap "kill $CHILD_PID_1;" SIGTERM SIGINT
 
-  docker_build_node_multistage api &
-  CHILD_PID_2=$!
-  trap "kill $CHILD_PID_2;" SIGTERM SIGINT
+    docker_build_node_multistage api &
+    local CHILD_PID_2=$!
+    trap "kill $CHILD_PID_2;" SIGTERM SIGINT
 
-  docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}" &
-  CHILD_PID_3=$!
-  trap "kill $CHILD_PID_3;" SIGTERM SIGINT
+    docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}" &
+    local CHILD_PID_3=$!
+    trap "kill $CHILD_PID_3;" SIGTERM SIGINT
 
-  wait -n $CHILD_PID_1
-  wait -n $CHILD_PID_2
-  wait -n $CHILD_PID_3
+    wait -n $CHILD_PID_1
+    wait -n $CHILD_PID_2
+    wait -n $CHILD_PID_3
+  else
+    docker_build hasura
+    docker_build_node_multistage api
+    docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}"
+  fi
 
-  current_time=$(date +%s)
-  seconds_elapsed=$(( $current_time - $start_time ))
-  timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
+  local current_time=$(date +%s)
+  local seconds_elapsed=$(( $current_time - $start_time ))
+  local timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
   IFS=':' read -r day hour minute second <<< "$timestamp"
-  hour="$(( $hour+24*($day-1) ))"
+  local hour="$(( $hour+24*($day-1) ))"
   printf "buit in \r%02d:%02d:%02d" $hour $minute $second
 }
 
 # K8S DEPLOY FUNCTIONS
 
 function k8s_create_namespace {
+
+  if kubectl get ns $K8S_NAMESPACE 2>&1 >/dev/null; then
+    return;
+  fi
 
   # Create namespace
   kubectl apply -f - <<EOF
@@ -119,9 +132,9 @@ kind: Namespace
 metadata:
   annotations:
     field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: ${RANCHER_PROJECT_ID}
+    field.cattle.io/projectId: ${RANCHER_CLUSTER_ID}:${RANCHER_PROJECT_ID}
     git/branch: ${BRANCH_HASH}
-    git/remote: ${DOMAIN}
+    git/remote: https://github.com/SocialGouv/emjpm.git
   labels:
     cert: wildcard
     field.cattle.io/projectId: ${RANCHER_PROJECT_ID}
@@ -138,6 +151,31 @@ EOF
   export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
   envsubst < .k8s/azure-volume-secret.yml > ./.k8s/manifests/azure-volume-secret-generated.yml
   kubectl apply -f ./.k8s/manifests/azure-volume-secret-generated.yml -n ${K8S_NAMESPACE}
+}
+
+function k8s_restore_db {
+  echo "### RESTORING DB FOR $HOST"
+  export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+
+  export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
+  export EMJPM_PG_PASSWORD=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_PASSWORD}' | base64 --decode)
+
+  kubectl scale --replicas=0 deploy/hasura
+
+  kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
+  kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+    --from-file=./.k8s/postgres/restore/configmap/
+
+  kubectl delete job restore-job || true
+  cat ./.k8s/postgres/restore/restore-job.yml | envsubst | kubectl apply -f -
+
+  kubectl wait --for=condition=complete job/restore-job  --timeout=600s
+  kubectl scale --replicas=1 deploy/hasura
+  kubectl rollout status deploy/hasura --timeout=600s
+
+  kubectl delete job anonymise-job || true
+  cat ./.k8s/postgres/restore/anonymise-job.yml | envsubst | kubectl apply -f -
+  kubectl wait --for=condition=complete job/anonymise-job  --timeout=600s
 }
 
 function k8s_deploy_package {
@@ -234,15 +272,43 @@ function k8s_deploy_package {
   echo "#### manifests: packages/$CONTEXT/.k8s/manifests"
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 
-  ## force to pull latest image
-  # kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
-  #   "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+  ## force to pull latest image (and redeploy if failed previously)
+  kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
+    "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
   if [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
     local NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
     echo '{"text":"'${NOTIF_MSG}'"}' \
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
   fi
+}
+
+function k8s_wait_deployment {
+  kubectl -n $K8S_NAMESPACE rollout status deployment $1
+}
+
+function k8s_wait_deployments {
+  k8s_wait_deployment "hasura" &
+  local CHILD_PID_1=$!
+  trap "kill $CHILD_PID_1;" SIGTERM SIGINT
+
+  k8s_wait_deployment "api" &
+  local CHILD_PID_2=$!
+  trap "kill $CHILD_PID_2;" SIGTERM SIGINT
+
+  k8s_wait_deployment "app" &
+  local CHILD_PID_3=$!
+  trap "kill $CHILD_PID_3;" SIGTERM SIGINT
+
+  wait -n $CHILD_PID_1
+  wait -n $CHILD_PID_2
+  wait -n $CHILD_PID_3
+}
+
+function k8s_deploy_packages {
+  k8s_deploy_package "hasura"
+  k8s_deploy_package "api"
+  k8s_deploy_package "app"
 }
 
 function k8s_deploy_packages_branch {
@@ -252,7 +318,7 @@ function k8s_deploy_packages_branch {
     export BRANCH_HASH=master;
     export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
   elif [ "${BRANCH_NAME}" = "apitest" ]; then
-    export BRANCH_HASH=apitest;
+    export BRANCH_HASH="${BRANCH_NAME}";
     export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
   else
     export BRANCH_HASH=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-7 )
@@ -261,13 +327,18 @@ function k8s_deploy_packages_branch {
   export DOMAIN="${BRANCH_HASH}-${ROOT_DOMAIN}";
   export POSTGRES_DATABASE_EMJPM="emjpm_$( printf "${BRANCH_HASH}" | sed "s/\-//g" )"
 
-  if [ "${BRANCH_NAME}" != "master" ]; then
-    k8s_create_namespace
+  k8s_create_namespace
+
+  if [ "${BRANCH_NAME}" != "apitest" ]; then
+    k8s_restore_db
   fi
 
-  k8s_deploy_package "hasura"
-  k8s_deploy_package "api"
-  k8s_deploy_package "app"
+  k8s_deploy_packages
+
+
+  if [ -n "$WAIT" ]; then
+    k8s_wait_deployments
+  fi
 }
 
 function k8s_deploy_packages_prod {
@@ -278,9 +349,11 @@ function k8s_deploy_packages_prod {
   export DOMAIN="${ROOT_DOMAIN}";
   export POSTGRES_DATABASE_EMJPM="emjpm"
 
-  k8s_deploy_package "hasura"
-  k8s_deploy_package "api"
-  k8s_deploy_package "app"
+  k8s_deploy_packages
+
+  if [ -n "$WAIT" ]; then
+    k8s_wait_deployments
+  fi
 }
 
 function k8s_deploy_env_dev {
@@ -289,7 +362,7 @@ function k8s_deploy_env_dev {
 
   export ROOT_DOMAIN="emjpm.dev2.fabrique.social.gouv.fr";
   export KUBECTL_CONTEXT=${KUBECTL_CONTEXT:-"dev2"}
-  # export RANCHER_CLUSTER_ID="c-bd7z2"
+  export RANCHER_CLUSTER_ID="c-bd7z2"
   export RANCHER_PROJECT_ID="p-57mxc"
 
   kubectl config use-context $KUBECTL_CONTEXT
@@ -337,8 +410,12 @@ function k8s_deploy_all {
 
 # MAIN
 run_main() {
+  local start_time=$(date +%s)
+
   export BUILD="1"
   export NOTIFY="1"
+  export WAIT="1"
+  export PARALLEL="1"
 
   while [[ "$#" -gt 0 ]]
   do
@@ -359,6 +436,12 @@ run_main() {
       --skip-notify)
         export NOTIFY=""
         ;;
+      --skip-wait)
+        export WAIT=""
+        ;;
+      --no-parallel)
+        export PARALLEL=""
+        ;;
     esac
     shift
   done
@@ -369,6 +452,12 @@ run_main() {
 
   k8s_deploy_all $@
 
+  local current_time=$(date +%s)
+  local seconds_elapsed=$(( $current_time - $start_time ))
+  local timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
+  IFS=':' read -r day hour minute second <<< "$timestamp"
+  local hour="$(( $hour+24*($day-1) ))"
+  printf "done in \r%02d:%02d:%02d" $hour $minute $second
 }
 
 # RUN MAIN
