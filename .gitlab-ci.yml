@@ -13,7 +13,8 @@ variables:
   IMAGE_INFRA_BASE_NAME: infra/images-docker
 
   # Globals
-  DOCKER_VERSION: "19.03"
+  DOCKER_VERSION: "19.03.8"
+  DOCKER_BUILDKIT: 1
 
   PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
