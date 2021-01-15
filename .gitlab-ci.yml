@@ -362,15 +362,6 @@ Build JS app:
   script:
     - |
       /kaniko/executor \
-        --target builder \
-        --cache=true \
-        --context ${CONTEXT} \
-        --dockerfile ${KANIKO_DOCKERFILE} \
-        ${DOCKER_BUILD_ARGS} \
-        --destination $DESTINATION
-
-      /kaniko/executor \
-        --target server \
         --cache=true \
         --context ${CONTEXT} \
         --dockerfile ${KANIKO_DOCKERFILE} \
