@@ -101,7 +101,8 @@ stages:
 .base_docker_image_stage:
   image: docker:${DOCKER_VERSION}
   services:
-    - docker:${DOCKER_VERSION}-dind
+    - name: docker:${DOCKER_VERSION}-dind
+      command: ["--experimental"]
 
 .before_script_build: &before_script_build |
   echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
