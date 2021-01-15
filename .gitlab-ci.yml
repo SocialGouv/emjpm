@@ -375,7 +375,6 @@ Build JS app:
         --dockerfile ${DOCKERFILE} \
         ${DOCKER_BUILD_ARGS} \
         --destination $REGISTRY/$CONTEXT:$IMAGE_TAG
-      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 .base_build_stage_node:
   extends: .base_build_stage
