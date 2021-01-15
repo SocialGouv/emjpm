@@ -79,8 +79,6 @@ function docker_build_node_multistage {
 }
 
 function docker_build_all {
-  local start_time=$(date +%s)
-
   echo "# BUILDING eMJPM $IMAGE_TAG"
 
   export DOCKER_BUILDKIT=1
@@ -108,13 +106,6 @@ function docker_build_all {
     docker_build_node_multistage api
     docker_build_node_multistage app "--build-arg SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}"
   fi
-
-  local current_time=$(date +%s)
-  local seconds_elapsed=$(( $current_time - $start_time ))
-  local timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
-  IFS=':' read -r day hour minute second <<< "$timestamp"
-  local hour="$(( $hour+24*($day-1) ))"
-  printf "buit in \r%02d:%02d:%02d" $hour $minute $second
 }
 
 # K8S DEPLOY FUNCTIONS
@@ -410,8 +401,6 @@ function k8s_deploy_all {
 
 # MAIN
 run_main() {
-  local start_time=$(date +%s)
-
   export BUILD="1"
   export NOTIFY="1"
   export WAIT="1"
@@ -451,13 +440,6 @@ run_main() {
   fi
 
   k8s_deploy_all $@
-
-  local current_time=$(date +%s)
-  local seconds_elapsed=$(( $current_time - $start_time ))
-  local timestamp=$(date -d"@$seconds_elapsed" -u +%-d:%-H:%-M:%-S)
-  IFS=':' read -r day hour minute second <<< "$timestamp"
-  local hour="$(( $hour+24*($day-1) ))"
-  printf "done in \r%02d:%02d:%02d" $hour $minute $second
 }
 
 # RUN MAIN
