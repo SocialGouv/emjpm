@@ -1,3 +1,5 @@
+# syntax = docker/dockerfile:experimental
+
 ARG NODE_VERSION=15-alpine
 ARG BUILD_ENV=pure
 FROM node:$NODE_VERSION as node
