@@ -1,0 +1,14 @@
+ARG NODE_VERSION=15-alpine
+FROM node:$NODE_VERSION
+
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+RUN npm i -g serve
+
+USER node
+
+CMD ["serve","-s","build"]
+
+COPY packages/app/build packages/app/build/

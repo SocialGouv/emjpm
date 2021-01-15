@@ -234,6 +234,12 @@ function k8s_deploy_package {
   ## force to pull latest image
   kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
     "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+
+  if [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
+    local NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
+    echo '{"text":"'${NOTIF_MSG}'"}' \
+      | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+  fi
 }
 
 function k8s_deploy_packages_branch {
@@ -329,6 +335,7 @@ function k8s_deploy_all {
 # MAIN
 run_main() {
   export BUILD="1"
+  export NOTIFY="1"
 
   while [[ "$#" -gt 0 ]]
   do
@@ -345,6 +352,9 @@ run_main() {
         ;;
       --skip-build)
         export BUILD=""
+        ;;
+      --skip-notify)
+        export NOTIFY=""
         ;;
     esac
     shift

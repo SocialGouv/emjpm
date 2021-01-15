@@ -19,7 +19,7 @@
     "start": "yarn dev",
     "test": "lerna run test --parallel",
     "postinstall": "husky install && scripts/gitops/package-ci",
-    "deploy:local_build": "scripts/gitops/deploy-prod-from-local",
+    "deploy:fast": "scripts/gitops/fast-ci",
     "release": "scripts/gitops/release"
   },
   "license": "Apache-2.0",
