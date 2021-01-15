@@ -8,8 +8,9 @@ if ((BASH_VERSINFO[0] < 4)); then
 exit 1; fi
 
 # GLOBAL VARIABLES
-export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/local_build"
+export REGISTRY="registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/fast-ci"
 export COMMIT_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+export COMMIT_SHA=$(git rev-parse --verify HEAD)
 export VERSION=$(printf "${COMMIT_TAG}" | sed "s/^v//")
 export BRANCH_NAME=$(git branch --show-current)
 export REF_SLUG=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9]/-/g;s/^-*//g;s/-*$//g' | cut -c1-63) # like CI_COMMIT_REF_SLUG in gitlab
@@ -39,10 +40,12 @@ function docker_build {
   docker build \
     -f ./packages/$CONTEXT/Dockerfile \
     -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
+    -t $REGISTRY/$CONTEXT:$COMMIT_SHA \
     $BUILD_ARGS \
     --progress plain \
     .
   docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
+  docker push $REGISTRY/$CONTEXT:$COMMIT_SHA
 }
 
 function docker_build_node_multistage {
@@ -204,7 +207,7 @@ function k8s_deploy_package {
 
   HELM_RENDER_ARGS="
     --set image.repository=${REGISTRY}/${CONTEXT}
-    --set image.tag=${IMAGE_TAG}
+    --set image.tag=${COMMIT_SHA}
     --set image.pullPolicy=Always
     --set ingress.hosts[0].host=${HOST}
     --set ingress.tls[0].hosts[0]=${HOST}
@@ -232,8 +235,8 @@ function k8s_deploy_package {
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
 
   ## force to pull latest image
-  kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
-    "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
+  # kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
+  #   "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
   if [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
     local NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')

@@ -28,7 +28,7 @@ services:
     restart: always
 
   hasura:
-    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/hasura:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/hasura:${TAG:-local}
     build:
       context: .
       dockerfile: ./packages/hasura/Dockerfile
@@ -48,7 +48,7 @@ services:
       HASURA_WEB_HOOK_SECRET: $HASURA_WEB_HOOK_SECRET
 
   app:
-    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/app:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/app:${TAG:-local}
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
@@ -67,7 +67,7 @@ services:
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
 
   api:
-    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local_build_test}
+    image: ${REGISTRY:-registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm}/api:${TAG:-local}
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile

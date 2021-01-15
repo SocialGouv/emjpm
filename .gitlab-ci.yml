@@ -374,7 +374,8 @@ Build JS app:
         --context . \
         --dockerfile ${DOCKERFILE} \
         ${DOCKER_BUILD_ARGS} \
-        --destination $REGISTRY/$CONTEXT:$IMAGE_TAG
+        --destination $REGISTRY/$CONTEXT:$IMAGE_TAG \
+        --destination $REGISTRY/$CONTEXT:$CI_COMMIT_SHA
 
 .base_build_stage_node:
   extends: .base_build_stage
