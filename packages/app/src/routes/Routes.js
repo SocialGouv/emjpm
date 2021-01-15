@@ -73,14 +73,6 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)/close",
   },
   {
-    Component: require("~/pages/conditions-utilisation").default,
-    path: "/conditions-utilisation",
-  },
-  {
-    Component: require("~/pages/signup/congratulation").default,
-    path: "/signup/congratulation",
-  },
-  {
     Component: require("~/pages/admin/editors/create").default,
     path: "/admin/editors/create",
   },
@@ -296,10 +288,6 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)",
   },
   {
-    Component: require("~/pages/signup/index").default,
-    path: "/signup",
-  },
-  {
     Component: require("~/pages/direction/informations").default,
     path: "/direction/informations",
   },
@@ -341,10 +329,6 @@ const routes = [
     path: "/services/members",
   },
   {
-    Component: require("~/pages/mentions-legales").default,
-    path: "/mentions-legales",
-  },
-  {
     Component: require("~/pages/magistrats/mesures/[mesure_id]").default,
     path: "/magistrats/mesures/:mesure_id(\\d+)",
   },
@@ -359,10 +343,6 @@ const routes = [
   {
     Component: require("~/pages/services/mesures").default,
     path: "/services/mesures",
-  },
-  {
-    Component: require("~/pages/politique-confidentialite").default,
-    path: "/politique-confidentialite",
   },
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/reactivate")
@@ -435,6 +415,26 @@ const publicRoutes = [
     path: "/stats/:departement_code",
   },
   { Component: require("~/pages/stats/index").default, path: "/stats" },
+  {
+    Component: require("~/pages/politique-confidentialite").default,
+    path: "/politique-confidentialite",
+  },
+  {
+    Component: require("~/pages/signup/index").default,
+    path: "/signup",
+  },
+  {
+    Component: require("~/pages/mentions-legales").default,
+    path: "/mentions-legales",
+  },
+  {
+    Component: require("~/pages/conditions-utilisation").default,
+    path: "/conditions-utilisation",
+  },
+  {
+    Component: require("~/pages/signup/congratulation").default,
+    path: "/signup/congratulation",
+  },
 ];
 
 function Routes() {
