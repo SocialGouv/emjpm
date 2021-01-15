@@ -164,10 +164,6 @@ const routes = [
       "/direction/enquetes/:enquete_id(\\d+)/reponse/:enquete_reponse_id(\\d+)",
   },
   {
-    Component: require("~/pages/account/forgot-password").default,
-    path: "/account/forgot-password",
-  },
-  {
     Component: require("~/pages/admin/etablissements/[id]").default,
     path: "/admin/etablissements/:id(\\d+)",
   },
@@ -358,10 +354,6 @@ const routes = [
     Component: require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/reservation")
       .default,
     path: "/magistrats/gestionnaires/:gestionnaire_id/reservation",
-  },
-  {
-    Component: require("~/pages/account/reset-password").default,
-    path: "/account/reset-password",
   },
   {
     Component: require("~/pages/admin/services/[service_id]").default,

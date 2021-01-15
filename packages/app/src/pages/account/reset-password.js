@@ -3,10 +3,10 @@ import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
 import { FlexWrapper } from "~/ui";
 
-import { useParams } from "react-router-dom";
+import useSearchParams from "../../hooks/useSearchParams";
 
 function ResetPasswordPage() {
-  const { token } = useParams();
+  const { token } = useSearchParams();
   return (
     <LayoutPublic>
       <FlexWrapper
