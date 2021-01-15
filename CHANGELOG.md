@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.86.2](https://github.com/SocialGouv/emjpm/compare/v25.86.1...v25.86.2) (2021-01-15)
+
+
+### Bug Fixes
+
+* **authorization:** params and auth ([8126c79](https://github.com/SocialGouv/emjpm/commit/8126c79260250782cb7f0b0858943fb21952b771))
+* **public-docs:** markdown ([19e4015](https://github.com/SocialGouv/emjpm/commit/19e4015ce78ebc934f2120e48259a73ac0ae81e6))
+* **reset-password:** look up token in search params ([71a1aba](https://github.com/SocialGouv/emjpm/commit/71a1abac1f36752d0e252eab1d0b569197231f8f))
+* **routes:** move routes from private to public ([c21c539](https://github.com/SocialGouv/emjpm/commit/c21c53934426728cb792b480e94ce6351a58f278))
+* **signup:** fix password confirmation test ([5a714a6](https://github.com/SocialGouv/emjpm/commit/5a714a68329339cc69d6a1f4b6f49112e457c34e))
+
+
+
+
+
 ## [25.86.1](https://github.com/SocialGouv/emjpm/compare/v25.86.0...v25.86.1) (2021-01-14)
 
 
