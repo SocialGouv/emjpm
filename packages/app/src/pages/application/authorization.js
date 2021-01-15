@@ -7,14 +7,18 @@ import { LayoutPublic } from "~/components/Layout";
 import { BoxWrapper, FlexWrapper } from "~/ui";
 
 import { useParams } from "react-router-dom";
+import useSearchParams from "~/hooks/useSearchParams";
+import { useAuth } from "~/routes/Auth";
 
-function AuthorizationPage(props) {
-  const { token } = props;
-
-  const query = useParams();
-  const editorId = query["client_id"];
-  const redirectUrl = query["redirect_uri"];
-  const state = query["state"] || Math.random().toString(36).slice(2);
+export default function AuthorizationPage() {
+  const {
+    authStore: { token },
+  } = useAuth();
+  const {
+    client_id: editorId,
+    redirect_uri: redirectUrl,
+    state = Math.random().toString(36).slice(2),
+  } = useSearchParams();
 
   return (
     <LayoutPublic>
@@ -60,5 +64,3 @@ function AuthorizationPage(props) {
     </LayoutPublic>
   );
 }
-
-export default AuthorizationPage;

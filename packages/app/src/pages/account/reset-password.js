@@ -3,7 +3,7 @@ import { LayoutPublic } from "~/components/Layout";
 import { ResetPassword } from "~/components/ResetPassword";
 import { FlexWrapper } from "~/ui";
 
-import useSearchParams from "../../hooks/useSearchParams";
+import useSearchParams from "~/hooks/useSearchParams";
 
 function ResetPasswordPage() {
   const { token } = useSearchParams();
