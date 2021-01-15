@@ -110,6 +110,9 @@ stages:
 
 .before_script_build: &before_script_build |
   echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+  export REGISTRY=$CI_REGISTRY_IMAGE
+  export DOCKERFILE=packages/${CONTEXT}/Dockerfile
+  export IMAGE_TAG=$CI_COMMIT_REF_SLUG
 
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
@@ -362,10 +365,21 @@ Build JS app:
     - source ./.gitlab-ci/env.sh
   script:
     - |
-      export REGISTRY=$CI_REGISTRY_IMAGE
-      export DOCKERFILE=packages/${CONTEXT}/Dockerfile
-      export IMAGE_TAG=$CI_COMMIT_REF_SLUG
+      docker build \
+        -f ${DOCKERFILE} \
+        -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
+        --build-arg BUILD_ENV=$BUILD_ENV \
+        --progress plain \
+        ${CONTEXT}
 
+      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
+
+.base_build_stage_node:
+  extends: .base_build_stage
+  variables:
+    BUILD_ENV: usecache
+  script:
+    - |
       docker build \
         -f ${DOCKERFILE} \
         --target builder \
@@ -384,13 +398,6 @@ Build JS app:
         --cache-from $REGISTRY/$CONTEXT.builder \
         --progress plain \
         ${CONTEXT}
-
-      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
-
-.base_build_stage_node:
-  extends: .base_build_stage
-  variables:
-    BUILD_ENV: usecache
 
 
 ################### Build Docker API ##################
