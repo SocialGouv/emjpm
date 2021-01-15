@@ -13,10 +13,6 @@ variables:
   IMAGE_INFRA_BASE_NAME: infra/images-docker
 
   # Globals
-  DOCKER_VERSION: "19.03.8"
-  DOCKER_BUILDKIT: 1
-  DOCKER_CLI_EXPERIMENTAL: enabled
-
   PROJECT: emjpm
   RANCHER_PROJECT_ID: c-kk8xm:p-dpgpt
 
@@ -101,17 +97,20 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image: docker:${DOCKER_VERSION}
-  variables:
-    DOCKER_BUILDKIT: 1
-  services:
-    - name: docker:${DOCKER_VERSION}-dind
-      command: ["--experimental"]
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
 
 .before_script_build: &before_script_build |
-  echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
+  mkdir -p /kaniko/.docker
+  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+
   export REGISTRY=$CI_REGISTRY_IMAGE
-  export DOCKERFILE=packages/${CONTEXT}/Dockerfile
+  if [ -f "$packages/${CONTEXT}/Dockerfile.gitlab-ci" ]
+  export DOCKERFILE=packages/${CONTEXT}/Dockerfile.gitlab-ci
+  else
+    export DOCKERFILE=packages/${CONTEXT}/Dockerfile
+  fi
   export IMAGE_TAG=$CI_COMMIT_REF_SLUG
 
 .notify_stage: &notify_stage
@@ -234,7 +233,7 @@ Notify New Pipeline:
     GIT_STRATEGY: none
   script:
     - |
-      echo '{"text":"🦊 pipeline ready to run at '${CI_PIPELINE_URL}'"}' \
+      echo '{"text":"[🦊 new pipeline ready to run]('${CI_PIPELINE_URL}')"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 Run Pipeline:
@@ -365,37 +364,16 @@ Build JS app:
     - source ./.gitlab-ci/env.sh
   script:
     - |
-      docker build \
-        -f ${DOCKERFILE} \
-        -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
-        --build-arg BUILD_ENV=$BUILD_ENV \
-        .
-
+      /kaniko/executor \
+        --cache=true \
+        --context . \
+        --dockerfile ${DOCKERFILE} \
+        ${DOCKER_BUILD_ARGS} \
+        --destination $REGISTRY/$CONTEXT:$IMAGE_TAG
       docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 .base_build_stage_node:
   extends: .base_build_stage
-  variables:
-    BUILD_ENV: usecache
-  script:
-    - |
-      docker build \
-        -f ${DOCKERFILE} \
-        --target builder \
-        -t $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
-        --build-arg BUILD_ENV=$BUILD_ENV \
-        $BUILDER_BUILD_ARGS \
-        .
-
-      docker build \
-        -f ${DOCKERFILE} \
-        --target server \
-        -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
-        --build-arg BUILD_ENV=$BUILD_ENV \
-        --cache-from $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
-        .
-
-      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 
 ################### Build Docker API ##################
@@ -410,7 +388,6 @@ Build api image:
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
-    - export DOCKER_BUILD_ARGS="--build-arg BUILD_ENV=${BUILD_ENV}"
 
 ################### Build Docker APP ##################
 
@@ -424,7 +401,6 @@ Build api image:
     - source ./.gitlab-ci/env.sh
     - >-
       export DOCKER_BUILD_ARGS="
-        --build-arg BUILD_ENV=${BUILD_ENV}
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}"
   variables:
     CONTEXT: app
@@ -438,6 +414,7 @@ Build app image:
 Build hasura image:
   extends:
     - .base_build_stage
+  needs: []
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh

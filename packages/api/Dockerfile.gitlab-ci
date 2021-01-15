@@ -1,0 +1,16 @@
+ARG NODE_VERSION=15-alpine
+FROM node:$NODE_VERSION
+
+ENV NODE_ENV=production
+
+# p7zip is used to unzip encrypted file from OCMI
+# p7zip is required by https://github.com/quentinrossetti/node-7z#installation
+RUN apk add --update --no-cache p7zip
+
+WORKDIR /app
+
+USER node
+
+CMD ["node","/app/dist/index.js"]
+
+COPY packages/api/dist packages/api/dist/
