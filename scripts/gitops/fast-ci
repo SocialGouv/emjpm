@@ -144,8 +144,40 @@ EOF
   kubectl apply -f ./.k8s/manifests/azure-volume-secret-generated.yml -n ${K8S_NAMESPACE}
 }
 
+# prod
+function k8s_backup_db {
+  echo "### BACKUP DB BEFORE PRODUCTION"
+
+  export COMMIT=$COMMIT_SHA
+  export JOB_ID="0"
+
+  kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
+  export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
+
+  export ADMIN_PG_USER=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_USER}' | base64 --decode)
+  export ADMIN_PG_PASSWORD=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.ADMIN_PG_PASSWORD}' | base64 --decode)
+
+  kubectl delete configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} || true
+  kubectl create configmap ${K8S_PROJECT}-backup-configmap-${BRANCH_HASH} \
+    --from-file=./.k8s/postgres/backup/configmap/
+
+  kubectl delete job ${K8S_PROJECT}-backup-${BRANCH_HASH} || true
+  cat .k8s/postgres/backup/job.yml | envsubst | kubectl apply -f -;
+}
+
+# dev
 function k8s_restore_db {
+  if [ "${BRANCH_NAME}" = "apitest" ]; then
+    return;
+  fi
   echo "### RESTORING DB FOR $HOST"
+
+  export COMMIT=$COMMIT_SHA
+  export JOB_ID="0"
+
+  kubectl config set-context --current --namespace=${K8S_NAMESPACE}
+
   export PG_HOST=$(kubectl get secret azure-pg-admin-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.PG_HOST}' | base64 --decode)
 
   export EMJPM_PG_USER=$(kubectl get secret azure-pg-emjpm-user -n ${K8S_PROJECT}-secret -ojsonpath='{.data.EMJPM_PG_USER}' | base64 --decode)
@@ -154,7 +186,7 @@ function k8s_restore_db {
   kubectl scale --replicas=0 deploy/hasura
 
   kubectl delete configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} || true
-  kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH}
+  kubectl create configmap ${K8S_PROJECT}-restore-configmap-${BRANCH_HASH} \
     --from-file=./.k8s/postgres/restore/configmap/
 
   kubectl delete job restore-job || true
@@ -267,7 +299,7 @@ function k8s_deploy_package {
   kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
     "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
-  if [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
+  if [ -n "$NOTIFY_PROD" ] && [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
     local NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
     echo '{"text":"'${NOTIF_MSG}'"}' \
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
@@ -305,11 +337,8 @@ function k8s_deploy_packages {
 function k8s_deploy_packages_branch {
   echo "## DEPLOYING eMJPM $IMAGE_TAG on branch ${BRANCH_NAME}"
 
-  if [ "${BRANCH_NAME}" = "master" ]; then
-    export BRANCH_HASH=master;
-    export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
-  elif [ "${BRANCH_NAME}" = "apitest" ]; then
-    export BRANCH_HASH="${BRANCH_NAME}";
+  if [ "${BRANCH_NAME}" = "master" ] || [ "${BRANCH_NAME}" = "apitest" ]; then
+    export BRANCH_HASH=$BRANCH_NAME;
     export K8S_NAMESPACE="emjpm-${BRANCH_HASH}"
   else
     export BRANCH_HASH=$( printf "${BRANCH_NAME}" | sha1sum | cut -c1-7 )
@@ -320,7 +349,7 @@ function k8s_deploy_packages_branch {
 
   k8s_create_namespace
 
-  if [ "${BRANCH_NAME}" != "apitest" ]; then
+  if [ -n "$RESTORE_DB" ]; then
     k8s_restore_db
   fi
 
@@ -339,6 +368,10 @@ function k8s_deploy_packages_prod {
   export BRANCH_HASH=prod;
   export DOMAIN="${ROOT_DOMAIN}";
   export POSTGRES_DATABASE_EMJPM="emjpm"
+
+  if [ -n "$BACKUPD_DB" ]; then
+    k8s_backup_db
+  fi
 
   k8s_deploy_packages
 
@@ -402,9 +435,14 @@ function k8s_deploy_all {
 # MAIN
 run_main() {
   export BUILD="1"
-  export NOTIFY="1"
   export WAIT="1"
   export PARALLEL="1"
+  export BACKUPD_DB="1"
+  export RESTORE_DB="1"
+
+  if [ "$BRANCH_NAME" = "$COMMIT_TAG" ]; then
+    export NOTIFY_PROD="1"
+  fi
 
   while [[ "$#" -gt 0 ]]
   do
@@ -422,11 +460,20 @@ run_main() {
       --skip-build)
         export BUILD=""
         ;;
-      --skip-notify)
-        export NOTIFY=""
+      --notify-prod)
+        export NOTIFY_PROD="1"
+        ;;
+      --skip-notify-prod)
+        export NOTIFY_PROD=""
         ;;
       --skip-wait)
         export WAIT=""
+        ;;
+      --skip-backup)
+        export BACKUPD_DB=""
+        ;;
+      --skip-restore)
+        export RESTORE_DB=""
         ;;
       --no-parallel)
         export PARALLEL=""
