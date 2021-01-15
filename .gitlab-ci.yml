@@ -558,9 +558,6 @@ Deploy app (prod):
   extends:
     - .deploy_app_stage
     - .incubateur_stage
-  needs:
-    - Create namespace
-    - Build app image
   after_script:
     - source ./.gitlab-ci/env.sh
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
