@@ -41,7 +41,7 @@ stages:
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
-        --set image.tag=$CI_COMMIT_REF_SLUG
+        --set image.tag=$CI_COMMIT_SHA
         --set ingress.hosts[0].host=${HOST}
         --set ingress.tls[0].hosts[0]=${HOST}
         ${HELM_RENDER_ARGS}"
