@@ -100,6 +100,8 @@ stages:
 
 .base_docker_image_stage:
   image: docker:${DOCKER_VERSION}
+  variables:
+    DOCKER_BUILDKIT: 1
   services:
     - name: docker:${DOCKER_VERSION}-dind
       command: ["--experimental"]
@@ -361,8 +363,6 @@ Build JS app:
       export REGISTRY=$CI_REGISTRY_IMAGE
       export DOCKERFILE=packages/${CONTEXT}/Dockerfile
       export IMAGE_TAG=$CI_COMMIT_REF_SLUG
-
-      export DOCKER_BUILDKIT=1
 
       docker build \
         -f ${DOCKERFILE} \
