@@ -106,8 +106,8 @@ stages:
   echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
 
   export REGISTRY=$CI_REGISTRY_IMAGE
-  if [ -f "$packages/${CONTEXT}/Dockerfile.gitlab-ci" ]
-  export DOCKERFILE=packages/${CONTEXT}/Dockerfile.gitlab-ci
+  if [ -f "$packages/${CONTEXT}/Dockerfile.gitlab-ci" ]; then
+    export DOCKERFILE=packages/${CONTEXT}/Dockerfile.gitlab-ci
   else
     export DOCKERFILE=packages/${CONTEXT}/Dockerfile
   fi
@@ -225,15 +225,20 @@ stages:
 
 ############ RUN PIPELINE ########################
 
+# disable this notif by removing NOTIFY_PIPELINE_READY_TO_RUN
+# in gitlab-ci variables settings (useful when working on CI)
 Notify New Pipeline:
   extends:
     - .enable_stage
     - .base_notify_mattermost
   variables:
     GIT_STRATEGY: none
+  only:
+    variables:
+      - $NOTIFY_PIPELINE_READY_TO_RUN
   script:
     - |
-      echo '{"text":"[🦊 new pipeline ready to run]('${CI_PIPELINE_URL}')"}' \
+      echo '{"text":"🦊 new pipeline ready to run at '${CI_PIPELINE_URL}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 Run Pipeline:
