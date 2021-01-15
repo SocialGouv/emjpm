@@ -382,7 +382,6 @@ Build JS app:
       docker build \
         -f ${DOCKERFILE} \
         --target builder \
-        -t $REGISTRY/$CONTEXT.builder \
         -t $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
         --build-arg BUILD_ENV=$BUILD_ENV \
         $BUILDER_BUILD_ARGS \
@@ -393,8 +392,10 @@ Build JS app:
         --target server \
         -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
         --build-arg BUILD_ENV=$BUILD_ENV \
-        --cache-from $REGISTRY/$CONTEXT.builder \
+        --cache-from $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
         .
+
+      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 
 ################### Build Docker API ##################
