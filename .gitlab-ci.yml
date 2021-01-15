@@ -99,13 +99,12 @@ stages:
     - kubectl annotate namespace ${K8S_NAMESPACE} field.cattle.io/creatorId=gitlab
 
 .base_docker_image_stage:
-  image:
-    name: gcr.io/kaniko-project/executor:debug
-    entrypoint: [""]
+  image: docker:${DOCKER_VERSION}
+  services:
+    - docker:${DOCKER_VERSION}-dind
 
 .before_script_build: &before_script_build |
-  mkdir -p /kaniko/.docker
-  echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+  echo "$CI_JOB_TOKEN" | docker login $CI_REGISTRY -u gitlab-ci-token --password-stdin
 
 .notify_stage: &notify_stage
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/git-deploy:0.24.0
@@ -356,17 +355,34 @@ Build JS app:
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
-  variables:
-    CONTEXT: .
-    KANIKO_DOCKERFILE: Dockerfile
   script:
     - |
-      /kaniko/executor \
-        --cache=true \
-        --context ${CONTEXT} \
-        --dockerfile ${KANIKO_DOCKERFILE} \
-        ${DOCKER_BUILD_ARGS} \
-        --destination $DESTINATION
+      export REGISTRY=$CI_REGISTRY_IMAGE
+      export DOCKERFILE=packages/${CONTEXT}/Dockerfile
+      export IMAGE_TAG=$CI_COMMIT_REF_SLUG
+
+      export DOCKER_BUILDKIT=1
+
+      docker build \
+        -f ${DOCKERFILE} \
+        --target builder \
+        -t $REGISTRY/$CONTEXT.builder \
+        -t $REGISTRY/$CONTEXT.builder:$IMAGE_TAG \
+        --build-arg BUILD_ENV=$BUILD_ENV \
+        $BUILDER_BUILD_ARGS \
+        --progress plain \
+        ${CONTEXT}
+
+      docker build \
+        -f ${DOCKERFILE} \
+        --target server \
+        -t $REGISTRY/$CONTEXT:$IMAGE_TAG \
+        --build-arg BUILD_ENV=$BUILD_ENV \
+        --cache-from $REGISTRY/$CONTEXT.builder \
+        --progress plain \
+        ${CONTEXT}
+
+      docker push $REGISTRY/$CONTEXT:$IMAGE_TAG
 
 .base_build_stage_node:
   extends: .base_build_stage
@@ -382,10 +398,7 @@ Build api image:
   needs:
     - Build JS api
   variables:
-    BUILD_NAME: api
-    CONTEXT: .
-    KANIKO_DOCKERFILE: packages/api/Dockerfile
-    DESTINATION: $CI_REGISTRY_IMAGE/api:$CI_COMMIT_REF_SLUG
+    CONTEXT: api
   before_script:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
@@ -406,10 +419,7 @@ Build api image:
         --build-arg BUILD_ENV=${BUILD_ENV}
         --build-arg REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN}"
   variables:
-    BUILD_NAME: app
-    CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/app:$CI_COMMIT_REF_SLUG
-    KANIKO_DOCKERFILE: packages/app/Dockerfile
+    CONTEXT: app
 
 Build app image:
   extends:
@@ -425,10 +435,7 @@ Build hasura image:
     - *before_script_build
     - source ./.gitlab-ci/env.sh
   variables:
-    BUILD_NAME: hasura
-    CONTEXT: .
-    DESTINATION: $CI_REGISTRY_IMAGE/hasura:$CI_COMMIT_REF_SLUG
-    KANIKO_DOCKERFILE: packages/hasura/Dockerfile
+    CONTEXT: hasura
 
 Backup PG before production (incubateur):
   extends:
