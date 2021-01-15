@@ -773,7 +773,6 @@ Trigger production:
   only:
     refs:
       - tags
-      - master
   script:
     - curl --request POST
       --form ref="${CI_COMMIT_REF_NAME}"
