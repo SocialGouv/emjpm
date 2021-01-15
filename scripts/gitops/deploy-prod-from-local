@@ -230,6 +230,10 @@ function k8s_deploy_package {
   echo "### DEPLOYING $CONTEXT/$IMAGE_TAG ON $HOST"
   echo "#### manifests: packages/$CONTEXT/.k8s/manifests"
   kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
+
+  ## force to pull latest image
+  kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \
+    "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 }
 
 function k8s_deploy_packages_branch {
