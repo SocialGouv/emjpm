@@ -8,8 +8,7 @@ import { EDIT_SERVICE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditInformationsForm } from "./ServiceEditInformationsForm";
 
-function ServiceEditInformations({ cancelLink, successLink }) {
-  const { service_id: serviceId } = useParams();
+function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
   const history = useHistory();
   const { data, error, loading } = useQuery(GET_SERVICES, {
     variables: {
