@@ -1,7 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { UserContext } from "~/components/UserContext";
 
 import { Card } from "~/ui";
 
@@ -10,9 +9,7 @@ import { GET_SERVICES } from "./queries";
 import { ServiceEditInformationsForm } from "./ServiceEditInformationsForm";
 
 function ServiceEditInformations({ cancelLink, successLink }) {
-  const {
-    service: { id: serviceId },
-  } = useContext(UserContext);
+  const { service_id: serviceId } = useParams();
   const history = useHistory();
   const { data, error, loading } = useQuery(GET_SERVICES, {
     variables: {
