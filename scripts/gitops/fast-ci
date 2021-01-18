@@ -15,6 +15,14 @@ export VERSION=$(printf "${COMMIT_TAG}" | sed "s/^v//")
 export BRANCH_NAME=$(git branch --show-current)
 export REF_SLUG=$(echo $BRANCH_NAME | sed 's/[^a-zA-Z0-9]/-/g;s/^-*//g;s/-*$//g' | cut -c1-63) # like CI_COMMIT_REF_SLUG in gitlab
 export IMAGE_TAG=${IMAGE_TAG:-"$REF_SLUG"}
+export CURRENT_COMMIT_TAG=$(git tag --points-at HEAD)
+if [ -z "$BRANCH_NAME" ] && [ -n "$CURRENT_COMMIT_TAG" ]; then
+  export BRANCH_NAME=$CURRENT_COMMIT_TAG
+fi
+if [ -z "$BRANCH_NAME" ]; then
+  echo "error: unable to get current branch name"
+  exit 1
+fi
 
 # HELPER FUNCTION
 function urlencode {
@@ -419,8 +427,9 @@ function k8s_deploy_all {
   export K8S_PROJECT="emjpm"
   export NODE_ENV="production"
   source .env.deploy
-  [ -f ".kubeconfig" ] && KUBECONFIG=".kubeconfig:$KUBECONFIG"
-  export KUBECONFIG=$KUBECONFIG
+  if [ -f ".kubeconfig" ] && [[ $KUBECONFIG != *".kubeconfig"* ]]; then
+    export KUBECONFIG=".kubeconfig:$KUBECONFIG"
+  fi
 
   if [ -n "$DEPLOY_DEV" ]; then
     k8s_deploy_env_dev
@@ -437,10 +446,10 @@ run_main() {
   export BUILD="1"
   export WAIT="1"
   export PARALLEL="1"
-  export BACKUPD_DB="1"
-  export RESTORE_DB="1"
+  export BACKUPD_DB=""
+  export RESTORE_DB=""
 
-  if [ "$BRANCH_NAME" = "$COMMIT_TAG" ]; then
+  if [ -n "$CURRENT_COMMIT_TAG" ]; then
     export NOTIFY_PROD="1"
   fi
 
@@ -469,11 +478,11 @@ run_main() {
       --skip-wait)
         export WAIT=""
         ;;
-      --skip-backup)
-        export BACKUPD_DB=""
+      --backup)
+        export BACKUPD_DB="1"
         ;;
-      --skip-restore)
-        export RESTORE_DB=""
+      --restore)
+        export RESTORE_DB="1"
         ;;
       --no-parallel)
         export PARALLEL=""
