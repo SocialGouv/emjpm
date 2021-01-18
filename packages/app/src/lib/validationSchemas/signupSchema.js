@@ -10,7 +10,6 @@ const signupSchema = yup.object().shape({
     .string()
     .email("Le format de votre email n'est pas correct")
     .required(),
-  genre: yup.string().required(),
   nom: yup.string().required(),
   password: yup
     .string()

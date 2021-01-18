@@ -28,7 +28,7 @@ export function SignupServiceInvitation(props) {
   }
 
   if (error || !data.service_member_invitations.length) {
-    // history.push("/login");
+    history.push("/login");
     return null;
   }
 
@@ -36,7 +36,6 @@ export function SignupServiceInvitation(props) {
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const exists = await isEmailExists(client, values.email);
-
     if (exists) {
       setErrors({ email: "Cet email existe déjà" });
     } else {
