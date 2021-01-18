@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.86.7](https://github.com/SocialGouv/emjpm/compare/v25.86.6...v25.86.7) (2021-01-18)
+
+
+### Bug Fixes
+
+* **service-id:** multiple source (prop) ([cc9ca10](https://github.com/SocialGouv/emjpm/commit/cc9ca10953dc32d08fff7fffd160a43d940996be))
+* **service-id:** url param ([fced51a](https://github.com/SocialGouv/emjpm/commit/fced51a0f43f4733b37d9d14511309c304d657fe))
+* **signup:** remove genre ([ffdb079](https://github.com/SocialGouv/emjpm/commit/ffdb079714fb2b7a8d8fb6291a1e658596a2b5a7))
+
+
+### Features
+
+* **script:** db admin tools helpers ([f8cc5c2](https://github.com/SocialGouv/emjpm/commit/f8cc5c28d48b451ae11f74b9a107af9b01b2dbfa))
+
+
+
+
+
 ## [25.86.6](https://github.com/SocialGouv/emjpm/compare/v25.86.5...v25.86.6) (2021-01-15)
 
 **Note:** Version bump only for package emjpm
