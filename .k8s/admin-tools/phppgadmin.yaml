@@ -1,0 +1,107 @@
+# see https://hub.docker.com/r/bitnami/phppgadmin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phppgadmin
+  labels:
+    app.kubernetes.io/name: phppgadmin
+    app.kubernetes.io/instance: phppgadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: phppgadmin
+      app.kubernetes.io/instance: phppgadmin
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: phppgadmin
+        app.kubernetes.io/instance: phppgadmin
+    spec:
+      containers:
+        - name: phppgadmin
+          image: "bitnami/phppgadmin:latest"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+          env:
+            - name: DATABASE_HOST
+              value: emjpmdevserver.postgres.database.azure.com
+            - name: DATABASE_SSL_MODE
+              value: require
+---
+# BASIC_AUTH deployment, more details see https://github.com/xsc/nginx-sidecar-basic-auth
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phppgadmin-proxy
+spec:
+  selector:
+    matchLabels:
+      app: phppgadmin-proxy
+  template:
+    metadata:
+      labels:
+        app: phppgadmin-proxy
+    spec:
+      containers:
+      - name: phppgadmin-proxy
+        image: registry.gitlab.factory.social.gouv.fr/devthejo/nginx-sidecar-basic-auth:1.0.0
+        imagePullPolicy: Always
+        env:
+          - name: FORWARD_HOST
+            value: "phppgadmin"
+          - name: FORWARD_PORT
+            value: "8080"
+          - name: BASIC_AUTH_USERNAME
+            value: admin
+          - name: BASIC_AUTH_PASSWORD
+            value: ${ADMIN_PASSWORD}
+          - name: CLIENT_MAX_BODY_SIZE
+            value: 2g
+---
+# BASIC_AUTH service
+apiVersion: v1
+kind: Service
+metadata:
+  name: phppgadmin
+spec:
+  selector:
+    app.kubernetes.io/name: phppgadmin
+    app.kubernetes.io/instance: phppgadmin
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phppgadmin-proxy
+spec:
+  selector:
+    app: phppgadmin-proxy
+  ports:
+  - name: http
+    port: 8087
+    targetPort: 8087
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: phppgadmin
+spec:
+  tls:
+  - hosts:
+      - phppgadmin-emjpm.dev2.fabrique.social.gouv.fr
+    secretName: wildcard-crt
+  rules:
+  - host: phppgadmin-emjpm.dev2.fabrique.social.gouv.fr
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: phppgadmin-proxy
+          servicePort: 8087
