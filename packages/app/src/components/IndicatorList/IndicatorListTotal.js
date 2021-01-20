@@ -8,8 +8,17 @@ import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
 
+import use30DaysInterval from "~/hooks/use30DaysInterval";
+
 function IndicatorListTotal() {
-  const { data, error, loading } = useQuery(FRANCE_INDICATORS);
+  const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
+
+  const { data, error, loading } = useQuery(FRANCE_INDICATORS, {
+    variables: {
+      currentMonthStart,
+      currentMonthEnd,
+    },
+  });
 
   if (loading) {
     return (
@@ -69,6 +78,9 @@ function IndicatorListTotal() {
         sum: { count: magistratInscritCount },
       },
     },
+    mesuresLastMonthCount: {
+      aggregate: { count: mesuresLastMonthCount },
+    },
   } = data;
   return (
     <Box>
@@ -79,25 +91,25 @@ function IndicatorListTotal() {
           error={false}
           loading={false}
           title="Services mandataires"
-          indicator={serviceInscritCount ? serviceInscritCount : 0}
+          indicator={serviceInscritCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
-          indicator={preposeInscritCount ? preposeInscritCount : 0}
+          indicator={preposeInscritCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
-          indicator={individuelInscritCount ? individuelInscritCount : 0}
+          indicator={individuelInscritCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={magistratInscritCount ? magistratInscritCount : 0}
+          indicator={magistratInscritCount || 0}
         />
       </Box>
       <Heading2>Connectés dans le dernier mois</Heading2>
@@ -106,25 +118,34 @@ function IndicatorListTotal() {
           error={false}
           loading={false}
           title="Services mandataires"
-          indicator={serviceLoginCount ? serviceLoginCount : 0}
+          indicator={serviceLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
-          indicator={preposeLoginCount ? preposeLoginCount : 0}
+          indicator={preposeLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
-          indicator={individuelLoginCount ? individuelLoginCount : 0}
+          indicator={individuelLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={magistratLoginCount ? magistratLoginCount : 0}
+          indicator={magistratLoginCount || 0}
+        />
+      </Box>
+      <Heading2>Mesures réservées</Heading2>
+      <Box my={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Au cours du dernier mois"
+          indicator={mesuresLastMonthCount || 0}
         />
       </Box>
     </Box>
