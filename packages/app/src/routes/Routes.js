@@ -122,6 +122,10 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)/edit",
   },
   {
+    Component: require("~/pages/admin/edit-informations").default,
+    path: "/admin/edit-informations",
+  },
+  {
     Component: require("~/pages/direction/edit-informations").default,
     path: "/direction/edit-informations",
   },
@@ -140,6 +144,10 @@ const routes = [
   {
     Component: require("~/pages/admin/editors/[editor_id]").default,
     path: "/admin/editors/:editor_id(\\d+)",
+  },
+  {
+    Component: require("~/pages/admin/edit-password").default,
+    path: "/admin/edit-password",
   },
   {
     Component: require("~/pages/direction/edit-password").default,
@@ -282,6 +290,10 @@ const routes = [
   {
     Component: require("~/pages/services/mesures/[mesure_id]/index").default,
     path: "/services/mesures/:mesure_id(\\d+)",
+  },
+  {
+    Component: require("~/pages/admin/informations").default,
+    path: "/admin/informations",
   },
   {
     Component: require("~/pages/direction/informations").default,
