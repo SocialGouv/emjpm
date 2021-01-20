@@ -1,6 +1,8 @@
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute } from "./Auth";
 
+import NotFound from "~/components/NotFound";
+
 const routes = [
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/accept")
@@ -451,15 +453,14 @@ function Routes() {
           </Route>
         );
       })}
-      <PrivateRoute>
-        {routes.map(({ path, Component, exact = true }) => {
-          return (
-            <Route key={path} path={path} exact={exact}>
-              <Component />
-            </Route>
-          );
-        })}
-      </PrivateRoute>
+      {routes.map(({ path, Component, exact = true }) => {
+        return (
+          <PrivateRoute key={path} path={path} exact={exact}>
+            <Component />
+          </PrivateRoute>
+        );
+      })}
+      <Route component={NotFound} />
     </Switch>
   );
 }
