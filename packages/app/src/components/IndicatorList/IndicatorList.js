@@ -5,11 +5,14 @@ import { Box } from "rebass";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
 
+import use30DaysInterval from "~/hooks/use30DaysInterval";
+
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
 const filterArray = (array, type) =>
   array.filter((element) => element.type === type);
+
 function filterArrays(arrays) {
   return arrays.map((array) => {
     const [service] = filterArray(array, "service");
@@ -22,8 +25,9 @@ function filterArrays(arrays) {
 
 function IndicatorList(props) {
   const { departementCode } = props;
+  const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
   const { data, error, loading } = useQuery(INDICATORS, {
-    variables: { code: departementCode },
+    variables: { code: departementCode, currentMonthStart, currentMonthEnd },
   });
 
   if (loading) {
@@ -88,25 +92,34 @@ function IndicatorList(props) {
           error={false}
           loading={false}
           title="Services mandataires"
-          indicator={loginData.service ? loginData.service.count : 0}
+          indicator={loginData.service?.count || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
-          indicator={loginData.prepose ? loginData.prepose.count : 0}
+          indicator={loginData.prepose?.count || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
-          indicator={loginData.individuel ? loginData.individuel.count : 0}
+          indicator={loginData.individuel?.count || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={loginData.ti ? loginData.ti.count : 0}
+          indicator={loginData.ti?.count || 0}
+        />
+      </Box>
+      <Heading2>Mesures réservées</Heading2>
+      <Box my={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Au cours du dernier mois"
+          indicator={data.mesuresLastMonthCount?.aggregate?.count || 0}
         />
       </Box>
     </Box>

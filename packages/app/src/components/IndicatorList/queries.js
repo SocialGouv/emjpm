@@ -1,7 +1,11 @@
 import gql from "graphql-tag";
 
 export const INDICATORS = gql`
-  query Indicators($code: String) {
+  query Indicators(
+    $code: String
+    $currentMonthStart: timestamptz!
+    $currentMonthEnd: timestamptz!
+  ) {
     departements(where: { code: { _eq: $code } }) {
       code
       nom
@@ -18,11 +22,27 @@ export const INDICATORS = gql`
       type
       code
     }
+    mesuresLastMonthCount: mesures_aggregate(
+      where: {
+        _and: {
+          created_at: { _gte: $currentMonthStart, _lte: $currentMonthEnd }
+          magistrat_id: { _is_null: false }
+          departement: { code: { _eq: $code } }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 
 export const FRANCE_INDICATORS = gql`
-  query AllIndicators {
+  query AllIndicators(
+    $currentMonthStart: timestamptz!
+    $currentMonthEnd: timestamptz!
+  ) {
     serviceLoginCount: view_indicateur_login_aggregate(
       where: { type: { _eq: "service" } }
     ) {
@@ -93,6 +113,18 @@ export const FRANCE_INDICATORS = gql`
         sum {
           count
         }
+      }
+    }
+    mesuresLastMonthCount: mesures_aggregate(
+      where: {
+        _and: {
+          created_at: { _gte: $currentMonthStart, _lte: $currentMonthEnd }
+          magistrat_id: { _is_null: false }
+        }
+      }
+    ) {
+      aggregate {
+        count
       }
     }
   }
