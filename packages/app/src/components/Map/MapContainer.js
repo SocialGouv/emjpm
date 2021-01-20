@@ -1,8 +1,10 @@
-import ReactMapboxGl, { ScaleControl, ZoomControl } from "react-mapbox-gl";
+import React from "react";
+
+const ScaleControl = React.lazy(() => import("./Lazy/ScaleControl"));
+const ZoomControl = React.lazy(() => import("./Lazy/ZoomControl"));
 
 import { MapError } from "./MapError";
-
-const Map = ReactMapboxGl({ accessToken: "" });
+import { Map } from "./Map";
 
 function MapContainer(props) {
   const { children, latitude, longitude } = props;

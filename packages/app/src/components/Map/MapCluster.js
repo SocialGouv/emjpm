@@ -1,4 +1,7 @@
-import { Cluster, Marker } from "react-mapbox-gl";
+import React from "react";
+
+const Marker = React.lazy(() => import("./Lazy/Marker"));
+const Cluster = React.lazy(() => import("./Lazy/Cluster"));
 
 const styles = {
   clickable: {

@@ -1,4 +1,7 @@
-import { Feature, Layer } from "react-mapbox-gl";
+import React from "react";
+
+const Layer = React.lazy(() => import("./Lazy/Layer"));
+const Feature = React.lazy(() => import("./Lazy/Feature"));
 
 function MapLayer(props) {
   const { items, type, image, onMarkerClick } = props;
