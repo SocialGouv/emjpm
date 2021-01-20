@@ -5182,6 +5182,13 @@
       - champ_mesure
       - ville
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - created_at
+      - magistrat_id
+      filter: {}
+      allow_aggregations: true
   - role: direction
     permission:
       columns:
