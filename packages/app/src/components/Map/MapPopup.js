@@ -1,4 +1,6 @@
-import { Popup } from "react-mapbox-gl";
+import React from "react";
+
+const Popup = React.lazy(() => import("./Lazy/Popup"));
 
 function MapPopup(props) {
   const { children, longitude, latitude } = props;
