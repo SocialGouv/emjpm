@@ -139,12 +139,12 @@ function IndicatorListTotal() {
           indicator={magistratLoginCount || 0}
         />
       </Box>
-      <Heading2>Mesures réservées</Heading2>
+      <Heading2>Mesures réservées dans le dernier mois</Heading2>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
-          title="Au cours du dernier mois"
+          title="France entière"
           indicator={mesuresLastMonthCount || 0}
         />
       </Box>

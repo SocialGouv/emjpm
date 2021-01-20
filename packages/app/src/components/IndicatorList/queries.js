@@ -35,6 +35,18 @@ export const INDICATORS = gql`
         count
       }
     }
+    mesuresLastMonthCountTotal: mesures_aggregate(
+      where: {
+        _and: {
+          created_at: { _gte: $currentMonthStart, _lte: $currentMonthEnd }
+          magistrat_id: { _is_null: false }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
   }
 `;
 
