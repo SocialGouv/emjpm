@@ -43,7 +43,11 @@ function LayoutAdmin(props) {
   return (
     <Fragment>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
-        <Header />
+        <Header
+          dropDownLinks={[
+            { title: "Vos informations", to: "/admin/informations" },
+          ]}
+        />
         {hasNavigation && (
           <BoxWrapper>
             <Navigation links={navigationLinks} />

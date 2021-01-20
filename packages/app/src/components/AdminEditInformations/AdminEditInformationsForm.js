@@ -8,10 +8,10 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
-import { directionEditSchema } from "~/lib/validationSchemas/directionEditSchema";
+import { adminEditSchema } from "~/lib/validationSchemas/adminEditSchema";
 import { Button, Heading4, InlineError, Text } from "~/ui";
 
-function DirectionEditInformationsForm({
+function AdminEditInformationsForm({
   user,
   handleSubmit,
   cancelLink,
@@ -24,7 +24,7 @@ function DirectionEditInformationsForm({
       prenom: user.prenom || "",
     },
     onSubmit: handleSubmit,
-    validationSchema: directionEditSchema,
+    validationSchema: adminEditSchema,
   });
 
   return (
@@ -41,19 +41,19 @@ function DirectionEditInformationsForm({
             formik={formik}
             id="prenom"
             placeholder="Prénom"
-            validationSchema={directionEditSchema}
+            validationSchema={adminEditSchema}
           />
           <FormGroupInput
             formik={formik}
             id="nom"
             placeholder="Nom"
-            validationSchema={directionEditSchema}
+            validationSchema={adminEditSchema}
           />
           <FormGroupInput
             formik={formik}
             id="email"
             placeholder="Email"
-            validationSchema={directionEditSchema}
+            validationSchema={adminEditSchema}
           />
         </FormInputBox>
       </Flex>
@@ -78,4 +78,4 @@ function DirectionEditInformationsForm({
   );
 }
 
-export { DirectionEditInformationsForm };
+export { AdminEditInformationsForm };
