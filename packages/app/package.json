@@ -123,6 +123,7 @@
     "react-test-renderer": "^17.0.1",
     "rebass": "^4.0.7",
     "sort-package-json": "^1.46.1",
+    "source-map-explorer": "^2.5.2",
     "source-map-loader": "^2.0.0",
     "style-loader": "^2.0.0",
     "styled-components": "^4.4.1",
