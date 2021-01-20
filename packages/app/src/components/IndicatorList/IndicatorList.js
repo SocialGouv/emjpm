@@ -113,14 +113,20 @@ function IndicatorList(props) {
           indicator={loginData.ti?.count || 0}
         />
       </Box>
-      <Heading2>Mesures réservées</Heading2>
+      <Heading2>Mesures réservées au cours du dernier mois</Heading2>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
-          title="Au cours du dernier mois"
-          indicator={data.mesuresLastMonthCount?.aggregate?.count || 0}
+          title="France entière"
+          indicator={data.mesuresLastMonthCountTotal?.aggregate?.count || 0}
         />
+        {/* <Indicator
+          error={false}
+          loading={false}
+          title="dans le département"
+          indicator={data.mesuresLastMonthCount?.aggregate?.count || 0}
+        /> */}
       </Box>
     </Box>
   );
