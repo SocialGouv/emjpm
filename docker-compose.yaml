@@ -28,6 +28,11 @@ services:
       - emjpm-pgdata:/var/lib/postgresql/data
     restart: always
 
+  adminer:
+    image: adminer:4.7
+    ports:
+      - "8081:8080"
+
   maildev:
     image: djfarrelly/maildev
     command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
