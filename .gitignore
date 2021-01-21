@@ -14,3 +14,5 @@ dump
 .gh-token
 .kubeconfig
 .env.deploy
+
+.testify
