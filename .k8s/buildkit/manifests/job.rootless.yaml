@@ -1,0 +1,73 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: build-job
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      annotations:
+        container.apparmor.security.beta.kubernetes.io/buildkit: unconfined
+        container.seccomp.security.alpha.kubernetes.io/buildkit: unconfined
+    # see buildkit/docs/rootless.md for caveats of rootless mode
+    spec:
+      restartPolicy: Never
+      initContainers:
+        - name: git-clone-repo
+          image: alpine/git:v2.30.0
+          command:
+            - sh
+            - -c
+            - |
+              git clone \
+                --depth 1 \
+                https://github.com/SocialGouv/emjpm \
+                --branch master --single-branch \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
+      containers:
+        - name: buildkit
+          # image: moby/buildkit:master-rootless
+          image: moby/buildkit:v0.8.1-rootless
+          env:
+            - name: BUILDKITD_FLAGS
+              value: --oci-worker-no-process-sandbox
+          command:
+            - buildctl-daemonless.sh
+          args:
+            - build
+            - --frontend
+            - dockerfile.v0
+            - --local
+            - context=/workspace
+            - --local
+            - dockerfile=/workspace/packages/api/
+            - --output
+            - type=image,registry.insecure=true,name=docker-registry.registry.svc.cluster.local:5000/emjpm/api:latest,push=true
+            - --export-cache
+            # - type=registry,ref=docker-registry.registry.svc.cluster.local:5000/emjpm/api:buildcache
+            - --import-cache
+            - type=inline
+            # - type=local,dest=
+            # - type=registry,ref=docker-registry.registry.svc.cluster.local:5000/emjpm/api:buildcache
+            - type=local,ref=docker-registry.registry.svc.cluster.local:5000/emjpm/api:buildcache
+          # To push the image to a registry, add
+          # `--output type=image,name=docker.io/username/image,push=true`
+          securityContext:
+            # To change UID/GID, you need to rebuild the image
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              readOnly: true
+              mountPath: /workspace
+      # To push the image, you also need to create `~/.docker/config.json` secret
+      # and set $DOCKER_CONFIG to `/path/to/.docker` directory.
+      volumes:
+        - name: workspace
+          emptyDir: {}

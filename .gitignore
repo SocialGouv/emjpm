@@ -14,3 +14,4 @@ dump
 .gh-token
 .kubeconfig
 .env.deploy
+.certs
