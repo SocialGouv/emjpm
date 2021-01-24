@@ -6,6 +6,7 @@ DEPLOY_ENV=${DEPLOY_ENV:-"dev"}
 
 GIT_REPOSITORY=https://github.com/SocialGouv/$PROJECT
 RELEASE="$PROJECT-$DEPLOY_ENV"
+KUBECTL_SERVER=https://rancher.fabrique.social.gouv.fr/k8s/clusters/c-bd7z2
 
 WEBHOOKCI_NS="webhook-ci"
 K8S_JOBS_NS="k8s-jobs"
@@ -26,8 +27,7 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set project=$PROJECT \
   --set webhook.tokenSecretName=$WEBHOOK_TOKEN_SECRET_NAME \
   --set git.repository=$GIT_REPOSITORY \
-  --set kubectl.serverSecretName=k8s \
-  --set kubectl.serverSecretKey=server \
+  --set kubectl.server=$KUBECTL_SERVER \
   --set kubectl.tokenSecretName=k8s \
   --set kubectl.tokenSecretKey=token \
   --set k8sJobsNamespace=$K8S_JOBS_NS \

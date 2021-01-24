@@ -9,8 +9,7 @@ webhook:
   tokenSecretKey: "token"
 
 kubectl:
-  serverSecretName: ""
-  serverSecretKey: server
+  server: ""
   tokenSecretName: ""
   tokenSecretKey: token
 
