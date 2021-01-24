@@ -1,13 +1,20 @@
+project: ""
+
 git:
   repository:
   branchDefault: master
 
 webhook:
-  token: ""
+  tokenSecretName: ""
+  tokenSecretKey: "token"
 
 kubectl:
+  serverSecretName: ""
+  serverSecretKey: server
   tokenSecretName: ""
   tokenSecretKey: token
+
+k8sJobsNamespace:
 
 registry:
   pushPath:
@@ -43,11 +50,11 @@ env: {}
 replicaCount: 1
 
 image:
-  # repository: almir/webhook
-  # tag: 2.8.0
   repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
-  tag: 1.0.0
+  tag: 1.4.0
   pullPolicy: IfNotPresent
+  # tag: latest
+  # pullPolicy: Always
 
 imagePullSecret: webhook-receiver-pullsecret
 
@@ -119,18 +126,30 @@ hooks:
       trigger-rule:
         match:
           type: value
-          value: "{{ getenv `WEBHOOK_TOKEN` | js }}"
+          # value: {{ getenv "WEBHOOK_TOKEN" | js }}
+          value: "1234"
           parameter:
             source: url
             name: token
-    command-working-directory: /opt
-    response-message: OK
-    response-headers:
-    - name: Access-Control-Allow-Origin
-      value: '*'
-    pass-arguments-to-command:
-    - source: url
-      name: branch
-    - source: url
-      name: trigger
+      command-working-directory: /opt
+      response-message: OK
+      pass-environment-to-command:
+      - source: url
+        name: branch
+        envname: BRANCH
+      - source: url
+        name: context
+        envname: CONTEXT
+      files:
+  # Leave this hook on all the time, disabling it will break livenessProbe
+  status:
+    enable: true
     files:
+      /data/status.sh: |
+        #!/bin/sh
+        echo Online we are!
+    hook:
+      id: status
+      execute-command: /data/status.sh
+      response-message: Online
+      include-command-output-in-response: true

@@ -1,0 +1,36 @@
+{{ if .Values.k8sJobsNamespace }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: jobs-cleanup
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: kubectl-container
+            image: bitnami/kubectl:latest
+            env:
+            - name: K8S_SERVER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "kubectl.serverSecretName must be specified" .Values.kubectl.serverSecretName }}
+                  key: {{ .Values.kubectl.serverSecretKey }}
+            - name: K8S_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ required "kubectl.tokenSecretName must be specified" .Values.kubectl.tokenSecretName }}
+                  key: {{ .Values.kubectl.tokenSecretKey }}
+            command:
+              - sh
+              - -c
+              - |
+                kubectl \
+                  --namespace {{ .Values.k8sJobsNamespace }} \
+                  --server $K8S_SERVER \
+                  --server $K8S_TOKEN \
+                  delete jobs --field-selector status.successful=1
+          restartPolicy: Never
+{{ end }}

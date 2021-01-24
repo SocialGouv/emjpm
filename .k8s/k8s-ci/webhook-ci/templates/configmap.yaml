@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "webhook-receiver.labels" . | nindent 4 }}
 data:
+  kubectltoken: {{ required "kubectl.tokenSecretName must be specified" .Values.kubectl.tokenSecretName }}
   hooks.yaml: | {{- range $key, $val := .Values.hooks }}
     - {{ $val.hook | toYaml | indent 6 | trim }}
   {{- end }}
