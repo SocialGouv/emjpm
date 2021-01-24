@@ -1,0 +1,136 @@
+git:
+  repository:
+  branchDefault: master
+
+webhook:
+  token: ""
+
+kubectl:
+  tokenSecretName: ""
+  tokenSecretKey: token
+
+registry:
+  pushPath:
+  url: registry.dev2.fabrique.social.gouv.fr
+  secretName: docker-creds
+  passKey: pass
+  userKey: user
+  pushTag: latest
+  cacheTag: buildcache
+
+build:
+  context: ""
+  dockerfile: ""
+
+buildkit:
+  image: moby/buildkit
+  # tag: "master-rootless
+  tag: v0.8.1-rootless
+docker:
+  image: docker
+  tag: stable
+gitclone:
+  image: alpine/git
+  tag: v2.30.0
+
+# Use this to insert env values into the deployment
+env: {}
+
+# Default values for webhook-receiver.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  # repository: almir/webhook
+  # tag: 2.8.0
+  repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
+  tag: 1.0.0
+  pullPolicy: IfNotPresent
+
+imagePullSecret: webhook-receiver-pullsecret
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 9000
+
+ingress:
+  enabled: true
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: webhook-receiver.chart.local
+      paths:
+        - /
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+hooks:
+  build:
+    enable: true
+    hook:
+      id: build
+      execute-command: /opt/build.sh
+      trigger-rule:
+        match:
+          type: value
+          value: "{{ getenv `WEBHOOK_TOKEN` | js }}"
+          parameter:
+            source: url
+            name: token
+    command-working-directory: /opt
+    response-message: OK
+    response-headers:
+    - name: Access-Control-Allow-Origin
+      value: '*'
+    pass-arguments-to-command:
+    - source: url
+      name: branch
+    - source: url
+      name: trigger
+    files:

@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "webhook-receiver.fullname" . }}
+  labels:
+    {{- include "webhook-receiver.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "webhook-receiver.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "webhook-receiver.selectorLabels" . | nindent 8 }}
+    spec:
+      serviceAccountName: {{ include "webhook-receiver.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecret }}
+      containers:
+        - name: {{ .Chart.Name }}
+          args:
+            - -verbose
+            - -hooks=/etc/webhook/hooks.yaml
+            - -hotreload
+            - -template
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+          {{- range $pkey, $pval := .Values.env }}
+          - name: {{ $pkey }}
+            value: {{ quote $pval }}
+          {{- end }}
+          # SPECIFIC TO CI ENV FROM VALUES
+          - name: WEBHOOK_TOKEN
+            value: {{ required "webhook.token must be specified" .Values.webhook.token }}
+          - name: GIT_REPOSITORY
+            value: {{ required "git.repository must be specified" .Values.git.repository }}
+          - name: GIT_BRANCH_DEFAULT
+            value: {{ .Values.git.branchDefault }}
+          - name: GITCLONE_IMAGE
+            value: {{ .Values.gitclone.image }}
+          - name: GITCLONE_TAG
+            value: {{ .Values.gitclone.tag }}
+          - name: DOCKER_IMAGE
+            value: {{ .Values.docker.image }}
+          - name: DOCKER_TAG
+            value: {{ .Values.docker.tag }}
+          - name: BUILDKITD_IMAGE
+            value: {{ .Values.buildkit.image }}
+          - name: BUILDKITD_TAG
+            value: {{ .Values.buildkit.tag }}
+          - name: BUILD_CONTEXT
+            value: {{ .Values.build.context }}
+          - name: BUILD_DOCKERFILE
+            value: {{ .Values.build.dockerfile }}
+          - name: REGISTRY_URL
+            key: {{ .Values.registry.url }}
+          - name: REGISTRY_SECRET_NAME
+            key: {{ .Values.registry.secretName }}
+          - name: REGISTRY_USER_KEY
+            value: {{ .Values.registry.userKey }}
+          - name: REGISTRY_PASS_KEY
+            value: {{ .Values.registry.passKey }}
+          - name: REGISTRY_PUSH_PATH
+            value: {{ required "registry.pushPath must be specified" .Values.registry.pushPath }}
+          - name: REGISTRY_PUSH_TAG
+            value: {{ .Values.registry.pushTag }}
+          - name: REGISTRY_CACHE_TAG
+            value: {{ .Values.registry.cacheTag }}
+          ports:
+            - name: http
+              containerPort: 9000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /hooks/status
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /hooks/status
+              port: http
+          volumeMounts:
+            - name: configs
+              mountPath: "/etc/webhook/hooks.yaml"
+              subPath: "hooks.yaml"
+          {{- range $key, $hook := .Values.hooks }}
+            {{- range $name, $val := $hook.files }}
+            {{- if $hook.enable }}
+            - name: configs
+              mountPath: {{ $name | replace "%" "." | quote }}
+              subPath: "file_{{ $name | replace "/" "_" | replace "%" "." }}"
+            {{- end }}
+            {{- end }}
+          {{- end }}
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+        - name: configs
+          configMap:
+            name: {{ include "webhook-receiver.fullname" $ }}
+            defaultMode: 0755
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}

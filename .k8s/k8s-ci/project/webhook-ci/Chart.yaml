@@ -1,0 +1,13 @@
+apiVersion: v2
+name: webhook-ci
+type: application
+version: 1.0.0
+appVersion: 2.8.0
+sources:
+    - https://github.com/adnanh/webhook
+    - https://hub.docker.com/r/almir/webhook/
+    - https://github.com/almir/docker-webhook
+    - https://github.com/geek-cookbook/helm-webhook-receiver/tree/master/charts/webhook-receiver
+maintainers:
+    - name: Jo Gottfreund <devthejo>
+      email: devthejo@protonmail.com
