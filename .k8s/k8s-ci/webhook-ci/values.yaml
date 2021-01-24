@@ -126,8 +126,7 @@ hooks:
       trigger-rule:
         match:
           type: value
-          # value: {{ getenv "WEBHOOK_TOKEN" | js }}
-          value: "1234"
+          value: '{{ getenv "WEBHOOK_TOKEN" | js }}'
           parameter:
             source: url
             name: token

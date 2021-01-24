@@ -15,7 +15,7 @@ WEBHOOK_TOKEN_SECRET_NAME="${WEBHOOKCI_NS}-${RELEASE}"
 
 WEBHOOK_TOKEN=$(kubectl -n $WEBHOOKCI_NS get secret $WEBHOOK_TOKEN_SECRET_NAME -ojsonpath='{.data.token}' 2>/dev/null | base64 --decode)
 if [ -z "$WEBHOOK_TOKEN" ]; then
-  WEBHOOK_TOKEN=$(openssl rand -base64 32)
+  WEBHOOK_TOKEN=$(cat /dev/urandom | base64 | head -n 1 |tr -dc '[:alnum:]' |cut -c -32)
   kubectl -n $WEBHOOKCI_NS create secret generic $WEBHOOK_TOKEN_SECRET_NAME \
     --from-literal=token=$WEBHOOK_TOKEN
 fi
@@ -38,3 +38,12 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set ingress.tls[0].secretName=wildcard-crt \
   $CHART_DIR | kubectl -n $WEBHOOKCI_NS apply -f -
 
+
+echo "
+webhook deployed at: https://$WEBHOOK_HOST/hooks/
+
+# to get token run these command:
+WEBHOOK_TOKEN="'$'"(kubectl -n $WEBHOOKCI_NS get secret $WEBHOOK_TOKEN_SECRET_NAME -ojsonpath='{.data.token}' 2>/dev/null | base64 --decode)
+WEBHOOK_TOKEN_URLENCODED="'$'"(printf %s "'$'"WEBHOOK_TOKEN|jq -sRr @uri)
+echo "'$'"WEBHOOK_TOKEN_URLENCODED
+"
