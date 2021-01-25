@@ -100,6 +100,9 @@ spec:
               port: http
           volumeMounts:
             - name: configs
+              mountPath: "/opt/env.hook.sh"
+              subPath: "env.hook.sh"
+            - name: configs
               mountPath: "/etc/webhook/hooks.yaml"
               subPath: "hooks.yaml"
           {{- range $key, $hook := .Values.hooks }}

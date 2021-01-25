@@ -1,20 +1,29 @@
 #!/usr/bin/env bash
 set -e
 
+# project and env
+## project global config
 PROJECT=emjpm
 DEPLOY_ENV=${DEPLOY_ENV:-"dev"}
-
+## project repo for build sources and deployment config
 GIT_REPOSITORY=https://github.com/SocialGouv/$PROJECT
 RELEASE="$PROJECT-$DEPLOY_ENV"
+
+# project build
+## build args
+SENTRY_PUBLIC_DSN=https://d9ba9b75ff784cba87abd847b6162b02@sentry.fabrique.social.gouv.fr/3
+# project deployment
 RANCHER_CLUSTER_ID="c-bd7z2"
 KUBECTL_SERVER="https://rancher.fabrique.social.gouv.fr/k8s/clusters/$RANCHER_CLUSTER_ID"
 
+# webhook deployment
+## global webhook-ci config
 WEBHOOKCI_NS="webhook-ci"
 K8S_JOBS_NS="k8s-jobs"
-
+CHART_DIR=$(dirname $0)/webhook-ci
+## project webhook-ci instance
 WEBHOOK_HOST="${RELEASE}-${WEBHOOKCI_NS}.dev2.fabrique.social.gouv.fr"
 WEBHOOK_TOKEN_SECRET_NAME="${WEBHOOKCI_NS}-${RELEASE}"
-
 WEBHOOK_TOKEN=$(kubectl -n $WEBHOOKCI_NS get secret $WEBHOOK_TOKEN_SECRET_NAME -ojsonpath='{.data.token}' 2>/dev/null | base64 --decode)
 if [ -z "$WEBHOOK_TOKEN" ]; then
   WEBHOOK_TOKEN=$(cat /dev/urandom | base64 | head -n 1 |tr -dc '[:alnum:]' |cut -c -32)
@@ -22,8 +31,7 @@ if [ -z "$WEBHOOK_TOKEN" ]; then
     --from-literal=token=$WEBHOOK_TOKEN
 fi
 
-CHART_DIR=$(dirname $0)/webhook-ci
-
+# let's deploy the project webhook instance
 helm -n $WEBHOOKCI_NS template $RELEASE \
   --set project=$PROJECT \
   --set webhook.tokenSecretName=$WEBHOOK_TOKEN_SECRET_NAME \
@@ -37,9 +45,12 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set ingress.hosts[0].paths[0]=/ \
   --set ingress.tls[0].hosts[0]=${WEBHOOK_HOST} \
   --set ingress.tls[0].secretName=wildcard-crt \
-  $CHART_DIR | kubectl -n $WEBHOOKCI_NS apply -f -
+  --set-file envHookFile=.k8s/k8s-ci-hook/env.hook.sh \
+  --set env.SENTRY_PUBLIC_DSN=$SENTRY_PUBLIC_DSN \
+  $CHART_DIR \
+    | kubectl -n $WEBHOOKCI_NS apply -f -
 
-
+# display infos
 echo "
 webhook deployed at: https://$WEBHOOK_HOST/hooks/
 
