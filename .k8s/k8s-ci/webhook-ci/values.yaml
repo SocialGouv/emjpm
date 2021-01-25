@@ -139,6 +139,56 @@ hooks:
         name: context
         envname: CONTEXT
       files:
+  deploy:
+    enable: true
+    hook:
+      id: deploy
+      execute-command: /opt/deploy.sh
+      trigger-rule:
+        match:
+          type: value
+          value: '{{ getenv "WEBHOOK_TOKEN" | js }}'
+          parameter:
+            source: url
+            name: token
+      command-working-directory: /opt
+      response-message: OK
+      pass-environment-to-command:
+      - source: url
+        name: branch
+        envname: BRANCH
+      - source: url
+        name: context
+        envname: CONTEXT
+      - source: url
+        name: production
+        envname: PRODUCTION
+      files:
+  build-n-deploy:
+    enable: true
+    hook:
+      id: build-n-deploy
+      execute-command: /opt/build-n-deploy.sh
+      trigger-rule:
+        match:
+          type: value
+          value: '{{ getenv "WEBHOOK_TOKEN" | js }}'
+          parameter:
+            source: url
+            name: token
+      command-working-directory: /opt
+      response-message: OK
+      pass-environment-to-command:
+      - source: url
+        name: branch
+        envname: BRANCH
+      - source: url
+        name: context
+        envname: CONTEXT
+      - source: url
+        name: production
+        envname: PRODUCTION
+      files:
   # Leave this hook on all the time, disabling it will break livenessProbe
   status:
     enable: true
