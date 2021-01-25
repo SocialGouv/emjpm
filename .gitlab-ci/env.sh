@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-#
-
 export BRANCH_NAME=${BRANCH_NAME:=$CI_COMMIT_REF_SLUG}
 export COMMIT_TAG=${COMMIT_TAG:=$CI_COMMIT_TAG}
 export COMMIT=${COMMIT:=$CI_COMMIT_SHA}
@@ -59,32 +57,3 @@ fi
 export API_HOST="api-${DOMAIN}";
 export APP_HOST="${DOMAIN}";
 export HASURA_HOST="hasura-${DOMAIN}";
-
-export API_URL="https://${API_HOST}"
-export APP_URL="https://${APP_HOST}"
-
-#
-printenv | grep \
-  -e BRANCH_HASH \
-  -e BRANCH_NAME \
-  -e COMMIT \
-  -e COMMIT_TAG \
-  -e DOMAIN \
-  -e ENVIRONMENT \
-  -e HASH_SIZE \
-  -e JOB_ID \
-  -e K8S_NAMESPACE \
-  -e K8S_PROJECT \
-  -e NODE_ENV \
-  -e PROJECT_PATH \
-  -e REGISTRY \
-  \
-  -e API_HOST \
-  -e API_URL \
-  -e CERTIFICATE_NAME \
-  -e APP_URL \
-  -e HASURA_HOST \
-  \
-  -e CONTEXT \
-  -e PORT \
-  | sort

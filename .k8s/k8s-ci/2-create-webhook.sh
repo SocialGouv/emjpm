@@ -6,7 +6,8 @@ DEPLOY_ENV=${DEPLOY_ENV:-"dev"}
 
 GIT_REPOSITORY=https://github.com/SocialGouv/$PROJECT
 RELEASE="$PROJECT-$DEPLOY_ENV"
-KUBECTL_SERVER=https://rancher.fabrique.social.gouv.fr/k8s/clusters/c-bd7z2
+RANCHER_CLUSTER_ID="c-bd7z2"
+KUBECTL_SERVER="https://rancher.fabrique.social.gouv.fr/k8s/clusters/$RANCHER_CLUSTER_ID"
 
 WEBHOOKCI_NS="webhook-ci"
 K8S_JOBS_NS="k8s-jobs"

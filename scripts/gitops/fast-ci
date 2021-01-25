@@ -125,31 +125,26 @@ function k8s_create_namespace {
   fi
 
   # Create namespace
-  kubectl apply -f - <<EOF
+  [ -z "$(kubectl get namespace $K8S_NAMESPACE 2>/dev/null)" ] && kubectl create -f - <<EOF
 apiVersion: v1
 kind: Namespace
 metadata:
   annotations:
-    field.cattle.io/creatorId: gitlab
-    field.cattle.io/projectId: ${RANCHER_CLUSTER_ID}:${RANCHER_PROJECT_ID}
-    git/branch: ${BRANCH_HASH}
-    git/remote: https://github.com/SocialGouv/emjpm.git
+    field.cattle.io/projectId: $RANCHER_CLUSTER_ID:$RANCHER_PROJECT_ID
   labels:
     cert: wildcard
-    field.cattle.io/projectId: ${RANCHER_PROJECT_ID}
-  name: ${K8S_NAMESPACE}
+  name: $K8S_NAMESPACE
 EOF
 
   # Create secrets
-  export APP_URL_B64=$(echo $DOMAIN | base64)
-  envsubst < ./.k8s/secret-dev.yml > ./.k8s/manifests/secret-dev-generated.yml
-  kubectl apply -f ./.k8s/manifests/secret-dev-generated.yml -n ${K8S_NAMESPACE}
+  cat ./.k8s/secret-dev.yml | envsubst \
+    | kubectl -n ${K8S_NAMESPACE} apply -f -
 
   # Create azure volume secrets for anonymized export
   export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountname}')
   export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl get secret azure-${K8S_PROJECT}dev-volume -n ${K8S_PROJECT}-secret -ojsonpath='{.data.azurestorageaccountkey}')
-  envsubst < .k8s/azure-volume-secret.yml > ./.k8s/manifests/azure-volume-secret-generated.yml
-  kubectl apply -f ./.k8s/manifests/azure-volume-secret-generated.yml -n ${K8S_NAMESPACE}
+  cat .k8s/azure-volume-secret.yml | envsubst \
+    | kubectl -n ${K8S_NAMESPACE} apply -f -
 }
 
 # prod
@@ -275,33 +270,33 @@ function k8s_deploy_package {
   fi
 
   HELM_RENDER_ARGS="
+    --set host=${HOST}
     --set image.repository=${REGISTRY}/${CONTEXT}
     --set image.tag=${COMMIT_SHA}
-    --set image.pullPolicy=Always
-    --set ingress.hosts[0].host=${HOST}
-    --set ingress.tls[0].hosts[0]=${HOST}
   "
+
+  if [ "$CONTEXT" = "api" ]; then
+    HELM_RENDER_ARGS=" \
+      --set appURL=https://${DOMAIN}
+      ${HELM_RENDER_ARGS}"
+  fi
 
   if [ -n "$PRODUCTION" ]; then
     HELM_RENDER_ARGS=" \
       --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
       --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+      --set tlsSecretName=${CONTEXT}-certificate \
       ${HELM_RENDER_ARGS}"
   else
     HELM_RENDER_ARGS=" \
-      --set ingress.tls[0].secretName=wildcard-crt \
+      --set tlsSecretName=wildcard-crt \
       ${HELM_RENDER_ARGS}"
   fi
 
-  envsubst < packages/$CONTEXT/.k8s/values.yaml \
-    | helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s \
-      --values - \
-      > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
-
-
   echo "### DEPLOYING $CONTEXT/$IMAGE_TAG ON $HOST"
-  echo "#### manifests: packages/$CONTEXT/.k8s/manifests"
-  kubectl -n ${K8S_NAMESPACE} apply -f packages/$CONTEXT/.k8s/manifests
+
+  helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s \
+    | kubectl -n ${K8S_NAMESPACE} apply -f -
 
   ## force to pull latest image (and redeploy if failed previously)
   kubectl -n ${K8S_NAMESPACE} patch deployment $CONTEXT -p \

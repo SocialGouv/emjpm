@@ -4,70 +4,50 @@ metadata:
   name: {{ include "nodejs.fullname" . }}
   labels:
 {{ include "nodejs.labels" . | indent 4 }}
-  {{- with .Values.deployment.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
-  replicas: {{ .Values.deployment.replicaCount }}
+  replicas: {{ .Values.replicas }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nodejs.name" . }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
-      {{- with .Values.deployment.annotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
-      {{- with .Values.deployment.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: http
-              containerPort: {{ .Values.deployment.port }}
+              containerPort: 3000
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ .Values.deployment.livenessProbe.path }}
+              path: /
               port: http
-            initialDelaySeconds: {{ .Values.deployment.livenessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.deployment.livenessProbe.periodSeconds }}
-            failureThreshold: {{ .Values.deployment.livenessProbe.failureThreshold }}
-            timeoutSeconds: {{ .Values.deployment.livenessProbe.timeoutSeconds }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              path: {{ .Values.deployment.readinessProbe.path }}
+              path: /
               port: http
-            initialDelaySeconds: {{ .Values.deployment.readinessProbe.initialDelaySeconds }}
-            periodSeconds: {{ .Values.deployment.readinessProbe.periodSeconds }}
-            failureThreshold: {{ .Values.deployment.readinessProbe.failureThreshold }}
-            timeoutSeconds: {{ .Values.deployment.readinessProbe.timeoutSeconds }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 10
+            timeoutSeconds: 10
           resources:
-            {{- toYaml .Values.deployment.resources | nindent 12 }}
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
           env:
-            {{- toYaml .Values.deployment.env | nindent 12 }}
-      {{- with .Values.deployment.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.deployment.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.deployment.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.deployment.initContainers }}
-      initContainers:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+            - name: PORT
+              value: '3000'
+            - name: NODE_ENV
+              value: production
