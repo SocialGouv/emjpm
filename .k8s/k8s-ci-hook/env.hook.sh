@@ -39,14 +39,14 @@ case $CONTEXT in
     ;;
   api)
     export CONTEXT_DOMAIN="api-$APP_DOMAIN"
-    export HELM_ARGS="$HELM_ARGS \
+    export HELM_ARGS="$HELM_ARGS
       --set appURL=https://$APP_DOMAIN
       --set dbName=$DB_NAME
       "
     ;;
   hasura)
     export CONTEXT_DOMAIN="hasura-$APP_DOMAIN"
-    export HELM_ARGS="$HELM_ARGS \
+    export HELM_ARGS="$HELM_ARGS
       --set dbName=$DB_NAME
       "
     ;;
@@ -54,19 +54,19 @@ esac
 
 ## prod / dev
 if [ -n "$PRODUCTION" ]; then
-  export HELM_ARGS="$HELM_ARGS \
-    --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
-    --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
-    --set tlsSecretName=${CONTEXT}-certificate \
+  export HELM_ARGS="$HELM_ARGS
+    --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
+    --set-string ingress.annotations.kubernetes\.io/tls-acme=true
+    --set tlsSecretName=${CONTEXT}-certificate
     "
 else
-  export HELM_ARGS="${HELM_ARGS} \
-    --set tlsSecretName=wildcard-crt \
+  export HELM_ARGS="${HELM_ARGS}
+    --set tlsSecretName=wildcard-crt
     "
 fi
 
 ## common
-export HELM_ARGS="$HELM_ARGS \
+export HELM_ARGS="$HELM_ARGS
   --set labels.date=`date +'%s'`s
   --set host=${CONTEXT_DOMAIN}
   --set image.repository=${REGISTRY_URL}/${CONTEXT}
