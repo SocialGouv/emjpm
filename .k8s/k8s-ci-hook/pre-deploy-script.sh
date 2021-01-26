@@ -25,6 +25,7 @@ metadata:
     field.cattle.io/projectId: $RANCHER_CLUSTER_ID:$RANCHER_PROJECT_ID
   labels:
     cert: wildcard
+    field.cattle.io/projectId: $RANCHER_PROJECT_ID
   name: $K8S_NS
 EOF
 

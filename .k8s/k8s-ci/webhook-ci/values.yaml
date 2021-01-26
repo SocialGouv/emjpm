@@ -54,7 +54,7 @@ image:
   repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
   # tag: latest
   # pullPolicy: Always
-  tag: 1.7.12
+  tag: 1.7.13
   pullPolicy: IfNotPresent
 
 imagePullSecret: webhook-receiver-pullsecret
