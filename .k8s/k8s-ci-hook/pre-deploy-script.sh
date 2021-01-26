@@ -11,7 +11,7 @@ else
   export RANCHER_PROJECT_ID="p-57mxc"
 fi
 
-if [ -z "$(kubectl get namespace $K8S_NS 2>/dev/null)" ]; then
+if [ -z "$(kubectl --server $K8S_SERVER --token $K8S_TOKEN get namespace $K8S_NS 2>/dev/null)" ]; then
 
   # create namespace
   kubectl \
