@@ -63,7 +63,7 @@ fi
 
 ## common
 export HELM_ARGS="$HELM_ARGS \
-  --set labels.date `date +'%s'`
+  --set labels.date=`date +'%s'`s
   --set host=${CONTEXT_DOMAIN}
   --set image.repository=${REGISTRY_URL}/${CONTEXT}
   --set image.tag=${IMAGE_TAG}

@@ -3,4 +3,5 @@ kind: Namespace
 metadata:
   labels:
     cert: wildcard
+    {{- include "webhook-receiver.labels" . | nindent 4 }}
   name: {{ .Release.Namespace }}

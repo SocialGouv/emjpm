@@ -41,6 +41,9 @@ helm.sh/chart: {{ include "webhook-receiver.chart" . }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{- with .Values.labels }}
+{{- toYaml . | nindent 0 }}
+{{- end -}}
 {{- end -}}
 
 {{/*

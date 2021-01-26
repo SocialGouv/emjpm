@@ -3,6 +3,8 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: jobs-cleanup
+  labels:
+    {{- include "webhook-receiver.labels" . | nindent 4 }}
 spec:
   schedule: "*/30 * * * *"
   jobTemplate:

@@ -39,6 +39,8 @@ gitclone:
   image: alpine/git
   tag: v2.30.0
 
+labels: {}
+
 # Use this to insert env values into the deployment
 env: {}
 
@@ -50,10 +52,10 @@ replicaCount: 1
 
 image:
   repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
-  tag: 1.7.0
-  pullPolicy: IfNotPresent
-  # tag: latest
-  # pullPolicy: Always
+  tag: latest
+  pullPolicy: Always
+  # tag: 1.7.3
+  # pullPolicy: IfNotPresent
 
 imagePullSecret: webhook-receiver-pullsecret
 
