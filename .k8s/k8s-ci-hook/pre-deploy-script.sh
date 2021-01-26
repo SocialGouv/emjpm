@@ -1,4 +1,4 @@
-#!/usr/bien/env bash
+#!/usr/bin/env bash
 
 ### this file will be loaded by git clone $repo from deploy-job
 ### it's path is specified in PRE_DEPLOY_SCRIPT var in env.hook.sh
