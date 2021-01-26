@@ -3,6 +3,14 @@
 ### this file will be loaded by git clone $repo from deploy-job
 ### it's path is specified in PRE_DEPLOY_SCRIPT var in env.hook.sh
 
+if [ -n "$PRODUCTION" ]; then
+  export RANCHER_CLUSTER_ID="c-lfcxv"
+  export RANCHER_PROJECT_ID="p-ttzld"
+else
+  export RANCHER_CLUSTER_ID="c-bd7z2"
+  export RANCHER_PROJECT_ID="p-57mxc"
+fi
+
 if [ -z "$(kubectl get namespace $K8S_NS 2>/dev/null)" ]; then
 
   # create namespace
