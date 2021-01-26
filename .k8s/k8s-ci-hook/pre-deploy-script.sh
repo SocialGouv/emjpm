@@ -8,6 +8,7 @@ if [ -z "$(kubectl get namespace $K8S_NS 2>/dev/null)" ]; then
   # create namespace
   kubectl \
     --server $K8S_SERVER \
+    --token $K8S_TOKEN \
     create -f - <<EOF
 apiVersion: v1
 kind: Namespace
@@ -22,7 +23,8 @@ EOF
   # copy secrets to new namespace
   SECRET_NAME="${PROJECT}-secret"
   SECRET_NAMESPACE="${PROJECT}-secret"
-  kubectl -n $SECRET_NAMESPACE get secret $SECRET_NAME -oyaml \
-    | kubectl -n $K8S_NS apply -f -
+  kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+    -n $SECRET_NAMESPACE get secret $SECRET_NAME -oyaml \
+    | kubectl --server $K8S_SERVER --token $K8S_TOKEN -n $K8S_NS apply -f -
 
 fi
