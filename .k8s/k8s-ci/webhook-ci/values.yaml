@@ -50,7 +50,7 @@ replicaCount: 1
 
 image:
   repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
-  tag: 1.4.0
+  tag: 1.6.0
   pullPolicy: IfNotPresent
   # tag: latest
   # pullPolicy: Always

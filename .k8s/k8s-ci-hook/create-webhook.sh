@@ -12,15 +12,14 @@ RELEASE="$PROJECT-$DEPLOY_ENV"
 # project build
 ## build args
 SENTRY_PUBLIC_DSN=https://d9ba9b75ff784cba87abd847b6162b02@sentry.fabrique.social.gouv.fr/3
-# project deployment
-RANCHER_CLUSTER_ID="c-bd7z2"
-KUBECTL_SERVER="https://rancher.fabrique.social.gouv.fr/k8s/clusters/$RANCHER_CLUSTER_ID"
 
 # webhook deployment
 ## global webhook-ci config
+WEBHOOK_RANCHER_CLUSTER_ID="c-bd7z2"
+WEBHOOK_K8S_SERVER="https://rancher.fabrique.social.gouv.fr/k8s/clusters/$WEBHOOK_RANCHER_CLUSTER_ID"
 WEBHOOKCI_NS="webhook-ci"
 K8S_JOBS_NS="k8s-jobs"
-CHART_DIR=$(dirname $0)/webhook-ci
+CHART_DIR=".k8s/k8s-ci/webhook-ci"
 ## project webhook-ci instance
 WEBHOOK_HOST="${RELEASE}-${WEBHOOKCI_NS}.dev2.fabrique.social.gouv.fr"
 WEBHOOK_TOKEN_SECRET_NAME="${WEBHOOKCI_NS}-${RELEASE}"
@@ -36,7 +35,7 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set project=$PROJECT \
   --set webhook.tokenSecretName=$WEBHOOK_TOKEN_SECRET_NAME \
   --set git.repository=$GIT_REPOSITORY \
-  --set kubectl.server=$KUBECTL_SERVER \
+  --set kubectl.server=$WEBHOOK_K8S_SERVER \
   --set kubectl.tokenSecretName=k8s \
   --set kubectl.tokenSecretKey=token \
   --set k8sJobsNamespace=$K8S_JOBS_NS \

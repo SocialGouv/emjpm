@@ -53,11 +53,13 @@ spec:
           env:
             - name: PGSSLMODE
               value: require
-            - name: HASURA_GRAPHQL_DATABASE_URL
+            - name: DATABASE_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
-                  key: DATABASE_URL
+                  key: DATABASE_CONNECTION
+            - name: HASURA_GRAPHQL_DATABASE_URL
+              value: $(DATABASE_CONNECTION)/{{ required "dbName must be specified" .Values.dbName }}
             - name: HASURA_GRAPHQL_ENABLE_CONSOLE
               value: 'true'
             - name: HASURA_GRAPHQL_UNAUTHORIZED_ROLE

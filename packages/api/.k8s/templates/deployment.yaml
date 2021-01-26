@@ -67,11 +67,13 @@ spec:
               value: require
             - name: HASURA_GRAPHQL_URI
               value: 'http://hasura/v1/graphql'
-            - name: DATABASE_URL
+            - name: DATABASE_CONNECTION
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
-                  key: DATABASE_URL
+                  key: DATABASE_CONNECTION
+            - name: DATABASE_URL
+              value: $(DATABASE_CONNECTION)/{{ required "dbName must be specified" .Values.dbName }}
             - name: PORT
               value: '4000'
             - name: NODE_ENV

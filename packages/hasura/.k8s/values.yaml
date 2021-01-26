@@ -3,6 +3,7 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 secretName: emjpm-secret
+dbName: ""
 replicas: 1
 labels: {}
 host: hasura-emjpm.dev2.fabrique.social.gouv.fr
