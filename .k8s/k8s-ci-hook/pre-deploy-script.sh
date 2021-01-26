@@ -32,7 +32,8 @@ EOF
   SECRET_NAME="${PROJECT}-secret"
   SECRET_NAMESPACE="${PROJECT}-secret"
   kubectl --server $K8S_SERVER --token $K8S_TOKEN \
-    -n $SECRET_NAMESPACE get secret $SECRET_NAME -oyaml \
+    -n $SECRET_NAMESPACE get secret $SECRET_NAME -o json \
+    | jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' \
     | kubectl --server $K8S_SERVER --token $K8S_TOKEN -n $K8S_NS apply -f -
 
 fi
