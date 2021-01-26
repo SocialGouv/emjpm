@@ -47,6 +47,7 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set-file envHookFile=.k8s/k8s-ci-hook/env.hook.sh \
   --set env.SENTRY_PUBLIC_DSN=$SENTRY_PUBLIC_DSN \
   --set labels.date=`date +'%s'`s \
+  --set registry.url=harbor.fabrique.social.gouv.fr \
   $CHART_DIR \
     | kubectl -n $WEBHOOKCI_NS apply -f -
 
