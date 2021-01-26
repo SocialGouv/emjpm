@@ -6,7 +6,7 @@ metadata:
   labels:
 {{ include "nodejs.labels" . | indent 4 }}
   annotations:
-{{ .Values.ingress.annotations | indent 4 }}
+{{ .Values.ingress.annotations | toYaml | indent 4 }}
 spec:
   tls:
     - hosts:
