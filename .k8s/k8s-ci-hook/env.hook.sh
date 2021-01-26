@@ -29,7 +29,7 @@ else
 fi
 export APP_DOMAIN="${DOMAIN_SLUG}-${ROOT_DOMAIN}"
 export K8S_SERVER_ROOT_URL="https://rancher.fabrique.social.gouv.fr/k8s/clusters"
-export K8S_SERVER="$K8S_SERVER_ROOT_URL/$RANCHER_CLUSTER_ID"
+export K8S_DEPLOY_SERVER="$K8S_SERVER_ROOT_URL/$RANCHER_CLUSTER_ID"
 export PRE_DEPLOY_SCRIPT=".k8s/k8s-ci-hook/pre-deploy-script.sh"
 
 ## context
