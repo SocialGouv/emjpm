@@ -40,11 +40,15 @@ case $CONTEXT in
   api)
     export CONTEXT_DOMAIN="api-$APP_DOMAIN"
     export HELM_ARGS="$HELM_ARGS \
-      --set appURL=https://${APP_DOMAIN}
+      --set appURL=https://$APP_DOMAIN
+      --set dbName=$DB_NAME
       "
     ;;
   hasura)
     export CONTEXT_DOMAIN="hasura-$APP_DOMAIN"
+    export HELM_ARGS="$HELM_ARGS \
+      --set dbName=$DB_NAME
+      "
     ;;
 esac
 
