@@ -16,16 +16,16 @@ kubectl:
 k8sJobsNamespace:
 
 registry:
-  # url: harbor.fabrique.social.gouv.fr
-  url: registry2.dev2.fabrique.social.gouv.fr
+  url: harbor.fabrique.social.gouv.fr
+  # url: registry2.dev2.fabrique.social.gouv.fr
   pushPath:
-  # secretName: registry-creds
   secretName: harbor-creds
+  # secretName: registry2-creds
   userKey: user
   passKey: pass
   pushTag: latest
   cacheTag: buildcache
-  cacheUrl: registry2.dev2.fabrique.social.gouv.fr
+  cacheUrl: registry.dev2.fabrique.social.gouv.fr
   cachePushPath:
   cacheSecretName: registry-creds
   cacheUserKey: user
