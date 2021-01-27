@@ -33,7 +33,7 @@ fi
 # let's deploy the project webhook instance
 helm -n $WEBHOOKCI_NS template $RELEASE \
   --set project=$PROJECT \
-  --set contextList=$CONTEXT_LIST \
+  --set contextList="$(echo $CONTEXT_LIST | sed 's/,/\\,/g')" \
   --set webhook.tokenSecretName=$WEBHOOK_TOKEN_SECRET_NAME \
   --set git.repository=$GIT_REPOSITORY \
   --set kubectl.server=$WEBHOOK_K8S_SERVER \
