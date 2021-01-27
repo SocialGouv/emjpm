@@ -4,6 +4,7 @@ set -e
 # project and env
 ## project global config
 PROJECT=emjpm
+CONTEXT_LIST="hasura,api,app"
 ## project repo for build sources and deployment config
 GIT_REPOSITORY=https://github.com/SocialGouv/$PROJECT
 RELEASE="$PROJECT"
@@ -32,6 +33,7 @@ fi
 # let's deploy the project webhook instance
 helm -n $WEBHOOKCI_NS template $RELEASE \
   --set project=$PROJECT \
+  --set contextList=$CONTEXT_LIST \
   --set webhook.tokenSecretName=$WEBHOOK_TOKEN_SECRET_NAME \
   --set git.repository=$GIT_REPOSITORY \
   --set kubectl.server=$WEBHOOK_K8S_SERVER \

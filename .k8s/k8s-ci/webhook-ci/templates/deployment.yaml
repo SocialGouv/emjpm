@@ -38,6 +38,8 @@ spec:
           # SPECIFIC TO CI ENV FROM VALUES
           - name: PROJECT
             value: {{ required "project must be specified" .Values.project }}
+          - name: CONTEXT_LIST
+            value: {{ .Values.contextList }}
           - name: WEBHOOK_TOKEN
             valueFrom:
               secretKeyRef:
