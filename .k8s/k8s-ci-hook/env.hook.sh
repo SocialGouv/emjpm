@@ -69,7 +69,7 @@ fi
 export HELM_ARGS="$HELM_ARGS
   --set labels.date=`date +'%s'`s
   --set host=${CONTEXT_DOMAIN}
-  --set image.repository=${REGISTRY_URL}/${CONTEXT}
+  --set image.repository=${REGISTRY_URL}/${REGISTRY_PUSH_PATH}
   --set image.tag=${IMAGE_TAG}
   --set secretName=emjpm-secret
   "
