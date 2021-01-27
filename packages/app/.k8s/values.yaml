@@ -1,7 +1,7 @@
 image:
   repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 replicas: 1
 labels: {}
 host: emjpm.dev2.fabrique.social.gouv.fr

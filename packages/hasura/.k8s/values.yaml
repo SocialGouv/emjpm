@@ -1,7 +1,7 @@
 image:
   repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/hasura
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 secretName: emjpm-secret
 dbName: ""
 replicas: 1

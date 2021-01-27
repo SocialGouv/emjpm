@@ -130,7 +130,7 @@ hooks:
     enable: true
     hook:
       id: build
-      execute-command: /opt/build.sh
+      execute-command: /opt/k8s-ci/build.sh
       trigger-rule:
         match:
           type: value
@@ -139,7 +139,8 @@ hooks:
             source: url
             name: token
       command-working-directory: /opt
-      response-message: OK
+      # response-message: OK
+      include-command-output-in-response: true
       pass-environment-to-command:
       - source: url
         name: branch
@@ -152,7 +153,7 @@ hooks:
     enable: true
     hook:
       id: deploy
-      execute-command: /opt/deploy.sh
+      execute-command: /opt/k8s-ci/deploy.sh
       trigger-rule:
         match:
           type: value
@@ -161,7 +162,8 @@ hooks:
             source: url
             name: token
       command-working-directory: /opt
-      response-message: OK
+      # response-message: OK
+      include-command-output-in-response: true
       pass-environment-to-command:
       - source: url
         name: branch
@@ -177,7 +179,8 @@ hooks:
     enable: true
     hook:
       id: build-n-deploy
-      execute-command: /opt/build-n-deploy.sh
+      command-working-directory: /opt
+      execute-command: /opt/k8s-ci/build-n-deploy.sh
       trigger-rule:
         match:
           type: value
@@ -186,7 +189,8 @@ hooks:
             source: url
             name: token
       command-working-directory: /opt
-      response-message: OK
+      # response-message: OK
+      include-command-output-in-response: true
       pass-environment-to-command:
       - source: url
         name: branch
