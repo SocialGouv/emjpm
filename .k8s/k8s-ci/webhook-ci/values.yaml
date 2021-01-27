@@ -16,13 +16,20 @@ kubectl:
 k8sJobsNamespace:
 
 registry:
+  # url: harbor.fabrique.social.gouv.fr
+  url: registry2.dev2.fabrique.social.gouv.fr
   pushPath:
-  url: registry.dev2.fabrique.social.gouv.fr
-  secretName: docker-creds
-  passKey: pass
+  # secretName: registry-creds
+  secretName: harbor-creds
   userKey: user
+  passKey: pass
   pushTag: latest
   cacheTag: buildcache
+  cacheUrl: registry2.dev2.fabrique.social.gouv.fr
+  cachePushPath:
+  cacheSecretName: registry-creds
+  cacheUserKey: user
+  cachePassKey: pass
 
 build:
   context: ""
@@ -54,7 +61,7 @@ image:
   repository: registry.gitlab.factory.social.gouv.fr/devthejo/webhook-k8s-ci
   # tag: latest
   # pullPolicy: Always
-  tag: 1.7.26
+  tag: 1.7.31
   pullPolicy: IfNotPresent
 
 imagePullSecret: webhook-receiver-pullsecret

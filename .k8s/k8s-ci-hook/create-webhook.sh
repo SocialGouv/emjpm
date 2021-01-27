@@ -4,10 +4,9 @@ set -e
 # project and env
 ## project global config
 PROJECT=emjpm
-DEPLOY_ENV=${DEPLOY_ENV:-"dev"}
 ## project repo for build sources and deployment config
 GIT_REPOSITORY=https://github.com/SocialGouv/$PROJECT
-RELEASE="$PROJECT-$DEPLOY_ENV"
+RELEASE="$PROJECT"
 
 # project build
 ## build args
@@ -47,7 +46,6 @@ helm -n $WEBHOOKCI_NS template $RELEASE \
   --set-file envHookFile=.k8s/k8s-ci-hook/env.hook.sh \
   --set env.SENTRY_PUBLIC_DSN=$SENTRY_PUBLIC_DSN \
   --set labels.date=`date +'%s'`s \
-  --set registry.url=harbor.fabrique.social.gouv.fr \
   $CHART_DIR \
     | kubectl -n $WEBHOOKCI_NS apply -f -
 

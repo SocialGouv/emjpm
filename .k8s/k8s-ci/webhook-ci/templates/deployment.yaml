@@ -86,6 +86,16 @@ spec:
             value: {{ .Values.registry.pushTag }}
           - name: REGISTRY_CACHE_TAG
             value: {{ .Values.registry.cacheTag }}
+          - name: REGISTRY_CACHE_URL
+            value: {{ .Values.registry.cacheUrl }}
+          - name: REGISTRY_CACHE_PUSH_PATH
+            value: {{ .Values.registry.cachePushPath }}
+          - name: REGISTRY_CACHE_SECRET_NAME
+            value: {{ .Values.registry.cacheSecretName }}
+          - name: REGISTRY_CACHE_USER_KEY
+            value: {{ .Values.registry.cacheUserKey }}
+          - name: REGISTRY_CACHE_PASS_KEY
+            value: {{ .Values.registry.cachePassKey }}
           ports:
             - name: http
               containerPort: 9000
