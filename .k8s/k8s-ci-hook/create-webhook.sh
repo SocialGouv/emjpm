@@ -19,7 +19,7 @@ WEBHOOK_RANCHER_CLUSTER_ID="c-bd7z2"
 WEBHOOK_K8S_SERVER="https://rancher.fabrique.social.gouv.fr/k8s/clusters/$WEBHOOK_RANCHER_CLUSTER_ID"
 WEBHOOKCI_NS="webhook-ci"
 K8S_JOBS_NS="k8s-jobs"
-CHART_DIR=".k8s/k8s-ci/webhook-ci"
+CHART_DIR="/lab/betagouv/k8s-ci"
 ## project webhook-ci instance
 WEBHOOK_HOST="${RELEASE}-${WEBHOOKCI_NS}.dev2.fabrique.social.gouv.fr"
 WEBHOOK_TOKEN_SECRET_NAME="${WEBHOOKCI_NS}-${RELEASE}"
