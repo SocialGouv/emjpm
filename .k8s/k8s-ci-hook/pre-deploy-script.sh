@@ -41,11 +41,6 @@ EOF
   # init managed db
   DB_SECRET_NS="${PROJECT}-secret"
   DB_SECRET_NAME="azure-pg-admin-user"
-  if $(kubectl get po -l 'app=init-azure-pg-job' \
-    --field-selector status.phase=Succeeded \
-    --field-selector status.phase=Running \
-    --field-selector status.phase=Pending)
-
   export PGHOST=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
     -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGHOST}' \
     | base64 --decode)
