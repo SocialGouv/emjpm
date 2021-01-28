@@ -112,7 +112,7 @@ spec:
               port: http
           volumeMounts:
             - name: configs
-              mountPath: "/opt/k8s-ci/env.hook.sh"
+              mountPath: "/opt/k8s-ci/jobs/env.hook.sh"
               subPath: "env.hook.sh"
             - name: configs
               mountPath: "/etc/webhook/hooks.yaml"
