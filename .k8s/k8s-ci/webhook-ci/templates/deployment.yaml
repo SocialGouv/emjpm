@@ -49,6 +49,10 @@ spec:
             value: {{ .Values.k8sJobsNamespace }}
           - name: K8S_SERVER
             value: {{ required "kubectl.server must be specified" .Values.kubectl.server }}
+          - name: K8S_JOB_TOKEN_SECRET_NAME
+            value: {{ required "kubectl.tokenSecretName must be specified" .Values.kubectl.tokenSecretName }}
+          - name: K8S_JOB_TOKEN_SECRET_KEY
+            value: {{ .Values.kubectl.tokenSecretKey }}
           - name: K8S_TOKEN
             valueFrom:
               secretKeyRef:
