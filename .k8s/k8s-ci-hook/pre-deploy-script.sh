@@ -53,7 +53,7 @@ EOF
 
   DEPLOYMENT_PGUSER=emjpm
   if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw ${DB_NAME}) ]; then
-    psql -v ON_ERROR_STOP=1 postgres  <<-EOSQL
+    psql -v ON_ERROR_STOP=1 postgres <<EOF
       CREATE DATABASE ${DB_NAME};
       \c ${DB_NAME}
 
@@ -61,7 +61,8 @@ EOF
 
       GRANT CONNECT ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
       GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
-EOSQL
+EOF
+
   fi
 
 fi
