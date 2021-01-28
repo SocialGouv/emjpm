@@ -11,6 +11,7 @@ else
   export RANCHER_PROJECT_ID="p-57mxc"
 fi
 
+# if namespace doesn't exists
 if [ -z "$(kubectl --server $K8S_SERVER --token $K8S_TOKEN get namespace $K8S_NS 2>/dev/null)" ]; then
 
   # create namespace
@@ -30,11 +31,42 @@ metadata:
 EOF
 
   # copy secrets to new namespace
+  SECRET_NS="${PROJECT}-secret"
   SECRET_NAME="${PROJECT}-secret"
-  SECRET_NAMESPACE="${PROJECT}-secret"
   kubectl --server $K8S_SERVER --token $K8S_TOKEN \
-    -n $SECRET_NAMESPACE get secret $SECRET_NAME -o json \
+    -n $SECRET_NS get secret $SECRET_NAME -o json \
     | jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' \
     | kubectl --server $K8S_SERVER --token $K8S_TOKEN -n $K8S_NS apply -f -
+
+  # init managed db
+  DB_SECRET_NS="${PROJECT}-secret"
+  DB_SECRET_NAME="azure-pg-admin-user"
+  if $(kubectl get po -l 'app=init-azure-pg-job' \
+    --field-selector status.phase=Succeeded \
+    --field-selector status.phase=Running \
+    --field-selector status.phase=Pending)
+
+  export PGHOST=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGHOST}' \
+    | base64 --decode)
+  export PGUSER=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGUSER}' \
+    | base64 --decode)
+  export PGPASSWORD=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGPASSWORD}' \
+    | base64 --decode)
+
+  DEPLOYMENT_PGUSER=emjpm
+  if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw ${DB_NAME}) ]; then
+    psql -v ON_ERROR_STOP=1 postgres  <<-EOSQL
+      CREATE DATABASE ${DB_NAME};
+      \c ${DB_NAME}
+
+      CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+      GRANT CONNECT ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
+      GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
+    EOSQL
+  fi
 
 fi
