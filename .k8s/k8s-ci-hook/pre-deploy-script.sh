@@ -11,10 +11,9 @@ else
   export RANCHER_PROJECT_ID="p-57mxc"
 fi
 
-# if namespace doesn't exists
+# create namespace if doesn't exists
 if [ -z "$(kubectl --server $K8S_SERVER --token $K8S_TOKEN get namespace $K8S_NS 2>/dev/null)" ]; then
 
-  # create namespace
   kubectl \
     --server $K8S_SERVER \
     --token $K8S_TOKEN \
@@ -37,32 +36,30 @@ EOF
     -n $SECRET_NS get secret $SECRET_NAME -o json \
     | jq 'del(.metadata["namespace","creationTimestamp","resourceVersion","selfLink","uid"])' \
     | kubectl --server $K8S_SERVER --token $K8S_TOKEN -n $K8S_NS apply -f -
+fi
 
-  # init managed db
-  DB_SECRET_NS="${PROJECT}-secret"
-  DB_SECRET_NAME="azure-pg-admin-user"
-  export PGHOST=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
-    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGHOST}' \
-    | base64 --decode)
-  export PGUSER=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
-    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGUSER}' \
-    | base64 --decode)
-  export PGPASSWORD=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
-    -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGPASSWORD}' \
-    | base64 --decode)
+# create managed db if doesn't exists
+DB_SECRET_NS="${PROJECT}-secret"
+DB_SECRET_NAME="azure-pg-admin-user"
+export PGHOST=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+  -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGHOST}' \
+  | base64 --decode)
+export PGUSER=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+  -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGUSER}' \
+  | base64 --decode)
+export PGPASSWORD=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
+  -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGPASSWORD}' \
+  | base64 --decode)
+DEPLOYMENT_PGUSER=$PROJECT
+if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw ${DB_NAME}) ]; then
+  psql -v ON_ERROR_STOP=1 postgres <<EOF
+    CREATE DATABASE ${DB_NAME};
+    \c ${DB_NAME}
 
-  DEPLOYMENT_PGUSER=emjpm
-  if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw ${DB_NAME}) ]; then
-    psql -v ON_ERROR_STOP=1 postgres <<EOF
-      CREATE DATABASE ${DB_NAME};
-      \c ${DB_NAME}
+    CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-      CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
-      GRANT CONNECT ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
-      GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
+    GRANT CONNECT ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
+    GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${DEPLOYMENT_PGUSER};
 EOF
-
-  fi
 
 fi
