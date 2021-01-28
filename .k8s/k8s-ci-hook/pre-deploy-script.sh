@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 ### this file will be loaded by git clone $repo from deploy-job
-### it's path is specified in PRE_DEPLOY_SCRIPT var in env.hook.sh
+### it's path is specified in CI_PRE_DEPLOY_SCRIPT var in env.hook.sh
 
-if [ -n "$PRODUCTION" ]; then
+if [ -n "$CI_PRODUCTION" ]; then
   export RANCHER_CLUSTER_ID="c-lfcxv"
   export RANCHER_PROJECT_ID="p-ttzld"
 else
@@ -51,7 +51,7 @@ export PGPASSWORD=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
   -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGPASSWORD}' \
   | base64 --decode)
 DEPLOYMENT_PGUSER=$PROJECT
-if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw ${DB_NAME}) ]; then
+if ! [ $(psql -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME") ]; then
   psql -v ON_ERROR_STOP=1 postgres <<EOF
     CREATE DATABASE ${DB_NAME};
     \c ${DB_NAME}

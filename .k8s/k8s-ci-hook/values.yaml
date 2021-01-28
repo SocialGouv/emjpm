@@ -1,0 +1,108 @@
+project: emjpm
+contextList: "hasura,api,app"
+git:
+  repository: https://github.com/SocialGouv/emjpm
+env:
+  SENTRY_PUBLIC_DSN: https://d9ba9b75ff784cba87abd847b6162b02@sentry.fabrique.social.gouv.fr/3
+webhook:
+  tokenSecretName: ci-webhook-token
+kubectl:
+  server: https://rancher.fabrique.social.gouv.fr/k8s/clusters/c-bd7z2
+  tokenSecretName: k8s
+  tokenSecretKey: token
+  k8sJobsNamespace: k8s-jobs-emjpm
+ingress:
+  enabled: true
+  hosts:
+    - host: k8s-ci-emjpm.dev2.fabrique.social.gouv.fr
+      paths:
+        - /
+  tls:
+    - hosts:
+      - k8s-ci-emjpm.dev2.fabrique.social.gouv.fr
+      secretName: wildcard-crt
+
+labels: {}
+
+# actions:
+#   myCustomAction: |
+#     #!/bin/sh
+#     echo HELLO WORLD !
+
+
+envHookFile: |
+  #!/usr/bin/env bash
+
+  ### this file is embeded in webhook configmap when running create-webhook.sh
+
+  # build vars
+  ## context
+  case $CI_CONTEXT in
+    app)
+      export BUILD_ARGS="$BUILD_ARGS \
+        --opt build-arg:REACT_APP_SENTRY_PUBLIC_DSN=${SENTRY_PUBLIC_DSN} \
+        "
+      ;;
+    api)
+      ;;
+    hasura)
+      ;;
+  esac
+
+
+  # deploy vars
+  if [ -n "$CI_PRODUCTION" ]; then
+    export ROOT_DOMAIN=emjpm.fabrique.social.gouv.fr
+    export RANCHER_CLUSTER_ID="c-lfcxv"
+    export RANCHER_PROJECT_ID="p-ttzld"
+  else
+    export ROOT_DOMAIN=emjpm.dev2.fabrique.social.gouv.fr
+    export RANCHER_CLUSTER_ID="c-bd7z2"
+    export RANCHER_PROJECT_ID="p-57mxc"
+  fi
+  export APP_DOMAIN="${DOMAIN_SLUG}-${ROOT_DOMAIN}"
+  export K8S_SERVER_ROOT_URL="https://rancher.fabrique.social.gouv.fr/k8s/clusters"
+  export K8S_DEPLOY_SERVER="$K8S_SERVER_ROOT_URL/$RANCHER_CLUSTER_ID"
+  export CI_PRE_DEPLOY_SCRIPT=".k8s/k8s-ci-hook/pre-deploy-script.sh"
+
+  ## context
+  case $CI_CONTEXT in
+    app)
+      export CONTEXT_DOMAIN=$APP_DOMAIN
+      ;;
+    api)
+      export CONTEXT_DOMAIN="api-$APP_DOMAIN"
+      export HELM_ARGS="$HELM_ARGS
+        appURL=https://$APP_DOMAIN
+        dbName=$DB_NAME
+        "
+      ;;
+    hasura)
+      export CONTEXT_DOMAIN="hasura-$APP_DOMAIN"
+      export HELM_ARGS="$HELM_ARGS
+        dbName=$DB_NAME
+        "
+      ;;
+  esac
+
+  ## prod / dev
+  if [ -n "$CI_PRODUCTION" ]; then
+    export HELM_ARGS="$HELM_ARGS
+      ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
+      --set-string ingress.annotations.kubernetes\.io/tls-acme=true
+      tlsSecretName=${CI_CONTEXT}-certificate
+      "
+  else
+    export HELM_ARGS="${HELM_ARGS}
+      tlsSecretName=wildcard-crt
+      "
+  fi
+
+  ## common
+  export HELM_ARGS="$HELM_ARGS
+    labels.date=`date +'%s'`s
+    host=${CONTEXT_DOMAIN}
+    image.repository=${REGISTRY_URL}/${REGISTRY_PUSH_PATH}
+    image.tag=${IMAGE_TAG}
+    secretName=emjpm-secret
+    "
