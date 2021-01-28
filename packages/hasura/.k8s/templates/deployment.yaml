@@ -12,10 +12,6 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
-      {{- with .Values.deployment.annotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:

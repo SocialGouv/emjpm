@@ -4,10 +4,6 @@ metadata:
   name: {{ include "nodejs.fullname" . }}
   labels:
 {{ include "nodejs.labels" . | indent 4 }}
-  {{- with .Values.deployment.annotations }}
-  annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
 spec:
   replicas: {{ .Values.replicas }}
   selector:
