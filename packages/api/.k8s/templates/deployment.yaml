@@ -13,7 +13,8 @@ spec:
   template:
     metadata:
       annotations: {}
-      labels: {}
+      labels:
+{{ include "nodejs.labels" . | indent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
