@@ -41,9 +41,8 @@ stages:
     # Set own wildcard when deploying in dev environment
     - >-
       HELM_RENDER_ARGS="
+        --set host=${DOMAIN}
         --set image.tag=$CI_COMMIT_SHA
-        --set ingress.hosts[0].host=${HOST}
-        --set ingress.tls[0].hosts[0]=${HOST}
         ${HELM_RENDER_ARGS}"
     # Set own certificate when deploying in prod environment
     - |-
@@ -51,18 +50,18 @@ stages:
         HELM_RENDER_ARGS=" \
           --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
           --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
+          --set tlsSecretName=${CONTEXT}-certificate \
           ${HELM_RENDER_ARGS}"
       else
         HELM_RENDER_ARGS=" \
-          --set ingress.tls[0].secretName=wildcard-crt \
+          --set tlsSecretName=wildcard-crt \
           ${HELM_RENDER_ARGS}"
       fi
 
-    # generate manifest using helm template
-    - envsubst < packages/$CONTEXT/.k8s/values.yaml  | helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s --values - > packages/$CONTEXT/.k8s/manifests/chart-generated.yaml
-
-    # apply manifests
-    - kubectl apply -f packages/$CONTEXT/.k8s/manifests
+    # generate and apply manifest using helm template and kubectl
+    - |
+      helm template ${HELM_RENDER_ARGS} ${CONTEXT} packages/$CONTEXT/.k8s \
+        | kubectl apply -f -
 
 .base_docker_kubectl_image_stage:
   image:
@@ -268,7 +267,6 @@ Create namespace:
     - kubectl config set-context --current --namespace=${K8S_NAMESPACE}
     #
     # Create secrets
-    - export APP_URL_B64=$(echo $APP_URL | base64)
     - envsubst < ./.k8s/secret-dev.yml > ./secret-dev.yml
     - kubectl apply -f ./secret-dev.yml -n ${K8S_NAMESPACE}
     #
@@ -511,8 +509,9 @@ Deploy api (dev):
     - .dev_stage
   variables:
     HELM_RENDER_ARGS: >-
-      --set deployment.resources.requests.memory=128Mi
-      --set deployment.resources.requests.cpu=1m
+      --set appURL=https://${DOMAIN}
+      --set resources.requests.memory=128Mi
+      --set resources.requests.cpu=1m
 
 Deploy api (prod):
   extends:
@@ -542,7 +541,7 @@ Deploy app (dev):
     - .dev_stage
   variables:
     HELM_RENDER_ARGS: >-
-      --set deployment.resources.requests.memory=128Mi
+      --set resources.requests.memory=128Mi
 
 Deploy app (prod):
   extends:
@@ -620,8 +619,8 @@ Deploy hasura (dev):
     - .dev_stage
   variables:
     HELM_RENDER_ARGS: >-
-      --set deployment.resources.requests.memory=128Mi
-      --set deployment.resources.requests.cpu=5m
+      --set resources.requests.memory=128Mi
+      --set resources.requests.cpu=5m
 
 Deploy hasura (prod):
   extends:
@@ -852,7 +851,7 @@ Notify Ready to Prod:
   script:
     - |
       source ./.gitlab-ci/env.sh
-      echo '{"text":"✨ dev version deployed at '${APP_URL}'"}' \
+      echo '{"text":"✨ dev version deployed at '${DOMAIN}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
 
 Notify Dev (mattermost):

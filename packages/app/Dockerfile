@@ -41,6 +41,7 @@ FROM build_${BUILD_ENV} as builder
 FROM node as server
 
 ENV NODE_ENV=production
+ENV PORT=3000
 
 WORKDIR /app
 

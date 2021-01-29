@@ -7,7 +7,6 @@ docker-compose.override.yaml
 *.log
 .eslintcache
 .npm
-.k8s/manifests/*-generated.yml
 
 dump
 .env
