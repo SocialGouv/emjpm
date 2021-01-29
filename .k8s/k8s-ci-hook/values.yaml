@@ -11,7 +11,11 @@ webhook:
   tokenSecretName: ci-webhook-token
 deployJob:
   # image: registry.gitlab.factory.social.gouv.fr/socialgouv/sre/k8s-ci/k8s-ci-deploy
-  imageTag: 1.0.1
+  imageTag: 1.0.0
+image:
+  # repository: registry.gitlab.factory.social.gouv.fr/socialgouv/sre/k8s-ci
+  tag: 1.0.5
+
 kubectl:
   server: https://rancher.fabrique.social.gouv.fr/k8s/clusters/c-bd7z2
   tokenSecretName: k8s
