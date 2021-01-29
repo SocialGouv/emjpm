@@ -1,57 +1,21 @@
 image:
   repository: registry.gitlab.factory.social.gouv.fr/socialgouv/emjpm/app
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
+replicas: 1
 labels: {}
-deployment:
-  annotations: {}
-  replicaCount: 1
-  imagePullSecrets: []
-  port: 3000
-  livenessProbe:
-    initialDelaySeconds: 5
-    path: /
-    periodSeconds: 10
-    failureThreshold: 10
-    timeoutSeconds: 10
-  readinessProbe:
-    initialDelaySeconds: 5
-    path: /
-    periodSeconds: 10
-    failureThreshold: 10
-    timeoutSeconds: 10
-  resources:
-    limits:
-      cpu: 500m
-      memory: 768Mi
-    requests:
-      cpu: 10m
-      memory: 512Mi
-  env:
-    - name: PORT
-      value: '3000'
-    - name: NODE_ENV
-      value: production
-  nodeSelector: {}
-  tolerations: []
-  affinity: {}
-  initContainers: []
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  hosts:
-    - host: emjpm.dev2.fabrique.social.gouv.fr
-      paths:
-        - path: /
-          servicePort: 3000
-  tls:
-    - hosts:
-        - emjpm.dev2.fabrique.social.gouv.fr
-      secretName: app-certificate
+host: emjpm.dev2.fabrique.social.gouv.fr
+# tlsSecretName: app-certificate
+tlsSecretName: wildcard-crt
 fullnameOverride: ''
 nameOverride: ''
-service:
-  type: ClusterIP
-  port: 3000
-  targetPort: 3000
+ingress:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+resources:
+  limits:
+    cpu: 500m
+    memory: 768Mi
+  requests:
+    cpu: 10m
+    memory: 512Mi

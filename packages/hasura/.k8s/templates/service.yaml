@@ -5,10 +5,10 @@ metadata:
   labels:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
-  type: {{ .Values.service.type }}
+  type: ClusterIP
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+    - port: 80
+      targetPort: 80
       protocol: TCP
       name: http
   selector:
