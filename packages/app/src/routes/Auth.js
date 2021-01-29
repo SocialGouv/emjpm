@@ -134,8 +134,11 @@ export function useProvideAuth() {
   // login redirect
   const prevLoggedStateRef = useRef(() => authStore.logged);
   useEffect(() => {
+    const { pathname } = window.location;
+    if (!authStore.logged && pathname === "/") {
+      history.push("/login");
+    }
     if (authStore.logged && prevLoggedStateRef.current !== authStore.logged) {
-      const { pathname } = window.location;
       const isOauth = pathname === "/application/authorization";
       if (!isOauth) {
         const { url, role } = jwtDecode(authStore.token);
