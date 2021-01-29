@@ -110,7 +110,6 @@ envHookFile: |
 
   ## common
   export HELM_ARGS="$HELM_ARGS
-    labels.date=`date +'%s'`s
     host=${CONTEXT_DOMAIN}
     image.repository=${REGISTRY_URL}/${REGISTRY_PUSH_PATH}
     image.tag=${IMAGE_TAG}

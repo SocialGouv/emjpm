@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   name: {{ include "nodejs.fullname" . }}
   labels:
+    timestamp: "{{ now | date "20060102150405" }}"
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
