@@ -51,7 +51,7 @@ export PGPASSWORD=$(kubectl --server $K8S_SERVER --token $K8S_TOKEN \
   -n $DB_SECRET_NS get secret $DB_SECRET_NAME -ojsonpath='{.data.PGPASSWORD}' \
   | base64 --decode)
 DEPLOYMENT_PGUSER=$PROJECT
-if [ -z "$(psql -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME")" ]; then
+if ! psql -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME"; then
   psql -v ON_ERROR_STOP=1 postgres <<EOF
     CREATE DATABASE "${DB_NAME}";
     \c "${DB_NAME}"
