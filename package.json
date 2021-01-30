@@ -4,7 +4,7 @@
     "build": "lerna run build --parallel",
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build -d",
     "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
-    "dev:restore_dump": "scripts/local/restore_dump.sh",
+    "dev:restore-dump": "scripts/dev/restore-dump",
     "dev:server": "yarn dev server:up && yarn dev server:log",
     "dev:server:up": "docker-compose up --build -d",
     "dev:server:log": "docker-compose logs -f",
@@ -18,9 +18,10 @@
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
     "start": "yarn dev",
     "test": "lerna run test --parallel",
-    "postinstall": "husky install && scripts/gitops/package-ci",
-    "deploy:fast": "scripts/gitops/fast-ci",
-    "release": "scripts/gitops/release"
+    "postinstall": "scripts/ci/postinstall",
+    "ci:local-ci": "scripts/ci/local-ci",
+    "ci:k8s-ci": "scripts/ci/k8s-ci",
+    "release": "scripts/ci/release"
   },
   "license": "Apache-2.0",
   "devDependencies": {

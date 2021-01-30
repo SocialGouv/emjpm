@@ -2,6 +2,6 @@
 
 husky install
 
-scripts/gitops/package-ci
+scripts/ci/package-zeroify-version
 
 [ -f .env ] || cp .env.sample .env

@@ -6,7 +6,7 @@
 ```bash
 export PGUSER=emjpm
 export PGPASSWORD=test
-psql -h localhost -p 5434 < ./scripts/local/before_seeds_creation.sql
+psql -h localhost -p 5434 < ./scripts/dev/before_seeds_creation.sql
 psql -h localhost -p 5434 < ./.k8s/postgres/restore/configmap/anonymize.sql
 pg_dump -h localhost -p 5434 -Fc > ./packages/api/__test__/database/test-seed.dump
 ```
