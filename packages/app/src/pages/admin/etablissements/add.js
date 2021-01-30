@@ -9,11 +9,14 @@ export function AddEtablissementPage() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link to="/admin/etablissements">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/etablissements"
+          component={() => (
+            <StyledLink mb={4} display="block">
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <EtablissementImport />
       </BoxWrapper>
     </LayoutAdmin>

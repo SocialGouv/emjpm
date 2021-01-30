@@ -10,11 +10,14 @@ function ListBlanchePage() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link to="/admin/liste-blanche">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/liste-blanche"
+          component={() => (
+            <StyledLink mb={4} display="block">
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <HeadingTitle mb={4}>
           {"Ajout d'un mandataire préposé à la liste blanche"}
         </HeadingTitle>

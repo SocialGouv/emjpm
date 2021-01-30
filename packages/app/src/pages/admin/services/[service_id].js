@@ -14,11 +14,14 @@ function Service() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link to="/admin/services">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/services"
+          component={() => (
+            <StyledLink mb={4} display="block">
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <Box width="100%">
           <ServiceEditInformations
             serviceId={serviceId}

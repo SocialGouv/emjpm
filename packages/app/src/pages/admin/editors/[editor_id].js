@@ -13,11 +13,14 @@ function Editor() {
   return (
     <LayoutAdmin>
       <BoxWrapper>
-        <Link to="/admin/editors">
-          <StyledLink my={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/editors"
+          component={() => (
+            <StyledLink my={4} display="block">
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <AdminEditorEdit editorId={editorId} />
       </BoxWrapper>
     </LayoutAdmin>
