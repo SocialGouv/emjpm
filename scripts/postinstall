@@ -1,0 +1,7 @@
+#!/bin/sh
+
+husky install
+
+scripts/gitops/package-ci
+
+[ -f .env ] || cp .env.sample .env
