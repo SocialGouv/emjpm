@@ -6,14 +6,18 @@ import { Link } from "~/components/Link";
 import { ListeBlanchePreposeCreate } from "~/components/ListeBlanche";
 import { BoxWrapper } from "~/ui";
 
-function ListBlanchePage() {
+export default function ListBlancheAjoutPrepose() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
         <Link
           to="/admin/liste-blanche"
-          component={() => (
-            <StyledLink mb={4} display="block">
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
               &larr; Retour
             </StyledLink>
           )}
@@ -26,5 +30,3 @@ function ListBlanchePage() {
     </LayoutAdmin>
   );
 }
-
-export default ListBlanchePage;

@@ -1,6 +1,9 @@
+import { useState, useEffect } from "react";
 import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
+
+import useDebouncedEffect from "~/hooks/useDebouncedEffect";
 
 import {
   FormGrayBox,
@@ -8,9 +11,13 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { adminServiceSchema } from "~/lib/validationSchemas/adminServiceSchema";
+import { adminServiceSchema as validationSchema } from "~/lib/validationSchemas/adminServiceSchema";
 import { Button, Heading4, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
+import { getDepartementByCodePostal } from "~/util/codePostal";
+import SelectSIREN from "~/components/SelectSIREN";
+import SelectAdresse from "~/components/SelectAdresse";
+import SelectVille from "~/components/SelectVille";
 
 export function ListeBlancheServiceForm(props) {
   const { handleCancel, handleSubmit, service } = props;
@@ -29,14 +36,81 @@ export function ListeBlancheServiceForm(props) {
       org_gestionnaire: service ? service.org_gestionnaire : "",
       org_nom: service ? service.org_nom : "",
       org_ville: service ? service.org_ville : "",
-      siret: service ? service.siret || "" : "",
+      siren: service ? service.siren || "" : "",
       telephone: service ? service.telephone : "",
     },
     onSubmit: handleSubmit,
-    validationSchema: adminServiceSchema,
+    validationSchema,
   });
 
   const { setFieldValue } = formik;
+
+  useDebouncedEffect(
+    () => {
+      let { siren } = formik.values;
+      if (!siren) {
+        siren = "";
+      }
+      siren = siren.replace(/\s/g, "");
+      siren = siren.substr(0, 9);
+      formik.setFieldValue("siren", siren);
+    },
+    500,
+    [formik.values["siren"]]
+  );
+  useDebouncedEffect(
+    () => {
+      let codePostal = formik.values["lb_code_postal"];
+      if (!codePostal) {
+        codePostal = "";
+      }
+      codePostal = codePostal.replace(/\s/g, "");
+      getDepartementByCodePostal(codePostal).then((departement) => {
+        if (!departement) return;
+        formik.setFieldValue("departement", departement.toString());
+      });
+      formik.setFieldValue("lb_code_postal", codePostal);
+    },
+    500,
+    [formik.values["lb_code_postal"]]
+  );
+
+  const [selectedSirenData, setSelectedSirenData] = useState();
+  useEffect(() => {
+    if (!selectedSirenData) {
+      return;
+    }
+    const {
+      nom_raison_sociale,
+      l4_declaree,
+      code_postal,
+      libelle_commune,
+      departement,
+    } = selectedSirenData;
+    formik.setValues({
+      ...formik.values,
+      etablissement: nom_raison_sociale || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+      lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+      lb_code_postal: code_postal || "",
+      lb_ville: libelle_commune || "",
+      departement: departement || "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSirenData]);
+
+  const [selectedAdresseData, setSelectedAdresseData] = useState(() => ({}));
+  useEffect(() => {
+    if (!selectedAdresseData) {
+      return;
+    }
+    const { postcode, city } = selectedAdresseData;
+    formik.setValues({
+      ...formik.values,
+      lb_code_postal: postcode || "",
+      lb_ville: city || "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAdresseData]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -48,32 +122,24 @@ export function ListeBlancheServiceForm(props) {
           </Text>
         </FormGrayBox>
         <FormInputBox>
-          <Box>
-            <FormGroupSelect
-              id="departement"
-              options={departementsOptions}
-              placeholder="Département du service"
-              formik={formik}
-              validationSchema={adminServiceSchema}
-            />
-          </Box>
-          <FormGroupInput
-            placeholder="Siret"
-            id="siret"
+          <SelectSIREN
+            id="siren"
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
+            dataSetter={setSelectedSirenData}
           />
           <FormGroupInput
             placeholder="Nom du service"
             id="etablissement"
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
           />
-          <FormGroupInput
+          <SelectAdresse
             placeholder="Adresse"
             id="lb_adresse"
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
+            dataSetter={setSelectedAdresseData}
           />
           <Flex>
             <Box flex={1 / 2}>
@@ -81,18 +147,28 @@ export function ListeBlancheServiceForm(props) {
                 placeholder="Code postal"
                 id="lb_code_postal"
                 formik={formik}
-                validationSchema={adminServiceSchema}
+                validationSchema={validationSchema}
               />
             </Box>
             <Box flex={1 / 2} pl={1}>
-              <FormGroupInput
+              <SelectVille
                 placeholder="Ville"
                 id="lb_ville"
                 formik={formik}
-                validationSchema={adminServiceSchema}
+                validationSchema={validationSchema}
+                codePostal={formik.values["lb_code_postal"]}
               />
             </Box>
           </Flex>
+          <Box>
+            <FormGroupSelect
+              id="departement"
+              options={departementsOptions}
+              placeholder="Département du service"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Box>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -104,13 +180,13 @@ export function ListeBlancheServiceForm(props) {
             placeholder="Email"
             id="email"
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInput
             placeholder="Téléphone"
             id="telephone"
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -137,7 +213,7 @@ export function ListeBlancheServiceForm(props) {
             placeholder="L'organisme gestionnaire est-il différent du service?"
             value={formik.values.org_gestionnaire}
             formik={formik}
-            validationSchema={adminServiceSchema}
+            validationSchema={validationSchema}
             onChange={({ value }) => {
               setFieldValue("org_gestionnaire", value);
               setFieldValue("org_nom", "");
@@ -152,13 +228,13 @@ export function ListeBlancheServiceForm(props) {
                 placeholder="Nom"
                 id="org_nom"
                 formik={formik}
-                validationSchema={adminServiceSchema}
+                validationSchema={validationSchema}
               />
               <FormGroupInput
                 placeholder="Adresse"
                 id="org_adresse"
                 formik={formik}
-                validationSchema={adminServiceSchema}
+                validationSchema={validationSchema}
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -166,7 +242,7 @@ export function ListeBlancheServiceForm(props) {
                     placeholder="Code postal"
                     id="org_code_postal"
                     formik={formik}
-                    validationSchema={adminServiceSchema}
+                    validationSchema={validationSchema}
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>
@@ -174,7 +250,7 @@ export function ListeBlancheServiceForm(props) {
                     placeholder="Ville"
                     id="org_ville"
                     formik={formik}
-                    validationSchema={adminServiceSchema}
+                    validationSchema={validationSchema}
                   />
                 </Box>
               </Flex>

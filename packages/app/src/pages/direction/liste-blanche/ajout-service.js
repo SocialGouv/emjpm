@@ -14,8 +14,12 @@ function ListBlanchePage() {
       <BoxWrapper mt={4} px={1}>
         <Link
           to="/direction/liste-blanche"
-          component={() => (
-            <StyledLink mb={4} display="block">
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
               &larr; Retour
             </StyledLink>
           )}

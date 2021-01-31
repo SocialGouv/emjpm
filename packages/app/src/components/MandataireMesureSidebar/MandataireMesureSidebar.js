@@ -11,8 +11,12 @@ export function MandataireMesureSidebar(props) {
     <Box {...props}>
       <Link
         to="/mandataires/mesures"
-        component={() => (
-          <StyledLink sx={linkStyle} display="block">
+        component={(props) => (
+          <StyledLink
+            onClick={() => props.navigate(props.href)}
+            sx={linkStyle}
+            display="block"
+          >
             <Flex>
               <ArrowBack size="16" />
               <Text

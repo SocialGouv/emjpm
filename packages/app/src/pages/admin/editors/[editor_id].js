@@ -15,8 +15,12 @@ function Editor() {
       <BoxWrapper>
         <Link
           to="/admin/editors"
-          component={() => (
-            <StyledLink my={4} display="block">
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              my={4}
+              display="block"
+            >
               &larr; Retour
             </StyledLink>
           )}

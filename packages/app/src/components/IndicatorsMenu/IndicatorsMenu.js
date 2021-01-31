@@ -45,8 +45,13 @@ function IndicatorsMenu(props) {
         <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
           <Link
             to={"/stats"}
-            component={() => (
-              <StyledLink sx={linkStyle}>France entière</StyledLink>
+            component={(props) => (
+              <StyledLink
+                onClick={() => props.navigate(props.href)}
+                sx={linkStyle}
+              >
+                France entière
+              </StyledLink>
             )}
           />
         </Card>

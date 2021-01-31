@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 
 import { Field, Input, Select } from "~/ui";
 import { findOption } from "~/util/option/OptionUtil";
@@ -7,12 +7,20 @@ import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
 import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
 import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
 
-export const FormGroupSelect = ({
+function ensureOption(options, value) {
+  if (!findOption(options, value)) {
+    options = [...(options || []), { value, label: value }];
+  }
+  return options;
+}
+
+export function FormGroupSelect({
   id,
   value,
   error,
   placeholder,
-  options,
+  label,
+  options: originalOptions,
   readOnly,
   formik,
   required,
@@ -21,8 +29,17 @@ export const FormGroupSelect = ({
   onChange,
   isClearable = false,
   size,
-}) => {
-  const { values, errors, setFieldValue, handleBlur, handleChange } = formik;
+  component: Component = Select,
+  ...componentProps
+}) {
+  const {
+    values,
+    errors,
+    setFieldValue,
+    setTouched,
+    handleBlur,
+    handleChange,
+  } = formik;
 
   if (!value) {
     value = values[id];
@@ -30,6 +47,17 @@ export const FormGroupSelect = ({
   if (!error) {
     error = errors[id];
   }
+
+  const [options, setOptions] = useState(() => ensureOption(originalOptions));
+  const originalOptionsJSON = useRef(() => JSON.stringify(originalOptions));
+  useEffect(() => {
+    const newOriginalOptionJSON = JSON.stringify(originalOptions);
+    if (originalOptionsJSON.current === newOriginalOptionJSON) {
+      return;
+    }
+    originalOptionsJSON.current = newOriginalOptionJSON;
+    setOptions(ensureOption(originalOptions, value));
+  }, [originalOptions, value]);
 
   const readOnlyValue = useMemo(() => {
     if (readOnly) {
@@ -54,6 +82,7 @@ export const FormGroupSelect = ({
       {readOnly ? (
         <Input
           placeholder={placeholder}
+          label={label}
           type="text"
           readOnly={true}
           id={id}
@@ -62,25 +91,31 @@ export const FormGroupSelect = ({
           onBlur={handleBlur}
           onChange={handleChange}
           hasError={showError}
+          {...componentProps}
         />
       ) : (
-        <Select
+        <Component
           id={id}
           instanceId={id}
           placeholder={placeholder}
+          label={label}
           required={required}
           hasError={showError}
-          onChange={
-            onChange
-              ? onChange
-              : (props) => {
-                  setFieldValue(id, props?.value || "");
-                }
-          }
+          onBlur={() => {
+            setTouched({ ...formik.touched, [id]: true });
+          }}
+          onChange={(props) => {
+            if (onChange) {
+              return onChange(props);
+            }
+            setFieldValue(id, props?.value || null);
+          }}
           value={findOption(options, value)}
           options={options}
+          setOptions={setOptions}
           isClearable={isClearable}
           size={size ? size : ""}
+          {...componentProps}
         />
       )}
 
@@ -92,4 +127,4 @@ export const FormGroupSelect = ({
       />
     </Field>
   );
-};
+}

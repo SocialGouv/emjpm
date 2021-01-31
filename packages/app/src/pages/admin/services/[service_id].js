@@ -16,8 +16,12 @@ function Service() {
       <BoxWrapper mt={4} px={1}>
         <Link
           to="/admin/services"
-          component={() => (
-            <StyledLink mb={4} display="block">
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
               &larr; Retour
             </StyledLink>
           )}

@@ -2,12 +2,11 @@ import PropTypes from "prop-types";
 
 import ReactSelect from "react-select";
 
-import { getStyle } from "./style";
+import SelectComponent from "./SelectComponent";
 
 export function Select(props) {
-  return <ReactSelect styles={getStyle(props)} {...props} />;
+  return <SelectComponent component={ReactSelect} {...props} />;
 }
-
 Select.propTypes = {
   hasError: PropTypes.bool,
   size: PropTypes.string,
@@ -16,4 +15,5 @@ Select.propTypes = {
 Select.defaultProps = {
   hasError: false,
   size: "large",
+  noOptionsMessage: () => "Aucune option",
 };

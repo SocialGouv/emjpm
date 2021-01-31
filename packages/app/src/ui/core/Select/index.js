@@ -1,4 +1,4 @@
-import { AsyncSelect } from "./AsyncSelect";
-import { Select } from "./Select";
-
-export { AsyncSelect, Select };
+export { AsyncSelect } from "./AsyncSelect";
+export { AsyncSelectCreatable } from "./AsyncSelectCreatable";
+export { Select } from "./Select";
+export { SelectCreatable } from "./SelectCreatable";

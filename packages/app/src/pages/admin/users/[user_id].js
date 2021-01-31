@@ -15,8 +15,12 @@ function User() {
       <BoxWrapper py={1}>
         <Link
           to="/admin/users"
-          component={() => (
-            <StyledLink mb={4} display="block">
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
               &larr; Retour
             </StyledLink>
           )}
