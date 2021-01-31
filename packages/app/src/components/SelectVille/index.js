@@ -4,7 +4,6 @@ import { SelectCreatable } from "~/ui";
 import { components } from "react-select";
 
 import { FormGroupSelect } from "~/components/AppForm";
-import debouncePromise from "~/util/async/debouncePromise";
 
 import { getCommunesByCodePostal } from "~/util/codePostal";
 
@@ -36,7 +35,6 @@ function SelectVille({ codePostal, formik, ...props }) {
         return "Saisissez le nom de la ville";
       }}
       options={options}
-      createNewOptionOnBlur
       editSelectedTag
       filterOption={() => true}
       {...props}

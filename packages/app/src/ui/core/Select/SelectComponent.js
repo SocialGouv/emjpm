@@ -1,12 +1,17 @@
+import React from "react";
+
 import { getStyle } from "./style";
 import SelectLabel from "./SelectLabel";
 
-function SelectComponent({
-  component: Component,
-  componentRef,
-  label,
-  ...props
-}) {
+function SelectComponent(
+  {
+    component: Component,
+    label,
+    loadingMessage = () => "Chargement des résultats en cours",
+    ...props
+  },
+  ref
+) {
   const htmlFor = "react-select-" + props.id + "-input";
   return (
     <>
@@ -24,16 +29,13 @@ function SelectComponent({
       )}
       <Component
         menuPortalTarget={document.body}
+        loadingMessage={loadingMessage}
         styles={getStyle(props)}
-        ref={componentRef}
+        ref={ref}
         {...props}
       />
     </>
   );
 }
 
-SelectComponent.defaultProps = {
-  loadingMessage: () => "Chargement des résultats en cours",
-};
-
-export default SelectComponent;
+export default React.forwardRef(SelectComponent);

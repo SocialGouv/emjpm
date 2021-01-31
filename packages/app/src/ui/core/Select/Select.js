@@ -4,7 +4,7 @@ import ReactSelect from "react-select";
 
 import SelectComponent from "./SelectComponent";
 
-export function Select(props) {
+export default function Select(props) {
   return <SelectComponent component={ReactSelect} {...props} />;
 }
 Select.propTypes = {

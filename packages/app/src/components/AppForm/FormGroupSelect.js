@@ -89,7 +89,7 @@ export function FormGroupSelect(props) {
     id,
   });
 
-  console.log("findOption", id, value, findOption(options, value));
+  // console.log("findOption", id, value, findOption(options, value));
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
