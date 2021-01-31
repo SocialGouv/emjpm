@@ -2,11 +2,11 @@ import AsyncCreatableSelect from "react-select/async-creatable";
 
 import SelectComponent from "./SelectComponent";
 
-export function AsyncSelectCreatable(props) {
+export function AsyncSelectCreatableLegacy(props) {
   return <SelectComponent component={AsyncCreatableSelect} {...props} />;
 }
 
-AsyncSelectCreatable.defaultProps = {
+AsyncSelectCreatableLegacy.defaultProps = {
   size: "large",
   noOptionsMessage: ({ inputValue }) => {
     if (inputValue.length < 1) {

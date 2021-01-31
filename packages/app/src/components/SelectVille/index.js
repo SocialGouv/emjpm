@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { SelectCreatable } from "~/ui";
 import { components } from "react-select";
 
-import { fullText } from "~/query-service/datagouv/api-siren";
 import { FormGroupSelect } from "~/components/AppForm";
 import debouncePromise from "~/util/async/debouncePromise";
 
@@ -31,19 +30,15 @@ function SelectVille({ codePostal, formik, ...props }) {
   return (
     <FormGroupSelect
       component={SelectCreatable}
-      formatCreateLabel={(inputValue) => inputValue}
       isClearable
       formik={formik}
-      onChange={(option) => {
-        formik.setFieldValue(props.id, option?.value || "");
-      }}
       noOptionsMessage={() => {
         return "Saisissez le nom de la ville";
       }}
       options={options}
-      setOptions={setOptions}
       createNewOptionOnBlur
       editSelectedTag
+      filterOption={() => true}
       {...props}
     />
   );

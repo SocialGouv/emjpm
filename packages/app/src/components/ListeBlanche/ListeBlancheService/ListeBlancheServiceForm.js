@@ -98,7 +98,7 @@ export function ListeBlancheServiceForm(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSirenData]);
 
-  const [selectedAdresseData, setSelectedAdresseData] = useState(() => ({}));
+  const [selectedAdresseData, setSelectedAdresseData] = useState();
   useEffect(() => {
     if (!selectedAdresseData) {
       return;

@@ -44,7 +44,6 @@ function SelectSIREN({ dataSetter = () => {}, formik, ...props }) {
       components={{
         Option: CustomOptionSelectSIREN,
       }}
-      formatCreateLabel={(inputValue) => inputValue}
       isClearable
       formik={formik}
       onChange={(option) => {

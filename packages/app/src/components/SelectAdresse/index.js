@@ -42,7 +42,6 @@ function SelectAdresse({ dataSetter = () => {}, formik, ...props }) {
       components={{
         Option: CustomOptionSelectAdresse,
       }}
-      formatCreateLabel={(inputValue) => inputValue}
       isClearable
       formik={formik}
       onChange={(option) => {
