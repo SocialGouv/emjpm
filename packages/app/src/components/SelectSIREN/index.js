@@ -17,7 +17,7 @@ function OptionSelectSIREN(props) {
     const { siren, nom_raison_sociale } = data;
     label = siren + " - " + nom_raison_sociale;
   } else {
-    label = option.value;
+    label = `"` + option.value + `"`;
   }
 
   return <components.Option {...props}>{label}</components.Option>;

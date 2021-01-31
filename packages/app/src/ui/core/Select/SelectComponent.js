@@ -3,15 +3,12 @@ import React from "react";
 import { getStyle } from "./style";
 import SelectLabel from "./SelectLabel";
 
-function SelectComponent(
-  {
-    component: Component,
-    label,
-    loadingMessage = () => "Chargement des résultats en cours",
-    ...props
-  },
-  ref
-) {
+function SelectComponent({
+  component: Component,
+  label,
+  loadingMessage = () => "Chargement des résultats en cours",
+  ...props
+}) {
   const htmlFor = "react-select-" + props.id + "-input";
   return (
     <>
@@ -31,11 +28,10 @@ function SelectComponent(
         menuPortalTarget={document.body}
         loadingMessage={loadingMessage}
         styles={getStyle(props)}
-        ref={ref}
         {...props}
       />
     </>
   );
 }
 
-export default React.forwardRef(SelectComponent);
+export default SelectComponent;

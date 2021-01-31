@@ -38,11 +38,11 @@ export function Input({ value: inputValue, isHidden, ...props }) {
   return <cs.Input isHidden={hidden} value={v} {...props} />;
 }
 
-const components = {
+const CreatableComponents = {
   ...cs,
   Option,
   SingleValue,
   Input,
 };
 
-export default components;
+export default CreatableComponents;

@@ -4,25 +4,22 @@ import Select from "react-select";
 
 import SelectComponent from "./SelectComponent";
 
-import Components from "./Components";
+import Components from "./CreatableComponents";
 
 // why not using native react-select Creatable ? because:
 // no viable solution for createNewOptionOnBlur found at https://github.com/JedWatson/react-select/issues/1764
 // editSelectedTag https://github.com/JedWatson/react-select/issues/1558#issuecomment-471657335
 
-function SelectCreatable(
-  {
-    onChange,
-    onInputChange,
-    noOptionsMessage = () => "Aucune option",
-    hasError = false,
-    size = "large",
-    backspaceRemovesValue = false,
-    components = {},
-    ...props
-  },
-  ref
-) {
+function SelectCreatable({
+  onChange,
+  onInputChange,
+  noOptionsMessage = () => "Aucune option",
+  hasError = false,
+  size = "large",
+  backspaceRemovesValue = false,
+  components = {},
+  ...props
+}) {
   return (
     <SelectComponent
       onChange={(value, event) => {
@@ -41,10 +38,9 @@ function SelectCreatable(
       hasError={hasError}
       size={size}
       backspaceRemovesValue={backspaceRemovesValue}
-      ref={ref}
       {...props}
     />
   );
 }
 
-export default React.forwardRef(SelectCreatable);
+export default SelectCreatable;
