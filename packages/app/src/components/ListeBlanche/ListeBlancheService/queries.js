@@ -5,6 +5,7 @@ export const SERVICE = gql`
     services_by_pk(id: $serviceId) {
       id
       etablissement
+      siren
       siret
       lb_code_postal
       lb_ville

@@ -1,7 +1,11 @@
-import { isAdmin } from "@emjpm/biz";
+import { useContext, useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
+
+import { isAdmin } from "@emjpm/biz";
+
+import useDebouncedEffect from "~/hooks/useDebouncedEffect";
+import { codePostalExists } from "~/util/codePostal";
 
 import {
   FormGrayBox,
@@ -14,6 +18,7 @@ import yup from "~/lib/validationSchemas/yup";
 import { Button, Heading4 } from "~/ui";
 import { formatFormInput } from "~/util";
 import { DepartementFormUtil } from "~/util/departements";
+import SelectSIREN from "~/components/SelectSIREN";
 
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
@@ -24,11 +29,21 @@ const validationSchema = yup.object().shape({
   code_postal: yup
     .string()
     .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-    .required(),
+    .required()
+    .test(
+      "code_postal_exists",
+      "ce code postal n'existe pas",
+      async (value) => {
+        return value && (await codePostalExists(value));
+      }
+    ),
   email: yup.string().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
-  siret: yup.string().required(),
+  siren: yup
+    .string()
+    .matches(/^[0-9]{9}$/, "Le SIREN doit être composé de 9 chiffres.")
+    .required(),
   ville: yup.string().required(),
 });
 
@@ -55,7 +70,7 @@ export function ListeBlancheIndividuelForm(props) {
       email: data ? formatFormInput(data.email) : "",
       nom: data ? formatFormInput(data.nom) : "",
       prenom: data ? formatFormInput(data.prenom) : "",
-      siret: data ? formatFormInput(data.siret) : "",
+      siren: data ? formatFormInput(data.siren) : "",
       ville: data ? formatFormInput(data.ville) : "",
     },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
@@ -77,6 +92,43 @@ export function ListeBlancheIndividuelForm(props) {
 
   const user = useContext(UserContext);
 
+  useDebouncedEffect(
+    () => {
+      let { siren = "" } = formik.values;
+      siren = siren.replace(/\s/g, "");
+      siren = siren.substr(0, 9);
+      formik.setFieldValue("siren", siren);
+    },
+    500,
+    [formik.values["siren"]]
+  );
+  useDebouncedEffect(
+    () => {
+      let { code_postal: codePostal = "" } = formik.values;
+      codePostal = codePostal.replace(/\s/g, "");
+      formik.setFieldValue("code_postal", codePostal);
+    },
+    500,
+    [formik.values["code_postal"]]
+  );
+
+  const [selectedSirenData, setSelectedSirenData] = useState(() => ({}));
+  useEffect(() => {
+    const {
+      l4_declaree,
+      l5_declaree,
+      code_postal,
+      libelle_commune,
+    } = selectedSirenData;
+    formik.setValues({
+      ...formik.values,
+      adresse1: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+      adresse2: l5_declaree || "", // https://sirene.fr/sirene/public/variable/l5-declaree
+      code_postal: code_postal || "",
+      ville: libelle_commune || "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedSirenData]);
   return (
     <form onSubmit={formik.handleSubmit}>
       <Flex>
@@ -84,11 +136,11 @@ export function ListeBlancheIndividuelForm(props) {
           <Heading4 mb={1}>{"Structure juridique"}</Heading4>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInput
-            placeholder="Siret"
-            id="siret"
+          <SelectSIREN
+            id="siren"
             formik={formik}
             validationSchema={validationSchema}
+            setSelectedOption={({ data }) => setSelectedSirenData(data)}
           />
           <FormGroupInput
             placeholder="Adresse 1"

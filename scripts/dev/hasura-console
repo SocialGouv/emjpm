@@ -1,22 +1,5 @@
 #!/usr/bin/env bash
-
-if ! which nc > /dev/null 2>&1; then
-  echo "missing nc command, to install netcat, on debian based distro, run":
-  echo "sudo apt-get install netcat"
-  exit 1
-fi
-
 cd packages/hasura
-
-echo "waiting for hasura"
-while ! nc -z localhost 5000; do
-  sleep 1
-done
-sleep 2
-while ! nc -z localhost 5000; do
-  sleep 1
-done
-echo "hasura ready"
 
 if nc -z localhost 9695; then
   echo "hasura console already running on port 9695"
@@ -25,4 +8,6 @@ if nc -z localhost 9695; then
 fi
 
 echo "running hasura console"
-hasura console
+while ! hasura console 2>/dev/null; do
+  sleep 2
+done

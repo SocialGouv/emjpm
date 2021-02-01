@@ -1,0 +1,7 @@
+#!/bin/sh
+
+husky install
+
+scripts/ci/package-zeroify-version
+
+[ -f .env ] || cp .env.sample .env
