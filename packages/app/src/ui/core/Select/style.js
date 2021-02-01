@@ -50,6 +50,24 @@ export function getStyle(props) {
   const { fontSizes, fonts, colors } = context.theme;
 
   return {
+    input: (provided, state) => {
+      const { isMulti } = props;
+      const style = {
+        ...provided,
+      };
+      if (!isMulti) {
+        Object.assign(style, {
+          "& > div": {
+            width: "100%",
+          },
+          "& > div > input": {
+            width: "100% !important",
+          },
+          width: "100%",
+        });
+      }
+      return style;
+    },
     control: (provided, state) => {
       const currentBorderColor = getBorderColor(hasError, state, colors);
       return {
