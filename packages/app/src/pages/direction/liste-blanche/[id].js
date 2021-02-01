@@ -13,11 +13,18 @@ function ListeBlancheDetailPage() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={4} px={1}>
-        <Link to="/direction/liste-blanche">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/direction/liste-blanche"
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
 
         <ListeBlancheEdit
           id={id}

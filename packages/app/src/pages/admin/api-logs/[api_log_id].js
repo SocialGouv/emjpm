@@ -13,11 +13,18 @@ function ApiLogsViewPage() {
   return (
     <LayoutAdmin>
       <BoxWrapper mt={4} px={1}>
-        <Link to="/admin/api-logs">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/api-logs"
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <AdminApiLog id={id} />
       </BoxWrapper>
     </LayoutAdmin>

@@ -9,6 +9,7 @@ import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
 export function FormGroupInput({
   id,
   value,
+  label,
   placeholder,
   error,
   type,
@@ -46,6 +47,7 @@ export function FormGroupInput({
       <Flex alignItems="center">
         <Input
           placeholder={placeholder}
+          label={label}
           readOnly={readOnly}
           required={required}
           id={id}

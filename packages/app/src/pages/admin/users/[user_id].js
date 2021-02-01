@@ -13,11 +13,18 @@ function User() {
   return (
     <LayoutAdmin>
       <BoxWrapper py={1}>
-        <Link to="/admin/users">
-          <StyledLink mb={4} display="block">
-            &larr; Retour
-          </StyledLink>
-        </Link>
+        <Link
+          to="/admin/users"
+          component={(props) => (
+            <StyledLink
+              onClick={() => props.navigate(props.href)}
+              mb={4}
+              display="block"
+            >
+              &larr; Retour
+            </StyledLink>
+          )}
+        />
         <AdminUser userId={userId} />
       </BoxWrapper>
     </LayoutAdmin>

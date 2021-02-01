@@ -867,7 +867,7 @@ Notify Dev (mattermost):
     variables:
       - $PRODUCTION
   script:
-    - NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
+    - NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
     - |
       echo '{"text":"'${NOTIF_MSG}'"}' \
         | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-

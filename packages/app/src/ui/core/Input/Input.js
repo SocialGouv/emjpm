@@ -29,6 +29,7 @@ function Input(props) {
   const {
     onChange,
     placeholder,
+    label,
     isValid,
     hasError,
     name,
@@ -46,7 +47,7 @@ function Input(props) {
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
-      {placeholder && (
+      {(placeholder || label) && (
         <InputLabel
           size={size}
           aria-label={name}
@@ -55,7 +56,7 @@ function Input(props) {
           required={required}
           readOnly={readOnly}
         >
-          {placeholder}
+          {label || placeholder}
         </InputLabel>
       )}
       <InputElement

@@ -303,7 +303,7 @@ function k8s_deploy_package {
     "{\"spec\":{\"template\":{\"metadata\":{\"labels\":{\"date\":\"`date +'%s'`\"}}}}}"
 
   if [ -n "$NOTIFY_PROD" ] && [ -n "$PRODUCTION" ] && [ -n "$MATTERMOST_WEBHOOK" ]; then
-    local NOTIF_MSG=$(./scripts/gitops/get-release-note | sed -z 's/\n/\\n/g')
+    local NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
     echo '{"text":"'${NOTIF_MSG}'"}' \
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
   fi

@@ -43,9 +43,17 @@ function IndicatorsMenu(props) {
     <Scrollbar style={{ height: "100%", width: "100%" }}>
       <Box {...props} mr="1">
         <Card p="1" mb="1" sx={{ borderRadius: "15px" }}>
-          <Link to={"/stats"}>
-            <StyledLink sx={linkStyle}>France entière</StyledLink>
-          </Link>
+          <Link
+            to={"/stats"}
+            component={(props) => (
+              <StyledLink
+                onClick={() => props.navigate(props.href)}
+                sx={linkStyle}
+              >
+                France entière
+              </StyledLink>
+            )}
+          />
         </Card>
         {departements.map((departement, index) => {
           return (
@@ -55,11 +63,14 @@ function IndicatorsMenu(props) {
               mb="1"
               sx={{ borderRadius: "15px" }}
             >
-              <Link to={`/stats/${departement.code}`}>
-                <StyledLink
-                  sx={linkStyle}
-                >{`${departement.code} - ${departement.nom}`}</StyledLink>
-              </Link>
+              <Link
+                to={`/stats/${departement.code}`}
+                component={() => (
+                  <StyledLink
+                    sx={linkStyle}
+                  >{`${departement.code} - ${departement.nom}`}</StyledLink>
+                )}
+              />
             </Card>
           );
         })}
