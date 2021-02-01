@@ -3,20 +3,21 @@ import React from "react";
 import { getStyle } from "./style";
 import SelectLabel from "./SelectLabel";
 
+const defaultLoadingMessage = () => "Chargement des résultats en cours";
+
 function SelectComponent({
   component: Component,
   label,
-  loadingMessage = () => "Chargement des résultats en cours",
+  loadingMessage = defaultLoadingMessage,
   ...props
 }) {
-  const htmlFor = "react-select-" + props.id + "-input";
   return (
     <>
       {label && (
         <SelectLabel
           size={props.size}
           aria-label={props.name}
-          htmlFor={htmlFor}
+          htmlFor={"react-select-" + props.id + "-input"}
           isActive={props.isActive}
           required={props.required}
           readOnly={props.readOnly}

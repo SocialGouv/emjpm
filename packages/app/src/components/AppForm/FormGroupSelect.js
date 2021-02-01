@@ -1,35 +1,11 @@
 import { useMemo, useState, useEffect, useRef } from "react";
+import { useDebouncedCallback } from "use-debounce";
 
-import { Field, Input, Select } from "~/ui";
+import { Field, Input, Select, SelectCreatable } from "~/ui";
 
 import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
 import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
 import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
-
-function findOption(options = [], value) {
-  return options.find((option) => option.value === value) || null;
-}
-
-// https://github.com/JedWatson/react-select/blob/master/packages/react-select/src/Creatable.js
-function ensureOption(options = [], value, props) {
-  if (value && !findOption(options, value)) {
-    const {
-      createOptionPosition,
-      getNewOptionData,
-      isLoading,
-      isValidNewOption,
-    } = props;
-    if (isValidNewOption(value, options)) {
-      const newOption = getNewOptionData(value, value);
-      // console.log("add missing option from value", newOption);
-      options =
-        createOptionPosition === "first"
-          ? [newOption, ...options]
-          : [...options, newOption];
-    }
-  }
-  return options;
-}
 
 export function FormGroupSelect(props) {
   let {
@@ -41,14 +17,24 @@ export function FormGroupSelect(props) {
     hideErrors,
     validationSchema,
     onChange,
+    onInputChange,
     isClearable,
     size,
-    createOptionPosition,
-    component: Component = Select,
     value,
     error,
     required,
-    options,
+    options = defaultProps.options,
+    setSelectedOption,
+    component: Component,
+    loadOptions,
+    isLoading: isLoadingProp,
+    debounceInterval = defaultProps.debounceInterval,
+    isCreatable,
+    createOptionPosition = defaultProps.createOptionPosition,
+    filterOption = defaultProps.filterOption,
+    formatCreateLabel = defaultProps.formatCreateLabel,
+    isValidNewOption = defaultProps.isValidNewOption,
+    getNewOptionData = defaultProps.getNewOptionData,
     ...componentProps
   } = props;
 
@@ -68,11 +54,55 @@ export function FormGroupSelect(props) {
     error = errors[id];
   }
 
-  options = useMemo(() => {
-    return ensureOption(options, value, props);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [options, value]);
+  // async
+  const [loadState, setLoadState] = useState(() => ({
+    isLoading: false,
+    loadedOptions: [],
+  }));
 
+  const debouncedLoadOptions = useDebouncedCallback(async (inputValue) => {
+    let loadedOptions;
+    try {
+      loadedOptions = await loadOptions(inputValue);
+    } catch (e) {
+      loadedOptions = [];
+    }
+    setLoadState({ isLoading: false, loadedOptions });
+  }, debounceInterval);
+  useEffect(() => {
+    return () => {
+      debouncedLoadOptions.cancel();
+    };
+  }, [debouncedLoadOptions]);
+  let loadCallback;
+  if (loadOptions) {
+    loadCallback = (inputValue) => {
+      if (!loadState.isLoading) {
+        setLoadState({ isLoading: true, loadedOptions: [] });
+      }
+      debouncedLoadOptions.callback(inputValue);
+    };
+  }
+  options = useMemo(() => {
+    return [...options, ...loadState.loadedOptions];
+  }, [options, loadState.loadedOptions]);
+  const inputValueRef = useRef();
+  const isLoading = isLoadingProp || loadState.isLoading;
+
+  // creatable
+  const createOptions = useMemo(
+    () => ({
+      createOptionPosition,
+      getNewOptionData,
+      isValidNewOption,
+    }),
+    [createOptionPosition, getNewOptionData, isValidNewOption]
+  );
+  options = useMemo(() => {
+    return isCreatable ? ensureOption(options, value, createOptions) : options;
+  }, [isCreatable, options, value, createOptions]);
+
+  // readOnly
   const readOnlyValue = useMemo(() => {
     if (readOnly) {
       const option = findOption(options, value);
@@ -89,9 +119,15 @@ export function FormGroupSelect(props) {
     id,
   });
 
-  // console.log("findOption", id, value, findOption(options, value));
-
   required = useAppFieldIsRequired({ id, required, validationSchema });
+
+  if (!Component) {
+    if (loadOptions || isCreatable) {
+      Component = SelectCreatable;
+    } else {
+      Component = Select;
+    }
+  }
 
   return (
     <Field>
@@ -120,21 +156,37 @@ export function FormGroupSelect(props) {
           onBlur={() => {
             setTouched({ ...formik.touched, [id]: true });
           }}
+          onInputChange={(value, event) => {
+            onInputChange && onInputChange(value, event);
+
+            const { action } = event;
+            if (action === "input-change") {
+              if (inputValueRef.current !== value) {
+                loadCallback && loadCallback(value);
+              }
+              inputValueRef.current = value;
+            }
+          }}
           onChange={(props) => {
             if (!props || typeof props !== "object") {
               props = { value: props, label: props };
             }
-            // console.log("onChange", { id, value: props?.value });
             if (onChange) {
               return onChange(props);
             }
             setFieldValue(id, props?.value || null);
+            setSelectedOption && setSelectedOption(props);
           }}
           value={findOption(options, value)}
           isClearable={isClearable}
           size={size ? size : ""}
-          {...componentProps}
           options={options}
+          isLoading={isLoading}
+          formatCreateLabel={formatCreateLabel}
+          isValidNewOption={isValidNewOption}
+          getNewOptionData={getNewOptionData}
+          filterOption={filterOption}
+          {...componentProps}
         />
       )}
 
@@ -148,16 +200,11 @@ export function FormGroupSelect(props) {
   );
 }
 
-// https://github.com/JedWatson/react-select/blob/master/packages/react-select/src/Creatable.js
-// https://github.com/JedWatson/react-select/blob/edc14e4d5406d4a6d6aaf6c0f66cd6850463ad28/packages/react-select/src/Creatable.js
-const compareOption = (inputValue = "", option) => {
-  const candidate = String(inputValue).toLowerCase();
-  const optionValue = String(option.value).toLowerCase();
-  const optionLabel = String(option.label).toLowerCase();
-  return optionValue === candidate || optionLabel === candidate;
-};
-FormGroupSelect.defaultProps = {
+const defaultProps = {
+  filterOption: () => true,
   formatCreateLabel: (inputValue) => `"${inputValue}"`,
+  debounceInterval: 300,
+  createOptionPosition: "last",
   isValidNewOption: (inputValue, selectOptions) =>
     !(
       !inputValue ||
@@ -168,4 +215,37 @@ FormGroupSelect.defaultProps = {
     value: inputValue,
     __isNew__: true,
   }),
+  options: [],
 };
+
+function findOption(options = [], value) {
+  return options.find((option) => option.value === value) || null;
+}
+
+// add missing option from value, for creatable (and initial value)
+function ensureOption(options = [], value, createOptions) {
+  if (value && !findOption(options, value)) {
+    const {
+      createOptionPosition,
+      getNewOptionData,
+      isValidNewOption,
+    } = createOptions;
+    if (isValidNewOption(value, options)) {
+      const newOption = getNewOptionData(value, value);
+      options =
+        createOptionPosition === "first"
+          ? [newOption, ...options]
+          : [...options, newOption];
+    }
+  }
+  return options;
+}
+
+// https://github.com/JedWatson/react-select/blob/master/packages/react-select/src/Creatable.js
+// https://github.com/JedWatson/react-select/blob/edc14e4d5406d4a6d6aaf6c0f66cd6850463ad28/packages/react-select/src/Creatable.js
+function compareOption(inputValue = "", option) {
+  const candidate = String(inputValue).toLowerCase();
+  const optionValue = String(option.value).toLowerCase();
+  const optionLabel = String(option.label).toLowerCase();
+  return optionValue === candidate || optionLabel === candidate;
+}

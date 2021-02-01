@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
@@ -53,7 +53,7 @@ export function ListeBlancheServiceForm(props) {
       }
       siren = siren.replace(/\s/g, "");
       siren = siren.substr(0, 9);
-      formik.setFieldValue("siren", siren);
+      setFieldValue("siren", siren);
     },
     500,
     [formik.values["siren"]]
@@ -67,15 +67,19 @@ export function ListeBlancheServiceForm(props) {
       codePostal = codePostal.replace(/\s/g, "");
       getDepartementByCodePostal(codePostal).then((departement) => {
         if (!departement) return;
-        formik.setFieldValue("departement", departement.toString());
+        setFieldValue("departement", departement.toString());
       });
-      formik.setFieldValue("lb_code_postal", codePostal);
+      setFieldValue("lb_code_postal", codePostal);
     },
     500,
     [formik.values["lb_code_postal"]]
   );
 
   const [selectedSirenData, setSelectedSirenData] = useState();
+  const setSelectedSirenDataCallback = useCallback(
+    ({ data }) => setSelectedSirenData(data),
+    [setSelectedSirenData]
+  );
   useEffect(() => {
     if (!selectedSirenData) {
       return;
@@ -87,18 +91,29 @@ export function ListeBlancheServiceForm(props) {
       libelle_commune,
       departement,
     } = selectedSirenData;
-    formik.setValues({
-      ...formik.values,
-      etablissement: nom_raison_sociale || "", // https://sirene.fr/sirene/public/variable/l4-declaree
-      lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
-      lb_code_postal: code_postal || "",
-      lb_ville: libelle_commune || "",
-      departement: departement || "",
-    });
+
+    setFieldValue("etablissement", nom_raison_sociale || "");
+    setFieldValue("lb_adresse", l4_declaree || ""); // https://sirene.fr/sirene/public/variable/l4-declaree
+    setFieldValue("code_postal", code_postal || "");
+    setFieldValue("lb_ville", libelle_commune || "");
+    setFieldValue("departement", departement || "");
+    // formik.setValues({
+    //   ...formik.values,
+    //   etablissement: nom_raison_sociale || "",
+    //   lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+    //   lb_code_postal: code_postal || "",
+    //   lb_ville: libelle_commune || "",
+    //   departement: departement || "",
+    // });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSirenData]);
 
   const [selectedAdresseData, setSelectedAdresseData] = useState();
+  const setSelectedAdresseDataCallback = useCallback(
+    ({ data }) => setSelectedAdresseData(data),
+    [setSelectedAdresseData]
+  );
   useEffect(() => {
     if (!selectedAdresseData) {
       return;
@@ -126,7 +141,7 @@ export function ListeBlancheServiceForm(props) {
             id="siren"
             formik={formik}
             validationSchema={validationSchema}
-            dataSetter={setSelectedSirenData}
+            setSelectedOption={setSelectedSirenDataCallback}
           />
           <FormGroupInput
             placeholder="Nom du service"
@@ -139,7 +154,7 @@ export function ListeBlancheServiceForm(props) {
             id="lb_adresse"
             formik={formik}
             validationSchema={validationSchema}
-            dataSetter={setSelectedAdresseData}
+            setSelectedOption={setSelectedAdresseDataCallback}
           />
           <Flex>
             <Box flex={1 / 2}>

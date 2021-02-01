@@ -9,11 +9,14 @@ import Components from "./CreatableComponents";
 // why not using native react-select Creatable ? because:
 // no viable solution for createNewOptionOnBlur found at https://github.com/JedWatson/react-select/issues/1764
 // editSelectedTag https://github.com/JedWatson/react-select/issues/1558#issuecomment-471657335
+// implementation details in parent FormGroupSelect component
+
+const defaultNoOptionsMessage = () => "Aucune option";
 
 function SelectCreatable({
   onChange,
   onInputChange,
-  noOptionsMessage = () => "Aucune option",
+  noOptionsMessage = defaultNoOptionsMessage,
   hasError = false,
   size = "large",
   backspaceRemovesValue = false,
@@ -23,7 +26,7 @@ function SelectCreatable({
   return (
     <SelectComponent
       onChange={(value, event) => {
-        return onChange && onChange(value, event);
+        onChange && onChange(value, event);
       }}
       onInputChange={(value, event) => {
         onInputChange && onInputChange(value, event);
@@ -34,7 +37,7 @@ function SelectCreatable({
       }}
       components={{ ...Components, ...components }}
       component={Select}
-      noOptionsMessage={() => "Aucune option"}
+      noOptionsMessage={noOptionsMessage}
       hasError={hasError}
       size={size}
       backspaceRemovesValue={backspaceRemovesValue}

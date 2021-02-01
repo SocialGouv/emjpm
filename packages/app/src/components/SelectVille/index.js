@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { SelectCreatable } from "~/ui";
 import { components } from "react-select";
 
 import { FormGroupSelect } from "~/components/AppForm";
@@ -28,14 +27,13 @@ function SelectVille({ codePostal, formik, ...props }) {
   }, [codePostal]);
   return (
     <FormGroupSelect
-      component={SelectCreatable}
+      isCreatable
       isClearable
       formik={formik}
       noOptionsMessage={() => {
         return "Saisissez le nom de la ville";
       }}
       options={options}
-      editSelectedTag
       filterOption={() => true}
       {...props}
     />

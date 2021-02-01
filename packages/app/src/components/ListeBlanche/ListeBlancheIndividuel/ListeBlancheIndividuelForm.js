@@ -140,7 +140,7 @@ export function ListeBlancheIndividuelForm(props) {
             id="siren"
             formik={formik}
             validationSchema={validationSchema}
-            dataSetter={setSelectedSirenData}
+            setSelectedOption={({ data }) => setSelectedSirenData(data)}
           />
           <FormGroupInput
             placeholder="Adresse 1"
