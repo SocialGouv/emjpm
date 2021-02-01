@@ -128,7 +128,7 @@ function MagistratMandatairesList(props) {
                 </Box>
                 <Box width="200px" mr={1}>
                   <Input
-                    value={searchText}
+                    value={searchText || ""}
                     spellCheck="false"
                     autoComplete="false"
                     onChange={(event) => {
