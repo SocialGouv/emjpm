@@ -70,19 +70,13 @@ this work without any previous install
 yarn dev:prod
 ```
 
-to rely on local installation (gitlab-ci emulation):
-```sh
-export BUILD_ENV=usecache
-yarn dev:prod
-```
-
 ## Database
 
 ### Restaurer un dump
 
 default path for dump is dump/db.dump
 ```bash
-yarn dev:restore_dump [my-path-to-emjpm.dump]
+yarn dev:restore-dump [my-path-to-emjpm.dump]
 ```
 
 ## Test
@@ -103,25 +97,22 @@ or put your token in untracked `.gh-token` file at root path of the projet.
 yarn release
 ```
 
-### Deploy from local build (fast and furious)
-You have to provide a K8S credentials by providing `KUBECONFIG` env var,
-or put your token in untracked `.kubeconfig` file at root path of the projet.
-And providing untracked `.env.deploy` with variables viewable in `.env.deploy.sample`
+### Build and deploy from using experimental [k8s-ci](https://github.com/SocialGouv/k8s-ci)
+You have to provide a the webhook token credentials by providing `K8S_CI_WEBHOOK_TOKEN` env var,
+or put your token in untracked `.k8s-ci-webhook-token` file at root path of the projet.
 requirements:
 - docker@^19.03
 - bash@^4
 - git@^2
 - kubectl@^1.19
 ```sh
-yarn deploy:fast
+yarn ci:k8s-ci
 ```
-*With great power there must also come great responsibility*
 
 ## Deployment policy
 
 All branches and tags are automatically deployed
 See https://github.com/SocialGouv/emjpm/deployments
-
 
 - **Development** : https://master.emjpm.dev.fabrique.social.gouv.fr/
 - **Prod Mirror** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
