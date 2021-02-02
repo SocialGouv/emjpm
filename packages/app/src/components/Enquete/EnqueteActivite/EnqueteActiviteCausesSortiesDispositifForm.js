@@ -39,9 +39,12 @@ export function EnqueteActiviteCausesSortiesDispositifForm(props) {
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm,
     dispatchEnqueteContextEvent,
@@ -51,6 +54,7 @@ export function EnqueteActiviteCausesSortiesDispositifForm(props) {
     onSubmit,
     step,
     validationSchema,
+    sections,
   });
 
   const { submitForm, submit } = enqueteForm;

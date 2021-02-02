@@ -6,7 +6,7 @@ import { Field } from "~/ui";
 import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
 import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 
-export const EnqueteFormYesNoField = ({
+export function EnqueteFormYesNoField({
   id,
   value,
   error,
@@ -17,7 +17,7 @@ export const EnqueteFormYesNoField = ({
   required,
   disableErrorMessage,
   hideErrorMessageIfPristine,
-}) => {
+}) {
   const { readOnly, formik } = enqueteForm;
   const { setFieldValue, values, errors } = formik;
 
@@ -59,4 +59,4 @@ export const EnqueteFormYesNoField = ({
       />
     </Field>
   );
-};
+}

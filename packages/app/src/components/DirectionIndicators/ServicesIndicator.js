@@ -25,7 +25,7 @@ function ServicesIndicator() {
       title="Services mandataires"
       indicator={
         data && data.gestionnaireNumber
-          ? data.gestionnaireNumber.aggregate.count
+          ? Number(data.gestionnaireNumber.aggregate.count)
           : 0
       }
     />

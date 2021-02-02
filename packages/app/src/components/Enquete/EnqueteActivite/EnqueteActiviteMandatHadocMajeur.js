@@ -61,6 +61,8 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
         loading={loading}
         data={normalizedData}
         section={section}
+        sections={props.sections}
+        currentStep={props.currentStep}
         step={step}
         onSubmit={async (values) => {
           await updateEnquete({

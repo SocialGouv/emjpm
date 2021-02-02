@@ -18,9 +18,12 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm: enquetePreposePersonnelFormationMjpmFormMapper.dataToForm,
     dispatchEnqueteContextEvent,

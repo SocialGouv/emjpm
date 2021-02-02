@@ -1,8 +1,8 @@
 version: 2
 endpoint: http://localhost:5000
 enable_telemetry: false
-admin_secret: secret
+admin_secret: admin
 metadata_directory: metadata
 actions:
   kind: synchronous
-  handler_webhook_baseurl: http://localhost:3000
+  handler_webhook_baseurl: http://localhost:4000

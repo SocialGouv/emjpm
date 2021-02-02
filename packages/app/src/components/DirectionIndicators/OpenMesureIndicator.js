@@ -35,7 +35,7 @@ function OpenMesureIndicator() {
       error={error}
       loading={loading}
       title="Mesures en cours"
-      indicator={opened_mesures_nb ? opened_mesures_nb : 0}
+      indicator={opened_mesures_nb ? Number(opened_mesures_nb) : 0}
     />
   );
 }

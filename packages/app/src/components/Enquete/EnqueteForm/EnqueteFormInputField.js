@@ -7,7 +7,7 @@ import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
 import { EnqueteFormFieldLabel } from "./EnqueteFormFieldLabel";
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
 
-export const EnqueteFormInputField = ({
+export function EnqueteFormInputField({
   id,
   value,
   error,
@@ -22,7 +22,7 @@ export const EnqueteFormInputField = ({
   disableErrorMessage,
   hideErrorMessageIfPristine,
   required,
-}) => {
+}) {
   const { readOnly, formik } = enqueteForm;
   const { handleChange, handleBlur, values } = formik;
 
@@ -94,4 +94,4 @@ export const EnqueteFormInputField = ({
       />
     </Field>
   );
-};
+}

@@ -59,6 +59,8 @@ export function EnqueteServicePersonnelFormation(props) {
     <EnqueteServicePersonnelFormationForm
       data={personnelFormation}
       section={section}
+      sections={props.sections}
+      currentStep={props.currentStep}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}

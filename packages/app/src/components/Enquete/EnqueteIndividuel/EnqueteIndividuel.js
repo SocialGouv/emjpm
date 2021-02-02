@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
@@ -28,10 +28,16 @@ export function EnqueteIndividuel(props) {
     sections,
   });
 
+  useEffect(() => {
+    if (step === undefined || section === undefined) {
+      navigateToStep({ step: 0, substep: 0 });
+    }
+  }, [step, section, navigateToStep]);
+
   if (step === undefined || section === undefined) {
-    navigateToStep({ step: 0, substep: 0 });
     return <Box mt={4}>Redirection...</Box>;
   }
+
   const ComponentForm = step.component;
 
   return (
@@ -48,7 +54,10 @@ export function EnqueteIndividuel(props) {
         <ComponentForm
           enquete={enquete}
           enqueteReponse={enqueteReponse}
+          currentStep={currentStep}
           section={section}
+          sections={sections}
+          currentStep={props.currentStep}
           step={step}
           enqueteContext={{
             ...enqueteContext,

@@ -8,9 +8,7 @@ import { EnquetePreposePrestationsSocialesRepartitionPersonnesForm } from "./Enq
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
 
-export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (
-  props
-) => {
+export function EnquetePreposePrestationsSocialesRepartitionPersonnes(props) {
   const {
     enqueteContext,
     dispatchEnqueteContextEvent,
@@ -67,6 +65,6 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnes = (
       }}
     />
   );
-};
+}
 
 export default EnquetePreposePrestationsSocialesRepartitionPersonnes;

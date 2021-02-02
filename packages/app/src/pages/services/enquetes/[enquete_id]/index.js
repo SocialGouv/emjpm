@@ -37,6 +37,19 @@ function EnquetePage() {
     loading,
   ]);
 
+  async function navigateToStep({ step, substep }) {
+    if (step === undefined || substep === undefined) {
+      return;
+    }
+    if (step !== currentStep.step || substep !== currentStep.substep) {
+      await history.push({
+        pathname: `/services/enquetes/${enquete.id}`,
+        search: `?step=${step}&substep=${substep}`,
+      });
+      window.scrollTo(0, 0);
+    }
+  }
+
   return (
     <LayoutServices>
       <BoxWrapper>
@@ -51,19 +64,6 @@ function EnquetePage() {
       </BoxWrapper>
     </LayoutServices>
   );
-
-  async function navigateToStep({ step, substep }) {
-    if (step === undefined || substep === undefined) {
-      return;
-    }
-    if (step !== currentStep.step || substep !== currentStep.substep) {
-      await history.push({
-        pathname: `/services/enquetes/${enquete.id}`,
-        search: `?step=${step}&substep=${substep}`,
-      });
-      window.scrollTo(0, 0);
-    }
-  }
 }
 
 export default EnquetePage;
