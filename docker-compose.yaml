@@ -53,7 +53,7 @@ services:
       - api
     restart: always
     environment:
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-secret}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:test@db:5432/emjpm
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
       HASURA_GRAPHQL_JWT_SECRET: '{"type": "RS256","jwk_url": "http://api:4000/api/auth/jwks"}'
@@ -77,8 +77,8 @@ services:
       AUTH_PRIVATE_KEY_FILE: /secrets/private.pem
       DATABASE_URL: ${DATABASE_URL-psql://postgres:test@db/emjpm}
       HASURA_WEB_HOOK_SECRET: ${HASURA_WEB_HOOK_SECRET:-localdevunsecuresecret}
-      HASURA_GRAPHQL_URI: ${HASURA_GRAPHQL_URI:-http://hasura:8080}
-      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-secret}
+      HASURA_GRAPHQL_URI: ${HASURA_GRAPHQL_URI:-http://hasura:8080/v1/graphql}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
 
 volumes:
   emjpm-pgdata:
