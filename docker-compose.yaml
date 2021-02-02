@@ -78,6 +78,7 @@ services:
       DATABASE_URL: ${DATABASE_URL-psql://postgres:test@db/emjpm}
       HASURA_WEB_HOOK_SECRET: ${HASURA_WEB_HOOK_SECRET:-localdevunsecuresecret}
       HASURA_GRAPHQL_URI: ${HASURA_GRAPHQL_URI:-http://hasura:8080}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-secret}
 
 volumes:
   emjpm-pgdata:
