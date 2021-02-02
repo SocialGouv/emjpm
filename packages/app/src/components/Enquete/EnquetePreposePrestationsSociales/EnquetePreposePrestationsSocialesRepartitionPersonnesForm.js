@@ -44,9 +44,9 @@ function formToData(values) {
   };
 }
 
-export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (
+export function EnquetePreposePrestationsSocialesRepartitionPersonnesForm(
   props
-) => {
+) {
   const {
     data = {},
     loading = false,
@@ -54,9 +54,12 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm,
     dispatchEnqueteContextEvent,
@@ -161,6 +164,6 @@ export const EnquetePreposePrestationsSocialesRepartitionPersonnesForm = (
       </Box>
     </form>
   );
-};
+}
 
 export default EnquetePreposePrestationsSocialesRepartitionPersonnesForm;

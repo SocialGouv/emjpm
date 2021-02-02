@@ -2,13 +2,13 @@ import { InlineError } from "~/ui";
 
 import { useEnqueteFieldShowError } from "./useEnqueteFieldShowError.hook";
 
-export const EnqueteFormFieldErrorMessage = ({
+export function EnqueteFormFieldErrorMessage({
   id,
   error,
   enqueteForm,
   disableErrorMessage,
   hideErrorMessageIfPristine,
-}) => {
+}) {
   const { formik } = enqueteForm;
   const { errors } = formik;
 
@@ -25,4 +25,4 @@ export const EnqueteFormFieldErrorMessage = ({
   });
 
   return <InlineError showError={showError} message={error} fieldId={id} />;
-};
+}

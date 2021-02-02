@@ -69,6 +69,8 @@ export function EnqueteActiviteRevisionMesures(props) {
         loading={loading}
         data={initialData}
         section={section}
+        sections={props.sections}
+        currentStep={props.currentStep}
         step={step}
         onSubmit={async (values) => {
           await updateEnquete({

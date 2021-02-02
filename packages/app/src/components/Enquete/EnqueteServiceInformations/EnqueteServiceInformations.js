@@ -52,6 +52,8 @@ export function EnqueteServiceInformations(props) {
     <EnqueteServiceInformationsForm
       data={informations}
       section={section}
+      sections={props.sections}
+      currentStep={props.currentStep}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}

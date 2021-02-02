@@ -87,6 +87,8 @@ export function EnqueteIndividuelInformationsFormation(props) {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       data={initialValues}
       section={section}
+      sections={props.sections}
+      currentStep={props.currentStep}
       step={step}
       onSubmit={async (values) => {
         await updateEnquete({

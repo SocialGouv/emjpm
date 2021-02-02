@@ -22,11 +22,11 @@ const ModalContent = styled.div`
   max-width: 800px;
 `;
 
-export const EnqueteConfirmExitInvalidFormDialog = ({
+export function EnqueteConfirmExitInvalidFormDialog({
   open,
   onConfirm,
   onCancel,
-}) => {
+}) {
   return (
     <Box display={open ? "block" : "none"} onClick={onCancel}>
       <Modal>
@@ -53,4 +53,4 @@ export const EnqueteConfirmExitInvalidFormDialog = ({
       </Modal>
     </Box>
   );
-};
+}

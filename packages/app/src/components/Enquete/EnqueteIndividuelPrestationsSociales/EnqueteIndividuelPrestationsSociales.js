@@ -51,6 +51,8 @@ export function EnqueteIndividuelPrestationsSociales(props) {
       loading={loading}
       data={prestationsSociales}
       section={section}
+      sections={props.sections}
+      currentStep={props.currentStep}
       step={step}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}

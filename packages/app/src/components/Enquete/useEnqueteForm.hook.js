@@ -1,10 +1,32 @@
 import { useFormik } from "formik";
 import { useCallback, useEffect, useMemo } from "react";
 
-function isEmptyObject(obj) {
-  return Object.keys(obj).length === 0 && obj.constructor === Object;
+function getNextPageStep(sections, currentStep) {
+  const { step, substep } = currentStep;
+  const currentSection =
+    sections && sections.length > step ? sections[step] : undefined;
+  if (currentSection) {
+    if (
+      currentSection.steps.length <= 1 ||
+      substep + 1 === currentSection.steps.length
+    ) {
+      return { step: step + 1, substep: 0 };
+    } else {
+      return { step, substep: substep + 1 };
+    }
+  }
 }
-const emptyReferencedObject = {};
+
+function getPrevPageStep(sections, currentStep) {
+  const { step, substep } = currentStep;
+  if (substep > 0) {
+    return { step, substep: substep - 1 };
+  } else if (currentStep.step - 1 >= 0) {
+    const substep = sections[currentStep.step - 1].steps.length;
+    return { step: currentStep.step - 1, substep: substep - 1 };
+  }
+}
+
 export function useEnqueteForm({
   onSubmit,
   dispatchEnqueteContextEvent,
@@ -15,13 +37,9 @@ export function useEnqueteForm({
   dataToForm,
   formToData,
   loading,
+  sections,
+  currentStep,
 }) {
-  // avoid infinite loop due to data = {} while data is loading in parent components
-  data = useMemo(() => {
-    // console.debug("[useEnqueteForm] input data changed", data);
-    return data && !isEmptyObject(data) ? data : emptyReferencedObject;
-  }, [data]);
-
   const initialValues = useMemo(() => {
     const initialValues = dataToForm ? dataToForm(data) : data;
     console.debug("[useEnqueteForm] build initialValues", data, initialValues);
@@ -109,15 +127,19 @@ export function useEnqueteForm({
         dispatchEnqueteContextEvent({
           type: "submit-and-navigate",
           value: "previous",
+          nextStep: getPrevPageStep(sections, currentStep),
+          readOnly,
         });
       } else {
         dispatchEnqueteContextEvent({
           type: "submit-and-navigate",
           value: "next",
+          nextStep: getNextPageStep(sections, currentStep),
+          readOnly,
         });
       }
     },
-    [dispatchEnqueteContextEvent]
+    [dispatchEnqueteContextEvent, readOnly, currentStep, sections]
   );
 
   return {

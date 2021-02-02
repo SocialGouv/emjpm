@@ -55,6 +55,8 @@ export function EnquetePopulationsTutelle(props) {
       loading={loading}
       data={reponsePopulations}
       section={section}
+      sections={props.sections}
+      currentStep={props.currentStep}
       step={step}
       onSubmit={async (values) => {
         await updateEnquete({
