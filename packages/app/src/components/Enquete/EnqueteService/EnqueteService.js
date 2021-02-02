@@ -31,9 +31,12 @@ export function EnqueteService(props) {
   useEffect(() => {
     if (step === undefined || section === undefined) {
       navigateToStep({ step: 0, substep: 0 });
-      return <Box mt={4}>Redirection...</Box>;
     }
   }, [step, section, navigateToStep]);
+
+  if (step === undefined || section === undefined) {
+    return <Box mt={4}>Redirection...</Box>;
+  }
 
   const ComponentForm = step.component;
 
