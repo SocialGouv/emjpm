@@ -43,6 +43,7 @@ export function EnqueteServiceInformationsForm(props) {
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const validationSchema = yup.object().shape({
@@ -52,6 +53,8 @@ export function EnqueteServiceInformationsForm(props) {
   });
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm,
     dispatchEnqueteContextEvent,

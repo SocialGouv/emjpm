@@ -12,14 +12,14 @@ const FieldLabel = ({ isRequired, readOnly }) =>
         },
       }
     : {};
-export const EnqueteFormFieldLabel = ({
+export function EnqueteFormFieldLabel({
   id,
   label,
   text,
   enqueteForm,
   required,
   children,
-}) => {
+}) {
   const { validationSchema, readOnly } = enqueteForm;
 
   const isRequired = useMemo(() => {
@@ -65,4 +65,4 @@ export const EnqueteFormFieldLabel = ({
       ) : null}
     </Fragment>
   );
-};
+}

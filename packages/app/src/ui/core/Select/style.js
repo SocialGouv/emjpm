@@ -50,6 +50,12 @@ export function getStyle(props) {
   const { fontSizes, fonts, colors } = context.theme;
 
   return {
+    menuPortal: (provided, state) => {
+      return {
+        ...provided,
+        zIndex: 99999,
+      };
+    },
     input: (provided, state) => {
       const { isMulti } = props;
       const style = {

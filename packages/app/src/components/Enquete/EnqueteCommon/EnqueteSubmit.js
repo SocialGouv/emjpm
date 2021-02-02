@@ -12,13 +12,13 @@ import {
   EnqueteStatusStarIcon,
 } from "./EnqueteIcons";
 
-export const EnqueteSubmit = ({
+export function EnqueteSubmit({
   loading,
   enquete,
   enqueteReponse,
   goToFirstPage,
   submitEnqueteReponse,
-}) => {
+}) {
   const globalStatus = enqueteReponse.enquete_reponse_validation_status.global;
 
   return enqueteReponse.status !== "draft" ? (
@@ -160,4 +160,4 @@ export const EnqueteSubmit = ({
       )}
     </Flex>
   );
-};
+}

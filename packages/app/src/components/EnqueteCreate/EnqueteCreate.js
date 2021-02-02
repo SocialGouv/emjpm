@@ -13,7 +13,6 @@ export function EnqueteCreate() {
   const client = useApolloClient();
   const history = useHistory();
   const [createEnquete] = useMutation(CREATE_ENQUETE, {
-    onCompleted: () => history.push("/direction/enquetes"),
     refetchQueries: [{ query: ENQUETES }],
   });
   const formik = useFormik({
@@ -34,6 +33,7 @@ export function EnqueteCreate() {
         variables: { endedAt: `${values.endedAt}`, year: `${values.year}` },
       });
       formikHelpers.setSubmitting(false);
+      history.push("/direction/enquetes");
     },
     validationSchema: yup.object().shape({
       endedAt: yup.date().required(),

@@ -72,9 +72,12 @@ export function EnquetePreposeModaliteExerciceInformationsForm(props) {
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm,
     dispatchEnqueteContextEvent,

@@ -28,10 +28,16 @@ export function EnquetePrepose(props) {
     sections,
   });
 
+  useEffect(() => {
+    if (step === undefined || section === undefined) {
+      navigateToStep({ step: 0, substep: 0 });
+    }
+  }, [step, section, navigateToStep]);
+
   if (step === undefined || section === undefined) {
-    navigateToStep({ step: 0, substep: 0 });
     return <Box mt={4}>Redirection...</Box>;
   }
+
   const ComponentForm = step.component;
 
   return (
@@ -54,7 +60,10 @@ export function EnquetePrepose(props) {
             section,
             step,
           }}
+          sections={sections}
+          currentStep={currentStep}
           section={section}
+          currentStep={props.currentStep}
           step={step}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}

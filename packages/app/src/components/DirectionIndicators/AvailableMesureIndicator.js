@@ -33,7 +33,7 @@ function AvailableMesureIndicator() {
       error={error}
       loading={loading}
       title="Disponibilités"
-      indicator={available_mesures_nb ? available_mesures_nb : 0}
+      indicator={available_mesures_nb ? Number(available_mesures_nb) : 0}
     />
   );
 }

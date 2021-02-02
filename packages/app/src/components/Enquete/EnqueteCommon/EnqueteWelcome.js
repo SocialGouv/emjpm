@@ -27,12 +27,12 @@ function getExcelName(type) {
   }
 }
 
-export const EnqueteWelcome = ({
+export function EnqueteWelcome({
   goToFirstPage,
   enquete,
   enqueteReponse,
   pathPrefix,
-}) => {
+}) {
   const { id: enqueteId } = enquete;
 
   const { type } = useContext(UserContext);
@@ -97,4 +97,4 @@ export const EnqueteWelcome = ({
       </Flex>
     </Flex>
   );
-};
+}

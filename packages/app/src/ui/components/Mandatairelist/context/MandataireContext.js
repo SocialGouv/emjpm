@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { createContext, useState } from "react";
 
 export const Context = createContext({});
@@ -20,11 +19,7 @@ export function Provider(props) {
   };
 
   // pass the value in provider and return
-  return <Context.Provider value={mesureContext}>{children}</Context.Provider>;
+  return <Context.Provider value={mesureContext} children={children} />;
 }
-
-Provider.propTypes = {
-  children: PropTypes.elementType.isRequired,
-};
 
 export const { Consumer } = Context;

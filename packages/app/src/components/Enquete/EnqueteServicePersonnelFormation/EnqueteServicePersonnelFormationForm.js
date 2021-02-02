@@ -101,9 +101,12 @@ export function EnqueteServicePersonnelFormationForm(props) {
     onSubmit,
     enqueteContext,
     dispatchEnqueteContextEvent,
+    sections,
   } = props;
 
   const enqueteForm = useEnqueteForm({
+    currentStep: props.currentStep,
+    sections,
     data,
     dataToForm,
     dispatchEnqueteContextEvent,
@@ -114,7 +117,6 @@ export function EnqueteServicePersonnelFormationForm(props) {
     step,
     validationSchema,
   });
-
   const { submitForm, submit } = enqueteForm;
 
   return (
