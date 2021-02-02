@@ -25,7 +25,7 @@ function EtablissementIndicator() {
       title="Préposés d'établissement"
       indicator={
         data && data.gestionnaireNumber
-          ? data.gestionnaireNumber.aggregate.count
+          ? Number(data.gestionnaireNumber.aggregate.count)
           : 0
       }
     />

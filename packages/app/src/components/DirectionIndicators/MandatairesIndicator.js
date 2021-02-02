@@ -25,7 +25,7 @@ function MandatairesIndicator() {
       title="Mandataires individuels"
       indicator={
         data && data.gestionnaireNumber
-          ? data.gestionnaireNumber.aggregate.count
+          ? Number(data.gestionnaireNumber.aggregate.count)
           : 0
       }
     />

@@ -35,7 +35,7 @@ function ClosedMesureIndicator() {
       error={error}
       loading={loading}
       title="Mesures éteintes"
-      indicator={closed_mesures_nb ? closed_mesures_nb : 0}
+      indicator={closed_mesures_nb ? Number(closed_mesures_nb) : 0}
     />
   );
 }
