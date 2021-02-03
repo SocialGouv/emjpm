@@ -65,8 +65,9 @@ function IndicatorsMenu(props) {
             >
               <Link
                 to={`/stats/${departement.code}`}
-                component={() => (
+                component={(props) => (
                   <StyledLink
+                    onClick={() => props.navigate(props.href)}
                     sx={linkStyle}
                   >{`${departement.code} - ${departement.nom}`}</StyledLink>
                 )}
