@@ -126,10 +126,10 @@ class User extends Model {
     if (!this.direction) {
       return [];
     }
-    const { region_id, department_id } = this.direction;
+    const { region_id, departement_code } = this.direction;
     const departements = await Models.Departement.query()
       .where({ id_region: region_id })
-      .orWhere({ id: department_id });
+      .orWhere({ id: departement_code });
     return departements.map((d) => d.id);
   }
 

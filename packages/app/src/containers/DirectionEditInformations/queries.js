@@ -11,7 +11,7 @@ export const DIRECTION = gql`
         id
         type
         region_id
-        department_id
+        departement_code
       }
     }
   }

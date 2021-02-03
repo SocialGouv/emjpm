@@ -190,35 +190,35 @@
   - name: directions
     using:
       foreign_key_constraint_on:
-        column: department_id
+        column: departement_code
         table:
           schema: public
           name: direction
   - name: mandataires
     using:
       foreign_key_constraint_on:
-        column: department_id
+        column: departement_code
         table:
           schema: public
           name: mandataires
   - name: mesures
     using:
       foreign_key_constraint_on:
-        column: department_id
+        column: departement_code
         table:
           schema: public
           name: mesures
   - name: services
     using:
       foreign_key_constraint_on:
-        column: department_id
+        column: departement_code
         table:
           schema: public
           name: services
   - name: tis
     using:
       foreign_key_constraint_on:
-        column: departement_id
+        column: departement_code
         table:
           schema: public
           name: tis
@@ -228,7 +228,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: direction
@@ -236,7 +235,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: direction_nationale
@@ -244,7 +242,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: direction_territoriale
@@ -252,7 +249,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: individuel
@@ -260,7 +256,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: prepose
@@ -268,7 +263,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: service
@@ -276,7 +270,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
   - role: ti
@@ -284,7 +277,6 @@
       columns:
       - id
       - id_region
-      - code
       - nom
       filter: {}
 - table:
@@ -293,7 +285,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: department_id
+      foreign_key_constraint_on: departement_code
   - name: region
     using:
       foreign_key_constraint_on: region_id
@@ -309,7 +301,7 @@
       set:
         user_id: x-hasura-User-Id
       columns:
-      - department_id
+      - departement_code
       - id
       - region_id
       - user_id
@@ -321,7 +313,7 @@
       - id
       - region_id
       - user_id
-      - department_id
+      - departement_code
       - type
       filter:
         user_id:
@@ -330,7 +322,7 @@
   - role: direction
     permission:
       columns:
-      - department_id
+      - departement_code
       - id
       - region_id
       - user_id
@@ -385,7 +377,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: departement_id
+      foreign_key_constraint_on: departement_code
   - name: enquete
     using:
       foreign_key_constraint_on: enquete_id
@@ -439,7 +431,7 @@
       - enquete_id
       - mandataire_id
       - service_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -459,7 +451,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -481,7 +473,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -509,7 +501,7 @@
       - enquete_id
       - mandataire_id
       - service_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -525,7 +517,7 @@
       - user_type
       - enquete_reponses_service_personnel_formation_id
       filter:
-        departement_id:
+        departement_code:
           _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
@@ -535,7 +527,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -563,7 +555,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -593,7 +585,7 @@
       - enquete_id
       - mandataire_id
       - service_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_prestations_sociale_id
       - enquete_reponses_agrements_formations_id
@@ -621,7 +613,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -646,7 +638,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -671,7 +663,7 @@
       - enquete_reponses_activite_id
       - enquete_reponses_agrements_formations_id
       - enquete_reponses_financement_id
-      - departement_id
+      - departement_code
       - enquete_reponses_informations_mandataire_id
       - enquete_reponses_modalites_exercice_id
       - enquete_reponses_populations_id
@@ -3455,7 +3447,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: departement_id
+      foreign_key_constraint_on: departement_code
   array_relationships:
   - name: mesures
     using:
@@ -3471,7 +3463,7 @@
           schema: public
           name: tis
         column_mapping:
-          departement_id: departement_id
+          departement_code: departement_code
   insert_permissions:
   - role: direction
     permission:
@@ -3479,7 +3471,7 @@
       columns:
       - coordxet
       - coordyet
-      - departement_id
+      - departement_code
       - id
       - nofinesset
       - rslongue
@@ -3491,7 +3483,7 @@
       columns:
       - id
       - nofinesset
-      - departement_id
+      - departement_code
       - nofinessej
       - rs
       - rslongue
@@ -3529,7 +3521,7 @@
       columns:
       - coordxet
       - coordyet
-      - departement_id
+      - departement_code
       - id
       - categagretab
       - categetab
@@ -3567,7 +3559,7 @@
       columns:
       - coordxet
       - coordyet
-      - departement_id
+      - departement_code
       - id
       - categagretab
       - categetab
@@ -3605,7 +3597,7 @@
       columns:
       - coordxet
       - coordyet
-      - departement_id
+      - departement_code
       - id
       - nofinesset
       - rslongue
@@ -3616,7 +3608,7 @@
       columns:
       - coordxet
       - coordyet
-      - departement_id
+      - departement_code
       - id
       - nofinesset
       - rslongue
@@ -3686,7 +3678,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: departement_id
+      foreign_key_constraint_on: departement_code
   array_relationships:
   - name: tis
     using:
@@ -3695,7 +3687,7 @@
           schema: public
           name: tis
         column_mapping:
-          departement_id: departement_id
+          departement_code: departement_code
   insert_permissions:
   - role: direction
     permission:
@@ -3704,7 +3696,7 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       backend_only: false
   select_permissions:
@@ -3714,7 +3706,7 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       filter: {}
       allow_aggregations: true
@@ -3724,7 +3716,7 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       filter: {}
   - role: direction_territoriale
@@ -3733,7 +3725,7 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       filter: {}
   - role: individuel
@@ -3742,14 +3734,14 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       filter: {}
   - role: prepose
     permission:
       columns:
       - departement_financeur
-      - departement_id
+      - departement_code
       - id
       - lb_user_id
       - created_at
@@ -3760,7 +3752,7 @@
       - id
       - created_at
       - lb_user_id
-      - departement_id
+      - departement_code
       - departement_financeur
       filter: {}
   update_permissions:
@@ -3942,7 +3934,7 @@
           _and:
           - departement_financeur:
               _eq: true
-          - departement_id:
+          - departement_code:
               _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
@@ -4111,7 +4103,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: department_id
+      foreign_key_constraint_on: departement_code
   - name: lb_user
     using:
       foreign_key_constraint_on: lb_user_id
@@ -4163,7 +4155,7 @@
       - adresse
       - code_postal
       - created_at
-      - department_id
+      - departement_code
       - dispo_max
       - email_send
       - genre
@@ -4216,7 +4208,7 @@
       columns:
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - lb_user_id
@@ -4240,7 +4232,7 @@
       columns:
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - lb_user_id
@@ -4264,7 +4256,7 @@
       columns:
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - lb_user_id
@@ -4287,7 +4279,7 @@
             _and:
             - departement_financeur:
                 _eq: true
-            - departement_id:
+            - departement_code:
                 _in: x-hasura-agrements
       allow_aggregations: true
   - role: individuel
@@ -4307,7 +4299,7 @@
       - genre
       - mesures_en_attente
       - competences
-      - department_id
+      - departement_code
       - siret
       - latitude
       - longitude
@@ -4319,7 +4311,7 @@
       columns:
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_en_attente
@@ -4355,7 +4347,7 @@
       - genre
       - mesures_en_attente
       - competences
-      - department_id
+      - departement_code
       - siret
       - latitude
       - longitude
@@ -4367,7 +4359,7 @@
       - adresse
       - code_postal
       - created_at
-      - department_id
+      - departement_code
       - dispo_max
       - email_send
       - genre
@@ -4392,7 +4384,7 @@
       - adresse
       - code_postal
       - created_at
-      - department_id
+      - departement_code
       - dispo_max
       - email_send
       - genre
@@ -5006,7 +4998,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: department_id
+      foreign_key_constraint_on: departement_code
   - name: etablissement
     using:
       foreign_key_constraint_on: etablissement_id
@@ -5056,7 +5048,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5093,7 +5085,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5132,7 +5124,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5162,7 +5154,7 @@
       - code_postal
       - created_at
       - date_nomination
-      - department_id
+      - departement_code
       - etablissement_id
       - date_fin_mesure
       - id
@@ -5202,7 +5194,7 @@
       - created_at
       - date_fin_mesure
       - date_nomination
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5250,7 +5242,7 @@
       - numero_dossier
       - cabinet
       - numero_rg
-      - department_id
+      - departement_code
       - antenne_id
       - service_id
       - is_urgent
@@ -5290,7 +5282,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5330,7 +5322,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5369,7 +5361,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5407,7 +5399,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5447,7 +5439,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5486,7 +5478,7 @@
       - date_nomination
       - date_premier_mesure
       - date_protection_en_cours
-      - department_id
+      - departement_code
       - etablissement_id
       - id
       - is_urgent
@@ -5519,7 +5511,7 @@
       - code_postal
       - created_at
       - date_nomination
-      - department_id
+      - departement_code
       - etablissement_id
       - date_fin_mesure
       - id
@@ -6040,7 +6032,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: department_id
+      foreign_key_constraint_on: departement_code
   array_relationships:
   - name: enquete_reponses
     using:
@@ -6087,7 +6079,7 @@
       - dispo_max
       - created_at
       - competences
-      - department_id
+      - departement_code
       - mesures_in_progress
       - mesures_awaiting
       - latitude
@@ -6107,7 +6099,7 @@
     permission:
       columns:
       - code_postal
-      - department_id
+      - departement_code
       - etablissement
       - id
       filter: {}
@@ -6117,7 +6109,7 @@
       - org_gestionnaire
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_awaiting
@@ -6157,7 +6149,7 @@
       - dispo_max
       - created_at
       - competences
-      - department_id
+      - departement_code
       - mesures_in_progress
       - mesures_awaiting
       - latitude
@@ -6179,7 +6171,7 @@
       - org_gestionnaire
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_awaiting
@@ -6210,7 +6202,7 @@
       - org_gestionnaire
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_awaiting
@@ -6242,7 +6234,7 @@
       - org_gestionnaire
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_awaiting
@@ -6269,7 +6261,7 @@
       - org_gestionnaire
       - latitude
       - longitude
-      - department_id
+      - departement_code
       - dispo_max
       - id
       - mesures_awaiting
@@ -6300,7 +6292,7 @@
       - adresse
       - code_postal
       - competences
-      - department_id
+      - departement_code
       - dispo_max
       - email
       - id
@@ -6333,7 +6325,7 @@
   object_relationships:
   - name: departement
     using:
-      foreign_key_constraint_on: departement_id
+      foreign_key_constraint_on: departement_code
   array_relationships:
   - name: commentaires
     using:
@@ -6374,7 +6366,7 @@
       - date_fermeture
       - date_modification
       - date_ouverture
-      - departement_id
+      - departement_code
       - email
       - id
       - immutable
@@ -6396,7 +6388,7 @@
       - date_ouverture
       - latitude
       - longitude
-      - departement_id
+      - departement_code
       - id
       - created_at
       - updated_at
@@ -6419,7 +6411,7 @@
       - date_ouverture
       - latitude
       - longitude
-      - departement_id
+      - departement_code
       - id
       - created_at
       - updated_at
@@ -6442,7 +6434,7 @@
       - date_ouverture
       - latitude
       - longitude
-      - departement_id
+      - departement_code
       - id
       - created_at
       - updated_at
@@ -6465,7 +6457,7 @@
       - date_ouverture
       - latitude
       - longitude
-      - departement_id
+      - departement_code
       - id
       - created_at
       - updated_at
@@ -6488,7 +6480,7 @@
       - date_ouverture
       - latitude
       - longitude
-      - departement_id
+      - departement_code
       - id
       - created_at
       - updated_at
@@ -6943,12 +6935,12 @@
           schema: public
           name: departements
         column_mapping:
-          department_id: id
+          departement_code: id
   select_permissions:
   - role: direction
     permission:
       columns:
-      - department_id
+      - departement_code
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -6956,7 +6948,7 @@
   - role: individuel
     permission:
       columns:
-      - department_id
+      - departement_code
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -6964,7 +6956,7 @@
   - role: prepose
     permission:
       columns:
-      - department_id
+      - departement_code
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -6972,7 +6964,7 @@
   - role: service
     permission:
       columns:
-      - department_id
+      - departement_code
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -6980,7 +6972,7 @@
   - role: ti
     permission:
       columns:
-      - department_id
+      - departement_code
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -6992,7 +6984,7 @@
   - role: anonymous
     permission:
       columns:
-      - code
+      - id
       - count
       - nom
       - type
@@ -7001,7 +6993,7 @@
   - role: direction
     permission:
       columns:
-      - code
+      - id
       - nom
       - type
       - count
@@ -7011,7 +7003,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7020,7 +7012,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7029,7 +7021,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7038,7 +7030,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7050,7 +7042,7 @@
   - role: anonymous
     permission:
       columns:
-      - code
+      - id
       - count
       - nom
       - type
@@ -7059,7 +7051,7 @@
   - role: direction
     permission:
       columns:
-      - code
+      - id
       - nom
       - type
       - count
@@ -7069,7 +7061,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7078,7 +7070,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7087,7 +7079,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7096,7 +7088,7 @@
     permission:
       columns:
       - count
-      - code
+      - id
       - nom
       - type
       filter: {}
@@ -7112,7 +7104,7 @@
           schema: public
           name: departements
         column_mapping:
-          department_id: id
+          departement_code: id
   - name: mandataire
     using:
       manual_configuration:
@@ -7146,7 +7138,7 @@
       - service_id
       - mandataire_id
       - discriminator
-      - department_id
+      - departement_code
       - dep_nom
       - mesures_max
       - mesures_awaiting
@@ -7161,7 +7153,7 @@
       - service_id
       - mandataire_id
       - discriminator
-      - department_id
+      - departement_code
       - dep_nom
       - mesures_max
       - mesures_awaiting
@@ -7171,7 +7163,7 @@
   - role: prepose
     permission:
       columns:
-      - department_id
+      - departement_code
       - mandataire_id
       - mesures_max
       - service_id
@@ -7185,7 +7177,7 @@
   - role: service
     permission:
       columns:
-      - department_id
+      - departement_code
       - mandataire_id
       - mesures_max
       - service_id
@@ -7200,7 +7192,7 @@
     permission:
       columns:
       - dep_nom
-      - department_id
+      - departement_code
       - discriminator
       - id
       - mandataire_id
@@ -7223,7 +7215,7 @@
           schema: public
           name: departements
         column_mapping:
-          department_id: id
+          departement_code: id
   - name: mandataire
     using:
       manual_configuration:
@@ -7249,7 +7241,7 @@
       - mandataire_id
       - discriminator
       - nom
-      - department_id
+      - departement_code
       - dep_nom
       - mesures_max
       - mesures_awaiting

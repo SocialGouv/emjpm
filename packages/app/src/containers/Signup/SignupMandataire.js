@@ -54,7 +54,7 @@ function SignupMandataireForm() {
           mandataire: {
             adresse: values.geocode.label,
             code_postal: values.geocode.postcode,
-            department_id: departement.id,
+            departement_code: departement.id,
             dispo_max: parseInt(values.dispo_max),
             genre: user.genre,
             latitude: values.geocode.latitude,

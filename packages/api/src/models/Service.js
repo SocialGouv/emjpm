@@ -18,7 +18,7 @@ class Service extends Model {
     return {
       departement: {
         join: {
-          from: "services.department_id",
+          from: "services.departement_code",
           to: "departements.id",
         },
         modelClass: Models.Departement,

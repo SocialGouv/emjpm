@@ -58,7 +58,7 @@ function IndicatorsMenu(props) {
         {departements.map((departement, index) => {
           return (
             <Card
-              key={`${index}-${departement.code}`}
+              key={`${index}-${departement.id}`}
               p="1"
               mb="1"
               sx={{ borderRadius: "15px" }}
@@ -69,7 +69,7 @@ function IndicatorsMenu(props) {
                   <StyledLink
                     onClick={() => props.navigate(props.href)}
                     sx={linkStyle}
-                  >{`${departement.code} - ${departement.nom}`}</StyledLink>
+                  >{`${departement.id} - ${departement.nom}`}</StyledLink>
                 )}
               />
             </Card>

@@ -158,7 +158,7 @@ async function importStructureEtablissement(properties, departements) {
     return;
   }
 
-  const { id: departementId } = findDepartementByCodeOrId(departements, {
+  const { id: departementCode } = findDepartementByCodeOrId(departements, {
     code: departement,
   });
 
@@ -174,7 +174,7 @@ async function importStructureEtablissement(properties, departements) {
     compvoie,
     dateautor,
     dateouv,
-    departement_id: departementId,
+    departement_code: departementCode,
     libcategagretab,
     libcategetab,
     libdepartement,

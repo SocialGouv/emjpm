@@ -10,7 +10,7 @@ function OpenMesureIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
     variables: {
-      departementId: filters.departement
+      departementCode: filters.departement
         ? parseInt(filters.departement)
         : undefined,
       end: filters.endDate,

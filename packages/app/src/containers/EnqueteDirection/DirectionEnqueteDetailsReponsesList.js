@@ -30,7 +30,7 @@ function buildQueryVariables(enqueteId, criteria) {
     criteria.selectedDepartement &&
     criteria.selectedDepartement.departement
   ) {
-    variables.departementId = criteria.selectedDepartement.departement.id;
+    variables.departementCode = criteria.selectedDepartement.departement.id;
   }
 
   if (criteria.responseStatus && criteria.responseStatus.value) {

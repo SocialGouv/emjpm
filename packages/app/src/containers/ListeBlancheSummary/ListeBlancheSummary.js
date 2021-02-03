@@ -44,7 +44,7 @@ function ListeBlancheSummary() {
 
   const { data, error, loading } = useQuery(LB_SUMMARY, {
     variables: {
-      departementId: departement,
+      departementCode: departement,
     },
   });
 

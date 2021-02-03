@@ -34,7 +34,7 @@ function filter({
         criteria.selectedDepartement &&
         criteria.selectedDepartement.value &&
         (!r.departement ||
-          criteria.selectedDepartement.value !== r.departement.code)
+          criteria.selectedDepartement.value !== r.departement.id)
       ) {
         return false;
       }

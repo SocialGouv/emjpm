@@ -7,7 +7,7 @@ export const CHANGE_DIRECTION_AGREMENT = gql`
     $direction_role_id: Int!
     $new_direction_role_id: Int!
     $type: String!
-    $department_id: Int
+    $departement_code: String
     $region_id: Int
   ) {
     delete_user_role(where: { user_id: { _eq: $user_id } }) {
@@ -24,13 +24,13 @@ export const CHANGE_DIRECTION_AGREMENT = gql`
     update_direction_by_pk(
       pk_columns: { id: $direction_id }
       _set: {
-        department_id: $department_id
+        departement_code: $departement_code
         region_id: $region_id
         type: $type
       }
     ) {
       id
-      department_id
+      departement_code
       region_id
       type
     }

@@ -33,7 +33,7 @@ export const MESURES_QUERY = gql`
       code_postal
       created_at
       date_nomination
-      department_id
+      departement_code
       etablissement_id
       date_fin_mesure
       id
@@ -85,7 +85,7 @@ export const MESURES_QUERY = gql`
       code_postal
       created_at
       date_nomination
-      department_id
+      departement_code
       etablissement_id
       date_fin_mesure
       id

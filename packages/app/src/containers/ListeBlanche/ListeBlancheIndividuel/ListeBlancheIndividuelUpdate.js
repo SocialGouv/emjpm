@@ -47,7 +47,7 @@ export function ListeBlancheIndividuelUpdate(props) {
               departementsToAdd: departementsToAdd.map((d) => {
                 return {
                   departement_financeur: d.departement_financeur,
-                  departement_id: d.id,
+                  departement_code: d.id,
                   lb_user_id: id,
                 };
               }),
