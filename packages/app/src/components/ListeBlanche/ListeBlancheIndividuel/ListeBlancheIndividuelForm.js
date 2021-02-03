@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { isAdmin } from "@emjpm/biz";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import { codePostalExists } from "~/util/codePostal";
+import { codePostalExists } from "~/util/geodata";
 
 import {
   FormGrayBox,
