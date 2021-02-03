@@ -57,7 +57,7 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                to={`https://github.com/SocialGouv/emjpm/`}
+                to="https://github.com/SocialGouv/emjpm/"
               >
                 Contribuer sur GitHub
               </Link>
@@ -65,7 +65,7 @@ function Footer(props) {
             <ListItem>
               <Link
                 target="_blank"
-                to={`https://github.com/SocialGouv/emjpm/releases/`}
+                to="https://github.com/SocialGouv/emjpm/releases/"
               >
                 Journal des modifications
               </Link>
