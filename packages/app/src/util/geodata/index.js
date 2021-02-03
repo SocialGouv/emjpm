@@ -4,18 +4,18 @@ import departements from "./departements.json";
 const codePostalDB = import("./code_postal.json");
 
 export const departementList = Object.entries(departements).map(
-  ([code, { name, region }]) => {
+  ([code, { nom, region }]) => {
     return {
       code,
-      name,
+      nom,
       region,
     };
   }
 );
-export const regionList = Object.entries(regions).map(([code, name]) => {
+export const regionList = Object.entries(regions).map(([code, nom]) => {
   return {
     code,
-    name,
+    nom,
   };
 });
 
@@ -56,9 +56,9 @@ export const createRegionOptions = (rows, options = { all: true }) => {
     });
   }
   opts.push(
-    ...Object.entries(rows).map(([code, { name }]) => ({
+    ...Object.entries(rows).map(([code, { nom }]) => ({
       value: parseInt(code),
-      label: name,
+      label: nom,
     }))
   );
   return opts;
@@ -73,9 +73,9 @@ export const createDepartementOptions = (rows, options = { all: true }) => {
     });
   }
   opts.push(
-    ...Object.entries(rows).map(([code, { name }]) => ({
+    ...Object.entries(rows).map(([code, { nom }]) => ({
       value: parseInt(code),
-      label: name,
+      label: nom,
     }))
   );
   return opts;
