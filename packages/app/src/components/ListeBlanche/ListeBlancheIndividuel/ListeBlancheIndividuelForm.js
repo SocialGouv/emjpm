@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useCallback, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { Box, Flex, Text } from "rebass";
 
 import { isAdmin } from "@emjpm/biz";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import { codePostalExists } from "~/util/geodata";
+import { codePostalExists, getDepartementByCodePostal } from "~/util/geodata";
 
 import {
   FormGrayBox,
@@ -17,8 +17,14 @@ import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
 import { Button, Heading4 } from "~/ui";
 import { formatFormInput } from "~/util";
-import { DepartementFormUtil } from "~/util/departements";
+import {
+  DepartementFormUtil,
+  useDepartementsOptions,
+} from "~/util/departements";
+
 import SelectSIREN from "~/components/SelectSIREN";
+import SelectAdresse from "~/components/SelectAdresse";
+import SelectVille from "~/components/SelectVille";
 
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
@@ -94,7 +100,10 @@ export function ListeBlancheIndividuelForm(props) {
 
   useDebouncedEffect(
     () => {
-      let { siren = "" } = formik.values;
+      let { siren } = formik.values;
+      if (!siren) {
+        siren = "";
+      }
       siren = siren.replace(/\s/g, "");
       siren = siren.substr(0, 9);
       formik.setFieldValue("siren", siren);
@@ -104,31 +113,70 @@ export function ListeBlancheIndividuelForm(props) {
   );
   useDebouncedEffect(
     () => {
-      let { code_postal: codePostal = "" } = formik.values;
+      let codePostal = formik.values["code_postal"];
+      if (!codePostal) {
+        codePostal = "";
+      }
       codePostal = codePostal.replace(/\s/g, "");
+      getDepartementByCodePostal(codePostal).then((departement) => {
+        if (!departement) return;
+        formik.setFieldValue("departement", departement.toString());
+      });
       formik.setFieldValue("code_postal", codePostal);
     },
     500,
     [formik.values["code_postal"]]
   );
 
-  const [selectedSirenData, setSelectedSirenData] = useState(() => ({}));
+  const [selectedSirenData, setSelectedSirenData] = useState();
+  const setSelectedSirenDataCallback = useCallback(
+    ({ data }) => setSelectedSirenData(data),
+    [setSelectedSirenData]
+  );
   useEffect(() => {
+    if (!selectedSirenData) {
+      return;
+    }
     const {
+      nom_raison_sociale,
       l4_declaree,
       l5_declaree,
       code_postal,
       libelle_commune,
+      departement,
     } = selectedSirenData;
+
     formik.setValues({
       ...formik.values,
+      etablissement: nom_raison_sociale || "",
       adresse1: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
       adresse2: l5_declaree || "", // https://sirene.fr/sirene/public/variable/l5-declaree
       code_postal: code_postal || "",
       ville: libelle_commune || "",
+      departement: departement || "",
     });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSirenData]);
+
+  const [selectedAdresseData, setSelectedAdresseData] = useState();
+  const setSelectedAdresseDataCallback = useCallback(
+    ({ data }) => setSelectedAdresseData(data),
+    [setSelectedAdresseData]
+  );
+  useEffect(() => {
+    if (!selectedAdresseData) {
+      return;
+    }
+    const { postcode, city } = selectedAdresseData;
+    formik.setValues({
+      ...formik.values,
+      code_postal: postcode || "",
+      ville: city || "",
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedAdresseData]);
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <Flex>
@@ -140,13 +188,14 @@ export function ListeBlancheIndividuelForm(props) {
             id="siren"
             formik={formik}
             validationSchema={validationSchema}
-            setSelectedOption={({ data }) => setSelectedSirenData(data)}
+            setSelectedOption={setSelectedSirenDataCallback}
           />
-          <FormGroupInput
+          <SelectAdresse
             placeholder="Adresse 1"
             id="adresse1"
             formik={formik}
             validationSchema={validationSchema}
+            setSelectedOption={setSelectedAdresseDataCallback}
           />
           <FormGroupInput
             placeholder="Complément"
@@ -164,11 +213,12 @@ export function ListeBlancheIndividuelForm(props) {
               />
             </Box>
             <Box pl={1} flex={1 / 2}>
-              <FormGroupInput
+              <SelectVille
                 placeholder="Ville"
                 id="ville"
                 formik={formik}
                 validationSchema={validationSchema}
+                codePostal={formik.values["code_postal"]}
               />
             </Box>
           </Flex>
