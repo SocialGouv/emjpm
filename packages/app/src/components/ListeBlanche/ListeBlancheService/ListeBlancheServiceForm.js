@@ -92,19 +92,14 @@ export function ListeBlancheServiceForm(props) {
       departement,
     } = selectedSirenData;
 
-    setFieldValue("etablissement", nom_raison_sociale || "");
-    setFieldValue("lb_adresse", l4_declaree || ""); // https://sirene.fr/sirene/public/variable/l4-declaree
-    setFieldValue("code_postal", code_postal || "");
-    setFieldValue("lb_ville", libelle_commune || "");
-    setFieldValue("departement", departement || "");
-    // formik.setValues({
-    //   ...formik.values,
-    //   etablissement: nom_raison_sociale || "",
-    //   lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
-    //   lb_code_postal: code_postal || "",
-    //   lb_ville: libelle_commune || "",
-    //   departement: departement || "",
-    // });
+    formik.setValues({
+      ...formik.values,
+      etablissement: nom_raison_sociale || "",
+      lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+      lb_code_postal: code_postal || "",
+      lb_ville: libelle_commune || "",
+      departement: departement || "",
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedSirenData]);
