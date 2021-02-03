@@ -5195,32 +5195,45 @@
       - annee_naissance
       - antenne_id
       - cabinet
+      - cause_sortie
+      - champ_mesure
       - civilite
       - code_postal
       - created_at
+      - date_fin_mesure
       - date_nomination
       - department_id
       - etablissement_id
-      - date_fin_mesure
       - id
       - is_urgent
       - judgment_date
       - latitude
+      - lieu_vie
       - longitude
+      - magistrat_id
       - mandataire_id
+      - nature_mesure
       - numero_dossier
       - numero_rg
       - pays
-      - cause_sortie
-      - lieu_vie
       - service_id
       - status
       - ti_id
-      - nature_mesure
-      - champ_mesure
       - ville
       filter: {}
       allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - created_at
+      - magistrat_id
+      filter: {}
+  - role: direction_territoriale
+    permission:
+      columns:
+      - created_at
+      - magistrat_id
+      filter: {}
   - role: individuel
     permission:
       columns:
@@ -5285,6 +5298,7 @@
       - latitude
       - lieu_vie
       - longitude
+      - magistrat_id
       - mandataire_id
       - nature_mesure
       - numero_dossier
@@ -5324,6 +5338,7 @@
       - latitude
       - lieu_vie
       - longitude
+      - magistrat_id
       - mandataire_id
       - nature_mesure
       - numero_dossier
