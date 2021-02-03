@@ -73,7 +73,7 @@ const MandataireEditInformations = ({
           adresse: values.geocode.label,
           code_postal: values.geocode.postcode,
           competences: values.competences,
-          department_id: departement.id,
+          departement_code: departement.id,
           dispo_max: parseInt(values.dispo_max),
           email: values.email,
           genre: values.genre,

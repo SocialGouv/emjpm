@@ -37,7 +37,7 @@ export function ListeBlancheServiceCreate(props) {
     try {
       await addService({
         variables: {
-          department_id: departement.id,
+          departement_code: departement.id,
           email: values.email,
           etablissement: values.etablissement,
           lb_adresse: values.lb_adresse,

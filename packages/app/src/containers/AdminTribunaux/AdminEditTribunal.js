@@ -29,7 +29,7 @@ export function AdminEditTribunal({ tribunal, closePanel }) {
           variables: {
             adresse: values.geocode.label,
             code_postal: values.geocode.postcode,
-            departement_id: departement.id,
+            departement_code: departement.id,
             email: values.email,
             etablissement: values.etablissement,
             id: tribunal.id,

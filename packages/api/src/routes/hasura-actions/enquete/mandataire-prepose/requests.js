@@ -29,12 +29,12 @@ module.exports = {
             const [{ etablissement }] = lb_user_etablissements;
             const { departement } = etablissement;
             defaultValues.region = departement.region.nom;
-            defaultValues.departement_id = departement.id;
+            defaultValues.departement_code = departement.id;
             defaultValues.departement = departement.nom;
           } else if (lb_departements && lb_departements.length) {
             const [{ departement }] = lb_user.lb_departements;
             defaultValues.region = departement.region.nom;
-            defaultValues.departement_id = departement.id;
+            defaultValues.departement_code = departement.id;
             defaultValues.departement = departement.nom;
           }
         }
@@ -42,7 +42,7 @@ module.exports = {
 
       const value = {
         departement: defaultValues.departement,
-        departementId: defaultValues.departement_id,
+        departementCode: defaultValues.departement_code,
         enqueteId,
         mandataireId,
         region: defaultValues.region,

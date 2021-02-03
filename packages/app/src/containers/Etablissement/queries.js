@@ -47,7 +47,6 @@ export const ETABLISSEMENT = gql`
       sourcecoordet
       departement {
         id
-        code
         nom
       }
     }

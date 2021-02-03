@@ -1,12 +1,12 @@
 import gql from "graphql-tag";
 
 export const LB_SUMMARY = gql`
-  query listeBlancheSummary($departementId: Int) {
+  query listeBlancheSummary($departementCode: String) {
     individuel_finance: lb_users_aggregate(
       where: {
         type: { _eq: "individuel" }
         lb_departements: {
-          departement_id: { _eq: $departementId }
+          departement_code: { _eq: $departementCode }
           departement_financeur: { _eq: true }
         }
       }
@@ -18,7 +18,7 @@ export const LB_SUMMARY = gql`
     individuel: lb_users_aggregate(
       where: {
         type: { _eq: "individuel" }
-        lb_departements: { departement_id: { _eq: $departementId } }
+        lb_departements: { departement_code: { _eq: $departementCode } }
       }
     ) {
       aggregate {
@@ -29,7 +29,7 @@ export const LB_SUMMARY = gql`
       where: {
         type: { _eq: "prepose" }
         lb_user_etablissements: {
-          etablissement: { departement_id: { _eq: $departementId } }
+          etablissement: { departement_code: { _eq: $departementCode } }
         }
       }
     ) {
@@ -38,7 +38,7 @@ export const LB_SUMMARY = gql`
       }
     }
     service: services_aggregate(
-      where: { department_id: { _eq: $departementId } }
+      where: { departement_code: { _eq: $departementCode } }
     ) {
       aggregate {
         count

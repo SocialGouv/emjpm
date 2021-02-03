@@ -52,7 +52,7 @@ export const EDIT_SERVICE = gql`
         email
         competences
         created_at
-        department_id
+        departement_code
         dispo_max
         etablissement
         latitude

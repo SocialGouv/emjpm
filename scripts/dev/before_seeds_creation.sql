@@ -56,7 +56,7 @@ delete from user_role where user_id in (select id from users where type in ('ser
 delete from users where type in ('service') and id not in (select user_id from service_members);
 
 -- CLEAN direction
-delete from direction where department_id <> 76;
+delete from direction where departement_code <> "75";
 delete from user_role where user_id in (select id from users where type = 'direction' and id not in (select user_id from direction));
 delete from users where type = 'direction' and id not in (select user_id from direction);
 

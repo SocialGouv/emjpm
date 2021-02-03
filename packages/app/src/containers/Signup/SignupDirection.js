@@ -37,7 +37,7 @@ export function SignupDirection() {
     onSubmit: (values, { setSubmitting, setErrors }) => {
       const body = {
         direction: {
-          departementId: values.departement,
+          departementCode: values.departement,
           directionType: values.directionType,
           regionId: values.region,
         },

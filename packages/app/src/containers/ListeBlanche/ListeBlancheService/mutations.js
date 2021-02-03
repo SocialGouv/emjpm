@@ -9,7 +9,7 @@ export const UPDATE_SERVICE = gql`
     $siren: String!
     $email: String
     $telephone: String
-    $department_id: Int!
+    $departement_code: String!
     $lb_adresse: String! # $latitude: Float! # $longitude: Float!
     $org_gestionnaire: Boolean!
     $org_nom: String
@@ -23,7 +23,7 @@ export const UPDATE_SERVICE = gql`
         etablissement: $etablissement
         siren: $siren
         lb_code_postal: $lb_code_postal
-        department_id: $department_id
+        departement_code: $departement_code
         lb_ville: $lb_ville
         email: $email
         telephone: $telephone
@@ -44,7 +44,7 @@ export const UPDATE_SERVICE = gql`
         email
         competences
         created_at
-        department_id
+        departement_code
         dispo_max
         etablissement
         latitude
@@ -76,7 +76,7 @@ export const ADD_SERVICE = gql`
     $lb_ville: String!
     $email: String
     $telephone: String
-    $department_id: Int!
+    $departement_code: String!
     $lb_adresse: String!
     $siren: String!
     $org_gestionnaire: Boolean!
@@ -91,7 +91,7 @@ export const ADD_SERVICE = gql`
         lb_code_postal: $lb_code_postal
         lb_ville: $lb_ville
         email: $email
-        department_id: $department_id
+        departement_code: $departement_code
         telephone: $telephone
         lb_adresse: $lb_adresse
         siren: $siren

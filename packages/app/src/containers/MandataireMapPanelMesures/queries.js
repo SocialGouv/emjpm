@@ -21,7 +21,7 @@ export const MESURES = gql`
       code_postal
       created_at
       date_nomination
-      department_id
+      departement_code
       etablissement_id
       date_fin_mesure
       is_urgent

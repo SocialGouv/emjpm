@@ -17,7 +17,6 @@ export const SERVICE = gql`
       org_ville
       departement {
         id
-        code
       }
       adresse
       lb_adresse

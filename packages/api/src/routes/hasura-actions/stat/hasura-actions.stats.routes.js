@@ -8,15 +8,15 @@ const knex = require("~/db/knex");
 const router = express.Router();
 
 router.post("/opened-mesures", async (req, res) => {
-  const { regionId, departementId, start, end } = req.body.input;
-  const departementIds = await getDepartementIds(regionId, departementId);
+  const { regionId, departementCode, start, end } = req.body.input;
+  const departementCodes = await getDepartementCodes(regionId, departementCode);
 
   const query = Mesure.query()
     .count("id")
     .where("date_nomination", ">", start)
     .where("date_nomination", "<=", end);
-  if (departementIds) {
-    query.where("department_id", "in", departementIds);
+  if (departementCodes) {
+    query.where("departement_code", "in", departementCodes);
   }
 
   const [openedMesuresNb] = await query;
@@ -27,16 +27,16 @@ router.post("/opened-mesures", async (req, res) => {
 });
 
 router.post("/closed-mesures", async (req, res) => {
-  const { regionId, departementId, start, end } = req.body.input;
+  const { regionId, departementCode, start, end } = req.body.input;
 
-  const departementIds = await getDepartementIds(regionId, departementId);
+  const departementCodes = await getDepartementCodes(regionId, departementCode);
 
   const query = Mesure.query()
     .count("id")
     .where("date_fin_mesure", ">", start)
     .where("date_fin_mesure", "<=", end);
-  if (departementIds) {
-    query.where("department_id", "in", departementIds);
+  if (departementCodes) {
+    query.where("departement_code", "in", departementCodes);
   }
 
   const [closedMesuresNb] = await query;
@@ -49,11 +49,11 @@ router.post("/closed-mesures", async (req, res) => {
 router.post(
   "/available-mesures",
   async (req, res, next) => {
-    const { regionId, departementId } = req.body.input;
+    const { regionId, departementCode } = req.body.input;
     try {
       const filters = {};
-      if (departementId) {
-        filters.department_id = departementId;
+      if (departementCode) {
+        filters.departement_code = departementCode;
       } else if (regionId) {
         filters.region_id = regionId;
       }
@@ -80,15 +80,15 @@ router.post(
 
 module.exports = router;
 
-async function getDepartementIds(regionId, departementId) {
-  let departementIds;
-  if (departementId) {
-    departementIds = [departementId];
+async function getDepartementCodes(regionId, departementCode) {
+  let departementCodes;
+  if (departementCode) {
+    departementCodes = [departementCode];
   } else if (regionId) {
     const queryResult =
       (await Departement.query().where({ id_region: regionId }).select("id")) ||
       [];
-    departementIds = queryResult.map((res) => res.id);
+    departementCodes = queryResult.map((res) => res.id);
   }
-  return departementIds;
+  return departementCodes;
 }

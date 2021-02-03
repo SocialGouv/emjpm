@@ -29,7 +29,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
     telephone_portable,
     adresse,
     code_postal,
-    department_id,
+    departement_code,
     ville,
     dispo_max,
     siret,
@@ -40,12 +40,12 @@ const createMandataire = async (mandataireDatas, user_id) => {
 
   const mandataire = await Mandataire.query()
     .allowInsert(
-      "[siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, department_id, dispo_max]"
+      "[siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, departement_code, dispo_max]"
     )
     .insert({
       adresse,
       code_postal,
-      department_id,
+      departement_code,
       dispo_max,
       genre,
       latitude,
@@ -60,9 +60,9 @@ const createMandataire = async (mandataireDatas, user_id) => {
   return mandataire;
 };
 
-const createDirection = (userId, type, regionId, departementId) => {
+const createDirection = (userId, type, regionId, departementCode) => {
   return Direction.query().insert({
-    department_id: departementId,
+    departement_code: departementCode,
     region_id: regionId,
     type,
     user_id: userId,
@@ -141,7 +141,7 @@ const signup = async (req, res) => {
       }
       case "direction": {
         const {
-          direction: { directionType, departementId, regionId },
+          direction: { directionType, departementCode, regionId },
         } = body;
 
         let roleName = "direction_nationale";
@@ -149,7 +149,12 @@ const signup = async (req, res) => {
           roleName = "direction_territoriale";
         }
         await createRole(user.id, roleName);
-        await createDirection(user.id, directionType, regionId, departementId);
+        await createDirection(
+          user.id,
+          directionType,
+          regionId,
+          departementCode
+        );
 
         break;
       }

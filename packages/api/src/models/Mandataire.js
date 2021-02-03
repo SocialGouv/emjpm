@@ -41,7 +41,7 @@ class Mandataire extends Model {
     return {
       department: {
         join: {
-          from: "mandataires.department_id",
+          from: "mandataires.departement_code",
           to: "departements.id",
         },
         modelClass: Models.Departement,
