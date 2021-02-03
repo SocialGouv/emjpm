@@ -1,29 +1,3 @@
-export function regionsToOptions(datas) {
-  const all = [
-    {
-      label: "Toutes les régions",
-      value: null,
-    },
-  ];
-  Array.prototype.push.apply(all, toOptions(datas, "id", "nom"));
-  return all;
-}
-
-export function departementToOptions(datas) {
-  const all = [];
-  if (datas && datas.length > 1) {
-    all.push({
-      label: "Tous les départements",
-      value: null,
-    });
-  }
-  Array.prototype.push.apply(all, toOptions(datas, "id", "nom"));
-  all.sort(function (a, b) {
-    return a.label - b.label;
-  });
-  return all;
-}
-
 export const toOptions = (data, valueKey, labelKey) =>
   !data?.length
     ? []

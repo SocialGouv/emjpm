@@ -56,7 +56,7 @@ export const createRegionOptions = (rows, options = { all: true }) => {
     });
   }
   opts.push(
-    ...Object.entries(rows).map(([code, { nom }]) => ({
+    ...rows.map(({ code, nom }) => ({
       value: parseInt(code),
       label: nom,
     }))
@@ -66,18 +66,21 @@ export const createRegionOptions = (rows, options = { all: true }) => {
 
 export const createDepartementOptions = (rows, options = { all: true }) => {
   const opts = [];
-  if (options.all) {
+  if (options.all && rows.length > 0) {
     opts.push({
       label: "Tous les départements",
       value: null,
     });
   }
   opts.push(
-    ...Object.entries(rows).map(([code, { nom }]) => ({
+    ...rows.map(({ code, nom }) => ({
       value: parseInt(code),
       label: nom,
     }))
   );
+  opts.sort(function (a, b) {
+    return a.label - b.label;
+  });
   return opts;
 };
 
