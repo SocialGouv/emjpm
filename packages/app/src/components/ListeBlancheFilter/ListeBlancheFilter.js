@@ -13,7 +13,8 @@ import { FiltersContextSerializable } from "~/components/FiltersContextSerializa
 import { UserContext } from "~/components/UserContext";
 import { Button, Card, CheckBox, Input, Select } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
-import { departementToOptions, findOption } from "~/util/option/OptionUtil";
+import { createDepartementOptions } from "~/util/geodata";
+import { findOption } from "~/util/option/OptionUtil";
 
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
@@ -78,7 +79,7 @@ function ListeBlancheFilter() {
     );
   }
 
-  const departmentOptions = departementToOptions(departements);
+  const departmentOptions = createDepartementOptions(departements);
 
   return (
     <Fragment>
