@@ -4,50 +4,30 @@ import { Box, Flex, Text } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 import { Card, Input, Select } from "~/ui";
-import {
-  departementToOptions,
-  findOption,
-  regionsToOptions,
-} from "~/util/option/OptionUtil";
+import { findOption } from "~/util/option/OptionUtil";
 
-import { GET_REGIONS } from "./queries";
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
+
+import {
+  createDepartementOptions,
+  departementList,
+  regionOptions,
+} from "~/util/geodata";
 
 export function DirectionFilters(props) {
   const { useNameFilter = false } = props;
 
-  const { data: regionsData, loading, error } = useQuery(GET_REGIONS, {});
   const { filters, onFilterChange } = useContext(FiltersContextSerializable);
 
-  const { regions, departements } = useMemo(() => {
-    const regions = regionsData?.regions || [];
+  const regionFilter = filters.region;
+  const departementOptions = useMemo(() => {
+    const departements = departementList.filter(
+      ({ region }) =>
+        !regionFilter || region.toString() === regionFilter.toString()
+    );
 
-    if (!filters?.region) {
-      return { departements: [], regions };
-    }
-
-    const departements = regions
-      .filter((r) => r.id === filters.region)
-      .reduce((acc, item) => {
-        item.departements.forEach((departement) => {
-          acc.push(departement);
-        });
-        return acc;
-      }, []);
-
-    return { departements, regions };
-  }, [regionsData, filters]);
-
-  if (loading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (error) {
-    return <div>Une erreur est survenue, veuillez réessayer plus tard.</div>;
-  }
-
-  const regionOptions = regionsToOptions(regions);
-  const departementOptions = departementToOptions(departements);
+    return createDepartementOptions(departements);
+  }, [regionFilter]);
 
   return (
     <Card>
