@@ -14,7 +14,7 @@ import {
 import { adminServiceSchema as validationSchema } from "~/lib/validationSchemas/adminServiceSchema";
 import { Button, Heading4, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
-import { getDepartementByCodePostal } from "~/util/codePostal";
+import { getDepartementByCodePostal } from "~/util/geodata";
 import SelectSIREN from "~/components/SelectSIREN";
 import SelectAdresse from "~/components/SelectAdresse";
 import SelectVille from "~/components/SelectVille";
