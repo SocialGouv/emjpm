@@ -4,7 +4,7 @@ import { components } from "react-select";
 
 import { FormGroupSelect } from "~/components/AppForm";
 
-import { getCommunesByCodePostal } from "~/util/codePostal";
+import { getCommunesByCodePostal } from "~/util/geodata";
 
 const placeholder = "Ville";
 
