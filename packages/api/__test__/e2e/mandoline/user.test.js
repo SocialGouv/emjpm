@@ -109,7 +109,7 @@ describe("POST /api/mandoline/user", () => {
           org_nom: "Organisme gestionnaire",
           org_ville: null,
           prenom: null,
-          siret: null,
+          siren: null,
           telephone: "0140506070",
         },
         type: "service",

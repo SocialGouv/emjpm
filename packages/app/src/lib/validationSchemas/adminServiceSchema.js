@@ -64,10 +64,6 @@ const adminServiceSchema = yup.object().shape({
     is: true,
     then: yup.string().required(),
   }),
-  // siret: yup
-  //   .string()
-  //   .matches(/^[\d]{14}$/, "Doit contenir exactement 14 chiffres")
-  //   .required(),
   siren: yup
     .string()
     .matches(/^[\d]{9}$/, "Doit contenir exactement 9 chiffres")
