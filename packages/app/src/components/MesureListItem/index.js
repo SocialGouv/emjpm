@@ -31,7 +31,7 @@ const GrayFemale = styled(Female)`
 
 const currentYear = new Date().getFullYear();
 
-function MesureListItem(props) {
+export default function MesureListItem(props) {
   const {
     mesure: {
       age,
@@ -183,5 +183,3 @@ MesureListItem.propTypes = {
   }).isRequired,
   onClick: PropTypes.func,
 };
-
-export { MesureListItem };

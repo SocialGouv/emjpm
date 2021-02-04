@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
-import { Antenne, Card, Heading, Spinner } from "~/ui";
+import { Card, Heading, Spinner } from "~/ui";
+import Antenne from "~/components/Antenne";
 
 import { SERVICE_ANTENNES } from "./queries";
 

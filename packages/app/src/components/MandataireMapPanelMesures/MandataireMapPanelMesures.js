@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import { MesureListItem } from "~/ui";
+import MesureListItem from "~/components/MesureListItem";
 import { formatMesureListItems } from "~/util/mesures";
 
 import { MESURES } from "./queries";

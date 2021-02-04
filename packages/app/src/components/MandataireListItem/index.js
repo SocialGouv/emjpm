@@ -19,7 +19,7 @@ import {
   titleStyle,
 } from "./style";
 
-function MandataireListItem(props) {
+export default function MandataireListItem(props) {
   const {
     gestionnaire: {
       currentAvailability,
@@ -150,5 +150,3 @@ MandataireListItem.propTypes = {
   isMagistratMap: PropTypes.bool,
   onClick: PropTypes.func,
 };
-
-export { MandataireListItem };

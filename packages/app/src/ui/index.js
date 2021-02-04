@@ -1,12 +1,3 @@
-// theme
-export * from "./preset";
-
-// globalStyle
-export * from "./globalStyle";
-
-// Components
-export * from "./components";
-
 export { default as Button } from "./Button";
 export { default as Grid } from "./Grid";
 export { default as Card } from "./Card";

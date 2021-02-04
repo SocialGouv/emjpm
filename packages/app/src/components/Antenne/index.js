@@ -11,7 +11,7 @@ import {
   numberStyle,
 } from "./style";
 
-function Antenne(props) {
+export default function Antenne(props) {
   const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
     <Card sx={sx}>
@@ -70,5 +70,3 @@ Antenne.propTypes = {
 
   to: PropTypes.string,
 };
-
-export { Antenne };

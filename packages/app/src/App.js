@@ -10,7 +10,7 @@ import { ProvideAuth, useAuth } from "~/routes/Auth";
 import Routes, { history } from "~/routes";
 import { useInitApolloClient } from "~/lib/apollo";
 
-import { GlobalStyle, presetEmjpm } from "~/ui";
+import { GlobalStyle, presetEmjpm } from "~/theme";
 import { formatUserFromToken } from "~/util/formatUserFromToken";
 import { useSentry } from "~/util/sentry";
 import { Router } from "react-router";

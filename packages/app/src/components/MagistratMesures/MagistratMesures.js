@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "~/components/MagistratFilters/context";
 import { UserContext } from "~/components/UserContext";
-import { MesureListItem } from "~/ui";
+import MesureListItem from "~/components/MesureListItem";
 import { formatMesureListItems } from "~/util/mesures";
 
 import { MAGISTRAT_MESURES_QUERY } from "./queries";

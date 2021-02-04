@@ -4,7 +4,8 @@ import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
-import { Card, Heading, MandataireListItem, Select, Spinner } from "~/ui";
+import { Card, Heading, Select, Spinner } from "~/ui";
+import MandataireListItem from "~/components/MandataireListItem";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";

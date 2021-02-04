@@ -5,17 +5,11 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
+import { MandataireContextProvider } from "~/components/Mandatairelist";
+import MandataireListItem from "~/components/MandataireListItem";
+
 import { useDebounce } from "~/hooks";
-import {
-  Card,
-  Heading,
-  Input,
-  MandataireContextProvider,
-  MandataireListItem,
-  Select,
-  Spinner,
-  Text,
-} from "~/ui";
+import { Card, Heading, Input, Select, Spinner, Text } from "~/ui";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";

@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { formatMandatairesList } from "~/components/MagistratMandatairesList/utils";
 import { MapContext } from "~/components/Map/context";
 import { UserContext } from "~/components/UserContext";
-import { MandataireListItem } from "~/ui";
+import MandataireListItem from "~/components/MandataireListItem";
 
 import { MESURES_GESTIONNAIRE } from "./queries";
 import { MagistratMapMandataireListStyle } from "./style";

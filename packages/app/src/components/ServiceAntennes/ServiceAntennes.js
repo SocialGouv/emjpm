@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import { Box, Flex } from "rebass";
 
 import { AntenneLinkButton, LinkButton } from "~/components/Commons";
-import { Antenne, Card, Heading, Spinner, Text } from "~/ui";
+import Antenne from "~/components/Antenne";
+import { Card, Heading, Spinner, Text } from "~/ui";
 import { BoxWrapper } from "~/ui/Grid";
 
 import { ANTENNE } from "./queries";
