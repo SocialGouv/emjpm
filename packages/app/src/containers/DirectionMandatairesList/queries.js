@@ -4,7 +4,7 @@ export const GET_MANDATAIRES = gql`
   query viewMesureGestionnaireByDepartement(
     $offset: Int!
     $limit: Int!
-    $departement: Int
+    $departement: String
     $region: Int
     $discriminator: String
     $order: order_by
