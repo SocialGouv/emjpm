@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutServices } from "~/components/Layout";
-import { ServiceEditInformations } from "~/components/ServiceEditInformations";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 export default function EditInformations() {
   const {

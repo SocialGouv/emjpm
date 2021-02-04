@@ -1,6 +1,7 @@
-import { LayoutMandataire } from "~/components/Layout";
-import { MandataireInformations } from "~/components/MandataireInformations";
-import { BoxWrapper, Card } from "~/ui";
+import { LayoutMandataire } from "~/containers/Layout";
+import { MandataireInformations } from "~/containers/MandataireInformations";
+import { Card } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 const Informations = () => (
   <LayoutMandataire>

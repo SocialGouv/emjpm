@@ -1,11 +1,11 @@
 import { Box, Card, Link as StyledLink } from "rebass";
 
-import { AdminServiceMesures } from "~/components/AdminServices";
-import { LayoutAdmin } from "~/components/Layout";
-import { Link } from "~/components/Link";
-import { MesureImportPanel } from "~/components/MesureImport";
-import { ServiceEditInformations } from "~/components/ServiceEditInformations";
-import { BoxWrapper } from "~/ui";
+import { AdminServiceMesures } from "~/containers/AdminServices";
+import { LayoutAdmin } from "~/containers/Layout";
+import { Link } from "~/containers/Link";
+import { MesureImportPanel } from "~/containers/MesureImport";
+import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

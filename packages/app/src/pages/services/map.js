@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutServicesMap } from "~/components/Layout";
-import { ServiceMapPanelMesures } from "~/components/ServiceMapPanelMesures";
+import { LayoutServicesMap } from "~/containers/Layout";
+import { ServiceMapPanelMesures } from "~/containers/ServiceMapPanelMesures";
 
-import { ServiceMap } from "~/components/ServiceMap";
+import { ServiceMap } from "~/containers/ServiceMap";
 
 function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);

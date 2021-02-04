@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutMandataireMap } from "~/components/Layout";
-import { MandataireMapPanelMesures } from "~/components/MandataireMapPanelMesures";
+import { LayoutMandataireMap } from "~/containers/Layout";
+import { MandataireMapPanelMesures } from "~/containers/MandataireMapPanelMesures";
 
-import { MandataireMap } from "~/components/MandataireMap";
+import { MandataireMap } from "~/containers/MandataireMap";
 
 function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);

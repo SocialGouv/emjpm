@@ -1,6 +1,6 @@
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratMesureAdd } from "~/components/MagistratMesureAdd";
-import { BoxWrapper } from "~/ui";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratMesureAdd } from "~/containers/MagistratMesureAdd";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

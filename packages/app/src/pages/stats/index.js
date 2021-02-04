@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { IndicatorListTotal } from "~/components/IndicatorList";
-import { IndicatorsMenu } from "~/components/IndicatorsMenu";
-import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { IndicatorListTotal } from "~/containers/IndicatorList";
+import { IndicatorsMenu } from "~/containers/IndicatorsMenu";
+import { LayoutPublic } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function StatsPage() {
   return (

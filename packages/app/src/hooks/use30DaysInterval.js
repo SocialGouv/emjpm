@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { get30DaysIntervalTimestampz } from "~/util/dates";
+import { get30DaysIntervalTimestampz } from "~/utils/dates";
 
 export default function use30DaysInterval(d = new Date()) {
   const day = d.getDate();

@@ -1,9 +1,9 @@
 import { Box, Image } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { TokenRequest } from "~/components/TokenRequest";
-import { BoxWrapper, FlexWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { TokenRequest } from "~/containers/TokenRequest";
+import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
 function AuthorizationPage() {
   return (

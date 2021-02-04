@@ -1,11 +1,11 @@
 import { Flex } from "rebass";
 
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratMesure } from "~/components/MagistratMesure";
-import { MagistratMesureMandataire } from "~/components/MagistratMesureMandataire";
-import { MesureProvider } from "~/components/MesureContext";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratMesure } from "~/containers/MagistratMesure";
+import { MagistratMesureMandataire } from "~/containers/MagistratMesureMandataire";
+import { MesureProvider } from "~/containers/MesureContext";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

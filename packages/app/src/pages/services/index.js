@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { LayoutServices } from "~/components/Layout";
-import { ServiceBoard } from "~/components/ServiceBoard";
-import { StatisticMesureNature } from "~/components/StatisticMesureNature";
-import { BoxWrapper } from "~/ui";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceBoard } from "~/containers/ServiceBoard";
+import { StatisticMesureNature } from "~/containers/StatisticMesureNature";
+import { BoxWrapper } from "~/components/Grid";
 
 function ServiceBoardView() {
   return (

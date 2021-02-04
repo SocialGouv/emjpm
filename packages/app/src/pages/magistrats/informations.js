@@ -1,9 +1,10 @@
 import { Box, Flex } from "rebass";
 
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratInformations } from "~/components/MagistratInformations";
-import { MagistratTribunalInformations } from "~/components/MagistratTribunalInformations";
-import { BoxWrapper, Heading2 } from "~/ui";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratInformations } from "~/containers/MagistratInformations";
+import { MagistratTribunalInformations } from "~/containers/MagistratTribunalInformations";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (
@@ -22,7 +23,7 @@ function Informations() {
               p: 1,
             }}
           >
-            <Heading2>Informations générales</Heading2>
+            <Heading size={2}>Informations générales</Heading>
             <MagistratInformations mt="3" />
           </Box>
           <Box
@@ -32,7 +33,7 @@ function Informations() {
               p: 1,
             }}
           >
-            <Heading2>Votre tribunal</Heading2>
+            <Heading size={2}>Votre tribunal</Heading>
             <MagistratTribunalInformations mt="3" />
           </Box>
         </Flex>

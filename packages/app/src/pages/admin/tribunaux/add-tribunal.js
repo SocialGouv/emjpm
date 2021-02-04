@@ -1,9 +1,9 @@
 import { Flex } from "rebass";
 
-import { AdminAddTribunal } from "~/components/AdminTribunaux/AdminAddTribunal";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { AdminAddTribunal } from "~/containers/AdminTribunaux/AdminAddTribunal";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function AddTribunauxPage() {
   return (

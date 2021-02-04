@@ -1,9 +1,9 @@
 import { Flex } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratMandatairesList } from "~/components/MagistratMandatairesList";
-import { BoxWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratMandatairesList } from "~/containers/MagistratMandatairesList";
+import { BoxWrapper } from "~/components/Grid";
 
 function Mandataires() {
   return (

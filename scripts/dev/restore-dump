@@ -1,4 +1,4 @@
-export PGUSER=postgres
+export PGUSER=emjpm
 export PGPASSWORD=test
 
 DB=emjpm

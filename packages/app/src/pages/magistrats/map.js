@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { LayoutMagistratMap } from "~/components/Layout";
-import { MagistratMandatairesMap } from "~/components/MagistratMandatairesMap";
-import { MagistratMapMandatairesPanelList } from "~/components/MagistratMapMandatairesPanelList";
-import { MapContextProvider } from "~/components/Map/context";
-import { UserContext } from "~/components/UserContext";
+import { LayoutMagistratMap } from "~/containers/Layout";
+import { MagistratMandatairesMap } from "~/containers/MagistratMandatairesMap";
+import { MagistratMapMandatairesPanelList } from "~/containers/MagistratMapMandatairesPanelList";
+import { MapContextProvider } from "~/containers/Map/context";
+import { UserContext } from "~/containers/UserContext";
 
 function Map() {
   const { magistrat } = useContext(UserContext);

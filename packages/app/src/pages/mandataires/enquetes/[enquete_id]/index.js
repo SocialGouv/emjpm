@@ -2,13 +2,13 @@ import { useContext, useMemo } from "react";
 import { useSubscription } from "@apollo/client";
 import { useHistory, useParams } from "react-router-dom";
 
-import { LoadingWrapper } from "~/components/Commons";
-import { EnqueteReponse } from "~/components/Enquete";
-import { useCurrentStepFromUrl } from "~/components/Enquete/EnqueteCommon";
-import { ENQUETE_WITH_REPONSE_STATUS } from "~/components/Enquete/queries";
-import { LayoutMandataire } from "~/components/Layout";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { LoadingWrapper } from "~/containers/Commons";
+import { EnqueteReponse } from "~/containers/Enquete";
+import { useCurrentStepFromUrl } from "~/containers/Enquete/EnqueteCommon";
+import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
+import { LayoutMandataire } from "~/containers/Layout";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 function MandataireEnquetePage() {
   const history = useHistory();

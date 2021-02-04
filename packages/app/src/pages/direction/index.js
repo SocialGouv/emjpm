@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { Box } from "rebass";
 
-import { AvailabilityMap } from "~/components/DirectionAvailabilityMap";
-import { DirectionFilters } from "~/components/DirectionFilters";
+import { AvailabilityMap } from "~/containers/DirectionAvailabilityMap";
+import { DirectionFilters } from "~/containers/DirectionFilters";
 import {
   AvailableMesureIndicator,
   ClosedMesureIndicator,
@@ -10,14 +10,19 @@ import {
   MandatairesIndicator,
   OpenMesureIndicator,
   ServicesIndicator,
-} from "~/components/DirectionIndicators";
-import { MandatairesActivity } from "~/components/DirectionMandatairesActivity";
-import { MandatairesDisponibility } from "~/components/DirectionMandatairesDisponibility";
-import { MandatairesSubNavigation } from "~/components/DirectionMandatairesSubNavigation";
-import { FiltersContextSerializableProvider } from "~/components/FiltersContextSerializable";
-import { LayoutDirection } from "~/components/Layout";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "~/ui";
+} from "~/containers/DirectionIndicators";
+import { MandatairesActivity } from "~/containers/DirectionMandatairesActivity";
+import { MandatairesDisponibility } from "~/containers/DirectionMandatairesDisponibility";
+import { MandatairesSubNavigation } from "~/containers/DirectionMandatairesSubNavigation";
+import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
+import { LayoutDirection } from "~/containers/Layout";
+import { UserContext } from "~/containers/UserContext";
+import {
+  BoxWrapper,
+  FlexWrapper,
+  fourColumnStyle,
+  twoColumnStyle,
+} from "~/components/Grid";
 
 function Mandataires() {
   const user = useContext(UserContext);

@@ -1,6 +1,6 @@
-import { DirectionEnqueteDetailsReponsePreview } from "~/components/EnqueteDirection/DirectionEnqueteDetailsReponsePreview";
-import { LayoutDirection } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { DirectionEnqueteDetailsReponsePreview } from "~/containers/EnqueteDirection/DirectionEnqueteDetailsReponsePreview";
+import { LayoutDirection } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

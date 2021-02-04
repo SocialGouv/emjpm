@@ -1,4 +1,4 @@
-import "~/polyfills";
+import "~/utils/polyfills";
 
 import React from "react";
 import ReactDOM from "react-dom";

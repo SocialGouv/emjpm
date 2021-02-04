@@ -1,7 +1,7 @@
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { ResetPassword } from "~/components/ResetPassword";
-import { FlexWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { ResetPassword } from "~/containers/ResetPassword";
+import { FlexWrapper } from "~/components/Grid";
 
 import useSearchParams from "~/hooks/useSearchParams";
 

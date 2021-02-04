@@ -1,6 +1,6 @@
-import { AdminApiLogs } from "~/components/AdminApiLogs";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { AdminApiLogs } from "~/containers/AdminApiLogs";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 const ApiLogsIndex = () => (
   <LayoutAdmin>

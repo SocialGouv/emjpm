@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { Box, Image } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { Login, LoginCreateAccount } from "~/components/Login";
-import { BoxWrapper, FlexWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { Login, LoginCreateAccount } from "~/containers/Login";
+import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
-import { ExcludeBrowserBanner } from "~/components/ExcludeBrowserBanner";
+import { ExcludeBrowserBanner } from "~/containers/ExcludeBrowserBanner";
 
 function LoginPage() {
   return (
@@ -32,13 +32,13 @@ function LoginPage() {
               }}
             />
             {/* <Box sx={{ p: "6" }}>
-            <Heading4 mb="3">
+            <Heading size={4} mb="3">
               Une connaissance en temps réel de l’activité des travailleurs sociaux
-            </Heading4>
-            <Heading4 mb="3">
+            </Heading>
+            <Heading size={4} mb="3">
               Un référentiel géolocalisé de l’ensemble des tuteurs et de leur disponibilité
-            </Heading4>
-            <Heading4>Une simplification des démarches pour les personnes sous protection</Heading4>
+            </Heading>
+            <Heading size={4}>Une simplification des démarches pour les personnes sous protection</Heading>
           </Box> */}
           </Box>
           <Box
