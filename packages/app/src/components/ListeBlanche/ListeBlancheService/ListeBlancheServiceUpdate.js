@@ -50,7 +50,7 @@ export function ListeBlancheServiceUpdate(props) {
           org_gestionnaire: values.org_gestionnaire,
           org_nom: values.org_nom,
           org_ville: values.org_ville,
-          siret: values.siret,
+          siren: values.siren,
           telephone: values.telephone,
         },
       });
