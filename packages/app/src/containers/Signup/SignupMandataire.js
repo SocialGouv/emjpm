@@ -13,7 +13,7 @@ import {
 import { Geocode } from "~/containers/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
-import { signupMandataireSchema } from "~/lib/validationSchemas";
+import { signupMandataireSchema } from "~/validation-schemas";
 import { isSiretExists } from "~/query-service/SiretQueryService";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
 import { useDepartements } from "~/util/departements/useDepartements.hook";

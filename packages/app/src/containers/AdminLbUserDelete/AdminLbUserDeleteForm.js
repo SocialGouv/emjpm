@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { LB_USERS } from "~/containers/ListeBlanche/queries";
-import { adminUserDeleteSchema } from "~/lib/validationSchemas";
+import { adminUserDeleteSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
 import { DELETE_LB_USER } from "./mutations";

@@ -6,7 +6,7 @@ import fetch from "unfetch";
 
 import { Link } from "~/containers/Commons";
 import config from "~/config";
-import { resetPasswordSchema } from "~/lib/validationSchemas";
+import { resetPasswordSchema } from "~/validation-schemas";
 import { Button, Card, Heading, InlineError, Input, Text } from "~/components";
 
 const { API_URL } = config;

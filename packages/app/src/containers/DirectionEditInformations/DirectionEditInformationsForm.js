@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Link";
-import { directionEditSchema } from "~/lib/validationSchemas/directionEditSchema";
+import { directionEditSchema } from "~/validation-schemas/directionEditSchema";
 import { Button, Heading, InlineError, Text } from "~/components";
 
 function DirectionEditInformationsForm({

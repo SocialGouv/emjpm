@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
 
-import { adminEditorSchema } from "~/lib/validationSchemas";
+import { adminEditorSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError, Input, Text } from "~/components";
 
 export function AdminEditorForm(props) {

@@ -12,7 +12,7 @@ import {
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
 import { Link } from "~/containers/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
-import { mandataireEditSchema } from "~/lib/validationSchemas";
+import { mandataireEditSchema } from "~/validation-schemas";
 import {
   Button,
   Field,

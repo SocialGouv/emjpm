@@ -10,7 +10,7 @@ import {
 } from "~/containers/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
-import { signupServiceSchema } from "~/lib/validationSchemas";
+import { signupServiceSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 import { toOptions } from "~/util";
 import { useDepartements } from "~/util/departements/useDepartements.hook";

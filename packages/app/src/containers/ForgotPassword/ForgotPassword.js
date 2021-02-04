@@ -5,7 +5,7 @@ import fetch from "unfetch";
 
 import { Link } from "~/containers/Commons";
 import config from "~/config";
-import { forgotPasswordSchema } from "~/lib/validationSchemas";
+import { forgotPasswordSchema } from "~/validation-schemas";
 import {
   Button,
   Card,

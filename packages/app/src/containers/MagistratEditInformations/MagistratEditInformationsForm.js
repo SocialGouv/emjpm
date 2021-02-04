@@ -9,7 +9,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Commons";
-import { magistratEditSchema } from "~/lib/validationSchemas";
+import { magistratEditSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Text } from "~/components";
 
 function MagistratEditInformationsForm(props) {

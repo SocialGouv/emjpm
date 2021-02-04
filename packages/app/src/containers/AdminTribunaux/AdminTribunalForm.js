@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Box, Flex } from "rebass";
 
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
-import { adminTribunalSchema } from "~/lib/validationSchemas";
+import { adminTribunalSchema } from "~/validation-schemas";
 import {
   Button,
   Card,

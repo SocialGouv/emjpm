@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
-import { adminUserDeleteSchema } from "~/lib/validationSchemas";
+import { adminUserDeleteSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
 // import { USERS } from "~/containers/AdminUsers/queries";

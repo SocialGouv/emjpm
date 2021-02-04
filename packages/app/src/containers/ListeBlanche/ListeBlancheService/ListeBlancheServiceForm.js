@@ -11,7 +11,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/containers/AppForm";
-import { adminServiceSchema as validationSchema } from "~/lib/validationSchemas/adminServiceSchema";
+import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
 import { Button, Heading, Text } from "~/components";
 import { useDepartementsOptions } from "~/util/departements";
 import { getDepartementByCodePostal } from "~/util/geodata";

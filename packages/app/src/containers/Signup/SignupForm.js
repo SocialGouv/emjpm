@@ -12,7 +12,7 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
-import { signupSchema } from "~/lib/validationSchemas";
+import { signupSchema } from "~/validation-schemas";
 import { isEmailExists } from "~/query-service/EmailQueryService";
 import { Button, Heading, Text } from "~/components";
 

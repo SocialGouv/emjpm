@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Link";
-import { adminEditSchema } from "~/lib/validationSchemas/adminEditSchema";
+import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
 import { Button, Heading, InlineError, Text } from "~/components";
 
 function AdminEditInformationsForm({

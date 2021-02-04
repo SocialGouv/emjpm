@@ -12,7 +12,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
-import { magistratMandataireSchema } from "~/lib/validationSchemas";
+import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
 export function MagistratMesureAddForm(props) {

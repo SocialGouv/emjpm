@@ -8,7 +8,7 @@ import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
 import config from "~/config";
 import { PATH } from "~/constants/basePath";
-import { passwordSchema } from "~/lib/validationSchemas";
+import { passwordSchema } from "~/validation-schemas";
 import {
   Button,
   Card,

@@ -10,7 +10,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
-import { mesureEditSchema } from "~/lib/validationSchemas";
+import { mesureEditSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 
 function initialValues(mesure) {

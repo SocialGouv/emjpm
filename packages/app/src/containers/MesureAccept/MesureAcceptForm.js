@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { FormGroupInput, FormGroupSelect } from "~/containers/AppForm";
 import { GeocodeCities } from "~/containers/Geocode";
-import { mesureAcceptSchema } from "~/lib/validationSchemas";
+import { mesureAcceptSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 
 export function MesureAcceptForm(props) {

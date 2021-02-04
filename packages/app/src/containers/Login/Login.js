@@ -7,7 +7,7 @@ import fetch from "unfetch";
 
 import { Link } from "~/containers/Commons";
 import config from "~/config";
-import { loginSchema } from "~/lib/validationSchemas";
+import { loginSchema } from "~/validation-schemas";
 import {
   Button,
   Card,

@@ -8,7 +8,7 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/containers/AppForm";
-import { mesureRessourceSchema } from "~/lib/validationSchemas";
+import { mesureRessourceSchema } from "~/validation-schemas";
 import {
   Button,
   Field,

@@ -8,7 +8,7 @@ import { UserProvider } from "~/containers/UserContext/index";
 import { ProvideAuth, useAuth } from "~/routes/Auth";
 
 import Routes, { history } from "~/routes";
-import { useInitApolloClient } from "~/lib/apollo";
+import useInitApolloClient from "~/hooks/useInitApolloClient";
 
 import { GlobalStyle, presetEmjpm } from "~/theme";
 import { formatUserFromToken } from "~/util/formatUserFromToken";

@@ -10,7 +10,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { GeocodeCities } from "~/containers/Geocode";
-import { mesureEtatSchema } from "~/lib/validationSchemas";
+import { mesureEtatSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
 
 function initialValues(mesureEtat) {

@@ -1,4 +1,4 @@
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 
 // fonction identique à activiteSchemaUtil
 export function buildMesureGroupsAttributes(mesureGroups) {

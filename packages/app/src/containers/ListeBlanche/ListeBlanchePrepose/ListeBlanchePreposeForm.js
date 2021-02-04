@@ -12,7 +12,7 @@ import {
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { Button, Heading, RadioGroup } from "~/components";
 
 const validationSchema = yup.object().shape({

@@ -12,7 +12,7 @@ import {
 } from "~/containers/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
-import { signupDirectionSchema } from "~/lib/validationSchemas";
+import { signupDirectionSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 import { useDepartementsOptions } from "~/util/departements";
 import { toOptions } from "~/util/option/OptionUtil";

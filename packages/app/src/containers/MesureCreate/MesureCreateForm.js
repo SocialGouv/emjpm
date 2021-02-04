@@ -11,7 +11,7 @@ import {
 } from "~/containers/AppForm";
 import { GeocodeCities } from "~/containers/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
-import { mesureCreateSchema } from "~/lib/validationSchemas";
+import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 
 function initialValues() {

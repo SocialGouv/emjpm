@@ -1,7 +1,7 @@
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { formatFormInput, parseFormFloat, parseFormInt } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";

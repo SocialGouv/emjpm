@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Commons";
-import { adminUserServiceSchema } from "~/lib/validationSchemas";
+import { adminUserServiceSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError } from "~/components";
 
 function AdminUserServiceForm(props) {

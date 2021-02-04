@@ -9,7 +9,7 @@ import {
 } from "~/containers/AppForm";
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
 import { Link } from "~/containers/Link";
-import { serviceSchema } from "~/lib/validationSchemas/serviceSchema";
+import { serviceSchema } from "~/validation-schemas/serviceSchema";
 import {
   Button,
   Field,

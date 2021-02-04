@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
-import { serviceAntenneSchema } from "~/lib/validationSchemas";
+import { serviceAntenneSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 
 function ServiceAntenneForm(props) {

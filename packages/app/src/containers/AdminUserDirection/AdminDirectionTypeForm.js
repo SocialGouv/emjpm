@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Link";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
 
 const directionTypeOptions = [

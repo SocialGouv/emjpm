@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 
 import { useHistory } from "react-router-dom";
 
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { Button, Field, InlineError, Input } from "~/components";
 
 import { CREATE_ENQUETE } from "./mutations";

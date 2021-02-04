@@ -1,7 +1,7 @@
 import { Box } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { formatFormInput, parseFormInput, parseFormInt } from "~/util";
 
 import { ENQ_REP_INFO_SERVICE } from "../constants/ENQ_REQ_INFO_SERVICE.const";

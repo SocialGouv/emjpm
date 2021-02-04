@@ -1,5 +1,5 @@
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { Heading } from "~/components";
 import { formatFormInput, parseFormInt } from "~/util";
 

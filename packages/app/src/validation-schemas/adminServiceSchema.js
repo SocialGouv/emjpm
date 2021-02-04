@@ -1,4 +1,4 @@
-import yup from "../validationSchemas/yup";
+import yup from "./yup";
 
 import { getDepartementByCodePostal, codePostalExists } from "~/util/geodata";
 

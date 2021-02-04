@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
 
-import { serviceMemberInvitationSchema } from "~/lib/validationSchemas";
+import { serviceMemberInvitationSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError, Input, Text } from "~/components";
 
 function ServiceMemberInvitationForm(props) {

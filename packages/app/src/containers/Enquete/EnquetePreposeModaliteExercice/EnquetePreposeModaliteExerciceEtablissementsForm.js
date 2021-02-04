@@ -5,7 +5,7 @@ import { FieldArray, FormikProvider } from "formik";
 import { Box, Flex } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import yup from "~/lib/validationSchemas/yup";
+import yup from "~/validation-schemas/yup";
 import { Button, Card, Heading } from "~/components";
 import { formatFormInput } from "~/util";
 

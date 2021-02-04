@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { editorTokenSchema } from "~/lib/validationSchemas";
+import { editorTokenSchema } from "~/validation-schemas";
 import {
   Button,
   Card,

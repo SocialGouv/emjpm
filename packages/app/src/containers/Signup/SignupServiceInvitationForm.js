@@ -8,7 +8,7 @@ import {
   FormInputBox,
 } from "~/containers/AppForm";
 import { Link } from "~/containers/Link";
-import { signupSchema } from "~/lib/validationSchemas";
+import { signupSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
 export function SignupServiceInvitationForm(props) {

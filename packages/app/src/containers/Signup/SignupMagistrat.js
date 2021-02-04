@@ -11,7 +11,7 @@ import {
 } from "~/containers/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
-import { signupMagistratSchema } from "~/lib/validationSchemas";
+import { signupMagistratSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
 import { SignupContext } from "./context";

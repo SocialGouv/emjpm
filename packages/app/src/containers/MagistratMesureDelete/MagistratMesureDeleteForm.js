@@ -7,7 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import { GESTIONNAIRES } from "~/containers/MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "~/containers/MagistratMesures/queries";
 import { UserContext } from "~/containers/UserContext";
-import { magistratMesureDeleteSchema } from "~/lib/validationSchemas";
+import { magistratMesureDeleteSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Input } from "~/components";
 
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
