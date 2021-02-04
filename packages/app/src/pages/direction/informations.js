@@ -1,8 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { DirectionInformations } from "~/components/DirectionInformations";
-import { LayoutDirection } from "~/components/Layout";
-import { BoxWrapper, Heading2 } from "~/ui";
+import { DirectionInformations } from "~/containers/DirectionInformations";
+import { LayoutDirection } from "~/containers/Layout";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (
@@ -21,7 +22,7 @@ function Informations() {
               p: 1,
             }}
           >
-            <Heading2>Informations générales</Heading2>
+            <Heading size={2}>Informations générales</Heading>
             <DirectionInformations mt="3" />
           </Box>
         </Flex>

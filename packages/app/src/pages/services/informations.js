@@ -1,9 +1,9 @@
 import { Box, Card } from "rebass";
 
-import { LayoutServices } from "~/components/Layout";
-import { ServiceAntennes } from "~/components/ServiceAntennes";
-import { ServiceInformations } from "~/components/ServiceInformations";
-import { BoxWrapper } from "~/ui";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceAntennes } from "~/containers/ServiceAntennes";
+import { ServiceInformations } from "~/containers/ServiceInformations";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (

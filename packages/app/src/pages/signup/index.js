@@ -1,7 +1,7 @@
-import { LayoutPublic } from "~/components/Layout";
-import Signup from "~/components/Signup";
-import { SignupContextProvider } from "~/components/Signup/context";
-import { BoxWrapper } from "~/ui";
+import { LayoutPublic } from "~/containers/Layout";
+import Signup from "~/containers/Signup";
+import { SignupContextProvider } from "~/containers/Signup/context";
+import { BoxWrapper } from "~/components/Grid";
 
 function SignupPage() {
   return (

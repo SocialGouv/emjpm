@@ -1,11 +1,11 @@
 import { useHistory } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutDirection } from "~/components/Layout";
-import { Link } from "~/components/Link";
-import { ListeBlancheServiceCreate } from "~/components/ListeBlanche";
-import { BoxWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutDirection } from "~/containers/Layout";
+import { Link } from "~/containers/Link";
+import { ListeBlancheServiceCreate } from "~/containers/ListeBlanche";
+import { BoxWrapper } from "~/components/Grid";
 
 function ListBlanchePage() {
   const history = useHistory();

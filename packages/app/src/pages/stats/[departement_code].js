@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { IndicatorList } from "~/components/IndicatorList";
-import { IndicatorsMenu } from "~/components/IndicatorsMenu";
-import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { IndicatorList } from "~/containers/IndicatorList";
+import { IndicatorsMenu } from "~/containers/IndicatorsMenu";
+import { LayoutPublic } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function DepartmentStatsPage() {

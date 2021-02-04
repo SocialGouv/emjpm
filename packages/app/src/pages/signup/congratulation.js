@@ -1,8 +1,9 @@
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Link } from "rebass";
 
-import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper, Button, Card, Heading2, Text } from "~/ui";
+import { LayoutPublic } from "~/containers/Layout";
+import { Button, Card, Heading, Text } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 const cardStyle = { m: "1", mt: "5", p: "5" };
 
@@ -15,7 +16,9 @@ function CongratulationPage() {
     <LayoutPublic>
       <BoxWrapper mt={6} px="1" p={"150px"}>
         <Card sx={cardStyle}>
-          <Heading2>{"Votre demande d'inscription est terminée"}</Heading2>
+          <Heading size={2}>
+            {"Votre demande d'inscription est terminée"}
+          </Heading>
           <Text mb="1" lineHeight="2" pt={6}>
             {"Merci ! Votre demande a bien été prise en compte."}
           </Text>

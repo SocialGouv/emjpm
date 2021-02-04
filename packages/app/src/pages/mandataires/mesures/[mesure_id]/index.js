@@ -1,10 +1,10 @@
 import { Flex } from "rebass";
 
-import { LayoutMandataire } from "~/components/Layout";
-import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
-import { MesureProvider } from "~/components/MesureContext";
-import { MesureView } from "~/components/MesureView";
-import { BoxWrapper } from "~/ui";
+import { LayoutMandataire } from "~/containers/Layout";
+import { MandataireMesureSidebar } from "~/containers/MandataireMesureSidebar";
+import { MesureProvider } from "~/containers/MesureContext";
+import { MesureView } from "~/containers/MesureView";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

@@ -1,12 +1,12 @@
 import { useHistory } from "react-router-dom";
 import { Flex } from "rebass";
 
-import { AdminFilterBar } from "~/components/AdminFilterBar";
-import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
-import { AdminTribunaux } from "~/components/AdminTribunaux";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { AdminFilterBar } from "~/containers/AdminFilterBar";
+import { AdminFilterProvider } from "~/containers/AdminFilterBar/context";
+import { AdminTribunaux } from "~/containers/AdminTribunaux";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function AdminTribunauxPage() {
   const history = useHistory();

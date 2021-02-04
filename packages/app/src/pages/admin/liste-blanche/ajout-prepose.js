@@ -1,10 +1,10 @@
 import { Link as StyledLink } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutAdmin } from "~/components/Layout";
-import { Link } from "~/components/Link";
-import { ListeBlanchePreposeCreate } from "~/components/ListeBlanche";
-import { BoxWrapper } from "~/ui";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutAdmin } from "~/containers/Layout";
+import { Link } from "~/containers/Link";
+import { ListeBlanchePreposeCreate } from "~/containers/ListeBlanche";
+import { BoxWrapper } from "~/components/Grid";
 
 export default function ListBlancheAjoutPrepose() {
   return (

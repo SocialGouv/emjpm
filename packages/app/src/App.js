@@ -1,26 +1,24 @@
 import { Global, css } from "@emotion/react";
-import * as Sentry from "@sentry/react";
-import jwtDecode from "jwt-decode";
-
-import { ApolloProvider } from "@apollo/client";
+import { Router } from "react-router";
 import { ThemeProvider } from "theme-ui";
-import { UserProvider } from "~/components/UserContext/index";
-import { ProvideAuth, useAuth } from "~/routes/Auth";
+
+import * as Sentry from "@sentry/react";
+
+import { ProvideAuth } from "~/user/Auth";
 
 import Routes, { history } from "~/routes";
-import { useInitApolloClient } from "~/lib/apollo";
+import AppApollo from "~/apollo/AppApollo";
 
-import { GlobalStyle, presetEmjpm } from "~/ui";
-import { formatUserFromToken } from "~/util/formatUserFromToken";
-import { useSentry } from "~/util/sentry";
-import { Router } from "react-router";
+import { GlobalStyle, presetEmjpm } from "~/theme";
+import { useSentry } from "~/user/sentry";
 
-import { useMatomo } from "~/util/matomo";
+import AppUser from "~/user/AppUser";
+import AppMatomo from "~/user/AppMatomo";
 
-import AutoReload from "~/components/AutoReload";
-import Impersonation from "~/components/Impersonation";
+import AutoReload from "~/containers/AutoReload";
+import Impersonation from "~/containers/Impersonation";
 
-function App() {
+export default function App() {
   useSentry();
 
   return (
@@ -41,7 +39,15 @@ function App() {
       <ThemeProvider theme={presetEmjpm}>
         <Sentry.ErrorBoundary fallback={"Une erreur s'est produite"}>
           <ProvideAuth>
-            <AppApollo />
+            <AppApollo>
+              <AppUser>
+                <Router history={history}>
+                  <AppMatomo>
+                    <Routes />
+                  </AppMatomo>
+                </Router>
+              </AppUser>
+            </AppApollo>
           </ProvideAuth>
         </Sentry.ErrorBoundary>
       </ThemeProvider>
@@ -50,33 +56,3 @@ function App() {
     </>
   );
 }
-
-function AppApollo() {
-  const { authStore } = useAuth();
-  const { token } = authStore;
-
-  const apolloClient = useInitApolloClient({}, token);
-
-  const currentUser = token ? jwtDecode(token) : null;
-  // const data = { currentUser: formatUserFromToken(currentUser) };
-  const user = formatUserFromToken(currentUser);
-
-  return (
-    <ApolloProvider client={apolloClient}>
-      <UserProvider user={user}>
-        <Router history={history}>
-          <AppMatomo>
-            <Routes />
-          </AppMatomo>
-        </Router>
-      </UserProvider>
-    </ApolloProvider>
-  );
-}
-
-function AppMatomo({ children }) {
-  useMatomo();
-  return <>{children}</>;
-}
-
-export default App;

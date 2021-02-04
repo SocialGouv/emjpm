@@ -1,9 +1,9 @@
 import { Flex } from "rebass";
 
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratMesureDelete } from "~/components/MagistratMesureDelete";
-import { MesureProvider } from "~/components/MesureContext";
-import { BoxWrapper } from "~/ui";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratMesureDelete } from "~/containers/MagistratMesureDelete";
+import { MesureProvider } from "~/containers/MesureContext";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

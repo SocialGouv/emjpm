@@ -1,13 +1,16 @@
-import { EnqueteCreate } from "~/components/EnqueteCreate";
-import { LayoutDirection } from "~/components/Layout";
-import { BoxWrapper, Card, Heading2 } from "~/ui";
+import { EnqueteCreate } from "~/containers/EnqueteCreate";
+import { LayoutDirection } from "~/containers/Layout";
+import { Card, Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function CreateEnquete() {
   return (
     <LayoutDirection>
       <BoxWrapper mt={6} px="1">
         <Card p={5}>
-          <Heading2 mb={3}>Créer une enquête</Heading2>
+          <Heading size={2} mb={3}>
+            Créer une enquête
+          </Heading>
           <EnqueteCreate />
         </Card>
       </BoxWrapper>

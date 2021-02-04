@@ -1,14 +1,14 @@
 import { Box, Image } from "rebass";
 
-import { AuthorizationLogin } from "~/components/AuthorizationLogin";
-import { Authorize } from "~/components/Authorize";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper, FlexWrapper } from "~/ui";
+import { AuthorizationLogin } from "~/containers/AuthorizationLogin";
+import { Authorize } from "~/containers/Authorize";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import useSearchParams from "~/hooks/useSearchParams";
-import { useAuth } from "~/routes/Auth";
+import { useAuth } from "~/user/Auth";
 
 export default function AuthorizationPage() {
   const {

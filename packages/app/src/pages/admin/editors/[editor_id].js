@@ -1,9 +1,9 @@
 import { Link as StyledLink } from "rebass";
 
-import { AdminEditorEdit } from "~/components/AdminEditors/AdminEditorEdit";
-import { LayoutAdmin } from "~/components/Layout";
-import { Link } from "~/components/Link";
-import { BoxWrapper } from "~/ui";
+import { AdminEditorEdit } from "~/containers/AdminEditors/AdminEditorEdit";
+import { LayoutAdmin } from "~/containers/Layout";
+import { Link } from "~/containers/Link";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

@@ -1,16 +1,16 @@
 import { Flex } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutMandataire } from "~/components/Layout";
-import { MesureList } from "~/components/MesureList";
-import { MesureListButtonBar } from "~/components/MesureListButtonBar";
-import { MesureListFilters } from "~/components/MesureListFilters";
-import { FiltersContextProvider } from "~/components/MesureListFilters/context";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutMandataire } from "~/containers/Layout";
+import { MesureList } from "~/containers/MesureList";
+import { MesureListButtonBar } from "~/containers/MesureListButtonBar";
+import { MesureListFilters } from "~/containers/MesureListFilters";
+import { FiltersContextProvider } from "~/containers/MesureListFilters/context";
 import {
   DEFAULT_MESURE_NATURE,
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/components/Grid";
 
 function MesuresListView() {
   return (
