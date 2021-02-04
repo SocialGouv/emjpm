@@ -2,7 +2,7 @@ import { Box, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import {
   formatFormBoolean,
   formatFormInput,
@@ -139,7 +139,7 @@ export function EnqueteIndividuelInformationsMandataireForm(props) {
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Vos informations"}
       </HeadingTitle>
-      <Heading3>Informations générales</Heading3>
+      <Heading size={3}>Informations générales</Heading>
       <Box mt={4}>
         <EnqueteFormInputField
           id="departement"

@@ -2,7 +2,8 @@ import { Box, Flex } from "rebass";
 
 import { AdminInformations } from "~/components/AdminInformations";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper, Heading2 } from "~/ui";
+import { Heading } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function Informations() {
   return (
@@ -21,7 +22,7 @@ function Informations() {
               p: 1,
             }}
           >
-            <Heading2>Informations générales</Heading2>
+            <Heading size={2}>Informations générales</Heading>
             <AdminInformations mt="3" />
           </Box>
         </Flex>

@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "rebass";
 
-import { Button, Heading3 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 export function DynamicTableHeader(props) {
   const {
@@ -15,7 +15,9 @@ export function DynamicTableHeader(props) {
   return (
     <Flex my={3} justifyContent="space-between" alignItems="center">
       <Box>
-        <Heading3 mb={3}>{title}</Heading3>
+        <Heading size={3} mb={3}>
+          {title}
+        </Heading>
       </Box>
       {buttonEnable && (
         <Flex justifyContent="center" alignItems="center">

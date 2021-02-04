@@ -7,7 +7,7 @@ import fetch from "unfetch";
 import { Link } from "~/components/Commons";
 import config from "~/config";
 import { loginSchema } from "~/lib/validationSchemas";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Card, Field, Heading, InlineError, Input, Text } from "~/ui";
 import { useAuth } from "~/routes/Auth";
 import { matopush } from "~/util/matomo";
 
@@ -74,7 +74,9 @@ function AuthorizationLogin(props) {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">{"Connectez-vous à votre compte."}</Heading4>
+          <Heading size={4} mb="1">
+            {"Connectez-vous à votre compte."}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Indiquez votre email et votre mot de passe pour vous connecter."}
           </Text>

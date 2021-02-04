@@ -12,7 +12,7 @@ import {
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupMagistratSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 
 import { SignupContext } from "./context";
 import signup from "./signup";
@@ -66,7 +66,7 @@ function SignupMagistratForm({ tiDatas }) {
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Tribunal"}</Heading4>
+            <Heading size={4}>{"Tribunal"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Dans quel tribunal exercez-vous?"}
             </Text>

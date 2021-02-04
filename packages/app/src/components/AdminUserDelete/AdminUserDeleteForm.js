@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { adminUserDeleteSchema } from "~/lib/validationSchemas";
-import { Button, Heading3, Heading5 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 // import { USERS } from "~/components/AdminUsers/queries";
 import { DELETE_USER } from "./mutations";
@@ -37,7 +37,9 @@ export function AdminUserDeleteForm(props) {
   return (
     <Flex sx={AdminUserDeleteRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
-        <Heading5 mb="1">{"Supprimer l'utilisateur"}</Heading5>
+        <Heading size={5} mb="1">
+          {"Supprimer l'utilisateur"}
+        </Heading>
         <Text mb="2" lineHeight="1.5">
           {
             "Vous êtes sur le point de supprimer définitivement un utilisateur du système eMJPM. Toute suppression est irréversible."
@@ -54,7 +56,7 @@ export function AdminUserDeleteForm(props) {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading3>{"Supprimer l'utilisateur"}</Heading3>
+          <Heading size={3}>{"Supprimer l'utilisateur"}</Heading>
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <Flex justifyContent="flex-end">

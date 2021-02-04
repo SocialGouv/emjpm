@@ -13,7 +13,7 @@ import {
   DEFAULT_MESURE_NATURE,
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 export default function Mesures() {
   const { service_members } = useContext(UserContext);

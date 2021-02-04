@@ -4,7 +4,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { MandataireEditInformations } from "~/components/MandataireEditInformations";
 import { UserContext } from "~/components/UserContext";
 import { PATH } from "~/constants/basePath";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function EditInformations() {
   const { id, type } = useContext(UserContext);

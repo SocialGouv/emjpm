@@ -1,11 +1,11 @@
 import { Box, Flex } from "rebass";
 
-import { Card, Heading4, Text } from "~/ui";
+import { Card, Heading, Text } from "~/ui";
 
 export function AdminTribunalMagistrats({ magistrats }) {
   return (
     <Card>
-      <Heading4>{"Liste des magistrats"}</Heading4>
+      <Heading size={4}>{"Liste des magistrats"}</Heading>
       <Flex flexWrap="wrap">
         {magistrats.map(({ user: { id, email } }) => {
           return (

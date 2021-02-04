@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { Link } from "~/components/Commons";
 import { MesureContext } from "~/components/MesureContext";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 
 import {
   MagistratMesureContentStyle,
@@ -31,9 +31,9 @@ function MagistratMesure(props) {
   } = useContext(MesureContext);
   return (
     <Fragment>
-      <Heading3 mt="4" mb="3">
+      <Heading size={3} mt="4" mb="3">
         Votre mesure
-      </Heading3>
+      </Heading>
       <Flex sx={MagistratMesureStyle} {...props}>
         <Box sx={MagistratMesureLinksStyle}>
           <Link to={`/magistrats/mesures/${id}/delete`}>

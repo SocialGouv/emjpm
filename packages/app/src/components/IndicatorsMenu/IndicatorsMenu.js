@@ -4,7 +4,7 @@ import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
 import { Link } from "~/components/Link";
-import { Card, Heading4, Spinner } from "~/ui";
+import { Card, Heading, Spinner } from "~/ui";
 
 import { INDICATORS } from "./queries";
 
@@ -33,7 +33,7 @@ function IndicatorsMenu(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }

@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
-import { Button, Heading3, Heading5 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 export function MesureCloseForm(props) {
   const { handleSubmit, handleCancel } = props;
@@ -24,7 +24,9 @@ export function MesureCloseForm(props) {
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
-        <Heading5 mb="1">Mettre fin au mandat</Heading5>
+        <Heading size={5} mb="1">
+          Mettre fin au mandat
+        </Heading>
         <Text lineHeight="1.5">
           {
             "Le formulaire ci-contre vous permet de mettre fin au madat de protection selectionne. Vous devez indiquer la date et la raison de l'extinction de la mesure."
@@ -43,7 +45,7 @@ export function MesureCloseForm(props) {
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
-          <Heading3>Mettre fin au mandat</Heading3>
+          <Heading size={3}>Mettre fin au mandat</Heading>
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <FormGroupInput

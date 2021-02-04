@@ -7,7 +7,7 @@ import { Breadcrumb, LoadingWrapper } from "~/components/Commons";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
 import useQueryContextWithHasuraRole from "~/hooks/useQueryContextWithHasuraRole";
-import { Heading2 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
@@ -88,11 +88,11 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading2>{enqueteLabel}</Heading2>
+        <Heading size={2}>{enqueteLabel}</Heading>
       </Flex>
 
       <Flex mt={3} flexDirection="row">
-        <Heading2>Informations clés</Heading2>
+        <Heading size={2}>Informations clés</Heading>
       </Flex>
       <Box mt={2}>
         {data && (
@@ -124,7 +124,7 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
         flexDirection="column"
         justifyContent="center"
       >
-        <Heading2>{"Réponses à l'enquête"}</Heading2>
+        <Heading size={2}>{"Réponses à l'enquête"}</Heading>
       </Flex>
 
       <DirectionEnqueteReponsesCriteria

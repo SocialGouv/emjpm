@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { MesureRessourceCreateOrEdit } from "~/components/MesureRessourceCreateOrEdit";
 
-const { Heading3, Button, Text } = require("~/ui");
+const { Heading, Button, Text } = require("~/ui");
 const { Flex, Box } = require("rebass");
 const { MesureRessourceView } = require("./MesureRessourceView");
 
@@ -21,7 +21,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
 
   return (
     <Box {...props}>
-      <Heading3>{"Ressources de la mesure de protection"}</Heading3>
+      <Heading size={3}>{"Ressources de la mesure de protection"}</Heading>
       <Text lineHeight="1.5" color="textSecondary">
         {
           "Vous pouvez ajouter, modifier et supprimer les ressources de la mesure de protection"
@@ -30,7 +30,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
       <Flex flexDirection="column" my={1}>
         {mesureRessources.length > 0 && (
           <Box px="3" pt="1">
-            <Heading3>{"Ressources"}</Heading3>
+            <Heading size={3}>{"Ressources"}</Heading>
             <Flex flexDirection="column">
               {mesureRessources.map((ressource) => (
                 <Box key={ressource.id}>

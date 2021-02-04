@@ -5,7 +5,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/components/ListeBlanche";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 export default function ListBlancheAjoutService() {
   const history = useHistory();

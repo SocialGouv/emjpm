@@ -10,7 +10,7 @@ import {
   DEFAULT_MESURE_NATURE,
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function MesuresListView() {
   return (

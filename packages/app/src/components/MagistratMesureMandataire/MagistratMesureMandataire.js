@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
 import { MesureContext } from "~/components/MesureContext";
-import { Card, Heading3, Heading4, Spinner } from "~/ui";
+import { Card, Heading, Spinner } from "~/ui";
 
 import { GESTIONNAIRES } from "./queries";
 import {
@@ -41,7 +41,7 @@ function MagistratMesureMandataire(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -74,9 +74,9 @@ function MagistratMesureMandataire(props) {
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
   return (
     <Box {...props} width="100%" mb={6}>
-      <Heading3 mt="4" mb="3">
+      <Heading size={3} mt="4" mb="3">
         {`Le ${serviceId ? "service" : "mandataire"} attribué à la mesure`}
-      </Heading3>
+      </Heading>
       <Flex sx={MagistratMandataireStyle}>
         <Box sx={MagistratSideStyle} height="400px">
           <MagistratMandataireMap

@@ -2,7 +2,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { Box } from "rebass";
 
-import { AsyncSelect, Spinner } from "~/ui";
+import { Select, Spinner } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/util/geocode";
 
@@ -38,7 +38,8 @@ function Geocode(props) {
     : null;
 
   return (
-    <AsyncSelect
+    <Select
+      isAsync
       instanceId={instanceId}
       defaultValue={defaultValue}
       hasError={hasError}

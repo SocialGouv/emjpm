@@ -14,7 +14,7 @@ import {
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
   MESURE_STATUS_LABEL_VALUE_ETEINTE,
 } from "~/constants/mesures";
-import { Heading4, Select } from "~/ui";
+import { Heading, Select } from "~/ui";
 
 import { CALCULATE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
@@ -151,7 +151,9 @@ function AdminServiceMesures() {
 
       {antennes.length > 0 && (
         <Box mb={4}>
-          <Heading4 mb={3}>Antennes</Heading4>
+          <Heading size={4} mb={3}>
+            Antennes
+          </Heading>
           {antennes.map((antenne, index) => {
             return (
               <Flex key={`antenne-${index}`}>

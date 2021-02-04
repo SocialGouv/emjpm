@@ -4,7 +4,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { MandataireMesureSidebar } from "~/components/MandataireMesureSidebar";
 import { MesureAccept } from "~/components/MesureAccept";
 import { MesureProvider } from "~/components/MesureContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

@@ -4,7 +4,7 @@ import { Box } from "rebass";
 import { Footer } from "~/components/Footer";
 import { Header } from "~/components/Header";
 import { Navigation } from "~/components/Navigation";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 const navigationLinks = [
   {

@@ -5,7 +5,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneEdit } from "~/components/ServiceAntenneEdit";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ServiceAntenneEditPage() {
   const params = useParams();

@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
 import config from "~/config";
-import { Button, Card, Heading4, Text } from "~/ui";
+import { Button, Card, Heading, Text } from "~/ui";
 
 import { EDITOR } from "./queries";
 
@@ -42,7 +42,10 @@ function Authorize(props) {
         <>
           <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
             <Box>
-              <Heading4 mb="1">{`Autoriser ${editor.name} à accéder à votre compte eMJPM.`}</Heading4>
+              <Heading
+                size={4}
+                mb="1"
+              >{`Autoriser ${editor.name} à accéder à votre compte eMJPM.`}</Heading>
               <Text lineHeight="1.5" color="textSecondary">
                 {
                   "Vos informations eMJPM seront accessibles par ce dernier pour faciliter l'échange et la fluidité des services."

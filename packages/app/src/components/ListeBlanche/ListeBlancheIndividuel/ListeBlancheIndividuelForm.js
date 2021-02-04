@@ -15,7 +15,7 @@ import {
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
-import { Button, Heading4 } from "~/ui";
+import { Button, Heading } from "~/ui";
 import { formatFormInput } from "~/util";
 import {
   DepartementFormUtil,
@@ -181,7 +181,9 @@ export function ListeBlancheIndividuelForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Structure juridique"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Structure juridique"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <SelectSIREN
@@ -226,7 +228,9 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Mandataire"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Mandataire"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -252,7 +256,9 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Liste des agréments"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Liste des agréments"}
+          </Heading>
           <Text mt={2} mb={1}>
             {
               "Ajouter les départements dans lesquels ce mandataire a un agrément, et sélectionner son département financeur."

@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { MesureEtatCreateOrEdit } from "~/components/MesureEtatCreateOrEdit";
 
-const { Heading3, Button, Text } = require("~/ui");
+const { Heading, Button, Text } = require("~/ui");
 const { Flex, Box } = require("rebass");
 const { MesureEtatView } = require("./MesureEtatView");
 
@@ -21,7 +21,7 @@ function MesureEtatViewList({ mesure, ...props }) {
 
   return (
     <Box {...props}>
-      <Heading3>{"Etats de la mesure de protection"}</Heading3>
+      <Heading size={3}>{"Etats de la mesure de protection"}</Heading>
       <Text lineHeight="1.5" color="textSecondary">
         {
           "Vous pouvez ajouter, modifier et supprimer les états de la mesure de protection"

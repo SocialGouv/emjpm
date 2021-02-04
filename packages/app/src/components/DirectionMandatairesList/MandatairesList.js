@@ -4,14 +4,7 @@ import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
-import {
-  Card,
-  Heading2,
-  Heading4,
-  MandataireListItem,
-  Select,
-  Spinner,
-} from "~/ui";
+import { Card, Heading, MandataireListItem, Select, Spinner } from "~/ui";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MandatairesListStyle } from "./style";
@@ -62,7 +55,7 @@ function MandatairesList(props) {
   if (loading) {
     return (
       <Card>
-        <Heading2>Liste des mandataires</Heading2>
+        <Heading size={2}>Liste des mandataires</Heading>
         <Box my="5">
           <Spinner />
         </Box>
@@ -73,8 +66,8 @@ function MandatairesList(props) {
   if (error) {
     return (
       <Card>
-        <Heading2>Liste des mandataires</Heading2>
-        <Heading4>erreur</Heading4>
+        <Heading size={2}>Liste des mandataires</Heading>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }

@@ -3,7 +3,7 @@ import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
-import { Heading4, Text } from "~/ui";
+import { Heading, Text } from "~/ui";
 
 function ServiceBoard() {
   const { service } = useContext(UserContext);
@@ -21,7 +21,7 @@ function ServiceBoard() {
       <Flex p={1} flexDirection="column" width="300px">
         <Box bg="cardSecondary">
           <Box p={1}>
-            <Heading4>Vos indicateurs</Heading4>
+            <Heading size={4}>Vos indicateurs</Heading>
           </Box>
         </Box>
         <Card>
@@ -52,7 +52,7 @@ function ServiceBoard() {
       <Flex p={1} flexDirection="column" width="300px">
         <Box bg="cardSecondary">
           <Box p={1}>
-            <Heading4>Vos tribunaux</Heading4>
+            <Heading size={4}>Vos tribunaux</Heading>
           </Box>
         </Box>
         <Card>

@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { LinkButton } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import { getUserBasePath } from "~/constants";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { content, statusBox, subtitle, title } from "./style";
 
@@ -47,10 +47,14 @@ function MesureDetailView({ mesure, ...props }) {
     <Box {...props}>
       <Flex justifyContent="space-between" mb="3" flexWrap="wrap">
         <Flex>
-          <Heading3 sx={title}>{`${formatNatureMesure(
+          <Heading size={3} sx={title}>{`${formatNatureMesure(
             natureMesure
-          )} ${formatChampMesure(champMesure)}`}</Heading3>
-          <Heading3 ml={2} color="textSecondary">{`${numeroRg}`}</Heading3>
+          )} ${formatChampMesure(champMesure)}`}</Heading>
+          <Heading
+            size={3}
+            ml={2}
+            color="textSecondary"
+          >{`${numeroRg}`}</Heading>
         </Flex>
         <Box>
           <Text mx="auto" sx={statusBox(status)}>

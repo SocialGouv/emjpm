@@ -5,7 +5,7 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 import { Link } from "~/components/Link";
 import { UserContext } from "~/components/UserContext";
-import { Heading4, Text } from "~/ui";
+import { Heading, Text } from "~/ui";
 
 const COLORS = [
   "#FF6633",
@@ -73,7 +73,7 @@ function StatisticMesureNature() {
   return (
     <Card m={1} width="100%">
       <Box>
-        <Heading4>Répartition des mesures par nature</Heading4>
+        <Heading size={4}>Répartition des mesures par nature</Heading>
       </Box>
       {data?.length === 0 && (
         <Flex pt={7}>

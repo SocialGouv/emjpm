@@ -13,7 +13,7 @@ import {
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 
 export function MagistratMesureAddForm(props) {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
@@ -37,7 +37,7 @@ export function MagistratMesureAddForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>Jugement</Heading4>
+          <Heading size={4}>Jugement</Heading>
           <Text lineHeight="1.5">{"Information sur le jugement."}</Text>
         </FormGrayBox>
         <FormInputBox>
@@ -68,7 +68,7 @@ export function MagistratMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>Majeur protégé</Heading4>
+          <Heading size={4}>Majeur protégé</Heading>
           <Text lineHeight="1.5">{"Informations sur le majeur protégé"}</Text>
         </FormGrayBox>
         <FormInputBox>
@@ -91,7 +91,7 @@ export function MagistratMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>Mesure de protection</Heading4>
+          <Heading size={4}>Mesure de protection</Heading>
           <Text lineHeight="1.5">
             {"Informations sur la mesure de protection"}
           </Text>

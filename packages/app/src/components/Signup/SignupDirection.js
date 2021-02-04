@@ -13,7 +13,7 @@ import {
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupDirectionSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 import { toOptions } from "~/util/option/OptionUtil";
 
@@ -73,7 +73,7 @@ export function SignupDirection() {
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Institution"}</Heading4>
+            <Heading size={4}>{"Institution"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Pour quelle direction travaillez-vous?"}
             </Text>

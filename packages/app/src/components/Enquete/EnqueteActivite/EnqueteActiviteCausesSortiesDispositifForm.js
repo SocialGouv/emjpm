@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -81,7 +81,7 @@ export function EnqueteActiviteCausesSortiesDispositifForm(props) {
         </Text>
       </Box>
 
-      <Heading3>Causes de sorties du dispositif</Heading3>
+      <Heading size={3}>Causes de sorties du dispositif</Heading>
 
       <Flex mt={4}>
         <Flex alignItems="center" flex={1 / 2}>

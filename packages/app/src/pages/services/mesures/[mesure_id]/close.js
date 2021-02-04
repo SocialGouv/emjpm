@@ -4,7 +4,7 @@ import { LayoutServices } from "~/components/Layout";
 import { MesureClose } from "~/components/MesureClose";
 import { MesureProvider } from "~/components/MesureContext";
 import { ServiceMesureSidebar } from "~/components/ServiceMesureSidebar";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

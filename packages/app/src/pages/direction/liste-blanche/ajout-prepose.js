@@ -4,7 +4,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutDirection } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlanchePreposeCreate } from "~/components/ListeBlanche";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ListBlanchePage() {
   return (

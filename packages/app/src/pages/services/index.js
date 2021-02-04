@@ -3,7 +3,7 @@ import { Box, Flex } from "rebass";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceBoard } from "~/components/ServiceBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ServiceBoardView() {
   return (

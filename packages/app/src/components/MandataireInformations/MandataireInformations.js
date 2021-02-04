@@ -6,7 +6,7 @@ import { AccessToken } from "~/components/AccessToken";
 import { LinkButton } from "~/components/Commons";
 import { Link } from "~/components/Link";
 import { UserContext } from "~/components/UserContext";
-import { Button, Heading3, Heading5 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 import { content, subtitle } from "./style";
 
@@ -22,9 +22,9 @@ function MandataireInformations() {
 
   return (
     <Box>
-      <Heading3>
+      <Heading size={3}>
         {prenom ? prenom : ""} {nom ? nom : ""}
-      </Heading3>
+      </Heading>
       <Flex p={1} mt={2} flexDirection="column">
         {isIndividuel(user) && lb_user && (
           <IndividuelInformations lb_user={lb_user} />
@@ -34,7 +34,7 @@ function MandataireInformations() {
         )}
         <TribunauxInformations mandataireTis={mandataire_tis} />
         <Box mb={2}>
-          <Heading5>Coordonnées</Heading5>
+          <Heading size={5}>Coordonnées</Heading>
           <Box flex={1 / 2}>
             <Flex my={1}>
               <Text sx={subtitle}>{"Email"}</Text>
@@ -52,7 +52,7 @@ function MandataireInformations() {
         </Box>
         <Box>
           <Box mb={2}>
-            <Heading5>Géolocalisation</Heading5>
+            <Heading size={5}>Géolocalisation</Heading>
             <Text>
               {
                 "Cette adresse permettra de vous localiser sur les cartes de votre compte et des magistrats"
@@ -66,9 +66,9 @@ function MandataireInformations() {
         </Box>
 
         <Box>
-          <Heading5 mt={2} mb="2">
+          <Heading size={5} mt={2} mb="2">
             Votre activité
-          </Heading5>
+          </Heading>
           <Flex my={1}>
             <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
             <Text sx={content}>{label(mandataire.dispo_max)}</Text>
@@ -105,7 +105,7 @@ export { MandataireInformations };
 function TribunauxInformations({ mandataireTis }) {
   return (
     <Box mb={2}>
-      <Heading5>Tribunaux</Heading5>
+      <Heading size={5}>Tribunaux</Heading>
       <Flex my={1}>
         <Text sx={subtitle}>
           {
@@ -130,7 +130,7 @@ function TribunauxInformations({ mandataireTis }) {
 function PreposeInformations({ lb_user }) {
   return (
     <Box mb={2}>
-      <Heading5>Etablissements</Heading5>
+      <Heading size={5}>Etablissements</Heading>
       <Flex my={1}>
         <Text sx={subtitle}>{"Liste des établissements"}</Text>
         <Box flex={2 / 3}>
@@ -153,7 +153,7 @@ function IndividuelInformations({ lb_user }) {
   return (
     <>
       <Box mb={2}>
-        <Heading5>Structure juridique</Heading5>
+        <Heading size={5}>Structure juridique</Heading>
         <Flex my={1}>
           <Text sx={subtitle}>{"Siret"}</Text>
           <Text sx={content}>{label(lb_user.siret)}</Text>
@@ -171,7 +171,7 @@ function IndividuelInformations({ lb_user }) {
       </Box>
 
       <Box mb={2}>
-        <Heading5>Agrément</Heading5>
+        <Heading size={5}>Agrément</Heading>
         <Flex my={1}>
           <Text sx={subtitle}>{"Liste des départements"}</Text>
           <Box flex={2 / 3}>

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
-import { Card, Heading2, Heading4, Spinner } from "~/ui";
+import { Card, Heading, Spinner } from "~/ui";
 import { convertToPercentage } from "~/util/math";
 
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
@@ -23,7 +23,9 @@ function MandatairesActivity(props) {
   if (loading) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+        <Heading size={2}>
+          Répartition de l’activité par type de mandataires
+        </Heading>
         <Box my="5">
           <Spinner />
         </Box>
@@ -34,8 +36,10 @@ function MandatairesActivity(props) {
   if (error) {
     return (
       <Card p="4">
-        <Heading2>Répartition de l’activité par type de mandataires</Heading2>
-        <Heading4>erreur</Heading4>
+        <Heading size={2}>
+          Répartition de l’activité par type de mandataires
+        </Heading>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -65,7 +69,9 @@ function MandatairesActivity(props) {
 
   return (
     <Card p="4" {...props}>
-      <Heading2>Répartition de l’activité par type de mandataires</Heading2>
+      <Heading size={2}>
+        Répartition de l’activité par type de mandataires
+      </Heading>
       <MandatairesActivityChart data={activityChartData} />
     </Card>
   );

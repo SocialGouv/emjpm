@@ -4,7 +4,7 @@ import { Link as StyledLink } from "rebass";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheEdit } from "~/components/ListeBlanche";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ListeBlancheDetailPage() {
   const { id } = useParams();

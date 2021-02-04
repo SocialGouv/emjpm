@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
-import { Antenne, Card, Heading3, Heading4, Spinner } from "~/ui";
+import { Antenne, Card, Heading, Spinner } from "~/ui";
 
 import { SERVICE_ANTENNES } from "./queries";
 
@@ -28,7 +28,7 @@ function MagistratServiceAntennes(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -41,9 +41,9 @@ function MagistratServiceAntennes(props) {
 
   return (
     <Box>
-      <Heading3 mt="4" mb="3">
+      <Heading size={3} mt="4" mb="3">
         Liste des antennes du service
-      </Heading3>
+      </Heading>
       <Flex flexWrap="wrap" justifyContent="space-around">
         {service_antenne.map((antenne) => {
           antenne = { ...antenne, preferences: [] };

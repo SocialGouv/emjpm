@@ -4,7 +4,7 @@ import { DirectionFilters } from "~/components/DirectionFilters";
 import { ServicesIndicator } from "~/components/DirectionIndicators";
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
 import { LayoutDirection } from "~/components/Layout";
-import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui/Grid";
 
 function DemographicDatas() {
   return (

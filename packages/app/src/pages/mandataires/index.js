@@ -3,7 +3,7 @@ import { Box, Flex } from "rebass";
 import { LayoutMandataire } from "~/components/Layout";
 import { MandataireBoard } from "~/components/MandataireBoard";
 import { StatisticMesureNature } from "~/components/StatisticMesureNature";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function MandataireBoardView() {
   return (

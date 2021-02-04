@@ -1,12 +1,12 @@
 import DocumentTitle from "react-document-title";
 
-import { Heading1 } from "~/ui";
+import { Heading } from "~/ui";
 
 function HeadingTitle(props) {
   return (
     <>
       <DocumentTitle title={"e-MJPM - " + props.children} />
-      <Heading1 {...props} />
+      <Heading size={1} {...props} />
     </>
   );
 }

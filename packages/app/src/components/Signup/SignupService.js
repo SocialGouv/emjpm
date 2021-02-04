@@ -11,7 +11,7 @@ import {
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 import { toOptions } from "~/util";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
@@ -80,7 +80,7 @@ function SignupServiceForm({ serviceDatas }) {
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Votre service"}</Heading4>
+            <Heading size={4}>{"Votre service"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {
                 "Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez."

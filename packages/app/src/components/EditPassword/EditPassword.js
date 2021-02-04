@@ -9,7 +9,7 @@ import { UserContext } from "~/components/UserContext";
 import config from "~/config";
 import { PATH } from "~/constants/basePath";
 import { passwordSchema } from "~/lib/validationSchemas";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Card, Field, Heading, InlineError, Input, Text } from "~/ui";
 
 const { API_URL } = config;
 
@@ -81,7 +81,7 @@ function EditPassword() {
           p="5"
         >
           <Box height="80px">
-            <Heading4>{"Modifier votre mot de passe"}</Heading4>
+            <Heading size={4}>{"Modifier votre mot de passe"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {
                 "Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial."

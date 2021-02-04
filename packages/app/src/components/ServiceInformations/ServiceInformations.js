@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 import { AccessToken } from "~/components/AccessToken";
 import { LinkButton } from "~/components/Commons";
 import { Link } from "~/components/Link";
-import { Button, Heading3, Heading5 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 import { GET_SERVICES } from "./queries";
 import { content, subtitle } from "./style";
@@ -48,10 +48,10 @@ function ServiceInformations() {
   } = service;
   return (
     <Box>
-      <Heading3>{etablissement}</Heading3>
+      <Heading size={3}>{etablissement}</Heading>
       <Flex p={1} mt={2} flexDirection="column">
         <Box mb={2}>
-          <Heading5>Service tutelaire</Heading5>
+          <Heading size={5}>Service tutelaire</Heading>
           <Flex my={1}>
             <Text sx={subtitle}>{"Siren"}</Text>
             <Text sx={content}>{siren || ""}</Text>
@@ -68,7 +68,7 @@ function ServiceInformations() {
         </Box>
         {org_gestionnaire && (
           <Box mb={2}>
-            <Heading5>Organisme gestionnaire</Heading5>
+            <Heading size={5}>Organisme gestionnaire</Heading>
             <Flex my={1}>
               <Text sx={subtitle}>{"Nom"}</Text>
               <Text sx={content}>{org_nom || ""}</Text>
@@ -86,7 +86,9 @@ function ServiceInformations() {
         )}
 
         <Box mb={2}>
-          <Heading5 mb="3">Contact</Heading5>
+          <Heading size={5} mb="3">
+            Contact
+          </Heading>
           <Flex my={1}>
             <Text sx={subtitle}>{"Responsable"}</Text>
             <Text sx={content}>
@@ -104,7 +106,7 @@ function ServiceInformations() {
         </Box>
         <Box mb={2}>
           <Box>
-            <Heading5>Géolocalisation</Heading5>
+            <Heading size={5}>Géolocalisation</Heading>
             <Text>
               {
                 "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
@@ -117,7 +119,7 @@ function ServiceInformations() {
           </Flex>
         </Box>
         <Box mb={2}>
-          <Heading5>Votre activité</Heading5>
+          <Heading size={5}>Votre activité</Heading>
           <Flex my={1}>
             <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
             <Text sx={content}>{dispo_max}</Text>
@@ -130,7 +132,9 @@ function ServiceInformations() {
           </Flex>
         </Box>
         <Box mb={2}>
-          <Heading5 mb="3">Tribunaux d’instance</Heading5>
+          <Heading size={5} mb="3">
+            Tribunaux d’instance
+          </Heading>
           {service_tis.map((ti) => {
             return (
               <Text key={ti.ti.id} sx={content}>

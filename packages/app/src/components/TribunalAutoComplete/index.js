@@ -2,7 +2,7 @@ import { useApolloClient } from "@apollo/client";
 import debounce from "p-debounce";
 import PropTypes from "prop-types";
 
-import { AsyncSelect } from "~/ui";
+import { Select } from "~/ui";
 
 import { TRIBUNAL } from "./queries";
 
@@ -10,7 +10,8 @@ function TribunalAutoComplete(props) {
   const client = useApolloClient();
   const { defaultOptions, hasError, value, name, id, onChange, size } = props;
   return (
-    <AsyncSelect
+    <Select
+      isAsync
       instanceId={name}
       name={name}
       id={id}

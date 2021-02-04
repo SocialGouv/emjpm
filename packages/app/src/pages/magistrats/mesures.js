@@ -6,7 +6,7 @@ import { MagistratFilters } from "~/components/MagistratFilters";
 import { FiltersContextProvider } from "~/components/MagistratFilters/context";
 import { MagistratMesures } from "~/components/MagistratMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 export default function Mesures() {
   return (

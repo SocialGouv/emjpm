@@ -6,7 +6,7 @@ import fetch from "unfetch";
 import { Link } from "~/components/Commons";
 import config from "~/config";
 import { forgotPasswordSchema } from "~/lib/validationSchemas";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Card, Field, Heading, InlineError, Input, Text } from "~/ui";
 import { captureException } from "~/util/sentry";
 
 const { API_URL } = config;
@@ -61,9 +61,9 @@ function ForgotPassword() {
     <Card mt="5" p="0" maxWidth={["100%", "60%", "50%"]}>
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading4 mb="1">
+          <Heading size={4} mb="1">
             {"Demande de réinitialisation du mot de passe"}
-          </Heading4>
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Pour demander une réinitialisation de votre mot de passe, saisissez l'adresse e-mail que vous utilisez pour vous connecter à E-mjpm"

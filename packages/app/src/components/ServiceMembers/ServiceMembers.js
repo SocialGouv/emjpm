@@ -3,7 +3,7 @@ import { stdFormatter } from "@emjpm/biz";
 import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { CheckBox, Heading2, Text } from "~/ui";
+import { CheckBox, Heading, Text } from "~/ui";
 
 import {
   DELETE_SERVICE_MEMBER,
@@ -58,9 +58,9 @@ function ServiceMembers(props) {
   const { service_members } = data;
   return (
     <Box mb="4">
-      <Heading2 width={[1]} mb="2">
+      <Heading size={2} width={[1]} mb="2">
         Membres du service et accès
-      </Heading2>
+      </Heading>
       {service_members.map((member, i) => {
         return (
           <Flex sx={listStyle} index={i} key={member.user.email}>

@@ -5,7 +5,7 @@ import { ServiceMemberInvitationCreate } from "~/components/ServiceMemberInvitat
 import { ServiceMemberInvitations } from "~/components/ServiceMemberInvitations";
 import { ServiceMembers } from "~/components/ServiceMembers";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ServiceMembersPage() {
   const { service_members, id } = useContext(UserContext);

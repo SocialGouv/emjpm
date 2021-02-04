@@ -13,7 +13,7 @@ import {
 import { Link } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
 import yup from "~/lib/validationSchemas/yup";
-import { Button, Heading4, RadioGroup } from "~/ui";
+import { Button, Heading, RadioGroup } from "~/ui";
 
 const validationSchema = yup.object().shape({
   email: yup.string().required(),
@@ -90,7 +90,9 @@ export function ListeBlanchePreposeForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Informations"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Informations"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -115,7 +117,9 @@ export function ListeBlanchePreposeForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Liste des établissements"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Liste des établissements"}
+          </Heading>
           <Text mt={"20px"} mb={2}>
             {
               "Ajouter les établissements dans lesquels ce mandataire travaille, et sélectionner son établissement de rattachement."

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceMesureImport } from "~/components/ServiceMesureImport";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ServiceMesuresImport() {
   const { service_members } = useContext(UserContext);

@@ -4,7 +4,7 @@ import { AuthorizationLogin } from "~/components/AuthorizationLogin";
 import { Authorize } from "~/components/Authorize";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper, FlexWrapper } from "~/ui";
+import { BoxWrapper, FlexWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 import useSearchParams from "~/hooks/useSearchParams";

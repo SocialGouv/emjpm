@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError } from "~/ui";
+import { Button, Field, Heading, InlineError } from "~/ui";
 
 function ServiceAntenneForm(props) {
   const { antenne = {}, handleSubmit } = props;
@@ -41,7 +41,9 @@ function ServiceAntenneForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Antenne"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Antenne"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -54,7 +56,9 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Responsable"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Responsable"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -73,7 +77,9 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Coordonnées"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Coordonnées"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -92,7 +98,7 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Adresse"}</Heading4>
+          <Heading size={4}>{"Adresse"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Cette adresse permettra de localiser l'antenne sur la carte des mesures"
@@ -111,7 +117,9 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Activité"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Activité"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             Ces informations seront visibles par les magistrats.
           </Text>

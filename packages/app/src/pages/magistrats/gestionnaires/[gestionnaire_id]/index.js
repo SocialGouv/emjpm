@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMandataire } from "~/components/MagistratMandataire";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

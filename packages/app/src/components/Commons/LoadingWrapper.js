@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Box, Card } from "rebass";
 
 import Error from "~/components/Error";
-import { Heading4, Spinner } from "~/ui";
+import { Heading, Spinner } from "~/ui";
 
 export function LoadingWrapper({
   children,
@@ -33,19 +33,19 @@ export function LoadingWrapper({
   ) : error ? (
     errorRedirectionEnabled ? (
       <Card mt={4} height="100%">
-        <Heading4>Erreur inattendue, redirection...</Heading4>
+        <Heading size={4}>Erreur inattendue, redirection...</Heading>
         <Box mt="3">
           <Spinner />
         </Box>
       </Card>
     ) : (
       <Card mt={4} height="100%">
-        <Heading4>Erreur inattendue</Heading4>
+        <Heading size={4}>Erreur inattendue</Heading>
       </Card>
     )
   ) : loading ? (
     <Card mt={4} height="100%">
-      <Heading4>Chargement en cours..</Heading4>
+      <Heading size={4}>Chargement en cours..</Heading>
       <Box mt="3">
         <Spinner />
       </Box>

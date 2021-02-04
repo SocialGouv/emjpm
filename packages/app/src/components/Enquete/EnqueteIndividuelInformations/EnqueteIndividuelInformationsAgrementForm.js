@@ -2,7 +2,7 @@ import { Box } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormBoolean, formatFormInput, parseFormInt } from "~/util";
 
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
@@ -79,7 +79,7 @@ export function EnqueteIndividuelInformationsAgrementForm(props) {
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Vos informations"}
       </HeadingTitle>
-      <Heading3>{"Agrément"}</Heading3>
+      <Heading size={3}>{"Agrément"}</Heading>
 
       <Box mt={4}>
         <EnqueteFormYesNoField

@@ -3,7 +3,7 @@ import { Box, Image } from "rebass";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutPublic } from "~/components/Layout";
 import { TokenRequest } from "~/components/TokenRequest";
-import { BoxWrapper, FlexWrapper } from "~/ui";
+import { BoxWrapper, FlexWrapper } from "~/ui/Grid";
 
 function AuthorizationPage() {
   return (

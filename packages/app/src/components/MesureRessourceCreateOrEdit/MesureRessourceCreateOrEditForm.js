@@ -9,7 +9,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { mesureRessourceSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError, Select, Text } from "~/ui";
+import { Button, Field, Heading, InlineError, Select, Text } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
 function initialValues(mesureRessource) {
@@ -39,10 +39,14 @@ export function MesureRessourceCreateOrEditForm(props) {
       <Flex>
         <FormGrayBox>
           {mesureRessourceToEdit?.id && (
-            <Heading4 mb={1}>{"Modification de la ressource"}</Heading4>
+            <Heading size={4} mb={1}>
+              {"Modification de la ressource"}
+            </Heading>
           )}
           {!mesureRessourceToEdit && (
-            <Heading4 mb={1}>{"Ajout d'une ressource"}</Heading4>
+            <Heading size={4} mb={1}>
+              {"Ajout d'une ressource"}
+            </Heading>
           )}
           <Text lineHeight="1.5" color="textSecondary">
             {

@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -89,7 +89,7 @@ export function EnqueteActiviteRevisionMesuresForm(props) {
           Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
         </Text>
       </Box>
-      <Heading3>Révisions de mesures</Heading3>
+      <Heading size={3}>Révisions de mesures</Heading>
 
       <Flex mt={4}>
         <Flex alignItems="center" flex={1 / 2}>

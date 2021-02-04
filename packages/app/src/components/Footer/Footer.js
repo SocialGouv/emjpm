@@ -2,7 +2,8 @@ import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/components/Commons";
 import config from "~/config";
-import { BoxWrapper, Logo } from "~/ui";
+import { Logo } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { FooterItemStyle, FooterWrapperStyle } from "./style";
 

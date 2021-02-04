@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Box, Flex } from "rebass";
 
 import { serviceMemberInvitationSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Field, Heading, InlineError, Input, Text } from "~/ui";
 
 function ServiceMemberInvitationForm(props) {
   const { handleSubmit } = props;
@@ -17,7 +17,7 @@ function ServiceMemberInvitationForm(props) {
   return (
     <Flex mb={4}>
       <Box width={[1 / 2]} bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
-        <Heading4>{"Invitez un nouveau membre au service"}</Heading4>
+        <Heading size={4}>{"Invitez un nouveau membre au service"}</Heading>
         <Text lineHeight="1.5" color="textSecondary">
           {"Un email contenant les instructions d'inscription sera envoyé."}
         </Text>

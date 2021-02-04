@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import yup from "~/lib/validationSchemas/yup";
-import { Button, Heading4 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 const directionTypeOptions = [
   {
@@ -70,7 +70,7 @@ export function AdminDirectionTypeForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>Type de direction</Heading4>
+          <Heading size={4}>Type de direction</Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupSelect

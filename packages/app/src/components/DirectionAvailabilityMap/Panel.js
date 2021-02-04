@@ -2,7 +2,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 
 import { Box, Button, Text } from "rebass";
 
-import { Card, Heading4 } from "~/ui";
+import { Card, Heading } from "~/ui";
 
 const ButtonStyle = {
   bg: "cardSecondary",
@@ -37,7 +37,9 @@ function Panel(props) {
         >
           <XCircle size={25} />
         </Button>
-        <Heading4 mb="2">{currentPanel.department.nom}</Heading4>
+        <Heading size={4} mb="2">
+          {currentPanel.department.nom}
+        </Heading>
         <Text mb="6px">{"Mesures en cours"}</Text>
         <Text
           fontWeight="bold"

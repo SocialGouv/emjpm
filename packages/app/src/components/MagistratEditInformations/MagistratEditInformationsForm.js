@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
 import { magistratEditSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, InlineError, Text } from "~/ui";
+import { Button, Heading, InlineError, Text } from "~/ui";
 
 function MagistratEditInformationsForm(props) {
   const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;
@@ -38,7 +38,9 @@ function MagistratEditInformationsForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Informations personnelles"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Informations personnelles"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -63,7 +65,9 @@ function MagistratEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Tribunal"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Tribunal"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Veuillez renseigner le tribunal dans lequel vous exercez."}
           </Text>

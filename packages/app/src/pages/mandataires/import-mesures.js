@@ -6,7 +6,7 @@ import { LayoutMandataire } from "~/components/Layout";
 import { MandataireMesureImport } from "~/components/MandataireMesureImport";
 import { MandataireOcmiMesureImport } from "~/components/MandataireOcmiMesureImport";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ImportMesures() {
   const user = useContext(UserContext);

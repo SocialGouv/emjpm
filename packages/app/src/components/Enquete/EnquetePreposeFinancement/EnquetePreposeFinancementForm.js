@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormFloat } from "~/util";
 
 import {
@@ -98,7 +98,9 @@ export function EnquetePreposeFinancementForm(props) {
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Financement en 2019"}
       </HeadingTitle>
-      <Heading3 mb={2}>{"Charges"}</Heading3>
+      <Heading size={3} mb={2}>
+        {"Charges"}
+      </Heading>
       <Flex>
         <Box width={1 / 3}>
           <EnqueteFormInputField
@@ -150,7 +152,9 @@ export function EnquetePreposeFinancementForm(props) {
       </Box>
 
       <Box mt={"50px"}>
-        <Heading3 mb={2}>{"Produits"}</Heading3>
+        <Heading size={3} mb={2}>
+          {"Produits"}
+        </Heading>
         <Flex>
           <Box width={1 / 2}>
             <EnqueteFormInputField

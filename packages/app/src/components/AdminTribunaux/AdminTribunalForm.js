@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { adminTribunalSchema } from "~/lib/validationSchemas";
-import { Button, Card, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Card, Field, Heading, InlineError, Input, Text } from "~/ui";
 
 import { cardStyle } from "./style";
 
@@ -36,13 +36,13 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
           p="5"
         >
           <Box height="230px">
-            <Heading4>{"Information du tribunal"}</Heading4>
+            <Heading size={4}>{"Information du tribunal"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Informations relatives au tribunal"}
             </Text>
           </Box>
           <Box height="150px">
-            <Heading4>{"Contact du tribunal"}</Heading4>
+            <Heading size={4}>{"Contact du tribunal"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               Contact du tribunal
             </Text>

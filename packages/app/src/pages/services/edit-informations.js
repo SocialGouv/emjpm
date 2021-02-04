@@ -4,7 +4,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceEditInformations } from "~/components/ServiceEditInformations";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 export default function EditInformations() {
   const {

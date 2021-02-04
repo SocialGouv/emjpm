@@ -3,7 +3,7 @@ import { Box } from "rebass";
 import { Link } from "~/components/Commons";
 import { EtablissementView } from "~/components/Etablissement";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

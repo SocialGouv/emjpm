@@ -3,7 +3,7 @@ import { Label } from "@rebass/forms";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -112,7 +112,7 @@ export function EnquetePopulationsForm(props) {
         </Text>
       </Box>
 
-      {title && <Heading3>{title}</Heading3>}
+      {title && <Heading size={3}>{title}</Heading>}
 
       <Text mt={4} mb={2} fontWeight="bold" color="titleSecondary">
         PAR TRANCHE D’ÂGE

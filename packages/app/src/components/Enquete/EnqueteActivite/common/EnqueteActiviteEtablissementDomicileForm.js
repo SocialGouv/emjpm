@@ -2,7 +2,7 @@ import { Box, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
@@ -93,7 +93,7 @@ export function EnqueteActiviteEtablissementDomicileForm(props) {
         {"Votre activité en 2019"}
       </HeadingTitle>
 
-      {title && <Heading3>{title}</Heading3>}
+      {title && <Heading size={3}>{title}</Heading>}
 
       <Text mt={2} mb={1} fontWeight="bold" color="#595959">
         EN ÉTABLISSEMENT

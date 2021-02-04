@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { Heading2, Text } from "~/ui";
+import { Heading, Text } from "~/ui";
 
 import { DELETE_SERVICE_MEMBER_INVITATION } from "./mutations";
 import { SERVICE_MEMBER_INVITATIONS } from "./queries";
@@ -45,9 +45,9 @@ function ServiceMemberInvitations(props) {
     <Fragment>
       {serviceMemberInvitations.length ? (
         <Box mb={4}>
-          <Heading2 width={[1]} mb="2">
+          <Heading size={2} width={[1]} mb="2">
             Invitations en attente ({serviceMemberInvitations.length})
-          </Heading2>
+          </Heading>
           <Box>
             {serviceMemberInvitations.map((invitation, i) => (
               <Flex sx={listStyle} index={i} key={invitation.id}>

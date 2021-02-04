@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 
 import { Box, Card, Flex } from "rebass";
 
-import { Button, Heading2, Heading3 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 const Modal = styled.div`
   position: fixed;
@@ -36,10 +36,12 @@ export function EnqueteConfirmExitInvalidFormDialog({
           }}
         >
           <Card p={20}>
-            <Heading2 textAlign="center">{"Formulaire invalide"}</Heading2>
-            <Heading3 mt={30}>
+            <Heading size={2} textAlign="center">
+              {"Formulaire invalide"}
+            </Heading>
+            <Heading size={3} mt={30}>
               {"Si vous quittez la page, vos modifications seront perdues."}
-            </Heading3>
+            </Heading>
             <Flex justifyContent="flex-end" mt={50} mb={30}>
               <Button variant="primary" onClick={onCancel}>
                 Corriger le formulaire

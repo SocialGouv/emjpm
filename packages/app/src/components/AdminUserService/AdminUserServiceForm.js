@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
 import { adminUserServiceSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, InlineError } from "~/ui";
+import { Button, Heading, InlineError } from "~/ui";
 
 function AdminUserServiceForm(props) {
   const { cancelLink, user, handleSubmit, errorMessage } = props;
@@ -33,7 +33,7 @@ function AdminUserServiceForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{`${service.etablissement}`}</Heading4>
+          <Heading size={4} mb={1}>{`${service.etablissement}`}</Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput

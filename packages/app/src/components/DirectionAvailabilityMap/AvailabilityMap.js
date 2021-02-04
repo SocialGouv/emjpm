@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 
 import { Box } from "rebass";
 
-import { Card, Heading2, Spinner } from "~/ui";
+import { Card, Heading, Spinner } from "~/ui";
 
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
@@ -14,7 +14,7 @@ function AvailabilityMap() {
     return (
       <Card p="4" minHeight="450px">
         <Box>
-          <Heading2>Disponibilités par territoire</Heading2>
+          <Heading size={2}>Disponibilités par territoire</Heading>
         </Box>
         <Box sx={{ p: "6", position: "relative" }}>
           <Spinner />
@@ -27,7 +27,7 @@ function AvailabilityMap() {
     return (
       <Card p="4">
         <Box>
-          <Heading2>Disponibilités par territoire</Heading2>
+          <Heading size={2}>Disponibilités par territoire</Heading>
         </Box>
         <Box sx={{ p: "6", position: "relative" }}>error</Box>
       </Card>
@@ -49,7 +49,7 @@ function AvailabilityMap() {
   return (
     <Card p="4">
       <Box>
-        <Heading2>Disponibilités par territoire</Heading2>
+        <Heading size={2}>Disponibilités par territoire</Heading>
       </Box>
       <Box
         sx={{

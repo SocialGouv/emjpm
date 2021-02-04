@@ -13,7 +13,7 @@ import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError, Select, Textarea } from "~/ui";
+import { Button, Field, Heading, InlineError, Select, Textarea } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
 function buildTiOptions(lb_departements, lb_user_etablissements) {
@@ -71,7 +71,9 @@ function MandataireEditInformationsForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Informations personnelles"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Informations personnelles"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupSelect
@@ -98,7 +100,9 @@ function MandataireEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Coordonnées"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Coordonnées"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -129,7 +133,7 @@ function MandataireEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Adresse"}</Heading4>
+          <Heading size={4}>{"Adresse"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Cette adresse permettra de vous localiser sur la carte des mesures"
@@ -148,7 +152,7 @@ function MandataireEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Tribunaux"}</Heading4>
+          <Heading size={4}>{"Tribunaux"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
@@ -181,7 +185,9 @@ function MandataireEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Activité"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Activité"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Ces informations seront visibles par les magistrats."}
           </Text>
@@ -213,7 +219,9 @@ function MandataireEditInformationsForm(props) {
       {isAdmin && (
         <Flex>
           <FormGrayBox>
-            <Heading4 mb={1}>{"Administrateur"}</Heading4>
+            <Heading size={4} mb={1}>
+              {"Administrateur"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Information uniquement accessible par l'administrateur"}
             </Text>

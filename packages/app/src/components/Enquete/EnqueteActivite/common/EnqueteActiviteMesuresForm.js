@@ -1,6 +1,6 @@
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormInt } from "~/util";
 
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
@@ -61,7 +61,7 @@ export function EnqueteActiviteMesuresForm(props) {
         {"Votre activité en 2019"}
       </HeadingTitle>
 
-      {title && <Heading3>{title}</Heading3>}
+      {title && <Heading size={3}>{title}</Heading>}
 
       <EnqueteActiviteFormGroupMesures
         enqueteContext={enqueteContext}

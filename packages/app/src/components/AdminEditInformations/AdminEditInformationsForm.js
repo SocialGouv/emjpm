@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { adminEditSchema } from "~/lib/validationSchemas/adminEditSchema";
-import { Button, Heading4, InlineError, Text } from "~/ui";
+import { Button, Heading, InlineError, Text } from "~/ui";
 
 function AdminEditInformationsForm({
   user,
@@ -31,7 +31,7 @@ function AdminEditInformationsForm({
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Modifier vos informations"}</Heading4>
+          <Heading size={4}>{"Modifier vos informations"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Vos informations"}
           </Text>

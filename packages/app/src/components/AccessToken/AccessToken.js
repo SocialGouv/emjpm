@@ -4,7 +4,7 @@ import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { AccessTokenDelete } from "~/components/AccessTokenDelete";
-import { Heading5 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { USER_TOKEN } from "./queries";
 
@@ -39,7 +39,7 @@ function AccessToken(props) {
     <Fragment>
       {access_tokens.length > 0 && (
         <Box sx={boxStyle}>
-          <Heading5 mt={3} mb="2">
+          <Heading size={5} mt={3} mb="2">
             {isAdmin ? (
               <Fragment>
                 Logiciels métiers autorisés à accéder à ce compte utilisateur
@@ -49,7 +49,7 @@ function AccessToken(props) {
                 Logiciels métiers autorisés à accéder à votre compte
               </Fragment>
             )}
-          </Heading5>
+          </Heading>
           <Box mr={4} mb="3">
             {access_tokens.map((token) => {
               return (

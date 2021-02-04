@@ -17,7 +17,12 @@ import { MandatairesSubNavigation } from "~/components/DirectionMandatairesSubNa
 import { FiltersContextSerializableProvider } from "~/components/FiltersContextSerializable";
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper, FlexWrapper, fourColumnStyle, twoColumnStyle } from "~/ui";
+import {
+  BoxWrapper,
+  FlexWrapper,
+  fourColumnStyle,
+  twoColumnStyle,
+} from "~/ui/Grid";
 
 function Mandataires() {
   const user = useContext(UserContext);

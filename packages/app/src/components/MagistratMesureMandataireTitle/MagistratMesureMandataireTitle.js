@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { Box } from "rebass";
 
-import { Heading2, Heading4 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { MANDATAIRE } from "./queries";
 
@@ -27,13 +27,16 @@ function MagistratMesureMandataireTitle(props) {
 
   return (
     <Fragment>
-      <Heading2 mb="1">{`Réserver une mesure auprès de ${prenom} ${nom}`}</Heading2>
+      <Heading
+        size={2}
+        mb="1"
+      >{`Réserver une mesure auprès de ${prenom} ${nom}`}</Heading>
       {limitReached && (
-        <Heading4 color="error">
+        <Heading size={4} color="error">
           {
             "Pour votre information, le mandataire a atteint le nombre de mesures souhaitées"
           }
-        </Heading4>
+        </Heading>
       )}
     </Fragment>
   );

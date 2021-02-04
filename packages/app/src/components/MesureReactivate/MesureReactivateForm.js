@@ -1,6 +1,6 @@
 import { Box, Flex, Text } from "rebass";
 
-import { Button, Heading3 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 export function MesureReactivateForm(props) {
   const { handleSubmit, handleCancel } = props;
@@ -8,7 +8,7 @@ export function MesureReactivateForm(props) {
   return (
     <Box p="5">
       <Box mb="3">
-        <Heading3>Réouvrir la mesure</Heading3>
+        <Heading size={3}>Réouvrir la mesure</Heading>
       </Box>
       <Box>
         <Text lineHeight="1.5">

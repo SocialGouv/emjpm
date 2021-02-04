@@ -4,7 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { EnqueteImportPanel } from "~/components/EnqueteImport";
 import { LayoutServices } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ImportEnquetePage() {
   const query = useParams();

@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "~/components/UserContext";
-import { Card, Heading3 } from "~/ui";
+import { Card, Heading } from "~/ui";
 
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 
@@ -15,7 +15,7 @@ function MagistratTribunalInformations(props) {
   return (
     <Box {...props}>
       <Card p="5">
-        <Heading3>{ti.etablissement}</Heading3>
+        <Heading size={3}>{ti.etablissement}</Heading>
         <Box sx={boxStyle}>
           <Text sx={innerTextStyle}>
             {ti.code_postal} {ti.ville}

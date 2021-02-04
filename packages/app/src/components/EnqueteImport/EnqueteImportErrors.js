@@ -1,6 +1,6 @@
 import { Flex, Text } from "rebass";
 
-import { Card, Heading3 } from "~/ui";
+import { Card, Heading } from "~/ui";
 
 import { importErrorsWrapperStyle } from "./style";
 
@@ -9,7 +9,9 @@ function EnqueteImportErrors(props) {
 
   return (
     <Card sx={importErrorsWrapperStyle} overflow="hidden">
-      <Heading3 mb={4}>Détail des erreurs par ligne</Heading3>
+      <Heading size={3} mb={4}>
+        Détail des erreurs par ligne
+      </Heading>
       {errors.map(({ line = 0, message }) => (
         <Flex key={`${line}-${message}`} mb={1}>
           <Text color="warning" mr={1}>

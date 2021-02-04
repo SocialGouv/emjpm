@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 import { Link } from "~/components/Link";
 import { MagistratMandataireComments } from "~/components/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/components/MagistratServiceAntennes";
-import { Button, Card, Heading2, Heading4, Spinner } from "~/ui";
+import { Button, Card, Heading, Spinner } from "~/ui";
 import { formatGestionnaireId } from "~/util/mandataires";
 
 import { GESTIONNAIRES } from "./queries";
@@ -42,7 +42,7 @@ export function MagistratMandataire(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -77,8 +77,8 @@ export function MagistratMandataire(props) {
   return (
     <Box {...props} width="100%" mb={6}>
       <Flex alignItems="center" justifyContent="space-between">
-        {serviceId && <Heading2>{etablissement}</Heading2>}
-        {mandataireId && <Heading2>{`${prenom} ${nom}`}</Heading2>}
+        {serviceId && <Heading size={2}>{etablissement}</Heading>}
+        {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
         <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
           <Button>Réserver une mesure</Button>

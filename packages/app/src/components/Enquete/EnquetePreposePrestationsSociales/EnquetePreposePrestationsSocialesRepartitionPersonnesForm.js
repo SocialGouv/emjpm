@@ -2,7 +2,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { formatFormInput, parseFormFloat } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -78,7 +78,7 @@ export function EnquetePreposePrestationsSocialesRepartitionPersonnesForm(
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Prestation sociales"}
       </HeadingTitle>
-      <Heading3>Répartition des personnes</Heading3>
+      <Heading size={3}>Répartition des personnes</Heading>
 
       <Text my={4} fontWeight="bold" color="#595959">
         SELON LA PRESTATION PRINCIPALE PERCUE

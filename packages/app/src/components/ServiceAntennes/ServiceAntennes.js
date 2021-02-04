@@ -4,15 +4,8 @@ import PropTypes from "prop-types";
 import { Box, Flex } from "rebass";
 
 import { AntenneLinkButton, LinkButton } from "~/components/Commons";
-import {
-  Antenne,
-  BoxWrapper,
-  Card,
-  Heading2,
-  Heading4,
-  Spinner,
-  Text,
-} from "~/ui";
+import { Antenne, Card, Heading, Spinner, Text } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { ANTENNE } from "./queries";
 
@@ -45,7 +38,7 @@ function ServiceAntennes(props) {
     <BoxWrapper>
       <Card p="5">
         <Flex mt="1" mb={3} justifyContent="space-between">
-          <Heading2>Antennes</Heading2>
+          <Heading size={2}>Antennes</Heading>
           {!isAntenneCreationHidden && (
             <Box>
               <LinkButton to="/services/antennes/create" ml="1">
@@ -107,7 +100,9 @@ function NoAntenne() {
         <img src="/images/enterprise.svg" alt="entreprise" />
       </Box>
       <Box ml="5">
-        <Heading4 mb="1">Créer des antennes pour votre service</Heading4>
+        <Heading size={4} mb="1">
+          Créer des antennes pour votre service
+        </Heading>
         <Text lineHeight="1.5">
           Si votre service est découpés en antennes indépendantes, eMJPM vous
           permet de gérer des mesures et des préférences d’affectation pour

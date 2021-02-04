@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
-import { Heading5 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -60,9 +60,9 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
       </Box>
 
       <Box mt={1}>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           Répartition des préposés en fonction de leur niveau de formation
-        </Heading5>
+        </Heading>
         <Box>
           {renderNiveauxQualificationBox({
             label: "Niveau 1",
@@ -101,9 +101,9 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
         </Box>
       </Box>
       <Box mt={1}>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           Répartition par sexe des préposés
-        </Heading5>
+        </Heading>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <EnqueteFormInputField
@@ -124,9 +124,9 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
         </Flex>
       </Box>
       <Box mt={1}>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           Nombre d&apos;autres personnels (dont secrétaires spécialisés)
-        </Heading5>
+        </Heading>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <EnqueteFormInputField
@@ -154,9 +154,9 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
   function renderNiveauxQualificationBox({ niveau, label }) {
     return (
       <Fragment>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           {label}
-        </Heading5>
+        </Heading>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <EnqueteFormInputField

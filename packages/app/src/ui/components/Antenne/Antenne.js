@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
-import { Card, Heading4, Text } from "../../core";
+import { Card, Heading, Text } from "~/ui";
 import {
   antenneTitleStyle,
   availabilityIndicatorStyle,
@@ -15,7 +15,9 @@ function Antenne(props) {
   const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
     <Card sx={sx}>
-      <Heading4 sx={antenneTitleStyle}>{antenne.name}</Heading4>
+      <Heading size={4} sx={antenneTitleStyle}>
+        {antenne.name}
+      </Heading>
       <Flex sx={{ alignItems: "center", mb: "3" }}>
         <Box
           sx={availabilityIndicatorStyle(

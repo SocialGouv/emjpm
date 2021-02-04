@@ -5,7 +5,7 @@ import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
 import { AdminUsers } from "~/components/AdminUsers";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function AdminUsersPage() {
   return (

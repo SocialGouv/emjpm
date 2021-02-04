@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/components/Commons";
 import { UserContext } from "~/components/UserContext";
-import { Card, Heading3, Heading5 } from "~/ui";
+import { Card, Heading } from "~/ui";
 
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
@@ -14,12 +14,12 @@ function MagistratInformations(props) {
   return (
     <Box {...props}>
       <Card p="5">
-        <Heading3>
+        <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}
-        </Heading3>
+        </Heading>
         <Flex sx={flexStyle}>
           <Box sx={boxStyle}>
-            <Heading5>Vos informations</Heading5>
+            <Heading size={5}>Vos informations</Heading>
             <Flex mt="2">
               <MailOutline size="16" />
               <Text sx={iconTextStyle}>{email}</Text>

@@ -3,7 +3,7 @@ import { Flex } from "rebass";
 import { AdminAddTribunal } from "~/components/AdminTribunaux/AdminAddTribunal";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function AddTribunauxPage() {
   return (

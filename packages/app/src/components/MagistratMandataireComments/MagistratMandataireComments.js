@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
 
-import { Button, Card, Heading4, Spinner } from "~/ui";
+import { Button, Card, Heading, Spinner } from "~/ui";
 
 import { MagistratMandataireComment } from "./MagistratMandataireComment";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
@@ -35,7 +35,7 @@ function MagistratMandataireComments(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }

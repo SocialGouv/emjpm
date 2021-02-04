@@ -3,7 +3,7 @@ import { Link as StyledLink } from "rebass";
 import { EtablissementImport } from "~/components/Etablissement";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 export function AddEtablissementPage() {
   return (

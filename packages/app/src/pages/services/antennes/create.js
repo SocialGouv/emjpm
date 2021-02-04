@@ -1,7 +1,7 @@
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutServices } from "~/components/Layout";
 import { ServiceCreateAntenne } from "~/components/ServiceAntenneCreate";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function AddAntennes() {
   return (

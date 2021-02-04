@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
-import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
+import { Card, Heading, Indicator, Spinner } from "~/ui";
 
 import use30DaysInterval from "~/hooks/use30DaysInterval";
 
@@ -43,7 +43,7 @@ function IndicatorList(props) {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -59,7 +59,7 @@ function IndicatorList(props) {
   return (
     <Box sx={IndicatorListStyle} {...props}>
       <HeadingTitle py="4">{`${department.code} - ${department.nom}`}</HeadingTitle>
-      <Heading2>Inscrits</Heading2>
+      <Heading size={2}>Inscrits</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
@@ -86,7 +86,7 @@ function IndicatorList(props) {
           indicator={inscritData.ti ? inscritData.ti.count : 0}
         />
       </Box>
-      <Heading2>Connectés dans le dernier mois</Heading2>
+      <Heading size={2}>Connectés dans le dernier mois</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
@@ -113,7 +113,9 @@ function IndicatorList(props) {
           indicator={loginData.ti?.count || 0}
         />
       </Box>
-      <Heading2>Mesures réservées au cours des 30 derniers jours</Heading2>
+      <Heading size={2}>
+        Mesures réservées au cours des 30 derniers jours
+      </Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}

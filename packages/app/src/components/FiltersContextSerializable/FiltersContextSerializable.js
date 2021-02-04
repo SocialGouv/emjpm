@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import { useDebounce } from "~/lib/hooks";
+import { useDebounce } from "~/hooks";
 import { endDate, startDate } from "~/util/dates";
 
 export const Context = createContext({});

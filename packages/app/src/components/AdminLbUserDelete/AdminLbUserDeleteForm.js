@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { LB_USERS } from "~/components/ListeBlanche/queries";
 import { adminUserDeleteSchema } from "~/lib/validationSchemas";
-import { Button, Heading3, Heading5 } from "~/ui";
+import { Button, Heading } from "~/ui";
 
 import { DELETE_LB_USER } from "./mutations";
 import { AdminLbUserDeleteRemoveStyle } from "./style";
@@ -44,7 +44,9 @@ export function AdminLbUserDeleteForm(props) {
   return (
     <Flex sx={AdminLbUserDeleteRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
-        <Heading5 mb="1">{"Supprimer l'utilisateur"}</Heading5>
+        <Heading size={5} mb="1">
+          {"Supprimer l'utilisateur"}
+        </Heading>
         <Text mb="2" lineHeight="1.5">
           {
             "Vous êtes sur le point de supprimer définitivement un mandataire du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à ce mandataire et celui-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'État."
@@ -61,7 +63,7 @@ export function AdminLbUserDeleteForm(props) {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading3>{"Supprimer le mandataire"}</Heading3>
+          <Heading size={3}>{"Supprimer le mandataire"}</Heading>
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <Flex justifyContent="flex-end">

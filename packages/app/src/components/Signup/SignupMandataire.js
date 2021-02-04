@@ -15,7 +15,7 @@ import { HeadingTitle } from "~/components/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/lib/validationSchemas";
 import { isSiretExists } from "~/query-service/SiretQueryService";
-import { Button, Field, Heading4, InlineError, Text } from "~/ui";
+import { Button, Field, Heading, InlineError, Text } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";
@@ -93,7 +93,7 @@ function SignupMandataireForm() {
         {isIndividuel(user) && (
           <Flex>
             <FormGrayBox>
-              <Heading4>{"Information professionelle"}</Heading4>
+              <Heading size={4}>{"Information professionelle"}</Heading>
               <Text lineHeight="1.5" color="textSecondary">
                 {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
@@ -112,7 +112,7 @@ function SignupMandataireForm() {
         )}
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Téléphone"}</Heading4>
+            <Heading size={4}>{"Téléphone"}</Heading>
           </FormGrayBox>
           <FormInputBox>
             <FormGroupInput
@@ -134,7 +134,7 @@ function SignupMandataireForm() {
 
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Adresse"}</Heading4>
+            <Heading size={4}>{"Adresse"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {
                 "Cette adresse permettra de vous localiser sur la carte des mesures"
@@ -154,7 +154,7 @@ function SignupMandataireForm() {
 
         <Flex>
           <FormGrayBox>
-            <Heading4>{"Capacité"}</Heading4>
+            <Heading size={4}>{"Capacité"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Indiquez le nombre de mesures maximal souhaité"}
             </Text>

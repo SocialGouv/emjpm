@@ -10,7 +10,7 @@ import {
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { Link } from "~/components/Link";
 import { serviceSchema } from "~/lib/validationSchemas/serviceSchema";
-import { Button, Field, Heading4, InlineError, Select, Textarea } from "~/ui";
+import { Button, Field, Heading, InlineError, Select, Textarea } from "~/ui";
 import { findOptions } from "~/util/option/OptionUtil";
 
 function buildTiOptions(tis) {
@@ -53,7 +53,9 @@ function ServiceEditInformationsForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Responsable"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Responsable"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -74,7 +76,9 @@ function ServiceEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Coordonnées"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Coordonnées"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -95,7 +99,7 @@ function ServiceEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Adresse"}</Heading4>
+          <Heading size={4}>{"Adresse"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Cette adresse permettra de localiser le service sur la carte des mesures"
@@ -114,7 +118,7 @@ function ServiceEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Tribunaux"}</Heading4>
+          <Heading size={4}>{"Tribunaux"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
@@ -147,7 +151,9 @@ function ServiceEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Activité"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Activité"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Ces informations seront visibles par les magistrats."}
           </Text>

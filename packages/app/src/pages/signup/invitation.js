@@ -3,7 +3,7 @@ import useSearchParams from "~/hooks/useSearchParams";
 import { LayoutPublic } from "~/components/Layout";
 import { SignupContextProvider } from "~/components/Signup/context";
 import { SignupServiceInvitation } from "~/components/Signup/SignupServiceInvitation";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function SignupInvitationPage() {
   const { token } = useSearchParams();

@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Button, Card, Heading3 } from "~/ui";
+import { Button, Card, Heading } from "~/ui";
 import { formatFormInput } from "~/util";
 
 import { STATUTS, TYPES } from "../constants";
@@ -123,9 +123,11 @@ export function EnquetePreposeModaliteExerciceEtablissementsForm(props) {
           render={(arrayHelpers) => (
             <Box>
               <Flex mb={4} alignItems="center" justifyContent="space-between">
-                <Heading3>{`${values.etablissements.length} établissement${
+                <Heading size={3}>{`${
+                  values.etablissements.length
+                } établissement${
                   values.etablissements.length > 1 ? "s" : ""
-                }`}</Heading3>
+                }`}</Heading>
 
                 {!readOnly && (
                   <Box>

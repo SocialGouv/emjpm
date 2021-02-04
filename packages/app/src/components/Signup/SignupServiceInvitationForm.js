@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { signupSchema } from "~/lib/validationSchemas";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 
 export function SignupServiceInvitationForm(props) {
   const { handleSubmit, invitation } = props;
@@ -31,7 +31,7 @@ export function SignupServiceInvitationForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Information personnelle"}</Heading4>
+          <Heading size={4}>{"Information personnelle"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             Ces informations permettent de vous identifier.
           </Text>
@@ -55,7 +55,7 @@ export function SignupServiceInvitationForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>{"Identifiants de connexion"}</Heading4>
+          <Heading size={4}>{"Identifiants de connexion"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}

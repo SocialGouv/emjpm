@@ -2,7 +2,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 
 import { Box } from "rebass";
 
-import { Heading2 } from "~/ui";
+import { Heading } from "~/ui";
 
 import {
   CREATE_SERVICE_MEMBER_INVITATION,
@@ -58,9 +58,9 @@ function ServiceMemberInvitationCreate(props) {
 
   return (
     <Box mb={4}>
-      <Heading2 width={[1]} mb="2">
+      <Heading size={2} width={[1]} mb="2">
         Inviter une personne
-      </Heading2>
+      </Heading>
       <Box bg="white">
         {isAdmin && <ServiceMemberInvitationForm handleSubmit={handleSubmit} />}
       </Box>

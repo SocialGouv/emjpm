@@ -8,7 +8,7 @@ import { GESTIONNAIRES } from "~/components/MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "~/components/MagistratMesures/queries";
 import { UserContext } from "~/components/UserContext";
 import { magistratMesureDeleteSchema } from "~/lib/validationSchemas";
-import { Button, Heading3, Heading5, InlineError, Input } from "~/ui";
+import { Button, Heading, InlineError, Input } from "~/ui";
 
 import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
@@ -78,7 +78,9 @@ export function MagistratMesureDeleteForm(props) {
   return (
     <Flex sx={MagistratMesureRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
-        <Heading5 mb="1">Supprimer la mesure</Heading5>
+        <Heading size={5} mb="1">
+          Supprimer la mesure
+        </Heading>
         <Text mb="2" lineHeight="1.5">
           {
             "Vous êtes sur le point de supprimer définitivement une mesure réservée du système eMJPM. Toute suppression est irréversible."
@@ -95,7 +97,7 @@ export function MagistratMesureDeleteForm(props) {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading3>Supprimer la mesure</Heading3>
+          <Heading size={3}>Supprimer la mesure</Heading>
         </Box>
         <form onSubmit={formik.handleSubmit}>
           <Box mb="2">

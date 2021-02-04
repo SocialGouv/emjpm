@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { Card, Text } from "../../core";
+import { Card, Text } from "~/ui";
 import {
   availabilityIndicatorStyle,
   cardStyle,

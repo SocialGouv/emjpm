@@ -8,7 +8,7 @@ import { useCurrentStepFromUrl } from "~/components/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/components/Enquete/queries";
 import { LayoutMandataire } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function MandataireEnquetePage() {
   const history = useHistory();

@@ -1,6 +1,6 @@
 import { Flex } from "rebass";
 
-import { Button, Heading2, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 
 import { MesureImportErrors } from "./MesureImportErrors";
 import { ServiceMesureAntennesMatcher } from "./ServiceMesureAntennesMatcher";
@@ -16,7 +16,7 @@ const MesureImportResult = ({
     <div p={7} sx={ServiceMesureImportResultStyle}>
       <Flex alignItems="center">
         <Flex flexDirection="column">
-          <Heading2>{"Résultat de l'import"}</Heading2>
+          <Heading size={2}>{"Résultat de l'import"}</Heading>
           {errors.length ? (
             <Text m={2} fontSize={2}>{`Erreur lors de l'import des mesures (${
               errors.length

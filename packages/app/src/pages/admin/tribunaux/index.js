@@ -6,7 +6,7 @@ import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
 import { AdminTribunaux } from "~/components/AdminTribunaux";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function AdminTribunauxPage() {
   const history = useHistory();

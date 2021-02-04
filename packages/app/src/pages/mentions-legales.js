@@ -5,7 +5,7 @@ import { Card } from "rebass";
 import { LayoutPublic } from "~/components/Layout";
 import { mdxComponents } from "~/components/MdxComponents";
 import { MentionsLegales } from "~/components/MentionsLegales";
-import { FlexWrapper } from "~/ui";
+import { FlexWrapper } from "~/ui/Grid";
 
 const MentionsLegalesPage = () => (
   <MDXProvider components={mdxComponents}>

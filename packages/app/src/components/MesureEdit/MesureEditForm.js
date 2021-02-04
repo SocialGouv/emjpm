@@ -11,7 +11,7 @@ import {
 } from "~/components/AppForm";
 import TribunalAutoComplete from "~/components/TribunalAutoComplete";
 import { mesureEditSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError } from "~/ui";
+import { Button, Field, Heading, InlineError } from "~/ui";
 
 function initialValues(mesure) {
   return {
@@ -48,7 +48,7 @@ export function MesureEditForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4>Majeur protégé</Heading4>
+          <Heading size={4}>Majeur protégé</Heading>
         </FormGrayBox>
         <FormInputBox>
           <Flex flexDirection={["column", "row", "row"]}>
@@ -99,7 +99,7 @@ export function MesureEditForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4>Mesure de protection</Heading4>
+          <Heading size={4}>Mesure de protection</Heading>
         </FormGrayBox>
         <FormInputBox>
           <Flex flexDirection={["column", "row", "row"]}>
@@ -156,7 +156,9 @@ export function MesureEditForm(props) {
       {antenneOptions.length > 0 && (
         <Flex>
           <FormGrayBox>
-            <Heading4>Antenne de gestion de la mesure de protection</Heading4>
+            <Heading size={4}>
+              Antenne de gestion de la mesure de protection
+            </Heading>
           </FormGrayBox>
           <FormInputBox>
             <FormGroupSelect

@@ -3,7 +3,7 @@ import { Flex } from "rebass";
 import { HeadingTitle } from "~/components/HeadingTitle";
 import { LayoutMagistrat } from "~/components/Layout";
 import { MagistratMandatairesList } from "~/components/MagistratMandatairesList";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function Mandataires() {
   return (

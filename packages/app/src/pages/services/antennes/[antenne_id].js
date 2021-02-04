@@ -2,7 +2,7 @@ import { Card } from "rebass";
 
 import { LayoutServices } from "~/components/Layout";
 import { ServiceAntenneInformations } from "~/components/ServiceAntenneInformations";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

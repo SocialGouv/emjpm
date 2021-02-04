@@ -11,7 +11,7 @@ import {
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureEtatSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError, Text } from "~/ui";
+import { Button, Field, Heading, InlineError, Text } from "~/ui";
 
 function initialValues(mesureEtat) {
   return {
@@ -46,9 +46,15 @@ export function MesureEtatCreateOrEditForm(props) {
       <Flex>
         <FormGrayBox>
           {mesureEtatToEdit?.id && (
-            <Heading4 mb={1}>{"Modification de l'état"}</Heading4>
+            <Heading size={4} mb={1}>
+              {"Modification de l'état"}
+            </Heading>
           )}
-          {!mesureEtatToEdit && <Heading4 mb={1}>{"Ajout d'un état"}</Heading4>}
+          {!mesureEtatToEdit && (
+            <Heading size={4} mb={1}>
+              {"Ajout d'un état"}
+            </Heading>
+          )}
           <Text lineHeight="1.5" color="textSecondary">
             {
               "Merci de renseigner les informations de l'état de la mesure de la protection"

@@ -5,7 +5,7 @@ import { Card } from "rebass";
 import { ConditionsUtilisation } from "~/components/ConditionsUtilisation";
 import { LayoutPublic } from "~/components/Layout";
 import { mdxComponents } from "~/components/MdxComponents";
-import { FlexWrapper } from "~/ui";
+import { FlexWrapper } from "~/ui/Grid";
 
 const ConditionsUtilistionPage = () => (
   <MDXProvider components={mdxComponents}>

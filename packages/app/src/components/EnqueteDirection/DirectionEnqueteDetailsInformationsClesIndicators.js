@@ -1,6 +1,7 @@
 import { Box } from "rebass";
 
-import { FlexWrapper, fourColumnStyle, Indicator } from "~/ui";
+import { Indicator } from "~/ui";
+import { FlexWrapper, fourColumnStyle } from "~/ui/Grid";
 
 export function DirectionEnqueteDetailsInformationsClesIndicators(props) {
   const {

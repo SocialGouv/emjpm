@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Link } from "~/components/Commons";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
@@ -89,7 +89,9 @@ function AdminUserActivation(props) {
       {isMandataire({ type }) && (
         <Flex>
           <FormGrayBox>
-            <Heading4 mb={1}>{"Liste blanche"}</Heading4>
+            <Heading size={4} mb={1}>
+              {"Liste blanche"}
+            </Heading>
           </FormGrayBox>
           <FormInputBox>
             <AdminMandataireListeBlanche
@@ -101,7 +103,9 @@ function AdminUserActivation(props) {
       )}
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Activer / Bloquer"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Activer / Bloquer"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <Box display="inline-flex">

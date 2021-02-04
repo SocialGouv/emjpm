@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
 import yup from "~/lib/validationSchemas/yup";
-import { Heading3 } from "~/ui";
+import { Heading } from "~/ui";
 import { parseFormFloat } from "~/util";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
@@ -93,7 +93,9 @@ export function EnquetePreposePrestationsSocialesRevenusForm(props) {
           Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
         </Text>
       </Box>
-      <Heading3 mb={4}>{title}</Heading3>
+      <Heading size={3} mb={4}>
+        {title}
+      </Heading>
 
       <Flex justifyContent="start" mb={4}>
         <Box mr={3} flex={1 / 2}>

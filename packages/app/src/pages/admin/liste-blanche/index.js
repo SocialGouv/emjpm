@@ -5,7 +5,7 @@ import { LayoutAdmin } from "~/components/Layout";
 import { ListeBlanche } from "~/components/ListeBlanche";
 import { ListeBlancheFilter } from "~/components/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/components/ListeBlancheSummary";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function ListBlanchePage() {
   return (

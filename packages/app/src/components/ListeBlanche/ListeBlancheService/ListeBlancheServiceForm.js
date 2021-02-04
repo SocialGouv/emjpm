@@ -12,7 +12,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { adminServiceSchema as validationSchema } from "~/lib/validationSchemas/adminServiceSchema";
-import { Button, Heading4, Text } from "~/ui";
+import { Button, Heading, Text } from "~/ui";
 import { useDepartementsOptions } from "~/util/departements";
 import { getDepartementByCodePostal } from "~/util/geodata";
 import SelectSIREN from "~/components/SelectSIREN";
@@ -126,7 +126,9 @@ export function ListeBlancheServiceForm(props) {
     <form onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Service tutelaire"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Service tutelaire"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Renseignez le département qui finance le service tutelaire."}
           </Text>
@@ -183,7 +185,9 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Contact"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Contact"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -202,7 +206,9 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading4 mb={1}>{"Organisme gestionnaire"}</Heading4>
+          <Heading size={4} mb={1}>
+            {"Organisme gestionnaire"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"L'organisme gestionnaire est-il différent du service?"}
           </Text>

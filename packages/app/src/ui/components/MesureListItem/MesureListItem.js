@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { Box, Flex } from "rebass";
 
-import { Card, Text } from "../../core";
-import { isMonsieur } from "../../util";
+import { Card, Text } from "~/ui";
+import { isMonsieur } from "@emjpm/biz";
 import { MESURE_TYPE } from "./constants/type";
 import {
   cardStyle,

@@ -2,7 +2,7 @@ import { Flex } from "rebass";
 
 import { AdminLbUserDelete } from "~/components/AdminLbUserDelete";
 import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

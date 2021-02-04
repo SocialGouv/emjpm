@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import { Box, Flex } from "rebass";
 
 import { adminEditorSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading4, InlineError, Input, Text } from "~/ui";
+import { Button, Field, Heading, InlineError, Input, Text } from "~/ui";
 
 export function AdminEditorForm(props) {
   const { handleCancel, handleSubmit, editor } = props;
@@ -21,7 +21,7 @@ export function AdminEditorForm(props) {
     <Flex flexWrap="wrap">
       <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
         <Box height="230px">
-          <Heading4>{"Information de l'éditeur"}</Heading4>
+          <Heading size={4}>{"Information de l'éditeur"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Informations relatives à l'éditeur"}
           </Text>

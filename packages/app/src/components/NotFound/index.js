@@ -1,6 +1,6 @@
 import { ArrowLeft } from "@styled-icons/material/ArrowLeft";
 import { Error } from "@styled-icons/material/Error";
-import { Heading1 } from "~/ui";
+import { Heading } from "~/ui";
 
 export default function NotFound() {
   return (
@@ -21,14 +21,15 @@ export default function NotFound() {
         }}
       >
         <a href="/">
-          <Heading1
+          <Heading
+            size={1}
             style={{
               textAlign: "center",
               color: "#423e42",
             }}
           >
             <Error size={32} /> Page Non Trouvée
-          </Heading1>
+          </Heading>
         </a>
       </div>
       <div>

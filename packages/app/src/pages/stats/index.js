@@ -3,7 +3,7 @@ import { Box, Flex } from "rebass";
 import { IndicatorListTotal } from "~/components/IndicatorList";
 import { IndicatorsMenu } from "~/components/IndicatorsMenu";
 import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function StatsPage() {
   return (

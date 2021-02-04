@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
-import { Card, Heading2, Heading4, Indicator, Spinner } from "~/ui";
+import { Card, Heading, Indicator, Spinner } from "~/ui";
 
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";
@@ -33,7 +33,7 @@ function IndicatorListTotal() {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>erreur</Heading4>
+        <Heading size={4}>erreur</Heading>
       </Card>
     );
   }
@@ -85,7 +85,7 @@ function IndicatorListTotal() {
   return (
     <Box>
       <HeadingTitle py="4">{"France entière"}</HeadingTitle>
-      <Heading2>Inscrits</Heading2>
+      <Heading size={2}>Inscrits</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
@@ -112,7 +112,7 @@ function IndicatorListTotal() {
           indicator={magistratInscritCount || 0}
         />
       </Box>
-      <Heading2>Connectés dans le dernier mois</Heading2>
+      <Heading size={2}>Connectés dans le dernier mois</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
@@ -139,7 +139,9 @@ function IndicatorListTotal() {
           indicator={magistratLoginCount || 0}
         />
       </Box>
-      <Heading2>Mesures réservées au cours des 30 derniers jours</Heading2>
+      <Heading size={2}>
+        Mesures réservées au cours des 30 derniers jours
+      </Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}

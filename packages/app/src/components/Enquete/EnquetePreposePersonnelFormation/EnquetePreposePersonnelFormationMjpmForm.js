@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/components/HeadingTitle";
-import { Heading3, Heading5 } from "~/ui";
+import { Heading } from "~/ui";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";
@@ -57,12 +57,12 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
           Les données à remplir ci-dessous sont celles au <strong>31/12</strong>
         </Text>
       </Box>
-      <Heading3>{"Informations relatives aux préposés MJPM"}</Heading3>
+      <Heading size={3}>{"Informations relatives aux préposés MJPM"}</Heading>
 
       <Box mt={1}>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           Nombre de préposés MJPM
-        </Heading5>
+        </Heading>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <EnqueteFormInputField
@@ -83,7 +83,7 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
         </Flex>
       </Box>
       <Box mt={1}>
-        <Heading3>{"La formation des préposés MJPM"}</Heading3>
+        <Heading size={3}>{"La formation des préposés MJPM"}</Heading>
         <Box>
           {renderFormationPreposeBox({
             label: "Nombre de préposés en poste ayant le CNC",
@@ -112,9 +112,9 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
   function renderFormationPreposeBox({ prefix, label }) {
     return (
       <Fragment>
-        <Heading5 mt={1} mb="2">
+        <Heading size={5} mt={1} mb="2">
           {label}
-        </Heading5>
+        </Heading>
         <Flex alignItems="start">
           <Box mr={1} flex={1 / 2}>
             <EnqueteFormInputField

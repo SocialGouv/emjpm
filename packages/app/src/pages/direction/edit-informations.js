@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { DirectionEditInformations } from "~/components/DirectionEditInformations";
 import { LayoutDirection } from "~/components/Layout";
 import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 function EditInformations() {
   const redirectLink = "/direction/informations";

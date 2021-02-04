@@ -9,7 +9,7 @@ import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "~/constants/import";
-import { Card, Heading3, Text } from "~/ui";
+import { Card, Heading, Text } from "~/ui";
 
 function ServiceMesureImport({ serviceId }) {
   return (
@@ -17,7 +17,9 @@ function ServiceMesureImport({ serviceId }) {
       <Card mb="5">
         <Flex flexDirection="column">
           <Box mb={2}>
-            <Heading3 mb="2">{"Format du fichier d'import"}</Heading3>
+            <Heading size={3} mb="2">
+              {"Format du fichier d'import"}
+            </Heading>
             <Text mb="1" lineHeight="2">
               {
                 "Pour simplifier la première mise à jour de toutes vos mesures en cours, vous pouvez importer vos mesures avec un fichier csv ou excel. Ce fichier doit être conforme au modèle décrit dans la note explicative ci-dessous."
@@ -49,7 +51,9 @@ function ServiceMesureImport({ serviceId }) {
             </Text>
           </Box>
           <Box mt={2}>
-            <Heading3 mb="2">{"Importer vos mesures"}</Heading3>
+            <Heading size={3} mb="2">
+              {"Importer vos mesures"}
+            </Heading>
             <Text mb="1" lineHeight="2">
               {
                 "Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer."

@@ -3,7 +3,7 @@ import { Link as StyledLink } from "rebass";
 import { AdminEditorEdit } from "~/components/AdminEditors/AdminEditorEdit";
 import { LayoutAdmin } from "~/components/Layout";
 import { Link } from "~/components/Link";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 
-import { useDebounce } from "~/lib/hooks";
+import { useDebounce } from "~/hooks";
 import castInt from "~/util/castInt";
 
 export const Context = createContext({});

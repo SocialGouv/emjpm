@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { PaginatedList } from "~/components/PaginatedList";
-import { Button, Card, Heading5 } from "~/ui";
+import { Button, Card, Heading } from "~/ui";
 import { captureException } from "~/util/sentry";
 
 import { ADD_EDITOR_FROM_REQUEST } from "./mutations";
@@ -79,7 +79,9 @@ function AdminEditorRequest() {
 
   return (
     <Box width="100%" mt="5">
-      <Heading5 mb="3">{"Liste des demandes d'accès"}</Heading5>
+      <Heading size={5} mb="3">
+        {"Liste des demandes d'accès"}
+      </Heading>
       <PaginatedList
         entries={editorTokenRequests}
         RowItem={RowItem}

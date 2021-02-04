@@ -5,7 +5,7 @@ import { MagistratMesure } from "~/components/MagistratMesure";
 import { MagistratMesureMandataire } from "~/components/MagistratMesureMandataire";
 import { MesureProvider } from "~/components/MesureContext";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui";
+import { BoxWrapper } from "~/ui/Grid";
 
 import { useParams } from "react-router-dom";
 

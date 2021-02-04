@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import { Field, Input, Select, SelectCreatable } from "~/ui";
+import { Field, Input, Select } from "~/ui";
 
 import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
 import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
@@ -121,14 +121,6 @@ export function FormGroupSelect(props) {
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
-  if (!Component) {
-    if (loadOptions || isCreatable) {
-      Component = SelectCreatable;
-    } else {
-      Component = Select;
-    }
-  }
-
   return (
     <Field>
       {readOnly ? (
@@ -146,7 +138,8 @@ export function FormGroupSelect(props) {
           {...componentProps}
         />
       ) : (
-        <Component
+        <Select
+          isCreatable={loadOptions || isCreatable}
           id={id}
           instanceId={id}
           placeholder={placeholder}

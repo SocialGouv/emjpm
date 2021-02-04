@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/lib/validationSchemas";
-import { Button, Field, Heading3, Heading5, InlineError } from "~/ui";
+import { Button, Field, Heading, InlineError } from "~/ui";
 
 export function MesureAcceptForm(props) {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
@@ -26,7 +26,9 @@ export function MesureAcceptForm(props) {
   return (
     <Flex flexWrap="wrap">
       <Box bg="cardSecondary" p="5" width={[1, 2 / 5]}>
-        <Heading5 mb="1">Accepter la mesure</Heading5>
+        <Heading size={5} mb="1">
+          Accepter la mesure
+        </Heading>
         <Text lineHeight="1.5">
           {
             "A reception de la notification de la decision du juge par courrier, le formulaire ci-contre vous permet de valider que cette mesure vous a ete attribuee."
@@ -40,7 +42,7 @@ export function MesureAcceptForm(props) {
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="3">
-          <Heading3>Accepter la mesure</Heading3>
+          <Heading size={3}>Accepter la mesure</Heading>
         </Box>
 
         <form onSubmit={formik.handleSubmit}>

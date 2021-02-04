@@ -4,7 +4,7 @@ import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
-import { Card, Heading2, Heading4, Spinner, Text } from "~/ui";
+import { Card, Heading, Spinner, Text } from "~/ui";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 import { LB_SUMMARY } from "./queries";
@@ -74,9 +74,9 @@ function ListeBlancheSummary() {
   if (error) {
     return (
       <Card width="100%">
-        <Heading4>
+        <Heading size={4}>
           Une erreur est survenue, veuillez réessayer plus tard.
-        </Heading4>
+        </Heading>
       </Card>
     );
   }
@@ -100,7 +100,7 @@ function ListeBlancheSummary() {
     <Card>
       <Flex>
         <Box width={1 / 2}>
-          <Heading2>{departementLabel}</Heading2>
+          <Heading size={2}>{departementLabel}</Heading>
         </Box>
       </Flex>
 

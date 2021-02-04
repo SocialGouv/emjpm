@@ -6,8 +6,8 @@ import { Box, Flex } from "rebass";
 
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/components/PaginatedList";
-import { useDebounce } from "~/lib/hooks";
-import { Button, Card, Heading4, Spinner } from "~/ui";
+import { useDebounce } from "~/hooks";
+import { Button, Card, Heading, Spinner } from "~/ui";
 
 import { API_LOGS_SEARCH } from "./queries";
 
@@ -138,7 +138,7 @@ function AdminApiLogs() {
   return (
     <Card>
       <Flex alignItems="center" mt="2" mb="4">
-        <Heading4>API Logs</Heading4>
+        <Heading size={4}>API Logs</Heading>
         <Flex
           m="auto"
           alignItems="center"

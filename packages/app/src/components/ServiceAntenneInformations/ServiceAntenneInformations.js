@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Box, Flex, Text } from "rebass";
 
 import { AntenneEditLinkButton } from "~/components/Commons";
-import { Card, Heading3, Heading5 } from "~/ui";
+import { Card, Heading } from "~/ui";
 
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { content, subtitle } from "./style";
@@ -39,11 +39,13 @@ function ServiceAntenneInformations(props) {
   } = antenne;
   return (
     <Box>
-      <Heading3>{name}</Heading3>
+      <Heading size={3}>{name}</Heading>
       <Card p="5">
         <Flex p={1} mt={2} flexDirection="column">
           <Box mb={2}>
-            <Heading5 mb="3">Contact</Heading5>
+            <Heading size={5} mb="3">
+              Contact
+            </Heading>
             <Flex my={1}>
               <Text sx={subtitle}>{"Responsable"}</Text>
               <Text sx={content}>
@@ -61,7 +63,7 @@ function ServiceAntenneInformations(props) {
           </Box>
           <Box mb={2}>
             <Box>
-              <Heading5>Géolocalisation</Heading5>
+              <Heading size={5}>Géolocalisation</Heading>
               <Text>
                 {
                   "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
@@ -74,7 +76,7 @@ function ServiceAntenneInformations(props) {
             </Flex>
           </Box>
           <Box mb={2}>
-            <Heading5>Votre activité</Heading5>
+            <Heading size={5}>Votre activité</Heading>
             <Flex my={1}>
               <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
               <Text sx={content}>{mesures_max}</Text>
