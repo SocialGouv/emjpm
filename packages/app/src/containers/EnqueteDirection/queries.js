@@ -44,7 +44,6 @@ export const ENQUETE_DETAILS_RESUME = gql`
       status
       departement {
         id
-        code
         nom
       }
       submitted_at
@@ -74,14 +73,14 @@ export const ENQUETE_DETAILS_LIST = gql`
     $enqueteId: Int!
     $offset: Int!
     $limit: Int!
-    $departementId: Int
+    $departementCode: String
     $userType: String
     $status: String
   ) {
     individuels_aggregate: mandataires_aggregate(
       where: {
         user: { type: { _eq: "individuel" } }
-        department_id: { _eq: $departementId }
+        departement_code: { _eq: $departementCode }
       }
     ) {
       mandataires: aggregate {
@@ -91,21 +90,21 @@ export const ENQUETE_DETAILS_LIST = gql`
     preposes_aggregate: mandataires_aggregate(
       where: {
         user: { type: { _eq: "prepose" } }
-        department_id: { _eq: $departementId }
+        departement_code: { _eq: $departementCode }
       }
     ) {
       mandataires: aggregate {
         count(columns: id)
       }
     }
-    services_aggregate(where: { department_id: { _eq: $departementId } }) {
+    services_aggregate(where: { departement_code: { _eq: $departementCode } }) {
       services: aggregate {
         count(columns: id)
       }
     }
     enquete_draft_count: enquete_reponses_aggregate(
       where: {
-        departement_id: { _eq: $departementId }
+        departement_code: { _eq: $departementCode }
         enquete_id: { _eq: $enqueteId }
         status: { _eq: "draft" }
       }
@@ -116,7 +115,7 @@ export const ENQUETE_DETAILS_LIST = gql`
     }
     enquete_submitted_count: enquete_reponses_aggregate(
       where: {
-        departement_id: { _eq: $departementId }
+        departement_code: { _eq: $departementCode }
         enquete_id: { _eq: $enqueteId }
         status: { _eq: "submitted" }
       }
@@ -141,7 +140,7 @@ export const ENQUETE_DETAILS_LIST = gql`
         where: {
           user_type: { _eq: $userType }
           status: { _eq: $status }
-          departement_id: { _eq: $departementId }
+          departement_code: { _eq: $departementCode }
         }
         order_by: { submitted_at: desc, created_at: desc }
       ) {
@@ -153,7 +152,6 @@ export const ENQUETE_DETAILS_LIST = gql`
         user_type
         departement {
           id
-          code
           nom
         }
         mandataire {
@@ -187,7 +185,6 @@ export const ENQUETE_DETAILS_LIST = gql`
         lb_departements {
           departement_financeur
           departement {
-            code
             nom
           }
         }
@@ -200,7 +197,7 @@ export const ENQUETE_DETAILS_LIST = gql`
       id
       etablissement
       departement {
-        code
+        id
         nom
       }
       ville

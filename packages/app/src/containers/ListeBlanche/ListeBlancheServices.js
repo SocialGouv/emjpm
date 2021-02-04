@@ -14,7 +14,7 @@ function getRequestFilters(filters) {
   const requestFilters = {};
 
   if (filters.departement) {
-    requestFilters.department_id = { _eq: filters.departement };
+    requestFilters.departement_code = { _eq: filters.departement };
   }
 
   if (filters.siret) {

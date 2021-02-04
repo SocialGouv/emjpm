@@ -17,15 +17,15 @@ function Geocode(props) {
     return <Spinner />;
   }
 
-  const { adresse, code_postal, departement_id, latitude, longitude, ville } =
+  const { adresse, code_postal, departement_code, latitude, longitude, ville } =
     resource || {};
 
   const departement =
-    findDepartementByCodeOrId(departements, { id: departement_id }) || {};
+    findDepartementByCodeOrId(departements, { code: departement_code }) || {};
 
   const geocode = {
     city: ville,
-    depcode: departement.code,
+    depcode: departement.id,
     label: adresse,
     latitude,
     longitude,

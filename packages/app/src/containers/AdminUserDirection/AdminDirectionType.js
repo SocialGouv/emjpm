@@ -39,7 +39,7 @@ function AdminDirectionType(props) {
 
     await changeDirectionAgrements({
       variables: {
-        department_id: values.departement || null,
+        departement_code: values.departement || null,
         direction_id: direction.id,
         direction_role_id: newDirectionRole.id,
         new_direction_role_id: directionRole.id,

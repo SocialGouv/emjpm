@@ -24,7 +24,7 @@ function departementToOptions(datas, config = {}) {
 }
 
 function formatDepartementLabel(departement) {
-  return `${departement["code"]} - ${departement["nom"]}`;
+  return `${departement["id"]} - ${departement["nom"]}`;
 }
 
 export const DepartementFormUtil = {

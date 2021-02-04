@@ -12,7 +12,6 @@ export function IndicatorsMap() {
     }
     return parseInt(code);
   });
-  console.log({ departements });
   return (
     <Card>
       <Heading size={1} py="5">

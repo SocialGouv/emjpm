@@ -17,7 +17,7 @@ export const SERVICES = gql`
       etablissement
       code_postal
       ville
-      department_id
+      departement_code
     }
   }
 `;
@@ -78,7 +78,7 @@ export const SERVICE = gql`
       siren
       code_postal
       ville
-      department_id
+      departement_code
       adresse
       latitude
       longitude
@@ -108,7 +108,6 @@ export const DEPARTEMENTS = gql`
   {
     departements(order_by: { nom: asc }) {
       id
-      code
       nom
     }
   }

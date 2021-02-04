@@ -81,7 +81,7 @@ export function DirectionEnqueteReponseResumeCard(props) {
           <Flex>
             <Text sx={descriptionStyle()}>
               {item.departement
-                ? `${item.departement.code} - ${item.departement.nom}`
+                ? `${item.departement.id} - ${item.departement.nom}`
                 : "Inconnu"}
             </Text>
           </Flex>

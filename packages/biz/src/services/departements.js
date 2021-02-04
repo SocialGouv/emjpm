@@ -15,7 +15,7 @@ function getDepartementCode(zipcode) {
 
 function findDepartementByCodeOrId(departements, { id, code }) {
   if (code) {
-    return departements.find((elm) => elm.code === code) || {};
+    return departements.find((elm) => elm.id === code) || {};
   }
   if (id) {
     return departements.find((elm) => elm.id === id) || {};

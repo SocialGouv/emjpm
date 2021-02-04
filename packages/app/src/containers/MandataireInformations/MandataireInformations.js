@@ -178,7 +178,7 @@ function IndividuelInformations({ lb_user }) {
             {lb_user?.lb_departements.map((lbd, index) => {
               return (
                 <Text key={index} sx={content}>
-                  {lbd.departement.code} - {lbd.departement.nom}{" "}
+                  {lbd.departement.id} - {lbd.departement.nom}{" "}
                   {lbd.departement_financeur ? "(financeur)" : ""}
                 </Text>
               );

@@ -57,7 +57,7 @@ export const createRegionOptions = (rows, options = { all: true }) => {
   }
   opts.push(
     ...rows.map(({ code, nom }) => ({
-      value: parseInt(code),
+      value: code,
       label: nom,
     }))
   );
@@ -74,7 +74,7 @@ export const createDepartementOptions = (rows, options = { all: true }) => {
   }
   opts.push(
     ...rows.map(({ code, nom }) => ({
-      value: parseInt(code),
+      value: code,
       label: nom,
     }))
   );

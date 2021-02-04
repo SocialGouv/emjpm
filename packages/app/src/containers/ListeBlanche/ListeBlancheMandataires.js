@@ -15,19 +15,19 @@ function getRequestFilters(filters) {
   };
 
   if (filters.departement) {
-    const departementId = filters.departement;
+    const departementCode = filters.departement;
     requestFilters._or = [
       {
         lb_user_etablissements: {
           etablissement: {
-            departement: { id: { _eq: departementId } },
+            departement: { id: { _eq: departementCode } },
           },
         },
       },
       {
         lb_departements: {
-          departement_id: {
-            _eq: departementId,
+          departement_code: {
+            _eq: departementCode,
           },
         },
       },

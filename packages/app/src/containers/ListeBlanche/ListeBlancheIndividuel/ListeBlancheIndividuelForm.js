@@ -61,7 +61,7 @@ export function ListeBlancheIndividuelForm(props) {
       ? data.lb_departements.map((item) => {
           return {
             departement_financeur: item.departement_financeur,
-            id: item.departement_id,
+            id: item.departement_code,
             nom: DepartementFormUtil.formatDepartementLabel(item.departement),
           };
         })

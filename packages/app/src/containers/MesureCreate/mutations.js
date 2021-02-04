@@ -14,7 +14,7 @@ export const ADD_MESURE = gql`
     $date_nomination: date!
     $date_protection_en_cours: date!
     $date_premier_mesure: date
-    $department_id: Int
+    $departement_code: String
     $nature_mesure: nature_mesure_enum!
     $champ_mesure: champ_mesure_enum
     $lieu_vie: lieu_vie_majeur_enum!
@@ -34,7 +34,7 @@ export const ADD_MESURE = gql`
   ) {
     add_or_update: insert_mesures(
       objects: {
-        department_id: $department_id
+        departement_code: $departement_code
         date_nomination: $date_nomination
         date_protection_en_cours: $date_protection_en_cours
         date_premier_mesure: $date_premier_mesure

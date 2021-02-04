@@ -30,7 +30,7 @@ export function ListeBlancheIndividuelCreate() {
               departements: values.departements.map((d) => {
                 return {
                   departement_financeur: d.departement_financeur,
-                  departement_id: d.id,
+                  departement_code: d.id,
                 };
               }),
               email: values.email,

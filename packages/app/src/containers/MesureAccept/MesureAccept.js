@@ -69,7 +69,7 @@ export function MesureAccept(props) {
         variables.ville = values.ville.toUpperCase();
         variables.latitude = geolocation ? geolocation.latitude : null;
         variables.longitude = geolocation ? geolocation.longitude : null;
-        variables.department_id = department.id;
+        variables.departement_code = department.id;
       }
     }
 

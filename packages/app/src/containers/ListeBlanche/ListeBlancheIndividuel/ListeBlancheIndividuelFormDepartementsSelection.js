@@ -6,14 +6,14 @@ import { Box, Flex, Text } from "rebass";
 import { UserContext } from "~/containers/UserContext";
 import { RadioGroup } from "~/components";
 
-function canModifyAgrement(user, departementId) {
+function canModifyAgrement(user, departementCode) {
   if (isAdmin(user)) {
     return true;
   }
   if (isDirectionNationale(user)) {
     return true;
   }
-  return user.agrements.includes(parseInt(departementId));
+  return user.agrements.includes(parseInt(departementCode));
 }
 
 export function ListeBlancheIndividuelFormDepartementsSelection(props) {

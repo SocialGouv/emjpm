@@ -10,7 +10,7 @@ function ClosedMesureIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
-      departementId: filters.departement
+      departementCode: filters.departement
         ? parseInt(filters.departement)
         : undefined,
       end: filters.endDate,

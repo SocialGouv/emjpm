@@ -40,7 +40,7 @@ export function ListeBlanchePreposeItem(props) {
                 .map((e) => {
                   let str = e.etablissement.rslongue;
                   if (e.etablissement.departement) {
-                    str += ` (${e.etablissement.departement.code})`;
+                    str += ` (${e.etablissement.departement.id})`;
                   }
                   if (e.etablissement_rattachement) {
                     str += " (Rattaché)";

@@ -66,7 +66,7 @@ class Mesure extends Model {
         date_nomination: { type: "date" },
         date_premier_mesure: { type: "date" },
         date_protection_en_cours: { type: "date" },
-        department_id: { type: ["integer", null] },
+        departement_code: { type: ["string", null] },
         etablissement: { type: ["string", null] },
         etablissement_id: { type: ["integer", null] },
         id: { type: "integer" },
