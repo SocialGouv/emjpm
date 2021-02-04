@@ -35,14 +35,7 @@ const login = async (req, res, next) => {
 
       const userResult = await user.getUser();
 
-      return res
-        .cookie("token", userResult.token, {
-          httpOnly: true,
-          path: "/api/auth",
-          secure: req.secure,
-        })
-        .status(200)
-        .json(userResult);
+      return res.status(200).json(userResult);
     }
   })(req, res, next);
 };
