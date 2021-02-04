@@ -6,7 +6,7 @@ import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
 import { Link } from "~/containers/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 

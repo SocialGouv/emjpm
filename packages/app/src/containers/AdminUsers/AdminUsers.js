@@ -20,7 +20,7 @@ import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
-import { impersonateLogin, useAuth } from "~/routes/Auth";
+import { impersonateLogin, useAuth } from "~/user/Auth";
 
 function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;

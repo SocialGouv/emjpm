@@ -20,7 +20,7 @@ export const LOCATIONS = gql`
   }
 `;
 
-export const getLocation = async (client, { address, zipcode, city }) => {
+const getLocation = async (client, { address, zipcode, city }) => {
   try {
     let geolocation = null;
 
@@ -73,3 +73,5 @@ export const getLocation = async (client, { address, zipcode, city }) => {
     return null;
   }
 };
+
+export default getLocation;

@@ -1,5 +1,5 @@
 import useSearchParams from "~/hooks/useSearchParams";
-import castInt from "~/util/castInt";
+import castInt from "~/util/std/castInt";
 
 export function useCurrentStepFromUrl() {
   const { step, substep } = useSearchParams();

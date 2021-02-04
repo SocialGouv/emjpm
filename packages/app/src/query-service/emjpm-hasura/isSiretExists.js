@@ -8,7 +8,7 @@ const CHECK_SIRET_UNICITY = gql`
   }
 `;
 
-export const isSiretExists = async (client, siret) => {
+const isSiretExists = async (client, siret) => {
   const checkSiret = await client.query({
     context: {
       headers: {
@@ -23,3 +23,5 @@ export const isSiretExists = async (client, siret) => {
   });
   return checkSiret.data.mandataires.length > 0;
 };
+
+export default isSiretExists;

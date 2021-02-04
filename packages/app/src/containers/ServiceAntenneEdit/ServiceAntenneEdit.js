@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 import { ServiceAntenneForm } from "~/containers/ServiceAntenneForms";
 import { Card } from "~/components";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import { EDIT_ANTENNE } from "./mutations";
 

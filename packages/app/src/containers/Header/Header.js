@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
 import { DropDownMenu, Header as HeaderComponent } from "~/components";
-import { useAuth } from "~/routes/Auth";
+import { useAuth } from "~/user/Auth";
 
 export const defaultLinks = [
   // { title: "Centre d'assistance", to: "https://emjpm-blog.azurewebsites.net" }

@@ -15,7 +15,7 @@ import {
   Input,
   Text,
 } from "~/components";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 const { API_URL } = config;
 

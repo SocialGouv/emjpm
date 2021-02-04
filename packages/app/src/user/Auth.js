@@ -13,7 +13,7 @@ import { LoadingWrapper } from "~/containers/Commons";
 
 import fetch from "unfetch";
 
-import { matopush } from "~/util/matomo";
+import { matopush } from "~/user/matomo";
 import config from "~/config";
 import history from "~/routes/history";
 

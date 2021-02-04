@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { UPLOAD_MESURES_EXCEL_FILE } from "~/containers/MesureImport/mutations";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { fileReader } from "~/util/fileReader";
+import { fileReader } from "~/util/std/fileReader";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();

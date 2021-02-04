@@ -8,7 +8,7 @@ const CHECK_EMAIL_UNICITY = gql`
   }
 `;
 
-export const isEmailExists = async (client, email) => {
+const isEmailExists = async (client, email) => {
   const checkEmail = await client.query({
     fetchPolicy: "network-only",
     query: CHECK_EMAIL_UNICITY,
@@ -18,3 +18,5 @@ export const isEmailExists = async (client, email) => {
   });
   return checkEmail.data.check_email_exists.exist;
 };
+
+export default isEmailExists;

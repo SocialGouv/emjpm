@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import { AdminEditorForm } from "./AdminEditorForm";
 import { EDIT_EDITOR } from "./mutations";

@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { ServiceAntenneForm } from "~/containers/ServiceAntenneForms";
 import { UserContext } from "~/containers/UserContext";
 import { Card } from "~/components";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import { CREATE_ANTENNE } from "./mutations";
 

@@ -6,7 +6,7 @@ import {
   ENQUETE_WITH_REPONSE_STATUS,
 } from "~/containers/Enquete/queries";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "~/containers/EnqueteImport/mutations";
-import { fileReader } from "~/util/fileReader";
+import { fileReader } from "~/util/std/fileReader";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();

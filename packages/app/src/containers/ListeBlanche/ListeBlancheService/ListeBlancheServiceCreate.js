@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 import serviceSiretExists from "~/util/serviceSiretExists";
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";

@@ -8,7 +8,7 @@ import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import useSearchParams from "~/hooks/useSearchParams";
-import { useAuth } from "~/routes/Auth";
+import { useAuth } from "~/user/Auth";
 
 export default function AuthorizationPage() {
   const {

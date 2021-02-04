@@ -16,8 +16,8 @@ import {
   Input,
   Text,
 } from "~/components";
-import { useAuth } from "~/routes/Auth";
-import { matopush } from "~/util/matomo";
+import { useAuth } from "~/user/Auth";
+import { matopush } from "~/user/matomo";
 
 const { API_URL } = config;
 

@@ -14,7 +14,7 @@ import { Geocode } from "~/containers/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
 import { signupMandataireSchema } from "~/validation-schemas";
-import { isSiretExists } from "~/query-service/SiretQueryService";
+import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 

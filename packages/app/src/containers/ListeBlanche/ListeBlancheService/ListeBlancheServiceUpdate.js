@@ -4,7 +4,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { Card } from "rebass";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";

@@ -1,7 +1,7 @@
 import { useRef, useState, useCallback, useEffect } from "react";
 
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
-import { impersonateLogout } from "~/routes/Auth";
+import { impersonateLogout } from "~/user/Auth";
 
 const isImpersonated = localStorage.getItem("impersonate");
 export default function Impersonation({}) {

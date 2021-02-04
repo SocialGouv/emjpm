@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card, Heading } from "~/components";
-import { captureException } from "~/util/sentry";
+import { captureException } from "~/user/sentry";
 
 import { ADD_EDITOR_FROM_REQUEST } from "./mutations";
 import { EDITOR_REQUESTS } from "./queries";

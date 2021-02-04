@@ -3,7 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import { isEmailExists } from "~/query-service/EmailQueryService";
+import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";

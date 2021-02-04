@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { isEmailExists } from "~/query-service/EmailQueryService";
+import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 
 import { SERVICE_MEMBER_INVITATION } from "./queries";
 import signup from "./signup";

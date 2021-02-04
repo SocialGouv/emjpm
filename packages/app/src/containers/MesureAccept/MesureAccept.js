@@ -9,7 +9,7 @@ import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
-import { getLocation } from "~/query-service/LocationQueryService";
+import getLocation from "~/query-service/emjpm-hasura/getLocation";
 
 import { MesureAcceptForm } from "./MesureAcceptForm";
 import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";

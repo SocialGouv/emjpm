@@ -13,7 +13,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/validation-schemas";
-import { isEmailExists } from "~/query-service/EmailQueryService";
+import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 import { Button, Heading, Text } from "~/components";
 
 import { SignupContext } from "./context";

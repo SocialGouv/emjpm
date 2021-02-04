@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import useScript, { SCRIPT_STATUS } from "~/hooks/useScript";
 
-import initTarteaucitron from "~/util/initTarteaucitron";
+import initTarteaucitron from "~/user/initTarteaucitron";
 
 export function useMatomo() {
   const location = useLocation();

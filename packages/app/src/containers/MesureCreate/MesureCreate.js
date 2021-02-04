@@ -7,7 +7,7 @@ import { Box } from "rebass";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
-import { getLocation } from "~/query-service/LocationQueryService";
+import getLocation from "~/query-service/emjpm-hasura/getLocation";
 import { formatTribunauxOptions } from "~/util";
 
 import { MesureCreateForm } from "./MesureCreateForm";
