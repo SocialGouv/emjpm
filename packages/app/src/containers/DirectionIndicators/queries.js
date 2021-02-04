@@ -4,13 +4,13 @@ export const GET_OPEN_MESURE_NUMBER = gql`
   query openedMesureNumber(
     $end: date!
     $start: date!
-    $departementId: Int
+    $departementCode: String
     $regionId: Int
   ) {
     stat_opened_mesures(
       end: $end
       start: $start
-      departementId: $departementId
+      departementCode: $departementCode
       regionId: $regionId
     ) {
       opened_mesures_nb
@@ -19,8 +19,11 @@ export const GET_OPEN_MESURE_NUMBER = gql`
 `;
 
 export const GET_AVAILABLE_MESURE_NUMBER = gql`
-  query stat_available_mesures($departementId: Int, $regionId: Int) {
-    stat_available_mesures(departementId: $departementId, regionId: $regionId) {
+  query stat_available_mesures($departementCode: String, $regionId: Int) {
+    stat_available_mesures(
+      departementCode: $departementCode
+      regionId: $regionId
+    ) {
       available_mesures_nb
     }
   }
@@ -30,13 +33,13 @@ export const GET_CLOSED_MESURE_NUMBER = gql`
   query closedMesureNumber(
     $end: date!
     $start: date!
-    $departementId: Int
+    $departementCode: String
     $regionId: Int
   ) {
     stat_closed_mesures(
       end: $end
       start: $start
-      departementId: $departementId
+      departementCode: $departementCode
       regionId: $regionId
     ) {
       closed_mesures_nb
@@ -45,7 +48,7 @@ export const GET_CLOSED_MESURE_NUMBER = gql`
 `;
 
 export const GET_GESTIONNAIRE_NUMBER = gql`
-  query gestionnaireNumber($type: String, $department: Int, $region: Int) {
+  query gestionnaireNumber($type: String, $department: String, $region: Int) {
     gestionnaireNumber: view_mesure_gestionnaire_departement_aggregate(
       where: {
         discriminator: { _eq: $type }

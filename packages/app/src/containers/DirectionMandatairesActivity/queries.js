@@ -1,7 +1,10 @@
 import gql from "graphql-tag";
 
 export const MANDATAIRE_ACTIVITY = gql`
-  query mesureInProgressByGestionnaireNumber($department: Int, $region: Int) {
+  query mesureInProgressByGestionnaireNumber(
+    $department: String
+    $region: Int
+  ) {
     service: view_mesure_gestionnaire_departement_aggregate(
       where: {
         departement: {

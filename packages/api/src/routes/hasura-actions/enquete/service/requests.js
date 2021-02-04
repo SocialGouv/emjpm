@@ -31,14 +31,14 @@ module.exports = {
         } = queryResult.data.services_by_pk;
 
         defaultValues.region = departement.region.nom;
-        defaultValues.departementId = departement.id;
+        defaultValues.departementCode = departement.id;
         defaultValues.departement = departement.nom;
         defaultValues.nom = etablissement;
       }
 
       const value = {
         departement: defaultValues.departement,
-        departementId: defaultValues.departementId,
+        departementCode: defaultValues.departementCode,
         enqueteId,
         nom: defaultValues.nom,
         region: defaultValues.region,

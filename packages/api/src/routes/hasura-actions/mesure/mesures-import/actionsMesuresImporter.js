@@ -289,7 +289,7 @@ const prepareMesure = async (
     civilite: mesureDatas.civilite,
     code_postal: mesureDatas.code_postal,
     date_nomination: mesureDatas.date_nomination,
-    department_id: department.id,
+    departement_code: department.id,
     etats: [
       {
         champ_mesure: mesureDatas.champ_mesure,

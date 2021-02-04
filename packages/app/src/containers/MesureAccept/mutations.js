@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 export const ACCEPT_MESURE = gql`
   mutation editMesure(
     $id: Int!
-    $department_id: Int
+    $departement_code: String
     $date_nomination: date!
     $nature_mesure: nature_mesure_enum!
     $champ_mesure: champ_mesure_enum
@@ -37,7 +37,7 @@ export const ACCEPT_MESURE = gql`
       where: { id: { _eq: $id } }
       _set: {
         antenne_id: $antenne_id
-        department_id: $department_id
+        departement_code: $departement_code
         status: en_cours
         date_nomination: $date_nomination
         date_protection_en_cours: $date_nomination

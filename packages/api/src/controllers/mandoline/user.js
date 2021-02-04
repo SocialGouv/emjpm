@@ -18,7 +18,7 @@ const getUserDirection = (user) => {
   }
   if (departement) {
     data.departement = {
-      code: departement.code,
+      code: departement.id,
       nom: departement.nom,
     };
   }
@@ -53,7 +53,7 @@ const getUserService = (user) => {
 
   const data = {
     departement: {
-      code: departement.code,
+      code: departement.id,
       nom: departement.nom,
     },
     dispo_max,

@@ -28,7 +28,7 @@ const defaultRegister = (params) => ({
   mandataire: {
     adresse: "",
     code_postal: "75010",
-    department_id: 1,
+    departement_code: "01",
     etablissement: "",
     telephone: "",
     ville: "",

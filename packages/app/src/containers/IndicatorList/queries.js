@@ -6,28 +6,28 @@ export const INDICATORS = gql`
     $currentMonthStart: timestamptz!
     $currentMonthEnd: timestamptz!
   ) {
-    departements(where: { code: { _eq: $code } }) {
-      code
+    departements(where: { id: { _eq: $code } }) {
+      id
       nom
     }
-    view_indicateur_login(where: { code: { _eq: $code } }) {
+    view_indicateur_login(where: { id: { _eq: $code } }) {
       count
       nom
       type
-      code
+      id
     }
-    view_indicateur_inscrit(where: { code: { _eq: $code } }) {
+    view_indicateur_inscrit(where: { id: { _eq: $code } }) {
       count
       nom
       type
-      code
+      id
     }
     mesuresLastMonthCount: mesures_aggregate(
       where: {
         _and: {
           created_at: { _gte: $currentMonthStart, _lte: $currentMonthEnd }
           magistrat_id: { _is_null: false }
-          departement: { code: { _eq: $code } }
+          departement: { id: { _eq: $code } }
         }
       }
     ) {

@@ -22,7 +22,7 @@ module.exports = async function updateCurrentDataOfMesure(mesureId) {
     .update({
       champ_mesure,
       code_postal,
-      department_id: departement.id,
+      departement_code: departement.id,
       latitude: geodata.latitude,
       lieu_vie,
       longitude: geodata.longitude,

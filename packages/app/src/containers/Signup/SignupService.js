@@ -20,9 +20,9 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-function getServiceOptions(services, departementId) {
+function getServiceOptions(services, departementCode) {
   const servicesByDepartement = services.filter(
-    (s) => s.department_id === departementId
+    (s) => s.departement_code === departementCode
   );
 
   return toOptions(servicesByDepartement, "id", "etablissement");

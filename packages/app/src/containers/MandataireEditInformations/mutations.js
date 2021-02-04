@@ -17,7 +17,7 @@ export const EDIT_USER = gql`
     $id: Int!
     $mandataire_id: Int!
     $mandataire_tis: [mandataire_tis_insert_input!]!
-    $department_id: Int!
+    $departement_code: String!
     $competences: String
     $siret: String
   ) {
@@ -43,7 +43,7 @@ export const EDIT_USER = gql`
         adresse: $adresse
         code_postal: $code_postal
         genre: $genre
-        department_id: $department_id
+        departement_code: $departement_code
         competences: $competences
         siret: $siret
       }

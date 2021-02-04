@@ -84,7 +84,7 @@ function formatMesure(mesure) {
     dateProtectionEnCoursFormatted: date_protection_en_cours
       ? stdFormatter.formatDateUI(date_protection_en_cours)
       : "",
-    departementId: departement ? departement.id : null,
+    departementCode: departement ? departement.id : null,
     id: id,
     isUrgent: is_urgent,
     judgmentDate: judgment_date,

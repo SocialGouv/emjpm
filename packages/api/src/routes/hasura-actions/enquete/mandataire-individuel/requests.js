@@ -32,7 +32,7 @@ module.exports = {
               const [{ departement }] = lb_user.lb_departements;
               defaultValues.region = departement.region.nom;
               defaultValues.departement = departement.nom;
-              defaultValues.departementId = departement.id;
+              defaultValues.departementCode = departement.id;
             }
           }
         }
@@ -40,7 +40,7 @@ module.exports = {
 
       const value = {
         departement: defaultValues.departement,
-        departementId: defaultValues.departementId,
+        departementCode: defaultValues.departementCode,
         enqueteId,
         mandataireId,
         nom: defaultValues.nom,

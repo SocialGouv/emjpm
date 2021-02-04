@@ -10,7 +10,7 @@ export const TRIBUNAUX = gql`
     tis_aggregate(
       where: {
         ville: { _ilike: $searchText }
-        departement: { code: { _eq: $departementCode } }
+        departement: { id: { _eq: $departementCode } }
       }
     ) {
       aggregate {
@@ -23,7 +23,7 @@ export const TRIBUNAUX = gql`
       offset: $offset
       where: {
         ville: { _ilike: $searchText }
-        departement: { code: { _eq: $departementCode } }
+        departement: { id: { _eq: $departementCode } }
       }
     ) {
       id

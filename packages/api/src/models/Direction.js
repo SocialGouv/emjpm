@@ -17,7 +17,7 @@ class Direction extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        department_id: { type: "integrer" },
+        departement_code: { type: "string" },
         id: { type: "integer" },
         region_id: { type: "integrer" },
         type: { type: "string" },
@@ -31,7 +31,7 @@ class Direction extends Model {
     return {
       departement: {
         join: {
-          from: "direction.department_id",
+          from: "direction.departement_code",
           to: "departements.id",
         },
         modelClass: Models.Departement,

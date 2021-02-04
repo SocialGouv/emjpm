@@ -21,9 +21,9 @@ export const ETABLISSEMENTS = gql`
           { ligneacheminement: { _ilike: $search } }
           { nofinesset: { _ilike: $search } }
         ]
-        departement: { code: { _eq: $departementCode } }
+        departement: { id: { _eq: $departementCode } }
       }
-      order_by: { departement: { code: asc } }
+      order_by: { departement: { id: asc } }
     ) {
       id
       nofinesset

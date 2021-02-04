@@ -67,10 +67,10 @@ describe("POST /api/mandoline/user", () => {
 
       expect(response.body).toMatchObject({
         direction: {
-          type: "national",
+          type: "departemental",
         },
-        email: "direction-874@justice.fr",
-        id: 874,
+        email: "direction-2084@justice.fr",
+        id: 2084,
         nom: "direction",
         prenom: "Paula",
         type: "direction",

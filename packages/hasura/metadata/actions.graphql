@@ -95,7 +95,7 @@ type Query {
 
 type Query {
   stat_available_mesures (
-    departementId: Int
+    departementCode: String
     regionId: Int
   ): StatAvailableMesuresOutput
 }
@@ -103,7 +103,7 @@ type Query {
 
 type Query {
   stat_awaiting_mesures (
-    departementId: Int
+    departementCode: String
     regionId: Int
     start: date!
     end: date!
@@ -113,7 +113,7 @@ type Query {
 
 type Query {
   stat_closed_mesures (
-    departementId: Int
+    departementCode: String
     regionId: Int
     start: date!
     end: date!
@@ -123,7 +123,7 @@ type Query {
 
 type Query {
   stat_opened_mesures (
-    departementId: Int
+    departementCode: String
     regionId: Int
     start: date!
     end: date!

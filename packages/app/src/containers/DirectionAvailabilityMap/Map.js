@@ -18,7 +18,7 @@ function France(props) {
           <SvgProxy
             key={`${dpt}-${index}`}
             onClick={() => togglePanel({ isActive: true, ...dpt })}
-            selector={`#dpt-${dpt.department.code}`}
+            selector={`#dpt-${dpt.department.id}`}
             fill={dpt.isAbove ? aboveColor : belowColor}
           />
         ))}

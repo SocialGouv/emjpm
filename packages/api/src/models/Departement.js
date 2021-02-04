@@ -15,8 +15,7 @@ class Departement extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        code: { type: "string" },
-        id: { type: "integer" },
+        id: { type: "string" },
         id_finess: {
           type: "string",
         },

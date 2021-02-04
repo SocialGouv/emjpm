@@ -33,11 +33,10 @@ export const LB_USER = gql`
       }
       lb_departements {
         id
-        departement_id
+        departement_code
         departement_financeur
         departement {
           id
-          code
           nom
         }
       }
@@ -116,7 +115,6 @@ export const LB_USERS = gql`
           departement {
             id
             nom
-            code
           }
         }
         etablissement_rattachement
@@ -126,7 +124,6 @@ export const LB_USERS = gql`
         departement_financeur
         departement {
           id
-          code
           nom
         }
       }

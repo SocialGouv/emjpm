@@ -51,7 +51,7 @@ export const CREATE_LB_USER_INDIVIDUEL = gql`
       id
       lb_departements {
         id
-        departement_id
+        departement_code
       }
       nom
       prenom
@@ -113,7 +113,7 @@ export const UPDATE_LB_USER = gql`
 export const CREATE_LB_DEPARTEMENT = gql`
   mutation create_lb_departement(
     $lb_user_id: Int!
-    $departement_id: Int!
+    $departement_code: String!
     $departement_financeur: Boolean
     $individuel: Boolean
     $service: Boolean
@@ -123,7 +123,7 @@ export const CREATE_LB_DEPARTEMENT = gql`
     insert_lb_departements_one(
       object: {
         lb_user_id: $lb_user_id
-        departement_id: $departement_id
+        departement_code: $departement_code
         departement_financeur: $departement_financeur
         individuel: $individuel
         service: $service

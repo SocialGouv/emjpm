@@ -54,7 +54,6 @@ export const GET_SERVICE_USERS = gql`
           latitude
           departement {
             id
-            code
           }
           service_tis {
             id
@@ -224,7 +223,6 @@ export const MANDATAIRE_USERS = gql`
               departement {
                 id
                 id_region
-                code
               }
             }
           }
@@ -234,7 +232,6 @@ export const MANDATAIRE_USERS = gql`
             departement {
               id
               nom
-              code
             }
           }
           ocmi_mandataire {

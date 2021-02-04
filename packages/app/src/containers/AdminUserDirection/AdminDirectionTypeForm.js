@@ -44,7 +44,7 @@ export function AdminDirectionTypeForm(props) {
   const { direction, departements, regions, onSubmit } = props;
   const formik = useFormik({
     initialValues: {
-      departement: direction.department_id || "",
+      departement: direction.departement_code || "",
       region: direction.region_id || "",
       type: direction.type || "",
     },

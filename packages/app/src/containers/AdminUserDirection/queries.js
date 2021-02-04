@@ -8,7 +8,6 @@ export const USER = gql`
     }
     departements {
       id
-      code
       nom
     }
     regions {
@@ -32,7 +31,7 @@ export const USER = gql`
       directions {
         id
         region_id
-        department_id
+        departement_code
         type
       }
     }

@@ -38,7 +38,7 @@ export function ListeBlancheServiceUpdate(props) {
       await updateService({
         refetchQueries: ["services", "services_aggregate"],
         variables: {
-          department_id: departement.id,
+          departement_code: departement.id,
           email: values.email,
           etablissement: values.etablissement,
           id: service.id,

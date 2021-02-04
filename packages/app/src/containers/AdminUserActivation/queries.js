@@ -12,7 +12,6 @@ export const LB_USER = gql`
         departement_financeur
         departement {
           id
-          code
         }
       }
     }
