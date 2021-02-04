@@ -12,7 +12,7 @@ export const UPDATE_TRIBUNAL = gql`
     $adresse: String!
     $latitude: Float!
     $longitude: Float!
-    $departement_code: Int!
+    $departement_code: String!
   ) {
     update_tis(
       where: { id: { _eq: $id } }
