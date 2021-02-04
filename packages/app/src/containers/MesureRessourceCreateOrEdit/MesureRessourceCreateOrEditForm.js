@@ -7,7 +7,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { mesureRessourceSchema } from "~/validation-schemas";
 import {
   Button,

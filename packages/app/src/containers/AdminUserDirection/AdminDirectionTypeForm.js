@@ -6,7 +6,7 @@ import {
   FormGrayBox,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Link } from "~/containers/Link";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";

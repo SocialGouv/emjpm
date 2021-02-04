@@ -10,7 +10,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
 import { Button, Heading, Text } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";

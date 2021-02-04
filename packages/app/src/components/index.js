@@ -19,3 +19,5 @@ export { default as Textarea } from "./Textarea";
 export { default as Indicator } from "./Indicator";
 export { default as DropDownMenu } from "./DropDownMenu";
 export { default as Header } from "./Header";
+
+export { default as AppForm } from "./AppForm";

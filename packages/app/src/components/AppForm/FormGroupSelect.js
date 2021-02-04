@@ -3,11 +3,11 @@ import { useDebouncedCallback } from "use-debounce";
 
 import { Field, Input, Select } from "~/components";
 
-import { AppFormFieldErrorMessage } from "./core/AppFormFieldErrorMessage";
-import { useAppFieldIsRequired } from "./core/useAppFieldIsRequired.hook";
-import { useAppFieldShowError } from "./core/useAppFieldShowError.hook";
+import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
+import useAppFieldIsRequired from "./useAppFieldIsRequired";
+import useAppFieldShowError from "./useAppFieldShowError";
 
-export function FormGroupSelect(props) {
+export default function FormGroupSelect(props) {
   let {
     id,
     placeholder,

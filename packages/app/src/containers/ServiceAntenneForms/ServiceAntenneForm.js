@@ -6,7 +6,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
 import { serviceAntenneSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";

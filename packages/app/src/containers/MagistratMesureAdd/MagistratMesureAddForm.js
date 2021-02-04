@@ -10,7 +10,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";

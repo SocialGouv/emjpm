@@ -8,7 +8,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureEditSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";

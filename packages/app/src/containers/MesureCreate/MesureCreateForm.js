@@ -8,7 +8,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { GeocodeCities } from "~/containers/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";

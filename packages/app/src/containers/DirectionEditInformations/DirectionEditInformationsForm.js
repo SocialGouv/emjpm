@@ -6,7 +6,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Link } from "~/containers/Link";
 import { directionEditSchema } from "~/validation-schemas/directionEditSchema";
 import { Button, Heading, InlineError, Text } from "~/components";

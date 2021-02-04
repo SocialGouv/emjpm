@@ -7,7 +7,7 @@ import {
   FormGrayBox,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
 import { signupServiceSchema } from "~/validation-schemas";

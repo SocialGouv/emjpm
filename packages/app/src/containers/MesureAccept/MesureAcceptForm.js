@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 
 import { Box, Flex, Text } from "rebass";
 
-import { FormGroupInput, FormGroupSelect } from "~/containers/AppForm";
+import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
 import { GeocodeCities } from "~/containers/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";

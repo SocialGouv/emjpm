@@ -3,7 +3,7 @@ import { isIndividuel, isMandataire } from "@emjpm/biz";
 import { Fragment, useCallback } from "react";
 import { Box, Flex } from "rebass";
 
-import { FormGrayBox, FormInputBox } from "~/containers/AppForm";
+import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { Button, Heading, Text } from "~/components";
 

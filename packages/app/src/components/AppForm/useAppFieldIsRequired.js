@@ -1,6 +1,10 @@
 import { useMemo } from "react";
 
-export function useAppFieldIsRequired({ id, required, validationSchema }) {
+export default function useAppFieldIsRequired({
+  id,
+  required,
+  validationSchema,
+}) {
   return useMemo(() => {
     if (required) {
       return required;

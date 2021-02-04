@@ -1,7 +1,7 @@
 import { components } from "react-select";
 
 import { searchAdresse } from "~/query-service/datagouv/api-adresse";
-import { FormGroupSelect } from "~/containers/AppForm";
+import { FormGroupSelect } from "~/components/AppForm";
 
 // https://geo.api.gouv.fr/adresse
 

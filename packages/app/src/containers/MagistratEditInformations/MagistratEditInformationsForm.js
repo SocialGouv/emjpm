@@ -7,7 +7,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { magistratEditSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Text } from "~/components";

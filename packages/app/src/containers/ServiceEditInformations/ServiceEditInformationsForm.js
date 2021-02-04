@@ -6,7 +6,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
 import { Link } from "~/containers/Link";
 import { serviceSchema } from "~/validation-schemas/serviceSchema";

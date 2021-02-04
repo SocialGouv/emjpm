@@ -8,7 +8,7 @@ import {
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
 import { Link } from "~/containers/Link";
 import { GENDER_OPTIONS } from "~/constants/user";

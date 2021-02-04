@@ -3,7 +3,7 @@ import { components } from "react-select";
 
 import { fullText } from "~/query-service/datagouv/api-siren";
 import { searchAdresse } from "~/query-service/datagouv/api-adresse";
-import { FormGroupSelect } from "~/containers/AppForm";
+import { FormGroupSelect } from "~/components/AppForm";
 
 // https://entreprise.data.gouv.fr/api_doc/sirene
 // https://sirene.fr/sirene/public/static/liste-variables

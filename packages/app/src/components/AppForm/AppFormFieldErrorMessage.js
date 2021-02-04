@@ -1,8 +1,13 @@
 import { InlineError } from "~/components";
 
-import { useAppFieldShowError } from "./useAppFieldShowError.hook";
+import useAppFieldShowError from "./useAppFieldShowError";
 
-export function AppFormFieldErrorMessage({ id, error, formik, hideErrors }) {
+export default function AppFormFieldErrorMessage({
+  id,
+  error,
+  formik,
+  hideErrors,
+}) {
   const { errors } = formik;
 
   if (!error) {

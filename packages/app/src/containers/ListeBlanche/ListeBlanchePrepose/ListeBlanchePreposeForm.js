@@ -9,7 +9,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
-} from "~/containers/AppForm";
+} from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
 import yup from "~/validation-schemas/yup";
