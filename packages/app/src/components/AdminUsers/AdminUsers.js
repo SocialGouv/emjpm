@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useCallback } from "react";
 import { useQuery } from "@apollo/client";
 import {
   DIRECTION_TYPE,
@@ -19,8 +19,17 @@ import { Button, Card } from "~/ui";
 import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
+import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
+import { impersonateLogin, useAuth } from "~/routes/Auth";
+
 function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;
+
+  const { authStore } = useAuth();
+  const { token } = authStore;
+  const impersonate = useCallback(() => {
+    impersonateLogin({ id, token });
+  }, [id, token]);
 
   return (
     <>
@@ -64,11 +73,34 @@ function RowItem({ item }) {
               </Flex>
             )}
           </Flex>
-          <Box mr="1" width="120px">
-            <Link to={`/admin/users/${id}`}>
-              <Button>Voir</Button>
-            </Link>
-          </Box>
+          <Flex justifyContent="flex-end" width="180px">
+            <Flex width="100px" flexDirection="column">
+              <Box mr="1" width="120px">
+                <Link to={`/admin/users/${id}`}>
+                  <Button>Voir</Button>
+                </Link>
+              </Box>
+            </Flex>
+            <Flex width="80px" flexDirection="column">
+              <Box mr="1" width="120px">
+                <Button
+                  style={{
+                    backgroundColor: "white",
+                    borderColor: "#007AD9",
+                    borderWidth: 1,
+                    borderStyle: "solid",
+                    borderRadius: 5,
+                  }}
+                  onClick={impersonate}
+                >
+                  <UserSecret
+                    size={18}
+                    style={{ color: "#333", height: "100%" }}
+                  />
+                </Button>
+              </Box>
+            </Flex>
+          </Flex>
         </Flex>
       </Card>
     </>

@@ -18,6 +18,7 @@ import { Router } from "react-router";
 import { useMatomo } from "~/util/matomo";
 
 import AutoReload from "~/components/AutoReload";
+import Impersonation from "~/components/Impersonation";
 
 function App() {
   useSentry();
@@ -45,6 +46,7 @@ function App() {
         </Sentry.ErrorBoundary>
       </ThemeProvider>
       <AutoReload />
+      <Impersonation />
     </>
   );
 }

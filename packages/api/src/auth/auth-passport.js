@@ -1,5 +1,6 @@
 const passport = require("passport");
 const authLoginPasswordStrategy = require("./strategies/authLoginPasswordStrategy");
+const authLoginImpersonateStrategy = require("./strategies/authLoginImpersonateStrategy");
 const authEditorJwtStrategy = require("./strategies/authEditorJwtStrategy");
 const authUserJwtStrategy = require("./strategies/authUserJwtStrategy");
 const {
@@ -49,6 +50,7 @@ function init() {
 init();
 
 passport.use("login-password", authLoginPasswordStrategy);
+passport.use("login-impersonate", authLoginImpersonateStrategy);
 passport.use("editor-jwt", authEditorJwtStrategy);
 passport.use("user-jwt", authUserJwtStrategy);
 passport.use(

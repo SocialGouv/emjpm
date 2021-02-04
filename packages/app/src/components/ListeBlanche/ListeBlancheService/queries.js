@@ -6,6 +6,7 @@ export const SERVICE = gql`
       id
       etablissement
       siren
+      siret
       lb_code_postal
       lb_ville
       code_postal
