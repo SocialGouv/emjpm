@@ -46,7 +46,7 @@ export const EDIT_SERVICE = gql`
       affected_rows
       returning {
         id
-        siren
+        siret
         adresse
         code_postal
         email
@@ -61,7 +61,7 @@ export const EDIT_SERVICE = gql`
         mesures_in_progress
         nom
         prenom
-        siren
+        siret
         telephone
         ville
       }

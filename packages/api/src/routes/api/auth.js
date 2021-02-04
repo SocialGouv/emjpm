@@ -1,10 +1,9 @@
 const express = require("express");
-const cookieParser = require("cookie-parser");
 
 const router = express.Router();
 const { check, body } = require("express-validator");
+const impersonate = require("~/controllers/user/impersonate");
 const login = require("~/controllers/user/login");
-const getToken = require("~/controllers/user/get-token");
 const signup = require("~/controllers/user/signup");
 const resetPassword = require("~/controllers/user/reset-password");
 const forgotPassword = require("~/controllers/user/forgot-password");
@@ -17,7 +16,11 @@ router.post(
   login
 );
 
-router.get("/get-token", cookieParser(), getToken);
+router.post(
+  "/impersonate",
+  [body("token").not().isEmpty(), body("id").not().isEmpty()],
+  impersonate
+);
 
 router.post(
   "/forgot-password",

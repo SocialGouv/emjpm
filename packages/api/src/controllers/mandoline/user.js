@@ -32,7 +32,7 @@ const getUserService = (user) => {
   }
   const {
     etablissement,
-    siren,
+    siret,
     nom,
     prenom,
     email,
@@ -71,7 +71,7 @@ const getUserService = (user) => {
     org_nom,
     org_ville,
     prenom,
-    siren,
+    siret,
     telephone,
   };
   return data;

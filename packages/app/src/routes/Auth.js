@@ -7,11 +7,11 @@ import React, {
   useReducer,
 } from "react";
 import { Redirect, Route } from "react-router-dom";
-import cookie from "js-cookie";
+// see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 import jwtDecode from "jwt-decode";
 import { LoadingWrapper } from "~/components/Commons";
 
-// see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
+import fetch from "unfetch";
 
 import { matopush } from "~/util/matomo";
 import config from "~/config";
@@ -28,7 +28,7 @@ export function ProvideAuth({ children }) {
     (event) => {
       if (event.key === "logout") {
         const { authStore } = auth;
-        if (authStore.logged) {
+        if (authStore.token) {
           console.log("logged out from storage!");
           auth.logout();
         }
@@ -57,13 +57,17 @@ const routeByRole = {
   ti: "/magistrats",
 };
 
-const authInitialState = {
-  id: null,
-  loading: cookie.get("logged") === "1",
-  logged: false,
-  token: null,
-  type: null,
+const getAuthInitialState = () => {
+  let storage;
+  storage = localStorage.getItem("impersonate");
+  if (!storage) {
+    storage = localStorage.getItem("auth");
+  }
+  const state = JSON.parse(storage) || {};
+  return state;
 };
+
+const authInitialState = getAuthInitialState();
 
 function authReducer(state, { type, payload }) {
   switch (type) {
@@ -71,18 +75,16 @@ function authReducer(state, { type, payload }) {
       return {
         ...state,
         id: null,
-        loading: false,
-        logged: false,
         token: null,
         type: null,
       };
     }
     case "login": {
       const { id, type, token } = payload;
-      return { ...state, id, loading: false, logged: true, token, type };
+      return { ...state, id, token, type };
     }
     case "loaded": {
-      return { ...state, loading: false };
+      return { ...state };
     }
     default:
       throw new Error("unknown auth action '" + type + "'");
@@ -96,13 +98,12 @@ export function useProvideAuth() {
   );
 
   const logout = useCallback(() => {
+    localStorage.setItem("auth", JSON.stringify({}));
+
     // to support logging out from all windows
     localStorage.setItem("logout", Date.now());
 
     // clear user data
-    cookie.remove("logged");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_type");
     localStorage.removeItem("filters");
 
     dispatchAuthStore({ type: "logout" });
@@ -110,10 +111,14 @@ export function useProvideAuth() {
 
   const login = useCallback(
     ({ token, id, type }) => {
-      cookie.set("logged", "1");
-
-      localStorage.setItem("user_id", id);
-      localStorage.setItem("user_type", type);
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({
+          token,
+          id,
+          type,
+        })
+      );
 
       matopush(["trackEvent", "login", "success"]);
       matopush(["setUserId", type + "-" + id]);
@@ -132,13 +137,13 @@ export function useProvideAuth() {
   );
 
   // login redirect
-  const prevLoggedStateRef = useRef(() => authStore.logged);
+  const prevLoggedStateRef = useRef(() => authStore.token);
   useEffect(() => {
     const { pathname } = window.location;
-    if (!authStore.logged && pathname === "/") {
+    if (!authStore.token && pathname === "/") {
       history.push("/login");
     }
-    if (authStore.logged && prevLoggedStateRef.current !== authStore.logged) {
+    if (authStore.token && prevLoggedStateRef.current !== authStore.token) {
       const isOauth = pathname === "/application/authorization";
       if (!isOauth) {
         const { url, role } = jwtDecode(authStore.token);
@@ -152,34 +157,6 @@ export function useProvideAuth() {
     }
   }, [authStore, logout]);
 
-  // load token in memory
-  useEffect(() => {
-    (async () => {
-      if (cookie.get("logged")) {
-        const response = await fetch(`${API_URL}/api/auth/get-token`, {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "GET",
-        });
-        const { token } = await response.json();
-        if (token) {
-          dispatchAuthStore({
-            payload: {
-              id: localStorage.getItem("user_id"),
-              token,
-              type: localStorage.getItem("user_type"),
-            },
-            type: "login",
-          });
-        } else {
-          dispatchAuthStore({ type: "logout" });
-        }
-      }
-    })();
-  }, [dispatchAuthStore]);
-
   return {
     authStore,
     login,
@@ -190,22 +167,43 @@ export function useProvideAuth() {
 export function PrivateRoute({ children, ...rest }) {
   const { authStore } = useAuth();
   return (
-    <LoadingWrapper loading={authStore.loading}>
-      <Route
-        {...rest}
-        render={({ location }) =>
-          authStore.logged ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
-            />
-          )
-        }
-      />
-    </LoadingWrapper>
+    <Route
+      {...rest}
+      render={({ location }) =>
+        authStore.token ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
   );
+}
+
+export async function impersonateLogin(impersonateParams) {
+  const url = `${API_URL}/api/auth/impersonate`;
+  const response = await fetch(url, {
+    body: JSON.stringify({
+      token: impersonateParams.token,
+      id: impersonateParams.id,
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
+  const json = await response.json();
+  const { id, token, type } = json;
+  localStorage.setItem("impersonate", JSON.stringify({ id, token, type }));
+  window.location.href = "/";
+}
+
+export async function impersonateLogout() {
+  localStorage.removeItem("impersonate");
+  window.location.href = "/";
 }
