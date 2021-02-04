@@ -1,12 +1,9 @@
-import { useQuery } from "@apollo/client";
-
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
 import { Link } from "~/containers/Link";
 import { Card, Heading, Spinner } from "~/components";
-
-import { INDICATORS } from "./queries";
+import { departementList } from "~/utils/geodata";
 
 const linkStyle = {
   color: "black",
@@ -18,27 +15,6 @@ const linkStyle = {
 };
 
 function IndicatorsMenu(props) {
-  const { data, error, loading } = useQuery(INDICATORS);
-
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
-  }
-
-  const { departements } = data;
   return (
     <Scrollbar style={{ height: "100%", width: "100%" }}>
       <Box {...props} mr="1">
@@ -55,21 +31,16 @@ function IndicatorsMenu(props) {
             )}
           />
         </Card>
-        {departements.map((departement, index) => {
+        {departementList.map(({ code, nom }) => {
           return (
-            <Card
-              key={`${index}-${departement.id}`}
-              p="1"
-              mb="1"
-              sx={{ borderRadius: "15px" }}
-            >
+            <Card key={code} p="1" mb="1" sx={{ borderRadius: "15px" }}>
               <Link
-                to={`/stats/${departement.code}`}
+                to={`/stats/${code}`}
                 component={(props) => (
                   <StyledLink
                     onClick={() => props.navigate(props.href)}
                     sx={linkStyle}
-                  >{`${departement.id} - ${departement.nom}`}</StyledLink>
+                  >{`${code} - ${nom}`}</StyledLink>
                 )}
               />
             </Card>

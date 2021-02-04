@@ -1,3 +1,4 @@
 import { IndicatorsMenu } from "./IndicatorsMenu";
+import { IndicatorsMap } from "./IndicatorsMap";
 
-export { IndicatorsMenu };
+export { IndicatorsMenu, IndicatorsMap };

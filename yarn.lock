@@ -3471,6 +3471,13 @@
     eslint-plugin-simple-import-sort "~5.0.3"
     eslint-plugin-sort-keys-fix "~1.1.1"
 
+"@socialgouv/react-departements@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@socialgouv/react-departements/-/react-departements-3.0.0.tgz#4ab8e65f1164d9bcc1d5aa61aae25dcbd51a8974"
+  integrity sha512-G6ESuXvtHmBn65PXwnI5zVX7Au7NWp1ajLWdKgYInjeMEUo95/0VhqXcZCXfiJGS3FGyux5N65JSa8WPIRKX2Q==
+  dependencies:
+    react-svgmt "^1.1.9"
+
 "@styled-icons/boxicons-regular@^10.18.0":
   version "10.23.0"
   resolved "https://registry.yarnpkg.com/@styled-icons/boxicons-regular/-/boxicons-regular-10.23.0.tgz#a87439875f07ca3af6727f2bd8824acae9b2faad"
@@ -16219,7 +16226,7 @@ react-smooth@^1.0.5:
     raf "^3.4.0"
     react-transition-group "^2.5.0"
 
-react-svgmt@^1.1.11:
+react-svgmt@^1.1.11, react-svgmt@^1.1.9:
   version "1.1.11"
   resolved "https://registry.yarnpkg.com/react-svgmt/-/react-svgmt-1.1.11.tgz#2c28477ccc44e6bbfa621a92476c5c4b579a1022"
   integrity sha512-y85s2dy37AJ0z+Sjsnwpkt/5md9nUFh2gkcTZL68uG5ZqIIXf7Na2CrinXWm6anY5JmnMQAXsoMlozcro1H8DA==
