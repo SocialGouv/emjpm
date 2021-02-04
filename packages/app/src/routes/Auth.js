@@ -7,7 +7,6 @@ import React, {
   useReducer,
 } from "react";
 import { Redirect, Route } from "react-router-dom";
-import cookie from "js-cookie";
 import jwtDecode from "jwt-decode";
 import { LoadingWrapper } from "~/components/Commons";
 
@@ -58,11 +57,10 @@ const routeByRole = {
 };
 
 const authInitialState = {
-  id: null,
-  loading: cookie.get("logged") === "1",
-  logged: false,
-  token: null,
-  type: null,
+  logged: localStorage.getItem("logged"),
+  token: localStorage.getItem("token"),
+  id: localStorage.getItem("id"),
+  type: localStorage.getItem("type"),
 };
 
 function authReducer(state, { type, payload }) {
@@ -71,7 +69,6 @@ function authReducer(state, { type, payload }) {
       return {
         ...state,
         id: null,
-        loading: false,
         logged: false,
         token: null,
         type: null,
@@ -79,10 +76,10 @@ function authReducer(state, { type, payload }) {
     }
     case "login": {
       const { id, type, token } = payload;
-      return { ...state, id, loading: false, logged: true, token, type };
+      return { ...state, id, logged: true, token, type };
     }
     case "loaded": {
-      return { ...state, loading: false };
+      return { ...state };
     }
     default:
       throw new Error("unknown auth action '" + type + "'");
@@ -100,9 +97,10 @@ export function useProvideAuth() {
     localStorage.setItem("logout", Date.now());
 
     // clear user data
-    cookie.remove("logged");
-    localStorage.removeItem("user_id");
-    localStorage.removeItem("user_type");
+    localStorage.removeItem("logged");
+    localStorage.removeItem("token");
+    localStorage.removeItem("id");
+    localStorage.removeItem("type");
     localStorage.removeItem("filters");
 
     dispatchAuthStore({ type: "logout" });
@@ -110,10 +108,10 @@ export function useProvideAuth() {
 
   const login = useCallback(
     ({ token, id, type }) => {
-      cookie.set("logged", "1");
-
-      localStorage.setItem("user_id", id);
-      localStorage.setItem("user_type", type);
+      localStorage.setItem("logged", "1");
+      localStorage.setItem("token", token);
+      localStorage.setItem("id", id);
+      localStorage.setItem("type", type);
 
       matopush(["trackEvent", "login", "success"]);
       matopush(["setUserId", type + "-" + id]);
@@ -152,34 +150,6 @@ export function useProvideAuth() {
     }
   }, [authStore, logout]);
 
-  // load token in memory
-  useEffect(() => {
-    (async () => {
-      if (cookie.get("logged")) {
-        const response = await fetch(`${API_URL}/api/auth/get-token`, {
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "GET",
-        });
-        const { token } = await response.json();
-        if (token) {
-          dispatchAuthStore({
-            payload: {
-              id: localStorage.getItem("user_id"),
-              token,
-              type: localStorage.getItem("user_type"),
-            },
-            type: "login",
-          });
-        } else {
-          dispatchAuthStore({ type: "logout" });
-        }
-      }
-    })();
-  }, [dispatchAuthStore]);
-
   return {
     authStore,
     login,
@@ -190,22 +160,20 @@ export function useProvideAuth() {
 export function PrivateRoute({ children, ...rest }) {
   const { authStore } = useAuth();
   return (
-    <LoadingWrapper loading={authStore.loading}>
-      <Route
-        {...rest}
-        render={({ location }) =>
-          authStore.logged ? (
-            children
-          ) : (
-            <Redirect
-              to={{
-                pathname: "/login",
-                state: { from: location },
-              }}
-            />
-          )
-        }
-      />
-    </LoadingWrapper>
+    <Route
+      {...rest}
+      render={({ location }) =>
+        authStore.logged ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
   );
 }
