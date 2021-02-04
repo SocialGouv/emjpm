@@ -38,7 +38,7 @@ export const UPDATE_SERVICE = gql`
       affected_rows
       returning {
         id
-        siret
+        siren
         adresse
         code_postal
         email
@@ -53,7 +53,7 @@ export const UPDATE_SERVICE = gql`
         mesures_in_progress
         nom
         prenom
-        siret
+        siren
         telephone
         ville
         org_gestionnaire
@@ -78,7 +78,7 @@ export const ADD_SERVICE = gql`
     $telephone: String
     $department_id: Int!
     $lb_adresse: String!
-    $siret: String!
+    $siren: String!
     $org_gestionnaire: Boolean!
     $org_nom: String
     $org_adresse: String
@@ -94,7 +94,7 @@ export const ADD_SERVICE = gql`
         department_id: $department_id
         telephone: $telephone
         lb_adresse: $lb_adresse
-        siret: $siret
+        siren: $siren
         org_gestionnaire: $org_gestionnaire
         org_nom: $org_nom
         org_adresse: $org_adresse
@@ -112,7 +112,7 @@ export const ADD_SERVICE = gql`
         adresse
         latitude
         longitude
-        siret
+        siren
         org_gestionnaire
         org_nom
         org_adresse

@@ -64,7 +64,6 @@ export const LB_SERVICES = gql`
     ) {
       id
       adresse
-      siret
       siren
       etablissement
       code_postal

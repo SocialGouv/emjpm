@@ -30,10 +30,10 @@ export function ListeBlancheServiceItem(props) {
           )}
         </Flex>
 
-        {item.siret && (
+        {item.siren && (
           <Flex width="15%" flexDirection="column">
-            <Text sx={labelStyle}>SIRET</Text>
-            <Text sx={descriptionStyle}>{item.siret}</Text>
+            <Text sx={labelStyle}>SIREN</Text>
+            <Text sx={descriptionStyle}>{item.siren}</Text>
           </Flex>
         )}
       </Flex>
