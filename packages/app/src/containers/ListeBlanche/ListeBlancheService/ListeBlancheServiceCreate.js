@@ -6,7 +6,7 @@ import { Card } from "rebass";
 
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { captureException } from "~/user/sentry";
-import serviceSiretExists from "~/util/serviceSiretExists";
+import serviceSiretExists from "~/query-service/emjpm-hasura/serviceSiretExists.js";
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { ADD_SERVICE } from "./mutations";

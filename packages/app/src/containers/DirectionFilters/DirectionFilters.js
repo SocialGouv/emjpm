@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Input, Select } from "~/components";
-import { findOption } from "~/util/option/OptionUtil";
+import { findOption } from "~/util/form";
 
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 

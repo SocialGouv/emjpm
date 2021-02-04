@@ -16,7 +16,7 @@ import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
-import { formatFormInput } from "~/util";
+import { formatFormInput } from "~/util/form";
 import {
   DepartementFormUtil,
   useDepartementsOptions,

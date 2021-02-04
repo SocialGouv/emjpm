@@ -10,7 +10,3 @@ export function isUnsupportedBrowser(currentBrowser, excludedBrowsers) {
     return isRestrictedBrowser && isUnsupportedVersion;
   });
 }
-
-export function isBrowser() {
-  return typeof window !== "undefined";
-}

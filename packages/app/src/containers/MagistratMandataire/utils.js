@@ -1,4 +1,4 @@
-import { formatMandataire } from "~/util/mandataires/MandataireUtils";
+import { formatMandataire } from "~/formatters/mandataires";
 
 export const formatGestionnaire = ({
   discriminator,

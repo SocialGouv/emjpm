@@ -9,7 +9,7 @@ import { FiltersContext } from "~/containers/MesureListFilters/context";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
 import MesureListItem from "~/containers/MesureListItem";
-import { formatMesureListItems } from "~/util/mesures";
+import { formatMesureListItems } from "~/formatters/mesures";
 
 import { MESURES_QUERY } from "./queries";
 import { MesureListStyle } from "./style";

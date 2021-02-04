@@ -21,7 +21,7 @@ import {
   Select,
   Textarea,
 } from "~/components";
-import { findOptions } from "~/util/option/OptionUtil";
+import { findOptions } from "~/util/form";
 
 function buildTiOptions(lb_departements, lb_user_etablissements) {
   const tiList = [];

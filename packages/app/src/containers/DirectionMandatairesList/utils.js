@@ -1,4 +1,4 @@
-import { formatMandataire } from "~/util/mandataires/MandataireUtils";
+import { formatMandataire } from "~/formatters/mandataires";
 
 export function formatMandatairesList(mandatairesList) {
   return mandatairesList.map((row) => {

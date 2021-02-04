@@ -6,7 +6,7 @@ import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
 import MesureListItem from "~/containers/MesureListItem";
-import { formatMesureListItems } from "~/util/mesures";
+import { formatMesureListItems } from "~/formatters/mesures";
 
 import { MESURES } from "./queries";
 import { ServiceMapPanelMesuresStyle } from "./style";

@@ -8,7 +8,7 @@ import { MagistratMesureMandataireTitle } from "~/containers/MagistratMesureMand
 import { MAGISTRAT_MESURES_QUERY } from "~/containers/MagistratMesures/queries";
 import { MagistratMesureServiceTitle } from "~/containers/MagistratMesureServiceTitle";
 import { UserContext } from "~/containers/UserContext";
-import { formatGestionnaireId } from "~/util/mandataires";
+import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
 import {

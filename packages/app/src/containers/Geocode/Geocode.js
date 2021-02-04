@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import { Select, Spinner } from "~/components";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
-import { debouncedGeocode } from "~/util/geocode";
+import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 
 function Geocode(props) {
   const { hasError, onChange, placeholder, resource, instanceId } = props;

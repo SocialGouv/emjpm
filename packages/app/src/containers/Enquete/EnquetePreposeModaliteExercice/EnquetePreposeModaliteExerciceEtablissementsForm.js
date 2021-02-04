@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import yup from "~/validation-schemas/yup";
 import { Button, Card, Heading } from "~/components";
-import { formatFormInput } from "~/util";
+import { formatFormInput } from "~/util/form";
 
 import { STATUTS, TYPES } from "../constants";
 import {

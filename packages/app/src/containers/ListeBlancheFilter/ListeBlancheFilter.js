@@ -14,7 +14,7 @@ import { UserContext } from "~/containers/UserContext";
 import { Button, Card, CheckBox, Input, Select } from "~/components";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 import { createDepartementOptions } from "~/util/geodata";
-import { findOption } from "~/util/option/OptionUtil";
+import { findOption } from "~/util/form";
 
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 

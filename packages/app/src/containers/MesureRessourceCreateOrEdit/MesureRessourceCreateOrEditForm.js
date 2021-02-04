@@ -17,7 +17,7 @@ import {
   Select,
   Text,
 } from "~/components";
-import { findOptions } from "~/util/option/OptionUtil";
+import { findOptions } from "~/util/form";
 
 function initialValues(mesureRessource) {
   return {

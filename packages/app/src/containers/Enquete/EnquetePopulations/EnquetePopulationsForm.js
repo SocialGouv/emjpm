@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Heading } from "~/components";
-import { formatFormInput, parseFormInt } from "~/util";
+import { formatFormInput, parseFormInt } from "~/util/form";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteStepperButtons } from "../EnqueteStepperButtons";

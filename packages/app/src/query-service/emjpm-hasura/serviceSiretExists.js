@@ -8,7 +8,7 @@ const SERVICE_BY_SIREN = gql`
   }
 `;
 
-const findSiren = async (client, siren) => {
+export default async function serviceSiretExists(client, siren) {
   const { data } = await client.query({
     context: {
       headers: {
@@ -23,6 +23,4 @@ const findSiren = async (client, siren) => {
   });
 
   return data.services.length > 0;
-};
-
-export default findSiren;
+}

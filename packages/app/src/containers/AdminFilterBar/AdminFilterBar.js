@@ -4,7 +4,7 @@ import { Box, Flex } from "rebass";
 import { LoadingWrapper } from "~/containers/Commons";
 import { Button, Card, Input, Select, Text } from "~/components";
 import { useDepartementsOptions } from "~/util/departements";
-import { findOption } from "~/util/option/OptionUtil";
+import { findOption } from "~/util/form";
 
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";

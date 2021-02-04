@@ -8,7 +8,7 @@ import { MesureContext } from "~/containers/MesureContext";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
-import { formatTribunauxOptions } from "~/util";
+import { formatTribunauxOptions } from "~/formatters/tribunaux";
 
 import { MesureEditForm } from "./MesureEditForm";
 import { CALCULATE_MESURES, EDIT_MESURE } from "./mutations";

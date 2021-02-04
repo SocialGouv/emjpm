@@ -8,7 +8,7 @@ import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
 import getLocation from "~/query-service/emjpm-hasura/getLocation";
-import { formatTribunauxOptions } from "~/util";
+import { formatTribunauxOptions } from "~/formatters/tribunaux";
 
 import { MesureCreateForm } from "./MesureCreateForm";
 import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";

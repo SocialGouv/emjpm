@@ -1,7 +1,7 @@
 import { getDepartementCode } from "@emjpm/biz";
 import gql from "graphql-tag";
 
-import { geocode } from "~/util/geocode";
+import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 
 export const LOCATIONS = gql`
   query locations($zipcode: String!, $code: String!) {

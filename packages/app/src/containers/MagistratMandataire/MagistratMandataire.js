@@ -5,7 +5,7 @@ import { Link } from "~/containers/Link";
 import { MagistratMandataireComments } from "~/containers/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { Button, Card, Heading, Spinner } from "~/components";
-import { formatGestionnaireId } from "~/util/mandataires";
+import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { GESTIONNAIRES } from "./queries";
 import {

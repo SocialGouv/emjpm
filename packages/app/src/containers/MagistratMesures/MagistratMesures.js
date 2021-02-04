@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 import { FiltersContext } from "~/containers/MagistratFilters/context";
 import { UserContext } from "~/containers/UserContext";
 import MesureListItem from "~/containers/MesureListItem";
-import { formatMesureListItems } from "~/util/mesures";
+import { formatMesureListItems } from "~/formatters/mesures";
 
 import { MAGISTRAT_MESURES_QUERY } from "./queries";
 import { MagistratListStyle } from "./style";

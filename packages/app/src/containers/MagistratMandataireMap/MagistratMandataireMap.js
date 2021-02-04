@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 
-import { formatGestionnaireId } from "~/util/mandataires";
+import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMandataireMapContent } from "./MagistratMandataireMapContent";
 import { MESURES } from "./queries";

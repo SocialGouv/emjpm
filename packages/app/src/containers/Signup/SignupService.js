@@ -12,7 +12,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/containers/Link";
 import { signupServiceSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
-import { toOptions } from "~/util";
+import { toOptions } from "~/util/form";
 import { useDepartements } from "~/util/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";

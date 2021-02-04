@@ -18,7 +18,7 @@ import {
   Select,
   Textarea,
 } from "~/components";
-import { findOptions } from "~/util/option/OptionUtil";
+import { findOptions } from "~/util/form";
 
 function buildTiOptions(tis) {
   const tiOptions = tis.map((ti) => ({

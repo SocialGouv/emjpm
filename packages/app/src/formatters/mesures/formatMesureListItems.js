@@ -1,7 +1,7 @@
 import { mesureFormatter as formatter } from "@emjpm/biz";
 import { format } from "date-fns";
 
-function formatMesureListItems(mesureList) {
+export default function formatMesureListItems(mesureList) {
   const mesures = mesureList.map((mesure) => {
     const {
       lieu_vie,
@@ -50,5 +50,3 @@ function formatMesureListItems(mesureList) {
   });
   return mesures;
 }
-
-export { formatMesureListItems };

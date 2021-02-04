@@ -14,10 +14,11 @@ et aisément compréhensible pour tous.
 │   └── hooks
 │   └── query-service
 │   └── apollo
-│   └── config
+│   └── formatters
 │   └── constants
+│   └── config
 │   └── theme
-│   └── util
+│   └── utils
 └── package.json
 ```
 
@@ -69,6 +70,10 @@ Requêtes vers des api, qu'elles soient tierces ou locales.
 ## /apollo
 Contient le contexte et la config [apollo](https://www.apollographql.com/) pour l'accès à [GraphQL](https://graphql.org/) et [Hasura](https://hasura.io/).
 
+## /formatters
+Fonctions métier partageable de traitements d'objets de données.
+Contient des fonctions qui destinées à produire des structures de données en fonction des données reçues en paramètres.
+
 ## /user
 Contient l'authentification, la contexte de l'utilisateur, les stats (matomo), le feedback (sentry) etc...
 
@@ -86,11 +91,11 @@ N'oubliez pas que le package `@emjpm/biz`, présent dans `/packages/biz` à la r
 ## /theme
 Contient le theme global, utilisé dans `/App.js` et transmis par le contexte dans tout le projet via [theme-ui](https://theme-ui.com/).
 
-## /util
+## /utils
 Contient tous les outils plus ou moins standards dont on peut avoir besoin dans le reste du projet.
 C'est un peu une trousse à outils qu'on va enrichir en fonction des besoins du projet, faute d'avoir trouvé un outil spécifique déjà adapté au besoin.
 C'est là que vont se retrouver toutes les idée brillantes et autres fabuleux snippets chippés sur stackoverflow.
 À utiliser avec modération. L'abus de snippets est dangereux pour la qualité du code. Merci de développer prudemment, et de vous tenir loin du clavier après l'excès de boisson.
 
-## /util/std
+## /utils/std
 Std signifie standard, c'est donc là qu'il faut mette tout ce qui pourrait être une fonction native du language, comme par exemple des traitements généraux sur les chaines de caractères, les arrays ou autre.

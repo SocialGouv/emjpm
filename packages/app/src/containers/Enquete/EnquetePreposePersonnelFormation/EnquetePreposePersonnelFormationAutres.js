@@ -2,7 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useContext } from "react";
 
 import { UserContext } from "~/containers/UserContext";
-import { parseFormFloat, parseFormInt } from "~/util";
+import { parseFormFloat, parseFormInt } from "~/util/form";
 
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationAutresForm } from "./EnquetePreposePersonnelFormationAutresForm";

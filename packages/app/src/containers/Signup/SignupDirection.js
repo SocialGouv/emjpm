@@ -15,7 +15,7 @@ import { Link } from "~/containers/Link";
 import { signupDirectionSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 import { useDepartementsOptions } from "~/util/departements";
-import { toOptions } from "~/util/option/OptionUtil";
+import { toOptions } from "~/util/form";
 
 import { SignupContext } from "./context";
 import { REGIONS } from "./queries";

@@ -1,15 +1,8 @@
 import { stdFormatter } from "@emjpm/biz";
 import { compareDesc, differenceInMonths } from "date-fns";
 
-const TYPES = {
-  MANDATAIRE_IND: "individuel",
-  MANDATAIRE_PRE: "préposé",
-  SERVICE: "service",
-};
-
-function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.toLowerCase().slice(1);
-}
+import capitalize from "~/util/std/capitalize";
+import { TYPES } from "~/constants/types";
 
 function formatLastLogin(date) {
   return stdFormatter.formatDateUI(date);
@@ -29,7 +22,7 @@ function isCriticalDate(date) {
   return differenceInMonths(new Date(), new Date(date)) >= 1;
 }
 
-export const formatMandataire = (
+export default function formatMandataire(
   remaining_capacity,
   discriminator,
   mesures_max,
@@ -39,7 +32,7 @@ export const formatMandataire = (
   mesures_awaiting,
   gestionnaire_tis,
   id
-) => {
+) {
   let currentDiscriminator = {};
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
@@ -115,16 +108,4 @@ export const formatMandataire = (
     ...common,
     ...currentDiscriminator,
   };
-};
-
-export function formatGestionnaireId(gestionnaireId) {
-  const [discriminator, id] = gestionnaireId.split("-");
-  let mandataireId = null;
-  let serviceId = null;
-  if (discriminator === "service") {
-    serviceId = Number(id);
-  } else {
-    mandataireId = Number(id);
-  }
-  return { mandataireId, serviceId };
 }
