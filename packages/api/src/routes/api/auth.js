@@ -2,7 +2,6 @@ const express = require("express");
 
 const router = express.Router();
 const { check, body } = require("express-validator");
-const impersonate = require("~/controllers/user/impersonate");
 const login = require("~/controllers/user/login");
 const signup = require("~/controllers/user/signup");
 const resetPassword = require("~/controllers/user/reset-password");
@@ -14,12 +13,6 @@ router.post(
   "/login",
   [body("username").not().isEmpty(), body("password").not().isEmpty()],
   login
-);
-
-router.post(
-  "/impersonate",
-  [body("token").not().isEmpty(), body("id").not().isEmpty()],
-  impersonate
 );
 
 router.post(
