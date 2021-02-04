@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { Button } from "rebass";
 
 import { UserContext } from "~/containers/UserContext";
-import { b64toBlob } from "~/util/std/b64toBlob";
+import { b64toBlob } from "~/utils/std/b64toBlob";
 
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
 

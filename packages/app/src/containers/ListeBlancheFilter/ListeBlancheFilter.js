@@ -12,9 +12,9 @@ import { Link } from "~/containers/Commons";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { UserContext } from "~/containers/UserContext";
 import { Button, Card, CheckBox, Input, Select } from "~/components";
-import { useDepartements } from "~/util/departements/useDepartements.hook";
-import { createDepartementOptions } from "~/util/geodata";
-import { findOption } from "~/util/form";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
+import { createDepartementOptions } from "~/utils/geodata";
+import { findOption } from "~/utils/form";
 
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 

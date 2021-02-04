@@ -13,8 +13,8 @@ import {
 } from "~/containers/AppForm";
 import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
 import { Button, Heading, Text } from "~/components";
-import { useDepartementsOptions } from "~/util/departements";
-import { getDepartementByCodePostal } from "~/util/geodata";
+import { useDepartementsOptions } from "~/utils/departements";
+import { getDepartementByCodePostal } from "~/utils/geodata";
 import SelectSIREN from "~/containers/SelectSIREN";
 import SelectAdresse from "~/containers/SelectAdresse";
 import SelectVille from "~/containers/SelectVille";

@@ -1,6 +1,6 @@
 import yup from "./yup";
 
-import { getDepartementByCodePostal, codePostalExists } from "~/util/geodata";
+import { getDepartementByCodePostal, codePostalExists } from "~/utils/geodata";
 
 const adminServiceSchema = yup.object().shape({
   departement: yup

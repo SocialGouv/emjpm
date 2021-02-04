@@ -3,7 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { Box } from "rebass";
 
 import { Select, Spinner } from "~/components";
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 
 function Geocode(props) {

@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { MandataireEditInformationsForm } from "./MandataireEditInformationsForm";
 import { EDIT_USER } from "./mutations";

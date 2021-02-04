@@ -1,7 +1,7 @@
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import yup from "~/validation-schemas/yup";
 import { Heading } from "~/components";
-import { formatFormInput, parseFormInt } from "~/util/form";
+import { formatFormInput, parseFormInt } from "~/utils/form";
 
 import { EnqueteStepperButtons } from "../../EnqueteStepperButtons";
 import { useEnqueteForm } from "../../useEnqueteForm.hook";

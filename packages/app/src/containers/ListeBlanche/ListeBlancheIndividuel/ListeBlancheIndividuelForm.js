@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { isAdmin } from "@emjpm/biz";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import { codePostalExists, getDepartementByCodePostal } from "~/util/geodata";
+import { codePostalExists, getDepartementByCodePostal } from "~/utils/geodata";
 
 import {
   FormGrayBox,
@@ -16,11 +16,11 @@ import { Link } from "~/containers/Commons";
 import { UserContext } from "~/containers/UserContext";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
-import { formatFormInput } from "~/util/form";
+import { formatFormInput } from "~/utils/form";
 import {
   DepartementFormUtil,
   useDepartementsOptions,
-} from "~/util/departements";
+} from "~/utils/departements";
 
 import SelectSIREN from "~/containers/SelectSIREN";
 import SelectAdresse from "~/containers/SelectAdresse";

@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Input, Select } from "~/components";
-import { findOption } from "~/util/form";
+import { findOption } from "~/utils/form";
 
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
 
@@ -12,7 +12,7 @@ import {
   createDepartementOptions,
   departementList,
   regionOptions,
-} from "~/util/geodata";
+} from "~/utils/geodata";
 
 export function DirectionFilters(props) {
   const { useNameFilter = false } = props;

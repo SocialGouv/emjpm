@@ -3,7 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { Card } from "rebass";
 
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { captureException } from "~/user/sentry";
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";

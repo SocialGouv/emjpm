@@ -4,7 +4,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { captureException } from "~/user/sentry";
 import serviceSiretExists from "~/query-service/emjpm-hasura/serviceSiretExists.js";
 

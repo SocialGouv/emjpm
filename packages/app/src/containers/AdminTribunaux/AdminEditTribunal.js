@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";

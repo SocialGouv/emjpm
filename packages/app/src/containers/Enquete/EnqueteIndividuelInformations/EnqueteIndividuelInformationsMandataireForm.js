@@ -8,7 +8,7 @@ import {
   formatFormInput,
   parseFormFloat,
   parseFormInput,
-} from "~/util/form";
+} from "~/utils/form";
 
 import { ENQ_REP_INFO_MANDATAIRE } from "../constants";
 import {

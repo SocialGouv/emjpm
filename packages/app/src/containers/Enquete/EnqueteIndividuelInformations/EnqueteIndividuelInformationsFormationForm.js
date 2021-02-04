@@ -3,7 +3,7 @@ import { Box, Flex, Text } from "rebass";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import yup from "~/validation-schemas/yup";
 import { Heading } from "~/components";
-import { formatFormInput, parseFormFloat, parseFormInt } from "~/util/form";
+import { formatFormInput, parseFormFloat, parseFormInt } from "~/utils/form";
 
 import { EnqueteFormInputField } from "../EnqueteForm";
 import { EnqueteFormFieldErrorMessage } from "../EnqueteForm/EnqueteFormFieldErrorMessage";

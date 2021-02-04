@@ -1,4 +1,4 @@
-import { formatFormInput } from "~/util/form";
+import { formatFormInput } from "~/utils/form";
 
 function mapFormation_preposes_mjpm_nb_prepose_heures_formation(data) {
   return {

@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Heading, Spinner } from "~/components";
-import { convertToPercentage } from "~/util/math";
+import { convertToPercentage } from "~/utils/math";
 
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";

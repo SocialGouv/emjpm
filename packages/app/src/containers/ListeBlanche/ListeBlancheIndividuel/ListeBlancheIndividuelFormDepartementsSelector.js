@@ -3,7 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { Box } from "rebass";
 
 import { Select } from "~/components";
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 export function ListeBlancheIndividuelFormDepartementsSelector(props) {
   const { departements = [], onAdd } = props;

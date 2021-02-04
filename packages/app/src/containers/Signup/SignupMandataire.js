@@ -16,7 +16,7 @@ import { Link } from "~/containers/Link";
 import { signupMandataireSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";
 import signup from "./signup";

@@ -2,7 +2,7 @@ import { detect as detectBrowser } from "detect-browser";
 import PropTypes from "prop-types";
 
 import { Card, Text } from "~/components";
-import { isUnsupportedBrowser } from "~/util/browser";
+import { isUnsupportedBrowser } from "~/utils/browser";
 
 const excludedBrowsers = [
   { name: "chrome", version: "44.0.2403" },

@@ -3,8 +3,8 @@ import { Box, Flex } from "rebass";
 
 import { LoadingWrapper } from "~/containers/Commons";
 import { Button, Card, Input, Select, Text } from "~/components";
-import { useDepartementsOptions } from "~/util/departements";
-import { findOption } from "~/util/form";
+import { useDepartementsOptions } from "~/utils/departements";
+import { findOption } from "~/utils/form";
 
 import { AdminFilterContext } from "./context";
 import { AdminFilterBarStyle, FilterTextStyle } from "./style";

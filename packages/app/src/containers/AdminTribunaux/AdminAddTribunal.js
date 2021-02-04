@@ -3,7 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { useHistory } from "react-router-dom";
 
-import { useDepartements } from "~/util/departements/useDepartements.hook";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";

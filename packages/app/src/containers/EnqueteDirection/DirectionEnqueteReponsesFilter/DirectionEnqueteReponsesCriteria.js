@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { LoadingWrapper } from "~/containers/Commons";
 import { Card, Select } from "~/components";
-import { useDepartementsOptions } from "~/util/departements";
+import { useDepartementsOptions } from "~/utils/departements";
 
 import { BoxStyle } from "./style";
 

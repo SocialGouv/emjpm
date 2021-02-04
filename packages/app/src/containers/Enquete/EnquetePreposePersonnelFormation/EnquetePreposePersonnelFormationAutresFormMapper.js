@@ -1,4 +1,4 @@
-import { formatFormInput } from "~/util/form";
+import { formatFormInput } from "~/utils/form";
 
 function mapNbPreposeNombrePreposesParNiveauQualificationFromForm(data) {
   return {

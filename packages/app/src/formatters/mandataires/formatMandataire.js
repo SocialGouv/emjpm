@@ -1,7 +1,7 @@
 import { stdFormatter } from "@emjpm/biz";
 import { compareDesc, differenceInMonths } from "date-fns";
 
-import capitalize from "~/util/std/capitalize";
+import capitalize from "~/utils/std/capitalize";
 import { TYPES } from "~/constants/types";
 
 function formatLastLogin(date) {

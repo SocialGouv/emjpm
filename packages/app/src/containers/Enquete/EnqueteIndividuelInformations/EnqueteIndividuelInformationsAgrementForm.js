@@ -3,7 +3,7 @@ import { Box } from "rebass";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import yup from "~/validation-schemas/yup";
 import { Heading } from "~/components";
-import { formatFormBoolean, formatFormInput, parseFormInt } from "~/util/form";
+import { formatFormBoolean, formatFormInput, parseFormInt } from "~/utils/form";
 
 import { ENQ_REP_AGREMENTS_FORMATIONS } from "../constants";
 import {
