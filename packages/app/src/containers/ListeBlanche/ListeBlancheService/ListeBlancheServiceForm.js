@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
@@ -13,15 +13,25 @@ import {
 } from "~/components/AppForm";
 import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
 import { Button, Heading, Text } from "~/components";
-import { useDepartementsOptions } from "~/utils/departements";
-import { getDepartementByCodePostal } from "~/utils/geodata";
+import {
+  createDepartementOptions,
+  departementList,
+  getDepartementByCodePostal,
+} from "~/utils/geodata";
+
 import SelectSIREN from "~/containers/SelectSIREN";
 import SelectAdresse from "~/containers/SelectAdresse";
 import SelectVille from "~/containers/SelectVille";
 
 export function ListeBlancheServiceForm(props) {
   const { handleCancel, handleSubmit, service } = props;
-  const { departementsOptions } = useDepartementsOptions();
+  const departementsOptions = useMemo(
+    () =>
+      createDepartementOptions(departementList, {
+        all: false,
+      }),
+    []
+  );
 
   const formik = useFormik({
     initialValues: {
@@ -66,10 +76,16 @@ export function ListeBlancheServiceForm(props) {
       }
       codePostal = codePostal.replace(/\s/g, "");
       getDepartementByCodePostal(codePostal).then((departement) => {
-        if (!departement) return;
-        setFieldValue("departement", departement.toString());
+        if (!departement) {
+          setFieldValue("lb_code_postal", codePostal);
+          return;
+        }
+        formik.setValues({
+          ...formik.values,
+          departement: departement,
+          lb_code_postal: codePostal,
+        });
       });
-      setFieldValue("lb_code_postal", codePostal);
     },
     500,
     [formik.values["lb_code_postal"]]
@@ -231,11 +247,14 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             onChange={({ value }) => {
-              setFieldValue("org_gestionnaire", value);
-              setFieldValue("org_nom", "");
-              setFieldValue("org_adresse", "");
-              setFieldValue("org_code_postal", "");
-              setFieldValue("org_ville", "");
+              formik.setValues({
+                ...formik.values,
+                org_gestionnaire: value,
+                org_nom: "",
+                org_adresse: "",
+                org_code_postal: "",
+                org_ville: "",
+              });
             }}
           />
           {formik.values.org_gestionnaire === true && (
