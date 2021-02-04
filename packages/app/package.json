@@ -14,6 +14,7 @@
     "@sentry/browser": "^5.27.2",
     "@sentry/node": "^5.27.2",
     "@sentry/react": "^5.29.2",
+    "@socialgouv/react-departements": "^3.0.0",
     "@styled-icons/boxicons-regular": "^10.18.0",
     "@styled-icons/boxicons-solid": "^10.18.0",
     "@styled-icons/entypo": "^10.18.0",
