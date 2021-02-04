@@ -1,7 +1,7 @@
-import { ForgotPassword } from "~/components/ForgotPassword";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { FlexWrapper } from "~/ui/Grid";
+import { ForgotPassword } from "~/containers/ForgotPassword";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { FlexWrapper } from "~/components/Grid";
 
 function ForgotPasswordPage() {
   return (

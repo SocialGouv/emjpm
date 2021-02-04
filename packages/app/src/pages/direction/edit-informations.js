@@ -1,9 +1,9 @@
 import { useContext } from "react";
 
-import { DirectionEditInformations } from "~/components/DirectionEditInformations";
-import { LayoutDirection } from "~/components/Layout";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui/Grid";
+import { DirectionEditInformations } from "~/containers/DirectionEditInformations";
+import { LayoutDirection } from "~/containers/Layout";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 function EditInformations() {
   const redirectLink = "/direction/informations";

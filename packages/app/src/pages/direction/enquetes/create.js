@@ -1,7 +1,7 @@
-import { EnqueteCreate } from "~/components/EnqueteCreate";
-import { LayoutDirection } from "~/components/Layout";
-import { Card, Heading } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { EnqueteCreate } from "~/containers/EnqueteCreate";
+import { LayoutDirection } from "~/containers/Layout";
+import { Card, Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function CreateEnquete() {
   return (

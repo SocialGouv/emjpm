@@ -1,7 +1,7 @@
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutServices } from "~/components/Layout";
-import { MesureCreate } from "~/components/MesureCreate";
-import { BoxWrapper } from "~/ui/Grid";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutServices } from "~/containers/Layout";
+import { MesureCreate } from "~/containers/MesureCreate";
+import { BoxWrapper } from "~/components/Grid";
 
 function AddMesures() {
   return (

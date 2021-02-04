@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { DirectionInformations } from "~/components/DirectionInformations";
-import { LayoutDirection } from "~/components/Layout";
-import { Heading } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { DirectionInformations } from "~/containers/DirectionInformations";
+import { LayoutDirection } from "~/containers/Layout";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (

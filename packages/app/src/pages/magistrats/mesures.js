@@ -1,12 +1,12 @@
 import { Flex } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratFilters } from "~/components/MagistratFilters";
-import { FiltersContextProvider } from "~/components/MagistratFilters/context";
-import { MagistratMesures } from "~/components/MagistratMesures";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratFilters } from "~/containers/MagistratFilters";
+import { FiltersContextProvider } from "~/containers/MagistratFilters/context";
+import { MagistratMesures } from "~/containers/MagistratMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui/Grid";
+import { BoxWrapper } from "~/components/Grid";
 
 export default function Mesures() {
   return (

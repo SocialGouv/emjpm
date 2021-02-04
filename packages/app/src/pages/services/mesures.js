@@ -1,19 +1,19 @@
 import { useContext } from "react";
 import { Flex, Text } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutServices } from "~/components/Layout";
-import { MesureBadge } from "~/components/MesureBadge";
-import { MesureList } from "~/components/MesureList";
-import { MesureListButtonBar } from "~/components/MesureListButtonBar";
-import { MesureListFilters } from "~/components/MesureListFilters";
-import { FiltersContextProvider } from "~/components/MesureListFilters/context";
-import { UserContext } from "~/components/UserContext";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutServices } from "~/containers/Layout";
+import { MesureBadge } from "~/containers/MesureBadge";
+import { MesureList } from "~/containers/MesureList";
+import { MesureListButtonBar } from "~/containers/MesureListButtonBar";
+import { MesureListFilters } from "~/containers/MesureListFilters";
+import { FiltersContextProvider } from "~/containers/MesureListFilters/context";
+import { UserContext } from "~/containers/UserContext";
 import {
   DEFAULT_MESURE_NATURE,
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
-import { BoxWrapper } from "~/ui/Grid";
+import { BoxWrapper } from "~/components/Grid";
 
 export default function Mesures() {
   const { service_members } = useContext(UserContext);

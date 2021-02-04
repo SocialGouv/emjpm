@@ -1,11 +1,11 @@
 import { Flex } from "rebass";
 
-import { AdminFilterBar } from "~/components/AdminFilterBar";
-import { AdminFilterProvider } from "~/components/AdminFilterBar/context";
-import { AdminUsers } from "~/components/AdminUsers";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui/Grid";
+import { AdminFilterBar } from "~/containers/AdminFilterBar";
+import { AdminFilterProvider } from "~/containers/AdminFilterBar/context";
+import { AdminUsers } from "~/containers/AdminUsers";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function AdminUsersPage() {
   return (

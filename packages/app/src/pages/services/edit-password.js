@@ -1,7 +1,7 @@
-import { EditPassword } from "~/components/EditPassword";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutServices } from "~/components/Layout";
-import { BoxWrapper } from "~/ui/Grid";
+import { EditPassword } from "~/containers/EditPassword";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutServices } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function EditInformations() {
   return (

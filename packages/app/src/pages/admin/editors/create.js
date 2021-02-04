@@ -1,9 +1,9 @@
 import { Flex } from "rebass";
 
-import { AdminEditorCreate } from "~/components/AdminEditors/AdminEditorCreate";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui/Grid";
+import { AdminEditorCreate } from "~/containers/AdminEditors/AdminEditorCreate";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 function AdminEditorsCreatePage() {
   return (

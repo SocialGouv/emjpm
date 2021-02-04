@@ -1,11 +1,11 @@
 import { useContext } from "react";
 
-import { LayoutServices } from "~/components/Layout";
-import { ServiceMemberInvitationCreate } from "~/components/ServiceMemberInvitationCreate";
-import { ServiceMemberInvitations } from "~/components/ServiceMemberInvitations";
-import { ServiceMembers } from "~/components/ServiceMembers";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceMemberInvitationCreate } from "~/containers/ServiceMemberInvitationCreate";
+import { ServiceMemberInvitations } from "~/containers/ServiceMemberInvitations";
+import { ServiceMembers } from "~/containers/ServiceMembers";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 function ServiceMembersPage() {
   const { service_members, id } = useContext(UserContext);

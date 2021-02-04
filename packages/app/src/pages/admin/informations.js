@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { AdminInformations } from "~/components/AdminInformations";
-import { LayoutAdmin } from "~/components/Layout";
-import { Heading } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { AdminInformations } from "~/containers/AdminInformations";
+import { LayoutAdmin } from "~/containers/Layout";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (

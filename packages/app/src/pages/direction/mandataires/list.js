@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box } from "rebass";
 
-import { DirectionFilters } from "~/components/DirectionFilters";
+import { DirectionFilters } from "~/containers/DirectionFilters";
 import {
   AvailableMesureIndicator,
   ClosedMesureIndicator,
@@ -9,13 +9,13 @@ import {
   MandatairesIndicator,
   OpenMesureIndicator,
   ServicesIndicator,
-} from "~/components/DirectionIndicators";
-import { MandatairesList } from "~/components/DirectionMandatairesList";
-import { MandatairesSubNavigation } from "~/components/DirectionMandatairesSubNavigation";
-import { FiltersContextSerializableProvider } from "~/components/FiltersContextSerializable";
-import { LayoutDirection } from "~/components/Layout";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui/Grid";
+} from "~/containers/DirectionIndicators";
+import { MandatairesList } from "~/containers/DirectionMandatairesList";
+import { MandatairesSubNavigation } from "~/containers/DirectionMandatairesSubNavigation";
+import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
+import { LayoutDirection } from "~/containers/Layout";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/components/Grid";
 
 function Mandataires() {
   const user = useContext(UserContext);

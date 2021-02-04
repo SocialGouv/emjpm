@@ -1,10 +1,10 @@
 import { Box } from "rebass";
 
-import { DirectionFilters } from "~/components/DirectionFilters";
-import { ServicesIndicator } from "~/components/DirectionIndicators";
-import { FiltersContextSerializable } from "~/components/FiltersContextSerializable";
-import { LayoutDirection } from "~/components/Layout";
-import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/ui/Grid";
+import { DirectionFilters } from "~/containers/DirectionFilters";
+import { ServicesIndicator } from "~/containers/DirectionIndicators";
+import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
+import { LayoutDirection } from "~/containers/Layout";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/components/Grid";
 
 function DemographicDatas() {
   return (

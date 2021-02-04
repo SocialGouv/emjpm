@@ -1,9 +1,9 @@
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Link } from "rebass";
 
-import { LayoutPublic } from "~/components/Layout";
-import { Button, Card, Heading, Text } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutPublic } from "~/containers/Layout";
+import { Button, Card, Heading, Text } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 const cardStyle = { m: "1", mt: "5", p: "5" };
 

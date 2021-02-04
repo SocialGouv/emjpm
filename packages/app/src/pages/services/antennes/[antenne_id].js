@@ -1,8 +1,8 @@
 import { Card } from "rebass";
 
-import { LayoutServices } from "~/components/Layout";
-import { ServiceAntenneInformations } from "~/components/ServiceAntenneInformations";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceAntenneInformations } from "~/containers/ServiceAntenneInformations";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

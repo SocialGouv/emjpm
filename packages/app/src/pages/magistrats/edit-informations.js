@@ -1,10 +1,10 @@
 import { useContext } from "react";
 
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratEditInformations } from "~/components/MagistratEditInformations";
-import { UserContext } from "~/components/UserContext";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
+import { UserContext } from "~/containers/UserContext";
 import { PATH } from "~/constants/basePath";
-import { BoxWrapper } from "~/ui/Grid";
+import { BoxWrapper } from "~/components/Grid";
 
 function EditInformations() {
   const { id: userId, type } = useContext(UserContext);

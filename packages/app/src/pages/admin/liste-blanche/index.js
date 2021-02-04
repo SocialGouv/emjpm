@@ -1,11 +1,11 @@
 import { Box, Flex } from "rebass";
 
-import { FiltersContextSerializableProvider } from "~/components/FiltersContextSerializable";
-import { LayoutAdmin } from "~/components/Layout";
-import { ListeBlanche } from "~/components/ListeBlanche";
-import { ListeBlancheFilter } from "~/components/ListeBlancheFilter";
-import { ListeBlancheSummary } from "~/components/ListeBlancheSummary";
-import { BoxWrapper } from "~/ui/Grid";
+import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
+import { LayoutAdmin } from "~/containers/Layout";
+import { ListeBlanche } from "~/containers/ListeBlanche";
+import { ListeBlancheFilter } from "~/containers/ListeBlancheFilter";
+import { ListeBlancheSummary } from "~/containers/ListeBlancheSummary";
+import { BoxWrapper } from "~/components/Grid";
 
 function ListBlanchePage() {
   return (

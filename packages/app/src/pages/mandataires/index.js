@@ -1,9 +1,9 @@
 import { Box, Flex } from "rebass";
 
-import { LayoutMandataire } from "~/components/Layout";
-import { MandataireBoard } from "~/components/MandataireBoard";
-import { StatisticMesureNature } from "~/components/StatisticMesureNature";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutMandataire } from "~/containers/Layout";
+import { MandataireBoard } from "~/containers/MandataireBoard";
+import { StatisticMesureNature } from "~/containers/StatisticMesureNature";
+import { BoxWrapper } from "~/components/Grid";
 
 function MandataireBoardView() {
   return (

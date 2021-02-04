@@ -1,10 +1,10 @@
 import { Box, Flex } from "rebass";
 
-import { LinkButton } from "~/components/Commons";
-import { DirectionEnquetesList } from "~/components/EnqueteDirection";
-import { LayoutDirection } from "~/components/Layout";
-import { Heading } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { LinkButton } from "~/containers/Commons";
+import { DirectionEnquetesList } from "~/containers/EnqueteDirection";
+import { LayoutDirection } from "~/containers/Layout";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function DirectionEnquetesPage() {
   return (

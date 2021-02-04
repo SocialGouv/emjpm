@@ -1,9 +1,9 @@
 import { Box } from "rebass";
 
-import { Link } from "~/components/Commons";
-import { EtablissementView } from "~/components/Etablissement";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui/Grid";
+import { Link } from "~/containers/Commons";
+import { EtablissementView } from "~/containers/Etablissement";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

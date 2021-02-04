@@ -1,8 +1,8 @@
 import { Flex } from "rebass";
 
-import { AdminLbUserDelete } from "~/components/AdminLbUserDelete";
-import { LayoutAdmin } from "~/components/Layout";
-import { BoxWrapper } from "~/ui/Grid";
+import { AdminLbUserDelete } from "~/containers/AdminLbUserDelete";
+import { LayoutAdmin } from "~/containers/Layout";
+import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 

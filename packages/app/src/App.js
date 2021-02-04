@@ -4,7 +4,7 @@ import jwtDecode from "jwt-decode";
 
 import { ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "theme-ui";
-import { UserProvider } from "~/components/UserContext/index";
+import { UserProvider } from "~/containers/UserContext/index";
 import { ProvideAuth, useAuth } from "~/routes/Auth";
 
 import Routes, { history } from "~/routes";
@@ -17,8 +17,8 @@ import { Router } from "react-router";
 
 import { useMatomo } from "~/util/matomo";
 
-import AutoReload from "~/components/AutoReload";
-import Impersonation from "~/components/Impersonation";
+import AutoReload from "~/containers/AutoReload";
+import Impersonation from "~/containers/Impersonation";
 
 function App() {
   useSentry();

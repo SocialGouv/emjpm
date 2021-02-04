@@ -1,10 +1,10 @@
 import { Box, Flex } from "rebass";
 
-import { LayoutMagistrat } from "~/components/Layout";
-import { MagistratInformations } from "~/components/MagistratInformations";
-import { MagistratTribunalInformations } from "~/components/MagistratTribunalInformations";
-import { Heading } from "~/ui";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutMagistrat } from "~/containers/Layout";
+import { MagistratInformations } from "~/containers/MagistratInformations";
+import { MagistratTribunalInformations } from "~/containers/MagistratTribunalInformations";
+import { Heading } from "~/components";
+import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (

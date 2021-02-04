@@ -1,11 +1,11 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutServices } from "~/components/Layout";
-import { ServiceAntenneEdit } from "~/components/ServiceAntenneEdit";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui/Grid";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutServices } from "~/containers/Layout";
+import { ServiceAntenneEdit } from "~/containers/ServiceAntenneEdit";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 function ServiceAntenneEditPage() {
   const params = useParams();

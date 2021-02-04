@@ -1,12 +1,12 @@
 import { Fragment } from "react";
 import { Box, Image } from "rebass";
 
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { Login, LoginCreateAccount } from "~/components/Login";
-import { BoxWrapper, FlexWrapper } from "~/ui/Grid";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { Login, LoginCreateAccount } from "~/containers/Login";
+import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
-import { ExcludeBrowserBanner } from "~/components/ExcludeBrowserBanner";
+import { ExcludeBrowserBanner } from "~/containers/ExcludeBrowserBanner";
 
 function LoginPage() {
   return (

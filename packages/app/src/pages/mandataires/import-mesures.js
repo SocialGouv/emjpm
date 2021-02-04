@@ -2,11 +2,11 @@ import { useContext, useState } from "react";
 import { Card, Flex } from "rebass";
 import { NavLink } from "theme-ui";
 
-import { LayoutMandataire } from "~/components/Layout";
-import { MandataireMesureImport } from "~/components/MandataireMesureImport";
-import { MandataireOcmiMesureImport } from "~/components/MandataireOcmiMesureImport";
-import { UserContext } from "~/components/UserContext";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutMandataire } from "~/containers/Layout";
+import { MandataireMesureImport } from "~/containers/MandataireMesureImport";
+import { MandataireOcmiMesureImport } from "~/containers/MandataireOcmiMesureImport";
+import { UserContext } from "~/containers/UserContext";
+import { BoxWrapper } from "~/components/Grid";
 
 function ImportMesures() {
   const user = useContext(UserContext);

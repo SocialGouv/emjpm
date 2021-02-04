@@ -1,9 +1,9 @@
 import useSearchParams from "~/hooks/useSearchParams";
 
-import { LayoutPublic } from "~/components/Layout";
-import { SignupContextProvider } from "~/components/Signup/context";
-import { SignupServiceInvitation } from "~/components/Signup/SignupServiceInvitation";
-import { BoxWrapper } from "~/ui/Grid";
+import { LayoutPublic } from "~/containers/Layout";
+import { SignupContextProvider } from "~/containers/Signup/context";
+import { SignupServiceInvitation } from "~/containers/Signup/SignupServiceInvitation";
+import { BoxWrapper } from "~/components/Grid";
 
 function SignupInvitationPage() {
   const { token } = useSearchParams();

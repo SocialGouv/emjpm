@@ -1,10 +1,10 @@
 import { Box, Image } from "rebass";
 
-import { AuthorizationLogin } from "~/components/AuthorizationLogin";
-import { Authorize } from "~/components/Authorize";
-import { HeadingTitle } from "~/components/HeadingTitle";
-import { LayoutPublic } from "~/components/Layout";
-import { BoxWrapper, FlexWrapper } from "~/ui/Grid";
+import { AuthorizationLogin } from "~/containers/AuthorizationLogin";
+import { Authorize } from "~/containers/Authorize";
+import { HeadingTitle } from "~/containers/HeadingTitle";
+import { LayoutPublic } from "~/containers/Layout";
+import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import useSearchParams from "~/hooks/useSearchParams";

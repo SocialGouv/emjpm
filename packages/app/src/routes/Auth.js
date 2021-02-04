@@ -9,7 +9,7 @@ import React, {
 import { Redirect, Route } from "react-router-dom";
 // see https://hasura.io/blog/best-practices-of-using-jwt-with-graphql/
 import jwtDecode from "jwt-decode";
-import { LoadingWrapper } from "~/components/Commons";
+import { LoadingWrapper } from "~/containers/Commons";
 
 import fetch from "unfetch";
 
