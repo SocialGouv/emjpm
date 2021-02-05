@@ -62,8 +62,10 @@ function IndicatorList(props) {
     preposeInscritCount: {
       aggregate: { count: preposeInscritCount },
     },
+    view_indicateur_inscrit,
     departements,
   } = data;
+  const magistratInscritCount = view_indicateur_inscrit[0]?.count;
   const [department] = departements;
 
   return (
@@ -89,12 +91,12 @@ function IndicatorList(props) {
           title="Mandataires individuels"
           indicator={individuelInscritCount || 0}
         />
-        {/* <Indicator
+        <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={inscritData.ti ? inscritData.ti.count : 0}
-        /> */}
+          indicator={magistratInscritCount || 0}
+        />
       </Box>
       <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>

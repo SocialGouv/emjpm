@@ -17,6 +17,12 @@ export const INDICATORS = gql`
       id
     }
 
+    view_indicateur_inscrit(
+      where: { id: { _eq: $code }, type: { _eq: "ti" } }
+    ) {
+      count
+    }
+
     serviceInscritCount: view_mesure_gestionnaire_departement_aggregate(
       where: {
         discriminator: { _eq: "SERVICE" }
