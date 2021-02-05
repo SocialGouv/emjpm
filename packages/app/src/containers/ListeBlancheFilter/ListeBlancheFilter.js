@@ -40,6 +40,7 @@ function ListeBlancheFilter() {
   } = filters;
 
   const { departements } = useDepartements({ all: true });
+  console.log({ departements });
 
   const buttonLinks = [
     {
@@ -79,7 +80,11 @@ function ListeBlancheFilter() {
     );
   }
 
-  const departmentOptions = createDepartementOptions(departements);
+  const departmentOptions = createDepartementOptions(departements, {
+    all: true,
+  });
+
+  console.log({ departmentOptions });
 
   return (
     <Fragment>
