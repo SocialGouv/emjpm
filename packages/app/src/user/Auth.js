@@ -215,11 +215,11 @@ export async function impersonateLogout() {
 
 export function AuthRedirect(props) {
   const { authStore, logout } = useAuth();
-  const { url, role } = jwtDecode(authStore.token);
-  if (!url) {
-    history.push("/login");
-  } else {
+  if (authStore.token) {
+    const { role } = jwtDecode(authStore.token);
     history.push(routeByRole[role]);
+    return null;
   }
+  history.push("/login");
   return null;
 }
