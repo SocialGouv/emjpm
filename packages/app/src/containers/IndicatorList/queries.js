@@ -16,12 +16,38 @@ export const INDICATORS = gql`
       type
       id
     }
-    view_indicateur_inscrit(where: { id: { _eq: $code } }) {
-      count
-      nom
-      type
-      id
+
+    serviceInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: {
+        discriminator: { _eq: "SERVICE" }
+        departement: { _or: { id: { _eq: $code } } }
+      }
+    ) {
+      aggregate {
+        count(distinct: true)
+      }
     }
+    individuelInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: {
+        discriminator: { _eq: "MANDATAIRE_IND" }
+        departement: { _or: { id: { _eq: $code } } }
+      }
+    ) {
+      aggregate {
+        count(distinct: true)
+      }
+    }
+    preposeInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: {
+        discriminator: { _eq: "MANDATAIRE_PRE" }
+        departement: { _or: { id: { _eq: $code } } }
+      }
+    ) {
+      aggregate {
+        count(distinct: true)
+      }
+    }
+
     mesuresLastMonthCount: mesures_aggregate(
       where: {
         _and: {
@@ -91,33 +117,30 @@ export const FRANCE_INDICATORS = gql`
         }
       }
     }
-    serviceInscritCount: view_indicateur_inscrit_aggregate(
-      where: { type: { _eq: "service" } }
+
+    serviceInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: { discriminator: { _eq: "SERVICE" } }
     ) {
       aggregate {
-        sum {
-          count
-        }
+        count(distinct: true)
       }
     }
-    individuelInscritCount: view_indicateur_inscrit_aggregate(
-      where: { type: { _eq: "individuel" } }
+
+    individuelInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: { discriminator: { _eq: "MANDATAIRE_IND" } }
     ) {
       aggregate {
-        sum {
-          count
-        }
+        count(distinct: true)
       }
     }
-    preposeInscritCount: view_indicateur_inscrit_aggregate(
-      where: { type: { _eq: "prepose" } }
+    preposeInscritCount: view_mesure_gestionnaire_departement_aggregate(
+      where: { discriminator: { _eq: "MANDATAIRE_PRE" } }
     ) {
       aggregate {
-        sum {
-          count
-        }
+        count(distinct: true)
       }
     }
+
     magistratInscritCount: view_indicateur_inscrit_aggregate(
       where: { type: { _eq: "ti" } }
     ) {
