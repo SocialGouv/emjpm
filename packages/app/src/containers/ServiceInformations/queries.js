@@ -9,7 +9,7 @@ export const GET_SERVICES = gql`
       ville
       code_postal
       adresse
-      siren
+      siret
       email
       etablissement
       dispo_max

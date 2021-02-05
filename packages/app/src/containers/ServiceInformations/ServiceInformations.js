@@ -33,7 +33,7 @@ function ServiceInformations() {
     etablissement,
     service_tis,
     telephone,
-    siren,
+    siret,
     nom,
     prenom,
     dispo_max,
@@ -53,8 +53,8 @@ function ServiceInformations() {
         <Box mb={2}>
           <Heading size={5}>Service tutelaire</Heading>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Siren"}</Text>
-            <Text sx={content}>{siren || ""}</Text>
+            <Text sx={subtitle}>{"Siret"}</Text>
+            <Text sx={content}>{siret || ""}</Text>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
