@@ -106,7 +106,7 @@ function IndicatorListTotal() {
           indicator={magistratInscritCount || 0}
         />
       </Box>
-      <Heading size={2}>Connectés dans le dernier mois</Heading>
+      <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
