@@ -3,15 +3,18 @@ import departements from "./departements.json";
 
 const codePostalDB = import("./code_postal.json");
 
-export const departementList = Object.entries(departements).map(
-  ([code, { nom, region }]) => {
+export const departementList = Object.entries(departements)
+  .map(([code, { nom, region }]) => {
     return {
       code,
       nom,
       region,
     };
-  }
-);
+  })
+  .sort(function (a, b) {
+    return a.code.replace(/\D/g, "9") - b.code.replace(/\D/g, "9");
+  });
+
 export const regionList = Object.entries(regions).map(([code, nom]) => {
   return {
     code,
@@ -47,7 +50,15 @@ export const getCommunesByCodePostal = async (cp) => {
   return codePostal[cp]?.communes;
 };
 
-export const createRegionOptions = (rows, options = { all: true }) => {
+const defaultFormatRegionLabel = ({ nom }) => {
+  return nom;
+};
+const defaultCreateRegionOptions = {
+  all: true,
+  formatLabel: defaultFormatRegionLabel,
+};
+export const createRegionOptions = (rows, options = {}) => {
+  options = { ...defaultCreateRegionOptions, ...options };
   const opts = [];
   if (options.all) {
     opts.push({
@@ -56,15 +67,23 @@ export const createRegionOptions = (rows, options = { all: true }) => {
     });
   }
   opts.push(
-    ...rows.map(({ code, nom }) => ({
-      value: code,
-      label: nom,
+    ...rows.map((row) => ({
+      value: row.code || row.id,
+      label: options.formatLabel(row),
     }))
   );
   return opts;
 };
 
-export const createDepartementOptions = (rows, options = { all: true }) => {
+const defaultFormatDepartementLabel = (row) => {
+  return (row.id || row.code) + " " + row.nom;
+};
+const defaultCreateDepartementOptions = {
+  all: true,
+  formatLabel: defaultFormatDepartementLabel,
+};
+export const createDepartementOptions = (rows, options = {}) => {
+  options = { ...defaultCreateDepartementOptions, ...options };
   const opts = [];
   if (options.all && rows.length > 0) {
     opts.push({
@@ -73,9 +92,9 @@ export const createDepartementOptions = (rows, options = { all: true }) => {
     });
   }
   opts.push(
-    ...rows.map(({ code, nom }) => ({
-      value: code,
-      label: nom,
+    ...rows.map((row) => ({
+      value: row.code || row.id,
+      label: options.formatLabel(row),
     }))
   );
   opts.sort(function (a, b) {
