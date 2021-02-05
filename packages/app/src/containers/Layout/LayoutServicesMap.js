@@ -1,10 +1,10 @@
-import { Fragment /*, useContext */ } from "react";
+import { Fragment, useContext } from "react";
 import { Box } from "rebass";
 
 import { Header } from "~/containers/Header";
 import { Navigation } from "~/containers/Navigation";
 import { BoxWrapper } from "~/components/Grid";
-// import { UserContext } from "~/containers/UserContext";
+import { UserContext } from "~/containers/UserContext";
 
 const navigationLinks = [
   {
@@ -24,21 +24,19 @@ const navigationLinks = [
 function LayoutServicesMap(props) {
   const { children } = props;
 
-  // const user = useContext(UserContext);
+  const user = useContext(UserContext);
 
-  const links = navigationLinks;
+  let links = navigationLinks;
 
-  // if (user.enquete) {
-  //   const [serviceMember] = user.service_members;
-  //   const { code } = serviceMember.service.departement;
+  if (user.enquete) {
+    const [serviceMember] = user.service_members;
+    const { code } = serviceMember.service.departement;
 
-  //   if (code === "75") {
-  //     links = navigationLinks.concat({
-  //       title: `Enquête ${user.enquete.annee}`,
-  //       to: `/services/enquetes/${user.enquete.id}`,
-  //     });
-  //   }
-  // }
+    links = navigationLinks.concat({
+      title: `Enquête ${user.enquete.annee}`,
+      to: `/services/enquetes/${user.enquete.id}`,
+    });
+  }
 
   return (
     <Fragment>
