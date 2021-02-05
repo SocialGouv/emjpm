@@ -19,7 +19,7 @@ import {
   getDepartementByCodePostal,
 } from "~/utils/geodata";
 
-import SelectSIREN from "~/containers/SelectSIREN";
+import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
 import SelectVille from "~/containers/SelectVille";
 
@@ -46,7 +46,7 @@ export function ListeBlancheServiceForm(props) {
       org_gestionnaire: service ? service.org_gestionnaire : "",
       org_nom: service ? service.org_nom : "",
       org_ville: service ? service.org_ville : "",
-      siren: service ? service.siren || "" : "",
+      siret: service ? service.siret || "" : "",
       telephone: service ? service.telephone : "",
     },
     onSubmit: handleSubmit,
@@ -57,16 +57,16 @@ export function ListeBlancheServiceForm(props) {
 
   useDebouncedEffect(
     () => {
-      let { siren } = formik.values;
-      if (!siren) {
-        siren = "";
+      let { siret } = formik.values;
+      if (!siret) {
+        siret = "";
       }
-      siren = siren.replace(/\s/g, "");
-      siren = siren.substr(0, 9);
-      setFieldValue("siren", siren);
+      siret = siret.replace(/\s/g, "");
+      siret = siret.substr(0, 14);
+      setFieldValue("siret", siret);
     },
     500,
-    [formik.values["siren"]]
+    [formik.values["siret"]]
   );
   useDebouncedEffect(
     () => {
@@ -91,13 +91,13 @@ export function ListeBlancheServiceForm(props) {
     [formik.values["lb_code_postal"]]
   );
 
-  const [selectedSirenData, setSelectedSirenData] = useState();
-  const setSelectedSirenDataCallback = useCallback(
-    ({ data }) => setSelectedSirenData(data),
-    [setSelectedSirenData]
+  const [selectedSiretData, setSelectedSiretData] = useState();
+  const setSelectedSiretDataCallback = useCallback(
+    ({ data }) => setSelectedSiretData(data),
+    [setSelectedSiretData]
   );
   useEffect(() => {
-    if (!selectedSirenData) {
+    if (!selectedSiretData) {
       return;
     }
     const {
@@ -106,19 +106,19 @@ export function ListeBlancheServiceForm(props) {
       code_postal,
       libelle_commune,
       departement,
-    } = selectedSirenData;
+    } = selectedSiretData;
 
     formik.setValues({
       ...formik.values,
       etablissement: nom_raison_sociale || "",
-      lb_adresse: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
+      lb_adresse: l4_declaree || "",
       lb_code_postal: code_postal || "",
       lb_ville: libelle_commune || "",
       departement: departement || "",
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSirenData]);
+  }, [selectedSiretData]);
 
   const [selectedAdresseData, setSelectedAdresseData] = useState();
   const setSelectedAdresseDataCallback = useCallback(
@@ -150,11 +150,11 @@ export function ListeBlancheServiceForm(props) {
           </Text>
         </FormGrayBox>
         <FormInputBox>
-          <SelectSIREN
-            id="siren"
+          <SelectSIRET
+            id="siret"
             formik={formik}
             validationSchema={validationSchema}
-            setSelectedOption={setSelectedSirenDataCallback}
+            setSelectedOption={setSelectedSiretDataCallback}
           />
           <FormGroupInput
             placeholder="Nom du service"

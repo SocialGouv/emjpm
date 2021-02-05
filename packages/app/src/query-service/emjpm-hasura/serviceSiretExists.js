@@ -1,24 +1,24 @@
 import gql from "graphql-tag";
 
-const SERVICE_BY_SIREN = gql`
-  query ServiceBySiren($siren: String!) {
-    services(where: { siren: { _eq: $siren } }) {
-      siren
+const SERVICE_BY_SIRET = gql`
+  query ServiceBySiret($siret: String!) {
+    services(where: { siret: { _eq: $siret } }) {
+      siret
     }
   }
 `;
 
-export default async function serviceSiretExists(client, siren) {
+export default async function serviceSiretExists(client, siret) {
   const { data } = await client.query({
     context: {
       headers: {
-        "X-Hasura-Siret": siren,
+        "X-Hasura-Siret": siret,
       },
     },
     fetchPolicy: "network-only",
-    query: SERVICE_BY_SIREN,
+    query: SERVICE_BY_SIRET,
     variables: {
-      siren,
+      siret,
     },
   });
 

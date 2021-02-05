@@ -22,10 +22,10 @@ export function ListeBlancheServiceCreate(props) {
   });
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
-    const sirenExists = await serviceSiretExists(client, values.siren);
+    const siretExists = await serviceSiretExists(client, values.siret);
 
-    if (sirenExists) {
-      setErrors({ siren: "Le siren est déjà utilisé" });
+    if (siretExists) {
+      setErrors({ siret: "Le siret est déjà utilisé" });
       setSubmitting(false);
       return;
     }
@@ -48,7 +48,7 @@ export function ListeBlancheServiceCreate(props) {
           org_gestionnaire: values.org_gestionnaire,
           org_nom: values.org_nom,
           org_ville: values.org_ville,
-          siren: values.siren,
+          siret: values.siret,
           telephone: values.telephone,
         },
       });

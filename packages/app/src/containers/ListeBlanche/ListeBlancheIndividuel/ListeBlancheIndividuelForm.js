@@ -22,7 +22,7 @@ import {
   useDepartementsOptions,
 } from "~/utils/departements";
 
-import SelectSIREN from "~/containers/SelectSIREN";
+import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
 import SelectVille from "~/containers/SelectVille";
 
@@ -46,9 +46,9 @@ const validationSchema = yup.object().shape({
   email: yup.string().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
-  siren: yup
+  siret: yup
     .string()
-    .matches(/^[0-9]{9}$/, "Le SIREN doit être composé de 9 chiffres.")
+    .matches(/^[0-9]{9}$/, "Le SIRET doit être composé de 9 chiffres.")
     .required(),
   ville: yup.string().required(),
 });
@@ -76,7 +76,7 @@ export function ListeBlancheIndividuelForm(props) {
       email: data ? formatFormInput(data.email) : "",
       nom: data ? formatFormInput(data.nom) : "",
       prenom: data ? formatFormInput(data.prenom) : "",
-      siren: data ? formatFormInput(data.siren) : "",
+      siret: data ? formatFormInput(data.siret) : "",
       ville: data ? formatFormInput(data.ville) : "",
     },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
@@ -100,16 +100,16 @@ export function ListeBlancheIndividuelForm(props) {
 
   useDebouncedEffect(
     () => {
-      let { siren } = formik.values;
-      if (!siren) {
-        siren = "";
+      let { siret } = formik.values;
+      if (!siret) {
+        siret = "";
       }
-      siren = siren.replace(/\s/g, "");
-      siren = siren.substr(0, 9);
-      formik.setFieldValue("siren", siren);
+      siret = siret.replace(/\s/g, "");
+      siret = siret.substr(0, 14);
+      formik.setFieldValue("siret", siret);
     },
     500,
-    [formik.values["siren"]]
+    [formik.values["siret"]]
   );
   useDebouncedEffect(
     () => {
@@ -128,13 +128,13 @@ export function ListeBlancheIndividuelForm(props) {
     [formik.values["code_postal"]]
   );
 
-  const [selectedSirenData, setSelectedSirenData] = useState();
-  const setSelectedSirenDataCallback = useCallback(
-    ({ data }) => setSelectedSirenData(data),
-    [setSelectedSirenData]
+  const [selectedSiretData, setSelectedSiretData] = useState();
+  const setSelectedSiretDataCallback = useCallback(
+    ({ data }) => setSelectedSiretData(data),
+    [setSelectedSiretData]
   );
   useEffect(() => {
-    if (!selectedSirenData) {
+    if (!selectedSiretData) {
       return;
     }
     const {
@@ -144,20 +144,20 @@ export function ListeBlancheIndividuelForm(props) {
       code_postal,
       libelle_commune,
       departement,
-    } = selectedSirenData;
+    } = selectedSiretData;
 
     formik.setValues({
       ...formik.values,
       etablissement: nom_raison_sociale || "",
-      adresse1: l4_declaree || "", // https://sirene.fr/sirene/public/variable/l4-declaree
-      adresse2: l5_declaree || "", // https://sirene.fr/sirene/public/variable/l5-declaree
+      adresse1: l4_declaree || "",
+      adresse2: l5_declaree || "",
       code_postal: code_postal || "",
       ville: libelle_commune || "",
       departement: departement || "",
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSirenData]);
+  }, [selectedSiretData]);
 
   const [selectedAdresseData, setSelectedAdresseData] = useState();
   const setSelectedAdresseDataCallback = useCallback(
@@ -186,11 +186,11 @@ export function ListeBlancheIndividuelForm(props) {
           </Heading>
         </FormGrayBox>
         <FormInputBox>
-          <SelectSIREN
-            id="siren"
+          <SelectSIRET
+            id="siret"
             formik={formik}
             validationSchema={validationSchema}
-            setSelectedOption={setSelectedSirenDataCallback}
+            setSelectedOption={setSelectedSiretDataCallback}
           />
           <SelectAdresse
             placeholder="Adresse 1"

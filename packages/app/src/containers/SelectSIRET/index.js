@@ -8,13 +8,13 @@ import { FormGroupSelect } from "~/components/AppForm";
 // https://entreprise.data.gouv.fr/api_doc/sirene
 // https://sirene.fr/sirene/public/static/liste-variables
 
-function OptionSelectSIREN(props) {
+function OptionSelectSIRET(props) {
   let label;
   const option = props.data;
   if (option.data) {
     const { data } = option;
-    const { siren, nom_raison_sociale } = data;
-    label = siren + " - " + nom_raison_sociale;
+    const { siret, nom_raison_sociale } = data;
+    label = siret + " - " + nom_raison_sociale;
   } else {
     label = `"` + option.value + `"`;
   }
@@ -22,24 +22,24 @@ function OptionSelectSIREN(props) {
   return <components.Option {...props}>{label}</components.Option>;
 }
 
-const defaultPlaceholder = "Rechercher par Nom, SIREN, SIRET, adresse...";
+const defaultPlaceholder = "Rechercher par Nom, SIRET, SIRET, adresse...";
 
 const loadOptions = async (search) => {
   const result = await fullText(search);
   const { etablissement = [] } = result;
   const options = etablissement.map((data) => {
-    const { siren } = data;
+    const { siret } = data;
     return {
-      value: siren,
-      label: siren,
+      value: siret,
+      label: siret,
       data: data,
     };
   });
   return options;
 };
 
-export default function SelectSIREN({
-  label = "SIREN",
+export default function SelectSIRET({
+  label = "SIRET",
   placeholder = defaultPlaceholder,
   noOptionsMessage = () => {
     return defaultPlaceholder;
@@ -52,7 +52,7 @@ export default function SelectSIREN({
       loadOptions={loadOptions}
       isCreatable
       components={{
-        Option: OptionSelectSIREN,
+        Option: OptionSelectSIRET,
       }}
       isClearable
       formik={formik}
