@@ -58,13 +58,17 @@ function MandataireBoard() {
           </Box>
         </Box>
         <Card>
-          {mandataireTis.map(({ ti }) => {
-            return (
-              <Text px={1} mb={1} key={ti.id}>
-                {ti.etablissement}
-              </Text>
-            );
-          })}
+          {mandataireTis &&
+            mandataireTis.map(({ ti }) => {
+              return (
+                (ti && (
+                  <Text px={1} mb={1} key={ti.id}>
+                    {ti.etablissement}
+                  </Text>
+                )) ||
+                null
+              );
+            })}
           {!isTribunal && (
             <Text px={1} mb={1}>
               {"Vous n'êtes pas visible par les juges des tutelles"}
