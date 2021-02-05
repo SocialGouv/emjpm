@@ -36,7 +36,7 @@ export function DirectionEnquetesList() {
                 enquete.annee - 1
               }`}
             </Text>
-            <Text fontWeight="bold" pl={5}>{`Du${format(
+            <Text fontWeight="bold" pl={5}>{`Du ${format(
               new Date(enquete.created_at),
               "dd/MM/yyyy"
             )}  au ${format(new Date(enquete.date_fin), "dd/MM/yyyy")}`}</Text>
