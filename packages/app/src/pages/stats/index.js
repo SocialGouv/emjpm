@@ -1,7 +1,7 @@
 import { Box, Flex } from "rebass";
 
 import { IndicatorListTotal } from "~/containers/IndicatorList";
-import { IndicatorsMenu, IndicatorsMap } from "~/containers/IndicatorsMenu";
+import { IndicatorsMenu } from "~/containers/IndicatorsMenu";
 import { LayoutPublic } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
 
@@ -34,7 +34,6 @@ function StatsPage() {
             <IndicatorListTotal />
           </Box>
         </Flex>
-        <IndicatorsMap />
         <Box />
       </BoxWrapper>
     </LayoutPublic>
