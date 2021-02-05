@@ -7233,6 +7233,13 @@
         column_mapping:
           service_id: id
   select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
   - role: direction
     permission:
       columns:
@@ -7247,6 +7254,48 @@
       - mesures_awaiting
       - mesures_in_progress
       - remaining_capacity
+      filter: {}
+      allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns:
+      - departement_code
+      - discriminator
+      filter: {}
+      allow_aggregations: true
+  - role: ti
+    permission:
+      columns:
+      - departement_code
+      - discriminator
       filter: {}
       allow_aggregations: true
 - table:

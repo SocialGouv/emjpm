@@ -59,19 +59,13 @@ function IndicatorListTotal() {
       },
     },
     serviceInscritCount: {
-      aggregate: {
-        sum: { count: serviceInscritCount },
-      },
+      aggregate: { count: serviceInscritCount },
     },
     individuelInscritCount: {
-      aggregate: {
-        sum: { count: individuelInscritCount },
-      },
+      aggregate: { count: individuelInscritCount },
     },
     preposeInscritCount: {
-      aggregate: {
-        sum: { count: preposeInscritCount },
-      },
+      aggregate: { count: preposeInscritCount },
     },
     magistratInscritCount: {
       aggregate: {
