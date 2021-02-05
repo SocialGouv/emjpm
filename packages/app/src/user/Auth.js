@@ -212,3 +212,14 @@ export async function impersonateLogout() {
   localStorage.removeItem("impersonate");
   window.location.href = "/";
 }
+
+export function AuthRedirect(props) {
+  const { authStore, logout } = useAuth();
+  const { url, role } = jwtDecode(authStore.token);
+  if (!url) {
+    history.push("/login");
+  } else {
+    history.push(routeByRole[role]);
+  }
+  return null;
+}

@@ -1,23 +1,31 @@
 import PropTypes from "prop-types";
 
 import { Box, Flex, Text } from "rebass";
-
 import Marianne from "./Marianne";
 import { LogoStyle, logoTextStyle } from "./style";
+
+import { Link } from "~/containers/Link";
 
 function Logo(props) {
   const { hasTitle, title } = props;
 
   return (
     <Flex>
-      <Box sx={LogoStyle}>
-        <Marianne />
-      </Box>
-      {hasTitle && (
-        <Box>
-          <Text sx={logoTextStyle}>{title}</Text>
-        </Box>
-      )}
+      <Link
+        to="/"
+        component={({ navigate, to }) => (
+          <>
+            <Box sx={LogoStyle} onClick={() => navigate(to)}>
+              <Marianne />
+            </Box>
+            {hasTitle && (
+              <Box onClick={() => navigate(to)}>
+                <Text sx={logoTextStyle}>{title}</Text>
+              </Box>
+            )}
+          </>
+        )}
+      />
     </Flex>
   );
 }
