@@ -1,5 +1,5 @@
-import { Route, Switch, Redirect } from "react-router-dom";
-import { PrivateRoute } from "~/user/Auth";
+import { Route, Switch } from "react-router-dom";
+import { PrivateRoute, AuthRedirect } from "~/user/Auth";
 
 import NotFound from "~/containers/NotFound";
 
@@ -461,11 +461,7 @@ function Routes() {
         );
       })}
       <Route path="/" exact>
-        <Redirect
-          to={{
-            pathname: "/login",
-          }}
-        />
+        <AuthRedirect />
       </Route>
       <Route component={NotFound} />
     </Switch>
