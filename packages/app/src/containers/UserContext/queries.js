@@ -11,7 +11,7 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz!) {
     enquetes(
       where: { status: { _eq: "created" }, date_fin: { _gt: $endDate } }
     ) {
