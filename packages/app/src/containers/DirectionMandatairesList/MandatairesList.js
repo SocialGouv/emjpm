@@ -37,7 +37,7 @@ function MandatairesList(props) {
   }, [filters]);
 
   const variables = {
-    departement: filters.departement ? parseInt(filters.departement) : null,
+    departement: filters.departement ? filters.departement : null,
     discriminator: selectedType ? selectedType.value : null,
     limit: RESULT_PER_PAGE,
     offset: currentOffset,

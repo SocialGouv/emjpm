@@ -10,9 +10,7 @@ function EtablissementIndicator() {
   const { filters } = useContext(FiltersContextSerializable);
   const { error, data, loading } = useQuery(GET_GESTIONNAIRE_NUMBER, {
     variables: {
-      department: filters.departement
-        ? parseInt(filters.departement)
-        : undefined,
+      department: filters.departement ? filters.departement : undefined,
       region: filters.region ? parseInt(filters.region) : undefined,
       type: "MANDATAIRE_PRE",
     },

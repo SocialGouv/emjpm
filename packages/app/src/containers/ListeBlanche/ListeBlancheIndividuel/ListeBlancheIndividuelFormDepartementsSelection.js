@@ -13,7 +13,7 @@ function canModifyAgrement(user, departementCode) {
   if (isDirectionNationale(user)) {
     return true;
   }
-  return user.agrements.includes(parseInt(departementCode));
+  return user.agrements.includes(departementCode);
 }
 
 export function ListeBlancheIndividuelFormDepartementsSelection(props) {
