@@ -46,13 +46,13 @@ export default function App() {
                     <Routes />
                   </AppMatomo>
                 </Router>
+                <Impersonation />
               </AppUser>
             </AppApollo>
           </ProvideAuth>
         </Sentry.ErrorBoundary>
       </ThemeProvider>
       <AutoReload />
-      <Impersonation />
     </>
   );
 }

@@ -77,6 +77,7 @@ function authReducer(state, { type, payload }) {
         id: null,
         token: null,
         type: null,
+        isImpersonated: false,
       };
     }
     case "login": {
@@ -99,6 +100,7 @@ export function useProvideAuth() {
 
   const logout = useCallback(() => {
     localStorage.setItem("auth", JSON.stringify({}));
+    localStorage.removeItem("impersonate");
 
     // to support logging out from all windows
     localStorage.setItem("logout", Date.now());
@@ -199,7 +201,10 @@ export async function impersonateLogin(impersonateParams) {
   });
   const json = await response.json();
   const { id, token, type } = json;
-  localStorage.setItem("impersonate", JSON.stringify({ id, token, type }));
+  localStorage.setItem(
+    "impersonate",
+    JSON.stringify({ id, token, type, isImpersonated: true })
+  );
   window.location.href = "/";
 }
 
