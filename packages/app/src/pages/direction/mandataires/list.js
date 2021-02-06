@@ -23,16 +23,11 @@ function Mandataires() {
   const initialFilters = {};
 
   if (direction.type === "departemental") {
-    initialFilters.departement = {
-      id: direction.departement.id,
-      label: direction.departement.nom,
-    };
+    initialFilters.departement = direction.departement.id;
   } else if (direction.type === "regional") {
-    initialFilters.region = {
-      id: direction.region.id,
-      label: direction.region.nom,
-    };
+    initialFilters.region = direction.region.id;
   }
+
   return (
     <FiltersContextSerializableProvider
       useLocalStorage={true}
