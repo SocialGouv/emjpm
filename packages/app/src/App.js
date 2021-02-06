@@ -46,9 +46,9 @@ export default function App() {
                     <Routes />
                   </AppMatomo>
                 </Router>
-                <Impersonation />
               </AppUser>
             </AppApollo>
+            <Impersonation />
           </ProvideAuth>
         </Sentry.ErrorBoundary>
       </ThemeProvider>

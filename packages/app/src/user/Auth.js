@@ -29,7 +29,6 @@ export function ProvideAuth({ children }) {
       if (event.key === "logout") {
         const { authStore } = auth;
         if (authStore.token) {
-          console.log("logged out from storage!");
           auth.logout();
         }
       }
@@ -58,12 +57,9 @@ const routeByRole = {
 };
 
 const getAuthInitialState = () => {
-  let storage;
-  storage = localStorage.getItem("impersonate");
-  if (!storage) {
-    storage = localStorage.getItem("auth");
-  }
-  const state = JSON.parse(storage) || {};
+  const storage =
+    localStorage.getItem("impersonate") || localStorage.getItem("auth");
+  const state = storage ? JSON.parse(storage) : {};
   return state;
 };
 
@@ -99,7 +95,7 @@ export function useProvideAuth() {
   );
 
   const logout = useCallback(() => {
-    localStorage.setItem("auth", JSON.stringify({}));
+    localStorage.removeItem("auth");
     localStorage.removeItem("impersonate");
 
     // to support logging out from all windows
@@ -214,12 +210,15 @@ export async function impersonateLogout() {
 }
 
 export function AuthRedirect(props) {
-  const { authStore, logout } = useAuth();
-  if (authStore.token) {
-    const { role } = jwtDecode(authStore.token);
-    history.push(routeByRole[role]);
-    return null;
-  }
-  history.push("/login");
+  const auth = useAuth();
+  useEffect(() => {
+    const { authStore, logout } = auth;
+    if (authStore.token) {
+      const { role } = jwtDecode(authStore.token);
+      history.push(routeByRole[role]);
+      return null;
+    }
+    history.push("/login");
+  }, [auth]);
   return null;
 }
