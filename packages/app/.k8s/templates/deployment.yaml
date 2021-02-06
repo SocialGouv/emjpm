@@ -3,7 +3,6 @@ kind: Deployment
 metadata:
   name: {{ include "nodejs.fullname" . }}
   labels:
-    timestamp: "{{ now | date "20060102150405" }}"
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
@@ -13,6 +12,8 @@ spec:
       app.kubernetes.io/instance: {{ .Release.Name }}
   template:
     metadata:
+      annotations:
+        timestamp: "{{ now | date "20060102150405" }}"
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
