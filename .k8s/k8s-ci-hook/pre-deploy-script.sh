@@ -8,7 +8,7 @@ if [ -n "$CI_PRODUCTION" ]; then
   export RANCHER_PROJECT_ID="p-ttzld"
 
   # temporary at project level
-  export K8S_DEPLOY_NS="${PROJECT}"
+  export K8S_NS="${PROJECT}"
   export DB_NAME="${PROJECT}"
 else
   export RANCHER_CLUSTER_ID="c-bd7z2"
