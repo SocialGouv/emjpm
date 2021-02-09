@@ -7,8 +7,8 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
-import { Link } from "~/containers/Link";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { Link } from "~/components/Link";
 import { serviceSchema } from "~/validation-schemas/serviceSchema";
 import {
   Button,

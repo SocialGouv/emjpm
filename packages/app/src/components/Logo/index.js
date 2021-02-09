@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 import Marianne from "./Marianne";
 import { LogoStyle, logoTextStyle } from "./style";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 
 function Logo(props) {
   const { hasTitle, title } = props;

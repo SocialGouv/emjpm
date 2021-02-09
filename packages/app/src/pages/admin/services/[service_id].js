@@ -2,7 +2,7 @@ import { Box, Card, Link as StyledLink } from "rebass";
 
 import { AdminServiceMesures } from "~/containers/AdminServices";
 import { LayoutAdmin } from "~/containers/Layout";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { MesureImportPanel } from "~/containers/MesureImport";
 import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
 import { BoxWrapper } from "~/components/Grid";

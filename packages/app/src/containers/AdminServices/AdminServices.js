@@ -3,7 +3,7 @@ import { Fragment, useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card, Text } from "~/components";
 

@@ -3,7 +3,7 @@ import { useMutation } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { UserContext } from "~/containers/UserContext";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { Button } from "~/components";
 
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";

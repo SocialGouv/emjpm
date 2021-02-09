@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { Button, Heading } from "~/components";
 
 import { GET_SERVICES } from "./queries";

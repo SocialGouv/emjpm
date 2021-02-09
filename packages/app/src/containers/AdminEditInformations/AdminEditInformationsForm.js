@@ -7,7 +7,7 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
 import { Button, Heading, InlineError, Text } from "~/components";
 

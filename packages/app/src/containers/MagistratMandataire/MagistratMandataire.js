@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { MagistratMandataireComments } from "~/containers/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { Button, Card, Heading, Spinner } from "~/components";

@@ -2,7 +2,7 @@ import { Link as StyledLink } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutDirection } from "~/containers/Layout";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { ListeBlanchePreposeCreate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
 

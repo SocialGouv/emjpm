@@ -10,9 +10,9 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Geocode } from "~/containers/Geocode";
+import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
