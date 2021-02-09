@@ -4,7 +4,7 @@ import { stdFormatter } from "@emjpm/biz";
 
 import { Box, Flex } from "rebass";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { useDebounce } from "~/hooks";
 import { Button, Card, Heading, Spinner } from "~/components";

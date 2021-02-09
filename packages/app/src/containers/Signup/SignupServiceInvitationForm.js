@@ -7,7 +7,7 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { signupSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 

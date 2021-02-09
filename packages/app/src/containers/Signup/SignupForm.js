@@ -10,7 +10,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/validation-schemas";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";

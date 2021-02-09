@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box, Card, Flex, Link as RebassLink } from "rebass";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { UserContext } from "~/containers/UserContext";
 import { Heading, Text } from "~/components";
 

@@ -1,7 +1,7 @@
 import { withRouter } from "react-router-dom";
 import { Box, Link } from "rebass";
 
-import { Link as RouterLink } from "~/containers/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 function LinkStyle(isActive) {
   return {

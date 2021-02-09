@@ -8,7 +8,6 @@ export const Context = createContext({});
 
 export function Provider(props) {
   const { children, mesureId } = props;
-
   const { data } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
 

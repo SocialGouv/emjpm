@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
 

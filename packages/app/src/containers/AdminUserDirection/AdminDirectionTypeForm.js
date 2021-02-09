@@ -7,7 +7,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
 

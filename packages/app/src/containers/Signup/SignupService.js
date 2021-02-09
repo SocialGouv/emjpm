@@ -9,7 +9,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 import { toOptions } from "~/utils/form";

@@ -1,7 +1,7 @@
 import { withRouter } from "react-router-dom";
 import { Link as RebassLink } from "rebass";
 
-import { Link as RouterLink } from "~/containers/Link";
+import { Link as RouterLink } from "~/components/Link";
 
 function AntenneLinkButtonStyle(isActive, disabled) {
   return {

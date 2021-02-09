@@ -2,7 +2,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
 
 import { LayoutDirection } from "~/containers/Layout";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { ListeBlancheEdit } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
 

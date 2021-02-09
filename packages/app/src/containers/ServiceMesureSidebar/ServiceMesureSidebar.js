@@ -2,7 +2,7 @@ import { ArrowBack } from "@styled-icons/boxicons-regular/ArrowBack";
 
 import { Box, Flex, Link as StyledLink, Text } from "rebass";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 
 const linkStyle = { color: "black", fontSize: "1", my: "3" };
 

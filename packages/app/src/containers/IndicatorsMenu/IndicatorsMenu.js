@@ -1,7 +1,7 @@
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Link as StyledLink } from "rebass";
 
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { Card, Heading, Spinner } from "~/components";
 import { departementList } from "~/utils/geodata";
 

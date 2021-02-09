@@ -9,7 +9,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { GeocodeCities } from "~/containers/Geocode";
+import { GeocodeCities } from "~/components/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";

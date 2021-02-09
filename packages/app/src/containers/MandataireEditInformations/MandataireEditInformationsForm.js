@@ -9,8 +9,8 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
-import { Link } from "~/containers/Link";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
+import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
 import {

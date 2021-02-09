@@ -4,7 +4,7 @@ import { differenceInDays } from "date-fns";
 import { Box, Button, Flex } from "rebass";
 
 import { Breadcrumb, LoadingWrapper } from "~/containers/Commons";
-import { Link } from "~/containers/Link";
+import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import useQueryContextWithHasuraRole from "~/hooks/useQueryContextWithHasuraRole";
 import { Heading } from "~/components";

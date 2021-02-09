@@ -7,7 +7,7 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Geocode, geocodeInitialValue } from "~/containers/Geocode";
+import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 
