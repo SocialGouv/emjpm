@@ -2,15 +2,13 @@ import { Global, css } from "@emotion/react";
 import { Router } from "react-router";
 import { ThemeProvider } from "theme-ui";
 
-import * as Sentry from "@sentry/react";
-
 import { ProvideAuth } from "~/user/Auth";
 
 import Routes, { history } from "~/routes";
 import AppApollo from "~/apollo/AppApollo";
 
 import { GlobalStyle, presetEmjpm } from "~/theme";
-import { useSentry } from "~/user/sentry";
+import { useSentry, captureException } from "~/user/sentry";
 
 import AppUser from "~/user/AppUser";
 import AppMatomo from "~/user/AppMatomo";
@@ -38,22 +36,20 @@ export default function App() {
         `}
       />
       <ThemeProvider theme={presetEmjpm}>
-        <Sentry.ErrorBoundary fallback={"Une erreur s'est produite"}>
-          <ErrorBoundary>
-            <ProvideAuth>
-              <AppApollo>
-                <AppUser>
-                  <Router history={history}>
-                    <AppMatomo>
-                      <Routes />
-                    </AppMatomo>
-                  </Router>
-                </AppUser>
-              </AppApollo>
-              <Impersonation />
-            </ProvideAuth>
-          </ErrorBoundary>
-        </Sentry.ErrorBoundary>
+        <ErrorBoundary onError={captureException}>
+          <ProvideAuth>
+            <AppApollo>
+              <AppUser>
+                <Router history={history}>
+                  <AppMatomo>
+                    <Routes />
+                  </AppMatomo>
+                </Router>
+              </AppUser>
+            </AppApollo>
+            <Impersonation />
+          </ProvideAuth>
+        </ErrorBoundary>
       </ThemeProvider>
       <AutoReload />
     </>
