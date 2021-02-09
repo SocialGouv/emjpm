@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.87.1](https://github.com/SocialGouv/emjpm/compare/v25.87.0...v25.87.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* **departement:** column ([51956fe](https://github.com/SocialGouv/emjpm/commit/51956feba522ca499f3ca0d9d32f44c51c8f87b5))
+* **departement:** column ([b69963e](https://github.com/SocialGouv/emjpm/commit/b69963e3adfbf3f9cfead143366d70ac839e57ee))
+* **gitlab-ci:** dbName parameter ([b5bc527](https://github.com/SocialGouv/emjpm/commit/b5bc5276618bb4ebd49d4766e938130ba3d38d6e))
+* **release-note:** handle minor and patch correctly ([652ce24](https://github.com/SocialGouv/emjpm/commit/652ce249e75f2107bba6e2e6fd9929e6d8b9b40e))
+* **restore-dum:** clean and fix ([f604c95](https://github.com/SocialGouv/emjpm/commit/f604c9589de8c921dd741e8a604932978d14f36c))
+
+
+
+
+
 # [25.87.0](https://github.com/SocialGouv/emjpm/compare/v25.86.7...v25.87.0) (2021-02-09)
 
 
