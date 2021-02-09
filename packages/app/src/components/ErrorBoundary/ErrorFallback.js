@@ -24,8 +24,23 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
           onClick={() => history.goBack()}
         >
           <ArrowLeft size={40} />
-          Retour à la page précédente
+          Page précédente
         </button>
+      </div>
+
+      <div>
+        <a href="/">
+          <img
+            src="/images/error-fallback.jpg"
+            style={{
+              maxWidth: "calc(100wh - 40px)",
+              maxHeight: "calc(100vh - 40px)",
+              borderRadius: "7px",
+              margin: "15px",
+            }}
+            alt="error"
+          />
+        </a>
       </div>
     </ErrorBox>
   );
