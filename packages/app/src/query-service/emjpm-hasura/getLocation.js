@@ -11,7 +11,7 @@ export const LOCATIONS = gql`
       longitude
       cities
     }
-    departements(where: { code: { _eq: $code } }) {
+    departements(where: { id: { _eq: $code } }) {
       id
       id_region
       nom
