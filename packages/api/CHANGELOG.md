@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.87.0](https://github.com/SocialGouv/emjpm/compare/v25.86.7...v25.87.0) (2021-02-09)
+
+
+### Bug Fixes
+
+* **re-apply-commit:** siret to siren ([7fd3038](https://github.com/SocialGouv/emjpm/commit/7fd30380da4743b62b77d9645dc67f7816594181))
+* **re-apply-commit:** siret to siren ([a610c4e](https://github.com/SocialGouv/emjpm/commit/a610c4ead55ebf60ba6446aa825ee5471af38351))
+* **rollback:** siren to siret ([a44e502](https://github.com/SocialGouv/emjpm/commit/a44e502abaaaf7a0f8812401cb3c4c3f407c427b))
+
+
+### Features
+
+* **auth:** back to localStorage ([e98ea66](https://github.com/SocialGouv/emjpm/commit/e98ea66cf10f6fe6b9d4befb06eb7ce98ff41457))
+* **impersonate:** full power admin ([#2470](https://github.com/SocialGouv/emjpm/issues/2470)) ([fe3161a](https://github.com/SocialGouv/emjpm/commit/fe3161a1666dce7838a7ba8e6e7bd41246071f0c))
+* **impersonate:** full power admin ([#2470](https://github.com/SocialGouv/emjpm/issues/2470)) ([55a1d41](https://github.com/SocialGouv/emjpm/commit/55a1d4175864ec5f1d167264aba2fe42a26960a3))
+
+
+
+
+
 ## [25.86.7](https://github.com/SocialGouv/emjpm/compare/v25.86.6...v25.86.7) (2021-01-18)
 
 **Note:** Version bump only for package @emjpm/api
