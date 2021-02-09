@@ -39,7 +39,6 @@ export function captureException(error, context = {}) {
     } catch (e) {
       // JSON.stringify will crash if context is circular
     }
-    scope.setTag("ssr", typeof window === "undefined");
   });
 
   Sentry.captureException(error);
