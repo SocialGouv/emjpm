@@ -201,11 +201,13 @@ export async function impersonateLogin(impersonateParams) {
     "impersonate",
     JSON.stringify({ id, token, type, isImpersonated: true })
   );
+  localStorage.removeItem("filters");
   window.location.href = "/";
 }
 
 export async function impersonateLogout() {
   localStorage.removeItem("impersonate");
+  localStorage.removeItem("filters");
   window.location.href = "/";
 }
 
