@@ -24,16 +24,13 @@ import {
   twoColumnStyle,
 } from "~/components/Grid";
 
-import { getDepartementRegionCode } from "~/utils/geodata";
-
-function Mandataires() {
+export default function DirectionPage() {
   const user = useContext(UserContext);
   const [direction] = user.directions;
   const initialFilters = {};
 
   if (direction.type === "departemental") {
     initialFilters.departement = direction.departement.id;
-    initialFilters.region = getDepartementRegionCode(direction.departement.id);
   } else if (direction.type === "regional") {
     initialFilters.region = direction.region.id;
   }
@@ -90,5 +87,3 @@ function Mandataires() {
     </FiltersContextSerializableProvider>
   );
 }
-
-export default Mandataires;
