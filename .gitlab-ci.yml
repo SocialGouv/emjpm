@@ -7,7 +7,6 @@ variables:
   DOCKER_DRIVER: overlay2
   DOCKER_HOST: tcp://localhost:2375
   GIT_STRATEGY: fetch
-  GIT_DEPTH: 5
 
   # Infra
   IMAGE_INFRA_BASE_NAME: infra/images-docker
@@ -731,7 +730,6 @@ Release:
     GIT_AUTHOR_NAME: Social Groovy Bot
     GIT_COMMITTER_EMAIL: $GIT_AUTHOR_EMAIL
     GIT_COMMITTER_NAME: $GIT_AUTHOR_NAME
-    GIT_DEPTH: 4242
   only:
     variables:
       - $RELEASE
