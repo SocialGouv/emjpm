@@ -5,11 +5,12 @@ import { endDate, startDate } from "~/utils/dates";
 
 export const Context = createContext({});
 
+const { localStorage } = window;
+
 export function Provider(props) {
   const { children, useLocalStorage, initialFilters } = props;
 
   const [filters, setFilters] = useState({
-    departements: [],
     endDate,
     startDate,
   });
@@ -20,7 +21,7 @@ export function Provider(props) {
     let newFilters = {};
 
     if (useLocalStorage) {
-      const storedItem = window.localStorage.getItem("filters");
+      const storedItem = localStorage.getItem("filters");
       if (storedItem) {
         newFilters = JSON.parse(storedItem);
       }
@@ -41,13 +42,7 @@ export function Provider(props) {
     const newFilters = { ...filters, ...obj };
     setFilters(newFilters);
     if (useLocalStorage) {
-      window.localStorage.setItem(
-        "filters",
-        JSON.stringify({
-          ...newFilters,
-          departements: [],
-        })
-      );
+      localStorage.setItem("filters", JSON.stringify(newFilters));
     }
   }
 
