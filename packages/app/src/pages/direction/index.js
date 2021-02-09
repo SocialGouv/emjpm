@@ -24,6 +24,8 @@ import {
   twoColumnStyle,
 } from "~/components/Grid";
 
+import { getDepartementRegionCode } from "~/utils/geodata";
+
 function Mandataires() {
   const user = useContext(UserContext);
   const [direction] = user.directions;
@@ -31,6 +33,7 @@ function Mandataires() {
 
   if (direction.type === "departemental") {
     initialFilters.departement = direction.departement.id;
+    initialFilters.region = getDepartementRegionCode(direction.departement.id);
   } else if (direction.type === "regional") {
     initialFilters.region = direction.region.id;
   }
