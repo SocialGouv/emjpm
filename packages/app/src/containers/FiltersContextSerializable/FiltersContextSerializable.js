@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 import { useDebounce } from "~/hooks";
 import { endDate, startDate } from "~/utils/dates";
+import { getDepartementRegionCode } from "~/utils/geodata";
 
 export const Context = createContext({});
 
@@ -33,6 +34,10 @@ export function Provider(props) {
           newFilters[key] = initialFilters[key];
         }
       });
+    }
+
+    if (newFilters.departement) {
+      newFilters.region = getDepartementRegionCode(newFilters.departement);
     }
 
     setFilters((f) => ({ ...f, ...newFilters }));
