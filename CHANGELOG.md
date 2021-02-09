@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.87.0](https://github.com/SocialGouv/emjpm/compare/v25.86.7...v25.87.0) (2021-02-09)
+
+
+### Bug Fixes
+
+* **autofill:** from siren api ([0c17417](https://github.com/SocialGouv/emjpm/commit/0c174173156fcbf0fc9fc0d41f475960a0867d53))
+* **bugs:** many littles ([55b28c2](https://github.com/SocialGouv/emjpm/commit/55b28c2ffdb2b3e9a830effc8d1af5e6eed71eec))
+* **bugs:** typo and null value ([8cda919](https://github.com/SocialGouv/emjpm/commit/8cda91988584db17ef6e611b72b03f692a52cbb6))
+* **ci:** rely on current commit tag ([e017993](https://github.com/SocialGouv/emjpm/commit/e01799349a013b5ca2f30ce93a23a531960dc4a3))
+* **ci:** tls ingress ([0647da6](https://github.com/SocialGouv/emjpm/commit/0647da6542df187093e1d165c2b3f98d56704efb))
+* **clean:** remove public stats map ([dcd8910](https://github.com/SocialGouv/emjpm/commit/dcd89108038c4ce3feaf57831c841f030721a227))
+* **clean:** remove unused query ([8be3d0c](https://github.com/SocialGouv/emjpm/commit/8be3d0c11924e793ae53e13fba7fac7eea283bf9))
+* **dead-link:** correction de liens morts ([#2475](https://github.com/SocialGouv/emjpm/issues/2475)) ([f2ff8c3](https://github.com/SocialGouv/emjpm/commit/f2ff8c3330bea9008b00280213db0406836c175d))
+* **departement:** is no more int ([88c9f2b](https://github.com/SocialGouv/emjpm/commit/88c9f2b77af851b7f9797c6a1327e8c1a8c05bb2))
+* **departements:** sort and default label ([9977299](https://github.com/SocialGouv/emjpm/commit/9977299364eef13c047c1a88fad44b2214de031d))
+* **direction:** filters ([9e6e1f1](https://github.com/SocialGouv/emjpm/commit/9e6e1f1b13f1663b24d4ee8f2c05e4d1628f0bcc))
+* **enquetes:** and other react bugs + clean ci ([#2462](https://github.com/SocialGouv/emjpm/issues/2462)) ([9877a30](https://github.com/SocialGouv/emjpm/commit/9877a30771d745ff34ec02336599220c9b639fe1))
+* **impersonation:** remove on logout ([b53e779](https://github.com/SocialGouv/emjpm/commit/b53e779d3a1f79c125b517dfac852623f0b9f1cb))
+* **lb-individuel:** end form ([#2466](https://github.com/SocialGouv/emjpm/issues/2466)) ([f25d7fd](https://github.com/SocialGouv/emjpm/commit/f25d7fd5af699c141b120393988775b5f87ce12f))
+* **menu:** on map layout ([1281bea](https://github.com/SocialGouv/emjpm/commit/1281bea44d745fad0eff39cbcdc050c7d68a9784))
+* **re-apply-commit:** siret to siren ([7fd3038](https://github.com/SocialGouv/emjpm/commit/7fd30380da4743b62b77d9645dc67f7816594181))
+* **re-apply-commit:** siret to siren ([a610c4e](https://github.com/SocialGouv/emjpm/commit/a610c4ead55ebf60ba6446aa825ee5471af38351))
+* **redirect:** empty token ([3366612](https://github.com/SocialGouv/emjpm/commit/336661240a9987b4a91be81afd9ae96566e39c93))
+* **redirect:** ensure redirect / to /login ([7d21972](https://github.com/SocialGouv/emjpm/commit/7d21972e23d6c4e7c395401220c48ffda630e0db))
+* **redirect:** not logged root 404 ([ab5d6ef](https://github.com/SocialGouv/emjpm/commit/ab5d6ef4a3e519530675f6c45a4f3aefb20e2693))
+* **rollback:** siren to siret ([a44e502](https://github.com/SocialGouv/emjpm/commit/a44e502abaaaf7a0f8812401cb3c4c3f407c427b))
+* **stats:** change presentation ([0d50f53](https://github.com/SocialGouv/emjpm/commit/0d50f532b8342793e25dcc6abd16fc6413394fca))
+* **stats:** direction filter ([#2468](https://github.com/SocialGouv/emjpm/issues/2468)) ([be5aa77](https://github.com/SocialGouv/emjpm/commit/be5aa779248f3908234ea2a25089a22c20d606b9))
+* **stats:** fix perms ([862ebb0](https://github.com/SocialGouv/emjpm/commit/862ebb0cb51ac730f971b6ccc63835e34e39baeb))
+* **stats:** little bugs ([#2464](https://github.com/SocialGouv/emjpm/issues/2464)) ([32babda](https://github.com/SocialGouv/emjpm/commit/32babda5ce46c3496f6ff389a5096999c6ae5b68))
+* **stats:** magistrat by departement ([08f24ef](https://github.com/SocialGouv/emjpm/commit/08f24ef99bfb64fc502519951c357adf48e361d8))
+* **stats:** public same as direction ([#2476](https://github.com/SocialGouv/emjpm/issues/2476)) ([8967121](https://github.com/SocialGouv/emjpm/commit/89671210459e14f4dd7f80b0d05a4ea728d0939a))
+* **wording:** month to days ([28bd2dc](https://github.com/SocialGouv/emjpm/commit/28bd2dcab746b532eca0a06b72a2b1c6440fd7c3))
+
+
+### Features
+
+* **404:** add fun 404 ([51eaaf5](https://github.com/SocialGouv/emjpm/commit/51eaaf542a403cc713613f09f104fc9cd7ec84da))
+* **admin:** edit infos and password ([31f092e](https://github.com/SocialGouv/emjpm/commit/31f092eefac9cb11c4eeb00ffad6cd947a9ce4e9))
+* **adresse-form:** plus plus ([#2459](https://github.com/SocialGouv/emjpm/issues/2459)) ([d36d8ef](https://github.com/SocialGouv/emjpm/commit/d36d8efb5051c5d07b09537782e8d7cc9c454873))
+* **auth:** back to localStorage ([e98ea66](https://github.com/SocialGouv/emjpm/commit/e98ea66cf10f6fe6b9d4befb06eb7ce98ff41457))
+* **departements:** embed ([#2465](https://github.com/SocialGouv/emjpm/issues/2465)) ([d390f35](https://github.com/SocialGouv/emjpm/commit/d390f3548f886ee9422a5e56dd545c645b97b5ff))
+* **dev:** shorter cmd ([5e074a3](https://github.com/SocialGouv/emjpm/commit/5e074a380dbe0085275b5c373c9f842833016043))
+* **dev:** shorter cmd ([d864c1a](https://github.com/SocialGouv/emjpm/commit/d864c1a96acee520d17aa937109937eb0a81d8d4))
+* **impersonate:** full power admin ([#2470](https://github.com/SocialGouv/emjpm/issues/2470)) ([fe3161a](https://github.com/SocialGouv/emjpm/commit/fe3161a1666dce7838a7ba8e6e7bd41246071f0c))
+* **impersonate:** full power admin ([#2470](https://github.com/SocialGouv/emjpm/issues/2470)) ([55a1d41](https://github.com/SocialGouv/emjpm/commit/55a1d4175864ec5f1d167264aba2fe42a26960a3))
+* **path:** fix / redirect + logo link index ([add543f](https://github.com/SocialGouv/emjpm/commit/add543f062c7a367a7c1ac9bd961fcb07b2841fd))
+* **stats:** add deployed departement map [#2292](https://github.com/SocialGouv/emjpm/issues/2292) ([#2473](https://github.com/SocialGouv/emjpm/issues/2473)) ([0b637cd](https://github.com/SocialGouv/emjpm/commit/0b637cd629c3f03e78535c06b66c8a0b157c4227))
+* **stats:** mesures réservées par mois ([776f55e](https://github.com/SocialGouv/emjpm/commit/776f55e8ee25b0489bad011a3ba01b44337cb94a))
+
+
+
+
+
 ## [25.86.7](https://github.com/SocialGouv/emjpm/compare/v25.86.6...v25.86.7) (2021-01-18)
 
 
