@@ -477,8 +477,6 @@ Init Managed Database:
 .deploy_stage:
   stage: Deploy
   dependencies: []
-  services:
-    - docker:dind
 
 ############### Deploy API ###########################
 
@@ -631,10 +629,10 @@ Deploy hasura (prod):
 ################### Restore DATA #############################
 
 .base_restore_pgdata:
+  stage: Notify Finished Deployment
   extends:
     - .base_docker_kubectl_image_stage
     - .dev_stage
-    - .deploy_stage
   script:
     - source ./.gitlab-ci/env.sh
 
@@ -782,8 +780,6 @@ Trigger release:
   extends:
     - .base_stage
   stage: Deploy
-  services:
-    - docker:dind
   image: registry.gitlab.factory.social.gouv.fr/socialgouv/docker/trivy:2.9.0
   allow_failure: true
   script:
