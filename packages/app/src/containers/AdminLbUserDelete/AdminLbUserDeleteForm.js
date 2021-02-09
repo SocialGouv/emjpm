@@ -73,7 +73,7 @@ export function AdminLbUserDeleteForm(props) {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  history.push(`/admin/list-blanche/${lbUserId}`);
+                  history.push(`/admin/liste-blanche/${lbUserId}`);
                 }}
               >
                 Annuler
