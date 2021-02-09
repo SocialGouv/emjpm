@@ -15,7 +15,7 @@ export const LOCATIONS = gql`
       id
       id_region
       nom
-      code
+      id
     }
   }
 `;
