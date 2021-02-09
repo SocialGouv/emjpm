@@ -509,6 +509,7 @@ Deploy api (dev):
     - .dev_stage
   variables:
     HELM_RENDER_ARGS: >-
+      --set dbName=$POSTGRES_DATABASE_EMJPM
       --set appURL=https://${DOMAIN}
       --set resources.requests.memory=128Mi
       --set resources.requests.cpu=1m
@@ -619,6 +620,7 @@ Deploy hasura (dev):
     - .dev_stage
   variables:
     HELM_RENDER_ARGS: >-
+      --set dbName=$POSTGRES_DATABASE_EMJPM
       --set resources.requests.memory=128Mi
       --set resources.requests.cpu=5m
 
