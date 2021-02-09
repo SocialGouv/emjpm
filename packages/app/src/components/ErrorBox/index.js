@@ -2,7 +2,8 @@ import { ArrowLeft } from "@styled-icons/material/ArrowLeft";
 import { Error } from "@styled-icons/material/Error";
 import { Heading } from "~/components";
 
-export default function NotFound() {
+export default function ErrorBox(props) {
+  const { message, children } = props;
   return (
     <div
       style={{
@@ -28,42 +29,38 @@ export default function NotFound() {
               color: "#423e42",
             }}
           >
-            <Error size={32} /> Page Non Trouvée
+            <span style={{}}>
+              <Error size={32} />
+            </span>{" "}
+            <span
+              style={{
+                padding: "10px",
+                position: "relative",
+                top: "3px",
+              }}
+            >
+              {message}
+            </span>
           </Heading>
         </a>
       </div>
       <div>
-        <a href="/">
-          <img
-            src="/images/404.png"
-            style={{
-              maxWidth: "calc(100wh - 40px)",
-              maxHeight: "calc(100vh - 40px)",
-            }}
-            alt="404"
-          />
-        </a>
-        <br />
-        <a
-          href="https://freepik.com"
-          target="_blank"
-          style={{ float: "right", marginRight: "15px" }}
-        >
-          <img
-            src="/images/404-credits.png"
-            alt="required license attribution"
-          />
-        </a>
-        <a
+        <div>{children}</div>
+        <div
           style={{
-            float: "left",
-            color: "#423e42",
+            marginTop: "50px",
           }}
-          href="/"
         >
-          <ArrowLeft size={24} />
-          Retour à l'accueil
-        </a>
+          <a
+            style={{
+              fontSize: "24px",
+            }}
+            href="/"
+          >
+            <ArrowLeft size={40} />
+            Retour à l'accueil
+          </a>
+        </div>
       </div>
     </div>
   );

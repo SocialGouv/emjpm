@@ -15,7 +15,8 @@ import { useSentry } from "~/user/sentry";
 import AppUser from "~/user/AppUser";
 import AppMatomo from "~/user/AppMatomo";
 
-import AutoReload from "~/containers/AutoReload";
+import { ErrorBoundary, AutoReload } from "~/components";
+
 import Impersonation from "~/containers/Impersonation";
 
 export default function App() {
@@ -38,18 +39,20 @@ export default function App() {
       />
       <ThemeProvider theme={presetEmjpm}>
         <Sentry.ErrorBoundary fallback={"Une erreur s'est produite"}>
-          <ProvideAuth>
-            <AppApollo>
-              <AppUser>
-                <Router history={history}>
-                  <AppMatomo>
-                    <Routes />
-                  </AppMatomo>
-                </Router>
-              </AppUser>
-            </AppApollo>
-            <Impersonation />
-          </ProvideAuth>
+          <ErrorBoundary>
+            <ProvideAuth>
+              <AppApollo>
+                <AppUser>
+                  <Router history={history}>
+                    <AppMatomo>
+                      <Routes />
+                    </AppMatomo>
+                  </Router>
+                </AppUser>
+              </AppApollo>
+              <Impersonation />
+            </ProvideAuth>
+          </ErrorBoundary>
         </Sentry.ErrorBoundary>
       </ThemeProvider>
       <AutoReload />

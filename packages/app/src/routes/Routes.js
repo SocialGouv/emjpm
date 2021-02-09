@@ -1,7 +1,7 @@
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute, AuthRedirect } from "~/user/Auth";
 
-import NotFound from "~/containers/NotFound";
+import { NotFound } from "~/components";
 
 const routes = [
   {
