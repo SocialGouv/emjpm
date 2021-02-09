@@ -19,3 +19,5 @@ if [ -n "$YARN_RELEASE_ENABLE_TEST" ]; then
 fi
 
 lerna version --force-publish --yes
+
+$(dirname $0)/get-release-note
