@@ -10,7 +10,7 @@ const findDepartmentFromPostalCode = async (code_postal, departmentByCode) => {
     department = departmentByCode[departementCode];
     if (!department) {
       department = await Departement.query().findOne({
-        code: departementCode,
+        id: departementCode,
       });
     }
   }
