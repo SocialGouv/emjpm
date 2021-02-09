@@ -10,7 +10,7 @@ import { ENQUETES } from "./queries";
 
 export function DirectionEnquetesList() {
   const history = useHistory();
-  const { data, loading } = useQuery(ENQUETES, { ssr: false });
+  const { data, loading } = useQuery(ENQUETES);
 
   if (loading) {
     return <Box p={2}>Chargement...</Box>;
