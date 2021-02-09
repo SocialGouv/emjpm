@@ -19,7 +19,8 @@
     "test": "lerna run test --parallel",
     "postinstall": "scripts/ci/postinstall",
     "ci:k8s-ci": "scripts/ci/k8s-ci",
-    "release": "scripts/ci/release"
+    "release": "scripts/ci/release",
+    "release-note": "scripts/ci/get-release-note"
   },
   "license": "Apache-2.0",
   "devDependencies": {

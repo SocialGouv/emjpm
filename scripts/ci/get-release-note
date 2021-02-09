@@ -10,13 +10,13 @@ function getLastVersionChanges {
   random_emoji=`getRandomEmoji`
   while read LINE; do
     if [ "$STARTFLAG" == "true" ]; then
-      if echo "$LINE" | grep -q -P '^## \[((\d+))\.(\d+)\.(\d+)\]'; then
+      if echo "$LINE" | grep -q -P '# \[((\d+))\.(\d+)\.(\d+)\]'; then
         exit
       else
         echo "$LINE"
       fi
-    elif echo "$LINE" | grep -q -P '^## \[(\d+)\.(\d+)\.(\d+)\]'; then
-      echo -n "$LINE" | sed -r 's/^## \[(.*)\](.*)\((.*)\)/## '$random_emoji' [\1]\2 (\3)/'
+    elif echo "$LINE" | grep -q -P '# \[(\d+)\.(\d+)\.(\d+)\]'; then
+      echo -n "$LINE" | sed -r 's/# \[(.*)\](.*)\((.*)\)/## '$random_emoji' [\1]\2 (\3)/'
       echo " deploying on production 🚀"
       STARTFLAG="true"
       continue
