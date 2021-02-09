@@ -1,33 +1,22 @@
+#!/bin/sh
+
 export PGUSER=emjpm
 export PGPASSWORD=test
-
 DB=emjpm
 NEW_OWNER=emjpm
 DUMP_FILE=${1:-"dump/db.dump"}
 
-# drop / create database emjpm
-cat <<EOF > reset-database.sql
-SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'emjpm';
-DROP DATABASE IF EXISTS emjpm;
-CREATE DATABASE emjpm WITH OWNER = $NEW_OWNER;
+cat <<EOF | psql -h localhost -p 5434 -U $PGUSER postgres
+SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '$DB';
+DROP DATABASE IF EXISTS $DB;
+CREATE DATABASE $DB WITH OWNER = $NEW_OWNER;
 EOF
 
-cat reset-database.sql | psql -h localhost -p 5434 -U $PGUSER
-rm reset-database.sql
+pg_restore -h localhost -p 5434 --if-exists --clean --no-owner --no-acl -e -Fc -d $DB $DUMP_FILE
 
-export PGUSER=emjpm
-export PGPASSWORD=test
-
-# restore production dump
-pg_restore -h localhost -p 5434 --if-exists --clean --no-owner --no-acl -e -Fc -d emjpm $DUMP_FILE
-
-# clear hasura
-cat <<EOF > clean-hasura.sql
+cat <<EOF | psql -h localhost -p 5434 -U $PGUSER
 DELETE FROM hdb_catalog.event_invocation_logs;
 DELETE FROM hdb_catalog.event_log;
 DELETE FROM hdb_catalog.event_triggers;
 DELETE FROM hdb_catalog.remote_schemas;
 EOF
-
-cat clean-hasura.sql | psql -h localhost -p 5434 -U $PGUSER
-rm clean-hasura.sql
