@@ -3,11 +3,11 @@ import { useHistory, useParams } from "react-router-dom";
 
 import { EnqueteImportPanel } from "~/containers/EnqueteImport";
 import { LayoutMandataire } from "~/containers/Layout";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ImportEnquetePage() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const history = useHistory();
 
   const query = useParams();

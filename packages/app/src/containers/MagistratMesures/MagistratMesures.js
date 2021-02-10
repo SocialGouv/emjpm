@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
 import { FiltersContext } from "~/containers/MagistratFilters/context";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import MesureListItem from "~/containers/MesureListItem";
 import { formatMesureListItems } from "~/formatters/mesures";
 
@@ -20,7 +20,7 @@ function MagistratMesures() {
   const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
   const {
     magistrat: { ti_id: tiId },
-  } = useContext(UserContext);
+  } = useUser();
 
   useEffect(() => {
     setCurrentOffset(0);

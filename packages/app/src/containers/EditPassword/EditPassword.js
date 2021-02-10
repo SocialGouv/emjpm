@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
 import { Link } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import config from "~/config";
 import { PATH } from "~/constants/basePath";
 import { passwordSchema } from "~/validation-schemas";
@@ -48,7 +48,7 @@ const checkStatus = async (
 
 function EditPassword() {
   const history = useHistory();
-  const { email, type } = useContext(UserContext);
+  const { email, type } = useUser();
   const url = `${API_URL}/api/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {

@@ -8,7 +8,7 @@ import { MesureList } from "~/containers/MesureList";
 import { MesureListButtonBar } from "~/containers/MesureListButtonBar";
 import { MesureListFilters } from "~/containers/MesureListFilters";
 import { FiltersContextProvider } from "~/containers/MesureListFilters/context";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import {
   DEFAULT_MESURE_NATURE,
   MESURE_STATUS_LABEL_VALUE,
@@ -16,7 +16,7 @@ import {
 import { BoxWrapper } from "~/components/Grid";
 
 export default function Mesures() {
-  const { service_members } = useContext(UserContext);
+  const { service_members } = useUser();
   const [
     {
       service: { service_antennes },

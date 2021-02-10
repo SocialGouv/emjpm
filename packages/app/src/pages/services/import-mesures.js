@@ -2,11 +2,11 @@ import { useContext } from "react";
 
 import { LayoutServices } from "~/containers/Layout";
 import { ServiceMesureImport } from "~/containers/ServiceMesureImport";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ServiceMesuresImport() {
-  const { service_members } = useContext(UserContext);
+  const { service_members } = useUser();
   const [{ service_id }] = service_members;
 
   return (

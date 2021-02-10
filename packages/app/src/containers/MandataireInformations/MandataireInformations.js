@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
 import { Link } from "~/components/Link";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Button, Heading } from "~/components";
 
 import { content, subtitle } from "./style";
@@ -15,7 +15,7 @@ function label(value) {
 }
 
 function MandataireInformations() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const { email, nom, prenom, mandataire } = user;
   const { mandataire_tis } = mandataire;
   const { lb_user } = mandataire;

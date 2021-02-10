@@ -2,12 +2,12 @@ import { useContext } from "react";
 
 import { LayoutMagistrat } from "~/containers/Layout";
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { PATH } from "~/constants/basePath";
 import { BoxWrapper } from "~/components/Grid";
 
 function EditInformations() {
-  const { id: userId, type } = useContext(UserContext);
+  const { id: userId, type } = useUser();
   const redirectLink = `${PATH[type]}/informations`;
   return (
     <LayoutMagistrat>

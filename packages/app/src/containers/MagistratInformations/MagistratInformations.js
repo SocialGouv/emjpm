@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Card, Heading } from "~/components";
 
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
 function MagistratInformations(props) {
-  const { email, cabinet, nom, prenom } = useContext(UserContext);
+  const { email, cabinet, nom, prenom } = useUser();
 
   return (
     <Box {...props}>

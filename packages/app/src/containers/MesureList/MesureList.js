@@ -7,7 +7,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MesureListFilters/context";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import MesureListItem from "~/containers/MesureListItem";
 import { formatMesureListItems } from "~/formatters/mesures";
@@ -27,7 +27,7 @@ function MesureList() {
     debouncedSearchText,
     sortBy,
   } = useContext(FiltersContext);
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
   const userBasePath = getUserBasePath({ type });
 
   useEffect(() => {

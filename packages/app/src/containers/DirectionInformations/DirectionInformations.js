@@ -6,13 +6,13 @@ import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Card, Heading } from "~/components";
 
 import { boxStyle, flexStyle, iconTextStyle } from "./style";
 
 function DirectionInformations(props) {
-  const { email, nom, prenom, directions } = useContext(UserContext);
+  const { email, nom, prenom, directions } = useUser();
   return (
     <Box {...props}>
       <Card p="5">

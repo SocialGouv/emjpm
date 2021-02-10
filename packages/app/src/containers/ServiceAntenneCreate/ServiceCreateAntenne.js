@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { ServiceAntenneForm } from "~/containers/ServiceAntenneForms";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Card } from "~/components";
 import { captureException } from "~/user/sentry";
 
@@ -11,7 +11,7 @@ import { CREATE_ANTENNE } from "./mutations";
 
 function ServiceCreateAntenne() {
   const history = useHistory();
-  const { service_members } = useContext(UserContext);
+  const { service_members } = useUser();
   const [currentUserService] = service_members;
   const { service_id } = currentUserService;
 

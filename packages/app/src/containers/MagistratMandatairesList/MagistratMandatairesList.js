@@ -4,7 +4,7 @@ import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { MandataireContextProvider } from "~/containers/Mandatairelist";
 import MandataireListItem from "~/containers/MandataireListItem";
 
@@ -60,7 +60,7 @@ function MagistratMandatairesList(props) {
   const history = useHistory();
   const {
     magistrat: { ti_id },
-  } = useContext(UserContext);
+  } = useUser();
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);

@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 
 import { formatMandatairesList } from "~/containers/MagistratMandatairesList/utils";
 import { MapContext } from "~/containers/Map/context";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import MandataireListItem from "~/containers/MandataireListItem";
 
 import { MESURES_GESTIONNAIRE } from "./queries";
@@ -17,7 +17,7 @@ const RESULT_PER_PAGE = 20;
 function MagistratMapMandatairesPanelList() {
   const {
     magistrat: { ti_id: tiId },
-  } = useContext(UserContext);
+  } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
   const { setCurrentMarker } = useContext(MapContext);

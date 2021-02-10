@@ -4,11 +4,11 @@ import { LayoutServices } from "~/containers/Layout";
 import { ServiceMemberInvitationCreate } from "~/containers/ServiceMemberInvitationCreate";
 import { ServiceMemberInvitations } from "~/containers/ServiceMemberInvitations";
 import { ServiceMembers } from "~/containers/ServiceMembers";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ServiceMembersPage() {
-  const { service_members, id } = useContext(UserContext);
+  const { service_members, id } = useUser();
   const [{ is_admin, service }] = service_members;
   return (
     <LayoutServices>

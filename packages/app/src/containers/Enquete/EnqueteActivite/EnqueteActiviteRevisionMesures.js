@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteRevisionMesuresForm } from "./EnqueteActiviteRevisionMesuresForm";
@@ -21,7 +21,7 @@ export function EnqueteActiviteRevisionMesures(props) {
   const {
     enquete_reponse_ids: { activite_id },
   } = enqueteReponse;
-  const { id: userId } = useContext(UserContext);
+  const { id: userId } = useUser();
   const [updateEnquete] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES,
     {

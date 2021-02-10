@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
@@ -18,7 +18,7 @@ export function EnquetePopulationsMAJ(props) {
     section,
     step,
   } = props;
-  const { id: userId } = useContext(UserContext);
+  const { id: userId } = useUser();
   const {
     enquete_reponse_ids: { populations_id },
   } = enqueteReponse;

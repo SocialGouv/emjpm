@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { MesureBadge } from "~/containers/MesureBadge";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import Link from "./Link";
 
@@ -26,7 +26,7 @@ function MandataireBadge({ mandataire }) {
 }
 
 function Navigation({ links }) {
-  const user = useContext(UserContext);
+  const user = useUser();
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">

@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/containers/MagistratMesureMandataire/queries";
 import { MAGISTRAT_MESURES_QUERY } from "~/containers/MagistratMesures/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { magistratMesureDeleteSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Input } from "~/components";
 
@@ -21,7 +21,7 @@ export function MagistratMesureDeleteForm(props) {
 
   const {
     magistrat: { ti_id: tiId },
-  } = useContext(UserContext);
+  } = useUser();
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);
 

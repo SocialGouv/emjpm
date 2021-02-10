@@ -3,7 +3,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
 import { CREATE_LB_USER_PREPOSE } from "./mutations";
@@ -11,7 +11,7 @@ import { ETABLISSEMENTS } from "./queries";
 
 export function ListeBlanchePreposeCreate() {
   const apolloClient = useApolloClient();
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
   const history = useHistory();
 
   const [createLbPrepose] = useMutation(CREATE_LB_USER_PREPOSE, {

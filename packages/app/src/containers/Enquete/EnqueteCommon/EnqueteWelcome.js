@@ -4,7 +4,7 @@ import { Box, Button, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { EnqueteAlreadySubmitted } from "./EnqueteAlreadySubmitted";
 
@@ -35,7 +35,7 @@ export function EnqueteWelcome({
 }) {
   const { id: enqueteId } = enquete;
 
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
 
   return enqueteReponse.status !== "draft" ? (
     <EnqueteAlreadySubmitted enquete={enquete} goToFirstPage={goToFirstPage} />

@@ -11,7 +11,7 @@ import { Box, Flex } from "rebass";
 import useQueryReady from "~/hooks/useQueryReady";
 import { Link } from "~/containers/Commons";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Button, Card, CheckBox, Input, Select } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { createDepartementOptions } from "~/utils/geodata";
@@ -27,7 +27,7 @@ const TYPE_OPTIONS = [
 function ListeBlancheFilter() {
   const ref = useRef();
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
-  const user = useContext(UserContext);
+  const user = useUser();
   const { loading, error, filters, onFilterChange } = useContext(
     FiltersContextSerializable
   );

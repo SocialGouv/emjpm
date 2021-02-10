@@ -7,7 +7,7 @@ import { Box } from "rebass";
 import useQueryReady from "~/hooks/useQueryReady";
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import { formatTribunauxOptions } from "~/formatters/tribunaux";
 
@@ -19,7 +19,7 @@ export function MesureEdit() {
   const history = useHistory();
   const mesureToEdit = useContext(MesureContext);
 
-  const currentUser = useContext(UserContext);
+  const currentUser = useUser();
 
   const { service = {}, type, mandataire } = currentUser;
   const { service_antennes = [] } = service;

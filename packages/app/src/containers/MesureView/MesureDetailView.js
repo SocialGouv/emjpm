@@ -3,7 +3,7 @@ import { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import { Heading } from "~/components";
 
@@ -31,7 +31,7 @@ function MesureDetailView({ mesure, ...props }) {
     id,
   } = mesure;
 
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
   const userBasePath = getUserBasePath({ type });
 
   const {

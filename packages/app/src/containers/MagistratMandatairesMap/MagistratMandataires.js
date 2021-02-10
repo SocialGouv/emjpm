@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import {
   MANDATAIRE_IND,
   MANDATAIRE_PRE,
@@ -14,7 +14,7 @@ import { filterGestionnairesByDiscriminator } from "./utils";
 import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
 
 function MagistratMandataires() {
-  const { magistrat } = useContext(UserContext);
+  const { magistrat } = useUser();
   const { ti_id } = magistrat;
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRES, {

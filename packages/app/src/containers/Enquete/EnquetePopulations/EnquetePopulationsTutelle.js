@@ -1,7 +1,7 @@
 import { useContext, useMemo } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
@@ -21,7 +21,7 @@ export function EnquetePopulationsTutelle(props) {
   const {
     enquete_reponse_ids: { populations_id },
   } = enqueteReponse;
-  const { id: userId } = useContext(UserContext);
+  const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_TUTELLE, {
     variables: {
       id: populations_id,

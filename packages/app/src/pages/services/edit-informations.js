@@ -3,13 +3,13 @@ import { useContext } from "react";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutServices } from "~/containers/Layout";
 import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 export default function EditInformations() {
   const {
     service: { id: serviceId },
-  } = useContext(UserContext);
+  } = useUser();
   return (
     <LayoutServices>
       <BoxWrapper mt={6}>

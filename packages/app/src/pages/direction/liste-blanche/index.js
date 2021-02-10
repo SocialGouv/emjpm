@@ -8,10 +8,10 @@ import { LayoutDirection } from "~/containers/Layout";
 import { ListeBlanche } from "~/containers/ListeBlanche";
 import { ListeBlancheFilter } from "~/containers/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/containers/ListeBlancheSummary";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 function ListBlanchePage() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const [direction] = user.directions;
   const initialFilters = {};
 

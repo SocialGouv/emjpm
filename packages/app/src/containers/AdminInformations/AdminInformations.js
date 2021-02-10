@@ -5,13 +5,13 @@ import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Card, Heading } from "~/components";
 
 import { boxStyle, flexStyle, iconTextStyle } from "./style";
 
 function AdminInformations(props) {
-  const { email, nom, prenom } = useContext(UserContext);
+  const { email, nom, prenom } = useUser();
   return (
     <Box {...props}>
       <Card p="5">

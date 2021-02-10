@@ -6,7 +6,7 @@ import { Box } from "rebass";
 
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 import { MesureDeleteForm } from "./MesureDeleteForm";
@@ -16,7 +16,7 @@ import { MesureDeleteStyle } from "./style";
 function MesureDelete(props) {
   const history = useHistory();
   const mesure = useContext(MesureContext);
-  const { type, service = {}, mandataire } = useContext(UserContext);
+  const { type, service = {}, mandataire } = useUser();
   const userBasePath = getUserBasePath({ type });
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);

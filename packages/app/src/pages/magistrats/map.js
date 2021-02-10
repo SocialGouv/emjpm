@@ -5,10 +5,10 @@ import { LayoutMagistratMap } from "~/containers/Layout";
 import { MagistratMandatairesMap } from "~/containers/MagistratMandatairesMap";
 import { MagistratMapMandatairesPanelList } from "~/containers/MagistratMapMandatairesPanelList";
 import { MapContextProvider } from "~/containers/Map/context";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 function Map() {
-  const { magistrat } = useContext(UserContext);
+  const { magistrat } = useUser();
   const {
     ti: { latitude, longitude },
   } = magistrat;
