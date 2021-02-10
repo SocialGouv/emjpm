@@ -4,7 +4,7 @@ import { Box } from "rebass";
 import { Header } from "~/containers/Header";
 import { Navigation } from "~/containers/Navigation";
 import { BoxWrapper } from "~/components/Grid";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 const navigationLinks = [
   {
@@ -24,7 +24,7 @@ const navigationLinks = [
 function LayoutServicesMap(props) {
   const { children } = props;
 
-  const user = useContext(UserContext);
+  const user = useUser();
 
   let links = navigationLinks;
 

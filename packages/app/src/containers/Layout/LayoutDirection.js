@@ -4,11 +4,11 @@ import { Box } from "rebass";
 import { Footer } from "~/containers/Footer";
 import { Header } from "~/containers/Header";
 import { Navigation } from "~/containers/Navigation";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function LayoutDirection({ children }) {
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
   const navigationLinks = [
     {
       title: "Statistiques",

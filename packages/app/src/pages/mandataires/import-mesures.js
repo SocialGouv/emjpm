@@ -5,11 +5,11 @@ import { NavLink } from "theme-ui";
 import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireMesureImport } from "~/containers/MandataireMesureImport";
 import { MandataireOcmiMesureImport } from "~/containers/MandataireOcmiMesureImport";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ImportMesures() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const { mandataire = {} } = user;
   const { lb_user = {} } = mandataire;
   const { ocmi_mandataire } = lb_user;

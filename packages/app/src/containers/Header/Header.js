@@ -4,7 +4,7 @@ import { Fragment, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Link } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { DropDownMenu, Header as HeaderComponent } from "~/components";
 import { useAuth } from "~/user/Auth";
 
@@ -13,7 +13,7 @@ export const defaultLinks = [
 ];
 
 function Header(props) {
-  const { email } = useContext(UserContext);
+  const { email } = useUser();
   const apolloClient = useApolloClient();
   const { dropDownLinks } = props;
   const history = useHistory();

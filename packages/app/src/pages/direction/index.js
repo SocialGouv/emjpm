@@ -16,7 +16,7 @@ import { MandatairesDisponibility } from "~/containers/DirectionMandatairesDispo
 import { MandatairesSubNavigation } from "~/containers/DirectionMandatairesSubNavigation";
 import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
 import { LayoutDirection } from "~/containers/Layout";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import {
   BoxWrapper,
   FlexWrapper,
@@ -25,7 +25,7 @@ import {
 } from "~/components/Grid";
 
 export default function DirectionPage() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const [direction] = user.directions;
   const initialFilters = {};
 

@@ -2,12 +2,12 @@ import { useContext } from "react";
 
 import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { PATH } from "~/constants/basePath";
 import { BoxWrapper } from "~/components/Grid";
 
 function EditInformations() {
-  const { id, type } = useContext(UserContext);
+  const { id, type } = useUser();
 
   const redirectLink = `${PATH[type]}/informations`;
 

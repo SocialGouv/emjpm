@@ -3,11 +3,11 @@ import { Box, Flex } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
 import { MesureExportExcelButton } from "~/containers/MesureExportExcelButton";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 function MesureListButtonBar() {
-  const { type } = useContext(UserContext);
+  const { type } = useUser();
 
   const path = getUserBasePath({ type });
 

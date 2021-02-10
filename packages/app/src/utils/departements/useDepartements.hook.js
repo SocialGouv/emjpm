@@ -2,7 +2,7 @@ import { gql } from "apollo-boost";
 import { useContext } from "react";
 import { useQuery } from "@apollo/client";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 const GET_FILTERED_DEPARTEMENTS = gql`
   query filtered_departements($filterCodes: [String!]) {
@@ -43,7 +43,7 @@ const GET_DIRECTION_REGION_DEPARTEMENT = gql`
 `;
 
 export function useDepartements({ all = false, ...queryOptions } = {}) {
-  const user = useContext(UserContext);
+  const user = useUser();
 
   const { data } = useQuery(GET_DIRECTION_REGION_DEPARTEMENT, {
     skip: all || user?.type !== "direction",

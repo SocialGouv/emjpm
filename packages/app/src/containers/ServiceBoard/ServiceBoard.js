@@ -2,11 +2,11 @@ import { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Heading, Text } from "~/components";
 
 function ServiceBoard() {
-  const { service } = useContext(UserContext);
+  const { service } = useUser();
   const {
     mesures_in_progress = 0,
     mesures_awaiting = 0,

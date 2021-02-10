@@ -14,11 +14,11 @@ import { MandatairesList } from "~/containers/DirectionMandatairesList";
 import { MandatairesSubNavigation } from "~/containers/DirectionMandatairesSubNavigation";
 import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
 import { LayoutDirection } from "~/containers/Layout";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/components/Grid";
 
 function Mandataires() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const [direction] = user.directions;
   const initialFilters = {};
 

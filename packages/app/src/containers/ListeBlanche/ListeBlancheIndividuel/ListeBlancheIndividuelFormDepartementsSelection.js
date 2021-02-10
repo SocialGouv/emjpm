@@ -3,7 +3,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { Fragment, useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { RadioGroup } from "~/components";
 
 function canModifyAgrement(user, departementCode) {
@@ -18,7 +18,7 @@ function canModifyAgrement(user, departementCode) {
 
 export function ListeBlancheIndividuelFormDepartementsSelection(props) {
   const { departements, onRemove, editMode, setDepartementFinanceur } = props;
-  const user = useContext(UserContext);
+  const user = useUser();
 
   const options = departements.map((d) => {
     return {

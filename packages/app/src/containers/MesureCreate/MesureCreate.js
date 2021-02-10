@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import getLocation from "~/query-service/emjpm-hasura/getLocation";
 import { formatTribunauxOptions } from "~/formatters/tribunaux";
@@ -19,7 +19,7 @@ export function MesureCreate() {
   const history = useHistory();
 
   const client = useApolloClient();
-  const currentUser = useContext(UserContext);
+  const currentUser = useUser();
 
   const { service = {}, type, mandataire } = currentUser;
   const { service_antennes = [] } = service;

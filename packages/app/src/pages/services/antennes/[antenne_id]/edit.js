@@ -4,13 +4,13 @@ import { useParams } from "react-router-dom";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutServices } from "~/containers/Layout";
 import { ServiceAntenneEdit } from "~/containers/ServiceAntenneEdit";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ServiceAntenneEditPage() {
   const params = useParams();
   const antenneId = parseInt(params.antenne_id);
-  const user = useContext(UserContext);
+  const user = useUser();
 
   return (
     <LayoutServices>

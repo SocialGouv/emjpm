@@ -7,7 +7,7 @@ import { Box } from "rebass";
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 import { MesureReactivateForm } from "./MesureReactivateForm";
@@ -17,7 +17,7 @@ import { MesureReactivateStyle } from "./style";
 function MesureReactivate() {
   const history = useHistory();
   const mesure = useContext(MesureContext);
-  const { type, service = {}, mandataire } = useContext(UserContext);
+  const { type, service = {}, mandataire } = useUser();
   const userBasePath = getUserBasePath({ type });
 
   const [recalculateMesures] = useMutation(CALCULATE_MESURES);

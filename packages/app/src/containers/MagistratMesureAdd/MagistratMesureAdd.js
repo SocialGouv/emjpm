@@ -7,7 +7,7 @@ import { GESTIONNAIRES } from "~/containers/MagistratMesureMandataire/queries";
 import { MagistratMesureMandataireTitle } from "~/containers/MagistratMesureMandataireTitle";
 import { MAGISTRAT_MESURES_QUERY } from "~/containers/MagistratMesures/queries";
 import { MagistratMesureServiceTitle } from "~/containers/MagistratMesureServiceTitle";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
@@ -26,7 +26,7 @@ function MagistratMesureAdd(props) {
   const {
     cabinet,
     magistrat: { ti_id: tiId, id: magistratId },
-  } = useContext(UserContext);
+  } = useUser();
 
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
 

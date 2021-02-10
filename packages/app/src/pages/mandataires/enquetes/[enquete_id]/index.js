@@ -7,12 +7,12 @@ import { EnqueteReponse } from "~/containers/Enquete";
 import { useCurrentStepFromUrl } from "~/containers/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
 import { LayoutMandataire } from "~/containers/Layout";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function MandataireEnquetePage() {
   const history = useHistory();
-  const { id: userId } = useContext(UserContext);
+  const { id: userId } = useUser();
   const currentStep = useCurrentStepFromUrl();
 
   const query = useParams();

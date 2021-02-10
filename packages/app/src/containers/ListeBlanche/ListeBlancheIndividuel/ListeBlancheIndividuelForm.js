@@ -13,7 +13,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
 import { formatFormInput } from "~/utils/form";
@@ -96,7 +96,7 @@ export function ListeBlancheIndividuelForm(props) {
     validationSchema,
   });
 
-  const user = useContext(UserContext);
+  const user = useUser();
 
   useDebouncedEffect(
     () => {

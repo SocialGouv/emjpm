@@ -3,11 +3,11 @@ import { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/containers/Commons";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Heading, Text } from "~/components";
 
 function MandataireBoard() {
-  const { type, mandataire } = useContext(UserContext);
+  const { type, mandataire } = useUser();
   const {
     mesures_en_cours = 0,
     mesures_en_attente = 0,

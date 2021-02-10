@@ -3,7 +3,7 @@ import { Smartphone } from "@styled-icons/material/Smartphone";
 import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Card, Heading } from "~/components";
 
 import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
@@ -11,7 +11,7 @@ import { boxStyle, iconTextStyle, innerTextStyle } from "./style";
 function MagistratTribunalInformations(props) {
   const {
     magistrat: { ti },
-  } = useContext(UserContext);
+  } = useUser();
   return (
     <Box {...props}>
       <Card p="5">

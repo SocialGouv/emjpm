@@ -3,14 +3,14 @@ import { useContext, useMemo } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { MapCluster, MapContainer } from "~/containers/Map";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 
 import { MESURES } from "./queries";
 
 function MandataireMap({ selectMesures, selectedMesuresIds }) {
   const {
     mandataire: { longitude, latitude },
-  } = useContext(UserContext);
+  } = useUser();
 
   const { data, loading, error } = useQuery(MESURES);
 

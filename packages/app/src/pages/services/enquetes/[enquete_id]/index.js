@@ -7,7 +7,7 @@ import { EnqueteReponse } from "~/containers/Enquete";
 import { useCurrentStepFromUrl } from "~/containers/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
 import { LayoutServices } from "~/containers/Layout";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function EnquetePage() {
@@ -15,7 +15,7 @@ function EnquetePage() {
   const enqueteId = Number(query.enquete_id);
 
   const history = useHistory();
-  const { id: userId } = useContext(UserContext);
+  const { id: userId } = useUser();
 
   const currentStep = useCurrentStepFromUrl();
 

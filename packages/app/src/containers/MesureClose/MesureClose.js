@@ -7,7 +7,7 @@ import { Box } from "rebass";
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 import { MesureCloseForm } from "./MesureCloseForm";
@@ -18,7 +18,7 @@ function MesureClose(props) {
   const history = useHistory();
   const mesure = useContext(MesureContext);
 
-  const currentUser = useContext(UserContext);
+  const currentUser = useUser();
 
   const { service, type, mandataire } = currentUser;
 

@@ -4,7 +4,7 @@ import { Box, Card, Flex, Link as RebassLink } from "rebass";
 import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 import { Link } from "~/components/Link";
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { Heading, Text } from "~/components";
 
 const COLORS = [
@@ -61,7 +61,7 @@ const COLORS = [
 ];
 
 function StatisticMesureNature() {
-  const user = useContext(UserContext);
+  const user = useUser();
   const { statistics = {} } = user;
   const { natureStatistics = [] } = statistics;
 

@@ -3,7 +3,7 @@ import { Export } from "@styled-icons/boxicons-regular/Export";
 import { useContext } from "react";
 import { Button } from "rebass";
 
-import { UserContext } from "~/containers/UserContext";
+import useUser from "~/hooks/useUser";
 import { b64toBlob } from "~/utils/std/b64toBlob";
 
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
@@ -18,7 +18,7 @@ const downloadMesuresFile = async (b64Data) => {
 };
 
 function MesureExportExcelButton(props) {
-  const { id: userId, service_members = [] } = useContext(UserContext);
+  const { id: userId, service_members = [] } = useUser();
   const [service_member] = service_members;
   const service = service_member ? service_member.service : undefined;
 
