@@ -6,6 +6,7 @@ import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card, Text } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
@@ -70,12 +71,8 @@ function AdminServices() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.services_aggregate.aggregate;

@@ -3,6 +3,7 @@ import { Lock } from "@styled-icons/boxicons-solid/Lock";
 import { useContext, useState } from "react";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card, Text } from "~/components";
@@ -112,12 +113,8 @@ function AdminTribunaux() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.tis_aggregate.aggregate;

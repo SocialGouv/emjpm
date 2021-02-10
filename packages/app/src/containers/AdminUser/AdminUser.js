@@ -4,6 +4,7 @@ import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
 import { Box, Card } from "rebass";
 import { useParams } from "react-router-dom";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
 import { AdminUserActivation } from "~/containers/AdminUserActivation";
 import { AdminDirectionType } from "~/containers/AdminUserDirection";
@@ -25,12 +26,8 @@ function AdminUser() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { users_by_pk: user } = data;

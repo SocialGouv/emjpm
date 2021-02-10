@@ -3,6 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
@@ -42,12 +43,8 @@ const MandataireEditInformations = ({
 
   const client = useApolloClient();
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const user = data.users[0];

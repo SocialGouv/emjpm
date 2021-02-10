@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card, Heading } from "~/components";
 import { captureException } from "~/user/sentry";
@@ -66,12 +67,8 @@ function AdminEditorRequest() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { editor_token_requests: editorTokenRequests } = data;

@@ -3,6 +3,7 @@ import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import { Fragment, useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import menuStepperStyle from "~/containers/Enquete/EnqueteCommon/EnqueteMenuStepper/style";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 
@@ -36,15 +37,8 @@ export function EnqueteImportPanel(props) {
     }
   });
 
-  if (error) {
-    return <div>error</div>;
-  }
-  if (loading) {
-    return (
-      <Box p={4}>
-        <LoaderCircle size="16" /> Chargement en cours, veuillez patienter...
-      </Box>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   if (uploading) {

@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMandataireMapContent } from "./MagistratMandataireMapContent";
@@ -15,12 +16,8 @@ function MagistratMandataireMap(props) {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
   const { mesures } = data;
   return (
