@@ -17,11 +17,11 @@ const reducer = (state, { type, payload }) => {
     case "hasError":
       return { ...state, hasError: payload.hasError };
     case "wait": {
-      const waiting = ++state.waiting;
+      const waiting = state.waiting + 1;
       return { ...state, waiting, isLoading: waiting > 0 };
     }
     case "done": {
-      const waiting = --state.waiting;
+      const waiting = state.waiting - 1;
       return { ...state, waiting, isLoading: waiting > 0 };
     }
   }
