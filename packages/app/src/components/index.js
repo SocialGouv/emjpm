@@ -25,5 +25,7 @@ export { default as GlobalLoader } from "./GlobalLoader";
 export { default as AppForm } from "./AppForm";
 
 export { default as ErrorBoundary } from "./ErrorBoundary";
+export { default as Suspense } from "./Suspense";
+
 export { default as AutoReload } from "./AutoReload";
 export { default as NotFound } from "./NotFound";
