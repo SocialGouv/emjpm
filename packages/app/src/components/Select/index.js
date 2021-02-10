@@ -46,5 +46,5 @@ Select.defaultProps = {
   hasError: false,
   size: "large",
   noOptionsMessage: () => "Aucune option",
-  defaultLoadingMessage: () => "Chargement des résultats en cours",
+  loadingMessage: () => "Chargement des résultats en cours",
 };
