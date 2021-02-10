@@ -4,6 +4,7 @@ import { useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { UserContext } from "~/containers/UserContext";
@@ -55,12 +56,8 @@ export function MesureEdit() {
     },
   });
 
-  if (loading) {
-    return <Box p={1}>Chargement...</Box>;
-  }
-
-  if (error) {
-    return <Box p={1}>Erreur...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const handleSubmit = async (values, { setSubmitting }) => {

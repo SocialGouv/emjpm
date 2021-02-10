@@ -4,19 +4,20 @@ import { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Heading } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { SERVICE } from "./queries";
 
 function MagistratMesureServiceTitle(props) {
   const { id } = props;
-  const { data, loading } = useQuery(SERVICE, {
+  const { data, loading, error } = useQuery(SERVICE, {
     variables: {
       id,
     },
   });
 
-  if (loading) {
-    return <Box p={1}>{"Chargement..."}</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const [service] = data.services;

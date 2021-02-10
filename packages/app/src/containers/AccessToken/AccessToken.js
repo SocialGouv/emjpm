@@ -6,6 +6,8 @@ import { Box, Flex, Text } from "rebass";
 import { AccessTokenDelete } from "~/containers/AccessTokenDelete";
 import { Heading } from "~/components";
 
+import useQueryReady from "~/hooks/useQueryReady";
+
 import { USER_TOKEN } from "./queries";
 
 const innerTextStyle = {
@@ -26,12 +28,8 @@ function AccessToken(props) {
     },
   });
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { access_tokens } = data;

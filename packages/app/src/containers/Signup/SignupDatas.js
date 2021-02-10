@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { SIGNUP_DATA } from "./queries";
 
@@ -7,12 +8,8 @@ function SignupDatas(props) {
 
   const { data, loading, error } = useQuery(SIGNUP_DATA);
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error...</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const tiDatas = data.tis;

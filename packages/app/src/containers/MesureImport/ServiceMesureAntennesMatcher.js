@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Select, Text } from "~/components";
 
 import { SERVICE_ANTENNES } from "./queries";
@@ -24,12 +25,8 @@ const ServiceMesureAntennesMatcher = ({
     [serviceAntennes]
   );
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const handleSubmit = async (event) => {

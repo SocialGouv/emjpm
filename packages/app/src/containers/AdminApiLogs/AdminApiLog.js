@@ -5,6 +5,7 @@ import { Box, Flex } from "rebass";
 
 import { Card, Text } from "~/components";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { API_LOG_BY_ID } from "./queries";
 
 function AdminApiLog({ id }) {
@@ -12,13 +13,14 @@ function AdminApiLog({ id }) {
     variables: { id },
   });
 
-  if (loading) {
-    return "Loading...";
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
+
   const [log] = data?.api_logs;
 
-  if (error || !log) {
-    return "Error...";
+  if (!log) {
+    return "Error: Log Not Found";
   }
 
   return (

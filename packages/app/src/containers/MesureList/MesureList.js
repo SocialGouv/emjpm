@@ -5,6 +5,7 @@ import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MesureListFilters/context";
 import { UserContext } from "~/containers/UserContext";
 import { getUserBasePath } from "~/constants";
@@ -76,16 +77,8 @@ function MesureList() {
     history.push(`${userBasePath}/mesures/${id}`);
   }
 
-  if (loading) {
-    return <Box mt={3}>{"Chargement..."}</Box>;
-  }
-
-  if (error) {
-    return (
-      <Box mt={3}>
-        {"Une erreur s'est produite. Veuillez réessayer ultérieurement."}
-      </Box>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.mesures_aggregate.aggregate;

@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState, useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Card } from "~/components";
 
 import { EDIT_SERVICE } from "./mutations";
@@ -29,12 +30,8 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
     },
   });
 
-  if (loading) {
-    return <div>Chargement...</div>;
-  }
-
-  if (error) {
-    return <div>Une erreur est survenue, veuillez réessayer plus tard</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { services_by_pk: service } = data;

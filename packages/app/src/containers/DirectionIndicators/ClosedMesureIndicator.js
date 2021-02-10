@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Indicator } from "~/components";
 
@@ -17,11 +18,8 @@ function ClosedMesureIndicator() {
     },
   });
 
-  if (error) {
-    return <div>{error}</div>;
-  }
-  if (loading) {
-    return <div>loading...</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const {

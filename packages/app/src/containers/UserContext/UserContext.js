@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { isService, isMandataire } from "@emjpm/biz";
 import { createContext, Fragment, useMemo } from "react";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { setUser } from "~/user/sentry";
 
 import {
@@ -32,7 +33,7 @@ function UserProvider(props) {
   if (isMandataire({ type }) || isService({ type })) {
     variables.endDate = endDate;
   }
-  const { data } = useQuery(QUERY_TYPE[type], {
+  const { data, loading, error } = useQuery(QUERY_TYPE[type], {
     onCompleted: ({ users_by_pk: user }) => {
       if (user) {
         setUser({ id: user.id, role: type });
@@ -41,8 +42,8 @@ function UserProvider(props) {
     variables,
   });
 
-  if (!data) {
-    return <Fragment>Chargement...</Fragment>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const user = data.users_by_pk;

@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { Box, Card, Flex } from "rebass";
 
 import { Button, Heading, Input, Text } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { IMPORT_FINESS } from "./mutations";
 import { PROCESSUS_STATE } from "./queries";
@@ -34,13 +35,10 @@ export function EtablissementImport() {
     },
   });
 
-  if (error) {
-    return <Text>Oups, une erreur est survenue.</Text>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
-  if (loading) {
-    return <Box>Chargement...</Box>;
-  }
   const processusState = data.processus_states_by_pk;
 
   if (processusState && processusState.start_date && !processusState.end_date) {

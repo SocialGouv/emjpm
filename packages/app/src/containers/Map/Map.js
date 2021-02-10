@@ -1,10 +1,11 @@
-import React, { Suspense } from "react";
+import { lazy } from "react";
+import { Suspense } from "~/components";
 
-const LazyMap = React.lazy(() => import("./Lazy/Map"));
+const LazyMap = lazy(() => import("./Lazy/Map"));
 
 function Map(props) {
   return (
-    <Suspense fallback={<div>Chargement...</div>}>
+    <Suspense>
       <LazyMap {...props} />
     </Suspense>
   );

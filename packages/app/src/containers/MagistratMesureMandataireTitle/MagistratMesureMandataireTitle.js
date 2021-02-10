@@ -4,20 +4,21 @@ import { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Heading } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { MANDATAIRE } from "./queries";
 
 function MagistratMesureMandataireTitle(props) {
   const { id } = props;
 
-  const { data, loading } = useQuery(MANDATAIRE, {
+  const { data, loading, error } = useQuery(MANDATAIRE, {
     variables: {
       id,
     },
   });
 
-  if (loading) {
-    return <Box p={1}>{"Chargement..."}</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const [mandataire] = data.mandataires;

@@ -5,15 +5,16 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { Card } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { ENQUETES } from "./queries";
 
 export function DirectionEnquetesList() {
   const history = useHistory();
-  const { data, loading } = useQuery(ENQUETES);
+  const { data, loading, error } = useQuery(ENQUETES);
 
-  if (loading) {
-    return <Box p={2}>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { enquetes } = data;

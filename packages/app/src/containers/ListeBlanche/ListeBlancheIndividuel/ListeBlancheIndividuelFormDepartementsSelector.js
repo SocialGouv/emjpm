@@ -2,15 +2,17 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { Box } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Select } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 export function ListeBlancheIndividuelFormDepartementsSelector(props) {
   const { departements = [], onAdd } = props;
   const queryResults = useDepartements();
+  const { loading, error } = queryResults;
 
-  if (queryResults.DepartementFormUtilloading) {
-    return <Box>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const options = !queryResults.departements

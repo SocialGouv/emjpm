@@ -1,11 +1,12 @@
-import { lazy, Suspense } from "react";
+import { lazy } from "react";
 import { importMDX } from "mdx.macro";
+import { Suspense } from "~/components";
 
 const Content = lazy(() => importMDX("./MentionsLegales.md"));
 export function MentionsLegales(props) {
   return (
     <div>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense>
         <Content />
       </Suspense>
     </div>

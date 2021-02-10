@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useContext, useMemo } from "react";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { MapCluster, MapContainer } from "~/containers/Map";
 import { UserContext } from "~/containers/UserContext";
 
@@ -26,12 +27,8 @@ function MandataireMap({ selectMesures, selectedMesuresIds }) {
     [data, selectedMesuresIds]
   );
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   return (
