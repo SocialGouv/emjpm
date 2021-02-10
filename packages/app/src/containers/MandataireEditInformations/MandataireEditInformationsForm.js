@@ -1,6 +1,7 @@
+import { useMemo, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import { uniq } from "lodash";
-import { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {
@@ -73,6 +74,12 @@ function MandataireEditInformationsForm(props) {
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
   });
+
+  const history = useHistory();
+  const saveAndQuit = useCallback(async () => {
+    formik.submitForm();
+    history.push(cancelLink);
+  }, [formik, history, cancelLink]);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -250,13 +257,22 @@ function MandataireEditInformationsForm(props) {
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>
-        <Box>
+        <Box mr="2">
           <Button
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
           >
             Enregistrer
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            disabled={formik.isSubmitting}
+            isLoading={formik.isSubmitting}
+            onClick={saveAndQuit}
+          >
+            Terminer
           </Button>
         </Box>
       </Flex>
