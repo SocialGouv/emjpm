@@ -22,6 +22,8 @@ import { cardStyle, descriptionStyle, labelStyle } from "./style";
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
 import { impersonateLogin, useAuth } from "~/user/Auth";
 
+import useQueryReady from "~/hooks/useQueryReady";
+
 function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;
 
@@ -138,13 +140,8 @@ function AdminUsers() {
     },
   });
 
-  if (loading) {
-    return <Text>Chargement...</Text>;
-  }
-
-  if (error) {
-    console.error(error);
-    return <Text>Oups, une erreur est survenue.</Text>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.users_aggregate.aggregate;

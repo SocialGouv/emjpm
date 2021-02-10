@@ -3,6 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { Card } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { captureException } from "~/user/sentry";
 
@@ -19,12 +20,8 @@ export function ListeBlancheServiceUpdate(props) {
   const { departements } = useDepartements();
   const [updateService] = useMutation(UPDATE_SERVICE);
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { services_by_pk: service } = data;

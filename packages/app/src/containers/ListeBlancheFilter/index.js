@@ -8,6 +8,7 @@ import React, {
 } from "react";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Link } from "~/containers/Commons";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { UserContext } from "~/containers/UserContext";
@@ -67,16 +68,8 @@ function ListeBlancheFilter() {
     };
   }, [ref, setButtonsEnabled]);
 
-  if (loading) {
-    return <div>{"Chargement..."}</div>;
-  }
-
-  if (error) {
-    return (
-      <div>
-        {"Oups, une erreur s'est produite. Veuillez réessayer ultérieurement."}
-      </div>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const departmentOptions = createDepartementOptions(departements, {

@@ -7,6 +7,7 @@ import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
 import { ETABLISSEMENTS } from "./queries";
@@ -77,12 +78,8 @@ export function AdminEtablissements() {
     },
   });
 
-  if (error) {
-    return <Text>Oups, une erreur est survenue.</Text>;
-  }
-
-  if (loading) {
-    return <Box>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   return (

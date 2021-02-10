@@ -2,6 +2,7 @@ import { Fragment, useContext } from "react";
 import { useMutation } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { UserContext } from "~/containers/UserContext";
 import { Link } from "~/components/Link";
 import { Button } from "~/components";
@@ -11,12 +12,12 @@ import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 export function AdminMandataireListeBlanche(props) {
   const { lb_user, mandataire } = props;
   const user = useContext(UserContext);
-  const [updateMandataire, { loading }] = useMutation(
+  const [updateMandataire, { loading, error }] = useMutation(
     LISTE_BLANCHE_ASSOCIATION
   );
 
-  if (loading) {
-    return <Box>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   return (

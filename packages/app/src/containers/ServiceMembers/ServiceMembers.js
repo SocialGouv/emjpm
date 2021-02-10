@@ -19,6 +19,8 @@ import {
   listStyle,
 } from "./styles";
 
+import useQueryReady from "~/hooks/useQueryReady";
+
 function ServiceMembers(props) {
   const { isAdmin, service, userId } = props;
   const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
@@ -30,12 +32,8 @@ function ServiceMembers(props) {
     variables: { serviceId: service.id },
   });
 
-  if (loading) {
-    return "Loading...";
-  }
-
-  if (error) {
-    return "Error...";
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const handleDelete = async (id) => {

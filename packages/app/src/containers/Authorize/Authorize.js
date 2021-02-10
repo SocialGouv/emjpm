@@ -4,6 +4,7 @@ import { Box } from "rebass";
 
 import config from "~/config";
 import { Button, Card, Heading, Text } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { EDITOR } from "./queries";
 
@@ -27,11 +28,8 @@ function Authorize(props) {
     }
   });
 
-  if (error) {
-    return <Box>Erreur...</Box>;
-  }
-  if (loading) {
-    return <Box>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { editor } = data;

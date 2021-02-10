@@ -8,6 +8,7 @@ import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 import { SERVICE_MEMBER_INVITATION } from "./queries";
 import signup from "./signup";
 import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function SignupServiceInvitation(props) {
   const history = useHistory();
@@ -23,8 +24,8 @@ export function SignupServiceInvitation(props) {
     variables: { token },
   });
 
-  if (loading) {
-    return "Loading...";
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   if (error || !data.service_member_invitations.length) {

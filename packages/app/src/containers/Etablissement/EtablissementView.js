@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
-import { Box, Text } from "rebass";
+
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { EtablissementViewForm } from "./EtablissementViewForm";
 import { ETABLISSEMENT } from "./queries";
@@ -12,12 +13,8 @@ export function EtablissementView() {
     variables: { id },
   });
 
-  if (error) {
-    return <Text>Oups, une erreur est survenue.</Text>;
-  }
-
-  if (loading) {
-    return <Box>Chargement...</Box>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   if (data && data.etablissements_by_pk) {

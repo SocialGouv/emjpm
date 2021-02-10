@@ -15,6 +15,8 @@ import {
   listStyle,
 } from "./styles";
 
+import useQueryReady from "~/hooks/useQueryReady";
+
 function ServiceMemberInvitations(props) {
   const { service, isAdmin } = props;
 
@@ -25,12 +27,8 @@ function ServiceMemberInvitations(props) {
     variables: { serviceId: service.id },
   });
 
-  if (loading) {
-    return "Loading...";
-  }
-
-  if (error) {
-    return "Error...";
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const handleDelete = async (id) => {
