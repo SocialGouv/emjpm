@@ -5,7 +5,7 @@ const { confirmationPasswordEmail } = require("~/email/password-confirmation");
 const { User } = require("~/models");
 
 /**
- * Reset password using username, password, new_password and new_password_confirmation return ok
+ * Reset password using email, password, new_password and new_password_confirmation return ok
  */
 const resetPassword = async (req, res) => {
   const errors = validationResult(req);
@@ -13,14 +13,13 @@ const resetPassword = async (req, res) => {
     return res.status(400).json({ errors });
   }
 
-  const { username, password, new_password } = req.body;
+  const { email, password, new_password } = req.body;
   const salt = bcrypt.genSaltSync();
   const newPasswordHash = bcrypt.hashSync(new_password, salt);
 
   try {
     const user = await User.query()
-      .where("username", username)
-      .orWhere("email", username.toLowerCase().trim())
+      .where("email", email.toLowerCase().trim())
       .first();
     user.verifyPassword(password, async function (err, passwordCorrect) {
       if (err) {

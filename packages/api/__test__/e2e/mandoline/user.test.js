@@ -23,8 +23,8 @@ beforeEach(async () => {
 
 async function getUserToken(user) {
   const loginRes = await request(server).post("/api/auth/login").send({
+    email: user.email,
     password: "emjpm2019",
-    username: user.username,
   });
 
   const loginToken = loginRes.body.token;

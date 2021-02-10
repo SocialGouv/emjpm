@@ -64,10 +64,7 @@ function SignupMandataireForm() {
             telephone_portable: values.telephone_portable,
             ville: values.geocode.city,
           },
-          user: {
-            username: user.email,
-            ...user,
-          },
+          user: user,
         };
 
         await signup({

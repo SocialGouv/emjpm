@@ -34,8 +34,8 @@ beforeAll(async () => {
     .limit(1);
 
   const loginRes = await request(server).post("/api/auth/login").send({
+    email: user.email,
     password: "emjpm2019",
-    username: user.username,
   });
 
   const loginToken = await loginRes.body.token;

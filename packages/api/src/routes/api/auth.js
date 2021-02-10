@@ -12,7 +12,7 @@ const jwkController = require("~/controllers/jwk");
 
 router.post(
   "/login",
-  [body("username").not().isEmpty(), body("password").not().isEmpty()],
+  [body("email").not().isEmpty(), body("password").not().isEmpty()],
   login
 );
 
@@ -62,13 +62,10 @@ router.post(
 router.post(
   "/reset-password",
   [
-    body("username").not().isEmpty(),
+    body("email").not().isEmpty(),
     body("password").not().isEmpty(),
     body("new_password_confirmation").not().isEmpty(),
     body("new_password").not().isEmpty(),
-    check("username", "username must be at least 3 characters long").isLength({
-      min: 3,
-    }),
     check("new_password", "new_password_confirmation")
       .exists()
       .withMessage("Votre mot de passe doit ne doit pas être vide")
@@ -97,15 +94,10 @@ router.post(
 router.post(
   "/signup",
   [
-    body("user.username", "Votre nom d'utilisateur ne doit pas être vide")
-      .not()
-      .isEmpty(),
-    check(
-      "user.username",
-      "Votre nom d'utilisateur doit être de 3 caractères minimum"
-    ).isLength({
-      min: 3,
-    }),
+    body("user.email", "Votre email ne doit pas être vide").not().isEmpty(),
+    check("user.email", "Votre email doit être valide")
+      .normalizeEmail()
+      .isEmail(),
     check(
       "user.password",
       "Votre mot de passe doit être de 8 caractères minimum"

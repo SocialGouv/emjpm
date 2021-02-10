@@ -45,10 +45,7 @@ function SignupServiceForm({ serviceDatas }) {
         service: {
           service_id: values.service,
         },
-        user: {
-          username: user.email,
-          ...user,
-        },
+        user: user,
       };
       signup({
         body,

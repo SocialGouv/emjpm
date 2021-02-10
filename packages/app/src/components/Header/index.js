@@ -15,7 +15,7 @@ const BlueUserCircle = styled(UserCircle)`
 function Header(props) {
   const {
     DropDownMenu,
-    username,
+    email,
     dropDownLinks,
     Link,
     disconnect,
@@ -43,7 +43,7 @@ function Header(props) {
             </Box>
             <Box>
               <Text color="black" fontWeight="600" ml={1}>
-                {username}
+                {email}
               </Text>
             </Box>
             <Box height="25px">
@@ -69,7 +69,7 @@ Header.defaultProps = {
   disconnect: null,
   dropDownLinks: [],
   isDisconnected: false,
-  username: null,
+  email: null,
 };
 
 Header.propTypes = {
@@ -83,7 +83,7 @@ Header.propTypes = {
     })
   ),
   isDisconnected: PropTypes.bool,
-  username: PropTypes.string,
+  email: PropTypes.string,
 };
 
 export default Header;

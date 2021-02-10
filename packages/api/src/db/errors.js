@@ -13,8 +13,6 @@ const getErrorMessage = (err) => {
   switch (err.constraint) {
     case "users_email_unique":
       return "Cet email est déjà utilisé.";
-    case "users_username_unique":
-      return "Ce nom d'utilisateur est déjà utilisé.";
     default:
       return "Une erreur est arrivé";
   }

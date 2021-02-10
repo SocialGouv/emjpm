@@ -44,7 +44,6 @@ const defaultRegister = (params) => ({
         : "test123456?",
     prenom: params && params.prenom != undefined ? params.prenom : "testPrenom",
     type: params && params.type != undefined ? params.type : "individuel",
-    username: params && params.username != undefined ? params.username : "toto",
   },
 });
 
@@ -67,7 +66,6 @@ test("should register with good values", async () => {
   expect(lastInsert).toMatchSnapshot({
     created_at: expect.any(Object),
     password: expect.any(String),
-    username: "toto",
   });
 });
 
@@ -114,7 +112,6 @@ test("should add magistrat", async () => {
       ...defaultRegister({
         email: "magistrat@emjpm.fr",
         type: "ti",
-        username: "magistrat",
       }),
       magistrat: {
         cabinet: "2A",
@@ -132,7 +129,7 @@ test("should add magistrat", async () => {
 
   const user = await knex.table("users").orderBy("created_at", "desc").first();
 
-  expect(user.username).toEqual("magistrat");
+  expect(user.email).toEqual("magistrat@emjpm.fr");
   const magistrat = await knex
     .table("magistrat")
     .innerJoin("users", "users.id", "magistrat.user_id")
