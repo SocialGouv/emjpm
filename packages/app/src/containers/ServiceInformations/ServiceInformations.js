@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
 import { Link } from "~/components/Link";
@@ -16,12 +17,8 @@ function ServiceInformations() {
     fetchPolicy: "cache-and-network",
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   // first of the array because it should be only one

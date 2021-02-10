@@ -7,6 +7,7 @@ import { Box, Flex } from "rebass";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { useDebounce } from "~/hooks";
+import useQueryReady from "~/hooks/useQueryReady";
 import { Button, Card, Heading, Spinner } from "~/components";
 
 import { API_LOGS_SEARCH } from "./queries";
@@ -113,19 +114,8 @@ function AdminApiLogs() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return (
-      <div>
-        Oups, une erreur est survenue
-        <span role="img" aria-hidden="true">
-          😕👇
-        </span>
-      </div>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data?.api_logs_aggregate?.aggregate;

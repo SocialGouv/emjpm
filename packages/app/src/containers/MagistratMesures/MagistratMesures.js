@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MagistratFilters/context";
 import useUser from "~/hooks/useUser";
 import MesureListItem from "~/containers/MesureListItem";
@@ -44,12 +45,8 @@ function MagistratMesures() {
     history.push(`/magistrats/mesures/${id}`);
   }
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.mesures_aggregate.aggregate;

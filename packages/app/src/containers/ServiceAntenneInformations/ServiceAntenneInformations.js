@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AntenneEditLinkButton } from "~/containers/Commons";
 import { Card, Heading } from "~/components";
 
@@ -18,12 +19,8 @@ function ServiceAntenneInformations(props) {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { service_antenne } = data;

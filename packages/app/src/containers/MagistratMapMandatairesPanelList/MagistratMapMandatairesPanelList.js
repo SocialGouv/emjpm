@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { formatMandatairesList } from "~/containers/MagistratMandatairesList/utils";
 import { MapContext } from "~/containers/Map/context";
 import useUser from "~/hooks/useUser";
@@ -36,12 +37,8 @@ function MagistratMapMandatairesPanelList() {
     }
   );
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   function selectMarker({ id, discriminator, longitude, latitude }) {

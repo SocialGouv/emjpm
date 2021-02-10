@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { MagistratEditInformationsForm } from "./MagistratEditInformationsForm";
 import { EDIT_USER } from "./mutations";
 import { MAGISTRAT } from "./queries";
@@ -30,12 +31,8 @@ function MagistratEditInformations({ userId, successLink, cancelLink }) {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { users_by_pk: user, tis: tribunaux } = data;

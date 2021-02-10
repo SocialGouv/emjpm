@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AdminUserServiceForm } from "./AdminUserServiceForm";
 import { EDIT_USER } from "./mutations";
 import { USER_SERVICE } from "./queries";
@@ -29,12 +30,8 @@ function AdminUserService({ userId, successLink, cancelLink }) {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { users_by_pk: user } = data;

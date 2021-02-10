@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
@@ -90,12 +91,8 @@ function AdminEditors() {
     },
   });
 
-  if (loading) {
-    return <div>loading</div>;
-  }
-
-  if (error) {
-    return <div>error</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const editors = data.editors;
