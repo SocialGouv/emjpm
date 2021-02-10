@@ -4,12 +4,11 @@ const { User } = require("~/models");
 const authLoginPasswordStrategy = new LocalStrategy(
   {
     passwordField: "password",
-    usernameField: "username",
+    usernameField: "email",
   },
-  function (username, password, done) {
+  function (email, password, done) {
     User.query()
-      .where("username", username)
-      .orWhere("email", username.toLowerCase().trim())
+      .where("email", email.toLowerCase().trim())
       .first()
       .withGraphFetched("[roles, service, direction, mandataire]")
       .then(function (user) {

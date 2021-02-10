@@ -13,7 +13,7 @@ export const defaultLinks = [
 ];
 
 function Header(props) {
-  const { username } = useContext(UserContext);
+  const { email } = useContext(UserContext);
   const apolloClient = useApolloClient();
   const { dropDownLinks } = props;
   const history = useHistory();
@@ -25,7 +25,7 @@ function Header(props) {
   return (
     <Fragment>
       <HeaderComponent
-        username={username}
+        email={email}
         Link={Link}
         dropDownLinks={defaultLinks.concat(dropDownLinks)}
         disconnect={handleLogout}

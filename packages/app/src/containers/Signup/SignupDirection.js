@@ -41,10 +41,7 @@ export function SignupDirection() {
           directionType: values.directionType,
           regionId: values.region,
         },
-        user: {
-          username: user.email,
-          ...user,
-        },
+        user: user,
       };
 
       signup({

@@ -6,7 +6,7 @@ const { User } = require("~/models");
 const { confirmationPasswordEmail } = require("~/email/password-confirmation");
 
 /**
- * Reset password using username, password, new_password and new_password_confirmation return ok
+ * Reset password using email, password, new_password and new_password_confirmation return ok
  */
 const resetPasswordWithToken = async (req, res) => {
   const errors = validationResult(req);

@@ -102,15 +102,15 @@ class User extends Model {
   async getUser() {
     const token = await this.getJwt();
     return {
+      email: this.email,
       id: this.id,
       roles: this.getRoles(),
       token: token,
+
       type: this.type,
 
       // TODO: remove when full graphql auth
       url: redirs[this.type] || redirs.default,
-
-      username: this.username,
     };
   }
 
@@ -157,7 +157,7 @@ class User extends Model {
     const claim = {
       "https://hasura.io/jwt/claims": hasuraClaims,
       id: this.id,
-      name: this.username,
+      name: this.email,
       role: this.getDefaultRole(),
       url: redirs[this.type] || redirs.default,
     };
@@ -185,7 +185,6 @@ class User extends Model {
         id: { type: "integer" },
         nom: { type: "string" },
         prenom: { type: "string" },
-        username: { maxLength: 255, minLength: 1, type: "string" },
       },
       type: "object",
     };

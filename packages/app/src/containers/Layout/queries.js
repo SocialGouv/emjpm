@@ -11,7 +11,6 @@ export const GET_SERVICE_USERS = gql`
       nom
       prenom
       type
-      username
       service_members {
         user {
           id
@@ -42,7 +41,6 @@ export const DIRECTION_USERS = gql`
       nom
       prenom
       type
-      username
     }
   }
 `;
@@ -58,7 +56,6 @@ export const MAGISTRAT_USERS = gql`
       nom
       prenom
       type
-      username
       magistrat {
         id
         ti_id

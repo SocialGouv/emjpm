@@ -53,7 +53,6 @@ export function SignupServiceInvitation(props) {
             password: values.password,
             prenom: values.prenom,
             type: "service",
-            username: values.email,
           },
         },
         onComplete: () => {

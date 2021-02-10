@@ -86,6 +86,5 @@ Object {
   "reset_password_expires": null,
   "reset_password_token": null,
   "type": "individuel",
-  "username": "toto",
 }
 `;

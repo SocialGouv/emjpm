@@ -48,7 +48,7 @@ const checkStatus = async (
 
 function EditPassword() {
   const history = useHistory();
-  const { username, type } = useContext(UserContext);
+  const { email, type } = useContext(UserContext);
   const url = `${API_URL}/api/auth/reset-password`;
 
   const handleSubmit = async (values, setSubmitting, setStatus, type) => {
@@ -57,7 +57,7 @@ function EditPassword() {
         new_password: values.newPassword,
         new_password_confirmation: values.newPasswordConfirmation,
         password: values.password,
-        username: username,
+        email: email,
       }),
       headers: {
         "Content-Type": "application/json",

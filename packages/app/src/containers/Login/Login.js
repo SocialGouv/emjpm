@@ -62,7 +62,7 @@ function Login(props) {
     const response = await fetch(url, {
       body: JSON.stringify({
         password: values.password,
-        username: values.username,
+        email: values.email,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ function Login(props) {
   const formik = useFormik({
     initialValues: {
       password: "",
-      username: "",
+      email: "",
     },
     onSubmit: (values, { setSubmitting, setStatus }) => {
       handleSubmit(values, setSubmitting, setStatus, token);
@@ -111,19 +111,16 @@ function Login(props) {
           )}
           <Field>
             <Input
-              value={formik.values.username}
-              id="username"
-              name="username"
+              value={formik.values.email}
+              id="email"
+              name="email"
               type="text"
-              hasError={formik.errors.username && formik.touched.username}
+              hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Votre nom d'utilisateur"
             />
-            {formik.touched.username && (
-              <InlineError
-                message={formik.errors.username}
-                fieldId="username"
-              />
+            {formik.touched.email && (
+              <InlineError message={formik.errors.email} fieldId="email" />
             )}
           </Field>
           <Field>

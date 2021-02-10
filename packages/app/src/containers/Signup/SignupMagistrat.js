@@ -41,10 +41,7 @@ function SignupMagistratForm({ tiDatas }) {
           cabinet: values.cabinet,
           ti: values.ti,
         },
-        user: {
-          username: user.email,
-          ...user,
-        },
+        user: user,
       };
 
       signup({

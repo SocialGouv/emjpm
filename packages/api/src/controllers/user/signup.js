@@ -92,10 +92,10 @@ const signup = async (req, res) => {
   try {
     const { body } = req;
     const { invitation } = body;
-    const { type, nom, prenom, password, username, email } = body.user;
+    const { type, nom, prenom, password, email } = body.user;
 
     const user = await User.query()
-      .allowInsert("[username, password,role,nom,prenom,email]")
+      .allowInsert("[password,role,nom,prenom,email]")
       .insert({
         active: invitation ? true : false,
         email: email.toLowerCase().trim(),
@@ -103,7 +103,6 @@ const signup = async (req, res) => {
         password,
         prenom,
         type,
-        username,
       });
 
     await createRole(user.id, type);
