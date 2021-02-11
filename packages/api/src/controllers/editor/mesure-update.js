@@ -24,10 +24,13 @@ const mesureUpdate = async (req, res) => {
   const ti = req.ti;
   const type = req.type;
 
+  const editorId = res.locals.oauth.token.client.id;
+
   try {
     const mesureQueryResult = await updateMesure({
       antenneId,
       datas: body,
+      editorId,
       id,
       serviceOrMandataire,
       ti,

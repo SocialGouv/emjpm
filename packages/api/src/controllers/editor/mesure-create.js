@@ -20,10 +20,13 @@ const mesureCreate = async (req, res) => {
 
   const { body } = req;
 
+  const editorId = res.locals.oauth.token.client.id;
+
   try {
     const mesureQueryResult = await saveMesure({
       antenneId,
       datas: body,
+      editorId,
       serviceOrMandataire,
       ti,
       type,

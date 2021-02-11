@@ -43,6 +43,8 @@ const mesureBatch = async (req, res) => {
     return res.status(422).json({ tiErrors });
   }
 
+  const editorId = res.locals.oauth.token.client.id;
+
   // process array of mesures
   try {
     const allMesureDatas = [];
@@ -53,6 +55,7 @@ const mesureBatch = async (req, res) => {
       allMesureDatas.push({
         antenneId: antenne_id ? antenne_id : null,
         datas: mesure,
+        editorId,
         serviceOrMandataire,
         ti,
         type,

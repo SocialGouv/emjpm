@@ -15,6 +15,7 @@ async function updateMesure({
   antenneId,
   serviceOrMandataire,
   ti,
+  editorId,
 }) {
   const mesureToUpdate = await Mesure.query()
     .where({ [`${type}_id`]: serviceOrMandataire.id })
@@ -33,6 +34,7 @@ async function updateMesure({
     antenneId,
     datas: datas,
     departement,
+    editorId,
     lastEtat,
     latitude,
     longitude,

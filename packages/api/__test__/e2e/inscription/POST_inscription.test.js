@@ -52,10 +52,10 @@ test("should register with good values", async () => {
     .post("/api/auth/signup")
     .send({ ...defaultRegister(), tis: [22, 37] });
   expect(response.body).toMatchInlineSnapshot(`
-                Object {
-                  "success": true,
-                }
-        `);
+    Object {
+      "success": true,
+    }
+  `);
   expect(response.status).toBe(200);
 
   const lastInsert = await knex("users").orderBy("created_at", "desc").first();
