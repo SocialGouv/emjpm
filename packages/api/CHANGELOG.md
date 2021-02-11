@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.88.0](https://github.com/SocialGouv/emjpm/compare/v25.87.2...v25.88.0) (2021-02-11)
+
+
+### Features
+
+* **dev-test:** snapshot update command ([3710ff4](https://github.com/SocialGouv/emjpm/commit/3710ff40306007339f9f26e676985bce24b76db2))
+* **editor_id:** assign to mesures fix #[#480](https://github.com/SocialGouv/emjpm/issues/480) ([162d7d9](https://github.com/SocialGouv/emjpm/commit/162d7d9ad46c34beda228a3c57695c885d737180))
+
+
+
+
+
 ## [25.87.2](https://github.com/SocialGouv/emjpm/compare/v25.87.1...v25.87.2) (2021-02-09)
 
 **Note:** Version bump only for package @emjpm/api
