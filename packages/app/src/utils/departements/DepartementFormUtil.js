@@ -1,5 +1,5 @@
 function departementToOptions(datas, config = {}) {
-  const { valueKey = "code", nullOption } = config;
+  const { valueKey = "id", nullOption } = config;
   let options = datas.map((departement) => ({
     departement,
     label: formatDepartementLabel(departement),
