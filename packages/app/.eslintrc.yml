@@ -15,9 +15,15 @@ parserOptions:
 plugins:
   - sort-keys-fix
   - react
+  - eslint-plugin-react
+  - unused-imports
 settings:
   react:
     version: detect
 ignorePatterns:
   - build
   - node_modules
+rules:
+  react/jsx-uses-react: 1
+  react/jsx-uses-vars: 1
+  unused-imports/no-unused-imports-ts: 1
