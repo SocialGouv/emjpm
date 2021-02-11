@@ -48,7 +48,7 @@ const validationSchema = yup.object().shape({
   prenom: yup.string().required(),
   siret: yup
     .string()
-    .matches(/^[0-9]{9}$/, "Le SIRET doit être composé de 9 chiffres.")
+    .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
     .required(),
   ville: yup.string().required(),
 });
