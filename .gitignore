@@ -1,15 +1,8 @@
 node_modules
 .idea
-coverage
-dist
-docker-compose.override.yaml
 .vscode
-*.log
 .eslintcache
-.npm
 
 dump
 .env
 .gh-token
-.kubeconfig
-.env.deploy
