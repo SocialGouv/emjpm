@@ -13,6 +13,7 @@
     "test:unit:watch": "NODE_ENV=test npx jest --config ./jest.unit.config.js --maxWorkers=2 --watch",
     "test:e2e": "NODE_ENV=test jest --config ./jest.e2e.config.js --maxWorkers=2",
     "test:e2e:watch": "NODE_ENV=test npx jest --config ./jest.e2e.config.js --maxWorkers=2 --watch",
+    "test:e2e:update-snapshot": "NODE_ENV=test npx jest --config ./jest.e2e.config.js --maxWorkers=2 --updateSnapshot",
     "lint:pre-commit": "yarn lint:fix",
     "lint": "eslint __test__ src",
     "lint:fix": "yarn lint --cache --fix",
