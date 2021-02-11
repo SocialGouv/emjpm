@@ -34,7 +34,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
       <RadioGroup
         value={null}
         onValueChange={(value) => {
-          setDepartementFinanceur(Number(value));
+          setDepartementFinanceur(value);
         }}
         options={options}
         renderRadioLabel={(item) => {
@@ -63,7 +63,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
                     size={24}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onRemove(Number(id));
+                      onRemove(id);
                     }}
                   />
                 </Box>
