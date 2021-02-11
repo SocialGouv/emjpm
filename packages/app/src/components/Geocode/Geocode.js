@@ -1,8 +1,6 @@
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 
-import { Box } from "rebass";
-
-import { Select, Spinner } from "~/components";
+import { Select } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 import useQueryReady from "~/hooks/useQueryReady";

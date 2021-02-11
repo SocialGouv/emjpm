@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { BoxWrapper } from "~/components/Grid";

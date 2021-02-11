@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 import { Link } from "~/components/Link";
 import { MagistratMandataireComments } from "~/containers/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
-import { Button, Card, Heading, Spinner } from "~/components";
+import { Button, Heading } from "~/components";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 import useQueryReady from "~/hooks/useQueryReady";
 

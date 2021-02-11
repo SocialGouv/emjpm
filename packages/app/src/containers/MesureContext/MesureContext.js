@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
-import { createContext, Fragment } from "react";
+import { createContext } from "react";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { MESURE_CONTEXT_QUERY } from "./queries";

@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import { AdminEditInformations } from "~/containers/AdminEditInformations";
 import { LayoutAdmin } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";

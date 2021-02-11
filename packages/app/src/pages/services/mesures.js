@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";

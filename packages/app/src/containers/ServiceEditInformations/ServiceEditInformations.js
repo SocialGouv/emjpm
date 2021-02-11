@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState, useContext } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { Card } from "~/components";

@@ -1,8 +1,6 @@
-import { useCallback } from "react";
 import { components } from "react-select";
 
 import { fullText } from "~/query-service/datagouv/api-siren";
-import { searchAdresse } from "~/query-service/datagouv/api-adresse";
 import { FormGroupSelect } from "~/components/AppForm";
 
 // https://entreprise.data.gouv.fr/api_doc/sirene

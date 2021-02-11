@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { Box } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Card, Heading, Spinner } from "~/components";
+import { Card, Heading } from "~/components";
 
 import MapComponent from "./Map";
 import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";

@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import useQueryReady from "~/hooks/useQueryReady";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { MesureContext } from "~/containers/MesureContext";
-import { Card, Heading, Spinner } from "~/components";
+import { Heading } from "~/components";
 
 import { GESTIONNAIRES } from "./queries";
 import {

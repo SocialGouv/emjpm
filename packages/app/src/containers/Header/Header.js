@@ -1,6 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import PropTypes from "prop-types";
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
 
 import { Link } from "~/containers/Commons";

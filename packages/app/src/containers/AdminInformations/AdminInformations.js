@@ -1,7 +1,5 @@
-import { Building } from "@styled-icons/fa-regular/Building";
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { PersonOutline } from "@styled-icons/material/PersonOutline";
-import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";

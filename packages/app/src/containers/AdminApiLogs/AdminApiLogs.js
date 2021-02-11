@@ -8,7 +8,7 @@ import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { useDebounce } from "~/hooks";
 import useQueryReady from "~/hooks/useQueryReady";
-import { Button, Card, Heading, Spinner } from "~/components";
+import { Button, Card, Heading } from "~/components";
 
 import { API_LOGS_SEARCH } from "./queries";
 

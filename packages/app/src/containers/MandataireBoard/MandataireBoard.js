@@ -1,5 +1,4 @@
 import { isIndividuel, isPrepose } from "@emjpm/biz";
-import { useContext } from "react";
 import { Box, Card, Flex } from "rebass";
 
 import { Link } from "~/containers/Commons";

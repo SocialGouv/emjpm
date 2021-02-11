@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Card, Heading, Spinner } from "~/components";
+import { Heading } from "~/components";
 import Antenne from "~/containers/Antenne";
 
 import { SERVICE_ANTENNES } from "./queries";

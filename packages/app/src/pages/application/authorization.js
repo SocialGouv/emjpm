@@ -6,7 +6,6 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
 import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
-import { useParams } from "react-router-dom";
 import useSearchParams from "~/hooks/useSearchParams";
 import { useAuth } from "~/user/Auth";
 

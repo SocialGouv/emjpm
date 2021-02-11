@@ -1,5 +1,4 @@
 import { useFormik } from "formik";
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";

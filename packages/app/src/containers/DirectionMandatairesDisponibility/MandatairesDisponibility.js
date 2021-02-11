@@ -1,9 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useContext } from "react";
-import { Box } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Heading, Spinner } from "~/components";
+import { Card, Heading } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";

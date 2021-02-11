@@ -1,5 +1,4 @@
 import { gql } from "apollo-boost";
-import { useContext } from "react";
 import { useQuery } from "@apollo/client";
 
 import useUser from "~/hooks/useUser";

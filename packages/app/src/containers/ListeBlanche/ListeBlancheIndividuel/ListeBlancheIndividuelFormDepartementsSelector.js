@@ -1,7 +1,5 @@
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 
-import { Box } from "rebass";
-
 import useQueryReady from "~/hooks/useQueryReady";
 import { Select } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";

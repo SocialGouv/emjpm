@@ -1,5 +1,3 @@
-import { useRef, useState, useCallback, useEffect } from "react";
-
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
 import { useAuth, impersonateLogout } from "~/user/Auth";
 

@@ -1,6 +1,5 @@
 import { MailOutline } from "@styled-icons/material/MailOutline";
 import { Smartphone } from "@styled-icons/material/Smartphone";
-import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import useUser from "~/hooks/useUser";

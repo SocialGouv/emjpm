@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Header } from "~/containers/Header";

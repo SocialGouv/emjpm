@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box } from "rebass";
 
 import { DirectionFilters } from "~/containers/DirectionFilters";
