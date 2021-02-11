@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { AntenneLinkButton, LinkButton } from "~/containers/Commons";
 import Antenne from "~/containers/Antenne";
 import { Card, Heading, Spinner, Text } from "~/components";
@@ -16,22 +17,8 @@ function ServiceAntennes(props) {
     fetchPolicy: "cache-and-network",
   });
 
-  if (loading) {
-    return (
-      <Card p="1" minHeight="450px">
-        <Box sx={{ p: "6", position: "relative" }}>
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card p="1">
-        <Box sx={{ p: "6", position: "relative" }}>error</Box>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { service_antenne } = data;

@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 
 import { Box } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Card, Heading, Spinner } from "~/components";
 
 import MapComponent from "./Map";
@@ -10,28 +11,8 @@ import { GET_DEPARTEMENTS_AVAILABILITY } from "./queries";
 function AvailabilityMap() {
   const { data, loading, error } = useQuery(GET_DEPARTEMENTS_AVAILABILITY);
 
-  if (loading) {
-    return (
-      <Card p="4" minHeight="450px">
-        <Box>
-          <Heading size={2}>Disponibilités par territoire</Heading>
-        </Box>
-        <Box sx={{ p: "6", position: "relative" }}>
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card p="4">
-        <Box>
-          <Heading size={2}>Disponibilités par territoire</Heading>
-        </Box>
-        <Box sx={{ p: "6", position: "relative" }}>error</Box>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const departements = data.view_department_availability

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Card, Heading, Spinner } from "~/components";
 import Antenne from "~/containers/Antenne";
 
@@ -16,22 +17,8 @@ function MagistratServiceAntennes(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { service_antenne } = data;

@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { MesureContext } from "~/containers/MesureContext";
 import { Card, Heading, Spinner } from "~/components";
@@ -28,22 +29,8 @@ function MagistratMesureMandataire(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const [gestionnaire] = data.gestionnaires;

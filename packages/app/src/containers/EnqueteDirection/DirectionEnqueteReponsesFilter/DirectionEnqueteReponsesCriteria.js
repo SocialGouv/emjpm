@@ -1,6 +1,6 @@
 import { Box, Flex } from "rebass";
 
-import { LoadingWrapper } from "~/containers/Commons";
+import useQueryReady from "~/hooks/useQueryReady";
 import { Card, Select } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
 
@@ -28,45 +28,45 @@ function DirectionEnqueteReponsesCriteria({ criteria, updateCriteria }) {
     departementsOptionsConfig
   );
 
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
-    <LoadingWrapper error={error} loading={loading}>
-      <Card>
-        <Flex flexDirection="row">
-          <Box sx={BoxStyle}>
-            <Select
-              instanceId={"departement-filter"}
-              size="small"
-              options={departementsOptions}
-              placeholder={"Département"}
-              value={criteria.selectedDepartement}
-              onChange={(option) =>
-                updateCriteria("selectedDepartement", option)
-              }
-            />
-          </Box>
-          <Box sx={BoxStyle}>
-            <Select
-              instanceId={"user-type-filter"}
-              size="small"
-              options={USER_TYPE_OPTIONS}
-              placeholder={"Type"}
-              value={criteria.userType}
-              onChange={(option) => updateCriteria("userType", option)}
-            />
-          </Box>
-          <Box sx={BoxStyle}>
-            <Select
-              instanceId={"enquete-reponse-statut-filter"}
-              size="small"
-              options={ENQUETE_REPONSE_STATUS_OPTIONS}
-              placeholder={"Statut"}
-              value={criteria.responseStatus}
-              onChange={(option) => updateCriteria("responseStatus", option)}
-            />
-          </Box>
-        </Flex>
-      </Card>
-    </LoadingWrapper>
+    <Card>
+      <Flex flexDirection="row">
+        <Box sx={BoxStyle}>
+          <Select
+            instanceId={"departement-filter"}
+            size="small"
+            options={departementsOptions}
+            placeholder={"Département"}
+            value={criteria.selectedDepartement}
+            onChange={(option) => updateCriteria("selectedDepartement", option)}
+          />
+        </Box>
+        <Box sx={BoxStyle}>
+          <Select
+            instanceId={"user-type-filter"}
+            size="small"
+            options={USER_TYPE_OPTIONS}
+            placeholder={"Type"}
+            value={criteria.userType}
+            onChange={(option) => updateCriteria("userType", option)}
+          />
+        </Box>
+        <Box sx={BoxStyle}>
+          <Select
+            instanceId={"enquete-reponse-statut-filter"}
+            size="small"
+            options={ENQUETE_REPONSE_STATUS_OPTIONS}
+            placeholder={"Statut"}
+            value={criteria.responseStatus}
+            onChange={(option) => updateCriteria("responseStatus", option)}
+          />
+        </Box>
+      </Flex>
+    </Card>
   );
 }
 

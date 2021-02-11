@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Heading, Select, Spinner } from "~/components";
 import MandataireListItem from "~/containers/MandataireListItem";
@@ -53,24 +54,8 @@ function MandatairesList(props) {
     variables,
   });
 
-  if (loading) {
-    return (
-      <Card>
-        <Heading size={2}>Liste des mandataires</Heading>
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card>
-        <Heading size={2}>Liste des mandataires</Heading>
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.count.aggregate;

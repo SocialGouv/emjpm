@@ -3,10 +3,12 @@ import { useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
-import { Breadcrumb, LoadingWrapper } from "~/containers/Commons";
+import { Breadcrumb } from "~/containers/Commons";
 import { EnqueteReponse } from "~/containers/Enquete";
 import { useCurrentStepFromUrl } from "~/containers/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
+import useQueryReady from "~/hooks/useQueryReady";
+import useOnErrorRedirect from "~/hooks/useOnErrorRedirect";
 
 export const DirectionEnqueteDetailsReponsePreview = ({
   enqueteId,
@@ -34,18 +36,13 @@ export const DirectionEnqueteDetailsReponsePreview = ({
     return { enquete, enqueteLabel, enqueteReponse, reponseLabel };
   }, [data]);
 
-  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [
-    enquete,
-    loading,
-  ]);
+  useOnErrorRedirect(error, "/direction/enquetes");
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
 
   return (
-    <LoadingWrapper
-      error={error}
-      loading={loading}
-      errorRedirect={{ url: "/direction/enquetes" }}
-      errorCode={errorCode}
-    >
+    <div>
       <Breadcrumb
         crumbs={[
           {
@@ -69,7 +66,7 @@ export const DirectionEnqueteDetailsReponsePreview = ({
           navigateToStep={navigateToStep}
         />
       </Box>
-    </LoadingWrapper>
+    </div>
   );
 
   async function navigateToStep({ step, substep }) {

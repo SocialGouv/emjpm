@@ -9,6 +9,7 @@ import { MandataireContextProvider } from "~/containers/Mandatairelist";
 import MandataireListItem from "~/containers/MandataireListItem";
 
 import { useDebounce } from "~/hooks";
+import useQueryReady from "~/hooks/useQueryReady";
 import { Card, Heading, Input, Select, Spinner, Text } from "~/components";
 
 import { GET_MANDATAIRES } from "./queries";
@@ -78,22 +79,8 @@ function MagistratMandatairesList(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { count } = data.count.aggregate;

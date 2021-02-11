@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { Button, Card, Heading, Spinner } from "~/components";
 
 import { MagistratMandataireComment } from "./MagistratMandataireComment";
@@ -22,22 +23,8 @@ function MagistratMandataireComments(props) {
   const [isEditOpen, toggleEditCommentForm] = useState(false);
   const [currentComment, setCurrentComment] = useState(false);
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { commentaires } = data;

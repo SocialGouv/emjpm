@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@apollo/client";
 
-import { LoadingWrapper } from "~/containers/Commons";
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { PaginatedList } from "~/containers/PaginatedList";
 
@@ -57,18 +57,20 @@ export function ListeBlancheServices(props) {
     };
   }, [data]);
 
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
-    <LoadingWrapper loading={loading} error={error}>
-      <PaginatedList
-        entries={services}
-        RowItem={ListeBlancheServiceItem}
-        count={count}
-        resultPerPage={resultPerPage}
-        currentOffset={currentOffset}
-        setCurrentOffset={setCurrentOffset}
-        onRowClick={onSelectItem}
-      />
-    </LoadingWrapper>
+    <PaginatedList
+      entries={services}
+      RowItem={ListeBlancheServiceItem}
+      count={count}
+      resultPerPage={resultPerPage}
+      currentOffset={currentOffset}
+      setCurrentOffset={setCurrentOffset}
+      onRowClick={onSelectItem}
+    />
   );
 }
 

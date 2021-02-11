@@ -3,7 +3,7 @@ import { differenceInDays } from "date-fns";
 
 import { Box, Button, Flex } from "rebass";
 
-import { Breadcrumb, LoadingWrapper } from "~/containers/Commons";
+import { Breadcrumb } from "~/containers/Commons";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import useQueryContextWithHasuraRole from "~/hooks/useQueryContextWithHasuraRole";
@@ -11,6 +11,8 @@ import { Heading } from "~/components";
 
 import { DirectionEnqueteDetailsInformationsClesIndicators } from "./DirectionEnqueteDetailsInformationsClesIndicators";
 import { DirectionEnqueteReponseResumeCard } from "./DirectionEnqueteReponseResumeCard";
+import useQueryReady from "~/hooks/useQueryReady";
+import useOnErrorRedirect from "~/hooks/useOnErrorRedirect";
 import {
   DirectionEnqueteReponsesCriteria,
   ENQUETE_REPONSE_STATUS_OPTIONS,
@@ -62,12 +64,13 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
         }`
       : "";
 
+  useOnErrorRedirect(error, "/direction/enquetes");
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
-    <LoadingWrapper
-      error={error}
-      loading={loading}
-      errorRedirect={{ url: "/direction/enquetes" }}
-    >
+    <div>
       <Breadcrumb
         crumbs={[
           {
@@ -164,6 +167,6 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
           }}
         />
       </Box>
-    </LoadingWrapper>
+    </div>
   );
 }

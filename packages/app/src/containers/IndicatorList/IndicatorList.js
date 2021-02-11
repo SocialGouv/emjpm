@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 
 import { Box } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Card, Heading, Indicator, Spinner } from "~/components";
 
@@ -34,22 +35,8 @@ function IndicatorList(props) {
     return { individuel, prepose, service, ti };
   }, [view_indicateur_login]);
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const {
