@@ -30,7 +30,10 @@ export function Provider(props) {
 
     if (initialFilters) {
       Object.keys(initialFilters).forEach((key) => {
-        if (!newFilters[key] && initialFilters[key]) {
+        if (
+          newFilters[key] === undefined &&
+          initialFilters[key] !== undefined
+        ) {
           newFilters[key] = initialFilters[key];
         }
       });
