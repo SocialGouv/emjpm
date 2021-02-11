@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.88.3](https://github.com/SocialGouv/emjpm/compare/v25.88.2...v25.88.3) (2021-02-11)
+
+
+### Bug Fixes
+
+* **refacto-dpt:** radio group ([b19e63c](https://github.com/SocialGouv/emjpm/commit/b19e63c42c8584f89783c6f0f83881cec04ade8e))
+
+
+
+
+
 ## [25.88.2](https://github.com/SocialGouv/emjpm/compare/v25.88.1...v25.88.2) (2021-02-11)
 
 
