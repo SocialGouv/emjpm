@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.88.2](https://github.com/SocialGouv/emjpm/compare/v25.88.1...v25.88.2) (2021-02-11)
+
+
+### Bug Fixes
+
+* **siret:** validation ([ccf9fd6](https://github.com/SocialGouv/emjpm/commit/ccf9fd63d56605290eb58bef0a8fc473fd5b3461))
+
+
+
+
+
 ## [25.88.1](https://github.com/SocialGouv/emjpm/compare/v25.88.0...v25.88.1) (2021-02-11)
 
 
