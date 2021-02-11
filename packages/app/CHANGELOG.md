@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.88.0](https://github.com/SocialGouv/emjpm/compare/v25.87.2...v25.88.0) (2021-02-11)
+
+
+### Bug Fixes
+
+* **design:** annoying scroll bounce effect ([1d8c349](https://github.com/SocialGouv/emjpm/commit/1d8c3491cf7e48b4acb20fcfaac3553cabf57870))
+* **filters:** empty values ([bae5aee](https://github.com/SocialGouv/emjpm/commit/bae5aee4c3f4e91fe3e950c549a2edf42e49116e))
+* **link:** typo ([a5180a4](https://github.com/SocialGouv/emjpm/commit/a5180a4a744351780115c369ea060f6f20152a3f))
+* **loader:** bugfix ([a0aef57](https://github.com/SocialGouv/emjpm/commit/a0aef57f64f16f80fe7a41ba16a237c9cd62f599))
+* **select:** default loading message ([6a6aa45](https://github.com/SocialGouv/emjpm/commit/6a6aa45019339092017fab26d30bcd5e4d4ef584))
+* **sentry:** capture error ([defb5af](https://github.com/SocialGouv/emjpm/commit/defb5afe05dffe647eda8bda2d32d15a899e04d3))
+
+
+### Features
+
+* **app:** global loading and error ([d1bb6b5](https://github.com/SocialGouv/emjpm/commit/d1bb6b5bbe4fcdb82bd86d332217efa0a49f09f5))
+* **error:** boundary + move components + clean ([4b75d10](https://github.com/SocialGouv/emjpm/commit/4b75d102ec3c96b774d4f44ca13bf5f88875f55d))
+* **filters:** default direction departement lb ([19ee9e5](https://github.com/SocialGouv/emjpm/commit/19ee9e540ba558e74368c956798135d4b49e8361))
+* **impersonate:** reset-filter ([daa8d7a](https://github.com/SocialGouv/emjpm/commit/daa8d7a4226dea0549d57b58ebee9d8e464a2533))
+* **implement:** suspense and loading state ([806204b](https://github.com/SocialGouv/emjpm/commit/806204be5a96deccfb4bf93d4c29e09e74b2f02f))
+* **react-suspense:** fallback and global loading ([431da67](https://github.com/SocialGouv/emjpm/commit/431da67478dac056db9203830a251c59513e4dec))
+* **region-filter:** infer from departement ([f2d3ffd](https://github.com/SocialGouv/emjpm/commit/f2d3ffd875f05b1c354bcac310a3f259fc37bf09))
+* **terminer:** add button fix [#2451](https://github.com/SocialGouv/emjpm/issues/2451) ([7e6862f](https://github.com/SocialGouv/emjpm/commit/7e6862fdcf4e0d723e6c452e4a6db32eaa8c29a6))
+
+
+
+
+
 ## [25.87.2](https://github.com/SocialGouv/emjpm/compare/v25.87.1...v25.87.2) (2021-02-09)
 
 
