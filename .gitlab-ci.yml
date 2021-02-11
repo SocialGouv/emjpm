@@ -50,6 +50,7 @@ stages:
           --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod \
           --set-string ingress.annotations.kubernetes\.io/tls-acme=true \
           --set tlsSecretName=${CONTEXT}-certificate \
+          --set replicas=2 \
           ${HELM_RENDER_ARGS}"
       else
         HELM_RENDER_ARGS=" \
