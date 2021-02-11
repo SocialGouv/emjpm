@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.88.4](https://github.com/SocialGouv/emjpm/compare/v25.88.3...v25.88.4) (2021-02-11)
+
+
+### Bug Fixes
+
+* **filter-dpt:** etablissements ([3418296](https://github.com/SocialGouv/emjpm/commit/3418296b7b329a02b934a3193f05c84ea51965bf))
+
+
+
+
+
 ## [25.88.3](https://github.com/SocialGouv/emjpm/compare/v25.88.2...v25.88.3) (2021-02-11)
 
 
