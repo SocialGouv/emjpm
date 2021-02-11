@@ -110,7 +110,7 @@ async function importFinessFileLine(line, departements) {
 async function importGeolocalisation(properties) {
   const [nofinesset, coordxet, coordyet] = properties;
   const result = await Etablissements.query().findOne({ nofinesset });
-  if (result) {
+  if (result && coordxet && coordyet) {
     await Etablissements.query()
       .update({
         coordxet,
