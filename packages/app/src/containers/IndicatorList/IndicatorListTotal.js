@@ -4,7 +4,7 @@ import { Box } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Card, Heading, Indicator, Spinner } from "~/components";
+import { Heading, Indicator } from "~/components";
 
 import { FRANCE_INDICATORS } from "./queries";
 import { IndicatorBoxStyle } from "./style";

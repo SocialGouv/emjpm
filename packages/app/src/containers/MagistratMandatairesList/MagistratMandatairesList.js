@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
@@ -10,7 +10,7 @@ import MandataireListItem from "~/containers/MandataireListItem";
 
 import { useDebounce } from "~/hooks";
 import useQueryReady from "~/hooks/useQueryReady";
-import { Card, Heading, Input, Select, Spinner, Text } from "~/components";
+import { Card, Input, Select, Text } from "~/components";
 
 import { GET_MANDATAIRES } from "./queries";
 import { MagistratMandatairesListStyle, TextStyle } from "./style";

@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
 

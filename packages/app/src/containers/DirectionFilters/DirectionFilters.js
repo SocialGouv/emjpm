@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 

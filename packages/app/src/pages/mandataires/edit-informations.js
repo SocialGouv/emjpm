@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
 import useUser from "~/hooks/useUser";

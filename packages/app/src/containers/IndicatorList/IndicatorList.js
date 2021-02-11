@@ -5,7 +5,7 @@ import { Box } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Card, Heading, Indicator, Spinner } from "~/components";
+import { Heading, Indicator } from "~/components";
 
 import use30DaysInterval from "~/hooks/use30DaysInterval";
 

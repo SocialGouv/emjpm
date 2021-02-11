@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Card, Flex } from "rebass";
 import { NavLink } from "theme-ui";
 

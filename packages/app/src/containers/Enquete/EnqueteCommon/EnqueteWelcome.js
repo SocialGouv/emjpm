@@ -1,5 +1,4 @@
 import { isIndividuel, isPrepose, isService, stdFormatter } from "@emjpm/biz";
-import { useContext } from "react";
 import { Box, Button, Flex, Text } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";

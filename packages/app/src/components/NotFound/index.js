@@ -1,4 +1,3 @@
-import { Error } from "@styled-icons/material/Error";
 import ErrorBox from "~/components/ErrorBox";
 
 export default function NotFound() {

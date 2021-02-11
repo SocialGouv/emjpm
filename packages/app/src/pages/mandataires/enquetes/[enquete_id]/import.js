@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useHistory, useParams } from "react-router-dom";
 
 import { EnqueteImportPanel } from "~/containers/EnqueteImport";

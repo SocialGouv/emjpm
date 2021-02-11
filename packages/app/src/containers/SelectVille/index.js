@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { components } from "react-select";
-
 import { FormGroupSelect } from "~/components/AppForm";
 
 import { getCommunesByCodePostal } from "~/utils/geodata";

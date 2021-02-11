@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 
 import useUser from "~/hooks/useUser";

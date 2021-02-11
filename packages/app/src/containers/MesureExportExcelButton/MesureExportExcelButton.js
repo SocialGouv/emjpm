@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
 import { Export } from "@styled-icons/boxicons-regular/Export";
-import { useContext } from "react";
 import { Button } from "rebass";
 
 import useUser from "~/hooks/useUser";

@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Heading, Spinner, Text } from "~/components";
+import { Card, Heading, Text } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { LB_SUMMARY } from "./queries";

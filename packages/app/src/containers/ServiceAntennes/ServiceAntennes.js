@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 import useQueryReady from "~/hooks/useQueryReady";
 import { AntenneLinkButton, LinkButton } from "~/containers/Commons";
 import Antenne from "~/containers/Antenne";
-import { Card, Heading, Spinner, Text } from "~/components";
+import { Card, Heading, Text } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 import { ANTENNE } from "./queries";

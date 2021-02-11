@@ -2,7 +2,7 @@ import { useQuery } from "@apollo/client";
 import { format } from "date-fns";
 import { Fragment } from "react";
 import { useHistory } from "react-router-dom";
-import { Box, Flex, Text } from "rebass";
+import { Flex, Text } from "rebass";
 
 import { Card } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";

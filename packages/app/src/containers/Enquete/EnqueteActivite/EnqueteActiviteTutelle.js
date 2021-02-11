@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useContext, useMemo } from "react";
+import { useMemo } from "react";
 import { Box } from "rebass";
 
 import useUser from "~/hooks/useUser";

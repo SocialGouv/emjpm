@@ -1,5 +1,4 @@
 import { isMandataire, isService } from "@emjpm/biz";
-import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { MesureBadge } from "~/containers/MesureBadge";

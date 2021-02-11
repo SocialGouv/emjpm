@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 
 import { UserProvider } from "~/containers/UserContext/index";
 
-import { ProvideAuth, useAuth } from "~/user/Auth";
+import { useAuth } from "~/user/Auth";
 import { formatUserFromToken } from "~/user/formatUserFromToken";
 
 export default function AppUser({ children }) {

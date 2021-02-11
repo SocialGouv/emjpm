@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import { Box, Text } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Button, Card, Heading, Spinner } from "~/components";
+import { Button } from "~/components";
 
 import { MagistratMandataireComment } from "./MagistratMandataireComment";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";

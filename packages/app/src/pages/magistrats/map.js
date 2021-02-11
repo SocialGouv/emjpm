@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { LayoutMagistratMap } from "~/containers/Layout";

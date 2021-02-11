@@ -1,5 +1,3 @@
-import { useContext } from "react";
-
 import { LayoutMagistrat } from "~/containers/Layout";
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
 import useUser from "~/hooks/useUser";

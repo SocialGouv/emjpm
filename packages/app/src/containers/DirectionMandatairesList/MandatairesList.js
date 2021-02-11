@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Heading, Select, Spinner } from "~/components";
+import { Select } from "~/components";
 import MandataireListItem from "~/containers/MandataireListItem";
 
 import { GET_MANDATAIRES } from "./queries";

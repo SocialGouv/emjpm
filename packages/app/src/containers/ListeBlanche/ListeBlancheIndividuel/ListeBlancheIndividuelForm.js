@@ -1,4 +1,4 @@
-import { useContext, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useFormik } from "formik";
 import { Box, Flex, Text } from "rebass";
 
@@ -17,10 +17,7 @@ import useUser from "~/hooks/useUser";
 import yup from "~/validation-schemas/yup";
 import { Button, Heading } from "~/components";
 import { formatFormInput } from "~/utils/form";
-import {
-  DepartementFormUtil,
-  useDepartementsOptions,
-} from "~/utils/departements";
+import { DepartementFormUtil } from "~/utils/departements";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
