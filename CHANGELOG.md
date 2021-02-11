@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.88.1](https://github.com/SocialGouv/emjpm/compare/v25.88.0...v25.88.1) (2021-02-11)
+
+
+### Bug Fixes
+
+* **theme:** rollback fonts ([8411f56](https://github.com/SocialGouv/emjpm/commit/8411f567da0b5400ae9177c6890b1a73fbc8b8f4))
+
+
+
+
+
 # [25.88.0](https://github.com/SocialGouv/emjpm/compare/v25.87.2...v25.88.0) (2021-02-11)
 
 
