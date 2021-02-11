@@ -1,3 +1,4 @@
+/* eslint-disable-next-line unused-imports/no-unused-imports-ts */
 import "~/utils/polyfills";
 
 import React from "react";
