@@ -6,6 +6,7 @@ import { MagistratMandataireComments } from "~/containers/MagistratMandataireCom
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { Button, Card, Heading, Spinner } from "~/components";
 import { formatGestionnaireId } from "~/formatters/mandataires";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { GESTIONNAIRES } from "./queries";
 import {
@@ -29,22 +30,8 @@ export function MagistratMandataire(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const [gestionnaire] = data.gestionnaires;

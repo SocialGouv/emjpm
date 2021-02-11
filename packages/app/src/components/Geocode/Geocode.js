@@ -5,16 +5,15 @@ import { Box } from "rebass";
 import { Select, Spinner } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function Geocode(props) {
   const { hasError, onChange, placeholder, resource, instanceId } = props;
 
   const { departements, error, loading } = useDepartements({ all: true });
-  if (error) {
-    return <Box>{error}</Box>;
-  }
-  if (loading) {
-    return <Spinner />;
+
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { adresse, code_postal, departement_code, latitude, longitude, ville } =

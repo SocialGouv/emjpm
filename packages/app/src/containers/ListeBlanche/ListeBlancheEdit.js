@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 
-import { LoadingWrapper } from "~/containers/Commons";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { ListeBlancheIndividuelUpdate } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
@@ -17,8 +17,12 @@ export function ListeBlancheEdit(props) {
     },
   });
 
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
-    <LoadingWrapper loading={loading} error={error}>
+    <div>
       {data && data.lb_users_by_pk && (
         <Fragment>
           {data.lb_users_by_pk.type === "prepose" && (
@@ -38,7 +42,7 @@ export function ListeBlancheEdit(props) {
           )}
         </Fragment>
       )}
-    </LoadingWrapper>
+    </div>
   );
 }
 

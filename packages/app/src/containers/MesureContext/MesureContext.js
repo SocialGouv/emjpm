@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
 import { createContext, Fragment } from "react";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { MESURE_CONTEXT_QUERY } from "./queries";
 
@@ -8,16 +9,15 @@ export const Context = createContext({});
 
 export function Provider(props) {
   const { children, mesureId } = props;
-  const { data } = useQuery(MESURE_CONTEXT_QUERY, {
+  const { data, loading, error } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
-
     variables: {
       id: mesureId,
     },
   });
 
-  if (!data) {
-    return <Fragment>loading</Fragment>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const [mesure] = data.mesures;

@@ -135,7 +135,6 @@ function AdminApiLogs() {
           justifyContent="flex-end"
           sx={{ flexGrow: 1 }}
         >
-          {!loading || <Spinner />}
           <Box
             as="input"
             placeholder="Rechercher..."

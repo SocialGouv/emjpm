@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { useSubscription } from "@apollo/client";
 import { useHistory, useParams } from "react-router-dom";
 
-import { LoadingWrapper } from "~/containers/Commons";
+import useQueryReady from "~/hooks/useQueryReady";
 import { EnqueteReponse } from "~/containers/Enquete";
 import { useCurrentStepFromUrl } from "~/containers/Enquete/EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
@@ -32,11 +32,6 @@ function EnquetePage() {
     return { enquete, enqueteReponse };
   }, [data]);
 
-  const errorCode = useMemo(() => (!loading && !enquete ? 404 : undefined), [
-    enquete,
-    loading,
-  ]);
-
   async function navigateToStep({ step, substep }) {
     if (step === undefined || substep === undefined) {
       return;
@@ -50,17 +45,19 @@ function EnquetePage() {
     }
   }
 
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
     <LayoutServices>
       <BoxWrapper>
-        <LoadingWrapper loading={loading} error={error} errorCode={errorCode}>
-          <EnqueteReponse
-            enquete={enquete}
-            enqueteReponse={enqueteReponse}
-            currentStep={currentStep}
-            navigateToStep={navigateToStep}
-          />
-        </LoadingWrapper>
+        <EnqueteReponse
+          enquete={enquete}
+          enqueteReponse={enqueteReponse}
+          currentStep={currentStep}
+          navigateToStep={navigateToStep}
+        />
       </BoxWrapper>
     </LayoutServices>
   );

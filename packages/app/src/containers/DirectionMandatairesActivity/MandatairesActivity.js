@@ -5,6 +5,7 @@ import { Box } from "rebass";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Heading, Spinner } from "~/components";
 import { convertToPercentage } from "~/utils/math";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { MandatairesActivityChart } from "./MandatairesActivityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
@@ -18,28 +19,8 @@ function MandatairesActivity(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card p="4">
-        <Heading size={2}>
-          Répartition de l’activité par type de mandataires
-        </Heading>
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card p="4">
-        <Heading size={2}>
-          Répartition de l’activité par type de mandataires
-        </Heading>
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const service = data.service.aggregate.sum.mesures_in_progress;

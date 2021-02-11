@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
-import { LoadingWrapper } from "~/containers/Commons";
+import useQueryReady from "~/hooks/useQueryReady";
 import { Button, Card, Input, Select, Text } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
 import { findOption } from "~/utils/form";
@@ -43,67 +43,67 @@ function AdminFilterBar({
     selectDepartementCode,
   } = useContext(AdminFilterContext);
 
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
   return (
-    <LoadingWrapper error={error} loading={loading}>
-      <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
-        <Flex justifyContent={"space-between"} flexWrap="wrap">
-          <Box>
-            <Flex>
-              <Text sx={FilterTextStyle}>AFFINER LES RÉSULTATS</Text>
+    <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
+      <Flex justifyContent={"space-between"} flexWrap="wrap">
+        <Box>
+          <Flex>
+            <Text sx={FilterTextStyle}>AFFINER LES RÉSULTATS</Text>
+            <Box width="170px" mr={1}>
+              <Input
+                value={searchText}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={(event) => changeSearchText(event.target.value)}
+                name="search"
+                size="small"
+                placeholder="Filtre"
+              />
+            </Box>
+            {userTypeFilter && (
               <Box width="170px" mr={1}>
-                <Input
-                  value={searchText}
-                  spellCheck="false"
-                  autoComplete="false"
-                  onChange={(event) => changeSearchText(event.target.value)}
-                  name="search"
+                <Select
+                  instanceId={"user-type-filter"}
+                  value={TYPE_OPTIONS.find((elm) => elm.value === selectedType)}
+                  options={TYPE_OPTIONS}
+                  onChange={(option) => selectType(option.value)}
+                  name="type"
                   size="small"
-                  placeholder="Filtre"
+                  placeholder="Type"
                 />
               </Box>
-              {userTypeFilter && (
-                <Box width="170px" mr={1}>
-                  <Select
-                    instanceId={"user-type-filter"}
-                    value={TYPE_OPTIONS.find(
-                      (elm) => elm.value === selectedType
-                    )}
-                    options={TYPE_OPTIONS}
-                    onChange={(option) => selectType(option.value)}
-                    name="type"
-                    size="small"
-                    placeholder="Type"
-                  />
-                </Box>
-              )}
-              {useDepartementfilter && (
-                <Box width="250px" mr={1}>
-                  <Select
-                    instanceId={"departement-filter"}
-                    value={findOption(
-                      departementsOptions,
-                      selectedDepartementCode
-                    )}
-                    options={departementsOptions}
-                    onChange={(option) => selectDepartementCode(option.value)}
-                    name="departement"
-                    size="small"
-                    placeholder="Département"
-                  />
-                </Box>
-              )}
-            </Flex>
+            )}
+            {useDepartementfilter && (
+              <Box width="250px" mr={1}>
+                <Select
+                  instanceId={"departement-filter"}
+                  value={findOption(
+                    departementsOptions,
+                    selectedDepartementCode
+                  )}
+                  options={departementsOptions}
+                  onChange={(option) => selectDepartementCode(option.value)}
+                  name="departement"
+                  size="small"
+                  placeholder="Département"
+                />
+              </Box>
+            )}
+          </Flex>
+        </Box>
+        {onAddButtonClick && (
+          <Box>
+            <Button width="120px" onClick={onAddButtonClick}>
+              Ajouter
+            </Button>
           </Box>
-          {onAddButtonClick && (
-            <Box>
-              <Button width="120px" onClick={onAddButtonClick}>
-                Ajouter
-              </Button>
-            </Box>
-          )}
-        </Flex>
-      </Card>
-    </LoadingWrapper>
+        )}
+      </Flex>
+    </Card>
   );
 }
 

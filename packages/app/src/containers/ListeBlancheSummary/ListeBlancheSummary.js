@@ -3,6 +3,7 @@ import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
+import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Heading, Spinner, Text } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
@@ -61,24 +62,8 @@ function ListeBlancheSummary() {
     }
   }, [departements, departement]);
 
-  if (loading) {
-    return (
-      <Card width="100%">
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card width="100%">
-        <Heading size={4}>
-          Une erreur est survenue, veuillez réessayer plus tard.
-        </Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const {

@@ -4,6 +4,7 @@ import { Box } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Heading, Spinner } from "~/components";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { MandatairesDisponibilityChart } from "./MandatairesDisponibilityChart";
 import { MANDATAIRE_ACTIVITY } from "./queries";
@@ -17,24 +18,8 @@ function MandatairesDisponibility(props) {
     },
   });
 
-  if (loading) {
-    return (
-      <Card p="4">
-        <Heading size={2}>Disponibilités par type de mandataires</Heading>
-        <Box my="5">
-          <Spinner />
-        </Box>
-      </Card>
-    );
-  }
-
-  if (error) {
-    return (
-      <Card p="4">
-        <Heading size={2}>Disponibilités par type de mandataires</Heading>
-        <Heading size={4}>erreur</Heading>
-      </Card>
-    );
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const remainingCapacity = (data) =>
