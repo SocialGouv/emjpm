@@ -21,6 +21,7 @@ function sanitizeMesureProperties(mesure) {
     date_protection_en_cours: mesure.date_protection_en_cours
       ? format(mesure.date_protection_en_cours, "yyyy-MM-dd")
       : mesure.date_protection_en_cours,
+    editor_id: mesure.editor_id,
     etats: mesure.etats
       ? mesure.etats.map((etat) => {
           return {

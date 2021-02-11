@@ -10,6 +10,7 @@ function buildMesure({
   departement,
   type,
   ti,
+  editorId,
 }) {
   return {
     annee_naissance: datas.annee_naissance,
@@ -27,6 +28,7 @@ function buildMesure({
     latitude: latitude,
     [`${type}_id`]: serviceOrMandataire.id,
     lieu_vie: lastEtat.lieu_vie,
+    editor_id: editorId,
     longitude: longitude,
     nature_mesure: lastEtat.nature_mesure,
     numero_dossier: datas.numero_dossier,

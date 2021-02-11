@@ -297,6 +297,7 @@ describe("POST /api/editors/mesures", () => {
       date_nomination: "2020-01-11",
       date_premier_mesure: "2020-01-10",
       date_protection_en_cours: "2020-01-11",
+      editor_id: 6,
       etats: [
         {
           champ_mesure: "protection_bien",
@@ -441,6 +442,108 @@ describe("POST /api/editors/mesures/batch", () => {
       return expected;
     });
     expect({ mesures: expected }).toMatchSnapshot();
+  });
+
+  test("it return mesure with editor_id assigned", async () => {
+    const response = await request(server)
+      .post("/api/editors/mesures/batch")
+      .set("Accept", "application/json")
+      .set({ Authorization: `Bearer ${global.token}` })
+      .send({
+        mesures: [
+          {
+            annee_naissance: 1957,
+            civilite: "monsieur",
+            date_nomination: "2019-02-14",
+            date_premier_mesure: "2019-02-14",
+            date_protection_en_cours: "2019-04-18",
+            etats: [
+              {
+                champ_mesure: "protection_bien_personne",
+                code_postal: "22190",
+                date_changement_etat: "2020-09-19",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
+                pays: "FR",
+                type_etablissement: "etablissement_handicapes",
+                ville: "PLRIN SUR MER",
+              },
+            ],
+            numero_dossier: "TESTES",
+            numero_rg: "2020202020",
+            ressources: [
+              {
+                annee: 2019,
+                niveau_ressource: "14246",
+                prestations_sociales: [],
+              },
+            ],
+            tribunal_siret: "17750111101763",
+          },
+          {
+            annee_naissance: 1982,
+            civilite: "monsieur",
+            date_nomination: "2018-02-01",
+            date_premier_mesure: "2014-01-01",
+            date_protection_en_cours: "2020-05-12",
+            etats: [
+              {
+                champ_mesure: "protection_bien_personne",
+                code_postal: "22190",
+                date_changement_etat: "2020-05-12",
+                lieu_vie: "etablissement",
+                nature_mesure: "curatelle_renforcee",
+                pays: "FR",
+                type_etablissement: "autre_etablissement_s_ms",
+                ville: "PLRIN SUR MER",
+              },
+              {
+                champ_mesure: "protection_bien_personne",
+                code_postal: "75005",
+                date_changement_etat: "2019-09-19",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
+                pays: "FR",
+                ville: "PARIS",
+              },
+              {
+                champ_mesure: "protection_personne",
+                code_postal: "75005",
+                date_changement_etat: "2018-02-01",
+                lieu_vie: "domicile",
+                nature_mesure: "curatelle_simple",
+                pays: "FR",
+                ville: "PARIS",
+              },
+            ],
+            numero_dossier: "20190512",
+            numero_rg: "18/A/3245",
+            ressources: [
+              {
+                annee: 2020,
+                niveau_ressource: "25000",
+                prestations_sociales: [],
+              },
+              {
+                annee: 2019,
+                niveau_ressource: "28000",
+                prestations_sociales: [],
+              },
+              {
+                annee: 2018,
+                niveau_ressource: "30000",
+                prestations_sociales: [],
+              },
+            ],
+            tribunal_siret: "17750111101763",
+          },
+        ],
+      });
+    expect(response.status).toBe(201);
+    const { mesures } = response.body;
+    for (const mesure of Object.values(mesures)) {
+      expect(mesure.editor_id).toEqual(6);
+    }
   });
 });
 

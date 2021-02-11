@@ -15,7 +15,14 @@ async function saveMesures(allMesureDatas) {
     async (Mesure, MesureEtat, MesureRessources) => {
       const createdMesureIds = [];
       for (const mesureDatas of allMesureDatas) {
-        const { datas, type, antenneId, serviceOrMandataire, ti } = mesureDatas;
+        const {
+          datas,
+          type,
+          antenneId,
+          serviceOrMandataire,
+          ti,
+          editorId,
+        } = mesureDatas;
 
         const {
           lastEtat,
@@ -27,6 +34,7 @@ async function saveMesures(allMesureDatas) {
           antenneId,
           datas,
           departement,
+          editorId,
           lastEtat,
           latitude,
           longitude,
@@ -53,7 +61,14 @@ async function saveMesures(allMesureDatas) {
   return mesuresQueryResult;
 }
 
-async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
+async function saveMesure({
+  datas,
+  type,
+  antenneId,
+  serviceOrMandataire,
+  ti,
+  editorId,
+}) {
   const { lastEtat, departement, longitude, latitude } = await getLastEtatDatas(
     datas.etats
   );
@@ -62,6 +77,7 @@ async function saveMesure({ datas, type, antenneId, serviceOrMandataire, ti }) {
     antenneId,
     datas,
     departement,
+    editorId,
     lastEtat,
     latitude,
     longitude,
