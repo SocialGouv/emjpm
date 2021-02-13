@@ -7,18 +7,18 @@ source $(dirname $0)/.env
 export K8SCI_GID=$(uuidgen)
 
 # BUILD
-$(dirname $0)/scripts/build.sh
+$(dirname $0)/scripts/build
 
 # PRE-DEPLOY
 if [ -n "$K8SCI_PRODUCTION" ]; then
   echo "backup before deploy to production"
   # TODO
 else
-  $(dirname $0)/scripts/create-ns.sh
+  $(dirname $0)/scripts/create-ns
 fi
 
 # DEPLOY
-$(dirname $0)/scripts/deploy.sh
+$(dirname $0)/scripts/deploy
 
 # POST-DEPLOY
 if [ -n "$K8SCI_PRODUCTION" ]; then

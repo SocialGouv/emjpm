@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -x
+
 source $(dirname $0)/.env-build
 
 export K8SCI_REGISTRY_SECRET_NAME="harbor-creds"
