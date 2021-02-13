@@ -6,6 +6,8 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nodejs.name" . }}
@@ -16,8 +18,6 @@ spec:
         timestamp: "{{ now | date "20060102150405" }}"
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
-    strategy:
-      type: RollingUpdate
     spec:
       terminationGracePeriodSeconds: 60
       containers:

@@ -1,10 +1,6 @@
 #!/bin/bash
 set -e
 
-set -x
-env
-
-
 # PROJECT
 export K8SCI_PROJECT="emjpm"
 export K8SCI_CONTEXT_LIST="hasura api app"
