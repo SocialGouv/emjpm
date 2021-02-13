@@ -1,16 +1,7 @@
 #!/bin/bash
 
-if [ -n "$K8SCI_PRODUCTION" ]; then
-  export ROOT_DOMAIN="$PROD_ROOT_DOMAIN"
-  export RANCHER_CLUSTER_ID="c-lfcxv"
-  export RANCHER_PROJECT_ID="p-ttzld"
-else
-  export ROOT_DOMAIN="$DEV_ROOT_DOMAIN"
-  export RANCHER_CLUSTER_ID="c-bd7z2"
-  export RANCHER_PROJECT_ID="p-57mxc"
-fi
-SERVER_ROOT_URL="https://rancher.fabrique.social.gouv.fr/k8s/clusters"
-export K8SCI_K8S_DEPLOY_SERVER="$SERVER_ROOT_URL/$RANCHER_CLUSTER_ID"
+source $(dirname $0)/.env-k8s
+
 if [ -n "$K8SCI_PRODUCTION" ]; then
   export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
     --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
@@ -29,13 +20,6 @@ else
   export DB_NAME="${K8SCI_PROJECT}_$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:]]/_/g' | cut -c1-32)"
   DOMAIN_SLUG=$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:]]/-/g' | cut -c1-32)
   export APP_DOMAIN="${DOMAIN_SLUG}-${ROOT_DOMAIN}"
-fi
-
-if [ -n "$K8SCI_PRODUCTION" ]; then
-  echo "backup before deploy to production"
-  # TODO
-else
-  $(dirname $0)/create-ns.sh
 fi
 
 for context in $K8SCI_CONTEXT_LIST; do
@@ -83,10 +67,16 @@ for context in $K8SCI_CONTEXT_LIST; do
 done
 
 
-if [ -n "$K8SCI_PRODUCTION" ]; then
-  echo "notify mattermost"
-  # TODO
-else
-  $(dirname $0)/create-ns.sh
-  # TODO restore db
-fi
+# wait job
+for context in $K8SCI_CONTEXT_LIST; do
+  export K8SCI_CONTEXT=$context
+  /opt/k8sci-wait-job deploy
+done
+
+# wait rollout
+for context in $K8SCI_CONTEXT_LIST; do
+  kubectl \
+    --server=$K8SCI_K8S_SERVER --token=$K8SCI_K8S_TOKEN \
+    --namespace=$K8SCI_K8S_NS \
+    rollout status deployment "$context"
+done

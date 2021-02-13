@@ -1,27 +1,31 @@
 #!/bin/bash
 set -e
 
-# PROJECT
-export K8SCI_PROJECT="emjpm"
-export K8SCI_CONTEXT_LIST="hasura api app"
+source $(dirname $0)/.env
 
-# COMMON
-export DEV_ROOT_DOMAIN="${K8SCI_PROJECT}.dev2.fabrique.social.gouv.fr"
-export PROD_ROOT_DOMAIN="${K8SCI_PROJECT}.fabrique.social.gouv.fr"
-export K8SCI_REGISTRY_URL="harbor.fabrique.social.gouv.fr"
-export K8SCI_REGISTRY_CACHE_URL="registry.dev2.fabrique.social.gouv.fr"
-export K8SCI_PRODUCTION=$([ "$K8SCI_BRANCH" = "prod" ] && echo "1")
-export K8SCI_IMAGE_TAG=$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:].]/-/g' | cut -c1-32)
-export K8SCI_GID=${K8SCI_GID:-"$(uuidgen)"}
+export K8SCI_GID=$(uuidgen)
 
 # BUILD
 $(dirname $0)/scripts/build.sh
 
-# WAIT BUILT
-for context in $K8SCI_CONTEXT_LIST; do
-  export K8SCI_CONTEXT=$context
-  /opt/k8sci-wait-job build
-done
+# PRE-DEPLOY
+if [ -n "$K8SCI_PRODUCTION" ]; then
+  echo "backup before deploy to production"
+  # TODO
+else
+  $(dirname $0)/scripts/create-ns.sh
+fi
 
 # DEPLOY
 $(dirname $0)/scripts/deploy.sh
+
+# POST-DEPLOY
+if [ -n "$K8SCI_PRODUCTION" ]; then
+  echo "notify mattermost"
+  NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
+  echo '{"text":"'${NOTIF_MSG}'"}' \
+    | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+else
+  echo "restore anonymised db"
+  # TODO restore db
+fi

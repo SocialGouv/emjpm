@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source $(dirname $0)/.env-k8s
+
 if [ -n "$(kubectl --server $K8SCI_K8S_SERVER --token $K8SCI_K8S_TOKEN get namespace $K8SCI_K8S_NS 2>/dev/null)" ]; then
   exit 0
 fi
@@ -12,10 +14,10 @@ apiVersion: v1
 kind: Namespace
 metadata:
 annotations:
-  field.cattle.io/projectId: $RANCHER_CLUSTER_ID:$RANCHER_K8SCI_PROJECT_ID
+  field.cattle.io/projectId: $RANCHER_CLUSTER_ID:$RANCHER_PROJECT_ID
 labels:
   cert: wildcard
-  field.cattle.io/projectId: $RANCHER_K8SCI_PROJECT_ID
+  field.cattle.io/projectId: $RANCHER_PROJECT_ID
 name: $K8SCI_K8S_NS
 EOF
 
