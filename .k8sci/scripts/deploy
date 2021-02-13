@@ -2,7 +2,9 @@
 
 set -x
 
+set -a
 source $(dirname $0)/.env-k8s
+set +a
 
 if [ -n "$K8SCI_PRODUCTION" ]; then
   export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS

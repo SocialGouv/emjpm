@@ -1,8 +1,9 @@
 #!/bin/bash
 set -e
-set -x
 
+set -a
 source $(dirname $0)/.env
+set +a
 
 export K8SCI_GID=$(uuidgen)
 

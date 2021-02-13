@@ -2,7 +2,9 @@
 
 set -x
 
+set -a
 source $(dirname $0)/.env-k8s
+set +a
 
 if [ -n "$(kubectl --server $K8SCI_K8S_SERVER --token $K8SCI_K8S_TOKEN get namespace $K8SCI_K8S_NS 2>/dev/null)" ]; then
   exit 0
