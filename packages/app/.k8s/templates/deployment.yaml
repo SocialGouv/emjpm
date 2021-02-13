@@ -16,7 +16,10 @@ spec:
         timestamp: "{{ now | date "20060102150405" }}"
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
+    strategy:
+      type: RollingUpdate
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,9 +28,16 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "touch /app/build/healthy"]
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","rm /app/build/healthy && sleep 30"]
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthy
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -35,7 +45,7 @@ spec:
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthy
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10

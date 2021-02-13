@@ -16,7 +16,10 @@ spec:
         timestamp: "{{ now | date "20060102150405" }}"
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
+    strategy:
+      type: RollingUpdate
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
