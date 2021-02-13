@@ -7,11 +7,8 @@ source $(dirname $0)/.env-k8s
 set +a
 
 if [ -n "$(kubectl --server $K8SCI_K8S_SERVER --token $K8SCI_K8S_TOKEN get namespace $K8SCI_K8S_DEPLOY_NS 2>/dev/null)" ]; then
-  echo "namespace $K8SCI_K8S_DEPLOY_NS already exists"
   exit 0
 fi
-
-echo "creating namespace $K8SCI_K8S_DEPLOY_NS"
 
 kubectl \
   --server $K8SCI_K8S_DEPLOY_SERVER \
