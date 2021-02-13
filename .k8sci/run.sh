@@ -1,5 +1,6 @@
 #!/bin/bash
 set -e
+set -x
 
 
 # PROJECT
@@ -16,7 +17,7 @@ export K8SCI_IMAGE_TAG=$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:].]/-/g' | cut
 export K8SCI_GID=${K8SCI_GID:-"$(uuidgen)"}
 
 # BUILD
-$(dirname $0)/build.sh
+$(dirname $0)/scripts/build.sh
 
 # WAIT BUILT
 for context in $K8SCI_CONTEXT_LIST; do
@@ -25,4 +26,4 @@ for context in $K8SCI_CONTEXT_LIST; do
 done
 
 # DEPLOY
-$(dirname $0)/deploy.sh
+$(dirname $0)/scripts/deploy.sh
