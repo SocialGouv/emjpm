@@ -32,7 +32,8 @@ else
 fi
 
 if [ -n "$K8SCI_PRODUCTION" ]; then
-  # TODO backup db before prod
+  echo "backup before deploy to production"
+  # TODO
 else
   $(dirname $0)/create-ns.sh
 fi
@@ -83,7 +84,8 @@ done
 
 
 if [ -n "$K8SCI_PRODUCTION" ]; then
-  # TODO notify mattermost
+  echo "notify mattermost"
+  # TODO
 else
   $(dirname $0)/create-ns.sh
   # TODO restore db
