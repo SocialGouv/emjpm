@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -x
+set -e
 
 set -a
 source $(dirname $0)/.env-k8s
