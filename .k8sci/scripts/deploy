@@ -23,16 +23,12 @@ else
 fi
 
 for context in $K8SCI_CONTEXT_LIST; do
+
   export K8SCI_CONTEXT=$context
   export IMAGE_PATH="$K8SCI_PROJECT/$K8SCI_CONTEXT"
   export K8SCI_HELM_CHART="packages/$K8SCI_CONTEXT/.k8s"
   export K8SCI_HELM_RELEASE="$K8SCI_CONTEXT"
-  export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
-    --set host=${CONTEXT_DOMAIN}
-    --set image.repository=${REGISTRY_URL}/${REGISTRY_PUSH_PATH}
-    --set image.tag=${IMAGE_TAG}
-    --set secretName=emjpm-secret
-    "
+
   if [ -n "$K8SCI_PRODUCTION" ]; then
     export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
       --set ingress.annotations.certmanager\.k8s\.io/cluster-issuer=letsencrypt-prod
@@ -45,6 +41,7 @@ for context in $K8SCI_CONTEXT_LIST; do
       --set tlsSecretName=wildcard-crt
       "
   fi
+
   case $K8SCI_CONTEXT in
     app)
       export CONTEXT_DOMAIN=$APP_DOMAIN
@@ -63,6 +60,13 @@ for context in $K8SCI_CONTEXT_LIST; do
         "
       ;;
   esac
+
+  export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
+    --set host=${CONTEXT_DOMAIN}
+    --set image.repository=${K8SCI_REGISTRY_URL}/${IMAGE_PATH}
+    --set image.tag=${IMAGE_TAG}
+    --set secretName=emjpm-secret
+    "
   /opt/jobs/deploy/create.sh
 done
 
