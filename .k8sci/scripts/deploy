@@ -64,7 +64,7 @@ for context in $K8SCI_CONTEXT_LIST; do
   export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
     --set host=${CONTEXT_DOMAIN}
     --set image.repository=${K8SCI_REGISTRY_URL}/${IMAGE_PATH}
-    --set image.tag=${IMAGE_TAG}
+    --set image.tag=${K8SCI_IMAGE_TAG}
     --set secretName=emjpm-secret
     "
   /opt/jobs/deploy/create.sh
@@ -80,7 +80,7 @@ done
 # wait rollout
 for context in $K8SCI_CONTEXT_LIST; do
   kubectl \
-    --server=$K8SCI_K8S_SERVER --token=$K8SCI_K8S_TOKEN \
-    --namespace=$K8SCI_K8S_NS \
+    --server=$K8SCI_K8S_DEPLOY_SERVER --token=$K8SCI_K8S_TOKEN \
+    --namespace=$K8SCI_K8S_DEPLOY_NS \
     rollout status deployment "$context"
 done
