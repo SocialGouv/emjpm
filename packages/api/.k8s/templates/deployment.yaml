@@ -16,7 +16,10 @@ spec:
         timestamp: "{{ now | date "20060102150405" }}"
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
+    strategy:
+      type: RollingUpdate
     spec:
+      terminationGracePeriodSeconds: 600
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,21 +28,23 @@ spec:
             - name: http
               containerPort: 4000
               protocol: TCP
-          livenessProbe:
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            failureThreshold: 10
-            timeoutSeconds: 10
-            httpGet:
-              path: /
-              port: http
           readinessProbe:
+            failureThreshold: 1
             initialDelaySeconds: 5
-            periodSeconds: 10
-            failureThreshold: 10
-            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
             httpGet:
-              path: /
+              path: /ready
+              port: http
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /live
               port: http
           resources:
             limits:
