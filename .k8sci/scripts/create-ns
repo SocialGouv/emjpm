@@ -10,8 +10,10 @@ if [ -n "$(kubectl --server $K8SCI_K8S_SERVER --token $K8SCI_K8S_TOKEN get names
   exit 0
 fi
 
+echo "creating namespace"
+
 kubectl \
-  --server $K8SCI_K8S_SERVER \
+  --server $K8SCI_K8S_DEPLOY_SERVER \
   --token $K8SCI_K8S_TOKEN \
   create -f - <<EOF
 apiVersion: v1
