@@ -36,7 +36,7 @@ spec:
             timeoutSeconds: 5
             httpGet:
               path: /ready
-              port: http
+              port: 9000
           livenessProbe:
             failureThreshold: 3
             initialDelaySeconds: 10
@@ -45,7 +45,7 @@ spec:
             timeoutSeconds: 5
             httpGet:
               path: /live
-              port: http
+              port: 9000
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
