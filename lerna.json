@@ -8,5 +8,5 @@
   },
   "npmClient": "yarn",
   "useWorkspaces": true,
-  "version": "25.88.4"
+  "version": "25.89.0"
 }
