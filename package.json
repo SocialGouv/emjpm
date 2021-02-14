@@ -9,6 +9,7 @@
     "dev:log": "docker-compose logs -f",
     "dev:stop": "docker-compose down",
     "dev:app": "yarn workspace @emjpm/app start",
+    "dev:release-note": "scripts/ci/get-release-note",
     "hasura:console": "scripts/dev/hasura-console",
     "hasura:console:stop": "scripts/dev/hasura-console-stop",
     "dev": "yarn dev:up && yarn hasura:console & yarn dev:app",
@@ -18,9 +19,8 @@
     "start": "yarn dev",
     "test": "lerna run test --parallel",
     "postinstall": "scripts/ci/postinstall",
-    "ci:k8s-ci": "scripts/ci/k8s-ci",
     "release": "scripts/ci/release",
-    "release-note": "scripts/ci/get-release-note"
+    "prod": "scripts/ci/prod"
   },
   "license": "Apache-2.0",
   "devDependencies": {
