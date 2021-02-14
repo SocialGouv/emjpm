@@ -52,7 +52,9 @@ Wait K8SCI:
       - .vars/
   script:
     - |
+      cat .vars/push-results.json
       K8SCI_GID=$(jq -r '.job.id' .vars/push-results.json)
+      echo $K8SCI_GID
       JOB="job/push-${K8SCI_GID}"
 
       retval_complete=1
