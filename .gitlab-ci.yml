@@ -36,7 +36,9 @@ Run K8SCI:
       - $RUN_K8SCI
   script:
     - mkdir -p .vars
-    - set -x
+    - echo curl -sf
+      ${K8SCI_URL}/hooks/push?token=${K8SCI_TOKEN}&branch=${CI_COMMIT_BRANCH}
+      >.vars/push-results.json
     - curl -sf
       ${K8SCI_URL}/hooks/push?token=${K8SCI_TOKEN}&branch=${CI_COMMIT_BRANCH}
       >.vars/push-results.json
