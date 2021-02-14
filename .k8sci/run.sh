@@ -23,11 +23,13 @@ $(dirname $0)/scripts/deploy
 
 # POST-DEPLOY
 CURRENT_COMMIT_TAG=$(git tag --points-at HEAD)
-if [ -n "$K8SCI_PRODUCTION" ] && [ -n "$CURRENT_COMMIT_TAG" ]; then
-  echo "notify mattermost"
-  NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
-  echo '{"text":"'${NOTIF_MSG}'"}' \
-    | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+if [ -n "$K8SCI_PRODUCTION" ]; then
+  if [ -n "$CURRENT_COMMIT_TAG" ]; then
+    echo "notify mattermost"
+    NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
+    echo '{"text":"'${NOTIF_MSG}'"}' \
+      | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+  fi
 else
   echo "restore anonymised db"
   # TODO restore db
