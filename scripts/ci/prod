@@ -3,5 +3,5 @@ set -e
 
 git checkout prod
 git rebase master
-git push --tags
+git push --follow-tags
 git checkout master
