@@ -6,6 +6,8 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nodejs.name" . }}
@@ -17,6 +19,7 @@ spec:
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
+      terminationGracePeriodSeconds: 30
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,6 +28,10 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh","-c","sleep 30"]
           livenessProbe:
             httpGet:
               path: /
