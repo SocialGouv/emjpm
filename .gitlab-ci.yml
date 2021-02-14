@@ -53,5 +53,5 @@ Wait K8SCI:
   script:
     - K8SCI_GID=$(jq -r '.job.id' .vars/push-results.json)
     - JOB="job/push-${K8SCI_GID}"
-    - .k8sci/scripts/wait-from-gitlab
+    - ./.k8sci/scripts/wait-from-gitlab
 
