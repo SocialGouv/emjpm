@@ -1,4 +1,3 @@
----
 variables:
   GIT_STRATEGY: none
   K8SCI_URL: https://ci-emjpm.dev2.fabrique.social.gouv.fr
@@ -29,7 +28,7 @@ Trigger K8SCI:
         ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/trigger/pipeline
 
 Run K8SCI:
-  stage: Run K8S-CI
+  stage: Run K8SCI
   image: curlimages/curl:7.75.0
   only:
     variables:
@@ -43,7 +42,7 @@ Run K8SCI:
 
 
 Wait K8SCI:
-  stage: Wait K8S-CI
+  stage: Wait K8SCI
   image: bitnami/kubectl:latest
   only:
     variables:
