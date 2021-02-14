@@ -22,7 +22,8 @@ fi
 $(dirname $0)/scripts/deploy
 
 # POST-DEPLOY
-if [ -n "$K8SCI_PRODUCTION" ]; then
+CURRENT_COMMIT_TAG=$(git tag --points-at HEAD)
+if [ -n "$K8SCI_PRODUCTION" ] && [ -n "$CURRENT_COMMIT_TAG" ]; then
   echo "notify mattermost"
   NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
   echo '{"text":"'${NOTIF_MSG}'"}' \
