@@ -35,21 +35,20 @@ Run K8SCI:
       - $RUN_K8SCI
   script:
     - mkdir -p .vars
-    - curl
-      --fail
-      ${K8SCI_URL}/hooks/push?token=${K8SCI_TOKEN}&branch=${CI_COMMIT_BRANCH}&output=id
-      >.vars/K8SCI_GID
+    - curl -sf
+      ${K8SCI_URL}/hooks/push?token=${K8SCI_TOKEN}&branch=${CI_COMMIT_BRANCH}
+      >.vars/push-results.json
 
 
 Wait K8SCI:
   stage: Wait K8SCI
-  image: bitnami/kubectl:latest
+  image: registry.gitlab.factory.social.gouv.fr/devthejo/docker-kubectl-helm
   only:
     variables:
       - $RUN_K8SCI
   script:
     - |
-      K8SCI_GID=$(cat .vars/K8SCI_GID)
+      K8SCI_GID=$(jq -r '.id' .vars/push-results.json)
       JOB="job/push-${K8SCI_GID}"
 
       retval_complete=1
