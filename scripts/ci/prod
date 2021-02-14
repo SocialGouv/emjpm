@@ -1,8 +1,7 @@
-#!/usr/bin/env bash
-
+#!/bin/sh
 set -e
 
 git checkout prod
-git rebase origin/master
+git rebase master
 git push --tags
 git checkout master
