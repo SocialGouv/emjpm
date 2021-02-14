@@ -29,15 +29,12 @@ spec:
               containerPort: 3000
               protocol: TCP
           lifecycle:
-            postStart:
-              exec:
-                command: ["/bin/sh", "-c", "touch /app/build/healthy"]
             preStop:
               exec:
-                command: ["/bin/sh","-c","rm /app/build/healthy && sleep 30"]
+                command: ["/bin/sh","-c","sleep 30"]
           livenessProbe:
             httpGet:
-              path: /healthy
+              path: /
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
@@ -45,7 +42,7 @@ spec:
             timeoutSeconds: 10
           readinessProbe:
             httpGet:
-              path: /healthy
+              path: /
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
