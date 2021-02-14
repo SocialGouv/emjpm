@@ -9,6 +9,7 @@ stages:
   - Wait K8SCI
 
 cache:
+  key: "$CI_PIPELINE_ID"
   paths:
     - .vars/*
 
@@ -38,6 +39,7 @@ Run K8SCI:
     - curl -sf
       ${K8SCI_URL}/hooks/push?token=${K8SCI_TOKEN}&branch=${CI_COMMIT_BRANCH}
       >.vars/push-results.json
+    - cat .vars/push-results.json
 
 
 Wait K8SCI:
