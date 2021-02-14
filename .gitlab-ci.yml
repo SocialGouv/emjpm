@@ -52,4 +52,4 @@ Wait K8SCI:
       - .vars/
   script:
     - K8SCI_GID=$(jq -r '.job.id' .vars/push-results.json)
-    - kubectl --namespace=$K8SCI_NS wait --for=condition=complete "job/push-${K8SCI_GID}" --timeout=3600
+    - kubectl --namespace=$K8SCI_NS wait --for=condition=complete "job/push-${K8SCI_GID}" --timeout=1h
