@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.89.0](https://github.com/SocialGouv/emjpm/compare/v25.88.4...v25.89.0) (2021-02-14)
+
+
+### Bug Fixes
+
+* **import-finess:** check input data ([1d08f90](https://github.com/SocialGouv/emjpm/commit/1d08f905ff9686b8c3221a8945b98e2cd768c4d0))
+
+
+### Features
+
+* **ci:** k8sci + zero downtime deployment ([#2483](https://github.com/SocialGouv/emjpm/issues/2483)) ([06540c5](https://github.com/SocialGouv/emjpm/commit/06540c558953defa2d83112febb96310314b44a5))
+* **dev-clean:** apply lint fix ([f95c918](https://github.com/SocialGouv/emjpm/commit/f95c9189c7d7fdd9ac50971a00b7bd5d59e0a19a))
+* **dev-clean:** unused import lint autofix ([cd4ac04](https://github.com/SocialGouv/emjpm/commit/cd4ac0486685cae5be5a13b3b87a8d7eeae1cbe1))
+
+
+
+
+
 ## [25.88.4](https://github.com/SocialGouv/emjpm/compare/v25.88.3...v25.88.4) (2021-02-11)
 
 
