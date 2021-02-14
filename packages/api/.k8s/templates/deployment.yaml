@@ -6,6 +6,8 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nodejs.name" . }}
@@ -17,6 +19,7 @@ spec:
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
+      terminationGracePeriodSeconds: 600
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
@@ -25,22 +28,24 @@ spec:
             - name: http
               containerPort: 4000
               protocol: TCP
-          livenessProbe:
-            initialDelaySeconds: 5
-            periodSeconds: 10
-            failureThreshold: 10
-            timeoutSeconds: 10
-            httpGet:
-              path: /
-              port: http
           readinessProbe:
+            failureThreshold: 1
             initialDelaySeconds: 5
-            periodSeconds: 10
-            failureThreshold: 10
-            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 5
             httpGet:
-              path: /
-              port: http
+              path: /ready
+              port: 9000
+          livenessProbe:
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 5
+            httpGet:
+              path: /live
+              port: 9000
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}

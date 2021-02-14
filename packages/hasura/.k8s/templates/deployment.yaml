@@ -6,6 +6,8 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "nodejs.name" . }}
@@ -17,6 +19,7 @@ spec:
       labels:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
+      terminationGracePeriodSeconds: 60
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"

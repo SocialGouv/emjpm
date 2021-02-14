@@ -24,16 +24,8 @@ function getLastVersionChanges {
   done < $1
 }
 
-function getDevLink {
-  VERSION=`jq -r .version lerna.json`
-  VERSION_SLUG=`echo $VERSION | sed 's/\./-/g'`
-  echo "-----"
-  echo "https://v$VERSION_SLUG-emjpm.dev2.fabrique.social.gouv.fr/"
-}
-
 function getReleaseNote {
   getLastVersionChanges CHANGELOG.md | sed '/^$/d'
-  getDevLink
 }
 
 getReleaseNote
