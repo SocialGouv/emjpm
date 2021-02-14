@@ -3,6 +3,6 @@
 set -e
 
 git checkout prod
-git git rebase origin/master
+git rebase origin/master
 git push --tags
 git checkout master
