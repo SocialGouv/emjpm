@@ -55,6 +55,6 @@ spec:
       volumes:
         - name: data
           azureFile:
-            secretName: azure-storage-{{.Env.DB_NAME}}
-            shareName: emjpm-backup-restore
+            secretName: {{.Env.K8SCI_PROJECT}}-azure-storage-{{.Env.DB_NAME}}
+            shareName: {{.Env.K8SCI_PROJECT}}-backup-restore
             readOnly: false
