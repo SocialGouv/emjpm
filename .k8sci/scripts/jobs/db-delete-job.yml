@@ -1,0 +1,45 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-delete-{{.Env.K8SCI_GID}}
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: create-job
+          image: postgres:10-alpine
+          env:
+            - name: PGSSLMODE
+              value: "require"
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: PGHOST
+            - name: DB_NAME
+              value: {{.Env.DB_NAME}}
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: ADMIN_PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: ADMIN_PGPASSWORD
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+              psql -v ON_ERROR_STOP=1 postgres <<EOF
+                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${DB_NAME}';
+                DROP DATABASE IF EXISTS "${DB_NAME}";
+              EOF
+      volumes:
+        - name: psql-creds
+          secret:
+            secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}

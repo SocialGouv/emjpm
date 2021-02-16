@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+
+set -a
+source $(dirname $0)/.env
+set +a
+
+export K8SCI_GID=${K8SCI_GID:-"$(uuidgen)"}
+
+$(dirname $0)/scripts/k8s-ns-delete
+$(dirname $0)/scripts/db-delete
