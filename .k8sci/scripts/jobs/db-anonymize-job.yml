@@ -6,11 +6,12 @@ spec:
   backoffLimit: 1
   template:
     spec:
+      restartPolicy: Never
       containers:
         - name: anonymise-job
           image: postgres:10-alpine
           command:
-            - psql {{.DB_NAME}} <<EOF
+            - psql $DB_NAME <<EOF
 {{file.Read ".k8sci/scripts/jobs/db-anonymize.sql" | strings.Indent 14 }}
               EOF
           env:
@@ -26,4 +27,3 @@ spec:
             - name: psql-creds
               secret:
                 secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}
-      restartPolicy: Never
