@@ -28,9 +28,11 @@ if [ -n "$K8SCI_PRODUCTION" ]; then
   if [ -n "$CURRENT_COMMIT_TAG" ]; then
     echo "notify mattermost"
     MATTERMOST_WEBHOOK=$(cat /secrets/MATTERMOST_WEBHOOK)
-    NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
+    RELEASE_NOTE=$(./scripts/ci/get-release-note)
+    echo $RELEASE_NOTE
+    NOTIF_MSG=$(echo "$RELEASE_NOTE" | sed -z 's/\n/\\n/g')
     echo '{"text":"'${NOTIF_MSG}'"}' \
-      | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
+      | curl -sS -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
   fi
 fi
 
