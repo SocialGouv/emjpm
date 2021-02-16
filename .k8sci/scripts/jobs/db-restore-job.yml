@@ -48,7 +48,7 @@ spec:
               psql postgres <<EOF
                 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '{{.Env.DB_NAME}}';
                 DROP DATABASE IF EXISTS {{.Env.DB_NAME}};
-                CREATE DATABASE {{.Env.DB_NAME}} WITH OWNER = {{.Env.APP_PGUSER}};
+                CREATE DATABASE {{.Env.DB_NAME}} WITH OWNER = ${APP_PGUSER};
               EOF
 
               pg_restore \
