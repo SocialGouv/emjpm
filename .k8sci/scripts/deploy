@@ -73,7 +73,7 @@ done
 
 # wait job
 for context in $K8SCI_CONTEXT_LIST; do
-  /opt/k8sci-wait-job "runner-${K8SCI_GID}-deploy-${context}"
+  /opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-deploy-${context}"
 done
 
 # wait rollout

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: db-create-{{.Env.K8SCI_GID}}
+  name: pipeline-{{.Env.K8SCI_GID}}-job-db-create
 spec:
   backoffLimit: 1
   template:

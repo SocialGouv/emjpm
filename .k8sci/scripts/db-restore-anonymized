@@ -7,7 +7,7 @@ source $(dirname $0)/.env-db
 set +a
 
 cat ./.k8sci/scripts/jobs/db-restore-job.yml | gomplate | kubectl apply -f -
-/opt/k8sci-wait-job "db-restore-${K8SCI_GID}"
+/opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-db-restore"
 
 cat ./.k8sci/scripts/jobs/db-anonymize-job.yml | gomplate | kubectl apply -f -
-/opt/k8sci-wait-job "db-anonymize-${K8SCI_GID}"
+/opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-db-anonymize"

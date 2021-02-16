@@ -54,4 +54,4 @@ Wait K8SCI:
     - K8SCI_GID=$(jq -r '.job.id' .vars/push-results.json)
     - kubectl --server=$K8S_SERVER --token=$K8S_TOKEN
       --namespace=$K8SCI_NS wait --for=condition=complete
-      "job/push-${K8SCI_GID}" --timeout=1h
+      "job/pipeline-${K8SCI_GID}-hook-push" --timeout=1h

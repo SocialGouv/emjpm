@@ -5,7 +5,7 @@ set -a
 source $(dirname $0)/.env
 set +a
 
-export K8SCI_GID=${K8SCI_GID:-"$(uuidgen)"}
+export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 
 # BUILD
 $(dirname $0)/scripts/build
