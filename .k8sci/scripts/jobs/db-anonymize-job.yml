@@ -22,7 +22,10 @@ spec:
         - name: anonymise-job
           image: postgres:10-alpine
           command:
-            - psql $DB_NAME <<EOF
+            - /bin/sh
+            - -c
+            - |
+              psql $DB_NAME <<EOF
 {{file.Read ".k8sci/scripts/jobs/db-anonymize.sql" | strings.Indent 14 }}
               EOF
           env:
