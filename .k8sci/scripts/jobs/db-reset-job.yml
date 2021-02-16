@@ -38,7 +38,4 @@ spec:
               value: {{.Env.PGHOST}}
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
-          volumeMounts:
-            - mountPath: "/data"
-              name: data
       restartPolicy: Never
