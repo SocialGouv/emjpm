@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
-echo "🗑️ starting delete hook"
+echo "🗑️ starting delete hook branch $K8SCI_BRANCH"
 
 set -a
 source $(dirname $0)/.env
@@ -11,5 +11,5 @@ export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 $(dirname $0)/scripts/k8s-ns-delete
 $(dirname $0)/scripts/db-delete
 
-echo "♻️ delete succeed"
+echo "♻️ delete succeed branch $K8SCI_BRANCH"
 echo "⏱️ elapsed: $(($SECONDS / 3600))hrs $((($SECONDS / 60) % 60))min $(($SECONDS % 60))sec"
