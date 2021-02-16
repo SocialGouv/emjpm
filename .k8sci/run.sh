@@ -12,10 +12,9 @@ $(dirname $0)/scripts/build
 
 # PRE-DEPLOY
 if [ -n "$K8SCI_PRODUCTION" ]; then
-  echo "backup before deploy to production"
-  # TODO
+  $(dirname $0)/scripts/db-backup
 else
-  $(dirname $0)/scripts/create-ns
+  $(dirname $0)/scripts/branch-init
 fi
 
 # DEPLOY
@@ -30,7 +29,4 @@ if [ -n "$K8SCI_PRODUCTION" ]; then
     echo '{"text":"'${NOTIF_MSG}'"}' \
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
   fi
-else
-  echo "restore anonymised db"
-  # TODO restore db
 fi

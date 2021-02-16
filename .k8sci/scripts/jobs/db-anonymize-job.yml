@@ -1,0 +1,54 @@
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: db-restore-configmap
+data:
+  db-anonymize.sql: |
+    {{file.Read ".k8sci/scripts/jobs/db-anonymize.sql" | strings.Indent 4 }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: db-anonymize-{{.Env.K8SCI_GID}}
+spec:
+  template:
+    spec:
+      containers:
+        - name: anonymise-job
+          image: postgres:10-alpine
+          command:
+            - psql --file /opt/db-anonymize.sql {{.DB_NAME}}
+          resources:
+            requests:
+              cpu: 0m
+              memory: 0Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
+          env:
+            - name: PGSSLMODE
+              value: "require"
+            - name: PGHOST
+              value: {{.Env.PGHOST}}
+            - name: PGUSER
+              value: {{.Env.PGUSER}}
+            - name: PGPASSWORD
+              value: {{.Env.PGPASSWORD}}
+            - name: DB_NAME
+              value: {{.Env.DB_NAME}}
+          volumeMounts:
+            - mountPath: "/mnt/data"
+              name: volume
+            - mountPath: "/opt"
+              name: opt
+      restartPolicy: Never
+      volumes:
+        - name: opt
+          configMap:
+            name: db-restore-configmap
+        - name: volume
+          azureFile:
+            secretName: azure-storage-{{.Env.DB_NAME}}
+            shareName: emjpm-backup-restore
+            readOnly: false
