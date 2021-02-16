@@ -3,6 +3,7 @@ kind: Job
 metadata:
   name: db-reset-{{.Env.K8SCI_GID}}
 spec:
+  backoffLimit: 1
   template:
     spec:
       containers:
