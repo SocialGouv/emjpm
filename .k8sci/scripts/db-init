@@ -8,5 +8,5 @@ if psql -lqt | cut -d \| -f 1 | grep -qw "$DB_NAME"; then
   exit 0
 fi
 
-$(dirname $0)/scripts/db-create
-$(dirname $0)/scripts/db-restore-anonymized
+$(dirname $0)/db-create
+$(dirname $0)/db-restore-anonymized
