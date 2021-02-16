@@ -2,6 +2,11 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: pipeline-{{.Env.K8SCI_GID}}-job-db-create
+  labels:
+    app.kubernetes.io/managed-by: k8sci
+    k8sci/gid: "{{.Env.K8SCI_GID}}"
+    k8sci/type: job
+    k8sci/job: db-create
 spec:
   backoffLimit: 1
   template:
