@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Secret
 metadata:
-  name: {{.Env.K8SCI_PROJECT}}-azure-storage-{{.Env.AZURE_STORAGE_SECRET_SUFFIX}}
+  name: {{.Env.AZURE_STORAGE_SECRET_NAME}}
 type: Opaque
 data:
   azurestorageaccountname: {{.Env.AZURE_STORAGE_ACCOUNT_NAME}}
@@ -65,6 +65,6 @@ spec:
       volumes:
         - name: data
           azureFile:
-            secretName: {{.Env.K8SCI_PROJECT}}-azure-storage-{{.Env.DB_NAME}}
+            secretName: {{.Env.AZURE_STORAGE_SECRET_NAME}}
             shareName: {{.Env.K8SCI_PROJECT}}-backup-restore
             readOnly: false
