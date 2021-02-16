@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.90.1](https://github.com/SocialGouv/emjpm/compare/v25.90.0...v25.90.1) (2021-02-16)
+
+
+### Bug Fixes
+
+* **ci:** prod ([03c6f77](https://github.com/SocialGouv/emjpm/commit/03c6f77b8175368f962200c93914037a44818790))
+* **ci:** remove rollout global ([6804f2a](https://github.com/SocialGouv/emjpm/commit/6804f2ac32d2082c0144242330d699dd6380c88d))
+
+
+
+
+
 # [25.90.0](https://github.com/SocialGouv/emjpm/compare/v25.89.0...v25.90.0) (2021-02-16)
 
 
