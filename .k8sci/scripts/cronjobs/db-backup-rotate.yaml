@@ -1,0 +1,227 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: dump-rotate
+data:
+  dump-rotate.sh: |
+    #!/bin/sh
+    set -o errexit
+    set -o nounset
+
+    DUMPS_RETENTION_IN_DAYS=183
+
+    echo '[INFO] starting dumps clean up script'
+
+    find /data \
+      -type d \
+      -mtime +${DUMPS_RETENTION_IN_DAYS} \
+      -regex '/data/[0-9]\{14\}' \
+      -prune \
+      -print \
+      -exec rm -rf -- '{}' \;
+
+    echo '[INFO] exiting dumps clean up script'
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgresql-backup-script
+data:
+  postgresql-backup-script.sh: |
+    #!/usr/bin/env bash
+    set -o errexit
+    set -o nounset
+
+    TIMESTAMP=$(date '+%Y%m%d%H%M%S')
+    echo "[INFO] using timestamp ${TIMESTAMP}"
+    mkdir -p /data/${TIMESTAMP}
+    for db in $(psql \
+      -h emjpmprodserver.postgres.database.azure.com \
+      -U emjpmadmin@emjpmprodserver.postgres.database.azure.com \
+      -l \
+      | grep -v 'azure_superuser' \
+      | grep -v Owner \
+      | grep -v 'List of databases' \
+      | grep -v 'rows)' \
+      | grep -ve '--' \
+      | cut -d"|" -f1 \
+      | sed '/^ *$/d')
+    do
+      trimed_db=$(echo $db | xargs)
+      echo "[INFO] backing up database ${trimed_db}"
+
+      pg_dump -v -Fc --no-owner --no-acl \
+        -h emjpmprodserver.postgres.database.azure.com \
+        -U emjpmadmin@emjpmprodserver.postgres.database.azure.com ${trimed_db} \
+        > /data/${TIMESTAMP}/${trimed_db}_db.psql.gz
+
+      echo "[INFO] database ${trimed_db} done"
+    done
+
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/component: postgres-dump-script
+    app.kubernetes.io/managed-by: terraform
+    app.kubernetes.io/name: postgres-dump
+    app.kubernetes.io/part-of: managed-databases
+  name: backup-db-emjpm
+spec:
+  concurrencyPolicy: Replace
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: postgres-dump-script
+        app.kubernetes.io/managed-by: terraform
+        app.kubernetes.io/name: postgres-dump
+        app.kubernetes.io/part-of: managed-databases
+    spec:
+      backoffLimit: 0
+      completions: 1
+      manualSelector: false
+      parallelism: 1
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app.kubernetes.io/component: postgres-dump-script
+            app.kubernetes.io/managed-by: terraform
+            app.kubernetes.io/name: postgres-dump
+            app.kubernetes.io/part-of: managed-databases
+        spec:
+          automountServiceAccountToken: false
+          containers:
+          - args:
+            - -c
+            - /postgresql_backup_script.sh
+            command:
+            - /bin/bash
+            env:
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: ADMIN_PG_PASSWORD
+                  name: azure-pg-admin-user
+            image: postgres:10
+            imagePullPolicy: IfNotPresent
+            name: backup-db
+            resources:
+              limits:
+                cpu: 100m
+                memory: 256Mi
+              requests:
+                cpu: 50m
+                memory: 128Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /data
+              mountPropagation: None
+              name: volume
+            - mountPath: /postgresql_backup_script.sh
+              mountPropagation: None
+              name: postgresql-backup-script
+              subPath: postgresql-backup-script.sh
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - azureFile:
+              secretName: azure-emjpmprod-volume
+              shareName: emjpm-backup-restore
+            name: volume
+          - configMap:
+              defaultMode: 488
+              name: postgresql-backup-script
+            name: postgresql-backup-script
+  schedule: 0 4 * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    app.kubernetes.io/component: postgres-dump-rotation-script
+    app.kubernetes.io/managed-by: terraform
+    app.kubernetes.io/name: postgres-dump-rotate
+    app.kubernetes.io/part-of: managed-databases
+  name: dump-rotate-emjpm
+spec:
+  concurrencyPolicy: Replace
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/component: postgres-dump-rotation-script
+        app.kubernetes.io/managed-by: terraform
+        app.kubernetes.io/name: postgres-dump-rotate
+        app.kubernetes.io/part-of: managed-databases
+    spec:
+      backoffLimit: 0
+      completions: 1
+      manualSelector: false
+      parallelism: 1
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            app.kubernetes.io/component: postgres-dump-rotation-script
+            app.kubernetes.io/managed-by: terraform
+            app.kubernetes.io/name: postgres-dump-rotate
+            app.kubernetes.io/part-of: managed-databases
+        spec:
+          automountServiceAccountToken: false
+          containers:
+          - args:
+            - -c
+            - /dump-rotate.sh
+            command:
+            - /bin/sh
+            image: alpine:3.12.0
+            imagePullPolicy: IfNotPresent
+            name: dump-rotate
+            resources:
+              limits:
+                cpu: 10m
+                memory: 64Mi
+              requests:
+                cpu: 5m
+                memory: 32Mi
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            volumeMounts:
+            - mountPath: /data
+              mountPropagation: None
+              name: volume
+            - mountPath: /dump-rotate.sh
+              mountPropagation: None
+              name: dump-rotate
+              subPath: dump-rotate.sh
+          dnsPolicy: ClusterFirst
+          restartPolicy: Never
+          schedulerName: default-scheduler
+          securityContext: {}
+          shareProcessNamespace: false
+          terminationGracePeriodSeconds: 30
+          volumes:
+          - azureFile:
+              secretName: azure-emjpmprod-volume
+              shareName: emjpm-backup-restore
+            name: volume
+          - configMap:
+              defaultMode: 488
+              name: dump-rotate
+            name: dump-rotate
+  schedule: 0 7 * * *
+  successfulJobsHistoryLimit: 3
+  suspend: false
