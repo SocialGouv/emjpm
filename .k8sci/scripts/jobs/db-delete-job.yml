@@ -8,7 +8,7 @@ spec:
     spec:
       restartPolicy: Never
       containers:
-        - name: create-job
+        - name: delete-job
           image: postgres:10-alpine
           env:
             - name: PGSSLMODE
