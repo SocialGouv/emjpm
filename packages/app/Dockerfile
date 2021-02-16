@@ -1,5 +1,4 @@
 ARG NODE_VERSION=15-alpine
-ARG BUILD_ENV=pure
 FROM node:$NODE_VERSION as node
 
 ENV NODE_ENV=production
@@ -7,7 +6,7 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # BUILD ENVIRONMENTS
-FROM node as build_pure
+FROM node as builder
 
 COPY package.json yarn.lock /app/
 COPY packages/app/package.ci.json  /app/packages/app/package.json
@@ -32,10 +31,6 @@ RUN yarn workspace @emjpm/app build
 
 FROM node as build_usecache
 ONBUILD COPY packages/app/build packages/app/build/
-
-# BUILDER
-FROM build_${BUILD_ENV} as builder
-
 
 # SERVER
 FROM node as server

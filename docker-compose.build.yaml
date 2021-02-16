@@ -52,8 +52,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/app/Dockerfile
-      args:
-        BUILD_ENV: ${BUILD_ENV:-pure}
       shm_size: 2gb
     shm_size: 2gb
     volumes:
@@ -71,8 +69,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/api/Dockerfile
-      args:
-        BUILD_ENV: ${BUILD_ENV:-pure}
     volumes:
       - ./.dev-secrets:/secrets:ro
     ports:
