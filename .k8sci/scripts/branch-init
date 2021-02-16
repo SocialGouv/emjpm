@@ -2,5 +2,5 @@
 
 set -e
 
-$(dirname $0)/scripts/k8s-init
-$(dirname $0)/scripts/db-init
+$(dirname $0)/k8s-init
+$(dirname $0)/db-init
