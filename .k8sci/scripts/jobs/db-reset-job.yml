@@ -28,14 +28,15 @@ spec:
             - name: PGSSLMODE
               value: "require"
             - name: PGUSER
-              value: "{{.Env.PGUSER}}"
+              value: >
+                {{.Env.PGUSER}}
             - name: PGPASSWORD
-              value: |
+              value: >
                 {{.Env.PGPASSWORD}}
             - name: PGHOST
-              value: "{{.Env.PGHOST}}"
+              value: {{.Env.PGHOST}}
             - name: DB_NAME
-              value: "{{.Env.DB_NAME}}"
+              value: {{.Env.DB_NAME}}
           volumeMounts:
             - mountPath: "/data"
               name: data
