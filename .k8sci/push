@@ -3,6 +3,10 @@ set -e
 
 echo "🚀 starting push hook on branch $K8SCI_BRANCH"
 
+# DEV WIP
+$(dirname $0)/scripts/db-backup
+exit 0
+
 set -a
 source $(dirname $0)/.env
 set +a
@@ -13,9 +17,8 @@ export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 $(dirname $0)/scripts/build
 
 # PRE-DEPLOY
-$(dirname $0)/scripts/db-backup
 if [ -n "$K8SCI_PRODUCTION" ]; then
-  # $(dirname $0)/scripts/db-backup
+  $(dirname $0)/scripts/db-backup
 else
   $(dirname $0)/scripts/branch-init
 fi
