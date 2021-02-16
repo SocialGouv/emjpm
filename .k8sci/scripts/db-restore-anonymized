@@ -6,6 +6,13 @@ set -a
 source $(dirname $0)/.env-db
 set +a
 
+DB_SECRET_NS="${K8SCI_PROJECT}-secret"
+AZURE_DB_SECRET_NAME="azure-emjpmdev-volume"
+export AZURE_STORAGE_ACCOUNT_NAME=$(kubectl -n $DB_SECRET_NS get secret $AZURE_DB_SECRET_NAME \
+  -ojsonpath='{.data.azurestorageaccountname}')
+export AZURE_STORAGE_ACCOUNT_KEY=$(kubectl -n $DB_SECRET_NS get secret $AZURE_DB_SECRET_NAME \
+  -ojsonpath='{.data.azurestorageaccountkey}')
+
 cat ./.k8sci/scripts/jobs/db-restore-job.yml | gomplate | kubectl apply -f -
 kubectl wait --for=condition=complete "job/db-restore-${K8SCI_GID}" --timeout=600s
 

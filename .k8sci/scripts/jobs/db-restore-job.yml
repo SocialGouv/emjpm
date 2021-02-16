@@ -1,3 +1,13 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{.Env.K8SCI_PROJECT}}-azure-storage-{{.Env.DB_NAME}}
+type: Opaque
+data:
+  azurestorageaccountname: {{.Env.AZURE_STORAGE_ACCOUNT_NAME}}
+  azurestorageaccountkey: {{.Env.AZURE_STORAGE_ACCOUNT_KEY}}
+---
 apiVersion: batch/v1
 kind: Job
 metadata:
