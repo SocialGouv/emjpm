@@ -1,12 +1,3 @@
----
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: db-restore-configmap
-data:
-  db-anonymize.sql: |
-    {{file.Read ".k8sci/scripts/jobs/db-anonymize.sql" | strings.Indent 4 }}
----
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -19,32 +10,20 @@ spec:
         - name: anonymise-job
           image: postgres:10-alpine
           command:
-            - psql --file /opt/db-anonymize.sql {{.DB_NAME}}
-          resources:
-            requests:
-              cpu: 0m
-              memory: 0Mi
-            limits:
-              cpu: 500m
-              memory: 512Mi
+            - psql {{.DB_NAME}} <<EOF
+{{file.Read ".k8sci/scripts/jobs/db-anonymize.sql" | strings.Indent 14 }}
+              EOF
           env:
             - name: PGSSLMODE
               value: "require"
             - name: PGHOST
-              value: {{.Env.PGHOST}}
-            - name: PGUSER
-              value: >
-                {{.Env.PGUSER}}
-            - name: PGPASSWORD
-              value: >
-                {{.Env.PGPASSWORD}}
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: PGHOST
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
-          volumeMounts:
-            - mountPath: "/opt"
-              name: opt
+            - name: psql-creds
+              secret:
+                secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}
       restartPolicy: Never
-      volumes:
-        - name: opt
-          configMap:
-            name: db-restore-configmap

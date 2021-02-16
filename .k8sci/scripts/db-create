@@ -6,12 +6,5 @@ set -a
 source $(dirname $0)/.env-db
 set +a
 
-psql -v ON_ERROR_STOP=1 postgres <<EOF
-  CREATE DATABASE "${DB_NAME}";
-  \c "${DB_NAME}"
-
-  CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
-  GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${DEPLOYMENT_PGUSER};
-  GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${DEPLOYMENT_PGUSER};
-EOF
+cat ./.k8sci/scripts/jobs/db-create-job.yml | gomplate | kubectl apply -f -
+kubectl wait --for=condition=complete "job/db-create-${K8SCI_GID}" --timeout=600s
