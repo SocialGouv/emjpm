@@ -27,6 +27,7 @@ CURRENT_COMMIT_TAG=$(git tag --points-at HEAD)
 if [ -n "$K8SCI_PRODUCTION" ]; then
   if [ -n "$CURRENT_COMMIT_TAG" ]; then
     echo "notify mattermost"
+    MATTERMOST_WEBHOOK=$(cat /secrets/MATTERMOST_WEBHOOK)
     NOTIF_MSG=$(./scripts/ci/get-release-note | sed -z 's/\n/\\n/g')
     echo '{"text":"'${NOTIF_MSG}'"}' \
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
