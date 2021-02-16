@@ -26,5 +26,5 @@ done
 
 # wait
 for context in $K8SCI_CONTEXT_LIST; do
-  /opt/k8sci-wait-job "runner-${K8SCI_GID}-build-${context}"
+  /opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-build-${context}"
 done
