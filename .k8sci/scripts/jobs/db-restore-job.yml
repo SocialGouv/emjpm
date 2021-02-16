@@ -4,9 +4,6 @@ metadata:
   name: db-restore-{{.Env.K8SCI_GID}}
 spec:
   template:
-    metadata:
-      labels:
-        app: restore-job
     spec:
       containers:
         - name: restore-job
