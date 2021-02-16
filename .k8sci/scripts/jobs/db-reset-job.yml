@@ -13,7 +13,7 @@ spec:
             - -c
             - |
               psql postgres <<EOF
-                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${DB_NAME}';
+                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '{{.Env.DB_NAME}}';
                 DROP DATABASE IF EXISTS ${DB_NAME};
                 CREATE DATABASE ${DB_NAME} WITH OWNER = emjpm;
               EOF
