@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.90.0](https://github.com/SocialGouv/emjpm/compare/v25.89.0...v25.90.0) (2021-02-16)
+
+
+### Bug Fixes
+
+* **deps:** up ci ([20d2db9](https://github.com/SocialGouv/emjpm/commit/20d2db9075f881fbf32cf6d01127f14e9244afe3))
+* **deps:** update all dependencies ([#2484](https://github.com/SocialGouv/emjpm/issues/2484)) ([85a77f7](https://github.com/SocialGouv/emjpm/commit/85a77f78fce07d8f40b1da9e4d20281990dfe941))
+* **update:** graphq-tag ([9e3c386](https://github.com/SocialGouv/emjpm/commit/9e3c386309e9581e7fe4a40aff4457c72fbf1507))
+
+
+### Features
+
+* **restore-db:** + refacto ci + clean ([#2485](https://github.com/SocialGouv/emjpm/issues/2485)) ([f44f19e](https://github.com/SocialGouv/emjpm/commit/f44f19e7a460f90d8d507510101d61db3d7a77a0))
+
+
+
+
+
 # [25.89.0](https://github.com/SocialGouv/emjpm/compare/v25.88.4...v25.89.0) (2021-02-14)
 
 
