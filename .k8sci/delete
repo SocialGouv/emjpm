@@ -9,3 +9,5 @@ export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 
 $(dirname $0)/scripts/k8s-ns-delete
 $(dirname $0)/scripts/db-delete
+
+echo "delete succeed ♻️"
