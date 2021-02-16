@@ -19,7 +19,7 @@ function getLastVersionChanges {
       echo -n "$LINE" \
         | sed -r 's/# \[(.*)\](.*)\((.*)\)/## '$random_emoji' [\1]\2 (\3)/' \
         | sed -r 's/###/##/'
-      echo " deploying on production 🚀"
+      echo " on production"
       STARTFLAG="true"
       continue
     fi
