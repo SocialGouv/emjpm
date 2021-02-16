@@ -75,10 +75,3 @@ done
 for context in $K8SCI_CONTEXT_LIST; do
   /opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-deploy-${context}"
 done
-
-# wait rollout
-for context in $K8SCI_CONTEXT_LIST; do
-  kubectl -n $K8SCI_K8S_DEPLOY_NS wait \
-    --for=condition=available --timeout=600s "deployment/$context"
-  kubectl -n $K8SCI_K8S_DEPLOY_NS rollout status deployment "$context"
-done
