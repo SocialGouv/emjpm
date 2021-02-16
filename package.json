@@ -20,7 +20,8 @@
     "test": "lerna run test --parallel",
     "postinstall": "scripts/ci/postinstall",
     "release": "scripts/ci/release",
-    "prod": "scripts/ci/prod"
+    "prod": "scripts/ci/prod",
+    "delivery": "scripts/ci/delivery"
   },
   "license": "Apache-2.0",
   "devDependencies": {

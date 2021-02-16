@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+$(dirname $0)/release
+$(dirname $0)/prod
