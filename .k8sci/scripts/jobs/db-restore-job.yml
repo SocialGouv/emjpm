@@ -46,9 +46,9 @@ spec:
               pg_isready
 
               psql postgres <<EOF
-                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '{{.Env.DB_NAME}}';
-                DROP DATABASE IF EXISTS {{.Env.DB_NAME}};
-                CREATE DATABASE {{.Env.DB_NAME}} WITH OWNER = ${APP_PGUSER};
+                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${DB_NAME}';
+                DROP DATABASE IF EXISTS '${DB_NAME}';
+                CREATE DATABASE '${DB_NAME}' WITH OWNER = '${APP_PGUSER}';
               EOF
 
               pg_restore \
@@ -61,8 +61,8 @@ spec:
                 /data/$(cat /data/LATEST)
 
               psql -v ON_ERROR_STOP=1 ${DB_NAME}  <<-EOSQL
-                GRANT CONNECT ON DATABASE ${DB_NAME} TO ${APP_PGUSER};
-                GRANT ALL PRIVILEGES ON DATABASE ${DB_NAME} TO ${APP_PGUSER};
+                GRANT CONNECT ON DATABASE '${DB_NAME}' TO '${APP_PGUSER}';
+                GRANT ALL PRIVILEGES ON DATABASE '${DB_NAME}' TO '${APP_PGUSER}';
 
                 DELETE FROM hdb_catalog.event_invocation_logs;
                 DELETE FROM hdb_catalog.event_log;
