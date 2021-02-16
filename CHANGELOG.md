@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.90.2](https://github.com/SocialGouv/emjpm/compare/v25.90.1...v25.90.2) (2021-02-16)
+
+
+### Bug Fixes
+
+* **release-notes:** load var ([c348bd3](https://github.com/SocialGouv/emjpm/commit/c348bd30e842b50b05ffd86e7c7059fb7798081d))
+* **release-notes:** minor and patch gap ([fce49af](https://github.com/SocialGouv/emjpm/commit/fce49af4fc93ecb96010b97456febe2e19bb074a))
+
+
+### Features
+
+* **yarn:** delivery ([c81634a](https://github.com/SocialGouv/emjpm/commit/c81634a58e094b992467d39af20292c5e5efaf31))
+
+
+
+
+
 ## [25.90.1](https://github.com/SocialGouv/emjpm/compare/v25.90.0...v25.90.1) (2021-02-16)
 
 
