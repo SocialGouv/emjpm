@@ -39,8 +39,6 @@ spec:
             - name: DB_NAME
               value: "{{.Env.DB_NAME}}"
           volumeMounts:
-            - mountPath: "/mnt/data"
-              name: volume
             - mountPath: "/opt"
               name: opt
       restartPolicy: Never
@@ -48,8 +46,3 @@ spec:
         - name: opt
           configMap:
             name: db-restore-configmap
-        - name: volume
-          azureFile:
-            secretName: azure-storage-{{.Env.DB_NAME}}
-            shareName: emjpm-backup-restore
-            readOnly: false
