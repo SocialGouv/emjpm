@@ -30,3 +30,5 @@ if [ -n "$K8SCI_PRODUCTION" ]; then
       | curl -H 'Content-Type: application/json' ${MATTERMOST_WEBHOOK} -d @-
   fi
 fi
+
+echo "push succeed ☄️"
