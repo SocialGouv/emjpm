@@ -54,7 +54,7 @@ update services set email = concat('service-', id, '@justice.fr')
   , competences = null;
 update tis set telephone = '0140506070';
 update mesures set numero_dossier = null, annee_naissance = 1968, numero_rg = id;
-update users set username = concat("type",'-',id, '@justice.fr'), nom = "type", prenom = 'Paula', email = concat("type",'-',id, '@justice.fr');
+update users set nom = "type", prenom = 'Paula', email = concat("type",'-',id, '@justice.fr');
 update users set password = '$2a$10$AAuEwAMCl3AUuOE3bXhzS.IWOx6Y1SPlScWcVxhW.nyNMXVL.Q1lO';
 update lb_users set nom = concat("type",'-',id)
   , siret = null

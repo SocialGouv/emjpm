@@ -1,0 +1,95 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pipeline-{{.Env.K8SCI_GID}}-job-db-restore
+  labels:
+    app.kubernetes.io/managed-by: k8sci
+    k8sci/gid: "{{.Env.K8SCI_GID}}"
+    k8sci/type: job
+    k8sci/job: db-restore
+spec:
+  backoffLimit: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/managed-by: k8sci
+        k8sci/gid: "{{.Env.K8SCI_GID}}"
+        k8sci/type: job
+        k8sci/job: db-restore
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: restore-job
+          image: postgres:10-alpine
+          env:
+            - name: PGSSLMODE
+              value: "require"
+            - name: PGHOST
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: PGHOST
+            - name: DB_NAME
+              value: {{.Env.DB_NAME}}
+            - name: APP_PG_ROLE
+              value: {{.Env.APP_PG_ROLE}}
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: ADMIN_PGUSER
+            - name: PGPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: psql-creds
+                  key: ADMIN_PGPASSWORD
+          volumeMounts:
+            - mountPath: "/data"
+              name: data
+          command:
+            - sh
+            - -c
+            - |
+              set -e
+
+              psql postgres <<EOF
+                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${DB_NAME}';
+                DROP DATABASE IF EXISTS "${DB_NAME}";
+              EOF
+
+              psql -v ON_ERROR_STOP=1 postgres <<EOF
+                CREATE DATABASE "${DB_NAME}";
+                \c "${DB_NAME}"
+
+                CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+              EOF
+
+              pg_restore \
+                --no-owner \
+                --no-acl \
+                --exit-on-error \
+                --format=c \
+                --verbose \
+                --dbname ${DB_NAME} \
+                /data/$(cat /data/LATEST)
+
+              psql -v ON_ERROR_STOP=1 ${DB_NAME}  <<-EOSQL
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
+
+                DELETE FROM hdb_catalog.event_invocation_logs;
+                DELETE FROM hdb_catalog.event_log;
+                DELETE FROM hdb_catalog.event_triggers ;
+              EOSQL
+      volumes:
+        - name: data
+          azureFile:
+            secretName: {{.Env.AZURE_STORAGE_SECRET_NAME}}
+            shareName: {{.Env.K8SCI_PROJECT}}-backup-restore
+            readOnly: false
+        - name: psql-creds
+          secret:
+            secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}

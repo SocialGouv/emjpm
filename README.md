@@ -5,7 +5,7 @@
 
 ## Fiche technique du projet
 
-[Fiche technique du projet](./tech.md)
+[Fiche technique du projet](./tech.yaml)
 
 ## Getting started
 

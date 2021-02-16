@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
@@ -26,6 +26,5 @@ done
 
 # wait
 for context in $K8SCI_CONTEXT_LIST; do
-  export K8SCI_CONTEXT=$context
-  /opt/k8sci-wait-job build
+  /opt/k8sci-wait-job "pipeline-${K8SCI_GID}-job-build-${context}"
 done
