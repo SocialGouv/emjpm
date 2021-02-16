@@ -20,11 +20,8 @@ spec:
                   key: PGHOST
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
-            - name: APP_PGUSER
-              valueFrom:
-                secretKeyRef:
-                  name: psql-creds
-                  key: APP_PGUSER
+            - name: APP_PG_ROLE
+              value: {{.Env.APP_PG_ROLE}}
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
@@ -55,8 +52,8 @@ spec:
 
                 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PGUSER};
-                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PGUSER};
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
 
               pg_restore \
@@ -69,8 +66,8 @@ spec:
                 /data/$(cat /data/LATEST)
 
               psql -v ON_ERROR_STOP=1 ${DB_NAME}  <<-EOSQL
-                GRANT CONNECT ON DATABASE "${DB_NAME}" TO "${APP_PGUSER}";
-                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO "${APP_PGUSER}";
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
 
                 DELETE FROM hdb_catalog.event_invocation_logs;
                 DELETE FROM hdb_catalog.event_log;
