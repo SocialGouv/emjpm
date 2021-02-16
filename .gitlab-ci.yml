@@ -41,7 +41,7 @@ Run K8SCI:
 
 Wait K8SCI:
   stage: Wait K8SCI
-  image: registry.gitlab.factory.social.gouv.fr/devthejo/docker-kubectl-helm
+  image: registry.gitlab.factory.social.gouv.fr/socialgouv/sre/k8s-ci/kail
   only:
     variables:
       - $RUN_K8SCI
@@ -52,6 +52,9 @@ Wait K8SCI:
       - .vars/
   script:
     - K8SCI_GID=$(jq -r '.job.id' .vars/push-results.json)
+    - kail -n $K8SCI_NS -l k8sci/gid=$K8SCI_GID &
+    - kail_pid=$!
     - kubectl --server=$K8S_SERVER --token=$K8S_TOKEN
       --namespace=$K8SCI_NS wait --for=condition=complete
       "job/pipeline-${K8SCI_GID}-hook-push" --timeout=1h
+    - kill -9 $kail_pid
