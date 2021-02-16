@@ -24,6 +24,7 @@ spec:
             - -c
             - |
               set -e
+              pg_isready
               pg_restore \
                 --no-owner \
                 --no-acl \
