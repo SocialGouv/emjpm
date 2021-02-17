@@ -29,7 +29,7 @@ spec:
             - name: PGHOST
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: PGHOST
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
@@ -38,12 +38,12 @@ spec:
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGUSER
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGPASSWORD
           volumeMounts:
             - mountPath: "/data"
@@ -65,6 +65,3 @@ spec:
             secretName: {{.Env.AZURE_STORAGE_SECRET_NAME}}
             shareName: {{.Env.K8SCI_PROJECT}}-backup-restore
             readOnly: false
-        - name: psql-creds
-          secret:
-            secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}
