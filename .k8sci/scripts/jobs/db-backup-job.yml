@@ -1,12 +1,12 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: pipeline-{{.Env.K8SCI_GID}}-job-db-restore
+  name: pipeline-{{.Env.K8SCI_GID}}-job-db-backup
   labels:
     app.kubernetes.io/managed-by: k8sci
     k8sci/gid: "{{.Env.K8SCI_GID}}"
     k8sci/type: job
-    k8sci/job: db-restore
+    k8sci/job: db-backup
 spec:
   backoffLimit: 1
   template:
@@ -15,13 +15,15 @@ spec:
         app.kubernetes.io/managed-by: k8sci
         k8sci/gid: "{{.Env.K8SCI_GID}}"
         k8sci/type: job
-        k8sci/job: db-restore
+        k8sci/job: db-backup
     spec:
       restartPolicy: Never
       containers:
-        - name: restore-job
+        - name: backup-job
           image: postgres:10-alpine
           env:
+            - name: K8SCI_PROJECT
+              value: {{.Env.K8SCI_PROJECT}}
             - name: PGSSLMODE
               value: "require"
             - name: PGHOST
@@ -50,40 +52,13 @@ spec:
             - sh
             - -c
             - |
+              echo $PGUSER
               set -e
+              TIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')
+              BACKUP_FILENAME="backup_${K8SCI_PROJECT}_${TIMESTAMP}.dump"
+              pg_dump --verbose -Fc $DB_NAME > /data/$BACKUP_FILENAME
+              echo "$BACKUP_FILENAME" > /data/LATEST
 
-              psql postgres <<EOF
-                SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '${DB_NAME}';
-                DROP DATABASE IF EXISTS "${DB_NAME}";
-              EOF
-
-              psql -v ON_ERROR_STOP=1 postgres <<EOF
-                CREATE DATABASE "${DB_NAME}";
-                \c "${DB_NAME}"
-
-                CREATE EXTENSION IF NOT EXISTS pgcrypto;
-
-                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-              EOF
-
-              pg_restore \
-                --no-owner \
-                --no-acl \
-                --exit-on-error \
-                --format=c \
-                --verbose \
-                --dbname ${DB_NAME} \
-                /data/$(cat /data/LATEST)
-
-              psql -v ON_ERROR_STOP=1 ${DB_NAME}  <<-EOSQL
-                GRANT CONNECT ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
-                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO "${APP_PG_ROLE}";
-
-                DELETE FROM hdb_catalog.event_invocation_logs;
-                DELETE FROM hdb_catalog.event_log;
-                DELETE FROM hdb_catalog.event_triggers ;
-              EOSQL
       volumes:
         - name: data
           azureFile:

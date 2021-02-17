@@ -27,7 +27,7 @@ spec:
             - name: PGHOST
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: PGHOST
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
@@ -36,12 +36,12 @@ spec:
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGUSER
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGPASSWORD
           command:
             - sh
@@ -58,6 +58,6 @@ spec:
                 GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
       volumes:
-        - name: psql-creds
+        - name: {{.Env.PSQL_CREDS_SECRET_NAME}}
           secret:
             secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}

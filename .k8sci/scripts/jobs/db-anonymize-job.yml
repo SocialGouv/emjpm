@@ -34,17 +34,17 @@ spec:
             - name: PGHOST
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: PGHOST
             - name: DB_NAME
               value: {{.Env.DB_NAME}}
             - name: PGUSER
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGUSER
             - name: PGPASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: psql-creds
+                  name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGPASSWORD
