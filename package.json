@@ -21,7 +21,9 @@
     "postinstall": "scripts/ci/postinstall",
     "release": "scripts/ci/release",
     "prod": "scripts/ci/prod",
-    "delivery": "scripts/ci/delivery"
+    "next": "scripts/ci/next",
+    "delivery": "scripts/ci/delivery",
+    "ci:logs": "scripts/ci/k8sci-logs"
   },
   "license": "Apache-2.0",
   "devDependencies": {

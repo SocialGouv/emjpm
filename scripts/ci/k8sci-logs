@@ -1,0 +1,3 @@
+#!/bin/sh
+
+kail -n ci-emjpm -l app.kubernetes.io/managed-by=k8sci
