@@ -13,7 +13,7 @@ import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesCh
 import { ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-const resultPerPage = 50;
+const resultPerPage = 10;
 
 function RowItem(props) {
   const { item } = props;

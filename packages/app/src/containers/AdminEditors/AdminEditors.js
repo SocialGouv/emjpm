@@ -70,7 +70,7 @@ function RowItem({ item }) {
 
 function AdminEditors() {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const resultPerPage = 20;
+  const resultPerPage = 10;
   const { debouncedSearchText } = useContext(AdminFilterContext);
 
   useEffectObjectValuesChangeCallback({ debouncedSearchText }, () => {

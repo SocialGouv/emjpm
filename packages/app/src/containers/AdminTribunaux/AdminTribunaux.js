@@ -85,7 +85,7 @@ function RowItem({ item }) {
 }
 
 function AdminTribunaux() {
-  const resultPerPage = 20;
+  const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, selectedDepartementCode } = useContext(
     AdminFilterContext

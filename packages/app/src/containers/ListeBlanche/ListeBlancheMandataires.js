@@ -64,7 +64,7 @@ export function ListeBlancheMandataires(props) {
   const { onSelectItem } = props;
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
 
-  const resultPerPage = 50;
+  const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
 
   useEffect(() => {

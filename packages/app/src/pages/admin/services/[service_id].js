@@ -1,6 +1,5 @@
 import { Box, Card, Link as StyledLink } from "rebass";
 
-import { AdminServiceMesures } from "~/containers/AdminServices";
 import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { MesureImportPanel } from "~/containers/MesureImport";
@@ -33,7 +32,7 @@ function Service() {
           />
         </Box>
         <Card my={1}>
-          <AdminServiceMesures serviceId={serviceId} />
+          {/* <AdminServiceMesures serviceId={serviceId} /> */}
         </Card>
         <Card my={1}>
           <MesureImportPanel serviceId={serviceId} />

@@ -59,7 +59,7 @@ function RowItem({ item }) {
 
 function AdminEditorRequest() {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const resultPerPage = 20;
+  const resultPerPage = 10;
   const { data, error, loading } = useQuery(EDITOR_REQUESTS, {
     variables: {
       limit: resultPerPage,

@@ -110,7 +110,7 @@ function RowItem({ item }) {
 }
 
 function AdminUsers() {
-  const resultPerPage = 50;
+  const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { debouncedSearchText, debouncedSearchId, selectedType } = useContext(
     AdminFilterContext

@@ -8,7 +8,7 @@ import { PaginatedList } from "~/containers/PaginatedList";
 import { ListeBlancheServiceItem } from "./ListeBlancheService";
 import { LB_SERVICES } from "./queries";
 
-const resultPerPage = 50;
+const resultPerPage = 10;
 
 function getRequestFilters(filters) {
   const requestFilters = {};
