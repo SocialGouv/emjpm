@@ -1,3 +1,4 @@
+/* eslint-disable auto-import/auto-import */
 import { isUnsupportedBrowser } from ".";
 
 const testBrowserObject = {

@@ -1,8 +1,8 @@
+/* eslint-disable auto-import/auto-import */
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute, AuthRedirect } from "~/user/Auth";
 
 import { NotFound } from "~/components";
-
 const routes = [
   {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/accept")

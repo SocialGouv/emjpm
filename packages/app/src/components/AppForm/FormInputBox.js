@@ -1,4 +1,4 @@
-const { Card } = require("rebass");
+import { Card } from "rebass";
 
 export default function FormInputBox(props) {
   const { children } = props;

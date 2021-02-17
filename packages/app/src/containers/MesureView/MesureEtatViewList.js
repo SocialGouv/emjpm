@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { MesureEtatCreateOrEdit } from "~/containers/MesureEtatCreateOrEdit";
 
-const { Heading, Button, Text } = require("~/components");
-const { Flex, Box } = require("rebass");
-const { MesureEtatView } = require("./MesureEtatView");
+import { Heading, Button, Text } from "~/components";
+import { Flex, Box } from "rebass";
+import { MesureEtatView } from "./MesureEtatView";
 
 function MesureEtatViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);

@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { MesureRessourceCreateOrEdit } from "~/containers/MesureRessourceCreateOrEdit";
 
-const { Heading, Button, Text } = require("~/components");
-const { Flex, Box } = require("rebass");
-const { MesureRessourceView } = require("./MesureRessourceView");
+import { Heading, Button, Text } from "~/components";
+import { Flex, Box } from "rebass";
+import { MesureRessourceView } from "./MesureRessourceView";
 
 function MesureRessourceViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);

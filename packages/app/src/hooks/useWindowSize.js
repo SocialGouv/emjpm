@@ -1,4 +1,4 @@
-const { useState, useEffect } = require("react");
+import { useState, useEffect } from "react";
 
 function getSize() {
   if (typeof window !== "undefined") {

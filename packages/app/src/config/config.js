@@ -1,3 +1,4 @@
+/* eslint-disable auto-import/auto-import */
 import version from "./version";
 
 const { location } = window;

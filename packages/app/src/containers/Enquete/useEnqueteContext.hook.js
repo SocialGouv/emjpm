@@ -1,5 +1,19 @@
 import { useMemo, useReducer, useState, useEffect, useRef } from "react";
 
+const enqueteContextInitialValue = () => {
+  return {
+    actions: {
+      autoSubmit: false,
+    },
+    form: {
+      dirty: false,
+      nextStep: null,
+      submited: false,
+      valid: true, // {section, step} | 'previous' | 'next'
+    },
+  };
+};
+
 function enqueteContextReducer(state, action) {
   switch (action.type) {
     case "submit-and-navigate": {
@@ -75,21 +89,6 @@ export function useEnqueteContext(props) {
     const step = !section ? undefined : section.steps[currentStep.substep || 0];
     return { section, step };
   }, [currentStep.step, currentStep.substep, sections]);
-
-  const enqueteContextInitialValue = useMemo(
-    () => ({
-      actions: {
-        autoSubmit: false,
-      },
-      form: {
-        dirty: false,
-        nextStep: null,
-        submited: false,
-        valid: true, // {section, step} | 'previous' | 'next'
-      },
-    }),
-    []
-  );
 
   const enqueteReponseStatus = enqueteReponse ? enqueteReponse.status : "";
   const readOnly = enqueteReponseStatus !== "draft";

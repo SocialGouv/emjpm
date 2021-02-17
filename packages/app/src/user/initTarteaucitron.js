@@ -1,3 +1,4 @@
+/* eslint-disable auto-import/auto-import */
 export default function initTarteaucitron() {
   window.tarteaucitronForceLanguage = document.documentElement.lang;
 

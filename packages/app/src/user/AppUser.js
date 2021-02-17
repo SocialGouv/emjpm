@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import jwtDecode from "jwt-decode";
 
 import { UserProvider } from "~/containers/UserContext/index";

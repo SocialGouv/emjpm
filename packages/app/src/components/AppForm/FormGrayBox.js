@@ -1,4 +1,4 @@
-const { Box } = require("rebass");
+import { Box } from "rebass";
 
 const grayBoxStyle = {
   bg: "cardSecondary",
