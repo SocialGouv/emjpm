@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 cd packages/hasura
 
-if nc -z localhost 9695; then
-  echo "hasura console already running on port 9695"
-  echo "you can go to http://localhost:9695"
-  exit 0
+if !nc -z localhost 9695; then
+  echo "running hasura console"
+  while ! hasura console --no-browser 2>/dev/null; do
+    sleep 2
+  done
 fi
 
-echo "running hasura console"
-while ! hasura console 2>/dev/null; do
-  sleep 2
-done
+echo "hasura console at http://localhost:9695"
