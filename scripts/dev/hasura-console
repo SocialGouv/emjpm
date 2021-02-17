@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 cd packages/hasura
 
-if !nc -z localhost 9695; then
+if ! nc -z localhost 9695; then
   echo "running hasura console"
   while ! hasura console --no-browser 2>/dev/null; do
     sleep 2
