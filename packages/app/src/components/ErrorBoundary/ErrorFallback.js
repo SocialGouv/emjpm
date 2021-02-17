@@ -2,7 +2,7 @@ import { Hammer2 } from "@styled-icons/icomoon/Hammer2";
 import { ArrowLeft } from "@styled-icons/material/ArrowLeft";
 
 import ErrorBox from "~/components/ErrorBox";
-// import history from "~/routes/history.js";
+import goBackAndRefresh from "~/utils/navigation/goBackAndRefresh";
 
 export default function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -22,8 +22,7 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
             fontSize: "24px",
           }}
           onClick={() => {
-            // history.goBack();
-            window.history.go(-1);
+            goBackAndRefresh();
           }}
         >
           <ArrowLeft size={40} />
