@@ -53,8 +53,6 @@ spec:
             - -c
             - |
               set -e
-              set -x
-              echo DB_NAME=$DB_NAME
               TIMESTAMP=$(date '+%Y-%m-%d_%H-%M-%S')
               BACKUP_FILENAME="backup_${K8SCI_PROJECT}_${TIMESTAMP}.dump"
               pg_dump --verbose -Fc $DB_NAME > /data/$BACKUP_FILENAME
