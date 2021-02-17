@@ -1,17 +1,15 @@
 import { useMemo, useReducer, useState, useEffect, useRef } from "react";
 
-const enqueteContextInitialValue = () => {
-  return {
-    actions: {
-      autoSubmit: false,
-    },
-    form: {
-      dirty: false,
-      nextStep: null,
-      submited: false,
-      valid: true, // {section, step} | 'previous' | 'next'
-    },
-  };
+const enqueteContextInitialValue = {
+  actions: {
+    autoSubmit: false,
+  },
+  form: {
+    dirty: false,
+    nextStep: null,
+    submited: false,
+    valid: true, // {section, step} | 'previous' | 'next'
+  },
 };
 
 function enqueteContextReducer(state, action) {
@@ -53,7 +51,14 @@ function enqueteContextReducer(state, action) {
       }
     }
     case "navigate-to-next-page":
-      return enqueteContextInitialValue;
+      return {
+        actions: {
+          ...enqueteContextInitialValue.actions,
+        },
+        form: {
+          ...enqueteContextInitialValue.form,
+        },
+      };
     case "set-form-dirty":
       return {
         ...state,
