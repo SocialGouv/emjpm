@@ -32,7 +32,7 @@ function Service() {
           />
         </Box>
         <Card my={1}>
-          {/* <AdminServiceMesures serviceId={serviceId} /> */}
+          <AdminServiceMesures serviceId={serviceId} />
         </Card>
         <Card my={1}>
           <MesureImportPanel serviceId={serviceId} />
