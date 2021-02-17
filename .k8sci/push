@@ -8,7 +8,7 @@ source $(dirname $0)/.env
 set +a
 
 # DEV WIP
-export DB_NAME="$K8SCI_PROJECT"
+export K8SCI_PRODUCTION="1"
 $(dirname $0)/scripts/db-backup
 exit 0
 
