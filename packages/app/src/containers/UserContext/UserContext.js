@@ -3,7 +3,6 @@ import { isService, isMandataire } from "@emjpm/biz";
 import { createContext, Fragment, useMemo } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { setUser } from "~/user/sentry";
 
 import {
   ADMIN_USERS,
@@ -34,11 +33,6 @@ function UserProvider(props) {
     variables.endDate = endDate;
   }
   const { data, loading, error } = useQuery(QUERY_TYPE[type], {
-    onCompleted: ({ users_by_pk: user }) => {
-      if (user) {
-        setUser({ id: user.id, role: type });
-      }
-    },
     variables,
   });
 
@@ -71,7 +65,6 @@ export function Provider(props) {
   const type = user ? user.role : null;
   const userId = user ? user.id : null;
   const agrements = user ? user.agrements : [];
-
   if (userId) {
     return (
       <UserProvider type={type} userId={userId} agrements={agrements}>
