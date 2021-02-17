@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { isService, isMandataire } from "@emjpm/biz";
-import { createContext, Fragment, useMemo } from "react";
+import { createContext, useMemo } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
+import { endDate } from "~/utils/dates";
 
 import {
   ADMIN_USERS,
@@ -23,15 +24,20 @@ const QUERY_TYPE = {
   ti: MAGISTRAT_USERS,
 };
 
-function UserProvider(props) {
-  const { type, userId, agrements, children } = props;
-  const variables = {
-    userId,
-  };
-  const endDate = useMemo(() => new Date(), []);
-  if (isMandataire({ type }) || isService({ type })) {
-    variables.endDate = endDate;
-  }
+function UserDataQueryProvider(props) {
+  const { user, children } = props;
+  const { role: type, id: userId } = user;
+
+  const variables = useMemo(() => {
+    const variables = {
+      userId,
+    };
+    if (isMandataire({ type }) || isService({ type })) {
+      variables.endDate = endDate;
+    }
+    return variables;
+  }, [userId, type]);
+
   const { data, loading, error } = useQuery(QUERY_TYPE[type], {
     variables,
   });
@@ -40,18 +46,17 @@ function UserProvider(props) {
     return null;
   }
 
-  const user = data.users_by_pk;
+  const userData = data.users_by_pk;
   let currentService;
-  if (isService(user)) {
+  if (isService(userData)) {
     const {
       service_members: [{ service }],
-    } = user;
+    } = userData;
     currentService = service;
   }
 
   const currentUser = {
-    ...user,
-    agrements,
+    ...userData,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
     service: currentService,
     statistics: data.statistics,
@@ -62,18 +67,13 @@ function UserProvider(props) {
 
 export function Provider(props) {
   const { children, user } = props;
-  const type = user ? user.role : null;
-  const userId = user ? user.id : null;
-  const agrements = user ? user.agrements : [];
-  if (userId) {
+  if (user?.id) {
     return (
-      <UserProvider type={type} userId={userId} agrements={agrements}>
-        {children}
-      </UserProvider>
+      <UserDataQueryProvider user={user}>{children}</UserDataQueryProvider>
     );
   }
 
-  return <Fragment>{children}</Fragment>;
+  return <>{children}</>;
 }
 
 export const { Consumer } = Context;
