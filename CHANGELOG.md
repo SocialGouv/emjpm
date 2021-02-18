@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.91.0](https://github.com/SocialGouv/emjpm/compare/v25.90.3...v25.91.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **dev:** hasura console --no-browser ([2dc93e9](https://github.com/SocialGouv/emjpm/commit/2dc93e9405287e7be499154a78fc0155d97d5beb))
+* **enquete:** nav ([2676197](https://github.com/SocialGouv/emjpm/commit/2676197598e090599eaa5aa55dfe76104fe958a4))
+* **enquete:** race condition bug ([6399613](https://github.com/SocialGouv/emjpm/commit/6399613c74321ef3cfd045560abbffeef33b489a))
+* **error:** go back ([9d5a5e4](https://github.com/SocialGouv/emjpm/commit/9d5a5e45f3db90e74185f4b9e619b8aeb2872cc0))
+* **error:** go back ([7e43e1c](https://github.com/SocialGouv/emjpm/commit/7e43e1c4023f80007bd36285a6f8ea0b771a6dc3))
+* **hasura-console:** script syntax ([b96a2e8](https://github.com/SocialGouv/emjpm/commit/b96a2e8da3a7e17bbb3f00b1b41c9ec7eb871cd2))
+* **perfs:** reduce to 10 results per page ([b15385a](https://github.com/SocialGouv/emjpm/commit/b15385a34b8d0ec693d6c88baf3fa7e6ea162008))
+* **rollback:** type ([cad6c37](https://github.com/SocialGouv/emjpm/commit/cad6c3793db2b4728c5de36798336c25fb107556))
+* **user-query:** call once ([2105ded](https://github.com/SocialGouv/emjpm/commit/2105ded84ce9ef850407835c47cf7df647e71a90))
+
+
+### Features
+
+* **lint:** autoimport + fix vars ([58b15ba](https://github.com/SocialGouv/emjpm/commit/58b15ba09d0995877b14bbe0123c598d319b9f91))
+
+
+
+
+
 ## [25.90.3](https://github.com/SocialGouv/emjpm/compare/v25.90.2...v25.90.3) (2021-02-17)
 
 

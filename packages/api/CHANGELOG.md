@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.91.0](https://github.com/SocialGouv/emjpm/compare/v25.90.3...v25.91.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **enquete:** race condition bug ([6399613](https://github.com/SocialGouv/emjpm/commit/6399613c74321ef3cfd045560abbffeef33b489a))
+
+
+
+
+
 ## [25.90.3](https://github.com/SocialGouv/emjpm/compare/v25.90.2...v25.90.3) (2021-02-17)
 
 **Note:** Version bump only for package @emjpm/api
