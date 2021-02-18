@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.91.1](https://github.com/SocialGouv/emjpm/compare/v25.91.0...v25.91.1) (2021-02-18)
+
+
+### Bug Fixes
+
+* **build:** eslint package ([242a895](https://github.com/SocialGouv/emjpm/commit/242a8958694dfd83a0a7577686eb1b9b358188f9))
+
+
+
+
+
 # [25.91.0](https://github.com/SocialGouv/emjpm/compare/v25.90.3...v25.91.0) (2021-02-18)
 
 
