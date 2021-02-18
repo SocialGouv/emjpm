@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ -n "$1" ]; then
+  ID=$1
+  kubectl -n ci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci -l k8sci/gid=$ID
+else
+  kubectl -n ci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci
+fi

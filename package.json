@@ -24,7 +24,8 @@
     "next": "scripts/ci/next",
     "delivery": "scripts/ci/delivery",
     "ci:logs": "scripts/ci/k8sci-logs",
-    "ci:trigger": "scripts/ci/trigger"
+    "ci:trigger": "scripts/ci/trigger",
+    "ci:stop": "scripts/ci/k8sci-stop"
   },
   "license": "Apache-2.0",
   "devDependencies": {
