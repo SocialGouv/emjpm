@@ -13,12 +13,6 @@ export function EnquetePreposeSubmit(props) {
   const [submitEnqueteReponse, { loading }] = useMutation(
     SUBMIT_ENQUETE_REPONSE,
     {
-      onCompleted: () => {
-        // TODO: it must be changed, but actually SUBMIT_ENQUETE_REPONSE
-        // use useSubscription method with graphql query 🤷
-        // The problem is refetchQueries doesn't works with useSubscription.
-        document.location.reload(true);
-      },
       refetchQueries: [
         {
           query: ENQUETE_WITH_REPONSE_STATUS,

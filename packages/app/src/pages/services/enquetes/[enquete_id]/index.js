@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { useSubscription } from "@apollo/client";
+import { useQuery } from "@apollo/client";
 import { useHistory, useParams } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -19,12 +19,9 @@ function EnquetePage() {
 
   const currentStep = useCurrentStepFromUrl();
 
-  const { data, loading, error } = useSubscription(
-    ENQUETE_WITH_REPONSE_STATUS,
-    {
-      variables: { enqueteId, userId },
-    }
-  );
+  const { data, loading, error } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
+    variables: { enqueteId, userId },
+  });
 
   const { enquete, enqueteReponse } = useMemo(() => {
     const enquete = data ? data.enquetes_by_pk : {};

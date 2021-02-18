@@ -27,7 +27,6 @@ async function submitEnqueteMandataireIndividuel({
 }
 
 async function initEnqueteMandataireIndividuel({
-  // eslint-disable-next-line no-unused-vars
   enqueteContext: { enqueteId, mandataireId },
 }) {
   let enqueteReponse = await getEnqueteReponse({
