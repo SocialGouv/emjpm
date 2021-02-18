@@ -87,39 +87,15 @@ yarn dev:restore-dump [my-path-to-emjpm.dump]
 
 ### Semantic releases
 
-[On a successful `master` branch pipeline click on trigger the `Release` job.](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/pipelines)
-
-To increase production deployment and avoid to run two pipeline,
-You can trigger release locally using `yarn release` script.
-You have to provide a github token by providing `GH_TOKEN` env var,
-or put your token in untracked `.gh-token` file at root path of the projet.
 ```sh
 yarn release
 ```
 
-### Build and deploy from using experimental [k8s-ci](https://github.com/SocialGouv/k8s-ci)
-You have to provide a the webhook token credentials by providing `K8S_CI_WEBHOOK_TOKEN` env var,
-or put your token in untracked `.k8s-ci-webhook-token` file at root path of the projet.
-requirements:
-- docker@^19.03
-- bash@^4
-- git@^2
-- kubectl@^1.19
-```sh
-yarn ci:k8s-ci
-```
-
 ## Deployment policy
+see [documentation details](https://github.com/SocialGouv/emjpm/blob/master/.k8sci/README.md)
 
-All branches and tags are automatically deployed
-See https://github.com/SocialGouv/emjpm/deployments
-
-- **Development** : https://master.emjpm.dev.fabrique.social.gouv.fr/
-- **Prod Mirror** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
-- **Pre Prod** : https://v24-1-0.emjpm.dev.fabrique.social.gouv.fr
+- **Pre Prod** : https://next-emjpm.dev2.fabrique.social.gouv.fr
 - **Prod** : https://emjpm.fabrique.social.gouv.fr
-
-New releases are deployed on production when pipeline end with success
 
 ## Branch name
 
