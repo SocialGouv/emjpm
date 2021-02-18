@@ -31,4 +31,4 @@ if [ -z "$BRANCH" ]; then
 fi
 
 curl -o /dev/null -sS \
-  "$CI_URL/hooks/$EVENT?token=$TOKEN&branch=$BRANCH"
+  "$CI_URL/hooks/$EVENT?token=$K8SCI_TOKEN&branch=$BRANCH"
