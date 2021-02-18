@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.92.0](https://github.com/SocialGouv/emjpm/compare/v25.91.1...v25.92.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* **script:** var ([808f74b](https://github.com/SocialGouv/emjpm/commit/808f74bba637c7786567a50fd82bac32225340ee))
+
+
+### Features
+
+* **dev:** ci stop script ([53cc552](https://github.com/SocialGouv/emjpm/commit/53cc5526ae5c9e5c21167e3cbcb7f35b64f2f3ba))
+* **dev:** ci trigger script ([34cadb3](https://github.com/SocialGouv/emjpm/commit/34cadb373cb8af57e4b8607dfcd4b8c90198359c))
+* **map:** fallback on error ([35a4640](https://github.com/SocialGouv/emjpm/commit/35a464018bc76a070ee9726a277087ce1c9a258a))
+
+
+
+
+
 ## [25.91.1](https://github.com/SocialGouv/emjpm/compare/v25.91.0...v25.91.1) (2021-02-18)
 
 

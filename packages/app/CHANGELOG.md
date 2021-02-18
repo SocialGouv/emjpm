@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.92.0](https://github.com/SocialGouv/emjpm/compare/v25.91.1...v25.92.0) (2021-02-18)
+
+
+### Features
+
+* **map:** fallback on error ([35a4640](https://github.com/SocialGouv/emjpm/commit/35a464018bc76a070ee9726a277087ce1c9a258a))
+
+
+
+
+
 ## [25.91.1](https://github.com/SocialGouv/emjpm/compare/v25.91.0...v25.91.1) (2021-02-18)
 
 
