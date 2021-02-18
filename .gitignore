@@ -6,3 +6,4 @@ node_modules
 dump
 /.env
 .gh-token
+.k8sci-token

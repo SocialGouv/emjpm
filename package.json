@@ -23,7 +23,8 @@
     "prod": "scripts/ci/prod",
     "next": "scripts/ci/next",
     "delivery": "scripts/ci/delivery",
-    "ci:logs": "scripts/ci/k8sci-logs"
+    "ci:logs": "scripts/ci/k8sci-logs",
+    "ci:trigger": "scripts/ci/trigger"
   },
   "license": "Apache-2.0",
   "devDependencies": {

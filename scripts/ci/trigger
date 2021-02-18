@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+set -e
+
+export CI_URL=${CI_URL:-"https://ci-emjpm.dev2.fabrique.social.gouv.fr"}
+
+if [ -z "$K8SCI_TOKEN" ] && [ -f .k8sci-token ]; then
+  export K8SCI_TOKEN=`cat .k8sci-token`
+fi
+if [ -z "$K8SCI_TOKEN" ]; then
+  echo "missing \$K8SCI_TOKEN env variable"
+  echo "store it in .k8sci-token"
+  exit 1;
+fi
+
+if [ -n "$1" ]; then
+  EVENT=$1
+else
+  EVENT=push
+fi
+
+if [ -n "$2" ]; then
+  BRANCH=$2
+else
+  BRANCH=$(git branch --show-current)
+fi
+
+if [ -z "$BRANCH" ]; then
+  echo "unable to retrieve BRANCH"
+  exit 1;
+fi
+
+curl -o /dev/null -sS \
+  "$CI_URL/hooks/$EVENT?token=$TOKEN&branch=$BRANCH"
