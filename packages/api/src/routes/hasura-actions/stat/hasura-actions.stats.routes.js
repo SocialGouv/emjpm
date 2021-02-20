@@ -11,13 +11,17 @@ router.post("/opened-mesures", async (req, res) => {
   const { regionId, departementCode, start, end } = req.body.input;
   const departementCodes = await getDepartementCodes(regionId, departementCode);
 
-  const query = Mesure.query()
-    .count("id")
-    .where("date_nomination", ">", start)
-    .where("date_nomination", "<=", end);
+  const query = Mesure.query().count("id");
+  if (start) {
+    query.where("date_nomination", ">", start);
+  }
+  if (end) {
+    query.where("date_nomination", "<=", end);
+  }
   if (departementCodes) {
     query.where("departement_code", "in", departementCodes);
   }
+  query.where("status", "en_cours");
 
   const [openedMesuresNb] = await query;
 
@@ -31,13 +35,17 @@ router.post("/closed-mesures", async (req, res) => {
 
   const departementCodes = await getDepartementCodes(regionId, departementCode);
 
-  const query = Mesure.query()
-    .count("id")
-    .where("date_fin_mesure", ">", start)
-    .where("date_fin_mesure", "<=", end);
+  const query = Mesure.query().count("id");
+  if (start) {
+    query.where("date_fin_mesure", ">", start);
+  }
+  if (end) {
+    query.where("date_fin_mesure", "<=", end);
+  }
   if (departementCodes) {
     query.where("departement_code", "in", departementCodes);
   }
+  query.where("status", "eteinte");
 
   const [closedMesuresNb] = await query;
 
