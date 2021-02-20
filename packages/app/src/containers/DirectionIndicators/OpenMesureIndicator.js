@@ -26,6 +26,8 @@ function OpenMesureIndicator() {
     stat_opened_mesures: { opened_mesures_nb },
   } = data;
 
+  console.log(data);
+
   return (
     <Indicator
       error={error}

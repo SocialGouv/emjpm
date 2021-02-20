@@ -53,7 +53,7 @@ export function useDepartements({ all = false, ...queryOptions } = {}) {
   });
 
   let departementsCodes = null;
-  if (data && data.direction) {
+  if (data && data.direction && data.direction.length > 0) {
     const [direction] = data.direction;
     const { departement, region } = direction;
 
