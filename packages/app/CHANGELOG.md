@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.93.0](https://github.com/SocialGouv/emjpm/compare/v25.92.0...v25.93.0) (2021-02-20)
+
+
+### Bug Fixes
+
+* **agrements:** parse ([37fe04a](https://github.com/SocialGouv/emjpm/commit/37fe04a4f020f8654f1e826260172848ac319ad9))
+* **direction:** empty d list (national) ([a558051](https://github.com/SocialGouv/emjpm/commit/a558051d45c11d496ed4d4213453b9336c5e8b67))
+
+
+### Features
+
+* **disconnect:** from error ([e6188f6](https://github.com/SocialGouv/emjpm/commit/e6188f6347393f761ec1648eb96fcee1ee203b55))
+
+
+
+
+
 # [25.92.0](https://github.com/SocialGouv/emjpm/compare/v25.91.1...v25.92.0) (2021-02-18)
 
 
