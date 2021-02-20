@@ -28,9 +28,9 @@ export default function DirectionPage() {
   const [direction] = user.directions;
   const initialFilters = {};
 
-  if (direction.type === "departemental") {
+  if (direction?.type === "departemental") {
     initialFilters.departement = direction.departement.id;
-  } else if (direction.type === "regional") {
+  } else if (direction?.type === "regional") {
     initialFilters.region = direction.region.id;
   }
 
