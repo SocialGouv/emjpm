@@ -1,8 +1,11 @@
 import { Hammer2 } from "@styled-icons/icomoon/Hammer2";
 import { ArrowLeft } from "@styled-icons/material/ArrowLeft";
+import { PowerSettingsNew } from "@styled-icons/material/PowerSettingsNew";
 
 import ErrorBox from "~/components/ErrorBox";
 import goBackAndRefresh from "~/utils/navigation/goBackAndRefresh";
+
+import { clearUserStorage } from "~/user/Auth";
 
 export default function ErrorFallback({ error, resetErrorBoundary }) {
   return (
@@ -20,6 +23,7 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
         <button
           style={{
             fontSize: "24px",
+            float: "left",
           }}
           onClick={() => {
             goBackAndRefresh();
@@ -27,6 +31,19 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
         >
           <ArrowLeft size={40} />
           Page précédente
+        </button>
+        <button
+          style={{
+            fontSize: "24px",
+            float: "right",
+          }}
+          onClick={() => {
+            clearUserStorage();
+            goBackAndRefresh();
+          }}
+        >
+          <PowerSettingsNew size={28} />
+          Se déconnecter
         </button>
       </div>
 

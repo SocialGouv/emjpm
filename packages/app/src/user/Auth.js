@@ -223,3 +223,9 @@ export function AuthRedirect(props) {
   }, [auth]);
   return null;
 }
+
+export function clearUserStorage() {
+  localStorage.removeItem("auth");
+  localStorage.removeItem("impersonate");
+  localStorage.removeItem("filters");
+}
