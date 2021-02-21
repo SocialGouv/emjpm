@@ -13,11 +13,6 @@ services:
     image: emjpm_postgres
     build:
       context: ./docker/postgres
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
     environment:
       # master password
       - POSTGRES_USER=emjpm
