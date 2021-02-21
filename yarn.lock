@@ -8368,8 +8368,10 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-"eslint-plugin-auto-import@file:./packages/app/src/utils/eslint-plugin-auto-import":
-  version "1.0.0"
+eslint-plugin-auto-import@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-auto-import/-/eslint-plugin-auto-import-0.1.1.tgz#327a2f398cf619892dfe03343606e38b29d7f29f"
+  integrity sha512-H3RX0wmRq/MLIf3ZMLEy9OyvQKUGxWIsi+TJenicgGptJzdQnQe6XheGlFlqnqUjpy3CQW/1KiF7UNTNxM6Xhw==
   dependencies:
     requireindex "~1.1.0"
     ts-morph "^9.1.0"
