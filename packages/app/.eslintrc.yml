@@ -17,7 +17,7 @@ plugins:
   - react
   - eslint-plugin-react
   - unused-imports
-  - auto-import
+  - autoimport
 settings:
   react:
     version: detect
@@ -29,7 +29,7 @@ rules:
   react/jsx-uses-vars: 1
   unused-imports/no-unused-imports-ts: 1
   import/no-named-as-default: 0
-  auto-import/auto-import:
+  autoimport/autoimport:
     - 1
     - packages:
         react:

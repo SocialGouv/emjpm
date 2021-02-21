@@ -1,4 +1,4 @@
-/* eslint-disable auto-import/auto-import */
+/* eslint-disable autoimport/autoimport */
 import { Route, Switch } from "react-router-dom";
 import { PrivateRoute, AuthRedirect } from "~/user/Auth";
 

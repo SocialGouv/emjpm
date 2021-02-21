@@ -1,4 +1,4 @@
-/* eslint-disable auto-import/auto-import */
+/* eslint-disable autoimport/autoimport */
 let version;
 version = require("../../package.json").version;
 if (version === "0.0.0") {

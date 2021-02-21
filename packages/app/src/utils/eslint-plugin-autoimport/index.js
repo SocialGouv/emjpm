@@ -2,10 +2,10 @@
 "use strict";
 
 const requireIndex = require("requireindex");
-const autoImportRule = require("./auto-import");
+const autoImportRule = require("./autoimport");
 
 module.exports = {
   rules: {
-    "auto-import": autoImportRule.create,
+    "autoimport": autoImportRule.create,
   },
 };
