@@ -25,9 +25,6 @@ COPY packages/biz/.eslintrc.yml  /app/packages/biz/.eslintrc.yml
 RUN yarn workspaces run postinstall
 RUN yarn workspace @emjpm/api build
 
-FROM node as build_usecache
-ONBUILD COPY packages/api/dist packages/api/dist/
-
 # SERVER
 FROM node as server
 

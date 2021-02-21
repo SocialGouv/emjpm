@@ -29,9 +29,6 @@ ENV REACT_APP_SENTRY_PUBLIC_DSN=$REACT_APP_SENTRY_PUBLIC_DSN
 RUN yarn workspaces run postinstall
 RUN yarn workspace @emjpm/app build
 
-FROM node as build_usecache
-ONBUILD COPY packages/app/build packages/app/build/
-
 # SERVER
 FROM node as server
 
