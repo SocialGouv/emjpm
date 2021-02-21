@@ -8338,8 +8338,10 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-"eslint-plugin-autoimport@file:./packages/app/src/utils/eslint-plugin-autoimport":
+eslint-plugin-autoimport-declarative@^1.0.0:
   version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-autoimport-declarative/-/eslint-plugin-autoimport-declarative-1.0.0.tgz#59df785a7db72379b1fe9b449804d1f5afc0889e"
+  integrity sha512-9QQEBRN1BX+JhgRNcEsae1tNbkBIkfZ+7VF7L7LVlJhGkia2Iw3O/lDEqMW2aL+tCIIUZEBoaBlk/wBVjYPDrA==
 
 eslint-plugin-es@^3.0.0:
   version "3.0.1"

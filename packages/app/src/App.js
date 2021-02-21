@@ -18,7 +18,6 @@ import Impersonation from "~/containers/Impersonation";
 
 export default function App() {
   useSentry();
-
   return (
     <>
       <GlobalStyle />
