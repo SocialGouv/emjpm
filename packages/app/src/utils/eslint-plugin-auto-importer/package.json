@@ -1,0 +1,8 @@
+{
+  "name": "eslint-plugin-auto-importer",
+  "version": "1.0.0",
+  "description": "Automatically imports based on declarative linter",
+  "author": "Jo Gottfreund",
+  "main": "index.js",
+  "license": "MIT"
+}

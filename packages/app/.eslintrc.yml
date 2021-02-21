@@ -31,7 +31,17 @@ rules:
   import/no-named-as-default: 0
   auto-import/auto-import:
     - 1
-    - rootPath: ./src
-      packages:
+    - packages:
         react:
-          hasExports: react
+          - useState
+          - useEffect
+          - useContext
+          - useReducer
+          - useCallback
+          - useMemo
+          - useRef
+          - useImperativeHandle
+          - useLayoutEffect
+          - useDebugValue
+          - name: React
+            isDefault: true
