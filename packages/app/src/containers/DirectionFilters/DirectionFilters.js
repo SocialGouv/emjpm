@@ -82,7 +82,7 @@ export function DirectionFilters(props) {
           <Flex>
             <Box sx={BoxStyle}>
               <Input
-                value={filters.startDate}
+                value={filters.startDate || ""}
                 spellCheck="false"
                 autoComplete="false"
                 onChange={(event) =>
@@ -96,7 +96,7 @@ export function DirectionFilters(props) {
             </Box>
             <Box sx={SimpleBoxStyle}>
               <Input
-                value={filters.endDate}
+                value={filters.endDate || ""}
                 spellCheck="false"
                 autoComplete="false"
                 onChange={(event) =>
