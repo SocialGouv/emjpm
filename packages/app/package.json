@@ -1,10 +1,10 @@
 {
   "name": "@emjpm/app",
-  "version": "25.94.0",
+  "version": "25.94.1",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.10",
-    "@emjpm/biz": "^25.94.0",
+    "@emjpm/biz": "^25.94.1",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.0.0",
     "@emotion/styled-base": "^11.0.0",
@@ -36,7 +36,7 @@
     "dotenv": "^8.2.0",
     "emotion-normalize": "^11.0.1",
     "eslint-config-prettier": "^7.0.0",
-    "eslint-plugin-auto-import": "^0.1.1",
+    "eslint-plugin-auto-import": "file:./src/utils/eslint-plugin-auto-import",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.2.0",
