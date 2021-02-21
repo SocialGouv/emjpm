@@ -7,6 +7,8 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
+  FormGroupInputDate,
+  FormGroupInputYear,
   FormInputBox,
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
@@ -111,19 +113,18 @@ export function MesureCreateForm(props) {
             validationSchema={mesureCreateSchema}
           />
 
-          <FormGroupInput
-            placeholder="Année de naissance"
+          <FormGroupInputYear
+            label="Année de naissance"
+            placeholder="aaaa"
             id="annee_naissance"
             formik={formik}
-            size="small"
             validationSchema={mesureCreateSchema}
           />
-          <FormGroupInput
-            placeholder="Date de première mise sous protection (optionnel)"
-            type="date"
+          <FormGroupInputDate
+            label="Date de première mise sous protection (optionnel)"
+            placeholder="jj/mm/aaaa"
             id="date_premier_mesure"
             formik={formik}
-            size="small"
             validationSchema={mesureCreateSchema}
           />
         </FormInputBox>
@@ -133,12 +134,10 @@ export function MesureCreateForm(props) {
           <Heading size={4}>Mesure de protection</Heading>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInput
+          <FormGroupInputDate
             placeholder="Date de nomination"
-            type="date"
             id="date_nomination"
             formik={formik}
-            size="small"
             validationSchema={mesureCreateSchema}
           />
           <FormGroupSelect

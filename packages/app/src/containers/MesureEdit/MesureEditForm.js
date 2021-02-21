@@ -87,12 +87,11 @@ export function MesureEditForm(props) {
             size="small"
             validationSchema={mesureEditSchema}
           />
-          <FormGroupInput
-            placeholder="Date de première mise sous protection (optionnel)"
-            type="date"
+          <FormGroupInputDate
+            label="Date de première mise sous protection (optionnel)"
+            placeholder="jj/mm/aaaa"
             id="date_premier_mesure"
             formik={formik}
-            size="small"
             validationSchema={mesureEditSchema}
           />
         </FormInputBox>
@@ -135,20 +134,18 @@ export function MesureEditForm(props) {
               />
             </Box>
           </Flex>
-          <FormGroupInput
-            placeholder="Date de nomination"
-            type="date"
+          <FormGroupInputDate
+            label="Date de nomination"
+            placeholder="jj/mm/aaaa"
             id="date_nomination"
             formik={formik}
-            size="small"
             validationSchema={mesureEditSchema}
           />
-          <FormGroupInput
-            placeholder="Date de la protection en cours"
-            type="date"
+          <FormGroupInputDate
+            label="Date de la protection en cours"
+            placeholder="jj/mm/aaaa"
             id="date_protection_en_cours"
             formik={formik}
-            size="small"
             validationSchema={mesureEditSchema}
           />
         </FormInputBox>

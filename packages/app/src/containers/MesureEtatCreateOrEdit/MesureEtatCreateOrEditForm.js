@@ -62,9 +62,9 @@ export function MesureEtatCreateOrEditForm(props) {
           </Text>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInput
-            placeholder="Date de changement d'état"
-            type="date"
+          <FormGroupInputDate
+            label="Date de changement d'état"
+            placeholder="jj/mm/aaaa"
             id="date_changement_etat"
             formik={formik}
             validationSchema={mesureEtatSchema}

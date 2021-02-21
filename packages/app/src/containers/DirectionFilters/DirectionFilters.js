@@ -2,7 +2,7 @@ import { useContext, useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Input, Select } from "~/components";
+import { Card, Input, Select, InputDate } from "~/components";
 import { findOption } from "~/utils/form";
 
 import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
@@ -81,31 +81,19 @@ export function DirectionFilters(props) {
         <Box>
           <Flex>
             <Box sx={BoxStyle}>
-              <Input
+              <InputDate
                 value={filters.startDate || ""}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) =>
-                  onFilterChange({ startDate: event.target.value })
-                }
+                onChange={(value) => onFilterChange({ startDate: value })}
                 name="startDate"
-                size="small"
-                type="date"
-                placeholder="du"
+                placeholderText="du"
               />
             </Box>
             <Box sx={SimpleBoxStyle}>
-              <Input
+              <InputDate
                 value={filters.endDate || ""}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) =>
-                  onFilterChange({ endDate: event.target.value })
-                }
+                onChange={(value) => onFilterChange({ endDate: value })}
                 name="endDate"
-                size="small"
-                type="date"
-                placeholder="au"
+                placeholderText="au"
               />
             </Box>
           </Flex>

@@ -10,9 +10,9 @@ export const TextStyle = {
 
 export const BoxStyle = {
   mr: 1,
-  width: "170px",
+  minWidth: "170px",
 };
 
 export const SimpleBoxStyle = {
-  width: "170px",
+  minWidth: "170px",
 };

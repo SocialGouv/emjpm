@@ -8,6 +8,8 @@ import { Box, Flex } from "rebass";
 import {
   FormGrayBox,
   FormGroupInput,
+  FormGroupInputDate,
+  FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
@@ -55,13 +57,12 @@ export function MagistratMesureAddForm(props) {
             size="small"
             validationSchema={magistratMandataireSchema}
           />
-          <FormGroupInput
+          <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
-            type="date"
-            placeholder="Date prévisionnelle du jugement (optionnel)"
+            label="Date prévisionnelle du jugement (optionnel)"
+            placeholder="jj/mm/aaaa"
             formik={formik}
-            size="small"
             validationSchema={magistratMandataireSchema}
           />
         </FormInputBox>
@@ -80,11 +81,11 @@ export function MagistratMesureAddForm(props) {
             size="small"
             validationSchema={magistratMandataireSchema}
           />
-          <FormGroupInput
+          <FormGroupInputYear
             id="annee_naissance"
-            placeholder="Année de naissance"
+            label="Année de naissance"
+            placeholder="aaaa"
             formik={formik}
-            size="small"
             validationSchema={magistratMandataireSchema}
           />
         </FormInputBox>

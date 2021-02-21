@@ -3,7 +3,11 @@ import { useFormik } from "formik";
 
 import { Box, Flex, Text } from "rebass";
 
-import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
+import {
+  FormGroupInput,
+  FormGroupSelect,
+  FormGroupInputDate,
+} from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
@@ -46,9 +50,9 @@ export function MesureAcceptForm(props) {
         </Box>
 
         <form onSubmit={formik.handleSubmit}>
-          <FormGroupInput
-            placeholder="Date de nomination"
-            type="date"
+          <FormGroupInputDate
+            label="Date de nomination"
+            placeholder="jj/mm/aaaa"
             id="date_nomination"
             formik={formik}
             validationSchema={mesureAcceptSchema}

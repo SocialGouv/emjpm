@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { FormGroupInput, FormGroupSelect } from "~/components/AppForm";
+import { FormGroupSelect } from "~/components/AppForm";
 import { Button, Heading } from "~/components";
 
 export function MesureCloseForm(props) {
@@ -48,9 +48,9 @@ export function MesureCloseForm(props) {
           <Heading size={3}>Mettre fin au mandat</Heading>
         </Box>
         <form onSubmit={formik.handleSubmit}>
-          <FormGroupInput
-            placeholder="Date de fin de la mesure de protection"
-            type="date"
+          <FormGroupInputDate
+            label="Date de fin de la mesure de protection"
+            placeholder="jj/mm/aaaa"
             id="date_fin_mesure"
             formik={formik}
             validationSchema={validationSchema}

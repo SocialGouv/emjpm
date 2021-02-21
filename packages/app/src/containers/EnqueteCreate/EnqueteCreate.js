@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 
 import yup from "~/validation-schemas/yup";
-import { Button, Field, InlineError, Input } from "~/components";
+import { Button, Field, InlineError, InputDate, InputYear } from "~/components";
 
 import { CREATE_ENQUETE } from "./mutations";
 import { ENQUETES } from "./queries";
@@ -44,30 +44,28 @@ export function EnqueteCreate() {
     }),
   });
 
-  const { values, touched, handleChange, handleSubmit, errors } = formik;
+  const { values, touched, handleSubmit, errors } = formik;
   return (
     <form onSubmit={handleSubmit}>
       <Field>
-        <Input
-          maxLength={4}
+        <InputYear
           value={values.year}
           id="year"
           name="year"
-          hasError={!!errors.year}
-          onChange={handleChange}
-          placeholder="Année de l'enquête"
+          onChange={(value) => formik.setFieldValue("year", value)}
+          placeholderText="Année de l'enquête"
         />
-        {touched.year && <InlineError message={errors.year} fieldId="year" />}
+        {touched.year && errors.year && (
+          <InlineError message={errors.year} fieldId="year" />
+        )}
       </Field>
       <Field>
-        <Input
+        <InputDate
           value={values.endedAt}
           id="endedAt"
           name="endedAt"
-          hasError={!!errors.endedAt}
-          onChange={handleChange}
-          placeholder="Date de fin"
-          type="date"
+          onChange={(value) => formik.setFieldValue("endedAt", value)}
+          placeholderText="Date de fin"
         />
         {touched.endedAt && (
           <InlineError message={errors.endedAt} fieldId="endedAt" />
