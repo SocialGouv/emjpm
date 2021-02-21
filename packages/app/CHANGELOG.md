@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.95.0](https://github.com/SocialGouv/emjpm/compare/v25.94.1...v25.95.0) (2021-02-21)
+
+
+### Bug Fixes
+
+* **rollback:** remote eslint-plugin-auto-import ([a3aa757](https://github.com/SocialGouv/emjpm/commit/a3aa757697404fabb940bbb8112c730dd1c12a7a))
+* **sass:** dart sass instead of deprecated node-sass ([50484df](https://github.com/SocialGouv/emjpm/commit/50484df784e8bb0d2a6a9093319ef467d7e6bfc1))
+
+
+### Features
+
+* **dev:** local bugfixed autoimport linter ([183e390](https://github.com/SocialGouv/emjpm/commit/183e390fcdc9b5867c1ab2f5798d06237aa8a971))
+
+
+
+
+
 ## [25.94.1](https://github.com/SocialGouv/emjpm/compare/v25.94.0...v25.94.1) (2021-02-21)
 
 
