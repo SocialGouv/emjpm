@@ -26,11 +26,18 @@ function ClosedMesureIndicator() {
     stat_closed_mesures: { closed_mesures_nb },
   } = data;
 
+  let title = "Mesures éteintes";
+  if (filters.departement) {
+    title += " dans le département";
+  } else if (filters.region) {
+    title += " dans la région";
+  }
+
   return (
     <Indicator
       error={error}
       loading={loading}
-      title="Mesures éteintes"
+      title={title}
       indicator={closed_mesures_nb ? Number(closed_mesures_nb) : 0}
     />
   );

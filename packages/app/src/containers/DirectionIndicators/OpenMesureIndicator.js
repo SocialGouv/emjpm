@@ -26,11 +26,18 @@ function OpenMesureIndicator() {
     stat_opened_mesures: { opened_mesures_nb },
   } = data;
 
+  let title = "Mesures en cours";
+  if (filters.departement) {
+    title += " dans le département";
+  } else if (filters.region) {
+    title += " dans la région";
+  }
+
   return (
     <Indicator
       error={error}
       loading={loading}
-      title="Mesures en cours"
+      title={title}
       indicator={opened_mesures_nb ? Number(opened_mesures_nb) : 0}
     />
   );
