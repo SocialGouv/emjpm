@@ -2,8 +2,10 @@ import classNames from "classnames";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import fr from "date-fns/locale/fr";
 import "react-datepicker/dist/react-datepicker.css";
-import "./style.scss";
 import { format, parse } from "date-fns";
+
+import "./style.scss";
+import Label from "./Label";
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
@@ -15,6 +17,7 @@ export default function InputDate(props) {
     value,
     selected,
     className,
+    label,
     ...datePickerProps
   } = props;
 
@@ -32,12 +35,25 @@ export default function InputDate(props) {
   };
 
   return (
-    <DatePicker
-      onChange={onChange}
-      selected={selected}
-      className={classNames("datepicker", className)}
-      {...datePickerProps}
-    />
+    <>
+      {label && (
+        <Label
+          aria-label={props.name}
+          htmlFor={props.id}
+          isActive={props.isActive}
+          required={props.required}
+          readOnly={props.readOnly}
+        >
+          {label}
+        </Label>
+      )}
+      <DatePicker
+        onChange={onChange}
+        selected={selected}
+        className={classNames("datepicker", className)}
+        {...datePickerProps}
+      />
+    </>
   );
 }
 
