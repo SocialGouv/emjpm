@@ -44,6 +44,12 @@ spec:
             periodSeconds: 10
             failureThreshold: 10
             timeoutSeconds: 10
+          startupProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 30
+            periodSeconds: 10
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
