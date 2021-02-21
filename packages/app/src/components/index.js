@@ -5,6 +5,8 @@ export { default as CheckBox } from "./CheckBox";
 export { default as Heading } from "./Heading";
 export { default as InlineError } from "./InlineError";
 export { default as Input } from "./Input";
+export { default as InputDate } from "./InputDate";
+export { default as InputYear } from "./InputYear";
 export { default as Radio } from "./Radio";
 export { default as RadioGroup } from "./RadioGroup";
 export { default as Select } from "./Select";
