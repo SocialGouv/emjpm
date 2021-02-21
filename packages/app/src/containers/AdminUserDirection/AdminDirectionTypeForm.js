@@ -42,11 +42,12 @@ const validationSchema = yup.object({
 
 export function AdminDirectionTypeForm(props) {
   const { direction, departements, regions, onSubmit } = props;
+
   const formik = useFormik({
     initialValues: {
-      departement: direction.departement_code || "",
-      region: direction.region_id || "",
-      type: direction.type || "",
+      departement: direction?.departement_code || "",
+      region: direction?.region_id || "",
+      type: direction?.type || "",
     },
     onSubmit: async (data, { setSubmitting }) => {
       await onSubmit(data);
@@ -54,10 +55,9 @@ export function AdminDirectionTypeForm(props) {
     },
     validationSchema,
   });
-
   const departementOptions = useMemo(() => {
     return departements.map(({ nom, code, id }) => ({
-      label: `${nom} (${code})`,
+      label: `${nom} (${id})`,
       value: id,
     }));
   }, [departements]);

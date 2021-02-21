@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 
+import useQueryReady from "~/hooks/useQueryReady";
+
 import { AdminDirectionTypeForm } from "./AdminDirectionTypeForm";
 import { CHANGE_DIRECTION_AGREMENT } from "./mutations";
 import { USER } from "./queries";
@@ -13,12 +15,8 @@ function AdminDirectionType(props) {
 
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
 
-  if (loading) {
-    return <div>Chargement</div>;
-  }
-
-  if (error) {
-    return <div>Erreur</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
   const { users_by_pk, regions, departements, directionRoles } = data;
