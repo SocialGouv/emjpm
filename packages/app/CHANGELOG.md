@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.95.1](https://github.com/SocialGouv/emjpm/compare/v25.95.0...v25.95.1) (2021-02-21)
+
+
+### Bug Fixes
+
+* **dev:** autoimport lint published ([4d08eac](https://github.com/SocialGouv/emjpm/commit/4d08eacf3cb3013fd22959e259f462131bbf8bae))
+* **dev:** local autoimport lint ([7e46ff8](https://github.com/SocialGouv/emjpm/commit/7e46ff847e9a824940f8b5b20c024d39c9e98437))
+* **dev:** local autoimport lint ([0dfe4c2](https://github.com/SocialGouv/emjpm/commit/0dfe4c2d7c6854c51f918ca53e37f9dbec5d97cc))
+
+
+
+
+
 # [25.95.0](https://github.com/SocialGouv/emjpm/compare/v25.94.1...v25.95.0) (2021-02-21)
 
 
