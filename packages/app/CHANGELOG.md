@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.94.0](https://github.com/SocialGouv/emjpm/compare/v25.93.1...v25.94.0) (2021-02-21)
+
+
+### Bug Fixes
+
+* **direction:** empty list + departement label ([5d0036d](https://github.com/SocialGouv/emjpm/commit/5d0036ddd1231b73b093bc93aaac5e3a9d3501ec))
+* **filter:** remove default date ([c1bec1a](https://github.com/SocialGouv/emjpm/commit/c1bec1a823c9fad22a08532c5a079755e1208fe9))
+* **warning:** input null ([dd1b6cd](https://github.com/SocialGouv/emjpm/commit/dd1b6cd0810ee9c91120ef317f19c2a2f89e945b))
+* **wrap:** error msg ([84a1e2c](https://github.com/SocialGouv/emjpm/commit/84a1e2c76ec809aa2fb5be4586753d2671a1498e))
+
+
+### Features
+
+* **filter-info:** fix ambiguity ([a0ed829](https://github.com/SocialGouv/emjpm/commit/a0ed8295bc63d2033078025ea24a4a4898fc0cbd))
+* **input-date-and-year:** fix design and year form group comp ([07c1de3](https://github.com/SocialGouv/emjpm/commit/07c1de35cb565a3cb28866833bcc763215a956ee))
+* **input-date-and-year:** implement everywhere ([be2c62b](https://github.com/SocialGouv/emjpm/commit/be2c62bef1789c0a89566d9c7de103cb08197dc6))
+* **input-date-and-year:** improve design and form group comp ([54371f4](https://github.com/SocialGouv/emjpm/commit/54371f4ccb5e1f5d52259403ef29d2e1e2b7f049))
+* **input-date-and-year:** using react-datepicker ([17b725a](https://github.com/SocialGouv/emjpm/commit/17b725a82d9447a26c4d2c5e8869a3855ac8a53e))
+* **scss:** and upgrade react datepicker ([f1fcd58](https://github.com/SocialGouv/emjpm/commit/f1fcd58605bad4c9df7f6c0c8ca96b0d58bcdbac))
+
+
+
+
+
 ## [25.93.1](https://github.com/SocialGouv/emjpm/compare/v25.93.0...v25.93.1) (2021-02-20)
 
 
