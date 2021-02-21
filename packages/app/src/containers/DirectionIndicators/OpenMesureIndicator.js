@@ -12,9 +12,9 @@ function OpenMesureIndicator() {
   const { error, data, loading } = useQuery(GET_OPEN_MESURE_NUMBER, {
     variables: {
       departementCode: filters.departement ? filters.departement : undefined,
-      end: filters.endDate,
+      end: filters.endDate || null,
       regionId: filters.region ? parseInt(filters.region) : undefined,
-      start: filters.startDate,
+      start: filters.startDate || null,
     },
   });
 
@@ -25,8 +25,6 @@ function OpenMesureIndicator() {
   const {
     stat_opened_mesures: { opened_mesures_nb },
   } = data;
-
-  console.log(data);
 
   return (
     <Indicator

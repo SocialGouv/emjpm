@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
 import { useDebounce } from "~/hooks";
-import { endDate, startDate } from "~/utils/dates";
 import { getDepartementRegionCode } from "~/utils/geodata";
 
 export const Context = createContext({});
@@ -11,10 +10,7 @@ const { localStorage } = window;
 export function Provider(props) {
   const { children, useLocalStorage, initialFilters } = props;
 
-  const [filters, setFilters] = useState({
-    endDate,
-    startDate,
-  });
+  const [filters, setFilters] = useState({});
 
   const debounceFilters = useDebounce(filters, 2000);
 

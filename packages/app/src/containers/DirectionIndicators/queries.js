@@ -2,8 +2,8 @@ import gql from "graphql-tag";
 
 export const GET_OPEN_MESURE_NUMBER = gql`
   query openedMesureNumber(
-    $end: date!
-    $start: date!
+    $end: date
+    $start: date
     $departementCode: String
     $regionId: Int
   ) {
@@ -31,8 +31,8 @@ export const GET_AVAILABLE_MESURE_NUMBER = gql`
 
 export const GET_CLOSED_MESURE_NUMBER = gql`
   query closedMesureNumber(
-    $end: date!
-    $start: date!
+    $end: date
+    $start: date
     $departementCode: String
     $regionId: Int
   ) {

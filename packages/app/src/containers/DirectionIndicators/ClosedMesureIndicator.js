@@ -12,9 +12,9 @@ function ClosedMesureIndicator() {
   const { error, data, loading } = useQuery(GET_CLOSED_MESURE_NUMBER, {
     variables: {
       departementCode: filters.departement ? filters.departement : undefined,
-      end: filters.endDate,
+      end: filters.endDate || null,
       regionId: filters.region ? parseInt(filters.region) : undefined,
-      start: filters.startDate,
+      start: filters.startDate || null,
     },
   });
 
