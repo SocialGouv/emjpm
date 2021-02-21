@@ -10,7 +10,14 @@ import { clearUserStorage } from "~/user/Auth";
 export default function ErrorFallback({ error, resetErrorBoundary }) {
   return (
     <ErrorBox message="Une erreur s'est produite">
-      <pre>{error.message}</pre>
+      <pre
+        style={{
+          width: "700px",
+          whiteSpace: "normal",
+        }}
+      >
+        {error.message}
+      </pre>
       <button onClick={resetErrorBoundary}>
         <Hammer2 size={12} /> Réessayer
       </button>
