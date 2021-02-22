@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.95.2](https://github.com/SocialGouv/emjpm/compare/v25.95.1...v25.95.2) (2021-02-22)
+
+
+### Bug Fixes
+
+* **missing:** form group input date ([5df15af](https://github.com/SocialGouv/emjpm/commit/5df15af5c0b5278a7c91de8c312a66e4e6b546f9))
+* **pagination:** add where to aggregate ([a2d9d11](https://github.com/SocialGouv/emjpm/commit/a2d9d118cc5774509f896099e4806840de902ee5))
+
+
+
+
+
 ## [25.95.1](https://github.com/SocialGouv/emjpm/compare/v25.95.0...v25.95.1) (2021-02-21)
 
 

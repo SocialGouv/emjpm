@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.95.2](https://github.com/SocialGouv/emjpm/compare/v25.95.1...v25.95.2) (2021-02-22)
+
+
+### Bug Fixes
+
+* **db:** enquete cascade ([95dcb69](https://github.com/SocialGouv/emjpm/commit/95dcb69902fd1075555a88ee988d939e1dc53a1e))
+* **graphql:** rollback uri port ([d52be13](https://github.com/SocialGouv/emjpm/commit/d52be1398cd4a474ac50636bea982eb00f7e2da0))
+* **graphql:** uri port ([d7a8062](https://github.com/SocialGouv/emjpm/commit/d7a80620426ff681a37cd463db49c5e61770d93c))
+* **hasura:** healthz ([c7d411a](https://github.com/SocialGouv/emjpm/commit/c7d411a8c8cf1be43c28b83ca1fc22312c133ba2))
+* **hasura:** increase migrations servers timeout ([128ac6d](https://github.com/SocialGouv/emjpm/commit/128ac6d7ff9c65697275ff556075a3f3290d2e0d))
+* **hasura:** prev image version ([68b10a6](https://github.com/SocialGouv/emjpm/commit/68b10a6862f2ceef79ea4823ef6dc7316b4c3230))
+* **hasura:** prev image version ([55e02c0](https://github.com/SocialGouv/emjpm/commit/55e02c034343765813104112d67d7a1f43a16a17))
+* **hasura:** startupProbe ([506cf6d](https://github.com/SocialGouv/emjpm/commit/506cf6d5bdc34793761702470163d503d346178c))
+* **missing:** form group input date ([5df15af](https://github.com/SocialGouv/emjpm/commit/5df15af5c0b5278a7c91de8c312a66e4e6b546f9))
+* **pagination:** add where to aggregate ([a2d9d11](https://github.com/SocialGouv/emjpm/commit/a2d9d118cc5774509f896099e4806840de902ee5))
+
+
+### Features
+
+* **hasura:** upgrade ([090c2cb](https://github.com/SocialGouv/emjpm/commit/090c2cb5442ce3c139d4abed4e3a680289c59a78))
+
+
+
+
+
 ## [25.95.1](https://github.com/SocialGouv/emjpm/compare/v25.95.0...v25.95.1) (2021-02-21)
 
 

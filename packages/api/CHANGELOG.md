@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.95.2](https://github.com/SocialGouv/emjpm/compare/v25.95.1...v25.95.2) (2021-02-22)
+
+
+### Bug Fixes
+
+* **graphql:** rollback uri port ([d52be13](https://github.com/SocialGouv/emjpm/commit/d52be1398cd4a474ac50636bea982eb00f7e2da0))
+* **graphql:** uri port ([d7a8062](https://github.com/SocialGouv/emjpm/commit/d7a80620426ff681a37cd463db49c5e61770d93c))
+
+
+
+
+
 ## [25.95.1](https://github.com/SocialGouv/emjpm/compare/v25.95.0...v25.95.1) (2021-02-21)
 
 **Note:** Version bump only for package @emjpm/api
