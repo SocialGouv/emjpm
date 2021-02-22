@@ -7,7 +7,16 @@ export const ETABLISSEMENTS = gql`
     $limit: Int = 100
     $offset: Int = 0
   ) {
-    etablissements_aggregate {
+    etablissements_aggregate(
+      where: {
+        _or: [
+          { rslongue: { _ilike: $search } }
+          { ligneacheminement: { _ilike: $search } }
+          { nofinesset: { _ilike: $search } }
+        ]
+        departement: { id: { _eq: $departementCode } }
+      }
+    ) {
       aggregate {
         count
       }
