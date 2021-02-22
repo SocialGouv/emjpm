@@ -2,6 +2,7 @@
 set -e
 
 git checkout next
-git rebase master
+# git rebase master
+git reset --hard master
 git push --follow-tags --force
 git checkout master
