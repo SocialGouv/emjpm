@@ -48,7 +48,7 @@
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.0.0",
-    "knex": "^0.21.17",
+    "knex": "^0.21.18",
     "lightship": "^6.6.1",
     "link-module-alias": "^1.2.0",
     "lodash.uniq": "^4.5.0",
@@ -73,7 +73,7 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
+    "@babel/core": "^7.12.17",
     "@socialgouv/eslint-config-recommended": "^1.46.0",
     "babel-core": "7.0.0-bridge.0",
     "chai": "^4.2.0",
