@@ -10,6 +10,7 @@
     "dev:stop": "docker-compose down",
     "dev:app": "yarn workspace @emjpm/app start",
     "dev:release-note": "scripts/ci/get-release-note",
+    "dev:yarn-refresh": "scripts/dev/yarn-refresh",
     "hasura:console": "scripts/dev/hasura-console",
     "hasura:console:stop": "scripts/dev/hasura-console-stop",
     "dev": "yarn dev:up && yarn hasura:console & yarn dev:app",
