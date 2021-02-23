@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.96.1](https://github.com/SocialGouv/emjpm/compare/v25.96.0...v25.96.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* **finess-import:** columns mapping ([e50eeaf](https://github.com/SocialGouv/emjpm/commit/e50eeaf3da4ab103a1156747957d988974478273))
+* **ocmi-import:** free memory by json stream ([83504a3](https://github.com/SocialGouv/emjpm/commit/83504a38ca9a3de59259133640900a6b27cd4e16))
+
+
+
+
+
 # [25.96.0](https://github.com/SocialGouv/emjpm/compare/v25.95.2...v25.96.0) (2021-02-23)
 
 
