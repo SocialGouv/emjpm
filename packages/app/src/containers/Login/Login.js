@@ -117,7 +117,7 @@ function Login(props) {
               type="text"
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
-              placeholder="Votre nom d'utilisateur"
+              placeholder="Votre email"
             />
             {formik.touched.email && (
               <InlineError message={formik.errors.email} fieldId="email" />
