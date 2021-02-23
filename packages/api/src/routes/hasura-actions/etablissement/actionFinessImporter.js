@@ -121,8 +121,54 @@ async function importGeolocalisation(properties) {
   }
 }
 
+/*
+  https://www.data.gouv.fr/fr/datasets/finess-extraction-du-fichier-des-etablissements/
+  https://www.data.gouv.fr/fr/datasets/r/d1a2f35f-8823-400f-9296-6eb7361ddf6f
+*/
+const mapFinessColumns = {
+  categagretab: 21,
+  categetab: 19,
+  codeape: 24,
+  codemft: 25,
+  codesph: 27,
+  commune: 13,
+  compldistrib: 7,
+  complrs: 6,
+  compvoie: 11,
+  dateautor: 30,
+  datemaj: 31,
+  dateouv: 29,
+  departement: 14,
+  libcategagretab: 22,
+  libcategetab: 20,
+  libdepartement: 15,
+  libmft: 26,
+  libsph: 28,
+  lieuditbp: 12,
+  ligneacheminement: 16,
+  nofinessej: 3,
+  nofinesset: 2,
+  numuai: 32,
+  numvoie: 8,
+  rs: 4,
+  rslongue: 5,
+  siret: 23,
+  telecopie: 18,
+  telephone: 17,
+  typvoie: 9,
+  voie: 10,
+};
+
+function mapFinessFromColumns(properties) {
+  const m = {};
+  for (const [key, index] of Object.entries(mapFinessColumns)) {
+    m[key] = properties[index - 2];
+  }
+  return m;
+}
+
 async function importStructureEtablissement(properties, departements) {
-  const [
+  const {
     categagretab,
     categetab,
     codeape,
@@ -153,7 +199,7 @@ async function importStructureEtablissement(properties, departements) {
     telephone,
     typvoie,
     voie,
-  ] = properties;
+  } = mapFinessFromColumns(properties);
 
   if (!FILTERS.includes(categetab)) {
     return;
