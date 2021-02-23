@@ -80,6 +80,9 @@ services:
       SMTP_USER: "${SMTP_USER:-}"
       SMTP_PASS: "${SMTP_PASS:-}"
       SMTP_FROM: "${SMTP_PORT:-}"
+      OCMI_SYNC_FILE_ENABLED: "true"
+      OCMI_SYNC_FILE_LOCAL: "true"
+      OCMI_FILE_PASSWORD: ${OCMI_FILE_PASSWORD:-""}
 
 volumes:
   emjpm-pgdata:

@@ -4,6 +4,8 @@ exports.getConfiguration = (env) => ({
   jwtConfig: require("./jwt")(env),
   ocmiFilePassword: env.OCMI_FILE_PASSWORD,
   ocmiSyncFileEnabled: env.OCMI_SYNC_FILE_ENABLED === "true" ? true : false,
+  ocmiSyncFileLocal: env.OCMI_SYNC_FILE_LOCAL === "true" ? true : false,
+  ocmiSyncFileLocalDirPath: env.OCMI_SYNC_FILE_LOCAL_DIR_PATH || ".data/ocmi",
   sentryEnvironment: env.SENTRY_ENV,
   sentryPublicDSN: env.SENTRY_PUBLIC_DSN,
   smtpFrom: env.SMTP_FROM,

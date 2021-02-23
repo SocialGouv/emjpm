@@ -82,6 +82,11 @@ type Mutation {
 
 
 type Mutation {
+  import_ocmi_local_file : ImportOCMIOutput
+}
+
+
+type Mutation {
   import_ocmi_mesures : ImportOcmiMesuresOutput
 }
 
@@ -309,5 +314,13 @@ type DeleteMesureEtatOutput {
 type ImportOcmiMesuresOutput {
   en_cours : Int
   eteinte : Int
+}
+
+type StateOutput {
+  state : Boolean
+}
+
+type ImportOCMIOutput {
+  state : String
 }
 
