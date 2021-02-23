@@ -50,6 +50,7 @@
     "jwt-decode": "^3.0.0",
     "knex": "^0.21.18",
     "lightship": "^6.6.1",
+    "line-reader": "^0.4.0",
     "link-module-alias": "^1.2.0",
     "lodash.uniq": "^4.5.0",
     "node-7z": "^2.1.2",
@@ -68,6 +69,8 @@
     "query-string": "^6.13.8",
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",
+    "stream-chain": "^2.2.4",
+    "stream-json": "^1.7.1",
     "tmp": "^0.2.1",
     "xlsx": "^0.16.9",
     "yup": "^0.29.3"

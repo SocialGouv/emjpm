@@ -12443,6 +12443,11 @@ lightship@^6.6.1:
     roarr "^2.15.4"
     serialize-error "^7.0.1"
 
+line-reader@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/line-reader/-/line-reader-0.4.0.tgz#17e44818da0ac335675ba300954f94ef670e66fd"
+  integrity sha1-F+RIGNoKwzVnW6MAlU+U72cOZv0=
+
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
@@ -18008,6 +18013,11 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
+stream-chain@^2.2.3, stream-chain@^2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/stream-chain/-/stream-chain-2.2.4.tgz#2e5e9858e00d25ebaf7e4339e8328ddcab5facad"
+  integrity sha512-9lsl3YM53V5N/I1C2uJtc3Kavyi3kNYN83VkKb/bMWRk7D9imiFyUPYa0PoZbLohSVOX1mYE9YsmwObZUsth6Q==
+
 stream-each@^1.1.0:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/stream-each/-/stream-each-1.2.3.tgz#ebe27a0c389b04fbcc233642952e10731afa9bae"
@@ -18026,6 +18036,13 @@ stream-http@^2.7.2:
     readable-stream "^2.3.6"
     to-arraybuffer "^1.0.0"
     xtend "^4.0.0"
+
+stream-json@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/stream-json/-/stream-json-1.7.1.tgz#ec7e414c2eba456c89a4b4e5223794eabc3860c4"
+  integrity sha512-I7g0IDqvdJXbJ279/D3ZoTx0VMhmKnEF7u38CffeWdF8bfpMPsLo+5fWnkNjO2GU/JjWaRjdH+zmH03q+XGXFw==
+  dependencies:
+    stream-chain "^2.2.3"
 
 stream-shift@^1.0.0:
   version "1.0.1"

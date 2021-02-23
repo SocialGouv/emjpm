@@ -82,7 +82,7 @@ type Mutation {
 
 
 type Mutation {
-  import_ocmi_local_file : ImportOCMIOutput
+  import_ocmi_file : ImportOCMIOutput
 }
 
 

@@ -1,8 +1,12 @@
 const express = require("express");
 const Seven = require("node-7z");
-const { promises: fs } = require("fs");
+const fs = require("fs");
 const path = require("path");
 const os = require("os");
+
+const StreamArray = require("stream-json/streamers/StreamArray");
+const lineReader = require("line-reader");
+
 const config = require("~/config");
 const { OcmiMandataire, ProcessusStates } = require("~/models");
 
@@ -133,7 +137,7 @@ async function azureBlobToFile(
   logger.info(`[OCMI] loading file from azure ${name}`);
   const buffer = await readBlob(container, name, contentLength);
 
-  await fs.writeFile(zipFilePath, buffer);
+  await fs.promises.writeFile(zipFilePath, buffer);
   return zipFilePath;
 }
 
@@ -169,17 +173,55 @@ async function unzipFile(tempDir, zipFilePath) {
 }
 
 async function importJSON(file) {
-  const fileContent = await fs.readFile(file, "utf8");
-  const mesures = JSON.parse(fileContent);
-  const ocmiMandataires = getOcmiMandataires(mesures);
-  const keys = Object.keys(ocmiMandataires);
-  const size = keys.length;
-  for (let index = 0; index < keys.length; index++) {
-    const key = keys[index];
-    const ocmiMandataire = ocmiMandataires[key];
-    logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
+  const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
+
+  let index = 0;
+  const jsonStream = StreamArray.withParser();
+  fs.createReadStream(file).pipe(jsonStream.input);
+
+  const mandataireSIRETList = new Set();
+  jsonStream.on("data", async ({ value: mesure }) => {
+    const { mandataire } = mesure;
+    const { siret } = mandataire;
+    mandataireSIRETList.add(siret);
+    const jsonlFile = path.join(tempDir, "mandataire-" + siret + ".json");
+    index++;
+    await fs.promises.appendFile(jsonlFile, JSON.stringify(mesure) + "\n");
+  });
+  await new Promise((resolve, reject) => {
+    jsonStream.on("end", () => resolve()).on("error", () => reject());
+  });
+
+  index = 0;
+  const size = mandataireSIRETList.size;
+  for (const [siret] of mandataireSIRETList.entries()) {
+    const jsonlFile = path.join(tempDir, "mandataire-" + siret + ".json");
+    const mesures = [];
+    let mandataire;
+    await new Promise((resolve, reject) => {
+      lineReader.eachLine(
+        jsonlFile,
+        function (line) {
+          if (!line) return;
+          const mesure = JSON.parse(line);
+          if (!mandataire) {
+            mandataire = mesure["mandataire"];
+          }
+          delete mesure["mandataire"];
+          mesures.push(mesure);
+        },
+        function (err) {
+          if (err) reject(err);
+          resolve();
+        }
+      );
+    });
+    const ocmiMandataire = { ...mandataire, mesures, siret };
     await createOrUpdateOcmiMandataire(ocmiMandataire);
+    index++;
+    logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
   }
+
   logger.info(`[OCMI] sync file finished`);
   await completeImport();
 }
@@ -195,24 +237,6 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
   } else {
     await OcmiMandataire.query().update(ocmiMandataire).where({ siret });
   }
-}
-
-function getOcmiMandataires(mesures) {
-  const mandataireMap = {};
-  for (const mesure of mesures) {
-    const { mandataire } = mesure;
-    const { siret } = mandataire;
-
-    const value = mandataireMap[siret];
-    if (value) {
-      value.mesures.push(mesure);
-    } else {
-      delete mesure["mandataire"];
-      mandataire.mesures = [mesure];
-      mandataireMap[siret] = mandataire;
-    }
-  }
-  return mandataireMap;
 }
 
 async function processIsRunning() {
