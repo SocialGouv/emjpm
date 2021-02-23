@@ -1,6 +1,6 @@
 const express = require("express");
 const Seven = require("node-7z");
-const fs = require("fs");
+const { promises: fs } = require("fs");
 const { join } = require("path");
 const os = require("os");
 const config = require("~/config");
@@ -79,7 +79,7 @@ async function processBlob(container, { name, properties: { contentLength } }) {
   logger.info(`[OCMI] loading file from azure ${name}`);
   const buffer = await readBlob(container, name, contentLength);
 
-  fs.writeFileSync(zipFilePath, buffer);
+  await fs.writeFile(zipFilePath, buffer);
   logger.info(`[OCMI] unzipping file ${zipFilePath}`);
   const stream = Seven.extract(zipFilePath, tempDir, {
     password: config.ocmiFilePassword,
@@ -88,7 +88,8 @@ async function processBlob(container, { name, properties: { contentLength } }) {
   stream.on("data", async function ({ file }) {
     const unzippedFile = join(tempDir, file);
     logger.info(`[OCMI] file unzipped  ${unzippedFile}`);
-    const mesures = JSON.parse(fs.readFileSync(unzippedFile, "utf8"));
+    const fileContent = await fs.readFile(unzippedFile, "utf8");
+    const mesures = JSON.parse(fileContent);
     const ocmiMandataires = getOcmiMandataires(mesures);
     const keys = Object.keys(ocmiMandataires);
     const size = keys.length;
