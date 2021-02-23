@@ -95,9 +95,7 @@ router.post(
   "/signup",
   [
     body("user.email", "Votre email ne doit pas être vide").not().isEmpty(),
-    check("user.email", "Votre email doit être valide")
-      .normalizeEmail()
-      .isEmail(),
+    check("user.email", "Votre email doit être valide").isEmail(),
     check(
       "user.password",
       "Votre mot de passe doit être de 8 caractères minimum"
