@@ -74,6 +74,7 @@ services:
       HASURA_WEB_HOOK_SECRET: ${HASURA_WEB_HOOK_SECRET:-localdevunsecuresecret}
       HASURA_GRAPHQL_URI: ${HASURA_GRAPHQL_URI:-http://hasura:8080/v1/graphql}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
+      APP_URL: "localhost:3000"
 
 volumes:
   emjpm-pgdata:

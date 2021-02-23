@@ -21,7 +21,7 @@ Vous avez demandé le changement de mot de passe.
 <br><br>
 Votre identifiant est: ${user.email}
 
-Veuillez cliquer sur le lien suivant: <a href=${url}>réinitialiser mon mot de passe</a>.
+Veuillez cliquer sur le lien suivant: <a href="${url}">réinitialiser mon mot de passe</a>.
 <br><br><br>
 Bien à vous.
 `;
