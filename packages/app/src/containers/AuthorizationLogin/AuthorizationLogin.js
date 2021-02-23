@@ -141,7 +141,7 @@ function AuthorizationLogin(props) {
           </Flex>
           <Box my="2">
             <Link to="/account/forgot-password">
-              {"J'ai oublié mon mot de passe et / ou mon identifiant"}
+              {"J'ai oublié mon mot de passe"}
             </Link>
           </Box>
           <Box>

@@ -10,10 +10,10 @@ Feature: Forgot password
     And an empty inbox
 
   Scenario: Adrien (ud@ud.com) forgot his password
-    When I click on "J'ai oublié mon mot de passe et / ou mon identifiant"
+    When I click on "J'ai oublié mon mot de passe"
     Then I should redirected to "/account/forgot-password" page
     Then I see "Demander un nouveau mot de passe"
-    
+
     When I enter "ud@ud.com" as "Entrez votre email"
     Then I click on "Obtenir le lien de réinitialisation"
 
@@ -45,4 +45,3 @@ Feature: Forgot password
     When I enter "JaimeLesChips123456?" as "Votre mot de passe"
     And I click on "Se connecter"
     Then I should redirected to "/mandataires" page
-    
