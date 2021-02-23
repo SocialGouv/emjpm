@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.96.0](https://github.com/SocialGouv/emjpm/compare/v25.95.2...v25.96.0) (2021-02-23)
+
+
+### Bug Fixes
+
+* **async:** remove sync node bad practice ([5fe1a07](https://github.com/SocialGouv/emjpm/commit/5fe1a07991427ee0a98d0385daa1df71af8fa3f3))
+* **deps:** update all dependencies ([#2492](https://github.com/SocialGouv/emjpm/issues/2492)) ([6eb6483](https://github.com/SocialGouv/emjpm/commit/6eb6483b57e090c2a9b1c4400d65a44abf084b11))
+* **dot-email:** fix [#2494](https://github.com/SocialGouv/emjpm/issues/2494) ([c2c21cf](https://github.com/SocialGouv/emjpm/commit/c2c21cfe71e39fbbb6885ea12ab49e3dbb06daea))
+* **email:** placeholder ([d0d4136](https://github.com/SocialGouv/emjpm/commit/d0d4136cf78ab016ea6ed9e6b673d0b69866109b))
+* **email:** url ([53b806c](https://github.com/SocialGouv/emjpm/commit/53b806c4619a5917fb3bd4bc6da317576337ec68))
+* **label:** forgot password only ([52815c1](https://github.com/SocialGouv/emjpm/commit/52815c134cce1a4e8c3b64355d8dacf415241a63))
+* **lint:** order ([137339e](https://github.com/SocialGouv/emjpm/commit/137339ed207a92662f3e68f5bf01cae5ca4d86e1))
+* **up:** packages.ci.json ([9a31cce](https://github.com/SocialGouv/emjpm/commit/9a31cceecc7b6bed4b511bd70e97ba1a78ee3de7))
+
+
+### Features
+
+* **dev:** script dev:yarn-refresh ([13938f5](https://github.com/SocialGouv/emjpm/commit/13938f597aac7782e9aa5e29e0e9ba4782e22e8c))
+* **dev:** smtp dev env ([656f09c](https://github.com/SocialGouv/emjpm/commit/656f09c0da57f975ab9fc613865d2589a3adcfa0))
+* **dev:** triggerable and local ocmi import ([fb5a1b9](https://github.com/SocialGouv/emjpm/commit/fb5a1b9e17503c6fb462a2a3d782888ed11054d1))
+* **finess:** import new type 101 ([bdd629d](https://github.com/SocialGouv/emjpm/commit/bdd629dea77265f3951dc1b4e60890ee66a17655))
+
+
+
+
+
 ## [25.95.2](https://github.com/SocialGouv/emjpm/compare/v25.95.1...v25.95.2) (2021-02-22)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.96.0](https://github.com/SocialGouv/emjpm/compare/v25.95.2...v25.96.0) (2021-02-23)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#2492](https://github.com/SocialGouv/emjpm/issues/2492)) ([6eb6483](https://github.com/SocialGouv/emjpm/commit/6eb6483b57e090c2a9b1c4400d65a44abf084b11))
+* **email:** placeholder ([d0d4136](https://github.com/SocialGouv/emjpm/commit/d0d4136cf78ab016ea6ed9e6b673d0b69866109b))
+* **label:** forgot password only ([52815c1](https://github.com/SocialGouv/emjpm/commit/52815c134cce1a4e8c3b64355d8dacf415241a63))
+* **up:** packages.ci.json ([9a31cce](https://github.com/SocialGouv/emjpm/commit/9a31cceecc7b6bed4b511bd70e97ba1a78ee3de7))
+
+
+
+
+
 ## [25.95.2](https://github.com/SocialGouv/emjpm/compare/v25.95.1...v25.95.2) (2021-02-22)
 
 
