@@ -6,6 +6,8 @@ import { MesureImportPanel } from "~/containers/MesureImport";
 import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
 import { BoxWrapper } from "~/components/Grid";
 
+import { AdminServiceMesures } from "~/containers/AdminServices";
+
 import { useParams } from "react-router-dom";
 
 function Service() {
