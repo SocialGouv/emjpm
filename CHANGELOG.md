@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.96.3](https://github.com/SocialGouv/emjpm/compare/v25.96.2...v25.96.3) (2021-02-24)
+
+
+### Bug Fixes
+
+* **filter:** ref change (was breaking some paginations) ([efda94c](https://github.com/SocialGouv/emjpm/commit/efda94cc5b30e1808610bc036d935e557912ae30))
+
+
+
+
+
 ## [25.96.2](https://github.com/SocialGouv/emjpm/compare/v25.96.1...v25.96.2) (2021-02-24)
 
 
