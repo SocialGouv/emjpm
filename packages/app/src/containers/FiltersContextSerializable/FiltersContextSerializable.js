@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from "react";
+import isEqual from "lodash.isequal";
 
 import { useDebounce } from "~/hooks";
 import { getDepartementRegionCode } from "~/utils/geodata";
@@ -39,8 +40,11 @@ export function Provider(props) {
       newFilters.region = getDepartementRegionCode(newFilters.departement);
     }
 
-    setFilters((f) => ({ ...f, ...newFilters }));
-  }, [useLocalStorage, initialFilters]);
+    newFilters = { ...filters, ...newFilters };
+    if (!isEqual(filters, newFilters)) {
+      setFilters(newFilters);
+    }
+  }, [useLocalStorage, initialFilters, filters]);
 
   function onFilterChange(obj) {
     const newFilters = { ...filters, ...obj };
