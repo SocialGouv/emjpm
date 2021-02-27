@@ -26,7 +26,7 @@ export const getRegionName = (code) => {
   return regions[code];
 };
 export const getDepartementName = (code) => {
-  return departements[code];
+  return departements[code]?.nom;
 };
 export const getDepartementRegionCode = (code) => {
   return departements[code]?.region;

@@ -4014,6 +4014,41 @@
     using:
       foreign_key_constraint_on: user_id
   select_permissions:
+  - role: anonymous
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: direction
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: direction_nationale
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: direction_territoriale
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: individuel
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: prepose
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
+  - role: service
+    permission:
+      columns: []
+      filter: {}
+      allow_aggregations: true
   - role: ti
     permission:
       columns:
@@ -4023,6 +4058,7 @@
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+      allow_aggregations: true
   update_permissions:
   - role: ti
     permission:
@@ -6693,6 +6729,7 @@
         email:
           _eq: X-Hasura-Email
       limit: 1
+      allow_aggregations: true
   - role: direction
     permission:
       columns:
@@ -6709,6 +6746,7 @@
       - reset_password_token
       - type
       filter: {}
+      allow_aggregations: true
   - role: direction_nationale
     permission:
       columns:
@@ -6759,6 +6797,7 @@
       filter:
         id:
           _eq: X-Hasura-User-Id
+      allow_aggregations: true
   - role: prepose
     permission:
       columns:
@@ -6777,6 +6816,7 @@
       filter:
         id:
           _eq: X-Hasura-User-Id
+      allow_aggregations: true
   - role: service
     permission:
       columns:
@@ -6799,6 +6839,7 @@
         - service_members:
             service_id:
               _eq: X-Hasura-Service-Id
+      allow_aggregations: true
   - role: ti
     permission:
       columns:
@@ -6811,6 +6852,7 @@
       - prenom
       - type
       filter: {}
+      allow_aggregations: true
   update_permissions:
   - role: direction
     permission:

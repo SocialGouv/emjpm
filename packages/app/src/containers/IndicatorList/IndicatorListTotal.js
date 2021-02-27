@@ -56,9 +56,7 @@ function IndicatorListTotal() {
       aggregate: { count: preposeInscritCount },
     },
     magistratInscritCount: {
-      aggregate: {
-        sum: { count: magistratInscritCount },
-      },
+      aggregate: { count: magistratInscritCount },
     },
     mesuresLastMonthCount: {
       aggregate: { count: mesuresLastMonthCount },

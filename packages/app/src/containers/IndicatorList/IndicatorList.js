@@ -12,6 +12,8 @@ import use30DaysInterval from "~/hooks/use30DaysInterval";
 import { INDICATORS } from "./queries";
 import { IndicatorBoxStyle, IndicatorListStyle } from "./style";
 
+import { getDepartementName } from "~/utils/geodata";
+
 function IndicatorList(props) {
   const { departementCode } = props;
   const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
@@ -49,15 +51,16 @@ function IndicatorList(props) {
     preposeInscritCount: {
       aggregate: { count: preposeInscritCount },
     },
-    view_indicateur_inscrit,
-    departements,
+    magistratInscritCount: {
+      aggregate: { count: magistratInscritCount },
+    },
   } = data;
-  const magistratInscritCount = view_indicateur_inscrit[0]?.count;
-  const [department] = departements;
+
+  const departementNom = getDepartementName(departementCode);
 
   return (
     <Box sx={IndicatorListStyle} {...props}>
-      <HeadingTitle py="4">{`${department.id} - ${department.nom}`}</HeadingTitle>
+      <HeadingTitle py="4">{`${departementCode} - ${departementNom}`}</HeadingTitle>
       <Heading size={2}>Inscrits</Heading>
       <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator

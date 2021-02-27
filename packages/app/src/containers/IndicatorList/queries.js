@@ -6,10 +6,6 @@ export const INDICATORS = gql`
     $currentMonthStart: timestamptz!
     $currentMonthEnd: timestamptz!
   ) {
-    departements(where: { id: { _eq: $code } }) {
-      id
-      nom
-    }
     view_indicateur_login(where: { id: { _eq: $code } }) {
       count
       nom
@@ -17,40 +13,53 @@ export const INDICATORS = gql`
       id
     }
 
-    view_indicateur_inscrit(
-      where: { id: { _eq: $code }, type: { _eq: "ti" } }
+    magistratInscritCount: users_aggregate(
+      where: {
+        _and: {
+          type: { _eq: "ti" }
+          magistrat: { ti: { departement_code: { _eq: $code } } }
+        }
+      }
     ) {
-      count
+      aggregate {
+        count
+      }
     }
 
-    serviceInscritCount: view_mesure_gestionnaire_departement_aggregate(
+    serviceInscritCount: users_aggregate(
       where: {
-        discriminator: { _eq: "SERVICE" }
-        departement: { _or: { id: { _eq: $code } } }
+        _and: {
+          type: { _eq: "service" }
+          service_members: { service: { departement: { id: { _eq: $code } } } }
+        }
       }
     ) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
-    individuelInscritCount: view_mesure_gestionnaire_departement_aggregate(
+    individuelInscritCount: users_aggregate(
       where: {
-        discriminator: { _eq: "MANDATAIRE_IND" }
-        departement: { _or: { id: { _eq: $code } } }
+        _and: {
+          type: { _eq: "individuel" }
+          mandataire: { departement_code: { _eq: $code } }
+        }
       }
     ) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
-    preposeInscritCount: view_mesure_gestionnaire_departement_aggregate(
+    preposeInscritCount: users_aggregate(
       where: {
-        discriminator: { _eq: "MANDATAIRE_PRE" }
-        departement: { _or: { id: { _eq: $code } } }
+        _and: {
+          type: { _eq: "prepose" }
+          mandataire: { departement_code: { _eq: $code } }
+        }
       }
     ) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
 
@@ -124,36 +133,28 @@ export const FRANCE_INDICATORS = gql`
       }
     }
 
-    serviceInscritCount: view_mesure_gestionnaire_departement_aggregate(
-      where: { discriminator: { _eq: "SERVICE" } }
-    ) {
+    serviceInscritCount: users_aggregate(where: { type: { _eq: "service" } }) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
 
-    individuelInscritCount: view_mesure_gestionnaire_departement_aggregate(
-      where: { discriminator: { _eq: "MANDATAIRE_IND" } }
+    individuelInscritCount: users_aggregate(
+      where: { type: { _eq: "individuel" } }
     ) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
-    preposeInscritCount: view_mesure_gestionnaire_departement_aggregate(
-      where: { discriminator: { _eq: "MANDATAIRE_PRE" } }
-    ) {
+    preposeInscritCount: users_aggregate(where: { type: { _eq: "prepose" } }) {
       aggregate {
-        count(distinct: true)
+        count
       }
     }
 
-    magistratInscritCount: view_indicateur_inscrit_aggregate(
-      where: { type: { _eq: "ti" } }
-    ) {
+    magistratInscritCount: users_aggregate(where: { type: { _eq: "ti" } }) {
       aggregate {
-        sum {
-          count
-        }
+        count
       }
     }
     mesuresLastMonthCount: mesures_aggregate(
