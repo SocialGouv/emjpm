@@ -57,4 +57,5 @@ Button.defaultProps = {
   disabled: false,
   isLoading: false,
   variant: null,
+  type: "button",
 };
