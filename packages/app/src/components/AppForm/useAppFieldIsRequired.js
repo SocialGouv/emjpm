@@ -13,10 +13,6 @@ export default function useAppFieldIsRequired({
       return false;
     }
     const fieldValidation = validationSchema.fields[id];
-    return (
-      fieldValidation &&
-      fieldValidation._exclusive &&
-      fieldValidation._exclusive.required
-    );
+    return fieldValidation?._exclusive?.required;
   }, [id, required, validationSchema]);
 }

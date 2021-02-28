@@ -15,6 +15,9 @@ export default function Select({ isAsync, isCreatable, label, ...props }) {
     : isAsync
     ? ReactAsyncSelect
     : ReactSelect;
+  if (!label && props.placeholder) {
+    label = props.placeholder;
+  }
   return (
     <>
       {label && (
