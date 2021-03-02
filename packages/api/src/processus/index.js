@@ -1,4 +1,5 @@
 const { ProcessusStates } = require("~/models");
+const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
 async function processusIsRunning(type) {
   const processusState = await ProcessusStates.query()
@@ -15,13 +16,23 @@ async function startProcessus({
   expirationTimeInHour = 2,
   type,
   checkIsRunning = true,
+  mutexLock = true,
 }) {
   if (!type) {
     console.error("type is missing in startProcessus");
     return false;
   }
 
-  // TODO add mutex lock
+  if (mutexLock) {
+    const lockAcquired = await acquireLock(type);
+    if (!lockAcquired) {
+      console.error("cannot acquire lock");
+      return {
+        alreadyInProgress: true,
+      };
+    }
+    // console.log("lock acquired");
+  }
 
   if (checkIsRunning) {
     const alreadyInProgress = await processusIsRunning(type);
@@ -49,7 +60,13 @@ async function startProcessus({
   };
 }
 
-async function endProcessus({ success, id }) {
+async function endProcessus({ success, id, mutexLock = true }) {
+  const row = await ProcessusStates.query().findById(id);
+
+  if (mutexLock) {
+    await releaseLock(row.type);
+  }
+
   await ProcessusStates.query()
     .findById(id)
     .update({
