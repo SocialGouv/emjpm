@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.97.0](https://github.com/SocialGouv/emjpm/compare/v25.96.5...v25.97.0) (2021-03-02)
+
+
+### Bug Fixes
+
+* **breakable-process:** refacto processus_states fix [#2482](https://github.com/SocialGouv/emjpm/issues/2482) ([a2ac660](https://github.com/SocialGouv/emjpm/commit/a2ac6600c1c81d3bc3df58a01cd16da1908023fa))
+
+
+
+
+
 ## [25.96.5](https://github.com/SocialGouv/emjpm/compare/v25.96.4...v25.96.5) (2021-03-02)
 
 
