@@ -7973,10 +7973,10 @@ eslint-module-utils@^2.6.0:
     debug "^2.6.9"
     pkg-dir "^2.0.0"
 
-eslint-plugin-autoimport-declarative@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-autoimport-declarative/-/eslint-plugin-autoimport-declarative-1.0.0.tgz#59df785a7db72379b1fe9b449804d1f5afc0889e"
-  integrity sha512-9QQEBRN1BX+JhgRNcEsae1tNbkBIkfZ+7VF7L7LVlJhGkia2Iw3O/lDEqMW2aL+tCIIUZEBoaBlk/wBVjYPDrA==
+eslint-plugin-autoimport-declarative@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-autoimport-declarative/-/eslint-plugin-autoimport-declarative-1.0.1.tgz#7e07b0122702219af48e6573b21b6356b90feee7"
+  integrity sha512-TeKioe3wwxxaTxzUA+MNC8Jn4eyxsDsV4KP4sI68L9YNmkejpNzzN6CszqpuY/lAxPsk8BSkyzUiF/caMW62jw==
 
 eslint-plugin-es@^3.0.0:
   version "3.0.1"
