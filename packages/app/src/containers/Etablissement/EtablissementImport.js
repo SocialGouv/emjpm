@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 
@@ -8,13 +9,15 @@ import { Button, Heading, Input, Text } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { IMPORT_FINESS } from "./mutations";
-import { PROCESSUS_STATE } from "./queries";
+import { RUNNING_PROCESSUS_STATE } from "./queries";
 
 export function EtablissementImport() {
-  const { data, loading, error } = useQuery(PROCESSUS_STATE, {
+  const now = useMemo(() => new Date(), []);
+  const { data, loading, error } = useQuery(RUNNING_PROCESSUS_STATE, {
     fetchPolicy: "network-only",
-
-    variables: { id: "import_finess" },
+    variables: {
+      now,
+    },
   });
 
   const [importFiness] = useMutation(IMPORT_FINESS);
@@ -39,9 +42,8 @@ export function EtablissementImport() {
     return null;
   }
 
-  const processusState = data.processus_states_by_pk;
-
-  if (processusState && processusState.start_date && !processusState.end_date) {
+  const processusState = data.processus_states[0];
+  if (processusState) {
     return (
       <Card mb="5">
         <Flex flexDirection="column">
@@ -50,7 +52,7 @@ export function EtablissementImport() {
               {"Mise à jour de la base de données FINESS"}
             </Heading>
             <Text mb="1" lineHeight="2">
-              {`Un import des données de FINESS est en cours. Date de début ${format(
+              {`Un import des données de FINESS est en cours. Date de début: ${format(
                 new Date(processusState.start_date),
                 "dd/MM/yyyy HH:mm"
               )}`}
@@ -70,7 +72,7 @@ export function EtablissementImport() {
           </Heading>
           <Text mb="1" lineHeight="2">
             {`Dernière mise à jour de la base FINESS: ${
-              processusState
+              processusState?.end_date
                 ? format(new Date(processusState.end_date), "dd/MM/yyyy HH:mm")
                 : ""
             }`}

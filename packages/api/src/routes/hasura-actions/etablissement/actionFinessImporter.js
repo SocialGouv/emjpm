@@ -1,10 +1,10 @@
 const fetch = require("node-fetch");
 const readline = require("readline");
 const { Etablissements } = require("~/models");
-const { ProcessusStates } = require("~/models");
 const { Departement } = require("~/models");
 const logger = require("~/utils/logger");
 const { findDepartementByCodeOrId } = require("@emjpm/biz");
+const { startProcessus, endProcessus } = require("~/processus");
 
 const FILTERS = [
   "355",
@@ -44,35 +44,34 @@ const actionsFinessImporter = {
 
 module.exports = actionsFinessImporter;
 
-async function completeImport() {
-  await ProcessusStates.query().where({ id: "import_finess" }).update({
-    end_date: new Date(),
-  });
-}
-
-async function startImport() {
-  let processusState = await ProcessusStates.query().findById("import_finess");
-  if (!processusState) {
-    processusState = await ProcessusStates.query().insertAndFetch({
-      id: "import_finess",
-    });
-  }
-  if (processusState.start_date && !processusState.end_date) {
-    return false;
-  }
-  await ProcessusStates.query().where({ id: "import_finess" }).update({
-    end_date: null,
-    start_date: new Date(),
-  });
-  return true;
-}
-
 async function importFinessFile(url) {
-  if (!startImport()) {
+  const { processusId, alreadyInProgress } = await startProcessus({
+    expirationTimeInHour: 2,
+    type: "import_finess",
+  });
+  if (alreadyInProgress) {
     logger.info(`FINESS import is already in progress!`);
     return;
   }
 
+  let success;
+  try {
+    await runImport(url);
+    success = true;
+  } catch (e) {
+    logger.error(e);
+    success = false;
+  }
+
+  await endProcessus({
+    id: processusId,
+    success,
+  });
+
+  logger.info(`FINESS import is finished!`);
+}
+
+async function runImport(url) {
   const departements = await Departement.query();
 
   const result = await fetch(url);
@@ -94,9 +93,6 @@ async function importFinessFile(url) {
     await importFinessFileLine(line, departements);
     counter++;
   }
-
-  await completeImport();
-  logger.info(`FINESS import is finished!`);
 }
 
 async function importFinessFileLine(line, departements) {

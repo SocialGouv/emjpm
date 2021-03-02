@@ -9,6 +9,11 @@ const lineReader = require("line-reader");
 
 const config = require("~/config");
 const { OcmiMandataire, ProcessusStates } = require("~/models");
+const {
+  processusIsRunning,
+  startProcessus,
+  endProcessus,
+} = require("~/processus");
 
 const router = express.Router();
 
@@ -36,7 +41,7 @@ router.post("/sync-file", async (req, res) => {
     });
   }
 
-  if (await processIsRunning()) {
+  if (await processusIsRunning("ocmi_sync_file")) {
     logger.info(`[OCMI] sync file is already running.`);
     return res.json({
       state: "is_already_running",
@@ -63,8 +68,8 @@ router.post("/sync-file", async (req, res) => {
 module.exports = router;
 
 async function startImportFromLocal() {
-  await processusStateStartImport();
-  importFromLocal();
+  const { processusId } = await processusStateStartImport();
+  importFromLocal(processusId);
   return {
     state: "start",
   };
@@ -92,8 +97,8 @@ async function startImportFromAzure() {
     };
   }
 
-  await processusStateStartImport();
-  importFromAzure(container, blob);
+  const processusId = await processusStateStartImport();
+  importFromAzure(processusId, container, blob);
 
   return {
     contentLength,
@@ -105,17 +110,17 @@ async function startImportFromAzure() {
   };
 }
 
-async function importFromAzure(container, blob) {
+async function importFromAzure(processusId, container, blob) {
   const tempDir = os.tmpdir();
   const zipFilePath = await azureBlobToFile(tempDir, container, blob);
   const unzippedFile = await unzipFile(tempDir, zipFilePath);
   if (!unzippedFile) {
     return;
   }
-  await importJSON(unzippedFile);
+  await runImportJSON(processusId, unzippedFile);
 }
 
-async function importFromLocal() {
+async function importFromLocal(processusId) {
   const zipFilePath = path.join(
     ocmiSyncFileLocalDirPath,
     "ocmi-emjpmenq.json.zip"
@@ -124,7 +129,7 @@ async function importFromLocal() {
   if (!unzippedFile) {
     return;
   }
-  await importJSON(unzippedFile);
+  await runImportJSON(processusId, unzippedFile);
 }
 
 async function azureBlobToFile(
@@ -172,6 +177,18 @@ async function unzipFile(tempDir, zipFilePath) {
   return unzippedFile;
 }
 
+async function runImportJSON(processusId, file) {
+  let success;
+  try {
+    await importJSON(file);
+    success = true;
+    logger.info(`[OCMI] sync file finished`);
+  } catch (e) {
+    success = false;
+    logger.error(e);
+  }
+  await endProcessus({ id: processusId, success });
+}
 async function importJSON(file) {
   const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
 
@@ -221,9 +238,6 @@ async function importJSON(file) {
     index++;
     logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
   }
-
-  logger.info(`[OCMI] sync file finished`);
-  await completeImport();
 }
 
 async function createOrUpdateOcmiMandataire(ocmiMandataire) {
@@ -239,16 +253,6 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
   }
 }
 
-async function processIsRunning() {
-  const processusState = await ProcessusStates.query().findById(
-    "ocmi_sync_file"
-  );
-  if (!processusState) {
-    return false;
-  }
-  return !processusState.end_date;
-}
-
 async function hasBeenProcessed({ properties: { createdOn } }) {
   const processusState = await ProcessusStates.query().findById(
     "ocmi_sync_file"
@@ -259,21 +263,10 @@ async function hasBeenProcessed({ properties: { createdOn } }) {
   return processusState.start_date.getTime() > createdOn.getTime();
 }
 
-async function completeImport() {
-  await ProcessusStates.query().where({ id: "ocmi_sync_file" }).update({
-    end_date: new Date(),
-  });
-}
-
 async function processusStateStartImport() {
-  let processusState = await ProcessusStates.query().findById("ocmi_sync_file");
-  if (!processusState) {
-    processusState = await ProcessusStates.query().insertAndFetch({
-      id: "ocmi_sync_file",
-    });
-  }
-  await ProcessusStates.query().where({ id: "ocmi_sync_file" }).update({
-    end_date: null,
-    start_date: new Date(),
+  return startProcessus({
+    checkIsRunning: false,
+    expirationTimeInHour: 2,
+    type: "ocmi_sync_file",
   });
 }

@@ -1,8 +1,17 @@
 import gql from "graphql-tag";
 
-export const PROCESSUS_STATE = gql`
-  query processus_states($id: String!) {
-    processus_states_by_pk(id: $id) {
+export const RUNNING_PROCESSUS_STATE = gql`
+  query processus_states($now: timestamptz!) {
+    processus_states(
+      where: {
+        _and: {
+          type: { _eq: "import_finess" }
+          end_date: { _eq: null }
+          expire_date: { _gt: $now }
+        }
+      }
+      limit: 1
+    ) {
       id
       start_date
       end_date
