@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.96.4](https://github.com/SocialGouv/emjpm/compare/v25.96.3...v25.96.4) (2021-03-02)
+
+
+### Bug Fixes
+
+* **agrements:** undefined bug ([fba4dc5](https://github.com/SocialGouv/emjpm/commit/fba4dc57221a14afd11e64230c5bd736301d6bc9))
+* **button:** default type button fix [#2497](https://github.com/SocialGouv/emjpm/issues/2497) ([ded4774](https://github.com/SocialGouv/emjpm/commit/ded4774e4a72c9b7e2f761e90a348a213e0d36b2))
+* **code-postal:** leading zero ([b4f43e8](https://github.com/SocialGouv/emjpm/commit/b4f43e8207fd58a16fa47e03f3512b53ac38b100))
+* **deps:** update all non-major dependencies ([#2498](https://github.com/SocialGouv/emjpm/issues/2498)) ([47e8616](https://github.com/SocialGouv/emjpm/commit/47e8616002c1879fa2e23b101c1b302583b594ef))
+* **deps:** update dependency cypress to v6 ([#2505](https://github.com/SocialGouv/emjpm/issues/2505)) ([df62cad](https://github.com/SocialGouv/emjpm/commit/df62cadab688dabea81ea24b3970a18e64704b0b))
+* **dev-autoimport:** up version ([d5b61e5](https://github.com/SocialGouv/emjpm/commit/d5b61e575b0937eb6a84899c3e7344c2f898555a))
+* **select:** show required using placholder as default label fix [#2496](https://github.com/SocialGouv/emjpm/issues/2496) ([5f2e221](https://github.com/SocialGouv/emjpm/commit/5f2e221491ca51b71e78269bef80e51ee1c832fb))
+* **stats:** inscrits rely on users fix [#2488](https://github.com/SocialGouv/emjpm/issues/2488) ([07426b6](https://github.com/SocialGouv/emjpm/commit/07426b6a76e5be24c853754d53aaeadb5eb0b878))
+
+
+
+
+
 ## [25.96.3](https://github.com/SocialGouv/emjpm/compare/v25.96.2...v25.96.3) (2021-02-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.96.4](https://github.com/SocialGouv/emjpm/compare/v25.96.3...v25.96.4) (2021-03-02)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#2498](https://github.com/SocialGouv/emjpm/issues/2498)) ([47e8616](https://github.com/SocialGouv/emjpm/commit/47e8616002c1879fa2e23b101c1b302583b594ef))
+
+
+
+
+
 ## [25.96.3](https://github.com/SocialGouv/emjpm/compare/v25.96.2...v25.96.3) (2021-02-24)
 
 **Note:** Version bump only for package @emjpm/biz
