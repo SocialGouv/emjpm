@@ -26,6 +26,7 @@ export default function FormGroupSelect(props) {
     options = defaultProps.options,
     setSelectedOption,
     component: Component,
+    defaultOptions = [],
     loadOptions,
     isLoading: isLoadingProp,
     debounceInterval = defaultProps.debounceInterval,
@@ -67,7 +68,10 @@ export default function FormGroupSelect(props) {
     } catch (e) {
       loadedOptions = [];
     }
-    setLoadState({ isLoading: false, loadedOptions });
+    setLoadState({
+      isLoading: false,
+      loadedOptions,
+    });
   }, debounceInterval);
   useEffect(() => {
     return () => {
@@ -84,8 +88,11 @@ export default function FormGroupSelect(props) {
     };
   }
   options = useMemo(() => {
+    if (!value) {
+      return [...options, ...defaultOptions];
+    }
     return [...options, ...loadState.loadedOptions];
-  }, [options, loadState.loadedOptions]);
+  }, [options, loadState.loadedOptions, defaultOptions, value]);
   const inputValueRef = useRef();
   const isLoading = isLoadingProp || loadState.isLoading;
 
@@ -98,9 +105,28 @@ export default function FormGroupSelect(props) {
     }),
     [createOptionPosition, getNewOptionData, isValidNewOption]
   );
+
+  // ensure value
+  const initialValue = formik.initialValues[id];
   options = useMemo(() => {
-    return isCreatable ? ensureOption(options, value, createOptions) : options;
-  }, [isCreatable, options, value, createOptions]);
+    if (isCreatable) {
+      return ensureOptionCreate(options, value, createOptions);
+    }
+    if (initialValue) {
+      const initialOption = findOption(defaultOptions, initialValue);
+      if (initialOption && !findOption(options, initialValue)) {
+        return [...options, initialOption];
+      }
+    }
+    return options;
+  }, [
+    isCreatable,
+    options,
+    value,
+    createOptions,
+    defaultOptions,
+    initialValue,
+  ]);
 
   // readOnly
   const readOnlyValue = useMemo(() => {
@@ -216,7 +242,7 @@ function findOption(options = [], value) {
 }
 
 // add missing option from value, for creatable (and initial value)
-function ensureOption(options = [], value, createOptions) {
+function ensureOptionCreate(options = [], value, createOptions) {
   if (value && !findOption(options, value)) {
     const {
       createOptionPosition,
