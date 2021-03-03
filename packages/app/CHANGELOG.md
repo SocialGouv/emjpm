@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.98.0](https://github.com/SocialGouv/emjpm/compare/v25.97.0...v25.98.0) (2021-03-03)
+
+
+### Bug Fixes
+
+* **required:** some missing asterisques ([0a25c61](https://github.com/SocialGouv/emjpm/commit/0a25c6163b9d56923deab4c15db2c05e4b92d817))
+* **tribunal:** selector ([50fba03](https://github.com/SocialGouv/emjpm/commit/50fba03d69cdb6e375a7c7664bc3f09b82d9c351))
+
+
+### Features
+
+* **select:** ensure option of initial value using default options ([4cdff83](https://github.com/SocialGouv/emjpm/commit/4cdff83e3a13e747322040c0dcd61fee9e023547))
+
+
+
+
+
 # [25.97.0](https://github.com/SocialGouv/emjpm/compare/v25.96.5...v25.97.0) (2021-03-02)
 
 
