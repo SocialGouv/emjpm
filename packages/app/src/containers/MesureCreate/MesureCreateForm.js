@@ -207,6 +207,7 @@ export function MesureCreateForm(props) {
                   formik={formik}
                   size="small"
                   validationSchema={mesureCreateSchema}
+                  required={formik.values.pays == "FR"}
                   onChange={async (e) => {
                     const { value } = e.target;
                     await formik.setFieldValue("code_postal", value);
@@ -225,6 +226,7 @@ export function MesureCreateForm(props) {
                     value={formik.values.ville}
                     hasError={!!formik.errors.ville}
                     size="small"
+                    required
                   />
                   <InlineError message={formik.errors.ville} fieldId="ville" />
                 </Field>

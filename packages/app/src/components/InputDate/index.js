@@ -34,6 +34,10 @@ export default function InputDate(props) {
     return onChangeProp(value);
   };
 
+  if (!label && props.placeholderText) {
+    label = props.placeholderText;
+  }
+
   return (
     <>
       {label && (

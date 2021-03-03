@@ -5,7 +5,7 @@ import { Select } from "~/components";
 import { CODE_POSTAL } from "./queries";
 
 export function GeocodeCities(props) {
-  const { onChange, hasError, zipcode, value, name, size } = props;
+  const { onChange, hasError, zipcode, value, name, size, required } = props;
   const { data, loading } = useQuery(CODE_POSTAL, {
     variables: {
       zipcode: zipcode,
@@ -33,6 +33,7 @@ export function GeocodeCities(props) {
       onChange={(item) => onChange(item.value)}
       options={options}
       size={size ? size : ""}
+      required={required}
     />
   );
 }

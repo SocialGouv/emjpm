@@ -18,6 +18,11 @@ export default function InputYear(props) {
   if (value) {
     selected = parse(value.toString(), "yyyy", new Date());
   }
+
+  if (!label && props.placeholderText) {
+    label = props.placeholderText;
+  }
+
   return (
     <>
       {label && (

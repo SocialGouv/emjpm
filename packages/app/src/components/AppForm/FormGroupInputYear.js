@@ -4,6 +4,7 @@ import { Field, InputYear } from "~/components";
 
 import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
 import useAppFieldShowError from "./useAppFieldShowError";
+import useAppFieldIsRequired from "./useAppFieldIsRequired";
 
 export default function FormGroupInputYear({
   id,
@@ -16,6 +17,7 @@ export default function FormGroupInputYear({
   hideErrors,
   validationSchema,
   onChange,
+  required,
   ...props
 }) {
   const { handleBlur, values } = formik;
@@ -31,6 +33,8 @@ export default function FormGroupInputYear({
     id,
   });
 
+  required = useAppFieldIsRequired({ id, required, validationSchema });
+
   return (
     <Field>
       <Flex alignItems="center">
@@ -44,6 +48,7 @@ export default function FormGroupInputYear({
           onChange={
             onChange ? onChange : (value) => formik.setFieldValue(id, value)
           }
+          required={required}
           {...props}
         />
         {children ? <Box>{children}</Box> : null}

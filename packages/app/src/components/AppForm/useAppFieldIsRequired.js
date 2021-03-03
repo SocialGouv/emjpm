@@ -1,5 +1,13 @@
 import { useMemo } from "react";
 
+function isFieldRequired(validationSchema, id) {
+  return (
+    validationSchema
+      .describe()
+      .fields[id]?.tests.findIndex(({ name }) => name === "required") >= 0
+  );
+}
+
 export default function useAppFieldIsRequired({
   id,
   required,
@@ -12,7 +20,6 @@ export default function useAppFieldIsRequired({
     if (!validationSchema) {
       return false;
     }
-    const fieldValidation = validationSchema.fields[id];
-    return fieldValidation?._exclusive?.required;
+    return isFieldRequired(validationSchema, id);
   }, [id, required, validationSchema]);
 }
