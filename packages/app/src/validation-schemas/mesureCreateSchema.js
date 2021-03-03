@@ -22,7 +22,7 @@ const mesureCreateSchema = yup.object().shape({
   numero_dossier: yup.string(),
   numero_rg: yup.string().required(),
   pays: yup.string().required(),
-  tribunal: yup.string().required(),
+  ti_id: yup.string().required().nullable(),
   ville: yup.string().when("pays", {
     is: (pays) => pays === "FR",
     then: yup.string().required(),

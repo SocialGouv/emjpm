@@ -12,7 +12,7 @@ import {
 } from "~/components/AppForm";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureEditSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError } from "~/components";
+import { Button, Heading } from "~/components";
 
 function initialValues(mesure) {
   return {
@@ -24,20 +24,17 @@ function initialValues(mesure) {
     date_protection_en_cours: mesure.dateProtectionEnCours || "",
     numero_dossier: mesure.numeroDossier || "",
     numero_rg: mesure.numeroRg || "",
-    tribunal: mesure.tiId
-      ? { label: mesure.tribunal, value: mesure.tiId }
-      : null,
+    ti_id: mesure.tiId,
   };
 }
 
 export function MesureEditForm(props) {
-  const {
-    tribunaux,
-    antenneOptions,
-    handleSubmit,
-    handleCancel,
-    mesureToEdit,
-  } = props;
+  const { antenneOptions, handleSubmit, handleCancel, mesureToEdit } = props;
+
+  const tribunaux = [
+    { label: mesureToEdit.tribunal, value: mesureToEdit.tiId },
+    ...props.tribunaux,
+  ];
 
   const formik = useFormik({
     initialValues: initialValues(mesureToEdit),
@@ -104,26 +101,14 @@ export function MesureEditForm(props) {
         <FormInputBox>
           <Flex flexDirection={["column", "row", "row"]}>
             <Box flexGrow="2" pr="1px">
-              <Field>
-                <TribunalAutoComplete
-                  id="tribunal"
-                  value={formik.values.tribunal}
-                  name="tribunal"
-                  hasError={formik.errors.tribunal && formik.touched.tribunal}
-                  onChange={(option) =>
-                    formik.setFieldValue("tribunal", option)
-                  }
-                  defaultOptions={tribunaux}
-                  placeholder="Tribunal"
-                  size="small"
-                />
-                {formik.touched.tribunal && (
-                  <InlineError
-                    message={formik.errors.tribunal}
-                    fieldId="tribunal"
-                  />
-                )}
-              </Field>
+              <TribunalAutoComplete
+                id="ti_id"
+                defaultOptions={tribunaux}
+                placeholder="Tribunal"
+                size="small"
+                formik={formik}
+                validationSchema={mesureEditSchema}
+              />
             </Box>
             <Box pl="1px">
               <FormGroupInput

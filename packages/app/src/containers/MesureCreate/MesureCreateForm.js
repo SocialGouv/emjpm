@@ -30,7 +30,7 @@ function initialValues() {
     numero_dossier: "",
     numero_rg: "",
     pays: "FR",
-    tribunal: null,
+    ti_id: "",
     ville: "",
   };
 }
@@ -73,26 +73,14 @@ export function MesureCreateForm(props) {
           </Flex>
           <Flex flexDirection={["column", "row", "row"]}>
             <Box flexGrow="2" pr="1px">
-              <Field>
-                <TribunalAutoComplete
-                  id="tribunal"
-                  value={formik.values.tribunal}
-                  name="tribunal"
-                  hasError={formik.errors.tribunal && formik.touched.tribunal}
-                  onChange={(option) =>
-                    formik.setFieldValue("tribunal", option)
-                  }
-                  defaultOptions={tribunaux}
-                  placeholder="Tribunal"
-                  size="small"
-                />
-                {formik.touched.tribunal && (
-                  <InlineError
-                    message={formik.errors.tribunal}
-                    fieldId="tribunal"
-                  />
-                )}
-              </Field>
+              <TribunalAutoComplete
+                id="ti_id"
+                defaultOptions={tribunaux}
+                placeholder="Tribunal"
+                size="small"
+                formik={formik}
+                validationSchema={mesureCreateSchema}
+              />
             </Box>
             <Box pl="1px">
               <FormGroupInput

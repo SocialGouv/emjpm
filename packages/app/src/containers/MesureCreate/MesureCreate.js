@@ -114,7 +114,7 @@ export function MesureCreate() {
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
         pays: values.pays,
-        ti_id: values.tribunal.value,
+        ti_id: values.ti_id,
         type_etablissement: values.type_etablissement
           ? values.type_etablissement
           : null,

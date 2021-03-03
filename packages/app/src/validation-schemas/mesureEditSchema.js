@@ -19,7 +19,7 @@ const mesureEditSchema = yup.object().shape({
   date_protection_en_cours: yup.date().required(),
   numero_dossier: yup.string(),
   numero_rg: yup.string().required(),
-  tribunal: yup.string().required(),
+  ti_id: yup.string().required(),
 });
 
 export { mesureEditSchema };

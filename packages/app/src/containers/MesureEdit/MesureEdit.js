@@ -87,7 +87,7 @@ export function MesureEdit() {
         id: mesureToEdit.id,
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
-        ti_id: values.tribunal.value,
+        ti_id: values.ti_id,
       },
     });
 
