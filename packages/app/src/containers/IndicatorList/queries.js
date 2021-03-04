@@ -13,49 +13,35 @@ export const INDICATORS = gql`
       id
     }
 
-    magistratInscritCount: users_aggregate(
-      where: {
-        _and: {
-          type: { _eq: "ti" }
-          magistrat: { ti: { departement_code: { _eq: $code } } }
-        }
-      }
+    magistratInscritCount: view_users_stats_aggregate(
+      where: { _and: { type: { _eq: "ti" }, departement_code: { _eq: $code } } }
     ) {
       aggregate {
         count
       }
     }
 
-    serviceInscritCount: users_aggregate(
+    serviceInscritCount: view_users_stats_aggregate(
       where: {
-        _and: {
-          type: { _eq: "service" }
-          service_members: { service: { departement: { id: { _eq: $code } } } }
-        }
+        _and: { type: { _eq: "service" }, departement_code: { _eq: $code } }
       }
     ) {
       aggregate {
         count
       }
     }
-    individuelInscritCount: users_aggregate(
+    individuelInscritCount: view_users_stats_aggregate(
       where: {
-        _and: {
-          type: { _eq: "individuel" }
-          mandataire: { departement_code: { _eq: $code } }
-        }
+        _and: { type: { _eq: "individuel" }, departement_code: { _eq: $code } }
       }
     ) {
       aggregate {
         count
       }
     }
-    preposeInscritCount: users_aggregate(
+    preposeInscritCount: view_users_stats_aggregate(
       where: {
-        _and: {
-          type: { _eq: "prepose" }
-          mandataire: { departement_code: { _eq: $code } }
-        }
+        _and: { type: { _eq: "prepose" }, departement_code: { _eq: $code } }
       }
     ) {
       aggregate {
@@ -133,26 +119,32 @@ export const FRANCE_INDICATORS = gql`
       }
     }
 
-    serviceInscritCount: users_aggregate(where: { type: { _eq: "service" } }) {
+    serviceInscritCount: view_users_stats_aggregate(
+      where: { type: { _eq: "service" } }
+    ) {
       aggregate {
         count
       }
     }
 
-    individuelInscritCount: users_aggregate(
+    individuelInscritCount: view_users_stats_aggregate(
       where: { type: { _eq: "individuel" } }
     ) {
       aggregate {
         count
       }
     }
-    preposeInscritCount: users_aggregate(where: { type: { _eq: "prepose" } }) {
+    preposeInscritCount: view_users_stats_aggregate(
+      where: { type: { _eq: "prepose" } }
+    ) {
       aggregate {
         count
       }
     }
 
-    magistratInscritCount: users_aggregate(where: { type: { _eq: "ti" } }) {
+    magistratInscritCount: view_users_stats_aggregate(
+      where: { type: { _eq: "ti" } }
+    ) {
       aggregate {
         count
       }
