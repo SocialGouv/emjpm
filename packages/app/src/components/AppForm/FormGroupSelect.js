@@ -193,7 +193,15 @@ export default function FormGroupSelect(props) {
             if (onChange) {
               return onChange(props);
             }
-            setFieldValue(id, props?.value || null);
+            if (Array.isArray(props)) {
+              console.log(props.map(({ value }) => value));
+              setFieldValue(
+                id,
+                props.map(({ value }) => value)
+              );
+            } else {
+              setFieldValue(id, props?.value || null);
+            }
             setSelectedOption && setSelectedOption(props);
           }}
           value={findOption(options, value)}
