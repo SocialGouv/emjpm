@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.98.1](https://github.com/SocialGouv/emjpm/compare/v25.98.0...v25.98.1) (2021-03-04)
+
+
+### Bug Fixes
+
+* **stats:** view_users_stats for anonymous perms ([a762cb6](https://github.com/SocialGouv/emjpm/commit/a762cb6ef25ed706b6efb70216e00999f1cef475))
+
+
+
+
+
 # [25.98.0](https://github.com/SocialGouv/emjpm/compare/v25.97.0...v25.98.0) (2021-03-03)
 
 
