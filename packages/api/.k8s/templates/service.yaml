@@ -6,6 +6,7 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   type: ClusterIP
+  clusterIP: None
   ports:
     - port: 4000
       targetPort: 4000
