@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.99.0](https://github.com/SocialGouv/emjpm/compare/v25.98.1...v25.99.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* **deployment:** dns resolution ([c2be03c](https://github.com/SocialGouv/emjpm/commit/c2be03cb3a46fd7e1ecbfef4eb4fe21c159401c9))
+* **deps:** update all dependencies ([#2507](https://github.com/SocialGouv/emjpm/issues/2507)) ([2c69e33](https://github.com/SocialGouv/emjpm/commit/2c69e333259c9669a33cb1ad8d7cf345ae6b1ec8))
+
+
+
+
+
 ## [25.98.1](https://github.com/SocialGouv/emjpm/compare/v25.98.0...v25.98.1) (2021-03-04)
 
 **Note:** Version bump only for package @emjpm/api
