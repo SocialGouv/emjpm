@@ -2,7 +2,9 @@ import "react-tabs/style/react-tabs.css";
 
 const tabsStyle = {};
 
-const tabListStyle = {};
+const tabListStyle = {
+  marginBottom: "1px",
+};
 
 const tabStyle = {
   "&.react-tabs__tab--selected": {
