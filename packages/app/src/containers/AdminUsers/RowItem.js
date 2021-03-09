@@ -5,10 +5,9 @@ import {
   isIndividuel,
   isPrepose,
 } from "@emjpm/biz";
-
+import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
-import { Link } from "~/components/Link";
 import { Button, Card } from "~/components";
 
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
@@ -19,20 +18,29 @@ import { impersonateLogin, useAuth } from "~/user/Auth";
 export default function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;
 
+  const history = useHistory();
   const { authStore } = useAuth();
   const { token } = authStore;
   const impersonate = useCallback(() => {
     impersonateLogin({ id, token });
   }, [id, token]);
 
+  const onRowClick = useCallback(() => history.push(`/admin/users/${id}`), [
+    id,
+    history,
+  ]);
+
   return (
     <>
-      <Card sx={cardStyle(active)} width="100%">
+      <Card sx={cardStyle(active)} width="100%" onClick={onRowClick}>
         <Flex justifyContent="space-between">
           <Flex justifyContent="flex-start">
-            <Flex width="100px" flexDirection="column">
+            <Flex width="46px" flexDirection="column">
               <Text sx={labelStyle}>id</Text>
               <Text sx={descriptionStyle}>{id}</Text>
+            </Flex>
+            <Flex width="80px" flexDirection="column">
+              <Text sx={labelStyle}>type</Text>
               <Text sx={descriptionStyle}>{type}</Text>
             </Flex>
             <Box width="300px">
@@ -41,8 +49,9 @@ export default function RowItem({ item }) {
             </Box>
             <Flex width="200px" flexDirection="column">
               <Text sx={labelStyle}>prénom / nom</Text>
-              <Text sx={descriptionStyle}>{prenom}</Text>
-              <Text sx={descriptionStyle}>{nom}</Text>
+              <Text sx={descriptionStyle}>
+                {prenom} {nom}
+              </Text>
             </Flex>
             <Flex width="100px" flexDirection="column">
               <Text sx={labelStyle}>état</Text>
@@ -68,13 +77,13 @@ export default function RowItem({ item }) {
             )}
           </Flex>
           <Flex justifyContent="flex-end" width="180px">
-            <Flex width="100px" flexDirection="column">
+            {/* <Flex width="100px" flexDirection="column">
               <Box mr="1" width="120px">
                 <Link to={`/admin/users/${id}`}>
                   <Button>Voir</Button>
                 </Link>
               </Box>
-            </Flex>
+            </Flex> */}
             <Flex width="80px" flexDirection="column">
               <Box mr="1" width="120px">
                 <Button
@@ -84,6 +93,7 @@ export default function RowItem({ item }) {
                     borderWidth: 1,
                     borderStyle: "solid",
                     borderRadius: 5,
+                    padding: "12px",
                   }}
                   onClick={impersonate}
                 >

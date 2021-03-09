@@ -5,6 +5,9 @@ function cardStyle(active) {
     overflow: "hidden",
     pl: "16px",
     position: "relative",
+    cursor: "pointer",
+    borderRadius: "0",
+    marginBottom: "1px",
   };
 }
 
@@ -14,7 +17,7 @@ const labelStyle = {
   fontSize: "11px",
   fontWeight: "600",
   mb: "5px",
-  mt: "7px",
+  mt: "0",
 };
 
 const descriptionStyle = {
