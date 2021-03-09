@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.100.0](https://github.com/SocialGouv/emjpm/compare/v25.99.0...v25.100.0) (2021-03-09)
+
+
+### Bug Fixes
+
+* **default-options:** and tribunal select ([56ab51c](https://github.com/SocialGouv/emjpm/commit/56ab51cbfeeb747df522d3c972d5251baa8d1692))
+* **footer:** add margin top ([b6ee1fb](https://github.com/SocialGouv/emjpm/commit/b6ee1fbe3c065700be29466a1587f6afa05ae00a))
+* **footer:** always at bottom ([e61595c](https://github.com/SocialGouv/emjpm/commit/e61595c6da897788b86324f85bd1bf34092128cc))
+* **label:** date and year context ([9a41597](https://github.com/SocialGouv/emjpm/commit/9a4159776c25243eadae898be84af7555d9a7654))
+* **tabs:** design ([6f4f2d9](https://github.com/SocialGouv/emjpm/commit/6f4f2d95d6806513b6c9f6f91dc00a018ac87155))
+
+
+### Features
+
+* **tabs:** users filter type ([7ede66e](https://github.com/SocialGouv/emjpm/commit/7ede66e8450d626bf02ced3bcd6a8fdc0696ebb0))
+* **ui:** beautify admin users ([7c9df4e](https://github.com/SocialGouv/emjpm/commit/7c9df4ee8452f249434e838611cf2dfddb8a7206))
+
+
+
+
+
 # [25.99.0](https://github.com/SocialGouv/emjpm/compare/v25.98.1...v25.99.0) (2021-03-08)
 
 
