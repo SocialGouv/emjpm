@@ -54,12 +54,9 @@ function LayoutAdmin(props) {
           </BoxWrapper>
         )}
       </Box>
-      {children}
-      <Box bg="cardPrimary">
-        <BoxWrapper px="1">
-          <Footer />
-        </BoxWrapper>
-      </Box>
+      <Box>{children}</Box>
+
+      <Footer />
     </Fragment>
   );
 }

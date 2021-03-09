@@ -6,13 +6,11 @@ import { Logo } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 import { FooterItemStyle, FooterWrapperStyle } from "./style";
-
 const { PACKAGE_VERSION } = config;
 
 function Footer(props) {
-  const { hasMarginTop = true } = props;
   return (
-    <Box mt={hasMarginTop ? 7 : 0} sx={FooterWrapperStyle}>
+    <Box sx={FooterWrapperStyle}>
       <BoxWrapper>
         <Flex
           flexWrap="wrap"

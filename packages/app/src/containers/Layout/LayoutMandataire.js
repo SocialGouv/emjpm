@@ -23,7 +23,7 @@ const navigationLinks = [
 ];
 
 function LayoutMandataire(props) {
-  const { children, hasNavigation = true, hasFooterMargins = true } = props;
+  const { children, hasNavigation = true } = props;
   const user = useUser();
 
   let links = navigationLinks;
@@ -50,12 +50,8 @@ function LayoutMandataire(props) {
             </BoxWrapper>
           )}
         </Box>
-        {children}
-        <Box bg="cardPrimary">
-          <BoxWrapper px="1">
-            <Footer hasMarginTop={hasFooterMargins} />
-          </BoxWrapper>
-        </Box>
+        <Box>{children}</Box>
+        <Footer />
       </Box>
     </Fragment>
   );

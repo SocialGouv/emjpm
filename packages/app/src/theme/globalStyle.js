@@ -66,6 +66,11 @@ const styles = css`
     font-family: "Open Sans", sans-serif;
     background: #f2f5f9;
     -webkit-font-smoothing: antialiased;
+    height: 100%;
+  }
+  div#root{
+    display: flex;
+    flex-direction: column;
   }
   ${emotionNormalize}
 `;

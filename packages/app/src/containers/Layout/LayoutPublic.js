@@ -3,7 +3,6 @@ import { Box } from "rebass";
 
 import { Footer } from "~/containers/Footer";
 import { Header } from "~/components";
-import { BoxWrapper } from "~/components/Grid";
 
 function LayoutPublic(props) {
   const { children } = props;
@@ -16,12 +15,8 @@ function LayoutPublic(props) {
       >
         <Header isDisconnected />
       </Box>
-      {children}
-      <Box bg="cardPrimary">
-        <BoxWrapper px="1">
-          <Footer />
-        </BoxWrapper>
-      </Box>
+      <Box>{children}</Box>
+      <Footer />
     </Fragment>
   );
 }

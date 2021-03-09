@@ -46,7 +46,7 @@ function MandataireEnquetePage() {
   }
 
   return (
-    <LayoutMandataire hasFooterMargins={false}>
+    <LayoutMandataire>
       <BoxWrapper>
         <EnqueteReponse
           enquete={enquete}

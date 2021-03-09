@@ -61,11 +61,7 @@ function LayoutServices(props) {
           )}
         </Box>
         <Box px="1">{children}</Box>
-        <Box bg="cardPrimary">
-          <BoxWrapper px="1">
-            <Footer />
-          </BoxWrapper>
-        </Box>
+        <Footer />
       </Box>
     </Fragment>
   );

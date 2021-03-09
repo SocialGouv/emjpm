@@ -39,12 +39,8 @@ function LayoutDirection({ children }) {
           <Navigation links={navigationLinks} />
         </BoxWrapper>
       </Box>
-      {children}
-      <Box bg="cardPrimary">
-        <BoxWrapper px="1">
-          <Footer />
-        </BoxWrapper>
-      </Box>
+      <Box>{children}</Box>
+      <Footer />
     </Fragment>
   );
 }
