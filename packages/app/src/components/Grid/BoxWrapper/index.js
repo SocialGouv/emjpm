@@ -4,10 +4,9 @@ import { Box } from "rebass";
 
 import { wrapperStyle } from "../style";
 
-function BoxWrapper(props) {
-  const { children } = props;
+function BoxWrapper({ children, sx = {}, ...props }) {
   return (
-    <Box sx={wrapperStyle} {...props}>
+    <Box sx={{ ...wrapperStyle, ...sx }} {...props}>
       {children}
     </Box>
   );
