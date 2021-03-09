@@ -21,9 +21,13 @@ export default function RowItem({ item }) {
   const history = useHistory();
   const { authStore } = useAuth();
   const { token } = authStore;
-  const impersonate = useCallback(() => {
-    impersonateLogin({ id, token });
-  }, [id, token]);
+  const impersonate = useCallback(
+    (e) => {
+      e.stopPropagation();
+      impersonateLogin({ id, token });
+    },
+    [id, token]
+  );
 
   const onRowClick = useCallback(() => history.push(`/admin/users/${id}`), [
     id,
