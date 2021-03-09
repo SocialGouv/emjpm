@@ -73,11 +73,13 @@ export default function FormGroupSelect(props) {
       loadedOptions,
     });
   }, debounceInterval);
+
   useEffect(() => {
     return () => {
       debouncedLoadOptions.cancel();
     };
   }, [debouncedLoadOptions]);
+
   let loadCallback;
   if (loadOptions) {
     loadCallback = (inputValue) => {
@@ -87,12 +89,14 @@ export default function FormGroupSelect(props) {
       debouncedLoadOptions.callback(inputValue);
     };
   }
+
   options = useMemo(() => {
     if (!value) {
       return [...options, ...defaultOptions];
     }
     return [...options, ...loadState.loadedOptions];
   }, [options, loadState.loadedOptions, defaultOptions, value]);
+
   const inputValueRef = useRef();
   const isLoading = isLoadingProp || loadState.isLoading;
 
@@ -112,21 +116,14 @@ export default function FormGroupSelect(props) {
     if (isCreatable) {
       return ensureOptionCreate(options, value, createOptions);
     }
-    if (initialValue) {
-      const initialOption = findOption(defaultOptions, initialValue);
-      if (initialOption && !findOption(options, initialValue)) {
-        return [...options, initialOption];
+    if (defaultOptions) {
+      const option = findOption(defaultOptions, value);
+      if (option && !findOption(options, value)) {
+        return [...options, option];
       }
     }
     return options;
-  }, [
-    isCreatable,
-    options,
-    value,
-    createOptions,
-    defaultOptions,
-    initialValue,
-  ]);
+  }, [isCreatable, options, value, createOptions, defaultOptions]);
 
   // readOnly
   const readOnlyValue = useMemo(() => {
