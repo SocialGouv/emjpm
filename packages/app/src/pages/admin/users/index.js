@@ -19,7 +19,7 @@ function AdminUsersPage() {
               mt: "2",
             }}
           >
-            <AdminFilterBar userTypeFilter />
+            <AdminFilterBar />
             <AdminUsers />
           </Flex>
         </BoxWrapper>

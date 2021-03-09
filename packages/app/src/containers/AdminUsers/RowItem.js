@@ -1,5 +1,4 @@
-import { useContext, useState, useCallback } from "react";
-import { useQuery } from "@apollo/client";
+import { useCallback } from "react";
 import {
   DIRECTION_TYPE,
   isDirection,
@@ -7,24 +6,17 @@ import {
   isPrepose,
 } from "@emjpm/biz";
 
-import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
-
 import { Box, Flex, Text } from "rebass";
 
-import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
 import { Link } from "~/components/Link";
-import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
 
-import { USERS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
 import { impersonateLogin, useAuth } from "~/user/Auth";
 
-import useQueryReady from "~/hooks/useQueryReady";
-
-function RowItem({ item }) {
+export default function RowItem({ item }) {
   const { id, nom, prenom, email, type, active, mandataire, directions } = item;
 
   const { authStore } = useAuth();
@@ -108,58 +100,6 @@ function RowItem({ item }) {
     </>
   );
 }
-
-function AdminUsers() {
-  const resultPerPage = 10;
-  const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, debouncedSearchId, selectedType } = useContext(
-    AdminFilterContext
-  );
-
-  useEffectObjectValuesChangeCallback(
-    { debouncedSearchText, selectedType },
-    () => {
-      if (currentOffset !== 0) {
-        setCurrentOffset(0);
-      }
-    }
-  );
-
-  const { data, error, loading } = useQuery(USERS, {
-    fetchPolicy: "network-only",
-
-    variables: {
-      limit: resultPerPage,
-      offset: currentOffset,
-      searchId: debouncedSearchId,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== ""
-          ? `%${debouncedSearchText}%`
-          : null,
-      type: selectedType,
-    },
-  });
-
-  if (!useQueryReady(loading, error)) {
-    return null;
-  }
-
-  const { count } = data.users_aggregate.aggregate;
-  const users = data.users;
-
-  return (
-    <PaginatedList
-      entries={users}
-      RowItem={RowItem}
-      count={count}
-      resultPerPage={resultPerPage}
-      currentOffset={currentOffset}
-      setCurrentOffset={setCurrentOffset}
-    />
-  );
-}
-
-export { AdminUsers };
 
 function getDirectionLabel({ type, directions }) {
   let directionLabel = " - ";
