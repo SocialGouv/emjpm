@@ -88,25 +88,23 @@ export default function RowItem({ item }) {
                 </Link>
               </Box>
             </Flex> */}
-            <Flex width="80px" flexDirection="column">
-              <Box mr="1" width="120px">
-                <Button
-                  style={{
-                    backgroundColor: "white",
-                    borderColor: "#007AD9",
-                    borderWidth: 1,
-                    borderStyle: "solid",
-                    borderRadius: 5,
-                    padding: "12px",
-                  }}
-                  onClick={impersonate}
-                >
-                  <UserSecret
-                    size={18}
-                    style={{ color: "#333", height: "100%" }}
-                  />
-                </Button>
-              </Box>
+            <Flex width="45px" flexDirection="column">
+              <Button
+                style={{
+                  backgroundColor: "white",
+                  borderColor: "#007AD9",
+                  borderWidth: 1,
+                  borderStyle: "solid",
+                  borderRadius: 5,
+                  padding: "12px",
+                }}
+                onClick={impersonate}
+              >
+                <UserSecret
+                  size={18}
+                  style={{ color: "#333", height: "100%" }}
+                />
+              </Button>
             </Flex>
           </Flex>
         </Flex>
