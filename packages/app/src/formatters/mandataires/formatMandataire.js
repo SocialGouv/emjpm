@@ -31,7 +31,8 @@ export default function formatMandataire(
   mandataire,
   mesures_awaiting,
   gestionnaire_tis,
-  id
+  id,
+  last_update
 ) {
   let currentDiscriminator = {};
   const common = {
@@ -44,6 +45,7 @@ export default function formatMandataire(
     mesuresInProgress: mesures_in_progress,
     tis: gestionnaire_tis,
     type: TYPES[discriminator],
+    lastUpdate: last_update,
   };
 
   if (discriminator === "SERVICE") {
