@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.101.0](https://github.com/SocialGouv/emjpm/compare/v25.100.0...v25.101.0) (2021-03-11)
+
+
+### Features
+
+* **last-update:** add direction indicator and db field ([#2509](https://github.com/SocialGouv/emjpm/issues/2509)) ([fe58e70](https://github.com/SocialGouv/emjpm/commit/fe58e7091d482ff86c6ac03b1624c0cd79be0f6b))
+
+
+
+
+
 # [25.100.0](https://github.com/SocialGouv/emjpm/compare/v25.99.0...v25.100.0) (2021-03-09)
 
 **Note:** Version bump only for package @emjpm/api
