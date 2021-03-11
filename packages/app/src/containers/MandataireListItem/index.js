@@ -4,12 +4,14 @@ import { Male } from "@styled-icons/fa-solid/Male";
 import PropTypes from "prop-types";
 import { Fragment } from "react";
 import { Box, Flex } from "rebass";
+import { stdFormatter } from "@emjpm/biz";
 
 import { Card, Text } from "~/components";
 import {
   availabilityIndicatorStyle,
   cardStyle,
   columnStyle,
+  lastUpdateStyle,
   decorationStyle,
   descriptionStyle,
   dispoDescriptionStyle,
@@ -35,6 +37,7 @@ export default function MandataireListItem(props) {
       etablissement,
       mesuresInProgress,
       mesuresAwaiting,
+      mesuresLastUpdate,
       type,
     },
     isMagistratMap,
@@ -103,6 +106,15 @@ export default function MandataireListItem(props) {
               </Flex>
             </Fragment>
           )}
+
+          <Flex sx={columnStyle(false, false)}>
+            <Text sx={labelStyle}>Dernière mise à jour</Text>
+            <Text sx={lastUpdateStyle()}>
+              {mesuresLastUpdate
+                ? stdFormatter.formatDateUI(mesuresLastUpdate)
+                : "Non renseignée"}
+            </Text>
+          </Flex>
 
           <Flex sx={columnStyle(false, false)}>
             <Text sx={labelStyle}>En cours / souhaitée</Text>

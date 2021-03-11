@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-router.use("/ocmi", require("./ocmi/hasura-triggers.ocmi.routes.js"));
-router.use("/mesures", require("./mesures/hasura-triggers.mesures.routes.js"));
+router.use("/ocmi", require("./ocmi"));
+router.use("/mesures", require("./mesures"));
 
 module.exports = router;

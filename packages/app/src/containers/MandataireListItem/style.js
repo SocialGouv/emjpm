@@ -11,6 +11,17 @@ const MandatairelistStyle = {
   justifyContent: "space-between",
 };
 
+function lastUpdateStyle() {
+  return {
+    fontFamily: "heading",
+    fontSize: "13px",
+    fontWeight: "600",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  };
+}
+
 function columnStyle(isMobileHidden, isTabletHidden) {
   return {
     "@media screen and (max-width: 40em)": {
@@ -112,6 +123,7 @@ export {
   availabilityIndicatorStyle,
   MandatairelistStyle,
   columnStyle,
+  lastUpdateStyle,
   titleStyle,
   subtitleStyle,
   labelStyle,
