@@ -36,7 +36,7 @@ export const GET_MANDATAIRES = gql`
       mandataire_id
       remaining_capacity
       service_id
-      last_update
+      mesures_last_update
       mandataire {
         id
         telephone

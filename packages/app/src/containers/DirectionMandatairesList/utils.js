@@ -12,7 +12,7 @@ export function formatMandatairesList(mandatairesList) {
       mesures_awaiting,
       gestionnaire_tis,
       id,
-      last_update,
+      mesures_last_update,
     } = row;
     return formatMandataire(
       remaining_capacity,
@@ -24,7 +24,7 @@ export function formatMandatairesList(mandatairesList) {
       mesures_awaiting,
       gestionnaire_tis,
       id,
-      last_update
+      mesures_last_update
     );
   });
 }

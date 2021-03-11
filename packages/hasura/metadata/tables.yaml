@@ -4251,7 +4251,7 @@
       - email_send
       - genre
       - id
-      - last_update
+      - mesures_last_update
       - latitude
       - lb_user_id
       - longitude
@@ -4379,7 +4379,7 @@
       - email_send
       - genre
       - id
-      - last_update
+      - mesures_last_update
       - latitude
       - longitude
       - mesures_en_attente
@@ -5599,6 +5599,58 @@
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
+  event_triggers:
+  - name: mesures-update
+    definition:
+      enable_manual: true
+      insert:
+        columns: '*'
+      delete:
+        columns: '*'
+      update:
+        columns:
+        - is_urgent
+        - date_fin_mesure
+        - date_nomination
+        - date_premier_mesure
+        - date_protection_en_cours
+        - judgment_date
+        - latitude
+        - longitude
+        - antenne_id
+        - department_id
+        - editor_id
+        - etablissement_id
+        - id
+        - magistrat_id
+        - mandataire_id
+        - service_id
+        - ti_id
+        - cause_sortie
+        - champ_mesure
+        - civilite
+        - lieu_vie
+        - nature_mesure
+        - resultat_revision
+        - status
+        - type_etablissement
+        - created_at
+        - annee_naissance
+        - cabinet
+        - code_postal
+        - departement_code
+        - numero_dossier
+        - numero_rg
+        - pays
+        - ville
+    retry_conf:
+      num_retries: 0
+      interval_sec: 10
+      timeout_sec: 60
+    webhook: http://api:4000/hasura/triggers/mesures/update
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: nature_mesure
@@ -6153,7 +6205,7 @@
       - email
       - etablissement
       - id
-      - last_update
+      - mesures_last_update
       - latitude
       - lb_adresse
       - lb_code_postal
@@ -6279,7 +6331,7 @@
       - email
       - etablissement
       - id
-      - last_update
+      - mesures_last_update
       - latitude
       - longitude
       - mesures_awaiting
@@ -7272,18 +7324,18 @@
   - role: direction
     permission:
       columns:
-      - dep_nom
-      - departement_code
-      - discriminator
-      - id
-      - last_update
       - mandataire_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
-      - nom
       - remaining_capacity
       - service_id
+      - discriminator
+      - id
+      - mesures_last_update
+      - departement_code
+      - dep_nom
+      - nom
       filter: {}
       allow_aggregations: true
   - role: direction_nationale
@@ -7326,7 +7378,6 @@
       columns:
       - departement_code
       - discriminator
-      - last_update
       filter: {}
       allow_aggregations: true
 - table:

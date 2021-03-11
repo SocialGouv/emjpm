@@ -32,7 +32,7 @@ export default function formatMandataire(
   mesures_awaiting,
   gestionnaire_tis,
   id,
-  last_update
+  mesures_last_update
 ) {
   let currentDiscriminator = {};
   const common = {
@@ -45,7 +45,7 @@ export default function formatMandataire(
     mesuresInProgress: mesures_in_progress,
     tis: gestionnaire_tis,
     type: TYPES[discriminator],
-    lastUpdate: last_update,
+    mesuresLastUpdate: mesures_last_update,
   };
 
   if (discriminator === "SERVICE") {

@@ -37,13 +37,12 @@ export default function MandataireListItem(props) {
       etablissement,
       mesuresInProgress,
       mesuresAwaiting,
-      lastUpdate,
+      mesuresLastUpdate,
       type,
     },
     isMagistratMap,
     onClick,
   } = props;
-  console.log({ lastUpdate });
   return (
     <Fragment>
       <Card sx={cardStyle} width="100%">
@@ -111,8 +110,8 @@ export default function MandataireListItem(props) {
           <Flex sx={columnStyle(false, false)}>
             <Text sx={labelStyle}>Dernière mise à jour</Text>
             <Text sx={lastUpdateStyle()}>
-              {lastUpdate
-                ? stdFormatter.formatDateUI(lastUpdate)
+              {mesuresLastUpdate
+                ? stdFormatter.formatDateUI(mesuresLastUpdate)
                 : "Non renseignée"}
             </Text>
           </Flex>
