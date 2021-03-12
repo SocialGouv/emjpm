@@ -1,32 +1,21 @@
 -- editors
-truncate editors cascade;
-truncate access_tokens cascade;
-truncate api_logs cascade;
-truncate editor_token_requests cascade;
+delete from editors;
+delete from access_tokens;
+delete from api_logs;
+delete from editor_token_requests;
 
 -- commentaires
-truncate commentaires;
+delete from commentaires;
 
 -- invitation
-truncate service_member_invitations cascade;
+delete from service_member_invitations;
 
--- logs_data
-truncate logs_data cascade;
+-- log
+delete from logs_data;
 
--- enquete
-truncate enquetes cascade;
-truncate enquete_reponses cascade;
-truncate enquete_reponses_activite cascade;
-truncate enquete_reponses_agrements_formations cascade;
-truncate enquete_reponses_financement cascade;
-truncate enquete_reponses_informations_mandataire cascade;
-truncate enquete_reponses_modalites_exercice cascade;
-truncate enquete_reponses_populations cascade;
-truncate enquete_reponses_prepose_personel_formation cascade;
-truncate enquete_reponses_prepose_prestations_sociales cascade;
-truncate enquete_reponses_prestations_sociales cascade;
-truncate enquete_reponses_service_informations cascade;
-truncate enquete_reponses_service_personnel_formation cascade;
+-- ENQUETE
+delete from enquetes;
+delete from enquete_reponses;
 
 -- anonymise data
 

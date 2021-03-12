@@ -5,35 +5,24 @@
  truncate hdb_catalog.event_triggers cascade;
 
 
- -- editors
-truncate editors cascade;
-truncate access_tokens cascade;
-truncate api_logs cascade;
-truncate editor_token_requests cascade;
+-- editors
+delete from editors;
+delete from access_tokens;
+delete from api_logs;
+delete from editor_token_requests;
 
 -- commentaires
-truncate commentaires;
+delete from commentaires;
 
 -- invitation
-truncate service_member_invitations cascade;
+delete from service_member_invitations;
 
 -- log
-truncate logs_data cascade;
+delete from logs_data;
 
 -- ENQUETE
-truncate enquetes cascade;
-truncate enquete_reponses cascade;
-truncate enquete_reponses_activite cascade;
-truncate enquete_reponses_agrements_formations cascade;
-truncate enquete_reponses_financement cascade;
-truncate enquete_reponses_informations_mandataire cascade;
-truncate enquete_reponses_modalites_exercice cascade;
-truncate enquete_reponses_populations cascade;
-truncate enquete_reponses_prepose_personel_formation cascade;
-truncate enquete_reponses_prepose_prestations_sociales cascade;
-truncate enquete_reponses_prestations_sociales cascade;
-truncate enquete_reponses_service_informations cascade;
-truncate enquete_reponses_service_personnel_formation cascade;
+delete from enquetes;
+delete from enquete_reponses;
 
 -- CLEAN tis
 delete from mesures where ti_id in (select id from tis where immutable = false);
@@ -56,7 +45,7 @@ delete from user_role where user_id in (select id from users where type in ('ser
 delete from users where type in ('service') and id not in (select user_id from service_members);
 
 -- CLEAN direction
-delete from direction where departement_code <> "75";
+delete from direction where departement_code <> '75';
 delete from user_role where user_id in (select id from users where type = 'direction' and id not in (select user_id from direction));
 delete from users where type = 'direction' and id not in (select user_id from direction);
 

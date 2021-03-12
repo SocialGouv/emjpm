@@ -101,6 +101,9 @@
       foreign_key_constraint_on: editor_id
 - table:
     schema: public
+    name: authorization_codes
+- table:
+    schema: public
     name: cause_sortie_mesure
   is_enum: true
 - table:
@@ -3356,6 +3359,9 @@
       check: null
 - table:
     schema: public
+    name: enquete_services
+- table:
+    schema: public
     name: enquetes
   array_relationships:
   - name: enquete_reponses
@@ -4003,6 +4009,9 @@
     schema: public
     name: lieu_vie_majeur
   is_enum: true
+- table:
+    schema: public
+    name: logs_data
 - table:
     schema: public
     name: magistrat

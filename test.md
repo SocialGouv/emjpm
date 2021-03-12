@@ -4,12 +4,14 @@
 ## création d'une base de données de test
 
 ```bash
-export PGUSER=emjpm
-export PGPASSWORD=test
-psql -h localhost -p 5434 < ./scripts/dev/before_seeds_creation.sql
-psql -h localhost -p 5434 < ./.k8sci/scripts/jobs/db-anonymize.sql
-pg_dump -h localhost -p 5434 -Fc > ./packages/api/__test__/database/test-seed.dump
+yarn dev:testdb-create
 ```
+
+## mise à jour des snaptshots de tests
+```bash
+yarn workspaces run test:e2e:update-snapshot
+```
+
 
 ## Test
 
