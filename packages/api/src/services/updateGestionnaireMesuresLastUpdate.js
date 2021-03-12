@@ -1,17 +1,22 @@
 const { Service, Mandataire } = require("~/models");
 
-module.exports = async function updateGestionnaireMesuresLastUpdate(table, id) {
+module.exports = async function updateGestionnaireMesuresLastUpdate(
+  tableOrType,
+  id
+) {
   let Model;
-  switch (table) {
+  switch (tableOrType) {
+    case "service":
     case "services":
       Model = Service;
       break;
+    case "mandataire":
     case "mandataires":
       Model = Mandataire;
       break;
     default:
       throw new Error(
-        "unexpected table '" + table + "' in updateGestionnaireLastUpdate"
+        "unexpected table '" + tableOrType + "' in updateGestionnaireLastUpdate"
       );
   }
   return Model.query()

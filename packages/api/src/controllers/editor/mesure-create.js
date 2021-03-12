@@ -5,6 +5,8 @@ const { sanitizeMesureProperties } = require("~/utils/mesure");
 const { saveMesure } = require("./service/saveMesure");
 const updateMesureStates = require("./service/updateMesureStates");
 
+const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
+
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
 
@@ -33,6 +35,8 @@ const mesureCreate = async (req, res) => {
     });
 
     await updateMesureStates(serviceOrMandataire, type);
+
+    await updateGestionnaireMesuresLastUpdate(type, serviceOrMandataire.id);
 
     return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {
