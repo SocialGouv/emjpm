@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.102.0](https://github.com/SocialGouv/emjpm/compare/v25.101.0...v25.102.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **niveau_ressource:** zero by default ([be03ef4](https://github.com/SocialGouv/emjpm/commit/be03ef425e8eb4cfdc5fce3fbd0603084c9b46d7))
+* **tests:** and test-seed dump ([dac0021](https://github.com/SocialGouv/emjpm/commit/dac00213045f1754e4c98492de4a457d01d4a4da))
+* **ui:** columns order ([c2602a5](https://github.com/SocialGouv/emjpm/commit/c2602a52d26e0357bcd8e6d6e7d265a455e2120f))
+
+
+### Features
+
+* **mesures-last-update:** import API ([713f326](https://github.com/SocialGouv/emjpm/commit/713f326dfb7917c6c3cb03e66481d314c04a4f6c))
+* **mesures-last-update:** import OCMI ([4e7165e](https://github.com/SocialGouv/emjpm/commit/4e7165ebc1536e2c700c8b78baca03971ed8a6c7))
+
+
+
+
+
 # [25.101.0](https://github.com/SocialGouv/emjpm/compare/v25.100.0...v25.101.0) (2021-03-11)
 
 

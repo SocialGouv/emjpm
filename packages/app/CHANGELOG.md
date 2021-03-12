@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.102.0](https://github.com/SocialGouv/emjpm/compare/v25.101.0...v25.102.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* **ui:** columns order ([c2602a5](https://github.com/SocialGouv/emjpm/commit/c2602a52d26e0357bcd8e6d6e7d265a455e2120f))
+
+
+
+
+
 # [25.101.0](https://github.com/SocialGouv/emjpm/compare/v25.100.0...v25.101.0) (2021-03-11)
 
 
