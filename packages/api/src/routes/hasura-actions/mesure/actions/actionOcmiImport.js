@@ -5,6 +5,7 @@ const { Mandataire } = require("~/models");
 const mesureStatesService = require("~/services/updateMesureStates");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const fetchTribunaux = require("~/controllers/editor/service/fetchTribunaux");
+const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 module.exports = async (req, res) => {
@@ -43,6 +44,8 @@ module.exports = async (req, res) => {
   }));
 
   await saveMesures(allMesureDatas);
+
+  await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
 
   await mesureStatesService.updateMandataireMesureStates(mandataireId);
 

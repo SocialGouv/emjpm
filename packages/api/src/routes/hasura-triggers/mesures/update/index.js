@@ -1,5 +1,5 @@
 const logger = require("~/utils/logger");
-const updateGestionnaireLastUpdate = require("./updateGestionnaireLastUpdate");
+const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
 
 module.exports = async (req, res) => {
   logger.info(`[TRIGGER_MESURES_UPDATE] start updating related gestionnaires`);
@@ -13,12 +13,12 @@ module.exports = async (req, res) => {
 
     let updatedRows;
     if (row.service_id) {
-      updatedRows = await updateGestionnaireLastUpdate(
+      updatedRows = await updateGestionnaireMesuresLastUpdate(
         "services",
         row.service_id
       );
     } else if (row.mandataire_id) {
-      updatedRows = await updateGestionnaireLastUpdate(
+      updatedRows = await updateGestionnaireMesuresLastUpdate(
         "mandataires",
         row.mandataire_id
       );

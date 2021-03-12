@@ -1,6 +1,6 @@
 const { Service, Mandataire } = require("~/models");
 
-module.exports = async function updateGestionnaireLastUpdate(table, id) {
+module.exports = async function updateGestionnaireMesuresLastUpdate(table, id) {
   let Model;
   switch (table) {
     case "services":
