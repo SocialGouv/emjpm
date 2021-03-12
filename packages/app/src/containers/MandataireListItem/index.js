@@ -108,21 +108,21 @@ export default function MandataireListItem(props) {
           )}
 
           <Flex sx={columnStyle(false, false)}>
-            <Text sx={labelStyle}>Dernière mise à jour</Text>
-            <Text sx={lastUpdateStyle()}>
-              {mesuresLastUpdate
-                ? stdFormatter.formatDateUI(mesuresLastUpdate)
-                : "Non renseignée"}
-            </Text>
-          </Flex>
-
-          <Flex sx={columnStyle(false, false)}>
             <Text sx={labelStyle}>En cours / souhaitée</Text>
             <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
               {mesuresInProgress === 0 && dispoMax === 0
                 ? "NC"
                 : mesuresInProgress}
               /{mesuresInProgress === 0 && dispoMax === 0 ? "NC" : dispoMax}
+            </Text>
+          </Flex>
+
+          <Flex sx={columnStyle(false, false)}>
+            <Text sx={labelStyle}>Dernière mise à jour</Text>
+            <Text sx={lastUpdateStyle()}>
+              {mesuresLastUpdate
+                ? stdFormatter.formatDateUI(mesuresLastUpdate)
+                : "Non renseignée"}
             </Text>
           </Flex>
 
