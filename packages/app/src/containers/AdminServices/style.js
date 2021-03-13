@@ -7,6 +7,9 @@ const cardStyle = {
   overflow: "hidden",
   pl: "16px",
   position: "relative",
+  cursor: "pointer",
+  borderRadius: "0",
+  marginBottom: "1px",
 };
 
 const labelStyle = {

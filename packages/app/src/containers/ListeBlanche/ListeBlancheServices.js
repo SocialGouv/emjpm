@@ -22,7 +22,9 @@ function getRequestFilters(filters) {
   }
 
   if (filters.nom_service) {
-    requestFilters.etablissement = { _ilike: `${filters.nom_service.trim()}%` };
+    requestFilters.etablissement = {
+      _ilike: `%${filters.nom_service.trim()}%`,
+    };
   }
 
   return requestFilters;

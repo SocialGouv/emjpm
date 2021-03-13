@@ -32,7 +32,7 @@ function MagistratMesures() {
     offset: currentOffset,
     searchText:
       debouncedSearchText && debouncedSearchText !== ""
-        ? `${debouncedSearchText}%`
+        ? `%${debouncedSearchText}%`
         : null,
     tiId,
   };

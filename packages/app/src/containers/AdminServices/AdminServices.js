@@ -1,52 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { Fragment, useContext, useState } from "react";
-import { Box, Flex } from "rebass";
+import { useContext, useState } from "react";
 
 import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
-import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
-import { Button, Card, Text } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
 import { SERVICES } from "./queries";
-import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
-function RowItem({ item }) {
-  const { id, etablissement, code_postal, ville } = item;
-  return (
-    <Fragment>
-      <Card sx={cardStyle} width="100%">
-        <Flex justifyContent="space-between">
-          <Box>
-            <Flex justifyContent="space-start">
-              <Flex width="50px" flexDirection="column">
-                <Text sx={labelStyle}>id</Text>
-                <Text sx={descriptionStyle}>{id}</Text>
-              </Flex>
-              <Flex width="350px" flexDirection="column">
-                <Text sx={labelStyle}>Nom</Text>
-                <Text sx={descriptionStyle}>{etablissement}</Text>
-              </Flex>
-              <Flex width="300px" flexDirection="column">
-                <Text sx={labelStyle}>Ville</Text>
-                <Text sx={descriptionStyle}>
-                  {ville} ({code_postal})
-                </Text>
-              </Flex>
-            </Flex>
-          </Box>
-          <Box mr="1" width="120px">
-            <Link to={`/admin/services/${id}`}>
-              <Button>Voir</Button>
-            </Link>
-          </Box>
-        </Flex>
-      </Card>
-    </Fragment>
-  );
-}
+import RowItem from "./RowItem";
 
 function AdminServices() {
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -66,7 +29,7 @@ function AdminServices() {
       offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== ""
-          ? `${debouncedSearchText}%`
+          ? `%${debouncedSearchText}%`
           : null,
     },
   });

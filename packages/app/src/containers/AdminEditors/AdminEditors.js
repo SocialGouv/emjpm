@@ -86,7 +86,7 @@ function AdminEditors() {
       offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== ""
-          ? `${debouncedSearchText}%`
+          ? `%${debouncedSearchText}%`
           : null,
     },
   });

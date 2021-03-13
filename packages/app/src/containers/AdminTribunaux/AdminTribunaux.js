@@ -108,7 +108,7 @@ function AdminTribunaux() {
       offset: currentOffset,
       searchText:
         debouncedSearchText && debouncedSearchText !== ""
-          ? `${debouncedSearchText}%`
+          ? `%${debouncedSearchText}%`
           : null,
     },
   });

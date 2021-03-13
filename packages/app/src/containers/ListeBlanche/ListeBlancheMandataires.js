@@ -42,7 +42,7 @@ function getRequestFilters(filters) {
   }
 
   if (filters.siret) {
-    requestFilters.siret = { _ilike: `${filters.siret}%` };
+    requestFilters.siret = { _ilike: `%${filters.siret}%` };
   }
 
   if (filters.prenom) {

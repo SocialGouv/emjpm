@@ -64,7 +64,7 @@ function MesureList() {
     orderBy,
     searchText:
       debouncedSearchText && debouncedSearchText !== ""
-        ? `${debouncedSearchText}%`
+        ? `%${debouncedSearchText}%`
         : null,
     status: currentMesureStatus,
   };

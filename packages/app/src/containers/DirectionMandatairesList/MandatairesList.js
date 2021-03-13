@@ -47,7 +47,7 @@ function MandatairesList(props) {
   };
 
   if (filters.nom) {
-    variables.nom = `${filters.nom}%`;
+    variables.nom = `%${filters.nom}%`;
   }
 
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
