@@ -3379,6 +3379,7 @@
       - annee
       - created_at
       - date_fin
+      - id
       - status
       backend_only: false
   select_permissions:
@@ -3447,6 +3448,16 @@
       - status
       filter: {}
       check: null
+  - role: direction_nationale
+    permission:
+      columns:
+      - id
+      - created_at
+      - date_fin
+      - annee
+      - status
+      filter: {}
+      check: {}
 - table:
     schema: public
     name: etablissements
