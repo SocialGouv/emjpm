@@ -3372,15 +3372,15 @@
           schema: public
           name: enquete_reponses
   insert_permissions:
-  - role: direction
+  - role: direction_nationale
     permission:
       check: {}
       columns:
-      - id
+      - annee
       - created_at
       - date_fin
-      - annee
       - status
+      backend_only: false
   select_permissions:
   - role: direction
     permission:
