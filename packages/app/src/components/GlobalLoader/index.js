@@ -7,6 +7,8 @@ import { captureException } from "~/user/sentry";
 import GlobalLoaderContext from "./context";
 import styles from "./style";
 
+import { toast } from "react-toastify";
+
 const initialState = {
   waiting: 0,
   isLoading: false,
@@ -40,19 +42,20 @@ export default function GlobalLoader(props) {
   }, [dispatch]);
 
   const addError = useCallback(
-    (error) => {
+    async (error) => {
       if (errorsSet.has(error)) {
         return;
       }
+      errorsSet.add(error);
       console.error(error);
       captureException(error);
-      errorsSet.add(error);
+      toast.error(error.message);
       dispatch({ type: "hasError", payload: { hasError: errorsSet.size > 0 } });
     },
     [dispatch, errorsSet]
   );
   const deleteError = useCallback(
-    (error) => {
+    async (error) => {
       if (!errorsSet.has(error)) {
         return;
       }

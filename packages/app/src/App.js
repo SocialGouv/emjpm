@@ -16,6 +16,9 @@ import { ErrorBoundary, AutoReload, GlobalLoader } from "~/components";
 
 import Impersonation from "~/containers/Impersonation";
 
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+
 export default function App() {
   useSentry();
   return (
@@ -39,6 +42,7 @@ export default function App() {
           </GlobalLoader>
         </ErrorBoundary>
       </ThemeProvider>
+      <ToastContainer />
       <AutoReload />
     </>
   );
