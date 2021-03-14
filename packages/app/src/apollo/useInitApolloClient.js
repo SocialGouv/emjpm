@@ -14,15 +14,13 @@ const { GRAPHQL_SERVER_URI } = config;
 
 export default function useInitApolloClient(initialState, token) {
   const authMiddleware = new ApolloLink((operation, forward) => {
-    let headers;
+    const headers = operation.getContext().hasOwnProperty("headers")
+      ? operation.getContext().headers
+      : {};
     if (token) {
-      headers = {
-        Authorization: "Bearer " + token,
-      };
+      headers["Authorization"] = "Bearer " + token;
     } else {
-      headers = {
-        "X-Hasura-Role": "anonymous",
-      };
+      headers["X-Hasura-Role"] = "anonymous";
     }
     operation.setContext({ headers });
     return forward(operation);
