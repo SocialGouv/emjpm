@@ -1,30 +1,34 @@
-import { ApolloClient, InMemoryCache } from "apollo-boost";
-import { setContext } from "apollo-link-context";
-import { createHttpLink } from "apollo-link-http";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloLink,
+  HttpLink,
+  from,
+} from "@apollo/client";
 
 import config from "~/config";
+
+import errorLink from "./errorLink";
 
 const { GRAPHQL_SERVER_URI } = config;
 
 export default function useInitApolloClient(initialState, token) {
-  const authLink = setContext((_, { headers }) => {
+  const authMiddleware = new ApolloLink((operation, forward) => {
+    let headers;
     if (token) {
-      return {
-        headers: {
-          ...headers,
-          Authorization: "Bearer " + token,
-        },
+      headers = {
+        Authorization: "Bearer " + token,
+      };
+    } else {
+      headers = {
+        "X-Hasura-Role": "anonymous",
       };
     }
-    return {
-      headers: {
-        ...headers,
-        "X-Hasura-Role": "anonymous",
-      },
-    };
+    operation.setContext({ headers });
+    return forward(operation);
   });
 
-  const httpLink = createHttpLink({
+  const httpLink = new HttpLink({
     credentials: "same-origin",
     uri: GRAPHQL_SERVER_URI,
   });
@@ -32,7 +36,7 @@ export default function useInitApolloClient(initialState, token) {
   return new ApolloClient({
     cache: new InMemoryCache().restore(initialState || {}),
     connectToDevTools: true,
-    link: authLink.concat(httpLink),
+    link: from([authMiddleware, errorLink.concat(httpLink)]),
     resolvers: {},
     ssrMode: false,
   });

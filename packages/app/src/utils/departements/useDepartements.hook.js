@@ -1,4 +1,4 @@
-import { gql } from "apollo-boost";
+import gql from "graphql-tag";
 import { useQuery } from "@apollo/client";
 
 import useUser from "~/hooks/useUser";
