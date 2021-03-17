@@ -39,7 +39,9 @@ const getDirectionServices = async (req, res) => {
   try {
     [direction] = await Direction.query()
       .where("user_id", userId)
-      .withGraphFetched("[departement_services, region_services]");
+      .withGraphFetched(
+        "[departement_services.[departement], region_services.[departement]]"
+      );
     if (!direction) {
       error = "user's direction undefined";
     }
