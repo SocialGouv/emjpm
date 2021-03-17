@@ -94,15 +94,7 @@ export function useProvideAuth() {
   );
 
   const logout = useCallback(() => {
-    localStorage.removeItem("auth");
-    localStorage.removeItem("impersonate");
-
-    // to support logging out from all windows
-    localStorage.setItem("logout", Date.now());
-
-    // clear user data
-    localStorage.removeItem("filters");
-
+    logoutLocalStorage();
     dispatchAuthStore({ type: "logout" });
   }, [dispatchAuthStore]);
 
@@ -204,10 +196,21 @@ export async function impersonateLogin(impersonateParams) {
   window.location.href = "/";
 }
 
-export async function impersonateLogout() {
+export function impersonateLogout() {
   localStorage.removeItem("impersonate");
   localStorage.removeItem("filters");
   window.location.href = "/";
+}
+
+export function logoutLocalStorage() {
+  localStorage.removeItem("auth");
+  localStorage.removeItem("impersonate");
+
+  // to support logging out from all windows
+  localStorage.setItem("logout", Date.now());
+
+  // clear user data
+  localStorage.removeItem("filters");
 }
 
 export function AuthRedirect(props) {
