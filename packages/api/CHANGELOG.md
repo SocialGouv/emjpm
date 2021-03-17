@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.103.0](https://github.com/SocialGouv/emjpm/compare/v25.102.0...v25.103.0) (2021-03-17)
+
+
+### Bug Fixes
+
+* **error:** handle missing direction ([a738cf9](https://github.com/SocialGouv/emjpm/commit/a738cf9f1c36cf540367d2e09021143b4926dba6))
+
+
+### Features
+
+* **api-mandoline-services:** retrieve services from direction user ([c1be9b4](https://github.com/SocialGouv/emjpm/commit/c1be9b40cd6c03a794a5b59c57d5675f5482d805))
+* **api-services:** add departement label ([45cfc76](https://github.com/SocialGouv/emjpm/commit/45cfc76495cf45abacd7a874a20666d1d51fc88d))
+
+
+
+
+
 # [25.102.0](https://github.com/SocialGouv/emjpm/compare/v25.101.0...v25.102.0) (2021-03-12)
 
 
