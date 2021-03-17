@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.103.1](https://github.com/SocialGouv/emjpm/compare/v25.103.0...v25.103.1) (2021-03-17)
+
+
+### Bug Fixes
+
+* **invalid-jwt:** logout ([d21d119](https://github.com/SocialGouv/emjpm/commit/d21d119ba720119aaaac4a7c39c8f3236c7ad97a))
+
+
+
+
+
 # [25.103.0](https://github.com/SocialGouv/emjpm/compare/v25.102.0...v25.103.0) (2021-03-17)
 
 
