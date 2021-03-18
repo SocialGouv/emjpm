@@ -20,18 +20,13 @@ export function EnqueteIndividuelInformationsFormation(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: {
-      agrements_formations_id,
-      informations_mandataire_id,
-    },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(
     ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
     {
       variables: {
-        id: agrements_formations_id,
+        id: enqueteReponse.id,
       },
     }
   );
@@ -41,7 +36,7 @@ export function EnqueteIndividuelInformationsFormation(props) {
     loading: loadingInformationsGenerales,
   } = useQuery(ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE, {
     variables: {
-      id: informations_mandataire_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -53,7 +48,7 @@ export function EnqueteIndividuelInformationsFormation(props) {
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
-        variables: { id: agrements_formations_id },
+        variables: { id: enqueteReponse.id },
       },
     ],
   });
@@ -93,7 +88,7 @@ export function EnqueteIndividuelInformationsFormation(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: agrements_formations_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

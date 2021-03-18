@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const ENQUETE_PREPOSE_PERSONNEL_FORMATION = gql`
   query enquete_prepose_personnel_formation($id: Int!) {
-    enquete_reponses_prepose_personel_formation_by_pk(id: $id) {
+    enquete_reponses_prepose_personel_formation(
+      where: { enquete_reponses_id: { _eq: $id } }
+    ) {
       nb_preposes_mjpm
       nb_preposes_mjpm_etp
       formation_preposes_mjpm

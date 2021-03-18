@@ -18,13 +18,11 @@ export function EnquetePopulationsTutelle(props) {
     section,
     step,
   } = props;
-  const {
-    enquete_reponse_ids: { populations_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_TUTELLE, {
     variables: {
-      id: populations_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +34,7 @@ export function EnquetePopulationsTutelle(props) {
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_TUTELLE,
-        variables: { id: populations_id },
+        variables: { id: enqueteReponse.id },
       },
     ],
   });
@@ -61,7 +59,7 @@ export function EnquetePopulationsTutelle(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: populations_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

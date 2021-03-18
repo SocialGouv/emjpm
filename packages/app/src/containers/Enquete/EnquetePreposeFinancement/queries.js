@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const ENQUETE_REPONSES_FINANCEMENT = gql`
   query enquete_reponses_financement($id: Int!) {
-    enquete_reponses_financement_by_pk(id: $id) {
+    enquete_reponses_financement(where: { enquete_reponses_id: { _eq: $id } }) {
       aide_sociale_conseil_departemental
       autre_produits
       charges_fonctionnement

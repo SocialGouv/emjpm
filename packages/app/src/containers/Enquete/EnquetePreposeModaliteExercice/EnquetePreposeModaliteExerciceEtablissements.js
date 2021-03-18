@@ -16,13 +16,10 @@ export function EnquetePreposeModaliteExerciceEtablissements(props) {
     enquete: { id: enqueteId },
   } = props;
 
-  const {
-    enquete_reponse_ids: { modalites_exercice_id },
-  } = enqueteReponse;
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
-      id: modalites_exercice_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +33,7 @@ export function EnquetePreposeModaliteExerciceEtablissements(props) {
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,
-          variables: { id: modalites_exercice_id },
+          variables: { id: enqueteReponse.id },
         },
       ],
     }
@@ -55,7 +52,7 @@ export function EnquetePreposeModaliteExerciceEtablissements(props) {
             actions_information_tuteurs_familiaux:
               values.actions_information_tuteurs_familiaux,
             data: values.etablissements,
-            id: modalites_exercice_id,
+            id: enqueteReponse.id,
           },
         });
       }}

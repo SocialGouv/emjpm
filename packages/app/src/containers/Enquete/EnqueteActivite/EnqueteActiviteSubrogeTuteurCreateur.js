@@ -20,9 +20,7 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR, {
@@ -34,14 +32,14 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
       {
         query: ENQUETE_SUBROGE_TUTEUR_CREATEUR,
         variables: {
-          id: activite_id,
+          id: enqueteReponse.id,
         },
       },
     ],
   });
   const { data, loading } = useQuery(ENQUETE_SUBROGE_TUTEUR_CREATEUR, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -68,7 +66,7 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

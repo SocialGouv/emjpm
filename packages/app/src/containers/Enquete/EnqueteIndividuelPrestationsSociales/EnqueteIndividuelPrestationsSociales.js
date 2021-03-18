@@ -16,13 +16,11 @@ export function EnqueteIndividuelPrestationsSociales(props) {
     section,
     step,
   } = props;
-  const {
-    enquete_reponse_ids: { prestations_sociale_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_REPONSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: prestations_sociale_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +34,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
         },
         {
           query: ENQUETE_REPONSE_PRESTATIONS_SOCIALES,
-          variables: { id: prestations_sociale_id },
+          variables: { id: enqueteReponse.id },
         },
       ],
     }
@@ -58,7 +56,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: prestations_sociale_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

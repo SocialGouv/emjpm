@@ -20,9 +20,6 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE,
@@ -35,7 +32,7 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
         {
           query: ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE,
           variables: {
-            id: activite_id,
+            id: enqueteReponse.id,
           },
         },
       ],
@@ -44,7 +41,7 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
 
   const { data, loading } = useQuery(ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -76,7 +73,7 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

@@ -15,13 +15,11 @@ export function EnquetePreposeFinancement(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { financement_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_REPONSES_FINANCEMENT, {
     variables: {
-      id: financement_id,
+      id: enqueteReponse.id,
     },
   });
   const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
@@ -33,7 +31,7 @@ export function EnquetePreposeFinancement(props) {
       {
         query: ENQUETE_REPONSES_FINANCEMENT,
         variables: {
-          id: financement_id,
+          id: enqueteReponse.id,
         },
       },
     ],
@@ -49,7 +47,7 @@ export function EnquetePreposeFinancement(props) {
       onSubmit={async (values) => {
         await updateFinancement({
           variables: {
-            id: financement_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

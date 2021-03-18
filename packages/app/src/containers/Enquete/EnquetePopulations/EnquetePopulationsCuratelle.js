@@ -19,15 +19,11 @@ export function EnquetePopulationsCuratelle(props) {
     step,
   } = props;
 
-  const {
-    enquete_reponse_ids: { populations_id },
-  } = enqueteReponse;
-
   const { id: userId } = useUser();
 
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_CURATELLE, {
     variables: {
-      id: populations_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -39,7 +35,7 @@ export function EnquetePopulationsCuratelle(props) {
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_CURATELLE,
-        variables: { id: populations_id },
+        variables: { id: enqueteReponse.id },
       },
     ],
   });
@@ -64,7 +60,7 @@ export function EnquetePopulationsCuratelle(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: populations_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

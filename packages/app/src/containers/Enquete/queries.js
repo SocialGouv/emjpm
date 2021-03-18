@@ -35,7 +35,6 @@ export const ENQUETE_WITH_REPONSE_STATUS = gql`
       user_type
       mandataire
       service
-      enquete_reponse_ids
       enquete_reponse_validation_status
     }
   }

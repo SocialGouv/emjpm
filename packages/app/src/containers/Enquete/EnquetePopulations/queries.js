@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 function buildEnquetePopulationQuery(prefix) {
   return gql`
   query enquete_reponses_populations_${prefix}($id: Int!) {
-    enquete_reponses_populations_by_pk(id: $id) {
+    enquete_reponses_populations(where: {enquete_reponses_id: {_eq: $id}}) {
       id
       created_at
       ${prefix}_age_inf_25_ans_homme

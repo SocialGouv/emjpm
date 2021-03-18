@@ -28,21 +28,8 @@ async function initEnqueteMandatairePrepose({
     enqueteReponse = insert_enquete_reponses_one;
   }
   const status = await enqueteMandatairePreposeStatus(enqueteReponse);
-  const ids = {
-    activite_id: enqueteReponse.enquete_reponses_activite_id,
-    financement_id: enqueteReponse.enquete_reponses_financement_id,
-    id: enqueteReponse.id,
-    modalites_exercice_id:
-      enqueteReponse.enquete_reponses_modalites_exercice_id,
-    personel_formation_id:
-      enqueteReponse.enquete_reponses_prepose_personel_formation_id,
-    populations_id: enqueteReponse.enquete_reponses_populations_id,
-    prestations_sociales_id:
-      enqueteReponse.enquete_reponses_prepose_prestations_sociales_id,
-  };
   return {
     enquete_id: enqueteReponse.enquete_id,
-    enquete_reponse_ids: ids,
     enquete_reponse_validation_status: status,
     mandataire: enqueteReponse.mandataire,
     status: enqueteReponse.status,

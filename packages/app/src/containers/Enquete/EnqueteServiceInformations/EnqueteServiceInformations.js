@@ -19,13 +19,9 @@ export function EnqueteServiceInformations(props) {
 
   const { id: userId } = useUser();
 
-  const {
-    enquete_reponse_ids: { service_informations_id },
-  } = enqueteReponse;
-
   const { data, loading } = useQuery(ENQUETE_SERVICE_INFORMATIONS, {
     variables: {
-      id: service_informations_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -38,7 +34,7 @@ export function EnqueteServiceInformations(props) {
       {
         query: ENQUETE_SERVICE_INFORMATIONS,
         variables: {
-          id: service_informations_id,
+          id: enqueteReponse.id,
         },
       },
     ],
@@ -62,7 +58,7 @@ export function EnqueteServiceInformations(props) {
           variables: {
             affiliation_federation: values.affiliation_federation,
             departement: values.departement,
-            id: service_informations_id,
+            id: enqueteReponse.id,
             last_update: new Date(),
             nb_structures_concernees: values.nb_structures_concernees,
             nom: values.nom,

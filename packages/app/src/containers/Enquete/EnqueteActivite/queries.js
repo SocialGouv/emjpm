@@ -4,7 +4,7 @@ import gql from "graphql-tag";
 function buildEnqueteEtablissementDomicileQuery(prefix) {
   return gql`
     query enquete_reponses_activite_${prefix}($id: Int!) {
-      enquete_reponses_activite_by_pk(id: $id) {
+      enquete_reponses_activite(where: {enquete_reponses_id: {_eq: $id}}) {
         ${prefix}_domicile_debut_annee
         ${prefix}_domicile_fin_annee
         ${prefix}_etablissement_debut_annee
@@ -46,7 +46,7 @@ export const ENQUETE_TUTELLE = buildEnqueteEtablissementDomicileQuery(
 function buildEnqueteMesuresQuery(prefix) {
   return gql`
     query enquete_reponses_activite_${prefix}($id: Int!) {
-      enquete_reponses_activite_by_pk(id: $id) {
+      enquete_reponses_activite(where: {enquete_reponses_id: {_eq: $id}}) {
         ${prefix}_debut_annee
         ${prefix}_fin_annee
         ${prefix}_mesures_nouvelles
@@ -67,7 +67,7 @@ export const ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresQuery(
 
 export const ENQUETE_REVISION_MESURES = gql`
   query enquete_reponses_activite_revision_mesures($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
+    enquete_reponses_activite(where: { enquete_reponses_id: { _eq: $id } }) {
       revisions_main_levee
       revisions_masp
       revisions_reconduction
@@ -79,7 +79,7 @@ export const ENQUETE_REVISION_MESURES = gql`
 
 export const ENQUETE_CAUSES_SORTIE_DISPOSITIF = gql`
   query enquete_reponses_activite_causes_sortie_dispositif($id: Int!) {
-    enquete_reponses_activite_by_pk(id: $id) {
+    enquete_reponses_activite(where: { enquete_reponses_id: { _eq: $id } }) {
       sorties_main_levee
       sorties_deces
       sorties_masp

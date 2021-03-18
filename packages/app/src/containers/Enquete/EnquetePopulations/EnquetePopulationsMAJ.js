@@ -19,12 +19,10 @@ export function EnquetePopulationsMAJ(props) {
     step,
   } = props;
   const { id: userId } = useUser();
-  const {
-    enquete_reponse_ids: { populations_id },
-  } = enqueteReponse;
+
   const { data, loading } = useQuery(ENQUETE_REPONSE_POPULATIONS_MAJ, {
     variables: {
-      id: populations_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +34,7 @@ export function EnquetePopulationsMAJ(props) {
       },
       {
         query: ENQUETE_REPONSE_POPULATIONS_MAJ,
-        variables: { id: populations_id },
+        variables: { id: enqueteReponse.id },
       },
     ],
   });
@@ -61,7 +59,7 @@ export function EnquetePopulationsMAJ(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: populations_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });
