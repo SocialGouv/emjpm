@@ -43,10 +43,10 @@ export default function GlobalLoader(props) {
 
   const addError = useCallback(
     async (error) => {
-      if (errorsSet.has(error)) {
+      if (errorsSet.has(error.message)) {
         return;
       }
-      errorsSet.add(error);
+      errorsSet.add(error.message);
       console.error(error);
       captureException(error);
       toast.error(error.message);
