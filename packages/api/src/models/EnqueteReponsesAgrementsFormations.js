@@ -24,6 +24,7 @@ class EnqueteReponsesAgrementsFormations extends Model {
         cumul_prepose: { type: "number" },
         cumul_prepose_etp: { type: "string" },
         debut_activite_avant_2009: { type: "boolean" },
+        enquete_reponses_id: { type: "integer" },
         nb_departements: { type: "string" },
         nb_mesures_dep_autres: { type: "number" },
         nb_mesures_dep_finance: { type: "number" },

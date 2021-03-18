@@ -16,6 +16,7 @@ class EnqueteReponsesServicePersonnelFormation extends Model {
   static get jsonSchema() {
     return {
       properties: {
+        enquete_reponses_id: { type: "integer" },
         nb_delegues: { type: "number" },
         nb_delegues_cnc: { type: "number" },
         nb_delegues_en_formation: { type: "number" },

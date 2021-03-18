@@ -64,6 +64,7 @@ class EnqueteReponsesPopulations extends Model {
         curatelle_service_hospitalier_soins_longue_duree: { type: "number" },
         curatelle_service_personne_handicapee: { type: "number" },
         curatelle_service_psychiatrique: { type: "number" },
+        enquete_reponses_id: { type: "integer" },
         maj_age_25_39_ans_femme: { type: "number" },
         maj_age_25_39_ans_homme: { type: "number" },
         maj_age_40_59_ans_femme: { type: "number" },

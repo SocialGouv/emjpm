@@ -18,6 +18,7 @@ class EnqueteReponsesServiceInformations extends Model {
       properties: {
         affiliation_federation: { type: "string" },
         departement: { type: "string" },
+        enquete_reponses_id: { type: "integer" },
         nb_structures_concernees: { type: "number" },
         nom: { type: "string" },
         region: { type: "string" },

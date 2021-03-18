@@ -21,6 +21,7 @@ class EnqueteReponsesFinancement extends Model {
         charges_fonctionnement: { type: "float" },
         charges_personnel: { type: "float" },
         charges_preposes: { type: "float" },
+        enquete_reponses_id: { type: "integer" },
         financement_public: { type: "float" },
         produits_bareme_prelevements: { type: "float" },
       },

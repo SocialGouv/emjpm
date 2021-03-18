@@ -63,8 +63,8 @@ module.exports = {
         service {
           id
         }
-        enquete_reponses_service_personnel_formation_id
         enquete_reponses_service_personnel_formation {
+          id
           created_at
           id
           last_update
@@ -91,8 +91,8 @@ module.exports = {
           nb_delegues_non_formes
           total_heures_delegues_en_formation
         }
-        enquete_reponses_service_informations_id
         enquete_reponses_service_information {
+          id
           affiliation_federation
           created_at
           departement
@@ -103,8 +103,8 @@ module.exports = {
           region
           type_organisme_gestionnaire
         }
-        enquete_reponses_activite_id
         enquete_reponses_activite {
+          id
           created_at
           last_update
           ${build3Combinaisons(
@@ -138,8 +138,8 @@ module.exports = {
           sorties_deces
           sorties_masp
         }
-        enquete_reponses_populations_id
         enquete_reponses_population {
+          id
           created_at
           last_update
           tutelle_age_inf_25_ans_homme
