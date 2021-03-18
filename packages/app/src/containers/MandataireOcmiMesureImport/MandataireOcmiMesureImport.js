@@ -1,6 +1,7 @@
 import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useHistory } from "react-router-dom";
+import useQueryReady from "~/hooks/useQueryReady";
 
 import { Box, Button, Flex } from "rebass";
 
@@ -11,11 +12,16 @@ import { IMPORT_OCMI_MESURES } from "./mutations";
 
 function MandataireOcmiMesureImport() {
   const history = useHistory();
-  const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES, {
-    onCompleted: async () => {
-      history.push(`/mandataires/mesures`);
-    },
-  });
+  const [importOcmiMesures, { error, loading }] = useMutation(
+    IMPORT_OCMI_MESURES,
+    {
+      onCompleted: async () => {
+        history.push(`/mandataires/mesures`);
+      },
+    }
+  );
+
+  useQueryReady(loading, error);
 
   const importMesure = async () => {
     await importOcmiMesures({

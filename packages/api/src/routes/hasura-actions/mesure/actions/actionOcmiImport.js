@@ -43,18 +43,25 @@ module.exports = async (req, res) => {
     type: "mandataire",
   }));
 
-  await knex.transaction(async function (trx) {
-    try {
-      await deleteAllMesures(mandataireId);
-      await saveMesures(allMesureDatas);
-      await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
-      await mesureStatesService.updateMandataireMesureStates(mandataireId);
+  try {
+    await knex.transaction(async function (trx) {
+      try {
+        await deleteAllMesures(mandataireId);
+        await saveMesures(allMesureDatas);
+        await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
+        await mesureStatesService.updateMandataireMesureStates(mandataireId);
 
-      await trx.commit();
-    } catch (e) {
-      await trx.rollback();
-    }
-  });
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
+      }
+    });
+  } catch (error) {
+    return res.status(422).json({
+      code: error.code,
+      message: error.message,
+    });
+  }
 
   // success
   return res.json({
