@@ -558,19 +558,11 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_activite_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
       check:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -651,7 +643,7 @@
   - role: prepose
     permission:
       check:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -806,7 +798,7 @@
       - tutelle_etablissement_mesures_nouvelles
       - tutelle_etablissement_sortie_mesures
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: individuel
@@ -885,7 +877,7 @@
       - tutelle_etablissement_mesures_nouvelles
       - tutelle_etablissement_sortie_mesures
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -965,7 +957,7 @@
       - tutelle_etablissement_mesures_nouvelles
       - tutelle_etablissement_sortie_mesures
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1122,7 +1114,7 @@
       - tutelle_etablissement_mesures_nouvelles
       - tutelle_etablissement_sortie_mesures
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1203,7 +1195,7 @@
       - tutelle_etablissement_mesures_nouvelles
       - tutelle_etablissement_sortie_mesures
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1292,14 +1284,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_agrements_formations_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
@@ -1359,7 +1343,7 @@
       - secretaire_specialise_etp_n5
       - secretaire_specialise_etp_n6
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: individuel
@@ -1390,7 +1374,7 @@
       - secretaire_specialise_etp_n5
       - secretaire_specialise_etp_n6
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1423,7 +1407,7 @@
       - secretaire_specialise_etp_n5
       - secretaire_specialise_etp_n6
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1435,19 +1419,11 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_financement_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: prepose
     permission:
       check:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1480,7 +1456,7 @@
       - last_update
       - produits_bareme_prelevements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: prepose
@@ -1498,7 +1474,7 @@
       - last_update
       - produits_bareme_prelevements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1518,7 +1494,7 @@
       - last_update
       - produits_bareme_prelevements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1530,14 +1506,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_informations_mandataire_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
@@ -1583,7 +1551,7 @@
       - sexe
       - tranche_age
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: individuel
@@ -1607,7 +1575,7 @@
       - sexe
       - tranche_age
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1633,7 +1601,7 @@
       - sexe
       - tranche_age
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1645,14 +1613,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_modalites_exercice_id
-        table:
-          schema: public
-          name: enquete_reponses
   select_permissions:
   - role: direction
     permission:
@@ -1671,7 +1631,7 @@
       - region
       - total_mesures_etablissements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: prepose
@@ -1691,7 +1651,7 @@
       - region
       - total_mesures_etablissements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1713,7 +1673,7 @@
       - region
       - total_mesures_etablissements
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -1725,14 +1685,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_populations_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
@@ -2106,7 +2058,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: individuel
@@ -2232,7 +2184,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2359,7 +2311,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2486,7 +2438,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -2615,7 +2567,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2743,7 +2695,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2871,7 +2823,7 @@
       - tutelle_service_personne_handicapee
       - tutelle_service_psychiatrique
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -2884,19 +2836,11 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_prepose_personel_formation_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: prepose
     permission:
       check:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2931,7 +2875,7 @@
       - nb_preposes_mjpm_etp
       - niveaux_qualification
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: prepose
@@ -2950,7 +2894,7 @@
       - nb_preposes_mjpm_etp
       - niveaux_qualification
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2971,7 +2915,7 @@
       - nb_preposes_mjpm_etp
       - niveaux_qualification
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -2983,14 +2927,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_prepose_prestations_sociales_id
-        table:
-          schema: public
-          name: enquete_reponses
   select_permissions:
   - role: direction
     permission:
@@ -3012,7 +2948,7 @@
       - sauvegarde_autres_mesures
       - tutelle
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: prepose
@@ -3035,7 +2971,7 @@
       - sauvegarde_autres_mesures
       - tutelle
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -3060,7 +2996,7 @@
       - sauvegarde_autres_mesures
       - tutelle
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -3072,14 +3008,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_prestations_sociale_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: individuel
     permission:
@@ -3113,7 +3041,7 @@
       - pch
       - rsa
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: individuel
@@ -3131,7 +3059,7 @@
       - pch
       - rsa
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -3151,7 +3079,7 @@
       - pch
       - rsa
       filter:
-        enquete_reponses:
+        enquete_reponse:
           mandataire:
             user_id:
               _eq: X-Hasura-User-Id
@@ -3163,14 +3091,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_service_informations_id
-        table:
-          schema: public
-          name: enquete_reponses
   select_permissions:
   - role: direction
     permission:
@@ -3186,7 +3106,7 @@
       - region
       - type_organisme_gestionnaire
       filter:
-        enquete_reponses:
+        enquete_reponse:
           status:
             _ne: draft
   - role: service
@@ -3203,7 +3123,7 @@
       - region
       - type_organisme_gestionnaire
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -3223,7 +3143,7 @@
       - region
       - type_organisme_gestionnaire
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -3236,14 +3156,6 @@
   - name: enquete_reponse
     using:
       foreign_key_constraint_on: enquete_reponses_id
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_reponses_service_personnel_formation_id
-        table:
-          schema: public
-          name: enquete_reponses
   select_permissions:
   - role: service
     permission:
@@ -3275,7 +3187,7 @@
       - nb_delegues_non_formes
       - total_heures_delegues_en_formation
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -3311,7 +3223,7 @@
       - nb_delegues_non_formes
       - total_heures_delegues_en_formation
       filter:
-        enquete_reponses:
+        enquete_reponse:
           service:
             service_members:
               user_id:
@@ -3323,14 +3235,6 @@
 - table:
     schema: public
     name: enquetes
-  array_relationships:
-  - name: enquete_reponses
-    using:
-      foreign_key_constraint_on:
-        column: enquete_id
-        table:
-          schema: public
-          name: enquete_reponses
   insert_permissions:
   - role: direction_nationale
     permission:
