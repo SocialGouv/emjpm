@@ -554,6 +554,10 @@
 - table:
     schema: public
     name: enquete_reponses_activite
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -1284,6 +1288,10 @@
 - table:
     schema: public
     name: enquete_reponses_agrements_formations
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -1423,6 +1431,10 @@
 - table:
     schema: public
     name: enquete_reponses_financement
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -1514,6 +1526,10 @@
 - table:
     schema: public
     name: enquete_reponses_informations_mandataire
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -1625,6 +1641,10 @@
 - table:
     schema: public
     name: enquete_reponses_modalites_exercice
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -1701,6 +1721,10 @@
 - table:
     schema: public
     name: enquete_reponses_populations
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -2856,6 +2880,10 @@
 - table:
     schema: public
     name: enquete_reponses_prepose_personel_formation
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -2951,6 +2979,10 @@
 - table:
     schema: public
     name: enquete_reponses_prepose_prestations_sociales
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -3036,6 +3068,10 @@
 - table:
     schema: public
     name: enquete_reponses_prestations_sociales
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -3123,6 +3159,10 @@
 - table:
     schema: public
     name: enquete_reponses_service_informations
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
@@ -3192,6 +3232,10 @@
 - table:
     schema: public
     name: enquete_reponses_service_personnel_formation
+  object_relationships:
+  - name: enquete_reponse
+    using:
+      foreign_key_constraint_on: enquete_reponses_id
   array_relationships:
   - name: enquete_reponses
     using:
