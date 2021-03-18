@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.104.0](https://github.com/SocialGouv/emjpm/compare/v25.103.1...v25.104.0) (2021-03-18)
+
+
+### Bug Fixes
+
+* **import-ocmi:** case when date 0000-00-00 ([52f4e9b](https://github.com/SocialGouv/emjpm/commit/52f4e9bb63d21382fcf8c0eb657dc5105b3973b7))
+
+
+### Features
+
+* **import-ocmi:** error feedback ([5a3ce2d](https://github.com/SocialGouv/emjpm/commit/5a3ce2d537f69aaf8b45ce63034980988361f542))
+* **import-ocmi:** transaction keep old mesure if fail ([d2f72ab](https://github.com/SocialGouv/emjpm/commit/d2f72aba4c6ac051cc92b0be4e1e612b0a73c240))
+
+
+
+
+
 ## [25.103.1](https://github.com/SocialGouv/emjpm/compare/v25.103.0...v25.103.1) (2021-03-17)
 
 **Note:** Version bump only for package @emjpm/api
