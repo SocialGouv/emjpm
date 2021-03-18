@@ -8,14 +8,14 @@ const fetchTribunaux = require("~/controllers/editor/service/fetchTribunaux");
 const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
+const knex = require("~/db/knex");
+
 module.exports = async (req, res) => {
   const { userId } = req.user;
 
   const mandataire = await Mandataire.query().findOne({ user_id: userId });
 
   const { id: mandataireId, lb_user_id: lbUserId } = mandataire;
-
-  await deleteAllMesures(mandataireId);
 
   const { siret } = await LbUser.query().findById(lbUserId);
 
@@ -43,11 +43,18 @@ module.exports = async (req, res) => {
     type: "mandataire",
   }));
 
-  await saveMesures(allMesureDatas);
+  await knex.transaction(async function (trx) {
+    try {
+      await deleteAllMesures(mandataireId);
+      await saveMesures(allMesureDatas);
+      await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
+      await mesureStatesService.updateMandataireMesureStates(mandataireId);
 
-  await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
-
-  await mesureStatesService.updateMandataireMesureStates(mandataireId);
+      await trx.commit();
+    } catch (e) {
+      await trx.rollback();
+    }
+  });
 
   // success
   return res.json({
