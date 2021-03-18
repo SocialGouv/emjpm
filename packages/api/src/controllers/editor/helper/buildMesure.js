@@ -20,9 +20,14 @@ function buildMesure({
     champ_mesure: lastEtat.champ_mesure,
     civilite: datas.civilite,
     code_postal: lastEtat.code_postal,
-    date_fin_mesure: datas.date_fin_mesure,
-    date_nomination: datas.date_nomination,
-    date_premier_mesure: datas.date_premier_mesure,
+    date_fin_mesure:
+      datas.date_fin_mesure !== "0000-00-00" ? datas.date_fin_mesure : null,
+    date_nomination:
+      datas.date_nomination !== "0000-00-00" ? datas.date_nomination : null,
+    date_premier_mesure:
+      datas.date_premier_mesure !== "0000-00-00"
+        ? datas.date_premier_mesure
+        : null,
     date_protection_en_cours: datas.date_protection_en_cours,
     departement_code: departement ? departement.id : null,
     editor_id: editorId,
