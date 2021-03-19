@@ -82,7 +82,8 @@ services:
       SMTP_FROM: "${SMTP_PORT:-}"
       OCMI_SYNC_FILE_ENABLED: "${OCMI_SYNC_FILE_ENABLED:-}"
       OCMI_SYNC_FILE_LOCAL: "true"
-      OCMI_FILE_PASSWORD: ${OCMI_FILE_PASSWORD:-""}
+      OCMI_FILE_PASSWORD: ${OCMI_FILE_PASSWORD:-}
+      LOG_REQUESTS: ${LOG_REQUESTS:-false}
 
 volumes:
   emjpm-pgdata:

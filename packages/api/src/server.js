@@ -15,6 +15,8 @@ const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
 const mandolineRoutes = require("./routes/api/mandoline");
 
+const { logRequests } = require("~/config");
+
 const corsOptions = {
   credentials: true,
   origin: true,
@@ -34,7 +36,15 @@ const apiLimiter = rateLimit({
 });
 
 // middlewares
-app.use(expressPinoLogger({ logger }));
+if (logRequests) {
+  app.use(expressPinoLogger({ logger }));
+} else {
+  app.use((req, res, next) => {
+    req.log = res.log = logger.child({ req: req });
+    next();
+  });
+}
+
 app.use(cors(corsOptions));
 app.use(bodyParser.json(bodyParserOptions));
 app.use(bodyParser.urlencoded({ extended: false }));

@@ -2,6 +2,7 @@ exports.getConfiguration = (env) => ({
   azureAccountKey: env.AZURE_ACCOUNT_KEY,
   azureAccountName: env.AZURE_ACCOUNT_NAME,
   jwtConfig: require("./jwt")(env),
+  logRequests: env.LOG_REQUESTS === "false" ? false : true,
   ocmiFilePassword: env.OCMI_FILE_PASSWORD,
   ocmiSyncFileEnabled: env.OCMI_SYNC_FILE_ENABLED === "true" ? true : false,
   ocmiSyncFileLocal: env.OCMI_SYNC_FILE_LOCAL === "true" ? true : false,
