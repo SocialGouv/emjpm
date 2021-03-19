@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.104.1](https://github.com/SocialGouv/emjpm/compare/v25.104.0...v25.104.1) (2021-03-19)
+
+
+### Bug Fixes
+
+* **geolocal:** fallback to mesure when missing last etat ([8c2c19b](https://github.com/SocialGouv/emjpm/commit/8c2c19b38ae4ebb1545a45d3ef9f85d8941e46bc))
+
+
+
+
+
 # [25.104.0](https://github.com/SocialGouv/emjpm/compare/v25.103.1...v25.104.0) (2021-03-18)
 
 
