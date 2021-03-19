@@ -6,6 +6,7 @@ const { MesureRessources } = require("~/models");
 
 const getLastEtatDatas = require("./getLastEtatDatas");
 const buildMesure = require("../helper/buildMesure");
+const getGeoDatas = require("~/services/getGeoDatas");
 
 async function saveMesures(allMesureDatas) {
   const createdMesureIds = await transaction(
@@ -24,12 +25,21 @@ async function saveMesures(allMesureDatas) {
           editorId,
         } = mesureDatas;
 
-        const {
-          lastEtat,
-          departement,
-          longitude,
-          latitude,
-        } = await getLastEtatDatas(datas.etats);
+        const lastEtatDatas = await getLastEtatDatas(datas.etats);
+        const { lastEtat, departement } = lastEtatDatas;
+
+        let { longitude, latitude } = lastEtatDatas;
+        if (!(latitude && longitude)) {
+          if (mesureDatas.latitude && mesureDatas.longitude) {
+            latitude = mesureDatas.latitude;
+            longitude = mesureDatas.longitude;
+          } else if (datas.code_postal || datas.ville) {
+            const geoloc = await getGeoDatas(datas.code_postal, datas.ville);
+            latitude = geoloc.latitude;
+            longitude = geoloc.longitude;
+          }
+        }
+
         const mesureToCreate = buildMesure({
           antenneId,
           datas,

@@ -19,7 +19,7 @@ function buildMesure({
     cause_sortie: datas.cause_sortie,
     champ_mesure: lastEtat.champ_mesure,
     civilite: datas.civilite,
-    code_postal: lastEtat.code_postal,
+    code_postal: lastEtat.code_postal || datas.code_postal,
     date_fin_mesure:
       datas.date_fin_mesure !== "0000-00-00" ? datas.date_fin_mesure : null,
     date_nomination:
@@ -45,7 +45,7 @@ function buildMesure({
       : MESURE_PROTECTION_STATUS.en_cours,
     ti_id: ti.id,
     type_etablissement: lastEtat.type_etablissement,
-    ville: lastEtat.ville,
+    ville: lastEtat.ville || datas.ville,
   };
 }
 
