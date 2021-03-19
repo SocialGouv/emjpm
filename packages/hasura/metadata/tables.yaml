@@ -478,6 +478,95 @@
   - name: service
     using:
       foreign_key_constraint_on: service_id
+  array_relationships:
+  - name: enquete_reponses_activites
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_activite
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_agrements_formations
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_agrements_formations
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_financements
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_financement
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_informations_mandataires
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_informations_mandataire
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_modalites_exercices
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_modalites_exercice
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_populations
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_populations
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_prepose_personel_formations
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_prepose_personel_formation
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_prepose_prestations_sociales
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_prepose_prestations_sociales
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_prestations_sociales
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_prestations_sociales
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_service_informations
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_service_informations
+        column_mapping:
+          id: enquete_reponses_id
+  - name: enquete_reponses_service_personnel_formations
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: enquete_reponses_service_personnel_formation
+        column_mapping:
+          id: enquete_reponses_id
   insert_permissions:
   - role: individuel
     permission:
@@ -493,6 +582,19 @@
       - submitted_at
       backend_only: false
   - role: prepose
+    permission:
+      check: {}
+      columns:
+      - created_at
+      - departement_code
+      - enquete_id
+      - id
+      - mandataire_id
+      - service_id
+      - status
+      - submitted_at
+      backend_only: false
+  - role: service
     permission:
       check: {}
       columns:

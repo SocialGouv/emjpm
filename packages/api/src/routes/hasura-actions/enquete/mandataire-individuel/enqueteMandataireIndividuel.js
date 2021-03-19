@@ -38,11 +38,11 @@ async function initEnqueteMandataireIndividuel({
     logger.warn(
       `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataireId}: create it`
     );
-    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+    const { insert_enquete_reponses } = await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId: mandataireId,
     });
-    enqueteReponse = insert_enquete_reponses_one;
+    enqueteReponse = insert_enquete_reponses.returning;
   }
 
   const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
