@@ -57,7 +57,9 @@ ils sont utilisés dans containers (et possiblement dans pages)
 Toujours faire un `export default` par composant.
 Bonnes pratiques React:
 - utilisez des fonctions nommées pour exporter vos composants react et non des const avec des arrow functions afin de permettre la lecture des bugs dans les source maps.
-- plutôt que d'utiliser des `index.js` en tant que proxy d'export et de recréer un fichier nommé pour vos composants, adaptez votre IDE afin qu'il s'appuie sur le nom du dossier lorsqu'il rencontre un fichier nommé `index.js`, example [Atom](https://atom.io/) a le plugin [tab-foldername-index](https://atom.io/packages/tab-foldername-index) pour cela.
+- plutôt que d'utiliser des `index.js` en tant que proxy d'export et de recréer un fichier nommé pour vos composants, adaptez votre IDE afin qu'il s'appuie sur le nom du dossier lorsqu'il rencontre un fichier nommé `index.js`, examples:  
+  - [VSCode](https://code.visualstudio.com/) a le plugin [nice-index](https://marketplace.visualstudio.com/items?itemName=stekoshy.nice-index) pour cela.
+  - [Atom](https://atom.io/) a le plugin [tab-foldername-index](https://atom.io/packages/tab-foldername-index) pour cela.
 
 ## /validation-schemas
 Utilisés par les containers pour valider les formulaires, basé sur [yup](https://github.com/jquense/yup).
