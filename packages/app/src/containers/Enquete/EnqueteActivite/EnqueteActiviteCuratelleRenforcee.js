@@ -46,7 +46,7 @@ export function EnqueteActiviteCuratelleRenforcee(props) {
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk[0] || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
