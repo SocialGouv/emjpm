@@ -50,7 +50,7 @@ export function EnqueteActiviteRevisionMesures(props) {
       revisions_reconduction: revisionsReconduction,
       revisions_changement: revisionsChangement,
       revisions_autre: revisionsAutre,
-    } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    } = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       revisionsAutre,

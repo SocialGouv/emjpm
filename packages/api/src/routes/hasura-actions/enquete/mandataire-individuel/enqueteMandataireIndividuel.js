@@ -49,6 +49,7 @@ async function initEnqueteMandataireIndividuel({
   return {
     enquete_id: enqueteReponse.enquete_id,
     enquete_reponse_validation_status: status,
+    id: enqueteReponse.id,
     mandataire: enqueteReponse.mandataire,
     status: enqueteReponse.status,
     submitted_at: enqueteReponse.submitted_at,

@@ -217,6 +217,7 @@ type EnquetePreposeReponse {
 }
 
 type EnqueteReponseStatus {
+  id : Int!
   enquete_id : Int!
   submitted_at : timestamptz
   status : String!

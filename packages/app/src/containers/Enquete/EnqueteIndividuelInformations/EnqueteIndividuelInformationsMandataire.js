@@ -39,9 +39,8 @@ export function EnqueteIndividuelInformationsMandataire(props) {
       },
     ],
   });
-
   const informations = data
-    ? data.enquete_reponses_informations_mandataire_by_pk || {}
+    ? data.enquete_reponses_informations_mandataire[0] || {}
     : {};
   return loading ? null : (
     <EnqueteIndividuelInformationsMandataireForm

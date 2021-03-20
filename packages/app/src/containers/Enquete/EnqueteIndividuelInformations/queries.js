@@ -27,7 +27,7 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS = gql`
   query enquete_reponses_agrements($id: Int!) {
-    enquete_reponses_informations_mandataire(
+    enquete_reponses_agrements_formations(
       where: { enquete_reponses_id: { _eq: $id } }
     ) {
       id
@@ -42,8 +42,8 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS = gql`
 `;
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION = gql`
-  query enquete_reponses_formation($id: Int!) {
-    enquete_reponses_informations_mandataire(
+  query enquete_reponses_agrements_formations($id: Int!) {
+    enquete_reponses_agrements_formations(
       where: { enquete_reponses_id: { _eq: $id } }
     ) {
       cnc_annee_obtention

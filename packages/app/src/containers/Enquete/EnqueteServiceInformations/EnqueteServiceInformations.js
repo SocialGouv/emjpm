@@ -40,7 +40,7 @@ export function EnqueteServiceInformations(props) {
     ],
   });
   const informations = data
-    ? data.enquete_reponses_service_informations_by_pk || {}
+    ? data.enquete_reponses_service_informations[0] || {}
     : {};
 
   return loading ? null : (

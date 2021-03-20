@@ -41,7 +41,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
   );
 
   const prestationsSociales = data
-    ? data.enquete_reponses_prestations_sociales_by_pk || {}
+    ? data.enquete_reponses_prestations_sociales[0] || {}
     : {};
   return (
     <EnqueteIndividuelPrestationsSocialesForm

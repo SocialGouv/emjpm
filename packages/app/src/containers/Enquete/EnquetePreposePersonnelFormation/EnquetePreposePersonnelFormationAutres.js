@@ -41,7 +41,7 @@ export function EnquetePreposePersonnelFormationAutres(props) {
   );
 
   const initialData = data
-    ? data.enquete_reponses_prepose_personel_formation_by_pk || {}
+    ? data.enquete_reponses_prepose_personel_formation[0] || {}
     : {};
 
   return (

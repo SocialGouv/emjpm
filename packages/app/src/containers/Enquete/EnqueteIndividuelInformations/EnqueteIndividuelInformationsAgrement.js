@@ -41,7 +41,7 @@ export function EnqueteIndividuelInformationsAgrement(props) {
   });
 
   const agrements = data
-    ? data.enquete_reponses_agrements_formations_by_pk
+    ? data.enquete_reponses_agrements_formations[0]
     : undefined;
   return loading ? null : (
     <EnqueteIndividuelInformationsAgrementForm

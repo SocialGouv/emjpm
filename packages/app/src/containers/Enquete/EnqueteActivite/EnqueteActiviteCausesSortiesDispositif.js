@@ -43,7 +43,7 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
 
   const initialData = useMemo(() => {
     const { sorties_main_levee, sorties_deces, sorties_masp } = data
-      ? data.enquete_reponses_activite_by_pk || {}
+      ? data.enquete_reponses_activite[0] || {}
       : {};
 
     return {

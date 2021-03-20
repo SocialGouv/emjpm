@@ -44,7 +44,7 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       debutAnnee: r[`${PREFIX}_debut_annee`],

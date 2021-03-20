@@ -41,7 +41,7 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
   return (
     !loading && (
       <EnquetePreposeModaliteExerciceInformationsForm
-        data={data ? data.enquete_reponses_modalites_exercice_by_pk : undefined}
+        data={data ? data.enquete_reponses_modalites_exercice[0] : undefined}
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         loading={loading}

@@ -36,7 +36,7 @@ export function EnquetePreposeFinancement(props) {
       },
     ],
   });
-  const financement = data ? data.enquete_reponses_financement_by_pk || {} : {};
+  const financement = data ? data.enquete_reponses_financement[0] || {} : {};
 
   return (
     <EnquetePreposeFinancementForm

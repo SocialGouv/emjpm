@@ -47,7 +47,7 @@ export function EnqueteServicePersonnelFormation(props) {
   );
 
   const personnelFormation = data
-    ? data.enquete_reponses_service_personnel_formation_by_pk || {}
+    ? data.enquete_reponses_service_personnel_formation[0] || {}
     : {};
 
   return loading ? null : (

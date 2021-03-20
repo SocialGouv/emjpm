@@ -55,11 +55,10 @@ export function EnqueteIndividuelInformationsFormation(props) {
 
   const initialValues = useMemo(() => {
     if (data && dataInformationsGenerales) {
-      const agrementsFormations =
-        data.enquete_reponses_agrements_formations_by_pk;
+      const agrementsFormations = data.enquete_reponses_agrements_formations[0];
 
       const informationsGenerales =
-        dataInformationsGenerales.enquete_reponses_informations_mandataire_by_pk;
+        dataInformationsGenerales.enquete_reponses_informations_mandataire;
 
       const initialValues = agrementsFormations
         ? {

@@ -40,7 +40,7 @@ export function EnquetePopulationsMAJ(props) {
   });
 
   const populations = useMemo(
-    () => (data ? data.enquete_reponses_populations_by_pk || {} : {}),
+    () => (data ? data.enquete_reponses_populations[0] || {} : {}),
     [data]
   );
   const reponsePopulations = useMemo(
