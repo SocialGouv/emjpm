@@ -1,29 +1,18 @@
+DELETE FROM enquete_reponses;
+DELETE FROM enquete_reponses_activite;
+DELETE FROM enquete_reponses_agrements_formations;
+DELETE FROM enquete_reponses_financement;
+DELETE FROM enquete_reponses_informations_mandataire;
+DELETE FROM enquete_reponses_modalites_exercice;
+DELETE FROM enquete_reponses_populations;
+DELETE FROM enquete_reponses_prepose_personel_formation;
+DELETE FROM enquete_reponses_prepose_prestations_sociales;
+DELETE FROM enquete_reponses_prestations_sociales;
+DELETE FROM enquete_reponses_service_informations;
+DELETE FROM enquete_reponses_service_personnel_formation;
 
 ALTER TABLE "public"."enquete_reponses" ADD COLUMN "departement_id" int4;
 ALTER TABLE "public"."enquete_reponses" ALTER COLUMN "departement_id" DROP NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_service_personnel_formation" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_service_informations" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_prestations_sociales" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_prepose_prestations_sociales" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_prepose_personel_formation" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_populations" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_modalites_exercice" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_informations_mandataire" ALTER COLUMN "enquete_reponses_id" TYPE integer;
-ALTER TABLE "public"."enquete_reponses_informations_mandataire" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_financement" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_agrements_formations" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
-
-ALTER TABLE "public"."enquete_reponses_activite" ALTER COLUMN "enquete_reponses_id" SET NOT NULL;
 
 alter table "public"."enquete_reponses" drop constraint "enquete_reponses_enquete_id_service_id_key";
 
@@ -136,7 +125,5 @@ alter table "public"."enquete_reponses_agrements_formations" drop constraint "en
 ALTER TABLE "public"."enquete_reponses_agrements_formations" DROP COLUMN "enquete_reponses_id";
 
 alter table "public"."enquete_reponses_activite" drop constraint "enquete_reponses_activite_enquete_reponses_id_fkey";
-
-ALTER TABLE "public"."enquete_reponses_activite" ALTER COLUMN "enquete_reponses_id" DROP NOT NULL;
 
 ALTER TABLE "public"."enquete_reponses_activite" DROP COLUMN "enquete_reponses_id";
