@@ -23,6 +23,7 @@ class EnqueteReponsesPreposePrestationsSociales extends Model {
         aspa: { type: "float" },
         curatelle_renforcee: { type: "jsonb" },
         curatelle_simple: { type: "jsonb" },
+        enquete_reponses_id: { type: "integer" },
         maj: { type: "jsonb" },
         pch: { type: "float" },
         rsa: { type: "float" },

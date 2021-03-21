@@ -88,8 +88,8 @@ module.exports = {
           type
         }
       }
-      enquete_reponses_populations_id
       enquete_reponses_population {
+        id
         created_at
         last_update
         tutelle_age_inf_25_ans_homme
@@ -200,8 +200,8 @@ module.exports = {
         sauvegarde_justice_service_psychiatrique
         sauvegarde_justice_autre_service
       }
-      enquete_reponses_financement_id
       enquete_reponses_financement {
+        id
         aide_sociale_conseil_departemental
         autre_produits
         charges_fonctionnement
@@ -213,8 +213,8 @@ module.exports = {
         last_update
         produits_bareme_prelevements
       }
-      enquete_reponses_activite_id
       enquete_reponses_activite {
+        id
         created_at
         last_update
         ${build3Combinaisons(
@@ -248,8 +248,8 @@ module.exports = {
         sorties_deces
         sorties_masp
       }
-      enquete_reponses_prepose_personel_formation_id
       enquete_reponses_prepose_personel_formation {
+        id
         created_at
         last_update
         nb_preposes_mjpm
@@ -261,8 +261,8 @@ module.exports = {
         nb_autre_personnel
         nb_autre_personnel_etp
       }
-      enquete_reponses_modalites_exercice_id
       enquete_reponses_modalites_exercice {
+        id
         actions_information_tuteurs_familiaux
         created_at
         departement
@@ -276,8 +276,8 @@ module.exports = {
         region
         total_mesures_etablissements
       }
-      enquete_reponses_prepose_prestations_sociales_id
       enquete_reponses_prepose_prestations_sociale{
+        id
         tutelle
         curatelle_simple
         curatelle_renforcee

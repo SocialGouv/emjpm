@@ -18,6 +18,7 @@ class EnqueteReponsesInformationsMandataire extends Model {
         anciennete: { type: "string" },
         benevole: { type: "boolean" },
         departement: { type: "string" },
+        enquete_reponses_id: { type: "integer" },
         estimation_etp: { type: "string" },
         exerce_secretaires_specialises: { type: "boolean" },
         exerce_seul_activite: { type: "boolean" },

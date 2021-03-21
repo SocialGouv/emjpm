@@ -179,7 +179,7 @@ CREATE TABLE public.enquete_reponses (
     enquete_reponses_agrements_formations_id integer,
     enquete_reponses_activite_id integer,
     enquete_reponses_populations_id integer,
-    enquete_reponses_modalites_exercice_id integer,
+    enquete_reponses_enqueteReponse.id integer,
     enquete_reponses_financement_id integer,
     enquete_reponses_prepose_personel_formation_id integer,
     enquete_reponses_prepose_prestations_sociales_id integer,

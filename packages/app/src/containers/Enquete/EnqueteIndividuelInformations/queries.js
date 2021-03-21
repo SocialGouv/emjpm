@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
   query enquete_reponses_informations_mandataire($id: Int!) {
-    enquete_reponses_informations_mandataire_by_pk(id: $id) {
+    enquete_reponses_informations_mandataire(
+      where: { enquete_reponses_id: { _eq: $id } }
+    ) {
       anciennete
       benevole
       created_at
@@ -25,7 +27,9 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE = gql`
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS = gql`
   query enquete_reponses_agrements($id: Int!) {
-    enquete_reponses_agrements_formations_by_pk(id: $id) {
+    enquete_reponses_agrements_formations(
+      where: { enquete_reponses_id: { _eq: $id } }
+    ) {
       id
       debut_activite_avant_2009
       annee_agrement
@@ -38,8 +42,10 @@ export const ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS = gql`
 `;
 
 export const ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION = gql`
-  query enquete_reponses_formation($id: Int!) {
-    enquete_reponses_agrements_formations_by_pk(id: $id) {
+  query enquete_reponses_agrements_formations($id: Int!) {
+    enquete_reponses_agrements_formations(
+      where: { enquete_reponses_id: { _eq: $id } }
+    ) {
       cnc_annee_obtention
       cnc_heures_formation
       created_at

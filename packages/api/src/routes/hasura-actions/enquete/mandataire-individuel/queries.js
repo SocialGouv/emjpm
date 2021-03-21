@@ -52,8 +52,8 @@ module.exports = {
           type
         }
       }
-      enquete_reponses_activite_id
       enquete_reponses_activite {
+        id
         created_at
         last_update
         ${build3Combinaisons(
@@ -87,8 +87,8 @@ module.exports = {
         sorties_deces
         sorties_masp
       }
-      enquete_reponses_agrements_formations_id
       enquete_reponses_agrements_formation {
+        id
         created_at
         last_update
         annee_agrement
@@ -112,8 +112,8 @@ module.exports = {
         secretaire_specialise_etp_n6
         secretaire_specialise
       }
-      enquete_reponses_informations_mandataire_id
       enquete_reponses_informations_mandataire {
+        id
         created_at
         last_update
         benevole
@@ -130,8 +130,8 @@ module.exports = {
         departement
         tranche_age
       }
-      enquete_reponses_populations_id
       enquete_reponses_population {
+        id
         created_at
         last_update
         tutelle_age_inf_25_ans_homme
@@ -242,8 +242,8 @@ module.exports = {
         sauvegarde_justice_service_psychiatrique
         sauvegarde_justice_autre_service
       }
-      enquete_reponses_prestations_sociale_id
       enquete_reponses_prestations_sociale {
+        id
         aah
         als_apl
         apa

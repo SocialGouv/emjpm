@@ -20,9 +20,7 @@ export function EnqueteActiviteSauvegardeJustice(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_SAUVEGARDE_JUSTICE, {
     refetchQueries: [
@@ -33,19 +31,19 @@ export function EnqueteActiviteSauvegardeJustice(props) {
       {
         query: ENQUETE_SAUVEGARDE_JUSTICE,
         variables: {
-          id: activite_id,
+          id: enqueteReponse.id,
         },
       },
     ],
   });
   const { data, loading } = useQuery(ENQUETE_SAUVEGARDE_JUSTICE, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       debutAnnee: r[`${PREFIX}_debut_annee`],
@@ -67,7 +65,7 @@ export function EnqueteActiviteSauvegardeJustice(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

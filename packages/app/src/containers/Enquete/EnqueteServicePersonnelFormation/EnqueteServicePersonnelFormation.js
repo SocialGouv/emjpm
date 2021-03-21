@@ -19,15 +19,11 @@ export function EnqueteServicePersonnelFormation(props) {
 
   const { id: userId } = useUser();
 
-  const {
-    enquete_reponse_ids: { personnel_formation_id },
-  } = enqueteReponse;
-
   const { data, loading } = useQuery(
     ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION,
     {
       variables: {
-        id: personnel_formation_id,
+        id: enqueteReponse.id,
       },
     }
   );
@@ -43,7 +39,7 @@ export function EnqueteServicePersonnelFormation(props) {
         {
           query: ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION,
           variables: {
-            id: personnel_formation_id,
+            id: enqueteReponse.id,
           },
         },
       ],
@@ -51,7 +47,7 @@ export function EnqueteServicePersonnelFormation(props) {
   );
 
   const personnelFormation = data
-    ? data.enquete_reponses_service_personnel_formation_by_pk || {}
+    ? data.enquete_reponses_service_personnel_formation[0] || {}
     : {};
 
   return loading ? null : (
@@ -67,7 +63,7 @@ export function EnqueteServicePersonnelFormation(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: personnel_formation_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

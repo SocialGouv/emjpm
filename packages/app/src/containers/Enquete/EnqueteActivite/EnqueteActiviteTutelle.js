@@ -20,9 +20,7 @@ export function EnqueteActiviteTutelle(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
 
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_TUTELLE, {
@@ -34,19 +32,19 @@ export function EnqueteActiviteTutelle(props) {
       {
         query: ENQUETE_TUTELLE,
         variables: {
-          id: activite_id,
+          id: enqueteReponse.id,
         },
       },
     ],
   });
   const { data, loading } = useQuery(ENQUETE_TUTELLE, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
@@ -73,7 +71,7 @@ export function EnqueteActiviteTutelle(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

@@ -16,13 +16,10 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
     enquete: { id: enqueteId },
   } = props;
 
-  const {
-    enquete_reponse_ids: { modalites_exercice_id },
-  } = enqueteReponse;
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_PREPOSE_INFORMATIONS, {
     variables: {
-      id: modalites_exercice_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +33,7 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
         },
         {
           query: ENQUETE_PREPOSE_INFORMATIONS,
-          variables: { id: modalites_exercice_id },
+          variables: { id: enqueteReponse.id },
         },
       ],
     }
@@ -44,7 +41,7 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
   return (
     !loading && (
       <EnquetePreposeModaliteExerciceInformationsForm
-        data={data ? data.enquete_reponses_modalites_exercice_by_pk : undefined}
+        data={data ? data.enquete_reponses_modalites_exercice[0] : undefined}
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         loading={loading}
@@ -52,7 +49,7 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
         onSubmit={async (values) => {
           await sendEnqueteReponseInformations({
             variables: {
-              id: modalites_exercice_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

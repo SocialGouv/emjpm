@@ -16,13 +16,11 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
     step,
     enquete: { id: enqueteId },
   } = props; /* mandataireId, enquete */
-  const {
-    enquete_reponse_ids: { personel_formation_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PERSONNEL_FORMATION, {
     variables: {
-      id: personel_formation_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,14 +34,14 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
         },
         {
           query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
-          variables: { id: personel_formation_id },
+          variables: { id: enqueteReponse.id },
         },
       ],
     }
   );
 
   const initialData = data
-    ? data.enquete_reponses_prepose_personel_formation_by_pk || {}
+    ? data.enquete_reponses_prepose_personel_formation[0] || {}
     : {};
 
   return (
@@ -71,7 +69,7 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
         await sendEnqueteReponseInformations({
           variables: {
             formation_preposes_mjpm,
-            id: personel_formation_id,
+            id: enqueteReponse.id,
             nb_preposes_mjpm: parseFormInt(values.nb_preposes_mjpm),
             nb_preposes_mjpm_etp: parseFormFloat(values.nb_preposes_mjpm_etp),
           },

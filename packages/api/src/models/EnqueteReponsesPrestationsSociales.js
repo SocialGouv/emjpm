@@ -21,6 +21,7 @@ class EnqueteReponsesPrestationsSociales extends Model {
         apa: { type: "number" },
         asi: { type: "number" },
         aspa: { type: "number" },
+        enquete_reponses_id: { type: "integer" },
         pch: { type: "number" },
         rsa: { type: "number" },
       },

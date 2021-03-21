@@ -16,15 +16,13 @@ export function EnqueteIndividuelInformationsMandataire(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { informations_mandataire_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(
     ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
     {
       variables: {
-        id: informations_mandataire_id,
+        id: enqueteReponse.id,
       },
     }
   );
@@ -37,13 +35,12 @@ export function EnqueteIndividuelInformationsMandataire(props) {
       },
       {
         query: ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
-        variables: { id: informations_mandataire_id },
+        variables: { id: enqueteReponse.id },
       },
     ],
   });
-
   const informations = data
-    ? data.enquete_reponses_informations_mandataire_by_pk || {}
+    ? data.enquete_reponses_informations_mandataire[0] || {}
     : {};
   return loading ? null : (
     <EnqueteIndividuelInformationsMandataireForm
@@ -58,7 +55,7 @@ export function EnqueteIndividuelInformationsMandataire(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: informations_mandataire_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

@@ -20,9 +20,7 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR, {
     refetchQueries: [
@@ -33,19 +31,19 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
       {
         query: ENQUETE_MANDAT_ADHOC_MAJEUR,
         variables: {
-          id: activite_id,
+          id: enqueteReponse.id,
         },
       },
     ],
   });
   const { data, loading } = useQuery(ENQUETE_MANDAT_ADHOC_MAJEUR, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       debutAnnee: r[`${PREFIX}_debut_annee`],
@@ -67,7 +65,7 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

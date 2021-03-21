@@ -5,14 +5,6 @@ module.exports = {
         id
         departement_code
         user_type
-        enquete_reponses_activite_id
-        enquete_reponses_financement_id
-        enquete_reponses_modalites_exercice_id
-        enquete_reponses_agrements_formations_id
-        enquete_reponses_informations_mandataire_id
-        enquete_reponses_populations_id
-        enquete_reponses_prepose_prestations_sociales_id
-        enquete_reponses_prepose_personel_formation_id
         mandataire_id
         service_id
         status
@@ -27,13 +19,6 @@ module.exports = {
     update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submittedAt, status: "submitted"}) {
       id
       departement_code
-      enquete_reponses_activite_id
-      enquete_reponses_financement_id
-      enquete_reponses_modalites_exercice_id
-      enquete_reponses_agrements_formations_id
-      enquete_reponses_informations_mandataire_id
-      enquete_reponses_populations_id
-      enquete_reponses_prestations_sociale_id
       mandataire_id
       service_id
       status

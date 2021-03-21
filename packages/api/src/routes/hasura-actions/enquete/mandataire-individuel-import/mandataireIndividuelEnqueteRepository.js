@@ -35,23 +35,23 @@ async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   }
 
   await EnqueteReponsesInformationsMandataire.query()
-    .findById(enqueteReponse.enquete_reponses_informations_mandataire_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(informationsMandataire);
 
   await EnqueteReponsesAgrementsFormations.query()
-    .findById(enqueteReponse.enquete_reponses_agrements_formations_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(agrementsFormations);
 
   await EnqueteReponsesPopulations.query()
-    .findById(enqueteReponse.enquete_reponses_populations_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(populations);
 
   await EnqueteReponsesPrestationsSociales.query()
-    .findById(enqueteReponse.enquete_reponses_prestations_sociale_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(prestationsSociales);
 
   await EnqueteReponsesActivite.query()
-    .findById(enqueteReponse.enquete_reponses_activite_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(activite);
 }
 

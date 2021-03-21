@@ -18,15 +18,13 @@ export function EnquetePopulationsSauvegardeJustice(props) {
     section,
     step,
   } = props;
-  const {
-    enquete_reponse_ids: { populations_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(
     ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
     {
       variables: {
-        id: populations_id,
+        id: enqueteReponse.id,
       },
     }
   );
@@ -41,14 +39,14 @@ export function EnquetePopulationsSauvegardeJustice(props) {
         },
         {
           query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,
-          variables: { id: populations_id },
+          variables: { id: enqueteReponse.id },
         },
       ],
     }
   );
 
   const populations = useMemo(
-    () => (data ? data.enquete_reponses_populations_by_pk || {} : {}),
+    () => (data ? data.enquete_reponses_populations[0] || {} : {}),
     [data]
   );
   const reponsePopulations = useMemo(
@@ -67,7 +65,7 @@ export function EnquetePopulationsSauvegardeJustice(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: populations_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

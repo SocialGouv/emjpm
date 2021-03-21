@@ -29,19 +29,19 @@ async function update(enqueteId, { tabs, serviceId, isUpload = false }) {
   }
 
   await EnqueteReponsesServicePersonnelFormation.query()
-    .findById(enqueteReponse.enquete_reponses_service_personnel_formation_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(personnelFormation);
 
   await EnqueteReponsesServiceInformations.query()
-    .findById(enqueteReponse.enquete_reponses_service_informations_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(informations);
 
   await EnqueteReponsesPopulations.query()
-    .findById(enqueteReponse.enquete_reponses_populations_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(populations);
 
   await EnqueteReponsesActivite.query()
-    .findById(enqueteReponse.enquete_reponses_activite_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(activite);
 }
 

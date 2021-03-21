@@ -18,9 +18,7 @@ export function EnqueteActiviteRevisionMesures(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES,
@@ -33,7 +31,7 @@ export function EnqueteActiviteRevisionMesures(props) {
         {
           query: ENQUETE_REVISION_MESURES,
           variables: {
-            id: activite_id,
+            id: enqueteReponse.id,
           },
         },
       ],
@@ -41,7 +39,7 @@ export function EnqueteActiviteRevisionMesures(props) {
   );
   const { data, loading } = useQuery(ENQUETE_REVISION_MESURES, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -52,7 +50,7 @@ export function EnqueteActiviteRevisionMesures(props) {
       revisions_reconduction: revisionsReconduction,
       revisions_changement: revisionsChangement,
       revisions_autre: revisionsAutre,
-    } = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    } = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       revisionsAutre,
@@ -75,7 +73,7 @@ export function EnqueteActiviteRevisionMesures(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

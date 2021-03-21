@@ -28,19 +28,8 @@ async function initEnqueteService(context) {
   }
   const status = await enqueteServiceStatus(enqueteReponse);
 
-  const ids = {
-    activite_id: enqueteReponse.enquete_reponses_activite_id,
-    id: enqueteReponse.id,
-    personnel_formation_id:
-      enqueteReponse.enquete_reponses_service_personnel_formation_id,
-    populations_id: enqueteReponse.enquete_reponses_populations_id,
-    service_informations_id:
-      enqueteReponse.enquete_reponses_service_informations_id,
-  };
-
   return {
     enquete_id: enqueteReponse.enquete_id,
-    enquete_reponse_ids: ids,
     enquete_reponse_validation_status: status,
     service: enqueteReponse.service,
     status: enqueteReponse.status || {},

@@ -16,6 +16,7 @@ delete from logs_data;
 -- ENQUETE
 delete from enquetes;
 delete from enquete_reponses;
+delete from enquete_services;
 
 -- anonymise data
 

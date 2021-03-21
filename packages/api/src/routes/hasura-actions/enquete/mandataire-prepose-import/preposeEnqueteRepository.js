@@ -38,27 +38,27 @@ async function update(enqueteId, { tabs, mandataireId, isUpload = false }) {
   }
 
   await EnqueteReponsesPopulations.query()
-    .findById(enqueteReponse.enquete_reponses_populations_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(populations);
 
   await EnqueteReponsesModalitesExercice.query()
-    .findById(enqueteReponse.enquete_reponses_modalites_exercice_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(modaliteExercice);
 
   await EnqueteReponsesPreposePersonnelFormation.query()
-    .findById(enqueteReponse.enquete_reponses_prepose_personel_formation_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(preposePersonnelFormation);
 
   await EnqueteReponsesActivite.query()
-    .findById(enqueteReponse.enquete_reponses_activite_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(activite);
 
   await EnqueteReponsesPreposePrestationsSociales.query()
-    .findById(enqueteReponse.enquete_reponses_prepose_prestations_sociales_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(prestationsSociales);
 
   await EnqueteReponsesFinancement.query()
-    .findById(enqueteReponse.enquete_reponses_financement_id)
+    .findOne("enquete_reponses_id", enqueteReponse.id)
     .patch(financement);
 }
 

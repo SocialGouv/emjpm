@@ -15,13 +15,11 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { prestations_sociales_id },
-  } = enqueteReponse;
+
   const { id: userId } = useUser();
   const { data, loading } = useQuery(ENQUETE_PREPOSE_PRESTATIONS_SOCIALES, {
     variables: {
-      id: prestations_sociales_id,
+      id: enqueteReponse.id,
     },
   });
 
@@ -36,7 +34,7 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
         {
           query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
           variables: {
-            id: prestations_sociales_id,
+            id: enqueteReponse.id,
           },
         },
       ],
@@ -44,7 +42,7 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
   );
 
   const prestationsSociales = data
-    ? data.enquete_reponses_prepose_prestations_sociales_by_pk || {}
+    ? data.enquete_reponses_prepose_prestations_sociales[0] || {}
     : {};
 
   return (
@@ -58,7 +56,7 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
         await updatePrestationsSociales({
           variables: {
             curatelle_renforcee: values,
-            id: prestations_sociales_id,
+            id: enqueteReponse.id,
           },
         });
       }}

@@ -20,9 +20,6 @@ export function EnqueteActiviteCuratelleBiens(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS, {
     refetchQueries: [
@@ -33,19 +30,19 @@ export function EnqueteActiviteCuratelleBiens(props) {
       {
         query: ENQUETE_CURATELLE_BIENS,
         variables: {
-          id: activite_id,
+          id: enqueteReponse.id,
         },
       },
     ],
   });
   const { data, loading } = useQuery(ENQUETE_CURATELLE_BIENS, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
   const normalizedData = useMemo(() => {
-    const r = data ? data.enquete_reponses_activite_by_pk || {} : {};
+    const r = data ? data.enquete_reponses_activite[0] || {} : {};
 
     return {
       domicileDebutAnnee: r[`${PREFIX}_domicile_debut_annee`],
@@ -72,7 +69,7 @@ export function EnqueteActiviteCuratelleBiens(props) {
         onSubmit={async (values) => {
           await updateEnquete({
             variables: {
-              id: activite_id,
+              id: enqueteReponse.id,
               ...values,
             },
           });

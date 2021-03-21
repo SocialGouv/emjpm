@@ -2,7 +2,9 @@ import gql from "graphql-tag";
 
 export const ENQUETE_PREPOSE_INFORMATIONS = gql`
   query enquete_prepose_informations($id: Int!) {
-    enquete_reponses_modalites_exercice_by_pk(id: $id) {
+    enquete_reponses_modalites_exercice(
+      where: { enquete_reponses_id: { _eq: $id } }
+    ) {
       actions_information_tuteurs_familiaux
       created_at
       departement

@@ -190,11 +190,6 @@ type EnqueteIndividuelReponse {
   submitted_at : timestamptz
   enquete_reponses_id : Int!
   enquete_reponses_status : json!
-  enquete_reponses_informations_mandataire_id : Int
-  enquete_reponses_prestations_sociale_id : Int
-  enquete_reponses_agrements_formations_id : Int
-  enquete_reponses_activite_id : Int
-  enquete_reponses_populations_id : Int
 }
 
 type SubmittedEnqueteReponse {
@@ -213,24 +208,20 @@ type EnquetePreposeReponse {
   submitted_at : timestamptz
   enquete_reponses_id : Int!
   enquete_reponses_status : json!
-  enquete_reponses_modalites_exercice_id : Int
   enquete_reponses_modalites_exercice_status : Int!
-  enquete_reponses_populations_id : Int
   enquete_reponses_populations_curatelle_status : Int!
   enquete_reponses_populations_tutelle_status : Int!
   enquete_reponses_populations_accompagnement_judiciaire_status : Int!
   enquete_reponses_populations_sauvegarde_justice_status : Int!
   enquete_reponses_populations_autre_status : Int!
-  enquete_reponses_financement_id : Int!
-  enquete_reponses_activite_id : Int!
 }
 
 type EnqueteReponseStatus {
+  id : Int!
   enquete_id : Int!
   submitted_at : timestamptz
   status : String!
   user_type : String!
-  enquete_reponse_ids : json!
   enquete_reponse_validation_status : json!
   mandataire : json
   service : json

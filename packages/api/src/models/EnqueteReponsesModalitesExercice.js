@@ -19,6 +19,7 @@ class EnqueteReponsesModalitesExercice extends Model {
         actions_information_tuteurs_familiaux: { type: "boolean" },
         activite_exercee_par: { type: "string" },
         departement: { type: "string" },
+        enquete_reponses_id: { type: "integer" },
         etablissements_type: { type: "string" },
         nombre_etablissements: { type: "number" },
         nombre_lits_journee_hospitalisation: { type: "jsonb" },

@@ -17,9 +17,6 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
     step,
     enquete: { id: enqueteId },
   } = props;
-  const {
-    enquete_reponse_ids: { activite_id },
-  } = enqueteReponse;
   const { id: userId } = useUser();
   const [updateEnquete] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF,
@@ -32,7 +29,7 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
         {
           query: ENQUETE_CAUSES_SORTIE_DISPOSITIF,
           variables: {
-            id: activite_id,
+            id: enqueteReponse.id,
           },
         },
       ],
@@ -40,13 +37,13 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
   );
   const { data, loading } = useQuery(ENQUETE_CAUSES_SORTIE_DISPOSITIF, {
     variables: {
-      id: activite_id,
+      id: enqueteReponse.id,
     },
   });
 
   const initialData = useMemo(() => {
     const { sorties_main_levee, sorties_deces, sorties_masp } = data
-      ? data.enquete_reponses_activite_by_pk || {}
+      ? data.enquete_reponses_activite[0] || {}
       : {};
 
     return {
@@ -67,7 +64,7 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
       onSubmit={async (values) => {
         await updateEnquete({
           variables: {
-            id: activite_id,
+            id: enqueteReponse.id,
             ...values,
           },
         });

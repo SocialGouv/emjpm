@@ -16,6 +16,7 @@ class EnqueteReponsesPreposePersonnelFormation extends Model {
   static get jsonSchema() {
     return {
       properties: {
+        enquete_reponses_id: { type: "integer" },
         formation_preposes_mjpm: { type: "jsonb" },
         nb_autre_personnel: { type: "number" },
         nb_autre_personnel_etp: { type: "number" },
