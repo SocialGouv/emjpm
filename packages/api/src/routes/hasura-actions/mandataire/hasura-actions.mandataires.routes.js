@@ -45,7 +45,6 @@ router.post(
         mandataireId
       );
     }
-    console.log({ result });
     try {
       return res.status(200).json(result);
     } catch (err) {
