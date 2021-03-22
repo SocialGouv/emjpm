@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 
-const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
+const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 
 const updateMesureStates = require("./service/updateMesureStates");
 
@@ -41,7 +41,7 @@ const mesureUpdate = async (req, res) => {
 
     await updateMesureStates(serviceOrMandataire, type);
 
-    await updateGestionnaireMesuresLastUpdate(type, serviceOrMandataire.id);
+    await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
     return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {

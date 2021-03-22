@@ -4,7 +4,7 @@ const { Mesure } = require("~/models");
 const { MesureEtat } = require("~/models");
 const { MesureRessources } = require("~/models");
 
-const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
+const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 
 const updateMesureStates = require("./service/updateMesureStates");
 
@@ -33,7 +33,7 @@ const deleteById = async (req, res) => {
 
   await updateMesureStates(serviceOrMandataire, type);
 
-  await updateGestionnaireMesuresLastUpdate(type, serviceOrMandataire.id);
+  await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
   return res.status(200).json({ affected_rows: affectedRows });
 };
@@ -67,7 +67,7 @@ const deleteAll = async (req, res) => {
 
     await updateMesureStates(serviceOrMandataire, type);
 
-    await updateGestionnaireMesuresLastUpdate(type, serviceOrMandataire.id);
+    await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
     return res.status(200).json({ affected_rows: affectedRows });
   } catch (err) {

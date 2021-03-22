@@ -5,7 +5,7 @@ const { Mandataire } = require("~/models");
 const mesureStatesService = require("~/services/updateMesureStates");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const fetchTribunaux = require("~/controllers/editor/service/fetchTribunaux");
-const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
+const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 const knex = require("~/db/knex");
@@ -48,7 +48,7 @@ module.exports = async (req, res) => {
       try {
         await deleteAllMesures(mandataireId);
         await saveMesures(allMesureDatas);
-        await updateGestionnaireMesuresLastUpdate("mandataires", mandataireId);
+        await updateGestionnaireMesuresEvent("mandataires", mandataireId);
         await mesureStatesService.updateMandataireMesureStates(mandataireId);
 
         await trx.commit();

@@ -2,7 +2,7 @@ const { validationResult } = require("express-validator");
 const uniq = require("lodash.uniq");
 
 const antenneIdIsValid = require("~/services/antenneIdIsValid");
-const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate.js");
+const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const { saveMesures } = require("./service/saveMesure");
@@ -67,7 +67,7 @@ const mesureBatch = async (req, res) => {
 
     await updateMesureStates(serviceOrMandataire, type);
 
-    await updateGestionnaireMesuresLastUpdate(type, serviceOrMandataire.id);
+    await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
     return res.status(201).json({
       mesures: mesuresQueryResult.map((mqr) => sanitizeMesureProperties(mqr)),

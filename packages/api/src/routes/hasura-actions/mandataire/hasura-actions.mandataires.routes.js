@@ -1,12 +1,9 @@
 const express = require("express");
-const { Mandataire } = require("~/models");
-const { Mesure } = require("~/models");
-const { Service } = require("~/models");
-const { ServiceAntenne } = require("~/models");
+const { Mesure, User } = require("~/models");
 
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
-const { User } = require("~/models");
 const { isMandataire } = require("@emjpm/biz");
+const updateGestionnaireMesuresCounters = require("~/services/updateGestionnaireMesuresCounters");
 
 const router = express.Router();
 
@@ -40,25 +37,15 @@ router.post(
     const { serviceId, mandataireId } = req.body.input;
     let result;
     if (serviceId) {
-      const {
-        mesures_in_progress: en_cours,
-        mesures_awaiting: en_attente,
-      } = await recalculateServiceMesuresCount(serviceId);
-      result = {
-        en_attente,
-        en_cours,
-      };
+      result = await updateGestionnaireMesuresCounters("services", serviceId);
     }
     if (mandataireId) {
-      const {
-        mesures_en_cours: en_cours,
-        mesures_en_attente: en_attente,
-      } = await recalculateMandatairesMesuresCount(mandataireId);
-      result = {
-        en_attente,
-        en_cours,
-      };
+      result = await updateGestionnaireMesuresCounters(
+        "mandataires",
+        mandataireId
+      );
     }
+    console.log({ result });
     try {
       return res.status(200).json(result);
     } catch (err) {
@@ -69,52 +56,3 @@ router.post(
 );
 
 module.exports = router;
-
-async function recalculateMandatairesMesuresCount(mandataireId) {
-  const mandataireStates = await Mesure.query()
-    .groupBy("status")
-    .select("status")
-    .count("id")
-    .where({ mandataire_id: mandataireId });
-
-  return await Mandataire.query().updateAndFetchById(mandataireId, {
-    mesures_en_attente: getCount(mandataireStates, "en_attente"),
-    mesures_en_cours: getCount(mandataireStates, "en_cours"),
-  });
-}
-
-async function recalculateServiceMesuresCount(serviceId) {
-  const antennes = await ServiceAntenne.query().where({
-    service_id: serviceId,
-  });
-
-  for (const { id: antenneId } of antennes) {
-    const antenneStates = await Mesure.query()
-      .groupBy("status")
-      .select("status")
-      .count("id")
-      .where({ antenne_id: antenneId });
-    await ServiceAntenne.query()
-      .findById(antenneId)
-      .update({
-        mesures_awaiting: getCount(antenneStates, "en_attente"),
-        mesures_in_progress: getCount(antenneStates, "en_cours"),
-      });
-  }
-
-  const serviceStates = await Mesure.query()
-    .groupBy("status")
-    .select("status")
-    .count("id")
-    .where({ service_id: serviceId });
-
-  return await Service.query().updateAndFetchById(serviceId, {
-    mesures_awaiting: getCount(serviceStates, "en_attente"),
-    mesures_in_progress: getCount(serviceStates, "en_cours"),
-  });
-}
-
-function getCount(states, status) {
-  const line = states.find((elm) => elm.status === status) || { count: 0 };
-  return line.count;
-}
