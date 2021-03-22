@@ -25,7 +25,7 @@ export function EtablissementImport() {
   const formik = useFormik({
     initialValues: {
       url:
-        "https://www.data.gouv.fr/fr/datasets/r/16ee2cd3-b9fe-459e-8a57-46e03ba3adbd",
+        "https://www.data.gouv.fr/fr/datasets/r/9b81484a-0deb-42f7-a7c4-eb9869ea580a",
     },
     onSubmit: async (values, { setSubmitting }) => {
       await importFiness({

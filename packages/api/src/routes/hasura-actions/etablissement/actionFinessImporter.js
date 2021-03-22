@@ -120,7 +120,7 @@ async function importGeolocalisation(properties) {
 
 /*
   https://www.data.gouv.fr/fr/datasets/finess-extraction-du-fichier-des-etablissements/
-  https://www.data.gouv.fr/fr/datasets/r/d1a2f35f-8823-400f-9296-6eb7361ddf6f
+  https://www.data.gouv.fr/fr/datasets/r/9b81484a-0deb-42f7-a7c4-eb9869ea580a
 */
 const mapFinessColumns = {
   categagretab: 21,
