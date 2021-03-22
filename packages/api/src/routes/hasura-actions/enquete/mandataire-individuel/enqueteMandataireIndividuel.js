@@ -42,7 +42,7 @@ async function initEnqueteMandataireIndividuel({
       enqueteId,
       mandataireId: mandataireId,
     });
-    enqueteReponse = insert_enquete_reponses.returning;
+    enqueteReponse = insert_enquete_reponses.returning[0];
   }
 
   const status = await enqueteMandataireIndividuelStatus(enqueteReponse);
