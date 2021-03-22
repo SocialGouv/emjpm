@@ -6,7 +6,7 @@ export const RUNNING_PROCESSUS_STATE = gql`
       where: {
         _and: {
           type: { _eq: "import_finess" }
-          end_date: { _eq: null }
+          end_date: { _is_null: true }
           expire_date: { _gt: $now }
         }
       }
