@@ -374,6 +374,12 @@
       - id
       - name
       filter: {}
+  - role: ti
+    permission:
+      columns:
+      - id
+      - name
+      filter: {}
 - table:
     schema: public
     name: enquete_reponses
