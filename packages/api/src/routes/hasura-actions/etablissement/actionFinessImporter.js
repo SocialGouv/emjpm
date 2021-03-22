@@ -36,6 +36,7 @@ const FILTERS = [
   "380",
   "165",
   "101",
+  "340",
 ];
 
 const actionsFinessImporter = {
