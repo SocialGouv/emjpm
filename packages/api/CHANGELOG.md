@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.105.1](https://github.com/SocialGouv/emjpm/compare/v25.105.0...v25.105.1) (2021-03-22)
+
+
+### Bug Fixes
+
+* **update-mesures:** table name ([c10ba5a](https://github.com/SocialGouv/emjpm/commit/c10ba5a37299b9dc74bf6455e27ae2b1694b2c7e))
+
+
+
+
+
 # [25.105.0](https://github.com/SocialGouv/emjpm/compare/v25.104.1...v25.105.0) (2021-03-22)
 
 
