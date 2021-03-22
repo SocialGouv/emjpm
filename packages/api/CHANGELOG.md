@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.105.0](https://github.com/SocialGouv/emjpm/compare/v25.104.1...v25.105.0) (2021-03-22)
+
+
+### Bug Fixes
+
+* **calcul-mesures-count:** ensure done at server level ([78d7632](https://github.com/SocialGouv/emjpm/commit/78d7632d6666466add475426ba4b4cdee4611400))
+* **deps:** update all dependencies ([#2517](https://github.com/SocialGouv/emjpm/issues/2517)) ([4363322](https://github.com/SocialGouv/emjpm/commit/43633220bc0c26e20504abf07050960026b92dcf))
+* **enquetes:** init ([77312b6](https://github.com/SocialGouv/emjpm/commit/77312b6c37e6e601999f9203d402cb013e7c8890))
+* **enquetes:** inverted model  ([#2516](https://github.com/SocialGouv/emjpm/issues/2516)) ([3753482](https://github.com/SocialGouv/emjpm/commit/37534824c1de08e736625ad685ea92274c595e71))
+
+
+### Features
+
+* **finess:** add category 340 ([1f69791](https://github.com/SocialGouv/emjpm/commit/1f697912f1b334f7e9df82deda328c04abf95a3c))
+
+
+
+
+
 ## [25.104.1](https://github.com/SocialGouv/emjpm/compare/v25.104.0...v25.104.1) (2021-03-19)
 
 

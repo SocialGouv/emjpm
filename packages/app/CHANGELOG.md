@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.105.0](https://github.com/SocialGouv/emjpm/compare/v25.104.1...v25.105.0) (2021-03-22)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#2517](https://github.com/SocialGouv/emjpm/issues/2517)) ([4363322](https://github.com/SocialGouv/emjpm/commit/43633220bc0c26e20504abf07050960026b92dcf))
+* **enquetes:** inverted model  ([#2516](https://github.com/SocialGouv/emjpm/issues/2516)) ([3753482](https://github.com/SocialGouv/emjpm/commit/37534824c1de08e736625ad685ea92274c595e71))
+* **stats:** login count ([ccd9ba5](https://github.com/SocialGouv/emjpm/commit/ccd9ba5aaea3c6cf7c101462617699a93911f53d))
+* **ux:** redirect and recalcul race condition ([ae1e8f1](https://github.com/SocialGouv/emjpm/commit/ae1e8f1477891ba9f5e38511fce47dd4b7df78e8))
+
+
+
+
+
 ## [25.104.1](https://github.com/SocialGouv/emjpm/compare/v25.104.0...v25.104.1) (2021-03-19)
 
 **Note:** Version bump only for package @emjpm/app
