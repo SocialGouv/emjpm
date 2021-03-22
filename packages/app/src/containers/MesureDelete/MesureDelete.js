@@ -26,6 +26,7 @@ function MesureDelete(props) {
 
   const [deleteMesure] = useMutation(DELETE_MESURE, {
     onCompleted: async () => {
+      history.push(`${userBasePath}/mesures`);
       await recalculateMesures({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
@@ -33,7 +34,6 @@ function MesureDelete(props) {
           serviceId: service ? service.id : null,
         },
       });
-      history.push(userBasePath);
     },
   });
 
