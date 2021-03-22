@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { useQuery } from "@apollo/client";
 
 import { Box } from "rebass";
@@ -21,27 +20,31 @@ function IndicatorList(props) {
     variables: { code: departementCode, currentMonthStart, currentMonthEnd },
   });
 
-  const view_indicateur_login = data?.view_indicateur_login;
-  const loginData = useMemo(() => {
-    if (!view_indicateur_login) return;
-    const [service] = view_indicateur_login.filter(
-      ({ type }) => type === "service"
-    );
-    const [prepose] = view_indicateur_login.filter(
-      ({ type }) => type === "prepose"
-    );
-    const [individuel] = view_indicateur_login.filter(
-      ({ type }) => type === "individuel"
-    );
-    const [ti] = view_indicateur_login.filter(({ type }) => type === "ti");
-    return { individuel, prepose, service, ti };
-  }, [view_indicateur_login]);
-
   if (!useQueryReady(loading, error)) {
     return null;
   }
 
   const {
+    serviceLoginCount: {
+      aggregate: {
+        sum: { count: serviceLoginCount },
+      },
+    },
+    individuelLoginCount: {
+      aggregate: {
+        sum: { count: individuelLoginCount },
+      },
+    },
+    preposeLoginCount: {
+      aggregate: {
+        sum: { count: preposeLoginCount },
+      },
+    },
+    magistratLoginCount: {
+      aggregate: {
+        sum: { count: magistratLoginCount },
+      },
+    },
     serviceInscritCount: {
       aggregate: { count: serviceInscritCount },
     },
@@ -94,25 +97,25 @@ function IndicatorList(props) {
           error={false}
           loading={false}
           title="Services mandataires"
-          indicator={loginData.service?.count || 0}
+          indicator={serviceLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
-          indicator={loginData.prepose?.count || 0}
+          indicator={preposeLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
-          indicator={loginData.individuel?.count || 0}
+          indicator={individuelLoginCount || 0}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={loginData.ti?.count || 0}
+          indicator={magistratLoginCount || 0}
         />
       </Box>
       <Heading size={2}>

@@ -6,11 +6,41 @@ export const INDICATORS = gql`
     $currentMonthStart: timestamptz!
     $currentMonthEnd: timestamptz!
   ) {
-    view_indicateur_login(where: { id: { _eq: $code } }) {
-      count
-      nom
-      type
-      id
+    serviceLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "service" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    individuelLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "individuel" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    preposeLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "prepose" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    magistratLoginCount: view_indicateur_login_aggregate(
+      where: { type: { _eq: "ti" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
     }
 
     magistratInscritCount: view_users_stats_aggregate(
