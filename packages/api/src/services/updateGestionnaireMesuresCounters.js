@@ -7,8 +7,26 @@ module.exports = async function updateGestionnaireMesuresCounters(
   tableOrType,
   id
 ) {
-  let result;
+  let table;
   switch (tableOrType) {
+    case "service":
+    case "services":
+      table = "services";
+      break;
+    case "mandataire":
+    case "mandataires":
+      table = "mandataires";
+      break;
+    default:
+      throw new Error(
+        "unexpected table '" +
+          tableOrType +
+          "' in updateGestionnaireMesuresCounters"
+      );
+  }
+
+  let result;
+  switch (table) {
     case "services": {
       const {
         mesures_in_progress: en_cours,
@@ -31,12 +49,6 @@ module.exports = async function updateGestionnaireMesuresCounters(
       };
       break;
     }
-    default:
-      throw new Error(
-        "unexpected table '" +
-          tableOrType +
-          "' in updateGestionnaireMesuresCounters"
-      );
   }
   return result;
 };
