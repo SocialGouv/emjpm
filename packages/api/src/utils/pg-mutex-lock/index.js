@@ -4,15 +4,37 @@ const knexConnection = require("~/db/knex");
 
 async function acquireLock(
   key,
-  { acquireTimeout = 5, knex = knexConnection } = {}
+  { acquireTimeout = 5, lockTimeout = "600s", knex = knexConnection } = {}
 ) {
   const [classid, objid] = strToKey(key);
 
   const timeoutNs = acquireTimeout * 1000;
   const time = +new Date();
   while (+new Date() - time < timeoutNs) {
-    const { rows } = await knex.raw(
-      `
+    if (lockTimeout) {
+      const { rows } = await knex.raw(
+        `
+        SELECT
+            CASE count(*) WHEN 0 THEN (SELECT pg_try_advisory_lock_with_timeout(?, ?, ?))
+                        ELSE FALSE
+            END as pg_try_advisory_lock
+        FROM
+            pg_locks
+        WHERE
+            pid = (
+                SELECT
+                    pg_backend_pid()
+                )
+            AND locktype = 'advisory'
+            AND classid = ? AND objid = ?;
+      `,
+        [classid, objid, lockTimeout, classid, objid]
+      );
+
+      if (rows[0].pg_try_advisory_lock == true) return true;
+    } else {
+      const { rows } = await knex.raw(
+        `
         SELECT
             CASE count(*) WHEN 0 THEN (SELECT pg_try_advisory_lock(?, ?))
                         ELSE FALSE
@@ -27,9 +49,10 @@ async function acquireLock(
             AND locktype = 'advisory'
             AND classid = ? AND objid = ?;
       `,
-      [classid, objid, classid, objid]
-    );
-    if (rows[0].pg_try_advisory_lock == true) return true;
+        [classid, objid, classid, objid]
+      );
+      if (rows[0].pg_try_advisory_lock == true) return true;
+    }
 
     await sleep(100);
   }
