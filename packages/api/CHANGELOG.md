@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.105.2](https://github.com/SocialGouv/emjpm/compare/v25.105.1...v25.105.2) (2021-03-23)
+
+
+### Bug Fixes
+
+* **finess:** upgrade dataset url ([92f8f16](https://github.com/SocialGouv/emjpm/commit/92f8f16a241eb92529db8faa6aff32f9ab4a5955))
+* **mutext-lock:** user ocmi import ([7ff154e](https://github.com/SocialGouv/emjpm/commit/7ff154e656f37dc9b2ebe9ab5c754543ae34e3a1))
+
+
+
+
+
 ## [25.105.1](https://github.com/SocialGouv/emjpm/compare/v25.105.0...v25.105.1) (2021-03-22)
 
 

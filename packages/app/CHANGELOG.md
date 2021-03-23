@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.105.2](https://github.com/SocialGouv/emjpm/compare/v25.105.1...v25.105.2) (2021-03-23)
+
+
+### Bug Fixes
+
+* **finess:** ui processus state ([19196ae](https://github.com/SocialGouv/emjpm/commit/19196ae6d965e59c82c88b8cea5c66240164f1ca))
+* **finess:** upgrade dataset url ([92f8f16](https://github.com/SocialGouv/emjpm/commit/92f8f16a241eb92529db8faa6aff32f9ab4a5955))
+
+
+
+
+
 ## [25.105.1](https://github.com/SocialGouv/emjpm/compare/v25.105.0...v25.105.1) (2021-03-22)
 
 **Note:** Version bump only for package @emjpm/app
