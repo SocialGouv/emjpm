@@ -12,10 +12,6 @@ const knex = require("~/db/knex");
 
 const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 module.exports = async (req, res) => {
   const { userId } = req.user;
 
@@ -23,7 +19,6 @@ module.exports = async (req, res) => {
 
   const { id: mandataireId, lb_user_id: lbUserId } = mandataire;
 
-  await sleep(2000);
   const mutexLockKey = `import-ocmi-${mandataireId}`;
   const lockAcquired = await acquireLock(mutexLockKey);
   if (!lockAcquired) {
