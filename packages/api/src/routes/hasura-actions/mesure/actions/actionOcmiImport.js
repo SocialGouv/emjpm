@@ -10,12 +10,25 @@ const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 const knex = require("~/db/knex");
 
+const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 module.exports = async (req, res) => {
   const { userId } = req.user;
 
   const mandataire = await Mandataire.query().findOne({ user_id: userId });
 
   const { id: mandataireId, lb_user_id: lbUserId } = mandataire;
+
+  await sleep(2000);
+  const mutexLockKey = `import-ocmi-${mandataireId}`;
+  const lockAcquired = await acquireLock(mutexLockKey);
+  if (!lockAcquired) {
+    throw new Error("cannot acquire lock for " + mutexLockKey);
+  }
 
   const { siret } = await LbUser.query().findById(lbUserId);
 
@@ -62,6 +75,8 @@ module.exports = async (req, res) => {
       message: error.message,
     });
   }
+
+  await releaseLock(mutexLockKey);
 
   // success
   return res.json({
