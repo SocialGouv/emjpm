@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.106.0](https://github.com/SocialGouv/emjpm/compare/v25.105.3...v25.106.0) (2021-03-23)
+
+
+### Bug Fixes
+
+* **deadlock:**  pg_try_advisory_lock_with_timeout ([94be5ea](https://github.com/SocialGouv/emjpm/commit/94be5eac51f42b9e2027f628896f3c38bba37ef1))
+
+
+### Features
+
+* **finess:** add category 460 ([4ea3b44](https://github.com/SocialGouv/emjpm/commit/4ea3b4425687b642888282c675c8107e38010d7b))
+
+
+
+
+
 ## [25.105.3](https://github.com/SocialGouv/emjpm/compare/v25.105.2...v25.105.3) (2021-03-23)
 
 **Note:** Version bump only for package @emjpm/api
