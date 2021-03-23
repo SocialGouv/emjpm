@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.106.1](https://github.com/SocialGouv/emjpm/compare/v25.106.0...v25.106.1) (2021-03-23)
+
+
+### Bug Fixes
+
+* **ocmi-import:** process start error ([c3b2471](https://github.com/SocialGouv/emjpm/commit/c3b2471e6aaa24d3cb9373dd813ccd267c3bbff3))
+
+
+
+
+
 # [25.106.0](https://github.com/SocialGouv/emjpm/compare/v25.105.3...v25.106.0) (2021-03-23)
 
 
