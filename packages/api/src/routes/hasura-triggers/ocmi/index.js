@@ -84,19 +84,23 @@ async function startImportFromAzure() {
   }
 
   const container = getBlobContainer("emjpm-echange");
-  const [blob = {}] = await listBlobsOrderByLastModifiedDesc(container);
+  const [blob] = await listBlobsOrderByLastModifiedDesc(container);
 
-  const { name, properties = {} } = blob;
-
-  const { contentLength, createdOn, lastModified, contentType } = properties;
-
-  console.log("G");
-  if (await hasBeenProcessed(blob)) {
-    logger.info(`[OCMI] ${name} has been already processed`);
-    console.log("H");
-    return {
-      state: "has_been_already_processed",
-    };
+  const result = { state: "start" };
+  if (blob) {
+    const { name, properties } = blob;
+    const { contentLength, createdOn, lastModified, contentType } = properties;
+    if (await hasBeenProcessed(blob)) {
+      logger.info(`[OCMI] ${name} has been already processed`);
+      return {
+        state: "has_been_already_processed",
+      };
+    }
+    result.contentLength = contentLength;
+    result.contentType = contentType;
+    result.createdOn = createdOn;
+    result.lastModified = lastModified;
+    result.name = name;
   }
   console.log("I");
 
@@ -105,14 +109,7 @@ async function startImportFromAzure() {
   importFromAzure(processusId, container, blob);
   console.log("Z");
 
-  return {
-    contentLength,
-    contentType,
-    createdOn,
-    lastModified,
-    name,
-    state: "start",
-  };
+  return result;
 }
 
 async function importFromAzure(processusId, container, blob) {
