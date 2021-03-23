@@ -54,7 +54,6 @@ router.post("/sync-file", async (req, res) => {
     if (ocmiSyncFileLocal) {
       result = await startImportFromLocal();
     } else {
-      console.log("A");
       result = await startImportFromAzure();
     }
   } catch (e) {
@@ -77,20 +76,16 @@ async function startImportFromLocal() {
 }
 
 async function startImportFromAzure() {
-  console.log("B");
   if (!azureAccountName || !azureAccountKey) {
-    console.log("C");
     logger.error(`[OCMI] AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined`);
     return {
       state: "AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined",
     };
   }
 
-  console.log("D");
   const container = getBlobContainer("emjpm-echange");
-  console.log("E");
   const [blob] = await listBlobsOrderByLastModifiedDesc(container);
-  console.log("F");
+  console.log("F", blob);
   const {
     name,
     properties: { contentLength, createdOn, lastModified, contentType },
