@@ -54,6 +54,7 @@ router.post("/sync-file", async (req, res) => {
     if (ocmiSyncFileLocal) {
       result = await startImportFromLocal();
     } else {
+      console.log("A");
       result = await startImportFromAzure();
     }
   } catch (e) {
@@ -76,29 +77,39 @@ async function startImportFromLocal() {
 }
 
 async function startImportFromAzure() {
+  console.log("B");
   if (!azureAccountName || !azureAccountKey) {
+    console.log("C");
     logger.error(`[OCMI] AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined`);
     return {
       state: "AZURE_ACCOUNT_NAME or AZURE_ACCOUNT_KEY not defined",
     };
   }
 
+  console.log("D");
   const container = getBlobContainer("emjpm-echange");
+  console.log("E");
   const [blob] = await listBlobsOrderByLastModifiedDesc(container);
+  console.log("F");
   const {
     name,
     properties: { contentLength, createdOn, lastModified, contentType },
   } = blob;
 
+  console.log("G");
   if (await hasBeenProcessed(blob)) {
     logger.info(`[OCMI] ${name} has been already processed`);
+    console.log("H");
     return {
       state: "has_been_already_processed",
     };
   }
+  console.log("I");
 
   const { processusId } = await processusStateStartImport();
+  console.log("K");
   importFromAzure(processusId, container, blob);
+  console.log("Z");
 
   return {
     contentLength,
@@ -111,13 +122,19 @@ async function startImportFromAzure() {
 }
 
 async function importFromAzure(processusId, container, blob) {
+  console.log("L");
   const tempDir = os.tmpdir();
   const zipFilePath = await azureBlobToFile(tempDir, container, blob);
+  console.log("M");
   const unzippedFile = await unzipFile(tempDir, zipFilePath);
+  console.log("N");
   if (!unzippedFile) {
+    console.log("O");
     return;
   }
+  console.log("P");
   await runImportJSON(processusId, unzippedFile);
+  console.log("Q");
 }
 
 async function importFromLocal(processusId) {
