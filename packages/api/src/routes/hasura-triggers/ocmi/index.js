@@ -97,7 +97,7 @@ async function startImportFromAzure() {
     };
   }
 
-  const processusId = await processusStateStartImport();
+  const { processusId } = await processusStateStartImport();
   importFromAzure(processusId, container, blob);
 
   return {
