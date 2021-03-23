@@ -84,8 +84,8 @@ async function startImportFromAzure() {
   }
 
   const container = getBlobContainer("emjpm-echange");
-  const [blob] = await listBlobsOrderByLastModifiedDesc(container);
-  console.log("F", container);
+  const [blob = {}] = await listBlobsOrderByLastModifiedDesc(container);
+
   const { name, properties = {} } = blob;
 
   const { contentLength, createdOn, lastModified, contentType } = properties;
