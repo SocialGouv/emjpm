@@ -83,20 +83,15 @@ async function startImportFromAzure() {
     };
   }
 
-  console.log("E");
   const container = getBlobContainer("emjpm-echange");
-  console.log("F");
   const [blob] = await listBlobsOrderByLastModifiedDesc(container);
 
   const result = { state: "start" };
-  console.log("G");
   if (blob) {
-    console.log("H");
     const { name, properties } = blob;
     const { contentLength, createdOn, lastModified, contentType } = properties;
     if (await hasBeenProcessed(blob)) {
       logger.info(`[OCMI] ${name} has been already processed`);
-      console.log("H");
       return {
         state: "has_been_already_processed",
       };
@@ -107,30 +102,21 @@ async function startImportFromAzure() {
     result.lastModified = lastModified;
     result.name = name;
   }
-  console.log("I");
 
   const { processusId } = await processusStateStartImport();
-  console.log("K");
   importFromAzure(processusId, container, blob);
-  console.log("Z");
 
   return result;
 }
 
 async function importFromAzure(processusId, container, blob) {
-  console.log("L");
   const tempDir = os.tmpdir();
   const zipFilePath = await azureBlobToFile(tempDir, container, blob);
-  console.log("M");
   const unzippedFile = await unzipFile(tempDir, zipFilePath);
-  console.log("N");
   if (!unzippedFile) {
-    console.log("O");
     return;
   }
-  console.log("P");
   await runImportJSON(processusId, unzippedFile);
-  console.log("Q");
 }
 
 async function importFromLocal(processusId) {
@@ -203,11 +189,15 @@ async function runImportJSON(processusId, file) {
   await endProcessus({ id: processusId, success });
 }
 async function importJSON(file) {
+  console.log("A");
   const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
+  console.log("B");
 
   let index = 0;
   const jsonStream = StreamArray.withParser();
+  console.log("C");
   fs.createReadStream(file).pipe(jsonStream.input);
+  console.log("D");
 
   const mandataireSIRETList = new Set();
   jsonStream.on("data", async ({ value: mesure }) => {
@@ -218,10 +208,12 @@ async function importJSON(file) {
     index++;
     await fs.promises.appendFile(jsonlFile, JSON.stringify(mesure) + "\n");
   });
+  console.log("E");
   await new Promise((resolve, reject) => {
     jsonStream.on("end", () => resolve()).on("error", () => reject());
   });
 
+  console.log("F");
   index = 0;
   const size = mandataireSIRETList.size;
   for (const [siret] of mandataireSIRETList.entries()) {
@@ -251,6 +243,8 @@ async function importJSON(file) {
     index++;
     logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
   }
+
+  console.log("G");
 }
 
 async function createOrUpdateOcmiMandataire(ocmiMandataire) {
@@ -267,17 +261,14 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
 }
 
 async function hasBeenProcessed({ properties: { createdOn } }) {
-  console.log("hasBeenProcessed 1");
   const processusState = await ProcessusStates.query()
     .findOne({
       type: "ocmi_sync_file",
     })
     .orderBy("end_date", "desc");
-  console.log("hasBeenProcessed 2", processusState);
   if (!processusState) {
     return false;
   }
-  console.log("hasBeenProcessed 3");
   return processusState.start_date.getTime() > createdOn.getTime();
 }
 
