@@ -189,15 +189,11 @@ async function runImportJSON(processusId, file) {
   await endProcessus({ id: processusId, success });
 }
 async function importJSON(file) {
-  console.log("A");
   const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
-  console.log("B");
 
   let index = 0;
   const jsonStream = StreamArray.withParser();
-  console.log("C");
   fs.createReadStream(file).pipe(jsonStream.input);
-  console.log("D");
 
   const mandataireSIRETList = new Set();
   jsonStream.on("data", async ({ value: mesure }) => {
@@ -208,12 +204,10 @@ async function importJSON(file) {
     index++;
     await fs.promises.appendFile(jsonlFile, JSON.stringify(mesure) + "\n");
   });
-  console.log("E");
   await new Promise((resolve, reject) => {
     jsonStream.on("end", () => resolve()).on("error", () => reject());
   });
 
-  console.log("F");
   index = 0;
   const size = mandataireSIRETList.size;
   for (const [siret] of mandataireSIRETList.entries()) {
@@ -243,8 +237,6 @@ async function importJSON(file) {
     index++;
     logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
   }
-
-  console.log("G");
 }
 
 async function createOrUpdateOcmiMandataire(ocmiMandataire) {
