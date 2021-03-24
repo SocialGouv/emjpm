@@ -268,9 +268,11 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
 
 async function hasBeenProcessed({ properties: { createdOn } }) {
   console.log("hasBeenProcessed 1");
-  const processusState = await ProcessusStates.query().findById(
-    "ocmi_sync_file"
-  );
+  const processusState = await ProcessusStates.query()
+    .findOne({
+      type: "ocmi_sync_file",
+    })
+    .orderBy("end_date", "desc");
   console.log("hasBeenProcessed 2", processusState);
   if (!processusState) {
     return false;
