@@ -83,11 +83,15 @@ async function startImportFromAzure() {
     };
   }
 
+  console.log("E");
   const container = getBlobContainer("emjpm-echange");
+  console.log("F");
   const [blob] = await listBlobsOrderByLastModifiedDesc(container);
 
   const result = { state: "start" };
+  console.log("G");
   if (blob) {
+    console.log("H");
     const { name, properties } = blob;
     const { contentLength, createdOn, lastModified, contentType } = properties;
     if (await hasBeenProcessed(blob)) {
