@@ -6,39 +6,39 @@ const logger = require("~/utils/logger");
 const { findDepartementByCodeOrId } = require("@emjpm/biz");
 const { startProcessus, endProcessus } = require("~/processus");
 
-const FILTERS = [
-  "355",
-  "292",
-  "106",
-  "362",
-  "412",
-  "444",
-  "697",
-  "252",
-  "253",
-  "255",
-  "370",
-  "382",
-  "395",
-  "437",
-  "448",
-  "246",
-  "379",
-  "445",
-  "446",
-  "202",
-  "500",
-  "501",
-  "502",
-  "381",
-  "214",
-  "219",
-  "380",
-  "165",
-  "101",
-  "340",
-  "460",
-];
+// const FILTERS = [
+//   "355",
+//   "292",
+//   "106",
+//   "362",
+//   "412",
+//   "444",
+//   "697",
+//   "252",
+//   "253",
+//   "255",
+//   "370",
+//   "382",
+//   "395",
+//   "437",
+//   "448",
+//   "246",
+//   "379",
+//   "445",
+//   "446",
+//   "202",
+//   "500",
+//   "501",
+//   "502",
+//   "381",
+//   "214",
+//   "219",
+//   "380",
+//   "165",
+//   "101",
+//   "340",
+//   "460",
+// ];
 
 const actionsFinessImporter = {
   importFinessFile,
@@ -199,9 +199,9 @@ async function importStructureEtablissement(properties, departements) {
     voie,
   } = mapFinessFromColumns(properties);
 
-  if (!FILTERS.includes(categetab)) {
-    return;
-  }
+  // if (!FILTERS.includes(categetab)) {
+  //   return;
+  // }
 
   const { id: departementCode } = findDepartementByCodeOrId(departements, {
     code: departement,
