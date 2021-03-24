@@ -10,7 +10,7 @@ import { Button, Card } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
-import { ETABLISSEMENTS } from "./queries";
+import { SEARCH_ETABLISSEMENTS, ALL_ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const resultPerPage = 10;
@@ -66,29 +66,34 @@ export function AdminEtablissements() {
     }
   );
 
-  const { data, error, loading } = useQuery(ETABLISSEMENTS, {
-    variables: {
-      departementCode: selectedDepartementCode ? selectedDepartementCode : null,
-      limit: resultPerPage,
-      offset: currentOffset,
-      search:
-        debouncedSearchText && debouncedSearchText !== ""
-          ? `%${debouncedSearchText}%`
-          : null,
-    },
-  });
+  const searching = debouncedSearchText && debouncedSearchText !== "";
+  const query = searching ? SEARCH_ETABLISSEMENTS : ALL_ETABLISSEMENTS;
+  const variables = {
+    departementCode: selectedDepartementCode ? selectedDepartementCode : null,
+    limit: resultPerPage,
+    offset: currentOffset,
+    ...(searching
+      ? {
+          search: `%${debouncedSearchText}%`,
+        }
+      : {}),
+  };
+
+  const { data, error, loading } = useQuery(query, { variables });
 
   if (!useQueryReady(loading, error)) {
     return null;
   }
 
+  const dataKey = searching ? "search_etablissements" : "etablissements";
+  const dataAggregateKey = dataKey + "_aggregate";
   return (
     <PaginatedList
-      entries={data ? data.etablissements : []}
+      entries={data ? data[dataKey] : []}
       RowItem={RowItem}
       count={
-        data && data.etablissements_aggregate
-          ? data.etablissements_aggregate.aggregate.count
+        data && data[dataAggregateKey]
+          ? data[dataAggregateKey].aggregate.count
           : 0
       }
       resultPerPage={resultPerPage}

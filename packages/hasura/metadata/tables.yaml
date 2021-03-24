@@ -3593,6 +3593,7 @@
       - coordyet
       - sourcecoordet
       filter: {}
+      allow_aggregations: true
   - role: individuel
     permission:
       columns:
@@ -3631,6 +3632,7 @@
       - typvoie
       - voie
       filter: {}
+      allow_aggregations: true
   - role: prepose
     permission:
       columns:
@@ -3669,6 +3671,7 @@
       - typvoie
       - voie
       filter: {}
+      allow_aggregations: true
   - role: service
     permission:
       columns:
@@ -3680,6 +3683,7 @@
       - rslongue
       - commune
       filter: {}
+      allow_aggregations: true
   - role: ti
     permission:
       columns:
@@ -3691,6 +3695,7 @@
       - rslongue
       - commune
       filter: {}
+      allow_aggregations: true
 - table:
     schema: public
     name: geolocalisation_code_postal
