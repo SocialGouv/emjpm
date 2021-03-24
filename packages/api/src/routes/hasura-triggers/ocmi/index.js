@@ -96,6 +96,7 @@ async function startImportFromAzure() {
     const { contentLength, createdOn, lastModified, contentType } = properties;
     if (await hasBeenProcessed(blob)) {
       logger.info(`[OCMI] ${name} has been already processed`);
+      console.log("H");
       return {
         state: "has_been_already_processed",
       };
@@ -266,12 +267,15 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
 }
 
 async function hasBeenProcessed({ properties: { createdOn } }) {
+  console.log("hasBeenProcessed 1");
   const processusState = await ProcessusStates.query().findById(
     "ocmi_sync_file"
   );
+  console.log("hasBeenProcessed 2", processusState);
   if (!processusState) {
     return false;
   }
+  console.log("hasBeenProcessed 3");
   return processusState.start_date.getTime() > createdOn.getTime();
 }
 
