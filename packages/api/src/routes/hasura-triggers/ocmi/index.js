@@ -8,12 +8,14 @@ const StreamArray = require("stream-json/streamers/StreamArray");
 const lineReader = require("line-reader");
 
 const config = require("~/config");
-const { OcmiMandataire, ProcessusStates } = require("~/models");
+const { OcmiMandataire, ProcessusStates, Mandataire } = require("~/models");
 const {
   processusIsRunning,
   startProcessus,
   endProcessus,
 } = require("~/processus");
+
+const updateMandataireMesuresFromOCMI = require("~/services/updateMandataireMesuresFromOCMI");
 
 const router = express.Router();
 
@@ -234,6 +236,7 @@ async function importJSON(file) {
     });
     const ocmiMandataire = { ...mandataire, mesures, siret };
     await createOrUpdateOcmiMandataire(ocmiMandataire);
+    await updateOcmiMandataireMesures(siret);
     index++;
     logger.info(`[OCMI] processed ocmi mandataire ${index} / ${size}`);
   }
@@ -249,6 +252,18 @@ async function createOrUpdateOcmiMandataire(ocmiMandataire) {
     await OcmiMandataire.query().insert(ocmiMandataire);
   } else {
     await OcmiMandataire.query().update(ocmiMandataire).where({ siret });
+  }
+}
+
+async function updateOcmiMandataireMesures(siret) {
+  const mandataire = await Mandataire.query().findOne({ siret });
+  if (mandataire) {
+    const { user_id: userId } = mandataire;
+    try {
+      await updateMandataireMesuresFromOCMI({ userId });
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
 
