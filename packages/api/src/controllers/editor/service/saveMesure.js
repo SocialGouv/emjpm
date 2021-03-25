@@ -151,7 +151,19 @@ async function persistMesure(
 
   mesure.etats = [];
   if (datas.etats) {
+    const etatsByDateChangement = {};
     for (const etat of datas.etats) {
+      const date = new Date(etat.date_changement_etat);
+      const noTimeDate = new Date(
+        date.getFullYear(),
+        date.getMonth(),
+        date.getDate()
+      );
+      etatsByDateChangement[noTimeDate.toISOString()] = etat;
+    }
+    const etats = Object.values(etatsByDateChangement);
+
+    for (const etat of etats) {
       const mesureEtat = await MesureEtat.query().insert({
         champ_mesure: etat.champ_mesure,
         code_postal: etat.code_postal,
