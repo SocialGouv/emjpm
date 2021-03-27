@@ -16,6 +16,7 @@ export { default as Tabs } from "./Tabs";
 export { default as Logo } from "./Logo";
 export { default as Field } from "./Field";
 export { default as FilePicker } from "./FilePicker";
+export { default as Switch } from "./Switch";
 export { default as Textarea } from "./Textarea";
 
 export { default as Indicator } from "./Indicator";
