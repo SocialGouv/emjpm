@@ -1,72 +1,42 @@
-import { useMutation } from "@apollo/client";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import { useHistory } from "react-router-dom";
+import { useQuery } from "@apollo/client";
 import useQueryReady from "~/hooks/useQueryReady";
 
-import { Box, Button, Flex } from "rebass";
+import { Warning } from "@styled-icons/entypo/Warning";
+import { CheckCircleOutline } from "@styled-icons/material/CheckCircleOutline";
+import styled from "styled-components";
 
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
-import { Text } from "~/components";
+import { SYNC_OCMI_ENABLED } from "./queries";
 
-import { IMPORT_OCMI_MESURES } from "./mutations";
+import useUser from "~/hooks/useUser";
+import MandataireOcmiMesureImportSwitcher from "./MandataireOcmiMesureImportSwitcher";
+
+const StyledCheckCircleOutline = styled(CheckCircleOutline)`
+  margin-right: 10px;
+  color: green;
+`;
+const StyledWarning = styled(Warning)`
+  margin-right: 10px;
+  color: orange;
+`;
 
 function MandataireOcmiMesureImport() {
-  const history = useHistory();
-  const [importOcmiMesures, { error, loading }] = useMutation(
-    IMPORT_OCMI_MESURES,
-    {
-      onCompleted: async () => {
-        history.push(`/mandataires/mesures`);
-      },
-    }
-  );
+  const user = useUser();
+  const mandataireId = user.mandataire.id;
 
-  useQueryReady(loading, error);
-
-  const importMesure = async () => {
-    await importOcmiMesures({
-      awaitRefetchQueries: true,
-      refetchQueries: [
-        "CURRENT_USER_QUERY",
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
-          },
-        },
-      ],
-    });
-  };
-
+  const { data, error, loading } = useQuery(SYNC_OCMI_ENABLED, {
+    variables: {
+      mandataireId,
+    },
+  });
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+  const syncEnableOrigin = data.mandataires_by_pk.sync_ocmi_enable || null;
   return (
-    <Flex flexDirection="column">
-      <Box mb={2} p={1}>
-        <Text mb="1" lineHeight="2">
-          {`Pour importer vos mesures de votre compte OCMI dans votre compte eMJPM, sélectionnez le bouton ci-dessous.`}
-        </Text>
-        <Text mb="1" lineHeight="2">
-          {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI.`}
-        </Text>
-      </Box>
-      <Flex justifyContent="center">
-        <Button
-          onClick={importMesure}
-          variant="outline"
-          sx={{
-            ":hover": {
-              opacity: "0.7",
-            },
-          }}
-        >
-          Importer les mesures de mon compte OCMI dans eMJPM
-        </Button>
-      </Flex>
-    </Flex>
+    <MandataireOcmiMesureImportSwitcher
+      syncEnableOrigin={syncEnableOrigin}
+      mandataireId={mandataireId}
+    />
   );
 }
 

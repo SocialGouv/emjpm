@@ -4407,24 +4407,25 @@
   - role: individuel
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - telephone
       - adresse
-      - mesures_en_cours
-      - dispo_max
-      - user_id
-      - telephone_portable
+      - code_postal
+      - competences
       - created_at
+      - departement_code
+      - dispo_max
       - email_send
       - genre
-      - mesures_en_attente
-      - competences
-      - departement_code
-      - siret
+      - id
       - latitude
       - longitude
+      - mesures_en_attente
+      - mesures_en_cours
+      - siret
+      - sync_ocmi_enable
+      - telephone
+      - telephone_portable
+      - user_id
+      - ville
       filter:
         user_id:
           _eq: X-Hasura-User-Id
@@ -4481,6 +4482,7 @@
       columns:
       - adresse
       - code_postal
+      - competences
       - created_at
       - departement_code
       - dispo_max
@@ -4492,11 +4494,11 @@
       - mesures_en_attente
       - mesures_en_cours
       - siret
+      - sync_ocmi_enable
       - telephone
       - telephone_portable
       - user_id
       - ville
-      - competences
       filter:
         user_id:
           _eq: X-Hasura-User-Id

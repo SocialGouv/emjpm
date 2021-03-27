@@ -23,7 +23,9 @@ function Switch(props) {
           <Label>
             <RebassSwitch checked={isChecked} onClick={onChange} />
           </Label>
-          <Text lineHeight="20px">{label}</Text>
+          <Text ml={2} lineHeight="20px">
+            {label}
+          </Text>
         </Flex>
       </Box>
     </Box>
