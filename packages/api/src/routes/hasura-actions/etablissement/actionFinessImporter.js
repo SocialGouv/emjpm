@@ -5,6 +5,16 @@ const logger = require("~/utils/logger");
 
 const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
+const departementRemap = {
+  971: "9A",
+  972: "9B",
+  973: "9C",
+  974: "9D",
+};
+const getDepartementCode = (code) => {
+  return departementRemap[code] || code;
+};
+
 // const FILTERS = [
 //   "355",
 //   "292",
@@ -228,7 +238,7 @@ async function importStructureEtablissement(properties) {
     compvoie,
     dateautor,
     dateouv,
-    departement_code: departement,
+    departement_code: getDepartementCode(departement),
     libcategagretab,
     libcategetab,
     libdepartement,
@@ -249,8 +259,13 @@ async function importStructureEtablissement(properties) {
     voie,
   };
 
-  await Etablissements.query()
-    .insert(etablissement)
-    .onConflict("nofinesset")
-    .merge();
+  try {
+    await Etablissements.query()
+      .insert(etablissement)
+      .onConflict("nofinesset")
+      .merge();
+  } catch (e) {
+    console.log(etablissement);
+    console.error(e);
+  }
 }
