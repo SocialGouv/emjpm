@@ -10,6 +10,7 @@ const departementRemap = {
   972: "9B",
   973: "9C",
   974: "9D",
+  976: "9F",
 };
 const getDepartementCode = (code) => {
   return departementRemap[code] || code;
