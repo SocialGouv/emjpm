@@ -6,11 +6,11 @@ const logger = require("~/utils/logger");
 const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
 const departementRemap = {
-  971: "9A",
-  972: "9B",
-  973: "9C",
-  974: "9D",
-  976: "9F",
+  "9A": "971",
+  "9B": "972",
+  "9C": "973",
+  "9D": "974",
+  "9F": "976",
 };
 const getDepartementCode = (code) => {
   return departementRemap[code] || code;
