@@ -1,10 +1,9 @@
 const fetch = require("node-fetch");
 const readline = require("readline");
-const { Etablissements } = require("~/models");
-const { Departement } = require("~/models");
+const { Etablissements, RoutineLog } = require("~/models");
 const logger = require("~/utils/logger");
-const { findDepartementByCodeOrId } = require("@emjpm/biz");
-const { startProcessus, endProcessus } = require("~/processus");
+
+const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
 // const FILTERS = [
 //   "355",
@@ -47,14 +46,22 @@ const actionsFinessImporter = {
 module.exports = actionsFinessImporter;
 
 async function importFinessFile(url) {
-  const { processusId, alreadyInProgress } = await startProcessus({
-    expirationTimeInHour: 2,
-    type: "import_finess",
+  const lockKey = "import_finess";
+  const lockAcquired = await acquireLock(lockKey, {
+    timeout: 3600,
   });
-  if (alreadyInProgress) {
+
+  if (!lockAcquired) {
     logger.info(`FINESS import is already in progress!`);
     return;
   }
+
+  const { id: logId } = await RoutineLog.query()
+    .insert({
+      start_date: new Date(),
+      type: "import_finess",
+    })
+    .returning("id");
 
   let success;
   try {
@@ -65,17 +72,19 @@ async function importFinessFile(url) {
     success = false;
   }
 
-  await endProcessus({
-    id: processusId,
-    success,
-  });
+  await RoutineLog.query()
+    .findById(logId)
+    .update({
+      end_date: new Date(),
+      result: success ? "success" : "error",
+    });
+
+  await releaseLock(lockKey);
 
   logger.info(`FINESS import is finished!`);
 }
 
 async function runImport(url) {
-  const departements = await Departement.query();
-
   const result = await fetch(url);
 
   const inputStream = result.body;
@@ -88,19 +97,19 @@ async function runImport(url) {
 
   let counter = 0;
   for await (const line of rl) {
-    if (counter % 100 == 0) {
+    if (counter % 1000 == 0) {
       logger.info(`FINESS import in progress ${counter} lines processed`);
     }
 
-    await importFinessFileLine(line, departements);
+    await importFinessFileLine(line);
     counter++;
   }
 }
 
-async function importFinessFileLine(line, departements) {
+async function importFinessFileLine(line) {
   const [lineType, ...properties] = line.split(";");
   if (lineType === "structureet") {
-    await importStructureEtablissement(properties, departements);
+    await importStructureEtablissement(properties);
   } else {
     await importGeolocalisation(properties);
   }
@@ -165,7 +174,7 @@ function mapFinessFromColumns(properties) {
   return m;
 }
 
-async function importStructureEtablissement(properties, departements) {
+async function importStructureEtablissement(properties) {
   const {
     categagretab,
     categetab,
@@ -199,13 +208,13 @@ async function importStructureEtablissement(properties, departements) {
     voie,
   } = mapFinessFromColumns(properties);
 
+  if (!departement) {
+    return;
+  }
+
   // if (!FILTERS.includes(categetab)) {
   //   return;
   // }
-
-  const { id: departementCode } = findDepartementByCodeOrId(departements, {
-    code: departement,
-  });
 
   const etablissement = {
     categagretab,
@@ -219,7 +228,7 @@ async function importStructureEtablissement(properties, departements) {
     compvoie,
     dateautor,
     dateouv,
-    departement_code: departementCode,
+    departement_code: departement,
     libcategagretab,
     libcategetab,
     libdepartement,
@@ -240,14 +249,8 @@ async function importStructureEtablissement(properties, departements) {
     voie,
   };
 
-  const result = await Etablissements.query().findOne({ nofinesset });
-  if (!result) {
-    await Etablissements.query().insert(etablissement);
-  } else {
-    await Etablissements.query()
-      .update({
-        ...etablissement,
-      })
-      .where({ id: result.id });
-  }
+  await Etablissements.query()
+    .insert(etablissement)
+    .onConflict("nofinesset")
+    .merge();
 }

@@ -32,23 +32,27 @@ function MandataireOcmiMesureImportSwitcher({
   const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES);
 
   const importMesure = useCallback(async () => {
-    await importOcmiMesures({
-      awaitRefetchQueries: true,
-      refetchQueries: [
-        "CURRENT_USER_QUERY",
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
+    try {
+      await importOcmiMesures({
+        awaitRefetchQueries: true,
+        refetchQueries: [
+          "CURRENT_USER_QUERY",
+          {
+            query: MESURES_QUERY,
+            variables: {
+              antenne: null,
+              limit: 20,
+              natureMesure: null,
+              offset: 0,
+              searchText: null,
+              status: MESURE_PROTECTION_STATUS.en_cours,
+            },
           },
-        },
-      ],
-    });
+        ],
+      });
+    } catch (e) {
+      console.log("importOcmiMesures error", e);
+    }
   }, [importOcmiMesures]);
 
   const [syncOCMIEnable] = useMutation(SYNC_OCMI_ENABLE, {

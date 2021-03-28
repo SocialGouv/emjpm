@@ -3,9 +3,9 @@ const { Model } = require("objection");
 
 Model.knex(knexConnection);
 
-class ProcessusStates extends Model {
+class RoutineLog extends Model {
   static get tableName() {
-    return "processus_states";
+    return "routine_log";
   }
 
   static get idColumn() {
@@ -16,12 +16,14 @@ class ProcessusStates extends Model {
     return {
       properties: {
         end_date: { type: "timestamptz" },
-        id: { type: "string" },
+        id: { type: "integer" },
+        result: { type: "string" },
         start_date: { type: "timestamptz" },
+        type: { type: "string" },
       },
       type: "object",
     };
   }
 }
 
-module.exports = ProcessusStates;
+module.exports = RoutineLog;

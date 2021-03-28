@@ -8,12 +8,9 @@ const StreamArray = require("stream-json/streamers/StreamArray");
 const lineReader = require("line-reader");
 
 const config = require("~/config");
-const { OcmiMandataire, ProcessusStates, Mandataire } = require("~/models");
-const {
-  processusIsRunning,
-  startProcessus,
-  endProcessus,
-} = require("~/processus");
+const { OcmiMandataire, RoutineLog, Mandataire } = require("~/models");
+
+const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
 
 const updateMandataireMesuresFromOCMI = require("~/services/updateMandataireMesuresFromOCMI");
 
@@ -35,6 +32,8 @@ const {
   azureAccountKey,
 } = config;
 
+const lockKey = "ocmi_sync_file";
+
 router.post("/sync-file", async (req, res) => {
   if (!ocmiSyncFileEnabled) {
     logger.info(`[OCMI] ocmi sync file is not enabled`);
@@ -43,7 +42,11 @@ router.post("/sync-file", async (req, res) => {
     });
   }
 
-  if (await processusIsRunning("ocmi_sync_file")) {
+  const lockAcquired = await acquireLock(lockKey, {
+    timeout: 3600,
+  });
+
+  if (!lockAcquired) {
     logger.info(`[OCMI] sync file is already running.`);
     return res.json({
       state: "is_already_running",
@@ -61,6 +64,7 @@ router.post("/sync-file", async (req, res) => {
   } catch (e) {
     err = e;
   }
+
   if (err) {
     return res.json({ error: err });
   }
@@ -70,8 +74,8 @@ router.post("/sync-file", async (req, res) => {
 module.exports = router;
 
 async function startImportFromLocal() {
-  const { processusId } = await processusStateStartImport();
-  importFromLocal(processusId);
+  const logId = await processusStateStartImport();
+  importFromLocal(logId);
   return {
     state: "start",
   };
@@ -105,23 +109,23 @@ async function startImportFromAzure() {
     result.name = name;
   }
 
-  const { processusId } = await processusStateStartImport();
-  importFromAzure(processusId, container, blob);
+  const logId = await processusStateStartImport();
+  importFromAzure(logId, container, blob);
 
   return result;
 }
 
-async function importFromAzure(processusId, container, blob) {
+async function importFromAzure(logId, container, blob) {
   const tempDir = os.tmpdir();
   const zipFilePath = await azureBlobToFile(tempDir, container, blob);
   const unzippedFile = await unzipFile(tempDir, zipFilePath);
   if (!unzippedFile) {
     return;
   }
-  await runImportJSON(processusId, unzippedFile);
+  await runImportJSON(logId, unzippedFile);
 }
 
-async function importFromLocal(processusId) {
+async function importFromLocal(logId) {
   const zipFilePath = path.join(
     ocmiSyncFileLocalDirPath,
     "ocmi-emjpmenq.json.zip"
@@ -130,7 +134,7 @@ async function importFromLocal(processusId) {
   if (!unzippedFile) {
     return;
   }
-  await runImportJSON(processusId, unzippedFile);
+  await runImportJSON(logId, unzippedFile);
 }
 
 async function azureBlobToFile(
@@ -178,7 +182,7 @@ async function unzipFile(tempDir, zipFilePath) {
   return unzippedFile;
 }
 
-async function runImportJSON(processusId, file) {
+async function runImportJSON(logId, file) {
   let success;
   try {
     await importJSON(file);
@@ -188,7 +192,14 @@ async function runImportJSON(processusId, file) {
     success = false;
     logger.error(e);
   }
-  await endProcessus({ id: processusId, success });
+
+  await RoutineLog.query()
+    .findById(logId)
+    .update({
+      end_date: new Date(),
+      result: success ? "success" : "error",
+    });
+  await releaseLock(lockKey);
 }
 async function importJSON(file) {
   const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
@@ -268,21 +279,23 @@ async function updateOcmiMandataireMesures(siret) {
 }
 
 async function hasBeenProcessed({ properties: { createdOn } }) {
-  const processusState = await ProcessusStates.query()
+  const log = await RoutineLog.query()
     .findOne({
       type: "ocmi_sync_file",
     })
     .orderBy("end_date", "desc");
-  if (!processusState) {
+  if (!log) {
     return false;
   }
-  return processusState.start_date.getTime() > createdOn.getTime();
+  return log.start_date.getTime() > createdOn.getTime();
 }
 
 async function processusStateStartImport() {
-  return startProcessus({
-    checkIsRunning: false,
-    expirationTimeInHour: 2,
-    type: "ocmi_sync_file",
-  });
+  const { id: logId } = await RoutineLog.query()
+    .insert({
+      start_date: new Date(),
+      type: "ocmi_sync_file",
+    })
+    .returning("id");
+  return logId;
 }

@@ -5740,6 +5740,9 @@
       value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
+    name: mutex_lock
+- table:
+    schema: public
     name: nature_mesure
   is_enum: true
 - table:
@@ -5806,9 +5809,6 @@
       columns:
       - value
       filter: {}
-- table:
-    schema: public
-    name: processus_states
 - table:
     schema: public
     name: regions
@@ -5909,6 +5909,9 @@
       - id
       - name
       filter: {}
+- table:
+    schema: public
+    name: routine_log
 - table:
     schema: public
     name: service_antenne

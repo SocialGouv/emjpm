@@ -9,17 +9,22 @@ import { Button, Heading, Input, Text } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { IMPORT_FINESS } from "./mutations";
-import { RUNNING_PROCESSUS_STATE } from "./queries";
+import { ROUTINE_IMPORT_FINESS } from "./queries";
+
+const timeout = 3600;
 
 export function EtablissementImport() {
-  const now = useMemo(() => new Date(), []);
-  const { data, loading, error } = useQuery(RUNNING_PROCESSUS_STATE, {
+  const expired = useMemo(() => {
+    const expiration = new Date();
+    expiration.setSeconds(expiration.getSeconds() - timeout);
+    return expiration;
+  }, []);
+  const { data, loading, error } = useQuery(ROUTINE_IMPORT_FINESS, {
     fetchPolicy: "network-only",
     variables: {
-      now,
+      expired,
     },
   });
-
   const [importFiness] = useMutation(IMPORT_FINESS);
 
   const formik = useFormik({
@@ -42,8 +47,8 @@ export function EtablissementImport() {
     return null;
   }
 
-  const processusState = data.processus_states[0];
-  if (processusState) {
+  const [running] = data.running;
+  if (running) {
     return (
       <Card mb="5">
         <Flex flexDirection="column">
@@ -53,7 +58,7 @@ export function EtablissementImport() {
             </Heading>
             <Text mb="1" lineHeight="2">
               {`Un import des données de FINESS est en cours. Date de début: ${format(
-                new Date(processusState.start_date),
+                new Date(running.start_date),
                 "dd/MM/yyyy HH:mm"
               )}`}
             </Text>
@@ -63,6 +68,7 @@ export function EtablissementImport() {
     );
   }
 
+  const [last] = data.last;
   return (
     <Card mb="5">
       <Flex flexDirection="column">
@@ -72,8 +78,8 @@ export function EtablissementImport() {
           </Heading>
           <Text mb="1" lineHeight="2">
             {`Dernière mise à jour de la base FINESS: ${
-              processusState?.end_date
-                ? format(new Date(processusState.end_date), "dd/MM/yyyy HH:mm")
+              last?.end_date
+                ? format(new Date(last.end_date), "dd/MM/yyyy HH:mm")
                 : ""
             }`}
           </Text>

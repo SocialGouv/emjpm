@@ -1,0 +1,1 @@
+DROP FUNCTION pg_try_advisory_lock_with_timeout;
