@@ -134,8 +134,8 @@ spec:
           shareProcessNamespace: false
           terminationGracePeriodSeconds: 30
           volumes:
-          - azureFile:
-              shareName: emjpm-backup-restore
+          - persistentVolumeClaim:
+              claimName: emjpm-backup-storage
             name: volume
           - configMap:
               defaultMode: 488
@@ -213,9 +213,8 @@ spec:
           shareProcessNamespace: false
           terminationGracePeriodSeconds: 30
           volumes:
-          - azureFile:
-              secretName: azure-emjpmprod-volume
-              shareName: emjpm-backup-restore
+          - persistentVolumeClaim:
+              claimName: emjpm-backup-storage
             name: volume
           - configMap:
               defaultMode: 488

@@ -1,0 +1,42 @@
+# k8s 1.19 upgrade see
+# https://github.com/kubernetes/kubernetes/issues/99061
+# https://github.com/Azure/AKS/issues/2108
+# and the solution here
+# https://github.com/kubernetes/examples/tree/master/staging/volumes/azure_file#mount-volume-via-pv-and-pvc
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: ci-emjpm
+  name: emjpm-backup-storage
+  labels:
+    usage: emjpm-backup-storage
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  azureFile:
+    secretName: azure-emjpmdev-volume
+    secretNamespace: ci-emjpm
+    shareName: emjpm-backup-restore
+    readOnly: false
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: emjpm-backup-storage
+  # Set this annotation to NOT let Kubernetes automatically create
+  # a persistent volume for this volume claim.
+  annotations:
+    volume.beta.kubernetes.io/storage-class: ""
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+  selector:
+    # To make sure we match the claim with the exact volume, match the label
+    matchLabels:
+      usage: emjpm-backup-storage
