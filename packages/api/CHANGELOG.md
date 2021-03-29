@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.107.0](https://github.com/SocialGouv/emjpm/compare/v25.106.2...v25.107.0) (2021-03-29)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#2519](https://github.com/SocialGouv/emjpm/issues/2519)) ([945d28b](https://github.com/SocialGouv/emjpm/commit/945d28be9c004614efb3bc8fef86e6e50f6ed481))
+* **finess:** dom-tom codes ([5abedbe](https://github.com/SocialGouv/emjpm/commit/5abedbe75b0a0b7a75a74589df07bb98aedb9b5e))
+* **finess:** dom-tom codes ([95b3ea6](https://github.com/SocialGouv/emjpm/commit/95b3ea611e43f1562e5cd6dff835d186b597e7e6))
+* **finess:** dom-tom codes ([79d6165](https://github.com/SocialGouv/emjpm/commit/79d61653f1de862477794b3cb3096ffbed61dd50))
+* **finess:** dom-tom codes ([fa529ac](https://github.com/SocialGouv/emjpm/commit/fa529acd7a447a226ba5824189edfb6f7a73e9c7))
+* **ocmi-import:** duplicate mesure state date ([dc014cd](https://github.com/SocialGouv/emjpm/commit/dc014cd06780f2ce8deed69c34b275d0f8e9292f))
+
+
+### Features
+
+* **config-table:** implement on import finess ([1dd3939](https://github.com/SocialGouv/emjpm/commit/1dd3939bd3168f99f4d6299879618806b8d8b632))
+* **full-finess:** disable cat filter on import ([e059d11](https://github.com/SocialGouv/emjpm/commit/e059d11fb010fada05cae701ebe2dca011d3c30c))
+* **mutex-lock:** dead lock handler ([b74fae0](https://github.com/SocialGouv/emjpm/commit/b74fae0894ad3fe2e61d4c87648cfcf5e12ad74d))
+* **ocmi-sync:** routine ([b7a5cef](https://github.com/SocialGouv/emjpm/commit/b7a5cefe206ed91898fea0901d59cf4563bea793))
+
+
+
+
+
 ## [25.106.2](https://github.com/SocialGouv/emjpm/compare/v25.106.1...v25.106.2) (2021-03-24)
 
 

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.107.0](https://github.com/SocialGouv/emjpm/compare/v25.106.2...v25.107.0) (2021-03-29)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies ([#2519](https://github.com/SocialGouv/emjpm/issues/2519)) ([945d28b](https://github.com/SocialGouv/emjpm/commit/945d28be9c004614efb3bc8fef86e6e50f6ed481))
+* **stats:** perms ([77dd560](https://github.com/SocialGouv/emjpm/commit/77dd560499c5ab74d9063635b1d1687d4d42a934))
+* **typo:** réouvrir -> rouvrir ([6d81429](https://github.com/SocialGouv/emjpm/commit/6d814298b2c9b1445fc8b247428f4f69807e737f))
+
+
+### Features
+
+* **admin-filter-bar:** refacto ([7af38d1](https://github.com/SocialGouv/emjpm/commit/7af38d1a1d5e8bb6a2b82332fdbb8fa893c31de7))
+* **button:** handle better disabled ux ([25be635](https://github.com/SocialGouv/emjpm/commit/25be63549276469c3575b3ccf7da54118a1b7735))
+* **config-table:** implement on import finess ([1dd3939](https://github.com/SocialGouv/emjpm/commit/1dd3939bd3168f99f4d6299879618806b8d8b632))
+* **fuzzy-search:** finess ([f45be08](https://github.com/SocialGouv/emjpm/commit/f45be08cf68f278167c19bcf5dba5757035886ab))
+* **mutex-lock:** dead lock handler ([b74fae0](https://github.com/SocialGouv/emjpm/commit/b74fae0894ad3fe2e61d4c87648cfcf5e12ad74d))
+* **ocmi-import:** improve presentation ([1c763fb](https://github.com/SocialGouv/emjpm/commit/1c763fbcd66c8375a9aec6d54d8c13286ebd15a6))
+* **ocmi-import:** manual trigger button ([b9a54e9](https://github.com/SocialGouv/emjpm/commit/b9a54e985c15c2e498e85248a37713c0d28ba0c7))
+* **ocmi-sync:** disable mesures modification ([16ea5ba](https://github.com/SocialGouv/emjpm/commit/16ea5ba48bdf205e69eda78565522304c8a96a67))
+* **ocmi-sync:** ui ([a57ac4c](https://github.com/SocialGouv/emjpm/commit/a57ac4ce84c07ff45dd93d6784f106a7fc7419ee))
+* **widget:** switch component ([8906b42](https://github.com/SocialGouv/emjpm/commit/8906b42dfce17334f81a67809ca3691d16144cd8))
+
+
+
+
+
 ## [25.106.2](https://github.com/SocialGouv/emjpm/compare/v25.106.1...v25.106.2) (2021-03-24)
 
 **Note:** Version bump only for package @emjpm/app
