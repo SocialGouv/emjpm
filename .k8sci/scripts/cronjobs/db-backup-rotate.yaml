@@ -135,6 +135,7 @@ spec:
           terminationGracePeriodSeconds: 30
           volumes:
           - azureFile:
+              secretNamespace: emjpm-secret
               secretName: azure-emjpmprod-volume
               shareName: emjpm-backup-restore
             name: volume
@@ -215,6 +216,7 @@ spec:
           terminationGracePeriodSeconds: 30
           volumes:
           - azureFile:
+              secretNamespace: emjpm-secret
               secretName: azure-emjpmprod-volume
               shareName: emjpm-backup-restore
             name: volume
