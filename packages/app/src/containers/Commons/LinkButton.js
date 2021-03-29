@@ -17,12 +17,12 @@ function LinkButtonStyle(isActive, props) {
     borderColor: props.outline ? color : "",
     borderRadius: "default",
     color,
-    cursor: "pointer",
+    cursor: props.disabled ? "not-allowed" : "pointer",
     display: "inline-block",
     fontSize: 1,
     fontWeight: 500,
     lineHeight: "1.2",
-    opacity: isActive ? (props.disabled ? 0.3 : 0.6) : 1,
+    opacity: props.disabled ? 0.3 : isActive ? 0.6 : 1,
     outline: "none",
     px: 3,
     py: 2,
@@ -32,15 +32,19 @@ function LinkButtonStyle(isActive, props) {
   if (!props.outline) {
     properties = {
       ...properties,
-      "&:active": {
-        color: "white",
-        opacity: "0.6",
-      },
-      "&:hover": {
-        color: "white",
-        opacity: "0.8",
-        textDecoration: "none",
-      },
+      ...(props.disabled
+        ? {}
+        : {
+            "&:active": {
+              color: "white",
+              opacity: "0.6",
+            },
+            "&:hover": {
+              color: "white",
+              opacity: "0.8",
+              textDecoration: "none",
+            },
+          }),
     };
   }
 
