@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 const readline = require("readline");
-const { Etablissements, RoutineLog } = require("~/models");
+const { Etablissements, RoutineLog, Config } = require("~/models");
 const logger = require("~/utils/logger");
 
 const { acquireLock, releaseLock } = require("~/utils/pg-mutex-lock");
@@ -57,7 +57,10 @@ const actionsFinessImporter = {
 
 module.exports = actionsFinessImporter;
 
-async function importFinessFile(url) {
+async function importFinessFile() {
+  const configRow = await Config.query().findOne("key", "finess_dataset_url");
+  const url = configRow.value;
+
   const lockKey = "import_finess";
   const lockAcquired = await acquireLock(lockKey, {
     timeout: 3600,

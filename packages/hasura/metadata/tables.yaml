@@ -184,6 +184,9 @@
                 _eq: X-Hasura-User-Id
 - table:
     schema: public
+    name: config
+- table:
+    schema: public
     name: departements
   object_relationships:
   - name: region

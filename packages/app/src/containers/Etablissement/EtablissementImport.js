@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { format } from "date-fns";
 import { useFormik } from "formik";
 
@@ -8,47 +8,70 @@ import { Box, Card, Flex } from "rebass";
 import { Button, Heading, Input, Text } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
-import { IMPORT_FINESS } from "./mutations";
+import { IMPORT_FINESS, CONFIG_FINESS_DATASET_URL } from "./mutations";
 import { ROUTINE_IMPORT_FINESS } from "./queries";
+
+import { toast } from "react-toastify";
 
 const timeout = 3600;
 
 export function EtablissementImport() {
+  const { data, loading, error } = useQuery(ROUTINE_IMPORT_FINESS, {
+    fetchPolicy: "network-only",
+  });
+  const [importFiness] = useMutation(IMPORT_FINESS);
+  const [configFinessDatasetUrl] = useMutation(CONFIG_FINESS_DATASET_URL);
+
+  const initialFinessDatasetUrl = data?.config_finess_dataset_url.value;
+
+  const runImportFiness = async () => {
+    await importFiness();
+    document.location.reload();
+  };
+
+  const formik = useFormik({
+    initialValues: {
+      url: initialFinessDatasetUrl,
+    },
+    onSubmit: async (values, { setSubmitting }) => {
+      await configFinessDatasetUrl({
+        variables: {
+          url: formik.values.url,
+        },
+      });
+      toast.success("Nouvelle configuration enregistrée");
+      setSubmitting(false);
+    },
+  });
+
+  const { setFieldValue } = formik;
+  useEffect(() => {
+    if (initialFinessDatasetUrl) {
+      setFieldValue("url", initialFinessDatasetUrl);
+    }
+  }, [initialFinessDatasetUrl, setFieldValue]);
+
+  let isRunning = false;
   const expired = useMemo(() => {
     const expiration = new Date();
     expiration.setSeconds(expiration.getSeconds() - timeout);
     return expiration;
   }, []);
-  const { data, loading, error } = useQuery(ROUTINE_IMPORT_FINESS, {
-    fetchPolicy: "network-only",
-    variables: {
-      expired,
-    },
-  });
-  const [importFiness] = useMutation(IMPORT_FINESS);
-
-  const formik = useFormik({
-    initialValues: {
-      url:
-        "https://www.data.gouv.fr/fr/datasets/r/9b81484a-0deb-42f7-a7c4-eb9869ea580a",
-    },
-    onSubmit: async (values, { setSubmitting }) => {
-      await importFiness({
-        variables: {
-          url: values.url,
-        },
-      });
-      setSubmitting(false);
-      document.location.reload(true);
-    },
-  });
 
   if (!useQueryReady(loading, error)) {
     return null;
   }
 
-  const [running] = data.running;
-  if (running) {
+  const [lastStarted] = data.routine_log;
+  if (
+    lastStarted &&
+    lastStarted.end_date === null &&
+    new Date(lastStarted.start_date) > expired
+  ) {
+    isRunning = true;
+  }
+
+  if (isRunning) {
     return (
       <Card mb="5">
         <Flex flexDirection="column">
@@ -58,7 +81,7 @@ export function EtablissementImport() {
             </Heading>
             <Text mb="1" lineHeight="2">
               {`Un import des données de FINESS est en cours. Date de début: ${format(
-                new Date(running.start_date),
+                new Date(lastStarted.start_date),
                 "dd/MM/yyyy HH:mm"
               )}`}
             </Text>
@@ -96,9 +119,12 @@ export function EtablissementImport() {
                 />
               </Box>
             </Box>
-            <Flex mt={4} justifyContent="flex-end">
+            <Flex mt={4} justifyContent="space-between">
               <Box>
-                <Button type="submit">Importer la base FINESS</Button>
+                <Button type="submit">Enregister</Button>
+              </Box>
+              <Box>
+                <Button onClick={runImportFiness}>Importer maintenant</Button>
               </Box>
             </Flex>
           </Box>

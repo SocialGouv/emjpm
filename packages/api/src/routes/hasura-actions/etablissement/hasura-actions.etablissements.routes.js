@@ -10,13 +10,11 @@ const router = express.Router();
 router.post(
   "/import-finess",
   (req, res, next) => {
-    const { url } = req.body.input;
-
-    importFinessFile(url);
+    importFinessFile();
 
     try {
       return res.status(200).json({
-        data: url,
+        ok: true,
       });
     } catch (err) {
       return next(err);

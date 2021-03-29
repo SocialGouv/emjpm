@@ -1,15 +1,9 @@
 import gql from "graphql-tag";
 
 export const ROUTINE_IMPORT_FINESS = gql`
-  query running_routine($expired: timestamptz!) {
-    running: routine_log(
-      where: {
-        _and: {
-          type: { _eq: "import_finess" }
-          end_date: { _is_null: true }
-          start_date: { _gt: $expired }
-        }
-      }
+  query routineImportFiness {
+    routine_log(
+      where: { _and: { type: { _eq: "import_finess" } } }
       order_by: { start_date: desc }
       limit: 1
     ) {
@@ -29,6 +23,10 @@ export const ROUTINE_IMPORT_FINESS = gql`
       limit: 1
     ) {
       end_date
+    }
+
+    config_finess_dataset_url: config_by_pk(key: "finess_dataset_url") {
+      value
     }
   }
 `;

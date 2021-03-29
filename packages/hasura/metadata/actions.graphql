@@ -75,9 +75,7 @@ type Mutation {
 
 
 type Mutation {
-  import_base_finess (
-    url: String!
-  ): ImportFinessOutput
+  import_base_finess : ImportFinessOutput
 }
 
 

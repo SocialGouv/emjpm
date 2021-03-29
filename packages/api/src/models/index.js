@@ -4,6 +4,7 @@
 module.exports.AccessToken = require("./AccessToken");
 module.exports.ApiLog = require("./ApiLog");
 module.exports.AuthorizationCodes = require("./AuthorizationCodes");
+module.exports.Config = require("./Config");
 module.exports.Departement = require("./Departement");
 module.exports.Direction = require("./Direction");
 module.exports.Editors = require("./Editors");
