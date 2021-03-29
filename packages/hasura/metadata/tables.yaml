@@ -5357,38 +5357,38 @@
   - role: individuel
     permission:
       columns:
-      - id
-      - code_postal
-      - ville
-      - mandataire_id
-      - created_at
       - annee_naissance
-      - date_nomination
-      - date_fin_mesure
-      - etablissement_id
-      - ti_id
-      - numero_dossier
-      - cabinet
-      - numero_rg
-      - departement_code
       - antenne_id
-      - service_id
+      - cabinet
+      - cause_sortie
+      - champ_mesure
+      - civilite
+      - code_postal
+      - created_at
+      - date_fin_mesure
+      - date_nomination
+      - date_premier_mesure
+      - date_protection_en_cours
+      - departement_code
+      - etablissement_id
+      - id
       - is_urgent
       - judgment_date
       - latitude
-      - longitude
-      - pays
-      - magistrat_id
       - lieu_vie
-      - type_etablissement
-      - civilite
-      - cause_sortie
+      - longitude
+      - magistrat_id
+      - mandataire_id
       - nature_mesure
-      - champ_mesure
-      - status
-      - date_premier_mesure
-      - date_protection_en_cours
+      - numero_dossier
+      - numero_rg
+      - pays
       - resultat_revision
+      - service_id
+      - status
+      - ti_id
+      - type_etablissement
+      - ville
       filter:
         mandataire:
           user:

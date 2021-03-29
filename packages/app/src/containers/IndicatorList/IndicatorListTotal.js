@@ -15,6 +15,7 @@ function IndicatorListTotal() {
   const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
 
   const { data, error, loading } = useQuery(FRANCE_INDICATORS, {
+    context: { headers: { "X-Hasura-Role": "anonymous" } },
     variables: {
       currentMonthStart,
       currentMonthEnd,

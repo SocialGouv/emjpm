@@ -17,7 +17,7 @@ export default function useInitApolloClient(initialState, token) {
     const headers = operation.getContext().hasOwnProperty("headers")
       ? operation.getContext().headers
       : {};
-    if (token) {
+    if (token && headers["X-Hasura-Role"] !== "anonymous") {
       headers["Authorization"] = "Bearer " + token;
     } else {
       headers["X-Hasura-Role"] = "anonymous";

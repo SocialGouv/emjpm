@@ -17,6 +17,7 @@ function IndicatorList(props) {
   const { departementCode } = props;
   const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
   const { data, error, loading } = useQuery(INDICATORS, {
+    context: { headers: { "X-Hasura-Role": "anonymous" } },
     variables: { code: departementCode, currentMonthStart, currentMonthEnd },
   });
 
