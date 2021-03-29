@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
+import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
@@ -71,9 +71,11 @@ function RowItem({ item }) {
 function AdminEditors() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 10;
-  const { debouncedSearchText } = useContext(AdminFilterContext);
+  const {
+    debouncedFilters: { searchText },
+  } = useContext(AdminFilterContext);
 
-  useEffectObjectValuesChangeCallback({ debouncedSearchText }, () => {
+  useEffectObjectValuesChangeCallback({ searchText }, () => {
     if (currentOffset !== 0) {
       setCurrentOffset(0);
     }
@@ -84,10 +86,7 @@ function AdminEditors() {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== ""
-          ? `%${debouncedSearchText}%`
-          : null,
+      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
     },
   });
 

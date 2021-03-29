@@ -43,7 +43,9 @@ function Input(props) {
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive =
-    isFocus || hasValue || (value !== null && value !== undefined);
+    isFocus ||
+    hasValue ||
+    (value !== null && value !== undefined && value !== "");
 
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
@@ -66,9 +68,9 @@ function Input(props) {
         aria-required={required}
         placeholder={null}
         isActive={isActive}
+        {...props}
         value={formatFormInput(value)}
         name={name}
-        {...props}
         onChange={(e) => {
           toogleValue(e.target.value.length > 0);
           onChange(e);
@@ -95,7 +97,7 @@ Input.propTypes = {
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   readOnly: PropTypes.bool,
   required: PropTypes.bool,
   size: PropTypes.string,

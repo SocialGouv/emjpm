@@ -14,8 +14,8 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)/accept",
   },
   {
-    Component: require("~/pages/admin/etablissements/add").default,
-    path: "/admin/etablissements/add",
+    Component: require("~/pages/admin/etablissements/config").default,
+    path: "/admin/etablissements/config",
   },
   {
     Component: require("~/pages/mandataires/add-mesures").default,

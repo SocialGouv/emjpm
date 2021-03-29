@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useContext, useState } from "react";
 
-import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
+import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
 import { PaginatedList } from "~/containers/PaginatedList";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -14,9 +14,11 @@ import RowItem from "./RowItem";
 function AdminServices() {
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 10;
-  const { debouncedSearchText } = useContext(AdminFilterContext);
+  const {
+    debouncedFilters: { searchText },
+  } = useContext(AdminFilterContext);
 
-  useEffectObjectValuesChangeCallback({ debouncedSearchText }, () => {
+  useEffectObjectValuesChangeCallback({ searchText }, () => {
     if (currentOffset !== 0) {
       setCurrentOffset(0);
     }
@@ -27,10 +29,7 @@ function AdminServices() {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== ""
-          ? `%${debouncedSearchText}%`
-          : null,
+      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
     },
   });
 

@@ -1,7 +1,8 @@
-import { Flex } from "rebass";
+import { Flex, Box } from "rebass";
 
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
-import { AdminFilterProvider } from "~/containers/AdminFilterBar/context";
+import SearchFilter from "~/containers/FilterWidgets/SearchFilter";
+import { Provider as AdminFilterProvider } from "~/containers/FilterWidgets/context";
 import { AdminServices } from "~/containers/AdminServices";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutAdmin } from "~/containers/Layout";
@@ -19,7 +20,13 @@ function AdminServicesPage() {
               mt: "2",
             }}
           >
-            <AdminFilterBar />
+            <AdminFilterBar>
+              <Box>
+                <Flex>
+                  <SearchFilter />
+                </Flex>
+              </Box>
+            </AdminFilterBar>
             <AdminServices />
           </Flex>
         </BoxWrapper>

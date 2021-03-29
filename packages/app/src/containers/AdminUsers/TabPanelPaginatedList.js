@@ -3,29 +3,29 @@ import { useQuery } from "@apollo/client";
 
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
-import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
+import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
 import { PaginatedList } from "~/containers/PaginatedList";
 
 import { USERS } from "./queries";
 
+import castInt from "~/utils/std/castInt";
 import useQueryReady from "~/hooks/useQueryReady";
 import RowItem from "./RowItem";
 
 export default function TabPanelPaginatedList({ type: selectedType }) {
   const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, debouncedSearchId } = useContext(
-    AdminFilterContext
-  );
+  const {
+    debouncedFilters: { searchText },
+  } = useContext(AdminFilterContext);
 
-  useEffectObjectValuesChangeCallback(
-    { debouncedSearchText, selectedType },
-    () => {
-      if (currentOffset !== 0) {
-        setCurrentOffset(0);
-      }
+  useEffectObjectValuesChangeCallback({ searchText, selectedType }, () => {
+    if (currentOffset !== 0) {
+      setCurrentOffset(0);
     }
-  );
+  });
+
+  const searchId = castInt(searchText);
 
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
@@ -33,11 +33,8 @@ export default function TabPanelPaginatedList({ type: selectedType }) {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchId: debouncedSearchId,
-      searchText:
-        debouncedSearchText && debouncedSearchText !== ""
-          ? `%${debouncedSearchText}%`
-          : null,
+      searchId,
+      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
       type: selectedType,
     },
   });

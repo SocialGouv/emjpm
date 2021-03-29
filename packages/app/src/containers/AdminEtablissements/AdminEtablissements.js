@@ -2,7 +2,7 @@ import { Fragment, useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
-import { AdminFilterContext } from "~/containers/AdminFilterBar/context";
+import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
 import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
@@ -53,28 +53,26 @@ function RowItem(props) {
 
 export function AdminEtablissements() {
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { debouncedSearchText, selectedDepartementCode } = useContext(
-    AdminFilterContext
-  );
+  const {
+    debouncedFilters: { searchText },
+    filters: { departementCode },
+  } = useContext(AdminFilterContext);
 
-  useEffectObjectValuesChangeCallback(
-    { debouncedSearchText, selectedDepartementCode },
-    () => {
-      if (currentOffset !== 0) {
-        setCurrentOffset(0);
-      }
+  useEffectObjectValuesChangeCallback({ searchText, departementCode }, () => {
+    if (currentOffset !== 0) {
+      setCurrentOffset(0);
     }
-  );
+  });
 
-  const searching = debouncedSearchText && debouncedSearchText !== "";
+  const searching = searchText && searchText !== "";
   const query = searching ? SEARCH_ETABLISSEMENTS : ALL_ETABLISSEMENTS;
   const variables = {
-    departementCode: selectedDepartementCode ? selectedDepartementCode : null,
+    departementCode,
     limit: resultPerPage,
     offset: currentOffset,
     ...(searching
       ? {
-          search: `%${debouncedSearchText}%`,
+          search: `%${searchText}%`,
         }
       : {}),
   };
