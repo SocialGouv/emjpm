@@ -87,7 +87,6 @@ spec:
       volumes:
         - name: data
           azureFile:
-            secretNamespace: ci-emjpm
             secretName: {{.Env.AZURE_STORAGE_SECRET_NAME}}
             shareName: {{.Env.K8SCI_PROJECT}}-backup-restore
             readOnly: false
