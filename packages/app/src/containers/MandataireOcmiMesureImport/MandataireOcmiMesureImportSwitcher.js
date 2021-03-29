@@ -110,56 +110,61 @@ function MandataireOcmiMesureImportSwitcher({
   };
 
   return (
-    <Flex flexDirection="column">
-      <Box m={2}>
-        <Box mb={50}>
-          <Text mb="1" lineHeight="2">
-            {`Pour importer maintenant vos mesures de votre compte OCMI dans votre compte eMJPM, activer le bouton ci-dessous.`}
-          </Text>
-          <Text mb="1" lineHeight="2">
-            {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
-          </Text>
-          <Text mb="1" lineHeight="2">
-            <StyledWarning size={18} />
-            {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI.`}
-          </Text>
-          <Flex justifyContent="center">
-            <Button onClick={importMesuresNow}>Importer maintenant</Button>
-          </Flex>
+    <Flex m={2} flexDirection="column">
+      <Flex justifyContent="left">
+        <Box mb={2}>
+          <Switch
+            name="sync-ocmi"
+            onChange={onChangeSyncEnabled}
+            isChecked={syncEnabled}
+            label={"Synchroniser automatiquement mes mesures avec OCMI"}
+          />
         </Box>
-
-        <Flex justifyContent="left">
-          <Box mb={2}>
-            <Switch
-              name="sync-ocmi"
-              onChange={onChangeSyncEnabled}
-              isChecked={syncEnabled}
-              label={"Synchroniser automatiquement mes mesures avec OCMI"}
-            />
-          </Box>
-        </Flex>
-        {syncEnabled || (
-          <Box>
-            <Text mb="1" lineHeight="2">
-              {`Pour activer la synchronisation automatique et importer vos mesures de votre compte OCMI dans votre compte eMJPM, activer le bouton ci-dessus.`}
-            </Text>
-          </Box>
-        )}
-        {syncEnabled && (
+      </Flex>
+      {syncEnabled || (
+        <Box>
+          <Text mb="1" lineHeight="2">
+            {`Pour activer la synchronisation automatique et importer vos mesures de votre compte OCMI dans votre compte eMJPM, activer le bouton ci-dessus.`}
+          </Text>
+        </Box>
+      )}
+      {syncEnabled && (
+        <>
           <Box mb={2}>
             <Text mb="1" lineHeight="2">
               <StyledCheckCircleOutline size={18} />
               {`Votre compte eMJPM est synchronisé avec votre compte OCMI, une mise à jour des données d'eMJPM s'effectuera chaque nuit.`}
             </Text>
           </Box>
-        )}
-        <Box mb={2}>
-          <Text mb="1" lineHeight="2">
-            <StyledWarning size={18} />
-            {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI lors de chaque synchronisation. N'activez pas cette option si vous comptez modifier vous même vos mesures, vos modifications seraient perdues lors de chaque synchronisation.`}
-          </Text>
+          <Box mb={2}>
+            <Text mb="1" lineHeight="2">
+              <StyledWarning size={18} />
+              {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI lors de chaque synchronisation. En activant cette option vos mesures ne seront pas modifiables sur eMJPM.`}
+            </Text>
+          </Box>
+        </>
+      )}
+      {syncEnabled || (
+        <Box>
+          <Box mb={50}>
+            <Text mb="1" lineHeight="2">
+              {`Vous avez également l'option d'importer vos mesures depuis OCMI en cliquant sur le bouton ci-dessous.`}
+            </Text>
+            <Text mb="1" lineHeight="2">
+              {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
+            </Text>
+            <Box mb={2}>
+              <Text mb="1" lineHeight="2">
+                <StyledWarning size={18} />
+                {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI.`}
+              </Text>
+            </Box>
+            <Flex justifyContent="center">
+              <Button onClick={importMesuresNow}>Importer maintenant</Button>
+            </Flex>
+          </Box>
         </Box>
-      </Box>
+      )}
     </Flex>
   );
 }
