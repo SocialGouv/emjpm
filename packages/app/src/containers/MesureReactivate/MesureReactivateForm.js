@@ -8,12 +8,12 @@ export function MesureReactivateForm(props) {
   return (
     <Box p="5">
       <Box mb="3">
-        <Heading size={3}>Réouvrir la mesure</Heading>
+        <Heading size={3}>Rouvrir la mesure</Heading>
       </Box>
       <Box>
         <Text lineHeight="1.5">
           {
-            'Si vous souhaitez réouvrir la mesure, cliquez sur le bouton "Réouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler'
+            'Si vous souhaitez rouvrir la mesure, cliquez sur le bouton "Rouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler'
           }
         </Text>
       </Box>
@@ -24,7 +24,7 @@ export function MesureReactivateForm(props) {
           </Button>
         </Box>
         <Box>
-          <Button onClick={handleSubmit}>Réouvrir la mesure</Button>
+          <Button onClick={handleSubmit}>Rouvrir la mesure</Button>
         </Box>
       </Flex>
     </Box>

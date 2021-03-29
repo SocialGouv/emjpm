@@ -143,7 +143,7 @@ function MesureDetailView({ mesure, ...props }) {
             outline={true}
             to={`${userBasePath}/mesures/${id}/reactivate`}
           >
-            Réouvrir la mesure
+            Rouvrir la mesure
           </LinkButton>
         )}
 
