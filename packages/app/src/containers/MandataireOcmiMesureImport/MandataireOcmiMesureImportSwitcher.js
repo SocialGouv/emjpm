@@ -12,7 +12,6 @@ import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { Text, Switch, Button } from "~/components";
 
 import { SYNC_OCMI_ENABLE, IMPORT_OCMI_MESURES } from "./mutations";
-import { SYNC_OCMI_ENABLED } from "./queries";
 import { toast } from "react-toastify";
 
 const StyledCheckCircleOutline = styled(CheckCircleOutline)`
@@ -71,14 +70,7 @@ function MandataireOcmiMesureImportSwitcher({
         toast.success("Synchronisation désactivée");
       }
     },
-    refetchQueries: [
-      {
-        query: SYNC_OCMI_ENABLED,
-        variables: {
-          mandataireId,
-        },
-      },
-    ],
+    refetchQueries: ["CURRENT_USER_QUERY"],
   });
 
   const [syncEnabled, setSyncEnabled] = useState(!!syncEnableOrigin);

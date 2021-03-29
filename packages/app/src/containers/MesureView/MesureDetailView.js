@@ -9,6 +9,8 @@ import { Heading } from "~/components";
 
 import { content, statusBox, subtitle, title } from "./style";
 
+import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+
 function MesureDetailView({ mesure, ...props }) {
   const {
     realAge,
@@ -31,7 +33,11 @@ function MesureDetailView({ mesure, ...props }) {
     id,
   } = mesure;
 
-  const { type } = useUser();
+  const {
+    type,
+    mandataire: { sync_ocmi_enable },
+  } = useUser();
+
   const userBasePath = getUserBasePath({ type });
 
   const {
@@ -42,6 +48,13 @@ function MesureDetailView({ mesure, ...props }) {
     formatLieuVie,
     formatPays,
   } = mesureFormatter;
+
+  const mesureModificationButtonProps = sync_ocmi_enable
+    ? {
+        disabled: true,
+        title: SYNC_OCMI_DISABLED_MESSAGE,
+      }
+    : {};
 
   return (
     <Box {...props}>
@@ -124,6 +137,7 @@ function MesureDetailView({ mesure, ...props }) {
           bg="red"
           color="white"
           to={`${userBasePath}/mesures/${id}/delete`}
+          {...mesureModificationButtonProps}
         >
           Supprimer la mesure
         </LinkButton>
@@ -132,6 +146,7 @@ function MesureDetailView({ mesure, ...props }) {
           <LinkButton
             outline={true}
             to={`${userBasePath}/mesures/${id}/accept`}
+            {...mesureModificationButtonProps}
           >
             Accepter la mesure
           </LinkButton>
@@ -142,6 +157,7 @@ function MesureDetailView({ mesure, ...props }) {
             ml={3}
             outline={true}
             to={`${userBasePath}/mesures/${id}/reactivate`}
+            {...mesureModificationButtonProps}
           >
             Rouvrir la mesure
           </LinkButton>
@@ -154,6 +170,7 @@ function MesureDetailView({ mesure, ...props }) {
               color="white"
               outline={true}
               to={`${userBasePath}/mesures/${id}/close`}
+              {...mesureModificationButtonProps}
             >
               Cloturer la mesure
             </LinkButton>
@@ -162,6 +179,7 @@ function MesureDetailView({ mesure, ...props }) {
               ml={3}
               outline={true}
               to={`${userBasePath}/mesures/${id}/edit`}
+              {...mesureModificationButtonProps}
             >
               Modifier la mesure
             </LinkButton>

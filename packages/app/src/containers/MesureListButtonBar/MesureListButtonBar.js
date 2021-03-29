@@ -5,16 +5,33 @@ import { MesureExportExcelButton } from "~/containers/MesureExportExcelButton";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
+import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+
 function MesureListButtonBar() {
-  const { type } = useUser();
+  const {
+    type,
+    mandataire: { sync_ocmi_enable },
+  } = useUser();
 
   const path = getUserBasePath({ type });
+
+  const mesureModificationButtonProps = sync_ocmi_enable
+    ? {
+        disabled: true,
+        title: SYNC_OCMI_DISABLED_MESSAGE,
+      }
+    : {};
 
   return (
     <Box>
       <Flex flexDirection="row">
         <Box>
-          <LinkButton to={`${path}/add-mesures`}>Ajouter une mesure</LinkButton>
+          <LinkButton
+            {...mesureModificationButtonProps}
+            to={`${path}/add-mesures`}
+          >
+            Ajouter une mesure
+          </LinkButton>
         </Box>
         <Box ml={1}>
           <LinkButton to={`${path}/import-mesures`}>

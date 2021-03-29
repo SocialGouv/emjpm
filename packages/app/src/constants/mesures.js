@@ -35,3 +35,6 @@ export const IS_URGENT = [
   { label: "oui, c'est une demande urgente", value: true },
   { label: "non, ce n'est pas une demande urgente", value: false },
 ];
+
+export const SYNC_OCMI_DISABLED_MESSAGE =
+  "La synchronisation de vos mesures avec OCMI est activée, désactiver la synchronisation pour pouvoir modifier vos mesures.";

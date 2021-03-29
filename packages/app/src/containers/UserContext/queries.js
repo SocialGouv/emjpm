@@ -196,6 +196,7 @@ export const MANDATAIRE_USERS = gql`
         ville
         code_postal
         competences
+        sync_ocmi_enable
         mandataire_tis {
           id
           ti {

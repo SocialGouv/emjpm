@@ -6,6 +6,9 @@ import { Heading, Button, Text } from "~/components";
 import { Flex, Box } from "rebass";
 import { MesureEtatView } from "./MesureEtatView";
 
+import useUser from "~/hooks/useUser";
+import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+
 function MesureEtatViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
   const [selectedMesureEtat, setSelectedMesureEtat] = useState(false);
@@ -18,6 +21,18 @@ function MesureEtatViewList({ mesure, ...props }) {
     }
     return selectedMesureEtat.id === etat.id;
   }
+
+  const {
+    mandataire: { sync_ocmi_enable },
+  } = useUser();
+
+  const mesureModificationDisabled = sync_ocmi_enable;
+  const mesureModificationButtonProps = mesureModificationDisabled
+    ? {
+        disabled: true,
+        title: SYNC_OCMI_DISABLED_MESSAGE,
+      }
+    : {};
 
   return (
     <Box {...props}>
@@ -32,6 +47,9 @@ function MesureEtatViewList({ mesure, ...props }) {
           <Box key={etat.id}>
             <MesureEtatView
               onClick={() => {
+                if (mesureModificationDisabled) {
+                  return;
+                }
                 if (isSelectedMesureEtat(etat)) {
                   setSelectedMesureEtat(null);
                 } else {
@@ -46,7 +64,7 @@ function MesureEtatViewList({ mesure, ...props }) {
                   borderLeft: "solid 3px gray",
                 },
                 bg: isSelectedMesureEtat(etat) ? "cardSecondary" : "",
-                cursor: "pointer",
+                cursor: mesureModificationDisabled ? "normal" : "pointer",
               }}
             />
             {isSelectedMesureEtat(etat) && (
@@ -77,6 +95,7 @@ function MesureEtatViewList({ mesure, ...props }) {
               setSelectedMesureEtat(null);
               setCreationMode(true);
             }}
+            {...mesureModificationButtonProps}
           >
             Ajouter un changement
           </Button>

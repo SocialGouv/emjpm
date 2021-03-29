@@ -6,11 +6,26 @@ import { Heading, Button, Text } from "~/components";
 import { Flex, Box } from "rebass";
 import { MesureRessourceView } from "./MesureRessourceView";
 
+import useUser from "~/hooks/useUser";
+import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+
 function MesureRessourceViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
   const [selectedMesureRessource, setSelectedMesureRessource] = useState(false);
 
   const { mesureRessources } = mesure;
+
+  const {
+    mandataire: { sync_ocmi_enable },
+  } = useUser();
+
+  const mesureModificationDisabled = sync_ocmi_enable;
+  const mesureModificationButtonProps = mesureModificationDisabled
+    ? {
+        disabled: true,
+        title: SYNC_OCMI_DISABLED_MESSAGE,
+      }
+    : {};
 
   function isSelectedMesureRessource(ressource) {
     if (!selectedMesureRessource) {
@@ -36,6 +51,9 @@ function MesureRessourceViewList({ mesure, ...props }) {
                 <Box key={ressource.id}>
                   <MesureRessourceView
                     onClick={() => {
+                      if (mesureModificationDisabled) {
+                        return;
+                      }
                       if (isSelectedMesureRessource(ressource)) {
                         setSelectedMesureRessource(null);
                       } else {
@@ -53,7 +71,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
                       bg: isSelectedMesureRessource(ressource)
                         ? "cardSecondary"
                         : "",
-                      cursor: "pointer",
+                      cursor: mesureModificationDisabled ? "normal" : "pointer",
                     }}
                     ressource={ressource}
                   />
@@ -89,6 +107,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
               setSelectedMesureRessource(null);
               setCreationMode(true);
             }}
+            {...mesureModificationButtonProps}
           >
             Ajouter une ressource
           </Button>
