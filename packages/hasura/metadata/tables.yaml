@@ -4435,23 +4435,24 @@
   - role: prepose
     permission:
       columns:
-      - latitude
-      - longitude
-      - departement_code
-      - dispo_max
-      - id
-      - mesures_en_attente
-      - mesures_en_cours
-      - user_id
-      - competences
-      - created_at
-      - email_send
       - adresse
       - code_postal
+      - competences
+      - created_at
+      - departement_code
+      - dispo_max
+      - email_send
       - genre
+      - id
+      - latitude
+      - longitude
+      - mesures_en_attente
+      - mesures_en_cours
       - siret
+      - sync_ocmi_enable
       - telephone
       - telephone_portable
+      - user_id
       - ville
       filter:
         user_id:
