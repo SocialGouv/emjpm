@@ -15,11 +15,9 @@ function MesureRessourceViewList({ mesure, ...props }) {
 
   const { mesureRessources } = mesure;
 
-  const {
-    mandataire: { sync_ocmi_enable },
-  } = useUser();
+  const user = useUser();
 
-  const mesureModificationDisabled = sync_ocmi_enable;
+  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
   const mesureModificationButtonProps = mesureModificationDisabled
     ? {
         disabled: true,

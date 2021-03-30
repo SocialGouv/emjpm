@@ -33,10 +33,9 @@ function MesureDetailView({ mesure, ...props }) {
     id,
   } = mesure;
 
-  const {
-    type,
-    mandataire: { sync_ocmi_enable },
-  } = useUser();
+  const user = useUser();
+
+  const { type } = user;
 
   const userBasePath = getUserBasePath({ type });
 
@@ -49,7 +48,8 @@ function MesureDetailView({ mesure, ...props }) {
     formatPays,
   } = mesureFormatter;
 
-  const mesureModificationButtonProps = sync_ocmi_enable
+  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
+  const mesureModificationButtonProps = mesureModificationDisabled
     ? {
         disabled: true,
         title: SYNC_OCMI_DISABLED_MESSAGE,

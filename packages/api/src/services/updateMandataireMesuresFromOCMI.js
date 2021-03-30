@@ -21,7 +21,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
 }) {
   const mandataire = await Mandataire.query().findOne({ user_id: userId });
 
-  if (!manual && !mandataire.sync_ocmi_enabled) {
+  if (!manual && !mandataire.sync_ocmi_enable) {
     return;
   }
 

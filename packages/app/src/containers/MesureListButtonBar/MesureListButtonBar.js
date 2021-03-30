@@ -8,14 +8,13 @@ import { getUserBasePath } from "~/constants";
 import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
 
 function MesureListButtonBar() {
-  const {
-    type,
-    mandataire: { sync_ocmi_enable },
-  } = useUser();
+  const user = useUser();
+  const { type } = user;
+  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
 
   const path = getUserBasePath({ type });
 
-  const mesureModificationButtonProps = sync_ocmi_enable
+  const mesureModificationButtonProps = mesureModificationDisabled
     ? {
         disabled: true,
         title: SYNC_OCMI_DISABLED_MESSAGE,
