@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.107.1](https://github.com/SocialGouv/emjpm/compare/v25.107.0...v25.107.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* **stats:** add departement 975 ([b8cc3dc](https://github.com/SocialGouv/emjpm/commit/b8cc3dc53e50a83f085882779109d6a11c8c6cfa))
+
+
+
+
+
 # [25.107.0](https://github.com/SocialGouv/emjpm/compare/v25.106.2...v25.107.0) (2021-03-29)
 
 
