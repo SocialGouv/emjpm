@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.107.4](https://github.com/SocialGouv/emjpm/compare/v25.107.3...v25.107.4) (2021-03-31)
+
+
+### Bug Fixes
+
+* **perms:** ti on api oauth ([2fac536](https://github.com/SocialGouv/emjpm/commit/2fac5362b8cecf2ab263839887f52d8d76d7a024))
+
+
+
+
+
 ## [25.107.3](https://github.com/SocialGouv/emjpm/compare/v25.107.2...v25.107.3) (2021-03-30)
 
 
