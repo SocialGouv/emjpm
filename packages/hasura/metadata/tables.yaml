@@ -71,6 +71,21 @@
       filter:
         user_id:
           _eq: X-Hasura-User-Id
+  - role: ti
+    permission:
+      columns:
+      - expired
+      - editor_id
+      - id
+      - user_id
+      - expired_on
+      - refresh_token_expires_on
+      - access_token
+      - editor_url
+      - refresh_token
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
   delete_permissions:
   - role: direction
     permission:
