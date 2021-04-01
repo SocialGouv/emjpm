@@ -6,7 +6,7 @@ import { ProvideAuth } from "~/user/Auth";
 import Routes, { history } from "~/routes";
 import AppApollo from "~/apollo/AppApollo";
 
-import { GlobalStyle, presetEmjpm } from "~/theme";
+import { GlobalStyle, theme } from "~/theme";
 import { useSentry, captureException } from "~/user/sentry";
 
 import AppUser from "~/user/AppUser";
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider theme={presetEmjpm}>
+      <ThemeProvider theme={theme}>
         <ErrorBoundary onError={captureException}>
           <GlobalLoader>
             <ProvideAuth>

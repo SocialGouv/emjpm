@@ -1,6 +1,6 @@
-// default theme preset
-
-export const presetEmjpm = {
+const theme = {
+  useColorSchemeMediaQuery: false,
+  useRootStyles: true,
   breakpoints: ["40em", "52em", "64em"],
   buttons: {
     outline: {
@@ -176,3 +176,5 @@ export const presetEmjpm = {
     },
   },
 };
+
+export default theme;

@@ -75,6 +75,6 @@ const styles = css`
   ${emotionNormalize}
 `;
 
-export function GlobalStyle() {
+export default function GlobalStyle() {
   return <Global styles={styles} />;
 }

@@ -1,4 +1,2 @@
-export { presetEmjpm } from "./emjpm";
-export { presetMaterial } from "./material";
-export { presetBase } from "./base";
-export { GlobalStyle } from "./globalStyle";
+export { default as theme } from "./theme";
+export { default as GlobalStyle } from "./GlobalStyle";
