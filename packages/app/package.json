@@ -26,9 +26,9 @@
     "@styled-icons/remix-line": "^10.18.0",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
-    "classnames": "^2.2.6",
+    "classnames": "^2.3.0",
     "compare-versions": "^3.6.0",
-    "date-fns": "^2.18.0",
+    "date-fns": "^2.19.0",
     "detect-browser": "^5.2.0",
     "dotenv": "^8.2.0",
     "emotion-normalize": "^11.0.1",
@@ -37,7 +37,7 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
+    "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-sort-keys-fix": "^1.1.1",
     "eslint-plugin-unused-imports": "^1.1.0",
     "formik": "^2.2.6",
@@ -56,7 +56,7 @@
     "prettier": "^2.2.1",
     "query-string": "^6.14.1",
     "react": "^17.0.2",
-    "react-datepicker": "^3.6.0",
+    "react-datepicker": "^3.7.0",
     "react-document-title": "^2.0.3",
     "react-dom": "^17.0.2",
     "react-error-boundary": "^3.1.1",
@@ -75,7 +75,7 @@
     "recharts": "^1.8.5",
     "sass": "^1.32.8",
     "styled-components": "^4.4.1",
-    "theme-ui": "^0.3.5",
+    "theme-ui": "^0.6.1",
     "use-debounce": "^5.2.1",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.9"
@@ -127,7 +127,7 @@
     "hygen": "^6.0.4",
     "json-loader": "^0.5.7",
     "lint-staged": "^10.5.4",
-    "postcss-loader": "^5.0.0",
+    "postcss-loader": "^5.2.0",
     "prop-types": "^15.7.2",
     "react-test-renderer": "^17.0.2",
     "rebass": "^4.0.7",
@@ -136,7 +136,7 @@
     "source-map-loader": "^2.0.1",
     "style-loader": "^2.0.0",
     "styled-components": "^4.4.1",
-    "theme-ui": "^0.3.5"
+    "theme-ui": "^0.6.1"
   },
   "resolutions": {
     "react-input-autosize": "^3.0.0"
