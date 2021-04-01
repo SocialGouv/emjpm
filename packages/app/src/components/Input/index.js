@@ -38,6 +38,7 @@ function Input(props) {
     value,
     type,
     onBlur,
+    onFocus,
     readOnly,
   } = props;
   const [isFocus, toggleFocus] = useState(false);
@@ -81,7 +82,12 @@ function Input(props) {
             onBlur(event);
           }
         }}
-        onFocus={() => toggleFocus(true)}
+        onFocus={() => {
+          toggleFocus(true);
+          if (onFocus) {
+            onFocus(event);
+          }
+        }}
       />
     </InputWrapper>
   );
@@ -96,6 +102,7 @@ Input.propTypes = {
   isValid: PropTypes.bool,
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
   onChange: PropTypes.func,
   placeholder: PropTypes.string,
   readOnly: PropTypes.bool,

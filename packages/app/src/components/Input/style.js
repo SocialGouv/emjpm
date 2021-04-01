@@ -21,7 +21,7 @@ function InputWrapperStyle(props) {
 
 function InputStyle(props) {
   return {
-    bg: props.readOnly ? "#f0f0f0" : "transparent",
+    bg: props.readOnly ? "rgba(255,255,255,0.5)" : "transparent",
     border: "0",
     boxShadow: "none",
     color: "text",

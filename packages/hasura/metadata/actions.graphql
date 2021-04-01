@@ -1,4 +1,11 @@
 type Mutation {
+  admin_reset_user_password (
+    id: Int!
+  ): AdminResetPasswordOutput
+}
+
+
+type Mutation {
   calculate_mesures (
     serviceId: Int
     mandataireId: Int
@@ -311,5 +318,9 @@ type StateOutput {
 
 type ImportOCMIOutput {
   state : String
+}
+
+type AdminResetPasswordOutput {
+  password : String!
 }
 

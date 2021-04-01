@@ -1,4 +1,14 @@
 actions:
+- name: admin_reset_user_password
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/reset-password'
+    forward_client_headers: true
+    headers:
+    - value: admin
+      name: x-hasura-role
+    - name: hasura_web_hook_secret
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: calculate_mesures
   definition:
     kind: synchronous
@@ -283,4 +293,5 @@ custom_types:
   - name: ImportOcmiMesuresOutput
   - name: StateOutput
   - name: ImportOCMIOutput
+  - name: AdminResetPasswordOutput
   scalars: []
