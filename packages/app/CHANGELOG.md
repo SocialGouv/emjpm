@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.109.0](https://github.com/SocialGouv/emjpm/compare/v25.108.0...v25.109.0) (2021-04-01)
+
+
+### Features
+
+* **stats:** direction + refacto indicators ([6b5d3ea](https://github.com/SocialGouv/emjpm/commit/6b5d3eab88ae996a31019eaaed70f0faec1f1556))
+
+
+
+
+
 # [25.108.0](https://github.com/SocialGouv/emjpm/compare/v25.107.3...v25.108.0) (2021-04-01)
 
 
