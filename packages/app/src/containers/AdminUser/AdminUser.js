@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
 import { AdminUserActivation } from "~/containers/AdminUserActivation";
-import { AdminUserResetPassword } from "~/containers/AdminUserResetPassword";
 import { AdminDirectionType } from "~/containers/AdminUserDirection";
 import { AdminMandataireMesures } from "~/containers/AdminUserMandataire";
 import { AdminUserService } from "~/containers/AdminUserService";
@@ -38,7 +37,6 @@ function AdminUser() {
     <Box>
       <Box my={1} width="100%">
         <AdminUserActivation userId={userId} />
-        <AdminUserResetPassword userId={userId} />
       </Box>
       {isMandataire({ type }) && (
         <>
