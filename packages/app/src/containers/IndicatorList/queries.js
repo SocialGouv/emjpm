@@ -6,7 +6,7 @@ export const INDICATORS = gql`
     $currentMonthStart: timestamptz!
     $currentMonthEnd: timestamptz!
   ) {
-    serviceLoginCount: view_indicateur_login_aggregate(
+    serviceLoginCount: view_departement_indicateur_login_aggregate(
       where: { type: { _eq: "service" }, id: { _eq: $code } }
     ) {
       aggregate {
@@ -15,7 +15,7 @@ export const INDICATORS = gql`
         }
       }
     }
-    individuelLoginCount: view_indicateur_login_aggregate(
+    individuelLoginCount: view_departement_indicateur_login_aggregate(
       where: { type: { _eq: "individuel" }, id: { _eq: $code } }
     ) {
       aggregate {
@@ -24,7 +24,7 @@ export const INDICATORS = gql`
         }
       }
     }
-    preposeLoginCount: view_indicateur_login_aggregate(
+    preposeLoginCount: view_departement_indicateur_login_aggregate(
       where: { type: { _eq: "prepose" }, id: { _eq: $code } }
     ) {
       aggregate {
@@ -33,7 +33,7 @@ export const INDICATORS = gql`
         }
       }
     }
-    magistratLoginCount: view_indicateur_login_aggregate(
+    magistratLoginCount: view_departement_indicateur_login_aggregate(
       where: { type: { _eq: "ti" }, id: { _eq: $code } }
     ) {
       aggregate {
@@ -42,40 +42,59 @@ export const INDICATORS = gql`
         }
       }
     }
-
-    magistratInscritCount: view_users_stats_aggregate(
-      where: { _and: { type: { _eq: "ti" }, departement_code: { _eq: $code } } }
+    directionLoginCount: view_departement_indicateur_login_aggregate(
+      where: { type: { _eq: "direction" }, id: { _eq: $code } }
     ) {
       aggregate {
-        count
+        sum {
+          count
+        }
       }
     }
 
-    serviceInscritCount: view_users_stats_aggregate(
-      where: {
-        _and: { type: { _eq: "service" }, departement_code: { _eq: $code } }
-      }
+    serviceInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "service" }, id: { _eq: $code } } }
     ) {
       aggregate {
-        count
+        sum {
+          count
+        }
       }
     }
-    individuelInscritCount: view_users_stats_aggregate(
-      where: {
-        _and: { type: { _eq: "individuel" }, departement_code: { _eq: $code } }
-      }
+    individuelInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "individuel" }, id: { _eq: $code } } }
     ) {
       aggregate {
-        count
+        sum {
+          count
+        }
       }
     }
-    preposeInscritCount: view_users_stats_aggregate(
-      where: {
-        _and: { type: { _eq: "prepose" }, departement_code: { _eq: $code } }
-      }
+    preposeInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "prepose" }, id: { _eq: $code } } }
     ) {
       aggregate {
-        count
+        sum {
+          count
+        }
+      }
+    }
+    magistratInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "ti" }, id: { _eq: $code } } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    directionInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "direction" }, id: { _eq: $code } } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
       }
     }
 
@@ -112,73 +131,59 @@ export const FRANCE_INDICATORS = gql`
     $currentMonthStart: timestamptz!
     $currentMonthEnd: timestamptz!
   ) {
-    serviceLoginCount: view_indicateur_login_aggregate(
+    serviceLoginCount: view_nation_indicateur_login(
       where: { type: { _eq: "service" } }
     ) {
-      aggregate {
-        sum {
-          count
-        }
-      }
+      count
     }
-    individuelLoginCount: view_indicateur_login_aggregate(
+    individuelLoginCount: view_nation_indicateur_login(
       where: { type: { _eq: "individuel" } }
     ) {
-      aggregate {
-        sum {
-          count
-        }
-      }
+      count
     }
-    preposeLoginCount: view_indicateur_login_aggregate(
+    preposeLoginCount: view_nation_indicateur_login(
       where: { type: { _eq: "prepose" } }
     ) {
-      aggregate {
-        sum {
-          count
-        }
-      }
+      count
     }
-    magistratLoginCount: view_indicateur_login_aggregate(
+    magistratLoginCount: view_nation_indicateur_login(
       where: { type: { _eq: "ti" } }
     ) {
-      aggregate {
-        sum {
-          count
-        }
-      }
+      count
+    }
+    directionLoginCount: view_nation_indicateur_login(
+      where: { type: { _eq: "direction" } }
+    ) {
+      count
     }
 
-    serviceInscritCount: view_users_stats_aggregate(
+    serviceInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "service" } }
     ) {
-      aggregate {
-        count
-      }
+      count
     }
 
-    individuelInscritCount: view_users_stats_aggregate(
+    individuelInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "individuel" } }
     ) {
-      aggregate {
-        count
-      }
+      count
     }
-    preposeInscritCount: view_users_stats_aggregate(
+    preposeInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "prepose" } }
     ) {
-      aggregate {
-        count
-      }
+      count
     }
-
-    magistratInscritCount: view_users_stats_aggregate(
+    magistratInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "ti" } }
     ) {
-      aggregate {
-        count
-      }
+      count
     }
+    directionInscritCount: view_nation_indicateur_inscrit(
+      where: { type: { _eq: "direction" } }
+    ) {
+      count
+    }
+
     mesuresLastMonthCount: mesures_aggregate(
       where: {
         _and: {

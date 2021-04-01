@@ -7116,6 +7116,32 @@
       check: null
 - table:
     schema: public
+    name: view_departement_indicateur_inscrit
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - nom
+      - type
+      - count
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
+    name: view_departement_indicateur_login
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - id
+      - nom
+      - type
+      - count
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: view_department_availability
   object_relationships:
   - name: department
@@ -7167,122 +7193,6 @@
       - mesures_in_progress
       - mesures_max
       filter: {}
-- table:
-    schema: public
-    name: view_indicateur_inscrit
-  select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-      - id
-      - count
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: direction
-    permission:
-      columns:
-      - id
-      - nom
-      - type
-      - count
-      filter: {}
-      allow_aggregations: true
-  - role: individuel
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: prepose
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: service
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: ti
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-- table:
-    schema: public
-    name: view_indicateur_login
-  select_permissions:
-  - role: anonymous
-    permission:
-      columns:
-      - id
-      - count
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: direction
-    permission:
-      columns:
-      - id
-      - nom
-      - type
-      - count
-      filter: {}
-      allow_aggregations: true
-  - role: individuel
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: prepose
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: service
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
-  - role: ti
-    permission:
-      columns:
-      - count
-      - id
-      - nom
-      - type
-      filter: {}
-      allow_aggregations: true
 - table:
     schema: public
     name: view_mesure_gestionnaire
@@ -7521,6 +7431,26 @@
       - ti_id
       filter: {}
       allow_aggregations: true
+- table:
+    schema: public
+    name: view_nation_indicateur_inscrit
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - type
+      - count
+      filter: {}
+- table:
+    schema: public
+    name: view_nation_indicateur_login
+  select_permissions:
+  - role: anonymous
+    permission:
+      columns:
+      - type
+      - count
+      filter: {}
 - table:
     schema: public
     name: view_users_stats

@@ -46,17 +46,35 @@ function IndicatorList(props) {
         sum: { count: magistratLoginCount },
       },
     },
+    directionLoginCount: {
+      aggregate: {
+        sum: { count: directionLoginCount },
+      },
+    },
     serviceInscritCount: {
-      aggregate: { count: serviceInscritCount },
+      aggregate: {
+        sum: { count: serviceInscritCount },
+      },
     },
     individuelInscritCount: {
-      aggregate: { count: individuelInscritCount },
+      aggregate: {
+        sum: { count: individuelInscritCount },
+      },
     },
     preposeInscritCount: {
-      aggregate: { count: preposeInscritCount },
+      aggregate: {
+        sum: { count: preposeInscritCount },
+      },
     },
     magistratInscritCount: {
-      aggregate: { count: magistratInscritCount },
+      aggregate: {
+        sum: { count: magistratInscritCount },
+      },
+    },
+    directionInscritCount: {
+      aggregate: {
+        sum: { count: directionInscritCount },
+      },
     },
   } = data;
 
@@ -70,26 +88,37 @@ function IndicatorList(props) {
         <Indicator
           error={false}
           loading={false}
+          title="Agents DD/DR"
+          indicator={directionInscritCount || 0}
+          headingSize={5}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Services mandataires"
           indicator={serviceInscritCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
           indicator={preposeInscritCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
           indicator={individuelInscritCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
           indicator={magistratInscritCount || 0}
+          headingSize={5}
         />
       </Box>
       <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
@@ -97,26 +126,37 @@ function IndicatorList(props) {
         <Indicator
           error={false}
           loading={false}
+          title="Agents DD/DR"
+          indicator={directionLoginCount || 0}
+          headingSize={5}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Services mandataires"
           indicator={serviceLoginCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
           indicator={preposeLoginCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
           indicator={individuelLoginCount || 0}
+          headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
           indicator={magistratLoginCount || 0}
+          headingSize={5}
         />
       </Box>
       <Heading size={2}>
@@ -128,6 +168,7 @@ function IndicatorList(props) {
           loading={false}
           title="Pour le département"
           indicator={data.mesuresLastMonthCount?.aggregate?.count || 0}
+          headingSize={5}
         />
       </Box>
       Seules les mesures dont le département du majeur est renseigné sont prises

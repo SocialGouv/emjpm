@@ -5,8 +5,8 @@ const IndicatorListStyle = {
 
 const IndicatorBoxStyle = {
   display: "grid",
-  gridGap: 4,
-  gridTemplateColumns: ["repeat(1, 1fr)", "repeat(4, 1fr)"],
+  gridGap: 1,
+  gridTemplateColumns: ["repeat(1, 1fr)", "repeat(5, 1fr)"],
   height: 150,
 };
 
