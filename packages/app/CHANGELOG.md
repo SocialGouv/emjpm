@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.108.0](https://github.com/SocialGouv/emjpm/compare/v25.107.3...v25.108.0) (2021-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#2522](https://github.com/SocialGouv/emjpm/issues/2522)) ([0d9d7d2](https://github.com/SocialGouv/emjpm/commit/0d9d7d2a898731a646220b08b5af5b09b45f4196))
+
+
+### Features
+
+* **admin:** reset password ([cd79d5b](https://github.com/SocialGouv/emjpm/commit/cd79d5b67d202950b52db66ceea2a63f4eb72c8f))
+
+
+
+
+
 ## [25.107.3](https://github.com/SocialGouv/emjpm/compare/v25.107.2...v25.107.3) (2021-03-30)
 
 **Note:** Version bump only for package @emjpm/app
