@@ -1,3 +1,6 @@
 - function:
     schema: public
     name: search_etablissements
+- function:
+    schema: public
+    name: search_users

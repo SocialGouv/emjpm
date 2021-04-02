@@ -8,7 +8,6 @@ import { PaginatedList } from "~/containers/PaginatedList";
 
 import { USERS } from "./queries";
 
-import castInt from "~/utils/std/castInt";
 import useQueryReady from "~/hooks/useQueryReady";
 import RowItem from "./RowItem";
 
@@ -25,16 +24,13 @@ export default function TabPanelPaginatedList({ type: selectedType }) {
     }
   });
 
-  const searchId = castInt(searchText);
-
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
 
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchId,
-      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
+      search: searchText && searchText !== "" ? `%${searchText}%` : null,
       type: selectedType,
     },
   });
@@ -43,8 +39,8 @@ export default function TabPanelPaginatedList({ type: selectedType }) {
     return null;
   }
 
-  const { count } = data.users_aggregate.aggregate;
-  const users = data.users;
+  const { count } = data.search_users_aggregate.aggregate;
+  const users = data.search_users;
 
   return (
     <PaginatedList
