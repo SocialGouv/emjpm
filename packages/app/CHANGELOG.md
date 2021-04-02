@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.110.0](https://github.com/SocialGouv/emjpm/compare/v25.109.0...v25.110.0) (2021-04-02)
+
+
+### Features
+
+* **search:** user trigram ([72e9962](https://github.com/SocialGouv/emjpm/commit/72e99625c966fb432bbf849365f97c68558354d5))
+
+
+
+
+
 # [25.109.0](https://github.com/SocialGouv/emjpm/compare/v25.108.0...v25.109.0) (2021-04-01)
 
 
