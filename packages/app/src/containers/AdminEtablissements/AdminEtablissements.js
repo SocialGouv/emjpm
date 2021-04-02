@@ -10,7 +10,7 @@ import { Button, Card } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
-import { SEARCH_ETABLISSEMENTS, ALL_ETABLISSEMENTS } from "./queries";
+import { SEARCH_ETABLISSEMENTS } from "./queries";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 const resultPerPage = 10;
@@ -65,7 +65,6 @@ export function AdminEtablissements() {
   });
 
   const searching = searchText && searchText !== "";
-  const query = searching ? SEARCH_ETABLISSEMENTS : ALL_ETABLISSEMENTS;
   const variables = {
     departementCode,
     limit: resultPerPage,
@@ -77,23 +76,19 @@ export function AdminEtablissements() {
       : {}),
   };
 
-  const { data, error, loading } = useQuery(query, { variables });
+  const { data, error, loading } = useQuery(SEARCH_ETABLISSEMENTS, {
+    variables,
+  });
 
   if (!useQueryReady(loading, error)) {
     return null;
   }
 
-  const dataKey = searching ? "search_etablissements" : "etablissements";
-  const dataAggregateKey = dataKey + "_aggregate";
   return (
     <PaginatedList
-      entries={data ? data[dataKey] : []}
+      entries={data ? data.search_etablissements : []}
       RowItem={RowItem}
-      count={
-        data && data[dataAggregateKey]
-          ? data[dataAggregateKey].aggregate.count
-          : 0
-      }
+      count={data?.search_etablissements_aggregate?.aggregate?.count || 0}
       resultPerPage={resultPerPage}
       currentOffset={currentOffset}
       setCurrentOffset={setCurrentOffset}
