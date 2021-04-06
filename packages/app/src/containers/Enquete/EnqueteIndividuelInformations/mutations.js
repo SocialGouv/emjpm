@@ -9,8 +9,8 @@ export const UPDATE_ENQUETE_INFORMATIONS_AGREMENTS = gql`
     $nb_mesures_dep_finance: Int
     $nb_mesures_dep_autres: Int
   ) {
-    update_enquete_reponses_agrements_formations_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_agrements_formations(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         debut_activite_avant_2009: $debut_activite_avant_2009
         annee_agrement: $annee_agrement
@@ -19,12 +19,14 @@ export const UPDATE_ENQUETE_INFORMATIONS_AGREMENTS = gql`
         nb_mesures_dep_autres: $nb_mesures_dep_autres
       }
     ) {
-      id
-      debut_activite_avant_2009
-      annee_agrement
-      nb_departements
-      nb_mesures_dep_finance
-      nb_mesures_dep_autres
+      returning {
+        id
+        debut_activite_avant_2009
+        annee_agrement
+        nb_departements
+        nb_mesures_dep_finance
+        nb_mesures_dep_autres
+      }
     }
   }
 `;
@@ -42,8 +44,8 @@ export const UPDATE_ENQUETE_INFORMATIONS_FORMATION = gql`
     $secretaire_specialise_etp_n5: Float
     $secretaire_specialise_etp_n6: Float
   ) {
-    update_enquete_reponses_agrements_formations_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_agrements_formations(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         cnc_annee_obtention: $cnc_annee_obtention
         cnc_heures_formation: $cnc_heures_formation
@@ -56,16 +58,18 @@ export const UPDATE_ENQUETE_INFORMATIONS_FORMATION = gql`
         secretaire_specialise_etp_n6: $secretaire_specialise_etp_n6
       }
     ) {
-      id
-      cnc_annee_obtention
-      cnc_heures_formation
-      niveau_qualification
-      secretaire_specialise_etp_n1
-      secretaire_specialise_etp_n2
-      secretaire_specialise_etp_n3
-      secretaire_specialise_etp_n4
-      secretaire_specialise_etp_n5
-      secretaire_specialise_etp_n6
+      returning {
+        id
+        cnc_annee_obtention
+        cnc_heures_formation
+        niveau_qualification
+        secretaire_specialise_etp_n1
+        secretaire_specialise_etp_n2
+        secretaire_specialise_etp_n3
+        secretaire_specialise_etp_n4
+        secretaire_specialise_etp_n5
+        secretaire_specialise_etp_n6
+      }
     }
   }
 `;
@@ -87,8 +91,8 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
     $region: String
     $nom: String
   ) {
-    update_enquete_reponses_informations_mandataire_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_informations_mandataire(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         anciennete: $anciennete
         benevole: $benevole
@@ -105,22 +109,24 @@ export const UPDATE_ENQUETE_INDIVIDUEL_INFORMATIONS = gql`
         nom: $nom
       }
     ) {
-      sexe
-      exerce_seul_activite
-      secretaire_specialise_etp
-      local_professionnel
-      last_update
-      id
-      forme_juridique
-      exerce_secretaires_specialises
-      estimation_etp
-      created_at
-      benevole
-      anciennete
-      tranche_age
-      departement
-      region
-      nom
+      returning {
+        sexe
+        exerce_seul_activite
+        secretaire_specialise_etp
+        local_professionnel
+        last_update
+        id
+        forme_juridique
+        exerce_secretaires_specialises
+        estimation_etp
+        created_at
+        benevole
+        anciennete
+        tranche_age
+        departement
+        region
+        nom
+      }
     }
   }
 `;

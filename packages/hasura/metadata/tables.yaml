@@ -632,6 +632,10 @@
       - submitted_at
       backend_only: false
   select_permissions:
+  - role: direction
+    permission:
+      columns: []
+      filter: {}
   - role: direction_nationale
     permission:
       columns:
@@ -3449,6 +3453,14 @@
 - table:
     schema: public
     name: enquetes
+  array_relationships:
+  - name: enquete_reponses
+    using:
+      foreign_key_constraint_on:
+        column: enquete_id
+        table:
+          schema: public
+          name: enquete_reponses
   insert_permissions:
   - role: direction_nationale
     permission:

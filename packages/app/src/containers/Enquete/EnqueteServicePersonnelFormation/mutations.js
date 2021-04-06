@@ -26,8 +26,8 @@ export const UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION = gql`
     $nb_delegues_femme: Int
     $nb_delegues_femme_etp: Float
   ) {
-    update_enquete_reponses_service_personnel_formation_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_service_personnel_formation(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         nb_delegues: $nb_delegues
         nb_delegues_etp: $nb_delegues_etp
@@ -53,7 +53,9 @@ export const UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION = gql`
         nb_delegues_femme_etp: $nb_delegues_femme_etp
       }
     ) {
-      id
+      returning {
+        id
+      }
     }
   }
 `;

@@ -5,12 +5,14 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE = gql`
     $id: Int!
     $tutelle: jsonb!
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: { tutelle: $tutelle }
     ) {
-      id
-      tutelle
+      returning {
+        id
+        tutelle
+      }
     }
   }
 `;
@@ -26,8 +28,8 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION = gql`
     $aspa: Float
     $apa: Float
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         aah: $aah
         pch: $pch
@@ -38,14 +40,16 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_REPARTITION = gql`
         apa: $apa
       }
     ) {
-      id
-      aah
-      pch
-      asi
-      rsa
-      als_apl
-      aspa
-      apa
+      returning {
+        id
+        aah
+        pch
+        asi
+        rsa
+        als_apl
+        aspa
+        apa
+      }
     }
   }
 `;
@@ -55,12 +59,14 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE = gql`
     $id: Int!
     $curatelle_simple: jsonb!
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: { curatelle_simple: $curatelle_simple }
     ) {
-      id
-      curatelle_simple
+      returning {
+        id
+        curatelle_simple
+      }
     }
   }
 `;
@@ -70,12 +76,14 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE = g
     $id: Int!
     $curatelle_renforcee: jsonb!
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: { curatelle_renforcee: $curatelle_renforcee }
     ) {
-      id
-      curatelle_renforcee
+      returning {
+        id
+        curatelle_renforcee
+      }
     }
   }
 `;
@@ -85,12 +93,14 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_AUTRES_MESURES = gql`
     $id: Int!
     $sauvegarde_autres_mesures: jsonb!
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: { sauvegarde_autres_mesures: $sauvegarde_autres_mesures }
     ) {
-      id
-      sauvegarde_autres_mesures
+      returning {
+        id
+        sauvegarde_autres_mesures
+      }
     }
   }
 `;
@@ -100,12 +110,14 @@ export const UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_MAJ = gql`
     $id: Int!
     $maj: jsonb!
   ) {
-    update_enquete_reponses_prepose_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prepose_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: { maj: $maj }
     ) {
-      id
-      maj
+      returning {
+        id
+        maj
+      }
     }
   }
 `;

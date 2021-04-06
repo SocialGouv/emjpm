@@ -11,8 +11,8 @@ export const UPDATE_ENQUETE_SERVICE_INFORMATIONS = gql`
     $type_organisme_gestionnaire: String
     $affiliation_federation: String
   ) {
-    update_enquete_reponses_service_informations_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_service_informations(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         region: $region
         nom: $nom
@@ -23,15 +23,17 @@ export const UPDATE_ENQUETE_SERVICE_INFORMATIONS = gql`
         affiliation_federation: $affiliation_federation
       }
     ) {
-      id
-      affiliation_federation
-      created_at
-      departement
-      last_update
-      type_organisme_gestionnaire
-      nb_structures_concernees
-      nom
-      region
+      returning {
+        id
+        affiliation_federation
+        created_at
+        departement
+        last_update
+        type_organisme_gestionnaire
+        nb_structures_concernees
+        nom
+        region
+      }
     }
   }
 `;

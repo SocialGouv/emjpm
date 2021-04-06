@@ -14,8 +14,8 @@ function buildEnqueteEtablissementDomicileUpdateMutation(prefix) {
       $domicileMesuresNouvelles: Int
       $domicileSortieMesures: Int
     ) {
-      update_enquete_reponses_activite_by_pk(
-        pk_columns: { id: $id }
+      update_enquete_reponses_activite(
+        where: { enquete_reponses_id: { _eq: $id } }
         _set: {
           ${prefix}_etablissement_debut_annee: $etablissementDebutAnnee
           ${prefix}_etablissement_fin_annee: $etablissementFinAnnee
@@ -27,15 +27,17 @@ function buildEnqueteEtablissementDomicileUpdateMutation(prefix) {
           ${prefix}_domicile_sortie_mesures: $domicileSortieMesures
         }
       ) {
-        id
-        ${prefix}_etablissement_debut_annee
-        ${prefix}_etablissement_fin_annee
-        ${prefix}_domicile_debut_annee
-        ${prefix}_domicile_fin_annee
-        ${prefix}_etablissement_mesures_nouvelles
-        ${prefix}_etablissement_sortie_mesures
-        ${prefix}_domicile_mesures_nouvelles
-        ${prefix}_domicile_sortie_mesures
+        returning {
+          id
+          ${prefix}_etablissement_debut_annee
+          ${prefix}_etablissement_fin_annee
+          ${prefix}_domicile_debut_annee
+          ${prefix}_domicile_fin_annee
+          ${prefix}_etablissement_mesures_nouvelles
+          ${prefix}_etablissement_sortie_mesures
+          ${prefix}_domicile_mesures_nouvelles
+          ${prefix}_domicile_sortie_mesures
+        }
       }
     }
   `;
@@ -75,8 +77,8 @@ function buildEnqueteMesuresUpdateMutation(prefix) {
       $mesuresNouvelles: Int
       $sortieMesures: Int
     ) {
-      update_enquete_reponses_activite_by_pk(
-        pk_columns: { id: $id }
+      update_enquete_reponses_activite(
+        where: { enquete_reponses_id: { _eq: $id } }
         _set: {
           ${prefix}_debut_annee: $debutAnnee
           ${prefix}_fin_annee: $finAnnee
@@ -84,11 +86,13 @@ function buildEnqueteMesuresUpdateMutation(prefix) {
           ${prefix}_sortie_mesures: $sortieMesures
         }
       ) {
-        id
-        ${prefix}_debut_annee
-        ${prefix}_fin_annee
-        ${prefix}_mesures_nouvelles
-        ${prefix}_sortie_mesures
+        returning {
+          id
+          ${prefix}_debut_annee
+          ${prefix}_fin_annee
+          ${prefix}_mesures_nouvelles
+          ${prefix}_sortie_mesures
+        }
       }
     }
   `;
@@ -112,8 +116,8 @@ export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
     $revisionsChangement: Int
     $revisionsAutre: Int
   ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_activite(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         revisions_main_levee: $revisionsMainLevee
         revisions_masp: $revisionsMasp
@@ -122,12 +126,14 @@ export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
         revisions_autre: $revisionsAutre
       }
     ) {
-      id
-      revisions_main_levee
-      revisions_masp
-      revisions_reconduction
-      revisions_changement
-      revisions_autre
+      returning {
+        id
+        revisions_main_levee
+        revisions_masp
+        revisions_reconduction
+        revisions_changement
+        revisions_autre
+      }
     }
   }
 `;
@@ -139,18 +145,20 @@ export const UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF = gql`
     $sortiesDeces: Int
     $sortiesMasp: Int
   ) {
-    update_enquete_reponses_activite_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_activite(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         sorties_main_levee: $sortiesMainLevee
         sorties_deces: $sortiesDeces
         sorties_masp: $sortiesMasp
       }
     ) {
-      id
-      sorties_main_levee
-      sorties_deces
-      sorties_masp
+      returning {
+        id
+        sorties_main_levee
+        sorties_deces
+        sorties_masp
+      }
     }
   }
 `;

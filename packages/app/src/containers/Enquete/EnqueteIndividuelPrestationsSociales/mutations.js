@@ -11,8 +11,8 @@ export const UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES = gql`
     $aspa: Int
     $apa: Int
   ) {
-    update_enquete_reponses_prestations_sociales_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_prestations_sociales(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         aah: $aah
         pch: $pch
@@ -23,16 +23,18 @@ export const UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES = gql`
         apa: $apa
       }
     ) {
-      aah
-      als_apl
-      apa
-      asi
-      aspa
-      created_at
-      id
-      last_update
-      pch
-      rsa
+      returning {
+        aah
+        als_apl
+        apa
+        asi
+        aspa
+        created_at
+        id
+        last_update
+        pch
+        rsa
+      }
     }
   }
 `;

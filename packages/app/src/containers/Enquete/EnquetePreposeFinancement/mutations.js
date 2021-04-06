@@ -11,8 +11,8 @@ export const UPDATE_ENQUETE_REPONSES_FINANCEMENT = gql`
     $financement_public: numeric
     $produits_bareme_prelevements: numeric
   ) {
-    update_enquete_reponses_financement_by_pk(
-      pk_columns: { id: $id }
+    update_enquete_reponses_financement(
+      where: { enquete_reponses_id: { _eq: $id } }
       _set: {
         aide_sociale_conseil_departemental: $aide_sociale_conseil_departemental
         autre_produits: $autre_produits
@@ -23,16 +23,18 @@ export const UPDATE_ENQUETE_REPONSES_FINANCEMENT = gql`
         produits_bareme_prelevements: $produits_bareme_prelevements
       }
     ) {
-      id
-      aide_sociale_conseil_departemental
-      autre_produits
-      charges_fonctionnement
-      charges_personnel
-      charges_preposes
-      created_at
-      financement_public
-      last_update
-      produits_bareme_prelevements
+      returning {
+        id
+        aide_sociale_conseil_departemental
+        autre_produits
+        charges_fonctionnement
+        charges_personnel
+        charges_preposes
+        created_at
+        financement_public
+        last_update
+        produits_bareme_prelevements
+      }
     }
   }
 `;
