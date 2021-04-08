@@ -116,7 +116,7 @@ function MandataireOcmiMesureImportSwitcher({
       {syncEnabled || (
         <Box>
           <Text mb="1" lineHeight="2">
-            {`Pour activer la synchronisation automatique et importer vos mesures de votre compte OCMI dans votre compte eMJPM, activer le bouton ci-dessus.`}
+            {`Pour activer la synchronisation automatique journalière et importer vos mesures de votre compte OCMI dans votre compte eMJPM, activer le bouton ci-dessus.`}
           </Text>
         </Box>
       )}
