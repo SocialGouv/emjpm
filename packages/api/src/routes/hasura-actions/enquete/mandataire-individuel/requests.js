@@ -2,6 +2,7 @@
 const logger = require("~/utils/logger");
 const { graphqlFetch, backendAuthHeaders } = require("~/utils/graphql-fetcher");
 const {
+  ENQUETE,
   ENQUETE_REPONSE,
   ENQUETE_REPONSE_DEFAULT_VALUES,
 } = require("./queries");
@@ -9,9 +10,17 @@ const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
 module.exports = {
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
+    const { data: enqueteData } = await graphqlFetch(
+      { enqueteId },
+      ENQUETE,
+      backendAuthHeaders
+    );
+
+    const enqueteAnnee = enqueteData.enquetes_by_pk.annee;
+    const previousYear = (enqueteAnnee - 1).toString();
     try {
-      const queryResult = await graphqlFetch(
-        { mandataireId },
+      const { data: enqueteReponseDefaultData } = await graphqlFetch(
+        { mandataireId, previousYear },
         ENQUETE_REPONSE_DEFAULT_VALUES,
         backendAuthHeaders
       );
@@ -22,8 +31,8 @@ module.exports = {
         region: null,
       };
 
-      if (queryResult.data.mandataires_by_pk) {
-        const { id, lb_user } = queryResult.data.mandataires_by_pk;
+      if (enqueteReponseDefaultData.mandataires_by_pk) {
+        const { lb_user } = enqueteReponseDefaultData.mandataires_by_pk;
 
         if (lb_user) {
           defaultValues.nom = `${lb_user.prenom} ${lb_user.nom}`;
@@ -42,7 +51,20 @@ module.exports = {
         }
       }
 
+      if (
+        enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0]
+          ?.enquete_reponses_informations_mandataire
+      ) {
+        const previousYearEnqueteReponsesInformationsMandataire =
+          enqueteReponseDefaultData.previous_enquete[0].enquete_reponses[0]
+            .enquete_reponses_informations_mandataire;
+
+        defaultValues.benevole =
+          previousYearEnqueteReponsesInformationsMandataire.benevole;
+      }
+
       const value = {
+        benevole: defaultValues.benevole,
         departement: defaultValues.departement,
         departementCode: defaultValues.departementCode,
         enqueteId,

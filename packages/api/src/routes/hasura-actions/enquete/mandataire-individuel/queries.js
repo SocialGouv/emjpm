@@ -35,6 +35,15 @@ function build3Combinaisons(prefixes, middles, suffixes, separator) {
 }
 
 module.exports = {
+  ENQUETE: `
+  query enquete($enqueteId: Int!) {
+    enquetes_by_pk(id: $enqueteId){
+      id
+      annee
+    }
+  }
+  `,
+
   ENQUETE_REPONSE: `
   query enquete_reponses($enqueteId: Int!, $mandataireId: Int!) {
     enquete_reponses(where: {enquete_id: {_eq: $enqueteId}, mandataire_id: { _eq: $mandataireId }}) {
@@ -260,7 +269,7 @@ module.exports = {
 `,
 
   ENQUETE_REPONSE_DEFAULT_VALUES: `
-    query enquete_individuel_default_values($mandataireId: Int!) {
+    query enquete_individuel_default_values($mandataireId: Int!, $previousYear: String!) {
       mandataires_by_pk(id: $mandataireId) {
         id
         lb_user {
@@ -276,6 +285,15 @@ module.exports = {
                 nom
               }
             }
+          }
+        }
+      }
+
+      previous_enquete: enquetes(where: {annee: {_eq: $previousYear}}){
+        id
+        enquete_reponses(where: {mandataire_id: {_eq: $mandataireId}}) {
+          enquete_reponses_informations_mandataire {
+            benevole
           }
         }
       }

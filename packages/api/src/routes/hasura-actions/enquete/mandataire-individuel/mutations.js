@@ -1,6 +1,6 @@
 module.exports = {
   INIT_ENQUETE_REPONSE: `
-  mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!, $departementCode: String, $nom: String, $departement: String, $region: String) {
+  mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!, $departementCode: String, $nom: String, $departement: String, $region: String, $benevole: Boolean) {
     insert_enquete_reponses
       (objects: [
         {
@@ -10,7 +10,7 @@ module.exports = {
           mandataire_id: $mandataireId,
           enquete_reponses_activites: {data: [{}]},
           enquete_reponses_agrements_formations: {data: [{}]},
-          enquete_reponses_informations_mandataires: {data: [{nom: $nom, departement: $departement, region: $region}]},
+          enquete_reponses_informations_mandataires: {data: [{nom: $nom, departement: $departement, region: $region, benevole: $benevole}]},
           enquete_reponses_populations: {data: [{}]},
           enquete_reponses_prestations_sociales: {data: [{}]}
         }
