@@ -21,6 +21,15 @@ module.exports = {
     $debut_activite_avant_2009: Boolean,
     $nb_mesures_dep_finance: Int,
     $nb_mesures_dep_autres: Int,
+    $cnc_annee_obtention: Int,
+    $cnc_heures_formation: Float,
+    $niveau_qualification: Int,
+    $secretaire_specialise_etp_n1: Float,
+    $secretaire_specialise_etp_n2: Float,
+    $secretaire_specialise_etp_n3: Float,
+    $secretaire_specialise_etp_n4: Float,
+    $secretaire_specialise_etp_n5: Float,
+    $secretaire_specialise_etp_n6: Float,
   ) {
     insert_enquete_reponses
       (objects: [
@@ -36,6 +45,15 @@ module.exports = {
             debut_activite_avant_2009: $debut_activite_avant_2009,
             nb_mesures_dep_finance: $nb_mesures_dep_finance,
             nb_mesures_dep_autres: $nb_mesures_dep_autres,
+            cnc_annee_obtention: $cnc_annee_obtention,
+            cnc_heures_formation: $cnc_heures_formation,
+            niveau_qualification: $niveau_qualification,
+            secretaire_specialise_etp_n1: $secretaire_specialise_etp_n1,
+            secretaire_specialise_etp_n2: $secretaire_specialise_etp_n2,
+            secretaire_specialise_etp_n3: $secretaire_specialise_etp_n3,
+            secretaire_specialise_etp_n4: $secretaire_specialise_etp_n4,
+            secretaire_specialise_etp_n5: $secretaire_specialise_etp_n5,
+            secretaire_specialise_etp_n6: $secretaire_specialise_etp_n6,
           }]},
           enquete_reponses_informations_mandataires: {data: [{
             nom: $nom,

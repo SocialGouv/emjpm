@@ -114,6 +114,19 @@ module.exports = {
           nbMesures.nb_mesures_dep_autres.aggregate.count;
 
         // ## formation
+        for (const k of [
+          "cnc_annee_obtention",
+          "cnc_heures_formation",
+          "niveau_qualification",
+          "secretaire_specialise_etp_n1",
+          "secretaire_specialise_etp_n2",
+          "secretaire_specialise_etp_n3",
+          "secretaire_specialise_etp_n4",
+          "secretaire_specialise_etp_n5",
+          "secretaire_specialise_etp_n6",
+        ]) {
+          defaultValues[k] = previous.enquete_reponses_agrements_formation[k];
+        }
       }
 
       const values = {

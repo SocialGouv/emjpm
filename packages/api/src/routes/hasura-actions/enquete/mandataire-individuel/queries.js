@@ -307,6 +307,15 @@ module.exports = {
           enquete_reponses_agrements_formation {
             debut_activite_avant_2009
             annee_agrement
+            cnc_annee_obtention
+            cnc_heures_formation
+            niveau_qualification
+            secretaire_specialise_etp_n1
+            secretaire_specialise_etp_n2
+            secretaire_specialise_etp_n3
+            secretaire_specialise_etp_n4
+            secretaire_specialise_etp_n5
+            secretaire_specialise_etp_n6
           }
         }
       }      
