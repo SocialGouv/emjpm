@@ -31,8 +31,11 @@ module.exports = {
         region: null,
       };
 
-      if (enqueteReponseDefaultData.mandataires_by_pk) {
-        const { lb_user } = enqueteReponseDefaultData.mandataires_by_pk;
+      const mandataire = enqueteReponseDefaultData.mandataires_by_pk;
+      if (mandataire) {
+        const { lb_user } = mandataire;
+
+        defaultValues.genre = mandataire.genre;
 
         if (lb_user) {
           defaultValues.nom = `${lb_user.prenom} ${lb_user.nom}`;
@@ -68,6 +71,7 @@ module.exports = {
         departement: defaultValues.departement,
         departementCode: defaultValues.departementCode,
         enqueteId,
+        genre: defaultValues.genre,
         mandataireId,
         nom: defaultValues.nom,
         region: defaultValues.region,

@@ -272,6 +272,7 @@ module.exports = {
     query enquete_individuel_default_values($mandataireId: Int!, $previousYear: String!) {
       mandataires_by_pk(id: $mandataireId) {
         id
+        genre
         lb_user {
           id
           nom
