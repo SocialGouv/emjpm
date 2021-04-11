@@ -277,8 +277,9 @@ module.exports = {
           id
           nom
           prenom
-          lb_departements(where: {departement_financeur: {_eq: true}}) {
+          lb_departements {
             id
+            departement_financeur
             departement {
               id
               nom
@@ -295,7 +296,101 @@ module.exports = {
         enquete_reponses(where: {mandataire_id: {_eq: $mandataireId}}) {
           enquete_reponses_informations_mandataire {
             benevole
+            anciennete
+            estimation_etp
+            secretaire_specialise_etp
+            local_professionnel
+            exerce_seul_activite
+            exerce_secretaires_specialises
+            tranche_age
           }
+          enquete_reponses_agrements_formation {
+            debut_activite_avant_2009
+            annee_agrement
+          }
+        }
+      }      
+    }
+  `,
+
+  NB_MESURES: `
+    query nb_mesures(
+      $mandataireId: Int!,
+      $departementCode: String,
+      $dateStart: date!,
+      $dateEnd: date!,
+    ) {
+      nb_mesures_dep_finance: mesures_aggregate(where: {
+        _and: [
+          {
+            mandataire_id : {_eq: $mandataireId}
+          },
+          {
+            departement_code : {_eq: $departementCode}
+          },
+          {
+            date_nomination: {_gte: $dateStart}
+          },
+          {
+            _or: [
+              {
+                date_fin_mesure : {
+                  _lte: $dateEnd
+                }
+              },
+              {
+                date_fin_mesure : {
+                  _is_null: true
+                }
+              }
+            ]
+          }
+        ]
+      }){
+        aggregate {
+          count
+        }
+      }
+      nb_mesures_dep_autres: mesures_aggregate(where: {
+        _and: [
+          {
+            mandataire_id : {_eq: $mandataireId}
+          },
+          {
+            _or: [
+              {
+                departement_code : {
+                  _neq: $departementCode
+                }
+              },
+              {
+                departement_code : {
+                  _is_null: true
+                }
+              }
+            ]
+          },
+          {
+            date_nomination: {_gte: $dateStart}
+          },
+          {
+            _or: [
+              {
+                date_fin_mesure : {
+                  _lte: $dateEnd
+                }
+              },
+              {
+                date_fin_mesure : {
+                  _is_null: true
+                }
+              }
+            ]
+          }
+        ]
+      }){
+        aggregate {
+          count
         }
       }
     }

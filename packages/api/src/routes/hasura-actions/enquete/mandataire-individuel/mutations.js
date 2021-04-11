@@ -1,6 +1,27 @@
 module.exports = {
   INIT_ENQUETE_REPONSE: `
-  mutation create_enquete_individuel_reponse($enqueteId: Int!, $mandataireId: Int!, $departementCode: String, $nom: String, $departement: String, $region: String, $benevole: Boolean, $genre: String) {
+  mutation create_enquete_individuel_reponse(
+    $enqueteId: Int!,
+    $mandataireId: Int!,
+    $departementCode: String,
+    $nom: String,
+    $departement: String,
+    $region: String,
+    $benevole: Boolean,
+    $genre: String,
+    $anciennete: String,
+    $estimation_etp: String,
+    $secretaire_specialise_etp: Float,
+    $local_professionnel: Boolean,
+    $exerce_seul_activite: Boolean,
+    $exerce_secretaires_specialises: Boolean,
+    $tranche_age: String,
+    $annee_agrement: Int,
+    $nb_departements: String,
+    $debut_activite_avant_2009: Boolean,
+    $nb_mesures_dep_finance: Int,
+    $nb_mesures_dep_autres: Int,
+  ) {
     insert_enquete_reponses
       (objects: [
         {
@@ -9,8 +30,27 @@ module.exports = {
           user_type: "individuel",
           mandataire_id: $mandataireId,
           enquete_reponses_activites: {data: [{}]},
-          enquete_reponses_agrements_formations: {data: [{}]},
-          enquete_reponses_informations_mandataires: {data: [{nom: $nom, departement: $departement, region: $region, benevole: $benevole, sexe: $genre}]},
+          enquete_reponses_agrements_formations: {data: [{
+            annee_agrement: $annee_agrement,
+            nb_departements: $nb_departements,
+            debut_activite_avant_2009: $debut_activite_avant_2009,
+            nb_mesures_dep_finance: $nb_mesures_dep_finance,
+            nb_mesures_dep_autres: $nb_mesures_dep_autres,
+          }]},
+          enquete_reponses_informations_mandataires: {data: [{
+            nom: $nom,
+            departement: $departement,
+            region: $region,
+            benevole: $benevole,
+            sexe: $genre,
+            anciennete: $anciennete,
+            estimation_etp: $estimation_etp,
+            secretaire_specialise_etp: $secretaire_specialise_etp,
+            local_professionnel: $local_professionnel,
+            exerce_seul_activite: $exerce_seul_activite,
+            exerce_secretaires_specialises: $exerce_secretaires_specialises,
+            tranche_age: $tranche_age,
+          }]},
           enquete_reponses_populations: {data: [{}]},
           enquete_reponses_prestations_sociales: {data: [{}]}
         }

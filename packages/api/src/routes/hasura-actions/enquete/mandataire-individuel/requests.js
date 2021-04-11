@@ -7,6 +7,7 @@ const {
   ENQUETE,
   ENQUETE_REPONSE,
   ENQUETE_REPONSE_DEFAULT_VALUES,
+  NB_MESURES,
 } = require("./queries");
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
 
@@ -34,27 +35,27 @@ module.exports = {
       };
 
       const mandataire = enqueteReponseDefaultData.mandataires_by_pk;
-      if (mandataire) {
-        const { lb_user } = mandataire;
 
-        defaultValues.genre = mandataire.genre;
+      const { lb_user } = mandataire;
 
-        if (lb_user) {
-          defaultValues.nom = capitalizeName(
-            `${lb_user.prenom} ${lb_user.nom}`
+      defaultValues.genre = mandataire.genre;
+
+      let lb_departements;
+      let departement_financeur;
+      let lb_departement;
+      if (lb_user) {
+        defaultValues.nom = capitalizeName(`${lb_user.prenom} ${lb_user.nom}`);
+        lb_departements = lb_user.lb_departements;
+        if (lb_departements && lb_departements.length) {
+          departement_financeur = lb_departements.find(
+            (row) => row.departement_financeur
           );
-          const { lb_departements } = lb_user;
-          if (lb_departements && lb_departements.length) {
-            const departement_financeur = lb_departements.find(
-              (row) => row.departement_financeur
-            );
-            const lb_departement = departement_financeur || lb_departements[0];
-            const { departement } = lb_departement;
+          lb_departement = departement_financeur || lb_departements[0];
+          const { departement } = lb_departement;
 
-            defaultValues.region = departement.region.nom;
-            defaultValues.departement = departement.nom;
-            defaultValues.departementCode = departement.id;
-          }
+          defaultValues.region = departement.region.nom;
+          defaultValues.departement = departement.nom;
+          defaultValues.departementCode = departement.id;
         }
       }
 
@@ -62,27 +63,67 @@ module.exports = {
         enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0]
           ?.enquete_reponses_informations_mandataire
       ) {
-        const previousYearEnqueteReponsesInformationsMandataire =
-          enqueteReponseDefaultData.previous_enquete[0].enquete_reponses[0]
-            .enquete_reponses_informations_mandataire;
+        const previous =
+          enqueteReponseDefaultData.previous_enquete[0].enquete_reponses[0];
 
-        defaultValues.benevole =
-          previousYearEnqueteReponsesInformationsMandataire.benevole;
+        // # Vos informations
+        // ## informations générales
+        for (const k of [
+          "benevole",
+          "anciennete",
+          "estimation_etp",
+          "secretaire_specialise_etp",
+          "local_professionnel",
+          "exerce_seul_activite",
+          "exerce_secretaires_specialises",
+          "tranche_age",
+        ]) {
+          defaultValues[k] =
+            previous.enquete_reponses_informations_mandataire[k];
+        }
+
+        // ## agrément
+        for (const k of ["debut_activite_avant_2009", "annee_agrement"]) {
+          defaultValues[k] = previous.enquete_reponses_agrements_formation[k];
+        }
+        if (lb_user) {
+          const length = lb_user.lb_departements.length;
+          if (length >= 5) {
+            defaultValues.nb_departements = "5+";
+          } else {
+            defaultValues.nb_departements = length.toString();
+          }
+        }
+        const departementCode = departement_financeur.departement.id;
+        const dateStart = new Date(enqueteAnnee - 1, 0, 1);
+        const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
+        const { data: nbMesures } = await graphqlFetch(
+          {
+            dateEnd,
+            dateStart,
+            departementCode,
+            mandataireId,
+          },
+          NB_MESURES,
+          backendAuthHeaders
+        );
+        defaultValues.nb_mesures_dep_finance = departementCode
+          ? nbMesures.nb_mesures_dep_finance.aggregate.count
+          : 0;
+        defaultValues.nb_mesures_dep_autres =
+          nbMesures.nb_mesures_dep_autres.aggregate.count;
+
+        // ## formation
       }
 
-      const value = {
-        benevole: defaultValues.benevole,
-        departement: defaultValues.departement,
-        departementCode: defaultValues.departementCode,
+      const values = {
+        ...defaultValues,
         enqueteId,
-        genre: defaultValues.genre,
         mandataireId,
-        nom: defaultValues.nom,
-        region: defaultValues.region,
       };
 
       const { data, errors } = await graphqlFetch(
-        value,
+        values,
         INIT_ENQUETE_REPONSE,
         backendAuthHeaders
       );
