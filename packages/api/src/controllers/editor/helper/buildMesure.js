@@ -1,4 +1,5 @@
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
+const { getDepartementByCodePostal } = require("~/utils/code-postal");
 
 function buildMesure({
   datas,
@@ -12,6 +13,12 @@ function buildMesure({
   ti,
   editorId,
 }) {
+  const code_postal = lastEtat.code_postal || datas.code_postal;
+  let departement_code = departement ? departement.id : null;
+  if (!departement_code && code_postal) {
+    departement_code = getDepartementByCodePostal(code_postal);
+  }
+
   return {
     annee_naissance: datas.annee_naissance,
     antenne_id: antenneId,
@@ -19,7 +26,7 @@ function buildMesure({
     cause_sortie: datas.cause_sortie,
     champ_mesure: lastEtat.champ_mesure,
     civilite: datas.civilite,
-    code_postal: lastEtat.code_postal || datas.code_postal,
+    code_postal,
     date_fin_mesure:
       datas.date_fin_mesure !== "0000-00-00" ? datas.date_fin_mesure : null,
     date_nomination:
@@ -29,7 +36,7 @@ function buildMesure({
         ? datas.date_premier_mesure
         : null,
     date_protection_en_cours: datas.date_protection_en_cours,
-    departement_code: departement ? departement.id : null,
+    departement_code,
     editor_id: editorId,
     [`${type}_id`]: serviceOrMandataire.id,
     latitude: latitude,
