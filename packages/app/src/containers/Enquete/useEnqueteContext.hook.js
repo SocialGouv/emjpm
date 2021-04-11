@@ -51,12 +51,17 @@ function enqueteContextReducer(state, action) {
       }
     }
     case "navigate-to-next-page":
+      const { nextStep } = state.form;
       return {
         actions: {
           ...enqueteContextInitialValue.actions,
         },
         form: {
           ...enqueteContextInitialValue.form,
+          nextStep: {
+            step: nextStep.step,
+            substep: nextStep.substep,
+          },
         },
       };
     case "set-form-dirty":
