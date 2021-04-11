@@ -27,13 +27,17 @@ module.exports = {
 
         if (lb_user) {
           defaultValues.nom = `${lb_user.prenom} ${lb_user.nom}`;
-          if (lb_user.lb_departements && lb_user.lb_departements.length) {
-            if (lb_user.lb_departements) {
-              const [{ departement }] = lb_user.lb_departements;
-              defaultValues.region = departement.region.nom;
-              defaultValues.departement = departement.nom;
-              defaultValues.departementCode = departement.id;
-            }
+          const { lb_departements } = lb_user;
+          if (lb_departements && lb_departements.length) {
+            const departement_financeur = lb_departements.find(
+              (row) => row.departement_financeur
+            );
+            const lb_departement = departement_financeur || lb_departements[0];
+            const { departement } = lb_departement;
+
+            defaultValues.region = departement.region.nom;
+            defaultValues.departement = departement.nom;
+            defaultValues.departementCode = departement.id;
           }
         }
       }

@@ -32,7 +32,11 @@ module.exports = {
             defaultValues.departement_code = departement.id;
             defaultValues.departement = departement.nom;
           } else if (lb_departements && lb_departements.length) {
-            const [{ departement }] = lb_user.lb_departements;
+            const departement_financeur = lb_departements.find(
+              (row) => row.departement_financeur
+            );
+            const lb_departement = departement_financeur || lb_departements[0];
+            const { departement } = lb_departement;
             defaultValues.region = departement.region.nom;
             defaultValues.departement_code = departement.id;
             defaultValues.departement = departement.nom;
