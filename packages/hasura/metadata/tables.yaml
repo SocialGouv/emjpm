@@ -5736,7 +5736,6 @@
         - latitude
         - longitude
         - antenne_id
-        - department_id
         - editor_id
         - etablissement_id
         - id
