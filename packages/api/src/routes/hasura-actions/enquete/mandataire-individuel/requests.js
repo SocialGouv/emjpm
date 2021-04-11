@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 const logger = require("~/utils/logger");
+const { capitalizeName } = require("~/utils/strings");
+
 const { graphqlFetch, backendAuthHeaders } = require("~/utils/graphql-fetcher");
 const {
   ENQUETE,
@@ -38,7 +40,9 @@ module.exports = {
         defaultValues.genre = mandataire.genre;
 
         if (lb_user) {
-          defaultValues.nom = `${lb_user.prenom} ${lb_user.nom}`;
+          defaultValues.nom = capitalizeName(
+            `${lb_user.prenom} ${lb_user.nom}`
+          );
           const { lb_departements } = lb_user;
           if (lb_departements && lb_departements.length) {
             const departement_financeur = lb_departements.find(
