@@ -62,7 +62,7 @@ module.exports = {
       const previous =
         enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0];
 
-      // # Vos informations
+      // # 2. Vos informations
       // ## informations générales
       if (previous) {
         for (const k of [
@@ -97,7 +97,7 @@ module.exports = {
       const departementCode = departement_financeur.departement.id;
       const dateStart = new Date(enqueteAnnee - 1, 0, 1);
       const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
-      const { data: nbMesures } = await graphqlFetch(
+      const { data: nbMesures, errors: errorsNbMesures } = await graphqlFetch(
         {
           dateEnd,
           dateStart,
@@ -107,6 +107,11 @@ module.exports = {
         NB_MESURES,
         backendAuthHeaders
       );
+
+      if (errorsNbMesures) {
+        console.error("errorsNbMesures", errorsNbMesures);
+      }
+
       defaultValues.nb_mesures_dep_finance = departementCode
         ? nbMesures.nb_mesures_dep_finance.aggregate.count
         : 0;
@@ -140,6 +145,41 @@ module.exports = {
         if (!defaultValues[k]) {
           defaultValues[k] = 0;
         }
+      }
+
+      // # 3. Activité dans l'année
+      for (const k of [
+        "curatelle_renforcee_etablissement_debut_annee",
+        "curatelle_renforcee_etablissement_fin_annee",
+        "curatelle_renforcee_domicile_debut_annee",
+        "curatelle_renforcee_domicile_fin_annee",
+        "curatelle_simple_etablissement_debut_annee",
+        "curatelle_simple_etablissement_fin_annee",
+        "curatelle_simple_domicile_debut_annee",
+        "curatelle_simple_domicile_fin_annee",
+        "tutelle_etablissement_debut_annee",
+        "tutelle_etablissement_fin_annee",
+        "tutelle_domicile_debut_annee",
+        "tutelle_domicile_fin_annee",
+        "accompagnement_judiciaire_etablissement_debut_annee",
+        "accompagnement_judiciaire_etablissement_fin_annee",
+        "accompagnement_judiciaire_domicile_debut_annee",
+        "accompagnement_judiciaire_domicile_fin_annee",
+        "curatelle_biens_etablissement_debut_annee",
+        "curatelle_biens_etablissement_fin_annee",
+        "curatelle_biens_domicile_debut_annee",
+        "curatelle_personne_etablissement_debut_annee",
+        "curatelle_personne_etablissement_fin_annee",
+        "curatelle_personne_domicile_debut_annee",
+        "curatelle_personne_domicile_fin_annee",
+        "subroge_tuteur_createur_debut_annee",
+        "subroge_tuteur_createur_fin_annee",
+        "sauvegarde_justice_debut_annee",
+        "sauvegarde_justice_fin_annee",
+        "mandat_adhoc_majeur_debut_annee",
+        "mandat_adhoc_majeur_fin_annee",
+      ]) {
+        defaultValues[k] = nbMesures[k].aggregate.count;
       }
 
       const values = {

@@ -34,6 +34,66 @@ function build3Combinaisons(prefixes, middles, suffixes, separator) {
     .join("\n");
 }
 
+const gqlAu1erJanvier = `
+  { date_nomination: {_lte: $dateStart} },
+  {
+    _or: [
+      { date_fin_mesure : {_lte: $dateStart} },
+      { date_fin_mesure : {_is_null: true} }
+    ]
+  },
+`;
+
+const gqlAu31Decembre = `
+  { date_nomination : {_gte: $dateStart} },
+  { date_nomination : {_lte: $dateEnd} },
+  {
+    _or: [
+      { date_fin_mesure : { _lte: $dateEnd }},
+      { date_fin_mesure : { _is_null: true }}
+    ]
+  },
+`;
+
+const gqlEtalblissement = `
+  {
+    _or: [
+      { lieu_vie: {_eq: etablissement} },
+    ],
+  },
+`;
+
+const gqlDomicile = `
+  {
+    _or: [
+      { lieu_vie: {_eq: domicile} },
+      { lieu_vie: {_eq: etablissement_conservation_domicile} },
+      { lieu_vie: {_eq: sdf} }
+    ],
+  },
+`;
+
+const gqlCuratelle = `
+  {
+    _or: [
+      { nature_mesure: {_eq: curatelle_simple} },
+      { nature_mesure: {_eq: curatelle_renforcee} }
+    ]
+  },      
+`;
+
+const gqlBiens = `
+  { champ_mesure: {_eq: protection_bien} },
+`;
+const gqlPersonne = `
+  {
+    _or: [
+      {champ_mesure: {_eq: protection_personne} },
+      {champ_mesure: {_eq: protection_bien_personne} }
+    ]
+  },
+`;
+
 module.exports = {
   ENQUETE: `
   query enquete($enqueteId: Int!) {
@@ -402,6 +462,321 @@ module.exports = {
           count
         }
       }
+
+      curatelle_renforcee_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+        ]
+      }){
+        aggregate { count }
+      }
+      
+      curatelle_renforcee_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_renforcee_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_renforcee_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      curatelle_simple_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: curatelle_simple} },
+        ]
+      }){
+        aggregate { count }
+     }
+     curatelle_simple_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: curatelle_simple} },
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: curatelle_simple} },
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: curatelle_simple} },
+        ]
+      }){
+        aggregate { count }
+      }
+      
+      tutelle_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: tutelle} },
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: tutelle} },
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: tutelle} },
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: tutelle} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      accompagnement_judiciaire_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      curatelle_biens_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+     }
+      curatelle_biens_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+
+      curatelle_personne_etablissement_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_etablissement_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_domicile_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_domicile_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+
+      subroge_tuteur_createur_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          { nature_mesure: {_eq: subroge_tuteur} },
+        ]
+      }){
+        aggregate { count }
+      }
+      subroge_tuteur_createur_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          { nature_mesure: {_eq: subroge_tuteur} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      sauvegarde_justice_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          { nature_mesure: {_eq: sauvegarde_justice} },
+        ]
+      }){
+        aggregate { count }
+      }
+      sauvegarde_justice_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          { nature_mesure: {_eq: sauvegarde_justice} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      mandat_adhoc_majeur_debut_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu1erJanvier}
+          { nature_mesure: {_eq: mesure_ad_hoc} },
+        ]
+      }){
+        aggregate { count }
+      }
+      mandat_adhoc_majeur_fin_annee: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlAu31Decembre}
+          { nature_mesure: {_eq: mesure_ad_hoc} },
+        ]
+      }){
+        aggregate { count }
+      }
+    
+    
+    
     }
   `,
 };
