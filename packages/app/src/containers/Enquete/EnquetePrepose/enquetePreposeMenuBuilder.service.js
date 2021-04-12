@@ -36,7 +36,7 @@ import {
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
 
-function buildMenuSections(enqueteReponse) {
+function buildMenuSections(enqueteReponse, enquete) {
   const status = enqueteReponse.enquete_reponse_validation_status;
   const menu = [
     {
@@ -82,7 +82,7 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      label: "Votre activité",
+      label: `Votre activité en ${enquete.annee - 1}`,
       status: status.activite.global,
       steps: [
         {

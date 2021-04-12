@@ -23,7 +23,7 @@ import { EnqueteServicePersonnelFormation } from "../EnqueteServicePersonnelForm
 import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
 import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
 
-function buildMenuSections(enqueteReponse) {
+function buildMenuSections(enqueteReponse, enquete) {
   const status = enqueteReponse.enquete_reponse_validation_status;
 
   const menu = [
@@ -58,7 +58,7 @@ function buildMenuSections(enqueteReponse) {
       ],
     },
     {
-      label: "Votre activité",
+      label: `Votre activité en ${enquete.annee - 1}`,
       status: status.activite.global,
       steps: [
         {

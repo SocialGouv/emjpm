@@ -10,7 +10,8 @@ export function EnqueteIndividuel(props) {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
   const sections = useMemo(
-    () => enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse),
+    () =>
+      enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse, enquete),
     [enqueteReponse]
   );
 

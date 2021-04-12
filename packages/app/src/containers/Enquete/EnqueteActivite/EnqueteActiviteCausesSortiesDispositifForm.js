@@ -70,7 +70,7 @@ export function EnqueteActiviteCausesSortiesDispositifForm(props) {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <HeadingTitle mb={1}>{"Votre activité en 2019"}</HeadingTitle>
+        <HeadingTitle mb={1}>{enqueteContext.section.label}</HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",

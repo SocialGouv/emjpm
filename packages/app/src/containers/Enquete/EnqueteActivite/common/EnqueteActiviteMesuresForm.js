@@ -58,7 +58,7 @@ export function EnqueteActiviteMesuresForm(props) {
   return (
     <form onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
-        {"Votre activité en 2019"}
+        {enqueteContext.section.label}
       </HeadingTitle>
 
       {title && <Heading size={3}>{title}</Heading>}
