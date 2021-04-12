@@ -73,6 +73,7 @@ export function EnqueteActiviteSauvegardeJustice(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Sauvegarde de justice"
+        enquete={props.enquete}
       />
     </Box>
   );

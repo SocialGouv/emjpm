@@ -67,6 +67,7 @@ export function EnquetePopulationsMAJ(props) {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       title={"Mesure d'accompagnement de justice"}
+      enquete={props.enquete}
     />
   );
 }

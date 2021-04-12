@@ -52,6 +52,7 @@ export function EnquetePreposePrestationsSocialesRevenusForm(props) {
     enqueteContext,
     dispatchEnqueteContextEvent,
     sections,
+    enquete,
   } = props;
 
   const enqueteForm = useEnqueteForm({
@@ -82,7 +83,7 @@ export function EnquetePreposePrestationsSocialesRevenusForm(props) {
     >
       <Box textAlign="center" mb={"50px"}>
         <HeadingTitle textAlign="center">
-          {"Revenus / Prestations sociales en 2019"}
+          {"Revenus / Prestations sociales en ${enquete.annee - 1}"}
         </HeadingTitle>
         <Text
           sx={{

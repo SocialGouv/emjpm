@@ -79,6 +79,7 @@ export function EnqueteActiviteTutelle(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Tutelle"
+        enquete={props.enquete}
       />
     </Box>
   );

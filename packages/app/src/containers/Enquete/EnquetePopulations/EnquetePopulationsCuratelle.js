@@ -68,6 +68,7 @@ export function EnquetePopulationsCuratelle(props) {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       title={"Curatelle"}
+      enquete={props.enquete}
     />
   );
 }

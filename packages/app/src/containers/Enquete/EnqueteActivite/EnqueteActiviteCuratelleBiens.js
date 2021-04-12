@@ -77,6 +77,7 @@ export function EnqueteActiviteCuratelleBiens(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Tutelle ou curatelle aux biens"
+        enquete={props.enquete}
       />
     </Box>
   );

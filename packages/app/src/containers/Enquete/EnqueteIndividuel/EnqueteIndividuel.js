@@ -12,7 +12,7 @@ export function EnqueteIndividuel(props) {
   const sections = useMemo(
     () =>
       enqueteIndividuelMenuBuilder.buildMenuSections(enqueteReponse, enquete),
-    [enqueteReponse]
+    [enqueteReponse, enquete]
   );
 
   const {

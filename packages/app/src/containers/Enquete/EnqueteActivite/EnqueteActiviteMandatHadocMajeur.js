@@ -73,6 +73,7 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Mandat ad hoc majeur"
+        enquete={props.enquete}
       />
     </Box>
   );

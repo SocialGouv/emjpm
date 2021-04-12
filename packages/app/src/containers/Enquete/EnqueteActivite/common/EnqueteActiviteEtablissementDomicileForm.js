@@ -63,6 +63,7 @@ export function EnqueteActiviteEtablissementDomicileForm(props) {
     enqueteContext,
     dispatchEnqueteContextEvent,
     sections,
+    enquete,
   } = props;
 
   const enqueteForm = useEnqueteForm({
@@ -121,8 +122,9 @@ export function EnqueteActiviteEtablissementDomicileForm(props) {
 
       <Box sx={{ color: "#595959", fontWeight: "bold" }} mt={"50px"}>
         Soit un total de <Text sx={strongStyle}>{totalDebutAnnee}</Text> mesures
-        au 01/01/2019 et de <Text sx={strongStyle}>{totalFinAnnee}</Text>{" "}
-        mesures au 31/12/2019.
+        au 01/01/{`${enquete.annee - 1}`} et de{" "}
+        <Text sx={strongStyle}>{totalFinAnnee}</Text> mesures au 31/12/
+        {`${enquete.annee - 1}`}.
       </Box>
 
       <EnqueteStepperButtons submit={submit} disabled={loading} />

@@ -60,6 +60,7 @@ export function EnqueteIndividuelInformationsAgrement(props) {
           },
         });
       }}
+      enquete={props.enquete}
     />
   );
 }

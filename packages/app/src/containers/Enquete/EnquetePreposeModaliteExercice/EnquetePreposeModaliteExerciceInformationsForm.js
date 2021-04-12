@@ -73,6 +73,7 @@ export function EnquetePreposeModaliteExerciceInformationsForm(props) {
     enqueteContext,
     dispatchEnqueteContextEvent,
     sections,
+    enquete,
   } = props;
 
   const enqueteForm = useEnqueteForm({
@@ -94,7 +95,7 @@ export function EnquetePreposeModaliteExerciceInformationsForm(props) {
   return (
     <form onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
-        {"Modalité d'exercice en 2019"}
+        {"Modalité d'exercice en ${enquete.annee - 1}"}
       </HeadingTitle>
       <Heading size={3}>{"Informations générales"}</Heading>
       <Box mt={4}>

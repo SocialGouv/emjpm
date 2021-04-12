@@ -19,6 +19,7 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
     enqueteContext,
     dispatchEnqueteContextEvent,
     sections,
+    enquete,
   } = props;
 
   const enqueteForm = useEnqueteForm({
@@ -47,7 +48,9 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
       onSubmit={submitForm}
     >
       <Box textAlign="center" mb={"50px"}>
-        <HeadingTitle mb={1}>{"Personnel et formation en 2019"}</HeadingTitle>
+        <HeadingTitle mb={1}>
+          {"Personnel et formation en ${enquete.annee - 1}"}
+        </HeadingTitle>
         <Text
           sx={{
             color: "titleSecondary",

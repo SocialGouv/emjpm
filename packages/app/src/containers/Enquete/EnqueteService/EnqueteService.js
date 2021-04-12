@@ -11,7 +11,7 @@ export function EnqueteService(props) {
 
   const sections = useMemo(
     () => enqueteServiceMenuBuilder.buildMenuSections(enqueteReponse, enquete),
-    [enqueteReponse]
+    [enqueteReponse, enquete]
   );
 
   const {

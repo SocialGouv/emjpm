@@ -73,6 +73,7 @@ export function EnquetePopulationsSauvegardeJustice(props) {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       title={"Sauvegarde de justice"}
+      enquete={props.enquete}
     />
   );
 }

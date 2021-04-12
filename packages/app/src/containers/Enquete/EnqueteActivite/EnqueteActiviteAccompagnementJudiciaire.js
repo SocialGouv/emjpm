@@ -81,6 +81,7 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Accompagnement judiciaire"
+        enquete={props.enquete}
       />
     </Box>
   );

@@ -92,6 +92,7 @@ export function EnqueteIndividuelInformationsFormation(props) {
           },
         });
       }}
+      enquete={props.enquete}
     />
   );
 }

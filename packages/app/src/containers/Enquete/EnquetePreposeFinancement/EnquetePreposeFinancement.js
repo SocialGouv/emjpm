@@ -53,6 +53,7 @@ export function EnquetePreposeFinancement(props) {
         });
       }}
       loading={loading}
+      enquete={props.enquete}
     />
   );
 }

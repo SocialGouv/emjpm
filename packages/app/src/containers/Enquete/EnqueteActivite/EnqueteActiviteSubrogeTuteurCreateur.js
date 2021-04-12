@@ -74,6 +74,7 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Subrogé tuteur ou curateur"
+        enquete={props.enquete}
       />
     </Box>
   );

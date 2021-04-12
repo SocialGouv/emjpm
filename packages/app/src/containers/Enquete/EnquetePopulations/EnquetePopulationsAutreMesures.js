@@ -68,6 +68,7 @@ export function EnquetePopulationsAutreMesures(props) {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       title={"Autre mesures"}
+      enquete={props.enquete}
     />
   );
 }

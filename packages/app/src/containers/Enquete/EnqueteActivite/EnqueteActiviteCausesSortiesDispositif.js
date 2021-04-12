@@ -71,6 +71,7 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
       }}
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+      enquete={props.enquete}
     />
   );
 }

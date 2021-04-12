@@ -80,6 +80,7 @@ export function EnqueteActiviteRevisionMesures(props) {
         }}
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
+        enquete={props.enquete}
       />
     </Box>
   );

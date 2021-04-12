@@ -51,6 +51,7 @@ export function EnquetePreposePersonnelFormationAutres(props) {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
+      enquete={props.enquete}
       onSubmit={async (values) => {
         const niveaux_qualification = values.niveaux_qualification
           ? {

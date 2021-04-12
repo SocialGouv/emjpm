@@ -61,6 +61,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
           },
         });
       }}
+      enquete={props.enquete}
     />
   );
 }

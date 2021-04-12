@@ -81,6 +81,7 @@ export function EnqueteActiviteCuratelleRenforcee(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Curatelle renforcée"
+        enquete={props.enquete}
       />
     </Box>
   );

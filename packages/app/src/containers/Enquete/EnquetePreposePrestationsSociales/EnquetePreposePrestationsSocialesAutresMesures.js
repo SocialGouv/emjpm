@@ -52,6 +52,7 @@ export function EnquetePreposePrestationsSocialesAutresMesures(props) {
       enqueteContext={enqueteContext}
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
+      enquete={props.enquete}
       onSubmit={async (values) => {
         await updatePrestationsSociales({
           variables: {

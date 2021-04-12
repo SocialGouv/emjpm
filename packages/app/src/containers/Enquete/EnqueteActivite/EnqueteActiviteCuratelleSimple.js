@@ -81,6 +81,7 @@ export function EnqueteActiviteCuratelleSimple(props) {
         enqueteContext={enqueteContext}
         dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
         title="Curatelle simple"
+        enquete={props.enquete}
       />
     </Box>
   );

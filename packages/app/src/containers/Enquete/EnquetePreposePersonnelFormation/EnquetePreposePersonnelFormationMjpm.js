@@ -51,6 +51,7 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
       dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
       loading={loading}
       step={step}
+      enquete={props.enquete}
       onSubmit={async (values) => {
         const formation_preposes_mjpm = values.formation_preposes_mjpm
           ? {

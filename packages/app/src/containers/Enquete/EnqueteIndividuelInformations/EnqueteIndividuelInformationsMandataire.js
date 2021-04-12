@@ -60,6 +60,7 @@ export function EnqueteIndividuelInformationsMandataire(props) {
           },
         });
       }}
+      enquete={props.enquete}
     />
   );
 }
