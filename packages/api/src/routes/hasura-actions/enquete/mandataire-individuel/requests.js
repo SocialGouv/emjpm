@@ -59,15 +59,12 @@ module.exports = {
         }
       }
 
-      if (
-        enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0]
-          ?.enquete_reponses_informations_mandataire
-      ) {
-        const previous =
-          enqueteReponseDefaultData.previous_enquete[0].enquete_reponses[0];
+      const previous =
+        enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0];
 
-        // # Vos informations
-        // ## informations générales
+      // # Vos informations
+      // ## informations générales
+      if (previous) {
         for (const k of [
           "benevole",
           "anciennete",
@@ -81,39 +78,43 @@ module.exports = {
           defaultValues[k] =
             previous.enquete_reponses_informations_mandataire[k];
         }
+      }
 
-        // ## agrément
+      // ## agrément
+      if (previous) {
         for (const k of ["debut_activite_avant_2009", "annee_agrement"]) {
           defaultValues[k] = previous.enquete_reponses_agrements_formation[k];
         }
-        if (lb_user) {
-          const length = lb_user.lb_departements.length;
-          if (length >= 5) {
-            defaultValues.nb_departements = "5+";
-          } else {
-            defaultValues.nb_departements = length.toString();
-          }
+      }
+      if (lb_user) {
+        const length = lb_user.lb_departements.length;
+        if (length >= 5) {
+          defaultValues.nb_departements = "5+";
+        } else {
+          defaultValues.nb_departements = length.toString();
         }
-        const departementCode = departement_financeur.departement.id;
-        const dateStart = new Date(enqueteAnnee - 1, 0, 1);
-        const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
-        const { data: nbMesures } = await graphqlFetch(
-          {
-            dateEnd,
-            dateStart,
-            departementCode,
-            mandataireId,
-          },
-          NB_MESURES,
-          backendAuthHeaders
-        );
-        defaultValues.nb_mesures_dep_finance = departementCode
-          ? nbMesures.nb_mesures_dep_finance.aggregate.count
-          : 0;
-        defaultValues.nb_mesures_dep_autres =
-          nbMesures.nb_mesures_dep_autres.aggregate.count;
+      }
+      const departementCode = departement_financeur.departement.id;
+      const dateStart = new Date(enqueteAnnee - 1, 0, 1);
+      const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
+      const { data: nbMesures } = await graphqlFetch(
+        {
+          dateEnd,
+          dateStart,
+          departementCode,
+          mandataireId,
+        },
+        NB_MESURES,
+        backendAuthHeaders
+      );
+      defaultValues.nb_mesures_dep_finance = departementCode
+        ? nbMesures.nb_mesures_dep_finance.aggregate.count
+        : 0;
+      defaultValues.nb_mesures_dep_autres =
+        nbMesures.nb_mesures_dep_autres.aggregate.count;
 
-        // ## formation
+      // ## formation
+      if (previous) {
         for (const k of [
           "cnc_annee_obtention",
           "cnc_heures_formation",
@@ -126,6 +127,18 @@ module.exports = {
           "secretaire_specialise_etp_n6",
         ]) {
           defaultValues[k] = previous.enquete_reponses_agrements_formation[k];
+        }
+      }
+      for (const k of [
+        "secretaire_specialise_etp_n1",
+        "secretaire_specialise_etp_n2",
+        "secretaire_specialise_etp_n3",
+        "secretaire_specialise_etp_n4",
+        "secretaire_specialise_etp_n5",
+        "secretaire_specialise_etp_n6",
+      ]) {
+        if (!defaultValues[k]) {
+          defaultValues[k] = 0;
         }
       }
 
