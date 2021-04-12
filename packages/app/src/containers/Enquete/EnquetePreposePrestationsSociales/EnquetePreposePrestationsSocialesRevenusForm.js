@@ -83,7 +83,7 @@ export function EnquetePreposePrestationsSocialesRevenusForm(props) {
     >
       <Box textAlign="center" mb={"50px"}>
         <HeadingTitle textAlign="center">
-          {"Revenus / Prestations sociales en ${enquete.annee - 1}"}
+          {`Revenus / Prestations sociales en ${enquete.annee - 1}`}
         </HeadingTitle>
         <Text
           sx={{

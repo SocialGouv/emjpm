@@ -97,7 +97,7 @@ export function EnquetePreposeFinancementForm(props) {
   return (
     <form onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
-        {"Financement en ${enquete.annee - 1}"}
+        {`Financement en ${enquete.annee - 1}`}
       </HeadingTitle>
       <Heading size={3} mb={2}>
         {"Charges"}

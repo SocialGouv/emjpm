@@ -109,7 +109,7 @@ export function EnquetePreposeModaliteExerciceEtablissementsForm(props) {
     <FormikProvider value={formik}>
       <form onSubmit={submitForm}>
         <HeadingTitle textAlign="center" mb={"50px"}>
-          {"Modalité d'exercice en ${enquete.annee - 1}"}
+          {`Modalité d'exercice en ${enquete.annee - 1}`}
         </HeadingTitle>
         <Box mb={4}>
           <EnqueteFormYesNoField

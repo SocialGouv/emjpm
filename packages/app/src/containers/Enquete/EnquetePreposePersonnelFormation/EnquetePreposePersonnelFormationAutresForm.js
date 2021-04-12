@@ -50,7 +50,7 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
     >
       <Box textAlign="center" mb={"50px"}>
         <HeadingTitle mb={1}>
-          {"Personnel et formation en ${enquete.annee - 1}"}
+          {`Personnel et formation en ${enquete.annee - 1}`}
         </HeadingTitle>
         <Text
           sx={{

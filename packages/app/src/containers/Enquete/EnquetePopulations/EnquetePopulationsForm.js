@@ -103,7 +103,7 @@ export function EnquetePopulationsForm(props) {
     >
       <Box textAlign="center" mb={"50px"}>
         <HeadingTitle mb={1}>
-          {"Populations en ${enquete.annee - 1}"}
+          {`Populations en ${enquete.annee - 1}`}
         </HeadingTitle>
         <Text
           sx={{
