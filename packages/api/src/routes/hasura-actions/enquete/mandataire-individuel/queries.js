@@ -72,6 +72,7 @@ const gqlDomicile = `
     ],
   },
 `;
+// ???
 
 const gqlCuratelle = `
   {
@@ -92,6 +93,20 @@ const gqlPersonne = `
       {champ_mesure: {_eq: protection_bien_personne} }
     ]
   },
+`;
+// ???
+
+const gqlNouvelles = `
+  { date_nomination : {_gte: $dateStart} },
+  { date_nomination : {_lte: $dateEnd} },
+`;
+// ???
+// { date_fin_mesure: { _gte: $dateEnd } },
+// { date_fin_mesure: { _is_null: true } },
+
+const gqlSorties = `
+  { date_fin_mesure : {_gte: $dateStart} },
+  { date_fin_mesure : {_lte: $dateEnd} },
 `;
 
 module.exports = {
@@ -769,6 +784,309 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlAu31Decembre}
+          { nature_mesure: {_eq: mesure_ad_hoc} },
+        ]
+      }){
+        aggregate { count }
+      }
+
+      curatelle_renforcee_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_renforcee_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_renforcee_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_renforcee_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: curatelle_simple} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: curatelle_simple} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: curatelle_simple} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_simple_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: curatelle_simple} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: tutelle} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: tutelle} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: tutelle} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      tutelle_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: tutelle} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          ${gqlEtalblissement}
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      accompagnement_judiciaire_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          ${gqlDomicile}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_biens_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlBiens}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_etablissement_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_etablissement_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          ${gqlEtalblissement}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_domicile_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      curatelle_personne_domicile_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          ${gqlDomicile}
+          ${gqlCuratelle}
+          ${gqlPersonne}
+        ]
+      }){
+        aggregate { count }
+      }
+      subroge_tuteur_createur_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: subroge_tuteur} },
+        ]
+      }){
+        aggregate { count }
+      }
+      subroge_tuteur_createur_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: subroge_tuteur} },
+        ]
+      }){
+        aggregate { count }
+      }
+      sauvegarde_justice_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: sauvegarde_justice} },
+        ]
+      }){
+        aggregate { count }
+      }
+      sauvegarde_justice_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
+          { nature_mesure: {_eq: sauvegarde_justice} },
+        ]
+      }){
+        aggregate { count }
+      }
+      mandat_adhoc_majeur_mesures_nouvelles: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlNouvelles}
+          { nature_mesure: {_eq: mesure_ad_hoc} },
+        ]
+      }){
+        aggregate { count }
+      }
+      mandat_adhoc_majeur_sortie_mesures: mesures_aggregate(where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlSorties}
           { nature_mesure: {_eq: mesure_ad_hoc} },
         ]
       }){
