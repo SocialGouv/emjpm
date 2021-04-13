@@ -62,11 +62,14 @@ async function initEnqueteReponse({ enqueteId, mandataireId }) {
   });
 
   if (!enqueteReponse) {
-    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+    await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId,
     });
-    enqueteReponse = insert_enquete_reponses_one;
+    enqueteReponse = await getEnqueteReponse({
+      enqueteId,
+      mandataireId,
+    });
   }
 
   return enqueteReponse;

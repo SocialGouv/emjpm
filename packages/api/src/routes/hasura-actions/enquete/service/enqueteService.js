@@ -19,18 +19,22 @@ async function initEnqueteService(context) {
     logger.warn(
       `EnqueteReponse does not exists for enqueteId ${enqueteId} and serviceId ${serviceId}: create it`
     );
-    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+    await createEmptyEnqueteReponse({
       enqueteId,
       serviceId,
     });
 
-    enqueteReponse = insert_enquete_reponses_one;
+    enqueteReponse = await getEnqueteReponseService({
+      enqueteId,
+      serviceId,
+    });
   }
   const status = await enqueteServiceStatus(enqueteReponse);
 
   return {
     enquete_id: enqueteReponse.enquete_id,
     enquete_reponse_validation_status: status,
+    id: enqueteReponse.id,
     service: enqueteReponse.service,
     status: enqueteReponse.status || {},
     submitted_at: enqueteReponse.submitted_at,

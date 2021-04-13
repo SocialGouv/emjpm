@@ -10,7 +10,7 @@ export function EnquetePrepose(props) {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
   const sections = useMemo(
-    () => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse),
+    () => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse, enquete),
     [enqueteReponse]
   );
 

@@ -52,11 +52,14 @@ async function initEnqueteReponse({ enqueteId, serviceId }) {
   });
 
   if (!enqueteReponse) {
-    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+    await createEmptyEnqueteReponse({
       enqueteId,
       serviceId,
     });
-    enqueteReponse = insert_enquete_reponses_one;
+    enqueteReponse = await getEnqueteReponseService({
+      enqueteId,
+      serviceId,
+    });
   }
   return enqueteReponse;
 }

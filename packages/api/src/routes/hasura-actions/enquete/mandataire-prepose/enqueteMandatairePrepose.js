@@ -8,7 +8,6 @@ const logger = require("~/utils/logger");
 const HttpError = require("~/utils/error/HttpError");
 
 async function initEnqueteMandatairePrepose({
-  // eslint-disable-next-line no-unused-vars
   enqueteContext: { enqueteId, mandataireId },
 }) {
   let enqueteReponse = await getEnqueteReponseMandatairePrepose({
@@ -20,17 +19,21 @@ async function initEnqueteMandatairePrepose({
     logger.warn(
       `EnqueteReponse does not exists for enqueteId ${enqueteId} and mandataireId ${mandataireId}: create it`
     );
-    const { insert_enquete_reponses_one } = await createEmptyEnqueteReponse({
+    await createEmptyEnqueteReponse({
       enqueteId,
       mandataireId,
     });
-
-    enqueteReponse = insert_enquete_reponses_one;
+    enqueteReponse = await getEnqueteReponseMandatairePrepose({
+      enqueteId,
+      mandataireId: mandataireId,
+    });
   }
+
   const status = await enqueteMandatairePreposeStatus(enqueteReponse);
   return {
     enquete_id: enqueteReponse.enquete_id,
     enquete_reponse_validation_status: status,
+    id: enqueteReponse.id,
     mandataire: enqueteReponse.mandataire,
     status: enqueteReponse.status,
     submitted_at: enqueteReponse.submitted_at,
