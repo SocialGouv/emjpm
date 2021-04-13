@@ -411,6 +411,13 @@ module.exports = {
       mandataires_by_pk(id: $mandataireId) {
         id
         genre
+        departement{
+          id
+          nom
+          region {
+            nom
+          }
+        }
         lb_user {
           id
           nom

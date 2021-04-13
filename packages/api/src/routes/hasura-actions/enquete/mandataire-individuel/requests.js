@@ -64,7 +64,6 @@ module.exports = {
 
       let lb_departements;
       let departement_financeur;
-      let lb_departement;
       if (lb_user) {
         defaultValues.nom = capitalizeName(`${lb_user.prenom} ${lb_user.nom}`);
         lb_departements = lb_user.lb_departements;
@@ -72,14 +71,16 @@ module.exports = {
           departement_financeur = lb_departements.find(
             (row) => row.departement_financeur
           );
-          lb_departement = departement_financeur || lb_departements[0];
-          const { departement } = lb_departement;
-
-          defaultValues.region = departement.region.nom;
-          defaultValues.departement = departement.nom;
-          defaultValues.departementCode = departement.id;
         }
       }
+      const departement =
+        departement_financeur?.departement ||
+        lb_departements?.[0]?.departement ||
+        mandataire?.departement;
+
+      defaultValues.region = departement.region.nom;
+      defaultValues.departement = departement.nom;
+      defaultValues.departementCode = departement.id;
 
       const previous =
         enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0];
@@ -116,7 +117,7 @@ module.exports = {
           defaultValues.nb_departements = length.toString();
         }
       }
-      const departementCode = departement_financeur.departement.id;
+      const departementCode = departement.id;
       const dateStart = new Date(enqueteAnnee - 1, 0, 1);
       const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
       const { data: nbMesures, errors: errorsNbMesures } = await graphqlFetch(
