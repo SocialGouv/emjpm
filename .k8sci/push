@@ -14,7 +14,8 @@ $(dirname $0)/scripts/build
 
 # PRE-DEPLOY
 if [ -n "$K8SCI_PRODUCTION" ]; then
-  $(dirname $0)/scripts/db-backup
+  # $(dirname $0)/scripts/db-backup
+  echo "backup is temporary disabled on ci"
 else
   $(dirname $0)/scripts/branch-init
 fi
