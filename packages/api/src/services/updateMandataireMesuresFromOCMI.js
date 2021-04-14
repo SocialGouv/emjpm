@@ -70,11 +70,10 @@ module.exports = async function updateMandataireMesuresFromOCMI({
 
   await knex.transaction(async function (trx) {
     try {
-      await deleteAllMesures(mandataireId);
-      await saveMesures(allMesureDatas);
-      await updateGestionnaireMesuresEvent("mandataires", mandataireId);
-      await updateMandataireMesureStates(mandataireId);
-
+      await deleteAllMesures(mandataireId, trx);
+      await saveMesures(allMesureDatas, trx);
+      await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
+      await updateMandataireMesureStates(mandataireId, trx);
       await trx.commit();
     } catch (e) {
       await trx.rollback(e);
@@ -88,8 +87,8 @@ function findTribunal(tribunaux, tribunalSiret) {
   return tribunaux.find((t) => t.siret === tribunalSiret);
 }
 
-async function deleteAllMesures(mandataireId) {
-  await Mesure.query()
+async function deleteAllMesures(mandataireId, trx) {
+  await Mesure.query(trx)
     .delete()
     .where({ mandataire_id: mandataireId })
     .andWhere("status", "in", [

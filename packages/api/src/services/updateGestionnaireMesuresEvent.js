@@ -3,12 +3,14 @@ const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnai
 
 module.exports = async function updateGestionnaireMesuresEvent(
   tableOrType,
-  id
+  id,
+  trx
 ) {
-  await updateGestionnaireMesuresCounters(tableOrType, id);
+  await updateGestionnaireMesuresCounters(tableOrType, id, trx);
   const affectedRows = await updateGestionnaireMesuresLastUpdate(
     tableOrType,
-    id
+    id,
+    trx
   );
   return affectedRows;
 };

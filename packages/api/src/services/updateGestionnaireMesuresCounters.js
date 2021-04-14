@@ -5,7 +5,8 @@ const { ServiceAntenne } = require("~/models");
 
 module.exports = async function updateGestionnaireMesuresCounters(
   tableOrType,
-  id
+  id,
+  trx
 ) {
   let table;
   switch (tableOrType) {
@@ -31,7 +32,7 @@ module.exports = async function updateGestionnaireMesuresCounters(
       const {
         mesures_in_progress: en_cours,
         mesures_awaiting: en_attente,
-      } = await recalculateServiceMesuresCount(id);
+      } = await recalculateServiceMesuresCount(id, trx);
       result = {
         en_attente,
         en_cours,
@@ -42,7 +43,7 @@ module.exports = async function updateGestionnaireMesuresCounters(
       const {
         mesures_en_cours: en_cours,
         mesures_en_attente: en_attente,
-      } = await recalculateMandatairesMesuresCount(id);
+      } = await recalculateMandatairesMesuresCount(id, trx);
       result = {
         en_attente,
         en_cours,
@@ -53,31 +54,31 @@ module.exports = async function updateGestionnaireMesuresCounters(
   return result;
 };
 
-async function recalculateMandatairesMesuresCount(mandataireId) {
-  const mandataireStates = await Mesure.query()
+async function recalculateMandatairesMesuresCount(mandataireId, trx) {
+  const mandataireStates = await Mesure.query(trx)
     .groupBy("status")
     .select("status")
     .count("id")
     .where({ mandataire_id: mandataireId });
 
-  return await Mandataire.query().updateAndFetchById(mandataireId, {
+  return await Mandataire.query(trx).updateAndFetchById(mandataireId, {
     mesures_en_attente: getCount(mandataireStates, "en_attente"),
     mesures_en_cours: getCount(mandataireStates, "en_cours"),
   });
 }
 
-async function recalculateServiceMesuresCount(serviceId) {
-  const antennes = await ServiceAntenne.query().where({
+async function recalculateServiceMesuresCount(serviceId, trx) {
+  const antennes = await ServiceAntenne.query(trx).where({
     service_id: serviceId,
   });
 
   for (const { id: antenneId } of antennes) {
-    const antenneStates = await Mesure.query()
+    const antenneStates = await Mesure.query(trx)
       .groupBy("status")
       .select("status")
       .count("id")
       .where({ antenne_id: antenneId });
-    await ServiceAntenne.query()
+    await ServiceAntenne.query(trx)
       .findById(antenneId)
       .update({
         mesures_awaiting: getCount(antenneStates, "en_attente"),
@@ -85,13 +86,13 @@ async function recalculateServiceMesuresCount(serviceId) {
       });
   }
 
-  const serviceStates = await Mesure.query()
+  const serviceStates = await Mesure.query(trx)
     .groupBy("status")
     .select("status")
     .count("id")
     .where({ service_id: serviceId });
 
-  return await Service.query().updateAndFetchById(serviceId, {
+  return await Service.query(trx).updateAndFetchById(serviceId, {
     mesures_awaiting: getCount(serviceStates, "en_attente"),
     mesures_in_progress: getCount(serviceStates, "en_cours"),
   });

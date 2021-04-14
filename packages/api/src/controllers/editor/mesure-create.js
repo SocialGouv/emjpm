@@ -1,5 +1,7 @@
 const { validationResult } = require("express-validator");
 
+const knex = require("~/db/knex");
+
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const { saveMesure } = require("./service/saveMesure");
@@ -25,18 +27,28 @@ const mesureCreate = async (req, res) => {
   const editorId = res.locals.oauth.token.client.id;
 
   try {
-    const mesureQueryResult = await saveMesure({
-      antenneId,
-      datas: body,
-      editorId,
-      serviceOrMandataire,
-      ti,
-      type,
+    let mesureQueryResult;
+    await knex.transaction(async function (trx) {
+      try {
+        mesureQueryResult = await saveMesure(
+          {
+            antenneId,
+            datas: body,
+            editorId,
+            serviceOrMandataire,
+            ti,
+            type,
+          },
+          trx
+        );
+        await updateMesureStates(serviceOrMandataire, type, trx);
+        await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
+
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
+      }
     });
-
-    await updateMesureStates(serviceOrMandataire, type);
-
-    await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
     return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));
   } catch (error) {

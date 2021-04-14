@@ -2,7 +2,8 @@ const { Service, Mandataire } = require("~/models");
 
 module.exports = async function updateGestionnaireMesuresLastUpdate(
   tableOrType,
-  id
+  id,
+  trx
 ) {
   let Model;
   switch (tableOrType) {
@@ -19,7 +20,7 @@ module.exports = async function updateGestionnaireMesuresLastUpdate(
         "unexpected table '" + tableOrType + "' in updateGestionnaireLastUpdate"
       );
   }
-  return Model.query()
+  return Model.query(trx)
     .update({
       mesures_last_update: new Date(),
     })
