@@ -1,0 +1,2 @@
+#!/bin/sh
+kail -n emjpm -l app.kubernetes.io/name=api
