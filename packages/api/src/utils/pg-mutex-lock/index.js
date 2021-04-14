@@ -36,6 +36,7 @@ async function acquireLock(key, { timeout = 0, knex = knexConnection } = {}) {
 
 async function releaseLock(key, { knex = knexConnection } = {}) {
   await knex.raw(`DELETE FROM mutex_lock WHERE key = ?`, [key]);
+  console.log("lock released for '" + key + "'");
 }
 
 module.exports = { acquireLock, releaseLock };

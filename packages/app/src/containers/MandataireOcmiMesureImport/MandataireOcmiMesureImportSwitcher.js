@@ -1,7 +1,6 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useMutation } from "@apollo/client";
 import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
-import { useHistory } from "react-router-dom";
 
 import { Box, Flex } from "rebass";
 import { Warning } from "@styled-icons/entypo/Warning";
@@ -27,8 +26,6 @@ function MandataireOcmiMesureImportSwitcher({
   syncEnableOrigin,
   mandataireId,
 }) {
-  const history = useHistory();
-
   const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES);
 
   const importMesures = useCallback(async () => {
@@ -50,22 +47,21 @@ function MandataireOcmiMesureImportSwitcher({
           },
         ],
       });
+      toast.success("Import réalisé avec succès");
     } catch (e) {
-      console.log("importOcmiMesures error", e);
+      if (e.message.startsWith("cannot acquire lock")) {
+        toast.warn("Un import est déjà en cours");
+      } else {
+        console.log("importOcmiMesures error", e);
+      }
     }
   }, [importOcmiMesures]);
 
   const [syncOCMIEnable] = useMutation(SYNC_OCMI_ENABLE, {
     onCompleted: async () => {
       if (syncEnabled) {
-        try {
-          await importMesures();
-          toast.success(
-            "Synchronisation activée et import réalisé avec succès"
-          );
-        } catch (e) {
-          toast.error("Une erreur s'est produite");
-        }
+        toast.success("Synchronisation activée, import en cours...");
+        await importMesures();
       } else {
         toast.success("Synchronisation désactivée");
       }
@@ -93,12 +89,7 @@ function MandataireOcmiMesureImportSwitcher({
   }, [importMesures, mandataireId, syncEnabled, syncOCMIEnable]);
 
   const importMesuresNow = async () => {
-    try {
-      await importMesures();
-      toast.success("Import réalisé avec succès");
-    } catch (e) {
-      toast.error("Une erreur s'est produite");
-    }
+    await importMesures();
   };
 
   return (
