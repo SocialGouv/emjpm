@@ -54,12 +54,11 @@ router.post("/sync-file", async (req, res) => {
   }
 
   let err;
-  let result;
   try {
     if (ocmiSyncFileLocal) {
-      result = await startImportFromLocal();
+      await startImportFromLocal();
     } else {
-      result = await startImportFromAzure();
+      await startImportFromAzure();
     }
   } catch (e) {
     err = e;
@@ -68,7 +67,9 @@ router.post("/sync-file", async (req, res) => {
   if (err) {
     return res.json({ error: err });
   }
-  return res.json(result);
+  return res.json({
+    state: "start",
+  });
 });
 
 module.exports = router;
@@ -76,9 +77,6 @@ module.exports = router;
 async function startImportFromLocal() {
   const logId = await processusStateStartImport();
   importFromLocal(logId);
-  return {
-    state: "start",
-  };
 }
 
 async function startImportFromAzure() {
