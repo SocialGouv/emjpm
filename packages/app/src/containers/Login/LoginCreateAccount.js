@@ -48,7 +48,7 @@ function LoginCreateAccount() {
         </Text>
       </LineBox>
       <LinkButton px="5" py="3" to="/signup">
-        Créer votre compte emjpm
+        Créer votre compte e-MJPM
       </LinkButton>
     </Flex>
   );

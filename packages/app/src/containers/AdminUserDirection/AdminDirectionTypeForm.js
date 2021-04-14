@@ -83,14 +83,14 @@ export function AdminDirectionTypeForm(props) {
               formik.setFieldValue("type", value);
               switch (value) {
                 case "regional":
-                  formik.setFieldValue("departement", "");
+                  formik.setFieldValue("departement", null);
                   break;
                 case "departemental":
-                  formik.setFieldValue("region", "");
+                  formik.setFieldValue("region", null);
                   break;
                 case "national":
-                  formik.setFieldValue("departement", "");
-                  formik.setFieldValue("region", "");
+                  formik.setFieldValue("departement", null);
+                  formik.setFieldValue("region", null);
                   break;
               }
             }}

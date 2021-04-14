@@ -17,11 +17,11 @@ class Direction extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        departement_code: { type: "string" },
+        departement_code: { type: ["string", "null"] },
         id: { type: "integer" },
-        region_id: { type: "integrer" },
+        region_id: { type: ["integer", "null"] },
         type: { type: "string" },
-        user_id: { type: "integrer" },
+        user_id: { type: "integer" },
       },
       type: "object",
     };

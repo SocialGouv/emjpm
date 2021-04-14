@@ -84,8 +84,18 @@ export function SignupDirection() {
               validationSchema={signupDirectionSchema}
               onChange={({ value }) => {
                 setFieldValue("directionType", value);
-                setFieldValue("region", null);
-                setFieldValue("departement", null);
+                switch (value) {
+                  case "regional":
+                    formik.setFieldValue("departement", null);
+                    break;
+                  case "departemental":
+                    formik.setFieldValue("region", null);
+                    break;
+                  case "national":
+                    formik.setFieldValue("departement", null);
+                    formik.setFieldValue("region", null);
+                    break;
+                }
               }}
             />
             {formik.values.directionType === "regional" && (
@@ -94,7 +104,7 @@ export function SignupDirection() {
                 placeholder="Région"
                 formik={formik}
                 options={regionOptions}
-                isClearable={true}
+                enableFilterByLabel
                 validationSchema={signupDirectionSchema}
               />
             )}
@@ -104,7 +114,7 @@ export function SignupDirection() {
                 placeholder="Département"
                 formik={formik}
                 options={departementsOptions}
-                isClearable={true}
+                enableFilterByLabel
                 validationSchema={signupDirectionSchema}
               />
             )}
