@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.111.0](https://github.com/SocialGouv/emjpm/compare/v25.110.0...v25.111.0) (2021-04-14)
+
+
+### Bug Fixes
+
+* **date-label:** hardcoded to dynamic ([a7592b9](https://github.com/SocialGouv/emjpm/commit/a7592b9b802c3afd0eb0de4c05e0471c8dfcf0f7))
+* **date-label:** hardcoded to dynamic ([733645c](https://github.com/SocialGouv/emjpm/commit/733645c980cb5de7f6a55de5f57a6953ff7a10e5))
+* **date-label:** quote ([af89e2e](https://github.com/SocialGouv/emjpm/commit/af89e2e46b072a256bde4ec4010bdd7c75ddb99d))
+* **deps:** update all dependencies ([#2529](https://github.com/SocialGouv/emjpm/issues/2529)) ([94cc3fe](https://github.com/SocialGouv/emjpm/commit/94cc3fe63f8e892e0a51c5360199cfe4e6230327))
+* **deps:** update dependency react-tabs to ^3.2.2 ([#2530](https://github.com/SocialGouv/emjpm/issues/2530)) ([a0d7f81](https://github.com/SocialGouv/emjpm/commit/a0d7f81e16c52a84bd741b632626d7dce22f3001))
+* **direction:** signup regional + admin ([6a9606a](https://github.com/SocialGouv/emjpm/commit/6a9606ace1a85a16bcf2ab8cd73a6ee42293dfdb))
+* **doc:** journalière ([eedfa60](https://github.com/SocialGouv/emjpm/commit/eedfa6090beee5997e1e3d3e8c6c2246ce3621c1))
+* **enquete:** next button ([ec783d2](https://github.com/SocialGouv/emjpm/commit/ec783d21cb888b4d1127331bd40adf2153263e98))
+* **enquetes:** debug prepose and service ([3d6dbf8](https://github.com/SocialGouv/emjpm/commit/3d6dbf8ca0414b5b459c11206035078c9313a4a2))
+* **enquetes:** query refacto enquetes model ([f275f03](https://github.com/SocialGouv/emjpm/commit/f275f0304171a417d23515721bac68b27e461551))
+
+
+### Features
+
+* **import-ocmi:** more feedback in ui and logs ([87acbc5](https://github.com/SocialGouv/emjpm/commit/87acbc576abb6475bcd87bfb34be916a552e3b9e))
+* **select:** enableFilterByLabel ([62d664e](https://github.com/SocialGouv/emjpm/commit/62d664e5557895aaf19c4c311972ee45c7eab644))
+
+
+
+
+
 # [25.110.0](https://github.com/SocialGouv/emjpm/compare/v25.109.0...v25.110.0) (2021-04-02)
 
 

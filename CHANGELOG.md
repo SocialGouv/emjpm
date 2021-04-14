@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.111.0](https://github.com/SocialGouv/emjpm/compare/v25.110.0...v25.111.0) (2021-04-14)
+
+
+### Bug Fixes
+
+* **capitalize-name:** normalize ([16e779e](https://github.com/SocialGouv/emjpm/commit/16e779e3b912812617e86745cd865a92fb8c0078))
+* **date-label:** hardcoded to dynamic ([a7592b9](https://github.com/SocialGouv/emjpm/commit/a7592b9b802c3afd0eb0de4c05e0471c8dfcf0f7))
+* **date-label:** hardcoded to dynamic ([733645c](https://github.com/SocialGouv/emjpm/commit/733645c980cb5de7f6a55de5f57a6953ff7a10e5))
+* **date-label:** quote ([af89e2e](https://github.com/SocialGouv/emjpm/commit/af89e2e46b072a256bde4ec4010bdd7c75ddb99d))
+* **deps:** update all dependencies ([#2529](https://github.com/SocialGouv/emjpm/issues/2529)) ([94cc3fe](https://github.com/SocialGouv/emjpm/commit/94cc3fe63f8e892e0a51c5360199cfe4e6230327))
+* **deps:** update dependency react-tabs to ^3.2.2 ([#2530](https://github.com/SocialGouv/emjpm/issues/2530)) ([a0d7f81](https://github.com/SocialGouv/emjpm/commit/a0d7f81e16c52a84bd741b632626d7dce22f3001))
+* **direction:** signup regional + admin ([6a9606a](https://github.com/SocialGouv/emjpm/commit/6a9606ace1a85a16bcf2ab8cd73a6ee42293dfdb))
+* **doc:** journalière ([eedfa60](https://github.com/SocialGouv/emjpm/commit/eedfa6090beee5997e1e3d3e8c6c2246ce3621c1))
+* **enquete:** next button ([ec783d2](https://github.com/SocialGouv/emjpm/commit/ec783d21cb888b4d1127331bd40adf2153263e98))
+* **enquetes:** debug prepose and service ([3d6dbf8](https://github.com/SocialGouv/emjpm/commit/3d6dbf8ca0414b5b459c11206035078c9313a4a2))
+* **enquetes:** individuel departement fallback ([1c80931](https://github.com/SocialGouv/emjpm/commit/1c809311162f2f019c6a6e12c17b17f9b30239d5))
+* **enquetes:** previous ([228e19e](https://github.com/SocialGouv/emjpm/commit/228e19e708e161024d81517ad4918172e22684cb))
+* **enquetes:** query refacto enquetes model ([f275f03](https://github.com/SocialGouv/emjpm/commit/f275f0304171a417d23515721bac68b27e461551))
+* **mutex-lock:** ocmi user add timeout ([2972cff](https://github.com/SocialGouv/emjpm/commit/2972cff052086445cd178e4f25cff84a945df12c))
+* **ocmi:** routine return format ([98268ef](https://github.com/SocialGouv/emjpm/commit/98268ef13353f4b2a0085084f8bf77d8ccfc61e8))
+* **transaction:** import ocmi and api ([3f5f8c5](https://github.com/SocialGouv/emjpm/commit/3f5f8c56049feb3fa8365ee690734fda65d8c8ad))
+
+
+### Features
+
+* **departement:** from codepostal on OCMI and API ([6f8dfe6](https://github.com/SocialGouv/emjpm/commit/6f8dfe6aeacff68bbb31b0777240969202f303e7))
+* **enquete:** capitalizeName ([0c74c18](https://github.com/SocialGouv/emjpm/commit/0c74c1889439726e66175c4c1e3c98f133aae052))
+* **enquete:** prefill benevole from previous year ([5f92875](https://github.com/SocialGouv/emjpm/commit/5f9287539c71e409265811caef273de6229236c4))
+* **enquete:** prefill genre ([963203f](https://github.com/SocialGouv/emjpm/commit/963203f3ba5496f9c4c03c6adacd76e6d4061238))
+* **enquete:** prefill individuel activite wip ([28016f4](https://github.com/SocialGouv/emjpm/commit/28016f43c049e78db1177c499a7029c915f31533))
+* **enquete:** prefill individuel activite wip ([c9d62e2](https://github.com/SocialGouv/emjpm/commit/c9d62e2b227a1d18ebeb5428293fbd3c585ffd79))
+* **enquete:** prefill individuel agrement ([89854bc](https://github.com/SocialGouv/emjpm/commit/89854bc6d24d32c7a5773ccb337ee7ff0b469b64))
+* **enquete:** prefill individuel formation ([df64fdc](https://github.com/SocialGouv/emjpm/commit/df64fdcae4e33c413606fec987b0e0c270856e95))
+* **enquete:** prefill individuel ok ([03c85d5](https://github.com/SocialGouv/emjpm/commit/03c85d56f20edd9269eea441b2c008b5ce6edbea))
+* **enquete:** use departement financeur ([04a7d3e](https://github.com/SocialGouv/emjpm/commit/04a7d3ed94c19514c1ed7e09f4346ecdd0fd7a48))
+* **import-ocmi:** more feedback in ui and logs ([87acbc5](https://github.com/SocialGouv/emjpm/commit/87acbc576abb6475bcd87bfb34be916a552e3b9e))
+* **select:** enableFilterByLabel ([62d664e](https://github.com/SocialGouv/emjpm/commit/62d664e5557895aaf19c4c311972ee45c7eab644))
+
+
+
+
+
 # [25.110.0](https://github.com/SocialGouv/emjpm/compare/v25.109.0...v25.110.0) (2021-04-02)
 
 
