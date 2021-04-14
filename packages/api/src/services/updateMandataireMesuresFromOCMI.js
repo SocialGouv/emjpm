@@ -28,7 +28,9 @@ module.exports = async function updateMandataireMesuresFromOCMI({
   const { id: mandataireId, lb_user_id: lbUserId } = mandataire;
 
   const mutexLockKey = `import-ocmi-${mandataireId}`;
-  const lockAcquired = await acquireLock(mutexLockKey);
+  const lockAcquired = await acquireLock(mutexLockKey, {
+    timeout: 3600,
+  });
   if (!lockAcquired) {
     throw new Error("cannot acquire lock for " + mutexLockKey);
   }
