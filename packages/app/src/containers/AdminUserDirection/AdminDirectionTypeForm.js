@@ -78,11 +78,20 @@ export function AdminDirectionTypeForm(props) {
             formik={formik}
             placeholder="Type de direction"
             options={directionTypeOptions}
+            enableFilterByLabel
             onChange={({ value }) => {
               formik.setFieldValue("type", value);
-              if (value === "national") {
-                formik.setFieldValue("departement", "");
-                formik.setFieldValue("region", "");
+              switch (value) {
+                case "regional":
+                  formik.setFieldValue("departement", "");
+                  break;
+                case "departemental":
+                  formik.setFieldValue("region", "");
+                  break;
+                case "national":
+                  formik.setFieldValue("departement", "");
+                  formik.setFieldValue("region", "");
+                  break;
               }
             }}
           />
@@ -93,10 +102,7 @@ export function AdminDirectionTypeForm(props) {
               placeholder="Département"
               options={departementOptions}
               formik={formik}
-              onChange={({ value }) => {
-                formik.setFieldValue("departement", value);
-                formik.setFieldValue("region", null);
-              }}
+              enableFilterByLabel
             />
           )}
 
@@ -106,10 +112,7 @@ export function AdminDirectionTypeForm(props) {
               placeholder="Région"
               formik={formik}
               options={regionOptions}
-              onChange={({ value }) => {
-                formik.setFieldValue("region", value);
-                formik.setFieldValue("departement", null);
-              }}
+              enableFilterByLabel
             />
           )}
         </FormInputBox>

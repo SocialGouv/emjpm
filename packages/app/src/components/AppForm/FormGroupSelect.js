@@ -1,3 +1,4 @@
+import { createFilter } from "react-select";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -36,6 +37,7 @@ export default function FormGroupSelect(props) {
     formatCreateLabel = defaultProps.formatCreateLabel,
     isValidNewOption = defaultProps.isValidNewOption,
     getNewOptionData = defaultProps.getNewOptionData,
+    enableFilterByLabel = defaultProps.enableFilterByLabel,
     ...componentProps
   } = props;
 
@@ -47,6 +49,16 @@ export default function FormGroupSelect(props) {
     handleBlur,
     handleChange,
   } = formik;
+
+  if (enableFilterByLabel) {
+    const filterConfig = {
+      ignoreCase: true,
+      ignoreAccents: true,
+      trim: true,
+      matchFrom: "any",
+    };
+    filterOption = createFilter(filterConfig);
+  }
 
   if (!value) {
     value = values[id];
@@ -111,7 +123,6 @@ export default function FormGroupSelect(props) {
   );
 
   // ensure value
-  const initialValue = formik.initialValues[id];
   options = useMemo(() => {
     if (isCreatable) {
       return ensureOptionCreate(options, value, createOptions);
@@ -226,6 +237,7 @@ export default function FormGroupSelect(props) {
 
 const defaultProps = {
   filterOption: () => true,
+  enableFilterByLabel: false,
   formatCreateLabel: (inputValue) => `"${inputValue}"`,
   debounceInterval: 300,
   createOptionPosition: "last",
