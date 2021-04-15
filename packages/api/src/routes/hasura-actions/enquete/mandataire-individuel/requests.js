@@ -117,6 +117,7 @@ module.exports = {
           defaultValues.nb_departements = length.toString();
         }
       }
+
       const departementCode = departement.id;
       const dateStart = new Date(enqueteAnnee - 1, 0, 1);
       const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
