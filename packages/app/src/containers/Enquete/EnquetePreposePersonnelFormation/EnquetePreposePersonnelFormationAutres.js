@@ -89,6 +89,8 @@ export function EnquetePreposePersonnelFormationAutres(props) {
           },
         });
       }}
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

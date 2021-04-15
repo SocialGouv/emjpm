@@ -55,6 +55,8 @@ export function EnquetePreposeModaliteExerciceInformations(props) {
           });
         }}
         enquete={props.enquete}
+        currentStep={props.currentStep}
+        sections={props.sections}
       />
     )
   );

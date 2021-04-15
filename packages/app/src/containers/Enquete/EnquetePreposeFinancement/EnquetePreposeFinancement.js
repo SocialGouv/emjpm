@@ -54,6 +54,8 @@ export function EnquetePreposeFinancement(props) {
       }}
       loading={loading}
       enquete={props.enquete}
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

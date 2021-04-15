@@ -63,7 +63,6 @@ export function EnquetePrepose(props) {
           sections={sections}
           currentStep={currentStep}
           section={section}
-          currentStep={props.currentStep}
           step={step}
           dispatchEnqueteContextEvent={dispatchEnqueteContextEvent}
           goToFirstPage={() => navigateToStep({ step: 1, substep: 0 })}

@@ -62,6 +62,8 @@ export function EnquetePreposePrestationsSocialesMAJ(props) {
         });
       }}
       title="MAJ"
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

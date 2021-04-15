@@ -62,6 +62,8 @@ export function EnquetePreposePrestationsSocialesCuratelleSimple(props) {
         });
       }}
       title="Curatelle simple"
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

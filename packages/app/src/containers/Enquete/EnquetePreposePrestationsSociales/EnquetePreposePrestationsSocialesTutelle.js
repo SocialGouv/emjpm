@@ -62,6 +62,8 @@ export function EnquetePreposePrestationsSocialesTutelle(props) {
         });
       }}
       title="Tutelle"
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

@@ -61,6 +61,8 @@ export function EnquetePreposePrestationsSocialesRepartitionPersonnes(props) {
           },
         });
       }}
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

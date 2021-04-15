@@ -62,6 +62,8 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
         });
       }}
       title="Curatelle renforcée"
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

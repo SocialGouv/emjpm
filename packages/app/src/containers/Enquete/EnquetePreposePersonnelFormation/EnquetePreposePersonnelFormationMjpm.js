@@ -76,6 +76,8 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
           },
         });
       }}
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }

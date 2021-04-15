@@ -131,6 +131,7 @@ export function useEnqueteForm({
           readOnly,
         });
       } else {
+        // "click-next"
         dispatchEnqueteContextEvent({
           type: "submit-and-navigate",
           value: "next",

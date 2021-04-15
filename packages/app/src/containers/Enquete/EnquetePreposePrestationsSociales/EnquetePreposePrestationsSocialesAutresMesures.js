@@ -62,6 +62,8 @@ export function EnquetePreposePrestationsSocialesAutresMesures(props) {
         });
       }}
       title="Autres mesures"
+      currentStep={props.currentStep}
+      sections={props.sections}
     />
   );
 }
