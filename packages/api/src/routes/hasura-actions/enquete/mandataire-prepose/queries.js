@@ -94,7 +94,16 @@ module.exports = {
     previous_enquete: enquetes(where: {annee: {_eq: $year}}){
         id
         enquete_reponses(where: {mandataire_id: {_eq: $mandataireId}}) {
-          __typename
+          enquete_reponses_prepose_personel_formation{
+            nb_preposes_mjpm
+            nb_preposes_mjpm_etp
+            formation_preposes_mjpm
+            niveaux_qualification
+            nb_preposes_homme
+            nb_preposes_femme
+            nb_autre_personnel
+            nb_autre_personnel_etp
+          }
         }
       }
   }

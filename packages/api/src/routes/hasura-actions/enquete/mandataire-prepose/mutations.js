@@ -15,6 +15,15 @@ module.exports = {
       $activite_exercee_par: String,
       $etablissements_type: String,
 
+      $nb_preposes_mjpm: Int,
+      $nb_preposes_mjpm_etp: Float,
+      $formation_preposes_mjpm: jsonb,
+      $niveaux_qualification: jsonb,
+      $nb_preposes_homme: Int,
+      $nb_preposes_femme: Int,
+      $nb_autre_personnel: Int,
+      $nb_autre_personnel_etp: Float,
+
       $curatelle_renforcee_etablissement_debut_annee: Int,
       $curatelle_renforcee_etablissement_fin_annee: Int,
       $curatelle_renforcee_domicile_debut_annee: Int,
@@ -410,7 +419,14 @@ module.exports = {
               autre_mesures_autre_service: $autre_mesures_autre_service,
             }]},
             enquete_reponses_prepose_personel_formations: {data: [{
-
+              nb_preposes_mjpm: $nb_preposes_mjpm,
+              nb_preposes_mjpm_etp: $nb_preposes_mjpm_etp,
+              formation_preposes_mjpm: $formation_preposes_mjpm,
+              niveaux_qualification: $niveaux_qualification,
+              nb_preposes_homme: $nb_preposes_homme,
+              nb_preposes_femme: $nb_preposes_femme,
+              nb_autre_personnel: $nb_autre_personnel,
+              nb_autre_personnel_etp: $nb_autre_personnel_etp,
             }]}
           }
         ]){

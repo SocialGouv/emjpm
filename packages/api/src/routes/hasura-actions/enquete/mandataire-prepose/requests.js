@@ -83,7 +83,6 @@ module.exports = {
       const previous =
         enqueteReponseDefaultData.previous_enquete?.[0]?.enquete_reponses?.[0];
 
-      const departementCode = departement.id;
       const dateStart = new Date(enqueteAnnee - 1, 0, 1);
       const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
       const { data: nbMesures, errors: errorsNbMesures } = await graphqlFetch(
@@ -94,7 +93,6 @@ module.exports = {
           dateYearLess10: new Date(yearLess10, 0, 1),
           dateYearLess3: new Date(yearLess3, 0, 1),
           dateYearLess5: new Date(yearLess5, 0, 1),
-          departementCode,
           mandataireId,
           yearLess25: yearLess25.toString(),
           yearLess39: yearLess39.toString(),
@@ -167,6 +165,21 @@ module.exports = {
       }
 
       // # 3. Personnel et formation
+      if (previous) {
+        for (const k of [
+          "nb_preposes_mjpm",
+          "nb_preposes_mjpm_etp",
+          "formation_preposes_mjpm",
+          "niveaux_qualification",
+          "nb_preposes_homme",
+          "nb_preposes_femme",
+          "nb_autre_personnel",
+          "nb_autre_personnel_etp",
+        ]) {
+          defaultValues[k] =
+            previous.enquete_reponses_prepose_personel_formation[k];
+        }
+      }
 
       // # 4. Activité dans l'année
       for (const k of [
