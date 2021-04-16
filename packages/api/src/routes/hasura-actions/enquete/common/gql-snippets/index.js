@@ -33,6 +33,7 @@ const gqlEtalblissement = `
   {
     _or: [
       { lieu_vie: {_eq: etablissement} },
+      { lieu_vie: {_eq: etablissement_conservation_domicile} },
     ],
   },
 `;
@@ -41,14 +42,18 @@ const gqlDomicile = `
   {
     _or: [
       { lieu_vie: {_eq: domicile} },
-      { lieu_vie: {_eq: etablissement_conservation_domicile} },
       { lieu_vie: {_eq: sdf} }
     ],
   },
 `;
-// ???
+
+const gqlTutelle = `
+  { champ_mesure: {_eq: protection_bien_personne} },
+  { nature_mesure: {_eq: tutelle} },
+`;
 
 const gqlCuratelle = `
+  { champ_mesure: {_eq: protection_bien_personne} },
   {
     _or: [
       { nature_mesure: {_eq: curatelle_simple} },
@@ -64,19 +69,14 @@ const gqlPersonne = `
   {
     _or: [
       {champ_mesure: {_eq: protection_personne} },
-      {champ_mesure: {_eq: protection_bien_personne} }
     ]
   },
 `;
-// ???
 
 const gqlNouvelles = `
   { date_nomination : {_gte: $dateStart} },
   { date_nomination : {_lte: $dateEnd} },
 `;
-// ???
-// { date_fin_mesure: { _gte: $dateEnd } },
-// { date_fin_mesure: { _is_null: true } },
 
 const gqlSorties = `
   { date_fin_mesure : {_gte: $dateStart} },
@@ -89,29 +89,11 @@ const gqlRevisionChangement = `
     { resultat_revision: {_eq: allegement} },
   ] }
 `;
-// ???
 
 const gqlRevisionAutre = `
   { resultat_revision: {_eq: dessaisissement_famille} },
   { resultat_revision: {_eq: dessaisissement_autre_mjpm} },
 `;
-// ???
-
-const gqlRevisionMASP = `
-  { _or: [
-    { resultat_revision: {_eq: dessaisissement_famille} },
-    { resultat_revision: {_eq: dessaisissement_autre_mjpm} },
-  ] }
-`;
-// ??? rajouter MASP dans resultat_revision_mesure
-
-const gqlCauseSortieMASP = `
-  { _or: [
-    { cause_sortie: {_eq: dessaisissement_famille} },
-    { cause_sortie: {_eq: dessaisissement_autre_mjpm} },
-  ] }
-`;
-// ??? rajouter MASP dans cause_sortie_mesure
 
 const gqlNatureMesureAutre = `
   { _or: [
@@ -121,17 +103,10 @@ const gqlNatureMesureAutre = `
     { nature_mesure: {_eq: mesure_ad_hoc} },
   ] }
 `;
-//???
-
-const gqlEhpad = `
-  { type_etablissement: { _eq: etablissement_personne_agee } },
-`;
-//???
 
 const gqlChrs = `
   { type_etablissement: { _eq: autre_etablissement_s_ms } },
 `;
-//???
 
 function build2Combinaisons(prefixes, suffixes, separator) {
   if (separator === undefined) {
@@ -170,23 +145,21 @@ function build3Combinaisons(prefixes, middles, suffixes, separator) {
 }
 
 module.exports = {
+  build2Combinaisons,
+  build3Combinaisons,
   gqlAu1erJanvier,
   gqlAu31Decembre,
   gqlBiens,
-  gqlCauseSortieMASP,
   gqlChrs,
   gqlCuratelle,
-  build2Combinaisons,
   gqlDomicile,
-  build3Combinaisons,
   gqlDu1erJanvierAu31Decembre,
-  gqlEhpad,
   gqlEtalblissement,
   gqlNatureMesureAutre,
   gqlNouvelles,
   gqlPersonne,
   gqlRevisionAutre,
   gqlRevisionChangement,
-  gqlRevisionMASP,
   gqlSorties,
+  gqlTutelle,
 };

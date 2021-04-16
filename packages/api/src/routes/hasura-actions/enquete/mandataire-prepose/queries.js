@@ -11,11 +11,9 @@ const {
   gqlSorties,
   gqlRevisionChangement,
   gqlRevisionAutre,
-  gqlRevisionMASP,
-  gqlCauseSortieMASP,
   gqlNatureMesureAutre,
-  gqlEhpad,
   gqlChrs,
+  gqlTutelle,
   build2Combinaisons,
   build3Combinaisons,
 } = require("~/routes/hasura-actions/enquete/common/gql-snippets");
@@ -468,7 +466,7 @@ module.exports = {
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlAu1erJanvier}
           ${gqlEtalblissement}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
         ]
       }){
         aggregate { count }
@@ -478,7 +476,7 @@ module.exports = {
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlAu31Decembre}
           ${gqlEtalblissement}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
         ]
       }){
         aggregate { count }
@@ -488,7 +486,7 @@ module.exports = {
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlAu1erJanvier}
           ${gqlDomicile}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
         ]
       }){
         aggregate { count }
@@ -498,7 +496,7 @@ module.exports = {
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlAu31Decembre}
           ${gqlDomicile}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
         ]
       }){
         aggregate { count }
@@ -776,7 +774,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlNouvelles}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
           ${gqlEtalblissement}
         ]
       }){
@@ -786,7 +784,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlSorties}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
           ${gqlEtalblissement}
         ]
       }){
@@ -796,7 +794,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlNouvelles}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
           ${gqlDomicile}
         ]
       }){
@@ -806,7 +804,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlSorties}
-          { nature_mesure: {_eq: tutelle} },
+          ${gqlTutelle}
           ${gqlDomicile}
         ]
       }){
@@ -1005,16 +1003,6 @@ module.exports = {
       }){
         aggregate { count }
       }
-      revisions_masp:  mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          { date_protection_en_cours: {_gte: $dateStart} },
-          { date_protection_en_cours: {_lte: $dateEnd} },
-          ${gqlRevisionMASP}
-        ]
-      }){
-        aggregate { count }
-      }
       revisions_reconduction:  mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -1062,16 +1050,6 @@ module.exports = {
           { date_fin_mesure: {_gte: $dateStart} },
           { date_fin_mesure: {_lte: $dateEnd} },
           { cause_sortie: {_eq: deces} },
-        ]
-      }){
-        aggregate { count }
-      }
-      sorties_masp:  mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          { date_fin_mesure: {_gte: $dateStart} },
-          { date_fin_mesure: {_lte: $dateEnd} },
-          ${gqlCauseSortieMASP}
         ]
       }){
         aggregate { count }
@@ -1942,16 +1920,6 @@ module.exports = {
       }){
         aggregate { count }
       }
-      tutelle_ehpad: mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          ${gqlDu1erJanvierAu31Decembre}
-          { nature_mesure : {_eq: tutelle} },
-          ${gqlEhpad}
-        ]
-      }){
-        aggregate { count }
-      }
       tutelle_autre_etablissement_personne_agee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -2018,16 +1986,6 @@ module.exports = {
           ${gqlDu1erJanvierAu31Decembre}
           ${gqlCuratelle}
           { type_etablissement: {_eq: etablissement_handicapes} },
-        ]
-      }){
-        aggregate { count }
-      }
-      curatelle_ehpad: mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          ${gqlDu1erJanvierAu31Decembre}
-          ${gqlCuratelle}
-          ${gqlEhpad}
         ]
       }){
         aggregate { count }
@@ -2102,16 +2060,6 @@ module.exports = {
       }){
         aggregate { count }
       }
-      maj_ehpad: mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          ${gqlDu1erJanvierAu31Decembre}
-          { nature_mesure : {_eq: mesure_accompagnement_judiciaire} },
-          ${gqlEhpad}
-        ]
-      }){
-        aggregate { count }
-      }
       maj_autre_etablissement_personne_agee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -2182,16 +2130,6 @@ module.exports = {
       }){
         aggregate { count }
       }
-      sauvegarde_justice_ehpad: mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          ${gqlDu1erJanvierAu31Decembre}
-          { nature_mesure : {_eq: sauvegarde_justice} },
-          ${gqlEhpad}
-        ]
-      }){
-        aggregate { count }
-      }
       sauvegarde_justice_autre_etablissement_personne_agee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -2258,16 +2196,6 @@ module.exports = {
           ${gqlDu1erJanvierAu31Decembre}
           ${gqlNatureMesureAutre}
           { type_etablissement: {_eq: etablissement_handicapes} },
-        ]
-      }){
-        aggregate { count }
-      }
-      autre_mesures_ehpad: mesures_aggregate(where: {
-        _and: [
-          { mandataire_id : {_eq: $mandataireId} },
-          ${gqlDu1erJanvierAu31Decembre}
-          ${gqlNatureMesureAutre}
-          ${gqlEhpad}
         ]
       }){
         aggregate { count }
