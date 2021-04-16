@@ -87,3 +87,5 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
                   key: HASURA_WEB_HOOK_SECRET
+            - name: HASURA_GRAPHQL_PG_CONNECTIONS
+              value: {{ .Values.pgConnections }}
