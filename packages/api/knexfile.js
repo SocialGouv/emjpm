@@ -9,6 +9,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
+    pool: { max: 5, min: 1 },
     seeds: {},
   },
   production: {
@@ -21,6 +22,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
+    pool: { max: 5, min: 1 },
   },
   test: {
     // debug: true,
