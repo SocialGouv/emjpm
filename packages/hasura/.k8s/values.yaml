@@ -24,4 +24,4 @@ resources:
   requests:
     cpu: 10m
     memory: 1024Mi
-pgConnections: 35
+pgConnections: '35'
