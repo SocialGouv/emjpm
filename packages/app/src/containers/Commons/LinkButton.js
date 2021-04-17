@@ -72,7 +72,7 @@ function LinkButton({ location, ...props }) {
               return;
             }
             e.preventDefault();
-            navigate(to);
+            navigate(props.to);
           }}
         >
           {props.children}
