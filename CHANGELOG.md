@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.112.1](https://github.com/SocialGouv/emjpm/compare/v25.112.0...v25.112.1) (2021-04-17)
+
+
+### Bug Fixes
+
+* **db:** remove metadata smic_annee ([525926d](https://github.com/SocialGouv/emjpm/commit/525926d5d0a5b73ffa980d96b82bf2dc94f28675))
+
+
+
+
+
 # [25.112.0](https://github.com/SocialGouv/emjpm/compare/v25.111.0...v25.112.0) (2021-04-17)
 
 
