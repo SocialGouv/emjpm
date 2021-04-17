@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.112.0](https://github.com/SocialGouv/emjpm/compare/v25.111.0...v25.112.0) (2021-04-17)
+
+
+### Bug Fixes
+
+* **enquetes:** prepose next navigation ([b379778](https://github.com/SocialGouv/emjpm/commit/b3797789e02c747f85ebe46bbf7bae8cf31c0de9))
+* **typo:** prop ([98352c0](https://github.com/SocialGouv/emjpm/commit/98352c029fa0d19f7bf8f706a9208ff5e56f29c3))
+
+
+### Features
+
+* **navigation:** link open in new tab ([567e547](https://github.com/SocialGouv/emjpm/commit/567e547c17297fef5b2938492c024832558620a1))
+* **stats-annee:** generator ([3e728e5](https://github.com/SocialGouv/emjpm/commit/3e728e55866385743368b3b57fe918c1260a3e05))
+
+
+
+
+
 # [25.111.0](https://github.com/SocialGouv/emjpm/compare/v25.110.0...v25.111.0) (2021-04-14)
 
 

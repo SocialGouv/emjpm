@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.112.0](https://github.com/SocialGouv/emjpm/compare/v25.111.0...v25.112.0) (2021-04-17)
+
+
+### Bug Fixes
+
+* **api-limit:** increase ([362d29b](https://github.com/SocialGouv/emjpm/commit/362d29b66403f277bf912d704cf6a49ac5061d33))
+* **enquetes:** prepose next navigation ([b379778](https://github.com/SocialGouv/emjpm/commit/b3797789e02c747f85ebe46bbf7bae8cf31c0de9))
+* **pg-connections:** cast to string ([3fc9a57](https://github.com/SocialGouv/emjpm/commit/3fc9a577546793ed95fef901dab9b0c35b6aa5e8))
+* **pg-connections:** cast to string ([295503e](https://github.com/SocialGouv/emjpm/commit/295503e364deaecde65756bb09d746bae601cfdd))
+* **pg-connections:** hasura pg-connections ([e67f85d](https://github.com/SocialGouv/emjpm/commit/e67f85da7728e31e37f2883f5928146f878b3439))
+* **typo:** prop ([98352c0](https://github.com/SocialGouv/emjpm/commit/98352c029fa0d19f7bf8f706a9208ff5e56f29c3))
+
+
+### Features
+
+* **enquete:** prefill prepose step 3 + fixs ([cc56767](https://github.com/SocialGouv/emjpm/commit/cc567674a31484da2dbd68f4dcd5517c26d93cf2))
+* **enquete:** prefill prepose wip ([c05ba78](https://github.com/SocialGouv/emjpm/commit/c05ba78f57566f73aeae39f35cc7bef0e12059ce))
+* **enquete:** prefill service ([aea3bd3](https://github.com/SocialGouv/emjpm/commit/aea3bd3b4d559c65400715ac8aa7637ec3419586))
+* **enquetes:** fix biz logic ([91359ec](https://github.com/SocialGouv/emjpm/commit/91359eccb671427aaca45faa52ee65fec0470077))
+* **enquetes:** prepose ressources tranches ([d9f031d](https://github.com/SocialGouv/emjpm/commit/d9f031d3656c1075d8494aa4727122956e134732))
+* **navigation:** link open in new tab ([567e547](https://github.com/SocialGouv/emjpm/commit/567e547c17297fef5b2938492c024832558620a1))
+* **smic-par-annee:** add and feed table ([93fdc0f](https://github.com/SocialGouv/emjpm/commit/93fdc0ff5af847b85be93d3f9d08c9eebc991822))
+* **stats-annee:** generator ([3e728e5](https://github.com/SocialGouv/emjpm/commit/3e728e55866385743368b3b57fe918c1260a3e05))
+
+
+
+
+
 # [25.111.0](https://github.com/SocialGouv/emjpm/compare/v25.110.0...v25.111.0) (2021-04-14)
 
 
