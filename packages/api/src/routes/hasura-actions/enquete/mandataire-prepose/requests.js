@@ -6,8 +6,11 @@ const {
   ENQUETE_REPONSE_MANDATAIRE_PREPOSE,
   ENQUETE_REPONSE_DEFAULT_VALUES,
   NB_MESURES,
+  INFO_FINANCE_ANNEE,
+  REVENUS,
 } = require("./queries");
 const { INIT_ENQUETE_REPONSE, SUBMIT_ENQUETE_REPONSE } = require("./mutations");
+const { range } = require("~/routes/hasura-actions/enquete/common/utils");
 
 module.exports = {
   createEmptyEnqueteReponse: async ({ enqueteId, mandataireId }) => {
@@ -85,6 +88,7 @@ module.exports = {
 
       const dateStart = new Date(enqueteAnnee - 1, 0, 1);
       const dateEnd = new Date(enqueteAnnee - 1, 11, 31);
+
       const { data: nbMesures, errors: errorsNbMesures } = await graphqlFetch(
         {
           dateEnd,
@@ -366,6 +370,93 @@ module.exports = {
         "autre_mesures_autre_service",
       ]) {
         defaultValues[k] = nbMesures[k].aggregate.count;
+      }
+
+      // # 6. Revenus / Prestations sociales
+      const yearSmic = enqueteAnnee - 2;
+      const {
+        data: infoFinanceAnneeData,
+        errors: infoFinanceAnneeErrors,
+      } = await graphqlFetch(
+        { year: yearSmic },
+        INFO_FINANCE_ANNEE,
+        backendAuthHeaders
+      );
+      if (infoFinanceAnneeErrors) {
+        console.error("infoFinanceAnneeErrors", infoFinanceAnneeErrors);
+      }
+
+      const infoFinanceAnnee = infoFinanceAnneeData.info_finance_annee.reduce(
+        (obj, { type, montant }) => {
+          return {
+            ...obj,
+            [type]: montant,
+          };
+        },
+        {}
+      );
+
+      const smicMensuel = infoFinanceAnnee.smic_mensuel;
+      const aahAnnuel = infoFinanceAnnee.aah_annuel;
+      if (!smicMensuel) {
+        throw new Error(
+          `missing data info_finance_annee.smic_mensuel in database for year ${yearSmic}`
+        );
+      }
+      if (!aahAnnuel) {
+        throw new Error(
+          `missing data info_finance_annee.aah_annuel in database for year ${yearSmic}`
+        );
+      }
+      const smicAnnuel = smicMensuel * 12;
+
+      const maxTranche1 = aahAnnuel;
+      const maxTranche2 = smicAnnuel;
+      const maxTranche3 = Math.round(smicAnnuel * 1.2 * 100) / 100;
+      const maxTranche4 = Math.round(smicAnnuel * 1.4 * 100) / 100;
+      const maxTranche5 = Math.round(smicAnnuel * 1.6 * 100) / 100;
+      const maxTranche6 = Math.round(smicAnnuel * 1.8 * 100) / 100;
+      const maxTranche7 = Math.round(smicAnnuel * 2.0 * 100) / 100;
+      const maxTranche8 = Math.round(smicAnnuel * 2.5 * 100) / 100;
+      const maxTranche9 = Math.round(smicAnnuel * 4.0 * 100) / 100;
+      const maxTranche10 = Math.round(smicAnnuel * 6.0 * 100) / 100;
+      const { data: revenusData, errors: revenusErrors } = await graphqlFetch(
+        {
+          dateEnd,
+          dateStart,
+          mandataireId,
+          maxTranche1,
+          maxTranche10,
+          maxTranche2,
+          maxTranche3,
+          maxTranche4,
+          maxTranche5,
+          maxTranche6,
+          maxTranche7,
+          maxTranche8,
+          maxTranche9,
+        },
+        REVENUS,
+        backendAuthHeaders
+      );
+
+      if (revenusErrors) {
+        console.error("revenusErrors", revenusErrors);
+      }
+
+      for (const k of [
+        "tutelle",
+        "curatelle_simple",
+        "curatelle_renforcee",
+        "sauvegarde_autres_mesures",
+        "maj",
+      ]) {
+        defaultValues[k] = range(1, 11).reduce((o, i) => {
+          return {
+            ...o,
+            [`tranche${i}`]: revenusData[`${k}_tranche${i}`].aggregate.count,
+          };
+        }, {});
       }
 
       const value = {

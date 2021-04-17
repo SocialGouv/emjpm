@@ -3786,6 +3786,13 @@
       filter: {}
 - table:
     schema: public
+    name: info_finance_annee
+- table:
+    schema: public
+    name: info_finance_type
+  is_enum: true
+- table:
+    schema: public
     name: lb_departements
   object_relationships:
   - name: departement

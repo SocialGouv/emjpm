@@ -104,6 +104,16 @@ const gqlNatureMesureAutre = `
   ] }
 `;
 
+const gqlNatureMesureAutre2 = `
+  { _or: [
+    { nature_mesure: {_eq: subroge_curateur} },
+    { nature_mesure: {_eq: subroge_tuteur} },
+    { nature_mesure: {_eq: mandat_protection_future} },
+    { nature_mesure: {_eq: mesure_ad_hoc} },
+    { nature_mesure: {_eq: sauvegarde_justice} },
+  ] }
+`;
+
 const gqlChrs = `
   { type_etablissement: { _eq: autre_etablissement_s_ms } },
 `;
@@ -156,6 +166,7 @@ module.exports = {
   gqlDu1erJanvierAu31Decembre,
   gqlEtalblissement,
   gqlNatureMesureAutre,
+  gqlNatureMesureAutre2,
   gqlNouvelles,
   gqlPersonne,
   gqlRevisionAutre,

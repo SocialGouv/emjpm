@@ -200,6 +200,12 @@ module.exports = {
       $autre_mesures_service_hospitalier_soins_longue_duree: Int,
       $autre_mesures_service_psychiatrique: Int,
       $autre_mesures_autre_service: Int,
+
+      $tutelle: jsonb,
+      $curatelle_simple: jsonb,
+      $curatelle_renforcee: jsonb,
+      $sauvegarde_autres_mesures: jsonb,
+      $maj: jsonb,
     ) {
       insert_enquete_reponses
         (objects: [
@@ -209,7 +215,11 @@ module.exports = {
             user_type: "prepose",
             mandataire_id: $mandataireId,
             enquete_reponses_prepose_prestations_sociales: {data: [{
-
+              tutelle: $tutelle,
+              curatelle_simple: $curatelle_simple,
+              curatelle_renforcee: $curatelle_renforcee,
+              sauvegarde_autres_mesures: $sauvegarde_autres_mesures,
+              maj: $maj,
             }]},
             enquete_reponses_activites: {data: [{
               curatelle_renforcee_etablissement_debut_annee: $curatelle_renforcee_etablissement_debut_annee,

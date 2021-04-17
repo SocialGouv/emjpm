@@ -12,11 +12,95 @@ const {
   gqlRevisionChangement,
   gqlRevisionAutre,
   gqlNatureMesureAutre,
+  gqlNatureMesureAutre2,
   gqlChrs,
   gqlTutelle,
   build2Combinaisons,
   build3Combinaisons,
 } = require("~/routes/hasura-actions/enquete/common/gql-snippets");
+const { range } = require("~/routes/hasura-actions/enquete/common/utils");
+
+const trancheFrom2To10 = range(2, 10)
+  .map(
+    (i) => `
+    tutelle_tranche${i}: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlTutelle}
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche${
+            i - 1
+          }} } },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche${i}} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_simple_tranche${i}: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_simple} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche${
+            i - 1
+          }} } },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche${i}} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_renforcee_tranche${i}: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche${
+            i - 1
+          }} } },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche${i}} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    sauvegarde_autres_mesures_tranche${i}: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlNatureMesureAutre2}
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche${
+            i - 1
+          }} } },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche${i}} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    maj_tranche${i}: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche${
+            i - 1
+          }} } },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche${i}} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+`
+  )
+  .join("\n");
 
 module.exports = {
   ENQUETE: `
@@ -326,6 +410,23 @@ module.exports = {
         aspa
         apa
       }
+    }
+  }
+  `,
+
+  INFO_FINANCE_ANNEE: `
+  query info_finance_annee($year: Int!){
+    info_finance_annee(
+      where: {
+        annee: {_eq: $year},
+        _or: [
+          { type: {_eq: smic_mensuel} },
+          { type: {_eq: aah_annuel} },
+        ]
+      }
+    ){
+      type
+      montant
     }
   }
   `,
@@ -2252,5 +2353,148 @@ module.exports = {
       }
     
     }
+  `,
+
+  REVENUS: `
+  query revenus(
+    $mandataireId: Int!,
+    $dateStart: date!,
+    $dateEnd: date!,
+    $maxTranche1: numeric!,
+    $maxTranche2: numeric!,
+    $maxTranche3: numeric!,
+    $maxTranche4: numeric!,
+    $maxTranche5: numeric!,
+    $maxTranche6: numeric!,
+    $maxTranche7: numeric!,
+    $maxTranche8: numeric!,
+    $maxTranche9: numeric!,
+    $maxTranche10: numeric!
+  ){
+    tutelle_tranche1: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlTutelle}
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche1} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_simple_tranche1: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_simple} },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche1} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_renforcee_tranche1: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche1} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    sauvegarde_autres_mesures_tranche1: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlNatureMesureAutre2}
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche1} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    maj_tranche1: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          { mesure_ressources: { niveau_ressource: {_lte: $maxTranche1} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+
+    ${trancheFrom2To10}
+
+    tutelle_tranche11: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlTutelle}
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche10} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_simple_tranche11: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_simple} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche10} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    curatelle_renforcee_tranche11: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: curatelle_renforcee} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche10} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    sauvegarde_autres_mesures_tranche11: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          ${gqlNatureMesureAutre2}
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche10} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+    maj_tranche11: mesures_aggregate(
+      where: {
+        _and: [
+          { mandataire_id : {_eq: $mandataireId} },
+          ${gqlDu1erJanvierAu31Decembre}
+          { nature_mesure: {_eq: mesure_accompagnement_judiciaire} },
+          { mesure_ressources: { niveau_ressource: {_gt: $maxTranche10} } },
+        ]
+      }
+    ){
+      aggregate { count }
+    }
+
+  }
   `,
 };
