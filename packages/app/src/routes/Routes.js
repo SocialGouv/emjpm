@@ -422,6 +422,10 @@ const publicRoutes = [
   },
   { Component: require("~/pages/stats/index").default, path: "/stats" },
   {
+    Component: require("~/pages/stats-annee/index").default,
+    path: "/stats-annee",
+  },
+  {
     Component: require("~/pages/politique-confidentialite").default,
     path: "/politique-confidentialite",
   },
