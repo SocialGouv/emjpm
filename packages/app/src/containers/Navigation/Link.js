@@ -53,7 +53,17 @@ function ActiveLink(props) {
         to={to}
         component={({ navigate }) => {
           return (
-            <Link sx={LinkStyle(isActive)} onClick={() => navigate(to)}>
+            <Link
+              sx={LinkStyle(isActive)}
+              onClick={(e) => {
+                if (e.ctrlKey) {
+                  return;
+                }
+                e.preventDefault();
+                navigate(to);
+              }}
+              href={to}
+            >
               {props.children}
               {isActive && <Box sx={LineStyle} />}
             </Link>

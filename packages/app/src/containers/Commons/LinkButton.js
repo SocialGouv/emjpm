@@ -62,8 +62,18 @@ function LinkButton({ location, ...props }) {
       component={({ navigate }) => (
         <RebassLink
           {...attr}
+          href={props.disabled ? "" : props.to}
           sx={LinkButtonStyle(isActive, props)}
-          onClick={() => props.disabled || navigate(props.to)}
+          onClick={(e) => {
+            if (props.disabled) {
+              return;
+            }
+            if (e.ctrlKey) {
+              return;
+            }
+            e.preventDefault();
+            navigate(to);
+          }}
         >
           {props.children}
         </RebassLink>

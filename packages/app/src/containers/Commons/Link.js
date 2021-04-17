@@ -19,7 +19,7 @@ function isExternalLink(to) {
 }
 
 function Link({ to, ...props }) {
-  if (isExternalLink(to)) {
+  if (isExternalLink(to) || props.target == "_blank") {
     return (
       <RebassLink sx={LinkStyle()} {...props} href={to}>
         {props.children}
@@ -30,7 +30,18 @@ function Link({ to, ...props }) {
     <RouterLink
       to={to}
       component={({ navigate }) => (
-        <RebassLink sx={LinkStyle()} {...props} onClick={() => navigate(to)}>
+        <RebassLink
+          sx={LinkStyle()}
+          {...props}
+          onClick={(e) => {
+            if (e.ctrlKey) {
+              return;
+            }
+            e.preventDefault();
+            navigate(to);
+          }}
+          href={to}
+        >
           {props.children}
         </RebassLink>
       )}
