@@ -6540,9 +6540,6 @@
       check: null
 - table:
     schema: public
-    name: smic_annee
-- table:
-    schema: public
     name: tis
   object_relationships:
   - name: departement
