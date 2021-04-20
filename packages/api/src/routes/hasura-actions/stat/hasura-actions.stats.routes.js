@@ -59,15 +59,20 @@ router.post(
   async (req, res, next) => {
     const { regionId, departementCode } = req.body.input;
     try {
-      const filters = {};
-      if (departementCode) {
-        filters.departement_code = departementCode;
-      } else if (regionId) {
-        filters.region_id = regionId;
+      let availibilities;
+      if (departementCode || regionId) {
+        const filters = {};
+        if (departementCode) {
+          filters.departement_code = departementCode;
+        } else if (regionId) {
+          filters.region_id = regionId;
+        }
+        availibilities = await knex("view_department_availability").where(
+          filters
+        );
+      } else {
+        availibilities = await knex("view_nation_availability");
       }
-      const availibilities = await knex("view_department_availability").where(
-        filters
-      );
 
       const availableMesuresNb = availibilities.reduce((acc, availability) => {
         const max = availability.mesures_max || 0;

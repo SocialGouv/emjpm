@@ -7451,6 +7451,9 @@
       allow_aggregations: true
 - table:
     schema: public
+    name: view_nation_availability
+- table:
+    schema: public
     name: view_nation_indicateur_inscrit
   select_permissions:
   - role: anonymous
