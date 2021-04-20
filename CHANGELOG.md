@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.112.4](https://github.com/SocialGouv/emjpm/compare/v25.112.3...v25.112.4) (2021-04-20)
+
+
+### Bug Fixes
+
+* **direction:** stats dispo ([a386654](https://github.com/SocialGouv/emjpm/commit/a38665450aa10ee929642baa10f2d678da1c84d7))
+
+
+
+
+
 ## [25.112.3](https://github.com/SocialGouv/emjpm/compare/v25.112.2...v25.112.3) (2021-04-20)
 
 **Note:** Version bump only for package emjpm2
