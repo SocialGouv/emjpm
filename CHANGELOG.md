@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.112.5](https://github.com/SocialGouv/emjpm/compare/v25.112.4...v25.112.5) (2021-04-20)
+
+
+### Bug Fixes
+
+* **stats:** departement filter right target ([9bad099](https://github.com/SocialGouv/emjpm/commit/9bad099f68f29769fce382975a9f7228418f97af))
+
+
+
+
+
 ## [25.112.4](https://github.com/SocialGouv/emjpm/compare/v25.112.3...v25.112.4) (2021-04-20)
 
 
