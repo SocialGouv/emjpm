@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.112.2](https://github.com/SocialGouv/emjpm/compare/v25.112.1...v25.112.2) (2021-04-20)
+
+
+### Bug Fixes
+
+* **admin:** create missing direction row ([b00c78d](https://github.com/SocialGouv/emjpm/commit/b00c78dfa391c859ea80ee372e378f7d6b609d73))
+* **deps:** update all dependencies ([#2532](https://github.com/SocialGouv/emjpm/issues/2532)) ([b781de9](https://github.com/SocialGouv/emjpm/commit/b781de90c0666dc747d2a4fbd04c1b57dda85d0f))
+* **signup:** genre as required in validationSchema ([344236f](https://github.com/SocialGouv/emjpm/commit/344236f629fe4d944fb5c6a5981ea98c07ef2c7c))
+
+
+
+
+
 ## [25.112.1](https://github.com/SocialGouv/emjpm/compare/v25.112.0...v25.112.1) (2021-04-17)
 
 
