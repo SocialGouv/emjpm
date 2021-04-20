@@ -39,7 +39,7 @@ function AdminDirectionType(props) {
         user_id: userId,
       },
     });
-  }, [data]);
+  }, [createMissingDirectionAgrement, data, userId]);
 
   if (!useQueryReady(loading, error)) {
     return null;
