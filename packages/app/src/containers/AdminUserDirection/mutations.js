@@ -36,3 +36,11 @@ export const CHANGE_DIRECTION_AGREMENT = gql`
     }
   }
 `;
+
+export const CREATE_MISSING_DIRECTION_AGREMENT = gql`
+  mutation create_missing_direction_agrement($user_id: Int!) {
+    insert_direction_one(object: { user_id: $user_id }) {
+      id
+    }
+  }
+`;

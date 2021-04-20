@@ -3,8 +3,12 @@ import { useMutation, useQuery } from "@apollo/client";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { AdminDirectionTypeForm } from "./AdminDirectionTypeForm";
-import { CHANGE_DIRECTION_AGREMENT } from "./mutations";
+import {
+  CHANGE_DIRECTION_AGREMENT,
+  CREATE_MISSING_DIRECTION_AGREMENT,
+} from "./mutations";
 import { USER } from "./queries";
+import { useEffect } from "react";
 
 function AdminDirectionType(props) {
   const { userId } = props;
@@ -14,6 +18,28 @@ function AdminDirectionType(props) {
   });
 
   const [changeDirectionAgrements] = useMutation(CHANGE_DIRECTION_AGREMENT);
+  const [createMissingDirectionAgrement] = useMutation(
+    CREATE_MISSING_DIRECTION_AGREMENT,
+    {
+      refetchQueries: [
+        {
+          query: USER,
+          variables: { userId },
+        },
+      ],
+    }
+  );
+
+  useEffect(() => {
+    if (!data || data.users_by_pk.directions.length > 0) {
+      return;
+    }
+    createMissingDirectionAgrement({
+      variables: {
+        user_id: userId,
+      },
+    });
+  }, [data]);
 
   if (!useQueryReady(loading, error)) {
     return null;
@@ -38,7 +64,7 @@ function AdminDirectionType(props) {
     await changeDirectionAgrements({
       variables: {
         departement_code: values.departement || null,
-        direction_id: direction?.id,
+        direction_id: direction.id,
         direction_role_id: newDirectionRole.id,
         new_direction_role_id: directionRole.id,
         region_id: values.region || null,
