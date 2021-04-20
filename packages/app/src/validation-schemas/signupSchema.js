@@ -25,6 +25,7 @@ const signupSchema = yup.object().shape({
     ),
   prenom: yup.string().required(),
   type: yup.string().required(),
+  genre: yup.string().oneOf(["F", "H"]).required(),
 });
 
 export { signupSchema };
