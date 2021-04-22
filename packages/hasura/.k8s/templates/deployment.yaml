@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: {{ include "nodejs.fullname" . }}
   labels:
+    app: hasura
+    application: emjpm
+    owner: emjpm
+    team: emjpm
 {{ include "nodejs.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicas }}
