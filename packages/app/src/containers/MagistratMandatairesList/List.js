@@ -11,30 +11,6 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { GET_MANDATAIRES } from "./queries";
 import { formatMandatairesList } from "./utils";
 
-const DEFAULT_VALUE = { label: "Tous les types", value: null };
-
-const optionsType = [
-  DEFAULT_VALUE,
-  { label: "Préposé", value: "MANDATAIRE_PRE" },
-  { label: "Individuel", value: "MANDATAIRE_IND" },
-  { label: "Service", value: "SERVICE" },
-];
-
-const orderByOptions = [
-  {
-    label: "disponibilité",
-    value: 0,
-  },
-  {
-    label: "ordre alphabétique (A-Z)",
-    value: 1,
-  },
-  {
-    label: "ordre alphabétique (Z-A)",
-    value: 2,
-  },
-];
-
 const RESULT_PER_PAGE = 20;
 
 function getOrderByVariable(orderBy) {
@@ -53,7 +29,13 @@ function getOrderByVariable(orderBy) {
 }
 
 function MagistratMandatairesListList(props) {
-  const { orderBy, debouncedSearchText, currentOffset, selectedType } = props;
+  const {
+    orderBy,
+    debouncedSearchText,
+    setCurrentOffset,
+    currentOffset,
+    selectedType,
+  } = props;
   const history = useHistory();
   const {
     magistrat: { ti_id },

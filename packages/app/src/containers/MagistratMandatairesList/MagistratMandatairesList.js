@@ -1,8 +1,5 @@
 import { useCallback, useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
-
-import useUser from "~/hooks/useUser";
 
 import { useDebounce } from "~/hooks";
 
@@ -52,10 +49,6 @@ function getOrderByVariable(orderBy) {
 }
 
 function MagistratMandatairesList() {
-  const history = useHistory();
-  const {
-    magistrat: { ti_id },
-  } = useUser();
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -90,6 +83,7 @@ function MagistratMandatairesList() {
       <MagistratMandatairesListList
         orderBy={orderBy}
         debouncedSearchText={debouncedSearchText}
+        setCurrentOffset={setCurrentOffset}
         currentOffset={currentOffset}
         selectedType={selectedType}
       />
