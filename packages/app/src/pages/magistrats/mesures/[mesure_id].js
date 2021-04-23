@@ -13,7 +13,7 @@ function Mandataires() {
   const { mesure_id: mesureId } = useParams();
   return (
     <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <Flex
           sx={{
             flexWrap: "wrap",

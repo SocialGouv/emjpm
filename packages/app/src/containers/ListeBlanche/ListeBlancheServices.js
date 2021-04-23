@@ -31,7 +31,7 @@ function getRequestFilters(filters) {
 }
 
 export function ListeBlancheServices(props) {
-  const { onSelectItem } = props;
+  const { getHref, onRowClick } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
   const { search } = debounceFilters;
@@ -69,11 +69,12 @@ export function ListeBlancheServices(props) {
     <PaginatedList
       entries={services}
       RowItem={ListeBlancheServiceItem}
+      getHref={getHref}
       count={count}
       resultPerPage={resultPerPage}
       currentOffset={currentOffset}
       setCurrentOffset={setCurrentOffset}
-      onRowClick={onSelectItem}
+      onRowClick={onRowClick}
     />
   );
 }

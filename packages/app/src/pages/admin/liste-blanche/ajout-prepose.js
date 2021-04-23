@@ -9,7 +9,7 @@ import { BoxWrapper } from "~/components/Grid";
 export default function ListBlancheAjoutPrepose() {
   return (
     <LayoutAdmin>
-      <BoxWrapper mt={4} px={1}>
+      <BoxWrapper mt={3} px={1}>
         <Link
           to="/admin/liste-blanche"
           component={(props) => (

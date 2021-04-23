@@ -12,7 +12,7 @@ function ApiLogsViewPage() {
 
   return (
     <LayoutAdmin>
-      <BoxWrapper mt={4} px={1}>
+      <BoxWrapper mt={3} px={1}>
         <Link
           to="/admin/api-logs"
           component={(props) => (

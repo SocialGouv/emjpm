@@ -26,7 +26,7 @@ function ListBlanchePage() {
         useLocalStorage={true}
         initialFilters={initialFilters}
       >
-        <BoxWrapper mt={4} px={1}>
+        <BoxWrapper mt={3} px={1}>
           <Flex flexDirection="column">
             <Box mb="2">
               <ListeBlancheFilter />

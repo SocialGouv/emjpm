@@ -2,7 +2,7 @@ import { Lock } from "@styled-icons/boxicons-solid/Lock";
 import { useState } from "react";
 import { Box, Flex } from "rebass";
 
-import { Button, Card, Text } from "~/components";
+import { Card, Text } from "~/components";
 
 import { AdminEditTribunal } from "./AdminEditTribunal";
 import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
@@ -23,11 +23,22 @@ function RowItem({ item }) {
   } = item;
   const [editMode, setEditMode] = useState(false);
 
-  const toogleEditMode = () => setEditMode(!editMode);
+  const toogleEditMode = () => {
+    const selection = window.getSelection().toString();
+    if (selection.length > 0) {
+      return;
+    }
+    setEditMode(!editMode);
+  };
 
   return (
     <>
-      <Card sx={cardStyle} width="100%">
+      <Card
+        sx={cardStyle}
+        width="100%"
+        onClick={toogleEditMode}
+        style={{ cursor: "pointer" }}
+      >
         <Flex justifyContent="space-between">
           <Box>
             <Flex justifyContent="space-start">
@@ -57,11 +68,6 @@ function RowItem({ item }) {
                 <Text sx={descriptionStyle}>{count}</Text>
               </Flex>
             </Flex>
-          </Box>
-          <Box mr="1" width="120px" textAlign="center">
-            <Button width="120px" onClick={toogleEditMode} variant="outline">
-              Voir
-            </Button>
           </Box>
         </Flex>
       </Card>

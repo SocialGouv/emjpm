@@ -15,7 +15,7 @@ function AdminEditorsPage() {
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
-        <BoxWrapper mt={6} px="1">
+        <BoxWrapper mt={3} px="1">
           <HeadingTitle>Liste des éditeurs</HeadingTitle>
           <Flex
             sx={{

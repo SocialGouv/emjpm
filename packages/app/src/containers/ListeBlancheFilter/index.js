@@ -139,6 +139,7 @@ function ListeBlancheFilter() {
           <Flex mt={2}>
             <Box sx={BoxStyle}>
               <Input
+                name="search"
                 value={search || ""}
                 spellCheck="false"
                 autoComplete="false"

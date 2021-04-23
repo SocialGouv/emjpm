@@ -8,7 +8,7 @@ import { BoxWrapper } from "~/components/Grid";
 function AdminEditorsCreatePage() {
   return (
     <LayoutAdmin hasNavigation={false}>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <HeadingTitle>{"Création d'un éditeur"}</HeadingTitle>
         <Flex
           sx={{

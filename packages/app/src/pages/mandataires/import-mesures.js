@@ -36,7 +36,7 @@ function ImportMesures() {
 
   return (
     <LayoutMandataire>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <Flex>
           {ocmi_mandataire && (
             <ImportTypeTab type="ocmi">

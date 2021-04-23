@@ -1,15 +1,20 @@
 function cardStyle(active) {
   return {
     borderLeft: active ? "2px solid green" : "2px solid red",
-    mb: "1",
     overflow: "hidden",
-    pl: "16px",
     position: "relative",
-    cursor: "pointer",
     borderRadius: "0",
     marginBottom: "1px",
   };
 }
+
+const anchorStyle = {
+  cursor: "pointer",
+  margin: "-12px",
+  paddingLeft: "16px",
+  paddingTop: "12px",
+  width: "calc(100% - 45px)",
+};
 
 const labelStyle = {
   color: "mediumGray",
@@ -29,4 +34,4 @@ const descriptionStyle = {
   whiteSpace: "nowrap",
 };
 
-export { cardStyle, labelStyle, descriptionStyle };
+export { cardStyle, labelStyle, descriptionStyle, anchorStyle };

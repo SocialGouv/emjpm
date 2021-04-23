@@ -19,7 +19,7 @@ function AdminEtablissementsPage() {
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
-        <BoxWrapper mt={4} px={1}>
+        <BoxWrapper mt={3} px={1}>
           <HeadingTitle>Liste des établissements</HeadingTitle>
           <Box mt={4} mb={4}>
             <AdminFilterBar>

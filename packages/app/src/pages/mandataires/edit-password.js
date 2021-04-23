@@ -6,7 +6,7 @@ import { BoxWrapper } from "~/components/Grid";
 function EditInformations() {
   return (
     <LayoutMandataire>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <HeadingTitle>Modifier votre mot de passe</HeadingTitle>
         <EditPassword mt="3" />
       </BoxWrapper>

@@ -11,7 +11,7 @@ function ListBlanchePage() {
   return (
     <LayoutAdmin>
       <FiltersContextSerializableProvider useLocalStorage={true}>
-        <BoxWrapper mt={4} px={1}>
+        <BoxWrapper mt={3} px={1}>
           <Flex flexDirection="column">
             <Box mb="2">
               <ListeBlancheFilter />

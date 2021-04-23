@@ -10,7 +10,7 @@ export default function EditInformations() {
   } = useUser();
   return (
     <LayoutServices>
-      <BoxWrapper mt={6}>
+      <BoxWrapper mt={3}>
         <HeadingTitle mx="1">
           Editer les informations de votre service
         </HeadingTitle>

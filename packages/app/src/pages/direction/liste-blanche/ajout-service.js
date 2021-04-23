@@ -11,7 +11,7 @@ function ListBlanchePage() {
   const history = useHistory();
   return (
     <LayoutDirection>
-      <BoxWrapper mt={4} px={1}>
+      <BoxWrapper mt={3} px={1}>
         <Link
           to="/direction/liste-blanche"
           component={(props) => (

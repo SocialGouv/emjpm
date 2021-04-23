@@ -4,20 +4,23 @@ import { Box, Flex } from "rebass";
 
 import { PaginatedListStyle } from "./style";
 
-const DataList = ({ entries, RowItem, renderActions, onRowClick }) => (
-  <Flex flexDirection="column">
-    {entries.map((entry, index) => (
-      <RowItem
-        onClick={() => (onRowClick ? onRowClick(entry) : null)}
-        key={index}
-        item={entry}
-        renderActions={renderActions}
-      />
-    ))}
-  </Flex>
-);
+function DataList({ entries, RowItem, renderActions, onRowClick, getHref }) {
+  return (
+    <Flex flexDirection="column">
+      {entries.map((entry, index) => (
+        <RowItem
+          onClick={(e) => onRowClick && onRowClick(entry, e)}
+          getHref={getHref}
+          key={index}
+          item={entry}
+          renderActions={renderActions}
+        />
+      ))}
+    </Flex>
+  );
+}
 
-const PaginatedList = ({
+function PaginatedList({
   entries,
   RowItem,
   resultPerPage,
@@ -26,7 +29,8 @@ const PaginatedList = ({
   count,
   renderActions,
   onRowClick,
-}) => {
+  getHref,
+}) {
   const totalPage = count / resultPerPage;
   return (
     <Box sx={PaginatedListStyle}>
@@ -37,6 +41,7 @@ const PaginatedList = ({
             RowItem={RowItem}
             renderActions={renderActions}
             onRowClick={onRowClick}
+            getHref={getHref}
           />
           {count > resultPerPage && (
             <ReactPaginate
@@ -62,6 +67,6 @@ const PaginatedList = ({
       )}
     </Box>
   );
-};
+}
 
 export { PaginatedList };

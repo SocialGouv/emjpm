@@ -12,7 +12,7 @@ function AdminUsersPage() {
   return (
     <AdminFilterProvider>
       <LayoutAdmin>
-        <BoxWrapper mt={6} px="1">
+        <BoxWrapper mt={3} px="1">
           <HeadingTitle>Liste des utilisateurs</HeadingTitle>
           <AdminFilterBar>
             <Box>

@@ -68,6 +68,12 @@ const labelStyle = {
   mb: "7px",
 };
 
+const anchorStyle = {
+  display: "block",
+  margin: "-12xp",
+  padding: "12xp",
+};
+
 function descriptionStyle(isPositive) {
   return {
     color: isPositive ? "black" : "error",
@@ -123,4 +129,5 @@ export {
   decorationStyle,
   cardStyle,
   natureStyle,
+  anchorStyle,
 };

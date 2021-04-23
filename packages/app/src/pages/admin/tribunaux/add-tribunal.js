@@ -8,7 +8,7 @@ import { BoxWrapper } from "~/components/Grid";
 function AddTribunauxPage() {
   return (
     <LayoutAdmin hasNavigation={false}>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <HeadingTitle>{"Création d'un tribunal"}</HeadingTitle>
         <Flex
           sx={{

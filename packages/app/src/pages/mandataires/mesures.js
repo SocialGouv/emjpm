@@ -21,7 +21,7 @@ function MesuresListView() {
       }}
     >
       <LayoutMandataire>
-        <BoxWrapper mt={6} px="1">
+        <BoxWrapper mt={3} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
             <HeadingTitle>Toutes vos mesures</HeadingTitle>
             <MesureListButtonBar />

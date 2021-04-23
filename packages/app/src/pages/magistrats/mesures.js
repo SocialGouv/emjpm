@@ -14,7 +14,7 @@ export default function Mesures() {
       initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
     >
       <LayoutMagistrat>
-        <BoxWrapper mt={6} px="1">
+        <BoxWrapper mt={3} px="1">
           <HeadingTitle>Toutes vos mesures</HeadingTitle>
           <MagistratFilters />
           <Flex

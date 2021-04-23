@@ -28,8 +28,9 @@ function ServiceMapPanelMesures({ mesuresIds }) {
     variables: queryVariables,
   });
 
-  function selectMesure({ id }) {
-    history.push(`/services/mesures/${id}`);
+  const getHref = ({ mesure: { id } }) => `/services/mesures/${id}`;
+  function selectMesure(props) {
+    history.push(getHref(props));
   }
 
   const mesures = useMemo(
@@ -63,7 +64,8 @@ function ServiceMapPanelMesures({ mesuresIds }) {
                     hasLocation={false}
                     hasTribunal={false}
                     hasFolderNumber={false}
-                    onClick={({ mesure }) => selectMesure(mesure)}
+                    onClick={selectMesure}
+                    getHref={getHref}
                   />
                 );
               })}

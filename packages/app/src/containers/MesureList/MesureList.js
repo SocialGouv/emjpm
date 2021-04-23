@@ -75,8 +75,10 @@ function MesureList() {
     variables: queryVariables,
   });
 
-  function selectMesure({ id, userBasePath }) {
-    history.push(`${userBasePath}/mesures/${id}`);
+  const getHref = ({ mesure: { id } }) => `${userBasePath}/mesures/${id}`;
+
+  function selectMesure(props) {
+    history.push(getHref(props));
   }
 
   if (!useQueryReady(loading, error)) {
@@ -106,9 +108,8 @@ function MesureList() {
                 <MesureListItem
                   key={mesure.id}
                   mesure={mesure}
-                  onClick={({ mesure }) =>
-                    selectMesure({ id: mesure.id, userBasePath })
-                  }
+                  getHref={getHref}
+                  onClick={selectMesure}
                 />
               );
             })}

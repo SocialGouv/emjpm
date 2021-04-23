@@ -89,7 +89,6 @@ function MandatairesList(props) {
         return (
           <MandataireListItem
             key={gestionnaire.id}
-            onClick={() => {}}
             gestionnaire={gestionnaire}
           />
         );

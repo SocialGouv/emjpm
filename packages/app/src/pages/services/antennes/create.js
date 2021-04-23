@@ -6,7 +6,7 @@ import { BoxWrapper } from "~/components/Grid";
 function AddAntennes() {
   return (
     <LayoutServices>
-      <BoxWrapper mt={6}>
+      <BoxWrapper mt={3}>
         <HeadingTitle mx="1">Créer une antenne pour votre service</HeadingTitle>
         <ServiceCreateAntenne />
       </BoxWrapper>

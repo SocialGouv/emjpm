@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
@@ -6,14 +6,14 @@ import { FiltersContextSerializable } from "~/containers/FiltersContextSerializa
 import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
 import { ListeBlancheServices } from "./ListeBlancheServices";
 
-async function onSelectItem(history, { type, origin, id }) {
+const getHref = (item) => {
+  const { type, origin, id } = item;
   if (type === "mandataire") {
-    await history.push(`/${origin}/liste-blanche/${id}`);
+    return `/${origin}/liste-blanche/${id}`;
   } else if (type === "service") {
-    await history.push(`/${origin}/liste-blanche/services/${id}`);
+    return `/${origin}/liste-blanche/services/${id}`;
   }
-  window.scrollTo(0, 0);
-}
+};
 
 export function ListeBlanche(props) {
   const { origin } = props;
@@ -22,19 +22,38 @@ export function ListeBlanche(props) {
 
   const { type = "mandataire" } = filters;
 
+  const getHrefCall = useCallback(
+    (item) => getHref({ id: item.id, origin, type }),
+    [origin, type]
+  );
+
+  const onRowClick = async (item, e) => {
+    if (e.ctrlKey) {
+      return;
+    }
+    e.preventDefault();
+    const selection = window.getSelection().toString();
+    if (selection.length > 0) {
+      return;
+    }
+    const to = getHrefCall(item);
+    if (to) {
+      await history.push(to);
+    }
+    window.scrollTo(0, 0);
+  };
+
   return type === "mandataire" ? (
     <ListeBlancheMandataires
       {...props}
-      onSelectItem={(item) =>
-        onSelectItem(history, { id: item.id, origin, type })
-      }
+      getHref={getHrefCall}
+      onRowClick={onRowClick}
     />
   ) : (
     <ListeBlancheServices
       {...props}
-      onSelectItem={(item) =>
-        onSelectItem(history, { id: item.id, origin, type })
-      }
+      getHref={getHrefCall}
+      onRowClick={onRowClick}
     />
   );
 }

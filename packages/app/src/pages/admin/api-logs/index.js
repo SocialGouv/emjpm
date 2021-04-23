@@ -4,7 +4,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 const ApiLogsIndex = () => (
   <LayoutAdmin>
-    <BoxWrapper mt={4} px={1}>
+    <BoxWrapper mt={3} px={1}>
       <AdminApiLogs />
     </BoxWrapper>
   </LayoutAdmin>

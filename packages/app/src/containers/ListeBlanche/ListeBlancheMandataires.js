@@ -49,7 +49,7 @@ function getRequestFilters(filters) {
 }
 
 export function ListeBlancheMandataires(props) {
-  const { onSelectItem } = props;
+  const { getHref, onRowClick } = props;
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
 
   const resultPerPage = 10;
@@ -94,11 +94,12 @@ export function ListeBlancheMandataires(props) {
     <PaginatedList
       entries={users}
       RowItem={ListeBlancheItem}
+      getHref={getHref}
       count={count}
       resultPerPage={resultPerPage}
       currentOffset={currentOffset}
       setCurrentOffset={setCurrentOffset}
-      onRowClick={onSelectItem}
+      onRowClick={onRowClick}
     />
   );
 }

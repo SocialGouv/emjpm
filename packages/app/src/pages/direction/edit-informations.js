@@ -8,7 +8,7 @@ function EditInformations() {
   const { id: userId } = useUser();
   return (
     <LayoutDirection>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <DirectionEditInformations
           successLink={redirectLink}
           cancelLink={redirectLink}

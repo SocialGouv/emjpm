@@ -14,7 +14,7 @@ function CongratulationPage() {
   }
   return (
     <LayoutPublic>
-      <BoxWrapper mt={6} px="1" p={"150px"}>
+      <BoxWrapper mt={3} px="1" p={"150px"}>
         <Card sx={cardStyle}>
           <Heading size={2}>
             {"Votre demande d'inscription est terminée"}

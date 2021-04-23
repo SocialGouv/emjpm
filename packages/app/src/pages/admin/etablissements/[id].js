@@ -12,7 +12,7 @@ export function EditEtablissementPage() {
 
   return (
     <LayoutAdmin>
-      <BoxWrapper mt={4} px={1}>
+      <BoxWrapper mt={3} px={1}>
         <Box mb="4">
           <Link to="/admin/etablissements">&larr; Retour</Link>
         </Box>

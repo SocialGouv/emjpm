@@ -9,7 +9,7 @@ import { BoxWrapper } from "~/components/Grid";
 function Informations() {
   return (
     <LayoutMagistrat>
-      <BoxWrapper mt={6} px="0">
+      <BoxWrapper mt={3} px="0">
         <Flex
           sx={{
             flexWrap: "wrap",

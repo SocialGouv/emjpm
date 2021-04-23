@@ -12,7 +12,7 @@ function DirectionEnquetesPage() {
   const user = useUser();
   return (
     <LayoutDirection>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <Flex mb={3} flexDirection="row" justifyContent="space-between">
           <Heading size={2}>Enquêtes</Heading>
           {isDirectionNationale(user) && (

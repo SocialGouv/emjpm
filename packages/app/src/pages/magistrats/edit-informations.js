@@ -9,7 +9,7 @@ function EditInformations() {
   const redirectLink = `${PATH[type]}/informations`;
   return (
     <LayoutMagistrat>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <MagistratEditInformations
           userId={userId}
           cancelLink={redirectLink}

@@ -8,7 +8,7 @@ import { BoxWrapper } from "~/components/Grid";
 function MandataireBoardView() {
   return (
     <LayoutMandataire>
-      <BoxWrapper mt={6} px="1">
+      <BoxWrapper mt={3} px="1">
         <Flex>
           <Box width={1 / 3}>
             <MandataireBoard />

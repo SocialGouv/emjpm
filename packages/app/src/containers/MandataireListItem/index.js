@@ -48,8 +48,8 @@ export default function MandataireListItem(props) {
       <Card sx={cardStyle} width="100%">
         <Box sx={decorationStyle(type)} />
         <Flex
-          onClick={() => {
-            onClick(props);
+          onClick={(e) => {
+            onClick && onClick(e, props);
           }}
           sx={MandatairelistStyle}
         >

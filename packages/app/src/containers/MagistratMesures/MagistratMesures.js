@@ -41,8 +41,10 @@ function MagistratMesures() {
     variables: queryVariables,
   });
 
-  function selectMesure({ id }) {
-    history.push(`/magistrats/mesures/${id}`);
+  const getHref = ({ mesure: { id } }) => `/magistrats/mesures/${id}`;
+
+  function selectMesure(props) {
+    history.push(getHref(props));
   }
 
   if (!useQueryReady(loading, error)) {
@@ -65,7 +67,8 @@ function MagistratMesures() {
                   mesure={mesure}
                   hasFolderNumber={false}
                   hasLocation={false}
-                  onClick={({ mesure }) => selectMesure(mesure)}
+                  onClick={selectMesure}
+                  getHref={getHref}
                 />
               );
             })}

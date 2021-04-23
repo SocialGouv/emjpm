@@ -89,7 +89,7 @@ function MesureListFilters(props) {
             </Box>
           </Flex>
         </Box>
-        <Box width="250px">
+        <Box width="320px">
           <Input
             value={searchText}
             spellCheck="false"
@@ -97,7 +97,8 @@ function MesureListFilters(props) {
             onChange={(event) => changeSearchText(event.target.value)}
             name="search"
             size="small"
-            placeholder="Rechercher une mesure"
+            label="Rechercher une mesure"
+            placeholder="Numéro RG, Dossier, Ville, Code Postal..."
           />
         </Box>
       </Flex>

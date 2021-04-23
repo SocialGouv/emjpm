@@ -10,7 +10,7 @@ function ServiceMembersPage() {
   const [{ is_admin, service }] = service_members;
   return (
     <LayoutServices>
-      <BoxWrapper mt={6} px={2}>
+      <BoxWrapper mt={3} px={2}>
         <ServiceMembers service={service} userId={id} isAdmin={is_admin} />
         {is_admin && (
           <ServiceMemberInvitations service={service} isAdmin={is_admin} />

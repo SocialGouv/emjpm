@@ -13,7 +13,7 @@ function Gestionnaire() {
 
   return (
     <LayoutMagistrat>
-      <BoxWrapper mt={6} px="0">
+      <BoxWrapper mt={3} px="0">
         <MagistratMandataire gestionnaireId={gestionnaireId} tiId={tiId} />
       </BoxWrapper>
     </LayoutMagistrat>

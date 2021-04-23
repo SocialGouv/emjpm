@@ -63,14 +63,27 @@ function MagistratMandatairesListList(props) {
   return (
     <>
       {gestionnaires.map((gestionnaire) => {
+        const to = `/magistrats/gestionnaires/${gestionnaire.id}`;
+        const onItemClick = (e) => {
+          if (e.ctrlKey) {
+            return;
+          }
+          e.preventDefault();
+          const selection = window.getSelection().toString();
+          if (selection.length > 0) {
+            return;
+          }
+          history.push(to);
+        };
         return (
-          <MandataireListItem
+          <a
             key={gestionnaire.id}
-            onClick={() =>
-              history.push(`/magistrats/gestionnaires/${gestionnaire.id}`)
-            }
-            gestionnaire={gestionnaire}
-          />
+            href={to}
+            onClick={onItemClick}
+            draggable="false"
+          >
+            <MandataireListItem gestionnaire={gestionnaire} />
+          </a>
         );
       })}
       {count > RESULT_PER_PAGE && (

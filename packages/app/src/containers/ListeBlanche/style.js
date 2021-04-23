@@ -7,6 +7,12 @@ const cardStyle = ({ clickable }) => ({
   width: "100%",
 });
 
+const anchorStyle = {
+  margin: "-12px",
+  display: "block",
+  padding: "12px",
+};
+
 const labelStyle = {
   color: "mediumGray",
   fontFamily: "body",
@@ -25,4 +31,4 @@ const descriptionStyle = {
   whiteSpace: "nowrap",
 };
 
-export { cardStyle, labelStyle, descriptionStyle };
+export { cardStyle, labelStyle, descriptionStyle, anchorStyle };
