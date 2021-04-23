@@ -1,11 +1,11 @@
 import { useContext, useMemo } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { Card, Input, Select, InputDate } from "~/components";
 import { findOption } from "~/utils/form";
 
-import { BoxStyle, SimpleBoxStyle, TextStyle } from "./style";
+import { BoxStyle, SimpleBoxStyle } from "./style";
 
 import {
   createDepartementOptions,
@@ -33,7 +33,6 @@ export function DirectionFilters(props) {
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>
-            <Text sx={TextStyle}>Affiner</Text>
             {useNameFilter && (
               <Box sx={BoxStyle}>
                 <Input
@@ -54,8 +53,9 @@ export function DirectionFilters(props) {
                 instanceId={"direction-region-filter"}
                 size="small"
                 options={regionOptions}
-                placeholder={"region"}
-                value={findOption(regionOptions, filters.region)}
+                label={"Région"}
+                placeholder={"Région"}
+                value={findOption(regionOptions, filters.region || null)}
                 onChange={(option) =>
                   onFilterChange({
                     departement: null,
@@ -69,8 +69,12 @@ export function DirectionFilters(props) {
                 instanceId={"direction-departement-filter"}
                 size="small"
                 options={departementOptions}
-                placeholder={"departement"}
-                value={findOption(departementOptions, filters.departement)}
+                label={"Départements"}
+                placeholder={"Départements"}
+                value={findOption(
+                  departementOptions,
+                  filters.departement || null
+                )}
                 onChange={(option) =>
                   onFilterChange({ departement: option.value })
                 }
@@ -85,7 +89,8 @@ export function DirectionFilters(props) {
                 value={filters.startDate || ""}
                 onChange={(value) => onFilterChange({ startDate: value })}
                 name="startDate"
-                placeholderText="du"
+                label="du"
+                placeholderText="date de début"
               />
             </Box>
             <Box sx={SimpleBoxStyle}>
@@ -93,7 +98,8 @@ export function DirectionFilters(props) {
                 value={filters.endDate || ""}
                 onChange={(value) => onFilterChange({ endDate: value })}
                 name="endDate"
-                placeholderText="au"
+                label="au"
+                placeholderText="date de fin"
               />
             </Box>
           </Flex>
