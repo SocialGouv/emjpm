@@ -1,4 +1,4 @@
-import { Fragment, useCallback } from "react";
+import { useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { Card, Text } from "~/components";

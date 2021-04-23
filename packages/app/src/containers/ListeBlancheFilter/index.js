@@ -1,11 +1,5 @@
 import { ChevronDown } from "@styled-icons/evil/ChevronDown";
-import React, {
-  Fragment,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";

@@ -1,5 +1,5 @@
 import { stdFormatter } from "@emjpm/biz";
-import { Fragment } from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";

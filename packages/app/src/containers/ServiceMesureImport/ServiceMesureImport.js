@@ -1,6 +1,6 @@
 import { FileExcel } from "@styled-icons/fa-regular/FileExcel";
 import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
-import { Fragment } from "react";
+
 import { Box, Flex } from "rebass";
 
 import { MesureImportPanel } from "~/containers/MesureImport";

@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 

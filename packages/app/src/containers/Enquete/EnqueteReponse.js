@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import { Fragment } from "react";
 
 import { EnqueteIndividuel } from "./EnqueteIndividuel";
 import { EnquetePrepose } from "./EnquetePrepose";

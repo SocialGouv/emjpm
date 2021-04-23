@@ -1,5 +1,5 @@
 import { Label } from "@rebass/forms";
-import { Fragment, useMemo } from "react";
+import { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {

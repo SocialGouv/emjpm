@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Box, Image } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";

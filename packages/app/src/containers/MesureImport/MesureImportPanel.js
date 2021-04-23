@@ -1,5 +1,5 @@
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
-import { Fragment } from "react";
+
 import { Box } from "rebass";
 
 import { MesureImportResult } from "./MesureImportResult";

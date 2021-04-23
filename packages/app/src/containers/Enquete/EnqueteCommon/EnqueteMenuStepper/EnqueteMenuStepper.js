@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import {

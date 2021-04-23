@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { useMutation } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 

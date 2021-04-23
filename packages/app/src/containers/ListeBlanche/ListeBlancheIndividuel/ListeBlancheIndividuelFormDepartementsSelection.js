@@ -1,6 +1,6 @@
 import { isAdmin, isDirectionNationale } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
-import { Fragment } from "react";
+
 import { Box, Flex, Text } from "rebass";
 
 import { getRegionDepartementList } from "~/utils/geodata";

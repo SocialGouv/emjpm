@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { Box, Text } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";

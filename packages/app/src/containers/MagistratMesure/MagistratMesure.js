@@ -1,5 +1,5 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import { Link } from "~/containers/Commons";

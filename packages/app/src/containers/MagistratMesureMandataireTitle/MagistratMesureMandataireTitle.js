@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import PropTypes from "prop-types";
-import { Fragment } from "react";
 
 import { Heading } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";

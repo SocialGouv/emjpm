@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Box } from "rebass";
 
 import { Footer } from "~/containers/Footer";

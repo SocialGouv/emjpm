@@ -1,6 +1,6 @@
 import { useApolloClient } from "@apollo/client";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
-import { Fragment, useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";

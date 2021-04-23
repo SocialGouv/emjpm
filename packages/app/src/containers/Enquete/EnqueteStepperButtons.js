@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import { Button, Flex } from "rebass";
 
 export function EnqueteStepperButtons(props) {

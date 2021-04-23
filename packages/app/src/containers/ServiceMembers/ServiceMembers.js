@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { stdFormatter } from "@emjpm/biz";
-import { Fragment } from "react";
+
 import { Box, Flex } from "rebass";
 
 import { CheckBox, Heading, Text } from "~/components";
