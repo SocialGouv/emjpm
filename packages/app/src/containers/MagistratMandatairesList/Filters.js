@@ -50,7 +50,7 @@ function MagistratMandatairesListFilters(props) {
               options={optionsType}
             />
           </Box>
-          <Box width="200px" mr={1}>
+          <Box width="235px" mr={1}>
             <Input
               value={searchText || ""}
               spellCheck="false"
@@ -58,7 +58,8 @@ function MagistratMandatairesListFilters(props) {
               onChange={onChangeSearch}
               name="search"
               size="small"
-              placeholder="Rechercher"
+              label="Rechercher"
+              placeholder="nom, email, code postal, ville..."
             />
           </Box>
         </Flex>

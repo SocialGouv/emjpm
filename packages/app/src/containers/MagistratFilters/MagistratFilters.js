@@ -1,12 +1,11 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useContext } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex } from "rebass";
 
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { Card, Input, Select } from "~/components";
 
 import { FiltersContext } from "./context";
-import { TextStyle } from "./style";
 
 function MagistratFilters() {
   const {
@@ -21,7 +20,6 @@ function MagistratFilters() {
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>
-            <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
             <Box width="200px" mr={1}>
               <Select
                 instanceId={"nature-mesure-filter"}
@@ -34,7 +32,7 @@ function MagistratFilters() {
                 onChange={(option) => changeNatureMesure(option)}
               />
             </Box>
-            <Box width="200px" mr={1}>
+            <Box width="320px" mr={1}>
               <Input
                 value={searchText}
                 spellCheck="false"
