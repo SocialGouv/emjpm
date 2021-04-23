@@ -1,31 +1,34 @@
-import { useContext, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 
-import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
+import { Box } from "rebass";
 
-import { ListeBlancheMandataires } from "./ListeBlancheMandataires";
-import { ListeBlancheServices } from "./ListeBlancheServices";
+import { Tabs as TabsComponent } from "~/components";
 
-const getHref = (item) => {
-  const { type, origin, id } = item;
-  if (type === "mandataire") {
-    return `/${origin}/liste-blanche/${id}`;
-  } else if (type === "service") {
-    return `/${origin}/liste-blanche/services/${id}`;
-  }
-};
+import TabPanelPaginatedList from "./TabPanelPaginatedList";
+
+const { Tabs, TabList, Tab, TabPanel } = TabsComponent;
+
+const TYPE_OPTIONS = [
+  { label: "Tous les types", value: null },
+  { label: "Mandataire Individuel", value: "individuel" },
+  { label: "Mandataire Préposé", value: "prepose" },
+  { label: "Service", value: "service" },
+];
 
 export function ListeBlanche(props) {
   const { origin } = props;
-  const { filters } = useContext(FiltersContextSerializable);
   const history = useHistory();
 
-  const { type = "mandataire" } = filters;
-
-  const getHrefCall = useCallback(
-    (item) => getHref({ id: item.id, origin, type }),
-    [origin, type]
-  );
+  const getHref = (item) => {
+    const { type, id } = item;
+    switch (type) {
+      case "individuel":
+      case "prepose":
+        return `/${origin}/liste-blanche/${id}`;
+      case "service":
+        return `/${origin}/liste-blanche/services/${id}`;
+    }
+  };
 
   const onRowClick = async (item, e) => {
     if (e.ctrlKey) {
@@ -36,25 +39,34 @@ export function ListeBlanche(props) {
     if (selection.length > 0) {
       return;
     }
-    const to = getHrefCall(item);
+    const to = getHref(item);
     if (to) {
       await history.push(to);
     }
     window.scrollTo(0, 0);
   };
 
-  return type === "mandataire" ? (
-    <ListeBlancheMandataires
-      {...props}
-      getHref={getHrefCall}
-      onRowClick={onRowClick}
-    />
-  ) : (
-    <ListeBlancheServices
-      {...props}
-      getHref={getHrefCall}
-      onRowClick={onRowClick}
-    />
+  return (
+    <Box>
+      <Tabs>
+        <TabList>
+          {TYPE_OPTIONS.map(({ label }, index) => (
+            <Tab key={index}>{label}</Tab>
+          ))}
+        </TabList>
+
+        {TYPE_OPTIONS.map(({ value }, index) => (
+          <TabPanel key={index}>
+            <TabPanelPaginatedList
+              {...props}
+              type={value}
+              getHref={getHref}
+              onRowClick={onRowClick}
+            />
+          </TabPanel>
+        ))}
+      </Tabs>
+    </Box>
   );
 }
 

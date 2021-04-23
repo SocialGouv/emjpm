@@ -21,4 +21,7 @@
     name: search_users
 - function:
     schema: public
+    name: search_view_lb
+- function:
+    schema: public
     name: search_view_mesure_gestionnaire_tis

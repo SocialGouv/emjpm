@@ -7220,6 +7220,44 @@
       filter: {}
 - table:
     schema: public
+    name: view_lb
+  object_relationships:
+  - name: mandataire
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: mandataires
+        column_mapping:
+          mandataire_id: id
+  - name: service
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: services
+        column_mapping:
+          service_id: id
+  select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - uid
+      - id
+      - service_id
+      - mandataire_id
+      - user_type
+      - nom
+      - departement_code
+      - siret
+      - code_postal
+      - ville
+      - adress
+      - email
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: view_mesure_gestionnaire
   object_relationships:
   - name: departement

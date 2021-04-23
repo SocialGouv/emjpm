@@ -1,87 +1,5 @@
 import gql from "graphql-tag";
 
-export const LB_USER = gql`
-  query listeBlancheUser($id: Int!) {
-    lb_users_by_pk(id: $id) {
-      id
-      nom
-      prenom
-      email
-      siret
-      adresse1
-      adresse2
-      code_postal
-      ville
-      type
-      mandataire {
-        id
-        user {
-          id
-          nom
-          prenom
-        }
-      }
-      lb_user_etablissements {
-        id
-        etablissement {
-          id
-          rslongue
-          ligneacheminement
-        }
-        lb_user_id
-        etablissement_rattachement
-      }
-      lb_departements {
-        id
-        departement_code
-        departement_financeur
-        departement {
-          id
-          nom
-        }
-      }
-    }
-  }
-`;
-
-export const LB_SERVICES = gql`
-  query liste_blanche_services(
-    $limit: Int
-    $offset: Int
-    $filters: services_bool_exp = {}
-    $search: String
-  ) {
-    services_aggregate: search_services_aggregate(
-      where: $filters
-      args: { search: $search }
-    ) {
-      aggregate {
-        count
-      }
-    }
-    services: search_services(
-      limit: $limit
-      offset: $offset
-      where: $filters
-      order_by: { etablissement: asc_nulls_last }
-      args: { search: $search }
-    ) {
-      id
-      adresse
-      siret
-      etablissement
-      code_postal
-      created_at
-      departement {
-        id
-        nom
-      }
-      nom
-      telephone
-    }
-  }
-`;
-
 export const LB_USERS = gql`
   query liste_blanche_users(
     $limit: Int
@@ -135,6 +53,123 @@ export const LB_USERS = gql`
         departement {
           id
           nom
+        }
+      }
+    }
+  }
+`;
+
+export const LB_USER = gql`
+  query listeBlancheUser($id: Int!) {
+    lb_users_by_pk(id: $id) {
+      id
+      nom
+      prenom
+      email
+      siret
+      adresse1
+      adresse2
+      code_postal
+      ville
+      type
+      mandataire {
+        id
+        user {
+          id
+          nom
+          prenom
+        }
+      }
+      lb_user_etablissements {
+        id
+        etablissement {
+          id
+          rslongue
+          ligneacheminement
+        }
+        lb_user_id
+        etablissement_rattachement
+      }
+      lb_departements {
+        id
+        departement_code
+        departement_financeur
+        departement {
+          id
+          nom
+        }
+      }
+    }
+  }
+`;
+
+export const SEARCH_VIEW_LB = gql`
+  query search_view_lb(
+    $limit: Int
+    $offset: Int
+    $filters: view_lb_bool_exp = {}
+    $search: String
+  ) {
+    search_view_lb_aggregate(where: $filters, args: { search: $search }) {
+      aggregate {
+        count
+      }
+    }
+    search_view_lb(
+      limit: $limit
+      offset: $offset
+      args: { search: $search }
+      where: $filters
+      order_by: { nom: asc_nulls_last }
+    ) {
+      id
+      nom
+      email
+      siret
+      type: user_type
+      service {
+        id
+        adresse
+        siret
+        etablissement
+        code_postal
+        created_at
+        departement {
+          id
+          nom
+        }
+        nom
+        telephone
+      }
+      mandataire {
+        id
+        user {
+          id
+          nom
+          prenom
+        }
+        lb_user {
+          nom
+          prenom
+          lb_user_etablissements {
+            etablissement {
+              id
+              rslongue
+              departement {
+                id
+                nom
+              }
+            }
+            etablissement_rattachement
+          }
+          lb_departements {
+            id
+            departement_financeur
+            departement {
+              id
+              nom
+            }
+          }
         }
       }
     }

@@ -7,6 +7,10 @@ import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "../style";
 export function ListeBlancheIndividuelItem(props) {
   const { item, getHref, onClick } = props;
   const to = getHref && getHref(item, props);
+
+  const { mandataire } = item;
+  const { lb_user } = mandataire;
+
   return (
     <Card key={item.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
@@ -15,10 +19,10 @@ export function ListeBlancheIndividuelItem(props) {
             <Text sx={labelStyle}>{"Mandataire individuel"}</Text>
             <Flex>
               <Text sx={descriptionStyle}>
-                {item.nom ? item.nom.toUpperCase() : ""}
+                {lb_user.nom ? lb_user.nom.toUpperCase() : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle}>
-                {item.prenom}
+                {lb_user.prenom}
               </Text>
             </Flex>
           </Flex>
@@ -32,13 +36,15 @@ export function ListeBlancheIndividuelItem(props) {
           </Flex>
           <Flex width="10%" flexDirection="column">
             <Text sx={labelStyle}>Utilisateur</Text>
-            <Text sx={descriptionStyle}>{item.mandataire ? "oui" : "non"}</Text>
+            <Text sx={descriptionStyle}>
+              {lb_user.mandataire ? "oui" : "non"}
+            </Text>
           </Flex>
 
           <Flex width="30%" flexDirection="column">
             <Text sx={labelStyle}>{"Départements"}</Text>
             <Text sx={descriptionStyle}>
-              {item.lb_departements
+              {lb_user.lb_departements
                 .map((lbDep) =>
                   `${
                     lbDep.departement ? lbDep.departement.nom : "Inconnu"

@@ -19,11 +19,6 @@ import { findOption } from "~/utils/form";
 
 import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
 
-const TYPE_OPTIONS = [
-  { label: "Mandataire (individuel, préposé)", value: "mandataire" },
-  { label: "Association tutélaire", value: "service" },
-];
-
 function ListeBlancheFilter() {
   const ref = useRef();
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
@@ -37,12 +32,16 @@ function ListeBlancheFilter() {
 
   const buttonLinks = [
     {
-      title: "Mandataire individuel",
+      title: "Mandataire Individuel",
       to: `/${user.type}/liste-blanche/ajout-individuel`,
     },
     {
-      title: "Mandataire préposé",
+      title: "Mandataire Préposé",
       to: `/${user.type}/liste-blanche/ajout-prepose`,
+    },
+    {
+      title: "Service",
+      to: `/${user.type}/liste-blanche/ajout-service`,
     },
   ];
 
@@ -77,48 +76,30 @@ function ListeBlancheFilter() {
           ref={ref}
           sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}
         >
-          {type === "service" ? (
-            <Box>
-              <Link to={`/${user.type}/liste-blanche/ajout-service`}>
-                <Button ml={4}>{"Ajouter un service"}</Button>
-              </Link>
-            </Box>
-          ) : (
-            <>
-              <Button onClick={() => setButtonsEnabled(true)}>
-                Ajouter un mandataire
-                <ChevronDown size={20} />
-              </Button>
+          <>
+            <Button onClick={() => setButtonsEnabled(true)}>
+              Ajouter
+              <ChevronDown size={20} />
+            </Button>
 
-              {buttonsEnabled && (
-                <Box sx={dropdownStyle}>
-                  <Card p="0" variant="sideCard">
-                    {buttonLinks.map((link) => {
-                      return (
-                        <Box sx={menuItemStyle} key={link.title}>
-                          <Link to={link.to}>{link.title}</Link>
-                        </Box>
-                      );
-                    })}
-                  </Card>
-                </Box>
-              )}
-            </>
-          )}
+            {buttonsEnabled && (
+              <Box sx={dropdownStyle}>
+                <Card p="0" variant="sideCard">
+                  {buttonLinks.map((link) => {
+                    return (
+                      <Box sx={menuItemStyle} key={link.title}>
+                        <Link to={link.to}>{link.title}</Link>
+                      </Box>
+                    );
+                  })}
+                </Card>
+              </Box>
+            )}
+          </>
         </Box>
 
         <Flex flexDirection="column">
           <Flex>
-            <Box sx={BoxStyle}>
-              <Select
-                size="small"
-                instanceId={"filters-type"}
-                options={TYPE_OPTIONS}
-                placeholder={"Type d'utilisateur"}
-                value={TYPE_OPTIONS.find(({ value }) => value === type)}
-                onChange={(option) => onFilterChange({ type: option.value })}
-              />
-            </Box>
             <Box sx={BoxStyle}>
               <Select
                 instanceId={"filters-departement"}
@@ -135,8 +116,6 @@ function ListeBlancheFilter() {
                 }
               />
             </Box>
-          </Flex>
-          <Flex mt={2}>
             <Box sx={BoxStyle}>
               <Input
                 name="search"

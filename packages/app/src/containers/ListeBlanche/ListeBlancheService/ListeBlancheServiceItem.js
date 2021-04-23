@@ -9,6 +9,8 @@ export function ListeBlancheServiceItem(props) {
 
   const to = getHref && getHref(item, props);
 
+  const { service } = item;
+
   return (
     <Card key={item.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
@@ -17,22 +19,24 @@ export function ListeBlancheServiceItem(props) {
             <Text sx={labelStyle}>{"Nom du service"}</Text>
             <Flex>
               <Text sx={descriptionStyle}>
-                {item.etablissement ? item.etablissement.toUpperCase() : ""}
+                {service.etablissement
+                  ? service.etablissement.toUpperCase()
+                  : ""}
               </Text>
             </Flex>
           </Flex>
 
           <Flex width="30%" flexDirection="column">
             <Text sx={labelStyle}>Département</Text>
-            {item.departement && (
-              <Text sx={descriptionStyle}>{item.departement.nom}</Text>
+            {service.departement && (
+              <Text sx={descriptionStyle}>{service.departement.nom}</Text>
             )}
           </Flex>
 
-          {item.siret && (
+          {service.siret && (
             <Flex width="15%" flexDirection="column">
               <Text sx={labelStyle}>SIRET</Text>
-              <Text sx={descriptionStyle}>{item.siret}</Text>
+              <Text sx={descriptionStyle}>{service.siret}</Text>
             </Flex>
           )}
         </Flex>

@@ -1,10 +1,12 @@
 const cardStyle = ({ clickable }) => ({
   cursor: clickable ? "pointer" : "default",
-  mb: "1",
   overflow: "hidden",
   pl: "16px",
   position: "relative",
   width: "100%",
+  borderLeft: "2px solid #0067EA",
+  borderRadius: "0",
+  marginBottom: "1px !important",
 });
 
 const anchorStyle = {
