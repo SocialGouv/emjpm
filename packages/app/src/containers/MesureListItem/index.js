@@ -62,7 +62,7 @@ export default function MesureListItem(props) {
         <Flex sx={mesureListItemStyle}>
           <Box minWidth="220px" mr="1">
             <Text sx={titleStyle}>
-              {numeroRg || ""}
+              {numeroRg || ""} &nbsp;
               <Text sx={statusStyle(status)}>{currentStatus || ""}</Text>
             </Text>
             <Text sx={natureStyle}>{`${natureMesure} ${
