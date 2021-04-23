@@ -46,25 +46,25 @@ export const GET_MANDATAIRES = gql`
     $limit: Int
     $searchText: String
   ) {
-    count: view_mesure_gestionnaire_tis_aggregate(
+    count: search_view_mesure_gestionnaire_tis_aggregate(
+      args: { search: $searchText }
       where: {
         ti_id: { _eq: $tribunal }
         discriminator: { _eq: $discriminator }
-        gestionnaire: { nom: { _ilike: $searchText } }
       }
     ) {
       aggregate {
         count
       }
     }
-    mandatairesList: view_mesure_gestionnaire_tis(
+    mandatairesList: search_view_mesure_gestionnaire_tis(
       limit: $limit
       offset: $offset
       order_by: $orderBy
+      args: { search: $searchText }
       where: {
         discriminator: { _eq: $discriminator }
         ti_id: { _eq: $tribunal }
-        gestionnaire: { nom: { _ilike: $searchText } }
       }
     ) {
       gestionnaire {

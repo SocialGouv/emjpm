@@ -6,7 +6,7 @@ AS $function$
     SELECT *
     FROM services
     WHERE
-      search IS NULL OR search <% CONCAT_WS(' ', siret, code_postal, ville, adresse, nom, prenom, email, id)
+      search IS NULL OR search <% CONCAT_WS(' ', etablissement, siret, code_postal, ville, adresse, nom, prenom, email, id)
     ORDER BY
-      similarity(search, CONCAT_WS(' ', siret, code_postal, ville, adresse, nom, prenom, email, id)) DESC
+      similarity(search, CONCAT_WS(' ', etablissement, siret, code_postal, ville, adresse, nom, prenom, email, id)) DESC
 $function$;
