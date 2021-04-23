@@ -13,7 +13,7 @@ export function Provider(props) {
 
   const [filters, setFilters] = useState({});
 
-  const debounceFilters = useDebounce(filters, 2000);
+  const debounceFilters = useDebounce(filters, 300);
 
   useEffect(() => {
     let newFilters = {};

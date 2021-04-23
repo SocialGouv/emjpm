@@ -8,14 +8,11 @@ export const MESURES_QUERY = gql`
     $searchText: String
     $offset: Int
     $antenne: Int
-    $orderBy: mesures_order_by! = { date_nomination: desc_nulls_first }
+    $orderBy: [mesures_order_by!]
   ) {
-    mesures_aggregate(
+    mesures_aggregate: search_mesures_aggregate(
+      args: { search: $searchText }
       where: {
-        _or: [
-          { numero_dossier: { _ilike: $searchText } }
-          { numero_rg: { _ilike: $searchText } }
-        ]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
@@ -64,15 +61,12 @@ export const MESURES_QUERY = gql`
       }
     }
 
-    mesures(
+    mesures: search_mesures(
       offset: $offset
       limit: $limit
-      order_by: [$orderBy]
+      order_by: $orderBy
+      args: { search: $searchText }
       where: {
-        _or: [
-          { numero_dossier: { _ilike: $searchText } }
-          { numero_rg: { _ilike: $searchText } }
-        ]
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }

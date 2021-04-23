@@ -1,7 +1,13 @@
 import gql from "graphql-tag";
 
 export const USERS = gql`
-  query searchUsers($limit: Int, $search: String, $offset: Int, $type: String) {
+  query searchUsers(
+    $limit: Int
+    $search: String
+    $offset: Int
+    $type: String
+    $orderBy: [users_order_by!]
+  ) {
     search_users_aggregate(
       args: { search: $search }
       where: { type: { _eq: $type } }
@@ -12,7 +18,7 @@ export const USERS = gql`
     }
     search_users(
       limit: $limit
-      order_by: { active: asc, id: desc }
+      order_by: $orderBy
       offset: $offset
       args: { search: $search }
       where: { type: { _eq: $type } }

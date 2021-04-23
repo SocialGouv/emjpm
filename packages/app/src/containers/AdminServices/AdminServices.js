@@ -29,7 +29,7 @@ function AdminServices() {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
+      search: searchText || null,
     },
   });
 

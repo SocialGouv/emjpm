@@ -96,7 +96,7 @@ function RowItem({ item }) {
 
 function AdminApiLogs() {
   const [searchQuery, setSearchQuery] = useState(null);
-  const debouncedSearchQuery = useDebounce(searchQuery, 1000);
+  const debouncedSearchQuery = useDebounce(searchQuery, 300);
 
   const [currentOffset, setCurrentOffset] = useState(0);
   const resultPerPage = 5;

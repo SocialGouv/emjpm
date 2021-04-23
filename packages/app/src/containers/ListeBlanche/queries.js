@@ -49,17 +49,22 @@ export const LB_SERVICES = gql`
     $limit: Int
     $offset: Int
     $filters: services_bool_exp = {}
+    $search: String
   ) {
-    services_aggregate(where: $filters) {
+    services_aggregate: search_services_aggregate(
+      where: $filters
+      args: { search: $search }
+    ) {
       aggregate {
         count
       }
     }
-    services(
+    services: search_services(
       limit: $limit
       offset: $offset
       where: $filters
       order_by: { etablissement: asc_nulls_last }
+      args: { search: $search }
     ) {
       id
       adresse
@@ -82,15 +87,20 @@ export const LB_USERS = gql`
     $limit: Int
     $offset: Int
     $filters: lb_users_bool_exp = {}
+    $search: String
   ) {
-    lb_users_aggregate(where: $filters) {
+    lb_users_aggregate: search_lb_users_aggregate(
+      where: $filters
+      args: { search: $search }
+    ) {
       aggregate {
         count
       }
     }
-    lb_users(
+    lb_users: search_lb_users(
       limit: $limit
       offset: $offset
+      args: { search: $search }
       where: $filters
       order_by: { nom: asc_nulls_last }
     ) {

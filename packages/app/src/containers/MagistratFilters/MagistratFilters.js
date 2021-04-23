@@ -42,7 +42,8 @@ function MagistratFilters() {
                 onChange={(event) => changeSearchText(event.target.value)}
                 name="search"
                 size="small"
-                placeholder="Numéro RG"
+                placeholder="Numéro RG, Dossier, Ville, Code Postal..."
+                label="Rechercher"
               />
             </Box>
           </Flex>

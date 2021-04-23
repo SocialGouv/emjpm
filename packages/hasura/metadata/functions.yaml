@@ -3,4 +3,19 @@
     name: search_etablissements
 - function:
     schema: public
+    name: search_lb_users
+- function:
+    schema: public
+    name: search_mandataires
+- function:
+    schema: public
+    name: search_mesures
+- function:
+    schema: public
+    name: search_services
+- function:
+    schema: public
+    name: search_tis
+- function:
+    schema: public
     name: search_users

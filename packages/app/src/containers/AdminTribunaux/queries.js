@@ -7,24 +7,20 @@ export const TRIBUNAUX = gql`
     $searchText: String
     $offset: Int
   ) {
-    tis_aggregate(
-      where: {
-        ville: { _ilike: $searchText }
-        departement: { id: { _eq: $departementCode } }
-      }
+    tis_aggregate: search_tis_aggregate(
+      args: { search: $searchText }
+      where: { departement: { id: { _eq: $departementCode } } }
     ) {
       aggregate {
         count
       }
     }
-    tis(
+    tis: search_tis(
       limit: $limit
       order_by: { code_postal: asc }
       offset: $offset
-      where: {
-        ville: { _ilike: $searchText }
-        departement: { id: { _eq: $departementCode } }
-      }
+      args: { search: $searchText }
+      where: { departement: { id: { _eq: $departementCode } } }
     ) {
       id
       etablissement

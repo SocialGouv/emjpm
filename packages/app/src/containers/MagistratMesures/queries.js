@@ -7,9 +7,9 @@ export const MAGISTRAT_MESURES_QUERY = gql`
     $searchText: String
     $offset: Int
   ) {
-    mesures_aggregate(
+    mesures_aggregate: search_mesures_aggregate(
+      args: { search: $searchText }
       where: {
-        numero_rg: { _ilike: $searchText }
         status: { _eq: en_attente }
         nature_mesure: { _eq: $natureMesure }
         ti_id: { _eq: $tiId }
@@ -19,9 +19,9 @@ export const MAGISTRAT_MESURES_QUERY = gql`
         count
       }
     }
-    mesures(
+    mesures: search_mesures(
+      args: { search: $searchText }
       where: {
-        numero_rg: { _ilike: $searchText }
         status: { _eq: en_attente }
         nature_mesure: { _eq: $natureMesure }
         ti_id: { _eq: $tiId }

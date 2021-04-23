@@ -27,7 +27,7 @@ export function Provider(props) {
   );
 
   const { filters } = state;
-  const debouncedFilters = useDebounce(filters, 500);
+  const debouncedFilters = useDebounce(filters, 300);
 
   const filtersContext = {
     filters,

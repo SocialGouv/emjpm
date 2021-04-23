@@ -31,7 +31,7 @@ function AdminTribunaux() {
       departementCode,
       limit: resultPerPage,
       offset: currentOffset,
-      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
+      searchText: searchText || null,
     },
   });
 

@@ -13,7 +13,7 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { Card, Input, Select, Text } from "~/components";
 
 import { GET_MANDATAIRES } from "./queries";
-import { MagistratMandatairesListStyle, TextStyle } from "./style";
+import { MagistratMandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
@@ -66,7 +66,7 @@ function MagistratMandatairesList(props) {
   const [searchText, changeSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
   const [orderBy, setOrderBy] = useState(orderByOptions[0].value);
-  const debouncedSearchText = useDebounce(searchText, 2000);
+  const debouncedSearchText = useDebounce(searchText, 300);
 
   const { data, error, loading } = useQuery(GET_MANDATAIRES, {
     variables: {
@@ -93,7 +93,6 @@ function MagistratMandatairesList(props) {
           <Card mb="2" mt="1">
             <Flex justifyContent="space-between" alignItems="center">
               <Flex flexWrap="wrap">
-                <Text sx={TextStyle}>AFFINER LES RÉSULTATS</Text>
                 <Box width="200px" mr="2">
                   <Select
                     instanceId={"type-mandataire-filter"}
@@ -118,7 +117,7 @@ function MagistratMandatairesList(props) {
                     }}
                     name="search"
                     size="small"
-                    placeholder="mandataire / service"
+                    placeholder="Rechercher"
                   />
                 </Box>
               </Flex>

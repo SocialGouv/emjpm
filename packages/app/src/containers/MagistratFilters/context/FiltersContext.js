@@ -16,7 +16,7 @@ export function Provider(props) {
     initialValues.searchText || ""
   );
 
-  const debouncedSearchText = useDebounce(searchText, 1000);
+  const debouncedSearchText = useDebounce(searchText, 300);
 
   // Make the context object:
   const filtersContext = {

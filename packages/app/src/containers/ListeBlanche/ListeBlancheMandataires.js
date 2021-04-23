@@ -45,18 +45,6 @@ function getRequestFilters(filters) {
     requestFilters.siret = { _ilike: `%${filters.siret}%` };
   }
 
-  if (filters.prenom) {
-    requestFilters.prenom = { _ilike: `%${filters.prenom}%` };
-  }
-
-  if (filters.nom) {
-    requestFilters.nom = { _ilike: `%${filters.nom}%` };
-  }
-
-  if (filters.email) {
-    requestFilters.email = { _ilike: `%${filters.email}%` };
-  }
-
   return requestFilters;
 }
 
@@ -71,9 +59,12 @@ export function ListeBlancheMandataires(props) {
     setCurrentOffset(0);
   }, [filters]);
 
+  const { search } = debounceFilters;
+
   const { data, error, loading } = useQuery(LB_USERS, {
     fetchPolicy: "cache-and-network",
     variables: {
+      search: search && search !== "" ? `%${search}%` : null,
       filters: getRequestFilters(debounceFilters),
       limit: resultPerPage,
       offset: currentOffset,

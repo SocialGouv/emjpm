@@ -38,22 +38,24 @@ function MesureList() {
     ? mesureStatus.value
     : MESURE_PROTECTION_STATUS.en_cours;
 
-  let orderBy;
+  const orderBy = [];
   switch (sortBy.value) {
     case "annee_naissance_asc":
-      orderBy = { annee_naissance: "asc" };
+      orderBy.push({ annee_naissance: "asc" });
       break;
     case "annee_naissance_desc":
-      orderBy = { annee_naissance: "desc" };
+      orderBy.push({ annee_naissance: "desc" });
       break;
     case "date_nomination_asc":
-      orderBy = { date_nomination: "asc" };
+      orderBy.push({ date_nomination: "asc" });
       break;
     case "date_nomination_desc":
-      orderBy = { date_nomination: "desc" };
+      orderBy.push({ date_nomination: "desc" });
       break;
     default:
-      orderBy = { date_nomination: "desc_nulls_first" };
+      if (!debouncedSearchText) {
+        orderBy.push({ date_nomination: "desc_nulls_first" });
+      }
   }
 
   const queryVariables = {

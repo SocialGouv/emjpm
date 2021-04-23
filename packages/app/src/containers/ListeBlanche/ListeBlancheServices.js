@@ -34,8 +34,10 @@ export function ListeBlancheServices(props) {
   const { onSelectItem } = props;
   const [currentOffset, setCurrentOffset] = useState(0);
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
+  const { search } = debounceFilters;
   const { data, loading, error } = useQuery(LB_SERVICES, {
     variables: {
+      search: search && search !== "" ? `%${search}%` : null,
       filters: getRequestFilters(debounceFilters),
       limit: resultPerPage,
       offset: currentOffset,

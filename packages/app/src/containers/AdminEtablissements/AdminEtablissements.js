@@ -71,7 +71,7 @@ export function AdminEtablissements() {
     offset: currentOffset,
     ...(searching
       ? {
-          search: `%${searchText}%`,
+          search: searchText || null,
         }
       : {}),
   };

@@ -31,14 +31,7 @@ function ListeBlancheFilter() {
   const { loading, error, filters, onFilterChange } = useContext(
     FiltersContextSerializable
   );
-  const {
-    departementFinanceur,
-    type = "mandataire",
-    nom,
-    nom_service,
-    siret,
-    email,
-  } = filters;
+  const { departementFinanceur, type = "mandataire", search, siret } = filters;
 
   const { departements } = useDepartements({ all: true });
 
@@ -146,6 +139,18 @@ function ListeBlancheFilter() {
           <Flex mt={2}>
             <Box sx={BoxStyle}>
               <Input
+                value={search || ""}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={(event) =>
+                  onFilterChange({ search: event.target.value })
+                }
+                size="small"
+                placeholder="Rechercher"
+              />
+            </Box>
+            <Box sx={BoxStyle}>
+              <Input
                 value={siret || ""}
                 spellCheck="false"
                 autoComplete="false"
@@ -157,63 +162,20 @@ function ListeBlancheFilter() {
                 placeholder="Siret"
               />
             </Box>
-            {type === "service" && (
-              <Box sx={BoxStyle}>
-                <Input
-                  value={nom_service || ""}
-                  spellCheck="false"
-                  autoComplete="false"
-                  onChange={(event) =>
-                    onFilterChange({ nom_service: event.target.value })
+            {type === "mandataire" && (
+              <Box mr={1} pt={2} width="100px">
+                <CheckBox
+                  instanceId={"filters-departement-financeur"}
+                  label="Financé"
+                  name="departementFinanceur"
+                  isChecked={departementFinanceur || false}
+                  onChange={() =>
+                    onFilterChange({
+                      departementFinanceur: !departementFinanceur,
+                    })
                   }
-                  name="search_service"
-                  size="small"
-                  placeholder="Nom du service"
                 />
               </Box>
-            )}
-            {type === "mandataire" && (
-              <>
-                <Box sx={BoxStyle}>
-                  <Input
-                    value={nom || ""}
-                    spellCheck="false"
-                    autoComplete="false"
-                    onChange={(event) =>
-                      onFilterChange({ nom: event.target.value })
-                    }
-                    name="search_mandataire"
-                    size="small"
-                    placeholder="Nom"
-                  />
-                </Box>
-                <Box sx={BoxStyle}>
-                  <Input
-                    value={email || ""}
-                    spellCheck="false"
-                    autoComplete="false"
-                    onChange={(event) =>
-                      onFilterChange({ email: event.target.value })
-                    }
-                    name="email"
-                    size="small"
-                    placeholder="email"
-                  />
-                </Box>
-                <Box mr={1} pt={2} width="100px">
-                  <CheckBox
-                    instanceId={"filters-departement-financeur"}
-                    label="Financé"
-                    name="departementFinanceur"
-                    isChecked={departementFinanceur || false}
-                    onChange={() =>
-                      onFilterChange({
-                        departementFinanceur: !departementFinanceur,
-                      })
-                    }
-                  />
-                </Box>
-              </>
             )}
           </Flex>
         </Flex>

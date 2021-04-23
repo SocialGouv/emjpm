@@ -24,13 +24,19 @@ export default function TabPanelPaginatedList({ type: selectedType }) {
     }
   });
 
+  const orderBy = [];
+  if (!searchText) {
+    orderBy.push({ active: "asc" });
+    orderBy.push({ id: "desc" });
+  }
+
   const { data, error, loading } = useQuery(USERS, {
     fetchPolicy: "network-only",
-
     variables: {
+      orderBy,
       limit: resultPerPage,
       offset: currentOffset,
-      search: searchText && searchText !== "" ? `%${searchText}%` : null,
+      search: searchText || null,
       type: selectedType,
     },
   });
