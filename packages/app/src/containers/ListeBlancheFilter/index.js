@@ -71,7 +71,7 @@ function ListeBlancheFilter() {
   });
 
   return (
-    <Fragment>
+    <>
       <Card sx={{ position: "relative" }}>
         <Box
           ref={ref}
@@ -84,7 +84,7 @@ function ListeBlancheFilter() {
               </Link>
             </Box>
           ) : (
-            <Fragment>
+            <>
               <Button onClick={() => setButtonsEnabled(true)}>
                 Ajouter un mandataire
                 <ChevronDown size={20} />
@@ -103,7 +103,7 @@ function ListeBlancheFilter() {
                   </Card>
                 </Box>
               )}
-            </Fragment>
+            </>
           )}
         </Box>
 
@@ -169,7 +169,7 @@ function ListeBlancheFilter() {
           </Flex>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

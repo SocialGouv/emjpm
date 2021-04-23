@@ -38,7 +38,7 @@ function Mandataire(props) {
     },
   } = props;
   return (
-    <Fragment>
+    <>
       <Card sx={cardStyle} width="100%">
         <Box sx={decorationStyle(type)} />
         <Flex sx={MandatairelistStyle}>
@@ -47,20 +47,18 @@ function Mandataire(props) {
               {type === "service" ? (
                 <BuildingHouse size="24" />
               ) : (
-                <Fragment>
-                  {genre === "F" ? <Female size="24" /> : <Male size="24" />}
-                </Fragment>
+                <>{genre === "F" ? <Female size="24" /> : <Male size="24" />}</>
               )}
               {isAvailable}
             </Box>
             <Box>
               <Text sx={titleStyle}>
                 {type === "service" ? (
-                  <Fragment>{etablissement}</Fragment>
+                  <>{etablissement}</>
                 ) : (
-                  <Fragment>
+                  <>
                     {nom} {prenom}
-                  </Fragment>
+                  </>
                 )}
               </Text>
               <Text sx={subtitleStyle}>{type}</Text>
@@ -71,8 +69,8 @@ function Mandataire(props) {
             <Text sx={descriptionStyle}>{ville}</Text>
           </Flex>
 
-          <Fragment>
-            <Fragment>
+          <>
+            <>
               <Flex width="200px" sx={columnStyle(true, true)}>
                 <Text sx={labelStyle}>Email</Text>
                 <Text sx={descriptionStyle}>{email}</Text>
@@ -81,13 +79,13 @@ function Mandataire(props) {
                 <Text sx={labelStyle}>Téléphone</Text>
                 <Text sx={descriptionStyle}>{telephone}</Text>
               </Flex>
-            </Fragment>
-          </Fragment>
+            </>
+          </>
 
           <Flex alignItems="center">
             <Box sx={availabilityIndicatorStyle(currentAvailability > 0)} />
           </Flex>
-          <Fragment>
+          <>
             <Flex sx={columnStyle(false, false)}>
               <Text sx={labelStyle}>Disponibilité</Text>
               <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
@@ -108,10 +106,10 @@ function Mandataire(props) {
               <Text sx={labelStyle}>En attente</Text>
               <Text sx={descriptionStyle}>{mesuresAwaiting}</Text>
             </Flex>
-          </Fragment>
+          </>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

@@ -62,7 +62,7 @@ export function SignupDirection() {
   const { setFieldValue } = formik;
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle p="1" m="1">
         {"Création d'un compte d'agent de l'état"}
       </HeadingTitle>
@@ -151,6 +151,6 @@ export function SignupDirection() {
           </Box>
         </Flex>
       </form>
-    </Fragment>
+    </>
   );
 }

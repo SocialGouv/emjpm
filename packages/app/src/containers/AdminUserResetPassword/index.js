@@ -24,7 +24,7 @@ function AdminUserResetPassword(props) {
   }
 
   return (
-    <Fragment>
+    <>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
@@ -67,7 +67,7 @@ function AdminUserResetPassword(props) {
           </Flex>
         </FormInputBox>
       </Flex>
-    </Fragment>
+    </>
   );
 }
 

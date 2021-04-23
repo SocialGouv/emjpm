@@ -26,7 +26,7 @@ function MagistratMesureMandataireTitle(props) {
   const limitReached = mesures_en_cours + mesures_en_attente >= dispo_max;
 
   return (
-    <Fragment>
+    <>
       <Heading
         size={2}
         mb="1"
@@ -38,7 +38,7 @@ function MagistratMesureMandataireTitle(props) {
           }
         </Heading>
       )}
-    </Fragment>
+    </>
   );
 }
 

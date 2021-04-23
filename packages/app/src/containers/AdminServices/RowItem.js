@@ -16,7 +16,7 @@ export default function RowItem({ item }) {
   ]);
 
   return (
-    <Fragment>
+    <>
       <Card sx={cardStyle} width="100%" onClick={onRowClick}>
         <Flex justifyContent="space-between">
           <Box>
@@ -39,6 +39,6 @@ export default function RowItem({ item }) {
           </Box>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }

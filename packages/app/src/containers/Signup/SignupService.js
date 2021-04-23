@@ -69,7 +69,7 @@ function SignupServiceForm({ serviceDatas }) {
   const departementsOptions = toOptions(departements, "id", "nom");
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle p="1" m="1">
         {"Création d'un compte de service mandataire"}
       </HeadingTitle>
@@ -131,7 +131,7 @@ function SignupServiceForm({ serviceDatas }) {
           </Box>
         </Flex>
       </form>
-    </Fragment>
+    </>
   );
 }
 

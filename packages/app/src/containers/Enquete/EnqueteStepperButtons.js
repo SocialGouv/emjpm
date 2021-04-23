@@ -6,7 +6,7 @@ export function EnqueteStepperButtons(props) {
   return (
     <Flex mt={"80px"} alignItems="center" flexDirection="column">
       <Flex justifyContent>
-        <Fragment>
+        <>
           <Button
             disabled={disabled}
             onClick={(e) => {
@@ -31,7 +31,7 @@ export function EnqueteStepperButtons(props) {
           >
             Suivant
           </Button>
-        </Fragment>
+        </>
       </Flex>
       {/* <Box mt={3}>
         <Text color="#404040" sx={{ textDecoration: "underline" }} fontWeight="bold" mr={4}>

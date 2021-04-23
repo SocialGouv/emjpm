@@ -35,7 +35,7 @@ function PaginatedList({
   return (
     <Box sx={PaginatedListStyle}>
       {entries.length > 0 ? (
-        <Fragment>
+        <>
           <DataList
             entries={entries}
             RowItem={RowItem}
@@ -61,7 +61,7 @@ function PaginatedList({
               activeClassName={"active"}
             />
           )}
-        </Fragment>
+        </>
       ) : (
         <div>Pas de donnée à afficher</div>
       )}

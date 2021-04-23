@@ -21,7 +21,7 @@ export function AdminMandataireListeBlanche(props) {
   }
 
   return (
-    <Fragment>
+    <>
       {mandataire.lb_user ? (
         <Link to={`/${user.type}/liste-blanche/${mandataire.lb_user.id}`}>
           <Text fontWeight="bold">{`${mandataire.lb_user.prenom} ${mandataire.lb_user.nom}`}</Text>
@@ -31,7 +31,7 @@ export function AdminMandataireListeBlanche(props) {
           )}
         </Link>
       ) : (
-        <Fragment>
+        <>
           {lb_user ? (
             <Flex>
               <Box>
@@ -67,9 +67,9 @@ export function AdminMandataireListeBlanche(props) {
               </Text>
             </Box>
           )}
-        </Fragment>
+        </>
       )}
-    </Fragment>
+    </>
   );
 }
 

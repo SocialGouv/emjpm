@@ -44,7 +44,7 @@ export default function MandataireListItem(props) {
     onClick,
   } = props;
   return (
-    <Fragment>
+    <>
       <Card sx={cardStyle} width="100%">
         <Box sx={decorationStyle(type)} />
         <Flex
@@ -58,20 +58,18 @@ export default function MandataireListItem(props) {
               {type === "service" ? (
                 <BuildingHouse size="24" />
               ) : (
-                <Fragment>
-                  {genre === "F" ? <Female size="24" /> : <Male size="24" />}
-                </Fragment>
+                <>{genre === "F" ? <Female size="24" /> : <Male size="24" />}</>
               )}
               {isAvailable}
             </Box>
             <Box>
               <Text sx={titleStyle}>
                 {type === "service" ? (
-                  <Fragment>{etablissement}</Fragment>
+                  <>{etablissement}</>
                 ) : (
-                  <Fragment>
+                  <>
                     {nom} {prenom}
-                  </Fragment>
+                  </>
                 )}
               </Text>
               <Text sx={subtitleStyle}>{type}</Text>
@@ -83,7 +81,7 @@ export default function MandataireListItem(props) {
           </Flex>
 
           {!isMagistratMap && (
-            <Fragment>
+            <>
               <Flex width="200px" sx={columnStyle(true, true)}>
                 <Text sx={labelStyle}>Email</Text>
                 <Text sx={descriptionStyle}>{email}</Text>
@@ -104,7 +102,7 @@ export default function MandataireListItem(props) {
                     : currentAvailability}
                 </Text>
               </Flex>
-            </Fragment>
+            </>
           )}
 
           <Flex sx={columnStyle(false, false)}>
@@ -131,7 +129,7 @@ export default function MandataireListItem(props) {
           </Flex>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

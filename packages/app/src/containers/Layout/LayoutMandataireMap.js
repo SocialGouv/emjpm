@@ -36,7 +36,7 @@ function LayoutMandataireMap(props) {
   }
 
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           dropDownLinks={[
@@ -48,7 +48,7 @@ function LayoutMandataireMap(props) {
         </BoxWrapper>
       </Box>
       {children}
-    </Fragment>
+    </>
   );
 }
 

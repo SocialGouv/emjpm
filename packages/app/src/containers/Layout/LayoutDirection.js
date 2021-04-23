@@ -28,7 +28,7 @@ function LayoutDirection({ children }) {
   }
 
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           dropDownLinks={[
@@ -41,7 +41,7 @@ function LayoutDirection({ children }) {
       </Box>
       <Box>{children}</Box>
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

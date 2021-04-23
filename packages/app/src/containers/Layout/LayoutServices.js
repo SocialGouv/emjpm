@@ -39,7 +39,7 @@ function LayoutServices(props) {
   }
 
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }}>
         <Box sx={{ bg: "white" }}>
           <Header
@@ -63,7 +63,7 @@ function LayoutServices(props) {
         <Box px="1">{children}</Box>
         <Footer />
       </Box>
-    </Fragment>
+    </>
   );
 }
 

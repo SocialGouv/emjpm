@@ -29,7 +29,7 @@ function MagistratMandataireComments(props) {
 
   const { commentaires } = data;
   return (
-    <Fragment>
+    <>
       {commentaires.length > 0 ? (
         <Box width="100%">
           {commentaires.map((commentaire) => {
@@ -61,7 +61,7 @@ function MagistratMandataireComments(props) {
           mandataireId={mandataireId}
         />
       ) : (
-        <Fragment>
+        <>
           {!isEditOpen && (
             <Box width="100%" mt="3">
               <Button
@@ -74,9 +74,9 @@ function MagistratMandataireComments(props) {
               </Button>
             </Box>
           )}
-        </Fragment>
+        </>
       )}
-    </Fragment>
+    </>
   );
 }
 

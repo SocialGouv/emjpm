@@ -81,7 +81,7 @@ export function SignupForm() {
   });
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle p="1" m="1">
         {"Création de compte"}
       </HeadingTitle>
@@ -184,6 +184,6 @@ export function SignupForm() {
           </Box>
         </Flex>
       </form>
-    </Fragment>
+    </>
   );
 }

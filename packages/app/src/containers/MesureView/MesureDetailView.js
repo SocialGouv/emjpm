@@ -164,7 +164,7 @@ function MesureDetailView({ mesure, ...props }) {
         )}
 
         {status === MESURE_PROTECTION_STATUS.en_cours && (
-          <Fragment>
+          <>
             <LinkButton
               bg="red"
               color="white"
@@ -183,7 +183,7 @@ function MesureDetailView({ mesure, ...props }) {
             >
               Modifier la mesure
             </LinkButton>
-          </Fragment>
+          </>
         )}
       </Box>
     </Box>

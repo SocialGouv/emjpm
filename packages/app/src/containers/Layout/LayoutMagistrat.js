@@ -24,7 +24,7 @@ const navigationLinks = [
 function LayoutMagistrat(props) {
   const { children } = props;
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           {...props}
@@ -38,7 +38,7 @@ function LayoutMagistrat(props) {
       </Box>
       <Box>{children}</Box>
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

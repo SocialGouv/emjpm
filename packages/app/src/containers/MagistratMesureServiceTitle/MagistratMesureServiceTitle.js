@@ -29,7 +29,7 @@ function MagistratMesureServiceTitle(props) {
   const limitReached = mesures_in_progress + mesures_awaiting >= dispo_max;
 
   return (
-    <Fragment>
+    <>
       <Heading
         size={2}
         mb="1"
@@ -41,7 +41,7 @@ function MagistratMesureServiceTitle(props) {
           }
         </Heading>
       )}
-    </Fragment>
+    </>
   );
 }
 

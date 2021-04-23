@@ -156,7 +156,7 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
   // niveau: 'n1' || 'n2' || 'n3' || 'n4' || 'n5' || 'n6'
   function renderNiveauxQualificationBox({ niveau, label }) {
     return (
-      <Fragment>
+      <>
         <Heading size={5} mt={1} mb="2">
           {label}
         </Heading>
@@ -191,7 +191,7 @@ export function EnquetePreposePersonnelFormationAutresForm(props) {
             />
           </Box>
         </Flex>
-      </Fragment>
+      </>
     );
   }
 }

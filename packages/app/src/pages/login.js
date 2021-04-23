@@ -10,7 +10,7 @@ import { ExcludeBrowserBanner } from "~/containers/ExcludeBrowserBanner";
 
 function LoginPage() {
   return (
-    <Fragment>
+    <>
       <LayoutPublic>
         <BoxWrapper>
           <HeadingTitle mt={"80px"} textAlign="center">
@@ -53,7 +53,7 @@ function LoginPage() {
           </Box>
         </FlexWrapper>
       </LayoutPublic>
-    </Fragment>
+    </>
   );
 }
 

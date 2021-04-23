@@ -89,7 +89,7 @@ export function EnqueteSubmit({
             }}
           >
             {globalStatus === "empty-half" ? (
-              <Fragment>
+              <>
                 <Flex>
                   <Box mr={2}>
                     <EnqueteStatusHalfStarIcon />
@@ -118,9 +118,9 @@ export function EnqueteSubmit({
                 <Text>
                   Celles-ci seront transmises à votre direction régionale.
                 </Text>
-              </Fragment>
+              </>
             ) : (
-              <Fragment>
+              <>
                 <Text>
                   Vous avez répondu à toutes les questions de l’enquête.
                 </Text>
@@ -136,7 +136,7 @@ export function EnqueteSubmit({
                     .
                   </Text>
                 )}
-              </Fragment>
+              </>
             )}
 
             {loading === false && (

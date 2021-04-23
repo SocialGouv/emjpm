@@ -35,7 +35,7 @@ export function EnqueteFormFieldLabel({
   }, [id, required, validationSchema.fields]);
 
   return (
-    <Fragment>
+    <>
       {label && (
         <Label
           sx={FieldLabel({ isRequired, readOnly })}
@@ -63,6 +63,6 @@ export function EnqueteFormFieldLabel({
           {children}
         </Box>
       ) : null}
-    </Fragment>
+    </>
   );
 }

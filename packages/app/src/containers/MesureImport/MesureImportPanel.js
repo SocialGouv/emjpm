@@ -45,7 +45,7 @@ export const MesureImportPanel = ({
   }
 
   return (
-    <Fragment>
+    <>
       {importSummary && importSummary.unexpectedError && (
         <Box mt={2} mb={2}>
           Erreur inatendue. Veuillez ré-essayer.
@@ -55,6 +55,6 @@ export const MesureImportPanel = ({
         placeholder="Sélectionner votre fichier excel"
         onFileChosen={(file) => importMesureFile(file)}
       />
-    </Fragment>
+    </>
   );
 };

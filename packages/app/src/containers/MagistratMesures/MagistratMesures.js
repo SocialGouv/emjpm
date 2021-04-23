@@ -57,9 +57,9 @@ function MagistratMesures() {
 
   return (
     <Box sx={MagistratListStyle}>
-      <Fragment>
+      <>
         {mesures.length > 0 ? (
-          <Fragment>
+          <>
             {mesures.map((mesure) => {
               return (
                 <MesureListItem
@@ -92,11 +92,11 @@ function MagistratMesures() {
                 />
               </Flex>
             )}
-          </Fragment>
+          </>
         ) : (
           <div>Pas de donnée à afficher</div>
         )}
-      </Fragment>
+      </>
     </Box>
   );
 }

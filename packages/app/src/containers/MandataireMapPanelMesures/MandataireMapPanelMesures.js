@@ -53,7 +53,7 @@ function MandataireMapPanelMesures({ mesuresIds }) {
       <Scrollbar style={{ height: "100%", width: "100%" }}>
         <Box p="2">
           {mesures.length > 0 ? (
-            <Fragment>
+            <>
               {mesures.map((mesure) => {
                 return (
                   <MesureListItem
@@ -66,7 +66,7 @@ function MandataireMapPanelMesures({ mesuresIds }) {
                   />
                 );
               })}
-            </Fragment>
+            </>
           ) : (
             <div>Pas de donnée à afficher</div>
           )}

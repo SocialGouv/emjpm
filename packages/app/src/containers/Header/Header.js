@@ -23,7 +23,7 @@ function Header(props) {
     logout(history);
   }
   return (
-    <Fragment>
+    <>
       <HeaderComponent
         email={email}
         Link={Link}
@@ -31,7 +31,7 @@ function Header(props) {
         disconnect={handleLogout}
         DropDownMenu={DropDownMenu}
       />
-    </Fragment>
+    </>
   );
 }
 

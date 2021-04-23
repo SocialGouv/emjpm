@@ -27,7 +27,7 @@ export function EnquetePopulationTrancheAgeField(props) {
     [values, menFieldId, womenFieldId]
   );
   return (
-    <Fragment>
+    <>
       <Box>
         <EnqueteFormFieldErrorMessage
           enqueteForm={enqueteForm}
@@ -69,6 +69,6 @@ export function EnquetePopulationTrancheAgeField(props) {
           </Text>
         </EnqueteFormInputField>
       </Flex>
-    </Fragment>
+    </>
   );
 }

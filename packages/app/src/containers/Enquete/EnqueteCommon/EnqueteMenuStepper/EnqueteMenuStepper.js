@@ -13,7 +13,7 @@ export function EnqueteMenuStepper(props) {
   const { readOnly, sections, currentStep, onClickLink } = props;
 
   return (
-    <Fragment>
+    <>
       <Box py={"50px"} px={4} sx={styles.menu}>
         {sections.map((menuSection, index) => {
           const hasSubSections =
@@ -59,7 +59,7 @@ export function EnqueteMenuStepper(props) {
           );
         })}
       </Box>
-    </Fragment>
+    </>
   );
 }
 function renderSectionTitle({
@@ -70,7 +70,7 @@ function renderSectionTitle({
   onClickLink,
 }) {
   return (
-    <Fragment>
+    <>
       <Flex
         sx={{
           color: isActiveSesion
@@ -103,7 +103,7 @@ function renderSectionTitle({
           !readOnly &&
           renderIcon(menuSection.status)}
       </Flex>
-    </Fragment>
+    </>
   );
 }
 function renderSubSection({

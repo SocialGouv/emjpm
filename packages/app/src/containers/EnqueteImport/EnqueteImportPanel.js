@@ -95,7 +95,7 @@ export function EnqueteImportPanel(props) {
 
 function renderSectionTitle(enqueteId, goToStep) {
   return (
-    <Fragment>
+    <>
       <Flex
         sx={{
           color: "#007AD9",
@@ -118,6 +118,6 @@ function renderSectionTitle(enqueteId, goToStep) {
 
         <Box display="flex" flexGrow={1} />
       </Flex>
-    </Fragment>
+    </>
   );
 }

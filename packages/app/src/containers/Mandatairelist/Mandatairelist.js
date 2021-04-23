@@ -12,7 +12,7 @@ function Mandatairelist(props) {
     ChooseComponent,
   } = props;
   return (
-    <Fragment>
+    <>
       {mandataires.map((mandataire) => {
         return (
           <Mandataire
@@ -25,7 +25,7 @@ function Mandatairelist(props) {
           />
         );
       })}
-    </Fragment>
+    </>
   );
 }
 

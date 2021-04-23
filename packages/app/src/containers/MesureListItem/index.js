@@ -70,7 +70,7 @@ export default function MesureListItem(props) {
   };
 
   return (
-    <Fragment>
+    <>
       <Card sx={cardStyle} width="100%">
         <a
           href={getHref && getHref(props)}
@@ -102,13 +102,13 @@ export default function MesureListItem(props) {
             <Flex minWidth="50px" mr="1">
               <Box alignSelf="center" pt="4px" mr="1">
                 {civilite && (
-                  <Fragment>
+                  <>
                     {isMonsieur({ civilite }) ? (
                       <GrayMale size="24" />
                     ) : (
                       <GrayFemale size="24" />
                     )}
-                  </Fragment>
+                  </>
                 )}
               </Box>
               <Box>
@@ -130,10 +130,10 @@ export default function MesureListItem(props) {
             </Flex>
 
             {status === MESURE_TYPE.WAITING && (
-              <Fragment>
+              <>
                 <Flex width="130px">
                   <Box alignSelf="center" pt="4px" mr="1">
-                    <Fragment>
+                    <>
                       {isUrgent && (
                         <Flex alignItems="center">
                           <Warning size="24" />
@@ -142,7 +142,7 @@ export default function MesureListItem(props) {
                           </Text>
                         </Flex>
                       )}
-                    </Fragment>
+                    </>
                   </Box>
                 </Flex>
                 <Flex
@@ -153,7 +153,7 @@ export default function MesureListItem(props) {
                   <Text sx={labelStyle}>Date prév. juge.</Text>
                   <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
                 </Flex>
-              </Fragment>
+              </>
             )}
 
             {status !== MESURE_TYPE.WAITING && (
@@ -171,7 +171,7 @@ export default function MesureListItem(props) {
           </Flex>
         </a>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

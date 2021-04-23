@@ -19,7 +19,7 @@ function RowItem(props) {
   const { item } = props;
   const { id, siret, rslongue, ligneacheminement, departement } = item;
   return (
-    <Fragment>
+    <>
       <Card sx={cardStyle} width="100%">
         <Flex justifyContent="space-between">
           <Box>
@@ -47,7 +47,7 @@ function RowItem(props) {
           </Box>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

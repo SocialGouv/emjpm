@@ -41,7 +41,7 @@ function LayoutAdmin(props) {
   const { children, hasNavigation = true } = props;
 
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           dropDownLinks={[
@@ -57,7 +57,7 @@ function LayoutAdmin(props) {
       <Box>{children}</Box>
 
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

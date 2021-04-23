@@ -100,9 +100,9 @@ function MesureList() {
 
   return (
     <Box sx={MesureListStyle}>
-      <Fragment>
+      <>
         {mesuresList.length > 0 ? (
-          <Fragment>
+          <>
             {mesuresList.map((mesure) => {
               return (
                 <MesureListItem
@@ -113,7 +113,7 @@ function MesureList() {
                 />
               );
             })}
-          </Fragment>
+          </>
         ) : (
           <div>Pas de donnée à afficher</div>
         )}
@@ -137,7 +137,7 @@ function MesureList() {
             />
           </Flex>
         )}
-      </Fragment>
+      </>
     </Box>
   );
 }

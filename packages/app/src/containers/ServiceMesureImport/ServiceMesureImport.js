@@ -13,7 +13,7 @@ import { Card, Heading, Text } from "~/components";
 
 function ServiceMesureImport({ serviceId }) {
   return (
-    <Fragment>
+    <>
       <Card mb="5">
         <Flex flexDirection="column">
           <Box mb={2}>
@@ -63,7 +63,7 @@ function ServiceMesureImport({ serviceId }) {
           </Box>
         </Flex>
       </Card>
-    </Fragment>
+    </>
   );
 }
 

@@ -70,7 +70,7 @@ export function SignupServiceInvitation(props) {
   };
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle
         p="1"
         m={1}
@@ -79,6 +79,6 @@ export function SignupServiceInvitation(props) {
         handleSubmit={handleSubmit}
         invitation={invitation}
       />
-    </Fragment>
+    </>
   );
 }

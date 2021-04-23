@@ -41,7 +41,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
   });
 
   return (
-    <Fragment>
+    <>
       <RadioGroup
         value={null}
         onValueChange={(value) => {
@@ -83,7 +83,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
           );
         }}
       />
-    </Fragment>
+    </>
   );
 }
 

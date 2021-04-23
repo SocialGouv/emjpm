@@ -34,18 +34,14 @@ function AccessToken(props) {
 
   const { access_tokens } = data;
   return (
-    <Fragment>
+    <>
       {access_tokens.length > 0 && (
         <Box sx={boxStyle}>
           <Heading size={5} mt={3} mb="2">
             {isAdmin ? (
-              <Fragment>
-                Logiciels métiers autorisés à accéder à ce compte utilisateur
-              </Fragment>
+              <>Logiciels métiers autorisés à accéder à ce compte utilisateur</>
             ) : (
-              <Fragment>
-                Logiciels métiers autorisés à accéder à votre compte
-              </Fragment>
+              <>Logiciels métiers autorisés à accéder à votre compte</>
             )}
           </Heading>
           <Box mr={4} mb="3">
@@ -73,7 +69,7 @@ function AccessToken(props) {
           </Box>
         </Box>
       )}
-    </Fragment>
+    </>
   );
 }
 

@@ -55,7 +55,7 @@ function SignupMagistratForm({ tiDatas }) {
   });
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle p="1" m="1">
         {"Création d'un compte de magistrat"}
       </HeadingTitle>
@@ -116,7 +116,7 @@ function SignupMagistratForm({ tiDatas }) {
           </Box>
         </Flex>
       </form>
-    </Fragment>
+    </>
   );
 }
 

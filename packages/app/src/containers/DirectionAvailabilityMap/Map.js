@@ -8,7 +8,7 @@ function France(props) {
   const { color, aboveColor, belowColor, departements } = props;
   const [currentPanel, togglePanel] = useState(false);
   return (
-    <Fragment>
+    <>
       {currentPanel.isActive && (
         <Panel togglePanel={togglePanel} currentPanel={currentPanel} />
       )}
@@ -23,7 +23,7 @@ function France(props) {
           />
         ))}
       </SvgLoader>
-    </Fragment>
+    </>
   );
 }
 

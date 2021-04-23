@@ -30,7 +30,7 @@ function MagistratMesure(props) {
     id,
   } = useContext(MesureContext);
   return (
-    <Fragment>
+    <>
       <Heading size={3} mt="4" mb="3">
         Votre mesure
       </Heading>
@@ -106,7 +106,7 @@ function MagistratMesure(props) {
           </Box>
         </Flex>
       </Flex>
-    </Fragment>
+    </>
   );
 }
 

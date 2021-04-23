@@ -85,7 +85,7 @@ function AdminUserActivation(props) {
   const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
-    <Fragment>
+    <>
       {isMandataire({ type }) && (
         <Flex>
           <FormGrayBox>
@@ -145,7 +145,7 @@ function AdminUserActivation(props) {
           )}
         </FormInputBox>
       </Flex>
-    </Fragment>
+    </>
   );
 }
 

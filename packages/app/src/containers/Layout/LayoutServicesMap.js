@@ -39,7 +39,7 @@ function LayoutServicesMap(props) {
   }
 
   return (
-    <Fragment>
+    <>
       <Box sx={{ position: "relative", "z-index": "1000" }} bg="cardPrimary">
         <Header
           dropDownLinks={[
@@ -58,7 +58,7 @@ function LayoutServicesMap(props) {
         </BoxWrapper>
       </Box>
       {children}
-    </Fragment>
+    </>
   );
 }
 

@@ -114,7 +114,7 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
   // prefix: 'en_poste_cnc' || 'non_formation_non_cnc' || 'formation_non_cnc'
   function renderFormationPreposeBox({ prefix, label }) {
     return (
-      <Fragment>
+      <>
         <Heading size={5} mt={1} mb="2">
           {label}
         </Heading>
@@ -150,7 +150,7 @@ export function EnquetePreposePersonnelFormationMjpmForm(props) {
             />
           </Box>
         </Flex>
-      </Fragment>
+      </>
     );
   }
 }

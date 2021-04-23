@@ -8,7 +8,7 @@ function LayoutPublic(props) {
   const { children } = props;
 
   return (
-    <Fragment>
+    <>
       <Box
         sx={{ height: "66px", position: "relative", "z-index": "1000" }}
         bg="cardPrimary"
@@ -17,7 +17,7 @@ function LayoutPublic(props) {
       </Box>
       <Box>{children}</Box>
       <Footer />
-    </Fragment>
+    </>
   );
 }
 

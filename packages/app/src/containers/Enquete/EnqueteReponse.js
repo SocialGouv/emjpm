@@ -12,7 +12,7 @@ export function EnqueteReponse({
   navigateToStep,
 }) {
   return (
-    <Fragment>
+    <>
       {enqueteReponse.user_type === "individuel" && (
         <EnqueteIndividuel
           enquete={enquete}
@@ -39,7 +39,7 @@ export function EnqueteReponse({
           navigateToStep={navigateToStep}
         />
       )}
-    </Fragment>
+    </>
   );
 }
 

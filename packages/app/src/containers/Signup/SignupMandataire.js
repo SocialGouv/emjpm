@@ -80,7 +80,7 @@ function SignupMandataireForm() {
   });
 
   return (
-    <Fragment>
+    <>
       <HeadingTitle p="1" m="1">
         {"Demande de création d'un compte de mandataire"}
       </HeadingTitle>
@@ -194,7 +194,7 @@ function SignupMandataireForm() {
           </Box>
         </Flex>
       </form>
-    </Fragment>
+    </>
   );
 }
 

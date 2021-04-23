@@ -21,7 +21,7 @@ function MagistratMandataireComment(props) {
   const [RemoveComment] = useMutation(REMOVE_COMMENT);
 
   return (
-    <Fragment>
+    <>
       {isEditOpen && currentComment === id ? (
         <MagistratMandataireCommentForm
           toggleEditCommentForm={toggleEditCommentForm}
@@ -64,7 +64,7 @@ function MagistratMandataireComment(props) {
           </Flex>
         </Text>
       )}
-    </Fragment>
+    </>
   );
 }
 

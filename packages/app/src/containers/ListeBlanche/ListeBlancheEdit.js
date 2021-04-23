@@ -24,7 +24,7 @@ export function ListeBlancheEdit(props) {
   return (
     <div>
       {data && data.lb_users_by_pk && (
-        <Fragment>
+        <>
           {data.lb_users_by_pk.type === "prepose" && (
             <ListeBlanchePreposeUpdate
               id={id}
@@ -40,7 +40,7 @@ export function ListeBlancheEdit(props) {
               data={data.lb_users_by_pk}
             />
           )}
-        </Fragment>
+        </>
       )}
     </div>
   );

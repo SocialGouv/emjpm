@@ -74,7 +74,7 @@ function ServiceMembers(props) {
             </Text>
             <Box sx={listAdminStyle}>
               {isAdmin ? (
-                <Fragment>
+                <>
                   {userId === member.user_id ? (
                     <Text fontWeight="bold" color="black" sx={listDateStyle}>
                       Administrateur
@@ -90,7 +90,7 @@ function ServiceMembers(props) {
                       />
                     </Box>
                   )}
-                </Fragment>
+                </>
               ) : (
                 <Text fontWeight="bold" color="black" sx={listDateStyle}>
                   Membre

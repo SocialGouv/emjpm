@@ -134,7 +134,7 @@ export function ListeBlanchePreposeForm(props) {
             }}
             renderRadioLabel={(etablissement) => {
               return (
-                <Fragment>
+                <>
                   <Text>{etablissement.label}</Text>
                   <Box
                     ml={2}
@@ -160,7 +160,7 @@ export function ListeBlanchePreposeForm(props) {
                       }}
                     />
                   </Box>
-                </Fragment>
+                </>
               );
             }}
           />

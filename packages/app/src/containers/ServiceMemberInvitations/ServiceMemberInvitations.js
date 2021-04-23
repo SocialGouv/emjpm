@@ -40,7 +40,7 @@ function ServiceMemberInvitations(props) {
 
   const serviceMemberInvitations = data.service_member_invitations;
   return (
-    <Fragment>
+    <>
       {serviceMemberInvitations.length ? (
         <Box mb={4}>
           <Heading size={2} width={[1]} mb="2">
@@ -71,7 +71,7 @@ function ServiceMemberInvitations(props) {
           </Box>
         </Box>
       ) : null}
-    </Fragment>
+    </>
   );
 }
 

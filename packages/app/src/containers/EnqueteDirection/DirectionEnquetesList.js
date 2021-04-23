@@ -23,7 +23,7 @@ export function DirectionEnquetesList() {
     history.push(`/direction/enquetes/${enqueteId}`);
   }
   return (
-    <Fragment>
+    <>
       {enquetes.map((enquete) => (
         <Card
           key={enquete.id}
@@ -49,7 +49,7 @@ export function DirectionEnquetesList() {
           </Flex>
         </Card>
       ))}
-    </Fragment>
+    </>
   );
 }
 
