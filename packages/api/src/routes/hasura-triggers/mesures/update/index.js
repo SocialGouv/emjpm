@@ -1,12 +1,15 @@
 const logger = require("~/utils/logger");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
+const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
 module.exports = async (req, res) => {
   logger.info(`[TRIGGER_MESURES_UPDATE] start updating related gestionnaires`);
   let status;
   const updatedRows = 0;
   try {
-    const row = req.body.event?.data?.new || req.body.event?.data?.old;
+    const newRow = req.body.event?.data?.new;
+    const oldRow = req.body.event?.data?.old;
+    const row = newRow || oldRow;
     if (!row) {
       throw new Error("undefined row");
     }
@@ -24,6 +27,17 @@ module.exports = async (req, res) => {
       );
     } else {
       throw new Error("row missing gestionnaire");
+    }
+
+    if ((newRow?.ti_id || null) !== (oldRow?.ti_id || null)) {
+      if (newRow?.ti_id) {
+        const tiUpdatedRows = await updateTiMesuresEvent(newRow.ti_id);
+        updatedRows += tiUpdatedRows;
+      }
+      if (oldRow?.ti_id) {
+        const tiUpdatedRows = await updateTiMesuresEvent(oldRow.ti_id);
+        updatedRows += tiUpdatedRows;
+      }
     }
 
     status = "success";

@@ -10,6 +10,7 @@ const { sanitizeMesureProperties } = require("~/utils/mesure");
 const { saveMesures } = require("./service/saveMesure");
 const updateMesureStates = require("./service/updateMesureStates");
 const fetchTribunaux = require("./service/fetchTribunaux");
+const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
 const mesureBatch = async (req, res) => {
   const errors = validationResult(req);
@@ -71,6 +72,17 @@ const mesureBatch = async (req, res) => {
         mesuresQueryResult = await saveMesures(allMesureDatas, trx);
         await updateMesureStates(serviceOrMandataire, type, trx);
         await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
+
+        const tiIds = allMesureDatas.reduce((s, { ti: { id } }) => {
+          if (id) {
+            s.add(id);
+          }
+          return s;
+        }, new Set());
+        for (const [tiId] of tiIds.entries()) {
+          await updateTiMesuresEvent(tiId, trx);
+        }
+
         await trx.commit();
       } catch (e) {
         await trx.rollback(e);

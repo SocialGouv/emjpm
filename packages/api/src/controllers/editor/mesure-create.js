@@ -8,6 +8,7 @@ const { saveMesure } = require("./service/saveMesure");
 const updateMesureStates = require("./service/updateMesureStates");
 
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
+const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
@@ -43,6 +44,7 @@ const mesureCreate = async (req, res) => {
         );
         await updateMesureStates(serviceOrMandataire, type, trx);
         await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
+        await updateTiMesuresEvent(ti.id, trx);
 
         await trx.commit();
       } catch (e) {

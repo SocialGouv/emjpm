@@ -5,6 +5,7 @@ const { Mandataire } = require("~/models");
 const {
   updateMandataireMesureStates,
 } = require("~/services/updateMesureStates");
+const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
@@ -73,6 +74,17 @@ module.exports = async function updateMandataireMesuresFromOCMI({
       await deleteAllMesures(mandataireId, trx);
       await saveMesures(allMesureDatas, trx);
       await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
+
+      const tiIds = allMesureDatas.reduce((s, { datas: { ti: { id } } }) => {
+        if (id) {
+          s.add(id);
+        }
+        return s;
+      }, new Set());
+      for (const [tiId] of tiIds.entries()) {
+        await updateTiMesuresEvent(tiId, trx);
+      }
+
       await updateMandataireMesureStates(mandataireId, trx);
       await trx.commit();
     } catch (e) {
