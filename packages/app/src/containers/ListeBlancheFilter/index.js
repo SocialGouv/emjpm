@@ -146,20 +146,8 @@ function ListeBlancheFilter() {
                   onFilterChange({ search: event.target.value })
                 }
                 size="small"
-                placeholder="Rechercher"
-              />
-            </Box>
-            <Box sx={BoxStyle}>
-              <Input
-                value={siret || ""}
-                spellCheck="false"
-                autoComplete="false"
-                onChange={(event) =>
-                  onFilterChange({ siret: event.target.value })
-                }
-                name="search_siret"
-                size="small"
-                placeholder="Siret"
+                label="Rechercher"
+                placeholder="nom, prénom, email ou SIRET"
               />
             </Box>
             {type === "mandataire" && (
