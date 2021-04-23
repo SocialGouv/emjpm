@@ -3,6 +3,7 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { Fragment } from "react";
 import { Box, Flex, Text } from "rebass";
 
+import { getRegionDepartementList } from "~/utils/geodata";
 import useUser from "~/hooks/useUser";
 import { RadioGroup } from "~/components";
 
@@ -13,9 +14,16 @@ function canModifyAgrement(user, departementCode) {
   if (isDirectionNationale(user)) {
     return true;
   }
-  const agrements = user.directions.map(
-    (direction) => direction.departement.id
-  );
+  const agrements = user.directions.reduce((list, direction) => {
+    if (direction.type === "regional") {
+      for (const { code } of getRegionDepartementList(direction.region.id)) {
+        list.push(code);
+      }
+    } else {
+      list.push(direction.departement.id);
+    }
+    return list;
+  }, []);
   return agrements.includes(departementCode);
 }
 

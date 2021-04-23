@@ -3,24 +3,34 @@ import departements from "./departements.json";
 
 const codePostalDB = import("./code_postal.json");
 
-export const departementList = Object.entries(departements)
-  .map(([code, { nom, region }]) => {
-    return {
-      code,
-      nom,
-      region,
-    };
-  })
-  .sort(function (a, b) {
-    return a.code.replace(/\D/g, "9") - b.code.replace(/\D/g, "9");
-  });
-
 export const regionList = Object.entries(regions).map(([code, nom]) => {
   return {
     code,
     nom,
   };
 });
+
+export const departementsByRegionCode = {};
+
+export const departementList = Object.entries(departements)
+  .map(([code, { nom, region }]) => {
+    const departement = {
+      code,
+      nom,
+      region,
+    };
+
+    // optimization over consitency
+    if (!departementsByRegionCode[region]) {
+      departementsByRegionCode[region] = [];
+    }
+    departementsByRegionCode[region].push(departement);
+
+    return departement;
+  })
+  .sort(function (a, b) {
+    return a.code.replace(/\D/g, "9") - b.code.replace(/\D/g, "9");
+  });
 
 export const getRegionName = (code) => {
   return regions[code];
@@ -33,6 +43,10 @@ export const getDepartementRegionCode = (code) => {
 };
 export const getDepartementRegionName = (code) => {
   return regions[getDepartementRegionCode(code)];
+};
+
+export const getRegionDepartementList = (code) => {
+  return departementsByRegionCode[code];
 };
 
 export const codePostalExists = async (cp) => {
