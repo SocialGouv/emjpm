@@ -5,6 +5,15 @@
  truncate hdb_catalog.event_triggers cascade;
 
 
+-- etablissements
+delete from etablissements where not exists (
+   select 1 from lb_user_etablissements
+   where lb_user_etablissements.etablissement_id = etablissements.id
+   union
+   select 1 from mesures
+   where mesures.etablissement_id = etablissements.id
+);
+
 -- editors
 delete from editors;
 delete from access_tokens;
