@@ -8,12 +8,11 @@ import {
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
-import { Button, Card } from "~/components";
+import { Card } from "~/components";
 
 import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "./style";
 
-import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
-import { impersonateLogin, useAuth } from "~/user/Auth";
+import ImpersonateButton from "~/containers/ImpersonateButton";
 
 export default function RowItem({ item }) {
   const {
@@ -30,11 +29,6 @@ export default function RowItem({ item }) {
   } = item;
 
   const history = useHistory();
-  const { authStore } = useAuth();
-  const { token } = authStore;
-  const onClickImpersonate = useCallback(() => {
-    impersonateLogin({ id, token });
-  }, [id, token]);
 
   let labelNbMesures;
   switch (type) {
@@ -144,22 +138,7 @@ export default function RowItem({ item }) {
           </a>
           <Flex justifyContent="flex-end" width="45px">
             <Flex width="45px" flexDirection="column">
-              <Button
-                style={{
-                  backgroundColor: "white",
-                  borderColor: "#007AD9",
-                  borderWidth: 1,
-                  borderStyle: "solid",
-                  borderRadius: 5,
-                  padding: "12px",
-                }}
-                onClick={onClickImpersonate}
-              >
-                <UserSecret
-                  size={18}
-                  style={{ color: "#333", height: "100%" }}
-                />
-              </Button>
+              <ImpersonateButton userId={id} />
             </Flex>
           </Flex>
         </Flex>

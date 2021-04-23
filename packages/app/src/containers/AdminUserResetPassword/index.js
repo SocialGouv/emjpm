@@ -5,6 +5,8 @@ import { Box, Flex } from "rebass";
 import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Button, Heading, Input } from "~/components";
 
+import ImpersonateButton from "~/containers/ImpersonateButton";
+
 import { RESET_PASSWORD } from "./mutations";
 
 function AdminUserResetPassword(props) {
@@ -30,32 +32,39 @@ function AdminUserResetPassword(props) {
           </Heading>
         </FormGrayBox>
         <FormInputBox>
-          <Box display="inline-flex">
-            <Box>
-              <Button
-                mr={2}
-                bg="warning"
-                onClick={resetPassword}
-                isLoading={loading}
-              >
-                Régénérer le mot de passe
-              </Button>
-            </Box>
-            {password && (
-              <Box width="170px">
-                <Input
-                  label={"Nouveau mot de passe"}
-                  value={password}
-                  readOnly
-                  name="new_password"
-                  onFocus={(e) => {
-                    e.target.select();
-                  }}
-                  size="small"
-                />
+          <Flex justifyContent="space-between">
+            <Box display="inline-flex">
+              <Box>
+                <Button
+                  mr={2}
+                  bg="warning"
+                  onClick={resetPassword}
+                  isLoading={loading}
+                >
+                  Régénérer le mot de passe
+                </Button>
               </Box>
-            )}
-          </Box>
+              {password && (
+                <Box width="170px">
+                  <Input
+                    label={"Nouveau mot de passe"}
+                    value={password}
+                    readOnly
+                    name="new_password"
+                    onFocus={(e) => {
+                      e.target.select();
+                    }}
+                    size="small"
+                  />
+                </Box>
+              )}
+            </Box>
+            <Box display="inline-flex">
+              <Flex width="45px">
+                <ImpersonateButton userId={userId} />
+              </Flex>
+            </Box>
+          </Flex>
         </FormInputBox>
       </Flex>
     </Fragment>
