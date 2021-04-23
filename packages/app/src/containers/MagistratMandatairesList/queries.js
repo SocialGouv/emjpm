@@ -46,10 +46,11 @@ export const GET_MANDATAIRES = gql`
     $limit: Int
     $searchText: String
   ) {
-    count: view_mesure_gestionnaire_aggregate(
+    count: view_mesure_gestionnaire_tis_aggregate(
       where: {
-        gestionnaire_tis: { ti_id: { _eq: $tribunal } }
+        ti_id: { _eq: $tribunal }
         discriminator: { _eq: $discriminator }
+        gestionnaire: { nom: { _ilike: $searchText } }
       }
     ) {
       aggregate {
