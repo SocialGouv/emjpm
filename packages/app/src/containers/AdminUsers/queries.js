@@ -41,9 +41,23 @@ export const USERS = gql`
           nom
         }
       }
+      magistrat {
+        ti {
+          nb_mesures
+        }
+      }
       mandataire {
         id
         lb_user_id
+        mesures_en_cours
+        dispo_max
+      }
+      service_members {
+        service {
+          mesures_in_progress
+          mesures_awaiting
+          dispo_max
+        }
       }
     }
   }

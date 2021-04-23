@@ -6258,6 +6258,13 @@
         table:
           schema: public
           name: enquete_reponses
+  - name: mesures
+    using:
+      foreign_key_constraint_on:
+        column: service_id
+        table:
+          schema: public
+          name: mesures
   - name: service_antennes
     using:
       foreign_key_constraint_on:
