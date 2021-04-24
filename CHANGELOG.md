@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.113.1](https://github.com/SocialGouv/emjpm/compare/v25.113.0...v25.113.1) (2021-04-24)
+
+
+### Bug Fixes
+
+* **lb:** inner join ([46d660f](https://github.com/SocialGouv/emjpm/commit/46d660f074a7d61122ed05dfb1bda42a9245ba6a))
+
+
+
+
+
 # [25.113.0](https://github.com/SocialGouv/emjpm/compare/v25.112.5...v25.113.0) (2021-04-24)
 
 
