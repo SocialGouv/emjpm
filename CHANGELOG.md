@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.113.0](https://github.com/SocialGouv/emjpm/compare/v25.112.5...v25.113.0) (2021-04-24)
+
+
+### Bug Fixes
+
+* **design:** missing space ([816aa3f](https://github.com/SocialGouv/emjpm/commit/816aa3fef8df59644e784f41973442880e300cfe))
+* **dev-tests:** reduce testdb size cleaning etab ([44832ed](https://github.com/SocialGouv/emjpm/commit/44832ed6920acee11e48875d30681d85952efc6a))
+* **direction-regional-lb:** fiche mandataire error ([cf1938d](https://github.com/SocialGouv/emjpm/commit/cf1938d402bfbf8416563ca6d4f988ba53da6a3c))
+* **filters:** clean interface ([15777cf](https://github.com/SocialGouv/emjpm/commit/15777cf0d41fdd0b6a797962a76bc5112d271177))
+* **filters:** improve ux ([799c7ee](https://github.com/SocialGouv/emjpm/commit/799c7eeaedb5938107e134d9b3dcd19e514107e3))
+* **geodata:** remove leading zero in region ([887bb91](https://github.com/SocialGouv/emjpm/commit/887bb91a6f340e90c56cf17a47bba4bc54354636))
+* **labels:** clean interface ([3c5d4f0](https://github.com/SocialGouv/emjpm/commit/3c5d4f0992e04b5a60309b194d7578b6c44cb02e))
+* **pagination:** magistrats mandataires list ([ed55245](https://github.com/SocialGouv/emjpm/commit/ed552455e5f5f975741f1c07c191fa2238f801ad))
+* **tests:** upgrade test-seed ([12140e7](https://github.com/SocialGouv/emjpm/commit/12140e7e6d70bc894783209645f8a8e45bf60be4))
+
+
+### Features
+
+* **admin:** impersonate on user page ([6392896](https://github.com/SocialGouv/emjpm/commit/6392896c824b58ce6cb6a6e1e0f1cc1527245f5f))
+* **admin:** user view nb mesures ([80ad68a](https://github.com/SocialGouv/emjpm/commit/80ad68adf4e2fc1937b1bd483bd8ff9ed9bda7ed))
+* **liste-blanche:** improve navigation ([5d40982](https://github.com/SocialGouv/emjpm/commit/5d40982d8895b798fadbbd58bef75517cc0bbbc7))
+* **navigation:** selectable text + newtab on all ([06fab93](https://github.com/SocialGouv/emjpm/commit/06fab93d439c6e51b44d94afc3588293c9d424e1))
+* **search:** magistrat mandataires +fix searchbar ([1c04764](https://github.com/SocialGouv/emjpm/commit/1c0476419a08c66a4a5adcd83a0d443ab426bae7))
+* **search-tgrm:** wip + optimmize researches ([7e1c8cf](https://github.com/SocialGouv/emjpm/commit/7e1c8cfd227d9be66753ecd346515391f2c99ef9))
+* **ti:** keep sync nb_mesures ([3156573](https://github.com/SocialGouv/emjpm/commit/31565732c6b71e63cb811801da1aab654b0a68a8))
+
+
+
+
+
 ## [25.112.5](https://github.com/SocialGouv/emjpm/compare/v25.112.4...v25.112.5) (2021-04-20)
 
 
