@@ -5,6 +5,7 @@
     "dev:prod": "docker-compose -f docker-compose.build.yaml up --build -d",
     "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
     "dev:restore-dump": "scripts/dev/restore-dump",
+    "dev:docker-compose-restore-dump": "scripts/dev/docker-compose-restore-dump",
     "dev:up": "docker-compose up --build -d",
     "dev:log": "docker-compose logs -f",
     "dev:stop": "docker-compose down",

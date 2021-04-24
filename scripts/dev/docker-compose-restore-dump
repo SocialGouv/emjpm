@@ -1,0 +1,11 @@
+#!/bin/sh
+
+docker-compose down
+docker-compose up -d db
+
+while ! nc -z localhost 5434; do
+  sleep 2
+done
+
+$(dirname $0)/restore-dump
+docker-compose up --build -d
