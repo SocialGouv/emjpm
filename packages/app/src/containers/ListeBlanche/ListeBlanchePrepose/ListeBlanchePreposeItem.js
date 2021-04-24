@@ -9,11 +9,6 @@ export function ListeBlanchePreposeItem(props) {
   const { mandataire } = item;
   const { lb_user } = mandataire;
 
-  if (!lb_user) {
-    console.error("missing lb_user", item);
-    return null;
-  }
-
   const { lb_user_etablissements: etablissements = [] } = lb_user;
 
   const to = getHref && getHref(item, props);
