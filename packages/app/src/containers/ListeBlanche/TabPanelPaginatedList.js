@@ -32,6 +32,12 @@ function getRequestFilters(filters) {
         },
       },
     };
+    if (filters.departementFinanceur) {
+      individuelDepartementFilters.mandataire.lb_user.lb_departements.departement_financeur = {
+        _eq: filters.departementFinanceur === true,
+      };
+    }
+
     const preposeDepartementFilter = {
       mandataire: {
         lb_user: {
@@ -67,13 +73,18 @@ function getRequestFilters(filters) {
         departementsFilter.push(serviceDepartementFilters);
     }
     requestFilters._or = departementsFilter;
-  }
-
-  if (filters.departementFinanceur) {
-    requestFilters.lb_departements = {
-      ...requestFilters.lb_departements,
-      departement_financeur: { _eq: filters.departementFinanceur === true },
-    };
+  } else {
+    if (filters.departementFinanceur) {
+      requestFilters.mandataire = {
+        lb_user: {
+          lb_departements: {
+            departement_financeur: {
+              _eq: true,
+            },
+          },
+        },
+      };
+    }
   }
 
   return requestFilters;

@@ -20,7 +20,7 @@ function ListeBlancheFilter() {
   const { loading, error, filters, onFilterChange } = useContext(
     FiltersContextSerializable
   );
-  const { departementFinanceur, type = "mandataire", search, siret } = filters;
+  const { departementFinanceur, search } = filters;
 
   const { departements } = useDepartements({ all: true });
 
@@ -124,21 +124,19 @@ function ListeBlancheFilter() {
                 placeholder="nom, prénom, email ou SIRET"
               />
             </Box>
-            {type === "mandataire" && (
-              <Box mr={1} pt={2} width="100px">
-                <CheckBox
-                  instanceId={"filters-departement-financeur"}
-                  label="Financé"
-                  name="departementFinanceur"
-                  isChecked={departementFinanceur || false}
-                  onChange={() =>
-                    onFilterChange({
-                      departementFinanceur: !departementFinanceur,
-                    })
-                  }
-                />
-              </Box>
-            )}
+            <Box mr={1} pt={2} width="100px">
+              <CheckBox
+                instanceId={"filters-departement-financeur"}
+                label="Financé"
+                name="departementFinanceur"
+                isChecked={departementFinanceur || false}
+                onChange={() =>
+                  onFilterChange({
+                    departementFinanceur: !departementFinanceur,
+                  })
+                }
+              />
+            </Box>
           </Flex>
         </Flex>
       </Card>
