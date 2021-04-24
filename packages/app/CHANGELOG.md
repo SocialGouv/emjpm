@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.113.2](https://github.com/SocialGouv/emjpm/compare/v25.113.1...v25.113.2) (2021-04-24)
+
+
+### Bug Fixes
+
+* **lb-filter:** departement financeur ([f983420](https://github.com/SocialGouv/emjpm/commit/f9834206fa90b546cbc6d74e7221a7a9ad663823))
+
+
+
+
+
 ## [25.113.1](https://github.com/SocialGouv/emjpm/compare/v25.113.0...v25.113.1) (2021-04-24)
 
 **Note:** Version bump only for package @emjpm/app
