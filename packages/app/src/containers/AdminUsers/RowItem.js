@@ -46,7 +46,7 @@ export default function RowItem({ item }) {
           dispo_max = mandataire?.dispo_max || 0;
           break;
         case "service":
-          const [service] = service_members;
+          const service = service_members[0]?.service;
           mesures_in_progress = service?.mesures_in_progress || 0;
           mesures_awaiting = service?.mesures_awaiting || 0;
           dispo_max = service?.dispo_max || 0;
