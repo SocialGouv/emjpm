@@ -108,10 +108,6 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)/delete",
   },
   {
-    Component: require("~/pages/direction/donnees-demographiques").default,
-    path: "/direction/donnees-demographiques",
-  },
-  {
     Component: require("~/pages/mandataires/mesures/[mesure_id]/edit").default,
     path: "/mandataires/mesures/:mesure_id(\\d+)/edit",
   },

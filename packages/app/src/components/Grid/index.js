@@ -1,10 +1,18 @@
 import FlexWrapper from "./FlexWrapper";
 import BoxWrapper from "./BoxWrapper";
-import { fourColumnStyle, twoColumnStyle, wrapperStyle } from "./style";
+import {
+  sixColumnStyle,
+  fiveColumnStyle,
+  fourColumnStyle,
+  twoColumnStyle,
+  wrapperStyle,
+} from "./style";
 
 export default {
   BoxWrapper,
   FlexWrapper,
+  sixColumnStyle,
+  fiveColumnStyle,
   fourColumnStyle,
   twoColumnStyle,
   wrapperStyle,
@@ -12,6 +20,8 @@ export default {
 export {
   BoxWrapper,
   FlexWrapper,
+  sixColumnStyle,
+  fiveColumnStyle,
   fourColumnStyle,
   twoColumnStyle,
   wrapperStyle,

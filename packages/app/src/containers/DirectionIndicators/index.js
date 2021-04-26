@@ -1,15 +1,3 @@
-import { AvailableMesureIndicator } from "./AvailableMesureIndicator";
-import { ClosedMesureIndicator } from "./ClosedMesureIndicator";
-import { EtablissementIndicator } from "./EtablissementIndicator";
-import { MandatairesIndicator } from "./MandatairesIndicator";
-import { OpenMesureIndicator } from "./OpenMesureIndicator";
-import { ServicesIndicator } from "./ServicesIndicator";
+import DirectionStatsKPI from "./DirectionStatsKPI";
 
-export {
-  ClosedMesureIndicator,
-  OpenMesureIndicator,
-  AvailableMesureIndicator,
-  ServicesIndicator,
-  MandatairesIndicator,
-  EtablissementIndicator,
-};
+export { DirectionStatsKPI };
