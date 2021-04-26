@@ -45,9 +45,14 @@ rules:
           - useDebugValue
           - name: React
             isDefault: true
+        "react-router-dom":
+          - useHistory
         "@apollo/client":
           - useQuery
           - useMutation
+        "~/hooks/useQueryReady":
+          - name: useQueryReady
+            isDefault: true
         "~/hooks/useUser":
           - name: useUser
             isDefault: true
