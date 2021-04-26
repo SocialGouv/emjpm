@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.114.0](https://github.com/SocialGouv/emjpm/compare/v25.113.2...v25.114.0) (2021-04-26)
+
+
+### Features
+
+* **enquete:** direction reponse validation ([44bccd7](https://github.com/SocialGouv/emjpm/commit/44bccd7ac441b470df739aa15088056b174ebecc))
+
+
+
+
+
 ## [25.113.2](https://github.com/SocialGouv/emjpm/compare/v25.113.1...v25.113.2) (2021-04-24)
 
 **Note:** Version bump only for package @emjpm/api

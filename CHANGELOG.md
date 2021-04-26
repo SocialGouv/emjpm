@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.114.0](https://github.com/SocialGouv/emjpm/compare/v25.113.2...v25.114.0) (2021-04-26)
+
+
+### Bug Fixes
+
+* **admin:** users services nb mesures ([f3981a7](https://github.com/SocialGouv/emjpm/commit/f3981a7213bfd6db4a9e6b8eb4d06866bb5d05a6))
+* **liste-blanche:** show lb without user ([eadcebd](https://github.com/SocialGouv/emjpm/commit/eadcebdaa639b253ccc586a012e317d0b62493c6))
+
+
+### Features
+
+* **enquete:** direction reponse validation ([44bccd7](https://github.com/SocialGouv/emjpm/commit/44bccd7ac441b470df739aa15088056b174ebecc))
+
+
+
+
+
 ## [25.113.2](https://github.com/SocialGouv/emjpm/compare/v25.113.1...v25.113.2) (2021-04-24)
 
 
