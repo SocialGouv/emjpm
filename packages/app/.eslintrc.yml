@@ -45,3 +45,9 @@ rules:
           - useDebugValue
           - name: React
             isDefault: true
+        "@apollo/client":
+          - useQuery
+          - useMutation
+        "~/hooks/useUser":
+          - name: useUser
+            isDefault: true
