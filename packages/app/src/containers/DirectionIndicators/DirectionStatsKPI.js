@@ -106,11 +106,10 @@ export default function DirectionStatsKPI() {
             error={error}
             loading={loading}
             data={data}
-            load={(data) => {
-              const { available_mesures_nb } = data.stat_available_mesures;
-              return available_mesures_nb ? Number(available_mesures_nb) : 0;
-            }}
-            title="Moyenne de disponibilités"
+            load={(data) =>
+              data.stat_available_mesures.available_mesures_nb_global
+            }
+            title="Disponibilités globales"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -118,10 +117,9 @@ export default function DirectionStatsKPI() {
             error={error}
             loading={loading}
             data={data}
-            load={(data) => {
-              const { available_mesures_nb } = data.stat_available_mesures;
-              return available_mesures_nb ? Number(available_mesures_nb) : 0;
-            }}
+            load={(data) =>
+              data.stat_available_mesures.available_mesures_nb_real
+            }
             title="Places disponibles"
           />
         </Box>
@@ -130,10 +128,9 @@ export default function DirectionStatsKPI() {
             error={error}
             loading={loading}
             data={data}
-            load={(data) => {
-              const { available_mesures_nb } = data.stat_available_mesures;
-              return available_mesures_nb ? Number(available_mesures_nb) : 0;
-            }}
+            load={(data) =>
+              data.stat_available_mesures.available_mesures_nb_over
+            }
             title="Dépassement capacité"
           />
         </Box>
@@ -142,10 +139,9 @@ export default function DirectionStatsKPI() {
             error={error}
             loading={loading}
             data={data}
-            load={(data) => {
-              const { available_mesures_nb } = data.stat_available_mesures;
-              return available_mesures_nb ? Number(available_mesures_nb) : 0;
-            }}
+            load={(data) =>
+              data.stat_available_mesures.available_mesures_nb_unknown_mesures
+            }
             title="Dispo max inconnue mesures"
           />
         </Box>
@@ -155,8 +151,12 @@ export default function DirectionStatsKPI() {
             loading={loading}
             data={data}
             load={(data) => {
-              const { available_mesures_nb } = data.stat_available_mesures;
-              return available_mesures_nb ? Number(available_mesures_nb) : 0;
+              const {
+                available_mesures_nb_unknown_gestion,
+              } = data.stat_available_mesures;
+              return available_mesures_nb_unknown_gestion
+                ? Number(available_mesures_nb_unknown_gestion)
+                : 0;
             }}
             title="Dispo max inconnues gestion"
           />
