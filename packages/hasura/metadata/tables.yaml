@@ -7742,6 +7742,14 @@
     schema: public
     name: view_lb
   object_relationships:
+  - name: lb_user
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: lb_users
+        column_mapping:
+          lb_user_id: id
   - name: mandataire
     using:
       manual_configuration:
@@ -7763,12 +7771,11 @@
     permission:
       columns:
       - uid
-      - id
+      - lb_user_id
       - service_id
       - mandataire_id
       - user_type
       - nom
-      - departement_code
       - siret
       - code_postal
       - ville

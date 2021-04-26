@@ -8,8 +8,8 @@ export function ListeBlancheIndividuelItem(props) {
   const { item, getHref, onClick } = props;
   const to = getHref && getHref(item, props);
 
-  const { mandataire } = item;
-  const { lb_user } = mandataire;
+  const { lb_user } = item;
+  const { mandataire } = lb_user;
 
   return (
     <Card key={item.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
@@ -36,9 +36,7 @@ export function ListeBlancheIndividuelItem(props) {
           </Flex>
           <Flex width="10%" flexDirection="column">
             <Text sx={labelStyle}>Utilisateur</Text>
-            <Text sx={descriptionStyle}>
-              {lb_user.mandataire ? "oui" : "non"}
-            </Text>
+            <Text sx={descriptionStyle}>{mandataire ? "oui" : "non"}</Text>
           </Flex>
 
           <Flex width="30%" flexDirection="column">

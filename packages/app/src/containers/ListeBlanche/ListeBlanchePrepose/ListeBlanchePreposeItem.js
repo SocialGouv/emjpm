@@ -6,8 +6,7 @@ import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "../style";
 
 export function ListeBlanchePreposeItem(props) {
   const { item, onClick, getHref } = props;
-  const { mandataire } = item;
-  const { lb_user } = mandataire;
+  const { lb_user } = item;
 
   const { lb_user_etablissements: etablissements = [] } = lb_user;
 

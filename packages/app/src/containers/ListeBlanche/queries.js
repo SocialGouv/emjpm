@@ -122,7 +122,6 @@ export const SEARCH_VIEW_LB = gql`
       where: $filters
       order_by: { nom: asc_nulls_last }
     ) {
-      id
       nom
       email
       siret
@@ -141,34 +140,34 @@ export const SEARCH_VIEW_LB = gql`
         nom
         telephone
       }
-      mandataire {
-        id
-        user {
+      lb_user {
+        nom
+        prenom
+        mandataire {
           id
-          nom
-          prenom
-        }
-        lb_user {
-          nom
-          prenom
-          lb_user_etablissements {
-            etablissement {
-              id
-              rslongue
-              departement {
-                id
-                nom
-              }
-            }
-            etablissement_rattachement
-          }
-          lb_departements {
+          user {
             id
-            departement_financeur
+            nom
+            prenom
+          }
+        }
+        lb_user_etablissements {
+          etablissement {
+            id
+            rslongue
             departement {
               id
               nom
             }
+          }
+          etablissement_rattachement
+        }
+        lb_departements {
+          id
+          departement_financeur
+          departement {
+            id
+            nom
           }
         }
       }
