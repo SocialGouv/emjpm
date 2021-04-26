@@ -400,6 +400,10 @@
       filter: {}
 - table:
     schema: public
+    name: enquete_reponse_status
+  is_enum: true
+- table:
+    schema: public
     name: enquete_reponses
   object_relationships:
   - name: departement
@@ -634,8 +638,20 @@
   select_permissions:
   - role: direction
     permission:
-      columns: []
-      filter: {}
+      columns:
+      - id
+      - created_at
+      - submitted_at
+      - enquete_id
+      - mandataire_id
+      - service_id
+      - status
+      - uploaded_on
+      - user_type
+      - departement_code
+      filter:
+        status:
+          _ne: draft
   - role: direction_nationale
     permission:
       columns:
@@ -721,6 +737,25 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - enquete_id
+      - id
+      - mandataire_id
+      - service_id
+      - created_at
+      - submitted_at
+      - uploaded_on
+      - departement_code
+      - status
+      - user_type
+      filter:
+        status:
+          _ne: draft
+      check:
+        status:
+          _ne: draft
   - role: individuel
     permission:
       columns:
@@ -1256,6 +1291,89 @@
       - tutelle_etablissement_sortie_mesures
       filter: {}
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - curatelle_renforcee_etablissement_debut_annee
+      - curatelle_renforcee_etablissement_fin_annee
+      - curatelle_renforcee_domicile_debut_annee
+      - curatelle_renforcee_domicile_fin_annee
+      - curatelle_simple_etablissement_debut_annee
+      - curatelle_simple_etablissement_fin_annee
+      - curatelle_simple_domicile_debut_annee
+      - curatelle_simple_domicile_fin_annee
+      - tutelle_etablissement_debut_annee
+      - tutelle_etablissement_fin_annee
+      - tutelle_domicile_debut_annee
+      - tutelle_domicile_fin_annee
+      - accompagnement_judiciaire_etablissement_debut_annee
+      - accompagnement_judiciaire_etablissement_fin_annee
+      - accompagnement_judiciaire_domicile_debut_annee
+      - accompagnement_judiciaire_domicile_fin_annee
+      - curatelle_biens_etablissement_debut_annee
+      - curatelle_biens_etablissement_fin_annee
+      - curatelle_biens_domicile_debut_annee
+      - curatelle_biens_domicile_fin_annee
+      - curatelle_personne_etablissement_debut_annee
+      - curatelle_personne_etablissement_fin_annee
+      - curatelle_personne_domicile_debut_annee
+      - curatelle_personne_domicile_fin_annee
+      - revisions_main_levee
+      - revisions_masp
+      - revisions_reconduction
+      - revisions_changement
+      - revisions_autre
+      - sorties_main_levee
+      - sorties_deces
+      - sorties_masp
+      - curatelle_renforcee_etablissement_mesures_nouvelles
+      - curatelle_renforcee_etablissement_sortie_mesures
+      - curatelle_renforcee_domicile_mesures_nouvelles
+      - curatelle_renforcee_domicile_sortie_mesures
+      - curatelle_simple_etablissement_mesures_nouvelles
+      - curatelle_simple_etablissement_sortie_mesures
+      - curatelle_simple_domicile_mesures_nouvelles
+      - curatelle_simple_domicile_sortie_mesures
+      - tutelle_etablissement_mesures_nouvelles
+      - tutelle_etablissement_sortie_mesures
+      - tutelle_domicile_mesures_nouvelles
+      - tutelle_domicile_sortie_mesures
+      - accompagnement_judiciaire_etablissement_mesures_nouvelles
+      - accompagnement_judiciaire_etablissement_sortie_mesures
+      - accompagnement_judiciaire_domicile_mesures_nouvelles
+      - accompagnement_judiciaire_domicile_sortie_mesures
+      - curatelle_biens_etablissement_mesures_nouvelles
+      - curatelle_biens_etablissement_sortie_mesures
+      - curatelle_biens_domicile_mesures_nouvelles
+      - curatelle_biens_domicile_sortie_mesures
+      - curatelle_personne_etablissement_mesures_nouvelles
+      - curatelle_personne_etablissement_sortie_mesures
+      - curatelle_personne_domicile_mesures_nouvelles
+      - curatelle_personne_domicile_sortie_mesures
+      - subroge_tuteur_createur_debut_annee
+      - subroge_tuteur_createur_mesures_nouvelles
+      - subroge_tuteur_createur_sortie_mesures
+      - subroge_tuteur_createur_fin_annee
+      - sauvegarde_justice_debut_annee
+      - sauvegarde_justice_mesures_nouvelles
+      - sauvegarde_justice_sortie_mesures
+      - sauvegarde_justice_fin_annee
+      - mandat_adhoc_majeur_debut_annee
+      - mandat_adhoc_majeur_mesures_nouvelles
+      - mandat_adhoc_majeur_sortie_mesures
+      - mandat_adhoc_majeur_fin_annee
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: individuel
     permission:
       columns:
@@ -1597,6 +1715,41 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - annee_agrement
+      - nb_departements
+      - annee_debut_activite
+      - cumul_delegue_service
+      - cumul_delegue_service_etp
+      - cumul_prepose
+      - cumul_prepose_etp
+      - debut_activite_avant_2009
+      - niveau_qualification
+      - secretaire_specialise
+      - nb_mesures_dep_finance
+      - nb_mesures_dep_autres
+      - cnc_annee_obtention
+      - cnc_heures_formation
+      - secretaire_specialise_etp_n1
+      - secretaire_specialise_etp_n2
+      - secretaire_specialise_etp_n3
+      - secretaire_specialise_etp_n4
+      - secretaire_specialise_etp_n5
+      - secretaire_specialise_etp_n6
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: individuel
     permission:
       columns:
@@ -1697,6 +1850,28 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - charges_personnel
+      - charges_preposes
+      - charges_fonctionnement
+      - produits_bareme_prelevements
+      - autre_produits
+      - financement_public
+      - aide_sociale_conseil_departemental
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: prepose
     permission:
       columns:
@@ -1798,6 +1973,34 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - benevole
+      - forme_juridique
+      - sexe
+      - anciennete
+      - estimation_etp
+      - secretaire_specialise_etp
+      - local_professionnel
+      - departement
+      - region
+      - nom
+      - exerce_seul_activite
+      - exerce_secretaires_specialises
+      - tranche_age
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: individuel
     permission:
       columns:
@@ -1874,6 +2077,30 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - departement
+      - region
+      - raison_sociale
+      - personnalite_juridique_etablissement
+      - total_mesures_etablissements
+      - nombre_lits_journee_hospitalisation
+      - actions_information_tuteurs_familiaux
+      - activite_exercee_par
+      - etablissements_type
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: prepose
     permission:
       columns:
@@ -2662,6 +2889,136 @@
               user_id:
                 _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - tutelle_age_inf_25_ans_homme
+      - tutelle_age_inf_25_ans_femme
+      - tutelle_age_25_39_ans_homme
+      - tutelle_age_25_39_ans_femme
+      - tutelle_age_40_59_ans_homme
+      - tutelle_age_40_59_ans_femme
+      - tutelle_age_60_74_ans_homme
+      - tutelle_age_60_74_ans_femme
+      - tutelle_age_sup_75_ans_homme
+      - tutelle_age_sup_75_ans_femme
+      - curatelle_age_inf_25_ans_homme
+      - curatelle_age_inf_25_ans_femme
+      - curatelle_age_25_39_ans_homme
+      - curatelle_age_25_39_ans_femme
+      - curatelle_age_40_59_ans_homme
+      - curatelle_age_40_59_ans_femme
+      - curatelle_age_60_74_ans_homme
+      - curatelle_age_60_74_ans_femme
+      - curatelle_age_sup_75_ans_homme
+      - curatelle_age_sup_75_ans_femme
+      - maj_age_inf_25_ans_homme
+      - maj_age_inf_25_ans_femme
+      - maj_age_25_39_ans_homme
+      - maj_age_25_39_ans_femme
+      - maj_age_40_59_ans_homme
+      - maj_age_40_59_ans_femme
+      - maj_age_60_74_ans_homme
+      - maj_age_60_74_ans_femme
+      - maj_age_sup_75_ans_homme
+      - maj_age_sup_75_ans_femme
+      - sauvegarde_justice_age_inf_25_ans_homme
+      - sauvegarde_justice_age_inf_25_ans_femme
+      - sauvegarde_justice_age_25_39_ans_homme
+      - sauvegarde_justice_age_25_39_ans_femme
+      - sauvegarde_justice_age_40_59_ans_homme
+      - sauvegarde_justice_age_40_59_ans_femme
+      - sauvegarde_justice_age_60_74_ans_homme
+      - sauvegarde_justice_age_60_74_ans_femme
+      - sauvegarde_justice_age_sup_75_ans_homme
+      - sauvegarde_justice_age_sup_75_ans_femme
+      - autre_mesures_age_inf_25_ans_homme
+      - autre_mesures_age_inf_25_ans_femme
+      - autre_mesures_age_25_39_ans_homme
+      - autre_mesures_age_25_39_ans_femme
+      - autre_mesures_age_40_59_ans_homme
+      - autre_mesures_age_40_59_ans_femme
+      - autre_mesures_age_60_74_ans_homme
+      - autre_mesures_age_60_74_ans_femme
+      - autre_mesures_age_sup_75_ans_homme
+      - autre_mesures_age_sup_75_ans_femme
+      - tutelle_anciennete_inf_1_an
+      - tutelle_anciennete_1_3_ans
+      - tutelle_anciennete_3_5_ans
+      - tutelle_anciennete_5_10_ans
+      - tutelle_anciennete_sup_10_ans
+      - curatelle_anciennete_inf_1_an
+      - curatelle_anciennete_1_3_ans
+      - curatelle_anciennete_3_5_ans
+      - curatelle_anciennete_5_10_ans
+      - curatelle_anciennete_sup_10_ans
+      - maj_anciennete_inf_1_an
+      - maj_anciennete_1_3_ans
+      - maj_anciennete_3_5_ans
+      - maj_anciennete_5_10_ans
+      - maj_anciennete_sup_10_ans
+      - sauvegarde_justice_anciennete_inf_1_an
+      - sauvegarde_justice_anciennete_1_3_ans
+      - sauvegarde_justice_anciennete_3_5_ans
+      - sauvegarde_justice_anciennete_5_10_ans
+      - sauvegarde_justice_anciennete_sup_10_ans
+      - autre_mesures_anciennete_inf_1_an
+      - autre_mesures_anciennete_1_3_ans
+      - autre_mesures_anciennete_3_5_ans
+      - autre_mesures_anciennete_5_10_ans
+      - autre_mesures_anciennete_sup_10_ans
+      - tutelle_etablissement_personne_handicapee
+      - tutelle_service_personne_handicapee
+      - tutelle_ehpad
+      - tutelle_autre_etablissement_personne_agee
+      - tutelle_chrs
+      - tutelle_service_hospitalier_soins_longue_duree
+      - tutelle_service_psychiatrique
+      - tutelle_autre_service
+      - curatelle_etablissement_personne_handicapee
+      - curatelle_service_personne_handicapee
+      - curatelle_ehpad
+      - curatelle_autre_etablissement_personne_agee
+      - curatelle_chrs
+      - curatelle_service_hospitalier_soins_longue_duree
+      - curatelle_service_psychiatrique
+      - curatelle_autre_service
+      - maj_etablissement_personne_handicapee
+      - maj_service_personne_handicapee
+      - maj_ehpad
+      - maj_autre_etablissement_personne_agee
+      - maj_chrs
+      - maj_service_hospitalier_soins_longue_duree
+      - maj_service_psychiatrique
+      - maj_autre_service
+      - sauvegarde_justice_etablissement_personne_handicapee
+      - sauvegarde_justice_service_personne_handicapee
+      - sauvegarde_justice_ehpad
+      - sauvegarde_justice_autre_etablissement_personne_agee
+      - sauvegarde_justice_chrs
+      - sauvegarde_justice_service_hospitalier_soins_longue_duree
+      - sauvegarde_justice_service_psychiatrique
+      - sauvegarde_justice_autre_service
+      - autre_mesures_etablissement_personne_handicapee
+      - autre_mesures_service_personne_handicapee
+      - autre_mesures_ehpad
+      - autre_mesures_autre_etablissement_personne_agee
+      - autre_mesures_chrs
+      - autre_mesures_service_hospitalier_soins_longue_duree
+      - autre_mesures_service_psychiatrique
+      - autre_mesures_autre_service
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: individuel
     permission:
       columns:
@@ -3117,6 +3474,29 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - nb_preposes_mjpm
+      - nb_preposes_mjpm_etp
+      - formation_preposes_mjpm
+      - niveaux_qualification
+      - nb_preposes_homme
+      - nb_preposes_femme
+      - nb_autre_personnel
+      - nb_autre_personnel_etp
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: prepose
     permission:
       columns:
@@ -3194,6 +3574,33 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - tutelle
+      - curatelle_simple
+      - curatelle_renforcee
+      - sauvegarde_autres_mesures
+      - maj
+      - aah
+      - pch
+      - asi
+      - rsa
+      - als_apl
+      - aspa
+      - apa
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: prepose
     permission:
       columns:
@@ -3282,6 +3689,28 @@
             user_id:
               _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - aah
+      - pch
+      - asi
+      - rsa
+      - als_apl
+      - aspa
+      - apa
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: individuel
     permission:
       columns:
@@ -3347,6 +3776,27 @@
               user_id:
                 _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - departement
+      - region
+      - nom
+      - nb_structures_concernees
+      - affiliation_federation
+      - type_organisme_gestionnaire
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: service
     permission:
       columns:
@@ -3375,6 +3825,39 @@
     using:
       foreign_key_constraint_on: enquete_reponses_id
   select_permissions:
+  - role: direction
+    permission:
+      columns:
+      - id
+      - created_at
+      - last_update
+      - nb_delegues
+      - nb_delegues_etp
+      - nb_delegues_cnc
+      - nb_delegues_en_formation
+      - total_heures_delegues_en_formation
+      - nb_delegues_non_formes
+      - nb_delegues_niveau1
+      - nb_delegues_niveau1_etp
+      - nb_delegues_niveau2
+      - nb_delegues_niveau2_etp
+      - nb_delegues_niveau3
+      - nb_delegues_niveau3_etp
+      - nb_delegues_niveau4
+      - nb_delegues_niveau4_etp
+      - nb_delegues_niveau5
+      - nb_delegues_niveau5_etp
+      - nb_delegues_niveau6
+      - nb_delegues_niveau6_etp
+      - nb_delegues_homme
+      - nb_delegues_homme_etp
+      - nb_delegues_femme
+      - nb_delegues_femme_etp
+      - enquete_reponses_id
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: service
     permission:
       columns:
@@ -3411,6 +3894,43 @@
               user_id:
                 _eq: X-Hasura-User-Id
   update_permissions:
+  - role: direction
+    permission:
+      columns:
+      - nb_delegues_etp
+      - nb_delegues_femme_etp
+      - nb_delegues_homme_etp
+      - nb_delegues_niveau1_etp
+      - nb_delegues_niveau2_etp
+      - nb_delegues_niveau3_etp
+      - nb_delegues_niveau4_etp
+      - nb_delegues_niveau5_etp
+      - nb_delegues_niveau6_etp
+      - total_heures_delegues_en_formation
+      - enquete_reponses_id
+      - id
+      - nb_delegues
+      - nb_delegues_cnc
+      - nb_delegues_en_formation
+      - nb_delegues_femme
+      - nb_delegues_homme
+      - nb_delegues_niveau1
+      - nb_delegues_niveau2
+      - nb_delegues_niveau3
+      - nb_delegues_niveau4
+      - nb_delegues_niveau5
+      - nb_delegues_niveau6
+      - nb_delegues_non_formes
+      - created_at
+      - last_update
+      filter:
+        enquete_reponse:
+          status:
+            _ne: draft
+      check:
+        enquete_reponse:
+          status:
+            _ne: draft
   - role: service
     permission:
       columns:

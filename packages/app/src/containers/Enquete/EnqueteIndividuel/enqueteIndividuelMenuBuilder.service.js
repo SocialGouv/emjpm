@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import {
   EnqueteActiviteAccompagnementJudiciaire,
   EnqueteActiviteCausesSortiesDispositif,
@@ -26,25 +27,74 @@ import {
 } from "../EnquetePopulations";
 import { EnqueteIndividuelSubmit } from "./EnqueteIndividuelSubmit";
 import { EnqueteIndividuelWelcome } from "./EnqueteIndividuelWelcome";
+import EnqueteDirectionStatut from "../EnqueteDirection/Statut";
+import EnqueteDirectionValidation from "../EnqueteDirection/Validation";
+import useUser from "~/hooks/useUser";
 
 export const enqueteIndividuelMenuBuilder = {
-  buildMenuSections,
+  useMenuSections,
 };
 
-function buildMenuSections(enqueteReponse, enquete) {
+function useMenuSections(enqueteReponse, enquete) {
+  const { type: userType } = useUser();
+  return useMemo(() => buildMenuSections(enqueteReponse, enquete, userType), [
+    enqueteReponse,
+    enquete,
+    userType,
+  ]);
+}
+
+function buildMenuSections(enqueteReponse, enquete, userType) {
   const status = enqueteReponse.enquete_reponse_validation_status;
 
+  const isDirection = userType === "direction";
+
+  const welcomeSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionStatut,
+            label: "Statut",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteIndividuelWelcome,
+            label: "Bienvenue",
+            status: "valid",
+          },
+        ],
+      };
+
+  const endSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionValidation,
+            label: "Validation",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: enqueteReponse.status === "draft" ? "empty" : "valid",
+        steps: [
+          {
+            component: EnqueteIndividuelSubmit,
+            label: "Envoi de vos réponses",
+            status: status.global === "valid" ? "valid" : "empty",
+          },
+        ],
+      };
+
   const menu = [
-    {
-      status: "valid",
-      steps: [
-        {
-          component: EnqueteIndividuelWelcome,
-          label: "Bienvenue",
-          status: "valid",
-        },
-      ],
-    },
+    welcomeSection,
     {
       label: "Vos informations",
       status: status.informations.global,
@@ -169,16 +219,7 @@ function buildMenuSections(enqueteReponse, enquete) {
         },
       ],
     },
-    {
-      status: enqueteReponse.status === "draft" ? "empty" : "valid",
-      steps: [
-        {
-          component: EnqueteIndividuelSubmit,
-          label: "Envoi de vos réponses",
-          status: status.global === "valid" ? "valid" : "empty",
-        },
-      ],
-    },
+    endSection,
   ];
 
   return menu;

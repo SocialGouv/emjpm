@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useEffect } from "react";
 import { Box, Flex } from "rebass";
 
 import { EnqueteMenuStepper } from "../EnqueteCommon/EnqueteMenuStepper";
@@ -9,9 +9,9 @@ import { enquetePreposeMenuBuilder } from "./enquetePreposeMenuBuilder.service";
 export function EnquetePrepose(props) {
   const { enquete, enqueteReponse, currentStep, navigateToStep } = props;
 
-  const sections = useMemo(
-    () => enquetePreposeMenuBuilder.buildMenuSections(enqueteReponse, enquete),
-    [enquete, enqueteReponse]
+  const sections = enquetePreposeMenuBuilder.useMenuSections(
+    enqueteReponse,
+    enquete
   );
 
   const {

@@ -35,20 +35,75 @@ import {
 } from "../EnquetePreposePrestationsSociales";
 import { EnquetePreposeSubmit } from "./EnquetePreposeSubmit";
 import { EnquetePreposeWelcome } from "./EnquetePreposeWelcome";
+import EnqueteDirectionStatut from "../EnqueteDirection/Statut";
+import EnqueteDirectionValidation from "../EnqueteDirection/Validation";
+import { useMemo } from "react";
+import useUser from "~/hooks/useUser";
 
-function buildMenuSections(enqueteReponse, enquete) {
+export const enquetePreposeMenuBuilder = {
+  useMenuSections,
+};
+
+function useMenuSections(enqueteReponse, enquete) {
+  const { type: userType } = useUser();
+  return useMemo(() => buildMenuSections(enqueteReponse, enquete, userType), [
+    enqueteReponse,
+    enquete,
+    userType,
+  ]);
+}
+
+function buildMenuSections(enqueteReponse, enquete, userType) {
   const status = enqueteReponse.enquete_reponse_validation_status;
+
+  const isDirection = userType === "direction";
+
+  const welcomeSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionStatut,
+            label: "Statut",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: "valid",
+        steps: [
+          {
+            component: EnquetePreposeWelcome,
+            label: "Bienvenue",
+            status: "valid",
+          },
+        ],
+      };
+
+  const endSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionValidation,
+            label: "Validation",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: enqueteReponse.status === "draft" ? "empty" : "valid",
+        steps: [
+          {
+            component: EnquetePreposeSubmit,
+            label: "Envoi de vos réponses",
+            status: status.global === "valid" ? "valid" : "empty",
+          },
+        ],
+      };
+
   const menu = [
-    {
-      status: "valid",
-      steps: [
-        {
-          component: EnquetePreposeWelcome,
-          label: "Bienvenue",
-          status: "valid",
-        },
-      ],
-    },
+    welcomeSection,
     {
       label: "Modalité d'exercice",
       status: status.modalitesExercice.global,
@@ -219,21 +274,8 @@ function buildMenuSections(enqueteReponse, enquete) {
         },
       ],
     },
-    {
-      status: enqueteReponse.status === "draft" ? "empty" : "valid",
-      steps: [
-        {
-          component: EnquetePreposeSubmit,
-          label: "Envoi de vos réponses",
-          status: status.global === "valid" ? "valid" : "empty",
-        },
-      ],
-    },
+    endSection,
   ];
 
   return menu;
 }
-
-export const enquetePreposeMenuBuilder = {
-  buildMenuSections,
-};

@@ -22,21 +22,75 @@ import { EnqueteServiceInformations } from "../EnqueteServiceInformations";
 import { EnqueteServicePersonnelFormation } from "../EnqueteServicePersonnelFormation";
 import { EnqueteServiceSubmit } from "./EnqueteServiceSubmit";
 import { EnqueteServiceWelcome } from "./EnqueteServiceWelcome";
+import EnqueteDirectionStatut from "../EnqueteDirection/Statut";
+import EnqueteDirectionValidation from "../EnqueteDirection/Validation";
+import useUser from "~/hooks/useUser";
+import { useMemo } from "react";
 
-function buildMenuSections(enqueteReponse, enquete) {
+export const enqueteServiceMenuBuilder = {
+  useMenuSections,
+};
+
+function useMenuSections(enqueteReponse, enquete) {
+  const { type: userType } = useUser();
+  return useMemo(() => buildMenuSections(enqueteReponse, enquete, userType), [
+    enqueteReponse,
+    enquete,
+    userType,
+  ]);
+}
+
+function buildMenuSections(enqueteReponse, enquete, userType) {
   const status = enqueteReponse.enquete_reponse_validation_status;
 
+  const isDirection = userType === "direction";
+
+  const welcomeSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionStatut,
+            label: "Statut",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteServiceWelcome,
+            label: "Bienvenue",
+            status: "valid",
+          },
+        ],
+      };
+
+  const endSection = isDirection
+    ? {
+        status: "valid",
+        steps: [
+          {
+            component: EnqueteDirectionValidation,
+            label: "Validation",
+            status: "valid",
+          },
+        ],
+      }
+    : {
+        status: enqueteReponse.status === "draft" ? "empty" : "valid",
+        steps: [
+          {
+            component: EnqueteServiceSubmit,
+            label: "Envoi de vos réponses",
+            status: status.global === "valid" ? "valid" : "empty",
+          },
+        ],
+      };
+
   const menu = [
-    {
-      status: "valid",
-      steps: [
-        {
-          component: EnqueteServiceWelcome,
-          label: "Bienvenue",
-          status: "valid",
-        },
-      ],
-    },
+    welcomeSection,
     {
       status: status.informations.global,
       steps: [
@@ -149,21 +203,8 @@ function buildMenuSections(enqueteReponse, enquete) {
         },
       ],
     },
-    {
-      status: enqueteReponse.status === "draft" ? "empty" : "valid",
-      steps: [
-        {
-          component: EnqueteServiceSubmit,
-          label: "Envoi de vos réponses",
-          status: status.global === "valid" ? "valid" : "empty",
-        },
-      ],
-    },
+    endSection,
   ];
 
   return menu;
 }
-
-export const enqueteServiceMenuBuilder = {
-  buildMenuSections,
-};

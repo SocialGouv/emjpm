@@ -75,7 +75,7 @@ export const ENQUETE_DETAILS_LIST = gql`
     $limit: Int!
     $departementCode: String
     $userType: String
-    $status: String
+    $status: enquete_reponse_status_enum
   ) {
     individuels_aggregate: mandataires_aggregate(
       where: {
@@ -106,7 +106,7 @@ export const ENQUETE_DETAILS_LIST = gql`
       where: {
         departement_code: { _eq: $departementCode }
         enquete_id: { _eq: $enqueteId }
-        status: { _eq: "draft" }
+        status: { _eq: draft }
       }
     ) {
       enquete_reponses: aggregate {
@@ -117,7 +117,7 @@ export const ENQUETE_DETAILS_LIST = gql`
       where: {
         departement_code: { _eq: $departementCode }
         enquete_id: { _eq: $enqueteId }
-        status: { _eq: "submitted" }
+        status: { _eq: submitted }
       }
     ) {
       enquete_reponses: aggregate {

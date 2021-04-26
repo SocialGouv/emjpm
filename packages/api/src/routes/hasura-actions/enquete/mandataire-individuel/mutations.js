@@ -464,7 +464,7 @@ module.exports = {
 
   SUBMIT_ENQUETE_REPONSE: `
   mutation submit_enquete_reponse($id: Int!, $submittedAt: timestamptz!) {
-    update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submittedAt, status: "submitted"}) {
+    update_enquete_reponses_by_pk(pk_columns: {id: $id}, _set: {submitted_at: $submittedAt, status: submitted}) {
       id
       departement_code
       mandataire_id

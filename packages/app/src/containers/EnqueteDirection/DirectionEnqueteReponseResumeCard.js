@@ -30,25 +30,17 @@ const descriptionStyle = (style) => ({
   whiteSpace: "nowrap",
 });
 
-function getTypeLabel(user_type) {
-  switch (user_type) {
-    case "individuel":
-      return "Mandataire individuel";
-    case "prepose":
-      return "Mandataire préposé d'établissement";
-    case "service":
-      return "Service";
-  }
-}
+const typeLabels = {
+  individuel: "Mandataire individuel",
+  prepose: "Mandataire préposé d'établissement",
+  service: "Service",
+};
 
-function getStatusLabel(status) {
-  if (status === "draft") {
-    return "En cours";
-  }
-  if (status === "submitted") {
-    return "Réponse reçue";
-  }
-}
+const statusLabels = {
+  draft: "En cours",
+  submitted: "Réponse reçue",
+  validated: "Réponse validée",
+};
 
 export function DirectionEnqueteReponseResumeCard(props) {
   const { item, renderActions } = props;
@@ -56,7 +48,7 @@ export function DirectionEnqueteReponseResumeCard(props) {
     <Card key={item.reponse_id} sx={cardStyle} mb="2">
       <Flex justifyContent="flex-start">
         <Flex width="50%" flexDirection="column">
-          <Text sx={labelStyle}>{getTypeLabel(item.user_type)}</Text>
+          <Text sx={labelStyle}>{typeLabels[item.user_type]}</Text>
           {item.mandataire && item.mandataire.user ? (
             <Flex>
               <Text sx={descriptionStyle("important")}>
@@ -101,7 +93,7 @@ export function DirectionEnqueteReponseResumeCard(props) {
         <Flex width="50%" flexDirection="column">
           <Text sx={labelStyle}>{"Statut"}</Text>
           <Text sx={descriptionStyle("important")}>
-            {getStatusLabel(item.status)}
+            {statusLabels[item.status]}
           </Text>
           <Text sx={descriptionStyle()}>
             {item.submitted_at

@@ -17,6 +17,7 @@ export const ENQUETE_REPONSE_STATUS_OPTIONS = [
   { label: "Tous les status", value: null },
   { label: "En cours", value: "draft" },
   { label: "Réponse reçue", value: "submitted" },
+  { label: "Réponse validée", value: "validated" },
 ];
 const departementsOptionsConfig = {
   nullOption: {

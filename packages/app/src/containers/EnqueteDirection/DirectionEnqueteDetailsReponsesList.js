@@ -152,7 +152,7 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
           currentOffset={criteria.currentOffset}
           setCurrentOffset={(value) => updateCriteria("currentOffset", value)}
           renderActions={(item) => {
-            if (item.status === "submitted") {
+            if (item.status === "submitted" || item.status === "validated") {
               return (
                 <Box mt={1} textAlign="center">
                   <Link

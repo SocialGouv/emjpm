@@ -35,7 +35,7 @@ export function EnquetePopulationsSauvegardeJustice(props) {
       refetchQueries: [
         {
           query: ENQUETE_WITH_REPONSE_STATUS,
-          variables: { enqueteId, userId },
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
         {
           query: ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE,

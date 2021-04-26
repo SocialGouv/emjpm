@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import { useCallback, useEffect, useMemo } from "react";
+import useUser from "~/hooks/useUser";
 
 function getNextPageStep(sections, currentStep) {
   const { step, substep } = currentStep;
@@ -83,7 +84,35 @@ export function useEnqueteForm({
       };
 
   const enqueteReponseStatus = enqueteContext.enqueteReponse.status;
-  const readOnly = enqueteReponseStatus !== "draft";
+
+  const { type: userType } = useUser();
+  let readOnly;
+  switch (userType) {
+    case "direction":
+      switch (enqueteReponseStatus) {
+        case "draft":
+        case "submitted":
+        case "validated":
+        default:
+          readOnly = false;
+          break;
+      }
+      break;
+    case "mandataire":
+    case "prepose":
+    case "individuel":
+    default:
+      switch (enqueteReponseStatus) {
+        case "draft":
+          readOnly = false;
+          break;
+        default:
+        case "submitted":
+          readOnly = true;
+          break;
+      }
+      break;
+  }
 
   useEffect(() => {
     setTimeout(() => {
