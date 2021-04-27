@@ -8,7 +8,6 @@ const availableMesureNbGlobal = require("./available-mesures/global");
 const availableMesureNbOver = require("./available-mesures/over");
 const availableMesureNbReal = require("./available-mesures/real");
 const availableMesureNbUnknownGestion = require("./available-mesures/unknown-gestion");
-const availableMesureNbUnknownMesures = require("./available-mesures/unknown-mesures");
 
 const router = express.Router();
 
@@ -84,17 +83,11 @@ router.post(
         regionId,
       });
 
-      const nbUnknownMesures = await availableMesureNbUnknownMesures({
-        departementCode,
-        regionId,
-      });
-
       return res.status(200).json({
         available_mesures_nb_global: nbGlobal,
         available_mesures_nb_over: nbOver,
         available_mesures_nb_real: nbReal,
         available_mesures_nb_unknown_gestion: nbUnknownGestion,
-        available_mesures_nb_unknown_mesures: nbUnknownMesures,
       });
     } catch (err) {
       return next(err);

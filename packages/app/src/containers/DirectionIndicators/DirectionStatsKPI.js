@@ -107,17 +107,6 @@ export default function DirectionStatsKPI() {
             loading={loading}
             data={data}
             load={(data) =>
-              data.stat_available_mesures.available_mesures_nb_global
-            }
-            title="Disponibilités globales"
-          />
-        </Box>
-        <Box sx={fiveColumnStyle}>
-          <Indicator
-            error={error}
-            loading={loading}
-            data={data}
-            load={(data) =>
               data.stat_available_mesures.available_mesures_nb_real
             }
             title="Places disponibles"
@@ -131,7 +120,7 @@ export default function DirectionStatsKPI() {
             load={(data) =>
               data.stat_available_mesures.available_mesures_nb_over
             }
-            title="Dépassement capacité"
+            title="Surcapacité"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -140,9 +129,9 @@ export default function DirectionStatsKPI() {
             loading={loading}
             data={data}
             load={(data) =>
-              data.stat_available_mesures.available_mesures_nb_unknown_mesures
+              data.stat_available_mesures.available_mesures_nb_global
             }
-            title="Dispo max inconnue mesures"
+            title="Disponibilité totale"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -158,7 +147,7 @@ export default function DirectionStatsKPI() {
                 ? Number(available_mesures_nb_unknown_gestion)
                 : 0;
             }}
-            title="Dispo max inconnues gestion"
+            title="Mandataires capacité non renseignée"
           />
         </Box>
       </FlexWrapper>

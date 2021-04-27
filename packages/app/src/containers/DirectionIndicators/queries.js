@@ -14,7 +14,6 @@ export const GET_DIRECTION_STATS_KPI = gql`
       available_mesures_nb_global
       available_mesures_nb_real
       available_mesures_nb_over
-      available_mesures_nb_unknown_mesures
       available_mesures_nb_unknown_gestion
     }
     stat_opened_mesures(
