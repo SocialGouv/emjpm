@@ -2,26 +2,14 @@ import { Box } from "rebass";
 
 import { AvailabilityMap } from "~/containers/DirectionAvailabilityMap";
 import { DirectionFilters } from "~/containers/DirectionFilters";
-import {
-  AvailableMesureIndicator,
-  ClosedMesureIndicator,
-  EtablissementIndicator,
-  MandatairesIndicator,
-  OpenMesureIndicator,
-  ServicesIndicator,
-} from "~/containers/DirectionIndicators";
+import { DirectionStatsKPI } from "~/containers/DirectionIndicators";
 import { MandatairesActivity } from "~/containers/DirectionMandatairesActivity";
 import { MandatairesDisponibility } from "~/containers/DirectionMandatairesDisponibility";
 import { MandatairesSubNavigation } from "~/containers/DirectionMandatairesSubNavigation";
 import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
 import { LayoutDirection } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
-import {
-  BoxWrapper,
-  FlexWrapper,
-  fourColumnStyle,
-  twoColumnStyle,
-} from "~/components/Grid";
+import { BoxWrapper, FlexWrapper, twoColumnStyle } from "~/components/Grid";
 
 export default function DirectionPage() {
   const user = useUser();
@@ -43,28 +31,7 @@ export default function DirectionPage() {
         <BoxWrapper mt={5} px="1">
           <DirectionFilters />
         </BoxWrapper>
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <Box sx={fourColumnStyle}>
-            <ServicesIndicator />
-          </Box>
-          <Box sx={fourColumnStyle}>
-            <MandatairesIndicator />
-          </Box>
-          <Box sx={fourColumnStyle}>
-            <EtablissementIndicator />
-          </Box>
-          <Box sx={fourColumnStyle}>
-            <AvailableMesureIndicator />
-          </Box>
-        </FlexWrapper>
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <Box sx={fourColumnStyle}>
-            <OpenMesureIndicator />
-          </Box>
-          <Box sx={fourColumnStyle}>
-            <ClosedMesureIndicator />
-          </Box>
-        </FlexWrapper>
+        <DirectionStatsKPI />
         <FlexWrapper flexWrap={"wrap"} mt={5}>
           <MandatairesSubNavigation />
         </FlexWrapper>

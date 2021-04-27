@@ -3,7 +3,11 @@ const express = require("express");
 const { Departement } = require("~/models");
 const { Mesure } = require("~/models");
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
-const knex = require("~/db/knex");
+
+const availableMesureNbGlobal = require("./available-mesures/global");
+const availableMesureNbOver = require("./available-mesures/over");
+const availableMesureNbReal = require("./available-mesures/real");
+const availableMesureNbUnknownGestion = require("./available-mesures/unknown-gestion");
 
 const router = express.Router();
 
@@ -59,30 +63,31 @@ router.post(
   async (req, res, next) => {
     const { regionId, departementCode } = req.body.input;
     try {
-      let availibilities;
-      if (departementCode || regionId) {
-        const filters = {};
-        if (departementCode) {
-          filters.departement_code = departementCode;
-        } else if (regionId) {
-          filters.region_id = regionId;
-        }
-        availibilities = await knex("view_department_availability").where(
-          filters
-        );
-      } else {
-        availibilities = await knex("view_nation_availability");
-      }
+      const nbGlobal = await availableMesureNbGlobal({
+        departementCode,
+        regionId,
+      });
 
-      const availableMesuresNb = availibilities.reduce((acc, availability) => {
-        const max = availability.mesures_max || 0;
-        const awaiting = availability.mesures_awaiting || 0;
-        const inProgress = availability.mesures_in_progress || 0;
-        return acc + (max - inProgress - awaiting);
-      }, 0);
+      const nbOver = await availableMesureNbOver({
+        departementCode,
+        regionId,
+      });
+
+      const nbReal = await availableMesureNbReal({
+        departementCode,
+        regionId,
+      });
+
+      const nbUnknownGestion = await availableMesureNbUnknownGestion({
+        departementCode,
+        regionId,
+      });
 
       return res.status(200).json({
-        available_mesures_nb: availableMesuresNb,
+        available_mesures_nb_global: nbGlobal,
+        available_mesures_nb_over: nbOver,
+        available_mesures_nb_real: nbReal,
+        available_mesures_nb_unknown_gestion: nbUnknownGestion,
       });
     } catch (err) {
       return next(err);

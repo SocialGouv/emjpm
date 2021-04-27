@@ -250,7 +250,10 @@ type EmailCancelReservationOutput {
 }
 
 type StatAvailableMesuresOutput {
-  available_mesures_nb : Int!
+  available_mesures_nb_global : Int!
+  available_mesures_nb_real : Int!
+  available_mesures_nb_over : Int!
+  available_mesures_nb_unknown_gestion : Int!
 }
 
 type StatClosedMesuresOutput {

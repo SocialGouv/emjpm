@@ -7702,6 +7702,7 @@
     permission:
       columns:
       - departement_code
+      - region_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -7710,6 +7711,7 @@
     permission:
       columns:
       - departement_code
+      - region_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -7718,6 +7720,7 @@
     permission:
       columns:
       - departement_code
+      - region_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -7726,6 +7729,7 @@
     permission:
       columns:
       - departement_code
+      - region_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -7734,6 +7738,7 @@
     permission:
       columns:
       - departement_code
+      - region_id
       - mesures_awaiting
       - mesures_in_progress
       - mesures_max
@@ -8021,9 +8026,6 @@
       - ti_id
       filter: {}
       allow_aggregations: true
-- table:
-    schema: public
-    name: view_nation_availability
 - table:
     schema: public
     name: view_nation_indicateur_inscrit

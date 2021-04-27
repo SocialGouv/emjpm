@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 import { Box } from "rebass";
 
 import Card from "../Card";
@@ -8,7 +6,8 @@ import Spinner from "../Spinner";
 import { IndicatorTextStyle } from "./style";
 
 function Indicator(props) {
-  const { error, loading, indicator, title, headingSize } = props;
+  const { error, loading, title, headingSize, data, load } = props;
+
   if (error) {
     return (
       <Card height="100%">
@@ -31,6 +30,8 @@ function Indicator(props) {
     );
   }
 
+  const indicator = load ? load(data) : props.indicator;
+
   return (
     <Card
       justifyContent="space-between"
@@ -50,14 +51,6 @@ Indicator.defaultProps = {
   error: false,
   loading: false,
   headingSize: 4,
-};
-
-Indicator.propTypes = {
-  error: PropTypes.bool,
-  indicator: PropTypes.number.isRequired,
-  loading: PropTypes.bool,
-  title: PropTypes.string.isRequired,
-  headingSize: PropTypes.number,
 };
 
 export default Indicator;
