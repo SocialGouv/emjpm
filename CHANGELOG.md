@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.115.0](https://github.com/SocialGouv/emjpm/compare/v25.114.0...v25.115.0) (2021-04-27)
+
+
+### Features
+
+* **direction:** stat relevants kpi ([#2533](https://github.com/SocialGouv/emjpm/issues/2533)) ([a53d481](https://github.com/SocialGouv/emjpm/commit/a53d481f27a13b26454bced97e424788fb01fd76))
+
+
+
+
+
 # [25.114.0](https://github.com/SocialGouv/emjpm/compare/v25.113.2...v25.114.0) (2021-04-26)
 
 

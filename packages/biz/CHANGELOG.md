@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.115.0](https://github.com/SocialGouv/emjpm/compare/v25.114.0...v25.115.0) (2021-04-27)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
 # [25.114.0](https://github.com/SocialGouv/emjpm/compare/v25.113.2...v25.114.0) (2021-04-26)
 
 **Note:** Version bump only for package @emjpm/biz
