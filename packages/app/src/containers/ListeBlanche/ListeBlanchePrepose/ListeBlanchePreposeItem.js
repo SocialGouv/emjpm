@@ -13,7 +13,7 @@ export function ListeBlanchePreposeItem(props) {
   const to = getHref && getHref(item, props);
 
   return (
-    <Card key={item.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
+    <Card key={lb_user.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">

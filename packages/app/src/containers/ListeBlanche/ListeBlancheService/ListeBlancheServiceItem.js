@@ -12,7 +12,7 @@ export function ListeBlancheServiceItem(props) {
   const { service } = item;
 
   return (
-    <Card key={item.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
+    <Card key={service.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">

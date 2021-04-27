@@ -20,13 +20,15 @@ export function ListeBlanche(props) {
   const history = useHistory();
 
   const getHref = (item) => {
-    const { type, id } = item;
+    const { type } = item;
     switch (type) {
       case "individuel":
       case "prepose":
-        return `/${origin}/liste-blanche/${id}`;
+        const { lb_user } = item;
+        return `/${origin}/liste-blanche/${lb_user.id}`;
       case "service":
-        return `/${origin}/liste-blanche/services/${id}`;
+        const { service } = item;
+        return `/${origin}/liste-blanche/services/${service.id}`;
     }
   };
 

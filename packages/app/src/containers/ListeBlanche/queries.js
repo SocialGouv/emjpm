@@ -141,6 +141,7 @@ export const SEARCH_VIEW_LB = gql`
         telephone
       }
       lb_user {
+        id
         nom
         prenom
         mandataire {
