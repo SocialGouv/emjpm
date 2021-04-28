@@ -49,12 +49,13 @@ function MesureDetailView({ mesure, ...props }) {
   } = mesureFormatter;
 
   const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
-  const mesureModificationButtonProps = mesureModificationDisabled
-    ? {
-        disabled: true,
-        title: SYNC_OCMI_DISABLED_MESSAGE,
-      }
-    : {};
+  const mesureModificationButtonProps =
+    mesureModificationDisabled && status !== "en_attente"
+      ? {
+          disabled: true,
+          title: SYNC_OCMI_DISABLED_MESSAGE,
+        }
+      : {};
 
   return (
     <Box {...props}>
