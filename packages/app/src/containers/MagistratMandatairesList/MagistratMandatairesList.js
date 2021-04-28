@@ -9,13 +9,6 @@ import { MagistratMandatairesListFilters } from "./Filters";
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
 
-const optionsType = [
-  DEFAULT_VALUE,
-  { label: "Préposé", value: "MANDATAIRE_PRE" },
-  { label: "Individuel", value: "MANDATAIRE_IND" },
-  { label: "Service", value: "SERVICE" },
-];
-
 const orderByOptions = [
   {
     label: "disponibilité",
@@ -30,23 +23,6 @@ const orderByOptions = [
     value: 2,
   },
 ];
-
-const RESULT_PER_PAGE = 20;
-
-function getOrderByVariable(orderBy) {
-  switch (orderBy) {
-    case 0:
-      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
-    case 1:
-      return {
-        name: "asc",
-      };
-    case 2:
-      return {
-        name: "desc",
-      };
-  }
-}
 
 function MagistratMandatairesList() {
   const [selectedType, setType] = useState(DEFAULT_VALUE);

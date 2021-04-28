@@ -97,9 +97,7 @@ export default function MandataireListItem(props) {
               <Flex sx={columnStyle(false, false)}>
                 <Text sx={labelStyle}>Disponibilité</Text>
                 <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-                  {currentAvailability === undefined
-                    ? "NC"
-                    : currentAvailability}
+                  {currentAvailability}
                 </Text>
               </Flex>
             </>
@@ -108,10 +106,7 @@ export default function MandataireListItem(props) {
           <Flex sx={columnStyle(false, false)}>
             <Text sx={labelStyle}>En cours / souhaitée</Text>
             <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-              {mesuresInProgress === 0 && dispoMax === 0
-                ? "NC"
-                : mesuresInProgress}
-              /{mesuresInProgress === 0 && dispoMax === 0 ? "NC" : dispoMax}
+              {mesuresInProgress}/ {dispoMax}
             </Text>
           </Flex>
 
