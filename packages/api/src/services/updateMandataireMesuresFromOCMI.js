@@ -88,6 +88,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
       await updateMandataireMesureStates(mandataireId, trx);
       await trx.commit();
     } catch (e) {
+      console.error(e);
       await trx.rollback(e);
     }
   });
