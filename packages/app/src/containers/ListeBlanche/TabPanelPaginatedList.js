@@ -22,18 +22,16 @@ function getRequestFilters(filters) {
   if (departement) {
     const departementCode = departement;
     const individuelDepartementFilters = {
-      mandataire: {
-        lb_user: {
-          lb_departements: {
-            departement_code: {
-              _eq: departementCode,
-            },
+      lb_user: {
+        lb_departements: {
+          departement_code: {
+            _eq: departementCode,
           },
         },
       },
     };
     if (filters.departementFinanceur) {
-      individuelDepartementFilters.mandataire.lb_user.lb_departements.departement_financeur = {
+      individuelDepartementFilters.lb_user.lb_departements.departement_financeur = {
         _eq: filters.departementFinanceur === true,
       };
     }
