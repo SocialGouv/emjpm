@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.115.2](https://github.com/SocialGouv/emjpm/compare/v25.115.1...v25.115.2) (2021-04-28)
+
+
+### Bug Fixes
+
+* **import-mesures:** unhandled undefined var ([da7002d](https://github.com/SocialGouv/emjpm/commit/da7002d55773d3e13b814ba4d6f140153610ca7a))
+
+
+
+
+
 ## [25.115.1](https://github.com/SocialGouv/emjpm/compare/v25.115.0...v25.115.1) (2021-04-27)
 
 **Note:** Version bump only for package @emjpm/api

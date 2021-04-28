@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.115.2](https://github.com/SocialGouv/emjpm/compare/v25.115.1...v25.115.2) (2021-04-28)
+
+
+### Bug Fixes
+
+* **mandataire:** dispo_max display 0 ([cc07559](https://github.com/SocialGouv/emjpm/commit/cc075592a8ed9314de3e6a362fb01e1fe9bbe03a))
+* **mandataires-list:** fix NC + clean ([3a7d2d0](https://github.com/SocialGouv/emjpm/commit/3a7d2d0319da4bdc2287e07f19a759b7a35d65fb))
+
+
+
+
+
 ## [25.115.1](https://github.com/SocialGouv/emjpm/compare/v25.115.0...v25.115.1) (2021-04-27)
 
 
