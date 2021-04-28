@@ -60,7 +60,7 @@ function MandataireEditInformationsForm(props) {
   const formik = useFormik({
     initialValues: {
       competences: mandataire.competences || "",
-      dispo_max: mandataire.dispo_max || "",
+      dispo_max: parseInt(mandataire.dispo_max),
       email: user.email || "",
       genre: mandataire.genre,
       geocode: geocodeInitialValue(mandataire),
