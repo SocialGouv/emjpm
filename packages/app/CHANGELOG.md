@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.115.3](https://github.com/SocialGouv/emjpm/compare/v25.115.2...v25.115.3) (2021-04-28)
+
+
+### Bug Fixes
+
+* **lb-filters:** after lb mandataire reversed ([837f864](https://github.com/SocialGouv/emjpm/commit/837f8642e717f201236c2e0024e18253fadf2669))
+
+
+
+
+
 ## [25.115.2](https://github.com/SocialGouv/emjpm/compare/v25.115.1...v25.115.2) (2021-04-28)
 
 
