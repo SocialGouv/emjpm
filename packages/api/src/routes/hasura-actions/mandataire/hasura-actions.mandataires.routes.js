@@ -13,7 +13,7 @@ router.post("/stats", async (req, res) => {
   const user = await User.query().findById(userId);
   const type = isMandataire(user) ? "mandataire" : "service";
   const serviceOrMandataire = await user.$relatedQuery(type);
-  console.log({ serviceOrMandataire, user });
+
   const natureStats = await Mesure.query()
     .where({ [`${type}_id`]: serviceOrMandataire.id })
     .andWhere({ status: "en_cours" })
