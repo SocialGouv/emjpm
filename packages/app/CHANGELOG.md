@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.115.4](https://github.com/SocialGouv/emjpm/compare/v25.115.3...v25.115.4) (2021-04-28)
+
+
+### Bug Fixes
+
+* **mesures:** en_attente re-enable actions ([3e8a07b](https://github.com/SocialGouv/emjpm/commit/3e8a07b29c7c16b9c39e4a2896e41dcd2b63fac0))
+
+
+
+
+
 ## [25.115.3](https://github.com/SocialGouv/emjpm/compare/v25.115.2...v25.115.3) (2021-04-28)
 
 
