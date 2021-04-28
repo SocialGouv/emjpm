@@ -73,9 +73,9 @@ const mesureBatch = async (req, res) => {
         await updateMesureStates(serviceOrMandataire, type, trx);
         await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
 
-        const tiIds = allMesureDatas.reduce((s, { ti: { id } }) => {
-          if (id) {
-            s.add(id);
+        const tiIds = allMesureDatas.reduce((s, { ti }) => {
+          if (ti?.id) {
+            s.add(ti.id);
           }
           return s;
         }, new Set());

@@ -75,9 +75,9 @@ module.exports = async function updateMandataireMesuresFromOCMI({
       await saveMesures(allMesureDatas, trx);
       await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
 
-      const tiIds = allMesureDatas.reduce((s, { datas: { ti: { id } } }) => {
-        if (id) {
-          s.add(id);
+      const tiIds = allMesureDatas.reduce((s, { datas: { ti } }) => {
+        if (ti?.id) {
+          s.add(ti.id);
         }
         return s;
       }, new Set());
