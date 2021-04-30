@@ -64,6 +64,8 @@ router.post("/sync-file", async (req, res) => {
     err = e;
   }
 
+  await releaseLock(lockKey);
+
   if (err) {
     return res.json({ error: err });
   }
@@ -204,7 +206,6 @@ async function runImportJSON(logId, file) {
       end_date: new Date(),
       result: success ? "success" : "error",
     });
-  await releaseLock(lockKey);
 }
 async function importJSON(file) {
   const tempDir = await fs.promises.mkdtemp(path.join(os.tmpdir(), "ocmi-"));
