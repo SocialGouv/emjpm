@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.116.2](https://github.com/SocialGouv/emjpm/compare/v25.116.1...v25.116.2) (2021-04-30)
+
+
+### Bug Fixes
+
+* **mandataire:** mesure action reload list ([a28e31e](https://github.com/SocialGouv/emjpm/commit/a28e31ee4d18a5ca488d0d909fc827ef7030ac80))
+
+
+
+
+
 ## [25.116.1](https://github.com/SocialGouv/emjpm/compare/v25.116.0...v25.116.1) (2021-04-30)
 
 **Note:** Version bump only for package @emjpm/app

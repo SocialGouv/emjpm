@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.116.2](https://github.com/SocialGouv/emjpm/compare/v25.116.1...v25.116.2) (2021-04-30)
+
+
+### Bug Fixes
+
+* **improt-ocmi:** release-lock ([8c16f91](https://github.com/SocialGouv/emjpm/commit/8c16f91a0b8165116a64d7385539419e1103f37f))
+
+
+
+
+
 ## [25.116.1](https://github.com/SocialGouv/emjpm/compare/v25.116.0...v25.116.1) (2021-04-30)
 
 
