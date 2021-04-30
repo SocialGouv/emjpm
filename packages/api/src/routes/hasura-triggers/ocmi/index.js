@@ -283,16 +283,21 @@ async function updateOcmiMandataireMesures(siret) {
   }
 }
 
-async function hasBeenProcessed({ properties: { createdOn } }) {
+async function hasBeenProcessed({ properties: { createdOn, lastModified } }) {
   const log = await RoutineLog.query()
     .findOne({
+      result: "success",
       type: "ocmi_sync_file",
     })
     .orderBy("end_date", "desc");
   if (!log) {
     return false;
   }
-  return log.start_date.getTime() > createdOn.getTime();
+  const processedTime = log.start_date.getTime();
+  return (
+    processedTime > createdOn.getTime() &&
+    processedTime > lastModified.getTime()
+  );
 }
 
 async function processusStateStartImport() {
