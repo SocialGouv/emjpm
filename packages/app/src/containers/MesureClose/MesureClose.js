@@ -1,12 +1,10 @@
 import { useMutation } from "@apollo/client";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
@@ -53,17 +51,7 @@ function MesureClose(props) {
             id: mesure.id,
           },
         },
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
-          },
-        },
+        "MESURES_QUERY",
       ],
       variables: {
         cause_sortie: values.cause_sortie,

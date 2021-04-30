@@ -1,10 +1,9 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/client";
-import { isFrance, isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
+import { isFrance, isMandataire } from "@emjpm/biz";
 import { useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import getLocation from "~/query-service/emjpm-hasura/getLocation";
@@ -86,19 +85,7 @@ export function MesureCreate() {
 
     addMesure({
       awaitRefetchQueries: true,
-      refetchQueries: [
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
-          },
-        },
-      ],
+      refetchQueries: ["MESURES_QUERY"],
       variables: {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),

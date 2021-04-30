@@ -1,11 +1,9 @@
 import { useMutation } from "@apollo/client";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import { MesureContext } from "~/containers/MesureContext";
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
@@ -40,19 +38,7 @@ function MesureDelete(props) {
   const handleSubmit = async () => {
     await deleteMesure({
       awaitRefetchQueries: true,
-      refetchQueries: [
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
-          },
-        },
-      ],
+      refetchQueries: ["MESURES_QUERY"],
       variables: {
         id: mesure.id,
       },

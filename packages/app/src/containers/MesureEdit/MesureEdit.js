@@ -1,12 +1,11 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { isMandataire, MESURE_PROTECTION_STATUS } from "@emjpm/biz";
+import { isMandataire } from "@emjpm/biz";
 import { useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { MesureContext } from "~/containers/MesureContext";
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 import { formatTribunauxOptions } from "~/formatters/tribunaux";
@@ -63,19 +62,7 @@ export function MesureEdit() {
   const handleSubmit = async (values, { setSubmitting }) => {
     addOrUpdateMesure({
       awaitRefetchQueries: true,
-      refetchQueries: [
-        {
-          query: MESURES_QUERY,
-          variables: {
-            antenne: null,
-            limit: 20,
-            natureMesure: null,
-            offset: 0,
-            searchText: null,
-            status: MESURE_PROTECTION_STATUS.en_cours,
-          },
-        },
-      ],
+      refetchQueries: ["MESURES_QUERY"],
       variables: {
         annee_naissance: values.annee_naissance.toString(),
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,

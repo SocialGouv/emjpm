@@ -1,9 +1,7 @@
 import { useMutation } from "@apollo/client";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useState } from "react";
 
 import { UPLOAD_MESURES_EXCEL_FILE } from "~/containers/MesureImport/mutations";
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 import { fileReader } from "~/utils/std/fileReader";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
@@ -38,20 +36,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
     readFile(file, ({ file, content }) => {
       const { name, type } = file;
       uploadFile({
-        refetchQueries: [
-          "CURRENT_USER_QUERY",
-          {
-            query: MESURES_QUERY,
-            variables: {
-              antenne: null,
-              limit: 20,
-              natureMesure: null,
-              offset: 0,
-              searchText: null,
-              status: MESURE_PROTECTION_STATUS.en_cours,
-            },
-          },
-        ],
+        refetchQueries: ["CURRENT_USER_QUERY", "MESURES_QUERY"],
         variables: {
           antennesMap: antennesMap ? JSON.stringify(antennesMap) : undefined,
           content,

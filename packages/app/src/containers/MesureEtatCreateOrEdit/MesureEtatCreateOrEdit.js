@@ -1,10 +1,8 @@
 import { useMutation } from "@apollo/client";
-import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 
 import { Box } from "rebass";
 
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
-import { MESURES_QUERY } from "~/containers/MesureList/queries";
 
 import { MesureEtatCreateOrEditForm } from "./MesureEtatCreateOrEditForm";
 import { DELETE_MESURE_ETAT, UPSERT_MESURE_ETAT } from "./mutations";
@@ -58,17 +56,7 @@ export const MesureEtatCreateOrEdit = ({
       upsertMesureEtat({
         awaitRefetchQueries: true,
         refetchQueries: [
-          {
-            query: MESURES_QUERY,
-            variables: {
-              antenne: null,
-              limit: 20,
-              natureMesure: null,
-              offset: 0,
-              searchText: null,
-              status: MESURE_PROTECTION_STATUS.en_cours,
-            },
-          },
+          "MESURES_QUERY",
           {
             query: MESURE_CONTEXT_QUERY,
             variables: {
