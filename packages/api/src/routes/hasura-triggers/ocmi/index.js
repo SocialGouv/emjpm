@@ -96,6 +96,13 @@ async function startImportFromAzure() {
     const { contentLength, createdOn, lastModified, contentType } = properties;
     if (await hasBeenProcessed(blob)) {
       logger.info(`[OCMI] ${name} has been already processed`);
+      const now = new Date();
+      await RoutineLog.query().insert({
+        end_date: now,
+        result: "unchanged",
+        start_date: now,
+        type: "ocmi_sync_file",
+      });
       return {
         state: "has_been_already_processed",
       };
