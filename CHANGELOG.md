@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.116.5](https://github.com/SocialGouv/emjpm/compare/v25.116.4...v25.116.5) (2021-05-04)
+
+
+### Bug Fixes
+
+* **tipimail:** enable tls ([8f282a1](https://github.com/SocialGouv/emjpm/commit/8f282a1b30a04fedc1e1fb8bbecfdc555f89dd83))
+
+
+
+
+
 ## [25.116.4](https://github.com/SocialGouv/emjpm/compare/v25.116.3...v25.116.4) (2021-05-04)
 
 
