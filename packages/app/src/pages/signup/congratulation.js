@@ -9,8 +9,8 @@ const cardStyle = { m: "1", mt: "5", p: "5" };
 
 function CongratulationPage() {
   const history = useHistory();
-  function backLogin() {
-    history.push("/login");
+  function backHome() {
+    history.push("/");
   }
   return (
     <LayoutPublic>
@@ -24,13 +24,13 @@ function CongratulationPage() {
           </Text>
           <Text mb="1" lineHeight="2">
             {
-              "Notre équipe a été informée et vous recevrez une confirmation très prochainement."
+              "Notre équipe a été informée. Vous recevrez très prochainement une confirmation par email après vérification de votre demande et activation de votre compte."
             }
           </Text>
           <Flex mt={5}>
             <Box>
-              <Button mr="2" variant="outline" onClick={() => backLogin()}>
-                <Link>Se connecter</Link>
+              <Button mr="2" variant="outline" onClick={() => backHome()}>
+                <Link>Retour à l'accueil</Link>
               </Button>
             </Box>
           </Flex>
