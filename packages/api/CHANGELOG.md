@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.116.4](https://github.com/SocialGouv/emjpm/compare/v25.116.3...v25.116.4) (2021-05-04)
+
+
+### Bug Fixes
+
+* **login:** bug err handle ([6759e51](https://github.com/SocialGouv/emjpm/commit/6759e514c6b4228470193b24bf7317e50ba16f80))
+
+
+
+
+
 ## [25.116.3](https://github.com/SocialGouv/emjpm/compare/v25.116.2...v25.116.3) (2021-05-04)
 
 
