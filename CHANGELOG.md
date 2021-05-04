@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.116.3](https://github.com/SocialGouv/emjpm/compare/v25.116.2...v25.116.3) (2021-05-04)
+
+
+### Bug Fixes
+
+* **login:** handle unactive account message ([5ded88b](https://github.com/SocialGouv/emjpm/commit/5ded88b94f6f346fee01df3158288c2fc2888659))
+* **ui:** change signup ok message ([d32bbdc](https://github.com/SocialGouv/emjpm/commit/d32bbdc9f8fc485da1a7823efcad721b5d780e98))
+
+
+
+
+
 ## [25.116.2](https://github.com/SocialGouv/emjpm/compare/v25.116.1...v25.116.2) (2021-04-30)
 
 
