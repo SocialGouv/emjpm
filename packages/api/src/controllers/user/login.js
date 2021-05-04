@@ -13,15 +13,27 @@ const login = async (req, res, next) => {
   }
 
   passport.authenticate("login-password", async (err, user) => {
-    if (err) {
-      return res.status(401).json({
-        errors: {
-          error: err,
-          location: "body",
-          msg: "Vos informations de connexion sont erronées",
-        },
-      });
+    switch (err) {
+      case "User is inactive":
+        res.status(401).json({
+          errors: {
+            error: err,
+            location: "body",
+            msg:
+              "Votre compte est en attente d'activation, vous recevrez un email de confirmation",
+          },
+        });
+        break;
+      default:
+        return res.status(401).json({
+          errors: {
+            error: err,
+            location: "body",
+            msg: "Vos informations de connexion sont erronées",
+          },
+        });
     }
+
     if (user) {
       await User.query()
         .where("id", user.id)
