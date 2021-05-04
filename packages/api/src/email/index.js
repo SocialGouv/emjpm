@@ -12,7 +12,7 @@ const smtpConfig = {
   ignoreTLS: false,
   port: smtpPort,
   requireTLS: true,
-  secure: true,
+  secure: false,
 };
 
 if (smtpUser) {
