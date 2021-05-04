@@ -9,9 +9,10 @@ const smtpFrom = config.smtpFrom;
 
 const smtpConfig = {
   host: smtpHost,
-  ignoreTLS: true,
+  ignoreTLS: false,
   port: smtpPort,
-  secure: false,
+  requireTLS: true,
+  secure: true,
 };
 
 if (smtpUser) {
