@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteRevisionMesuresForm } from "./EnqueteActiviteRevisionMesuresForm";
 import { UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES } from "./mutations";
 import { ENQUETE_REVISION_MESURES } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteActiviteRevisionMesures(props) {
   const {
@@ -20,7 +21,7 @@ export function EnqueteActiviteRevisionMesures(props) {
   } = props;
 
   const { id: userId } = useUser();
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES,
     {
       refetchQueries: [
@@ -37,6 +38,8 @@ export function EnqueteActiviteRevisionMesures(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_REVISION_MESURES, {
     variables: {
       id: enqueteReponse.id,

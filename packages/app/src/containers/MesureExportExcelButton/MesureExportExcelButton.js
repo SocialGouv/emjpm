@@ -6,6 +6,7 @@ import useUser from "~/hooks/useUser";
 import { b64toBlob } from "~/utils/std/b64toBlob";
 
 import { EXPORT_MESURES_EXCEL_FILE } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const downloadMesuresFile = async (b64Data) => {
   const element = document.createElement("a");
@@ -21,7 +22,11 @@ function MesureExportExcelButton(props) {
   const [service_member] = service_members;
   const service = service_member ? service_member.service : undefined;
 
-  const [exportMesure] = useMutation(EXPORT_MESURES_EXCEL_FILE);
+  const [exportMesure, { loading, error }] = useMutation(
+    EXPORT_MESURES_EXCEL_FILE
+  );
+
+  useQueryReady(loading, error);
 
   const exportMesuresToExcel = async () => {
     const res = await exportMesure({

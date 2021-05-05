@@ -7,6 +7,7 @@ import { Card } from "~/components";
 import { captureException } from "~/user/sentry";
 
 import { EDIT_ANTENNE } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function ServiceAntenneEdit(props) {
   const history = useHistory();
@@ -16,7 +17,8 @@ function ServiceAntenneEdit(props) {
   const { service_antennes } = service;
   const [antenne] = service_antennes.filter((s) => s.id === antenneId);
 
-  const [editAntenne] = useMutation(EDIT_ANTENNE);
+  const [editAntenne, { loading, error }] = useMutation(EDIT_ANTENNE);
+  useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {

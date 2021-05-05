@@ -8,15 +8,21 @@ import { Button, Heading, Input } from "~/components";
 import ImpersonateButton from "~/containers/ImpersonateButton";
 
 import { RESET_PASSWORD } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function AdminUserResetPassword(props) {
   const { userId } = props;
 
-  const [resetPassword, { data, loading }] = useMutation(RESET_PASSWORD, {
-    variables: {
-      id: userId,
-    },
-  });
+  const [resetPassword, { data, loading, error }] = useMutation(
+    RESET_PASSWORD,
+    {
+      variables: {
+        id: userId,
+      },
+    }
+  );
+
+  useQueryReady(loading, error);
 
   let password;
   if (data) {

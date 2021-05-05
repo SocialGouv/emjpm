@@ -7,12 +7,16 @@ import {
 } from "~/containers/Enquete/queries";
 import { UPLOAD_ENQUETE_EXCEL_FILE } from "~/containers/EnqueteImport/mutations";
 import { fileReader } from "~/utils/std/fileReader";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function useEnqueteImportManager({ enqueteId, userId }) {
   const [importSummary, setImportSummary] = useState();
-  const [uploadFile, { loading: enqueteImportLoading }] = useMutation(
-    UPLOAD_ENQUETE_EXCEL_FILE
-  );
+  const [
+    uploadFile,
+    { loading: enqueteImportLoading, error: enqueteImportError },
+  ] = useMutation(UPLOAD_ENQUETE_EXCEL_FILE);
+  useQueryReady(enqueteImportLoading, enqueteImportError);
+
   const {
     data: enqueteData,
     loading: enqueteLoading,

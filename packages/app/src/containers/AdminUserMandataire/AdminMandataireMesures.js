@@ -17,6 +17,7 @@ import { Select } from "~/components";
 
 import { CALCULATE_MANDATAIRE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
@@ -40,13 +41,17 @@ function AdminMandataireMesures(props) {
     },
   });
 
-  const [deleteMesures, { loading: mutationLoading }] = useMutation(
-    DELETE_MESURES
-  );
+  const [
+    deleteMesures,
+    { loading: mutationLoading, error: error1 },
+  ] = useMutation(DELETE_MESURES);
   const [
     calculateMandataireMesures,
-    { loading: calculateMandataireMesuresLoading },
+    { loading: calculateMandataireMesuresLoading, error: error2 },
   ] = useMutation(CALCULATE_MANDATAIRE_MESURES);
+
+  useQueryReady(mutationLoading, error1);
+  useQueryReady(calculateMandataireMesuresLoading, error2);
 
   const allMesures = useMemo(() => (data ? data.mesures : []), [data]);
 

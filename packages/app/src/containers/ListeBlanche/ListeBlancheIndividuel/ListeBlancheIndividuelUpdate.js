@@ -5,17 +5,26 @@ import { Card } from "rebass";
 import { LB_USER } from "../queries";
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { UPDATE_DEPARTEMENT_FINANCEUR, UPDATE_LB_USER } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function ListeBlancheIndividuelUpdate(props) {
   const { id, data, handleSubmit, handleCancel } = props;
 
-  const [updateListeBlanche] = useMutation(UPDATE_LB_USER, {
+  const [
+    updateListeBlanche,
+    { loading: loading1, error: error1 },
+  ] = useMutation(UPDATE_LB_USER, {
     refetchQueries: [{ query: LB_USER, variables: { id } }],
   });
+  useQueryReady(loading1, error1);
 
-  const [setDepartementFinanceur] = useMutation(UPDATE_DEPARTEMENT_FINANCEUR, {
+  const [
+    setDepartementFinanceur,
+    { loading: loading2, error: error2 },
+  ] = useMutation(UPDATE_DEPARTEMENT_FINANCEUR, {
     refetchQueries: [{ query: LB_USER, variables: { id } }],
   });
+  useQueryReady(loading2, error2);
 
   return (
     <Card p={5}>

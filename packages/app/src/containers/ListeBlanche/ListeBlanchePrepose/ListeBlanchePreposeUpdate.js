@@ -4,6 +4,7 @@ import { Card } from "rebass";
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
 import { UPDATE_LB_USER_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function getPropertiesToUpdate(values) {
   const propertiesToUpdate = {};
@@ -22,7 +23,10 @@ function getPropertiesToUpdate(values) {
 export function ListeBlanchePreposeUpdate(props) {
   const { data, handleSubmit } = props;
   const apolloClient = useApolloClient();
-  const [updateListeBlanche] = useMutation(UPDATE_LB_USER_PREPOSE);
+  const [updateListeBlanche, { loading, error }] = useMutation(
+    UPDATE_LB_USER_PREPOSE
+  );
+  useQueryReady(loading, error);
 
   return (
     <Card p={5}>

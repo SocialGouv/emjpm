@@ -12,6 +12,7 @@ import { Text, Switch, Button } from "~/components";
 
 import { SYNC_OCMI_ENABLE, IMPORT_OCMI_MESURES } from "./mutations";
 import { toast } from "react-toastify";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const StyledCheckCircleOutline = styled(CheckCircleOutline)`
   margin-right: 10px;
@@ -26,7 +27,10 @@ function MandataireOcmiMesureImportSwitcher({
   syncEnableOrigin,
   mandataireId,
 }) {
-  const [importOcmiMesures] = useMutation(IMPORT_OCMI_MESURES);
+  const [importOcmiMesures, { loading: loading1, error: error1 }] = useMutation(
+    IMPORT_OCMI_MESURES
+  );
+  useQueryReady(loading1, error1);
 
   const importMesures = useCallback(async () => {
     try {
@@ -57,17 +61,21 @@ function MandataireOcmiMesureImportSwitcher({
     }
   }, [importOcmiMesures]);
 
-  const [syncOCMIEnable] = useMutation(SYNC_OCMI_ENABLE, {
-    onCompleted: async () => {
-      if (syncEnabled) {
-        toast.success("Synchronisation activée, import en cours...");
-        await importMesures();
-      } else {
-        toast.success("Synchronisation désactivée");
-      }
-    },
-    refetchQueries: ["CURRENT_USER_QUERY"],
-  });
+  const [syncOCMIEnable, { loading: loading2, error: error2 }] = useMutation(
+    SYNC_OCMI_ENABLE,
+    {
+      onCompleted: async () => {
+        if (syncEnabled) {
+          toast.success("Synchronisation activée, import en cours...");
+          await importMesures();
+        } else {
+          toast.success("Synchronisation désactivée");
+        }
+      },
+      refetchQueries: ["CURRENT_USER_QUERY"],
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const [syncEnabled, setSyncEnabled] = useState(!!syncEnableOrigin);
   const onChangeSyncEnabled = (e) => {

@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteIndividuelPrestationsSocialesForm } from "./EnqueteIndividuelPrestationsSocialesForm";
 import { UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES } from "./mutations";
 import { ENQUETE_REPONSE_PRESTATIONS_SOCIALES } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteIndividuelPrestationsSociales(props) {
   const {
@@ -24,7 +25,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
     },
   });
 
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_INDIVIDUEL_PRESTATIONS_SOCIALES,
     {
       refetchQueries: [
@@ -39,6 +40,7 @@ export function EnqueteIndividuelPrestationsSociales(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
 
   const prestationsSociales = data
     ? data.enquete_reponses_prestations_sociales[0] || {}

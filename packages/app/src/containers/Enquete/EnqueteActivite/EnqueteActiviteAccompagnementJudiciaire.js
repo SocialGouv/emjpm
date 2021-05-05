@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE } from "./mutations";
 import { ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const PREFIX = "accompagnement_judiciaire";
 
@@ -21,7 +22,8 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
     enquete: { id: enqueteId },
   } = props;
   const { id: userId } = useUser();
-  const [updateEnquete] = useMutation(
+
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE,
     {
       refetchQueries: [
@@ -38,6 +40,7 @@ export function EnqueteActiviteAccompagnementJudiciaire(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
 
   const { data, loading } = useQuery(ENQUETE_ACCOMPAGNEMENT_JUDICIAIRE, {
     variables: {

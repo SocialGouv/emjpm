@@ -7,6 +7,7 @@ import { Card } from "~/components";
 import { captureException } from "~/user/sentry";
 
 import { CREATE_ANTENNE } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function ServiceCreateAntenne() {
   const history = useHistory();
@@ -14,7 +15,8 @@ function ServiceCreateAntenne() {
   const [currentUserService] = service_members;
   const { service_id } = currentUserService;
 
-  const [createAntenne] = useMutation(CREATE_ANTENNE);
+  const [createAntenne, { loading, error }] = useMutation(CREATE_ANTENNE);
+  useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     try {

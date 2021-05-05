@@ -7,6 +7,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePersonnelFormationMjpmForm } from "./EnquetePreposePersonnelFormationMjpmForm";
 import { UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM } from "./mutations";
 import { ENQUETE_PREPOSE_PERSONNEL_FORMATION } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnquetePreposePersonnelFormationMjpm(props) {
   const {
@@ -24,21 +25,22 @@ export function EnquetePreposePersonnelFormationMjpm(props) {
     },
   });
 
-  const [sendEnqueteReponseInformations] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM,
-    {
-      refetchQueries: [
-        {
-          query: ENQUETE_WITH_REPONSE_STATUS,
-          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-        },
-        {
-          query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
-          variables: { id: enqueteReponse.id },
-        },
-      ],
-    }
-  );
+  const [
+    sendEnqueteReponseInformations,
+    { loading: loading2, error: error2 },
+  ] = useMutation(UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_MJPM, {
+    refetchQueries: [
+      {
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+      },
+      {
+        query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
+        variables: { id: enqueteReponse.id },
+      },
+    ],
+  });
+  useQueryReady(loading2, error2);
 
   const initialData = data
     ? data.enquete_reponses_prepose_personel_formation[0] || {}

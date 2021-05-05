@@ -13,6 +13,7 @@ import getLocation from "~/query-service/emjpm-hasura/getLocation";
 import { MesureAcceptForm } from "./MesureAcceptForm";
 import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";
 import { MesureAcceptStyle } from "./style";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function MesureAccept(props) {
   const history = useHistory();
@@ -27,21 +28,29 @@ export function MesureAccept(props) {
 
   const userBasePath = getUserBasePath({ type });
 
-  const [recalculateMesures] = useMutation(CALCULATE_MESURES);
+  const [
+    recalculateMesures,
+    { loading: loading1, error: error1 },
+  ] = useMutation(CALCULATE_MESURES);
+  useQueryReady(loading1, error1);
 
   function redirectToMesure(mesureId) {
     history.push(`${userBasePath}/mesures/${mesureId}`);
   }
 
-  const [updateMesure] = useMutation(ACCEPT_MESURE, {
-    onCompleted: async () => {
-      await recalculateMesures({
-        refetchQueries: ["CURRENT_USER_QUERY"],
-        variables: { mandataireId, serviceId },
-      });
-      redirectToMesure(mesure.id);
-    },
-  });
+  const [updateMesure, { loading: loading2, error: error2 }] = useMutation(
+    ACCEPT_MESURE,
+    {
+      onCompleted: async () => {
+        await recalculateMesures({
+          refetchQueries: ["CURRENT_USER_QUERY"],
+          variables: { mandataireId, serviceId },
+        });
+        redirectToMesure(mesure.id);
+      },
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const antenneOptions = service_antennes.map((antenne) => ({
     label: antenne.name,

@@ -17,18 +17,22 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
     },
   });
   const [errorMessage, setErrorMessage] = useState(false);
-  const [editService] = useMutation(EDIT_SERVICE, {
-    onError(error) {
-      setErrorMessage(error);
-    },
-    update() {
-      if (successLink) {
-        history.push(successLink, successLink, {
-          shallow: true,
-        });
-      }
-    },
-  });
+  const [editService, { loading: loading2, error: error2 }] = useMutation(
+    EDIT_SERVICE,
+    {
+      onError(error) {
+        setErrorMessage(error);
+      },
+      update() {
+        if (successLink) {
+          history.push(successLink, successLink, {
+            shallow: true,
+          });
+        }
+      },
+    }
+  );
+  useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {
     return null;

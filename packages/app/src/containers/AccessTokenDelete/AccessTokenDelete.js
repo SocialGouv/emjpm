@@ -4,10 +4,15 @@ import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { Box } from "rebass";
 
 import { REMOVE_ACCESS_TOKEN } from "./Mutation";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function AccessTokenDelete(props) {
   const { id } = props;
-  const [RemoveAccessToken] = useMutation(REMOVE_ACCESS_TOKEN);
+  const [RemoveAccessToken, { loading, error }] = useMutation(
+    REMOVE_ACCESS_TOKEN
+  );
+
+  useQueryReady(loading, error);
 
   return (
     <Box

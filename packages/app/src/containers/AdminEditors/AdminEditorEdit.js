@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import { captureException } from "~/user/sentry";
+import useQueryReady from "../../hooks/useQueryReady";
 
 import { AdminEditorForm } from "./AdminEditorForm";
 import { EDIT_EDITOR } from "./mutations";
@@ -17,15 +18,15 @@ function AdminEditorEdit(props) {
   const { data, loading, error } = useQuery(EDITOR, {
     variables: { id: editorId },
   });
-  const [editEditor] = useMutation(EDIT_EDITOR);
+  const [editEditor, { loading: loading2, error: error2 }] = useMutation(
+    EDIT_EDITOR
+  );
+  useQueryReady(loading2, error2);
 
-  if (loading) {
-    return <div>Chargement</div>;
+  if (!useQueryReady(loading, error)) {
+    return null;
   }
 
-  if (error) {
-    return <div>Erreur</div>;
-  }
   const editor = data.editors_by_pk;
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {

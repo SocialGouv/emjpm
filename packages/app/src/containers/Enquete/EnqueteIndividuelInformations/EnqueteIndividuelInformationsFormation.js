@@ -10,6 +10,7 @@ import {
   ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
   ENQUETE_INDIVIDUEL_INFORMATIONS_MANDATAIRE,
 } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteIndividuelInformationsFormation(props) {
   const {
@@ -40,18 +41,22 @@ export function EnqueteIndividuelInformationsFormation(props) {
     },
   });
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_FORMATION, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
-        variables: { id: enqueteReponse.id },
-      },
-    ],
-  });
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_INFORMATIONS_FORMATION,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+        },
+        {
+          query: ENQUETE_INDIVIDUEL_INFORMATIONS_FORMATION,
+          variables: { id: enqueteReponse.id },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const initialValues = useMemo(() => {
     if (data && dataInformationsGenerales) {

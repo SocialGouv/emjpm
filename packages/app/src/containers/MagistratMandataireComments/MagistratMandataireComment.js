@@ -7,6 +7,7 @@ import { Box, Flex, Text } from "rebass";
 import { MagistratMandataireCommentForm } from "./MagistratMandataireCommentForm";
 import { REMOVE_COMMENT } from "./mutations";
 import { topTextStyle } from "./style";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function MagistratMandataireComment(props) {
   const {
@@ -18,7 +19,8 @@ function MagistratMandataireComment(props) {
     toggleEditCommentForm,
     toggleCommentForm,
   } = props;
-  const [RemoveComment] = useMutation(REMOVE_COMMENT);
+  const [RemoveComment, { loading, error }] = useMutation(REMOVE_COMMENT);
+  useQueryReady(loading, error);
 
   return (
     <>

@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteMesuresForm } from "./common";
 import { UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./mutations";
 import { ENQUETE_SUBROGE_TUTEUR_CREATEUR } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const PREFIX = "subroge_tuteur_createur";
 
@@ -23,20 +24,25 @@ export function EnqueteActiviteSubrogeTuteurCreateur(props) {
 
   const { id: userId } = useUser();
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_SUBROGE_TUTEUR_CREATEUR,
-        variables: {
-          id: enqueteReponse.id,
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_SUBROGE_TUTEUR_CREATEUR,
+          variables: {
+            id: enqueteReponse.id,
+          },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_SUBROGE_TUTEUR_CREATEUR, {
     variables: {
       id: enqueteReponse.id,

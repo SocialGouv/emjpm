@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE } from "./mutations";
 import { ENQUETE_CURATELLE_PERSONNE } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const PREFIX = "curatelle_personne";
 
@@ -21,7 +22,7 @@ export function EnqueteActiviteCuratellePersonne(props) {
     enquete: { id: enqueteId },
   } = props;
   const { id: userId } = useUser();
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE,
     {
       refetchQueries: [
@@ -38,6 +39,8 @@ export function EnqueteActiviteCuratellePersonne(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_CURATELLE_PERSONNE, {
     variables: {
       id: enqueteReponse.id,

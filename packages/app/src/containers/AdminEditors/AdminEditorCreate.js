@@ -8,10 +8,13 @@ import { captureException } from "~/user/sentry";
 import { AdminEditorForm } from "./AdminEditorForm";
 import { ADD_EDITOR } from "./mutations";
 import { cardStyle } from "./style";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function AdminEditorCreate() {
-  const [addEditor] = useMutation(ADD_EDITOR);
+  const [addEditor, { loading, error }] = useMutation(ADD_EDITOR);
   const history = useHistory();
+
+  useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setSubmitting, setStatus }) => {
     // TODO(paullaunay): generate key on server-side via hasura webhook or postgres func

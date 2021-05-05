@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
 import useUser from "~/hooks/useUser";
+import useQueryReady from "../../../hooks/useQueryReady";
 
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
@@ -10,7 +11,9 @@ import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
 export function ListeBlancheIndividuelCreate() {
   const history = useHistory();
   const { type } = useUser();
-  const [create, { loading }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
+  const [create, { loading, error }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
+
+  useQueryReady(loading, error);
 
   return (
     <Card p={5}>

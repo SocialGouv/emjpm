@@ -10,16 +10,19 @@ import { Button, Heading } from "~/components";
 // import { USERS } from "~/containers/AdminUsers/queries";
 import { DELETE_USER } from "./mutations";
 import { AdminUserDeleteRemoveStyle } from "./style";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function AdminUserDeleteForm(props) {
   const { userId } = props;
   const history = useHistory();
 
-  const [deleteUser] = useMutation(DELETE_USER, {
+  const [deleteUser, { loading, error }] = useMutation(DELETE_USER, {
     onCompleted: async () => {
       history.push("/admin/users");
     },
   });
+
+  useQueryReady(loading, error);
 
   const formik = useFormik({
     initialValues: {},

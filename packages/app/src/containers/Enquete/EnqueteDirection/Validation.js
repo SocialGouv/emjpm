@@ -7,6 +7,7 @@ import { useMutation } from "@apollo/client";
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import useUser from "~/hooks/useUser";
 import { useHistory } from "react-router";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export default function EnqueteDirectionValidation({
   enquete,
@@ -16,7 +17,7 @@ export default function EnqueteDirectionValidation({
   const { id: reponseId } = enqueteReponse;
   const { id: userId } = useUser();
 
-  const [validateEnqueteReponseMutation] = useMutation(
+  const [validateEnqueteReponseMutation, { loading, error }] = useMutation(
     VALIDATE_ENQUETE_REPONSE,
     {
       variables: {
@@ -30,6 +31,8 @@ export default function EnqueteDirectionValidation({
       ],
     }
   );
+
+  useQueryReady(loading, error);
 
   const history = useHistory();
 

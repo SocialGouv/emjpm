@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteEtablissementDomicileForm } from "./common";
 import { UPDATE_ENQUETE_ACTIVITE_TUTELLE } from "./mutations";
 import { ENQUETE_TUTELLE } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const PREFIX = "tutelle";
 
@@ -23,20 +24,25 @@ export function EnqueteActiviteTutelle(props) {
 
   const { id: userId } = useUser();
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_ACTIVITE_TUTELLE, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_TUTELLE,
-        variables: {
-          id: enqueteReponse.id,
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_ACTIVITE_TUTELLE,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_TUTELLE,
+          variables: {
+            id: enqueteReponse.id,
+          },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_TUTELLE, {
     variables: {
       id: enqueteReponse.id,

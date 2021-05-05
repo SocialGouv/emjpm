@@ -8,6 +8,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteMesuresForm } from "./common";
 import { UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR } from "./mutations";
 import { ENQUETE_MANDAT_ADHOC_MAJEUR } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 const PREFIX = "mandat_adhoc_majeur";
 
@@ -22,20 +23,25 @@ export function EnqueteActiviteMandatHadocMajeur(props) {
   } = props;
 
   const { id: userId } = useUser();
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_MANDAT_ADHOC_MAJEUR,
-        variables: {
-          id: enqueteReponse.id,
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_MANDAT_ADHOC_MAJEUR,
+          variables: {
+            id: enqueteReponse.id,
+          },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_MANDAT_ADHOC_MAJEUR, {
     variables: {
       id: enqueteReponse.id,

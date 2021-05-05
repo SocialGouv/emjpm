@@ -18,7 +18,10 @@ export function ListeBlancheServiceUpdate(props) {
     variables: { serviceId },
   });
   const { departements } = useDepartements();
-  const [updateService] = useMutation(UPDATE_SERVICE);
+  const [updateService, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_SERVICE
+  );
+  useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {
     return null;

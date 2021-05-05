@@ -6,6 +6,7 @@ import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
 
 import { MesureEtatCreateOrEditForm } from "./MesureEtatCreateOrEditForm";
 import { DELETE_MESURE_ETAT, UPSERT_MESURE_ETAT } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export const MesureEtatCreateOrEdit = ({
   mesure,
@@ -19,17 +20,25 @@ export const MesureEtatCreateOrEdit = ({
     mesureEtat = null;
   }
 
-  const [upsertMesureEtat] = useMutation(UPSERT_MESURE_ETAT, {
-    onCompleted: async () => {
-      onSuccess();
-    },
-  });
+  const [upsertMesureEtat, { loading: loading1, error: error1 }] = useMutation(
+    UPSERT_MESURE_ETAT,
+    {
+      onCompleted: async () => {
+        onSuccess();
+      },
+    }
+  );
+  useQueryReady(loading1, error1);
 
-  const [deleteMesureEtat] = useMutation(DELETE_MESURE_ETAT, {
-    onCompleted: async () => {
-      onSuccess();
-    },
-  });
+  const [deleteMesureEtat, { loading: loading2, error: error2 }] = useMutation(
+    DELETE_MESURE_ETAT,
+    {
+      onCompleted: async () => {
+        onSuccess();
+      },
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const etatWithSameDate = mesure?.mesureEtats?.find(

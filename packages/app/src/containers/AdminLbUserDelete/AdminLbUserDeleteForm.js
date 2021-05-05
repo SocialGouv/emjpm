@@ -10,13 +10,14 @@ import { Button, Heading } from "~/components";
 
 import { DELETE_LB_USER } from "./mutations";
 import { AdminLbUserDeleteRemoveStyle } from "./style";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function AdminLbUserDeleteForm(props) {
   const { lbUserId } = props;
 
   const history = useHistory();
 
-  const [deleteUser] = useMutation(DELETE_LB_USER, {
+  const [deleteUser, { loading, error }] = useMutation(DELETE_LB_USER, {
     awaitRefetchQueries: true,
     onCompleted: async () => {
       history.push("/admin/liste-blanche");
@@ -27,6 +28,8 @@ export function AdminLbUserDeleteForm(props) {
       },
     ],
   });
+
+  useQueryReady(loading, error);
 
   const formik = useFormik({
     initialValues: {},

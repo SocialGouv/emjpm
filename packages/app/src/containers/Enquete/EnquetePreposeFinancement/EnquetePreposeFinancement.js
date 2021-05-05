@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeFinancementForm } from "./EnquetePreposeFinancementForm";
 import { UPDATE_ENQUETE_REPONSES_FINANCEMENT } from "./mutations";
 import { ENQUETE_REPONSES_FINANCEMENT } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnquetePreposeFinancement(props) {
   const {
@@ -22,20 +23,25 @@ export function EnquetePreposeFinancement(props) {
       id: enqueteReponse.id,
     },
   });
-  const [updateFinancement] = useMutation(UPDATE_ENQUETE_REPONSES_FINANCEMENT, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_REPONSES_FINANCEMENT,
-        variables: {
-          id: enqueteReponse.id,
+  const [updateFinancement, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_REPONSES_FINANCEMENT,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_REPONSES_FINANCEMENT,
+          variables: {
+            id: enqueteReponse.id,
+          },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
+
   const financement = data ? data.enquete_reponses_financement[0] || {} : {};
 
   return (

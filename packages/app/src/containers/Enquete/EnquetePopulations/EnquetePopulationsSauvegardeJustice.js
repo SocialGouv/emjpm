@@ -8,6 +8,7 @@ import { EnquetePopulationsForm } from "./EnquetePopulationsForm";
 import { UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./mutations";
 import { ENQUETE_REPONSE_POPULATIONS_SAUVEGARDE_JUSTICE } from "./queries";
 import { removeAttributesPrefix } from "./removeAttributesPrefix.service";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnquetePopulationsSauvegardeJustice(props) {
   const {
@@ -29,7 +30,7 @@ export function EnquetePopulationsSauvegardeJustice(props) {
     }
   );
 
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE,
     {
       refetchQueries: [
@@ -44,6 +45,7 @@ export function EnquetePopulationsSauvegardeJustice(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
 
   const populations = useMemo(
     () => (data ? data.enquete_reponses_populations[0] || {} : {}),

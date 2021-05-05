@@ -7,6 +7,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteActiviteCausesSortiesDispositifForm } from "./EnqueteActiviteCausesSortiesDispositifForm";
 import { UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF } from "./mutations";
 import { ENQUETE_CAUSES_SORTIE_DISPOSITIF } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteActiviteCausesSortiesDispositif(props) {
   const {
@@ -18,7 +19,7 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
     enquete: { id: enqueteId },
   } = props;
   const { id: userId } = useUser();
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_ACTIVITE_CAUSES_SORTIE_DISPOSITIF,
     {
       refetchQueries: [
@@ -35,6 +36,8 @@ export function EnqueteActiviteCausesSortiesDispositif(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
+
   const { data, loading } = useQuery(ENQUETE_CAUSES_SORTIE_DISPOSITIF, {
     variables: {
       id: enqueteReponse.id,

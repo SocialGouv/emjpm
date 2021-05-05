@@ -17,7 +17,9 @@ import { descriptionStyle, labelStyle } from "./style";
 
 function RowItem({ item }) {
   const { id, name, api_token, redirect_uris } = item;
-  const [removeEditor] = useMutation(REMOVE_EDITOR);
+  const [removeEditor, { loading, error }] = useMutation(REMOVE_EDITOR);
+
+  useQueryReady(loading, error);
 
   const removeEditorFromList = async (id) => {
     try {

@@ -10,6 +10,7 @@ import serviceSiretExists from "~/query-service/emjpm-hasura/serviceSiretExists.
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { ADD_SERVICE } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function ListeBlancheServiceCreate(props) {
   const { handleCancel, onSuccess } = props;
@@ -17,9 +18,10 @@ export function ListeBlancheServiceCreate(props) {
   const client = useApolloClient();
   const { departements } = useDepartements();
 
-  const [addService] = useMutation(ADD_SERVICE, {
+  const [addService, { loading, error }] = useMutation(ADD_SERVICE, {
     onCompleted: () => history.push("/admin/services"),
   });
+  useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
     const siretExists = await serviceSiretExists(client, values.siret);

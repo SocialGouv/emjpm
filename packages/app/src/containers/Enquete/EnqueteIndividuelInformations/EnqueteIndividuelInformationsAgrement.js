@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 
 import useUser from "~/hooks/useUser";
+import useQueryReady from "../../../hooks/useQueryReady";
 
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteIndividuelInformationsAgrementForm } from "./EnqueteIndividuelInformationsAgrementForm";
@@ -18,7 +19,7 @@ export function EnqueteIndividuelInformationsAgrement(props) {
   } = props;
 
   const { id: userId } = useUser();
-  const { data, loading } = useQuery(
+  const { data, loading, error } = useQuery(
     ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
     {
       variables: {
@@ -27,23 +28,31 @@ export function EnqueteIndividuelInformationsAgrement(props) {
     }
   );
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_INFORMATIONS_AGREMENTS, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
-        variables: { id: enqueteReponse.id },
-      },
-    ],
-  });
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_INFORMATIONS_AGREMENTS,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+        },
+        {
+          query: ENQUETE_INDIVIDUEL_INFORMATIONS_AGREMENTS,
+          variables: { id: enqueteReponse.id },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const agrements = data
     ? data.enquete_reponses_agrements_formations[0]
     : undefined;
-  return loading ? null : (
+
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+  return (
     <EnqueteIndividuelInformationsAgrementForm
       data={agrements}
       section={section}

@@ -19,8 +19,16 @@ export function EtablissementImport() {
   const { data, loading, error } = useQuery(ROUTINE_IMPORT_FINESS, {
     fetchPolicy: "network-only",
   });
-  const [importFiness] = useMutation(IMPORT_FINESS);
-  const [configFinessDatasetUrl] = useMutation(CONFIG_FINESS_DATASET_URL);
+  const [importFiness, { loading: loading1, error: error1 }] = useMutation(
+    IMPORT_FINESS
+  );
+  const [
+    configFinessDatasetUrl,
+    { loading: loading2, error: error2 },
+  ] = useMutation(CONFIG_FINESS_DATASET_URL);
+
+  useQueryReady(loading1, error1);
+  useQueryReady(loading2, error2);
 
   const initialFinessDatasetUrl = data?.config_finess_dataset_url.value;
 

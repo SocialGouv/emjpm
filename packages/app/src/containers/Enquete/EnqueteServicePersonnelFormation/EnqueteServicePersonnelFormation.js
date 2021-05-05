@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteServicePersonnelFormationForm } from "./EnqueteServicePersonnelFormationForm";
 import { UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION } from "./mutations";
 import { ENQUETE_REPONSES_SERVICE_PERSONNEL_FORMATION } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteServicePersonnelFormation(props) {
   const {
@@ -28,7 +29,7 @@ export function EnqueteServicePersonnelFormation(props) {
     }
   );
 
-  const [updateEnquete] = useMutation(
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
     UPDATE_ENQUETE_REPONSE_SERVICE_PERSONNEL_FORMATION,
     {
       refetchQueries: [
@@ -45,6 +46,7 @@ export function EnqueteServicePersonnelFormation(props) {
       ],
     }
   );
+  useQueryReady(loading2, error2);
 
   const personnelFormation = data
     ? data.enquete_reponses_service_personnel_formation[0] || {}

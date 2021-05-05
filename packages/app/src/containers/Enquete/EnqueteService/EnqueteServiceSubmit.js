@@ -5,12 +5,13 @@ import useUser from "~/hooks/useUser";
 import { EnqueteSubmit } from "../EnqueteCommon";
 import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { SUBMIT_ENQUETE_REPONSE } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteServiceSubmit(props) {
   const { enquete, enqueteReponse, goToFirstPage } = props;
   const { id: enqueteId } = enquete;
   const { id: userId } = useUser();
-  const [submitEnqueteReponse, { loading }] = useMutation(
+  const [submitEnqueteReponse, { loading, error }] = useMutation(
     SUBMIT_ENQUETE_REPONSE,
     {
       refetchQueries: [
@@ -21,6 +22,8 @@ export function EnqueteServiceSubmit(props) {
       ],
     }
   );
+
+  useQueryReady(loading, error);
 
   return (
     <EnqueteSubmit

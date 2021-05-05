@@ -3,13 +3,16 @@ import { useState } from "react";
 
 import { UPLOAD_MESURES_EXCEL_FILE } from "~/containers/MesureImport/mutations";
 import { fileReader } from "~/utils/std/fileReader";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function useMesureImportManager({ mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [file, setFile] = useState();
-  const [uploadFile, { loading: mesuresImportLoading }] = useMutation(
-    UPLOAD_MESURES_EXCEL_FILE
-  );
+  const [
+    uploadFile,
+    { loading: mesuresImportLoading, error: mesuresImportError },
+  ] = useMutation(UPLOAD_MESURES_EXCEL_FILE);
+  useQueryReady(mesuresImportLoading, mesuresImportError);
 
   function importMesureFileWithAntennesMap(antennesMap) {
     launchImport({ antennesMap, file });

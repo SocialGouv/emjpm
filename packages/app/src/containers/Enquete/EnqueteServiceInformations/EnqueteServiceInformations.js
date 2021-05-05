@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnqueteServiceInformationsForm } from "./EnqueteServiceInformationsForm";
 import { UPDATE_ENQUETE_SERVICE_INFORMATIONS } from "./mutations";
 import { ENQUETE_SERVICE_INFORMATIONS } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnqueteServiceInformations(props) {
   const {
@@ -25,20 +26,25 @@ export function EnqueteServiceInformations(props) {
     },
   });
 
-  const [updateEnquete] = useMutation(UPDATE_ENQUETE_SERVICE_INFORMATIONS, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_SERVICE_INFORMATIONS,
-        variables: {
-          id: enqueteReponse.id,
+  const [updateEnquete, { loading: loading2, error: error2 }] = useMutation(
+    UPDATE_ENQUETE_SERVICE_INFORMATIONS,
+    {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
         },
-      },
-    ],
-  });
+        {
+          query: ENQUETE_SERVICE_INFORMATIONS,
+          variables: {
+            id: enqueteReponse.id,
+          },
+        },
+      ],
+    }
+  );
+  useQueryReady(loading2, error2);
+
   const informations = data
     ? data.enquete_reponses_service_informations[0] || {}
     : {};

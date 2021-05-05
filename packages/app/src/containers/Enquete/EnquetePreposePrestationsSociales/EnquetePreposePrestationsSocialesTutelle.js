@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposePrestationsSocialesRevenusForm } from "./EnquetePreposePrestationsSocialesRevenusForm";
 import { UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE } from "./mutations";
 import { ENQUETE_PREPOSE_PRESTATIONS_SOCIALES } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnquetePreposePrestationsSocialesTutelle(props) {
   const {
@@ -23,23 +24,24 @@ export function EnquetePreposePrestationsSocialesTutelle(props) {
     },
   });
 
-  const [updatePrestationsSociales] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE,
-    {
-      refetchQueries: [
-        {
-          query: ENQUETE_WITH_REPONSE_STATUS,
-          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+  const [
+    updatePrestationsSociales,
+    { loading: loading2, error: error2 },
+  ] = useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_TUTELLE, {
+    refetchQueries: [
+      {
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+      },
+      {
+        query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
+        variables: {
+          id: enqueteReponse.id,
         },
-        {
-          query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
-          variables: {
-            id: enqueteReponse.id,
-          },
-        },
-      ],
-    }
-  );
+      },
+    ],
+  });
+  useQueryReady(loading2, error2);
 
   const prestationsSociales = data
     ? data.enquete_reponses_prepose_prestations_sociales[0] || {}

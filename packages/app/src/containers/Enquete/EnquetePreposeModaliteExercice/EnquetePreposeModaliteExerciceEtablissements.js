@@ -6,6 +6,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "../queries";
 import { EnquetePreposeModaliteExerciceEtablissementsForm } from "./EnquetePreposeModaliteExerciceEtablissementsForm";
 import { UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS } from "./mutations";
 import { ENQUETE_PREPOSE_INFORMATIONS } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function EnquetePreposeModaliteExerciceEtablissements(props) {
   const {
@@ -23,21 +24,22 @@ export function EnquetePreposeModaliteExerciceEtablissements(props) {
     },
   });
 
-  const [updateEtablissements] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS,
-    {
-      refetchQueries: [
-        {
-          query: ENQUETE_WITH_REPONSE_STATUS,
-          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-        },
-        {
-          query: ENQUETE_PREPOSE_INFORMATIONS,
-          variables: { id: enqueteReponse.id },
-        },
-      ],
-    }
-  );
+  const [
+    updateEtablissements,
+    { loading: loading2, error: error2 },
+  ] = useMutation(UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS, {
+    refetchQueries: [
+      {
+        query: ENQUETE_WITH_REPONSE_STATUS,
+        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+      },
+      {
+        query: ENQUETE_PREPOSE_INFORMATIONS,
+        variables: { id: enqueteReponse.id },
+      },
+    ],
+  });
+  useQueryReady(loading2, error2);
 
   return loading ? null : (
     <EnquetePreposeModaliteExerciceEtablissementsForm

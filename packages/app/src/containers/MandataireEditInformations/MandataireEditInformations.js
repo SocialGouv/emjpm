@@ -26,18 +26,22 @@ const MandataireEditInformations = ({
     },
   });
 
-  const [editUser] = useMutation(EDIT_USER, {
-    onError(error) {
-      setErrorMessage(error);
-    },
-    update() {
-      if (successLink) {
-        history.push(`${successLink}`, `${successLink}`, {
-          shallow: true,
-        });
-      }
-    },
-  });
+  const [editUser, { loading: loading2, error: error2 }] = useMutation(
+    EDIT_USER,
+    {
+      onError(error) {
+        setErrorMessage(error);
+      },
+      update() {
+        if (successLink) {
+          history.push(`${successLink}`, `${successLink}`, {
+            shallow: true,
+          });
+        }
+      },
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const { departements } = useDepartements();
 

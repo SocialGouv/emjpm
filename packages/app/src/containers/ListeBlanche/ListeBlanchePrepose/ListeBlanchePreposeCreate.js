@@ -7,17 +7,22 @@ import useUser from "~/hooks/useUser";
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
 import { CREATE_LB_USER_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function ListeBlanchePreposeCreate() {
   const apolloClient = useApolloClient();
   const { type } = useUser();
   const history = useHistory();
 
-  const [createLbPrepose] = useMutation(CREATE_LB_USER_PREPOSE, {
-    onCompleted: async () => {
-      await history.push(`/${type}/liste-blanche`);
-    },
-  });
+  const [createLbPrepose, { loading, error }] = useMutation(
+    CREATE_LB_USER_PREPOSE,
+    {
+      onCompleted: async () => {
+        await history.push(`/${type}/liste-blanche`);
+      },
+    }
+  );
+  useQueryReady(loading, error);
 
   return (
     <Card p={5}>

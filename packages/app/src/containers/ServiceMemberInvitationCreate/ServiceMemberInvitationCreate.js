@@ -10,17 +10,24 @@ import {
 } from "./mutations";
 import { USER_EMAIL_EXISTS } from "./queries";
 import { ServiceMemberInvitationForm } from "./ServiceMemberInvitationForm";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function ServiceMemberInvitationCreate(props) {
   const { service, isAdmin } = props;
 
   const client = useApolloClient();
-  const [createServiceMemberInvitation] = useMutation(
-    CREATE_SERVICE_MEMBER_INVITATION
-  );
-  const [sendEmailServiceMemberInvitation] = useMutation(
-    SEND_EMAIL_SERVICE_MEMBER_INVITATION
-  );
+
+  const [
+    createServiceMemberInvitation,
+    { loading: loading1, error: error1 },
+  ] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
+  useQueryReady(loading1, error1);
+
+  const [
+    sendEmailServiceMemberInvitation,
+    { loading: loading2, error: error2 },
+  ] = useMutation(SEND_EMAIL_SERVICE_MEMBER_INVITATION);
+  useQueryReady(loading2, error2);
 
   async function handleSubmit(values, { resetForm, setErrors }) {
     const { data } = await client.query({

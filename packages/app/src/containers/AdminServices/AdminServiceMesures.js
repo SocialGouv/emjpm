@@ -18,6 +18,7 @@ import { Heading, Select } from "~/components";
 
 import { CALCULATE_MESURES, DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export const MESURES_OPTIONS = [
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
@@ -44,7 +45,7 @@ function AdminServiceMesures() {
 
   const [
     recalculateServiceMesures,
-    { loading: recalculateServiceMesuresLoading },
+    { loading: recalculateServiceMesuresLoading, error: error1 },
   ] = useMutation(CALCULATE_MESURES, {
     refetchQueries: [
       {
@@ -56,18 +57,21 @@ function AdminServiceMesures() {
     ],
   });
 
-  const [deleteMesures, { loading: mutationLoading }] = useMutation(
-    DELETE_MESURES,
-    {
-      onCompleted: async () => {
-        await recalculateServiceMesures({
-          variables: {
-            serviceId,
-          },
-        });
-      },
-    }
-  );
+  const [
+    deleteMesures,
+    { loading: mutationLoading, error: error2 },
+  ] = useMutation(DELETE_MESURES, {
+    onCompleted: async () => {
+      await recalculateServiceMesures({
+        variables: {
+          serviceId,
+        },
+      });
+    },
+  });
+
+  useQueryReady(recalculateServiceMesuresLoading, error1);
+  useQueryReady(mutationLoading, error2);
 
   const allMesures = useMemo(() => (data ? data.mesures : []), [data]);
 

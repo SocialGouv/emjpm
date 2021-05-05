@@ -5,14 +5,17 @@ import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { UPDATE_TRIBUNAL } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function AdminEditTribunal({ tribunal, closePanel }) {
-  const { departements, loading } = useDepartements();
-  const [updateTribunal] = useMutation(UPDATE_TRIBUNAL, {
+  const { departements, loadingDepartements } = useDepartements();
+  const [updateTribunal, { loading, error }] = useMutation(UPDATE_TRIBUNAL, {
     onCompleted: closePanel,
   });
 
-  if (loading) {
+  useQueryReady(loading, error);
+
+  if (loadingDepartements) {
     return null;
   }
 

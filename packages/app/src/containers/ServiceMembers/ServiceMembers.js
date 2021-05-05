@@ -23,14 +23,21 @@ import useQueryReady from "~/hooks/useQueryReady";
 
 function ServiceMembers(props) {
   const { isAdmin, service, userId } = props;
-  const [deleteServiceMember] = useMutation(DELETE_SERVICE_MEMBER);
-  const [updateServiceMemberIsAdmin] = useMutation(
-    UPDATE_SERVICE_MEMBER_IS_ADMIN
-  );
 
   const { loading, error, data } = useQuery(SERVICE_MEMBERS, {
     variables: { serviceId: service.id },
   });
+
+  const [
+    deleteServiceMember,
+    { loading: loading1, error: error1 },
+  ] = useMutation(DELETE_SERVICE_MEMBER);
+  useQueryReady(loading1, error1);
+  const [
+    updateServiceMemberIsAdmin,
+    { loading: loading2, error: error2 },
+  ] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
+  useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {
     return null;

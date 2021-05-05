@@ -7,16 +7,19 @@ import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { AdminTribunalForm } from "./AdminTribunalForm";
 import { ADD_TRIBUNAL } from "./mutations";
+import useQueryReady from "~/hooks/useQueryReady";
 
 export function AdminAddTribunal() {
   const history = useHistory();
 
-  const { departements, loading } = useDepartements();
-  const [addTribunal] = useMutation(ADD_TRIBUNAL, {
+  const { departements, loading: loadingDepartements } = useDepartements();
+  const [addTribunal, { loading, error }] = useMutation(ADD_TRIBUNAL, {
     onCompleted: () => history.push("/admin/tribunaux"),
   });
 
-  if (loading) {
+  useQueryReady(loading, error);
+
+  if (loadingDepartements) {
     return null;
   }
 

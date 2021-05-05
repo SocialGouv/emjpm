@@ -12,7 +12,9 @@ import { EDITOR_REQUESTS } from "./queries";
 import { descriptionStyle, labelStyle } from "./style";
 
 function RowItem({ item }) {
-  const [addEditor] = useMutation(ADD_EDITOR_FROM_REQUEST);
+  const [addEditor, { loading, error }] = useMutation(ADD_EDITOR_FROM_REQUEST);
+
+  useQueryReady(loading, error);
 
   const authorizeEditor = async (id, name) => {
     const api_token = Math.random().toString(36).substring(2);

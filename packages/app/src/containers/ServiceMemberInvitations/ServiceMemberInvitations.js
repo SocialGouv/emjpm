@@ -20,12 +20,15 @@ import useQueryReady from "~/hooks/useQueryReady";
 function ServiceMemberInvitations(props) {
   const { service, isAdmin } = props;
 
-  const [deleteServiceMemberInvitation] = useMutation(
-    DELETE_SERVICE_MEMBER_INVITATION
-  );
   const { loading, error, data } = useQuery(SERVICE_MEMBER_INVITATIONS, {
     variables: { serviceId: service.id },
   });
+
+  const [
+    deleteServiceMemberInvitation,
+    { loading: loading2, error: error2 },
+  ] = useMutation(DELETE_SERVICE_MEMBER_INVITATION);
+  useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {
     return null;

@@ -10,6 +10,7 @@ import { Button, Heading, Text } from "~/components";
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LB_USER, USER } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
 
 function AdminUserActivation(props) {
   const { userId } = props;
@@ -43,12 +44,18 @@ function AdminUserActivation(props) {
     variables: { userId },
   });
 
-  const [activateUser, { loading: activateUserLoading }] = useMutation(
-    ACTIVATE_USER
-  );
-  const [sendEmailAccountValidation] = useMutation(
-    SEND_EMAIL_ACCOUNT_VALIDATION
-  );
+  const [
+    activateUser,
+    { loading: activateUserLoading, error: error1 },
+  ] = useMutation(ACTIVATE_USER);
+  const [
+    sendEmailAccountValidation,
+    { loading: loading2, error: error2 },
+  ] = useMutation(SEND_EMAIL_ACCOUNT_VALIDATION);
+
+  useQueryReady(activateUserLoading, error1);
+  useQueryReady(loading2, error2);
+
   const lb_user =
     queryResult.data && queryResult.data.lb_users.length
       ? queryResult.data.lb_users[0]
