@@ -1,11 +1,9 @@
 CREATE EXTENSION unaccent;
 
-CREATE OR REPLACE FUNCTION public.immutable_unaccent(regdictionary, text)
-  RETURNS text LANGUAGE c IMMUTABLE PARALLEL SAFE STRICT AS
-'$libdir/unaccent', 'unaccent_dict';
-
-CREATE OR REPLACE FUNCTION public.f_unaccent(text)
-  RETURNS text LANGUAGE sql IMMUTABLE PARALLEL SAFE STRICT AS
+CREATE OR REPLACE FUNCTION f_unaccent(text)
+  RETURNS text AS
 $func$
-SELECT public.immutable_unaccent(regdictionary 'public.unaccent', $1)
-$func$;
+SELECT public.unaccent('public.unaccent', $1)  -- schema-qualify function and dictionary
+$func$
+LANGUAGE sql
+IMMUTABLE;
