@@ -5864,39 +5864,6 @@
       - magistrat_id
       filter: {}
       allow_aggregations: true
-  - role: direction
-    permission:
-      columns:
-      - annee_naissance
-      - antenne_id
-      - cabinet
-      - cause_sortie
-      - champ_mesure
-      - civilite
-      - code_postal
-      - created_at
-      - date_fin_mesure
-      - date_nomination
-      - departement_code
-      - etablissement_id
-      - id
-      - is_urgent
-      - judgment_date
-      - latitude
-      - lieu_vie
-      - longitude
-      - magistrat_id
-      - mandataire_id
-      - nature_mesure
-      - numero_dossier
-      - numero_rg
-      - pays
-      - service_id
-      - status
-      - ti_id
-      - ville
-      filter: {}
-      allow_aggregations: true
   - role: direction_nationale
     permission:
       columns:
@@ -6064,7 +6031,11 @@
       - ti_id
       - type_etablissement
       - ville
-      filter: {}
+      filter:
+        ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: individuel
@@ -7444,51 +7415,71 @@
     permission:
       columns:
       - active
-      - id
-      - created_at
-      - last_login
-      - reset_password_expires
       - cabinet
+      - created_at
       - email
+      - id
+      - last_login
       - nom
-      - password
       - prenom
-      - reset_password_token
       - type
-      filter: {}
+      filter:
+        _or:
+        - type:
+            _eq: individuel
+        - type:
+            _eq: prepose
+        - type:
+            _eq: service
+        - id:
+            _eq: X-Hasura-User-Id
       allow_aggregations: true
   - role: direction_nationale
     permission:
       columns:
-      - id
-      - password
-      - created_at
-      - type
-      - last_login
       - active
-      - reset_password_token
-      - reset_password_expires
+      - cabinet
+      - created_at
+      - email
+      - id
+      - last_login
       - nom
       - prenom
-      - cabinet
-      - email
-      filter: {}
+      - type
+      filter:
+        _or:
+        - type:
+            _eq: individuel
+        - type:
+            _eq: prepose
+        - type:
+            _eq: service
+        - id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
   - role: direction_territoriale
     permission:
       columns:
-      - id
-      - password
-      - created_at
-      - type
-      - last_login
       - active
-      - reset_password_token
-      - reset_password_expires
+      - cabinet
+      - created_at
+      - email
+      - id
+      - last_login
       - nom
       - prenom
-      - cabinet
-      - email
-      filter: {}
+      - type
+      filter:
+        _or:
+        - type:
+            _eq: individuel
+        - type:
+            _eq: prepose
+        - type:
+            _eq: service
+        - id:
+            _eq: X-Hasura-User-Id
+      allow_aggregations: true
   - role: individuel
     permission:
       columns:
@@ -7553,6 +7544,7 @@
   - role: ti
     permission:
       columns:
+      - active
       - cabinet
       - created_at
       - email
@@ -7561,7 +7553,16 @@
       - nom
       - prenom
       - type
-      filter: {}
+      filter:
+        _or:
+        - type:
+            _eq: individuel
+        - type:
+            _eq: prepose
+        - type:
+            _eq: service
+        - id:
+            _eq: X-Hasura-User-Id
       allow_aggregations: true
   update_permissions:
   - role: direction
