@@ -15,7 +15,7 @@ function Mandataires() {
   if (direction?.type === "departemental") {
     initialFilters.departement = direction.departement.id;
   } else if (direction?.type === "regional") {
-    initialFilters.region = direction.region.id;
+    initialFilters.region = direction.region.id.toString();
   }
 
   return (
