@@ -124,10 +124,10 @@ function ListeBlancheFilter() {
                 placeholder="nom, prénom, email ou SIRET"
               />
             </Box>
-            <Box mr={1} pt={2} width="100px">
+            <Box mr={1} pt={2} width="250px">
               <CheckBox
                 instanceId={"filters-departement-financeur"}
-                label="Financé"
+                label="Financés par le département"
                 name="departementFinanceur"
                 isChecked={departementFinanceur || false}
                 onChange={() =>

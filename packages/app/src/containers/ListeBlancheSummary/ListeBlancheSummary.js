@@ -76,6 +76,9 @@ function ListeBlancheSummary() {
     individuel_finance: {
       aggregate: { count: individuelFinanceCount },
     },
+    individuel_finance_departement: {
+      aggregate: { count: individuelFinanceDepartementCount },
+    },
     service: {
       aggregate: { count: serviceCount },
     },
@@ -92,7 +95,14 @@ function ListeBlancheSummary() {
       <Flex flexDirection="column" pt={1}>
         <LabelValue
           label="Mandataire individuel"
-          value={`${individuelCount} dont ${individuelFinanceCount} financés`}
+          value={
+            `${individuelCount} dont ${individuelFinanceCount} financés` +
+            (!departement
+              ? ""
+              : " et " +
+                individuelFinanceDepartementCount +
+                " financés par le département")
+          }
         />
         <LabelValue
           label="Mandataire préposé à un établissement"
