@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.117.1](https://github.com/SocialGouv/emjpm/compare/v25.117.0...v25.117.1) (2021-05-05)
+
+
+### Bug Fixes
+
+* **pg:** missing c permission ([40f7269](https://github.com/SocialGouv/emjpm/commit/40f72693bf88615c41e7837d78b37bced7cb3110))
+
+
+
+
+
 # [25.117.0](https://github.com/SocialGouv/emjpm/compare/v25.116.6...v25.117.0) (2021-05-05)
 
 
