@@ -38,17 +38,31 @@ export default function EnqueteDirectionValidation({
     history.push(`/direction/enquetes/${enqueteId}/reponse/${reponseId}`);
   };
 
+  const { status } = enqueteReponse;
+
   return (
     <Box py={"50px"}>
       <HeadingTitle textAlign="center">Validation</HeadingTitle>
       <Box>
         <Box sx={{ lineHeight: "30px", marginTop: 4, textAlign: "center" }}>
-          <Text>
-            Pour valider la réponse à l'enquête cliquez sur le bouton suivant:
-          </Text>
-          <Button onClick={() => validateEnqueteReponse()} mx="auto" mt={30}>
-            Valider
-          </Button>
+          {status !== "validated" && (
+            <>
+              <Text>
+                Pour valider la réponse à l'enquête cliquez sur le bouton
+                suivant:
+              </Text>
+              <Button
+                onClick={() => validateEnqueteReponse()}
+                mx="auto"
+                mt={30}
+              >
+                Valider
+              </Button>
+            </>
+          )}
+          {status === "validated" && (
+            <Text>Cette réponse à l'enquête {enquete.annee} est validée</Text>
+          )}
         </Box>
       </Box>
     </Box>
