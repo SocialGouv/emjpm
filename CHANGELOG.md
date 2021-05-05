@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.117.0](https://github.com/SocialGouv/emjpm/compare/v25.116.6...v25.117.0) (2021-05-05)
+
+
+### Bug Fixes
+
+* **direction-regional:** default  filter on login ([aacba04](https://github.com/SocialGouv/emjpm/commit/aacba042452317730995e5757617a85b566b088e))
+* **enquete:** validation when validated ([ad905e1](https://github.com/SocialGouv/emjpm/commit/ad905e185464794728794aef9c9781eb6fcf498c))
+* **liste-blanche:** financé ambiguity ([34a1360](https://github.com/SocialGouv/emjpm/commit/34a1360d7059201cf9e5c221309ed092aad047c3))
+* **search-users:** id first ([f61692c](https://github.com/SocialGouv/emjpm/commit/f61692c643c69603c67b0cdb84ff485fbea9798f))
+* **security:** reinforce rules thanks EY feedback ([c3d540d](https://github.com/SocialGouv/emjpm/commit/c3d540d57e99dd946b2120a90d79925015c4b770))
+
+
+### Features
+
+* **import:** individuel remove tab from file ([d223271](https://github.com/SocialGouv/emjpm/commit/d2232713eee2d27ee4898bc4345a844205ff4fbf))
+* **mutation:** handle loading and errors ([f485f34](https://github.com/SocialGouv/emjpm/commit/f485f3483e7b0e65a6a94506e797db4a276d675c))
+* **search:** accent insensitivation ([9940448](https://github.com/SocialGouv/emjpm/commit/99404487c3faa1a0a5a7abfbbcae04cad686289e))
+
+
+
+
+
 ## [25.116.6](https://github.com/SocialGouv/emjpm/compare/v25.116.5...v25.116.6) (2021-05-04)
 
 
