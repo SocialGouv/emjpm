@@ -69,7 +69,7 @@ export const ENQUETE_DETAILS_RESUME = gql`
 `;
 
 export const ENQUETE_DETAILS_LIST = gql`
-  query enquete_details(
+  query ENQUETE_DETAILS_LIST(
     $enqueteId: Int!
     $offset: Int!
     $limit: Int!

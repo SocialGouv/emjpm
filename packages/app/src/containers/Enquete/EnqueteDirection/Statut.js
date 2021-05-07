@@ -34,6 +34,7 @@ export default function EnqueteDirectionStatut({
         reponseId,
       },
       refetchQueries: [
+        "ENQUETE_DETAILS_LIST",
         {
           query: ENQUETE_WITH_REPONSE_STATUS,
           variables: { enqueteId, userId, reponseId },
