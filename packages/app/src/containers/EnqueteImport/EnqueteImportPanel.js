@@ -1,4 +1,3 @@
-import { useApolloClient } from "@apollo/client";
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
@@ -17,7 +16,6 @@ const textStyle = {
 
 export function EnqueteImportPanel(props) {
   const { enqueteId, userId, goToStep } = props;
-  const apolloClient = useApolloClient();
 
   const {
     importEnqueteFile,
@@ -31,11 +29,18 @@ export function EnqueteImportPanel(props) {
     userId,
   });
 
+  const status = enqueteReponse?.status;
   useEffect(() => {
-    if (enqueteReponse && enqueteReponse.status !== "draft") {
+    if (status && status !== "draft") {
       goToStep(enqueteId, { step: 0, subtep: 0 });
     }
-  });
+  }, [status]);
+
+  useEffect(() => {
+    if (importSummary && !importSummary.unexpectedError) {
+      goToStep(enqueteId, { step: 1, substep: 0 });
+    }
+  }, [importSummary]);
 
   if (!useQueryReady(loading, error)) {
     return null;
@@ -48,12 +53,6 @@ export function EnqueteImportPanel(props) {
         patienter...
       </Box>
     );
-  }
-
-  if (importSummary && !importSummary.unexpectedError) {
-    // clear cache after import
-    apolloClient.clearStore();
-    goToStep(enqueteId, { step: 1, substep: 0 });
   }
 
   return (

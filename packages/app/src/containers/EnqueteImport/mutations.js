@@ -4,7 +4,7 @@ export const UPLOAD_ENQUETE_EXCEL_FILE = gql`
   mutation upload_enquete_file(
     $content: String!
     $enqueteId: Int!
-    $userId: Int
+    $userId: Int!
   ) {
     upload_enquete_file(
       content: $content

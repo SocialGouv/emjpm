@@ -37,36 +37,31 @@ function useEnqueteImportManager({ enqueteId, userId }) {
     ? enqueteReponseData.enquete_reponse_validation_status
     : undefined;
 
-  function readFile(file, cb, err) {
-    if (file) {
-      fileReader.readBinaryFileAsBase64(file, cb, err);
+  async function importEnqueteFile(file) {
+    if (!file) {
+      return;
     }
-  }
-
-  function importEnqueteFile(file) {
-    readFile(file, ({ content }) => {
-      uploadFile({
-        variables: {
-          content,
-          enqueteId,
-          userId,
-        },
-      })
-        .then(
-          ({
-            data: {
-              upload_enquete_file: { data },
-            },
-          }) => {
-            const importSummary = JSON.parse(data);
-            setImportSummary(importSummary);
-          }
-        )
-        .catch(() => {
-          setImportSummary({
-            unexpectedError: true,
-          });
+    fileReader.readBinaryFileAsBase64(file, async ({ content }) => {
+      try {
+        const res = await uploadFile({
+          variables: {
+            content,
+            enqueteId,
+            userId,
+          },
         });
+        const {
+          data: {
+            upload_enquete_file: { data },
+          },
+        } = res;
+        const importSummary = JSON.parse(data);
+        setImportSummary(importSummary);
+      } catch (error) {
+        setImportSummary({
+          unexpectedError: true,
+        });
+      }
     });
   }
 
