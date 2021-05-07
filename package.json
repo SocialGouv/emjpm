@@ -29,7 +29,8 @@
     "delivery": "scripts/ci/delivery",
     "ci:logs": "scripts/ci/k8sci-logs",
     "ci:trigger": "scripts/ci/trigger",
-    "ci:stop": "scripts/ci/k8sci-stop"
+    "ci:stop": "scripts/ci/k8sci-stop",
+    "ci:sync": "scripts/ci/sync-branch-with-master"
   },
   "license": "Apache-2.0",
   "devDependencies": {

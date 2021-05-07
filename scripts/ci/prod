@@ -1,17 +1,4 @@
 #!/bin/sh
 set -e
 
-if [ -n "$(git diff)" ]; then
-  STASHING=1
-  git stash
-fi
-
-git checkout prod
-git reset --hard master
-git push --follow-tags --force
-git checkout master
-
-if [ -n "$STASHING" ]; then
-  git stash apply
-fi
-
+exec $(dirname $0)/sync-branch-with-master prod
