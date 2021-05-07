@@ -1,6 +1,7 @@
 import { LoaderCircle } from "@styled-icons/boxicons-regular/LoaderCircle";
 import { useEffect } from "react";
 import { Box, Flex, Text } from "rebass";
+import { useApolloClient } from "@apollo/client";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import menuStepperStyle from "~/containers/Enquete/EnqueteCommon/EnqueteMenuStepper/style";
@@ -29,6 +30,8 @@ export function EnqueteImportPanel(props) {
     userId,
   });
 
+  const apolloClient = useApolloClient();
+
   const status = enqueteReponse?.status;
   useEffect(() => {
     if (status && status !== "draft") {
@@ -38,6 +41,8 @@ export function EnqueteImportPanel(props) {
 
   useEffect(() => {
     if (importSummary && !importSummary.unexpectedError) {
+      // reset cache after import
+      apolloClient.resetStore();
       goToStep(enqueteId, { step: 1, substep: 0 });
     }
   }, [importSummary, enqueteId, goToStep]);
