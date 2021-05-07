@@ -43,9 +43,7 @@ function ImportMesures() {
               A partir de votre compte OCMI
             </ImportTypeTab>
           )}
-          {(user.type !== "individuel" || !ocmi_mandataire) && (
-            <ImportTypeTab type="file">{`À partir d'un fichier`}</ImportTypeTab>
-          )}
+          <ImportTypeTab type="file">{`À partir d'un fichier`}</ImportTypeTab>
         </Flex>
         <Card mb="5" pt="5">
           {importType === "ocmi" && (
