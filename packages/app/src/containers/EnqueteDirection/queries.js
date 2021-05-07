@@ -113,6 +113,17 @@ export const ENQUETE_DETAILS_LIST = gql`
         count(columns: id)
       }
     }
+    enquete_validated_count: enquete_reponses_aggregate(
+      where: {
+        departement_code: { _eq: $departementCode }
+        enquete_id: { _eq: $enqueteId }
+        status: { _eq: validated }
+      }
+    ) {
+      enquete_reponses: aggregate {
+        count(columns: id)
+      }
+    }
     enquete_submitted_count: enquete_reponses_aggregate(
       where: {
         departement_code: { _eq: $departementCode }

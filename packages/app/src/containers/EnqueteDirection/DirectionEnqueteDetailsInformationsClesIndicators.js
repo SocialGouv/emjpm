@@ -9,6 +9,7 @@ export function DirectionEnqueteDetailsInformationsClesIndicators(props) {
     individuelsCount,
     servicesCount,
     enqueteDraftCount,
+    enqueteValidatedCount,
     enqueteSubmittedCount,
     daysBeforeClosing,
   } = props;
@@ -16,23 +17,13 @@ export function DirectionEnqueteDetailsInformationsClesIndicators(props) {
   return (
     <FlexWrapper flexWrap={"wrap"}>
       <Box sx={fourColumnStyle}>
-        <Indicator title="Préposés" indicator={preposesCount} />
-      </Box>
-      <Box sx={fourColumnStyle}>
         <Indicator title="Individuels" indicator={individuelsCount} />
       </Box>
       <Box sx={fourColumnStyle}>
+        <Indicator title="Préposés" indicator={preposesCount} />
+      </Box>
+      <Box sx={fourColumnStyle}>
         <Indicator title="Services" indicator={servicesCount} />
-      </Box>
-      <Box sx={fourColumnStyle} />
-      <Box sx={fourColumnStyle}>
-        <Indicator title="Réponses en cours" indicator={enqueteDraftCount} />
-      </Box>
-      <Box sx={fourColumnStyle}>
-        <Indicator
-          title="Réponses envoyées"
-          indicator={enqueteSubmittedCount}
-        />
       </Box>
       {daysBeforeClosing !== undefined && (
         <Box sx={fourColumnStyle}>
@@ -49,6 +40,27 @@ export function DirectionEnqueteDetailsInformationsClesIndicators(props) {
           )}
         </Box>
       )}
+      <Box sx={fourColumnStyle}>
+        <Indicator
+          title="Réponses attendues"
+          indicator={preposesCount + individuelsCount + servicesCount}
+        />
+      </Box>
+      <Box sx={fourColumnStyle}>
+        <Indicator title="Réponses en cours" indicator={enqueteDraftCount} />
+      </Box>
+      <Box sx={fourColumnStyle}>
+        <Indicator
+          title="Réponses envoyées"
+          indicator={enqueteSubmittedCount}
+        />
+      </Box>
+      <Box sx={fourColumnStyle}>
+        <Indicator
+          title="Réponses validées"
+          indicator={enqueteValidatedCount}
+        />
+      </Box>
     </FlexWrapper>
   );
 }

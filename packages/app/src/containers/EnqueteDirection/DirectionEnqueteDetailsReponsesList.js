@@ -104,6 +104,9 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
             individuelsCount={data.individuels_aggregate.mandataires.count}
             servicesCount={data.services_aggregate.services.count}
             enqueteDraftCount={data.enquete_draft_count.enquete_reponses.count}
+            enqueteValidatedCount={
+              data.enquete_validated_count.enquete_reponses.count
+            }
             enqueteSubmittedCount={
               data.enquete_submitted_count.enquete_reponses.count
             }
