@@ -34,13 +34,13 @@ export function EnqueteImportPanel(props) {
     if (status && status !== "draft") {
       goToStep(enqueteId, { step: 0, subtep: 0 });
     }
-  }, [status]);
+  }, [status, enqueteId, goToStep]);
 
   useEffect(() => {
     if (importSummary && !importSummary.unexpectedError) {
       goToStep(enqueteId, { step: 1, substep: 0 });
     }
-  }, [importSummary]);
+  }, [importSummary, enqueteId, goToStep]);
 
   if (!useQueryReady(loading, error)) {
     return null;
