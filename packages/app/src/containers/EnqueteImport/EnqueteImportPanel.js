@@ -45,7 +45,7 @@ export function EnqueteImportPanel(props) {
       apolloClient.resetStore();
       goToStep(enqueteId, { step: 1, substep: 0 });
     }
-  }, [importSummary, enqueteId, goToStep]);
+  }, [importSummary, enqueteId, goToStep, apolloClient]);
 
   if (!useQueryReady(loading, error)) {
     return null;
