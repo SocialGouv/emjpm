@@ -24,9 +24,8 @@ import { SignupGeneralError } from "./SignupGeneralError";
 
 export function SignupDirection() {
   const history = useHistory();
-  const { user, departement, direction, region, validateStepOne } = useContext(
-    SignupContext
-  );
+  const { user, departement, direction, region, validateStepOne } =
+    useContext(SignupContext);
 
   const formik = useFormik({
     initialValues: {

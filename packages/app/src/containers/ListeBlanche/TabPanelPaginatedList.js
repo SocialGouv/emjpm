@@ -31,9 +31,10 @@ function getRequestFilters(filters) {
       },
     };
     if (filters.departementFinanceur) {
-      individuelDepartementFilters.lb_user.lb_departements.departement_financeur = {
-        _eq: filters.departementFinanceur === true,
-      };
+      individuelDepartementFilters.lb_user.lb_departements.departement_financeur =
+        {
+          _eq: filters.departementFinanceur === true,
+        };
     }
 
     const preposeDepartementFilter = {

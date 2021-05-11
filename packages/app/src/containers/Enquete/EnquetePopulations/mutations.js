@@ -88,18 +88,13 @@ function buildEnquetePopulationMutation(prefix) {
   `;
 }
 
-export const UPDATE_ENQUETE_POPULATIONS_CURATELLE = buildEnquetePopulationMutation(
-  "curatelle"
-);
-export const UPDATE_ENQUETE_POPULATIONS_TUTELLE = buildEnquetePopulationMutation(
-  "tutelle"
-);
-export const UPDATE_ENQUETE_POPULATIONS_MAJ = buildEnquetePopulationMutation(
-  "maj"
-);
-export const UPDATE_ENQUETE_POPULATIONS_AUTRE = buildEnquetePopulationMutation(
-  "autre_mesures"
-);
-export const UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE = buildEnquetePopulationMutation(
-  "sauvegarde_justice"
-);
+export const UPDATE_ENQUETE_POPULATIONS_CURATELLE =
+  buildEnquetePopulationMutation("curatelle");
+export const UPDATE_ENQUETE_POPULATIONS_TUTELLE =
+  buildEnquetePopulationMutation("tutelle");
+export const UPDATE_ENQUETE_POPULATIONS_MAJ =
+  buildEnquetePopulationMutation("maj");
+export const UPDATE_ENQUETE_POPULATIONS_AUTRE =
+  buildEnquetePopulationMutation("autre_mesures");
+export const UPDATE_ENQUETE_POPULATIONS_SAUVEGARDE_JUSTICE =
+  buildEnquetePopulationMutation("sauvegarde_justice");

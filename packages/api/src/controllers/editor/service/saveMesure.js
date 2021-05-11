@@ -7,14 +7,8 @@ const getGeoDatas = require("~/services/getGeoDatas");
 async function saveMesures(allMesureDatas, trx) {
   const createdMesureIds = [];
   for (const mesureDatas of allMesureDatas) {
-    const {
-      datas,
-      type,
-      antenneId,
-      serviceOrMandataire,
-      ti,
-      editorId,
-    } = mesureDatas;
+    const { datas, type, antenneId, serviceOrMandataire, ti, editorId } =
+      mesureDatas;
 
     const lastEtatDatas = await getLastEtatDatas(datas.etats);
     const { lastEtat, departement } = lastEtatDatas;
@@ -97,11 +91,10 @@ async function persistMesure(mesureToCreate, datas, trx) {
         annee: ressource.annee || null,
         mesure_id: mesure.id,
 
-        mesure_ressources_prestations_sociales: ressource.prestations_sociales?.map(
-          (prestations_sociales) => ({
+        mesure_ressources_prestations_sociales:
+          ressource.prestations_sociales?.map((prestations_sociales) => ({
             prestations_sociales,
-          })
-        ),
+          })),
         niveau_ressource: ressource.niveau_ressource,
       });
       mesure.ressources.push(createdMesureRessource);

@@ -23,10 +23,8 @@ export function MagistratMesureDeleteForm(props) {
     magistrat: { ti_id: tiId },
   } = useUser();
 
-  const [
-    recalculateMesures,
-    { loading: loading1, error: error1 },
-  ] = useMutation(CALCULATE_MESURES);
+  const [recalculateMesures, { loading: loading1, error: error1 }] =
+    useMutation(CALCULATE_MESURES);
   useQueryReady(loading1, error1);
 
   const [deleteMesure, { loading: loading2, error: error2 }] = useMutation(

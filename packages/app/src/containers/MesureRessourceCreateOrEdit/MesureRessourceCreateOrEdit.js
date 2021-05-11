@@ -24,34 +24,28 @@ export const MesureRessourceCreateOrEdit = ({
     mesureRessource = null;
   }
 
-  const [
-    updateMesureRessource,
-    { loading: loading1, error: error1 },
-  ] = useMutation(UPDATE_MESURE_RESSOURCE, {
-    onCompleted: async () => {
-      onSuccess();
-    },
-  });
+  const [updateMesureRessource, { loading: loading1, error: error1 }] =
+    useMutation(UPDATE_MESURE_RESSOURCE, {
+      onCompleted: async () => {
+        onSuccess();
+      },
+    });
   useQueryReady(loading1, error1);
 
-  const [
-    insertMesureRessource,
-    { loading: loading2, error: error2 },
-  ] = useMutation(INSERT_MESURE_RESSOURCE, {
-    onCompleted: async () => {
-      onSuccess();
-    },
-  });
+  const [insertMesureRessource, { loading: loading2, error: error2 }] =
+    useMutation(INSERT_MESURE_RESSOURCE, {
+      onCompleted: async () => {
+        onSuccess();
+      },
+    });
   useQueryReady(loading2, error2);
 
-  const [
-    deleteMesureRessource,
-    { loading: loading3, error: error3 },
-  ] = useMutation(DELETE_MESURE_RESSOURCE, {
-    onCompleted: async () => {
-      onSuccess();
-    },
-  });
+  const [deleteMesureRessource, { loading: loading3, error: error3 }] =
+    useMutation(DELETE_MESURE_RESSOURCE, {
+      onCompleted: async () => {
+        onSuccess();
+      },
+    });
   useQueryReady(loading3, error3);
 
   const handleInsert = async (values) => {

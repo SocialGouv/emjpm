@@ -164,10 +164,10 @@ const routes = [
     path: "/services/edit-password",
   },
   {
-    Component: require("~/pages/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]")
-      .default,
-    path:
-      "/direction/enquetes/:enquete_id(\\d+)/reponse/:enquete_reponse_id(\\d+)",
+    Component:
+      require("~/pages/direction/enquetes/[enquete_id]/reponse/[enquete_reponse_id]")
+        .default,
+    path: "/direction/enquetes/:enquete_id(\\d+)/reponse/:enquete_reponse_id(\\d+)",
   },
   {
     Component: require("~/pages/admin/etablissements/[id]").default,
@@ -260,8 +260,9 @@ const routes = [
     path: "/magistrats",
   },
   {
-    Component: require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/index")
-      .default,
+    Component:
+      require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/index")
+        .default,
     path: "/magistrats/gestionnaires/:gestionnaire_id",
   },
   {
@@ -361,8 +362,9 @@ const routes = [
     path: "/services/mesures/:mesure_id(\\d+)/reactivate",
   },
   {
-    Component: require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/reservation")
-      .default,
+    Component:
+      require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/reservation")
+        .default,
     path: "/magistrats/gestionnaires/:gestionnaire_id/reservation",
   },
   {

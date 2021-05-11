@@ -8,12 +8,8 @@ import { Card, Input, Select } from "~/components";
 import { FiltersContext } from "./context";
 
 function MagistratFilters() {
-  const {
-    natureMesure,
-    changeNatureMesure,
-    searchText,
-    changeSearchText,
-  } = useContext(FiltersContext);
+  const { natureMesure, changeNatureMesure, searchText, changeSearchText } =
+    useContext(FiltersContext);
 
   return (
     <Card mt="3">

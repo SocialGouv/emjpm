@@ -6,13 +6,8 @@ async function checkImportMesuresParameters(req) {
 
   const inputParameters = req.body.input;
 
-  const {
-    name,
-    content,
-    serviceId,
-    mandataireUserId,
-    antennesMap,
-  } = inputParameters;
+  const { name, content, serviceId, mandataireUserId, antennesMap } =
+    inputParameters;
 
   if (!serviceId && !mandataireUserId) {
     throw new HttpError(

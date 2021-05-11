@@ -35,17 +35,15 @@ module.exports = {
     const yearLess75 = year - 75;
 
     try {
-      const {
-        data: enqueteReponseDefaultData,
-        errors: errorsDefaultData,
-      } = await graphqlFetch(
-        {
-          mandataireId,
-          year: year.toString(),
-        },
-        ENQUETE_REPONSE_DEFAULT_VALUES,
-        backendAuthHeaders
-      );
+      const { data: enqueteReponseDefaultData, errors: errorsDefaultData } =
+        await graphqlFetch(
+          {
+            mandataireId,
+            year: year.toString(),
+          },
+          ENQUETE_REPONSE_DEFAULT_VALUES,
+          backendAuthHeaders
+        );
 
       if (errorsDefaultData) {
         console.error("errorsDefaultData", errorsDefaultData);
@@ -137,15 +135,11 @@ module.exports = {
       }
       const lb_user_etablissements = lb_user?.lb_user_etablissements;
       if (lb_user_etablissements) {
-        defaultValues.nombre_lits_journee_hospitalisation = lb_user_etablissements.map(
-          ({ etablissement }) => {
+        defaultValues.nombre_lits_journee_hospitalisation =
+          lb_user_etablissements.map(({ etablissement }) => {
             // src/containers/Enquete/constants/mandatairePrepose.js
-            const {
-              nofinesset,
-              rslongue,
-              libcategagretab,
-              libsph,
-            } = etablissement;
+            const { nofinesset, rslongue, libcategagretab, libsph } =
+              etablissement;
 
             let statut;
             switch (libsph) {
@@ -164,8 +158,7 @@ module.exports = {
               statut,
               type: libcategagretab,
             };
-          }
-        );
+          });
       }
 
       // # 3. Personnel et formation
@@ -374,14 +367,12 @@ module.exports = {
 
       // # 6. Revenus / Prestations sociales
       const yearSmic = enqueteAnnee - 2;
-      const {
-        data: infoFinanceAnneeData,
-        errors: infoFinanceAnneeErrors,
-      } = await graphqlFetch(
-        { year: yearSmic },
-        INFO_FINANCE_ANNEE,
-        backendAuthHeaders
-      );
+      const { data: infoFinanceAnneeData, errors: infoFinanceAnneeErrors } =
+        await graphqlFetch(
+          { year: yearSmic },
+          INFO_FINANCE_ANNEE,
+          backendAuthHeaders
+        );
       if (infoFinanceAnneeErrors) {
         console.error("infoFinanceAnneeErrors", infoFinanceAnneeErrors);
       }

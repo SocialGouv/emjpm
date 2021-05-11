@@ -65,7 +65,11 @@ export function useDepartements({ all = false, ...queryOptions } = {}) {
     }
   }
 
-  const { data: departementsData, loading, error } = useQuery(
+  const {
+    data: departementsData,
+    loading,
+    error,
+  } = useQuery(
     departementsCodes === null ? GET_DEPARTEMENTS : GET_FILTERED_DEPARTEMENTS,
     {
       variables:

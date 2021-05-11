@@ -261,11 +261,8 @@ function findOption(options = [], value) {
 // add missing option from value, for creatable (and initial value)
 function ensureOptionCreate(options = [], value, createOptions) {
   if (value && !findOption(options, value)) {
-    const {
-      createOptionPosition,
-      getNewOptionData,
-      isValidNewOption,
-    } = createOptions;
+    const { createOptionPosition, getNewOptionData, isValidNewOption } =
+      createOptions;
     if (isValidNewOption(value, options)) {
       const newOption = getNewOptionData(value, value);
       options =

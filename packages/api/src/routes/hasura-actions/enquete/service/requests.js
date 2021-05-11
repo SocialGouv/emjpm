@@ -33,17 +33,15 @@ module.exports = {
     const yearLess75 = year - 75;
 
     try {
-      const {
-        data: enqueteReponseDefaultData,
-        errors: errorsDefaultData,
-      } = await graphqlFetch(
-        {
-          serviceId,
-          year: year.toString(),
-        },
-        ENQUETE_REPONSE_DEFAULT_VALUES,
-        backendAuthHeaders
-      );
+      const { data: enqueteReponseDefaultData, errors: errorsDefaultData } =
+        await graphqlFetch(
+          {
+            serviceId,
+            year: year.toString(),
+          },
+          ENQUETE_REPONSE_DEFAULT_VALUES,
+          backendAuthHeaders
+        );
 
       if (errorsDefaultData) {
         console.error("errorsDefaultData", errorsDefaultData);

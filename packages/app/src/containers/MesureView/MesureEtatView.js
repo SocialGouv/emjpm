@@ -5,12 +5,8 @@ import { Box, Flex, Text } from "rebass";
 import { content, subtitle } from "./style";
 
 function MesureEtatView({ etat, ...props }) {
-  const {
-    formatNatureMesure,
-    formatChampMesure,
-    formatLieuVie,
-    formatPays,
-  } = mesureFormatter;
+  const { formatNatureMesure, formatChampMesure, formatLieuVie, formatPays } =
+    mesureFormatter;
   return (
     <Flex justifyContent="flex-start" {...props} my={1}>
       <Box width="150px">

@@ -18,9 +18,8 @@ function AdminEditorEdit(props) {
   const { data, loading, error } = useQuery(EDITOR, {
     variables: { id: editorId },
   });
-  const [editEditor, { loading: loading2, error: error2 }] = useMutation(
-    EDIT_EDITOR
-  );
+  const [editEditor, { loading: loading2, error: error2 }] =
+    useMutation(EDIT_EDITOR);
   useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {

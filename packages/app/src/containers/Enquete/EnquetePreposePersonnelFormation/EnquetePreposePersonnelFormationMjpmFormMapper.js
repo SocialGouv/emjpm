@@ -14,9 +14,10 @@ function mapFormation_preposes_mjpm(data) {
     formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
       !data ? null : data.formation_non_cnc
     ),
-    non_formation_non_cnc: mapFormation_preposes_mjpm_nb_prepose_heures_formation(
-      !data ? null : data.non_formation_non_cnc
-    ),
+    non_formation_non_cnc:
+      mapFormation_preposes_mjpm_nb_prepose_heures_formation(
+        !data ? null : data.non_formation_non_cnc
+      ),
   };
 }
 

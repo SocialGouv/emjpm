@@ -8,9 +8,8 @@ import useQueryReady from "~/hooks/useQueryReady";
 
 function AccessTokenDelete(props) {
   const { id } = props;
-  const [RemoveAccessToken, { loading, error }] = useMutation(
-    REMOVE_ACCESS_TOKEN
-  );
+  const [RemoveAccessToken, { loading, error }] =
+    useMutation(REMOVE_ACCESS_TOKEN);
 
   useQueryReady(loading, error);
 

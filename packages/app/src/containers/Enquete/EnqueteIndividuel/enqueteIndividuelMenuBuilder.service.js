@@ -37,11 +37,10 @@ export const enqueteIndividuelMenuBuilder = {
 
 function useMenuSections(enqueteReponse, enquete) {
   const { type: userType } = useUser();
-  return useMemo(() => buildMenuSections(enqueteReponse, enquete, userType), [
-    enqueteReponse,
-    enquete,
-    userType,
-  ]);
+  return useMemo(
+    () => buildMenuSections(enqueteReponse, enquete, userType),
+    [enqueteReponse, enquete, userType]
+  );
 }
 
 function buildMenuSections(enqueteReponse, enquete, userType) {

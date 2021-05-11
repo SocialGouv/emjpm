@@ -29,10 +29,8 @@ module.exports = async function updateGestionnaireMesuresCounters(
   let result;
   switch (table) {
     case "services": {
-      const {
-        mesures_in_progress: en_cours,
-        mesures_awaiting: en_attente,
-      } = await recalculateServiceMesuresCount(id, trx);
+      const { mesures_in_progress: en_cours, mesures_awaiting: en_attente } =
+        await recalculateServiceMesuresCount(id, trx);
       result = {
         en_attente,
         en_cours,
@@ -40,10 +38,8 @@ module.exports = async function updateGestionnaireMesuresCounters(
       break;
     }
     case "mandataires": {
-      const {
-        mesures_en_cours: en_cours,
-        mesures_en_attente: en_attente,
-      } = await recalculateMandatairesMesuresCount(id, trx);
+      const { mesures_en_cours: en_cours, mesures_en_attente: en_attente } =
+        await recalculateMandatairesMesuresCount(id, trx);
       result = {
         en_attente,
         en_cours,

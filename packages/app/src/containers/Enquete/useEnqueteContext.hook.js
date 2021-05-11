@@ -88,9 +88,8 @@ function enqueteContextReducer(state, action) {
 }
 
 export function useEnqueteContext(props) {
-  const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] = useState(
-    false
-  );
+  const [openConfirmExitInvalidForm, setOpenConfirmExitInvalidForm] =
+    useState(false);
 
   const { enqueteReponse, currentStep, navigateToStep, sections } = props;
 

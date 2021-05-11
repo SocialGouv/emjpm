@@ -43,29 +43,23 @@ function buildEnqueteEtablissementDomicileUpdateMutation(prefix) {
   `;
 }
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE = buildEnqueteEtablissementDomicileUpdateMutation(
-  "curatelle_simple"
-);
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_SIMPLE =
+  buildEnqueteEtablissementDomicileUpdateMutation("curatelle_simple");
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_RENFORCEE = buildEnqueteEtablissementDomicileUpdateMutation(
-  "curatelle_renforcee"
-);
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_RENFORCEE =
+  buildEnqueteEtablissementDomicileUpdateMutation("curatelle_renforcee");
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE = buildEnqueteEtablissementDomicileUpdateMutation(
-  "curatelle_personne"
-);
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_PERSONNE =
+  buildEnqueteEtablissementDomicileUpdateMutation("curatelle_personne");
 
-export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS = buildEnqueteEtablissementDomicileUpdateMutation(
-  "curatelle_biens"
-);
+export const UPDATE_ENQUETE_ACTIVITE_CURATELLE_BIENS =
+  buildEnqueteEtablissementDomicileUpdateMutation("curatelle_biens");
 
-export const UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE = buildEnqueteEtablissementDomicileUpdateMutation(
-  "accompagnement_judiciaire"
-);
+export const UPDATE_ENQUETE_ACTIVITE_ACCOMPAGNEMENT_JUDICIAIRE =
+  buildEnqueteEtablissementDomicileUpdateMutation("accompagnement_judiciaire");
 
-export const UPDATE_ENQUETE_ACTIVITE_TUTELLE = buildEnqueteEtablissementDomicileUpdateMutation(
-  "tutelle"
-);
+export const UPDATE_ENQUETE_ACTIVITE_TUTELLE =
+  buildEnqueteEtablissementDomicileUpdateMutation("tutelle");
 
 // prefix: 'subroge_tuteur_createur' | 'sauvegarde_justice' | 'mandat_adhoc_majeur'
 function buildEnqueteMesuresUpdateMutation(prefix) {
@@ -97,15 +91,12 @@ function buildEnqueteMesuresUpdateMutation(prefix) {
     }
   `;
 }
-export const UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR = buildEnqueteMesuresUpdateMutation(
-  "subroge_tuteur_createur"
-);
-export const UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR = buildEnqueteMesuresUpdateMutation(
-  "mandat_adhoc_majeur"
-);
-export const UPDATE_ENQUETE_SAUVEGARDE_JUSTICE = buildEnqueteMesuresUpdateMutation(
-  "sauvegarde_justice"
-);
+export const UPDATE_ENQUETE_SUBROGE_TUTEUR_CREATEUR =
+  buildEnqueteMesuresUpdateMutation("subroge_tuteur_createur");
+export const UPDATE_ENQUETE_MANDAT_ADHOC_MAJEUR =
+  buildEnqueteMesuresUpdateMutation("mandat_adhoc_majeur");
+export const UPDATE_ENQUETE_SAUVEGARDE_JUSTICE =
+  buildEnqueteMesuresUpdateMutation("sauvegarde_justice");
 
 export const UPDATE_ENQUETE_ACTIVITE_REVISION_MESURES = gql`
   mutation update_enquete_activite_revision_mesures(

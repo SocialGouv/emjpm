@@ -31,10 +31,11 @@ module.exports = {
     enqueteReponse,
     { debugGroupName, logDataWithErrors }
   ) => {
-    const informations_generales_secretaire_specialise_etp = enqueteReponse.enquete_reponses_informations_mandataire
-      ? enqueteReponse.enquete_reponses_informations_mandataire
-          .secretaire_specialise_etp
-      : undefined;
+    const informations_generales_secretaire_specialise_etp =
+      enqueteReponse.enquete_reponses_informations_mandataire
+        ? enqueteReponse.enquete_reponses_informations_mandataire
+            .secretaire_specialise_etp
+        : undefined;
     const data = {
       ...enqueteReponse.enquete_reponses_agrements_formation,
       informations_generales_secretaire_specialise_etp,

@@ -21,9 +21,8 @@ import { SignupGeneralError } from "./SignupGeneralError";
 
 function SignupMagistratForm({ tiDatas }) {
   const history = useHistory();
-  const { user, magistrat, setMagistrat, validateStepOne } = useContext(
-    SignupContext
-  );
+  const { user, magistrat, setMagistrat, validateStepOne } =
+    useContext(SignupContext);
 
   const tiOptions = tiDatas.map((ti) => ({
     label: ti.etablissement,

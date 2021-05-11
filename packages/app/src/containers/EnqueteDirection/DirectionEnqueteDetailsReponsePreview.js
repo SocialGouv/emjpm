@@ -21,20 +21,16 @@ export const DirectionEnqueteDetailsReponsePreview = ({
     variables: { enqueteId, reponseId: enqueteReponseId },
   });
 
-  const {
-    enquete,
-    enqueteLabel,
-    reponseLabel,
-    enqueteReponse,
-  } = useMemo(() => {
-    const enquete = data ? data.enquetes_by_pk : {};
-    const enqueteReponse = data ? data.enquete_reponse_validation_status : {};
-    const enqueteLabel = !enquete.annee
-      ? ""
-      : `Enquête ${enquete.annee} sur l'activité de ${enquete.annee - 1}`;
-    const reponseLabel = formatReponseLabel(enqueteReponse);
-    return { enquete, enqueteLabel, enqueteReponse, reponseLabel };
-  }, [data]);
+  const { enquete, enqueteLabel, reponseLabel, enqueteReponse } =
+    useMemo(() => {
+      const enquete = data ? data.enquetes_by_pk : {};
+      const enqueteReponse = data ? data.enquete_reponse_validation_status : {};
+      const enqueteLabel = !enquete.annee
+        ? ""
+        : `Enquête ${enquete.annee} sur l'activité de ${enquete.annee - 1}`;
+      const reponseLabel = formatReponseLabel(enqueteReponse);
+      return { enquete, enqueteLabel, enqueteReponse, reponseLabel };
+    }, [data]);
 
   useOnErrorRedirect(error, "/direction/enquetes");
   if (!useQueryReady(loading, error)) {

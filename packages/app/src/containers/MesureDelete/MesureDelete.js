@@ -18,10 +18,8 @@ function MesureDelete(props) {
   const { type, service = {}, mandataire } = useUser();
   const userBasePath = getUserBasePath({ type });
 
-  const [
-    recalculateMesures,
-    { loading: loading1, error: error1 },
-  ] = useMutation(CALCULATE_MESURES);
+  const [recalculateMesures, { loading: loading1, error: error1 }] =
+    useMutation(CALCULATE_MESURES);
   useQueryReady(loading1, error1);
 
   const redirectToMesure = (mesureId) =>

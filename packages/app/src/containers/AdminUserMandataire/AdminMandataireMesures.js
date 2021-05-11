@@ -41,10 +41,8 @@ function AdminMandataireMesures(props) {
     },
   });
 
-  const [
-    deleteMesures,
-    { loading: mutationLoading, error: error1 },
-  ] = useMutation(DELETE_MESURES);
+  const [deleteMesures, { loading: mutationLoading, error: error1 }] =
+    useMutation(DELETE_MESURES);
   const [
     calculateMandataireMesures,
     { loading: calculateMandataireMesuresLoading, error: error2 },

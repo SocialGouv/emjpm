@@ -25,21 +25,19 @@ export function EnquetePreposePersonnelFormationAutres(props) {
     },
   });
 
-  const [
-    sendEnqueteReponseInformations,
-    { loading: loading2, error: error2 },
-  ] = useMutation(UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
-        variables: { id: enqueteReponse.id },
-      },
-    ],
-  });
+  const [sendEnqueteReponseInformations, { loading: loading2, error: error2 }] =
+    useMutation(UPDATE_ENQUETE_PREPOSE_PERSONNEL_FORMATION_AUTRES, {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+        },
+        {
+          query: ENQUETE_PREPOSE_PERSONNEL_FORMATION,
+          variables: { id: enqueteReponse.id },
+        },
+      ],
+    });
   useQueryReady(loading2, error2);
 
   const initialData = data

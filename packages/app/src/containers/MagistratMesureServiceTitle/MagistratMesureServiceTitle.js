@@ -19,12 +19,8 @@ function MagistratMesureServiceTitle(props) {
   }
 
   const [service] = data.services;
-  const {
-    etablissement,
-    dispo_max,
-    mesures_awaiting,
-    mesures_in_progress,
-  } = service;
+  const { etablissement, dispo_max, mesures_awaiting, mesures_in_progress } =
+    service;
   const limitReached = mesures_in_progress + mesures_awaiting >= dispo_max;
 
   return (

@@ -24,10 +24,8 @@ function ServiceMemberInvitations(props) {
     variables: { serviceId: service.id },
   });
 
-  const [
-    deleteServiceMemberInvitation,
-    { loading: loading2, error: error2 },
-  ] = useMutation(DELETE_SERVICE_MEMBER_INVITATION);
+  const [deleteServiceMemberInvitation, { loading: loading2, error: error2 }] =
+    useMutation(DELETE_SERVICE_MEMBER_INVITATION);
   useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {

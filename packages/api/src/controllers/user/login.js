@@ -20,8 +20,7 @@ const login = async (req, res, next) => {
             errors: {
               error: err,
               location: "body",
-              msg:
-                "Votre compte est en attente d'activation, vous recevrez un email de confirmation",
+              msg: "Votre compte est en attente d'activation, vous recevrez un email de confirmation",
             },
           });
           break;

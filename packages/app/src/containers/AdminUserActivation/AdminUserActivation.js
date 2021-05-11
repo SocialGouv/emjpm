@@ -44,14 +44,10 @@ function AdminUserActivation(props) {
     variables: { userId },
   });
 
-  const [
-    activateUser,
-    { loading: activateUserLoading, error: error1 },
-  ] = useMutation(ACTIVATE_USER);
-  const [
-    sendEmailAccountValidation,
-    { loading: loading2, error: error2 },
-  ] = useMutation(SEND_EMAIL_ACCOUNT_VALIDATION);
+  const [activateUser, { loading: activateUserLoading, error: error1 }] =
+    useMutation(ACTIVATE_USER);
+  const [sendEmailAccountValidation, { loading: loading2, error: error2 }] =
+    useMutation(SEND_EMAIL_ACCOUNT_VALIDATION);
 
   useQueryReady(activateUserLoading, error1);
   useQueryReady(loading2, error2);

@@ -22,12 +22,10 @@ export function MagistratMandataireCommentForm(props) {
     isEditing,
   } = props;
 
-  const [insertComment, { loading: loading1, error: error1 }] = useMutation(
-    ADD_COMMENT
-  );
-  const [editComment, { loading: loading2, error: error2 }] = useMutation(
-    EDIT_COMMENT
-  );
+  const [insertComment, { loading: loading1, error: error1 }] =
+    useMutation(ADD_COMMENT);
+  const [editComment, { loading: loading2, error: error2 }] =
+    useMutation(EDIT_COMMENT);
   useQueryReady(loading1, error1);
   useQueryReady(loading2, error2);
 

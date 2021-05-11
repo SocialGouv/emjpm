@@ -19,10 +19,8 @@ function MesureReactivate() {
   const { type, service = {}, mandataire } = useUser();
   const userBasePath = getUserBasePath({ type });
 
-  const [
-    recalculateMesures,
-    { loading: loading2, error: error2 },
-  ] = useMutation(CALCULATE_MESURES);
+  const [recalculateMesures, { loading: loading2, error: error2 }] =
+    useMutation(CALCULATE_MESURES);
   useQueryReady(loading2, error2);
 
   const redirectToMesure = (mesureId) =>

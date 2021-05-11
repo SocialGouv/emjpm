@@ -30,16 +30,12 @@ function MagistratMesureAdd(props) {
 
   const { mandataireId, serviceId } = formatGestionnaireId(gestionnaireId);
 
-  const [
-    sendEmailReservation,
-    { loading: loading1, error: error1 },
-  ] = useMutation(SEND_EMAIL_RESERVATION);
+  const [sendEmailReservation, { loading: loading1, error: error1 }] =
+    useMutation(SEND_EMAIL_RESERVATION);
   useQueryReady(loading1, error1);
 
-  const [
-    recalculateMesures,
-    { loading: loading2, error: error2 },
-  ] = useMutation(CALCULATE_MESURES);
+  const [recalculateMesures, { loading: loading2, error: error2 }] =
+    useMutation(CALCULATE_MESURES);
   useQueryReady(loading2, error2);
 
   const [chooseMandataire, { loading: loading3, error: error3 }] = useMutation(

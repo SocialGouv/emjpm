@@ -17,10 +17,8 @@ function ServiceMemberInvitationCreate(props) {
 
   const client = useApolloClient();
 
-  const [
-    createServiceMemberInvitation,
-    { loading: loading1, error: error1 },
-  ] = useMutation(CREATE_SERVICE_MEMBER_INVITATION);
+  const [createServiceMemberInvitation, { loading: loading1, error: error1 }] =
+    useMutation(CREATE_SERVICE_MEMBER_INVITATION);
   useQueryReady(loading1, error1);
 
   const [
@@ -48,9 +46,8 @@ function ServiceMemberInvitationCreate(props) {
       },
     });
 
-    const {
-      id: invitationId,
-    } = result?.data?.insert_service_member_invitations?.returning?.[0];
+    const { id: invitationId } =
+      result?.data?.insert_service_member_invitations?.returning?.[0];
 
     if (invitationId) {
       sendEmailServiceMemberInvitation({

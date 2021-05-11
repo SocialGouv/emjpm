@@ -57,18 +57,16 @@ function AdminServiceMesures() {
     ],
   });
 
-  const [
-    deleteMesures,
-    { loading: mutationLoading, error: error2 },
-  ] = useMutation(DELETE_MESURES, {
-    onCompleted: async () => {
-      await recalculateServiceMesures({
-        variables: {
-          serviceId,
-        },
-      });
-    },
-  });
+  const [deleteMesures, { loading: mutationLoading, error: error2 }] =
+    useMutation(DELETE_MESURES, {
+      onCompleted: async () => {
+        await recalculateServiceMesures({
+          variables: {
+            serviceId,
+          },
+        });
+      },
+    });
 
   useQueryReady(recalculateServiceMesuresLoading, error1);
   useQueryReady(mutationLoading, error2);

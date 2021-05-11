@@ -140,9 +140,8 @@ export default function DirectionStatsKPI() {
             loading={loading}
             data={data}
             load={(data) => {
-              const {
-                available_mesures_nb_unknown_gestion,
-              } = data.stat_available_mesures;
+              const { available_mesures_nb_unknown_gestion } =
+                data.stat_available_mesures;
               return available_mesures_nb_unknown_gestion
                 ? Number(available_mesures_nb_unknown_gestion)
                 : 0;

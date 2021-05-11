@@ -26,7 +26,8 @@ const MESURE_TYPES = [
 ];
 
 // 20/11/2015 or 20/11/15
-const REGEX_DATE_OUVERTURE = /^([0-2][0-9]|(3)[0-1])(\/)((0[0-9])|(1[0-2]))(\/)(([12][0-9]{3}))$/;
+const REGEX_DATE_OUVERTURE =
+  /^([0-2][0-9]|(3)[0-1])(\/)((0[0-9])|(1[0-2]))(\/)(([12][0-9]{3}))$/;
 
 const actionsMesuresImporterSchema = yup.object().shape({
   annee: yup

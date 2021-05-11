@@ -30,9 +30,8 @@ function getServiceOptions(services, departementCode) {
 
 function SignupServiceForm({ serviceDatas }) {
   const history = useHistory();
-  const { user, service, setService, validateStepOne } = useContext(
-    SignupContext
-  );
+  const { user, service, setService, validateStepOne } =
+    useContext(SignupContext);
   const { departements, loading } = useDepartements();
 
   const formik = useFormik({

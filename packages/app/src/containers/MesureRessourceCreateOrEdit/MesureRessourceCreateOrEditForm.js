@@ -28,12 +28,8 @@ function initialValues(mesureRessource) {
 }
 
 export function MesureRessourceCreateOrEditForm(props) {
-  const {
-    handleSubmit,
-    handleDelete,
-    handleCancel,
-    mesureRessourceToEdit,
-  } = props;
+  const { handleSubmit, handleDelete, handleCancel, mesureRessourceToEdit } =
+    props;
 
   const formik = useFormik({
     initialValues: initialValues(mesureRessourceToEdit),

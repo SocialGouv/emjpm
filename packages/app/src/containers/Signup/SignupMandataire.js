@@ -25,9 +25,8 @@ import { SignupGeneralError } from "./SignupGeneralError";
 
 function SignupMandataireForm() {
   const history = useHistory();
-  const { user, mandataire, setMandataire, validateStepOne } = useContext(
-    SignupContext
-  );
+  const { user, mandataire, setMandataire, validateStepOne } =
+    useContext(SignupContext);
 
   const { departements } = useDepartements();
 

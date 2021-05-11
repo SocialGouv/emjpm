@@ -10,10 +10,10 @@ export default function RowItem({ item }) {
   const { id, etablissement, code_postal, ville } = item;
   const history = useHistory();
 
-  const onRowClick = useCallback(() => history.push(`/admin/services/${id}`), [
-    id,
-    history,
-  ]);
+  const onRowClick = useCallback(
+    () => history.push(`/admin/services/${id}`),
+    [id, history]
+  );
 
   return (
     <>

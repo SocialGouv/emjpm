@@ -41,11 +41,10 @@ function DynamicTable(props) {
     state: { selectedRowIds, pageIndex, pageSize },
   } = table;
 
-  useEffect(() => setSelectedRows(selectedFlatRows.map((d) => d.original)), [
-    setSelectedRows,
-    selectedRowIds,
-    selectedFlatRows,
-  ]);
+  useEffect(
+    () => setSelectedRows(selectedFlatRows.map((d) => d.original)),
+    [setSelectedRows, selectedRowIds, selectedFlatRows]
+  );
 
   return (
     <Box>

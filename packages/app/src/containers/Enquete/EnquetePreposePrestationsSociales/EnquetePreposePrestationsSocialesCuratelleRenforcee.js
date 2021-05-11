@@ -24,26 +24,24 @@ export function EnquetePreposePrestationsSocialesCuratelleRenforcee(props) {
     },
   });
 
-  const [
-    updatePrestationsSociales,
-    { loading: loading2, error: error2 },
-  ] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE,
-    {
-      refetchQueries: [
-        {
-          query: ENQUETE_WITH_REPONSE_STATUS,
-          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-        },
-        {
-          query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
-          variables: {
-            id: enqueteReponse.id,
+  const [updatePrestationsSociales, { loading: loading2, error: error2 }] =
+    useMutation(
+      UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_RENFORCEE,
+      {
+        refetchQueries: [
+          {
+            query: ENQUETE_WITH_REPONSE_STATUS,
+            variables: { enqueteId, userId, reponseId: enqueteReponse.id },
           },
-        },
-      ],
-    }
-  );
+          {
+            query: ENQUETE_PREPOSE_PRESTATIONS_SOCIALES,
+            variables: {
+              id: enqueteReponse.id,
+            },
+          },
+        ],
+      }
+    );
   useQueryReady(loading2, error2);
 
   const prestationsSociales = data

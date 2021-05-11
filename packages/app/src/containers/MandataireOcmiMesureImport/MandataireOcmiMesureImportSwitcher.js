@@ -27,9 +27,8 @@ function MandataireOcmiMesureImportSwitcher({
   syncEnableOrigin,
   mandataireId,
 }) {
-  const [importOcmiMesures, { loading: loading1, error: error1 }] = useMutation(
-    IMPORT_OCMI_MESURES
-  );
+  const [importOcmiMesures, { loading: loading1, error: error1 }] =
+    useMutation(IMPORT_OCMI_MESURES);
   useQueryReady(loading1, error1);
 
   const importMesures = useCallback(async () => {

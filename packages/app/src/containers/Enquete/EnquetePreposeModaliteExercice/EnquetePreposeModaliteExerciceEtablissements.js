@@ -24,21 +24,19 @@ export function EnquetePreposeModaliteExerciceEtablissements(props) {
     },
   });
 
-  const [
-    updateEtablissements,
-    { loading: loading2, error: error2 },
-  ] = useMutation(UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS, {
-    refetchQueries: [
-      {
-        query: ENQUETE_WITH_REPONSE_STATUS,
-        variables: { enqueteId, userId, reponseId: enqueteReponse.id },
-      },
-      {
-        query: ENQUETE_PREPOSE_INFORMATIONS,
-        variables: { id: enqueteReponse.id },
-      },
-    ],
-  });
+  const [updateEtablissements, { loading: loading2, error: error2 }] =
+    useMutation(UPDATE_ENQUETE_PREPOSE_MODALITE_EXERCICE_ETABLISSEMENTS, {
+      refetchQueries: [
+        {
+          query: ENQUETE_WITH_REPONSE_STATUS,
+          variables: { enqueteId, userId, reponseId: enqueteReponse.id },
+        },
+        {
+          query: ENQUETE_PREPOSE_INFORMATIONS,
+          variables: { id: enqueteReponse.id },
+        },
+      ],
+    });
   useQueryReady(loading2, error2);
 
   return loading ? null : (

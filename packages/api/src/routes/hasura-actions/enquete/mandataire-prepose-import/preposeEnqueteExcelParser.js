@@ -45,9 +45,10 @@ const parse = async ({ content }) => {
     populations: enqueteExcelParserAgrementsPopulations.parse(
       workbook.Sheets["Populations "]
     ),
-    preposePersonnelFormation: enqueteExcelParserPreposePersonnelFormation.parse(
-      workbook.Sheets["Personnel et formation "]
-    ),
+    preposePersonnelFormation:
+      enqueteExcelParserPreposePersonnelFormation.parse(
+        workbook.Sheets["Personnel et formation "]
+      ),
     prestationsSociales: enqueteExcelParserPreposePrestationsSociales.parse(
       workbook.Sheets["Revenus- prestations sociales "]
     ),

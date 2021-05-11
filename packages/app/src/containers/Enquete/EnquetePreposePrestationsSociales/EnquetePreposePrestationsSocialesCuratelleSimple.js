@@ -24,12 +24,8 @@ export function EnquetePreposePrestationsSocialesCuratelleSimple(props) {
     },
   });
 
-  const [
-    updatePrestationsSociales,
-    { loading: loading2, error: error2 },
-  ] = useMutation(
-    UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE,
-    {
+  const [updatePrestationsSociales, { loading: loading2, error: error2 }] =
+    useMutation(UPDATE_ENQUETE_PREPOSE_PRESTATIONS_SOCIALES_CURATELLE_SIMPLE, {
       refetchQueries: [
         {
           query: ENQUETE_WITH_REPONSE_STATUS,
@@ -42,8 +38,7 @@ export function EnquetePreposePrestationsSocialesCuratelleSimple(props) {
           },
         },
       ],
-    }
-  );
+    });
   useQueryReady(loading2, error2);
 
   const prestationsSociales = data

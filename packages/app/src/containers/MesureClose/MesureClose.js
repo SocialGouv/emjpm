@@ -23,10 +23,8 @@ function MesureClose(props) {
 
   const userBasePath = getUserBasePath({ type });
 
-  const [
-    recalculateMesures,
-    { loading: loading1, error: error1 },
-  ] = useMutation(CALCULATE_MESURES);
+  const [recalculateMesures, { loading: loading1, error: error1 }] =
+    useMutation(CALCULATE_MESURES);
   useQueryReady(loading1, error1);
   function redirectToMesure(mesureId) {
     history.push(`${userBasePath}/mesures/${mesureId}`);

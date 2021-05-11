@@ -17,21 +17,17 @@ function AdminDirectionType(props) {
     variables: { userId },
   });
 
-  const [
-    changeDirectionAgrements,
-    { loading: loading1, error: error1 },
-  ] = useMutation(CHANGE_DIRECTION_AGREMENT);
-  const [
-    createMissingDirectionAgrement,
-    { loading: loading2, error: error2 },
-  ] = useMutation(CREATE_MISSING_DIRECTION_AGREMENT, {
-    refetchQueries: [
-      {
-        query: USER,
-        variables: { userId },
-      },
-    ],
-  });
+  const [changeDirectionAgrements, { loading: loading1, error: error1 }] =
+    useMutation(CHANGE_DIRECTION_AGREMENT);
+  const [createMissingDirectionAgrement, { loading: loading2, error: error2 }] =
+    useMutation(CREATE_MISSING_DIRECTION_AGREMENT, {
+      refetchQueries: [
+        {
+          query: USER,
+          variables: { userId },
+        },
+      ],
+    });
 
   useQueryReady(loading1, error1);
   useQueryReady(loading2, error2);

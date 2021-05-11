@@ -50,13 +50,11 @@ router.post("/email-account-validation", function (req, res) {
 router.post("/email-service-member-invitation", async function (req, res) {
   const { invitation_id } = req.body.input;
 
-  const serviceMemberInvitation = await ServiceMemberInvitation.query().patchAndFetchById(
-    invitation_id,
-    {
+  const serviceMemberInvitation =
+    await ServiceMemberInvitation.query().patchAndFetchById(invitation_id, {
       sent_at: new Date(),
       token: uid(32),
-    }
-  );
+    });
 
   const service = await Service.query().findById(
     serviceMemberInvitation.service_id

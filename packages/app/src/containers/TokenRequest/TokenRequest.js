@@ -18,16 +18,12 @@ import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
 import useQueryReady from "~/hooks/useQueryReady";
 
 function TokenRequest() {
-  const [
-    editorTokenRequest,
-    { loading: loading1, error: error1 },
-  ] = useMutation(EDITOR_TOKEN_REQUEST);
+  const [editorTokenRequest, { loading: loading1, error: error1 }] =
+    useMutation(EDITOR_TOKEN_REQUEST);
   useQueryReady(loading1, error1);
 
-  const [
-    sendEmailTokenRequest,
-    { loading: loading2, error: error2 },
-  ] = useMutation(SEND_EMAIL_TOKEN_REQUEST);
+  const [sendEmailTokenRequest, { loading: loading2, error: error2 }] =
+    useMutation(SEND_EMAIL_TOKEN_REQUEST);
   useQueryReady(loading2, error2);
 
   const [isMessageVisible, toggleMessage] = useState(false);

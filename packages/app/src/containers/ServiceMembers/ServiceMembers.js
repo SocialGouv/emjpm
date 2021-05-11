@@ -28,15 +28,11 @@ function ServiceMembers(props) {
     variables: { serviceId: service.id },
   });
 
-  const [
-    deleteServiceMember,
-    { loading: loading1, error: error1 },
-  ] = useMutation(DELETE_SERVICE_MEMBER);
+  const [deleteServiceMember, { loading: loading1, error: error1 }] =
+    useMutation(DELETE_SERVICE_MEMBER);
   useQueryReady(loading1, error1);
-  const [
-    updateServiceMemberIsAdmin,
-    { loading: loading2, error: error2 },
-  ] = useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
+  const [updateServiceMemberIsAdmin, { loading: loading2, error: error2 }] =
+    useMutation(UPDATE_SERVICE_MEMBER_IS_ADMIN);
   useQueryReady(loading2, error2);
 
   if (!useQueryReady(loading, error)) {

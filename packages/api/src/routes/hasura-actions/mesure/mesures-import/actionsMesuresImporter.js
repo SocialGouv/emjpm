@@ -58,10 +58,8 @@ async function importMesuresFile({
 
   logger.info(`[IMPORT MESURES] mesuresToImport: ${mesuresToImport.length}`);
 
-  const {
-    errors,
-    mesuresWithLine,
-  } = actionsMesuresImporterSchemaValidator.validateImportData(mesuresToImport);
+  const { errors, mesuresWithLine } =
+    actionsMesuresImporterSchemaValidator.validateImportData(mesuresToImport);
 
   const importSummary = await importMesures({
     antennesMap,
@@ -209,13 +207,8 @@ const prepareMesure = async (
   mesureDatas,
   { cache, antennesMap, line, importSummary, serviceId }
 ) => {
-  const {
-    mandataire,
-    service,
-    code_postal,
-    ville,
-    tribunal_siret,
-  } = mesureDatas;
+  const { mandataire, service, code_postal, ville, tribunal_siret } =
+    mesureDatas;
 
   const department =
     (await actionsMesuresImporterGeoRepository.findDepartment({
