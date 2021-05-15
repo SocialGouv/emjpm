@@ -5,3 +5,9 @@ ENV HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT 180
 
 COPY packages/hasura/metadata /hasura-metadata
 COPY packages/hasura/migrations /hasura-migrations
+
+RUN chmod +x /bin/hasura-cli\
+  && addgroup -g 1000 hasura \
+  && adduser -u 1000 -s /bin/sh -S -G hasura hasura
+
+USER 1000
