@@ -11,11 +11,11 @@ RUN addgroup -g 1000 hasura \
  && adduser -u 1000 -s /bin/sh -S -G hasura hasura \
  && chown -R hasura:hasura /tmp
 
-#USER hasura
-
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD ["graphql-engine", "serve"]
 
 COPY packages/hasura/metadata /hasura-metadata
 COPY packages/hasura/migrations /hasura-migrations
+
+USER hasura
