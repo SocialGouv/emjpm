@@ -4,7 +4,6 @@ ENV HASURA_GRAPHQL_ENABLE_TELEMETRY false
 ENV HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT 180
 ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=server-on-docker
 ENV HASURA_GRAPHQL_SHOW_UPDATE_NOTIFICATION=false
-ENV HASURA_GRAPHQL_SERVER_PORT=8080
 
 COPY packages/hasura/docker-entrypoint.sh /bin/
 RUN chmod +x /bin/hasura-cli\
@@ -15,7 +14,7 @@ USER 1000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-CMD ["graphql-engine", "serve"]
+CMD ["graphql-engine", "serve", "-p", "8080"]
 
 COPY packages/hasura/metadata /hasura-metadata
 COPY packages/hasura/migrations /hasura-migrations
