@@ -24,6 +24,9 @@ spec:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
       terminationGracePeriodSeconds: 60
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
