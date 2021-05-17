@@ -19,4 +19,4 @@ spec:
           - path: /
             backend:
               serviceName: {{ $fullName }}
-              servicePort: 80
+              servicePort: 8080
