@@ -9,6 +9,9 @@ ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 COPY packages/hasura/docker-entrypoint.sh /bin/
 RUN addgroup -g 1000 hasura \
  && adduser -u 1000 -s /bin/sh -S -G hasura hasura
+RUN mkdir /.hasura && mkdir /tmp/plugins-downloads/cli-ext
+RUN chown -R hasura:hasura /tmp /.hasura /hasura-migrations /hasura-metadata /tmp/plugins-downloads/cli-ext
+USER hasura
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
@@ -16,8 +19,3 @@ CMD ["graphql-engine", "serve"]
 
 COPY packages/hasura/metadata /hasura-metadata
 COPY packages/hasura/migrations /hasura-migrations
-
-RUN chown -R hasura:hasura /tmp && \
-  chown -R hasura:hasura /hasura-metadata \
-  chown -R hasura:hasura /hasura-migrations
-USER hasura
