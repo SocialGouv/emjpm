@@ -5,7 +5,7 @@ ENV HASURA_GRAPHQL_MIGRATIONS_SERVER_TIMEOUT 180
 ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=server-on-docker
 ENV HASURA_GRAPHQL_SHOW_UPDATE_NOTIFICATION=false
 
-COPY docker-entrypoint.sh /bin/
+COPY packages/hasura/docker-entrypoint.sh /bin/
 RUN chmod +x /bin/hasura-cli\
   && addgroup -g 1000 hasura \
   && adduser -u 1000 -s /bin/sh -S -G hasura hasura
