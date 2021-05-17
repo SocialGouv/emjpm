@@ -9,7 +9,8 @@ ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 COPY packages/hasura/docker-entrypoint.sh /bin/
 RUN addgroup -g 1000 hasura \
  && adduser -u 1000 -s /bin/sh -S -G hasura hasura \
- && chown -R hasura:hasura /tmp
+ && chown -R hasura:hasura /tmp \
+ && chown -R hasura:hasura /home/hasura
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
