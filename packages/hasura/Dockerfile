@@ -10,7 +10,7 @@ COPY packages/hasura/docker-entrypoint.sh /bin/
 RUN addgroup -g 1000 hasura \
   && adduser -u 1000 -s /bin/sh -S -G hasura hasura
 
-USER 1000
+# USER 1000
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
