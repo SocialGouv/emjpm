@@ -38,12 +38,10 @@ function getRequestFilters(filters) {
     }
 
     const preposeDepartementFilter = {
-      mandataire: {
-        lb_user: {
-          lb_user_etablissements: {
-            etablissement: {
-              departement: { id: { _eq: departementCode } },
-            },
+      lb_user: {
+        lb_user_etablissements: {
+          etablissement: {
+            departement_code: { _eq: departementCode },
           },
         },
       },
