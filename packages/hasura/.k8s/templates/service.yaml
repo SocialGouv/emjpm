@@ -8,8 +8,8 @@ spec:
   type: ClusterIP
   clusterIP: None
   ports:
-    - port: 8080
-      targetPort: 8080
+    - port: 80
+      targetPort: 80
       protocol: TCP
       name: http
   selector:
