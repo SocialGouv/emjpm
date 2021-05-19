@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.118.0](https://github.com/SocialGouv/emjpm/compare/v25.117.2...v25.118.0) (2021-05-19)
+
+
+### Bug Fixes
+
+* **api:** upsert ressources prestations_sociales ([d2da6d5](https://github.com/SocialGouv/emjpm/commit/d2da6d5e3ee3a67fff7f2176a5988a4196fedf4b))
+
+
+
+
+
 ## [25.117.2](https://github.com/SocialGouv/emjpm/compare/v25.117.1...v25.117.2) (2021-05-07)
 
 **Note:** Version bump only for package @emjpm/api

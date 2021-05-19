@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.118.0](https://github.com/SocialGouv/emjpm/compare/v25.117.2...v25.118.0) (2021-05-19)
+
+
+### Bug Fixes
+
+* **api:** upsert ressources prestations_sociales ([d2da6d5](https://github.com/SocialGouv/emjpm/commit/d2da6d5e3ee3a67fff7f2176a5988a4196fedf4b))
+* **enquete:** cache of list after validation ([52cc0c7](https://github.com/SocialGouv/emjpm/commit/52cc0c7c903e502a1f43774f93c0a80f9370b03e))
+* **enquete:** missing finance info per year ([1619e95](https://github.com/SocialGouv/emjpm/commit/1619e957ddf5a5ea4c5c387d0a47bd8fb0df9f72))
+* **enquete:** reset cache after import ([425d13d](https://github.com/SocialGouv/emjpm/commit/425d13d723348a670dba8da3ebff0375898168ae))
+* **lb:** label and kpi financé ([b9e50b5](https://github.com/SocialGouv/emjpm/commit/b9e50b58fc6f255af60f52bb1dc938fd1b6afa91))
+* **lb:** prepose without user ([eb65096](https://github.com/SocialGouv/emjpm/commit/eb65096ad7f172ea21caed5cdbd854fedf18b495))
+* **security:** upgrade yarn lock ([82abca9](https://github.com/SocialGouv/emjpm/commit/82abca98ccfd7724f53f3fc7cd70710ca7c89bbd))
+
+
+### Features
+
+* **enquete:** direction validate on statut page ([aaa4ca6](https://github.com/SocialGouv/emjpm/commit/aaa4ca6aab260293c0a9a05d57ad6d32e539f27b))
+* **enquetes:** add direction kpi ([9ff2078](https://github.com/SocialGouv/emjpm/commit/9ff2078752386262e87e28a36391b4d54a40deb4))
+
+
+
+
+
 ## [25.117.2](https://github.com/SocialGouv/emjpm/compare/v25.117.1...v25.117.2) (2021-05-07)
 
 
