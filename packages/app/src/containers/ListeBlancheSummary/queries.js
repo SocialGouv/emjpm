@@ -2,19 +2,6 @@ import gql from "graphql-tag";
 
 export const LB_SUMMARY = gql`
   query listeBlancheSummary($departementCode: String) {
-    individuel_finance: lb_users_aggregate(
-      where: {
-        type: { _eq: "individuel" }
-        _and: [
-          { lb_departements: { departement_code: { _eq: $departementCode } } }
-          { lb_departements: { departement_financeur: { _eq: true } } }
-        ]
-      }
-    ) {
-      aggregate {
-        count
-      }
-    }
     individuel_finance_departement: lb_users_aggregate(
       where: {
         type: { _eq: "individuel" }

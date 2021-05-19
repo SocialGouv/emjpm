@@ -73,9 +73,6 @@ function ListeBlancheSummary() {
     prepose: {
       aggregate: { count: preposeCount },
     },
-    individuel_finance: {
-      aggregate: { count: individuelFinanceCount },
-    },
     individuel_finance_departement: {
       aggregate: { count: individuelFinanceDepartementCount },
     },
@@ -96,12 +93,10 @@ function ListeBlancheSummary() {
         <LabelValue
           label="Mandataire individuel"
           value={
-            `${individuelCount} dont ${individuelFinanceCount} financés` +
+            `${individuelCount}` +
             (!departement
               ? ""
-              : " et " +
-                individuelFinanceDepartementCount +
-                " financés par le département")
+              : " dont " + individuelFinanceDepartementCount + " financés")
           }
         />
         <LabelValue
