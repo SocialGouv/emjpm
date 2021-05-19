@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.118.1](https://github.com/SocialGouv/emjpm/compare/v25.118.0...v25.118.1) (2021-05-19)
+
+
+### Bug Fixes
+
+* **k8s:** rollback hasura port ([e1a56d9](https://github.com/SocialGouv/emjpm/commit/e1a56d91d85b0f46660680c96369f4715c222695))
+
+
+
+
+
 # [25.118.0](https://github.com/SocialGouv/emjpm/compare/v25.117.2...v25.118.0) (2021-05-19)
 
 
