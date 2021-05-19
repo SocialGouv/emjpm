@@ -60,7 +60,7 @@ async function updateMesure({
   );
 
   const mesureQueryResult = await Mesure.query()
-    .withGraphFetched("[etats,ressources, tis]")
+    .withGraphFetched("[etats,ressources.[prestations_sociales], tis]")
     .where("id", mesureToUpdate.id)
     .first();
 
@@ -82,19 +82,19 @@ async function processRessources(MesureRessources, mesureId, body) {
       annee,
       mesure_id: mesureId,
 
+      mesure_ressources_prestations_sociales: prestations_sociales.map(
+        (prestations_sociales) => ({
+          prestations_sociales,
+        })
+      ),
       niveau_ressource,
-      prestations_sociales,
     };
     const ressourceToUpdate = findRessource(loadedRessources, ressource);
+
     if (ressourceToUpdate) {
-      //update
-      await MesureRessources.query()
-        .patch(ressourceDatas)
-        .where("id", ressourceToUpdate.id);
-    } else {
-      //insert
-      await MesureRessources.query().insertGraph(ressourceDatas);
+      ressourceDatas.id = ressourceToUpdate.id;
     }
+    await MesureRessources.query().upsertGraph(ressourceDatas);
   }
 
   for (const ressource of loadedRessources) {
