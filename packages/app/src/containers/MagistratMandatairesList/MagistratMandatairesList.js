@@ -9,26 +9,11 @@ import { MagistratMandatairesListFilters } from "./Filters";
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
 
-const orderByOptions = [
-  {
-    label: "disponibilité",
-    value: 0,
-  },
-  {
-    label: "ordre alphabétique (A-Z)",
-    value: 1,
-  },
-  {
-    label: "ordre alphabétique (Z-A)",
-    value: 2,
-  },
-];
-
 function MagistratMandatairesList() {
   const [selectedType, setType] = useState(DEFAULT_VALUE);
   const [searchText, setSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
-  const [orderBy, setOrderBy] = useState(orderByOptions[0].value);
+  const [orderBy, setOrderBy] = useState(0);
   const debouncedSearchText = useDebounce(searchText, 10);
   const [prefer, setPrefer] = useState(false);
   const [habilitation, setHabilitation] = useState(false);
