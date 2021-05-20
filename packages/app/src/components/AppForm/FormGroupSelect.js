@@ -202,7 +202,6 @@ export default function FormGroupSelect(props) {
               return onChange(props);
             }
             if (Array.isArray(props)) {
-              console.log(props.map(({ value }) => value));
               setFieldValue(
                 id,
                 props.map(({ value }) => value)

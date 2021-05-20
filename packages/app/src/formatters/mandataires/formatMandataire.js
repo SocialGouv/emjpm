@@ -37,7 +37,6 @@ export default function formatMandataire(
   let currentDiscriminator = {};
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
-    cvLink: "test",
     discriminator: discriminator,
     dispoMax: mesures_max ? mesures_max : 0,
     isAvailable: mesures_max < mesures_in_progress,

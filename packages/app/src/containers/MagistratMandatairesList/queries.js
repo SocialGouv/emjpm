@@ -38,41 +38,172 @@ export const SERVICE_ANTENNES = gql`
 `;
 
 export const GET_MANDATAIRES = gql`
-  query view_mesure_gestionnaire(
+  query search_ti_view_lb_tis(
     $tribunal: Int!
     $offset: Int!
-    $discriminator: String
-    $orderBy: [view_mesure_gestionnaire_tis_order_by!]
+    $user_type: String
+    $orderBy: [view_lb_tis_order_by!]
     $limit: Int
     $searchText: String
+    $departementCode: String
+    $habilitation: Boolean
+    $prefer: Boolean
+    $available: Boolean
   ) {
-    count: search_view_mesure_gestionnaire_tis_aggregate(
-      args: { search: $searchText }
+    count: search_ti_view_lb_tis_aggregate(
+      args: {
+        search: $searchText
+        departementcode: $departementCode
+        tiid: $tribunal
+      }
       where: {
-        ti_id: { _eq: $tribunal }
-        discriminator: { _eq: $discriminator }
+        user_type: { _eq: $user_type }
+        habilitation: { _eq: $habilitation }
+        prefer: { _eq: $prefer }
+        available: { _eq: $available }
       }
     ) {
       aggregate {
         count
       }
     }
-    mandatairesList: search_view_mesure_gestionnaire_tis(
+    mandatairesList: search_ti_view_lb_tis(
       limit: $limit
       offset: $offset
       order_by: $orderBy
-      args: { search: $searchText }
+      args: {
+        search: $searchText
+        departementcode: $departementCode
+        tiid: $tribunal
+      }
       where: {
-        discriminator: { _eq: $discriminator }
-        ti_id: { _eq: $tribunal }
+        user_type: { _eq: $user_type }
+        habilitation: { _eq: $habilitation }
+        prefer: { _eq: $prefer }
+        available: { _eq: $available }
       }
     ) {
+      prefer
+      habilitation
+      available
+      user_type
       gestionnaire {
         id
         discriminator
         mesures_awaiting
         mesures_in_progress
         mesures_max
+        mesures_last_update
+        mandataire_id
+        remaining_capacity
+        service_id
+        mandataire {
+          telephone
+          ville
+          adresse
+          commentaires {
+            id
+            comment
+            ti_id
+          }
+          code_postal
+          user {
+            id
+            nom
+            prenom
+            email
+            last_login
+          }
+          genre
+          id
+        }
+        gestionnaire_tis {
+          tis {
+            id
+            etablissement
+          }
+        }
+        service {
+          id
+          nom
+          prenom
+          ville
+          adresse
+          code_postal
+          telephone
+          email
+          etablissement
+          service_members {
+            id
+            user {
+              id
+              last_login
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_MANDATAIRES_BY_COORDS = gql`
+  query search_ti_view_lb_tis(
+    $tribunal: Int!
+    $offset: Int!
+    $user_type: String
+    $orderBy: [view_lb_tis_order_by!]
+    $limit: Int
+    $searchText: String
+    $departementCode: String
+    $habilitation: Boolean
+    $prefer: Boolean
+    $available: Boolean
+    $coords: geography!
+  ) {
+    count: search_ti_view_lb_tis_aggregate(
+      args: {
+        search: $searchText
+        departementcode: $departementCode
+        tiid: $tribunal
+      }
+      where: {
+        user_type: { _eq: $user_type }
+        habilitation: { _eq: $habilitation }
+        prefer: { _eq: $prefer }
+        available: { _eq: $available }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    mandatairesList: search_ti_view_lb_tis(
+      limit: $limit
+      offset: $offset
+      order_by: $orderBy
+      args: {
+        search: $searchText
+        departementcode: $departementCode
+        tiid: $tribunal
+      }
+      where: {
+        user_type: { _eq: $user_type }
+        habilitation: { _eq: $habilitation }
+        prefer: { _eq: $prefer }
+        available: { _eq: $available }
+      }
+    ) {
+      prefer
+      habilitation
+      available
+      user_type
+      gestionnaire {
+        id
+        discriminator
+        mesures_awaiting
+        mesures_in_progress
+        mesures_max
+        mesures_last_update
         mandataire_id
         remaining_capacity
         service_id

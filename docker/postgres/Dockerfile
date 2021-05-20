@@ -1,3 +1,4 @@
-FROM postgres:10
+#FROM postgres:10
+FROM mdillon/postgis:10
 
 COPY ./postgres-init.sh /docker-entrypoint-initdb.d/postgres-init.sh

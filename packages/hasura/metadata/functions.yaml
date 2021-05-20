@@ -18,10 +18,16 @@
     name: search_tis
 - function:
     schema: public
+    name: search_ti_view_lb_tis
+- function:
+    schema: public
     name: search_users
 - function:
     schema: public
     name: search_view_lb
+- function:
+    schema: public
+    name: search_view_lb_tis
 - function:
     schema: public
     name: search_view_mesure_gestionnaire_tis

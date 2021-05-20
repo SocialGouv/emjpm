@@ -7740,6 +7740,44 @@
       allow_aggregations: true
 - table:
     schema: public
+    name: view_lb_tis
+  object_relationships:
+  - name: gestionnaire
+    using:
+      manual_configuration:
+        remote_table:
+          schema: public
+          name: view_mesure_gestionnaire
+        column_mapping:
+          uid: id
+  select_permissions:
+  - role: ti
+    permission:
+      columns:
+      - adress
+      - available
+      - code_postal
+      - departement_code
+      - email
+      - habilitation
+      - lb_user_id
+      - mandataire_id
+      - mesures_awaiting
+      - mesures_in_progress
+      - mesures_max
+      - nom
+      - prefer
+      - remaining_capacity
+      - service_id
+      - siret
+      - ti_id
+      - uid
+      - user_type
+      - ville
+      filter: {}
+      allow_aggregations: true
+- table:
+    schema: public
     name: view_mesure_gestionnaire
   object_relationships:
   - name: departement
@@ -7843,6 +7881,7 @@
       - mandataire_id
       - mesures_awaiting
       - mesures_in_progress
+      - mesures_last_update
       - mesures_max
       - nom
       - remaining_capacity
