@@ -10,7 +10,8 @@ const mesureRessourceSchema = yup.object().shape({
     .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
   niveau_ressource: yup.number().required(),
   prestations_sociales: yup
-    .string()
+    .array()
+    .of(yup.string())
     .ensure()
     .required("Sélectionnez au moins une prestation sociale"),
 });
