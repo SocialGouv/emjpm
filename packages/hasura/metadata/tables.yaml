@@ -7758,6 +7758,7 @@
       - available
       - code_postal
       - departement_code
+      - distance
       - email
       - habilitation
       - lb_user_id
@@ -7766,6 +7767,7 @@
       - mesures_in_progress
       - mesures_max
       - nom
+      - point
       - prefer
       - remaining_capacity
       - service_id

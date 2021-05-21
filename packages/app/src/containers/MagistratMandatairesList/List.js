@@ -12,6 +12,8 @@ import { GET_MANDATAIRES, GET_MANDATAIRES_BY_COORDS } from "./queries";
 import { useMemo } from "react";
 
 const RESULT_PER_PAGE = 20;
+const distanceMaxKM = 300;
+// const distanceMaxKM = null;
 
 function getOrderByVariable(orderBy) {
   switch (orderBy) {
@@ -50,17 +52,13 @@ function MagistratMandatairesListList(props) {
       return null;
     }
     const { lat, lon } = localisation.data;
-    return [lon, lat];
+    return { lon, lat };
   }, [localisation]);
 
   const variables = {
     user_type: selectedType ? selectedType.value : null,
     limit: RESULT_PER_PAGE,
     offset: currentOffset,
-    orderBy: getOrderByVariable(orderBy),
-    searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
-    tribunal: magistrat.ti_id,
-    departementCode: magistrat.ti.departement_code,
     prefer: prefer || null,
     habilitation: habilitation || null,
     available: available || null,
@@ -68,9 +66,20 @@ function MagistratMandatairesListList(props) {
   let query;
   if (coords) {
     query = GET_MANDATAIRES_BY_COORDS;
-    variables.coords = coords;
+    Object.assign(variables, {
+      lat: coords.lat,
+      lon: coords.lon,
+      distanceMaxKM,
+      orderBy: { distance: "asc" },
+    });
   } else {
     query = GET_MANDATAIRES;
+    Object.assign(variables, {
+      orderBy: getOrderByVariable(orderBy),
+      searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
+      tribunal: magistrat.ti_id,
+      departementCode: magistrat.ti.departement_code,
+    });
   }
 
   const { data, error, loading } = useQuery(query, {

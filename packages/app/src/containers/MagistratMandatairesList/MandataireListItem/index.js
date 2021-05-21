@@ -35,6 +35,7 @@ export default function MandataireListItem(props) {
     prefer,
     habilitation,
     available,
+    distance,
   } = item;
   const {
     mandataire,
@@ -68,7 +69,6 @@ export default function MandataireListItem(props) {
   const mesuresInProgress = mesures_in_progress;
   const mesuresAwaiting = mesures_awaiting;
   const mesuresLastUpdate = mesures_last_update;
-
   return (
     <>
       <Card sx={cardStyle} width="100%">
@@ -137,6 +137,15 @@ export default function MandataireListItem(props) {
                 : "Non renseignée"}
             </Text>
           </Flex>
+
+          {distance && (
+            <Flex sx={columnStyle(false, false)}>
+              <Text sx={labelStyle}>Distance</Text>
+              <Text sx={lastUpdateStyle()}>
+                {Math.round(distance * 10) / 10} KM
+              </Text>
+            </Flex>
+          )}
 
           <Flex alignItems="center">
             <Box>

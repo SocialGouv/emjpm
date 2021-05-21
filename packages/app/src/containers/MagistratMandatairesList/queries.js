@@ -147,52 +147,46 @@ export const GET_MANDATAIRES = gql`
 `;
 
 export const GET_MANDATAIRES_BY_COORDS = gql`
-  query search_ti_view_lb_tis(
-    $tribunal: Int!
+  query locate_ti_view_lb_tis(
     $offset: Int!
     $user_type: String
     $orderBy: [view_lb_tis_order_by!]
     $limit: Int
-    $searchText: String
-    $departementCode: String
     $habilitation: Boolean
     $prefer: Boolean
     $available: Boolean
-    $coords: geography!
+    $lat: float8!
+    $lon: float8!
+    $distanceMaxKM: float8
   ) {
-    count: search_ti_view_lb_tis_aggregate(
-      args: {
-        search: $searchText
-        departementcode: $departementCode
-        tiid: $tribunal
-      }
+    count: locate_ti_view_lb_tis_aggregate(
+      args: { lat: $lat, lon: $lon }
       where: {
         user_type: { _eq: $user_type }
         habilitation: { _eq: $habilitation }
         prefer: { _eq: $prefer }
         available: { _eq: $available }
+        distance: { _lte: $distanceMaxKM }
       }
     ) {
       aggregate {
         count
       }
     }
-    mandatairesList: search_ti_view_lb_tis(
+    mandatairesList: locate_ti_view_lb_tis(
       limit: $limit
       offset: $offset
       order_by: $orderBy
-      args: {
-        search: $searchText
-        departementcode: $departementCode
-        tiid: $tribunal
-      }
+      args: { lat: $lat, lon: $lon }
       where: {
         user_type: { _eq: $user_type }
         habilitation: { _eq: $habilitation }
         prefer: { _eq: $prefer }
         available: { _eq: $available }
+        distance: { _lte: $distanceMaxKM }
       }
     ) {
+      distance
       prefer
       habilitation
       available
