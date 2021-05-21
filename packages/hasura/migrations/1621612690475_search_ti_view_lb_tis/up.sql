@@ -24,7 +24,8 @@ AS $function$
         prefer,
         habilitation,
         available,
-        point,
+        latitude,
+        longitude,
         distance
     FROM (
         SELECT

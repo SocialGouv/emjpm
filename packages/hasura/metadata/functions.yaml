@@ -30,7 +30,4 @@
     name: search_view_lb
 - function:
     schema: public
-    name: search_view_lb_tis
-- function:
-    schema: public
     name: search_view_mesure_gestionnaire_tis

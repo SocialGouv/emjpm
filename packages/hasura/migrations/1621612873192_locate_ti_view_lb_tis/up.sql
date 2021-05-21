@@ -24,7 +24,8 @@ AS $function$
         prefer,
         habilitation,
         available,
-        point,
+        latitude,
+        longitude,
         distance
     FROM (
         SELECT
@@ -48,14 +49,15 @@ AS $function$
             prefer,
             habilitation,
             available,
-            point,
+            latitude,
+            longitude,
             (ST_Distance(
-                ST_Transform(ST_SetSRID(point::geometry,4326),3857),
+                ST_Transform(ST_SetSRID(ST_Point(longitude, latitude),4326),3857),
                 ST_Transform(ST_SetSRID(ST_Point(lon, lat),4326),3857)
             )/1000) as distance
         FROM
             view_lb_tis
         WHERE
-            view_lb_tis.point IS NOT NULL
+            view_lb_tis.latitude IS NOT NULL AND view_lb_tis.longitude IS NOT NULL
     ) v
 $function$;

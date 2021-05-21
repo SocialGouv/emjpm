@@ -22,8 +22,9 @@ CREATE OR REPLACE VIEW "public"."view_lb_tis" AS
             ELSE false
         END AS habilitation,
     (((ser.dispo_max - ser.mesures_awaiting) - ser.mesures_in_progress) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM (((services ser
      LEFT JOIN lb_users lbu ON (((ser.siret)::text = (lbu.siret)::text)))
      JOIN departements dep ON (((dep.id)::text = (ser.departement_code)::text)))
@@ -52,8 +53,9 @@ UNION
             ELSE false
         END AS habilitation,
     (((ser.dispo_max - ser.mesures_awaiting) - ser.mesures_in_progress) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM (((services ser
      LEFT JOIN lb_users lbu ON (((ser.siret)::text = (lbu.siret)::text)))
      JOIN service_tis sti ON ((sti.service_id = ser.id)))
@@ -82,8 +84,9 @@ UNION
             ELSE false
         END AS habilitation,
     (((man.dispo_max - man.mesures_en_attente) - man.mesures_en_cours) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM ((((mandataires man
      LEFT JOIN lb_users lbu ON ((man.lb_user_id = lbu.id)))
      LEFT JOIN lb_departements lbd ON ((lbu.id = lbd.lb_user_id)))
@@ -114,8 +117,9 @@ UNION
             ELSE false
         END AS habilitation,
     (((man.dispo_max - man.mesures_en_attente) - man.mesures_en_cours) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM (((mandataires man
      LEFT JOIN lb_users lbu ON ((man.lb_user_id = lbu.id)))
      JOIN mandataire_tis mti ON ((mti.mandataire_id = man.id)))
@@ -145,8 +149,9 @@ UNION
             ELSE false
         END AS habilitation,
     (((man.dispo_max - man.mesures_en_attente) - man.mesures_en_cours) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM (((((mandataires man
      LEFT JOIN lb_users lbu ON ((man.lb_user_id = lbu.id)))
      LEFT JOIN lb_user_etablissements lbue ON ((lbu.id = lbue.lb_user_id)))
@@ -178,8 +183,9 @@ UNION
             ELSE false
         END AS habilitation,
     (((man.dispo_max - man.mesures_en_attente) - man.mesures_en_cours) > 0) AS available,
-    gcp.point,
-    NULL::float as distance
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
    FROM (((mandataires man
      LEFT JOIN lb_users lbu ON ((man.lb_user_id = lbu.id)))
      JOIN mandataire_tis mti ON ((mti.mandataire_id = man.id)))
