@@ -28,13 +28,13 @@ services:
     ports:
       - "8081:8080"
 
-  maildev:
-    image: djfarrelly/maildev
-    command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
-    ports:
-      - "1025:1025"
-      - "1080:1080"
-    restart: always
+  # maildev:
+  #   image: djfarrelly/maildev
+  #   command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
+  #   ports:
+  #     - "1025:1025"
+  #     - "1080:1080"
+  #   restart: always
 
   hasura:
     image: emjpm_hasura
