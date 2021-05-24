@@ -36,12 +36,7 @@ export const CHOOSE_MANDATAIRE = gql`
         id
       }
     }
-  }
-`;
-
-export const CALCULATE_MESURES = gql`
-  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
-    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
+    calculate_mesures(mandataireId: $mandataire_id, serviceId: $service_id) {
       en_cours
       en_attente
     }

@@ -11,7 +11,7 @@ import { getUserBasePath } from "~/constants";
 import getLocation from "~/query-service/emjpm-hasura/getLocation";
 
 import { MesureAcceptForm } from "./MesureAcceptForm";
-import { ACCEPT_MESURE, CALCULATE_MESURES } from "./mutations";
+import { ACCEPT_MESURE } from "./mutations";
 import { MesureAcceptStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -28,27 +28,18 @@ export function MesureAccept(props) {
 
   const userBasePath = getUserBasePath({ type });
 
-  const [recalculateMesures, { loading: loading1, error: error1 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading1, error1);
-
   function redirectToMesure(mesureId) {
     history.push(`${userBasePath}/mesures/${mesureId}`);
   }
 
-  const [updateMesure, { loading: loading2, error: error2 }] = useMutation(
-    ACCEPT_MESURE,
-    {
-      onCompleted: async () => {
-        await recalculateMesures({
-          refetchQueries: ["CURRENT_USER_QUERY"],
-          variables: { mandataireId, serviceId },
-        });
-        redirectToMesure(mesure.id);
-      },
-    }
-  );
-  useQueryReady(loading2, error2);
+  const [updateMesure, { loading, error }] = useMutation(ACCEPT_MESURE, {
+    variables: { mandataireId, serviceId },
+    refetchQueries: ["CURRENT_USER_QUERY"],
+    onCompleted: () => {
+      redirectToMesure(mesure.id);
+    },
+  });
+  useQueryReady(loading, error);
 
   const antenneOptions = service_antennes.map((antenne) => ({
     label: antenne.name,

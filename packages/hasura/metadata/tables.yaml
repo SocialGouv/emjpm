@@ -6215,57 +6215,6 @@
           magistrats:
             user_id:
               _eq: X-Hasura-User-Id
-  event_triggers:
-  - name: mesures-update
-    definition:
-      enable_manual: true
-      insert:
-        columns: '*'
-      delete:
-        columns: '*'
-      update:
-        columns:
-        - is_urgent
-        - date_fin_mesure
-        - date_nomination
-        - date_premier_mesure
-        - date_protection_en_cours
-        - judgment_date
-        - latitude
-        - longitude
-        - antenne_id
-        - editor_id
-        - etablissement_id
-        - id
-        - magistrat_id
-        - mandataire_id
-        - service_id
-        - ti_id
-        - cause_sortie
-        - champ_mesure
-        - civilite
-        - lieu_vie
-        - nature_mesure
-        - resultat_revision
-        - status
-        - type_etablissement
-        - created_at
-        - annee_naissance
-        - cabinet
-        - code_postal
-        - departement_code
-        - numero_dossier
-        - numero_rg
-        - pays
-        - ville
-    retry_conf:
-      num_retries: 0
-      interval_sec: 10
-      timeout_sec: 60
-    webhook: http://api:4000/hasura/triggers/mesures/update
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
 - table:
     schema: public
     name: mutex_lock

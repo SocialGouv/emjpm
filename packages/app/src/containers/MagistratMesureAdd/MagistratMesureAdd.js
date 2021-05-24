@@ -10,11 +10,7 @@ import useUser from "~/hooks/useUser";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
-import {
-  CALCULATE_MESURES,
-  CHOOSE_MANDATAIRE,
-  SEND_EMAIL_RESERVATION,
-} from "./mutations";
+import { CHOOSE_MANDATAIRE, SEND_EMAIL_RESERVATION } from "./mutations";
 import { MagistratMandataireStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -34,41 +30,15 @@ function MagistratMesureAdd(props) {
     useMutation(SEND_EMAIL_RESERVATION);
   useQueryReady(loading1, error1);
 
-  const [recalculateMesures, { loading: loading2, error: error2 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading2, error2);
-
-  const [chooseMandataire, { loading: loading3, error: error3 }] = useMutation(
+  const [chooseMandataire, { loading: loading2, error: error2 }] = useMutation(
     CHOOSE_MANDATAIRE,
     {
+      variables: {
+        mandataire_id: mandataireId,
+        service_id: serviceId,
+      },
       onCompleted: async ({ insert_mesures }) => {
         const [mesure] = insert_mesures.returning;
-
-        await recalculateMesures({
-          awaitRefetchQueries: true,
-          refetchQueries: [
-            {
-              query: GESTIONNAIRES,
-              variables: {
-                mandataire_id: mandataireId,
-                service_id: serviceId,
-              },
-            },
-            {
-              query: MAGISTRAT_MESURES_QUERY,
-              variables: {
-                natureMesure: null,
-                offset: 0,
-                searchText: null,
-                tiId: tiId,
-              },
-            },
-          ],
-          variables: {
-            mandataireId,
-            serviceId,
-          },
-        });
 
         await sendEmailReservation({
           variables: {
@@ -76,11 +46,29 @@ function MagistratMesureAdd(props) {
           },
         });
 
-        await history.push(`/magistrats/mesures/${mesure.id}`);
+        history.push(`/magistrats/mesures/${mesure.id}`);
       },
+      refetchQueries: [
+        {
+          query: GESTIONNAIRES,
+          variables: {
+            mandataire_id: mandataireId,
+            service_id: serviceId,
+          },
+        },
+        {
+          query: MAGISTRAT_MESURES_QUERY,
+          variables: {
+            natureMesure: null,
+            offset: 0,
+            searchText: null,
+            tiId: tiId,
+          },
+        },
+      ],
     }
   );
-  useQueryReady(loading3, error3);
+  useQueryReady(loading2, error2);
 
   const handleSubmit = async (values, { setSubmitting }) => {
     setSubmitting(true);

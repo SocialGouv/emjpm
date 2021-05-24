@@ -2,6 +2,8 @@ const logger = require("~/utils/logger");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
+// deprecated and not used anymore for now
+
 module.exports = async (req, res) => {
   logger.info(`[TRIGGER_MESURES_UPDATE] start updating related gestionnaires`);
   let status;
