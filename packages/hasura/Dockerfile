@@ -13,7 +13,9 @@ ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 # RUN chown hasura:hasura -R /tmp/plugins-downloads/cli-ext
 # USER hasura
 
-ENTRYPOINT ["docker-entrypoint.sh"]
+COPY packages/hasura/bin/ /bin/
+
+ENTRYPOINT ["wait-for", "api:4000", "--", "docker-entrypoint.sh"]
 
 CMD ["graphql-engine", "serve"]
 
