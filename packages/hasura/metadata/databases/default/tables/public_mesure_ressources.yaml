@@ -1,0 +1,157 @@
+table:
+  name: mesure_ressources
+  schema: public
+object_relationships:
+- name: mesure
+  using:
+    foreign_key_constraint_on: mesure_id
+array_relationships:
+- name: mesure_ressources_prestations_sociales
+  using:
+    foreign_key_constraint_on:
+      column: mesure_ressources_id
+      table:
+        name: mesure_ressources_prestations_sociales
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+  role: individuel
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+  role: prepose
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+  role: service
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    check: null
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    check:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service
+delete_permissions:
+- permission:
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service

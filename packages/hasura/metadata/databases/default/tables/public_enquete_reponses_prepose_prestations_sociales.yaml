@@ -1,0 +1,108 @@
+table:
+  name: enquete_reponses_prepose_prestations_sociales
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+select_permissions:
+- permission:
+    columns:
+    - aah
+    - als_apl
+    - apa
+    - asi
+    - aspa
+    - created_at
+    - curatelle_renforcee
+    - curatelle_simple
+    - enquete_reponses_id
+    - id
+    - last_update
+    - maj
+    - pch
+    - rsa
+    - sauvegarde_autres_mesures
+    - tutelle
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - aah
+    - als_apl
+    - apa
+    - asi
+    - aspa
+    - created_at
+    - curatelle_renforcee
+    - curatelle_simple
+    - enquete_reponses_id
+    - id
+    - last_update
+    - maj
+    - pch
+    - rsa
+    - sauvegarde_autres_mesures
+    - tutelle
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - id
+    - created_at
+    - last_update
+    - tutelle
+    - curatelle_simple
+    - curatelle_renforcee
+    - sauvegarde_autres_mesures
+    - maj
+    - aah
+    - pch
+    - asi
+    - rsa
+    - als_apl
+    - aspa
+    - apa
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - aah
+    - als_apl
+    - apa
+    - asi
+    - aspa
+    - created_at
+    - curatelle_renforcee
+    - curatelle_simple
+    - enquete_reponses_id
+    - id
+    - last_update
+    - maj
+    - pch
+    - rsa
+    - sauvegarde_autres_mesures
+    - tutelle
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose

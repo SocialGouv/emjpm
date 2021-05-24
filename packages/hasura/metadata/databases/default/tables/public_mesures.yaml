@@ -1,0 +1,540 @@
+table:
+  name: mesures
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+- name: etablissement
+  using:
+    foreign_key_constraint_on: etablissement_id
+- name: mandataire
+  using:
+    foreign_key_constraint_on: mandataire_id
+- name: service
+  using:
+    foreign_key_constraint_on: service_id
+- name: service_antenne
+  using:
+    foreign_key_constraint_on: antenne_id
+- name: ti
+  using:
+    foreign_key_constraint_on: ti_id
+array_relationships:
+- name: mesure_etats
+  using:
+    foreign_key_constraint_on:
+      column: mesure_id
+      table:
+        name: mesure_etat
+        schema: public
+- name: mesure_ressources
+  using:
+    foreign_key_constraint_on:
+      column: mesure_id
+      table:
+        name: mesure_ressources
+        schema: public
+insert_permissions:
+- permission:
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    set:
+      mandataire_id: x-hasura-mandataire-id
+  role: individuel
+- permission:
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    set:
+      mandataire_id: x-hasura-mandataire-id
+  role: prepose
+- permission:
+    check:
+      service_id:
+        _eq: X-Hasura-Service-Id
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    set:
+      service_id: x-hasura-Service-Id
+  role: service
+- permission:
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - civilite
+    - code_postal
+    - created_at
+    - date_nomination
+    - departement_code
+    - etablissement_id
+    - date_fin_mesure
+    - id
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - numero_dossier
+    - numero_rg
+    - pays
+    - cause_sortie
+    - lieu_vie
+    - service_id
+    - status
+    - ti_id
+    - nature_mesure
+    - champ_mesure
+    - ville
+  role: ti
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - created_at
+    - magistrat_id
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - created_at
+    - magistrat_id
+    filter: {}
+  role: direction_nationale
+- permission:
+    columns:
+    - created_at
+    - magistrat_id
+    filter: {}
+  role: direction_territoriale
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      mandataire:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      mandataire:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    check: null
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    check: null
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - etablissement_id
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    check: null
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - civilite
+    - code_postal
+    - created_at
+    - date_nomination
+    - departement_code
+    - etablissement_id
+    - date_fin_mesure
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - numero_dossier
+    - numero_rg
+    - pays
+    - cause_sortie
+    - lieu_vie
+    - service_id
+    - status
+    - ti_id
+    - nature_mesure
+    - champ_mesure
+    - ville
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti
+delete_permissions:
+- permission:
+    filter:
+      mandataire:
+        user:
+          id:
+            _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti

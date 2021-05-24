@@ -1,0 +1,319 @@
+table:
+  name: mandataires
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+- name: lb_user
+  using:
+    foreign_key_constraint_on: lb_user_id
+- name: ocmi_mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: ocmi_mandataires
+        schema: public
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+array_relationships:
+- name: commentaires
+  using:
+    foreign_key_constraint_on:
+      column: mandataire_id
+      table:
+        name: commentaires
+        schema: public
+- name: enquete_reponses
+  using:
+    foreign_key_constraint_on:
+      column: mandataire_id
+      table:
+        name: enquete_reponses
+        schema: public
+- name: mandataire_tis
+  using:
+    foreign_key_constraint_on:
+      column: mandataire_id
+      table:
+        name: mandataire_tis
+        schema: public
+- name: mesures
+  using:
+    foreign_key_constraint_on:
+      column: mandataire_id
+      table:
+        name: mesures
+        schema: public
+insert_permissions:
+- permission:
+    check: {}
+    columns:
+    - adresse
+    - code_postal
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    - competences
+  role: individuel
+- permission:
+    check:
+      user_id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - adresse
+    - code_postal
+    - created_at
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    - competences
+  role: prepose
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - siret
+    filter:
+      siret:
+        _eq: X-Hasura-Siret
+    limit: 1
+  role: anonymous
+- permission:
+    allow_aggregations: true
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - mesures_last_update
+    - latitude
+    - lb_user_id
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter: {}
+  role: direction
+- permission:
+    allow_aggregations: true
+    columns:
+    - latitude
+    - longitude
+    - departement_code
+    - dispo_max
+    - id
+    - lb_user_id
+    - mesures_en_attente
+    - mesures_en_cours
+    - user_id
+    - competences
+    - created_at
+    - email_send
+    - adresse
+    - code_postal
+    - genre
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    filter: {}
+  role: direction_nationale
+- permission:
+    allow_aggregations: true
+    columns:
+    - latitude
+    - longitude
+    - departement_code
+    - dispo_max
+    - id
+    - lb_user_id
+    - mesures_en_attente
+    - mesures_en_cours
+    - user_id
+    - competences
+    - created_at
+    - email_send
+    - adresse
+    - code_postal
+    - genre
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    filter:
+      lb_user:
+        lb_departements:
+          _and:
+          - departement_financeur:
+              _eq: true
+          - departement_code:
+              _in: x-hasura-agrements
+  role: direction_territoriale
+- permission:
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - sync_ocmi_enable
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - sync_ocmi_enable
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - mesures_last_update
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - sync_ocmi_enable
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    check: null
+    columns:
+    - adresse
+    - code_postal
+    - created_at
+    - departement_code
+    - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente
+    - mesures_en_cours
+    - siret
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    - competences
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    check: null
+    columns:
+    - mesures_en_attente
+    - mesures_en_cours
+    filter: {}
+  role: ti

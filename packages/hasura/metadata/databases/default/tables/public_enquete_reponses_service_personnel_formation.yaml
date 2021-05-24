@@ -1,0 +1,150 @@
+table:
+  name: enquete_reponses_service_personnel_formation
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+select_permissions:
+- permission:
+    columns:
+    - id
+    - created_at
+    - last_update
+    - nb_delegues
+    - nb_delegues_etp
+    - nb_delegues_cnc
+    - nb_delegues_en_formation
+    - total_heures_delegues_en_formation
+    - nb_delegues_non_formes
+    - nb_delegues_niveau1
+    - nb_delegues_niveau1_etp
+    - nb_delegues_niveau2
+    - nb_delegues_niveau2_etp
+    - nb_delegues_niveau3
+    - nb_delegues_niveau3_etp
+    - nb_delegues_niveau4
+    - nb_delegues_niveau4_etp
+    - nb_delegues_niveau5
+    - nb_delegues_niveau5_etp
+    - nb_delegues_niveau6
+    - nb_delegues_niveau6_etp
+    - nb_delegues_homme
+    - nb_delegues_homme_etp
+    - nb_delegues_femme
+    - nb_delegues_femme_etp
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - id
+    - last_update
+    - nb_delegues
+    - nb_delegues_cnc
+    - nb_delegues_en_formation
+    - nb_delegues_etp
+    - nb_delegues_femme
+    - nb_delegues_femme_etp
+    - nb_delegues_homme
+    - nb_delegues_homme_etp
+    - nb_delegues_niveau1
+    - nb_delegues_niveau1_etp
+    - nb_delegues_niveau2
+    - nb_delegues_niveau2_etp
+    - nb_delegues_niveau3
+    - nb_delegues_niveau3_etp
+    - nb_delegues_niveau4
+    - nb_delegues_niveau4_etp
+    - nb_delegues_niveau5
+    - nb_delegues_niveau5_etp
+    - nb_delegues_niveau6
+    - nb_delegues_niveau6_etp
+    - nb_delegues_non_formes
+    - total_heures_delegues_en_formation
+    filter:
+      enquete_reponse:
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
+  role: service
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - nb_delegues_etp
+    - nb_delegues_femme_etp
+    - nb_delegues_homme_etp
+    - nb_delegues_niveau1_etp
+    - nb_delegues_niveau2_etp
+    - nb_delegues_niveau3_etp
+    - nb_delegues_niveau4_etp
+    - nb_delegues_niveau5_etp
+    - nb_delegues_niveau6_etp
+    - total_heures_delegues_en_formation
+    - enquete_reponses_id
+    - id
+    - nb_delegues
+    - nb_delegues_cnc
+    - nb_delegues_en_formation
+    - nb_delegues_femme
+    - nb_delegues_homme
+    - nb_delegues_niveau1
+    - nb_delegues_niveau2
+    - nb_delegues_niveau3
+    - nb_delegues_niveau4
+    - nb_delegues_niveau5
+    - nb_delegues_niveau6
+    - nb_delegues_non_formes
+    - created_at
+    - last_update
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - id
+    - last_update
+    - nb_delegues
+    - nb_delegues_cnc
+    - nb_delegues_en_formation
+    - nb_delegues_etp
+    - nb_delegues_femme
+    - nb_delegues_femme_etp
+    - nb_delegues_homme
+    - nb_delegues_homme_etp
+    - nb_delegues_niveau1
+    - nb_delegues_niveau1_etp
+    - nb_delegues_niveau2
+    - nb_delegues_niveau2_etp
+    - nb_delegues_niveau3
+    - nb_delegues_niveau3_etp
+    - nb_delegues_niveau4
+    - nb_delegues_niveau4_etp
+    - nb_delegues_niveau5
+    - nb_delegues_niveau5_etp
+    - nb_delegues_niveau6
+    - nb_delegues_niveau6_etp
+    - nb_delegues_non_formes
+    - total_heures_delegues_en_formation
+    filter:
+      enquete_reponse:
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
+  role: service

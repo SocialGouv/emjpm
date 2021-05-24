@@ -1,0 +1,150 @@
+table:
+  name: service_antenne
+  schema: public
+object_relationships:
+- name: service
+  using:
+    foreign_key_constraint_on: service_id
+array_relationships:
+- name: mesures
+  using:
+    foreign_key_constraint_on:
+      column: antenne_id
+      table:
+        name: mesures
+        schema: public
+insert_permissions:
+- permission:
+    check: {}
+    columns:
+    - adresse
+    - ville
+    - code_postal
+    - contact_email
+    - contact_firstname
+    - contact_lastname
+    - contact_phone
+    - created_at
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    - name
+    - service_id
+  role: service
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - latitude
+    - longitude
+    - id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    - service_id
+    - created_at
+    - adresse
+    - code_postal
+    - contact_email
+    - contact_firstname
+    - contact_lastname
+    - contact_phone
+    - name
+    - ville
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - id
+    - name
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - id
+    - name
+    filter: {}
+  role: prepose
+- permission:
+    allow_aggregations: true
+    columns:
+    - adresse
+    - ville
+    - code_postal
+    - contact_email
+    - contact_firstname
+    - contact_lastname
+    - contact_phone
+    - created_at
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    - name
+    - service_id
+    filter:
+      service_id:
+        _eq: x-hasura-service-id
+  role: service
+- permission:
+    columns:
+    - id
+    - service_id
+    - name
+    - created_at
+    - code_postal
+    - ville
+    - contact_lastname
+    - contact_firstname
+    - contact_email
+    - contact_phone
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    - adresse
+    - latitude
+    - longitude
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - adresse
+    - ville
+    - code_postal
+    - contact_email
+    - contact_firstname
+    - contact_lastname
+    - contact_phone
+    - created_at
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    - name
+    - service_id
+    filter:
+      service_id:
+        _eq: x-hasura-service-id
+  role: service
+- permission:
+    check: null
+    columns:
+    - mesures_awaiting
+    - mesures_in_progress
+    filter: {}
+  role: ti
+delete_permissions:
+- permission:
+    filter:
+      service_id:
+        _eq: x-hasura-service-id
+  role: service

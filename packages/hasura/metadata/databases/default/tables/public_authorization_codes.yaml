@@ -1,0 +1,3 @@
+table:
+  name: authorization_codes
+  schema: public

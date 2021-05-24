@@ -1,0 +1,4 @@
+table:
+  name: resultat_revision_mesure
+  schema: public
+is_enum: true

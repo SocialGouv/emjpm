@@ -1,0 +1,179 @@
+table:
+  name: etablissements
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+array_relationships:
+- name: mesures
+  using:
+    foreign_key_constraint_on:
+      column: etablissement_id
+      table:
+        name: mesures
+        schema: public
+- name: tis
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: departement_code
+      insertion_order: null
+      remote_table:
+        name: tis
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
+    - nofinesset
+    - rslongue
+    - commune
+  role: direction
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - nofinesset
+    - departement_code
+    - nofinessej
+    - rs
+    - rslongue
+    - complrs
+    - compldistrib
+    - numvoie
+    - typvoie
+    - voie
+    - compvoie
+    - lieuditbp
+    - commune
+    - libdepartement
+    - ligneacheminement
+    - telephone
+    - telecopie
+    - categetab
+    - libcategetab
+    - categagretab
+    - libcategagretab
+    - siret
+    - codeape
+    - codemft
+    - libmft
+    - codesph
+    - libsph
+    - dateouv
+    - dateautor
+    - numuai
+    - coordxet
+    - coordyet
+    - sourcecoordet
+    filter: {}
+  role: direction
+- permission:
+    allow_aggregations: true
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
+    - categagretab
+    - categetab
+    - codeape
+    - codemft
+    - codesph
+    - commune
+    - compldistrib
+    - complrs
+    - compvoie
+    - dateautor
+    - dateouv
+    - libcategagretab
+    - libcategetab
+    - libdepartement
+    - libmft
+    - libsph
+    - lieuditbp
+    - ligneacheminement
+    - nofinessej
+    - nofinesset
+    - numuai
+    - numvoie
+    - rs
+    - rslongue
+    - siret
+    - sourcecoordet
+    - telecopie
+    - telephone
+    - typvoie
+    - voie
+    filter: {}
+  role: individuel
+- permission:
+    allow_aggregations: true
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
+    - categagretab
+    - categetab
+    - codeape
+    - codemft
+    - codesph
+    - commune
+    - compldistrib
+    - complrs
+    - compvoie
+    - dateautor
+    - dateouv
+    - libcategagretab
+    - libcategetab
+    - libdepartement
+    - libmft
+    - libsph
+    - lieuditbp
+    - ligneacheminement
+    - nofinessej
+    - nofinesset
+    - numuai
+    - numvoie
+    - rs
+    - rslongue
+    - siret
+    - sourcecoordet
+    - telecopie
+    - telephone
+    - typvoie
+    - voie
+    filter: {}
+  role: prepose
+- permission:
+    allow_aggregations: true
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
+    - nofinesset
+    - rslongue
+    - commune
+    filter: {}
+  role: service
+- permission:
+    allow_aggregations: true
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
+    - nofinesset
+    - rslongue
+    - commune
+    filter: {}
+  role: ti
