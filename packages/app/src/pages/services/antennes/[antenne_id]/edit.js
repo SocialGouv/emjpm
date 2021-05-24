@@ -7,8 +7,8 @@ import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function ServiceAntenneEditPage() {
-  const params = useParams();
-  const antenneId = parseInt(params.antenne_id);
+  const { antenne_id } = useParams();
+  const antenneId = parseInt(antenne_id);
   const user = useUser();
 
   return (

@@ -9,8 +9,8 @@ function ImportEnquetePage() {
   const user = useUser();
   const history = useHistory();
 
-  const query = useParams();
-  const enqueteId = Number(query.enquete_id);
+  const { enquete_id } = useParams();
+  const enqueteId = parseInt(enquete_id);
 
   return (
     <LayoutMandataire>

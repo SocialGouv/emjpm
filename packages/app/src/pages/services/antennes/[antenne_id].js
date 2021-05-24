@@ -7,7 +7,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function Antennes() {
-  const { antenne_id: antenneId } = useParams();
+  const { antenne_id } = useParams();
+  const antenneId = parseInt(antenne_id);
 
   return (
     <LayoutServices>

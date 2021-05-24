@@ -8,7 +8,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function ApiLogsViewPage() {
-  const { api_log_id: id } = useParams();
+  const { api_log_id } = useParams();
+  const id = parseInt(api_log_id);
 
   return (
     <LayoutAdmin>

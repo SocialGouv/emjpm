@@ -9,7 +9,9 @@ import { LB_USER } from "./queries";
 
 export function ListeBlancheEdit(props) {
   const { handleSubmit, handleCancel } = props;
-  const { id } = useParams();
+  const { id: paramId } = useParams();
+  const id = parseInt(paramId);
+
   const { data, error, loading } = useQuery(LB_USER, {
     variables: {
       id,

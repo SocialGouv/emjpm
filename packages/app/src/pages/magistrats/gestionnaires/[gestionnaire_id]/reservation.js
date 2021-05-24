@@ -5,7 +5,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function Reservation() {
-  const { gestionnaire_id: gestionnaireId } = useParams();
+  const { gestionnaire_id } = useParams();
+  const gestionnaireId = parseInt(gestionnaire_id);
 
   return (
     <LayoutMagistrat>

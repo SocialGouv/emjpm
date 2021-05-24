@@ -11,8 +11,8 @@ import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 
 function EnquetePage() {
-  const query = useParams();
-  const enqueteId = Number(query.enquete_id);
+  const { enquete_id } = useParams();
+  const enqueteId = parseInt(enquete_id);
 
   const history = useHistory();
   const { id: userId } = useUser();

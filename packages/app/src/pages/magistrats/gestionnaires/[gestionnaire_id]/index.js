@@ -6,7 +6,9 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function Gestionnaire() {
-  const { gestionnaire_id: gestionnaireId } = useParams();
+  const { gestionnaire_id } = useParams();
+  const gestionnaireId = parseInt(gestionnaire_id);
+
   const {
     magistrat: { ti_id: tiId },
   } = useUser();

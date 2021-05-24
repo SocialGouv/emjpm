@@ -12,7 +12,7 @@ export function Provider(props) {
   const { data, loading, error } = useQuery(MESURE_CONTEXT_QUERY, {
     fetchPolicy: "cache-and-network",
     variables: {
-      id: mesureId,
+      id: parseInt(mesureId),
     },
   });
 

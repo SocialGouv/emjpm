@@ -5,9 +5,9 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function DirectionEnqueteReponsePreviewPage() {
-  const query = useParams();
-  const enqueteId = Number(query.enquete_id);
-  const enqueteReponseId = Number(query.enquete_reponse_id);
+  const { enquete_id, enquete_reponse_id } = useParams();
+  const enqueteId = parseInt(enquete_id);
+  const enqueteReponseId = parseInt(enquete_reponse_id);
 
   return (
     <LayoutDirection>

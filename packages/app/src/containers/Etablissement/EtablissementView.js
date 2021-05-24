@@ -7,7 +7,8 @@ import { EtablissementViewForm } from "./EtablissementViewForm";
 import { ETABLISSEMENT } from "./queries";
 
 export function EtablissementView() {
-  const { id } = useParams();
+  const { id: paramId } = useParams();
+  const id = parseInt(paramId);
 
   const { data, loading, error } = useQuery(ETABLISSEMENT, {
     variables: { id },

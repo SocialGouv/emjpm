@@ -36,7 +36,7 @@ export function AdminLbUserDeleteForm(props) {
     onSubmit: async (_, { setSubmitting }) => {
       await deleteUser({
         variables: {
-          lbUserId: lbUserId,
+          lbUserId,
         },
       });
       setSubmitting(false);
