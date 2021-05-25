@@ -1,0 +1,10 @@
+table:
+  name: view_nation_indicateur_inscrit
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - type
+    - count
+    filter: {}
+  role: anonymous

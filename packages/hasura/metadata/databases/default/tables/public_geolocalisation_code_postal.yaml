@@ -1,0 +1,58 @@
+table:
+  name: geolocalisation_code_postal
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - cities
+    - code_postal
+    - id
+    - latitude
+    - longitude
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
+    - id
+    - code_postal
+    - latitude
+    - longitude
+    - cities
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - latitude
+    - longitude
+    - id
+    - cities
+    - code_postal
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - latitude
+    - longitude
+    - id
+    - cities
+    - code_postal
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - cities
+    - code_postal
+    - id
+    - latitude
+    - longitude
+    filter: {}
+  role: service
+- permission:
+    columns:
+    - latitude
+    - longitude
+    - id
+    - cities
+    - code_postal
+    filter: {}
+  role: ti

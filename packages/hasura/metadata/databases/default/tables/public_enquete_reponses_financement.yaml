@@ -1,0 +1,109 @@
+table:
+  name: enquete_reponses_financement
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    columns:
+    - aide_sociale_conseil_departemental
+    - autre_produits
+    - charges_fonctionnement
+    - charges_personnel
+    - charges_preposes
+    - created_at
+    - enquete_reponses_id
+    - financement_public
+    - id
+    - last_update
+    - produits_bareme_prelevements
+  role: prepose
+select_permissions:
+- permission:
+    columns:
+    - aide_sociale_conseil_departemental
+    - autre_produits
+    - charges_fonctionnement
+    - charges_personnel
+    - charges_preposes
+    - created_at
+    - enquete_reponses_id
+    - financement_public
+    - id
+    - last_update
+    - produits_bareme_prelevements
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - aide_sociale_conseil_departemental
+    - autre_produits
+    - charges_fonctionnement
+    - charges_personnel
+    - charges_preposes
+    - created_at
+    - enquete_reponses_id
+    - financement_public
+    - id
+    - last_update
+    - produits_bareme_prelevements
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - id
+    - created_at
+    - last_update
+    - charges_personnel
+    - charges_preposes
+    - charges_fonctionnement
+    - produits_bareme_prelevements
+    - autre_produits
+    - financement_public
+    - aide_sociale_conseil_departemental
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - aide_sociale_conseil_departemental
+    - autre_produits
+    - charges_fonctionnement
+    - charges_personnel
+    - charges_preposes
+    - created_at
+    - enquete_reponses_id
+    - financement_public
+    - id
+    - last_update
+    - produits_bareme_prelevements
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose

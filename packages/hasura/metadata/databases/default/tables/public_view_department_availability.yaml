@@ -1,0 +1,59 @@
+table:
+  name: view_department_availability
+  schema: public
+object_relationships:
+- name: department
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: id
+      insertion_order: null
+      remote_table:
+        name: departements
+        schema: public
+select_permissions:
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
+  role: service
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
+  role: ti

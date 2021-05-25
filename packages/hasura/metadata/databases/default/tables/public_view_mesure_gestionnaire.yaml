@@ -1,0 +1,116 @@
+table:
+  name: view_mesure_gestionnaire
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: id
+      insertion_order: null
+      remote_table:
+        name: departements
+        schema: public
+- name: mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        mandataire_id: id
+      insertion_order: null
+      remote_table:
+        name: mandataires
+        schema: public
+- name: service
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: services
+        schema: public
+array_relationships:
+- name: gestionnaire_tis
+  using:
+    manual_configuration:
+      column_mapping:
+        id: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire_tis
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - service_id
+    - mandataire_id
+    - discriminator
+    - departement_code
+    - dep_nom
+    - mesures_max
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - id
+    - service_id
+    - mandataire_id
+    - discriminator
+    - departement_code
+    - dep_nom
+    - mesures_max
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - departement_code
+    - mandataire_id
+    - mesures_max
+    - service_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    - discriminator
+    - id
+    - dep_nom
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - departement_code
+    - mandataire_id
+    - mesures_max
+    - service_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    - discriminator
+    - id
+    - dep_nom
+    filter: {}
+  role: service
+- permission:
+    allow_aggregations: true
+    columns:
+    - dep_nom
+    - departement_code
+    - discriminator
+    - id
+    - mandataire_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_last_update
+    - mesures_max
+    - nom
+    - remaining_capacity
+    - service_id
+    filter: {}
+  role: ti

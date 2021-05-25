@@ -1,0 +1,44 @@
+table:
+  name: service_tis
+  schema: public
+object_relationships:
+- name: service
+  using:
+    foreign_key_constraint_on: service_id
+- name: ti
+  using:
+    foreign_key_constraint_on: ti_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      service_id:
+        _eq: X-Hasura-Service-Id
+    columns:
+    - id
+    - service_id
+    - ti_id
+  role: service
+select_permissions:
+- permission:
+    columns:
+    - id
+    - ti_id
+    - service_id
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - id
+    - service_id
+    - ti_id
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+delete_permissions:
+- permission:
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service

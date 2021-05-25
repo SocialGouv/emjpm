@@ -1,0 +1,204 @@
+table:
+  name: mesure_etat
+  schema: public
+object_relationships:
+- name: mesure
+  using:
+    foreign_key_constraint_on: mesure_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+  role: individuel
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+  role: prepose
+- permission:
+    backend_only: false
+    check:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+  role: service
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - mesure_id
+    - date_changement_etat
+    - nature_mesure
+    - champ_mesure
+    - lieu_vie
+    - code_postal
+    - ville
+    - pays
+    - type_etablissement
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    allow_aggregations: true
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    columns:
+    - date_changement_etat
+    - id
+    - mesure_id
+    - champ_mesure
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    check: null
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    check: null
+    columns:
+    - champ_mesure
+    - date_changement_etat
+    - id
+    - mesure_id
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service
+delete_permissions:
+- permission:
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    filter:
+      mesure:
+        mandataire_id:
+          _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    filter:
+      mesure:
+        service_id:
+          _eq: X-Hasura-Service-Id
+  role: service

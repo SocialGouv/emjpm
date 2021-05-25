@@ -1,0 +1,4 @@
+table:
+  name: civilite
+  schema: public
+is_enum: true

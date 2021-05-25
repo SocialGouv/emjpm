@@ -1,0 +1,4 @@
+table:
+  name: type_etablissement
+  schema: public
+is_enum: true

@@ -1,0 +1,7 @@
+table:
+  name: api_logs
+  schema: public
+object_relationships:
+- name: editor
+  using:
+    foreign_key_constraint_on: editor_id
