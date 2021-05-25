@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 function Gestionnaire() {
   const { gestionnaire_id } = useParams();
-  const gestionnaireId = parseInt(gestionnaire_id);
+  const gestionnaireId = gestionnaire_id;
 
   const {
     magistrat: { ti_id: tiId },

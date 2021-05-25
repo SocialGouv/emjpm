@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 
 function Reservation() {
   const { gestionnaire_id } = useParams();
-  const gestionnaireId = parseInt(gestionnaire_id);
+  const gestionnaireId = gestionnaire_id;
 
   return (
     <LayoutMagistrat>
