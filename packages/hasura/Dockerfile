@@ -14,4 +14,4 @@ ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 #CMD ["graphql-engine", "serve"]
 
 COPY packages/hasura/metadata /hasura-metadata
-#COPY packages/hasura/migrations /hasura-migrations
+COPY packages/hasura/migrations /hasura-migrations
