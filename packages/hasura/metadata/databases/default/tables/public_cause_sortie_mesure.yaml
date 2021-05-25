@@ -1,4 +1,0 @@
-table:
-  name: cause_sortie_mesure
-  schema: public
-is_enum: true
