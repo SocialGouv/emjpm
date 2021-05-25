@@ -9,6 +9,9 @@ ENV HASURA_GRAPHQL_SHOW_UPDATE_NOTIFICATION=false
 ENV HASURA_GRAPHQL_SERVER_PORT=8080
 ENV HASURA_GRAPHQL_CLI_ENVIRONMENT=default
 
+ENV HASURA_GRAPHQL_DEV_MODE=true
+ENV HASURA_GRAPHQL_ADMIN_INTERNAL_ERRORS=true
+
 COPY packages/hasura/bin/ /bin/
 ENTRYPOINT ["wait-for", "api:4000", "--", "docker-entrypoint.sh"]
 CMD ["graphql-engine", "serve"]
