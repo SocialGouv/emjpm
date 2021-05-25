@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.2](https://github.com/SocialGouv/emjpm/compare/v25.119.1...v25.119.2) (2021-05-25)
+
+
+### Bug Fixes
+
+* **parseint:** gestionnaire id ([15c053a](https://github.com/SocialGouv/emjpm/commit/15c053a1569fffcdee38b71b9cd8fe9f99ba7b67))
+
+
+
+
+
 ## [25.119.1](https://github.com/SocialGouv/emjpm/compare/v25.119.0...v25.119.1) (2021-05-25)
 
 
