@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.1](https://github.com/SocialGouv/emjpm/compare/v25.119.0...v25.119.1) (2021-05-25)
+
+
+### Bug Fixes
+
+* **typo:** text info pluriel ([14e8518](https://github.com/SocialGouv/emjpm/commit/14e8518e29ee5b56fa028a031ac30743326bf4b0))
+* **typo:** text info pluriel ([8d34a91](https://github.com/SocialGouv/emjpm/commit/8d34a91238c248a1d30d14da55952d8601825fa6))
+
+
+
+
+
 # [25.119.0](https://github.com/SocialGouv/emjpm/compare/v25.118.2...v25.119.0) (2021-05-25)
 
 
