@@ -132,7 +132,7 @@ function MagistratMandatairesListFilters(props) {
               style={styleFilterButton(prefer)}
               data-tip={
                 !prefer
-                  ? "Afficher uniquement les mandataires souhaitant recevoirs des mesure en provenance de votre tribunal"
+                  ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
                   : null
               }
             >
