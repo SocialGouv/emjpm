@@ -44,7 +44,7 @@ function MandataireOcmiMesureImportSwitcher({
               limit: 20,
               natureMesure: null,
               offset: 0,
-              searchText: null,
+              searchText: "",
               status: MESURE_PROTECTION_STATUS.en_cours,
             },
           },

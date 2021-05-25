@@ -52,7 +52,7 @@ spec:
             httpGet:
               path: /healthz
               port: http
-            failureThreshold: 30
+            failureThreshold: 60
             periodSeconds: 10
           resources:
             limits:

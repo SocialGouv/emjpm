@@ -9,7 +9,9 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function AcceptMesurePage() {
-  const { mesure_id: mesureId } = useParams();
+  const { mesure_id } = useParams();
+  const mesureId = parseInt(mesure_id);
+
   return (
     <MesureProvider mesureId={mesureId}>
       <LayoutMandataire>

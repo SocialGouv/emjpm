@@ -7,7 +7,9 @@ import { ListeBlancheServiceUpdate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
 
 function ListeBlancheDetailPage() {
-  const { id } = useParams();
+  const { id: paramId } = useParams();
+  const id = parseInt(paramId);
+
   const history = useHistory();
 
   return (

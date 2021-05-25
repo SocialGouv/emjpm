@@ -5,7 +5,9 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function DirectionEnqueteDetailsPage() {
-  const { enquete_id: enqueteId } = useParams();
+  const { enquete_id } = useParams();
+  const enqueteId = parseInt(enquete_id);
+
   return (
     <LayoutDirection>
       <BoxWrapper mt={1} px="1">

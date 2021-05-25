@@ -9,35 +9,33 @@ import { MagistratMandatairesListFilters } from "./Filters";
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
 
-const orderByOptions = [
-  {
-    label: "disponibilité",
-    value: 0,
-  },
-  {
-    label: "ordre alphabétique (A-Z)",
-    value: 1,
-  },
-  {
-    label: "ordre alphabétique (Z-A)",
-    value: 2,
-  },
-];
-
 function MagistratMandatairesList() {
   const [selectedType, setType] = useState(DEFAULT_VALUE);
-  const [searchText, changeSearchText] = useState(null);
+  const [searchText, setSearchText] = useState(null);
   const [currentOffset, setCurrentOffset] = useState(0);
-  const [orderBy, setOrderBy] = useState(orderByOptions[0].value);
+  const [orderBy, setOrderBy] = useState(0);
   const debouncedSearchText = useDebounce(searchText, 10);
+  const [prefer, setPrefer] = useState(false);
+  const [habilitation, setHabilitation] = useState(false);
+  const [available, setAvailable] = useState(false);
+  const [localisation, setLocalisation] = useState(false);
 
   const onChangeSearch = useCallback(
     (event) => {
       setCurrentOffset(0);
-      changeSearchText(event.target.value);
+      setSearchText(event.target.value);
     },
-    [setCurrentOffset, changeSearchText]
+    [setCurrentOffset, setSearchText]
   );
+
+  const onChangeLocalisation = useCallback(
+    (value) => {
+      setCurrentOffset(0);
+      setLocalisation(value);
+    },
+    [setCurrentOffset, setLocalisation]
+  );
+
   const onChangeType = useCallback(
     (option) => {
       setCurrentOffset(0);
@@ -45,23 +43,64 @@ function MagistratMandatairesList() {
     },
     [setCurrentOffset, setType]
   );
+  const onChangeHabilitation = useCallback(() => {
+    setCurrentOffset(0);
+    setHabilitation(!habilitation);
+  }, [setCurrentOffset, setHabilitation, habilitation]);
+  const onChangePrefer = useCallback(() => {
+    setCurrentOffset(0);
+    setPrefer(!prefer);
+  }, [setCurrentOffset, setPrefer, prefer]);
+  const onChangeAvailable = useCallback(() => {
+    setCurrentOffset(0);
+    setAvailable(!available);
+  }, [setCurrentOffset, setAvailable, available]);
+
+  const onChangeOrderBy = useCallback(
+    (value) => {
+      if (value === "localisation") {
+        setSearchText("");
+      } else {
+        setLocalisation(null);
+      }
+      setCurrentOffset(0);
+      setOrderBy(value);
+    },
+    [setOrderBy, setCurrentOffset, setLocalisation, setSearchText]
+  );
 
   return (
     <Box sx={MagistratMandatairesListStyle}>
       <MagistratMandatairesListFilters
-        onChangeSearch={onChangeSearch}
-        searchText={searchText}
-        selectedType={selectedType}
-        onChangeType={onChangeType}
-        orderBy={orderBy}
-        setOrderBy={setOrderBy}
+        {...{
+          onChangeSearch,
+          searchText,
+          selectedType,
+          onChangeType,
+          orderBy,
+          onChangeOrderBy,
+          prefer,
+          onChangePrefer,
+          habilitation,
+          onChangeHabilitation,
+          available,
+          onChangeAvailable,
+          localisation,
+          onChangeLocalisation,
+        }}
       />
       <MagistratMandatairesListList
-        orderBy={orderBy}
-        debouncedSearchText={debouncedSearchText}
-        setCurrentOffset={setCurrentOffset}
-        currentOffset={currentOffset}
-        selectedType={selectedType}
+        {...{
+          orderBy,
+          debouncedSearchText,
+          setCurrentOffset,
+          currentOffset,
+          selectedType,
+          prefer,
+          habilitation,
+          available,
+          localisation,
+        }}
       />
     </Box>
   );

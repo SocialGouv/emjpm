@@ -4,26 +4,30 @@ import { useHistory } from "react-router-dom";
 import { Flex } from "rebass";
 
 import useUser from "~/hooks/useUser";
-import MandataireListItem from "~/containers/MandataireListItem";
+import MandataireListItem from "~/containers/MagistratMandatairesList/MandataireListItem";
 
 import useQueryReady from "~/hooks/useQueryReady";
 
-import { GET_MANDATAIRES } from "./queries";
-import { formatMandatairesList } from "./utils";
+import { GET_MANDATAIRES, GET_MANDATAIRES_BY_COORDS } from "./queries";
+import { useMemo } from "react";
 
 const RESULT_PER_PAGE = 20;
+const distanceMaxKM = 300;
+// const distanceMaxKM = null;
 
 function getOrderByVariable(orderBy) {
   switch (orderBy) {
     case 0:
       return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
     case 1:
-      return {
-        name: "asc",
-      };
+      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
     case 2:
       return {
-        name: "desc",
+        nom: "asc",
+      };
+    case 3:
+      return {
+        nom: "desc",
       };
   }
 }
@@ -35,21 +39,51 @@ function MagistratMandatairesListList(props) {
     setCurrentOffset,
     currentOffset,
     selectedType,
+    prefer,
+    habilitation,
+    available,
+    localisation,
   } = props;
   const history = useHistory();
-  const {
-    magistrat: { ti_id },
-  } = useUser();
+  const { magistrat } = useUser();
 
-  const { data, error, loading } = useQuery(GET_MANDATAIRES, {
-    variables: {
-      discriminator: selectedType ? selectedType.value : null,
-      limit: RESULT_PER_PAGE,
-      offset: currentOffset,
+  const coords = useMemo(() => {
+    if (typeof localisation !== "object" || !localisation) {
+      return null;
+    }
+    const { lat, lon } = localisation.data;
+    return { lon, lat };
+  }, [localisation]);
+
+  const variables = {
+    user_type: selectedType ? selectedType.value : null,
+    limit: RESULT_PER_PAGE,
+    offset: currentOffset,
+    prefer: prefer || null,
+    habilitation: habilitation || null,
+    available: available || null,
+  };
+  let query;
+  if (coords) {
+    query = GET_MANDATAIRES_BY_COORDS;
+    Object.assign(variables, {
+      lat: coords.lat,
+      lon: coords.lon,
+      distanceMaxKM,
+      orderBy: { distance: "asc" },
+    });
+  } else {
+    query = GET_MANDATAIRES;
+    Object.assign(variables, {
       orderBy: getOrderByVariable(orderBy),
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
-      tribunal: ti_id,
-    },
+      tribunal: magistrat.ti_id,
+      departementCode: magistrat.ti.departement_code,
+    });
+  }
+
+  const { data, error, loading } = useQuery(query, {
+    variables,
   });
 
   if (!useQueryReady(loading, error)) {
@@ -58,11 +92,11 @@ function MagistratMandatairesListList(props) {
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const gestionnaires = formatMandatairesList(data.mandatairesList);
 
   return (
     <>
-      {gestionnaires.map((gestionnaire) => {
+      {data.mandatairesList.map((item) => {
+        const { gestionnaire } = item;
         const to = `/magistrats/gestionnaires/${gestionnaire.id}`;
         const onItemClick = (e) => {
           if (e.ctrlKey) {
@@ -82,7 +116,7 @@ function MagistratMandatairesListList(props) {
             onClick={onItemClick}
             draggable="false"
           >
-            <MandataireListItem gestionnaire={gestionnaire} />
+            <MandataireListItem item={item} />
           </a>
         );
       })}

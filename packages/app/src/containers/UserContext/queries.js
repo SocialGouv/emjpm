@@ -137,6 +137,7 @@ export const MAGISTRAT_USERS = gql`
           etablissement
           email
           code_postal
+          departement_code
           adresse
           latitude
           longitude

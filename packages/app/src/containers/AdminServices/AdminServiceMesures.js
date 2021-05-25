@@ -26,8 +26,8 @@ export const MESURES_OPTIONS = [
 ];
 
 function AdminServiceMesures() {
-  const query = useParams();
-  const serviceId = Number(query.service_id);
+  const { service_id } = useParams();
+  const serviceId = parseInt(service_id);
   const [selectedRows, setSelectedRows] = useState([]);
 
   const [selectedMesureStatus, setSelectedMesureStatus] = useState(

@@ -10,7 +10,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function Mandataires() {
-  const { mesure_id: mesureId } = useParams();
+  const { mesure_id } = useParams();
+  const mesureId = parseInt(mesure_id);
   return (
     <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
       <BoxWrapper mt={3} px="1">

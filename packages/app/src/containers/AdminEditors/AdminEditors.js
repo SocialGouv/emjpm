@@ -88,7 +88,7 @@ function AdminEditors() {
     variables: {
       limit: resultPerPage,
       offset: currentOffset,
-      searchText: searchText && searchText !== "" ? `%${searchText}%` : null,
+      searchText: searchText && searchText !== "" ? `%${searchText}%` : "",
     },
   });
 

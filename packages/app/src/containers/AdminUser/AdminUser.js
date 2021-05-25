@@ -19,7 +19,8 @@ import { MesureImportPanel } from "~/containers/MesureImport";
 import { USER } from "./queries";
 
 function AdminUser() {
-  const { user_id: userId } = useParams();
+  const { user_id } = useParams();
+  const userId = parseInt(user_id);
 
   const { data, loading, error } = useQuery(USER, {
     variables: {

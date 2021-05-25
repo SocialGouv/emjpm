@@ -1,14 +1,24 @@
 import { Box, Flex } from "rebass";
 
-import { Card, Input, Select, Text } from "~/components";
+import { CheckShield } from "@styled-icons/boxicons-solid/CheckShield";
+import { Star } from "@styled-icons/fa-solid/Star";
+import { DotCircle } from "@styled-icons/fa-regular/DotCircle";
+
+import { Card, Input, Select, Button } from "~/components";
+
+import SelectAdresse from "./SelectAdresse";
+
+import { styleFilterButton } from "./style";
+
+const extraIconsSize = 22;
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
 
 const optionsType = [
   DEFAULT_VALUE,
-  { label: "Préposé", value: "MANDATAIRE_PRE" },
-  { label: "Individuel", value: "MANDATAIRE_IND" },
-  { label: "Service", value: "SERVICE" },
+  { label: "Préposé", value: "prepose" },
+  { label: "Individuel", value: "individuel" },
+  { label: "Service", value: "service" },
 ];
 
 const orderByOptions = [
@@ -17,12 +27,16 @@ const orderByOptions = [
     value: 0,
   },
   {
-    label: "ordre alphabétique (A-Z)",
+    label: "localisation",
     value: 1,
   },
   {
     label: "ordre alphabétique (Z-A)",
     value: 2,
+  },
+  {
+    label: "ordre alphabétique (Z-A)",
+    value: 3,
   },
 ];
 
@@ -33,7 +47,15 @@ function MagistratMandatairesListFilters(props) {
     selectedType,
     onChangeType,
     orderBy,
-    setOrderBy,
+    onChangeOrderBy,
+    prefer,
+    onChangePrefer,
+    habilitation,
+    onChangeHabilitation,
+    available,
+    onChangeAvailable,
+    localisation,
+    onChangeLocalisation,
   } = props;
 
   return (
@@ -50,30 +72,90 @@ function MagistratMandatairesListFilters(props) {
               options={optionsType}
             />
           </Box>
-          <Box width="235px" mr={1}>
-            <Input
-              value={searchText || ""}
-              spellCheck="false"
-              autoComplete="false"
-              onChange={onChangeSearch}
-              name="search"
-              size="small"
-              label="Rechercher"
-              placeholder="nom, email, code postal, ville..."
-            />
-          </Box>
-        </Flex>
-
-        <Flex alignItems="center">
-          <Text mr={2}>Trier par:</Text>
-          <Box width="200px">
+          <Box width="200px" mr={2}>
             <Select
               instanceId={"mandataire-sort"}
               size="small"
-              onChange={({ value }) => setOrderBy(value)}
+              label={"Trier par"}
+              onChange={({ value }) => onChangeOrderBy(value)}
               value={orderByOptions.find(({ value }) => value === orderBy)}
               options={orderByOptions}
             />
+          </Box>
+          <Box width="235px" mr={1}>
+            {orderBy === 1 && (
+              <SelectAdresse
+                label="Code Postal ou Ville"
+                placeholder="rechercher par localisation"
+                onChange={onChangeLocalisation}
+                value={localisation}
+              />
+            )}
+            {orderBy !== 1 && (
+              <Input
+                value={searchText || ""}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={onChangeSearch}
+                name="search"
+                size="small"
+                label="Rechercher"
+                placeholder="nom, email, code postal, ville..."
+              />
+            )}
+          </Box>
+        </Flex>
+        <Flex alignItems="center">
+          <Box mr={1}>
+            <Button
+              variant="outline"
+              p={2}
+              style={styleFilterButton(habilitation)}
+              onClick={onChangeHabilitation}
+              data-tip={
+                !habilitation
+                  ? "Afficher uniquement les mandataires ayant une habilitation vérifiée"
+                  : null
+              }
+            >
+              <CheckShield
+                size={extraIconsSize}
+                color={habilitation ? "#70D54F" : ""}
+              />
+            </Button>
+          </Box>
+          <Box mr={1}>
+            <Button
+              variant="outline"
+              p={2}
+              onClick={onChangePrefer}
+              style={styleFilterButton(prefer)}
+              data-tip={
+                !prefer
+                  ? "Afficher uniquement les mandataires souhaitant recevoir des mesure en provenance de votre tribunal"
+                  : null
+              }
+            >
+              <Star size={extraIconsSize} color={prefer ? "#70D54F" : ""} />
+            </Button>
+          </Box>
+          <Box mr={0}>
+            <Button
+              variant="outline"
+              p={2}
+              onClick={onChangeAvailable}
+              style={styleFilterButton(available)}
+              data-tip={
+                !available
+                  ? "Afficher uniquement les mandataire ayant des places disponibles"
+                  : null
+              }
+            >
+              <DotCircle
+                size={extraIconsSize}
+                color={available ? "#70D54F" : ""}
+              />
+            </Button>
           </Box>
         </Flex>
       </Flex>

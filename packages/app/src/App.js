@@ -19,6 +19,8 @@ import Impersonation from "~/containers/Impersonation";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
+import ReactTooltip from "react-tooltip";
+
 export default function App() {
   useSentry();
   return (
@@ -30,6 +32,7 @@ export default function App() {
             <ProvideAuth>
               <AppApollo>
                 <AppUser>
+                  <ReactTooltip />
                   <Router history={history}>
                     <AppMatomo>
                       <Routes />

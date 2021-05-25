@@ -45,6 +45,26 @@ const flexStyle = {
   mt: 2,
 };
 
+const styleFilterButton = (enabled) => {
+  const common = {
+    background: "#ededed",
+    border: "1px solid #ccc",
+    padding: "10px 15px",
+    borderRadius: "3px",
+    cursor: "pointer",
+  };
+  if (enabled) {
+    return {
+      ...common,
+      background: "#e5e5e5",
+      boxShadow: "inset 0px 0px 5px #c1c1c1",
+      outline: "none",
+    };
+  } else {
+    return common;
+  }
+};
+
 export {
   titleStyle,
   innerTextStyle,
@@ -54,4 +74,5 @@ export {
   flexStyle,
   TextStyle,
   MagistratMandatairesListStyle,
+  styleFilterButton,
 };

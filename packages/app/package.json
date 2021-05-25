@@ -71,6 +71,7 @@
     "react-table": "^7.6.3",
     "react-tabs": "^3.2.2",
     "react-toastify": "^7.0.3",
+    "react-tooltip": "^4.2.19",
     "rebass": "^4.0.7",
     "recharts": "^1.8.5",
     "sass": "^1.32.10",

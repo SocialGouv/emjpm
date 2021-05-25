@@ -8,7 +8,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function Editor() {
-  const { editor_id: editorId } = useParams();
+  const { editor_id } = useParams();
+  const editorId = parseInt(editor_id);
 
   return (
     <LayoutAdmin>

@@ -15,8 +15,8 @@ function MandataireEnquetePage() {
   const { id: userId } = useUser();
   const currentStep = useCurrentStepFromUrl();
 
-  const query = useParams();
-  const enqueteId = Number(query.enquete_id);
+  const { enquete_id } = useParams();
+  const enqueteId = parseInt(enquete_id);
 
   const { data, loading, error } = useQuery(ENQUETE_WITH_REPONSE_STATUS, {
     variables: { enqueteId, userId },

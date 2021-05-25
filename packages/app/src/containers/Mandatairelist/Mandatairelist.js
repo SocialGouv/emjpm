@@ -47,7 +47,6 @@ Mandatairelist.propTypes = {
         comment: PropTypes.string,
       }),
       currentAvailability: PropTypes.number.isRequired,
-      cvLink: PropTypes.string.isRequired,
       discriminator: PropTypes.string,
       dispoMax: PropTypes.number.isRequired,
       email: PropTypes.string.isRequired,

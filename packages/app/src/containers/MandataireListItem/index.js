@@ -137,7 +137,6 @@ MandataireListItem.propTypes = {
   gestionnaire: PropTypes.shape({
     codePostal: PropTypes.string,
     currentAvailability: PropTypes.number.isRequired,
-    cvLink: PropTypes.string.isRequired,
     dispoMax: PropTypes.number.isRequired,
     email: PropTypes.string.isRequired,
     etablissement: PropTypes.string,

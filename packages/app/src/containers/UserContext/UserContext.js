@@ -30,7 +30,7 @@ function UserDataQueryProvider(props) {
 
   const variables = useMemo(() => {
     const variables = {
-      userId,
+      userId: parseInt(userId),
     };
     if (isMandataire({ type }) || isService({ type })) {
       variables.endDate = endDate;

@@ -7,13 +7,14 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 function AdminUserDeletePage() {
-  const { id: lbUserId } = useParams();
+  const { id: paramId } = useParams();
+  const id = parseInt(paramId);
 
   return (
     <LayoutAdmin>
       <BoxWrapper mt="6" px="1">
         <Flex flexWrap="wrap" mt="2">
-          <AdminLbUserDelete lbUserId={lbUserId} />
+          <AdminLbUserDelete lbUserId={id} />
         </Flex>
       </BoxWrapper>
     </LayoutAdmin>

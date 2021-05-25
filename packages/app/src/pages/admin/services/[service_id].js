@@ -11,7 +11,9 @@ import { AdminServiceMesures } from "~/containers/AdminServices";
 import { useParams } from "react-router-dom";
 
 function Service() {
-  const { service_id: serviceId } = useParams();
+  const { service_id } = useParams();
+  const serviceId = parseInt(service_id);
+
   return (
     <LayoutAdmin>
       <BoxWrapper mt={3} px={1}>

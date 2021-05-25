@@ -61,7 +61,7 @@ function MagistratMesureAdd(props) {
           variables: {
             natureMesure: null,
             offset: 0,
-            searchText: null,
+            searchText: "",
             tiId: tiId,
           },
         },

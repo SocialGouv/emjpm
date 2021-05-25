@@ -8,7 +8,8 @@ import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
 
 export function EditEtablissementPage() {
-  const { id } = useParams();
+  const { id: paramId } = useParams();
+  const id = parseInt(paramId);
 
   return (
     <LayoutAdmin>
