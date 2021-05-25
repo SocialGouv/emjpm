@@ -1,4 +1,0 @@
-table:
-  name: nature_mesure
-  schema: public
-is_enum: true

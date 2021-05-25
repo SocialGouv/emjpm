@@ -1,4 +1,0 @@
-table:
-  name: enquete_reponse_status
-  schema: public
-is_enum: true
