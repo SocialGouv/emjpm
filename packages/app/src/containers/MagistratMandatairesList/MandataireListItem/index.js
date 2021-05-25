@@ -165,8 +165,8 @@ export default function MandataireListItem(props) {
                 size={extraIconsSize}
                 title={
                   prefer
-                    ? "Le mandataire souhaite recevoir des mesure en provenance de votre tribunal"
-                    : "Le mandataire n'a pas exprimé son souhait de recevoir des mesure en provenance de votre tribunal"
+                    ? "Le mandataire souhaite recevoir des mesures en provenance de votre tribunal"
+                    : "Le mandataire n'a pas exprimé son souhait de recevoir des mesures en provenance de votre tribunal"
                 }
                 color={prefer ? "#70D54F" : ""}
               />
