@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.119.0](https://github.com/SocialGouv/emjpm/compare/v25.118.2...v25.119.0) (2021-05-25)
+
+
+### Bug Fixes
+
+* **events:** replace event-trigger mesures-update ([6e1af7e](https://github.com/SocialGouv/emjpm/commit/6e1af7ed4cfc674963893c05655b089a303b2987))
+
+
+### Features
+
+* **lb-tis+hasura:** big improve on magistrat mandataire liste + upgrade and rollback hasura v2 (code ready) ([#2544](https://github.com/SocialGouv/emjpm/issues/2544)) ([b23c090](https://github.com/SocialGouv/emjpm/commit/b23c0905d8c4ba3c2dc5b1db85bfcdcb3e8b3349))
+
+
+
+
+
 ## [25.118.2](https://github.com/SocialGouv/emjpm/compare/v25.118.1...v25.118.2) (2021-05-20)
 
 
