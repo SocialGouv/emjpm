@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.4](https://github.com/SocialGouv/emjpm/compare/v25.119.3...v25.119.4) (2021-05-26)
+
+
+### Bug Fixes
+
+* **k8s:** fix rollback to ingress beta ([3e7a509](https://github.com/SocialGouv/emjpm/commit/3e7a509d601bf56e55ea7117caf3a0cda6ab2306))
+
+
+
+
+
 ## [25.119.3](https://github.com/SocialGouv/emjpm/compare/v25.119.2...v25.119.3) (2021-05-26)
 
 **Note:** Version bump only for package @emjpm/api
