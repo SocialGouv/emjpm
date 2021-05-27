@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.5](https://github.com/SocialGouv/emjpm/compare/v25.119.4...v25.119.5) (2021-05-27)
+
+
+### Bug Fixes
+
+* **api:** get mesure prestations-sociales ([995ec2b](https://github.com/SocialGouv/emjpm/commit/995ec2ba9257e7abac576b676a45151ce77643ff))
+
+
+
+
+
 ## [25.119.4](https://github.com/SocialGouv/emjpm/compare/v25.119.3...v25.119.4) (2021-05-26)
 
 
