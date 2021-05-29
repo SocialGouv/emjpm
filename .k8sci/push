@@ -18,6 +18,8 @@ if [ -n "$K8SCI_PRODUCTION" ]; then
   echo "backup is temporary disabled on ci"
 else
   $(dirname $0)/scripts/branch-init
+  # $(dirname $0)/db-create
+  # $(dirname $0)/db-restore-anonymized
 fi
 
 # DEPLOY
