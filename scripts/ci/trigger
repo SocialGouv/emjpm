@@ -30,5 +30,7 @@ if [ -z "$BRANCH" ]; then
   exit 1;
 fi
 
+set -x
+
 curl -o /dev/null -sS \
   "$CI_URL/hooks/$EVENT?token=$K8SCI_TOKEN&branch=$BRANCH"
