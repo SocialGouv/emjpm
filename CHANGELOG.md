@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.6](https://github.com/SocialGouv/emjpm/compare/v25.119.5...v25.119.6) (2021-05-29)
+
+
+### Bug Fixes
+
+* **api:** batch mesure prestations-sociales ([0aeb3ee](https://github.com/SocialGouv/emjpm/commit/0aeb3ee97731f4e4ccf080f73eec4821759f04c8))
+* **schema:** add indexes ([2ea5381](https://github.com/SocialGouv/emjpm/commit/2ea53816c3ca14e16ba2d6bdd8c026fa911b288a))
+* **schema:** clean indexes ([b014c8a](https://github.com/SocialGouv/emjpm/commit/b014c8a4e7321acc79d8bf16198be89187a348ac))
+
+
+
+
+
 ## [25.119.5](https://github.com/SocialGouv/emjpm/compare/v25.119.4...v25.119.5) (2021-05-27)
 
 
