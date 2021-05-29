@@ -69,6 +69,7 @@ Object {
         Object {
           "annee": 2019,
           "niveau_ressource": "14246",
+          "prestations_sociales": Array [],
         },
       ],
       "resultat_revision": null,
@@ -124,14 +125,17 @@ Object {
         Object {
           "annee": 2020,
           "niveau_ressource": "25000",
+          "prestations_sociales": Array [],
         },
         Object {
           "annee": 2019,
           "niveau_ressource": "28000",
+          "prestations_sociales": Array [],
         },
         Object {
           "annee": 2018,
           "niveau_ressource": "30000",
+          "prestations_sociales": Array [],
         },
       ],
       "resultat_revision": null,
