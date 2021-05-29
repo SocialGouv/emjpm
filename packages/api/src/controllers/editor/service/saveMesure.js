@@ -42,7 +42,7 @@ async function saveMesures(allMesureDatas, trx) {
   }
 
   const mesuresQueryResult = await Mesure.query(trx)
-    .withGraphFetched("[etats,ressources, tis]")
+    .withGraphFetched("[etats,ressources.[prestations_sociales], tis]")
     .whereIn("id", createdMesureIds);
   return mesuresQueryResult;
 }
