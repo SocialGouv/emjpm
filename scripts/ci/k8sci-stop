@@ -2,7 +2,7 @@
 
 if [ -n "$1" ]; then
   ID=$1
-  kubectl --context=dev -n ci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci -l k8sci/gid=$ID
+  kubectl --context=dev -n kubeci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci -l k8sci/gid=$ID
 else
-  kubectl --context=dev -n ci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci
+  kubectl --context=dev -n kubeci-emjpm delete jobs -l app.kubernetes.io/managed-by=k8sci
 fi

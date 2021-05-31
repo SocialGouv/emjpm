@@ -6,7 +6,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  namespace: ci-emjpm
+  namespace: kubeci-emjpm
   name: emjpm-backup-storage
   labels:
     usage: emjpm-backup-storage
@@ -18,7 +18,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   azureFile:
     secretName: azure-emjpmdev-volume
-    secretNamespace: ci-emjpm
+    secretNamespace: kubeci-emjpm
     shareName: emjpm-backup-restore
     readOnly: false
 ---

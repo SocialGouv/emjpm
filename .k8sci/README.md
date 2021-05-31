@@ -37,5 +37,5 @@ on prod (the branch `prod`):
 
 ## triggerable manually on any branch
 - from [giltab-ci](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/-/pipelines)
-- calling url `https://ci-emjpm.dev2.fabrique.social.gouv.fr/hooks/push?token=$WEBHOOKTOKEN&branch=name-of-my-branch`
+- calling url `https://kubeci-emjpm.dev2.fabrique.social.gouv.fr/hooks/push?token=$WEBHOOKTOKEN&branch=name-of-my-branch`
 
