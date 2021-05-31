@@ -1,6 +1,6 @@
 variables:
   GIT_STRATEGY: none
-  K8SCI_URL: https://kubeci-emjpm.dev2.fabrique.social.gouv.fr
+  K8SCI_URL: https://ci-emjpm.dev2.fabrique.social.gouv.fr
   K8SCI_NS: kubeci-emjpm
 
 stages:
