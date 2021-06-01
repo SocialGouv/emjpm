@@ -1,3 +1,9 @@
+const pool = {
+  max: 5,
+  min: 5,
+  propagateCreateError: false,
+};
+
 module.exports = {
   development: {
     client: "pg",
@@ -9,8 +15,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
-    pool: { max: 5, min: 1 },
-    seeds: {},
+    pool,
   },
   production: {
     client: "pg",
@@ -22,7 +27,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
-    pool: { max: 5, min: 1 },
+    pool,
   },
   test: {
     // debug: true,
@@ -35,7 +40,6 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
-    pool: { max: 5, min: 1 },
-    seeds: {},
+    pool,
   },
 };
