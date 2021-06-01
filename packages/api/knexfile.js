@@ -35,6 +35,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
+    pool: { max: 5, min: 1 },
     seeds: {},
   },
 };
