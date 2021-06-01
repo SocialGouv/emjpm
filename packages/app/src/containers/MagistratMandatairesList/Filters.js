@@ -114,7 +114,7 @@ function MagistratMandatairesListFilters(props) {
               onClick={onChangeHabilitation}
               data-tip={
                 !habilitation
-                  ? "Afficher uniquement les mandataires ayant une habilitation vérifiée"
+                  ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
                   : null
               }
             >
