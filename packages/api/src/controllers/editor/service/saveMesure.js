@@ -1,4 +1,5 @@
-const { Mesure, MesureEtat, MesureRessources } = require("~/models");
+const knex = require("~/db/knex");
+const { Mesure } = require("~/models");
 
 const getLastEtatDatas = require("./getLastEtatDatas");
 const buildMesure = require("../helper/buildMesure");
@@ -79,26 +80,17 @@ async function saveMesure(
 
 module.exports = { saveMesure, saveMesures };
 
-async function persistMesure(mesureToCreate, datas, trx) {
-  const mesure = await Mesure.query(trx).insert(mesureToCreate);
-
+async function persistMesure(mesure, datas, trx) {
   mesure.ressources = [];
-  if (datas.ressources) {
-    for (const ressource of datas.ressources) {
-      const createdMesureRessource = await MesureRessources.query(
-        trx
-      ).insertGraph({
-        annee: ressource.annee || null,
-        mesure_id: mesure.id,
-
-        mesure_ressources_prestations_sociales:
-          ressource.prestations_sociales?.map((prestations_sociales) => ({
-            prestations_sociales,
-          })),
-        niveau_ressource: ressource.niveau_ressource,
-      });
-      mesure.ressources.push(createdMesureRessource);
-    }
+  for (const ressource of datas.ressources) {
+    mesure.ressources.push({
+      annee: ressource.annee || null,
+      mesure_ressources_prestations_sociales:
+        ressource.prestations_sociales?.map((prestations_sociales) => ({
+          prestations_sociales,
+        })),
+      niveau_ressource: ressource.niveau_ressource,
+    });
   }
 
   mesure.etats = [];
@@ -114,21 +106,39 @@ async function persistMesure(mesureToCreate, datas, trx) {
       etatsByDateChangement[noTimeDate.toISOString()] = etat;
     }
     const etats = Object.values(etatsByDateChangement);
-
     for (const etat of etats) {
-      const mesureEtat = await MesureEtat.query(trx).insert({
+      mesure.etats.push({
         champ_mesure: etat.champ_mesure,
         code_postal: etat.code_postal,
         date_changement_etat: etat.date_changement_etat,
         lieu_vie: etat.lieu_vie,
-        mesure_id: mesure.id,
         nature_mesure: etat.nature_mesure,
         pays: etat.pays,
         type_etablissement: etat.type_etablissement,
         ville: etat.ville,
       });
-      mesure.etats.push(mesureEtat);
     }
   }
-  return mesure;
+
+  if (mesure.editor_id && mesure.numero_dossier) {
+    const { rows } = await knex.raw(
+      `
+      SELECT
+      id
+      FROM
+      mesures
+      WHERE
+      mesures.editor_id = ? AND
+      mesures.numero_dossier = ?
+      `,
+      [mesure.editor_id, mesure.numero_dossier]
+    );
+    if (rows.length > 0) {
+      mesure.id = rows[0].id;
+    }
+  }
+
+  const mesureRow = await Mesure.query(trx).upsertGraph(mesure);
+
+  return mesureRow;
 }
