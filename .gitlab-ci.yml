@@ -41,7 +41,7 @@ Run K8SCI:
 
 Wait K8SCI:
   stage: Wait K8SCI
-  image: registry.gitlab.factory.social.gouv.fr/socialgouv/sre/k8s-ci/kail
+  image: harbor.fabrique.social.gouv.fr/emjpm/k8s-ci/kail
   only:
     variables:
       - $RUN_K8SCI
