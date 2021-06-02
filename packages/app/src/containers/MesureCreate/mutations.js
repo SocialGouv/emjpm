@@ -1,5 +1,14 @@
 import gql from "graphql-tag";
 
+export const CALCULATE_MESURES = gql`
+  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
+    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
+      en_cours
+      en_attente
+    }
+  }
+`;
+
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
@@ -22,8 +31,6 @@ export const ADD_MESURE = gql`
     $longitude: Float
     $pays: String!
     $cabinet: String
-    $mandataireId: Int
-    $serviceId: Int
   ) {
     add_or_update: insert_mesures(
       objects: {
@@ -66,10 +73,6 @@ export const ADD_MESURE = gql`
       returning {
         id
       }
-    }
-    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
-      en_cours
-      en_attente
     }
   }
 `;

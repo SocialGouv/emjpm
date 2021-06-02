@@ -9,7 +9,7 @@ import useUser from "~/hooks/useUser";
 import { magistratMesureDeleteSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Input } from "~/components";
 
-import { DELETE_MESURE } from "./mutations";
+import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -23,25 +23,35 @@ export function MagistratMesureDeleteForm(props) {
     magistrat: { ti_id: tiId },
   } = useUser();
 
-  const [deleteMesure, { loading, error }] = useMutation(DELETE_MESURE, {
-    variables: {
-      mandataireId,
-      serviceId,
-    },
-    refetchQueries: [
-      {
-        query: GESTIONNAIRES,
-        variables: {
-          mandataire_id: mandataireId,
-          service_id: serviceId,
-        },
+  const [recalculateMesures, { loading: loading1, error: error1 }] =
+    useMutation(CALCULATE_MESURES);
+  useQueryReady(loading1, error1);
+
+  const [deleteMesure, { loading: loading2, error: error2 }] = useMutation(
+    DELETE_MESURE,
+    {
+      onCompleted: async () => {
+        await recalculateMesures({
+          refetchQueries: [
+            {
+              query: GESTIONNAIRES,
+              variables: {
+                mandataire_id: mandataireId,
+                service_id: serviceId,
+              },
+            },
+          ],
+          variables: {
+            mandataireId,
+            serviceId,
+          },
+        });
+
+        history.push("/magistrats/mesures");
       },
-    ],
-    onCompleted: async () => {
-      history.push("/magistrats/mesures");
-    },
-  });
-  useQueryReady(loading, error);
+    }
+  );
+  useQueryReady(loading2, error2);
 
   const formik = useFormik({
     initialValues: {

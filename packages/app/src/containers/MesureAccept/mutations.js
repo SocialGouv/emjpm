@@ -15,8 +15,6 @@ export const ACCEPT_MESURE = gql`
     $latitude: Float
     $longitude: Float
     $pays: String!
-    $mandataireId: Int
-    $serviceId: Int
   ) {
     insert_mesure_etat(
       objects: {
@@ -55,6 +53,11 @@ export const ACCEPT_MESURE = gql`
         id
       }
     }
+  }
+`;
+
+export const CALCULATE_MESURES = gql`
+  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
     calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
       en_cours
       en_attente
