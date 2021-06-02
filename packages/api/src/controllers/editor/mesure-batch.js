@@ -29,10 +29,10 @@ const mesureBatch = async (req, res) => {
     return res.status(201).json({ mesures: [] });
   }
 
-  if (mesures.length > 100) {
+  if (mesures.length > 1000) {
     return res
       .status(422)
-      .json({ errors: [{ msg: "The number of mesures must be <= 100" }] });
+      .json({ errors: [{ msg: "The number of mesures must be <= 1000" }] });
   }
 
   // check antenne_id validity
