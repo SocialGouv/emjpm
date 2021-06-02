@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.7](https://github.com/SocialGouv/emjpm/compare/v25.119.6...v25.119.7) (2021-06-02)
+
+
+### Bug Fixes
+
+* **calculation:** using delayed in transaction ([c7779eb](https://github.com/SocialGouv/emjpm/commit/c7779ebe638c80bd678c8eed722eb940f57cde33))
+
+
+
+
+
 ## [25.119.6](https://github.com/SocialGouv/emjpm/compare/v25.119.5...v25.119.6) (2021-05-29)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.119.7](https://github.com/SocialGouv/emjpm/compare/v25.119.6...v25.119.7) (2021-06-02)
+
+
+### Bug Fixes
+
+* **calculation:** using delayed in transaction ([c7779eb](https://github.com/SocialGouv/emjpm/commit/c7779ebe638c80bd678c8eed722eb940f57cde33))
+* **events:** revert decoupled calculation ([dfb8216](https://github.com/SocialGouv/emjpm/commit/dfb8216ec94522dfcc1abd97971764e02a04f1d4))
+* **k8s:** hasura pg-connections ([8205909](https://github.com/SocialGouv/emjpm/commit/82059093be387ee957d272bf8cd3dc78f4573400))
+* **label:** vérifiée par la DD ([11608d3](https://github.com/SocialGouv/emjpm/commit/11608d340ad1126d5a17806cc02bb1a916d9a12f))
+
+
+
+
+
 ## [25.119.6](https://github.com/SocialGouv/emjpm/compare/v25.119.5...v25.119.6) (2021-05-29)
 
 
