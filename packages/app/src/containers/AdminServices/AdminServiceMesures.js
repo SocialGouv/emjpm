@@ -127,7 +127,7 @@ function AdminServiceMesures() {
                 variables: { serviceId },
               },
             ],
-            variables: { ids: selectedRows.map(({ id }) => id) },
+            variables: { ids: selectedRows.map(({ id }) => id), serviceId },
           })
         }
         buttonText="Supprimer"

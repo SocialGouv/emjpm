@@ -32,6 +32,32 @@ router.post("/stats", async (req, res) => {
 });
 
 router.post(
+  "/calculate-mesures-delayed",
+  async (req, res, next) => {
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+
+    const { serviceId, mandataireId } = req.body.input;
+
+    let result;
+    if (serviceId) {
+      result = await updateGestionnaireMesuresCounters("services", serviceId);
+    }
+    if (mandataireId) {
+      result = await updateGestionnaireMesuresCounters(
+        "mandataires",
+        mandataireId
+      );
+    }
+    try {
+      return res.status(200).json(result);
+    } catch (err) {
+      return next(err);
+    }
+  },
+  hasuraActionErrorHandler("Unexpected error processing file")
+);
+
+router.post(
   "/calculate-mesures",
   async (req, res, next) => {
     const { serviceId, mandataireId } = req.body.input;

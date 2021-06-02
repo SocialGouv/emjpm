@@ -63,6 +63,8 @@ function MesureClose(props) {
         cause_sortie: values.cause_sortie,
         date_fin_mesure: values.date_fin_mesure,
         id: mesure.id,
+        mandataireId: mandataire ? mandataire.id : null,
+        serviceId: service ? service.id : null,
       },
     });
     setSubmitting(false);

@@ -81,6 +81,8 @@ export function MesureEdit() {
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
         ti_id: values.ti_id,
+        mandataireId: mandataire ? mandataire.id : null,
+        serviceId: service ? service.id : null,
       },
     });
 

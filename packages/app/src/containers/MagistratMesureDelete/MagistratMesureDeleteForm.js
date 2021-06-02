@@ -73,6 +73,8 @@ export function MagistratMesureDeleteForm(props) {
         ],
         variables: {
           mesureId: mesure.id,
+          mandataireId,
+          serviceId,
         },
       });
 

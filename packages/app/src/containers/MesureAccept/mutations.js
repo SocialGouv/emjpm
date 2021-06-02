@@ -15,6 +15,8 @@ export const ACCEPT_MESURE = gql`
     $latitude: Float
     $longitude: Float
     $pays: String!
+    $mandataireId: Int
+    $serviceId: Int
   ) {
     insert_mesure_etat(
       objects: {
@@ -53,6 +55,10 @@ export const ACCEPT_MESURE = gql`
         id
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;
 

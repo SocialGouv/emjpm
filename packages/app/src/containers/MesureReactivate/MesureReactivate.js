@@ -57,6 +57,8 @@ function MesureReactivate() {
       ],
       variables: {
         id: mesure.id,
+        mandataireId: mandataire ? mandataire.id : null,
+        serviceId: service ? service.id : null,
       },
     });
   };

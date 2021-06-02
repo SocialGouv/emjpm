@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
 export const REACTIVATE_MESURE = gql`
-  mutation reactivateMesure($id: Int!) {
+  mutation reactivateMesure($id: Int!, $mandataireId: Int, $serviceId: Int) {
     update_mesures(where: { id: { _eq: $id } }, _set: { status: en_cours }) {
       returning {
         id
@@ -28,6 +28,10 @@ export const REACTIVATE_MESURE = gql`
         date_nomination
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;
 

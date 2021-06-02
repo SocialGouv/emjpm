@@ -5,6 +5,8 @@ export const CLOSE_MESURE = gql`
     $id: Int!
     $cause_sortie: cause_sortie_mesure_enum!
     $date_fin_mesure: date!
+    $mandataireId: Int
+    $serviceId: Int
   ) {
     update_mesures(
       where: { id: { _eq: $id } }
@@ -39,6 +41,10 @@ export const CLOSE_MESURE = gql`
         date_nomination
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;
 

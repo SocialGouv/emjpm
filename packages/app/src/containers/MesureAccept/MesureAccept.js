@@ -98,6 +98,8 @@ export function MesureAccept(props) {
         lieu_vie: values.lieu_vie,
         nature_mesure: mesure.natureMesure,
         pays: values.pays,
+        mandataireId,
+        serviceId,
       },
     });
     setSubmitting(false);

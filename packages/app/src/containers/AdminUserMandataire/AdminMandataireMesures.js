@@ -111,7 +111,10 @@ function AdminMandataireMesures(props) {
         onClick={() =>
           deleteMesures({
             refetchQueries: [{ query: MESURES, variables: { userId } }],
-            variables: { ids: selectedRows.map(({ id }) => id) },
+            variables: {
+              ids: selectedRows.map(({ id }) => id),
+              mandataireId: mandataire.id,
+            },
           })
         }
         buttonText="Supprimer"

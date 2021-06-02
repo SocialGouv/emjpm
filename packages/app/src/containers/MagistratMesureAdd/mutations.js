@@ -36,6 +36,10 @@ export const CHOOSE_MANDATAIRE = gql`
         id
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataire_id
+      serviceId: $service_id
+    )
   }
 `;
 

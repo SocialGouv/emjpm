@@ -22,6 +22,19 @@ actions:
   - role: prepose
   - role: service
   - role: ti
+- name: calculate_mesures_delayed
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/calculate-mesures-delayed'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: individuel
+  - role: prepose
+  - role: service
+  - role: ti
 - name: check_email_exists
   definition:
     kind: ""
@@ -294,4 +307,5 @@ custom_types:
   - name: StateOutput
   - name: ImportOCMIOutput
   - name: AdminResetPasswordOutput
+  - name: CalculateMesuresDelayedOutput
   scalars: []

@@ -111,6 +111,8 @@ export function MesureCreate() {
         type_etablissement: values.type_etablissement
           ? values.type_etablissement
           : null,
+        mandataireId: mandataire ? mandataire.id : null,
+        serviceId: service ? service.id : null,
       },
     });
 

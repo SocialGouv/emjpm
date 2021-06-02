@@ -22,6 +22,8 @@ export const EDIT_MESURE = gql`
     $numero_rg: String
     $ti_id: Int!
     $cabinet: String
+    $mandataireId: Int
+    $serviceId: Int
   ) {
     add_or_update: update_mesures(
       where: { id: { _eq: $id } }
@@ -42,5 +44,9 @@ export const EDIT_MESURE = gql`
         id
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;

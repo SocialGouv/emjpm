@@ -31,6 +31,8 @@ export const ADD_MESURE = gql`
     $longitude: Float
     $pays: String!
     $cabinet: String
+    $mandataireId: Int
+    $serviceId: Int
   ) {
     add_or_update: insert_mesures(
       objects: {
@@ -74,5 +76,9 @@ export const ADD_MESURE = gql`
         id
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;

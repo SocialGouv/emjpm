@@ -1,13 +1,17 @@
 import gql from "graphql-tag";
 
 export const DELETE_MESURE = gql`
-  mutation deleteMesure($id: Int!) {
+  mutation deleteMesure($id: Int!, $mandataireId: Int, $serviceId: Int) {
     delete_mesures(where: { id: { _eq: $id } }) {
       affected_rows
       returning {
         id
       }
     }
+    calculate_mesures_delayed(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    )
   }
 `;
 

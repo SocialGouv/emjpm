@@ -13,6 +13,14 @@ type Mutation {
 }
 
 
+type Mutation {
+  calculate_mesures_delayed (
+    serviceId: Int
+    mandataireId: Int
+  ): CalculateMesuresOutput
+}
+
+
 type Query {
   check_email_exists (
     email: String
@@ -325,5 +333,9 @@ type ImportOCMIOutput {
 
 type AdminResetPasswordOutput {
   password : String!
+}
+
+type CalculateMesuresDelayedOutput {
+  state : String!
 }
 
