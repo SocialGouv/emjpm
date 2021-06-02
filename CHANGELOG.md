@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.120.0](https://github.com/SocialGouv/emjpm/compare/v25.119.7...v25.120.0) (2021-06-02)
+
+
+### Features
+
+* **api:** upsert batch + refacto to upsertGraph ([8816be4](https://github.com/SocialGouv/emjpm/commit/8816be43af7bf4283d918594383b1abfd46ea7b6))
+
+
+
+
+
 ## [25.119.7](https://github.com/SocialGouv/emjpm/compare/v25.119.6...v25.119.7) (2021-06-02)
 
 
