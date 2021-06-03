@@ -10,9 +10,7 @@ version: "3.8"
 
 services:
   db:
-    image: emjpm_postgres
-    build:
-      context: ./docker/postgres
+    image: mdillon/postgis:11
     environment:
       # master password
       - POSTGRES_USER=emjpm
