@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.4](https://github.com/SocialGouv/emjpm/compare/v25.120.3...v25.120.4) (2021-06-03)
+
+
+### Features
+
+* **hasura:** upgrade config to v3 ([646cec5](https://github.com/SocialGouv/emjpm/commit/646cec520d536fe0e98190c1dfdcf4dc4e47416d))
+
+
+
+
+
 ## [25.120.3](https://github.com/SocialGouv/emjpm/compare/v25.120.2...v25.120.3) (2021-06-03)
 
 
