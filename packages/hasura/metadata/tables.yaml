@@ -8,6 +8,7 @@
         remote_table:
           schema: public
           name: editors
+        insertion_order: null
         column_mapping:
           editor_id: id
   select_permissions:
@@ -418,6 +419,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_activite
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_agrements_formation
@@ -426,6 +428,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_agrements_formations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_financement
@@ -434,6 +437,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_financement
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_informations_mandataire
@@ -442,6 +446,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_informations_mandataire
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_modalites_exercice
@@ -450,6 +455,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_modalites_exercice
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_population
@@ -458,6 +464,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_populations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prepose_personel_formation
@@ -466,6 +473,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prepose_personel_formation
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prepose_prestations_sociale
@@ -474,6 +482,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prepose_prestations_sociales
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prestations_sociale
@@ -482,6 +491,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prepose_prestations_sociales
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_service_information
@@ -490,6 +500,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_service_informations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_service_personnel_formation
@@ -498,6 +509,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_service_personnel_formation
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: mandataire
@@ -513,6 +525,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_activite
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_agrements_formations
@@ -521,6 +534,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_agrements_formations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_financements
@@ -529,6 +543,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_financement
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_informations_mandataires
@@ -537,6 +552,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_informations_mandataire
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_modalites_exercices
@@ -545,6 +561,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_modalites_exercice
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_populations
@@ -553,6 +570,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_populations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prepose_personel_formations
@@ -561,6 +579,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prepose_personel_formation
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prepose_prestations_sociales
@@ -569,6 +588,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prepose_prestations_sociales
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_prestations_sociales
@@ -577,6 +597,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_prestations_sociales
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_service_informations
@@ -585,6 +606,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_service_informations
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   - name: enquete_reponses_service_personnel_formations
@@ -593,6 +615,7 @@
         remote_table:
           schema: public
           name: enquete_reponses_service_personnel_formation
+        insertion_order: null
         column_mapping:
           id: enquete_reponses_id
   insert_permissions:
@@ -4089,6 +4112,7 @@
         remote_table:
           schema: public
           name: tis
+        insertion_order: null
         column_mapping:
           departement_code: departement_code
   insert_permissions:
@@ -4325,6 +4349,7 @@
         remote_table:
           schema: public
           name: tis
+        insertion_order: null
         column_mapping:
           departement_code: departement_code
   insert_permissions:
@@ -4479,6 +4504,7 @@
         remote_table:
           schema: public
           name: mandataires
+        insertion_order: null
         column_mapping:
           id: lb_user_id
   - name: ocmi_mandataire
@@ -4487,6 +4513,7 @@
         remote_table:
           schema: public
           name: ocmi_mandataires
+        insertion_order: null
         column_mapping:
           siret: siret
   array_relationships:
@@ -4791,6 +4818,7 @@
         remote_table:
           schema: public
           name: ocmi_mandataires
+        insertion_order: null
         column_mapping:
           siret: siret
   - name: user
@@ -7227,6 +7255,7 @@
         remote_table:
           schema: public
           name: magistrat
+        insertion_order: null
         column_mapping:
           id: user_id
   - name: mandataire
@@ -7235,6 +7264,7 @@
         remote_table:
           schema: public
           name: mandataires
+        insertion_order: null
         column_mapping:
           id: user_id
   array_relationships:
@@ -7645,6 +7675,7 @@
         remote_table:
           schema: public
           name: departements
+        insertion_order: null
         column_mapping:
           departement_code: id
   select_permissions:
@@ -7703,6 +7734,7 @@
         remote_table:
           schema: public
           name: lb_users
+        insertion_order: null
         column_mapping:
           lb_user_id: id
   - name: mandataire
@@ -7711,6 +7743,7 @@
         remote_table:
           schema: public
           name: mandataires
+        insertion_order: null
         column_mapping:
           mandataire_id: id
   - name: service
@@ -7719,6 +7752,7 @@
         remote_table:
           schema: public
           name: services
+        insertion_order: null
         column_mapping:
           service_id: id
   select_permissions:
@@ -7748,6 +7782,7 @@
         remote_table:
           schema: public
           name: view_mesure_gestionnaire
+        insertion_order: null
         column_mapping:
           uid: id
   select_permissions:
@@ -7789,6 +7824,7 @@
         remote_table:
           schema: public
           name: departements
+        insertion_order: null
         column_mapping:
           departement_code: id
   - name: mandataire
@@ -7797,6 +7833,7 @@
         remote_table:
           schema: public
           name: mandataires
+        insertion_order: null
         column_mapping:
           mandataire_id: id
   - name: service
@@ -7805,6 +7842,7 @@
         remote_table:
           schema: public
           name: services
+        insertion_order: null
         column_mapping:
           service_id: id
   array_relationships:
@@ -7814,6 +7852,7 @@
         remote_table:
           schema: public
           name: view_mesure_gestionnaire_tis
+        insertion_order: null
         column_mapping:
           id: id
   select_permissions:
@@ -7901,6 +7940,7 @@
         remote_table:
           schema: public
           name: departements
+        insertion_order: null
         column_mapping:
           departement_code: id
   - name: mandataire
@@ -7909,6 +7949,7 @@
         remote_table:
           schema: public
           name: mandataires
+        insertion_order: null
         column_mapping:
           mandataire_id: id
   - name: service
@@ -7917,6 +7958,7 @@
         remote_table:
           schema: public
           name: services
+        insertion_order: null
         column_mapping:
           service_id: id
   select_permissions:
@@ -7996,6 +8038,7 @@
         remote_table:
           schema: public
           name: view_mesure_gestionnaire
+        insertion_order: null
         column_mapping:
           id: id
   - name: tis
@@ -8004,6 +8047,7 @@
         remote_table:
           schema: public
           name: tis
+        insertion_order: null
         column_mapping:
           ti_id: id
   select_permissions:

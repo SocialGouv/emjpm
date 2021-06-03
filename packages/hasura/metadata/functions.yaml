@@ -18,10 +18,10 @@
     name: search_services
 - function:
     schema: public
-    name: search_tis
+    name: search_ti_view_lb_tis
 - function:
     schema: public
-    name: search_ti_view_lb_tis
+    name: search_tis
 - function:
     schema: public
     name: search_users

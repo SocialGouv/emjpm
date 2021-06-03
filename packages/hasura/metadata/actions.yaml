@@ -293,6 +293,7 @@ custom_types:
         schema: public
         name: mesures
       name: mesure
+      source: default
       type: object
       field_mapping:
         mesure_id: id
@@ -300,6 +301,7 @@ custom_types:
         schema: public
         name: mesure_etat
       name: mesure_etat
+      source: default
       type: array
       field_mapping:
         id: id
