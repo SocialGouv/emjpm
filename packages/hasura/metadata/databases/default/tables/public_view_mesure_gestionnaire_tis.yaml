@@ -1,0 +1,34 @@
+table:
+  name: view_mesure_gestionnaire_tis
+  schema: public
+object_relationships:
+- name: gestionnaire
+  using:
+    manual_configuration:
+      column_mapping:
+        id: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire
+        schema: public
+- name: tis
+  using:
+    manual_configuration:
+      column_mapping:
+        ti_id: id
+      insertion_order: null
+      remote_table:
+        name: tis
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - discriminator
+    - id
+    - mandataire_id
+    - name
+    - service_id
+    - ti_id
+    filter: {}
+  role: ti

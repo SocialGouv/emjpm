@@ -1,0 +1,48 @@
+table:
+  name: view_lb
+  schema: public
+object_relationships:
+- name: lb_user
+  using:
+    manual_configuration:
+      column_mapping:
+        lb_user_id: id
+      insertion_order: null
+      remote_table:
+        name: lb_users
+        schema: public
+- name: mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        mandataire_id: id
+      insertion_order: null
+      remote_table:
+        name: mandataires
+        schema: public
+- name: service
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: services
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - uid
+    - lb_user_id
+    - service_id
+    - mandataire_id
+    - user_type
+    - nom
+    - siret
+    - code_postal
+    - ville
+    - adress
+    - email
+    filter: {}
+  role: direction

@@ -1,0 +1,135 @@
+table:
+  name: enquete_reponses_informations_mandataire
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - anciennete
+    - benevole
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - estimation_etp
+    - exerce_secretaires_specialises
+    - exerce_seul_activite
+    - forme_juridique
+    - id
+    - last_update
+    - local_professionnel
+    - nom
+    - region
+    - secretaire_specialise_etp
+    - sexe
+    - tranche_age
+  role: individuel
+select_permissions:
+- permission:
+    columns:
+    - anciennete
+    - benevole
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - estimation_etp
+    - exerce_secretaires_specialises
+    - exerce_seul_activite
+    - forme_juridique
+    - id
+    - last_update
+    - local_professionnel
+    - nom
+    - region
+    - secretaire_specialise_etp
+    - sexe
+    - tranche_age
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - anciennete
+    - benevole
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - estimation_etp
+    - exerce_secretaires_specialises
+    - exerce_seul_activite
+    - forme_juridique
+    - id
+    - last_update
+    - local_professionnel
+    - nom
+    - region
+    - secretaire_specialise_etp
+    - sexe
+    - tranche_age
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: individuel
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - id
+    - created_at
+    - last_update
+    - benevole
+    - forme_juridique
+    - sexe
+    - anciennete
+    - estimation_etp
+    - secretaire_specialise_etp
+    - local_professionnel
+    - departement
+    - region
+    - nom
+    - exerce_seul_activite
+    - exerce_secretaires_specialises
+    - tranche_age
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - anciennete
+    - benevole
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - estimation_etp
+    - exerce_secretaires_specialises
+    - exerce_seul_activite
+    - forme_juridique
+    - id
+    - last_update
+    - local_professionnel
+    - nom
+    - region
+    - secretaire_specialise_etp
+    - sexe
+    - tranche_age
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: individuel

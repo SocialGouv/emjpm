@@ -1,0 +1,96 @@
+table:
+  name: enquete_reponses_modalites_exercice
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+select_permissions:
+- permission:
+    columns:
+    - actions_information_tuteurs_familiaux
+    - activite_exercee_par
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - etablissements_type
+    - id
+    - last_update
+    - nombre_lits_journee_hospitalisation
+    - personnalite_juridique_etablissement
+    - raison_sociale
+    - region
+    - total_mesures_etablissements
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - actions_information_tuteurs_familiaux
+    - activite_exercee_par
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - etablissements_type
+    - id
+    - last_update
+    - nombre_lits_journee_hospitalisation
+    - personnalite_juridique_etablissement
+    - raison_sociale
+    - region
+    - total_mesures_etablissements
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - id
+    - created_at
+    - last_update
+    - departement
+    - region
+    - raison_sociale
+    - personnalite_juridique_etablissement
+    - total_mesures_etablissements
+    - nombre_lits_journee_hospitalisation
+    - actions_information_tuteurs_familiaux
+    - activite_exercee_par
+    - etablissements_type
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - actions_information_tuteurs_familiaux
+    - activite_exercee_par
+    - created_at
+    - departement
+    - enquete_reponses_id
+    - etablissements_type
+    - id
+    - last_update
+    - nombre_lits_journee_hospitalisation
+    - personnalite_juridique_etablissement
+    - raison_sociale
+    - region
+    - total_mesures_etablissements
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose

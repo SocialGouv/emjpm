@@ -1,0 +1,4 @@
+table:
+  name: info_finance_type
+  schema: public
+is_enum: true

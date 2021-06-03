@@ -1,0 +1,10 @@
+table:
+  name: editor_token_requests
+  schema: public
+insert_permissions:
+- permission:
+    check: {}
+    columns:
+    - email
+    - name
+  role: anonymous

@@ -1,0 +1,114 @@
+table:
+  name: enquete_reponses_prepose_personel_formation
+  schema: public
+object_relationships:
+- name: enquete_reponse
+  using:
+    foreign_key_constraint_on: enquete_reponses_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - formation_preposes_mjpm
+    - id
+    - last_update
+    - nb_autre_personnel
+    - nb_autre_personnel_etp
+    - nb_preposes_femme
+    - nb_preposes_homme
+    - nb_preposes_mjpm
+    - nb_preposes_mjpm_etp
+    - niveaux_qualification
+  role: prepose
+select_permissions:
+- permission:
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - formation_preposes_mjpm
+    - id
+    - last_update
+    - nb_autre_personnel
+    - nb_autre_personnel_etp
+    - nb_preposes_femme
+    - nb_preposes_homme
+    - nb_preposes_mjpm
+    - nb_preposes_mjpm_etp
+    - niveaux_qualification
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - formation_preposes_mjpm
+    - id
+    - last_update
+    - nb_autre_personnel
+    - nb_autre_personnel_etp
+    - nb_preposes_femme
+    - nb_preposes_homme
+    - nb_preposes_mjpm
+    - nb_preposes_mjpm_etp
+    - niveaux_qualification
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose
+update_permissions:
+- permission:
+    check:
+      enquete_reponse:
+        status:
+          _ne: draft
+    columns:
+    - id
+    - created_at
+    - last_update
+    - nb_preposes_mjpm
+    - nb_preposes_mjpm_etp
+    - formation_preposes_mjpm
+    - niveaux_qualification
+    - nb_preposes_homme
+    - nb_preposes_femme
+    - nb_autre_personnel
+    - nb_autre_personnel_etp
+    - enquete_reponses_id
+    filter:
+      enquete_reponse:
+        status:
+          _ne: draft
+  role: direction
+- permission:
+    check: null
+    columns:
+    - created_at
+    - enquete_reponses_id
+    - formation_preposes_mjpm
+    - id
+    - last_update
+    - nb_autre_personnel
+    - nb_autre_personnel_etp
+    - nb_preposes_femme
+    - nb_preposes_homme
+    - nb_preposes_mjpm
+    - nb_preposes_mjpm_etp
+    - niveaux_qualification
+    filter:
+      enquete_reponse:
+        mandataire:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: prepose
