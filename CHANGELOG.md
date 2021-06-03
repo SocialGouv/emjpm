@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.2](https://github.com/SocialGouv/emjpm/compare/v25.120.1...v25.120.2) (2021-06-03)
+
+
+### Bug Fixes
+
+* **hasura:** try increase migration timeout ([db7c6f2](https://github.com/SocialGouv/emjpm/commit/db7c6f2cf999eb67f5f6f73f9f6f36c681a49bea))
+
+
+
+
+
 ## [25.120.1](https://github.com/SocialGouv/emjpm/compare/v25.120.0...v25.120.1) (2021-06-03)
 
 
