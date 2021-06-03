@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hasura-metadata
+data:
+  databases.yaml: |
+    - name: default
+      kind: postgres
+      configuration:
+        connection_info:
+          database_url:
+            from_env: HASURA_GRAPHQL_DATABASE_URL
+          isolation_level: read-committed
+          pool_settings:
+            connection_lifetime: 600
+            idle_timeout: 180
+            max_connections: {{ .Values.pgConnections }}
+            retries: 1
+          use_prepared_statements: true
+      tables: "!include default/tables/tables.yaml"
+      functions: "!include default/functions/functions.yaml"
+

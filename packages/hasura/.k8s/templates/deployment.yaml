@@ -24,10 +24,21 @@ spec:
 {{ include "nodejs.labels" . | indent 8 }}
     spec:
       terminationGracePeriodSeconds: 60
+      volumes:
+        - name: hasura-metadata
+          configMap:
+            name: hasura-metadata
+            items:
+            - key: SPECIAL_LEVEL
+              path: keys
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          volumeMounts:
+            - name: hasura-metadata
+              mountPath: /hasura-metadata/databases/databases.yaml
+              subPath: databases.yaml
           ports:
             - name: http
               containerPort: 80
@@ -91,5 +102,3 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
                   key: HASURA_WEB_HOOK_SECRET
-            - name: HASURA_GRAPHQL_PG_CONNECTIONS
-              value: '{{ .Values.pgConnections }}'
