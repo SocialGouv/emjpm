@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.1](https://github.com/SocialGouv/emjpm/compare/v25.120.0...v25.120.1) (2021-06-03)
+
+
+### Bug Fixes
+
+* **overflow:** to auto on import errors ([fbb9831](https://github.com/SocialGouv/emjpm/commit/fbb9831de1613001f89ec7dfe1badd1a73a9741f))
+
+
+### Features
+
+* **hasura:** upgrade to v2 beta ([d5a5435](https://github.com/SocialGouv/emjpm/commit/d5a5435665b5ab8fe3b959cbf66739a7df0b1ee3))
+
+
+
+
+
 # [25.120.0](https://github.com/SocialGouv/emjpm/compare/v25.119.7...v25.120.0) (2021-06-02)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.1](https://github.com/SocialGouv/emjpm/compare/v25.120.0...v25.120.1) (2021-06-03)
+
+
+### Bug Fixes
+
+* **overflow:** to auto on import errors ([fbb9831](https://github.com/SocialGouv/emjpm/commit/fbb9831de1613001f89ec7dfe1badd1a73a9741f))
+
+
+
+
+
 # [25.120.0](https://github.com/SocialGouv/emjpm/compare/v25.119.7...v25.120.0) (2021-06-02)
 
 **Note:** Version bump only for package @emjpm/app
