@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.3](https://github.com/SocialGouv/emjpm/compare/v25.120.2...v25.120.3) (2021-06-03)
+
+
+### Bug Fixes
+
+* **hasura:** metadata for v2 ([8eb9a66](https://github.com/SocialGouv/emjpm/commit/8eb9a66b34d2bfa3ca155556a7c6de0cd65bccc5))
+
+
+### Features
+
+* **pg:** up to v11 ([18aa461](https://github.com/SocialGouv/emjpm/commit/18aa4618cbce6d452e45d85ca18363b922078874))
+
+
+
+
+
 ## [25.120.2](https://github.com/SocialGouv/emjpm/compare/v25.120.1...v25.120.2) (2021-06-03)
 
 
