@@ -1,8 +1,9 @@
 # FROM hasura/graphql-engine:v2.0.0-alpha.11.cli-migrations-v3
 # FROM hasura/graphql-engine:v2.0.0-alpha.11.cli-migrations-v2
-FROM hasura/graphql-engine:v1.3.2.cli-migrations-v2
+# FROM hasura/graphql-engine:v1.3.2.cli-migrations-v2
+FROM hasura/graphql-engine:v2.0.0-beta.1.cli-migrations-v2
 
-#ENV HASURA_GRAPHQL_V1_BOOLEAN_NULL_COLLAPSE=true
+ENV HASURA_GRAPHQL_V1_BOOLEAN_NULL_COLLAPSE=true
 
 ENV HASURA_GRAPHQL_CONSOLE_ASSETS_DIR=/srv/console-assets
 ENV HASURA_GRAPHQL_ENABLE_TELEMETRY=false

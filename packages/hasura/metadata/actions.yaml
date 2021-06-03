@@ -242,6 +242,7 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+    timeout: 120
   permissions:
   - role: individuel
   - role: prepose
