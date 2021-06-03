@@ -8,7 +8,7 @@ function EnqueteImportErrors(props) {
   const { errors } = props;
 
   return (
-    <Card sx={importErrorsWrapperStyle} overflow="hidden">
+    <Card sx={importErrorsWrapperStyle}>
       <Heading size={3} mb={4}>
         Détail des erreurs par ligne
       </Heading>
