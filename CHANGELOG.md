@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.6](https://github.com/SocialGouv/emjpm/compare/v25.120.5...v25.120.6) (2021-06-03)
+
+
+### Bug Fixes
+
+* **hasura:** v3 max_connections ([3c1ac2b](https://github.com/SocialGouv/emjpm/commit/3c1ac2b333db496e7b30bc8df81d2b05018e0c75))
+
+
+
+
+
 ## [25.120.5](https://github.com/SocialGouv/emjpm/compare/v25.120.4...v25.120.5) (2021-06-03)
 
 
