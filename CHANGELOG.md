@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.7](https://github.com/SocialGouv/emjpm/compare/v25.120.6...v25.120.7) (2021-06-03)
+
+
+### Bug Fixes
+
+* **hasura:** k8s config ([2448877](https://github.com/SocialGouv/emjpm/commit/24488778566100417e68f206f7b2996bb82940b0))
+
+
+
+
+
 ## [25.120.6](https://github.com/SocialGouv/emjpm/compare/v25.120.5...v25.120.6) (2021-06-03)
 
 
