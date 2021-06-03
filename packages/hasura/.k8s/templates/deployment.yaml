@@ -28,9 +28,6 @@ spec:
         - name: hasura-metadata
           configMap:
             name: hasura-metadata
-            items:
-            - key: SPECIAL_LEVEL
-              path: keys
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
