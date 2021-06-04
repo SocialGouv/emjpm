@@ -121,6 +121,8 @@ async function persistMesure(mesure, datas, trx) {
   }
 
   if (mesure.editor_id && mesure.numero_dossier) {
+    const gestionColumn = mesure.service_id ? "service_id" : "mandataire_id";
+    const gestionId = mesure[gestionColumn];
     const { rows } = await knex.raw(
       `
       SELECT
@@ -129,9 +131,10 @@ async function persistMesure(mesure, datas, trx) {
       mesures
       WHERE
       mesures.editor_id = ? AND
+      mesures.${gestionColumn} = ? AND
       mesures.numero_dossier = ?
       `,
-      [mesure.editor_id, mesure.numero_dossier]
+      [mesure.editor_id, gestionId, mesure.numero_dossier]
     );
     if (rows.length > 0) {
       mesure.id = rows[0].id;
