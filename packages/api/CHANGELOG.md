@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.120.8](https://github.com/SocialGouv/emjpm/compare/v25.120.7...v25.120.8) (2021-06-04)
+
+
+### Bug Fixes
+
+* **api:** batch upsert unicity 3 factors ([7c48baf](https://github.com/SocialGouv/emjpm/commit/7c48baf55dd07c4f6331f65aad050d917331873a))
+
+
+
+
+
 ## [25.120.7](https://github.com/SocialGouv/emjpm/compare/v25.120.6...v25.120.7) (2021-06-03)
 
 **Note:** Version bump only for package @emjpm/api
