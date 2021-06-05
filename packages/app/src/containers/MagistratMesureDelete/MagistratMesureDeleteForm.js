@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/containers/MagistratMesureMandataire/queries";
-import { MAGISTRAT_MESURES_QUERY } from "~/containers/MagistratMesures/queries";
 import useUser from "~/hooks/useUser";
 import { magistratMesureDeleteSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Input } from "~/components";
@@ -60,17 +59,7 @@ export function MagistratMesureDeleteForm(props) {
     onSubmit: async (_, { setSubmitting }) => {
       await deleteMesure({
         awaitRefetchQueries: true,
-        refetchQueries: [
-          {
-            query: MAGISTRAT_MESURES_QUERY,
-            variables: {
-              natureMesure: null,
-              offset: 0,
-              searchText: "",
-              tiId: tiId,
-            },
-          },
-        ],
+        refetchQueries: ["MAGISTRAT_MESURE_QUERY"],
         variables: {
           mesureId: mesure.id,
           mandataireId,
