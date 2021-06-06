@@ -127,9 +127,7 @@ function ServiceEditInformationsForm(props) {
         <FormGrayBox>
           <Heading size={4}>{"Tribunaux"}</Heading>
           <Text lineHeight="1.5" color="textSecondary">
-            {
-              "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
-            }
+            {"Liste des tribunaux préférentiels"}
           </Text>
         </FormGrayBox>
         <FormInputBox>

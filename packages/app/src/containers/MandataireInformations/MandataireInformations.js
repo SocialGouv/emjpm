@@ -106,11 +106,7 @@ function TribunauxInformations({ mandataireTis }) {
     <Box mb={2}>
       <Heading size={5}>Tribunaux</Heading>
       <Flex my={1}>
-        <Text sx={subtitle}>
-          {
-            "Liste des tribunaux dans lesquels vous souhaitez être visible par les magistrats"
-          }
-        </Text>
+        <Text sx={subtitle}>{"Liste des tribunaux préférentiels"}</Text>
         <Box flex={2 / 3}>
           {mandataireTis?.map((mti, index) => {
             const { ti } = mti;
