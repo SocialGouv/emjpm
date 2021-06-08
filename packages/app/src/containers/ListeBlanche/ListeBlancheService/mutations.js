@@ -76,7 +76,7 @@ export const ADD_SERVICE = gql`
     $lb_ville: String!
     $email: String
     $telephone: String
-    $departement_code: String!
+    $departements: [service_departements_insert_input!]!
     $lb_adresse: String!
     $siret: String!
     $org_gestionnaire: Boolean!
@@ -91,7 +91,7 @@ export const ADD_SERVICE = gql`
         lb_code_postal: $lb_code_postal
         lb_ville: $lb_ville
         email: $email
-        departement_code: $departement_code
+        service_departements: { data: $departements }
         telephone: $telephone
         lb_adresse: $lb_adresse
         siret: $siret

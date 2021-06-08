@@ -3,17 +3,25 @@ import yup from "./yup";
 import { getDepartementByCodePostal, codePostalExists } from "~/utils/geodata";
 
 const adminServiceSchema = yup.object().shape({
-  departement: yup
-    .string()
+  departements: yup
+    .array()
+    .of(
+      yup.object().shape({
+        departement_code: yup.string(),
+      })
+    )
     .required()
     .test(
       "departement_code_postal",
-      "le département ne correspond pas au code postal",
+      "aucun département ne correspond au code postal",
       async function (value) {
+        if (!value) return false;
+        const codes = value.map(({ departement_code }) => departement_code);
         return (
           this.parent.lb_code_postal &&
-          (await getDepartementByCodePostal(this.parent.lb_code_postal)) ==
-            value
+          codes.includes(
+            await getDepartementByCodePostal(this.parent.lb_code_postal)
+          )
         );
       }
     ),
@@ -34,12 +42,15 @@ const adminServiceSchema = yup.object().shape({
     )
     .test(
       "code_postal_departement",
-      "le code postal ne correspond pas au département",
+      "le code postal ne correspond à aucun département sélectionné",
       async function (value) {
-        return (
-          value &&
-          (await getDepartementByCodePostal(value)) == this.parent.departement
+        if (!this.parent.departements) {
+          return false;
+        }
+        const codes = this.parent.departements.map(
+          ({ departement_code }) => departement_code
         );
+        return value && codes.includes(await getDepartementByCodePostal(value));
       }
     ),
   lb_ville: yup.string().nullable().required(),

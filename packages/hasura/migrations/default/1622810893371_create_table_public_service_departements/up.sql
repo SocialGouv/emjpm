@@ -1,0 +1,1 @@
+CREATE TABLE "public"."service_departements" ("id" serial NOT NULL, "service_id" integer NOT NULL, "departement_code" text NOT NULL, PRIMARY KEY ("id") , FOREIGN KEY ("service_id") REFERENCES "public"."services"("id") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("departement_code") REFERENCES "public"."departements"("id") ON UPDATE cascade ON DELETE cascade);

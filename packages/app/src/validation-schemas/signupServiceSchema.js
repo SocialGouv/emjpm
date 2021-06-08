@@ -1,7 +1,7 @@
 import yup from "./yup";
 
 const signupServiceSchema = yup.object().shape({
-  departement: yup.mixed().required(),
+  departements: yup.mixed().required(),
   service: yup.mixed().required(),
 });
 
