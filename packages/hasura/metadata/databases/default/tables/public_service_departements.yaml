@@ -1,6 +1,10 @@
 table:
   name: service_departements
   schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
 insert_permissions:
 - permission:
     backend_only: false

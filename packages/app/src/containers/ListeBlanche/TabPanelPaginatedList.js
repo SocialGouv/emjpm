@@ -49,7 +49,9 @@ function getRequestFilters(filters) {
 
     const serviceDepartementFilters = {
       service: {
-        departement_code: { _eq: departementCode },
+        service_departements: {
+          departement_code: { _eq: departementCode },
+        },
       },
     };
 

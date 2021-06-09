@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { Card } from "rebass";
 
@@ -29,15 +28,17 @@ export function ListeBlancheServiceUpdate(props) {
   const { services_by_pk: service } = data;
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    const departement = findDepartementByCodeOrId(departements, {
-      code: values.departement,
-    });
-
     try {
       await updateService({
         refetchQueries: ["services", "services_aggregate"],
         variables: {
-          departement_code: departement.id,
+          service_departements: values.departements.map((dep) => ({
+            ...dep,
+            service_id: service.id,
+          })),
+          departement_codes: values.departements.map(
+            ({ departement_code }) => departement_code
+          ),
           email: values.email,
           etablissement: values.etablissement,
           id: service.id,

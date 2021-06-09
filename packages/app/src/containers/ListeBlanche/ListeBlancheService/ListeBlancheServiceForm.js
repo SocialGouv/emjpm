@@ -43,7 +43,12 @@ export function ListeBlancheServiceForm(props) {
 
   const formik = useFormik({
     initialValues: {
-      departements: service ? service.departements : "",
+      departements:
+        service && service.departements
+          ? service.departements.map(({ departement }) => ({
+              departement_code: departement.id,
+            }))
+          : "",
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
       lb_adresse: service ? service.lb_adresse : "",

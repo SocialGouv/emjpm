@@ -134,8 +134,10 @@ export const SEARCH_VIEW_LB = gql`
         code_postal
         created_at
         departements {
-          id
-          nom
+          departement {
+            id
+            nom
+          }
         }
         nom
         telephone

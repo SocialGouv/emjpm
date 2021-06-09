@@ -9,8 +9,9 @@ export const UPDATE_SERVICE = gql`
     $siret: String!
     $email: String
     $telephone: String
-    $departement_code: String!
-    $lb_adresse: String! # $latitude: Float! # $longitude: Float!
+    $service_departements: [service_departements_insert_input!]!
+    $departement_codes: [String!]!
+    $lb_adresse: String!
     $org_gestionnaire: Boolean!
     $org_nom: String
     $org_adresse: String
@@ -23,7 +24,6 @@ export const UPDATE_SERVICE = gql`
         etablissement: $etablissement
         siret: $siret
         lb_code_postal: $lb_code_postal
-        departement_code: $departement_code
         lb_ville: $lb_ville
         email: $email
         telephone: $telephone
@@ -44,7 +44,6 @@ export const UPDATE_SERVICE = gql`
         email
         competences
         created_at
-        departement_code
         dispo_max
         etablissement
         latitude
@@ -65,6 +64,27 @@ export const UPDATE_SERVICE = gql`
         lb_ville
         lb_code_postal
       }
+    }
+    insert_service_departements(
+      objects: $service_departements
+      on_conflict: {
+        constraint: service_departements_service_id_departement_code_key
+        update_columns: []
+      }
+    ) {
+      returning {
+        id
+      }
+    }
+    delete_service_departements(
+      where: {
+        _and: [
+          { service_id: { _eq: $id } }
+          { departement_code: { _nin: $departement_codes } }
+        ]
+      }
+    ) {
+      affected_rows
     }
   }
 `;

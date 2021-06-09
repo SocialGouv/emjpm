@@ -27,10 +27,15 @@ export function ListeBlancheServiceItem(props) {
           </Flex>
 
           <Flex width="30%" flexDirection="column">
-            <Text sx={labelStyle}>Département</Text>
+            <Text sx={labelStyle}>Départements</Text>
             {service.departement && (
               <Text sx={descriptionStyle}>{service.departement.nom}</Text>
             )}
+            <Text sx={descriptionStyle}>
+              {service.departements
+                .map(({ departement }) => departement.nom)
+                .join(", ")}
+            </Text>
           </Flex>
 
           {service.siret && (

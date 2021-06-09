@@ -38,7 +38,9 @@ export const LB_SUMMARY = gql`
       }
     }
     service: services_aggregate(
-      where: { departement_code: { _eq: $departementCode } }
+      where: {
+        service_departements: { departement_code: { _eq: $departementCode } }
+      }
     ) {
       aggregate {
         count
