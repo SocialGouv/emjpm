@@ -39,6 +39,7 @@ module.exports.Role = require("./Role");
 module.exports.RoutineLog = require("./RoutineLog");
 module.exports.Service = require("./Service");
 module.exports.ServiceAntenne = require("./ServiceAntenne");
+module.exports.ServiceDepartements = require("./ServiceDepartements");
 module.exports.ServiceMember = require("./ServiceMember");
 module.exports.ServiceMemberInvitation = require("./ServiceMemberInvitation");
 module.exports.ServiceTis = require("./ServiceTis");
