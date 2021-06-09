@@ -70,14 +70,10 @@ update services m set mesures_in_progress = (select count(*) from mesures where 
 update services m set mesures_awaiting = (select count(*) from mesures where service_id = m.id and status = 'en_attente');
 
 -- CLEAN etablissements
--- delete from etablissements where not exists (
---    select 1 from lb_user_etablissements
---    where lb_user_etablissements.etablissement_id = etablissements.id
---    union
---    select 1 from mesures
---    where mesures.etablissement_id = etablissements.id
--- );
-delete from etablissements
-using lb_user_etablissements, mesures
-where lb_user_etablissements.etablissement_id != etablissements.id
-and mesures.etablissement_id != etablissements.id
+delete from etablissements where not exists (
+   select 1 from lb_user_etablissements
+   where lb_user_etablissements.etablissement_id = etablissements.id
+   union
+   select 1 from mesures
+   where mesures.etablissement_id = etablissements.id
+);
