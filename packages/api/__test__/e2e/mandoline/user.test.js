@@ -94,6 +94,7 @@ describe("POST /api/mandoline/user", () => {
         prenom: "Paula",
         service: {
           departement: { code: "75", nom: "Paris" },
+          departements: [{ code: "75", nom: "Paris" }],
           dispo_max: 1300,
           email: "service-57@justice.fr",
           etablissement: "service-57",
