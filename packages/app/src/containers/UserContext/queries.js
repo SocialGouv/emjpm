@@ -51,7 +51,7 @@ export const GET_SERVICE_USERS = gql`
           etablissement
           longitude
           latitude
-          departement {
+          departements {
             id
           }
           service_tis {

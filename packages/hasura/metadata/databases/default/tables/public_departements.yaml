@@ -27,12 +27,12 @@ array_relationships:
       table:
         name: mesures
         schema: public
-- name: services
+- name: service_departements
   using:
     foreign_key_constraint_on:
       column: departement_code
       table:
-        name: services
+        name: service_departements
         schema: public
 - name: tis
   using:

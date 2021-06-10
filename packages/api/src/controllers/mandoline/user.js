@@ -48,14 +48,20 @@ const getUserService = (user) => {
     lb_ville,
     mesures_awaiting: mesures_en_attente,
     mesures_in_progress: mesures_en_cours,
-    departement,
+    departements,
   } = service;
 
   const data = {
-    departement: {
+    departement: departements[0]
+      ? {
+          code: departements[0].id,
+          nom: departements[0].nom,
+        }
+      : null,
+    departements: departements.map((departement) => ({
       code: departement.id,
       nom: departement.nom,
-    },
+    })),
     dispo_max,
     email,
     etablissement,
@@ -92,7 +98,7 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departement, region], service.[departement]]"
+        "[direction.[departement, region], service.[departements]]"
       );
   } catch (error) {
     return res.status(422).json({

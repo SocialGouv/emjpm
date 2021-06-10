@@ -11,8 +11,8 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/validation-schemas";
-import { Button, Heading, Text } from "~/components";
-import { toOptions } from "~/utils/form";
+import { Select, Button, Heading, Text } from "~/components";
+import { toOptions, findOptions } from "~/utils/form";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";
@@ -20,10 +20,10 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-function getServiceOptions(services, departementCode) {
-  const servicesByDepartement = services.filter(
-    (s) => s.departement_code === departementCode
-  );
+function getServiceOptions(services, departementCodes) {
+  const servicesByDepartement = departementCodes
+    ? services.filter((s) => departementCodes.includes(s.departement_code))
+    : [];
 
   return toOptions(servicesByDepartement, "id", "etablissement");
 }
@@ -36,7 +36,7 @@ function SignupServiceForm({ serviceDatas }) {
 
   const formik = useFormik({
     initialValues: {
-      departement: service?.departement || null,
+      departements: service?.departements || null,
       service: service?.service || null,
     },
     onSubmit: (values, { setSubmitting, setErrors }) => {
@@ -62,7 +62,7 @@ function SignupServiceForm({ serviceDatas }) {
 
   const serviceOptions = getServiceOptions(
     serviceDatas,
-    formik.values.departement
+    formik.values.departements
   );
 
   const departementsOptions = toOptions(departements, "id", "nom");
@@ -84,18 +84,32 @@ function SignupServiceForm({ serviceDatas }) {
             </Text>
           </FormGrayBox>
           <FormInputBox>
-            <FormGroupSelect
-              id="departement"
+            <Select
+              id="departements"
               formik={formik}
-              placeholder="Département de votre service"
+              placeholder="Département(s) de votre service"
               options={departementsOptions}
+              isMulti
+              value={findOptions(
+                departementsOptions,
+                formik.values.departements
+              )}
+              hasError={
+                formik.errors.departements && formik.touched.departements
+              }
+              onChange={(options) => {
+                formik.setFieldValue(
+                  "departements",
+                  (options || []).map((o) => o.value)
+                );
+              }}
             />
             <FormGroupSelect
               id="service"
               formik={formik}
               placeholder="Votre service"
               options={serviceOptions}
-              isClearable={true}
+              isClearable
             />
           </FormInputBox>
         </Flex>
@@ -134,11 +148,13 @@ function SignupServiceForm({ serviceDatas }) {
   );
 }
 
-const SignupService = (props) => (
-  <SignupDatas
-    {...props}
-    Component={(props) => <SignupServiceForm {...props} />}
-  />
-);
+function SignupService(props) {
+  return (
+    <SignupDatas
+      {...props}
+      Component={(props) => <SignupServiceForm {...props} />}
+    />
+  );
+}
 
 export { SignupService };

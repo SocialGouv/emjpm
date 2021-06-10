@@ -16,13 +16,17 @@ class Service extends Model {
 
   static get relationMappings() {
     return {
-      departement: {
+      departements: {
         join: {
-          from: "services.departement_code",
+          from: "services.id",
+          through: {
+            from: "service_departements.service_id",
+            to: "service_departements.departement_code",
+          },
           to: "departements.id",
         },
         modelClass: Models.Departement,
-        relation: Model.HasOneRelation,
+        relation: Model.ManyToManyRelation,
       },
     };
   }

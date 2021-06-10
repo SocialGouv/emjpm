@@ -12,7 +12,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Select, Text, InlineError } from "~/components";
 import {
   createDepartementOptions,
   departementList,
@@ -22,6 +22,14 @@ import {
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
 import SelectVille from "~/containers/SelectVille";
+
+const findOptionsDepartements = (options, values) => {
+  if (!values) {
+    return [];
+  }
+  const codes = values.map(({ departement_code }) => departement_code);
+  return options.filter((opt) => codes.includes(opt.value));
+};
 
 export function ListeBlancheServiceForm(props) {
   const { handleCancel, handleSubmit, service } = props;
@@ -35,7 +43,12 @@ export function ListeBlancheServiceForm(props) {
 
   const formik = useFormik({
     initialValues: {
-      departement: service ? "" + service.departement.id : "",
+      departements:
+        service && service.departements
+          ? service.departements.map(({ departement }) => ({
+              departement_code: departement.id,
+            }))
+          : "",
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
       lb_adresse: service ? service.lb_adresse : "",
@@ -54,6 +67,18 @@ export function ListeBlancheServiceForm(props) {
   });
 
   const { setFieldValue } = formik;
+
+  const addDepartementToCurrents = (departement) => {
+    const departements = formik.values.departements || [];
+    if (
+      !departements
+        .map(({ departement_code }) => departement_code)
+        .includes(departement)
+    ) {
+      departements.push({ departement_code: departement });
+    }
+    return departements;
+  };
 
   useDebouncedEffect(
     () => {
@@ -80,9 +105,10 @@ export function ListeBlancheServiceForm(props) {
           setFieldValue("lb_code_postal", codePostal);
           return;
         }
+        const departements = addDepartementToCurrents(departement);
         formik.setValues({
           ...formik.values,
-          departement: departement,
+          departements,
           lb_code_postal: codePostal,
         });
       });
@@ -108,13 +134,15 @@ export function ListeBlancheServiceForm(props) {
       departement,
     } = selectedSiretData;
 
+    const departements = addDepartementToCurrents(departement);
+
     formik.setValues({
       ...formik.values,
       etablissement: nom_raison_sociale || "",
       lb_adresse: l4_declaree || "",
       lb_code_postal: code_postal || "",
       lb_ville: libelle_commune || "",
-      departement: departement || "",
+      departements,
     });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -189,13 +217,33 @@ export function ListeBlancheServiceForm(props) {
             </Box>
           </Flex>
           <Box>
-            <FormGroupSelect
-              id="departement"
-              options={departementsOptions}
-              placeholder="Département du service"
-              formik={formik}
+            <Select
+              id="departements"
               validationSchema={validationSchema}
+              formik={formik}
+              placeholder="Départements du votre service"
+              options={departementsOptions}
+              isMulti
+              value={findOptionsDepartements(
+                departementsOptions,
+                formik.values.departements
+              )}
+              hasError={
+                formik.errors.departements && formik.touched.departements
+              }
+              onChange={(options) => {
+                formik.setFieldValue(
+                  "departements",
+                  (options || []).map((o) => ({ departement_code: o.value }))
+                );
+              }}
             />
+            {formik.touched.departements && (
+              <InlineError
+                message={formik.errors.departements}
+                fieldId="departements"
+              />
+            )}
           </Box>
         </FormInputBox>
       </Flex>

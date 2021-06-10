@@ -88,12 +88,13 @@ describe("POST /api/mandoline/user", () => {
         .set({ Authorization: `Bearer ${token}` });
 
       expect(response.body).toMatchObject({
-        email: "service-1923@justice.fr",
-        id: 1923,
+        email: "service-1951@justice.fr",
+        id: 1951,
         nom: "service",
         prenom: "Paula",
         service: {
           departement: { code: "75", nom: "Paris" },
+          departements: [{ code: "75", nom: "Paris" }],
           dispo_max: 1300,
           email: "service-57@justice.fr",
           etablissement: "service-57",

@@ -1,5 +1,4 @@
 import { useApolloClient, useMutation } from "@apollo/client";
-import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
@@ -32,14 +31,10 @@ export function ListeBlancheServiceCreate(props) {
       return;
     }
 
-    const departement = findDepartementByCodeOrId(departements, {
-      code: values.departement,
-    });
-
     try {
       await addService({
         variables: {
-          departement_code: departement.id,
+          departements: values.departements,
           email: values.email,
           etablissement: values.etablissement,
           lb_adresse: values.lb_adresse,
