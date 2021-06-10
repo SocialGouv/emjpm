@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.121.0](https://github.com/SocialGouv/emjpm/compare/v25.120.9...v25.121.0) (2021-06-10)
+
+
+### Features
+
+* **services:** multi departements ([#2547](https://github.com/SocialGouv/emjpm/issues/2547)) ([896bf21](https://github.com/SocialGouv/emjpm/commit/896bf21f53ef4c4a7747fc5541e7b90db86e0c12))
+
+
+
+
+
 ## [25.120.9](https://github.com/SocialGouv/emjpm/compare/v25.120.8...v25.120.9) (2021-06-05)
 
 **Note:** Version bump only for package @emjpm/api
