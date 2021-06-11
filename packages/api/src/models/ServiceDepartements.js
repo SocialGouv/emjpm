@@ -1,6 +1,8 @@
 const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
 
+const Models = require(".");
+
 Model.knex(knexConnection);
 
 class ServiceDepartements extends Model {
@@ -20,6 +22,19 @@ class ServiceDepartements extends Model {
         service_id: { type: "integer" },
       },
       type: "object",
+    };
+  }
+
+  static get relationMappings() {
+    return {
+      services: {
+        join: {
+          from: "service_departements.service_id",
+          to: "services.id",
+        },
+        modelClass: Models.Service,
+        relation: Model.HasManyRelation,
+      },
     };
   }
 }

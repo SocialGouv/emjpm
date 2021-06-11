@@ -40,10 +40,14 @@ class Direction extends Model {
       departement_services: {
         join: {
           from: "direction.departement_code",
-          to: "services.departement_code",
+          through: {
+            from: "service_departements.departement_code",
+            to: "service_departements.service_id",
+          },
+          to: "services.id",
         },
         modelClass: Models.Service,
-        relation: Model.HasManyRelation,
+        relation: Model.ManyToManyRelation,
       },
       region: {
         join: {
@@ -53,16 +57,16 @@ class Direction extends Model {
         modelClass: Models.Region,
         relation: Model.HasOneRelation,
       },
-      region_services: {
+      region_service_departements: {
         join: {
           from: "direction.region_id",
           through: {
             from: "departements.id_region",
             to: "departements.id",
           },
-          to: "services.departement_code",
+          to: "service_departements.departement_code",
         },
-        modelClass: Models.Service,
+        modelClass: Models.ServiceDepartements,
         relation: Model.ManyToManyRelation,
       },
       users: {

@@ -40,7 +40,7 @@ const getDirectionServices = async (req, res) => {
     [direction] = await Direction.query()
       .where("user_id", userId)
       .withGraphFetched(
-        "[departement_services.[departement], region_services.[departement]]"
+        "[departement_services.[departements], region_service_departements.[services.[departements]]]"
       );
     if (!direction) {
       error = "user's direction undefined";
@@ -65,7 +65,13 @@ const getDirectionServices = async (req, res) => {
         services = direction.departement_services;
         break;
       case "regional":
-        services = direction.region_services;
+        services = direction.region_service_departements.reduce(
+          (acc, { services }) => {
+            acc.push(...services);
+            return acc;
+          },
+          []
+        );
         break;
       default:
         throw new Error(
@@ -75,6 +81,11 @@ const getDirectionServices = async (req, res) => {
   } catch (err) {
     error = err;
   }
+
+  for (const service of services) {
+    service.departement = service.departements[0];
+  }
+
   if (error) {
     return res.status(422).json({
       errors: [{ error: `${error}` }],
