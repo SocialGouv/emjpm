@@ -5,6 +5,16 @@ object_relationships:
 - name: departement
   using:
     foreign_key_constraint_on: departement_code
+array_relationships:
+- name: tis
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: departement_code
+      insertion_order: null
+      remote_table:
+        name: tis
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false

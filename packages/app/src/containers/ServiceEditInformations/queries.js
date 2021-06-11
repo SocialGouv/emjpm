@@ -19,7 +19,7 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
-      departement {
+      departements {
         id
         tis(where: { immutable: { _eq: true } }) {
           id

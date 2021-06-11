@@ -31,10 +31,12 @@ function buildTiOptions(tis) {
 function ServiceEditInformationsForm(props) {
   const { handleSubmit, cancelLink, service, errorMessage } = props;
 
-  const {
-    departement: { tis },
-    service_tis,
-  } = service;
+  const { departements, service_tis } = service;
+
+  const tis = departements.reduce((acc, { tis }) => {
+    acc.push(...tis);
+    return acc;
+  }, []);
 
   const { tiOptions } = useMemo(() => {
     return buildTiOptions(tis);
