@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.121.2](https://github.com/SocialGouv/emjpm/compare/v25.121.1...v25.121.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* **sdep:** fix api eager expression in get user ([f75f69a](https://github.com/SocialGouv/emjpm/commit/f75f69a36962921f33294799d3244d86d726b77f))
+* **sdep:** fix edit service ([863c3c0](https://github.com/SocialGouv/emjpm/commit/863c3c0940f49ba152f62a0c5f638dfe72097ad7))
+
+
+
+
+
 ## [25.121.1](https://github.com/SocialGouv/emjpm/compare/v25.121.0...v25.121.1) (2021-06-11)
 
 
