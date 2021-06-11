@@ -49,6 +49,18 @@ class Direction extends Model {
         modelClass: Models.Service,
         relation: Model.ManyToManyRelation,
       },
+      departements: {
+        join: {
+          from: "direction.departement_code",
+          through: {
+            from: "service_departements.departement_code",
+            to: "service_departements.service_id",
+          },
+          to: "services.id",
+        },
+        modelClass: Models.Service,
+        relation: Model.ManyToManyRelation,
+      },
       region: {
         join: {
           from: "direction.region_id",
