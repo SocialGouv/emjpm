@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.121.1](https://github.com/SocialGouv/emjpm/compare/v25.121.0...v25.121.1) (2021-06-11)
+
+
+### Bug Fixes
+
+* **sdep:** fix api eager expression ([d8f7a65](https://github.com/SocialGouv/emjpm/commit/d8f7a65f52b219b55dd142a41a9c931634efbfd6))
+
+
+
+
+
 # [25.121.0](https://github.com/SocialGouv/emjpm/compare/v25.120.9...v25.121.0) (2021-06-10)
 
 
