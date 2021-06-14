@@ -17,7 +17,6 @@ export const SERVICES = gql`
       etablissement
       code_postal
       ville
-      departement_code
     }
   }
 `;
@@ -78,7 +77,6 @@ export const SERVICE = gql`
       siret
       code_postal
       ville
-      departement_code
       adresse
       latitude
       longitude
