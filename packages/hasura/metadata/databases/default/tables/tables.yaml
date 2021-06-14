@@ -60,6 +60,8 @@
 - "!include public_type_etablissement.yaml"
 - "!include public_user_role.yaml"
 - "!include public_users.yaml"
+- "!include public_view_departement_indicateur_inscrit.yaml"
+- "!include public_view_departement_indicateur_login.yaml"
 - "!include public_view_department_availability.yaml"
 - "!include public_view_lb.yaml"
 - "!include public_view_lb_tis.yaml"
