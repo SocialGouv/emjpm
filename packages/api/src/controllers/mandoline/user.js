@@ -98,7 +98,7 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departements, region], service.[departements]]"
+        "[direction.[departement, region], service.[departements]]"
       );
   } catch (error) {
     return res.status(422).json({
