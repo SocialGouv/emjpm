@@ -23,7 +23,7 @@
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.63.0",
     "eslint": "^7.23.0",
-    "sort-package-json": "^1.49.0"
+    "sort-package-json": "^1.50.0"
   },
   "dependencies": {
     "date-fns": "^2.19.0",
