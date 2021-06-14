@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.121.3](https://github.com/SocialGouv/emjpm/compare/v25.121.2...v25.121.3) (2021-06-14)
+
+
+### Bug Fixes
+
+* **admin:** services view query ([d040c9f](https://github.com/SocialGouv/emjpm/commit/d040c9f2ba7c785359018c95b820479146d38fe3))
+
+
+
+
+
 ## [25.121.2](https://github.com/SocialGouv/emjpm/compare/v25.121.1...v25.121.2) (2021-06-11)
 
 
