@@ -8,6 +8,8 @@ metadata:
 {{ include "nodejs.labels" . | indent 4 }}
   annotations:
 {{ .Values.ingress.annotations | toYaml | indent 4 }}
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
 spec:
   tls:
     - hosts:
