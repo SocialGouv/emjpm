@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.121.5](https://github.com/SocialGouv/emjpm/compare/v25.121.4...v25.121.5) (2021-06-15)
+
+
+### Bug Fixes
+
+* **import:** increase k8s ingress timeout ([2103a00](https://github.com/SocialGouv/emjpm/commit/2103a0015ba2020920d7388449f8ccb5e4f23878))
+
+
+
+
+
 ## [25.121.4](https://github.com/SocialGouv/emjpm/compare/v25.121.3...v25.121.4) (2021-06-15)
 
 
