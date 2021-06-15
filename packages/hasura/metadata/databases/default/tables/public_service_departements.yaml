@@ -40,6 +40,12 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
+    - departement_code
+    - service_id
+    filter: {}
+  role: anonymous
+- permission:
+    columns:
     - id
     - service_id
     - departement_code

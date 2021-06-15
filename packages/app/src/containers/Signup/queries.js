@@ -10,7 +10,9 @@ export const SIGNUP_DATA = gql`
     }
     services(order_by: { etablissement: asc }) {
       id
-      departement_code
+      departements {
+        departement_code
+      }
       etablissement
       code_postal
     }

@@ -22,7 +22,14 @@ import { SignupGeneralError } from "./SignupGeneralError";
 
 function getServiceOptions(services, departementCodes) {
   const servicesByDepartement = departementCodes
-    ? services.filter((s) => departementCodes.includes(s.departement_code))
+    ? services.filter((service) => {
+        if (!service.departements) {
+          return false;
+        }
+        return service.departements.some(({ departement_code }) =>
+          departementCodes.includes(departement_code)
+        );
+      })
     : [];
 
   return toOptions(servicesByDepartement, "id", "etablissement");
