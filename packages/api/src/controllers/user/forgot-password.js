@@ -25,9 +25,10 @@ const forgotPassword = async (req, res) => {
   }
 
   if (!user) {
-    return res
-      .status(422)
-      .json({ error: `Aucun utilisateur avec l'email "${email}"` });
+    res.status(200).json({});
+    // return res
+    //   .status(422)
+    //   .json({ error: `Aucun utilisateur avec l'email "${email}"` });
   }
 
   try {

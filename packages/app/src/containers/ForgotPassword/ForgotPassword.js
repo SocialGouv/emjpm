@@ -89,7 +89,7 @@ function ForgotPassword() {
               }}
             >
               {
-                "Un email avec un lien de réinitialisation vient de vous être envoyé."
+                "Un lien de réinitialisation vous a été envoyé, si un compte correspondant à l'email indiqué existe."
               }
             </Box>
           )}
