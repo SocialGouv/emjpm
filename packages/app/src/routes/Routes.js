@@ -436,6 +436,10 @@ const publicRoutes = [
     path: "/mentions-legales",
   },
   {
+    Component: require("~/pages/rgaa").default,
+    path: "/rgaa",
+  },
+  {
     Component: require("~/pages/conditions-utilisation").default,
     path: "/conditions-utilisation",
   },

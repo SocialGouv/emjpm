@@ -74,6 +74,11 @@ function Footer(props) {
                   Journal des modifications
                 </Link>
               </ListItem>
+              <ListItem>
+                <Link target="_blank" to={`/rgaa`}>
+                  Accessibilité : non conforme
+                </Link>
+              </ListItem>
             </List>
             <List sx={FooterItemStyle}>
               <ListTitle>En collaboration avec</ListTitle>
