@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.122.1](https://github.com/SocialGouv/emjpm/compare/v25.122.0...v25.122.1) (2021-06-17)
+
+
+### Bug Fixes
+
+* **import:** increase timeout to 5minutes ([caeed73](https://github.com/SocialGouv/emjpm/commit/caeed73aa10c8294080dc7678c75fb0ec0d1a9ec))
+
+
+
+
+
 # [25.122.0](https://github.com/SocialGouv/emjpm/compare/v25.121.5...v25.122.0) (2021-06-17)
 
 
