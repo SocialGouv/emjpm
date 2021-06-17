@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.122.0](https://github.com/SocialGouv/emjpm/compare/v25.121.5...v25.122.0) (2021-06-17)
+
+
+### Features
+
+* **forgot-password:** secu remove notfound user ([244ca14](https://github.com/SocialGouv/emjpm/commit/244ca14fdd4165ff0f8ce4201c0194e4e135cbe3))
+* **rgaa:** declaration de non conformité ([7d57313](https://github.com/SocialGouv/emjpm/commit/7d57313e6bac40f6282ecd0571396aea4796f752))
+* **secu:** add anti xss headers ([f59fe39](https://github.com/SocialGouv/emjpm/commit/f59fe39ac027ea6834c23856df9bc5cc46f7b3aa))
+
+
+
+
+
 ## [25.121.5](https://github.com/SocialGouv/emjpm/compare/v25.121.4...v25.121.5) (2021-06-15)
 
 **Note:** Version bump only for package @emjpm/app

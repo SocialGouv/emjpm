@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.122.0](https://github.com/SocialGouv/emjpm/compare/v25.121.5...v25.122.0) (2021-06-17)
+
+
+### Features
+
+* **forgot-password:** secu remove notfound user ([244ca14](https://github.com/SocialGouv/emjpm/commit/244ca14fdd4165ff0f8ce4201c0194e4e135cbe3))
+* **forgot-password:** up tests ([1081104](https://github.com/SocialGouv/emjpm/commit/108110454f58d1ba18d89a7766aee2ba4c96b648))
+
+
+
+
+
 ## [25.121.5](https://github.com/SocialGouv/emjpm/compare/v25.121.4...v25.121.5) (2021-06-15)
 
 
