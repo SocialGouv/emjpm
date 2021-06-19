@@ -1,5 +1,5 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import {
@@ -11,6 +11,8 @@ import { Card, Input, Select } from "~/components";
 
 import { FiltersContext } from "./context";
 
+import { createDepartementOptions, departementList } from "~/utils/geodata";
+
 function MesureListFilters(props) {
   const { service_antennes = [] } = props;
 
@@ -19,6 +21,8 @@ function MesureListFilters(props) {
     changeNatureMesure,
     mesureStatus,
     changeMesureStatus,
+    changeMesureDepartement,
+    mesureDepartement,
     antenne,
     changeAntenne,
     searchText,
@@ -38,6 +42,11 @@ function MesureListFilters(props) {
     })),
   ];
 
+  const departementsOptions = useMemo(
+    () => createDepartementOptions(departementList),
+    []
+  );
+
   return (
     <Card mt="1">
       <Flex justifyContent={"space-between"} flexWrap="wrap">
@@ -46,7 +55,6 @@ function MesureListFilters(props) {
             {service_antennes.length >= 2 && (
               <Box width="170px" mr={1}>
                 <Select
-                  instanceId={"antenne-filter"}
                   size="small"
                   options={antenneOptions}
                   placeholder={"Antenne"}
@@ -57,7 +65,6 @@ function MesureListFilters(props) {
             )}
             <Box width="200px" mr={1}>
               <Select
-                instanceId={"mesure-nature-filter"}
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options
@@ -69,7 +76,6 @@ function MesureListFilters(props) {
             </Box>
             <Box width="200px" mr={1}>
               <Select
-                instanceId={"mesure-status-filter"}
                 size="small"
                 options={MESURE_STATUS_LABEL_VALUE}
                 placeholder={"État de la mesure"}
@@ -79,17 +85,27 @@ function MesureListFilters(props) {
             </Box>
             <Box width="200px" mr={1}>
               <Select
-                instanceId={"mesure-sort"}
+                size="small"
+                options={departementsOptions}
+                label={"Département du majeur"}
+                placeholder={"Tous"}
+                value={mesureDepartement}
+                onChange={(option) => changeMesureDepartement(option)}
+              />
+            </Box>
+            <Box width="200px" mr={1}>
+              <Select
                 size="small"
                 options={MESURE_SORTBY_LABEL_VALUE}
-                placeholder={"Trier par"}
+                label="Trier par"
+                placeholder="Aucun Tri"
                 value={sortBy}
                 onChange={(option) => changeSortBy(option)}
               />
             </Box>
           </Flex>
         </Box>
-        <Box width="320px">
+        <Box width="240px">
           <Input
             value={searchText}
             spellCheck="false"
@@ -98,7 +114,7 @@ function MesureListFilters(props) {
             name="search"
             size="small"
             label="Rechercher une mesure"
-            placeholder="Numéro RG, Dossier, Ville, Code Postal..."
+            placeholder="Numéro RG, Dossier, Ville..."
           />
         </Box>
       </Flex>

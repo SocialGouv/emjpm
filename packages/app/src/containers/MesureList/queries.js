@@ -5,6 +5,7 @@ export const MESURES_QUERY = gql`
     $limit: Int
     $natureMesure: nature_mesure_enum
     $status: mesure_status_enum!
+    $departement: String
     $searchText: String
     $offset: Int
     $antenne: Int
@@ -16,13 +17,20 @@ export const MESURES_QUERY = gql`
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
+        departement: { id: { _eq: $departement } }
       }
     ) {
       aggregate {
         count
       }
     }
-    awaiting_mesures: mesures(where: { status: { _eq: en_attente } }) {
+
+    awaiting_mesures: mesures(
+      where: {
+        status: { _eq: en_attente }
+        departement: { id: { _eq: $departement } }
+      }
+    ) {
       annee_naissance
       antenne_id
       cabinet
@@ -70,6 +78,7 @@ export const MESURES_QUERY = gql`
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
+        departement: { id: { _eq: $departement } }
       }
     ) {
       annee_naissance

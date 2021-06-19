@@ -20,8 +20,14 @@ const RESULT_PER_PAGE = 20;
 function MesureList() {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { antenne, natureMesure, mesureStatus, debouncedSearchText, sortBy } =
-    useContext(FiltersContext);
+  const {
+    antenne,
+    natureMesure,
+    mesureStatus,
+    mesureDepartement,
+    debouncedSearchText,
+    sortBy,
+  } = useContext(FiltersContext);
   const { type } = useUser();
   const userBasePath = getUserBasePath({ type });
 
@@ -64,6 +70,7 @@ function MesureList() {
         ? `%${debouncedSearchText}%`
         : null,
     status: currentMesureStatus,
+    departement: mesureDepartement?.value || null,
   };
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {

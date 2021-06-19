@@ -16,6 +16,9 @@ export function Provider(props) {
   const [mesureStatus, changeMesureStatus] = useState(
     initialValues.mesureStatus
   );
+  const [mesureDepartement, changeMesureDepartement] = useState(
+    initialValues.mesureDepartement
+  );
   const [searchText, changeSearchText] = useState("");
   const [sortBy, changeSortBy] = useState("");
 
@@ -27,9 +30,11 @@ export function Provider(props) {
     changeAntenne,
     changeMesureStatus,
     changeNatureMesure,
+    changeMesureDepartement,
     changeSearchText,
     changeSortBy,
     debouncedSearchText,
+    mesureDepartement,
     mesureStatus,
     natureMesure,
     searchText,
