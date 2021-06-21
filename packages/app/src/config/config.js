@@ -15,11 +15,17 @@ if (hostname == "localhost") {
   API_URL = protocol + "//api-" + hostname;
 }
 
+const PROD_DOMAIN = "emjpm.fabrique.social.gouv.fr";
+
+const isProd = hostname === PROD_DOMAIN;
+
 const config = {
   API_URL,
   GRAPHQL_SERVER_URI,
   NODE_ENV: process.env.NODE_ENV,
   PACKAGE_VERSION: version,
   SENTRY_PUBLIC_DSN: process.env.REACT_APP_SENTRY_PUBLIC_DSN,
+  IS_PROD: isProd,
+  PROD_DOMAIN,
 };
 export default config;

@@ -3,15 +3,32 @@ import { Box, Image } from "rebass";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
 import { Login, LoginCreateAccount } from "~/containers/Login";
+import { Heading } from "~/components";
 import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 
 import { ExcludeBrowserBanner } from "~/containers/ExcludeBrowserBanner";
+
+import config from "~/config";
+
+const { IS_PROD, PROD_DOMAIN } = config;
 
 function LoginPage() {
   return (
     <>
       <LayoutPublic>
         <BoxWrapper>
+          {!IS_PROD && (
+            <Heading size={5} color={"red"} textAlign="center">
+              <a href={"https://" + PROD_DOMAIN}>
+                Vous êtes actuellement sur une version de test et développement
+                d'e-MJPM
+                <br />
+                cliquez ici pour revenir à l'adresse de production: &nbsp;
+                {"https://" + PROD_DOMAIN}
+              </a>
+            </Heading>
+          )}
+
           <HeadingTitle mt={"80px"} textAlign="center">
             Trouvez le bon professionnel pour les majeurs à protéger
           </HeadingTitle>
