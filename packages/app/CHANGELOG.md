@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.123.0](https://github.com/SocialGouv/emjpm/compare/v25.122.1...v25.123.0) (2021-06-21)
+
+
+### Bug Fixes
+
+* **csp:** dev branches ([b76a88e](https://github.com/SocialGouv/emjpm/commit/b76a88e5d2e412c58813de37934dab51c6af5c1f))
+* **csp:** matomo ([d5f4f06](https://github.com/SocialGouv/emjpm/commit/d5f4f06958850d5b887d71cd05ead0de216b5c5c))
+* **secu:** add csp headers ([be67bf8](https://github.com/SocialGouv/emjpm/commit/be67bf8f227980fed9d96595d0a651bc7ab307f7))
+
+
+### Features
+
+* **google:** verif ([b70ba77](https://github.com/SocialGouv/emjpm/commit/b70ba77c03cf97750ca6b91f7fc918e9369146be))
+* **mesures:** filter by departement ([d9ccb7c](https://github.com/SocialGouv/emjpm/commit/d9ccb7c4e012a110c26215b10daa0b77fba5fec8))
+* **test-version:** alert on login page ([23d4077](https://github.com/SocialGouv/emjpm/commit/23d40778413b55ceb522ac08104de540bf69e1cc))
+
+
+
+
+
 ## [25.122.1](https://github.com/SocialGouv/emjpm/compare/v25.122.0...v25.122.1) (2021-06-17)
 
 **Note:** Version bump only for package @emjpm/app

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.123.0](https://github.com/SocialGouv/emjpm/compare/v25.122.1...v25.123.0) (2021-06-21)
+
+
+### Bug Fixes
+
+* **forgot-password:** return typo ([c383e7a](https://github.com/SocialGouv/emjpm/commit/c383e7af89047bec3620be9afc30b11d7b7a7cf0))
+
+
+
+
+
 ## [25.122.1](https://github.com/SocialGouv/emjpm/compare/v25.122.0...v25.122.1) (2021-06-17)
 
 
