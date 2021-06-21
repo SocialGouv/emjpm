@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.123.2](https://github.com/SocialGouv/emjpm/compare/v25.123.1...v25.123.2) (2021-06-21)
+
+
+### Bug Fixes
+
+* **mesures-count:** use triggers approach ([b1b04cd](https://github.com/SocialGouv/emjpm/commit/b1b04cd176cbc014ce057ee6264ddc42a503ee20))
+
+
+
+
+
 ## [25.123.1](https://github.com/SocialGouv/emjpm/compare/v25.123.0...v25.123.1) (2021-06-21)
 
 
