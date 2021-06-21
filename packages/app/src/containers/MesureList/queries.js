@@ -28,7 +28,7 @@ export const MESURES_QUERY = gql`
     awaiting_mesures: mesures(
       where: {
         status: { _eq: en_attente }
-        departement: { id: { _eq: $departement } }
+        departement_code: { _eq: $departement }
       }
     ) {
       annee_naissance
