@@ -9,7 +9,7 @@ import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 import { MesureReactivateForm } from "./MesureReactivateForm";
-import { CALCULATE_MESURES, REACTIVATE_MESURE } from "./mutations";
+import { REACTIVATE_MESURE } from "./mutations";
 import { MesureReactivateStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -19,29 +19,15 @@ function MesureReactivate() {
   const { type, service = {}, mandataire } = useUser();
   const userBasePath = getUserBasePath({ type });
 
-  const [recalculateMesures, { loading: loading2, error: error2 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading2, error2);
-
   const redirectToMesure = (mesureId) =>
     history.push(`${userBasePath}/mesures/${mesureId}`);
 
-  const [updateMesure, { loading: loading1, error: error1 }] = useMutation(
-    REACTIVATE_MESURE,
-    {
-      onCompleted: async () => {
-        await recalculateMesures({
-          refetchQueries: ["CURRENT_USER_QUERY"],
-          variables: {
-            mandataireId: mandataire ? mandataire.id : null,
-            serviceId: service ? service.id : null,
-          },
-        });
-        redirectToMesure(mesure.id);
-      },
-    }
-  );
-  useQueryReady(loading1, error1);
+  const [updateMesure, { loading, error }] = useMutation(REACTIVATE_MESURE, {
+    onCompleted: () => {
+      redirectToMesure(mesure.id);
+    },
+  });
+  useQueryReady(loading, error);
 
   const handleSubmit = async () => {
     await updateMesure({
@@ -54,6 +40,7 @@ function MesureReactivate() {
           },
         },
         "MESURES_QUERY",
+        "CURRENT_USER_QUERY",
       ],
       variables: {
         id: mesure.id,

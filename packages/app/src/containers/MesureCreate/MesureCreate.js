@@ -11,7 +11,7 @@ import { formatTribunauxOptions } from "~/formatters/tribunaux";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { MesureCreateForm } from "./MesureCreateForm";
-import { ADD_MESURE, CALCULATE_MESURES } from "./mutations";
+import { ADD_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export function MesureCreate() {
@@ -36,25 +36,14 @@ export function MesureCreate() {
     [data]
   );
 
-  const [recalculateMesures, { loading: loading2, error: error2 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading2, error2);
-
   const redirectToMesure = (mesureId) =>
     history.push(`${userBasePath}/mesures/${mesureId}`);
 
   const [addMesure, { loading: loading1, error: error1 }] = useMutation(
     ADD_MESURE,
     {
-      onCompleted: async ({ add_or_update }) => {
+      onCompleted: ({ add_or_update }) => {
         const mesure = add_or_update.returning[0];
-        await recalculateMesures({
-          refetchQueries: ["CURRENT_USER_QUERY"],
-          variables: {
-            mandataireId: mandataire ? mandataire.id : null,
-            serviceId: service ? service.id : null,
-          },
-        });
         redirectToMesure(mesure.id);
       },
     }
@@ -91,7 +80,7 @@ export function MesureCreate() {
 
     addMesure({
       awaitRefetchQueries: true,
-      refetchQueries: ["MESURES_QUERY"],
+      refetchQueries: ["MESURES_QUERY", "CURRENT_USER_QUERY"],
       variables: {
         ...variables,
         annee_naissance: values.annee_naissance.toString(),

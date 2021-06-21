@@ -1,14 +1,5 @@
 import gql from "graphql-tag";
 
-export const CALCULATE_MESURES = gql`
-  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
-    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
-      en_cours
-      en_attente
-    }
-  }
-`;
-
 export const ADD_MESURE = gql`
   mutation addMesure(
     $date_nomination: date!
@@ -76,9 +67,11 @@ export const ADD_MESURE = gql`
         id
       }
     }
-    calculate_mesures_delayed(
+    reset_mesures_calculations(
       mandataireId: $mandataireId
       serviceId: $serviceId
-    )
+    ) {
+      state
+    }
   }
 `;

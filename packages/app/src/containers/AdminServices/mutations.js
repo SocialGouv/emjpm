@@ -9,18 +9,11 @@ export const DELETE_MESURES = gql`
     delete_mesures(where: { id: { _in: $ids } }) {
       affected_rows
     }
-    calculate_mesures_delayed(
+    reset_mesures_calculations(
       mandataireId: $mandataireId
       serviceId: $serviceId
-    )
-  }
-`;
-
-export const CALCULATE_MESURES = gql`
-  mutation calculateMesures($mandataireId: Int, $serviceId: Int) {
-    calculate_mesures(mandataireId: $mandataireId, serviceId: $serviceId) {
-      en_cours
-      en_attente
+    ) {
+      state
     }
   }
 `;

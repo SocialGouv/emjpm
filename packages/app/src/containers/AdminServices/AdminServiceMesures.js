@@ -8,7 +8,6 @@ import { useParams } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { DynamicTable, DynamicTableHeader } from "~/containers/DynamicTable";
-import ErrorBox from "~/containers/ErrorBox";
 import {
   MESURE_STATUS_LABEL_VALUE_ATTENTE,
   MESURE_STATUS_LABEL_VALUE_EN_COURS,
@@ -16,7 +15,7 @@ import {
 } from "~/constants/mesures";
 import { Heading, Select } from "~/components";
 
-import { CALCULATE_MESURES, DELETE_MESURES } from "./mutations";
+import { DELETE_MESURES } from "./mutations";
 import { MESURES } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -43,33 +42,19 @@ function AdminServiceMesures() {
     },
   });
 
-  const [
-    recalculateServiceMesures,
-    { loading: recalculateServiceMesuresLoading, error: error1 },
-  ] = useMutation(CALCULATE_MESURES, {
-    refetchQueries: [
-      {
-        query: MESURES,
-        variables: {
-          serviceId,
-        },
-      },
-    ],
-  });
-
-  const [deleteMesures, { loading: mutationLoading, error: error2 }] =
+  const [deleteMesures, { loading: mutationLoading, error: error1 }] =
     useMutation(DELETE_MESURES, {
-      onCompleted: async () => {
-        await recalculateServiceMesures({
+      refetchQueries: [
+        {
+          query: MESURES,
           variables: {
             serviceId,
           },
-        });
-      },
+        },
+      ],
     });
 
-  useQueryReady(recalculateServiceMesuresLoading, error1);
-  useQueryReady(mutationLoading, error2);
+  useQueryReady(mutationLoading, error1);
 
   const allMesures = useMemo(() => (data ? data.mesures : []), [data]);
 
@@ -95,29 +80,8 @@ function AdminServiceMesures() {
   const { nodes: antennes } = service_antenne_aggregate;
 
   const [service] = services;
-  const mustBeRecalculated =
-    service &&
-    (awaitingMesuresCount !== service.mesures_awaiting ||
-      inProgressMesuresCount !== service.mesures_in_progress);
-
   return (
     <Box p={2}>
-      {mustBeRecalculated && (
-        <ErrorBox
-          title="Oups, le nombre de mesures ne semble pas être à jour."
-          message={`Mesures en cours: ${inProgressMesuresCount} • Mesures en attente: ${awaitingMesuresCount}`}
-          buttonText="Recalculer"
-          isLoading={recalculateServiceMesuresLoading}
-          onClick={async () => {
-            await recalculateServiceMesures({
-              variables: {
-                serviceId,
-              },
-            });
-          }}
-        />
-      )}
-
       <DynamicTableHeader
         onClick={() =>
           deleteMesures({

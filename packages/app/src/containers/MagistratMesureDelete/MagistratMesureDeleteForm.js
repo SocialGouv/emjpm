@@ -4,11 +4,10 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/containers/MagistratMesureMandataire/queries";
-import useUser from "~/hooks/useUser";
 import { magistratMesureDeleteSchema } from "~/validation-schemas";
 import { Button, Heading, InlineError, Input } from "~/components";
 
-import { CALCULATE_MESURES, DELETE_MESURE } from "./mutations";
+import { DELETE_MESURE } from "./mutations";
 import { MagistratMesureRemoveStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -18,39 +17,12 @@ export function MagistratMesureDeleteForm(props) {
 
   const history = useHistory();
 
-  const {
-    magistrat: { ti_id: tiId },
-  } = useUser();
-
-  const [recalculateMesures, { loading: loading1, error: error1 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading1, error1);
-
-  const [deleteMesure, { loading: loading2, error: error2 }] = useMutation(
-    DELETE_MESURE,
-    {
-      onCompleted: async () => {
-        await recalculateMesures({
-          refetchQueries: [
-            {
-              query: GESTIONNAIRES,
-              variables: {
-                mandataire_id: mandataireId,
-                service_id: serviceId,
-              },
-            },
-          ],
-          variables: {
-            mandataireId,
-            serviceId,
-          },
-        });
-
-        history.push("/magistrats/mesures");
-      },
-    }
-  );
-  useQueryReady(loading2, error2);
+  const [deleteMesure, { loading, error }] = useMutation(DELETE_MESURE, {
+    onCompleted: async () => {
+      history.push("/magistrats/mesures");
+    },
+  });
+  useQueryReady(loading, error);
 
   const formik = useFormik({
     initialValues: {
@@ -59,7 +31,16 @@ export function MagistratMesureDeleteForm(props) {
     onSubmit: async (_, { setSubmitting }) => {
       await deleteMesure({
         awaitRefetchQueries: true,
-        refetchQueries: ["MAGISTRAT_MESURE_QUERY"],
+        refetchQueries: [
+          "MAGISTRAT_MESURE_QUERY",
+          {
+            query: GESTIONNAIRES,
+            variables: {
+              mandataire_id: mandataireId,
+              service_id: serviceId,
+            },
+          },
+        ],
         variables: {
           mesureId: mesure.id,
           mandataireId,

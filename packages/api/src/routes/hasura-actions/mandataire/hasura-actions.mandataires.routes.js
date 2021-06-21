@@ -3,6 +3,7 @@ const { Mesure, User } = require("~/models");
 
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 const { isMandataire } = require("@emjpm/biz");
+const resetGestionnaireMesuresCounters = require("~/services/resetGestionnaireMesuresCounters");
 const updateGestionnaireMesuresCounters = require("~/services/updateGestionnaireMesuresCounters");
 
 const router = express.Router();
@@ -32,29 +33,21 @@ router.post("/stats", async (req, res) => {
 });
 
 router.post(
-  "/calculate-mesures-delayed",
+  "/reset-mesures-calculations",
   async (req, res, next) => {
     await new Promise((resolve) => setTimeout(resolve, 4000));
 
     const { serviceId, mandataireId } = req.body.input;
 
-    let result;
-    if (serviceId) {
-      result = await updateGestionnaireMesuresCounters("services", serviceId);
-    }
-    if (mandataireId) {
-      result = await updateGestionnaireMesuresCounters(
-        "mandataires",
-        mandataireId
-      );
-    }
     try {
-      return res.status(200).json(result);
+      await resetGestionnaireMesuresCounters({ mandataireId, serviceId });
+      return res.status(200).json({ state: true });
     } catch (err) {
+      console.log(err);
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processing file")
+  hasuraActionErrorHandler("Erreur inattendu durant le comptage des mesures")
 );
 
 router.post(
@@ -77,7 +70,7 @@ router.post(
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Unexpected error processing file")
+  hasuraActionErrorHandler("Erreur inattendu durant le comptage des mesures")
 );
 
 module.exports = router;

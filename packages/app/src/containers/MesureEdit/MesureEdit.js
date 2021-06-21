@@ -11,7 +11,7 @@ import { getUserBasePath } from "~/constants";
 import { formatTribunauxOptions } from "~/formatters/tribunaux";
 
 import { MesureEditForm } from "./MesureEditForm";
-import { CALCULATE_MESURES, EDIT_MESURE } from "./mutations";
+import { EDIT_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
 
 export function MesureEdit() {
@@ -36,30 +36,19 @@ export function MesureEdit() {
     [data]
   );
 
-  const [recalculateMesures, { loading: loading1, error: error1 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading1, error1);
-
   const redirectToMesure = (mesureId) =>
     history.push(`${userBasePath}/mesures/${mesureId}`);
 
-  const [addOrUpdateMesure, { loading: loading2, error: error2 }] = useMutation(
+  const [addOrUpdateMesure, { loading: loading1, error: error1 }] = useMutation(
     EDIT_MESURE,
     {
-      onCompleted: async ({ add_or_update }) => {
+      onCompleted: ({ add_or_update }) => {
         const mesure = add_or_update.returning[0];
-        await recalculateMesures({
-          refetchQueries: ["CURRENT_USER_QUERY"],
-          variables: {
-            mandataireId: mandataire ? mandataire.id : null,
-            serviceId: service ? service.id : null,
-          },
-        });
         redirectToMesure(mesure.id);
       },
     }
   );
-  useQueryReady(loading2, error2);
+  useQueryReady(loading1, error1);
 
   if (!useQueryReady(loading, error)) {
     return null;
@@ -68,7 +57,7 @@ export function MesureEdit() {
   const handleSubmit = async (values, { setSubmitting }) => {
     addOrUpdateMesure({
       awaitRefetchQueries: true,
-      refetchQueries: ["MESURES_QUERY"],
+      refetchQueries: ["MESURES_QUERY", "CURRENT_USER_QUERY"],
       variables: {
         annee_naissance: values.annee_naissance.toString(),
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,

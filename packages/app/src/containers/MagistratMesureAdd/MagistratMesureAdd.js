@@ -10,11 +10,7 @@ import useUser from "~/hooks/useUser";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 
 import { MagistratMesureAddForm } from "./MagistratMesureAddForm";
-import {
-  CALCULATE_MESURES,
-  CHOOSE_MANDATAIRE,
-  SEND_EMAIL_RESERVATION,
-} from "./mutations";
+import { CHOOSE_MANDATAIRE, SEND_EMAIL_RESERVATION } from "./mutations";
 import { MagistratMandataireStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -34,41 +30,33 @@ function MagistratMesureAdd(props) {
     useMutation(SEND_EMAIL_RESERVATION);
   useQueryReady(loading1, error1);
 
-  const [recalculateMesures, { loading: loading2, error: error2 }] =
-    useMutation(CALCULATE_MESURES);
-  useQueryReady(loading2, error2);
-
   const [chooseMandataire, { loading: loading3, error: error3 }] = useMutation(
     CHOOSE_MANDATAIRE,
     {
+      refetchQueries: [
+        {
+          query: GESTIONNAIRES,
+          variables: {
+            mandataire_id: mandataireId,
+            service_id: serviceId,
+          },
+        },
+        {
+          query: MAGISTRAT_MESURES_QUERY,
+          variables: {
+            natureMesure: null,
+            offset: 0,
+            searchText: null,
+            tiId: tiId,
+          },
+        },
+      ],
+      variables: {
+        mandataireId,
+        serviceId,
+      },
       onCompleted: async ({ insert_mesures }) => {
         const [mesure] = insert_mesures.returning;
-
-        await recalculateMesures({
-          awaitRefetchQueries: true,
-          refetchQueries: [
-            {
-              query: GESTIONNAIRES,
-              variables: {
-                mandataire_id: mandataireId,
-                service_id: serviceId,
-              },
-            },
-            {
-              query: MAGISTRAT_MESURES_QUERY,
-              variables: {
-                natureMesure: null,
-                offset: 0,
-                searchText: null,
-                tiId: tiId,
-              },
-            },
-          ],
-          variables: {
-            mandataireId,
-            serviceId,
-          },
-        });
 
         await sendEmailReservation({
           variables: {
