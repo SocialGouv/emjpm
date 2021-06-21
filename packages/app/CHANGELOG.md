@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.123.1](https://github.com/SocialGouv/emjpm/compare/v25.123.0...v25.123.1) (2021-06-21)
+
+
+### Bug Fixes
+
+* **mesures:** en attentes ([45280e9](https://github.com/SocialGouv/emjpm/commit/45280e9e5b19aec924231140c92b0561132e3b62))
+* **sitelink:** se connecter redirect to prod ([bafa647](https://github.com/SocialGouv/emjpm/commit/bafa64784201044ebc2c4f220de780d4f28812bc))
+
+
+
+
+
 # [25.123.0](https://github.com/SocialGouv/emjpm/compare/v25.122.1...v25.123.0) (2021-06-21)
 
 
