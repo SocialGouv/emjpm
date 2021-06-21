@@ -9,6 +9,9 @@ import { BoxWrapper, FlexWrapper } from "~/components/Grid";
 import useSearchParams from "~/hooks/useSearchParams";
 import { useAuth } from "~/user/Auth";
 
+import config from "~/config";
+import { useEffect } from "react";
+
 export default function AuthorizationPage() {
   const {
     authStore: { token },
@@ -18,6 +21,12 @@ export default function AuthorizationPage() {
     redirect_uri: redirectUrl,
     state = Math.random().toString(36).slice(2),
   } = useSearchParams();
+
+  useEffect(() => {
+    if (!editorId) {
+      window.location.href = "https://" + config.PROD_DOMAIN;
+    }
+  }, [editorId]);
 
   return (
     <LayoutPublic>
