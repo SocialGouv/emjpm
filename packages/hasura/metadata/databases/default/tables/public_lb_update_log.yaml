@@ -1,0 +1,3 @@
+table:
+  name: lb_update_log
+  schema: public

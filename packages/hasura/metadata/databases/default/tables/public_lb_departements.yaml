@@ -93,3 +93,25 @@ delete_permissions:
 - permission:
     filter: {}
   role: direction
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - lb_user_id
+      - departement_financeur
+      - departement_code
+      - created_at
+  headers:
+  - name: hasura_web_hook_secret
+    value_from_env: HASURA_WEB_HOOK_SECRET
+  name: lb_update_lb_user_departement
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/lb-update/lb-user"

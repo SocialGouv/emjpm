@@ -23,6 +23,7 @@ module.exports.EnqueteReponsesServicePersonnelFormation = require("./EnqueteRepo
 module.exports.Etablissements = require("./Etablissements");
 module.exports.GeolocalisationCodePostal = require("./GeolocalisationCodePostal");
 module.exports.Logs = require("./Logs");
+module.exports.LbUpdateLog = require("./LbUpdateLog");
 module.exports.LbUser = require("./LbUser");
 module.exports.Magistrat = require("./Magistrat");
 module.exports.Mandataire = require("./Mandataire");
