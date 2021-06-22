@@ -27,6 +27,7 @@
 - "!include public_enquetes.yaml"
 - "!include public_etablissements.yaml"
 - "!include public_geolocalisation_code_postal.yaml"
+- "!include public_impersonate_log.yaml"
 - "!include public_info_finance_annee.yaml"
 - "!include public_info_finance_type.yaml"
 - "!include public_lb_departements.yaml"

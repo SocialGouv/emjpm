@@ -10,7 +10,7 @@ const authImpersonateJwtStrategy = new JWTStrategy(
     secretOrKey: jwtConfig.publicKey,
   },
   function (jwtPayload, cb) {
-    return cb(null, jwtPayload.role === "admin");
+    return cb(null, jwtPayload.role === "admin", jwtPayload);
   }
 );
 

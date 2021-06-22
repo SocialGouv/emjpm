@@ -1,0 +1,3 @@
+table:
+  name: impersonate_log
+  schema: public
