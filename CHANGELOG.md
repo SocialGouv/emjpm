@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.123.4](https://github.com/SocialGouv/emjpm/compare/v25.123.3...v25.123.4) (2021-06-22)
+
+
+### Bug Fixes
+
+* **mesures-count:** nullable columns ([9e794e3](https://github.com/SocialGouv/emjpm/commit/9e794e32010d2377e34b4be8237ea96052d82516))
+
+
+
+
+
 ## [25.123.3](https://github.com/SocialGouv/emjpm/compare/v25.123.2...v25.123.3) (2021-06-22)
 
 
