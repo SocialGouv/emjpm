@@ -28,6 +28,13 @@ router.post("/reset-password", async (req, res) => {
     });
   }
 
+  if (user.type === "admin") {
+    return res.status(403).json({
+      error: "Forbidden",
+      message: "reset admin password not allowed",
+    });
+  }
+
   const password = generator.generate({
     length: 10,
     lowercase: true,

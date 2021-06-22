@@ -37,10 +37,12 @@ function AdminUser() {
 
   return (
     <Box>
-      <Box my={1} width="100%">
-        <AdminUserActivation userId={userId} />
-        <AdminUserResetPassword userId={userId} />
-      </Box>
+      {type !== "admin" && (
+        <Box my={1} width="100%">
+          <AdminUserActivation userId={userId} />
+          <AdminUserResetPassword userId={userId} />
+        </Box>
+      )}
       {isMandataire({ type }) && (
         <>
           <Box my={1} width="100%">

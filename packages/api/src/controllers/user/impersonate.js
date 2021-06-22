@@ -38,6 +38,10 @@ const impersonate = async (req, res, next) => {
       }
       const userResult = await user.getUser();
 
+      if (user.type === "admin") {
+        return res.status(403).json({ error: "Forbidden" });
+      }
+
       await ImpersonateLog.query().insert({
         admin_user_id: jwtPayload.id,
         user_id: user.id,

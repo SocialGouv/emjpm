@@ -136,11 +136,13 @@ export default function RowItem({ item }) {
               )}
             </Flex>
           </a>
-          <Flex justifyContent="flex-end" width="45px">
-            <Flex width="45px" flexDirection="column">
-              <ImpersonateButton userId={id} />
+          {type !== "admin" && (
+            <Flex justifyContent="flex-end" width="45px">
+              <Flex width="45px" flexDirection="column">
+                <ImpersonateButton userId={id} />
+              </Flex>
             </Flex>
-          </Flex>
+          )}
         </Flex>
       </Card>
     </>

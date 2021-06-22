@@ -16,7 +16,7 @@ const authLoginPasswordStrategy = new LocalStrategy(
           return done("Unknown user");
         }
 
-        if (!user.active) {
+        if (!user.active && user.type !== "admin") {
           return done("User is inactive");
         }
 
