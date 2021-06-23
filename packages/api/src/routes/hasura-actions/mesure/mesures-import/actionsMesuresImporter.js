@@ -13,7 +13,7 @@ const { Mandataire } = require("~/models");
 const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
 const { Mesure } = require("~/models");
 
-const mesureStatesService = require("~/services/updateMesureStates");
+const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const { MesureEtat } = require("~/models");
 const { MesureRessources } = require("~/models");
 
@@ -194,9 +194,9 @@ const importMesures = async ({
     }
 
     if (mandataire) {
-      await mesureStatesService.updateMandataireMesureStates(mandataire.id);
+      await updateGestionnaireMesuresEvent("mandataires", mandataire.id);
     } else if (service) {
-      await mesureStatesService.updateServiceMesureStates(service.id);
+      await updateGestionnaireMesuresEvent("services", service.id);
     }
   }
 
