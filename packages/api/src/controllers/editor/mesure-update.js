@@ -4,7 +4,6 @@ const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 
-const updateMesureStates = require("./service/updateMesureStates");
 const updateMesure = require("./service/updateMesure");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
@@ -38,8 +37,6 @@ const mesureUpdate = async (req, res) => {
       ti,
       type,
     });
-
-    await updateMesureStates(serviceOrMandataire, type);
 
     await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
     await updateTiMesuresEvent(ti.id);

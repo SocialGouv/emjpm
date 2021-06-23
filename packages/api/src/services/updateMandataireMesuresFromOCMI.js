@@ -2,9 +2,6 @@ const { Mesure } = require("~/models");
 const { OcmiMandataire } = require("~/models");
 const { LbUser } = require("~/models");
 const { Mandataire } = require("~/models");
-const {
-  updateMandataireMesureStates,
-} = require("~/services/updateMesureStates");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
@@ -85,7 +82,6 @@ module.exports = async function updateMandataireMesuresFromOCMI({
         await updateTiMesuresEvent(tiId, trx);
       }
 
-      await updateMandataireMesureStates(mandataireId, trx);
       await trx.commit();
     } catch (e) {
       console.error(e);

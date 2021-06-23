@@ -7,7 +7,6 @@ const { MesureRessources } = require("~/models");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
-const updateMesureStates = require("./service/updateMesureStates");
 
 const deleteById = async (req, res) => {
   const {
@@ -33,8 +32,6 @@ const deleteById = async (req, res) => {
       return affectedRows;
     }
   );
-
-  await updateMesureStates(serviceOrMandataire, type);
 
   await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 
@@ -78,8 +75,6 @@ const deleteAll = async (req, res) => {
         return affectedRows;
       }
     );
-
-    await updateMesureStates(serviceOrMandataire, type);
 
     await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
 

@@ -8,7 +8,6 @@ const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMes
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 
 const { saveMesures } = require("./service/saveMesure");
-const updateMesureStates = require("./service/updateMesureStates");
 const fetchTribunaux = require("./service/fetchTribunaux");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
@@ -70,7 +69,6 @@ const mesureBatch = async (req, res) => {
     await knex.transaction(async function (trx) {
       try {
         mesuresQueryResult = await saveMesures(allMesureDatas, trx);
-        await updateMesureStates(serviceOrMandataire, type, trx);
         await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
 
         const tiIds = allMesureDatas.reduce((s, { ti }) => {
