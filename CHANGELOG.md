@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.124.0](https://github.com/SocialGouv/emjpm/compare/v25.123.4...v25.124.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* **csp:** geo and siret services ([3b24b1e](https://github.com/SocialGouv/emjpm/commit/3b24b1ee9eaab45723194cf2044b8d5ab480013d))
+
+
+### Features
+
+* **cron:** clean logs ([a0a0dc5](https://github.com/SocialGouv/emjpm/commit/a0a0dc5336ffec60844d633ff61a3796d6af21d9))
+* **secu:** admin compartimentation ([b6c3d67](https://github.com/SocialGouv/emjpm/commit/b6c3d67845d71fba48e459b6b85b80b4fdd7dcf0))
+* **secu:** logs impersonate ([efb6211](https://github.com/SocialGouv/emjpm/commit/efb621198849e539ed7aa6d18bbd6a4784f9d564))
+* **secu:** logs of lb modifications ([a694a2b](https://github.com/SocialGouv/emjpm/commit/a694a2b9c52ab3f3db55d4f56e8389dbc89a5f71))
+
+
+
+
+
 ## [25.123.4](https://github.com/SocialGouv/emjpm/compare/v25.123.3...v25.123.4) (2021-06-22)
 
 

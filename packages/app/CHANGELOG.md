@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.124.0](https://github.com/SocialGouv/emjpm/compare/v25.123.4...v25.124.0) (2021-06-23)
+
+
+### Bug Fixes
+
+* **csp:** geo and siret services ([3b24b1e](https://github.com/SocialGouv/emjpm/commit/3b24b1ee9eaab45723194cf2044b8d5ab480013d))
+
+
+### Features
+
+* **secu:** admin compartimentation ([b6c3d67](https://github.com/SocialGouv/emjpm/commit/b6c3d67845d71fba48e459b6b85b80b4fdd7dcf0))
+
+
+
+
+
 ## [25.123.4](https://github.com/SocialGouv/emjpm/compare/v25.123.3...v25.123.4) (2021-06-22)
 
 **Note:** Version bump only for package @emjpm/app
