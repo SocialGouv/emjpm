@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.124.1](https://github.com/SocialGouv/emjpm/compare/v25.124.0...v25.124.1) (2021-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency prettier to ^2.3.2 ([#2558](https://github.com/SocialGouv/emjpm/issues/2558)) ([6b0c077](https://github.com/SocialGouv/emjpm/commit/6b0c0778fcdb6371a1e53974dac41f9dc40cde59))
+
+
+
+
+
 # [25.124.0](https://github.com/SocialGouv/emjpm/compare/v25.123.4...v25.124.0) (2021-06-23)
 
 
