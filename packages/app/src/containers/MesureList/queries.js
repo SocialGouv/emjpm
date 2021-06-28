@@ -17,7 +17,7 @@ export const MESURES_QUERY = gql`
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
-        departement: { id: { _eq: $departement } }
+        departement_code: { _eq: $departement }
       }
     ) {
       aggregate {
@@ -78,7 +78,7 @@ export const MESURES_QUERY = gql`
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
         antenne_id: { _eq: $antenne }
-        departement: { id: { _eq: $departement } }
+        departement_code: { _eq: $departement }
       }
     ) {
       annee_naissance
