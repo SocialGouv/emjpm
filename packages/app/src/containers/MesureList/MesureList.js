@@ -75,6 +75,7 @@ function MesureList() {
 
   const { data, error, loading } = useQuery(MESURES_QUERY, {
     variables: queryVariables,
+    fetchPolicy: "network-only",
   });
 
   const getHref = ({ mesure: { id } }) => `${userBasePath}/mesures/${id}`;
