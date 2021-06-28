@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.124.2](https://github.com/SocialGouv/emjpm/compare/v25.124.1...v25.124.2) (2021-06-28)
+
+
+### Bug Fixes
+
+* **cache-issue:** using network-only on mesures ls ([4e65974](https://github.com/SocialGouv/emjpm/commit/4e6597410cbb85203ae9531d556a293a5ddfd60f))
+* **clean:** remove optionnel label (implicit) ([aaa4a45](https://github.com/SocialGouv/emjpm/commit/aaa4a45d1632943cf90a169b559094425f21a3c3))
+* **clean:** use name of query for cache refetch ([7990838](https://github.com/SocialGouv/emjpm/commit/7990838de4f6cc016f2310cbbc2a2f812268893c))
+
+
+
+
+
 ## [25.124.1](https://github.com/SocialGouv/emjpm/compare/v25.124.0...v25.124.1) (2021-06-28)
 
 
