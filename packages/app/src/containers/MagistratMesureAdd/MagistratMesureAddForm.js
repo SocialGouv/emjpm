@@ -52,7 +52,7 @@ export function MagistratMesureAddForm(props) {
           />
           <FormGroupInput
             id="cabinet"
-            placeholder="Cabinet du tribunal (optionnel)"
+            placeholder="Cabinet du tribunal"
             formik={formik}
             size="small"
             validationSchema={magistratMandataireSchema}
@@ -60,7 +60,7 @@ export function MagistratMesureAddForm(props) {
           <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
-            label="Date prévisionnelle du jugement (optionnel)"
+            label="Date prévisionnelle du jugement"
             placeholder="jj/mm/aaaa"
             formik={formik}
             validationSchema={magistratMandataireSchema}

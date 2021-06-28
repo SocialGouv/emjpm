@@ -82,7 +82,7 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
           />
           <FormGroupInput
-            placeholder="Cabinet (optionnel)"
+            placeholder="Cabinet"
             id="cabinet"
             formik={formik}
             validationSchema={magistratEditSchema}

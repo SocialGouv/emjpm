@@ -78,7 +78,7 @@ function SignupMagistratForm({ tiDatas }) {
 
             <FormGroupInput
               id="cabinet"
-              placeholder="Cabinet (optionnel)"
+              placeholder="Cabinet"
               formik={formik}
             />
           </FormInputBox>

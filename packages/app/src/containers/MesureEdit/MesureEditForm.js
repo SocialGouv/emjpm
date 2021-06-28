@@ -61,7 +61,7 @@ export function MesureEditForm(props) {
             </Box>
             <Box pl="1px">
               <FormGroupInput
-                placeholder="Numéro de dossier (optionnel)"
+                placeholder="Numéro de dossier"
                 id="numero_dossier"
                 formik={formik}
                 size="small"
@@ -86,7 +86,7 @@ export function MesureEditForm(props) {
             validationSchema={mesureEditSchema}
           />
           <FormGroupInputDate
-            label="Date de première mise sous protection (optionnel)"
+            label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
             id="date_premier_mesure"
             formik={formik}
@@ -112,7 +112,7 @@ export function MesureEditForm(props) {
             </Box>
             <Box pl="1px">
               <FormGroupInput
-                placeholder="Cabinet (optionnel)"
+                placeholder="Cabinet"
                 id="cabinet"
                 formik={formik}
                 size="small"
