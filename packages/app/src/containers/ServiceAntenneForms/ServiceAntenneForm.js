@@ -10,6 +10,7 @@ import {
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
+import { useHistory } from "react-router-dom";
 
 function ServiceAntenneForm(props) {
   const { antenne = {}, handleSubmit } = props;
@@ -36,6 +37,8 @@ function ServiceAntenneForm(props) {
     onSubmit: handleSubmit,
     validationSchema: serviceAntenneSchema,
   });
+
+  const history = useHistory();
 
   return (
     <form onSubmit={formik.handleSubmit}>
