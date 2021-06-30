@@ -54,7 +54,7 @@
     "mdx.macro": "^0.2.9",
     "p-debounce": "^2.1.0",
     "prettier": "^2.3.2",
-    "query-string": "^6.14.1",
+    "query-string": "^7.0.1",
     "react": "^17.0.2",
     "react-datepicker": "^3.8.0",
     "react-document-title": "^2.0.3",
