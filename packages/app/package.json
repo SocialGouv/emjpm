@@ -32,7 +32,7 @@
     "detect-browser": "^5.2.0",
     "dotenv": "^8.6.0",
     "emotion-normalize": "^11.0.1",
-    "eslint-config-prettier": "^7.2.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-autoimport-declarative": "^1.0.1",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
