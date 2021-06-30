@@ -16,8 +16,16 @@ function label(value) {
 function MandataireInformations() {
   const user = useUser();
   const { email, nom, prenom, mandataire } = user;
-  const { mandataire_tis } = mandataire;
-  const { lb_user } = mandataire;
+  const { mandataire_tis, lb_user } = mandataire;
+  const { lb_departements } = lb_user;
+
+  const dispo_departements = lb_departements.map(({ departement_code }) => ({
+    departement_code,
+    dispo:
+      mandataire.dispo_departements.find(
+        (row) => row.departement_code === departement_code
+      )?.dispo || "non défini",
+  }));
 
   return (
     <Box>
@@ -69,8 +77,15 @@ function MandataireInformations() {
             Votre activité
           </Heading>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
+            <Text sx={subtitle}>{"Nombre de mesures souhaitées"}</Text>
             <Text sx={content}>{label(mandataire.dispo_max)}</Text>
+          </Flex>
+          <Flex my={1}>
+            {dispo_departements.map(({ departement_code, dispo }) => (
+              <Box key={departement_code}>
+                {`Nombre de mesures souhaitées dans le département ${departement_code}: ${dispo}`}
+              </Box>
+            ))}
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>

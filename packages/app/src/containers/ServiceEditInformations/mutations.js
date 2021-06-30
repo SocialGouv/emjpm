@@ -15,7 +15,26 @@ export const EDIT_SERVICE = gql`
     $latitude: Float
     $longitude: Float
     $service_tis: [service_tis_insert_input!]!
+    $dispo_departements: [dispo_departements_insert_input!]!
+    $departement_codes: [String!]!
   ) {
+    delete_dispo_departements(
+      where: { departement_code: { _nin: $departement_codes } }
+    ) {
+      affected_rows
+    }
+    insert_dispo_departements(
+      objects: $dispo_departements
+      on_conflict: {
+        constraint: dispo_departements_service_id_departement_code_key
+        update_columns: [dispo]
+      }
+    ) {
+      affected_rows
+      returning {
+        id
+      }
+    }
     delete_service_tis(where: { service_id: { _eq: $service_id } }) {
       affected_rows
     }
