@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { CheckShield } from "@styled-icons/boxicons-solid/CheckShield";
@@ -9,6 +10,9 @@ import { Card, Input, Select, Button } from "~/components";
 import SelectAdresse from "./SelectAdresse";
 
 import { styleFilterButton } from "./style";
+
+import { createDepartementOptions, departementList } from "~/utils/geodata";
+import { findOption } from "~/utils/form";
 
 const extraIconsSize = 22;
 
@@ -56,7 +60,13 @@ function MagistratMandatairesListFilters(props) {
     onChangeAvailable,
     localisation,
     onChangeLocalisation,
+    departement,
+    onChangeDepartement,
   } = props;
+
+  const departementOptions = useMemo(() =>
+    createDepartementOptions(departementList)
+  );
 
   return (
     <Card mb="2" mt="1">
@@ -70,6 +80,17 @@ function MagistratMandatairesListFilters(props) {
               onChange={onChangeType}
               value={selectedType}
               options={optionsType}
+            />
+          </Box>
+          <Box width="200px" mr="2">
+            <Select
+              instanceId={"direction-departement-filter"}
+              size="small"
+              options={departementOptions}
+              label={"Départements"}
+              placeholder={"Départements"}
+              value={findOption(departementOptions, departement || null)}
+              onChange={(option) => onChangeDepartement(option.value)}
             />
           </Box>
           <Box width="200px" mr={2}>
