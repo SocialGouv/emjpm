@@ -64,8 +64,9 @@ function MagistratMandatairesListFilters(props) {
     onChangeDepartement,
   } = props;
 
-  const departementOptions = useMemo(() =>
-    createDepartementOptions(departementList)
+  const departementOptions = useMemo(
+    () => createDepartementOptions(departementList),
+    []
   );
 
   return (
