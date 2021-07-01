@@ -69,6 +69,21 @@ export default function MandataireListItem(props) {
   const mesuresInProgress = mesures_in_progress;
   const mesuresAwaiting = mesures_awaiting;
   const mesuresLastUpdate = mesures_last_update;
+
+  const { departementFilter } = props;
+  const dispoInSelectedDepartement = isService
+    ? service.dispo_departements?.find(
+        ({ departement_code }) => departement_code === departementFilter
+      )?.dispo
+    : mandataire.dispo_departements?.find(
+        ({ departement_code }) => departement_code === departementFilter
+      )?.dispo;
+  const dispoInSelectedDepartementLabel =
+    dispoInSelectedDepartement === null ||
+    dispoInSelectedDepartement === undefined
+      ? "ND"
+      : dispoInSelectedDepartement;
+
   return (
     <>
       <Card sx={cardStyle} width="100%">
@@ -114,8 +129,20 @@ export default function MandataireListItem(props) {
               <Text sx={labelStyle}>En attente</Text>
               <Text sx={descriptionStyle}>{mesuresAwaiting}</Text>
             </Flex>
-            <Flex width="70px" sx={columnStyle(false, false)}>
-              <Text sx={labelStyle}>Disponibilité</Text>
+            {departementFilter && (
+              <Flex width="60px" sx={columnStyle(false, false)}>
+                <Text sx={labelStyle}>Dispo ({`${departementFilter}`})</Text>
+                <Text
+                  sx={dispoDescriptionStyle(dispoInSelectedDepartement > 0)}
+                >
+                  {dispoInSelectedDepartementLabel}
+                </Text>
+              </Flex>
+            )}
+            <Flex width="75px" sx={columnStyle(false, false)}>
+              <Text sx={labelStyle}>
+                {departementFilter ? "Dispo-globale" : "Disponibilité"}
+              </Text>
               <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
                 {currentAvailability}
               </Text>

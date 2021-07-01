@@ -43,6 +43,7 @@ function MagistratMandatairesListList(props) {
     habilitation,
     available,
     localisation,
+    departement,
   } = props;
   const history = useHistory();
   const { magistrat } = useUser();
@@ -79,6 +80,7 @@ function MagistratMandatairesListList(props) {
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
       tribunal: magistrat.ti_id,
       departementCode: magistrat.ti.departement_code,
+      departementFilter: departement,
     });
   }
 
@@ -116,7 +118,7 @@ function MagistratMandatairesListList(props) {
             onClick={onItemClick}
             draggable="false"
           >
-            <MandataireListItem item={item} />
+            <MandataireListItem item={item} departementFilter={departement} />
           </a>
         );
       })}

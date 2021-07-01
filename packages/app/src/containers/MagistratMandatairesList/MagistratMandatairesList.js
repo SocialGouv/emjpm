@@ -110,6 +110,7 @@ function MagistratMandatairesList() {
           habilitation,
           available,
           localisation,
+          departement,
         }}
       />
     </Box>
