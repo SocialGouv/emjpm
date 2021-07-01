@@ -108,5 +108,7 @@ export default function formatMandataire(
   return {
     ...common,
     ...currentDiscriminator,
+    mandataire,
+    service,
   };
 }

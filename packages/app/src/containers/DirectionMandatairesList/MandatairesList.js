@@ -90,6 +90,7 @@ function MandatairesList(props) {
           <MandataireListItem
             key={gestionnaire.id}
             gestionnaire={gestionnaire}
+            departementFilter={filters.departement}
           />
         );
       })}
