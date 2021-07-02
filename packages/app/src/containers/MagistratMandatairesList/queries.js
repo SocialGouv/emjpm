@@ -177,7 +177,9 @@ export const GET_MANDATAIRES = gql`
             comment
             ti_id
           }
-          dispo_departements {
+          dispo_departements(
+            where: { departement_code: { _eq: $departementFilter } }
+          ) {
             departement_code
             dispo
           }
@@ -208,7 +210,9 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
-          dispo_departements {
+          dispo_departements(
+            where: { departement_code: { _eq: $departementFilter } }
+          ) {
             departement_code
             dispo
           }

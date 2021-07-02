@@ -15,10 +15,33 @@ const RESULT_PER_PAGE = 20;
 const distanceMaxKM = 300;
 // const distanceMaxKM = null;
 
-function getOrderByVariable(orderBy) {
+function getOrderByVariable(orderBy, departementFilterEnabled) {
   switch (orderBy) {
-    case 0:
-      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+    case 0: // disponibilité
+      if (departementFilterEnabled) {
+        return [
+          {
+            gestionnaire: {
+              service: {
+                dispo_departements_aggregate: {
+                  sum: { dispo: "desc_nulls_last" },
+                },
+              },
+            },
+          },
+          {
+            gestionnaire: {
+              mandataire: {
+                dispo_departements_aggregate: {
+                  sum: { dispo: "desc_nulls_last" },
+                },
+              },
+            },
+          },
+        ];
+      } else {
+        return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+      }
     case 1:
       return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
     case 2:
@@ -76,7 +99,7 @@ function MagistratMandatairesListList(props) {
   } else {
     query = GET_MANDATAIRES;
     Object.assign(variables, {
-      orderBy: getOrderByVariable(orderBy),
+      orderBy: getOrderByVariable(orderBy, !!departement),
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
       tribunal: magistrat.ti_id,
       departementCode: magistrat.ti.departement_code,
