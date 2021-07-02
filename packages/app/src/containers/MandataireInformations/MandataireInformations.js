@@ -8,6 +8,7 @@ import useUser from "~/hooks/useUser";
 import { Button, Heading } from "~/components";
 
 import { content, subtitle } from "./style";
+import React from "react";
 
 function label(value) {
   return value ? value : "";
@@ -81,11 +82,16 @@ function MandataireInformations() {
             <Text sx={content}>{label(mandataire.dispo_max)}</Text>
           </Flex>
           <Flex my={1}>
-            {dispo_departements.map(({ departement_code, dispo }) => (
-              <Box key={departement_code}>
-                {`Nombre de mesures souhaitées dans le département ${departement_code}: ${dispo}`}
-              </Box>
-            ))}
+            <Box flex={1}>
+              {dispo_departements.map(({ departement_code, dispo }) => (
+                <Flex key={departement_code} my={1}>
+                  <Text
+                    sx={subtitle}
+                  >{`Disponibilité dans le département ${departement_code}`}</Text>
+                  <Text sx={content}>{dispo}</Text>
+                </Flex>
+              ))}
+            </Box>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>
