@@ -73,5 +73,8 @@ export const ADD_MESURE = gql`
     ) {
       state
     }
+    mesures_last_update {
+      status
+    }
   }
 `;

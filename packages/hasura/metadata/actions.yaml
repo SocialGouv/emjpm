@@ -162,6 +162,18 @@ actions:
   - role: individuel
   - role: prepose
   - role: service
+- name: mesures_last_update
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/mesures-last-update'
+    forward_client_headers: true
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: service
+  - role: prepose
+  - role: individuel
 - name: reset_mesures_calculations
   definition:
     kind: synchronous
@@ -312,4 +324,5 @@ custom_types:
   - name: AdminResetPasswordOutput
   - name: CalculateMesuresDelayedOutput
   - name: ResetMesuresCalculationsOutput
+  - name: MesuresLastUpdateResult
   scalars: []

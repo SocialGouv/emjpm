@@ -15,5 +15,8 @@ export const DELETE_MESURES = gql`
     ) {
       state
     }
+    mesures_last_update {
+      status
+    }
   }
 `;

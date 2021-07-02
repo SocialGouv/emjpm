@@ -104,6 +104,11 @@ type Query {
 
 
 type Mutation {
+  mesures_last_update : MesuresLastUpdateResult
+}
+
+
+type Mutation {
   reset_mesures_calculations (
     serviceId: Int
     mandataireId: Int
@@ -341,5 +346,9 @@ type CalculateMesuresDelayedOutput {
 
 type ResetMesuresCalculationsOutput {
   state : Boolean!
+}
+
+type MesuresLastUpdateResult {
+  status : String!
 }
 

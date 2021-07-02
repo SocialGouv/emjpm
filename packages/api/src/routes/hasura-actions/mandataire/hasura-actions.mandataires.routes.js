@@ -5,6 +5,7 @@ const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 const { isMandataire } = require("@emjpm/biz");
 const resetGestionnaireMesuresCounters = require("~/services/resetGestionnaireMesuresCounters");
 const updateGestionnaireMesuresCounters = require("~/services/updateGestionnaireMesuresCounters");
+const updateGestionnaireMesuresLastUpdate = require("~/services/updateGestionnaireMesuresLastUpdate");
 
 const router = express.Router();
 
@@ -47,7 +48,7 @@ router.post(
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Erreur inattendu durant le comptage des mesures")
+  hasuraActionErrorHandler("Erreur durant le comptage des mesures")
 );
 
 router.post(
@@ -70,7 +71,42 @@ router.post(
       return next(err);
     }
   },
-  hasuraActionErrorHandler("Erreur inattendu durant le comptage des mesures")
+  hasuraActionErrorHandler("Erreur durant le comptage des mesures")
+);
+
+router.post(
+  "/mesures-last-update",
+  async (req, res) => {
+    const svars = req.body.session_variables;
+    let status;
+    try {
+      const role = svars["x-hasura-role"];
+      if (role === "service") {
+        await updateGestionnaireMesuresLastUpdate(
+          "services",
+          svars["x-hasura-service-id"]
+        );
+      } else if (role === "mandataire") {
+        await updateGestionnaireMesuresLastUpdate(
+          "mandataires",
+          svars["x-hasura-mandataire-id"]
+        );
+      } else {
+        throw new Error("row missing gestionnaire");
+      }
+      status = "success";
+    } catch (e) {
+      status = "error";
+    }
+
+    // success
+    return res.json({
+      status,
+    });
+  },
+  hasuraActionErrorHandler(
+    "Erreur durant la mise à jour de la dernière date de modification des mesures"
+  )
 );
 
 module.exports = router;

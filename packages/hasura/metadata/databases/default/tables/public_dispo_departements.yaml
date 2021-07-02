@@ -1,0 +1,170 @@
+table:
+  name: dispo_departements
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+- name: mandataire
+  using:
+    foreign_key_constraint_on: mandataire_id
+- name: service
+  using:
+    foreign_key_constraint_on: service_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+  role: individuel
+- permission:
+    backend_only: false
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+  role: prepose
+- permission:
+    backend_only: false
+    check:
+      service_id:
+        _eq: X-Hasura-Service-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - service_id
+  role: service
+select_permissions:
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    - service_id
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    - service_id
+    filter: {}
+  role: direction_nationale
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    - service_id
+    filter: {}
+  role: direction_territoriale
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - service_id
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+- permission:
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    - service_id
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - mandataire_id
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    check:
+      service_id:
+        _eq: X-Hasura-Service-Id
+    columns:
+    - departement_code
+    - dispo
+    - id
+    - service_id
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
+delete_permissions:
+- permission:
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: individuel
+- permission:
+    filter:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
+  role: prepose
+- permission:
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: service
