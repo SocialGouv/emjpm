@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.125.0](https://github.com/SocialGouv/emjpm/compare/v25.124.2...v25.125.0) (2021-07-02)
+
+
+### Bug Fixes
+
+* **create-antenne:** cancel button ([161be79](https://github.com/SocialGouv/emjpm/commit/161be792b0230af006f01bf0cfd2b54720a0c112))
+
+
+### Features
+
+* **mesures-last-update:** restore feat for ui req ([f6e3453](https://github.com/SocialGouv/emjpm/commit/f6e3453e4f460458be9f1606386f6ae640583ef8))
+
+
+
+
+
 ## [25.124.2](https://github.com/SocialGouv/emjpm/compare/v25.124.1...v25.124.2) (2021-06-28)
 
 
