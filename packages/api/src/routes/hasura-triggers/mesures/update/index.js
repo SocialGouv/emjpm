@@ -7,7 +7,7 @@ const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 module.exports = async (req, res) => {
   logger.info(`[TRIGGER_MESURES_UPDATE] start updating related gestionnaires`);
   let status;
-  const updatedRows = 0;
+  let updatedRows = 0;
   try {
     const newRow = req.body.event?.data?.new;
     const oldRow = req.body.event?.data?.old;
@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
       throw new Error("undefined row");
     }
 
-    let updatedRows;
     if (row.service_id) {
       updatedRows = await updateGestionnaireMesuresEvent(
         "services",
