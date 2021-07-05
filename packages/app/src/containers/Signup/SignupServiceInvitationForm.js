@@ -5,11 +5,13 @@ import { Box, Flex } from "rebass";
 import {
   FormGrayBox,
   FormGroupInput,
+  FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { signupSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
+import { GENDER_OPTIONS } from "~/constants/user";
 
 export function SignupServiceInvitationForm(props) {
   const { handleSubmit, invitation } = props;
@@ -68,6 +70,14 @@ export function SignupServiceInvitationForm(props) {
             value={formik.values.email}
             id="email"
             placeholder="Email"
+            validationSchema={signupSchema}
+          />
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Genre"
+            value={formik.values.genre}
+            formik={formik}
             validationSchema={signupSchema}
           />
           <FormGroupInput
