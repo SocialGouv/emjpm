@@ -28,9 +28,6 @@ function LayoutServices(props) {
   let links = navigationLinks;
 
   if (user.enquete) {
-    const [serviceMember] = user.service_members;
-    const { code } = serviceMember.service.departement;
-
     links = navigationLinks.concat({
       title: `Enquête ${user.enquete.annee}`,
       to: `/services/enquetes/${user.enquete.id}`,
