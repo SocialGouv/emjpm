@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.125.2](https://github.com/SocialGouv/emjpm/compare/v25.125.1...v25.125.2) (2021-07-07)
+
+
+### Bug Fixes
+
+* **add-mesure:** magistrat del mesures_last_update ([c043a29](https://github.com/SocialGouv/emjpm/commit/c043a2998f6d3ed99389491e1fd9595ca48cee41))
+
+
+
+
+
 ## [25.125.1](https://github.com/SocialGouv/emjpm/compare/v25.125.0...v25.125.1) (2021-07-07)
 
 
