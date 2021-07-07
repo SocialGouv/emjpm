@@ -25,6 +25,7 @@ function initialValues(mesure) {
     numero_dossier: mesure.numeroDossier || "",
     numero_rg: mesure.numeroRg || "",
     ti_id: mesure.tiId,
+    date_premier_mesure: mesure.datePremierMesure,
   };
 }
 

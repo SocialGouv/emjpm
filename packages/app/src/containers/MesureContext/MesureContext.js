@@ -77,7 +77,7 @@ function formatMesure(mesure) {
       : "",
     datePremierMesure: date_premier_mesure,
     datePremierMesureFormatted: date_premier_mesure
-      ? stdFormatter.formatDateUI(date_protection_en_cours)
+      ? stdFormatter.formatDateUI(date_premier_mesure)
       : "",
     dateProtectionEnCours: date_protection_en_cours,
     dateProtectionEnCoursFormatted: date_protection_en_cours
