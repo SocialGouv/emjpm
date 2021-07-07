@@ -42,9 +42,6 @@ export const CHOOSE_MANDATAIRE = gql`
     ) {
       state
     }
-    mesures_last_update {
-      status
-    }
   }
 `;
 
