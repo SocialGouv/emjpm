@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.125.1](https://github.com/SocialGouv/emjpm/compare/v25.125.0...v25.125.1) (2021-07-07)
+
+
+### Bug Fixes
+
+* **clean:** remove old buggy code ([89f3477](https://github.com/SocialGouv/emjpm/commit/89f3477a35302aa346a3ef140bcd59fab68f6733))
+* **edit-mesure:** date_premier_mesure ([536a0d8](https://github.com/SocialGouv/emjpm/commit/536a0d8ec8903cc3f62ab967f4816058a2ac1d72))
+* **service-member:** signup from invitation gender ([59d107d](https://github.com/SocialGouv/emjpm/commit/59d107dab9b143a24059dae7f7f91d7bdd476a75))
+
+
+
+
+
 # [25.125.0](https://github.com/SocialGouv/emjpm/compare/v25.124.2...v25.125.0) (2021-07-02)
 
 
