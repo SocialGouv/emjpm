@@ -52,6 +52,7 @@ export const USERS = gql`
         mesures_en_cours
         dispo_max
       }
+      # TODO(UP TO MULTIPLE SERVICES)
       service_members {
         service {
           mesures_in_progress

@@ -29,6 +29,7 @@ async function checkEnqueteContext(req) {
   switch (role) {
     case "service": {
       // SERVICE
+      // TODO(UP TO MULTIPLE SERVICES)
       const serviceMember = await ServiceMember.query().findOne({
         user_id: userId,
       });

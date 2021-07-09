@@ -7,6 +7,7 @@ export const USER_SERVICE = gql`
       email
       nom
       prenom
+      # TODO(UP TO MULTIPLE SERVICES)
       service_members {
         id
         service {

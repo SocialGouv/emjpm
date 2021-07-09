@@ -16,8 +16,12 @@ router.post("/stats", async (req, res) => {
   const type = isMandataire(user) ? "mandataire" : "service";
   const serviceOrMandataire = await user.$relatedQuery(type);
 
+  const idList = Array.isArray(serviceOrMandataire)
+    ? serviceOrMandataire.map(({ id }) => id)
+    : [serviceOrMandataire.id];
+
   const natureStats = await Mesure.query()
-    .where({ [`${type}_id`]: serviceOrMandataire.id })
+    .whereIn(`${type}_id`, idList)
     .andWhere({ status: "en_cours" })
     .groupBy("nature_mesure")
     .select("nature_mesure")

@@ -67,6 +67,7 @@ class User extends Model {
         modelClass: Models.Role,
         relation: Model.ManyToManyRelation,
       },
+      // TODO(UP TO MULTIPLE SERVICES) + find all reference to service subquery from user model in api
       service: {
         join: {
           from: "users.id",

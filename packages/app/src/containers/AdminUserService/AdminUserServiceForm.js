@@ -16,6 +16,7 @@ function AdminUserServiceForm(props) {
 
   const { nom, prenom, email, service_members } = user;
 
+  // TODO(UP TO MULTIPLE SERVICES)
   const [serviceMember] = service_members;
   const { service } = serviceMember;
 

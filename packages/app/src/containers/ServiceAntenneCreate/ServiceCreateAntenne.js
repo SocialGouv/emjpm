@@ -12,6 +12,7 @@ import useQueryReady from "~/hooks/useQueryReady";
 function ServiceCreateAntenne() {
   const history = useHistory();
   const { service_members } = useUser();
+  // TODO(UP TO MULTIPLE SERVICES)
   const [currentUserService] = service_members;
   const { service_id } = currentUserService;
 

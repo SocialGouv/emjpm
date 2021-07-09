@@ -13,6 +13,7 @@ function ServiceAntenneEdit(props) {
   const history = useHistory();
   const { user, antenneId } = props;
   const { service_members } = user;
+  // TODO(UP TO MULTIPLE SERVICES)
   const [{ service }] = service_members;
   const { service_antennes } = service;
   const [antenne] = service_antennes.filter((s) => s.id === antenneId);

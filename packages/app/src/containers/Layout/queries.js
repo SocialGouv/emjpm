@@ -11,6 +11,7 @@ export const GET_SERVICE_USERS = gql`
       nom
       prenom
       type
+      # TODO(UP TO MULTIPLE SERVICES)
       service_members {
         user {
           id

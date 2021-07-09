@@ -10,6 +10,7 @@ import { MESURES_SERVICE } from "./queries";
 
 function ServiceMap({ selectMesures, selectedMesuresIds }) {
   const { service_members } = useUser();
+  // TODO(UP TO MULTIPLE SERVICES)
   const [service_member] = service_members;
   const {
     service: { longitude, latitude },

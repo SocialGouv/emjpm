@@ -49,6 +49,7 @@ function UserDataQueryProvider(props) {
   const userData = data.users_by_pk;
   let currentService;
   if (isService(userData)) {
+    // TODO(UP TO MULTIPLE SERVICES)
     const {
       service_members: [{ service }],
     } = userData;

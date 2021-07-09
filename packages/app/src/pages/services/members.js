@@ -7,6 +7,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 function ServiceMembersPage() {
   const { service_members, id } = useUser();
+  // TODO(UP TO MULTIPLE SERVICES)
   const [{ is_admin, service }] = service_members;
   return (
     <LayoutServices>
