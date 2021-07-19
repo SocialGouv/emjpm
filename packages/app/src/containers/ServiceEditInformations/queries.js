@@ -22,10 +22,6 @@ export const GET_SERVICES = gql`
       service_departements {
         departement_code
       }
-      dispo_departements {
-        departement_code
-        dispo
-      }
       departements {
         id
         tis(where: { immutable: { _eq: true } }) {

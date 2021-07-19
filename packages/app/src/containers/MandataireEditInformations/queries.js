@@ -20,10 +20,6 @@ export const MANDATAIRE = gql`
         telephone_portable
         ville
         competences
-        dispo_departements {
-          departement_code
-          dispo
-        }
         lb_user {
           id
           lb_departements {

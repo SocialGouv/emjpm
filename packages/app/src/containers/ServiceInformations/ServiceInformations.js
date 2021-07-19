@@ -42,18 +42,7 @@ function ServiceInformations() {
     lb_adresse,
     lb_code_postal,
     lb_ville,
-    service_departements,
   } = service;
-
-  const dispo_departements = service_departements.map(
-    ({ departement_code }) => ({
-      departement_code,
-      dispo:
-        service.dispo_departements.find(
-          (row) => row.departement_code === departement_code
-        )?.dispo || "non défini",
-    })
-  );
 
   return (
     <Box>
@@ -132,18 +121,6 @@ function ServiceInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
             <Text sx={content}>{dispo_max}</Text>
-          </Flex>
-          <Flex my={1}>
-            <Box flex={1}>
-              {dispo_departements.map(({ departement_code, dispo }) => (
-                <Flex key={departement_code} my={1}>
-                  <Text
-                    sx={subtitle}
-                  >{`Disponibilité dans le département ${departement_code}`}</Text>
-                  <Text sx={content}>{dispo}</Text>
-                </Flex>
-              ))}
-            </Box>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>

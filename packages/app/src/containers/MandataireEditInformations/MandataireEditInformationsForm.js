@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { useHistory } from "react-router-dom";
-import { useFormik, FieldArray, FormikProvider } from "formik";
+import { useFormik, FormikProvider } from "formik";
 import { uniq } from "lodash";
 import { Box, Flex, Text } from "rebass";
 
@@ -50,11 +50,7 @@ function MandataireEditInformationsForm(props) {
     errorMessage,
   } = props;
 
-  const {
-    lb_user = {},
-    mandataire_tis = [],
-    dispo_departements = [],
-  } = mandataire;
+  const { lb_user = {}, mandataire_tis = [] } = mandataire;
   const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
 
   const { tiOptions } = useMemo(() => {
@@ -74,13 +70,6 @@ function MandataireEditInformationsForm(props) {
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
-      dispo_departements: lb_departements.map(({ departement_code }) => ({
-        departement_code,
-        dispo:
-          dispo_departements.find(
-            (row) => row.departement_code === departement_code
-          )?.dispo || null,
-      })),
     },
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
@@ -223,31 +212,6 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={mandataireEditSchema}
             />
-            <Box>
-              <FieldArray
-                name="dispo_departements"
-                render={() => (
-                  <Box>
-                    <Heading size={5} mb={1}>
-                      {"Disponibilités par département"}
-                    </Heading>
-                    <Box>
-                      {formik.values.dispo_departements.map((row, index) => (
-                        <Box key={row.departement_code}>
-                          <FormGroupInput
-                            placeholder={`Nombre de mesures souhaitées dans le ${row.departement_code}`}
-                            id={`dispo_departements[${index}].dispo`}
-                            value={row.dispo}
-                            formik={formik}
-                            validationSchema={mandataireEditSchema}
-                          />
-                        </Box>
-                      ))}
-                    </Box>
-                  </Box>
-                )}
-              />
-            </Box>
             <Box>
               <Textarea
                 value={formik.values.competences}

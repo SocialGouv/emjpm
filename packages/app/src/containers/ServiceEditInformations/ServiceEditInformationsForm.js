@@ -1,4 +1,4 @@
-import { useFormik, FieldArray, FormikProvider } from "formik";
+import { useFormik, FormikProvider } from "formik";
 import { useMemo } from "react";
 import { Box, Flex, Text } from "rebass";
 
@@ -31,12 +31,7 @@ function buildTiOptions(tis) {
 function ServiceEditInformationsForm(props) {
   const { handleSubmit, cancelLink, service, errorMessage } = props;
 
-  const {
-    departements,
-    service_tis,
-    service_departements,
-    dispo_departements,
-  } = service;
+  const { departements, service_tis, service_departements } = service;
 
   const tis = departements.reduce((acc, { tis }) => {
     acc.push(...tis);
@@ -58,13 +53,6 @@ function ServiceEditInformationsForm(props) {
       prenom: service.prenom || "",
       telephone: service.telephone || "",
       tis: service_tis.map(({ ti }) => ti.id),
-      dispo_departements: service_departements.map(({ departement_code }) => ({
-        departement_code,
-        dispo:
-          dispo_departements.find(
-            (row) => row.departement_code === departement_code
-          )?.dispo || null,
-      })),
     },
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,
@@ -185,31 +173,6 @@ function ServiceEditInformationsForm(props) {
               formik={formik}
               validationSchema={serviceSchema}
             />
-            <Box>
-              <FieldArray
-                name="dispo_departements"
-                render={() => (
-                  <Box>
-                    <Heading size={5} mb={1}>
-                      {"Disponibilités par département"}
-                    </Heading>
-                    <Box>
-                      {formik.values.dispo_departements.map((row, index) => (
-                        <Box key={row.departement_code}>
-                          <FormGroupInput
-                            placeholder={`Nombre de mesures souhaitées dans le ${row.departement_code}`}
-                            id={`dispo_departements[${index}].dispo`}
-                            value={row.dispo}
-                            formik={formik}
-                            validationSchema={serviceSchema}
-                          />
-                        </Box>
-                      ))}
-                    </Box>
-                  </Box>
-                )}
-              />
-            </Box>
             <Box>
               <Textarea
                 value={formik.values.competences}

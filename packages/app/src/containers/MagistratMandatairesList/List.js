@@ -20,24 +20,24 @@ function getOrderByVariable(orderBy, departementFilterEnabled) {
     case 0: // disponibilité
       if (departementFilterEnabled) {
         return [
-          {
-            gestionnaire: {
-              service: {
-                dispo_departements_aggregate: {
-                  sum: { dispo: "desc_nulls_last" },
-                },
-              },
-            },
-          },
-          {
-            gestionnaire: {
-              mandataire: {
-                dispo_departements_aggregate: {
-                  sum: { dispo: "desc_nulls_last" },
-                },
-              },
-            },
-          },
+          // {
+          //   gestionnaire: {
+          //     service: {
+          //       dispo_departements_aggregate: {
+          //         sum: { dispo: "desc_nulls_last" },
+          //       },
+          //     },
+          //   },
+          // },
+          // {
+          //   gestionnaire: {
+          //     mandataire: {
+          //       dispo_departements_aggregate: {
+          //         sum: { dispo: "desc_nulls_last" },
+          //       },
+          //     },
+          //   },
+          // },
         ];
       } else {
         return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };

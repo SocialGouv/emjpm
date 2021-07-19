@@ -28,13 +28,6 @@ array_relationships:
       table:
         name: commentaires
         schema: public
-- name: dispo_departements
-  using:
-    foreign_key_constraint_on:
-      column: mandataire_id
-      table:
-        name: dispo_departements
-        schema: public
 - name: enquete_reponses
   using:
     foreign_key_constraint_on:

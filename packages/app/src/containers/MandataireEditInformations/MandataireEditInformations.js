@@ -92,13 +92,6 @@ const MandataireEditInformations = ({
           departement_codes: lb_departements.map(
             ({ departement_code }) => departement_code
           ),
-          dispo_departements: values.dispo_departements.map(
-            ({ dispo, departement_code }) => ({
-              dispo: dispo || dispo === "0" ? dispo : null,
-              departement_code,
-              mandataire_id: mandataire.id,
-            })
-          ),
           nom: values.nom,
           prenom: values.prenom,
           siret: values.siret ? values.siret : null,

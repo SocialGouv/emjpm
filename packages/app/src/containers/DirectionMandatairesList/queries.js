@@ -47,10 +47,6 @@ export const GET_MANDATAIRES = gql`
           prenom
           email
         }
-        dispo_departements {
-          departement_code
-          dispo
-        }
         genre
       }
       service {
@@ -61,10 +57,6 @@ export const GET_MANDATAIRES = gql`
         ville
         telephone
         email
-        dispo_departements {
-          departement_code
-          dispo
-        }
       }
     }
   }

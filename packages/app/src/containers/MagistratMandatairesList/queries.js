@@ -177,12 +177,6 @@ export const GET_MANDATAIRES = gql`
             comment
             ti_id
           }
-          dispo_departements(
-            where: { departement_code: { _eq: $departementFilter } }
-          ) {
-            departement_code
-            dispo
-          }
           code_postal
           user {
             id
@@ -210,12 +204,6 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
-          dispo_departements(
-            where: { departement_code: { _eq: $departementFilter } }
-          ) {
-            departement_code
-            dispo
-          }
           service_members {
             id
             user {
@@ -301,10 +289,6 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
             email
             last_login
           }
-          dispo_departements {
-            departement_code
-            dispo
-          }
           genre
           id
         }
@@ -324,10 +308,6 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           telephone
           email
           etablissement
-          dispo_departements {
-            departement_code
-            dispo
-          }
           service_members {
             id
             user {

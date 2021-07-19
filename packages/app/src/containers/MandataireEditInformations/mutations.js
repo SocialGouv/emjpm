@@ -18,28 +18,10 @@ export const EDIT_USER = gql`
     $mandataire_id: Int!
     $mandataire_tis: [mandataire_tis_insert_input!]!
     $departement_code: String!
-    $dispo_departements: [dispo_departements_insert_input!]!
     $departement_codes: [String!]!
     $competences: String
     $siret: String
   ) {
-    delete_dispo_departements(
-      where: { departement_code: { _nin: $departement_codes } }
-    ) {
-      affected_rows
-    }
-    insert_dispo_departements(
-      objects: $dispo_departements
-      on_conflict: {
-        constraint: dispo_departements_mandataire_id_departement_code_key
-        update_columns: [dispo]
-      }
-    ) {
-      affected_rows
-      returning {
-        id
-      }
-    }
     delete_mandataire_tis(where: { mandataire_id: { _eq: $mandataire_id } }) {
       affected_rows
     }

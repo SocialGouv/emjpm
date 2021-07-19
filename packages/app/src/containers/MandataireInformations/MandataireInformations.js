@@ -20,14 +20,6 @@ function MandataireInformations() {
   const { mandataire_tis, lb_user } = mandataire;
   const { lb_departements } = lb_user;
 
-  const dispo_departements = lb_departements.map(({ departement_code }) => ({
-    departement_code,
-    dispo:
-      mandataire.dispo_departements.find(
-        (row) => row.departement_code === departement_code
-      )?.dispo || "non défini",
-  }));
-
   return (
     <Box>
       <Heading size={3}>
@@ -80,18 +72,6 @@ function MandataireInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>{"Nombre de mesures souhaitées"}</Text>
             <Text sx={content}>{label(mandataire.dispo_max)}</Text>
-          </Flex>
-          <Flex my={1}>
-            <Box flex={1}>
-              {dispo_departements.map(({ departement_code, dispo }) => (
-                <Flex key={departement_code} my={1}>
-                  <Text
-                    sx={subtitle}
-                  >{`Disponibilité dans le département ${departement_code}`}</Text>
-                  <Text sx={content}>{dispo}</Text>
-                </Flex>
-              ))}
-            </Box>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>

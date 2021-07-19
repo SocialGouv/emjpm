@@ -11,13 +11,6 @@ array_relationships:
       remote_table:
         name: service_departements
         schema: public
-- name: dispo_departements
-  using:
-    foreign_key_constraint_on:
-      column: service_id
-      table:
-        name: dispo_departements
-        schema: public
 - name: enquete_reponses
   using:
     foreign_key_constraint_on:

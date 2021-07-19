@@ -3,29 +3,7 @@ import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
 const mandataireEditSchema = yup.object().shape({
   competences: yup.string(),
-  dispo_max: yup
-    .number()
-    .required()
-    .test(
-      "dispo-total",
-      "La disponibilité globale ne doit pas être inférieur à la disponibilité totale par département",
-      (value, ctx) => {
-        if (!value) {
-          return true;
-        }
-        const dispo_globale = parseInt(value);
-        const dispo_departements = ctx.parent.dispo_departements.reduce(
-          (acc, { dispo }) => {
-            if (dispo !== null && !isNaN(dispo)) {
-              return acc + parseInt(dispo);
-            }
-            return acc;
-          },
-          0
-        );
-        return dispo_globale >= dispo_departements;
-      }
-    ),
+  dispo_max: yup.number().required(),
   email: yup.string().email().required(),
   genre: yup.string().nullable().required(),
   geocode: yup

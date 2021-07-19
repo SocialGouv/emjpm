@@ -29,10 +29,6 @@ export const GET_SERVICES = gql`
       service_departements {
         departement_code
       }
-      dispo_departements {
-        departement_code
-        dispo
-      }
       service_tis {
         id
         ti {

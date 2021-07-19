@@ -54,10 +54,6 @@ export const GET_SERVICE_USERS = gql`
           departements {
             id
           }
-          dispo_departements {
-            departement_code
-            dispo
-          }
           service_tis {
             id
             ti {
@@ -202,10 +198,6 @@ export const MANDATAIRE_USERS = gql`
         code_postal
         competences
         sync_ocmi_enable
-        dispo_departements {
-          departement_code
-          dispo
-        }
         mandataire_tis {
           id
           ti {
