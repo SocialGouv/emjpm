@@ -1,0 +1,3 @@
+table:
+  name: code_postal
+  schema: public

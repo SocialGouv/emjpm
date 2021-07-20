@@ -43,6 +43,7 @@ function ServiceInformations() {
     lb_code_postal,
     lb_ville,
   } = service;
+
   return (
     <Box>
       <Heading size={3}>{etablissement}</Heading>

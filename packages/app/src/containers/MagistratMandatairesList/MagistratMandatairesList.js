@@ -19,6 +19,7 @@ function MagistratMandatairesList() {
   const [habilitation, setHabilitation] = useState(false);
   const [available, setAvailable] = useState(false);
   const [localisation, setLocalisation] = useState(false);
+  const [departement, setDepartement] = useState(null);
 
   const onChangeSearch = useCallback(
     (event) => {
@@ -42,6 +43,13 @@ function MagistratMandatairesList() {
       setType(option);
     },
     [setCurrentOffset, setType]
+  );
+  const onChangeDepartement = useCallback(
+    (option) => {
+      setCurrentOffset(0);
+      setDepartement(option);
+    },
+    [setCurrentOffset, setDepartement]
   );
   const onChangeHabilitation = useCallback(() => {
     setCurrentOffset(0);
@@ -87,6 +95,8 @@ function MagistratMandatairesList() {
           onChangeAvailable,
           localisation,
           onChangeLocalisation,
+          departement,
+          onChangeDepartement,
         }}
       />
       <MagistratMandatairesListList
@@ -100,6 +110,7 @@ function MagistratMandatairesList() {
           habilitation,
           available,
           localisation,
+          departement,
         }}
       />
     </Box>

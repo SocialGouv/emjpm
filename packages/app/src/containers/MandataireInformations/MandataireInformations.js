@@ -8,6 +8,7 @@ import useUser from "~/hooks/useUser";
 import { Button, Heading } from "~/components";
 
 import { content, subtitle } from "./style";
+import React from "react";
 
 function label(value) {
   return value ? value : "";
@@ -16,8 +17,8 @@ function label(value) {
 function MandataireInformations() {
   const user = useUser();
   const { email, nom, prenom, mandataire } = user;
-  const { mandataire_tis } = mandataire;
-  const { lb_user } = mandataire;
+  const { mandataire_tis, lb_user } = mandataire;
+  const { lb_departements } = lb_user;
 
   return (
     <Box>
@@ -69,7 +70,7 @@ function MandataireInformations() {
             Votre activité
           </Heading>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
+            <Text sx={subtitle}>{"Nombre de mesures souhaitées"}</Text>
             <Text sx={content}>{label(mandataire.dispo_max)}</Text>
           </Flex>
           <Flex my={1}>

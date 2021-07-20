@@ -4,7 +4,6 @@ export const EDIT_ANTENNE = gql`
   mutation editAntenne(
     $antenne_id: Int
     $user_id: Int
-    $service_id: Int
     $name: String
     $mesures_max: Int
     $contact_phone: String
@@ -12,6 +11,7 @@ export const EDIT_ANTENNE = gql`
     $contact_firstname: String
     $contact_email: String
     $code_postal: String
+    $departement_code: String
     $adresse: String
     $ville: String
     $latitude: Float
@@ -27,6 +27,7 @@ export const EDIT_ANTENNE = gql`
         contact_firstname: $contact_firstname
         contact_email: $contact_email
         code_postal: $code_postal
+        departement_code: $departement_code
         adresse: $adresse
         ville: $ville
         latitude: $latitude
@@ -37,6 +38,7 @@ export const EDIT_ANTENNE = gql`
         ville
         adresse
         code_postal
+        departement_code
         latitude
         longitude
         contact_email

@@ -9,6 +9,7 @@ const magistratMandataireSchema = yup.object().shape({
   nature_mesure: yup.string().required(),
   numero_rg: yup.string().required(),
   urgent: yup.boolean().nullable(),
+  antenne: yup.number().integer().nullable(),
 });
 
 export { magistratMandataireSchema };

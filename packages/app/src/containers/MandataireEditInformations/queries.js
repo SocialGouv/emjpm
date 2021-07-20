@@ -24,6 +24,7 @@ export const MANDATAIRE = gql`
           id
           lb_departements {
             id
+            departement_code
             tis(where: { immutable: { _eq: true } }) {
               id
               etablissement

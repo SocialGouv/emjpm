@@ -26,6 +26,9 @@ export const GET_SERVICES = gql`
       org_adresse
       org_code_postal
       org_ville
+      service_departements {
+        departement_code
+      }
       service_tis {
         id
         ti {

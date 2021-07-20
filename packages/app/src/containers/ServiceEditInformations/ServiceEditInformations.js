@@ -63,7 +63,6 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
         ville: values.geocode.city,
       },
     });
-
     setSubmitting(false);
   };
   return (

@@ -49,6 +49,7 @@ export const GET_MANDATAIRES = gql`
     $habilitation: Boolean
     $prefer: Boolean
     $available: Boolean
+    $departementFilter: String
   ) {
     count: search_ti_view_lb_tis_aggregate(
       args: {
@@ -61,6 +62,41 @@ export const GET_MANDATAIRES = gql`
         habilitation: { _eq: $habilitation }
         prefer: { _eq: $prefer }
         available: { _eq: $available }
+        _or: [
+          {
+            gestionnaire: {
+              service: {
+                service_departements: {
+                  departement_code: { _eq: $departementFilter }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_departements: {
+                    departement_code: { _eq: $departementFilter }
+                  }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_user_etablissements: {
+                    etablissement: {
+                      departement_code: { _eq: $departementFilter }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     ) {
       aggregate {
@@ -81,6 +117,41 @@ export const GET_MANDATAIRES = gql`
         habilitation: { _eq: $habilitation }
         prefer: { _eq: $prefer }
         available: { _eq: $available }
+        _or: [
+          {
+            gestionnaire: {
+              service: {
+                service_departements: {
+                  departement_code: { _eq: $departementFilter }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_departements: {
+                    departement_code: { _eq: $departementFilter }
+                  }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_user_etablissements: {
+                    etablissement: {
+                      departement_code: { _eq: $departementFilter }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     ) {
       prefer
@@ -138,6 +209,18 @@ export const GET_MANDATAIRES = gql`
             user {
               id
               last_login
+            }
+          }
+          service_antennes_aggregate(
+            where: { departement_code: { _eq: $departementFilter } }
+          ) {
+            aggregate {
+              count
+              sum {
+                mesures_max
+                mesures_in_progress
+                mesures_awaiting
+              }
             }
           }
         }

@@ -19,6 +19,14 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
+      service_antennes_aggregate {
+        aggregate {
+          count
+          sum {
+            mesures_max
+          }
+        }
+      }
       departements {
         id
         tis(where: { immutable: { _eq: true } }) {

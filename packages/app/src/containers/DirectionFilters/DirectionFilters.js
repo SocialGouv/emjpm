@@ -69,8 +69,8 @@ export function DirectionFilters(props) {
                 instanceId={"direction-departement-filter"}
                 size="small"
                 options={departementOptions}
-                label={"Départements"}
-                placeholder={"Départements"}
+                label={"Département"}
+                placeholder={"Département"}
                 value={findOption(
                   departementOptions,
                   filters.departement || null

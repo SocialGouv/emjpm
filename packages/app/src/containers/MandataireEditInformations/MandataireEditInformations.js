@@ -68,6 +68,9 @@ const MandataireEditInformations = ({
         code: codeDepartement,
       });
 
+      const { lb_user } = mandataire;
+      const { lb_departements = [] } = lb_user || {};
+
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
@@ -86,6 +89,9 @@ const MandataireEditInformations = ({
             mandataire_id: mandataire.id,
             ti_id: ti,
           })),
+          departement_codes: lb_departements.map(
+            ({ departement_code }) => departement_code
+          ),
           nom: values.nom,
           prenom: values.prenom,
           siret: values.siret ? values.siret : null,

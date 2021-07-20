@@ -15,10 +15,27 @@ const RESULT_PER_PAGE = 20;
 const distanceMaxKM = 300;
 // const distanceMaxKM = null;
 
-function getOrderByVariable(orderBy) {
+function getOrderByVariable(orderBy, departementFilterEnabled) {
   switch (orderBy) {
-    case 0:
-      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+    case 0: // disponibilité
+      if (departementFilterEnabled) {
+        return [
+          {
+            gestionnaire: {
+              service: {
+                service_antennes_aggregate: {
+                  sum: {
+                    dispo: "desc_nulls_last",
+                  },
+                },
+              },
+            },
+          },
+          { gestionnaire: { remaining_capacity: "desc_nulls_last" } },
+        ];
+      } else {
+        return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+      }
     case 1:
       return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
     case 2:
@@ -43,6 +60,7 @@ function MagistratMandatairesListList(props) {
     habilitation,
     available,
     localisation,
+    departement,
   } = props;
   const history = useHistory();
   const { magistrat } = useUser();
@@ -75,10 +93,11 @@ function MagistratMandatairesListList(props) {
   } else {
     query = GET_MANDATAIRES;
     Object.assign(variables, {
-      orderBy: getOrderByVariable(orderBy),
+      orderBy: getOrderByVariable(orderBy, !!departement),
       searchText: debouncedSearchText ? `%${debouncedSearchText}%` : null,
       tribunal: magistrat.ti_id,
       departementCode: magistrat.ti.departement_code,
+      departementFilter: departement,
     });
   }
 
@@ -116,7 +135,7 @@ function MagistratMandatairesListList(props) {
             onClick={onItemClick}
             draggable="false"
           >
-            <MandataireListItem item={item} />
+            <MandataireListItem item={item} departementFilter={departement} />
           </a>
         );
       })}

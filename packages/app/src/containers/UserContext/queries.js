@@ -225,6 +225,7 @@ export const MANDATAIRE_USERS = gql`
           }
           lb_departements {
             id
+            departement_code
             departement_financeur
             departement {
               id

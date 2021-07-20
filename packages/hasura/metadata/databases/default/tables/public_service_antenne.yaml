@@ -2,6 +2,15 @@ table:
   name: service_antenne
   schema: public
 object_relationships:
+- name: departement
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: id
+      insertion_order: null
+      remote_table:
+        name: departements
+        schema: public
 - name: service
   using:
     foreign_key_constraint_on: service_id
@@ -18,13 +27,13 @@ insert_permissions:
     check: {}
     columns:
     - adresse
-    - ville
     - code_postal
     - contact_email
     - contact_firstname
     - contact_lastname
     - contact_phone
     - created_at
+    - departement_code
     - id
     - latitude
     - longitude
@@ -32,27 +41,31 @@ insert_permissions:
     - mesures_in_progress
     - mesures_max
     - name
-    - service_id
+    - ville
+    set:
+      service_id: x-hasura-Service-Id
   role: service
 select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - latitude
-    - longitude
-    - id
-    - mesures_awaiting
-    - mesures_in_progress
-    - mesures_max
-    - service_id
-    - created_at
     - adresse
     - code_postal
     - contact_email
     - contact_firstname
     - contact_lastname
     - contact_phone
+    - created_at
+    - departement_code
+    - dispo
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
     - name
+    - service_id
     - ville
     filter: {}
   role: direction
@@ -72,13 +85,14 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - ville
     - code_postal
     - contact_email
     - contact_firstname
     - contact_lastname
     - contact_phone
     - created_at
+    - departement_code
+    - dispo
     - id
     - latitude
     - longitude
@@ -87,28 +101,32 @@ select_permissions:
     - mesures_max
     - name
     - service_id
+    - ville
     filter:
       service_id:
         _eq: x-hasura-service-id
   role: service
 - permission:
+    allow_aggregations: true
     columns:
-    - id
-    - service_id
-    - name
-    - created_at
+    - adresse
     - code_postal
-    - ville
-    - contact_lastname
-    - contact_firstname
     - contact_email
+    - contact_firstname
+    - contact_lastname
     - contact_phone
+    - created_at
+    - departement_code
+    - dispo
+    - id
+    - latitude
+    - longitude
     - mesures_awaiting
     - mesures_in_progress
     - mesures_max
-    - adresse
-    - latitude
-    - longitude
+    - name
+    - service_id
+    - ville
     filter: {}
   role: ti
 update_permissions:
@@ -116,13 +134,13 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - ville
     - code_postal
     - contact_email
     - contact_firstname
     - contact_lastname
     - contact_phone
     - created_at
+    - departement_code
     - id
     - latitude
     - longitude
@@ -130,7 +148,7 @@ update_permissions:
     - mesures_in_progress
     - mesures_max
     - name
-    - service_id
+    - ville
     filter:
       service_id:
         _eq: x-hasura-service-id

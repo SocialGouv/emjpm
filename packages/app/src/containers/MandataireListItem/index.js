@@ -1,7 +1,9 @@
 import { BuildingHouse } from "@styled-icons/boxicons-solid/BuildingHouse";
 import { Female } from "@styled-icons/fa-solid/Female";
 import { Male } from "@styled-icons/fa-solid/Male";
+import { InfoCircle } from "@styled-icons/fa-solid/InfoCircle";
 import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 
 import { Box, Flex } from "rebass";
 import { stdFormatter } from "@emjpm/biz";
@@ -20,6 +22,16 @@ import {
   subtitleStyle,
   titleStyle,
 } from "./style";
+import { useEffect } from "react";
+
+const dispoDepartementInfoTip =
+  "La disponibilité départementale est calculée à partir du nombre de mesures souhaitées par antennes et des mesures associées à ces antennes. Il est possible qu'une mesure ne soit associée à une antenne qu'au moment d'être accepté par le service, cela peut donc expliquer dans certain cas une dispo plus grande dans le département que globalement, cela correspond à l'écart des mesures en attente non encore associées à une antenne. Pour éviter cela le magistrat peut désigner une antenne du service au moment de réserver la mesure.";
+
+function getDispoInSelectedDepartement(service) {
+  const { mesures_awaiting, mesures_max, mesures_in_progress } =
+    service.service_antennes_aggregate.aggregate.sum;
+  return mesures_max - ((mesures_awaiting || 0) + (mesures_in_progress || 0));
+}
 
 export default function MandataireListItem(props) {
   const {
@@ -39,10 +51,29 @@ export default function MandataireListItem(props) {
       mesuresAwaiting,
       mesuresLastUpdate,
       type,
+      service,
     },
     isMagistratMap,
     onClick,
+    departementFilter,
   } = props;
+
+  const isService = type === "service";
+
+  const dispoInSelectedDepartement = isService
+    ? getDispoInSelectedDepartement(service)
+    : null;
+
+  const hasAntennes =
+    isService && service.service_antennes_aggregate.aggregate.count > 0;
+  const dispoInSelectedDepartementLabel = hasAntennes
+    ? dispoInSelectedDepartement
+    : "ND";
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
+
   return (
     <>
       <Card sx={cardStyle} width="100%">
@@ -94,11 +125,42 @@ export default function MandataireListItem(props) {
                 <Text sx={labelStyle}>En attente</Text>
                 <Text sx={descriptionStyle}>{mesuresAwaiting}</Text>
               </Flex>
-              <Flex sx={columnStyle(false, false)}>
-                <Text sx={labelStyle}>Disponibilité</Text>
-                <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-                  {currentAvailability}
+              <Flex width="110px" sx={columnStyle(false, false)}>
+                <Text sx={labelStyle}>
+                  {departementFilter && hasAntennes
+                    ? `Dispo (${departementFilter}) / globale`
+                    : "Disponibilité"}
                 </Text>
+                <div>
+                  {departementFilter && hasAntennes && (
+                    <>
+                      {dispoInSelectedDepartementLabel >
+                        currentAvailability && (
+                        <div
+                          style={{ display: "inline" }}
+                          data-tip={dispoDepartementInfoTip}
+                        >
+                          <InfoCircle size={12} />{" "}
+                        </div>
+                      )}
+                      <Text
+                        sx={dispoDescriptionStyle(
+                          dispoInSelectedDepartementLabel > 0
+                        )}
+                        style={{ display: "inline" }}
+                      >
+                        {dispoInSelectedDepartementLabel}
+                      </Text>
+                      {" / "}
+                    </>
+                  )}
+                  <Text
+                    sx={dispoDescriptionStyle(currentAvailability > 0)}
+                    style={{ display: "inline" }}
+                  >
+                    {currentAvailability}
+                  </Text>
+                </div>
               </Flex>
             </>
           )}
