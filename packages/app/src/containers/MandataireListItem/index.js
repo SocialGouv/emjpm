@@ -134,15 +134,6 @@ export default function MandataireListItem(props) {
                 <div>
                   {departementFilter && hasAntennes && (
                     <>
-                      {dispoInSelectedDepartementLabel >
-                        currentAvailability && (
-                        <div
-                          style={{ display: "inline" }}
-                          data-tip={dispoDepartementInfoTip}
-                        >
-                          <InfoCircle size={12} />{" "}
-                        </div>
-                      )}
                       <Text
                         sx={dispoDescriptionStyle(
                           dispoInSelectedDepartementLabel > 0
@@ -159,7 +150,15 @@ export default function MandataireListItem(props) {
                     style={{ display: "inline" }}
                   >
                     {currentAvailability}
-                  </Text>
+                  </Text>{" "}
+                  {dispoInSelectedDepartementLabel > currentAvailability && (
+                    <div
+                      style={{ display: "inline" }}
+                      data-tip={dispoDepartementInfoTip}
+                    >
+                      <InfoCircle color="#818181" size={11} />{" "}
+                    </div>
+                  )}
                 </div>
               </Flex>
             </>

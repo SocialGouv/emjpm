@@ -24,7 +24,7 @@ const serviceAntenneSchema = yup.object().shape({
         return true;
       }
       return createError({
-        message: `Le total des mesures souhaitées par antenne ne doit pas excéder le nombre total de mesures souhaitées au niveau global pour le service. C'est à dire, actuellement ${mesuresMax}. Le total par antenne s'élève actuellement à ${otherAntennesMesuresMaxSum} et s'élèverai à ${total}. Veuillez ajuster le nombre global de mesures souhaiter pour pouvoir continuer.`,
+        message: `Le total des mesures souhaitées par antenne ne doit pas excéder le nombre total de mesures souhaitées au niveau global pour le service. C'est à dire, actuellement ${mesuresMax}. Le total par antenne s'élèverai à ${total}. Veuillez ajuster le nombre global de mesures souhaitées pour pouvoir continuer.`,
         path,
       });
     }),
