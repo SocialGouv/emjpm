@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.2](https://github.com/SocialGouv/emjpm/compare/v25.126.1...v25.126.2) (2021-07-20)
+
+
+### Bug Fixes
+
+* **dispo:** missing migration column ([fa9cdad](https://github.com/SocialGouv/emjpm/commit/fa9cdad73543de7041ef4625f5efdedda26e0936))
+
+
+
+
+
 ## [25.126.1](https://github.com/SocialGouv/emjpm/compare/v25.126.0...v25.126.1) (2021-07-20)
 
 
