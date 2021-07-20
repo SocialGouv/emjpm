@@ -15,7 +15,6 @@ export const EDIT_SERVICE = gql`
     $latitude: Float
     $longitude: Float
     $service_tis: [service_tis_insert_input!]!
-    $departement_codes: [String!]!
   ) {
     delete_service_tis(where: { service_id: { _eq: $service_id } }) {
       affected_rows
