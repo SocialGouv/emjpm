@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.126.0](https://github.com/SocialGouv/emjpm/compare/v25.125.3...v25.126.0) (2021-07-20)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (patch) ([#2572](https://github.com/SocialGouv/emjpm/issues/2572)) ([8974c22](https://github.com/SocialGouv/emjpm/commit/8974c2295be1de121bd66b09b1ff95efabd257b2)), closes [#2563](https://github.com/SocialGouv/emjpm/issues/2563)
+* **deps:** update dependency @testing-library/react to v12 ([#2571](https://github.com/SocialGouv/emjpm/issues/2571)) ([50dd552](https://github.com/SocialGouv/emjpm/commit/50dd5524cf440a082eb7a0b143a002d6443d819d))
+* **dispo:** improve display ([bfaa78f](https://github.com/SocialGouv/emjpm/commit/bfaa78fcebd7abbd6ca39262f6f2f29803af479c))
+* **typo:** missing field ([85c367d](https://github.com/SocialGouv/emjpm/commit/85c367d8ed4ae0a2b6ac5b41f75382b5d09bdecd))
+
+
+### Features
+
+* **dispo:** by department ([#2567](https://github.com/SocialGouv/emjpm/issues/2567)) ([d0b16e8](https://github.com/SocialGouv/emjpm/commit/d0b16e8dc718ef7e5f09a5957d66a6c64e0b8e68))
+
+
+
+
+
 ## [25.125.3](https://github.com/SocialGouv/emjpm/compare/v25.125.2...v25.125.3) (2021-07-13)
 
 

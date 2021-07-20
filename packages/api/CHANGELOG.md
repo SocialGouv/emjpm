@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.126.0](https://github.com/SocialGouv/emjpm/compare/v25.125.3...v25.126.0) (2021-07-20)
+
+
+### Bug Fixes
+
+* **deps:** update all dependencies (patch) ([#2572](https://github.com/SocialGouv/emjpm/issues/2572)) ([8974c22](https://github.com/SocialGouv/emjpm/commit/8974c2295be1de121bd66b09b1ff95efabd257b2)), closes [#2563](https://github.com/SocialGouv/emjpm/issues/2563)
+* **import-file:** timeout up to 15 minutes in k8s ([76e533d](https://github.com/SocialGouv/emjpm/commit/76e533d51970ec5671783e329c98b14d33a8ec17))
+
+
+
+
+
 ## [25.125.3](https://github.com/SocialGouv/emjpm/compare/v25.125.2...v25.125.3) (2021-07-13)
 
 **Note:** Version bump only for package @emjpm/api
