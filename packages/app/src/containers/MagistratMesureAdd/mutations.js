@@ -14,6 +14,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $urgent: Boolean!
     $judgmentDate: date
     $numero_rg: String!
+    $antenne_id: Int!
   ) {
     insert_mesures(
       objects: {
@@ -23,6 +24,7 @@ export const CHOOSE_MANDATAIRE = gql`
         ti_id: $ti
         mandataire_id: $mandataire_id
         service_id: $service_id
+        antenne_id: $antenne_id
         magistrat_id: $magistrat_id
         nature_mesure: $nature_mesure
         champ_mesure: $champ_mesure

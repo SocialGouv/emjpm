@@ -40,7 +40,7 @@ export function ListeBlancheIndividuelItem(props) {
           </Flex>
 
           <Flex width="30%" flexDirection="column">
-            <Text sx={labelStyle}>{"Départements"}</Text>
+            <Text sx={labelStyle}>{"Département"}</Text>
             <Text sx={descriptionStyle}>
               {lb_user.lb_departements
                 .map((lbDep) =>

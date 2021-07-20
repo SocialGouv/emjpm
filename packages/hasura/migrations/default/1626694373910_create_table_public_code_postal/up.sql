@@ -1,0 +1,1 @@
+CREATE TABLE "public"."code_postal" ("code_postal" text NOT NULL, "departement_code" text NOT NULL, PRIMARY KEY ("code_postal") , FOREIGN KEY ("departement_code") REFERENCES "public"."departements"("id") ON UPDATE restrict ON DELETE restrict, UNIQUE ("code_postal"));

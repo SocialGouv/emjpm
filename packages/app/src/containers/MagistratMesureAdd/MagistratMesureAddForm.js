@@ -17,6 +17,8 @@ import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
+import ServiceReservation from "./ServiceReservation";
+
 export function MagistratMesureAddForm(props) {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
   const history = useHistory();
@@ -34,6 +36,9 @@ export function MagistratMesureAddForm(props) {
     onSubmit: handleSubmit,
     validationSchema: magistratMandataireSchema,
   });
+
+  const { serviceId } = props;
+  const isService = !!serviceId;
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -124,6 +129,13 @@ export function MagistratMesureAddForm(props) {
           />
         </FormInputBox>
       </Flex>
+      {isService && (
+        <ServiceReservation
+          formik={formik}
+          schema={magistratMandataireSchema}
+          serviceId={serviceId}
+        />
+      )}
       <Flex justifyContent="flex-end" py={2}>
         <Box>
           <Button

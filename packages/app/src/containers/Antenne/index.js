@@ -38,6 +38,10 @@ export default function Antenne(props) {
         <Text sx={numberStyle}>{antenne.mesures_in_progress}</Text>
         <Text sx={mesureStyle}>mesures en cours</Text>
       </Flex>
+      <Flex sx={numberContainer}>
+        <Text sx={numberStyle}>{antenne.mesures_awaiting}</Text>
+        <Text sx={mesureStyle}>mesures en attente</Text>
+      </Flex>
       {hasButton && (
         <Box mt="3">
           <Link to={to}>{linkText}</Link>

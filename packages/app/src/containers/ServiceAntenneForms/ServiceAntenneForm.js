@@ -13,7 +13,12 @@ import { Button, Field, Heading, InlineError } from "~/components";
 import { useHistory } from "react-router-dom";
 
 function ServiceAntenneForm(props) {
-  const { antenne = {}, handleSubmit } = props;
+  const {
+    antenne = {},
+    handleSubmit,
+    mesuresMax,
+    otherAntennesMesuresMaxSum,
+  } = props;
   const {
     contact_email,
     contact_phone,
@@ -23,7 +28,6 @@ function ServiceAntenneForm(props) {
     name,
   } = antenne;
   const geocode = geocodeInitialValue(antenne);
-
   const formik = useFormik({
     initialValues: {
       contact_email: contact_email || "",
@@ -33,6 +37,8 @@ function ServiceAntenneForm(props) {
       geocode,
       mesures_max: mesures_max || "",
       name: name || "",
+      mesuresMax,
+      otherAntennesMesuresMaxSum,
     },
     onSubmit: handleSubmit,
     validationSchema: serviceAntenneSchema,

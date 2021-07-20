@@ -39,7 +39,6 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
   }
 
   const { services_by_pk: service } = data;
-  const { service_departements } = service;
 
   const handleSubmit = async (values, { setSubmitting }) => {
     await editService({
@@ -60,9 +59,6 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
           service_id: service.id,
           ti_id: ti,
         })),
-        departement_codes: service_departements.map(
-          ({ departement_code }) => departement_code
-        ),
         telephone: values.telephone,
         ville: values.geocode.city,
       },

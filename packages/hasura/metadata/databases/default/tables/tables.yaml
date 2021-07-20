@@ -4,6 +4,7 @@
 - "!include public_cause_sortie_mesure.yaml"
 - "!include public_champ_mesure.yaml"
 - "!include public_civilite.yaml"
+- "!include public_code_postal.yaml"
 - "!include public_commentaires.yaml"
 - "!include public_config.yaml"
 - "!include public_departements.yaml"

@@ -57,6 +57,18 @@ export const GET_MANDATAIRES = gql`
         ville
         telephone
         email
+        service_antennes_aggregate(
+          where: { departement_code: { _eq: $departement } }
+        ) {
+          aggregate {
+            count
+            sum {
+              mesures_max
+              mesures_in_progress
+              mesures_awaiting
+            }
+          }
+        }
       }
     }
   }

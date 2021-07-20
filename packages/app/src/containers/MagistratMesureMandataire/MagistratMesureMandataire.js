@@ -145,7 +145,7 @@ function MagistratMesureMandataire(props) {
               </Box>
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>
-                  En cours / souhaitée
+                  En cours / Souhaitées
                 </Text>
                 <Text sx={MagistratContentMandataireStyle}>
                   {mesuresInProgress} / {dispoMax}

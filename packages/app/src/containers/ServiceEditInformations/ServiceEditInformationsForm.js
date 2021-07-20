@@ -31,7 +31,7 @@ function buildTiOptions(tis) {
 function ServiceEditInformationsForm(props) {
   const { handleSubmit, cancelLink, service, errorMessage } = props;
 
-  const { departements, service_tis, service_departements } = service;
+  const { departements, service_tis } = service;
 
   const tis = departements.reduce((acc, { tis }) => {
     acc.push(...tis);
@@ -41,6 +41,11 @@ function ServiceEditInformationsForm(props) {
   const { tiOptions } = useMemo(() => {
     return buildTiOptions(tis);
   }, [tis]);
+
+  const {
+    count: antennes_count,
+    sum: { mesures_max: antennes_mesures_max },
+  } = service.service_antennes_aggregate.aggregate;
 
   const formik = useFormik({
     initialValues: {
@@ -53,6 +58,8 @@ function ServiceEditInformationsForm(props) {
       prenom: service.prenom || "",
       telephone: service.telephone || "",
       tis: service_tis.map(({ ti }) => ti.id),
+      antennes_count,
+      antennes_mesures_max,
     },
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,

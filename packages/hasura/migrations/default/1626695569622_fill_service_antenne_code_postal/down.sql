@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE service_antenne SET departement_code = (SELECT departement_code FROM code_postal WHERE code_postal.code_postal = service_antenne.code_postal);

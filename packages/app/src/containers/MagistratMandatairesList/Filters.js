@@ -35,7 +35,7 @@ const orderByOptions = [
     value: 1,
   },
   {
-    label: "ordre alphabétique (Z-A)",
+    label: "ordre alphabétique (A-Z)",
     value: 2,
   },
   {
@@ -88,8 +88,8 @@ function MagistratMandatairesListFilters(props) {
               instanceId={"direction-departement-filter"}
               size="small"
               options={departementOptions}
-              label={"Départements"}
-              placeholder={"Départements"}
+              label={"Département"}
+              placeholder={"Département"}
               value={findOption(departementOptions, departement || null)}
               onChange={(option) => onChangeDepartement(option.value)}
             />

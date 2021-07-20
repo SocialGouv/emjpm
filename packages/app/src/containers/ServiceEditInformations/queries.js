@@ -19,8 +19,13 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
-      service_departements {
-        departement_code
+      service_antennes_aggregate {
+        aggregate {
+          count
+          sum {
+            mesures_max
+          }
+        }
       }
       departements {
         id

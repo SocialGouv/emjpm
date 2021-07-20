@@ -86,6 +86,7 @@ function MagistratMesureAdd(props) {
         service_id: serviceId,
         ti: tiId,
         urgent: values.urgent,
+        antenne_id: values.antenne,
       },
     });
 
@@ -109,6 +110,8 @@ function MagistratMesureAdd(props) {
           handleSubmit={handleSubmit}
           cancelActionRoute={cancelActionRoute}
           cabinet={cabinet}
+          mandataireId={mandataireId}
+          serviceId={serviceId}
         />
       </Box>
     </Box>
