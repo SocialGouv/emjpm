@@ -56,7 +56,7 @@ export const codePostalExists = async (cp) => {
 
 export const getDepartementByCodePostal = async (cp) => {
   const codePostal = await codePostalDB;
-  return codePostal[cp]?.departement;
+  return codePostal[cp]?.departement?.toString();
 };
 
 export const getCommunesByCodePostal = async (cp) => {
