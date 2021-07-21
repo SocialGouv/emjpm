@@ -18,7 +18,6 @@ export const EDIT_USER = gql`
     $mandataire_id: Int!
     $mandataire_tis: [mandataire_tis_insert_input!]!
     $departement_code: String!
-    $departement_codes: [String!]!
     $competences: String
     $siret: String
   ) {

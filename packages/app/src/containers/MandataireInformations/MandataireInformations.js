@@ -18,7 +18,6 @@ function MandataireInformations() {
   const user = useUser();
   const { email, nom, prenom, mandataire } = user;
   const { mandataire_tis, lb_user } = mandataire;
-  const { lb_departements } = lb_user;
 
   return (
     <Box>
