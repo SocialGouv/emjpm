@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.4](https://github.com/SocialGouv/emjpm/compare/v25.126.3...v25.126.4) (2021-07-21)
+
+
+### Bug Fixes
+
+* **missing-field:** departement_codes ([bd07b10](https://github.com/SocialGouv/emjpm/commit/bd07b10ad7e3c79c2c7396d40d224901f290f5fa))
+
+
+
+
+
 ## [25.126.3](https://github.com/SocialGouv/emjpm/compare/v25.126.2...v25.126.3) (2021-07-20)
 
 **Note:** Version bump only for package @emjpm/app
