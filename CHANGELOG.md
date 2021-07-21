@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.6](https://github.com/SocialGouv/emjpm/compare/v25.126.5...v25.126.6) (2021-07-21)
+
+
+### Bug Fixes
+
+* **departement-cast:** to string type ([4a72070](https://github.com/SocialGouv/emjpm/commit/4a720701e62dff7eb2f12a88b77b7064863f01a3))
+
+
+
+
+
 ## [25.126.5](https://github.com/SocialGouv/emjpm/compare/v25.126.4...v25.126.5) (2021-07-21)
 
 **Note:** Version bump only for package emjpm2
