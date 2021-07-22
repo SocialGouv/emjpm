@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.7](https://github.com/SocialGouv/emjpm/compare/v25.126.6...v25.126.7) (2021-07-22)
+
+
+### Bug Fixes
+
+* **reservation:** ind et pre antenne_id opt ([3a6ea47](https://github.com/SocialGouv/emjpm/commit/3a6ea47e091e3bc036f0f79e5e8d4a180b502757))
+
+
+
+
+
 ## [25.126.6](https://github.com/SocialGouv/emjpm/compare/v25.126.5...v25.126.6) (2021-07-21)
 
 
