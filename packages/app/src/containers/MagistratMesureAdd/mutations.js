@@ -14,7 +14,7 @@ export const CHOOSE_MANDATAIRE = gql`
     $urgent: Boolean!
     $judgmentDate: date
     $numero_rg: String!
-    $antenne_id: Int!
+    $antenne_id: Int
   ) {
     insert_mesures(
       objects: {
