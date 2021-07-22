@@ -60,15 +60,21 @@ export default function MandataireListItem(props) {
 
   const isService = type === "service";
 
-  const dispoInSelectedDepartement = isService
-    ? getDispoInSelectedDepartement(service)
-    : null;
-
-  const hasAntennes =
-    isService && service.service_antennes_aggregate.aggregate.count > 0;
-  const dispoInSelectedDepartementLabel = hasAntennes
-    ? dispoInSelectedDepartement
-    : "ND";
+  let hasAntennes;
+  let dispoInSelectedDepartement;
+  let dispoInSelectedDepartementLabel;
+  if (isService) {
+    const { service_antennes_aggregate } = service;
+    if (service_antennes_aggregate) {
+      hasAntennes = service.service_antennes_aggregate.aggregate.count > 0;
+      dispoInSelectedDepartement = isService
+        ? getDispoInSelectedDepartement(service)
+        : null;
+      dispoInSelectedDepartementLabel = hasAntennes
+        ? dispoInSelectedDepartement
+        : "ND";
+    }
+  }
 
   useEffect(() => {
     ReactTooltip.rebuild();
