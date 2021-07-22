@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.8](https://github.com/SocialGouv/emjpm/compare/v25.126.7...v25.126.8) (2021-07-22)
+
+
+### Bug Fixes
+
+* **magistrat:** map undefined aggregate ([a7f7281](https://github.com/SocialGouv/emjpm/commit/a7f7281361f60b69ae5267871b63c5ff9d2da971))
+
+
+
+
+
 ## [25.126.7](https://github.com/SocialGouv/emjpm/compare/v25.126.6...v25.126.7) (2021-07-22)
 
 
