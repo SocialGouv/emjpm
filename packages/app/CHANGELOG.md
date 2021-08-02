@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.9](https://github.com/SocialGouv/emjpm/compare/v25.126.8...v25.126.9) (2021-08-02)
+
+
+### Bug Fixes
+
+* **ci:** dev2 -> dev ([8b77d56](https://github.com/SocialGouv/emjpm/commit/8b77d5641f78a49d650173c4d39970d2723583af))
+* **csp:** matomo ([4ac0ec1](https://github.com/SocialGouv/emjpm/commit/4ac0ec12943d5b4c6dbd4a0544a10b70cd7e6ac8))
+* **stats:** stats when zero entries ([8f36cda](https://github.com/SocialGouv/emjpm/commit/8f36cda77dded0e69c878a82416864add184c1a8))
+* **ti:** delete mesure ([2cd61d0](https://github.com/SocialGouv/emjpm/commit/2cd61d0df7a02da715ecf7618fb5d369741fde76))
+
+
+
+
+
 ## [25.126.8](https://github.com/SocialGouv/emjpm/compare/v25.126.7...v25.126.8) (2021-07-22)
 
 

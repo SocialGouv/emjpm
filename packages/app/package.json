@@ -1,10 +1,10 @@
 {
   "name": "@emjpm/app",
-  "version": "25.126.8",
+  "version": "25.126.9",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.3.21",
-    "@emjpm/biz": "^25.126.8",
+    "@emjpm/biz": "^25.126.9",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
     "@emotion/styled-base": "^11.0.0",
