@@ -27,22 +27,22 @@ function IndicatorListTotal() {
   }
 
   const {
-    serviceLoginCount: [{ count: serviceLoginCount }],
-    individuelLoginCount: [{ count: individuelLoginCount }],
-    preposeLoginCount: [{ count: preposeLoginCount }],
-    magistratLoginCount: [{ count: magistratLoginCount }],
-    directionLoginCount: [{ count: directionLoginCount }],
-    serviceInscritCount: [{ count: serviceInscritCount }],
-    individuelInscritCount: [{ count: individuelInscritCount }],
-    preposeInscritCount: [{ count: preposeInscritCount }],
-    magistratInscritCount: [{ count: magistratInscritCount }],
-    directionInscritCount: [{ count: directionInscritCount }],
     mesuresLastMonthCount: {
       aggregate: { count: mesuresLastMonthCount },
     },
   } = data;
 
-  console.log(data);
+  const serviceLoginCount = data.serviceLoginCount[0]?.count;
+  const individuelLoginCount = data.individuelLoginCount[0]?.count;
+  const preposeLoginCount = data.preposeLoginCount[0]?.count;
+  const magistratLoginCount = data.magistratLoginCount[0]?.count;
+  const directionLoginCount = data.directionLoginCount[0]?.count;
+  const serviceInscritCount = data.serviceInscritCount[0]?.count;
+  const individuelInscritCount = data.individuelInscritCount[0]?.count;
+  const preposeInscritCount = data.preposeInscritCount[0]?.count;
+  const magistratInscritCount = data.magistratInscritCount[0]?.count;
+  const directionInscritCount = data.directionInscritCount[0]?.count;
+
   return (
     <Box>
       <HeadingTitle py="4">{"France entière"}</HeadingTitle>
