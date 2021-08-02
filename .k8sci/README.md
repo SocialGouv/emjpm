@@ -14,9 +14,9 @@ yarn delivery
 ## webhook
 configured in github webhooks
 run automatically on theses branches:
-- [next](https://next-emjpm.dev2.fabrique.social.gouv.fr/)
+- [next](https://next-emjpm.dev.fabrique.social.gouv.fr/)
 - [prod](https://emjpm.fabrique.social.gouv.fr/) (trigger production)
-- [apitest](https://apitest-emjpm.dev2.fabrique.social.gouv.fr/)
+- [apitest](https://apitest-emjpm.dev.fabrique.social.gouv.fr/)
 
 ### push event
 on dev (any branch other than prod):
@@ -37,5 +37,5 @@ on prod (the branch `prod`):
 
 ## triggerable manually on any branch
 - from [giltab-ci](https://gitlab.factory.social.gouv.fr/SocialGouv/emjpm/-/pipelines)
-- calling url `https://ci-emjpm.dev2.fabrique.social.gouv.fr/hooks/push?token=$WEBHOOKTOKEN&branch=name-of-my-branch`
+- calling url `https://ci-emjpm.dev.fabrique.social.gouv.fr/hooks/push?token=$WEBHOOKTOKEN&branch=name-of-my-branch`
 

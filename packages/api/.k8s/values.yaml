@@ -3,12 +3,12 @@ image:
   tag: latest
   pullPolicy: Always
 replicas: 1
-appURL: https://emjpm.dev2.fabrique.social.gouv.fr
+appURL: https://emjpm.dev.fabrique.social.gouv.fr
 secretName: emjpm-secret
 dbName: ""
 # tlsSecretName: api-certificate
 tlsSecretName: wildcard-crt
-host: api-emjpm.dev2.fabrique.social.gouv.fr
+host: api-emjpm.dev.fabrique.social.gouv.fr
 labels: {}
 fullnameOverride: ''
 nameOverride: ''

@@ -6,7 +6,7 @@ secretName: emjpm-secret
 dbName: ""
 replicas: 1
 labels: {}
-host: hasura-emjpm.dev2.fabrique.social.gouv.fr
+host: hasura-emjpm.dev.fabrique.social.gouv.fr
 # tlsSecretName: hasura-certificate
 tlsSecretName: wildcard-crt
 fullnameOverride: ''
