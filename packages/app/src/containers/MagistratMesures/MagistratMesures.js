@@ -39,6 +39,7 @@ function MagistratMesures() {
 
   const { data, error, loading } = useQuery(MAGISTRAT_MESURES_QUERY, {
     variables: queryVariables,
+    fetchPolicy: "network-only",
   });
 
   const getHref = ({ mesure: { id } }) => `/magistrats/mesures/${id}`;
