@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE mesures SET numero_rg = RPAD(SUBSTR(UPPER(REGEXP_REPLACE(numero_rg, '[^a-zA-Z0-9]', '', 'g')),0,8), 8, '0');
