@@ -6,6 +6,11 @@ function normalizeNumeroRG(str) {
     .padEnd(8, "0");
 }
 
+function validateNumeroRG(str) {
+  return normalizeNumeroRG(str) === str;
+}
+
 module.exports = {
   normalizeNumeroRG,
+  validateNumeroRG,
 };
