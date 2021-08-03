@@ -138,7 +138,7 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
         numero_dossier: "45656456",
-        numero_rg: "RG234534534",
+        numero_rg: "RG234534",
         ressources: [],
         tribunal_cabinet: null,
         tribunal_siret: global.ti.siret,
@@ -175,7 +175,7 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
         numero_dossier: "45656456",
-        numero_rg: "RG234534534",
+        numero_rg: "RG234534",
         ressources: [],
         tribunal_cabinet: null,
         tribunal_siret: global.ti.siret,
@@ -227,7 +227,7 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
         numero_dossier: "45656456",
-        numero_rg: "RG234534534",
+        numero_rg: "RG234534",
         ressources: [],
         tribunal_cabinet: null,
         tribunal_siret: global.ti.siret,
@@ -273,7 +273,7 @@ describe("POST /api/editors/mesures", () => {
           },
         ],
         numero_dossier: "45656456",
-        numero_rg: "RG234534534",
+        numero_rg: "RG234534",
         ressources: [
           {
             annee: 2020,
@@ -322,7 +322,7 @@ describe("POST /api/editors/mesures", () => {
       latitude: 47.78,
       longitude: 3.07776,
       numero_dossier: "45656456",
-      numero_rg: "RG234534534",
+      numero_rg: "RG234534",
       ressources: [
         {
           annee: 2020,
