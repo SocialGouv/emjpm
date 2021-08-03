@@ -54,6 +54,15 @@ for context in $K8SCI_CONTEXT_LIST; do
         --set appURL=https://$APP_DOMAIN
         --set dbName=$DB_NAME
         "
+      if [ -n "$K8SCI_PRODUCTION" ]; then
+        export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
+          --set env=prod
+          "
+      else
+        export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
+          --set env=dev
+          "
+      fi
       ;;
     hasura)
       export CONTEXT_DOMAIN="hasura-$APP_DOMAIN"
