@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.126.10](https://github.com/SocialGouv/emjpm/compare/v25.126.9...v25.126.10) (2021-08-03)
+
+
+### Bug Fixes
+
+* **ci:** csp ([4691c4b](https://github.com/SocialGouv/emjpm/commit/4691c4b2133cd66c071fb54abde9fced6a58bcb9))
+* **csp:** manifest.json ([f99bab5](https://github.com/SocialGouv/emjpm/commit/f99bab53d168e9b34d0c4225e57a1da3e648793d))
+* **ti:** disable mesures cache ([e17f715](https://github.com/SocialGouv/emjpm/commit/e17f715c7196fa885d1186d12f8b84625fa51ed0))
+
+
+
+
+
 ## [25.126.9](https://github.com/SocialGouv/emjpm/compare/v25.126.8...v25.126.9) (2021-08-02)
 
 
