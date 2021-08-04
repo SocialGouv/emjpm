@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
+
+
+### Bug Fixes
+
+* **ingress:** secu hide http header server version ([bce0f6e](https://github.com/SocialGouv/emjpm/commit/bce0f6e4e3c0e7f2e71fb3f05694b6aa18c86b83))
+
+
+
+
+
 ## [25.126.10](https://github.com/SocialGouv/emjpm/compare/v25.126.9...v25.126.10) (2021-08-03)
 
 
