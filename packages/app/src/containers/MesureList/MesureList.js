@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
+import ReactTooltip from "react-tooltip";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MesureListFilters/context";
@@ -34,6 +35,10 @@ function MesureList() {
   useEffect(() => {
     setCurrentOffset(0);
   }, [natureMesure, mesureStatus, debouncedSearchText, sortBy]);
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   const currentMesureStatus = mesureStatus
     ? mesureStatus.value
