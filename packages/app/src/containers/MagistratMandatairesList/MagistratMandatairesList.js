@@ -17,6 +17,7 @@ function MagistratMandatairesList() {
   const debouncedSearchText = useDebounce(searchText, 10);
   const [prefer, setPrefer] = useState(false);
   const [habilitation, setHabilitation] = useState(false);
+  const [searchByLocation, setSearchByLocation] = useState(false);
   const [available, setAvailable] = useState(false);
   const [localisation, setLocalisation] = useState(false);
   const [departement, setDepartement] = useState(null);
@@ -36,6 +37,20 @@ function MagistratMandatairesList() {
     },
     [setCurrentOffset, setLocalisation]
   );
+
+  const onChangeSearchByLocation = useCallback(() => {
+    setCurrentOffset(0);
+    setOrderBy(searchByLocation ? 0 : null);
+    setSearchByLocation(!searchByLocation);
+    setLocalisation("");
+    setSearchText("");
+  }, [
+    setCurrentOffset,
+    setLocalisation,
+    setSearchByLocation,
+    setSearchText,
+    searchByLocation,
+  ]);
 
   const onChangeType = useCallback(
     (option) => {
@@ -91,6 +106,8 @@ function MagistratMandatairesList() {
           onChangePrefer,
           habilitation,
           onChangeHabilitation,
+          searchByLocation,
+          onChangeSearchByLocation,
           available,
           onChangeAvailable,
           localisation,

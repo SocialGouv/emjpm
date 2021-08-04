@@ -40,10 +40,12 @@ function Input(props) {
     onBlur,
     onFocus,
     readOnly,
+    forceActive,
   } = props;
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive =
+    forceActive ||
     isFocus ||
     hasValue ||
     (value !== null && value !== undefined && value !== "");

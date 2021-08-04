@@ -158,6 +158,7 @@ export const GET_MANDATAIRES = gql`
       habilitation
       available
       user_type
+      remaining_capacity
       gestionnaire {
         id
         discriminator
@@ -241,6 +242,7 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
     $lat: float8!
     $lon: float8!
     $distanceMaxKM: float8
+    $departementFilter: String
   ) {
     count: locate_ti_view_lb_tis_aggregate(
       args: { lat: $lat, lon: $lon }
@@ -250,6 +252,41 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
         prefer: { _eq: $prefer }
         available: { _eq: $available }
         distance: { _lte: $distanceMaxKM }
+        _or: [
+          {
+            gestionnaire: {
+              service: {
+                service_departements: {
+                  departement_code: { _eq: $departementFilter }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_departements: {
+                    departement_code: { _eq: $departementFilter }
+                  }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_user_etablissements: {
+                    etablissement: {
+                      departement_code: { _eq: $departementFilter }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     ) {
       aggregate {
@@ -267,6 +304,41 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
         prefer: { _eq: $prefer }
         available: { _eq: $available }
         distance: { _lte: $distanceMaxKM }
+        _or: [
+          {
+            gestionnaire: {
+              service: {
+                service_departements: {
+                  departement_code: { _eq: $departementFilter }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_departements: {
+                    departement_code: { _eq: $departementFilter }
+                  }
+                }
+              }
+            }
+          }
+          {
+            gestionnaire: {
+              mandataire: {
+                lb_user: {
+                  lb_user_etablissements: {
+                    etablissement: {
+                      departement_code: { _eq: $departementFilter }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        ]
       }
     ) {
       distance
