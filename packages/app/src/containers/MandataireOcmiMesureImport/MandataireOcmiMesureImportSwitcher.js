@@ -114,7 +114,7 @@ function MandataireOcmiMesureImportSwitcher({
           <Box mb={2}>
             <Text mb="1" lineHeight="2">
               <StyledWarning size={18} />
-              {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI lors de chaque synchronisation. En activant cette option vos mesures ne seront pas modifiables sur eMJPM.`}
+              {`Toutes les mesures de votre compte eMJPM seront mise à jour et les données de celles-ci remplacées par celles des mesures correspondantes de votre compte OCMI lors de chaque synchronisation. En activant cette option vos mesures ne seront pas modifiables sur eMJPM.`}
             </Text>
           </Box>
         </>
@@ -131,7 +131,7 @@ function MandataireOcmiMesureImportSwitcher({
             <Box mb={2}>
               <Text mb="1" lineHeight="2">
                 <StyledWarning size={18} />
-                {`Toutes les mesures de votre compte eMJPM seront définitivement supprimées et remplacées par les mesures de votre compte OCMI.`}
+                {`La mise à jour des mesures se fait à partir de la correspondance avec le Numéro RG le le SIRET du tribunal, veillez à ce que ces informations soient correctement renseignées et correspondent entre OCMI et eMJPM.`}
               </Text>
             </Box>
             <Flex justifyContent="center">

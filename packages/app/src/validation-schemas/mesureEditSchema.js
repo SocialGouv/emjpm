@@ -1,4 +1,8 @@
 import yup from "./yup";
+import {
+  validateNumeroRG,
+  MESSAGE_VALID_NUMERO_RG,
+} from "~/utils/data/numero-rg";
 
 const currentYear = new Date().getFullYear();
 
@@ -18,7 +22,19 @@ const mesureEditSchema = yup.object().shape({
   date_premier_mesure: yup.date(),
   date_protection_en_cours: yup.date().required(),
   numero_dossier: yup.string(),
-  numero_rg: yup.string().required(),
+  numero_rg: yup
+    .string()
+    .required()
+    .test("numero_rg-check", MESSAGE_VALID_NUMERO_RG, (value, { parent }) => {
+      if (validateNumeroRG(value)) {
+        return true;
+      }
+      // allow dedup history original invalid numero rg
+      if (value === parent.initialNumeroRG) {
+        return true;
+      }
+      return false;
+    }),
   ti_id: yup.string().required(),
 });
 
