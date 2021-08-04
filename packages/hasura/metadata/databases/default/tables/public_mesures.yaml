@@ -523,10 +523,13 @@ update_permissions:
     - ti_id
     - ville
     filter:
-      ti:
-        magistrats:
-          user_id:
-            _eq: X-Hasura-User-Id
+      _and:
+      - ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+      - status:
+          _eq: en_attente
   role: ti
 delete_permissions:
 - permission:
@@ -549,8 +552,11 @@ delete_permissions:
   role: service
 - permission:
     filter:
-      ti:
-        magistrats:
-          user_id:
-            _eq: X-Hasura-User-Id
+      _and:
+      - ti:
+          magistrats:
+            user_id:
+              _eq: X-Hasura-User-Id
+      - status:
+          _eq: en_attente
   role: ti
