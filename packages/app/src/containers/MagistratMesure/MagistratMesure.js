@@ -36,9 +36,11 @@ function MagistratMesure(props) {
       </Heading>
       <Flex sx={MagistratMesureStyle} {...props}>
         <Box sx={MagistratMesureLinksStyle}>
-          <Link to={`/magistrats/mesures/${id}/delete`}>
-            Supprimer la mesure
-          </Link>
+          {status === "en_attente" && (
+            <Link to={`/magistrats/mesures/${id}/delete`}>
+              Supprimer la mesure
+            </Link>
+          )}
         </Box>
         <Box sx={MagistratMesureSideStyle} />
         <Flex sx={MagistratMesureMainStyle}>
