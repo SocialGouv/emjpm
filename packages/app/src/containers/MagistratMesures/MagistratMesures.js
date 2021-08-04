@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
+import ReactTooltip from "react-tooltip";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MagistratFilters/context";
@@ -26,6 +27,10 @@ function MagistratMesures() {
   useEffect(() => {
     setCurrentOffset(0);
   }, [natureMesure, debouncedSearchText]);
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   const queryVariables = {
     natureMesure: natureMesure ? natureMesure.value : null,
