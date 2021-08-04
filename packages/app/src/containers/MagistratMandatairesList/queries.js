@@ -327,6 +327,16 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
               last_login
             }
           }
+          service_antennes_aggregate {
+            aggregate {
+              count
+              sum {
+                mesures_max
+                mesures_in_progress
+                mesures_awaiting
+              }
+            }
+          }
         }
       }
     }
