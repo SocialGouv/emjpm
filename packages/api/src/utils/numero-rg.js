@@ -3,7 +3,7 @@ function normalizeNumeroRG(str) {
     .replace(/[^a-zA-Z0-9]/g, "")
     .toUpperCase()
     .substr(0, 8)
-    .padEnd(8, "0");
+    .padStart(8, "0");
 }
 
 function validateNumeroRG(str) {

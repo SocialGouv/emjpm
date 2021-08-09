@@ -1,5 +1,27 @@
 import gql from "graphql-tag";
 
+export const CHECK_MESURE_EXISTS_QUERY = gql`
+  query CHECK_MESURE_EXISTS_QUERY(
+    $tiId: Int!
+    $mandataireId: Int
+    $serviceId: Int
+    $numeroRG: String!
+  ) {
+    mesures(
+      where: {
+        ti_id: { _eq: $tiId }
+        mandataire_id: { _eq: $mandataireId }
+        service_id: { _eq: $serviceId }
+        numero_rg: { _eq: $numeroRG }
+      }
+      limit: 1
+    ) {
+      id
+      status
+    }
+  }
+`;
+
 export const MAGISTRAT_MESURES_QUERY = gql`
   query MAGISTRAT_MESURE_QUERY(
     $tiId: Int!
@@ -57,6 +79,22 @@ export const MAGISTRAT_MESURES_QUERY = gql`
       numero_dossier
       annee_naissance
       date_nomination
+      en_attente_reouverture
+      mesure_en_attente_reouvertures(limit: 1) {
+        id
+        annee_naissance
+        cabinet
+        champ_mesure
+        civilite
+        judgment_date
+        magistrat_id
+        mandataire_id
+        service_id
+        ti_id
+        is_urgent
+        antenne_id
+        nature_mesure
+      }
     }
   }
 `;

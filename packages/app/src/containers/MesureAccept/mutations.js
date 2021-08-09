@@ -17,6 +17,11 @@ export const ACCEPT_MESURE = gql`
     $pays: String!
     $mandataireId: Int
     $serviceId: Int
+    $annee_naissance: String
+    $cabinet: String
+    $judgment_date: date
+    $is_urgent: Boolean
+    $civilite: civilite_enum
   ) {
     insert_mesure_etat(
       objects: {
@@ -41,6 +46,7 @@ export const ACCEPT_MESURE = gql`
         antenne_id: $antenne_id
         departement_code: $departement_code
         status: en_cours
+        en_attente_reouverture: false
         date_nomination: $date_nomination
         date_protection_en_cours: $date_nomination
         lieu_vie: $lieu_vie
@@ -49,11 +55,19 @@ export const ACCEPT_MESURE = gql`
         latitude: $latitude
         longitude: $longitude
         pays: $pays
+        annee_naissance: $annee_naissance
+        cabinet: $cabinet
+        judgment_date: $judgment_date
+        is_urgent: $is_urgent
+        civilite: $civilite
       }
     ) {
       returning {
         id
       }
+    }
+    delete_mesure_en_attente_reouverture(where: { mesure_id: { _eq: $id } }) {
+      affected_rows
     }
     reset_mesures_calculations(
       mandataireId: $mandataireId

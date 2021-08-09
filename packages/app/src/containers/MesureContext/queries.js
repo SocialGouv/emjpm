@@ -49,6 +49,7 @@ export const MESURE_CONTEXT_QUERY = gql`
       date_nomination
       date_protection_en_cours
       date_premier_mesure
+      en_attente_reouverture
       mesure_etats(order_by: { date_changement_etat: desc }) {
         champ_mesure
         code_postal
@@ -67,6 +68,22 @@ export const MESURE_CONTEXT_QUERY = gql`
         mesure_ressources_prestations_sociales {
           prestations_sociales
         }
+      }
+      mesure_en_attente_reouvertures(limit: 1) {
+        id
+        mesure_id
+        annee_naissance
+        cabinet
+        champ_mesure
+        civilite
+        judgment_date
+        magistrat_id
+        mandataire_id
+        service_id
+        ti_id
+        is_urgent
+        antenne_id
+        nature_mesure
       }
     }
   }

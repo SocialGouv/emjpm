@@ -1,0 +1,313 @@
+table:
+  name: mesure_en_attente_reouverture
+  schema: public
+object_relationships:
+- name: champMesureByChampMesure
+  using:
+    foreign_key_constraint_on: champ_mesure
+- name: magistrat
+  using:
+    foreign_key_constraint_on: magistrat_id
+- name: mandataire
+  using:
+    foreign_key_constraint_on: mandataire_id
+- name: mesure
+  using:
+    foreign_key_constraint_on: mesure_id
+- name: natureMesureByNatureMesure
+  using:
+    foreign_key_constraint_on: nature_mesure
+- name: service
+  using:
+    foreign_key_constraint_on: service_id
+- name: service_antenne
+  using:
+    foreign_key_constraint_on: antenne_id
+- name: ti
+  using:
+    foreign_key_constraint_on: ti_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
+    - nature_mesure
+    - service_id
+    - ti_id
+    set:
+      mandataire_id: x-hasura-mandataire-id
+      service_id: x-hasura-service-id
+  role: individuel
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
+    - nature_mesure
+    - service_id
+    - ti_id
+    set:
+      mandataire_id: x-hasura-mandataire-id
+      service_id: x-hasura-service-id
+  role: prepose
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
+    - nature_mesure
+    - service_id
+    - ti_id
+    set:
+      mandataire_id: x-hasura-mandataire-id
+      service_id: x-hasura-service-id
+  role: service
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - nature_mesure
+    - service_id
+    - ti_id
+  role: ti
+select_permissions:
+- permission:
+    columns:
+    - id
+    - mesure_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - service_id
+    - ti_id
+    - is_urgent
+    - antenne_id
+    - nature_mesure
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      service:
+        service_members:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: service
+- permission:
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - id
+    - mesure_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - service_id
+    - ti_id
+    - is_urgent
+    - antenne_id
+    - nature_mesure
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    check: null
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    check: null
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      service:
+        service_members:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: service
+- permission:
+    check: null
+    columns:
+    - is_urgent
+    - judgment_date
+    - antenne_id
+    - id
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - service_id
+    - ti_id
+    - annee_naissance
+    - cabinet
+    - champ_mesure
+    - civilite
+    - nature_mesure
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti
+delete_permissions:
+- permission:
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: individuel
+- permission:
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
+- permission:
+    filter:
+      service:
+        service_members:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: service
+- permission:
+    filter:
+      ti:
+        magistrats:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: ti
