@@ -38,12 +38,14 @@ export function ListeBlancheServiceItem(props) {
             </Text>
           </Flex>
 
-          {service.siret && (
-            <Flex width="15%" flexDirection="column">
-              <Text sx={labelStyle}>SIRET</Text>
-              <Text sx={descriptionStyle}>{service.siret}</Text>
-            </Flex>
-          )}
+          <Flex width="45%" flexDirection="column">
+            {service.siret && (
+              <>
+                <Text sx={labelStyle}>SIRET</Text>
+                <Text sx={descriptionStyle}>{service.siret}</Text>
+              </>
+            )}
+          </Flex>
         </Flex>
       </a>
     </Card>
