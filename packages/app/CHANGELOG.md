@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
+
+
+### Bug Fixes
+
+* **dd-space:** refine dashboard priorites ([#2615](https://github.com/SocialGouv/emjpm/issues/2615)) ([a0eb7d2](https://github.com/SocialGouv/emjpm/commit/a0eb7d2f1e644ba243cd0bdcf383786441cc898e))
+* **duplicates:** services multi deps ([4899464](https://github.com/SocialGouv/emjpm/commit/48994645052b0935f81f6b9c4cff09041ec22e1f))
+* **import-file:** antenne matcher del success msg ([ebe196b](https://github.com/SocialGouv/emjpm/commit/ebe196b5f005a2a5e81238556c91467efef3e741))
+* **lint:** bugfix ([16d2c06](https://github.com/SocialGouv/emjpm/commit/16d2c06b7871e96b63b230e32d1f4d149a3daa34))
+
+
+### Features
+
+* **import-incremental:** for editor's api, ocmi etc... ([#2612](https://github.com/SocialGouv/emjpm/issues/2612)) ([7f07654](https://github.com/SocialGouv/emjpm/commit/7f07654d4fe70ba0537c93db3f0cac1e8658557e))
+* **service:** sans antenne kpi ([0a62446](https://github.com/SocialGouv/emjpm/commit/0a624460cd89114bcbe59cb4e496d38f15122188)), closes [#2592](https://github.com/SocialGouv/emjpm/issues/2592)
+* **ti:** ti all mesures ([#2614](https://github.com/SocialGouv/emjpm/issues/2614)) ([858b132](https://github.com/SocialGouv/emjpm/commit/858b132a6d4103d23db914d3e088104e881cff1c))
+
+
+
+
+
 # [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
 
 

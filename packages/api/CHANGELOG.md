@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
+
+
+### Features
+
+* **import-incremental:** for editor's api, ocmi etc... ([#2612](https://github.com/SocialGouv/emjpm/issues/2612)) ([7f07654](https://github.com/SocialGouv/emjpm/commit/7f07654d4fe70ba0537c93db3f0cac1e8658557e))
+
+
+
+
+
 # [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
 
 
