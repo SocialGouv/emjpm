@@ -25,7 +25,7 @@ function getOrderByVariable(orderBy, departementFilterEnabled) {
           },
         ];
       } else {
-        return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+        return { remaining_capacity: "desc_nulls_last" };
       }
     case 1:
       return {
@@ -36,7 +36,7 @@ function getOrderByVariable(orderBy, departementFilterEnabled) {
         nom: "desc",
       };
     default:
-      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+      return { remaining_capacity: "desc_nulls_last" };
   }
 }
 

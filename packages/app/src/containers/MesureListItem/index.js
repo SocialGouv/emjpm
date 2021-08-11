@@ -84,7 +84,7 @@ export default function MesureListItem(props) {
         >
           <Box sx={decorationStyle(status)} />
           <Flex sx={mesureListItemStyle}>
-            <Box minWidth="220px" mr="1">
+            <Box minWidth="220px" maxWidth="220px" mr="1">
               <Text sx={titleStyle}>
                 {!numeroRgIsValid && (
                   <div
@@ -106,16 +106,22 @@ export default function MesureListItem(props) {
               }`}</Text>
             </Box>
 
-            {hasTribunal && (
-              <Flex width="280px" sx={columnStyle(true, true)}>
-                <Text sx={labelStyle}>Tribunal</Text>
-                <Text sx={descriptionStyle}>
-                  {tribunal || ""} {cabinet}
-                </Text>
-              </Flex>
-            )}
+            <Flex
+              sx={columnStyle(true, true)}
+              minWidth="270px"
+              maxWidth="270px"
+            >
+              {hasTribunal && (
+                <>
+                  <Text sx={labelStyle}>Tribunal</Text>
+                  <Text sx={descriptionStyle}>
+                    {tribunal || ""} {cabinet}
+                  </Text>
+                </>
+              )}
+            </Flex>
 
-            <Flex minWidth="50px" mr="1">
+            <Flex minWidth="70px" mr="1">
               <Box alignSelf="center" pt="4px" mr="1">
                 {civilite && (
                   <>
@@ -134,26 +140,50 @@ export default function MesureListItem(props) {
             </Flex>
 
             {hasFolderNumber && (
-              <Flex width="90px" sx={columnStyle(true, true)}>
+              <Flex
+                sx={columnStyle(true, true)}
+                minWidth="90px"
+                maxWidth="90px"
+              >
                 <Text sx={labelStyle}>Dossier</Text>
                 <Text sx={descriptionStyle}>{numeroDossier || ""}</Text>
               </Flex>
             )}
 
-            <Flex width="280px" sx={columnStyle(true, true)}>
+            <Flex
+              minWidth="280px"
+              maxWidth="280px"
+              sx={columnStyle(true, true)}
+            >
               <Text sx={labelStyle}>Commune</Text>
               <Text sx={descriptionStyle}>{ville || ""}</Text>
             </Flex>
 
             {status === MESURE_TYPE.WAITING && (
               <>
-                <Flex width="130px">
+                <Flex
+                  sx={columnStyle(false, false)}
+                  minWidth="130px"
+                  maxWidth="130px"
+                  textAlign="left"
+                >
+                  <Text sx={labelStyle}>Date prév. juge.</Text>
+                  <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
+                </Flex>
+                <Flex
+                  minWidth="100px"
+                  maxWidth="100px"
+                  style={{ marginLeft: "5px" }}
+                >
                   <Box alignSelf="center" pt="4px" mr="1">
                     <>
-                      {isUrgent && (
+                      {(isUrgent || 21) && (
                         <Flex alignItems="center">
                           <Warning size="24" />
-                          <Text ml="1" sx={descriptionStyle}>
+                          <Text
+                            sx={descriptionStyle}
+                            style={{ marginLeft: "5px" }}
+                          >
                             Urgent
                           </Text>
                         </Flex>
@@ -161,22 +191,15 @@ export default function MesureListItem(props) {
                     </>
                   </Box>
                 </Flex>
-                <Flex
-                  width="120px"
-                  textAlign="left"
-                  sx={columnStyle(false, false)}
-                >
-                  <Text sx={labelStyle}>Date prév. juge.</Text>
-                  <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
-                </Flex>
               </>
             )}
 
             {status !== MESURE_TYPE.WAITING && (
               <Flex
-                minWidth="70px"
                 textAlign="left"
                 sx={columnStyle(false, false)}
+                minWidth="130px"
+                maxWidth="130px"
               >
                 <Text sx={labelStyle}>Decision du</Text>
                 <Text sx={descriptionStyle}>
