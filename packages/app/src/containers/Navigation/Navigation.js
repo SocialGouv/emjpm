@@ -29,9 +29,11 @@ function Navigation({ links }) {
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
-        {links.map(({ title, to }) => (
+        {links.map(({ title, to, isActive }) => (
           <Box key={title} px={1}>
-            <Link to={to}>{title}</Link>
+            <Link to={to} isActive={isActive}>
+              {title}
+            </Link>
           </Box>
         ))}
         {isMandataire(user) && <MandataireBadge mandataire={user.mandataire} />}

@@ -9,7 +9,7 @@ function MandatairesSubNavigation(props) {
   return (
     <Flex sx={MandatairesSubNavigationStyle} {...props}>
       <Flex>
-        <LinkButton to="/direction">Vue globale</LinkButton>
+        <LinkButton to="/direction/stats">Vue globale</LinkButton>
         <Box ml="1">
           <LinkButton to="/direction/mandataires/list">
             Vue détaillée

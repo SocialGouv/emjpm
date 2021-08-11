@@ -32,25 +32,27 @@ export function ListeBlanchePreposeItem(props) {
             <Text sx={descriptionStyle}>{item.email}</Text>
           </Flex>
 
-          {etablissements.length > 0 && (
-            <Flex width="30%" flexDirection="column">
-              <Text sx={labelStyle}>{"Etablissements"}</Text>
-              <Text sx={descriptionStyle}>
-                {etablissements
-                  .map((e) => {
-                    let str = e.etablissement.rslongue;
-                    if (e.etablissement.departement) {
-                      str += ` (${e.etablissement.departement.id})`;
-                    }
-                    if (e.etablissement_rattachement) {
-                      str += " (Rattaché)";
-                    }
-                    return str;
-                  })
-                  .join(", ")}
-              </Text>
-            </Flex>
-          )}
+          <Flex width="45%" flexDirection="column">
+            {etablissements.length > 0 && (
+              <>
+                <Text sx={labelStyle}>{"Etablissements"}</Text>
+                <Text sx={descriptionStyle}>
+                  {etablissements
+                    .map((e) => {
+                      let str = e.etablissement.rslongue;
+                      if (e.etablissement.departement) {
+                        str += ` (${e.etablissement.departement.id})`;
+                      }
+                      if (e.etablissement_rattachement) {
+                        str += " (Rattaché)";
+                      }
+                      return str;
+                    })
+                    .join(", ")}
+                </Text>
+              </>
+            )}
+          </Flex>
         </Flex>
       </a>
     </Card>

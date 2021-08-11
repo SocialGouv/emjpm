@@ -248,8 +248,8 @@ const routes = [
     path: "/direction/enquetes/:enquete_id(\\d+)",
   },
   {
-    Component: require("~/pages/direction/liste-blanche/index").default,
-    path: "/direction/liste-blanche",
+    Component: require("~/pages/direction/stats").default,
+    path: "/direction/stats",
   },
   {
     Component: require("~/pages/inscription/index").default,

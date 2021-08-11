@@ -26,20 +26,20 @@ export function ListeBlancheIndividuelItem(props) {
               </Text>
             </Flex>
           </Flex>
-          <Flex width="15%" flexDirection="column">
-            <Text sx={labelStyle}>SIRET</Text>
-            <Text sx={descriptionStyle}>{item.siret}</Text>
-          </Flex>
           <Flex width="30%" flexDirection="column">
             <Text sx={labelStyle}>Email</Text>
             <Text sx={descriptionStyle}>{item.email}</Text>
+          </Flex>
+          <Flex width="15%" flexDirection="column">
+            <Text sx={labelStyle}>SIRET</Text>
+            <Text sx={descriptionStyle}>{item.siret}</Text>
           </Flex>
           <Flex width="10%" flexDirection="column">
             <Text sx={labelStyle}>Utilisateur</Text>
             <Text sx={descriptionStyle}>{mandataire ? "oui" : "non"}</Text>
           </Flex>
 
-          <Flex width="30%" flexDirection="column">
+          <Flex width="20%" flexDirection="column">
             <Text sx={labelStyle}>{"Département"}</Text>
             <Text sx={descriptionStyle}>
               {lb_user.lb_departements
