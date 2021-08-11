@@ -33,21 +33,13 @@ function formatMesure(mesure) {
     code_postal,
     numero_dossier,
     departement,
-    nature_mesure,
-    champ_mesure,
     ville,
     status,
     id,
-    annee_naissance,
-    antenne_id,
-    civilite,
     date_nomination,
     date_protection_en_cours,
     date_premier_mesure,
     numero_rg,
-    is_urgent,
-    judgment_date,
-    cabinet,
     ti,
     latitude,
     longitude,
@@ -55,9 +47,22 @@ function formatMesure(mesure) {
     service_id,
     mandataire_id,
     pays,
+    en_attente_reouverture,
     mesure_etats = [],
     mesure_ressources = [],
+    mesure_en_attente_reouvertures = [],
   } = mesure;
+
+  const {
+    annee_naissance,
+    cabinet,
+    judgment_date,
+    is_urgent,
+    champ_mesure,
+    nature_mesure,
+    civilite,
+    antenne_id,
+  } = en_attente_reouverture ? mesure_en_attente_reouvertures[0] : mesure;
 
   const currentStatus = status;
 
@@ -128,5 +133,7 @@ function formatMesure(mesure) {
     tiId: ti ? ti.id : null,
     tribunal: ti ? ti.etablissement : "Tribunal ",
     ville: ville ? ville : "",
+    en_attente_reouverture: en_attente_reouverture,
+    mesure_en_attente_reouvertures: mesure_en_attente_reouvertures,
   };
 }

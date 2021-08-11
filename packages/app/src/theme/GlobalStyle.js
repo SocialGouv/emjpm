@@ -72,6 +72,9 @@ const styles = css`
     display: flex;
     flex-direction: column;
   }
+  .react-tooltip {
+    z-index: 9999 !important;
+  }
   ${emotionNormalize}
 `;
 

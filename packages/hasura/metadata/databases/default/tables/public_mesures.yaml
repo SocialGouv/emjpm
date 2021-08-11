@@ -21,6 +21,13 @@ object_relationships:
   using:
     foreign_key_constraint_on: ti_id
 array_relationships:
+- name: mesure_en_attente_reouvertures
+  using:
+    foreign_key_constraint_on:
+      column: mesure_id
+      table:
+        name: mesure_en_attente_reouverture
+        schema: public
 - name: mesure_etats
   using:
     foreign_key_constraint_on:
@@ -72,6 +79,7 @@ insert_permissions:
     - ville
     set:
       mandataire_id: x-hasura-mandataire-id
+      service_id: x-hasura-service-id
   role: individuel
 - permission:
     check: {}
@@ -215,6 +223,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -256,6 +265,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -296,6 +306,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -335,6 +346,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -377,6 +389,7 @@ update_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -417,6 +430,7 @@ update_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -456,6 +470,7 @@ update_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
     - id
     - is_urgent
@@ -484,27 +499,28 @@ update_permissions:
     - annee_naissance
     - antenne_id
     - cabinet
+    - cause_sortie
+    - champ_mesure
     - civilite
     - code_postal
     - created_at
+    - date_fin_mesure
     - date_nomination
     - departement_code
+    - en_attente_reouverture
     - etablissement_id
-    - date_fin_mesure
     - id
     - is_urgent
     - judgment_date
+    - lieu_vie
     - mandataire_id
+    - nature_mesure
     - numero_dossier
     - numero_rg
     - pays
-    - cause_sortie
-    - lieu_vie
     - service_id
     - status
     - ti_id
-    - nature_mesure
-    - champ_mesure
     - ville
     filter:
       ti:

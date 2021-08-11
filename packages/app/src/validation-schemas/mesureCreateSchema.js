@@ -1,4 +1,8 @@
 import yup from "./yup";
+import {
+  validateNumeroRG,
+  MESSAGE_VALID_NUMERO_RG,
+} from "~/utils/data/numero-rg";
 
 const currentYear = new Date().getFullYear();
 
@@ -20,7 +24,10 @@ const mesureCreateSchema = yup.object().shape({
   lieu_vie: yup.string().required(),
   nature_mesure: yup.string().required(),
   numero_dossier: yup.string(),
-  numero_rg: yup.string().required(),
+  numero_rg: yup
+    .string()
+    .required()
+    .test("numero_rg-check", MESSAGE_VALID_NUMERO_RG, validateNumeroRG),
   pays: yup.string().required(),
   ti_id: yup.string().required().nullable(),
   ville: yup.string().when("pays", {

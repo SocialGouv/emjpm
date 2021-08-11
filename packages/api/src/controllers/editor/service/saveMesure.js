@@ -120,21 +120,41 @@ async function persistMesure(mesure, datas, trx) {
     }
   }
 
-  if (mesure.editor_id && mesure.numero_dossier) {
-    const gestionColumn = mesure.service_id ? "service_id" : "mandataire_id";
-    const gestionId = mesure[gestionColumn];
+  const gestionColumn = mesure.service_id ? "service_id" : "mandataire_id";
+  const gestionId = mesure[gestionColumn];
+
+  // if (mesure.editor_id && mesure.numero_dossier) {
+  //   const { rows } = await knex.raw(
+  //     `
+  //     SELECT
+  //       id
+  //     FROM
+  //       mesures
+  //     WHERE
+  //       mesures.editor_id = ? AND
+  //       mesures.${gestionColumn} = ? AND
+  //       mesures.numero_dossier = ?
+  //     `,
+  //     [mesure.editor_id, gestionId, mesure.numero_dossier]
+  //   );
+  //   if (rows.length > 0) {
+  //     mesure.id = rows[0].id;
+  //   }
+  // }
+
+  if (mesure.numero_rg && mesure.ti_id) {
     const { rows } = await knex.raw(
       `
       SELECT
-      id
+        id
       FROM
-      mesures
+        mesures
       WHERE
-      mesures.editor_id = ? AND
-      mesures.${gestionColumn} = ? AND
-      mesures.numero_dossier = ?
+        mesures.${gestionColumn} = ? AND
+        mesures.ti_id = ? AND
+        mesures.numero_rg = ?
       `,
-      [mesure.editor_id, gestionId, mesure.numero_dossier]
+      [gestionId, mesure.ti_id, mesure.numero_rg]
     );
     if (rows.length > 0) {
       mesure.id = rows[0].id;

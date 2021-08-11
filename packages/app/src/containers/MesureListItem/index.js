@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { Female } from "@styled-icons/fa-solid/Female";
 import { Male } from "@styled-icons/fa-solid/Male";
 import { Warning } from "@styled-icons/material/Warning";
+import { ExclamationCircle } from "@styled-icons/fa-solid/ExclamationCircle";
+
 import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
@@ -69,6 +71,8 @@ export default function MesureListItem(props) {
     onClick && onClick(props);
   };
 
+  const numeroRgIsValid = numeroRg.length === 8;
+
   return (
     <>
       <Card sx={cardStyle} width="100%">
@@ -82,7 +86,19 @@ export default function MesureListItem(props) {
           <Flex sx={mesureListItemStyle}>
             <Box minWidth="220px" mr="1">
               <Text sx={titleStyle}>
-                {numeroRg || ""} &nbsp;
+                {!numeroRgIsValid && (
+                  <div
+                    style={{ display: "inline" }}
+                    data-multiline={true}
+                    data-tip={
+                      "Le Numéro RG de cette mesure est invalide,  il est probable qu'elle soit doublonnée.<br />" +
+                      "Veuillez corriger cette anomalie afin que les fonctions d'imports <br />(OCMI, éditeur tiers de logiciel utilisant notre API, import fichier) puissent fonctionner correctement."
+                    }
+                  >
+                    <ExclamationCircle size="12" color="#ff0000" />
+                  </div>
+                )}{" "}
+                {numeroRg || ""}{" "}
                 <Text sx={statusStyle(status)}>{currentStatus || ""}</Text>
               </Text>
               <Text sx={natureStyle}>{`${natureMesure} ${

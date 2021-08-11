@@ -1,5 +1,6 @@
 const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 const { getDepartementByCodePostal } = require("~/utils/code-postal");
+const { normalizeNumeroRG } = require("~/utils/numero-rg");
 
 function buildMesure({
   datas,
@@ -44,7 +45,7 @@ function buildMesure({
     longitude: longitude,
     nature_mesure: lastEtat.nature_mesure,
     numero_dossier: datas.numero_dossier,
-    numero_rg: datas.numero_rg,
+    numero_rg: normalizeNumeroRG(datas.numero_rg),
     pays: lastEtat.pays,
     resultat_revision: datas.resultat_revision,
     status: datas.date_fin_mesure

@@ -3,6 +3,7 @@ const { validationResult } = require("express-validator");
 const knex = require("~/db/knex");
 
 const { sanitizeMesureProperties } = require("~/utils/mesure");
+const { validateNumeroRG } = require("~/utils/numero-rg");
 
 const { saveMesure } = require("./service/saveMesure");
 
@@ -25,6 +26,18 @@ const mesureCreate = async (req, res) => {
   const { body } = req;
 
   const editorId = res.locals.oauth.token.client.id;
+
+  if (body.strictNumeroRG && !validateNumeroRG(body.numero_rg)) {
+    res.status(422).json({
+      errors: [
+        {
+          msg:
+            "Numero RG must contain exactly 8 uppercase alphanumeric characters. Invalid numero rg: " +
+            body.numero_rg,
+        },
+      ],
+    });
+  }
 
   try {
     let mesureQueryResult;
