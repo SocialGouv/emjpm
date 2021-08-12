@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/containers/Commons";
 import config from "~/config";
-import { Logo } from "~/components";
+import { LogoEtat } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 import {
@@ -23,7 +23,7 @@ function Footer(props) {
             flexDirection={["column", "column", "row"]}
           >
             <Box mb={[3, 0]} flexBasis={["100%", "13%"]}>
-              <Logo hasTitle={false} />
+              <LogoEtat />
             </Box>
             <List sx={FooterItemStyle}>
               <ListTitle>eMJPM</ListTitle>

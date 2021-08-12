@@ -17,16 +17,23 @@ const MesureImportResult = ({
       <Flex alignItems="center">
         <Flex flexDirection="column">
           <Heading size={2}>{"Résultat de l'import"}</Heading>
-          {errors.length ? (
-            <Text m={2} fontSize={2}>{`Erreur lors de l'import des mesures (${
-              errors.length
-            } erreurs sur ${
-              errors.length + creationNumber + updateNumber
-            } mesures). Aucune mesure n'a été importée.`}</Text>
-          ) : (
-            <Text m={2} fontSize={2}>{`${
-              creationNumber + updateNumber
-            } mesures ont été importées (${creationNumber} nouvelles et ${updateNumber} mises à jour).`}</Text>
+          {!invalidAntenneNames.length && (
+            <>
+              {errors.length ? (
+                <Text
+                  m={2}
+                  fontSize={2}
+                >{`Erreur lors de l'import des mesures (${
+                  errors.length
+                } erreurs sur ${
+                  errors.length + creationNumber + updateNumber
+                } mesures). Aucune mesure n'a été importée.`}</Text>
+              ) : (
+                <Text m={2} fontSize={2}>{`${
+                  creationNumber + updateNumber
+                } mesures ont été importées (${creationNumber} nouvelles et ${updateNumber} mises à jour).`}</Text>
+              )}
+            </>
           )}
         </Flex>
         <Button variant="outline" onClick={reset}>

@@ -9,7 +9,7 @@ function LayoutPublic(props) {
   return (
     <>
       <Box
-        sx={{ height: "66px", position: "relative", "z-index": "1000" }}
+        sx={{ height: "120px", position: "relative", "z-index": "1000" }}
         bg="cardPrimary"
       >
         <Header isDisconnected />

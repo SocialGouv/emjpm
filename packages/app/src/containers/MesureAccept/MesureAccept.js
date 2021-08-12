@@ -71,6 +71,19 @@ export function MesureAccept(props) {
       }
     }
 
+    const { en_attente_reouverture, mesure_en_attente_reouvertures = [] } =
+      mesure;
+
+    const {
+      annee_naissance,
+      cabinet,
+      judgment_date,
+      is_urgent,
+      champ_mesure,
+      nature_mesure,
+      civilite,
+    } = en_attente_reouverture ? mesure_en_attente_reouvertures[0] : mesure;
+
     await updateMesure({
       refetchQueries: [
         {
@@ -85,14 +98,19 @@ export function MesureAccept(props) {
       variables: {
         ...variables,
         antenne_id: values.antenne ? Number.parseInt(values.antenne) : null,
-        champ_mesure: mesure.champMesure ? mesure.champMesure : null,
         date_nomination: values.date_nomination,
         id,
         lieu_vie: values.lieu_vie,
-        nature_mesure: mesure.natureMesure,
         pays: values.pays,
         mandataireId,
         serviceId,
+        annee_naissance,
+        cabinet,
+        judgment_date,
+        is_urgent,
+        champ_mesure,
+        nature_mesure,
+        civilite,
       },
     });
     setSubmitting(false);

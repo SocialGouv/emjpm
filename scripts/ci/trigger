@@ -2,7 +2,7 @@
 
 set -e
 
-export CI_URL=${CI_URL:-"https://ci-emjpm.dev2.fabrique.social.gouv.fr"}
+export CI_URL=${CI_URL:-"https://ci-emjpm.dev.fabrique.social.gouv.fr"}
 
 if [ -z "$K8SCI_TOKEN" ] && [ -f .k8sci-token ]; then
   export K8SCI_TOKEN=`cat .k8sci-token`

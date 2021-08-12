@@ -4,7 +4,7 @@ image:
   pullPolicy: Always
 replicas: 1
 labels: {}
-host: emjpm.dev2.fabrique.social.gouv.fr
+host: emjpm.dev.fabrique.social.gouv.fr
 # tlsSecretName: app-certificate
 tlsSecretName: wildcard-crt
 fullnameOverride: ''

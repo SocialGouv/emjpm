@@ -4,6 +4,7 @@ import { Box, Flex } from "rebass";
 import { CheckShield } from "@styled-icons/boxicons-solid/CheckShield";
 import { Star } from "@styled-icons/fa-solid/Star";
 import { DotCircle } from "@styled-icons/fa-regular/DotCircle";
+import { Location } from "@styled-icons/entypo/Location";
 
 import { Card, Input, Select, Button } from "~/components";
 
@@ -14,7 +15,7 @@ import { styleFilterButton } from "./style";
 import { createDepartementOptions, departementList } from "~/utils/geodata";
 import { findOption } from "~/utils/form";
 
-const extraIconsSize = 22;
+const extraIconsSize = 18;
 
 const DEFAULT_VALUE = { label: "Tous les types", value: null };
 
@@ -31,16 +32,12 @@ const orderByOptions = [
     value: 0,
   },
   {
-    label: "localisation",
+    label: "ordre alphabétique (A-Z)",
     value: 1,
   },
   {
-    label: "ordre alphabétique (A-Z)",
-    value: 2,
-  },
-  {
     label: "ordre alphabétique (Z-A)",
-    value: 3,
+    value: 2,
   },
 ];
 
@@ -56,6 +53,8 @@ function MagistratMandatairesListFilters(props) {
     onChangePrefer,
     habilitation,
     onChangeHabilitation,
+    searchByLocation,
+    onChangeSearchByLocation,
     available,
     onChangeAvailable,
     localisation,
@@ -88,32 +87,36 @@ function MagistratMandatairesListFilters(props) {
               instanceId={"direction-departement-filter"}
               size="small"
               options={departementOptions}
-              label={"Département"}
-              placeholder={"Département"}
+              label={"Département d'habilitation"}
+              placeholder={"Département d'habilitation"}
               value={findOption(departementOptions, departement || null)}
               onChange={(option) => onChangeDepartement(option.value)}
             />
           </Box>
-          <Box width="200px" mr={2}>
-            <Select
-              instanceId={"mandataire-sort"}
-              size="small"
-              label={"Trier par"}
-              onChange={({ value }) => onChangeOrderBy(value)}
-              value={orderByOptions.find(({ value }) => value === orderBy)}
-              options={orderByOptions}
-            />
-          </Box>
-          <Box width="235px" mr={1}>
-            {orderBy === 1 && (
+          {!searchByLocation && (
+            <Box width="200px" mr={2}>
+              <Select
+                instanceId={"mandataire-sort"}
+                size="small"
+                label={"Trier par"}
+                onChange={({ value }) => onChangeOrderBy(value)}
+                value={orderByOptions.find(({ value }) => value === orderBy)}
+                options={orderByOptions}
+              />
+            </Box>
+          )}
+          {searchByLocation && (
+            <Box width="240px" mr={1}>
               <SelectAdresse
-                label="Code Postal ou Ville"
+                label="Ville ou Code Postal"
                 placeholder="rechercher par localisation"
                 onChange={onChangeLocalisation}
                 value={localisation}
               />
-            )}
-            {orderBy !== 1 && (
+            </Box>
+          )}
+          {!searchByLocation && (
+            <Box width="220px" mr={1}>
               <Input
                 value={searchText || ""}
                 spellCheck="false"
@@ -122,16 +125,35 @@ function MagistratMandatairesListFilters(props) {
                 name="search"
                 size="small"
                 label="Rechercher"
+                forceActive
                 placeholder="nom, email, code postal, ville..."
               />
-            )}
-          </Box>
+            </Box>
+          )}
         </Flex>
         <Flex alignItems="center">
           <Box mr={1}>
             <Button
               variant="outline"
-              p={2}
+              p={1}
+              style={styleFilterButton(searchByLocation)}
+              onClick={onChangeSearchByLocation}
+              data-tip={
+                !searchByLocation
+                  ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
+                  : null
+              }
+            >
+              <Location
+                size={extraIconsSize}
+                color={habilitation ? "#70D54F" : ""}
+              />
+            </Button>
+          </Box>
+          <Box mr={1}>
+            <Button
+              variant="outline"
+              p={1}
               style={styleFilterButton(habilitation)}
               onClick={onChangeHabilitation}
               data-tip={
@@ -149,7 +171,7 @@ function MagistratMandatairesListFilters(props) {
           <Box mr={1}>
             <Button
               variant="outline"
-              p={2}
+              p={1}
               onClick={onChangePrefer}
               style={styleFilterButton(prefer)}
               data-tip={
@@ -164,7 +186,7 @@ function MagistratMandatairesListFilters(props) {
           <Box mr={0}>
             <Button
               variant="outline"
-              p={2}
+              p={1}
               onClick={onChangeAvailable}
               style={styleFilterButton(available)}
               data-tip={

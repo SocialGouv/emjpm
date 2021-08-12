@@ -8,7 +8,7 @@ import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
 
 import { MesureDeleteForm } from "./MesureDeleteForm";
-import { DELETE_MESURE } from "./mutations";
+import { DELETE_MESURE, DELETE_MESURE_REOUVERTURE } from "./mutations";
 import { MesureDeleteStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -26,10 +26,22 @@ function MesureDelete(props) {
       history.push(`${userBasePath}/mesures`);
     },
   });
+  const [deleteMesureReouverture, { loading2, error2 }] = useMutation(
+    DELETE_MESURE_REOUVERTURE,
+    {
+      onCompleted: async () => {
+        history.push(`${userBasePath}/mesures`);
+      },
+    }
+  );
   useQueryReady(loading, error);
+  useQueryReady(loading2, error2);
 
   const handleSubmit = async () => {
-    await deleteMesure({
+    const delOp = mesure.en_attente_reouverture
+      ? deleteMesureReouverture
+      : deleteMesure;
+    await delOp({
       awaitRefetchQueries: true,
       refetchQueries: ["CURRENT_USER_QUERY", "MESURES_QUERY"],
       variables: {
@@ -48,6 +60,7 @@ function MesureDelete(props) {
     <Box sx={MesureDeleteStyle} {...props}>
       <MesureDeleteForm
         mt="3"
+        mesure={mesure}
         handleCancel={handleCancel}
         handleSubmit={handleSubmit}
       />

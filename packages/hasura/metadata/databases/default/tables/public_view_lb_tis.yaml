@@ -11,6 +11,16 @@ object_relationships:
       remote_table:
         name: view_mesure_gestionnaire
         schema: public
+array_relationships:
+- name: gestionnaires
+  using:
+    manual_configuration:
+      column_mapping:
+        uid: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire
+        schema: public
 select_permissions:
 - permission:
     allow_aggregations: true

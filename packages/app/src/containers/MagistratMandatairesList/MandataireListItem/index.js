@@ -44,13 +44,15 @@ function getDispoInSelectedDepartement(service) {
 export default function MandataireListItem(props) {
   const { item } = props;
   const {
-    gestionnaire,
+    gestionnaires,
     user_type: type,
     prefer,
     habilitation,
     available,
     distance,
   } = item;
+
+  const [gestionnaire] = gestionnaires;
   const {
     mandataire,
     service,

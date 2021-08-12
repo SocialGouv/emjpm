@@ -136,7 +136,7 @@ spec:
                   name: {{ .Values.secretName }}
                   key: OCMI_FILE_PASSWORD
             - name: SENTRY_ENV
-              value: '${NODE_ENV}'
+              value: {{ .Values.env }}
             - name: AUTH_PRIVATE_KEY
               valueFrom:
                 secretKeyRef:

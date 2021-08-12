@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.1](https://github.com/SocialGouv/emjpm/compare/v25.129.0...v25.129.1) (2021-08-12)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+# [25.129.0](https://github.com/SocialGouv/emjpm/compare/v25.128.0...v25.129.0) (2021-08-12)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+# [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+# [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+## [25.126.10](https://github.com/SocialGouv/emjpm/compare/v25.126.9...v25.126.10) (2021-08-03)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+## [25.126.9](https://github.com/SocialGouv/emjpm/compare/v25.126.8...v25.126.9) (2021-08-02)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
 ## [25.126.8](https://github.com/SocialGouv/emjpm/compare/v25.126.7...v25.126.8) (2021-07-22)
 
 **Note:** Version bump only for package @emjpm/biz

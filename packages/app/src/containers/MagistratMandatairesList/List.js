@@ -21,31 +21,22 @@ function getOrderByVariable(orderBy, departementFilterEnabled) {
       if (departementFilterEnabled) {
         return [
           {
-            gestionnaire: {
-              service: {
-                service_antennes_aggregate: {
-                  sum: {
-                    dispo: "desc_nulls_last",
-                  },
-                },
-              },
-            },
+            remaining_capacity: "desc_nulls_last",
           },
-          { gestionnaire: { remaining_capacity: "desc_nulls_last" } },
         ];
       } else {
-        return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
+        return { remaining_capacity: "desc_nulls_last" };
       }
     case 1:
-      return { gestionnaire: { remaining_capacity: "desc_nulls_last" } };
-    case 2:
       return {
         nom: "asc",
       };
-    case 3:
+    case 2:
       return {
         nom: "desc",
       };
+    default:
+      return { remaining_capacity: "desc_nulls_last" };
   }
 }
 
@@ -88,6 +79,7 @@ function MagistratMandatairesListList(props) {
       lat: coords.lat,
       lon: coords.lon,
       distanceMaxKM,
+      departementFilter: departement,
       orderBy: { distance: "asc" },
     });
   } else {
@@ -115,7 +107,9 @@ function MagistratMandatairesListList(props) {
   return (
     <>
       {data.mandatairesList.map((item) => {
-        const { gestionnaire } = item;
+        const {
+          gestionnaires: [gestionnaire],
+        } = item;
         const to = `/magistrats/gestionnaires/${gestionnaire.id}`;
         const onItemClick = (e) => {
           if (e.ctrlKey) {

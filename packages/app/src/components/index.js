@@ -13,7 +13,7 @@ export { default as Select } from "./Select";
 export { default as Spinner } from "./Spinner";
 export { default as Text } from "./Text";
 export { default as Tabs } from "./Tabs";
-export { default as Logo } from "./Logo";
+export { default as LogoEtat } from "./LogoEtat";
 export { default as Field } from "./Field";
 export { default as FilePicker } from "./FilePicker";
 export { default as Switch } from "./Switch";

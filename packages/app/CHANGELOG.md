@@ -3,6 +3,98 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.1](https://github.com/SocialGouv/emjpm/compare/v25.129.0...v25.129.1) (2021-08-12)
+
+
+### Bug Fixes
+
+* **design:** marque de l etat favicon ([900a9b5](https://github.com/SocialGouv/emjpm/commit/900a9b505edc59853cd0be0ef94a7bf964be015b))
+
+
+
+
+
+# [25.129.0](https://github.com/SocialGouv/emjpm/compare/v25.128.0...v25.129.0) (2021-08-12)
+
+
+### Bug Fixes
+
+* **ti:** mandataire list relation ([e03caef](https://github.com/SocialGouv/emjpm/commit/e03caef6ca711b710ca05eea89de60022a912bac))
+
+
+### Features
+
+* **design:** marque de l etat ([5788bf1](https://github.com/SocialGouv/emjpm/commit/5788bf18994f8366304404749ea92f949fa0a896))
+
+
+
+
+
+# [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
+
+
+### Bug Fixes
+
+* **dd-space:** refine dashboard priorites ([#2615](https://github.com/SocialGouv/emjpm/issues/2615)) ([a0eb7d2](https://github.com/SocialGouv/emjpm/commit/a0eb7d2f1e644ba243cd0bdcf383786441cc898e))
+* **duplicates:** services multi deps ([4899464](https://github.com/SocialGouv/emjpm/commit/48994645052b0935f81f6b9c4cff09041ec22e1f))
+* **import-file:** antenne matcher del success msg ([ebe196b](https://github.com/SocialGouv/emjpm/commit/ebe196b5f005a2a5e81238556c91467efef3e741))
+* **lint:** bugfix ([16d2c06](https://github.com/SocialGouv/emjpm/commit/16d2c06b7871e96b63b230e32d1f4d149a3daa34))
+
+
+### Features
+
+* **import-incremental:** for editor's api, ocmi etc... ([#2612](https://github.com/SocialGouv/emjpm/issues/2612)) ([7f07654](https://github.com/SocialGouv/emjpm/commit/7f07654d4fe70ba0537c93db3f0cac1e8658557e))
+* **service:** sans antenne kpi ([0a62446](https://github.com/SocialGouv/emjpm/commit/0a624460cd89114bcbe59cb4e496d38f15122188)), closes [#2592](https://github.com/SocialGouv/emjpm/issues/2592)
+* **ti:** ti all mesures ([#2614](https://github.com/SocialGouv/emjpm/issues/2614)) ([858b132](https://github.com/SocialGouv/emjpm/commit/858b132a6d4103d23db914d3e088104e881cff1c))
+
+
+
+
+
+# [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
+
+
+### Bug Fixes
+
+* **ingress:** secu hide http header server version ([bce0f6e](https://github.com/SocialGouv/emjpm/commit/bce0f6e4e3c0e7f2e71fb3f05694b6aa18c86b83))
+* **location:** missing service antennes aggr ([03490b4](https://github.com/SocialGouv/emjpm/commit/03490b45c8445fec9f1f7546c864e8f48c199b10))
+
+
+### Features
+
+* **ti:** search by location explicit consistent ([e82c023](https://github.com/SocialGouv/emjpm/commit/e82c023e072ebe7f3f8e5fbe9b2afcc84bf1aa43))
+
+
+
+
+
+## [25.126.10](https://github.com/SocialGouv/emjpm/compare/v25.126.9...v25.126.10) (2021-08-03)
+
+
+### Bug Fixes
+
+* **ci:** csp ([4691c4b](https://github.com/SocialGouv/emjpm/commit/4691c4b2133cd66c071fb54abde9fced6a58bcb9))
+* **csp:** manifest.json ([f99bab5](https://github.com/SocialGouv/emjpm/commit/f99bab53d168e9b34d0c4225e57a1da3e648793d))
+* **ti:** disable mesures cache ([e17f715](https://github.com/SocialGouv/emjpm/commit/e17f715c7196fa885d1186d12f8b84625fa51ed0))
+
+
+
+
+
+## [25.126.9](https://github.com/SocialGouv/emjpm/compare/v25.126.8...v25.126.9) (2021-08-02)
+
+
+### Bug Fixes
+
+* **ci:** dev2 -> dev ([8b77d56](https://github.com/SocialGouv/emjpm/commit/8b77d5641f78a49d650173c4d39970d2723583af))
+* **csp:** matomo ([4ac0ec1](https://github.com/SocialGouv/emjpm/commit/4ac0ec12943d5b4c6dbd4a0544a10b70cd7e6ac8))
+* **stats:** stats when zero entries ([8f36cda](https://github.com/SocialGouv/emjpm/commit/8f36cda77dded0e69c878a82416864add184c1a8))
+* **ti:** delete mesure ([2cd61d0](https://github.com/SocialGouv/emjpm/commit/2cd61d0df7a02da715ecf7618fb5d369741fde76))
+
+
+
+
+
 ## [25.126.8](https://github.com/SocialGouv/emjpm/compare/v25.126.7...v25.126.8) (2021-07-22)
 
 

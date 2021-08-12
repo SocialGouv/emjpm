@@ -39,12 +39,12 @@ function ActiveLink(props) {
   if (!location) return null;
   const { pathname } = location;
   let isActive;
-  if (isNestedLinks) {
+  if (props.isActive !== undefined) {
+    isActive = props.isActive;
+  } else if (isNestedLinks) {
     isActive = pathname.startsWith(to);
   } else {
-    isActive =
-      pathname === to ||
-      (pathname === "/direction/mandataires/list" && to === "/direction");
+    isActive = pathname === to;
   }
 
   return (

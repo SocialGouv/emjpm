@@ -10,7 +10,7 @@ Nous avons reçu une nouvelle demande d'accès à l'api e-MJPM pour les éditeur
 avec le mail suivant: ${email}
 avec le nom suivant: ${name}
 
-  Veuillez prendre en compte cette demain au plus vite et vérifier si cet email correspond bien à un éditeur.
+  Veuillez prendre en compte cette demande au plus vite et vérifier si cet email correspond bien à un éditeur.
 
 À bientôt
 

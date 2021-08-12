@@ -7,11 +7,11 @@ import { Select, Text } from "~/components";
 
 import { SERVICE_ANTENNES } from "./queries";
 
-const ServiceMesureAntennesMatcher = ({
+function ServiceMesureAntennesMatcher({
   serviceId,
   invalidAntenneNames,
   onSubmitAntennesMap,
-}) => {
+}) {
   const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
     variables: { service_id: serviceId },
   });
@@ -82,6 +82,6 @@ const ServiceMesureAntennesMatcher = ({
       </Box>
     </form>
   );
-};
+}
 
 export { ServiceMesureAntennesMatcher };

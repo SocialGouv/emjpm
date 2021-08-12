@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.1](https://github.com/SocialGouv/emjpm/compare/v25.129.0...v25.129.1) (2021-08-12)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [25.129.0](https://github.com/SocialGouv/emjpm/compare/v25.128.0...v25.129.0) (2021-08-12)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
+
+
+### Features
+
+* **import-incremental:** for editor's api, ocmi etc... ([#2612](https://github.com/SocialGouv/emjpm/issues/2612)) ([7f07654](https://github.com/SocialGouv/emjpm/commit/7f07654d4fe70ba0537c93db3f0cac1e8658557e))
+
+
+
+
+
+# [25.127.0](https://github.com/SocialGouv/emjpm/compare/v25.126.10...v25.127.0) (2021-08-04)
+
+
+### Bug Fixes
+
+* **ingress:** secu hide http header server version ([bce0f6e](https://github.com/SocialGouv/emjpm/commit/bce0f6e4e3c0e7f2e71fb3f05694b6aa18c86b83))
+
+
+
+
+
+## [25.126.10](https://github.com/SocialGouv/emjpm/compare/v25.126.9...v25.126.10) (2021-08-03)
+
+
+### Bug Fixes
+
+* **ci:** sentry env ([57cbc51](https://github.com/SocialGouv/emjpm/commit/57cbc5163d61b8ce0a14e0917f4589b45a5da1b9))
+* **sentry:** correct node env ([1b60472](https://github.com/SocialGouv/emjpm/commit/1b60472e8b5dbb9a42d214b1aa785e66cb850bd2))
+* **typo:** demain -> demande ([5946f2d](https://github.com/SocialGouv/emjpm/commit/5946f2da171340d32e025f34074bf449022e630a))
+
+
+
+
+
+## [25.126.9](https://github.com/SocialGouv/emjpm/compare/v25.126.8...v25.126.9) (2021-08-02)
+
+
+### Bug Fixes
+
+* **ci:** dev2 -> dev ([8b77d56](https://github.com/SocialGouv/emjpm/commit/8b77d5641f78a49d650173c4d39970d2723583af))
+
+
+
+
+
 ## [25.126.8](https://github.com/SocialGouv/emjpm/compare/v25.126.7...v25.126.8) (2021-07-22)
 
 **Note:** Version bump only for package @emjpm/api

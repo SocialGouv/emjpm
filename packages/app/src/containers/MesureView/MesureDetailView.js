@@ -31,6 +31,7 @@ function MesureDetailView({ mesure, ...props }) {
     codePostal,
     antenne,
     id,
+    en_attente_reouverture,
   } = mesure;
 
   const user = useUser();
@@ -140,7 +141,9 @@ function MesureDetailView({ mesure, ...props }) {
           to={`${userBasePath}/mesures/${id}/delete`}
           {...mesureModificationButtonProps}
         >
-          Supprimer la mesure
+          {en_attente_reouverture
+            ? "Supprimer la demande de réouverture"
+            : "Supprimer la mesure"}
         </LinkButton>
 
         {status === MESURE_PROTECTION_STATUS.en_attente && (
@@ -149,7 +152,9 @@ function MesureDetailView({ mesure, ...props }) {
             to={`${userBasePath}/mesures/${id}/accept`}
             {...mesureModificationButtonProps}
           >
-            Accepter la mesure
+            {en_attente_reouverture
+              ? "Accepter la réouverture"
+              : "Accepter la mesure"}
           </LinkButton>
         )}
 

@@ -94,7 +94,7 @@ yarn release
 ## Deployment policy
 see [documentation details](https://github.com/SocialGouv/emjpm/blob/master/.k8sci/README.md)
 
-- **Pre Prod** : https://next-emjpm.dev2.fabrique.social.gouv.fr
+- **Pre Prod** : https://apitest-emjpm.dev.fabrique.social.gouv.fr
 - **Prod** : https://emjpm.fabrique.social.gouv.fr
 
 ## Branch name

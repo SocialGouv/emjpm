@@ -24,6 +24,7 @@ function initialValues(mesure) {
     date_protection_en_cours: mesure.dateProtectionEnCours || "",
     numero_dossier: mesure.numeroDossier || "",
     numero_rg: mesure.numeroRg || "",
+    initialNumeroRG: mesure.numeroRg || "",
     ti_id: mesure.tiId,
     date_premier_mesure: mesure.datePremierMesure,
   };

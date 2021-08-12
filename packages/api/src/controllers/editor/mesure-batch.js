@@ -6,10 +6,23 @@ const knex = require("~/db/knex");
 const antenneIdIsValid = require("~/services/antenneIdIsValid");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 const { sanitizeMesureProperties } = require("~/utils/mesure");
+const { validateNumeroRG } = require("~/utils/numero-rg");
 
 const { saveMesures } = require("./service/saveMesure");
 const fetchTribunaux = require("./service/fetchTribunaux");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
+
+function checkMesuresNumeroRG(mesures) {
+  const invalidRGList = [];
+  let ok = true;
+  for (const { numero_rg } of mesures) {
+    if (!validateNumeroRG(numero_rg)) {
+      ok = false;
+      invalidRGList.push(numero_rg);
+    }
+  }
+  return [ok, invalidRGList];
+}
 
 const mesureBatch = async (req, res) => {
   const errors = validationResult(req);
@@ -19,7 +32,7 @@ const mesureBatch = async (req, res) => {
   }
 
   const {
-    body: { mesures },
+    body: { mesures, strictNumeroRG = true },
     type,
     serviceOrMandataire,
   } = req;
@@ -32,6 +45,22 @@ const mesureBatch = async (req, res) => {
     return res
       .status(422)
       .json({ errors: [{ msg: "The number of mesures must be <= 1000" }] });
+  }
+
+  // check numero_rg validity
+  if (strictNumeroRG) {
+    const [ok, invalidRGList] = checkMesuresNumeroRG(mesures);
+    if (!ok) {
+      res.status(422).json({
+        errors: [
+          {
+            msg:
+              "Numero RG must contain exactly 8 uppercase alphanumeric characters. There are invalid numero rg: " +
+              invalidRGList.join(","),
+          },
+        ],
+      });
+    }
   }
 
   // check antenne_id validity

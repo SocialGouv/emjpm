@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
+import ReactTooltip from "react-tooltip";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContext } from "~/containers/MagistratFilters/context";
@@ -18,7 +19,8 @@ const RESULT_PER_PAGE = 20;
 function MagistratMesures() {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { natureMesure, debouncedSearchText } = useContext(FiltersContext);
+  const { natureMesure, etatMesure, debouncedSearchText } =
+    useContext(FiltersContext);
   const {
     magistrat: { ti_id: tiId },
   } = useUser();
@@ -27,7 +29,12 @@ function MagistratMesures() {
     setCurrentOffset(0);
   }, [natureMesure, debouncedSearchText]);
 
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
+
   const queryVariables = {
+    etatMesure: etatMesure ? etatMesure : null,
     natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,
     searchText:
@@ -39,6 +46,7 @@ function MagistratMesures() {
 
   const { data, error, loading } = useQuery(MAGISTRAT_MESURES_QUERY, {
     variables: queryVariables,
+    fetchPolicy: "network-only",
   });
 
   const getHref = ({ mesure: { id } }) => `/magistrats/mesures/${id}`;

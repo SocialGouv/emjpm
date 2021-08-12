@@ -12,6 +12,9 @@ export function Provider(props) {
   const [natureMesure, changeNatureMesure] = useState(
     initialValues.natureMesure
   );
+  const [etatMesure, changeEtatMesure] = useState(
+    initialValues.etatMesure || null
+  );
   const [searchText, changeSearchText] = useState(
     initialValues.searchText || ""
   );
@@ -21,8 +24,10 @@ export function Provider(props) {
   // Make the context object:
   const filtersContext = {
     changeNatureMesure,
+    changeEtatMesure,
     changeSearchText,
     debouncedSearchText,
+    etatMesure,
     natureMesure,
     searchText,
   };

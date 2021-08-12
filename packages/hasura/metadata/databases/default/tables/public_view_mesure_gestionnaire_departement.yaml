@@ -29,6 +29,16 @@ object_relationships:
       remote_table:
         name: services
         schema: public
+array_relationships:
+- name: gestionnaire_tis
+  using:
+    manual_configuration:
+      column_mapping:
+        id: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire_tis
+        schema: public
 select_permissions:
 - permission:
     allow_aggregations: true
@@ -92,7 +102,17 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - departement_code
+    - id
+    - service_id
+    - mandataire_id
     - discriminator
+    - nom
+    - departement_code
+    - dep_nom
+    - mesures_max
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    - mesures_last_update
     filter: {}
   role: ti

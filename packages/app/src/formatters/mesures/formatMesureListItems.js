@@ -7,21 +7,26 @@ export default function formatMesureListItems(mesureList) {
       lieu_vie,
       code_postal,
       numero_dossier,
-      antenne_id,
-      nature_mesure,
-      champ_mesure,
       ville,
       status,
       id,
       ti,
-      annee_naissance,
-      civilite,
       date_nomination,
-      is_urgent,
-      judgment_date,
       numero_rg,
-      cabinet,
+      en_attente_reouverture,
+      mesure_en_attente_reouvertures = [],
     } = mesure;
+
+    const {
+      annee_naissance,
+      cabinet,
+      judgment_date,
+      is_urgent,
+      champ_mesure,
+      nature_mesure,
+      civilite,
+      antenne_id,
+    } = en_attente_reouverture ? mesure_en_attente_reouvertures[0] : mesure;
 
     return {
       age: annee_naissance ? annee_naissance : null,

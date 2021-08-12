@@ -67,6 +67,22 @@ export const MESURES_QUERY = gql`
         id
         etablissement
       }
+      en_attente_reouverture
+      mesure_en_attente_reouvertures(limit: 1) {
+        id
+        annee_naissance
+        cabinet
+        champ_mesure
+        civilite
+        judgment_date
+        magistrat_id
+        mandataire_id
+        service_id
+        ti_id
+        is_urgent
+        antenne_id
+        nature_mesure
+      }
     }
 
     mesures: search_mesures(

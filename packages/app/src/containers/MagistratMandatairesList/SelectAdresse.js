@@ -67,6 +67,12 @@ export default function SelectAdresse({ label, placeholder, onChange, value }) {
       isClearable
       options={loadedOptions}
       isLoading={isLoading}
+      onBlur={() => {
+        if (typeof value === "string") {
+          onChange("");
+          inputValueRef.current = "";
+        }
+      }}
       onInputChange={(value, event) => {
         const { action } = event;
         if (action === "input-change") {

@@ -32,7 +32,7 @@ export default function App() {
             <ProvideAuth>
               <AppApollo>
                 <AppUser>
-                  <ReactTooltip />
+                  <ReactTooltip className={"react-tooltip"} />
                   <Router history={history}>
                     <AppMatomo>
                       <Routes />

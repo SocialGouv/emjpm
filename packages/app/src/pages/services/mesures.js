@@ -18,9 +18,22 @@ export default function Mesures() {
   const { service_members } = useUser();
   const [
     {
-      service: { service_antennes },
+      service: { service_antennes, mesures_in_progress, dispo_max },
     },
   ] = service_members;
+
+  const sansAntenneEncours = service_antennes.reduce(
+    (acc, { mesures_in_progress }) => {
+      return acc - mesures_in_progress;
+    },
+    mesures_in_progress
+  );
+  const sansAntenneDispoMax = service_antennes.reduce(
+    (acc, { mesures_max }) => {
+      return acc - mesures_max;
+    },
+    dispo_max
+  );
 
   return (
     <FiltersContextProvider
@@ -42,7 +55,11 @@ export default function Mesures() {
                 alignItems="flex-start"
                 key={antenne.id}
                 mr={2}
-                sx={{ bg: "white", borderRadius: "20px", px: "2" }}
+                sx={{
+                  bg: "white",
+                  borderRadius: "20px",
+                  px: "2",
+                }}
               >
                 <Text>{antenne.name}</Text>
                 <MesureBadge
@@ -51,6 +68,23 @@ export default function Mesures() {
                 />
               </Flex>
             ))}
+            <Flex
+              flexDirection="column"
+              alignItems="flex-start"
+              mr={2}
+              sx={{
+                bg: "white",
+                borderRadius: "20px",
+                px: "2",
+                border: "1px dotted #545454 !important",
+              }}
+            >
+              <Text>Sans antenne</Text>
+              <MesureBadge
+                mesures_en_cours={sansAntenneEncours}
+                dispo_max={sansAntenneDispoMax}
+              />
+            </Flex>
           </Flex>
 
           <MesureListFilters service_antennes={service_antennes} />

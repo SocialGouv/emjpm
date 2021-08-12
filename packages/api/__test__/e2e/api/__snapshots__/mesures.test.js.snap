@@ -64,7 +64,7 @@ Object {
       "latitude": 48.5442,
       "longitude": -2.77005,
       "numero_dossier": "TESTES",
-      "numero_rg": "2020202020",
+      "numero_rg": "20202020",
       "ressources": Array [
         Object {
           "annee": 2019,
@@ -120,7 +120,7 @@ Object {
       "latitude": 48.5442,
       "longitude": -2.77005,
       "numero_dossier": "20190512",
-      "numero_rg": "18/A/3245",
+      "numero_rg": "18A32450",
       "ressources": Array [
         Object {
           "annee": 2020,

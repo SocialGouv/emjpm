@@ -63,7 +63,7 @@ function LabelStyle({ required, readOnly, isActive, size }) {
     left: "0",
     lineHeight: size === "small" ? "22px" : "32px",
     position: "absolute",
-    pt: "6px",
+    pt: "8px",
     px: "2",
     top: isActive ? "-12px" : "0px",
     transition: "150ms ease-in-out all",
