@@ -76,7 +76,7 @@
     "recharts": "^1.8.5",
     "sass": "^1.37.5",
     "styled-components": "^4.4.1",
-    "theme-ui": "^0.10",
+    "theme-ui": "0.3",
     "use-debounce": "^5.2.1",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.9"
