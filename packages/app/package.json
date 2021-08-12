@@ -3,7 +3,7 @@
   "version": "25.129.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.21",
+    "@apollo/client": "^3.4.7",
     "@emjpm/biz": "^25.129.0",
     "@emotion/react": "^11.4.0",
     "@emotion/styled": "^11.3.0",
