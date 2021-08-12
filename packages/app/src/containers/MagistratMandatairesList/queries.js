@@ -159,7 +159,7 @@ export const GET_MANDATAIRES = gql`
       available
       user_type
       remaining_capacity
-      gestionnaire {
+      gestionnaires(distinct_on: [id]) {
         id
         discriminator
         mesures_awaiting
@@ -346,7 +346,7 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
       habilitation
       available
       user_type
-      gestionnaire {
+      gestionnaires(distinct_on: [id]) {
         id
         discriminator
         mesures_awaiting

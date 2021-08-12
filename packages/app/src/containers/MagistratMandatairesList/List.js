@@ -107,7 +107,9 @@ function MagistratMandatairesListList(props) {
   return (
     <>
       {data.mandatairesList.map((item) => {
-        const { gestionnaire } = item;
+        const {
+          gestionnaires: [gestionnaire],
+        } = item;
         const to = `/magistrats/gestionnaires/${gestionnaire.id}`;
         const onItemClick = (e) => {
           if (e.ctrlKey) {

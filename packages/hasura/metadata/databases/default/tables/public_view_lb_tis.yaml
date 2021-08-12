@@ -6,7 +6,16 @@ object_relationships:
   using:
     manual_configuration:
       column_mapping:
-        departement_code: departement_code
+        uid: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire
+        schema: public
+array_relationships:
+- name: gestionnaires
+  using:
+    manual_configuration:
+      column_mapping:
         uid: id
       insertion_order: null
       remote_table:
