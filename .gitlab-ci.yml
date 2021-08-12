@@ -11,7 +11,7 @@ stages:
 Trigger K8SCI:
   when: manual
   stage: Trigger K8SCI
-  image: curlimages/curl:7.77.0
+  image: curlimages/curl:7.78.0
   except:
     variables:
       - $RUN_K8SCI
@@ -24,7 +24,7 @@ Trigger K8SCI:
 
 Run K8SCI:
   stage: Run K8SCI
-  image: curlimages/curl:7.77.0
+  image: curlimages/curl:7.78.0
   only:
     variables:
       - $RUN_K8SCI
