@@ -8,6 +8,8 @@ import useUser from "~/hooks/useUser";
 import { DropDownMenu, Header as HeaderComponent } from "~/components";
 import { useAuth } from "~/user/Auth";
 
+import { BoxWrapper } from "~/components/Grid";
+
 export const defaultLinks = [
   // { title: "Centre d'assistance", to: "https://emjpm-blog.azurewebsites.net" }
 ];
@@ -23,7 +25,7 @@ function Header(props) {
     logout(history);
   }
   return (
-    <>
+    <BoxWrapper>
       <HeaderComponent
         email={email}
         Link={Link}
@@ -31,7 +33,7 @@ function Header(props) {
         disconnect={handleLogout}
         DropDownMenu={DropDownMenu}
       />
-    </>
+    </BoxWrapper>
   );
 }
 

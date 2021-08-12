@@ -1,11 +1,12 @@
 import styled from "@emotion/styled";
 import { ChevronDown } from "@styled-icons/evil/ChevronDown";
 import { UserCircle } from "@styled-icons/fa-regular/UserCircle";
+import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useRef, useState } from "react";
+import { useRef, useState, useCallback } from "react";
 import { Box, Flex, Text } from "rebass";
 
-import { Logo } from "~/components";
+import { LogoEtat } from "~/components";
 import { useOnClickOutside } from "~/hooks";
 
 const BlueUserCircle = styled(UserCircle)`
@@ -30,10 +31,45 @@ function Header(props) {
     setState(!state);
   }
 
+  const history = useHistory();
+
+  const goToHome = useCallback(() => {
+    history.push("/");
+  }, [history]);
+
   return (
-    <Flex alignItems="center" flexWrap="wrap" justifyContent="space-between">
+    <Flex
+      alignItems="center"
+      flexWrap="wrap"
+      justifyContent="space-between"
+      height="115px"
+    >
       <Box p={1}>
-        <Logo hasTitle />
+        <Flex flexWrap="wrap" justifyContent="left">
+          <Box>
+            <LogoEtat />
+          </Box>
+          <Box ml={2}>
+            <button onClick={goToHome} style={{ paddingTop: "24px" }}>
+              <Text
+                color="#007AD9"
+                fontWeight="100"
+                fontSize="5"
+                style={{ display: "inline" }}
+              >
+                e
+              </Text>
+              <Text
+                color="#404040"
+                fontWeight="100"
+                fontSize="5"
+                style={{ display: "inline" }}
+              >
+                MJPM
+              </Text>
+            </button>
+          </Box>
+        </Flex>
       </Box>
       {!isDisconnected && (
         <Box ref={ref} p={1} sx={{ position: "relative" }}>
