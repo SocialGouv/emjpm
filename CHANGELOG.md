@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.129.0](https://github.com/SocialGouv/emjpm/compare/v25.128.0...v25.129.0) (2021-08-12)
+
+
+### Bug Fixes
+
+* **ti:** mandataire list relation ([e03caef](https://github.com/SocialGouv/emjpm/commit/e03caef6ca711b710ca05eea89de60022a912bac))
+
+
+### Features
+
+* **design:** marque de l etat ([5788bf1](https://github.com/SocialGouv/emjpm/commit/5788bf18994f8366304404749ea92f949fa0a896))
+
+
+
+
+
 # [25.128.0](https://github.com/SocialGouv/emjpm/compare/v25.127.0...v25.128.0) (2021-08-11)
 
 
