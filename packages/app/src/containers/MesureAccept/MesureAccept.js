@@ -82,7 +82,15 @@ export function MesureAccept(props) {
       champ_mesure,
       nature_mesure,
       civilite,
-    } = en_attente_reouverture ? mesure_en_attente_reouvertures[0] : mesure;
+    } = en_attente_reouverture
+      ? mesure_en_attente_reouvertures[0]
+      : {
+          ...mesure,
+          judgment_date: mesure.judgmentDate,
+          is_urgent: mesure.isUrgent,
+          champ_mesure: mesure.champMesure,
+          nature_mesure: mesure.natureMesure,
+        };
 
     await updateMesure({
       refetchQueries: [
@@ -108,7 +116,7 @@ export function MesureAccept(props) {
         cabinet,
         judgment_date,
         is_urgent,
-        champ_mesure,
+        champ_mesure: champ_mesure ? champ_mesure : null,
         nature_mesure,
         civilite,
       },
