@@ -64,8 +64,8 @@ export default function DirectionStatsKPI() {
             loading={loading}
             data={data}
             load={(data) =>
-              data.gestionnairePreIndNumber
-                ? Number(data.gestionnairePreIndNumber.aggregate.count)
+              data.gestionnairePreNumber
+                ? Number(data.gestionnairePreNumber.aggregate.count)
                 : 0
             }
             title="Préposés d'établissement"
