@@ -1,18 +1,23 @@
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
 import { useAuth, impersonateLogout } from "~/user/Auth";
+import ReactTooltip from "react-tooltip";
 
 import style from "./style";
+import { useEffect } from "react";
 
 export default function Impersonation({}) {
   const { authStore } = useAuth();
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
   if (!authStore.isImpersonated) return null;
   return (
     <div style={style}>
-      <button onClick={impersonateLogout}>
-        <UserSecret size={12} />{" "}
-        {`Vous êtes actuellement connecté en mode impersonate depuis un compte administrateur.`}
-        <br />
-        {`Cliquez ici pour vous déconnecter et revenir à votre compte administrateur.`}
+      <button
+        onClick={impersonateLogout}
+        data-tip="Cliquez ici pour vous déconnecter et revenir à votre compte administrateur."
+      >
+        <UserSecret size={12} /> {`impersonation`}
       </button>
     </div>
   );

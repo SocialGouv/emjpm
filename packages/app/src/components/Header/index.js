@@ -5,9 +5,10 @@ import { useHistory } from "react-router-dom";
 import PropTypes from "prop-types";
 import { useRef, useState, useCallback } from "react";
 import { Box, Flex, Text } from "rebass";
-
 import { LogoEtat } from "~/components";
 import { useOnClickOutside } from "~/hooks";
+
+import Impersonation from "~/containers/Impersonation";
 
 const BlueUserCircle = styled(UserCircle)`
   color: #006be6;
@@ -74,6 +75,7 @@ function Header(props) {
       {!isDisconnected && (
         <Box ref={ref} p={1} sx={{ position: "relative" }}>
           <Flex onClick={toggle} sx={{ cursor: "pointer" }} alignItems="center">
+            <Impersonation />
             <Box height="25px">
               <BlueUserCircle size={25} />
             </Box>

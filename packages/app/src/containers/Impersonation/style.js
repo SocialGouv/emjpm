@@ -1,7 +1,5 @@
 const style = {
-  position: "absolute",
-  top: 10,
-  left: "35%",
+  margin: "1em",
   padding: "1em",
   zIndex: 1050,
   backgroundColor: "white",

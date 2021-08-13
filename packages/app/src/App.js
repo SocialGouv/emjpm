@@ -14,8 +14,6 @@ import AppMatomo from "~/user/AppMatomo";
 
 import { ErrorBoundary, AutoReload, GlobalLoader } from "~/components";
 
-import Impersonation from "~/containers/Impersonation";
-
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 
@@ -40,7 +38,6 @@ export default function App() {
                   </Router>
                 </AppUser>
               </AppApollo>
-              <Impersonation />
             </ProvideAuth>
           </GlobalLoader>
         </ErrorBoundary>
