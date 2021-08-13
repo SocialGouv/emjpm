@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.3](https://github.com/SocialGouv/emjpm/compare/v25.129.2...v25.129.3) (2021-08-13)
+
+
+### Bug Fixes
+
+* **accept-mesure:** remap fields ([77622ba](https://github.com/SocialGouv/emjpm/commit/77622ba050c6eb6226e41d510797acc1a6d6f5cf))
+* **impersonate:** bugfix redesign ([873306a](https://github.com/SocialGouv/emjpm/commit/873306a9420df1570f8f77d7ea14d6a98d19c684))
+* **impersonate:** redesign ([0755b71](https://github.com/SocialGouv/emjpm/commit/0755b71c0ba6220c88f2b01b3d4fa499993a7a84))
+
+
+
+
+
 ## [25.129.2](https://github.com/SocialGouv/emjpm/compare/v25.129.1...v25.129.2) (2021-08-13)
 
 
