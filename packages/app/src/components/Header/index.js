@@ -74,18 +74,22 @@ function Header(props) {
       </Box>
       {!isDisconnected && (
         <Box ref={ref} p={1} sx={{ position: "relative" }}>
-          <Flex onClick={toggle} sx={{ cursor: "pointer" }} alignItems="center">
-            <Impersonation />
+          <Flex alignItems="center">
             <Box height="25px">
-              <BlueUserCircle size={25} />
-            </Box>
-            <Box>
-              <Text color="black" fontWeight="600" ml={1}>
-                {email}
-              </Text>
+              <Impersonation />
             </Box>
             <Box height="25px">
-              <ChevronDown size={25} />
+              <Flex onClick={toggle} sx={{ cursor: "pointer" }}>
+                <BlueUserCircle size={25} />
+                <Box>
+                  <Text color="black" fontWeight="600" ml={1}>
+                    {email}
+                  </Text>
+                </Box>
+                <Box height="25px">
+                  <ChevronDown size={25} />
+                </Box>
+              </Flex>
             </Box>
           </Flex>
           {state && (

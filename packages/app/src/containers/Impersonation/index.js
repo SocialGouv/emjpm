@@ -12,13 +12,12 @@ export default function Impersonation({}) {
   });
   if (!authStore.isImpersonated) return null;
   return (
-    <div style={style}>
-      <button
-        onClick={impersonateLogout}
-        data-tip="Cliquez ici pour vous déconnecter et revenir à votre compte administrateur."
-      >
-        <UserSecret size={12} /> {`impersonation`}
-      </button>
-    </div>
+    <button
+      style={style}
+      onClick={impersonateLogout}
+      data-tip="Cliquez ici pour vous déconnecter et revenir à votre compte administrateur."
+    >
+      <UserSecret size={12} /> {`impersonation`}
+    </button>
   );
 }
