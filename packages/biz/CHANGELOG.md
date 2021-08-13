@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.2](https://github.com/SocialGouv/emjpm/compare/v25.129.1...v25.129.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#2604](https://github.com/SocialGouv/emjpm/issues/2604)) ([371fe3a](https://github.com/SocialGouv/emjpm/commit/371fe3a93466c1442b5d768e087c5b9225256ef4))
+* **upgrades:** ci and lock theme-ui ([9f28a00](https://github.com/SocialGouv/emjpm/commit/9f28a00f7ee21d157e47af7288ea905600f9efff))
+
+
+
+
+
 ## [25.129.1](https://github.com/SocialGouv/emjpm/compare/v25.129.0...v25.129.1) (2021-08-12)
 
 **Note:** Version bump only for package @emjpm/biz

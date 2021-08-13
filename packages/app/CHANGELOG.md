@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.2](https://github.com/SocialGouv/emjpm/compare/v25.129.1...v25.129.2) (2021-08-13)
+
+
+### Bug Fixes
+
+* **deps:** update all non-major dependencies ([#2604](https://github.com/SocialGouv/emjpm/issues/2604)) ([371fe3a](https://github.com/SocialGouv/emjpm/commit/371fe3a93466c1442b5d768e087c5b9225256ef4))
+* **deps:** update dependency @apollo/client to ^3.4.7 ([#2605](https://github.com/SocialGouv/emjpm/issues/2605)) ([a82f48e](https://github.com/SocialGouv/emjpm/commit/a82f48ebe22a827d3b9e01f5d5389c515dc407b7))
+* **deps:** update dependency dotenv to v10 ([#2609](https://github.com/SocialGouv/emjpm/issues/2609)) ([8222e79](https://github.com/SocialGouv/emjpm/commit/8222e79909160a7180451bf905665f7adcf1f9f2))
+* **deps:** update dependency eslint-config-prettier to v8 ([#2610](https://github.com/SocialGouv/emjpm/issues/2610)) ([15bdea9](https://github.com/SocialGouv/emjpm/commit/15bdea9e9d57de3752c616f9045f460440520bab))
+* **eslint:** upgrade prettier ([5a018bf](https://github.com/SocialGouv/emjpm/commit/5a018bf644d126f00cec7490b6bc067df4da9fae))
+* **typobug:** dd stats prepose ([ce7c68d](https://github.com/SocialGouv/emjpm/commit/ce7c68d2c1160a0828d608b793004dc89d8fc0c6))
+* **upgrades:** ci and lock theme-ui ([9f28a00](https://github.com/SocialGouv/emjpm/commit/9f28a00f7ee21d157e47af7288ea905600f9efff))
+
+
+
+
+
 ## [25.129.1](https://github.com/SocialGouv/emjpm/compare/v25.129.0...v25.129.1) (2021-08-12)
 
 
