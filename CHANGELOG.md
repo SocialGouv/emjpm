@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.129.4](https://github.com/SocialGouv/emjpm/compare/v25.129.3...v25.129.4) (2021-08-13)
+
+
+### Bug Fixes
+
+* **migration:** uniq name constraint ([2ede44f](https://github.com/SocialGouv/emjpm/commit/2ede44f16606ffec884bf859b4a8f07a38995ad1))
+
+
+
+
+
 ## [25.129.3](https://github.com/SocialGouv/emjpm/compare/v25.129.2...v25.129.3) (2021-08-13)
 
 
