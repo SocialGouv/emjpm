@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE mesures SET numero_rg='00000000' WHERE numero_rg IS NULL;
