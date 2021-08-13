@@ -6,7 +6,7 @@ extends:
   - plugin:import/recommended
   - plugin:jsx-a11y/recommended
   - plugin:react-hooks/recommended
-  - prettier/react
+  - prettier
 parserOptions:
   ecmaFeatures:
     jsx: true
