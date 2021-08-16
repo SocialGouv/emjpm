@@ -4,11 +4,13 @@ import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
 import { Box, Flex } from "rebass";
 
 import { MesureImportPanel } from "~/containers/MesureImport";
+import MesureImportDeleteAll from "~/containers/MesureImportDeleteAll";
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
   MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "~/constants/import";
 import { Heading, Text } from "~/components";
+import useUser from "~/hooks/useUser";
 
 function DocumentLink(props) {
   const { children, document } = props;
@@ -35,6 +37,8 @@ function DocumentLink(props) {
 }
 
 function MandataireMesureImport({ mandataireUserId }) {
+  const user = useUser();
+  const mandataireId = user.mandataire.id;
   return (
     <Flex flexDirection="column">
       <Box mb={2}>
@@ -62,6 +66,9 @@ function MandataireMesureImport({ mandataireUserId }) {
         <Text mb="1" lineHeight="2">
           {`Nous vous conseillons de réaliser l’import de vos mesures qu’une seule fois au début de votre utilisation de e-MJPM. Une fois le tableau importé une première fois, vous serez prêt.e à utiliser parfaitement e-MJPM. Vous pourrez alors faire toutes les modifications, les mises à jours et les ajouts vous même.`}
         </Text>
+      </Box>
+      <Box mt={2}>
+        <MesureImportDeleteAll mandataireId={mandataireId} />
       </Box>
       <Box mt={2}>
         <Heading size={3} mb="2">{`Importer vos mesures`}</Heading>

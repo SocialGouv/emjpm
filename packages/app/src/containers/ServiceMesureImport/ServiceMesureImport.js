@@ -4,6 +4,7 @@ import { FilePdf } from "@styled-icons/fa-regular/FilePdf";
 import { Box, Flex } from "rebass";
 
 import { MesureImportPanel } from "~/containers/MesureImport";
+import MesureImportDeleteAll from "~/containers/MesureImportDeleteAll";
 import { DocumentLink } from "~/containers/MesureImport/DocumentLink";
 import {
   MANDATAIRE_MESURE_IMPORT_MANUAL,
@@ -49,6 +50,9 @@ function ServiceMesureImport({ serviceId }) {
                 "Nous vous conseillons de réaliser l’import de vos mesures qu’une seule fois au début de votre utilisation de e-MJPM. Une fois le tableau importé une première fois, vous serez prêt.e à utiliser parfaitement e-MJPM. Vous pourrez alors faire toutes les modifications, les mises à jours et les ajouts vous même."
               }
             </Text>
+          </Box>
+          <Box mt={2}>
+            <MesureImportDeleteAll serviceId={serviceId} />
           </Box>
           <Box mt={2}>
             <Heading size={3} mb="2">

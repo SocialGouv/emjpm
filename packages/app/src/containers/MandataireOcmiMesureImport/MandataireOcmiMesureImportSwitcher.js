@@ -11,6 +11,7 @@ import { Text, Switch, Button } from "~/components";
 import { SYNC_OCMI_ENABLE, IMPORT_OCMI_MESURES } from "./mutations";
 import { toast } from "react-toastify";
 import useQueryReady from "~/hooks/useQueryReady";
+import MesureImportDeleteAll from "~/containers/MesureImportDeleteAll";
 
 const StyledCheckCircleOutline = styled(CheckCircleOutline)`
   margin-right: 10px;
@@ -119,27 +120,30 @@ function MandataireOcmiMesureImportSwitcher({
           </Box>
         </>
       )}
-      {syncEnabled || (
+
+      <Box mt={50} mb={50}>
+        <MesureImportDeleteAll mandataireId={mandataireId} />
+      </Box>
+
+      <Box mb={50}>
         <Box>
-          <Box mb={50}>
+          <Text mb="1" lineHeight="2">
+            {`Vous avez également l'option d'importer vos mesures depuis OCMI en cliquant sur le bouton ci-dessous.`}
+          </Text>
+          <Text mb="1" lineHeight="2">
+            {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
+          </Text>
+          <Box mb={2}>
             <Text mb="1" lineHeight="2">
-              {`Vous avez également l'option d'importer vos mesures depuis OCMI en cliquant sur le bouton ci-dessous.`}
+              <StyledWarning size={18} />
+              {`La mise à jour des mesures se fait à partir de la correspondance avec le Numéro RG le le SIRET du tribunal, veillez à ce que ces informations soient correctement renseignées et correspondent entre OCMI et eMJPM.`}
             </Text>
-            <Text mb="1" lineHeight="2">
-              {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
-            </Text>
-            <Box mb={2}>
-              <Text mb="1" lineHeight="2">
-                <StyledWarning size={18} />
-                {`La mise à jour des mesures se fait à partir de la correspondance avec le Numéro RG le le SIRET du tribunal, veillez à ce que ces informations soient correctement renseignées et correspondent entre OCMI et eMJPM.`}
-              </Text>
-            </Box>
-            <Flex justifyContent="center">
-              <Button onClick={importMesuresNow}>Importer maintenant</Button>
-            </Flex>
           </Box>
+          <Flex justifyContent="center">
+            <Button onClick={importMesuresNow}>Importer maintenant</Button>
+          </Flex>
         </Box>
-      )}
+      </Box>
     </Flex>
   );
 }
