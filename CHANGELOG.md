@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.130.0](https://github.com/SocialGouv/emjpm/compare/v25.129.4...v25.130.0) (2021-08-16)
+
+
+### Features
+
+* **import:** delete-all-mesures button ([4401af0](https://github.com/SocialGouv/emjpm/commit/4401af0316b9509d81123c78816213650b38ea30))
+
+
+
+
+
 ## [25.129.4](https://github.com/SocialGouv/emjpm/compare/v25.129.3...v25.129.4) (2021-08-13)
 
 
