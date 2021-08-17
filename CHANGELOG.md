@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.130.3](https://github.com/SocialGouv/emjpm/compare/v25.130.2...v25.130.3) (2021-08-17)
+
+
+### Bug Fixes
+
+* **create-mesures:** prepose sess var ([868b791](https://github.com/SocialGouv/emjpm/commit/868b79162b442bec74c9c518154924331ce6a02c))
+* **message:** valid numero rg prefix ([c5cca69](https://github.com/SocialGouv/emjpm/commit/c5cca6947bfafe7a59e074f18a5d280a281ec604))
+* **script:** fix bash ([b2dfda0](https://github.com/SocialGouv/emjpm/commit/b2dfda01259ea8fead96ee0fe255d5dbece357ee))
+
+
+
+
+
 ## [25.130.2](https://github.com/SocialGouv/emjpm/compare/v25.130.1...v25.130.2) (2021-08-17)
 
 
