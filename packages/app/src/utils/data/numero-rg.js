@@ -11,4 +11,4 @@ export function validateNumeroRG(str) {
 }
 
 export const MESSAGE_VALID_NUMERO_RG =
-  "Un Numéro RG valide se compose de 8 caractères alphanumériques majuscules (normalement 2 chiffres, suivi d'une lettre, puis de 5 chiffres).";
+  "Un numéro RG valide se compose de 8 caractères alphanumériques majuscules (normalement 2 chiffres, suivi d'une lettre, puis de 5 chiffres). Nous vous recommandons de préfixer votre numéro RG d'un 0 si vous disposez de moins de 8 caractères.";
