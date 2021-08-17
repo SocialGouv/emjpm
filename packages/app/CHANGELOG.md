@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.130.2](https://github.com/SocialGouv/emjpm/compare/v25.130.1...v25.130.2) (2021-08-17)
+
+
+### Bug Fixes
+
+* **ci:** deps ([d6b72f8](https://github.com/SocialGouv/emjpm/commit/d6b72f841b53146663df60c8f33e9146f5a813d5))
+* **deps:** update all dependencies ([#2623](https://github.com/SocialGouv/emjpm/issues/2623)) ([92205e2](https://github.com/SocialGouv/emjpm/commit/92205e212b6127dcb2de080b4a7935e030505c52))
+* **ti:** mesures en_attente at first ([8e447f6](https://github.com/SocialGouv/emjpm/commit/8e447f6ad41652868c3e701387c501eb584efc13))
+
+
+
+
+
 ## [25.130.1](https://github.com/SocialGouv/emjpm/compare/v25.130.0...v25.130.1) (2021-08-17)
 
 
