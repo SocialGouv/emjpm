@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.130.4](https://github.com/SocialGouv/emjpm/compare/v25.130.3...v25.130.4) (2021-08-17)
+
+
+### Bug Fixes
+
+* **filter:** magistrat cabinet ([23d2deb](https://github.com/SocialGouv/emjpm/commit/23d2deb68fdc172a004e70d38e352dadc08fc2a8))
+
+
+
+
+
 ## [25.130.3](https://github.com/SocialGouv/emjpm/compare/v25.130.2...v25.130.3) (2021-08-17)
 
 
