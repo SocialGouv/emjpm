@@ -19,7 +19,10 @@ export function Provider(props) {
     initialValues.searchText || ""
   );
 
+  const [cabinet, changeCabinet] = useState(initialValues.cabinet || "");
+
   const debouncedSearchText = useDebounce(searchText, 300);
+  const debouncedCabinet = useDebounce(cabinet, 300);
 
   // Make the context object:
   const filtersContext = {
@@ -30,6 +33,9 @@ export function Provider(props) {
     etatMesure,
     natureMesure,
     searchText,
+    cabinet,
+    debouncedCabinet,
+    changeCabinet,
   };
 
   // pass the value in provider and return

@@ -19,7 +19,7 @@ const RESULT_PER_PAGE = 20;
 function MagistratMesures() {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { natureMesure, etatMesure, debouncedSearchText } =
+  const { natureMesure, etatMesure, debouncedSearchText, debouncedCabinet } =
     useContext(FiltersContext);
   const {
     magistrat: { ti_id: tiId },
@@ -37,6 +37,7 @@ function MagistratMesures() {
     etatMesure: etatMesure ? etatMesure : null,
     natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,
+    cabinet: debouncedCabinet ? `%${debouncedCabinet}%` : null,
     searchText:
       debouncedSearchText && debouncedSearchText !== ""
         ? `%${debouncedSearchText}%`

@@ -35,6 +35,8 @@ function MagistratFilters() {
     changeEtatMesure,
     searchText,
     changeSearchText,
+    cabinet,
+    changeCabinet,
   } = useContext(FiltersContext);
 
   return (
@@ -72,6 +74,20 @@ function MagistratFilters() {
                 size="small"
                 placeholder="Numéro RG, Dossier, Ville, Code Postal..."
                 label="Rechercher"
+                forceActive
+              />
+            </Box>
+            <Box width="160px" mr={1}>
+              <Input
+                value={cabinet}
+                spellCheck="false"
+                autoComplete="false"
+                onChange={(event) => changeCabinet(event.target.value)}
+                name="search2"
+                size="small"
+                placeholder="Cabinet"
+                label="Préciser un cabinet"
+                forceActive
               />
             </Box>
           </Flex>

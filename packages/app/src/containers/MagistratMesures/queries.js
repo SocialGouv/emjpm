@@ -28,11 +28,13 @@ export const MAGISTRAT_MESURES_QUERY = gql`
     $natureMesure: nature_mesure_enum
     $etatMesure: mesure_status_enum
     $searchText: String
+    $cabinet: String
     $offset: Int
   ) {
     mesures_aggregate: search_mesures_aggregate(
       args: { search: $searchText }
       where: {
+        cabinet: { _like: $cabinet }
         nature_mesure: { _eq: $natureMesure }
         status: { _eq: $etatMesure }
         ti_id: { _eq: $tiId }
@@ -45,6 +47,7 @@ export const MAGISTRAT_MESURES_QUERY = gql`
     mesures: search_mesures(
       args: { search: $searchText }
       where: {
+        cabinet: { _like: $cabinet }
         nature_mesure: { _eq: $natureMesure }
         status: { _eq: $etatMesure }
         ti_id: { _eq: $tiId }
