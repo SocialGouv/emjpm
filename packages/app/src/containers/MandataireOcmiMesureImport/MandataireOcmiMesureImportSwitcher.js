@@ -6,7 +6,7 @@ import { Warning } from "@styled-icons/entypo/Warning";
 import { CheckCircleOutline } from "@styled-icons/material/CheckCircleOutline";
 import styled from "styled-components";
 
-import { Text, Switch, Button } from "~/components";
+import { Text, Switch, Button, Heading } from "~/components";
 
 import { SYNC_OCMI_ENABLE, IMPORT_OCMI_MESURES } from "./mutations";
 import { toast } from "react-toastify";
@@ -87,6 +87,9 @@ function MandataireOcmiMesureImportSwitcher({
 
   return (
     <Flex m={2} flexDirection="column">
+      <Heading size={3} mb="3">
+        Synchronisez vos mesures
+      </Heading>
       <Flex justifyContent="left">
         <Box mb={2}>
           <Switch
@@ -112,33 +115,41 @@ function MandataireOcmiMesureImportSwitcher({
               {`Votre compte eMJPM est synchronisé avec votre compte OCMI, une mise à jour des données d'eMJPM s'effectuera chaque nuit.`}
             </Text>
           </Box>
-          <Box mb={2}>
-            <Text mb="1" lineHeight="2">
-              <StyledWarning size={18} />
-              {`Toutes les mesures de votre compte eMJPM seront mise à jour et les données de celles-ci remplacées par celles des mesures correspondantes de votre compte OCMI lors de chaque synchronisation. En activant cette option vos mesures ne seront pas modifiables sur eMJPM.`}
-            </Text>
-          </Box>
         </>
       )}
-
-      <Box mt={50} mb={50}>
-        <MesureImportDeleteAll mandataireId={mandataireId} />
+      <Box mb={2}>
+        <Text mb="1" lineHeight="2">
+          {`La mise à jour des mesures se fait à partir de la correspondance avec le numéro RG et le SIRET du tribunal. Si une correspondance est trouvée entre OCMI et eMJPM leur données seront mis à jour, sinon la mesure sera créée.`}
+        </Text>
+        <Text mb="1" lineHeight="2">
+          <StyledWarning size={18} />
+          {`En activant cette option vos mesures ne seront pas modifiables sur eMJPM.`}
+        </Text>
       </Box>
 
-      <Box mb={50}>
+      <Box mt={20} mb={20}>
+        <Heading size={3} mb="1">
+          Supprimez vos mesures
+        </Heading>
+        <MesureImportDeleteAll mandataireId={mandataireId} />
+        <Text mt="3" mb="1" lineHeight="2">
+          {`A la suite de cette manipulation vous pouvez réimporter vos mesures. Pour cela, vous pouvez vous référer à la section suivante.`}
+        </Text>
+      </Box>
+
+      <Box mb={20}>
+        <Heading size={3} mb="1">
+          Déclenchez manuellement l'import des mesures
+        </Heading>
         <Box>
           <Text mb="1" lineHeight="2">
-            {`Vous avez également l'option d'importer vos mesures depuis OCMI en cliquant sur le bouton ci-dessous.`}
+            {`Vous pouvez déclencher l’import de vos mesures depuis OCMI en cliquant sur le bouton ci-dessous.`}
           </Text>
-          <Text mb="1" lineHeight="2">
-            {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
-          </Text>
-          <Box mb={2}>
+          {syncEnabled || (
             <Text mb="1" lineHeight="2">
-              <StyledWarning size={18} />
-              {`La mise à jour des mesures se fait à partir de la correspondance avec le Numéro RG le le SIRET du tribunal, veillez à ce que ces informations soient correctement renseignées et correspondent entre OCMI et eMJPM.`}
+              {`Vous pourrez ensuite modifier vos mesures dans eMJPM.`}
             </Text>
-          </Box>
+          )}
           <Flex justifyContent="center">
             <Button onClick={importMesuresNow}>Importer maintenant</Button>
           </Flex>

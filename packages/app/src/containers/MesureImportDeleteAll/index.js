@@ -5,7 +5,16 @@ import { useMutation } from "@apollo/client";
 import { Box, Flex } from "rebass";
 import { Text, Button } from "~/components";
 
+import { Warning } from "@styled-icons/entypo/Warning";
+
 import { DELETE_ALL_MESURES } from "./mutations";
+
+import styled from "styled-components";
+
+const StyledWarning = styled(Warning)`
+  margin-right: 10px;
+  color: orange;
+`;
 
 export default function MesureImportDeleteAll({ mandataireId, serviceId }) {
   const [deleteAllMesures, { loading, error }] = useMutation(
@@ -22,12 +31,16 @@ export default function MesureImportDeleteAll({ mandataireId, serviceId }) {
   return (
     <>
       <Box>
-        <Text mb="1" lineHeight="2">
-          {`Depuis l'activation de la fonctionnalité des imports incrémentaux, qui permet de mettre à jour une mesure en se basant sur son numéro rg et le SIRET du tribunal, les mesures ne sont plus supprimées avant l'importation. Si vous souhaitez malgré tout supprimer avant d'effectuer votre import vous pouvez le faire manuellement en cliquant sur le boutton ci dessous. Attention cela supprimera toutes vos mesures d'eMJPM. Vous pourrez ensuite réimporter vos mesures proprement sur une base vide.`}
+        <Text mb="1">
+          {`L'import de mesure est incrémental. Ainsi, aucune mesure est supprimée durant l'import. Nous mettons à jour les mesures en nous basant sur leur numéro RG et le SIRET du tribunal. Si vous souhaitez supprimer toutes les mesures de votre compte eMJPM avant d'effectuer votre import, vous pouvez le faire en cliquant sur le bouton ci-dessous.`}
+        </Text>
+        <Text mb="1">
+          <StyledWarning size={18} />
+          {`Attention, cela supprimera toutes les mesures de votre compte eMJPM`}
         </Text>
       </Box>
       <Flex justifyContent="center">
-        <Button onClick={() => deleteAllMesures()}>
+        <Button mt="1" onClick={() => deleteAllMesures()}>
           Supprimer toutes les mesures
         </Button>
       </Flex>
