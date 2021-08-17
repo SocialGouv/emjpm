@@ -51,7 +51,7 @@ export const MAGISTRAT_MESURES_QUERY = gql`
       }
       offset: $offset
       limit: 20
-      order_by: { created_at: desc }
+      order_by: [{ status: asc }, { created_at: desc }]
     ) {
       id
       cabinet
