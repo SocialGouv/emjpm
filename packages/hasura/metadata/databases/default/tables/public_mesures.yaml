@@ -44,7 +44,9 @@ array_relationships:
         schema: public
 insert_permissions:
 - permission:
-    check: {}
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
     columns:
     - annee_naissance
     - antenne_id
@@ -79,7 +81,9 @@ insert_permissions:
     - ville
   role: individuel
 - permission:
-    check: {}
+    check:
+      mandataire_id:
+        _eq: X-Hasura-Mandataire-Id
     columns:
     - annee_naissance
     - antenne_id
@@ -112,8 +116,6 @@ insert_permissions:
     - ti_id
     - type_etablissement
     - ville
-    set:
-      mandataire_id: x-hasura-mandataire-id
   role: prepose
 - permission:
     check:
@@ -151,8 +153,6 @@ insert_permissions:
     - ti_id
     - type_etablissement
     - ville
-    set:
-      service_id: x-hasura-Service-Id
   role: service
 - permission:
     check: {}
