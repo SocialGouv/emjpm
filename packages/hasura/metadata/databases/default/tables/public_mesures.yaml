@@ -77,9 +77,6 @@ insert_permissions:
     - ti_id
     - type_etablissement
     - ville
-    set:
-      mandataire_id: x-hasura-mandataire-id
-      service_id: x-hasura-service-id
   role: individuel
 - permission:
     check: {}

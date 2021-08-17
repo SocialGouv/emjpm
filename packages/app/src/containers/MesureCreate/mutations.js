@@ -27,6 +27,8 @@ export const ADD_MESURE = gql`
   ) {
     add_or_update: insert_mesures(
       objects: {
+        mandataire_id: $mandataireId
+        service_id: $serviceId
         departement_code: $departement_code
         date_nomination: $date_nomination
         date_protection_en_cours: $date_protection_en_cours
