@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.130.1](https://github.com/SocialGouv/emjpm/compare/v25.130.0...v25.130.1) (2021-08-17)
+
+
+### Bug Fixes
+
+* **create-mesure:** bug cast null2str from session ([72a6068](https://github.com/SocialGouv/emjpm/commit/72a6068213a14876c2c92f62035bd5fc3fe98913))
+
+
+
+
+
 # [25.130.0](https://github.com/SocialGouv/emjpm/compare/v25.129.4...v25.130.0) (2021-08-16)
 
 
