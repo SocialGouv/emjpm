@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.130.6](https://github.com/SocialGouv/emjpm/compare/v25.130.5...v25.130.6) (2021-08-23)
+
+
+### Bug Fixes
+
+* **design:** magistrat map padding top ([712f813](https://github.com/SocialGouv/emjpm/commit/712f813863643913bf5e084373a2694432f6a733))
+* **docs:** up numero_rg format details ([3ef40b9](https://github.com/SocialGouv/emjpm/commit/3ef40b936b9e0f7580c8151773bcd0a26c177ecd))
+
+
+
+
+
 ## [25.130.5](https://github.com/SocialGouv/emjpm/compare/v25.130.4...v25.130.5) (2021-08-17)
 
 
