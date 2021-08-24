@@ -30,7 +30,7 @@ function InputStyle(props) {
     height: props.size === "small" ? "42px" : "52px",
     lineHeight: props.size === "small" ? "22px" : "32px",
     opacity: props.readOnly || props.isActive ? "1" : "0",
-    outline: "none",
+    outline: props.outline ? props.outline : "none",
     pb: "1",
     position: "relative",
     pt: props.isActive ? "15px" : "10px",

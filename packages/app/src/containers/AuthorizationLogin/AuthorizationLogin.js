@@ -106,6 +106,7 @@ function AuthorizationLogin(props) {
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Votre nom d'utilisateur"
+              outline="default"
             />
             {formik.touched.email && (
               <InlineError message={formik.errors.email} fieldId="email" />
@@ -120,6 +121,7 @@ function AuthorizationLogin(props) {
               hasError={formik.errors.password && formik.touched.password}
               onChange={formik.handleChange}
               placeholder="Votre mot de passe"
+              outline="default"
             />
             {formik.touched.password && (
               <InlineError
