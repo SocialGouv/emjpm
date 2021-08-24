@@ -109,7 +109,11 @@ function AuthorizationLogin(props) {
               outline="default"
             />
             {formik.touched.email && (
-              <InlineError message={formik.errors.email} fieldId="email" />
+              <InlineError
+                message={formik.errors.email}
+                fieldId="email"
+                aria-live="polite"
+              />
             )}
           </Field>
           <Field>
@@ -127,6 +131,7 @@ function AuthorizationLogin(props) {
               <InlineError
                 message={formik.errors.password}
                 fieldId="password"
+                aria-live="polite"
               />
             )}
           </Field>

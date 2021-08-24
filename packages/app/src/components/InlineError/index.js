@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import { Flex, Text } from "rebass";
 
-function InlineError({ message, fieldId, showError }) {
+function InlineError({ message, fieldId, showError, ...props }) {
   return (
     showError !== false &&
     message && (
-      <Flex id={fieldId} alignItems="center" color="error">
+      <Flex id={fieldId} alignItems="center" color="error" {...props}>
         <Exclamation size="18" />
         <Text mx="1" fontSize="12px">
           {message}
