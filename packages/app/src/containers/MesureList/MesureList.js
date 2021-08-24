@@ -65,7 +65,8 @@ function MesureList() {
   }
 
   const queryVariables = {
-    antenne: antenne ? antenne.value : null,
+    antenne: antenne && antenne.value ? antenne.value : null,
+    antenne_null: antenne && antenne.value === false ? true : null,
     limit: RESULT_PER_PAGE,
     natureMesure: natureMesure ? natureMesure.value : null,
     offset: currentOffset,

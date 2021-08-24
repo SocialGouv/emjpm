@@ -9,6 +9,7 @@ export const MESURES_QUERY = gql`
     $searchText: String
     $offset: Int
     $antenne: Int
+    $antenne_null: Boolean
     $orderBy: [mesures_order_by!]
   ) {
     mesures_aggregate: search_mesures_aggregate(
@@ -16,7 +17,10 @@ export const MESURES_QUERY = gql`
       where: {
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
-        antenne_id: { _eq: $antenne }
+        _and: [
+          { antenne_id: { _eq: $antenne } }
+          { antenne_id: { _is_null: $antenne_null } }
+        ]
         departement_code: { _eq: $departement }
       }
     ) {
@@ -29,6 +33,10 @@ export const MESURES_QUERY = gql`
       where: {
         status: { _eq: en_attente }
         departement_code: { _eq: $departement }
+        _and: [
+          { antenne_id: { _eq: $antenne } }
+          { antenne_id: { _is_null: $antenne_null } }
+        ]
       }
     ) {
       annee_naissance
@@ -93,7 +101,10 @@ export const MESURES_QUERY = gql`
       where: {
         status: { _eq: $status }
         nature_mesure: { _eq: $natureMesure }
-        antenne_id: { _eq: $antenne }
+        _and: [
+          { antenne_id: { _eq: $antenne } }
+          { antenne_id: { _is_null: $antenne_null } }
+        ]
         departement_code: { _eq: $departement }
       }
     ) {

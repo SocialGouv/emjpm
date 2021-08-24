@@ -40,6 +40,10 @@ function MesureListFilters(props) {
       label: antenne.name,
       value: antenne.id,
     })),
+    {
+      label: "Sans antenne",
+      value: false,
+    },
   ];
 
   const departementsOptions = useMemo(
@@ -52,7 +56,7 @@ function MesureListFilters(props) {
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>
-            {service_antennes.length >= 2 && (
+            {service_antennes.length >= 1 && (
               <Box width="170px" mr={1}>
                 <Select
                   size="small"
