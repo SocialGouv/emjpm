@@ -4,6 +4,14 @@ import { Box, Button, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { Select, Text } from "~/components";
+import { Warning } from "@styled-icons/material/Warning";
+
+import styled from "styled-components";
+
+const StyledWarning = styled(Warning)`
+  margin-right: 10px;
+  color: orange;
+`;
 
 import { SERVICE_ANTENNES } from "./queries";
 
@@ -11,6 +19,7 @@ function ServiceMesureAntennesMatcher({
   serviceId,
   invalidAntenneNames,
   onSubmitAntennesMap,
+  reset,
 }) {
   const { data, loading, error } = useQuery(SERVICE_ANTENNES, {
     variables: { service_id: serviceId },
@@ -49,6 +58,7 @@ function ServiceMesureAntennesMatcher({
     <form onSubmit={handleSubmit}>
       <Box mb={4}>
         <Text color="textSecondary" mb={4} width="50%" lineHeight={1.5}>
+          <StyledWarning size="18" />
           {
             "Certaines antennes ne sont pas reconnues, associez les à des antennes eMJPM existantes pour continuer l'import."
           }
@@ -76,8 +86,12 @@ function ServiceMesureAntennesMatcher({
             </Box>
           </Flex>
         ))}
-        <Button type="submit" mb={1}>
+        <Button type="submit" mb={1} mr={5}>
           {"Importez les mesures"}
+        </Button>
+        ou
+        <Button variant="outline" onClick={reset} ml={5}>
+          Sélectionner un autre fichier
         </Button>
       </Box>
     </form>

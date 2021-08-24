@@ -36,9 +36,11 @@ const MesureImportResult = ({
             </>
           )}
         </Flex>
-        <Button variant="outline" onClick={reset}>
-          Sélectionner un autre fichier
-        </Button>
+        {!invalidAntenneNames.length && (
+          <Button variant="outline" onClick={reset}>
+            Sélectionner un autre fichier
+          </Button>
+        )}
       </Flex>
       {!!errors.length && <MesureImportErrors errors={errors} />}
       {!!invalidAntenneNames.length && (
@@ -46,6 +48,7 @@ const MesureImportResult = ({
           serviceId={serviceId}
           invalidAntenneNames={invalidAntenneNames}
           onSubmitAntennesMap={onSubmitAntennesMap}
+          reset={reset}
         />
       )}
     </div>
