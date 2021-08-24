@@ -6,16 +6,15 @@ const {
 const excelParser = require("~/utils/file/excelParser");
 const logger = require("~/utils/logger");
 
-const { Service } = require("~/models");
 const actionsMesuresImporterGeoRepository = require("./repository/actionsMesuresImporterGeoRepository");
 const actionsMesuresImporterMesureRepository = require("./repository/actionsMesuresImporterMesureRepository");
-const { Mandataire } = require("~/models");
+const { Mandataire, Service, Mesure } = require("~/models");
 const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
-const { Mesure } = require("~/models");
+// const { MesureEtat, MesureRessources } = require("~/models");
 
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
-const { MesureEtat } = require("~/models");
-const { MesureRessources } = require("~/models");
+const knex = require("~/db/knex");
+const { normalizeNumeroRG } = require("~/utils/numero-rg");
 
 const actionsMesuresImporter = {
   importMesuresFile,
@@ -75,26 +74,26 @@ async function importMesuresFile({
 
   if (errors.length) {
     logger.info(
-      `[IMPORT MESURES] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
+      `[IMPORT MESURES] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.createLength}, to update:  ${importSummary.update.length})`
     );
   } else if (importSummary.invalidAntenneNames.length) {
     logger.info(
-      `[IMPORT MESURES] WARNING (duration: ${durationInSeconds}s, invalid antennes: ${importSummary.invalidAntenneNames.length}, to create: ${importSummary.create.length}, to update:  ${importSummary.update.length})`
+      `[IMPORT MESURES] WARNING (duration: ${durationInSeconds}s, invalid antennes: ${importSummary.invalidAntenneNames.length}, to create: ${importSummary.createLength}, to update:  ${importSummary.updateLength})`
     );
   } else {
     logger.info(
-      `[IMPORT MESURES] SUCCESS (duration: ${durationInSeconds}s, created: ${importSummary.create.length}, updated:  ${importSummary.update.length})`
+      `[IMPORT MESURES] SUCCESS (duration: ${durationInSeconds}s, created: ${importSummary.createLength}, updated:  ${importSummary.updateLength})`
     );
   }
 
   return {
-    creationNumber: importSummary.create.length,
+    creationNumber: importSummary.createLength,
     errors: importSummary.errors,
     invalidAntenneNames:
       importSummary.errors.length === 0
         ? importSummary.invalidAntenneNames
         : [],
-    updateNumber: importSummary.update.length,
+    updateNumber: importSummary.updateLength,
   };
 }
 
@@ -106,10 +105,11 @@ const importMesures = async ({
   antennesMap,
 }) => {
   const importSummary = {
-    create: [],
+    createLength: 0,
     errors,
     invalidAntenneNames: [],
-    update: [],
+    rows: [],
+    updateLength: 0,
   };
 
   let mandataire;
@@ -179,19 +179,56 @@ const importMesures = async ({
     importSummary.errors.length === 0 &&
     importSummary.invalidAntenneNames.length === 0
   ) {
-    const type = service ? "service" : "mandataire";
-    const filters = {
-      status: "en_cours",
-      [`${type}_id`]: service ? service.id : mandataire.id,
-    };
-    const subQuery = Mesure.query().select("id").where(filters);
-    await MesureEtat.query().delete().whereIn("mesure_id", subQuery);
-    await MesureRessources.query().delete().whereIn("mesure_id", subQuery);
-    await Mesure.query().delete().where(filters);
+    // const type = service ? "service" : "mandataire";
+    // const filters = {
+    //   status: "en_cours",
+    //   [`${type}_id`]: service ? service.id : mandataire.id,
+    // };
+    // const subQuery = Mesure.query().select("id").where(filters);
+    // await MesureEtat.query().delete().whereIn("mesure_id", subQuery);
+    // await MesureRessources.query().delete().whereIn("mesure_id", subQuery);
+    // await Mesure.query().delete().where(filters);
 
-    for (const data of importSummary.create) {
-      await Mesure.query().insertGraph(data);
-    }
+    // for (const data of importSummary.create) {
+    // await Mesure.query().insertGraph(data);
+    // }
+    importSummary.rows = Array.from(
+      new Set(importSummary.rows.map(({ numero_rg }) => numero_rg))
+    ).map((numero_rg) => {
+      return importSummary.rows.find((a) => a.numero_rg === numero_rg);
+    });
+    await knex.transaction(async function (trx) {
+      for (const mesure of importSummary.rows) {
+        const gestionColumn = mesure.service_id
+          ? "service_id"
+          : "mandataire_id";
+        const gestionId = mesure[gestionColumn];
+        if (mesure.numero_rg && mesure.ti_id) {
+          const { rows } = await knex.raw(
+            `
+        SELECT
+          id
+        FROM
+          mesures
+        WHERE
+          mesures.${gestionColumn} = ? AND
+          mesures.ti_id = ? AND
+          mesures.numero_rg = ?
+        `,
+            [gestionId, mesure.ti_id, mesure.numero_rg]
+          );
+          if (rows.length > 0) {
+            mesure.id = rows[0].id;
+          }
+        }
+        if (mesure.id) {
+          importSummary.updateLength++;
+        } else {
+          importSummary.createLength++;
+        }
+        await Mesure.query(trx).upsertGraph(mesure);
+      }
+    });
 
     if (mandataire) {
       await updateGestionnaireMesuresEvent("mandataires", mandataire.id);
@@ -300,7 +337,7 @@ const prepareMesure = async (
     mandataire_id: mandataire ? mandataire.id : null,
     nature_mesure: mesureDatas.nature_mesure,
     numero_dossier: mesureDatas.numero_dossier,
-    numero_rg: mesureDatas.numero_rg,
+    numero_rg: normalizeNumeroRG(mesureDatas.numero_rg),
     pays,
     service_id: service ? service.id : null,
     status: mesureDatas.status,
@@ -308,7 +345,7 @@ const prepareMesure = async (
     ville: mesureDatas.ville,
   };
 
-  importSummary.create.push(data);
+  importSummary.rows.push(data);
 };
 
 const getMesurePays = (code_postal) => {
