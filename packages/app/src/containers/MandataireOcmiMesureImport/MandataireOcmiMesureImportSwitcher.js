@@ -43,7 +43,9 @@ function MandataireOcmiMesureImportSwitcher({
             toast.warn(
               "Votre import contient " +
                 error.count +
-                " doublons, il est possible que vous perdiez des données lors de l'import, veillez à n'avoir qu'un Numéro RG unique par mesure et par tribunal."
+                " doublon" +
+                (error.count > 1 ? "s" : "") +
+                ", il est possible que vous perdiez des données lors de l'import, veillez à n'avoir qu'un Numéro RG unique par mesure et par tribunal."
             );
             break;
         }
