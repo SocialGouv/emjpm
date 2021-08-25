@@ -3,6 +3,7 @@ const updateMandataireMesuresFromOCMI = require("~/services/updateMandataireMesu
 module.exports = async (req, res) => {
   const { userId } = req.user;
 
+  let errors = [];
   try {
     const result = await updateMandataireMesuresFromOCMI({
       manual: true,
@@ -11,6 +12,7 @@ module.exports = async (req, res) => {
     if (result === false) {
       throw new Error("ocmi mandataire not found");
     }
+    errors = result.errors;
   } catch (error) {
     return res.status(422).json({
       code: error.code,
@@ -20,7 +22,6 @@ module.exports = async (req, res) => {
 
   // success
   return res.json({
-    en_cours: "0",
-    eteinte: "0",
+    errors,
   });
 };

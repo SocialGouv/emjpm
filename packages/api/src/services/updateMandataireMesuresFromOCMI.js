@@ -43,6 +43,8 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     return false;
   }
 
+  const errors = [];
+
   const { mesures } = ocmiMandataire;
 
   // check tribunal_siret validity and load tis
@@ -52,7 +54,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     throw new AggregateError(tiErrors);
   }
 
-  const allMesureDatas = mesures.map((mesure) => ({
+  let allMesureDatas = mesures.map((mesure) => ({
     datas: {
       ...mesure,
       etats: mesure.etats.map((etat) => ({
@@ -65,6 +67,20 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     ti: findTribunal(tribunaux, mesure.tribunal_siret),
     type: "mandataire",
   }));
+
+  const origLength = allMesureDatas.length;
+  allMesureDatas = Array.from(
+    new Set(allMesureDatas.map(({ datas: { numero_rg } }) => numero_rg))
+  ).map((numero_rg) => {
+    return allMesureDatas.find((a) => a.datas.numero_rg === numero_rg);
+  });
+  const finalLength = allMesureDatas.length;
+
+  if (finalLength < origLength) {
+    errors.push(
+      JSON.stringify({ count: origLength - finalLength, type: "doublons" })
+    );
+  }
 
   await knex.transaction(async function (trx) {
     try {
@@ -90,6 +106,10 @@ module.exports = async function updateMandataireMesuresFromOCMI({
   });
 
   await releaseLock(mutexLockKey);
+
+  return {
+    errors,
+  };
 };
 
 function findTribunal(tribunaux, tribunalSiret) {

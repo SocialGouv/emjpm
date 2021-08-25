@@ -324,8 +324,7 @@ type DeleteMesureEtatOutput {
 }
 
 type ImportOcmiMesuresOutput {
-  en_cours : Int
-  eteinte : Int
+  errors : [String]
 }
 
 type StateOutput {

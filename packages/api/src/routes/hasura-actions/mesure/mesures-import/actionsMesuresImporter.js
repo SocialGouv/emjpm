@@ -94,6 +94,7 @@ async function importMesuresFile({
         ? importSummary.invalidAntenneNames
         : [],
     updateNumber: importSummary.updateLength,
+    warnings: importSummary.warnings,
   };
 }
 
@@ -110,6 +111,7 @@ const importMesures = async ({
     invalidAntenneNames: [],
     rows: [],
     updateLength: 0,
+    warnings: [],
   };
 
   let mandataire;
@@ -179,24 +181,20 @@ const importMesures = async ({
     importSummary.errors.length === 0 &&
     importSummary.invalidAntenneNames.length === 0
   ) {
-    // const type = service ? "service" : "mandataire";
-    // const filters = {
-    //   status: "en_cours",
-    //   [`${type}_id`]: service ? service.id : mandataire.id,
-    // };
-    // const subQuery = Mesure.query().select("id").where(filters);
-    // await MesureEtat.query().delete().whereIn("mesure_id", subQuery);
-    // await MesureRessources.query().delete().whereIn("mesure_id", subQuery);
-    // await Mesure.query().delete().where(filters);
-
-    // for (const data of importSummary.create) {
-    // await Mesure.query().insertGraph(data);
-    // }
+    const origLength = importSummary.rows.length;
     importSummary.rows = Array.from(
       new Set(importSummary.rows.map(({ numero_rg }) => numero_rg))
     ).map((numero_rg) => {
       return importSummary.rows.find((a) => a.numero_rg === numero_rg);
     });
+    const finalLength = importSummary.rows.length;
+    if (origLength > finalLength) {
+      importSummary.warnings.push({
+        count: origLength - finalLength,
+        type: "doublons",
+      });
+    }
+
     await knex.transaction(async function (trx) {
       for (const mesure of importSummary.rows) {
         const gestionColumn = mesure.service_id

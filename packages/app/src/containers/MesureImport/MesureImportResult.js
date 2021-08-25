@@ -6,12 +6,35 @@ import { MesureImportErrors } from "./MesureImportErrors";
 import { ServiceMesureAntennesMatcher } from "./ServiceMesureAntennesMatcher";
 import { ServiceMesureImportResultStyle } from "./style";
 
+import { toast } from "react-toastify";
+import { useEffect } from "react";
+
 const MesureImportResult = ({
   reset,
-  importSummary: { creationNumber, updateNumber, errors, invalidAntenneNames },
+  importSummary: {
+    creationNumber,
+    updateNumber,
+    errors,
+    warnings,
+    invalidAntenneNames,
+  },
   serviceId,
   onSubmitAntennesMap,
 }) => {
+  useEffect(() => {
+    for (const error of warnings) {
+      switch (error.type) {
+        case "doublons":
+          toast.warn(
+            "Votre import contient " +
+              error.count +
+              " doublons, il est possible que vous perdiez des données lors de l'import, veillez à n'avoir qu'un Numéro RG unique par mesure et par tribunal."
+          );
+          break;
+      }
+    }
+  }, [warnings]);
+
   return (
     <div p={7} sx={ServiceMesureImportResultStyle}>
       <Flex alignItems="center">

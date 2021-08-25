@@ -32,10 +32,22 @@ function MandataireOcmiMesureImportSwitcher({
 
   const importMesures = useCallback(async () => {
     try {
-      await importOcmiMesures({
+      const { data } = await importOcmiMesures({
         awaitRefetchQueries: true,
         refetchQueries: ["CURRENT_USER_QUERY", "MESURES_QUERY"],
       });
+      for (const json of data.import_ocmi_mesures.errors) {
+        const error = JSON.parse(json);
+        switch (error.type) {
+          case "doublons":
+            toast.warn(
+              "Votre import contient " +
+                error.count +
+                " doublons, il est possible que vous perdiez des données lors de l'import, veillez à n'avoir qu'un Numéro RG unique par mesure et par tribunal."
+            );
+            break;
+        }
+      }
       toast.success("Import réalisé avec succès");
     } catch (e) {
       if (e.message.startsWith("cannot acquire lock")) {

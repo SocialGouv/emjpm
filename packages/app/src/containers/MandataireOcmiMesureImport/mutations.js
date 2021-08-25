@@ -14,8 +14,7 @@ export const SYNC_OCMI_ENABLE = gql`
 export const IMPORT_OCMI_MESURES = gql`
   mutation importOcmiMesures {
     import_ocmi_mesures {
-      en_cours
-      eteinte
+      errors
     }
   }
 `;
