@@ -1,0 +1,6 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE FUNCTION mesure_email_mandataire(mesure_row mesures)
+-- RETURNS TEXT AS $$
+--   SELECT users.email FROM users, mandataires WHERE mandataires.id = mesure_row.mandataire_id AND users.id = mandataires.user_id
+-- $$ LANGUAGE sql STABLE;

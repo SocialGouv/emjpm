@@ -8,6 +8,9 @@ object_relationships:
 - name: etablissement
   using:
     foreign_key_constraint_on: etablissement_id
+- name: magistrat
+  using:
+    foreign_key_constraint_on: magistrat_id
 - name: mandataire
   using:
     foreign_key_constraint_on: mandataire_id
@@ -42,6 +45,22 @@ array_relationships:
       table:
         name: mesure_ressources
         schema: public
+computed_fields:
+- definition:
+    function:
+      name: mesure_email_magistrat
+      schema: public
+  name: email_magistrat
+- definition:
+    function:
+      name: mesure_email_mandataire
+      schema: public
+  name: email_mandataire
+- definition:
+    function:
+      name: mesure_email_service
+      schema: public
+  name: email_service
 insert_permissions:
 - permission:
     check:
@@ -240,6 +259,8 @@ select_permissions:
     - ti_id
     - type_etablissement
     - ville
+    computed_fields:
+    - email_magistrat
     filter:
       mandataire:
         user:
@@ -282,6 +303,8 @@ select_permissions:
     - ti_id
     - type_etablissement
     - ville
+    computed_fields:
+    - email_magistrat
     filter:
       mandataire:
         user_id:
@@ -323,6 +346,8 @@ select_permissions:
     - ti_id
     - type_etablissement
     - ville
+    computed_fields:
+    - email_magistrat
     filter:
       service_id:
         _eq: X-Hasura-Service-Id
@@ -363,6 +388,9 @@ select_permissions:
     - ti_id
     - type_etablissement
     - ville
+    computed_fields:
+    - email_mandataire
+    - email_service
     filter:
       ti:
         magistrats:

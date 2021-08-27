@@ -1,6 +1,6 @@
 import { MESURE_PROTECTION_STATUS, mesureFormatter } from "@emjpm/biz";
 
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Text, Link, Button } from "rebass";
 
 import { LinkButton } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
@@ -10,6 +10,10 @@ import { Heading } from "~/components";
 import { content, statusBox, subtitle, title } from "./style";
 
 import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+
+import { MESURE_EMAIL_MAGISTRAT } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
+import { useQuery } from "@apollo/client";
 
 function MesureDetailView({ mesure, ...props }) {
   const {
@@ -57,6 +61,18 @@ function MesureDetailView({ mesure, ...props }) {
           title: SYNC_OCMI_DISABLED_MESSAGE,
         }
       : {};
+
+  const mesureEmailQuery = MESURE_EMAIL_MAGISTRAT;
+  const { data, loading, error } = useQuery(mesureEmailQuery, {
+    fetchPolicy: "cache-and-network",
+    variables: {
+      id: mesure.id,
+    },
+  });
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+  const emailMagistrat = data?.mesures_by_pk.email_magistrat;
 
   return (
     <Box {...props}>
@@ -191,6 +207,22 @@ function MesureDetailView({ mesure, ...props }) {
             </LinkButton>
           </>
         )}
+      </Box>
+      <Box textAlign="center" py={1}>
+        <Link
+          href={
+            `mailto:` +
+            emailMagistrat +
+            `?subject=` +
+            encodeURIComponent("Concernant la mesure RG-" + numeroRg)
+          }
+        >
+          <Button ml={3} variant="outline">
+            <Text fontSize={1} fontWeight="normal">
+              Envoyer un email au magistrat à propos de cette mesure
+            </Text>
+          </Button>
+        </Link>
       </Box>
     </Box>
   );

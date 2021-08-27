@@ -1,6 +1,6 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useContext } from "react";
-import { Box, Flex, Text } from "rebass";
+import { Box, Flex, Text, Button, Link as RebassLink } from "rebass";
 
 import { Link } from "~/containers/Commons";
 import { MesureContext } from "~/containers/MesureContext";
@@ -15,7 +15,13 @@ import {
   MagistratMesureTitleStyle,
 } from "./style";
 
+import { MESURE_EMAIL_MANDATAIRE, MESURE_EMAIL_SERVICE } from "./queries";
+import useQueryReady from "~/hooks/useQueryReady";
+import { useQuery } from "@apollo/client";
+
 function MagistratMesure(props) {
+  const mesure = useContext(MesureContext);
+
   const {
     realAge,
     cabinet,
@@ -28,7 +34,25 @@ function MagistratMesure(props) {
     natureMesure,
     champMesure,
     id,
-  } = useContext(MesureContext);
+  } = mesure;
+
+  const mesureEmailQuery = mesure.service_id
+    ? MESURE_EMAIL_SERVICE
+    : MESURE_EMAIL_MANDATAIRE;
+  const { data, loading, error } = useQuery(mesureEmailQuery, {
+    fetchPolicy: "cache-and-network",
+    variables: {
+      id: mesure.id,
+    },
+  });
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+  const emailGestionnaire =
+    data?.mesures_by_pk[
+      "email_" + (mesure.service_id ? "service" : "mandataire")
+    ];
+
   return (
     <>
       <Heading size={3} mt="4" mb="3">
@@ -104,6 +128,22 @@ function MagistratMesure(props) {
               <Text sx={MagistratMesureContentStyle}>
                 {MESURE_PROTECTION.STATUS.byKey[status]}
               </Text>
+            </Box>
+            <Box textAlign="left">
+              <RebassLink
+                href={
+                  `mailto:` +
+                  emailGestionnaire +
+                  `?subject=` +
+                  encodeURIComponent("Concernant la mesure RG-" + numeroRg)
+                }
+              >
+                <Button variant="outline">
+                  <Text fontSize={1} fontWeight="normal">
+                    Envoyer un email au mandataire à propos de cette mesure
+                  </Text>
+                </Button>
+              </RebassLink>
             </Box>
           </Box>
         </Flex>
