@@ -74,7 +74,7 @@ async function importMesuresFile({
 
   if (errors.length) {
     logger.info(
-      `[IMPORT MESURES] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.createLength}, to update:  ${importSummary.update.length})`
+      `[IMPORT MESURES] ERROR (duration: ${durationInSeconds}s, errors: ${errors.length}, to create: ${importSummary.createLength}, to update:  ${importSummary.updateLength})`
     );
   } else if (importSummary.invalidAntenneNames.length) {
     logger.info(
