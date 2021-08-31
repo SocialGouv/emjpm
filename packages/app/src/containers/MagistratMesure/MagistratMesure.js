@@ -51,7 +51,7 @@ function MagistratMesure(props) {
   const emailGestionnaire =
     data?.mesures_by_pk[
       "email_" + (mesure.service_id ? "service" : "mandataire")
-    ];
+    ] ?? "";
 
   return (
     <>
@@ -135,7 +135,9 @@ function MagistratMesure(props) {
                   `mailto:` +
                   emailGestionnaire +
                   `?subject=` +
-                  encodeURIComponent("Concernant la mesure RG-" + numeroRg)
+                  encodeURIComponent(
+                    "eMJPM - Concernant la mesure RG-" + numeroRg
+                  )
                 }
               >
                 <Button variant="outline">

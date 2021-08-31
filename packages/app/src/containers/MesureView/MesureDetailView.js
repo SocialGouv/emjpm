@@ -72,7 +72,7 @@ function MesureDetailView({ mesure, ...props }) {
   if (!useQueryReady(loading, error)) {
     return null;
   }
-  const emailMagistrat = data?.mesures_by_pk.email_magistrat;
+  const emailMagistrat = data?.mesures_by_pk.email_magistrat ?? "";
 
   return (
     <Box {...props}>
@@ -214,7 +214,7 @@ function MesureDetailView({ mesure, ...props }) {
             `mailto:` +
             emailMagistrat +
             `?subject=` +
-            encodeURIComponent("Concernant la mesure RG-" + numeroRg)
+            encodeURIComponent("eMJPM - Concernant la mesure RG-" + numeroRg)
           }
         >
           <Button ml={3} variant="outline">
