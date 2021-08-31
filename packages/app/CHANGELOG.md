@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.133.0](https://github.com/SocialGouv/emjpm/compare/v25.132.0...v25.133.0) (2021-08-31)
+
+
+### Bug Fixes
+
+* **ci:** up deps ([c1d0c56](https://github.com/SocialGouv/emjpm/commit/c1d0c560c30b76be99af637e201411692ae0e1fa))
+* **deps:** update all dependencies ([#2624](https://github.com/SocialGouv/emjpm/issues/2624)) ([c92abf0](https://github.com/SocialGouv/emjpm/commit/c92abf0513057fa91bfd34fe2dee0f696130c68e))
+* **msg:** doublon plural cond ([4ace330](https://github.com/SocialGouv/emjpm/commit/4ace33067b012ad4cc6219110b2a7bc33e0f5729))
+
+
+### Features
+
+* **email-about-mesure:** mailto ([0ece3a2](https://github.com/SocialGouv/emjpm/commit/0ece3a28e6562b13606337b55f66f37d1bcb66a4))
+
+
+
+
+
 # [25.132.0](https://github.com/SocialGouv/emjpm/compare/v25.131.0...v25.132.0) (2021-08-25)
 
 
