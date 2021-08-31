@@ -3,7 +3,7 @@
   "version": "25.133.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.4.9",
+    "@apollo/client": "^3.4.10",
     "@emjpm/biz": "^25.133.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
@@ -63,7 +63,7 @@
     "react-loader-spinner": "^4.0.0",
     "react-mapbox-gl": "^5.1.1",
     "react-paginate": "^6.5.0",
-    "react-router-dom": "^5.2.0",
+    "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "react-scrollbars-custom": "^4.0.27",
     "react-select": "^4",
