@@ -5,6 +5,7 @@ const { Mandataire } = require("~/models");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
+const dedupMesures = require("~/utils/dedup-mesures");
 // const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 const knex = require("~/db/knex");
@@ -54,7 +55,21 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     throw new AggregateError(tiErrors);
   }
 
-  let allMesureDatas = mesures.map((mesure) => ({
+  const origLength = mesures.length;
+
+  const allMesures = dedupMesures(mesures);
+
+  const finalLength = allMesures.length;
+  if (finalLength < origLength) {
+    errors.push(
+      JSON.stringify({ count: origLength - finalLength, type: "doublons" })
+    );
+  }
+
+  console.log(mesures);
+  console.log(allMesures);
+
+  const allMesureDatas = allMesures.map((mesure) => ({
     datas: {
       ...mesure,
       etats: mesure.etats.map((etat) => ({
@@ -67,20 +82,6 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     ti: findTribunal(tribunaux, mesure.tribunal_siret),
     type: "mandataire",
   }));
-
-  const origLength = allMesureDatas.length;
-  allMesureDatas = Array.from(
-    new Set(allMesureDatas.map(({ datas: { numero_rg } }) => numero_rg))
-  ).map((numero_rg) => {
-    return allMesureDatas.find((a) => a.datas.numero_rg === numero_rg);
-  });
-  const finalLength = allMesureDatas.length;
-
-  if (finalLength < origLength) {
-    errors.push(
-      JSON.stringify({ count: origLength - finalLength, type: "doublons" })
-    );
-  }
 
   await knex.transaction(async function (trx) {
     try {

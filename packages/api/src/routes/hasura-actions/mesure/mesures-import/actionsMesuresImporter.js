@@ -15,6 +15,7 @@ const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresIm
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const knex = require("~/db/knex");
 const { normalizeNumeroRG } = require("~/utils/numero-rg");
+const dedupMesures = require("~/utils/dedup-mesures");
 
 const actionsMesuresImporter = {
   importMesuresFile,
@@ -182,11 +183,7 @@ const importMesures = async ({
     importSummary.invalidAntenneNames.length === 0
   ) {
     const origLength = importSummary.rows.length;
-    importSummary.rows = Array.from(
-      new Set(importSummary.rows.map(({ numero_rg }) => numero_rg))
-    ).map((numero_rg) => {
-      return importSummary.rows.find((a) => a.numero_rg === numero_rg);
-    });
+    importSummary.rows = dedupMesures(importSummary.rows);
     const finalLength = importSummary.rows.length;
     if (origLength > finalLength) {
       importSummary.warnings.push({
