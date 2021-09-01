@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.133.2](https://github.com/SocialGouv/emjpm/compare/v25.133.1...v25.133.2) (2021-09-01)
+
+
+### Bug Fixes
+
+* **ci:** up hasura migration timeout ([c5356fb](https://github.com/SocialGouv/emjpm/commit/c5356fb48c3c0f64366a6348e9f45b131fab0bcf))
+* **mailto:** wording ([02cd698](https://github.com/SocialGouv/emjpm/commit/02cd69877dc44e31c34ec986f73b24250c05698d))
+* **strict-numero-rg:** false by default ([758a36c](https://github.com/SocialGouv/emjpm/commit/758a36c607403b73ca1cebb55aaf0dc12e077eba))
+
+
+
+
+
 ## [25.133.1](https://github.com/SocialGouv/emjpm/compare/v25.133.0...v25.133.1) (2021-08-31)
 
 
