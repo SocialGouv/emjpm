@@ -32,7 +32,7 @@ const mesureBatch = async (req, res) => {
   }
 
   const {
-    body: { mesures, strictNumeroRG = true },
+    body: { mesures, strictNumeroRG = false },
     type,
     serviceOrMandataire,
   } = req;
