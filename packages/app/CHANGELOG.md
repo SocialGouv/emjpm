@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.133.3](https://github.com/SocialGouv/emjpm/compare/v25.133.2...v25.133.3) (2021-09-02)
+
+
+### Bug Fixes
+
+* **map:** gestionnaire height and width ([3a84d6b](https://github.com/SocialGouv/emjpm/commit/3a84d6b34b9e8c185ab987e0df7c365defbb7635))
+
+
+
+
+
 ## [25.133.2](https://github.com/SocialGouv/emjpm/compare/v25.133.1...v25.133.2) (2021-09-01)
 
 
