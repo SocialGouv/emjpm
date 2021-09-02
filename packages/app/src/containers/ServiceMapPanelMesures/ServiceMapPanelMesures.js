@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { Scrollbar } from "react-scrollbars-custom";
 import { Box, Flex } from "rebass";
 
-import MesureListItem from "~/containers/MesureListItem";
+import MapMesureListItem from "~/containers/MapMesureListItem";
 import { formatMesureListItems } from "~/formatters/mesures";
 
 import { MESURES } from "./queries";
@@ -58,12 +58,9 @@ function ServiceMapPanelMesures({ mesuresIds }) {
             <>
               {mesures.map((mesure) => {
                 return (
-                  <MesureListItem
+                  <MapMesureListItem
                     key={mesure.id}
                     mesure={mesure}
-                    hasLocation={false}
-                    hasTribunal={false}
-                    hasFolderNumber={false}
                     onClick={selectMesure}
                     getHref={getHref}
                   />

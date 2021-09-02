@@ -15,7 +15,7 @@ function Map() {
         sx={{
           height: "100%",
           position: "absolute",
-          pt: "115px",
+          pt: "155px",
           top: "0",
           width: "100%",
         }}
