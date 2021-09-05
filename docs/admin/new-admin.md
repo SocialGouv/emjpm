@@ -11,7 +11,8 @@ NEWPASSWORD=$(pwgen -ys 15 1)
 
 get password hash output
 ```sh
-echo "$NEWPASSWORD" | htpasswd -bnBC 10 "" password | tr -d ':\n'
+npm install -g @carsondarling/bcrypt-cli
+bcrypt
 ```
 
 ## 2. Insert a new row in user_role table

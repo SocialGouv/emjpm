@@ -25,7 +25,10 @@ beforeAll(async () => {
 
   const [editor] = await knex("editors");
   const [ti] = await knex("tis").where({ id: 22 });
-  const [user] = await knex("users").where({ type: "individuel" }).limit(1);
+  const [user] = await knex("users")
+    .where({ type: "individuel" })
+    .orderBy("id")
+    .limit(1);
   const [mandataire] = await knex("mandataires")
     .where({ user_id: user.id })
     .limit(1);
@@ -35,7 +38,7 @@ beforeAll(async () => {
 
   const loginRes = await request(server).post("/api/auth/login").send({
     email: user.email,
-    password: "emjpm2019",
+    password: "emjpm2021",
   });
 
   const loginToken = await loginRes.body.token;
@@ -296,7 +299,7 @@ describe("POST /api/editors/mesures", () => {
       date_nomination: "2020-01-11",
       date_premier_mesure: "2020-01-10",
       date_protection_en_cours: "2020-01-11",
-      editor_id: 6,
+      editor_id: 2,
       etats: [
         {
           champ_mesure: "protection_bien",
@@ -541,7 +544,7 @@ describe("POST /api/editors/mesures/batch", () => {
     expect(response.status).toBe(201);
     const { mesures } = response.body;
     for (const mesure of Object.values(mesures)) {
-      expect(mesure.editor_id).toEqual(6);
+      expect(mesure.editor_id).toEqual(2);
     }
   });
 });

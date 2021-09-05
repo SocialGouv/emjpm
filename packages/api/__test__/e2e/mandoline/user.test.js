@@ -24,7 +24,7 @@ beforeEach(async () => {
 async function getUserToken(user) {
   const loginRes = await request(server).post("/api/auth/login").send({
     email: user.email,
-    password: "emjpm2019",
+    password: "emjpm2021",
   });
 
   const loginToken = loginRes.body.token;
@@ -67,12 +67,12 @@ describe("POST /api/mandoline/user", () => {
 
       expect(response.body).toMatchObject({
         direction: {
-          type: "national",
+          type: "departemental",
         },
-        email: "direction-874@justice.fr",
-        id: 874,
-        nom: "direction",
-        prenom: "Paula",
+        email: "aurore.weitz@bas-rhin.gouv.fr",
+        id: 15,
+        nom: "Weitz",
+        prenom: "Aurore",
         type: "direction",
       });
     });
@@ -88,30 +88,30 @@ describe("POST /api/mandoline/user", () => {
         .set({ Authorization: `Bearer ${token}` });
 
       expect(response.body).toMatchObject({
-        email: "service-1951@justice.fr",
-        id: 1951,
-        nom: "service",
-        prenom: "Paula",
+        email: "maelys.dupuis@atn.fr",
+        id: 25,
+        nom: "Dupuis",
+        prenom: "Maelys ",
         service: {
-          departement: { code: "75", nom: "Paris" },
-          departements: [{ code: "75", nom: "Paris" }],
-          dispo_max: 1300,
-          email: "service-57@justice.fr",
-          etablissement: "service-57",
-          lb_adresse: "Rue du service tutelaire",
-          lb_code_postal: "75020",
-          lb_ville: "Paris",
-          mesures_en_attente: 0,
-          mesures_en_cours: 0,
-          nom: null,
-          org_adresse: "Rue de l'organisme gestionnaire",
+          departement: { code: "44", nom: "Loire-Atlantique" },
+          departements: [{ code: "44", nom: "Loire-Atlantique" }],
+          dispo_max: 900,
+          email: "atn@justice.fr",
+          etablissement: "ATN",
+          lb_adresse: "10 Rue de la Ville En Pierre",
+          lb_code_postal: "44000",
+          lb_ville: "Nantes",
+          mesures_en_attente: 1,
+          mesures_en_cours: 3,
+          nom: "Aristile",
+          org_adresse: "",
           org_code_postal: "",
           org_gestionnaire: false,
-          org_nom: "Organisme gestionnaire",
+          org_nom: "",
           org_ville: "",
-          prenom: null,
-          siret: null,
-          telephone: "0140506070",
+          prenom: "Elise",
+          siret: "75572248413489",
+          telephone: "01 10 10 10 10 ",
         },
         type: "service",
       });

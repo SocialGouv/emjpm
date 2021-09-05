@@ -48,7 +48,7 @@ Object {
       "date_nomination": "2019-02-14",
       "date_premier_mesure": "2019-02-14",
       "date_protection_en_cours": "2019-04-18",
-      "editor_id": 6,
+      "editor_id": 2,
       "etats": Array [
         Object {
           "champ_mesure": "protection_bien_personne",
@@ -84,7 +84,7 @@ Object {
       "date_nomination": "2018-02-01",
       "date_premier_mesure": "2014-01-01",
       "date_protection_en_cours": "2020-05-12",
-      "editor_id": 6,
+      "editor_id": 2,
       "etats": Array [
         Object {
           "champ_mesure": "protection_personne",
