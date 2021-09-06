@@ -51,6 +51,7 @@ function MagistratEditInformations({ userId, successLink, cancelLink }) {
         nom: values.nom,
         prenom: values.prenom,
         tiId: values.ti,
+        shareEmail: values.share_email,
       },
     });
 

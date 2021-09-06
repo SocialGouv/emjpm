@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { magistratEditSchema } from "~/validation-schemas";
-import { Button, Heading, InlineError, Text } from "~/components";
+import { Button, Heading, InlineError, Text, CheckBox } from "~/components";
 
 function MagistratEditInformationsForm(props) {
   const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;
@@ -29,6 +29,7 @@ function MagistratEditInformationsForm(props) {
       nom: user.nom || "",
       prenom: user.prenom || "",
       ti: magistrat.ti_id || "",
+      share_email: magistrat.share_email || false,
     },
     onSubmit: handleSubmit,
     validationSchema: magistratEditSchema,
@@ -42,7 +43,7 @@ function MagistratEditInformationsForm(props) {
             {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox mb={1}>
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
@@ -60,6 +61,13 @@ function MagistratEditInformationsForm(props) {
             id="email"
             formik={formik}
             validationSchema={magistratEditSchema}
+          />
+          <CheckBox
+            isChecked={formik.values.share_email}
+            onChange={() => {
+              formik.setFieldValue("share_email", !formik.values.share_email);
+            }}
+            label="Autoriser les mandataires à accéder à mon email pour m'envoyer des messages"
           />
         </FormInputBox>
       </Flex>

@@ -8,8 +8,8 @@ import { Card, Heading } from "~/components";
 import { boxStyle, flexStyle, iconTextStyle, innerTextStyle } from "./style";
 
 function MagistratInformations(props) {
-  const { email, cabinet, nom, prenom } = useUser();
-
+  const { email, cabinet, nom, prenom, magistrat } = useUser();
+  const { share_email } = magistrat;
   return (
     <Box {...props}>
       <Card p="5">
@@ -27,6 +27,12 @@ function MagistratInformations(props) {
             <Text sx={innerTextStyle}>{prenom ? prenom : ""}</Text>
             <Text sx={innerTextStyle}>
               {cabinet ? `Cabinet: ${cabinet}` : ""}
+            </Text>
+            <Text sx={innerTextStyle}>
+              {share_email
+                ? "Les mandataires ont accès à votre adresse email pour vous envoyer des messages."
+                : "Les mandataires n'ont pas accès à votre adresse email et ne peuvent donc pas vous envoyer de message."}
+              {` Vous pouvez modifier ce paramètre en vous rendant sur "Modifier vos informations".`}
             </Text>
           </Box>
         </Flex>

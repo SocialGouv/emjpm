@@ -10,6 +10,7 @@ export const MAGISTRAT = gql`
       magistrat {
         id
         ti_id
+        share_email
       }
     }
     tis(where: { immutable: { _eq: true } }) {

@@ -48,8 +48,9 @@ select_permissions:
     allow_aggregations: true
     columns:
     - id
-    - user_id
+    - share_email
     - ti_id
+    - user_id
     filter:
       user_id:
         _eq: X-Hasura-User-Id
@@ -58,6 +59,7 @@ update_permissions:
 - permission:
     check: null
     columns:
+    - share_email
     - ti_id
     filter:
       user_id:

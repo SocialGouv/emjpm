@@ -129,6 +129,7 @@ export const MAGISTRAT_USERS = gql`
       magistrat {
         id
         ti_id
+        share_email
         ti {
           id
           siret

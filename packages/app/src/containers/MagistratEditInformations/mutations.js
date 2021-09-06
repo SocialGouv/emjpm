@@ -8,6 +8,7 @@ export const EDIT_USER = gql`
     $email: String!
     $id: Int!
     $tiId: Int!
+    $shareEmail: Boolean
   ) {
     update_users(
       _set: { cabinet: $cabinet, prenom: $prenom, nom: $nom, email: $email }
@@ -22,7 +23,10 @@ export const EDIT_USER = gql`
         prenom
       }
     }
-    update_magistrat(_set: { ti_id: $tiId }, where: { user_id: { _eq: $id } }) {
+    update_magistrat(
+      _set: { ti_id: $tiId, share_email: $shareEmail }
+      where: { user_id: { _eq: $id } }
+    ) {
       affected_rows
       returning {
         id
