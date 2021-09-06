@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.134.0](https://github.com/SocialGouv/emjpm/compare/v25.133.3...v25.134.0) (2021-09-06)
+
+
+### Features
+
+* **magistrat:** allow to access my email option ([00a83e2](https://github.com/SocialGouv/emjpm/commit/00a83e2c22bc23d3838f514d8a380476d07d190e))
+* **testdb:** implements in tests ([ddc1a63](https://github.com/SocialGouv/emjpm/commit/ddc1a630ad3a021603a099c6b755c50642d37351))
+
+
+
+
+
 ## [25.133.3](https://github.com/SocialGouv/emjpm/compare/v25.133.2...v25.133.3) (2021-09-02)
 
 
