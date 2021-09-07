@@ -97,7 +97,8 @@ spec:
                 --no-acl \
                 -e \
                 -Fc \
-                -v < /workspace/db-seed/devdb.dump
+                -v \
+                  < /workspace/db-seed/devdb.dump
       volumes:
         - name: {{.Env.PSQL_CREDS_SECRET_NAME}}
           secret:
