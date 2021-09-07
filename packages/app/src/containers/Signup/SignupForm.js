@@ -88,7 +88,7 @@ export function SignupForm() {
       <form onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Information professionelle"}</Heading>
+            <Heading size={4}>{"Information professionnelle"}</Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Quel type d'utilisateur êtes-vous ?"}
             </Text>

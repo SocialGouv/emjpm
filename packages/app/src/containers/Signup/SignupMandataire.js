@@ -89,7 +89,7 @@ function SignupMandataireForm() {
         {isIndividuel(user) && (
           <Flex>
             <FormGrayBox>
-              <Heading size={4}>{"Information professionelle"}</Heading>
+              <Heading size={4}>{"Information professionnelle"}</Heading>
               <Text lineHeight="1.5" color="textSecondary">
                 {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
