@@ -15,7 +15,7 @@ $(dirname $0)/scripts/build
 # PRE-DEPLOY
 if [ ! -n "$K8SCI_PRODUCTION" ]; then
   $(dirname $0)/scripts/branch-init
-  $(dirname $0)/db-create
+  $(dirname $0)/scripts/db-create
 fi
 
 # DEPLOY
