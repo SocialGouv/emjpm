@@ -76,10 +76,7 @@ spec:
             - |
               set -e
               psql -v ON_ERROR_STOP=1 postgres <<EOF
-                CREATE DATABASE "${DB_NAME}"
-                  WITH
-                  TEMPLATE = template0
-                ;
+                CREATE DATABASE "${DB_NAME}";
                 \c "${DB_NAME}"
 
                 CREATE EXTENSION IF NOT EXISTS pgcrypto;
@@ -103,9 +100,14 @@ spec:
 
               PGUSER_ENCODED=`echo -e "$PGUSER" | urlencode`
               PGPASSWORD_ENCODED=`echo -e "$PGPASSWORD" | urlencode`
+                # --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
 
+              set "PGPASSWORD=$PGPASSWORD"
               pg_restore \
-                --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
+                -U "$PGUSER" \
+                -h $PGHOST \
+                -p 5432 \
+                -d $DB_NAME \
                 --if-exists \
                 --clean \
                 --no-owner \
