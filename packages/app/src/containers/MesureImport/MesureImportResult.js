@@ -60,12 +60,12 @@ const MesureImportResult = ({
               )}
             </>
           )}
+          {!invalidAntenneNames.length && (
+            <Button ml={2} variant="outline" onClick={reset}>
+              Sélectionner un autre fichier
+            </Button>
+          )}
         </Flex>
-        {!invalidAntenneNames.length && (
-          <Button variant="outline" onClick={reset}>
-            Sélectionner un autre fichier
-          </Button>
-        )}
       </Flex>
       {!!errors.length && <MesureImportErrors errors={errors} />}
       {!!invalidAntenneNames.length && (

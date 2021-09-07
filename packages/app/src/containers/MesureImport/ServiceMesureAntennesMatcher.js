@@ -57,7 +57,7 @@ function ServiceMesureAntennesMatcher({
   return (
     <form onSubmit={handleSubmit}>
       <Box mb={4}>
-        <Text color="textSecondary" mb={4} width="50%" lineHeight={1.5}>
+        <Text color="textSecondary" mt={2} mb={4} width="100%" lineHeight={1.5}>
           <StyledWarning size="18" />
           {
             "Certaines antennes ne sont pas reconnues, associez les à des antennes eMJPM existantes pour continuer l'import."
@@ -86,11 +86,11 @@ function ServiceMesureAntennesMatcher({
             </Box>
           </Flex>
         ))}
-        <Button type="submit" mb={1} mr={5}>
+        <Button type="submit" mt={4} mb={1} mr={5}>
           {"Importez les mesures"}
         </Button>
         ou
-        <Button variant="outline" onClick={reset} ml={5}>
+        <Button variant="outline" mt={4} onClick={reset} ml={5}>
           Sélectionner un autre fichier
         </Button>
       </Box>
