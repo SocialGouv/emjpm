@@ -85,8 +85,9 @@ spec:
                 GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
 
+              PGPASSWORD_ENCODED=echo -ne $PGPASSWORD | xxd -plain | tr -d '\n' | sed 's/\(..\)/%\1/g'
               pg_restore \
-                --dbname=postgresql://$PGUSER:$PGPASSWORD@$PGHOST/$DB_NAME \
+                --dbname=postgresql://$PGUSER:$PGPASSWORD_ENCODED@$PGHOST/$DB_NAME \
                 --if-exists \
                 --clean \
                 --no-owner \
