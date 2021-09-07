@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **champ-mesure:** not required anymore ([104dd48](https://github.com/SocialGouv/emjpm/commit/104dd4896758c17e8aa10ed8e56bfa32c7883b32))
+* **migration:** create or replace function ([df1ce0f](https://github.com/SocialGouv/emjpm/commit/df1ce0fb78e9f05e3e7ede185e9288cd9f386f03))
+* **type:** word professionnelle ([89b8661](https://github.com/SocialGouv/emjpm/commit/89b8661eb28c230af5b76d07e7537ac9a5669b45))
+
+
+
+
+
 # [25.134.0](https://github.com/SocialGouv/emjpm/compare/v25.133.3...v25.134.0) (2021-09-06)
 
 

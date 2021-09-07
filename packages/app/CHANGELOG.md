@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
+
+
+### Bug Fixes
+
+* **type:** word professionnelle ([89b8661](https://github.com/SocialGouv/emjpm/commit/89b8661eb28c230af5b76d07e7537ac9a5669b45))
+
+
+
+
+
 # [25.134.0](https://github.com/SocialGouv/emjpm/compare/v25.133.3...v25.134.0) (2021-09-06)
 
 
