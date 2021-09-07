@@ -75,15 +75,18 @@ spec:
             - -c
             - |
               set -e
-              # psql -v ON_ERROR_STOP=1 postgres <<EOF
-              #   CREATE DATABASE "${DB_NAME}";
-              #   \c "${DB_NAME}"
+              psql -v ON_ERROR_STOP=1 postgres <<EOF
+                CREATE DATABASE "${DB_NAME}"
+                  WITH
+                  TEMPLATE = template0
+                ;
+                \c "${DB_NAME}"
 
-              #   CREATE EXTENSION IF NOT EXISTS pgcrypto;
+                CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
-              #   GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-              #   GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-              # EOF
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+              EOF
 
               urlencode() {
                 STDIN=`cat /dev/stdin`
@@ -103,7 +106,6 @@ spec:
 
               pg_restore \
                 --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
-                -d $DB_NAME \
                 --if-exists \
                 --clean \
                 --no-owner \
