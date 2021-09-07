@@ -86,6 +86,7 @@ spec:
               EOF
 
               PGPASSWORD_ENCODED=`echo -ne $PGPASSWORD | xxd -plain | tr -d '\n' | sed 's/\(..\)/%\1/g'`
+              echo postgresql://$PGUSER:$PGPASSWORD_ENCODED@$PGHOST:5432/$DB_NAME
               pg_restore \
                 --dbname=postgresql://$PGUSER:$PGPASSWORD_ENCODED@$PGHOST:5432/$DB_NAME \
                 --if-exists \
