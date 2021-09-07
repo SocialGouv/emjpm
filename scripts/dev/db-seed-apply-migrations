@@ -37,14 +37,15 @@ done
 # restore original seed
 docker exec -i emjpm_db_seed \
   pg_restore \
-  --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
-  --if-exists \
-  --clean \
-  --no-owner \
-  --no-acl \
-  -e \
-  -Fc \
-  -v < $DUMP_FILE
+    --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
+    --if-exists \
+    --clean \
+    --no-owner \
+    --no-acl \
+    -e \
+    -Fc \
+    -v \
+      < $DUMP_FILE
 
 # build migration image
 docker build -t emjpm_hasura_migrate -f packages/hasura/Dockerfile .
@@ -60,11 +61,13 @@ docker run \
 # backup seed
 docker exec -i emjpm_db_seed \
   pg_dump \
-  --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
-  --no-owner \
-  --no-acl \
-  -Fc \
-  -v > $DUMP_FILE
+    --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
+    --no-owner \
+    --no-acl \
+    --clean \
+    -Fc \
+    -v \
+      > $DUMP_FILE
 
 
 # clean
@@ -72,6 +75,6 @@ docker stop emjpm_db_seed
 docker network rm emjpm_db_seed_network
 
 # upgrade tests snapshots
-cd packages/api
-yarn run test:e2e:update-snapshot
-cd ../..
+# cd packages/api
+# yarn run test:e2e:update-snapshot
+# cd ../..

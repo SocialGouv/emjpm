@@ -85,29 +85,12 @@ spec:
               #   GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               # EOF
 
-              # urlencode() {
-              #   STDIN=`cat /dev/stdin`
-              #   local length="${#STDIN}"
-              #   for (( i = 0; i < length; i++ )); do
-              #       local c="${STDIN:i:1}"
-              #       case $c in
-              #           [a-zA-Z0-9.~_-]) printf "$c" ;;
-              #           *) printf '%s' "$c" | xxd -p -c1 |
-              #                 while read c; do printf '%%%s' "$c"; done ;;
-              #       esac
-              #   done
-              # }
-
-              # PGUSER_ENCODED=`echo -e "$PGUSER" | urlencode`
-              # PGPASSWORD_ENCODED=`echo -e "$PGPASSWORD" | urlencode`
-                # --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
-
               set "PGPASSWORD=$PGPASSWORD"
               pg_restore \
                 -U "$PGUSER" \
-                -h $PGHOST \
+                -h "$PGHOST" \
                 -p 5432 \
-                -d $DB_NAME \
+                -d "$DB_NAME" \
                 --if-exists \
                 --clean \
                 --no-owner \
