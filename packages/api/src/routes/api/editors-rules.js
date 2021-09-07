@@ -79,16 +79,6 @@ module.exports = {
 
 function checkChampMesure(value, { req }) {
   if (req.body.etats && req.body.etats.length) {
-    const { nature_mesure } = req.body.etats[req.body.etats.length - 1];
-    if (
-      (nature_mesure === "curatelle_simple" ||
-        nature_mesure === "curatelle_renforcee" ||
-        nature_mesure === "curatelle_renforcee") &&
-      !value
-    ) {
-      throw new Error("champ_mesure is required");
-    }
-
     if (value && !MESURE_PROTECTION.CHAMP_MESURE.keys.includes(value)) {
       throw new Error(
         `champ_mesure must be equal to ${MESURE_PROTECTION.CHAMP_MESURE.keys.join(

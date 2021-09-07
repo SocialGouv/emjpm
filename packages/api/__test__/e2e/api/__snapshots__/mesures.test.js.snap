@@ -22,16 +22,6 @@ Object {
       "param": "date_nomination",
       "value": "2020-01-11",
     },
-    Object {
-      "location": "body",
-      "msg": "champ_mesure is required",
-      "param": "etats[0].champ_mesure",
-    },
-    Object {
-      "location": "body",
-      "msg": "champ_mesure is required",
-      "param": "etats[1].champ_mesure",
-    },
   ],
 }
 `;
