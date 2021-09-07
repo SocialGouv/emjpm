@@ -57,7 +57,7 @@ function MesureListFilters(props) {
         <Box>
           <Flex>
             {service_antennes.length >= 1 && (
-              <Box width="170px" mr={1}>
+              <Box width="170px" mb={1} mr={1}>
                 <Select
                   size="small"
                   options={antenneOptions}
@@ -67,7 +67,7 @@ function MesureListFilters(props) {
                 />
               </Box>
             )}
-            <Box width="200px" mr={1}>
+            <Box width="200px" mb={1} mr={1}>
               <Select
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
@@ -78,7 +78,7 @@ function MesureListFilters(props) {
                 onChange={(option) => changeNatureMesure(option)}
               />
             </Box>
-            <Box width="200px" mr={1}>
+            <Box width="200px" mb={1} mr={1}>
               <Select
                 size="small"
                 options={MESURE_STATUS_LABEL_VALUE}
@@ -87,7 +87,7 @@ function MesureListFilters(props) {
                 onChange={(option) => changeMesureStatus(option)}
               />
             </Box>
-            <Box width="200px" mr={1}>
+            <Box width="200px" mb={1} mr={1}>
               <Select
                 size="small"
                 options={departementsOptions}
@@ -97,7 +97,7 @@ function MesureListFilters(props) {
                 onChange={(option) => changeMesureDepartement(option)}
               />
             </Box>
-            <Box width="200px" mr={1}>
+            <Box width="200px" mb={1} mr={1}>
               <Select
                 size="small"
                 options={MESURE_SORTBY_LABEL_VALUE}
