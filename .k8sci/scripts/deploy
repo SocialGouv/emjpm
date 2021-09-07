@@ -18,8 +18,7 @@ else
   export K8SCI_HELM_ARGS="${K8SCI_HELM_ARGS}
     --set tlsSecretName=wildcard-crt
     "
-  DOMAIN_SLUG=$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:]]/-/g' | cut -c1-32)
-  DOMAIN_SLUG=${DOMAIN_SLUG%.dev}
+  DOMAIN_SLUG=$(echo ${K8SCI_BRANCH%.dev} | sed -e 's/[^[:alnum:]]/-/g' | cut -c1-32)
   export APP_DOMAIN="${DOMAIN_SLUG}-${ROOT_DOMAIN}"
 fi
 
