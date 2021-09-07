@@ -103,6 +103,7 @@ spec:
 
               pg_restore \
                 --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
+                -d $DB_NAME \
                 --if-exists \
                 --clean \
                 --no-owner \
