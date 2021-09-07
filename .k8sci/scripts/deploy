@@ -19,6 +19,7 @@ else
     --set tlsSecretName=wildcard-crt
     "
   DOMAIN_SLUG=$(echo $K8SCI_BRANCH | sed -e 's/[^[:alnum:]]/-/g' | cut -c1-32)
+  DOMAIN_SLUG=${DOMAIN_SLUG%.dev}
   export APP_DOMAIN="${DOMAIN_SLUG}-${ROOT_DOMAIN}"
 fi
 
