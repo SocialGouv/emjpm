@@ -208,22 +208,24 @@ function MesureDetailView({ mesure, ...props }) {
           </>
         )}
       </Box>
-      <Box textAlign="center" py={1}>
-        <Link
-          href={
-            `mailto:` +
-            emailMagistrat +
-            `?subject=` +
-            encodeURIComponent("eMJPM - Concernant la mesure RG-" + numeroRg)
-          }
-        >
-          <Button ml={3} variant="outline">
-            <Text fontSize={1} fontWeight="normal">
-              Envoyer un email au magistrat à propos de cette mesure
-            </Text>
-          </Button>
-        </Link>
-      </Box>
+      {emailMagistrat && (
+        <Box textAlign="center" py={1}>
+          <Link
+            href={
+              `mailto:` +
+              emailMagistrat +
+              `?subject=` +
+              encodeURIComponent("eMJPM - Concernant la mesure RG-" + numeroRg)
+            }
+          >
+            <Button ml={3} variant="outline">
+              <Text fontSize={1} fontWeight="normal">
+                Envoyer un email au magistrat à propos de cette mesure
+              </Text>
+            </Button>
+          </Link>
+        </Box>
+      )}
     </Box>
   );
 }
