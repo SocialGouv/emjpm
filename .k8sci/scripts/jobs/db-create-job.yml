@@ -18,9 +18,36 @@ spec:
         k8sci/job: db-create
     spec:
       restartPolicy: Never
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+      initContainers:
+        - name: git-clone-repo
+          image: alpine/git:v2.30.0
+          command:
+            - sh
+            - -c
+            - |
+              git clone \
+                --depth 1 \
+                {{.Env.K8SCI_REPOSITORY}} \
+                --branch {{.Env.K8SCI_BRANCH}} \
+                --single-branch \
+                /workspace
+          securityContext:
+            runAsUser: 1000
+            runAsGroup: 1000
+          volumeMounts:
+            - name: workspace
+              mountPath: /workspace
       containers:
         - name: create-job
           image: postgres:10-alpine
+          volumeMounts:
+            - name: workspace
+              readOnly: true
+              mountPath: /workspace
           env:
             - name: PGSSLMODE
               value: "require"
@@ -57,7 +84,19 @@ spec:
                 GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
                 GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
+
+              pg_restore \
+                --dbname=postgresql://$PGUSER:$PGPASSWORD@$PGHOST/$DB_NAME \
+                --if-exists \
+                --clean \
+                --no-owner \
+                --no-acl \
+                -e \
+                -Fc \
+                -v < /workspace/db-seed/devdb.dump
       volumes:
         - name: {{.Env.PSQL_CREDS_SECRET_NAME}}
           secret:
             secretName: {{.Env.PSQL_CREDS_SECRET_NAME}}
+        - name: workspace
+          emptyDir: {}
