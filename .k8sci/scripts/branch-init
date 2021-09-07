@@ -13,3 +13,4 @@ fi
 $(dirname $0)/k8s-ns-create
 $(dirname $0)/k8s-ns-copy-secrets
 
+$(dirname $0)/db-create

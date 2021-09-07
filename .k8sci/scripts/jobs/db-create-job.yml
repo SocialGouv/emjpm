@@ -98,10 +98,11 @@ spec:
                 done
               }
 
+              PGUSER_ENCODED=`echo -e "$PGUSER" | urlencode`
               PGPASSWORD_ENCODED=`echo -e "$PGPASSWORD" | urlencode`
-              echo postgresql://${PGUSER}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME}
+
               pg_restore \
-                --dbname=postgresql://${PGUSER}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
+                --dbname=postgresql://${PGUSER_ENCODED}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
                 --if-exists \
                 --clean \
                 --no-owner \

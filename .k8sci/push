@@ -15,7 +15,6 @@ export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 # PRE-DEPLOY
 if [ ! -n "$K8SCI_PRODUCTION" ]; then
   $(dirname $0)/scripts/branch-init
-  $(dirname $0)/scripts/db-create
 fi
 
 # DEPLOY
