@@ -94,7 +94,6 @@ spec:
                 --if-exists \
                 --no-owner \
                 --no-acl \
-                -e \
                 -Fc \
                 -v \
                   < /workspace/db-seed/devdb.dump

@@ -66,7 +66,7 @@ docker exec -i emjpm_db_seed \
     --no-acl \
     --clean \
     --no-tablespaces \
-    -Fc \
+    --format=c \
     -v \
       > $DUMP_FILE
 
