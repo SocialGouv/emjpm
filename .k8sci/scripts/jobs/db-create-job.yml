@@ -71,7 +71,7 @@ spec:
                   name: {{.Env.PSQL_CREDS_SECRET_NAME}}
                   key: ADMIN_PGPASSWORD
           command:
-            - sh
+            - /bin/bash
             - -c
             - |
               set -e
@@ -85,9 +85,22 @@ spec:
                 GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
 
-              PGPASSWORD_ENCODED=`echo -e "$PGPASSWORD" | od -An -tx1 | tr ' ' % | xargs printf "%s"`
+              urlencode() {
+                STDIN=`cat /dev/stdin`
+                local length="${#STDIN}"
+                for (( i = 0; i < length; i++ )); do
+                    local c="${STDIN:i:1}"
+                    case $c in
+                        [a-zA-Z0-9.~_-]) printf "$c" ;;
+                        *) printf '%s' "$c" | xxd -p -c1 |
+                              while read c; do printf '%%%s' "$c"; done ;;
+                    esac
+                done
+              }
+
+              PGPASSWORD_ENCODED=`echo -e "$PGPASSWORD" | urlencode`
               pg_restore \
-                --dbname=postgresql://$PGUSER:$PGPASSWORD_ENCODED@$PGHOST:5432/$DB_NAME \
+                --dbname=postgresql://${PGUSER}:${PGPASSWORD_ENCODED}@${PGHOST}:5432/${DB_NAME} \
                 --if-exists \
                 --clean \
                 --no-owner \
