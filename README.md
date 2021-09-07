@@ -70,15 +70,6 @@ this work without any previous install
 yarn dev:prod
 ```
 
-## Database
-
-### Restaurer un dump
-
-default path for dump is dump/db.dump
-```bash
-yarn dev:restore-dump [my-path-to-emjpm.dump]
-```
-
 ## Test
 
 [Fonctionnement des tests](./test/md)

@@ -27,25 +27,16 @@ afterEach(async () => {
 });
 
 describe("POST /api/auth/forgot-password", () => {
-  // describe("when email is invalid or not found", () => {
-  //   test("it returns 422", async () => {
-  //     const response = await request(server)
-  //       .post("/api/auth/forgot-password")
-  //       .set("Accept", "application/json")
-  //       .send({ body: { email: null } });
+  describe("when email is invalid or not found", () => {
+    test("it returns 422", async () => {
+      const response = await request(server)
+        .post("/api/auth/forgot-password")
+        .set("Accept", "application/json")
+        .send({ body: { email: null } });
 
-  //     expect(response.status).toBe(422);
-  //   });
-
-  //   test("it returns error message", async () => {
-  //     const response = await request(server)
-  //       .post("/api/auth/forgot-password")
-  //       .set("Accept", "application/json")
-  //       .send({ email: "notfound@notfound.com" });
-
-  //     expect(response.body.error).not.toBeFalsy();
-  //   });
-  // });
+      expect(response.status).toBe(422);
+    });
+  });
 
   test("it updates reset_password_token and reset_password_expires", async () => {
     await request(server)

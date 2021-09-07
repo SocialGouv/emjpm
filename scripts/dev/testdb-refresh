@@ -1,7 +1,0 @@
-#!/bin/sh
-
-yarn dev:testdb-create
-
-cd packages/api
-yarn run test:e2e:update-snapshot
-cd ../..

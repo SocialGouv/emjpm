@@ -15,7 +15,7 @@ const seedData = (databaseName) => {
       "--clean",
       "--dbname",
       `${databaseName}`,
-      require("path").join(__dirname, "./test-seed.dump"),
+      require("path").join(__dirname, "../../../../db-seed/devdb.dump"),
     ],
     {
       env: {

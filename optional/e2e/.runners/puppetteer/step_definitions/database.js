@@ -37,7 +37,7 @@ Given("a clean test database", async () => {
       "--clean",
       "--dbname",
       "emjpm",
-      require("path").join(process.cwd(), "./test-seed.dump")
+      require("path").join(process.cwd(), "../../../../db-seed/devdb.dump")
     ],
     {
       env: {

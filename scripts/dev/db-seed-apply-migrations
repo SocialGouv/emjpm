@@ -1,0 +1,77 @@
+#!/bin/sh
+
+set -e
+
+POSTGRS_VERSION=11
+
+DB=emjpm
+DUMP_FILE=db-seed/devdb.dump
+export PGUSER=$DB
+export PGPASSWORD=test
+export PGPORT=5435
+
+# clean
+docker stop emjpm_db_seed || cat /dev/null
+docker network rm emjpm_db_seed_network || cat /dev/null
+
+# create network for containers communication
+docker network create emjpm_db_seed_network
+
+# run db container in detached mod
+docker run \
+  -d \
+  --rm \
+  --network emjpm_db_seed_network \
+  --name emjpm_db_seed \
+  -p $PGPORT:5432 \
+  -e POSTGRES_USER=$PGUSER \
+  -e POSTGRES_PASSWORD=$PGPASSWORD \
+  mdillon/postgis:$POSTGRS_VERSION
+
+# wait to be sure pg is ready
+sleep 5
+while ! nc -z localhost $PGPORT; do
+  sleep 1
+done
+
+# restore original seed
+docker exec -i emjpm_db_seed \
+  pg_restore \
+  --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
+  --if-exists \
+  --clean \
+  --no-owner \
+  --no-acl \
+  -e \
+  -Fc \
+  -v < $DUMP_FILE
+
+# build migration image
+docker build -t emjpm_hasura_migrate -f packages/hasura/Dockerfile .
+# apply migration
+docker run \
+  --network emjpm_db_seed_network \
+  --rm \
+  -e HASURA_GRAPHQL_DATABASE_URL=postgres://$PGUSER:$PGPASSWORD@emjpm_db_seed:5432/$DB \
+  --entrypoint /bin/docker-entrypoint.sh \
+  emjpm_hasura_migrate \
+  cat /dev/null
+
+# backup seed
+docker exec -i emjpm_db_seed \
+  pg_dump \
+  --dbname=postgresql://$PGUSER:$PGPASS@localhost:5432/$DB \
+  --no-owner \
+  --no-acl \
+  -Fc \
+  -v > $DUMP_FILE
+
+
+# clean
+docker stop emjpm_db_seed
+docker network rm emjpm_db_seed_network
+
+# upgrade tests snapshots
+cd packages/api
+yarn run test:e2e:update-snapshot
+cd ../..

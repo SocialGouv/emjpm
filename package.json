@@ -11,7 +11,6 @@
     "dev:stop": "docker-compose down",
     "dev:app": "yarn workspace @emjpm/app start",
     "dev:release-note": "scripts/ci/get-release-note",
-    "dev:yarn-refresh": "scripts/dev/yarn-refresh",
     "dev:testdb-create": "scripts/dev/testdb-create",
     "dev:testdb-refresh": "scripts/dev/testdb-refresh",
     "hasura:console": "scripts/dev/hasura-console",

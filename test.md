@@ -1,10 +1,10 @@
 # eMJPM
 
 
-## création d'une base de données de test
+## mise à jour de la base de données de test
 
 ```bash
-yarn dev:testdb-create
+scripts/dev/db-seed-apply-migrations
 ```
 
 ## mise à jour des snaptshots de tests
@@ -49,11 +49,11 @@ $ docker-compose up db
 $ yarn workspace @emjpm/knex run migrate --env test
 $ yarn workspace @emjpm/knex run seeds --env test
 # Instantiate the initial seed
-$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > db-seed/devdb.dump
 
 # Or if you have the test-seed.dump
 # The e2e script will retore the db before each scenario with
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm db-seed/devdb.dump
 
 # start the dev server
 $ yarn dev
@@ -95,11 +95,11 @@ $ yarn workspace @emjpm/knex run migrate --env test
 $ yarn workspace @emjpm/knex run seeds --env test
 
 # Instantiate the initial seed
-$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_dump --host localhost --port 5434 --username=postgres -Fc emjpm > db-seed/devdb.dump
 
 # Optional
 # The e2e script will retore the db before each scenario with
-$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm optional/e2e/.runners/puppetteer/test-seed.dump
+$ PGPASSWORD=test pg_restore --host localhost --port 5434 --username postgres -e --if-exists --clean --dbname=emjpm db-seed/devdb.dump
 
 $ docker-compose stop
 
