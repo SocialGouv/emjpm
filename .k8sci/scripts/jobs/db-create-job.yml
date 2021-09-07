@@ -92,7 +92,6 @@ spec:
                 -p 5432 \
                 -d "$DB_NAME" \
                 --if-exists \
-                --clean \
                 --no-owner \
                 --no-acl \
                 -e \
