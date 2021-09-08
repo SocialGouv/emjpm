@@ -74,7 +74,6 @@ spec:
             - /bin/bash
             - -c
             - |
-              set -e
               psql -v ON_ERROR_STOP=1 postgres <<EOF
                 CREATE DATABASE "${DB_NAME}" WITH TEMPLATE template0;
               EOF
