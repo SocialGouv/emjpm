@@ -89,7 +89,7 @@ spec:
                 -d "$DB_NAME" \
                 --no-owner \
                 -v \
-                  /workspace/db-seed/devdb.dump
+                  /workspace/db-seed/devdb.dump || true
       volumes:
         - name: {{.Env.PSQL_CREDS_SECRET_NAME}}
           secret:
