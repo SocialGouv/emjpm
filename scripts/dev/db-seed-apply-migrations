@@ -11,13 +11,14 @@ export PGPASSWORD=test
 export PGPORT=5435
 
 # clean
-docker stop emjpm_db_seed > /dev/null || true
+docker stop emjpm_db_seed > /dev/null 2>&1 || true
 
 # create network for containers communication
 NETWORK_NAME=emjpm_db_seed_network
 if [ -z $(docker network ls --filter name=^${NETWORK_NAME}$ --format="{{ .Name }}") ] ; then
-     docker network create ${NETWORK_NAME} ;
+    docker network create ${NETWORK_NAME} ;
 fi
+
 
 # run db container in detached mod
 docker run \
