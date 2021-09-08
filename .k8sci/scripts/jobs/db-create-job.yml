@@ -76,6 +76,9 @@ spec:
             - |
               psql -v ON_ERROR_STOP=1 postgres <<EOF
                 CREATE DATABASE "${DB_NAME}" WITH TEMPLATE template0;
+                \c "${DB_NAME}"
+                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
+                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
               EOF
 
               set "PGPASSWORD=$PGPASSWORD"
@@ -84,14 +87,9 @@ spec:
                 -h "$PGHOST" \
                 -p 5432 \
                 -d "$DB_NAME" \
+                --no-owner \
                 -v \
                   /workspace/db-seed/devdb.dump
-
-              psql -v ON_ERROR_STOP=1 postgres <<EOF
-                \c "${DB_NAME}"
-                GRANT CONNECT ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-                GRANT ALL PRIVILEGES ON DATABASE "${DB_NAME}" TO ${APP_PG_ROLE};
-              EOF
       volumes:
         - name: {{.Env.PSQL_CREDS_SECRET_NAME}}
           secret:
