@@ -10,7 +10,7 @@ set +a
 export K8SCI_GID=${K8SCI_GID:-"$(date +'%s%3N')"}
 
 # BUILD
-# $(dirname $0)/scripts/build
+$(dirname $0)/scripts/build
 
 # PRE-DEPLOY
 if [ ! -n "$K8SCI_PRODUCTION" ]; then
