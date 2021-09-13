@@ -37,11 +37,15 @@ for context in $K8SCI_CONTEXT_LIST; do
       --set replicas=2
       "
     export HASURA_GRAPHQL_PG_CONNECTIONS="16"
+    export API_PG_CONNECTIONS_MIN="5"
+    export API_PG_CONNECTIONS_MAX="5"
   else
     export K8SCI_HELM_ARGS="${K8SCI_HELM_ARGS}
       --set tlsSecretName=wildcard-crt
       "
     export HASURA_GRAPHQL_PG_CONNECTIONS="2"
+    export API_PG_CONNECTIONS_MIN="2"
+    export API_PG_CONNECTIONS_MAX="2"
   fi
 
   case $K8SCI_CONTEXT in
@@ -53,6 +57,8 @@ for context in $K8SCI_CONTEXT_LIST; do
       export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
         --set appURL=https://$APP_DOMAIN
         --set dbName=$DB_NAME
+        --set apiPgConnectionsMin=$API_PG_CONNECTIONS_MIN
+        --set apiPgConnectionsMax=$API_PG_CONNECTIONS_MAX
         "
       if [ -n "$K8SCI_PRODUCTION" ]; then
         export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
@@ -68,7 +74,7 @@ for context in $K8SCI_CONTEXT_LIST; do
       export CONTEXT_DOMAIN="hasura-$APP_DOMAIN"
       export K8SCI_HELM_ARGS="$K8SCI_HELM_ARGS
         --set dbName=$DB_NAME
-        --set pgConnections=$HASURA_GRAPHQL_PG_CONNECTIONS
+        --set hasuraPgConnections=$HASURA_GRAPHQL_PG_CONNECTIONS
         "
       ;;
   esac

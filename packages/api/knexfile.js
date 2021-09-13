@@ -1,6 +1,11 @@
+let poolMax = process.env.PG_POOL_MAX;
+let poolMin = process.env.PG_POOL_MIN;
+poolMax = poolMax ? parseInt(poolMax) : 5;
+poolMin = poolMin ? parseInt(poolMin) : 5;
+
 const pool = {
-  max: 5,
-  min: 5,
+  max: poolMax,
+  min: poolMin,
   propagateCreateError: false,
 };
 

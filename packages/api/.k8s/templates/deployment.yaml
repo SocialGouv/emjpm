@@ -81,6 +81,10 @@ spec:
                   key: DATABASE_CONNECTION
             - name: DATABASE_URL
               value: $(DATABASE_CONNECTION)/{{ required "dbName must be specified" .Values.dbName }}
+            - name: PG_POOL_MIN
+              value: {{ .Values.apiPgConnectionsMin }}
+            - name: PG_POOL_MAX
+              value: {{ .Values.apiPgConnectionsMax }}
             - name: PORT
               value: '4000'
             - name: NODE_ENV
