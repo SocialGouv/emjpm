@@ -6,12 +6,16 @@ ENV NODE_ENV=production
 WORKDIR /app
 
 # BUILD ENVIRONMENTS
-FROM node as builder
+FROM node as prepare
 
 COPY package.json yarn.lock /app/
 COPY packages/app/package.ci.json  /app/packages/app/package.json
 COPY packages/biz/package.ci.json /app/packages/biz/package.json
+RUN node -e "fs.writeFileSync('/app/packages/app/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/app/package.json')), version: '0.0.0' }));"
+RUN node -e "fs.writeFileSync('/app/packages/biz/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/biz/package.json')), version: '0.0.0' }));"
 
+
+FROM prepare as builder
 RUN yarn --frozen-lockfile --production --ignore-scripts
 
 
