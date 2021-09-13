@@ -9,10 +9,19 @@ WORKDIR /app
 FROM node as prepare
 
 COPY package.json yarn.lock /app/
-COPY packages/app/package.json  /app/packages/app/package.json
+
 COPY packages/biz/package.json /app/packages/biz/package.json
-RUN node -e "fs.writeFileSync('/app/packages/app/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/app/package.json')), version: '0.0.0' }));"
 RUN node -e "fs.writeFileSync('/app/packages/biz/package.json', JSON.stringify({ ...JSON.parse(fs.readFileSync('/app/packages/biz/package.json')), version: '0.0.0' }));"
+
+COPY packages/app/package.json  /app/packages/app/package.json
+RUN node -e " \
+  const package = JSON.parse(fs.readFileSync('/app/packages/app/package.json')); \
+  const packageZero = { ...package, version: '0.0.0', dependencies: {  \
+    ...package.dependencies, \
+    \"@emjpm/biz\": \"0.0.0\"  \
+  } };  \
+  fs.writeFileSync('/app/packages/app/package.json', JSON.stringify(packageZero));"
+
 
 
 FROM prepare as builder
