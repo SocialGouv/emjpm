@@ -2,7 +2,5 @@
 
 husky install
 
-scripts/ci/package-zeroify-version
-
 [ -f .env ] || cp .env.sample .env
 [ -f packages/app/.env ] || cp packages/app/.env.sample packages/app/.env

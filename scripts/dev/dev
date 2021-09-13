@@ -1,0 +1,5 @@
+#!/bin/sh
+
+exec yarn concurrently \
+  "docker-compose up --build" \
+  "yarn workspace @emjpm/app start"

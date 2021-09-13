@@ -54,6 +54,31 @@ services:
       HASURA_WEB_HOOK_BASE_URL: ${HASURA_WEB_HOOK_BASE_URL:-http://api:4000}
       HASURA_WEB_HOOK_SECRET: ${HASURA_WEB_HOOK_SECRET:-localdevunsecuresecret}
 
+  hasura_console:
+    image: emjpm_hasura_console
+    build:
+      context: .
+      dockerfile: ./packages/hasura/console/Dockerfile
+    volumes:
+      - ./packages/hasura/metadata:/hasura/metadata:rw
+      - ./packages/hasura/migrations:/hasura/migrations:rw
+      - ./packages/hasura/seeds:/hasura/seeds:rw
+    ports:
+      - 9695:9695
+      - 9693:9693
+    depends_on:
+      - db
+      - api
+    restart: always
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
+      HASURA_CONSOLE_INTERNAL_HOSTNAME: ${HASURA_CONSOLE_INTERNAL_HOSTNAME:-hasura_console}
+      HASURA_CONSOLE_PORT: 9695
+      HASURA_CONSOLE_API_PORT: 9693
+      HASURA_GRAPHQL_ENDPOINT: http://localhost:5000
+      HASURA_INTERNAL_HOSTNAME: hasura
+      HASURA_EXPOSE_PORT: 5000
+
   api:
     image: emjpm_api
     build:

@@ -6,16 +6,11 @@
     "dev:prod:stop": "docker-compose -f docker-compose.build.yaml down",
     "dev:restore-dump": "scripts/dev/restore-dump",
     "dev:docker-compose-restore-dump": "scripts/dev/docker-compose-restore-dump",
-    "dev:up": "docker-compose up --build -d",
-    "dev:log": "docker-compose logs -f",
-    "dev:stop": "docker-compose down",
-    "dev:app": "yarn workspace @emjpm/app start",
     "dev:release-note": "scripts/ci/get-release-note",
     "dev:testdb-create": "scripts/dev/testdb-create",
     "dev:testdb-refresh": "scripts/dev/testdb-refresh",
-    "hasura:console": "scripts/dev/hasura-console",
-    "hasura:console:stop": "scripts/dev/hasura-console-stop",
-    "dev": "yarn dev:up && yarn hasura:console & yarn dev:app",
+    "dev:app": "yarn workspace @emjpm/app start",
+    "dev": "scripts/dev/dev",
     "e2e": "yarn --cwd optional/e2e/.runners/puppetteer",
     "lint": "lerna run lint --parallel",
     "lint:pre-commit": "lerna run lint:pre-commit --parallel",
@@ -38,6 +33,7 @@
     "lerna": "^3.22.1"
   },
   "dependencies": {
+    "concurrently": "^6.2.1",
     "glob": "^7.1.7"
   },
   "lint-staged": {
