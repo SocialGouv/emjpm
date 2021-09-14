@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
+
+
+### Features
+
+* **ci:** ci zeroify clean ([c27e9f3](https://github.com/SocialGouv/emjpm/commit/c27e9f3cf08fddedfeaf634dee92ce40836b8560))
+
+
+
+
+
 ## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
 
 **Note:** Version bump only for package @emjpm/biz

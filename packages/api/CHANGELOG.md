@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** ci zeroify clean ([a02778e](https://github.com/SocialGouv/emjpm/commit/a02778ee87baffa4a184e26fc241952f4321030a))
+* **ci:** int to str ([d8c3488](https://github.com/SocialGouv/emjpm/commit/d8c3488c6a9fc30bfb148cca7db50c64bdf7b672))
+* **pg-pool:** less connections in test env ([b7ab849](https://github.com/SocialGouv/emjpm/commit/b7ab849b0c061f55af9c01aecca6fc79e5c08bef))
+
+
+### Features
+
+* **ci:** ci zeroify clean ([c27e9f3](https://github.com/SocialGouv/emjpm/commit/c27e9f3cf08fddedfeaf634dee92ce40836b8560))
+* **db-seed:** devdb apply migrations ([daa23f6](https://github.com/SocialGouv/emjpm/commit/daa23f69e58c46af7789df0030f44bff0286fb2b))
+
+
+
+
+
 ## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
 
 

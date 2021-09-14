@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** ci zeroify clean ([a02778e](https://github.com/SocialGouv/emjpm/commit/a02778ee87baffa4a184e26fc241952f4321030a))
+* **ci:** ci zeroify clean ([95a73cc](https://github.com/SocialGouv/emjpm/commit/95a73ccff9081d2a1125aa3dfbdad3903605d71b))
+* **ci:** int to str ([d8c3488](https://github.com/SocialGouv/emjpm/commit/d8c3488c6a9fc30bfb148cca7db50c64bdf7b672))
+* **ci:** remove .dev suffix branch ([29f7a80](https://github.com/SocialGouv/emjpm/commit/29f7a80ffed5790ca1e5a1e37aacb90403cccee2))
+* **ci:** remove .dev suffix branch bugfix ([e9f57ba](https://github.com/SocialGouv/emjpm/commit/e9f57bac1d014bf628421de52bb1f020970db214))
+* **ci:** script branches ([945504d](https://github.com/SocialGouv/emjpm/commit/945504d30987b996d33a61aa1526d66751ba2e81))
+* **ci:** use kube 1.2 ingress annotations ([#2643](https://github.com/SocialGouv/emjpm/issues/2643)) ([8b8a3cd](https://github.com/SocialGouv/emjpm/commit/8b8a3cd337d3b31f299ebff711d1e65374a7ea18))
+* **hide:** mailto magistrat when no shared email ([8b24eee](https://github.com/SocialGouv/emjpm/commit/8b24eee0da7531f4d6b7277b73e9f46d0c99e3fa))
+* **import-file:** redesign fix [#2573](https://github.com/SocialGouv/emjpm/issues/2573) ([917ef7e](https://github.com/SocialGouv/emjpm/commit/917ef7e431b12fedd24a3299745cdfc5e14abeac))
+* **mandataire-mesures:** filter design space ([7b01ff2](https://github.com/SocialGouv/emjpm/commit/7b01ff2ff20fef82fbe8f318f7daa5b24459f721))
+* **pg-pool:** less connections in test env ([b7ab849](https://github.com/SocialGouv/emjpm/commit/b7ab849b0c061f55af9c01aecca6fc79e5c08bef))
+
+
+### Features
+
+* **branch:** seed db ([#2642](https://github.com/SocialGouv/emjpm/issues/2642)) ([f63f1d9](https://github.com/SocialGouv/emjpm/commit/f63f1d9c646f2d7e1e9b599d6e28b4ee0c9fbbfd))
+* **ci:** ci zeroify clean ([c27e9f3](https://github.com/SocialGouv/emjpm/commit/c27e9f3cf08fddedfeaf634dee92ce40836b8560))
+* **db-seed:** devdb apply migrations ([daa23f6](https://github.com/SocialGouv/emjpm/commit/daa23f69e58c46af7789df0030f44bff0286fb2b))
+* **dev:** hasura console docker ([22dde48](https://github.com/SocialGouv/emjpm/commit/22dde484c270fa61b2a621de4033d689349a9ce4))
+
+
+
+
+
 ## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
 
 

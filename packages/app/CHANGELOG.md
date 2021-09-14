@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
+
+
+### Bug Fixes
+
+* **ci:** ci zeroify clean ([a02778e](https://github.com/SocialGouv/emjpm/commit/a02778ee87baffa4a184e26fc241952f4321030a))
+* **ci:** ci zeroify clean ([95a73cc](https://github.com/SocialGouv/emjpm/commit/95a73ccff9081d2a1125aa3dfbdad3903605d71b))
+* **hide:** mailto magistrat when no shared email ([8b24eee](https://github.com/SocialGouv/emjpm/commit/8b24eee0da7531f4d6b7277b73e9f46d0c99e3fa))
+* **import-file:** redesign fix [#2573](https://github.com/SocialGouv/emjpm/issues/2573) ([917ef7e](https://github.com/SocialGouv/emjpm/commit/917ef7e431b12fedd24a3299745cdfc5e14abeac))
+* **mandataire-mesures:** filter design space ([7b01ff2](https://github.com/SocialGouv/emjpm/commit/7b01ff2ff20fef82fbe8f318f7daa5b24459f721))
+
+
+### Features
+
+* **ci:** ci zeroify clean ([c27e9f3](https://github.com/SocialGouv/emjpm/commit/c27e9f3cf08fddedfeaf634dee92ce40836b8560))
+
+
+
+
+
 ## [25.134.1](https://github.com/SocialGouv/emjpm/compare/v25.134.0...v25.134.1) (2021-09-07)
 
 
