@@ -5,9 +5,6 @@ object_relationships:
 - name: departement
   using:
     foreign_key_constraint_on: departement_code
-- name: etablissement
-  using:
-    foreign_key_constraint_on: etablissement_id
 - name: magistrat
   using:
     foreign_key_constraint_on: magistrat_id
@@ -80,7 +77,6 @@ insert_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -117,7 +113,6 @@ insert_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -154,7 +149,6 @@ insert_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -184,7 +178,6 @@ insert_permissions:
     - created_at
     - date_nomination
     - departement_code
-    - etablissement_id
     - date_fin_mesure
     - id
     - is_urgent
@@ -240,7 +233,6 @@ select_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -284,7 +276,6 @@ select_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -327,7 +318,6 @@ select_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -369,7 +359,6 @@ select_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -415,7 +404,6 @@ update_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -456,7 +444,6 @@ update_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -496,7 +483,6 @@ update_permissions:
     - date_protection_en_cours
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date
@@ -533,7 +519,6 @@ update_permissions:
     - date_nomination
     - departement_code
     - en_attente_reouverture
-    - etablissement_id
     - id
     - is_urgent
     - judgment_date

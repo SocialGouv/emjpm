@@ -47,7 +47,6 @@ export const MESURES_QUERY = gql`
       created_at
       date_nomination
       departement_code
-      etablissement_id
       date_fin_mesure
       id
       is_urgent
@@ -116,7 +115,6 @@ export const MESURES_QUERY = gql`
       created_at
       date_nomination
       departement_code
-      etablissement_id
       date_fin_mesure
       id
       is_urgent

@@ -1,131 +1,113 @@
 type Mutation {
-  admin_reset_user_password (
+  admin_reset_user_password(
     id: Int!
   ): AdminResetPasswordOutput
 }
 
-
 type Mutation {
-  calculate_mesures (
+  calculate_mesures(
     serviceId: Int
     mandataireId: Int
   ): CalculateMesuresOutput
 }
 
-
 type Query {
-  check_email_exists (
+  check_email_exists(
     email: String
   ): CheckEmailExistsOutput
 }
 
-
 type Mutation {
-  delete_mesure_action (
+  delete_mesure_action(
     mesure_id: Int!
   ): DeleteMesureActionOutput
 }
 
-
 type Mutation {
-  delete_mesure_etat_action (
+  delete_mesure_etat_action(
     id: Int!
     mesure_id: Int!
   ): DeleteMesureEtatOutput
 }
 
-
 type Mutation {
-  email_account_validation (
+  email_account_validation(
     user_email: String!
   ): EmailAccountValidationOutput
 }
 
-
 type Mutation {
-  email_reservation (
+  email_reservation(
     mesure_id: Int!
   ): EmailReservationOutput
 }
 
-
 type Mutation {
-  email_service_member_invitation (
+  email_service_member_invitation(
     invitation_id: Int!
   ): EmailServiceMemberInvitationOutput
 }
 
-
 type Mutation {
-  email_token_request (
+  email_token_request(
     email: String!
     name: String!
   ): TokenRequestOutput
 }
 
-
 type Query {
-  enquete_reponse_validation_status (
+  enquete_reponse_validation_status(
     enqueteId: Int!
     userId: Int
     reponseId: Int
   ): EnqueteReponseStatus
 }
 
-
 type Mutation {
-  export_mesures_file (
+  export_mesures_file(
     serviceId: Int
     mandataireUserId: Int
   ): FileOutput
 }
 
-
 type Mutation {
-  import_base_finess : ImportFinessOutput
+  import_base_finess: ImportFinessOutput
 }
 
-
 type Mutation {
-  import_ocmi_file : ImportOCMIOutput
+  import_ocmi_file: ImportOCMIOutput
 }
 
-
 type Mutation {
-  import_ocmi_mesures : ImportOcmiMesuresOutput
+  import_ocmi_mesures: ImportOcmiMesuresOutput
 }
-
 
 type Query {
-  mandataire_statistics (
+  mandataire_statistics(
     userId: Int!
   ): MandataireStatisticsOutput
 }
 
-
 type Mutation {
-  mesures_last_update : MesuresLastUpdateResult
+  mesures_last_update: MesuresLastUpdateResult
 }
 
-
 type Mutation {
-  reset_mesures_calculations (
+  reset_mesures_calculations(
     serviceId: Int
     mandataireId: Int
   ): ResetMesuresCalculationsOutput
 }
 
-
 type Query {
-  stat_available_mesures (
+  stat_available_mesures(
     departementCode: String
     regionId: Int
   ): StatAvailableMesuresOutput
 }
 
-
 type Query {
-  stat_closed_mesures (
+  stat_closed_mesures(
     departementCode: String
     regionId: Int
     start: date
@@ -133,9 +115,8 @@ type Query {
   ): StatClosedMesuresOutput
 }
 
-
 type Query {
-  stat_opened_mesures (
+  stat_opened_mesures(
     departementCode: String
     regionId: Int
     start: date
@@ -143,25 +124,22 @@ type Query {
   ): StatOpenedMesuresOutput
 }
 
-
 type Mutation {
-  submit_enquete_reponse (
+  submit_enquete_reponse(
     enqueteId: Int!
   ): EnqueteReponseSubmitted
 }
 
-
 type Mutation {
-  upload_enquete_file (
+  upload_enquete_file(
     content: String!
     enqueteId: Int!
     userId: Int
   ): FileOutput
 }
 
-
 type Mutation {
-  upload_mesures_file (
+  upload_mesures_file(
     name: String!
     type: String!
     content: String!
@@ -171,9 +149,8 @@ type Mutation {
   ): FileOutput
 }
 
-
 type Mutation {
-  upsert_mesure_etat (
+  upsert_mesure_etat(
     champ_mesure: String
     code_postal: String
     date_changement_etat: date!
@@ -187,167 +164,164 @@ type Mutation {
   ): UpsertMesureEtatOutput!
 }
 
-
-
-
 input EmailReservationInput {
-  mesure_id : Int!
+  mesure_id: Int!
 }
 
 input StatAvailableMesuresInput {
-  department : Int!
-  region : Int!
+  department: Int!
+  region: Int!
 }
 
 type FileOutput {
-  data : String!
+  data: String!
 }
 
 type EnqueteIndividuelReponse {
-  enquete_id : Int!
-  submitted_at : timestamptz
-  enquete_reponses_id : Int!
-  enquete_reponses_status : json!
+  enquete_id: Int!
+  submitted_at: timestamptz
+  enquete_reponses_id: Int!
+  enquete_reponses_status: json!
 }
 
 type SubmittedEnqueteReponse {
-  id : Int!
-  submitted_at : timestamptz!
+  id: Int!
+  submitted_at: timestamptz!
 }
 
 type EnqueteReponseSubmitted {
-  enquete_id : Int!
-  enquete_reponses_id : Int!
-  submitted_at : timestamptz
+  enquete_id: Int!
+  enquete_reponses_id: Int!
+  submitted_at: timestamptz
 }
 
 type EnquetePreposeReponse {
-  enquete_id : Int!
-  submitted_at : timestamptz
-  enquete_reponses_id : Int!
-  enquete_reponses_status : json!
-  enquete_reponses_modalites_exercice_status : Int!
-  enquete_reponses_populations_curatelle_status : Int!
-  enquete_reponses_populations_tutelle_status : Int!
-  enquete_reponses_populations_accompagnement_judiciaire_status : Int!
-  enquete_reponses_populations_sauvegarde_justice_status : Int!
-  enquete_reponses_populations_autre_status : Int!
+  enquete_id: Int!
+  submitted_at: timestamptz
+  enquete_reponses_id: Int!
+  enquete_reponses_status: json!
+  enquete_reponses_modalites_exercice_status: Int!
+  enquete_reponses_populations_curatelle_status: Int!
+  enquete_reponses_populations_tutelle_status: Int!
+  enquete_reponses_populations_accompagnement_judiciaire_status: Int!
+  enquete_reponses_populations_sauvegarde_justice_status: Int!
+  enquete_reponses_populations_autre_status: Int!
 }
 
 type EnqueteReponseStatus {
-  id : Int!
-  enquete_id : Int!
-  submitted_at : timestamptz
-  status : String!
-  user_type : String!
-  enquete_reponse_validation_status : json!
-  mandataire : json
-  service : json
+  id: Int!
+  enquete_id: Int!
+  submitted_at: timestamptz
+  status: String!
+  user_type: String!
+  enquete_reponse_validation_status: json!
+  mandataire: json
+  service: json
 }
 
 type ImportFinessOutput {
-  data : String!
+  data: String!
 }
 
 type EmailReservationOutput {
-  result : String!
+  result: String!
 }
 
 type CalculateMesuresOutput {
-  en_cours : Int!
-  en_attente : Int!
+  en_cours: Int!
+  en_attente: Int!
 }
 
 type EmailCancelReservationOutput {
-  result : String!
+  result: String!
 }
 
 type StatAvailableMesuresOutput {
-  available_mesures_nb_global : Int!
-  available_mesures_nb_real : Int!
-  available_mesures_nb_over : Int!
-  available_mesures_nb_unknown_gestion : Int!
+  available_mesures_nb_global: Int!
+  available_mesures_nb_real: Int!
+  available_mesures_nb_over: Int!
+  available_mesures_nb_unknown_gestion: Int!
 }
 
 type StatClosedMesuresOutput {
-  closed_mesures_nb : Int!
+  closed_mesures_nb: Int!
 }
 
 type StatOpendMesuresOutput {
-  opened_mesures_nb : Int!
+  opened_mesures_nb: Int!
 }
 
 type StatOpenedMesuresOutput {
-  opened_mesures_nb : Int!
+  opened_mesures_nb: Int!
 }
 
 type StatAwaitingMesuresOutput {
-  awaiting_mesures_nb : Int!
+  awaiting_mesures_nb: Int!
 }
 
 type DeleteMesureActionOutput {
-  success : Boolean!
+  success: Boolean!
 }
 
 type EmailAccountValidationOutput {
-  result : String!
+  result: String!
 }
 
 type EmailServiceMemberInvitationOutput {
-  result : String!
+  result: String!
 }
 
 type TokenRequestOutput {
-  result : String!
+  result: String!
 }
 
 type CheckEmailExistsOutput {
-  exist : Boolean!
+  exist: Boolean!
 }
 
 type MandataireStatisticsOutput {
-  natureStatistics : json!
+  natureStatistics: json!
 }
 
 type MandataireStatistic {
-  value : Int!
-  name : String!
+  value: Int!
+  name: String!
 }
 
 type UpsertMesureEtatOutput {
-  id : Int!
-  mesure_id : Int!
+  id: Int!
+  mesure_id: Int!
 }
 
 type DeleteMesureEtatOutput {
-  affectedRows : Int!
+  affectedRows: Int!
 }
 
 type ImportOcmiMesuresOutput {
-  errors : [String]
+  errors: [String]
 }
 
 type StateOutput {
-  state : Boolean
+  state: Boolean
 }
 
 type ImportOCMIOutput {
-  state : String
+  state: String
 }
 
 type AdminResetPasswordOutput {
-  password : String!
+  password: String!
 }
 
 type CalculateMesuresDelayedOutput {
-  state : String!
+  state: String!
 }
 
 type ResetMesuresCalculationsOutput {
-  state : Boolean!
+  state: Boolean!
 }
 
 type MesuresLastUpdateResult {
-  status : String!
+  status: String!
 }
 
