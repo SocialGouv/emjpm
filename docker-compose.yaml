@@ -60,15 +60,14 @@ services:
       context: .
       dockerfile: ./packages/hasura/console/Dockerfile
     volumes:
-      - ./packages/hasura/metadata:/hasura/metadata:rw
-      - ./packages/hasura/migrations:/hasura/migrations:rw
-      - ./packages/hasura/seeds:/hasura/seeds:rw
+      - ./packages/hasura:/hasura
     ports:
       - 9695:9695
       - 9693:9693
     depends_on:
       - db
       - api
+      - hasura
     restart: always
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
