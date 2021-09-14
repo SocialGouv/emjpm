@@ -66,9 +66,6 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     );
   }
 
-  console.log(mesures);
-  console.log(allMesures);
-
   const allMesureDatas = allMesures.map((mesure) => ({
     datas: {
       ...mesure,
