@@ -1,23 +1,28 @@
 #!/bin/sh
 set -e
 
-BRANCH=$1
-if [ -z "$BRANCH" ]; then
+if [ -z "$1" ]; then
   echo "missing branch argument" >> /dev/stderr
   exit 1
 fi
 
-if [ -n "$(git diff)" ]; then
-  STASHING=1
-  git stash
-fi
+for BRANCH in "$@"; do
+  echo "syncing branch $BRANCH"
 
-git checkout $BRANCH
-git reset --hard master
-git push --follow-tags --force
-git checkout master
+  if [ -n "$(git diff)" ]; then
+    STASHING=1
+    git stash
+  fi
 
-if [ -n "$STASHING" ]; then
-  git stash apply
-fi
+  git checkout $BRANCH
+  git reset --hard master
+  git push --follow-tags --force
+  git checkout master
+
+  if [ -n "$STASHING" ]; then
+    git stash apply
+  fi
+
+
+done
 

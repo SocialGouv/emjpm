@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-
-$(dirname $0)/sync-branch-with-master apitest.dev
-
-$(dirname $0)/sync-branch-with-master testdb.dev
