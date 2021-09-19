@@ -1,7 +1,7 @@
 import { Box } from "rebass";
 
 import { Footer } from "~/containers/Footer";
-import { Header } from "~/containers/Header";
+import { Header } from "~/components";
 import { Navigation } from "~/containers/Navigation";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";

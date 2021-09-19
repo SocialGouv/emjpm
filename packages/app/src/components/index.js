@@ -20,7 +20,7 @@ export { default as Switch } from "./Switch";
 export { default as Textarea } from "./Textarea";
 
 export { default as Indicator } from "./Indicator";
-export { default as DropDownMenu } from "./DropDownMenu";
+export { default as LoggedMenu } from "./LoggedMenu";
 export { default as Header } from "./Header";
 export { default as Loader } from "./Loader";
 export { default as GlobalLoader } from "./GlobalLoader";

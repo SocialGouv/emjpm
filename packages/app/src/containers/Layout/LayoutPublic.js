@@ -12,7 +12,7 @@ function LayoutPublic(props) {
         sx={{ height: "120px", position: "relative", "z-index": "1000" }}
         bg="cardPrimary"
       >
-        <Header isDisconnected />
+        <Header isPublicLayout />
       </Box>
       <Box>{children}</Box>
       <Footer />
