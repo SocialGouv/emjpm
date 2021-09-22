@@ -1,17 +1,11 @@
 import { useHistory } from "react-router-dom";
-// import { useRef, useCallback } from "react";
 import { Box, Flex, Text } from "rebass";
 import { LogoEtat, LoggedMenu } from "~/components";
-// import { useOnClickOutside } from "~/hooks";
 import { useCallback } from "react";
 import { BoxWrapper } from "~/components/Grid";
 
 function Header(props) {
   const { dropDownLinks, isPublicLayout } = props;
-  // const ref = useRef();
-  // useOnClickOutside(ref, () => setState(false));
-
-  console.log(dropDownLinks);
 
   const history = useHistory();
 
