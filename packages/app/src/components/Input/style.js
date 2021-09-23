@@ -41,10 +41,10 @@ function InputStyle(props) {
   };
 }
 
-function LabelStyle({ required, readOnly, isActive, size }) {
+function LabelStyle({ required, readOnly, isActive, size, noRequiredAsterix }) {
   return {
     "&:after":
-      required && !readOnly
+      required && !readOnly && !noRequiredAsterix
         ? {
             color: "#db4949",
             content: "'  *'",

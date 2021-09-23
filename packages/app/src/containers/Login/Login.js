@@ -19,6 +19,7 @@ import {
 } from "~/components";
 import { useAuth } from "~/user/Auth";
 import { matopush } from "~/user/matomo";
+import { useState } from "react";
 
 const { API_URL } = config;
 
@@ -57,6 +58,7 @@ function Login(props) {
   const history = useHistory();
   const { login } = useAuth();
   const apolloClient = useApolloClient();
+  const [formikSubmitted, setFormikSubmitted] = useState(false);
 
   const handleSubmit = async (values, setSubmitting, setStatus) => {
     const response = await fetch(url, {
@@ -90,6 +92,11 @@ function Login(props) {
     validationSchema: loginSchema,
   });
 
+  const onSubmit = (e) => {
+    setFormikSubmitted(true);
+    return formik.handleSubmit(e);
+  };
+
   return (
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
@@ -103,7 +110,7 @@ function Login(props) {
         </Box>
       </Box>
       <Box p="5">
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={onSubmit} noValidate>
           {!!formik.status && (
             <Box color="error" mb="1">
               {formik.status.errorMsg}
@@ -115,13 +122,14 @@ function Login(props) {
               id="email"
               name="email"
               type="text"
-              hasError={formik.errors.email && formik.touched.email}
+              hasError={!!formik.errors.email}
               onChange={formik.handleChange}
               placeholder="Votre email"
+              required
+              noRequiredAsterix
             />
-            {formik.touched.email && (
-              <InlineError message={formik.errors.email} fieldId="email" />
-            )}
+
+            <InlineError message={formik.errors.email} fieldId="email" />
           </Field>
           <Field>
             <Input
@@ -129,11 +137,19 @@ function Login(props) {
               id="password"
               name="password"
               type="password"
-              hasError={formik.errors.password && formik.touched.password}
+              hasError={
+                formik.errors.password &&
+                (formik.dirty.password || formikSubmitted)
+              }
               onChange={formik.handleChange}
+              onBlur={() => {
+                formik.setFieldTouched("password");
+              }}
               placeholder="Votre mot de passe"
+              required
+              noRequiredAsterix
             />
-            {formik.touched.password && (
+            {(formik.touched.password || formikSubmitted) && (
               <InlineError
                 message={formik.errors.password}
                 fieldId="password"

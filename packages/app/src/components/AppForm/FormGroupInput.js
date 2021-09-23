@@ -23,6 +23,7 @@ export default function FormGroupInput({
   validationSchema,
   onChange,
   size,
+  noRequiredAsterix,
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -60,6 +61,7 @@ export default function FormGroupInput({
           min={min}
           max={max}
           size={size ? size : ""}
+          noRequiredAsterix={noRequiredAsterix}
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>

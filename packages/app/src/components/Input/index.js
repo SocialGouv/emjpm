@@ -41,7 +41,9 @@ function Input(props) {
     onFocus,
     readOnly,
     forceActive,
+    noRequiredAsterix,
   } = props;
+
   const [isFocus, toggleFocus] = useState(false);
   const [hasValue, toogleValue] = useState(false);
   const isActive =
@@ -59,6 +61,7 @@ function Input(props) {
           htmlFor={name}
           isActive={isActive}
           required={required}
+          noRequiredAsterix={noRequiredAsterix}
           readOnly={readOnly}
         >
           {label || placeholder}
@@ -113,6 +116,7 @@ Input.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  noRequiredAsterix: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -128,6 +132,7 @@ Input.defaultProps = {
   title: null,
   type: null,
   value: null,
+  noRequiredAsterix: false,
 };
 
 export default Input;
