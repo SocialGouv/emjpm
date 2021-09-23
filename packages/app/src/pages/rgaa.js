@@ -5,6 +5,8 @@ import { FlexWrapper } from "~/components/Grid";
 
 import { Heading } from "~/components";
 
+import config from "~/config";
+
 const MentionsLegalesPage = () => (
   <LayoutPublic>
     <FlexWrapper p="4" my="50px">
