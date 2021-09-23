@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 import style from "./style";
 import { useEffect } from "react";
 
-export default function Impersonation({}) {
+export default function Impersonation(props) {
   const { authStore } = useAuth();
   useEffect(() => {
     ReactTooltip.rebuild();
@@ -16,6 +16,7 @@ export default function Impersonation({}) {
       style={style}
       onClick={impersonateLogout}
       data-tip="Cliquez ici pour vous déconnecter et revenir à votre compte administrateur."
+      {...props}
     >
       <UserSecret size={12} /> {`impersonation`}
     </button>

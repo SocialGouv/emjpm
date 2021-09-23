@@ -9,6 +9,8 @@ import cssStyle from "./style.css";
 
 import useUser from "~/hooks/useUser";
 
+import Impersonation from "~/containers/Impersonation";
+
 import {
   Wrapper,
   Menu,
@@ -44,64 +46,66 @@ function LoggedMenu(props) {
   }
 
   return (
-    <>
+    <Flex style={{ paddingTop: "55px", height: "127px" }}>
       <Global styles={cssStyle} />
-      <Wrapper
-        onSelection={handleSelection}
-        className="UserMenu-AriaMenuButton"
-        style={{
-          position: "relative",
-          boxSizing: "border-box",
-          margin: "0px",
-          minWidth: "0px",
-          padding: "10px",
-          height: "127px",
-        }}
-      >
-        <MenuButton
-          className="UserMenu-AriaMenuButton-trigger"
-          style={{ display: "block", marginTop: "55px" }}
+      <Box height="25px">
+        <Impersonation />
+      </Box>
+
+      <Box>
+        <Wrapper
+          onSelection={handleSelection}
+          className="UserMenu-AriaMenuButton"
+          style={{
+            position: "relative",
+            boxSizing: "border-box",
+            margin: "0px",
+            minWidth: "0px",
+            padding: "10px",
+          }}
         >
-          <Flex>
-            <BlueUserCircle size={25} />
-            <Box>
-              <Text color="black" fontWeight="600" ml={1}>
-                {email}
-              </Text>
-            </Box>
-            <Box height="25px">
-              <ChevronDown size={25} />
-            </Box>
-          </Flex>
-        </MenuButton>
-        <Menu>
-          <ul className="UserMenu-AriaMenuButton-menu">
-            {dropDownLinks.map((link, i) => {
-              return (
-                <li key={i}>
-                  <MenuItem
-                    value={link.to}
-                    text={link.title}
-                    className="UserMenu-AriaMenuButton-menuItem"
-                  >
-                    {link.title}
-                  </MenuItem>
-                </li>
-              );
-            })}
-            <li key="logout">
-              <MenuItem
-                className="UserMenu-AriaMenuButton-menuItem"
-                value={`logout`}
-                text={"Se déconnecter"}
-              >
-                Se déconnecter
-              </MenuItem>
-            </li>
-          </ul>
-        </Menu>
-      </Wrapper>
-    </>
+          <MenuButton className="UserMenu-AriaMenuButton-trigger">
+            <Flex>
+              <BlueUserCircle size={25} />
+              <Box>
+                <Text color="black" fontWeight="600" ml={1}>
+                  {email}
+                </Text>
+              </Box>
+              <Box height="25px">
+                <ChevronDown size={25} />
+              </Box>
+            </Flex>
+          </MenuButton>
+          <Menu>
+            <ul className="UserMenu-AriaMenuButton-menu">
+              {dropDownLinks.map((link, i) => {
+                return (
+                  <li key={i}>
+                    <MenuItem
+                      value={link.to}
+                      text={link.title}
+                      className="UserMenu-AriaMenuButton-menuItem"
+                    >
+                      {link.title}
+                    </MenuItem>
+                  </li>
+                );
+              })}
+              <li key="logout">
+                <MenuItem
+                  className="UserMenu-AriaMenuButton-menuItem"
+                  value={`logout`}
+                  text={"Se déconnecter"}
+                >
+                  Se déconnecter
+                </MenuItem>
+              </li>
+            </ul>
+          </Menu>
+        </Wrapper>
+      </Box>
+    </Flex>
   );
 }
 
