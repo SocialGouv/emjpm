@@ -27,29 +27,24 @@ function InputStyle(props) {
     color: "text",
     fontSize: "1",
     fontWeight: props.isActive ? "600" : "500",
-    height: props.size === "small" ? "42px" : "52px",
-    lineHeight: props.size === "small" ? "22px" : "32px",
+    height: props.size === "small" ? "30px" : "40px",
+    lineHeight: props.size === "small" ? "10px" : "20px",
     opacity: props.readOnly || props.isActive ? "1" : "0",
     outline: props.outline ? props.outline : "none",
-    pb: "1",
+    pl: "12px",
+    pr: "12px",
+    mt: "13px",
+    pb: "10px",
     position: "relative",
-    pt: props.isActive ? "15px" : "10px",
-    px: "2",
+    pt: props.isActive ? "5px" : "0",
     transition: "150ms ease-in-out all",
     width: "100%",
     zIndex: props.isActive ? 1 : 0,
   };
 }
 
-function LabelStyle({ required, readOnly, isActive, size, noRequiredAsterix }) {
+function LabelStyle({ isActive, size }) {
   return {
-    "&:after":
-      required && !readOnly && !noRequiredAsterix
-        ? {
-            color: "#db4949",
-            content: "'  *'",
-          }
-        : {},
     color: () => {
       if (isActive) return "primary";
       return "textSecondary";

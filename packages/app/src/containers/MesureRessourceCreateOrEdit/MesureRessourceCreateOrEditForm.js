@@ -38,7 +38,7 @@ export function MesureRessourceCreateOrEditForm(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           {mesureRessourceToEdit?.id && (

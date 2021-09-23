@@ -28,7 +28,7 @@ function AdminEditInformationsForm({
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>{"Modifier vos informations"}</Heading>

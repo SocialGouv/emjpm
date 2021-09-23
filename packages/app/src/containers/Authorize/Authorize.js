@@ -52,7 +52,7 @@ function Authorize(props) {
             </Box>
           </Box>
           <Box p="5">
-            <form method="post" action={url}>
+            <form noValidate method="post" action={url}>
               <input type="hidden" name="response_type" value="code" />
               <input type="hidden" name="client_id" value={editorId} />
               <input type="hidden" name="redirect_uri" value={redirectUrl} />

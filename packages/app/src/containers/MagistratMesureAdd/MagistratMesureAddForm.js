@@ -14,6 +14,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
+import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
 import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
@@ -41,7 +42,7 @@ export function MagistratMesureAddForm(props) {
   const isService = !!serviceId;
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Jugement</Heading>
@@ -54,6 +55,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={magistratMandataireSchema}
+            title={MESSAGE_VALID_NUMERO_RG}
           />
           <FormGroupInput
             id="cabinet"
@@ -67,6 +69,7 @@ export function MagistratMesureAddForm(props) {
             id="judgmentDate"
             label="Date prévisionnelle du jugement"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={magistratMandataireSchema}
           />
@@ -90,6 +93,7 @@ export function MagistratMesureAddForm(props) {
             id="annee_naissance"
             label="Année de naissance"
             placeholder="aaaa"
+            title="Format: aaaa. Exemple: 2021"
             formik={formik}
             validationSchema={magistratMandataireSchema}
           />

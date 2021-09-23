@@ -120,7 +120,7 @@ export function EnqueteServicePersonnelFormationForm(props) {
   const { submitForm, submit } = enqueteForm;
 
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <Box textAlign="center" mb={"50px"}>
         <HeadingTitle mb={1}>{"Personnel et Formation"}</HeadingTitle>
       </Box>

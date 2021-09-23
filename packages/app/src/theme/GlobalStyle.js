@@ -75,7 +75,14 @@ const styles = css`
   .react-tooltip {
     z-index: 9999 !important;
   }
+
   ${emotionNormalize}
+
+  abbr[title] {
+    position: relative;
+    text-decoration: none;
+  }
+
 `;
 
 export default function GlobalStyle() {

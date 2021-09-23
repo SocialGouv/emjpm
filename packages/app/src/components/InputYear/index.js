@@ -4,12 +4,15 @@ import DatePicker from "react-datepicker";
 import { parse, format } from "date-fns";
 import "./style.scss";
 
+import { RequiredAsterisk } from "~/components";
+
 import Label from "./Label";
 
 export default function InputYear(props) {
   let {
     value,
     label,
+    title,
     selected,
     className,
     onChange: onChangeProp,
@@ -27,13 +30,16 @@ export default function InputYear(props) {
     <>
       {label && (
         <Label
-          aria-label={props.name}
+          aria-describedby={props.id}
           htmlFor={props.id}
           isActive={props.isActive}
           required={props.required}
+          aria-required={props.required}
           readOnly={props.readOnly}
+          title={title}
         >
           {label}
+          {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <DatePicker

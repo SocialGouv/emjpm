@@ -5,6 +5,8 @@ import ReactAsyncSelect from "react-select/async";
 
 import React from "react";
 
+import { RequiredAsterisk } from "~/components";
+
 import { getStyle } from "./style";
 import Label from "./Label";
 import Creatable from "./Creatable";
@@ -23,13 +25,15 @@ export default function Select({ isAsync, isCreatable, label, ...props }) {
       {label && (
         <Label
           size={props.size}
-          aria-label={props.name}
+          aria-describedby={props.id}
           htmlFor={"react-select-" + props.id + "-input"}
           isActive={props.isActive}
           required={props.required}
+          aria-required={props.required}
           readOnly={props.readOnly}
         >
           {label}
+          {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <Component

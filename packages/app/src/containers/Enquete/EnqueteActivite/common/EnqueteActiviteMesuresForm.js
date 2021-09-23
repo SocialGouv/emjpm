@@ -56,7 +56,7 @@ export function EnqueteActiviteMesuresForm(props) {
   });
   const { submitForm, errors, showError, submit } = enqueteForm;
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
         {enqueteContext.section.label}
       </HeadingTitle>

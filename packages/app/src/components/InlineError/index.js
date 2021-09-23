@@ -7,7 +7,13 @@ function InlineError({ message, fieldId, showError, ...props }) {
   return (
     showError !== false &&
     message && (
-      <Flex id={fieldId} alignItems="center" color="error" {...props}>
+      <Flex
+        id={`error-${fieldId}`}
+        aria-describedby={fieldId}
+        alignItems="center"
+        color="error"
+        {...props}
+      >
         <Exclamation size="18" />
         <Text mx="1" fontSize="12px">
           {message}

@@ -30,7 +30,7 @@ function AdminUserServiceForm(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>{`${service.etablissement}`}</Heading>

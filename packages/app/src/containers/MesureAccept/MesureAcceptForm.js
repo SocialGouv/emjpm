@@ -49,10 +49,11 @@ export function MesureAcceptForm(props) {
           <Heading size={3}>Accepter la mesure</Heading>
         </Box>
 
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           <FormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_nomination"
             formik={formik}
             validationSchema={mesureAcceptSchema}

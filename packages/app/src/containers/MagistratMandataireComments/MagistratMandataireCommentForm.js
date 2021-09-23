@@ -69,7 +69,7 @@ export function MagistratMandataireCommentForm(props) {
         Les observations sont visibles uniquement par les magistrats de votre
         tribunal
       </Text>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <Field>
           <Input
             value={formik.values.comment || undefined}

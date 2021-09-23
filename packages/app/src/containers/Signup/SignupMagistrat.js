@@ -58,7 +58,7 @@ function SignupMagistratForm({ tiDatas }) {
       <HeadingTitle p="1" m="1">
         {"Création d'un compte de magistrat"}
       </HeadingTitle>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>

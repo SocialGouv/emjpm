@@ -65,7 +65,7 @@ export function SignupDirection() {
       <HeadingTitle p="1" m="1">
         {"Création d'un compte d'agent de l'état"}
       </HeadingTitle>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>

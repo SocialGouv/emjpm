@@ -16,15 +16,8 @@ function getHoverBorderColor(hasError, state, colors) {
   return state.isFocused ? colors.primary : colors.border;
 }
 
-export function LabelStyle({ required, readOnly, size }) {
+export function LabelStyle({ size }) {
   return {
-    "&:after":
-      required && !readOnly
-        ? {
-            color: "#db4949",
-            content: "'  *'",
-          }
-        : {},
     color: () => {
       return "primary";
     },

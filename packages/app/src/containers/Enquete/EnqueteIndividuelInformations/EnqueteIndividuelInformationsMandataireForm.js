@@ -135,7 +135,7 @@ export function EnqueteIndividuelInformationsMandataireForm(props) {
   const { submitForm, values, errors, submit } = enqueteForm;
 
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Vos informations"}
       </HeadingTitle>

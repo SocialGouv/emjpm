@@ -29,7 +29,7 @@ export function AdminEditorForm(props) {
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="2">
-          <form onSubmit={formik.handleSubmit}>
+          <form noValidate onSubmit={formik.handleSubmit}>
             <Field>
               <Input
                 value={formik.values.name}

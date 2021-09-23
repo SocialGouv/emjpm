@@ -84,7 +84,7 @@ function SignupMandataireForm() {
         {"Demande de création d'un compte de mandataire"}
       </HeadingTitle>
 
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         {isIndividuel(user) && (
           <Flex>

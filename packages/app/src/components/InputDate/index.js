@@ -4,6 +4,8 @@ import fr from "date-fns/locale/fr";
 import "react-datepicker/dist/react-datepicker.css";
 import { format, parse } from "date-fns";
 
+import { RequiredAsterisk } from "~/components";
+
 import "./style.scss";
 import Label from "./Label";
 
@@ -42,13 +44,15 @@ export default function InputDate(props) {
     <>
       {label && (
         <Label
-          aria-label={props.name}
+          aria-describedby={props.id}
           htmlFor={props.id}
           isActive={props.isActive}
+          aria-required={props.required}
           required={props.required}
           readOnly={props.readOnly}
         >
           {label}
+          {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <DatePicker

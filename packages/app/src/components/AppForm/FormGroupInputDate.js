@@ -3,7 +3,6 @@ import { Box, Flex } from "rebass";
 import { Field, InputDate } from "~/components";
 
 import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
-import useAppFieldShowError from "./useAppFieldShowError";
 import useAppFieldIsRequired from "./useAppFieldIsRequired";
 
 export default function FormGroupInputDate({
@@ -18,6 +17,7 @@ export default function FormGroupInputDate({
   validationSchema,
   onChange,
   required,
+  title,
   ...props
 }) {
   const { handleBlur, values } = formik;
@@ -26,18 +26,11 @@ export default function FormGroupInputDate({
     value = values[id];
   }
 
-  const showError = useAppFieldShowError({
-    error,
-    formik,
-    hideErrors,
-    id,
-  });
-
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
   return (
     <Field>
-      <Flex alignItems="center">
+      <Flex alignItems="center" title={title}>
         <InputDate
           placeholderText={placeholder}
           readOnly={readOnly}

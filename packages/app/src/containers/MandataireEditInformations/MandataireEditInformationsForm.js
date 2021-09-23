@@ -83,7 +83,7 @@ function MandataireEditInformationsForm(props) {
 
   return (
     <FormikProvider value={formik}>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1}>

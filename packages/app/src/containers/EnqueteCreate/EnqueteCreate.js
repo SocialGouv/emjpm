@@ -50,7 +50,7 @@ export function EnqueteCreate() {
 
   const { values, touched, handleSubmit, errors } = formik;
   return (
-    <form onSubmit={handleSubmit}>
+    <form noValidate onSubmit={handleSubmit}>
       <Field>
         <InputYear
           value={values.year}
@@ -58,6 +58,7 @@ export function EnqueteCreate() {
           name="year"
           onChange={(value) => formik.setFieldValue("year", value)}
           placeholderText="Année de l'enquête"
+          title="Format: aaaa. Exemple: 2021"
         />
         {touched.year && errors.year && (
           <InlineError message={errors.year} fieldId="year" />

@@ -61,7 +61,7 @@ export function AdminUserDeleteForm(props) {
         <Box mb="3">
           <Heading size={3}>{"Supprimer l'utilisateur"}</Heading>
         </Box>
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           <Flex justifyContent="flex-end">
             <Box>
               <Button

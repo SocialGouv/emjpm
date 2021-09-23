@@ -91,7 +91,7 @@ function AuthorizationLogin(props) {
         </Box>
       </Box>
       <Box p="5">
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1">
               {formik.status.errorMsg}

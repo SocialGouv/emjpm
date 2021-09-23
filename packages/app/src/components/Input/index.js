@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Box } from "rebass";
+import { RequiredAsterisk } from "~/components";
 
 import { InputStyle, InputWrapperStyle, LabelStyle } from "./style";
 
@@ -12,11 +13,13 @@ function InputElement(props) {
   return <Box as="input" sx={InputStyle(props)} {...props} />;
 }
 
-function InputLabel(props) {
-  const { children } = props;
+function InputLabel({ children, noRequiredAsterisk, ...props }) {
+  const { required, readOnly } = props;
+  const displayAsterisk = required && !readOnly && !noRequiredAsterisk;
   return (
     <Box as="label" sx={LabelStyle(props)} {...props}>
       {children}
+      {displayAsterisk && <RequiredAsterisk />}
     </Box>
   );
 }
@@ -41,7 +44,7 @@ function Input(props) {
     onFocus,
     readOnly,
     forceActive,
-    noRequiredAsterix,
+    noRequiredAsterisk,
   } = props;
 
   const [isFocus, toggleFocus] = useState(false);
@@ -61,7 +64,7 @@ function Input(props) {
           htmlFor={name}
           isActive={isActive}
           required={required}
-          noRequiredAsterix={noRequiredAsterix}
+          noRequiredAsterisk={noRequiredAsterisk}
           readOnly={readOnly}
         >
           {label || placeholder}
@@ -116,7 +119,7 @@ Input.propTypes = {
   title: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  noRequiredAsterix: PropTypes.bool,
+  noRequiredAsterisk: PropTypes.bool,
 };
 
 Input.defaultProps = {
@@ -132,7 +135,7 @@ Input.defaultProps = {
   title: null,
   type: null,
   value: null,
-  noRequiredAsterix: false,
+  noRequiredAsterisk: false,
 };
 
 export default Input;

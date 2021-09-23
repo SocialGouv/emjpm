@@ -14,6 +14,8 @@ import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureEditSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
+import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
+
 function initialValues(mesure) {
   return {
     annee_naissance: mesure.age,
@@ -45,7 +47,7 @@ export function MesureEditForm(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Majeur protégé</Heading>
@@ -59,6 +61,7 @@ export function MesureEditForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={mesureEditSchema}
+                title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
             <Box pl="1px">
@@ -82,6 +85,7 @@ export function MesureEditForm(props) {
 
           <FormGroupInput
             placeholder="Année de naissance"
+            title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
             formik={formik}
             size="small"
@@ -90,6 +94,7 @@ export function MesureEditForm(props) {
           <FormGroupInputDate
             label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_premier_mesure"
             formik={formik}
             validationSchema={mesureEditSchema}
@@ -125,6 +130,7 @@ export function MesureEditForm(props) {
           <FormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_nomination"
             formik={formik}
             validationSchema={mesureEditSchema}
@@ -132,6 +138,7 @@ export function MesureEditForm(props) {
           <FormGroupInputDate
             label="Date de la protection en cours"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_protection_en_cours"
             formik={formik}
             validationSchema={mesureEditSchema}

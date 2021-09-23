@@ -93,7 +93,7 @@ export function EnquetePreposeModaliteExerciceInformationsForm(props) {
   const { submitForm, submit } = enqueteForm;
 
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
         {`Modalité d'exercice en ${enquete.annee - 1}`}
       </HeadingTitle>

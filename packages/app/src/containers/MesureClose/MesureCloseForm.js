@@ -47,10 +47,11 @@ export function MesureCloseForm(props) {
         <Box mb="3">
           <Heading size={3}>Mettre fin au mandat</Heading>
         </Box>
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           <FormGroupInputDate
             label="Date de fin de la mesure de protection"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_fin_mesure"
             formik={formik}
             validationSchema={validationSchema}

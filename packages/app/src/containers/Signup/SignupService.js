@@ -79,7 +79,7 @@ function SignupServiceForm({ serviceDatas }) {
       <HeadingTitle p="1" m="1">
         {"Création d'un compte de service mandataire"}
       </HeadingTitle>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>

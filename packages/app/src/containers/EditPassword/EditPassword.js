@@ -98,7 +98,7 @@ function EditPassword() {
         </Box>
         <Box p="5" width={[1, 1 / 2]}>
           <Box mb="2">
-            <form onSubmit={formik.handleSubmit}>
+            <form noValidate onSubmit={formik.handleSubmit}>
               {!!formik.status && (
                 <Box color="error" mb="1">
                   {formik.status.errorMsg}

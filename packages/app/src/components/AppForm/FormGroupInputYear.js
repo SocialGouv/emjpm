@@ -3,7 +3,6 @@ import { Box, Flex } from "rebass";
 import { Field, InputYear } from "~/components";
 
 import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
-import useAppFieldShowError from "./useAppFieldShowError";
 import useAppFieldIsRequired from "./useAppFieldIsRequired";
 
 export default function FormGroupInputYear({
@@ -25,13 +24,6 @@ export default function FormGroupInputYear({
   if (value === undefined) {
     value = values[id];
   }
-
-  const showError = useAppFieldShowError({
-    error,
-    formik,
-    hideErrors,
-    id,
-  });
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 

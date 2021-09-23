@@ -89,7 +89,7 @@ export function EnqueteActiviteEtablissementDomicileForm(props) {
     (values.etablissementFinAnnee || 0) + (values.domicileFinAnnee || 0);
 
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
         {enqueteContext.section.label}
       </HeadingTitle>

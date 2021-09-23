@@ -85,7 +85,7 @@ export function SignupForm() {
       <HeadingTitle p="1" m="1">
         {"Création de compte"}
       </HeadingTitle>
-      <form onSubmit={formik.handleSubmit}>
+      <form noValidate onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Information professionnelle"}</Heading>

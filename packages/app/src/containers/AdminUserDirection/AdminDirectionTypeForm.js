@@ -67,7 +67,7 @@ export function AdminDirectionTypeForm(props) {
   }, [regions]);
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Type de direction</Heading>

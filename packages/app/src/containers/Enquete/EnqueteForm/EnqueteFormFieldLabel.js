@@ -1,17 +1,9 @@
 import { Label } from "@rebass/forms";
 import { useMemo } from "react";
 import { Box, Text } from "rebass";
+import { RequiredAsterisk } from "~/components";
 
-const FieldLabel = ({ isRequired, readOnly }) =>
-  isRequired && !readOnly
-    ? {
-        "&:after": {
-          color: "#db4949",
-          content: "'  *'",
-          marginLeft: "3px",
-        },
-      }
-    : {};
+const FieldLabel = ({}) => {};
 export function EnqueteFormFieldLabel({
   id,
   label,
@@ -37,30 +29,21 @@ export function EnqueteFormFieldLabel({
   return (
     <>
       {label && (
-        <Label
-          sx={FieldLabel({ isRequired, readOnly })}
-          mb={"5px"}
-          htmlFor={id}
-        >
+        <Label sx={FieldLabel({})} mb={"5px"} htmlFor={id}>
           {label}
+          {isRequired && !readOnly && <RequiredAsterisk />}
         </Label>
       )}
       {text && (
-        <Text
-          sx={FieldLabel({ isRequired: isRequired && !label, readOnly })}
-          mb={"5px"}
-        >
+        <Text sx={FieldLabel({})} mb={"5px"}>
           {text}
+          {isRequired && !label && !readOnly && <RequiredAsterisk />}
         </Text>
       )}
       {children ? (
-        <Box
-          sx={FieldLabel({
-            isRequired: isRequired && !label && !text,
-            readOnly,
-          })}
-        >
+        <Box sx={FieldLabel({})}>
           {children}
+          {isRequired && !label && !text && !readOnly && <RequiredAsterisk />}
         </Box>
       ) : null}
     </>

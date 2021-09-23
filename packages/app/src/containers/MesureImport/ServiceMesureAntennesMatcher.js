@@ -55,7 +55,7 @@ function ServiceMesureAntennesMatcher({
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form noValidate onSubmit={handleSubmit}>
       <Box mb={4}>
         <Text color="textSecondary" mt={2} mb={4} width="100%" lineHeight={1.5}>
           <StyledWarning size="18" />

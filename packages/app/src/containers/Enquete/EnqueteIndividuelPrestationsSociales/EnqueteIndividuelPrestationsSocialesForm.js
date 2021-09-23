@@ -70,7 +70,7 @@ export function EnqueteIndividuelPrestationsSocialesForm(props) {
   const { submitForm, submit } = enqueteForm;
 
   return (
-    <form onSubmit={submitForm}>
+    <form noValidate onSubmit={submitForm}>
       <HeadingTitle textAlign="center" mb={"50px"}>
         {"Prestation sociales"}
       </HeadingTitle>

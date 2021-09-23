@@ -43,7 +43,7 @@ export function MesureEtatCreateOrEditForm(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           {mesureEtatToEdit?.id && (
@@ -66,6 +66,7 @@ export function MesureEtatCreateOrEditForm(props) {
           <FormGroupInputDate
             label="Date de changement d'état"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_changement_etat"
             formik={formik}
             validationSchema={mesureEtatSchema}

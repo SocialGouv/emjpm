@@ -77,7 +77,7 @@ export function MagistratMesureDeleteForm(props) {
         <Box mb="3">
           <Heading size={3}>Supprimer la mesure</Heading>
         </Box>
-        <form onSubmit={formik.handleSubmit}>
+        <form noValidate onSubmit={formik.handleSubmit}>
           <Box mb="2">
             <Input
               value={formik.values.reason_delete}

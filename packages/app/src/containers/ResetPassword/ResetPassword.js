@@ -129,7 +129,7 @@ function ResetPassword(props) {
                 handleSubmit,
               } = props;
               return (
-                <form onSubmit={handleSubmit}>
+                <form noValidate onSubmit={handleSubmit}>
                   {!!status && (
                     <Box color="error" mb="1">
                       {status.errorMsg}

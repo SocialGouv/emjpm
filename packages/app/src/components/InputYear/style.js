@@ -1,12 +1,5 @@
-export function LabelStyle({ required, readOnly, size }) {
+export function LabelStyle() {
   return {
-    "&:after":
-      required && !readOnly
-        ? {
-            color: "#db4949",
-            content: "'  *'",
-          }
-        : {},
     color: () => {
       return "primary";
     },

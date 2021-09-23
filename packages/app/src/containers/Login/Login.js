@@ -110,7 +110,7 @@ function Login(props) {
         </Box>
       </Box>
       <Box p="5">
-        <form onSubmit={onSubmit} noValidate>
+        <form noValidate onSubmit={onSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1">
               {formik.status.errorMsg}
@@ -126,7 +126,6 @@ function Login(props) {
               onChange={formik.handleChange}
               placeholder="Votre email"
               required
-              noRequiredAsterix
             />
 
             <InlineError message={formik.errors.email} fieldId="email" />
@@ -147,7 +146,6 @@ function Login(props) {
               }}
               placeholder="Votre mot de passe"
               required
-              noRequiredAsterix
             />
             {(formik.touched.password || formikSubmitted) && (
               <InlineError

@@ -15,6 +15,7 @@ import { GeocodeCities } from "~/components/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
+import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
 
 function initialValues() {
   return {
@@ -45,7 +46,7 @@ export function MesureCreateForm(props) {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Majeur protégé</Heading>
@@ -59,6 +60,7 @@ export function MesureCreateForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={mesureCreateSchema}
+                title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
             <Box pl="1px">
@@ -104,6 +106,7 @@ export function MesureCreateForm(props) {
           <FormGroupInputYear
             label="Année de naissance"
             placeholder="aaaa"
+            title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
             formik={formik}
             validationSchema={mesureCreateSchema}
@@ -111,6 +114,7 @@ export function MesureCreateForm(props) {
           <FormGroupInputDate
             label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
+            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_premier_mesure"
             formik={formik}
             validationSchema={mesureCreateSchema}

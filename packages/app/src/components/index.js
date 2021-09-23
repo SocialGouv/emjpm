@@ -32,3 +32,5 @@ export { default as Suspense } from "./Suspense";
 
 export { default as AutoReload } from "./AutoReload";
 export { default as NotFound } from "./NotFound";
+
+export { default as RequiredAsterisk } from "./RequiredAsterisk";
