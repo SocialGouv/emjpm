@@ -2,17 +2,16 @@ import { detect as detectBrowser } from "detect-browser";
 import PropTypes from "prop-types";
 
 import { Card, Text } from "~/components";
-import { isUnsupportedBrowser } from "~/utils/browser";
+import { isSupportedBrowser } from "~/utils/browser";
 
 const excludedBrowsers = [
   { name: "chrome", version: "44.0.2403" },
-  { name: "ie", version: "10" },
   { name: "firefox", version: "68.0" },
 ];
 const currentBrowser = detectBrowser();
 
 export function ExcludeBrowserBanner() {
-  if (isUnsupportedBrowser(currentBrowser, excludedBrowsers)) {
+  if (!isSupportedBrowser(currentBrowser, excludedBrowsers)) {
     return (
       <Card p={3}>
         <Text lineHeight={2} fontWeight="bold" color="error">
