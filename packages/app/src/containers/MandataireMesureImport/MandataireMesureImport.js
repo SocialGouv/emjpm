@@ -12,6 +12,8 @@ import {
 import { Heading, Text } from "~/components";
 import useUser from "~/hooks/useUser";
 
+import config from "~/config";
+
 function DocumentLink(props) {
   const { children, document } = props;
   return (
@@ -76,7 +78,7 @@ function MandataireMesureImport({ mandataireUserId }) {
       <Box mt={2}>
         <Heading size={3} mb="2">{`Importez vos mesures`}</Heading>
         <Text mb="1" lineHeight="2">
-          {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
+          {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à ${config.EMAIL_SUPPORT}. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
         </Text>
         <MesureImportPanel mandataireUserId={mandataireUserId} />
       </Box>

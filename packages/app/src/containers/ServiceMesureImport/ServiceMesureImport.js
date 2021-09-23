@@ -12,6 +12,8 @@ import {
 } from "~/constants/import";
 import { Card, Heading, Text } from "~/components";
 
+import config from "~/config";
+
 function ServiceMesureImport({ serviceId }) {
   return (
     <>
@@ -59,9 +61,7 @@ function ServiceMesureImport({ serviceId }) {
               {"Importer vos mesures"}
             </Heading>
             <Text mb="1" lineHeight="2">
-              {
-                "Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à contact@emjpm.beta.gouv.fr. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer."
-              }
+              {`Utilisez le cadre ci-dessous pour nous transmettre votre tableau csv ou excel de mesures. Si vous rencontrez des difficultés, vous pouvez nous envoyer un mail avec votre tableau en pièce-jointe à ${config.EMAIL_SUPPORT}. Nous le vérifierons, le mettrons en page et nous vous le renverrons pour que vous puissiez l’importer.`}
             </Text>
             <MesureImportPanel serviceId={serviceId} />
           </Box>

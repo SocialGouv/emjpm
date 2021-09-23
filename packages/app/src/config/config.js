@@ -16,6 +16,7 @@ if (hostname == "localhost") {
 }
 
 const PROD_DOMAIN = "emjpm.fabrique.social.gouv.fr";
+const EMAIL_SUPPORT = "support.emjpm@fabrique.social.gouv.fr";
 
 const isProd = hostname === PROD_DOMAIN;
 
@@ -27,5 +28,6 @@ const config = {
   SENTRY_PUBLIC_DSN: process.env.REACT_APP_SENTRY_PUBLIC_DSN,
   IS_PROD: isProd,
   PROD_DOMAIN,
+  EMAIL_SUPPORT,
 };
 export default config;

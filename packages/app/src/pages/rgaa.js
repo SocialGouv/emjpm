@@ -58,8 +58,8 @@ const MentionsLegalesPage = () => (
         <ul class="basic-information feedback h-card">
           <li>
             E-mail :{" "}
-            <a href="mailto:support.emjpm@fabrique.social.gouv.fr">
-              support.emjpm@fabrique.social.gouv.fr
+            <a href={`mailto:${config.EMAIL_SUPPORT}`}>
+              ${config.EMAIL_SUPPORT}
             </a>
           </li>
           <li>

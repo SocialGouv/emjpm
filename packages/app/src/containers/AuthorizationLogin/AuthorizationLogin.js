@@ -152,7 +152,7 @@ function AuthorizationLogin(props) {
             </Link>
           </Box>
           <Box>
-            <Link to={"mailto:support.emjpm@fabrique.social.gouv.fr"}>
+            <Link to={`mailto:${config.EMAIL_SUPPORT}`}>
               {"Contactez-nous en cas de difficulté de connexion"}
             </Link>
           </Box>
