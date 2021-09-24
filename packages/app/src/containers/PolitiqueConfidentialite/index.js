@@ -1,13 +1,14 @@
 import { lazy } from "react";
 import { importMDX } from "mdx.macro";
 import { Suspense } from "~/components";
+import mdComponents from "~/utils/mdx/md-components";
 
 const Content = lazy(() => importMDX("./PolitiqueConfidentialite.md"));
 export function PolitiqueConfidentialite(props) {
   return (
     <div>
       <Suspense>
-        <Content />
+        <Content components={mdComponents} />
       </Suspense>
     </div>
   );
