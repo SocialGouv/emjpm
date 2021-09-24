@@ -37,7 +37,7 @@ export function LabelStyle({ size }) {
 }
 
 export function getStyle(props) {
-  const { size, hasError = false } = props;
+  const { size, hasError = false, isMulti } = props;
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const context = useThemeUI();
   const { fontSizes, fonts, colors } = context.theme;
@@ -80,6 +80,12 @@ export function getStyle(props) {
         fontSize: fontSizes[1],
         minHeight: size === "small" ? "44px" : "54px",
         padding: "0 2px",
+      };
+    },
+    valueContainer: (provided, _state) => {
+      return {
+        ...provided,
+        paddingTop: isMulti ? "15px" : "2px",
       };
     },
   };

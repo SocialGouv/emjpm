@@ -221,7 +221,7 @@ export function ListeBlancheServiceForm(props) {
               id="departements"
               validationSchema={validationSchema}
               formik={formik}
-              placeholder="Départements du votre service"
+              placeholder="Départements de votre service"
               options={departementsOptions}
               isMulti
               value={findOptionsDepartements(
