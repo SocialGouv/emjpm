@@ -27,8 +27,8 @@ import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheI
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
 const validationSchema = yup.object().shape({
-  adresse1: yup.string().required(),
-  adresse2: yup.string().optional(),
+  adresse1: yup.string().required().nullable(),
+  adresse2: yup.string().optional().nullable(),
   code_postal: yup
     .string()
     .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")

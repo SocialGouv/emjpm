@@ -18,9 +18,9 @@ const mesureEditSchema = yup.object().shape({
     is: (pays) => pays === "FR",
     then: yup.string().length(5).required(),
   }),
-  date_nomination: yup.date().required(),
-  date_premier_mesure: yup.date(),
-  date_protection_en_cours: yup.date().required(),
+  date_nomination: yup.date().required().nullable(),
+  date_premier_mesure: yup.date().nullable(),
+  date_protection_en_cours: yup.date().required().nullable(),
   numero_dossier: yup.string(),
   numero_rg: yup
     .string()
@@ -35,7 +35,7 @@ const mesureEditSchema = yup.object().shape({
       }
       return false;
     }),
-  ti_id: yup.string().required(),
+  ti_id: yup.string().nullable().required(),
 });
 
 export { mesureEditSchema };

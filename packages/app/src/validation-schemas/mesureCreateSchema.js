@@ -20,7 +20,7 @@ const mesureCreateSchema = yup.object().shape({
     then: yup.string().length(5).required(),
   }),
   date_nomination: yup.date().required(),
-  date_premier_mesure: yup.date(),
+  date_premier_mesure: yup.date().nullable(),
   lieu_vie: yup.string().required(),
   nature_mesure: yup.string().required(),
   numero_dossier: yup.string(),
