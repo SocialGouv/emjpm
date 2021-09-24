@@ -63,7 +63,7 @@ export function MesureCreateForm(props) {
                 title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
-            <Box pl="1px">
+            <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
                 placeholder="Numéro de dossier"
                 id="numero_dossier"
