@@ -121,6 +121,7 @@ export function MagistratMesureAddForm(props) {
             options={MESURE_PROTECTION.CHAMP_MESURE.options}
             formik={formik}
             size="small"
+            isClearable
             validationSchema={magistratMandataireSchema}
           />
           <FormGroupSelect

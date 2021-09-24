@@ -85,7 +85,8 @@ export function MesureEtatCreateOrEditForm(props) {
           <FormGroupSelect
             id="champ_mesure"
             options={MESURE_PROTECTION.CHAMP_MESURE.options}
-            placeholder="Champs de la mesure"
+            placeholder="Champ de la mesure"
+            isClearable
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"

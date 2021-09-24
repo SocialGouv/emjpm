@@ -144,8 +144,9 @@ export function MesureCreateForm(props) {
           <FormGroupSelect
             id="champ_mesure"
             options={MESURE_PROTECTION.CHAMP_MESURE.options}
-            placeholder="Champs de la mesure"
+            placeholder="Champ de la mesure"
             formik={formik}
+            isClearable
             size="small"
             validationSchema={mesureCreateSchema}
           />
