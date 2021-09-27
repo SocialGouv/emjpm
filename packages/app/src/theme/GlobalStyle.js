@@ -1,5 +1,6 @@
 import { css, Global } from "@emotion/react";
 import emotionNormalize from "emotion-normalize";
+import mdxClasses from "~/utils/mdx/styles";
 
 const styles = css`
   /*** Custom css reset ***/
@@ -89,6 +90,7 @@ const styles = css`
       -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
 
+  ${mdxClasses}
 `;
 
 export default function GlobalStyle() {

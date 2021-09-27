@@ -65,31 +65,31 @@ Ce consentement de la personne concernée pour une ou plusieurs finalités spéc
 
 Les données à caractère personnel sont conservées :
 
-<table>
-  <thead>
-    <td>Types de données</td>
-    <td>Durée de conservation</td>
+<table class="mdx-table">
+  <thead class="mdx-thead">
+    <td class="mdx-td">Types de données</td>
+    <td class="mdx-td">Durée de conservation</td>
   </thead>
   <tbody>
     <tr>
-      <td>Données de profil des mandataires judiciaires</td>
-      <td>Ces données sont conservées le temps de l’habilitation du mandataire ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
+      <td class="mdx-td">Données de profil des mandataires judiciaires</td>
+      <td class="mdx-td">Ces données sont conservées le temps de l’habilitation du mandataire ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
     </tr>
     <tr>
-      <td>Données de profil des magistrats</td>
-      <td>Ces données sont conservées le temps de l’habilitation du magistrat ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
+      <td class="mdx-td">Données de profil des magistrats</td>
+      <td class="mdx-td">Ces données sont conservées le temps de l’habilitation du magistrat ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
     </tr>
     <tr>
-      <td>Données contenues dans les mesures judiciaires</td>
-      <td><b>5 ans</b></td>
+      <td class="mdx-td">Données contenues dans les mesures judiciaires</td>
+      <td class="mdx-td"><b>5 ans</b></td>
     </tr>
     <tr>
-      <td>Données d’hébergeur</td>
-      <td><b>1 an</b>, conformément au décret n°2011-219 du 25 février 2011.</td>
+      <td class="mdx-td">Données d’hébergeur</td>
+      <td class="mdx-td"><b>1 an</b>, conformément au décret n°2011-219 du 25 février 2011.</td>
     </tr>
     <tr>
-      <td>Cookies</td>
-      <td><b>Dès le retrait du consentement ou dans un délai de 13 mois</b>, conformément aux recommandations de la CNIL</td>
+      <td class="mdx-td">Cookies</td>
+      <td class="mdx-td"><b>Dès le retrait du consentement ou dans un délai de 13 mois</b>, conformément aux recommandations de la CNIL</td>
     </tr>
   </tbody>
 </table>
@@ -105,9 +105,9 @@ Les moyens de sécurisation suivants ont notamment été mis en œuvre
 - Pare feu applicatif (WAF) ;
 - Chiffrement des flux réseaux via certificat SSL ;
 - Disque dur chiffré ;
-- Services isolés dans des containers Monitoring Azur ;
+- Services isolés dans des containers Monitoring Azure ;
 - Administration et monitoring centralisés des accès ;
-- Sauvegarde des bases de données via solution de stockage Azur ;
+- Sauvegarde des bases de données via solution de stockage Azure ;
 - Accès aux données réservé aux membres de l’entité (hors restitution applicative publique des données) ;
 - Accès aux données uniquement via un outil d’édition sécurisé (SSL + mot de passe) avec utilisation de comptes nominatifs.
 
@@ -146,6 +146,26 @@ Les données collectées et les demandes, ou dossiers réalisés depuis la Plate
 
 Certaines des données sont envoyées à des sous-traitants pour réaliser certaines missions. Le responsable de traitements s'est assuré de la mise en œuvre par ses sous-traitants de garanties adéquates et du respect de conditions strictes de confidentialité, d’usage et de protection des données.
 
+<table class="mdx-table">
+  <thead class="mdx-thead">
+    <td class="mdx-td">Nom du sous-traitant</td>
+    <td class="mdx-td">Traitement réalisé</td>
+    <td class="mdx-td">Pays destinataire</td>
+    <td class="mdx-td">Garanties</td>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="mdx-td">Microsoft Azure</td>
+      <td class="mdx-td">Hébergement de site web</td>
+      <td class="mdx-td">France</td>
+      <td class="mdx-td">
+        <a class="mdx-a" href="https://privacy.microsoft.com/fr-fr/privacystatement" target="_blank">https://privacy.microsoft.com/fr-fr/privacystatement</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
 ## **Cookies**
 
 Un cookie est un fichier déposé sur votre terminal lors de la visite d’un site. Il a pour but de collecter des informations relatives à votre navigation et de vous adresser des services adaptés à votre terminal (ordinateur, mobile ou tablette).
@@ -159,17 +179,3 @@ Il convient d’indiquer que :
 - Les données collectées ne sont pas recoupées avec d’autres traitements.
 - Les cookies ne permettent pas de suivre la navigation de l’internaute sur d’autres sites.
 - Les cookies sont inactifs avant que vous ayez exprimé votre consentement en cliquant sur le bouton “Ok, tout accepter” ou après que vous ayez pris le soin de personnaliser vos préférences.
-
-## **[BOUTON MODIFIER LES REGLAGES]**
-
-À tout moment, vous pouvez refuser l’utilisation des cookies et désactiver le dépôt sur votre ordinateur en utilisant la fonction dédiée de votre navigateur (fonction disponible notamment sur Microsoft Internet Explorer 11, Google Chrome, Mozilla Firefox, Apple Safari et Opera).
-
-Pour aller plus loin, vous pouvez consulter les fiches proposées par la Commission Nationale de l’Informatique et des Libertés (CNIL) :
-
-[Cookies & traceurs : que dit la loi ?](https://www.cnil.fr/fr/cookies-traceurs-que-dit-la-loi)
-
-[Cookies : les outils pour les maîtriser](https://www.cnil.fr/fr/cookies-les-outils-pour-les-maitriser)
-
-## **Mise à jour**
-
-Les termes de la présente politique de confidentialité peuvent être amendés à tout moment, sans préavis, en fonction des modifications apportées à la plateforme, de l’évolution de la législation ou pour tout autre motif jugé nécessaire.
