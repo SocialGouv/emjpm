@@ -16,7 +16,7 @@ function ListeBlancheDetailPage() {
     <LayoutDirection>
       <BoxWrapper mt={3} px={1}>
         <Link
-          to="/direction/liste-blanche"
+          to="/direction"
           component={(props) => (
             <StyledLink
               onClick={() => props.navigate(props.href)}
@@ -31,11 +31,11 @@ function ListeBlancheDetailPage() {
         <ListeBlancheServiceUpdate
           serviceId={id}
           onSuccess={async () => {
-            await history.push("/direction/liste-blanche");
+            await history.push("/direction");
             window.scrollTo(0, 0);
           }}
           handleCancel={async () => {
-            await history.push("/direction/liste-blanche");
+            await history.push("/direction");
             window.scrollTo(0, 0);
           }}
         />

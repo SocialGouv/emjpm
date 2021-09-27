@@ -13,7 +13,7 @@ function ListBlanchePage() {
     <LayoutDirection>
       <BoxWrapper mt={3} px={1}>
         <Link
-          to="/direction/liste-blanche"
+          to="/direction"
           component={(props) => (
             <StyledLink
               onClick={() => props.navigate(props.href)}
@@ -30,10 +30,10 @@ function ListBlanchePage() {
         </HeadingTitle>
         <ListeBlancheServiceCreate
           onSuccess={async () => {
-            await history.push("/direction/liste-blanche");
+            await history.push("/direction");
           }}
           handleCancel={async () => {
-            await history.push("/direction/liste-blanche");
+            await history.push("/direction");
           }}
         />
       </BoxWrapper>
