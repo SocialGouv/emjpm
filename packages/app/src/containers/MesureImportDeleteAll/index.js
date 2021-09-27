@@ -36,7 +36,7 @@ export default function MesureImportDeleteAll({ mandataireId, serviceId }) {
         </Text>
         <Text mb="1">
           <StyledWarning size={18} />
-          {`Attention, cela supprimera toutes les mesures de votre compte eMJPM`}
+          {`Attention, cela supprimera toutes les mesures, excepté les mesures en attente, de votre compte eMJPM.`}
         </Text>
       </Box>
       <Flex justifyContent="center">
