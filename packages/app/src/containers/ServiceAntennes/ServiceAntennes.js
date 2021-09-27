@@ -7,7 +7,7 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { AntenneLinkButton, LinkButton } from "~/containers/Commons";
 import Antenne from "~/containers/Antenne";
 import { Card, Heading, Text } from "~/components";
-import { BoxWrapper } from "~/components/Grid";
+import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/components/Grid";
 
 import { ANTENNE } from "./queries";
 
@@ -58,21 +58,23 @@ export { ServiceAntennes };
 
 function AntenneList({ service_antenne }) {
   return (
-    <Flex p={5} sx={{ bg: "gray" }}>
+    <FlexWrapper flexWrap={"wrap"} p="15px" sx={{ bg: "gray" }}>
       {service_antenne.map((antenne) => {
         antenne = { ...antenne, preferences: [] };
         return (
-          <Antenne
-            sx={{ minHeight: "300px", p: "3" }}
-            key={antenne.id}
-            antenne={antenne}
-            linkText="Voir l'antenne"
-            to={parseInt(antenne.id, 10)}
-            Link={AntenneLinkButton}
-          />
+          <Box sx={fourColumnStyle}>
+            <Antenne
+              sx={{ minHeight: "300px", p: "3", height: "100%" }}
+              key={antenne.id}
+              antenne={antenne}
+              linkText="Voir l'antenne"
+              to={parseInt(antenne.id, 10)}
+              Link={AntenneLinkButton}
+            />
+          </Box>
         );
       })}
-    </Flex>
+    </FlexWrapper>
   );
 }
 
