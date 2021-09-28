@@ -14,14 +14,18 @@ export function ExcludeBrowserBanner() {
   if (!isSupportedBrowser(currentBrowser, excludedBrowsers)) {
     return (
       <Card p={3}>
-        <Text lineHeight={2} fontWeight="bold" color="error">
+        <Text lineHeight={2} fontSize={13} fontWeight="bold" color="error">
+          {`eMJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}).`}
+          <br />
           <a
             rel="noopener noreferrer"
             target="_blank"
             href="https://www.mozilla.org/fr/firefox/"
           >
-            {`La plateforme e-MJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}). Nous vous conseillons d'utiliser une version récente de Firefox pour profiter pleinement des fonctionnalités d'eMJPM. Veuillez cliquer ici pour installer ou mettre à jour ce navigateur libre.`}
+            {`Nous vous conseillons d'utiliser une version récente de Firefox (cliquer ici). `}
           </a>
+          <br />
+          eMJPM est également compatible avec le navigateur Chrome.
         </Text>
       </Card>
     );
