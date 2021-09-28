@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.136.0](https://github.com/SocialGouv/emjpm/compare/v25.135.0...v25.136.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **logs:** clean debug ([5d6a7d5](https://github.com/SocialGouv/emjpm/commit/5d6a7d5fbc8afd68884829531ee0f96ca4662f4c))
+
+
+### Features
+
+* **import:** siren-fallback fix [#2560](https://github.com/SocialGouv/emjpm/issues/2560) ([4199b7f](https://github.com/SocialGouv/emjpm/commit/4199b7f4ae426f33d95bd2d255bf1203e8cd5dcb))
+
+
+
+
+
 # [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
 
 

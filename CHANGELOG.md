@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.136.0](https://github.com/SocialGouv/emjpm/compare/v25.135.0...v25.136.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* **404:** broken link retour /direction ([06cac72](https://github.com/SocialGouv/emjpm/commit/06cac72cb99b2eb1607fec6036fffff97f764853))
+* **antenne:** list grid 4 + spacing ([f62592f](https://github.com/SocialGouv/emjpm/commit/f62592f95536a2ac949078d6cfdd3fe2d4af9752))
+* **antenne-create:** require fields ([800ee97](https://github.com/SocialGouv/emjpm/commit/800ee9708da90b1a602d00cff1a5642843d2e06f))
+* **autofill:** reset for ff ([08a0dee](https://github.com/SocialGouv/emjpm/commit/08a0deefa9c1143dafb423a83e1fc55d5ea3cd09))
+* **browser-compat:** improve ([f34dd9d](https://github.com/SocialGouv/emjpm/commit/f34dd9d9cb5f9f63313abb2dd251cbc054b312c6))
+* **cgu:** upgrade + improve design ([aa563bd](https://github.com/SocialGouv/emjpm/commit/aa563bdd402bd7613d4e3b072e518369ca5e893b))
+* **champ-coupe:** fix [#2652](https://github.com/SocialGouv/emjpm/issues/2652) ([9882ddd](https://github.com/SocialGouv/emjpm/commit/9882ddd11f3b848e59cc896848caba70f7abe041))
+* **clearable:** not required field ([5a9321d](https://github.com/SocialGouv/emjpm/commit/5a9321d24bc26f026ee85b1471ebcee254c65fe3))
+* **hasura-console:** dev src writer ([107afba](https://github.com/SocialGouv/emjpm/commit/107afba27a5c517b315d8ef95d997a287fb239fc))
+* **impersonation:** re-enable button ([f2f2a7f](https://github.com/SocialGouv/emjpm/commit/f2f2a7fbabc9174addd2f093dbc721db1840cf36))
+* **input-year:** picker ([f773b13](https://github.com/SocialGouv/emjpm/commit/f773b13f5bd244db98a911040de039f3b6474852))
+* **logs:** clean debug ([5d6a7d5](https://github.com/SocialGouv/emjpm/commit/5d6a7d5fbc8afd68884829531ee0f96ca4662f4c))
+* **mesure:** clean rm etablissement-id ([62c8797](https://github.com/SocialGouv/emjpm/commit/62c879763b0b3d7b2a2047ddeb4be99fb54d775e))
+* **multi-select:** label collapsed tags ([06b02fe](https://github.com/SocialGouv/emjpm/commit/06b02fe25f343c08ca8cad20602fdf2dbdab52e2))
+* **nullable-fields:** fix [#2651](https://github.com/SocialGouv/emjpm/issues/2651) ([da2fc71](https://github.com/SocialGouv/emjpm/commit/da2fc71a88828fba54514b80443e7c55b00c9de3))
+* **numero-dossier:** fix [#2653](https://github.com/SocialGouv/emjpm/issues/2653) ([d04cae6](https://github.com/SocialGouv/emjpm/commit/d04cae603745592d1bd24227bc5c5bfe35c464aa))
+* **s:** erriconsize+fieldsize+inputborder+etc ([580b78c](https://github.com/SocialGouv/emjpm/commit/580b78c4aba9a52052a4641a8d7012861acd3a8b))
+* **style:** logged menu color ([5ec7050](https://github.com/SocialGouv/emjpm/commit/5ec705072c8d5a61633edc49e4b6c7aef0d797a4))
+* **support-email:** fix [#2650](https://github.com/SocialGouv/emjpm/issues/2650) + refacto on config ([c134fad](https://github.com/SocialGouv/emjpm/commit/c134fadb5cf354e63b077e7c72180b01c4c7af24))
+* **tests:** react test passwithnotests ([e4288cc](https://github.com/SocialGouv/emjpm/commit/e4288cc6098fce0b24521b9f47af3132e8f5a444))
+
+
+### Features
+
+* **browsers:** support only ff and chrom ([2370689](https://github.com/SocialGouv/emjpm/commit/237068960e3ba847962d261da082e6996e68d2e7))
+* **cgu+conf:** upgrade markdowns and design ([c8d7468](https://github.com/SocialGouv/emjpm/commit/c8d74688f346a59bddce30b245bb2426b919bcd7))
+* **delete-all-mesures:** except en_attente ([80b0ac4](https://github.com/SocialGouv/emjpm/commit/80b0ac4480ac99dabfbaa47516ecf3ec1ae92327))
+* **import:** siren-fallback fix [#2560](https://github.com/SocialGouv/emjpm/issues/2560) ([4199b7f](https://github.com/SocialGouv/emjpm/commit/4199b7f4ae426f33d95bd2d255bf1203e8cd5dcb))
+* **rgaa:** end implementation of logged menu ([c18e50f](https://github.com/SocialGouv/emjpm/commit/c18e50fb6b8ba47462a04470ba66de0751f021cc))
+* **rgaa:** fix [#2640](https://github.com/SocialGouv/emjpm/issues/2640) for a good part ([bbe31f3](https://github.com/SocialGouv/emjpm/commit/bbe31f33a9438c9d53153ef4c01da4afff4bc0c2))
+* **rgaa:** recast logged menu fix [#2638](https://github.com/SocialGouv/emjpm/issues/2638) ([1fb154c](https://github.com/SocialGouv/emjpm/commit/1fb154c6cee1d902c50643b9ade373e5442ab212))
+* **rgaa:** required on login page ([01a8f9d](https://github.com/SocialGouv/emjpm/commit/01a8f9d4a1b892569cce0fc2c22f9909a29d8f4f))
+
+
+
+
+
 # [25.135.0](https://github.com/SocialGouv/emjpm/compare/v25.134.1...v25.135.0) (2021-09-14)
 
 
