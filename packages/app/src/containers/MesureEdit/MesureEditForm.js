@@ -7,6 +7,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormGroupInputDate,
+  FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
@@ -83,12 +84,12 @@ export function MesureEditForm(props) {
             validationSchema={mesureEditSchema}
           />
 
-          <FormGroupInput
-            placeholder="Année de naissance"
+          <FormGroupInputYear
+            label="Année de naissance"
+            placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
             formik={formik}
-            size="small"
             validationSchema={mesureEditSchema}
           />
           <FormGroupInputDate
