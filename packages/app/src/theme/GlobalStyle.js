@@ -89,6 +89,9 @@ const styles = css`
   input:-webkit-autofill:active{
       -webkit-box-shadow: 0 0 0 30px white inset !important;
   }
+  input {
+    filter: none;
+  }
 
   ${mdxClasses}
 `;
