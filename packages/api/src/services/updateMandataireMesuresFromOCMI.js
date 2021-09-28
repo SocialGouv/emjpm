@@ -1,4 +1,5 @@
-// const { Mesure } = require("~/models");
+const { raw } = require("objection");
+
 const { OcmiMandataire } = require("~/models");
 const { LbUser } = require("~/models");
 const { Mandataire } = require("~/models");
@@ -6,7 +7,6 @@ const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const dedupMesures = require("~/utils/dedup-mesures");
-// const { MESURE_PROTECTION_STATUS } = require("@emjpm/biz");
 
 const knex = require("~/db/knex");
 
@@ -35,10 +35,20 @@ module.exports = async function updateMandataireMesuresFromOCMI({
   }
 
   const { siret } = await LbUser.query().findById(lbUserId);
+  if (!siret) {
+    return false;
+  }
 
-  const ocmiMandataire = await OcmiMandataire.query().findOne({
+  let ocmiMandataire = await OcmiMandataire.query().findOne({
     siret,
   });
+
+  if (!ocmiMandataire) {
+    // fallback on SIREN lookup
+    ocmiMandataire = await OcmiMandataire.query().findOne(
+      raw("SUBSTR(siret,1,9) = ?", [siret.substr(0, 9)])
+    );
+  }
 
   if (!ocmiMandataire) {
     return false;
@@ -113,13 +123,3 @@ module.exports = async function updateMandataireMesuresFromOCMI({
 function findTribunal(tribunaux, tribunalSiret) {
   return tribunaux.find((t) => t.siret === tribunalSiret);
 }
-
-// async function deleteAllMesures(mandataireId, trx) {
-//   await Mesure.query(trx)
-//     .delete()
-//     .where({ mandataire_id: mandataireId })
-//     .andWhere("status", "in", [
-//       MESURE_PROTECTION_STATUS.en_cours,
-//       MESURE_PROTECTION_STATUS.eteinte,
-//     ]);
-// }
