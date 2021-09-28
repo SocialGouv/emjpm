@@ -15,11 +15,12 @@ import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureEditSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
+import isInt from "~/utils/std/isInt";
 import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
 
 function initialValues(mesure) {
   return {
-    annee_naissance: mesure.age,
+    annee_naissance: isInt(mesure.age) ? mesure.age : "",
     antenne: mesure.antenneId || "",
     cabinet: mesure.cabinet || "",
     civilite: mesure.civilite || "",
@@ -65,7 +66,7 @@ export function MesureEditForm(props) {
                 title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
-            <Box pl="1px">
+            <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
                 placeholder="Numéro de dossier"
                 id="numero_dossier"
@@ -118,7 +119,7 @@ export function MesureEditForm(props) {
                 validationSchema={mesureEditSchema}
               />
             </Box>
-            <Box pl="1px">
+            <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
                 placeholder="Cabinet"
                 id="cabinet"

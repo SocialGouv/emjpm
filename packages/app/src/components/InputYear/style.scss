@@ -1,5 +1,16 @@
 .yearpicker {
   height: 44px;
   width: 100%;
-  padding-left: 8px;
+  padding-left: 14px;
+
+  border: solid 1px #D4D4D4;
+  border-radius: 5px;
+  &:focus,
+  &:active,
+  &:focus-visible,
+  &:focus-within {
+    outline: none;
+    border: solid 1px #007AD9 !important;
+  }
+
 }

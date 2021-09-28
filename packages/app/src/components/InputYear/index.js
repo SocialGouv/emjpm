@@ -7,6 +7,7 @@ import "./style.scss";
 import { RequiredAsterisk } from "~/components";
 
 import Label from "./Label";
+import isInt from "~/utils/std/isInt";
 
 export default function InputYear(props) {
   let {
@@ -18,6 +19,10 @@ export default function InputYear(props) {
     onChange: onChangeProp,
     ...datePickerProps
   } = props;
+
+  if (!isInt(value)) {
+    value = "";
+  }
   if (value) {
     selected = parse(value.toString(), "yyyy", new Date());
   }

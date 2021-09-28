@@ -27,7 +27,7 @@ function InputStyle(props) {
     color: "text",
     fontSize: "1",
     fontWeight: props.isActive ? "600" : "500",
-    height: props.size === "small" ? "34px" : "40px",
+    height: props.size === "small" ? "26px" : "30px",
     lineHeight: props.size === "small" ? "10px" : "20px",
     opacity: props.readOnly || props.isActive ? "1" : "0",
     outline: props.outline ? props.outline : "none",
