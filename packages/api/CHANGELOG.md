@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.136.1](https://github.com/SocialGouv/emjpm/compare/v25.136.0...v25.136.1) (2021-10-01)
+
+
+### Bug Fixes
+
+* **dedup:** rg + mesure ti-siret or ti-id ([1b6f24a](https://github.com/SocialGouv/emjpm/commit/1b6f24a92fcb23c388d52a0d8e718c6c54cfb80b))
+
+
+
+
+
 # [25.136.0](https://github.com/SocialGouv/emjpm/compare/v25.135.0...v25.136.0) (2021-09-28)
 
 
