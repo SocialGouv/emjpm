@@ -1,6 +1,8 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 
+import { useApolloClient } from "@apollo/client";
+
 import { Box, Flex } from "rebass";
 
 import {
@@ -17,6 +19,7 @@ import { Button, Heading } from "~/components";
 
 import isInt from "~/utils/std/isInt";
 import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
+import { useMemo } from "react";
 
 function initialValues(mesure) {
   return {
@@ -29,6 +32,7 @@ function initialValues(mesure) {
     numero_dossier: mesure.numeroDossier || "",
     numero_rg: mesure.numeroRg || "",
     initialNumeroRG: mesure.numeroRg || "",
+    initialTiId: mesure.tiId,
     ti_id: mesure.tiId,
     date_premier_mesure: mesure.datePremierMesure,
   };
@@ -42,10 +46,16 @@ export function MesureEditForm(props) {
     ...props.tribunaux,
   ];
 
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => mesureEditSchema({ apolloClient }),
+    [apolloClient]
+  );
+
   const formik = useFormik({
     initialValues: initialValues(mesureToEdit),
     onSubmit: handleSubmit,
-    validationSchema: mesureEditSchema,
+    validationSchema,
   });
 
   return (
@@ -62,7 +72,7 @@ export function MesureEditForm(props) {
                 id="numero_rg"
                 formik={formik}
                 size="small"
-                validationSchema={mesureEditSchema}
+                validationSchema={validationSchema}
                 title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
@@ -72,7 +82,7 @@ export function MesureEditForm(props) {
                 id="numero_dossier"
                 formik={formik}
                 size="small"
-                validationSchema={mesureEditSchema}
+                validationSchema={validationSchema}
               />
             </Box>
           </Flex>
@@ -82,7 +92,7 @@ export function MesureEditForm(props) {
             placeholder="Civilité"
             formik={formik}
             size="small"
-            validationSchema={mesureEditSchema}
+            validationSchema={validationSchema}
           />
 
           <FormGroupInputYear
@@ -91,7 +101,7 @@ export function MesureEditForm(props) {
             title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
             formik={formik}
-            validationSchema={mesureEditSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInputDate
             label="Date de première mise sous protection"
@@ -99,7 +109,7 @@ export function MesureEditForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_premier_mesure"
             formik={formik}
-            validationSchema={mesureEditSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -116,7 +126,7 @@ export function MesureEditForm(props) {
                 placeholder="Tribunal"
                 size="small"
                 formik={formik}
-                validationSchema={mesureEditSchema}
+                validationSchema={validationSchema}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
@@ -125,7 +135,7 @@ export function MesureEditForm(props) {
                 id="cabinet"
                 formik={formik}
                 size="small"
-                validationSchema={mesureEditSchema}
+                validationSchema={validationSchema}
               />
             </Box>
           </Flex>
@@ -135,7 +145,7 @@ export function MesureEditForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_nomination"
             formik={formik}
-            validationSchema={mesureEditSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInputDate
             label="Date de la protection en cours"
@@ -143,7 +153,7 @@ export function MesureEditForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_protection_en_cours"
             formik={formik}
-            validationSchema={mesureEditSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -162,7 +172,7 @@ export function MesureEditForm(props) {
               value={formik.values.antenne}
               formik={formik}
               size="small"
-              validationSchema={mesureEditSchema}
+              validationSchema={validationSchema}
             />
           </FormInputBox>
         </Flex>

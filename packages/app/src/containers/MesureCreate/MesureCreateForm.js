@@ -2,6 +2,7 @@ import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
+import { useApolloClient } from "@apollo/client";
 
 import {
   FormGrayBox,
@@ -16,6 +17,7 @@ import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
 import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
+import { useMemo } from "react";
 
 function initialValues() {
   return {
@@ -39,10 +41,16 @@ function initialValues() {
 export function MesureCreateForm(props) {
   const { tribunaux, antenneOptions, handleSubmit, handleCancel } = props;
 
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => mesureCreateSchema({ apolloClient }),
+    [apolloClient]
+  );
+
   const formik = useFormik({
     initialValues: initialValues(),
     onSubmit: handleSubmit,
-    validationSchema: mesureCreateSchema,
+    validationSchema,
   });
 
   return (
@@ -59,7 +67,7 @@ export function MesureCreateForm(props) {
                 id="numero_rg"
                 formik={formik}
                 size="small"
-                validationSchema={mesureCreateSchema}
+                validationSchema={validationSchema}
                 title={MESSAGE_VALID_NUMERO_RG}
               />
             </Box>
@@ -69,7 +77,7 @@ export function MesureCreateForm(props) {
                 id="numero_dossier"
                 formik={formik}
                 size="small"
-                validationSchema={mesureCreateSchema}
+                validationSchema={validationSchema}
               />
             </Box>
           </Flex>
@@ -81,7 +89,7 @@ export function MesureCreateForm(props) {
                 placeholder="Tribunal"
                 size="small"
                 formik={formik}
-                validationSchema={mesureCreateSchema}
+                validationSchema={validationSchema}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
@@ -90,7 +98,7 @@ export function MesureCreateForm(props) {
                 id="cabinet"
                 formik={formik}
                 size="small"
-                validationSchema={mesureCreateSchema}
+                validationSchema={validationSchema}
               />
             </Box>
           </Flex>
@@ -100,7 +108,7 @@ export function MesureCreateForm(props) {
             placeholder="Civilité"
             formik={formik}
             size="small"
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
 
           <FormGroupInputYear
@@ -109,7 +117,7 @@ export function MesureCreateForm(props) {
             title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
             formik={formik}
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInputDate
             label="Date de première mise sous protection"
@@ -117,7 +125,7 @@ export function MesureCreateForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             id="date_premier_mesure"
             formik={formik}
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -130,7 +138,7 @@ export function MesureCreateForm(props) {
             placeholder="Date de nomination"
             id="date_nomination"
             formik={formik}
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupSelect
             id="nature_mesure"
@@ -138,7 +146,7 @@ export function MesureCreateForm(props) {
             placeholder="Nature de la mesure"
             formik={formik}
             size="small"
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
 
           <FormGroupSelect
@@ -148,7 +156,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             isClearable
             size="small"
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
 
           <FormGroupSelect
@@ -156,7 +164,7 @@ export function MesureCreateForm(props) {
             options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
             placeholder="Lieu de vie du majeur"
             formik={formik}
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
             onChange={(option) => {
               formik.setFieldValue("lieu_vie", option.value);
               formik.setFieldValue("type_etablissement", null);
@@ -169,7 +177,7 @@ export function MesureCreateForm(props) {
               options={MESURE_PROTECTION.TYPE_ETABLISSEMENT.options}
               placeholder="Type d'établissement"
               formik={formik}
-              validationSchema={mesureCreateSchema}
+              validationSchema={validationSchema}
             />
           )}
 
@@ -188,7 +196,7 @@ export function MesureCreateForm(props) {
             placeholder="Pays"
             formik={formik}
             size="small"
-            validationSchema={mesureCreateSchema}
+            validationSchema={validationSchema}
           />
 
           {formik.values.pays === "FR" && (
@@ -199,7 +207,7 @@ export function MesureCreateForm(props) {
                   id="code_postal"
                   formik={formik}
                   size="small"
-                  validationSchema={mesureCreateSchema}
+                  validationSchema={validationSchema}
                   required={formik.values.pays == "FR"}
                   onChange={async (e) => {
                     const { value } = e.target;
@@ -246,7 +254,7 @@ export function MesureCreateForm(props) {
               value={formik.values.antenne}
               formik={formik}
               size="small"
-              validationSchema={mesureCreateSchema}
+              validationSchema={validationSchema}
             />
           </FormInputBox>
         </Flex>
