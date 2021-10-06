@@ -170,10 +170,15 @@ export function MesureEtatCreateOrEditForm(props) {
                     zipcode={formik.values.code_postal}
                     onChange={(value) => formik.setFieldValue("ville", value)}
                     value={formik.values.ville}
-                    hasError={!!formik.errors.ville}
+                    hasError={formik.touched.ville && formik.errors.ville}
                     size="small"
                   />
-                  <InlineError message={formik.errors.ville} fieldId="ville" />
+                  {formik.touched.ville && (
+                    <InlineError
+                      message={formik.errors.ville}
+                      fieldId="ville"
+                    />
+                  )}
                 </Field>
               </Box>
             </Flex>
