@@ -133,12 +133,9 @@ export function MesureEtatCreateOrEditForm(props) {
             validationSchema={mesureEtatSchema}
             size="small"
             onChange={(option) => {
-              formik.setValues({
-                ...formik.values,
-                pays: option.value,
-                code_postal: null,
-                ville: null,
-              });
+              formik.setFieldValue("pays", option.value);
+              formik.setFieldValue("code_postal", null);
+              formik.setFieldValue("ville", null);
             }}
           />
 
@@ -149,14 +146,12 @@ export function MesureEtatCreateOrEditForm(props) {
                   placeholder="Code postal"
                   id="code_postal"
                   formik={formik}
+                  required
                   validationSchema={mesureEtatSchema}
                   onChange={(e) => {
                     const { value } = e.target;
-                    formik.setValues({
-                      ...formik.values,
-                      code_postal: value,
-                      ville: "",
-                    });
+                    formik.setFieldValue("code_postal", value);
+                    formik.setFieldValue("ville", "");
                   }}
                   size="small"
                 />
@@ -167,6 +162,7 @@ export function MesureEtatCreateOrEditForm(props) {
                     placeholder="Ville"
                     name="ville"
                     id="ville"
+                    required
                     zipcode={formik.values.code_postal}
                     onChange={(value) => formik.setFieldValue("ville", value)}
                     value={formik.values.ville}
