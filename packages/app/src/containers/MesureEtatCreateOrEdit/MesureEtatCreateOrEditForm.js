@@ -133,9 +133,12 @@ export function MesureEtatCreateOrEditForm(props) {
             validationSchema={mesureEtatSchema}
             size="small"
             onChange={(option) => {
-              formik.setFieldValue("pays", option.value);
-              formik.setFieldValue("code_postal", null);
-              formik.setFieldValue("ville", null);
+              formik.setValues({
+                ...formik.values,
+                pays: option.value,
+                code_postal: null,
+                ville: null,
+              });
             }}
           />
 
@@ -147,10 +150,13 @@ export function MesureEtatCreateOrEditForm(props) {
                   id="code_postal"
                   formik={formik}
                   validationSchema={mesureEtatSchema}
-                  onChange={async (e) => {
+                  onChange={(e) => {
                     const { value } = e.target;
-                    await formik.setFieldValue("code_postal", value);
-                    await formik.setFieldValue("ville", "");
+                    formik.setValues({
+                      ...formik.values,
+                      code_postal: value,
+                      ville: "",
+                    });
                   }}
                   size="small"
                 />

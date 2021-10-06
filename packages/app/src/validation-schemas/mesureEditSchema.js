@@ -17,10 +17,13 @@ const mesureEditSchema = ({ apolloClient }) =>
       .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
     antenne: yup.string().nullable(),
     civilite: yup.string().required(),
-    code_postal: yup.string().when("pays", {
-      is: (pays) => pays === "FR",
-      then: yup.string().length(5).required(),
-    }),
+    code_postal: yup
+      .string()
+      .when("pays", {
+        is: (pays) => pays === "FR",
+        then: yup.string().length(5).required(),
+      })
+      .nullable(),
     date_nomination: yup.date().required().nullable(),
     date_premier_mesure: yup.date().nullable(),
     date_protection_en_cours: yup.date().required().nullable(),
