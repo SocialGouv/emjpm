@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
+import { useApolloClient } from "@apollo/client";
 
 import {
   FormGrayBox,
@@ -19,10 +20,20 @@ import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
 import ServiceReservation from "./ServiceReservation";
+import { useMemo } from "react";
 
 export function MagistratMesureAddForm(props) {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
   const history = useHistory();
+
+  const { serviceId, mandataireId } = props;
+
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => magistratMandataireSchema({ apolloClient, serviceId, mandataireId }),
+    [apolloClient]
+  );
+
   const formik = useFormik({
     initialValues: {
       annee_naissance: "",
@@ -35,10 +46,9 @@ export function MagistratMesureAddForm(props) {
       urgent: false,
     },
     onSubmit: handleSubmit,
-    validationSchema: magistratMandataireSchema,
+    validationSchema,
   });
 
-  const { serviceId } = props;
   const isService = !!serviceId;
 
   return (
@@ -54,7 +64,7 @@ export function MagistratMesureAddForm(props) {
             placeholder="Numéro RG"
             formik={formik}
             size="small"
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
             title={MESSAGE_VALID_NUMERO_RG}
           />
           <FormGroupInput
@@ -62,7 +72,7 @@ export function MagistratMesureAddForm(props) {
             placeholder="Cabinet du tribunal"
             formik={formik}
             size="small"
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}
@@ -71,7 +81,7 @@ export function MagistratMesureAddForm(props) {
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -87,7 +97,7 @@ export function MagistratMesureAddForm(props) {
             options={MESURE_PROTECTION.CIVILITE.options}
             formik={formik}
             size="small"
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupInputYear
             id="annee_naissance"
@@ -95,7 +105,7 @@ export function MagistratMesureAddForm(props) {
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
             formik={formik}
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
@@ -113,7 +123,7 @@ export function MagistratMesureAddForm(props) {
             options={MESURE_PROTECTION.NATURE_MESURE.options}
             formik={formik}
             size="small"
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupSelect
             id="champ_mesure"
@@ -122,7 +132,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             isClearable
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
           <FormGroupSelect
             id="urgent"
@@ -130,14 +140,14 @@ export function MagistratMesureAddForm(props) {
             options={IS_URGENT}
             formik={formik}
             size="small"
-            validationSchema={magistratMandataireSchema}
+            validationSchema={validationSchema}
           />
         </FormInputBox>
       </Flex>
       {isService && (
         <ServiceReservation
           formik={formik}
-          schema={magistratMandataireSchema}
+          schema={validationSchema}
           serviceId={serviceId}
         />
       )}

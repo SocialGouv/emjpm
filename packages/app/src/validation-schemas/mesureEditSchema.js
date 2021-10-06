@@ -4,7 +4,7 @@ import {
   MESSAGE_VALID_NUMERO_RG,
   MESSAGE_DUPLICATE_NUMERO_RG,
 } from "~/utils/data/numero-rg";
-import checkDuplicateNumeroRG from "~/query-service/emjpm-hasura/checkDuplicateNumeroRG";
+import { checkDuplicateNumeroRGByTiId } from "~/query-service/emjpm-hasura/checkDuplicateNumeroRG";
 
 const currentYear = new Date().getFullYear();
 
@@ -55,7 +55,7 @@ const mesureEditSchema = ({ apolloClient }) =>
           if (!tiId || !validateNumeroRG(value)) {
             return true;
           }
-          return checkDuplicateNumeroRG(apolloClient, value, tiId);
+          return checkDuplicateNumeroRGByTiId(apolloClient, value, tiId);
         }
       ),
     ti_id: yup.string().nullable().required(),
