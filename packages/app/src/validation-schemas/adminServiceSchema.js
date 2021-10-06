@@ -8,19 +8,7 @@ const adminServiceSchema = yup.object().shape({
         departement_code: yup.string(),
       })
     )
-    .required()
-    .test(
-      "departement_code_postal",
-      "aucun département ne correspond à la ville sélectionnée",
-      async function (value) {
-        if (!value) return false;
-        const codes = value.map(({ departement_code }) => departement_code);
-        return (
-          this.parent.lb_ville_departement &&
-          codes.includes(this.parent.lb_ville_departement)
-        );
-      }
-    ),
+    .required(),
   email: yup.string().email(),
   etablissement: yup.string().required(),
   lb_adresse: yup.string().nullable().required(),
