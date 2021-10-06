@@ -31,7 +31,7 @@ export function MagistratMesureAddForm(props) {
   const apolloClient = useApolloClient();
   const validationSchema = useMemo(
     () => magistratMandataireSchema({ apolloClient, serviceId, mandataireId }),
-    [apolloClient]
+    [apolloClient, serviceId, mandataireId]
   );
 
   const formik = useFormik({
