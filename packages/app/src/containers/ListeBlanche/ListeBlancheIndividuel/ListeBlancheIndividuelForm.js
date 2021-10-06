@@ -101,7 +101,7 @@ export function ListeBlancheIndividuelForm(props) {
     [formik.values["siret"]]
   );
 
-  const { setFieldValue, values } = formik;
+  const { setFieldValue } = formik;
 
   const [selectedSiretData, setSelectedSiretData] = useState();
   const setSelectedSiretDataCallback = useCallback(
@@ -121,16 +121,13 @@ export function ListeBlancheIndividuelForm(props) {
       departement,
     } = selectedSiretData;
 
-    formik.setValues({
-      ...values,
-      etablissement: nom_raison_sociale || "",
-      adresse1: l4_declaree || "",
-      adresse2: l5_declaree || "",
-      code_postal: code_postal || "",
-      ville: libelle_commune || "",
-      departement: departement || "",
-    });
-  }, [selectedSiretData, setFieldValue, values]);
+    setFieldValue("etablissement", nom_raison_sociale || "");
+    setFieldValue("adresse1", l4_declaree || "");
+    setFieldValue("adresse2", l5_declaree || "");
+    setFieldValue("code_postal", code_postal || "");
+    setFieldValue("ville", libelle_commune || "");
+    setFieldValue("departement", departement || "");
+  }, [selectedSiretData, setFieldValue]);
 
   const [selectedAdresseData, setSelectedAdresseData] = useState();
   const setSelectedAdresseDataCallback = useCallback(
@@ -142,12 +139,9 @@ export function ListeBlancheIndividuelForm(props) {
       return;
     }
     const { postcode, city } = selectedAdresseData;
-    formik.setValues({
-      ...values,
-      code_postal: postcode || "",
-      ville: city || "",
-    });
-  }, [selectedAdresseData, setFieldValue, values]);
+    setFieldValue("code_postal", postcode || "");
+    setFieldValue("ville", city || "");
+  }, [selectedAdresseData, setFieldValue]);
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>

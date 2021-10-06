@@ -111,7 +111,7 @@ export function ListeBlancheServiceForm(props) {
   useEffect(() => {
     const departements = addDepartementToCurrents(lbVilleDepartement);
     setFieldValue("departements", departements);
-  }, [lbVilleDepartement, setFieldValue]);
+  }, [lbVilleDepartement, setFieldValue, addDepartementToCurrents]);
 
   useEffect(() => {
     if (!selectedSiretData) {
