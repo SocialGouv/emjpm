@@ -1,7 +1,5 @@
 import yup from "./yup";
 
-import { getDepartementByCodePostal, codePostalExists } from "~/utils/geodata";
-
 const adminServiceSchema = yup.object().shape({
   departements: yup
     .array()
@@ -13,15 +11,13 @@ const adminServiceSchema = yup.object().shape({
     .required()
     .test(
       "departement_code_postal",
-      "aucun département ne correspond au code postal",
+      "aucun département ne correspond à la ville sélectionnée",
       async function (value) {
         if (!value) return false;
         const codes = value.map(({ departement_code }) => departement_code);
         return (
-          this.parent.lb_code_postal &&
-          codes.includes(
-            await getDepartementByCodePostal(this.parent.lb_code_postal)
-          )
+          this.parent.lb_ville_departement &&
+          codes.includes(this.parent.lb_ville_departement)
         );
       }
     ),
@@ -32,27 +28,7 @@ const adminServiceSchema = yup.object().shape({
     .string()
     .nullable()
     .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-    .required()
-    .test(
-      "code_postal_exists",
-      "ce code postal n'existe pas",
-      async (value) => {
-        return value && (await codePostalExists(value));
-      }
-    )
-    .test(
-      "code_postal_departement",
-      "le code postal ne correspond à aucun département sélectionné",
-      async function (value) {
-        if (!this.parent.departements) {
-          return false;
-        }
-        const codes = this.parent.departements.map(
-          ({ departement_code }) => departement_code
-        );
-        return value && codes.includes(await getDepartementByCodePostal(value));
-      }
-    ),
+    .required(),
   lb_ville: yup.string().nullable().required(),
   org_adresse: yup.string().nullable().when("org_gestionnaire", {
     is: true,

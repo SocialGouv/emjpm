@@ -12,16 +12,20 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
-import { Button, Heading, Select, Text, InlineError } from "~/components";
 import {
-  createDepartementOptions,
-  departementList,
-  getDepartementByCodePostal,
-} from "~/utils/geodata";
+  Button,
+  Heading,
+  Select,
+  Text,
+  InlineError,
+  Field,
+} from "~/components";
+import { GeocodeCities } from "~/components/Geocode";
+
+import { createDepartementOptions, departementList } from "~/utils/geodata";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
-import SelectVille from "~/containers/SelectVille";
 
 const findOptionsDepartements = (options, values) => {
   if (!values) {
@@ -68,17 +72,20 @@ export function ListeBlancheServiceForm(props) {
 
   const { setFieldValue } = formik;
 
-  const addDepartementToCurrents = (departement) => {
-    const departements = formik.values.departements || [];
-    if (
-      !departements
-        .map(({ departement_code }) => departement_code)
-        .includes(departement)
-    ) {
-      departements.push({ departement_code: departement });
-    }
-    return departements;
-  };
+  const addDepartementToCurrents = useCallback(
+    (departement) => {
+      const departements = formik.values.departements || [];
+      if (
+        !departements
+          .map(({ departement_code }) => departement_code)
+          .includes(departement)
+      ) {
+        departements.push({ departement_code: departement });
+      }
+      return departements;
+    },
+    [formik]
+  );
 
   useDebouncedEffect(
     () => {
@@ -93,35 +100,19 @@ export function ListeBlancheServiceForm(props) {
     500,
     [formik.values["siret"]]
   );
-  useDebouncedEffect(
-    () => {
-      let codePostal = formik.values["lb_code_postal"];
-      if (!codePostal) {
-        codePostal = "";
-      }
-      codePostal = codePostal.replace(/\s/g, "");
-      getDepartementByCodePostal(codePostal).then((departement) => {
-        if (!departement) {
-          setFieldValue("lb_code_postal", codePostal);
-          return;
-        }
-        const departements = addDepartementToCurrents(departement);
-        formik.setValues({
-          ...formik.values,
-          departements,
-          lb_code_postal: codePostal,
-        });
-      });
-    },
-    500,
-    [formik.values["lb_code_postal"]]
-  );
 
   const [selectedSiretData, setSelectedSiretData] = useState();
   const setSelectedSiretDataCallback = useCallback(
     ({ data }) => setSelectedSiretData(data),
     [setSelectedSiretData]
   );
+
+  const lbVilleDepartement = formik.values["lb_ville_departement"];
+  useEffect(() => {
+    const departements = addDepartementToCurrents(lbVilleDepartement);
+    setFieldValue("departements", departements);
+  }, [lbVilleDepartement, setFieldValue]);
+
   useEffect(() => {
     if (!selectedSiretData) {
       return;
@@ -197,23 +188,41 @@ export function ListeBlancheServiceForm(props) {
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
           />
-          <Flex>
-            <Box flex={1 / 2}>
+          <Flex justifyContent="space-between">
+            <Box mr={1} flex={1 / 2}>
               <FormGroupInput
                 placeholder="Code postal"
-                id="lb_code_postal"
+                id="code_postal"
                 formik={formik}
+                required
                 validationSchema={validationSchema}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  formik.setFieldValue("code_postal", value);
+                  formik.setFieldValue("ville", "");
+                }}
+                size="small"
               />
             </Box>
-            <Box flex={1 / 2} pl={1}>
-              <SelectVille
-                placeholder="Ville"
-                id="lb_ville"
-                formik={formik}
-                validationSchema={validationSchema}
-                codePostal={formik.values["lb_code_postal"]}
-              />
+            <Box ml={1} flex={1 / 2}>
+              <Field>
+                <GeocodeCities
+                  placeholder="Ville"
+                  name="ville"
+                  id="ville"
+                  required
+                  zipcode={formik.values.code_postal}
+                  onChange={(value) => formik.setFieldValue("ville", value)}
+                  value={formik.values.ville}
+                  hasError={formik.touched.ville && formik.errors.ville}
+                  size="small"
+                  departementFieldId="lb_ville_departement"
+                  formik={formik}
+                />
+                {formik.touched.ville && (
+                  <InlineError message={formik.errors.ville} fieldId="ville" />
+                )}
+              </Field>
             </Box>
           </Flex>
           <Box>

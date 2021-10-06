@@ -1,8 +1,6 @@
 import regions from "./regions.json";
 import departements from "./departements.json";
 
-const codePostalDB = import("./code_postal.json");
-
 export const regionList = Object.entries(regions).map(([code, nom]) => {
   return {
     code,
@@ -47,21 +45,6 @@ export const getDepartementRegionName = (code) => {
 
 export const getRegionDepartementList = (code) => {
   return departementsByRegionCode[code];
-};
-
-export const codePostalExists = async (cp) => {
-  const codePostal = await codePostalDB;
-  return codePostal[cp] !== undefined;
-};
-
-export const getDepartementByCodePostal = async (cp) => {
-  const codePostal = await codePostalDB;
-  return codePostal[cp]?.departement?.toString();
-};
-
-export const getCommunesByCodePostal = async (cp) => {
-  const codePostal = await codePostalDB;
-  return codePostal[cp]?.communes;
 };
 
 const defaultFormatRegionLabel = ({ nom }) => {

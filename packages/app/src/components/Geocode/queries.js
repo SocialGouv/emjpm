@@ -7,6 +7,7 @@ export const CODE_POSTAL = gql`
       distinct_on: cities
     ) {
       cities
+      departement_code
     }
   }
 `;

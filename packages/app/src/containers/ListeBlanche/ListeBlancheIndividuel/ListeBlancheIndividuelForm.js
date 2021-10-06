@@ -5,7 +5,6 @@ import { Box, Flex, Text } from "rebass";
 import { isAdmin } from "@emjpm/biz";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import { codePostalExists, getDepartementByCodePostal } from "~/utils/geodata";
 
 import {
   FormGrayBox,
@@ -15,13 +14,13 @@ import {
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import yup from "~/validation-schemas/yup";
-import { Button, Heading } from "~/components";
+import { Button, Heading, Field, InlineError } from "~/components";
 import { formatFormInput } from "~/utils/form";
 import { DepartementFormUtil } from "~/utils/departements";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
-import SelectVille from "~/containers/SelectVille";
+import { GeocodeCities } from "~/components/Geocode";
 
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
@@ -32,14 +31,7 @@ const validationSchema = yup.object().shape({
   code_postal: yup
     .string()
     .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-    .required()
-    .test(
-      "code_postal_exists",
-      "ce code postal n'existe pas",
-      async (value) => {
-        return value && (await codePostalExists(value));
-      }
-    ),
+    .required(),
   email: yup.string().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
@@ -108,22 +100,8 @@ export function ListeBlancheIndividuelForm(props) {
     500,
     [formik.values["siret"]]
   );
-  useDebouncedEffect(
-    () => {
-      let codePostal = formik.values["code_postal"];
-      if (!codePostal) {
-        codePostal = "";
-      }
-      codePostal = codePostal.replace(/\s/g, "");
-      getDepartementByCodePostal(codePostal).then((departement) => {
-        if (!departement) return;
-        formik.setFieldValue("departement", departement.toString());
-      });
-      formik.setFieldValue("code_postal", codePostal);
-    },
-    500,
-    [formik.values["code_postal"]]
-  );
+
+  const { setFieldValue, values } = formik;
 
   const [selectedSiretData, setSelectedSiretData] = useState();
   const setSelectedSiretDataCallback = useCallback(
@@ -144,7 +122,7 @@ export function ListeBlancheIndividuelForm(props) {
     } = selectedSiretData;
 
     formik.setValues({
-      ...formik.values,
+      ...values,
       etablissement: nom_raison_sociale || "",
       adresse1: l4_declaree || "",
       adresse2: l5_declaree || "",
@@ -152,9 +130,7 @@ export function ListeBlancheIndividuelForm(props) {
       ville: libelle_commune || "",
       departement: departement || "",
     });
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedSiretData]);
+  }, [selectedSiretData, setFieldValue, values]);
 
   const [selectedAdresseData, setSelectedAdresseData] = useState();
   const setSelectedAdresseDataCallback = useCallback(
@@ -167,12 +143,11 @@ export function ListeBlancheIndividuelForm(props) {
     }
     const { postcode, city } = selectedAdresseData;
     formik.setValues({
-      ...formik.values,
+      ...values,
       code_postal: postcode || "",
       ville: city || "",
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedAdresseData]);
+  }, [selectedAdresseData, setFieldValue, values]);
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
@@ -202,23 +177,41 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
           />
-          <Flex>
-            <Box flex={1 / 2}>
+          <Flex justifyContent="space-between">
+            <Box mr={1} flex={1 / 2}>
               <FormGroupInput
                 placeholder="Code postal"
                 id="code_postal"
                 formik={formik}
+                required
                 validationSchema={validationSchema}
+                onChange={(e) => {
+                  const { value } = e.target;
+                  formik.setFieldValue("code_postal", value);
+                  formik.setFieldValue("ville", "");
+                }}
+                size="small"
               />
             </Box>
-            <Box pl={1} flex={1 / 2}>
-              <SelectVille
-                placeholder="Ville"
-                id="ville"
-                formik={formik}
-                validationSchema={validationSchema}
-                codePostal={formik.values["code_postal"]}
-              />
+            <Box ml={1} flex={1 / 2}>
+              <Field>
+                <GeocodeCities
+                  placeholder="Ville"
+                  name="ville"
+                  id="ville"
+                  required
+                  zipcode={formik.values.code_postal}
+                  onChange={(value) => formik.setFieldValue("ville", value)}
+                  value={formik.values.ville}
+                  hasError={formik.touched.ville && formik.errors.ville}
+                  size="small"
+                  departementFieldId="departement"
+                  formik={formik}
+                />
+                {formik.touched.ville && (
+                  <InlineError message={formik.errors.ville} fieldId="ville" />
+                )}
+              </Field>
             </Box>
           </Flex>
         </FormInputBox>
