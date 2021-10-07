@@ -6,6 +6,7 @@ select_permissions:
     columns:
     - cities
     - code_postal
+    - departement_code
     - id
     - latitude
     - longitude
@@ -13,35 +14,39 @@ select_permissions:
   role: anonymous
 - permission:
     columns:
-    - id
+    - cities
     - code_postal
+    - departement_code
+    - id
     - latitude
     - longitude
-    - cities
     filter: {}
   role: direction
 - permission:
     columns:
-    - latitude
-    - longitude
-    - id
     - cities
     - code_postal
+    - departement_code
+    - id
+    - latitude
+    - longitude
     filter: {}
   role: individuel
 - permission:
     columns:
-    - latitude
-    - longitude
-    - id
     - cities
     - code_postal
+    - departement_code
+    - id
+    - latitude
+    - longitude
     filter: {}
   role: prepose
 - permission:
     columns:
     - cities
     - code_postal
+    - departement_code
     - id
     - latitude
     - longitude
@@ -49,10 +54,11 @@ select_permissions:
   role: service
 - permission:
     columns:
-    - latitude
-    - longitude
-    - id
     - cities
     - code_postal
+    - departement_code
+    - id
+    - latitude
+    - longitude
     filter: {}
   role: ti
