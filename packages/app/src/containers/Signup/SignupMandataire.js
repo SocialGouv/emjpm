@@ -140,10 +140,17 @@ function SignupMandataireForm() {
           <FormInputBox>
             <Field>
               <Geocode
+                id="geocode"
                 resource={mandataire}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+                aria-describedby="msg-geocode"
               />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <div id="msg-geocode">
+                <InlineError
+                  message={formik.errors.geocode}
+                  fieldId="geocode"
+                />
+              </div>
             </Field>
           </FormInputBox>
         </Flex>

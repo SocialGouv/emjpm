@@ -69,11 +69,14 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   }
                   onChange={formik.handleChange}
                   placeholder="Nom du tribunal"
+                  aria-describedby="msg-etablissement"
                 />
-                <InlineError
-                  message={formik.errors.etablissement}
-                  fieldId="etablissement"
-                />
+                <div id="msg-etablissement">
+                  <InlineError
+                    message={formik.errors.etablissement}
+                    fieldId="etablissement"
+                  />
+                </div>
               </Field>
               <Field>
                 <Input
@@ -83,8 +86,11 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.siret && formik.touched.siret}
                   onChange={formik.handleChange}
                   placeholder="SIRET"
+                  aria-describedby="msg-siret"
                 />
-                <InlineError message={formik.errors.siret} fieldId="siret" />
+                <div id="msg-siret">
+                  <InlineError message={formik.errors.siret} fieldId="siret" />
+                </div>
               </Field>
               <Field mt="5">
                 <Input
@@ -94,8 +100,11 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.email && formik.touched.email}
                   onChange={formik.handleChange}
                   placeholder="Email"
+                  aria-describedby="msg-email"
                 />
-                <InlineError message={formik.errors.email} fieldId="email" />
+                <div id="msg-email">
+                  <InlineError message={formik.errors.email} fieldId="email" />
+                </div>
               </Field>
               <Field>
                 <Input
@@ -105,11 +114,14 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.telephone && formik.touched.telephone}
                   onChange={formik.handleChange}
                   placeholder="Téléphone"
+                  aria-describedby="msg-telephone"
                 />
-                <InlineError
-                  message={formik.errors.telephone}
-                  fieldId="telephone"
-                />
+                <div id="msg-telephone">
+                  <InlineError
+                    message={formik.errors.telephone}
+                    fieldId="telephone"
+                  />
+                </div>
               </Field>
               <Field>
                 <Geocode
@@ -117,11 +129,14 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   onChange={(geocode) =>
                     formik.setFieldValue("geocode", geocode)
                   }
+                  aria-describedby="msg-geocode"
                 />
-                <InlineError
-                  message={formik.errors.geocode}
-                  fieldId="geocode"
-                />
+                <div id="msg-geocode">
+                  <InlineError
+                    message={formik.errors.geocode}
+                    fieldId="geocode"
+                  />
+                </div>
               </Field>
               <Flex justifyContent="flex-end">
                 <Box>

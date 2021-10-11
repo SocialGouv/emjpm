@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -9,7 +8,6 @@ import { ADMIN } from "./queries";
 
 function AdminEditInformations({ userId, successLink, cancelLink }) {
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(ADMIN, {
     fetchPolicy: "network-only",
     variables: {
@@ -20,9 +18,6 @@ function AdminEditInformations({ userId, successLink, cancelLink }) {
   const [editUser, { loading: loading2, error: error2 }] = useMutation(
     EDIT_USER,
     {
-      onError(error) {
-        setErrorMessage(error);
-      },
       update() {
         if (successLink) {
           history.push(successLink, successLink, {
@@ -60,7 +55,6 @@ function AdminEditInformations({ userId, successLink, cancelLink }) {
       user={user}
       handleSubmit={handleSubmit}
       cancelLink={cancelLink}
-      errorMessage={errorMessage}
     />
   );
 }

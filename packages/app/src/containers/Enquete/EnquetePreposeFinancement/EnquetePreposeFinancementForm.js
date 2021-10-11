@@ -112,6 +112,7 @@ export function EnquetePreposeFinancementForm(props) {
             type="number"
             size="medium"
             disableErrorMessage={true} // error displayed below
+            aria-describedby="msg-charges_personnel"
           />
         </Box>
         <Box width={1 / 3}>
@@ -123,6 +124,7 @@ export function EnquetePreposeFinancementForm(props) {
             type="number"
             size="medium"
             disableErrorMessage={true} // error displayed below
+            aria-describedby="msg-charges_preposes"
           />
         </Box>
         <Box width={1 / 3}>
@@ -134,6 +136,7 @@ export function EnquetePreposeFinancementForm(props) {
             type="number"
             size="medium"
             disableErrorMessage={true} // error displayed below
+            aria-describedby="msg-charges_fonctionnement"
           />
         </Box>
       </Flex>
@@ -166,6 +169,7 @@ export function EnquetePreposeFinancementForm(props) {
               type="number"
               size="medium"
               disableErrorMessage={true} // error displayed below
+              aria-describedby="msg-produits_bareme_prelevements"
             />
           </Box>
           <Box width={1 / 2}>
@@ -177,6 +181,7 @@ export function EnquetePreposeFinancementForm(props) {
               type="number"
               size="medium"
               disableErrorMessage={true} // error displayed below
+              aria-describedby="msg-autre_produits"
             />
           </Box>
         </Flex>

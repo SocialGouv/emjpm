@@ -29,7 +29,7 @@ function buildTiOptions(tis) {
 }
 
 function ServiceEditInformationsForm(props) {
-  const { handleSubmit, cancelLink, service, errorMessage } = props;
+  const { handleSubmit, cancelLink, service } = props;
 
   const { departements, service_tis } = service;
 
@@ -126,10 +126,17 @@ function ServiceEditInformationsForm(props) {
           <FormInputBox>
             <Field>
               <Geocode
+                id="geocode"
                 resource={service}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+                aria-describedby="msg-geocode"
               />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <div id="msg-geocode">
+                <InlineError
+                  message={formik.errors.geocode}
+                  fieldId="geocode"
+                />
+              </div>
             </Field>
           </FormInputBox>
         </Flex>
@@ -157,10 +164,13 @@ function ServiceEditInformationsForm(props) {
                 }}
                 options={tiOptions}
                 isMulti
+                aria-describedby="msg-tis"
               />
-              {formik.touched.tis && (
-                <InlineError message={formik.errors.tis} fieldId="tis" />
-              )}
+              <div id="msg-tis">
+                {formik.touched.tis && (
+                  <InlineError message={formik.errors.tis} fieldId="tis" />
+                )}
+              </div>
             </Field>
           </FormInputBox>
         </Flex>
@@ -189,15 +199,17 @@ function ServiceEditInformationsForm(props) {
                 onChange={formik.handleChange}
                 label="Informations à destination du magistrat"
                 placeholder="Préférences géographiques, compétences, langues parlées, ..."
+                aria-describedby="msg-competences"
               />
-              <InlineError
-                message={formik.errors.competences}
-                fieldId="competences"
-              />
+              <div id="msg-competences">
+                <InlineError
+                  message={formik.errors.competences}
+                  fieldId="competences"
+                />
+              </div>
             </Box>
           </FormInputBox>
         </Flex>
-        {errorMessage && <InlineError message={`${errorMessage}`} />}
         <Flex p={2} alignItems="center" justifyContent="flex-end">
           <Box mr="2">
             <Link to={cancelLink}>

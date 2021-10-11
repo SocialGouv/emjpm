@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -16,13 +15,9 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
       serviceId,
     },
   });
-  const [errorMessage, setErrorMessage] = useState(false);
   const [editService, { loading: loading2, error: error2 }] = useMutation(
     EDIT_SERVICE,
     {
-      onError(error) {
-        setErrorMessage(error);
-      },
       update() {
         if (successLink) {
           history.push(successLink, successLink, {
@@ -71,7 +66,6 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
         handleSubmit={handleSubmit}
         cancelLink={cancelLink}
         service={service}
-        errorMessage={errorMessage}
       />
     </Card>
   );

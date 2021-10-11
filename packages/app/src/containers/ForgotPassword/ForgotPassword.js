@@ -107,14 +107,17 @@ function ForgotPassword() {
               value={formik.values.email}
               id="email"
               name="email"
+              aria-describedby="msg-email"
               type="text"
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Entrez votre email"
             />
-            {formik.touched.email && (
-              <InlineError message={formik.errors.email} fieldId="email" />
-            )}
+            <div id="msg-email">
+              {formik.touched.email && (
+                <InlineError message={formik.errors.email} fieldId="email" />
+              )}
+            </div>
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box mr="2">

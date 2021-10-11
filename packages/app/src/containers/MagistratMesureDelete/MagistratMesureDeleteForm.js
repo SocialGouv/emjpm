@@ -88,11 +88,14 @@ export function MagistratMesureDeleteForm(props) {
               name="reason_delete"
               onChange={formik.handleChange}
               placeholder="Raison de la suppression"
+              aria-describedby="msg-reason_delete"
             />
-            <InlineError
-              message={formik.errors.reason_delete}
-              fieldId="reason_delete"
-            />
+            <div id="msg-reason_delete">
+              <InlineError
+                message={formik.errors.reason_delete}
+                fieldId="reason_delete"
+              />
+            </div>
           </Box>
           <Flex justifyContent="flex-end">
             <Box>

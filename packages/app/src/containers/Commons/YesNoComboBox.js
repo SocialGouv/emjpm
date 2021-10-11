@@ -7,7 +7,13 @@ const FieldValue = ({ isChecked, readOnly }) => ({
 });
 
 export function YesNoComboBox(props) {
-  const { onChange = () => {}, name = "", value, readOnly } = props;
+  const {
+    onChange = () => {},
+    name = "",
+    value,
+    readOnly,
+    ...inputProps
+  } = props;
   return (
     <Flex width={1 / 2}>
       <Label alignItems="center" width={[1 / 2]} p={2}>
@@ -39,6 +45,7 @@ export function YesNoComboBox(props) {
               onChange(true);
             }
           }}
+          {...inputProps}
         />
         <Box sx={FieldValue({ isChecked: value === true, readOnly })}>Oui</Box>
       </Label>

@@ -201,10 +201,16 @@ export function ListeBlancheIndividuelForm(props) {
                   size="small"
                   departementFieldId="departement"
                   formik={formik}
+                  aria-describedby="msg-ville"
                 />
-                {formik.touched.ville && (
-                  <InlineError message={formik.errors.ville} fieldId="ville" />
-                )}
+                <div id="msg-ville">
+                  {formik.touched.ville && (
+                    <InlineError
+                      message={formik.errors.ville}
+                      fieldId="ville"
+                    />
+                  )}
+                </div>
               </Field>
             </Box>
           </Flex>

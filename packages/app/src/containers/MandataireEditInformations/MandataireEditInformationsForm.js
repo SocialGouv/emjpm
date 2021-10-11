@@ -160,8 +160,14 @@ function MandataireEditInformationsForm(props) {
               <Geocode
                 resource={mandataire}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+                aria-describedby="msg-geocode"
               />
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+              <div id="msg-geocode">
+                <InlineError
+                  message={formik.errors.geocode}
+                  fieldId="geocode"
+                />
+              </div>
             </Field>
           </FormInputBox>
         </Flex>
@@ -189,10 +195,13 @@ function MandataireEditInformationsForm(props) {
                 }}
                 options={tiOptions}
                 isMulti
+                aria-describedby="msg-tis"
               />
-              {formik.touched.tis && (
-                <InlineError message={formik.errors.tis} fieldId="tis" />
-              )}
+              <div id="msg-tis">
+                {formik.touched.tis && (
+                  <InlineError message={formik.errors.tis} fieldId="tis" />
+                )}
+              </div>
             </Field>
           </FormInputBox>
         </Flex>
@@ -221,11 +230,14 @@ function MandataireEditInformationsForm(props) {
                 onChange={formik.handleChange}
                 label="Informations à destination du magistrat"
                 placeholder="Préférences géographiques, compétences, langues parlées, ..."
+                aria-describedby="msg-competences"
               />
-              <InlineError
-                message={formik.errors.competences}
-                fieldId="competences"
-              />
+              <div id="msg-competences">
+                <InlineError
+                  message={formik.errors.competences}
+                  fieldId="competences"
+                />
+              </div>
             </Box>
           </FormInputBox>
         </Flex>

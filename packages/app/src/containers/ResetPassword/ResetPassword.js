@@ -144,13 +144,16 @@ function ResetPassword(props) {
                       hasError={errors.newPassword && touched.newPassword}
                       onChange={handleChange}
                       placeholder="Entrez votre nouveau mot de passe"
+                      aria-describedby="msg-newPassword"
                     />
-                    {touched.newPassword && (
-                      <InlineError
-                        message={errors.newPassword}
-                        fieldId="newPassword"
-                      />
-                    )}
+                    <div id="msg-newPassword">
+                      {touched.newPassword && (
+                        <InlineError
+                          message={errors.newPassword}
+                          fieldId="newPassword"
+                        />
+                      )}
+                    </div>
                   </Box>
                   <Box sx={{ position: "relative", zIndex: "1" }} mb="2">
                     <Input
@@ -164,13 +167,16 @@ function ResetPassword(props) {
                       }
                       onChange={handleChange}
                       placeholder="Confirmer votre nouveau mot de passe"
+                      aria-describedby="msg-newPasswordConfirmation"
                     />
-                    {touched.newPasswordConfirmation && (
-                      <InlineError
-                        message={errors.newPasswordConfirmation}
-                        fieldId="newPasswordConfirmation"
-                      />
-                    )}
+                    <div id="msg-newPasswordConfirmation">
+                      {touched.newPasswordConfirmation && (
+                        <InlineError
+                          message={errors.newPasswordConfirmation}
+                          fieldId="newPasswordConfirmation"
+                        />
+                      )}
+                    </div>
                   </Box>
                   <Flex alignItems="center" justifyContent="flex-end">
                     <Box mr="2">

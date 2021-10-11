@@ -228,13 +228,16 @@ export function MesureCreateForm(props) {
                     hasError={formik.touched.ville && formik.errors.ville}
                     size="small"
                     required
+                    aria-describedby="msg-ville"
                   />
-                  {formik.touched.ville && (
-                    <InlineError
-                      message={formik.errors.ville}
-                      fieldId="ville"
-                    />
-                  )}
+                  <div id="msg-ville">
+                    {formik.touched.ville && (
+                      <InlineError
+                        message={formik.errors.ville}
+                        fieldId="ville"
+                      />
+                    )}
+                  </div>
                 </Field>
               </Box>
             </Flex>

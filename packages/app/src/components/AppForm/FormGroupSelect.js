@@ -164,6 +164,7 @@ export default function FormGroupSelect(props) {
           type="text"
           readOnly={true}
           id={id}
+          aria-describedby={`msg-${id}`}
           name={id}
           value={readOnlyValue}
           onBlur={handleBlur}
@@ -175,6 +176,7 @@ export default function FormGroupSelect(props) {
         <Select
           isCreatable={loadOptions || isCreatable}
           id={id}
+          aria-describedby={`msg-${id}`}
           instanceId={id}
           placeholder={placeholder}
           label={label}
@@ -224,12 +226,14 @@ export default function FormGroupSelect(props) {
         />
       )}
 
-      <AppFormFieldErrorMessage
-        id={id}
-        error={error}
-        formik={formik}
-        hideErrors={hideErrors}
-      />
+      <div id={`msg-${id}`}>
+        <AppFormFieldErrorMessage
+          id={id}
+          error={error}
+          formik={formik}
+          hideErrors={hideErrors}
+        />
+      </div>
     </Field>
   );
 }

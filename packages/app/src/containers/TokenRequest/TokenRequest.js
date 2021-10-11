@@ -107,10 +107,13 @@ function TokenRequest() {
               hasError={formik.errors.name && formik.touched.name}
               onChange={formik.handleChange}
               placeholder="Le nom de votre logiciel métier"
+              aria-describedby="msg-name"
             />
-            {formik.touched.name && (
-              <InlineError message={formik.errors.name} fieldId="name" />
-            )}
+            <div id="msg-name">
+              {formik.touched.name && (
+                <InlineError message={formik.errors.name} fieldId="name" />
+              )}
+            </div>
           </Field>
           <Field>
             <Input
@@ -121,10 +124,13 @@ function TokenRequest() {
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Votre email"
+              aria-describedby="msg-email"
             />
-            {formik.touched.email && (
-              <InlineError message={formik.errors.email} fieldId="email" />
-            )}
+            <div id="msg-email">
+              {formik.touched.email && (
+                <InlineError message={formik.errors.email} fieldId="email" />
+              )}
+            </div>
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>

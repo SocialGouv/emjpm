@@ -7,8 +7,17 @@ import { labelStyle, textareaStyle } from "./style";
 function Textarea(props) {
   const [isFocused, setFocus] = useState(false);
 
-  const { id, error, onChange, onFocus, onBlur, label, placeholder, value } =
-    props;
+  const {
+    id,
+    error,
+    onChange,
+    onFocus,
+    onBlur,
+    label,
+    placeholder,
+    value,
+    ...inputProps
+  } = props;
 
   return (
     <Box mb="2">
@@ -37,6 +46,7 @@ function Textarea(props) {
         placeholder={placeholder}
         value={value}
         sx={(theme) => textareaStyle({ ...props, isFocused }, theme)}
+        {...inputProps}
       />
     </Box>
   );

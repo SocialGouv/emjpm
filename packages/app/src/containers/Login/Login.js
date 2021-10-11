@@ -126,9 +126,11 @@ function Login(props) {
               onChange={formik.handleChange}
               placeholder="Votre email"
               required
+              aria-describedby="msg-email"
             />
-
-            <InlineError message={formik.errors.email} fieldId="email" />
+            <div id="msg-email">
+              <InlineError message={formik.errors.email} fieldId="email" />
+            </div>
           </Field>
           <Field>
             <Input
@@ -146,13 +148,16 @@ function Login(props) {
               }}
               placeholder="Votre mot de passe"
               required
+              aria-describedby="msg-password"
             />
-            {(formik.touched.password || formikSubmitted) && (
-              <InlineError
-                message={formik.errors.password}
-                fieldId="password"
-              />
-            )}
+            <div id="msg-password">
+              {(formik.touched.password || formikSubmitted) && (
+                <InlineError
+                  message={formik.errors.password}
+                  fieldId="password"
+                />
+              )}
+            </div>
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>

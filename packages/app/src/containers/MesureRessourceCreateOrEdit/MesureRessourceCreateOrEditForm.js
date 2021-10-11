@@ -94,13 +94,16 @@ export function MesureRessourceCreateOrEditForm(props) {
               }}
               options={MESURE_PROTECTION.PRESTATION_SOCIALES.options}
               isMulti
+              aria-describedby="msg-prestations_sociales"
             />
-            {formik.touched.prestations_sociales && (
-              <InlineError
-                message={formik.errors.prestations_sociales}
-                fieldId="prestations_sociales"
-              />
-            )}
+            <div id="msg-prestations_sociales">
+              {formik.touched.prestations_sociales && (
+                <InlineError
+                  message={formik.errors.prestations_sociales}
+                  fieldId="prestations_sociales"
+                />
+              )}
+            </div>
           </Field>
         </FormInputBox>
       </Flex>

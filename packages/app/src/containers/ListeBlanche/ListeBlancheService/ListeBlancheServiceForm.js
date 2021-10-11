@@ -214,13 +214,16 @@ export function ListeBlancheServiceForm(props) {
                   size="small"
                   departementFieldId="lb_ville_departement"
                   formik={formik}
+                  aria-describedby="msg-lb_ville"
                 />
-                {formik.touched.lb_ville && formik.errors.lb_ville && (
-                  <InlineError
-                    message={formik.errors.lb_ville}
-                    fieldId="lb_ville"
-                  />
-                )}
+                <div id="msg-lb_ville">
+                  {formik.touched.lb_ville && formik.errors.lb_ville && (
+                    <InlineError
+                      message={formik.errors.lb_ville}
+                      fieldId="lb_ville"
+                    />
+                  )}
+                </div>
               </Field>
             </Box>
           </Flex>
@@ -245,13 +248,16 @@ export function ListeBlancheServiceForm(props) {
                   (options || []).map((o) => ({ departement_code: o.value }))
                 );
               }}
+              aria-describedby="msg-departements"
             />
-            {formik.touched.departements && (
-              <InlineError
-                message={formik.errors.departements}
-                fieldId="departements"
-              />
-            )}
+            <div id="msg-departements">
+              {formik.touched.departements && (
+                <InlineError
+                  message={formik.errors.departements}
+                  fieldId="departements"
+                />
+              )}
+            </div>
           </Box>
         </FormInputBox>
       </Flex>

@@ -31,10 +31,13 @@ function ServiceMemberInvitationForm(props) {
             hasError={formik.touched.email && formik.errors.email}
             onChange={formik.handleChange}
             placeholder="Email"
+            aria-describedby="msg-email"
           />
-          {formik.touched.email && (
-            <InlineError message={formik.errors.email} fieldId="email" />
-          )}
+          <div id="msg-email">
+            {formik.touched.email && (
+              <InlineError message={formik.errors.email} fieldId="email" />
+            )}
+          </div>
         </Field>
         <Flex alignItems="center" justifyContent="flex-end">
           <Box>

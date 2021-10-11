@@ -66,6 +66,7 @@ export function EnqueteFormInputField({
             min={min}
             max={max}
             minWidth={size === "small" ? "60px" : "180px"}
+            aria-describedby={`msg-${id}`}
           />
         ) : (
           <Input
@@ -80,6 +81,7 @@ export function EnqueteFormInputField({
             type={type}
             min={min}
             max={max}
+            aria-describedby={`msg-${id}`}
           />
         )}
         {children ? <Box>{children}</Box> : null}

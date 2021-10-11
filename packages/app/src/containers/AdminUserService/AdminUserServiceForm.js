@@ -9,10 +9,10 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { adminUserServiceSchema } from "~/validation-schemas";
-import { Button, Heading, InlineError } from "~/components";
+import { Button, Heading } from "~/components";
 
 function AdminUserServiceForm(props) {
-  const { cancelLink, user, handleSubmit, errorMessage } = props;
+  const { cancelLink, user, handleSubmit } = props;
 
   const { nom, prenom, email, service_members } = user;
 
@@ -57,7 +57,6 @@ function AdminUserServiceForm(props) {
         </FormInputBox>
       </Flex>
 
-      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link to={cancelLink}>

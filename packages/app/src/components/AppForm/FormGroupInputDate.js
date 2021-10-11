@@ -35,6 +35,7 @@ export default function FormGroupInputDate({
           placeholderText={placeholder}
           readOnly={readOnly}
           id={id}
+          aria-describedby={`msg-${id}`}
           name={id}
           value={value}
           onBlur={handleBlur}
@@ -47,12 +48,14 @@ export default function FormGroupInputDate({
         {children ? <Box>{children}</Box> : null}
       </Flex>
 
-      <AppFormFieldErrorMessage
-        id={id}
-        error={error}
-        formik={formik}
-        hideErrors={hideErrors}
-      />
+      <div id={`msg-${id}`}>
+        <AppFormFieldErrorMessage
+          id={id}
+          error={error}
+          formik={formik}
+          hideErrors={hideErrors}
+        />
+      </div>
     </Field>
   );
 }

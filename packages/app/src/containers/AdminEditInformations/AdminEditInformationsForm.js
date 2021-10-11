@@ -9,14 +9,9 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
-import { Button, Heading, InlineError, Text } from "~/components";
+import { Button, Heading, Text } from "~/components";
 
-function AdminEditInformationsForm({
-  user,
-  handleSubmit,
-  cancelLink,
-  errorMessage,
-}) {
+function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
   const formik = useFormik({
     initialValues: {
       email: user.email || "",
@@ -57,7 +52,6 @@ function AdminEditInformationsForm({
           />
         </FormInputBox>
       </Flex>
-      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link to={cancelLink}>

@@ -54,7 +54,6 @@ function Input(props) {
     isFocus ||
     hasValue ||
     (value !== null && value !== undefined && value !== "");
-
   return (
     <InputWrapper size={size} isValid={isValid} hasError={hasError}>
       {(placeholder || label) && (

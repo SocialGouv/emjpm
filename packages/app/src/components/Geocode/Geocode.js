@@ -6,7 +6,14 @@ import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 import useQueryReady from "~/hooks/useQueryReady";
 
 function Geocode(props) {
-  const { hasError, onChange, placeholder, resource, instanceId } = props;
+  const {
+    hasError,
+    onChange,
+    placeholder,
+    resource,
+    instanceId,
+    ...selectProps
+  } = props;
 
   const { departements, error, loading } = useDepartements({ all: true });
 
@@ -45,6 +52,7 @@ function Geocode(props) {
       placeholder={placeholder || "Adresse, ville, ..."}
       noOptionsMessage={() => "Pas de résultats"}
       onChange={onChange}
+      {...selectProps}
     />
   );
 }

@@ -53,6 +53,7 @@ export default function FormGroupInput({
           readOnly={readOnly}
           required={required}
           id={id}
+          aria-describedby={`msg-${id}`}
           name={id}
           title={title}
           value={value}
@@ -67,13 +68,14 @@ export default function FormGroupInput({
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>
-
-      <AppFormFieldErrorMessage
-        id={id}
-        error={error}
-        formik={formik}
-        hideErrors={hideErrors}
-      />
+      <div id={`msg-${id}`}>
+        <AppFormFieldErrorMessage
+          id={id}
+          error={error}
+          formik={formik}
+          hideErrors={hideErrors}
+        />
+      </div>
     </Field>
   );
 }

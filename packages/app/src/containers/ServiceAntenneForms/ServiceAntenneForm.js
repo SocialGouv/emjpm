@@ -122,10 +122,14 @@ function ServiceAntenneForm(props) {
         <FormInputBox>
           <Field>
             <Geocode
+              id="geocode"
               onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
               resource={antenne}
+              aria-describedby="msg-geocode"
             />
-            <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            <div id="msg-geocode">
+              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            </div>
           </Field>
         </FormInputBox>
       </Flex>

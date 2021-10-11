@@ -46,6 +46,7 @@ export function EnqueteFormYesNoField({
           onChange={(value) => {
             setFieldValue(id, value);
           }}
+          aria-describedby={`msg-${id}`}
         />
         <Box>{children}</Box>
       </Flex>

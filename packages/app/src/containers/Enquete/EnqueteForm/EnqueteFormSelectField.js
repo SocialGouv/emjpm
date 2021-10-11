@@ -67,6 +67,7 @@ export function EnqueteFormSelectField({
           onBlur={handleBlur}
           onChange={handleChange}
           hasError={showError}
+          aria-describedby={`msg-${id}`}
         />
       ) : (
         <Select
@@ -77,6 +78,7 @@ export function EnqueteFormSelectField({
           onChange={({ value }) => setFieldValue(id, value)}
           value={findOption(options, value)}
           options={options}
+          aria-describedby={`msg-${id}`}
         />
       )}
 

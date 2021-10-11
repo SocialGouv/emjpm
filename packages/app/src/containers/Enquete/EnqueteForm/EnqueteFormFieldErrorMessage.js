@@ -24,5 +24,9 @@ export function EnqueteFormFieldErrorMessage({
     id,
   });
 
-  return <InlineError showError={showError} message={error} fieldId={id} />;
+  return (
+    <div id={`msg-${id}`}>
+      <InlineError showError={showError} message={error} fieldId={id} />
+    </div>
+  );
 }

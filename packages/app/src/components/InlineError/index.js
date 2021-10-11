@@ -9,7 +9,6 @@ function InlineError({ message, fieldId, showError, ...props }) {
     message && (
       <Flex
         id={`error-${fieldId}`}
-        aria-describedby={fieldId}
         alignItems="center"
         color="error"
         {...props}

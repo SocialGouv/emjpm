@@ -9,14 +9,9 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { directionEditSchema } from "~/validation-schemas/directionEditSchema";
-import { Button, Heading, InlineError, Text } from "~/components";
+import { Button, Heading, Text } from "~/components";
 
-function DirectionEditInformationsForm({
-  user,
-  handleSubmit,
-  cancelLink,
-  errorMessage,
-}) {
+function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
   const formik = useFormik({
     initialValues: {
       email: user.email || "",
@@ -57,7 +52,6 @@ function DirectionEditInformationsForm({
           />
         </FormInputBox>
       </Flex>
-      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link to={cancelLink}>

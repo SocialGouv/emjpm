@@ -168,13 +168,16 @@ export function MesureEtatCreateOrEditForm(props) {
                     value={formik.values.ville}
                     hasError={formik.touched.ville && formik.errors.ville}
                     size="small"
+                    aria-describedby="msg-ville"
                   />
-                  {formik.touched.ville && (
-                    <InlineError
-                      message={formik.errors.ville}
-                      fieldId="ville"
-                    />
-                  )}
+                  <div id="msg-ville">
+                    {formik.touched.ville && (
+                      <InlineError
+                        message={formik.errors.ville}
+                        fieldId="ville"
+                      />
+                    )}
+                  </div>
                 </Field>
               </Box>
             </Flex>

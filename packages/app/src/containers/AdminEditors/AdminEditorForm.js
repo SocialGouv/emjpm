@@ -38,8 +38,11 @@ export function AdminEditorForm(props) {
                 hasError={formik.errors.name && formik.touched.name}
                 onChange={formik.handleChange}
                 placeholder="Nom du service"
+                aria-describedby="msg-name"
               />
-              <InlineError message={formik.errors.name} fieldId="name" />
+              <div id="msg-name">
+                <InlineError message={formik.errors.name} fieldId="name" />
+              </div>
             </Field>
             <Field>
               <Input
@@ -51,11 +54,14 @@ export function AdminEditorForm(props) {
                 }
                 onChange={formik.handleChange}
                 placeholder="URI de redirection"
+                aria-describedby="msg-redirect_uris"
               />
-              <InlineError
-                message={formik.errors.redirect_uris}
-                fieldId="redirect_uris"
-              />
+              <div id="msg-redirect_uris">
+                <InlineError
+                  message={formik.errors.redirect_uris}
+                  fieldId="redirect_uris"
+                />
+              </div>
             </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (

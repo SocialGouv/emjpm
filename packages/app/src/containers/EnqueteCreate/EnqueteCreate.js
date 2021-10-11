@@ -59,10 +59,13 @@ export function EnqueteCreate() {
           onChange={(value) => formik.setFieldValue("year", value)}
           placeholderText="Année de l'enquête"
           title="Format: aaaa. Exemple: 2021"
+          aria-describedby="msg-year"
         />
-        {touched.year && errors.year && (
-          <InlineError message={errors.year} fieldId="year" />
-        )}
+        <div id="msg-year">
+          {touched.year && errors.year && (
+            <InlineError message={errors.year} fieldId="year" />
+          )}
+        </div>
       </Field>
       <Field>
         <InputDate
@@ -71,10 +74,13 @@ export function EnqueteCreate() {
           name="endedAt"
           onChange={(value) => formik.setFieldValue("endedAt", value)}
           placeholderText="Date de fin"
+          aria-describedby="msg-endedAt"
         />
-        {touched.endedAt && (
-          <InlineError message={errors.endedAt} fieldId="endedAt" />
-        )}
+        <div id="msg-endedAt">
+          {touched.endedAt && (
+            <InlineError message={errors.endedAt} fieldId="endedAt" />
+          )}
+        </div>
       </Field>
       <Button type="submit">Créer</Button>
     </form>

@@ -10,10 +10,10 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { magistratEditSchema } from "~/validation-schemas";
-import { Button, Heading, InlineError, Text, CheckBox } from "~/components";
+import { Button, Heading, Text, CheckBox } from "~/components";
 
 function MagistratEditInformationsForm(props) {
-  const { cancelLink, user, tribunaux, handleSubmit, errorMessage } = props;
+  const { cancelLink, user, tribunaux, handleSubmit } = props;
 
   const { magistrat } = user;
 
@@ -98,7 +98,6 @@ function MagistratEditInformationsForm(props) {
         </FormInputBox>
       </Flex>
 
-      {errorMessage && <InlineError message={`${errorMessage}`} />}
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link to={cancelLink}>

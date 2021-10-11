@@ -113,11 +113,14 @@ function EditPassword() {
                   hasError={formik.errors.password && formik.touched.password}
                   onChange={formik.handleChange}
                   placeholder="Votre mot de passe actuel"
+                  aria-describedby="msg-password"
                 />
-                <InlineError
-                  message={formik.errors.password}
-                  fieldId="password"
-                />
+                <div id="msg-password">
+                  <InlineError
+                    message={formik.errors.password}
+                    fieldId="password"
+                  />
+                </div>
               </Field>
               <Field>
                 <Input
@@ -130,11 +133,14 @@ function EditPassword() {
                   }
                   onChange={formik.handleChange}
                   placeholder="Votre nouveau mot de passe"
+                  aria-describedby="msg-newPassword"
                 />
-                <InlineError
-                  message={formik.errors.newPassword}
-                  fieldId="newPassword"
-                />
+                <div id="msg-newPassword">
+                  <InlineError
+                    message={formik.errors.newPassword}
+                    fieldId="newPassword"
+                  />
+                </div>
               </Field>
               <Field>
                 <Input
@@ -148,11 +154,14 @@ function EditPassword() {
                   }
                   onChange={formik.handleChange}
                   placeholder="Confirmation de votre nouveau mot de passe"
+                  aria-describedby="msg-newPasswordConfirmation"
                 />
-                <InlineError
-                  message={formik.errors.newPasswordConfirmation}
-                  fieldId="newPasswordConfirmation"
-                />
+                <div id="msg-newPasswordConfirmation">
+                  <InlineError
+                    message={formik.errors.newPasswordConfirmation}
+                    fieldId="newPasswordConfirmation"
+                  />
+                </div>
               </Field>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">

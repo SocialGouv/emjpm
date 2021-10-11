@@ -46,6 +46,7 @@ export function EnquetePopulationTrancheAgeField(props) {
         </Label>
         <EnqueteFormInputField
           id={womenFieldId}
+          aria-describedby={`msg-${womenFieldId}`}
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"
@@ -57,6 +58,7 @@ export function EnquetePopulationTrancheAgeField(props) {
         </EnqueteFormInputField>
         <EnqueteFormInputField
           id={menFieldId}
+          aria-describedby={`msg-${menFieldId}`}
           enqueteContext={enqueteContext}
           enqueteForm={enqueteForm}
           size="small"

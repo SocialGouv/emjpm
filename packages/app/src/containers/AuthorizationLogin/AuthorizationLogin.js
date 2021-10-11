@@ -107,14 +107,17 @@ function AuthorizationLogin(props) {
               onChange={formik.handleChange}
               placeholder="Votre nom d'utilisateur"
               outline="default"
+              aria-describedby="msg-email"
             />
-            {formik.touched.email && (
-              <InlineError
-                message={formik.errors.email}
-                fieldId="email"
-                aria-live="polite"
-              />
-            )}
+            <div id="msg-email">
+              {formik.touched.email && (
+                <InlineError
+                  message={formik.errors.email}
+                  fieldId="email"
+                  aria-live="polite"
+                />
+              )}
+            </div>
           </Field>
           <Field>
             <Input
@@ -126,14 +129,17 @@ function AuthorizationLogin(props) {
               onChange={formik.handleChange}
               placeholder="Votre mot de passe"
               outline="default"
+              aria-describedby="msg-password"
             />
-            {formik.touched.password && (
-              <InlineError
-                message={formik.errors.password}
-                fieldId="password"
-                aria-live="polite"
-              />
-            )}
+            <div id="msg-password">
+              {formik.touched.password && (
+                <InlineError
+                  message={formik.errors.password}
+                  fieldId="password"
+                  aria-live="polite"
+                />
+              )}
+            </div>
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>

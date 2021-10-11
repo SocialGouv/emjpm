@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
@@ -10,7 +9,6 @@ import { MAGISTRAT } from "./queries";
 
 function MagistratEditInformations({ userId, successLink, cancelLink }) {
   const history = useHistory();
-  const [errorMessage, setErrorMessage] = useState(false);
   const { data, error, loading } = useQuery(MAGISTRAT, {
     fetchPolicy: "network-only",
     variables: {
@@ -21,9 +19,6 @@ function MagistratEditInformations({ userId, successLink, cancelLink }) {
   const [editUser, { loading: loading2, error: error2 }] = useMutation(
     EDIT_USER,
     {
-      onError(error) {
-        setErrorMessage(error);
-      },
       update() {
         if (successLink) {
           history.push(successLink, successLink, {
@@ -65,7 +60,6 @@ function MagistratEditInformations({ userId, successLink, cancelLink }) {
         handleSubmit={handleSubmit}
         tribunaux={tribunaux}
         cancelLink={cancelLink}
-        errorMessage={errorMessage}
       />
     </Box>
   );
