@@ -2,7 +2,7 @@ import yup from "./yup";
 import {
   validateNumeroRG,
   MESSAGE_VALID_NUMERO_RG,
-  MESSAGE_DUPLICATE_NUMERO_RG,
+  MESSAGE_DUPLICATE_NUMERO_RG_MANDATAIRE,
 } from "~/utils/data/numero-rg";
 import { checkDuplicateNumeroRGByTiId } from "~/query-service/emjpm-hasura/checkDuplicateNumeroRG";
 
@@ -43,7 +43,7 @@ const mesureEditSchema = ({ apolloClient }) =>
       })
       .test(
         "numero_rg-duplicate",
-        MESSAGE_DUPLICATE_NUMERO_RG,
+        MESSAGE_DUPLICATE_NUMERO_RG_MANDATAIRE,
         (value, { parent }) => {
           const tiId = parent.ti_id;
           if (

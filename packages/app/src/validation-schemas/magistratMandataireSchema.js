@@ -2,7 +2,7 @@ import yup from "./yup";
 import {
   validateNumeroRG,
   MESSAGE_VALID_NUMERO_RG,
-  MESSAGE_DUPLICATE_NUMERO_RG,
+  MESSAGE_DUPLICATE_NUMERO_RG_TI,
 } from "~/utils/data/numero-rg";
 import {
   checkDuplicateNumeroRGByMandataireId,
@@ -23,7 +23,7 @@ const magistratMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
       .test("numero_rg-check", MESSAGE_VALID_NUMERO_RG, validateNumeroRG)
       .test(
         "numero_rg-duplicate",
-        MESSAGE_DUPLICATE_NUMERO_RG,
+        MESSAGE_DUPLICATE_NUMERO_RG_TI,
         (value, { parent }) => {
           if (!validateNumeroRG(value)) {
             return true;
