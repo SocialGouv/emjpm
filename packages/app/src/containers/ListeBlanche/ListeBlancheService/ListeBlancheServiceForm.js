@@ -75,7 +75,7 @@ export function ListeBlancheServiceForm(props) {
   const departements = formik.values.departements;
   const addDepartementToCurrents = useCallback(
     (departement) => {
-      const newDepartementsList = departements;
+      const newDepartementsList = departements || [];
       if (
         departement &&
         !newDepartementsList
