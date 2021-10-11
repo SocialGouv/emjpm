@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.137.0](https://github.com/SocialGouv/emjpm/compare/v25.136.1...v25.137.0) (2021-10-11)
+
+
+### Bug Fixes
+
+* **dpt-list:** create ([cf161aa](https://github.com/SocialGouv/emjpm/commit/cf161aa93b592b0594f67659b2cbaa45d8b393a4))
+* **error:** show only when touched fix [#2654](https://github.com/SocialGouv/emjpm/issues/2654) ([70258b6](https://github.com/SocialGouv/emjpm/commit/70258b69477421423e62f787e47cbe32186d9bdb))
+* **geo:** db rebased validation ([d443f0f](https://github.com/SocialGouv/emjpm/commit/d443f0f79797aee5e8e76e88143bc525dcc11832))
+* **linter:** hook deps ([54c9d51](https://github.com/SocialGouv/emjpm/commit/54c9d51462741036f19db873b6ba3c11a6d88eb9))
+* **linter:** hook deps ([e8561fd](https://github.com/SocialGouv/emjpm/commit/e8561fd50cd7dd023ad6925b872fa89148f3a96a))
+* **nullable:** fix [#2651](https://github.com/SocialGouv/emjpm/issues/2651) ([710fefc](https://github.com/SocialGouv/emjpm/commit/710fefc1ec363bf00900ff738644f14524616ad6))
+* **perfs:** rollback to setfieldvalue ([3c638cc](https://github.com/SocialGouv/emjpm/commit/3c638cc1ee61a1248a7516b9907e2c985248dd2a))
+* **perms:** db geocp ([c3b16a1](https://github.com/SocialGouv/emjpm/commit/c3b16a1a2996898aeca734e5e8d6a8f54a3633be))
+* **touched-only:** error on ville accept mesure ([162ebf0](https://github.com/SocialGouv/emjpm/commit/162ebf0391e0d4ff446bb069132c88227d7c3932))
+* **wording:** message rg doublon fix [#2664](https://github.com/SocialGouv/emjpm/issues/2664) ([a5885ef](https://github.com/SocialGouv/emjpm/commit/a5885ef992d2f21e6fb4ef9d29ad287578313b63))
+
+
+### Features
+
+* **geo:** add dep code to table + add domtoms ([544bac7](https://github.com/SocialGouv/emjpm/commit/544bac7b354e0dc34a1929dd21d1581482f9d27e))
+* **geo:** db rebased fix [#2666](https://github.com/SocialGouv/emjpm/issues/2666) ([ad7e9e1](https://github.com/SocialGouv/emjpm/commit/ad7e9e1bf86efb0d241639aa7307b0f663f2f2c2))
+* **ti:** numero rg dup error msg fix [#2664](https://github.com/SocialGouv/emjpm/issues/2664) ([58cb708](https://github.com/SocialGouv/emjpm/commit/58cb7085eb60fd16279087e10832de55616b901b))
+* **validation:** uniqueness rg fix [#2664](https://github.com/SocialGouv/emjpm/issues/2664) ([e1b6e55](https://github.com/SocialGouv/emjpm/commit/e1b6e551992af45a5edf532458b719858b0d1121))
+
+
+
+
+
 ## [25.136.1](https://github.com/SocialGouv/emjpm/compare/v25.136.0...v25.136.1) (2021-10-01)
 
 
