@@ -77,6 +77,23 @@ function ServiceBoard() {
           </Flex>
         </Card>
       </Flex>
+
+      <Flex p={1} flexDirection="column" width="300px">
+        <Box bg="cardSecondary">
+          <Box p={1}>
+            <Heading size={4}>Vos accès</Heading>
+          </Box>
+        </Box>
+        <Card>
+          <Box>
+            <Flex px={1} mb={1}>
+              <Link to="https://efsm.pjm.social.gouv.fr/" target="_blank">
+                <Text ml={1}>{"Accèder à eFSM"}</Text>
+              </Link>
+            </Flex>
+          </Box>
+        </Card>
+      </Flex>
     </Box>
   );
 }
