@@ -6,8 +6,10 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+FROM_BRANCH=$(git branch --show-current)
+
 for BRANCH in "$@"; do
-  echo "syncing branch $BRANCH"
+  echo "syncing branch $BRANCH with $FROM_BRANCH"
 
   if [ -n "$(git diff)" ]; then
     STASHING=1
@@ -15,9 +17,9 @@ for BRANCH in "$@"; do
   fi
 
   git checkout $BRANCH
-  git reset --hard master
+  git reset --hard $FROM_BRANCH
   git push --follow-tags --force
-  git checkout master
+  git checkout $FROM_BRANCH
 
   if [ -n "$STASHING" ]; then
     git stash apply

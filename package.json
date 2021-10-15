@@ -24,7 +24,7 @@
     "ci:logs": "scripts/ci/k8sci-logs",
     "ci:trigger": "scripts/ci/trigger",
     "ci:stop": "scripts/ci/k8sci-stop",
-    "ci:sync": "scripts/ci/sync-branch-with-master"
+    "ci:sync": "scripts/ci/sync-branch"
   },
   "license": "Apache-2.0",
   "devDependencies": {
