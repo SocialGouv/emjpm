@@ -5,13 +5,15 @@ import { Box, Flex } from "rebass";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
 
+import { useApolloClient } from "@apollo/client";
+
 import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { adminServiceSchema as validationSchema } from "~/validation-schemas/adminServiceSchema";
+import { adminServiceSchema } from "~/validation-schemas/adminServiceSchema";
 import {
   Button,
   Heading,
@@ -37,6 +39,13 @@ const findOptionsDepartements = (options, values) => {
 
 export function ListeBlancheServiceForm(props) {
   const { handleCancel, handleSubmit, service } = props;
+
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => adminServiceSchema({ apolloClient }),
+    [apolloClient]
+  );
+
   const departementsOptions = useMemo(
     () =>
       createDepartementOptions(departementList, {
@@ -65,6 +74,7 @@ export function ListeBlancheServiceForm(props) {
       org_ville: service ? service.org_ville : "",
       siret: service ? service.siret || "" : "",
       telephone: service ? service.telephone : "",
+      initialSiret: service ? service.siret || "" : "",
     },
     onSubmit: handleSubmit,
     validationSchema,

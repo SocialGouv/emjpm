@@ -1,8 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useMemo } from "react";
 import { useFormik } from "formik";
 import { Box, Flex, Text } from "rebass";
 
 import { isAdmin } from "@emjpm/biz";
+
+import { useApolloClient } from "@apollo/client";
+
+import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
 
@@ -25,25 +29,42 @@ import { GeocodeCities } from "~/components/Geocode";
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
-const validationSchema = yup.object().shape({
-  adresse1: yup.string().required().nullable(),
-  adresse2: yup.string().optional().nullable(),
-  code_postal: yup
-    .string()
-    .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-    .required(),
-  email: yup.string().required(),
-  nom: yup.string().required(),
-  prenom: yup.string().required(),
-  siret: yup
-    .string()
-    .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
-    .required(),
-  ville: yup.string().required(),
-});
+const lbSchema = ({ apolloClient }) =>
+  yup.object().shape({
+    adresse1: yup.string().required().nullable(),
+    adresse2: yup.string().optional().nullable(),
+    code_postal: yup
+      .string()
+      .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
+      .required(),
+    email: yup.string().required(),
+    nom: yup.string().required(),
+    prenom: yup.string().required(),
+    siret: yup
+      .string()
+      .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
+      .required()
+      .test(
+        "siret-duplicate",
+        "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
+        (value, { parent }) => {
+          if (value === parent.initialSiret) {
+            return true;
+          }
+          return checkDuplicateMandataireSIRET(apolloClient, value);
+        }
+      ),
+    ville: yup.string().required(),
+  });
 
 export function ListeBlancheIndividuelForm(props) {
   const { handleCancel, data, editMode = false } = props;
+
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => lbSchema({ apolloClient }),
+    [apolloClient]
+  );
 
   const departements =
     data && data.lb_departements
@@ -66,6 +87,7 @@ export function ListeBlancheIndividuelForm(props) {
       nom: data ? formatFormInput(data.nom) : "",
       prenom: data ? formatFormInput(data.prenom) : "",
       siret: data ? formatFormInput(data.siret) : "",
+      initialSiret: data ? formatFormInput(data.siret) : "",
       ville: data ? formatFormInput(data.ville) : "",
     },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
