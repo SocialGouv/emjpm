@@ -55,7 +55,12 @@ function Input(props) {
     hasValue ||
     (value !== null && value !== undefined && value !== "");
   return (
-    <InputWrapper size={size} isValid={isValid} hasError={hasError}>
+    <InputWrapper
+      readOnly={readOnly}
+      size={size}
+      isValid={isValid}
+      hasError={hasError}
+    >
       {(placeholder || label) && (
         <InputLabel
           size={size}

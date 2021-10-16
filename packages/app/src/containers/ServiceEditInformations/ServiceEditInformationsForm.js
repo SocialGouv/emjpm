@@ -17,6 +17,7 @@ import {
   InlineError,
   Select,
   Textarea,
+  CheckBox,
 } from "~/components";
 import { findOptions } from "~/utils/form";
 
@@ -46,7 +47,6 @@ function ServiceEditInformationsForm(props) {
     count: antennes_count,
     sum: { mesures_max: antennes_mesures_max },
   } = service.service_antennes_aggregate.aggregate;
-
   const formik = useFormik({
     initialValues: {
       competences: service.competences || "",
@@ -60,6 +60,8 @@ function ServiceEditInformationsForm(props) {
       tis: service_tis.map(({ ti }) => ti.id),
       antennes_count,
       antennes_mesures_max,
+      suspendActivity: service.suspend_activity,
+      suspendActivityReason: service.suspend_activity_reason,
     },
     onSubmit: handleSubmit,
     validationSchema: serviceSchema,
@@ -184,12 +186,45 @@ function ServiceEditInformationsForm(props) {
             </Text>
           </FormGrayBox>
           <FormInputBox>
+            <Box mb={2}>
+              <CheckBox
+                isChecked={formik.values.suspendActivity}
+                onChange={() => {
+                  formik.setFieldValue(
+                    "suspendActivity",
+                    !formik.values.suspendActivity
+                  );
+                }}
+                label="Je ne souhaite plus recevoir de nouvelles mesures pour le moment"
+              />
+            </Box>
+            {formik.values.suspendActivity && (
+              <FormGroupInput
+                placeholder={"Motif de l'absence"}
+                id="suspendActivityReason"
+                formik={formik}
+                validationSchema={serviceSchema}
+              />
+            )}
             <FormGroupInput
-              placeholder="Nombre de mesures souhaité"
+              placeholder={
+                "Nombre de mesures souhaité" +
+                (formik.values.suspendActivity ? " (suspendu)" : "")
+              }
+              readOnly={formik.values.suspendActivity}
               id="dispo_max"
               formik={formik}
               validationSchema={serviceSchema}
             />
+            {formik.values.suspendActivity && (
+              <FormGroupInput
+                placeholder="Nombre de mesures en cours"
+                id="currentMesures"
+                formik={formik}
+                readOnly
+                value={service.mesures_in_progress}
+              />
+            )}
             <Box>
               <Textarea
                 value={formik.values.competences}

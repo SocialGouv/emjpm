@@ -19,6 +19,9 @@ export const MANDATAIRE = gql`
         telephone_portable
         ville
         competences
+        suspend_activity
+        suspend_activity_reason
+        mesures_en_cours
         lb_user {
           id
           lb_departements {

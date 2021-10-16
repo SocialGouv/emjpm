@@ -33,7 +33,7 @@ module.exports = async function availableMesureNbUnkownGestion({
         JOIN departements d ON (((v.departement_code) :: text = (d.id) :: text))
       WHERE
         d.id_region = ? AND
-        v.mesures_max <= 0
+        (v.suspend_activity IS NOT TRUE AND v.mesures_max <= 0)
     `,
       [regionId]
     );
@@ -47,7 +47,7 @@ module.exports = async function availableMesureNbUnkownGestion({
       FROM
         view_mesure_gestionnaire v
       WHERE
-        v.mesures_max <= 0
+        (v.suspend_activity IS NOT TRUE AND v.mesures_max <= 0)
     `);
     nbGlobal = count;
   }

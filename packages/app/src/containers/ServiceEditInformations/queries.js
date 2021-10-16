@@ -19,6 +19,8 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
+      suspend_activity
+      suspend_activity_reason
       service_antennes_aggregate {
         aggregate {
           count

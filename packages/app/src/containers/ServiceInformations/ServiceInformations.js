@@ -21,7 +21,6 @@ function ServiceInformations() {
     return null;
   }
 
-  // first of the array because it should be only one
   const [service] = data.services;
   const {
     adresse,
@@ -118,9 +117,24 @@ function ServiceInformations() {
         </Box>
         <Box mb={2}>
           <Heading size={5}>Votre activité</Heading>
+          {service.suspend_activity && (
+            <Flex my={1}>
+              <Text sx={subtitle}>
+                {"Ne souhaite pas de nouvelles mesures pour le moment"}
+              </Text>
+              <Text sx={content}>{service.suspend_activity_reason}</Text>
+            </Flex>
+          )}
           <Flex my={1}>
-            <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
+            <Text sx={subtitle}>
+              {"Nombre de mesures souhaité" +
+                (service.suspend_activity ? " (suspendu)" : "")}
+            </Text>
             <Text sx={content}>{dispo_max}</Text>
+          </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Nombre de mesures en cours"}</Text>
+            <Text sx={content}>{service.mesures_in_progress}</Text>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>

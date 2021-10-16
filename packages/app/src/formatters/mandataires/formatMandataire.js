@@ -22,7 +22,7 @@ function isCriticalDate(date) {
   return differenceInMonths(new Date(), new Date(date)) >= 1;
 }
 
-export default function formatMandataire(
+export default function formatMandataire({
   remaining_capacity,
   discriminator,
   mesures_max,
@@ -32,8 +32,10 @@ export default function formatMandataire(
   mesures_awaiting,
   gestionnaire_tis,
   id,
-  mesures_last_update
-) {
+  mesures_last_update,
+  suspend_activity,
+  suspend_activity_reason,
+}) {
   let currentDiscriminator = {};
   const common = {
     currentAvailability: remaining_capacity ? remaining_capacity : 0,
@@ -70,6 +72,8 @@ export default function formatMandataire(
       serviceId: service.id,
       telephone: service.telephone ? service.telephone : "",
       ville: service.ville ? capitalize(service.ville) : "",
+      suspendActivity: service.suspend_activity || false,
+      suspendActivityReason: service.suspend_activity_reason || false,
     };
   } else {
     currentDiscriminator = {
@@ -103,6 +107,8 @@ export default function formatMandataire(
           : "",
       telephone: mandataire.telephone,
       ville: mandataire.ville ? capitalize(mandataire.ville) : "",
+      suspendActivity: mandataire.suspend_activity || false,
+      suspendActivityReason: mandataire.suspend_activity_reason || false,
     };
   }
   return {

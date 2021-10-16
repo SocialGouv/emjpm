@@ -62,11 +62,16 @@ export default function MandataireListItem(props) {
     mesures_last_update,
   } = gestionnaire;
 
+  const isService = type === "service";
+
+  const suspendActivity = isService
+    ? service.suspend_activity
+    : mandataire.suspend_activity;
+
   const user = useUser();
 
   const currentAvailability = gestionnaire.remaining_capacity || 0;
   const dispoMax = gestionnaire.mesures_max || 0;
-  const isService = type === "service";
   const email = isService ? service.email : mandataire.user.email;
   const genre = isService ? service.genre : mandataire.genre;
   const telephone =
@@ -160,32 +165,39 @@ export default function MandataireListItem(props) {
                   : "Disponibilité"}
               </Text>
               <div style={{ display: "inline" }}>
-                {hasAntennes && (
+                {suspendActivity && (
+                  <Text sx={dispoDescriptionStyle(false)}>{"Suspendu"}</Text>
+                )}
+                {!suspendActivity && (
                   <>
+                    {hasAntennes && (
+                      <>
+                        <Text
+                          sx={dispoDescriptionStyle(
+                            dispoInSelectedDepartement > 0
+                          )}
+                          style={{ display: "inline" }}
+                        >
+                          {dispoInSelectedDepartementLabel}
+                        </Text>
+                        {" / "}
+                      </>
+                    )}
                     <Text
-                      sx={dispoDescriptionStyle(
-                        dispoInSelectedDepartementLabel > 0
-                      )}
+                      sx={dispoDescriptionStyle(currentAvailability > 0)}
                       style={{ display: "inline" }}
                     >
-                      {dispoInSelectedDepartementLabel}
-                    </Text>
-                    {" / "}
+                      {currentAvailability}
+                    </Text>{" "}
+                    {dispoInSelectedDepartement > currentAvailability && (
+                      <div
+                        style={{ display: "inline" }}
+                        data-tip={dispoDepartementInfoTip}
+                      >
+                        <InfoCircle color="#818181" size={11} />{" "}
+                      </div>
+                    )}
                   </>
-                )}
-                <Text
-                  sx={dispoDescriptionStyle(currentAvailability > 0)}
-                  style={{ display: "inline" }}
-                >
-                  {currentAvailability}
-                </Text>{" "}
-                {dispoInSelectedDepartementLabel > currentAvailability && (
-                  <div
-                    style={{ display: "inline" }}
-                    data-tip={dispoDepartementInfoTip}
-                  >
-                    <InfoCircle color="#818181" size={11} />{" "}
-                  </div>
                 )}
               </div>
             </Flex>
@@ -193,8 +205,12 @@ export default function MandataireListItem(props) {
 
           <Flex sx={columnStyle(false, false)}>
             <Text sx={labelStyle}>En cours / Souhaitées</Text>
-            <Text sx={dispoDescriptionStyle(currentAvailability > 0)}>
-              {mesuresInProgress} / {dispoMax}
+            <Text
+              sx={dispoDescriptionStyle(
+                !suspendActivity && currentAvailability > 0
+              )}
+            >
+              {mesuresInProgress} / {suspendActivity ? "Suspendu" : dispoMax}
             </Text>
           </Flex>
 

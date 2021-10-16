@@ -25,6 +25,8 @@ export const GESTIONNAIRES = gql`
         longitude
         adresse
         competences
+        suspend_activity
+        suspend_activity_reason
         commentaires {
           id
           comment
@@ -58,6 +60,8 @@ export const GESTIONNAIRES = gql`
         latitude
         longitude
         etablissement
+        suspend_activity
+        suspend_activity_reason
         service_members {
           id
           user {

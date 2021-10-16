@@ -5,6 +5,8 @@ export const EDIT_SERVICE = gql`
     $adresse: String
     $code_postal: String
     $dispo_max: Int
+    $suspend_activity: Boolean
+    $suspend_activity_reason: String
     $email: String
     $competences: String
     $nom: String
@@ -32,6 +34,8 @@ export const EDIT_SERVICE = gql`
       _set: {
         adresse: $adresse
         dispo_max: $dispo_max
+        suspend_activity: $suspend_activity
+        suspend_activity_reason: $suspend_activity_reason
         email: $email
         nom: $nom
         prenom: $prenom
@@ -53,6 +57,7 @@ export const EDIT_SERVICE = gql`
         competences
         created_at
         dispo_max
+        suspend_activity
         etablissement
         latitude
         longitude

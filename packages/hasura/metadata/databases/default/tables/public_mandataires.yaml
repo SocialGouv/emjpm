@@ -201,7 +201,10 @@ select_permissions:
     - longitude
     - mesures_en_attente
     - mesures_en_cours
+    - mesures_last_update
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - sync_ocmi_enable
     - telephone
     - telephone_portable
@@ -226,7 +229,10 @@ select_permissions:
     - longitude
     - mesures_en_attente
     - mesures_en_cours
+    - mesures_last_update
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - sync_ocmi_enable
     - telephone
     - telephone_portable
@@ -247,12 +253,14 @@ select_permissions:
     - email_send
     - genre
     - id
-    - mesures_last_update
     - latitude
     - longitude
     - mesures_en_attente
     - mesures_en_cours
+    - mesures_last_update
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - telephone_portable
     - user_id
@@ -277,6 +285,8 @@ update_permissions:
     - mesures_en_attente
     - mesures_en_cours
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - sync_ocmi_enable
     - telephone
     - telephone_portable
@@ -291,6 +301,7 @@ update_permissions:
     columns:
     - adresse
     - code_postal
+    - competences
     - created_at
     - departement_code
     - dispo_max
@@ -302,11 +313,12 @@ update_permissions:
     - mesures_en_attente
     - mesures_en_cours
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - telephone_portable
     - user_id
     - ville
-    - competences
     filter:
       user_id:
         _eq: X-Hasura-User-Id

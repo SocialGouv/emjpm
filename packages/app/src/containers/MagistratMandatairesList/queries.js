@@ -188,6 +188,7 @@ export const GET_MANDATAIRES = gql`
           }
           genre
           id
+          suspend_activity
         }
         gestionnaire_tis {
           tis {
@@ -205,6 +206,7 @@ export const GET_MANDATAIRES = gql`
           telephone
           email
           etablissement
+          suspend_activity
           service_members {
             id
             user {
@@ -360,6 +362,7 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           telephone
           ville
           adresse
+          suspend_activity
           commentaires {
             id
             comment
@@ -392,6 +395,7 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           telephone
           email
           etablissement
+          suspend_activity
           service_members {
             id
             user {

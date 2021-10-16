@@ -51,6 +51,8 @@ export const GET_SERVICE_USERS = gql`
           etablissement
           longitude
           latitude
+          suspend_activity
+          suspend_activity_reason
           departements {
             id
           }
@@ -187,6 +189,8 @@ export const MANDATAIRE_USERS = gql`
       mandataire {
         id
         dispo_max
+        suspend_activity
+        suspend_activity_reason
         mesures_en_cours
         mesures_en_attente
         longitude

@@ -79,6 +79,8 @@ const MandataireEditInformations = ({
           competences: values.competences,
           departement_code: departement.id,
           dispo_max: parseInt(values.dispo_max),
+          suspend_activity: values.suspendActivity,
+          suspend_activity_reason: values.suspendActivityReason,
           email: values.email,
           genre: values.genre,
           id: user.id,

@@ -68,9 +68,24 @@ function MandataireInformations() {
           <Heading size={5} mt={2} mb="2">
             Votre activité
           </Heading>
+          {mandataire.suspend_activity && (
+            <Flex my={1}>
+              <Text sx={subtitle}>
+                {"Ne souhaite pas de nouvelles mesures pour le moment"}
+              </Text>
+              <Text sx={content}>{mandataire.suspend_activity_reason}</Text>
+            </Flex>
+          )}
           <Flex my={1}>
-            <Text sx={subtitle}>{"Nombre de mesures souhaitées"}</Text>
-            <Text sx={content}>{label(mandataire.dispo_max)}</Text>
+            <Text sx={subtitle}>
+              {"Nombre de mesures souhaitées" +
+                (mandataire.suspend_activity ? " (suspendu)" : "")}
+            </Text>
+            <Text sx={content}>{mandataire.dispo_max}</Text>
+          </Flex>
+          <Flex my={1}>
+            <Text sx={subtitle}>{"Nombre de mesures en cours"}</Text>
+            <Text sx={content}>{mandataire.mesures_en_cours}</Text>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>

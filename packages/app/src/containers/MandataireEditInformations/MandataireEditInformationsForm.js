@@ -11,9 +11,8 @@ import {
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { Link } from "~/components/Link";
-import { GENDER_OPTIONS } from "~/constants/user";
-import { mandataireEditSchema } from "~/validation-schemas";
 import {
+  CheckBox,
   Button,
   Field,
   Heading,
@@ -21,6 +20,8 @@ import {
   Select,
   Textarea,
 } from "~/components";
+import { GENDER_OPTIONS } from "~/constants/user";
+import { mandataireEditSchema } from "~/validation-schemas";
 import { findOptions } from "~/utils/form";
 
 function buildTiOptions(lb_departements, lb_user_etablissements) {
@@ -62,6 +63,8 @@ function MandataireEditInformationsForm(props) {
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
+      suspendActivity: mandataire.suspend_activity,
+      suspendActivityReason: mandataire.suspend_activity_reason,
     },
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
@@ -201,12 +204,45 @@ function MandataireEditInformationsForm(props) {
             </Text>
           </FormGrayBox>
           <FormInputBox>
+            <Box mb={2}>
+              <CheckBox
+                isChecked={formik.values.suspendActivity}
+                onChange={() => {
+                  formik.setFieldValue(
+                    "suspendActivity",
+                    !formik.values.suspendActivity
+                  );
+                }}
+                label="Je ne souhaite plus recevoir de nouvelles mesures pour le moment"
+              />
+            </Box>
+            {formik.values.suspendActivity && (
+              <FormGroupInput
+                placeholder={"Motif de l'absence"}
+                id="suspendActivityReason"
+                formik={formik}
+                validationSchema={mandataireEditSchema}
+              />
+            )}
             <FormGroupInput
-              placeholder="Nombre de mesures souhaitées"
+              placeholder={
+                "Nombre de mesures souhaitées" +
+                (formik.values.suspendActivity ? " (suspendu)" : "")
+              }
               id="dispo_max"
               formik={formik}
+              readOnly={formik.values.suspendActivity}
               validationSchema={mandataireEditSchema}
             />
+            {formik.values.suspendActivity && (
+              <FormGroupInput
+                placeholder="Nombre de mesures en cours"
+                id="currentMesures"
+                formik={formik}
+                readOnly
+                value={mandataire.mesures_en_cours}
+              />
+            )}
             <Box>
               <Textarea
                 value={formik.values.competences}

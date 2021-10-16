@@ -43,6 +43,8 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
         code_postal: values.geocode.postcode,
         competences: values.competences,
         dispo_max: values.dispo_max,
+        suspend_activity: values.suspendActivity,
+        suspend_activity_reason: values.suspendActivityReason,
         email: values.email,
         etablissement: values.etablissement,
         latitude: values.geocode.latitude,

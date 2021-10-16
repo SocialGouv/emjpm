@@ -200,6 +200,7 @@ select_permissions:
     - longitude
     - mesures_awaiting
     - mesures_in_progress
+    - mesures_last_update
     - nom
     - org_adresse
     - org_code_postal
@@ -208,6 +209,8 @@ select_permissions:
     - org_ville
     - prenom
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - ville
     filter:
@@ -236,6 +239,8 @@ select_permissions:
     - org_ville
     - prenom
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - ville
     filter: {}
@@ -287,6 +292,8 @@ update_permissions:
     - mesures_in_progress
     - nom
     - prenom
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - ville
     filter:

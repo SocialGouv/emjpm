@@ -11,7 +11,12 @@ module.exports = async function availableMesureNbGlobal({
     } = await knex.raw(
       `
       SELECT
-        sum(v.mesures_max) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
+        sum(
+          CASE WHEN v.suspend_activity IS NOT TRUE
+              THEN v.mesures_max
+              ELSE v.mesures_in_progress + v.mesures_awaiting
+          END
+        ) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
       FROM
         view_mesure_gestionnaire_departement v
       WHERE
@@ -27,7 +32,12 @@ module.exports = async function availableMesureNbGlobal({
     } = await knex.raw(
       `
       SELECT
-        sum(v.mesures_max) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
+        sum(
+          CASE WHEN v.suspend_activity IS NOT TRUE
+              THEN v.mesures_max
+              ELSE v.mesures_in_progress + v.mesures_awaiting
+          END
+        ) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
       FROM
         view_mesure_gestionnaire_departement v
         JOIN departements d ON (((v.departement_code) :: text = (d.id) :: text))
@@ -43,7 +53,12 @@ module.exports = async function availableMesureNbGlobal({
       rows: [{ count }],
     } = await knex.raw(`
       SELECT
-        sum(v.mesures_max) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
+        sum(
+          CASE WHEN v.suspend_activity IS NOT TRUE
+              THEN v.mesures_max
+              ELSE v.mesures_in_progress + v.mesures_awaiting
+          END
+        ) - sum(v.mesures_in_progress) - sum(v.mesures_awaiting) as count
       FROM
         view_mesure_gestionnaire v
       WHERE

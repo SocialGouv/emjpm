@@ -26,6 +26,8 @@ export const GET_SERVICES = gql`
       org_adresse
       org_code_postal
       org_ville
+      suspend_activity
+      suspend_activity_reason
       service_departements {
         departement_code
       }

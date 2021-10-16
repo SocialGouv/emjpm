@@ -1,6 +1,6 @@
 function InputWrapperStyle(props) {
   return {
-    bg: "cardPrimary",
+    bg: props.readOnly ? "#f8fafc" : "transparent",
     border: "1px solid",
     borderColor: () => {
       if (props.isValid) return "success";
@@ -21,7 +21,7 @@ function InputWrapperStyle(props) {
 
 function InputStyle(props) {
   return {
-    bg: props.readOnly ? "rgba(255,255,255,0.5)" : "transparent",
+    bg: "transparent",
     border: "0",
     boxShadow: "none",
     color: "text",

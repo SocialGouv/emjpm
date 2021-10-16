@@ -57,18 +57,22 @@ export function MagistratMandataire(props) {
     longitude,
     ville,
     id,
+    suspendActivity,
+    suspendActivityReason,
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
-
   return (
     <Box {...props} width="100%" mb={6}>
       <Flex alignItems="center" justifyContent="space-between">
         {serviceId && <Heading size={2}>{etablissement}</Heading>}
         {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-        <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
-          <Button>Réserver une mesure</Button>
+        <Link
+          disabled={!suspendActivity}
+          to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
+        >
+          <Button disabled={suspendActivity}>Réserver une mesure</Button>
         </Link>
       </Flex>
 
@@ -140,7 +144,13 @@ export function MagistratMandataire(props) {
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
               <Text sx={MagistratContentMandataireStyle}>
-                {currentAvailability}
+                {suspendActivity ? "Activité Suspendue" : currentAvailability}
+                {suspendActivity && (
+                  <>
+                    <br />
+                    {"Motif: " + suspendActivityReason}
+                  </>
+                )}
               </Text>
             </Box>
             <Box>
@@ -148,7 +158,8 @@ export function MagistratMandataire(props) {
                 En cours / souhaitée
               </Text>
               <Text sx={MagistratContentMandataireStyle}>
-                {mesuresInProgress} / {dispoMax}
+                {mesuresInProgress} /{" "}
+                {suspendActivity ? "Activité Suspendue" : dispoMax}
               </Text>
             </Box>
             <Box>
