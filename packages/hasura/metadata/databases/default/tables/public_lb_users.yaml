@@ -169,6 +169,15 @@ update_permissions:
     - type
     filter: {}
   role: direction
+- permission:
+    check: null
+    columns:
+    - siret
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: individuel
 event_triggers:
 - definition:
     delete:

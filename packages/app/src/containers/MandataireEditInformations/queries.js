@@ -15,7 +15,6 @@ export const MANDATAIRE = gql`
         longitude
         dispo_max
         genre
-        siret
         telephone
         telephone_portable
         ville
@@ -30,6 +29,7 @@ export const MANDATAIRE = gql`
               etablissement
             }
           }
+          siret
           lb_user_etablissements {
             id
             etablissement {

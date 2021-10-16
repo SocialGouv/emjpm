@@ -1,5 +1,4 @@
-import { useMemo, useCallback } from "react";
-import { useHistory } from "react-router-dom";
+import { useMemo } from "react";
 import { useFormik, FormikProvider } from "formik";
 import { uniq } from "lodash";
 import { Box, Flex, Text } from "rebass";
@@ -41,14 +40,7 @@ function buildTiOptions(lb_departements, lb_user_etablissements) {
 }
 
 function MandataireEditInformationsForm(props) {
-  const {
-    cancelLink,
-    mandataire,
-    handleSubmit,
-    user,
-    isAdmin = false,
-    errorMessage,
-  } = props;
+  const { cancelLink, mandataire, handleSubmit, user, errorMessage } = props;
 
   const { lb_user = {}, mandataire_tis = [] } = mandataire;
   const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
@@ -66,7 +58,7 @@ function MandataireEditInformationsForm(props) {
       geocode: geocodeInitialValue(mandataire),
       nom: user.nom || "",
       prenom: user.prenom || "",
-      siret: mandataire.siret || "",
+      siret: lb_user.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
@@ -74,12 +66,6 @@ function MandataireEditInformationsForm(props) {
     onSubmit: handleSubmit,
     validationSchema: mandataireEditSchema,
   });
-
-  const history = useHistory();
-  const saveAndQuit = useCallback(async () => {
-    formik.submitForm();
-    history.push(cancelLink);
-  }, [formik, history, cancelLink]);
 
   return (
     <FormikProvider value={formik}>
@@ -239,28 +225,14 @@ function MandataireEditInformationsForm(props) {
                 />
               </div>
             </Box>
+            <FormGroupInput
+              placeholder="SIRET"
+              id="siret"
+              formik={formik}
+              validationSchema={mandataireEditSchema}
+            />
           </FormInputBox>
         </Flex>
-        {isAdmin && (
-          <Flex>
-            <FormGrayBox>
-              <Heading size={4} mb={1}>
-                {"Administrateur"}
-              </Heading>
-              <Text lineHeight="1.5" color="textSecondary">
-                {"Information uniquement accessible par l'administrateur"}
-              </Text>
-            </FormGrayBox>
-            <FormInputBox>
-              <FormGroupInput
-                placeholder="SIRET"
-                id="siret"
-                formik={formik}
-                validationSchema={mandataireEditSchema}
-              />
-            </FormInputBox>
-          </Flex>
-        )}
         {errorMessage && <InlineError message={`${errorMessage}`} />}
         <Flex p={2} alignItems="center" justifyContent="flex-end">
           <Box mr="2">
@@ -275,15 +247,6 @@ function MandataireEditInformationsForm(props) {
               isLoading={formik.isSubmitting}
             >
               Enregistrer
-            </Button>
-          </Box>
-          <Box>
-            <Button
-              disabled={formik.isSubmitting}
-              isLoading={formik.isSubmitting}
-              onClick={saveAndQuit}
-            >
-              Terminer
             </Button>
           </Box>
         </Flex>

@@ -197,6 +197,7 @@ select_permissions:
     - genre
     - id
     - latitude
+    - lb_user_id
     - longitude
     - mesures_en_attente
     - mesures_en_cours
