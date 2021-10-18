@@ -12,6 +12,7 @@ const mesureEditSchema = ({ apolloClient }) =>
   yup.object().shape({
     annee_naissance: yup
       .number()
+      .nullable()
       .required()
       .min(1900, "l'année choisi doit être au minimum 1900")
       .max(currentYear, "l'année choisi doit être au maximum " + currentYear),

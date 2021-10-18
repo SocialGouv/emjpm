@@ -135,7 +135,9 @@ export default function MesureListItem(props) {
               </Box>
               <Box>
                 <Text sx={labelStyle}>Age</Text>
-                <Text sx={descriptionStyle}>{currentYear - age || "nc"}</Text>
+                <Text sx={descriptionStyle}>
+                  {age ? currentYear - age : "NC"}
+                </Text>
               </Box>
             </Flex>
 

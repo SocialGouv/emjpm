@@ -50,7 +50,10 @@ export default function InputYear(props) {
       <DatePicker
         showYearPicker
         onChange={(date) => {
-          return onChangeProp(format(date, "yyyy"));
+          if (date) {
+            date = format(date, "yyyy");
+          }
+          return onChangeProp(date);
         }}
         selected={selected}
         className={classNames("yearpicker", className)}
