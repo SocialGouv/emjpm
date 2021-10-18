@@ -17,7 +17,6 @@ export const ACCEPT_MESURE = gql`
     $pays: String!
     $mandataireId: Int
     $serviceId: Int
-    $annee_naissance: String
     $cabinet: String
     $judgment_date: date
     $is_urgent: Boolean
@@ -55,7 +54,6 @@ export const ACCEPT_MESURE = gql`
         latitude: $latitude
         longitude: $longitude
         pays: $pays
-        annee_naissance: $annee_naissance
         cabinet: $cabinet
         judgment_date: $judgment_date
         is_urgent: $is_urgent

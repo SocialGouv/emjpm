@@ -75,7 +75,6 @@ export function MesureAccept(props) {
       mesure;
 
     const {
-      annee_naissance,
       cabinet,
       judgment_date,
       is_urgent,
@@ -112,7 +111,6 @@ export function MesureAccept(props) {
         pays: values.pays,
         mandataireId,
         serviceId,
-        annee_naissance,
         cabinet,
         judgment_date,
         is_urgent,
