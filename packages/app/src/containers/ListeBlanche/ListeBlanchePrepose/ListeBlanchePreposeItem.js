@@ -11,7 +11,6 @@ export function ListeBlanchePreposeItem(props) {
   const { lb_user_etablissements: etablissements = [] } = lb_user;
 
   const to = getHref && getHref(item, props);
-
   return (
     <Card key={lb_user.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
@@ -20,10 +19,10 @@ export function ListeBlanchePreposeItem(props) {
             <Text sx={labelStyle}>{"Mandataire préposé d'établissement"}</Text>
             <Flex>
               <Text sx={descriptionStyle}>
-                {item.nom ? item.nom.toUpperCase() : ""}
+                {lb_user.nom ? lb_user.nom.toUpperCase() : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle}>
-                {item.prenom}
+                {lb_user.prenom}
               </Text>
             </Flex>
           </Flex>
