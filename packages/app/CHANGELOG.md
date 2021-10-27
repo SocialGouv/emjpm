@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.137.1](https://github.com/SocialGouv/emjpm/compare/v25.137.0...v25.137.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **rgaa:** aria-describedby fix [#2640](https://github.com/SocialGouv/emjpm/issues/2640) ([698fafd](https://github.com/SocialGouv/emjpm/commit/698fafde26b650e2ae5e07f03d0372784017dea4))
+
+
+
+
+
 # [25.137.0](https://github.com/SocialGouv/emjpm/compare/v25.136.1...v25.137.0) (2021-10-11)
 
 

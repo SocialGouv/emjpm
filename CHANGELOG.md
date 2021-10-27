@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.137.1](https://github.com/SocialGouv/emjpm/compare/v25.137.0...v25.137.1) (2021-10-27)
+
+
+### Bug Fixes
+
+* **rgaa:** aria-describedby fix [#2640](https://github.com/SocialGouv/emjpm/issues/2640) ([698fafd](https://github.com/SocialGouv/emjpm/commit/698fafde26b650e2ae5e07f03d0372784017dea4))
+
+
+### Features
+
+* **dev:** ci sync with current branch ([935ad9a](https://github.com/SocialGouv/emjpm/commit/935ad9a80af4e6481edc433dba11b7f4e2d37c77))
+* **ti:** upgrade ti list ([2427795](https://github.com/SocialGouv/emjpm/commit/2427795fd2e208f78f565ba3c324b2867f059649))
+* **tls:** up certs refs ([7b62c29](https://github.com/SocialGouv/emjpm/commit/7b62c2971c9ff68843efede1b77843d76392e471))
+
+
+
+
+
 # [25.137.0](https://github.com/SocialGouv/emjpm/compare/v25.136.1...v25.137.0) (2021-10-11)
 
 
