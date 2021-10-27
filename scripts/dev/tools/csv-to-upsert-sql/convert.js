@@ -11,6 +11,9 @@ const wrapValue = (value) => {
   if (typeof value === "number") {
     return value;
   }
+  if (typeof value === "boolean") {
+    return value ? "TRUE" : "FALSE";
+  }
   if (value == null || value === undefined) {
     return "NULL";
   }
@@ -84,6 +87,7 @@ fs.createReadStream(file)
       code_postal,
       departement_code,
       etablissement,
+      immutable: true,
       latitude,
       longitude,
       siret,
