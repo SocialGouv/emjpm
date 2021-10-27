@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 
-exec $(dirname $0)/sync-branch-with-master prod
+exec $(dirname $0)/sync-branch prod
