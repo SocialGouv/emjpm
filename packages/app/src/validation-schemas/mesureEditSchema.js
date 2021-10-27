@@ -49,6 +49,7 @@ const mesureEditSchema = ({ apolloClient }) =>
           const tiId = parent.ti_id;
           if (
             value === parent.initialNumeroRG &&
+            tiId &&
             tiId.toString() === parent.initialTiId.toString()
           ) {
             return true;
