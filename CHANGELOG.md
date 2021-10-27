@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.137.2](https://github.com/SocialGouv/emjpm/compare/v25.137.1...v25.137.2) (2021-10-27)
+
+
+### Bug Fixes
+
+* **dev:** script path ([dbcbb53](https://github.com/SocialGouv/emjpm/commit/dbcbb53d871916cf460293d808a924a996915264))
+* **ti:** upgrade add immutable ([92afc48](https://github.com/SocialGouv/emjpm/commit/92afc48b34b6292831c37afec05d0dd03011b65f))
+
+
+
+
+
 ## [25.137.1](https://github.com/SocialGouv/emjpm/compare/v25.137.0...v25.137.1) (2021-10-27)
 
 
