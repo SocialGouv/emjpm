@@ -16,7 +16,10 @@ const mandataireEditSchema = yup.object().shape({
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
   tis: yup.mixed().required(),
-  siret: yup.string().required(),
+  siret: yup
+    .string()
+    .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
+    .required(),
 });
 
 export { mandataireEditSchema };
