@@ -7,7 +7,7 @@ export const PANEL_TYPE = {
 };
 
 export const MESURE_TYPE = {
-  CLOSED: "Mesure éteinte",
+  CLOSED: "Mesure clôturée",
   IN_PROGRESS: "Mesure en cours",
   WAITING: "Mesure en attente",
 };

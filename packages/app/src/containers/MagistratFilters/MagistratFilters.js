@@ -22,7 +22,7 @@ const etatMesuresOptions = [
     value: "en_cours",
   },
   {
-    label: "Éteintes",
+    label: "Clôturées",
     value: "eteinte",
   },
 ];

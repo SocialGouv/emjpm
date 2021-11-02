@@ -20,7 +20,7 @@ export function MesureDeleteForm(props) {
             </Text>
             <Text mb="2" lineHeight="1.5">
               {
-                'NB : les mesures éteintes ne sont plus comptabilisees dans vos "mesures en cours", elles n\'apparaissent donc plus aupres des Magistrats.'
+                'NB : les mesures clôturées ne sont plus comptabilisées dans vos "mesures en cours", elles n\'apparaissent donc plus aupres des Magistrats.'
               }
             </Text>
             <Text lineHeight="1.5">

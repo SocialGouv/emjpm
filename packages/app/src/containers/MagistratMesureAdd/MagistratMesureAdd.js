@@ -151,7 +151,7 @@ function MagistratMesureAdd(props) {
         return;
       } else if (status === "eteinte") {
         toast.info(
-          "Il y a une mesure éteinte portant le même Numéro RG et rattaché à votre tribunal pour ce mandataire, elle sera réouverte"
+          "Il y a une mesure clôturée portant le même Numéro RG et rattaché à votre tribunal pour ce mandataire, elle sera réouverte"
         );
       } else {
         throw new Error("unexpected status");

@@ -60,7 +60,7 @@ const MESURE_PROTECTION = {
   STATUS: buildKeys({
     en_attente: "Mesure en attente",
     en_cours: "Mesure en cours",
-    eteinte: "Mesure éteinte",
+    eteinte: "Mesure clôturée",
   }),
   TYPE_ETABLISSEMENT: buildKeys({
     autre_etablissement: "Autre établissement",

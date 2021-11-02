@@ -20,7 +20,7 @@ export default function DirectionStatsKPI() {
   useQueryReady(loading, error);
 
   let titleOpenedMesures = "Mesures en cours";
-  let titleClosedMesures = "Mesures éteintes";
+  let titleClosedMesures = "Mesures clôturées";
   if (filters.departement) {
     titleOpenedMesures += " dans le département";
     titleClosedMesures += " dans le département";
