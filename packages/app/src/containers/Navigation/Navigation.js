@@ -26,6 +26,9 @@ function MandataireBadge({ mandataire }) {
 
 function Navigation({ links }) {
   const user = useUser();
+  const suspendActivity = isService(user)
+    ? user.service.suspend_activity
+    : user.mandataire.suspend_activity;
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
@@ -38,6 +41,20 @@ function Navigation({ links }) {
         ))}
         {isMandataire(user) && <MandataireBadge mandataire={user.mandataire} />}
         {isService(user) && <ServiceBadge service={user.service} />}
+        {suspendActivity && (
+          <Box
+            sx={{
+              bg: "error",
+              borderRadius: 9999,
+              color: "white",
+              mb: 2,
+              px: 1,
+              ml: 3,
+            }}
+          >
+            Activitée suspendue
+          </Box>
+        )}
       </Flex>
     </Box>
   );
