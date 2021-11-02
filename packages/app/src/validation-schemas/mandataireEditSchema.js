@@ -16,6 +16,7 @@ const mandataireEditSchema = yup.object().shape({
   telephone: yup.string().required(),
   telephone_portable: yup.string(),
   tis: yup.mixed().required(),
+  siret: yup.string().required(),
 });
 
 export { mandataireEditSchema };
