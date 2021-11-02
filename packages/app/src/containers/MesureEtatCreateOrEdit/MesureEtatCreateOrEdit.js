@@ -66,6 +66,7 @@ export const MesureEtatCreateOrEdit = ({
         awaitRefetchQueries: true,
         refetchQueries: [
           "MESURES_QUERY",
+          "CURRENT_USER_QUERY",
           {
             query: MESURE_CONTEXT_QUERY,
             variables: {
@@ -84,6 +85,7 @@ export const MesureEtatCreateOrEdit = ({
     deleteMesureEtat({
       awaitRefetchQueries: true,
       refetchQueries: [
+        "CURRENT_USER_QUERY",
         {
           query: MESURE_CONTEXT_QUERY,
           variables: {
