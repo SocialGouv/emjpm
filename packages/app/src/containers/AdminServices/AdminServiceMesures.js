@@ -100,7 +100,7 @@ function AdminServiceMesures() {
         buttonEnable={
           filteredMesures.length !== 0 && Object.keys(selectedRows).length > 0
         }
-        title={`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente • ${extinctionMesuresCount} éteintes)`}
+        title={`Mesures (${service.mesures_in_progress} en cours • ${service.mesures_awaiting} en attente • ${extinctionMesuresCount} cloturées)`}
       />
       <Flex flexDirection="row">
         <Box width="200px">

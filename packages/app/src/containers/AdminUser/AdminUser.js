@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
 
-import { Box, Card } from "rebass";
+import { Box } from "rebass";
 import { useParams } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -9,12 +9,10 @@ import { AccessToken } from "~/containers/AccessToken";
 import { AdminUserActivation } from "~/containers/AdminUserActivation";
 import { AdminUserResetPassword } from "~/containers/AdminUserResetPassword";
 import { AdminDirectionType } from "~/containers/AdminUserDirection";
-import { AdminMandataireMesures } from "~/containers/AdminUserMandataire";
 import { AdminUserService } from "~/containers/AdminUserService";
 import { DirectionEditInformations } from "~/containers/DirectionEditInformations";
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
-import { MesureImportPanel } from "~/containers/MesureImport";
 
 import { USER } from "./queries";
 
@@ -52,16 +50,6 @@ function AdminUser() {
               isAdmin
               mt="3"
             />
-            {active && (
-              <>
-                <Card my={1}>
-                  <AdminMandataireMesures userId={userId} />
-                </Card>
-                <Card my={1}>
-                  <MesureImportPanel mandataireUserId={userId} />
-                </Card>
-              </>
-            )}
           </Box>
         </>
       )}
