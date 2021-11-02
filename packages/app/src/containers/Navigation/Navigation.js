@@ -28,7 +28,9 @@ function Navigation({ links }) {
   const user = useUser();
   const suspendActivity = isService(user)
     ? user.service.suspend_activity
-    : user.mandataire.suspend_activity;
+    : isMandataire(user)
+    ? user.mandataire.suspend_activity
+    : false;
   return (
     <Box mt="2">
       <Flex alignItems="center" flexWrap="wrap">
