@@ -22,7 +22,6 @@ export const MESURES = gql`
       created_at
       date_nomination
       departement_code
-      etablissement_id
       date_fin_mesure
       is_urgent
       judgment_date
