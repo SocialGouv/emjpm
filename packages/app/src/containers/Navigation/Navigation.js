@@ -47,9 +47,9 @@ function Navigation({ links }) {
               bg: "error",
               borderRadius: 9999,
               color: "white",
+              ml: 3,
               mb: 2,
               px: 1,
-              ml: 3,
             }}
           >
             Activitée suspendue

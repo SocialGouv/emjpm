@@ -69,6 +69,7 @@
 - "!include public_view_department_availability.yaml"
 - "!include public_view_lb.yaml"
 - "!include public_view_lb_tis.yaml"
+- "!include public_view_mandataires_siret.yaml"
 - "!include public_view_mesure_gestionnaire.yaml"
 - "!include public_view_mesure_gestionnaire_departement.yaml"
 - "!include public_view_mesure_gestionnaire_tis.yaml"

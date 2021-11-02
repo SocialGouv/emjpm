@@ -3,6 +3,8 @@ import { useFormik, FormikProvider } from "formik";
 import { uniq } from "lodash";
 import { Box, Flex, Text } from "rebass";
 
+import { useApolloClient } from "@apollo/client";
+
 import {
   FormGrayBox,
   FormGroupInput,
@@ -50,6 +52,12 @@ function MandataireEditInformationsForm(props) {
     return buildTiOptions(lb_departements, lb_user_etablissements);
   }, [lb_departements, lb_user_etablissements]);
 
+  const apolloClient = useApolloClient();
+  const validationSchema = useMemo(
+    () => mandataireEditSchema({ apolloClient }),
+    [apolloClient]
+  );
+
   const formik = useFormik({
     initialValues: {
       competences: mandataire.competences || "",
@@ -65,9 +73,10 @@ function MandataireEditInformationsForm(props) {
       tis: mandataire_tis.map((mti) => mti.ti_id),
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
+      initialSiret: lb_user.siret || "",
     },
     onSubmit: handleSubmit,
-    validationSchema: mandataireEditSchema,
+    validationSchema,
   });
 
   return (
@@ -86,19 +95,19 @@ function MandataireEditInformationsForm(props) {
               placeholder="Genre"
               value={formik.values.genre}
               formik={formik}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
             <FormGroupInput
               placeholder="Prénom"
               id="prenom"
               formik={formik}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
             <FormGroupInput
               placeholder="Nom"
               id="nom"
               formik={formik}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
           </FormInputBox>
         </Flex>
@@ -113,7 +122,7 @@ function MandataireEditInformationsForm(props) {
               placeholder="Email"
               id="email"
               formik={formik}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>
@@ -121,7 +130,7 @@ function MandataireEditInformationsForm(props) {
                   placeholder="Téléphone"
                   id="telephone"
                   formik={formik}
-                  validationSchema={mandataireEditSchema}
+                  validationSchema={validationSchema}
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
@@ -129,7 +138,7 @@ function MandataireEditInformationsForm(props) {
                   placeholder="Téléphone portable"
                   id="telephone_portable"
                   formik={formik}
-                  validationSchema={mandataireEditSchema}
+                  validationSchema={validationSchema}
                 />
               </Box>
             </Flex>
@@ -221,7 +230,7 @@ function MandataireEditInformationsForm(props) {
                 placeholder={"Motif de l'absence"}
                 id="suspendActivityReason"
                 formik={formik}
-                validationSchema={mandataireEditSchema}
+                validationSchema={validationSchema}
               />
             )}
             <FormGroupInput
@@ -232,7 +241,7 @@ function MandataireEditInformationsForm(props) {
               id="dispo_max"
               formik={formik}
               readOnly={formik.values.suspendActivity}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
             {formik.values.suspendActivity && (
               <FormGroupInput
@@ -265,7 +274,7 @@ function MandataireEditInformationsForm(props) {
               placeholder="SIRET"
               id="siret"
               formik={formik}
-              validationSchema={mandataireEditSchema}
+              validationSchema={validationSchema}
             />
           </FormInputBox>
         </Flex>

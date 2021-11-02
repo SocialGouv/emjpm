@@ -1,5 +1,13 @@
 import gql from "graphql-tag";
 
+const CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE = gql`
+  query CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE($siret: String!) {
+    view_mandataires_siret(where: { siret: { _eq: $siret } }) {
+      siret
+    }
+  }
+`;
+
 const CHECK_DUPLICATE_MANDATAIRE_SIRET = gql`
   query CHECK_DUPLICATE_MANDATAIRE_SIRET($siret: String!) {
     mandataires(where: { lb_user: { siret: { _eq: $siret } } }) {
@@ -25,6 +33,20 @@ export async function checkDuplicateMandataireSIRET(client, siret) {
     },
   });
   return data.mandataires.length === 0;
+}
+
+export async function checkDuplicateMandataireSIRETFromMandataire(
+  client,
+  siret
+) {
+  const { data } = await client.query({
+    fetchPolicy: "network-only",
+    query: CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE,
+    variables: {
+      siret,
+    },
+  });
+  return data.view_mandataires_siret.length === 0;
 }
 
 export async function checkDuplicateServiceSIRET(client, siret) {
