@@ -144,7 +144,7 @@ export function MagistratMandataire(props) {
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
               <Text sx={MagistratContentMandataireStyle}>
-                {suspendActivity ? "Activité Suspendue" : currentAvailability}
+                {suspendActivity ? "Activité suspendue" : currentAvailability}
                 {suspendActivity && (
                   <>
                     <br />
@@ -159,7 +159,7 @@ export function MagistratMandataire(props) {
               </Text>
               <Text sx={MagistratContentMandataireStyle}>
                 {mesuresInProgress} /{" "}
-                {suspendActivity ? "Activité Suspendue" : dispoMax}
+                {suspendActivity ? "Activité suspendue" : dispoMax}
               </Text>
             </Box>
             <Box>
