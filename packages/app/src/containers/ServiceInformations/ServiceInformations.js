@@ -119,8 +119,8 @@ function ServiceInformations() {
           <Heading size={5}>Votre activité</Heading>
           {service.suspend_activity && (
             <Flex my={1}>
-              <Text sx={subtitle}>
-                {"Ne souhaite pas de nouvelles mesures pour le moment"}
+              <Text sx={{ ...subtitle, color: "#FF6966" }}>
+                {"Je ne souhaite pas de nouvelles mesures pour le moment"}
               </Text>
               <Text sx={content}>{service.suspend_activity_reason}</Text>
             </Flex>
