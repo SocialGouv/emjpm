@@ -6,6 +6,7 @@ import { isSupportedBrowser } from "~/utils/browser";
 
 const excludedBrowsers = [
   { name: "chrome", version: "44.0.2403" },
+  { name: "edge-chromium", version: "94.0" },
   { name: "firefox", version: "68.0" },
 ];
 const currentBrowser = detectBrowser();
@@ -25,7 +26,8 @@ export function ExcludeBrowserBanner() {
             {`Nous vous conseillons d'utiliser une version récente de Firefox (cliquer ici). `}
           </a>
           <br />
-          eMJPM est également compatible avec le navigateur Chrome.
+          eMJPM est également compatible avec les navigateurs Chrome et Edge
+          Chromium.
         </Text>
       </Card>
     );
