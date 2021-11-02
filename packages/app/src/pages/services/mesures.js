@@ -13,14 +13,12 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
+import { useState } from "react";
 
 export default function Mesures() {
   const { service_members } = useUser();
-  const [
-    {
-      service: { service_antennes, mesures_in_progress, dispo_max },
-    },
-  ] = service_members;
+  const [{ service }] = service_members;
+  const { service_antennes, mesures_in_progress, dispo_max } = service;
 
   const sansAntenneEncours = service_antennes.reduce(
     (acc, { mesures_in_progress }) => {
@@ -35,6 +33,10 @@ export default function Mesures() {
     dispo_max
   );
 
+  const [mesuresCount, setMesuresCount] = useState(null);
+  console.log(service);
+  const mesuresTotal = service.mesures_in_progress + service.mesures_awaiting;
+
   return (
     <FiltersContextProvider
       initialValues={{
@@ -45,7 +47,14 @@ export default function Mesures() {
       <LayoutServices>
         <BoxWrapper mt={2} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
-            <HeadingTitle>Toutes vos mesures</HeadingTitle>
+            <HeadingTitle>
+              Vos mesures{" "}
+              {mesuresCount !== null && (
+                <Text fontSize="1" display="inline">
+                  ({mesuresCount}/{mesuresTotal})
+                </Text>
+              )}
+            </HeadingTitle>
             <MesureListButtonBar />
           </Flex>
           <Flex mt={1} flexDirection="row" justifyContent="flex-start">
@@ -94,7 +103,7 @@ export default function Mesures() {
               mt: "1",
             }}
           >
-            <MesureList />
+            <MesureList setMesuresCount={setMesuresCount} />
           </Flex>
         </BoxWrapper>
       </LayoutServices>

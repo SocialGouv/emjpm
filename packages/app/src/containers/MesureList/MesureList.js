@@ -18,7 +18,7 @@ import { MesureListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
-function MesureList() {
+function MesureList(props) {
   const history = useHistory();
   const [currentOffset, setCurrentOffset] = useState(0);
   const {
@@ -89,6 +89,17 @@ function MesureList() {
   function selectMesure(props) {
     history.push(getHref(props));
   }
+
+  const { setMesuresCount } = props;
+  useEffect(() => {
+    if (!data) {
+      setMesuresCount(null);
+      return;
+    }
+    setMesuresCount(
+      data.awaiting_mesures.length + data.mesures_aggregate.aggregate.count
+    );
+  }, [data, setMesuresCount]);
 
   if (!useQueryReady(loading, error)) {
     return null;
