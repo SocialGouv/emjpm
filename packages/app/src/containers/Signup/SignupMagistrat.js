@@ -73,6 +73,7 @@ function SignupMagistratForm({ tiDatas }) {
               id="ti"
               placeholder="Tribunal d'instance"
               options={tiOptions}
+              enableFilterByLabel
               isClearable={true}
             />
 

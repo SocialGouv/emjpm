@@ -86,6 +86,7 @@ function MagistratEditInformationsForm(props) {
             id="ti"
             placeholder="Tribunal d'instance"
             options={tiOptions}
+            enableFilterByLabel
             isClearable={true}
             validationSchema={magistratEditSchema}
           />
