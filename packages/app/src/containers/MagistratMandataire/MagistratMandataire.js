@@ -140,7 +140,12 @@ export function MagistratMandataire(props) {
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text sx={{ ...MagistratContentMandataireStyle, color: "error" }}>
+              <Text
+                sx={{
+                  ...MagistratContentMandataireStyle,
+                  ...(suspendActivity ? { color: "error" } : {}),
+                }}
+              >
                 {suspendActivity ? "Activité suspendue" : currentAvailability}
                 {suspendActivity && (
                   <>
