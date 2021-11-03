@@ -68,11 +68,8 @@ export function MagistratMandataire(props) {
         {serviceId && <Heading size={2}>{etablissement}</Heading>}
         {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-        <Link
-          disabled={!suspendActivity}
-          to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
-        >
-          <Button disabled={suspendActivity}>Réserver une mesure</Button>
+        <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
+          <Button>Réserver une mesure</Button>
         </Link>
       </Flex>
 
@@ -143,7 +140,7 @@ export function MagistratMandataire(props) {
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text sx={MagistratContentMandataireStyle}>
+              <Text sx={{ ...MagistratContentMandataireStyle, color: "error" }}>
                 {suspendActivity ? "Activité suspendue" : currentAvailability}
                 {suspendActivity && (
                   <>
@@ -157,7 +154,7 @@ export function MagistratMandataire(props) {
               <Text sx={MagistratTitleMandataireStyle}>
                 En cours / souhaitée
               </Text>
-              <Text sx={MagistratContentMandataireStyle}>
+              <Text sx={{ ...MagistratContentMandataireStyle, color: "error" }}>
                 {mesuresInProgress} /{" "}
                 {suspendActivity ? "Activité suspendue" : dispoMax}
               </Text>
