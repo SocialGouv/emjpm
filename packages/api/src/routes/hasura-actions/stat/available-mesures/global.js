@@ -12,7 +12,10 @@ module.exports = async function availableMesureNbGlobal({
       `
       SELECT
         sum(
-          CASE WHEN v.suspend_activity IS NOT TRUE
+          CASE WHEN (
+            v.suspend_activity IS NOT TRUE
+            OR v.mesures_max::int - v.mesures_in_progress::int - v.mesures_awaiting::int < 0
+          )
               THEN v.mesures_max
               ELSE v.mesures_in_progress + v.mesures_awaiting
           END
@@ -33,7 +36,10 @@ module.exports = async function availableMesureNbGlobal({
       `
       SELECT
         sum(
-          CASE WHEN v.suspend_activity IS NOT TRUE
+          CASE WHEN (
+            v.suspend_activity IS NOT TRUE
+            OR v.mesures_max::int - v.mesures_in_progress::int - v.mesures_awaiting::int < 0
+          )
               THEN v.mesures_max
               ELSE v.mesures_in_progress + v.mesures_awaiting
           END
@@ -54,7 +60,10 @@ module.exports = async function availableMesureNbGlobal({
     } = await knex.raw(`
       SELECT
         sum(
-          CASE WHEN v.suspend_activity IS NOT TRUE
+          CASE WHEN (
+            v.suspend_activity IS NOT TRUE
+            OR v.mesures_max::int - v.mesures_in_progress::int - v.mesures_awaiting::int < 0
+          )
               THEN v.mesures_max
               ELSE v.mesures_in_progress + v.mesures_awaiting
           END
