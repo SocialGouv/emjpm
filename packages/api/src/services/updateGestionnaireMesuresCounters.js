@@ -68,17 +68,21 @@ async function recalculateServiceMesuresCount(serviceId, trx) {
     service_id: serviceId,
   });
 
-  for (const { id: antenneId } of antennes) {
+  for (const { id: antenneId, mesures_max: mesuresMax } of antennes) {
     const antenneStates = await Mesure.query(trx)
       .groupBy("status")
       .select("status")
       .count("id")
       .where({ antenne_id: antenneId });
+
+    const antenneMesuresAwaiting = getCount(antenneStates, "en_attente");
+    const antenneMesuresInProgress = getCount(antenneStates, "en_cours");
     await ServiceAntenne.query(trx)
       .findById(antenneId)
       .update({
-        mesures_awaiting: getCount(antenneStates, "en_attente"),
-        mesures_in_progress: getCount(antenneStates, "en_cours"),
+        dispo: mesuresMax - (antenneMesuresAwaiting + antenneMesuresInProgress),
+        mesures_awaiting: antenneMesuresAwaiting,
+        mesures_in_progress: antenneMesuresInProgress,
       });
   }
 
