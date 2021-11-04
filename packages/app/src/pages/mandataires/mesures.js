@@ -1,4 +1,4 @@
-import { Flex, Text } from "rebass";
+import { Flex } from "rebass";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutMandataire } from "~/containers/Layout";
@@ -31,11 +31,11 @@ function MesuresListView() {
           <Flex flexDirection="row" justifyContent="space-between">
             <HeadingTitle>
               Vos mesures{" "}
-              {mesuresCount !== null && (
+              {/*mesuresCount !== null && (
                 <Text fontSize="1" display="inline">
                   ({mesuresCount}/{mesuresTotal})
                 </Text>
-              )}
+              )*/}
             </HeadingTitle>
             <MesureListButtonBar />
           </Flex>

@@ -34,7 +34,6 @@ export default function Mesures() {
   );
 
   const [mesuresCount, setMesuresCount] = useState(null);
-  console.log(service);
   const mesuresTotal = service.mesures_in_progress + service.mesures_awaiting;
 
   return (
@@ -49,11 +48,11 @@ export default function Mesures() {
           <Flex flexDirection="row" justifyContent="space-between">
             <HeadingTitle>
               Vos mesures{" "}
-              {mesuresCount !== null && (
+              {/*mesuresCount !== null && (
                 <Text fontSize="1" display="inline">
                   ({mesuresCount}/{mesuresTotal})
                 </Text>
-              )}
+              )*/}
             </HeadingTitle>
             <MesureListButtonBar />
           </Flex>
