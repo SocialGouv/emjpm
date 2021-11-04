@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.139.1](https://github.com/SocialGouv/emjpm/compare/v25.139.0...v25.139.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* **clean:** unused var ([5b089e0](https://github.com/SocialGouv/emjpm/commit/5b089e0d86eea264c88ae150e6b4b1f3592e7d41))
+* **clean:** unused var ([cc62268](https://github.com/SocialGouv/emjpm/commit/cc6226826283b21006db333e7ff2522607bca345))
+* **delete-all:** fix import delete all for service ([4643e20](https://github.com/SocialGouv/emjpm/commit/4643e20fe6679dad40c108635efececff766f29d))
+* **siret:** validation schema bugfix ([bea12ca](https://github.com/SocialGouv/emjpm/commit/bea12cadee8d122feecc3721157cee082fbfc8c1))
+
+
+
+
+
 # [25.139.0](https://github.com/SocialGouv/emjpm/compare/v25.138.1...v25.139.0) (2021-11-04)
 
 
