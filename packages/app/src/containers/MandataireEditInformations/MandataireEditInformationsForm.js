@@ -54,9 +54,10 @@ function MandataireEditInformationsForm(props) {
 
   const apolloClient = useApolloClient();
 
+  const { type } = user;
   const validationSchema = useMemo(
-    () => mandataireEditSchema({ type: user.type, apolloClient }),
-    [apolloClient]
+    () => mandataireEditSchema({ type, apolloClient }),
+    [apolloClient, type]
   );
 
   const formik = useFormik({
