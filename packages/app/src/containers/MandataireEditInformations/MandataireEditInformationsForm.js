@@ -45,7 +45,7 @@ function buildTiOptions(lb_departements, lb_user_etablissements) {
 function MandataireEditInformationsForm(props) {
   const { cancelLink, mandataire, handleSubmit, user, errorMessage } = props;
 
-  const { lb_user = {}, mandataire_tis = [] } = mandataire;
+  const { lb_user, mandataire_tis = [] } = mandataire;
   const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
 
   const { tiOptions } = useMemo(() => {
@@ -68,13 +68,13 @@ function MandataireEditInformationsForm(props) {
       geocode: geocodeInitialValue(mandataire),
       nom: user.nom || "",
       prenom: user.prenom || "",
-      siret: lb_user.siret || "",
+      siret: lb_user?.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
-      initialSiret: lb_user.siret || "",
+      initialSiret: lb_user?.siret || "",
     },
     onSubmit: handleSubmit,
     validationSchema,
