@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.139.0](https://github.com/SocialGouv/emjpm/compare/v25.138.1...v25.139.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **lb_user:** null ([7f5a07a](https://github.com/SocialGouv/emjpm/commit/7f5a07ae9d27eb2d9e0d46fc523dd5b074e8f3d8))
+* **linter:** deps ([466aa67](https://github.com/SocialGouv/emjpm/commit/466aa6770dffc013fecf8fe67f9accfa196c0b9e))
+* **prepose:** allow empty siret ([bf57436](https://github.com/SocialGouv/emjpm/commit/bf5743628b5d825c0b57071f001363d7b6e68026))
+* **wording:** prefix by to with 0 ([01d8718](https://github.com/SocialGouv/emjpm/commit/01d87189402bcdaa7da658de23f161c4fed33e48))
+
+
+### Features
+
+* **count-mesures:** display filtered resultats ([76781d2](https://github.com/SocialGouv/emjpm/commit/76781d2a371958faccf26b986888b9f97ef1a8d8))
+
+
+
+
+
 ## [25.138.1](https://github.com/SocialGouv/emjpm/compare/v25.138.0...v25.138.1) (2021-11-04)
 
 
