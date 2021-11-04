@@ -3,7 +3,7 @@ import { MESURE_PROTECTION_STATUS } from "@emjpm/biz";
 import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useHistory } from "react-router-dom";
-import { Box, Flex } from "rebass";
+import { Box, Flex, Text } from "rebass";
 import ReactTooltip from "react-tooltip";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -90,17 +90,6 @@ function MesureList(props) {
     history.push(getHref(props));
   }
 
-  const { setMesuresCount } = props;
-  useEffect(() => {
-    if (!data) {
-      setMesuresCount(null);
-      return;
-    }
-    setMesuresCount(
-      data.awaiting_mesures.length + data.mesures_aggregate.aggregate.count
-    );
-  }, [data, setMesuresCount]);
-
   if (!useQueryReady(loading, error)) {
     return null;
   }
@@ -119,46 +108,52 @@ function MesureList(props) {
   mesuresList.push(...mesures);
 
   return (
-    <Box sx={MesureListStyle}>
-      <>
-        {mesuresList.length > 0 ? (
-          <>
-            {mesuresList.map((mesure) => {
-              return (
-                <MesureListItem
-                  key={mesure.id}
-                  mesure={mesure}
-                  getHref={getHref}
-                  onClick={selectMesure}
-                />
-              );
-            })}
-          </>
-        ) : (
-          <div>Pas de donnée à afficher</div>
-        )}
-        {count > RESULT_PER_PAGE && (
-          <Flex alignItems="center" justifyContent="center">
-            <ReactPaginate
-              previousLabel={"Précédent"}
-              nextLabel={"Suivant"}
-              breakLabel={"..."}
-              breakClassName={"break-me"}
-              pageCount={totalPage}
-              containerClassName={"react-paginate"}
-              marginPagesDisplayed={2}
-              forcePage={currentOffset / RESULT_PER_PAGE}
-              pageRangeDisplayed={5}
-              onPageChange={(data) => {
-                setCurrentOffset(data.selected * RESULT_PER_PAGE);
-              }}
-              subContainerClassName={"pages pagination"}
-              activeClassName={"active"}
-            />
-          </Flex>
-        )}
-      </>
-    </Box>
+    <>
+      <Text pb="1" color="#696363">
+        Résultats de la séléction: {data.awaiting_mesures.length + count}
+      </Text>
+
+      <Box sx={MesureListStyle}>
+        <>
+          {mesuresList.length > 0 ? (
+            <>
+              {mesuresList.map((mesure) => {
+                return (
+                  <MesureListItem
+                    key={mesure.id}
+                    mesure={mesure}
+                    getHref={getHref}
+                    onClick={selectMesure}
+                  />
+                );
+              })}
+            </>
+          ) : (
+            <div>Pas de donnée à afficher</div>
+          )}
+          {count > RESULT_PER_PAGE && (
+            <Flex alignItems="center" justifyContent="center">
+              <ReactPaginate
+                previousLabel={"Précédent"}
+                nextLabel={"Suivant"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={totalPage}
+                containerClassName={"react-paginate"}
+                marginPagesDisplayed={2}
+                forcePage={currentOffset / RESULT_PER_PAGE}
+                pageRangeDisplayed={5}
+                onPageChange={(data) => {
+                  setCurrentOffset(data.selected * RESULT_PER_PAGE);
+                }}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"}
+              />
+            </Flex>
+          )}
+        </>
+      </Box>
+    </>
   );
 }
 

@@ -13,7 +13,6 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
-import { useState } from "react";
 
 export default function Mesures() {
   const { service_members } = useUser();
@@ -33,7 +32,6 @@ export default function Mesures() {
     dispo_max
   );
 
-  const [mesuresCount, setMesuresCount] = useState(null);
   const mesuresTotal = service.mesures_in_progress + service.mesures_awaiting;
 
   return (
@@ -46,14 +44,7 @@ export default function Mesures() {
       <LayoutServices>
         <BoxWrapper mt={2} px="1">
           <Flex flexDirection="row" justifyContent="space-between">
-            <HeadingTitle>
-              Vos mesures{" "}
-              {/*mesuresCount !== null && (
-                <Text fontSize="1" display="inline">
-                  ({mesuresCount}/{mesuresTotal})
-                </Text>
-              )*/}
-            </HeadingTitle>
+            <HeadingTitle>Vos mesures</HeadingTitle>
             <MesureListButtonBar />
           </Flex>
           <Flex mt={1} flexDirection="row" justifyContent="flex-start">
@@ -102,7 +93,7 @@ export default function Mesures() {
               mt: "1",
             }}
           >
-            <MesureList setMesuresCount={setMesuresCount} />
+            <MesureList />
           </Flex>
         </BoxWrapper>
       </LayoutServices>
