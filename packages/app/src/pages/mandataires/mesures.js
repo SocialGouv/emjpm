@@ -15,8 +15,6 @@ import useUser from "~/hooks/useUser";
 
 function MesuresListView() {
   const user = useUser();
-  const mesuresTotal =
-    user.mandataire.mesures_en_cours + user.mandataire.mesures_en_attente;
   return (
     <FiltersContextProvider
       initialValues={{
