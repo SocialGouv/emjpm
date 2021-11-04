@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.138.0](https://github.com/SocialGouv/emjpm/compare/v25.137.2...v25.138.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **wording:** mesure replace éteinte by clôturée ([799810c](https://github.com/SocialGouv/emjpm/commit/799810c3f9841099c49f329c6149287b86d2480c))
+
+
+
+
+
 ## [25.137.2](https://github.com/SocialGouv/emjpm/compare/v25.137.1...v25.137.2) (2021-10-27)
 
 **Note:** Version bump only for package @emjpm/biz

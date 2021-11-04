@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.138.0](https://github.com/SocialGouv/emjpm/compare/v25.137.2...v25.138.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **accept-mesure:** fixed [#2672](https://github.com/SocialGouv/emjpm/issues/2672) ([2d8ea1f](https://github.com/SocialGouv/emjpm/commit/2d8ea1f3cf182bc649cb9be394541dd332c60b0b))
+* **cache:** renew on dashboard ([c6bda34](https://github.com/SocialGouv/emjpm/commit/c6bda34b77a6d2d22aabac6843ad209e8b613758))
+* **clean:** admin user remove old mesures table ([5b40b58](https://github.com/SocialGouv/emjpm/commit/5b40b583e27e358097f5c0d7f2ffead4f5522180))
+* **dev:** script path ([1597088](https://github.com/SocialGouv/emjpm/commit/1597088f489e7a52e6adb96997a1924ed5dab64e))
+* **edge:** compat with chromium fix [#2687](https://github.com/SocialGouv/emjpm/issues/2687) ([46008b5](https://github.com/SocialGouv/emjpm/commit/46008b523624311ef1d0f536354a3eb299934b9d))
+* **input-year:** fixing [#2672](https://github.com/SocialGouv/emjpm/issues/2672) ([d4e6e77](https://github.com/SocialGouv/emjpm/commit/d4e6e7787bf99c1b1e15929d3d3b1867d25d8502))
+* **map:** bug on etablissement-id when select ([d610278](https://github.com/SocialGouv/emjpm/commit/d610278ff7e7c0e996078c8540470108c3d77de8))
+* **navigation:** alt user ([7853721](https://github.com/SocialGouv/emjpm/commit/78537211087b594ecae76e8d0cd845e93862f293))
+* **prenom:** remove uppercase ([c2dfcdb](https://github.com/SocialGouv/emjpm/commit/c2dfcdb897e7f6b13500362c41e240a5deed88b7))
+* **search-ti:** by label fix [#2688](https://github.com/SocialGouv/emjpm/issues/2688) ([c6eccc5](https://github.com/SocialGouv/emjpm/commit/c6eccc515b0ca0e38d2342829cdd3bf2791f7bf5))
+* **siret:** valid 14 int ([6eb5c88](https://github.com/SocialGouv/emjpm/commit/6eb5c8841b71bded78503a2072b322f056282be0))
+* **siret-required:** fix [#2600](https://github.com/SocialGouv/emjpm/issues/2600) ([0d86608](https://github.com/SocialGouv/emjpm/commit/0d86608db0f27f59e16ac079ec24bd665a77e346))
+* **stats:** suspend no dispo but over ([3e4505b](https://github.com/SocialGouv/emjpm/commit/3e4505be8cfeb9904cdc68c042dbd3b43d52a663))
+* **suspend:** color on ti indicator ([ffbf3d1](https://github.com/SocialGouv/emjpm/commit/ffbf3d13ca3037e7a0d8982f567ea3071131e8bb))
+* **suspend:** color on ti indicator ([617aeb8](https://github.com/SocialGouv/emjpm/commit/617aeb86002f707f74d171297b7d23615e21f8fd))
+* **suspend:** don't disabled reservation ([d12f3e7](https://github.com/SocialGouv/emjpm/commit/d12f3e724f7a304c3ef24e953ac9fa84c1aca59b))
+* **suspend:** label and red ([4063aaf](https://github.com/SocialGouv/emjpm/commit/4063aafd1038981bcded2fed4c7e77b77e698f3e))
+* **ti:** nullable ([3434cee](https://github.com/SocialGouv/emjpm/commit/3434cee9cba6e2be0b00c85aa60c5b707f8e13ae))
+* **ti:** upgrade add immutable ([931829e](https://github.com/SocialGouv/emjpm/commit/931829e9cd602ae749b5260c4a53efc4afab9d81))
+* **unknown:** exclude suspended ([9b3b645](https://github.com/SocialGouv/emjpm/commit/9b3b645ccb111c067aee7236de7bcc8a22dae5de))
+* **up:** browserlist ([04200a8](https://github.com/SocialGouv/emjpm/commit/04200a87c0b83c5148d7ffcdc5be78477f7bbdd0))
+* **wording:** activite suspendue ([b32d9dc](https://github.com/SocialGouv/emjpm/commit/b32d9dc32e0925b1a93ee46786edc8bd8678aaf8))
+* **wording:** cloturée singular ([0c7b3e7](https://github.com/SocialGouv/emjpm/commit/0c7b3e723bc3c1e2cedb70d273e15334fe003356))
+* **wording:** mesure replace éteinte by clôturée ([799810c](https://github.com/SocialGouv/emjpm/commit/799810c3f9841099c49f329c6149287b86d2480c))
+
+
+### Features
+
+* **acces:** add link eFSM fix [#2669](https://github.com/SocialGouv/emjpm/issues/2669) ([9f6938a](https://github.com/SocialGouv/emjpm/commit/9f6938a206bfb868a60c9b4103dad4cb4a653c6d))
+* **ind:** user can update siret fix [#2600](https://github.com/SocialGouv/emjpm/issues/2600) ([16950b4](https://github.com/SocialGouv/emjpm/commit/16950b4cd75492c6a720a14cef28aedfcf919f91))
+* **lb:** siret error duplicate fix [#2587](https://github.com/SocialGouv/emjpm/issues/2587) ([bd170bf](https://github.com/SocialGouv/emjpm/commit/bd170bf0e69ed80669113d37f82d00b784024eaf))
+* **mesures:** count filtered ([24b7871](https://github.com/SocialGouv/emjpm/commit/24b78718da4064b91ad96790edaf1b3f0793d3f9))
+* **numero-rg:** improve validation ([3759b64](https://github.com/SocialGouv/emjpm/commit/3759b640b103ae8f8caeb9bf790c660a888ecba6))
+* **siret:** check siret dup on edit mandataire ([5509ef5](https://github.com/SocialGouv/emjpm/commit/5509ef548e4edf9a3a3671c4754c3fcc732063e5))
+* **suspen-activity:** fix [#1320](https://github.com/SocialGouv/emjpm/issues/1320) ([d7414b5](https://github.com/SocialGouv/emjpm/commit/d7414b56694d8e07bc3bb0068f08646c38275b97))
+* **suspend:** direction indicator ([f5298bb](https://github.com/SocialGouv/emjpm/commit/f5298bb6d8ec996642e152928e5be2200092e3d1))
+* **suspend:** indicator ([59a1cfc](https://github.com/SocialGouv/emjpm/commit/59a1cfc588bf1431526f0034242bcb98ff0f9632))
+* **ti:** upgrade ti list ([0db9f34](https://github.com/SocialGouv/emjpm/commit/0db9f34c9abb616497693b1c3c4fb68338dfcbe8))
+
+
+
+
+
 ## [25.137.2](https://github.com/SocialGouv/emjpm/compare/v25.137.1...v25.137.2) (2021-10-27)
 
 

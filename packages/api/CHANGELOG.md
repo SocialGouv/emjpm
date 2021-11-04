@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.138.0](https://github.com/SocialGouv/emjpm/compare/v25.137.2...v25.138.0) (2021-11-04)
+
+
+### Bug Fixes
+
+* **stats:** suspend no dispo but over ([3e4505b](https://github.com/SocialGouv/emjpm/commit/3e4505be8cfeb9904cdc68c042dbd3b43d52a663))
+* **unknown:** exclude suspended ([9b3b645](https://github.com/SocialGouv/emjpm/commit/9b3b645ccb111c067aee7236de7bcc8a22dae5de))
+
+
+### Features
+
+* **suspen-activity:** fix [#1320](https://github.com/SocialGouv/emjpm/issues/1320) ([d7414b5](https://github.com/SocialGouv/emjpm/commit/d7414b56694d8e07bc3bb0068f08646c38275b97))
+
+
+
+
+
 ## [25.137.2](https://github.com/SocialGouv/emjpm/compare/v25.137.1...v25.137.2) (2021-10-27)
 
 **Note:** Version bump only for package @emjpm/api
