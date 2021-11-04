@@ -11,10 +11,8 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
-import useUser from "~/hooks/useUser";
 
 function MesuresListView() {
-  const user = useUser();
   return (
     <FiltersContextProvider
       initialValues={{
