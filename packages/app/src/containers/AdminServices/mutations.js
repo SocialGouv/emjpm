@@ -6,14 +6,14 @@ export const DELETE_MESURES = gql`
     $mandataireId: Int
     $serviceId: Int
   ) {
-    delete_mesures(where: { id: { _in: $ids } }) {
-      affected_rows
-    }
     reset_mesures_calculations(
       mandataireId: $mandataireId
       serviceId: $serviceId
     ) {
       state
+    }
+    delete_mesures(where: { id: { _in: $ids } }) {
+      affected_rows
     }
     mesures_last_update {
       status

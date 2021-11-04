@@ -22,6 +22,22 @@ array_relationships:
       table:
         name: mesures
         schema: public
+computed_fields:
+- definition:
+    function:
+      name: count_service_antenne_dispo
+      schema: public
+  name: dispo
+- definition:
+    function:
+      name: count_service_antenne_mesures_awaiting
+      schema: public
+  name: mesures_awaiting
+- definition:
+    function:
+      name: count_service_antenne_mesures_in_progress
+      schema: public
+  name: mesures_in_progress
 insert_permissions:
 - permission:
     check: {}
@@ -37,8 +53,8 @@ insert_permissions:
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_max
     - name
     - ville
@@ -57,16 +73,17 @@ select_permissions:
     - contact_phone
     - created_at
     - departement_code
-    - dispo
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_max
     - name
     - service_id
     - ville
+    computed_fields:
+    - dispo
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: direction
 - permission:
@@ -92,16 +109,17 @@ select_permissions:
     - contact_phone
     - created_at
     - departement_code
-    - dispo
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_max
     - name
     - service_id
     - ville
+    computed_fields:
+    - dispo
+    - mesures_awaiting
+    - mesures_in_progress
     filter:
       service_id:
         _eq: x-hasura-service-id
@@ -117,16 +135,17 @@ select_permissions:
     - contact_phone
     - created_at
     - departement_code
-    - dispo
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_max
     - name
     - service_id
     - ville
+    computed_fields:
+    - dispo
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: ti
 update_permissions:
@@ -144,8 +163,8 @@ update_permissions:
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_max
     - name
     - ville
@@ -156,8 +175,8 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     filter: {}
   role: ti
 delete_permissions:

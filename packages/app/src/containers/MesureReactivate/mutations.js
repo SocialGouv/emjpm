@@ -2,6 +2,12 @@ import gql from "graphql-tag";
 
 export const REACTIVATE_MESURE = gql`
   mutation reactivateMesure($id: Int!, $mandataireId: Int, $serviceId: Int) {
+    reset_mesures_calculations(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    ) {
+      state
+    }
     update_mesures(where: { id: { _eq: $id } }, _set: { status: en_cours }) {
       returning {
         id
@@ -27,12 +33,6 @@ export const REACTIVATE_MESURE = gql`
         annee_naissance
         date_nomination
       }
-    }
-    reset_mesures_calculations(
-      mandataireId: $mandataireId
-      serviceId: $serviceId
-    ) {
-      state
     }
     mesures_last_update {
       status

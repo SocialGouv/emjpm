@@ -16,6 +16,12 @@ export const REOPEN_MESURE = gql`
     $judgmentDate: date
     $antenne_id: Int
   ) {
+    reset_mesures_calculations(
+      mandataireId: $mandataire_id
+      serviceId: $service_id
+    ) {
+      state
+    }
     insert_mesure_en_attente_reouverture(
       objects: {
         mesure_id: $mesure_id
@@ -44,12 +50,6 @@ export const REOPEN_MESURE = gql`
     ) {
       id
     }
-    reset_mesures_calculations(
-      mandataireId: $mandataire_id
-      serviceId: $service_id
-    ) {
-      state
-    }
   }
 `;
 
@@ -69,6 +69,12 @@ export const CHOOSE_MANDATAIRE = gql`
     $numero_rg: String!
     $antenne_id: Int
   ) {
+    reset_mesures_calculations(
+      mandataireId: $mandataire_id
+      serviceId: $service_id
+    ) {
+      state
+    }
     insert_mesures(
       objects: {
         is_urgent: $urgent
@@ -90,12 +96,6 @@ export const CHOOSE_MANDATAIRE = gql`
       returning {
         id
       }
-    }
-    reset_mesures_calculations(
-      mandataireId: $mandataire_id
-      serviceId: $service_id
-    ) {
-      state
     }
   }
 `;

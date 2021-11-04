@@ -16,6 +16,12 @@ export const EDIT_MESURE = gql`
     $mandataireId: Int
     $serviceId: Int
   ) {
+    reset_mesures_calculations(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    ) {
+      state
+    }
     add_or_update: update_mesures(
       where: { id: { _eq: $id } }
       _set: {
@@ -34,12 +40,6 @@ export const EDIT_MESURE = gql`
       returning {
         id
       }
-    }
-    reset_mesures_calculations(
-      mandataireId: $mandataireId
-      serviceId: $serviceId
-    ) {
-      state
     }
     mesures_last_update {
       status

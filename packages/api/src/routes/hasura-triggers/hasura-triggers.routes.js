@@ -6,5 +6,6 @@ router.use("/ocmi", require("./ocmi"));
 router.use("/mesures", require("./mesures"));
 router.use("/lb-update", require("./lb-update"));
 router.use("/clean-logs", require("./clean-logs"));
+router.use("/mandataires", require("./mandataires"));
 
 module.exports = router;

@@ -22,6 +22,12 @@ export const ACCEPT_MESURE = gql`
     $is_urgent: Boolean
     $civilite: civilite_enum
   ) {
+    reset_mesures_calculations(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    ) {
+      state
+    }
     insert_mesure_etat(
       objects: {
         mesure_id: $id
@@ -66,12 +72,6 @@ export const ACCEPT_MESURE = gql`
     }
     delete_mesure_en_attente_reouverture(where: { mesure_id: { _eq: $id } }) {
       affected_rows
-    }
-    reset_mesures_calculations(
-      mandataireId: $mandataireId
-      serviceId: $serviceId
-    ) {
-      state
     }
     mesures_last_update {
       status

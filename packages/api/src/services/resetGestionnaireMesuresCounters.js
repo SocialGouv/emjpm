@@ -9,23 +9,24 @@ module.exports = async function resetGestionnaireMesuresCounters(
   if (mandataireId) {
     await Mandataire.query(trx)
       .update({
-        mesures_en_attente: null,
-        mesures_en_cours: null,
+        mesures_en_attente_cached: null,
+        mesures_en_cours_cached: null,
       })
       .where({ id: mandataireId });
   }
   if (serviceId) {
     await ServiceAntenne.query(trx)
       .update({
-        mesures_awaiting: null,
-        mesures_in_progress: null,
+        dispo_cached: null,
+        mesures_awaiting_cached: null,
+        mesures_in_progress_cached: null,
       })
       .where({ service_id: serviceId });
 
     await Service.query(trx)
       .update({
-        mesures_awaiting: null,
-        mesures_in_progress: null,
+        mesures_awaiting_cached: null,
+        mesures_in_progress_cached: null,
       })
       .where({ id: serviceId });
   }

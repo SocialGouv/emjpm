@@ -8,6 +8,12 @@ export const CLOSE_MESURE = gql`
     $mandataireId: Int
     $serviceId: Int
   ) {
+    reset_mesures_calculations(
+      mandataireId: $mandataireId
+      serviceId: $serviceId
+    ) {
+      state
+    }
     update_mesures(
       where: { id: { _eq: $id } }
       _set: {
@@ -40,12 +46,6 @@ export const CLOSE_MESURE = gql`
         annee_naissance
         date_nomination
       }
-    }
-    reset_mesures_calculations(
-      mandataireId: $mandataireId
-      serviceId: $serviceId
-    ) {
-      state
     }
     mesures_last_update {
       status

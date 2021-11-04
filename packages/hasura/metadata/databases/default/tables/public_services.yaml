@@ -53,6 +53,17 @@ array_relationships:
       table:
         name: service_tis
         schema: public
+computed_fields:
+- definition:
+    function:
+      name: count_service_mesures_awaiting
+      schema: public
+  name: mesures_awaiting
+- definition:
+    function:
+      name: count_service_mesures_in_progress
+      schema: public
+  name: mesures_in_progress
 insert_permissions:
 - permission:
     backend_only: false
@@ -71,8 +82,8 @@ insert_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - nom
     - org_adresse
     - org_code_postal
@@ -108,8 +119,6 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_last_update
     - nom
     - org_adresse
@@ -121,6 +130,9 @@ select_permissions:
     - siret
     - telephone
     - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: direction
 - permission:
@@ -139,8 +151,6 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - nom
     - org_adresse
     - org_code_postal
@@ -151,6 +161,9 @@ select_permissions:
     - siret
     - telephone
     - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: direction_nationale
 - permission:
@@ -169,8 +182,6 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - nom
     - org_adresse
     - org_code_postal
@@ -181,6 +192,9 @@ select_permissions:
     - siret
     - telephone
     - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: direction_territoriale
 - permission:
@@ -198,8 +212,6 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_last_update
     - nom
     - org_adresse
@@ -213,6 +225,9 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
     filter:
       id:
         _eq: X-Hasura-Service-Id
@@ -229,8 +244,6 @@ select_permissions:
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
     - mesures_last_update
     - nom
     - org_adresse
@@ -243,6 +256,9 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
     filter: {}
   role: ti
 update_permissions:
@@ -262,8 +278,8 @@ update_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - nom
     - org_adresse
     - org_code_postal
@@ -288,8 +304,8 @@ update_permissions:
     - id
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - nom
     - prenom
     - suspend_activity
@@ -306,8 +322,8 @@ update_permissions:
     - etablissement
     - latitude
     - longitude
-    - mesures_awaiting
-    - mesures_in_progress
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     filter: {}
   role: ti
 event_triggers:

@@ -58,8 +58,8 @@ async function recalculateMandatairesMesuresCount(mandataireId, trx) {
     .where({ mandataire_id: mandataireId });
 
   return await Mandataire.query(trx).updateAndFetchById(mandataireId, {
-    mesures_en_attente: getCount(mandataireStates, "en_attente"),
-    mesures_en_cours: getCount(mandataireStates, "en_cours"),
+    mesures_en_attente_cached: getCount(mandataireStates, "en_attente"),
+    mesures_en_cours_cached: getCount(mandataireStates, "en_cours"),
   });
 }
 
@@ -80,9 +80,10 @@ async function recalculateServiceMesuresCount(serviceId, trx) {
     await ServiceAntenne.query(trx)
       .findById(antenneId)
       .update({
-        dispo: mesuresMax - (antenneMesuresAwaiting + antenneMesuresInProgress),
-        mesures_awaiting: antenneMesuresAwaiting,
-        mesures_in_progress: antenneMesuresInProgress,
+        dispo_cached:
+          mesuresMax - (antenneMesuresAwaiting + antenneMesuresInProgress),
+        mesures_awaiting_cached: antenneMesuresAwaiting,
+        mesures_in_progress_cached: antenneMesuresInProgress,
       });
   }
 
@@ -93,8 +94,8 @@ async function recalculateServiceMesuresCount(serviceId, trx) {
     .where({ service_id: serviceId });
 
   return await Service.query(trx).updateAndFetchById(serviceId, {
-    mesures_awaiting: getCount(serviceStates, "en_attente"),
-    mesures_in_progress: getCount(serviceStates, "en_cours"),
+    mesures_awaiting_cached: getCount(serviceStates, "en_attente"),
+    mesures_in_progress_cached: getCount(serviceStates, "en_cours"),
   });
 }
 

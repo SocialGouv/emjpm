@@ -6,14 +6,14 @@ export const DELETE_MESURE = gql`
     $mandataireId: Int
     $serviceId: Int
   ) {
-    delete_mesure_action(mesure_id: $mesureId) {
-      success
-    }
     reset_mesures_calculations(
       mandataireId: $mandataireId
       serviceId: $serviceId
     ) {
       state
+    }
+    delete_mesure_action(mesure_id: $mesureId) {
+      success
     }
   }
 `;

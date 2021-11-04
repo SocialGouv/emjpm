@@ -570,3 +570,25 @@ delete_permissions:
       - status:
           _eq: en_attente
   role: ti
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - antenne_id
+      - mandataire_id
+      - service_id
+      - status
+  headers:
+  - name: hasura_web_hook_secret
+    value_from_env: HASURA_WEB_HOOK_SECRET
+  name: mesures_counter
+  retry_conf:
+    interval_sec: 10
+    num_retries: 1
+    timeout_sec: 120
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mandataires/recalculate-mesures"
