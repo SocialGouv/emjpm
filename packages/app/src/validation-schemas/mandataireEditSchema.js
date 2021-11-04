@@ -3,8 +3,24 @@ import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
 import { checkDuplicateMandataireSIRETFromMandataire } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
-const mandataireEditSchema = ({ apolloClient }) =>
-  yup.object().shape({
+const mandataireEditSchema = ({ type, apolloClient }) => {
+  let siret = yup
+    .string()
+    .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
+    .test(
+      "siret-duplicate",
+      "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
+      (value, { parent }) => {
+        if (value === parent.initialSiret) {
+          return true;
+        }
+        return checkDuplicateMandataireSIRETFromMandataire(apolloClient, value);
+      }
+    );
+  if (type !== "prepose") {
+    siret = siret.required();
+  }
+  return yup.object().shape({
     competences: yup.string(),
     dispo_max: yup.number().required(),
     email: yup.string().email().required(),
@@ -19,23 +35,8 @@ const mandataireEditSchema = ({ apolloClient }) =>
     telephone: yup.string().required(),
     telephone_portable: yup.string(),
     tis: yup.mixed().required(),
-    siret: yup
-      .string()
-      .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
-      .required()
-      .test(
-        "siret-duplicate",
-        "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
-        (value, { parent }) => {
-          if (value === parent.initialSiret) {
-            return true;
-          }
-          return checkDuplicateMandataireSIRETFromMandataire(
-            apolloClient,
-            value
-          );
-        }
-      ),
+    siret,
   });
+};
 
 export { mandataireEditSchema };

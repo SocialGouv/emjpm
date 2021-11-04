@@ -53,8 +53,9 @@ function MandataireEditInformationsForm(props) {
   }, [lb_departements, lb_user_etablissements]);
 
   const apolloClient = useApolloClient();
+
   const validationSchema = useMemo(
-    () => mandataireEditSchema({ apolloClient }),
+    () => mandataireEditSchema({ type: user.type, apolloClient }),
     [apolloClient]
   );
 

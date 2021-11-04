@@ -7,6 +7,7 @@ export const MANDATAIRE = gql`
       email
       nom
       prenom
+      type
       mandataire {
         id
         adresse
