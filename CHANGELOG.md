@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.138.1](https://github.com/SocialGouv/emjpm/compare/v25.138.0...v25.138.1) (2021-11-04)
+
+
+### Bug Fixes
+
+* **temp-disable:** count filtered mesures ([df7e83c](https://github.com/SocialGouv/emjpm/commit/df7e83c0338ae531d9659170b52b69dbbe2a0809))
+
+
+
+
+
 # [25.138.0](https://github.com/SocialGouv/emjpm/compare/v25.137.2...v25.138.0) (2021-11-04)
 
 
