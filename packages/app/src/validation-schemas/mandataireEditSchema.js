@@ -6,12 +6,13 @@ import { checkDuplicateMandataireSIRETFromMandataire } from "~/query-service/emj
 const mandataireEditSchema = ({ type, apolloClient }) => {
   let siret = yup
     .string()
+    .nullable()
     .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
     .test(
       "siret-duplicate",
       "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
       (value, { parent }) => {
-        if (value === parent.initialSiret) {
+        if (!value || value === parent.initialSiret) {
           return true;
         }
         return checkDuplicateMandataireSIRETFromMandataire(apolloClient, value);
