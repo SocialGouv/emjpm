@@ -11,7 +11,6 @@ export function validateNumeroRG(str) {
 }
 
 export function checkNumeroRgAlphanum(str) {
-  console.log({ str });
   return /^[a-z0-9]+$/i.test(str);
 }
 
@@ -26,7 +25,7 @@ export function checkNumeroRgLengthGt(str) {
 export const MESSAGE_VALID_NUMERO_RG_ALPHANUM =
   "8 chiffres ou lettres. Aucun caractère spécial ou espace n'est accepté.";
 export const MESSAGE_VALID_NUMERO_RG_LENGTH_LT =
-  "8 chiffres ou lettres. Préfixez votre numéro RG par 0 si vous disposez de moins de 8 caractères.";
+  "8 chiffres ou lettres. Préfixez votre numéro RG de 0 si vous disposez de moins de 8 caractères.";
 export const MESSAGE_VALID_NUMERO_RG_LENGTH_GT =
   "8 chiffres ou lettres maximum.";
 
