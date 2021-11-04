@@ -10,8 +10,25 @@ export function validateNumeroRG(str) {
   return normalizeNumeroRG(str) === str;
 }
 
-export const MESSAGE_VALID_NUMERO_RG =
-  "Un numéro RG valide se compose de 8 caractères alphanumériques majuscules (normalement 2 chiffres, suivi d'une lettre, puis de 5 chiffres). Nous vous recommandons de préfixer votre numéro RG d'un 0 si vous disposez de moins de 8 caractères. Exemple: 12A12345.";
+export function checkNumeroRgAlphanum(str) {
+  console.log({ str });
+  return /^[a-z0-9]+$/i.test(str);
+}
+
+export function checkNumeroRgLengthLt(str) {
+  return !(str && str.length < 8);
+}
+
+export function checkNumeroRgLengthGt(str) {
+  return !(!str || str.length > 8);
+}
+
+export const MESSAGE_VALID_NUMERO_RG_ALPHANUM =
+  "8 chiffres ou lettres. Aucun caractère spécial ou espace n'est accepté.";
+export const MESSAGE_VALID_NUMERO_RG_LENGTH_LT =
+  "8 chiffres ou lettres. Préfixez votre numéro RG par 0 si vous disposez de moins de 8 caractères.";
+export const MESSAGE_VALID_NUMERO_RG_LENGTH_GT =
+  "8 chiffres ou lettres maximum.";
 
 export const MESSAGE_DUPLICATE_NUMERO_RG_MANDATAIRE =
   "Le numéro RG que vous venez de saisir existe déjà sur votre compte eMJPM pour ce tribunal. Merci de le rectifier.";

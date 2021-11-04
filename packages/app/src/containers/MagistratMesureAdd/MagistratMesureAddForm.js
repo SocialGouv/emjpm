@@ -15,7 +15,6 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
-import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
 import { magistratMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
@@ -61,11 +60,20 @@ export function MagistratMesureAddForm(props) {
         <FormInputBox>
           <FormGroupInput
             id="numero_rg"
-            placeholder="Numéro RG"
+            label="Numéro RG"
+            placeholder="8 chiffres ou lettres"
+            forceActive
             formik={formik}
             size="small"
             validationSchema={validationSchema}
-            title={MESSAGE_VALID_NUMERO_RG}
+            onInput={(e) => {
+              let value = e.target.value || "";
+              value = value.toUpperCase().trim();
+              formik.setFieldValue("numero_rg", value);
+              if (!/^[a-z0-9]+$/i.test(value)) {
+                formik.setFieldTouched("numero_rg");
+              }
+            }}
           />
           <FormGroupInput
             id="cabinet"

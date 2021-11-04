@@ -1,7 +1,12 @@
 import yup from "./yup";
 import {
   validateNumeroRG,
-  MESSAGE_VALID_NUMERO_RG,
+  checkNumeroRgAlphanum,
+  checkNumeroRgLengthLt,
+  checkNumeroRgLengthGt,
+  MESSAGE_VALID_NUMERO_RG_ALPHANUM,
+  MESSAGE_VALID_NUMERO_RG_LENGTH_LT,
+  MESSAGE_VALID_NUMERO_RG_LENGTH_GT,
   MESSAGE_DUPLICATE_NUMERO_RG_TI,
 } from "~/utils/data/numero-rg";
 import {
@@ -20,29 +25,39 @@ const magistratMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
     numero_rg: yup
       .string()
       .required()
-      .test("numero_rg-check", MESSAGE_VALID_NUMERO_RG, validateNumeroRG)
       .test(
-        "numero_rg-duplicate",
-        MESSAGE_DUPLICATE_NUMERO_RG_TI,
-        (value, { parent }) => {
-          if (!validateNumeroRG(value)) {
-            return true;
-          }
-          if (serviceId) {
-            return checkDuplicateNumeroRGByServiceId(
-              apolloClient,
-              value,
-              serviceId
-            );
-          } else {
-            return checkDuplicateNumeroRGByMandataireId(
-              apolloClient,
-              value,
-              mandataireId
-            );
-          }
+        "numero_rg-alphanum",
+        MESSAGE_VALID_NUMERO_RG_ALPHANUM,
+        checkNumeroRgAlphanum
+      )
+      .test(
+        "numero_rg-length-lt",
+        MESSAGE_VALID_NUMERO_RG_LENGTH_LT,
+        checkNumeroRgLengthLt
+      )
+      .test(
+        "numero_rg-length-gt",
+        MESSAGE_VALID_NUMERO_RG_LENGTH_GT,
+        checkNumeroRgLengthGt
+      )
+      .test("numero_rg-duplicate", MESSAGE_DUPLICATE_NUMERO_RG_TI, (value) => {
+        if (!validateNumeroRG(value)) {
+          return true;
         }
-      ),
+        if (serviceId) {
+          return checkDuplicateNumeroRGByServiceId(
+            apolloClient,
+            value,
+            serviceId
+          );
+        } else {
+          return checkDuplicateNumeroRGByMandataireId(
+            apolloClient,
+            value,
+            mandataireId
+          );
+        }
+      }),
     urgent: yup.boolean().nullable(),
     antenne: yup.number().integer().nullable(),
   });

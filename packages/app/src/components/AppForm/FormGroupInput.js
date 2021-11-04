@@ -12,6 +12,7 @@ export default function FormGroupInput({
   label,
   title,
   placeholder,
+  forceActive,
   error,
   type,
   min,
@@ -50,6 +51,7 @@ export default function FormGroupInput({
         <Input
           placeholder={placeholder}
           label={label}
+          forceActive={forceActive}
           readOnly={readOnly}
           required={required}
           id={id}

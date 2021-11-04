@@ -16,7 +16,6 @@ import { GeocodeCities } from "~/components/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
-import { MESSAGE_VALID_NUMERO_RG } from "~/utils/data/numero-rg";
 import { useMemo } from "react";
 
 function initialValues() {
@@ -63,12 +62,21 @@ export function MesureCreateForm(props) {
           <Flex flexDirection={["column", "row", "row"]}>
             <Box flexGrow="2" pr="1px">
               <FormGroupInput
-                placeholder="Numéro RG"
+                label="Numéro RG"
+                placeholder="8 chiffres ou lettres"
+                forceActive
                 id="numero_rg"
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
-                title={MESSAGE_VALID_NUMERO_RG}
+                onInput={(e) => {
+                  let value = e.target.value || "";
+                  value = value.toUpperCase().trim();
+                  formik.setFieldValue("numero_rg", value);
+                  if (!/^[a-z0-9]+$/i.test(value)) {
+                    formik.setFieldTouched("numero_rg");
+                  }
+                }}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
