@@ -20,7 +20,7 @@
     value_from_env: HASURA_WEB_HOOK_SECRET
 - name: mesures-update-status
   webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/update-status'
-  schedule: '* * * * *'
+  schedule: 0 1 * * *
   include_in_metadata: true
   payload:
     session_variables:
