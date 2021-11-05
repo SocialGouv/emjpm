@@ -23,6 +23,7 @@ export default function FormGroupInput({
   formik,
   hideErrors,
   validationSchema,
+  onInput,
   onChange,
   size,
   noRequiredAsterisk,
@@ -60,7 +61,8 @@ export default function FormGroupInput({
           title={title}
           value={value}
           onBlur={handleBlur}
-          onChange={onChange ? onChange : handleChange}
+          onChange={onChange ? onChange : onInput ? undefined : handleChange}
+          onInput={onInput}
           hasError={showError}
           type={type}
           min={min}
