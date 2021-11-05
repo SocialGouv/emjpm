@@ -20,6 +20,16 @@ function buildMesure({
     departement_code = getDepartementByCodePostal(code_postal);
   }
 
+  const date_fin_mesure =
+    datas.date_fin_mesure !== "0000-00-00" ? datas.date_fin_mesure : null;
+
+  let status = MESURE_PROTECTION_STATUS.en_cours;
+  if (date_fin_mesure) {
+    if (new Date(date_fin_mesure) <= new Date()) {
+      status = MESURE_PROTECTION_STATUS.eteinte;
+    }
+  }
+
   return {
     annee_naissance: datas.annee_naissance,
     antenne_id: antenneId,
@@ -28,8 +38,7 @@ function buildMesure({
     champ_mesure: lastEtat.champ_mesure,
     civilite: datas.civilite,
     code_postal,
-    date_fin_mesure:
-      datas.date_fin_mesure !== "0000-00-00" ? datas.date_fin_mesure : null,
+    date_fin_mesure,
     date_nomination:
       datas.date_nomination !== "0000-00-00" ? datas.date_nomination : null,
     date_premier_mesure:
@@ -48,9 +57,7 @@ function buildMesure({
     numero_rg: normalizeNumeroRG(datas.numero_rg),
     pays: lastEtat.pays,
     resultat_revision: datas.resultat_revision,
-    status: datas.date_fin_mesure
-      ? MESURE_PROTECTION_STATUS.eteinte
-      : MESURE_PROTECTION_STATUS.en_cours,
+    status,
     ti_id: ti.id,
     type_etablissement: lastEtat.type_etablissement,
     ville: lastEtat.ville || datas.ville,
