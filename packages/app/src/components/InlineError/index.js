@@ -17,7 +17,13 @@ function InlineError({ message, fieldId, showError, ...props }) {
           <Exclamation size="18" />
         </Box>
         <Box>
-          <Text mx="1" fontSize="12px">
+          <Text
+            mx="1"
+            fontSize="12px"
+            style={{
+              whiteSpace: "pre-line",
+            }}
+          >
             {message}
           </Text>
         </Box>

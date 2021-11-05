@@ -23,9 +23,9 @@ export function checkNumeroRgLengthGt(str) {
 }
 
 export const MESSAGE_VALID_NUMERO_RG_ALPHANUM =
-  "8 chiffres ou lettres. Aucun caractère spécial ou espace n'est accepté.";
+  "8 chiffres ou lettres. \n Aucun caractère spécial ou espace n'est accepté.";
 export const MESSAGE_VALID_NUMERO_RG_LENGTH_LT =
-  "8 chiffres ou lettres. Préfixez votre numéro RG de 0 si vous disposez de moins de 8 caractères.";
+  "8 chiffres ou lettres. \n Préfixez votre numéro RG de 0 si vous disposez de moins de 8 caractères.";
 export const MESSAGE_VALID_NUMERO_RG_LENGTH_GT =
   "8 chiffres ou lettres maximum.";
 
