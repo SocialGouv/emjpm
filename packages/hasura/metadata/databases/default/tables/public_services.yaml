@@ -119,6 +119,8 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_last_update
     - nom
     - org_adresse
@@ -212,6 +214,8 @@ select_permissions:
     - lb_code_postal
     - lb_ville
     - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_last_update
     - nom
     - org_adresse
@@ -244,6 +248,8 @@ select_permissions:
     - id
     - latitude
     - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_last_update
     - nom
     - org_adresse

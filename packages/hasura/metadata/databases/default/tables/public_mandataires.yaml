@@ -132,6 +132,8 @@ select_permissions:
     - latitude
     - lb_user_id
     - longitude
+    - mesures_en_attente_cached
+    - mesures_en_cours_cached
     - mesures_last_update
     - siret
     - suspend_activity
@@ -216,6 +218,8 @@ select_permissions:
     - latitude
     - lb_user_id
     - longitude
+    - mesures_en_attente_cached
+    - mesures_en_cours_cached
     - mesures_last_update
     - siret
     - suspend_activity
@@ -245,6 +249,8 @@ select_permissions:
     - id
     - latitude
     - longitude
+    - mesures_en_attente_cached
+    - mesures_en_cours_cached
     - mesures_last_update
     - siret
     - suspend_activity
@@ -274,6 +280,8 @@ select_permissions:
     - id
     - latitude
     - longitude
+    - mesures_en_attente_cached
+    - mesures_en_cours_cached
     - mesures_last_update
     - siret
     - suspend_activity

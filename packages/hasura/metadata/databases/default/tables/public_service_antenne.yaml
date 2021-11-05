@@ -114,6 +114,8 @@ select_permissions:
     - id
     - latitude
     - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_max
     - name
     - service_id
@@ -140,6 +142,8 @@ select_permissions:
     - id
     - latitude
     - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
     - mesures_max
     - name
     - service_id
