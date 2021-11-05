@@ -27,6 +27,7 @@ export const GET_MANDATAIRES = gql`
         departement: { id_region: { _eq: $region }, id: { _eq: $departement } }
       }
       order_by: { remaining_capacity: $order }
+      distinct_on: [id]
     ) {
       id
       discriminator
