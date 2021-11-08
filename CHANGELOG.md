@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.140.0](https://github.com/SocialGouv/emjpm/compare/v25.139.1...v25.140.0) (2021-11-08)
+
+
+### Bug Fixes
+
+* **admin-siret:** fallback to user siret ([b9b848b](https://github.com/SocialGouv/emjpm/commit/b9b848b34157981f70779f437f06bda311a896e8))
+* **all-mesures-counters:** one shot ([09e257b](https://github.com/SocialGouv/emjpm/commit/09e257b18fa3e2f47d2b3b26599b0df0cbac6827))
+* **antenne:** recalcul dispo ([052c6b6](https://github.com/SocialGouv/emjpm/commit/052c6b637c90a762cba25bb9feac2a2443b68812))
+* **db-seed:** upgrade + fix api ([e2c6e7d](https://github.com/SocialGouv/emjpm/commit/e2c6e7dcc79a9b27e1773f2d6220a31d971d8bb3))
+* **direction:** duplicate-entry on region filter ([a4a72af](https://github.com/SocialGouv/emjpm/commit/a4a72af6289ac5cda21f09c976e380ade868c733))
+* **error:** allow multiline ([b20f36e](https://github.com/SocialGouv/emjpm/commit/b20f36e842e6a4a59e760afdc93d41d30e60d624))
+* **feat-status:** remove debug behavior ([b8f038b](https://github.com/SocialGouv/emjpm/commit/b8f038bfb625ced0d7178fddcfff5c6ede9d5781))
+* **mesures-calculation:** eventwh + proxy computed ([8663648](https://github.com/SocialGouv/emjpm/commit/86636483d3c1e116abf78dd1473cf52b801ff5e9))
+* **refacto:** mesures counter ([8f09f0f](https://github.com/SocialGouv/emjpm/commit/8f09f0f0b63ecca0bd2ffeb798a11e881fe274a1))
+* **refacto:** mesures counter ([c28da0c](https://github.com/SocialGouv/emjpm/commit/c28da0c8198b6859433f6820369d243b394ac65b))
+* **rg-validation:** handle input ([bf96137](https://github.com/SocialGouv/emjpm/commit/bf96137ab6a7985ed7bcbf1e21e0f9924bb70239))
+* **signup:** required asterisk ([1963d9c](https://github.com/SocialGouv/emjpm/commit/1963d9cdc78c50c54fa078e3aae35e85d2eb1846))
+
+
+### Features
+
+* **status:** eteinte if now < date_fin_mesure ([466ff95](https://github.com/SocialGouv/emjpm/commit/466ff955a2a2bf240361b0e1a7272c69899b2658))
+
+
+
+
+
 ## [25.139.1](https://github.com/SocialGouv/emjpm/compare/v25.139.0...v25.139.1) (2021-11-04)
 
 

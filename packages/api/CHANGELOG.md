@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.140.0](https://github.com/SocialGouv/emjpm/compare/v25.139.1...v25.140.0) (2021-11-08)
+
+
+### Bug Fixes
+
+* **antenne:** recalcul dispo ([052c6b6](https://github.com/SocialGouv/emjpm/commit/052c6b637c90a762cba25bb9feac2a2443b68812))
+* **db-seed:** upgrade + fix api ([e2c6e7d](https://github.com/SocialGouv/emjpm/commit/e2c6e7dcc79a9b27e1773f2d6220a31d971d8bb3))
+* **mesures-calculation:** eventwh + proxy computed ([8663648](https://github.com/SocialGouv/emjpm/commit/86636483d3c1e116abf78dd1473cf52b801ff5e9))
+
+
+### Features
+
+* **status:** eteinte if now < date_fin_mesure ([466ff95](https://github.com/SocialGouv/emjpm/commit/466ff955a2a2bf240361b0e1a7272c69899b2658))
+
+
+
+
+
 ## [25.139.1](https://github.com/SocialGouv/emjpm/compare/v25.139.0...v25.139.1) (2021-11-04)
 
 **Note:** Version bump only for package @emjpm/api
