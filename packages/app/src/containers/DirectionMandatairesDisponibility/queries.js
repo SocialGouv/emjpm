@@ -13,8 +13,8 @@ export const MANDATAIRE_ACTIVITY = gql`
       aggregate {
         sum {
           mesures_max
-          mesures_awaiting: mesures_awaiting_cached
-          mesures_in_progress: mesures_in_progress_cached
+          mesures_awaiting
+          mesures_in_progress
         }
       }
     }
@@ -29,8 +29,8 @@ export const MANDATAIRE_ACTIVITY = gql`
       aggregate {
         sum {
           mesures_max
-          mesures_awaiting: mesures_awaiting_cached
-          mesures_in_progress: mesures_in_progress_cached
+          mesures_awaiting
+          mesures_in_progress
         }
       }
     }
@@ -45,8 +45,8 @@ export const MANDATAIRE_ACTIVITY = gql`
       aggregate {
         sum {
           mesures_max
-          mesures_awaiting: mesures_awaiting_cached
-          mesures_in_progress: mesures_in_progress_cached
+          mesures_awaiting
+          mesures_in_progress
         }
       }
     }
