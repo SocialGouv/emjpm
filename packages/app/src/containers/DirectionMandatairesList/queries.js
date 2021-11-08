@@ -68,8 +68,8 @@ export const GET_MANDATAIRES = gql`
             count
             sum {
               mesures_max
-              mesures_in_progress
-              mesures_awaiting
+              mesures_in_progress: mesures_in_progress_cached
+              mesures_awaiting: mesures_awaiting_cached
             }
           }
         }
