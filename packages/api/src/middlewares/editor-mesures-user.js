@@ -28,6 +28,9 @@ const editorMesureUserMiddleWare = async (req, res, next) => {
 
   try {
     serviceOrMandataire = await user.$relatedQuery(type);
+    if (!serviceOrMandataire) {
+      throw new Error("Not found");
+    }
     req.serviceOrMandataire = serviceOrMandataire;
   } catch (error) {
     return res.status(422).json({ errors: [{ msg: `${type} not found` }] });
