@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.140.2](https://github.com/SocialGouv/emjpm/compare/v25.140.1...v25.140.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* **api:** mandataire not found ([e5fa65d](https://github.com/SocialGouv/emjpm/commit/e5fa65da2e2532b9d1293c0a53cfa99526e355b2))
+* **column-error:** fix [#2695](https://github.com/SocialGouv/emjpm/issues/2695) ([cb8f401](https://github.com/SocialGouv/emjpm/commit/cb8f4012823c4a6ce3cd2c7c8e369193d9c4e807))
+* **column-error:** fix [#2695](https://github.com/SocialGouv/emjpm/issues/2695) ([459dbf4](https://github.com/SocialGouv/emjpm/commit/459dbf40541c809a9e3e80693cdb1b87f57adec1))
+* **direction:** duplicate entries region filter ([9391c70](https://github.com/SocialGouv/emjpm/commit/9391c7043484324ad02b812f14d322b6a3f987fc))
+* **direction:** fix suspend activity fix [#1320](https://github.com/SocialGouv/emjpm/issues/1320) ([d127d9e](https://github.com/SocialGouv/emjpm/commit/d127d9ee94bf5a42e7846fbc61b6b10a10c70676))
+* **direction:** stats over when suspended ([0c1afca](https://github.com/SocialGouv/emjpm/commit/0c1afca29211f455a6d0690c026e4f7a9e4c575d))
+* **distinct-error:** fix [#2694](https://github.com/SocialGouv/emjpm/issues/2694) ([29a4f19](https://github.com/SocialGouv/emjpm/commit/29a4f19c61bfe137d1cc5a150fdd08b4f5c5a520))
+
+
+
+
+
 ## [25.140.1](https://github.com/SocialGouv/emjpm/compare/v25.140.0...v25.140.1) (2021-11-08)
 
 

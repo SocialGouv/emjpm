@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.140.2](https://github.com/SocialGouv/emjpm/compare/v25.140.1...v25.140.2) (2021-11-08)
+
+
+### Bug Fixes
+
+* **api:** mandataire not found ([e5fa65d](https://github.com/SocialGouv/emjpm/commit/e5fa65da2e2532b9d1293c0a53cfa99526e355b2))
+
+
+
+
+
 ## [25.140.1](https://github.com/SocialGouv/emjpm/compare/v25.140.0...v25.140.1) (2021-11-08)
 
 **Note:** Version bump only for package @emjpm/api
