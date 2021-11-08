@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.140.1](https://github.com/SocialGouv/emjpm/compare/v25.140.0...v25.140.1) (2021-11-08)
+
+
+### Bug Fixes
+
+* **admin-siret:** fix retrieving ([1ce5b1d](https://github.com/SocialGouv/emjpm/commit/1ce5b1d7b1add44eb1caf2d6a8b74fd2873d9ff3))
+
+
+
+
+
 # [25.140.0](https://github.com/SocialGouv/emjpm/compare/v25.139.1...v25.140.0) (2021-11-08)
 
 
