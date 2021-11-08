@@ -69,7 +69,7 @@ function MandataireEditInformationsForm(props) {
       geocode: geocodeInitialValue(mandataire),
       nom: user.nom || "",
       prenom: user.prenom || "",
-      siret: lb_user?.siret || "",
+      siret: lb_user?.siret || mandataire?.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
