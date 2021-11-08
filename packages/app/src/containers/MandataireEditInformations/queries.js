@@ -23,6 +23,7 @@ export const MANDATAIRE = gql`
         suspend_activity
         suspend_activity_reason
         mesures_en_cours
+        siret
         lb_user {
           id
           lb_departements {
