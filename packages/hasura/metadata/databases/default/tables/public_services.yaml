@@ -130,6 +130,8 @@ select_permissions:
     - org_ville
     - prenom
     - siret
+    - suspend_activity
+    - suspend_activity_reason
     - telephone
     - ville
     computed_fields:

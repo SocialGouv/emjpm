@@ -33,8 +33,6 @@ export default function formatMandataire({
   gestionnaire_tis,
   id,
   mesures_last_update,
-  suspend_activity,
-  suspend_activity_reason,
 }) {
   let currentDiscriminator = {};
   const common = {

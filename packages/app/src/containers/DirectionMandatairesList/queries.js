@@ -42,6 +42,8 @@ export const GET_MANDATAIRES = gql`
         id
         telephone
         ville
+        suspend_activity
+        suspend_activity_reason
         user {
           id
           nom
@@ -58,6 +60,8 @@ export const GET_MANDATAIRES = gql`
         ville
         telephone
         email
+        suspend_activity
+        suspend_activity_reason
         service_antennes_aggregate(
           where: { departement_code: { _eq: $departement } }
         ) {
