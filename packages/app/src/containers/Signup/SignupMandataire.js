@@ -102,6 +102,7 @@ function SignupMandataireForm() {
                 placeholder="SIRET"
                 value={formik.values.siret}
                 validationSchema={signupMandataireSchema}
+                required={isIndividuel(user)}
               />
             </FormInputBox>
           </Flex>
