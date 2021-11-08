@@ -8,7 +8,10 @@ import { FiltersContextSerializable } from "~/containers/FiltersContextSerializa
 import { Select } from "~/components";
 import MandataireListItem from "~/containers/MandataireListItem";
 
-import { GET_MANDATAIRES } from "./queries";
+import {
+  GET_MANDATAIRES_BY_DEPARTEMENT,
+  GET_MANDATAIRES_BY_REGION,
+} from "./queries";
 import { MandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
 
@@ -38,19 +41,28 @@ function MandatairesList(props) {
   }, [filters]);
 
   const variables = {
-    departement: filters.departement ? filters.departement : null,
     discriminator: selectedType ? selectedType.value : null,
     limit: RESULT_PER_PAGE,
     offset: currentOffset,
     order: selectedCapacity ? selectedCapacity.value : null,
-    region: filters.region ? parseInt(filters.region) : null,
   };
+
+  if (filters.region && !filters.departement) {
+    variables.region = parseInt(filters.region);
+  } else {
+    variables.departement = filters.departement ? filters.departement : null;
+  }
 
   if (filters.nom) {
     variables.nom = `%${filters.nom}%`;
   }
 
-  const { data, error, loading } = useQuery(GET_MANDATAIRES, {
+  const getMandatairesQuery =
+    filters.region && !filters.departement
+      ? GET_MANDATAIRES_BY_REGION
+      : GET_MANDATAIRES_BY_DEPARTEMENT;
+
+  const { data, error, loading } = useQuery(getMandatairesQuery, {
     variables,
   });
 
