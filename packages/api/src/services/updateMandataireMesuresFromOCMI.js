@@ -27,6 +27,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
   const { id: mandataireId, lb_user_id: lbUserId } = mandataire;
 
   const mutexLockKey = `import-ocmi-${mandataireId}`;
+
   const lockAcquired = await acquireLock(mutexLockKey, {
     timeout: 3600,
   });
@@ -34,92 +35,98 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     throw new Error("cannot acquire lock for " + mutexLockKey);
   }
 
-  const { siret } = await LbUser.query().findById(lbUserId);
-  if (!siret) {
-    return false;
-  }
-
-  let ocmiMandataire = await OcmiMandataire.query().findOne({
-    siret,
-  });
-
-  if (!ocmiMandataire) {
-    // fallback on SIREN lookup
-    ocmiMandataire = await OcmiMandataire.query().findOne(
-      raw("SUBSTR(siret,1,9) = ?", [siret.substr(0, 9)])
-    );
-  }
-
-  if (!ocmiMandataire) {
-    return false;
-  }
-
-  const errors = [];
-
-  const { mesures } = ocmiMandataire;
-
-  // check tribunal_siret validity and load tis
-  const { errors: tiErrors, tribunaux } = await fetchTribunaux(mesures);
-  if (tiErrors.length > 0) {
-    // eslint-disable-next-line no-undef
-    throw new AggregateError(tiErrors);
-  }
-
-  const origLength = mesures.length;
-
-  const allMesures = dedupMesures(mesures);
-
-  const finalLength = allMesures.length;
-  if (finalLength < origLength) {
-    errors.push(
-      JSON.stringify({ count: origLength - finalLength, type: "doublons" })
-    );
-  }
-
-  const allMesureDatas = allMesures.map((mesure) => ({
-    datas: {
-      ...mesure,
-      etats: mesure.etats.map((etat) => ({
-        ...etat,
-        date_changement_etat: new Date(etat.date_changement_etat),
-        pays: etat.pays || "FR",
-      })),
-    },
-    serviceOrMandataire: mandataire,
-    ti: findTribunal(tribunaux, mesure.tribunal_siret),
-    type: "mandataire",
-  }));
-
-  await knex.transaction(async function (trx) {
-    try {
-      // await deleteAllMesures(mandataireId, trx);
-      await saveMesures(allMesureDatas, trx);
-      await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
-
-      const tiIds = allMesureDatas.reduce((s, { datas: { ti } }) => {
-        if (ti?.id) {
-          s.add(ti.id);
-        }
-        return s;
-      }, new Set());
-      for (const [tiId] of tiIds.entries()) {
-        await updateTiMesuresEvent(tiId, trx);
-      }
-
-      await trx.commit();
-    } catch (e) {
-      console.error(e);
-      await trx.rollback(e);
+  const warnErrors = [];
+  let fatalError;
+  try {
+    const { siret } = await LbUser.query().findById(lbUserId);
+    if (!siret) {
+      throw new Error("cannot find lb user " + lbUserId);
     }
-  });
 
-  await releaseLock(mutexLockKey);
+    let ocmiMandataire = await OcmiMandataire.query().findOne({
+      siret,
+    });
+
+    if (!ocmiMandataire) {
+      // fallback on SIREN lookup
+      ocmiMandataire = await OcmiMandataire.query().findOne(
+        raw("SUBSTR(siret,1,9) = ?", [siret.substr(0, 9)])
+      );
+    }
+
+    if (!ocmiMandataire) {
+      throw new Error("cannot find ocmi mandataire for siret " + siret);
+    }
+
+    const { mesures } = ocmiMandataire;
+
+    // check tribunal_siret validity and load tis
+    const { errors: tiErrors, tribunaux } = await fetchTribunaux(mesures);
+    if (tiErrors.length > 0) {
+      throw new Error(
+        tiErrors
+          .map(({ msg, value }) => new Error(`${msg}: ${value}`))
+          .join("\n")
+      );
+    }
+
+    const origLength = mesures.length;
+
+    const allMesures = dedupMesures(mesures);
+
+    const finalLength = allMesures.length;
+    if (finalLength < origLength) {
+      warnErrors.push(
+        JSON.stringify({ count: origLength - finalLength, type: "doublons" })
+      );
+    }
+
+    const allMesureDatas = allMesures.map((mesure) => ({
+      datas: {
+        ...mesure,
+        etats: mesure.etats.map((etat) => ({
+          ...etat,
+          date_changement_etat: new Date(etat.date_changement_etat),
+          pays: etat.pays || "FR",
+        })),
+      },
+      serviceOrMandataire: mandataire,
+      ti: tribunaux[mesure.tribunal_siret],
+      type: "mandataire",
+    }));
+
+    await knex.transaction(async function (trx) {
+      try {
+        await saveMesures(allMesureDatas, trx);
+        await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
+
+        const tiIds = allMesureDatas.reduce((s, { datas: { ti } }) => {
+          if (ti?.id) {
+            s.add(ti.id);
+          }
+          return s;
+        }, new Set());
+        for (const [tiId] of tiIds.entries()) {
+          await updateTiMesuresEvent(tiId, trx);
+        }
+
+        await trx.commit();
+      } catch (e) {
+        console.error(e);
+        await trx.rollback(e);
+      }
+    });
+  } catch (e) {
+    fatalError = e;
+  } finally {
+    await releaseLock(mutexLockKey);
+  }
+
+  if (fatalError) {
+    throw fatalError;
+  }
 
   return {
-    errors,
+    errors: warnErrors,
   };
 };
-
-function findTribunal(tribunaux, tribunalSiret) {
-  return tribunaux.find((t) => t.siret === tribunalSiret);
-}

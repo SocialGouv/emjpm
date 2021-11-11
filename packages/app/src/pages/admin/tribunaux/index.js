@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { Flex, Box } from "rebass";
-import { Button } from "~/components";
+import { Button, Tabs as TabsComponent } from "~/components";
 
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import { Provider as AdminFilterProvider } from "~/containers/FilterWidgets/context";
@@ -12,6 +12,8 @@ import { AdminTribunaux } from "~/containers/AdminTribunaux";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutAdmin } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
+
+const { Tabs, TabList, Tab, TabPanel } = TabsComponent;
 
 function AdminTribunauxPage() {
   const history = useHistory();
@@ -42,7 +44,23 @@ function AdminTribunauxPage() {
                 </Button>
               </Box>
             </AdminFilterBar>
-            <AdminTribunaux />
+            <Tabs style={{ width: "100%" }}>
+              <TabList>
+                <Tab key="all">Tous</Tab>
+                <Tab key="actual">Actuels</Tab>
+                <Tab key="old">Anciens</Tab>
+              </TabList>
+
+              <TabPanel key="all">
+                <AdminTribunaux immutable={null} />
+              </TabPanel>
+              <TabPanel key="actual">
+                <AdminTribunaux immutable={true} />
+              </TabPanel>
+              <TabPanel key="old">
+                <AdminTribunaux immutable={false} />
+              </TabPanel>
+            </Tabs>
           </Flex>
         </BoxWrapper>
       </LayoutAdmin>

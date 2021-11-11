@@ -6,10 +6,14 @@ export const TRIBUNAUX = gql`
     $departementCode: String
     $searchText: String
     $offset: Int
+    $immutable: Boolean
   ) {
     tis_aggregate: search_tis_aggregate(
       args: { search: $searchText }
-      where: { departement: { id: { _eq: $departementCode } } }
+      where: {
+        immutable: { _eq: $immutable }
+        departement: { id: { _eq: $departementCode } }
+      }
     ) {
       aggregate {
         count
@@ -20,7 +24,10 @@ export const TRIBUNAUX = gql`
       order_by: { code_postal: asc }
       offset: $offset
       args: { search: $searchText }
-      where: { departement: { id: { _eq: $departementCode } } }
+      where: {
+        immutable: { _eq: $immutable }
+        departement: { id: { _eq: $departementCode } }
+      }
     ) {
       id
       etablissement
@@ -33,6 +40,10 @@ export const TRIBUNAUX = gql`
       latitude
       longitude
       immutable
+      actual_tribunal_id
+      actual_tribunal {
+        etablissement
+      }
       magistrats {
         id
         user {
@@ -47,6 +58,16 @@ export const TRIBUNAUX = gql`
           count
         }
       }
+    }
+  }
+`;
+
+export const SELECT_TRIBUNAUX = gql`
+  query tiImmutableSelect {
+    tis(where: { immutable: { _eq: true } }) {
+      id
+      etablissement
+      code_postal
     }
   }
 `;

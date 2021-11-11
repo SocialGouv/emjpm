@@ -3,10 +3,10 @@ const AdminTribunauxStyle = {
 };
 
 const cardStyle = {
-  mb: "1",
   overflow: "hidden",
   pl: "16px",
   position: "relative",
+  borderRadius: 0,
 };
 
 const labelStyle = {

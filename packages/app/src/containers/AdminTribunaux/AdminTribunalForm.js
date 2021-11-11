@@ -2,6 +2,8 @@ import { useFormik } from "formik";
 
 import { Box, Flex } from "rebass";
 
+import { FormGroupSelect } from "~/components/AppForm";
+
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { adminTribunalSchema } from "~/validation-schemas";
 import {
@@ -16,6 +18,10 @@ import {
 
 import { cardStyle } from "./style";
 
+import { SELECT_TRIBUNAUX } from "./queries";
+import { useQuery } from "@apollo/client";
+import useQueryReady from "~/hooks/useQueryReady";
+
 export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
   const geocode = geocodeInitialValue(tribunal);
 
@@ -26,6 +32,10 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
       geocode,
       siret: tribunal && tribunal.siret ? tribunal.siret : "",
       telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
+      actual_tribunal_id:
+        tribunal && tribunal.actual_tribunal_id
+          ? tribunal.actual_tribunal_id
+          : "",
     },
     onSubmit: (values, { setSubmitting }) => {
       onSubmit(values);
@@ -33,6 +43,17 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
     },
     validationSchema: adminTribunalSchema,
   });
+
+  const { data: dataTiSelect, loading, error } = useQuery(SELECT_TRIBUNAUX);
+
+  if (!useQueryReady(loading, error)) {
+    return null;
+  }
+
+  const tiOptions = dataTiSelect.tis.map((ti) => ({
+    label: ti.etablissement,
+    value: ti.id,
+  }));
 
   return (
     <Card sx={cardStyle} width="100%">
@@ -91,6 +112,17 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                 <div id="msg-siret">
                   <InlineError message={formik.errors.siret} fieldId="siret" />
                 </div>
+              </Field>
+              <Field>
+                <FormGroupSelect
+                  formik={formik}
+                  id="actual_tribunal_id"
+                  label="Correspond au tribunal actuel"
+                  placeholder="Sélectionnez le nouveau tribunal correspondant"
+                  options={tiOptions}
+                  enableFilterByLabel
+                  isClearable={true}
+                />
               </Field>
               <Field mt="5">
                 <Input

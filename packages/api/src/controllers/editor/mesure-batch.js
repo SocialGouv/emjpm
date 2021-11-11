@@ -82,7 +82,7 @@ const mesureBatch = async (req, res) => {
     const allMesureDatas = [];
     for (const mesure of mesures) {
       const { antenne_id } = mesure;
-      const ti = findTribunal(tribunaux, mesure.tribunal_siret);
+      const ti = tribunaux[mesure.tribunal_siret];
 
       allMesureDatas.push({
         antenneId: antenne_id ? antenne_id : null,
@@ -125,10 +125,6 @@ const mesureBatch = async (req, res) => {
 };
 
 module.exports = mesureBatch;
-
-function findTribunal(tribunaux, tribunalSiret) {
-  return tribunaux.find((t) => t.siret === tribunalSiret);
-}
 
 async function checkAntenneIdValidity(mesures, userId) {
   const errors = [];

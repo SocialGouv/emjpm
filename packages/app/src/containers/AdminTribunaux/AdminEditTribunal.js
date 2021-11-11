@@ -41,6 +41,7 @@ export function AdminEditTribunal({ tribunal, closePanel }) {
             siret: values.siret,
             telephone: values.telephone,
             ville: values.geocode.city,
+            actual_tribunal_id: values.actual_tribunal_id,
           },
         });
       }}

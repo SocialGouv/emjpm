@@ -2,6 +2,15 @@ table:
   name: tis
   schema: public
 object_relationships:
+- name: actual_tribunal
+  using:
+    manual_configuration:
+      column_mapping:
+        actual_tribunal_id: id
+      insertion_order: null
+      remote_table:
+        name: tis
+        schema: public
 - name: departement
   using:
     foreign_key_constraint_on: departement_code

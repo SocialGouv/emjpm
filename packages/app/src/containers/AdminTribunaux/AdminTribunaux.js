@@ -11,7 +11,7 @@ import { TRIBUNAUX } from "./queries";
 
 import RowItem from "./RowItem";
 
-function AdminTribunaux() {
+function AdminTribunaux({ immutable }) {
   const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
   const {
@@ -32,6 +32,7 @@ function AdminTribunaux() {
       limit: resultPerPage,
       offset: currentOffset,
       searchText: searchText || null,
+      immutable,
     },
   });
 

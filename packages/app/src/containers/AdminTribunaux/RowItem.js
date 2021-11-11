@@ -16,6 +16,7 @@ function RowItem({ item }) {
     ville,
     siret,
     immutable,
+    actual_tribunal,
     magistrats_aggregate: {
       aggregate: { count },
     },
@@ -37,7 +38,11 @@ function RowItem({ item }) {
         sx={cardStyle}
         width="100%"
         onClick={toogleEditMode}
-        style={{ cursor: "pointer" }}
+        style={{
+          cursor: "pointer",
+          boxShadow: "0 1px 1px rgba(33,82,139,.16)",
+          marginBottom: "1px",
+        }}
       >
         <Flex justifyContent="space-between">
           <Box>
@@ -59,7 +64,7 @@ function RowItem({ item }) {
                   {ville} ({code_postal})
                 </Text>
               </Flex>
-              <Flex width="200px" flexDirection="column">
+              <Flex width="150px" flexDirection="column">
                 <Text sx={labelStyle}>SIRET</Text>
                 <Text sx={descriptionStyle}>{siret}</Text>
               </Flex>
@@ -67,12 +72,35 @@ function RowItem({ item }) {
                 <Text sx={labelStyle}>Magistrats</Text>
                 <Text sx={descriptionStyle}>{count}</Text>
               </Flex>
+              <Flex width="250px" flexDirection="column">
+                {!immutable && (
+                  <>
+                    <Text sx={labelStyle}>Tribunal correspondant</Text>
+                    <Text sx={descriptionStyle}>
+                      {actual_tribunal && (
+                        <>
+                          <Lock size="14" />
+                          <Text display="inline">
+                            {actual_tribunal.etablissement}
+                          </Text>
+                        </>
+                      )}
+                    </Text>
+                  </>
+                )}
+              </Flex>
             </Flex>
           </Box>
         </Flex>
       </Card>
       {editMode && (
-        <Card>
+        <Card
+          style={{
+            borderRadius: 0,
+            boxShadow: "0 3px 1px rgba(33,82,139,.16)",
+            marginBottom: "3px",
+          }}
+        >
           <AdminTribunalMagistrats magistrats={magistrats} />
           {!immutable && (
             <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />
