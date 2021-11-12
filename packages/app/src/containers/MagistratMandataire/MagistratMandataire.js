@@ -150,7 +150,7 @@ export function MagistratMandataire(props) {
                 {suspendActivity && (
                   <>
                     <br />
-                    {"Motif: " + suspendActivityReason}
+                    {"Motif: " + (suspendActivityReason || "")}
                   </>
                 )}
               </Text>
