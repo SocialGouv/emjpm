@@ -48,7 +48,7 @@ function buildHasuraUser(req) {
     return buildHasuraUser(body.payload.session_variables);
   }
 
-  return false;
+  return {};
 }
 
 const SERIALIZED_PREFIX = "__hasura__;";
