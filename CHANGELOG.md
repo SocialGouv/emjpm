@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.1](https://github.com/SocialGouv/emjpm/compare/v25.141.0...v25.141.1) (2021-11-12)
+
+
+### Bug Fixes
+
+* **webhook:** allow no user trigger event ([08322ec](https://github.com/SocialGouv/emjpm/commit/08322ec779bc86251d05c40de382b4016b00280f))
+* **wording:** fix [#2697](https://github.com/SocialGouv/emjpm/issues/2697) ([6eb2536](https://github.com/SocialGouv/emjpm/commit/6eb2536cc42e176400cac25e6241687e300e41da))
+
+
+
+
+
 # [25.141.0](https://github.com/SocialGouv/emjpm/compare/v25.140.2...v25.141.0) (2021-11-11)
 
 
