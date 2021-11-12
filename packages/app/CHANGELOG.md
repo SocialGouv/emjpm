@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.3](https://github.com/SocialGouv/emjpm/compare/v25.141.2...v25.141.3) (2021-11-12)
+
+
+### Bug Fixes
+
+* **wording:** false to empty string fix [#2698](https://github.com/SocialGouv/emjpm/issues/2698) ([401335a](https://github.com/SocialGouv/emjpm/commit/401335a0499c6ae1805d30d59c41f9f5ee6d5b37))
+
+
+
+
+
 ## [25.141.2](https://github.com/SocialGouv/emjpm/compare/v25.141.1...v25.141.2) (2021-11-12)
 
 **Note:** Version bump only for package @emjpm/app
