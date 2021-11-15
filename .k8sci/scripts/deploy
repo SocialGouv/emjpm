@@ -34,9 +34,9 @@ for context in $K8SCI_CONTEXT_LIST; do
       --set tlsSecretName=${K8SCI_CONTEXT}-cert
       --set replicas=2
       "
-    export HASURA_GRAPHQL_PG_CONNECTIONS="16"
-    export API_PG_CONNECTIONS_MIN="5"
-    export API_PG_CONNECTIONS_MAX="5"
+    export HASURA_GRAPHQL_PG_CONNECTIONS="7"
+    export API_PG_CONNECTIONS_MIN="3"
+    export API_PG_CONNECTIONS_MAX="3"
   else
     export K8SCI_HELM_ARGS="${K8SCI_HELM_ARGS}
       --set tlsSecretName=wildcard-crt
