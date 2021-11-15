@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.9](https://github.com/SocialGouv/emjpm/compare/v25.141.8...v25.141.9) (2021-11-15)
+
+
+### Bug Fixes
+
+* **dispo:** nullable suspend_activity ([2d0e7de](https://github.com/SocialGouv/emjpm/commit/2d0e7de25a86698c0c77471860d3802efcd68205))
+
+
+
+
+
 ## [25.141.8](https://github.com/SocialGouv/emjpm/compare/v25.141.7...v25.141.8) (2021-11-15)
 
 
