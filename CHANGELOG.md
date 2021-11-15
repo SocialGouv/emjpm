@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.6](https://github.com/SocialGouv/emjpm/compare/v25.141.5...v25.141.6) (2021-11-15)
+
+
+### Bug Fixes
+
+* **pg-pool:** try reducing required prod pool ([fca6b9c](https://github.com/SocialGouv/emjpm/commit/fca6b9c940c6582c2b7a1edd12ecb6820a507d3f))
+
+
+
+
+
 ## [25.141.5](https://github.com/SocialGouv/emjpm/compare/v25.141.4...v25.141.5) (2021-11-14)
 
 
