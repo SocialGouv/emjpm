@@ -41,8 +41,5 @@ export const EDIT_MESURE = gql`
         id
       }
     }
-    mesures_last_update {
-      status
-    }
   }
 `;

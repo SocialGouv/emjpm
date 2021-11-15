@@ -47,8 +47,5 @@ export const CLOSE_MESURE = gql`
         date_nomination
       }
     }
-    mesures_last_update {
-      status
-    }
   }
 `;

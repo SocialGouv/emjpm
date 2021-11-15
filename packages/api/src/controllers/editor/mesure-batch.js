@@ -4,13 +4,11 @@ const uniq = require("lodash.uniq");
 const knex = require("~/db/knex");
 
 const antenneIdIsValid = require("~/services/antenneIdIsValid");
-const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 const { validateNumeroRG } = require("~/utils/numero-rg");
 
 const { saveMesures } = require("./service/saveMesure");
 const fetchTribunaux = require("./service/fetchTribunaux");
-const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 
 function checkMesuresNumeroRG(mesures) {
   const invalidRGList = [];
@@ -98,18 +96,6 @@ const mesureBatch = async (req, res) => {
     await knex.transaction(async function (trx) {
       try {
         mesuresQueryResult = await saveMesures(allMesureDatas, trx);
-        await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
-
-        const tiIds = allMesureDatas.reduce((s, { ti }) => {
-          if (ti?.id) {
-            s.add(ti.id);
-          }
-          return s;
-        }, new Set());
-        for (const [tiId] of tiIds.entries()) {
-          await updateTiMesuresEvent(tiId, trx);
-        }
-
         await trx.commit();
       } catch (e) {
         await trx.rollback(e);

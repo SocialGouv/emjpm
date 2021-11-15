@@ -15,8 +15,5 @@ export const DELETE_MESURES = gql`
     delete_mesures(where: { id: { _in: $ids } }) {
       affected_rows
     }
-    mesures_last_update {
-      status
-    }
   }
 `;

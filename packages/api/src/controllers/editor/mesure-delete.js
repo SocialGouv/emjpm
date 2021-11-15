@@ -4,10 +4,6 @@ const { Mesure } = require("~/models");
 const { MesureEtat } = require("~/models");
 const { MesureRessources } = require("~/models");
 
-const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
-
-const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
-
 const deleteById = async (req, res) => {
   const {
     params: { id },
@@ -15,8 +11,6 @@ const deleteById = async (req, res) => {
 
   const serviceOrMandataire = req.serviceOrMandataire;
   const type = req.type;
-
-  const mesure = await Mesure.query().where("id", id);
 
   const affectedRows = await transaction(
     Mesure,
@@ -33,12 +27,6 @@ const deleteById = async (req, res) => {
     }
   );
 
-  await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
-
-  if (mesure.ti_id) {
-    await updateTiMesuresEvent(mesure.ti_id);
-  }
-
   return res.status(200).json({ affected_rows: affectedRows });
 };
 
@@ -52,13 +40,6 @@ const deleteAll = async (req, res) => {
       .where({ [`${type}_id`]: serviceOrMandataire.id });
 
     const mesureIds = mesures.map((m) => m.id);
-
-    const tiIds = mesures.reduce((s, { ti_id }) => {
-      if (ti_id) {
-        s.add(ti_id);
-      }
-      return s;
-    }, new Set());
 
     const affectedRows = await transaction(
       Mesure,
@@ -75,12 +56,6 @@ const deleteAll = async (req, res) => {
         return affectedRows;
       }
     );
-
-    await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id);
-
-    for (const [tiId] of tiIds.entries()) {
-      await updateTiMesuresEvent(tiId);
-    }
 
     return res.status(200).json({ affected_rows: affectedRows });
   } catch (err) {

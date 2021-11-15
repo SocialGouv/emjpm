@@ -591,4 +591,4 @@ event_triggers:
     interval_sec: 10
     num_retries: 1
     timeout_sec: 120
-  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mandataires/recalculate-mesures"
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/update"

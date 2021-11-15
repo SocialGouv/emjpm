@@ -14,9 +14,6 @@ export const DELETE_MESURE = gql`
         id
       }
     }
-    mesures_last_update {
-      status
-    }
   }
 `;
 
@@ -45,9 +42,6 @@ export const DELETE_MESURE_REOUVERTURE = gql`
       returning {
         id
       }
-    }
-    mesures_last_update {
-      status
     }
   }
 `;

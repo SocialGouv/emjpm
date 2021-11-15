@@ -73,8 +73,5 @@ export const ACCEPT_MESURE = gql`
     delete_mesure_en_attente_reouverture(where: { mesure_id: { _eq: $id } }) {
       affected_rows
     }
-    mesures_last_update {
-      status
-    }
   }
 `;

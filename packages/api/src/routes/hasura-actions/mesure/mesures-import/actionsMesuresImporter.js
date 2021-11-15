@@ -12,7 +12,6 @@ const { Mandataire, Service, Mesure } = require("~/models");
 const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresImporterSchemaValidator");
 // const { MesureEtat, MesureRessources } = require("~/models");
 
-const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const knex = require("~/db/knex");
 const { normalizeNumeroRG } = require("~/utils/numero-rg");
 const dedupMesures = require("~/utils/dedup-mesures");
@@ -224,12 +223,6 @@ const importMesures = async ({
         await Mesure.query(trx).upsertGraph(mesure);
       }
     });
-
-    if (mandataire) {
-      await updateGestionnaireMesuresEvent("mandataires", mandataire.id);
-    } else if (service) {
-      await updateGestionnaireMesuresEvent("services", service.id);
-    }
   }
 
   return importSummary;

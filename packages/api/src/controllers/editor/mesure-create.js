@@ -7,9 +7,6 @@ const { validateNumeroRG } = require("~/utils/numero-rg");
 
 const { saveMesure } = require("./service/saveMesure");
 
-const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent.js");
-const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
-
 const mesureCreate = async (req, res) => {
   const errors = validationResult(req);
 
@@ -54,9 +51,6 @@ const mesureCreate = async (req, res) => {
           },
           trx
         );
-        await updateGestionnaireMesuresEvent(type, serviceOrMandataire.id, trx);
-        await updateTiMesuresEvent(ti.id, trx);
-
         await trx.commit();
       } catch (e) {
         await trx.rollback(e);

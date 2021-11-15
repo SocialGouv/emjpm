@@ -3,9 +3,7 @@ const { raw } = require("objection");
 const { OcmiMandataire } = require("~/models");
 const { LbUser } = require("~/models");
 const { Mandataire } = require("~/models");
-const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent.js");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
-const updateGestionnaireMesuresEvent = require("~/services/updateGestionnaireMesuresEvent");
 const dedupMesures = require("~/utils/dedup-mesures");
 
 const knex = require("~/db/knex");
@@ -98,18 +96,6 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     await knex.transaction(async function (trx) {
       try {
         await saveMesures(allMesureDatas, trx);
-        await updateGestionnaireMesuresEvent("mandataires", mandataireId, trx);
-
-        const tiIds = allMesureDatas.reduce((s, { datas: { ti } }) => {
-          if (ti?.id) {
-            s.add(ti.id);
-          }
-          return s;
-        }, new Set());
-        for (const [tiId] of tiIds.entries()) {
-          await updateTiMesuresEvent(tiId, trx);
-        }
-
         await trx.commit();
       } catch (e) {
         console.error(e);
