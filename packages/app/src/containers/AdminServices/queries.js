@@ -21,49 +21,6 @@ export const SERVICES = gql`
   }
 `;
 
-export const MESURES = gql`
-  query mesures($serviceId: Int!) {
-    service_antenne_aggregate(
-      distinct_on: id
-      where: { service_id: { _eq: $serviceId } }
-    ) {
-      nodes {
-        name
-        mesures_awaiting
-        mesures_in_progress
-      }
-    }
-    services(where: { id: { _eq: $serviceId } }) {
-      id
-      mesures_awaiting
-      mesures_in_progress
-    }
-    mesures(where: { service_id: { _eq: $serviceId } }) {
-      id
-      numero_dossier
-      annee_naissance
-      lieu_vie
-      numero_rg
-      nature_mesure
-      champ_mesure
-      status
-      date_nomination
-      created_at
-      ti {
-        etablissement
-        ville
-      }
-      service_antenne {
-        name
-        ville
-        code_postal
-        mesures_awaiting
-        mesures_in_progress
-      }
-    }
-  }
-`;
-
 export const SERVICE = gql`
   query admin_service($serviceId: Int) {
     tis(where: { immutable: { _eq: true } }) {

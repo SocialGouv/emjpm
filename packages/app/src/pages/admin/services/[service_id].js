@@ -1,12 +1,9 @@
-import { Box, Card, Link as StyledLink } from "rebass";
+import { Box, Link as StyledLink } from "rebass";
 
 import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
-import { MesureImportPanel } from "~/containers/MesureImport";
 import { ServiceEditInformations } from "~/containers/ServiceEditInformations";
 import { BoxWrapper } from "~/components/Grid";
-
-import { AdminServiceMesures } from "~/containers/AdminServices";
 
 import { useParams } from "react-router-dom";
 
@@ -35,12 +32,6 @@ function Service() {
             cancelLink="/admin/services"
           />
         </Box>
-        <Card my={1}>
-          <AdminServiceMesures serviceId={serviceId} />
-        </Card>
-        <Card my={1}>
-          <MesureImportPanel serviceId={serviceId} />
-        </Card>
       </BoxWrapper>
     </LayoutAdmin>
   );
