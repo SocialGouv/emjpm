@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.8](https://github.com/SocialGouv/emjpm/compare/v25.141.7...v25.141.8) (2021-11-15)
+
+
+### Bug Fixes
+
+* **clean-admin:** remove service mesures fix [#2360](https://github.com/SocialGouv/emjpm/issues/2360) ([900cbbe](https://github.com/SocialGouv/emjpm/commit/900cbbea63bcda0e1cce0d4046fb941d46c24ebf))
+* **delete-mesure-action:** count reseter and rights ([813580d](https://github.com/SocialGouv/emjpm/commit/813580dc68ec9464e586a8dae8e3b239cd65f0eb))
+* **mesures-count:** fix delete all mesures action ([7380d8a](https://github.com/SocialGouv/emjpm/commit/7380d8ab6bc284df3f53bf0843b1fc324098c9ae))
+
+
+
+
+
 ## [25.141.7](https://github.com/SocialGouv/emjpm/compare/v25.141.6...v25.141.7) (2021-11-15)
 
 
