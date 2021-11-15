@@ -3,6 +3,7 @@ const { Mesure } = require("~/models");
 const { isEnAttente } = require("@emjpm/biz");
 const { getEmailUserDatas } = require("~/email/email-user-data");
 const { cancelReservationEmail } = require("~/email/cancel-reservation-email");
+const resetGestionnaireMesuresCounters = require("~/services/resetGestionnaireMesuresCounters");
 
 module.exports = async function (req, res, next) {
   const { mesure_id } = req.body.input;
@@ -19,6 +20,11 @@ module.exports = async function (req, res, next) {
     const nbDeleted = await Mesure.query().deleteById(mesure_id);
 
     if (nbDeleted === 0) return res.json({ success: false });
+
+    await resetGestionnaireMesuresCounters({
+      mandataireId: mandataire_id,
+      serviceId: service_id,
+    });
 
     const ti = await Tis.query().findById(ti_id);
     const users = await getEmailUserDatas(mandataire_id, service_id);
