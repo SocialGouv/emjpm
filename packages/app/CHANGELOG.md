@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.10](https://github.com/SocialGouv/emjpm/compare/v25.141.9...v25.141.10) (2021-11-15)
+
+
+### Bug Fixes
+
+* **direction:** dup nation view fixing filter ([80626bf](https://github.com/SocialGouv/emjpm/commit/80626bfd9ad1c2e6cc84e4b421ee18e8b43d7e80))
+
+
+
+
+
 ## [25.141.9](https://github.com/SocialGouv/emjpm/compare/v25.141.8...v25.141.9) (2021-11-15)
 
 **Note:** Version bump only for package @emjpm/app
