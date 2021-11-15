@@ -223,7 +223,7 @@ MandataireListItem.propTypes = {
     genre: PropTypes.string.isRequired,
     isAvailable: PropTypes.bool.isRequired,
     mesuresAwaiting: PropTypes.number,
-    mesuresInProgress: PropTypes.number.isRequired,
+    mesuresInProgress: PropTypes.number,
     nom: PropTypes.string.isRequired,
     onItemClick: PropTypes.func,
     prenom: PropTypes.string.isRequired,

@@ -27,7 +27,6 @@ export function DirectionFilters(props) {
 
     return createDepartementOptions(departements);
   }, [regionFilter]);
-
   return (
     <Card>
       <Flex justifyContent={"space-between"} flexWrap="wrap">
@@ -55,7 +54,10 @@ export function DirectionFilters(props) {
                 options={regionOptions}
                 label={"Région"}
                 placeholder={"Région"}
-                value={findOption(regionOptions, filters.region || null)}
+                value={findOption(
+                  regionOptions,
+                  filters.region?.toString() || null
+                )}
                 onChange={(option) =>
                   onFilterChange({
                     departement: null,

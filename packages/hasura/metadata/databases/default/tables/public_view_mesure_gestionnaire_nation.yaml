@@ -1,0 +1,39 @@
+table:
+  name: view_mesure_gestionnaire_nation
+  schema: public
+object_relationships:
+- name: mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        mandataire_id: id
+      insertion_order: null
+      remote_table:
+        name: mandataires
+        schema: public
+- name: service
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: services
+        schema: public
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - service_id
+    - mandataire_id
+    - discriminator
+    - nom
+    - mesures_max
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    - mesures_last_update
+    - suspend_activity
+    filter: {}
+  role: direction

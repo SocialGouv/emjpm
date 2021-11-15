@@ -11,6 +11,7 @@ import MandataireListItem from "~/containers/MandataireListItem";
 import {
   GET_MANDATAIRES_BY_DEPARTEMENT,
   GET_MANDATAIRES_BY_REGION,
+  GET_MANDATAIRES_BY_NATION,
 } from "./queries";
 import { MandatairesListStyle } from "./style";
 import { formatMandatairesList } from "./utils";
@@ -49,7 +50,7 @@ function MandatairesList(props) {
 
   if (filters.region && !filters.departement) {
     variables.region = parseInt(filters.region);
-  } else {
+  } else if (filters.departement) {
     variables.departement = filters.departement ? filters.departement : null;
   }
 
@@ -60,7 +61,9 @@ function MandatairesList(props) {
   const getMandatairesQuery =
     filters.region && !filters.departement
       ? GET_MANDATAIRES_BY_REGION
-      : GET_MANDATAIRES_BY_DEPARTEMENT;
+      : filters.departement
+      ? GET_MANDATAIRES_BY_DEPARTEMENT
+      : GET_MANDATAIRES_BY_NATION;
 
   const { data, error, loading } = useQuery(getMandatairesQuery, {
     variables,

@@ -72,6 +72,7 @@
 - "!include public_view_mandataires_siret.yaml"
 - "!include public_view_mesure_gestionnaire.yaml"
 - "!include public_view_mesure_gestionnaire_departement.yaml"
+- "!include public_view_mesure_gestionnaire_nation.yaml"
 - "!include public_view_mesure_gestionnaire_region.yaml"
 - "!include public_view_mesure_gestionnaire_tis.yaml"
 - "!include public_view_nation_indicateur_inscrit.yaml"
