@@ -11,6 +11,10 @@ type Query {
 }
 
 type Mutation {
+  delete_all_mesures: DeleteAllMesuresActionOutput
+}
+
+type Mutation {
   delete_mesure_action(
     mesure_id: Int!
   ): DeleteMesureActionOutput
@@ -312,5 +316,9 @@ type ResetMesuresCalculationsOutput {
 
 type MesuresLastUpdateResult {
   status: String!
+}
+
+type DeleteAllMesuresActionOutput {
+  success: Boolean!
 }
 

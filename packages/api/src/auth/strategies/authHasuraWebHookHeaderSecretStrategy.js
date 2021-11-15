@@ -22,10 +22,13 @@ function buildHasuraUser(req) {
       "x-hasura-role": role,
       "x-hasura-user-id": userId,
       "x-hasura-service-id": serviceId,
+      "x-hasura-mandataire-id": mandataireId,
     } = session_variables;
 
     return {
       __auth_type__: "hasura",
+      mandataireId:
+        mandataireId !== "null" ? parseInt(mandataireId) : undefined,
       role,
       serviceId: serviceId !== "null" ? parseInt(serviceId) : undefined,
       userId: userId !== "null" ? parseInt(userId) : undefined,

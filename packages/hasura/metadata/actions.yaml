@@ -24,6 +24,17 @@ actions:
   - role: prepose
   - role: service
   - role: ti
+- name: delete_all_mesures
+  definition:
+    kind: synchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/delete-all-mesures'
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
+  permissions:
+  - role: service
+  - role: prepose
+  - role: individuel
 - name: delete_mesure_action
   definition:
     kind: synchronous
@@ -297,4 +308,5 @@ custom_types:
   - name: CalculateMesuresDelayedOutput
   - name: ResetMesuresCalculationsOutput
   - name: MesuresLastUpdateResult
+  - name: DeleteAllMesuresActionOutput
   scalars: []

@@ -1,4 +1,7 @@
 const express = require("express");
+
+const knex = require("~/db/knex");
+
 const { Mesure, User } = require("~/models");
 
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
@@ -34,10 +37,7 @@ router.post("/stats", async (req, res) => {
 router.post(
   "/reset-mesures-calculations",
   async (req, res, next) => {
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-
     const { serviceId, mandataireId } = req.body.input;
-
     try {
       await resetGestionnaireMesuresCounters({ mandataireId, serviceId });
       return res.status(200).json({ state: true });
@@ -47,6 +47,51 @@ router.post(
     }
   },
   hasuraActionErrorHandler("Erreur durant le comptage des mesures")
+);
+
+router.post(
+  "/delete-all-mesures",
+  async (req, res) => {
+    const { serviceId, mandataireId } = req.user;
+
+    const isService = !!serviceId;
+
+    let resultCount;
+    if (isService) {
+      resultCount = await knex.raw(
+        `SELECT COUNT(*) FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
+        [serviceId]
+      );
+    } else {
+      resultCount = await knex.raw(
+        `SELECT COUNT(*) FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
+        [mandataireId]
+      );
+    }
+    const [{ count: strCount }] = resultCount.rows;
+    const count = parseInt(strCount);
+
+    if (count === 0) {
+      return res.json({ success: true });
+    }
+
+    await resetGestionnaireMesuresCounters({ mandataireId, serviceId });
+
+    if (isService) {
+      await knex.raw(
+        `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
+        [serviceId]
+      );
+    } else {
+      await knex.raw(
+        `DELETE FROM mesures WHERE mandataire_id = ?  AND status != 'en_attente'`,
+        [mandataireId]
+      );
+    }
+
+    return res.json({ success: true });
+  },
+  hasuraActionErrorHandler("Erreur lors de la suppression des mesures")
 );
 
 module.exports = router;
