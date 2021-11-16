@@ -56,38 +56,32 @@ router.post(
 
     const isService = !!serviceId;
 
-    let resultCount;
-    if (isService) {
-      resultCount = await knex.raw(
-        `SELECT COUNT(*) FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
-        [serviceId]
-      );
-    } else {
-      resultCount = await knex.raw(
-        `SELECT COUNT(*) FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
-        [mandataireId]
-      );
-    }
-    const [{ count: strCount }] = resultCount.rows;
-    const count = parseInt(strCount);
-
-    if (count === 0) {
-      return res.json({ success: true });
-    }
-
-    await resetGestionnaireMesuresCounters({ mandataireId, serviceId });
-
-    if (isService) {
-      await knex.raw(
-        `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
-        [serviceId]
-      );
-    } else {
-      await knex.raw(
-        `DELETE FROM mesures WHERE mandataire_id = ?  AND status != 'en_attente'`,
-        [mandataireId]
-      );
-    }
+    await knex.transaction(async function (trx) {
+      try {
+        if (isService) {
+          await knex.raw(
+            `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
+            [serviceId]
+          );
+          await knex.raw(
+            `UPDATE services SET mesures_in_progress_cached = 0 WHERE id = ?`,
+            [serviceId]
+          );
+        } else {
+          await knex.raw(
+            `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
+            [mandataireId]
+          );
+          await knex.raw(
+            `UPDATE mandataires SET mesures_en_cours_cached = 0 WHERE id = ?`,
+            [mandataireId]
+          );
+        }
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
+      }
+    });
 
     return res.json({ success: true });
   },

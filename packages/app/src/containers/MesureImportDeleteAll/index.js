@@ -16,7 +16,7 @@ const StyledWarning = styled(Warning)`
   color: orange;
 `;
 
-export default function MesureImportDeleteAll({ mandataireId, serviceId }) {
+export default function MesureImportDeleteAll() {
   const [deleteAllMesures, { loading, error }] = useMutation(
     DELETE_ALL_MESURES,
     {

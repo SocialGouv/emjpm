@@ -145,7 +145,7 @@ function MandataireOcmiMesureImportSwitcher({
         <Heading size={3} mb="1">
           Supprimez vos mesures
         </Heading>
-        <MesureImportDeleteAll mandataireId={mandataireId} />
+        <MesureImportDeleteAll />
         <Text mt="3" mb="1" lineHeight="2">
           {`A la suite de cette manipulation vous pouvez réimporter vos mesures. Pour cela, vous pouvez vous référer à la section suivante.`}
         </Text>

@@ -10,7 +10,6 @@ import {
   MANDATAIRE_MESURE_IMPORT_TEMPLATE,
 } from "~/constants/import";
 import { Heading, Text } from "~/components";
-import useUser from "~/hooks/useUser";
 
 import config from "~/config";
 
@@ -39,8 +38,6 @@ function DocumentLink(props) {
 }
 
 function MandataireMesureImport({ mandataireUserId }) {
-  const user = useUser();
-  const mandataireId = user.mandataire.id;
   return (
     <Flex flexDirection="column">
       <Box mb={2}>
@@ -73,7 +70,7 @@ function MandataireMesureImport({ mandataireUserId }) {
         <Heading size={3} mb="2">
           Supprimez vos mesures
         </Heading>
-        <MesureImportDeleteAll mandataireId={mandataireId} />
+        <MesureImportDeleteAll />
       </Box>
       <Box mt={2}>
         <Heading size={3} mb="2">{`Importez vos mesures`}</Heading>

@@ -54,7 +54,7 @@ function ServiceMesureImport({ serviceId }) {
             </Text>
           </Box>
           <Box mt={2}>
-            <MesureImportDeleteAll serviceId={serviceId} />
+            <MesureImportDeleteAll />
           </Box>
           <Box mt={2}>
             <Heading size={3} mb="2">
