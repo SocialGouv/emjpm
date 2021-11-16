@@ -7,6 +7,7 @@ const { Mesure, User } = require("~/models");
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 const { isMandataire } = require("@emjpm/biz");
 const resetGestionnaireMesuresCounters = require("~/services/resetGestionnaireMesuresCounters");
+const updateMesuresCounter = require("~/services/updateMesuresCounter");
 
 const router = express.Router();
 
@@ -63,20 +64,13 @@ router.post(
             `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
             [serviceId]
           );
-          await knex.raw(
-            `UPDATE services SET mesures_in_progress_cached = 0 WHERE id = ?`,
-            [serviceId]
-          );
         } else {
           await knex.raw(
             `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
             [mandataireId]
           );
-          await knex.raw(
-            `UPDATE mandataires SET mesures_en_cours_cached = 0 WHERE id = ?`,
-            [mandataireId]
-          );
         }
+        await updateMesuresCounter({ mandataireId, serviceId }, trx);
         await trx.commit();
       } catch (e) {
         await trx.rollback(e);

@@ -13,15 +13,7 @@ export const EDIT_MESURE = gql`
     $numero_rg: String
     $ti_id: Int!
     $cabinet: String
-    $mandataireId: Int
-    $serviceId: Int
   ) {
-    reset_mesures_calculations(
-      mandataireId: $mandataireId
-      serviceId: $serviceId
-    ) {
-      state
-    }
     add_or_update: update_mesures(
       where: { id: { _eq: $id } }
       _set: {

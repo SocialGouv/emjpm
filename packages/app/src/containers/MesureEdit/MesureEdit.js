@@ -20,7 +20,7 @@ export function MesureEdit() {
 
   const currentUser = useUser();
 
-  const { service = {}, type, mandataire } = currentUser;
+  const { service = {}, type } = currentUser;
   const { service_antennes = [] } = service;
 
   const userBasePath = getUserBasePath({ type });
@@ -70,8 +70,6 @@ export function MesureEdit() {
         numero_dossier: values.numero_dossier,
         numero_rg: values.numero_rg,
         ti_id: values.ti_id,
-        mandataireId: mandataire ? mandataire.id : null,
-        serviceId: service ? service.id : null,
       },
     });
 

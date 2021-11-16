@@ -2,7 +2,7 @@ const knex = require("~/db/knex");
 const updateTiMesuresEvent = require("~/services/updateTiMesuresEvent");
 
 module.exports = async function updateMesuresCounter(
-  { mandataireId, serviceId, tiIDs },
+  { mandataireId, serviceId, tiIDs = [] },
   trx
 ) {
   const isService = !!serviceId;
