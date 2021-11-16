@@ -18,6 +18,16 @@
   headers:
   - name: HASURA_WEB_HOOK_SECRET
     value_from_env: HASURA_WEB_HOOK_SECRET
+- name: mesures-recount-uncached
+  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/recount-uncached'
+  schedule: '* * * * *'
+  include_in_metadata: true
+  payload:
+    session_variables:
+      x-hasura-role: admin
+  headers:
+  - name: HASURA_WEB_HOOK_SECRET
+    value_from_env: HASURA_WEB_HOOK_SECRET
 - name: mesures-update-status
   webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/update-status'
   schedule: 0 1 * * *
