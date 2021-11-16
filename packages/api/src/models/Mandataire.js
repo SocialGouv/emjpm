@@ -1,5 +1,5 @@
 const knexConnection = require("~/db/knex");
-const { Model } = require("objection");
+const { Model, raw } = require("objection");
 const Models = require(".");
 
 Model.knex(knexConnection);
@@ -11,6 +11,28 @@ class Mandataire extends Model {
 
   static get idColumn() {
     return "id";
+  }
+
+  static get modifiers() {
+    return {
+      selectAll: (query) => {
+        query.select("mandataires.*");
+      },
+      selectMesuresEnAttente: (query) => {
+        query.select(
+          raw("count_mandataire_mesures_en_attente(mandataires.*)::integer").as(
+            "mesures_en_attente"
+          )
+        );
+      },
+      selectMesuresEnCours: (query) => {
+        query.select(
+          raw("count_mandataire_mesures_en_cours(mandataires.*)::integer").as(
+            "mesures_en_cours"
+          )
+        );
+      },
+    };
   }
 
   static get jsonSchema() {
@@ -25,6 +47,8 @@ class Mandataire extends Model {
           type: "string",
         },
         id: { type: "integer" },
+        mesures_en_attente: { type: "integer" },
+        mesures_en_cours: { type: "integer" },
         telephone: { type: "string" },
         telephone_portable: {
           type: "string",

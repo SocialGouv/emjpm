@@ -5,7 +5,11 @@ const { User } = require("~/models");
 
 const getEmailUserDatas = async (mandataire_id, service_id) => {
   if (mandataire_id) {
-    const [mandataire] = await Mandataire.query().where("id", mandataire_id);
+    const [mandataire] = await Mandataire.query()
+      .modify("selectAll")
+      .modify("selectMesuresEnAttente")
+      .modify("selectMesuresEnCours")
+      .where("id", mandataire_id);
     const [currentUser] = await User.query().where("id", mandataire.user_id);
     return [
       {
@@ -15,7 +19,11 @@ const getEmailUserDatas = async (mandataire_id, service_id) => {
       },
     ];
   } else {
-    const service = await Service.query().findById(service_id);
+    const service = await Service.query()
+      .modify("selectAll")
+      .modify("selectMesuresAwaiting")
+      .modify("selectMesuresInProgress")
+      .findById(service_id);
     const serviceAdmins = await ServiceMember.query().where(
       "service_id",
       service_id

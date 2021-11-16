@@ -40,7 +40,7 @@ const getDirectionServices = async (req, res) => {
     [direction] = await Direction.query()
       .where("user_id", userId)
       .withGraphFetched(
-        "[departement_services.[departements], region_service_departements.[services.[departements]]]"
+        "[departement_services(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements], region_service_departements.[services(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements]]]"
       );
     if (!direction) {
       error = "user's direction undefined";
@@ -59,7 +59,11 @@ const getDirectionServices = async (req, res) => {
     const { type: directionType } = direction;
     switch (directionType) {
       case "national":
-        services = await Service.query().select();
+        services = await Service.query()
+          .modify("selectAll")
+          .modify("selectMesuresAwaiting")
+          .modify("selectMesuresInProgress")
+          .select();
         break;
       case "departemental":
         services = direction.departement_services;

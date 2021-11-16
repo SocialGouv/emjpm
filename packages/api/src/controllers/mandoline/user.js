@@ -46,8 +46,8 @@ const getUserService = (user) => {
     lb_adresse,
     lb_code_postal,
     lb_ville,
-    mesures_awaiting_cached: mesures_en_attente,
-    mesures_in_progress_cached: mesures_en_cours,
+    mesures_in_progress: mesures_en_attente,
+    mesures_awaiting: mesures_en_cours,
     departements,
   } = service;
 
@@ -98,7 +98,7 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departement, region], service.[departements]]"
+        "[direction.[departement, region], service(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements]]"
       );
   } catch (error) {
     return res.status(422).json({

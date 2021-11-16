@@ -1,5 +1,5 @@
 const knexConnection = require("~/db/knex");
-const { Model } = require("objection");
+const { Model, raw } = require("objection");
 
 const Models = require(".");
 
@@ -12,6 +12,28 @@ class Service extends Model {
 
   static get idColumn() {
     return "id";
+  }
+
+  static get modifiers() {
+    return {
+      selectAll: (query) => {
+        query.select("services.*");
+      },
+      selectMesuresAwaiting: (query) => {
+        query.select(
+          raw("count_service_mesures_awaiting(services.*)::integer").as(
+            "mesures_awaiting"
+          )
+        );
+      },
+      selectMesuresInProgress: (query) => {
+        query.select(
+          raw("count_service_mesures_in_progress(services.*)::integer").as(
+            "mesures_in_progress"
+          )
+        );
+      },
+    };
   }
 
   static get relationMappings() {
@@ -44,6 +66,8 @@ class Service extends Model {
         },
         etablissement: { type: "string" },
         id: { type: "integer" },
+        mesures_awaiting: { type: "integer" },
+        mesures_in_progress: { type: "integer" },
         telephone: { type: "string" },
         ville: { type: "string" },
       },

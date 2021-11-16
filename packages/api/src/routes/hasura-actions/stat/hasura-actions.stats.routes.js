@@ -1,7 +1,7 @@
 const express = require("express");
 
-const { Departement } = require("~/models");
-const { Mesure } = require("~/models");
+const { Departement, Mesure } = require("~/models");
+
 const hasuraActionErrorHandler = require("~/middlewares/hasura-error-handler");
 
 const availableMesureNbGlobal = require("./available-mesures/global");
