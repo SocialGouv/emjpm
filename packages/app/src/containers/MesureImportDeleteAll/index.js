@@ -21,10 +21,6 @@ export default function MesureImportDeleteAll({ mandataireId, serviceId }) {
     DELETE_ALL_MESURES,
     {
       refetchQueries: ["MESURES_QUERY", "CURRENT_USER_QUERY"],
-      variables: {
-        mandataireId,
-        serviceId,
-      },
     }
   );
   useQueryReady(loading, error);
