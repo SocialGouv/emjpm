@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.12](https://github.com/SocialGouv/emjpm/compare/v25.141.11...v25.141.12) (2021-11-16)
+
+
+### Bug Fixes
+
+* **mandataire:** edit mesure select ti null parent ([21bb9bd](https://github.com/SocialGouv/emjpm/commit/21bb9bd752c819c2280d7e92df06e5c51d7ae599))
+* **mesures-counter:** improve actions ([27a169c](https://github.com/SocialGouv/emjpm/commit/27a169c293807927521e0e671310f1826967277f))
+
+
+
+
+
 ## [25.141.11](https://github.com/SocialGouv/emjpm/compare/v25.141.10...v25.141.11) (2021-11-16)
 
 
