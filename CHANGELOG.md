@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.141.14](https://github.com/SocialGouv/emjpm/compare/v25.141.13...v25.141.14) (2021-11-16)
+
+
+### Bug Fixes
+
+* **mesures-counter:** add routine for uncached ([f8a982b](https://github.com/SocialGouv/emjpm/commit/f8a982b83cd027b4ece95d2a3d56c0ad6b6efbe2))
+
+
+
+
+
 ## [25.141.13](https://github.com/SocialGouv/emjpm/compare/v25.141.12...v25.141.13) (2021-11-16)
 
 
