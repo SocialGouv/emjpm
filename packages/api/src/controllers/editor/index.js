@@ -6,8 +6,10 @@ const mesureBatch = require("./mesure-batch");
 const mesureDelete = require("./mesure-delete");
 const serviceAntennes = require("./service-antennes");
 const tribunaux = require("./tribunaux");
+const editorMesuresAction = require("./editor-mesures-action");
 
 module.exports = {
+  editorMesuresAction,
   mesure,
   mesureBatch,
   mesureCreate,

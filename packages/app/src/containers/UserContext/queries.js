@@ -53,6 +53,10 @@ export const GET_SERVICE_USERS = gql`
           latitude
           suspend_activity
           suspend_activity_reason
+          editor_locked_mesures
+          editor {
+            name
+          }
           departements {
             id
           }
@@ -203,6 +207,10 @@ export const MANDATAIRE_USERS = gql`
         code_postal
         competences
         sync_ocmi_enable
+        editor_locked_mesures
+        editor {
+          name
+        }
         mandataire_tis {
           id
           ti {

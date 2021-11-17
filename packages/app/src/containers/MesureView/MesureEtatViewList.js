@@ -6,8 +6,7 @@ import { Heading, Button, Text } from "~/components";
 import { Flex, Box } from "rebass";
 import { MesureEtatView } from "./MesureEtatView";
 
-import useUser from "~/hooks/useUser";
-import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+import useMesuresLocked from "~/hooks/useMesuresLocked";
 
 function MesureEtatViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
@@ -22,13 +21,11 @@ function MesureEtatViewList({ mesure, ...props }) {
     return selectedMesureEtat.id === etat.id;
   }
 
-  const user = useUser();
-
-  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
-  const mesureModificationButtonProps = mesureModificationDisabled
+  const { locked, message } = useMesuresLocked();
+  const mesureModificationButtonProps = locked
     ? {
         disabled: true,
-        title: SYNC_OCMI_DISABLED_MESSAGE,
+        title: message,
       }
     : {};
 
@@ -45,7 +42,7 @@ function MesureEtatViewList({ mesure, ...props }) {
           <Box key={etat.id}>
             <MesureEtatView
               onClick={() => {
-                if (mesureModificationDisabled) {
+                if (locked) {
                   return;
                 }
                 if (isSelectedMesureEtat(etat)) {
@@ -62,7 +59,7 @@ function MesureEtatViewList({ mesure, ...props }) {
                   borderLeft: "solid 3px gray",
                 },
                 bg: isSelectedMesureEtat(etat) ? "cardSecondary" : "",
-                cursor: mesureModificationDisabled ? "normal" : "pointer",
+                cursor: locked ? "normal" : "pointer",
               }}
             />
             {isSelectedMesureEtat(etat) && (

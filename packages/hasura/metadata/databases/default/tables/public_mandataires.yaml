@@ -5,6 +5,15 @@ object_relationships:
 - name: departement
   using:
     foreign_key_constraint_on: departement_code
+- name: editor
+  using:
+    manual_configuration:
+      column_mapping:
+        editor_id: id
+      insertion_order: null
+      remote_table:
+        name: editors
+        schema: public
 - name: lb_user
   using:
     foreign_key_constraint_on: lb_user_id
@@ -212,6 +221,8 @@ select_permissions:
     - created_at
     - departement_code
     - dispo_max
+    - editor_id
+    - editor_locked_mesures
     - email_send
     - genre
     - id
@@ -244,6 +255,8 @@ select_permissions:
     - created_at
     - departement_code
     - dispo_max
+    - editor_id
+    - editor_locked_mesures
     - email_send
     - genre
     - id

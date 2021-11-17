@@ -9,9 +9,8 @@ import { Heading } from "~/components";
 
 import { content, statusBox, subtitle, title } from "./style";
 
-import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
-
 import { MESURE_EMAIL_MAGISTRAT } from "./queries";
+import useMesuresLocked from "~/hooks/useMesuresLocked";
 import useQueryReady from "~/hooks/useQueryReady";
 import { useQuery } from "@apollo/client";
 
@@ -53,12 +52,13 @@ function MesureDetailView({ mesure, ...props }) {
     formatPays,
   } = mesureFormatter;
 
-  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
+  const { locked, message } = useMesuresLocked();
+
   const mesureModificationButtonProps =
-    mesureModificationDisabled && status !== "en_attente"
+    locked && status !== "en_attente"
       ? {
           disabled: true,
-          title: SYNC_OCMI_DISABLED_MESSAGE,
+          title: message,
         }
       : {};
 

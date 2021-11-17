@@ -13,6 +13,7 @@ const {
   mesure,
   serviceAntennes,
   tribunaux,
+  editorMesuresAction,
   mesureCreate,
   mesureUpdate,
   mesureBatch,
@@ -32,7 +33,7 @@ router
     editorMesureUser,
     editorMesureTi,
     editorMesureAntenne,
-    mesureCreate
+    editorMesuresAction(mesureCreate)
   )
   .put(
     "/mesures/:id",
@@ -41,7 +42,7 @@ router
     editorMesureUser,
     editorMesureTi,
     editorMesureAntenne,
-    mesureUpdate
+    editorMesuresAction(mesureUpdate)
   );
 
 router.post(
@@ -49,11 +50,19 @@ router.post(
   contentTypeValidator,
   batchRules,
   editorMesureUser,
-  mesureBatch
+  editorMesuresAction(mesureBatch)
 );
 
-router.delete("/mesures/:id", editorMesureUser, mesureDelete.deleteById);
-router.delete("/mesures", editorMesureUser, mesureDelete.deleteAll);
+router.delete(
+  "/mesures/:id",
+  editorMesureUser,
+  editorMesuresAction(mesureDelete.deleteById)
+);
+router.delete(
+  "/mesures",
+  editorMesureUser,
+  editorMesuresAction(mesureDelete.deleteAll)
+);
 router.get("/mesures/:id", param("id").isInt(), editorMesureUser, mesure);
 
 module.exports = router;

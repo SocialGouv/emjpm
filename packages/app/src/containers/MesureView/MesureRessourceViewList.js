@@ -6,8 +6,7 @@ import { Heading, Button, Text } from "~/components";
 import { Flex, Box } from "rebass";
 import { MesureRessourceView } from "./MesureRessourceView";
 
-import useUser from "~/hooks/useUser";
-import { SYNC_OCMI_DISABLED_MESSAGE } from "~/constants/mesures";
+import useMesuresLocked from "~/hooks/useMesuresLocked";
 
 function MesureRessourceViewList({ mesure, ...props }) {
   const [creationMode, setCreationMode] = useState(false);
@@ -15,13 +14,11 @@ function MesureRessourceViewList({ mesure, ...props }) {
 
   const { mesureRessources } = mesure;
 
-  const user = useUser();
-
-  const mesureModificationDisabled = user.mandataire?.sync_ocmi_enable;
-  const mesureModificationButtonProps = mesureModificationDisabled
+  const { locked, message } = useMesuresLocked();
+  const mesureModificationButtonProps = locked
     ? {
         disabled: true,
-        title: SYNC_OCMI_DISABLED_MESSAGE,
+        title: message,
       }
     : {};
 
@@ -49,7 +46,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
                 <Box key={ressource.id}>
                   <MesureRessourceView
                     onClick={() => {
-                      if (mesureModificationDisabled) {
+                      if (locked) {
                         return;
                       }
                       if (isSelectedMesureRessource(ressource)) {
@@ -69,7 +66,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
                       bg: isSelectedMesureRessource(ressource)
                         ? "cardSecondary"
                         : "",
-                      cursor: mesureModificationDisabled ? "normal" : "pointer",
+                      cursor: locked ? "normal" : "pointer",
                     }}
                     ressource={ressource}
                   />
