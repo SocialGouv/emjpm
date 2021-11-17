@@ -1,5 +1,6 @@
 const { validationResult } = require("express-validator");
 const { User } = require("~/models");
+const { OcmiMandataire } = require("~/models");
 const { Mandataire } = require("~/models");
 const { Magistrat } = require("~/models");
 const { UserRole } = require("~/models");
@@ -38,6 +39,10 @@ const createMandataire = async (mandataireDatas, user_id) => {
     genre,
   } = mandataireDatas;
 
+  const ocmiMandataire = await OcmiMandataire.query().where({ siret }).first();
+
+  const sync_ocmi_enable = !!ocmiMandataire?.siret;
+
   const mandataire = await Mandataire.query()
     .allowInsert(
       "[siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, departement_code, dispo_max]"
@@ -51,6 +56,7 @@ const createMandataire = async (mandataireDatas, user_id) => {
       latitude,
       longitude,
       siret,
+      sync_ocmi_enable,
       telephone,
       telephone_portable,
       user_id,
@@ -110,7 +116,7 @@ const signup = async (req, res) => {
     switch (type) {
       case "individuel":
       case "prepose": {
-        await createMandataire(body.mandataire, user.id);
+        await createMandataire(body.mandataire, user.id, type);
         break;
       }
       case "service": {
