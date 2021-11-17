@@ -24,23 +24,26 @@ export function AdminEditTribunal({ tribunal, closePanel }) {
       tribunal={tribunal}
       onCancel={closePanel}
       onSubmit={async (values) => {
-        const departement = findDepartementByCodeOrId(departements, {
-          code: values.geocode.depcode,
-        });
+        const { geocode } = values;
+        const departement = geocode
+          ? findDepartementByCodeOrId(departements, {
+              code: geocode.depcode,
+            })
+          : null;
         await updateTribunal({
           refetchQueries: ["tis", "tis_aggregate"],
           variables: {
-            adresse: values.geocode.label,
-            code_postal: values.geocode.postcode,
-            departement_code: departement.id,
+            adresse: geocode?.label,
+            code_postal: geocode?.postcode || "",
+            departement_code: departement?.id,
             email: values.email,
             etablissement: values.etablissement,
             id: tribunal.id,
-            latitude: values.geocode.latitude,
-            longitude: values.geocode.longitude,
+            latitude: geocode?.latitude,
+            longitude: geocode?.longitude,
             siret: values.siret,
             telephone: values.telephone,
-            ville: values.geocode.city,
+            ville: geocode?.city || "",
             actual_tribunal_id: values.actual_tribunal_id,
           },
         });

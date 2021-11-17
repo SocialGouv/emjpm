@@ -4,15 +4,15 @@ export const UPDATE_TRIBUNAL = gql`
   mutation UpdateTribunal(
     $id: Int!
     $etablissement: String!
-    $code_postal: String!
-    $ville: String!
+    $code_postal: String
+    $ville: String
     $email: String
     $telephone: String
     $siret: String
-    $adresse: String!
-    $latitude: Float!
-    $longitude: Float!
-    $departement_code: String!
+    $adresse: String
+    $latitude: Float
+    $longitude: Float
+    $departement_code: String
     $actual_tribunal_id: Int
   ) {
     update_tis(

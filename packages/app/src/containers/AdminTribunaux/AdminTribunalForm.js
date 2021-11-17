@@ -21,15 +21,31 @@ import { cardStyle } from "./style";
 import { SELECT_TRIBUNAUX } from "./queries";
 import { useQuery } from "@apollo/client";
 import useQueryReady from "~/hooks/useQueryReady";
+import { useMemo } from "react";
 
 export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
-  const geocode = geocodeInitialValue(tribunal);
+  const initialGeocode = useMemo(() => {
+    const geocode = geocodeInitialValue(tribunal);
+    if (!geocode.ville && tribunal.ville) {
+      geocode.ville = tribunal.ville;
+    }
+    if (!geocode.code_postal && tribunal.code_postal) {
+      geocode.code_postal = tribunal.code_postal;
+    }
+    if (!geocode.departement_code && tribunal.departement_code) {
+      geocode.departement_code = tribunal.departement_code;
+    }
+    if (!geocode.departement_code && tribunal.departement_code) {
+      geocode.departement_code = tribunal.departement_code;
+    }
+    return geocode;
+  }, [tribunal]);
 
   const formik = useFormik({
     initialValues: {
       email: tribunal && tribunal.email ? tribunal.email : "",
       etablissement: tribunal ? tribunal.etablissement : "",
-      geocode,
+      geocode: initialGeocode,
       siret: tribunal && tribunal.siret ? tribunal.siret : "",
       telephone: tribunal && tribunal.telephone ? tribunal.telephone : "",
       actual_tribunal_id:

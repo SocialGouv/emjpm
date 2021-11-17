@@ -12,7 +12,7 @@ export const TRIBUNAUX = gql`
       args: { search: $searchText }
       where: {
         immutable: { _eq: $immutable }
-        departement: { id: { _eq: $departementCode } }
+        departement_code: { _eq: $departementCode }
       }
     ) {
       aggregate {
@@ -26,7 +26,7 @@ export const TRIBUNAUX = gql`
       args: { search: $searchText }
       where: {
         immutable: { _eq: $immutable }
-        departement: { id: { _eq: $departementCode } }
+        departement_code: { _eq: $departementCode }
       }
     ) {
       id
