@@ -1,10 +1,10 @@
 import useUser from "~/hooks/useUser";
 
 const syncOcmiDisabledMessage =
-  "La synchronisation de vos mesures avec OCMI est activée, désactiver la synchronisation pour pouvoir modifier vos mesures.";
+  "La synchronisation de vos mesures avec OCMI est activée, désactivez la synchronisation pour pouvoir modifier vos mesures.";
 
 const syncEditorDisabledMessage = (editorName) => {
-  return `La synchronisation de vos mesures avec votre éditeur de logiciel "${editorName}" est activée, désactiver la synchronisation pour pouvoir modifier vos mesures.`;
+  return `La synchronisation de vos mesures avec votre éditeur de logiciel "${editorName}" est activée, vous ne pouvez donc plus modifier vos mesures manuellement sur eMJPM.`;
 };
 
 export default function useMesuresLocked() {
