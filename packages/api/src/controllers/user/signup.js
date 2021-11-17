@@ -39,9 +39,13 @@ const createMandataire = async (mandataireDatas, user_id) => {
     genre,
   } = mandataireDatas;
 
-  const ocmiMandataire = await OcmiMandataire.query().where({ siret }).first();
-
-  const sync_ocmi_enable = !!ocmiMandataire?.siret;
+  let sync_ocmi_enable = false;
+  if (siret) {
+    const ocmiMandataire = await OcmiMandataire.query()
+      .where({ siret })
+      .first();
+    sync_ocmi_enable = !!ocmiMandataire?.siret;
+  }
 
   const mandataire = await Mandataire.query()
     .allowInsert(
