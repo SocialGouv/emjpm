@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.142.0](https://github.com/SocialGouv/emjpm/compare/v25.141.14...v25.142.0) (2021-11-17)
+
+
+### Bug Fixes
+
+* **tis-old:** remove required geodata fix [#2702](https://github.com/SocialGouv/emjpm/issues/2702) ([b370335](https://github.com/SocialGouv/emjpm/commit/b370335e7e9587e437262ee4afc58a8f6b4a74fc))
+
+
+### Features
+
+* **editor:** lock mesures when synced fix [#2701](https://github.com/SocialGouv/emjpm/issues/2701) ([845abec](https://github.com/SocialGouv/emjpm/commit/845abec4c60e12fdb98439060a0282da250664fa))
+* **ocmi:** enable sync on new accounts fix [#2700](https://github.com/SocialGouv/emjpm/issues/2700) ([2fa831d](https://github.com/SocialGouv/emjpm/commit/2fa831dfaba241d0e531edbdb1703946f57e5918))
+
+
+
+
+
 ## [25.141.14](https://github.com/SocialGouv/emjpm/compare/v25.141.13...v25.141.14) (2021-11-16)
 
 
