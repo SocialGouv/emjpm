@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.142.2](https://github.com/SocialGouv/emjpm/compare/v25.142.1...v25.142.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* **editor:** lock mesures wording ([594efaf](https://github.com/SocialGouv/emjpm/commit/594efafcae0ec5bac2b6d17d700ce994c4d225b8))
+
+
+
+
+
 ## [25.142.1](https://github.com/SocialGouv/emjpm/compare/v25.142.0...v25.142.1) (2021-11-17)
 
 **Note:** Version bump only for package @emjpm/app
