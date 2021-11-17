@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.142.1](https://github.com/SocialGouv/emjpm/compare/v25.142.0...v25.142.1) (2021-11-17)
+
+
+### Bug Fixes
+
+* **ocmi:** auto enable sync empty siret ([abfae79](https://github.com/SocialGouv/emjpm/commit/abfae799d8cd5c0c23490204d690401ef1bf9e38))
+
+
+
+
+
 # [25.142.0](https://github.com/SocialGouv/emjpm/compare/v25.141.14...v25.142.0) (2021-11-17)
 
 
