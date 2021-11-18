@@ -39,10 +39,10 @@ const TYPE_OPTIONS = [
     label: "Greffier",
     value: "greffier",
   },
-  {
-    label: "Agent de l'état",
-    value: "direction",
-  },
+  // {
+  //   label: "Agent de l'état",
+  //   value: "direction",
+  // },
 ];
 
 export function SignupForm() {
