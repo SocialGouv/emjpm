@@ -447,6 +447,50 @@ const publicRoutes = [
     Component: require("~/pages/signup/congratulation").default,
     path: "/signup/congratulation",
   },
+  {
+    Component: require("~/pages/greffiers/mesures/[mesure_id]/delete").default,
+    path: "/greffiers/mesures/:mesure_id(\\d+)/delete",
+  },
+  {
+    Component: require("~/pages/greffiers/edit-informations").default,
+    path: "/greffiers/edit-informations",
+  },
+  {
+    Component: require("~/pages/greffiers/edit-password").default,
+    path: "/greffiers/edit-password",
+  },
+  {
+    Component: require("~/pages/greffiers/index").default,
+    path: "/greffiers",
+  },
+  {
+    Component:
+      require("~/pages/greffiers/gestionnaires/[gestionnaire_id]/index")
+        .default,
+    path: "/greffiers/gestionnaires/:gestionnaire_id",
+  },
+  {
+    Component: require("~/pages/greffiers/informations").default,
+    path: "/greffiers/informations",
+  },
+  {
+    Component: require("~/pages/greffiers/map").default,
+    path: "/greffiers/map",
+  },
+  {
+    Component: require("~/pages/greffiers/mesures/[mesure_id]").default,
+    path: "/greffiers/mesures/:mesure_id(\\d+)",
+  },
+  {
+    Component: require("~/pages/greffiers/mesures").default,
+    path: "/greffiers/mesures",
+  },
+  {
+    Component:
+      require("~/pages/greffiers/gestionnaires/[gestionnaire_id]/reservation")
+        .default,
+    path: "/greffiers/gestionnaires/:gestionnaire_id/reservation",
+  },
 ];
 
 function Routes() {

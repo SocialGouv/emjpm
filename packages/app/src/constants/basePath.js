@@ -5,6 +5,7 @@ export const PATH = {
   prepose: "/mandataires",
   service: "/services",
   ti: "/magistrats",
+  greffier: "/greffiers",
 };
 
 export function getUserBasePath({ type }) {

@@ -16,12 +16,14 @@ const MAIN_ROLES = [
   "prepose",
   "direction",
   "ti",
+  "greffier",
 ];
 
 const redirs = {
   admin: "/admin",
   default: "/",
   direction: "/direction",
+  greffier: "/greffiers",
   individuel: "/mandataires",
   prepose: "/mandataires",
   service: "/services",

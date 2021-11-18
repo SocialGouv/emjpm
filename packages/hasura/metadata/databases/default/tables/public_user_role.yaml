@@ -19,6 +19,15 @@ select_permissions:
         _eq: X-Hasura-User-Id
   role: direction
 - permission:
+    columns:
+    - id
+    - role_id
+    - user_id
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
     columns: []
     filter:
       user_id:

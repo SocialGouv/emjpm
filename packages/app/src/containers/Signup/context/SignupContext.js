@@ -11,6 +11,7 @@ export function Provider(props) {
   const [user, setUser] = useState(false);
   const [mandataire, setMandataire] = useState(false);
   const [magistrat, setMagistrat] = useState(false);
+  const [greffier, setGreffier] = useState(false);
   const [direction, setDirection] = useState(false);
   const [service, setService] = useState(false);
   const [department, setDepartment] = useState(null);
@@ -23,12 +24,14 @@ export function Provider(props) {
     direction,
     isStepOneValidate,
     magistrat,
+    greffier,
     mandataire,
     region,
     service,
     setDepartment,
     setDirection,
     setMagistrat,
+    setGreffier,
     setMandataire,
     setRegion,
     setService,

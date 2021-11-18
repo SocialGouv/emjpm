@@ -5,6 +5,9 @@ object_relationships:
 - name: departement
   using:
     foreign_key_constraint_on: departement_code
+- name: greffier
+  using:
+    foreign_key_constraint_on: greffier_id
 - name: magistrat
   using:
     foreign_key_constraint_on: magistrat_id
@@ -45,6 +48,11 @@ array_relationships:
 computed_fields:
 - definition:
     function:
+      name: mesure_email_greffier
+      schema: public
+  name: email_greffier
+- definition:
+    function:
       name: mesure_email_magistrat
       schema: public
   name: email_magistrat
@@ -59,6 +67,36 @@ computed_fields:
       schema: public
   name: email_service
 insert_permissions:
+- permission:
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - departement_code
+    - greffier_id
+    - id
+    - is_urgent
+    - judgment_date
+    - lieu_vie
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - service_id
+    - status
+    - ti_id
+    - ville
+  role: greffier
 - permission:
     check:
       mandataire_id:
@@ -253,6 +291,52 @@ select_permissions:
     - ville
     computed_fields:
     - email_magistrat
+    - email_mandataire
+    - email_service
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - date_premier_mesure
+    - date_protection_en_cours
+    - departement_code
+    - en_attente_reouverture
+    - id
+    - is_urgent
+    - judgment_date
+    - latitude
+    - lieu_vie
+    - longitude
+    - magistrat_id
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - resultat_revision
+    - service_id
+    - status
+    - ti_id
+    - type_etablissement
+    - ville
+    computed_fields:
+    - email_greffier
+    - email_magistrat
     filter:
       mandataire:
         user:
@@ -295,6 +379,7 @@ select_permissions:
     - type_etablissement
     - ville
     computed_fields:
+    - email_greffier
     - email_magistrat
     filter:
       mandataire:
@@ -337,6 +422,7 @@ select_permissions:
     - type_etablissement
     - ville
     computed_fields:
+    - email_greffier
     - email_magistrat
     filter:
       service_id:
@@ -378,6 +464,7 @@ select_permissions:
     - type_etablissement
     - ville
     computed_fields:
+    - email_greffier
     - email_mandataire
     - email_service
     filter:
@@ -387,6 +474,40 @@ select_permissions:
             _eq: X-Hasura-User-Id
   role: ti
 update_permissions:
+- permission:
+    check: null
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - cause_sortie
+    - champ_mesure
+    - civilite
+    - code_postal
+    - created_at
+    - date_fin_mesure
+    - date_nomination
+    - departement_code
+    - en_attente_reouverture
+    - id
+    - is_urgent
+    - judgment_date
+    - lieu_vie
+    - mandataire_id
+    - nature_mesure
+    - numero_dossier
+    - numero_rg
+    - pays
+    - service_id
+    - status
+    - ti_id
+    - ville
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     check: null
     columns:
@@ -542,6 +663,13 @@ update_permissions:
           _eq: en_attente
   role: ti
 delete_permissions:
+- permission:
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     filter:
       mandataire:

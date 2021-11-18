@@ -154,6 +154,39 @@ export const MAGISTRAT_USERS = gql`
   }
 `;
 
+export const GREFFIER_USERS = gql`
+  query CURRENT_USER_QUERY($userId: Int!) {
+    users_by_pk(id: $userId) {
+      email
+      created_at
+      cabinet
+      id
+      last_login
+      nom
+      prenom
+      type
+      greffier {
+        id
+        ti_id
+        share_email
+        ti {
+          id
+          siret
+          ville
+          telephone
+          etablissement
+          email
+          code_postal
+          departement_code
+          adresse
+          latitude
+          longitude
+        }
+      }
+    }
+  }
+`;
+
 export const ADMIN_USERS = gql`
   query CURRENT_USER_QUERY($userId: Int!) {
     users_by_pk(id: $userId) {

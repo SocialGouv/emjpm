@@ -52,6 +52,13 @@ select_permissions:
     - id
     - mesure_ressources_id
     - prestations_sociales
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - mesure_ressources_id
+    - prestations_sociales
     filter:
       mesure_ressource:
         mesure:

@@ -221,6 +221,34 @@ select_permissions:
     - created_at
     - departement_code
     - dispo_max
+    - email_send
+    - genre
+    - id
+    - latitude
+    - longitude
+    - mesures_en_attente_cached
+    - mesures_en_cours_cached
+    - mesures_last_update
+    - siret
+    - suspend_activity
+    - suspend_activity_reason
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    computed_fields:
+    - mesures_en_attente
+    - mesures_en_cours
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - dispo_max
     - editor_id
     - editor_locked_mesures
     - email_send
@@ -360,8 +388,3 @@ update_permissions:
       user_id:
         _eq: X-Hasura-User-Id
   role: prepose
-- permission:
-    check: null
-    columns: []
-    filter: {}
-  role: ti

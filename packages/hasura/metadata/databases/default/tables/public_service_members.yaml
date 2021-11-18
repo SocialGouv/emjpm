@@ -20,6 +20,13 @@ select_permissions:
 - permission:
     columns:
     - id
+    - user_id
+    - service_id
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
     - is_admin
     - service_id
     - user_id

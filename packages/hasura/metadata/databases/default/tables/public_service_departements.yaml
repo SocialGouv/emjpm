@@ -70,6 +70,13 @@ select_permissions:
     - id
     - service_id
     - departement_code
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - service_id
+    - departement_code
     filter:
       service_id:
         _eq: X-Hasura-Service-Id

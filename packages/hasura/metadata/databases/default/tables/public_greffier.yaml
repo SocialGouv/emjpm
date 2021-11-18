@@ -1,0 +1,67 @@
+table:
+  name: greffier
+  schema: public
+object_relationships:
+- name: ti
+  using:
+    foreign_key_constraint_on: ti_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: anonymous
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: direction
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: direction_nationale
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: direction_territoriale
+- permission:
+    allow_aggregations: true
+    columns:
+    - share_email
+    - id
+    - ti_id
+    - user_id
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: individuel
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: prepose
+- permission:
+    allow_aggregations: true
+    columns: []
+    filter: {}
+  role: service
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - share_email
+    - ti_id
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: greffier

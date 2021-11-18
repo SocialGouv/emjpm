@@ -36,6 +36,10 @@ const TYPE_OPTIONS = [
     value: "ti",
   },
   {
+    label: "Greffier",
+    value: "greffier",
+  },
+  {
     label: "Agent de l'état",
     value: "direction",
   },

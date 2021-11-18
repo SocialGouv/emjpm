@@ -1,5 +1,11 @@
 import { useQuery } from "@apollo/client";
-import { isDirection, isMagistrat, isMandataire, isService } from "@emjpm/biz";
+import {
+  isDirection,
+  isMagistrat,
+  isMandataire,
+  isService,
+  isGreffier,
+} from "@emjpm/biz";
 
 import { Box } from "rebass";
 import { useParams } from "react-router-dom";
@@ -12,6 +18,7 @@ import { AdminDirectionType } from "~/containers/AdminUserDirection";
 import { AdminUserService } from "~/containers/AdminUserService";
 import { DirectionEditInformations } from "~/containers/DirectionEditInformations";
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
+import { GreffierEditInformations } from "~/containers/GreffierEditInformations";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
 
 import { USER } from "./queries";
@@ -31,7 +38,7 @@ function AdminUser() {
   }
 
   const { users_by_pk: user } = data;
-  const { type, active } = user;
+  const { type } = user;
 
   return (
     <Box>
@@ -56,6 +63,16 @@ function AdminUser() {
       {isMagistrat({ type }) && (
         <Box my={1} width="100%">
           <MagistratEditInformations
+            userId={userId}
+            cancelLink="/admin/users"
+            isAdmin
+            mt="3"
+          />
+        </Box>
+      )}
+      {isGreffier({ type }) && (
+        <Box my={1} width="100%">
+          <GreffierEditInformations
             userId={userId}
             cancelLink="/admin/users"
             isAdmin

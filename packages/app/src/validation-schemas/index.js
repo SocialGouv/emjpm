@@ -8,6 +8,9 @@ import { loginSchema } from "./loginSchema";
 import { magistratEditSchema } from "./magistratEditSchema";
 import { magistratMandataireSchema } from "./magistratMandataireSchema";
 import { magistratMesureDeleteSchema } from "./magistratMesureDeleteSchema";
+import { greffierEditSchema } from "./greffierEditSchema";
+import { greffierMandataireSchema } from "./greffierMandataireSchema";
+import { greffierMesureDeleteSchema } from "./greffierMesureDeleteSchema";
 import { mandataireEditSchema } from "./mandataireEditSchema";
 import { mesureAcceptSchema } from "./mesureAcceptSchema";
 import { mesureCreateSchema } from "./mesureCreateSchema";
@@ -20,6 +23,7 @@ import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
+import { signupGreffierSchema } from "./signupGreffierSchema";
 import { signupMandataireSchema } from "./signupMandataireSchema";
 import { signupSchema } from "./signupSchema";
 import { signupServiceSchema } from "./signupServiceSchema";
@@ -34,6 +38,9 @@ export {
   magistratEditSchema,
   magistratMesureDeleteSchema,
   magistratMandataireSchema,
+  greffierEditSchema,
+  greffierMesureDeleteSchema,
+  greffierMandataireSchema,
   mandataireEditSchema,
   passwordSchema,
   serviceAntenneSchema,
@@ -45,6 +52,7 @@ export {
   resetPasswordSchema,
   signupDirectionSchema,
   signupMagistratSchema,
+  signupGreffierSchema,
   signupSchema,
   signupServiceSchema,
   editorTokenSchema,

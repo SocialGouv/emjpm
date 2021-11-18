@@ -27,6 +27,12 @@ select_permissions:
     - id
     - nom
     filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - nom
+    filter: {}
   role: individuel
 - permission:
     columns:

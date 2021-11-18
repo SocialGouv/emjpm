@@ -10,6 +10,7 @@ import {
   DIRECTION_USERS,
   GET_SERVICE_USERS,
   MAGISTRAT_USERS,
+  GREFFIER_USERS,
   MANDATAIRE_USERS,
 } from "./queries";
 
@@ -22,6 +23,7 @@ const QUERY_TYPE = {
   prepose: MANDATAIRE_USERS,
   service: GET_SERVICE_USERS,
   ti: MAGISTRAT_USERS,
+  greffier: GREFFIER_USERS,
 };
 
 function UserDataQueryProvider(props) {

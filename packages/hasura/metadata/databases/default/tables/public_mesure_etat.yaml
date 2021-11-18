@@ -62,6 +62,20 @@ insert_permissions:
   role: service
 select_permissions:
 - permission:
+    columns:
+    - date_changement_etat
+    - id
+    - mesure_id
+    - champ_mesure
+    - lieu_vie
+    - nature_mesure
+    - type_etablissement
+    - code_postal
+    - pays
+    - ville
+    filter: {}
+  role: greffier
+- permission:
     allow_aggregations: true
     columns:
     - id

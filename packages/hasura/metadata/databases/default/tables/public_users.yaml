@@ -2,6 +2,15 @@ table:
   name: users
   schema: public
 object_relationships:
+- name: greffier
+  using:
+    manual_configuration:
+      column_mapping:
+        id: user_id
+      insertion_order: null
+      remote_table:
+        name: greffier
+        schema: public
 - name: magistrat
   using:
     manual_configuration:
@@ -59,6 +68,24 @@ insert_permissions:
     - cabinet
     - email
   role: direction
+- permission:
+    check:
+      id:
+        _eq: X-Hasura-User-Id
+    columns:
+    - active
+    - id
+    - created_at
+    - last_login
+    - reset_password_expires
+    - cabinet
+    - email
+    - nom
+    - password
+    - prenom
+    - reset_password_token
+    - type
+  role: greffier
 - permission:
     check:
       id:
@@ -215,6 +242,29 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - id
+    - last_login
+    - nom
+    - prenom
+    - type
+    filter:
+      _or:
+      - type:
+          _eq: individuel
+      - type:
+          _eq: prepose
+      - type:
+          _eq: service
+      - id:
+          _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
     - id
     - password
     - created_at
@@ -316,6 +366,25 @@ update_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: direction
+- permission:
+    check: null
+    columns:
+    - active
+    - id
+    - created_at
+    - last_login
+    - reset_password_expires
+    - cabinet
+    - email
+    - nom
+    - password
+    - prenom
+    - reset_password_token
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     check: null
     columns:

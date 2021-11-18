@@ -31,6 +31,16 @@ select_permissions:
     - latitude
     - longitude
     filter: {}
+  role: greffier
+- permission:
+    columns:
+    - cities
+    - code_postal
+    - departement_code
+    - id
+    - latitude
+    - longitude
+    filter: {}
   role: individuel
 - permission:
     columns:

@@ -49,4 +49,32 @@ select_permissions:
     - longitude
     - distance
     filter: {}
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
+    - uid
+    - ti_id
+    - lb_user_id
+    - service_id
+    - mandataire_id
+    - user_type
+    - nom
+    - siret
+    - code_postal
+    - ville
+    - adress
+    - email
+    - departement_code
+    - mesures_max
+    - mesures_awaiting
+    - mesures_in_progress
+    - remaining_capacity
+    - prefer
+    - habilitation
+    - available
+    - latitude
+    - longitude
+    - distance
+    filter: {}
   role: ti

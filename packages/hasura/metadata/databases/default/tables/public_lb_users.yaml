@@ -121,6 +121,21 @@ select_permissions:
     - siret
     - type
     filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - adresse1
+    - adresse2
+    - code_postal
+    - ville
+    - created_at
+    - email
+    - nom
+    - prenom
+    - siret
+    - type
+    filter: {}
   role: individuel
 - permission:
     columns:

@@ -29,6 +29,15 @@ select_permissions:
     - mesures_in_progress
     - mesures_max
     filter: {}
+  role: greffier
+- permission:
+    columns:
+    - departement_code
+    - region_id
+    - mesures_awaiting
+    - mesures_in_progress
+    - mesures_max
+    filter: {}
   role: individuel
 - permission:
     columns:

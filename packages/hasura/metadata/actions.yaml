@@ -18,6 +18,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: greffier
   - role: anonymous
   - role: direction
   - role: individuel
@@ -44,6 +45,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: greffier
   - role: ti
 - name: delete_mesure_etat_action
   definition:
@@ -73,6 +75,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: greffier
   - role: ti
 - name: email_service_member_invitation
   definition:
@@ -166,6 +169,7 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
+  - role: greffier
   - role: ti
   - role: service
   - role: prepose

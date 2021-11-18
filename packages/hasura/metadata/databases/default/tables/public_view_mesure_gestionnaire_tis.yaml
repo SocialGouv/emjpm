@@ -31,4 +31,15 @@ select_permissions:
     - service_id
     - ti_id
     filter: {}
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
+    - discriminator
+    - id
+    - mandataire_id
+    - name
+    - service_id
+    - ti_id
+    filter: {}
   role: ti

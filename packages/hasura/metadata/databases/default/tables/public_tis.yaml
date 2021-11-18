@@ -22,6 +22,13 @@ array_relationships:
       table:
         name: commentaires
         schema: public
+- name: greffiers
+  using:
+    foreign_key_constraint_on:
+      column: ti_id
+      table:
+        name: greffier
+        schema: public
 - name: magistrats
   using:
     foreign_key_constraint_on:
@@ -90,6 +97,29 @@ select_permissions:
     - etablissement
     filter: {}
   role: direction
+- permission:
+    columns:
+    - immutable
+    - date_fermeture
+    - date_modification
+    - date_ouverture
+    - latitude
+    - longitude
+    - departement_code
+    - id
+    - created_at
+    - updated_at
+    - adresse
+    - adresse2
+    - code_postal
+    - email
+    - siret
+    - telephone
+    - type
+    - ville
+    - etablissement
+    filter: {}
+  role: greffier
 - permission:
     columns:
     - immutable

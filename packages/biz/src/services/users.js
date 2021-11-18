@@ -26,6 +26,10 @@ function isMagistrat(user) {
   return user.type === "ti";
 }
 
+function isGreffier(user) {
+  return user.type === "greffier";
+}
+
 function isDirectionNationale(user) {
   return user.user_roles
     .map((ur) => ur.role.name)
@@ -36,6 +40,7 @@ module.exports = {
   isAdmin,
   isDirection,
   isDirectionNationale,
+  isGreffier,
   isIndividuel,
   isMagistrat,
   isMandataire,

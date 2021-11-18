@@ -53,6 +53,15 @@ export const TRIBUNAUX = gql`
           prenom
         }
       }
+      greffiers {
+        id
+        user {
+          id
+          email
+          nom
+          prenom
+        }
+      }
       magistrats_aggregate {
         aggregate {
           count

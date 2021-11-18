@@ -58,6 +58,15 @@ select_permissions:
     - id
     - mesure_id
     - niveau_ressource
+    filter: {}
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
+    - annee
+    - id
+    - mesure_id
+    - niveau_ressource
     filter:
       mesure:
         mandataire_id:

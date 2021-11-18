@@ -63,6 +63,15 @@ select_permissions:
     - departement_code
     - departement_financeur
     filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
   role: individuel
 - permission:
     columns:

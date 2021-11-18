@@ -12,6 +12,20 @@ insert_permissions:
 - permission:
     check:
       ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+    columns:
+    - comment
+    - created_at
+    - id
+    - mandataire_id
+    - service_id
+    - ti_id
+  role: greffier
+- permission:
+    check:
+      ti:
         magistrats:
           user:
             id:
@@ -25,6 +39,20 @@ insert_permissions:
     - ti_id
   role: ti
 select_permissions:
+- permission:
+    columns:
+    - comment
+    - created_at
+    - id
+    - mandataire_id
+    - service_id
+    - ti_id
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     columns:
     - comment
@@ -52,12 +80,34 @@ update_permissions:
     - ti_id
     filter:
       ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    check: null
+    columns:
+    - comment
+    - created_at
+    - id
+    - mandataire_id
+    - service_id
+    - ti_id
+    filter:
+      ti:
         magistrats:
           user:
             id:
               _eq: X-Hasura-User-Id
   role: ti
 delete_permissions:
+- permission:
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     filter:
       ti:

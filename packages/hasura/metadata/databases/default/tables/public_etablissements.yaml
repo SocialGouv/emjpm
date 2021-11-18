@@ -75,6 +75,18 @@ select_permissions:
     - coordyet
     - departement_code
     - id
+    - nofinesset
+    - rslongue
+    - commune
+    filter: {}
+  role: greffier
+- permission:
+    allow_aggregations: true
+    columns:
+    - coordxet
+    - coordyet
+    - departement_code
+    - id
     - categagretab
     - categetab
     - codeape

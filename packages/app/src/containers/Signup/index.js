@@ -4,6 +4,7 @@ import { SignupContext } from "./context";
 import { SignupDirection } from "./SignupDirection";
 import { SignupForm } from "./SignupForm";
 import { SignupMagistrat } from "./SignupMagistrat";
+import { SignupGreffier } from "./SignupGreffier";
 import { SignupMandataire } from "./SignupMandataire";
 import { SignupService } from "./SignupService";
 
@@ -16,6 +17,7 @@ function Signup(props) {
       {isStepOneValidate && user.type === "prepose" && <SignupMandataire />}
       {isStepOneValidate && user.type === "service" && <SignupService />}
       {isStepOneValidate && user.type === "ti" && <SignupMagistrat />}
+      {isStepOneValidate && user.type === "greffier" && <SignupGreffier />}
       {isStepOneValidate && user.type === "direction" && <SignupDirection />}
     </>
   );

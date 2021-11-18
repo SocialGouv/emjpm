@@ -73,6 +73,7 @@ function MesureDetailView({ mesure, ...props }) {
     return null;
   }
   const emailMagistrat = data?.mesures_by_pk.email_magistrat ?? "";
+  const emailGreffier = data?.mesures_by_pk.email_greffier ?? "";
 
   return (
     <Box {...props}>
@@ -221,6 +222,24 @@ function MesureDetailView({ mesure, ...props }) {
             <Button ml={3} variant="outline">
               <Text fontSize={1} fontWeight="normal">
                 Envoyer un email au magistrat à propos de cette mesure
+              </Text>
+            </Button>
+          </Link>
+        </Box>
+      )}
+      {emailGreffier && (
+        <Box textAlign="center" py={1}>
+          <Link
+            href={
+              `mailto:` +
+              emailGreffier +
+              `?subject=` +
+              encodeURIComponent("eMJPM - Concernant la mesure RG-" + numeroRg)
+            }
+          >
+            <Button ml={3} variant="outline">
+              <Text fontSize={1} fontWeight="normal">
+                Envoyer un email au greffier à propos de cette mesure
               </Text>
             </Button>
           </Link>

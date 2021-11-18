@@ -89,6 +89,32 @@ select_permissions:
     filter: {}
   role: direction
 - permission:
+    allow_aggregations: true
+    columns:
+    - adresse
+    - code_postal
+    - contact_email
+    - contact_firstname
+    - contact_lastname
+    - contact_phone
+    - created_at
+    - departement_code
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    - mesures_max
+    - name
+    - service_id
+    - ville
+    computed_fields:
+    - dispo
+    - mesures_awaiting
+    - mesures_in_progress
+    filter: {}
+  role: greffier
+- permission:
     columns:
     - id
     - name
@@ -155,6 +181,13 @@ select_permissions:
     filter: {}
   role: ti
 update_permissions:
+- permission:
+    check: null
+    columns:
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    filter: {}
+  role: greffier
 - permission:
     check: null
     columns:

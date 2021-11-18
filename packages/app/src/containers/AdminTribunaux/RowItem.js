@@ -6,6 +6,7 @@ import { Card, Text } from "~/components";
 
 import { AdminEditTribunal } from "./AdminEditTribunal";
 import { AdminTribunalMagistrats } from "./AdminTribunalMagistrats";
+import { AdminTribunalGreffiers } from "./AdminTribunalGreffiers";
 import { cardStyle, descriptionStyle, labelStyle } from "./style";
 
 function RowItem({ item }) {
@@ -21,6 +22,7 @@ function RowItem({ item }) {
       aggregate: { count },
     },
     magistrats,
+    greffiers,
   } = item;
   const [editMode, setEditMode] = useState(false);
 
@@ -102,6 +104,7 @@ function RowItem({ item }) {
           }}
         >
           <AdminTribunalMagistrats magistrats={magistrats} />
+          <AdminTribunalGreffiers greffiers={greffiers} />
           {!immutable && (
             <AdminEditTribunal tribunal={item} closePanel={toogleEditMode} />
           )}

@@ -212,6 +212,37 @@ select_permissions:
     - competences
     - created_at
     - dispo_max
+    - email
+    - etablissement
+    - id
+    - latitude
+    - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    - mesures_last_update
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_ville
+    - prenom
+    - siret
+    - suspend_activity
+    - suspend_activity_reason
+    - telephone
+    - ville
+    computed_fields:
+    - mesures_awaiting
+    - mesures_in_progress
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - adresse
+    - code_postal
+    - competences
+    - created_at
+    - dispo_max
     - editor_id
     - editor_locked_mesures
     - email
@@ -306,6 +337,16 @@ update_permissions:
     - ville
     filter: {}
   role: direction
+- permission:
+    check: null
+    columns:
+    - etablissement
+    - latitude
+    - longitude
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    filter: {}
+  role: greffier
 - permission:
     check: null
     columns:

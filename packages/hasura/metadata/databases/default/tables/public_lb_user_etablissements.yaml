@@ -26,6 +26,14 @@ select_permissions:
   role: direction
 - permission:
     columns:
+    - id
+    - lb_user_id
+    - etablissement_id
+    - etablissement_rattachement
+    filter: {}
+  role: greffier
+- permission:
+    columns:
     - etablissement_rattachement
     - etablissement_id
     - id

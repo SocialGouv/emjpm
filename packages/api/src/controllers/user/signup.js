@@ -3,6 +3,7 @@ const { User } = require("~/models");
 const { OcmiMandataire } = require("~/models");
 const { Mandataire } = require("~/models");
 const { Magistrat } = require("~/models");
+const { Greffier } = require("~/models");
 const { UserRole } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
 const { ServiceMember } = require("~/models");
@@ -19,6 +20,19 @@ const createMagistrat = async (magistrat, user) => {
     );
   }
   return Magistrat.query().allowInsert("[user_id, ti_id]").insert({
+    ti_id: ti,
+    user_id: user.id,
+  });
+};
+
+const createGreffier = async (greffier, user) => {
+  const { ti } = greffier;
+  if (!ti) {
+    throw new Error(
+      "Renseigner un tribunal est obligatoire pour un compte 'greffier'"
+    );
+  }
+  return Greffier.query().allowInsert("[user_id, ti_id]").insert({
     ti_id: ti,
     user_id: user.id,
   });
@@ -146,6 +160,12 @@ const signup = async (req, res) => {
         const { cabinet } = body.magistrat;
         await User.query().update({ cabinet }).where("id", user.id);
         await createMagistrat(body.magistrat, user);
+        break;
+      }
+      case "greffier": {
+        const { cabinet } = body.greffier;
+        await User.query().update({ cabinet }).where("id", user.id);
+        await createGreffier(body.greffier, user);
         break;
       }
       case "direction": {

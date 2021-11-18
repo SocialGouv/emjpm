@@ -5,6 +5,9 @@ object_relationships:
 - name: champMesureByChampMesure
   using:
     foreign_key_constraint_on: champ_mesure
+- name: greffier
+  using:
+    foreign_key_constraint_on: greffier_id
 - name: magistrat
   using:
     foreign_key_constraint_on: magistrat_id
@@ -27,6 +30,24 @@ object_relationships:
   using:
     foreign_key_constraint_on: ti_id
 insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - annee_naissance
+    - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
+    - nature_mesure
+    - service_id
+    - ti_id
+  role: greffier
 - permission:
     backend_only: false
     check: {}
@@ -109,20 +130,44 @@ insert_permissions:
 select_permissions:
 - permission:
     columns:
-    - id
-    - mesure_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - greffier_id
+    - id
+    - is_urgent
     - judgment_date
     - magistrat_id
     - mandataire_id
+    - mesure_id
+    - nature_mesure
     - service_id
     - ti_id
-    - is_urgent
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    columns:
+    - annee_naissance
     - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - greffier_id
+    - id
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       mandataire:
         user_id:
@@ -130,20 +175,21 @@ select_permissions:
   role: individuel
 - permission:
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - greffier_id
+    - id
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       mandataire:
         user_id:
@@ -151,20 +197,21 @@ select_permissions:
   role: prepose
 - permission:
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - greffier_id
+    - id
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       service:
         service_members:
@@ -173,20 +220,21 @@ select_permissions:
   role: service
 - permission:
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - greffier_id
+    - id
+    - is_urgent
+    - judgment_date
+    - magistrat_id
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       ti:
         magistrats:
@@ -197,20 +245,41 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - id
-    - mesure_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - id
+    - is_urgent
     - judgment_date
-    - magistrat_id
     - mandataire_id
+    - mesure_id
+    - nature_mesure
     - service_id
     - ti_id
-    - is_urgent
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
+- permission:
+    check: null
+    columns:
+    - annee_naissance
     - antenne_id
+    - cabinet
+    - champ_mesure
+    - civilite
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       mandataire:
         user_id:
@@ -219,20 +288,19 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       mandataire:
         user_id:
@@ -241,20 +309,19 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       service:
         service_members:
@@ -264,20 +331,19 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - is_urgent
-    - judgment_date
-    - antenne_id
-    - id
-    - magistrat_id
-    - mandataire_id
-    - mesure_id
-    - service_id
-    - ti_id
     - annee_naissance
+    - antenne_id
     - cabinet
     - champ_mesure
     - civilite
+    - id
+    - is_urgent
+    - judgment_date
+    - mandataire_id
+    - mesure_id
     - nature_mesure
+    - service_id
+    - ti_id
     filter:
       ti:
         magistrats:
@@ -285,6 +351,13 @@ update_permissions:
             _eq: X-Hasura-User-Id
   role: ti
 delete_permissions:
+- permission:
+    filter:
+      ti:
+        greffiers:
+          user_id:
+            _eq: X-Hasura-User-Id
+  role: greffier
 - permission:
     filter:
       mandataire:

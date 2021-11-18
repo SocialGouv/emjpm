@@ -78,6 +78,7 @@ export const MESURE_CONTEXT_QUERY = gql`
         civilite
         judgment_date
         magistrat_id
+        greffier_id
         mandataire_id
         service_id
         ti_id
