@@ -60,15 +60,19 @@ router.post(
     await knex.transaction(async function (trx) {
       try {
         if (isService) {
-          await knex.raw(
-            `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
-            [serviceId]
-          );
+          await knex
+            .raw(
+              `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
+              [serviceId]
+            )
+            .transacting(trx);
         } else {
-          await knex.raw(
-            `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
-            [mandataireId]
-          );
+          await knex
+            .raw(
+              `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
+              [mandataireId]
+            )
+            .transacting(trx);
         }
         await updateMesuresCounter({ mandataireId, serviceId }, trx);
         await trx.commit();
