@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.143.1](https://github.com/SocialGouv/emjpm/compare/v25.143.0...v25.143.1) (2021-11-18)
+
+
+### Bug Fixes
+
+* **hasura:** try to fix init ([b14a2ce](https://github.com/SocialGouv/emjpm/commit/b14a2ce36c9b9be3b95e92ef813d787f28f2315c))
+
+
+
+
+
 # [25.143.0](https://github.com/SocialGouv/emjpm/compare/v25.142.4...v25.143.0) (2021-11-18)
 
 
