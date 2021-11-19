@@ -26,6 +26,9 @@ import { useMemo } from "react";
 export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
   const initialGeocode = useMemo(() => {
     const geocode = geocodeInitialValue(tribunal);
+    if (!tribunal) {
+      return geocode;
+    }
     if (!geocode.ville && tribunal.ville) {
       geocode.ville = tribunal.ville;
     }
