@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.143.2](https://github.com/SocialGouv/emjpm/compare/v25.143.1...v25.143.2) (2021-11-19)
+
+
+### Bug Fixes
+
+* **old-ti:** required actual + bugfix ([f8bf587](https://github.com/SocialGouv/emjpm/commit/f8bf587173e737fc8baa256c678aeb822601d37c))
+* **revert:** disable greffier signup ([2a1f2bc](https://github.com/SocialGouv/emjpm/commit/2a1f2bcf2249a015e14823262fa16783b9a8eb58))
+
+
+
+
+
 ## [25.143.1](https://github.com/SocialGouv/emjpm/compare/v25.143.0...v25.143.1) (2021-11-18)
 
 
