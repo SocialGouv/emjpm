@@ -35,14 +35,14 @@ const TYPE_OPTIONS = [
     label: "Juge des tutelles",
     value: "ti",
   },
-  {
-    label: "Greffier",
-    value: "greffier",
-  },
   // {
-  //   label: "Agent de l'état",
-  //   value: "direction",
+  //   label: "Greffier",
+  //   value: "greffier",
   // },
+  {
+    label: "Agent de l'état",
+    value: "direction",
+  },
 ];
 
 export function SignupForm() {
