@@ -193,6 +193,15 @@ update_permissions:
         user_id:
           _eq: X-Hasura-User-Id
   role: individuel
+- permission:
+    check: null
+    columns:
+    - siret
+    filter:
+      mandataire:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: prepose
 event_triggers:
 - definition:
     delete:
