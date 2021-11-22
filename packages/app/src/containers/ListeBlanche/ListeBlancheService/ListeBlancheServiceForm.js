@@ -199,7 +199,7 @@ export function ListeBlancheServiceForm(props) {
                 formik={formik}
                 required
                 validationSchema={validationSchema}
-                onChange={(e) => {
+                onInput={(e) => {
                   const { value } = e.target;
                   formik.setFieldValue("lb_code_postal", value);
                   formik.setFieldValue("lb_ville", "");

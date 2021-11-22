@@ -3,7 +3,6 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Card } from "rebass";
 
-import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { captureException } from "~/user/sentry";
 import serviceSiretExists from "~/query-service/emjpm-hasura/serviceSiretExists.js";
 
@@ -15,7 +14,6 @@ export function ListeBlancheServiceCreate(props) {
   const { handleCancel, onSuccess } = props;
   const history = useHistory();
   const client = useApolloClient();
-  const { departements } = useDepartements();
 
   const [addService, { loading, error }] = useMutation(ADD_SERVICE, {
     onCompleted: () => history.push("/admin/services"),
