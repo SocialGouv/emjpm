@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.143.3](https://github.com/SocialGouv/emjpm/compare/v25.143.2...v25.143.3) (2021-11-22)
+
+
+### Bug Fixes
+
+* **ti-remapping:** up and dedup migration ([3d6106a](https://github.com/SocialGouv/emjpm/commit/3d6106a4c034d9435c9150274cc7206760374c69))
+* **ti-remapping:** using pgsql query ([0792157](https://github.com/SocialGouv/emjpm/commit/0792157d018c07bb6438ffd88da7c7f8c6ddd547))
+
+
+
+
+
 ## [25.143.2](https://github.com/SocialGouv/emjpm/compare/v25.143.1...v25.143.2) (2021-11-19)
 
 
