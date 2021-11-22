@@ -8,7 +8,7 @@ La présente plateforme e-MJPM est à l’initiative de la Direction générale 
 
 La plateforme peut collecter des données à caractère personnel pour les finalités suivantes :
 
-- Permettre aux magistrats de mieux répartir les mesures de sauvegarde des majeurs protégés grâce à une géolocalisation des mandataires disponibles.
+- Permettre aux magistrats et aux greffiers de mieux répartir les mesures de sauvegarde des majeurs protégés grâce à une géolocalisation des mandataires disponibles.
 - Permettre aux mandataires la gestion, en temps réel, des mesures qui lui sont attribuées.
 
 ## **Données personnelles traitées**
@@ -17,6 +17,7 @@ La plateforme peut traiter les données à caractère personnel suivantes :
 
 - Données de profil de mandataires : Nom ; Prénom ; Téléphone ; Adresse mail professionnelle ; Adresse ; Nombre de mesures souhaitées.
 - Données de profil de magistrats : Nom ; Prénom ; Téléphone ; Adresse mail professionnelle
+- Données de profil de greffiers : Nom ; Prénom ; Téléphone ; Adresse mail professionnelle
 - Données contenues dans les mesures judiciaires
 - Données d’hébergeur : Identifiant de connexion ; Nature des opérations
 - Cookies
@@ -25,9 +26,8 @@ L’inscription est ouverte aux seuls professionnels chargés de la protection d
 
 ## **Bases juridiques**
 
-Les données traitées par la plateforme ont plusieurs fondements juridiques :
+Les traitements de données traitées par la plateforme ont plusieurs fondements juridiques :
 
-- Le consentement de la personne concernée pour une ou plusieurs finalités spécifiques au sens de l’article 6-a du RGPD et en application de l’article 5(3) de la directive 2002/58/CE modifiée ;
 - L’obligation légale à laquelle est soumise le responsable de traitements au sens de l’article 6-c du RGPD ;
 - L’exécution d’une mission d’intérêt public ou relevant de l’exercice de l’autorité publique dont est investi le responsable de traitement au sens de l’article 6-e du RPGD.
 
@@ -41,17 +41,21 @@ Ce traitement est nécessaire à l’exécution d’une mission d’intérêt pu
 
 Ce traitement est nécessaire à l’exécution d’une mission d’intérêt public ou relevant de l’exercice de l’autorité publique dont est investi le responsable de traitement au sens de l’article 6-e du règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à la protection des personnes physiques à l’égard du traitement des données à caractère personnel et à la libre circulation de ces données.
 
-### **c) Données contenues dans les mesures judiciaires**
+### **c) Données de profil des greffiers**
 
 Ce traitement est nécessaire à l’exécution d’une mission d’intérêt public ou relevant de l’exercice de l’autorité publique dont est investi le responsable de traitement au sens de l’article 6-e du règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à la protection des personnes physiques à l’égard du traitement des données à caractère personnel et à la libre circulation de ces données.
 
-### **d) Données d’hébergeur**
+### **d) Données contenues dans les mesures judiciaires**
+
+Ce traitement est nécessaire à l’exécution d’une mission d’intérêt public ou relevant de l’exercice de l’autorité publique dont est investi le responsable de traitement au sens de l’article 6-e du règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à la protection des personnes physiques à l’égard du traitement des données à caractère personnel et à la libre circulation de ces données.
+
+### **e) Données d’hébergeur**
 
 Ce traitement est nécessaire au respect d'une obligation légale à laquelle le responsable de traitement est soumis au sens de l'article 6-c du Règlement (UE) 2016/679 du Parlement européen et du Conseil du 27 avril 2016 relatif à la protection des personnes physiques à l'égard du traitement des données à caractère personnel et à la libre circulation de ces données.
 
-L'obligation légale est posée par la loi LCEN n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique et par les articles 1 et 3 du décret n°2011-219 du 25 février 2011.
+L'obligation légale est posée par la loi LCEN n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique et par l’article 1 du décret n°2021-1363 portant injonction, au regard de la menace grave et actuelle contre la sécurité nationale, de conservation pour une durée d'un an de certaines catégories de données de connexion.
 
-### **e) Cookies**
+### **f) Cookies**
 
 En application de l’article 5(3) de la directive 2002/58/CE modifiée concernant le traitement des données à caractère personnel et la protection de la vie privée dans le secteur des communications électroniques, transposée à l’article 82 de la loi n°78-17 du 6 janvier 1978 relative à l’informatique, aux fichiers et aux libertés, les traceurs ou cookies suivent deux régimes distincts.
 

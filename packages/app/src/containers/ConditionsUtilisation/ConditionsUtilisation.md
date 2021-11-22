@@ -4,7 +4,7 @@ Les présentes conditions générales d’utilisation (dites « CGU ») fixent
 
 ## **Article 1 - Champ d’application**
 
-L'inscription est gratuite et réservée aux mandataires judiciaires de la protection des majeurs, aux magistrats chargés de l'attribution des mesures de protection et aux agents publics des direction.
+L'inscription est gratuite et réservée aux mandataires judiciaires de la protection des majeurs, aux magistrats chargés de l'attribution des mesures de protection, aux greffiers et aux agents publics des direction.
 
 ## **Article 2 – Objet**
 
@@ -27,7 +27,7 @@ Les « Services » sont les fonctionnalités offertes par la plateforme pour ré
 
 ### **4.1 Création du profil**
 
-La création du profil est ouverte à toute personne pouvant justifiant de la fonction de magistrat, chargé de la protection des personnes majeures ou de mandataire judiciaire. Lors de la création de profil, la personne choisit son rôle et détermine son mot de passe. Le rôle ainsi choisit lui ouvrira l'accès à des fonctionnalités spécifiques.
+La création du profil est ouverte à toute personne pouvant justifiant de la fonction de magistrat, chargé de la protection des personnes majeures, de mandataire judiciaire ou de greffier. Lors de la création de profil, la personne choisit son rôle et détermine son mot de passe. Le rôle ainsi choisit lui ouvrira l'accès à des fonctionnalités spécifiques.
 
 L'inscription demeure librement validée par l'équipe e-MJPM.
 
@@ -41,7 +41,13 @@ Lorsque l'Utilisateur a choisi le profil « magistrat », il pourra notamment :
 - Avoir accès aux mandataires présents sur le ressort de leurs tribunaux judiciaires, et notamment les profils des mandataires ;
 - Renseigner la mesure judiciaire qu'il aura prescrite et sélectionner le Mandataire chargé de cette dernière ;
 
-#### **B - Fonctionnalités proposées aux profils « mandataires »**
+#### **B - Fonctionnalités proposées aux profils « greffiers »
+Lorsque l'Utilisateur a choisi le profil « greffier », il pourra notamment : 
+- Accéder à une cartographie des mesures effectives sur leur territoire ;
+- Avoir accès aux mandataires présents sur le ressort de leurs tribunaux judiciaires, et notamment les profils des mandataires ;
+- Renseigner une mesure judiciaire et sélectionner le Mandataire chargé de cette dernière ;
+
+#### **C - Fonctionnalités proposées aux profils « mandataires »**
 
 Lorsque l'Utilisateur a choisi le profil « mandataire », il pourra notamment :
 
@@ -51,7 +57,7 @@ Lorsque l'Utilisateur a choisi le profil « mandataire », il pourra notamment 
 - Accuser réception de la réception de chaque mesure judiciaire qui lui aura été assigné par un magistrat ;
 - Répondre aux enquêtes réalisées pour le compte de l'Administration.
 
-#### **C - Fonctionnalités offertes à un Utilisateur de l'Administration centrale**
+#### **D - Fonctionnalités offertes à un Utilisateur de l'Administration centrale**
 
 Lorsque l'Utilisateur a choisi le profil « Direction » il pourra notamment :
 
