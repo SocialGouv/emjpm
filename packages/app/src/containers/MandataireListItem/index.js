@@ -55,6 +55,7 @@ export default function MandataireListItem(props) {
       suspendActivity,
     },
     isMagistratMap,
+    isGreffierMap,
     onClick,
     departementFilter,
   } = props;
@@ -118,7 +119,7 @@ export default function MandataireListItem(props) {
             <Text sx={descriptionStyle}>{`${codePostal} ${ville}`}</Text>
           </Flex>
 
-          {!isMagistratMap && (
+          {!(isMagistratMap || isGreffierMap) && (
             <>
               <Flex width="200px" sx={columnStyle(true, true)}>
                 <Text sx={labelStyle}>Email</Text>
@@ -232,5 +233,6 @@ MandataireListItem.propTypes = {
     ville: PropTypes.string.isRequired,
   }).isRequired,
   isMagistratMap: PropTypes.bool,
+  isGreffierMap: PropTypes.bool,
   onClick: PropTypes.func,
 };
