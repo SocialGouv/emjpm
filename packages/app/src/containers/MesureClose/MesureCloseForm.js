@@ -12,7 +12,7 @@ export function MesureCloseForm(props) {
 
   const validationSchema = Yup.object().shape({
     cause_sortie: Yup.string().required(),
-    date_fin_mesure: Yup.date().required(),
+    date_fin_mesure: Yup.date().nullable().required(),
   });
 
   const formik = useFormik({
