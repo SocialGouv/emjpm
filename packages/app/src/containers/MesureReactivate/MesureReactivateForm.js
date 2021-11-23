@@ -13,7 +13,7 @@ export function MesureReactivateForm(props) {
       <Box>
         <Text lineHeight="1.5">
           {
-            'Si vous souhaitez rouvrir la mesure, cliquez sur le bouton "Rouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler'
+            'Si vous souhaitez rouvrir la mesure, cliquez sur le bouton "Rouvrir la mesure". Dans le cas contraire, cliquez sur le bouton "Annuler"'
           }
         </Text>
       </Box>

@@ -29,7 +29,7 @@ export function MesureCloseForm(props) {
         </Heading>
         <Text lineHeight="1.5">
           {
-            "Le formulaire ci-contre vous permet de mettre fin au madat de protection selectionne. Vous devez indiquer la date et la raison de l'extinction de la mesure."
+            "Le formulaire ci-contre vous permet de mettre fin au mandat de protection selectionne. Vous devez indiquer la date et la raison de l'extinction de la mesure."
           }
         </Text>
         <Text lineHeight="1.5">
