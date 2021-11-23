@@ -6,7 +6,7 @@ const adminTribunalSchema = yup.object().shape({
   geocode: yup.object().nullable(),
   siret: yup.string().required(),
   telephone: yup.string(),
-  actual_tribunal_id: yup.number().required(),
+  actual_tribunal_id: yup.number().nullable().required(),
 });
 
 export { adminTribunalSchema };
