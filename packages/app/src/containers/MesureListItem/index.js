@@ -179,7 +179,7 @@ export default function MesureListItem(props) {
                 >
                   <Box alignSelf="center" pt="4px" mr="1">
                     <>
-                      {(isUrgent || 21) && (
+                      {isUrgent && (
                         <Flex alignItems="center">
                           <Warning size="24" />
                           <Text
