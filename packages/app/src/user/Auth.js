@@ -53,6 +53,7 @@ const routeByRole = {
   prepose: "/mandataires",
   service: "/services",
   ti: "/magistrats",
+  greffier: "/greffiers",
 };
 
 const getAuthInitialState = () => {
