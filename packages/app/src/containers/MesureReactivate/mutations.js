@@ -8,7 +8,10 @@ export const REACTIVATE_MESURE = gql`
     ) {
       state
     }
-    update_mesures(where: { id: { _eq: $id } }, _set: { status: en_cours }) {
+    update_mesures(
+      where: { id: { _eq: $id } }
+      _set: { status: en_cours, date_fin_mesure: null }
+    ) {
       returning {
         id
         cabinet

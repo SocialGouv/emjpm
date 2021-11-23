@@ -64,6 +64,7 @@ export const ACCEPT_MESURE = gql`
         judgment_date: $judgment_date
         is_urgent: $is_urgent
         civilite: $civilite
+        date_fin_mesure: null
       }
     ) {
       returning {
