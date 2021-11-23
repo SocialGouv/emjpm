@@ -41,7 +41,7 @@ Lorsque l'Utilisateur a choisi le profil « magistrat », il pourra notamment :
 - Avoir accès aux mandataires présents sur le ressort de leurs tribunaux judiciaires, et notamment les profils des mandataires ;
 - Renseigner la mesure judiciaire qu'il aura prescrite et sélectionner le Mandataire chargé de cette dernière ;
 
-#### **B - Fonctionnalités proposées aux profils « greffiers »
+#### **B - Fonctionnalités proposées aux profils « greffiers »**
 Lorsque l'Utilisateur a choisi le profil « greffier », il pourra notamment : 
 - Accéder à une cartographie des mesures effectives sur leur territoire ;
 - Avoir accès aux mandataires présents sur le ressort de leurs tribunaux judiciaires, et notamment les profils des mandataires ;
