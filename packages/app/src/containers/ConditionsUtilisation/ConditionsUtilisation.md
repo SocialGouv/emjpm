@@ -54,7 +54,7 @@ Lorsque l'Utilisateur a choisi le profil « mandataire », il pourra notamment 
 - Gérer l'ensemble des mesures judiciaires qui lui auront été attribuées ;
 - Accéder à une cartographie de leurs mesures judiciaires respectives ;
 - Être notifié par courrier lorsqu'un magistrat leur assigne une mesure judiciaire ;
-- Accuser réception de la réception de chaque mesure judiciaire qui lui aura été assigné par un magistrat ;
+- Accuser réception de la réception de chaque mesure judiciaire qui lui aura été assigné par un magistrat ou par un greffier ;
 - Répondre aux enquêtes réalisées pour le compte de l'Administration.
 
 #### **D - Fonctionnalités offertes à un Utilisateur de l'Administration centrale**
