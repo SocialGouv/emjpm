@@ -12,6 +12,7 @@ export const MAGISTRAT = gql`
         ti_id
         share_email
       }
+      cabinet
     }
     tis(where: { immutable: { _eq: true } }) {
       id

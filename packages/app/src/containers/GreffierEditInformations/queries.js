@@ -7,6 +7,7 @@ export const GREFFIER = gql`
       email
       nom
       prenom
+      cabinet
       greffier {
         id
         ti_id
