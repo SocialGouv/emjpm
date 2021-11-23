@@ -4,7 +4,7 @@ import { Suspense } from "~/components";
 import mdComponents from "~/utils/mdx/md-components";
 
 const Content = lazy(() => importMDX("./PolitiqueConfidentialite.md"));
-export function PolitiqueConfidentialite(props) {
+export function PolitiqueConfidentialite() {
   return (
     <div>
       <Suspense>

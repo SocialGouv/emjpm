@@ -84,6 +84,10 @@ Les données à caractère personnel sont conservées :
       <td class="mdx-td">Ces données sont conservées le temps de l’habilitation du magistrat ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
     </tr>
     <tr>
+      <td class="mdx-td">Données de profil des greffiers</td>
+      <td class="mdx-td">Ces données sont conservées le temps de l’habilitation du greffier ou elles peuvent être supprimées après suppression du compte et dans un bref délai sur demande expresse de la personne concernée. Sans demande expresse, elles sont archivées et sont conservées pendant une durée qui ne peut excéder 5 ans.</td>
+    </tr>
+    <tr>
       <td class="mdx-td">Données contenues dans les mesures judiciaires</td>
       <td class="mdx-td"><b>5 ans</b></td>
     </tr>
