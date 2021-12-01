@@ -52,7 +52,7 @@ module.exports = async (req, res, next) => {
 
       return res.send({ data: wbout });
     } else {
-      return res.status(404).end();
+      return res.send({ data: "" });
     }
   } catch (err) {
     return next(err);
