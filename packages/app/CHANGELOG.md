@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.144.0](https://github.com/SocialGouv/emjpm/compare/v25.143.7...v25.144.0) (2021-12-01)
+
+
+### Bug Fixes
+
+* **admin-cabinet:** magistrat and greffier ([13878f9](https://github.com/SocialGouv/emjpm/commit/13878f96d5cd29f2a9494909401662a5eab94938))
+* **cgu:** formatage titre ([5b1e016](https://github.com/SocialGouv/emjpm/commit/5b1e016df51ebe98d17ea7147d4cf4b1f408f05b))
+* **cgu:** missing text ([cd444cf](https://github.com/SocialGouv/emjpm/commit/cd444cf5ec132aadecedd316a2583df82909a701))
+* **greffier:** map items list alignment ([7ef291e](https://github.com/SocialGouv/emjpm/commit/7ef291e53b7e8968ee0c4e56bf80a2ab7ec5aaf0))
+* **greffier:** route by role on auth ([e287873](https://github.com/SocialGouv/emjpm/commit/e287873d714716636e173ff553e84f206cfa5c61))
+* **is-urgent:** remove debug ([720ec15](https://github.com/SocialGouv/emjpm/commit/720ec1535f5b4e2cace9da326100fb821bdbd1cd))
+* **nullable:** actual_tribunal_id ([8f3cb5f](https://github.com/SocialGouv/emjpm/commit/8f3cb5f12bf75a9dd0eb78781de99e2b6bca87b0))
+* **nullable:** signup greffier et magistrat ([e36ab74](https://github.com/SocialGouv/emjpm/commit/e36ab742eefa048e99ede10c75ea14b6c1674e16))
+* **politique-confidentialit:** missing table line ([ae5bfca](https://github.com/SocialGouv/emjpm/commit/ae5bfca9e6a8a359dc6e3c75939494d08b329468))
+
+
+### Features
+
+* **greffier:** re-enable ([b7d9c47](https://github.com/SocialGouv/emjpm/commit/b7d9c47875ffc101631c2fb1c4dc94e0026e038a))
+
+
+
+
+
 ## [25.143.7](https://github.com/SocialGouv/emjpm/compare/v25.143.6...v25.143.7) (2021-11-23)
 
 
