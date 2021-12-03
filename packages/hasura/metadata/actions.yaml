@@ -146,6 +146,7 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+    timeout: 180
   permissions:
   - role: individuel
 - name: mandataire_statistics
