@@ -42,6 +42,15 @@ export const INDICATORS = gql`
         }
       }
     }
+    greffierLoginCount: view_departement_indicateur_login_aggregate(
+      where: { type: { _eq: "greffier" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
     directionLoginCount: view_departement_indicateur_login_aggregate(
       where: { type: { _eq: "direction" }, id: { _eq: $code } }
     ) {
@@ -81,6 +90,15 @@ export const INDICATORS = gql`
     }
     magistratInscritCount: view_departement_indicateur_inscrit_aggregate(
       where: { _and: { type: { _eq: "ti" }, id: { _eq: $code } } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    greffierInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "greffier" }, id: { _eq: $code } } }
     ) {
       aggregate {
         sum {
@@ -139,6 +157,11 @@ export const FRANCE_INDICATORS = gql`
     ) {
       count
     }
+    greffierLoginCount: view_nation_indicateur_login(
+      where: { type: { _eq: "greffier" } }
+    ) {
+      count
+    }
     directionLoginCount: view_nation_indicateur_login(
       where: { type: { _eq: "direction" } }
     ) {
@@ -163,6 +186,11 @@ export const FRANCE_INDICATORS = gql`
     }
     magistratInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "ti" } }
+    ) {
+      count
+    }
+    greffierInscritCount: view_nation_indicateur_inscrit(
+      where: { type: { _eq: "greffier" } }
     ) {
       count
     }

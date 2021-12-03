@@ -46,6 +46,11 @@ function IndicatorList(props) {
         sum: { count: magistratLoginCount },
       },
     },
+    greffierLoginCount: {
+      aggregate: {
+        sum: { count: greffierLoginCount },
+      },
+    },
     directionLoginCount: {
       aggregate: {
         sum: { count: directionLoginCount },
@@ -71,6 +76,11 @@ function IndicatorList(props) {
         sum: { count: magistratInscritCount },
       },
     },
+    greffierInscritCount: {
+      aggregate: {
+        sum: { count: greffierInscritCount },
+      },
+    },
     directionInscritCount: {
       aggregate: {
         sum: { count: directionInscritCount },
@@ -88,10 +98,26 @@ function IndicatorList(props) {
         <Indicator
           error={false}
           loading={false}
+          title="Magistrats"
+          indicator={magistratInscritCount || 0}
+          headingSize={5}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Greffier"
+          indicator={greffierInscritCount || 0}
+          headingSize={5}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Agents DD/DR"
           indicator={directionInscritCount || 0}
           headingSize={5}
         />
+      </Box>
+      <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
@@ -113,16 +139,23 @@ function IndicatorList(props) {
           indicator={individuelInscritCount || 0}
           headingSize={5}
         />
+      </Box>
+      <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
+      <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
           title="Magistrats"
-          indicator={magistratInscritCount || 0}
+          indicator={magistratLoginCount || 0}
           headingSize={5}
         />
-      </Box>
-      <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
-      <Box my={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Greffiers"
+          indicator={greffierLoginCount || 0}
+          headingSize={5}
+        />
         <Indicator
           error={false}
           loading={false}
@@ -130,6 +163,8 @@ function IndicatorList(props) {
           indicator={directionLoginCount || 0}
           headingSize={5}
         />
+      </Box>
+      <Box my={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
@@ -149,13 +184,6 @@ function IndicatorList(props) {
           loading={false}
           title="Mandataires individuels"
           indicator={individuelLoginCount || 0}
-          headingSize={5}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Magistrats"
-          indicator={magistratLoginCount || 0}
           headingSize={5}
         />
       </Box>

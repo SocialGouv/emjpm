@@ -11,6 +11,8 @@ import { IndicatorBoxStyle } from "./style";
 
 import use30DaysInterval from "~/hooks/use30DaysInterval";
 
+const headingSize = 5;
+
 function IndicatorListTotal() {
   const [currentMonthStart, currentMonthEnd] = use30DaysInterval();
 
@@ -36,11 +38,13 @@ function IndicatorListTotal() {
   const individuelLoginCount = data.individuelLoginCount[0]?.count;
   const preposeLoginCount = data.preposeLoginCount[0]?.count;
   const magistratLoginCount = data.magistratLoginCount[0]?.count;
+  const greffierLoginCount = data.greffierLoginCount[0]?.count;
   const directionLoginCount = data.directionLoginCount[0]?.count;
   const serviceInscritCount = data.serviceInscritCount[0]?.count;
   const individuelInscritCount = data.individuelInscritCount[0]?.count;
   const preposeInscritCount = data.preposeInscritCount[0]?.count;
   const magistratInscritCount = data.magistratInscritCount[0]?.count;
+  const greffierInscritCount = data.greffierInscritCount[0]?.count;
   const directionInscritCount = data.directionInscritCount[0]?.count;
 
   return (
@@ -51,37 +55,46 @@ function IndicatorListTotal() {
         <Indicator
           error={false}
           loading={false}
+          title="Magistrats"
+          indicator={magistratInscritCount || 0}
+          headingSize={headingSize}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Greffiers"
+          indicator={greffierInscritCount || 0}
+          headingSize={headingSize}
+        />
+        <Indicator
+          error={false}
+          loading={false}
           title="Agents DD/DR/DN"
           indicator={directionInscritCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
+      </Box>
+      <Box mt={2} mb={4} sx={IndicatorBoxStyle}>
         <Indicator
           error={false}
           loading={false}
           title="Services mandataires"
           indicator={serviceInscritCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
           indicator={preposeInscritCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
           indicator={individuelInscritCount || 0}
-          headingSize={5}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Magistrats"
-          indicator={magistratInscritCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
       </Box>
       <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
@@ -89,37 +102,46 @@ function IndicatorListTotal() {
         <Indicator
           error={false}
           loading={false}
-          title="Agents DD/DR/DN"
-          indicator={directionLoginCount || 0}
+          title="Magistrats"
+          indicator={magistratLoginCount || 0}
           headingSize={5}
         />
         <Indicator
           error={false}
           loading={false}
+          title="Greffiers"
+          indicator={greffierLoginCount || 0}
+          headingSize={5}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Agents DD/DR/DN"
+          indicator={directionLoginCount || 0}
+          headingSize={headingSize}
+        />
+      </Box>
+      <Box mt={2} mb={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
           title="Services mandataires"
           indicator={serviceLoginCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
         <Indicator
           error={false}
           loading={false}
           title="Préposés à un établissement"
           indicator={preposeLoginCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
         <Indicator
           error={false}
           loading={false}
           title="Mandataires individuels"
           indicator={individuelLoginCount || 0}
-          headingSize={5}
-        />
-        <Indicator
-          error={false}
-          loading={false}
-          title="Magistrats"
-          indicator={magistratLoginCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
       </Box>
       <Heading size={2}>
@@ -131,7 +153,7 @@ function IndicatorListTotal() {
           loading={false}
           title="France entière"
           indicator={mesuresLastMonthCount || 0}
-          headingSize={5}
+          headingSize={headingSize}
         />
       </Box>
     </Box>
