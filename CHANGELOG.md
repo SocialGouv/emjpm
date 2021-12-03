@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.145.0](https://github.com/SocialGouv/emjpm/compare/v25.144.1...v25.145.0) (2021-12-03)
+
+
+### Bug Fixes
+
+* **import-ocmi:** increase timeout ([496b257](https://github.com/SocialGouv/emjpm/commit/496b257e00e582b66cd1236aef9ea3f687d22de2))
+
+
+### Features
+
+* **stats:** add greffier fix [#2708](https://github.com/SocialGouv/emjpm/issues/2708) ([0cbe877](https://github.com/SocialGouv/emjpm/commit/0cbe8774fd61fb3d2d12abca8628fb4f262f8f6a))
+
+
+
+
+
 ## [25.144.1](https://github.com/SocialGouv/emjpm/compare/v25.144.0...v25.144.1) (2021-12-01)
 
 
