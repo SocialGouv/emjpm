@@ -15,6 +15,7 @@ class ApiLog extends Model {
   static get jsonSchema() {
     return {
       properties: {
+        editor_id: { type: "integer" },
         id: { type: "integer" },
         request_method: { type: "string" },
         request_params: { type: "jsonb" },

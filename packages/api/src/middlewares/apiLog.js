@@ -1,6 +1,6 @@
-const jwtDecode = require("jwt-decode");
+const fs = require("fs");
 
-const { ApiLog } = require("~/models");
+const { ApiLog, AccessToken } = require("~/models");
 
 module.exports = async (req, res, next) => {
   const {
@@ -9,18 +9,22 @@ module.exports = async (req, res, next) => {
     originalUrl,
     params,
   } = req;
-  const token = authorization ? authorization.slice(7, -1) : "";
 
-  let decodedToken;
+  const token = authorization ? authorization.slice(7) : "";
 
-  try {
-    decodedToken = jwtDecode(token);
-  } catch (error) {
-    decodedToken = null;
+  let editorId;
+  if (token) {
+    const accessToken = await AccessToken.query().findOne({
+      access_token: token,
+    });
+    editorId = accessToken?.editor_id || null;
+    fs.writeFileSync(
+      "/tmp/test-emjpm.log",
+      JSON.stringify({ editorId, token })
+    );
   }
 
-  if (decodedToken) {
-    const { editorId } = token;
+  if (editorId) {
     const tempSend = res.send;
 
     res.send = async function asyncSend(response) {
