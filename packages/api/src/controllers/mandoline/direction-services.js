@@ -69,12 +69,13 @@ const getDirectionServices = async (req, res) => {
         services = direction.departement_services;
         break;
       case "regional":
-        services = direction.region_service_departements.reduce(
-          (acc, { services }) => {
-            acc.push(...services);
+        services = Object.values(
+          direction.region_service_departements.reduce((acc, { services }) => {
+            for (const service of services) {
+              acc[service.id] = service;
+            }
             return acc;
-          },
-          []
+          }, {})
         );
         break;
       default:
