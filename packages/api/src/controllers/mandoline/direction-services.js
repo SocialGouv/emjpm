@@ -67,6 +67,10 @@ const getDirectionServices = async (req, res) => {
         break;
       case "departemental":
         services = direction.departement_services;
+        // temporary workaround for deprecated single departement by service
+        for (const service of services) {
+          service.departement = service.departements[0];
+        }
         break;
       case "regional":
         services = Object.values(
@@ -77,6 +81,10 @@ const getDirectionServices = async (req, res) => {
             return acc;
           }, {})
         );
+        // temporary workaround for deprecated single departement by service
+        for (const service of services) {
+          service.departement = service.departements[0];
+        }
         break;
       default:
         throw new Error(
@@ -85,10 +93,6 @@ const getDirectionServices = async (req, res) => {
     }
   } catch (err) {
     error = err;
-  }
-
-  for (const service of services) {
-    service.departement = service.departements[0];
   }
 
   if (error) {
