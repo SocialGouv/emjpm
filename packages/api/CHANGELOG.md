@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.145.1](https://github.com/SocialGouv/emjpm/compare/v25.145.0...v25.145.1) (2021-12-06)
+
+
+### Bug Fixes
+
+* **api-logs:** editor-id fix [#2579](https://github.com/SocialGouv/emjpm/issues/2579) ([c7f19aa](https://github.com/SocialGouv/emjpm/commit/c7f19aab4f120ed7ced8e64a9ef6998814a5769f))
+* **api-mandoline:** direction duplicate on region ([a05b6be](https://github.com/SocialGouv/emjpm/commit/a05b6bef1b7cda75d96f9ecb08191792a15dee01))
+* **api-mandoline:** direction national ([fd72146](https://github.com/SocialGouv/emjpm/commit/fd72146c899c7f5becf467bc9912740228da5e63))
+
+
+
+
+
 # [25.145.0](https://github.com/SocialGouv/emjpm/compare/v25.144.1...v25.145.0) (2021-12-03)
 
 **Note:** Version bump only for package @emjpm/api
