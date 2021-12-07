@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.145.2](https://github.com/SocialGouv/emjpm/compare/v25.145.1...v25.145.2) (2021-12-07)
+
+
+### Bug Fixes
+
+* **migration:** dedup double pass ([d796b64](https://github.com/SocialGouv/emjpm/commit/d796b648defe0e94f6e4e9c5125da9963ff0eeb2))
+
+
+
+
+
 ## [25.145.1](https://github.com/SocialGouv/emjpm/compare/v25.145.0...v25.145.1) (2021-12-06)
 
 
