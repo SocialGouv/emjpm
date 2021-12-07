@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.146.0](https://github.com/SocialGouv/emjpm/compare/v25.145.4...v25.146.0) (2021-12-07)
+
+
+### Features
+
+* **k8s:** add network-policy fix [#2715](https://github.com/SocialGouv/emjpm/issues/2715) ([e552994](https://github.com/SocialGouv/emjpm/commit/e552994ed89d89403490bcbafc35f28ae5a7854a))
+
+
+
+
+
 ## [25.145.4](https://github.com/SocialGouv/emjpm/compare/v25.145.3...v25.145.4) (2021-12-07)
 
 **Note:** Version bump only for package @emjpm/app
