@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.145.4](https://github.com/SocialGouv/emjpm/compare/v25.145.3...v25.145.4) (2021-12-07)
+
+
+### Bug Fixes
+
+* **stats:** view indicator login greffier ([f4ade27](https://github.com/SocialGouv/emjpm/commit/f4ade271d8556d6afa1944315072639c8a99ed1d))
+
+
+
+
+
 ## [25.145.3](https://github.com/SocialGouv/emjpm/compare/v25.145.2...v25.145.3) (2021-12-07)
 
 
