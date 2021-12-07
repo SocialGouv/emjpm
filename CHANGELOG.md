@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.145.3](https://github.com/SocialGouv/emjpm/compare/v25.145.2...v25.145.3) (2021-12-07)
+
+
+### Bug Fixes
+
+* **stats:** indicator height ([9ffae7f](https://github.com/SocialGouv/emjpm/commit/9ffae7f4b2d38e92480c7b42e2f2ad1b3a49932f))
+
+
+
+
+
 ## [25.145.2](https://github.com/SocialGouv/emjpm/compare/v25.145.1...v25.145.2) (2021-12-07)
 
 
