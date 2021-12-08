@@ -108,8 +108,8 @@ export default function MesureListItem(props) {
 
             <Flex
               sx={columnStyle(true, true)}
-              minWidth="270px"
-              maxWidth="270px"
+              minWidth="220px"
+              maxWidth="220px"
             >
               {hasTribunal && (
                 <>
@@ -153,8 +153,8 @@ export default function MesureListItem(props) {
             )}
 
             <Flex
-              minWidth="280px"
-              maxWidth="280px"
+              minWidth="230px"
+              maxWidth="230px"
               sx={columnStyle(true, true)}
             >
               <Text sx={labelStyle}>Commune</Text>
