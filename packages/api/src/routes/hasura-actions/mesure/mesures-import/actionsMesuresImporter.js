@@ -53,6 +53,13 @@ async function importMesuresFile({
       data.residence = data.residence.replace("a domicile", "domicile");
       data.residence = data.residence.replace("sdf", "SDF");
     }
+    // retro-compat fallback
+    if (data.date_ouverture) {
+      if (!data.date_nomination) {
+        data.date_nomination = data.date_ouverture;
+      }
+      delete data.date_ouverture;
+    }
   });
 
   logger.info(`[IMPORT MESURES] mesuresToImport: ${mesuresToImport.length}`);
