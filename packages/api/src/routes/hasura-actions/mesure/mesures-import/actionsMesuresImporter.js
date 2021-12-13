@@ -160,7 +160,7 @@ const importMesures = async ({
       ...mesure,
       champ_mesure,
       civilite,
-      date_nomination: toDate(mesure.date_ouverture),
+      date_nomination: toDate(mesure.date_nomination),
       lieu_vie,
       mandataire,
       nature_mesure,

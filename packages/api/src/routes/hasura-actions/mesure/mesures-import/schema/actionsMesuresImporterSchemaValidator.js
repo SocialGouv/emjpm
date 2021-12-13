@@ -3,7 +3,7 @@ const {
 } = require("./actionsMesuresImporterSchema");
 
 const HEADERS = [
-  "date_ouverture",
+  "date_nomination",
   "type",
   "code_postal",
   "ville",

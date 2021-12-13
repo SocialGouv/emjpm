@@ -59,7 +59,7 @@ select_permissions:
     - created_at
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - departement_code
     - email
     - id
@@ -79,7 +79,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
@@ -102,7 +102,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
@@ -125,7 +125,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
@@ -148,7 +148,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
@@ -171,7 +171,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
@@ -194,7 +194,7 @@ select_permissions:
     - immutable
     - date_fermeture
     - date_modification
-    - date_ouverture
+    - date_nomination
     - latitude
     - longitude
     - departement_code
