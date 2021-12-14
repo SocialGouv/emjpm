@@ -23,7 +23,7 @@ export const MESURES_GESTIONNAIRE = gql`
 
 export const MESURES_GESTIONNAIRES = gql`
   query MesureGestionnaires($tiId: Int!) {
-    view_lb_tis(where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }) {
+    view_lb_tis(where: { ti_id: { _eq: $tiId } }) {
       id: uid
       user_type
       mandataire {
