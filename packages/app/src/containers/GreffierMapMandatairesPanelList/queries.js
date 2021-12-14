@@ -1,20 +1,20 @@
 import gql from "graphql-tag";
 
 export const MESURES_GESTIONNAIRE = gql`
-  query view_mesure_gestionnaire(
+  query view_lb_tis(
     $limit: Int!
     $tiId: Int!
     $offset: Int!
     $order: order_by
   ) {
-    count: view_mesure_gestionnaire_aggregate(
+    count: view_lb_tis_aggregate(
       where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }
     ) {
       aggregate {
         count
       }
     }
-    mandatairesList: view_mesure_gestionnaire_tis(
+    mandatairesList: view_lb_tis(
       limit: $limit
       offset: $offset
       order_by: { gestionnaire: { remaining_capacity: $order } }
