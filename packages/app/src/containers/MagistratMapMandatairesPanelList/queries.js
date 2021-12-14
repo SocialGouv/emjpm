@@ -6,6 +6,7 @@ export const MESURES_GESTIONNAIRE = gql`
     $tiId: Int!
     $offset: Int!
     $order: order_by
+    $departementCode: String
   ) {
     count: view_lb_tis_aggregate(
       where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }
@@ -14,11 +15,11 @@ export const MESURES_GESTIONNAIRE = gql`
         count
       }
     }
-    mandatairesList: view_lb_tis(
+    mandatairesList: search_ti_view_lb_tis(
       limit: $limit
       offset: $offset
       order_by: { gestionnaire: { remaining_capacity: $order } }
-      where: { ti_id: { _eq: $tiId } }
+      args: { search: null, tiid: $tiId, departementcode: $departementCode }
     ) {
       gestionnaire {
         id

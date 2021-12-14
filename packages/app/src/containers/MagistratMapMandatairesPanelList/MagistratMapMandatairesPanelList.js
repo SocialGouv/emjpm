@@ -17,7 +17,10 @@ const RESULT_PER_PAGE = 20;
 
 function MagistratMapMandatairesPanelList() {
   const {
-    magistrat: { ti_id: tiId },
+    magistrat: {
+      ti_id: tiId,
+      ti: { departement_code: departementCode },
+    },
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -29,6 +32,7 @@ function MagistratMapMandatairesPanelList() {
       variables: {
         limit: RESULT_PER_PAGE,
         offset: currentOffset,
+        departementCode,
         tiId: tiId,
       },
     },

@@ -17,7 +17,7 @@ const RESULT_PER_PAGE = 20;
 
 function GreffierMapMandatairesPanelList() {
   const {
-    greffier: { ti_id: tiId },
+    greffier: { ti_id: tiId, departement_code: departementCode },
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -30,6 +30,7 @@ function GreffierMapMandatairesPanelList() {
         limit: RESULT_PER_PAGE,
         offset: currentOffset,
         tiId: tiId,
+        departementCode,
       },
     },
     {

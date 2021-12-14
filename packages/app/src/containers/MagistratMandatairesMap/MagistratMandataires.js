@@ -9,12 +9,16 @@ import { MagistratMandatairesMap } from "./MagistratMandatairesMap";
 
 function MagistratMandataires() {
   const { magistrat } = useUser();
-  const { ti_id } = magistrat;
+  const {
+    ti_id,
+    ti: { departement_code: departementCode },
+  } = magistrat;
 
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRES, {
     fetchPolicy: "network-only",
     variables: {
       tiId: ti_id,
+      departementCode,
     },
   });
 

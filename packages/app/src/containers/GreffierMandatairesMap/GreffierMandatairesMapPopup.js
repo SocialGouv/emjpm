@@ -34,19 +34,19 @@ function GreffierMandatairesMapPopup() {
     return <div>Erreur</div>;
   }
 
-  const [currentGestionnaire] = data.view_mesure_gestionnaire;
+  const [currentGestionnaire] = data.view_lb_tis;
   const {
     nom,
     mesures_max,
     mesures_in_progress,
     mandataire,
     service,
-    discriminator,
+    user_type,
     remaining_capacity,
   } = currentGestionnaire;
 
-  const ville = discriminator === "SERVICE" ? service.ville : mandataire.ville;
-  const type = TYPES[discriminator];
+  const ville = user_type === "service" ? service.ville : mandataire.ville;
+  const type = TYPES[user_type];
   return (
     <Box p="1">
       <Text sx={titleStyle}>{nom}</Text>

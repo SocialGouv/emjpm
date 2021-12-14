@@ -22,9 +22,9 @@ export const MESURES_GESTIONNAIRE = gql`
 `;
 
 export const MESURES_GESTIONNAIRES = gql`
-  query MesureGestionnaires($tiId: Int!) {
+  query MesureGestionnaires($tiId: Int!, $departementCode: String) {
     view_lb_tis: search_ti_view_lb_tis(
-      args: { search: null, departementcode: null, tiid: $tiId }
+      args: { search: null, departementcode: $departementCode, tiid: $tiId }
     ) {
       id: uid
       user_type
