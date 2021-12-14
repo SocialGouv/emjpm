@@ -54,7 +54,7 @@ function Navigation({ links }) {
               px: 1,
             }}
           >
-            Activité suspendue
+            Activité interrompue
           </Box>
         )}
       </Flex>

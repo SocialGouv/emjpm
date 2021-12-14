@@ -142,7 +142,7 @@ export function GreffierMandataire(props) {
                   ...(suspendActivity ? { color: "error" } : {}),
                 }}
               >
-                {suspendActivity ? "Activité suspendue" : currentAvailability}
+                {suspendActivity ? "Activité interrompue" : currentAvailability}
                 {suspendActivity && (
                   <>
                     <br />
@@ -166,7 +166,7 @@ export function GreffierMandataire(props) {
                   }}
                   display="inline"
                 >
-                  {suspendActivity ? "Activité suspendue" : dispoMax}
+                  {suspendActivity ? "Activité interrompue" : dispoMax}
                 </Text>
               </Text>
             </Box>
