@@ -8,6 +8,7 @@ import { useMesureImportManager } from "./useMesureImportManager.hook";
 
 export const MesureImportPanel = ({
   // mandataireUserId & serviceId are mutually exclusive
+  mandataireId,
   mandataireUserId,
   serviceId,
 }) => {
@@ -18,6 +19,7 @@ export const MesureImportPanel = ({
     reset,
     mesuresImportLoading,
   } = useMesureImportManager({
+    mandataireId,
     mandataireUserId,
     serviceId,
   });

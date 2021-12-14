@@ -5,7 +5,7 @@ import { UPLOAD_MESURES_EXCEL_FILE } from "~/containers/MesureImport/mutations";
 import { fileReader } from "~/utils/std/fileReader";
 import useQueryReady from "~/hooks/useQueryReady";
 
-function useMesureImportManager({ mandataireUserId, serviceId }) {
+function useMesureImportManager({ mandataireId, mandataireUserId, serviceId }) {
   const [importSummary, setImportSummary] = useState();
   const [file, setFile] = useState();
   const [
@@ -46,6 +46,7 @@ function useMesureImportManager({ mandataireUserId, serviceId }) {
           mandataireUserId,
           name,
           serviceId,
+          mandataireId,
           type,
         },
       })

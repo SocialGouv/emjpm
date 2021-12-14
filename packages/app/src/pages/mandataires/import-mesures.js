@@ -50,7 +50,10 @@ function ImportMesures() {
             <MandataireOcmiMesureImport mandataireUserId={user.id} />
           )}
           {importType === "file" && (
-            <MandataireMesureImport mandataireUserId={user.id} />
+            <MandataireMesureImport
+              mandataireId={mandataire.id}
+              mandataireUserId={user.id}
+            />
           )}
         </Card>
       </BoxWrapper>
