@@ -20,20 +20,15 @@ module.exports = async function (req, res, next) {
 
     let nbDeleted;
     await knex.transaction(async function (trx) {
-      try {
-        nbDeleted = await Mesure.query(trx).deleteById(mesure_id);
-        await updateMesuresCounter(
-          {
-            mandataireId: mandataire_id,
-            serviceId: service_id,
-            tiIDs: [ti_id],
-          },
-          trx
-        );
-        await trx.commit();
-      } catch (e) {
-        await trx.rollback(e);
-      }
+      nbDeleted = await Mesure.query(trx).deleteById(mesure_id);
+      await updateMesuresCounter(
+        {
+          mandataireId: mandataire_id,
+          serviceId: service_id,
+          tiIDs: [ti_id],
+        },
+        trx
+      );
     });
 
     if (nbDeleted === 0) return res.json({ success: false });

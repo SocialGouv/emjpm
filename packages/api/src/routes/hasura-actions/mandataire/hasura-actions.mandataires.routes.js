@@ -58,27 +58,22 @@ router.post(
     const isService = !!serviceId;
 
     await knex.transaction(async function (trx) {
-      try {
-        if (isService) {
-          await knex
-            .raw(
-              `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
-              [serviceId]
-            )
-            .transacting(trx);
-        } else {
-          await knex
-            .raw(
-              `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
-              [mandataireId]
-            )
-            .transacting(trx);
-        }
-        await updateMesuresCounter({ mandataireId, serviceId }, trx);
-        await trx.commit();
-      } catch (e) {
-        await trx.rollback(e);
+      if (isService) {
+        await knex
+          .raw(
+            `DELETE FROM mesures WHERE service_id = ? AND status != 'en_attente'`,
+            [serviceId]
+          )
+          .transacting(trx);
+      } else {
+        await knex
+          .raw(
+            `DELETE FROM mesures WHERE mandataire_id = ? AND status != 'en_attente'`,
+            [mandataireId]
+          )
+          .transacting(trx);
       }
+      await updateMesuresCounter({ mandataireId, serviceId }, trx);
     });
 
     return res.json({ success: true });

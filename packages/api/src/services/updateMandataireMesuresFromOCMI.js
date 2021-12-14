@@ -94,13 +94,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     }));
 
     await knex.transaction(async function (trx) {
-      try {
-        await saveMesures(allMesureDatas, trx);
-        await trx.commit();
-      } catch (e) {
-        console.error(e);
-        await trx.rollback(e);
-      }
+      await saveMesures(allMesureDatas, trx);
     });
   } catch (e) {
     fatalError = e;
