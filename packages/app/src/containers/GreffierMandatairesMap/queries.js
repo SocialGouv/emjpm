@@ -23,7 +23,9 @@ export const MESURES_GESTIONNAIRE = gql`
 
 export const MESURES_GESTIONNAIRES = gql`
   query MesureGestionnaires($tiId: Int!) {
-    view_lb_tis(where: { ti_id: { _eq: $tiId } }) {
+    view_lb_tis: search_ti_view_lb_tis(
+      args: { search: null, departementcode: null, tiid: $tiId }
+    ) {
       id: uid
       user_type
       mandataire {
