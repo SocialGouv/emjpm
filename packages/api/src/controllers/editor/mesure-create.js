@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 
-// const knex = require("~/db/knex");
+const knex = require("~/db/knex");
 
 const { sanitizeMesureProperties } = require("~/utils/mesure");
 const { validateNumeroRG } = require("~/utils/numero-rg");
@@ -37,27 +37,19 @@ const mesureCreate = async (req, res) => {
   }
 
   try {
-    // let mesureQueryResult;
-    // await knex.transaction(async function (trx) {
-    //   mesureQueryResult = await saveMesure(
-    //     {
-    //       antenneId,
-    //       datas: body,
-    //       editorId,
-    //       serviceOrMandataire,
-    //       ti,
-    //       type,
-    //     },
-    //     trx
-    //   );
-    // });
-    const mesureQueryResult = await saveMesure({
-      antenneId,
-      datas: body,
-      editorId,
-      serviceOrMandataire,
-      ti,
-      type,
+    let mesureQueryResult;
+    await knex.transaction(async function (trx) {
+      mesureQueryResult = await saveMesure(
+        {
+          antenneId,
+          datas: body,
+          editorId,
+          serviceOrMandataire,
+          ti,
+          type,
+        },
+        trx
+      );
     });
 
     return res.status(201).json(sanitizeMesureProperties(mesureQueryResult));

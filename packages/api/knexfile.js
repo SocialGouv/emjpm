@@ -45,6 +45,7 @@ module.exports = {
       user: "emjpm",
     },
     migrations: {},
-    pool: { acquireTimeoutMillis: 1000, max: 1, min: 1 },
+    pool,
+    // pool: { acquireTimeoutMillis: 1000, max: 1, min: 1 },
   },
 };

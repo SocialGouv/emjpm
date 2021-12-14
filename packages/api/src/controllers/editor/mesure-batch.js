@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const uniq = require("lodash.uniq");
 
-// const knex = require("~/db/knex");
+const knex = require("~/db/knex");
 
 const antenneIdIsValid = require("~/services/antenneIdIsValid");
 const { sanitizeMesureProperties } = require("~/utils/mesure");
@@ -92,16 +92,15 @@ const mesureBatch = async (req, res) => {
       });
     }
 
-    // let mesuresQueryResult;
-    // await knex.transaction(async function (trx) {
-    // try {
-    // mesuresQueryResult = await saveMesures(allMesureDatas, trx);
-    // await trx.commit();
-    // } catch (e) {
-    // await trx.rollback(e);
-    // }
-    // });
-    const mesuresQueryResult = await saveMesures(allMesureDatas);
+    let mesuresQueryResult;
+    await knex.transaction(async function (trx) {
+      try {
+        mesuresQueryResult = await saveMesures(allMesureDatas, trx);
+        await trx.commit();
+      } catch (e) {
+        await trx.rollback(e);
+      }
+    });
 
     return res.status(201).json({
       mesures: mesuresQueryResult.map((mqr) => sanitizeMesureProperties(mqr)),
