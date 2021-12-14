@@ -12,7 +12,10 @@ export const YES_NO_OPTIONS = [
 ];
 
 export const TYPES = {
-  MANDATAIRE_IND: "prépose",
-  MANDATAIRE_PRE: "individuel",
+  MANDATAIRE_PRE: "prépose",
+  MANDATAIRE_IND: "individuel",
   SERVICE: "service",
+  prepose: "prépose",
+  individuel: "individuel",
+  service: "service",
 };

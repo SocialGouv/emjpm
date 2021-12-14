@@ -27,4 +27,7 @@ export const mapImages = {
   MANDATAIRE_PRE: iconPrepose,
   MESURE: mesure,
   SERVICE: iconService,
+  individuel: iconIndividuel,
+  prepose: iconPrepose,
+  service: iconService,
 };

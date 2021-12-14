@@ -7,7 +7,7 @@ import { MagistratMandataireMapContent } from "./MagistratMandataireMapContent";
 import { MESURES } from "./queries";
 
 function MagistratMandataireMap(props) {
-  const { latitude, longitude, id, discriminator } = props;
+  const { latitude, longitude, id, user_type } = props;
   const { mandataireId, serviceId } = formatGestionnaireId(id);
   const { data, loading, error } = useQuery(MESURES, {
     variables: {
@@ -26,7 +26,7 @@ function MagistratMandataireMap(props) {
       latitude={latitude}
       longitude={longitude}
       id={id}
-      discriminator={discriminator}
+      user_type={user_type}
     />
   );
 }

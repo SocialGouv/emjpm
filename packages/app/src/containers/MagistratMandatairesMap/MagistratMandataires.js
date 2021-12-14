@@ -1,11 +1,6 @@
 import { useQuery } from "@apollo/client";
 
 import useUser from "~/hooks/useUser";
-import {
-  MANDATAIRE_IND,
-  MANDATAIRE_PRE,
-  SERVICE,
-} from "~/constants/discriminator";
 
 import { MESURES_GESTIONNAIRES } from "./queries";
 import { filterGestionnairesByDiscriminator } from "./utils";
@@ -31,19 +26,19 @@ function MagistratMandataires() {
     return <div>Erreur</div>;
   }
 
-  const mesureGestionnaires = data.view_mesure_gestionnaire;
+  const mesureGestionnaires = data.view_lb_tis;
 
   const services = filterGestionnairesByDiscriminator(
     mesureGestionnaires,
-    SERVICE
+    "service"
   );
   const individuel = filterGestionnairesByDiscriminator(
     mesureGestionnaires,
-    MANDATAIRE_IND
+    "individuel"
   );
   const prepose = filterGestionnairesByDiscriminator(
     mesureGestionnaires,
-    MANDATAIRE_PRE
+    "prepose"
   );
 
   return (

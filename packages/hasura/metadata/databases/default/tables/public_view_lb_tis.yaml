@@ -11,7 +11,34 @@ object_relationships:
       remote_table:
         name: view_mesure_gestionnaire
         schema: public
+- name: mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        mandataire_id: id
+      insertion_order: null
+      remote_table:
+        name: mandataires
+        schema: public
+- name: service
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: services
+        schema: public
 array_relationships:
+- name: gestionnaire_tis
+  using:
+    manual_configuration:
+      column_mapping:
+        uid: id
+      insertion_order: null
+      remote_table:
+        name: view_mesure_gestionnaire_tis
+        schema: public
 - name: gestionnaires
   using:
     manual_configuration:
