@@ -38,22 +38,32 @@ module.exports = async (req, res, next) => {
         ville,
       };
     });
-    if (mesures.length) {
-      var ws = XLSX.utils.json_to_sheet(exportedMesures, {
-        header: Object.keys(exportedMesures[0]),
-      });
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Mesures eMJPM");
-      res.header("Content-Type", "application/octet-stream");
-      res.attachment("export_mesures.xlsx");
+    var ws = XLSX.utils.json_to_sheet(exportedMesures, {
+      header: [
+        "annee_naissance",
+        "cabinet",
+        "champ_mesure",
+        "civilite",
+        "code_postal",
+        "date_nomination",
+        "lieu_vie",
+        "nature_mesur",
+        "numero_dossier",
+        "numero_rg",
+        "pays",
+        "tribunal",
+        "ville",
+      ],
+    });
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Mesures eMJPM");
+    res.header("Content-Type", "application/octet-stream");
+    res.attachment("export_mesures.xlsx");
 
-      var wopts = { bookSST: false, bookType: "xlsx", type: "base64" };
-      var wbout = XLSX.write(wb, wopts);
+    var wopts = { bookSST: false, bookType: "xlsx", type: "base64" };
+    var wbout = XLSX.write(wb, wopts);
 
-      return res.send({ data: wbout });
-    } else {
-      return res.send({ data: "" });
-    }
+    return res.send({ data: wbout });
   } catch (err) {
     return next(err);
   }
