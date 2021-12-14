@@ -238,7 +238,7 @@ function MandataireEditInformationsForm(props) {
             <FormGroupInput
               placeholder={
                 "Nombre de mesures souhaitées" +
-                (formik.values.suspendActivity ? " (suspendu)" : "")
+                (formik.values.suspendActivity ? " (interrompu)" : "")
               }
               id="dispo_max"
               formik={formik}

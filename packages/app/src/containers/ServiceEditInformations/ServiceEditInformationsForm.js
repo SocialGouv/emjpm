@@ -209,7 +209,7 @@ function ServiceEditInformationsForm(props) {
             <FormGroupInput
               placeholder={
                 "Nombre de mesures souhaité" +
-                (formik.values.suspendActivity ? " (suspendu)" : "")
+                (formik.values.suspendActivity ? " (interrompu)" : "")
               }
               readOnly={formik.values.suspendActivity}
               id="dispo_max"

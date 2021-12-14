@@ -128,7 +128,7 @@ function ServiceInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>
               {"Nombre de mesures souhaité" +
-                (service.suspend_activity ? " (suspendu)" : "")}
+                (service.suspend_activity ? " (interrompu)" : "")}
             </Text>
             <Text sx={content}>{dispo_max}</Text>
           </Flex>

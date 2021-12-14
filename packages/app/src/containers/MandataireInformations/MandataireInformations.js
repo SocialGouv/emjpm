@@ -79,7 +79,7 @@ function MandataireInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>
               {"Nombre de mesures souhaitées" +
-                (mandataire.suspend_activity ? " (suspendu)" : "")}
+                (mandataire.suspend_activity ? " (interrompu)" : "")}
             </Text>
             <Text sx={content}>{mandataire.dispo_max}</Text>
           </Flex>

@@ -166,7 +166,7 @@ export default function MandataireListItem(props) {
               </Text>
               <div style={{ display: "inline" }}>
                 {suspendActivity && (
-                  <Text sx={dispoDescriptionStyle(false)}>{"Suspendu"}</Text>
+                  <Text sx={dispoDescriptionStyle(false)}>{"Interrompu"}</Text>
                 )}
                 {!suspendActivity && (
                   <>
@@ -210,7 +210,7 @@ export default function MandataireListItem(props) {
                 !suspendActivity && currentAvailability > 0
               )}
             >
-              {mesuresInProgress} / {suspendActivity ? "Suspendu" : dispoMax}
+              {mesuresInProgress} / {suspendActivity ? "Interrompu" : dispoMax}
             </Text>
           </Flex>
 
