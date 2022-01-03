@@ -78,7 +78,7 @@ spec:
                   name: {{ .Values.secretName }}
                   key: DATABASE_CONNECTION
             - name: DATABASE_URL
-              value: $(DATABASE_CONNECTION)/{{ required "dbName must be specified" .Values.dbName }}?sslmode=require&ssl=true
+              value: $(DATABASE_CONNECTION)/{{ required "dbName must be specified" .Values.dbName }}?ssl=true
             - name: PG_POOL_MIN
               value: "{{ .Values.apiPgConnectionsMin }}"
             - name: PG_POOL_MAX

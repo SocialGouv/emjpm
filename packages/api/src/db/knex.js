@@ -13,8 +13,9 @@ knexConnection
     console.log("PostgreSQL connected");
   })
   .catch((e) => {
-    console.log("PostgreSQL not connected");
     console.error(e);
+    console.error("Fatal error: unable to connect to PostgreSQL, exiting ...");
+    process.exit(1);
   });
 
 module.exports = knexConnection;
