@@ -4,8 +4,8 @@ const { DATABASE_URL, PG_POOL_MAX, PG_POOL_MIN } = process.env;
 
 const pool = {
   acquireTimeoutMillis: 2000,
-  max: PG_POOL_MAX ? parseInt(PG_POOL_MAX) : 7,
-  min: PG_POOL_MIN ? parseInt(PG_POOL_MIN) : 0,
+  max: PG_POOL_MAX ? parseInt(PG_POOL_MAX) : 5,
+  min: PG_POOL_MIN ? parseInt(PG_POOL_MIN) : 5,
   propagateCreateError: false,
 };
 
@@ -13,9 +13,9 @@ const databaseConfig = DATABASE_URL
   ? parse(DATABASE_URL)
   : {
       database: "emjpm",
-      host: "localhost",
+      host: "db",
       password: "test",
-      port: "5434",
+      port: "5432",
       user: "emjpm",
     };
 
@@ -23,7 +23,6 @@ const connection = {
   ...databaseConfig,
   ...(databaseConfig.ssl ? { ssl: { rejectUnauthorized: false } } : {}),
 };
-console.log({ connection });
 
 module.exports = {
   development: {
@@ -41,7 +40,11 @@ module.exports = {
   test: {
     // debug: true,
     client: "pg",
-    connection,
+    connection: {
+      ...connection,
+      host: "localhost",
+      port: "5434",
+    },
     migrations: {},
     pool,
     // pool: { acquireTimeoutMillis: 1000, max: 1, min: 1 },

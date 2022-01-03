@@ -3,19 +3,19 @@ const config = require("../../knexfile.js")[environment];
 
 const knexConnection = require("knex")(config);
 
-const { Model } = require("objection");
-
-Model.knex(knexConnection);
-
-knexConnection
-  .raw("SELECT 1")
-  .then(() => {
-    console.log("PostgreSQL connected");
-  })
-  .catch((e) => {
-    console.error(e);
-    console.error("Fatal error: unable to connect to PostgreSQL, exiting ...");
-    process.exit(1);
-  });
+if (environment !== "test") {
+  knexConnection
+    .raw("SELECT 1")
+    .then(() => {
+      console.log("PostgreSQL connected");
+    })
+    .catch((e) => {
+      console.error(e);
+      console.error(
+        "Fatal error: unable to connect to PostgreSQL, exiting ..."
+      );
+      process.exit(1);
+    });
+}
 
 module.exports = knexConnection;
