@@ -17,8 +17,8 @@ const pool = {
 const { DATABASE_URL } = process.env;
 const connection = DATABASE_URL
   ? {
-      ssl: true,
       ...parse(DATABASE_URL),
+      ssl: true,
     }
   : {
       database: "emjpm",
