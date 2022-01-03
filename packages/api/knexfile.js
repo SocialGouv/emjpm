@@ -23,6 +23,7 @@ const connection = {
   ...databaseConfig,
   ...(databaseConfig.ssl ? { ssl: { rejectUnauthorized: false } } : {}),
 };
+console.log({ connection });
 
 module.exports = {
   development: {
