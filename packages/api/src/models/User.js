@@ -2,12 +2,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { Model } = require("objection");
 
-const knexConnection = require("~/db/knex");
 const { jwtConfig } = require("~/config");
 
 const Models = require(".");
-
-Model.knex(knexConnection);
 
 const MAIN_ROLES = [
   "admin",

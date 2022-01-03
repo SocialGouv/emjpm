@@ -1,25 +1,16 @@
-const pg = require("pg");
-const parse = require("pg-connection-string").parse;
+const { parse } = require("pg-connection-string");
 
-pg.defaults.ssl = true;
-
-let poolMax = process.env.PG_POOL_MAX;
-let poolMin = process.env.PG_POOL_MIN;
-poolMax = poolMax ? parseInt(poolMax) : 5;
-poolMin = poolMin ? parseInt(poolMin) : 5;
+const { DATABASE_URL, PG_POOL_MAX, PG_POOL_MIN } = process.env;
 
 const pool = {
-  max: poolMax,
-  min: poolMin,
+  acquireTimeoutMillis: 2000,
+  max: PG_POOL_MAX ? parseInt(PG_POOL_MAX) : 7,
+  min: PG_POOL_MIN ? parseInt(PG_POOL_MIN) : 0,
   propagateCreateError: false,
 };
 
-const { DATABASE_URL } = process.env;
-const connection = DATABASE_URL
-  ? {
-      ...parse(DATABASE_URL),
-      ssl: true,
-    }
+const databaseConfig = DATABASE_URL
+  ? parse(DATABASE_URL)
   : {
       database: "emjpm",
       host: "localhost",
@@ -28,18 +19,15 @@ const connection = DATABASE_URL
       user: "emjpm",
     };
 
-console.log({ connection });
+const connection = {
+  ...databaseConfig,
+  ...(databaseConfig.ssl ? { ssl: { rejectUnauthorized: false } } : {}),
+};
 
 module.exports = {
   development: {
     client: "pg",
-    connection: DATABASE_URL || {
-      database: "emjpm",
-      host: "db",
-      password: "test",
-      port: "5432",
-      user: "emjpm",
-    },
+    connection,
     migrations: {},
     pool,
   },

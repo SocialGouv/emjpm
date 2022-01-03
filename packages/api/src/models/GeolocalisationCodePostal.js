@@ -1,7 +1,4 @@
-const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
-
-Model.knex(knexConnection);
 
 class GeolocalisationCodePostal extends Model {
   static get tableName() {

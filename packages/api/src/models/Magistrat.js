@@ -1,7 +1,4 @@
-const knexConnection = require("~/db/knex");
 const { Model } = require("objection");
-
-Model.knex(knexConnection);
 
 class Magistrat extends Model {
   static get tableName() {
