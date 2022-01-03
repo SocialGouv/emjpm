@@ -1,4 +1,7 @@
 const { parse } = require("pg-connection-string");
+const pg = require("pg");
+
+pg.defaults.ssl = true;
 
 const { DATABASE_URL, PG_POOL_MAX, PG_POOL_MIN } = process.env;
 
