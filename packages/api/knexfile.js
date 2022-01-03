@@ -28,6 +28,8 @@ const connection = DATABASE_URL
       user: "emjpm",
     };
 
+console.log({ connection });
+
 module.exports = {
   development: {
     client: "pg",
