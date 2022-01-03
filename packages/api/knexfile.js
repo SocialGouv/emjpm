@@ -1,3 +1,5 @@
+const parse = require("pg-connection-string").parse;
+
 let poolMax = process.env.PG_POOL_MAX;
 let poolMin = process.env.PG_POOL_MIN;
 poolMax = poolMax ? parseInt(poolMax) : 5;
@@ -9,10 +11,24 @@ const pool = {
   propagateCreateError: false,
 };
 
+const { DATABASE_URL } = process.env;
+const connection = DATABASE_URL
+  ? {
+      ssl: true,
+      ...parse(DATABASE_URL),
+    }
+  : {
+      database: "emjpm",
+      host: "localhost",
+      password: "test",
+      port: "5434",
+      user: "emjpm",
+    };
+
 module.exports = {
   development: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
+    connection: DATABASE_URL || {
       database: "emjpm",
       host: "db",
       password: "test",
@@ -24,26 +40,14 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: process.env.DATABASE_URL || {
-      database: "emjpm",
-      host: "localhost",
-      password: "test",
-      port: "5434",
-      user: "emjpm",
-    },
+    connection,
     migrations: {},
     pool,
   },
   test: {
     // debug: true,
     client: "pg",
-    connection: process.env.DATABASE_URL || {
-      database: "emjpm",
-      host: "localhost",
-      password: "test",
-      port: "5434",
-      user: "emjpm",
-    },
+    connection,
     migrations: {},
     pool,
     // pool: { acquireTimeoutMillis: 1000, max: 1, min: 1 },

@@ -70,6 +70,8 @@ spec:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
           env:
+            - name: PGSSLMODE
+              value: require
             - name: DATABASE_CONNECTION
               valueFrom:
                 secretKeyRef:
