@@ -1,4 +1,7 @@
+const pg = require("pg");
 const parse = require("pg-connection-string").parse;
+
+pg.defaults.ssl = true;
 
 let poolMax = process.env.PG_POOL_MAX;
 let poolMin = process.env.PG_POOL_MIN;
