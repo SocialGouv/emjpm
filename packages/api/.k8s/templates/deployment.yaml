@@ -70,8 +70,6 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
                   key: HASURA_WEB_HOOK_SECRET
-            - name: PGSSLMODE
-              value: require
             - name: HASURA_GRAPHQL_URI
               value: 'http://hasura/v1/graphql'
             - name: DATABASE_CONNECTION
