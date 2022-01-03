@@ -1,5 +1,5 @@
 const { parse } = require("pg-connection-string");
-const pg = require("pg");
+// const pg = require("pg");
 
 const { DATABASE_URL, PG_POOL_MAX, PG_POOL_MIN } = process.env;
 
@@ -25,9 +25,11 @@ const connection = {
   ...(databaseConfig.ssl ? { ssl: { rejectUnauthorized: false } } : {}),
 };
 
-if (databaseConfig.ssl) {
-  pg.defaults.ssl = true;
-}
+console.log({ connection });
+
+// if (databaseConfig.ssl) {
+//   pg.defaults.ssl = true;
+// }
 
 module.exports = {
   development: {
