@@ -1,3 +1,9 @@
+const knexConnection = require("~/db/knex");
+
+const { Model } = require("objection");
+
+Model.knex(knexConnection);
+
 // fix Warning: Accessing non-existent property 'User' of module exports inside circular dependency
 // see https://github.com/Vincit/objection.js/issues/787#issuecomment-364047113
 

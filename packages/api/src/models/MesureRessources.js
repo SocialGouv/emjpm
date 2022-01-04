@@ -1,10 +1,6 @@
 const { Model } = require("objection");
 const Models = require(".");
 
-const knexConnection = require("~/db/knex");
-
-Model.knex(knexConnection);
-
 class MesureRessources extends Model {
   static get tableName() {
     return "mesure_ressources";

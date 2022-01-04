@@ -1,9 +1,6 @@
-const knexConnection = require("~/db/knex");
 const { Model, raw } = require("objection");
 
 const Models = require(".");
-
-Model.knex(knexConnection);
 
 class Service extends Model {
   static get tableName() {

@@ -1,9 +1,5 @@
 const { Model } = require("objection");
 
-const knexConnection = require("~/db/knex");
-
-Model.knex(knexConnection);
-
 class EnqueteReponsesModalitesExercice extends Model {
   static get tableName() {
     return "enquete_reponses_modalites_exercice";
