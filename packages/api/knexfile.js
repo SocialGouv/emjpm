@@ -25,8 +25,6 @@ const connection = {
   ...(databaseConfig.ssl ? { ssl: { rejectUnauthorized: false } } : {}),
 };
 
-console.log({ connection });
-
 if (databaseConfig.ssl) {
   pg.defaults.ssl = true;
 }
