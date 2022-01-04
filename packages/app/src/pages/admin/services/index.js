@@ -1,4 +1,5 @@
 import { Flex, Box } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import SearchFilter from "~/containers/FilterWidgets/SearchFilter";
@@ -10,28 +11,33 @@ import { BoxWrapper } from "~/components/Grid";
 
 function AdminServicesPage() {
   return (
-    <AdminFilterProvider>
-      <LayoutAdmin>
-        <BoxWrapper mt={3} px="1">
-          <HeadingTitle>Liste des services</HeadingTitle>
-          <Flex
-            sx={{
-              flexWrap: "wrap",
-              mt: "2",
-            }}
-          >
-            <AdminFilterBar>
-              <Box>
-                <Flex>
-                  <SearchFilter />
-                </Flex>
-              </Box>
-            </AdminFilterBar>
-            <AdminServices />
-          </Flex>
-        </BoxWrapper>
-      </LayoutAdmin>
-    </AdminFilterProvider>
+    <>
+      <Helmet>
+        <title>Liste des services | e-MPJM</title>
+      </Helmet>
+      <AdminFilterProvider>
+        <LayoutAdmin>
+          <BoxWrapper mt={3} px="1">
+            <HeadingTitle>Liste des services</HeadingTitle>
+            <Flex
+              sx={{
+                flexWrap: "wrap",
+                mt: "2",
+              }}
+            >
+              <AdminFilterBar>
+                <Box>
+                  <Flex>
+                    <SearchFilter />
+                  </Flex>
+                </Box>
+              </AdminFilterBar>
+              <AdminServices />
+            </Flex>
+          </BoxWrapper>
+        </LayoutAdmin>
+      </AdminFilterProvider>
+    </>
   );
 }
 

@@ -7,19 +7,24 @@ import { BoxWrapper } from "~/components/Grid";
 
 function Mandataires() {
   return (
-    <LayoutMagistrat>
-      <BoxWrapper mt={3} px="1">
-        <HeadingTitle>Tous les mandataires</HeadingTitle>
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <MagistratMandatairesList />
-        </Flex>
-      </BoxWrapper>
-    </LayoutMagistrat>
+    <>
+      <Helmet>
+        <title>Tous les mandataires | e-MJPM </title>
+      </Helmet>
+      <LayoutMagistrat>
+        <BoxWrapper mt={3} px="1">
+          <HeadingTitle>Tous les mandataires</HeadingTitle>
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <MagistratMandatairesList />
+          </Flex>
+        </BoxWrapper>
+      </LayoutMagistrat>
+    </>
   );
 }
 

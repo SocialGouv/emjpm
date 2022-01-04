@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AdminEditorCreate } from "~/containers/AdminEditors/AdminEditorCreate";
 import { HeadingTitle } from "~/containers/HeadingTitle";
@@ -7,19 +8,24 @@ import { BoxWrapper } from "~/components/Grid";
 
 function AdminEditorsCreatePage() {
   return (
-    <LayoutAdmin hasNavigation={false}>
-      <BoxWrapper mt={3} px="1">
-        <HeadingTitle>{"Création d'un éditeur"}</HeadingTitle>
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <AdminEditorCreate />
-        </Flex>
-      </BoxWrapper>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>Création d'un éditeur | e-MJPM</title>
+      </Helmet>
+      <LayoutAdmin hasNavigation={false}>
+        <BoxWrapper mt={3} px="1">
+          <HeadingTitle>{"Création d'un éditeur"}</HeadingTitle>
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <AdminEditorCreate />
+          </Flex>
+        </BoxWrapper>
+      </LayoutAdmin>
+    </>
   );
 }
 

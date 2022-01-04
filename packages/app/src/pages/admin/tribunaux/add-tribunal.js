@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AdminAddTribunal } from "~/containers/AdminTribunaux/AdminAddTribunal";
 import { HeadingTitle } from "~/containers/HeadingTitle";
@@ -7,19 +8,24 @@ import { BoxWrapper } from "~/components/Grid";
 
 function AddTribunauxPage() {
   return (
-    <LayoutAdmin hasNavigation={false}>
-      <BoxWrapper mt={3} px="1">
-        <HeadingTitle>{"Création d'un tribunal"}</HeadingTitle>
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <AdminAddTribunal />
-        </Flex>
-      </BoxWrapper>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>Création d'un tribunal | e-MPJM</title>
+      </Helmet>
+      <LayoutAdmin hasNavigation={false}>
+        <BoxWrapper mt={3} px="1">
+          <HeadingTitle>{"Création d'un tribunal"}</HeadingTitle>
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <AdminAddTribunal />
+          </Flex>
+        </BoxWrapper>
+      </LayoutAdmin>
+    </>
   );
 }
 

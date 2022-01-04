@@ -1,4 +1,5 @@
 import { Box, Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { FiltersContextSerializableProvider } from "~/containers/FiltersContextSerializable";
 import { LayoutAdmin } from "~/containers/Layout";
@@ -9,23 +10,28 @@ import { BoxWrapper } from "~/components/Grid";
 
 function ListBlanchePage() {
   return (
-    <LayoutAdmin>
-      <FiltersContextSerializableProvider useLocalStorage={true}>
-        <BoxWrapper mt={3} px={1}>
-          <Flex flexDirection="column">
-            <Box mb="2">
-              <ListeBlancheFilter />
-            </Box>
-            <Box mb="2">
-              <ListeBlancheSummary />
-            </Box>
-            <Box mb="2">
-              <ListeBlanche origin="admin" />
-            </Box>
-          </Flex>
-        </BoxWrapper>
-      </FiltersContextSerializableProvider>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>Liste blanche | e-MPJM</title>
+      </Helmet>
+      <LayoutAdmin>
+        <FiltersContextSerializableProvider useLocalStorage={true}>
+          <BoxWrapper mt={3} px={1}>
+            <Flex flexDirection="column">
+              <Box mb="2">
+                <ListeBlancheFilter />
+              </Box>
+              <Box mb="2">
+                <ListeBlancheSummary />
+              </Box>
+              <Box mb="2">
+                <ListeBlanche origin="admin" />
+              </Box>
+            </Flex>
+          </BoxWrapper>
+        </FiltersContextSerializableProvider>
+      </LayoutAdmin>
+    </>
   );
 }
 

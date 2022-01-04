@@ -1,4 +1,5 @@
 import { Box, Image } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AuthorizationLogin } from "~/containers/AuthorizationLogin";
 import { Authorize } from "~/containers/Authorize";
@@ -29,46 +30,51 @@ export default function AuthorizationPage() {
   }, [editorId]);
 
   return (
-    <LayoutPublic>
-      <BoxWrapper>
-        <HeadingTitle mt={"80px"} textAlign="center">
-          Se connecter à une application métier
-        </HeadingTitle>
-      </BoxWrapper>
-      <FlexWrapper my="50px">
-        <Box
-          sx={{
-            flexBasis: ["100%", "50%"],
-            p: "3",
-          }}
-        >
-          <Image
-            src="/images/login-application.png"
+    <>
+      <Helmet>
+        <title> Se connecter à une application métier | e-MPJM</title>
+      </Helmet>
+      <LayoutPublic>
+        <BoxWrapper>
+          <HeadingTitle mt={"80px"} textAlign="center">
+            Se connecter à une application métier
+          </HeadingTitle>
+        </BoxWrapper>
+        <FlexWrapper my="50px">
+          <Box
             sx={{
-              mt: "80px",
+              flexBasis: ["100%", "50%"],
               p: "3",
-              width: ["100%"],
             }}
-          />
-        </Box>
-        <Box
-          sx={{
-            flexBasis: ["100%", "50%"],
-            p: "3",
-          }}
-        >
-          {token ? (
-            <Authorize
-              state={state}
-              token={token}
-              editorId={editorId}
-              redirectUrl={redirectUrl}
+          >
+            <Image
+              src="/images/login-application.png"
+              sx={{
+                mt: "80px",
+                p: "3",
+                width: ["100%"],
+              }}
             />
-          ) : (
-            <AuthorizationLogin />
-          )}
-        </Box>
-      </FlexWrapper>
-    </LayoutPublic>
+          </Box>
+          <Box
+            sx={{
+              flexBasis: ["100%", "50%"],
+              p: "3",
+            }}
+          >
+            {token ? (
+              <Authorize
+                state={state}
+                token={token}
+                editorId={editorId}
+                redirectUrl={redirectUrl}
+              />
+            ) : (
+              <AuthorizationLogin />
+            )}
+          </Box>
+        </FlexWrapper>
+      </LayoutPublic>
+    </>
   );
 }

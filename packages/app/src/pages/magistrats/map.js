@@ -12,26 +12,31 @@ function Map() {
     ti: { latitude, longitude },
   } = magistrat;
   return (
-    <MapContextProvider latitude={latitude} longitude={longitude}>
-      <LayoutMagistratMap>
-        <Flex
-          sx={{
-            height: "100%",
-            position: "absolute",
-            pt: "155px",
-            top: "0",
-            width: "100%",
-          }}
-        >
-          <Box height="100%" flex="0 1 auto" width="600px">
-            <MagistratMapMandatairesPanelList />
-          </Box>
-          <Box height="100%" flex="1 1 auto">
-            <MagistratMandatairesMap />
-          </Box>
-        </Flex>
-      </LayoutMagistratMap>
-    </MapContextProvider>
+    <>
+      <Helmet>
+        <title>la carte des mandataires | e-MJPM </title>
+      </Helmet>
+      <MapContextProvider latitude={latitude} longitude={longitude}>
+        <LayoutMagistratMap>
+          <Flex
+            sx={{
+              height: "100%",
+              position: "absolute",
+              pt: "155px",
+              top: "0",
+              width: "100%",
+            }}
+          >
+            <Box height="100%" flex="0 1 auto" width="600px">
+              <MagistratMapMandatairesPanelList />
+            </Box>
+            <Box height="100%" flex="1 1 auto">
+              <MagistratMandatairesMap />
+            </Box>
+          </Flex>
+        </LayoutMagistratMap>
+      </MapContextProvider>
+    </>
   );
 }
 

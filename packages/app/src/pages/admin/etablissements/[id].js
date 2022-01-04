@@ -1,4 +1,5 @@
 import { Box } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { Link } from "~/containers/Commons";
 import { EtablissementView } from "~/containers/Etablissement";
@@ -12,14 +13,19 @@ export function EditEtablissementPage() {
   const id = parseInt(paramId);
 
   return (
-    <LayoutAdmin>
-      <BoxWrapper mt={3} px={1}>
-        <Box mb="4">
-          <Link to="/admin/etablissements">&larr; Retour</Link>
-        </Box>
-        <EtablissementView id={id} />
-      </BoxWrapper>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>Etablissement {`${id}`} | e-MJPM </title>
+      </Helmet>
+      <LayoutAdmin>
+        <BoxWrapper mt={3} px={1}>
+          <Box mb="4">
+            <Link to="/admin/etablissements">&larr; Retour</Link>
+          </Box>
+          <EtablissementView id={id} />
+        </BoxWrapper>
+      </LayoutAdmin>
+    </>
   );
 }
 
