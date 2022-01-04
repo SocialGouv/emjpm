@@ -1,12 +1,12 @@
 const { parse } = require("pg-connection-string");
-// const pg = require("pg");
+const pg = require("pg");
 
 const { DATABASE_URL, PG_POOL_MAX, PG_POOL_MIN } = process.env;
 
 const pool = {
-  acquireTimeoutMillis: 2000,
-  max: PG_POOL_MAX ? parseInt(PG_POOL_MAX) : 5,
-  min: PG_POOL_MIN ? parseInt(PG_POOL_MIN) : 5,
+  acquireTimeoutMillis: 5000,
+  max: PG_POOL_MAX ? parseInt(PG_POOL_MAX) : 10,
+  min: PG_POOL_MIN ? parseInt(PG_POOL_MIN) : 0,
   propagateCreateError: false,
 };
 
@@ -27,9 +27,9 @@ const connection = {
 
 console.log({ connection });
 
-// if (databaseConfig.ssl) {
-//   pg.defaults.ssl = true;
-// }
+if (databaseConfig.ssl) {
+  pg.defaults.ssl = true;
+}
 
 module.exports = {
   development: {
