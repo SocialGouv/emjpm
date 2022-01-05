@@ -1,4 +1,5 @@
 import { Box, Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { DirectionInformations } from "~/containers/DirectionInformations";
 import { LayoutDirection } from "~/containers/Layout";
@@ -7,27 +8,32 @@ import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
   return (
-    <LayoutDirection>
-      <BoxWrapper mt={3} px="0">
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-          }}
-        >
-          <Box
+    <>
+      <Helmet>
+        <title>Informations générales | e-MPJM</title>
+      </Helmet>
+      <LayoutDirection>
+        <BoxWrapper mt={3} px="0">
+          <Flex
             sx={{
-              flexBasis: 0,
-              flexGrow: 99999,
-              minWidth: 320,
-              p: 1,
+              flexWrap: "wrap",
             }}
           >
-            <Heading size={2}>Informations générales</Heading>
-            <DirectionInformations mt="3" />
-          </Box>
-        </Flex>
-      </BoxWrapper>
-    </LayoutDirection>
+            <Box
+              sx={{
+                flexBasis: 0,
+                flexGrow: 99999,
+                minWidth: 320,
+                p: 1,
+              }}
+            >
+              <Heading size={2}>Informations générales</Heading>
+              <DirectionInformations mt="3" />
+            </Box>
+          </Flex>
+        </BoxWrapper>
+      </LayoutDirection>
+    </>
   );
 }
 

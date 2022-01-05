@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet";
+
 import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
 import useUser from "~/hooks/useUser";
@@ -10,17 +12,22 @@ function EditInformations() {
   const redirectLink = `${PATH[type]}/informations`;
 
   return (
-    <LayoutMandataire>
-      <BoxWrapper px="1">
-        <MandataireEditInformations
-          userId={id}
-          userType={type}
-          cancelLink={redirectLink}
-          successLink={redirectLink}
-          mt="3"
-        />
-      </BoxWrapper>
-    </LayoutMandataire>
+    <>
+      <Helmet>
+        <title>edition des informations del'utilisateur | e-MPJM</title>
+      </Helmet>
+      <LayoutMandataire>
+        <BoxWrapper px="1">
+          <MandataireEditInformations
+            userId={id}
+            userType={type}
+            cancelLink={redirectLink}
+            successLink={redirectLink}
+            mt="3"
+          />
+        </BoxWrapper>
+      </LayoutMandataire>
+    </>
   );
 }
 

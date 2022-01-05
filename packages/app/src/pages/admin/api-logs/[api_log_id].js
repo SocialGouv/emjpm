@@ -1,5 +1,6 @@
 import { Link as StyledLink } from "rebass";
 
+import { Helmet } from "react-helmet";
 import { AdminApiLog } from "~/containers/AdminApiLogs/AdminApiLog";
 import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
@@ -12,23 +13,28 @@ function ApiLogsViewPage() {
   const id = parseInt(api_log_id);
 
   return (
-    <LayoutAdmin>
-      <BoxWrapper mt={3} px={1}>
-        <Link
-          to="/admin/api-logs"
-          component={(props) => (
-            <StyledLink
-              onClick={() => props.navigate(props.href)}
-              mb={4}
-              display="block"
-            >
-              &larr; Retour
-            </StyledLink>
-          )}
-        />
-        <AdminApiLog id={id} />
-      </BoxWrapper>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>Api logs - {api_log_id} | e-MJPM</title>
+      </Helmet>
+      <LayoutAdmin>
+        <BoxWrapper mt={3} px={1}>
+          <Link
+            to="/admin/api-logs"
+            component={(props) => (
+              <StyledLink
+                onClick={() => props.navigate(props.href)}
+                mb={4}
+                display="block"
+              >
+                &larr; Retour
+              </StyledLink>
+            )}
+          />
+          <AdminApiLog id={id} />
+        </BoxWrapper>
+      </LayoutAdmin>
+    </>
   );
 }
 

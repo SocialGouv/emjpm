@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutMagistrat } from "~/containers/Layout";
@@ -7,19 +8,24 @@ import { BoxWrapper } from "~/components/Grid";
 
 function Mandataires() {
   return (
-    <LayoutMagistrat>
-      <BoxWrapper mt={3} px="1">
-        <HeadingTitle>Tous les mandataires</HeadingTitle>
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <MagistratMandatairesList />
-        </Flex>
-      </BoxWrapper>
-    </LayoutMagistrat>
+    <>
+      <Helmet>
+        <title>Tous les mandataires | e-MJPM </title>
+      </Helmet>
+      <LayoutMagistrat>
+        <BoxWrapper mt={3} px="1">
+          <HeadingTitle>Tous les mandataires</HeadingTitle>
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <MagistratMandatairesList />
+          </Flex>
+        </BoxWrapper>
+      </LayoutMagistrat>
+    </>
   );
 }
 

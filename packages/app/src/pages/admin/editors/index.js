@@ -1,7 +1,8 @@
 import { useHistory } from "react-router-dom";
 import { Flex, Box } from "rebass";
-import { Button } from "~/components";
+import { Helmet } from "react-helmet";
 
+import { Button } from "~/components";
 import { AdminEditorRequest, AdminEditors } from "~/containers/AdminEditors";
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import SearchFilter from "~/containers/FilterWidgets/SearchFilter";
@@ -13,38 +14,43 @@ import { BoxWrapper } from "~/components/Grid";
 function AdminEditorsPage() {
   const history = useHistory();
   return (
-    <AdminFilterProvider>
-      <LayoutAdmin>
-        <BoxWrapper mt={3} px="1">
-          <HeadingTitle>Liste des éditeurs</HeadingTitle>
-          <Flex
-            sx={{
-              flexWrap: "wrap",
-              mt: "2",
-            }}
-          >
-            <AdminFilterBar>
-              <Box>
-                <Flex>
-                  <SearchFilter />
-                </Flex>
-              </Box>
-              <Box>
-                <Button
-                  width="120px"
-                  onClick={() => history.push("/admin/editors/create")}
-                >
-                  Ajouter
-                </Button>
-              </Box>
-            </AdminFilterBar>
+    <>
+      <Helmet>
+        <title>Liste des éditeurs | e-MJPM </title>
+      </Helmet>
+      <AdminFilterProvider>
+        <LayoutAdmin>
+          <BoxWrapper mt={3} px="1">
+            <HeadingTitle>Liste des éditeurs</HeadingTitle>
+            <Flex
+              sx={{
+                flexWrap: "wrap",
+                mt: "2",
+              }}
+            >
+              <AdminFilterBar>
+                <Box>
+                  <Flex>
+                    <SearchFilter />
+                  </Flex>
+                </Box>
+                <Box>
+                  <Button
+                    width="120px"
+                    onClick={() => history.push("/admin/editors/create")}
+                  >
+                    Ajouter
+                  </Button>
+                </Box>
+              </AdminFilterBar>
 
-            <AdminEditors />
-            <AdminEditorRequest />
-          </Flex>
-        </BoxWrapper>
-      </LayoutAdmin>
-    </AdminFilterProvider>
+              <AdminEditors />
+              <AdminEditorRequest />
+            </Flex>
+          </BoxWrapper>
+        </LayoutAdmin>
+      </AdminFilterProvider>
+    </>
   );
 }
 

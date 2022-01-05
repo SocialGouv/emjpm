@@ -1,4 +1,5 @@
 import { Box, Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { LinkButton } from "~/containers/Commons";
 import { DirectionEnquetesList } from "~/containers/EnqueteDirection";
@@ -11,21 +12,26 @@ import { isDirectionNationale } from "@emjpm/biz";
 function DirectionEnquetesPage() {
   const user = useUser();
   return (
-    <LayoutDirection>
-      <BoxWrapper mt={3} px="1">
-        <Flex mb={3} flexDirection="row" justifyContent="space-between">
-          <Heading size={2}>Enquêtes</Heading>
-          {isDirectionNationale(user) && (
-            <Box>
-              <LinkButton to="/direction/enquetes/create">
-                Ajouter une enquête
-              </LinkButton>
-            </Box>
-          )}
-        </Flex>
-        <DirectionEnquetesList />
-      </BoxWrapper>
-    </LayoutDirection>
+    <>
+      <Helmet>
+        <title>Enquêtes | e-MPJM</title>
+      </Helmet>
+      <LayoutDirection>
+        <BoxWrapper mt={3} px="1">
+          <Flex mb={3} flexDirection="row" justifyContent="space-between">
+            <Heading size={2}>Enquêtes</Heading>
+            {isDirectionNationale(user) && (
+              <Box>
+                <LinkButton to="/direction/enquetes/create">
+                  Ajouter une enquête
+                </LinkButton>
+              </Box>
+            )}
+          </Flex>
+          <DirectionEnquetesList />
+        </BoxWrapper>
+      </LayoutDirection>
+    </>
   );
 }
 

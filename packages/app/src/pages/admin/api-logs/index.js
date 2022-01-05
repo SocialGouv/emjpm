@@ -1,13 +1,19 @@
 import { AdminApiLogs } from "~/containers/AdminApiLogs";
 import { LayoutAdmin } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
+import { Helmet } from "react-helmet";
 
 const ApiLogsIndex = () => (
-  <LayoutAdmin>
-    <BoxWrapper mt={3} px={1}>
-      <AdminApiLogs />
-    </BoxWrapper>
-  </LayoutAdmin>
+  <>
+    <Helmet>
+      <title> Api logs | e-MJPM </title>
+    </Helmet>
+    <LayoutAdmin>
+      <BoxWrapper mt={3} px={1}>
+        <AdminApiLogs />
+      </BoxWrapper>
+    </LayoutAdmin>
+  </>
 );
 
 export default ApiLogsIndex;

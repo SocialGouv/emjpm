@@ -8,26 +8,32 @@ import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 function Mandataires() {
   const { mesure_id } = useParams();
   const mesureId = parseInt(mesure_id);
   return (
-    <LayoutGreffier initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
-      <BoxWrapper mt={3} px="1">
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <MesureProvider mesureId={mesureId}>
-            <GreffierMesure />
-            <GreffierMesureMandataire />
-          </MesureProvider>
-        </Flex>
-      </BoxWrapper>
-    </LayoutGreffier>
+    <>
+      <Helmet>
+        <title>Mesure {mesure_id} | e-MPJM</title>
+      </Helmet>
+      <LayoutGreffier initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
+        <BoxWrapper mt={3} px="1">
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <MesureProvider mesureId={mesureId}>
+              <GreffierMesure />
+              <GreffierMesureMandataire />
+            </MesureProvider>
+          </Flex>
+        </BoxWrapper>
+      </LayoutGreffier>
+    </>
   );
 }
 

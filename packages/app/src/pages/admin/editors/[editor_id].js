@@ -1,4 +1,5 @@
 import { Link as StyledLink } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AdminEditorEdit } from "~/containers/AdminEditors/AdminEditorEdit";
 import { LayoutAdmin } from "~/containers/Layout";
@@ -12,23 +13,28 @@ function Editor() {
   const editorId = parseInt(editor_id);
 
   return (
-    <LayoutAdmin>
-      <BoxWrapper>
-        <Link
-          to="/admin/editors"
-          component={(props) => (
-            <StyledLink
-              onClick={() => props.navigate(props.href)}
-              my={4}
-              display="block"
-            >
-              &larr; Retour
-            </StyledLink>
-          )}
-        />
-        <AdminEditorEdit editorId={editorId} />
-      </BoxWrapper>
-    </LayoutAdmin>
+    <>
+      <Helmet>
+        <title>éditeur {`${editor_id}`} | e-MJPM</title>
+      </Helmet>
+      <LayoutAdmin>
+        <BoxWrapper>
+          <Link
+            to="/admin/editors"
+            component={(props) => (
+              <StyledLink
+                onClick={() => props.navigate(props.href)}
+                my={4}
+                display="block"
+              >
+                &larr; Retour
+              </StyledLink>
+            )}
+          />
+          <AdminEditorEdit editorId={editorId} />
+        </BoxWrapper>
+      </LayoutAdmin>
+    </>
   );
 }
 

@@ -1,4 +1,5 @@
 import { Flex, Box } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import SearchFilter from "~/containers/FilterWidgets/SearchFilter";
@@ -10,21 +11,26 @@ import { BoxWrapper } from "~/components/Grid";
 
 function AdminUsersPage() {
   return (
-    <AdminFilterProvider>
-      <LayoutAdmin>
-        <BoxWrapper mt={3} px="1">
-          <HeadingTitle>Liste des utilisateurs</HeadingTitle>
-          <AdminFilterBar>
-            <Box>
-              <Flex>
-                <SearchFilter />
-              </Flex>
-            </Box>
-          </AdminFilterBar>
-          <AdminUsers />
-        </BoxWrapper>
-      </LayoutAdmin>
-    </AdminFilterProvider>
+    <>
+      <Helmet>
+        <title>Liste des utilisateurs | e-MPJM</title>
+      </Helmet>
+      <AdminFilterProvider>
+        <LayoutAdmin>
+          <BoxWrapper mt={3} px="1">
+            <HeadingTitle>Liste des utilisateurs</HeadingTitle>
+            <AdminFilterBar>
+              <Box>
+                <Flex>
+                  <SearchFilter />
+                </Flex>
+              </Box>
+            </AdminFilterBar>
+            <AdminUsers />
+          </BoxWrapper>
+        </LayoutAdmin>
+      </AdminFilterProvider>
+    </>
   );
 }
 

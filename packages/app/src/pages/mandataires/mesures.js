@@ -11,33 +11,39 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
+import { Helmet } from "react-helmet";
 
 function MesuresListView() {
   return (
-    <FiltersContextProvider
-      initialValues={{
-        mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
-        natureMesure: DEFAULT_MESURE_NATURE,
-      }}
-    >
-      <LayoutMandataire>
-        <BoxWrapper mt={3} px="1">
-          <Flex flexDirection="row" justifyContent="space-between">
-            <HeadingTitle>Vos mesures</HeadingTitle>
-            <MesureListButtonBar />
-          </Flex>
-          <MesureListFilters />
-          <Flex
-            sx={{
-              flexWrap: "wrap",
-              mt: "2",
-            }}
-          >
-            <MesureList />
-          </Flex>
-        </BoxWrapper>
-      </LayoutMandataire>
-    </FiltersContextProvider>
+    <>
+      <Helmet>
+        <title>Vos mesures | e-MPJM</title>
+      </Helmet>
+      <FiltersContextProvider
+        initialValues={{
+          mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
+          natureMesure: DEFAULT_MESURE_NATURE,
+        }}
+      >
+        <LayoutMandataire>
+          <BoxWrapper mt={3} px="1">
+            <Flex flexDirection="row" justifyContent="space-between">
+              <HeadingTitle>Vos mesures</HeadingTitle>
+              <MesureListButtonBar />
+            </Flex>
+            <MesureListFilters />
+            <Flex
+              sx={{
+                flexWrap: "wrap",
+                mt: "2",
+              }}
+            >
+              <MesureList />
+            </Flex>
+          </BoxWrapper>
+        </LayoutMandataire>
+      </FiltersContextProvider>
+    </>
   );
 }
 

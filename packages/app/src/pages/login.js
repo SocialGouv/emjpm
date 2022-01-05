@@ -1,4 +1,5 @@
 import { Box, Image } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
@@ -15,6 +16,9 @@ const { IS_PROD, PROD_DOMAIN } = config;
 function LoginPage() {
   return (
     <>
+      <Helmet>
+        <title>Connectez-vous à votre compte | e-MPJM</title>
+      </Helmet>
       <LayoutPublic>
         <BoxWrapper>
           {!IS_PROD && (

@@ -1,4 +1,5 @@
 import { Box } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { AvailabilityMap } from "~/containers/DirectionAvailabilityMap";
 import { DirectionFilters } from "~/containers/DirectionFilters";
@@ -23,33 +24,38 @@ export default function DirectionPage() {
   }
 
   return (
-    <FiltersContextSerializableProvider
-      useLocalStorage={true}
-      initialFilters={initialFilters}
-    >
-      <LayoutDirection>
-        <BoxWrapper mt={5} px="1">
-          <DirectionFilters />
-        </BoxWrapper>
-        <DirectionStatsKPI />
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <MandatairesSubNavigation />
-        </FlexWrapper>
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <Box sx={twoColumnStyle}>
-            <MandatairesDisponibility />
-          </Box>
+    <>
+      <Helmet>
+        <title>Statistiques direction | e-MPJM</title>
+      </Helmet>
+      <FiltersContextSerializableProvider
+        useLocalStorage={true}
+        initialFilters={initialFilters}
+      >
+        <LayoutDirection>
+          <BoxWrapper mt={5} px="1">
+            <DirectionFilters />
+          </BoxWrapper>
+          <DirectionStatsKPI />
+          <FlexWrapper flexWrap={"wrap"} mt={5}>
+            <MandatairesSubNavigation />
+          </FlexWrapper>
+          <FlexWrapper flexWrap={"wrap"} mt={5}>
+            <Box sx={twoColumnStyle}>
+              <MandatairesDisponibility />
+            </Box>
 
-          <Box sx={twoColumnStyle}>
-            <MandatairesActivity />
-          </Box>
-        </FlexWrapper>
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <Box sx={twoColumnStyle}>
-            <AvailabilityMap />
-          </Box>
-        </FlexWrapper>
-      </LayoutDirection>
-    </FiltersContextSerializableProvider>
+            <Box sx={twoColumnStyle}>
+              <MandatairesActivity />
+            </Box>
+          </FlexWrapper>
+          <FlexWrapper flexWrap={"wrap"} mt={5}>
+            <Box sx={twoColumnStyle}>
+              <AvailabilityMap />
+            </Box>
+          </FlexWrapper>
+        </LayoutDirection>
+      </FiltersContextSerializableProvider>
+    </>
   );
 }
