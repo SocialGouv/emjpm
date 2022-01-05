@@ -1,3 +1,5 @@
+import { Helmet } from "react-helmet";
+
 import { DirectionFilters } from "~/containers/DirectionFilters";
 import { DirectionStatsKPI } from "~/containers/DirectionIndicators";
 import { MandatairesList } from "~/containers/DirectionMandatairesList";
@@ -19,23 +21,28 @@ function Mandataires() {
   }
 
   return (
-    <FiltersContextSerializableProvider
-      useLocalStorage={true}
-      initialFilters={initialFilters}
-    >
-      <LayoutDirection>
-        <BoxWrapper mt={5} px="1">
-          <DirectionFilters />
-        </BoxWrapper>
-        <DirectionStatsKPI />
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <MandatairesSubNavigation />
-        </FlexWrapper>
-        <FlexWrapper flexWrap={"wrap"} mt={5}>
-          <MandatairesList />
-        </FlexWrapper>
-      </LayoutDirection>
-    </FiltersContextSerializableProvider>
+    <>
+      <Helmet>
+        <title>Liste des mandataires | e-MPJM</title>
+      </Helmet>
+      <FiltersContextSerializableProvider
+        useLocalStorage={true}
+        initialFilters={initialFilters}
+      >
+        <LayoutDirection>
+          <BoxWrapper mt={5} px="1">
+            <DirectionFilters />
+          </BoxWrapper>
+          <DirectionStatsKPI />
+          <FlexWrapper flexWrap={"wrap"} mt={5}>
+            <MandatairesSubNavigation />
+          </FlexWrapper>
+          <FlexWrapper flexWrap={"wrap"} mt={5}>
+            <MandatairesList />
+          </FlexWrapper>
+        </LayoutDirection>
+      </FiltersContextSerializableProvider>
+    </>
   );
 }
 

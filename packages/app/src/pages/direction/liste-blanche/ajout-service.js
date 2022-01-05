@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { Link as StyledLink } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutDirection } from "~/containers/Layout";
@@ -10,34 +11,39 @@ import { BoxWrapper } from "~/components/Grid";
 function ListBlanchePage() {
   const history = useHistory();
   return (
-    <LayoutDirection>
-      <BoxWrapper mt={3} px={1}>
-        <Link
-          to="/direction"
-          component={(props) => (
-            <StyledLink
-              onClick={() => props.navigate(props.href)}
-              mb={4}
-              display="block"
-            >
-              &larr; Retour
-            </StyledLink>
-          )}
-        />
+    <>
+      <Helmet>
+        <title>Ajout d'un engistrement à la liste blanche | e-MPJM</title>
+      </Helmet>
+      <LayoutDirection>
+        <BoxWrapper mt={3} px={1}>
+          <Link
+            to="/direction"
+            component={(props) => (
+              <StyledLink
+                onClick={() => props.navigate(props.href)}
+                mb={4}
+                display="block"
+              >
+                &larr; Retour
+              </StyledLink>
+            )}
+          />
 
-        <HeadingTitle mb={4}>
-          {"Ajout d'un engistrement à la liste blanche"}
-        </HeadingTitle>
-        <ListeBlancheServiceCreate
-          onSuccess={async () => {
-            await history.push("/direction");
-          }}
-          handleCancel={async () => {
-            await history.push("/direction");
-          }}
-        />
-      </BoxWrapper>
-    </LayoutDirection>
+          <HeadingTitle mb={4}>
+            {"Ajout d'un engistrement à la liste blanche"}
+          </HeadingTitle>
+          <ListeBlancheServiceCreate
+            onSuccess={async () => {
+              await history.push("/direction");
+            }}
+            handleCancel={async () => {
+              await history.push("/direction");
+            }}
+          />
+        </BoxWrapper>
+      </LayoutDirection>
+    </>
   );
 }
 

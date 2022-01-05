@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet";
 import { Box, Flex } from "rebass";
 
 import { BoxWrapper } from "~/components/Grid";
@@ -21,26 +22,31 @@ function ListBlanchePage() {
   }
 
   return (
-    <LayoutDirection>
-      <FiltersContextSerializableProvider
-        useLocalStorage={true}
-        initialFilters={initialFilters}
-      >
-        <BoxWrapper mt={3} px={1}>
-          <Flex flexDirection="column">
-            <Box mb="2">
-              <ListeBlancheFilter />
-            </Box>
-            <Box mb="2">
-              <ListeBlancheSummary />
-            </Box>
-            <Box mb="2">
-              <ListeBlanche origin="direction" />
-            </Box>
-          </Flex>
-        </BoxWrapper>
-      </FiltersContextSerializableProvider>
-    </LayoutDirection>
+    <>
+      <Helmet>
+        <title>Direction | e-MPJM</title>
+      </Helmet>
+      <LayoutDirection>
+        <FiltersContextSerializableProvider
+          useLocalStorage={true}
+          initialFilters={initialFilters}
+        >
+          <BoxWrapper mt={3} px={1}>
+            <Flex flexDirection="column">
+              <Box mb="2">
+                <ListeBlancheFilter />
+              </Box>
+              <Box mb="2">
+                <ListeBlancheSummary />
+              </Box>
+              <Box mb="2">
+                <ListeBlanche origin="direction" />
+              </Box>
+            </Flex>
+          </BoxWrapper>
+        </FiltersContextSerializableProvider>
+      </LayoutDirection>
+    </>
   );
 }
 
