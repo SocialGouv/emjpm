@@ -22,8 +22,8 @@ function getRequestFilters(filters) {
   if (departement) {
     const departementCode = departement;
     const individuelDepartementFilters = {
-      lb_user: {
-        lb_departements: {
+      liste_blanche: {
+        mandataire_individuel_departements: {
           departement_code: {
             _eq: departementCode,
           },
@@ -31,15 +31,15 @@ function getRequestFilters(filters) {
       },
     };
     if (filters.departementFinanceur) {
-      individuelDepartementFilters.lb_user.lb_departements.departement_financeur =
+      individuelDepartementFilters.liste_blanche.mandataire_individuel_departements.departement_financeur =
         {
           _eq: filters.departementFinanceur === true,
         };
     }
 
     const preposeDepartementFilter = {
-      lb_user: {
-        lb_user_etablissements: {
+      liste_blanche: {
+        mandataire_prepose_etablissements: {
           etablissement: {
             departement_code: { _eq: departementCode },
           },
@@ -75,8 +75,8 @@ function getRequestFilters(filters) {
   } else {
     if (filters.departementFinanceur) {
       requestFilters.mandataire = {
-        lb_user: {
-          lb_departements: {
+        liste_blanche: {
+          mandataire_individuel_departements: {
             departement_financeur: {
               _eq: true,
             },

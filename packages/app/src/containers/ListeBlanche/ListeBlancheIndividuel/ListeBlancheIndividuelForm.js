@@ -31,8 +31,8 @@ import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIn
 
 const lbSchema = ({ apolloClient }) =>
   yup.object().shape({
-    adresse1: yup.string().required().nullable(),
-    adresse2: yup.string().optional().nullable(),
+    adresse: yup.string().required().nullable(),
+    adresse_complement: yup.string().optional().nullable(),
     code_postal: yup
       .string()
       .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
@@ -67,8 +67,8 @@ export function ListeBlancheIndividuelForm(props) {
   );
 
   const departements =
-    data && data.lb_departements
-      ? data.lb_departements.map((item) => {
+    data && data.mandataire_individuel_departements
+      ? data.mandataire_individuel_departements.map((item) => {
           return {
             departement_financeur: item.departement_financeur,
             id: item.departement_code,
@@ -79,8 +79,8 @@ export function ListeBlancheIndividuelForm(props) {
 
   const formik = useFormik({
     initialValues: {
-      adresse1: data ? formatFormInput(data.adresse1) : "",
-      adresse2: data ? formatFormInput(data.adresse2) : "",
+      adresse: data ? formatFormInput(data.adresse) : "",
+      adresse_complement: data ? formatFormInput(data.adresse_complement) : "",
       code_postal: data ? formatFormInput(data.code_postal) : "",
       departements,
       email: data ? formatFormInput(data.email) : "",
@@ -95,11 +95,11 @@ export function ListeBlancheIndividuelForm(props) {
         props.handleSubmit(values);
         setSubmitting(false);
       } catch (err) {
-        if (err.message.includes("lb_users_siret_unique")) {
+        if (err.message.includes("liste_blanche_siret_unique")) {
           setFieldError("siret", "Le siret renseigné est déjà existant");
         }
 
-        if (err.message.includes("lb_users_email_unique")) {
+        if (err.message.includes("liste_blanche_email_unique")) {
           setFieldError("email", "L'email renseigné est déjà existant");
         }
       }
@@ -144,8 +144,8 @@ export function ListeBlancheIndividuelForm(props) {
     } = selectedSiretData;
 
     setFieldValue("etablissement", nom_raison_sociale || "");
-    setFieldValue("adresse1", l4_declaree || "");
-    setFieldValue("adresse2", l5_declaree || "");
+    setFieldValue("adresse", l4_declaree || "");
+    setFieldValue("adresse_complement", l5_declaree || "");
     setFieldValue("code_postal", code_postal || "");
     setFieldValue("ville", libelle_commune || "");
     setFieldValue("departement", departement || "");
@@ -182,14 +182,14 @@ export function ListeBlancheIndividuelForm(props) {
           />
           <SelectAdresse
             placeholder="Adresse 1"
-            id="adresse1"
+            id="adresse"
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
           />
           <FormGroupInput
             placeholder="Complément"
-            id="adresse2"
+            id="adresse_complement"
             formik={formik}
             validationSchema={validationSchema}
           />

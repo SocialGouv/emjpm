@@ -9,7 +9,7 @@ import { Button } from "~/components";
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 
 export function AdminMandataireListeBlanche(props) {
-  const { lb_user, mandataire } = props;
+  const { liste_blanche, mandataire } = props;
   const user = useUser();
   const [updateMandataire, { loading, error }] = useMutation(
     LISTE_BLANCHE_ASSOCIATION
@@ -21,21 +21,21 @@ export function AdminMandataireListeBlanche(props) {
 
   return (
     <>
-      {mandataire.lb_user ? (
-        <Link to={`/${user.type}/liste-blanche/${mandataire.lb_user.id}`}>
-          <Text fontWeight="bold">{`${mandataire.lb_user.prenom} ${mandataire.lb_user.nom}`}</Text>
-          <Text>{`${mandataire.lb_user.email}`}</Text>
-          {mandataire.lb_user.siret && (
-            <Text>{`SIRET: ${mandataire.lb_user.siret}`}</Text>
+      {mandataire.liste_blanche ? (
+        <Link to={`/${user.type}/liste-blanche/${mandataire.liste_blanche.id}`}>
+          <Text fontWeight="bold">{`${mandataire.liste_blanche.prenom} ${mandataire.liste_blanche.nom}`}</Text>
+          <Text>{`${mandataire.liste_blanche.email}`}</Text>
+          {mandataire.liste_blanche.siret && (
+            <Text>{`SIRET: ${mandataire.liste_blanche.siret}`}</Text>
           )}
         </Link>
       ) : (
         <>
-          {lb_user ? (
+          {liste_blanche ? (
             <Flex>
               <Box>
-                <Text fontWeight="bold">{`${lb_user.prenom} ${lb_user.nom}`}</Text>
-                <Text>{`${lb_user.email}`}</Text>
+                <Text fontWeight="bold">{`${liste_blanche.prenom} ${liste_blanche.nom}`}</Text>
+                <Text>{`${liste_blanche.email}`}</Text>
               </Box>
               <Button
                 onClick={async () => {
@@ -43,14 +43,14 @@ export function AdminMandataireListeBlanche(props) {
                     await updateMandataire({
                       refetchQueries: ["adminUserQuery"],
                       variables: {
-                        lb_user_id: lb_user.id,
+                        liste_blanche_id: liste_blanche.id,
                         mandataire_id: mandataire.id,
                       },
                     });
                   } catch (err) {
                     if (err.message.includes("Uniqueness violation")) {
                       alert(
-                        `Oups, l'utilisateur ${lb_user.prenom} ${lb_user.nom} (lb_user_id: ${lb_user.id}) est déja associé à un autre mandataire (liste blanche).`
+                        `Oups, l'utilisateur ${liste_blanche.prenom} ${liste_blanche.nom} (liste_blanche_id: ${liste_blanche.id}) est déja associé à un autre mandataire (liste blanche).`
                       );
                     }
                   }

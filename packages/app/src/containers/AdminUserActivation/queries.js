@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
 
-export const LB_USER = gql`
-  query adminUserMandataireLBUser($where: lb_users_bool_exp!) {
-    lb_users(where: $where) {
+export const LISTE_BLANCHE = gql`
+  query adminUserMandataireLBUser($where: liste_blanche_bool_exp!) {
+    liste_blanche(where: $where) {
       id
       email
       nom
       prenom
-      lb_departements {
+      mandataire_individuel_departements {
         id
         departement_financeur
         departement {
@@ -30,8 +30,8 @@ export const USER = gql`
       mandataire {
         id
         siret
-        lb_user_id
-        lb_user {
+        liste_blanche_id
+        liste_blanche {
           id
           nom
           prenom

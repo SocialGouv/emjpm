@@ -10,7 +10,7 @@ const CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE = gql`
 
 const CHECK_DUPLICATE_MANDATAIRE_SIRET = gql`
   query CHECK_DUPLICATE_MANDATAIRE_SIRET($siret: String!) {
-    mandataires(where: { lb_user: { siret: { _eq: $siret } } }) {
+    mandataires(where: { liste_blanche: { siret: { _eq: $siret } } }) {
       id
     }
   }

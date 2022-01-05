@@ -8,21 +8,25 @@ export function ListeBlancheIndividuelItem(props) {
   const { item, getHref, onClick } = props;
   const to = getHref && getHref(item, props);
 
-  const { lb_user } = item;
-  const { mandataire } = lb_user;
+  const { liste_blanche } = item;
+  const { mandataire } = liste_blanche;
 
   return (
-    <Card key={lb_user.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
+    <Card
+      key={liste_blanche.id}
+      sx={cardStyle({ clickable: !!onClick })}
+      mb="2"
+    >
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">
             <Text sx={labelStyle}>{"Mandataire individuel"}</Text>
             <Flex>
               <Text sx={descriptionStyle}>
-                {lb_user.nom ? lb_user.nom.toUpperCase() : ""}
+                {liste_blanche.nom ? liste_blanche.nom.toUpperCase() : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle}>
-                {lb_user.prenom}
+                {liste_blanche.prenom}
               </Text>
             </Flex>
           </Flex>
@@ -42,7 +46,7 @@ export function ListeBlancheIndividuelItem(props) {
           <Flex width="20%" flexDirection="column">
             <Text sx={labelStyle}>{"Département"}</Text>
             <Text sx={descriptionStyle}>
-              {lb_user.lb_departements
+              {liste_blanche.mandataire_individuel_departements
                 .map((lbDep) =>
                   `${
                     lbDep.departement ? lbDep.departement.nom : "Inconnu"
