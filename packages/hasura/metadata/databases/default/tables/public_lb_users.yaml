@@ -1,25 +1,6 @@
 table:
   name: lb_users
   schema: public
-object_relationships:
-- name: mandataire
-  using:
-    manual_configuration:
-      column_mapping:
-        id: lb_user_id
-      insertion_order: null
-      remote_table:
-        name: mandataires
-        schema: public
-- name: ocmi_mandataire
-  using:
-    manual_configuration:
-      column_mapping:
-        siret: siret
-      insertion_order: null
-      remote_table:
-        name: ocmi_mandataires
-        schema: public
 insert_permissions:
 - permission:
     backend_only: false
@@ -167,17 +148,5 @@ update_permissions:
     check: null
     columns:
     - siret
-    filter:
-      mandataire:
-        user_id:
-          _eq: X-Hasura-User-Id
+    filter: {}
   role: individuel
-- permission:
-    check: null
-    columns:
-    - siret
-    filter:
-      mandataire:
-        user_id:
-          _eq: X-Hasura-User-Id
-  role: prepose
