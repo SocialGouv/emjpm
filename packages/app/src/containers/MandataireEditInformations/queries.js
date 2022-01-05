@@ -24,9 +24,9 @@ export const MANDATAIRE = gql`
         suspend_activity_reason
         mesures_en_cours
         siret
-        lb_user {
+        liste_blanche {
           id
-          lb_departements {
+          mandataire_individuel_departements {
             id
             departement_code
             tis(where: { immutable: { _eq: true } }) {
@@ -35,7 +35,7 @@ export const MANDATAIRE = gql`
             }
           }
           siret
-          lb_user_etablissements {
+          mandataire_prepose_etablissements {
             id
             etablissement {
               id

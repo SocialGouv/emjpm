@@ -1,13 +1,13 @@
 import gql from "graphql-tag";
 
-export const LB_USERS = gql`
+export const LISTE_BLANCHE = gql`
   query liste_blanche_users(
     $limit: Int
     $offset: Int
-    $filters: lb_users_bool_exp = {}
+    $filters: liste_blanche_bool_exp = {}
     $search: String
   ) {
-    lb_users_aggregate: search_lb_users_aggregate(
+    liste_blanche_aggregate: search_liste_blanche_aggregate(
       where: $filters
       args: { search: $search }
     ) {
@@ -15,7 +15,7 @@ export const LB_USERS = gql`
         count
       }
     }
-    lb_users: search_lb_users(
+    liste_blanche: search_liste_blanche(
       limit: $limit
       offset: $offset
       args: { search: $search }
@@ -36,7 +36,7 @@ export const LB_USERS = gql`
           prenom
         }
       }
-      lb_user_etablissements {
+      mandataire_prepose_etablissements {
         etablissement {
           id
           rslongue
@@ -47,7 +47,7 @@ export const LB_USERS = gql`
         }
         etablissement_rattachement
       }
-      lb_departements {
+      mandataire_individuel_departements {
         id
         departement_financeur
         departement {
@@ -59,16 +59,16 @@ export const LB_USERS = gql`
   }
 `;
 
-export const LB_USER = gql`
+export const LISTE_BLANCHE_BY_PK = gql`
   query listeBlancheUser($id: Int!) {
-    lb_users_by_pk(id: $id) {
+    liste_blanche_by_pk(id: $id) {
       id
       nom
       prenom
       email
       siret
-      adresse1
-      adresse2
+      adresse
+      adresse_complement
       code_postal
       ville
       type
@@ -80,17 +80,17 @@ export const LB_USER = gql`
           prenom
         }
       }
-      lb_user_etablissements {
+      mandataire_prepose_etablissements {
         id
         etablissement {
           id
           rslongue
           ligneacheminement
         }
-        lb_user_id
+        liste_blanche_id
         etablissement_rattachement
       }
-      lb_departements {
+      mandataire_individuel_departements {
         id
         departement_code
         departement_financeur
@@ -142,7 +142,7 @@ export const SEARCH_VIEW_LB = gql`
         nom
         telephone
       }
-      lb_user {
+      liste_blanche {
         id
         nom
         prenom
@@ -154,7 +154,7 @@ export const SEARCH_VIEW_LB = gql`
             prenom
           }
         }
-        lb_user_etablissements {
+        mandataire_prepose_etablissements {
           etablissement {
             id
             rslongue
@@ -165,7 +165,7 @@ export const SEARCH_VIEW_LB = gql`
           }
           etablissement_rattachement
         }
-        lb_departements {
+        mandataire_individuel_departements {
           id
           departement_financeur
           departement {

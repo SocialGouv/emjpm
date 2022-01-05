@@ -26,12 +26,15 @@ import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
 import { findOptions } from "~/utils/form";
 
-function buildTiOptions(lb_departements, lb_user_etablissements) {
+function buildTiOptions(
+  mandataire_individuel_departements,
+  mandataire_prepose_etablissements
+) {
   const tiList = [];
-  lb_user_etablissements.forEach(({ etablissement: { tis } }) => {
+  mandataire_prepose_etablissements.forEach(({ etablissement: { tis } }) => {
     tiList.push.apply(tiList, tis);
   });
-  lb_departements.forEach(({ tis }) => {
+  mandataire_individuel_departements.forEach(({ tis }) => {
     tiList.push.apply(tiList, tis);
   });
   const tis = uniq(tiList);
@@ -45,12 +48,18 @@ function buildTiOptions(lb_departements, lb_user_etablissements) {
 function MandataireEditInformationsForm(props) {
   const { cancelLink, mandataire, handleSubmit, user, errorMessage } = props;
 
-  const { lb_user, mandataire_tis = [] } = mandataire;
-  const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
+  const { liste_blanche, mandataire_tis = [] } = mandataire;
+  const {
+    mandataire_individuel_departements = [],
+    mandataire_prepose_etablissements = [],
+  } = liste_blanche || {};
 
   const { tiOptions } = useMemo(() => {
-    return buildTiOptions(lb_departements, lb_user_etablissements);
-  }, [lb_departements, lb_user_etablissements]);
+    return buildTiOptions(
+      mandataire_individuel_departements,
+      mandataire_prepose_etablissements
+    );
+  }, [mandataire_individuel_departements, mandataire_prepose_etablissements]);
 
   const apolloClient = useApolloClient();
 
@@ -69,13 +78,13 @@ function MandataireEditInformationsForm(props) {
       geocode: geocodeInitialValue(mandataire),
       nom: user.nom || "",
       prenom: user.prenom || "",
-      siret: lb_user?.siret || mandataire?.siret || "",
+      siret: liste_blanche?.siret || mandataire?.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
-      initialSiret: lb_user?.siret || "",
+      initialSiret: liste_blanche?.siret || "",
     },
     onSubmit: handleSubmit,
     validationSchema,

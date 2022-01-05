@@ -14,9 +14,9 @@ object_relationships:
       remote_table:
         name: editors
         schema: public
-- name: lb_user
+- name: liste_blanche
   using:
-    foreign_key_constraint_on: lb_user_id
+    foreign_key_constraint_on: liste_blanche_id
 - name: ocmi_mandataire
   using:
     manual_configuration:
@@ -205,13 +205,14 @@ select_permissions:
     - mesures_en_attente
     - mesures_en_cours
     filter:
-      lb_user:
-        lb_departements:
+      liste_blanche:
+        mandataire_individuel_departements:
           _and:
           - departement_financeur:
               _eq: true
           - departement_code:
-              _in: x-hasura-agrements
+              _in:
+              - x-hasura-agrements
   role: direction_territoriale
 - permission:
     columns:

@@ -2,7 +2,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 import { Card } from "rebass";
 
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
-import { UPDATE_LB_USER_PREPOSE } from "./mutations";
+import { UPDATE_LISTE_BLANCHE_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -24,7 +24,7 @@ export function ListeBlanchePreposeUpdate(props) {
   const { data, handleSubmit } = props;
   const apolloClient = useApolloClient();
   const [updateListeBlanche, { loading, error }] = useMutation(
-    UPDATE_LB_USER_PREPOSE
+    UPDATE_LISTE_BLANCHE_PREPOSE
   );
   useQueryReady(loading, error);
 
@@ -52,7 +52,7 @@ export function ListeBlanchePreposeUpdate(props) {
                 return {
                   etablissement_id: e.id,
                   etablissement_rattachement: e.etablissement_rattachement,
-                  lb_user_id: data.id,
+                  liste_blanche_id: data.id,
                 };
               }),
               id: data.id,

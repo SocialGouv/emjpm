@@ -40,8 +40,8 @@ export function ListeBlanchePreposeForm(props) {
 
   const initialValues = {
     email: data.email || "",
-    etablissements: data.lb_user_etablissements
-      ? data.lb_user_etablissements.map((e) => {
+    etablissements: data.mandataire_prepose_etablissements
+      ? data.mandataire_prepose_etablissements.map((e) => {
           return {
             etablissement_rattachement: e.etablissement_rattachement,
             id: e.etablissement.id,
@@ -62,7 +62,7 @@ export function ListeBlanchePreposeForm(props) {
           await handleSubmit(values);
         }
       } catch (error) {
-        if (error.message.includes("lb_users_email_unique")) {
+        if (error.message.includes("liste_blanche_email_unique")) {
           setFieldError(
             "email",
             "L'email renseigné est déja utilisé pour un autre enregistrement de la liste blanche"

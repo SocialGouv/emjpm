@@ -56,24 +56,30 @@ module.exports = {
 
       const mandataire = enqueteReponseDefaultData.mandataires_by_pk;
 
-      const { lb_user } = mandataire;
+      const { liste_blanche } = mandataire;
 
       defaultValues.genre = mandataire.genre;
 
-      let lb_departements;
+      let mandataire_individuel_departements;
       let departement_financeur;
-      if (lb_user) {
-        defaultValues.nom = capitalizeName(`${lb_user.prenom} ${lb_user.nom}`);
-        lb_departements = lb_user.lb_departements;
-        if (lb_departements && lb_departements.length) {
-          departement_financeur = lb_departements.find(
+      if (liste_blanche) {
+        defaultValues.nom = capitalizeName(
+          `${liste_blanche.prenom} ${liste_blanche.nom}`
+        );
+        mandataire_individuel_departements =
+          liste_blanche.mandataire_individuel_departements;
+        if (
+          mandataire_individuel_departements &&
+          mandataire_individuel_departements.length
+        ) {
+          departement_financeur = mandataire_individuel_departements.find(
             (row) => row.departement_financeur
           );
         }
       }
       const departement =
         departement_financeur?.departement ||
-        lb_departements?.[0]?.departement ||
+        mandataire_individuel_departements?.[0]?.departement ||
         mandataire?.departement;
 
       defaultValues.region = departement.region.nom;
@@ -107,8 +113,8 @@ module.exports = {
           defaultValues[k] = previous.enquete_reponses_agrements_formation[k];
         }
       }
-      if (lb_user) {
-        const length = lb_user.lb_departements.length;
+      if (liste_blanche) {
+        const length = liste_blanche.mandataire_individuel_departements.length;
         if (length >= 5) {
           defaultValues.nb_departements = "5+";
         } else {

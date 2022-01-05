@@ -6,12 +6,14 @@ import useUser from "~/hooks/useUser";
 import useQueryReady from "../../../hooks/useQueryReady";
 
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
-import { CREATE_LB_USER_INDIVIDUEL } from "./mutations";
+import { CREATE_LISTE_BLANCHE_INDIVIDUEL } from "./mutations";
 
 export function ListeBlancheIndividuelCreate() {
   const history = useHistory();
   const { type } = useUser();
-  const [create, { loading, error }] = useMutation(CREATE_LB_USER_INDIVIDUEL);
+  const [create, { loading, error }] = useMutation(
+    CREATE_LISTE_BLANCHE_INDIVIDUEL
+  );
 
   useQueryReady(loading, error);
 
@@ -26,8 +28,8 @@ export function ListeBlancheIndividuelCreate() {
         handleSubmit={async (values) => {
           await create({
             variables: {
-              adresse1: values.adresse1,
-              adresse2: values.adresse2,
+              adresse: values.adresse,
+              adresse_complement: values.adresse_complement,
               code_postal: values.code_postal,
               departements: values.departements.map((d) => {
                 return {

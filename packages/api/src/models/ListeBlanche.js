@@ -1,8 +1,8 @@
 const { Model } = require("objection");
 
-class LbUser extends Model {
+class ListeBlanche extends Model {
   static get tableName() {
-    return "lb_users";
+    return "liste_blanche";
   }
 
   static get idColumn() {
@@ -12,8 +12,8 @@ class LbUser extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        adresse1: { type: "string" },
-        adresse2: { type: "string" },
+        adresse: { type: "string" },
+        adresse_complement: { type: "string" },
         code_postal: {
           type: "string",
         },
@@ -30,4 +30,4 @@ class LbUser extends Model {
   }
 }
 
-module.exports = LbUser;
+module.exports = ListeBlanche;

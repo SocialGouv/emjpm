@@ -4,27 +4,27 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
-import { LB_USERS } from "~/containers/ListeBlanche/queries";
+import { LISTE_BLANCHE } from "~/containers/ListeBlanche/queries";
 import { adminUserDeleteSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
-import { DELETE_LB_USER } from "./mutations";
-import { AdminLbUserDeleteRemoveStyle } from "./style";
+import { DELETE_LISTE_BLANCHE } from "./mutations";
+import { AdminListeBlancheDeleteRemoveStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
 
-export function AdminLbUserDeleteForm(props) {
-  const { lbUserId } = props;
+export function AdminListeBlancheDeleteForm(props) {
+  const { listeBlancheId } = props;
 
   const history = useHistory();
 
-  const [deleteUser, { loading, error }] = useMutation(DELETE_LB_USER, {
+  const [deleteUser, { loading, error }] = useMutation(DELETE_LISTE_BLANCHE, {
     awaitRefetchQueries: true,
     onCompleted: async () => {
       history.push("/admin/liste-blanche");
     },
     refetchQueries: [
       {
-        query: LB_USERS,
+        query: LISTE_BLANCHE,
       },
     ],
   });
@@ -36,7 +36,7 @@ export function AdminLbUserDeleteForm(props) {
     onSubmit: async (_, { setSubmitting }) => {
       await deleteUser({
         variables: {
-          lbUserId,
+          listeBlancheId,
         },
       });
       setSubmitting(false);
@@ -45,7 +45,7 @@ export function AdminLbUserDeleteForm(props) {
   });
 
   return (
-    <Flex sx={AdminLbUserDeleteRemoveStyle}>
+    <Flex sx={AdminListeBlancheDeleteRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading size={5} mb="1">
           {"Supprimer l'utilisateur"}
@@ -76,7 +76,7 @@ export function AdminLbUserDeleteForm(props) {
                 mr="2"
                 variant="outline"
                 onClick={() => {
-                  history.push(`/admin/liste-blanche/${lbUserId}`);
+                  history.push(`/admin/liste-blanche/${listeBlancheId}`);
                 }}
               >
                 Annuler

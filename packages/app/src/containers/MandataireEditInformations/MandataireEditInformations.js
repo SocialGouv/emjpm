@@ -68,8 +68,8 @@ const MandataireEditInformations = ({
         code: codeDepartement,
       });
 
-      const { lb_user } = mandataire;
-      const { lb_departements = [] } = lb_user || {};
+      const { liste_blanche } = mandataire;
+      const { mandataire_individuel_departements = [] } = liste_blanche || {};
 
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
@@ -91,7 +91,7 @@ const MandataireEditInformations = ({
             mandataire_id: mandataire.id,
             ti_id: ti,
           })),
-          departement_codes: lb_departements.map(
+          departement_codes: mandataire_individuel_departements.map(
             ({ departement_code }) => departement_code
           ),
           nom: values.nom,

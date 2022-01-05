@@ -17,7 +17,7 @@ function label(value) {
 function MandataireInformations() {
   const user = useUser();
   const { email, nom, prenom, mandataire } = user;
-  const { mandataire_tis, lb_user } = mandataire;
+  const { mandataire_tis, liste_blanche } = mandataire;
 
   return (
     <Box>
@@ -25,11 +25,11 @@ function MandataireInformations() {
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading>
       <Flex p={1} mt={2} flexDirection="column">
-        {isIndividuel(user) && lb_user && (
-          <IndividuelInformations lb_user={lb_user} />
+        {isIndividuel(user) && liste_blanche && (
+          <IndividuelInformations liste_blanche={liste_blanche} />
         )}
-        {isPrepose(user) && lb_user && (
-          <PreposeInformations lb_user={lb_user} />
+        {isPrepose(user) && liste_blanche && (
+          <PreposeInformations liste_blanche={liste_blanche} />
         )}
         <TribunauxInformations mandataireTis={mandataire_tis} />
         <Box mb={2}>
@@ -137,44 +137,46 @@ function TribunauxInformations({ mandataireTis }) {
   );
 }
 
-function PreposeInformations({ lb_user }) {
+function PreposeInformations({ liste_blanche }) {
   return (
     <Box mb={2}>
       <Heading size={5}>Etablissements</Heading>
       <Flex my={1}>
         <Text sx={subtitle}>{"Liste des établissements"}</Text>
         <Box flex={2 / 3}>
-          {lb_user?.lb_user_etablissements?.map((lbue, index) => {
-            const { etablissement } = lbue;
-            return (
-              <Text key={index} sx={content}>
-                {etablissement.rslongue}
-                {lbue.etablissement_rattachement ? " (rattachement)" : ""}
-              </Text>
-            );
-          })}
+          {liste_blanche?.mandataire_prepose_etablissements?.map(
+            (lbue, index) => {
+              const { etablissement } = lbue;
+              return (
+                <Text key={index} sx={content}>
+                  {etablissement.rslongue}
+                  {lbue.etablissement_rattachement ? " (rattachement)" : ""}
+                </Text>
+              );
+            }
+          )}
         </Box>
       </Flex>
     </Box>
   );
 }
 
-function IndividuelInformations({ lb_user }) {
+function IndividuelInformations({ liste_blanche }) {
   return (
     <>
       <Box mb={2}>
         <Heading size={5}>Structure juridique</Heading>
         <Flex my={1}>
           <Text sx={subtitle}>{"Siret"}</Text>
-          <Text sx={content}>{label(lb_user.siret)}</Text>
+          <Text sx={content}>{label(liste_blanche.siret)}</Text>
         </Flex>
         <Flex my={1}>
           <Text sx={subtitle}>{"Adresse"}</Text>
           <Box flex={2 / 3}>
-            <Text sx={content}>{label(lb_user.adresse1)}</Text>
-            <Text sx={content}>{label(lb_user.adresse2)}</Text>
+            <Text sx={content}>{label(liste_blanche.adresse)}</Text>
+            <Text sx={content}>{label(liste_blanche.adresse_complement)}</Text>
             <Text sx={content}>
-              {label(lb_user.code_postal)} {label(lb_user.ville)}
+              {label(liste_blanche.code_postal)} {label(liste_blanche.ville)}
             </Text>
           </Box>
         </Flex>
@@ -185,14 +187,16 @@ function IndividuelInformations({ lb_user }) {
         <Flex my={1}>
           <Text sx={subtitle}>{"Liste des départements"}</Text>
           <Box flex={2 / 3}>
-            {lb_user?.lb_departements.map((lbd, index) => {
-              return (
-                <Text key={index} sx={content}>
-                  {lbd.departement.id} - {lbd.departement.nom}{" "}
-                  {lbd.departement_financeur ? "(financeur)" : ""}
-                </Text>
-              );
-            })}
+            {liste_blanche?.mandataire_individuel_departements.map(
+              (lbd, index) => {
+                return (
+                  <Text key={index} sx={content}>
+                    {lbd.departement.id} - {lbd.departement.nom}{" "}
+                    {lbd.departement_financeur ? "(financeur)" : ""}
+                  </Text>
+                );
+              }
+            )}
           </Box>
         </Flex>
       </Box>

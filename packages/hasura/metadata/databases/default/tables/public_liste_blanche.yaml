@@ -1,0 +1,338 @@
+table:
+  name: liste_blanche
+  schema: public
+object_relationships:
+- name: mandataire
+  using:
+    foreign_key_constraint_on:
+      column: liste_blanche_id
+      table:
+        name: mandataires
+        schema: public
+array_relationships:
+- name: mandataire_individuel_departements
+  using:
+    foreign_key_constraint_on:
+      column: liste_blanche_id
+      table:
+        name: mandataire_individuel_departements
+        schema: public
+- name: mandataire_prepose_etablissements
+  using:
+    foreign_key_constraint_on:
+      column: liste_blanche_id
+      table:
+        name: mandataire_prepose_etablissements
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+  role: direction
+select_permissions:
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: direction_nationale
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter:
+      mandataire_individuel_departements:
+        _and:
+        - departement_financeur:
+            _eq: true
+        - departement_code:
+            _in:
+            - x-hasura-agrements
+  role: direction_territoriale
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: service
+- permission:
+    columns:
+    - id
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    - created_at
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: {}
+    columns:
+    - adresse
+    - adresse_complement
+    - code_postal
+    - competences
+    - created_at
+    - departement_code
+    - email
+    - etablissement
+    - genre
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - telephone_portable
+    - type
+    - ville
+    filter: {}
+  role: direction
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - id
+      - type
+      - email
+      - nom
+      - prenom
+      - siret
+      - departement_code
+      - code_postal
+      - ville
+      - adresse
+      - adresse_complement
+      - telephone
+      - telephone_portable
+      - genre
+      - competences
+      - etablissement
+      - org_gestionnaire
+      - org_nom
+      - org_adresse
+      - org_code_postal
+      - org_ville
+      - created_at
+      - lb_user_id
+  headers:
+  - name: hasura_web_hook_secret
+    value_from_env: HASURA_WEB_HOOK_SECRET
+  name: lb_update_liste_blanche
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/lb-update/liste-blanche"
