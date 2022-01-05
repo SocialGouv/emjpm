@@ -251,14 +251,14 @@ export const MANDATAIRE_USERS = gql`
             etablissement
           }
         }
-        lb_user {
+        liste_blanche {
           id
           siret
-          adresse1
-          adresse2
+          adresse
+          adresse_complement
           code_postal
           ville
-          lb_user_etablissements {
+          mandataire_prepose_etablissements {
             etablissement_rattachement
             etablissement {
               id
@@ -269,7 +269,7 @@ export const MANDATAIRE_USERS = gql`
               }
             }
           }
-          lb_departements {
+          mandataire_individuel_departements {
             id
             departement_code
             departement_financeur

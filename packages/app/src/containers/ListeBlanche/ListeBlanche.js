@@ -24,8 +24,8 @@ export function ListeBlanche(props) {
     switch (type) {
       case "individuel":
       case "prepose":
-        const { lb_user } = item;
-        return `/${origin}/liste-blanche/${lb_user.id}`;
+        const { liste_blanche } = item;
+        return `/${origin}/liste-blanche/${liste_blanche.id}`;
       case "service":
         const { service } = item;
         return `/${origin}/liste-blanche/services/${service.id}`;

@@ -1,6 +1,6 @@
 import { Flex } from "rebass";
 
-import { AdminLbUserDelete } from "~/containers/AdminLbUserDelete";
+import { AdminListeBlancheDelete } from "~/containers/AdminListeBlancheDelete";
 import { LayoutAdmin } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
 
@@ -14,7 +14,7 @@ function AdminUserDeletePage() {
     <LayoutAdmin>
       <BoxWrapper mt="6" px="1">
         <Flex flexWrap="wrap" mt="2">
-          <AdminLbUserDelete lbUserId={id} />
+          <AdminListeBlancheDelete listeBlancheId={id} />
         </Flex>
       </BoxWrapper>
     </LayoutAdmin>

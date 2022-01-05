@@ -1,0 +1,33 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- DROP VIEW "public"."view_lb";
+-- CREATE OR REPLACE VIEW "public"."view_lb" AS
+--  SELECT concat('service-', ser.id) AS uid,
+--     NULL::integer AS liste_blanche_id,
+--     ser.id AS service_id,
+--     NULL::integer AS mandataire_id,
+--     'service'::text AS user_type,
+--     ser.etablissement AS nom,
+--     ser.siret,
+--     ser.code_postal,
+--     ser.ville,
+--     ser.adresse AS adress,
+--     ser.email
+--    FROM services ser
+-- UNION
+--  SELECT concat(lb.type, '-', lb.id) AS uid,
+--     lb.id AS liste_blanche_id,
+--     NULL::integer AS service_id,
+--     man.id AS mandataire_id,
+--         CASE
+--             WHEN ((lb.type)::text = 'individuel'::text) THEN 'individuel'::text
+--             ELSE 'prepose'::text
+--         END AS user_type,
+--     concat(lb.nom, ' ', lb.prenom) AS nom,
+--     lb.siret,
+--     lb.code_postal,
+--     lb.ville,
+--     concat_ws(' '::text, lb.adresse, lb.adresse_complement) AS adress,
+--     lb.email
+--    FROM (liste_blanche lb
+--      LEFT JOIN mandataires man ON ((man.liste_blanche_id = lb.id)));

@@ -1,6 +1,5 @@
 - "!include public_locate_ti_view_lb_tis.yaml"
 - "!include public_search_etablissements.yaml"
-- "!include public_search_lb_users.yaml"
 - "!include public_search_mandataires.yaml"
 - "!include public_search_mesures.yaml"
 - "!include public_search_services.yaml"

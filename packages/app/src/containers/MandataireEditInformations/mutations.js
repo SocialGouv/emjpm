@@ -55,7 +55,7 @@ export const EDIT_USER = gql`
     ) {
       affected_rows
     }
-    update_lb_users(
+    update_liste_blanche(
       _set: { siret: $siret }
       where: { mandataire: { user_id: { _eq: $id } } }
     ) {

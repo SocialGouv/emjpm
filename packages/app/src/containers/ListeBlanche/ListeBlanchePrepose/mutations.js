@@ -1,15 +1,17 @@
 import gql from "graphql-tag";
 
-export const UPDATE_LB_USER_PREPOSE = gql`
+export const UPDATE_LISTE_BLANCHE_PREPOSE = gql`
   mutation update_liste_blanche_prepose(
     $id: Int!
-    $data: lb_users_set_input = {}
-    $etablissements: [lb_user_etablissements_insert_input!]! = {}
+    $data: liste_blanche_set_input = {}
+    $etablissements: [mandataire_prepose_etablissements_insert_input!]! = {}
   ) {
-    delete_lb_user_etablissements(where: { lb_user_id: { _eq: $id } }) {
+    delete_mandataire_prepose_etablissements(
+      where: { liste_blanche_id: { _eq: $id } }
+    ) {
       affected_rows
     }
-    insert_lb_user_etablissements(objects: $etablissements) {
+    insert_mandataire_prepose_etablissements(objects: $etablissements) {
       affected_rows
       returning {
         id
@@ -18,19 +20,19 @@ export const UPDATE_LB_USER_PREPOSE = gql`
           rslongue
           ligneacheminement
         }
-        lb_user_id
+        liste_blanche_id
         etablissement_id
         etablissement_rattachement
       }
     }
-    update_lb_users_by_pk(pk_columns: { id: $id }, _set: $data) {
+    update_liste_blanche_by_pk(pk_columns: { id: $id }, _set: $data) {
       id
       created_at
       email
-      lb_user_etablissements {
+      mandataire_prepose_etablissements {
         id
         etablissement_id
-        lb_user_id
+        liste_blanche_id
         etablissement {
           id
           rslongue
@@ -44,19 +46,19 @@ export const UPDATE_LB_USER_PREPOSE = gql`
   }
 `;
 
-export const CREATE_LB_USER_PREPOSE = gql`
+export const CREATE_LISTE_BLANCHE_PREPOSE = gql`
   mutation create_liste_blanche_prepose(
     $email: String!
     $nom: String!
     $prenom: String!
-    $etablissements: [lb_user_etablissements_insert_input!]! = {}
+    $etablissements: [mandataire_prepose_etablissements_insert_input!]! = {}
   ) {
-    insert_lb_users_one(
+    insert_liste_blanche_one(
       object: {
         email: $email
         nom: $nom
         prenom: $prenom
-        lb_user_etablissements: { data: $etablissements }
+        mandataire_prepose_etablissements: { data: $etablissements }
         type: "prepose"
       }
     ) {
@@ -66,11 +68,11 @@ export const CREATE_LB_USER_PREPOSE = gql`
       nom
       prenom
       siret
-      lb_user_etablissements {
+      mandataire_prepose_etablissements {
         etablissement_id
         etablissement_rattachement
         id
-        lb_user_id
+        liste_blanche_id
       }
     }
   }

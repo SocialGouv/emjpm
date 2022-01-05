@@ -75,8 +75,8 @@ export const GET_MANDATAIRES = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_departements: {
+                liste_blanche: {
+                  mandataire_individuel_departements: {
                     departement_code: { _eq: $departementFilter }
                   }
                 }
@@ -86,8 +86,8 @@ export const GET_MANDATAIRES = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_user_etablissements: {
+                liste_blanche: {
+                  mandataire_prepose_etablissements: {
                     etablissement: {
                       departement_code: { _eq: $departementFilter }
                     }
@@ -130,8 +130,8 @@ export const GET_MANDATAIRES = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_departements: {
+                liste_blanche: {
+                  mandataire_individuel_departements: {
                     departement_code: { _eq: $departementFilter }
                   }
                 }
@@ -141,8 +141,8 @@ export const GET_MANDATAIRES = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_user_etablissements: {
+                liste_blanche: {
+                  mandataire_prepose_etablissements: {
                     etablissement: {
                       departement_code: { _eq: $departementFilter }
                     }
@@ -267,8 +267,8 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_departements: {
+                liste_blanche: {
+                  mandataire_individuel_departements: {
                     departement_code: { _eq: $departementFilter }
                   }
                 }
@@ -278,8 +278,8 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_user_etablissements: {
+                liste_blanche: {
+                  mandataire_prepose_etablissements: {
                     etablissement: {
                       departement_code: { _eq: $departementFilter }
                     }
@@ -319,8 +319,8 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_departements: {
+                liste_blanche: {
+                  mandataire_individuel_departements: {
                     departement_code: { _eq: $departementFilter }
                   }
                 }
@@ -330,8 +330,8 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
           {
             gestionnaire: {
               mandataire: {
-                lb_user: {
-                  lb_user_etablissements: {
+                liste_blanche: {
+                  mandataire_prepose_etablissements: {
                     etablissement: {
                       departement_code: { _eq: $departementFilter }
                     }
