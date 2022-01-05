@@ -14,7 +14,7 @@ function EditInformations() {
   return (
     <>
       <Helmet>
-        <title>edition des informations utilisateur | e-MPJM</title>
+        <title>edition des informations del'utilisateur | e-MPJM</title>
       </Helmet>
       <LayoutMandataire>
         <BoxWrapper px="1">
