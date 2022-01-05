@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutMagistrat } from "~/containers/Layout";

@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { LayoutMagistrat } from "~/containers/Layout";
 import { MagistratMesure } from "~/containers/MagistratMesure";
@@ -13,21 +14,26 @@ function Mandataires() {
   const { mesure_id } = useParams();
   const mesureId = parseInt(mesure_id);
   return (
-    <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
-      <BoxWrapper mt={3} px="1">
-        <Flex
-          sx={{
-            flexWrap: "wrap",
-            mt: "2",
-          }}
-        >
-          <MesureProvider mesureId={mesureId}>
-            <MagistratMesure />
-            <MagistratMesureMandataire />
-          </MesureProvider>
-        </Flex>
-      </BoxWrapper>
-    </LayoutMagistrat>
+    <>
+      <Helmet>
+        <title>Votre mesure {mesure_id} | e-MPJM</title>
+      </Helmet>
+      <LayoutMagistrat initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
+        <BoxWrapper mt={3} px="1">
+          <Flex
+            sx={{
+              flexWrap: "wrap",
+              mt: "2",
+            }}
+          >
+            <MesureProvider mesureId={mesureId}>
+              <MagistratMesure />
+              <MagistratMesureMandataire />
+            </MesureProvider>
+          </Flex>
+        </BoxWrapper>
+      </LayoutMagistrat>
+    </>
   );
 }
 

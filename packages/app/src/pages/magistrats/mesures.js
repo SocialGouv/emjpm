@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutMagistrat } from "~/containers/Layout";
@@ -10,23 +11,28 @@ import { BoxWrapper } from "~/components/Grid";
 
 export default function Mesures() {
   return (
-    <FiltersContextProvider
-      initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
-    >
-      <LayoutMagistrat>
-        <BoxWrapper mt={3} px="1">
-          <HeadingTitle>Toutes vos mesures</HeadingTitle>
-          <MagistratFilters />
-          <Flex
-            sx={{
-              flexWrap: "wrap",
-              mt: "2",
-            }}
-          >
-            <MagistratMesures />
-          </Flex>
-        </BoxWrapper>
-      </LayoutMagistrat>
-    </FiltersContextProvider>
+    <>
+      <Helmet>
+        <title>Toutes vos mesures | e-MJPM</title>
+      </Helmet>
+      <FiltersContextProvider
+        initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
+      >
+        <LayoutMagistrat>
+          <BoxWrapper mt={3} px="1">
+            <HeadingTitle>Toutes vos mesures</HeadingTitle>
+            <MagistratFilters />
+            <Flex
+              sx={{
+                flexWrap: "wrap",
+                mt: "2",
+              }}
+            >
+              <MagistratMesures />
+            </Flex>
+          </BoxWrapper>
+        </LayoutMagistrat>
+      </FiltersContextProvider>
+    </>
   );
 }
