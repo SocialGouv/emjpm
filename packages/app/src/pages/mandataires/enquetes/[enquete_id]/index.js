@@ -9,6 +9,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
 import { LayoutMandataire } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { Helmet } from "react-helmet";
 
 function MandataireEnquetePage() {
   const history = useHistory();
@@ -46,16 +47,21 @@ function MandataireEnquetePage() {
   }
 
   return (
-    <LayoutMandataire>
-      <BoxWrapper>
-        <EnqueteReponse
-          enquete={enquete}
-          enqueteReponse={enqueteReponse}
-          currentStep={currentStep}
-          navigateToStep={navigateToStep}
-        />
-      </BoxWrapper>
-    </LayoutMandataire>
+    <>
+      <Helmet>
+        <title>Enquête {enquete_id} | e-MPJM</title>
+      </Helmet>
+      <LayoutMandataire>
+        <BoxWrapper>
+          <EnqueteReponse
+            enquete={enquete}
+            enqueteReponse={enqueteReponse}
+            currentStep={currentStep}
+            navigateToStep={navigateToStep}
+          />
+        </BoxWrapper>
+      </LayoutMandataire>
+    </>
   );
 }
 

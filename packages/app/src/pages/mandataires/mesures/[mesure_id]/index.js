@@ -1,4 +1,5 @@
 import { Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireMesureSidebar } from "~/containers/MandataireMesureSidebar";
@@ -13,16 +14,21 @@ function MandataireMesurePage() {
   const mesureId = parseInt(mesure_id);
 
   return (
-    <MesureProvider mesureId={mesureId}>
-      <LayoutMandataire>
-        <BoxWrapper mt={1}>
-          <Flex flexDirection="column">
-            <MandataireMesureSidebar mesureId={mesureId} />
-            <MesureView />
-          </Flex>
-        </BoxWrapper>
-      </LayoutMandataire>
-    </MesureProvider>
+    <>
+      <Helmet>
+        <title>Mesure {mesure_id} | e-MPJM</title>
+      </Helmet>
+      <MesureProvider mesureId={mesureId}>
+        <LayoutMandataire>
+          <BoxWrapper mt={1}>
+            <Flex flexDirection="column">
+              <MandataireMesureSidebar mesureId={mesureId} />
+              <MesureView />
+            </Flex>
+          </BoxWrapper>
+        </LayoutMandataire>
+      </MesureProvider>
+    </>
   );
 }
 

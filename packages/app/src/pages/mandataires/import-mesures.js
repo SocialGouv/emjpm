@@ -7,6 +7,7 @@ import { MandataireMesureImport } from "~/containers/MandataireMesureImport";
 import { MandataireOcmiMesureImport } from "~/containers/MandataireOcmiMesureImport";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { Helmet } from "react-helmet";
 
 function ImportMesures() {
   const user = useUser();
@@ -35,29 +36,34 @@ function ImportMesures() {
   }
 
   return (
-    <LayoutMandataire>
-      <BoxWrapper mt={3} px="1">
-        <Flex>
-          {ocmi_mandataire && (
-            <ImportTypeTab type="ocmi">
-              A partir de votre compte OCMI
-            </ImportTypeTab>
-          )}
-          <ImportTypeTab type="file">{`À partir d'un fichier`}</ImportTypeTab>
-        </Flex>
-        <Card mb="5" pt="5">
-          {importType === "ocmi" && (
-            <MandataireOcmiMesureImport mandataireUserId={user.id} />
-          )}
-          {importType === "file" && (
-            <MandataireMesureImport
-              mandataireId={mandataire.id}
-              mandataireUserId={user.id}
-            />
-          )}
-        </Card>
-      </BoxWrapper>
-    </LayoutMandataire>
+    <>
+      <Helmet>
+        <title>Importez vos mesures | e-MPJM</title>
+      </Helmet>
+      <LayoutMandataire>
+        <BoxWrapper mt={3} px="1">
+          <Flex>
+            {ocmi_mandataire && (
+              <ImportTypeTab type="ocmi">
+                A partir de votre compte OCMI
+              </ImportTypeTab>
+            )}
+            <ImportTypeTab type="file">{`À partir d'un fichier`}</ImportTypeTab>
+          </Flex>
+          <Card mb="5" pt="5">
+            {importType === "ocmi" && (
+              <MandataireOcmiMesureImport mandataireUserId={user.id} />
+            )}
+            {importType === "file" && (
+              <MandataireMesureImport
+                mandataireId={mandataire.id}
+                mandataireUserId={user.id}
+              />
+            )}
+          </Card>
+        </BoxWrapper>
+      </LayoutMandataire>
+    </>
   );
 }
 
