@@ -1,3 +1,19 @@
 table:
   name: view_mandataires_siret
   schema: public
+select_permissions:
+- permission:
+    columns:
+    - siret
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - siret
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - siret
+    filter: {}
+  role: service
