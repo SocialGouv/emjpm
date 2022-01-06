@@ -64,9 +64,9 @@ export function ListeBlancheServiceForm(props) {
           : "",
       email: service ? service.email : "",
       etablissement: service ? service.etablissement : "",
-      lb_adresse: service ? service.lb_adresse : "",
-      lb_code_postal: service ? service.lb_code_postal : "",
-      lb_ville: service ? service.lb_ville : "",
+      adresse: service ? service.adresse : "",
+      code_postal: service ? service.code_postal : "",
+      ville: service ? service.ville : "",
       org_adresse: service ? service.org_adresse : "",
       org_code_postal: service ? service.org_code_postal : "",
       org_gestionnaire: service ? service.org_gestionnaire : "",
@@ -119,7 +119,7 @@ export function ListeBlancheServiceForm(props) {
     [setSelectedSiretData]
   );
 
-  const lbVilleDepartement = formik.values["lb_ville_departement"];
+  const lbVilleDepartement = formik.values["ville_departement"];
   useEffect(() => {
     const departements = addDepartementToCurrents(lbVilleDepartement);
     if (departements) setFieldValue("departements", departements);
@@ -140,9 +140,9 @@ export function ListeBlancheServiceForm(props) {
     const departements = addDepartementToCurrents(departement);
 
     setFieldValue("etablissement", nom_raison_sociale || "");
-    setFieldValue("lb_adresse", l4_declaree || "");
-    setFieldValue("lb_code_postal", code_postal || "");
-    setFieldValue("lb_ville", libelle_commune || "");
+    setFieldValue("adresse", l4_declaree || "");
+    setFieldValue("code_postal", code_postal || "");
+    setFieldValue("ville", libelle_commune || "");
     setFieldValue("departements", departements || []);
   }, [selectedSiretData, setFieldValue, addDepartementToCurrents]);
 
@@ -156,8 +156,8 @@ export function ListeBlancheServiceForm(props) {
       return;
     }
     const { postcode, city } = selectedAdresseData;
-    setFieldValue("lb_code_postal", postcode || "");
-    setFieldValue("lb_ville", city || "");
+    setFieldValue("code_postal", postcode || "");
+    setFieldValue("ville", city || "");
   }, [selectedAdresseData, setFieldValue]);
 
   return (
@@ -186,7 +186,7 @@ export function ListeBlancheServiceForm(props) {
           />
           <SelectAdresse
             placeholder="Adresse"
-            id="lb_adresse"
+            id="adresse"
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
@@ -195,18 +195,18 @@ export function ListeBlancheServiceForm(props) {
             <Box mr={1} flex={1 / 2}>
               <FormGroupInput
                 placeholder="Code postal"
-                id="lb_code_postal"
+                id="code_postal"
                 formik={formik}
                 required
                 validationSchema={validationSchema}
                 onInput={(e) => {
                   const { value } = e.target;
-                  formik.setFieldValue("lb_code_postal", value);
-                  formik.setFieldValue("lb_ville", "");
-                  formik.setFieldValue("lb_ville_departement", "");
+                  formik.setFieldValue("code_postal", value);
+                  formik.setFieldValue("ville", "");
+                  formik.setFieldValue("ville_departement", "");
                 }}
                 hasError={
-                  formik.touched.lb_code_postal && formik.errors.lb_code_postal
+                  formik.touched.code_postal && formik.errors.code_postal
                 }
                 size="small"
               />
@@ -215,22 +215,22 @@ export function ListeBlancheServiceForm(props) {
               <Field>
                 <GeocodeCities
                   placeholder="Ville"
-                  id="lb_ville"
+                  id="ville"
                   required
-                  zipcode={formik.values.lb_code_postal}
-                  onChange={(value) => formik.setFieldValue("lb_ville", value)}
-                  value={formik.values.lb_ville}
-                  hasError={formik.touched.lb_ville && formik.errors.lb_ville}
+                  zipcode={formik.values.code_postal}
+                  onChange={(value) => formik.setFieldValue("ville", value)}
+                  value={formik.values.ville}
+                  hasError={formik.touched.ville && formik.errors.ville}
                   size="small"
-                  departementFieldId="lb_ville_departement"
+                  departementFieldId="ville_departement"
                   formik={formik}
-                  aria-describedby="msg-lb_ville"
+                  aria-describedby="msg-ville"
                 />
-                <div id="msg-lb_ville">
-                  {formik.touched.lb_ville && formik.errors.lb_ville && (
+                <div id="msg-ville">
+                  {formik.touched.ville && formik.errors.ville && (
                     <InlineError
-                      message={formik.errors.lb_ville}
-                      fieldId="lb_ville"
+                      message={formik.errors.ville}
+                      fieldId="ville"
                     />
                   )}
                 </div>

@@ -33,6 +33,8 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
       .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
     nom: yup.string().required(),
     prenom: yup.string().required(),
+    adresse: yup.string().nullable().required(),
+    adresse_complement: yup.string().nullable(),
     telephone: yup.string().required(),
     telephone_portable: yup.string(),
     tis: yup.mixed().required(),

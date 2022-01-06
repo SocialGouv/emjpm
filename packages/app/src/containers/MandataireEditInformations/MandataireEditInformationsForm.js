@@ -25,6 +25,7 @@ import {
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
 import { findOptions } from "~/utils/form";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 function buildTiOptions(
   mandataire_individuel_departements,
@@ -69,13 +70,41 @@ function MandataireEditInformationsForm(props) {
     [apolloClient, type]
   );
 
+  const geocodeResource = useMemo(
+    () => ({
+      latitude: mandataire.latitude,
+      longitude: mandataire.longitude,
+      adresse: mandataire.location_adresse,
+      ville: mandataire.location_ville,
+      code_postal: mandataire.location_code_postal,
+      departement_code: mandataire.departement_code,
+    }),
+    [mandataire]
+  );
+
+  const geocodeInitValue = useMemo(
+    () =>
+      geocodeInitialValue({
+        latitude: mandataire.latitude,
+        longitude: mandataire.longitude,
+        adresse: mandataire.location_adresse,
+        ville: mandataire.location_ville,
+        code_postal: mandataire.location_code_postal,
+        departement_code: mandataire.departement_code,
+      }),
+    [geocodeResource]
+  );
+
   const formik = useFormik({
     initialValues: {
       competences: mandataire.competences || "",
       dispo_max: parseInt(mandataire.dispo_max),
       email: user.email || "",
       genre: mandataire.genre,
-      geocode: geocodeInitialValue(mandataire),
+      location_adresse: mandataire.location_adresse,
+      adresse: mandataire.adresse,
+      adresse_complement: mandataire.adresse_complement,
+      geocode: geocodeInitValue,
       nom: user.nom || "",
       prenom: user.prenom || "",
       siret: liste_blanche?.siret || mandataire?.siret || "",
@@ -103,7 +132,7 @@ function MandataireEditInformationsForm(props) {
             <FormGroupSelect
               id="genre"
               options={GENDER_OPTIONS}
-              placeholder="Genre"
+              placeholder="Civilité"
               value={formik.values.genre}
               formik={formik}
               validationSchema={validationSchema}
@@ -113,24 +142,17 @@ function MandataireEditInformationsForm(props) {
               id="prenom"
               formik={formik}
               validationSchema={validationSchema}
+              normalizers={[normalizeFirstName]}
             />
             <FormGroupInput
-              placeholder="Nom"
+              placeholder="NOM"
               id="nom"
               formik={formik}
               validationSchema={validationSchema}
+              normalizers={[normalizeLastName]}
             />
-          </FormInputBox>
-        </Flex>
-        <Flex>
-          <FormGrayBox>
-            <Heading size={4} mb={1}>
-              {"Coordonnées"}
-            </Heading>
-          </FormGrayBox>
-          <FormInputBox>
             <FormGroupInput
-              placeholder="Email"
+              placeholder="Adresse e-mail"
               id="email"
               formik={formik}
               validationSchema={validationSchema}
@@ -157,17 +179,28 @@ function MandataireEditInformationsForm(props) {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Adresse"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
-              {
-                "Cette adresse permettra de vous localiser sur la carte des mesures"
-              }
-            </Text>
+            <Heading size={4}>{"Structure juridique"}</Heading>
           </FormGrayBox>
           <FormInputBox>
+            <FormGroupInput
+              placeholder="SIRET"
+              id="siret"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+
             <Field>
+              {/* <Text lineHeight="1.5" color="textSecondary">
+                {
+                  "Cette adresse permettra de vous localiser sur la carte des mesures"
+                }
+              </Text> */}
               <Geocode
-                resource={mandataire}
+                label={
+                  "Localisation, cette adresse permettra de vous localiser sur la carte des mesures"
+                }
+                required
+                resource={geocodeResource}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
               />
@@ -178,6 +211,21 @@ function MandataireEditInformationsForm(props) {
                 />
               </div>
             </Field>
+
+            <FormGroupInput
+              placeholder="Adresse"
+              label="Adresse, cette adresse sera celle visible pour le magistrat / greffier"
+              id="adresse"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+            <FormGroupInput
+              placeholder="Complément d'adresse"
+              label="Complément d'adresse"
+              id="adresse_complement"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
           </FormInputBox>
         </Flex>
         <Flex>
@@ -281,12 +329,6 @@ function MandataireEditInformationsForm(props) {
                 />
               </div>
             </Box>
-            <FormGroupInput
-              placeholder="SIRET"
-              id="siret"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
           </FormInputBox>
         </Flex>
         {errorMessage && <InlineError message={`${errorMessage}`} />}

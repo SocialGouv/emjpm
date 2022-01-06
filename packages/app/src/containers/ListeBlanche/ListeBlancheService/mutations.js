@@ -4,14 +4,14 @@ export const UPDATE_SERVICE = gql`
   mutation UpdateService(
     $id: Int!
     $etablissement: String!
-    $lb_code_postal: String!
-    $lb_ville: String!
+    $code_postal: String!
+    $ville: String!
     $siret: String!
     $email: String
     $telephone: String
     $service_departements: [service_departements_insert_input!]!
     $departement_codes: [String!]!
-    $lb_adresse: String!
+    $adresse: String!
     $org_gestionnaire: Boolean!
     $org_nom: String
     $org_adresse: String
@@ -23,11 +23,11 @@ export const UPDATE_SERVICE = gql`
       _set: {
         etablissement: $etablissement
         siret: $siret
-        lb_code_postal: $lb_code_postal
-        lb_ville: $lb_ville
+        code_postal: $code_postal
+        ville: $ville
         email: $email
         telephone: $telephone
-        lb_adresse: $lb_adresse
+        adresse: $adresse
         org_gestionnaire: $org_gestionnaire
         org_nom: $org_nom
         org_adresse: $org_adresse
@@ -60,9 +60,9 @@ export const UPDATE_SERVICE = gql`
         org_adresse
         org_code_postal
         org_ville
-        lb_adresse
-        lb_ville
-        lb_code_postal
+        adresse
+        ville
+        code_postal
       }
     }
     insert_service_departements(
@@ -92,12 +92,12 @@ export const UPDATE_SERVICE = gql`
 export const ADD_SERVICE = gql`
   mutation addService(
     $etablissement: String!
-    $lb_code_postal: String!
-    $lb_ville: String!
+    $code_postal: String!
+    $ville: String!
     $email: String
     $telephone: String
     $departements: [service_departements_insert_input!]!
-    $lb_adresse: String!
+    $adresse: String!
     $siret: String!
     $org_gestionnaire: Boolean!
     $org_nom: String
@@ -105,15 +105,14 @@ export const ADD_SERVICE = gql`
     $org_code_postal: String
     $org_ville: String
   ) {
-    insert_services(
+    insert_liste_blanche(
       objects: {
         etablissement: $etablissement
-        lb_code_postal: $lb_code_postal
-        lb_ville: $lb_ville
+        code_postal: $code_postal
+        ville: $ville
         email: $email
-        service_departements: { data: $departements }
         telephone: $telephone
-        lb_adresse: $lb_adresse
+        adresse: $adresse
         siret: $siret
         org_gestionnaire: $org_gestionnaire
         org_nom: $org_nom
@@ -129,7 +128,7 @@ export const ADD_SERVICE = gql`
         ville
         telephone
         email
-        adresse
+        location_adresse
         latitude
         longitude
         siret
@@ -138,9 +137,47 @@ export const ADD_SERVICE = gql`
         org_adresse
         org_code_postal
         org_ville
-        lb_adresse
-        lb_ville
-        lb_code_postal
+        adresse
+        ville
+        code_postal
+      }
+    }
+    insert_services(
+      objects: {
+        etablissement: $etablissement
+        code_postal: $code_postal
+        ville: $ville
+        email: $email
+        service_departements: { data: $departements }
+        telephone: $telephone
+        adresse: $adresse
+        siret: $siret
+        org_gestionnaire: $org_gestionnaire
+        org_nom: $org_nom
+        org_adresse: $org_adresse
+        org_code_postal: $org_code_postal
+        org_ville: $org_ville
+      }
+    ) {
+      returning {
+        id
+        etablissement
+        code_postal
+        ville
+        telephone
+        email
+        location_adresse
+        latitude
+        longitude
+        siret
+        org_gestionnaire
+        org_nom
+        org_adresse
+        org_code_postal
+        org_ville
+        adresse
+        ville
+        code_postal
       }
     }
   }

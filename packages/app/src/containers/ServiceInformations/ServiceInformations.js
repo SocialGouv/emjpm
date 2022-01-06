@@ -23,7 +23,6 @@ function ServiceInformations() {
 
   const [service] = data.services;
   const {
-    adresse,
     competences,
     email,
     etablissement,
@@ -38,9 +37,9 @@ function ServiceInformations() {
     org_nom,
     org_code_postal,
     org_ville,
-    lb_adresse,
-    lb_code_postal,
-    lb_ville,
+    adresse,
+    code_postal,
+    ville,
   } = service;
 
   return (
@@ -56,9 +55,9 @@ function ServiceInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
             <Box flex={2 / 3}>
-              <Text sx={content}>{lb_adresse || ""}</Text>
+              <Text sx={content}>{adresse || ""}</Text>
               <Text sx={content}>
-                {lb_code_postal || ""} {lb_ville || ""}
+                {code_postal || ""} {ville || ""}
               </Text>
             </Box>
           </Flex>

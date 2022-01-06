@@ -66,7 +66,8 @@ insert_permissions:
     check: {}
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
+    - competences
     - created_at
     - departement_code
     - dispo_max
@@ -74,6 +75,9 @@ insert_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -81,8 +85,6 @@ insert_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
-    - competences
   role: individuel
 - permission:
     check:
@@ -90,13 +92,17 @@ insert_permissions:
         _eq: X-Hasura-User-Id
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
+    - competences
     - created_at
     - dispo_max
     - email_send
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -104,8 +110,6 @@ insert_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
-    - competences
   role: prepose
 select_permissions:
 - permission:
@@ -121,7 +125,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -131,6 +135,9 @@ select_permissions:
     - id
     - latitude
     - liste_blanche_id
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -141,7 +148,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -151,7 +157,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -161,12 +167,14 @@ select_permissions:
     - id
     - latitude
     - liste_blanche_id
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - siret
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -176,7 +184,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -186,12 +194,14 @@ select_permissions:
     - id
     - latitude
     - liste_blanche_id
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - siret
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -208,7 +218,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -217,6 +227,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -227,7 +240,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -236,7 +248,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -248,6 +260,9 @@ select_permissions:
     - id
     - latitude
     - liste_blanche_id
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -259,7 +274,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -270,7 +284,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -281,6 +295,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -292,7 +309,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -303,7 +319,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -312,6 +328,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -322,7 +341,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -333,7 +351,7 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -342,6 +360,9 @@ update_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - siret
     - suspend_activity
@@ -350,7 +371,6 @@ update_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     filter:
       user_id:
         _eq: X-Hasura-User-Id
@@ -359,7 +379,7 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -368,6 +388,9 @@ update_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - siret
     - suspend_activity
@@ -375,7 +398,6 @@ update_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     filter:
       user_id:
         _eq: X-Hasura-User-Id

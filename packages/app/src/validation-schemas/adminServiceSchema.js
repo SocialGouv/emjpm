@@ -14,13 +14,13 @@ const adminServiceSchema = ({ apolloClient }) =>
       .required(),
     email: yup.string().email(),
     etablissement: yup.string().required(),
-    lb_adresse: yup.string().nullable().required(),
-    lb_code_postal: yup
+    adresse: yup.string().nullable().required(),
+    code_postal: yup
       .string()
       .nullable()
       .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
       .required(),
-    lb_ville: yup.string().nullable().required(),
+    ville: yup.string().nullable().required(),
     org_adresse: yup.string().nullable().when("org_gestionnaire", {
       is: true,
       then: yup.string().required(),

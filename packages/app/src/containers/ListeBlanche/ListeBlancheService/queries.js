@@ -6,8 +6,8 @@ export const SERVICE = gql`
       id
       etablissement
       siret
-      lb_code_postal
-      lb_ville
+      code_postal
+      ville
       code_postal
       ville
       org_gestionnaire
@@ -21,7 +21,7 @@ export const SERVICE = gql`
         }
       }
       adresse
-      lb_adresse
+      adresse
       latitude
       longitude
       email

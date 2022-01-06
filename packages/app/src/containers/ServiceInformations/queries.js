@@ -18,9 +18,9 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
-      lb_adresse
-      lb_code_postal
-      lb_ville
+      adresse
+      code_postal
+      ville
       org_gestionnaire
       org_nom
       org_adresse

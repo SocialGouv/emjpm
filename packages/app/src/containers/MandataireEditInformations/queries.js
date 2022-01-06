@@ -11,14 +11,16 @@ export const MANDATAIRE = gql`
       mandataire {
         id
         adresse
-        code_postal
+        location_adresse
+        location_code_postal
+        location_ville
         latitude
         longitude
+        departement_code
         dispo_max
         genre
         telephone
         telephone_portable
-        ville
         competences
         suspend_activity
         suspend_activity_reason

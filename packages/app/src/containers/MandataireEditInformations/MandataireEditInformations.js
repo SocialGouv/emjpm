@@ -74,8 +74,9 @@ const MandataireEditInformations = ({
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          adresse: values.geocode.label,
-          code_postal: values.geocode.postcode,
+          adresse: values.adresse,
+          location_adresse: values.geocode.label,
+          location_code_postal: values.geocode.postcode,
           competences: values.competences,
           departement_code: departement.id,
           dispo_max: parseInt(values.dispo_max),
@@ -99,7 +100,7 @@ const MandataireEditInformations = ({
           siret: values.siret ? values.siret : null,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
-          ville: values.geocode.city,
+          location_ville: values.geocode.city,
         },
       });
     }
