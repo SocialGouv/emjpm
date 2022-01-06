@@ -16,7 +16,7 @@ function Mandataires() {
   return (
     <>
       <Helmet>
-        <title>Mesure {mesure_id} | e-MPJM</title>
+        <title>Mesure {mesure_id} | e-MJPM</title>
       </Helmet>
       <LayoutGreffier initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
         <BoxWrapper mt={3} px="1">

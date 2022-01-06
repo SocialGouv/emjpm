@@ -12,7 +12,7 @@ function ListBlanchePage() {
     <>
       <Helmet>
         <title>
-          Ajout d'un mandataire individuel à la liste blanche | e-MPJM
+          Ajout d'un mandataire individuel à la liste blanche | e-MJPM
         </title>
       </Helmet>
       <LayoutDirection>

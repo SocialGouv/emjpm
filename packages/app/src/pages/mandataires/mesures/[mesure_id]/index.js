@@ -16,7 +16,7 @@ function MandataireMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Mesure {mesure_id} | e-MPJM</title>
+        <title>Mesure {mesure_id} | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

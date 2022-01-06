@@ -17,7 +17,7 @@ function Gestionnaire() {
   return (
     <>
       <Helmet>
-        <title>Gestionnaire {gestionnaire_id} | e-MPJM</title>
+        <title>Gestionnaire {gestionnaire_id} | e-MJPM</title>
       </Helmet>
       <LayoutGreffier>
         <BoxWrapper mt={3} px="0">

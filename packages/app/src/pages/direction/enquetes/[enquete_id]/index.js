@@ -12,7 +12,7 @@ function DirectionEnqueteDetailsPage() {
   return (
     <>
       <Helmet>
-        <title>Enquête {enquete_id} | e-MPJM</title>
+        <title>Enquête {enquete_id} | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={1} px="1">

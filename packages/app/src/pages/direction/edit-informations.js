@@ -11,7 +11,7 @@ function EditInformations() {
   return (
     <>
       <Helmet>
-        <title>Modifier vos informations | e-MPJM</title>
+        <title>Modifier vos informations | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={3} px="1">

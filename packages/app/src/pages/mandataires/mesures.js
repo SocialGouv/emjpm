@@ -17,7 +17,7 @@ function MesuresListView() {
   return (
     <>
       <Helmet>
-        <title>Vos mesures | e-MPJM</title>
+        <title>Vos mesures | e-MJPM</title>
       </Helmet>
       <FiltersContextProvider
         initialValues={{

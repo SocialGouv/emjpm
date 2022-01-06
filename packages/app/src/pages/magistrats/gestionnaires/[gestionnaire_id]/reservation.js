@@ -12,7 +12,7 @@ function Reservation() {
   return (
     <>
       <Helmet>
-        <title>Réserver une mesure | e-MPJM</title>
+        <title>Réserver une mesure | e-MJPM</title>
       </Helmet>
       <LayoutMagistrat>
         <BoxWrapper mt={3} px="0">

@@ -10,7 +10,7 @@ function StatsPage() {
   return (
     <>
       <Helmet>
-        <title>Statistiques | e-MPJM</title>
+        <title>Statistiques | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>

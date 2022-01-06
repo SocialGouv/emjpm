@@ -14,7 +14,7 @@ function AdminUserDeletePage() {
   return (
     <>
       <Helmet>
-        <title>Suppression de l'utilisateur {user_id} | e-MPJM</title>
+        <title>Suppression de l'utilisateur {user_id} | e-MJPM</title>
       </Helmet>
       <LayoutAdmin>
         <BoxWrapper mt="6" px="1">

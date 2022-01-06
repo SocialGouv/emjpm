@@ -9,7 +9,7 @@ function CreateEnquete() {
   return (
     <>
       <Helmet>
-        <title>Créer une enquête | e-MPJM</title>
+        <title>Créer une enquête | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={3} px="1">

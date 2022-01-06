@@ -12,7 +12,7 @@ export default function ListBlancheAjoutIndividuel() {
     <>
       <Helmet>
         <title>
-          Ajout d'un mandataire individuel à la liste blanche | e-MPJM
+          Ajout d'un mandataire individuel à la liste blanche | e-MJPM
         </title>
       </Helmet>
       <LayoutAdmin>

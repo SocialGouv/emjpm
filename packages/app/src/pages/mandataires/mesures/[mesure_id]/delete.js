@@ -16,7 +16,7 @@ function DeleteMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Supprimer la mesure | e-MPJM</title>
+        <title>Supprimer la mesure | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

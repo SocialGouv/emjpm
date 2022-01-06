@@ -16,7 +16,7 @@ function CloseMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Mettre fin au mandat | e-MPJM</title>
+        <title>Mettre fin au mandat | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

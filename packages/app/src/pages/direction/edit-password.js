@@ -9,7 +9,7 @@ function EditInformations() {
   return (
     <>
       <Helmet>
-        <title>Modifier votre mot de passe | e-MPJM</title>
+        <title>Modifier votre mot de passe | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={3} px="1">

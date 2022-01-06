@@ -14,7 +14,7 @@ function GreffierMesureDeletePage() {
   return (
     <>
       <Helmet>
-        <title>Supprimer la mesure {mesure_id} | e-MPJM</title>
+        <title>Supprimer la mesure {mesure_id} | e-MJPM</title>
       </Helmet>
       <LayoutGreffier>
         <BoxWrapper mt="6" px="1">

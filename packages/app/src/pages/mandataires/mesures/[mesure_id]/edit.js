@@ -16,7 +16,7 @@ function EditMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Edition de la mesure | e-MPJM</title>
+        <title>Edition de la mesure | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

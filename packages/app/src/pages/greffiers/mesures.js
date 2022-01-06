@@ -13,7 +13,7 @@ export default function Mesures() {
   return (
     <>
       <Helmet>
-        <title>Toutes vos mesures | e-MPJM </title>
+        <title>Toutes vos mesures | e-MJPM </title>
       </Helmet>
       <FiltersContextProvider
         initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}

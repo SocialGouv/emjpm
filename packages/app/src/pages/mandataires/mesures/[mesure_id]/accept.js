@@ -16,7 +16,7 @@ function AcceptMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Accepter la mesure | e-MPJM</title>
+        <title>Accepter la mesure | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

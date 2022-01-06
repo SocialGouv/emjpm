@@ -32,7 +32,7 @@ export default function AuthorizationPage() {
   return (
     <>
       <Helmet>
-        <title> Se connecter à une application métier | e-MPJM</title>
+        <title> Se connecter à une application métier | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>
