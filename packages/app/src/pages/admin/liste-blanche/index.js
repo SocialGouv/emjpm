@@ -12,7 +12,7 @@ function ListBlanchePage() {
   return (
     <>
       <Helmet>
-        <title>Liste blanche | e-MPJM</title>
+        <title>Liste blanche | e-MJPM</title>
       </Helmet>
       <LayoutAdmin>
         <FiltersContextSerializableProvider useLocalStorage={true}>

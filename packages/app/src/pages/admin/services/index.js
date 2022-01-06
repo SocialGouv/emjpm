@@ -13,7 +13,7 @@ function AdminServicesPage() {
   return (
     <>
       <Helmet>
-        <title>Liste des services | e-MPJM</title>
+        <title>Liste des services | e-MJPM</title>
       </Helmet>
       <AdminFilterProvider>
         <LayoutAdmin>

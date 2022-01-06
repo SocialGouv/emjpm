@@ -12,7 +12,7 @@ function DepartmentStatsPage() {
   return (
     <>
       <Helmet>
-        <title>Statistiques du département {departementCode} | e-MPJM </title>
+        <title>Statistiques du département {departementCode} | e-MJPM </title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>

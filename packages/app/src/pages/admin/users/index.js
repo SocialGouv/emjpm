@@ -13,7 +13,7 @@ function AdminUsersPage() {
   return (
     <>
       <Helmet>
-        <title>Liste des utilisateurs | e-MPJM</title>
+        <title>Liste des utilisateurs | e-MJPM</title>
       </Helmet>
       <AdminFilterProvider>
         <LayoutAdmin>

@@ -16,7 +16,7 @@ function ReactivateMesurePage() {
   return (
     <>
       <Helmet>
-        <title>Rouvrir la mesure | e-MPJM</title>
+        <title>Rouvrir la mesure | e-MJPM</title>
       </Helmet>
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>

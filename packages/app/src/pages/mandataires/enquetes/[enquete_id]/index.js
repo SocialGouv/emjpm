@@ -49,7 +49,7 @@ function MandataireEnquetePage() {
   return (
     <>
       <Helmet>
-        <title>Enquête {enquete_id} | e-MPJM</title>
+        <title>Enquête {enquete_id} | e-MJPM</title>
       </Helmet>
       <LayoutMandataire>
         <BoxWrapper>

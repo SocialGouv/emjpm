@@ -11,7 +11,7 @@ function Informations() {
   return (
     <>
       <Helmet>
-        <title>Informations générales | e-MPJM</title>
+        <title>Informations générales | e-MJPM</title>
       </Helmet>
       <LayoutGreffier>
         <BoxWrapper mt={3} px="0">

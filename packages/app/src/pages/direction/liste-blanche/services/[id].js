@@ -16,7 +16,7 @@ function ListeBlancheDetailPage() {
   return (
     <>
       <Helmet>
-        <title>Service {paramId} | e-MPJM</title>
+        <title>Service {paramId} | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={3} px={1}>

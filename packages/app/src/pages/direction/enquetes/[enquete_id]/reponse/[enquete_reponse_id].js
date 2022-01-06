@@ -13,7 +13,7 @@ function DirectionEnqueteReponsePreviewPage() {
   return (
     <>
       <Helmet>
-        <title>Resultat de l'enquête | e-MPJM</title>
+        <title>Resultat de l'enquête | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={1} px="1">

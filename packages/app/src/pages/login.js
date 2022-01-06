@@ -17,7 +17,7 @@ function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Connectez-vous à votre compte | e-MPJM</title>
+        <title>Connectez-vous à votre compte | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>

@@ -15,7 +15,7 @@ function Service() {
   return (
     <>
       <Helmet>
-        <title>Service {service_id} | e-MPJM</title>
+        <title>Service {service_id} | e-MJPM</title>
       </Helmet>
       <LayoutAdmin>
         <BoxWrapper mt={3} px={1}>

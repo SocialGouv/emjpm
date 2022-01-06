@@ -21,7 +21,7 @@ function AdminTribunauxPage() {
   return (
     <>
       <Helmet>
-        <title>Liste des tribunaux | e-MPJM</title>
+        <title>Liste des tribunaux | e-MJPM</title>
       </Helmet>
       <AdminFilterProvider>
         <LayoutAdmin>

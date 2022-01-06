@@ -10,7 +10,7 @@ function Mandataires() {
   return (
     <>
       <Helmet>
-        <title>Tous les mandataires | e-MPJM</title>
+        <title>Tous les mandataires | e-MJPM</title>
       </Helmet>
       <LayoutGreffier>
         <BoxWrapper mt={3} px="1">
