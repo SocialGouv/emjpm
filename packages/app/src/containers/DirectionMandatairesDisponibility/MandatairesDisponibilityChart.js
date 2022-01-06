@@ -27,6 +27,9 @@ function MandatairesDisponibilityChart({ data }) {
               right: 0,
               top: 20,
             }}
+            role="img"
+            aria-label="Disponibilités par type de mandataires"
+            longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
             <XAxis dataKey="name" hide={true} />

@@ -69,11 +69,16 @@ function StatisticMesureNature() {
     value: parseInt(value),
   }));
 
+  const numberOfMesures = data.reduce((acc, val) => {
+    return acc + Number(val.value);
+  }, 0);
+
   return (
     <Card m={1} width="100%">
       <Box>
         <Heading size={4}>Répartition des mesures par nature</Heading>
       </Box>
+
       {data?.length === 0 && (
         <Flex pt={7}>
           <Text>{"Aucune donnée disponible. Merci de renseigner "}</Text>
@@ -88,7 +93,13 @@ function StatisticMesureNature() {
         </Flex>
       )}
       <Flex>
-        <PieChart width={300} height={300}>
+        <PieChart
+          width={300}
+          height={300}
+          role="img"
+          id="chart"
+          aria-label={`${numberOfMesures} mesures réparties par nature`}
+        >
           <Pie
             data={data}
             cx={150}
@@ -96,6 +107,7 @@ function StatisticMesureNature() {
             outerRadius={100}
             fill="#8884d8"
             dataKey="value"
+            aria-describedby="chart"
           >
             {data.map((_, index) => (
               <Cell

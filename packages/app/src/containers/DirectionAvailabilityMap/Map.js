@@ -12,7 +12,12 @@ function France(props) {
       {currentPanel.isActive && (
         <Panel togglePanel={togglePanel} currentPanel={currentPanel} />
       )}
-      <SvgLoader svgXML={Map}>
+      <SvgLoader
+        svgXML={Map}
+        role="img"
+        aria-label="Disponibilités par territoire"
+        longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
+      >
         <SvgProxy selector="#carte" fill={color} />
         {departements.map((dpt, index) => (
           <SvgProxy

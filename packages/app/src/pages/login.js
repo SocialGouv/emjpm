@@ -50,6 +50,7 @@ function LoginPage() {
                 p: "3",
                 width: ["100%"],
               }}
+              alt=""
             />
             {/* <Box sx={{ p: "6" }}>
             <Heading size={4} mb="3">

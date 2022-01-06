@@ -30,6 +30,9 @@ function MandatairesActivityChart(props) {
     { name: "PRÉPOSÉS D’ÉTABLISSEMENTS", value: mandatairePreposeSum },
   ];
 
+  const mandatairesByTypeLength = pieChartData.reduce((acc, val) => {
+    return acc + val.value;
+  }, 0);
   return (
     <Box>
       <Box
@@ -39,8 +42,13 @@ function MandatairesActivityChart(props) {
           {total}
           <Text sx={legendStyle}>mesures</Text>
         </Text>
+
         <ResponsiveContainer>
-          <PieChart>
+          <PieChart
+            role="img"
+            aria-label={`${mandatairesByTypeLength} mesures réparties par type de mandataire`}
+            longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
+          >
             <Pie
               data={pieChartData}
               innerRadius={60}
