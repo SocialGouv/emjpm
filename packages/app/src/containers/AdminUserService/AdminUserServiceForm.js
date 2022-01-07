@@ -7,6 +7,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
+  FormGroupSelect,
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { adminUserServiceSchema } from "~/validation-schemas";
@@ -21,6 +22,7 @@ import {
   CheckBox,
 } from "~/components";
 import { findOptions } from "~/utils/form";
+import { GENDER_OPTIONS } from "~/constants/user";
 
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
@@ -56,6 +58,23 @@ function AdminUserServiceForm(props) {
     sum: { mesures_max: antennes_mesures_max },
   } = service.service_antennes_aggregate.aggregate;
 
+  const geocodeResource = useMemo(
+    () => ({
+      latitude: service.latitude,
+      longitude: service.longitude,
+      adresse: service.location_adresse,
+      ville: service.location_ville,
+      code_postal: service.location_code_postal,
+      departement_code: service.departement_code,
+    }),
+    [service]
+  );
+
+  const geocodeInitValue = useMemo(
+    () => geocodeInitialValue(geocodeResource),
+    [geocodeResource]
+  );
+
   const formik = useFormik({
     initialValues: {
       user_email: user.email || "",
@@ -64,10 +83,15 @@ function AdminUserServiceForm(props) {
       competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
-      geocode: geocodeInitialValue(service),
+      adresse: service.adresse || "",
+      code_postal: service.code_postal || "",
+      ville: service.ville || "",
+      geocode: geocodeInitValue,
       information: service.information || "",
+      etablissement: service.etablissement || "",
       nom: service.nom || "",
       prenom: service.prenom || "",
+      genre: service.genre || "",
       telephone: service.telephone || "",
       tis: service_tis.map(({ ti }) => ti.id),
       antennes_count,
@@ -83,7 +107,22 @@ function AdminUserServiceForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>{`${service.etablissement}`}</Heading>
+          <Heading size={4} mb={1}>
+            Service
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          <Heading size={4} mb={1}>
+            {service.etablissement}
+          </Heading>
+        </FormInputBox>
+      </Flex>
+
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Informations personnelles"}
+          </Heading>
         </FormGrayBox>
         <FormInputBox>
           <FormGroupInput
@@ -108,14 +147,85 @@ function AdminUserServiceForm(props) {
           />
         </FormInputBox>
       </Flex>
-
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Responsable"}
+            {"Structure juridique"}
           </Heading>
         </FormGrayBox>
         <FormInputBox>
+          <FormGroupInput
+            placeholder="Nom du service"
+            id="etablissement"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+          <Field>
+            <Geocode
+              label={
+                "Localisation, cette adresse permettra au magistrats et greffiers de vous localiser sur la carte"
+              }
+              id="geocode"
+              resource={service}
+              onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
+              aria-describedby="msg-geocode"
+            />
+            <div id="msg-geocode">
+              <InlineError message={formik.errors.geocode} fieldId="geocode" />
+            </div>
+          </Field>
+          <FormGroupInput
+            placeholder="Adresse"
+            label="Adresse, cette adresse sera celle visible pour le magistrat / greffier"
+            id="adresse"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Complément d'adresse"
+            label="Complément d'adresse"
+            id="adresse_complement"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Code postal"
+            label="Code postal"
+            id="code_postal"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Ville"
+            label="Ville"
+            id="ville"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+        </FormInputBox>
+      </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Informations du responsable"}
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="prenom"
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+            normalizers={[normalizeFirstName]}
+          />
           <FormGroupInput
             placeholder="NOM"
             id="nom"
@@ -123,24 +233,6 @@ function AdminUserServiceForm(props) {
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeLastName]}
           />
-          <Box flex={1 / 2}>
-            <FormGroupInput
-              placeholder="Prénom"
-              id="prenom"
-              formik={formik}
-              validationSchema={adminUserServiceSchema}
-              normalizers={[normalizeFirstName]}
-            />
-          </Box>
-        </FormInputBox>
-      </Flex>
-      <Flex>
-        <FormGrayBox>
-          <Heading size={4} mb={1}>
-            {"Coordonnées"}
-          </Heading>
-        </FormGrayBox>
-        <FormInputBox>
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="email"
@@ -155,29 +247,6 @@ function AdminUserServiceForm(props) {
               validationSchema={adminUserServiceSchema}
             />
           </Box>
-        </FormInputBox>
-      </Flex>
-      <Flex>
-        <FormGrayBox>
-          <Heading size={4}>{"Adresse"}</Heading>
-          <Text lineHeight="1.5" color="textSecondary">
-            {
-              "Cette adresse permettra de localiser le service sur la carte des mesures"
-            }
-          </Text>
-        </FormGrayBox>
-        <FormInputBox>
-          <Field>
-            <Geocode
-              id="geocode"
-              resource={service}
-              onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
-              aria-describedby="msg-geocode"
-            />
-            <div id="msg-geocode">
-              <InlineError message={formik.errors.geocode} fieldId="geocode" />
-            </div>
-          </Field>
         </FormInputBox>
       </Flex>
       <Flex>

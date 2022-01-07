@@ -73,18 +73,19 @@ insert_permissions:
     backend_only: false
     check: {}
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -97,12 +98,12 @@ insert_permissions:
     - prenom
     - siret
     - telephone
-    - ville
+    - location_ville
   role: direction
 select_permissions:
 - permission:
     columns:
-    - code_postal
+    - location_code_postal
     - etablissement
     - id
     filter: {}
@@ -110,18 +111,19 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -137,7 +139,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -146,18 +148,19 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - nom
     - org_adresse
@@ -168,7 +171,7 @@ select_permissions:
     - prenom
     - siret
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -177,18 +180,19 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - nom
     - org_adresse
@@ -199,7 +203,7 @@ select_permissions:
     - prenom
     - siret
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -207,13 +211,14 @@ select_permissions:
   role: direction_territoriale
 - permission:
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
     - longitude
@@ -230,7 +235,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -238,8 +243,8 @@ select_permissions:
   role: greffier
 - permission:
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
@@ -247,11 +252,12 @@ select_permissions:
     - editor_locked_mesures
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -267,7 +273,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -277,13 +283,14 @@ select_permissions:
   role: service
 - permission:
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
     - longitude
@@ -300,7 +307,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - location_ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -310,18 +317,19 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - adresse
-    - code_postal
+    - location_adresse
+    - location_code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -334,7 +342,7 @@ update_permissions:
     - prenom
     - siret
     - telephone
-    - ville
+    - location_ville
     filter: {}
   role: direction
 - permission:
@@ -351,18 +359,29 @@ update_permissions:
     check: null
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
     - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
     - prenom
+    - siret
     - suspend_activity
     - suspend_activity_reason
     - telephone
@@ -391,14 +410,14 @@ event_triggers:
     update:
       columns:
       - org_gestionnaire
-      - adresse
-      - code_postal
+      - location_adresse
+      - location_code_postal
       - competences
       - email
       - etablissement
-      - lb_adresse
-      - lb_code_postal
-      - lb_ville
+      - adresse
+      - code_postal
+      - ville
       - nom
       - org_adresse
       - org_code_postal
@@ -407,7 +426,7 @@ event_triggers:
       - prenom
       - siret
       - telephone
-      - ville
+      - location_ville
       - id
       - latitude
       - longitude

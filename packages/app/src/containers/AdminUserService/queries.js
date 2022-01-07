@@ -16,6 +16,9 @@ export const USER_SERVICE = gql`
           ville
           code_postal
           adresse
+          location_ville
+          location_code_postal
+          location_adresse
           latitude
           longitude
           email
@@ -24,6 +27,7 @@ export const USER_SERVICE = gql`
           telephone
           prenom
           nom
+          genre
           competences
           created_at
           suspend_activity

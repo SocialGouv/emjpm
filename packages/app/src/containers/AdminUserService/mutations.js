@@ -16,6 +16,7 @@ export const EDIT_USER = gql`
     $competences: String
     $nom: String
     $prenom: String
+    $genre: String
     $ville: String
     $telephone: String
     $latitude: Float
@@ -56,6 +57,7 @@ export const EDIT_USER = gql`
         email: $email
         nom: $nom
         prenom: $prenom
+        genre: $genre
         telephone: $telephone
         code_postal: $code_postal
         competences: $competences
