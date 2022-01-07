@@ -41,6 +41,7 @@ function Navigation({ links }) {
             </Link>
           </Box>
         ))}
+
         {isMandataire(user) && <MandataireBadge mandataire={user.mandataire} />}
         {isService(user) && <ServiceBadge service={user.service} />}
         {suspendActivity && (

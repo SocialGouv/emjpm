@@ -122,7 +122,23 @@ export default function MandataireListItem(props) {
               {type === "service" ? (
                 <BuildingHouse size="24" />
               ) : (
-                <>{genre === "F" ? <Female size="24" /> : <Male size="24" />}</>
+                <>
+                  {genre === "F" ? (
+                    <Female
+                      size="24"
+                      role="img"
+                      aria-label="Madame"
+                      aria-hidden="false"
+                    />
+                  ) : (
+                    <Male
+                      size="24"
+                      role="img"
+                      aria-label="Monsieur"
+                      aria-hidden="false"
+                    />
+                  )}
+                </>
               )}
               {isAvailable}
             </Box>
@@ -238,6 +254,11 @@ export default function MandataireListItem(props) {
                 eMJPM
               </Text>
               <CheckShield
+                aria-label={
+                  habilitation
+                    ? "Habilitation vérifiée"
+                    : "Habilitation non vérifiée"
+                }
                 size={extraIconsSize}
                 title={
                   habilitation
@@ -254,12 +275,18 @@ export default function MandataireListItem(props) {
                     : "Le mandataire n'a pas exprimé son souhait de recevoir des mesures en provenance de votre tribunal"
                 }
                 color={prefer ? "#70D54F" : ""}
+                aria-label={
+                  prefer
+                    ? "Le mandataire souhaite recevoir des mesures en provenance de votre tribunal"
+                    : "Le mandataire n'a pas exprimé son souhait de recevoir des mesures en provenance de votre tribunal"
+                }
               />
               {!available && (
                 <DotCircleSolid
                   size={extraIconsSize}
                   title={"Il n'y plus de places disponibles"}
                   color={"#FF6966"}
+                  aria-label="Il n'y plus de places disponibles"
                 />
               )}
               {available && (
@@ -269,6 +296,9 @@ export default function MandataireListItem(props) {
                     "Il y a " + currentAvailability + " places disponibles"
                   }
                   color={"#70D54F"}
+                  aria-label={
+                    "Il y a " + currentAvailability + " places disponibles"
+                  }
                 />
               )}
             </Box>

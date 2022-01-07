@@ -97,7 +97,23 @@ export default function MandataireListItem(props) {
               {type === "service" ? (
                 <BuildingHouse size="24" />
               ) : (
-                <>{genre === "F" ? <Female size="24" /> : <Male size="24" />}</>
+                <>
+                  {genre === "F" ? (
+                    <Female
+                      size="24"
+                      aria-hidden="false"
+                      role="img"
+                      aria-label="Madame"
+                    />
+                  ) : (
+                    <Male
+                      size="24"
+                      aria-hidden="false"
+                      role="img"
+                      aria-label="Monsieur"
+                    />
+                  )}
+                </>
               )}
               {isAvailable}
             </Box>
