@@ -20,8 +20,7 @@ function MandatairesDisponibilityChart({ data }) {
         sx={{ height: [300, 313, 300], position: "relative", width: "100%" }}
       >
         <SrOnly id="disponibilites_par_type">
-          Graphique montrant les disponibilités par type de mandataires par
-          types
+          Graphique montrant les disponibilités des mandataires par type
         </SrOnly>
         <ResponsiveContainer>
           <BarChart

@@ -11,8 +11,7 @@ function France(props) {
   return (
     <>
       <SrOnly id="disponibilites_par_territoire">
-        Graphique montrant les disponibilités par type de mandataires par
-        territoire
+        Graphique montrant les disponibilités de mandataires par territoire
       </SrOnly>
       {currentPanel.isActive && (
         <Panel togglePanel={togglePanel} currentPanel={currentPanel} />
