@@ -3,12 +3,17 @@ import { SvgLoader, SvgProxy } from "react-svgmt";
 
 import Map from "./MapSvg";
 import { Panel } from "./Panel";
+import { SrOnly } from "~/components";
 
 function France(props) {
   const { color, aboveColor, belowColor, departements } = props;
   const [currentPanel, togglePanel] = useState(false);
   return (
     <>
+      <SrOnly id="disponibilites_par_territoire">
+        Graphique montrant les disponibilités par type de mandataires par
+        territoire
+      </SrOnly>
       {currentPanel.isActive && (
         <Panel togglePanel={togglePanel} currentPanel={currentPanel} />
       )}
@@ -16,7 +21,7 @@ function France(props) {
         svgXML={Map}
         role="img"
         aria-label="Disponibilités par territoire"
-        longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
+        aria-describedby="disponibilites_par_territoire"
       >
         <SvgProxy selector="#carte" fill={color} />
         {departements.map((dpt, index) => (

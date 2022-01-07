@@ -8,6 +8,7 @@ import {
   pieTextStyle,
   textStyle,
 } from "./style";
+import { SrOnly } from "~/components";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
@@ -35,6 +36,9 @@ function MandatairesActivityChart(props) {
   }, 0);
   return (
     <Box>
+      <SrOnly id="repartition_par_type">
+        Graphique montrant la répartition de l’activité par type de mandataires
+      </SrOnly>
       <Box
         sx={{ height: [300, 300, 300], position: "relative", width: "100%" }}
       >
@@ -47,7 +51,7 @@ function MandatairesActivityChart(props) {
           <PieChart
             role="img"
             aria-label={`${mandatairesByTypeLength} mesures réparties par type de mandataire`}
-            longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
+            aria-describedby="repartition_par_type"
           >
             <Pie
               data={pieChartData}

@@ -9,6 +9,7 @@ import {
 } from "recharts";
 
 import { textStyle } from "~/containers/DirectionMandatairesActivity/style";
+import { SrOnly } from "~/components";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
@@ -18,6 +19,10 @@ function MandatairesDisponibilityChart({ data }) {
       <Box
         sx={{ height: [300, 313, 300], position: "relative", width: "100%" }}
       >
+        <SrOnly id="disponibilites_par_type">
+          Graphique montrant les disponibilités par type de mandataires par
+          types
+        </SrOnly>
         <ResponsiveContainer>
           <BarChart
             data={data}
@@ -29,7 +34,7 @@ function MandatairesDisponibilityChart({ data }) {
             }}
             role="img"
             aria-label="Disponibilités par type de mandataires"
-            longdesc={`${document.location.protocol}//${document.location.host}/direction/mandataires/list`}
+            aria-describedby="disponibilites_par_type"
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
             <XAxis dataKey="name" hide={true} />
