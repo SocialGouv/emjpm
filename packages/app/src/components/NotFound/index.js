@@ -10,7 +10,8 @@ export default function NotFound() {
             maxWidth: "calc(100wh - 40px)",
             maxHeight: "calc(100vh - 40px)",
           }}
-          alt="404"
+          alt=""
+          aria-hidden="true"
         />
       </a>
       <br />

@@ -51,6 +51,7 @@ function LoginPage() {
                 width: ["100%"],
               }}
               alt=""
+              aria-hidden="true"
             />
             {/* <Box sx={{ p: "6" }}>
             <Heading size={4} mb="3">

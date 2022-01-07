@@ -32,6 +32,8 @@ function AuthorizationPage() {
                 p: "3",
                 width: ["100%"],
               }}
+              alt=""
+              aria-hidden="true"
             />
           </Box>
           <Box

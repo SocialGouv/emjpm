@@ -64,7 +64,8 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
               borderRadius: "7px",
               margin: "15px",
             }}
-            alt="error"
+            alt=""
+            aria-hidden="true"
           />
         </a>
       </div>
