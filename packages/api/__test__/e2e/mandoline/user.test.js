@@ -93,7 +93,7 @@ describe("POST /api/mandoline/user", () => {
         nom: "Dupuis",
         prenom: "Maelys ",
         service: {
-          adresse: "10 Rue de la Ville En Pierre",
+          adresse: "10 Rue de la Ville En Pierre 44000 Nantes",
           code_postal: "44000",
           departement: { code: "44", nom: "Loire-Atlantique" },
           departements: [{ code: "44", nom: "Loire-Atlantique" }],
