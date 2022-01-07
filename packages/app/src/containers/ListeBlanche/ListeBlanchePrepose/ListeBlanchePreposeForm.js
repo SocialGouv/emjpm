@@ -9,17 +9,43 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
+  FormGroupSelect,
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import yup from "~/validation-schemas/yup";
-import { Button, Heading, RadioGroup } from "~/components";
+import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
+import { Button, Heading, RadioGroup, InlineError, Input } from "~/components";
 
-const validationSchema = yup.object().shape({
-  email: yup.string().required(),
-  firstname: yup.string().required(),
-  lastname: yup.string().required(),
-});
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
+import { useMemo } from "react";
+
+const lbSchema = ({ isCreate }) =>
+  yup.object().shape({
+    email: yup.string().required(),
+    prenom: yup.string().required(),
+    nom: yup.string().required(),
+    genre: yup.string().nullable().required(),
+    telephone: yup.string().nullable(),
+    etablissements: yup
+      .array()
+      .test(
+        "required-oncreate-orif-present-onupdate",
+        FORM_REQUIRED_MESSAGE,
+        (value, { parent }) => {
+          if (isCreate) {
+            return true;
+          }
+          if (
+            !parent.initialEtablissements ||
+            parent.initialEtablissements.length === 0
+          ) {
+            return true;
+          }
+          return value && value.length > 0;
+        }
+      ),
+  });
 
 async function updateEtablissementRattachement(formik, id) {
   if (formik.values.etablissements.length > 0) {
@@ -38,20 +64,25 @@ async function updateEtablissementRattachement(formik, id) {
 export function ListeBlanchePreposeForm(props) {
   const { searchEtablissements, editMode, data = {}, handleSubmit } = props;
 
+  const isCreate = !props.data;
+  const validationSchema = useMemo(() => lbSchema({ isCreate }), [isCreate]);
+
+  const etablissements = data.mandataire_prepose_etablissements
+    ? data.mandataire_prepose_etablissements.map((e) => {
+        return {
+          etablissement_rattachement: e.etablissement_rattachement,
+          id: e.etablissement.id,
+          ligneacheminement: e.etablissement.ligneacheminement,
+          rslongue: e.etablissement.rslongue,
+        };
+      })
+    : [];
   const initialValues = {
     email: data.email || "",
-    etablissements: data.mandataire_prepose_etablissements
-      ? data.mandataire_prepose_etablissements.map((e) => {
-          return {
-            etablissement_rattachement: e.etablissement_rattachement,
-            id: e.etablissement.id,
-            ligneacheminement: e.etablissement.ligneacheminement,
-            rslongue: e.etablissement.rslongue,
-          };
-        })
-      : [],
-    firstname: data.prenom || "",
-    lastname: data.nom || "",
+    initialEtablissements: etablissements,
+    etablissements,
+    prenom: data.prenom || "",
+    nom: data.nom || "",
   };
 
   const formik = useFormik({
@@ -86,33 +117,53 @@ export function ListeBlanchePreposeForm(props) {
 
   const user = useUser();
 
+  const mandataire = data?.mandataire;
+
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Informations"}
+            {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInput
-            placeholder="Nom"
-            id="lastname"
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
             formik={formik}
             validationSchema={validationSchema}
           />
           <FormGroupInput
             placeholder="Prénom"
-            id="firstname"
+            id="prenom"
             formik={formik}
             validationSchema={validationSchema}
+            normalizers={[normalizeFirstName]}
           />
           <FormGroupInput
-            placeholder="Adresse e-mail du mandataire"
+            placeholder="NOM"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeLastName]}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
           />
+          <Box flex={1 / 2}>
+            <FormGroupInput
+              placeholder="Téléphone"
+              id="telephone"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Box>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -167,40 +218,114 @@ export function ListeBlanchePreposeForm(props) {
 
           <Box>
             <Box mt={2}>
-              <AsyncSelect
-                name="etablissement"
-                instanceId={`etablissement-${data.id || "new"}`}
-                cacheOptions
-                defaultOptions
-                placeholder={"recherche par nom, finess, code postal, ville."}
-                loadOptions={async (inputValue) => {
-                  const values = await searchEtablissements(inputValue);
-                  return values.map((e) => {
-                    return {
-                      label: `${e.rslongue} (${e.ligneacheminement})`,
-                      ligneacheminement: e.ligneacheminement,
-                      rslongue: e.rslongue,
-                      value: e.id,
-                    };
-                  });
-                }}
-                onChange={(option) => {
-                  if (!etablissementIds.includes(option.value)) {
-                    formik.setFieldValue(
-                      "etablissements",
-                      formik.values.etablissements.concat({
-                        id: option.value,
-                        ligneacheminement: option.ligneacheminement,
-                        rslongue: option.rslongue,
-                      })
-                    );
-                  }
-                }}
-              />
+              <div aria-describedby="msg-etablissements">
+                <AsyncSelect
+                  name="etablissement"
+                  instanceId={`etablissement-${data.id || "new"}`}
+                  cacheOptions
+                  defaultOptions
+                  placeholder={"recherche par nom, finess, code postal, ville."}
+                  loadOptions={async (inputValue) => {
+                    const values = await searchEtablissements(inputValue);
+                    return values.map((e) => {
+                      return {
+                        label: `${e.rslongue} (${e.ligneacheminement})`,
+                        ligneacheminement: e.ligneacheminement,
+                        rslongue: e.rslongue,
+                        value: e.id,
+                      };
+                    });
+                  }}
+                  onChange={(option) => {
+                    if (!etablissementIds.includes(option.value)) {
+                      formik.setFieldValue(
+                        "etablissements",
+                        formik.values.etablissements.concat({
+                          id: option.value,
+                          ligneacheminement: option.ligneacheminement,
+                          rslongue: option.rslongue,
+                        })
+                      );
+                    }
+                  }}
+                />
+              </div>
+              <div id="msg-etablissements">
+                {(formik.touched.etablissements || formik.submitCount > 1) && (
+                  <InlineError
+                    message={formik.errors.etablissements}
+                    fieldId="etablissements"
+                  />
+                )}
+              </div>
             </Box>
           </Box>
         </FormInputBox>
       </Flex>
+
+      {!isCreate && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Informations données par le préposé"}
+            </Heading>
+          </FormGrayBox>
+          <FormInputBox>
+            {!mandataire && <Text>Aucun utilisateur associé</Text>}
+            {mandataire && (
+              <>
+                <Input
+                  label="Civilité"
+                  placeholder=""
+                  value={
+                    mandataire.genre
+                      ? GENDER_OPTIONS.find(
+                          ({ value }) => value === mandataire.genre
+                        ).label
+                      : ""
+                  }
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="Prénom"
+                  placeholder=""
+                  value={mandataire.user.prenom}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="NOM"
+                  placeholder=""
+                  value={mandataire.user.nom}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="Adresse e-mail"
+                  placeholder=""
+                  value={mandataire.user.email}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  placeholder="Téléphone"
+                  value={mandataire.telephone}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  placeholder="Adresse"
+                  value={mandataire.adresse}
+                  forceActive
+                  readOnly
+                />
+              </>
+            )}
+          </FormInputBox>
+        </Flex>
+      )}
+
       <Flex justifyContent="flex-end" mt={4}>
         {editMode && isAdmin(user) && (
           <Box>

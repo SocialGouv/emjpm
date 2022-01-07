@@ -20,16 +20,8 @@ export function ListeBlanche(props) {
   const history = useHistory();
 
   const getHref = (item) => {
-    const { type } = item;
-    switch (type) {
-      case "individuel":
-      case "prepose":
-        const { liste_blanche } = item;
-        return `/${origin}/liste-blanche/${liste_blanche.id}`;
-      case "service":
-        const { service } = item;
-        return `/${origin}/liste-blanche/services/${service.id}`;
-    }
+    const { liste_blanche } = item;
+    return `/${origin}/liste-blanche/${liste_blanche.id}`;
   };
 
   const onRowClick = async (item, e) => {

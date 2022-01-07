@@ -51,6 +51,7 @@ export const CREATE_LISTE_BLANCHE_PREPOSE = gql`
     $email: String!
     $nom: String!
     $prenom: String!
+    $telephone: String
     $etablissements: [mandataire_prepose_etablissements_insert_input!]! = {}
   ) {
     insert_liste_blanche_one(
@@ -58,6 +59,7 @@ export const CREATE_LISTE_BLANCHE_PREPOSE = gql`
         email: $email
         nom: $nom
         prenom: $prenom
+        telephone: $telephone
         mandataire_prepose_etablissements: { data: $etablissements }
         type: "prepose"
       }

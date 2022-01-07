@@ -178,16 +178,8 @@ const routes = [
     path: "/admin/liste-blanche/:id(\\d+)",
   },
   {
-    Component: require("~/pages/admin/liste-blanche/services/[id]").default,
-    path: "/admin/liste-blanche/services/:id(\\d+)",
-  },
-  {
     Component: require("~/pages/direction/liste-blanche/[id]").default,
     path: "/direction/liste-blanche/:id(\\d+)",
-  },
-  {
-    Component: require("~/pages/direction/liste-blanche/services/[id]").default,
-    path: "/direction/liste-blanche/services/:id(\\d+)",
   },
   {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/import")

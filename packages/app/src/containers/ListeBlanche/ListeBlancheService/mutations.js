@@ -2,9 +2,13 @@ import gql from "graphql-tag";
 
 export const UPDATE_SERVICE = gql`
   mutation UpdateService(
-    $id: Int!
+    $liste_blanche_id: Int!
+    $service_id: Int!
     $etablissement: String!
     $code_postal: String!
+    $genre: String
+    $nom: String
+    $prenom: String
     $ville: String!
     $siret: String!
     $email: String
@@ -18,12 +22,15 @@ export const UPDATE_SERVICE = gql`
     $org_code_postal: String
     $org_ville: String
   ) {
-    update_services(
-      where: { id: { _eq: $id } }
+    update_liste_blanche(
+      where: { id: { _eq: $liste_blanche_id } }
       _set: {
         etablissement: $etablissement
         siret: $siret
         code_postal: $code_postal
+        genre: $genre
+        nom: $nom
+        prenom: $prenom
         ville: $ville
         email: $email
         telephone: $telephone
@@ -79,7 +86,7 @@ export const UPDATE_SERVICE = gql`
     delete_service_departements(
       where: {
         _and: [
-          { service_id: { _eq: $id } }
+          { service_id: { _eq: $service_id } }
           { departement_code: { _nin: $departement_codes } }
         ]
       }
@@ -94,6 +101,9 @@ export const ADD_SERVICE = gql`
     $etablissement: String!
     $code_postal: String!
     $ville: String!
+    $genre: String
+    $nom: String
+    $prenom: String
     $email: String
     $telephone: String
     $departements: [service_departements_insert_input!]!
@@ -110,6 +120,9 @@ export const ADD_SERVICE = gql`
         etablissement: $etablissement
         code_postal: $code_postal
         ville: $ville
+        genre: $genre
+        nom: $nom
+        prenom: $prenom
         email: $email
         telephone: $telephone
         adresse: $adresse
@@ -147,6 +160,9 @@ export const ADD_SERVICE = gql`
         etablissement: $etablissement
         code_postal: $code_postal
         ville: $ville
+        genre: $genre
+        nom: $nom
+        prenom: $prenom
         email: $email
         service_departements: { data: $departements }
         telephone: $telephone

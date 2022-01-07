@@ -37,6 +37,7 @@ export function ListeBlancheIndividuelCreate() {
                   departement_code: d.id,
                 };
               }),
+              genre: values.genre,
               email: values.email,
               nom: values.nom,
               prenom: values.prenom,

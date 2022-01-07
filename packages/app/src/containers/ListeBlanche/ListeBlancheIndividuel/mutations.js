@@ -26,6 +26,7 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
     $prenom: String!
     $siret: String!
     $email: String!
+    $telephone: String!
     $adresse: String!
     $adresse_complement: String
     $code_postal: String!
@@ -38,6 +39,7 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
         prenom: $prenom
         siret: $siret
         email: $email
+        telephone: $telephone
         adresse: $adresse
         adresse_complement: $adresse_complement
         code_postal: $code_postal
@@ -64,9 +66,11 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
 export const UPDATE_LISTE_BLANCHE = gql`
   mutation update_liste_blanche(
     $id: Int!
+    $genre: String
     $nom: String
     $prenom: String
     $email: String
+    $telephone: String
     $siret: String
     $adresse: String!
     $adresse_complement: String
@@ -92,9 +96,11 @@ export const UPDATE_LISTE_BLANCHE = gql`
     update_liste_blanche_by_pk(
       pk_columns: { id: $id }
       _set: {
+        genre: $genre
         nom: $nom
         prenom: $prenom
         email: $email
+        telephone: $telephone
         siret: $siret
         adresse: $adresse
         adresse_complement: $adresse_complement

@@ -18,6 +18,15 @@ object_relationships:
       remote_table:
         name: ocmi_mandataires
         schema: public
+- name: service
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: services
+        schema: public
 array_relationships:
 - name: mandataire_individuel_departements
   using:

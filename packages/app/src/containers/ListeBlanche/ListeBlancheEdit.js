@@ -5,6 +5,7 @@ import useQueryReady from "~/hooks/useQueryReady";
 
 import { ListeBlancheIndividuelUpdate } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
+import { ListeBlancheServiceUpdate } from "./ListeBlancheService";
 import { LISTE_BLANCHE_BY_PK } from "./queries";
 
 export function ListeBlancheEdit(props) {
@@ -39,6 +40,13 @@ export function ListeBlancheEdit(props) {
               handleSubmit={handleSubmit}
               handleCancel={handleCancel}
               data={data.liste_blanche_by_pk}
+            />
+          )}
+          {data.liste_blanche_by_pk.type === "service" && (
+            <ListeBlancheServiceUpdate
+              listeBlancheId={id}
+              handleSubmit={handleSubmit}
+              handleCancel={handleCancel}
             />
           )}
         </>

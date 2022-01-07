@@ -7,7 +7,7 @@ export const LISTE_BLANCHE = gql`
     $filters: liste_blanche_bool_exp = {}
     $search: String
   ) {
-    liste_blanche_aggregate: search_liste_blanche_aggregate(
+    liste_blanche_aggregate: search_view_lb_aggregate(
       where: $filters
       args: { search: $search }
     ) {
@@ -15,7 +15,7 @@ export const LISTE_BLANCHE = gql`
         count
       }
     }
-    liste_blanche: search_liste_blanche(
+    liste_blanche: search_view_lb(
       limit: $limit
       offset: $offset
       args: { search: $search }
@@ -66,6 +66,7 @@ export const LISTE_BLANCHE_BY_PK = gql`
       nom
       prenom
       email
+      genre
       siret
       adresse
       adresse_complement
@@ -74,10 +75,15 @@ export const LISTE_BLANCHE_BY_PK = gql`
       type
       mandataire {
         id
+        genre
+        adresse
+        telephone
+        siret
         user {
           id
           nom
           prenom
+          email
         }
       }
       mandataire_prepose_etablissements {

@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState, useMemo } from "react";
 import { useFormik } from "formik";
 import { Box, Flex, Text } from "rebass";
-
 import { isAdmin } from "@emjpm/biz";
 
 import { useApolloClient } from "@apollo/client";
@@ -9,27 +8,30 @@ import { useApolloClient } from "@apollo/client";
 import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
+import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
 
 import {
   FormGrayBox,
   FormGroupInput,
+  FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import yup from "~/validation-schemas/yup";
-import { Button, Heading, Field, InlineError } from "~/components";
-import { formatFormInput } from "~/utils/form";
+import { Button, Heading, Field, InlineError, Input } from "~/components";
 import { DepartementFormUtil } from "~/utils/departements";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
 import { GeocodeCities } from "~/components/Geocode";
 
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
+
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
-const lbSchema = ({ apolloClient }) =>
+const lbSchema = ({ apolloClient, isCreate }) =>
   yup.object().shape({
     adresse: yup.string().required().nullable(),
     adresse_complement: yup.string().optional().nullable(),
@@ -37,9 +39,11 @@ const lbSchema = ({ apolloClient }) =>
       .string()
       .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
       .required(),
+    genre: yup.string().required(),
     email: yup.string().required(),
     nom: yup.string().required(),
     prenom: yup.string().required(),
+    telephone: yup.string().nullable(),
     siret: yup
       .string()
       .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
@@ -55,15 +59,33 @@ const lbSchema = ({ apolloClient }) =>
         }
       ),
     ville: yup.string().required(),
+    departements: yup
+      .array()
+      .test(
+        "required-oncreate-orif-present-onupdate",
+        FORM_REQUIRED_MESSAGE,
+        (value, { parent }) => {
+          if (isCreate) {
+            return true;
+          }
+          if (
+            !parent.initialDepartements ||
+            parent.initialDepartements.length === 0
+          ) {
+            return true;
+          }
+          return value && value.length > 0;
+        }
+      ),
   });
 
 export function ListeBlancheIndividuelForm(props) {
   const { handleCancel, data, editMode = false } = props;
-
+  const isCreate = !data;
   const apolloClient = useApolloClient();
   const validationSchema = useMemo(
-    () => lbSchema({ apolloClient }),
-    [apolloClient]
+    () => lbSchema({ apolloClient, isCreate }),
+    [apolloClient, isCreate]
   );
 
   const departements =
@@ -79,16 +101,19 @@ export function ListeBlancheIndividuelForm(props) {
 
   const formik = useFormik({
     initialValues: {
-      adresse: data ? formatFormInput(data.adresse) : "",
-      adresse_complement: data ? formatFormInput(data.adresse_complement) : "",
-      code_postal: data ? formatFormInput(data.code_postal) : "",
+      adresse: data?.adresse || "",
+      adresse_complement: data?.adresse_complement || "",
+      code_postal: data?.code_postal || "",
       departements,
-      email: data ? formatFormInput(data.email) : "",
-      nom: data ? formatFormInput(data.nom) : "",
-      prenom: data ? formatFormInput(data.prenom) : "",
-      siret: data ? formatFormInput(data.siret) : "",
-      initialSiret: data ? formatFormInput(data.siret) : "",
-      ville: data ? formatFormInput(data.ville) : "",
+      email: data?.email || "",
+      telephone: data?.telephone || "",
+      nom: data?.nom || "",
+      prenom: data?.prenom || "",
+      genre: data?.genre || "",
+      siret: data?.siret || "",
+      ville: data?.ville || "",
+      initialSiret: data?.siret || "",
+      initialDepartements: departements,
     },
     onSubmit: async (values, { setSubmitting, setFieldError }) => {
       try {
@@ -165,8 +190,55 @@ export function ListeBlancheIndividuelForm(props) {
     setFieldValue("ville", city || "");
   }, [selectedAdresseData, setFieldValue]);
 
+  const mandataire = data?.mandataire;
+
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Informations personnelles"}
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="prenom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeFirstName]}
+          />
+          <FormGroupInput
+            placeholder="NOM"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeLastName]}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail"
+            id="email"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <Box flex={1 / 2}>
+            <FormGroupInput
+              placeholder="Téléphone"
+              id="telephone"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Box>
+        </FormInputBox>
+      </Flex>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
@@ -241,34 +313,6 @@ export function ListeBlancheIndividuelForm(props) {
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Mandataire"}
-          </Heading>
-        </FormGrayBox>
-        <FormInputBox>
-          <FormGroupInput
-            placeholder="Nom"
-            id="nom"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-          <FormGroupInput
-            placeholder="Prénom"
-            id="prenom"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-
-          <FormGroupInput
-            placeholder="Adresse e-mail"
-            id="email"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-        </FormInputBox>
-      </Flex>
-      <Flex>
-        <FormGrayBox>
-          <Heading size={4} mb={1}>
             {"Liste des agréments"}
           </Heading>
           <Text mt={2} mb={1}>
@@ -300,20 +344,100 @@ export function ListeBlancheIndividuelForm(props) {
             }}
           />
 
-          <ListeBlancheIndividuelFormDepartementsSelector
-            departements={formik.values.departements}
-            onAdd={(departement) =>
-              formik.setFieldValue(
-                "departements",
-                formik.values.departements.concat({
-                  ...departement,
-                  departement_financeur: false,
-                })
-              )
-            }
-          />
+          <div aria-describedby="msg-departements-agrements">
+            <ListeBlancheIndividuelFormDepartementsSelector
+              departements={formik.values.departements}
+              onAdd={(departement) =>
+                formik.setFieldValue(
+                  "departements",
+                  formik.values.departements.concat({
+                    ...departement,
+                    departement_financeur: false,
+                  })
+                )
+              }
+            />
+          </div>
+          <div id="msg-departements-agrements">
+            {(formik.touched.departements || formik.submitCount > 1) && (
+              <InlineError
+                message={formik.errors.departements}
+                fieldId="departements"
+              />
+            )}
+          </div>
         </FormInputBox>
       </Flex>
+
+      {!isCreate && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Informations données par le mandataire individuel"}
+            </Heading>
+          </FormGrayBox>
+          <FormInputBox>
+            {!mandataire && <Text>Aucun utilisateur associé</Text>}
+            {mandataire && (
+              <>
+                <Input
+                  label="SIRET"
+                  placeholder=""
+                  value={mandataire.siret}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="Civilité"
+                  placeholder=""
+                  value={
+                    mandataire.genre
+                      ? GENDER_OPTIONS.find(
+                          ({ value }) => value === mandataire.genre
+                        ).label
+                      : ""
+                  }
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="Prénom"
+                  placeholder=""
+                  value={mandataire.user.prenom}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="NOM"
+                  placeholder=""
+                  value={mandataire.user.nom}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  label="Adresse e-mail"
+                  placeholder=""
+                  value={mandataire.user.email}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  placeholder="Téléphone"
+                  value={mandataire.telephone}
+                  forceActive
+                  readOnly
+                />
+                <Input
+                  placeholder="Adresse"
+                  value={mandataire.adresse}
+                  forceActive
+                  readOnly
+                />
+              </>
+            )}
+          </FormInputBox>
+        </Flex>
+      )}
 
       <Flex mt={4} justifyContent="flex-end">
         {editMode && isAdmin(user) && (

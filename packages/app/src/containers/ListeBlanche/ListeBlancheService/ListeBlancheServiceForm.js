@@ -21,6 +21,7 @@ import {
   Text,
   InlineError,
   Field,
+  Input,
 } from "~/components";
 import { GeocodeCities } from "~/components/Geocode";
 
@@ -28,6 +29,9 @@ import { createDepartementOptions, departementList } from "~/utils/geodata";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
+
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 const findOptionsDepartements = (options, values) => {
   if (!values) {
@@ -38,7 +42,11 @@ const findOptionsDepartements = (options, values) => {
 };
 
 export function ListeBlancheServiceForm(props) {
-  const { handleCancel, handleSubmit, service } = props;
+  const { handleCancel, handleSubmit, lbService } = props;
+
+  const isCreate = !lbService;
+
+  const service = lbService?.service;
 
   const apolloClient = useApolloClient();
   const validationSchema = useMemo(
@@ -62,19 +70,22 @@ export function ListeBlancheServiceForm(props) {
               departement_code: departement.id,
             }))
           : "",
-      email: service ? service.email : "",
-      etablissement: service ? service.etablissement : "",
-      adresse: service ? service.adresse : "",
-      code_postal: service ? service.code_postal : "",
-      ville: service ? service.ville : "",
-      org_adresse: service ? service.org_adresse : "",
-      org_code_postal: service ? service.org_code_postal : "",
-      org_gestionnaire: service ? service.org_gestionnaire : "",
-      org_nom: service ? service.org_nom : "",
-      org_ville: service ? service.org_ville : "",
-      siret: service ? service.siret || "" : "",
-      telephone: service ? service.telephone : "",
-      initialSiret: service ? service.siret || "" : "",
+      genre: lbService ? lbService.genre : "",
+      nom: lbService ? lbService.nom : "",
+      prenom: lbService ? lbService.prenom : "",
+      email: lbService ? lbService.email : "",
+      etablissement: lbService ? lbService.etablissement : "",
+      adresse: lbService ? lbService.adresse : "",
+      code_postal: lbService ? lbService.code_postal : "",
+      ville: lbService ? lbService.ville : "",
+      org_adresse: lbService ? lbService.org_adresse : "",
+      org_code_postal: lbService ? lbService.org_code_postal : "",
+      org_gestionnaire: lbService ? lbService.org_gestionnaire : "",
+      org_nom: lbService ? lbService.org_nom : "",
+      org_ville: lbService ? lbService.org_ville : "",
+      siret: lbService ? lbService.siret || "" : "",
+      telephone: lbService ? lbService.telephone : "",
+      initialSiret: lbService ? lbService.siret || "" : "",
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -165,24 +176,21 @@ export function ListeBlancheServiceForm(props) {
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Service tutelaire"}
+            {"Structure juridique"}
           </Heading>
-          <Text lineHeight="1.5" color="textSecondary">
-            {"Renseignez le département qui finance le service tutelaire."}
-          </Text>
         </FormGrayBox>
         <FormInputBox>
-          <SelectSIRET
-            id="siret"
-            formik={formik}
-            validationSchema={validationSchema}
-            setSelectedOption={setSelectedSiretDataCallback}
-          />
           <FormGroupInput
             placeholder="Nom du service"
             id="etablissement"
             formik={formik}
             validationSchema={validationSchema}
+          />
+          <SelectSIRET
+            id="siret"
+            formik={formik}
+            validationSchema={validationSchema}
+            setSelectedOption={setSelectedSiretDataCallback}
           />
           <SelectAdresse
             placeholder="Adresse"
@@ -274,27 +282,6 @@ export function ListeBlancheServiceForm(props) {
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Contact"}
-          </Heading>
-        </FormGrayBox>
-        <FormInputBox>
-          <FormGroupInput
-            placeholder="Email"
-            id="email"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-          <FormGroupInput
-            placeholder="Téléphone"
-            id="telephone"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-        </FormInputBox>
-      </Flex>
-      <Flex>
-        <FormGrayBox>
-          <Heading size={4} mb={1}>
             {"Organisme gestionnaire"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
@@ -365,6 +352,127 @@ export function ListeBlancheServiceForm(props) {
           )}
         </FormInputBox>
       </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Informations du responsable"}
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="prenom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeFirstName]}
+          />
+          <FormGroupInput
+            placeholder="NOM"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeLastName]}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail"
+            id="email"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Téléphone"
+            id="telephone"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+        </FormInputBox>
+      </Flex>
+
+      {!isCreate && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Informations données par le service"}
+            </Heading>
+          </FormGrayBox>
+          <FormInputBox>
+            <Input
+              label="Nom du service"
+              placeholder=""
+              value={service.etablissement}
+              forceActive
+              readOnly
+            />
+            <Input
+              label="SIRET"
+              placeholder=""
+              value={service.siret}
+              forceActive
+              readOnly
+            />
+            <Input
+              placeholder="Adresse"
+              value={service.adresse}
+              forceActive
+              readOnly
+            />
+            <Input
+              label="Code postal"
+              placeholder=""
+              value={service.code_postal}
+              forceActive
+              readOnly
+            />
+            <Input
+              label="Civilité"
+              placeholder=""
+              value={
+                service.genre
+                  ? GENDER_OPTIONS.find(({ value }) => value === service.genre)
+                      .label
+                  : ""
+              }
+              forceActive
+              readOnly
+            />
+            <Input
+              label="Prénom"
+              placeholder=""
+              value={service.prenom}
+              forceActive
+              readOnly
+            />
+            <Input
+              label="NOM"
+              placeholder=""
+              value={service.nom}
+              forceActive
+              readOnly
+            />
+            <Input
+              label="Adresse e-mail"
+              placeholder=""
+              value={service.email}
+              forceActive
+              readOnly
+            />
+            <Input
+              placeholder="Téléphone"
+              value={service.telephone}
+              forceActive
+              readOnly
+            />
+          </FormInputBox>
+        </Flex>
+      )}
 
       <Flex justifyContent="flex-end" p={1}>
         {handleCancel && (

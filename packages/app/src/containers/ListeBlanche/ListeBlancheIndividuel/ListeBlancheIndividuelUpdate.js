@@ -65,6 +65,7 @@ export function ListeBlancheIndividuelUpdate(props) {
               departementsToDelete: departementsToDeleteIds,
               email: values.email,
               id,
+              genre: values.genre,
               nom: values.nom,
               prenom: values.prenom,
               siret: values.siret,
