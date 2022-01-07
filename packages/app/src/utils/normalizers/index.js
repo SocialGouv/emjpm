@@ -1,15 +1,15 @@
+import initCap from "~/utils/std/initCap";
+
 export function normalizeFirstName(value) {
   if (!value) {
     value = "";
   }
-  return value
-    .toLocaleLowerCase()
-    .replace(/\b[a-z]/g, (match) => match.toUpperCase());
+  return initCap(value).trimStart();
 }
 
 export function normalizeLastName(value) {
   if (!value) {
     value = "";
   }
-  return value.toUpperCase();
+  return value.toUpperCase().trimStart();
 }

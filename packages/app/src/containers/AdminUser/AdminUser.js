@@ -8,7 +8,6 @@ import {
 } from "@emjpm/biz";
 
 import { Box } from "rebass";
-import { useParams } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
@@ -23,13 +22,10 @@ import { MandataireEditInformations } from "~/containers/MandataireEditInformati
 
 import { USER } from "./queries";
 
-function AdminUser() {
-  const { user_id } = useParams();
-  const userId = parseInt(user_id);
-
+function AdminUser({ userId }) {
   const { data, loading, error } = useQuery(USER, {
     variables: {
-      userId: userId,
+      userId,
     },
   });
 

@@ -11,10 +11,6 @@ const navigationLinks = [
     to: "/admin",
   },
   {
-    title: "Services",
-    to: "/admin/services",
-  },
-  {
     title: "Etablissements",
     to: "/admin/etablissements",
   },
