@@ -211,8 +211,9 @@ select_permissions:
   role: direction_territoriale
 - permission:
     columns:
-    - location_adresse
-    - location_code_postal
+    - adresse
+    - adresse_complement
+    - code_postal
     - competences
     - created_at
     - dispo_max
@@ -221,6 +222,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -235,7 +239,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - location_ville
+    - ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -283,8 +287,9 @@ select_permissions:
   role: service
 - permission:
     columns:
-    - location_adresse
-    - location_code_postal
+    - adresse
+    - adresse_complement
+    - code_postal
     - competences
     - created_at
     - dispo_max
@@ -293,6 +298,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -307,7 +315,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - location_ville
+    - ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress

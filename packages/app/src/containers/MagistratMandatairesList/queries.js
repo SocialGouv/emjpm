@@ -171,14 +171,12 @@ export const GET_MANDATAIRES = gql`
         service_id
         mandataire {
           telephone
-          ville
           adresse
           commentaires {
             id
             comment
             ti_id
           }
-          code_postal
           user {
             id
             nom
@@ -360,7 +358,6 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
         service_id
         mandataire {
           telephone
-          ville
           adresse
           suspend_activity
           commentaires {
@@ -368,7 +365,6 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
             comment
             ti_id
           }
-          code_postal
           user {
             id
             nom

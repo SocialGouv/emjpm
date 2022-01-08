@@ -20,7 +20,6 @@ export const GESTIONNAIRES = gql`
         id
         genre
         telephone
-        ville
         latitude
         longitude
         adresse
@@ -30,7 +29,6 @@ export const GESTIONNAIRES = gql`
           comment
           ti_id
         }
-        code_postal
         user {
           id
           nom

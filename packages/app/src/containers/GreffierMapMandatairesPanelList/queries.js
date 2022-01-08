@@ -34,7 +34,6 @@ export const MESURES_GESTIONNAIRE = gql`
           id
           genre
           telephone
-          ville
           latitude
           longitude
           adresse
@@ -43,7 +42,6 @@ export const MESURES_GESTIONNAIRE = gql`
             comment
             ti_id
           }
-          code_postal
           user {
             id
             nom
