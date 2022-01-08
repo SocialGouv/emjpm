@@ -33,7 +33,6 @@
 - "!include public_info_finance_annee.yaml"
 - "!include public_info_finance_type.yaml"
 - "!include public_lb_update_log.yaml"
-- "!include public_lb_users.yaml"
 - "!include public_lieu_vie_majeur.yaml"
 - "!include public_liste_blanche.yaml"
 - "!include public_logs_data.yaml"
