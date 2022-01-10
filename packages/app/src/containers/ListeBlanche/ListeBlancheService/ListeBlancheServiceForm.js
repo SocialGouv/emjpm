@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
-
 import { Box, Flex } from "rebass";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-
-import { useApolloClient } from "@apollo/client";
 
 import {
   FormGrayBox,

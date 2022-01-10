@@ -24,7 +24,7 @@ function MagistratMapMandatairesPanelList() {
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setCurrentMarker } = useContext(MapContext);
+  const { setCurrentMarker, currentMarker } = useContext(MapContext);
 
   const { data, error, loading } = useQuery(
     MESURES_GESTIONNAIRE,
@@ -55,9 +55,18 @@ function MagistratMapMandatairesPanelList() {
     });
   }
 
+  function generateAccessibilityProps(id) {
+    return {
+      role: "button",
+      "aria-label": "Voir le mondataire sur la carte",
+      "aria-pressed": id === currentMarker.id,
+    };
+  }
+
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const gestionnaires = formatMandatairesList(data.mandatairesList);
+
   return (
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>
@@ -69,6 +78,7 @@ function MagistratMapMandatairesPanelList() {
                 isMagistratMap
                 onClick={() => selectMarker(gestionnaire)}
                 gestionnaire={gestionnaire}
+                accessibilityProps={generateAccessibilityProps(gestionnaire.id)}
               />
             );
           })}

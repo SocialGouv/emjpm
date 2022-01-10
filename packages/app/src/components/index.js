@@ -36,3 +36,5 @@ export { default as NotFound } from "./NotFound";
 export { default as RequiredAsterisk } from "./RequiredAsterisk";
 
 export { default as SrOnly } from "./SrOnly";
+
+export { default as AccessibleSelect } from "./AccessibleSelect";
