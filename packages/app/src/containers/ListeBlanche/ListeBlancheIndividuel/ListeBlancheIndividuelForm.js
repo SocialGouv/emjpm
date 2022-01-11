@@ -362,6 +362,7 @@ export function ListeBlancheIndividuelForm(props) {
                   })
                 )
               }
+              required
             />
           </div>
           <div id="msg-departements-agrements">
