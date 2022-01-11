@@ -26,7 +26,7 @@ router.post("/service", async (req, res) => {
     table,
     user_id,
   });
-  res.json({ sucess: true });
+  res.json({ success: true });
 });
 
 router.post("/liste-blanche", async (req, res) => {
@@ -54,7 +54,7 @@ router.post("/liste-blanche", async (req, res) => {
     table,
     user_id,
   });
-  res.json({ sucess: true });
+  res.json({ success: true });
 });
 
 module.exports = router;

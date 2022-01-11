@@ -15,7 +15,7 @@ router.post("/all", async (req, res) => {
     ImpersonateLog.query().delete().where("created_at", "<", deleteFromDate),
   ]);
 
-  res.json({ sucess: true });
+  res.json({ success: true });
 });
 
 module.exports = router;
