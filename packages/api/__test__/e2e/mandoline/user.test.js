@@ -71,7 +71,7 @@ describe("POST /api/mandoline/user", () => {
         },
         email: "aurore.weitz@bas-rhin.gouv.fr",
         id: 15,
-        nom: "Weitz",
+        nom: "WEITZ",
         prenom: "Aurore",
         type: "direction",
       });
@@ -90,10 +90,10 @@ describe("POST /api/mandoline/user", () => {
       expect(response.body).toMatchObject({
         email: "maelys.dupuis@atn.fr",
         id: 25,
-        nom: "Dupuis",
+        nom: "DUPUIS",
         prenom: "Maelys ",
         service: {
-          adresse: "10 Rue de la Ville En Pierre 44000 Nantes",
+          adresse: "10 Rue de la Ville En Pierre",
           code_postal: "44000",
           departement: { code: "44", nom: "Loire-Atlantique" },
           departements: [{ code: "44", nom: "Loire-Atlantique" }],
@@ -102,7 +102,7 @@ describe("POST /api/mandoline/user", () => {
           etablissement: "ATN",
           mesures_en_attente: 3,
           mesures_en_cours: 1,
-          nom: "Aristile",
+          nom: "ARISTILE",
           org_adresse: "",
           org_code_postal: "",
           org_gestionnaire: false,

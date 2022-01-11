@@ -191,7 +191,9 @@ const signup = async (req, res) => {
         return;
     }
 
-    const code_postal = body.mandataire ? body.mandataire.code_postal : "";
+    const code_postal = body.mandataire
+      ? body.mandataire.location_code_postal
+      : "";
 
     if (!user.active) {
       inscriptionEmail(nom, prenom, email, code_postal, type);
