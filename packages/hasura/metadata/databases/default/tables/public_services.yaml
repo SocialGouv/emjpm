@@ -5,6 +5,15 @@ object_relationships:
 - name: editor
   using:
     foreign_key_constraint_on: editor_id
+- name: liste_blanche
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: liste_blanche
+        schema: public
 array_relationships:
 - name: departements
   using:
