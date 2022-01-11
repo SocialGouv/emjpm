@@ -28,6 +28,11 @@ import { GeocodeCities } from "~/components/Geocode";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
+import {
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+} from "~/containers/ListeBlanche/style";
+
 import { ListeBlancheIndividuelFormDepartementsSelection } from "./ListeBlancheIndividuelFormDepartementsSelection";
 import { ListeBlancheIndividuelFormDepartementsSelector } from "./ListeBlancheIndividuelFormDepartementsSelector";
 
@@ -375,6 +380,9 @@ export function ListeBlancheIndividuelForm(props) {
             <Heading size={4} mb={1}>
               {"Informations données par le mandataire individuel"}
             </Heading>
+            <Text mt={2} mb={1}>
+              {"Ces information sont modifables uniquement par le mandataire"}
+            </Text>
           </FormGrayBox>
           <FormInputBox>
             {!mandataire && <Text>Aucun utilisateur associé</Text>}
@@ -386,6 +394,8 @@ export function ListeBlancheIndividuelForm(props) {
                   value={mandataire.siret}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="Civilité"
@@ -399,6 +409,8 @@ export function ListeBlancheIndividuelForm(props) {
                   }
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="Prénom"
@@ -406,6 +418,8 @@ export function ListeBlancheIndividuelForm(props) {
                   value={mandataire.user.prenom}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="NOM"
@@ -413,6 +427,8 @@ export function ListeBlancheIndividuelForm(props) {
                   value={mandataire.user.nom}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="Adresse e-mail"
@@ -420,18 +436,24 @@ export function ListeBlancheIndividuelForm(props) {
                   value={mandataire.user.email}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   placeholder="Téléphone"
                   value={mandataire.telephone}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   placeholder="Adresse"
                   value={mandataire.adresse}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
               </>
             )}

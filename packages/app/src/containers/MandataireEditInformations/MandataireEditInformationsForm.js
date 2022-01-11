@@ -184,7 +184,7 @@ function MandataireEditInformationsForm(props) {
             <Field>
               <Geocode
                 label={
-                  "Localisation, cette adresse permettra au magistrats et greffiers de vous localiser sur la carte"
+                  "Localisation, cette adresse permettra au magistrat/greffier de vous visualiser sur la carte"
                 }
                 required
                 resource={geocodeResource}

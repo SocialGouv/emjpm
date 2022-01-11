@@ -33,6 +33,11 @@ import SelectAdresse from "~/containers/SelectAdresse";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
+import {
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+} from "~/containers/ListeBlanche/style";
+
 const findOptionsDepartements = (options, values) => {
   if (!values) {
     return [];
@@ -402,6 +407,9 @@ export function ListeBlancheServiceForm(props) {
             <Heading size={4} mb={1}>
               {"Informations données par le service"}
             </Heading>
+            <Text mt={2} mb={1}>
+              {"Ces information sont modifables uniquement par le service"}
+            </Text>
           </FormGrayBox>
           <FormInputBox>
             <Input
@@ -410,6 +418,8 @@ export function ListeBlancheServiceForm(props) {
               value={service.etablissement}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="SIRET"
@@ -417,12 +427,16 @@ export function ListeBlancheServiceForm(props) {
               value={service.siret}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               placeholder="Adresse"
               value={service.adresse}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="Code postal"
@@ -430,6 +444,8 @@ export function ListeBlancheServiceForm(props) {
               value={service.code_postal}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="Civilité"
@@ -442,6 +458,8 @@ export function ListeBlancheServiceForm(props) {
               }
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="Prénom"
@@ -449,6 +467,8 @@ export function ListeBlancheServiceForm(props) {
               value={service.prenom}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="NOM"
@@ -456,6 +476,8 @@ export function ListeBlancheServiceForm(props) {
               value={service.nom}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               label="Adresse e-mail"
@@ -463,12 +485,16 @@ export function ListeBlancheServiceForm(props) {
               value={service.email}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
             <Input
               placeholder="Téléphone"
               value={service.telephone}
               forceActive
               readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
             />
           </FormInputBox>
         </Flex>

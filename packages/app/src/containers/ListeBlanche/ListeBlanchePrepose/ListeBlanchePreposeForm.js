@@ -20,6 +20,11 @@ import { GENDER_OPTIONS } from "~/constants/user";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 import { useMemo } from "react";
 
+import {
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+} from "~/containers/ListeBlanche/style";
+
 const lbSchema = ({ isCreate }) =>
   yup.object().shape({
     email: yup.string().required(),
@@ -269,6 +274,9 @@ export function ListeBlanchePreposeForm(props) {
             <Heading size={4} mb={1}>
               {"Informations données par le préposé"}
             </Heading>
+            <Text mt={2} mb={1}>
+              {"Ces information sont modifables uniquement par le mandataire"}
+            </Text>
           </FormGrayBox>
           <FormInputBox>
             {!mandataire && <Text>Aucun utilisateur associé</Text>}
@@ -286,6 +294,8 @@ export function ListeBlanchePreposeForm(props) {
                   }
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="Prénom"
@@ -293,6 +303,8 @@ export function ListeBlanchePreposeForm(props) {
                   value={mandataire.user.prenom}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="NOM"
@@ -300,6 +312,8 @@ export function ListeBlanchePreposeForm(props) {
                   value={mandataire.user.nom}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   label="Adresse e-mail"
@@ -307,18 +321,24 @@ export function ListeBlanchePreposeForm(props) {
                   value={mandataire.user.email}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   placeholder="Téléphone"
                   value={mandataire.telephone}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
                 <Input
                   placeholder="Adresse"
                   value={mandataire.adresse}
                   forceActive
                   readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
                 />
               </>
             )}
