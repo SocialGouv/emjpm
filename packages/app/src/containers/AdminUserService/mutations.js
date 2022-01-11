@@ -10,6 +10,7 @@ export const EDIT_USER = gql`
     $adresse: String
     $code_postal: String
     $dispo_max: Int
+    $use_location_adresse: Boolean
     $suspend_activity: Boolean
     $suspend_activity_reason: String
     $email: String
@@ -54,6 +55,7 @@ export const EDIT_USER = gql`
         dispo_max: $dispo_max
         suspend_activity: $suspend_activity
         suspend_activity_reason: $suspend_activity_reason
+        use_location_adresse: $use_location_adresse
         email: $email
         nom: $nom
         prenom: $prenom

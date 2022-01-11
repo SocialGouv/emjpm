@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const EDIT_USER = gql`
   mutation EditUser(
     $dispo_max: Int!
+    $use_location_adresse: Boolean
     $suspend_activity: Boolean
     $suspend_activity_reason: String
     $telephone: String
@@ -38,6 +39,7 @@ export const EDIT_USER = gql`
     update_mandataires(
       _set: {
         dispo_max: $dispo_max
+        use_location_adresse: $use_location_adresse
         suspend_activity: $suspend_activity
         suspend_activity_reason: $suspend_activity_reason
         telephone: $telephone

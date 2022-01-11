@@ -256,8 +256,8 @@ select_permissions:
   role: greffier
 - permission:
     columns:
-    - location_adresse
-    - location_code_postal
+    - adresse
+    - code_postal
     - competences
     - created_at
     - dispo_max
@@ -268,9 +268,9 @@ select_permissions:
     - genre
     - id
     - latitude
-    - adresse
-    - code_postal
-    - ville
+    - location_adresse
+    - location_code_postal
+    - location_ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -286,7 +286,8 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - location_ville
+    - use_location_adresse
+    - ville
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -402,6 +403,7 @@ update_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     filter:
       id:

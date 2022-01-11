@@ -16,6 +16,7 @@ export const USER_SERVICE = gql`
           ville
           code_postal
           adresse
+          use_location_adresse
           location_ville
           location_code_postal
           location_adresse

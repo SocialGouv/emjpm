@@ -51,8 +51,9 @@ function SignupMandataireForm() {
         });
         const body = {
           mandataire: {
-            adresse: values.geocode.label,
-            code_postal: values.geocode.postcode,
+            location_adresse: values.geocode.label,
+            location_code_postal: values.geocode.postcode,
+            location_ville: values.geocode.city,
             departement_code: departement.id,
             dispo_max: parseInt(values.dispo_max),
             genre: user.genre,
@@ -61,7 +62,6 @@ function SignupMandataireForm() {
             siret: isIndividuel(user) ? values.siret : null,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
-            ville: values.geocode.city,
           },
           user: user,
         };

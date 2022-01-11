@@ -56,6 +56,7 @@ function AdminUserService({ userId, successLink, cancelLink }) {
         dispo_max: values.dispo_max,
         suspend_activity: values.suspendActivity,
         suspend_activity_reason: values.suspendActivityReason,
+        use_location_adresse: values.useLocationAdresse,
         email: values.email,
         etablissement: values.etablissement,
         latitude: values.geocode.latitude,

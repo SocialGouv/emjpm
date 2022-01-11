@@ -4,7 +4,7 @@ import useUser from "~/hooks/useUser";
 
 export function AdminServiceListeBlanche(props) {
   const { service } = props;
-  const { liste_blanche } = service;
+  const liste_blanche = service?.liste_blanche;
 
   const user = useUser();
 

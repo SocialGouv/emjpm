@@ -98,6 +98,7 @@ function AdminUserServiceForm(props) {
       antennes_mesures_max,
       suspendActivity: service.suspend_activity,
       suspendActivityReason: service.suspend_activity_reason,
+      useLocationAdresse: service.use_location_adresse,
     },
     onSubmit: handleSubmit,
     validationSchema: adminUserServiceSchema,
@@ -174,13 +175,27 @@ function AdminUserServiceForm(props) {
               <InlineError message={formik.errors.geocode} fieldId="geocode" />
             </div>
           </Field>
-          <FormGroupInput
-            placeholder="Adresse"
-            label="Adresse, cette adresse sera celle visible pour le magistrat / greffier"
-            id="adresse"
-            formik={formik}
-            validationSchema={adminUserServiceSchema}
-          />
+          <Box mb={2}>
+            <CheckBox
+              isChecked={formik.values.useLocationAdresse}
+              onChange={() => {
+                formik.setFieldValue(
+                  "useLocationAdresse",
+                  !formik.values.useLocationAdresse
+                );
+              }}
+              label="Afficher une adresse différente pour le magistrat/greffier"
+            />
+          </Box>
+          {formik.values.useLocationAdresse && (
+            <FormGroupInput
+              placeholder="Adresse"
+              label="Adresse, cette adresse sera celle visible pour le magistrat/greffier"
+              id="adresse"
+              formik={formik}
+              validationSchema={adminUserServiceSchema}
+            />
+          )}
           <FormGroupInput
             placeholder="Complément d'adresse"
             label="Complément d'adresse"

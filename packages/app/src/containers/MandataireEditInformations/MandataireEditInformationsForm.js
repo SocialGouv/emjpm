@@ -106,6 +106,7 @@ function MandataireEditInformationsForm(props) {
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
       initialSiret: liste_blanche?.siret || "",
+      useLocationAdresse: mandataire.use_location_adresse,
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -199,13 +200,27 @@ function MandataireEditInformationsForm(props) {
               </div>
             </Field>
 
-            <FormGroupInput
-              placeholder="Adresse"
-              label="Adresse, cette adresse sera celle visible pour le magistrat / greffier"
-              id="adresse"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
+            <Box mb={2}>
+              <CheckBox
+                isChecked={formik.values.useLocationAdresse}
+                onChange={() => {
+                  formik.setFieldValue(
+                    "useLocationAdresse",
+                    !formik.values.useLocationAdresse
+                  );
+                }}
+                label="Afficher une adresse différente pour le magistrat/greffier"
+              />
+            </Box>
+            {formik.values.useLocationAdresse && (
+              <FormGroupInput
+                placeholder="Adresse"
+                label="Adresse, cette adresse sera celle visible pour le magistrat/greffier"
+                id="adresse"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            )}
             <FormGroupInput
               placeholder="Complément d'adresse"
               label="Complément d'adresse"

@@ -1,0 +1,264 @@
+CREATE OR REPLACE VIEW "public"."view_lb_tis" AS 
+ SELECT concat('service-', ser.id) AS uid,
+    NULL::integer AS ti_id,
+    NULL::integer AS liste_blanche_id,
+    ser.id AS service_id,
+    NULL::integer AS mandataire_id,
+    'service'::text AS user_type,
+    ser.etablissement AS nom,
+    ser.siret,
+    ser.location_code_postal AS code_postal,
+    ser.location_ville AS ville,
+    CASE
+        WHEN (ser.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, ser.adresse, ser.adresse_complement)
+        ELSE concat_ws(' '::text, ser.location_adresse, ser.adresse_complement)
+    END AS adress,
+    ser.email,
+    dep.id AS departement_code,
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ser.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_service_mesures_awaiting(ser.*))::integer AS mesures_awaiting,
+    (count_service_mesures_in_progress(ser.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ((ser.dispo_max - (count_service_mesures_awaiting(ser.*))::integer) - (count_service_mesures_in_progress(ser.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    false AS prefer,
+    true AS habilitation,
+    (
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ((ser.dispo_max - (count_service_mesures_awaiting(ser.*))::integer) - (count_service_mesures_in_progress(ser.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM (((services ser
+     JOIN service_departements sdep ON ((sdep.service_id = ser.id)))
+     JOIN departements dep ON (((dep.id)::text = sdep.departement_code)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (ser.location_code_postal)::text)))
+UNION
+ SELECT concat('service-', ser.id) AS uid,
+    sti.ti_id,
+    NULL::integer AS liste_blanche_id,
+    ser.id AS service_id,
+    NULL::integer AS mandataire_id,
+    'service'::text AS user_type,
+    ser.etablissement AS nom,
+    ser.siret,
+    ser.location_code_postal AS code_postal,
+    ser.location_ville AS ville,
+    CASE
+      WHEN (ser.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, ser.adresse, ser.adresse_complement)
+      ELSE concat_ws(' '::text, ser.location_adresse, ser.adresse_complement)
+    END AS adress,
+    ser.email,
+    NULL::character varying(255) AS departement_code,
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ser.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_service_mesures_awaiting(ser.*))::integer AS mesures_awaiting,
+    (count_service_mesures_in_progress(ser.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ((ser.dispo_max - (count_service_mesures_awaiting(ser.*))::integer) - (count_service_mesures_in_progress(ser.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    true AS prefer,
+    true AS habilitation,
+    (
+        CASE
+            WHEN (ser.suspend_activity IS NOT TRUE) THEN ((ser.dispo_max - (count_service_mesures_awaiting(ser.*))::integer) - (count_service_mesures_in_progress(ser.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM ((services ser
+     JOIN service_tis sti ON ((sti.service_id = ser.id)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (ser.location_code_postal)::text)))
+UNION
+ SELECT concat('individuel-', man.id) AS uid,
+    NULL::integer AS ti_id,
+    man.liste_blanche_id,
+    NULL::integer AS service_id,
+    man.id AS mandataire_id,
+    'individuel'::text AS user_type,
+    concat(u.nom, ' ', u.prenom) AS nom,
+    (man.siret)::text AS siret,
+    (man.location_code_postal)::text AS code_postal,
+    (man.location_ville)::text AS ville,
+    CASE
+        WHEN (man.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, man.adresse, man.adresse_complement)
+        ELSE concat_ws(' '::text, man.location_adresse, man.adresse_complement)
+    END AS adress,
+    (u.email)::text AS email,
+    dep.id AS departement_code,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN man.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_mandataire_mesures_en_attente(man.*))::integer AS mesures_awaiting,
+    (count_mandataire_mesures_en_cours(man.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    false AS prefer,
+        CASE
+            WHEN (man.liste_blanche_id IS NOT NULL) THEN true
+            ELSE false
+        END AS habilitation,
+    (
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM ((((mandataires man
+     JOIN users u ON ((u.id = man.user_id)))
+     LEFT JOIN mandataire_individuel_departements lbd ON ((man.liste_blanche_id = lbd.liste_blanche_id)))
+     LEFT JOIN departements dep ON (((lbd.departement_code)::text = (dep.id)::text)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (man.location_code_postal)::text)))
+  WHERE ((u.type)::text = 'individuel'::text)
+UNION
+ SELECT concat('individuel-', man.id) AS uid,
+    mti.ti_id,
+    man.liste_blanche_id,
+    NULL::integer AS service_id,
+    man.id AS mandataire_id,
+    'individuel'::text AS user_type,
+    concat(u.nom, ' ', u.prenom) AS nom,
+    (man.siret)::text AS siret,
+    (man.location_code_postal)::text AS code_postal,
+    (man.location_ville)::text AS ville,
+    CASE
+        WHEN (man.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, man.adresse, man.adresse_complement)
+        ELSE concat_ws(' '::text, man.location_adresse, man.adresse_complement)
+    END AS adress,
+    (u.email)::text AS email,
+    NULL::character varying(255) AS departement_code,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN man.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_mandataire_mesures_en_attente(man.*))::integer AS mesures_awaiting,
+    (count_mandataire_mesures_en_cours(man.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    true AS prefer,
+        CASE
+            WHEN (man.liste_blanche_id IS NOT NULL) THEN true
+            ELSE false
+        END AS habilitation,
+    (
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM (((mandataires man
+     JOIN users u ON ((u.id = man.user_id)))
+     JOIN mandataire_tis mti ON ((mti.mandataire_id = man.id)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (man.location_code_postal)::text)))
+  WHERE ((u.type)::text = 'individuel'::text)
+UNION
+ SELECT concat('prepose-', man.id) AS uid,
+    NULL::integer AS ti_id,
+    man.liste_blanche_id,
+    NULL::integer AS service_id,
+    man.id AS mandataire_id,
+    'prepose'::text AS user_type,
+    concat(u.nom, ' ', u.prenom) AS nom,
+    (man.siret)::text AS siret,
+    (man.location_code_postal)::text AS code_postal,
+    (man.location_ville)::text AS ville,
+    CASE
+        WHEN (man.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, man.adresse, man.adresse_complement)
+        ELSE concat_ws(' '::text, man.location_adresse, man.adresse_complement)
+    END AS adress,
+    (u.email)::text AS email,
+    dep.id AS departement_code,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN man.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_mandataire_mesures_en_attente(man.*))::integer AS mesures_awaiting,
+    (count_mandataire_mesures_en_cours(man.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    false AS prefer,
+        CASE
+            WHEN (man.liste_blanche_id IS NOT NULL) THEN true
+            ELSE false
+        END AS habilitation,
+    (
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM (((((mandataires man
+     JOIN users u ON ((u.id = man.user_id)))
+     LEFT JOIN mandataire_prepose_etablissements lbe ON ((man.liste_blanche_id = lbe.liste_blanche_id)))
+     LEFT JOIN etablissements e ON ((e.id = lbe.etablissement_id)))
+     LEFT JOIN departements dep ON (((e.departement_code)::text = (dep.id)::text)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (man.location_code_postal)::text)))
+  WHERE ((u.type)::text = 'prepose'::text)
+UNION
+ SELECT concat('prepose-', man.id) AS uid,
+    mti.ti_id,
+    man.liste_blanche_id,
+    NULL::integer AS service_id,
+    man.id AS mandataire_id,
+    'prepose'::text AS user_type,
+    concat(u.nom, ' ', u.prenom) AS nom,
+    (man.siret)::text AS siret,
+    (man.location_code_postal)::text AS code_postal,
+    (man.location_ville)::text AS ville,
+    CASE
+        WHEN (man.use_location_adresse IS NOT TRUE) THEN concat_ws(' '::text, man.adresse, man.adresse_complement)
+        ELSE concat_ws(' '::text, man.location_adresse, man.adresse_complement)
+    END AS adress,
+    (u.email)::text AS email,
+    NULL::character varying(255) AS departement_code,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN man.dispo_max
+            ELSE 0
+        END AS mesures_max,
+    (count_mandataire_mesures_en_attente(man.*))::integer AS mesures_awaiting,
+    (count_mandataire_mesures_en_cours(man.*))::integer AS mesures_in_progress,
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END AS remaining_capacity,
+    true AS prefer,
+        CASE
+            WHEN (man.liste_blanche_id IS NOT NULL) THEN true
+            ELSE false
+        END AS habilitation,
+    (
+        CASE
+            WHEN (man.suspend_activity IS NOT TRUE) THEN ((man.dispo_max - (count_mandataire_mesures_en_attente(man.*))::integer) - (count_mandataire_mesures_en_cours(man.*))::integer)
+            ELSE 0
+        END > 0) AS available,
+    gcp.latitude,
+    gcp.longitude,
+    NULL::double precision AS distance
+   FROM (((mandataires man
+     JOIN users u ON ((u.id = man.user_id)))
+     JOIN mandataire_tis mti ON ((mti.mandataire_id = man.id)))
+     LEFT JOIN geolocalisation_code_postal gcp ON (((gcp.code_postal)::text = (man.location_code_postal)::text)))
+  WHERE ((u.type)::text = 'prepose'::text);

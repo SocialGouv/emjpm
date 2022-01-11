@@ -26,6 +26,7 @@ export const MANDATAIRE = gql`
         suspend_activity_reason
         mesures_en_cours
         siret
+        use_location_adresse
         liste_blanche {
           id
           mandataire_individuel_departements {

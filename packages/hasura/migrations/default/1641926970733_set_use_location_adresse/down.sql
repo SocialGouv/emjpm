@@ -1,0 +1,4 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE mandataires SET use_location_adresse = TRUE WHERE NULLIF(adresse,'') IS NULL;
+-- UPDATE services SET use_location_adresse = TRUE WHERE NULLIF(adresse,'') IS NULL;
