@@ -15,10 +15,10 @@ import { adminServiceSchema } from "~/validation-schemas/adminServiceSchema";
 import {
   Button,
   Heading,
-  Select,
   Text,
   InlineError,
   Field,
+  AccessibleSelect,
 } from "~/components";
 import { GeocodeCities } from "~/components/Geocode";
 
@@ -236,7 +236,7 @@ export function ListeBlancheServiceForm(props) {
             </Box>
           </Flex>
           <Box>
-            <Select
+            <AccessibleSelect
               id="departements"
               validationSchema={validationSchema}
               formik={formik}
