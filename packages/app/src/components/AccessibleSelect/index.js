@@ -1,58 +1,13 @@
 import React from "react";
-import Select, { components } from "react-select";
-import styled from "@emotion/styled";
+import Select from "react-select";
 
-import { ReactComponent as MultiValueClearSvg } from "./clearIndicator.svg";
-import { ReactComponent as ClearIndicatorSvg } from "./multiValueClear.svg";
+import { RequiredAsterisk } from "~/components";
+import { getStyle } from "./style";
+import Label from "./Label";
+import MultiValueRemove from "./MultiValueRemove";
+import ClearIndicator from "./ClearIndicator";
 
-const StyledClearIndicatorSvg = styled(ClearIndicatorSvg)`
-  &:hover {
-    fill: hsl(0, 0%, 60%);
-  }
-`;
-
-const CustomClearText = () => (
-  <button
-    aria-label="Supprimer tous les éléments"
-    style={{
-      background: "none",
-      color: "inherit",
-      border: "none",
-      padding: 0,
-      font: "inherit",
-      cursor: "pointer",
-      outline: "inherit",
-      color: "hsl(0, 0%, 80%)",
-    }}
-  >
-    <StyledClearIndicatorSvg
-      role="img"
-      aria-label="Supprimer tous les éléments"
-      width="20"
-      height="20"
-      fill="hsl(0, 0%, 80%)"
-    />
-  </button>
-);
-
-const ClearIndicator = (props) => {
-  const {
-    children = <CustomClearText />,
-    getStyles,
-    innerProps: { ref, ...restInnerProps },
-  } = props;
-  return (
-    <div
-      {...restInnerProps}
-      ref={ref}
-      style={getStyles("clearIndicator", props)}
-    >
-      <div style={{ padding: "0px 5px" }}>{children}</div>
-    </div>
-  );
-};
-
-export default function AccessibleSelect(props) {
+export default function AccessibleSelect({ label, ...props }) {
   const ClearIndicatorStyles = (base, state) => ({
     ...base,
     cursor: "pointer",
@@ -64,36 +19,36 @@ export default function AccessibleSelect(props) {
     cursor: "pointer",
   });
 
-  const MultiValueRemove = (props) => {
-    return (
-      <components.MultiValueRemove
-        {...props}
-        innerProps={{
-          ...props.innerProps,
-          "aria-label": `Supprimer ${props.data.label}`,
-          "aria-pressed": false,
-        }}
-        style={{ cursor: "pointer" }}
-      >
-        <MultiValueClearSvg
-          aria-label={`Supprimer ${props.data.label}`}
-          role="img"
-          width="14"
-        />
-      </components.MultiValueRemove>
-    );
-  };
+  if (!label && props.placeholder) {
+    label = props.placeholder;
+  }
   return (
-    <div>
+    <>
+      {label && (
+        <Label
+          size={props.size}
+          aria-describedby={props.id}
+          htmlFor={props.id}
+          isActive={props.isActive}
+          required={props.required}
+          aria-required={props.required}
+          readOnly={props.readOnly}
+        >
+          {label}
+          {props.required && !props.readOnly && <RequiredAsterisk />}
+        </Label>
+      )}
       <Select
         options={props?.options || []}
         components={{ MultiValueRemove, ClearIndicator }}
         styles={{
           clearIndicator: ClearIndicatorStyles,
           multiValueRemove: multiValueRemoveStyle,
+          ...getStyle(props),
         }}
+        menuPortalTarget={document.body}
         {...props}
       />
-    </div>
+    </>
   );
 }
