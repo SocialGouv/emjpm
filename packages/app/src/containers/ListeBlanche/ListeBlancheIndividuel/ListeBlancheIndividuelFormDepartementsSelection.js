@@ -60,7 +60,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
                   cursor: "pointer",
                 }}
               >
-                <button aria-label={`Supprimer ${label}`}>
+                <button type="button" aria-label={`Supprimer ${label}`}>
                   <XCircle
                     size={24}
                     onClick={(e) => {
