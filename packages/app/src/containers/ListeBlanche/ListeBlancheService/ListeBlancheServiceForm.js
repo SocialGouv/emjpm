@@ -23,6 +23,8 @@ import {
   Field,
   Input,
 } from "~/components";
+
+import { Link } from "~/containers/Commons";
 import { GeocodeCities } from "~/components/Geocode";
 
 import { createDepartementOptions, departementList } from "~/utils/geodata";
@@ -37,6 +39,7 @@ import {
   readOnlyContainerStyle,
   readOnlyInputStyle,
 } from "~/containers/ListeBlanche/style";
+import useUser from "../../../hooks/useUser";
 
 const findOptionsDepartements = (options, values) => {
   if (!values) {
@@ -175,6 +178,9 @@ export function ListeBlancheServiceForm(props) {
     setFieldValue("code_postal", postcode || "");
     setFieldValue("ville", city || "");
   }, [selectedAdresseData, setFieldValue]);
+
+  const user = useUser();
+  const isAdmin = user.type === "admin";
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
@@ -410,6 +416,23 @@ export function ListeBlancheServiceForm(props) {
             <Text mt={2} mb={1}>
               {"Ces information sont modifables uniquement par le service"}
             </Text>
+            {isAdmin &&
+              service &&
+              service.service_members.map(({ user }) => {
+                return (
+                  <Link to={`/admin/users/${user.id}`}>
+                    <Button style={{ marginBottom: "10px" }}>
+                      <span role="img" aria-labelledby="user-profile-link">
+                        🧑
+                      </span>
+                      <span id="user-profile-link">
+                        {" "}
+                        Profil de l'utilisateur {user.prenom} {user.nom}
+                      </span>
+                    </Button>
+                  </Link>
+                );
+              })}
           </FormGrayBox>
           <FormInputBox>
             <Input

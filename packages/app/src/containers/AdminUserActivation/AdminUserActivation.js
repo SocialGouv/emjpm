@@ -8,6 +8,7 @@ import { Link } from "~/containers/Commons";
 import { Button, Heading, Text } from "~/components";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
+import { AdminServiceListeBlanche } from "./AdminServiceListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LISTE_BLANCHE, USER } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
@@ -82,28 +83,35 @@ function AdminUserActivation(props) {
 
   const { users_by_pk } = data;
 
-  const { active, type, mandataire } = users_by_pk;
+  const {
+    active,
+    type,
+    mandataire,
+    service_members: [{ service }],
+  } = users_by_pk;
 
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
 
   return (
     <>
-      {isMandataire({ type }) && (
-        <Flex>
-          <FormGrayBox>
-            <Heading size={4} mb={1}>
-              {"Liste blanche"}
-            </Heading>
-          </FormGrayBox>
-          <FormInputBox>
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Liste blanche"}
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          {mandataire ? (
             <AdminMandataireListeBlanche
               mandataire={mandataire}
               liste_blanche={liste_blanche}
             />
-          </FormInputBox>
-        </Flex>
-      )}
+          ) : (
+            <AdminServiceListeBlanche service={service} />
+          )}
+        </FormInputBox>
+      </Flex>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>

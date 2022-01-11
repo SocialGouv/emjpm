@@ -1,4 +1,3 @@
-import { isAdmin } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 
@@ -123,6 +122,7 @@ export function ListeBlanchePreposeForm(props) {
   const user = useUser();
 
   const mandataire = data?.mandataire;
+  const isAdmin = user.type === "admin";
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
@@ -277,6 +277,16 @@ export function ListeBlanchePreposeForm(props) {
             <Text mt={2} mb={1}>
               {"Ces information sont modifables uniquement par le mandataire"}
             </Text>
+            {isAdmin && mandataire && (
+              <Link to={`/admin/users/${mandataire.user.id}`}>
+                <Button>
+                  <span role="img" aria-labelledby="user-profile-link">
+                    🧑
+                  </span>
+                  <span id="user-profile-link"> Profil de l'utilisateur</span>
+                </Button>
+              </Link>
+            )}
           </FormGrayBox>
           <FormInputBox>
             {!mandataire && <Text>Aucun utilisateur associé</Text>}
@@ -347,7 +357,7 @@ export function ListeBlanchePreposeForm(props) {
       )}
 
       <Flex justifyContent="flex-end" mt={4}>
-        {editMode && isAdmin(user) && (
+        {editMode && isAdmin && (
           <Box>
             <Link to={`/admin/liste-blanche/${data.id}/delete`}>
               <Button mr="2" bg="red">

@@ -39,6 +39,17 @@ export const USER = gql`
           siret
         }
       }
+      service_members {
+        service {
+          liste_blanche {
+            id
+            nom
+            prenom
+            email
+            siret
+          }
+        }
+      }
     }
   }
 `;

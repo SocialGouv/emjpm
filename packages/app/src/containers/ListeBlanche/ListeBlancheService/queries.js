@@ -19,6 +19,13 @@ export const SERVICE = gql`
             id
           }
         }
+        service_members {
+          user {
+            id
+            nom
+            prenom
+          }
+        }
         id
         etablissement
         siret
