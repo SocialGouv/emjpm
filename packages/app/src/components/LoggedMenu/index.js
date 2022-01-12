@@ -64,7 +64,8 @@ function LoggedMenu(props) {
             minWidth: "0px",
             padding: "10px",
           }}
-          aria-label="Mon compte"
+          title={`${email}: Votre compte`}
+          aria-label={`${email}: Votre compte`}
         >
           <MenuButton className="UserMenu-AriaMenuButton-trigger">
             <Flex>

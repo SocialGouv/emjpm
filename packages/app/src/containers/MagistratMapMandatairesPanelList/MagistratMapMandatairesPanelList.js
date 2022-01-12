@@ -15,6 +15,11 @@ import { MagistratMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
+const genreRef = {
+  F: "Madame",
+  M: "Monsieur",
+};
+
 function MagistratMapMandatairesPanelList() {
   const {
     magistrat: {
@@ -55,14 +60,6 @@ function MagistratMapMandatairesPanelList() {
     });
   }
 
-  function generateAccessibilityProps(id) {
-    return {
-      role: "button",
-      "aria-label": "Voir le mondataire sur la carte",
-      "aria-pressed": id === currentMarker.id,
-    };
-  }
-
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
   const gestionnaires = formatMandatairesList(data.mandatairesList);
@@ -78,7 +75,18 @@ function MagistratMapMandatairesPanelList() {
                 isMagistratMap
                 onClick={() => selectMarker(gestionnaire)}
                 gestionnaire={gestionnaire}
-                accessibilityProps={generateAccessibilityProps(gestionnaire.id)}
+                accessibilityProps={{
+                  role: "button",
+                  "aria-label":
+                    gestionnaire?.genre &&
+                    gestionnaire?.nom &&
+                    gestionnaire?.prenom
+                      ? `${genreRef[gestionnaire.genre]} ${gestionnaire.nom} ${
+                          gestionnaire.prenom
+                        }`
+                      : "Voir le mondataire sur la carte",
+                  "aria-pressed": gestionnaire.id === currentMarker.id,
+                }}
               />
             );
           })}
