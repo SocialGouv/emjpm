@@ -8,7 +8,7 @@ export default function RadioGroup(props) {
   const { options, onValueChange, value, renderRadioLabel } = props;
 
   return (
-    <Box width="100%">
+    <Box width="100%" role="radiogroup">
       <Flex alignItems="center" flexWrap="wrap">
         {options.map((option) => {
           return (

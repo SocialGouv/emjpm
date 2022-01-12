@@ -1,11 +1,10 @@
 import { isAdmin, isDirectionNationale } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
-
-import { Box, Flex, Text } from "rebass";
+import { Box } from "rebass";
 
 import { getRegionDepartementList } from "~/utils/geodata";
 import useUser from "~/hooks/useUser";
-import { RadioGroup } from "~/components";
+import { AcessibleRadioGroup } from "~/components";
 
 function canModifyAgrement(user, departementCode) {
   if (isAdmin(user)) {
@@ -42,45 +41,40 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
 
   return (
     <>
-      <RadioGroup
-        value={null}
+      <AcessibleRadioGroup
+        RadioGroupAriaLabel="Liste des agréments"
+        options={options}
         onValueChange={(value) => {
           setDepartementFinanceur(value);
         }}
-        options={options}
-        renderRadioLabel={(item) => {
-          const { label, id } = item;
-          return (
-            <Flex
-              sx={{
-                flexBasis: "240px",
-                flexDirection: "row",
-                justifyContent: "space-between",
-                width: "240px",
-              }}
-            >
-              <Text lineHeight="20px">{label}</Text>
-              {(!editMode || canModifyAgrement(user, id)) && (
-                <Box
-                  sx={{
-                    ":hover": {
-                      color: "#aa2d2d",
-                    },
-                    color: "#777",
-                    cursor: "pointer",
-                  }}
-                >
+        renderBesideRadio={(item) => {
+          const { label, value } = item;
+          if (!editMode || canModifyAgrement(user, value)) {
+            return (
+              <Box
+                sx={{
+                  ":hover": {
+                    color: "#aa2d2d",
+                  },
+                  color: "#777",
+                  cursor: "pointer",
+                }}
+              >
+                <button type="button" aria-label={`Supprimer ${label}`}>
                   <XCircle
                     size={24}
                     onClick={(e) => {
                       e.stopPropagation();
-                      onRemove(id);
+                      onRemove(value);
                     }}
+                    role="img"
+                    aria-hidden="true"
                   />
-                </Box>
-              )}
-            </Flex>
-          );
+                </button>
+              </Box>
+            );
+          }
+          return null;
         }}
       />
     </>

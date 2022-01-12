@@ -58,6 +58,7 @@ export default function MandataireListItem(props) {
     isGreffierMap,
     onClick,
     departementFilter,
+    accessibilityProps,
   } = props;
 
   const isService = type === "service";
@@ -84,7 +85,7 @@ export default function MandataireListItem(props) {
 
   return (
     <>
-      <Card sx={cardStyle} width="100%">
+      <Card sx={cardStyle} width="100%" {...accessibilityProps}>
         <Box sx={decorationStyle(type)} />
         <Flex
           onClick={(e) => {
@@ -253,4 +254,9 @@ MandataireListItem.propTypes = {
   isMagistratMap: PropTypes.bool,
   isGreffierMap: PropTypes.bool,
   onClick: PropTypes.func,
+  accessibilityProps: PropTypes.shape({
+    role: PropTypes.string.isRequired,
+    "aria-label": PropTypes.string.isRequired,
+    "aria-pressed": PropTypes.string.isRequired,
+  }),
 };

@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
-
 import { Box, Flex } from "rebass";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-
-import { useApolloClient } from "@apollo/client";
 
 import {
   FormGrayBox,
@@ -17,10 +15,10 @@ import { adminServiceSchema } from "~/validation-schemas/adminServiceSchema";
 import {
   Button,
   Heading,
-  Select,
   Text,
   InlineError,
   Field,
+  AccessibleSelect,
 } from "~/components";
 import { GeocodeCities } from "~/components/Geocode";
 
@@ -238,7 +236,7 @@ export function ListeBlancheServiceForm(props) {
             </Box>
           </Flex>
           <Box>
-            <Select
+            <AccessibleSelect
               id="departements"
               validationSchema={validationSchema}
               formik={formik}
