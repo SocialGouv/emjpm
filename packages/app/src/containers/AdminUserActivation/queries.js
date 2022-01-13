@@ -43,10 +43,7 @@ export const USER = gql`
         service {
           liste_blanche {
             id
-            nom
-            prenom
-            email
-            siret
+            etablissement
           }
         }
       }

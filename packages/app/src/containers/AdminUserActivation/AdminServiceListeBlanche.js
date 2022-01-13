@@ -12,11 +12,7 @@ export function AdminServiceListeBlanche(props) {
     <>
       {liste_blanche ? (
         <Link to={`/${user.type}/liste-blanche/${liste_blanche.id}`}>
-          <Text fontWeight="bold">{`${liste_blanche.prenom} ${liste_blanche.nom}`}</Text>
-          <Text>{`${liste_blanche.email}`}</Text>
-          {liste_blanche.siret && (
-            <Text>{`SIRET: ${liste_blanche.siret}`}</Text>
-          )}
+          <Text fontWeight="bold">{liste_blanche.etablissement}</Text>
         </Link>
       ) : (
         <Box>
