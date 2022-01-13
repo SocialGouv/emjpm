@@ -51,12 +51,7 @@ export const UPDATE_SERVICE = gql`
         email
         competences
         created_at
-        dispo_max
         etablissement
-        latitude
-        longitude
-        mesures_awaiting
-        mesures_in_progress
         nom
         prenom
         siret

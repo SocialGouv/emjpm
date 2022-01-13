@@ -88,7 +88,7 @@ export function ListeBlancheServiceForm(props) {
       ville: lbService ? lbService.ville : "",
       org_adresse: lbService ? lbService.org_adresse : "",
       org_code_postal: lbService ? lbService.org_code_postal : "",
-      org_gestionnaire: lbService ? lbService.org_gestionnaire : "",
+      org_gestionnaire: lbService ? !!lbService.org_gestionnaire : false,
       org_nom: lbService ? lbService.org_nom : "",
       org_ville: lbService ? lbService.org_ville : "",
       siret: lbService ? lbService.siret || "" : "",

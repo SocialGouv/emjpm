@@ -40,7 +40,7 @@ export function ListeBlancheServiceCreate(props) {
           ville: values.ville,
           org_adresse: values.org_adresse,
           org_code_postal: values.org_code_postal,
-          org_gestionnaire: values.org_gestionnaire,
+          org_gestionnaire: !!values.org_gestionnaire,
           org_nom: values.org_nom,
           org_ville: values.org_ville,
           siret: values.siret,
