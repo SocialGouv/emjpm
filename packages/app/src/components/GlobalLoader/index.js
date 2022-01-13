@@ -46,10 +46,13 @@ export default function GlobalLoader(props) {
       if (errorsSet.has(error.message)) {
         return;
       }
+      if (error?.message && error.message.includes("Unexpected")) {
+        error.message = "Une erreur est survenue";
+      }
       errorsSet.add(error.message);
       console.error(error);
       captureException(error);
-      toast.error(error.message);
+      toast(error.message, { type: "error", delay: 300, autoClose: 7000 });
       dispatch({ type: "hasError", payload: { hasError: errorsSet.size > 0 } });
     },
     [dispatch, errorsSet]
