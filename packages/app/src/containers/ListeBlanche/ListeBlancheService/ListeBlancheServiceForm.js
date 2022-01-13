@@ -414,7 +414,7 @@ export function ListeBlancheServiceForm(props) {
               {"Informations données par le service"}
             </Heading>
             <Text mt={2} mb={1}>
-              {"Ces information sont modifables uniquement par le service"}
+              {"Ces informations sont modifables uniquement par le service"}
             </Text>
             {isAdmin &&
               service &&

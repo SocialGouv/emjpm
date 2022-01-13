@@ -163,7 +163,7 @@ function ServiceInformations() {
           </Box>
           <Box ml={1}>
             <LinkButton to="/services/edit-informations">
-              Modifier les informations du service
+              Modifier les informations
             </LinkButton>
           </Box>
         </Flex>

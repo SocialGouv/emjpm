@@ -383,7 +383,7 @@ export function ListeBlancheIndividuelForm(props) {
               {"Informations données par le mandataire individuel"}
             </Heading>
             <Text mt={2} mb={1}>
-              {"Ces information sont modifables uniquement par le mandataire"}
+              {"Ces informations sont modifables uniquement par le mandataire"}
             </Text>
             {isAdmin && mandataire && (
               <Link to={`/admin/users/${mandataire.user.id}`}>

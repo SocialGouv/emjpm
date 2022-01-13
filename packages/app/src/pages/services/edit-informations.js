@@ -9,7 +9,7 @@ export default function EditInformations() {
   return (
     <LayoutServices>
       <BoxWrapper mt={3}>
-        <HeadingTitle mx="1">Editer les informations</HeadingTitle>
+        <HeadingTitle mx="1">Modifier les informations</HeadingTitle>
         <AdminUserService
           mt="3"
           userId={userId}
