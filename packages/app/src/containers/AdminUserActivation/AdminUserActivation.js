@@ -87,32 +87,28 @@ function AdminUserActivation(props) {
 
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
-
   return (
     <>
-      {type === "mandataire" ||
-        (type === "service" && (
-          <Flex>
-            <FormGrayBox>
-              <Heading size={4} mb={1}>
-                {"Liste blanche"}
-              </Heading>
-            </FormGrayBox>
-            <FormInputBox>
-              {type === "mandataire" && (
-                <AdminMandataireListeBlanche
-                  mandataire={mandataire}
-                  liste_blanche={liste_blanche}
-                />
-              )}
-              {type === "service" && (
-                <AdminServiceListeBlanche
-                  service={service_members[0]?.service}
-                />
-              )}
-            </FormInputBox>
-          </Flex>
-        ))}
+      {(type === "individuel" || type === "prepose" || type === "service") && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Liste blanche"}
+            </Heading>
+          </FormGrayBox>
+          <FormInputBox>
+            {(type === "individuel" || type === "prepose") && (
+              <AdminMandataireListeBlanche
+                mandataire={mandataire}
+                liste_blanche={liste_blanche}
+              />
+            )}
+            {type === "service" && (
+              <AdminServiceListeBlanche service={service_members[0]?.service} />
+            )}
+          </FormInputBox>
+        </Flex>
+      )}
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
