@@ -71,6 +71,7 @@ export const LISTE_BLANCHE_BY_PK = gql`
       adresse
       adresse_complement
       code_postal
+      telephone
       ville
       type
       mandataire {

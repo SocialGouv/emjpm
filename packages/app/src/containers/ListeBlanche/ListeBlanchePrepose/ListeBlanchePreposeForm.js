@@ -87,6 +87,8 @@ export function ListeBlanchePreposeForm(props) {
     etablissements,
     prenom: data.prenom || "",
     nom: data.nom || "",
+    genre: data.genre,
+    telephone: data.telephone,
   };
 
   const formik = useFormik({

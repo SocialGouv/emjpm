@@ -2,7 +2,7 @@ import { useMutation } from "@apollo/client";
 
 import { Card } from "rebass";
 
-import { LISTE_BLANCHE } from "../queries";
+import { LISTE_BLANCHE_BY_PK } from "../queries";
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
 import {
   UPDATE_DEPARTEMENT_FINANCEUR,
@@ -15,13 +15,13 @@ export function ListeBlancheIndividuelUpdate(props) {
 
   const [updateListeBlanche, { loading: loading1, error: error1 }] =
     useMutation(UPDATE_LISTE_BLANCHE, {
-      refetchQueries: [{ query: LISTE_BLANCHE, variables: { id } }],
+      refetchQueries: [{ query: LISTE_BLANCHE_BY_PK, variables: { id } }],
     });
   useQueryReady(loading1, error1);
 
   const [setDepartementFinanceur, { loading: loading2, error: error2 }] =
     useMutation(UPDATE_DEPARTEMENT_FINANCEUR, {
-      refetchQueries: [{ query: LISTE_BLANCHE, variables: { id } }],
+      refetchQueries: [{ query: LISTE_BLANCHE_BY_PK, variables: { id } }],
     });
   useQueryReady(loading2, error2);
 
