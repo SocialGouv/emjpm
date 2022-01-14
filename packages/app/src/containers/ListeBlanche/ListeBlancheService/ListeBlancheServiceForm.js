@@ -203,7 +203,7 @@ export function ListeBlancheServiceForm(props) {
         );
       }
     })();
-  }, [formik.values.ville, setFieldValue]);
+  }, [formik.values.ville, setFieldValue, apolloClient]);
 
   const user = useUser();
   const isAdmin = user.type === "admin";

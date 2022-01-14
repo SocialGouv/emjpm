@@ -46,8 +46,6 @@ function MagistratMesureMandataire(props) {
     adresse,
     useLocationAdresse,
     locationAdresse,
-    locationCodePostal,
-    locationVille,
     email,
     lastLogin,
     lastLoginIsCritical,
