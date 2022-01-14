@@ -86,6 +86,9 @@ function AdminUserServiceForm(props) {
       adresse: service.adresse || "",
       code_postal: service.code_postal || "",
       ville: service.ville || "",
+      location_adresse: service.location_adresse || "",
+      location_code_postal: service.location_code_postal || "",
+      location_ville: service.location_ville || "",
       geocode: geocodeInitValue,
       information: service.information || "",
       etablissement: service.etablissement || "",
@@ -167,7 +170,7 @@ function AdminUserServiceForm(props) {
                 "Localisation, cette adresse permettra au magistrat/greffier de vous visualiser sur la carte"
               }
               id="geocode"
-              resource={service}
+              resource={geocodeResource}
               onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
               aria-describedby="msg-geocode"
             />

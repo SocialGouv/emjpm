@@ -38,6 +38,8 @@ function ServiceInformations() {
     org_code_postal,
     org_ville,
     adresse,
+    location_adresse,
+    use_location_adresse,
     code_postal,
     ville,
   } = service;
@@ -110,8 +112,10 @@ function ServiceInformations() {
             </Text>
           </Box>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Adresse"}</Text>
-            <Text sx={content}>{adresse}</Text>
+            <Text sx={subtitle}>{"Adresse de localisation"}</Text>
+            <Text sx={content}>
+              {use_location_adresse ? location_adresse : adresse}
+            </Text>
           </Flex>
         </Box>
         <Box mb={2}>

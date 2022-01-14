@@ -9,6 +9,10 @@ export const EDIT_USER = gql`
     $service_id: Int!
     $adresse: String
     $code_postal: String
+    $ville: String
+    $location_adresse: String
+    $location_code_postal: String
+    $location_ville: String
     $dispo_max: Int
     $use_location_adresse: Boolean
     $suspend_activity: Boolean
@@ -18,7 +22,6 @@ export const EDIT_USER = gql`
     $nom: String
     $prenom: String
     $genre: String
-    $ville: String
     $telephone: String
     $latitude: Float
     $longitude: Float
@@ -52,6 +55,13 @@ export const EDIT_USER = gql`
       where: { id: { _eq: $service_id } }
       _set: {
         adresse: $adresse
+        code_postal: $code_postal
+        ville: $ville
+        location_adresse: $location_adresse
+        location_code_postal: $location_code_postal
+        location_ville: $location_ville
+        latitude: $latitude
+        longitude: $longitude
         dispo_max: $dispo_max
         suspend_activity: $suspend_activity
         suspend_activity_reason: $suspend_activity_reason
@@ -61,11 +71,7 @@ export const EDIT_USER = gql`
         prenom: $prenom
         genre: $genre
         telephone: $telephone
-        code_postal: $code_postal
         competences: $competences
-        ville: $ville
-        latitude: $latitude
-        longitude: $longitude
       }
     ) {
       affected_rows
