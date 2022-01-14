@@ -37,6 +37,9 @@ export const MESURES_GESTIONNAIRE = gql`
           latitude
           longitude
           adresse
+          location_adresse
+          location_code_postal
+          location_ville
           commentaires {
             id
             comment
@@ -63,9 +66,12 @@ export const MESURES_GESTIONNAIRE = gql`
           prenom
           latitude
           longitude
-          ville
           adresse
           code_postal
+          ville
+          location_adresse
+          location_code_postal
+          location_ville
           telephone
           email
           etablissement
