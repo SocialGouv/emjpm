@@ -112,6 +112,7 @@ export const ADD_SERVICE = gql`
   ) {
     insert_liste_blanche(
       objects: {
+        type: "service"
         etablissement: $etablissement
         code_postal: $code_postal
         ville: $ville
@@ -136,9 +137,7 @@ export const ADD_SERVICE = gql`
         ville
         telephone
         email
-        location_adresse
-        latitude
-        longitude
+        adresse
         siret
         org_gestionnaire
         org_nom
