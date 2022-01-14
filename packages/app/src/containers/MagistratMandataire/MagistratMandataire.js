@@ -45,7 +45,10 @@ export function MagistratMandataire(props) {
     dispoMax,
     tis,
     adresse,
-    codePostal,
+    useLocationAdresse,
+    locationAdresse,
+    locationCodePostal,
+    locationVille,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -55,7 +58,6 @@ export function MagistratMandataire(props) {
     discriminator,
     latitude,
     longitude,
-    ville,
     id,
     suspendActivity,
     suspendActivityReason,
@@ -100,9 +102,9 @@ export function MagistratMandataire(props) {
               <Text sx={MagistratTitleMandataireStyle}>
                 {"Adresse d’activité"}
               </Text>
-              <Text
-                sx={MagistratContentMandataireStyle}
-              >{`${adresse} ${codePostal} ${ville}`}</Text>
+              <Text sx={MagistratContentMandataireStyle}>
+                {useLocationAdresse ? locationAdresse : adresse}
+              </Text>
             </Box>
             <Box>
               <Text sx={MagistratTitleMandataireStyle}>Dernière connexion</Text>

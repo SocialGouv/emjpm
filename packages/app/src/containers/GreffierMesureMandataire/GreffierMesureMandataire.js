@@ -44,7 +44,10 @@ function GreffierMesureMandataire(props) {
     mesuresInProgress,
     tis,
     adresse,
-    codePostal,
+    useLocationAdresse,
+    locationAdresse,
+    locationCodePostal,
+    locationVille,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -54,7 +57,6 @@ function GreffierMesureMandataire(props) {
     discriminator,
     latitude,
     longitude,
-    ville,
     id,
   } = formatedGestionnaire;
 
@@ -100,9 +102,9 @@ function GreffierMesureMandataire(props) {
                 <Text sx={GreffierTitleMandataireStyle}>
                   {"Adresse d’activité"}
                 </Text>
-                <Text
-                  sx={GreffierContentMandataireStyle}
-                >{`${adresse} ${codePostal} ${ville}`}</Text>
+                <Text sx={GreffierContentMandataireStyle}>
+                  {useLocationAdresse ? locationAdresse : adresse}
+                </Text>
               </Box>
               <Box>
                 <Text sx={GreffierTitleMandataireStyle}>

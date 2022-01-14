@@ -248,6 +248,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting
@@ -325,6 +326,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting

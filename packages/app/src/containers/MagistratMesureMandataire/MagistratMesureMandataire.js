@@ -44,7 +44,10 @@ function MagistratMesureMandataire(props) {
     mesuresInProgress,
     tis,
     adresse,
-    codePostal,
+    useLocationAdresse,
+    locationAdresse,
+    locationCodePostal,
+    locationVille,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -54,7 +57,6 @@ function MagistratMesureMandataire(props) {
     discriminator,
     latitude,
     longitude,
-    ville,
     id,
   } = formatedGestionnaire;
 
@@ -100,9 +102,9 @@ function MagistratMesureMandataire(props) {
                 <Text sx={MagistratTitleMandataireStyle}>
                   {"Adresse d’activité"}
                 </Text>
-                <Text
-                  sx={MagistratContentMandataireStyle}
-                >{`${adresse} ${codePostal} ${ville}`}</Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {useLocationAdresse ? locationAdresse : adresse}
+                </Text>
               </Box>
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>

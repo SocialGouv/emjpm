@@ -239,6 +239,7 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
     computed_fields:
     - mesures_en_attente
@@ -342,6 +343,7 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
     computed_fields:
     - mesures_en_attente
