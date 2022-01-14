@@ -26,7 +26,10 @@ function MandataireInformations() {
       </Heading>
       <Flex p={1} mt={2} flexDirection="column">
         {isIndividuel(user) && liste_blanche && (
-          <IndividuelInformations liste_blanche={liste_blanche} />
+          <IndividuelInformations
+            mandataire={mandataire}
+            liste_blanche={liste_blanche}
+          />
         )}
         {isPrepose(user) && liste_blanche && (
           <PreposeInformations liste_blanche={liste_blanche} />
@@ -59,8 +62,8 @@ function MandataireInformations() {
             </Text>
           </Box>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Adresse"}</Text>
-            <Text sx={content}>{label(mandataire.adresse)}</Text>
+            <Text sx={subtitle}>{"Adresse de localisation"}</Text>
+            <Text sx={content}>{mandataire.location_adresse || ""}</Text>
           </Flex>
         </Box>
 
@@ -161,22 +164,26 @@ function PreposeInformations({ liste_blanche }) {
   );
 }
 
-function IndividuelInformations({ liste_blanche }) {
+function IndividuelInformations({ mandataire, liste_blanche }) {
   return (
     <>
       <Box mb={2}>
         <Heading size={5}>Structure juridique</Heading>
         <Flex my={1}>
           <Text sx={subtitle}>{"Siret"}</Text>
-          <Text sx={content}>{label(liste_blanche.siret)}</Text>
+          <Text sx={content}>{label(mandataire.siret)}</Text>
         </Flex>
         <Flex my={1}>
           <Text sx={subtitle}>{"Adresse"}</Text>
           <Box flex={2 / 3}>
-            <Text sx={content}>{label(liste_blanche.adresse)}</Text>
-            <Text sx={content}>{label(liste_blanche.adresse_complement)}</Text>
             <Text sx={content}>
-              {label(liste_blanche.code_postal)} {label(liste_blanche.ville)}
+              {(mandataire.use_location_adresse
+                ? mandataire.location_adresse
+                : mandataire.adresse) || ""}
+            </Text>
+            <Text sx={content}>{label(mandataire.adresse_complement)}</Text>
+            <Text sx={content}>
+              {label(mandataire.code_postal)} {label(mandataire.ville)}
             </Text>
           </Box>
         </Flex>

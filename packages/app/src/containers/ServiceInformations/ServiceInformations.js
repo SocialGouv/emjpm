@@ -57,7 +57,9 @@ function ServiceInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
             <Box flex={2 / 3}>
-              <Text sx={content}>{adresse || ""}</Text>
+              <Text sx={content}>
+                {(use_location_adresse ? location_adresse : adresse) || ""}
+              </Text>
               <Text sx={content}>
                 {code_postal || ""} {ville || ""}
               </Text>
@@ -113,9 +115,7 @@ function ServiceInformations() {
           </Box>
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse de localisation"}</Text>
-            <Text sx={content}>
-              {use_location_adresse ? location_adresse : adresse}
-            </Text>
+            <Text sx={content}>{location_adresse}</Text>
           </Flex>
         </Box>
         <Box mb={2}>

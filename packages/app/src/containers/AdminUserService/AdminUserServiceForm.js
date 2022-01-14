@@ -180,7 +180,7 @@ function AdminUserServiceForm(props) {
           </Field>
           <Box mb={2}>
             <CheckBox
-              isChecked={formik.values.useLocationAdresse}
+              isChecked={!formik.values.useLocationAdresse}
               onChange={() => {
                 formik.setFieldValue(
                   "useLocationAdresse",
@@ -190,7 +190,7 @@ function AdminUserServiceForm(props) {
               label="Afficher une adresse différente pour le magistrat/greffier"
             />
           </Box>
-          {formik.values.useLocationAdresse && (
+          {!formik.values.useLocationAdresse && (
             <FormGroupInput
               placeholder="Adresse"
               label="Adresse, cette adresse sera celle visible pour le magistrat/greffier"

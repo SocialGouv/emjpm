@@ -236,6 +236,8 @@ export const MANDATAIRE_USERS = gql`
         telephone_portable
         siret
         adresse
+        location_adresse
+        use_location_adresse
         competences
         sync_ocmi_enable
         editor_locked_mesures
