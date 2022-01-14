@@ -26,7 +26,7 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
     $prenom: String!
     $siret: String!
     $email: String!
-    $telephone: String!
+    $telephone: String
     $adresse: String!
     $adresse_complement: String
     $code_postal: String!

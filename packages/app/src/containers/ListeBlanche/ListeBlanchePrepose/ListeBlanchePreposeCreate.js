@@ -38,8 +38,9 @@ export function ListeBlanchePreposeCreate() {
                   etablissement_rattachement: e.etablissement_rattachement,
                 };
               }),
-              nom: values.lastname,
-              prenom: values.firstname,
+              nom: values.nom,
+              prenom: values.prenom,
+              telephone: values.telephone,
             },
           });
         }}

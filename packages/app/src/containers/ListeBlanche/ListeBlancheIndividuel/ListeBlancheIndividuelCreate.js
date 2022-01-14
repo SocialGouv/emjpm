@@ -39,6 +39,7 @@ export function ListeBlancheIndividuelCreate() {
               }),
               genre: values.genre,
               email: values.email,
+              telephone: values.telephone,
               nom: values.nom,
               prenom: values.prenom,
               siret: values.siret,
