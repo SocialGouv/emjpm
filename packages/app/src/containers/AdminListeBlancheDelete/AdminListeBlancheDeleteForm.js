@@ -4,7 +4,6 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
 
-import { LISTE_BLANCHE } from "~/containers/ListeBlanche/queries";
 import { adminUserDeleteSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
@@ -22,11 +21,7 @@ export function AdminListeBlancheDeleteForm(props) {
     onCompleted: async () => {
       history.push("/admin/liste-blanche");
     },
-    refetchQueries: [
-      {
-        query: LISTE_BLANCHE,
-      },
-    ],
+    refetchQueries: ["search_view_lb"],
   });
 
   useQueryReady(loading, error);
