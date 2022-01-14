@@ -79,8 +79,8 @@ export function ListeBlancheServiceForm(props) {
             }))
           : "",
       genre: lbService ? lbService.genre : "",
-      nom: lbService ? lbService.nom : "",
-      prenom: lbService ? lbService.prenom : "",
+      nom: normalizeLastName(lbService ? lbService.nom : ""),
+      prenom: normalizeFirstName(lbService ? lbService.prenom : ""),
       email: lbService ? lbService.email : "",
       etablissement: lbService ? lbService.etablissement : "",
       adresse: lbService ? lbService.adresse : "",

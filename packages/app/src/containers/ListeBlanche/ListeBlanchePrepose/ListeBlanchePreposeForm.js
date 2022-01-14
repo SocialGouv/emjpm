@@ -85,8 +85,8 @@ export function ListeBlanchePreposeForm(props) {
     email: data.email || "",
     initialEtablissements: etablissements,
     etablissements,
-    prenom: data.prenom || "",
-    nom: data.nom || "",
+    prenom: normalizeFirstName(data.prenom || ""),
+    nom: normalizeLastName(data.nom || ""),
     genre: data.genre,
     telephone: data.telephone,
   };
