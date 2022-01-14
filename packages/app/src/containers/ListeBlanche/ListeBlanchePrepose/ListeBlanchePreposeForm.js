@@ -1,7 +1,6 @@
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 
-import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
 
 import {
@@ -13,7 +12,14 @@ import {
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
-import { Button, Heading, RadioGroup, InlineError, Input } from "~/components";
+import {
+  Button,
+  Heading,
+  RadioGroup,
+  InlineError,
+  Input,
+  Select,
+} from "~/components";
 
 import { GENDER_OPTIONS } from "~/constants/user";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
@@ -226,12 +232,15 @@ export function ListeBlanchePreposeForm(props) {
           <Box>
             <Box mt={2}>
               <div aria-describedby="msg-etablissements">
-                <AsyncSelect
+                <Select
+                  isAsync
                   name="etablissement"
                   instanceId={`etablissement-${data.id || "new"}`}
                   cacheOptions
                   defaultOptions
+                  label={"Ajouter un établissement"}
                   placeholder={"recherche par nom, finess, code postal, ville."}
+                  required
                   loadOptions={async (inputValue) => {
                     const values = await searchEtablissements(inputValue);
                     return values.map((e) => {
