@@ -26,6 +26,7 @@ import {
 
 import { Link } from "~/containers/Commons";
 import { GeocodeCities } from "~/components/Geocode";
+import { CITY_DEPARTEMENT } from "./queries";
 
 import { createDepartementOptions, departementList } from "~/utils/geodata";
 
@@ -170,14 +171,39 @@ export function ListeBlancheServiceForm(props) {
     ({ data }) => setSelectedAdresseData(data),
     [setSelectedAdresseData]
   );
+
   useEffect(() => {
     if (!selectedAdresseData) {
       return;
     }
     const { postcode, city } = selectedAdresseData;
     setFieldValue("code_postal", postcode || "");
-    setFieldValue("ville", city || "");
+    setFieldValue("ville", city ? city.toUpperCase() : "");
   }, [selectedAdresseData, setFieldValue]);
+
+  useEffect(() => {
+    (async () => {
+      const ville = formik.values.ville;
+      if (!ville) {
+        return;
+      }
+      const { data } = await apolloClient.query({
+        query: CITY_DEPARTEMENT,
+        variables: {
+          city: ville.replace(/-/g, " ").toUpperCase(),
+        },
+      });
+      if (
+        data.geolocalisation_code_postal.length &&
+        data.geolocalisation_code_postal[0].departement_code
+      ) {
+        setFieldValue(
+          "ville_departement",
+          data.geolocalisation_code_postal[0].departement_code
+        );
+      }
+    })();
+  }, [formik.values.ville, setFieldValue]);
 
   const user = useUser();
   const isAdmin = user.type === "admin";
