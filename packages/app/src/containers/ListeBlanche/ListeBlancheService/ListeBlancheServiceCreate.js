@@ -45,6 +45,7 @@ export function ListeBlancheServiceCreate(props) {
           org_ville: values.org_ville,
           siret: values.siret,
           telephone: values.telephone,
+          genre: values.genre,
         },
       });
 

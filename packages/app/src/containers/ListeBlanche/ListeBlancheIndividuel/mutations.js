@@ -24,6 +24,7 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
   mutation create_liste_blanche(
     $nom: String!
     $prenom: String!
+    $genre: String
     $siret: String!
     $email: String!
     $telephone: String
@@ -37,6 +38,7 @@ export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
       object: {
         nom: $nom
         prenom: $prenom
+        genre: $genre
         siret: $siret
         email: $email
         telephone: $telephone

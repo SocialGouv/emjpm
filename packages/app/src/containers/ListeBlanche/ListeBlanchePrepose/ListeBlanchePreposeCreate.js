@@ -41,6 +41,7 @@ export function ListeBlanchePreposeCreate() {
               nom: values.nom,
               prenom: values.prenom,
               telephone: values.telephone,
+              genre: values.genre,
             },
           });
         }}
