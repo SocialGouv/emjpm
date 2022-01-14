@@ -133,7 +133,7 @@ export function SignupForm() {
               normalizers={[normalizeFirstName]}
             />
             <FormGroupInput
-              placeholder="Nom"
+              placeholder="NOM"
               id="nom"
               formik={formik}
               validationSchema={signupSchema}
