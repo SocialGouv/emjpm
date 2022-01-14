@@ -23,6 +23,7 @@ export const GESTIONNAIRES = gql`
         latitude
         longitude
         adresse
+        adresse_complement
         competences
         suspend_activity
         suspend_activity_reason
@@ -51,6 +52,7 @@ export const GESTIONNAIRES = gql`
         prenom
         ville
         adresse
+        adresse_complement
         code_postal
         competences
         telephone

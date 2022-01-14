@@ -47,8 +47,7 @@ export function GreffierMandataire(props) {
     adresse,
     useLocationAdresse,
     locationAdresse,
-    locationCodePostal,
-    locationVille,
+    adresseComplement,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -100,6 +99,14 @@ export function GreffierMandataire(props) {
               </Text>
               <Text sx={GreffierContentMandataireStyle}>
                 {useLocationAdresse ? locationAdresse : adresse}
+              </Text>
+            </Box>
+            <Box>
+              <Text sx={GreffierTitleMandataireStyle}>
+                {"Complément d'adresse"}
+              </Text>
+              <Text sx={GreffierContentMandataireStyle}>
+                {adresseComplement}
               </Text>
             </Box>
             <Box>

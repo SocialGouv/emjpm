@@ -23,6 +23,7 @@ export const GESTIONNAIRES = gql`
         latitude
         longitude
         adresse
+        adresse_complement
         use_location_adresse
         location_adresse
         location_ville
@@ -54,6 +55,7 @@ export const GESTIONNAIRES = gql`
         nom
         prenom
         adresse
+        adresse_complement
         code_postal
         ville
         use_location_adresse

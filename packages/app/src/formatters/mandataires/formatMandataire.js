@@ -55,6 +55,9 @@ export default function formatMandataire({
 
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "",
+      adresseComplement: service.adresse_complement
+        ? service.adresse_complement
+        : "",
       codePostal: service.code_postal ? service.code_postal : "",
       ville: service.ville ? capitalize(service.ville) : "",
       useLocationAdresse: service.use_location_adresse,
@@ -84,6 +87,9 @@ export default function formatMandataire({
   } else {
     currentDiscriminator = {
       adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "",
+      adresseComplement: mandataire.adresse_complement
+        ? mandataire.adresse_complement
+        : "",
       useLocationAdresse: mandataire.use_location_adresse,
       locationAdresse: mandataire.location_adresse
         ? capitalize(mandataire.location_adresse)

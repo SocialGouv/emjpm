@@ -47,8 +47,7 @@ export function MagistratMandataire(props) {
     adresse,
     useLocationAdresse,
     locationAdresse,
-    locationCodePostal,
-    locationVille,
+    adresseComplement,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -104,6 +103,14 @@ export function MagistratMandataire(props) {
               </Text>
               <Text sx={MagistratContentMandataireStyle}>
                 {useLocationAdresse ? locationAdresse : adresse}
+              </Text>
+            </Box>
+            <Box>
+              <Text sx={MagistratTitleMandataireStyle}>
+                {"Complément d'adresse"}
+              </Text>
+              <Text sx={MagistratContentMandataireStyle}>
+                {adresseComplement}
               </Text>
             </Box>
             <Box>
