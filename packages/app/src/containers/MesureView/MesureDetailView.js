@@ -2,7 +2,7 @@ import { MESURE_PROTECTION_STATUS, mesureFormatter } from "@emjpm/biz";
 import { Box, Flex, Text, Link, Button } from "rebass";
 import { Helmet } from "react-helmet";
 
-import { capitalize } from "~/utils/general";
+import capitalize from "~/utils/std/capitalize";
 import { LinkButton } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import { getUserBasePath } from "~/constants";
