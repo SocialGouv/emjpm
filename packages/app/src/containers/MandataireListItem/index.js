@@ -44,8 +44,8 @@ export default function MandataireListItem(props) {
       isAvailable,
       nom,
       prenom,
-      locationVille,
-      locationCodePostal,
+      ville,
+      codePostal,
       etablissement,
       mesuresInProgress,
       mesuresAwaiting,
@@ -116,9 +116,7 @@ export default function MandataireListItem(props) {
           </Flex>
           <Flex width="100px" sx={columnStyle(true, true)}>
             <Text sx={labelStyle}>location</Text>
-            <Text
-              sx={descriptionStyle}
-            >{`${locationCodePostal} ${locationVille}`}</Text>
+            <Text sx={descriptionStyle}>{`${codePostal} ${ville}`}</Text>
           </Flex>
 
           {!(isMagistratMap || isGreffierMap) && (
