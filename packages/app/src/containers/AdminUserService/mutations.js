@@ -8,6 +8,7 @@ export const EDIT_USER = gql`
     $user_email: String!
     $service_id: Int!
     $adresse: String
+    $adresse_complement: String
     $code_postal: String
     $ville: String
     $location_adresse: String
@@ -53,6 +54,7 @@ export const EDIT_USER = gql`
       where: { id: { _eq: $service_id } }
       _set: {
         adresse: $adresse
+        adresse_complement: $adresse_complement
         code_postal: $code_postal
         ville: $ville
         location_adresse: $location_adresse

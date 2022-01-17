@@ -47,6 +47,7 @@ function AdminUserService({ userId, successLink, cancelLink }) {
         user_nom: values.user_nom,
         user_prenom: values.user_prenom,
         adresse: values.adresse,
+        adresse_complement: values.adresse_complement,
         location_adresse: values.geocode.label,
         code_postal: values.geocode.postcode,
         ville: values.geocode.city,

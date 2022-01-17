@@ -84,6 +84,7 @@ function AdminUserServiceForm(props) {
       dispo_max: service.dispo_max || "",
       email: service.email || "",
       adresse: service.adresse || "",
+      adresse_complement: service.adresse_complement || "",
       location_adresse: service.location_adresse || "",
       code_postal: service.code_postal || "",
       ville: service.ville || "",

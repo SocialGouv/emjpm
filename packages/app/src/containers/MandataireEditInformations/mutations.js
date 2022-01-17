@@ -13,6 +13,7 @@ export const EDIT_USER = gql`
     $latitude: Float!
     $location_adresse: String!
     $adresse: String!
+    $adresse_complement: String!
     $code_postal: String!
     $genre: String
     $prenom: String!
@@ -45,6 +46,7 @@ export const EDIT_USER = gql`
         telephone: $telephone
         telephone_portable: $telephone_portable
         adresse: $adresse
+        adresse_complement: $adresse_complement
         longitude: $longitude
         latitude: $latitude
         location_adresse: $location_adresse

@@ -11,6 +11,7 @@ export const MANDATAIRE = gql`
       mandataire {
         id
         adresse
+        adresse_complement
         location_adresse
         code_postal
         ville

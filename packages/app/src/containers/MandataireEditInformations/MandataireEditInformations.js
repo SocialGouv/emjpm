@@ -75,6 +75,7 @@ const MandataireEditInformations = ({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
           adresse: values.adresse,
+          adresse_complement: values.adresse_complement,
           use_location_adresse: values.useLocationAdresse,
           location_adresse: values.geocode.label,
           code_postal: values.geocode.postcode,

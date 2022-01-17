@@ -14,6 +14,7 @@ export const USER_SERVICE = gql`
           mesures_awaiting
           id
           adresse
+          adresse_complement
           use_location_adresse
           ville
           code_postal
