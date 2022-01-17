@@ -18,10 +18,9 @@ export const MESURES_GESTIONNAIRE = gql`
     mandatairesList: search_ti_view_lb_tis(
       limit: $limit
       offset: $offset
-      order_by: { gestionnaire: { remaining_capacity: $order } }
       args: { search: null, tiid: $tiId, departementcode: $departementCode }
     ) {
-      gestionnaire {
+      gestionnaires(distinct_on: [id]) {
         id
         discriminator
         mesures_awaiting
