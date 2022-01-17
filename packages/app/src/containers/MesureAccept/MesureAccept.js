@@ -14,6 +14,7 @@ import { MesureAcceptForm } from "./MesureAcceptForm";
 import { ACCEPT_MESURE } from "./mutations";
 import { MesureAcceptStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
+import { Helmet } from "react-helmet";
 
 export function MesureAccept(props) {
   const history = useHistory();
@@ -127,16 +128,21 @@ export function MesureAccept(props) {
   }
 
   return (
-    <Box sx={MesureAcceptStyle} {...props}>
-      <MesureAcceptForm
-        antenneOptions={antenneOptions}
-        userBasePath={userBasePath}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-        mt="3"
-        mesure={mesure}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>Accepter la mesure | e-MJPM</title>
+      </Helmet>
+      <Box sx={MesureAcceptStyle} {...props}>
+        <MesureAcceptForm
+          antenneOptions={antenneOptions}
+          userBasePath={userBasePath}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+          mt="3"
+          mesure={mesure}
+        />
+      </Box>
+    </>
   );
 }
 

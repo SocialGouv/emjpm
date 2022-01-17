@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -20,7 +21,20 @@ export function EtablissementView() {
 
   if (data && data.etablissements_by_pk) {
     const etablissement = data.etablissements_by_pk;
-    return <EtablissementViewForm data={etablissement} />;
+    console.log(etablissement);
+    return (
+      <>
+        <Helmet>
+          <title>
+            {etablissement?.rslongue ||
+              etablissement?.libcategagretab ||
+              `Etablissement ${paramId}`}{" "}
+            | e-MJPM
+          </title>
+        </Helmet>
+        <EtablissementViewForm data={etablissement} />
+      </>
+    );
   }
 }
 

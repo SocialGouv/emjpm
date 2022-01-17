@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Box, Flex } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { LayoutServicesMap } from "~/containers/Layout";
 import { ServiceMapPanelMesures } from "~/containers/ServiceMapPanelMesures";
@@ -10,41 +11,46 @@ function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
 
   return (
-    <LayoutServicesMap>
-      <Flex
-        sx={{
-          height: "100%",
-          position: "absolute",
-          pt: "155px",
-          top: "0",
-          width: "100%",
-        }}
-      >
-        {selectedMesuresIds.length ? (
-          <Box
-            sx={{
-              flexBasis: 600,
-              flexGrow: 1,
-            }}
-          >
-            <ServiceMapPanelMesures mesuresIds={selectedMesuresIds} />
-          </Box>
-        ) : null}
-        <Box
-          height="100%"
+    <>
+      <Helmet>
+        <title>Carte des services | e-MJPM</title>
+      </Helmet>
+      <LayoutServicesMap>
+        <Flex
           sx={{
-            flexBasis: 0,
-            flexGrow: 99999,
-            minWidth: 320,
+            height: "100%",
+            position: "absolute",
+            pt: "155px",
+            top: "0",
+            width: "100%",
           }}
         >
-          <ServiceMap
-            selectMesures={(ids) => setSelectedMesuresIds(ids)}
-            selectedMesuresIds={selectedMesuresIds}
-          />
-        </Box>
-      </Flex>
-    </LayoutServicesMap>
+          {selectedMesuresIds.length ? (
+            <Box
+              sx={{
+                flexBasis: 600,
+                flexGrow: 1,
+              }}
+            >
+              <ServiceMapPanelMesures mesuresIds={selectedMesuresIds} />
+            </Box>
+          ) : null}
+          <Box
+            height="100%"
+            sx={{
+              flexBasis: 0,
+              flexGrow: 99999,
+              minWidth: 320,
+            }}
+          >
+            <ServiceMap
+              selectMesures={(ids) => setSelectedMesuresIds(ids)}
+              selectedMesuresIds={selectedMesuresIds}
+            />
+          </Box>
+        </Flex>
+      </LayoutServicesMap>
+    </>
   );
 }
 
