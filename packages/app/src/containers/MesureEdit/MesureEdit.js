@@ -1,9 +1,8 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { isMandataire } from "@emjpm/biz";
+import { isMandataire, mesureFormatter } from "@emjpm/biz";
 import { useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
-import { mesureFormatter } from "@emjpm/biz";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { MesureContext } from "~/containers/MesureContext";

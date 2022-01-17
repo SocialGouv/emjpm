@@ -1,7 +1,6 @@
-import { MESURE_PROTECTION } from "@emjpm/biz";
+import { MESURE_PROTECTION, mesureFormatter } from "@emjpm/biz";
 import { useContext } from "react";
 import { Box, Flex, Text, Button, Link as RebassLink } from "rebass";
-import { mesureFormatter } from "@emjpm/biz";
 
 import { Link } from "~/containers/Commons";
 import { MesureContext } from "~/containers/MesureContext";
