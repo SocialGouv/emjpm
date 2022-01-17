@@ -44,13 +44,14 @@ const adminServiceSchema = ({ apolloClient }) =>
     }),
     siret: yup
       .string()
+      .nullable()
       .matches(/^[\d]{14}$/, "Doit contenir exactement 14 chiffres")
       .required()
       .test(
         "siret-duplicate",
         "Le numéro SIRET que vous venez de saisir existe déjà pour un service sur eMJPM.",
         (value, { parent }) => {
-          if (value === parent.initialSiret) {
+          if (!value || value === parent.initialSiret) {
             return true;
           }
           return checkDuplicateServiceSIRET(apolloClient, value);

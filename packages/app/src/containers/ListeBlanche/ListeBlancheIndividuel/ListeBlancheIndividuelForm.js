@@ -50,13 +50,14 @@ const lbSchema = ({ apolloClient, isCreate }) =>
     telephone: yup.string().nullable(),
     siret: yup
       .string()
+      .nullable()
       .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
       .required()
       .test(
         "siret-duplicate",
         "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
         (value, { parent }) => {
-          if (value === parent.initialSiret) {
+          if (!value || value === parent.initialSiret) {
             return true;
           }
           return checkDuplicateMandataireSIRET(apolloClient, value);
