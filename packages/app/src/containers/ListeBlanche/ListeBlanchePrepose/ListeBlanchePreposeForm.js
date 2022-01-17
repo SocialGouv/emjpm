@@ -44,7 +44,7 @@ const lbSchema = ({ isCreate }) =>
         FORM_REQUIRED_MESSAGE,
         (value, { parent }) => {
           if (isCreate) {
-            return true;
+            return value && value.length > 0;
           }
           if (
             !parent.initialEtablissements ||
