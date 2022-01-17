@@ -32,7 +32,20 @@ const adminUserServiceSchema = yup.object().shape({
     .required()
     .nullable()
     .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
-  adresse: yup.string().nullable(),
+  adresse: yup
+    .string()
+    .nullable()
+    .test(
+      "required-ifnot-use-location",
+      FORM_REQUIRED_MESSAGE,
+      (value, { parent }) => {
+        if (parent.useLocationAdresse) {
+          return true;
+        }
+        value = value?.trim();
+        return !!value;
+      }
+    ),
   code_postal: yup.string().nullable(),
   ville: yup.string().nullable(),
   etablissement: yup.string().required(),

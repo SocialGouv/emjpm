@@ -217,6 +217,7 @@ function MandataireEditInformationsForm(props) {
                 placeholder="Adresse"
                 label="Adresse, cette adresse sera celle visible pour le magistrat/greffier"
                 id="adresse"
+                required
                 formik={formik}
                 validationSchema={validationSchema}
               />
