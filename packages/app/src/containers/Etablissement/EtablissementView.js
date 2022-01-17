@@ -21,7 +21,7 @@ export function EtablissementView() {
 
   if (data && data.etablissements_by_pk) {
     const etablissement = data.etablissements_by_pk;
-    console.log(etablissement);
+
     return (
       <>
         <Helmet>

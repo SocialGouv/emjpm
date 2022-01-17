@@ -23,8 +23,6 @@ export function ListeBlancheEdit(props) {
     return null;
   }
 
-  console.log(data);
-
   return (
     <div>
       {data && data.lb_users_by_pk && (
