@@ -1,6 +1,7 @@
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useContext } from "react";
 import { Box, Flex, Text, Button, Link as RebassLink } from "rebass";
+import { mesureFormatter } from "@emjpm/biz";
 
 import { Link } from "~/containers/Commons";
 import { MesureContext } from "~/containers/MesureContext";
@@ -18,6 +19,7 @@ import {
 import { MESURE_EMAIL_MANDATAIRE, MESURE_EMAIL_SERVICE } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 import { useQuery } from "@apollo/client";
+import { Helmet } from "react-helmet";
 
 function MagistratMesure(props) {
   const mesure = useContext(MesureContext);
@@ -53,8 +55,15 @@ function MagistratMesure(props) {
       "email_" + (mesure.service_id ? "service" : "mandataire")
     ] ?? "";
 
+  const { formatNatureMesure } = mesureFormatter;
+
   return (
     <>
+      <Helmet>
+        <title>{`${formatNatureMesure(
+          mesure.natureMesure
+        )} ${numeroRg} | e-MJPM`}</title>
+      </Helmet>
       <Heading size={3} mt="4" mb="3">
         Votre mesure
       </Heading>
