@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
+import { Helmet } from "react-helmet";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { GreffierEditInformationsForm } from "./GreffierEditInformationsForm";
@@ -54,14 +55,19 @@ function GreffierEditInformations({ userId, successLink, cancelLink }) {
   };
 
   return (
-    <Box p="5">
-      <GreffierEditInformationsForm
-        user={user}
-        handleSubmit={handleSubmit}
-        tribunaux={tribunaux}
-        cancelLink={cancelLink}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>{`${user.nom} ${user.prenom} | e-MJPM`}</title>
+      </Helmet>
+      <Box p="5">
+        <GreffierEditInformationsForm
+          user={user}
+          handleSubmit={handleSubmit}
+          tribunaux={tribunaux}
+          cancelLink={cancelLink}
+        />
+      </Box>
+    </>
   );
 }
 

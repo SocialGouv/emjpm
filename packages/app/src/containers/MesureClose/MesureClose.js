@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
+import { mesureFormatter } from "@emjpm/biz";
 
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
@@ -12,6 +13,7 @@ import { MesureCloseForm } from "./MesureCloseForm";
 import { CLOSE_MESURE } from "./mutations";
 import { MesureCloseStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
+import { Helmet } from "react-helmet";
 
 function MesureClose(props) {
   const history = useHistory();
@@ -62,16 +64,26 @@ function MesureClose(props) {
     redirectToMesure(mesure.id);
   }
 
+  const { formatNatureMesure, formatChampMesure } = mesureFormatter;
+
   return (
-    <Box sx={MesureCloseStyle} {...props}>
-      <MesureCloseForm
-        mt="3"
-        mesure={mesure}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-        userBasePath={userBasePath}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>
+          Fermer la mesure {formatNatureMesure(mesure.natureMesure)}{" "}
+          {formatChampMesure(mesure.champMesure)} | e-MJPM
+        </title>
+      </Helmet>
+      <Box sx={MesureCloseStyle} {...props}>
+        <MesureCloseForm
+          mt="3"
+          mesure={mesure}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+          userBasePath={userBasePath}
+        />
+      </Box>
+    </>
   );
 }
 

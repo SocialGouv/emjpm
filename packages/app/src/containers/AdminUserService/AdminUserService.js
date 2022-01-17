@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { AdminUserServiceForm } from "./AdminUserServiceForm";
@@ -50,11 +51,16 @@ function AdminUserService({ userId, successLink, cancelLink }) {
   };
 
   return (
-    <AdminUserServiceForm
-      user={user}
-      handleSubmit={handleSubmit}
-      cancelLink={cancelLink}
-    />
+    <>
+      <Helmet>
+        <title>{`${user.nom} ${user.prenom} | e-MJPM`}</title>
+      </Helmet>
+      <AdminUserServiceForm
+        user={user}
+        handleSubmit={handleSubmit}
+        cancelLink={cancelLink}
+      />
+    </>
   );
 }
 

@@ -1,6 +1,7 @@
 import { useApolloClient, useMutation, useQuery } from "@apollo/client";
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useState } from "react";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -108,14 +109,21 @@ const MandataireEditInformations = ({
   };
 
   return (
-    <MandataireEditInformationsForm
-      mandataire={mandataire}
-      handleSubmit={handleSubmit}
-      user={user}
-      cancelLink={cancelLink}
-      errorMessage={errorMessage}
-      isAdmin={isAdmin}
-    />
+    <>
+      <Helmet>
+        <title>{`${user.nom} ${user.prenom} - mandataire ${
+          user.type === "prepose" ? "préposé" : user.type
+        } | e-MJPM`}</title>
+      </Helmet>
+      <MandataireEditInformationsForm
+        mandataire={mandataire}
+        handleSubmit={handleSubmit}
+        user={user}
+        cancelLink={cancelLink}
+        errorMessage={errorMessage}
+        isAdmin={isAdmin}
+      />
+    </>
   );
 };
 

@@ -2,6 +2,8 @@ import { useMutation } from "@apollo/client";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
+import { Helmet } from "react-helmet";
+import { mesureFormatter } from "@emjpm/biz";
 
 import { MesureContext } from "~/containers/MesureContext";
 import { MESURE_CONTEXT_QUERY } from "~/containers/MesureContext/queries";
@@ -54,15 +56,25 @@ function MesureReactivate() {
     redirectToMesure(mesure.id);
   }
 
+  const { formatNatureMesure, formatChampMesure } = mesureFormatter;
+
   return (
-    <Box sx={MesureReactivateStyle}>
-      <MesureReactivateForm
-        mt="3"
-        mesure={mesure}
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>
+          Réactiver la mesure {formatNatureMesure(mesure.natureMesure)}{" "}
+          {formatChampMesure(mesure.champMesure)} | e-MJPM | e-MJPM
+        </title>
+      </Helmet>
+      <Box sx={MesureReactivateStyle}>
+        <MesureReactivateForm
+          mt="3"
+          mesure={mesure}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+        />
+      </Box>
+    </>
   );
 }
 
