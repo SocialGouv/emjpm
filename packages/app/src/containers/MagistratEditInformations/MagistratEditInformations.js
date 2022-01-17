@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
 
@@ -54,14 +55,19 @@ function MagistratEditInformations({ userId, successLink, cancelLink }) {
   };
 
   return (
-    <Box p="5">
-      <MagistratEditInformationsForm
-        user={user}
-        handleSubmit={handleSubmit}
-        tribunaux={tribunaux}
-        cancelLink={cancelLink}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>{`${user.nom} ${user.prenom} | e-MJPM`}</title>
+      </Helmet>
+      <Box p="5">
+        <MagistratEditInformationsForm
+          user={user}
+          handleSubmit={handleSubmit}
+          tribunaux={tribunaux}
+          cancelLink={cancelLink}
+        />
+      </Box>
+    </>
   );
 }
 

@@ -2,6 +2,7 @@ import { useMutation } from "@apollo/client";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
+import { mesureFormatter } from "@emjpm/biz";
 
 import { MesureContext } from "~/containers/MesureContext";
 import useUser from "~/hooks/useUser";
@@ -11,6 +12,7 @@ import { MesureDeleteForm } from "./MesureDeleteForm";
 import { DELETE_MESURE, DELETE_MESURE_REOUVERTURE } from "./mutations";
 import { MesureDeleteStyle } from "./style";
 import useQueryReady from "~/hooks/useQueryReady";
+import { Helmet } from "react-helmet";
 
 function MesureDelete(props) {
   const history = useHistory();
@@ -56,15 +58,25 @@ function MesureDelete(props) {
     redirectToMesure(mesure.id);
   }
 
+  const { formatNatureMesure, formatChampMesure } = mesureFormatter;
+
   return (
-    <Box sx={MesureDeleteStyle} {...props}>
-      <MesureDeleteForm
-        mt="3"
-        mesure={mesure}
-        handleCancel={handleCancel}
-        handleSubmit={handleSubmit}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>
+          Supprimer la mesure {formatNatureMesure(mesure.natureMesure)}{" "}
+          {formatChampMesure(mesure.champMesure)} | e-MJPM
+        </title>
+      </Helmet>
+      <Box sx={MesureDeleteStyle} {...props}>
+        <MesureDeleteForm
+          mt="3"
+          mesure={mesure}
+          handleCancel={handleCancel}
+          handleSubmit={handleSubmit}
+        />
+      </Box>
+    </>
   );
 }
 

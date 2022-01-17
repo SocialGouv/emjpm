@@ -1,5 +1,5 @@
 import { Box, Flex } from "rebass";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet";
 
 import { LayoutMagistratMap } from "~/containers/Layout";
 import { MagistratMandatairesMap } from "~/containers/MagistratMandatairesMap";

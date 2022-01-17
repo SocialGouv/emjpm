@@ -19,6 +19,7 @@ import {
 import { formatGestionnaire } from "./utils";
 
 import { MagistratMandataireMap } from "~/containers/MagistratMandataireMap";
+import { Helmet } from "react-helmet";
 
 export function MagistratMandataire(props) {
   const { gestionnaireId, tiId } = props;
@@ -62,149 +63,169 @@ export function MagistratMandataire(props) {
   } = formatedGestionnaire;
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
+
   return (
-    <Box {...props} width="100%" mb={6}>
-      <Flex alignItems="center" justifyContent="space-between">
-        {serviceId && <Heading size={2}>{etablissement}</Heading>}
-        {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
+    <>
+      <Helmet>
+        <title>
+          {formatedGestionnaire?.etablissement
+            ? `${formatedGestionnaire.etablissement}`
+            : `${formatedGestionnaire.nom} ${formatedGestionnaire.prenom}`}
+          | e-MJPM
+        </title>
+      </Helmet>
+      <Box {...props} width="100%" mb={6}>
+        <Flex alignItems="center" justifyContent="space-between">
+          {serviceId && <Heading size={2}>{etablissement}</Heading>}
+          {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-        <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
-          <Button>Réserver une mesure</Button>
-        </Link>
-      </Flex>
+          <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
+            <Button>Réserver une mesure</Button>
+          </Link>
+        </Flex>
 
-      <Flex sx={MagistratMandataireStyle} flexDirection="column">
-        <Flex>
-          <Box width="50%">
-            {mandataireId && (
+        <Flex sx={MagistratMandataireStyle} flexDirection="column">
+          <Flex>
+            <Box width="50%">
+              {mandataireId && (
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    Nom du mandataire
+                  </Text>
+                  <Text
+                    sx={MagistratContentMandataireStyle}
+                  >{`${prenom} ${nom}`}</Text>
+                </Box>
+              )}
+              {serviceId && (
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    {"Nom de l'association"}
+                  </Text>
+                  <Text sx={MagistratContentMandataireStyle}>
+                    {etablissement}
+                  </Text>
+                </Box>
+              )}
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>
-                  Nom du mandataire
+                  {"Adresse d’activité"}
                 </Text>
                 <Text
                   sx={MagistratContentMandataireStyle}
-                >{`${prenom} ${nom}`}</Text>
+                >{`${adresse} ${codePostal} ${ville}`}</Text>
               </Box>
-            )}
-            {serviceId && (
               <Box>
                 <Text sx={MagistratTitleMandataireStyle}>
-                  {"Nom de l'association"}
+                  Dernière connexion
                 </Text>
-                <Text sx={MagistratContentMandataireStyle}>
-                  {etablissement}
+                <Text
+                  color={lastLoginColor}
+                  sx={MagistratContentMandataireStyle}
+                >
+                  {lastLogin}
                 </Text>
               </Box>
-            )}
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>
-                {"Adresse d’activité"}
-              </Text>
-              <Text
-                sx={MagistratContentMandataireStyle}
-              >{`${adresse} ${codePostal} ${ville}`}</Text>
+              <Box mb={4}>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Tribunaux d’instance
+                </Text>
+                {tis.map((ti) => {
+                  return (
+                    <Text key={ti.tis.id} sx={MagistratTribunal}>
+                      {ti.tis.etablissement}
+                    </Text>
+                  );
+                })}
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Informations (Préférences géographiques, compétences, ...)
+                </Text>
+                <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
+              </Box>
             </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Dernière connexion</Text>
-              <Text color={lastLoginColor} sx={MagistratContentMandataireStyle}>
-                {lastLogin}
-              </Text>
-            </Box>
-            <Box mb={4}>
-              <Text sx={MagistratTitleMandataireStyle}>
-                Tribunaux d’instance
-              </Text>
-              {tis.map((ti) => {
-                return (
-                  <Text key={ti.tis.id} sx={MagistratTribunal}>
-                    {ti.tis.etablissement}
-                  </Text>
-                );
-              })}
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>
-                Informations (Préférences géographiques, compétences, ...)
-              </Text>
-              <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
-            </Box>
-          </Box>
-          <Box width="50%">
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Email</Text>
-              <Text sx={MagistratContentMandataireStyle}>{email}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Téléphone</Text>
-              <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
-              <Text
-                sx={{
-                  ...MagistratContentMandataireStyle,
-                  ...(suspendActivity ? { color: "error" } : {}),
-                }}
-              >
-                {suspendActivity ? "Activité interrompue" : currentAvailability}
-                {suspendActivity && (
-                  <>
-                    <br />
-                    {suspendActivityReason
-                      ? "Motif: " + suspendActivityReason
-                      : ""}
-                  </>
-                )}
-              </Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>
-                En cours / souhaitée
-              </Text>
-              <Text sx={MagistratContentMandataireStyle}>
-                {mesuresInProgress} /{" "}
+            <Box width="50%">
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Email</Text>
+                <Text sx={MagistratContentMandataireStyle}>{email}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Téléphone</Text>
+                <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
                 <Text
                   sx={{
                     ...MagistratContentMandataireStyle,
                     ...(suspendActivity ? { color: "error" } : {}),
                   }}
-                  display="inline"
                 >
-                  {suspendActivity ? "Activité interrompue" : dispoMax}
+                  {suspendActivity
+                    ? "Activité interrompue"
+                    : currentAvailability}
+                  {suspendActivity && (
+                    <>
+                      <br />
+                      {suspendActivityReason
+                        ? "Motif: " + suspendActivityReason
+                        : ""}
+                    </>
+                  )}
                 </Text>
-              </Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  En cours / souhaitée
+                </Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {mesuresInProgress} /{" "}
+                  <Text
+                    sx={{
+                      ...MagistratContentMandataireStyle,
+                      ...(suspendActivity ? { color: "error" } : {}),
+                    }}
+                    display="inline"
+                  >
+                    {suspendActivity ? "Activité interrompue" : dispoMax}
+                  </Text>
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Mesure en attente
+                </Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {mesuresAwaiting}
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Observations sur le mandataire
+                </Text>
+                <MagistratMandataireComments
+                  tiId={tiId}
+                  serviceId={serviceId}
+                  mandataireId={mandataireId}
+                />
+              </Box>
             </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>Mesure en attente</Text>
-              <Text sx={MagistratContentMandataireStyle}>
-                {mesuresAwaiting}
-              </Text>
-            </Box>
-            <Box>
-              <Text sx={MagistratTitleMandataireStyle}>
-                Observations sur le mandataire
-              </Text>
-              <MagistratMandataireComments
-                tiId={tiId}
-                serviceId={serviceId}
-                mandataireId={mandataireId}
-              />
-            </Box>
-          </Box>
+          </Flex>
         </Flex>
-      </Flex>
-      <Box>
-        {serviceId && <MagistratServiceAntennes serviceId={serviceId} />}
+        <Box>
+          {serviceId && <MagistratServiceAntennes serviceId={serviceId} />}
+        </Box>
+        <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
+          <MagistratMandataireMap
+            longitude={longitude}
+            discriminator={discriminator}
+            latitude={latitude}
+            id={id}
+          />
+        </Box>
       </Box>
-      <Box height="400px" mt="5" sx={MagistratSideMandataireStyle}>
-        <MagistratMandataireMap
-          longitude={longitude}
-          discriminator={discriminator}
-          latitude={latitude}
-          id={id}
-        />
-      </Box>
-    </Box>
+    </>
   );
 }
 

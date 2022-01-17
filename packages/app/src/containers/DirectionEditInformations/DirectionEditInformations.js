@@ -1,4 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -51,11 +52,16 @@ function DirectionEditInformations({ userId, successLink, cancelLink }) {
   };
 
   return (
-    <DirectionEditInformationsForm
-      user={user}
-      handleSubmit={handleSubmit}
-      cancelLink={cancelLink}
-    />
+    <>
+      <Helmet>
+        <title>{`${user.nom} ${user.prenom} | e-MJPM`}</title>
+      </Helmet>
+      <DirectionEditInformationsForm
+        user={user}
+        handleSubmit={handleSubmit}
+        cancelLink={cancelLink}
+      />
+    </>
   );
 }
 

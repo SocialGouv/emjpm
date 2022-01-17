@@ -7,6 +7,7 @@ import { Card } from "~/components";
 import { EDIT_SERVICE } from "./mutations";
 import { GET_SERVICES } from "./queries";
 import { ServiceEditInformationsForm } from "./ServiceEditInformationsForm";
+import { Helmet } from "react-helmet";
 
 function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
   const history = useHistory();
@@ -62,14 +63,25 @@ function ServiceEditInformations({ cancelLink, successLink, serviceId }) {
     });
     setSubmitting(false);
   };
+
   return (
-    <Card p="5">
-      <ServiceEditInformationsForm
-        handleSubmit={handleSubmit}
-        cancelLink={cancelLink}
-        service={service}
-      />
-    </Card>
+    <>
+      <Helmet>
+        <title>
+          {service?.etablissement
+            ? service.etablissement
+            : `${service.nom} ${service.prenom}`}{" "}
+          | e-MJPM
+        </title>
+      </Helmet>
+      <Card p="5">
+        <ServiceEditInformationsForm
+          handleSubmit={handleSubmit}
+          cancelLink={cancelLink}
+          service={service}
+        />
+      </Card>
+    </>
   );
 }
 
