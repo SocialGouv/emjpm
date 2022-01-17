@@ -49,7 +49,6 @@ function AdminUserService({ userId, successLink, cancelLink }) {
 
     setSubmitting(false);
   };
-  console.log("user", user);
 
   return (
     <>

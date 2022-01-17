@@ -51,7 +51,6 @@ function DirectionEditInformations({ userId, successLink, cancelLink }) {
     setSubmitting(false);
   };
 
-  console.log(user);
   return (
     <>
       <Helmet>
