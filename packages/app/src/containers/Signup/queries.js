@@ -14,7 +14,7 @@ export const SIGNUP_DATA = gql`
         departement_code
       }
       etablissement
-      location_code_postal
+      code_postal
     }
     role {
       id

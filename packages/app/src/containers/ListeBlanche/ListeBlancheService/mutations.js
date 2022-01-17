@@ -47,7 +47,6 @@ export const UPDATE_SERVICE = gql`
         id
         siret
         adresse
-        code_postal
         email
         competences
         created_at
@@ -56,7 +55,6 @@ export const UPDATE_SERVICE = gql`
         prenom
         siret
         telephone
-        ville
         org_gestionnaire
         org_nom
         org_adresse
@@ -133,8 +131,6 @@ export const ADD_SERVICE = gql`
       returning {
         id
         etablissement
-        code_postal
-        ville
         telephone
         email
         adresse
@@ -186,8 +182,6 @@ export const ADD_SERVICE = gql`
         org_code_postal
         org_ville
         adresse
-        ville
-        code_postal
       }
     }
   }

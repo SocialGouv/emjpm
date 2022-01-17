@@ -75,8 +75,8 @@ function MandataireEditInformationsForm(props) {
       latitude: mandataire.latitude,
       longitude: mandataire.longitude,
       adresse: mandataire.location_adresse,
-      ville: mandataire.location_ville,
-      code_postal: mandataire.location_code_postal,
+      ville: mandataire.ville,
+      code_postal: mandataire.code_postal,
       departement_code: mandataire.departement_code,
     }),
     [mandataire]

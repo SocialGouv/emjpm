@@ -11,8 +11,6 @@ export const EDIT_USER = gql`
     $code_postal: String
     $ville: String
     $location_adresse: String
-    $location_code_postal: String
-    $location_ville: String
     $dispo_max: Int
     $use_location_adresse: Boolean
     $suspend_activity: Boolean
@@ -58,8 +56,6 @@ export const EDIT_USER = gql`
         code_postal: $code_postal
         ville: $ville
         location_adresse: $location_adresse
-        location_code_postal: $location_code_postal
-        location_ville: $location_ville
         latitude: $latitude
         longitude: $longitude
         dispo_max: $dispo_max

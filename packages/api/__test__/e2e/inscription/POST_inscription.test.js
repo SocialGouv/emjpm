@@ -26,12 +26,12 @@ beforeEach(async () => {
 
 const defaultRegister = (params) => ({
   mandataire: {
+    code_postal: "75010",
     departement_code: "01",
     etablissement: "",
     location_adresse: "",
-    location_code_postal: "75010",
-    location_ville: "",
     telephone: "",
+    ville: "",
   },
   user: {
     email: params && params.email != undefined ? params.email : "toto@toto.com",

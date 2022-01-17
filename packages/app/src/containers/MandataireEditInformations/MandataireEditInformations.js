@@ -77,7 +77,7 @@ const MandataireEditInformations = ({
           adresse: values.adresse,
           use_location_adresse: values.useLocationAdresse,
           location_adresse: values.geocode.label,
-          location_code_postal: values.geocode.postcode,
+          code_postal: values.geocode.postcode,
           competences: values.competences,
           departement_code: departement.id,
           dispo_max: parseInt(values.dispo_max),
@@ -101,7 +101,7 @@ const MandataireEditInformations = ({
           siret: values.siret ? values.siret : null,
           telephone: values.telephone,
           telephone_portable: values.telephone_portable,
-          location_ville: values.geocode.city,
+          ville: values.geocode.city,
         },
       });
     }

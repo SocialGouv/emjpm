@@ -43,8 +43,8 @@ const createMandataire = async (mandataireDatas, user_id) => {
     telephone,
     telephone_portable,
     location_adresse,
-    location_code_postal,
-    location_ville,
+    code_postal,
+    ville,
     departement_code,
     dispo_max,
     siret,
@@ -63,22 +63,22 @@ const createMandataire = async (mandataireDatas, user_id) => {
 
   const mandataire = await Mandataire.query()
     .allowInsert(
-      "[siret, telephone,user_id,telephone_portable,location_adresse,location_code_postal,location_ville, departement_code, dispo_max]"
+      "[siret, telephone,user_id,telephone_portable,location_adresse,code_postal,ville, departement_code, dispo_max]"
     )
     .insert({
+      code_postal,
       departement_code,
       dispo_max,
       genre,
       latitude,
       location_adresse,
-      location_code_postal,
-      location_ville,
       longitude,
       siret,
       sync_ocmi_enable,
       telephone,
       telephone_portable,
       user_id,
+      ville,
     });
 
   return mandataire;
@@ -191,9 +191,7 @@ const signup = async (req, res) => {
         return;
     }
 
-    const code_postal = body.mandataire
-      ? body.mandataire.location_code_postal
-      : "";
+    const code_postal = body.mandataire ? body.mandataire.code_postal : "";
 
     if (!user.active) {
       inscriptionEmail(nom, prenom, email, code_postal, type);

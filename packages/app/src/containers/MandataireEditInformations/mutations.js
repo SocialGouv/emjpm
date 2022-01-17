@@ -8,12 +8,12 @@ export const EDIT_USER = gql`
     $suspend_activity_reason: String
     $telephone: String
     $telephone_portable: String
-    $location_ville: String
+    $ville: String
     $longitude: Float!
     $latitude: Float!
     $location_adresse: String!
     $adresse: String!
-    $location_code_postal: String!
+    $code_postal: String!
     $genre: String
     $prenom: String!
     $nom: String!
@@ -48,8 +48,8 @@ export const EDIT_USER = gql`
         longitude: $longitude
         latitude: $latitude
         location_adresse: $location_adresse
-        location_ville: $location_ville
-        location_code_postal: $location_code_postal
+        ville: $ville
+        code_postal: $code_postal
         genre: $genre
         departement_code: $departement_code
         competences: $competences

@@ -172,6 +172,8 @@ export const GET_MANDATAIRES = gql`
         mandataire {
           telephone
           adresse
+          code_postal
+          ville
           commentaires {
             id
             comment
@@ -198,8 +200,8 @@ export const GET_MANDATAIRES = gql`
           id
           nom
           prenom
-          ville
           adresse
+          ville
           code_postal
           telephone
           email

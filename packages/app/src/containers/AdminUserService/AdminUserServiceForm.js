@@ -63,8 +63,8 @@ function AdminUserServiceForm(props) {
       latitude: service.latitude,
       longitude: service.longitude,
       adresse: service.location_adresse,
-      ville: service.location_ville,
-      code_postal: service.location_code_postal,
+      ville: service.ville,
+      code_postal: service.code_postal,
       departement_code: service.departement_code,
     }),
     [service]
@@ -84,11 +84,9 @@ function AdminUserServiceForm(props) {
       dispo_max: service.dispo_max || "",
       email: service.email || "",
       adresse: service.adresse || "",
+      location_adresse: service.location_adresse || "",
       code_postal: service.code_postal || "",
       ville: service.ville || "",
-      location_adresse: service.location_adresse || "",
-      location_code_postal: service.location_code_postal || "",
-      location_ville: service.location_ville || "",
       geocode: geocodeInitValue,
       information: service.information || "",
       etablissement: service.etablissement || "",
@@ -203,20 +201,6 @@ function AdminUserServiceForm(props) {
             placeholder="Complément d'adresse"
             label="Complément d'adresse"
             id="adresse_complement"
-            formik={formik}
-            validationSchema={adminUserServiceSchema}
-          />
-          <FormGroupInput
-            placeholder="Code postal"
-            label="Code postal"
-            id="code_postal"
-            formik={formik}
-            validationSchema={adminUserServiceSchema}
-          />
-          <FormGroupInput
-            placeholder="Ville"
-            label="Ville"
-            id="ville"
             formik={formik}
             validationSchema={adminUserServiceSchema}
           />

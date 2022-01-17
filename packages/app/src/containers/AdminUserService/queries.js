@@ -13,12 +13,10 @@ export const USER_SERVICE = gql`
           mesures_in_progress
           mesures_awaiting
           id
-          ville
-          code_postal
           adresse
           use_location_adresse
-          location_ville
-          location_code_postal
+          ville
+          code_postal
           location_adresse
           latitude
           longitude

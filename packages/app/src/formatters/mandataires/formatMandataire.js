@@ -64,10 +64,8 @@ export default function formatMandataire({
       locationAdresse: service.location_adresse
         ? capitalize(service.location_adresse)
         : "",
-      locationCodePostal: service.location_code_postal
-        ? service.location_code_postal
-        : "",
-      locationVille: service.location_ville ? service.location_ville : "",
+      locationCodePostal: service.code_postal ? service.code_postal : "",
+      locationVille: service.ville ? service.ville : "",
       competences: service.competences || "",
       email: service.email ? service.email : "",
       etablissement: service.etablissement ? service.etablissement : "",
@@ -94,10 +92,8 @@ export default function formatMandataire({
       locationAdresse: mandataire.location_adresse
         ? capitalize(mandataire.location_adresse)
         : "",
-      locationCodePostal: mandataire.location_code_postal
-        ? mandataire.location_code_postal
-        : "",
-      locationVille: mandataire.location_ville ? mandataire.location_ville : "",
+      locationCodePostal: mandataire.code_postal ? mandataire.code_postal : "",
+      locationVille: mandataire.ville ? mandataire.ville : "",
       competences: mandataire.competences || "",
       email:
         mandataire.user && mandataire.user.email ? mandataire.user.email : "",

@@ -10,6 +10,7 @@ export const MESURES_GESTIONNAIRE = gql`
       nom
       mandataire {
         id
+        ville
       }
       service {
         id

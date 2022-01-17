@@ -76,8 +76,8 @@ insert_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -101,8 +101,8 @@ insert_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -136,8 +136,8 @@ select_permissions:
     - latitude
     - liste_blanche_id
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -168,8 +168,8 @@ select_permissions:
     - latitude
     - liste_blanche_id
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - siret
     - telephone
@@ -195,8 +195,8 @@ select_permissions:
     - latitude
     - liste_blanche_id
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - siret
     - telephone
@@ -228,8 +228,8 @@ select_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -262,8 +262,8 @@ select_permissions:
     - latitude
     - liste_blanche_id
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -298,8 +298,8 @@ select_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -332,8 +332,8 @@ select_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -365,8 +365,8 @@ update_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - siret
     - suspend_activity
@@ -394,8 +394,8 @@ update_permissions:
     - id
     - latitude
     - location_adresse
-    - location_code_postal
-    - location_ville
+    - code_postal
+    - ville
     - longitude
     - siret
     - suspend_activity

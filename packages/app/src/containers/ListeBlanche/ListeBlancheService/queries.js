@@ -29,8 +29,6 @@ export const SERVICE = gql`
         id
         etablissement
         siret
-        ville
-        code_postal
         genre
         nom
         prenom

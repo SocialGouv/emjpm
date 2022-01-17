@@ -26,8 +26,8 @@ export const GESTIONNAIRES = gql`
         adresse_complement
         use_location_adresse
         location_adresse
-        location_ville
-        location_code_postal
+        ville
+        code_postal
         competences
         suspend_activity
         suspend_activity_reason
@@ -60,8 +60,6 @@ export const GESTIONNAIRES = gql`
         ville
         use_location_adresse
         location_adresse
-        location_code_postal
-        location_ville
         competences
         telephone
         email

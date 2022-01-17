@@ -52,8 +52,8 @@ function SignupMandataireForm() {
         const body = {
           mandataire: {
             location_adresse: values.geocode.label,
-            location_code_postal: values.geocode.postcode,
-            location_ville: values.geocode.city,
+            code_postal: values.geocode.postcode,
+            ville: values.geocode.city,
             departement_code: departement.id,
             dispo_max: parseInt(values.dispo_max),
             genre: user.genre,

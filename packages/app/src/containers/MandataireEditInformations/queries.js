@@ -12,8 +12,8 @@ export const MANDATAIRE = gql`
         id
         adresse
         location_adresse
-        location_code_postal
-        location_ville
+        code_postal
+        ville
         latitude
         longitude
         departement_code
