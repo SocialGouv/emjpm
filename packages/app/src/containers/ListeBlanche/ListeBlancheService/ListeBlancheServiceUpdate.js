@@ -75,7 +75,7 @@ export function ListeBlancheServiceUpdate(props) {
 
       setSubmitting(false);
     },
-    [lbService?.id, onSuccess, service?.id, siret, updateService]
+    [onSuccess, service?.id, siret, updateService]
   );
 
   if (!useQueryReady(loading, error)) {

@@ -100,11 +100,11 @@ export function ListeBlancheServiceForm(props) {
     validationSchema,
   });
 
+  const { setFieldValue } = formik;
+
   useEffect(() => {
     setFieldValue("initialSiret", originalSiret);
-  }, [originalSiret]);
-
-  const { setFieldValue } = formik;
+  }, [originalSiret, setFieldValue]);
 
   const departements = formik.values.departements;
   const addDepartementToCurrents = useCallback(
