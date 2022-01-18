@@ -8,9 +8,9 @@ const CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE = gql`
   }
 `;
 
-const CHECK_DUPLICATE_MANDATAIRE_SIRET = gql`
-  query CHECK_DUPLICATE_MANDATAIRE_SIRET($siret: String!) {
-    mandataires(where: { liste_blanche: { siret: { _eq: $siret } } }) {
+const CHECK_DUPLICATE_LISTE_BLANCHE_SIRET = gql`
+  query CHECK_DUPLICATE_LISTE_BLANCHE_SIRET($siret: String!) {
+    liste_blanche(where: { siret: { _eq: $siret } }) {
       id
     }
   }
@@ -24,21 +24,18 @@ const CHECK_DUPLICATE_SERVICE_SIRET = gql`
   }
 `;
 
-export async function checkDuplicateMandataireSIRET(client, siret) {
+export async function checkDuplicateListeBlancheSIRET(client, siret) {
   const { data } = await client.query({
     fetchPolicy: "network-only",
-    query: CHECK_DUPLICATE_MANDATAIRE_SIRET,
+    query: CHECK_DUPLICATE_LISTE_BLANCHE_SIRET,
     variables: {
       siret,
     },
   });
-  return data.mandataires.length === 0;
+  return data.liste_blanche.length === 0;
 }
 
-export async function checkDuplicateMandataireSIRETFromMandataire(
-  client,
-  siret
-) {
+export async function checkDuplicateMandataireSIRET(client, siret) {
   const { data } = await client.query({
     fetchPolicy: "network-only",
     query: CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE,

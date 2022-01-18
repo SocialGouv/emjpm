@@ -4,7 +4,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { useApolloClient } from "@apollo/client";
 
-import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
+import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
 import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
@@ -55,12 +55,12 @@ const lbSchema = ({ apolloClient, isCreate }) =>
       .required()
       .test(
         "siret-duplicate",
-        "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
+        "Le numéro SIRET que vous venez de saisir existe déjà dans la liste blanche sur eMJPM.",
         (value, { parent }) => {
           if (!value || value === parent.initialSiret) {
             return true;
           }
-          return checkDuplicateMandataireSIRET(apolloClient, value);
+          return checkDuplicateListeBlancheSIRET(apolloClient, value);
         }
       ),
     ville: yup.string().required(),

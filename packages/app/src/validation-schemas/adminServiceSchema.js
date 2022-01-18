@@ -1,6 +1,6 @@
 import yup from "./yup";
 
-import { checkDuplicateServiceSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
+import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 const adminServiceSchema = ({ apolloClient }) =>
   yup.object().shape({
@@ -54,7 +54,7 @@ const adminServiceSchema = ({ apolloClient }) =>
           if (!value || value === parent.initialSiret) {
             return true;
           }
-          return checkDuplicateServiceSIRET(apolloClient, value);
+          return checkDuplicateListeBlancheSIRET(apolloClient, value);
         }
       ),
     telephone: yup.string(),

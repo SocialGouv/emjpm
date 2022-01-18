@@ -1,7 +1,7 @@
 import { validateGeocode } from "./fieldValidators";
 import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
-import { checkDuplicateMandataireSIRETFromMandataire } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
+import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 const mandataireEditSchema = ({ type, apolloClient }) => {
   let siret = yup
@@ -15,7 +15,7 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
         if (!value || value === parent.initialSiret) {
           return true;
         }
-        return checkDuplicateMandataireSIRETFromMandataire(apolloClient, value);
+        return checkDuplicateMandataireSIRET(apolloClient, value);
       }
     );
   if (type !== "prepose") {
