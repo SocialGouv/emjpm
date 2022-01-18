@@ -267,7 +267,7 @@ export function ListeBlanchePreposeForm(props) {
                 />
               </div>
               <div id="msg-etablissements">
-                {(formik.touched.etablissements || formik.submitCount > 1) && (
+                {(formik.touched.etablissements || formik.submitCount > 0) && (
                   <InlineError
                     message={formik.errors.etablissements}
                     fieldId="etablissements"

@@ -367,7 +367,7 @@ export function ListeBlancheIndividuelForm(props) {
             />
           </div>
           <div id="msg-departements-agrements">
-            {(formik.touched.departements || formik.submitCount > 1) && (
+            {(formik.touched.departements || formik.submitCount > 0) && (
               <InlineError
                 message={formik.errors.departements}
                 fieldId="departements"
