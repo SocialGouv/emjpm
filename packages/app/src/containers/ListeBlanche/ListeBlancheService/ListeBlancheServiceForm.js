@@ -176,9 +176,14 @@ export function ListeBlancheServiceForm(props) {
     if (!selectedAdresseData) {
       return;
     }
-    const { postcode, city } = selectedAdresseData;
+    const { postcode, city, context } = selectedAdresseData;
     setFieldValue("code_postal", postcode || "");
     setFieldValue("ville", city ? city.toUpperCase() : "");
+    if (context) {
+      const [departement] = context.split(",");
+      const departements = addDepartementToCurrents(departement);
+      setFieldValue("departements", departements);
+    }
   }, [selectedAdresseData, setFieldValue]);
 
   useEffect(() => {
