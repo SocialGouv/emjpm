@@ -51,7 +51,7 @@ const findOptionsDepartements = (options, values) => {
 };
 
 export function ListeBlancheServiceForm(props) {
-  const { handleCancel, handleSubmit, lbService } = props;
+  const { handleCancel, handleSubmit, lbService, originalSiret } = props;
 
   const isCreate = !lbService;
 
@@ -99,6 +99,10 @@ export function ListeBlancheServiceForm(props) {
     onSubmit: handleSubmit,
     validationSchema,
   });
+
+  useEffect(() => {
+    setFieldValue("initialSiret", originalSiret);
+  }, [originalSiret]);
 
   const { setFieldValue } = formik;
 
@@ -475,7 +479,7 @@ export function ListeBlancheServiceForm(props) {
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
             />
-            <Input
+            {/* <Input
               label="SIRET"
               placeholder=""
               value={service.siret}
@@ -483,7 +487,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
-            />
+            /> */}
             <Input
               placeholder="Adresse"
               value={service.adresse}

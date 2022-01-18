@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 
 export const UPDATE_SERVICE = gql`
   mutation UpdateService(
-    $liste_blanche_id: Int!
     $service_id: Int!
     $etablissement: String!
     $code_postal: String!
@@ -11,6 +10,7 @@ export const UPDATE_SERVICE = gql`
     $prenom: String
     $ville: String!
     $siret: String!
+    $originalSiret: String!
     $email: String
     $telephone: String
     $service_departements: [service_departements_insert_input!]!
@@ -23,7 +23,7 @@ export const UPDATE_SERVICE = gql`
     $org_ville: String
   ) {
     update_liste_blanche(
-      where: { id: { _eq: $liste_blanche_id } }
+      where: { siret: { _eq: $originalSiret } }
       _set: {
         etablissement: $etablissement
         siret: $siret
@@ -64,6 +64,12 @@ export const UPDATE_SERVICE = gql`
         ville
         code_postal
       }
+    }
+    update_services(
+      where: { siret: { _eq: $originalSiret } }
+      _set: { siret: $siret }
+    ) {
+      affected_rows
     }
     insert_service_departements(
       objects: $service_departements
