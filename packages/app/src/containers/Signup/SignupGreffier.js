@@ -63,11 +63,11 @@ function SignupGreffierForm({ tiDatas }) {
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Tribunal"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
+            <Text lineHeight="1.5" color="textSecondary" id="tribunal_heading">
               {"Dans quel tribunal exercez-vous?"}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="tribunal_heading">
             <FormGroupSelect
               formik={formik}
               id="ti"

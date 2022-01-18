@@ -54,10 +54,12 @@ export function MagistratMesureAddForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Jugement</Heading>
+          <Heading size={4} id="jugement_heading">
+            Jugement
+          </Heading>
           <Text lineHeight="1.5">{"Information sur le jugement."}</Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="jugement_heading">
           <FormGroupInput
             id="numero_rg"
             label="Numéro RG"
@@ -95,10 +97,12 @@ export function MagistratMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Majeur protégé</Heading>
+          <Heading size={4} id="majeur_protege_heading">
+            Majeur protégé
+          </Heading>
           <Text lineHeight="1.5">{"Informations sur le majeur protégé"}</Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="majeur_protege_heading">
           <FormGroupSelect
             id="civilite"
             placeholder="Civilité"
@@ -119,12 +123,14 @@ export function MagistratMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Mesure de protection</Heading>
+          <Heading size={4} id="mesure_de_protection">
+            Mesure de protection
+          </Heading>
           <Text lineHeight="1.5">
             {"Informations sur la mesure de protection"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="mesure_de_protection">
           <FormGroupSelect
             id="nature_mesure"
             placeholder="Nature de la mesure"

@@ -90,11 +90,11 @@ export function ListeBlanchePreposeForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="informations_heading">
             {"Informations"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="informations_heading">
           <FormGroupInput
             placeholder="Nom"
             id="lastname"
@@ -117,7 +117,7 @@ export function ListeBlanchePreposeForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="liste_des_etablissements_heading">
             {"Liste des établissements"}
           </Heading>
           <Text mt={"20px"} mb={2}>
@@ -126,7 +126,10 @@ export function ListeBlanchePreposeForm(props) {
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="liste_des_etablissements_heading"
+        >
           <RadioGroup
             options={etablissementOptions}
             onValueChange={async (value) => {

@@ -66,11 +66,11 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="responsable_heading">
             {"Responsable"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="responsable_heading">
           <FormGroupInput
             value={formik.values.contact_firstname}
             id="contact_firstname"
@@ -89,11 +89,11 @@ function ServiceAntenneForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="coordonnes_heading">
             {"Coordonnées"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="coordonnes_heading">
           <FormGroupInput
             value={formik.values.contact_phone}
             id="contact_phone"

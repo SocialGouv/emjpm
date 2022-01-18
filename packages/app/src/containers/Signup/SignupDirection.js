@@ -69,12 +69,14 @@ export function SignupDirection() {
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Institution"}</Heading>
+            <Heading size={4} id="institution_heading">
+              {"Institution"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Pour quelle direction travaillez-vous?"}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="institution_heading">
             <FormGroupSelect
               id="directionType"
               placeholder="Type de direction"

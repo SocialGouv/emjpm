@@ -84,13 +84,17 @@ function SignupServiceForm({ serviceDatas }) {
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Votre service"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
+            <Text
+              lineHeight="1.5"
+              color="textSecondary"
+              id="votre_service_heading"
+            >
               {
                 "Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez."
               }
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="votre_service_heading">
             <Select
               id="departements"
               formik={formik}

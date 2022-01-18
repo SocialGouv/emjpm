@@ -162,14 +162,14 @@ export function ListeBlancheServiceForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="service_tutelaire_heading">
             {"Service tutelaire"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Renseignez le département qui finance le service tutelaire."}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="service_tutelaire_heading">
           <SelectSIRET
             id="siret"
             formik={formik}
@@ -271,11 +271,11 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="contact_heading">
             {"Contact"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="contact_heading">
           <FormGroupInput
             placeholder="Email"
             id="email"
@@ -292,14 +292,17 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="organisme_gestionnaire_heading">
             {"Organisme gestionnaire"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"L'organisme gestionnaire est-il différent du service?"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="organisme_gestionnaire_heading"
+        >
           <FormGroupSelect
             id="org_gestionnaire"
             options={[

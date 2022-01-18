@@ -111,11 +111,18 @@ export function SignupForm() {
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Information personnelle"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
+            <Text
+              lineHeight="1.5"
+              color="textSecondary"
+              id="informations_personelle_heading"
+            >
               {"Ces informations permettent de vous identifier."}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox
+            role="group"
+            aria-labelledby="informations_personelle_heading"
+          >
             <FormGroupSelect
               id="genre"
               formik={formik}
@@ -140,13 +147,18 @@ export function SignupForm() {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Identifiants de connexion"}</Heading>
+            <Heading size={4} id="identifiants_de_connexion">
+              {"Identifiants de connexion"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox
+            role="group"
+            aria-labelledby="identifiants_de_connexion"
+          >
             <FormGroupInput
               placeholder="Email"
               id="email"
