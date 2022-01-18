@@ -184,7 +184,7 @@ export function ListeBlancheServiceForm(props) {
       const departements = addDepartementToCurrents(departement);
       setFieldValue("departements", departements);
     }
-  }, [selectedAdresseData, setFieldValue]);
+  }, [selectedAdresseData, setFieldValue, addDepartementToCurrents]);
 
   useEffect(() => {
     (async () => {
