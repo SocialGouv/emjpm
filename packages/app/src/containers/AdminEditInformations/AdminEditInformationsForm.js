@@ -27,11 +27,15 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
       <Flex>
         <FormGrayBox>
           <Heading size={4}>{"Modifier vos informations"}</Heading>
-          <Text lineHeight="1.5" color="textSecondary">
+          <Text
+            lineHeight="1.5"
+            color="textSecondary"
+            id="modifier_informations"
+          >
             {"Vos informations"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="modifier_informations">
           <FormGroupInput
             formik={formik}
             id="prenom"

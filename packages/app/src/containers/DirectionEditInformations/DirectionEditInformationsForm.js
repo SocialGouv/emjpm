@@ -26,12 +26,17 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>{"Modifier vos informations"}</Heading>
+          <Heading size={4} id="modifier_vos_informations_heading">
+            {"Modifier vos informations"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Vos informations"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="modifier_vos_informations_heading"
+        >
           <FormGroupInput
             formik={formik}
             id="prenom"

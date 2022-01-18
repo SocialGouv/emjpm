@@ -56,13 +56,20 @@ export function MesureEtatCreateOrEditForm(props) {
               {"Ajout d'un état"}
             </Heading>
           )}
-          <Text lineHeight="1.5" color="textSecondary">
+          <Text
+            lineHeight="1.5"
+            color="textSecondary"
+            id="mesure_de_protection_informations"
+          >
             {
               "Merci de renseigner les informations de l'état de la mesure de la protection"
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="mesure_de_protection_informations"
+        >
           <FormGroupInputDate
             label="Date de changement d'état"
             placeholder="jj/mm/aaaa"

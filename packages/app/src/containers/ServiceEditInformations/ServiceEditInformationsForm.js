@@ -72,11 +72,11 @@ function ServiceEditInformationsForm(props) {
       <form noValidate onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="responsable_heading">
               {"Responsable"}
             </Heading>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="responsable_heading">
             <FormGroupInput
               placeholder="Nom"
               id="nom"
@@ -95,11 +95,11 @@ function ServiceEditInformationsForm(props) {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="coordonnees_heading">
               {"Coordonnées"}
             </Heading>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="coordonnees_heading">
             <FormGroupInput
               placeholder="Email"
               id="email"
@@ -178,14 +178,14 @@ function ServiceEditInformationsForm(props) {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="activite_heading">
               {"Activité"}
             </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Ces informations seront visibles par les magistrats."}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="activite_heading">
             <Box mb={2}>
               <CheckBox
                 isChecked={formik.values.suspendActivity}
