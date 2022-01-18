@@ -109,9 +109,11 @@ function SignupMandataireForm() {
         )}
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Téléphone"}</Heading>
+            <Heading size={4} id="telephone_heading">
+              {"Téléphone"}
+            </Heading>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="Téléphone">
             <FormGroupInput
               id="telephone"
               formik={formik}

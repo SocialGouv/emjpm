@@ -35,7 +35,7 @@ function AdminUserServiceForm(props) {
         <FormGrayBox>
           <Heading size={4} mb={1}>{`${service.etablissement}`}</Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-label="Informations personnelles">
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"

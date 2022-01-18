@@ -58,12 +58,19 @@ export function SignupServiceInvitationForm(props) {
       <Flex>
         <FormGrayBox>
           <Heading size={4}>{"Identifiants de connexion"}</Heading>
-          <Text lineHeight="1.5" color="textSecondary">
+          <Text
+            lineHeight="1.5"
+            color="textSecondary"
+            id="identifiants_de_connexion_heading"
+          >
             {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="identifiants_de_connexion_heading"
+        >
           <FormGroupInput
             formik={formik}
             disabled

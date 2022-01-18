@@ -169,11 +169,11 @@ export function ListeBlancheIndividuelForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="structure_juridique">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox rol="group" aria-labelledby="structure_juridique">
           <SelectSIRET
             id="siret"
             formik={formik}
@@ -240,11 +240,11 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="mandataire">
             {"Mandataire"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="mandataire">
           <FormGroupInput
             placeholder="Nom"
             id="nom"
@@ -268,7 +268,7 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="liste_des_agrements">
             {"Liste des agréments"}
           </Heading>
           <Text mt={2} mb={1}>
@@ -277,7 +277,7 @@ export function ListeBlancheIndividuelForm(props) {
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="liste_des_agrements">
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}
