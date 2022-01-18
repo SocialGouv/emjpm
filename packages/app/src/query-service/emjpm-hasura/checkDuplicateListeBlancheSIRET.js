@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-const CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE = gql`
-  query CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE($siret: String!) {
+const CHECK_DUPLICATE_MANDATAIRE_SIRET = gql`
+  query CHECK_DUPLICATE_MANDATAIRE_SIRET($siret: String!) {
     view_mandataires_siret(where: { siret: { _eq: $siret } }) {
       siret
     }
@@ -38,7 +38,7 @@ export async function checkDuplicateListeBlancheSIRET(client, siret) {
 export async function checkDuplicateMandataireSIRET(client, siret) {
   const { data } = await client.query({
     fetchPolicy: "network-only",
-    query: CHECK_DUPLICATE_MANDATAIRE_SIRET_FROM_MANDATAIRE,
+    query: CHECK_DUPLICATE_MANDATAIRE_SIRET,
     variables: {
       siret,
     },

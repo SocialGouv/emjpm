@@ -49,7 +49,7 @@ const adminServiceSchema = ({ apolloClient }) =>
       .required()
       .test(
         "siret-duplicate",
-        "Le numéro SIRET que vous venez de saisir existe déjà pour un service sur eMJPM.",
+        "Le numéro SIRET que vous venez de saisir existe déjà dans la liste blanche sur eMJPM.",
         (value, { parent }) => {
           if (!value || value === parent.initialSiret) {
             return true;

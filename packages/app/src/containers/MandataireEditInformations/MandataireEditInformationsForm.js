@@ -175,12 +175,14 @@ function MandataireEditInformationsForm(props) {
             <Heading size={4}>{"Structure juridique"}</Heading>
           </FormGrayBox>
           <FormInputBox>
-            <FormGroupInput
-              placeholder="SIRET"
-              id="siret"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
+            {type !== "prepose" && (
+              <FormGroupInput
+                placeholder="SIRET"
+                id="siret"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            )}
 
             <Field>
               <Geocode
