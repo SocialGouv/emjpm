@@ -105,7 +105,7 @@ function MandataireEditInformationsForm(props) {
       tis: mandataire_tis.map((mti) => mti.ti_id),
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
-      initialSiret: liste_blanche?.siret || "",
+      initialSiret: liste_blanche?.siret || mandataire?.siret || "",
       useLocationAdresse: mandataire.use_location_adresse,
     },
     onSubmit: handleSubmit,
