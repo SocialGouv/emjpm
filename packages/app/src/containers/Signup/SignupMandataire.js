@@ -12,7 +12,6 @@ import {
 } from "~/components/AppForm";
 import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
@@ -177,9 +176,13 @@ function SignupMandataireForm() {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">
-            <Link to="/">
-              <Button variant="outline">Annuler</Button>
-            </Link>
+            <Button
+              variant="outline"
+              onClick={() => history.push("/")}
+              aria-label="Annuler"
+            >
+              Annuler
+            </Button>
           </Box>
           <Box mr="2">
             <Button
@@ -188,6 +191,7 @@ function SignupMandataireForm() {
                 setMandataire(formik.values);
                 validateStepOne(false);
               }}
+              aria-label="Retour"
             >
               Retour
             </Button>
@@ -197,6 +201,7 @@ function SignupMandataireForm() {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              aria-label="Enregistrer"
             >
               Enregistrer
             </Button>
