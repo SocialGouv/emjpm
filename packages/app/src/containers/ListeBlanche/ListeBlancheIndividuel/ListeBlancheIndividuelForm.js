@@ -70,16 +70,32 @@ const lbSchema = ({ apolloClient, isCreate }) =>
         "required-oncreate-orif-present-onupdate",
         FORM_REQUIRED_MESSAGE,
         (value, { parent }) => {
-          if (isCreate) {
-            return value && value.length > 0;
-          }
           if (
-            !parent.initialDepartements ||
-            parent.initialDepartements.length === 0
+            !isCreate &&
+            (!parent.initialDepartements ||
+              parent.initialDepartements.length === 0)
           ) {
             return true;
           }
           return value && value.length > 0;
+        }
+      )
+      .test(
+        "required-financeur",
+        "Veuillez sélectionner un département financeur",
+        (value, { parent }) => {
+          if (
+            !isCreate &&
+            (!parent.initialDepartements ||
+              parent.initialDepartements.length === 0)
+          ) {
+            return true;
+          }
+          return (
+            value &&
+            value.length > 0 &&
+            value.some((v) => v.departement_financeur)
+          );
         }
       ),
   });
