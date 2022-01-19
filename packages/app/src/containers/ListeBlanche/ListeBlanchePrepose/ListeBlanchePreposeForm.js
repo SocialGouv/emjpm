@@ -43,16 +43,32 @@ const lbSchema = ({ isCreate }) =>
         "required-oncreate-orif-present-onupdate",
         FORM_REQUIRED_MESSAGE,
         (value, { parent }) => {
-          if (isCreate) {
-            return value && value.length > 0;
-          }
           if (
-            !parent.initialEtablissements ||
-            parent.initialEtablissements.length === 0
+            !isCreate &&
+            (!parent.initialEtablissements ||
+              parent.initialEtablissements.length === 0)
           ) {
             return true;
           }
           return value && value.length > 0;
+        }
+      )
+      .test(
+        "required-rattachement",
+        "Veuillez sélectionner un établissement de rattachement",
+        (value, { parent }) => {
+          if (
+            !isCreate &&
+            (!parent.initialEtablissements ||
+              parent.initialEtablissements.length === 0)
+          ) {
+            return true;
+          }
+          return (
+            value &&
+            value.length > 0 &&
+            value.some((v) => v.etablissement_rattachement)
+          );
         }
       ),
   });
