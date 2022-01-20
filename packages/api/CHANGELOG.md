@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.147.0](https://github.com/SocialGouv/emjpm/compare/v25.146.1...v25.147.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* **column+wording:** date_ouverture->date_nomination fix [#2716](https://github.com/SocialGouv/emjpm/issues/2716) ([64b1b75](https://github.com/SocialGouv/emjpm/commit/64b1b753aaeea392bd142ece0e0e9229577448d5))
+* **export:** empty file with headers ([2d0b348](https://github.com/SocialGouv/emjpm/commit/2d0b34867bcfd765fa1f68d87decbe40f1aa4ce0))
+* **pg-ssl:** prepare scaleway migration ([#2721](https://github.com/SocialGouv/emjpm/issues/2721)) ([a2e11d4](https://github.com/SocialGouv/emjpm/commit/a2e11d4533094a23651164e14d7c7742d5ce0fcc))
+* **retro-compat:** date_ouverture->date_nomination ([678ad6f](https://github.com/SocialGouv/emjpm/commit/678ad6fed0738507edd78c23bcf10c8bad58a294))
+* **signup:** + tests + up seed ([de256e4](https://github.com/SocialGouv/emjpm/commit/de256e432a5f3acd6aaf55a9793ee824957d1a30))
+* **test:** e2e and up seed ([3ed1acc](https://github.com/SocialGouv/emjpm/commit/3ed1acc01975a0b943d573439c789d101c471643))
+* **tests:** improve trx detection ([d51c158](https://github.com/SocialGouv/emjpm/commit/d51c158e688246a1963d49ea42cc86fb2b8ee354))
+* **trx:** move recount in transaction ([6e508fb](https://github.com/SocialGouv/emjpm/commit/6e508fb8fcb9c173e3c773423c9eaaf8c2bacd2a))
+* **trx:** re-enable transactions ([05a215c](https://github.com/SocialGouv/emjpm/commit/05a215cb49f42ab920dad0cc5190d7a33c182432))
+* **trx:** temp disable buggy transactions ([c37db50](https://github.com/SocialGouv/emjpm/commit/c37db5093e7751e53576c61deeb90170ef3121a2))
+* **typo:** code ([9b32974](https://github.com/SocialGouv/emjpm/commit/9b329748a2cc3407548cdeb3678fde7a7a550238))
+* **ville-cp:** refacto normalize ([24113e2](https://github.com/SocialGouv/emjpm/commit/24113e29b6716c89b41bfdd47090d5de8463f702))
+
+
+### Features
+
+* **lb:** decouple liste blanche ([a463091](https://github.com/SocialGouv/emjpm/commit/a463091722d513ec361b9f0e109d183ee7fedf41))
+* **location-adresse:** use ([180c6dc](https://github.com/SocialGouv/emjpm/commit/180c6dcc49fd56c68cf0c22a3b4b91bc7f00ea1a))
+* **mandataire-individuel:** user infos wip ([9fd8d85](https://github.com/SocialGouv/emjpm/commit/9fd8d85c1bd68ec0f6417eb6369d71e520fa6096))
+
+
+
+
+
 ## [25.146.1](https://github.com/SocialGouv/emjpm/compare/v25.146.0...v25.146.1) (2021-12-08)
 
 **Note:** Version bump only for package @emjpm/api
