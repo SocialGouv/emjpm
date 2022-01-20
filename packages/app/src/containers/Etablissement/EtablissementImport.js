@@ -121,6 +121,7 @@ export function EtablissementImport() {
                   placeholder="Lien de téléchargement de la base FINESS"
                   onBlur={formik.handleBlur}
                   onChange={formik.handleChange}
+                  autoComplete="url"
                 />
               </Box>
             </Box>

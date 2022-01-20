@@ -53,18 +53,21 @@ function MagistratEditInformationsForm(props) {
             id="prenom"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="Nom"
             id="nom"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Email"
             id="email"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="email"
           />
           <CheckBox
             isChecked={formik.values.share_email}

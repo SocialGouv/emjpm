@@ -112,6 +112,7 @@ function ForgotPassword() {
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Entrez votre email"
+              autoComplete="email"
             />
             <div id="msg-email">
               {formik.touched.email && (

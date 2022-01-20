@@ -41,18 +41,21 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             id="prenom"
             placeholder="Prénom"
             validationSchema={adminEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             formik={formik}
             id="nom"
             placeholder="Nom"
             validationSchema={adminEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             formik={formik}
             id="email"
             placeholder="Email"
             validationSchema={adminEditSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

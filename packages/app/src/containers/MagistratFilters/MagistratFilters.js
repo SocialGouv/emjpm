@@ -88,6 +88,7 @@ function MagistratFilters() {
                 placeholder="Cabinet"
                 label="Préciser un cabinet"
                 forceActive
+                autoComplete="organization"
               />
             </Box>
           </Flex>

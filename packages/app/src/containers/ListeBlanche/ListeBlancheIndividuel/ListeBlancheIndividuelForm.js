@@ -192,6 +192,7 @@ export function ListeBlancheIndividuelForm(props) {
             id="adresse2"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="address-line2"
           />
           <Flex justifyContent="space-between">
             <Box mr={1} flex={1 / 2}>
@@ -207,6 +208,7 @@ export function ListeBlancheIndividuelForm(props) {
                   formik.setFieldValue("ville", "");
                 }}
                 size="small"
+                autoComplete="postal-code"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -250,12 +252,14 @@ export function ListeBlancheIndividuelForm(props) {
             id="nom"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="given-name"
           />
 
           <FormGroupInput
@@ -263,6 +267,7 @@ export function ListeBlancheIndividuelForm(props) {
             id="email"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

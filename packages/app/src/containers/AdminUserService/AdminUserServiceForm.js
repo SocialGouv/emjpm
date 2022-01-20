@@ -41,18 +41,21 @@ function AdminUserServiceForm(props) {
             id="prenom"
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="Nom"
             id="nom"
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Email"
             id="email"
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>
