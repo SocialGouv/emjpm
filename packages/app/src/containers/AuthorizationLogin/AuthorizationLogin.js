@@ -108,6 +108,7 @@ function AuthorizationLogin(props) {
               placeholder="Votre nom d'utilisateur"
               outline="default"
               aria-describedby="msg-email"
+              autoComplete="email"
             />
             <div id="msg-email">
               {formik.touched.email && (
@@ -130,6 +131,7 @@ function AuthorizationLogin(props) {
               placeholder="Votre mot de passe"
               outline="default"
               aria-describedby="msg-password"
+              autoComplete="current-password"
             />
             <div id="msg-password">
               {formik.touched.password && (

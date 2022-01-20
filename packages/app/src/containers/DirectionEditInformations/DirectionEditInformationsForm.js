@@ -42,18 +42,21 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             id="prenom"
             placeholder="Prénom"
             validationSchema={directionEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             formik={formik}
             id="nom"
             placeholder="Nom"
             validationSchema={directionEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             formik={formik}
             id="email"
             placeholder="Email"
             validationSchema={directionEditSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

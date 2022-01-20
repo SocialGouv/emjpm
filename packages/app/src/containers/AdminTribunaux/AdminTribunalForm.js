@@ -110,6 +110,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   onChange={formik.handleChange}
                   placeholder="Nom du tribunal"
                   aria-describedby="msg-etablissement"
+                  autoComplete="organization"
                 />
                 <div id="msg-etablissement">
                   <InlineError
@@ -152,6 +153,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   onChange={formik.handleChange}
                   placeholder="Email"
                   aria-describedby="msg-email"
+                  autoComplete="email"
                 />
                 <div id="msg-email">
                   <InlineError message={formik.errors.email} fieldId="email" />
@@ -166,6 +168,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   onChange={formik.handleChange}
                   placeholder="Téléphone"
                   aria-describedby="msg-telephone"
+                  autoComplete="tel"
                 />
                 <div id="msg-telephone">
                   <InlineError

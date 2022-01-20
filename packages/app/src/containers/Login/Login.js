@@ -127,6 +127,7 @@ function Login(props) {
               placeholder="Votre email"
               required
               aria-describedby="msg-email"
+              autoComplete="email"
             />
             <div id="msg-email">
               <InlineError message={formik.errors.email} fieldId="email" />
@@ -149,6 +150,7 @@ function Login(props) {
               placeholder="Votre mot de passe"
               required
               aria-describedby="msg-password"
+              autoComplete="current-password"
             />
             <div id="msg-password">
               {(formik.touched.password || formikSubmitted) && (

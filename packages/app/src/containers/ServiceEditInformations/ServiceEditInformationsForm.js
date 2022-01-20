@@ -82,6 +82,7 @@ function ServiceEditInformationsForm(props) {
               id="nom"
               formik={formik}
               validationSchema={serviceSchema}
+              autoComplete="family-name"
             />
             <Box flex={1 / 2}>
               <FormGroupInput
@@ -89,6 +90,7 @@ function ServiceEditInformationsForm(props) {
                 id="prenom"
                 formik={formik}
                 validationSchema={serviceSchema}
+                autoComplete="given-name"
               />
             </Box>
           </FormInputBox>
@@ -105,6 +107,7 @@ function ServiceEditInformationsForm(props) {
               id="email"
               formik={formik}
               validationSchema={serviceSchema}
+              autoComplete="email"
             />
             <Box flex={1 / 2}>
               <FormGroupInput
@@ -112,6 +115,7 @@ function ServiceEditInformationsForm(props) {
                 id="telephone"
                 formik={formik}
                 validationSchema={serviceSchema}
+                autoComplete="tel"
               />
             </Box>
           </FormInputBox>

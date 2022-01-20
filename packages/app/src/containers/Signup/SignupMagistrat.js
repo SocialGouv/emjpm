@@ -81,6 +81,7 @@ function SignupMagistratForm({ tiDatas }) {
               id="cabinet"
               placeholder="Cabinet"
               formik={formik}
+              autoComplete="organization"
             />
           </FormInputBox>
         </Flex>

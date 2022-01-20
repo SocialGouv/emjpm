@@ -39,6 +39,7 @@ export function AdminEditorForm(props) {
                 onChange={formik.handleChange}
                 placeholder="Nom du service"
                 aria-describedby="msg-name"
+                autoComplete="organization"
               />
               <div id="msg-name">
                 <InlineError message={formik.errors.name} fieldId="name" />
@@ -55,6 +56,7 @@ export function AdminEditorForm(props) {
                 onChange={formik.handleChange}
                 placeholder="URI de redirection"
                 aria-describedby="msg-redirect_uris"
+                autoComplete="url"
               />
               <div id="msg-redirect_uris">
                 <InlineError

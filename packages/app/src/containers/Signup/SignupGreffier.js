@@ -81,6 +81,7 @@ function SignupGreffierForm({ tiDatas }) {
               id="cabinet"
               placeholder="Cabinet"
               formik={formik}
+              autoComplete="organization"
             />
           </FormInputBox>
         </Flex>

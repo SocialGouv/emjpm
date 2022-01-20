@@ -119,6 +119,7 @@ function SignupMandataireForm() {
               placeholder="Téléphone"
               value={formik.values.telephone}
               validationSchema={signupMandataireSchema}
+              autoComplete="tel"
             />
             <FormGroupInput
               id="telephone_portable"
@@ -126,6 +127,7 @@ function SignupMandataireForm() {
               placeholder="Téléphone portable"
               value={formik.values.telephone_portable}
               validationSchema={signupMandataireSchema}
+              autoComplete="tel"
             />
           </FormInputBox>
         </Flex>
