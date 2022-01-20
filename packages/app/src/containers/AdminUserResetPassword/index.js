@@ -61,6 +61,7 @@ function AdminUserResetPassword(props) {
                       e.target.select();
                     }}
                     size="small"
+                    autoComplete="current-password"
                   />
                 </Box>
               )}

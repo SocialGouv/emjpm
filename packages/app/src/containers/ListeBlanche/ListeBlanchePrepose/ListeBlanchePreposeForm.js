@@ -100,18 +100,21 @@ export function ListeBlanchePreposeForm(props) {
             id="lastname"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Prénom"
             id="firstname"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="Adresse e-mail du mandataire"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

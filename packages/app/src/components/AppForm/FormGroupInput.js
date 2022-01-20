@@ -27,6 +27,7 @@ export default function FormGroupInput({
   onChange,
   size,
   noRequiredAsterisk,
+  autoComplete,
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -69,6 +70,7 @@ export default function FormGroupInput({
           max={max}
           size={size ? size : ""}
           noRequiredAsterisk={noRequiredAsterisk}
+          autoComplete={autoComplete ? autoComplete : "off"}
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>

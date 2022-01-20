@@ -137,12 +137,14 @@ export function SignupForm() {
               id="prenom"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="given-name"
             />
             <FormGroupInput
               placeholder="Nom"
               id="nom"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="family-name"
             />
           </FormInputBox>
         </Flex>
@@ -165,6 +167,7 @@ export function SignupForm() {
               id="email"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="email"
             />
             <FormGroupInput
               placeholder="Mot de passe"
@@ -172,6 +175,7 @@ export function SignupForm() {
               id="password"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="new-password"
             />
             <FormGroupInput
               placeholder="Confirmation du mot de passe"
@@ -179,6 +183,7 @@ export function SignupForm() {
               id="confirmPassword"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="new-password"
             />
           </FormInputBox>
         </Flex>

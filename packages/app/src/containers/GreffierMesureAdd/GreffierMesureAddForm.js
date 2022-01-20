@@ -83,6 +83,7 @@ export function GreffierMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            autoComplete="organization"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}

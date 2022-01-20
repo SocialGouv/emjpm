@@ -181,6 +181,7 @@ export function ListeBlancheServiceForm(props) {
             id="etablissement"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="organization"
           />
           <SelectAdresse
             placeholder="Adresse"
@@ -207,6 +208,7 @@ export function ListeBlancheServiceForm(props) {
                   formik.touched.lb_code_postal && formik.errors.lb_code_postal
                 }
                 size="small"
+                autoComplete="postal-code"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -337,12 +339,14 @@ export function ListeBlancheServiceForm(props) {
                 id="org_nom"
                 formik={formik}
                 validationSchema={validationSchema}
+                autoComplete="family-name"
               />
               <FormGroupInput
                 placeholder="Adresse"
                 id="org_adresse"
                 formik={formik}
                 validationSchema={validationSchema}
+                autoComplete="address-line1"
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -351,6 +355,7 @@ export function ListeBlancheServiceForm(props) {
                     id="org_code_postal"
                     formik={formik}
                     validationSchema={validationSchema}
+                    autoComplete="postal-code"
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>

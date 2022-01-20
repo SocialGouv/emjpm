@@ -53,18 +53,21 @@ function GreffierEditInformationsForm(props) {
             id="prenom"
             formik={formik}
             validationSchema={greffierEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="Nom"
             id="nom"
             formik={formik}
             validationSchema={greffierEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Email"
             id="email"
             formik={formik}
             validationSchema={greffierEditSchema}
+            autoComplete="email"
           />
           <CheckBox
             isChecked={formik.values.share_email}

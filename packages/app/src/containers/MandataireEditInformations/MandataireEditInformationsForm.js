@@ -101,18 +101,21 @@ function MandataireEditInformationsForm(props) {
               value={formik.values.genre}
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="sex"
             />
             <FormGroupInput
               placeholder="Prénom"
               id="prenom"
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="given-name"
             />
             <FormGroupInput
               placeholder="Nom"
               id="nom"
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="family-name"
             />
           </FormInputBox>
         </Flex>
@@ -128,6 +131,7 @@ function MandataireEditInformationsForm(props) {
               id="email"
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="email"
             />
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>
@@ -136,6 +140,7 @@ function MandataireEditInformationsForm(props) {
                   id="telephone"
                   formik={formik}
                   validationSchema={validationSchema}
+                  autoComplete="tel"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
@@ -144,6 +149,7 @@ function MandataireEditInformationsForm(props) {
                   id="telephone_portable"
                   formik={formik}
                   validationSchema={validationSchema}
+                  autoComplete="tel"
                 />
               </Box>
             </Flex>
