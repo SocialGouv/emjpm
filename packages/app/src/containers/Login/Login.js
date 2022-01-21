@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 
 import { useApolloClient } from "@apollo/client";
@@ -19,7 +20,7 @@ import {
 } from "~/components";
 import { useAuth } from "~/user/Auth";
 import { matopush } from "~/user/matomo";
-import { useState } from "react";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 const { API_URL } = config;
 
@@ -129,8 +130,12 @@ function Login(props) {
               aria-describedby="msg-email"
               autoComplete="email"
             />
+
             <div id="msg-email">
-              <InlineError message={formik.errors.email} fieldId="email" />
+              <InlineError
+                message={formik.errors.email && errorMessages.email}
+                fieldId="email"
+              />
             </div>
           </Field>
           <Field>
