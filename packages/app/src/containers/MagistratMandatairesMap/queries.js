@@ -30,7 +30,6 @@ export const MESURES_GESTIONNAIRES = gql`
       user_type
       mandataire {
         id
-        code_postal
         longitude
         latitude
       }

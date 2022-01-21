@@ -1,6 +1,6 @@
 import yup from "./yup";
 
-import { checkDuplicateServiceSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
+import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 const adminServiceSchema = ({ apolloClient }) =>
   yup.object().shape({
@@ -14,13 +14,13 @@ const adminServiceSchema = ({ apolloClient }) =>
       .required(),
     email: yup.string().email(),
     etablissement: yup.string().required(),
-    lb_adresse: yup.string().nullable().required(),
-    lb_code_postal: yup
+    adresse: yup.string().nullable().required(),
+    code_postal: yup
       .string()
       .nullable()
       .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
       .required(),
-    lb_ville: yup.string().nullable().required(),
+    ville: yup.string().nullable().required(),
     org_adresse: yup.string().nullable().when("org_gestionnaire", {
       is: true,
       then: yup.string().required(),
@@ -44,16 +44,17 @@ const adminServiceSchema = ({ apolloClient }) =>
     }),
     siret: yup
       .string()
+      .nullable()
       .matches(/^[\d]{14}$/, "Doit contenir exactement 14 chiffres")
       .required()
       .test(
         "siret-duplicate",
-        "Le numéro SIRET que vous venez de saisir existe déjà pour un service sur eMJPM.",
+        "Le numéro SIRET que vous venez de saisir existe déjà dans la liste blanche sur eMJPM.",
         (value, { parent }) => {
-          if (value === parent.initialSiret) {
+          if (!value || value === parent.initialSiret) {
             return true;
           }
-          return checkDuplicateServiceSIRET(apolloClient, value);
+          return checkDuplicateListeBlancheSIRET(apolloClient, value);
         }
       ),
     telephone: yup.string(),

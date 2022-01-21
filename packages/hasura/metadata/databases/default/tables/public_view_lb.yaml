@@ -2,14 +2,14 @@ table:
   name: view_lb
   schema: public
 object_relationships:
-- name: lb_user
+- name: liste_blanche
   using:
     manual_configuration:
       column_mapping:
-        lb_user_id: id
+        liste_blanche_id: id
       insertion_order: null
       remote_table:
-        name: lb_users
+        name: liste_blanche
         schema: public
 - name: mandataire
   using:
@@ -34,7 +34,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - uid
-    - lb_user_id
+    - liste_blanche_id
     - service_id
     - mandataire_id
     - user_type

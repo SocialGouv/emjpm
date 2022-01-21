@@ -1,7 +1,7 @@
 import { validateGeocode } from "./fieldValidators";
 import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
 
-import { checkDuplicateMandataireSIRETFromMandataire } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
+import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 const mandataireEditSchema = ({ type, apolloClient }) => {
   let siret = yup
@@ -15,7 +15,7 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
         if (!value || value === parent.initialSiret) {
           return true;
         }
-        return checkDuplicateMandataireSIRETFromMandataire(apolloClient, value);
+        return checkDuplicateMandataireSIRET(apolloClient, value);
       }
     );
   if (type !== "prepose") {
@@ -33,6 +33,21 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
       .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
     nom: yup.string().required(),
     prenom: yup.string().required(),
+    adresse: yup
+      .string()
+      .nullable()
+      .test(
+        "required-ifnot-use-location",
+        FORM_REQUIRED_MESSAGE,
+        (value, { parent }) => {
+          if (parent.useLocationAdresse) {
+            return true;
+          }
+          value = value?.trim();
+          return !!value;
+        }
+      ),
+    adresse_complement: yup.string().nullable(),
     telephone: yup.string().required(),
     telephone_portable: yup.string(),
     tis: yup.mixed().required(),

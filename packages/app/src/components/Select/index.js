@@ -25,7 +25,6 @@ export default function Select({ isAsync, isCreatable, label, ...props }) {
       {label && (
         <Label
           size={props.size}
-          aria-describedby={props.id}
           htmlFor={"react-select-" + props.id + "-input"}
           isActive={props.isActive}
           required={props.required}

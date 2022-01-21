@@ -75,7 +75,7 @@ export function SignupServiceInvitationForm(props) {
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}
-            placeholder="Genre"
+            placeholder="Civilité"
             value={formik.values.genre}
             formik={formik}
             validationSchema={signupSchema}

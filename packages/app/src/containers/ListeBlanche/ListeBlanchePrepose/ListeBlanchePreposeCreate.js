@@ -5,7 +5,7 @@ import { Card } from "rebass";
 import useUser from "~/hooks/useUser";
 
 import { ListeBlanchePreposeForm } from "./ListeBlanchePreposeForm";
-import { CREATE_LB_USER_PREPOSE } from "./mutations";
+import { CREATE_LISTE_BLANCHE_PREPOSE } from "./mutations";
 import { ETABLISSEMENTS } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -15,7 +15,7 @@ export function ListeBlanchePreposeCreate() {
   const history = useHistory();
 
   const [createLbPrepose, { loading, error }] = useMutation(
-    CREATE_LB_USER_PREPOSE,
+    CREATE_LISTE_BLANCHE_PREPOSE,
     {
       onCompleted: async () => {
         await history.push(`/${type}/liste-blanche`);
@@ -38,8 +38,10 @@ export function ListeBlanchePreposeCreate() {
                   etablissement_rattachement: e.etablissement_rattachement,
                 };
               }),
-              nom: values.lastname,
-              prenom: values.firstname,
+              nom: values.nom,
+              prenom: values.prenom,
+              telephone: values.telephone,
+              genre: values.genre,
             },
           });
         }}

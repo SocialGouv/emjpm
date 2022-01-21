@@ -15,6 +15,7 @@ import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/validation-schemas";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 import { Button, Heading, Text } from "~/components";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 import { SignupContext } from "./context";
 
@@ -129,12 +130,14 @@ export function SignupForm() {
               id="prenom"
               formik={formik}
               validationSchema={signupSchema}
+              normalizers={[normalizeFirstName]}
             />
             <FormGroupInput
-              placeholder="Nom"
+              placeholder="NOM"
               id="nom"
               formik={formik}
               validationSchema={signupSchema}
+              normalizers={[normalizeLastName]}
             />
           </FormInputBox>
         </Flex>

@@ -45,6 +45,7 @@ function Input(props) {
     readOnly,
     forceActive,
     noRequiredAsterisk,
+    containerStyle,
   } = props;
 
   const [isFocus, toggleFocus] = useState(false);
@@ -60,6 +61,7 @@ function Input(props) {
       size={size}
       isValid={isValid}
       hasError={hasError}
+      style={containerStyle}
     >
       {(placeholder || label) && (
         <InputLabel

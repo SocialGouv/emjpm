@@ -17,7 +17,9 @@ const RESULT_PER_PAGE = 20;
 
 function GreffierMapMandatairesPanelList() {
   const {
-    greffier: { ti_id: tiId, departement_code: departementCode },
+    greffier: {
+      ti: { id: tiId, departement_code: departementCode },
+    },
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -54,7 +56,11 @@ function GreffierMapMandatairesPanelList() {
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const gestionnaires = formatMandatairesList(data.mandatairesList);
+  const gestionnaires = formatMandatairesList(
+    data.mandatairesList.map((row) => {
+      return { gestionnaire: row.gestionnaires[0] };
+    })
+  );
   return (
     <Box pt="2" px="2" sx={GreffierMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>

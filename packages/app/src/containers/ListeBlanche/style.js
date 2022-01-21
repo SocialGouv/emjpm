@@ -33,4 +33,19 @@ const descriptionStyle = {
   whiteSpace: "nowrap",
 };
 
-export { cardStyle, labelStyle, descriptionStyle, anchorStyle };
+const readOnlyContainerStyle = {
+  marginBottom: "10px",
+};
+
+const readOnlyInputStyle = {
+  cursor: "not-allowed",
+};
+
+export {
+  cardStyle,
+  labelStyle,
+  descriptionStyle,
+  anchorStyle,
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+};

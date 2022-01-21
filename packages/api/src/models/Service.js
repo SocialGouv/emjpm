@@ -54,6 +54,7 @@ class Service extends Model {
     return {
       properties: {
         adresse: { type: "string" },
+        adresse_complement: { type: "string" },
         code_postal: { type: "string" },
         competences: {
           type: "string",
@@ -63,6 +64,7 @@ class Service extends Model {
         },
         etablissement: { type: "string" },
         id: { type: "integer" },
+        location_adresse: { type: "string" },
         mesures_awaiting: { type: "integer" },
         mesures_in_progress: { type: "integer" },
         telephone: { type: "string" },

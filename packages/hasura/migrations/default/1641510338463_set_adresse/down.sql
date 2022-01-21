@@ -1,0 +1,3 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE mandataires SET adresse = TRIM(CONCAT(COALESCE(location_adresse, ''), ' ', COALESCE(location_code_postal, ''), ' ', COALESCE(location_ville, '')));

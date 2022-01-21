@@ -6,23 +6,28 @@ import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "../style";
 
 export function ListeBlanchePreposeItem(props) {
   const { item, onClick, getHref } = props;
-  const { lb_user } = item;
+  const { liste_blanche } = item;
 
-  const { lb_user_etablissements: etablissements = [] } = lb_user;
+  const { mandataire_prepose_etablissements: etablissements = [] } =
+    liste_blanche;
 
   const to = getHref && getHref(item, props);
   return (
-    <Card key={lb_user.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
+    <Card
+      key={liste_blanche.id}
+      sx={cardStyle({ clickable: !!onClick })}
+      mb="2"
+    >
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">
             <Text sx={labelStyle}>{"Mandataire préposé d'établissement"}</Text>
             <Flex>
               <Text sx={descriptionStyle}>
-                {lb_user.nom ? lb_user.nom.toUpperCase() : ""}
+                {liste_blanche.nom ? liste_blanche.nom.toUpperCase() : ""}
               </Text>
               <Text pl="1" sx={descriptionStyle}>
-                {lb_user.prenom}
+                {liste_blanche.prenom}
               </Text>
             </Flex>
           </Flex>

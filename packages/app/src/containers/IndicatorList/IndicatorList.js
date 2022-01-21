@@ -105,7 +105,7 @@ function IndicatorList(props) {
         <Indicator
           error={false}
           loading={false}
-          title="Greffier"
+          title="Greffiers"
           indicator={greffierInscritCount || 0}
           headingSize={5}
         />

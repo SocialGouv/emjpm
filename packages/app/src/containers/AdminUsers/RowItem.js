@@ -116,7 +116,7 @@ export default function RowItem({ item }) {
                 <Flex width="100px" flexDirection="column">
                   <Text sx={labelStyle}>liste blanche</Text>
                   <Text sx={descriptionStyle}>
-                    {mandataire.lb_user_id ? "oui" : "non"}
+                    {mandataire.liste_blanche_id ? "oui" : "non"}
                   </Text>
                 </Flex>
               )}

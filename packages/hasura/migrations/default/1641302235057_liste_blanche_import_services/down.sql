@@ -1,0 +1,40 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- INSERT INTO liste_blanche (
+--    type,
+--     email,
+--     nom,
+--     prenom,
+--     siret,
+--     code_postal,
+--     ville,
+--     adresse,
+--     telephone,
+--     competences,
+--     etablissement,
+--     org_gestionnaire,
+--     org_nom,
+--     org_adresse,
+--     org_code_postal,
+--     org_ville,
+--     created_at
+-- )
+-- SELECT
+--     'service',
+--     email,
+--     nom,
+--     prenom,
+--     siret,
+--     CASE WHEN (lb_code_postal = '') IS NOT FALSE THEN code_postal ELSE lb_code_postal END,
+--     CASE WHEN (lb_ville = '') IS NOT FALSE THEN ville ELSE lb_ville  END,
+--     CASE WHEN (lb_adresse = '') IS NOT FALSE THEN adresse ELSE lb_adresse  END,
+--     telephone,
+--     competences,
+--     etablissement,
+--     org_gestionnaire,
+--     org_nom,
+--     org_adresse,
+--     org_code_postal,
+--     org_ville,
+--     created_at
+-- FROM services;

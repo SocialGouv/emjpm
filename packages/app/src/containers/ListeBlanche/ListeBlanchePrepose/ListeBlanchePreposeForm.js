@@ -1,25 +1,77 @@
-import { isAdmin } from "@emjpm/biz";
 import { XCircle } from "@styled-icons/boxicons-regular/XCircle";
 import { useFormik } from "formik";
 
-import AsyncSelect from "react-select/async";
 import { Box, Flex, Text } from "rebass";
 
 import {
   FormGrayBox,
   FormGroupInput,
   FormInputBox,
+  FormGroupSelect,
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import yup from "~/validation-schemas/yup";
-import { Button, Heading, RadioGroup } from "~/components";
+import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
+import {
+  Button,
+  Heading,
+  RadioGroup,
+  InlineError,
+  Input,
+  Select,
+} from "~/components";
 
-const validationSchema = yup.object().shape({
-  email: yup.string().required(),
-  firstname: yup.string().required(),
-  lastname: yup.string().required(),
-});
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
+import { useMemo } from "react";
+
+import {
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+} from "~/containers/ListeBlanche/style";
+
+const lbSchema = ({ isCreate }) =>
+  yup.object().shape({
+    email: yup.string().required(),
+    prenom: yup.string().required(),
+    nom: yup.string().required(),
+    genre: yup.string().nullable().required(),
+    telephone: yup.string().nullable(),
+    etablissements: yup
+      .array()
+      .test(
+        "required-oncreate-orif-present-onupdate",
+        FORM_REQUIRED_MESSAGE,
+        (value, { parent }) => {
+          if (
+            !isCreate &&
+            (!parent.initialEtablissements ||
+              parent.initialEtablissements.length === 0)
+          ) {
+            return true;
+          }
+          return value && value.length > 0;
+        }
+      )
+      .test(
+        "required-rattachement",
+        "Veuillez sélectionner un établissement de rattachement",
+        (value, { parent }) => {
+          if (
+            !isCreate &&
+            (!parent.initialEtablissements ||
+              parent.initialEtablissements.length === 0)
+          ) {
+            return true;
+          }
+          return (
+            value &&
+            value.length > 0 &&
+            value.some((v) => v.etablissement_rattachement)
+          );
+        }
+      ),
+  });
 
 async function updateEtablissementRattachement(formik, id) {
   if (formik.values.etablissements.length > 0) {
@@ -38,20 +90,27 @@ async function updateEtablissementRattachement(formik, id) {
 export function ListeBlanchePreposeForm(props) {
   const { searchEtablissements, editMode, data = {}, handleSubmit } = props;
 
+  const isCreate = !props.data;
+  const validationSchema = useMemo(() => lbSchema({ isCreate }), [isCreate]);
+
+  const etablissements = data.mandataire_prepose_etablissements
+    ? data.mandataire_prepose_etablissements.map((e) => {
+        return {
+          etablissement_rattachement: e.etablissement_rattachement,
+          id: e.etablissement.id,
+          ligneacheminement: e.etablissement.ligneacheminement,
+          rslongue: e.etablissement.rslongue,
+        };
+      })
+    : [];
   const initialValues = {
     email: data.email || "",
-    etablissements: data.lb_user_etablissements
-      ? data.lb_user_etablissements.map((e) => {
-          return {
-            etablissement_rattachement: e.etablissement_rattachement,
-            id: e.etablissement.id,
-            ligneacheminement: e.etablissement.ligneacheminement,
-            rslongue: e.etablissement.rslongue,
-          };
-        })
-      : [],
-    firstname: data.prenom || "",
-    lastname: data.nom || "",
+    initialEtablissements: etablissements,
+    etablissements,
+    prenom: normalizeFirstName(data.prenom || ""),
+    nom: normalizeLastName(data.nom || ""),
+    genre: data.genre,
+    telephone: data.telephone,
   };
 
   const formik = useFormik({
@@ -62,7 +121,7 @@ export function ListeBlanchePreposeForm(props) {
           await handleSubmit(values);
         }
       } catch (error) {
-        if (error.message.includes("lb_users_email_unique")) {
+        if (error.message.includes("liste_blanche_email_unique")) {
           setFieldError(
             "email",
             "L'email renseigné est déja utilisé pour un autre enregistrement de la liste blanche"
@@ -86,33 +145,54 @@ export function ListeBlanchePreposeForm(props) {
 
   const user = useUser();
 
+  const mandataire = data?.mandataire;
+  const isAdmin = user.type === "admin";
+
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Informations"}
+            {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInput
-            placeholder="Nom"
-            id="lastname"
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
             formik={formik}
             validationSchema={validationSchema}
           />
           <FormGroupInput
             placeholder="Prénom"
-            id="firstname"
+            id="prenom"
             formik={formik}
             validationSchema={validationSchema}
+            normalizers={[normalizeFirstName]}
           />
           <FormGroupInput
-            placeholder="Adresse e-mail du mandataire"
+            placeholder="NOM"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeLastName]}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
           />
+          <Box flex={1 / 2}>
+            <FormGroupInput
+              placeholder="Téléphone"
+              id="telephone"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
+          </Box>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -167,42 +247,144 @@ export function ListeBlanchePreposeForm(props) {
 
           <Box>
             <Box mt={2}>
-              <AsyncSelect
-                name="etablissement"
-                instanceId={`etablissement-${data.id || "new"}`}
-                cacheOptions
-                defaultOptions
-                placeholder={"recherche par nom, finess, code postal, ville."}
-                loadOptions={async (inputValue) => {
-                  const values = await searchEtablissements(inputValue);
-                  return values.map((e) => {
-                    return {
-                      label: `${e.rslongue} (${e.ligneacheminement})`,
-                      ligneacheminement: e.ligneacheminement,
-                      rslongue: e.rslongue,
-                      value: e.id,
-                    };
-                  });
-                }}
-                onChange={(option) => {
-                  if (!etablissementIds.includes(option.value)) {
-                    formik.setFieldValue(
-                      "etablissements",
-                      formik.values.etablissements.concat({
-                        id: option.value,
-                        ligneacheminement: option.ligneacheminement,
-                        rslongue: option.rslongue,
-                      })
-                    );
-                  }
-                }}
-              />
+              <div aria-describedby="msg-etablissements">
+                <Select
+                  isAsync
+                  name="etablissement"
+                  instanceId={`etablissement-${data.id || "new"}`}
+                  cacheOptions
+                  defaultOptions
+                  label={"Ajouter un établissement"}
+                  placeholder={"recherche par nom, finess, code postal, ville."}
+                  required
+                  loadOptions={async (inputValue) => {
+                    const values = await searchEtablissements(inputValue);
+                    return values.map((e) => {
+                      return {
+                        label: `${e.rslongue} (${e.ligneacheminement})`,
+                        ligneacheminement: e.ligneacheminement,
+                        rslongue: e.rslongue,
+                        value: e.id,
+                      };
+                    });
+                  }}
+                  onChange={(option) => {
+                    if (!etablissementIds.includes(option.value)) {
+                      formik.setFieldValue(
+                        "etablissements",
+                        formik.values.etablissements.concat({
+                          id: option.value,
+                          ligneacheminement: option.ligneacheminement,
+                          rslongue: option.rslongue,
+                        })
+                      );
+                    }
+                  }}
+                />
+              </div>
+              <div id="msg-etablissements">
+                {(formik.touched.etablissements || formik.submitCount > 0) && (
+                  <InlineError
+                    message={formik.errors.etablissements}
+                    fieldId="etablissements"
+                  />
+                )}
+              </div>
             </Box>
           </Box>
         </FormInputBox>
       </Flex>
+
+      {!isCreate && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Informations données par le préposé"}
+            </Heading>
+            <Text mt={2} mb={1}>
+              {"Ces informations sont modifables uniquement par le mandataire"}
+            </Text>
+            {isAdmin && mandataire && (
+              <Link to={`/admin/users/${mandataire.user.id}`}>
+                <Button>
+                  <span role="img" aria-labelledby="user-profile-link">
+                    🧑
+                  </span>
+                  <span id="user-profile-link"> Profil de l'utilisateur</span>
+                </Button>
+              </Link>
+            )}
+          </FormGrayBox>
+          <FormInputBox>
+            {!mandataire && <Text>Aucun utilisateur associé</Text>}
+            {mandataire && (
+              <>
+                <Input
+                  label="Civilité"
+                  placeholder=""
+                  value={
+                    mandataire.genre
+                      ? GENDER_OPTIONS.find(
+                          ({ value }) => value === mandataire.genre
+                        ).label
+                      : ""
+                  }
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+                <Input
+                  label="Prénom"
+                  placeholder=""
+                  value={mandataire.user.prenom}
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+                <Input
+                  label="NOM"
+                  placeholder=""
+                  value={mandataire.user.nom}
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+                <Input
+                  label="Adresse e-mail"
+                  placeholder=""
+                  value={mandataire.user.email}
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+                <Input
+                  placeholder="Téléphone"
+                  value={mandataire.telephone}
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+                <Input
+                  placeholder="Adresse"
+                  value={mandataire.adresse}
+                  forceActive
+                  readOnly
+                  containerStyle={readOnlyContainerStyle}
+                  style={readOnlyInputStyle}
+                />
+              </>
+            )}
+          </FormInputBox>
+        </Flex>
+      )}
+
       <Flex justifyContent="flex-end" mt={4}>
-        {editMode && isAdmin(user) && (
+        {editMode && isAdmin && (
           <Box>
             <Link to={`/admin/liste-blanche/${data.id}/delete`}>
               <Button mr="2" bg="red">

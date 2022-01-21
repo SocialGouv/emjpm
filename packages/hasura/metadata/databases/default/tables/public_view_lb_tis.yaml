@@ -54,7 +54,7 @@ select_permissions:
     columns:
     - uid
     - ti_id
-    - lb_user_id
+    - liste_blanche_id
     - service_id
     - mandataire_id
     - user_type
@@ -82,7 +82,7 @@ select_permissions:
     columns:
     - uid
     - ti_id
-    - lb_user_id
+    - liste_blanche_id
     - service_id
     - mandataire_id
     - user_type

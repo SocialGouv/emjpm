@@ -267,11 +267,11 @@ module.exports = {
             nom
           }
         }
-        lb_user {
+        liste_blanche {
           id
           nom
           prenom
-          lb_departements {
+          mandataire_individuel_departements {
             id
             departement_financeur
             departement {
@@ -312,7 +312,7 @@ module.exports = {
             secretaire_specialise_etp_n6
           }
         }
-      }      
+      }
     }
   `,
 
@@ -418,7 +418,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-      
+
       curatelle_renforcee_etablissement_fin_annee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -490,7 +490,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-      
+
       tutelle_etablissement_debut_annee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -2285,7 +2285,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlDu1erJanvierAu31Decembre}
-          { 
+          {
             mesure_ressources : {
               mesure_ressources_prestations_sociales: {
                 prestations_sociales: {_eq: AAH}
@@ -2300,7 +2300,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlDu1erJanvierAu31Decembre}
-          { 
+          {
             mesure_ressources : {
               mesure_ressources_prestations_sociales: {
                 prestations_sociales: {_eq: PCH}
@@ -2315,7 +2315,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlDu1erJanvierAu31Decembre}
-          { 
+          {
             mesure_ressources : {
               mesure_ressources_prestations_sociales: {
                 prestations_sociales: {_eq: ASI}
@@ -2330,7 +2330,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlDu1erJanvierAu31Decembre}
-          { 
+          {
             mesure_ressources : {
               mesure_ressources_prestations_sociales: {
                 prestations_sociales: {_eq: RSA}
@@ -2371,7 +2371,7 @@ module.exports = {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
           ${gqlDu1erJanvierAu31Decembre}
-          { 
+          {
             mesure_ressources : {
               mesure_ressources_prestations_sociales: {
                 prestations_sociales: {_eq: ASPA}
@@ -2397,7 +2397,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-    
+
     }
   `,
 };

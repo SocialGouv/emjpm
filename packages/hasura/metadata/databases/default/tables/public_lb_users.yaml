@@ -1,40 +1,6 @@
 table:
   name: lb_users
   schema: public
-object_relationships:
-- name: mandataire
-  using:
-    manual_configuration:
-      column_mapping:
-        id: lb_user_id
-      insertion_order: null
-      remote_table:
-        name: mandataires
-        schema: public
-- name: ocmi_mandataire
-  using:
-    manual_configuration:
-      column_mapping:
-        siret: siret
-      insertion_order: null
-      remote_table:
-        name: ocmi_mandataires
-        schema: public
-array_relationships:
-- name: lb_departements
-  using:
-    foreign_key_constraint_on:
-      column: lb_user_id
-      table:
-        name: lb_departements
-        schema: public
-- name: lb_user_etablissements
-  using:
-    foreign_key_constraint_on:
-      column: lb_user_id
-      table:
-        name: lb_user_etablissements
-        schema: public
 insert_permissions:
 - permission:
     backend_only: false
@@ -99,13 +65,7 @@ select_permissions:
     - prenom
     - siret
     - type
-    filter:
-      lb_departements:
-        _and:
-        - departement_financeur:
-            _eq: true
-        - departement_code:
-            _in: x-hasura-agrements
+    filter: {}
   role: direction_territoriale
 - permission:
     columns:
@@ -188,46 +148,5 @@ update_permissions:
     check: null
     columns:
     - siret
-    filter:
-      mandataire:
-        user_id:
-          _eq: X-Hasura-User-Id
+    filter: {}
   role: individuel
-- permission:
-    check: null
-    columns:
-    - siret
-    filter:
-      mandataire:
-        user_id:
-          _eq: X-Hasura-User-Id
-  role: prepose
-event_triggers:
-- definition:
-    delete:
-      columns: "*"
-    enable_manual: false
-    insert:
-      columns: "*"
-    update:
-      columns:
-      - email
-      - nom
-      - prenom
-      - type
-      - siret
-      - adresse1
-      - adresse2
-      - code_postal
-      - ville
-      - created_at
-      - id
-  headers:
-  - name: hasura_web_hook_secret
-    value_from_env: HASURA_WEB_HOOK_SECRET
-  name: lb_update_lb_user
-  retry_conf:
-    interval_sec: 10
-    num_retries: 0
-    timeout_sec: 60
-  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/lb-update/lb-user"

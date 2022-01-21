@@ -31,11 +31,14 @@ function buildOne(enqueteReponse) {
       ? `${item.user.nom} ${item.user.prenom}`.toLowerCase()
       : "";
     if (!item.departement) {
-      const lb_user = enqueteReponse.mandataire.lb_user;
-      if (lb_user) {
-        const departement_financeur = lb_user.lb_departements
-          ? lb_user.lb_departements.find((d) => d.departement_financeur)
-          : undefined;
+      const liste_blanche = enqueteReponse.mandataire.liste_blanche;
+      if (liste_blanche) {
+        const departement_financeur =
+          liste_blanche.mandataire_individuel_departements
+            ? liste_blanche.mandataire_individuel_departements.find(
+                (d) => d.departement_financeur
+              )
+            : undefined;
         item.departement = departement_financeur
           ? departement_financeur.departement
           : undefined;

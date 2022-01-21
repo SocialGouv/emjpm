@@ -5,7 +5,7 @@ export default function useAppFieldShowError({
   hideErrors = false,
   displayOnlyWhenTouched = true,
 }) {
-  const { errors } = formik;
+  const { errors, submitCount } = formik;
 
   if (!error) {
     error = errors[id];
@@ -14,7 +14,7 @@ export default function useAppFieldShowError({
   const showError =
     !hideErrors && // disabled by component
     !!error && // no error to display
-    (!displayOnlyWhenTouched || !!formik.touched[id]); // not touched by user
+    (!displayOnlyWhenTouched || !!formik.touched[id] || submitCount > 0); // not touched by user
 
   return showError;
 }

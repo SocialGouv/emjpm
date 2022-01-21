@@ -81,9 +81,8 @@ export default function MandataireListItem(props) {
   const prenom = capitalize(
     (isService ? service.prenom : mandataire.user.prenom) || ""
   );
-  const codePostal = capitalize(
-    (isService ? service.code_postal : mandataire.code_postal) || ""
-  );
+  const codePostal =
+    (isService ? service.code_postal : mandataire.code_postal) || "";
   const ville = capitalize(
     (isService ? service.ville : mandataire.ville) || ""
   );

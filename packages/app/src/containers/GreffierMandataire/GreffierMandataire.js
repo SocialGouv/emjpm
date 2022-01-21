@@ -45,7 +45,9 @@ export function GreffierMandataire(props) {
     dispoMax,
     tis,
     adresse,
-    codePostal,
+    useLocationAdresse,
+    locationAdresse,
+    adresseComplement,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -55,7 +57,6 @@ export function GreffierMandataire(props) {
     discriminator,
     latitude,
     longitude,
-    ville,
     id,
     suspendActivity,
     suspendActivityReason,
@@ -96,9 +97,17 @@ export function GreffierMandataire(props) {
               <Text sx={GreffierTitleMandataireStyle}>
                 {"Adresse d’activité"}
               </Text>
-              <Text
-                sx={GreffierContentMandataireStyle}
-              >{`${adresse} ${codePostal} ${ville}`}</Text>
+              <Text sx={GreffierContentMandataireStyle}>
+                {useLocationAdresse ? locationAdresse : adresse}
+              </Text>
+            </Box>
+            <Box>
+              <Text sx={GreffierTitleMandataireStyle}>
+                {"Complément d'adresse"}
+              </Text>
+              <Text sx={GreffierContentMandataireStyle}>
+                {adresseComplement}
+              </Text>
             </Box>
             <Box>
               <Text sx={GreffierTitleMandataireStyle}>Dernière connexion</Text>

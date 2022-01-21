@@ -18,10 +18,9 @@ export const MESURES_GESTIONNAIRE = gql`
     mandatairesList: search_ti_view_lb_tis(
       limit: $limit
       offset: $offset
-      order_by: { gestionnaire: { remaining_capacity: $order } }
       args: { search: null, tiid: $tiId, departementcode: $departementCode }
     ) {
-      gestionnaire {
+      gestionnaires(distinct_on: [id]) {
         id
         discriminator
         mesures_awaiting
@@ -34,16 +33,17 @@ export const MESURES_GESTIONNAIRE = gql`
           id
           genre
           telephone
-          ville
           latitude
           longitude
           adresse
+          location_adresse
+          code_postal
+          ville
           commentaires {
             id
             comment
             ti_id
           }
-          code_postal
           user {
             id
             nom
@@ -65,9 +65,10 @@ export const MESURES_GESTIONNAIRE = gql`
           prenom
           latitude
           longitude
-          ville
           adresse
+          location_adresse
           code_postal
+          ville
           telephone
           email
           etablissement

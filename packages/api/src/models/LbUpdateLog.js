@@ -15,7 +15,7 @@ class LbUpdateLog extends Model {
         comment: { type: ["string", "null"] },
         created_at: { type: "timestamptz" },
         id: { type: "integer" },
-        lb_user_id: { type: ["integer", "null"] },
+        liste_blanche_id: { type: ["integer", "null"] },
         op: { type: ["string", "null"] },
         service_id: { type: ["integer", "null"] },
         siret: { type: ["string", "null"] },

@@ -3,6 +3,7 @@ import gql from "graphql-tag";
 export const EDIT_USER = gql`
   mutation EditUser(
     $dispo_max: Int!
+    $use_location_adresse: Boolean
     $suspend_activity: Boolean
     $suspend_activity_reason: String
     $telephone: String
@@ -10,7 +11,9 @@ export const EDIT_USER = gql`
     $ville: String
     $longitude: Float!
     $latitude: Float!
+    $location_adresse: String!
     $adresse: String!
+    $adresse_complement: String!
     $code_postal: String!
     $genre: String
     $prenom: String!
@@ -37,14 +40,17 @@ export const EDIT_USER = gql`
     update_mandataires(
       _set: {
         dispo_max: $dispo_max
+        use_location_adresse: $use_location_adresse
         suspend_activity: $suspend_activity
         suspend_activity_reason: $suspend_activity_reason
         telephone: $telephone
         telephone_portable: $telephone_portable
-        ville: $ville
+        adresse: $adresse
+        adresse_complement: $adresse_complement
         longitude: $longitude
         latitude: $latitude
-        adresse: $adresse
+        location_adresse: $location_adresse
+        ville: $ville
         code_postal: $code_postal
         genre: $genre
         departement_code: $departement_code
@@ -52,12 +58,6 @@ export const EDIT_USER = gql`
         siret: $siret
       }
       where: { user_id: { _eq: $id } }
-    ) {
-      affected_rows
-    }
-    update_lb_users(
-      _set: { siret: $siret }
-      where: { mandataire: { user_id: { _eq: $id } } }
     ) {
       affected_rows
     }

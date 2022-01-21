@@ -21,13 +21,26 @@ import {
   Text,
   InlineError,
   Field,
+  Input,
 } from "~/components";
+
+import { Link } from "~/containers/Commons";
 import { GeocodeCities } from "~/components/Geocode";
+import { CITY_DEPARTEMENT } from "./queries";
 
 import { createDepartementOptions, departementList } from "~/utils/geodata";
 
 import SelectSIRET from "~/containers/SelectSIRET";
 import SelectAdresse from "~/containers/SelectAdresse";
+
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
+
+import {
+  readOnlyContainerStyle,
+  readOnlyInputStyle,
+} from "~/containers/ListeBlanche/style";
+import useUser from "../../../hooks/useUser";
 
 const findOptionsDepartements = (options, values) => {
   if (!values) {
@@ -38,7 +51,11 @@ const findOptionsDepartements = (options, values) => {
 };
 
 export function ListeBlancheServiceForm(props) {
-  const { handleCancel, handleSubmit, service } = props;
+  const { handleCancel, handleSubmit, lbService, originalSiret } = props;
+
+  const isCreate = !lbService;
+
+  const service = lbService?.service;
 
   const apolloClient = useApolloClient();
   const validationSchema = useMemo(
@@ -62,25 +79,32 @@ export function ListeBlancheServiceForm(props) {
               departement_code: departement.id,
             }))
           : "",
-      email: service ? service.email : "",
-      etablissement: service ? service.etablissement : "",
-      lb_adresse: service ? service.lb_adresse : "",
-      lb_code_postal: service ? service.lb_code_postal : "",
-      lb_ville: service ? service.lb_ville : "",
-      org_adresse: service ? service.org_adresse : "",
-      org_code_postal: service ? service.org_code_postal : "",
-      org_gestionnaire: service ? service.org_gestionnaire : "",
-      org_nom: service ? service.org_nom : "",
-      org_ville: service ? service.org_ville : "",
-      siret: service ? service.siret || "" : "",
-      telephone: service ? service.telephone : "",
-      initialSiret: service ? service.siret || "" : "",
+      genre: lbService ? lbService.genre : "",
+      nom: normalizeLastName(lbService ? lbService.nom : ""),
+      prenom: normalizeFirstName(lbService ? lbService.prenom : ""),
+      email: lbService ? lbService.email : "",
+      etablissement: lbService ? lbService.etablissement : "",
+      adresse: lbService ? lbService.adresse : "",
+      code_postal: lbService ? lbService.code_postal : "",
+      ville: lbService ? lbService.ville : "",
+      org_adresse: lbService ? lbService.org_adresse : "",
+      org_code_postal: lbService ? lbService.org_code_postal : "",
+      org_gestionnaire: lbService ? !!lbService.org_gestionnaire : false,
+      org_nom: lbService ? lbService.org_nom : "",
+      org_ville: lbService ? lbService.org_ville : "",
+      siret: lbService ? lbService.siret || "" : "",
+      telephone: lbService ? lbService.telephone : "",
+      initialSiret: lbService ? lbService.siret || "" : "",
     },
     onSubmit: handleSubmit,
     validationSchema,
   });
 
   const { setFieldValue } = formik;
+
+  useEffect(() => {
+    setFieldValue("initialSiret", originalSiret);
+  }, [originalSiret, setFieldValue]);
 
   const departements = formik.values.departements;
   const addDepartementToCurrents = useCallback(
@@ -119,7 +143,7 @@ export function ListeBlancheServiceForm(props) {
     [setSelectedSiretData]
   );
 
-  const lbVilleDepartement = formik.values["lb_ville_departement"];
+  const lbVilleDepartement = formik.values["ville_departement"];
   useEffect(() => {
     const departements = addDepartementToCurrents(lbVilleDepartement);
     if (departements) setFieldValue("departements", departements);
@@ -140,9 +164,9 @@ export function ListeBlancheServiceForm(props) {
     const departements = addDepartementToCurrents(departement);
 
     setFieldValue("etablissement", nom_raison_sociale || "");
-    setFieldValue("lb_adresse", l4_declaree || "");
-    setFieldValue("lb_code_postal", code_postal || "");
-    setFieldValue("lb_ville", libelle_commune || "");
+    setFieldValue("adresse", l4_declaree || "");
+    setFieldValue("code_postal", code_postal || "");
+    setFieldValue("ville", libelle_commune || "");
     setFieldValue("departements", departements || []);
   }, [selectedSiretData, setFieldValue, addDepartementToCurrents]);
 
@@ -151,42 +175,72 @@ export function ListeBlancheServiceForm(props) {
     ({ data }) => setSelectedAdresseData(data),
     [setSelectedAdresseData]
   );
+
   useEffect(() => {
     if (!selectedAdresseData) {
       return;
     }
-    const { postcode, city } = selectedAdresseData;
-    setFieldValue("lb_code_postal", postcode || "");
-    setFieldValue("lb_ville", city || "");
-  }, [selectedAdresseData, setFieldValue]);
+    const { postcode, city, context } = selectedAdresseData;
+    setFieldValue("code_postal", postcode || "");
+    setFieldValue("ville", city ? city.toUpperCase() : "");
+    if (context) {
+      const [departement] = context.split(",");
+      const departements = addDepartementToCurrents(departement);
+      setFieldValue("departements", departements);
+    }
+  }, [selectedAdresseData, setFieldValue, addDepartementToCurrents]);
+
+  useEffect(() => {
+    (async () => {
+      const ville = formik.values.ville;
+      if (!ville) {
+        return;
+      }
+      const { data } = await apolloClient.query({
+        query: CITY_DEPARTEMENT,
+        variables: {
+          city: ville.replace(/-/g, " ").toUpperCase(),
+        },
+      });
+      if (
+        data.geolocalisation_code_postal.length &&
+        data.geolocalisation_code_postal[0].departement_code
+      ) {
+        setFieldValue(
+          "ville_departement",
+          data.geolocalisation_code_postal[0].departement_code
+        );
+      }
+    })();
+  }, [formik.values.ville, setFieldValue, apolloClient]);
+
+  const user = useUser();
+  const isAdmin = user.type === "admin";
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
-            {"Service tutelaire"}
+            {"Structure juridique"}
           </Heading>
-          <Text lineHeight="1.5" color="textSecondary">
-            {"Renseignez le département qui finance le service tutelaire."}
-          </Text>
         </FormGrayBox>
         <FormInputBox>
-          <SelectSIRET
-            id="siret"
-            formik={formik}
-            validationSchema={validationSchema}
-            setSelectedOption={setSelectedSiretDataCallback}
-          />
           <FormGroupInput
             placeholder="Nom du service"
             id="etablissement"
             formik={formik}
             validationSchema={validationSchema}
           />
+          <SelectSIRET
+            id="siret"
+            formik={formik}
+            validationSchema={validationSchema}
+            setSelectedOption={setSelectedSiretDataCallback}
+          />
           <SelectAdresse
             placeholder="Adresse"
-            id="lb_adresse"
+            id="adresse"
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
@@ -195,18 +249,18 @@ export function ListeBlancheServiceForm(props) {
             <Box mr={1} flex={1 / 2}>
               <FormGroupInput
                 placeholder="Code postal"
-                id="lb_code_postal"
+                id="code_postal"
                 formik={formik}
                 required
                 validationSchema={validationSchema}
                 onInput={(e) => {
                   const { value } = e.target;
-                  formik.setFieldValue("lb_code_postal", value);
-                  formik.setFieldValue("lb_ville", "");
-                  formik.setFieldValue("lb_ville_departement", "");
+                  formik.setFieldValue("code_postal", value);
+                  formik.setFieldValue("ville", "");
+                  formik.setFieldValue("ville_departement", "");
                 }}
                 hasError={
-                  formik.touched.lb_code_postal && formik.errors.lb_code_postal
+                  formik.touched.code_postal && formik.errors.code_postal
                 }
                 size="small"
               />
@@ -215,22 +269,22 @@ export function ListeBlancheServiceForm(props) {
               <Field>
                 <GeocodeCities
                   placeholder="Ville"
-                  id="lb_ville"
+                  id="ville"
                   required
-                  zipcode={formik.values.lb_code_postal}
-                  onChange={(value) => formik.setFieldValue("lb_ville", value)}
-                  value={formik.values.lb_ville}
-                  hasError={formik.touched.lb_ville && formik.errors.lb_ville}
+                  zipcode={formik.values.code_postal}
+                  onChange={(value) => formik.setFieldValue("ville", value)}
+                  value={formik.values.ville}
+                  hasError={formik.touched.ville && formik.errors.ville}
                   size="small"
-                  departementFieldId="lb_ville_departement"
+                  departementFieldId="ville_departement"
                   formik={formik}
-                  aria-describedby="msg-lb_ville"
+                  aria-describedby="msg-ville"
                 />
-                <div id="msg-lb_ville">
-                  {formik.touched.lb_ville && formik.errors.lb_ville && (
+                <div id="msg-ville">
+                  {formik.touched.ville && formik.errors.ville && (
                     <InlineError
-                      message={formik.errors.lb_ville}
-                      fieldId="lb_ville"
+                      message={formik.errors.ville}
+                      fieldId="ville"
                     />
                   )}
                 </div>
@@ -269,27 +323,6 @@ export function ListeBlancheServiceForm(props) {
               )}
             </div>
           </Box>
-        </FormInputBox>
-      </Flex>
-      <Flex>
-        <FormGrayBox>
-          <Heading size={4} mb={1}>
-            {"Contact"}
-          </Heading>
-        </FormGrayBox>
-        <FormInputBox>
-          <FormGroupInput
-            placeholder="Email"
-            id="email"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
-          <FormGroupInput
-            placeholder="Téléphone"
-            id="telephone"
-            formik={formik}
-            validationSchema={validationSchema}
-          />
         </FormInputBox>
       </Flex>
       <Flex>
@@ -365,6 +398,165 @@ export function ListeBlancheServiceForm(props) {
           )}
         </FormInputBox>
       </Flex>
+      <Flex>
+        <FormGrayBox>
+          <Heading size={4} mb={1}>
+            {"Informations du responsable"}
+          </Heading>
+        </FormGrayBox>
+        <FormInputBox>
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Prénom"
+            id="prenom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeFirstName]}
+          />
+          <FormGroupInput
+            placeholder="NOM"
+            id="nom"
+            formik={formik}
+            validationSchema={validationSchema}
+            normalizers={[normalizeLastName]}
+          />
+          <FormGroupInput
+            placeholder="Adresse e-mail"
+            id="email"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+          <FormGroupInput
+            placeholder="Téléphone"
+            id="telephone"
+            formik={formik}
+            validationSchema={validationSchema}
+          />
+        </FormInputBox>
+      </Flex>
+
+      {!isCreate && (
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1}>
+              {"Informations données par le service"}
+            </Heading>
+            <Text mt={2} mb={1}>
+              {"Ces informations sont modifables uniquement par le service"}
+            </Text>
+            {isAdmin &&
+              service &&
+              service.service_members.map(({ user }) => {
+                return (
+                  <Link to={`/admin/users/${user.id}`}>
+                    <Button style={{ marginBottom: "10px" }}>
+                      <span role="img" aria-labelledby="user-profile-link">
+                        🧑
+                      </span>
+                      <span id="user-profile-link">
+                        {" "}
+                        Profil de l'utilisateur {user.prenom} {user.nom}
+                      </span>
+                    </Button>
+                  </Link>
+                );
+              })}
+          </FormGrayBox>
+          <FormInputBox>
+            <Input
+              label="Nom du service"
+              placeholder=""
+              value={service.etablissement}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            {/* <Input
+              label="SIRET"
+              placeholder=""
+              value={service.siret}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            /> */}
+            <Input
+              placeholder="Adresse"
+              value={service.adresse}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              label="Code postal"
+              placeholder=""
+              value={service.code_postal}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              label="Civilité"
+              placeholder=""
+              value={
+                service.genre
+                  ? GENDER_OPTIONS.find(({ value }) => value === service.genre)
+                      .label
+                  : ""
+              }
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              label="Prénom"
+              placeholder=""
+              value={service.prenom}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              label="NOM"
+              placeholder=""
+              value={service.nom}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              label="Adresse e-mail"
+              placeholder=""
+              value={service.email}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+            <Input
+              placeholder="Téléphone"
+              value={service.telephone}
+              forceActive
+              readOnly
+              containerStyle={readOnlyContainerStyle}
+              style={readOnlyInputStyle}
+            />
+          </FormInputBox>
+        </Flex>
+      )}
 
       <Flex justifyContent="flex-end" p={1}>
         {handleCancel && (

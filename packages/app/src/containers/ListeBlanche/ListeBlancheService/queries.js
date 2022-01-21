@@ -1,13 +1,11 @@
 import gql from "graphql-tag";
 
 export const SERVICE = gql`
-  query listeBlancheService($serviceId: Int!) {
-    services_by_pk(id: $serviceId) {
+  query listeBlancheService($listeBlancheId: Int!) {
+    liste_blanche_by_pk(id: $listeBlancheId) {
       id
       etablissement
       siret
-      lb_code_postal
-      lb_ville
       code_postal
       ville
       org_gestionnaire
@@ -15,17 +13,43 @@ export const SERVICE = gql`
       org_adresse
       org_code_postal
       org_ville
-      departements {
-        departement {
-          id
+      service {
+        departements {
+          departement {
+            id
+          }
         }
+        service_members {
+          user {
+            id
+            nom
+            prenom
+          }
+        }
+        id
+        etablissement
+        siret
+        genre
+        nom
+        prenom
+        adresse
+        email
+        telephone
       }
+      genre
+      nom
+      prenom
       adresse
-      lb_adresse
-      latitude
-      longitude
       email
       telephone
+    }
+  }
+`;
+
+export const CITY_DEPARTEMENT = gql`
+  query city_departement($city: String!) {
+    geolocalisation_code_postal(where: { cities: { _eq: $city } }) {
+      departement_code
     }
   }
 `;

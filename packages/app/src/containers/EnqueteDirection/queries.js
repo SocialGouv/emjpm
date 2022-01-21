@@ -192,8 +192,8 @@ export const ENQUETE_DETAILS_LIST = gql`
         nom
         type
       }
-      lb_user {
-        lb_departements {
+      liste_blanche {
+        mandataire_individuel_departements {
           departement_financeur
           departement {
             nom

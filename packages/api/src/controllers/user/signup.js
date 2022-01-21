@@ -42,10 +42,10 @@ const createMandataire = async (mandataireDatas, user_id) => {
   const {
     telephone,
     telephone_portable,
-    adresse,
+    location_adresse,
     code_postal,
-    departement_code,
     ville,
+    departement_code,
     dispo_max,
     siret,
     latitude,
@@ -63,15 +63,15 @@ const createMandataire = async (mandataireDatas, user_id) => {
 
   const mandataire = await Mandataire.query()
     .allowInsert(
-      "[siret, telephone,user_id,telephone_portable,adresse,code_postal,ville, departement_code, dispo_max]"
+      "[siret, telephone,user_id,telephone_portable,location_adresse,code_postal,ville, departement_code, dispo_max]"
     )
     .insert({
-      adresse,
       code_postal,
       departement_code,
       dispo_max,
       genre,
       latitude,
+      location_adresse,
       longitude,
       siret,
       sync_ocmi_enable,

@@ -23,7 +23,6 @@ function ServiceInformations() {
 
   const [service] = data.services;
   const {
-    adresse,
     competences,
     email,
     etablissement,
@@ -38,9 +37,11 @@ function ServiceInformations() {
     org_nom,
     org_code_postal,
     org_ville,
-    lb_adresse,
-    lb_code_postal,
-    lb_ville,
+    adresse,
+    location_adresse,
+    use_location_adresse,
+    code_postal,
+    ville,
   } = service;
 
   return (
@@ -56,9 +57,11 @@ function ServiceInformations() {
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
             <Box flex={2 / 3}>
-              <Text sx={content}>{lb_adresse || ""}</Text>
               <Text sx={content}>
-                {lb_code_postal || ""} {lb_ville || ""}
+                {(use_location_adresse ? location_adresse : adresse) || ""}
+              </Text>
+              <Text sx={content}>
+                {code_postal || ""} {ville || ""}
               </Text>
             </Box>
           </Flex>
@@ -111,8 +114,8 @@ function ServiceInformations() {
             </Text>
           </Box>
           <Flex my={1}>
-            <Text sx={subtitle}>{"Adresse"}</Text>
-            <Text sx={content}>{adresse}</Text>
+            <Text sx={subtitle}>{"Adresse de localisation"}</Text>
+            <Text sx={content}>{location_adresse}</Text>
           </Flex>
         </Box>
         <Box mb={2}>
@@ -164,7 +167,7 @@ function ServiceInformations() {
           </Box>
           <Box ml={1}>
             <LinkButton to="/services/edit-informations">
-              Modifier les informations du service
+              Modifier les informations
             </LinkButton>
           </Box>
         </Flex>
