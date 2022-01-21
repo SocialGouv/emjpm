@@ -2,6 +2,7 @@ import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import { Box, Flex } from "rebass";
+import { useHistory } from "react-router-dom";
 
 import {
   FormGrayBox,
@@ -10,7 +11,6 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/components/Link";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/validation-schemas";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
@@ -47,6 +47,7 @@ const TYPE_OPTIONS = [
 ];
 
 export function SignupForm() {
+  const history = useHistory();
   const { user, setUser, validateStepOne } = useContext(SignupContext);
 
   const client = useApolloClient();
@@ -112,11 +113,18 @@ export function SignupForm() {
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Information personnelle"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
+            <Text
+              lineHeight="1.5"
+              color="textSecondary"
+              id="informations_personelle_heading"
+            >
               {"Ces informations permettent de vous identifier."}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox
+            role="group"
+            aria-labelledby="informations_personelle_heading"
+          >
             <FormGroupSelect
               id="genre"
               formik={formik}
@@ -131,6 +139,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               normalizers={[normalizeFirstName]}
+              autoComplete="given-name"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -138,23 +147,30 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               normalizers={[normalizeLastName]}
+              autoComplete="family-name"
             />
           </FormInputBox>
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Identifiants de connexion"}</Heading>
+            <Heading size={4} id="identifiants_de_connexion">
+              {"Identifiants de connexion"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {`Ces informations permettront de vous connecter à votre compte. L'adresse email
                 renseignée sera votre identifiant.`}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox
+            role="group"
+            aria-labelledby="identifiants_de_connexion"
+          >
             <FormGroupInput
               placeholder="Email"
               id="email"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="email"
             />
             <FormGroupInput
               placeholder="Mot de passe"
@@ -162,6 +178,7 @@ export function SignupForm() {
               id="password"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="new-password"
             />
             <FormGroupInput
               placeholder="Confirmation du mot de passe"
@@ -169,22 +186,29 @@ export function SignupForm() {
               id="confirmPassword"
               formik={formik}
               validationSchema={signupSchema}
+              autoComplete="new-password"
             />
           </FormInputBox>
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link to="/">
-              <Button mr="2" variant="outline">
-                Annuler
-              </Button>
-            </Link>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={() => {
+                history.push("/");
+              }}
+              aria-label="Annuler"
+            >
+              Annuler
+            </Button>
           </Box>
           <Box>
             <Button
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              aria-label="Suivant"
             >
               Suivant
             </Button>

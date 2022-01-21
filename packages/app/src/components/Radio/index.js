@@ -19,6 +19,7 @@ function BaseRadio(props) {
 
 export default function Radio(props) {
   const { label, id, name, checked, disabled, renderRadioLabel } = props;
+
   return (
     <Box sx={RadioWrapperStyle}>
       <Box htmlFor={id} as="label">

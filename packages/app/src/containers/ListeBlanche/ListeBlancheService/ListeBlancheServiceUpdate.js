@@ -9,6 +9,7 @@ import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { SERVICE } from "./queries";
 import { useState, useCallback, useEffect } from "react";
+import { Helmet } from "react-helmet";
 
 export function ListeBlancheServiceUpdate(props) {
   const { listeBlancheId, onSuccess, handleCancel } = props;
@@ -84,6 +85,9 @@ export function ListeBlancheServiceUpdate(props) {
 
   return (
     <Card p={5}>
+      <Helmet>
+        <title>{service.etablissement} | e-MJPM</title>
+      </Helmet>
       <ListeBlancheServiceForm
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}

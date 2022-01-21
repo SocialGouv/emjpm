@@ -27,28 +27,35 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
       <Flex>
         <FormGrayBox>
           <Heading size={4}>{"Modifier vos informations"}</Heading>
-          <Text lineHeight="1.5" color="textSecondary">
+          <Text
+            lineHeight="1.5"
+            color="textSecondary"
+            id="modifier_informations"
+          >
             {"Vos informations"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="modifier_informations">
           <FormGroupInput
             formik={formik}
             id="prenom"
             placeholder="Prénom"
             validationSchema={adminEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             formik={formik}
             id="nom"
             placeholder="Nom"
             validationSchema={adminEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             formik={formik}
             id="email"
             placeholder="Email"
             validationSchema={adminEditSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

@@ -88,7 +88,9 @@ function EditPassword() {
           p="5"
         >
           <Box height="80px">
-            <Heading size={4}>{"Modifier votre mot de passe"}</Heading>
+            <Heading size={4} id="modifier_mot_de_pass">
+              {"Modifier votre mot de passe"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {
                 "Votre mot de passe doit comprendre 8 caractères minimum et doit contenir au moins 1 chiffre et un caractère spécial."
@@ -104,65 +106,70 @@ function EditPassword() {
                   {formik.status.errorMsg}
                 </Box>
               )}
-              <Field>
-                <Input
-                  value={formik.values.password}
-                  id="password"
-                  name="password"
-                  type="password"
-                  hasError={formik.errors.password && formik.touched.password}
-                  onChange={formik.handleChange}
-                  placeholder="Votre mot de passe actuel"
-                  aria-describedby="msg-password"
-                />
-                <div id="msg-password">
-                  <InlineError
-                    message={formik.errors.password}
-                    fieldId="password"
+              <Box role="group" aria-labelledby="modifier_mot_de_pass">
+                <Field>
+                  <Input
+                    value={formik.values.password}
+                    id="password"
+                    name="password"
+                    type="password"
+                    hasError={formik.errors.password && formik.touched.password}
+                    onChange={formik.handleChange}
+                    placeholder="Votre mot de passe actuel"
+                    aria-describedby="msg-password"
+                    autoComplete="current-password"
                   />
-                </div>
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.newPassword}
-                  id="newPassword"
-                  name="newPassword"
-                  type="password"
-                  hasError={
-                    formik.errors.newPassword && formik.touched.newPassword
-                  }
-                  onChange={formik.handleChange}
-                  placeholder="Votre nouveau mot de passe"
-                  aria-describedby="msg-newPassword"
-                />
-                <div id="msg-newPassword">
-                  <InlineError
-                    message={formik.errors.newPassword}
-                    fieldId="newPassword"
+                  <div id="msg-password">
+                    <InlineError
+                      message={formik.errors.password}
+                      fieldId="password"
+                    />
+                  </div>
+                </Field>
+                <Field>
+                  <Input
+                    value={formik.values.newPassword}
+                    id="newPassword"
+                    name="newPassword"
+                    type="password"
+                    hasError={
+                      formik.errors.newPassword && formik.touched.newPassword
+                    }
+                    onChange={formik.handleChange}
+                    placeholder="Votre nouveau mot de passe"
+                    aria-describedby="msg-newPassword"
+                    autoComplete="new-password"
                   />
-                </div>
-              </Field>
-              <Field>
-                <Input
-                  value={formik.values.newPasswordConfirmation}
-                  id="newPasswordConfirmation"
-                  name="newPasswordConfirmation"
-                  type="password"
-                  hasError={
-                    formik.errors.newPasswordConfirmation &&
-                    formik.touched.newPasswordConfirmation
-                  }
-                  onChange={formik.handleChange}
-                  placeholder="Confirmation de votre nouveau mot de passe"
-                  aria-describedby="msg-newPasswordConfirmation"
-                />
-                <div id="msg-newPasswordConfirmation">
-                  <InlineError
-                    message={formik.errors.newPasswordConfirmation}
-                    fieldId="newPasswordConfirmation"
+                  <div id="msg-newPassword">
+                    <InlineError
+                      message={formik.errors.newPassword}
+                      fieldId="newPassword"
+                    />
+                  </div>
+                </Field>
+                <Field>
+                  <Input
+                    value={formik.values.newPasswordConfirmation}
+                    id="newPasswordConfirmation"
+                    name="newPasswordConfirmation"
+                    type="password"
+                    hasError={
+                      formik.errors.newPasswordConfirmation &&
+                      formik.touched.newPasswordConfirmation
+                    }
+                    onChange={formik.handleChange}
+                    placeholder="Confirmation de votre nouveau mot de passe"
+                    aria-describedby="msg-newPasswordConfirmation"
+                    autoComplete="new-password"
                   />
-                </div>
-              </Field>
+                  <div id="msg-newPasswordConfirmation">
+                    <InlineError
+                      message={formik.errors.newPasswordConfirmation}
+                      fieldId="newPasswordConfirmation"
+                    />
+                  </div>
+                </Field>
+              </Box>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">
                   <Link to={`${PATH[type]}/informations`}>Annuler</Link>

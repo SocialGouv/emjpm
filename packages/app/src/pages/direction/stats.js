@@ -26,7 +26,7 @@ export default function DirectionPage() {
   return (
     <>
       <Helmet>
-        <title>Statistiques direction | e-MPJM</title>
+        <title>Statistiques | e-MJPM</title>
       </Helmet>
       <FiltersContextSerializableProvider
         useLocalStorage={true}

@@ -214,7 +214,7 @@ function AdminUserServiceForm(props) {
             {"Informations du responsable"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-label="Informations personnelles">
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}
@@ -223,12 +223,14 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
           />
+
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
             formik={formik}
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeFirstName]}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -236,12 +238,14 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeLastName]}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            autoComplete="email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput

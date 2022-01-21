@@ -145,6 +145,7 @@ function ResetPassword(props) {
                       onChange={handleChange}
                       placeholder="Entrez votre nouveau mot de passe"
                       aria-describedby="msg-newPassword"
+                      autoComplete="new-password"
                     />
                     <div id="msg-newPassword">
                       {touched.newPassword && (
@@ -168,6 +169,7 @@ function ResetPassword(props) {
                       onChange={handleChange}
                       placeholder="Confirmer votre nouveau mot de passe"
                       aria-describedby="msg-newPasswordConfirmation"
+                      autoComplete="new-password"
                     />
                     <div id="msg-newPasswordConfirmation">
                       {touched.newPasswordConfirmation && (

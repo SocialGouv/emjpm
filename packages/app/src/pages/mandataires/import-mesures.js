@@ -38,7 +38,7 @@ function ImportMesures() {
   return (
     <>
       <Helmet>
-        <title>Importez vos mesures | e-MPJM</title>
+        <title>Importez vos mesures | e-MJPM</title>
       </Helmet>
       <LayoutMandataire>
         <BoxWrapper mt={3} px="1">

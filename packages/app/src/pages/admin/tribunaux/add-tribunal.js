@@ -10,7 +10,7 @@ function AddTribunauxPage() {
   return (
     <>
       <Helmet>
-        <title>Création d'un tribunal | e-MPJM</title>
+        <title>Création d'un tribunal | e-MJPM</title>
       </Helmet>
       <LayoutAdmin hasNavigation={false}>
         <BoxWrapper mt={3} px="1">

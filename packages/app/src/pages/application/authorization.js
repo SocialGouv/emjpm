@@ -32,7 +32,7 @@ export default function AuthorizationPage() {
   return (
     <>
       <Helmet>
-        <title> Se connecter à une application métier | e-MPJM</title>
+        <title> Se connecter à une application métier | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>
@@ -54,6 +54,8 @@ export default function AuthorizationPage() {
                 p: "3",
                 width: ["100%"],
               }}
+              alt=""
+              aria-hidden="true"
             />
           </Box>
           <Box

@@ -13,6 +13,7 @@ import {
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
+import { Helmet } from "react-helmet";
 
 export default function Mesures() {
   const { service_members } = useUser();
@@ -35,68 +36,73 @@ export default function Mesures() {
   const mesuresTotal = service.mesures_in_progress + service.mesures_awaiting;
 
   return (
-    <FiltersContextProvider
-      initialValues={{
-        mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
-        natureMesure: DEFAULT_MESURE_NATURE,
-      }}
-    >
-      <LayoutServices>
-        <BoxWrapper mt={2} px="1">
-          <Flex flexDirection="row" justifyContent="space-between">
-            <HeadingTitle>Vos mesures</HeadingTitle>
-            <MesureListButtonBar />
-          </Flex>
-          <Flex mt={1} flexDirection="row" justifyContent="flex-start">
-            {service_antennes.map((antenne) => (
+    <>
+      <Helmet>
+        <title>Vos mesures | e-MJPM</title>
+      </Helmet>
+      <FiltersContextProvider
+        initialValues={{
+          mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
+          natureMesure: DEFAULT_MESURE_NATURE,
+        }}
+      >
+        <LayoutServices>
+          <BoxWrapper mt={2} px="1">
+            <Flex flexDirection="row" justifyContent="space-between">
+              <HeadingTitle>Vos mesures</HeadingTitle>
+              <MesureListButtonBar />
+            </Flex>
+            <Flex mt={1} flexDirection="row" justifyContent="flex-start">
+              {service_antennes.map((antenne) => (
+                <Flex
+                  flexDirection="column"
+                  alignItems="flex-start"
+                  key={antenne.id}
+                  mr={2}
+                  sx={{
+                    bg: "white",
+                    borderRadius: "20px",
+                    px: "2",
+                  }}
+                >
+                  <Text>{antenne.name}</Text>
+                  <MesureBadge
+                    mesures_en_cours={antenne.mesures_in_progress}
+                    dispo_max={antenne.mesures_max}
+                  />
+                </Flex>
+              ))}
               <Flex
                 flexDirection="column"
                 alignItems="flex-start"
-                key={antenne.id}
                 mr={2}
                 sx={{
                   bg: "white",
                   borderRadius: "20px",
                   px: "2",
+                  border: "1px dotted #545454 !important",
                 }}
               >
-                <Text>{antenne.name}</Text>
+                <Text>Sans antenne</Text>
                 <MesureBadge
-                  mesures_en_cours={antenne.mesures_in_progress}
-                  dispo_max={antenne.mesures_max}
+                  mesures_en_cours={sansAntenneEncours}
+                  dispo_max={sansAntenneDispoMax}
                 />
               </Flex>
-            ))}
+            </Flex>
+
+            <MesureListFilters service_antennes={service_antennes} />
             <Flex
-              flexDirection="column"
-              alignItems="flex-start"
-              mr={2}
               sx={{
-                bg: "white",
-                borderRadius: "20px",
-                px: "2",
-                border: "1px dotted #545454 !important",
+                flexWrap: "wrap",
+                mt: "1",
               }}
             >
-              <Text>Sans antenne</Text>
-              <MesureBadge
-                mesures_en_cours={sansAntenneEncours}
-                dispo_max={sansAntenneDispoMax}
-              />
+              <MesureList />
             </Flex>
-          </Flex>
-
-          <MesureListFilters service_antennes={service_antennes} />
-          <Flex
-            sx={{
-              flexWrap: "wrap",
-              mt: "1",
-            }}
-          >
-            <MesureList />
-          </Flex>
-        </BoxWrapper>
-      </LayoutServices>
-    </FiltersContextProvider>
+          </BoxWrapper>
+        </LayoutServices>
+      </FiltersContextProvider>
+    </>
   );
 }

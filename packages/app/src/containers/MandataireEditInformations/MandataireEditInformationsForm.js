@@ -117,11 +117,14 @@ function MandataireEditInformationsForm(props) {
       <form noValidate onSubmit={formik.handleSubmit}>
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="Informations_personnelles_heading">
               {"Informations personnelles"}
             </Heading>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox
+            role="group"
+            aria-labelledby="Informations_personnelles_heading"
+          >
             <FormGroupSelect
               id="genre"
               options={GENDER_OPTIONS}
@@ -129,6 +132,7 @@ function MandataireEditInformationsForm(props) {
               value={formik.values.genre}
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="sex"
             />
             <FormGroupInput
               placeholder="Prénom"
@@ -136,6 +140,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               normalizers={[normalizeFirstName]}
+              autoComplete="given-name"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -143,12 +148,23 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               normalizers={[normalizeLastName]}
+              autoComplete="family-name"
             />
+          </FormInputBox>
+        </Flex>
+        <Flex>
+          <FormGrayBox>
+            <Heading size={4} mb={1} id="coordonnes_heading">
+              {"Coordonnées"}
+            </Heading>
+          </FormGrayBox>
+          <FormInputBox role="group" aria-labelledby="coordonnes_heading">
             <FormGroupInput
               placeholder="Adresse e-mail"
               id="email"
               formik={formik}
               validationSchema={validationSchema}
+              autoComplete="email"
             />
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>
@@ -157,6 +173,7 @@ function MandataireEditInformationsForm(props) {
                   id="telephone"
                   formik={formik}
                   validationSchema={validationSchema}
+                  autoComplete="tel"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
@@ -165,6 +182,7 @@ function MandataireEditInformationsForm(props) {
                   id="telephone_portable"
                   formik={formik}
                   validationSchema={validationSchema}
+                  autoComplete="tel"
                 />
               </Box>
             </Flex>
@@ -269,14 +287,14 @@ function MandataireEditInformationsForm(props) {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="activite_heading">
               {"Activité"}
             </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Ces informations seront visibles par les magistrats"}
             </Text>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="activite_heading">
             <Box mb={2}>
               <CheckBox
                 isChecked={formik.values.suspendActivity}

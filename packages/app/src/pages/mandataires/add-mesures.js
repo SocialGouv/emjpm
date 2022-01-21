@@ -9,7 +9,7 @@ function AddMesures() {
   return (
     <>
       <Helmet>
-        <title>Création d'une mesure | e-MPJM</title>
+        <title>Création d'une mesure | e-MJPM</title>
       </Helmet>
       <LayoutMandataire hasNavigation={false}>
         <BoxWrapper mt={3} px="1">

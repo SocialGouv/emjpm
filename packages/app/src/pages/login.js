@@ -17,7 +17,7 @@ function LoginPage() {
   return (
     <>
       <Helmet>
-        <title>Connectez-vous à votre compte | e-MPJM</title>
+        <title>Connectez-vous à votre compte | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>
@@ -50,6 +50,8 @@ function LoginPage() {
                 p: "3",
                 width: ["100%"],
               }}
+              alt=""
+              aria-hidden="true"
             />
             {/* <Box sx={{ p: "6" }}>
             <Heading size={4} mb="3">

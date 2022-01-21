@@ -23,7 +23,7 @@ function Mandataires() {
   return (
     <>
       <Helmet>
-        <title>Liste des mandataires | e-MPJM</title>
+        <title>Liste des mandataires | e-MJPM</title>
       </Helmet>
       <FiltersContextSerializableProvider
         useLocalStorage={true}

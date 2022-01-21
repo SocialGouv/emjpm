@@ -143,10 +143,17 @@ function MagistratMandatairesListFilters(props) {
                   ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
                   : null
               }
+              aria-label={
+                !searchByLocation
+                  ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
+                  : null
+              }
             >
               <Location
                 size={extraIconsSize}
                 color={searchByLocation ? "#70D54F" : ""}
+                alt=""
+                role="img"
               />
             </Button>
           </Box>
@@ -161,10 +168,17 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
                   : null
               }
+              aria-label={
+                !habilitation
+                  ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
+                  : null
+              }
             >
               <CheckShield
                 size={extraIconsSize}
                 color={habilitation ? "#70D54F" : ""}
+                alt=""
+                role="img"
               />
             </Button>
           </Box>
@@ -179,8 +193,18 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
                   : null
               }
+              aria-label={
+                !prefer
+                  ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
+                  : null
+              }
             >
-              <Star size={extraIconsSize} color={prefer ? "#70D54F" : ""} />
+              <Star
+                size={extraIconsSize}
+                color={prefer ? "#70D54F" : ""}
+                alt=""
+                role="img"
+              />
             </Button>
           </Box>
           <Box mr={0}>
@@ -194,10 +218,17 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataire ayant des places disponibles"
                   : null
               }
+              aria-label={
+                !available
+                  ? "Afficher uniquement les mandataire ayant des places disponibles"
+                  : null
+              }
             >
               <DotCircle
                 size={extraIconsSize}
                 color={available ? "#70D54F" : ""}
+                alt=""
+                role="img"
               />
             </Button>
           </Box>

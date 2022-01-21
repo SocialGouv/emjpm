@@ -61,22 +61,24 @@ function ServiceAntenneForm(props) {
             placeholder="Nom de l'antenne"
             formik={formik}
             validationSchema={serviceAntenneSchema}
+            autoComplete="organization"
           />
         </FormInputBox>
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="responsable_heading">
             {"Responsable"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="responsable_heading">
           <FormGroupInput
             value={formik.values.contact_firstname}
             id="contact_firstname"
             placeholder="Nom du responsable"
             formik={formik}
             validationSchema={serviceAntenneSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             value={formik.values.contact_lastname}
@@ -84,22 +86,24 @@ function ServiceAntenneForm(props) {
             placeholder="Prénom du responsable"
             formik={formik}
             validationSchema={serviceAntenneSchema}
+            autoComplete="given-name"
           />
         </FormInputBox>
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="coordonnes_heading">
             {"Coordonnées"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="coordonnes_heading">
           <FormGroupInput
             value={formik.values.contact_phone}
             id="contact_phone"
             placeholder="Téléphone"
             formik={formik}
             validationSchema={serviceAntenneSchema}
+            autoComplete="tel"
           />
           <FormGroupInput
             value={formik.values.contact_email}
@@ -107,6 +111,7 @@ function ServiceAntenneForm(props) {
             placeholder="Email"
             formik={formik}
             validationSchema={serviceAntenneSchema}
+            autoComplete="email"
           />
         </FormInputBox>
       </Flex>

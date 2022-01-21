@@ -61,9 +61,11 @@ export function MesureEditForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Majeur protégé</Heading>
+          <Heading size={4} id="majeur_protege_heading">
+            Majeur protégé
+          </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="majeur_protege_heading">
           <Flex flexDirection={["column", "row", "row"]}>
             <Box flexGrow="2" pr="1px">
               <FormGroupInput
@@ -123,9 +125,11 @@ export function MesureEditForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Mesure de protection</Heading>
+          <Heading size={4} id="mesure_de_protection_heading">
+            Mesure de protection
+          </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="majeur_protege_heading">
           <Flex flexDirection={["column", "row", "row"]}>
             <Box flexGrow="2" pr="1px">
               <TribunalAutoComplete

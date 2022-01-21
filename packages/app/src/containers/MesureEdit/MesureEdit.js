@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { isMandataire } from "@emjpm/biz";
+import { isMandataire, mesureFormatter } from "@emjpm/biz";
 import { useContext, useMemo } from "react";
 import { useHistory } from "react-router-dom";
 import { Box } from "rebass";
@@ -13,6 +13,7 @@ import { formatTribunauxOptions } from "~/formatters/tribunaux";
 import { MesureEditForm } from "./MesureEditForm";
 import { EDIT_MESURE } from "./mutations";
 import { MANDATAIRE_TRIBUNAL, SERVICE_TRIBUNAL } from "./queries";
+import { Helmet } from "react-helmet";
 
 export function MesureEdit() {
   const history = useHistory();
@@ -85,16 +86,26 @@ export function MesureEdit() {
     value: antenne.id,
   }));
 
+  const { formatNatureMesure, formatChampMesure } = mesureFormatter;
+
   return (
-    <Box m="1" mt="2" p="0">
-      <MesureEditForm
-        handleSubmit={handleSubmit}
-        handleCancel={handleCancel}
-        tribunaux={tribunaux}
-        antenneOptions={antenneOptions}
-        mesureToEdit={mesureToEdit}
-        userBasePath={userBasePath}
-      />
-    </Box>
+    <>
+      <Helmet>
+        <title>
+          Modifier la mesure {formatNatureMesure(mesureToEdit.natureMesure)}{" "}
+          {formatChampMesure(mesureToEdit.champMesure)} | e-MJPM
+        </title>
+      </Helmet>
+      <Box m="1" mt="2" p="0">
+        <MesureEditForm
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+          tribunaux={tribunaux}
+          antenneOptions={antenneOptions}
+          mesureToEdit={mesureToEdit}
+          userBasePath={userBasePath}
+        />
+      </Box>
+    </>
   );
 }

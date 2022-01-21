@@ -12,7 +12,6 @@ import {
 } from "~/components/AppForm";
 import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/components/Link";
 import { signupMandataireSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
@@ -109,15 +108,18 @@ function SignupMandataireForm() {
         )}
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Téléphone"}</Heading>
+            <Heading size={4} id="telephone_heading">
+              {"Téléphone"}
+            </Heading>
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="Téléphone">
             <FormGroupInput
               id="telephone"
               formik={formik}
               placeholder="Téléphone"
               value={formik.values.telephone}
               validationSchema={signupMandataireSchema}
+              autoComplete="tel"
             />
             <FormGroupInput
               id="telephone_portable"
@@ -125,6 +127,7 @@ function SignupMandataireForm() {
               placeholder="Téléphone portable"
               value={formik.values.telephone_portable}
               validationSchema={signupMandataireSchema}
+              autoComplete="tel"
             />
           </FormInputBox>
         </Flex>
@@ -175,9 +178,13 @@ function SignupMandataireForm() {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">
-            <Link to="/">
-              <Button variant="outline">Annuler</Button>
-            </Link>
+            <Button
+              variant="outline"
+              onClick={() => history.push("/")}
+              aria-label="Annuler"
+            >
+              Annuler
+            </Button>
           </Box>
           <Box mr="2">
             <Button
@@ -186,6 +193,7 @@ function SignupMandataireForm() {
                 setMandataire(formik.values);
                 validateStepOne(false);
               }}
+              aria-label="Retour"
             >
               Retour
             </Button>
@@ -195,6 +203,7 @@ function SignupMandataireForm() {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              aria-label="Enregistrer"
             >
               Enregistrer
             </Button>

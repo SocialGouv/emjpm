@@ -54,6 +54,7 @@ function LoggedMenu(props) {
 
       <Box>
         <Wrapper
+          tag="button"
           onSelection={handleSelection}
           className="UserMenu-AriaMenuButton"
           style={{
@@ -63,6 +64,8 @@ function LoggedMenu(props) {
             minWidth: "0px",
             padding: "10px",
           }}
+          title={`${email}: Votre compte`}
+          aria-label={`${email}: Votre compte`}
         >
           <MenuButton className="UserMenu-AriaMenuButton-trigger">
             <Flex>

@@ -15,7 +15,7 @@ function User() {
   return (
     <>
       <Helmet>
-        <title>Utilisateur {user_id} | e-MPJM</title>
+        <title>Utilisateur {user_id} | e-MJPM</title>
       </Helmet>
       <LayoutAdmin>
         <BoxWrapper py={1}>

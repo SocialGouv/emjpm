@@ -55,9 +55,11 @@ export function GreffierMesureAddForm(props) {
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Jugement</Heading>
-          <Text lineHeight="1.5">{"Information sur le jugement."}</Text>
+          <Text lineHeight="1.5" id="informations_jugements">
+            {"Information sur le jugement."}
+          </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="informations_jugements">
           <FormGroupInput
             id="numero_rg"
             label="Numéro RG"
@@ -81,6 +83,7 @@ export function GreffierMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            autoComplete="organization"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}
@@ -95,10 +98,12 @@ export function GreffierMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Majeur protégé</Heading>
+          <Heading size={4} id="majeur_protege_heading">
+            Majeur protégé
+          </Heading>
           <Text lineHeight="1.5">{"Informations sur le majeur protégé"}</Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="majeur_protege_heading">
           <FormGroupSelect
             id="civilite"
             placeholder="Civilité"
@@ -119,12 +124,17 @@ export function GreffierMesureAddForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4}>Mesure de protection</Heading>
+          <Heading size={4} id="mesure_de_protection_heading">
+            Mesure de protection
+          </Heading>
           <Text lineHeight="1.5">
             {"Informations sur la mesure de protection"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="mesure_de_protection_heading"
+        >
           <FormGroupSelect
             id="nature_mesure"
             placeholder="Nature de la mesure"

@@ -15,6 +15,11 @@ import { MagistratMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
+const genreRef = {
+  F: "Madame",
+  M: "Monsieur",
+};
+
 function MagistratMapMandatairesPanelList() {
   const {
     magistrat: {
@@ -24,7 +29,9 @@ function MagistratMapMandatairesPanelList() {
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setCurrentMarker } = useContext(MapContext);
+
+  const { setCurrentMarker, currentMarker } = useContext(MapContext);
+
   const { data, error, loading } = useQuery(
     MESURES_GESTIONNAIRE,
     {
@@ -56,11 +63,13 @@ function MagistratMapMandatairesPanelList() {
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
+
   const gestionnaires = formatMandatairesList(
     data.mandatairesList.map((row) => {
       return { gestionnaire: row.gestionnaires[0] };
     })
   );
+
   return (
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>
@@ -72,6 +81,18 @@ function MagistratMapMandatairesPanelList() {
                 isMagistratMap
                 onClick={() => selectMarker(gestionnaire)}
                 gestionnaire={gestionnaire}
+                accessibilityProps={{
+                  role: "button",
+                  "aria-label":
+                    gestionnaire?.genre &&
+                    gestionnaire?.nom &&
+                    gestionnaire?.prenom
+                      ? `${genreRef[gestionnaire.genre]} ${gestionnaire.nom} ${
+                          gestionnaire.prenom
+                        }`
+                      : "Voir le mondataire sur la carte",
+                  "aria-pressed": gestionnaire.id === currentMarker.id,
+                }}
               />
             );
           })}

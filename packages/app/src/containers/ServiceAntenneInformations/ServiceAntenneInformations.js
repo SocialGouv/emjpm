@@ -9,6 +9,7 @@ import { Card, Heading } from "~/components";
 
 import { GET_SERVICES_ANTENNE } from "./queries";
 import { content, subtitle } from "./style";
+import { Helmet } from "react-helmet";
 
 function ServiceAntenneInformations(props) {
   const { antenne_id } = props;
@@ -35,58 +36,63 @@ function ServiceAntenneInformations(props) {
     contact_lastname,
   } = antenne;
   return (
-    <Box>
-      <Heading size={3}>{name}</Heading>
-      <Card p="5">
-        <Flex p={1} mt={2} flexDirection="column">
-          <Box mb={2}>
-            <Heading size={5} mb="3">
-              Contact
-            </Heading>
-            <Flex my={1}>
-              <Text sx={subtitle}>{"Responsable"}</Text>
-              <Text sx={content}>
-                {contact_firstname || ""} {contact_lastname || ""}
-              </Text>
-            </Flex>
-            <Flex my={1}>
-              <Text sx={subtitle}>{"Email"}</Text>
-              <Text sx={content}>{contact_email || ""}</Text>
-            </Flex>
-            <Flex my={1}>
-              <Text sx={subtitle}>{"Téléphone"}</Text>
-              <Text sx={content}>{contact_phone || ""}</Text>
-            </Flex>
-          </Box>
-          <Box mb={2}>
-            <Box>
-              <Heading size={5}>Géolocalisation</Heading>
-              <Text>
-                {
-                  "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
-                }
-              </Text>
+    <>
+      <Helmet>
+        <title>{name} | e-MJPM</title>
+      </Helmet>
+      <Box>
+        <Heading size={3}>{name}</Heading>
+        <Card p="5">
+          <Flex p={1} mt={2} flexDirection="column">
+            <Box mb={2}>
+              <Heading size={5} mb="3">
+                Contact
+              </Heading>
+              <Flex my={1}>
+                <Text sx={subtitle}>{"Responsable"}</Text>
+                <Text sx={content}>
+                  {contact_firstname || ""} {contact_lastname || ""}
+                </Text>
+              </Flex>
+              <Flex my={1}>
+                <Text sx={subtitle}>{"Email"}</Text>
+                <Text sx={content}>{contact_email || ""}</Text>
+              </Flex>
+              <Flex my={1}>
+                <Text sx={subtitle}>{"Téléphone"}</Text>
+                <Text sx={content}>{contact_phone || ""}</Text>
+              </Flex>
             </Box>
-            <Flex my={1}>
-              <Text sx={subtitle}>{"Adresse"}</Text>
-              <Text sx={content}>{adresse}</Text>
-            </Flex>
-          </Box>
-          <Box mb={2}>
-            <Heading size={5}>Votre activité</Heading>
-            <Flex my={1}>
-              <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
-              <Text sx={content}>{mesures_max}</Text>
-            </Flex>
-          </Box>
-        </Flex>
-        <Flex mt="5">
-          <AntenneEditLinkButton antenne_id={antenne_id}>
-            {"Modifier les informations de l'antenne"}
-          </AntenneEditLinkButton>
-        </Flex>
-      </Card>
-    </Box>
+            <Box mb={2}>
+              <Box>
+                <Heading size={5}>Géolocalisation</Heading>
+                <Text>
+                  {
+                    "Cette adresse permettra de localiser le service tutelaire sur les cartes de votre compte et des magistrats"
+                  }
+                </Text>
+              </Box>
+              <Flex my={1}>
+                <Text sx={subtitle}>{"Adresse"}</Text>
+                <Text sx={content}>{adresse}</Text>
+              </Flex>
+            </Box>
+            <Box mb={2}>
+              <Heading size={5}>Votre activité</Heading>
+              <Flex my={1}>
+                <Text sx={subtitle}>{"Nombre de mesures souhaité"}</Text>
+                <Text sx={content}>{mesures_max}</Text>
+              </Flex>
+            </Box>
+          </Flex>
+          <Flex mt="5">
+            <AntenneEditLinkButton antenne_id={antenne_id}>
+              {"Modifier les informations de l'antenne"}
+            </AntenneEditLinkButton>
+          </Flex>
+        </Card>
+      </Box>
+    </>
   );
 }
 

@@ -16,7 +16,7 @@ function ImportEnquetePage() {
   return (
     <>
       <Helmet>
-        <title>Import de l' enquête {enquete_id} | e-MPJM</title>
+        <title>Import de l' enquête {enquete_id} | e-MJPM</title>
       </Helmet>
       <LayoutMandataire>
         <BoxWrapper>

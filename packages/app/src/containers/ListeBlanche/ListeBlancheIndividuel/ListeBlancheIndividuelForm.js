@@ -264,11 +264,11 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="structure_juridique">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox rol="group" aria-labelledby="structure_juridique">
           <SelectSIRET
             id="siret"
             formik={formik}
@@ -287,6 +287,7 @@ export function ListeBlancheIndividuelForm(props) {
             id="adresse_complement"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="address-line2"
           />
           <Flex justifyContent="space-between">
             <Box mr={1} flex={1 / 2}>
@@ -302,6 +303,7 @@ export function ListeBlancheIndividuelForm(props) {
                   formik.setFieldValue("ville", "");
                 }}
                 size="small"
+                autoComplete="postal-code"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -335,7 +337,7 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="mandataire">
             {"Liste des agréments"}
           </Heading>
           <Text mt={2} mb={1}>
@@ -344,7 +346,7 @@ export function ListeBlancheIndividuelForm(props) {
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="liste_des_agrements">
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}

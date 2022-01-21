@@ -39,28 +39,35 @@ function MagistratEditInformationsForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="informations_personnelles_heading">
             {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox mb={1}>
+        <FormInputBox
+          mb={1}
+          role="group"
+          aria-labelledby="informations_personnelles_heading"
+        >
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="given-name"
           />
           <FormGroupInput
             placeholder="Nom"
             id="nom"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="family-name"
           />
           <FormGroupInput
             placeholder="Email"
             id="email"
             formik={formik}
             validationSchema={magistratEditSchema}
+            autoComplete="email"
           />
           <CheckBox
             isChecked={formik.values.share_email}
@@ -73,14 +80,14 @@ function MagistratEditInformationsForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="tribunal_heading">
             {"Tribunal"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Veuillez renseigner le tribunal dans lequel vous exercez."}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="tribunal_heading">
           <FormGroupSelect
             formik={formik}
             id="ti"

@@ -11,7 +11,7 @@ function ListBlanchePage() {
   return (
     <>
       <Helmet>
-        <title>Ajout d'un mandataire préposé à la liste blanche | e-MPJM</title>
+        <title>Ajout d'un mandataire préposé à la liste blanche | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <BoxWrapper mt={3} px={1}>

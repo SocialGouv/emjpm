@@ -1,11 +1,9 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
+import { useApolloClient } from "@apollo/client";
 import { useFormik } from "formik";
-
 import { Box, Flex } from "rebass";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-
-import { useApolloClient } from "@apollo/client";
 
 import {
   FormGrayBox,
@@ -17,11 +15,11 @@ import { adminServiceSchema } from "~/validation-schemas/adminServiceSchema";
 import {
   Button,
   Heading,
-  Select,
   Text,
   InlineError,
   Field,
   Input,
+  AccessibleSelect,
 } from "~/components";
 
 import { Link } from "~/containers/Commons";
@@ -221,16 +219,17 @@ export function ListeBlancheServiceForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="service_tutelaire_heading">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="service_tutelaire_heading">
           <FormGroupInput
             placeholder="Nom du service"
             id="etablissement"
             formik={formik}
             validationSchema={validationSchema}
+            autoComplete="organization"
           />
           <SelectSIRET
             id="siret"
@@ -263,6 +262,7 @@ export function ListeBlancheServiceForm(props) {
                   formik.touched.code_postal && formik.errors.code_postal
                 }
                 size="small"
+                autoComplete="postal-code"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -292,7 +292,7 @@ export function ListeBlancheServiceForm(props) {
             </Box>
           </Flex>
           <Box>
-            <Select
+            <AccessibleSelect
               id="departements"
               validationSchema={validationSchema}
               formik={formik}
@@ -327,14 +327,17 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="organisme_gestionnaire_heading">
             {"Organisme gestionnaire"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"L'organisme gestionnaire est-il différent du service?"}
           </Text>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox
+          role="group"
+          aria-labelledby="organisme_gestionnaire_heading"
+        >
           <FormGroupSelect
             id="org_gestionnaire"
             options={[
@@ -369,12 +372,14 @@ export function ListeBlancheServiceForm(props) {
                 id="org_nom"
                 formik={formik}
                 validationSchema={validationSchema}
+                autoComplete="family-name"
               />
               <FormGroupInput
                 placeholder="Adresse"
                 id="org_adresse"
                 formik={formik}
                 validationSchema={validationSchema}
+                autoComplete="address-line1"
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -383,6 +388,7 @@ export function ListeBlancheServiceForm(props) {
                     id="org_code_postal"
                     formik={formik}
                     validationSchema={validationSchema}
+                    autoComplete="postal-code"
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>
@@ -400,11 +406,11 @@ export function ListeBlancheServiceForm(props) {
       </Flex>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="infos_responsable">
             {"Informations du responsable"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox>
+        <FormInputBox role="group" aria-labelledby="infos_responsable">
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}
@@ -445,7 +451,7 @@ export function ListeBlancheServiceForm(props) {
       {!isCreate && (
         <Flex>
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="infos_service">
               {"Informations données par le service"}
             </Heading>
             <Text mt={2} mb={1}>
@@ -469,7 +475,7 @@ export function ListeBlancheServiceForm(props) {
                 );
               })}
           </FormGrayBox>
-          <FormInputBox>
+          <FormInputBox role="group" aria-labelledby="infos_service">
             <Input
               label="Nom du service"
               placeholder=""

@@ -10,7 +10,7 @@ function AuthorizationPage() {
   return (
     <>
       <Helmet>
-        <title>Demander des accès à l'api Emjpm | e-MPJM</title>
+        <title>Demander des accès à l'api Emjpm | e-MJPM</title>
       </Helmet>
       <LayoutPublic>
         <BoxWrapper>
@@ -32,6 +32,8 @@ function AuthorizationPage() {
                 p: "3",
                 width: ["100%"],
               }}
+              alt=""
+              aria-hidden="true"
             />
           </Box>
           <Box
