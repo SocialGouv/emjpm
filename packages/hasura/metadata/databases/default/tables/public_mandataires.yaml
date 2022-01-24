@@ -14,18 +14,9 @@ object_relationships:
       remote_table:
         name: editors
         schema: public
-- name: lb_user
+- name: liste_blanche
   using:
-    foreign_key_constraint_on: lb_user_id
-- name: ocmi_mandataire
-  using:
-    manual_configuration:
-      column_mapping:
-        siret: siret
-      insertion_order: null
-      remote_table:
-        name: ocmi_mandataires
-        schema: public
+    foreign_key_constraint_on: liste_blanche_id
 - name: user
   using:
     foreign_key_constraint_on: user_id
@@ -75,7 +66,8 @@ insert_permissions:
     check: {}
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
+    - competences
     - created_at
     - departement_code
     - dispo_max
@@ -83,6 +75,9 @@ insert_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -90,8 +85,6 @@ insert_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
-    - competences
   role: individuel
 - permission:
     check:
@@ -99,13 +92,17 @@ insert_permissions:
         _eq: X-Hasura-User-Id
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
+    - competences
     - created_at
     - dispo_max
     - email_send
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -113,8 +110,6 @@ insert_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
-    - competences
   role: prepose
 select_permissions:
 - permission:
@@ -130,7 +125,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -139,7 +134,10 @@ select_permissions:
     - genre
     - id
     - latitude
-    - lb_user_id
+    - liste_blanche_id
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -150,7 +148,6 @@ select_permissions:
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -160,7 +157,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -169,13 +166,15 @@ select_permissions:
     - genre
     - id
     - latitude
-    - lb_user_id
+    - liste_blanche_id
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - siret
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -185,7 +184,7 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -194,29 +193,32 @@ select_permissions:
     - genre
     - id
     - latitude
-    - lb_user_id
+    - liste_blanche_id
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - siret
     - telephone
     - telephone_portable
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
     filter:
-      lb_user:
-        lb_departements:
+      liste_blanche:
+        mandataire_individuel_departements:
           _and:
           - departement_financeur:
               _eq: true
           - departement_code:
-              _in: x-hasura-agrements
+              _in:
+              - x-hasura-agrements
   role: direction_territoriale
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -225,6 +227,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -234,8 +239,8 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -244,7 +249,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -255,7 +260,10 @@ select_permissions:
     - genre
     - id
     - latitude
-    - lb_user_id
+    - liste_blanche_id
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -266,8 +274,8 @@ select_permissions:
     - sync_ocmi_enable
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -278,7 +286,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -289,6 +297,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -299,8 +310,8 @@ select_permissions:
     - sync_ocmi_enable
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -311,7 +322,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -320,6 +331,9 @@ select_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_en_attente_cached
     - mesures_en_cours_cached
@@ -329,8 +343,8 @@ select_permissions:
     - suspend_activity_reason
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     computed_fields:
     - mesures_en_attente
     - mesures_en_cours
@@ -341,7 +355,7 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -350,6 +364,9 @@ update_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - siret
     - suspend_activity
@@ -357,8 +374,8 @@ update_permissions:
     - sync_ocmi_enable
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     filter:
       user_id:
         _eq: X-Hasura-User-Id
@@ -367,7 +384,7 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - departement_code
@@ -376,14 +393,17 @@ update_permissions:
     - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - siret
     - suspend_activity
     - suspend_activity_reason
     - telephone
     - telephone_portable
+    - use_location_adresse
     - user_id
-    - ville
     filter:
       user_id:
         _eq: X-Hasura-User-Id

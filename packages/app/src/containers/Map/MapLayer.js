@@ -27,7 +27,7 @@ function MapLayer(props) {
                 onMarkerClick({ id, latitude, longitude, type });
               }
             }}
-            key={id}
+            key={`${type}-${id}`}
             coordinates={[longitude, latitude]}
           />
         );

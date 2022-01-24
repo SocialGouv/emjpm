@@ -5,7 +5,7 @@ import { Select } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 export function ListeBlancheIndividuelFormDepartementsSelector(props) {
-  const { departements = [], onAdd } = props;
+  const { departements = [], onAdd, ...selectProps } = props;
   const queryResults = useDepartements();
   const { loading, error } = queryResults;
 
@@ -43,6 +43,7 @@ export function ListeBlancheIndividuelFormDepartementsSelector(props) {
         );
         onAdd(departement);
       }}
+      {...selectProps}
     />
   );
 }

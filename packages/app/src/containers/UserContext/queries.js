@@ -236,8 +236,8 @@ export const MANDATAIRE_USERS = gql`
         telephone_portable
         siret
         adresse
-        ville
-        code_postal
+        location_adresse
+        use_location_adresse
         competences
         sync_ocmi_enable
         editor_locked_mesures
@@ -251,14 +251,14 @@ export const MANDATAIRE_USERS = gql`
             etablissement
           }
         }
-        lb_user {
+        liste_blanche {
           id
           siret
-          adresse1
-          adresse2
+          adresse
+          adresse_complement
           code_postal
           ville
-          lb_user_etablissements {
+          mandataire_prepose_etablissements {
             etablissement_rattachement
             etablissement {
               id
@@ -269,7 +269,7 @@ export const MANDATAIRE_USERS = gql`
               }
             }
           }
-          lb_departements {
+          mandataire_individuel_departements {
             id
             departement_code
             departement_financeur
@@ -277,9 +277,6 @@ export const MANDATAIRE_USERS = gql`
               id
               nom
             }
-          }
-          ocmi_mandataire {
-            siret
           }
         }
       }

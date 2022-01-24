@@ -6,6 +6,7 @@ import * as Yup from "yup";
 
 import { FormGroupSelect, FormGroupInputDate } from "~/components/AppForm";
 import { Button, Heading } from "~/components";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 export function MesureCloseForm(props) {
   const { handleSubmit, handleCancel } = props;
@@ -55,6 +56,7 @@ export function MesureCloseForm(props) {
             id="date_fin_mesure"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.date}
           />
           <FormGroupSelect
             id="cause_sortie"

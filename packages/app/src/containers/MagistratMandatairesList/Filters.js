@@ -151,7 +151,7 @@ function MagistratMandatairesListFilters(props) {
             >
               <Location
                 size={extraIconsSize}
-                color={habilitation ? "#70D54F" : ""}
+                color={searchByLocation ? "#70D54F" : ""}
                 alt=""
                 role="img"
               />

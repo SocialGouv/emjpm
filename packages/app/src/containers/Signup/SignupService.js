@@ -95,26 +95,28 @@ function SignupServiceForm({ serviceDatas }) {
             </Text>
           </FormGrayBox>
           <FormInputBox role="group" aria-labelledby="votre_service_heading">
-            <Select
-              id="departements"
-              formik={formik}
-              placeholder="Département(s) de votre service"
-              options={departementsOptions}
-              isMulti
-              value={findOptions(
-                departementsOptions,
-                formik.values.departements
-              )}
-              hasError={
-                formik.errors.departements && formik.touched.departements
-              }
-              onChange={(options) => {
-                formik.setFieldValue(
-                  "departements",
-                  (options || []).map((o) => o.value)
-                );
-              }}
-            />
+            <Box style={{ marginBottom: "10px" }}>
+              <Select
+                id="departements"
+                formik={formik}
+                placeholder="Département(s) de votre service"
+                options={departementsOptions}
+                isMulti
+                value={findOptions(
+                  departementsOptions,
+                  formik.values.departements
+                )}
+                hasError={
+                  formik.errors.departements && formik.touched.departements
+                }
+                onChange={(options) => {
+                  formik.setFieldValue(
+                    "departements",
+                    (options || []).map((o) => o.value)
+                  );
+                }}
+              />
+            </Box>
             <FormGroupSelect
               id="service"
               formik={formik}

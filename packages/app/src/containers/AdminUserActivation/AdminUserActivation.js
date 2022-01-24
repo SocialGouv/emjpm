@@ -8,14 +8,15 @@ import { Link } from "~/containers/Commons";
 import { Button, Heading, Text } from "~/components";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
+import { AdminServiceListeBlanche } from "./AdminServiceListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
-import { LB_USER, USER } from "./queries";
+import { LISTE_BLANCHE, USER } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 
 function AdminUserActivation(props) {
   const { userId } = props;
 
-  const [execQuery, queryResult] = useLazyQuery(LB_USER);
+  const [execQuery, queryResult] = useLazyQuery(LISTE_BLANCHE);
   const { data, loading, error } = useQuery(USER, {
     onCompleted: async (data) => {
       if (data) {
@@ -52,9 +53,9 @@ function AdminUserActivation(props) {
   useQueryReady(activateUserLoading, error1);
   useQueryReady(loading2, error2);
 
-  const lb_user =
-    queryResult.data && queryResult.data.lb_users.length
-      ? queryResult.data.lb_users[0]
+  const liste_blanche =
+    queryResult.data && queryResult.data.liste_blanche.length
+      ? queryResult.data.liste_blanche[0]
       : null;
 
   const toggleActivation = useCallback(() => {
@@ -82,14 +83,13 @@ function AdminUserActivation(props) {
 
   const { users_by_pk } = data;
 
-  const { active, type, mandataire } = users_by_pk;
+  const { active, type, mandataire, service_members } = users_by_pk;
 
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
-
   return (
     <>
-      {isMandataire({ type }) && (
+      {(type === "individuel" || type === "prepose" || type === "service") && (
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1}>
@@ -97,10 +97,15 @@ function AdminUserActivation(props) {
             </Heading>
           </FormGrayBox>
           <FormInputBox>
-            <AdminMandataireListeBlanche
-              mandataire={mandataire}
-              lb_user={lb_user}
-            />
+            {(type === "individuel" || type === "prepose") && (
+              <AdminMandataireListeBlanche
+                mandataire={mandataire}
+                liste_blanche={liste_blanche}
+              />
+            )}
+            {type === "service" && (
+              <AdminServiceListeBlanche service={service_members[0]?.service} />
+            )}
           </FormInputBox>
         </Flex>
       )}
@@ -114,7 +119,7 @@ function AdminUserActivation(props) {
           <Box display="inline-flex">
             <Box>
               <Button
-                disabled={isMandataire({ type }) && !mandataire.lb_user}
+                disabled={isMandataire({ type }) && !mandataire.liste_blanche}
                 mr={2}
                 bg={activateButtonStyle}
                 onClick={toggleActivation}
@@ -126,7 +131,7 @@ function AdminUserActivation(props) {
             {!active && (
               <Box>
                 <Link to={`/admin/users/${userId}/delete`}>
-                  <Button mr={2} bg={"red"}>
+                  <Button mr={2} bg={"red"} title="Supprimer cet utilisateur">
                     {"Supprimer cet utilisateur"}
                   </Button>
                 </Link>
@@ -134,7 +139,7 @@ function AdminUserActivation(props) {
             )}
           </Box>
 
-          {isMandataire({ type }) && mandataire && !mandataire.lb_user && (
+          {isMandataire({ type }) && mandataire && !mandataire.liste_blanche && (
             <Box ml={4} flex={1}>
               <span aria-label="information" role="img">
                 ℹ️

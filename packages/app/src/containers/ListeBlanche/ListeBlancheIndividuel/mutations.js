@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const DELETE_LB_DEPARTEMENTS = gql`
-  mutation delete_lb_departements($ids: [Int!]!) {
-    delete_lb_departements(where: { id: { _in: $ids } }) {
+export const DELETE_mandataire_individuel_departements = gql`
+  mutation delete_mandataire_individuel_departements($ids: [Int!]!) {
+    delete_mandataire_individuel_departements(where: { id: { _in: $ids } }) {
       affected_rows
     }
   }
@@ -10,7 +10,7 @@ export const DELETE_LB_DEPARTEMENTS = gql`
 
 export const UPDATE_DEPARTEMENT_FINANCEUR = gql`
   mutation set_departement_financeur($id: Int!) {
-    update_lb_departements_by_pk(
+    update_mandataire_individuel_departements_by_pk(
       pk_columns: { id: $id }
       _set: { departement_financeur: true }
     ) {
@@ -20,36 +20,40 @@ export const UPDATE_DEPARTEMENT_FINANCEUR = gql`
   }
 `;
 
-export const CREATE_LB_USER_INDIVIDUEL = gql`
-  mutation create_lb_user(
+export const CREATE_LISTE_BLANCHE_INDIVIDUEL = gql`
+  mutation create_liste_blanche(
     $nom: String!
     $prenom: String!
+    $genre: String
     $siret: String!
     $email: String!
-    $adresse1: String!
-    $adresse2: String
+    $telephone: String
+    $adresse: String!
+    $adresse_complement: String
     $code_postal: String!
     $ville: String!
-    $departements: [lb_departements_insert_input!]!
+    $departements: [mandataire_individuel_departements_insert_input!]!
   ) {
-    insert_lb_users_one(
+    insert_liste_blanche_one(
       object: {
         nom: $nom
         prenom: $prenom
+        genre: $genre
         siret: $siret
         email: $email
-        adresse1: $adresse1
-        adresse2: $adresse2
+        telephone: $telephone
+        adresse: $adresse
+        adresse_complement: $adresse_complement
         code_postal: $code_postal
         ville: $ville
-        lb_departements: { data: $departements }
+        mandataire_individuel_departements: { data: $departements }
         type: "individuel"
       }
     ) {
       created_at
       email
       id
-      lb_departements {
+      mandataire_individuel_departements {
         id
         departement_code
       }
@@ -61,41 +65,47 @@ export const CREATE_LB_USER_INDIVIDUEL = gql`
   }
 `;
 
-export const UPDATE_LB_USER = gql`
-  mutation update_lb_users(
+export const UPDATE_LISTE_BLANCHE = gql`
+  mutation update_liste_blanche(
     $id: Int!
+    $genre: String
     $nom: String
     $prenom: String
     $email: String
+    $telephone: String
     $siret: String
-    $adresse1: String!
-    $adresse2: String
+    $adresse: String!
+    $adresse_complement: String
     $code_postal: String!
     $ville: String!
     $departementsToDelete: [Int!]
-    $departementsToAdd: [lb_departements_insert_input!]!
+    $departementsToAdd: [mandataire_individuel_departements_insert_input!]!
   ) {
-    update_lb_departements(
+    update_mandataire_individuel_departements(
       _set: { departement_financeur: false }
-      where: { lb_user_id: { _eq: $id } }
+      where: { liste_blanche_id: { _eq: $id } }
     ) {
       affected_rows
     }
-    delete_lb_departements(where: { id: { _in: $departementsToDelete } }) {
+    delete_mandataire_individuel_departements(
+      where: { id: { _in: $departementsToDelete } }
+    ) {
       affected_rows
     }
-    insert_lb_departements(objects: $departementsToAdd) {
+    insert_mandataire_individuel_departements(objects: $departementsToAdd) {
       affected_rows
     }
-    update_lb_users_by_pk(
+    update_liste_blanche_by_pk(
       pk_columns: { id: $id }
       _set: {
+        genre: $genre
         nom: $nom
         prenom: $prenom
         email: $email
+        telephone: $telephone
         siret: $siret
-        adresse1: $adresse1
-        adresse2: $adresse2
+        adresse: $adresse
+        adresse_complement: $adresse_complement
         code_postal: $code_postal
         ville: $ville
       }
@@ -112,7 +122,7 @@ export const UPDATE_LB_USER = gql`
 
 export const CREATE_LB_DEPARTEMENT = gql`
   mutation create_lb_departement(
-    $lb_user_id: Int!
+    $liste_blanche_id: Int!
     $departement_code: String!
     $departement_financeur: Boolean
     $individuel: Boolean
@@ -120,9 +130,9 @@ export const CREATE_LB_DEPARTEMENT = gql`
     $prepose: Boolean
     $ti: Boolean
   ) {
-    insert_lb_departements_one(
+    insert_mandataire_individuel_departements_one(
       object: {
-        lb_user_id: $lb_user_id
+        liste_blanche_id: $liste_blanche_id
         departement_code: $departement_code
         departement_financeur: $departement_financeur
         individuel: $individuel
@@ -138,7 +148,7 @@ export const CREATE_LB_DEPARTEMENT = gql`
 
 export const UPDATE_LB_DEPARTEMENT = gql`
   mutation update_lb_departement($id: Int!, $departement_financeur: Boolean) {
-    update_lb_departements(
+    update_mandataire_individuel_departements(
       where: { id: { _eq: $id } }
       _set: { departement_financeur: $departement_financeur }
     ) {
@@ -149,7 +159,7 @@ export const UPDATE_LB_DEPARTEMENT = gql`
 
 export const DELETE_LB_DEPARTEMENT = gql`
   mutation delete_lb_departement($id: Int!) {
-    delete_lb_departements_by_pk(id: $id) {
+    delete_mandataire_individuel_departements_by_pk(id: $id) {
       id
     }
   }

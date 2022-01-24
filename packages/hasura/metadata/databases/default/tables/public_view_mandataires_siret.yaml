@@ -6,11 +6,14 @@ select_permissions:
     columns:
     - siret
     filter: {}
-    limit: 1
   role: individuel
 - permission:
     columns:
     - siret
     filter: {}
-    limit: 1
   role: prepose
+- permission:
+    columns:
+    - siret
+    filter: {}
+  role: service

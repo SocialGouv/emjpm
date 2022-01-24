@@ -125,11 +125,11 @@ module.exports = {
           nom
         }
       }
-      lb_user {
+      liste_blanche {
         id
         nom
         prenom
-        etablissement_rattachement: lb_user_etablissements(where: {etablissement_rattachement: {_eq: true}}) {
+        etablissement_rattachement: mandataire_prepose_etablissements(where: {etablissement_rattachement: {_eq: true}}) {
           etablissement {
             rslongue
             id
@@ -143,7 +143,7 @@ module.exports = {
             }
           }
         }
-        lb_user_etablissements {
+        mandataire_prepose_etablissements {
           etablissement {
             id
             nofinesset
@@ -160,7 +160,7 @@ module.exports = {
             }
           }
         }
-        lb_departements(where: {departement_financeur: {_eq: true}}) {
+        mandataire_individuel_departements(where: {departement_financeur: {_eq: true}}) {
           id
           departement {
             id
@@ -489,7 +489,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-      
+
       curatelle_renforcee_etablissement_fin_annee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -561,7 +561,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-      
+
       tutelle_etablissement_debut_annee: mesures_aggregate(where: {
         _and: [
           { mandataire_id : {_eq: $mandataireId} },
@@ -2351,7 +2351,7 @@ module.exports = {
       }){
         aggregate { count }
       }
-    
+
     }
   `,
 

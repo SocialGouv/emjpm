@@ -36,14 +36,40 @@ function AdminUserService({ userId, successLink, cancelLink }) {
   }
 
   const { users_by_pk: user } = data;
+  const {
+    service_members: [{ service }],
+  } = user;
 
   const handleSubmit = async (values, { setSubmitting }) => {
     await editUser({
       variables: {
-        email: values.email.toLowerCase(),
-        id: userId,
+        user_id: userId,
+        user_email: values.user_email.toLowerCase(),
+        user_nom: values.user_nom,
+        user_prenom: values.user_prenom,
+        adresse: values.adresse,
+        adresse_complement: values.adresse_complement,
+        location_adresse: values.geocode.label,
+        code_postal: values.geocode.postcode,
+        ville: values.geocode.city,
+        competences: values.competences,
+        dispo_max: values.dispo_max,
+        suspend_activity: values.suspendActivity,
+        suspend_activity_reason: values.suspendActivityReason,
+        use_location_adresse: values.useLocationAdresse,
+        email: values.email,
+        etablissement: values.etablissement,
+        latitude: values.geocode.latitude,
+        longitude: values.geocode.longitude,
         nom: values.nom,
         prenom: values.prenom,
+        genre: values.genre,
+        service_id: service.id,
+        service_tis: values.tis.map((ti) => ({
+          service_id: service.id,
+          ti_id: ti,
+        })),
+        telephone: values.telephone,
       },
     });
 

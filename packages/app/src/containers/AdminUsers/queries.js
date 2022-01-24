@@ -48,7 +48,7 @@ export const USERS = gql`
       }
       mandataire {
         id
-        lb_user_id
+        liste_blanche_id
         mesures_en_cours
         dispo_max
       }

@@ -5,6 +5,7 @@ const magistratEditSchema = yup.object().shape({
   email: yup.string().email().required(),
   nom: yup.string().required(),
   prenom: yup.string().required(),
+  genre: yup.string().nullable(),
 });
 
 export { magistratEditSchema };

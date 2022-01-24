@@ -12,8 +12,8 @@ class OcmiMandataire extends Model {
   static get jsonSchema() {
     return {
       properties: {
-        adresse1: { type: "string" },
-        adresse2: { type: "string" },
+        adresse: { type: "string" },
+        adresse_complement: { type: "string" },
         code_postal: {
           type: "string",
         },

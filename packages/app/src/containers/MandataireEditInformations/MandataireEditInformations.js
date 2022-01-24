@@ -69,13 +69,16 @@ const MandataireEditInformations = ({
         code: codeDepartement,
       });
 
-      const { lb_user } = mandataire;
-      const { lb_departements = [] } = lb_user || {};
+      const { liste_blanche } = mandataire;
+      const { mandataire_individuel_departements = [] } = liste_blanche || {};
 
       editUser({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
-          adresse: values.geocode.label,
+          adresse: values.adresse,
+          adresse_complement: values.adresse_complement,
+          use_location_adresse: values.useLocationAdresse,
+          location_adresse: values.geocode.label,
           code_postal: values.geocode.postcode,
           competences: values.competences,
           departement_code: departement.id,
@@ -92,7 +95,7 @@ const MandataireEditInformations = ({
             mandataire_id: mandataire.id,
             ti_id: ti,
           })),
-          departement_codes: lb_departements.map(
+          departement_codes: mandataire_individuel_departements.map(
             ({ departement_code }) => departement_code
           ),
           nom: values.nom,

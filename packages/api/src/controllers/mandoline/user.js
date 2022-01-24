@@ -43,15 +43,17 @@ const getUserService = (user) => {
     org_nom,
     org_ville,
     dispo_max,
-    lb_adresse,
-    lb_code_postal,
-    lb_ville,
+    adresse,
+    code_postal,
+    ville,
     mesures_in_progress: mesures_en_attente,
     mesures_awaiting: mesures_en_cours,
     departements,
   } = service;
 
   const data = {
+    adresse,
+    code_postal,
     departement: departements[0]
       ? {
           code: departements[0].id,
@@ -65,9 +67,6 @@ const getUserService = (user) => {
     dispo_max,
     email,
     etablissement,
-    lb_adresse,
-    lb_code_postal,
-    lb_ville,
     mesures_en_attente,
     mesures_en_cours,
     nom,
@@ -79,6 +78,7 @@ const getUserService = (user) => {
     prenom,
     siret,
     telephone,
+    ville,
   };
   return data;
 };

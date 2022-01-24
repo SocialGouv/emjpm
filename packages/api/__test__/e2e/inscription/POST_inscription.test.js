@@ -26,10 +26,10 @@ beforeEach(async () => {
 
 const defaultRegister = (params) => ({
   mandataire: {
-    adresse: "",
     code_postal: "75010",
     departement_code: "01",
     etablissement: "",
+    location_adresse: "",
     telephone: "",
     ville: "",
   },

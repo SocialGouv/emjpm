@@ -47,6 +47,10 @@ export function MagistratMandataire(props) {
     tis,
     adresse,
     codePostal,
+    ville,
+    useLocationAdresse,
+    locationAdresse,
+    adresseComplement,
     email,
     lastLogin,
     lastLoginIsCritical,
@@ -56,7 +60,6 @@ export function MagistratMandataire(props) {
     discriminator,
     latitude,
     longitude,
-    ville,
     id,
     suspendActivity,
     suspendActivityReason,
@@ -126,6 +129,33 @@ export function MagistratMandataire(props) {
                   {lastLogin}
                 </Text>
               </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  {"Adresse d’activité"}
+                </Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {useLocationAdresse ? locationAdresse : adresse}
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  {"Complément d'adresse"}
+                </Text>
+                <Text sx={MagistratContentMandataireStyle}>
+                  {adresseComplement}
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={MagistratTitleMandataireStyle}>
+                  Dernière connexion
+                </Text>
+                <Text
+                  color={lastLoginColor}
+                  sx={MagistratContentMandataireStyle}
+                >
+                  {lastLogin}
+                </Text>
+              </Box>
               <Box mb={4}>
                 <Text sx={MagistratTitleMandataireStyle}>
                   Tribunaux d’instance
@@ -175,40 +205,71 @@ export function MagistratMandataire(props) {
                   )}
                 </Text>
               </Box>
-              <Box>
-                <Text sx={MagistratTitleMandataireStyle}>
-                  En cours / souhaitée
-                </Text>
-                <Text sx={MagistratContentMandataireStyle}>
-                  {mesuresInProgress} /{" "}
+              <Box width="50%">
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>Email</Text>
+                  <Text sx={MagistratContentMandataireStyle}>{email}</Text>
+                </Box>
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>Téléphone</Text>
+                  <Text sx={MagistratContentMandataireStyle}>{telephone}</Text>
+                </Box>
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>Disponibilité</Text>
                   <Text
                     sx={{
                       ...MagistratContentMandataireStyle,
                       ...(suspendActivity ? { color: "error" } : {}),
                     }}
-                    display="inline"
                   >
-                    {suspendActivity ? "Activité interrompue" : dispoMax}
+                    {suspendActivity
+                      ? "Activité interrompue"
+                      : currentAvailability}
+                    {suspendActivity && (
+                      <>
+                        <br />
+                        {suspendActivityReason
+                          ? "Motif: " + suspendActivityReason
+                          : ""}
+                      </>
+                    )}
                   </Text>
-                </Text>
-              </Box>
-              <Box>
-                <Text sx={MagistratTitleMandataireStyle}>
-                  Mesure en attente
-                </Text>
-                <Text sx={MagistratContentMandataireStyle}>
-                  {mesuresAwaiting}
-                </Text>
-              </Box>
-              <Box>
-                <Text sx={MagistratTitleMandataireStyle}>
-                  Observations sur le mandataire
-                </Text>
-                <MagistratMandataireComments
-                  tiId={tiId}
-                  serviceId={serviceId}
-                  mandataireId={mandataireId}
-                />
+                </Box>
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    En cours / souhaitée
+                  </Text>
+                  <Text sx={MagistratContentMandataireStyle}>
+                    {mesuresInProgress} /{" "}
+                    <Text
+                      sx={{
+                        ...MagistratContentMandataireStyle,
+                        ...(suspendActivity ? { color: "error" } : {}),
+                      }}
+                      display="inline"
+                    >
+                      {suspendActivity ? "Activité interrompue" : dispoMax}
+                    </Text>
+                  </Text>
+                </Box>
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    Mesure en attente
+                  </Text>
+                  <Text sx={MagistratContentMandataireStyle}>
+                    {mesuresAwaiting}
+                  </Text>
+                </Box>
+                <Box>
+                  <Text sx={MagistratTitleMandataireStyle}>
+                    Observations sur le mandataire
+                  </Text>
+                  <MagistratMandataireComments
+                    tiId={tiId}
+                    serviceId={serviceId}
+                    mandataireId={mandataireId}
+                  />
+                </Box>
               </Box>
             </Box>
           </Flex>

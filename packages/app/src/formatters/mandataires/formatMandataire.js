@@ -55,7 +55,17 @@ export default function formatMandataire({
 
     currentDiscriminator = {
       adresse: service.adresse ? capitalize(service.adresse) : "",
-      codePostal: service.code_postal ? capitalize(service.code_postal) : "",
+      adresseComplement: service.adresse_complement
+        ? service.adresse_complement
+        : "",
+      codePostal: service.code_postal ? service.code_postal : "",
+      ville: service.ville ? capitalize(service.ville) : "",
+      useLocationAdresse: service.use_location_adresse,
+      locationAdresse: service.location_adresse
+        ? capitalize(service.location_adresse)
+        : "",
+      codePostal: service.code_postal ? service.code_postal : "",
+      ville: service.ville ? service.ville : "",
       competences: service.competences || "",
       email: service.email ? service.email : "",
       etablissement: service.etablissement ? service.etablissement : "",
@@ -69,16 +79,21 @@ export default function formatMandataire({
       prenom: service.prenom ? service.prenom : null,
       serviceId: service.id,
       telephone: service.telephone ? service.telephone : "",
-      ville: service.ville ? capitalize(service.ville) : "",
       suspendActivity: service.suspend_activity || false,
       suspendActivityReason: service.suspend_activity_reason || false,
     };
   } else {
     currentDiscriminator = {
       adresse: mandataire.adresse ? capitalize(mandataire.adresse) : "",
-      codePostal: mandataire.code_postal
-        ? capitalize(mandataire.code_postal)
+      adresseComplement: mandataire.adresse_complement
+        ? mandataire.adresse_complement
         : "",
+      useLocationAdresse: mandataire.use_location_adresse,
+      locationAdresse: mandataire.location_adresse
+        ? capitalize(mandataire.location_adresse)
+        : "",
+      codePostal: mandataire.code_postal ? mandataire.code_postal : "",
+      ville: mandataire.ville ? mandataire.ville : "",
       competences: mandataire.competences || "",
       email:
         mandataire.user && mandataire.user.email ? mandataire.user.email : "",
@@ -104,7 +119,6 @@ export default function formatMandataire({
           ? capitalize(mandataire.user.prenom)
           : "",
       telephone: mandataire.telephone,
-      ville: mandataire.ville ? capitalize(mandataire.ville) : "",
       suspendActivity: mandataire.suspend_activity || false,
       suspendActivityReason: mandataire.suspend_activity_reason || false,
     };

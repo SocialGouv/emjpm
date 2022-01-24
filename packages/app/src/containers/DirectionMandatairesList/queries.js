@@ -39,7 +39,6 @@ export const GET_MANDATAIRES_BY_DEPARTEMENT = gql`
       mandataire {
         id
         telephone
-        ville
         suspend_activity
         suspend_activity_reason
         user {
@@ -116,7 +115,6 @@ export const GET_MANDATAIRES_BY_REGION = gql`
       mandataire {
         id
         telephone
-        ville
         suspend_activity
         suspend_activity_reason
         user {
@@ -184,7 +182,6 @@ export const GET_MANDATAIRES_BY_NATION = gql`
       mandataire {
         id
         telephone
-        ville
         suspend_activity
         suspend_activity_reason
         user {

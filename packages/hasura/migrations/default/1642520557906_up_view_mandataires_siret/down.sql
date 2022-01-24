@@ -1,0 +1,5 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- CREATE OR REPLACE VIEW "public"."view_mandataires_siret" AS
+--  SELECT siret::text
+--    FROM mandataires;

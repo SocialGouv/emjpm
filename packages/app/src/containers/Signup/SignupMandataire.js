@@ -50,8 +50,9 @@ function SignupMandataireForm() {
         });
         const body = {
           mandataire: {
-            adresse: values.geocode.label,
+            location_adresse: values.geocode.label,
             code_postal: values.geocode.postcode,
+            ville: values.geocode.city,
             departement_code: departement.id,
             dispo_max: parseInt(values.dispo_max),
             genre: user.genre,
@@ -60,7 +61,6 @@ function SignupMandataireForm() {
             siret: isIndividuel(user) ? values.siret : null,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
-            ville: values.geocode.city,
           },
           user: user,
         };
@@ -150,10 +150,12 @@ function SignupMandataireForm() {
                 aria-describedby="msg-geocode"
               />
               <div id="msg-geocode">
-                <InlineError
-                  message={formik.errors.geocode}
-                  fieldId="geocode"
-                />
+                {(formik.touched.geocode || formik.submitCount > 0) && (
+                  <InlineError
+                    message={formik.errors.geocode}
+                    fieldId="geocode"
+                  />
+                )}
               </div>
             </Field>
           </FormInputBox>

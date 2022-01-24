@@ -29,6 +29,7 @@ function MagistratMapMandatairesPanelList() {
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
+
   const { setCurrentMarker, currentMarker } = useContext(MapContext);
 
   const { data, error, loading } = useQuery(
@@ -62,7 +63,12 @@ function MagistratMapMandatairesPanelList() {
 
   const { count } = data.count.aggregate;
   const totalPage = count / RESULT_PER_PAGE;
-  const gestionnaires = formatMandatairesList(data.mandatairesList);
+
+  const gestionnaires = formatMandatairesList(
+    data.mandatairesList.map((row) => {
+      return { gestionnaire: row.gestionnaires[0] };
+    })
+  );
 
   return (
     <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>

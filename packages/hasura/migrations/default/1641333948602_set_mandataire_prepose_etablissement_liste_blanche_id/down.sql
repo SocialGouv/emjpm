@@ -1,0 +1,8 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- UPDATE mandataire_prepose_etablissement mpe SET liste_blanche_id = (
+--     SELECT lb.id
+--     FROM liste_blanche lb
+--     JOIN lb_users lbu ON lb.siret = lbu.siret
+--     WHERE lbu.id = mpe.lb_user_id
+-- );

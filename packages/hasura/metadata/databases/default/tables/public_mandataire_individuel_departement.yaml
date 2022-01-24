@@ -1,0 +1,126 @@
+table:
+  name: mandataire_individuel_departement
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+array_relationships:
+- name: tis
+  using:
+    manual_configuration:
+      column_mapping:
+        departement_code: departement_code
+      insertion_order: null
+      remote_table:
+        name: tis
+        schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+  role: direction
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: direction_nationale
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: direction_territoriale
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: greffier
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: individuel
+- permission:
+    columns:
+    - departement_financeur
+    - departement_code
+    - id
+    - lb_user_id
+    - created_at
+    filter: {}
+  role: prepose
+- permission:
+    columns:
+    - id
+    - created_at
+    - lb_user_id
+    - departement_code
+    - departement_financeur
+    filter: {}
+  role: ti
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - departement_financeur
+    filter: {}
+  role: direction
+delete_permissions:
+- permission:
+    filter: {}
+  role: direction
+event_triggers:
+- definition:
+    delete:
+      columns: "*"
+    enable_manual: false
+    insert:
+      columns: "*"
+    update:
+      columns:
+      - lb_user_id
+      - departement_financeur
+      - departement_code
+      - created_at
+  headers:
+  - name: hasura_web_hook_secret
+    value_from_env: HASURA_WEB_HOOK_SECRET
+  name: lb_update_lb_user_departement
+  retry_conf:
+    interval_sec: 10
+    num_retries: 0
+    timeout_sec: 60
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/lb-update/lb-user"

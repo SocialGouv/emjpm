@@ -12,8 +12,8 @@ import { Helmet } from "react-helmet";
 function ImportMesures() {
   const user = useUser();
   const { mandataire = {} } = user;
-  const { lb_user = {} } = mandataire;
-  const { ocmi_mandataire } = lb_user;
+  const { liste_blanche = {} } = mandataire;
+  const { ocmi_mandataire } = liste_blanche;
 
   const [importType, setImportType] = useState(
     ocmi_mandataire ? "ocmi" : "file"

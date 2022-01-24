@@ -103,6 +103,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
               setCreationMode(true);
             }}
             {...mesureModificationButtonProps}
+            title="Ajouter une ressource"
           >
             Ajouter une ressource
           </Button>

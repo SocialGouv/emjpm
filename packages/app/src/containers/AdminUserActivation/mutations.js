@@ -17,13 +17,16 @@ export const SEND_EMAIL_ACCOUNT_VALIDATION = gql`
 `;
 
 export const LISTE_BLANCHE_ASSOCIATION = gql`
-  mutation liste_blanche_association($mandataire_id: Int!, $lb_user_id: Int!) {
+  mutation liste_blanche_association(
+    $mandataire_id: Int!
+    $liste_blanche_id: Int!
+  ) {
     update_mandataires_by_pk(
       pk_columns: { id: $mandataire_id }
-      _set: { lb_user_id: $lb_user_id }
+      _set: { liste_blanche_id: $liste_blanche_id }
     ) {
       id
-      lb_user_id
+      liste_blanche_id
     }
   }
 `;

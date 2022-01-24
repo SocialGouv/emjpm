@@ -11,6 +11,7 @@ import {
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 export function MesureAcceptForm(props) {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
@@ -57,6 +58,7 @@ export function MesureAcceptForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={mesureAcceptSchema}
+            errorMessage={errorMessages.date}
           />
 
           {antenneOptions.length > 0 && (
@@ -117,6 +119,7 @@ export function MesureAcceptForm(props) {
                   id="code_postal"
                   formik={formik}
                   validationSchema={mesureAcceptSchema}
+                  required
                   onChange={async (e) => {
                     const { value } = e.target;
                     await formik.setFieldValue("code_postal", value);
@@ -135,6 +138,7 @@ export function MesureAcceptForm(props) {
                     value={formik.values.ville}
                     hasError={formik.touched.ville && formik.errors.ville}
                     aria-describedby="msg-ville"
+                    required
                   />
                   <div id="msg-ville">
                     {formik.touched.ville && (

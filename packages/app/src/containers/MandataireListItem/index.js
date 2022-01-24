@@ -44,8 +44,8 @@ export default function MandataireListItem(props) {
       isAvailable,
       nom,
       prenom,
-      codePostal,
       ville,
+      codePostal,
       etablissement,
       mesuresInProgress,
       mesuresAwaiting,
@@ -132,7 +132,7 @@ export default function MandataireListItem(props) {
             </Box>
           </Flex>
           <Flex width="100px" sx={columnStyle(true, true)}>
-            <Text sx={labelStyle}>Localisation</Text>
+            <Text sx={labelStyle}>location</Text>
             <Text sx={descriptionStyle}>{`${codePostal} ${ville}`}</Text>
           </Flex>
 

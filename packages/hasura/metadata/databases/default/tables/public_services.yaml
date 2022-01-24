@@ -5,6 +5,15 @@ object_relationships:
 - name: editor
   using:
     foreign_key_constraint_on: editor_id
+- name: liste_blanche
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: liste_blanche
+        schema: public
 array_relationships:
 - name: departements
   using:
@@ -74,17 +83,17 @@ insert_permissions:
     check: {}
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -97,6 +106,7 @@ insert_permissions:
     - prenom
     - siret
     - telephone
+    - use_location_adresse
     - ville
   role: direction
 select_permissions:
@@ -111,17 +121,17 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -137,6 +147,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting
@@ -147,17 +158,17 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - nom
     - org_adresse
@@ -168,6 +179,7 @@ select_permissions:
     - prenom
     - siret
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting
@@ -178,17 +190,17 @@ select_permissions:
     allow_aggregations: true
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - nom
     - org_adresse
@@ -199,6 +211,7 @@ select_permissions:
     - prenom
     - siret
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting
@@ -208,14 +221,18 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -230,7 +247,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - use_location_adresse
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -239,6 +256,7 @@ select_permissions:
 - permission:
     columns:
     - adresse
+    - adresse_complement
     - code_postal
     - competences
     - created_at
@@ -247,11 +265,10 @@ select_permissions:
     - editor_locked_mesures
     - email
     - etablissement
+    - genre
     - id
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -267,6 +284,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     computed_fields:
     - mesures_awaiting
@@ -278,14 +296,18 @@ select_permissions:
 - permission:
     columns:
     - adresse
-    - code_postal
+    - adresse_complement
     - competences
     - created_at
     - dispo_max
     - email
     - etablissement
+    - genre
     - id
     - latitude
+    - location_adresse
+    - code_postal
+    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -300,7 +322,7 @@ select_permissions:
     - suspend_activity
     - suspend_activity_reason
     - telephone
-    - ville
+    - use_location_adresse
     computed_fields:
     - mesures_awaiting
     - mesures_in_progress
@@ -311,17 +333,35 @@ update_permissions:
     check: null
     columns:
     - adresse
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    filter: {}
+  role: direction
+- permission:
+    check: null
+    columns:
+    - mesures_awaiting_cached
+    - mesures_in_progress_cached
+    filter: {}
+  role: greffier
+- permission:
+    check: null
+    columns:
+    - adresse
+    - adresse_complement
     - code_postal
     - competences
-    - created_at
     - dispo_max
     - email
     - etablissement
-    - id
+    - genre
     - latitude
-    - lb_adresse
-    - lb_code_postal
-    - lb_ville
+    - location_adresse
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -333,39 +373,10 @@ update_permissions:
     - org_ville
     - prenom
     - siret
-    - telephone
-    - ville
-    filter: {}
-  role: direction
-- permission:
-    check: null
-    columns:
-    - etablissement
-    - latitude
-    - longitude
-    - mesures_awaiting_cached
-    - mesures_in_progress_cached
-    filter: {}
-  role: greffier
-- permission:
-    check: null
-    columns:
-    - adresse
-    - code_postal
-    - competences
-    - dispo_max
-    - email
-    - etablissement
-    - id
-    - latitude
-    - longitude
-    - mesures_awaiting_cached
-    - mesures_in_progress_cached
-    - nom
-    - prenom
     - suspend_activity
     - suspend_activity_reason
     - telephone
+    - use_location_adresse
     - ville
     filter:
       id:
@@ -374,9 +385,6 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - etablissement
-    - latitude
-    - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
     filter: {}
@@ -392,13 +400,12 @@ event_triggers:
       columns:
       - org_gestionnaire
       - adresse
-      - code_postal
       - competences
       - email
       - etablissement
-      - lb_adresse
-      - lb_code_postal
-      - lb_ville
+      - location_adresse
+      - code_postal
+      - ville
       - nom
       - org_adresse
       - org_code_postal
@@ -407,7 +414,6 @@ event_triggers:
       - prenom
       - siret
       - telephone
-      - ville
       - id
       - latitude
       - longitude

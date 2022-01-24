@@ -5,6 +5,7 @@ import { Field, Input } from "~/components";
 import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
 import useAppFieldIsRequired from "./useAppFieldIsRequired";
 import useAppFieldShowError from "./useAppFieldShowError";
+import { useCallback } from "react";
 
 export default function FormGroupInput({
   id,
@@ -27,7 +28,9 @@ export default function FormGroupInput({
   onChange,
   size,
   noRequiredAsterisk,
+  normalizers = [],
   autoComplete,
+  errorMessage,
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -47,6 +50,18 @@ export default function FormGroupInput({
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
+  const onChangeDefault = useCallback(
+    (e) => {
+      let { value } = e.target;
+      for (const normalize of normalizers) {
+        value = normalize(value);
+      }
+      e.target.value = value;
+      return handleChange(e);
+    },
+    [handleChange, normalizers]
+  );
+
   return (
     <Field>
       <Flex alignItems="center">
@@ -62,7 +77,7 @@ export default function FormGroupInput({
           title={title}
           value={value}
           onBlur={handleBlur}
-          onChange={onChange ? onChange : onInput ? undefined : handleChange}
+          onChange={onChange ? onChange : onInput ? undefined : onChangeDefault}
           onInput={onInput}
           hasError={showError}
           type={type}
@@ -77,7 +92,7 @@ export default function FormGroupInput({
       <div id={`msg-${id}`}>
         <AppFormFieldErrorMessage
           id={id}
-          error={error}
+          error={errorMessage ? errorMessage : error}
           formik={formik}
           hideErrors={hideErrors}
         />

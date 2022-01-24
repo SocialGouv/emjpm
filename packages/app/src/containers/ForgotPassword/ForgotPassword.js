@@ -16,6 +16,7 @@ import {
   Text,
 } from "~/components";
 import { captureException } from "~/user/sentry";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 const { API_URL } = config;
 
@@ -116,7 +117,10 @@ function ForgotPassword() {
             />
             <div id="msg-email">
               {formik.touched.email && (
-                <InlineError message={formik.errors.email} fieldId="email" />
+                <InlineError
+                  message={formik.errors.email && errorMessages.email}
+                  fieldId="email"
+                />
               )}
             </div>
           </Field>

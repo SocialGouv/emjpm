@@ -9,6 +9,8 @@ export const GET_SERVICES = gql`
       ville
       code_postal
       adresse
+      location_adresse
+      use_location_adresse
       siret
       email
       etablissement
@@ -18,9 +20,6 @@ export const GET_SERVICES = gql`
       nom
       competences
       created_at
-      lb_adresse
-      lb_code_postal
-      lb_ville
       org_gestionnaire
       org_nom
       org_adresse

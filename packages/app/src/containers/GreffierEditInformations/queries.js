@@ -12,6 +12,7 @@ export const GREFFIER = gql`
         id
         ti_id
         share_email
+        genre
       }
     }
     tis(where: { immutable: { _eq: true } }) {

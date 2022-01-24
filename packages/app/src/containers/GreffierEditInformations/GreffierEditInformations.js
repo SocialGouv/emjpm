@@ -48,6 +48,7 @@ function GreffierEditInformations({ userId, successLink, cancelLink }) {
         prenom: values.prenom,
         tiId: values.ti,
         shareEmail: values.share_email,
+        genre: values.genre,
       },
     });
 

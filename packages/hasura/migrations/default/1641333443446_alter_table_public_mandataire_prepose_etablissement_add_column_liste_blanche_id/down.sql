@@ -1,0 +1,4 @@
+-- Could not auto-generate a down migration.
+-- Please write an appropriate down migration for the SQL below:
+-- alter table "public"."mandataire_prepose_etablissement" add column "liste_blanche_id" integer
+--  null;

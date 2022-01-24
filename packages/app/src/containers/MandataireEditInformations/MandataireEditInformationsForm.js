@@ -25,13 +25,17 @@ import {
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
 import { findOptions } from "~/utils/form";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
-function buildTiOptions(lb_departements, lb_user_etablissements) {
+function buildTiOptions(
+  mandataire_individuel_departements,
+  mandataire_prepose_etablissements
+) {
   const tiList = [];
-  lb_user_etablissements.forEach(({ etablissement: { tis } }) => {
+  mandataire_prepose_etablissements.forEach(({ etablissement: { tis } }) => {
     tiList.push.apply(tiList, tis);
   });
-  lb_departements.forEach(({ tis }) => {
+  mandataire_individuel_departements.forEach(({ tis }) => {
     tiList.push.apply(tiList, tis);
   });
   const tis = uniq(tiList);
@@ -45,12 +49,18 @@ function buildTiOptions(lb_departements, lb_user_etablissements) {
 function MandataireEditInformationsForm(props) {
   const { cancelLink, mandataire, handleSubmit, user, errorMessage } = props;
 
-  const { lb_user, mandataire_tis = [] } = mandataire;
-  const { lb_departements = [], lb_user_etablissements = [] } = lb_user || {};
+  const { liste_blanche, mandataire_tis = [] } = mandataire;
+  const {
+    mandataire_individuel_departements = [],
+    mandataire_prepose_etablissements = [],
+  } = liste_blanche || {};
 
   const { tiOptions } = useMemo(() => {
-    return buildTiOptions(lb_departements, lb_user_etablissements);
-  }, [lb_departements, lb_user_etablissements]);
+    return buildTiOptions(
+      mandataire_individuel_departements,
+      mandataire_prepose_etablissements
+    );
+  }, [mandataire_individuel_departements, mandataire_prepose_etablissements]);
 
   const apolloClient = useApolloClient();
 
@@ -60,22 +70,43 @@ function MandataireEditInformationsForm(props) {
     [apolloClient, type]
   );
 
+  const geocodeResource = useMemo(
+    () => ({
+      latitude: mandataire.latitude,
+      longitude: mandataire.longitude,
+      adresse: mandataire.location_adresse,
+      ville: mandataire.ville,
+      code_postal: mandataire.code_postal,
+      departement_code: mandataire.departement_code,
+    }),
+    [mandataire]
+  );
+
+  const geocodeInitValue = useMemo(
+    () => geocodeInitialValue(geocodeResource),
+    [geocodeResource]
+  );
+
   const formik = useFormik({
     initialValues: {
       competences: mandataire.competences || "",
       dispo_max: parseInt(mandataire.dispo_max),
       email: user.email || "",
       genre: mandataire.genre,
-      geocode: geocodeInitialValue(mandataire),
+      location_adresse: mandataire.location_adresse,
+      adresse: mandataire.adresse,
+      adresse_complement: mandataire.adresse_complement,
+      geocode: geocodeInitValue,
       nom: user.nom || "",
       prenom: user.prenom || "",
-      siret: lb_user?.siret || mandataire?.siret || "",
+      siret: liste_blanche?.siret || mandataire?.siret || "",
       telephone: mandataire.telephone || "",
       telephone_portable: mandataire.telephone_portable || "",
       tis: mandataire_tis.map((mti) => mti.ti_id),
       suspendActivity: mandataire.suspend_activity,
       suspendActivityReason: mandataire.suspend_activity_reason,
-      initialSiret: lb_user?.siret || "",
+      initialSiret: liste_blanche?.siret || mandataire?.siret || "",
+      useLocationAdresse: mandataire.use_location_adresse,
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -97,7 +128,7 @@ function MandataireEditInformationsForm(props) {
             <FormGroupSelect
               id="genre"
               options={GENDER_OPTIONS}
-              placeholder="Genre"
+              placeholder="Civilité"
               value={formik.values.genre}
               formik={formik}
               validationSchema={validationSchema}
@@ -108,13 +139,15 @@ function MandataireEditInformationsForm(props) {
               id="prenom"
               formik={formik}
               validationSchema={validationSchema}
+              normalizers={[normalizeFirstName]}
               autoComplete="given-name"
             />
             <FormGroupInput
-              placeholder="Nom"
+              placeholder="NOM"
               id="nom"
               formik={formik}
               validationSchema={validationSchema}
+              normalizers={[normalizeLastName]}
               autoComplete="family-name"
             />
           </FormInputBox>
@@ -127,7 +160,7 @@ function MandataireEditInformationsForm(props) {
           </FormGrayBox>
           <FormInputBox role="group" aria-labelledby="coordonnes_heading">
             <FormGroupInput
-              placeholder="Email"
+              placeholder="Adresse e-mail"
               id="email"
               formik={formik}
               validationSchema={validationSchema}
@@ -157,17 +190,25 @@ function MandataireEditInformationsForm(props) {
         </Flex>
         <Flex>
           <FormGrayBox>
-            <Heading size={4}>{"Adresse"}</Heading>
-            <Text lineHeight="1.5" color="textSecondary">
-              {
-                "Cette adresse permettra de vous localiser sur la carte des mesures"
-              }
-            </Text>
+            <Heading size={4}>{"Structure juridique"}</Heading>
           </FormGrayBox>
           <FormInputBox>
+            {type !== "prepose" && (
+              <FormGroupInput
+                placeholder="SIRET"
+                id="siret"
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            )}
+
             <Field>
               <Geocode
-                resource={mandataire}
+                label={
+                  "Localisation, cette adresse permettra au magistrat/greffier de vous visualiser sur la carte"
+                }
+                required
+                resource={geocodeResource}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
               />
@@ -178,6 +219,36 @@ function MandataireEditInformationsForm(props) {
                 />
               </div>
             </Field>
+
+            <Box mb={2}>
+              <CheckBox
+                isChecked={!formik.values.useLocationAdresse}
+                onChange={() => {
+                  formik.setFieldValue(
+                    "useLocationAdresse",
+                    !formik.values.useLocationAdresse
+                  );
+                }}
+                label="Afficher une adresse différente pour le magistrat/greffier"
+              />
+            </Box>
+            {!formik.values.useLocationAdresse && (
+              <FormGroupInput
+                placeholder="Adresse"
+                label="Adresse, cette adresse sera celle visible pour le magistrat/greffier"
+                id="adresse"
+                required
+                formik={formik}
+                validationSchema={validationSchema}
+              />
+            )}
+            <FormGroupInput
+              placeholder="Complément d'adresse"
+              label="Complément d'adresse"
+              id="adresse_complement"
+              formik={formik}
+              validationSchema={validationSchema}
+            />
           </FormInputBox>
         </Flex>
         <Flex>
@@ -281,12 +352,6 @@ function MandataireEditInformationsForm(props) {
                 />
               </div>
             </Box>
-            <FormGroupInput
-              placeholder="SIRET"
-              id="siret"
-              formik={formik}
-              validationSchema={validationSchema}
-            />
           </FormInputBox>
         </Flex>
         {errorMessage && <InlineError message={`${errorMessage}`} />}

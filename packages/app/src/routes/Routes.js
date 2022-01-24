@@ -178,16 +178,8 @@ const routes = [
     path: "/admin/liste-blanche/:id(\\d+)",
   },
   {
-    Component: require("~/pages/admin/liste-blanche/services/[id]").default,
-    path: "/admin/liste-blanche/services/:id(\\d+)",
-  },
-  {
     Component: require("~/pages/direction/liste-blanche/[id]").default,
     path: "/direction/liste-blanche/:id(\\d+)",
-  },
-  {
-    Component: require("~/pages/direction/liste-blanche/services/[id]").default,
-    path: "/direction/liste-blanche/services/:id(\\d+)",
   },
   {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/import")
@@ -222,10 +214,6 @@ const routes = [
   {
     Component: require("~/pages/admin/liste-blanche/index").default,
     path: "/admin/liste-blanche",
-  },
-  {
-    Component: require("~/pages/admin/services/index").default,
-    path: "/admin/services",
   },
   {
     Component: require("~/pages/admin/tribunaux/index").default,
@@ -366,10 +354,6 @@ const routes = [
       require("~/pages/magistrats/gestionnaires/[gestionnaire_id]/reservation")
         .default,
     path: "/magistrats/gestionnaires/:gestionnaire_id/reservation",
-  },
-  {
-    Component: require("~/pages/admin/services/[service_id]").default,
-    path: "/admin/services/:service_id(\\d+)",
   },
   {
     Component: require("~/pages/application/token-request").default,

@@ -34,7 +34,7 @@ function ListeBlancheDetailPage() {
           />
 
           <ListeBlancheServiceUpdate
-            serviceId={id}
+            listeBlancheId={id}
             onSuccess={async () => {
               await history.push("/direction");
               window.scrollTo(0, 0);

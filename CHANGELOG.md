@@ -3,6 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.147.0](https://github.com/SocialGouv/emjpm/compare/v25.146.1...v25.147.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* **add:** lb mand ([db5b7a8](https://github.com/SocialGouv/emjpm/commit/db5b7a857d4c907aa94453a511c49831fbb2a96a))
+* **add-lb:** service ([67201e6](https://github.com/SocialGouv/emjpm/commit/67201e61bc3a3c5ee18bfbcb2732653ddef3944d))
+* **add-lb:** validate create etabl and aggr ([5ca04d5](https://github.com/SocialGouv/emjpm/commit/5ca04d595267ee315c44f1815365a6e3d7dc3a3d))
+* **admin-user:** lb link content ([71e5ac9](https://github.com/SocialGouv/emjpm/commit/71e5ac962cb8596f7219591e2f24c4b71a82af73))
+* **adresse-complement:** ind et serv ([1714631](https://github.com/SocialGouv/emjpm/commit/1714631bf390663c26b53850cb44d9e88823a68b))
+* **auto-select:** departement ([e0bf1b0](https://github.com/SocialGouv/emjpm/commit/e0bf1b08b71d59d0275c3372b9f9efe3e5a4a0d6))
+* **column+wording:** date_ouverture->date_nomination fix [#2716](https://github.com/SocialGouv/emjpm/issues/2716) ([64b1b75](https://github.com/SocialGouv/emjpm/commit/64b1b753aaeea392bd142ece0e0e9229577448d5))
+* **delete:** + clean ([0a9cc2a](https://github.com/SocialGouv/emjpm/commit/0a9cc2afd95c87ca4faf896c9ac12ebd38d7402d))
+* **departement-financeur:** required ([845c801](https://github.com/SocialGouv/emjpm/commit/845c80128bfe03906907afb1716174aee095f7c5))
+* **design:** bottom 10px ([a373f84](https://github.com/SocialGouv/emjpm/commit/a373f842388a703441621b68e8d222f3172ae6f2))
+* **etablissement-rattachement:** required ([39c6e42](https://github.com/SocialGouv/emjpm/commit/39c6e42470692b31ce4746b20712d29e16dafbc4))
+* **export:** empty file with headers ([2d0b348](https://github.com/SocialGouv/emjpm/commit/2d0b34867bcfd765fa1f68d87decbe40f1aa4ce0))
+* **form:** autocomplete departement from addr ctx ([7caa90d](https://github.com/SocialGouv/emjpm/commit/7caa90d1f9af554571f52c9f9d098d95fecf20e3))
+* **form:** autocomplete departement from addr ctx ([280aa5e](https://github.com/SocialGouv/emjpm/commit/280aa5ef64c337a4af2baa97b3c378d63fac0b82))
+* **form:** submit count ([88f8b97](https://github.com/SocialGouv/emjpm/commit/88f8b97cd4983f003e35d161f8775101c96538e5))
+* **genre:** store at create ([a90930b](https://github.com/SocialGouv/emjpm/commit/a90930b55381aa0a749114d6c6fec76c56095d6d))
+* **import:** file renew compteur ([a546cf7](https://github.com/SocialGouv/emjpm/commit/a546cf70dfc405215fd6a8b8b9b7177c869531f2))
+* **inscription:** service code_postal ([ae60e53](https://github.com/SocialGouv/emjpm/commit/ae60e53c59497fa5d4c51c5b09396c6a55bbdddf))
+* **lb:** service org gestionnaire ([c567cf6](https://github.com/SocialGouv/emjpm/commit/c567cf69b7472abc32b14e795393495a82905989))
+* **lb_users:** remove table ([8203d6d](https://github.com/SocialGouv/emjpm/commit/8203d6df53059b2d7875092da07da2e50b1bb96c))
+* **lint:** clean ([0ef9eec](https://github.com/SocialGouv/emjpm/commit/0ef9eec64ebc928399a9bac333116c7b5e64af16))
+* **linter:** ok ([08ca795](https://github.com/SocialGouv/emjpm/commit/08ca795b8d7787ea9e8335db967cc0563f0f04d6))
+* **mand:** edit adresse ([3f1ee98](https://github.com/SocialGouv/emjpm/commit/3f1ee982a411a9731e3d51209f0c4ee8b7476f5c))
+* **map:** location cp ([66efc66](https://github.com/SocialGouv/emjpm/commit/66efc668590e4797f4b613c7f6ce6bde70aa5319))
+* **map:** rollback to version 4.8.6 ([7910535](https://github.com/SocialGouv/emjpm/commit/791053536ae51e3982971342d0f2224bc35e7970)), closes [/github.com/alex3165/react-mapbox-gl/issues/920#issuecomment-751964204](https://github.com//github.com/alex3165/react-mapbox-gl/issues/920/issues/issuecomment-751964204)
+* **normalize:** first and last name ([1ddbba5](https://github.com/SocialGouv/emjpm/commit/1ddbba594b8ddfc830fe0cf4394a268e48ed3686))
+* **pg-ssl:** prepare scaleway migration ([#2721](https://github.com/SocialGouv/emjpm/issues/2721)) ([a2e11d4](https://github.com/SocialGouv/emjpm/commit/a2e11d4533094a23651164e14d7c7742d5ce0fcc))
+* **prepose:** bugfixs ([93f6c83](https://github.com/SocialGouv/emjpm/commit/93f6c83134002e74be0ce63b507b6cc7bf2ce6d7))
+* **required:** adresse whe not useLocationAdresse ([a090cdf](https://github.com/SocialGouv/emjpm/commit/a090cdf461b1b847808bb5561be268d60fece468))
+* **required:** indiv departements asterisk ([e60b406](https://github.com/SocialGouv/emjpm/commit/e60b406d434a11e814f450c4e6200d0766ed75ed))
+* **retro-compat:** date_ouverture->date_nomination ([678ad6f](https://github.com/SocialGouv/emjpm/commit/678ad6fed0738507edd78c23bcf10c8bad58a294))
+* **rollback:** restore trigger ([b6c0744](https://github.com/SocialGouv/emjpm/commit/b6c0744b6fb2bbecb6bdb52d31c54b3ec1ef5437))
+* **service:** edit adresse ([8a86e53](https://github.com/SocialGouv/emjpm/commit/8a86e53dd2420d5bebb67e09c518edddaf493a5d))
+* **service:** siret ([eaa1d36](https://github.com/SocialGouv/emjpm/commit/eaa1d3679d080d0f047ea65263a04dbfe7161460))
+* **signup:** + tests + up seed ([de256e4](https://github.com/SocialGouv/emjpm/commit/de256e432a5f3acd6aaf55a9793ee824957d1a30))
+* **signup:** nom uppercase label ([d91738e](https://github.com/SocialGouv/emjpm/commit/d91738e9f804c079087d6c2f1deac7f87a186c71))
+* **siret:** init mandataire dit form ([01d8b6e](https://github.com/SocialGouv/emjpm/commit/01d8b6e48465f0c7c389b589d4e1521db82ec348))
+* **siret:** lb duplicate ([7a2c86a](https://github.com/SocialGouv/emjpm/commit/7a2c86aefd98ed00cf632c2e537c05a1ff39275f))
+* **siret:** nullable and query ([beb667a](https://github.com/SocialGouv/emjpm/commit/beb667a685e61bc0d474ad8759ce86006ddbcb62))
+* **sirets:** dup + view + prepose hide ([9be5ec6](https://github.com/SocialGouv/emjpm/commit/9be5ec64322335b184c13a6c49805b8bf9a017ad))
+* **test:** e2e and up seed ([3ed1acc](https://github.com/SocialGouv/emjpm/commit/3ed1acc01975a0b943d573439c789d101c471643))
+* **tests:** improve trx detection ([d51c158](https://github.com/SocialGouv/emjpm/commit/d51c158e688246a1963d49ea42cc86fb2b8ee354))
+* **ti:** display adresse ([dc0ca1d](https://github.com/SocialGouv/emjpm/commit/dc0ca1d510deaebed6b46be6860e9bbb443e3fb9))
+* **ti:** magistrat and greffiers ([e245294](https://github.com/SocialGouv/emjpm/commit/e245294b7d72ef92dc2152e4e9c76b1bb0d8ef1e))
+* **ti-map:** duplicate entries ([5b4566d](https://github.com/SocialGouv/emjpm/commit/5b4566d42d60e702084f5dee88f39a253297165c))
+* **ti-map:** rely on view_lb_tis ([c619d9b](https://github.com/SocialGouv/emjpm/commit/c619d9baaf10fdf3765bb85e5866a8de80f917e2))
+* **ti-map:** rely on view_lb_tis ([9476ecf](https://github.com/SocialGouv/emjpm/commit/9476ecfd6a489328592aea52da5fd9c3788ff9e7))
+* **ti-map:** rely on view_lb_tis ([acb2233](https://github.com/SocialGouv/emjpm/commit/acb22331bf0e1bce8a2c0ce0d627eceb5eebf08d))
+* **ti-map:** rely on view_lb_tis ([0a01619](https://github.com/SocialGouv/emjpm/commit/0a01619383921d7dff906141a0cb95df48a62d59))
+* **ti-map:** rely on view_lb_tis ([f7efce9](https://github.com/SocialGouv/emjpm/commit/f7efce9b6d0cb99c48f3ecc11ab35a4d4907017d))
+* **trx:** move recount in transaction ([6e508fb](https://github.com/SocialGouv/emjpm/commit/6e508fb8fcb9c173e3c773423c9eaaf8c2bacd2a))
+* **trx:** re-enable transactions ([05a215c](https://github.com/SocialGouv/emjpm/commit/05a215cb49f42ab920dad0cc5190d7a33c182432))
+* **trx:** temp disable buggy transactions ([c37db50](https://github.com/SocialGouv/emjpm/commit/c37db5093e7751e53576c61deeb90170ef3121a2))
+* **type:** wip ([a789154](https://github.com/SocialGouv/emjpm/commit/a789154aad5198d827f3b0d48719a19521b4c9a6))
+* **typo:** add s to stats greffiers ([a2e945c](https://github.com/SocialGouv/emjpm/commit/a2e945c35e290fc908dafcf988ae68a22dc87d99))
+* **typo:** code ([9b32974](https://github.com/SocialGouv/emjpm/commit/9b329748a2cc3407548cdeb3678fde7a7a550238))
+* **typo:** etablissement field select ([93b5738](https://github.com/SocialGouv/emjpm/commit/93b57388dda2056e1b127ede920e677b98406b87))
+* **ui:** improve design ([d0e8a39](https://github.com/SocialGouv/emjpm/commit/d0e8a39cb77d6c88b320021a4cd91e911bcbc1a4))
+* **user:** link lb ([771d1f5](https://github.com/SocialGouv/emjpm/commit/771d1f5dba717df8eb450fdae15e5358d7566f9b))
+* **view-stats:** add greffiers to departements ([afdebf8](https://github.com/SocialGouv/emjpm/commit/afdebf8d14d9d38bcc0d146f7b90cc61bbd4806b))
+* **ville-cp:** refacto normalize ([24113e2](https://github.com/SocialGouv/emjpm/commit/24113e29b6716c89b41bfdd47090d5de8463f702))
+* **ville-lp:** wip ([8477f0e](https://github.com/SocialGouv/emjpm/commit/8477f0e85bcbce309bc5bee982edd8816a3207de))
+* **wording:** activité interrompue ([628a97a](https://github.com/SocialGouv/emjpm/commit/628a97a6fb465d8081027ac58bca141ad1cd26fb))
+* **wording:** interrompu ([468864d](https://github.com/SocialGouv/emjpm/commit/468864d2de4116f2d780f9e69782b7f8d4df644f))
+
+
+### Features
+
+* **adresse_complement:** add to ti view ([223897a](https://github.com/SocialGouv/emjpm/commit/223897a6ed84e0cd3d9df817c37e0dde1c4172cd))
+* **lb:** decouple liste blanche ([a463091](https://github.com/SocialGouv/emjpm/commit/a463091722d513ec361b9f0e109d183ee7fedf41))
+* **lb:** source view_lb_tis lb to man ([75d74c5](https://github.com/SocialGouv/emjpm/commit/75d74c5d5022db53db5a0ddf43e9384724eddd6f))
+* **lb:** wip ([d81268f](https://github.com/SocialGouv/emjpm/commit/d81268fd28a14c2f75cfb583a39eaf5c7a5d795f))
+* **link:** liste-blanche and users ([be3c710](https://github.com/SocialGouv/emjpm/commit/be3c7105f047b11d87345a03553346722bd29b6d))
+* **liste-blanche:** up ([3f6dc2c](https://github.com/SocialGouv/emjpm/commit/3f6dc2cee39d4c9de6394ae71ee4117a86ca3fc2))
+* **location-adresse:** use ([92c325c](https://github.com/SocialGouv/emjpm/commit/92c325c01fc3451cfc2f5612b84270c9242c1556))
+* **location-adresse:** use ([180c6dc](https://github.com/SocialGouv/emjpm/commit/180c6dcc49fd56c68cf0c22a3b4b91bc7f00ea1a))
+* **mandataire-individuel:** user infos wip ([985f96c](https://github.com/SocialGouv/emjpm/commit/985f96c2b64cae9e2a28568b6bd81d3d8e2c0190))
+* **mandataire-individuel:** user infos wip ([9fd8d85](https://github.com/SocialGouv/emjpm/commit/9fd8d85c1bd68ec0f6417eb6369d71e520fa6096))
+* **seed:** up tmp ([e260022](https://github.com/SocialGouv/emjpm/commit/e260022bdc2dec1385a3a5dd944a532b5c679680))
+* **service:** user infos wip ([28de8fb](https://github.com/SocialGouv/emjpm/commit/28de8fbb3a608249339fe205d8862bea78f7a353))
+* **service:** user infos wip ([aa4bf42](https://github.com/SocialGouv/emjpm/commit/aa4bf428ca7567618e6077dc98a5417dd8bccaff))
+
+
+
+
+
 ## [25.146.1](https://github.com/SocialGouv/emjpm/compare/v25.146.0...v25.146.1) (2021-12-08)
 
 

@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.0.8.cli-migrations-v3
+FROM hasura/graphql-engine:v2.1.1.cli-migrations-v3
 
 ENV HASURA_GRAPHQL_V1_BOOLEAN_NULL_COLLAPSE=true
 
@@ -14,3 +14,5 @@ CMD ["graphql-engine", "serve"]
 
 COPY packages/hasura/metadata /hasura-metadata
 COPY packages/hasura/migrations /hasura-migrations
+
+USER 1001

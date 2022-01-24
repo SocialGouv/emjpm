@@ -56,11 +56,14 @@ module.exports = {
 
       const mandataire = enqueteReponseDefaultData.mandataires_by_pk;
 
-      const { lb_user } = mandataire;
+      const { liste_blanche } = mandataire;
 
       let departement;
-      if (lb_user) {
-        const { lb_departements, etablissement_rattachement } = lb_user;
+      if (liste_blanche) {
+        const {
+          mandataire_individuel_departements,
+          etablissement_rattachement,
+        } = liste_blanche;
         if (
           etablissement_rattachement &&
           etablissement_rattachement.length > 0
@@ -68,8 +71,11 @@ module.exports = {
           const [{ etablissement }] = etablissement_rattachement;
           departement = etablissement.departement;
           defaultValues.raison_sociale = etablissement.rslongue;
-        } else if (lb_departements && lb_departements.length) {
-          const lb_departement = lb_departements[0];
+        } else if (
+          mandataire_individuel_departements &&
+          mandataire_individuel_departements.length
+        ) {
+          const lb_departement = mandataire_individuel_departements[0];
           departement = lb_departement.departement;
         }
       }
@@ -133,10 +139,11 @@ module.exports = {
           defaultValues[k] = previous.enquete_reponses_modalites_exercice[k];
         }
       }
-      const lb_user_etablissements = lb_user?.lb_user_etablissements;
-      if (lb_user_etablissements) {
+      const mandataire_prepose_etablissements =
+        liste_blanche?.mandataire_prepose_etablissements;
+      if (mandataire_prepose_etablissements) {
         defaultValues.nombre_lits_journee_hospitalisation =
-          lb_user_etablissements.map(({ etablissement }) => {
+          mandataire_prepose_etablissements.map(({ etablissement }) => {
             // src/containers/Enquete/constants/mandatairePrepose.js
             const { nofinesset, rslongue, libcategagretab, libsph } =
               etablissement;
