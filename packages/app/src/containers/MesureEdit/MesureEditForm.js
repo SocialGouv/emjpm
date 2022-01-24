@@ -198,7 +198,12 @@ export function MesureEditForm(props) {
 
       <Flex justifyContent="flex-end" py={2}>
         <Box>
-          <Button mr="2" variant="outline" onClick={handleCancel}>
+          <Button
+            mr="2"
+            variant="outline"
+            onClick={handleCancel}
+            title="Annuler la modification de l'état"
+          >
             Annuler
           </Button>
         </Box>
@@ -207,6 +212,7 @@ export function MesureEditForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la modification de l'état"
           >
             Enregistrer
           </Button>

@@ -31,12 +31,16 @@ export default function MesureImportDeleteAll() {
           {`L'import de mesure est incrémental. Ainsi, aucune mesure est supprimée durant l'import. Nous mettons à jour les mesures en nous basant sur leur numéro RG et le SIRET du tribunal. Si vous souhaitez supprimer toutes les mesures de votre compte eMJPM avant d'effectuer votre import, vous pouvez le faire en cliquant sur le bouton ci-dessous.`}
         </Text>
         <Text mb="1">
-          <StyledWarning size={18} />
+          <StyledWarning size={18} id="delete-all-measures__note" />
           {`Attention, cela supprimera toutes les mesures, excepté les mesures en attente, de votre compte eMJPM.`}
         </Text>
       </Box>
       <Flex justifyContent="center">
-        <Button mt="1" onClick={() => deleteAllMesures()}>
+        <Button
+          mt="1"
+          onClick={() => deleteAllMesures()}
+          aria-describedby="delete-all-measures__note"
+        >
           Supprimer toutes les mesures
         </Button>
       </Flex>

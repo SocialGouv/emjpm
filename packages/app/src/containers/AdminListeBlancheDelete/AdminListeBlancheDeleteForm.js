@@ -45,7 +45,7 @@ export function AdminListeBlancheDeleteForm(props) {
         <Heading size={5} mb="1">
           {"Supprimer l'utilisateur"}
         </Heading>
-        <Text mb="2" lineHeight="1.5">
+        <Text mb="2" lineHeight="1.5" id="supprimer_mandataire_note">
           {
             "Vous êtes sur le point de supprimer définitivement un mandataire du système eMJPM. Toute suppression est irréversible, vous ne pourrez pas récupérer les données associées à ce mandataire et celui-ci disparaîtra des statistiques d'activité produites par eMJPM à destination des magistrats et des agents de l'État."
           }
@@ -82,6 +82,7 @@ export function AdminListeBlancheDeleteForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                aria-describedby="supprimer_mandataire_note"
               >
                 {"Supprimer le mandataire"}
               </Button>

@@ -91,6 +91,7 @@ function MesureEtatViewList({ mesure, ...props }) {
               setCreationMode(true);
             }}
             {...mesureModificationButtonProps}
+            title="Ajouter un changement"
           >
             Ajouter un changement
           </Button>

@@ -131,7 +131,7 @@ function AdminUserActivation(props) {
             {!active && (
               <Box>
                 <Link to={`/admin/users/${userId}/delete`}>
-                  <Button mr={2} bg={"red"}>
+                  <Button mr={2} bg={"red"} title="Supprimer cet utilisateur">
                     {"Supprimer cet utilisateur"}
                   </Button>
                 </Link>
