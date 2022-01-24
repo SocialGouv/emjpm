@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.148.0](https://github.com/SocialGouv/emjpm/compare/v25.147.0...v25.148.0) (2022-01-24)
+
+
+### Bug Fixes
+
+* **refacto-lb:** ocmi ([#2758](https://github.com/SocialGouv/emjpm/issues/2758)) ([4a9fe70](https://github.com/SocialGouv/emjpm/commit/4a9fe7017917757de849dd7743689063f6193ad5))
+
+
+
+
+
 # [25.147.0](https://github.com/SocialGouv/emjpm/compare/v25.146.1...v25.147.0) (2022-01-20)
 
 
