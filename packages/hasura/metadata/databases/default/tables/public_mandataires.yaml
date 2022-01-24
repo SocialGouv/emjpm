@@ -17,6 +17,15 @@ object_relationships:
 - name: liste_blanche
   using:
     foreign_key_constraint_on: liste_blanche_id
+- name: ocmi_mandataire
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: ocmi_mandataires
+        schema: public
 - name: user
   using:
     foreign_key_constraint_on: user_id

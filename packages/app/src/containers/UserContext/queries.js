@@ -240,6 +240,9 @@ export const MANDATAIRE_USERS = gql`
         use_location_adresse
         competences
         sync_ocmi_enable
+        ocmi_mandataire {
+          siret
+        }
         editor_locked_mesures
         editor {
           name
