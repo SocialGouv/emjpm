@@ -119,6 +119,7 @@ export function MesureAcceptForm(props) {
                   id="code_postal"
                   formik={formik}
                   validationSchema={mesureAcceptSchema}
+                  required
                   onChange={async (e) => {
                     const { value } = e.target;
                     await formik.setFieldValue("code_postal", value);
@@ -137,6 +138,7 @@ export function MesureAcceptForm(props) {
                     value={formik.values.ville}
                     hasError={formik.touched.ville && formik.errors.ville}
                     aria-describedby="msg-ville"
+                    required
                   />
                   <div id="msg-ville">
                     {formik.touched.ville && (
