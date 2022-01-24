@@ -198,7 +198,15 @@ export function MesureEtatCreateOrEditForm(props) {
       <Flex justifyContent="space-between" py={2}>
         {isDeletable ? (
           <Box>
-            <Button bg="error" onClick={handleDelete}>
+            <Button
+              bg="error"
+              onClick={handleDelete}
+              title={
+                mesureEtatToEdit
+                  ? "Supprimer la modification de l'état"
+                  : "Supprimer le nouvel état"
+              }
+            >
               Supprimer
             </Button>
           </Box>
@@ -207,7 +215,16 @@ export function MesureEtatCreateOrEditForm(props) {
         )}
         <Flex justifyContent="flex-end">
           <Box>
-            <Button mr="2" variant="outline" onClick={handleCancel}>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={handleCancel}
+              title={
+                mesureEtatToEdit
+                  ? "Annuler la modification de l'état"
+                  : "Annuler le nouvel état"
+              }
+            >
               Annuler
             </Button>
           </Box>
@@ -216,6 +233,11 @@ export function MesureEtatCreateOrEditForm(props) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              title={
+                mesureEtatToEdit
+                  ? "Enregistrer la modification de l'état"
+                  : "Enregistrer le nouvel état"
+              }
             >
               Enregistrer
             </Button>

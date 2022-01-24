@@ -111,7 +111,17 @@ export function MesureRessourceCreateOrEditForm(props) {
       <Flex justifyContent="space-between" py={2}>
         {mesureRessourceToEdit ? (
           <Box>
-            <Button bg="error" type="button" onClick={handleDelete}>
+            <Button
+              bg="error"
+              type="button"
+              onClick={handleDelete}
+              title="Supprimer la nouvelle ressource"
+              title={
+                mesureRessourceToEdit
+                  ? "Supprimer la modification de la ressource"
+                  : "Supprimer la nouvelle ressource"
+              }
+            >
               Supprimer
             </Button>
           </Box>
@@ -120,7 +130,17 @@ export function MesureRessourceCreateOrEditForm(props) {
         )}
         <Flex justifyContent="flex-end">
           <Box>
-            <Button mr="2" variant="outline" onClick={handleCancel}>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={handleCancel}
+              title="Annuler la nouvelle ressource"
+              title={
+                mesureRessourceToEdit
+                  ? "Annuler la la modification de la ressource"
+                  : "Annuler la nouvelle ressource"
+              }
+            >
               Annuler
             </Button>
           </Box>
@@ -129,6 +149,11 @@ export function MesureRessourceCreateOrEditForm(props) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              title={
+                mesureRessourceToEdit
+                  ? "Enregistrer la modification de la ressource"
+                  : "Enregistrer la nouvelle ressource"
+              }
             >
               Enregistrer
             </Button>
