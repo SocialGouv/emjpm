@@ -333,37 +333,18 @@ update_permissions:
     check: null
     columns:
     - adresse
-    - code_postal
-    - competences
-    - created_at
-    - dispo_max
-    - email
-    - etablissement
-    - genre
-    - id
-    - latitude
-    - location_adresse
-    - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
-    - nom
     - org_adresse
     - org_code_postal
     - org_gestionnaire
     - org_nom
     - org_ville
-    - prenom
-    - siret
-    - telephone
-    - ville
     filter: {}
   role: direction
 - permission:
     check: null
     columns:
-    - etablissement
-    - latitude
-    - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
     filter: {}
@@ -373,16 +354,14 @@ update_permissions:
     columns:
     - adresse
     - adresse_complement
+    - code_postal
     - competences
     - dispo_max
     - email
     - etablissement
     - genre
-    - id
     - latitude
     - location_adresse
-    - code_postal
-    - ville
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
@@ -398,6 +377,7 @@ update_permissions:
     - suspend_activity_reason
     - telephone
     - use_location_adresse
+    - ville
     filter:
       id:
         _eq: X-Hasura-Service-Id
@@ -405,9 +385,6 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - etablissement
-    - latitude
-    - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
     filter: {}
