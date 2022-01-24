@@ -11,6 +11,8 @@ import {
 import { Link } from "~/containers/Commons";
 import { magistratEditSchema } from "~/validation-schemas";
 import { Button, Heading, Text, CheckBox } from "~/components";
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 function MagistratEditInformationsForm(props) {
   const { cancelLink, user, tribunaux, handleSubmit } = props;
@@ -30,6 +32,7 @@ function MagistratEditInformationsForm(props) {
       prenom: user.prenom || "",
       ti: magistrat.ti_id || "",
       share_email: magistrat.share_email || false,
+      genre: magistrat.genre || "",
     },
     onSubmit: handleSubmit,
     validationSchema: magistratEditSchema,
@@ -48,22 +51,32 @@ function MagistratEditInformationsForm(props) {
           role="group"
           aria-labelledby="informations_personnelles_heading"
         >
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={magistratEditSchema}
+          />
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
             formik={formik}
             validationSchema={magistratEditSchema}
             autoComplete="given-name"
+            normalizers={[normalizeFirstName]}
           />
           <FormGroupInput
-            placeholder="Nom"
+            placeholder="NOM"
             id="nom"
             formik={formik}
             validationSchema={magistratEditSchema}
             autoComplete="family-name"
+            normalizers={[normalizeLastName]}
           />
           <FormGroupInput
-            placeholder="Email"
+            placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={magistratEditSchema}

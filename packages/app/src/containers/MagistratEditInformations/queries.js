@@ -11,6 +11,7 @@ export const MAGISTRAT = gql`
         id
         ti_id
         share_email
+        genre
       }
       cabinet
     }

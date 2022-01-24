@@ -11,6 +11,8 @@ import {
 import { Link } from "~/containers/Commons";
 import { greffierEditSchema } from "~/validation-schemas";
 import { Button, Heading, Text, CheckBox } from "~/components";
+import { GENDER_OPTIONS } from "~/constants/user";
+import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 function GreffierEditInformationsForm(props) {
   const { cancelLink, user, tribunaux, handleSubmit } = props;
@@ -30,6 +32,7 @@ function GreffierEditInformationsForm(props) {
       prenom: user.prenom || "",
       ti: greffier.ti_id || "",
       share_email: greffier.share_email || false,
+      genre: greffier.genre || "",
     },
     onSubmit: handleSubmit,
     validationSchema: greffierEditSchema,
@@ -48,19 +51,29 @@ function GreffierEditInformationsForm(props) {
           role="group"
           aria-labelledby="informations_personnelles_heading"
         >
+          <FormGroupSelect
+            id="genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.genre}
+            formik={formik}
+            validationSchema={greffierEditSchema}
+          />
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
             formik={formik}
             validationSchema={greffierEditSchema}
             autoComplete="given-name"
+            normalizers={[normalizeFirstName]}
           />
           <FormGroupInput
-            placeholder="Nom"
+            placeholder="NOM"
             id="nom"
             formik={formik}
             validationSchema={greffierEditSchema}
             autoComplete="family-name"
+            normalizers={[normalizeLastName]}
           />
           <FormGroupInput
             placeholder="Email"
