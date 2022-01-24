@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 
@@ -18,7 +19,7 @@ import { mesureEditSchema } from "~/validation-schemas";
 import { Button, Heading } from "~/components";
 
 import isInt from "~/utils/std/isInt";
-import { useMemo } from "react";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 function initialValues(mesure) {
   return {
@@ -84,6 +85,7 @@ export function MesureEditForm(props) {
                     formik.setFieldTouched("numero_rg");
                   }
                 }}
+                errorMessage={errorMessages.numero_rg}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
@@ -112,6 +114,7 @@ export function MesureEditForm(props) {
             id="annee_naissance"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.annee}
           />
           <FormGroupInputDate
             label="Date de première mise sous protection"
@@ -120,6 +123,7 @@ export function MesureEditForm(props) {
             id="date_premier_mesure"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.annee}
           />
         </FormInputBox>
       </Flex>
@@ -158,6 +162,7 @@ export function MesureEditForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.annee}
           />
           <FormGroupInputDate
             label="Date de la protection en cours"
@@ -166,6 +171,7 @@ export function MesureEditForm(props) {
             id="date_protection_en_cours"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.annee}
           />
         </FormInputBox>
       </Flex>

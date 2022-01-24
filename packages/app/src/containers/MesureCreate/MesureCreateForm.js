@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
 
@@ -16,7 +17,7 @@ import { GeocodeCities } from "~/components/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError } from "~/components";
-import { useMemo } from "react";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 function initialValues() {
   return {
@@ -79,6 +80,7 @@ export function MesureCreateForm(props) {
                     formik.setFieldTouched("numero_rg");
                   }
                 }}
+                errorMessage={errorMessages.numero_rg}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
@@ -128,6 +130,7 @@ export function MesureCreateForm(props) {
             id="annee_naissance"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.annee}
           />
           <FormGroupInputDate
             label="Date de première mise sous protection"
@@ -136,6 +139,7 @@ export function MesureCreateForm(props) {
             id="date_premier_mesure"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.date}
           />
         </FormInputBox>
       </Flex>
@@ -154,6 +158,7 @@ export function MesureCreateForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={validationSchema}
+            errorMessage={errorMessages.date}
           />
           <FormGroupSelect
             id="nature_mesure"

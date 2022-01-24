@@ -15,6 +15,7 @@ import {
   Input,
   Text,
 } from "~/components";
+import { errorMessages } from "~/validation-schemas/errorMessages";
 
 import { cardStyle } from "./style";
 
@@ -156,7 +157,10 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   autoComplete="email"
                 />
                 <div id="msg-email">
-                  <InlineError message={formik.errors.email} fieldId="email" />
+                  <InlineError
+                    message={formik.errors.email && errorMessages.email}
+                    fieldId="email"
+                  />
                 </div>
               </Field>
               <Field>
