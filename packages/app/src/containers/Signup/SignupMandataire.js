@@ -150,10 +150,12 @@ function SignupMandataireForm() {
                 aria-describedby="msg-geocode"
               />
               <div id="msg-geocode">
-                <InlineError
-                  message={formik.errors.geocode}
-                  fieldId="geocode"
-                />
+                {(formik.touched.geocode || formik.submitCount > 0) && (
+                  <InlineError
+                    message={formik.errors.geocode}
+                    fieldId="geocode"
+                  />
+                )}
               </div>
             </Field>
           </FormInputBox>
