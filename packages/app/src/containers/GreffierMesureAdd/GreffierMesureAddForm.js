@@ -77,7 +77,7 @@ export function GreffierMesureAddForm(props) {
                 formik.setFieldTouched("numero_rg");
               }
             }}
-            errorMessage={errorMessages.numero_rg}
+            errorMessage={formik.errors.numero_rg}
           />
           <FormGroupInput
             id="cabinet"
