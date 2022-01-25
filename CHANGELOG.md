@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.148.1](https://github.com/SocialGouv/emjpm/compare/v25.148.0...v25.148.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* **required:** adresse ([3e2160e](https://github.com/SocialGouv/emjpm/commit/3e2160e170a1f392bac9cb66aa08e617bae7f4fd))
+* **rgaa:** fix error messages ([#2760](https://github.com/SocialGouv/emjpm/issues/2760)) ([7b2ee88](https://github.com/SocialGouv/emjpm/commit/7b2ee885a0944ddec237db399a327489fc689d57))
+* **ti:** required genre ([ba597a9](https://github.com/SocialGouv/emjpm/commit/ba597a976c9f92c1b41aca01abcf2bd102fbb5b4))
+
+
+
+
+
 # [25.148.0](https://github.com/SocialGouv/emjpm/compare/v25.147.0...v25.148.0) (2022-01-24)
 
 
