@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.148.2](https://github.com/SocialGouv/emjpm/compare/v25.148.1...v25.148.2) (2022-01-25)
+
+
+### Bug Fixes
+
+* **typo:** fix helmet import ([#2761](https://github.com/SocialGouv/emjpm/issues/2761)) ([c87b3c7](https://github.com/SocialGouv/emjpm/commit/c87b3c727142200a2c78bd98ad53160ee80a8ed4))
+
+
+
+
+
 ## [25.148.1](https://github.com/SocialGouv/emjpm/compare/v25.148.0...v25.148.1) (2022-01-25)
 
 
