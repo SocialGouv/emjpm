@@ -4,6 +4,6 @@ WORKDIR /app
 
 ENV NODE_ENV=development
 
-USER node
+USER 1000
 
 CMD [ "yarn", "workspace", "@emjpm/app", "dev" ]
