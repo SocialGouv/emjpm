@@ -3,6 +3,59 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.148.2](https://github.com/SocialGouv/emjpm/compare/v25.148.1...v25.148.2) (2022-01-25)
+
+
+### Bug Fixes
+
+* **typo:** fix helmet import ([#2761](https://github.com/SocialGouv/emjpm/issues/2761)) ([c87b3c7](https://github.com/SocialGouv/emjpm/commit/c87b3c727142200a2c78bd98ad53160ee80a8ed4))
+
+
+
+
+
+## [25.148.1](https://github.com/SocialGouv/emjpm/compare/v25.148.0...v25.148.1) (2022-01-25)
+
+
+### Bug Fixes
+
+* **required:** adresse ([3e2160e](https://github.com/SocialGouv/emjpm/commit/3e2160e170a1f392bac9cb66aa08e617bae7f4fd))
+* **rgaa:** fix error messages ([#2760](https://github.com/SocialGouv/emjpm/issues/2760)) ([7b2ee88](https://github.com/SocialGouv/emjpm/commit/7b2ee885a0944ddec237db399a327489fc689d57))
+* **ti:** required genre ([ba597a9](https://github.com/SocialGouv/emjpm/commit/ba597a976c9f92c1b41aca01abcf2bd102fbb5b4))
+
+
+
+
+
+# [25.148.0](https://github.com/SocialGouv/emjpm/compare/v25.147.0...v25.148.0) (2022-01-24)
+
+
+### Bug Fixes
+
+* **error-display:** was prematured fix [#2750](https://github.com/SocialGouv/emjpm/issues/2750) ([dc083d6](https://github.com/SocialGouv/emjpm/commit/dc083d6e2cce262a07d405585febf3895667049c))
+* **merge:** branch 'refacto-lb' to master ([18ea809](https://github.com/SocialGouv/emjpm/commit/18ea809a9ffa1c2928b733bf03bad9a60578ef23))
+* **refacto-lb:** ocmi ([#2758](https://github.com/SocialGouv/emjpm/issues/2758)) ([4a9fe70](https://github.com/SocialGouv/emjpm/commit/4a9fe7017917757de849dd7743689063f6193ad5))
+* **required:** accept mesure fix [#2748](https://github.com/SocialGouv/emjpm/issues/2748) ([2150b1a](https://github.com/SocialGouv/emjpm/commit/2150b1a990a16d7ec489c5f4373bcb22e79290ee))
+* **rgaa:** accessibility tools compatibility ([#2729](https://github.com/SocialGouv/emjpm/issues/2729)) ([e72f225](https://github.com/SocialGouv/emjpm/commit/e72f2253fdd1316dbbd147779122679863aaa478))
+* **rgaa:** add autoComplete attribute to inputs ([#2751](https://github.com/SocialGouv/emjpm/issues/2751)) ([a325d2e](https://github.com/SocialGouv/emjpm/commit/a325d2ee7ef6fcd3090d86de49b62d62e09b7f46))
+* **rgaa:** add relevant title for buttons ([#2757](https://github.com/SocialGouv/emjpm/issues/2757)) ([6352093](https://github.com/SocialGouv/emjpm/commit/63520938b28de6eb30138a3b118b5ae631e58310))
+* **rgaa:** add suggestions that make it easier to correct input errors ([#2753](https://github.com/SocialGouv/emjpm/issues/2753)) ([37b8e45](https://github.com/SocialGouv/emjpm/commit/37b8e45b20503ab429016bb8afabc21bf501dfc0))
+* **rgaa:** add text alternative for non-text content ([#2727](https://github.com/SocialGouv/emjpm/issues/2727)) ([06a3ccc](https://github.com/SocialGouv/emjpm/commit/06a3cccccc931b52d3491c7808be779f5215869e))
+* **rgaa:** decorative images used as part of page design ([#2728](https://github.com/SocialGouv/emjpm/issues/2728)) ([ff17489](https://github.com/SocialGouv/emjpm/commit/ff174891e82f1ba062f8142e5be6a89963588956))
+* **rgaa:** e-MJPM typo fix ([#2726](https://github.com/SocialGouv/emjpm/issues/2726)) ([918e718](https://github.com/SocialGouv/emjpm/commit/918e71825818f577dd1e8fe0009e9d1f8107718b))
+* **rgaa:** grouping related fields ([#2747](https://github.com/SocialGouv/emjpm/issues/2747)) ([3a95ff7](https://github.com/SocialGouv/emjpm/commit/3a95ff79924af7d9440fc6b18af9b75301fe328d))
+* **rgaa:** style button focus ([#2749](https://github.com/SocialGouv/emjpm/issues/2749)) ([af990b8](https://github.com/SocialGouv/emjpm/commit/af990b846adc69c52be30b51b14222a91726612b))
+* **rgaa:** translate error messages when they are in foreign language ([#2731](https://github.com/SocialGouv/emjpm/issues/2731)) ([44e96d7](https://github.com/SocialGouv/emjpm/commit/44e96d75b564947889af08f7e406172d9c4ce6ab))
+
+
+### Features
+
+* **ti:** up user forms fix [#2712](https://github.com/SocialGouv/emjpm/issues/2712) ([638b1c1](https://github.com/SocialGouv/emjpm/commit/638b1c1fcaa478bbca48c222ecc2fe943a8fafd3))
+
+
+
+
+
 # [25.147.0](https://github.com/SocialGouv/emjpm/compare/v25.146.1...v25.147.0) (2022-01-20)
 
 

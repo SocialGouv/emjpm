@@ -1,7 +1,6 @@
 const { raw } = require("objection");
 
 const { OcmiMandataire } = require("~/models");
-const { ListeBlanche } = require("~/models");
 const { Mandataire } = require("~/models");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const dedupMesures = require("~/utils/dedup-mesures");
@@ -22,7 +21,7 @@ module.exports = async function updateMandataireMesuresFromOCMI({
     return;
   }
 
-  const { id: mandataireId, liste_blanche_id: listeBlancheId } = mandataire;
+  const { id: mandataireId, siret } = mandataire;
 
   const mutexLockKey = `import-ocmi-${mandataireId}`;
 
@@ -36,11 +35,6 @@ module.exports = async function updateMandataireMesuresFromOCMI({
   const warnErrors = [];
   let fatalError;
   try {
-    const { siret } = await ListeBlanche.query().findById(listeBlancheId);
-    if (!siret) {
-      throw new Error("cannot find lb user " + listeBlancheId);
-    }
-
     let ocmiMandataire = await OcmiMandataire.query().findOne({
       siret,
     });

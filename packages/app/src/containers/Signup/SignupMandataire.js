@@ -148,6 +148,7 @@ function SignupMandataireForm() {
                 resource={mandataire}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
+                required
               />
               <div id="msg-geocode">
                 {(formik.touched.geocode || formik.submitCount > 0) && (

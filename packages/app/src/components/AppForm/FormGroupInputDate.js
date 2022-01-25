@@ -52,7 +52,8 @@ export default function FormGroupInputDate({
       <div id={`msg-${id}`}>
         <AppFormFieldErrorMessage
           id={id}
-          error={errorMessages ? errorMessages : error}
+          error={error}
+          errorMessage={errorMessages}
           formik={formik}
           hideErrors={hideErrors}
         />

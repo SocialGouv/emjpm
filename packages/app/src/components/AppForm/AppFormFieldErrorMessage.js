@@ -7,6 +7,7 @@ export default function AppFormFieldErrorMessage({
   error,
   formik,
   hideErrors,
+  errorMessage,
 }) {
   const { errors } = formik;
 
@@ -21,5 +22,11 @@ export default function AppFormFieldErrorMessage({
     id,
   });
 
-  return <InlineError showError={showError} message={error} fieldId={id} />;
+  return (
+    <InlineError
+      showError={showError}
+      message={errorMessage ? errorMessage : error}
+      fieldId={id}
+    />
+  );
 }
