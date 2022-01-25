@@ -80,7 +80,7 @@ export function MesureCreateForm(props) {
                     formik.setFieldTouched("numero_rg");
                   }
                 }}
-                errorMessage={errorMessages.numero_rg}
+                errorMessage={formik.errors.numero_rg}
               />
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">

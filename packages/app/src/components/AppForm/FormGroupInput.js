@@ -92,9 +92,10 @@ export default function FormGroupInput({
       <div id={`msg-${id}`}>
         <AppFormFieldErrorMessage
           id={id}
-          error={errorMessage ? errorMessage : error}
+          error={error}
           formik={formik}
           hideErrors={hideErrors}
+          errorMessage={errorMessage}
         />
       </div>
     </Field>
