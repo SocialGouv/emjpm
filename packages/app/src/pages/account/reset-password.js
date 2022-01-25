@@ -2,7 +2,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
 import { ResetPassword } from "~/containers/ResetPassword";
 import { FlexWrapper } from "~/components/Grid";
-
+import { Helmet } from "react-helmet";
 import useSearchParams from "~/hooks/useSearchParams";
 
 function ResetPasswordPage() {
