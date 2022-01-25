@@ -14,8 +14,6 @@ import { GeocodeCities } from "~/components/Geocode";
 import { mesureEtatSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError, Text } from "~/components";
 
-import { errorMessages } from "~/validation-schemas/errorMessages";
-
 function initialValues(mesureEtat) {
   return {
     champ_mesure: mesureEtat ? mesureEtat.champMesure : "",
@@ -80,7 +78,6 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
-            errorMessage={errorMessages.date}
           />
 
           <FormGroupSelect

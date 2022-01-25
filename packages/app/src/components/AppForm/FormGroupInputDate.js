@@ -18,7 +18,6 @@ export default function FormGroupInputDate({
   onChange,
   required,
   title,
-  errorMessages,
   ...props
 }) {
   const { handleBlur, values } = formik;
@@ -53,7 +52,6 @@ export default function FormGroupInputDate({
         <AppFormFieldErrorMessage
           id={id}
           error={error}
-          errorMessage={errorMessages}
           formik={formik}
           hideErrors={hideErrors}
         />

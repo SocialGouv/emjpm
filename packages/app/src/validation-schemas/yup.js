@@ -13,7 +13,8 @@ yup.setLocale({
     positive: "Le nombre indiqué doit être positif",
   },
   string: {
-    email: "Le format de l'adresse email n'est pas correct.",
+    email:
+      "Veuillez saisir une adresse e-mail valide. Par exemple : john.doe@justice.fr.",
     length: "Le champ doit comporter ${length} caractères.",
   },
 });
