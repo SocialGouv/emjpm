@@ -329,9 +329,9 @@ export function ListeBlanchePreposeForm(props) {
                   label="Civilité"
                   placeholder=""
                   value={
-                    mandataire.genre
+                    mandataire.user.genre
                       ? GENDER_OPTIONS.find(
-                          ({ value }) => value === mandataire.genre
+                          ({ value }) => value === mandataire.user.genre
                         ).label
                       : ""
                   }

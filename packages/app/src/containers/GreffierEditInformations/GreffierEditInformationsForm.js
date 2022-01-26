@@ -32,7 +32,7 @@ function GreffierEditInformationsForm(props) {
       prenom: user.prenom || "",
       ti: greffier.ti_id || "",
       share_email: greffier.share_email || false,
-      genre: greffier.genre || "",
+      genre: user.genre || "",
     },
     onSubmit: handleSubmit,
     validationSchema: greffierEditSchema,

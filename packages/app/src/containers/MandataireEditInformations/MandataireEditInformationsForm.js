@@ -92,7 +92,7 @@ function MandataireEditInformationsForm(props) {
       competences: mandataire.competences || "",
       dispo_max: parseInt(mandataire.dispo_max),
       email: user.email || "",
-      genre: mandataire.genre,
+      genre: user.genre,
       location_adresse: mandataire.location_adresse,
       adresse: mandataire.adresse,
       adresse_complement: mandataire.adresse_complement,

@@ -8,11 +8,11 @@ export const GREFFIER = gql`
       nom
       prenom
       cabinet
+      genre
       greffier {
         id
         ti_id
         share_email
-        genre
       }
     }
     tis(where: { immutable: { _eq: true } }) {

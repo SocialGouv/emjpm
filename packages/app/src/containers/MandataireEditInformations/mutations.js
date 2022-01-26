@@ -52,7 +52,6 @@ export const EDIT_USER = gql`
         location_adresse: $location_adresse
         ville: $ville
         code_postal: $code_postal
-        genre: $genre
         departement_code: $departement_code
         competences: $competences
         siret: $siret
@@ -62,7 +61,7 @@ export const EDIT_USER = gql`
       affected_rows
     }
     update_users(
-      _set: { prenom: $prenom, nom: $nom, email: $email }
+      _set: { prenom: $prenom, nom: $nom, email: $email, genre: $genre }
       where: { id: { _eq: $id } }
     ) {
       affected_rows

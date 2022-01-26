@@ -40,7 +40,7 @@ function SignupGreffierForm({ tiDatas }) {
           cabinet: values.cabinet,
           ti: values.ti,
         },
-        user: user,
+        user,
       };
 
       signup({

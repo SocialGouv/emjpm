@@ -7,6 +7,7 @@ export const USER_SERVICE = gql`
       email
       nom
       prenom
+      genre
       service_members {
         id
         service {
@@ -27,7 +28,6 @@ export const USER_SERVICE = gql`
           telephone
           prenom
           nom
-          genre
           competences
           created_at
           suspend_activity

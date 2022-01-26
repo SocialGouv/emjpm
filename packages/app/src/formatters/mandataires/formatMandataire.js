@@ -69,7 +69,7 @@ export default function formatMandataire({
       competences: service.competences || "",
       email: service.email ? service.email : "",
       etablissement: service.etablissement ? service.etablissement : "",
-      genre: "F",
+      genre: null,
       id: id,
       lastLogin: lastLogin ? formatLastLogin(lastLogin) : "",
       lastLoginIsCritical: lastLogin && isCriticalDate(lastLogin),
@@ -97,7 +97,7 @@ export default function formatMandataire({
       competences: mandataire.competences || "",
       email:
         mandataire.user && mandataire.user.email ? mandataire.user.email : "",
-      genre: mandataire.genre ? mandataire.genre : "F",
+      genre: mandataire.user.genre ? mandataire.user.genre : null,
       id: id,
       lastLogin:
         mandataire.user && mandataire.user.last_login

@@ -80,6 +80,7 @@ function AdminUserServiceForm(props) {
       user_email: user.email || "",
       user_nom: user.nom || "",
       user_prenom: user.prenom || "",
+      user_genre: user.genre || "",
       competences: service.competences || "",
       dispo_max: service.dispo_max || "",
       email: service.email || "",
@@ -128,6 +129,14 @@ function AdminUserServiceForm(props) {
           </Heading>
         </FormGrayBox>
         <FormInputBox>
+          <FormGroupSelect
+            id="user_genre"
+            options={GENDER_OPTIONS}
+            placeholder="Civilité"
+            value={formik.values.user_genre}
+            formik={formik}
+            validationSchema={adminUserServiceSchema}
+          />
           <FormGroupInput
             placeholder="Prénom"
             id="user_prenom"
@@ -223,7 +232,6 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
           />
-
           <FormGroupInput
             placeholder="Prénom"
             id="prenom"
