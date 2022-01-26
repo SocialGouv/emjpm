@@ -30,7 +30,6 @@ export default function FormGroupInput({
   noRequiredAsterisk,
   normalizers = [],
   autoComplete,
-  errorMessage,
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -95,7 +94,6 @@ export default function FormGroupInput({
           error={error}
           formik={formik}
           hideErrors={hideErrors}
-          errorMessage={errorMessage}
         />
       </div>
     </Field>

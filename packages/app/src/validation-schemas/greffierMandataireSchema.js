@@ -1,4 +1,4 @@
-import yup from "./yup";
+import yup, { FORM_YEAR_NOT_VALID } from "./yup";
 import {
   validateNumeroRG,
   checkNumeroRgAlphanum,
@@ -16,7 +16,7 @@ import {
 
 const greffierMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
   yup.object().shape({
-    annee_naissance: yup.string().required(),
+    annee_naissance: yup.string().required(FORM_YEAR_NOT_VALID),
     cabinet: yup.string().nullable(),
     champ_mesure: yup.string().nullable(),
     civilite: yup.string().required(),

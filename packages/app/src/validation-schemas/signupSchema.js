@@ -1,15 +1,14 @@
 import yup from "./yup";
 
+import { EMAIL_NOT_VALID } from "~/validation-schemas/yup";
+
 const signupSchema = yup.object().shape({
   confirmPassword: yup
     .string()
     .required()
     .label("Confirmation du mot de passe")
     .oneOf([yup.ref("password"), null], "Les mots de passe ne sont pas égaux"),
-  email: yup
-    .string()
-    .email("Le format de votre email n'est pas correct")
-    .required(),
+  email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   nom: yup.string().required(),
   password: yup
     .string()

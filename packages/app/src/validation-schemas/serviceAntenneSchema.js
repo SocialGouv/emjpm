@@ -1,8 +1,8 @@
 import { validateGeocode } from "./fieldValidators";
-import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
+import yup, { FORM_REQUIRED_MESSAGE, EMAIL_NOT_VALID } from "./yup";
 
 const serviceAntenneSchema = yup.object().shape({
-  contact_email: yup.string().required(),
+  contact_email: yup.string(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   contact_firstname: yup.string().required(),
   contact_lastname: yup.string().required(),
   contact_phone: yup.string().required(),

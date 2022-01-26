@@ -20,7 +20,6 @@ import { greffierMandataireSchema } from "~/validation-schemas";
 import { Button, Heading, Text } from "~/components";
 
 import ServiceReservation from "./ServiceReservation";
-import { errorMessages } from "~/validation-schemas/errorMessages";
 
 export function GreffierMesureAddForm(props) {
   const { cancelActionRoute, handleSubmit, cabinet } = props;
@@ -95,7 +94,6 @@ export function GreffierMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
-            errorMessage={errorMessages.date}
           />
         </FormInputBox>
       </Flex>
@@ -122,7 +120,6 @@ export function GreffierMesureAddForm(props) {
             title="Format: aaaa. Exemple: 2021"
             formik={formik}
             validationSchema={validationSchema}
-            errorMessage={errorMessages.annee}
           />
         </FormInputBox>
       </Flex>
