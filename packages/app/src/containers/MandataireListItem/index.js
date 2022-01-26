@@ -108,7 +108,7 @@ export default function MandataireListItem(props) {
                       aria-label="Madame"
                     />
                   )}
-                  {genre === "M" && (
+                  {genre === "H" && (
                     <Male
                       size="24"
                       aria-hidden="false"
