@@ -1,5 +1,5 @@
 import { validateGeocode } from "./fieldValidators";
-import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
+import yup, { FORM_REQUIRED_MESSAGE, EMAIL_NOT_VALID } from "./yup";
 
 import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
@@ -24,7 +24,7 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
   return yup.object().shape({
     competences: yup.string(),
     dispo_max: yup.number().required(),
-    email: yup.string().email().required(),
+    email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
     genre: yup.string().nullable().required(),
     geocode: yup
       .object()
