@@ -118,10 +118,11 @@ export default function MandataireListItem(props) {
                   )}
                   {!genre && (
                     <User
-                      size="24"
+                      size="16"
                       aria-hidden="false"
                       role="img"
                       aria-label="Genre inconnu"
+                      style={{ margin: "0 5px" }}
                     />
                   )}
                 </>
