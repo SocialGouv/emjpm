@@ -1,8 +1,8 @@
-import yup, { FORM_REQUIRED_MESSAGE } from "./yup";
+import yup, { FORM_REQUIRED_MESSAGE, EMAIL_NOT_VALID } from "./yup";
 import { validateGeocode } from "./fieldValidators";
 
 const adminUserServiceSchema = yup.object().shape({
-  user_email: yup.string().email().required(),
+  user_email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   user_nom: yup.string().required(),
   user_prenom: yup.string().required(),
   competences: yup.string().max(255, "Maximum 255 caractères"),
@@ -26,7 +26,7 @@ const adminUserServiceSchema = yup.object().shape({
         path,
       });
     }),
-  email: yup.string().required(),
+  email: yup.string(EMAIL_NOT_VALID).required(),
   geocode: yup
     .object()
     .required()

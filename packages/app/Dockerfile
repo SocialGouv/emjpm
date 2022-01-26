@@ -52,7 +52,7 @@ WORKDIR /app
 
 RUN npm i -g serve
 
-USER node
+USER 1000
 
 CMD ["serve","-s","build"]
 

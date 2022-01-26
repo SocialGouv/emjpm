@@ -5,8 +5,6 @@ import { Box, Flex } from "rebass";
 import { serviceMemberInvitationSchema } from "~/validation-schemas";
 import { Button, Field, Heading, InlineError, Input, Text } from "~/components";
 
-import { errorMessages } from "~/validation-schemas/errorMessages";
-
 function ServiceMemberInvitationForm(props) {
   const { handleSubmit } = props;
 
@@ -38,10 +36,7 @@ function ServiceMemberInvitationForm(props) {
           />
           <div id="msg-email">
             {formik.touched.email && (
-              <InlineError
-                message={formik.errors.email && errorMessages.email}
-                fieldId="email"
-              />
+              <InlineError message={formik.errors.email} fieldId="email" />
             )}
           </div>
         </Field>

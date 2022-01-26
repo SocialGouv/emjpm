@@ -47,7 +47,7 @@ RUN apk add --update --no-cache p7zip
 
 WORKDIR /app
 
-USER node
+USER 1000
 
 CMD ["node","/app/dist/index.js"]
 

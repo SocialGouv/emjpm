@@ -17,7 +17,6 @@ export default function FormGroupInputYear({
   validationSchema,
   onChange,
   required,
-  errorMessage,
   ...props
 }) {
   const { handleBlur, values } = formik;
@@ -54,7 +53,6 @@ export default function FormGroupInputYear({
           error={error}
           formik={formik}
           hideErrors={hideErrors}
-          errorMessage={errorMessage}
         />
       </div>
     </Field>
