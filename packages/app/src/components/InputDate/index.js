@@ -53,7 +53,7 @@ export default function InputDate(props) {
           required={props.required}
           readOnly={props.readOnly}
           onClick={() => {
-            inputRef?.current.handleFocus();
+            inputRef?.current?.handleFocus?.();
           }}
         >
           {label}
