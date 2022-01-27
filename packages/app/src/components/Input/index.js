@@ -81,6 +81,7 @@ function Input(props) {
         type={type}
         aria-label={name}
         aria-required={required}
+        aria-describedby={`msg-${props.id}`}
         placeholder={null}
         isActive={isActive}
         {...props}

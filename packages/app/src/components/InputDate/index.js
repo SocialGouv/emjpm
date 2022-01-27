@@ -1,3 +1,4 @@
+import React, { useRef } from "react";
 import classNames from "classnames";
 import DatePicker, { registerLocale, setDefaultLocale } from "react-datepicker";
 import fr from "date-fns/locale/fr";
@@ -13,6 +14,7 @@ registerLocale("fr", fr);
 setDefaultLocale("fr");
 
 export default function InputDate(props) {
+  const inputRef = useRef(null);
   let {
     dateFormatValue,
     onChange,
@@ -50,12 +52,16 @@ export default function InputDate(props) {
           aria-required={props.required}
           required={props.required}
           readOnly={props.readOnly}
+          onClick={() => {
+            inputRef?.current?.handleFocus?.();
+          }}
         >
           {label}
           {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <DatePicker
+        ref={inputRef}
         onChange={onChange}
         selected={selected}
         className={classNames("datepicker", className)}
