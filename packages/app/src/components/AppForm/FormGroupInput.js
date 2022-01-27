@@ -61,8 +61,6 @@ export default function FormGroupInput({
     [handleChange, normalizers]
   );
 
-  console.log("error", formik.errors[id]);
-
   return (
     <Field>
       <Flex alignItems="center">
