@@ -6,7 +6,7 @@ import { Star } from "@styled-icons/fa-solid/Star";
 import { DotCircle } from "@styled-icons/fa-regular/DotCircle";
 import { Location } from "@styled-icons/entypo/Location";
 
-import { Card, Input, Select, Button, AccessibleSelect } from "~/components";
+import { Card, Input, Button, AccessibleSelect } from "~/components";
 
 import SelectAdresse from "./SelectAdresse";
 
