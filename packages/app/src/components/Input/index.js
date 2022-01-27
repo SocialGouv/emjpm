@@ -65,7 +65,7 @@ function Input(props) {
     >
       {(placeholder || label) && (
         <InputLabel
-          size={name}
+          size={size}
           aria-label={name}
           htmlFor={name}
           isActive={isActive}
