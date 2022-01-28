@@ -1,5 +1,5 @@
 const { transaction } = require("objection");
-const { getYear, getMonth, getDay } = require("date-fns");
+const { getYear, getMonth, getDate } = require("date-fns");
 
 const { Mesure } = require("~/models");
 const { MesureEtat } = require("~/models");
@@ -160,11 +160,11 @@ async function processEtats(MesureEtat, mesureId, body) {
 function findEtat(etats, ref) {
   const refYear = getYear(ref.date_changement_etat);
   const refMonth = getMonth(ref.date_changement_etat);
-  const refDay = getDay(ref.date_changement_etat);
+  const refDay = getDate(ref.date_changement_etat);
   for (const etat of etats) {
     const year = getYear(etat.date_changement_etat);
     const month = getMonth(etat.date_changement_etat);
-    const day = getDay(etat.date_changement_etat);
+    const day = getDate(etat.date_changement_etat);
     if (refYear === year && refMonth === month && refDay === day) {
       return etat;
     }
