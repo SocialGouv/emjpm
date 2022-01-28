@@ -1,5 +1,5 @@
 const { transaction } = require("objection");
-const { getYear, getMonth, getDay } = require("date-fns");
+const { getYear, getMonth, getDate } = require("date-fns");
 
 const { Mesure } = require("~/models");
 const { MesureEtat } = require("~/models");
@@ -118,9 +118,7 @@ async function processEtats(MesureEtat, mesureId, body) {
   const loadedEtats = await MesureEtat.query().where("mesure_id", mesureId);
 
   for (const etat of loadedEtats) {
-    console.log("findEtat(body.etats, etat)");
     if (!findEtat(body.etats, etat)) {
-      console.log("delete etat", etat.id, etat);
       await MesureEtat.query().deleteById(etat.id);
     }
   }
@@ -148,10 +146,8 @@ async function processEtats(MesureEtat, mesureId, body) {
       type_etablissement,
       ville,
     };
-    console.log("findEtat(loadedEtats, etat)");
     const etatToUpdate = findEtat(loadedEtats, etat);
     if (etatToUpdate) {
-      console.log("etatToUpdate", etatToUpdate.id, etatToUpdate);
       //update
       await MesureEtat.query().patch(etatDatas).where("id", etatToUpdate.id);
     } else {
@@ -164,16 +160,11 @@ async function processEtats(MesureEtat, mesureId, body) {
 function findEtat(etats, ref) {
   const refYear = getYear(ref.date_changement_etat);
   const refMonth = getMonth(ref.date_changement_etat);
-  const refDay = getDay(ref.date_changement_etat);
+  const refDay = getDate(ref.date_changement_etat);
   for (const etat of etats) {
     const year = getYear(etat.date_changement_etat);
     const month = getMonth(etat.date_changement_etat);
-    const day = getDay(etat.date_changement_etat);
-    console.log(
-      "refYear === year && refMonth === month && refDay === day",
-      `${refYear} === ${year} && ${refMonth} === ${month} && ${refDay} === ${day}`
-    );
-    console.log({ etat, ref });
+    const day = getDate(etat.date_changement_etat);
     if (refYear === year && refMonth === month && refDay === day) {
       return etat;
     }
