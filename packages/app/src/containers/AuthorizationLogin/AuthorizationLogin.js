@@ -131,7 +131,7 @@ function AuthorizationLogin(props) {
               placeholder="Votre mot de passe"
               outline="default"
               aria-describedby="msg-password"
-              autoComplete="current-password"
+              aria-label="Votre mot de passe"
             />
             <div id="msg-password">
               {formik.touched.password && (

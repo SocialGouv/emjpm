@@ -57,6 +57,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={directionEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
         </FormInputBox>
       </Flex>

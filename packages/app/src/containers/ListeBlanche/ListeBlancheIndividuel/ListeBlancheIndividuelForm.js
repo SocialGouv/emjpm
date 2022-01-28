@@ -251,6 +251,7 @@ export function ListeBlancheIndividuelForm(props) {
             id="email"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Votre email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput
@@ -304,6 +305,7 @@ export function ListeBlancheIndividuelForm(props) {
                 }}
                 size="small"
                 autoComplete="postal-code"
+                aria-label="Code posta"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>

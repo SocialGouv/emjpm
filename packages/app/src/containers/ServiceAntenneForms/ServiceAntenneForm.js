@@ -112,6 +112,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
         </FormInputBox>
       </Flex>

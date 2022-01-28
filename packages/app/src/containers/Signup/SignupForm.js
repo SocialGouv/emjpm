@@ -171,6 +171,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="email"
+              aria-label="Votre email"
             />
             <FormGroupInput
               placeholder="Mot de passe"
@@ -179,6 +180,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
+              aria-label="Votre mot de passe"
             />
             <FormGroupInput
               placeholder="Confirmation du mot de passe"
@@ -187,6 +189,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
+              aria-label="Votre nouveau mot de passe"
             />
           </FormInputBox>
         </Flex>

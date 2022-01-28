@@ -165,6 +165,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               autoComplete="email"
+              aria-label="Votre email"
             />
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>

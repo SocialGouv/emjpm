@@ -171,6 +171,7 @@ function AdminUserServiceForm(props) {
             id="etablissement"
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            aria-label="Nom du service"
           />
           <Field>
             <Geocode
@@ -254,6 +255,7 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput

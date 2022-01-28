@@ -81,6 +81,7 @@ function MagistratEditInformationsForm(props) {
             formik={formik}
             validationSchema={magistratEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <CheckBox
             isChecked={formik.values.share_email}

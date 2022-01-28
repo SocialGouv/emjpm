@@ -187,6 +187,7 @@ export function ListeBlanchePreposeForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput
@@ -286,6 +287,7 @@ export function ListeBlanchePreposeForm(props) {
                       );
                     }
                   }}
+                  aria-label="Nom du service"
                 />
               </div>
               <div id="msg-etablissements">

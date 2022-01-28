@@ -230,6 +230,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="organization"
+            aria-label="Nom du service"
           />
           <SelectSIRET
             id="siret"
@@ -263,6 +264,7 @@ export function ListeBlancheServiceForm(props) {
                 }
                 size="small"
                 autoComplete="postal-code"
+                aria-label="Code posta"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -380,6 +382,7 @@ export function ListeBlancheServiceForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 autoComplete="address-line1"
+                aria-label="Adresse"
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -389,6 +392,7 @@ export function ListeBlancheServiceForm(props) {
                     formik={formik}
                     validationSchema={validationSchema}
                     autoComplete="postal-code"
+                    aria-label="Code postal"
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>

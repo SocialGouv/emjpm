@@ -123,6 +123,7 @@ export function MesureAcceptForm(props) {
                     await formik.setFieldValue("code_postal", value);
                     await formik.setFieldValue("ville", "");
                   }}
+                  aria-label="Code posta"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>

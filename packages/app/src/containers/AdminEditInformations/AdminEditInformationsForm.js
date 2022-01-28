@@ -56,6 +56,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={adminEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
         </FormInputBox>
       </Flex>

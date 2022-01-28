@@ -118,6 +118,7 @@ function EditPassword() {
                     placeholder="Votre mot de passe actuel"
                     aria-describedby="msg-password"
                     autoComplete="current-password"
+                    aria-label="Votre mot de passe"
                   />
                   <div id="msg-password">
                     <InlineError
@@ -139,6 +140,7 @@ function EditPassword() {
                     placeholder="Votre nouveau mot de passe"
                     aria-describedby="msg-newPassword"
                     autoComplete="new-password"
+                    aria-label="Votre nouveau mot de passe"
                   />
                   <div id="msg-newPassword">
                     <InlineError
@@ -160,7 +162,8 @@ function EditPassword() {
                     onChange={formik.handleChange}
                     placeholder="Confirmation de votre nouveau mot de passe"
                     aria-describedby="msg-newPasswordConfirmation"
-                    autoComplete="new-password"
+                    autoComplete="Confirmation de votre nouveau mot de passe"
+                    aria-label="Votre nouveau mot de passe"
                   />
                   <div id="msg-newPasswordConfirmation">
                     <InlineError

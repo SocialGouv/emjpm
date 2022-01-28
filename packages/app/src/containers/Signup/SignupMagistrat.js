@@ -82,6 +82,7 @@ function SignupMagistratForm({ tiDatas }) {
               placeholder="Cabinet"
               formik={formik}
               autoComplete="organization"
+              placeholder="Cabinet du tribunal"
             />
           </FormInputBox>
         </Flex>

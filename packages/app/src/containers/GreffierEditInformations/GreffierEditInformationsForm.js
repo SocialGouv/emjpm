@@ -81,6 +81,7 @@ function GreffierEditInformationsForm(props) {
             formik={formik}
             validationSchema={greffierEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <CheckBox
             isChecked={formik.values.share_email}

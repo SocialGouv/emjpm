@@ -78,6 +78,7 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            aria-label="Date de changement d'état"
           />
 
           <FormGroupSelect
@@ -161,6 +162,7 @@ export function MesureEtatCreateOrEditForm(props) {
                     formik.setFieldValue("ville", "");
                   }}
                   size="small"
+                  aria-label="Code posta"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
