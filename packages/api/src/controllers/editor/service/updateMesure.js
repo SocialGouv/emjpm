@@ -117,6 +117,12 @@ function findRessource(ressources, ref) {
 async function processEtats(MesureEtat, mesureId, body) {
   const loadedEtats = await MesureEtat.query().where("mesure_id", mesureId);
 
+  for (const etat of loadedEtats) {
+    if (!findEtat(body.etats, etat)) {
+      await MesureEtat.query().deleteById(etat.id);
+    }
+  }
+
   for (const etat of body.etats) {
     const {
       date_changement_etat,
@@ -147,12 +153,6 @@ async function processEtats(MesureEtat, mesureId, body) {
     } else {
       //insert
       await MesureEtat.query().insert(etatDatas);
-    }
-  }
-
-  for (const etat of loadedEtats) {
-    if (!findEtat(body.etats, etat)) {
-      await MesureEtat.query().deleteById(etat.id);
     }
   }
 }
