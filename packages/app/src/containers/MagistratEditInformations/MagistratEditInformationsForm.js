@@ -32,7 +32,7 @@ function MagistratEditInformationsForm(props) {
       prenom: user.prenom || "",
       ti: magistrat.ti_id || "",
       share_email: magistrat.share_email || false,
-      genre: magistrat.genre || "",
+      genre: user.genre || "",
     },
     onSubmit: handleSubmit,
     validationSchema: magistratEditSchema,

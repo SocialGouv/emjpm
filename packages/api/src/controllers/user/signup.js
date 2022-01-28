@@ -50,7 +50,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
     siret,
     latitude,
     longitude,
-    genre,
   } = mandataireDatas;
 
   let sync_ocmi_enable = false;
@@ -63,13 +62,12 @@ const createMandataire = async (mandataireDatas, user_id) => {
 
   const mandataire = await Mandataire.query()
     .allowInsert(
-      "[siret, telephone,user_id,telephone_portable,location_adresse,code_postal,ville, departement_code, dispo_max]"
+      "[siret,telephone,user_id,telephone_portable,location_adresse,code_postal,ville,departement_code,dispo_max]"
     )
     .insert({
       code_postal,
       departement_code,
       dispo_max,
-      genre,
       latitude,
       location_adresse,
       longitude,
@@ -116,13 +114,14 @@ const signup = async (req, res) => {
   try {
     const { body } = req;
     const { invitation } = body;
-    const { type, nom, prenom, password, email } = body.user;
+    const { type, nom, prenom, password, email, genre } = body.user;
 
     const user = await User.query()
       .allowInsert("[password,role,nom,prenom,email]")
       .insert({
         active: invitation ? true : false,
         email: email.toLowerCase().trim(),
+        genre,
         nom,
         password,
         prenom,

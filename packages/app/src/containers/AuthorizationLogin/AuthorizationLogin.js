@@ -18,7 +18,6 @@ import {
 } from "~/components";
 import { useAuth } from "~/user/Auth";
 import { matopush } from "~/user/matomo";
-import { errorMessages } from "~/validation-schemas/errorMessages";
 
 const { API_URL } = config;
 
@@ -114,7 +113,7 @@ function AuthorizationLogin(props) {
             <div id="msg-email">
               {formik.touched.email && (
                 <InlineError
-                  message={formik.errors.email && errorMessages.email}
+                  message={formik.errors.email}
                   fieldId="email"
                   aria-live="polite"
                 />

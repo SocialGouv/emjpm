@@ -16,7 +16,6 @@ import {
 
 import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
 import useQueryReady from "~/hooks/useQueryReady";
-import { errorMessages } from "~/validation-schemas/errorMessages";
 
 function TokenRequest() {
   const [editorTokenRequest, { loading: loading1, error: error1 }] =
@@ -130,10 +129,7 @@ function TokenRequest() {
             />
             <div id="msg-email">
               {formik.touched.email && (
-                <InlineError
-                  message={formik.errors.email && errorMessages.email}
-                  fieldId="email"
-                />
+                <InlineError message={formik.errors.email} fieldId="email" />
               )}
             </div>
           </Field>

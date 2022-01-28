@@ -1,4 +1,4 @@
-import yup from "./yup";
+import yup, { FORM_YEAR_NOT_VALID } from "./yup";
 import {
   validateNumeroRG,
   checkNumeroRgAlphanum,
@@ -16,9 +16,9 @@ const currentYear = new Date().getFullYear();
 const mesureEditSchema = ({ apolloClient }) =>
   yup.object().shape({
     annee_naissance: yup
-      .number()
+      .number(FORM_YEAR_NOT_VALID)
       .nullable()
-      .required()
+      .required(FORM_YEAR_NOT_VALID)
       .min(1900, "l'année choisi doit être au minimum 1900")
       .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
     antenne: yup.string().nullable(),

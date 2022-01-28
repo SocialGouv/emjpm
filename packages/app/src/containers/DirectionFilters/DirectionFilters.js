@@ -2,7 +2,12 @@ import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Input, Select, InputDate } from "~/components";
+import {
+  Card,
+  Input,
+  AccessibleSelect as Select,
+  InputDate,
+} from "~/components";
 import { findOption } from "~/utils/form";
 
 import { BoxStyle, SimpleBoxStyle } from "./style";

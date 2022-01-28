@@ -1,6 +1,7 @@
 import { BuildingHouse } from "@styled-icons/boxicons-solid/BuildingHouse";
 import { Female } from "@styled-icons/fa-solid/Female";
 import { Male } from "@styled-icons/fa-solid/Male";
+import { User } from "@styled-icons/fa-solid/User";
 import { CheckShield } from "@styled-icons/boxicons-solid/CheckShield";
 import { Star } from "@styled-icons/fa-solid/Star";
 import { DotCircle } from "@styled-icons/fa-regular/DotCircle";
@@ -73,7 +74,7 @@ export default function MandataireListItem(props) {
   const currentAvailability = gestionnaire.remaining_capacity || 0;
   const dispoMax = gestionnaire.mesures_max || 0;
   const email = isService ? service.email : mandataire.user.email;
-  const genre = isService ? service.genre : mandataire.genre;
+  const genre = isService ? null : mandataire.user.genre;
   const telephone =
     (isService ? service.telephone : mandataire.telephone) || "";
   const isAvailable = mesures_max < mesures_in_progress;
@@ -122,19 +123,29 @@ export default function MandataireListItem(props) {
                 <BuildingHouse size="24" />
               ) : (
                 <>
-                  {genre === "F" ? (
+                  {genre === "F" && (
                     <Female
                       size="24"
+                      aria-hidden="false"
                       role="img"
                       aria-label="Madame"
-                      aria-hidden="false"
                     />
-                  ) : (
+                  )}
+                  {genre === "H" && (
                     <Male
                       size="24"
+                      aria-hidden="false"
                       role="img"
                       aria-label="Monsieur"
+                    />
+                  )}
+                  {!genre && (
+                    <User
+                      size="16"
                       aria-hidden="false"
+                      role="img"
+                      aria-label="Genre inconnu"
+                      style={{ margin: "0 5px" }}
                     />
                   )}
                 </>

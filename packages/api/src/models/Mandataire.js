@@ -40,9 +40,6 @@ class Mandataire extends Model {
         dispo_max: {
           type: "integer",
         },
-        genre: {
-          type: "string",
-        },
         id: { type: "integer" },
         mesures_en_attente: { type: "integer" },
         mesures_en_cours: { type: "integer" },

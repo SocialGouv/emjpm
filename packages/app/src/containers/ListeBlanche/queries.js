@@ -17,7 +17,6 @@ export const LISTE_BLANCHE_BY_PK = gql`
       type
       mandataire {
         id
-        genre
         adresse
         telephone
         siret
@@ -26,6 +25,7 @@ export const LISTE_BLANCHE_BY_PK = gql`
           nom
           prenom
           email
+          genre
         }
       }
       mandataire_prepose_etablissements {

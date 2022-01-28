@@ -58,7 +58,7 @@ module.exports = {
 
       const { liste_blanche } = mandataire;
 
-      defaultValues.genre = mandataire.genre;
+      defaultValues.genre = mandataire.user.genre;
 
       let mandataire_individuel_departements;
       let departement_financeur;
