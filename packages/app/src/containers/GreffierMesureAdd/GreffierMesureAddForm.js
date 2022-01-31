@@ -87,6 +87,7 @@ export function GreffierMesureAddForm(props) {
             validationSchema={validationSchema}
             autoComplete="organization"
             placeholder="Cabinet du tribunal"
+            aria-label="Cabinet du tribunal"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}

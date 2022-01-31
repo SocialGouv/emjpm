@@ -238,6 +238,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -245,6 +246,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -259,6 +261,7 @@ export function ListeBlancheIndividuelForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Votre téléphone"
             />
           </Box>
         </FormInputBox>
@@ -282,6 +285,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
+            aria-label="Votre adresse"
           />
           <FormGroupInput
             placeholder="Complément"
@@ -289,6 +293,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="address-line2"
+            aria-label="Complément d'adresse"
           />
           <Flex justifyContent="space-between">
             <Box mr={1} flex={1 / 2}>
@@ -305,7 +310,7 @@ export function ListeBlancheIndividuelForm(props) {
                 }}
                 size="small"
                 autoComplete="postal-code"
-                aria-label="Code posta"
+                aria-label="Code postal"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -323,6 +328,7 @@ export function ListeBlancheIndividuelForm(props) {
                   departementFieldId="departement"
                   formik={formik}
                   aria-describedby="msg-ville"
+                  aria-label="Votre ville"
                 />
                 <div id="msg-ville">
                   {formik.touched.ville && (

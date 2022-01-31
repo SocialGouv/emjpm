@@ -62,6 +62,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="organization"
+            aria-label="Nom de l'antenne"
           />
         </FormInputBox>
       </Flex>
@@ -79,6 +80,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="family-name"
+            aria-label="Nom du responsable"
           />
           <FormGroupInput
             value={formik.values.contact_lastname}
@@ -87,6 +89,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="given-name"
+            aria-label="Prénom du responsable"
           />
         </FormInputBox>
       </Flex>
@@ -104,6 +107,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="tel"
+            aria-label="Votre téléphone"
           />
           <FormGroupInput
             value={formik.values.contact_email}
@@ -154,6 +158,7 @@ function ServiceAntenneForm(props) {
             id="mesures_max"
             placeholder="nombre de mesures souhaité"
             formik={formik}
+            aria-label="nombre de mesures souhaité"
           />
         </FormInputBox>
       </Flex>

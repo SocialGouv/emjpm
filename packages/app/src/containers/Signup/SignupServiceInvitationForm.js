@@ -46,6 +46,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Nom"
             validationSchema={signupSchema}
             autoComplete="family-name"
+            aria-label="Votre nom de famille"
           />
           <FormGroupInput
             formik={formik}
@@ -54,6 +55,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Prénom"
             validationSchema={signupSchema}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
         </FormInputBox>
       </Flex>

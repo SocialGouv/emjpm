@@ -162,7 +162,7 @@ export function MesureEtatCreateOrEditForm(props) {
                     formik.setFieldValue("ville", "");
                   }}
                   size="small"
-                  aria-label="Code posta"
+                  aria-label="Code postal"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>

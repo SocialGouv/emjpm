@@ -140,6 +140,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeFirstName]}
               autoComplete="given-name"
+              aria-label="Votre prénom"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -148,6 +149,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeLastName]}
               autoComplete="family-name"
+              aria-label="Votre nom"
             />
           </FormInputBox>
         </Flex>

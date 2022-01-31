@@ -172,6 +172,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -180,6 +181,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
             autoComplete="family-name"
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -195,6 +197,7 @@ export function ListeBlanchePreposeForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Votre téléphone"
             />
           </Box>
         </FormInputBox>
