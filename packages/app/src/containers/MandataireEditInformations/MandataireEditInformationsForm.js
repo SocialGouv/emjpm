@@ -141,6 +141,7 @@ function MandataireEditInformationsForm(props) {
               validationSchema={validationSchema}
               normalizers={[normalizeFirstName]}
               autoComplete="given-name"
+              aria-label="Votre prénom"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -149,6 +150,7 @@ function MandataireEditInformationsForm(props) {
               validationSchema={validationSchema}
               normalizers={[normalizeLastName]}
               autoComplete="family-name"
+              aria-label="Votre nom"
             />
           </FormInputBox>
         </Flex>
@@ -165,6 +167,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               autoComplete="email"
+              aria-label="Votre email"
             />
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>
@@ -174,6 +177,7 @@ function MandataireEditInformationsForm(props) {
                   formik={formik}
                   validationSchema={validationSchema}
                   autoComplete="tel"
+                  aria-label="Votre téléphone"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
@@ -183,6 +187,7 @@ function MandataireEditInformationsForm(props) {
                   formik={formik}
                   validationSchema={validationSchema}
                   autoComplete="tel"
+                  aria-label="Votre téléphone"
                 />
               </Box>
             </Flex>
@@ -199,6 +204,7 @@ function MandataireEditInformationsForm(props) {
                 id="siret"
                 formik={formik}
                 validationSchema={validationSchema}
+                aria-label="Siret"
               />
             )}
 
@@ -240,6 +246,7 @@ function MandataireEditInformationsForm(props) {
                 required
                 formik={formik}
                 validationSchema={validationSchema}
+                aria-label="Votre adresse, cette adresse sera celle visible pour le magistrat/greffier"
               />
             )}
             <FormGroupInput
@@ -248,6 +255,7 @@ function MandataireEditInformationsForm(props) {
               id="adresse_complement"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Complément d'adresse"
             />
           </FormInputBox>
         </Flex>
@@ -313,6 +321,7 @@ function MandataireEditInformationsForm(props) {
                 id="suspendActivityReason"
                 formik={formik}
                 validationSchema={validationSchema}
+                aria-label="Motif de l'absence"
               />
             )}
             <FormGroupInput
@@ -324,6 +333,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               readOnly={formik.values.suspendActivity}
               validationSchema={validationSchema}
+              aria-label="Nombre de mesures souhaitées"
             />
             {formik.values.suspendActivity && (
               <FormGroupInput
@@ -332,6 +342,7 @@ function MandataireEditInformationsForm(props) {
                 formik={formik}
                 readOnly
                 value={mandataire.mesures_en_cours}
+                aria-label="Nombre de mesures en cours"
               />
             )}
             <Box>

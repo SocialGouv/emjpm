@@ -172,6 +172,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -180,6 +181,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
             autoComplete="family-name"
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -187,6 +189,7 @@ export function ListeBlanchePreposeForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput
@@ -194,6 +197,7 @@ export function ListeBlanchePreposeForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Votre téléphone"
             />
           </Box>
         </FormInputBox>
@@ -286,6 +290,7 @@ export function ListeBlanchePreposeForm(props) {
                       );
                     }
                   }}
+                  aria-label="Nom du service"
                 />
               </div>
               <div id="msg-etablissements">

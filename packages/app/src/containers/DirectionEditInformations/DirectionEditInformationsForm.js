@@ -43,6 +43,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Prénom"
             validationSchema={directionEditSchema}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             formik={formik}
@@ -50,6 +51,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Nom"
             validationSchema={directionEditSchema}
             autoComplete="family-name"
+            aria-label="Votre nom"
           />
           <FormGroupInput
             formik={formik}
@@ -57,6 +59,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={directionEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
         </FormInputBox>
       </Flex>

@@ -230,6 +230,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="organization"
+            aria-label="Nom du service"
           />
           <SelectSIRET
             id="siret"
@@ -263,6 +264,7 @@ export function ListeBlancheServiceForm(props) {
                 }
                 size="small"
                 autoComplete="postal-code"
+                aria-label="Code postal"
               />
             </Box>
             <Box ml={1} flex={1 / 2}>
@@ -372,7 +374,8 @@ export function ListeBlancheServiceForm(props) {
                 id="org_nom"
                 formik={formik}
                 validationSchema={validationSchema}
-                autoComplete="family-name"
+                autoComplete="organization"
+                aria-label="Nom"
               />
               <FormGroupInput
                 placeholder="Adresse"
@@ -380,6 +383,7 @@ export function ListeBlancheServiceForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 autoComplete="address-line1"
+                aria-label="Adresse"
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -389,6 +393,7 @@ export function ListeBlancheServiceForm(props) {
                     formik={formik}
                     validationSchema={validationSchema}
                     autoComplete="postal-code"
+                    aria-label="Code postal"
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>
@@ -397,6 +402,7 @@ export function ListeBlancheServiceForm(props) {
                     id="org_ville"
                     formik={formik}
                     validationSchema={validationSchema}
+                    aria-label="Ville"
                   />
                 </Box>
               </Flex>
@@ -425,6 +431,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -432,18 +439,21 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Votre email"
           />
           <FormGroupInput
             placeholder="Téléphone"
             id="telephone"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Votre téléphone"
           />
         </FormInputBox>
       </Flex>

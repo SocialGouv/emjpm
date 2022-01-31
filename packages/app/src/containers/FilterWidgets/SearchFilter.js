@@ -26,6 +26,7 @@ export default function SearchFilter() {
         name="search"
         size="small"
         label="Rechercher"
+        aria-label="Rechercher"
       />
     </Box>
   );

@@ -82,6 +82,8 @@ function SignupGreffierForm({ tiDatas }) {
               placeholder="Cabinet"
               formik={formik}
               autoComplete="organization"
+              placeholder="Cabinet du tribunal"
+              aria-label="Cabinet du tribunal"
             />
           </FormInputBox>
         </Flex>

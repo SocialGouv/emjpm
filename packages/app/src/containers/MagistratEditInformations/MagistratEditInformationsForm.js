@@ -66,6 +66,7 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
             autoComplete="given-name"
             normalizers={[normalizeFirstName]}
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -74,6 +75,7 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
             autoComplete="family-name"
             normalizers={[normalizeLastName]}
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -81,6 +83,7 @@ function MagistratEditInformationsForm(props) {
             formik={formik}
             validationSchema={magistratEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <CheckBox
             isChecked={formik.values.share_email}
@@ -115,6 +118,8 @@ function MagistratEditInformationsForm(props) {
             id="cabinet"
             formik={formik}
             validationSchema={magistratEditSchema}
+            placeholder="Cabinet du tribunal"
+            aria-label="Cabinet du tribunal"
           />
         </FormInputBox>
       </Flex>

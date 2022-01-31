@@ -128,6 +128,7 @@ function Login(props) {
               required
               aria-describedby="msg-email"
               autoComplete="email"
+              aria-label="Votre email"
             />
 
             <div id="msg-email">
@@ -152,6 +153,7 @@ function Login(props) {
               required
               aria-describedby="msg-password"
               autoComplete="current-password"
+              aria-label="Votre mot de passe"
             />
             <div id="msg-password">
               {(formik.touched.password || formikSubmitted) && (

@@ -57,6 +57,7 @@ export function MesureAcceptForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={mesureAcceptSchema}
+            aria-label="Date de nomination"
           />
 
           {antenneOptions.length > 0 && (
@@ -123,6 +124,8 @@ export function MesureAcceptForm(props) {
                     await formik.setFieldValue("code_postal", value);
                     await formik.setFieldValue("ville", "");
                   }}
+                  aria-label="Code postal"
+                  aria-label="Code postal"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>

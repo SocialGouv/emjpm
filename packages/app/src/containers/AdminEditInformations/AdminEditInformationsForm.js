@@ -42,6 +42,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Prénom"
             validationSchema={adminEditSchema}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             formik={formik}
@@ -49,6 +50,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Nom"
             validationSchema={adminEditSchema}
             autoComplete="family-name"
+            aria-label="Votre nom"
           />
           <FormGroupInput
             formik={formik}
@@ -56,6 +58,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={adminEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
         </FormInputBox>
       </Flex>

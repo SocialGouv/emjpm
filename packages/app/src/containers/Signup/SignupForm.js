@@ -140,6 +140,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeFirstName]}
               autoComplete="given-name"
+              aria-label="Votre prénom"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -148,6 +149,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeLastName]}
               autoComplete="family-name"
+              aria-label="Votre nom"
             />
           </FormInputBox>
         </Flex>
@@ -171,6 +173,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="email"
+              aria-label="Votre email"
             />
             <FormGroupInput
               placeholder="Mot de passe"
@@ -179,6 +182,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
+              aria-label="Votre mot de passe"
             />
             <FormGroupInput
               placeholder="Confirmation du mot de passe"
@@ -187,6 +191,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
+              aria-label="Votre nouveau mot de passe"
             />
           </FormInputBox>
         </Flex>
