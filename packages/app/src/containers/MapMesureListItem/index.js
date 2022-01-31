@@ -107,9 +107,19 @@ export default function MapMesureListItem(props) {
                 {civilite && (
                   <>
                     {isMonsieur({ civilite }) ? (
-                      <GrayMale size="24" />
+                      <GrayMale
+                        size="24"
+                        role="img"
+                        aria-label="Monsieur"
+                        aria-hidden="false"
+                      />
                     ) : (
-                      <GrayFemale size="24" />
+                      <GrayFemale
+                        size="24"
+                        role="img"
+                        aria-label="Madame"
+                        aria-hidden="false"
+                      />
                     )}
                   </>
                 )}

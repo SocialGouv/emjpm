@@ -23,7 +23,13 @@ export default function ImpersonateButton({ userId: id }) {
       }}
       onClick={onClickImpersonate}
     >
-      <UserSecret size={18} style={{ color: "#333", height: "100%" }} />
+      <UserSecret
+        size={18}
+        style={{ color: "#333", height: "100%" }}
+        role="img"
+        aria-hidden="false"
+        aria-label="Impersonnate"
+      />
     </Button>
   );
 }
