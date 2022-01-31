@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { Link } from "~/components/Link";
 import { GreffierMandataireComments } from "~/containers/GreffierMandataireComments";
@@ -7,6 +8,7 @@ import { GreffierServiceAntennes } from "~/containers/GreffierServiceAntennes";
 import { Button, Heading } from "~/components";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 import useQueryReady from "~/hooks/useQueryReady";
+import { TYPES } from "~/constants/types";
 
 import { GESTIONNAIRES } from "./queries";
 import {
@@ -64,150 +66,173 @@ export function GreffierMandataire(props) {
 
   const lastLoginColor = lastLoginIsCritical ? "error" : "";
   return (
-    <Box {...props} width="100%" mb={6}>
-      <Flex alignItems="center" justifyContent="space-between">
-        {serviceId && <Heading size={2}>{etablissement}</Heading>}
-        {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
+    <>
+      <Helmet>
+        <title>
+          {formatedGestionnaire?.etablissement
+            ? `${formatedGestionnaire.etablissement} - Service `
+            : `${formatedGestionnaire.nom} ${formatedGestionnaire.prenom} - Mandataire ${TYPES[discriminator]} `}
+          | e-MJPM
+        </title>
+      </Helmet>
+      <Box {...props} width="100%" mb={6}>
+        <Flex alignItems="center" justifyContent="space-between">
+          {serviceId && <Heading size={2}>{etablissement}</Heading>}
+          {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-        <Link to={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}>
-          <Button>Réserver une mesure</Button>
-        </Link>
-      </Flex>
+          <Link to={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}>
+            <Button>Réserver une mesure</Button>
+          </Link>
+        </Flex>
 
-      <Flex sx={GreffierMandataireStyle} flexDirection="column">
-        <Flex>
-          <Box width="50%">
-            {mandataireId && (
-              <Box>
-                <Text sx={GreffierTitleMandataireStyle}>Nom du mandataire</Text>
-                <Text
-                  sx={GreffierContentMandataireStyle}
-                >{`${prenom} ${nom}`}</Text>
-              </Box>
-            )}
-            {serviceId && (
+        <Flex sx={GreffierMandataireStyle} flexDirection="column">
+          <Flex>
+            <Box width="50%">
+              {mandataireId && (
+                <Box>
+                  <Text sx={GreffierTitleMandataireStyle}>
+                    Nom du mandataire
+                  </Text>
+                  <Text
+                    sx={GreffierContentMandataireStyle}
+                  >{`${prenom} ${nom}`}</Text>
+                </Box>
+              )}
+              {serviceId && (
+                <Box>
+                  <Text sx={GreffierTitleMandataireStyle}>
+                    {"Nom de l'association"}
+                  </Text>
+                  <Text sx={GreffierContentMandataireStyle}>
+                    {etablissement}
+                  </Text>
+                </Box>
+              )}
               <Box>
                 <Text sx={GreffierTitleMandataireStyle}>
-                  {"Nom de l'association"}
+                  {"Adresse d’activité"}
                 </Text>
-                <Text sx={GreffierContentMandataireStyle}>{etablissement}</Text>
+                <Text sx={GreffierContentMandataireStyle}>
+                  {useLocationAdresse ? locationAdresse : adresse}
+                </Text>
               </Box>
-            )}
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>
-                {"Adresse d’activité"}
-              </Text>
-              <Text sx={GreffierContentMandataireStyle}>
-                {useLocationAdresse ? locationAdresse : adresse}
-              </Text>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  {"Complément d'adresse"}
+                </Text>
+                <Text sx={GreffierContentMandataireStyle}>
+                  {adresseComplement}
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  Dernière connexion
+                </Text>
+                <Text
+                  color={lastLoginColor}
+                  sx={GreffierContentMandataireStyle}
+                >
+                  {lastLogin}
+                </Text>
+              </Box>
+              <Box mb={4}>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  Tribunaux d’instance
+                </Text>
+                {tis.map((ti) => {
+                  return (
+                    <Text key={ti.tis.id} sx={GreffierTribunal}>
+                      {ti.tis.etablissement}
+                    </Text>
+                  );
+                })}
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  Informations (Préférences géographiques, compétences, ...)
+                </Text>
+                <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
+              </Box>
             </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>
-                {"Complément d'adresse"}
-              </Text>
-              <Text sx={GreffierContentMandataireStyle}>
-                {adresseComplement}
-              </Text>
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>Dernière connexion</Text>
-              <Text color={lastLoginColor} sx={GreffierContentMandataireStyle}>
-                {lastLogin}
-              </Text>
-            </Box>
-            <Box mb={4}>
-              <Text sx={GreffierTitleMandataireStyle}>
-                Tribunaux d’instance
-              </Text>
-              {tis.map((ti) => {
-                return (
-                  <Text key={ti.tis.id} sx={GreffierTribunal}>
-                    {ti.tis.etablissement}
-                  </Text>
-                );
-              })}
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>
-                Informations (Préférences géographiques, compétences, ...)
-              </Text>
-              <pre style={{ whiteSpace: "pre-wrap" }}>{competences}</pre>
-            </Box>
-          </Box>
-          <Box width="50%">
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>Email</Text>
-              <Text sx={GreffierContentMandataireStyle}>{email}</Text>
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>Téléphone</Text>
-              <Text sx={GreffierContentMandataireStyle}>{telephone}</Text>
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>Disponibilité</Text>
-              <Text
-                sx={{
-                  ...GreffierContentMandataireStyle,
-                  ...(suspendActivity ? { color: "error" } : {}),
-                }}
-              >
-                {suspendActivity ? "Activité interrompue" : currentAvailability}
-                {suspendActivity && (
-                  <>
-                    <br />
-                    {suspendActivityReason
-                      ? "Motif: " + suspendActivityReason
-                      : ""}
-                  </>
-                )}
-              </Text>
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>
-                En cours / souhaitée
-              </Text>
-              <Text sx={GreffierContentMandataireStyle}>
-                {mesuresInProgress} /{" "}
+            <Box width="50%">
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>Email</Text>
+                <Text sx={GreffierContentMandataireStyle}>{email}</Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>Téléphone</Text>
+                <Text sx={GreffierContentMandataireStyle}>{telephone}</Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>Disponibilité</Text>
                 <Text
                   sx={{
                     ...GreffierContentMandataireStyle,
                     ...(suspendActivity ? { color: "error" } : {}),
                   }}
-                  display="inline"
                 >
-                  {suspendActivity ? "Activité interrompue" : dispoMax}
+                  {suspendActivity
+                    ? "Activité interrompue"
+                    : currentAvailability}
+                  {suspendActivity && (
+                    <>
+                      <br />
+                      {suspendActivityReason
+                        ? "Motif: " + suspendActivityReason
+                        : ""}
+                    </>
+                  )}
                 </Text>
-              </Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  En cours / souhaitée
+                </Text>
+                <Text sx={GreffierContentMandataireStyle}>
+                  {mesuresInProgress} /{" "}
+                  <Text
+                    sx={{
+                      ...GreffierContentMandataireStyle,
+                      ...(suspendActivity ? { color: "error" } : {}),
+                    }}
+                    display="inline"
+                  >
+                    {suspendActivity ? "Activité interrompue" : dispoMax}
+                  </Text>
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>Mesure en attente</Text>
+                <Text sx={GreffierContentMandataireStyle}>
+                  {mesuresAwaiting}
+                </Text>
+              </Box>
+              <Box>
+                <Text sx={GreffierTitleMandataireStyle}>
+                  Observations sur le mandataire
+                </Text>
+                <GreffierMandataireComments
+                  tiId={tiId}
+                  serviceId={serviceId}
+                  mandataireId={mandataireId}
+                />
+              </Box>
             </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>Mesure en attente</Text>
-              <Text sx={GreffierContentMandataireStyle}>{mesuresAwaiting}</Text>
-            </Box>
-            <Box>
-              <Text sx={GreffierTitleMandataireStyle}>
-                Observations sur le mandataire
-              </Text>
-              <GreffierMandataireComments
-                tiId={tiId}
-                serviceId={serviceId}
-                mandataireId={mandataireId}
-              />
-            </Box>
-          </Box>
+          </Flex>
         </Flex>
-      </Flex>
-      <Box>
-        {serviceId && <GreffierServiceAntennes serviceId={serviceId} />}
+        <Box>
+          {serviceId && <GreffierServiceAntennes serviceId={serviceId} />}
+        </Box>
+        <Box height="400px" mt="5" sx={GreffierSideMandataireStyle}>
+          <GreffierMandataireMap
+            longitude={longitude}
+            discriminator={discriminator}
+            latitude={latitude}
+            id={id}
+          />
+        </Box>
       </Box>
-      <Box height="400px" mt="5" sx={GreffierSideMandataireStyle}>
-        <GreffierMandataireMap
-          longitude={longitude}
-          discriminator={discriminator}
-          latitude={latitude}
-          id={id}
-        />
-      </Box>
-    </Box>
+    </>
   );
 }
 

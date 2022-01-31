@@ -24,7 +24,7 @@ function ListBlanchePage() {
   return (
     <>
       <Helmet>
-        <title>Direction | e-MJPM</title>
+        <title>Liste blanche | e-MJPM</title>
       </Helmet>
       <LayoutDirection>
         <FiltersContextSerializableProvider
