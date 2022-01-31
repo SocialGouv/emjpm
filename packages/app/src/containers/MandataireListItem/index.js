@@ -97,7 +97,12 @@ export default function MandataireListItem(props) {
           <Flex>
             <Box alignSelf="center" my="1px" mr="1">
               {type === "service" ? (
-                <BuildingHouse size="24" />
+                <BuildingHouse
+                  size="24"
+                  aria-hidden="false"
+                  role="img"
+                  aria-label="Service"
+                />
               ) : (
                 <>
                   {genre === "F" && (

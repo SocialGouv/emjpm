@@ -126,9 +126,19 @@ export default function MesureListItem(props) {
                 {civilite && (
                   <>
                     {isMonsieur({ civilite }) ? (
-                      <GrayMale size="24" role="img" aria-label="homme" />
+                      <GrayMale
+                        size="24"
+                        role="img"
+                        aria-label="Monsieur"
+                        aria-hidden="false"
+                      />
                     ) : (
-                      <GrayFemale size="24" role="img" aria-label="femme" />
+                      <GrayFemale
+                        size="24"
+                        role="img"
+                        aria-label="Madame"
+                        aria-hidden="false"
+                      />
                     )}
                   </>
                 )}
