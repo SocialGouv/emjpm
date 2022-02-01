@@ -8,7 +8,7 @@ import { BoxWrapper } from "~/components/Grid";
 const Informations = () => (
   <>
     <Helmet>
-      <title>Informations sur le mondataire | e-MJPM </title>
+      <title>Vos informations | e-MJPM </title>
     </Helmet>
     <LayoutMandataire>
       <BoxWrapper mt={3} px="1">

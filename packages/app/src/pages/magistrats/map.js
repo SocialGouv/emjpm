@@ -15,7 +15,7 @@ function Map() {
   return (
     <>
       <Helmet>
-        <title>la carte des mandataires | e-MJPM </title>
+        <title>La carte des mandataires | e-MJPM </title>
       </Helmet>
       <MapContextProvider latitude={latitude} longitude={longitude}>
         <LayoutMagistratMap>

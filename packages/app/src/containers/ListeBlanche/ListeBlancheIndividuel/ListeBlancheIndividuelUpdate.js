@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
-
 import { Card } from "rebass";
+import { Helmet } from "react-helmet";
 
 import { LISTE_BLANCHE_BY_PK } from "../queries";
 import { ListeBlancheIndividuelForm } from "./ListeBlancheIndividuelForm";
@@ -26,65 +26,74 @@ export function ListeBlancheIndividuelUpdate(props) {
   useQueryReady(loading2, error2);
 
   return (
-    <Card p={5}>
-      <ListeBlancheIndividuelForm
-        editMode={true}
-        data={data}
-        handleCancel={handleCancel}
-        handleSubmit={async (values) => {
-          const { mandataire_individuel_departements } = data;
+    <>
+      <Helmet>
+        <title>
+          {data.nom} {data.prenom} - Mandataire individuel | e-MJPM
+        </title>
+      </Helmet>
+      <Card p={5}>
+        <ListeBlancheIndividuelForm
+          editMode={true}
+          data={data}
+          handleCancel={handleCancel}
+          handleSubmit={async (values) => {
+            const { mandataire_individuel_departements } = data;
 
-          const departementsToDelete =
-            mandataire_individuel_departements.filter((d) => {
-              return !values.departements.map((d) => d.id).includes(d.id);
+            const departementsToDelete =
+              mandataire_individuel_departements.filter((d) => {
+                return !values.departements.map((d) => d.id).includes(d.id);
+              });
+
+            const departementsToAdd = values.departements.filter((d) => {
+              return !mandataire_individuel_departements
+                .map((d) => d.id)
+                .includes(d.id);
             });
 
-          const departementsToAdd = values.departements.filter((d) => {
-            return !mandataire_individuel_departements
-              .map((d) => d.id)
-              .includes(d.id);
-          });
+            const departementsToDeleteIds = departementsToDelete.map(
+              (d) => d.id
+            );
+            const departementFinanceur = values.departements.find(
+              (d) => d.departement_financeur
+            );
 
-          const departementsToDeleteIds = departementsToDelete.map((d) => d.id);
-          const departementFinanceur = values.departements.find(
-            (d) => d.departement_financeur
-          );
-
-          await updateListeBlanche({
-            variables: {
-              adresse: values.adresse,
-              adresse_complement: values.adresse_complement,
-              code_postal: values.code_postal,
-              departementsToAdd: departementsToAdd.map((d) => {
-                return {
-                  departement_financeur: d.departement_financeur,
-                  departement_code: d.id,
-                  liste_blanche_id: id,
-                };
-              }),
-              departementsToDelete: departementsToDeleteIds,
-              email: values.email,
-              id,
-              genre: values.genre,
-              nom: values.nom,
-              prenom: values.prenom,
-              siret: values.siret,
-              ville: values.ville,
-            },
-          });
-
-          if (departementFinanceur) {
-            await setDepartementFinanceur({
+            await updateListeBlanche({
               variables: {
-                id: departementFinanceur.id,
+                adresse: values.adresse,
+                adresse_complement: values.adresse_complement,
+                code_postal: values.code_postal,
+                departementsToAdd: departementsToAdd.map((d) => {
+                  return {
+                    departement_financeur: d.departement_financeur,
+                    departement_code: d.id,
+                    liste_blanche_id: id,
+                  };
+                }),
+                departementsToDelete: departementsToDeleteIds,
+                email: values.email,
+                id,
+                genre: values.genre,
+                nom: values.nom,
+                prenom: values.prenom,
+                siret: values.siret,
+                ville: values.ville,
               },
             });
-          }
 
-          await handleSubmit();
-        }}
-      />
-    </Card>
+            if (departementFinanceur) {
+              await setDepartementFinanceur({
+                variables: {
+                  id: departementFinanceur.id,
+                },
+              });
+            }
+
+            await handleSubmit();
+          }}
+        />
+      </Card>
+    </>
   );
 }
 

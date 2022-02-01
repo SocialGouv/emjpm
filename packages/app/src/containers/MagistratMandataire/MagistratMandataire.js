@@ -7,6 +7,7 @@ import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes"
 import { Button, Heading } from "~/components";
 import { formatGestionnaireId } from "~/formatters/mandataires";
 import useQueryReady from "~/hooks/useQueryReady";
+import { TYPES } from "~/constants/types";
 
 import { GESTIONNAIRES } from "./queries";
 import {
@@ -72,8 +73,8 @@ export function MagistratMandataire(props) {
       <Helmet>
         <title>
           {formatedGestionnaire?.etablissement
-            ? `${formatedGestionnaire.etablissement}`
-            : `${formatedGestionnaire.nom} ${formatedGestionnaire.prenom}`}
+            ? `${formatedGestionnaire.etablissement} - Service `
+            : `${formatedGestionnaire.nom} ${formatedGestionnaire.prenom} - Mandataire ${TYPES[discriminator]} `}
           | e-MJPM
         </title>
       </Helmet>
