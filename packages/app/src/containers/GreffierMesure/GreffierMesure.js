@@ -1,7 +1,9 @@
-import { MESURE_PROTECTION } from "@emjpm/biz";
+import { MESURE_PROTECTION, mesureFormatter } from "@emjpm/biz";
 import { useContext } from "react";
 import { Box, Flex, Text, Button, Link as RebassLink } from "rebass";
+import { Helmet } from "react-helmet";
 
+import capitalize from "~/utils/std/capitalize";
 import { Link } from "~/containers/Commons";
 import { MesureContext } from "~/containers/MesureContext";
 import { Heading } from "~/components";
@@ -53,8 +55,18 @@ function GreffierMesure(props) {
       "email_" + (mesure.service_id ? "service" : "mandataire")
     ] ?? "";
 
+  const { formatNatureMesure, formatChampMesure } = mesureFormatter;
+
   return (
     <>
+      <Helmet>
+        <title>
+          {`${capitalize(formatNatureMesure(natureMesure))} ${formatChampMesure(
+            champMesure
+          )} ${numeroRg}`}{" "}
+          | e-MJPM
+        </title>
+      </Helmet>
       <Heading size={3} mt="4" mb="3">
         Votre mesure
       </Heading>
