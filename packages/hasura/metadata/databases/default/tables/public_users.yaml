@@ -51,113 +51,6 @@ array_relationships:
       table:
         name: user_role
         schema: public
-insert_permissions:
-- permission:
-    check: {}
-    columns:
-    - id
-    - password
-    - created_at
-    - type
-    - last_login
-    - active
-    - reset_password_token
-    - reset_password_expires
-    - nom
-    - prenom
-    - cabinet
-    - email
-  role: direction
-- permission:
-    check:
-      id:
-        _eq: X-Hasura-User-Id
-    columns:
-    - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
-    - cabinet
-    - email
-    - nom
-    - password
-    - prenom
-    - reset_password_token
-    - type
-  role: greffier
-- permission:
-    check:
-      id:
-        _eq: X-Hasura-User-Id
-    columns:
-    - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
-    - cabinet
-    - email
-    - nom
-    - password
-    - prenom
-    - reset_password_token
-    - type
-  role: individuel
-- permission:
-    check:
-      id:
-        _eq: X-Hasura-User-Id
-    columns:
-    - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
-    - cabinet
-    - email
-    - nom
-    - password
-    - prenom
-    - reset_password_token
-    - type
-  role: prepose
-- permission:
-    check:
-      id:
-        _eq: X-Hasura-User-Id
-    columns:
-    - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
-    - cabinet
-    - email
-    - nom
-    - password
-    - prenom
-    - reset_password_token
-    - type
-  role: service
-- permission:
-    check:
-      id:
-        _eq: X-Hasura-User-Id
-    columns:
-    - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
-    - cabinet
-    - email
-    - nom
-    - password
-    - prenom
-    - reset_password_token
-    - type
-  role: ti
 select_permissions:
 - permission:
     allow_aggregations: true
@@ -177,6 +70,7 @@ select_permissions:
     - cabinet
     - created_at
     - email
+    - genre
     - id
     - last_login
     - nom
@@ -200,6 +94,7 @@ select_permissions:
     - cabinet
     - created_at
     - email
+    - genre
     - id
     - last_login
     - nom
@@ -223,6 +118,7 @@ select_permissions:
     - cabinet
     - created_at
     - email
+    - genre
     - id
     - last_login
     - nom
@@ -246,6 +142,7 @@ select_permissions:
     - cabinet
     - created_at
     - email
+    - genre
     - id
     - last_login
     - nom
@@ -265,18 +162,19 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - id
-    - password
-    - created_at
-    - type
-    - last_login
     - active
-    - reset_password_token
-    - reset_password_expires
-    - nom
-    - prenom
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - type
     filter:
       id:
         _eq: X-Hasura-User-Id
@@ -285,15 +183,16 @@ select_permissions:
     allow_aggregations: true
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -304,15 +203,16 @@ select_permissions:
     allow_aggregations: true
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -330,6 +230,7 @@ select_permissions:
     - cabinet
     - created_at
     - email
+    - genre
     - id
     - last_login
     - nom
@@ -351,15 +252,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -370,15 +272,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -389,15 +292,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -408,15 +312,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -427,15 +332,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:
@@ -446,15 +352,16 @@ update_permissions:
     check: null
     columns:
     - active
-    - id
-    - created_at
-    - last_login
-    - reset_password_expires
     - cabinet
+    - created_at
     - email
+    - genre
+    - id
+    - last_login
     - nom
     - password
     - prenom
+    - reset_password_expires
     - reset_password_token
     - type
     filter:

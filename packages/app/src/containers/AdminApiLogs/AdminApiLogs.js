@@ -151,6 +151,7 @@ function AdminApiLogs() {
             }}
             onChange={handleSearchChange}
             value={searchQuery}
+            aria-label="Rechercher"
           />
         </Flex>
       </Flex>

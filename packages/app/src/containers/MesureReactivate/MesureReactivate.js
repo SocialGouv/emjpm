@@ -63,7 +63,7 @@ function MesureReactivate() {
       <Helmet>
         <title>
           Réactiver la mesure {formatNatureMesure(mesure.natureMesure)}{" "}
-          {formatChampMesure(mesure.champMesure)} | e-MJPM | e-MJPM
+          {formatChampMesure(mesure.champMesure)} | e-MJPM
         </title>
       </Helmet>
       <Box sx={MesureReactivateStyle}>

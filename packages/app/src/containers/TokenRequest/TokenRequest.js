@@ -126,6 +126,7 @@ function TokenRequest() {
               placeholder="Votre email"
               aria-describedby="msg-email"
               autoComplete="email"
+              aria-label="Votre email"
             />
             <div id="msg-email">
               {formik.touched.email && (

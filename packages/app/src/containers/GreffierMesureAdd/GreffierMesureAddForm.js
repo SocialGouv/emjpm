@@ -63,6 +63,7 @@ export function GreffierMesureAddForm(props) {
           <FormGroupInput
             id="numero_rg"
             label="Numéro RG"
+            aria-label="Numéro RG"
             placeholder="8 chiffres ou lettres"
             forceActive
             formik={formik}
@@ -85,6 +86,8 @@ export function GreffierMesureAddForm(props) {
             size="small"
             validationSchema={validationSchema}
             autoComplete="organization"
+            placeholder="Cabinet du tribunal"
+            aria-label="Cabinet du tribunal"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}
@@ -94,6 +97,7 @@ export function GreffierMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Date prévisionnelle du jugement"
           />
         </FormInputBox>
       </Flex>
@@ -120,6 +124,7 @@ export function GreffierMesureAddForm(props) {
             title="Format: aaaa. Exemple: 2021"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Année de naissance"
           />
         </FormInputBox>
       </Flex>

@@ -113,6 +113,7 @@ function ForgotPassword() {
               onChange={formik.handleChange}
               placeholder="Entrez votre email"
               autoComplete="email"
+              aria-label="Votre email"
             />
             <div id="msg-email">
               {formik.touched.email && (

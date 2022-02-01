@@ -18,7 +18,6 @@ export const GESTIONNAIRES = gql`
       service_id
       mandataire {
         id
-        genre
         telephone
         latitude
         longitude
@@ -41,6 +40,7 @@ export const GESTIONNAIRES = gql`
           nom
           prenom
           email
+          genre
           last_login
         }
       }

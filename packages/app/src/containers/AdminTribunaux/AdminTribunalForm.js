@@ -111,6 +111,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   placeholder="Nom du tribunal"
                   aria-describedby="msg-etablissement"
                   autoComplete="organization"
+                  aria-label="Nom du service"
                 />
                 <div id="msg-etablissement">
                   <InlineError
@@ -154,6 +155,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   placeholder="Email"
                   aria-describedby="msg-email"
                   autoComplete="email"
+                  aria-label="Votre email"
                 />
                 <div id="msg-email">
                   <InlineError message={formik.errors.email} fieldId="email" />

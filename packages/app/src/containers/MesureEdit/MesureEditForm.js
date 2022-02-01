@@ -73,6 +73,7 @@ export function MesureEditForm(props) {
                 placeholder="8 chiffres ou lettres"
                 forceActive
                 id="numero_rg"
+                aria-label="Numéro RG"
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
@@ -94,6 +95,7 @@ export function MesureEditForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
+                aria-label="Numéro de dossier"
               />
             </Box>
           </Flex>
@@ -113,6 +115,7 @@ export function MesureEditForm(props) {
             id="annee_naissance"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Année de naissance"
           />
           <FormGroupInputDate
             label="Date de première mise sous protection"
@@ -121,6 +124,7 @@ export function MesureEditForm(props) {
             id="date_premier_mesure"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Date de première mise sous protection"
           />
         </FormInputBox>
       </Flex>
@@ -149,6 +153,8 @@ export function MesureEditForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
+                placeholder="Cabinet du tribunal"
+                aria-label="Cabinet du tribunal"
               />
             </Box>
           </Flex>
@@ -159,6 +165,7 @@ export function MesureEditForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Date de nomination"
           />
           <FormGroupInputDate
             label="Date de la protection en cours"
@@ -167,6 +174,7 @@ export function MesureEditForm(props) {
             id="date_protection_en_cours"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Date de la protection en cours"
           />
         </FormInputBox>
       </Flex>

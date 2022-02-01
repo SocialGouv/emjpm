@@ -259,7 +259,9 @@ module.exports = {
     ) {
       mandataires_by_pk(id: $mandataireId) {
         id
-        genre
+        user {
+          genre
+        }
         departement{
           id
           nom

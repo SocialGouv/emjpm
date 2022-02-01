@@ -12,7 +12,13 @@ export const EDIT_USER = gql`
     $genre: String
   ) {
     update_users(
-      _set: { cabinet: $cabinet, prenom: $prenom, nom: $nom, email: $email }
+      _set: {
+        cabinet: $cabinet
+        prenom: $prenom
+        nom: $nom
+        email: $email
+        genre: $genre
+      }
       where: { id: { _eq: $id } }
     ) {
       affected_rows
@@ -25,7 +31,7 @@ export const EDIT_USER = gql`
       }
     }
     update_greffier(
-      _set: { ti_id: $tiId, share_email: $shareEmail, genre: $genre }
+      _set: { ti_id: $tiId, share_email: $shareEmail }
       where: { user_id: { _eq: $id } }
     ) {
       affected_rows

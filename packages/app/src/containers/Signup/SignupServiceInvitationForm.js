@@ -46,6 +46,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Nom"
             validationSchema={signupSchema}
             autoComplete="family-name"
+            aria-label="Votre nom de famille"
           />
           <FormGroupInput
             formik={formik}
@@ -54,6 +55,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Prénom"
             validationSchema={signupSchema}
             autoComplete="given-name"
+            aria-label="Votre prénom"
           />
         </FormInputBox>
       </Flex>
@@ -81,6 +83,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Email"
             validationSchema={signupSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <FormGroupSelect
             id="genre"
@@ -99,6 +102,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Mot de passe"
             validationSchema={signupSchema}
             autoComplete="new-password"
+            aria-label="Votre nouveau mot de passe"
           />
           <FormGroupInput
             formik={formik}
@@ -108,6 +112,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Confirmation du mot de passe"
             validationSchema={signupSchema}
             autoComplete="new-password"
+            aria-label="Confirmation de votre nouveau mot de passe"
           />
         </FormInputBox>
       </Flex>

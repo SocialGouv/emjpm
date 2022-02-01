@@ -1,15 +1,15 @@
 import { useMutation, useQuery } from "@apollo/client";
-
 import { Card } from "rebass";
+import { Helmet } from "react-helmet";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { captureException } from "~/user/sentry";
+import capitalize from "~/utils/std/capitalize";
 
 import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
 import { UPDATE_SERVICE } from "./mutations";
 import { SERVICE } from "./queries";
 import { useState, useCallback, useEffect } from "react";
-import { Helmet } from "react-helmet";
 
 export function ListeBlancheServiceUpdate(props) {
   const { listeBlancheId, onSuccess, handleCancel } = props;
@@ -86,7 +86,7 @@ export function ListeBlancheServiceUpdate(props) {
   return (
     <Card p={5}>
       <Helmet>
-        <title>{service.etablissement} | e-MJPM</title>
+        <title>{capitalize(service.etablissement)} - Service | e-MJPM</title>
       </Helmet>
       <ListeBlancheServiceForm
         handleSubmit={handleSubmit}

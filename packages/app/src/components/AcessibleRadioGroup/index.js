@@ -72,7 +72,10 @@ export default function AccessibleRadioGroup(props) {
       >
         {options.map((option) => {
           return (
-            <Flex css={{ margin: "10px 0", alignItems: "center" }}>
+            <Flex
+              key={option.value}
+              css={{ margin: "10px 0", alignItems: "center" }}
+            >
               <RadioGroupRadio
                 id={option.label}
                 checked={option.checked || option.value === value}

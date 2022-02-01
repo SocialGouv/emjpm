@@ -46,8 +46,8 @@ export const GET_MANDATAIRES_BY_DEPARTEMENT = gql`
           nom
           prenom
           email
+          genre
         }
-        genre
       }
       service {
         id
@@ -122,8 +122,8 @@ export const GET_MANDATAIRES_BY_REGION = gql`
           nom
           prenom
           email
+          genre
         }
-        genre
       }
       service {
         id
@@ -189,8 +189,8 @@ export const GET_MANDATAIRES_BY_NATION = gql`
           nom
           prenom
           email
+          genre
         }
-        genre
       }
       service {
         id

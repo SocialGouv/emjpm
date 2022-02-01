@@ -75,6 +75,7 @@ function MagistratFilters() {
                 placeholder="Numéro RG, Dossier, Ville, Code Postal..."
                 label="Rechercher"
                 forceActive
+                aria-label="Rechercher"
               />
             </Box>
             <Box width="160px" mr={1}>

@@ -7,7 +7,7 @@ import {
   MESURE_SORTBY_LABEL_VALUE,
   MESURE_STATUS_LABEL_VALUE,
 } from "~/constants/mesures";
-import { Card, Input, Select } from "~/components";
+import { Card, Input, AccessibleSelect } from "~/components";
 
 import { FiltersContext } from "./context";
 
@@ -58,7 +58,7 @@ function MesureListFilters(props) {
           <Flex>
             {service_antennes.length >= 1 && (
               <Box width="170px" mb={1} mr={1}>
-                <Select
+                <AccessibleSelect
                   size="small"
                   options={antenneOptions}
                   placeholder={"Antenne"}
@@ -68,7 +68,7 @@ function MesureListFilters(props) {
               </Box>
             )}
             <Box width="200px" mb={1} mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options
@@ -79,7 +79,7 @@ function MesureListFilters(props) {
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={MESURE_STATUS_LABEL_VALUE}
                 placeholder={"État de la mesure"}
@@ -88,7 +88,7 @@ function MesureListFilters(props) {
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={departementsOptions}
                 label={"Département du majeur"}
@@ -98,7 +98,7 @@ function MesureListFilters(props) {
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={MESURE_SORTBY_LABEL_VALUE}
                 label="Trier par"
@@ -119,6 +119,7 @@ function MesureListFilters(props) {
             size="small"
             label="Rechercher une mesure"
             placeholder="Numéro RG, Dossier, Ville..."
+            aria-label="Rechercher une mesure"
           />
         </Box>
       </Flex>

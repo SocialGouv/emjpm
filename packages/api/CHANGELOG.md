@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.148.4](https://github.com/SocialGouv/emjpm/compare/v25.148.3...v25.148.4) (2022-01-28)
+
+
+### Bug Fixes
+
+* **mesure-etat:** getDate not getDay !!! ([f09918a](https://github.com/SocialGouv/emjpm/commit/f09918a8167a745ff07f58a083a1feb2491a09e1))
+
+
+
+
+## [25.148.3](https://github.com/SocialGouv/emjpm/compare/v25.148.2...v25.148.3) (2022-01-28)
+
+
+### Bug Fixes
+
+* **api:** mesure etat dedup ([7f25b6a](https://github.com/SocialGouv/emjpm/commit/7f25b6ae82fa6dd65766126c4bb0aeb9d04b505c))
+
+
+
+
+
 ## [25.148.2](https://github.com/SocialGouv/emjpm/compare/v25.148.1...v25.148.2) (2022-01-25)
 
 **Note:** Version bump only for package @emjpm/api

@@ -1,5 +1,4 @@
 import { useQuery } from "@apollo/client";
-import { Helmet } from "react-helmet";
 import { useParams } from "react-router-dom";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -28,11 +27,6 @@ export function ListeBlancheEdit(props) {
     <div>
       {data && data.liste_blanche_by_pk && (
         <>
-          <Helmet>
-            <title>
-              {`${data.liste_blanche_by_pk?.nom} ${data.liste_blanche_by_pk?.prenom} | e-MJPM`}{" "}
-            </title>
-          </Helmet>
           {data.liste_blanche_by_pk.type === "prepose" && (
             <ListeBlanchePreposeUpdate
               id={id}

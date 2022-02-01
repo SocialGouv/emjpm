@@ -33,6 +33,7 @@ function ServiceMemberInvitationForm(props) {
             placeholder="Email"
             aria-describedby="msg-email"
             autoComplete="email"
+            aria-label="Votre email"
           />
           <div id="msg-email">
             {formik.touched.email && (

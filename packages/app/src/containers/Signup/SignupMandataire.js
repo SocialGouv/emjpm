@@ -102,6 +102,7 @@ function SignupMandataireForm() {
                 value={formik.values.siret}
                 validationSchema={signupMandataireSchema}
                 required={isIndividuel(user)}
+                aria-label="Siret"
               />
             </FormInputBox>
           </Flex>
@@ -120,6 +121,7 @@ function SignupMandataireForm() {
               value={formik.values.telephone}
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
+              aria-label="Votre téléphone"
             />
             <FormGroupInput
               id="telephone_portable"
@@ -128,6 +130,7 @@ function SignupMandataireForm() {
               value={formik.values.telephone_portable}
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
+              aria-label="Votre téléphone portable"
             />
           </FormInputBox>
         </Flex>
@@ -149,6 +152,7 @@ function SignupMandataireForm() {
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
                 required
+                aria-label="geocode"
               />
               <div id="msg-geocode">
                 {(formik.touched.geocode || formik.submitCount > 0) && (
@@ -176,6 +180,7 @@ function SignupMandataireForm() {
               placeholder="Nombre de mesures souhaité"
               value={formik.values.dispo_max}
               validationSchema={signupMandataireSchema}
+              aria-label="Nombre de mesures souhaité"
             />
           </FormInputBox>
         </Flex>

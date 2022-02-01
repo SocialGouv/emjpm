@@ -184,9 +184,9 @@ export const GET_MANDATAIRES = gql`
             nom
             prenom
             email
+            genre
             last_login
           }
-          genre
           id
           suspend_activity
         }
@@ -372,9 +372,9 @@ export const GET_MANDATAIRES_BY_COORDS = gql`
             nom
             prenom
             email
+            genre
             last_login
           }
-          genre
           id
         }
         gestionnaire_tis {

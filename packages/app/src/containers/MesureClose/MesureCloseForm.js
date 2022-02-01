@@ -55,6 +55,7 @@ export function MesureCloseForm(props) {
             id="date_fin_mesure"
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Date de fin de la mesure de protection"
           />
           <FormGroupSelect
             id="cause_sortie"
@@ -63,6 +64,7 @@ export function MesureCloseForm(props) {
             value={formik.values.cause_sortie}
             formik={formik}
             validationSchema={validationSchema}
+            aria-label="Raison de la fin de mandat"
           />
           <Flex justifyContent="flex-end">
             <Box>

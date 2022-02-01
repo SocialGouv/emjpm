@@ -18,7 +18,13 @@ export default function Impersonation(props) {
       data-tip="Cliquez ici pour vous déconnecter et revenir à votre compte administrateur."
       {...props}
     >
-      <UserSecret size={12} /> {`impersonation`}
+      <UserSecret
+        size={12}
+        role="img"
+        aria-label="Impersonnate"
+        aria-hidden="false"
+      />{" "}
+      {`impersonation`}
     </button>
   );
 }

@@ -47,6 +47,7 @@ function AdminUserService({ userId, successLink, cancelLink }) {
         user_email: values.user_email.toLowerCase(),
         user_nom: values.user_nom,
         user_prenom: values.user_prenom,
+        user_genre: values.user_genre,
         adresse: values.adresse,
         adresse_complement: values.adresse_complement,
         location_adresse: values.geocode.label,

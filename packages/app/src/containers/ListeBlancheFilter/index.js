@@ -6,7 +6,7 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { Link } from "~/containers/Commons";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import useUser from "~/hooks/useUser";
-import { Button, Card, CheckBox, Input, Select } from "~/components";
+import { Button, Card, CheckBox, Input, AccessibleSelect } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { createDepartementOptions } from "~/utils/geodata";
 import { findOption } from "~/utils/form";
@@ -95,7 +95,7 @@ function ListeBlancheFilter() {
         <Flex flexDirection="column">
           <Flex>
             <Box sx={BoxStyle}>
-              <Select
+              <AccessibleSelect
                 instanceId={"filters-departement"}
                 size="small"
                 options={departmentOptions}
@@ -122,6 +122,7 @@ function ListeBlancheFilter() {
                 size="small"
                 label="Rechercher"
                 placeholder="nom, prénom, email ou SIRET"
+                aria-label="Rechercher"
               />
             </Box>
             <Box mr={1} pt={2} width="250px">

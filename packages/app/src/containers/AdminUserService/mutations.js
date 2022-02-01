@@ -6,6 +6,7 @@ export const EDIT_USER = gql`
     $user_prenom: String!
     $user_nom: String!
     $user_email: String!
+    $user_genre: String!
     $service_id: Int!
     $adresse: String
     $adresse_complement: String
@@ -27,7 +28,12 @@ export const EDIT_USER = gql`
     $service_tis: [service_tis_insert_input!]!
   ) {
     update_users(
-      _set: { prenom: $user_prenom, nom: $user_nom, email: $user_email }
+      _set: {
+        prenom: $user_prenom
+        nom: $user_nom
+        email: $user_email
+        genre: $user_genre
+      }
       where: { id: { _eq: $user_id } }
     ) {
       affected_rows

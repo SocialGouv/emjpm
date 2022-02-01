@@ -5,6 +5,7 @@ const adminUserServiceSchema = yup.object().shape({
   user_email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   user_nom: yup.string().required(),
   user_prenom: yup.string().required(),
+  user_genre: yup.string().nullable().required(),
   competences: yup.string().max(255, "Maximum 255 caractères"),
   dispo_max: yup
     .number()

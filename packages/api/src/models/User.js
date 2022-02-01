@@ -181,6 +181,7 @@ class User extends Model {
       properties: {
         cabinet: { type: "string" },
         email: { type: "string" },
+        genre: { type: "string" },
         id: { type: "integer" },
         nom: { type: "string" },
         prenom: { type: "string" },

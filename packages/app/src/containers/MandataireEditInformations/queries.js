@@ -8,6 +8,7 @@ export const MANDATAIRE = gql`
       nom
       prenom
       type
+      genre
       mandataire {
         id
         adresse
@@ -19,7 +20,6 @@ export const MANDATAIRE = gql`
         longitude
         departement_code
         dispo_max
-        genre
         telephone
         telephone_portable
         competences

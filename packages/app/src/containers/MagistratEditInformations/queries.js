@@ -7,11 +7,11 @@ export const MAGISTRAT = gql`
       email
       nom
       prenom
+      genre
       magistrat {
         id
         ti_id
         share_email
-        genre
       }
       cabinet
     }

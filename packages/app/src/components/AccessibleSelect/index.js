@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useRef } from "react";
 import Select from "react-select";
 
+import AsyncSelect from "react-select/async";
+
 import { RequiredAsterisk } from "~/components";
+import Creatable from "~/components/Select/Creatable";
 import { getStyle } from "./style";
 import Label from "./Label";
 import MultiValueRemove from "./MultiValueRemove";
 import ClearIndicator from "./ClearIndicator";
 
-export default function AccessibleSelect({ label, ...props }) {
+export default function AccessibleSelect({
+  label,
+  isCreatable,
+  isAsync,
+  ...props
+}) {
+  const selectRef = useRef(null);
   const ClearIndicatorStyles = (base, state) => ({
     ...base,
     cursor: "pointer",
@@ -22,23 +31,25 @@ export default function AccessibleSelect({ label, ...props }) {
   if (!label && props.placeholder) {
     label = props.placeholder;
   }
+  const Component = isCreatable ? Creatable : isAsync ? AsyncSelect : Select;
   return (
     <>
       {label && (
         <Label
           size={props.size}
-          aria-describedby={props.id}
           htmlFor={props.id}
           isActive={props.isActive}
           required={props.required}
           aria-required={props.required}
           readOnly={props.readOnly}
+          onClick={() => selectRef?.current?.focus()}
         >
           {label}
           {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
-      <Select
+      <Component
+        ref={selectRef}
         options={props?.options || []}
         components={{ MultiValueRemove, ClearIndicator }}
         styles={{
@@ -47,6 +58,7 @@ export default function AccessibleSelect({ label, ...props }) {
           ...getStyle(props),
         }}
         menuPortalTarget={document.body}
+        id={props?.id || props?.instanceId}
         {...props}
       />
     </>

@@ -1,6 +1,7 @@
 import { BuildingHouse } from "@styled-icons/boxicons-solid/BuildingHouse";
 import { Female } from "@styled-icons/fa-solid/Female";
 import { Male } from "@styled-icons/fa-solid/Male";
+import { User } from "@styled-icons/fa-solid/User";
 import { InfoCircle } from "@styled-icons/fa-solid/InfoCircle";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
@@ -96,22 +97,37 @@ export default function MandataireListItem(props) {
           <Flex>
             <Box alignSelf="center" my="1px" mr="1">
               {type === "service" ? (
-                <BuildingHouse size="24" />
+                <BuildingHouse
+                  size="24"
+                  aria-hidden="false"
+                  role="img"
+                  aria-label="Service"
+                />
               ) : (
                 <>
-                  {genre === "F" ? (
+                  {genre === "F" && (
                     <Female
                       size="24"
                       aria-hidden="false"
                       role="img"
                       aria-label="Madame"
                     />
-                  ) : (
+                  )}
+                  {genre === "H" && (
                     <Male
                       size="24"
                       aria-hidden="false"
                       role="img"
                       aria-label="Monsieur"
+                    />
+                  )}
+                  {!genre && (
+                    <User
+                      size="16"
+                      aria-hidden="false"
+                      role="img"
+                      aria-label="Genre inconnu"
+                      style={{ margin: "0 5px" }}
                     />
                   )}
                 </>

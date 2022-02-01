@@ -32,7 +32,6 @@ select_permissions:
 - permission:
     allow_aggregations: true
     columns:
-    - genre
     - id
     - share_email
     - ti_id
@@ -60,7 +59,6 @@ update_permissions:
 - permission:
     check: null
     columns:
-    - genre
     - share_email
     - ti_id
     filter:

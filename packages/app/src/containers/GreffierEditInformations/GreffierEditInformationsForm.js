@@ -32,7 +32,7 @@ function GreffierEditInformationsForm(props) {
       prenom: user.prenom || "",
       ti: greffier.ti_id || "",
       share_email: greffier.share_email || false,
-      genre: greffier.genre || "",
+      genre: user.genre || "",
     },
     onSubmit: handleSubmit,
     validationSchema: greffierEditSchema,
@@ -66,6 +66,7 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
             autoComplete="given-name"
             normalizers={[normalizeFirstName]}
+            aria-label="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -74,6 +75,7 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
             autoComplete="family-name"
             normalizers={[normalizeLastName]}
+            aria-label="Votre nom"
           />
           <FormGroupInput
             placeholder="Email"
@@ -81,6 +83,7 @@ function GreffierEditInformationsForm(props) {
             formik={formik}
             validationSchema={greffierEditSchema}
             autoComplete="email"
+            aria-label="Votre email"
           />
           <CheckBox
             isChecked={formik.values.share_email}
@@ -115,6 +118,8 @@ function GreffierEditInformationsForm(props) {
             id="cabinet"
             formik={formik}
             validationSchema={greffierEditSchema}
+            placeholder="Cabinet du tribunal"
+            aria-label="Cabinet du tribunal"
           />
         </FormInputBox>
       </Flex>
