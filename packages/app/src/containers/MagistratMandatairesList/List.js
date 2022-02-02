@@ -7,6 +7,7 @@ import useUser from "~/hooks/useUser";
 import MandataireListItem from "~/containers/MagistratMandatairesList/MandataireListItem";
 
 import useQueryReady from "~/hooks/useQueryReady";
+import { SrOnly } from "~/components";
 
 import { GET_MANDATAIRES, GET_MANDATAIRES_BY_COORDS } from "./queries";
 import { useMemo } from "react";
@@ -106,6 +107,15 @@ function MagistratMandatairesListList(props) {
 
   return (
     <>
+      <SrOnly>
+        {count > 0 && (
+          <p role="status">
+            {count} {count > 1 ? "résultat" : "résultats"}
+          </p>
+        )}
+        {count === 0 && <p role="status">Pas de donnée à afficher</p>}
+      </SrOnly>
+
       {data.mandatairesList.map((item) => {
         const {
           gestionnaires: [gestionnaire],

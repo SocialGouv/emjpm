@@ -59,6 +59,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
                   color: "#777",
                   cursor: "pointer",
                 }}
+                role="status"
               >
                 <button type="button" aria-label={`Supprimer ${label}`}>
                   <XCircle
