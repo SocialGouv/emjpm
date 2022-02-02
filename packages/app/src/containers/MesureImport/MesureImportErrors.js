@@ -17,7 +17,7 @@ function MesureImportErrors(props) {
           <Text color="warning" mr={1}>
             LIGNE {line}
           </Text>
-          <Text>{message}</Text>
+          <Text role="alert">{message}</Text>
         </Flex>
       ))}
     </Card>

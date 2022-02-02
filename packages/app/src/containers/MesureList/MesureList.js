@@ -15,6 +15,7 @@ import { formatMesureListItems } from "~/formatters/mesures";
 
 import { MESURES_QUERY } from "./queries";
 import { MesureListStyle } from "./style";
+import { SrOnly } from "../../components";
 
 const RESULT_PER_PAGE = 20;
 
@@ -109,6 +110,19 @@ function MesureList(props) {
 
   return (
     <>
+      <SrOnly>
+        {data.awaiting_mesures.length + count > 0 && (
+          <p role="status">
+            {data.awaiting_mesures.length + count}{" "}
+            {data.awaiting_mesures.length + count > 1
+              ? "résultat"
+              : "résultats"}
+          </p>
+        )}
+        {data.awaiting_mesures.length + count === 0 && (
+          <p role="status">Pas de donnée à afficher</p>
+        )}
+      </SrOnly>
       <Text pb="1" color="#696363">
         Résultats de la séléction: {data.awaiting_mesures.length + count}
       </Text>
