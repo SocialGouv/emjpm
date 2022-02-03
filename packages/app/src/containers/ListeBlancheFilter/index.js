@@ -92,7 +92,7 @@ function ListeBlancheFilter() {
           </>
         </Box>
 
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" tabIndex="0">
           <Flex>
             <Box sx={BoxStyle}>
               <AccessibleSelect
