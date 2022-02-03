@@ -69,7 +69,7 @@ function GreffierMandatairesListFilters(props) {
   );
 
   return (
-    <Card mb="2" mt="1">
+    <Card mb="2" mt="1" tabIndex="0" id="greffier_mandataires_filter">
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexWrap="wrap">
           <Box width="200px" mr="2">

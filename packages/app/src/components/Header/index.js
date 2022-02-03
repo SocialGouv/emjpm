@@ -48,6 +48,7 @@ function Header(props) {
             </Box>
           </Flex>
         </Box>
+
         {!isPublicLayout && <LoggedMenu dropDownLinks={dropDownLinks} />}
       </Flex>
     </BoxWrapper>

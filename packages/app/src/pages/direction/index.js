@@ -9,6 +9,7 @@ import { ListeBlanche } from "~/containers/ListeBlanche";
 import { ListeBlancheFilter } from "~/containers/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/containers/ListeBlancheSummary";
 import useUser from "~/hooks/useUser";
+import { SkipToContent } from "~/components";
 
 function ListBlanchePage() {
   const user = useUser();
@@ -26,6 +27,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Liste blanche | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="direction_filter" />
       <LayoutDirection>
         <FiltersContextSerializableProvider
           useLocalStorage={true}
