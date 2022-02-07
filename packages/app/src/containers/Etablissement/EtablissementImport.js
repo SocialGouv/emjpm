@@ -98,7 +98,7 @@ export function EtablissementImport() {
 
   const [last] = data.last;
   return (
-    <Card mb="5">
+    <Card mb="5" id="etablissement_import">
       <Flex flexDirection="column">
         <Box mt={2}>
           <Heading size={3} mb="2">

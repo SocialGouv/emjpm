@@ -61,7 +61,7 @@ export function ListeBlancheServiceCreate(props) {
   };
 
   return (
-    <Card p={5}>
+    <Card p={5} id="list_blanche_service_create" tabIndex="0">
       <ListeBlancheServiceForm
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}

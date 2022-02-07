@@ -5,6 +5,7 @@ import { IndicatorListTotal } from "~/containers/IndicatorList";
 import { IndicatorsMenu } from "~/containers/IndicatorsMenu";
 import { LayoutPublic } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function StatsPage() {
   return (
@@ -12,6 +13,7 @@ function StatsPage() {
       <Helmet>
         <title>Statistiques | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="indicators_menu" />
       <LayoutPublic>
         <BoxWrapper>
           <Flex
@@ -25,6 +27,8 @@ function StatsPage() {
                 flexGrow: 1,
                 p: 3,
               }}
+              id="indicators_menu"
+              tabIndex="0"
             >
               <IndicatorsMenu />
             </Box>

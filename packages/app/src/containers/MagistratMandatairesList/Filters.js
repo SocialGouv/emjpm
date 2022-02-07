@@ -69,7 +69,7 @@ function MagistratMandatairesListFilters(props) {
   );
 
   return (
-    <Card mb="2" mt="1">
+    <Card mb="2" mt="1" id="magistrats_mandataires_filter" tabIndex="0">
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexWrap="wrap">
           <Box width="200px" mr="2">

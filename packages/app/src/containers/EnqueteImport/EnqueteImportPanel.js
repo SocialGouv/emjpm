@@ -61,7 +61,7 @@ export function EnqueteImportPanel(props) {
   }
 
   return (
-    <Flex>
+    <Flex id="import_mesure">
       <Box py={"50px"} px={4} sx={menuStepperStyle.menu}>
         <Box>{renderSectionTitle(enqueteId, goToStep)}</Box>
       </Box>

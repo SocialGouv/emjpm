@@ -53,7 +53,7 @@ function AdminEditorEdit(props) {
   }
 
   return (
-    <Card sx={cardStyle} p="0" width="100%">
+    <Card sx={cardStyle} p="0" width="100%" id="add_editor_edit">
       <AdminEditorForm
         editor={editor}
         handleSubmit={handleSubmit}

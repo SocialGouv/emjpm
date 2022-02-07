@@ -96,7 +96,7 @@ function ListeBlancheSummary() {
             : `${resultCount} résultats`}{" "}
         </p>
       </SrOnly>
-      <Card>
+      <Card tabIndex="0">
         <Flex>
           <Box width={1 / 2}>
             <Heading size={2}>{departementLabel}</Heading>

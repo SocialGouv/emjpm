@@ -19,7 +19,7 @@ function MandataireBoard() {
 
   return (
     <Box>
-      <Flex p={1} flexDirection="column" width="300px">
+      <Flex p={1} flexDirection="column" width="300px" id="vos_indicateurs">
         <Box bg="cardSecondary">
           <Box p={1}>
             <Heading size={4}>Vos indicateurs</Heading>

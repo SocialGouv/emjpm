@@ -7,6 +7,7 @@ import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 export default function ListBlancheAjoutService() {
   const history = useHistory();
@@ -15,6 +16,8 @@ export default function ListBlancheAjoutService() {
       <Helmet>
         <title>Ajout d'un service à la liste blanche | e-MJPM</title>
       </Helmet>
+
+      <SkipToContent skipTo="list_blanche_service_create" />
       <LayoutAdmin>
         <BoxWrapper mt={3} px={1}>
           <Link

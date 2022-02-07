@@ -13,7 +13,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 import { Cog } from "@styled-icons/fa-solid/Cog";
 
-import { Button } from "~/components";
+import { Button, SkipToContent } from "~/components";
 
 function AdminEtablissementsPage() {
   const history = useHistory();
@@ -22,6 +22,7 @@ function AdminEtablissementsPage() {
       <Helmet>
         <title>Liste des établissements | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="search_filter" />
       <AdminFilterProvider>
         <LayoutAdmin>
           <BoxWrapper mt={3} px={1}>

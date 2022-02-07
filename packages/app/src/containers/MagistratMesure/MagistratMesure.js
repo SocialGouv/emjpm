@@ -66,7 +66,12 @@ function MagistratMesure(props) {
       <Heading size={3} mt="4" mb="3">
         Votre mesure
       </Heading>
-      <Flex sx={MagistratMesureStyle} {...props}>
+      <Flex
+        sx={MagistratMesureStyle}
+        {...props}
+        id="magistrat_mesure_details"
+        tabIndex="0"
+      >
         <Box sx={MagistratMesureLinksStyle}>
           {status === "en_attente" && (
             <Link to={`/magistrats/mesures/${id}/delete`}>

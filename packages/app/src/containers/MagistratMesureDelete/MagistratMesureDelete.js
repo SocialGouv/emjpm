@@ -24,7 +24,11 @@ export function MagistratMesureDelete() {
           | e-MJPM
         </title>
       </Helmet>
-      <Flex sx={MagistratMesureRemoveStyle}>
+      <Flex
+        sx={MagistratMesureRemoveStyle}
+        id="magistrat_mesure_form_delete"
+        tabIndex="0"
+      >
         <MagistratMesureDeleteForm mesure={mesure} />
       </Flex>{" "}
     </>

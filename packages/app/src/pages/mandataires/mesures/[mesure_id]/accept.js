@@ -8,6 +8,7 @@ import { MesureProvider } from "~/containers/MesureContext";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function AcceptMesurePage() {
   const { mesure_id } = useParams();
@@ -18,10 +19,11 @@ function AcceptMesurePage() {
       <Helmet>
         <title>Accepter la mesure | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="mesure_accept" />
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
           <BoxWrapper mt={1}>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" id="mesure_accept">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureAccept />
             </Flex>

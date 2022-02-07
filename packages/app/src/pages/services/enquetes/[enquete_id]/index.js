@@ -9,6 +9,7 @@ import { ENQUETE_WITH_REPONSE_STATUS } from "~/containers/Enquete/queries";
 import { LayoutServices } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "../../../../components";
 
 function EnquetePage() {
   const { enquete_id } = useParams();
@@ -47,16 +48,19 @@ function EnquetePage() {
   }
 
   return (
-    <LayoutServices>
-      <BoxWrapper>
-        <EnqueteReponse
-          enquete={enquete}
-          enqueteReponse={enqueteReponse}
-          currentStep={currentStep}
-          navigateToStep={navigateToStep}
-        />
-      </BoxWrapper>
-    </LayoutServices>
+    <>
+      <SkipToContent skipTo="enquete_wrapper" />
+      <LayoutServices>
+        <BoxWrapper id="enquete_wrapper">
+          <EnqueteReponse
+            enquete={enquete}
+            enqueteReponse={enqueteReponse}
+            currentStep={currentStep}
+            navigateToStep={navigateToStep}
+          />
+        </BoxWrapper>
+      </LayoutServices>
+    </>
   );
 }
 

@@ -75,7 +75,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
   }));
 
   return (
-    <Card sx={cardStyle} width="100%">
+    <Card sx={cardStyle} width="100%" id="creation_tribunal">
       <Flex flexWrap="wrap">
         <Box
           width={[1, 2 / 5]}

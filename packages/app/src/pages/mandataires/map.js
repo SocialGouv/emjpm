@@ -14,6 +14,7 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM</title>
       </Helmet>
+
       <LayoutMandataireMap>
         <Flex
           sx={{

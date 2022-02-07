@@ -7,6 +7,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function MagistratMesureDeletePage() {
   const { mesure_id } = useParams();
@@ -17,6 +18,7 @@ function MagistratMesureDeletePage() {
       <Helmet>
         <title>Supprimer la mesure {mesure_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="magistrat_mesure_form_delete" />
       <LayoutMagistrat>
         <BoxWrapper mt="6" px="1">
           <Flex flexWrap="wrap" mt="2">

@@ -8,6 +8,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function ReactivateMesurePage() {
   const { mesure_id } = useParams();
@@ -18,10 +19,11 @@ function ReactivateMesurePage() {
       <Helmet>
         <title>Rouvrir la mesure | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="mesure_reactivate" />
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
           <BoxWrapper mt={1}>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" id="mesure_reactivate">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureReactivate />
             </Flex>

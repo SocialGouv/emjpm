@@ -11,6 +11,7 @@ import { FiltersContextSerializableProvider } from "~/containers/FiltersContextS
 import { LayoutDirection } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper, FlexWrapper, twoColumnStyle } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 export default function DirectionPage() {
   const user = useUser();
@@ -28,6 +29,7 @@ export default function DirectionPage() {
       <Helmet>
         <title>Statistiques | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="direction_filter" />
       <FiltersContextSerializableProvider
         useLocalStorage={true}
         initialFilters={initialFilters}

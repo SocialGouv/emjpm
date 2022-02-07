@@ -5,6 +5,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutGreffier } from "~/containers/Layout";
 import { GreffierMandatairesList } from "~/containers/GreffierMandatairesList";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function Mandataires() {
   return (
@@ -12,6 +13,7 @@ function Mandataires() {
       <Helmet>
         <title>Tous les mandataires | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="greffier_mandataires_filter" />
       <LayoutGreffier>
         <BoxWrapper mt={3} px="1">
           <HeadingTitle>Tous les mandataires</HeadingTitle>

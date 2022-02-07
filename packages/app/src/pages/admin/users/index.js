@@ -8,6 +8,7 @@ import { AdminUsers } from "~/containers/AdminUsers";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutAdmin } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function AdminUsersPage() {
   return (
@@ -15,6 +16,7 @@ function AdminUsersPage() {
       <Helmet>
         <title>Liste des utilisateurs | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="search_filter" />
       <AdminFilterProvider>
         <LayoutAdmin>
           <BoxWrapper mt={3} px="1">

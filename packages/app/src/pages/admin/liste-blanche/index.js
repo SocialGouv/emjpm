@@ -7,6 +7,7 @@ import { ListeBlanche } from "~/containers/ListeBlanche";
 import { ListeBlancheFilter } from "~/containers/ListeBlancheFilter";
 import { ListeBlancheSummary } from "~/containers/ListeBlancheSummary";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ListBlanchePage() {
   return (
@@ -14,6 +15,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Liste blanche | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="list_blanche_filter" />
       <LayoutAdmin>
         <FiltersContextSerializableProvider useLocalStorage={true}>
           <BoxWrapper mt={3} px={1}>

@@ -3,7 +3,7 @@ import { Box, Flex } from "rebass";
 import { LayoutMagistrat } from "~/containers/Layout";
 import { MagistratInformations } from "~/containers/MagistratInformations";
 import { MagistratTribunalInformations } from "~/containers/MagistratTribunalInformations";
-import { Heading } from "~/components";
+import { Heading, SkipToContent } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
 
@@ -13,6 +13,7 @@ function Informations() {
       <Helmet>
         <title>Vos informations | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="magistrats_informations" />
       <LayoutMagistrat>
         <BoxWrapper mt={3} px="0">
           <Flex

@@ -5,6 +5,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutMagistrat } from "~/containers/Layout";
 import { MagistratMandatairesList } from "~/containers/MagistratMandatairesList";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function Mandataires() {
   return (
@@ -12,6 +13,7 @@ function Mandataires() {
       <Helmet>
         <title>Tous les mandataires | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="magistrats_mandataires_filter" />
       <LayoutMagistrat>
         <BoxWrapper mt={3} px="1">
           <HeadingTitle>Tous les mandataires</HeadingTitle>

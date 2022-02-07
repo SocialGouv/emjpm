@@ -40,3 +40,5 @@ export { default as SrOnly } from "./SrOnly";
 export { default as AccessibleSelect } from "./AccessibleSelect";
 
 export { default as AcessibleRadioGroup } from "./AcessibleRadioGroup";
+
+export { default as SkipToContent } from "./SkipToContent";

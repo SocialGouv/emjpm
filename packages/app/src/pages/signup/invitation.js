@@ -5,6 +5,7 @@ import { LayoutPublic } from "~/containers/Layout";
 import { SignupContextProvider } from "~/containers/Signup/context";
 import { SignupServiceInvitation } from "~/containers/Signup/SignupServiceInvitation";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function SignupInvitationPage() {
   const { token } = useSearchParams();
@@ -14,9 +15,10 @@ function SignupInvitationPage() {
       <Helmet>
         <title>Invitation pour la création d'un compte | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="invitation_wrapper" />
       <SignupContextProvider>
         <LayoutPublic>
-          <BoxWrapper pt="6" px="1">
+          <BoxWrapper pt="6" px="1" id="invitation_wrapper">
             <SignupServiceInvitation token={token} />
           </BoxWrapper>
         </LayoutPublic>

@@ -7,6 +7,7 @@ import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function User() {
   const { user_id } = useParams();
@@ -17,6 +18,7 @@ function User() {
       <Helmet>
         <title>Utilisateur {user_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="informations_personelles" />
       <LayoutAdmin>
         <BoxWrapper py={1}>
           <Link

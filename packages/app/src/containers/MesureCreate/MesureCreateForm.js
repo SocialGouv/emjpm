@@ -54,7 +54,7 @@ export function MesureCreateForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex id="mesure_create">
         <FormGrayBox>
           <Heading size={4} id="majeur_a_protger_heading">
             Majeur protégé

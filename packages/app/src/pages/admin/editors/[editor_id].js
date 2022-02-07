@@ -5,6 +5,7 @@ import { AdminEditorEdit } from "~/containers/AdminEditors/AdminEditorEdit";
 import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 import { useParams } from "react-router-dom";
 
@@ -17,6 +18,7 @@ function Editor() {
       <Helmet>
         <title>éditeur {`${editor_id}`} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="add_editor_edit" />
       <LayoutAdmin>
         <BoxWrapper>
           <Link

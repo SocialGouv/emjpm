@@ -8,6 +8,7 @@ import { MesureDelete } from "~/containers/MesureDelete";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function DeleteMesurePage() {
   const { mesure_id } = useParams();
@@ -18,9 +19,10 @@ function DeleteMesurePage() {
       <Helmet>
         <title>Supprimer la mesure | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="delete_mesure" />
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
-          <BoxWrapper mt={1}>
+          <BoxWrapper mt={1} id="delete_mesure">
             <Flex flexDirection="column">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureDelete />

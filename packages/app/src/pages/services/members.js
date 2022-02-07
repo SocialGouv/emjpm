@@ -5,6 +5,7 @@ import { ServiceMembers } from "~/containers/ServiceMembers";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "../../components";
 
 function ServiceMembersPage() {
   const { service_members, id } = useUser();
@@ -14,8 +15,9 @@ function ServiceMembersPage() {
       <Helmet>
         <title>Membres du service et accès | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="services_members" />
       <LayoutServices>
-        <BoxWrapper mt={3} px={2}>
+        <BoxWrapper mt={3} px={2} id="services_members">
           <ServiceMembers service={service} userId={id} isAdmin={is_admin} />
           {is_admin && (
             <ServiceMemberInvitations service={service} isAdmin={is_admin} />

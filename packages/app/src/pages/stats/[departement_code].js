@@ -6,6 +6,7 @@ import { IndicatorsMenu } from "~/containers/IndicatorsMenu";
 import { LayoutPublic } from "~/containers/Layout";
 import { BoxWrapper } from "~/components/Grid";
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function DepartmentStatsPage() {
   const { departement_code: departementCode } = useParams();
@@ -14,6 +15,7 @@ function DepartmentStatsPage() {
       <Helmet>
         <title>Statistiques du département {departementCode} | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="indicators_menu" />
       <LayoutPublic>
         <BoxWrapper>
           <Flex
@@ -27,6 +29,8 @@ function DepartmentStatsPage() {
                 flexGrow: 1,
                 p: 3,
               }}
+              id="indicators_menu"
+              tabIndex="0"
             >
               <IndicatorsMenu />
             </Box>

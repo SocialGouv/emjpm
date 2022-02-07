@@ -37,7 +37,7 @@ function AdminUser({ userId }) {
   const { type } = user;
 
   return (
-    <Box>
+    <Box id="informations_personelles" tabIndex="0">
       {type !== "admin" && (
         <Box my={1} width="100%">
           <AdminUserActivation userId={userId} />

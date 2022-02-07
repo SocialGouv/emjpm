@@ -13,16 +13,19 @@ function ReactivateMesurePage() {
   const mesureId = parseInt(mesure_id);
 
   return (
-    <MesureProvider mesureId={mesureId}>
-      <LayoutServices>
-        <BoxWrapper mt={1}>
-          <Flex flexDirection="column">
-            <ServiceMesureSidebar mesureId={mesureId} />
-            <MesureReactivate />
-          </Flex>
-        </BoxWrapper>
-      </LayoutServices>
-    </MesureProvider>
+    <>
+      <SkipToContent skipTo="mesure_reactivate" />
+      <MesureProvider mesureId={mesureId}>
+        <LayoutServices>
+          <BoxWrapper mt={1} id="mesure_reactivate">
+            <Flex flexDirection="column">
+              <ServiceMesureSidebar mesureId={mesureId} />
+              <MesureReactivate />
+            </Flex>
+          </BoxWrapper>
+        </LayoutServices>
+      </MesureProvider>
+    </>
   );
 }
 

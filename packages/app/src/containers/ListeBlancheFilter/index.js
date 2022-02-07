@@ -65,7 +65,13 @@ function ListeBlancheFilter() {
 
   return (
     <>
-      <Card sx={{ position: "relative" }}>
+      <Card
+        sx={{ position: "relative" }}
+        tabIndex="0"
+        id="direction_filter"
+        id="list_blanche_filter"
+        tabIndex="0"
+      >
         <Box
           ref={ref}
           sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}
@@ -92,7 +98,7 @@ function ListeBlancheFilter() {
           </>
         </Box>
 
-        <Flex flexDirection="column">
+        <Flex flexDirection="column" tabIndex="0">
           <Flex>
             <Box sx={BoxStyle}>
               <AccessibleSelect

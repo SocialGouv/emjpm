@@ -4,6 +4,7 @@ import { ForgotPassword } from "~/containers/ForgotPassword";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
 import { FlexWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ForgotPasswordPage() {
   return (
@@ -11,6 +12,7 @@ function ForgotPasswordPage() {
       <Helmet>
         <title>Demander un nouveau mot de passe | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="forgot_password" />
       <LayoutPublic>
         <FlexWrapper
           mt={6}

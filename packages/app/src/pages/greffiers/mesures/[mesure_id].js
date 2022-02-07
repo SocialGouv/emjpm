@@ -9,6 +9,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function Mandataires() {
   const { mesure_id } = useParams();
@@ -18,6 +19,7 @@ function Mandataires() {
       <Helmet>
         <title>Mesure {mesure_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="votre_mesure_infos" />
       <LayoutGreffier initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}>
         <BoxWrapper mt={3} px="1">
           <Flex

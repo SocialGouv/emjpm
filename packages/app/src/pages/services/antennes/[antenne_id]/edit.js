@@ -5,6 +5,7 @@ import { LayoutServices } from "~/containers/Layout";
 import { ServiceAntenneEdit } from "~/containers/ServiceAntenneEdit";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ServiceAntenneEditPage() {
   const { antenne_id } = useParams();
@@ -12,12 +13,15 @@ function ServiceAntenneEditPage() {
   const user = useUser();
 
   return (
-    <LayoutServices>
-      <BoxWrapper mt={3}>
-        <HeadingTitle mx="1">{"Modification de l'antenne"}</HeadingTitle>
-        <ServiceAntenneEdit user={user} antenneId={antenneId} mt="3" />
-      </BoxWrapper>
-    </LayoutServices>
+    <>
+      <SkipToContent skipTo="edit_antenne" />
+      <LayoutServices>
+        <BoxWrapper mt={3} id="edit_antenne">
+          <HeadingTitle mx="1">{"Modification de l'antenne"}</HeadingTitle>
+          <ServiceAntenneEdit user={user} antenneId={antenneId} mt="3" />
+        </BoxWrapper>
+      </LayoutServices>
+    </>
   );
 }
 

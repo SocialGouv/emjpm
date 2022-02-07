@@ -4,6 +4,7 @@ import { ResetPassword } from "~/containers/ResetPassword";
 import { FlexWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
 import useSearchParams from "~/hooks/useSearchParams";
+import { SkipToContent } from "~/components";
 
 function ResetPasswordPage() {
   const { token } = useSearchParams();
@@ -12,6 +13,7 @@ function ResetPasswordPage() {
       <Helmet>
         <title>Modifier votre mot de passe | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="reset_password" />
       <LayoutPublic>
         <FlexWrapper
           mt={6}

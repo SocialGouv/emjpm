@@ -75,7 +75,7 @@ export function GreffierMandataire(props) {
           | e-MJPM
         </title>
       </Helmet>
-      <Box {...props} width="100%" mb={6}>
+      <Box {...props} width="100%" mb={6} id="greffier_mandataire">
         <Flex alignItems="center" justifyContent="space-between">
           {serviceId && <Heading size={2}>{etablissement}</Heading>}
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
