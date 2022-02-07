@@ -19,6 +19,7 @@ import { MESURE_EMAIL_MANDATAIRE, MESURE_EMAIL_SERVICE } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
 import { useQuery } from "@apollo/client";
 import { Helmet } from "react-helmet";
+import capitalize from "~/utils/std/capitalize";
 
 function MagistratMesure(props) {
   const mesure = useContext(MesureContext);
@@ -59,8 +60,8 @@ function MagistratMesure(props) {
   return (
     <>
       <Helmet>
-        <title>{`${formatNatureMesure(
-          mesure.natureMesure
+        <title>{`${capitalize(
+          formatNatureMesure(mesure.natureMesure)
         )} ${numeroRg} | e-MJPM`}</title>
       </Helmet>
       <Heading size={3} mt="4" mb="3">
