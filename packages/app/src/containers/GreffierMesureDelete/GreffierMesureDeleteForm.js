@@ -52,7 +52,7 @@ export function GreffierMesureDeleteForm(props) {
   });
 
   return (
-    <Flex sx={GreffierMesureRemoveStyle}>
+    <Flex sx={GreffierMesureRemoveStyle} id="delete_mesure">
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading size={5} mb="1">
           Supprimer la mesure

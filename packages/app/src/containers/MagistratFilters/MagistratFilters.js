@@ -41,7 +41,12 @@ function MagistratFilters() {
 
   return (
     <Card mt="3">
-      <Flex justifyContent={"space-between"} flexWrap="wrap">
+      <Flex
+        justifyContent={"space-between"}
+        flexWrap="wrap"
+        id="magistrats_filter"
+        tabIndex="0"
+      >
         <Box>
           <Flex>
             <Box width="200px" mr={1}>

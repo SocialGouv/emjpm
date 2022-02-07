@@ -11,7 +11,7 @@ import { boxStyle, flexStyle, iconTextStyle } from "./style";
 function AdminInformations(props) {
   const { email, nom, prenom } = useUser();
   return (
-    <Box {...props}>
+    <Box {...props} id="vos_informations" tabIndex="0">
       <Card p="5">
         <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}
@@ -33,13 +33,13 @@ function AdminInformations(props) {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton to="/admin/edit-informations">
+            <LinkButton to="/admin/edit-informations" tabIndex="0">
               Modifier vos informations
             </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton to="/admin/edit-password">
+          <LinkButton to="/admin/edit-password" tabIndex="0">
             Modifier votre mot de passe
           </LinkButton>
         </Flex>

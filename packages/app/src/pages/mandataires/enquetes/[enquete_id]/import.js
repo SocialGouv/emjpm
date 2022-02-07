@@ -5,6 +5,7 @@ import { EnqueteImportPanel } from "~/containers/EnqueteImport";
 import { LayoutMandataire } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ImportEnquetePage() {
   const user = useUser();
@@ -18,6 +19,7 @@ function ImportEnquetePage() {
       <Helmet>
         <title>Import de l' enquête {enquete_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="import_mesure" />
       <LayoutMandataire>
         <BoxWrapper>
           <EnqueteImportPanel

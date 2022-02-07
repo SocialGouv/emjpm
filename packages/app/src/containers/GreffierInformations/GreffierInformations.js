@@ -11,7 +11,7 @@ function GreffierInformations(props) {
   const { email, cabinet, nom, prenom, greffier } = useUser();
   const { share_email } = greffier;
   return (
-    <Box {...props}>
+    <Box {...props} id="greffier_informations">
       <Card p="5">
         <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}

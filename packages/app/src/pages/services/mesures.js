@@ -14,6 +14,7 @@ import {
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 export default function Mesures() {
   const { service_members } = useUser();
@@ -40,6 +41,7 @@ export default function Mesures() {
       <Helmet>
         <title>Vos mesures | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="vos_mesures_block" />
       <FiltersContextProvider
         initialValues={{
           mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
@@ -47,7 +49,7 @@ export default function Mesures() {
         }}
       >
         <LayoutServices>
-          <BoxWrapper mt={2} px="1">
+          <BoxWrapper mt={2} px="1" id="vos_mesures_block">
             <Flex flexDirection="row" justifyContent="space-between">
               <HeadingTitle>Vos mesures</HeadingTitle>
               <MesureListButtonBar />

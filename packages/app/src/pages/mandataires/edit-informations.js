@@ -5,6 +5,7 @@ import { MandataireEditInformations } from "~/containers/MandataireEditInformati
 import useUser from "~/hooks/useUser";
 import { PATH } from "~/constants/basePath";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function EditInformations() {
   const { id, type } = useUser();
@@ -16,6 +17,7 @@ function EditInformations() {
       <Helmet>
         <title>Edition des informations de l'utilisateur | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="Informations_personnelles_heading" />
       <LayoutMandataire>
         <BoxWrapper px="1">
           <MandataireEditInformations

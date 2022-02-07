@@ -24,7 +24,7 @@ export function ListeBlancheEdit(props) {
   }
 
   return (
-    <div>
+    <div id="list_blanche_edit">
       {data && data.liste_blanche_by_pk && (
         <>
           {data.liste_blanche_by_pk.type === "prepose" && (

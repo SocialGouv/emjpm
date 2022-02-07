@@ -6,6 +6,7 @@ import { MagistratMandatairesMap } from "~/containers/MagistratMandatairesMap";
 import { MagistratMapMandatairesPanelList } from "~/containers/MagistratMapMandatairesPanelList";
 import { MapContextProvider } from "~/containers/Map/context";
 import useUser from "~/hooks/useUser";
+import { SkipToContent } from "~/components";
 
 function Map() {
   const { magistrat } = useUser();
@@ -17,6 +18,7 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="magistrats_map" />
       <MapContextProvider latitude={latitude} longitude={longitude}>
         <LayoutMagistratMap>
           <Flex

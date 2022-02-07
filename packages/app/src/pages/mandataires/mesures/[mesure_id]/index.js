@@ -8,6 +8,7 @@ import { MesureView } from "~/containers/MesureView";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function MandataireMesurePage() {
   const { mesure_id } = useParams();
@@ -18,10 +19,11 @@ function MandataireMesurePage() {
       <Helmet>
         <title>Mesure {mesure_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="mesure_view" />
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
           <BoxWrapper mt={1}>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" id="mesure_view" tabIndex="0">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureView />
             </Flex>

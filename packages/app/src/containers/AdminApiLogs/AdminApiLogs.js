@@ -126,7 +126,7 @@ function AdminApiLogs() {
   }
 
   return (
-    <Card>
+    <Card id="api_logs">
       <Flex alignItems="center" mt="2" mb="4">
         <Heading size={4}>API Logs</Heading>
         <Flex

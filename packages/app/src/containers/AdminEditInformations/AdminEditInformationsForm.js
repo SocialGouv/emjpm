@@ -24,7 +24,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex id="modifier_informations" tabIndex="0">
         <FormGrayBox>
           <Heading size={4}>{"Modifier vos informations"}</Heading>
           <Text

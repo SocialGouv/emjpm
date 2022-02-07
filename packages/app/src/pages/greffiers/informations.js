@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet";
 import { LayoutGreffier } from "~/containers/Layout";
 import { GreffierInformations } from "~/containers/GreffierInformations";
 import { GreffierTribunalInformations } from "~/containers/GreffierTribunalInformations";
-import { Heading } from "~/components";
+import { Heading, SkipToContent } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
@@ -13,6 +13,7 @@ function Informations() {
       <Helmet>
         <title>Vos informations | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="greffier_informations" />
       <LayoutGreffier>
         <BoxWrapper mt={3} px="0">
           <Flex

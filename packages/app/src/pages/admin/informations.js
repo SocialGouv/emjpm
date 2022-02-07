@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 
 import { AdminInformations } from "~/containers/AdminInformations";
 import { LayoutAdmin } from "~/containers/Layout";
-import { Heading } from "~/components";
+import { Heading, SkipToContent } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 function Informations() {
@@ -12,6 +12,7 @@ function Informations() {
       <Helmet>
         <title>Vos informations | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="vos_informations" />
       <LayoutAdmin>
         <BoxWrapper mt={3} px="0">
           <Flex

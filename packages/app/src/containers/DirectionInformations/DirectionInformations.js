@@ -13,7 +13,7 @@ import { boxStyle, flexStyle, iconTextStyle } from "./style";
 function DirectionInformations(props) {
   const { email, nom, prenom, directions } = useUser();
   return (
-    <Box {...props}>
+    <Box {...props} id="informations_generales">
       <Card p="5">
         <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}

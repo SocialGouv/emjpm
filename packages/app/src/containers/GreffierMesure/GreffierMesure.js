@@ -79,7 +79,7 @@ function GreffierMesure(props) {
           )}
         </Box>
         <Box sx={GreffierMesureSideStyle} />
-        <Flex sx={GreffierMesureMainStyle}>
+        <Flex sx={GreffierMesureMainStyle} id="votre_mesure_infos">
           <Box width="50%">
             <Box>
               <Text sx={GreffierMesureTitleStyle}>Numero RG</Text>

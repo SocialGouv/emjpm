@@ -7,7 +7,10 @@ export function AdminListeBlancheDelete(props) {
   const { listeBlancheId } = props;
 
   return (
-    <Flex sx={AdminListeBlancheDeleteRemoveStyle}>
+    <Flex
+      sx={AdminListeBlancheDeleteRemoveStyle}
+      id="adminlist_dblanche_delete"
+    >
       <AdminListeBlancheDeleteForm listeBlancheId={listeBlancheId} />
     </Flex>
   );

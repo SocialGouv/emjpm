@@ -6,6 +6,7 @@ import { LayoutDirection } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheServiceUpdate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ListeBlancheDetailPage() {
   const { id: paramId } = useParams();
@@ -18,6 +19,7 @@ function ListeBlancheDetailPage() {
       <Helmet>
         <title>Service {paramId} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="list_blanche_service_update" />
       <LayoutDirection>
         <BoxWrapper mt={3} px={1}>
           <Link

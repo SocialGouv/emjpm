@@ -98,7 +98,7 @@ function Login(props) {
   };
 
   return (
-    <Card mt="5" p="0">
+    <Card mt="5" p="0" id="login_box">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
           <Heading size={4} mb="1">

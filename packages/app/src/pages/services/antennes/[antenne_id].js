@@ -5,19 +5,23 @@ import { ServiceAntenneInformations } from "~/containers/ServiceAntenneInformati
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "../../../components";
 
 function Antennes() {
   const { antenne_id } = useParams();
   const antenneId = parseInt(antenne_id);
 
   return (
-    <LayoutServices>
-      <BoxWrapper m={2} px="1">
-        <Card p="5" m={2}>
-          <ServiceAntenneInformations antenne_id={antenneId} mt="3" />
-        </Card>
-      </BoxWrapper>
-    </LayoutServices>
+    <>
+      <SkipToContent skipTo="servide_antenne_informations" />
+      <LayoutServices>
+        <BoxWrapper m={2} px="1" id="servide_antenne_informations">
+          <Card p="5" m={2}>
+            <ServiceAntenneInformations antenne_id={antenneId} mt="3" />
+          </Card>
+        </BoxWrapper>
+      </LayoutServices>
+    </>
   );
 }
 

@@ -8,6 +8,7 @@ import { FiltersContextSerializableProvider } from "~/containers/FiltersContextS
 import { LayoutDirection } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper, FlexWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function Mandataires() {
   const user = useUser();
@@ -25,6 +26,8 @@ function Mandataires() {
       <Helmet>
         <title>Liste des mandataires | e-MJPM</title>
       </Helmet>
+
+      <SkipToContent skipTo="direction_filter" />
       <FiltersContextSerializableProvider
         useLocalStorage={true}
         initialFilters={initialFilters}

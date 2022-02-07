@@ -6,6 +6,7 @@ import { LayoutDirection } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlanchePreposeCreate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ListBlanchePage() {
   return (
@@ -13,6 +14,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Ajout d'un mandataire préposé à la liste blanche | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="list_blanche_prepose_create" />
       <LayoutDirection>
         <BoxWrapper mt={3} px={1}>
           <Link

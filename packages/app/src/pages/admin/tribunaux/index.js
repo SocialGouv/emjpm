@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { Flex, Box } from "rebass";
 import { Helmet } from "react-helmet";
 
-import { Button, Tabs as TabsComponent } from "~/components";
+import { Button, SkipToContent, Tabs as TabsComponent } from "~/components";
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import { Provider as AdminFilterProvider } from "~/containers/FilterWidgets/context";
 
@@ -23,6 +23,7 @@ function AdminTribunauxPage() {
       <Helmet>
         <title>Liste des tribunaux | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="search_filter" />
       <AdminFilterProvider>
         <LayoutAdmin>
           <BoxWrapper mt={3} px="1">
