@@ -7,6 +7,7 @@ import { LayoutDirection } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheServiceCreate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ListBlanchePage() {
   const history = useHistory();
@@ -15,6 +16,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Ajout d'un engistrement à la liste blanche | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="list_blanche_service_create" />
       <LayoutDirection>
         <BoxWrapper mt={3} px={1}>
           <Link

@@ -2,7 +2,7 @@ import { useHistory } from "react-router-dom";
 import { Flex, Box } from "rebass";
 import { Helmet } from "react-helmet";
 
-import { Button } from "~/components";
+import { Button, SkipToContent } from "~/components";
 import { AdminEditorRequest, AdminEditors } from "~/containers/AdminEditors";
 import { AdminFilterBar } from "~/containers/AdminFilterBar";
 import SearchFilter from "~/containers/FilterWidgets/SearchFilter";
@@ -15,6 +15,7 @@ function AdminEditorsPage() {
   const history = useHistory();
   return (
     <>
+      <SkipToContent skipTo="search_filter" />
       <Helmet>
         <title>Liste des éditeurs | e-MJPM </title>
       </Helmet>

@@ -52,7 +52,7 @@ export function MagistratMesureAddForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex id="magistrat_mesure_add">
         <FormGrayBox>
           <Heading size={4} id="jugement_heading">
             Jugement

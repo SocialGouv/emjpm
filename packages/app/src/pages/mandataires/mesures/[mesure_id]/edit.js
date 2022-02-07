@@ -8,6 +8,7 @@ import { MesureEdit } from "~/containers/MesureEdit";
 import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
+import { SkipToContent } from "~/components";
 
 function EditMesurePage() {
   const { mesure_id } = useParams();
@@ -18,10 +19,11 @@ function EditMesurePage() {
       <Helmet>
         <title>Edition de la mesure | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="edit_mesure" />
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
           <BoxWrapper mt={1}>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" id="edit_mesure">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureEdit />
             </Flex>

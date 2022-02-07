@@ -5,6 +5,7 @@ import { LayoutMandataire } from "~/containers/Layout";
 import { MandataireBoard } from "~/containers/MandataireBoard";
 import { StatisticMesureNature } from "~/containers/StatisticMesureNature";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function MandataireBoardView() {
   return (
@@ -12,6 +13,7 @@ function MandataireBoardView() {
       <Helmet>
         <title>Tableau de bard | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="vos_indicateurs" />
       <LayoutMandataire>
         <BoxWrapper mt={3} px="1">
           <Flex>

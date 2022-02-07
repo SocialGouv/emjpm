@@ -46,7 +46,7 @@ const MesureImportResult = ({
             <>
               {errors.length ? (
                 <Text
-                  aria-live="polite"
+                  role="status"
                   m={2}
                   fontSize={2}
                 >{`Erreur lors de l'import des mesures (${
@@ -55,7 +55,7 @@ const MesureImportResult = ({
                   errors.length + creationNumber + updateNumber
                 } mesures). Aucune mesure n'a été importée.`}</Text>
               ) : (
-                <Text m={2} fontSize={2} aria-live="polite">{`${
+                <Text m={2} fontSize={2} role="status">{`${
                   creationNumber + updateNumber
                 } mesures ont été importées (${creationNumber} nouvelles et ${updateNumber} mises à jour).`}</Text>
               )}

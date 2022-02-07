@@ -23,7 +23,7 @@ function BaseCheckBox(props) {
 function CheckBox(props) {
   const { label, name, isChecked, onChange } = props;
   return (
-    <Box sx={CheckboxWrapperStyle}>
+    <Box sx={CheckboxWrapperStyle} tabIndex="0">
       <Box htmlFor={name} as="label">
         <Box
           sx={CheckboxInputStyle()}

@@ -8,6 +8,7 @@ import { MandataireOcmiMesureImport } from "~/containers/MandataireOcmiMesureImp
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function ImportMesures() {
   const user = useUser();
@@ -39,8 +40,9 @@ function ImportMesures() {
       <Helmet>
         <title>Importez vos mesures | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="import_box_wrapper" />
       <LayoutMandataire>
-        <BoxWrapper mt={3} px="1">
+        <BoxWrapper mt={3} px="1" id="import_box_wrapper">
           <Flex>
             {ocmi_mandataire && (
               <ImportTypeTab type="ocmi">

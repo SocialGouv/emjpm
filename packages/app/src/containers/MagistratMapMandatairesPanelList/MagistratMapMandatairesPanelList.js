@@ -71,7 +71,13 @@ function MagistratMapMandatairesPanelList() {
   );
 
   return (
-    <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
+    <Box
+      pt="2"
+      px="2"
+      sx={MagistratMapMandataireListStyle}
+      id="magistrats_map"
+      tabIndex="0"
+    >
       <Scrollbar style={{ height: "100%", width: "100%" }}>
         <Box mr="1" mb="4">
           {gestionnaires.map((gestionnaire) => {

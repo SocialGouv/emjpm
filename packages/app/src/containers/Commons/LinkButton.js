@@ -44,6 +44,10 @@ function LinkButtonStyle(isActive, props) {
               opacity: "0.8",
               textDecoration: "none",
             },
+            "&:focus": {
+              outline: "none",
+              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4)",
+            },
           }),
     };
   }

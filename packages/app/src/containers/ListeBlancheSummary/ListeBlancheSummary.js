@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Card, Heading, Text } from "~/components";
+import { Card, Heading, SrOnly, Text } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { LB_SUMMARY } from "./queries";
@@ -81,31 +81,46 @@ function ListeBlancheSummary() {
     },
   } = data;
 
-  return (
-    <Card>
-      <Flex>
-        <Box width={1 / 2}>
-          <Heading size={2}>{departementLabel}</Heading>
-        </Box>
-      </Flex>
+  const resultCount =
+    Number(individuelCount) +
+    Number(preposeCount) +
+    Number(individuelFinanceDepartementCount) +
+    Number(serviceCount);
 
-      <Flex flexDirection="column" pt={1}>
-        <LabelValue
-          label="Mandataire individuel"
-          value={
-            `${individuelCount}` +
-            (!departement
-              ? ""
-              : " dont " + individuelFinanceDepartementCount + " financés")
-          }
-        />
-        <LabelValue
-          label="Mandataire préposé à un établissement"
-          value={`${preposeCount}`}
-        />
-        <LabelValue label="Services" value={`${serviceCount}`} />
-      </Flex>
-    </Card>
+  return (
+    <>
+      <SrOnly role="status">
+        <p>
+          {resultCount === 0
+            ? "Pas de donnée à afficher"
+            : `${resultCount} résultats`}{" "}
+        </p>
+      </SrOnly>
+      <Card tabIndex="0">
+        <Flex>
+          <Box width={1 / 2}>
+            <Heading size={2}>{departementLabel}</Heading>
+          </Box>
+        </Flex>
+
+        <Flex flexDirection="column" pt={1}>
+          <LabelValue
+            label="Mandataire individuel"
+            value={
+              `${individuelCount}` +
+              (!departement
+                ? ""
+                : " dont " + individuelFinanceDepartementCount + " financés")
+            }
+          />
+          <LabelValue
+            label="Mandataire préposé à un établissement"
+            value={`${preposeCount}`}
+          />
+          <LabelValue label="Services" value={`${serviceCount}`} />
+        </Flex>
+      </Card>
+    </>
   );
 }
 

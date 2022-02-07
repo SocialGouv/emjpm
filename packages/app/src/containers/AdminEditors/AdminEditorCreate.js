@@ -44,7 +44,7 @@ export function AdminEditorCreate() {
   }
 
   return (
-    <Card sx={cardStyle} p="0" width="100%">
+    <Card sx={cardStyle} p="0" width="100%" id="admin_editor_create">
       <AdminEditorForm
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}

@@ -5,7 +5,13 @@ import { AdminFilterBarStyle } from "./style";
 
 function AdminFilterBar({ children }) {
   return (
-    <Card mt="3" sx={AdminFilterBarStyle} mb={2}>
+    <Card
+      mt="3"
+      sx={AdminFilterBarStyle}
+      mb={2}
+      id="search_filter"
+      tabIndex="0"
+    >
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         {children}
       </Flex>

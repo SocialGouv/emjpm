@@ -84,7 +84,7 @@ export function ListeBlancheServiceUpdate(props) {
   }
 
   return (
-    <Card p={5}>
+    <Card p={5} id="list_blanche_service_update">
       <Helmet>
         <title>{capitalize(service.etablissement)} - Service | e-MJPM</title>
       </Helmet>

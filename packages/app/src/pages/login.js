@@ -4,9 +4,8 @@ import { Helmet } from "react-helmet";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutPublic } from "~/containers/Layout";
 import { Login, LoginCreateAccount } from "~/containers/Login";
-import { Heading } from "~/components";
+import { Heading, SkipToContent } from "~/components";
 import { BoxWrapper, FlexWrapper } from "~/components/Grid";
-
 import { ExcludeBrowserBanner } from "~/containers/ExcludeBrowserBanner";
 
 import config from "~/config";
@@ -19,6 +18,7 @@ function LoginPage() {
       <Helmet>
         <title>Connectez-vous à votre compte | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="login_box" />
       <LayoutPublic>
         <BoxWrapper>
           {!IS_PROD && (

@@ -4,6 +4,7 @@ import { DirectionEditInformations } from "~/containers/DirectionEditInformation
 import { LayoutDirection } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function EditInformations() {
   const redirectLink = "/direction/informations";
@@ -13,6 +14,7 @@ function EditInformations() {
       <Helmet>
         <title>Modifier vos informations | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="modifier_vos_informations_heading" />
       <LayoutDirection>
         <BoxWrapper mt={3} px="1">
           <DirectionEditInformations

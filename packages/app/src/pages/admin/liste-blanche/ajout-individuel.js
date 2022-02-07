@@ -6,6 +6,7 @@ import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheIndividuelCreate } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 export default function ListBlancheAjoutIndividuel() {
   return (
@@ -15,6 +16,7 @@ export default function ListBlancheAjoutIndividuel() {
           Ajout d'un mandataire individuel à la liste blanche | e-MJPM
         </title>
       </Helmet>
+      <SkipToContent skipTo="liste_blanche_individuel_create" />
       <LayoutAdmin>
         <BoxWrapper mt={3} px={1}>
           <Link

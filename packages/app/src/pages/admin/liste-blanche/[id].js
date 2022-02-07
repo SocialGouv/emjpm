@@ -6,6 +6,7 @@ import { LayoutAdmin } from "~/containers/Layout";
 import { Link } from "~/components/Link";
 import { ListeBlancheEdit } from "~/containers/ListeBlanche";
 import { BoxWrapper } from "~/components/Grid";
+import { SkipToContent } from "~/components";
 
 function ListeBlancheDetailPage() {
   const { id: paramId } = useParams();
@@ -18,6 +19,7 @@ function ListeBlancheDetailPage() {
       <Helmet>
         <title>Liste blanche {`${paramId}`} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="list_blanche_edit" />
       <LayoutAdmin>
         <BoxWrapper mt={3} px={1}>
           <Link

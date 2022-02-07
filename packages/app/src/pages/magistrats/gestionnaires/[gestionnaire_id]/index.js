@@ -5,6 +5,7 @@ import { BoxWrapper } from "~/components/Grid";
 
 import { useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function Gestionnaire() {
   const { gestionnaire_id } = useParams();
@@ -19,6 +20,7 @@ function Gestionnaire() {
       <Helmet>
         <title>Gestionnaire {gestionnaire_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="reserver_mesure" />
       <LayoutMagistrat>
         <BoxWrapper mt={3} px="0">
           <MagistratMandataire gestionnaireId={gestionnaireId} tiId={tiId} />

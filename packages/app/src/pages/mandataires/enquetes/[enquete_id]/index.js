@@ -10,6 +10,7 @@ import { LayoutMandataire } from "~/containers/Layout";
 import useUser from "~/hooks/useUser";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function MandataireEnquetePage() {
   const history = useHistory();
@@ -51,8 +52,9 @@ function MandataireEnquetePage() {
       <Helmet>
         <title>Enquête {enquete_id} | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="enquete_reponse" />
       <LayoutMandataire>
-        <BoxWrapper>
+        <BoxWrapper id="enquete_reponse">
           <EnqueteReponse
             enquete={enquete}
             enqueteReponse={enqueteReponse}

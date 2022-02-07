@@ -206,7 +206,7 @@ function GreffierMesureAdd(props) {
       };
 
   return (
-    <Box>
+    <Box id="greffier_mesure_add">
       {serviceId && <GreffierMesureServiceTitle id={serviceId} />}
       {mandataireId && <GreffierMesureMandataireTitle id={mandataireId} />}
       <Box sx={GreffierMandataireStyle} {...props}>

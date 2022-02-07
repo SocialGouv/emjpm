@@ -6,6 +6,7 @@ import { GreffierMandatairesMap } from "~/containers/GreffierMandatairesMap";
 import { GreffierMapMandatairesPanelList } from "~/containers/GreffierMapMandatairesPanelList";
 import { MapContextProvider } from "~/containers/Map/context";
 import useUser from "~/hooks/useUser";
+import { SkipToContent } from "~/components";
 
 function Map() {
   const { greffier } = useUser();
@@ -17,6 +18,7 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="greffier_mandataires_list" />
       <MapContextProvider latitude={latitude} longitude={longitude}>
         <LayoutGreffierMap>
           <Flex

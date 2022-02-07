@@ -8,6 +8,7 @@ import { GreffierMesures } from "~/containers/GreffierMesures";
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 export default function Mesures() {
   return (
@@ -15,6 +16,7 @@ export default function Mesures() {
       <Helmet>
         <title>Toutes vos mesures | e-MJPM </title>
       </Helmet>
+      <SkipToContent skipTo="greffier_filter" />
       <FiltersContextProvider
         initialValues={{ natureMesure: DEFAULT_MESURE_NATURE }}
       >

@@ -83,7 +83,10 @@ export function MagistratMandataire(props) {
           {serviceId && <Heading size={2}>{etablissement}</Heading>}
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-          <Link to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}>
+          <Link
+            to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
+            id="reserver_mesure"
+          >
             <Button>Réserver une mesure</Button>
           </Link>
         </Flex>

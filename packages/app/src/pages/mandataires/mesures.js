@@ -12,6 +12,7 @@ import {
 } from "~/constants/mesures";
 import { BoxWrapper } from "~/components/Grid";
 import { Helmet } from "react-helmet";
+import { SkipToContent } from "~/components";
 
 function MesuresListView() {
   return (
@@ -19,6 +20,7 @@ function MesuresListView() {
       <Helmet>
         <title>Vos mesures | e-MJPM</title>
       </Helmet>
+      <SkipToContent skipTo="mesures_list_filter" />
       <FiltersContextProvider
         initialValues={{
           mesureStatus: MESURE_STATUS_LABEL_VALUE[0],
@@ -27,7 +29,11 @@ function MesuresListView() {
       >
         <LayoutMandataire>
           <BoxWrapper mt={3} px="1">
-            <Flex flexDirection="row" justifyContent="space-between">
+            <Flex
+              flexDirection="row"
+              justifyContent="space-between"
+              id="mesures_list_filter"
+            >
               <HeadingTitle>Vos mesures</HeadingTitle>
               <MesureListButtonBar />
             </Flex>

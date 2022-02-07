@@ -33,7 +33,7 @@ export function DirectionFilters(props) {
     return createDepartementOptions(departements);
   }, [regionFilter]);
   return (
-    <Card>
+    <Card id="direction_filter">
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>

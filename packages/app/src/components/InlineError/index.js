@@ -12,7 +12,6 @@ function InlineError({ message, fieldId, showError, ...props }) {
         alignItems="center"
         color="error"
         {...props}
-        role="status"
       >
         <Box style={{ minWidth: "18px" }}>
           <Exclamation size="18" />
@@ -24,6 +23,7 @@ function InlineError({ message, fieldId, showError, ...props }) {
             style={{
               whiteSpace: "pre-line",
             }}
+            role="alert"
           >
             {message}
           </Text>
