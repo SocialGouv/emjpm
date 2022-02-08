@@ -219,11 +219,14 @@ export function ListeBlancheServiceForm(props) {
     <form noValidate onSubmit={formik.handleSubmit}>
       <Flex>
         <FormGrayBox>
-          <Heading size={4} mb={1} id="service_tutelaire_heading">
+          <Heading size={4} mb={1} id="structure_juridique_heading">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox role="group" aria-labelledby="service_tutelaire_heading">
+        <FormInputBox
+          role="group"
+          aria-labelledby="structure_juridique_heading"
+        >
           <FormGroupInput
             placeholder="Nom du service"
             id="etablissement"
