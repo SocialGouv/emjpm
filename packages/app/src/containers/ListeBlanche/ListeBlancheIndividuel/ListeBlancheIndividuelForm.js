@@ -51,7 +51,10 @@ const lbSchema = ({ apolloClient, isCreate }) =>
     siret: yup
       .string()
       .nullable()
-      .matches(/^[0-9]{14}$/, "Le SIRET doit être composé de 14 chiffres.")
+      .matches(
+        /^[0-9]{14}$/,
+        "Le SIRET est composé de 14 chiffres. Par exemple: 82254321300027."
+      )
       .required()
       .test(
         "siret-duplicate",
