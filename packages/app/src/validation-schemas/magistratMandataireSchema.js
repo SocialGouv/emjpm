@@ -1,4 +1,4 @@
-import yup, { FORM_YEAR_NOT_VALID } from "./yup";
+import yup, { FORM_YEAR_NOT_VALID, FORM_DATE_NOT_VALID } from "./yup";
 import {
   validateNumeroRG,
   checkNumeroRgAlphanum,
@@ -22,7 +22,7 @@ const magistratMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
     cabinet: yup.string().nullable(),
     champ_mesure: yup.string().nullable(),
     civilite: yup.string().required(),
-    judgmentDate: yup.date(),
+    judgmentDate: yup.date(FORM_DATE_NOT_VALID),
     nature_mesure: yup.string().required(),
     numero_rg: yup
       .string()

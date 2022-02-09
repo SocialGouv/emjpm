@@ -1,10 +1,16 @@
-import yup, { FORM_REQUIRED_MESSAGE, EMAIL_NOT_VALID } from "./yup";
+import yup, {
+  FORM_REQUIRED_MESSAGE,
+  EMAIL_NOT_VALID,
+  NOM_NOT_VALID,
+  PRENOM_NOT_VALID,
+  TELEPHONE_NOT_VALID,
+} from "./yup";
 import { validateGeocode } from "./fieldValidators";
 
 const adminUserServiceSchema = yup.object().shape({
   user_email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
-  user_nom: yup.string().required(),
-  user_prenom: yup.string().required(),
+  user_nom: yup.string().required(NOM_NOT_VALID),
+  user_prenom: yup.string().required(PRENOM_NOT_VALID),
   user_genre: yup.string().nullable().required(),
   competences: yup.string().max(255, "Maximum 255 caractères"),
   dispo_max: yup
@@ -27,7 +33,7 @@ const adminUserServiceSchema = yup.object().shape({
         path,
       });
     }),
-  email: yup.string(EMAIL_NOT_VALID).required(),
+  email: yup.string(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   geocode: yup
     .object()
     .required()
@@ -51,9 +57,9 @@ const adminUserServiceSchema = yup.object().shape({
   ville: yup.string().nullable(),
   etablissement: yup.string().required(),
   genre: yup.string().nullable().required(),
-  nom: yup.string().required(),
-  prenom: yup.string().required(),
-  telephone: yup.string(),
+  nom: yup.string().required(NOM_NOT_VALID),
+  prenom: yup.string().required(PRENOM_NOT_VALID),
+  telephone: yup.string(TELEPHONE_NOT_VALID),
   tis: yup.mixed().required(),
 });
 

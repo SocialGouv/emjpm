@@ -1,4 +1,8 @@
-import yup, { FORM_YEAR_NOT_VALID } from "./yup";
+import yup, {
+  FORM_YEAR_NOT_VALID,
+  CODE_POSTAL_NOT_VALID,
+  FORM_DATE_NOT_VALID,
+} from "./yup";
 import {
   validateNumeroRG,
   checkNumeroRgAlphanum,
@@ -19,20 +23,29 @@ const mesureEditSchema = ({ apolloClient }) =>
       .number(FORM_YEAR_NOT_VALID)
       .nullable()
       .required(FORM_YEAR_NOT_VALID)
-      .min(1900, "l'année choisi doit être au minimum 1900")
-      .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
+      .min(1900, "l'année choisi doit être au minimum 1900. Par exemple: 1970.")
+      .max(
+        currentYear,
+        `l'année choisi doit être au maximum  ${currentYear}. Par exemple: 1970.`
+      ),
     antenne: yup.string().nullable(),
     civilite: yup.string().required(),
     code_postal: yup
       .string()
       .when("pays", {
         is: (pays) => pays === "FR",
-        then: yup.string().length(5).required(),
+        then: yup.string().length(5).required(CODE_POSTAL_NOT_VALID),
       })
       .nullable(),
-    date_nomination: yup.date().required().nullable(),
-    date_premier_mesure: yup.date().nullable(),
-    date_protection_en_cours: yup.date().required().nullable(),
+    date_nomination: yup
+      .date(FORM_DATE_NOT_VALID)
+      .required(FORM_DATE_NOT_VALID)
+      .nullable(),
+    date_premier_mesure: yup.date(FORM_DATE_NOT_VALID).nullable(),
+    date_protection_en_cours: yup
+      .date(FORM_DATE_NOT_VALID)
+      .required(FORM_DATE_NOT_VALID)
+      .nullable(),
     numero_dossier: yup.string(),
     numero_rg: yup
       .string()
