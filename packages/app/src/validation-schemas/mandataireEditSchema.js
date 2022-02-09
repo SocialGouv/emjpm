@@ -1,5 +1,11 @@
 import { validateGeocode } from "./fieldValidators";
-import yup, { FORM_REQUIRED_MESSAGE, EMAIL_NOT_VALID } from "./yup";
+import yup, {
+  FORM_REQUIRED_MESSAGE,
+  EMAIL_NOT_VALID,
+  NOM_NOT_VALID,
+  PRENOM_NOT_VALID,
+  TELEPHONE_NOT_VALID,
+} from "./yup";
 
 import { checkDuplicateMandataireSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
@@ -7,7 +13,10 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
   let siret = yup
     .string()
     .nullable()
-    .matches(/^[0-9]{14}$/, "Le SIRET est composé de 14 chiffres")
+    .matches(
+      /^[0-9]{14}$/,
+      "Le SIRET est composé de 14 chiffres. Par exemple: 82254321300027."
+    )
     .test(
       "siret-duplicate",
       "Le numéro SIRET que vous venez de saisir existe déjà pour un mandataire sur eMJPM.",
@@ -31,8 +40,8 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
       .required()
       .nullable()
       .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
-    nom: yup.string().required(),
-    prenom: yup.string().required(),
+    nom: yup.string().required(NOM_NOT_VALID),
+    prenom: yup.string().required(PRENOM_NOT_VALID),
     adresse: yup
       .string()
       .nullable()
@@ -48,7 +57,7 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
         }
       ),
     adresse_complement: yup.string().nullable(),
-    telephone: yup.string().required(),
+    telephone: yup.string().required(TELEPHONE_NOT_VALID),
     telephone_portable: yup.string(),
     tis: yup.mixed().required(),
     siret,

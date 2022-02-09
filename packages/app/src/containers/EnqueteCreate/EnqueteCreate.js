@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 
 import { useHistory } from "react-router-dom";
 
-import yup from "~/validation-schemas/yup";
+import yup, { FORM_DATE_NOT_VALID } from "~/validation-schemas/yup";
 import { Button, Field, InlineError, InputDate, InputYear } from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
@@ -40,10 +40,13 @@ export function EnqueteCreate() {
       history.push("/direction/enquetes");
     },
     validationSchema: yup.object().shape({
-      endedAt: yup.date().required(),
+      endedAt: yup.date(FORM_DATE_NOT_VALID).required(FORM_DATE_NOT_VALID),
       year: yup
         .string()
-        .matches(/^[0-9]{4}$/, "L'année doit comporter 4 chiffres.")
+        .matches(
+          /^[0-9]{4}$/,
+          "L'année doit comporter 4 chiffres. Par exemple: 01/01/2021."
+        )
         .required(),
     }),
   });

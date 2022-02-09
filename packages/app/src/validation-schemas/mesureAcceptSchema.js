@@ -1,14 +1,14 @@
 import { isTypeEtablissementRequired } from "@emjpm/biz";
 
-import yup from "./yup";
+import yup, { CODE_POSTAL_NOT_VALID, FORM_DATE_NOT_VALID } from "./yup";
 
 const mesureAcceptSchema = yup.object().shape({
   antenne: yup.string().nullable(),
   code_postal: yup.string().when("pays", {
     is: (pays) => pays === "FR",
-    then: yup.string().length(5).required(),
+    then: yup.string().length(5).required(CODE_POSTAL_NOT_VALID),
   }),
-  date_nomination: yup.date().required(),
+  date_nomination: yup.date(FORM_DATE_NOT_VALID).required(FORM_DATE_NOT_VALID),
   lieu_vie: yup.string().required(),
   pays: yup.string().required(),
   type_etablissement: yup

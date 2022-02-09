@@ -1,4 +1,4 @@
-import yup from "./yup";
+import yup, { EMAIL_NOT_VALID, SIRET_NOT_VALID } from "./yup";
 
 import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
@@ -12,13 +12,16 @@ const adminServiceSchema = ({ apolloClient }) =>
         })
       )
       .required(),
-    email: yup.string().email(),
+    email: yup.string().email(EMAIL_NOT_VALID),
     etablissement: yup.string().required(),
     adresse: yup.string().nullable().required(),
     code_postal: yup
       .string()
       .nullable()
-      .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
+      .matches(
+        /^[0-9]{5}$/,
+        "Le code postal doit être composé de 5 chiffres. Par exemple: 75001."
+      )
       .required(),
     ville: yup.string().nullable().required(),
     org_adresse: yup.string().nullable().when("org_gestionnaire", {
@@ -28,7 +31,10 @@ const adminServiceSchema = ({ apolloClient }) =>
     org_code_postal: yup
       .string()
       .nullable()
-      .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
+      .matches(
+        /^[0-9]{5}$/,
+        "Le code postal doit être composé de 5 chiffres. Par exemple: 75001."
+      )
       .when("org_gestionnaire", {
         is: true,
         then: yup.string().required(),
@@ -45,7 +51,7 @@ const adminServiceSchema = ({ apolloClient }) =>
     siret: yup
       .string()
       .nullable()
-      .matches(/^[\d]{14}$/, "Doit contenir exactement 14 chiffres")
+      .matches(/^[\d]{14}$/, SIRET_NOT_VALID)
       .required()
       .test(
         "siret-duplicate",
