@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { Select } from "~/components";
+import { AccessibleSelect as Select } from "~/components";
 import MandataireListItem from "~/containers/MandataireListItem";
 
 import {

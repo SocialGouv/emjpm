@@ -16,7 +16,7 @@ import {
 import { GeocodeCities } from "~/components/Geocode";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureCreateSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError } from "~/components";
+import { Button, Field, Heading, InlineError, SrOnly } from "~/components";
 
 function initialValues() {
   return {
@@ -81,7 +81,11 @@ export function MesureCreateForm(props) {
                   }
                 }}
                 errorMessage={formik.errors.numero_rg}
+                aria-describedby="format_rg_attendu"
               />
+              <SrOnly id="format_rg_attendu">
+                Format : 8 chiffres ou lettres. Exemple : 12A34567
+              </SrOnly>
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
