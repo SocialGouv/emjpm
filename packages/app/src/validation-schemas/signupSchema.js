@@ -1,6 +1,10 @@
 import yup from "./yup";
 
-import { EMAIL_NOT_VALID } from "~/validation-schemas/yup";
+import {
+  EMAIL_NOT_VALID,
+  PRENOM_NOT_VALID,
+  NOM_NOT_VALID,
+} from "~/validation-schemas/yup";
 
 const signupSchema = yup.object().shape({
   confirmPassword: yup
@@ -9,7 +13,7 @@ const signupSchema = yup.object().shape({
     .label("Confirmation du mot de passe")
     .oneOf([yup.ref("password"), null], "Les mots de passe ne sont pas égaux"),
   email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
-  nom: yup.string().required(),
+  nom: yup.string().required(NOM_NOT_VALID),
   password: yup
     .string()
     .label("Mot de passe")
@@ -22,7 +26,7 @@ const signupSchema = yup.object().shape({
           "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale",
       }
     ),
-  prenom: yup.string().required(),
+  prenom: yup.string().required(PRENOM_NOT_VALID),
   type: yup.string().required(),
   genre: yup.string().oneOf(["F", "H"]).required(),
 });

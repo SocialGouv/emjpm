@@ -1,4 +1,4 @@
-import yup from "./yup";
+import yup, { NIVEAU_DE_RESSOURCE_NOT_VALID } from "./yup";
 
 const currentYear = new Date().getFullYear();
 
@@ -6,9 +6,21 @@ const mesureRessourceSchema = yup.object().shape({
   annee: yup
     .number()
     .nullable()
-    .min(1900, "l'année choisi doit être au minimum 1900")
-    .max(currentYear, "l'année choisi doit être au maximum " + currentYear),
-  niveau_ressource: yup.number().required(),
+    .min(
+      1900,
+      `l'année choisi doit être au minimum 1900. Par exemple ${
+        Number(currentYear) - 1
+      }`
+    )
+    .max(
+      currentYear,
+      `l'année choisi doit être au maximum  ${currentYear}. Par exemple: ${
+        Number(currentYear) - 1
+      }`
+    ),
+  niveau_ressource: yup
+    .number(NIVEAU_DE_RESSOURCE_NOT_VALID)
+    .required(NIVEAU_DE_RESSOURCE_NOT_VALID),
   prestations_sociales: yup
     .array()
     .of(yup.string())

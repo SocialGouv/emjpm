@@ -6,13 +6,16 @@ import * as Yup from "yup";
 
 import { FormGroupSelect, FormGroupInputDate } from "~/components/AppForm";
 import { Button, Heading } from "~/components";
+import { FORM_DATE_NOT_VALID } from "../../validation-schemas/yup";
 
 export function MesureCloseForm(props) {
   const { handleSubmit, handleCancel } = props;
 
   const validationSchema = Yup.object().shape({
     cause_sortie: Yup.string().required(),
-    date_fin_mesure: Yup.date().nullable().required(),
+    date_fin_mesure: Yup.date(FORM_DATE_NOT_VALID)
+      .nullable()
+      .required(FORM_DATE_NOT_VALID),
   });
 
   const formik = useFormik({
