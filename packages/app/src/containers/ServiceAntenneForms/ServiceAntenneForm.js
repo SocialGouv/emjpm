@@ -169,6 +169,8 @@ function ServiceAntenneForm(props) {
             onClick={() => {
               history.push("/services/informations");
             }}
+            title="Annuler la création d'antenne"
+            aria-label="Annuler la création d'antenne"
           >
             Annuler
           </Button>
@@ -178,6 +180,8 @@ function ServiceAntenneForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la création d'antenne"
+            aria-label="Enregistrer la création d'antenne"
           >
             Enregistrer
           </Button>

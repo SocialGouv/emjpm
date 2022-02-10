@@ -124,7 +124,11 @@ export function SignupDirection() {
 
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link to="/">
+            <Link
+              to="/"
+              aria-label="Annuler la création de votre compte"
+              title="Annuler la création de votre compte"
+            >
               <Button mr="2" variant="outline">
                 Annuler
               </Button>
@@ -137,6 +141,8 @@ export function SignupDirection() {
               onClick={() => {
                 validateStepOne(false);
               }}
+              aria-label="Retour à la page précédente"
+              title="Retour"
             >
               Retour
             </Button>
@@ -146,6 +152,8 @@ export function SignupDirection() {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              aria-label="Enregistrer la création de votre compte"
+              title="Enregistrer la création de votre compte"
             >
               Enregistrer
             </Button>

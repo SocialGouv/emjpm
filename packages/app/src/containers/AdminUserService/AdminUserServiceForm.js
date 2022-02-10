@@ -383,7 +383,11 @@ function AdminUserServiceForm(props) {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link to={cancelLink}>
+          <Link
+            to={cancelLink}
+            title="Annuler la modification de vos informations"
+            aria-label="Annuler la modification de vos informations"
+          >
             <Button variant="outline">Annuler</Button>
           </Link>
         </Box>
@@ -392,6 +396,8 @@ function AdminUserServiceForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la modification de vos informations"
+            aria-label="Enregistrer la modification de vos informations"
           >
             Enregistrer
           </Button>

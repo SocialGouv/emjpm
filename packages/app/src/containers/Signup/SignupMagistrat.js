@@ -90,7 +90,11 @@ function SignupMagistratForm({ tiDatas }) {
 
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link to="/">
+            <Link
+              to="/"
+              aria-label="Annuler la création de votre compte"
+              title="Annuler la création de votre compte"
+            >
               <Button mr="2" variant="outline">
                 Annuler
               </Button>
@@ -104,6 +108,8 @@ function SignupMagistratForm({ tiDatas }) {
                 setMagistrat(formik.values);
                 validateStepOne(false);
               }}
+              aria-label="Retour à la page précédente"
+              title="Retour"
             >
               Retour
             </Button>
@@ -113,6 +119,8 @@ function SignupMagistratForm({ tiDatas }) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              aria-label="Enregistrer la création de votre compte"
+              title="Enregistrer la création de votre compte"
             >
               Enregistrer
             </Button>
