@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.149.0](https://github.com/SocialGouv/emjpm/compare/v25.148.5...v25.149.0) (2022-02-10)
+
+
+### Features
+
+* **ocmi-sync:** mesures last update fix [#2774](https://github.com/SocialGouv/emjpm/issues/2774) ([9e7feaa](https://github.com/SocialGouv/emjpm/commit/9e7feaad3f72269e296979fd17a125852ca89d21))
+
+
+
+
+
 ## [25.148.5](https://github.com/SocialGouv/emjpm/compare/v25.148.2...v25.148.5) (2022-02-10)
 
 

@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.149.0](https://github.com/SocialGouv/emjpm/compare/v25.148.5...v25.149.0) (2022-02-10)
+
+
+### Bug Fixes
+
+* **404:** cancel link direction fix [#2779](https://github.com/SocialGouv/emjpm/issues/2779) ([8f1f85b](https://github.com/SocialGouv/emjpm/commit/8f1f85b05060b6c622d0b8f5299abbe45d0d8db8))
+* **count:** pagination fix [#2772](https://github.com/SocialGouv/emjpm/issues/2772) ([da9f69b](https://github.com/SocialGouv/emjpm/commit/da9f69b6e408c83627417b1a585287ff6b23ece6))
+* **required:** asterisk fix [#2770](https://github.com/SocialGouv/emjpm/issues/2770) ([aaca365](https://github.com/SocialGouv/emjpm/commit/aaca365b6d7c60a46a6bb124b149e35579e46384))
+* **typo:** bard -> bord ([f2633a6](https://github.com/SocialGouv/emjpm/commit/f2633a60d30bc94339370e92dd828623bfdf185c))
+
+
+
+
+
 ## [25.148.5](https://github.com/SocialGouv/emjpm/compare/v25.148.2...v25.148.5) (2022-02-10)
 
 
