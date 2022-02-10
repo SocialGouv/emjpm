@@ -175,13 +175,21 @@ function EditPassword() {
               </Box>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">
-                  <Link to={`${PATH[type]}/informations`}>Annuler</Link>
+                  <Link
+                    to={`${PATH[type]}/informations`}
+                    title="Annuler la modification de votre mot de passe"
+                    aria-label="Annuler la modification de votre mot de passe"
+                  >
+                    Annuler
+                  </Link>
                 </Box>
                 <Box>
                   <Button
                     type="submit"
                     disabled={formik.isSubmitting}
                     isLoading={formik.isSubmitting}
+                    title="Enregistrer la modification de votre mot de passe"
+                    aria-label="Enregistrer la modification de votre mot de passe"
                   >
                     Enregistrer
                   </Button>

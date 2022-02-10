@@ -203,7 +203,8 @@ export function SignupForm() {
               onClick={() => {
                 history.push("/");
               }}
-              aria-label="Annuler"
+              aria-label="Annuler la création de votre compte"
+              title="Annuler la création de votre compte"
             >
               Annuler
             </Button>
@@ -213,7 +214,8 @@ export function SignupForm() {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
-              aria-label="Suivant"
+              aria-label="Aller à la page suivante"
+              title="Suivant"
             >
               Suivant
             </Button>

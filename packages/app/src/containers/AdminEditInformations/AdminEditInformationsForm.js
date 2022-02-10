@@ -65,7 +65,13 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Link to={cancelLink}>
-            <Button variant="outline">Annuler</Button>
+            <Button
+              variant="outline"
+              title="Annuler la modification de vos informations"
+              aria-label="Annuler la modification de vos informations"
+            >
+              Annuler
+            </Button>
           </Link>
         </Box>
         <Box>
@@ -73,6 +79,8 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la modification de vos informations"
+            aria-label="Enregistrer la modification de vos informations"
           >
             Enregistrer
           </Button>
