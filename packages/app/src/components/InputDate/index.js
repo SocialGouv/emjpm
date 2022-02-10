@@ -41,13 +41,14 @@ export default function InputDate(props) {
   if (!label && props.placeholderText) {
     label = props.placeholderText;
   }
+  const labelFor = props?.id || props?.label;
 
   return (
     <>
       {label && (
         <Label
           aria-describedby={props.id}
-          htmlFor={props.id}
+          htmlFor={labelFor}
           isActive={props.isActive}
           aria-required={props.required}
           required={props.required}
@@ -66,6 +67,7 @@ export default function InputDate(props) {
         selected={selected}
         className={classNames("datepicker", className)}
         {...datePickerProps}
+        id={labelFor}
       />
     </>
   );

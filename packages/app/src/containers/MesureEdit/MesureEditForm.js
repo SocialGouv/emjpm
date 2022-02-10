@@ -16,7 +16,7 @@ import {
 } from "~/components/AppForm";
 import TribunalAutoComplete from "~/containers/TribunalAutoComplete";
 import { mesureEditSchema } from "~/validation-schemas";
-import { Button, Heading } from "~/components";
+import { Button, Heading, SrOnly } from "~/components";
 
 import isInt from "~/utils/std/isInt";
 
@@ -86,7 +86,11 @@ export function MesureEditForm(props) {
                   }
                 }}
                 errorMessage={formik.errors.numero_rg}
+                aria-describedby="format_rg_attendu"
               />
+              <SrOnly id="format_rg_attendu">
+                Format : 8 chiffres ou lettres. Exemple : 12A34567
+              </SrOnly>
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
