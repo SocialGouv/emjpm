@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.148.5](https://github.com/SocialGouv/emjpm/compare/v25.148.2...v25.148.5) (2022-02-10)
+
+
+### Bug Fixes
+
+* **api:** mesure etat dedup ([#2766](https://github.com/SocialGouv/emjpm/issues/2766)) ([702b0f5](https://github.com/SocialGouv/emjpm/commit/702b0f50d69fad9bde44d01582c3453853f93cc7))
+* **genre:** field to users table ([2333b3f](https://github.com/SocialGouv/emjpm/commit/2333b3f367903640a72b8b4a0286392f18a07259))
+* **genre-icons:** m to h ([488f6a6](https://github.com/SocialGouv/emjpm/commit/488f6a61c524742e935433fab80ad5dffc57b97c))
+* **genre-icons:** size ([6fe8e63](https://github.com/SocialGouv/emjpm/commit/6fe8e63fa9dc52f7f7e297c84787bf97263ac47b))
+* **mesure-etat:** getDate not getDay !!! ([#2767](https://github.com/SocialGouv/emjpm/issues/2767)) ([70e9a79](https://github.com/SocialGouv/emjpm/commit/70e9a795803e1315bf2bbbeb47ce11e7bb57d276))
+* **react:** missing key ([102ea85](https://github.com/SocialGouv/emjpm/commit/102ea85827024293567a7655e2eefc77b577535e))
+* **rgaa:** add aria label for male/female icons ([#2771](https://github.com/SocialGouv/emjpm/issues/2771)) ([14ca343](https://github.com/SocialGouv/emjpm/commit/14ca343c7c2b128bfa6ed657f2bbfdec86045fd6))
+* **rgaa:** add skip to content feature ([#2780](https://github.com/SocialGouv/emjpm/issues/2780)) ([63d007b](https://github.com/SocialGouv/emjpm/commit/63d007b7be04078ce8e3a7ed38dd7256e2f1f88d))
+* **rgaa:** add suitable title for pages ([#2773](https://github.com/SocialGouv/emjpm/issues/2773)) ([c1f1799](https://github.com/SocialGouv/emjpm/commit/c1f179936622f3044347fd4041ae9cd2a6a02cf6))
+* **rgaa:** add title to buttons ([#2785](https://github.com/SocialGouv/emjpm/issues/2785)) ([6b4fc40](https://github.com/SocialGouv/emjpm/commit/6b4fc40f098f63c4a1458dc0b61ba9349bb348e7))
+* **rgaa:** add title to buttons ([#2785](https://github.com/SocialGouv/emjpm/issues/2785)) ([#2786](https://github.com/SocialGouv/emjpm/issues/2786)) ([b9a2b94](https://github.com/SocialGouv/emjpm/commit/b9a2b940f87d9dc51cf71166f243d2a65bba8dc4))
+* **rgaa:** add title to iframe ([#2763](https://github.com/SocialGouv/emjpm/issues/2763)) ([5b33b86](https://github.com/SocialGouv/emjpm/commit/5b33b8624d74c707f0f95ca314f3cff934a64365))
+* **rgaa:** change heading id ([#2783](https://github.com/SocialGouv/emjpm/issues/2783)) ([d57c08f](https://github.com/SocialGouv/emjpm/commit/d57c08f4076df5160e48afe4a9a0b49c69f0e630))
+* **rgaa:** compatibility of status messages with assistive technologies ([#2776](https://github.com/SocialGouv/emjpm/issues/2776)) ([f867f08](https://github.com/SocialGouv/emjpm/commit/f867f08811c07d2b2e91c1f6f031f8b11fcc1d24))
+* **rgaa:** fix input control and attribute ([#2768](https://github.com/SocialGouv/emjpm/issues/2768)) ([3d9a924](https://github.com/SocialGouv/emjpm/commit/3d9a9245c8db5dd7e5b85a0bb29b1114b2b2e5af))
+* **rgaa:** fix typo on page title ([#2781](https://github.com/SocialGouv/emjpm/issues/2781)) ([6a776ab](https://github.com/SocialGouv/emjpm/commit/6a776ab8f29386c169a5350fa1805f604ffbaa93))
+* **rgaa:** improve error messages suggestions ([#2784](https://github.com/SocialGouv/emjpm/issues/2784)) ([ca96d7b](https://github.com/SocialGouv/emjpm/commit/ca96d7ba3e744eddac846f9b59cb92ec9e035193))
+* **rgaa:** link select to labels ([#2765](https://github.com/SocialGouv/emjpm/issues/2765)) ([c14d7b1](https://github.com/SocialGouv/emjpm/commit/c14d7b1492ff90750e0722b73305a4417d4ebdbd))
+* **rgaa:** refacto error messages ([#2762](https://github.com/SocialGouv/emjpm/issues/2762)) ([4e7aea5](https://github.com/SocialGouv/emjpm/commit/4e7aea5bb41dcb1e732dd5655e4595cd3c417389))
+* **security:** psp require numeric format of user ([9e7552e](https://github.com/SocialGouv/emjpm/commit/9e7552e901d1fbb4b43d5d1fc2328b22dd1da5b3))
+
+
+
+
+
 ## [25.148.4](https://github.com/SocialGouv/emjpm/compare/v25.148.3...v25.148.4) (2022-01-28)
 
 **Note:** Version bump only for package @emjpm/app
