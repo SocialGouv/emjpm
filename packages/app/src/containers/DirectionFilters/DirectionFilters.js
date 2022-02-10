@@ -7,6 +7,7 @@ import {
   Input,
   AccessibleSelect as Select,
   InputDate,
+  SrOnly,
 } from "~/components";
 import { findOption } from "~/utils/form";
 
@@ -98,6 +99,7 @@ export function DirectionFilters(props) {
                 name="startDate"
                 label="du"
                 placeholderText="date de début"
+                ariaDescribedBy="format_attendu"
               />
             </Box>
             <Box sx={SimpleBoxStyle}>
@@ -107,8 +109,10 @@ export function DirectionFilters(props) {
                 name="endDate"
                 label="au"
                 placeholderText="date de fin"
+                ariaDescribedBy="format_attendu"
               />
             </Box>
+            <SrOnly id="format_attendu">format attendu : jj/mm/aaaa</SrOnly>
           </Flex>
         </Box>
       </Flex>

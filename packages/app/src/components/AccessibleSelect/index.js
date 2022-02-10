@@ -32,12 +32,14 @@ export default function AccessibleSelect({
     label = props.placeholder;
   }
   const Component = isCreatable ? Creatable : isAsync ? AsyncSelect : Select;
+  const forId = props?.id || props?.instanceId;
+
   return (
     <>
       {label && (
         <Label
           size={props.size}
-          htmlFor={props.id}
+          htmlFor={forId}
           isActive={props.isActive}
           required={props.required}
           aria-required={props.required}
@@ -58,7 +60,7 @@ export default function AccessibleSelect({
           ...getStyle(props),
         }}
         menuPortalTarget={document.body}
-        id={props?.id || props?.instanceId}
+        id={forId}
         {...props}
       />
     </>

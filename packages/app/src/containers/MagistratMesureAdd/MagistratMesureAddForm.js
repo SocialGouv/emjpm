@@ -17,7 +17,7 @@ import {
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 
 import ServiceReservation from "./ServiceReservation";
 
@@ -78,7 +78,11 @@ export function MagistratMesureAddForm(props) {
               }
             }}
             errorMessage={formik.errors.numero_rg}
+            aria-describedby="format_rg_attendu"
           />
+          <SrOnly id="format_rg_attendu">
+            Format : 8 chiffres ou lettres. Exemple : 12A34567
+          </SrOnly>
           <FormGroupInput
             id="cabinet"
             placeholder="Cabinet du tribunal"
