@@ -112,6 +112,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   aria-describedby="msg-etablissement"
                   autoComplete="organization"
                   aria-label="Nom du service"
+                  required
                 />
                 <div id="msg-etablissement">
                   <InlineError
@@ -129,6 +130,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   onChange={formik.handleChange}
                   placeholder="SIRET"
                   aria-describedby="msg-siret"
+                  required
                 />
                 <div id="msg-siret">
                   <InlineError message={formik.errors.siret} fieldId="siret" />
@@ -143,6 +145,7 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   options={tiOptions}
                   enableFilterByLabel
                   isClearable={true}
+                  required
                 />
               </Field>
               <Field mt="5">
