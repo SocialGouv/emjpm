@@ -89,6 +89,10 @@ module.exports = async function updateMandataireMesuresFromOCMI({
 
     await knex.transaction(async function (trx) {
       await saveMesures(allMesureDatas, trx);
+      await trx.raw(
+        `UPDATE mandataires SET mesures_last_update = NOW() WHERE mandataires.id = ?`,
+        [mandataireId]
+      );
     });
   } catch (e) {
     fatalError = e;
