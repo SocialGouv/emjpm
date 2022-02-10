@@ -18,7 +18,11 @@ export function ListeBlanchePreposeCreate() {
     CREATE_LISTE_BLANCHE_PREPOSE,
     {
       onCompleted: async () => {
-        await history.push(`/${type}/liste-blanche`);
+        if (type === "direction") {
+          await history.push(`/${type}`);
+        } else {
+          await history.push(`/${type}/liste-blanche`);
+        }
       },
     }
   );
