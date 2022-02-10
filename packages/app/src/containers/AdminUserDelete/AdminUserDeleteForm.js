@@ -80,6 +80,8 @@ export function AdminUserDeleteForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Supprimer l'utilisateur du service"
+                aria-label="Supprimer l'utilisateur du service"
               >
                 {"Supprimer l'utilisateur"}
               </Button>

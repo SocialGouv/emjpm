@@ -189,7 +189,8 @@ function SignupMandataireForm() {
             <Button
               variant="outline"
               onClick={() => history.push("/")}
-              aria-label="Annuler"
+              aria-label="Annuler la création de votre compte"
+              title="Annuler la création de votre compte"
             >
               Annuler
             </Button>
@@ -201,7 +202,8 @@ function SignupMandataireForm() {
                 setMandataire(formik.values);
                 validateStepOne(false);
               }}
-              aria-label="Retour"
+              aria-label="Retour à la page précédente"
+              title="Retour"
             >
               Retour
             </Button>
@@ -211,7 +213,8 @@ function SignupMandataireForm() {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
-              aria-label="Enregistrer"
+              aria-label="Enregistrer la création de votre compte"
+              title="Enregistrer la création de votre compte"
             >
               Enregistrer
             </Button>

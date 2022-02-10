@@ -118,7 +118,11 @@ export function SignupServiceInvitationForm(props) {
       </Flex>
       <Flex justifyContent="flex-end" p={1}>
         <Box>
-          <Link to="/">
+          <Link
+            to="/"
+            aria-label="Annuler la création de votre compte"
+            title="Annuler la création de votre compte"
+          >
             <Button mr="2" variant="outline">
               Annuler
             </Button>
@@ -129,6 +133,8 @@ export function SignupServiceInvitationForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            aria-label="Aller à la page suivante"
+            title="Suivant"
           >
             Suivant
           </Button>

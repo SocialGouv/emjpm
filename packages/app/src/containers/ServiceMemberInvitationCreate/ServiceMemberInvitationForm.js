@@ -47,6 +47,8 @@ function ServiceMemberInvitationForm(props) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              title="Inviter le membre au service"
+              aria-label="Inviter le membre au service"
             >
               Inviter
             </Button>
