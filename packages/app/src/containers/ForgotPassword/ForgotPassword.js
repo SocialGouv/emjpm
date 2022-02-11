@@ -104,7 +104,7 @@ function ForgotPassword() {
       <Box p="5">
         <form noValidate onSubmit={formik.handleSubmit}>
           {!!formik.status && (
-            <Box color="error" mb="1">
+            <Box color="error" mb="1" role="alert">
               {formik.status.error}
             </Box>
           )}

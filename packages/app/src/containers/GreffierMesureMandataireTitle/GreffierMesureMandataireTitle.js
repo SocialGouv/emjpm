@@ -31,7 +31,7 @@ function GreffierMesureMandataireTitle(props) {
         mb="1"
       >{`Réserver une mesure auprès de ${prenom} ${nom}`}</Heading>
       {limitReached && (
-        <Heading size={4} color="error">
+        <Heading size={4} color="error" role="alert">
           {
             "Pour votre information, le mandataire a atteint le nombre de mesures souhaitées"
           }
