@@ -14,6 +14,7 @@ const authRoutes = require("./routes/api/auth");
 const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
 const mandolineRoutes = require("./routes/api/mandoline");
+const devRoutes = require("./routes/api/dev");
 
 const { logRequests } = require("~/config");
 
@@ -67,6 +68,8 @@ app.use(
   [apiLimiter, oauthServer.authenticate()],
   mandolineRoutes
 );
+
+app.use("/api/dev", [apiLimiter], devRoutes);
 
 app.use(
   "/hasura/actions",
