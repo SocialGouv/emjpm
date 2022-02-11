@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.150.0](https://github.com/SocialGouv/emjpm/compare/v25.149.0...v25.150.0) (2022-02-11)
+
+
+### Features
+
+* **dev:** efsm service id by siret ([af711ea](https://github.com/SocialGouv/emjpm/commit/af711ea8763436bd37b5795ec9daa5f343a7cff5))
+* **mandoline:** user service id ([11dfe97](https://github.com/SocialGouv/emjpm/commit/11dfe973ed67a77a75041fa251fa5642b09c7394))
+* **service:** is service admin on signup fix [#2778](https://github.com/SocialGouv/emjpm/issues/2778) ([727478f](https://github.com/SocialGouv/emjpm/commit/727478f37c971e08bc83443c147504642b3c15a0))
+
+
+
+
+
 # [25.149.0](https://github.com/SocialGouv/emjpm/compare/v25.148.5...v25.149.0) (2022-02-10)
 
 
