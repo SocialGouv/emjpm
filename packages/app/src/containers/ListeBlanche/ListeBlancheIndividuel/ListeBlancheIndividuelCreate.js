@@ -23,7 +23,11 @@ export function ListeBlancheIndividuelCreate() {
         editMode={false}
         loading={loading}
         handleCancel={() => {
-          history.push(`/${type}/liste-blanche`);
+          if (type === "direction") {
+            history.push(`/${type}`);
+          } else {
+            history.push(`/${type}/liste-blanche`);
+          }
         }}
         handleSubmit={async (values) => {
           await create({
@@ -47,7 +51,11 @@ export function ListeBlancheIndividuelCreate() {
               ville: values.ville,
             },
           });
-          await history.push(`/${type}/liste-blanche`);
+          if (type === "direction") {
+            await history.push(`/${type}`);
+          } else {
+            await history.push(`/${type}/liste-blanche`);
+          }
         }}
       />
     </Card>

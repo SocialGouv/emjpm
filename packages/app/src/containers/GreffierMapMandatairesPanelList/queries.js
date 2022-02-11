@@ -8,8 +8,8 @@ export const MESURES_GESTIONNAIRE = gql`
     $order: order_by
     $departementCode: String
   ) {
-    count: view_lb_tis_aggregate(
-      where: { gestionnaire_tis: { ti_id: { _eq: $tiId } } }
+    count: search_ti_view_lb_tis_aggregate(
+      args: { search: null, tiid: $tiId, departementcode: $departementCode }
     ) {
       aggregate {
         count

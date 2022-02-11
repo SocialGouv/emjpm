@@ -11,7 +11,7 @@ function MandataireBoardView() {
   return (
     <>
       <Helmet>
-        <title>Tableau de bard | e-MJPM </title>
+        <title>Tableau de bord | e-MJPM </title>
       </Helmet>
       <SkipToContent skipTo="vos_indicateurs" />
       <LayoutMandataire>

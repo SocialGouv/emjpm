@@ -112,7 +112,7 @@ function Login(props) {
       <Box p="5">
         <form noValidate onSubmit={onSubmit}>
           {!!formik.status && (
-            <Box color="error" mb="1">
+            <Box color="error" mb="1" role="alert">
               {formik.status.errorMsg}
             </Box>
           )}

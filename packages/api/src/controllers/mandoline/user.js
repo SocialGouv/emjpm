@@ -31,6 +31,7 @@ const getUserService = (user) => {
     return null;
   }
   const {
+    id,
     etablissement,
     siret,
     nom,
@@ -67,6 +68,7 @@ const getUserService = (user) => {
     dispo_max,
     email,
     etablissement,
+    id,
     mesures_en_attente,
     mesures_en_cours,
     nom,

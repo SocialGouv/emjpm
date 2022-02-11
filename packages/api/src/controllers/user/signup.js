@@ -9,6 +9,7 @@ const { ServiceMemberInvitation } = require("~/models");
 const { ServiceMember } = require("~/models");
 const { Role } = require("~/models");
 const { Direction } = require("~/models");
+const { Service } = require("~/models");
 const { errorHandler } = require("~/db/errors");
 const { inscriptionEmail } = require("~/email/inscription");
 
@@ -142,10 +143,14 @@ const signup = async (req, res) => {
           service: { service_id },
         } = body;
 
-        await ServiceMember.query().allowInsert("[user_id,service_id]").insert({
-          service_id,
-          user_id: user.id,
-        });
+        const service = await Service.query().findOne("id", service_id);
+        await ServiceMember.query()
+          .allowInsert("[user_id,service_id]")
+          .insert({
+            is_admin: service.email === user.email,
+            service_id,
+            user_id: user.id,
+          });
 
         if (invitation) {
           await ServiceMemberInvitation.query()
