@@ -153,6 +153,7 @@ function SignupMandataireForm() {
                 aria-describedby="msg-geocode"
                 required
                 aria-label="geocode"
+                hasError={formik.errors.geocode}
               />
               <div id="msg-geocode">
                 {(formik.touched.geocode || formik.submitCount > 0) && (

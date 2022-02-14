@@ -75,6 +75,7 @@ function SignupGreffierForm({ tiDatas }) {
               options={tiOptions}
               enableFilterByLabel
               isClearable={true}
+              required
             />
 
             <FormGroupInput
@@ -84,6 +85,7 @@ function SignupGreffierForm({ tiDatas }) {
               autoComplete="organization"
               placeholder="Cabinet du tribunal"
               aria-label="Cabinet du tribunal"
+              required
             />
           </FormInputBox>
         </Flex>

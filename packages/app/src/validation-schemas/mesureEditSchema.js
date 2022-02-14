@@ -49,7 +49,7 @@ const mesureEditSchema = ({ apolloClient }) =>
     numero_dossier: yup.string(),
     numero_rg: yup
       .string()
-      .required()
+      .required("Veuillez renseigner ce champ. \n Par exemple : 12A34567")
       .test(
         "numero_rg-alphanum",
         MESSAGE_VALID_NUMERO_RG_ALPHANUM,

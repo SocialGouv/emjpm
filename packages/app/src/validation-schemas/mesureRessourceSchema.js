@@ -20,7 +20,7 @@ const mesureRessourceSchema = yup.object().shape({
     ),
   niveau_ressource: yup
     .number(NIVEAU_DE_RESSOURCE_NOT_VALID)
-    .required(NIVEAU_DE_RESSOURCE_NOT_VALID),
+    .required("Veuillez renseigner ce champ.Par exemple: 2017"),
   prestations_sociales: yup
     .array()
     .of(yup.string())
