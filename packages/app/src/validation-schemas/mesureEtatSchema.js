@@ -9,7 +9,9 @@ const mesureEtatSchema = yup.object().shape({
       then: yup.string().length(5).required(CODE_POSTAL_NOT_VALID).nullable(),
     })
     .nullable(),
-  date_changement_etat: yup.date(FORM_DATE_NOT_VALID).required(),
+  date_changement_etat: yup
+    .date(FORM_DATE_NOT_VALID)
+    .required(FORM_DATE_NOT_VALID),
   lieu_vie: yup.string().required(),
   nature_mesure: yup.string().required(),
   pays: yup.string().nullable().required(),
