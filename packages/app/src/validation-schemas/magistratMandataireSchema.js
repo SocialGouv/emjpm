@@ -26,7 +26,7 @@ const magistratMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
     nature_mesure: yup.string().required(),
     numero_rg: yup
       .string()
-      .required()
+      .required("Veuillez renseigner ce champ. \n Par exemple : 12A34567")
       .test(
         "numero_rg-alphanum",
         MESSAGE_VALID_NUMERO_RG_ALPHANUM,
