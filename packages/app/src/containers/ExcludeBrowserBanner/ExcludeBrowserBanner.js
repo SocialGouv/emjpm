@@ -15,7 +15,13 @@ export function ExcludeBrowserBanner() {
   if (!isSupportedBrowser(currentBrowser, excludedBrowsers)) {
     return (
       <Card p={3}>
-        <Text lineHeight={2} fontSize={13} fontWeight="bold" color="error">
+        <Text
+          lineHeight={2}
+          fontSize={13}
+          fontWeight="bold"
+          color="error"
+          role="alert"
+        >
           {`eMJPM n'est pas compatible avec votre navigateur (${currentBrowser.name} ${currentBrowser.version}).`}
           <br />
           <a
