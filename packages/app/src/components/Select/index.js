@@ -10,6 +10,7 @@ import { RequiredAsterisk } from "~/components";
 import { getStyle } from "./style";
 import Label from "./Label";
 import Creatable from "./Creatable";
+import { ariaLiveMessages } from "../AccessibleSelect/ariaLiveMessages";
 
 export default function Select({ isAsync, isCreatable, label, ...props }) {
   const Component = isCreatable
@@ -39,6 +40,7 @@ export default function Select({ isAsync, isCreatable, label, ...props }) {
         menuPortalTarget={document.body}
         styles={getStyle(props)}
         {...props}
+        ariaLiveMessages={ariaLiveMessages}
       />
     </>
   );
