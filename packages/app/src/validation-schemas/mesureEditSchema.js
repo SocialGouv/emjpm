@@ -21,6 +21,7 @@ const mesureEditSchema = ({ apolloClient }) =>
   yup.object().shape({
     annee_naissance: yup
       .number(FORM_YEAR_NOT_VALID)
+      .typeError(FORM_YEAR_NOT_VALID)
       .nullable()
       .required(FORM_YEAR_NOT_VALID)
       .min(1900, "l'année choisi doit être au minimum 1900. Par exemple: 1970.")
