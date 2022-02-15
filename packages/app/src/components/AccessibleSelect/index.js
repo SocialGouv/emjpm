@@ -9,6 +9,7 @@ import { getStyle } from "./style";
 import Label from "./Label";
 import MultiValueRemove from "./MultiValueRemove";
 import ClearIndicator from "./ClearIndicator";
+import { ariaLiveMessages } from "./ariaLiveMessages";
 
 export default function AccessibleSelect({
   label,
@@ -62,6 +63,7 @@ export default function AccessibleSelect({
         menuPortalTarget={document.body}
         id={forId}
         {...props}
+        ariaLiveMessages={ariaLiveMessages}
       />
     </>
   );
