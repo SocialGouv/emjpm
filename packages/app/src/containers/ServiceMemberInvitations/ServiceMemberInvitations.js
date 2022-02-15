@@ -62,6 +62,8 @@ function ServiceMemberInvitations(props) {
                     <Box
                       sx={listActionStyle}
                       onClick={() => handleDelete(invitation.id)}
+                      as="button"
+                      title="Supprimer l'utilisateur du service"
                     >
                       {"Supprimer l'invitation"}
                     </Box>
