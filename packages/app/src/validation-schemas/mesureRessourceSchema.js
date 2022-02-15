@@ -5,6 +5,11 @@ const currentYear = new Date().getFullYear();
 const mesureRessourceSchema = yup.object().shape({
   annee: yup
     .number()
+    .typeError(
+      `l'année choisi doit être au minimum 1900. Par exemple ${
+        Number(currentYear) - 1
+      }`
+    )
     .nullable()
     .min(
       1900,
@@ -20,7 +25,8 @@ const mesureRessourceSchema = yup.object().shape({
     ),
   niveau_ressource: yup
     .number(NIVEAU_DE_RESSOURCE_NOT_VALID)
-    .required("Veuillez renseigner ce champ.Par exemple: 2017"),
+    .typeError(NIVEAU_DE_RESSOURCE_NOT_VALID)
+    .required(NIVEAU_DE_RESSOURCE_NOT_VALID),
   prestations_sociales: yup
     .array()
     .of(yup.string())

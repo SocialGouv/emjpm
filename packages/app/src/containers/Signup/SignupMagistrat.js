@@ -85,7 +85,6 @@ function SignupMagistratForm({ tiDatas }) {
               autoComplete="organization"
               placeholder="Cabinet du tribunal"
               aria-label="Cabinet du tribunal"
-              required
             />
           </FormInputBox>
         </Flex>
