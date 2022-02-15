@@ -64,7 +64,9 @@ function ServiceMemberInvitations(props) {
                       onClick={() => handleDelete(invitation.id)}
                       as="button"
                       title="Supprimer l'utilisateur du service"
+
                       aria-label="Supprimer l'utilisateur du service"
+
                     >
                       {"Supprimer l'invitation"}
                     </Box>
