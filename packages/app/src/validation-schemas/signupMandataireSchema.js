@@ -8,7 +8,14 @@ import yup, {
 } from "./yup";
 
 const signupMandataireSchema = yup.object().shape({
-  dispo_max: yup.number().required(),
+  dispo_max: yup
+    .number()
+    .typeError(
+      "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+    )
+    .required(
+      "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+    ),
   geocode: yup
     .object()
     .required()

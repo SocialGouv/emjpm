@@ -19,7 +19,12 @@ const serviceAntenneSchema = yup.object().shape({
     .test("geocode-check", FORM_REQUIRED_MESSAGE, validateGeocode),
   mesures_max: yup
     .number()
-    .required()
+    .typeError(
+      "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+    )
+    .required(
+      "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+    )
     .test("mesures_max", (value, { parent, path, createError }) => {
       if (!value) {
         return true;
