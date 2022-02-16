@@ -65,6 +65,7 @@ function AdminUserService({ userId, successLink, cancelLink }) {
         nom: values.nom,
         prenom: values.prenom,
         genre: values.genre,
+        etablissement: values.etablissement,
         service_id: service.id,
         service_tis: values.tis.map((ti) => ({
           service_id: service.id,

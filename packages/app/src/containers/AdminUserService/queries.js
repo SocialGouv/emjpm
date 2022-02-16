@@ -28,6 +28,7 @@ export const USER_SERVICE = gql`
           telephone
           prenom
           nom
+          genre
           competences
           created_at
           suspend_activity
