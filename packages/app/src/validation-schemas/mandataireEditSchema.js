@@ -32,7 +32,14 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
   }
   return yup.object().shape({
     competences: yup.string(),
-    dispo_max: yup.number().required(),
+    dispo_max: yup
+      .number()
+      .typeError(
+        "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+      )
+      .required(
+        "Veuillez saisir un nombre de disponibilité valide. Par exemple: 5."
+      ),
     email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
     genre: yup.string().nullable().required(),
     geocode: yup
