@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.150.3](https://github.com/SocialGouv/emjpm/compare/v25.150.2...v25.150.3) (2022-02-16)
+
+
+### Bug Fixes
+
+* **org-gestionnaire:** cast as boolean ([cdd6a07](https://github.com/SocialGouv/emjpm/commit/cdd6a07e3b22d09ea70f51448cee0ed96f132ad0))
+
+
+
+
+
 ## [25.150.2](https://github.com/SocialGouv/emjpm/compare/v25.150.1...v25.150.2) (2022-02-16)
 
 
