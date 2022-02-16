@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.150.2](https://github.com/SocialGouv/emjpm/compare/v25.150.1...v25.150.2) (2022-02-16)
+
+
+### Bug Fixes
+
+* **form:** user service ([f893551](https://github.com/SocialGouv/emjpm/commit/f89355131ff5fd0814a6cb184683867690c6416d))
+* **rgaa:** add aria live message to react-select component ([#2793](https://github.com/SocialGouv/emjpm/issues/2793)) ([09ae252](https://github.com/SocialGouv/emjpm/commit/09ae252a4af1a094c0f676e2f7217c0278045fa2))
+* **rgaa:** add error suggestions to numero rg ([#2790](https://github.com/SocialGouv/emjpm/issues/2790)) ([0dc32dc](https://github.com/SocialGouv/emjpm/commit/0dc32dcccf23f9453ea728563d3c2b07d8fdc692))
+* **rgaa:** add title and aria-label for delete user button ([#2797](https://github.com/SocialGouv/emjpm/issues/2797)) ([3a87755](https://github.com/SocialGouv/emjpm/commit/3a87755c0408ec1f9b81e0f4b7f404e73b683c28))
+* **rgaa:** add title to delete member button ([#2795](https://github.com/SocialGouv/emjpm/issues/2795)) ([e885bc8](https://github.com/SocialGouv/emjpm/commit/e885bc875c9d7a96128f8c28e6fd881205581e98))
+* **rgaa:** fixing cast errors ([#2794](https://github.com/SocialGouv/emjpm/issues/2794)) ([befab05](https://github.com/SocialGouv/emjpm/commit/befab0546b53db25344d62fc95c0d6c520142e16))
+* **rm:** required cabinet ([205ab8a](https://github.com/SocialGouv/emjpm/commit/205ab8ae2ba876a118ff0810d3f0c4b2188e59c3))
+
+
+
+
+
 ## [25.150.1](https://github.com/SocialGouv/emjpm/compare/v25.150.0...v25.150.1) (2022-02-14)
 
 
