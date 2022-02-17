@@ -122,9 +122,9 @@ function AdminUserServiceForm(props) {
         </FormInputBox>
       </Flex>
 
-      <Flex>
+      <Flex role="group" aria-labelledby="informations_personelles">
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="informations_personelles">
             {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
@@ -162,9 +162,9 @@ function AdminUserServiceForm(props) {
           />
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="structure_juridique">
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="structure_juridique">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
@@ -223,9 +223,9 @@ function AdminUserServiceForm(props) {
           />
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="informations_du_responsable">
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="informations_du_responsable">
             {"Informations du responsable"}
           </Heading>
         </FormGrayBox>
@@ -275,9 +275,11 @@ function AdminUserServiceForm(props) {
           </Box>
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="tribunaux">
         <FormGrayBox>
-          <Heading size={4}>{"Tribunaux"}</Heading>
+          <Heading size={4} id="tribunaux">
+            {"Tribunaux"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Liste des tribunaux préférentiels"}
           </Text>
@@ -309,9 +311,9 @@ function AdminUserServiceForm(props) {
           </Field>
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="activite">
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="activite">
             {"Activité"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">

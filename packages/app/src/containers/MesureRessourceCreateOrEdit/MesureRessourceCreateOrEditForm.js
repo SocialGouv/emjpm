@@ -39,15 +39,15 @@ export function MesureRessourceCreateOrEditForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex role="group" aria-labelledby="ressource_heading">
         <FormGrayBox>
           {mesureRessourceToEdit?.id && (
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="ressource_heading">
               {"Modification de la ressource"}
             </Heading>
           )}
           {!mesureRessourceToEdit && (
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="ressource_heading">
               {"Ajout d'une ressource"}
             </Heading>
           )}

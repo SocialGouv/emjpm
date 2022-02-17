@@ -21,14 +21,16 @@ export function AdminEditorForm(props) {
     <Flex flexWrap="wrap">
       <Box width={[1, 2 / 5]} bg="cardSecondary" p="5">
         <Box height="230px">
-          <Heading size={4}>{"Information de l'éditeur"}</Heading>
+          <Heading size={4} id="informations_editeur">
+            {"Information de l'éditeur"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             {"Informations relatives à l'éditeur"}
           </Text>
         </Box>
       </Box>
       <Box p="5" width={[1, 3 / 5]}>
-        <Box mb="2">
+        <Box mb="2" role="group" aria-labelledby="informations_editeur">
           <form noValidate onSubmit={formik.handleSubmit}>
             <Field>
               <Input

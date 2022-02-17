@@ -60,9 +60,11 @@ function SignupMagistratForm({ tiDatas }) {
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
-        <Flex>
+        <Flex role="group" aria-labelledby="choix_tribunal">
           <FormGrayBox>
-            <Heading size={4}>{"Tribunal"}</Heading>
+            <Heading size={4} id="choix_tribunal">
+              {"Tribunal"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Dans quel tribunal exercez-vous?"}
             </Text>

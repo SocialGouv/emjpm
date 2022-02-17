@@ -31,9 +31,11 @@ export function SignupServiceInvitationForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex role="group" aria-labelledby="informations_personnelles">
         <FormGrayBox>
-          <Heading size={4}>{"Information personnelle"}</Heading>
+          <Heading size={4} id="informations_personnelles">
+            {"Information personnelle"}
+          </Heading>
           <Text lineHeight="1.5" color="textSecondary">
             Ces informations permettent de vous identifier.
           </Text>
@@ -59,9 +61,11 @@ export function SignupServiceInvitationForm(props) {
           />
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="indetifiants">
         <FormGrayBox>
-          <Heading size={4}>{"Identifiants de connexion"}</Heading>
+          <Heading size={4} id="indetifiants">
+            {"Identifiants de connexion"}
+          </Heading>
           <Text
             lineHeight="1.5"
             color="textSecondary"
