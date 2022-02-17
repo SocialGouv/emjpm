@@ -110,7 +110,7 @@ export function SignupForm() {
             />
           </FormInputBox>
         </Flex>
-        <Flex>
+        <Flex role="group" aria-labelledby="informations_personelle_heading">
           <FormGrayBox>
             <Heading size={4}>{"Information personnelle"}</Heading>
             <Text
@@ -121,10 +121,7 @@ export function SignupForm() {
               {"Ces informations permettent de vous identifier."}
             </Text>
           </FormGrayBox>
-          <FormInputBox
-            role="group"
-            aria-labelledby="informations_personelle_heading"
-          >
+          <FormInputBox>
             <FormGroupSelect
               id="genre"
               formik={formik}
@@ -153,7 +150,7 @@ export function SignupForm() {
             />
           </FormInputBox>
         </Flex>
-        <Flex>
+        <Flex role="group" aria-labelledby="identifiants_de_connexion">
           <FormGrayBox>
             <Heading size={4} id="identifiants_de_connexion">
               {"Identifiants de connexion"}
@@ -163,10 +160,7 @@ export function SignupForm() {
                 renseignée sera votre identifiant.`}
             </Text>
           </FormGrayBox>
-          <FormInputBox
-            role="group"
-            aria-labelledby="identifiants_de_connexion"
-          >
+          <FormInputBox>
             <FormGroupInput
               placeholder="Email"
               id="email"
