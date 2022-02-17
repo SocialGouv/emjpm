@@ -96,7 +96,7 @@ function ServiceMembers(props) {
                 </>
               ) : (
                 <Text fontWeight="bold" color="black" sx={listDateStyle}>
-                  Membre
+                  {member.is_admin ? "Administrateur" : "Membre"}
                 </Text>
               )}
             </Box>

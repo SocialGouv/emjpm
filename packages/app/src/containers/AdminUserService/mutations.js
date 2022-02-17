@@ -19,6 +19,7 @@ export const EDIT_USER = gql`
     $suspend_activity_reason: String
     $email: String
     $competences: String
+    $etablissement: String
     $nom: String
     $prenom: String
     $genre: String
@@ -71,6 +72,7 @@ export const EDIT_USER = gql`
         suspend_activity_reason: $suspend_activity_reason
         use_location_adresse: $use_location_adresse
         email: $email
+        etablissement: $etablissement
         nom: $nom
         prenom: $prenom
         genre: $genre

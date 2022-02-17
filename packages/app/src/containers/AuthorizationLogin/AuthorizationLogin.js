@@ -82,7 +82,7 @@ function AuthorizationLogin(props) {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading size={4} mb="1">
+          <Heading size={4} mb="1" id="authlogin">
             {"Connectez-vous à votre compte."}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
@@ -90,7 +90,7 @@ function AuthorizationLogin(props) {
           </Text>
         </Box>
       </Box>
-      <Box p="5">
+      <Box p="5" role="group" aria-labelledby="authlogin">
         <form noValidate onSubmit={formik.handleSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">

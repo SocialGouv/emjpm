@@ -46,9 +46,16 @@ export function MesureCloseForm(props) {
           }
         </Text>
       </Box>
-      <Box p="5" width={[1, 3 / 5]}>
+      <Box
+        role="group"
+        aria-labelledby="close_mesure_heading"
+        p="5"
+        width={[1, 3 / 5]}
+      >
         <Box mb="3">
-          <Heading size={3}>Mettre fin au mandat</Heading>
+          <Heading size={3} id="close_mesure_heading">
+            Mettre fin au mandat
+          </Heading>
         </Box>
         <form noValidate onSubmit={formik.handleSubmit}>
           <FormGroupInputDate

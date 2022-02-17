@@ -44,7 +44,7 @@ export function MesureEtatCreateOrEditForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex role="group" aria-labelledby="mesure_de_protection_informations">
         <FormGrayBox>
           {mesureEtatToEdit?.id && (
             <Heading size={4} mb={1}>
@@ -66,10 +66,7 @@ export function MesureEtatCreateOrEditForm(props) {
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox
-          role="group"
-          aria-labelledby="mesure_de_protection_informations"
-        >
+        <FormInputBox>
           <FormGroupInputDate
             label="Date de changement d'état"
             placeholder="jj/mm/aaaa"

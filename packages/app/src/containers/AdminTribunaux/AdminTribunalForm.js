@@ -90,14 +90,16 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
             </Text>
           </Box>
           <Box height="150px">
-            <Heading size={4}>{"Contact du tribunal"}</Heading>
+            <Heading size={4} id="contact_tribunal">
+              {"Contact du tribunal"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               Contact du tribunal
             </Text>
           </Box>
         </Box>
         <Box p="5" width={[1, 3 / 5]}>
-          <Box mb="2">
+          <Box mb="2" role="group" aria-labelledby="contact_tribunal">
             <form noValidate onSubmit={formik.handleSubmit}>
               <Field>
                 <Input

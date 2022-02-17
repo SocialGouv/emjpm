@@ -75,7 +75,7 @@ function ForgotPassword() {
     >
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading size={4} mb="1">
+          <Heading size={4} mb="1" id="demande_mot_de_passe">
             {"Demande de réinitialisation du mot de passe"}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
@@ -101,7 +101,7 @@ function ForgotPassword() {
           )}
         </Box>
       </Box>
-      <Box p="5">
+      <Box p="5" role="group" aria-labelledby="demande_mot_de_passe">
         <form noValidate onSubmit={formik.handleSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">
