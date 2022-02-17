@@ -47,6 +47,13 @@ function MandataireOcmiMesureImportSwitcher({
                 (error.count > 1 ? "s" : "") +
                 ", il est possible que vous perdiez des données lors de l'import, veillez à n'avoir qu'un Numéro RG unique par mesure et par tribunal."
             );
+            toast.warn(
+              "Les numéros RG de vos doublons sont: " +
+                error.doublons
+                  .map((doublon) => doublon.split(".")[0])
+                  .join(",\n"),
+              { autoClose: false }
+            );
             break;
         }
       }

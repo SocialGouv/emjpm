@@ -4,6 +4,7 @@ const { OcmiMandataire } = require("~/models");
 const { Mandataire } = require("~/models");
 const { saveMesures } = require("~/controllers/editor/service/saveMesure");
 const dedupMesures = require("~/utils/dedup-mesures");
+const getdupMesures = require("~/utils/getdup-mesures");
 
 const knex = require("~/db/knex");
 
@@ -68,8 +69,13 @@ module.exports = async function updateMandataireMesuresFromOCMI({
 
     const finalLength = allMesures.length;
     if (finalLength < origLength) {
+      const doublons = getdupMesures(mesures);
       warnErrors.push(
-        JSON.stringify({ count: origLength - finalLength, type: "doublons" })
+        JSON.stringify({
+          count: origLength - finalLength,
+          doublons,
+          type: "doublons",
+        })
       );
     }
 
