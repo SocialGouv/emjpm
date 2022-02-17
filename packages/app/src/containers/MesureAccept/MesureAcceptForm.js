@@ -44,9 +44,16 @@ export function MesureAcceptForm(props) {
           }
         </Text>
       </Box>
-      <Box p="5" width={[1, 3 / 5]}>
+      <Box
+        p="5"
+        width={[1, 3 / 5]}
+        role="group"
+        aria-labelledby="accepter_mesure"
+      >
         <Box mb="3">
-          <Heading size={3}>Accepter la mesure</Heading>
+          <Heading size={3} id="accepter_mesure">
+            Accepter la mesure
+          </Heading>
         </Box>
 
         <form noValidate onSubmit={formik.handleSubmit}>

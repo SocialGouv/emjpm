@@ -30,12 +30,15 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
           <Text
             lineHeight="1.5"
             color="textSecondary"
-            id="modifier_informations"
+            id="modifier_informations_heading"
           >
             {"Vos informations"}
           </Text>
         </FormGrayBox>
-        <FormInputBox role="group" aria-labelledby="modifier_informations">
+        <FormInputBox
+          role="group"
+          aria-labelledby="modifier_informations_heading"
+        >
           <FormGroupInput
             formik={formik}
             id="prenom"

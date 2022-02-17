@@ -81,7 +81,7 @@ function SignupServiceForm({ serviceDatas }) {
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
-        <Flex>
+        <Flex role="group" aria-labelledby="votre_service_heading">
           <FormGrayBox>
             <Heading size={4}>{"Votre service"}</Heading>
             <Text
@@ -94,7 +94,7 @@ function SignupServiceForm({ serviceDatas }) {
               }
             </Text>
           </FormGrayBox>
-          <FormInputBox role="group" aria-labelledby="votre_service_heading">
+          <FormInputBox>
             <Box style={{ marginBottom: "10px" }}>
               <Select
                 id="departements"

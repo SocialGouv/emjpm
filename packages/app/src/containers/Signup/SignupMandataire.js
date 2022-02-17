@@ -86,9 +86,11 @@ function SignupMandataireForm() {
       <form noValidate onSubmit={formik.handleSubmit}>
         <SignupGeneralError errors={formik.errors} />
         {isIndividuel(user) && (
-          <Flex>
+          <Flex role="group" aria-labelledby="informations">
             <FormGrayBox>
-              <Heading size={4}>{"Information professionnelle"}</Heading>
+              <Heading size={4} id="informations">
+                {"Information professionnelle"}
+              </Heading>
               <Text lineHeight="1.5" color="textSecondary">
                 {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
@@ -107,13 +109,13 @@ function SignupMandataireForm() {
             </FormInputBox>
           </Flex>
         )}
-        <Flex>
+        <Flex role="group" aria-labelledby="Téléphone">
           <FormGrayBox>
             <Heading size={4} id="telephone_heading">
               {"Téléphone"}
             </Heading>
           </FormGrayBox>
-          <FormInputBox role="group" aria-labelledby="Téléphone">
+          <FormInputBox>
             <FormGroupInput
               id="telephone"
               formik={formik}
@@ -135,9 +137,11 @@ function SignupMandataireForm() {
           </FormInputBox>
         </Flex>
 
-        <Flex>
+        <Flex role="group" aria-labelledby="adresse">
           <FormGrayBox>
-            <Heading size={4}>{"Adresse"}</Heading>
+            <Heading size={4} id="adresse">
+              {"Adresse"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {
                 "Cette adresse permettra de vous localiser sur la carte des mesures"
@@ -167,9 +171,11 @@ function SignupMandataireForm() {
           </FormInputBox>
         </Flex>
 
-        <Flex>
+        <Flex role="group" aria-labelledby="mesure_max">
           <FormGrayBox>
-            <Heading size={4}>{"Capacité"}</Heading>
+            <Heading size={4} id="mesure_max">
+              {"Capacité"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Indiquez le nombre de mesures maximal souhaité"}
             </Text>

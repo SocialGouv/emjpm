@@ -101,7 +101,7 @@ function Login(props) {
     <Card mt="5" p="0" id="login_box">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading size={4} mb="1">
+          <Heading size={4} mb="1" id="login_heading">
             {"Connectez-vous à votre compte."}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
@@ -109,7 +109,7 @@ function Login(props) {
           </Text>
         </Box>
       </Box>
-      <Box p="5">
+      <Box p="5" role="group" aria-labelledby="login_heading">
         <form noValidate onSubmit={onSubmit}>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">

@@ -60,7 +60,7 @@ function TokenRequest() {
     <Card mt="5" p="0">
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>
-          <Heading size={4} mb="1">
+          <Heading size={4} mb="1" id="demande_acces">
             {"Demande d'accès à l'api métier Emjpm."}
           </Heading>
           <Text lineHeight="1.5" color="textSecondary">
@@ -96,7 +96,7 @@ function TokenRequest() {
           )}
         </Box>
       </Box>
-      <Box p="5">
+      <Box p="5" role="group" aria-labelledby="demande_acces">
         <form noValidate onSubmit={formik.handleSubmit}>
           <Field>
             <Input

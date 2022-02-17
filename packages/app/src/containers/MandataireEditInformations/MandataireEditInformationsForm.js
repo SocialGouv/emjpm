@@ -193,9 +193,11 @@ function MandataireEditInformationsForm(props) {
             </Flex>
           </FormInputBox>
         </Flex>
-        <Flex>
+        <Flex role="group" aria-labelledby="structure_juridique">
           <FormGrayBox>
-            <Heading size={4}>{"Structure juridique"}</Heading>
+            <Heading size={4} id="structure_juridique">
+              {"Structure juridique"}
+            </Heading>
           </FormGrayBox>
           <FormInputBox>
             {type !== "prepose" && (
@@ -259,9 +261,11 @@ function MandataireEditInformationsForm(props) {
             />
           </FormInputBox>
         </Flex>
-        <Flex>
+        <Flex role="group" aria-labelledby="tribunaux">
           <FormGrayBox>
-            <Heading size={4}>{"Tribunaux"}</Heading>
+            <Heading size={4} id="tribunaux">
+              {"Tribunaux"}
+            </Heading>
             <Text lineHeight="1.5" color="textSecondary">
               {"Liste des tribunaux préférentiels"}
             </Text>

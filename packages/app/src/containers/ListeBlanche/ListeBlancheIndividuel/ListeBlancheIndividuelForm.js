@@ -220,9 +220,9 @@ export function ListeBlancheIndividuelForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
-      <Flex>
+      <Flex role="group" aria-labelledby="informations_individuelles">
         <FormGrayBox>
-          <Heading size={4} mb={1}>
+          <Heading size={4} mb={1} id="informations_individuelles">
             {"Informations personnelles"}
           </Heading>
         </FormGrayBox>
@@ -269,13 +269,13 @@ export function ListeBlancheIndividuelForm(props) {
           </Box>
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="structure_juridique">
         <FormGrayBox>
           <Heading size={4} mb={1} id="structure_juridique">
             {"Structure juridique"}
           </Heading>
         </FormGrayBox>
-        <FormInputBox rol="group" aria-labelledby="structure_juridique">
+        <FormInputBox>
           <SelectSIRET
             id="siret"
             formik={formik}
@@ -346,7 +346,7 @@ export function ListeBlancheIndividuelForm(props) {
           </Flex>
         </FormInputBox>
       </Flex>
-      <Flex>
+      <Flex role="group" aria-labelledby="liste_des_agrements">
         <FormGrayBox>
           <Heading size={4} mb={1} id="mandataire">
             {"Liste des agréments"}
@@ -357,7 +357,7 @@ export function ListeBlancheIndividuelForm(props) {
             }
           </Text>
         </FormGrayBox>
-        <FormInputBox role="group" aria-labelledby="liste_des_agrements">
+        <FormInputBox>
           <ListeBlancheIndividuelFormDepartementsSelection
             departements={formik.values.departements}
             editMode={editMode}
@@ -407,9 +407,9 @@ export function ListeBlancheIndividuelForm(props) {
       </Flex>
 
       {!isCreate && (
-        <Flex>
+        <Flex role="group" aria-labelledby="informations_mandataire">
           <FormGrayBox>
-            <Heading size={4} mb={1}>
+            <Heading size={4} mb={1} id="informations_mandataire">
               {"Informations données par le mandataire individuel"}
             </Heading>
             <Text mt={2} mb={1}>
