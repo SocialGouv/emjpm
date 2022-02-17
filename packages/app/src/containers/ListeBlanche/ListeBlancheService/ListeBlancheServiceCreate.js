@@ -46,6 +46,8 @@ export function ListeBlancheServiceCreate(props) {
           siret: values.siret,
           telephone: values.telephone,
           genre: values.genre,
+          nom: values.nom,
+          prenom: values.prenom,
         },
       });
 
