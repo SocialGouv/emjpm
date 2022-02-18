@@ -40,7 +40,7 @@ export default function AccessibleSelect({
       {label && (
         <Label
           size={props.size}
-          htmlFor={forId}
+          htmlFor={`react-select-${forId}-input`}
           isActive={props.isActive}
           required={props.required}
           aria-required={props.required}
@@ -61,8 +61,8 @@ export default function AccessibleSelect({
           ...getStyle(props),
         }}
         menuPortalTarget={document.body}
-        id={forId}
         {...props}
+        instanceId={forId}
         ariaLiveMessages={ariaLiveMessages}
       />
     </>

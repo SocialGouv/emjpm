@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Box } from "rebass";
-import { Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
 import useQueryReady from "~/hooks/useQueryReady";
 import { Context } from "./context";
@@ -28,7 +28,7 @@ export default function DepartementFilter() {
 
   return (
     <Box width="250px" mr={1}>
-      <Select
+      <AccessibleSelect
         instanceId={"departement-filter"}
         value={findOption(departementsOptions, departementCode)}
         options={departementsOptions}

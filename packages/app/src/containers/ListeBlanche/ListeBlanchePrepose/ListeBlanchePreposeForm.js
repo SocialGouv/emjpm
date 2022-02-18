@@ -18,7 +18,7 @@ import {
   RadioGroup,
   InlineError,
   Input,
-  Select,
+  AccessibleSelect,
 } from "~/components";
 
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -258,7 +258,7 @@ export function ListeBlanchePreposeForm(props) {
           <Box>
             <Box mt={2}>
               <div aria-describedby="msg-etablissements">
-                <Select
+                <AccessibleSelect
                   isAsync
                   name="etablissement"
                   instanceId={`etablissement-${data.id || "new"}`}

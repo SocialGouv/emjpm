@@ -2,13 +2,7 @@ import { useContext, useMemo } from "react";
 import { Box, Flex } from "rebass";
 
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import {
-  Card,
-  Input,
-  AccessibleSelect as Select,
-  InputDate,
-  SrOnly,
-} from "~/components";
+import { Card, Input, AccessibleSelect, InputDate, SrOnly } from "~/components";
 import { findOption } from "~/utils/form";
 
 import { BoxStyle, SimpleBoxStyle } from "./style";
@@ -54,7 +48,7 @@ export function DirectionFilters(props) {
               </Box>
             )}
             <Box sx={BoxStyle}>
-              <Select
+              <AccessibleSelect
                 instanceId={"direction-region-filter"}
                 size="small"
                 options={regionOptions}
@@ -73,7 +67,7 @@ export function DirectionFilters(props) {
               />
             </Box>
             <Box sx={BoxStyle}>
-              <Select
+              <AccessibleSelect
                 instanceId={"direction-departement-filter"}
                 size="small"
                 options={departementOptions}

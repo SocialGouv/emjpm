@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { Card, Input, Select } from "~/components";
+import { Card, Input, AccessibleSelect } from "~/components";
 import { findOption } from "~/utils/form";
 
 import { FiltersContext } from "./context";
@@ -45,7 +45,7 @@ function GreffierFilters() {
         <Box>
           <Flex>
             <Box width="200px" mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options
@@ -53,15 +53,17 @@ function GreffierFilters() {
                 placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}
+                id="nature_de_la_mesure"
               />
             </Box>
             <Box width="200px" mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={etatMesuresOptions}
                 placeholder={"État de la mesure"}
                 value={findOption(etatMesuresOptions, etatMesure)}
                 onChange={(option) => changeEtatMesure(option.value)}
+                id="etat_de_la_mesure"
               />
             </Box>
             <Box width="320px" mr={1}>

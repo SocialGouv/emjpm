@@ -112,6 +112,7 @@ function MagistratMandatairesListFilters(props) {
                 placeholder="rechercher par localisation"
                 onChange={onChangeLocalisation}
                 value={localisation}
+                id="rechercher_par_localisation"
               />
             </Box>
           )}

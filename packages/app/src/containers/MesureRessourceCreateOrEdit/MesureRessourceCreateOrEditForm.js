@@ -14,7 +14,7 @@ import {
   Field,
   Heading,
   InlineError,
-  Select,
+  AccessibleSelect,
   Text,
 } from "~/components";
 import { findOptions } from "~/utils/form";
@@ -74,7 +74,7 @@ export function MesureRessourceCreateOrEditForm(props) {
             aria-label="Niveau de Ressource (€)"
           />
           <Field>
-            <Select
+            <AccessibleSelect
               instanceId={"prestations_sociales"}
               id="prestations_sociales"
               name="prestations_sociales"
