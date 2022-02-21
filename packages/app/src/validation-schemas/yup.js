@@ -23,7 +23,7 @@ export const CODE_POSTAL_NOT_VALID =
 export const SIRET_NOT_VALID =
   "Le SIRET doit être composé de 14 chiffres. Par exemple: 82254321300027.";
 export const URL_NOT_VALID =
-  "Veuillez saisir une url valide. Par exemple: https://emjpm.fabrique.social.gouv.fr/world_best_software_company";
+  'Veuillez saisir une url valide. Par exemple: https://world-best-software-company.fr ou  ["https://world-best-software-company.fr","http://localhost/"].';
 
 yup.setLocale({
   mixed: {
