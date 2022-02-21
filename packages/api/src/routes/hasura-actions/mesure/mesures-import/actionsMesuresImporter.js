@@ -15,6 +15,7 @@ const actionsMesuresImporterSchemaValidator = require("./schema/actionsMesuresIm
 const knex = require("~/db/knex");
 const { normalizeNumeroRG } = require("~/utils/numero-rg");
 const dedupMesures = require("~/utils/dedup-mesures");
+const getdupMesures = require("~/utils/getdup-mesures");
 
 const actionsMesuresImporter = {
   importMesuresFile,
@@ -189,14 +190,17 @@ const importMesures = async ({
     importSummary.invalidAntenneNames.length === 0
   ) {
     const origLength = importSummary.rows.length;
-    importSummary.rows = dedupMesures(importSummary.rows);
-    const finalLength = importSummary.rows.length;
+    const dedupedRows = dedupMesures(importSummary.rows);
+    const finalLength = dedupedRows.length;
     if (origLength > finalLength) {
+      const doublons = getdupMesures(importSummary.rows);
       importSummary.warnings.push({
         count: origLength - finalLength,
+        doublons,
         type: "doublons",
       });
     }
+    importSummary.rows = dedupedRows;
 
     await knex.transaction(async function (trx) {
       for (const mesure of importSummary.rows) {

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.151.0](https://github.com/SocialGouv/emjpm/compare/v25.150.3...v25.151.0) (2022-02-17)
+
+
+### Bug Fixes
+
+* **lb:** create service missing fields ([2b928ac](https://github.com/SocialGouv/emjpm/commit/2b928ac62da81037f93077b6b31557b699219e63))
+* **rgaa:** add role group to forms ([#2798](https://github.com/SocialGouv/emjpm/issues/2798)) ([60abb8d](https://github.com/SocialGouv/emjpm/commit/60abb8df7d5d1702f22f576cc658c29f1ce40d4c))
+
+
+### Features
+
+* **doublons:** display rg doublons on import ([1f78c94](https://github.com/SocialGouv/emjpm/commit/1f78c94cd44248a2c0300b095c3fc3bd7c479192))
+* **service:** members display admin role ([28b4a24](https://github.com/SocialGouv/emjpm/commit/28b4a245eebb019ff111867a97058536aa628a09))
+
+
+
+
+
 ## [25.150.3](https://github.com/SocialGouv/emjpm/compare/v25.150.2...v25.150.3) (2022-02-16)
 
 **Note:** Version bump only for package @emjpm/app

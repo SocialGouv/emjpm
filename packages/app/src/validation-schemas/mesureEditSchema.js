@@ -24,10 +24,13 @@ const mesureEditSchema = ({ apolloClient }) =>
       .typeError(FORM_YEAR_NOT_VALID)
       .nullable()
       .required(FORM_YEAR_NOT_VALID)
-      .min(1900, "l'année choisi doit être au minimum 1900. Par exemple: 1970.")
+      .min(
+        1900,
+        "L'année choisie doit être au minimum 1900. Par exemple: 2021."
+      )
       .max(
         currentYear,
-        `l'année choisi doit être au maximum  ${currentYear}. Par exemple: 1970.`
+        `L'année choisie doit être au maximum  ${currentYear}. Par exemple: 2021.`
       ),
     antenne: yup.string().nullable(),
     civilite: yup.string().required(),
