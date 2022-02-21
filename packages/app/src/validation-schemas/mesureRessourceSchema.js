@@ -10,7 +10,11 @@ const mesureRessourceSchema = yup.object().shape({
         Number(currentYear) - 1
       }`
     )
-    .nullable()
+    .required(
+      `L'année choisie doit être au minimum 1900. Par exemple ${
+        Number(currentYear) - 1
+      }`
+    )
     .min(
       1900,
       `L'année choisie doit être au minimum 1900. Par exemple ${
