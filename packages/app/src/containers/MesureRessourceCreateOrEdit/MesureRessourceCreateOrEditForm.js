@@ -64,6 +64,7 @@ export function MesureRessourceCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureRessourceSchema}
             size="small"
+            required
           />
           <FormGroupInput
             placeholder="Niveau de Ressource (€)"
