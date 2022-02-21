@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.151.1](https://github.com/SocialGouv/emjpm/compare/v25.151.0...v25.151.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* **rgaa:** fix mesure ressources form ([#2807](https://github.com/SocialGouv/emjpm/issues/2807)) ([57d6c6d](https://github.com/SocialGouv/emjpm/commit/57d6c6dbc015d665d55716a18d32c10b60c0da0f))
+* **rgaa:** fix typo on error messages ([#2806](https://github.com/SocialGouv/emjpm/issues/2806)) ([ccd4d2c](https://github.com/SocialGouv/emjpm/commit/ccd4d2c70c35f9683d2649ca063cef5b5ebed67b))
+* **rgaa:** fix validation error on redirect_uris ([#2808](https://github.com/SocialGouv/emjpm/issues/2808)) ([04eb0b4](https://github.com/SocialGouv/emjpm/commit/04eb0b4bf88f66bac362b9709bb747c1d8f22560))
+
+
+
+
+
 # [25.151.0](https://github.com/SocialGouv/emjpm/compare/v25.150.3...v25.151.0) (2022-02-17)
 
 
