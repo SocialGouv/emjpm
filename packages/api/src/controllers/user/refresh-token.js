@@ -11,8 +11,9 @@ const refreshToken = async (req, res) => {
         .findOne({
           refresh_token: receivedRereshToken,
         });
+
       if (!foundedUser || !foundedUser.active) {
-        throw new Error("Utilisateur introuvable");
+        return res.status(404).json({ error: "Utilisateur introuvable" });
       }
 
       const isRefreshTokenValid = await foundedUser.verifyRefreshToken();
@@ -24,10 +25,14 @@ const refreshToken = async (req, res) => {
         });
       }
     } else {
-      throw new Error("Une erreur s'est produite");
+      return res.status(500).send({
+        error: "Une erreur s'est produite",
+      });
     }
   } catch (error) {
-    throw new Error("Une erreur s'est produite");
+    return res.status(500).send({
+      error: "Une erreur s'est produite",
+    });
   }
 };
 

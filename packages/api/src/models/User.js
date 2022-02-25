@@ -166,7 +166,7 @@ class User extends Model {
   async getRereshToken() {
     return jwt.sign({ id: this.id, name: this.email }, jwtConfig.key, {
       algorithm: "RS256",
-      expiresIn: 120,
+      expiresIn: "14d",
       subject: this.id.toString(),
     });
   }

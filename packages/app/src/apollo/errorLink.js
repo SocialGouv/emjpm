@@ -12,7 +12,7 @@ const refreshToken = (authStore) => {
   return fetch(`${config.API_URL}/api/auth/refresh-token`, {
     method: "POST",
     headers: {
-      "X-Auth-Refresh-Token": authStore?.refreshToken || null,
+      "X-Auth-Refresh-Token": authStore?.refreshToken,
     },
   });
 };
@@ -35,13 +35,12 @@ export default (authStore, renewToken) => {
                   },
                 });
                 renewToken(token);
-                console.log(token);
-                return forward(operation);
               })
-              .catch(() => {
+              .catch((error) => {
                 const msg = `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`;
 
                 console.error(msg);
+                console.error(error);
                 captureException(msg);
                 logout();
               });
@@ -53,6 +52,7 @@ export default (authStore, renewToken) => {
           logout();
           return;
         }
+
         const msg = `[Network error]: ${networkError}`;
         console.error(msg);
         captureException(msg);
