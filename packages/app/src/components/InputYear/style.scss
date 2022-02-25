@@ -12,5 +12,7 @@
     outline: none;
     border: solid 1px #007AD9 !important;
   }
-
+  .has-error & {
+    border: solid 1px #FF6966 !important;
+  }
 }

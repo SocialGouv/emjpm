@@ -290,6 +290,16 @@ export function ListeBlanchePreposeForm(props) {
                       );
                     }
                   }}
+                  onBlur={() => {
+                    formik.setTouched({
+                      ...formik.touched,
+                      ["etablissements"]: true,
+                    });
+                  }}
+                  hasError={
+                    formik.errors.etablissements &&
+                    (formik.touched.etablissements || formik.submitCount > 0)
+                  }
                   aria-label="Nom du service"
                 />
               </div>
