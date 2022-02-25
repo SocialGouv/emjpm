@@ -74,11 +74,12 @@ function authReducer(state, { type, payload }) {
         token: null,
         type: null,
         isImpersonated: false,
+        refreshToken: null,
       };
     }
     case "login": {
-      const { id, type, token } = payload;
-      return { ...state, id, token, type };
+      const { id, type, token, refreshToken } = payload;
+      return { ...state, id, token, type, refreshToken };
     }
     case "loaded": {
       return { ...state };
@@ -100,13 +101,14 @@ export function useProvideAuth() {
   }, [dispatchAuthStore]);
 
   const login = useCallback(
-    ({ token, id, type }) => {
+    ({ token, id, type, refreshToken }) => {
       localStorage.setItem(
         "auth",
         JSON.stringify({
           token,
           id,
           type,
+          refreshToken,
         })
       );
 
@@ -119,6 +121,7 @@ export function useProvideAuth() {
           id,
           token,
           type,
+          refreshToken,
         },
         type: "login",
       });

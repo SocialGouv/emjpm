@@ -89,7 +89,6 @@ class User extends Model {
     const defaultRoleName = (
       this.roles.find((role) => MAIN_ROLES.includes(role.name)) || {}
     ).name;
-
     if (!defaultRoleName) {
       throw new Error(
         "No default role found in the list : " + JSON.stringify(this.roles)
@@ -100,12 +99,13 @@ class User extends Model {
 
   async getUser() {
     const token = await this.getJwt();
+    const refreshToken = await this.getRereshToken();
     return {
       email: this.email,
       id: this.id,
+      refreshToken,
       roles: this.getRoles(),
       token: token,
-
       type: this.type,
 
       // TODO: remove when full graphql auth
@@ -148,7 +148,7 @@ class User extends Model {
   async getJwt() {
     const signOptions = {
       algorithm: "RS256",
-      expiresIn: "30d",
+      expiresIn: 10,
       subject: this.id.toString(),
     };
 
@@ -161,6 +161,28 @@ class User extends Model {
       url: redirs[this.type] || redirs.default,
     };
     return jwt.sign(claim, jwtConfig.key, signOptions);
+  }
+
+  async getRereshToken() {
+    return jwt.sign({ id: this.id, name: this.email }, jwtConfig.key, {
+      algorithm: "RS256",
+      expiresIn: 120,
+      subject: this.id.toString(),
+    });
+  }
+
+  async verifyRefreshToken() {
+    return jwt.verify(
+      this.refresh_token,
+      jwtConfig.key,
+      {
+        algorithms: ["RS256"],
+      },
+      function (err) {
+        if (err) return false;
+        return true;
+      }
+    );
   }
 
   async $beforeInsert() {
