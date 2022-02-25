@@ -84,6 +84,12 @@ function authReducer(state, { type, payload }) {
     case "loaded": {
       return { ...state };
     }
+    case "renewToken": {
+      return {
+        ...state,
+        token: payload,
+      };
+    }
     default:
       throw new Error("unknown auth action '" + type + "'");
   }
@@ -99,6 +105,10 @@ export function useProvideAuth() {
     logoutLocalStorage();
     dispatchAuthStore({ type: "logout" });
   }, [dispatchAuthStore]);
+
+  const renewToken = useCallback((newToken) => {
+    dispatchAuthStore({ type: "renewToken", payload: newToken });
+  }, []);
 
   const login = useCallback(
     ({ token, id, type, refreshToken }) => {
@@ -154,6 +164,7 @@ export function useProvideAuth() {
     authStore,
     login,
     logout,
+    renewToken,
   };
 }
 

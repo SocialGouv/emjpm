@@ -8,17 +8,22 @@ import {
 
 import config from "~/config";
 
-import errorLink from "./errorLink";
+import createErrorLink from "./errorLink";
 
 const { GRAPHQL_SERVER_URI } = config;
 
-export default function useInitApolloClient(initialState, token) {
+export default function useInitApolloClient(
+  initialState,
+  authStore,
+  renewToken
+) {
   const authMiddleware = new ApolloLink((operation, forward) => {
     const headers = operation.getContext().hasOwnProperty("headers")
       ? operation.getContext().headers
       : {};
-    if (token && headers["X-Hasura-Role"] !== "anonymous") {
-      headers["Authorization"] = "Bearer " + token;
+
+    if (authStore?.token && headers["X-Hasura-Role"] !== "anonymous") {
+      headers["Authorization"] = "Bearer " + authStore.token;
     } else {
       headers["X-Hasura-Role"] = "anonymous";
     }
@@ -30,7 +35,7 @@ export default function useInitApolloClient(initialState, token) {
     credentials: "same-origin",
     uri: GRAPHQL_SERVER_URI,
   });
-
+  const errorLink = createErrorLink(authStore, renewToken);
   return new ApolloClient({
     cache: new InMemoryCache().restore(initialState || {}),
     connectToDevTools: true,
