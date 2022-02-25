@@ -115,6 +115,7 @@ function SignupServiceForm({ serviceDatas }) {
                     (options || []).map((o) => o.value)
                   );
                 }}
+                required
               />
             </Box>
             <FormGroupSelect
@@ -123,6 +124,7 @@ function SignupServiceForm({ serviceDatas }) {
               placeholder="Votre service"
               options={serviceOptions}
               isClearable
+              required
             />
           </FormInputBox>
         </Flex>
