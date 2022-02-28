@@ -1,11 +1,10 @@
 import { ApolloProvider } from "@apollo/client";
 
 import useInitApolloClient from "./useInitApolloClient";
-import { useAuth } from "~/user/Auth";
+
+const initialState = {};
 
 export default function AppApollo({ children }) {
-  const { authStore, renewToken } = useAuth();
-
-  const apolloClient = useInitApolloClient({}, authStore, renewToken);
+  const apolloClient = useInitApolloClient(initialState);
   return <ApolloProvider client={apolloClient}>{children}</ApolloProvider>;
 }

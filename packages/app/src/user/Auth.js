@@ -15,6 +15,7 @@ import fetch from "unfetch";
 import { matopush } from "~/user/matomo";
 import config from "~/config";
 import history from "~/routes/history";
+import creds from "~/user/creds";
 
 const { API_URL } = config;
 
@@ -27,7 +28,7 @@ export function ProvideAuth({ children }) {
     (event) => {
       if (event.key === "logout") {
         const { authStore } = auth;
-        if (authStore.token) {
+        if (authStore.id) {
           auth.logout();
         }
       }
@@ -65,30 +66,25 @@ const getAuthInitialState = () => {
 
 const authInitialState = getAuthInitialState();
 
+creds.token = authInitialState.token;
+creds.refreshToken = authInitialState.refreshToken;
+
 function authReducer(state, { type, payload }) {
   switch (type) {
     case "logout": {
       return {
         ...state,
         id: null,
-        token: null,
         type: null,
         isImpersonated: false,
-        refreshToken: null,
       };
     }
     case "login": {
-      const { id, type, token, refreshToken } = payload;
-      return { ...state, id, token, type, refreshToken };
+      const { id, type } = payload;
+      return { ...state, id, type };
     }
     case "loaded": {
       return { ...state };
-    }
-    case "renewToken": {
-      return {
-        ...state,
-        token: payload,
-      };
     }
     default:
       throw new Error("unknown auth action '" + type + "'");
@@ -103,11 +99,13 @@ export function useProvideAuth() {
 
   const logout = useCallback(() => {
     logoutLocalStorage();
+    creds.refreshToken = null;
+    creds.token = null;
     dispatchAuthStore({ type: "logout" });
   }, [dispatchAuthStore]);
 
   const renewToken = useCallback((newToken) => {
-    dispatchAuthStore({ type: "renewToken", payload: newToken });
+    creds.token = newToken;
   }, []);
 
   const login = useCallback(
@@ -115,10 +113,10 @@ export function useProvideAuth() {
       localStorage.setItem(
         "auth",
         JSON.stringify({
-          token,
           id,
-          type,
+          token,
           refreshToken,
+          type,
         })
       );
 
@@ -126,12 +124,12 @@ export function useProvideAuth() {
       matopush(["setUserId", type + "-" + id]);
       matopush(["trackPageView"]);
 
+      creds.token = token;
+      creds.refreshToken = refreshToken;
       dispatchAuthStore({
         payload: {
           id,
-          token,
           type,
-          refreshToken,
         },
         type: "login",
       });
@@ -140,17 +138,17 @@ export function useProvideAuth() {
   );
 
   // login redirect
-  const prevLoggedStateRef = useRef(() => authStore.token);
+  const prevLoggedStateRef = useRef(() => authStore.id);
   useEffect(() => {
     const { pathname } = window.location;
-    if (!authStore.token && pathname === "/") {
+    if (!authStore.id && pathname === "/") {
       history.push("/login");
     }
 
-    if (authStore.token && prevLoggedStateRef.current !== authStore.token) {
+    if (authStore.id && prevLoggedStateRef.current !== authStore.id) {
       const isOauth = pathname === "/application/authorization";
       if (!isOauth) {
-        const { url, role } = jwtDecode(authStore.token);
+        const { url, role } = jwtDecode(creds.token);
         if (!url) {
           logout();
         }
@@ -175,7 +173,7 @@ export function PrivateRoute({ children, ...rest }) {
     <Route
       {...rest}
       render={({ location }) =>
-        authStore.token ? (
+        authStore.id ? (
           children
         ) : (
           <Redirect
@@ -232,9 +230,9 @@ export function logoutLocalStorage() {
 export function AuthRedirect(props) {
   const auth = useAuth();
   useEffect(() => {
-    const { authStore, logout } = auth;
-    if (authStore.token) {
-      const { role } = jwtDecode(authStore.token);
+    const { authStore } = auth;
+    if (authStore.id) {
+      const { role } = jwtDecode(creds.token);
       history.push(routeByRole[role]);
       return null;
     }
