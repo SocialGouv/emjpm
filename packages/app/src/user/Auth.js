@@ -146,6 +146,7 @@ export function useProvideAuth() {
     if (!authStore.token && pathname === "/") {
       history.push("/login");
     }
+
     if (authStore.token && prevLoggedStateRef.current !== authStore.token) {
       const isOauth = pathname === "/application/authorization";
       if (!isOauth) {

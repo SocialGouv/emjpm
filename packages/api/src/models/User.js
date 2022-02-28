@@ -148,7 +148,7 @@ class User extends Model {
   async getJwt() {
     const signOptions = {
       algorithm: "RS256",
-      expiresIn: "24h",
+      expiresIn: 10,
       subject: this.id.toString(),
     };
 
