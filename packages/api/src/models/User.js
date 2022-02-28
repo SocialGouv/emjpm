@@ -148,7 +148,7 @@ class User extends Model {
   async getJwt() {
     const signOptions = {
       algorithm: "RS256",
-      expiresIn: 10,
+      expiresIn: "24h",
       subject: this.id.toString(),
     };
 
@@ -160,10 +160,15 @@ class User extends Model {
       role: this.getDefaultRole(),
       url: redirs[this.type] || redirs.default,
     };
+
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
 
   async getRereshToken() {
+    const refreshTokenStillValid = await this.isRefreshTokenValid();
+    if (refreshTokenStillValid) {
+      return this.refresh_token;
+    }
     return jwt.sign({ id: this.id, name: this.email }, jwtConfig.key, {
       algorithm: "RS256",
       expiresIn: "14d",
@@ -171,7 +176,7 @@ class User extends Model {
     });
   }
 
-  async verifyRefreshToken() {
+  async isRefreshTokenValid() {
     return jwt.verify(
       this.refresh_token,
       jwtConfig.key,
