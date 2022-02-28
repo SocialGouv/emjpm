@@ -16,8 +16,8 @@ const refreshToken = async (req, res) => {
         return res.status(404).json({ error: "Utilisateur introuvable" });
       }
 
-      const validRefreshToekn = await foundedUser.isRefreshTokenValid();
-      if (validRefreshToekn) {
+      const validRefreshToken = await foundedUser.isRefreshTokenValid();
+      if (validRefreshToken) {
         const newAccessToken = await foundedUser.getJwt();
 
         return res.status(200).send({
