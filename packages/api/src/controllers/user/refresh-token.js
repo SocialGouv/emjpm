@@ -17,10 +17,23 @@ const refreshToken = async (req, res) => {
       }
 
       const validRefreshToken = await foundedUser.isRefreshTokenValid();
-      if (validRefreshToken) {
+      const { isValid, expiresSoon } = validRefreshToken;
+      if (expiresSoon) {
+        const newRefreshToken = await foundedUser.generateRefreshToken();
+        await User.query().findById(foundedUser.id).update({
+          refresh_token: newRefreshToken,
+        });
+        const newAccessToken = await foundedUser.getJwt();
+        return res.status(200).send({
+          refresh_token: newRefreshToken,
+          token: newAccessToken,
+        });
+      }
+      if (isValid) {
         const newAccessToken = await foundedUser.getJwt();
 
         return res.status(200).send({
+          refreshToken: receivedRereshToken,
           token: newAccessToken,
         });
       }

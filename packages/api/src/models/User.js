@@ -27,6 +27,12 @@ const redirs = {
   ti: "/magistrats",
 };
 
+const TokenExpiration = {
+  Access: 10,
+  Refresh: 14 * 24 * 60 * 60,
+  RefreshIfLessThan: 14 * 24 * 60 * 60,
+};
+
 class User extends Model {
   static get tableName() {
     return "users";
@@ -148,7 +154,7 @@ class User extends Model {
   async getJwt() {
     const signOptions = {
       algorithm: "RS256",
-      expiresIn: 10,
+      expiresIn: TokenExpiration.Access,
       subject: this.id.toString(),
     };
 
@@ -164,16 +170,21 @@ class User extends Model {
     return jwt.sign(claim, jwtConfig.key, signOptions);
   }
 
-  async getRereshToken() {
-    const refreshTokenStillValid = await this.isRefreshTokenValid();
-    if (refreshTokenStillValid) {
-      return this.refresh_token;
-    }
+  async generateRefreshToken() {
     return jwt.sign({ id: this.id, name: this.email }, jwtConfig.key, {
       algorithm: "RS256",
-      expiresIn: "14d",
+      expiresIn: TokenExpiration.Refresh,
       subject: this.id.toString(),
     });
+  }
+
+  async getRereshToken() {
+    const refreshTokenStillValid = await this.isRefreshTokenValid();
+    const { isValid } = refreshTokenStillValid;
+    if (isValid) {
+      return this.refresh_token;
+    }
+    return this.generateRefreshToken();
   }
 
   async isRefreshTokenValid() {
@@ -183,9 +194,33 @@ class User extends Model {
       {
         algorithms: ["RS256"],
       },
-      function (err) {
-        if (err) return false;
-        return true;
+      function (err, decoded) {
+        if (err) {
+          return {
+            expired: true,
+            expiresSoon: false,
+            isValid: false,
+          };
+        }
+
+        const expiration = new Date(decoded.exp * 1000);
+        const now = new Date();
+        const secondsUntilExpiration =
+          (expiration.getTime() - now.getTime()) / 1000;
+
+        if (secondsUntilExpiration < TokenExpiration.RefreshIfLessThan) {
+          return {
+            expired: false,
+            expiresSoon: true,
+            isValid: true,
+          };
+        }
+
+        return {
+          expired: false,
+          expiresSoon: false,
+          isValid: true,
+        };
       }
     );
   }

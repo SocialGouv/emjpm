@@ -24,16 +24,18 @@ const errorLink = onError(
   ({ graphQLErrors, networkError, operation, forward }) => {
     if (graphQLErrors) {
       let isInvalidJWT;
-      for (const { extensions } of graphQLErrors) {
+      let ErrorMessage;
+      for (const { extensions, message } of graphQLErrors) {
         if (extensions.code === "invalid-jwt") {
           isInvalidJWT = true;
+          ErrorMessage = message;
           break;
         }
       }
       if (isInvalidJWT) {
         const tokenRefreshPromise = refreshToken()
           .then((response) => response.json())
-          .then(({ token }) => {
+          .then(({ token, refresh_token }) => {
             const oldHeaders = operation.getContext().headers;
 
             operation.setContext({
@@ -43,23 +45,24 @@ const errorLink = onError(
               },
             });
             creds.token = token;
+            creds.refreshToken = refresh_token;
             return forward(operation);
           })
           .catch((error) => {
-            const msg = `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`;
-
+            const msg = `[GraphQL error]: Message: ${ErrorMessage}`;
             console.error(msg);
             console.error(error);
             captureException(msg);
             logout();
           });
 
-        return fromPromise(tokenRefreshPromise).flatMap(() =>
-          forward(operation)
-        );
+        return fromPromise(tokenRefreshPromise).flatMap(() => {
+          return forward(operation);
+        });
       }
     }
     if (networkError) {
+      console.log(networkError);
       if (networkError.statusCode === 401) {
         logout();
         return;
