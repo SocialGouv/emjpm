@@ -37,6 +37,11 @@ const errorLink = onError(
           try {
             const jsonResponse = await refreshToken();
             const response = await jsonResponse.json();
+
+            if (response.error) {
+              throw new Error(response.error);
+            }
+
             const { token, refresh_token } = response;
             const oldHeaders = operation.getContext().headers;
 

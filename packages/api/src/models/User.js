@@ -28,7 +28,7 @@ const redirs = {
 };
 
 const TokenExpiration = {
-  Access: 10,
+  Access: 24 * 60 * 60,
   Refresh: 14 * 24 * 60 * 60,
   RefreshIfLessThan: 14 * 24 * 60 * 60,
 };
