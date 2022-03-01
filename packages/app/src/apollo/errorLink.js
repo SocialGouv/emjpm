@@ -33,9 +33,11 @@ const errorLink = onError(
         }
       }
       if (isInvalidJWT) {
-        const tokenRefreshPromise = refreshToken()
-          .then((response) => response.json())
-          .then(({ token, refresh_token }) => {
+        const tokenRefreshPromise = (async () => {
+          try {
+            const jsonResponse = await refreshToken();
+            const response = await jsonResponse.json();
+            const { token, refresh_token } = response;
             const oldHeaders = operation.getContext().headers;
 
             operation.setContext({
@@ -46,15 +48,14 @@ const errorLink = onError(
             });
             creds.token = token;
             creds.refreshToken = refresh_token;
-            return forward(operation);
-          })
-          .catch((error) => {
+          } catch (err) {
             const msg = `[GraphQL error]: Message: ${ErrorMessage}`;
             console.error(msg);
             console.error(error);
             captureException(msg);
             logout();
-          });
+          }
+        })();
 
         return fromPromise(tokenRefreshPromise).flatMap(() => {
           return forward(operation);
