@@ -49,10 +49,8 @@ const errorLink = onError(
             creds.token = token;
             creds.refreshToken = refresh_token;
           } catch (err) {
-            const msg = `[GraphQL error]: Message: ${ErrorMessage}`;
-            console.error(msg);
-            console.error(error);
-            captureException(msg);
+            console.error(err);
+            captureException(err);
             logout();
           }
         })();
