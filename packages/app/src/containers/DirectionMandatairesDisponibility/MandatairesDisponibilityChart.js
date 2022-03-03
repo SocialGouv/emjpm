@@ -14,7 +14,6 @@ import { SrOnly } from "~/components";
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
 function MandatairesDisponibilityChart({ data }) {
-  console.log("===> data", data);
   return (
     <Box>
       <Box
