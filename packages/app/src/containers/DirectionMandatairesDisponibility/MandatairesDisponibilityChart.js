@@ -9,7 +9,7 @@ import {
 } from "recharts";
 
 import { textStyle } from "~/containers/DirectionMandatairesActivity/style";
-import { SrOnly, Table } from "~/components";
+import { SrOnly } from "~/components";
 
 const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
 
