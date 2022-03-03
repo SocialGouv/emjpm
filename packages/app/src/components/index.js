@@ -42,3 +42,5 @@ export { default as AccessibleSelect } from "./AccessibleSelect";
 export { default as AcessibleRadioGroup } from "./AcessibleRadioGroup";
 
 export { default as SkipToContent } from "./SkipToContent";
+
+export { default as Table } from "./Table";

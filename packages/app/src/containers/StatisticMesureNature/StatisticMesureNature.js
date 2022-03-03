@@ -4,7 +4,7 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 import { Link } from "~/components/Link";
 import useUser from "~/hooks/useUser";
-import { Heading, Text } from "~/components";
+import { Heading, Text, Table, SrOnly } from "~/components";
 
 const COLORS = [
   "#FF6633",
@@ -74,65 +74,73 @@ function StatisticMesureNature() {
   }, 0);
 
   return (
-    <Card m={1} width="100%">
-      <Box>
-        <Heading size={4}>Répartition des mesures par nature</Heading>
-      </Box>
+    <>
+      <Card m={1} width="100%">
+        <Box>
+          <Heading size={4}>Répartition des mesures par nature</Heading>
+        </Box>
 
-      {data?.length === 0 && (
-        <Flex pt={7}>
-          <Text>{"Aucune donnée disponible. Merci de renseigner "}</Text>
-          <Link
-            to="mandataires/mesures"
-            component={(props) => (
-              <RebassLink onClick={() => props.navigate(props.href)} pl="4px">
-                vos mesures
-              </RebassLink>
-            )}
-          ></Link>
-        </Flex>
-      )}
-      <Flex>
-        <PieChart
-          width={300}
-          height={300}
-          role="img"
-          id="chart"
-          aria-label={`${numberOfMesures} mesures réparties par nature`}
-        >
-          <Pie
-            data={data}
-            cx={150}
-            cy={150}
-            outerRadius={100}
-            fill="#8884d8"
-            dataKey="value"
-            aria-describedby="chart"
+        {data?.length === 0 && (
+          <Flex pt={7}>
+            <Text>{"Aucune donnée disponible. Merci de renseigner "}</Text>
+            <Link
+              to="mandataires/mesures"
+              component={(props) => (
+                <RebassLink onClick={() => props.navigate(props.href)} pl="4px">
+                  vos mesures
+                </RebassLink>
+              )}
+            ></Link>
+          </Flex>
+        )}
+        <Flex>
+          <PieChart
+            width={300}
+            height={300}
+            role="img"
+            id="chart"
+            aria-label={`${numberOfMesures} mesures réparties par nature. Voir le tableau ci-dessous pour les données.`}
           >
-            {data.map((_, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-        </PieChart>
-        <Flex flexDirection="column" justifyContent="center">
-          {data.map((stat, index) => {
-            return (
-              <Flex m={1} key={index}>
-                <Box bg={COLORS[index]} width="20px" height="20px" />
-                <Text fontWeight="bold" ml={1}>
-                  {stat.value}
-                </Text>
-                <Text ml={1}>{stat.name}</Text>
-              </Flex>
-            );
-          })}
+            <Pie
+              data={data}
+              cx={150}
+              cy={150}
+              outerRadius={100}
+              fill="#8884d8"
+              dataKey="value"
+              aria-describedby="chart"
+            >
+              {data.map((_, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+          </PieChart>
+          <Flex flexDirection="column" justifyContent="center">
+            {data.map((stat, index) => {
+              return (
+                <Flex m={1} key={index}>
+                  <Box bg={COLORS[index]} width="20px" height="20px" />
+                  <Text fontWeight="bold" ml={1}>
+                    {stat.value}
+                  </Text>
+                  <Text ml={1}>{stat.name}</Text>
+                </Flex>
+              );
+            })}
+          </Flex>
         </Flex>
-      </Flex>
-    </Card>
+      </Card>
+      <SrOnly>
+        <Table
+          columns={data.map((x) => x.name).length}
+          tableData={[...data.map((x) => x.name), ...data.map((x) => x.value)]}
+        />
+      </SrOnly>
+    </>
   );
 }
 
