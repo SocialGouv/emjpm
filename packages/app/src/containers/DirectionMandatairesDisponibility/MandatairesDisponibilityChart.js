@@ -32,7 +32,7 @@ function MandatairesDisponibilityChart({ data }) {
               top: 20,
             }}
             role="img"
-            aria-label="Disponibilités par type de mandataires"
+            aria-label="Disponibilités par type de mandataires. Voir le tableau ci-dessous pour les données."
             aria-describedby="disponibilites_par_type"
           >
             <Tooltip cursor={{ fill: "#F1F5F9" }} />
@@ -55,6 +55,25 @@ function MandatairesDisponibilityChart({ data }) {
           </BarChart>
         </ResponsiveContainer>
       </Box>
+
+      <SrOnly>
+        <table>
+          <tr>
+            <th scope="row">Type de mandataires</th>
+            <th scope="col">Disponibilité actuelle</th>
+            <th scope="col">Disponibilité max</th>
+            <th scope="col">Surcapacité</th>
+          </tr>
+          {data.map((el) => (
+            <tr key={el.name}>
+              <th scope="row">{el.name}</th>
+              <td>{el["Disponibilité actuelle"]}</td>
+              <td>{el["Disponibilité max"]}</td>
+              <td>{el.overcapacity ? "Oui" : "Non"}</td>
+            </tr>
+          ))}
+        </table>
+      </SrOnly>
       <Box
         sx={{
           display: "grid",
