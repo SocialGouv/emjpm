@@ -392,6 +392,16 @@ export function ListeBlancheIndividuelForm(props) {
                   })
                 )
               }
+              onBlur={() => {
+                formik.setTouched({
+                  ...formik.touched,
+                  ["departements"]: true,
+                });
+              }}
+              hasError={
+                formik.errors.departements &&
+                (formik.touched.departements || formik.submitCount > 0)
+              }
               required
             />
           </div>

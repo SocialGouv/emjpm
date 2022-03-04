@@ -28,8 +28,11 @@ export default function FormGroupInputDate({
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
+  const hasError =
+    formik.errors[id] && (formik.touched[id] || formik.submitCount > 0);
+
   return (
-    <Field>
+    <Field className={hasError ? "has-error" : ""}>
       <Flex alignItems="center" title={title}>
         <InputDate
           placeholderText={placeholder}

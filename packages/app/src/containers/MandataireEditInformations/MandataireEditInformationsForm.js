@@ -219,6 +219,7 @@ function MandataireEditInformationsForm(props) {
                 resource={geocodeResource}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
+                hasError={formik.errors.geocode}
               />
               <div id="msg-geocode">
                 <InlineError
