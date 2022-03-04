@@ -30,7 +30,7 @@ const redirs = {
 const TokenExpiration = {
   Access: 24 * 60 * 60,
   Refresh: 14 * 24 * 60 * 60,
-  RefreshIfLessThan: 7 * 24 * 60 * 60,
+  RefreshIfLessThan: 24 * 60 * 60,
 };
 
 class User extends Model {
