@@ -48,6 +48,10 @@ const login = async (req, res, next) => {
 
       const userResult = await user.getUser();
 
+      await User.query().findById(user.id).update({
+        refresh_token: userResult.refreshToken,
+      });
+
       return res.status(200).json(userResult);
     }
   })(req, res, next);
