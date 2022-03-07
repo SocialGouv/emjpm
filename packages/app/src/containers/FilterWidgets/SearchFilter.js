@@ -17,7 +17,7 @@ export default function SearchFilter() {
   );
 
   return (
-    <Box width="170px" mr={1} tabIndex="0" id="search_filter">
+    <Box width="170px" mr={1} tabIndex="-1" id="search_filter">
       <Input
         value={searchText}
         spellCheck="false"

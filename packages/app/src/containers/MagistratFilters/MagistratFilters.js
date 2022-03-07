@@ -45,7 +45,7 @@ function MagistratFilters() {
         justifyContent={"space-between"}
         flexWrap="wrap"
         id="magistrats_filter"
-        tabIndex="0"
+        tabIndex="-1"
       >
         <Box>
           <Flex>

@@ -64,7 +64,7 @@ function GreffierMapMandatairesPanelList() {
   return (
     <Box pt="2" px="2" sx={GreffierMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>
-        <Box mr="1" mb="4" id="greffier_mandataires_list" tabIndex="0">
+        <Box mr="1" mb="4" id="greffier_mandataires_list" tabIndex="-1">
           {gestionnaires.map((gestionnaire) => {
             return (
               <MandataireListItem

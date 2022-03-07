@@ -29,7 +29,7 @@ export function ListeBlanchePreposeCreate() {
   useQueryReady(loading, error);
 
   return (
-    <Card p={5} id="list_blanche_prepose_create" tabIndex="0">
+    <Card p={5} id="list_blanche_prepose_create" tabIndex="-1">
       <ListeBlanchePreposeForm
         editMode={false}
         handleSubmit={async (values) => {

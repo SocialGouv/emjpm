@@ -18,7 +18,7 @@ export function ListeBlancheIndividuelCreate() {
   useQueryReady(loading, error);
 
   return (
-    <Card p={5} id="liste_blanche_individuel_create" tabIndex="0">
+    <Card p={5} id="liste_blanche_individuel_create" tabIndex="-1">
       <ListeBlancheIndividuelForm
         editMode={false}
         loading={loading}

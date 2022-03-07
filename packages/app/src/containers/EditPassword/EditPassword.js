@@ -79,7 +79,7 @@ function EditPassword() {
   });
 
   return (
-    <Card mt="5" p="0" id="modifier_mot_de_passe" tabIndex="0">
+    <Card mt="5" p="0" id="modifier_mot_de_passe" tabIndex="-1">
       <Flex>
         <Box
           width={[1, 1 / 2]}

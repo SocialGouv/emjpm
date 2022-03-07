@@ -63,7 +63,7 @@ export function EtablissementViewForm(props) {
     sourcecoordet,
   } = data;
   return (
-    <Card id="etablissement_view" tabIndex="0">
+    <Card id="etablissement_view" tabIndex="-1">
       <Box mb={2}>
         <LabelValue label="id" value={id} />
         <LabelValue value={siret} label="SIRET" />
