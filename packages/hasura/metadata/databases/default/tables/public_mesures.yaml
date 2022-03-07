@@ -315,6 +315,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - editor_id
     - en_attente_reouverture
     - id
     - is_urgent
@@ -359,6 +360,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - editor_id
     - en_attente_reouverture
     - id
     - is_urgent
@@ -402,6 +404,7 @@ select_permissions:
     - date_premier_mesure
     - date_protection_en_cours
     - departement_code
+    - editor_id
     - en_attente_reouverture
     - id
     - is_urgent

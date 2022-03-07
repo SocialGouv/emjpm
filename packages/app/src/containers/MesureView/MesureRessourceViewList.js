@@ -14,7 +14,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
 
   const { mesureRessources } = mesure;
 
-  const { locked, message } = useMesuresLocked();
+  const { locked, message } = useMesuresLocked(mesure);
   const mesureModificationButtonProps = locked
     ? {
         disabled: true,

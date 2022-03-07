@@ -52,6 +52,7 @@ function formatMesure(mesure) {
     mesure_ressources = [],
     mesure_en_attente_reouvertures = [],
     created_at,
+    editor_id,
   } = mesure;
 
   const {
@@ -137,5 +138,6 @@ function formatMesure(mesure) {
     ville: ville ? ville : "",
     en_attente_reouverture: en_attente_reouverture,
     mesure_en_attente_reouvertures: mesure_en_attente_reouvertures,
+    editor_id,
   };
 }

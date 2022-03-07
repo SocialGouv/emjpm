@@ -54,7 +54,7 @@ function MesureDetailView({ mesure, ...props }) {
     formatPays,
   } = mesureFormatter;
 
-  const { locked, message } = useMesuresLocked();
+  const { locked, message } = useMesuresLocked(mesure);
 
   const mesureModificationButtonProps =
     locked && status !== "en_attente"
