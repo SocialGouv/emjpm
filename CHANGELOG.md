@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.1](https://github.com/SocialGouv/emjpm/compare/v25.152.0...v25.152.1) (2022-03-07)
+
+
+### Bug Fixes
+
+* **perms:** editor_id ([c03ea0a](https://github.com/SocialGouv/emjpm/commit/c03ea0af35d75ddff780eb768fb5221d7c478ebe))
+
+
+
+
+
 # [25.152.0](https://github.com/SocialGouv/emjpm/compare/v25.151.1...v25.152.0) (2022-03-07)
 
 
