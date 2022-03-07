@@ -51,6 +51,7 @@ function formatMesure(mesure) {
     mesure_etats = [],
     mesure_ressources = [],
     mesure_en_attente_reouvertures = [],
+    created_at,
   } = mesure;
 
   const {
@@ -88,6 +89,7 @@ function formatMesure(mesure) {
     dateProtectionEnCoursFormatted: date_protection_en_cours
       ? stdFormatter.formatDateUI(date_protection_en_cours)
       : "",
+    createdAtFormatted: created_at ? stdFormatter.formatDateUI(created_at) : "",
     departementCode: departement ? departement.id : null,
     id: id,
     isUrgent: is_urgent,
