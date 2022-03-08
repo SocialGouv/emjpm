@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.2](https://github.com/SocialGouv/emjpm/compare/v25.152.1...v25.152.2) (2022-03-08)
+
+
+### Bug Fixes
+
+* **oauth:** fix refresh token implem side effect ([06d9840](https://github.com/SocialGouv/emjpm/commit/06d9840d998b1ad4b3e8143b0cfab7c962e2f231))
+* **rgaa:** fix skip to content ([#2817](https://github.com/SocialGouv/emjpm/issues/2817)) ([0afa2b2](https://github.com/SocialGouv/emjpm/commit/0afa2b208ad29dba2b6713a3d02aad36d1aa65c5))
+* **suspend-activity:** required reason fix [#2818](https://github.com/SocialGouv/emjpm/issues/2818) ([1fe83d0](https://github.com/SocialGouv/emjpm/commit/1fe83d042a5aa6669323f7f59aae0d0f349c1201))
+
+
+
+
+
 ## [25.152.1](https://github.com/SocialGouv/emjpm/compare/v25.152.0...v25.152.1) (2022-03-07)
 
 
