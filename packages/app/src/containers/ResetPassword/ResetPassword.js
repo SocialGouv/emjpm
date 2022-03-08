@@ -76,7 +76,7 @@ function ResetPassword(props) {
       sx={cardStyle}
       maxWidth={["100%", "60%", "50%"]}
       id="reset_password"
-      tabIndex="0"
+      tabIndex="-1"
     >
       <Box sx={grayBox}>
         <Box>

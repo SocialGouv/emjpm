@@ -27,7 +27,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Liste blanche | e-MJPM</title>
       </Helmet>
-      <SkipToContent skipTo="list_blanche_filter" />
+      <SkipToContent skipTo="direction_filter" />
       <LayoutDirection>
         <FiltersContextSerializableProvider
           useLocalStorage={true}

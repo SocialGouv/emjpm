@@ -33,6 +33,7 @@ function MesuresListView() {
               flexDirection="row"
               justifyContent="space-between"
               id="mesures_list_filter"
+              tabIndex="-1"
             >
               <HeadingTitle>Vos mesures</HeadingTitle>
               <MesureListButtonBar />

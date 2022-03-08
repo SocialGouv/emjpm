@@ -27,7 +27,7 @@ export function MagistratMesureDelete() {
       <Flex
         sx={MagistratMesureRemoveStyle}
         id="magistrat_mesure_form_delete"
-        tabIndex="0"
+        tabIndex="-1"
       >
         <MagistratMesureDeleteForm mesure={mesure} />
       </Flex>{" "}

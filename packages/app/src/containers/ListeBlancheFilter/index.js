@@ -65,13 +65,7 @@ function ListeBlancheFilter() {
 
   return (
     <>
-      <Card
-        sx={{ position: "relative" }}
-        tabIndex="0"
-        id="direction_filter"
-        id="list_blanche_filter"
-        tabIndex="0"
-      >
+      <Card sx={{ position: "relative" }} tabIndex="-1" id="direction_filter">
         <Box
           ref={ref}
           sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}

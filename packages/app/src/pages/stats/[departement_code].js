@@ -30,7 +30,7 @@ function DepartmentStatsPage() {
                 p: 3,
               }}
               id="indicators_menu"
-              tabIndex="0"
+              tabIndex="-1"
             >
               <IndicatorsMenu />
             </Box>

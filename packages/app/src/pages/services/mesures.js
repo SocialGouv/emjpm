@@ -49,8 +49,13 @@ export default function Mesures() {
         }}
       >
         <LayoutServices>
-          <BoxWrapper mt={2} px="1" id="vos_mesures_block">
-            <Flex flexDirection="row" justifyContent="space-between">
+          <BoxWrapper mt={2} px="1">
+            <Flex
+              flexDirection="row"
+              justifyContent="space-between"
+              id="vos_mesures_block"
+              tabIndex="-1"
+            >
               <HeadingTitle>Vos mesures</HeadingTitle>
               <MesureListButtonBar />
             </Flex>

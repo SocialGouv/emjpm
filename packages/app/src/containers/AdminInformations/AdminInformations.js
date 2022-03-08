@@ -11,7 +11,7 @@ import { boxStyle, flexStyle, iconTextStyle } from "./style";
 function AdminInformations(props) {
   const { email, nom, prenom } = useUser();
   return (
-    <Box {...props} id="vos_informations" tabIndex="0">
+    <Box {...props} id="vos_informations" tabIndex="-1">
       <Card p="5">
         <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}
