@@ -340,6 +340,7 @@ function AdminUserServiceForm(props) {
               formik={formik}
               validationSchema={adminUserServiceSchema}
               aria-label="Rraisons de suspension de l'activité"
+              required
             />
           )}
           <FormGroupInput

@@ -327,6 +327,7 @@ function MandataireEditInformationsForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 aria-label="Motif de l'absence"
+                required
               />
             )}
             <FormGroupInput
