@@ -61,6 +61,7 @@ const adminUserServiceSchema = yup.object().shape({
   prenom: yup.string().required(PRENOM_NOT_VALID),
   telephone: yup.string(TELEPHONE_NOT_VALID),
   tis: yup.mixed().required(),
+  suspendActivityReason: yup.string().nullable().required(),
 });
 
 export { adminUserServiceSchema };
