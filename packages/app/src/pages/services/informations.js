@@ -15,7 +15,7 @@ function Informations() {
       </Helmet>
       <SkipToContent skipTo="service_informations" />
       <LayoutServices>
-        <BoxWrapper m={2} px="1" id="service_informations">
+        <BoxWrapper m={2} px="1" id="service_informations" tabIndex="-1">
           <Card p="5" m={2}>
             <ServiceInformations mt="3" />
           </Card>

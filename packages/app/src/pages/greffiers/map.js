@@ -18,6 +18,7 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM</title>
       </Helmet>
+
       <SkipToContent skipTo="greffier_mandataires_list" />
       <MapContextProvider latitude={latitude} longitude={longitude}>
         <LayoutGreffierMap>

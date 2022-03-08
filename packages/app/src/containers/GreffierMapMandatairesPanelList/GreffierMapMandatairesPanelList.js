@@ -15,6 +15,11 @@ import { GreffierMapMandataireListStyle } from "./style";
 
 const RESULT_PER_PAGE = 20;
 
+const genreRef = {
+  F: "Madame",
+  M: "Monsieur",
+};
+
 function GreffierMapMandatairesPanelList() {
   const {
     greffier: {
@@ -23,7 +28,7 @@ function GreffierMapMandatairesPanelList() {
   } = useUser();
 
   const [currentOffset, setCurrentOffset] = useState(0);
-  const { setCurrentMarker } = useContext(MapContext);
+  const { setCurrentMarker, currentMarker } = useContext(MapContext);
 
   const { data, error, loading } = useQuery(
     MESURES_GESTIONNAIRE,
@@ -64,14 +69,29 @@ function GreffierMapMandatairesPanelList() {
   return (
     <Box pt="2" px="2" sx={GreffierMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>
-        <Box mr="1" mb="4" id="greffier_mandataires_list" tabIndex="-1">
-          {gestionnaires.map((gestionnaire) => {
+        <Box mr="1" mb="4">
+          {gestionnaires.map((gestionnaire, index) => {
             return (
               <MandataireListItem
                 key={gestionnaire.id}
                 isGreffierMap
                 onClick={() => selectMarker(gestionnaire)}
                 gestionnaire={gestionnaire}
+                accessibilityProps={{
+                  role: "button",
+                  "aria-label":
+                    gestionnaire?.genre &&
+                    gestionnaire?.nom &&
+                    gestionnaire?.prenom
+                      ? `${genreRef[gestionnaire.genre]} ${gestionnaire.nom} ${
+                          gestionnaire.prenom
+                        }`
+                      : "Voir le mondataire sur la carte",
+                  "aria-pressed": gestionnaire.id === currentMarker.id,
+                  id:
+                    index === 0 ? "greffier_mandataires_list" : gestionnaire.id,
+                  tabIndex: index === 0 ? "-1" : "0",
+                }}
               />
             );
           })}

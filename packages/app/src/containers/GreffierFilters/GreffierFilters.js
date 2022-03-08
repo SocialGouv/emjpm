@@ -40,7 +40,7 @@ function GreffierFilters() {
   } = useContext(FiltersContext);
 
   return (
-    <Card mt="3" id="greffier_filter">
+    <Card mt="3" id="greffier_filter" tabIndex="-1">
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         <Box>
           <Flex>
