@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.3](https://github.com/SocialGouv/emjpm/compare/v25.152.2...v25.152.3) (2022-03-08)
+
+
+### Bug Fixes
+
+* **required-motif:** validation schema ([3fff1b7](https://github.com/SocialGouv/emjpm/commit/3fff1b7580c2510fd1a37c63cbbf0f6188ab4218))
+
+
+
+
+
 ## [25.152.2](https://github.com/SocialGouv/emjpm/compare/v25.152.1...v25.152.2) (2022-03-08)
 
 
