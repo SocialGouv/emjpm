@@ -14,9 +14,8 @@ import config from "~/config";
 import { useEffect } from "react";
 
 export default function AuthorizationPage() {
-  const {
-    authStore: { token },
-  } = useAuth();
+  const { authStore } = useAuth();
+
   const {
     client_id: editorId,
     redirect_uri: redirectUrl,
@@ -64,10 +63,9 @@ export default function AuthorizationPage() {
               p: "3",
             }}
           >
-            {token ? (
+            {authStore.id ? (
               <Authorize
                 state={state}
-                token={token}
                 editorId={editorId}
                 redirectUrl={redirectUrl}
               />

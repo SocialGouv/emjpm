@@ -12,8 +12,11 @@ const { API_URL } = config;
 
 const url = `${API_URL}/api/oauth/authorize`;
 
+import creds from "~/user/creds";
+
 function Authorize(props) {
-  const { editorId, token, redirectUrl, state } = props;
+  const { editorId, redirectUrl, state } = props;
+  const { token } = creds;
   const { data, loading, error } = useQuery(EDITOR, {
     variables: {
       id: editorId,
