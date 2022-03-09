@@ -1,4 +1,8 @@
-import yup, { EMAIL_NOT_VALID, SIRET_NOT_VALID } from "./yup";
+import yup, {
+  EMAIL_NOT_VALID,
+  SIRET_NOT_VALID,
+  CODE_POSTAL_NOT_VALID,
+} from "./yup";
 
 import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
@@ -22,7 +26,7 @@ const adminServiceSchema = ({ apolloClient }) =>
         /^[0-9]{5}$/,
         "Le code postal doit être composé de 5 chiffres. Par exemple: 75001."
       )
-      .required(),
+      .required(CODE_POSTAL_NOT_VALID),
     ville: yup.string().nullable().required(),
     org_adresse: yup.string().nullable().when("org_gestionnaire", {
       is: true,

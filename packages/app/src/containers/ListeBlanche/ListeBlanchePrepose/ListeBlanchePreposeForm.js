@@ -11,7 +11,12 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
+import yup, {
+  EMAIL_NOT_VALID,
+  NOM_NOT_VALID,
+  PRENOM_NOT_VALID,
+  SERVICE_NOT_VALID,
+} from "~/validation-schemas/yup";
 import {
   Button,
   Heading,
@@ -32,16 +37,16 @@ import {
 
 const lbSchema = ({ isCreate }) =>
   yup.object().shape({
-    email: yup.string().required(),
-    prenom: yup.string().required(),
-    nom: yup.string().required(),
+    email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
+    prenom: yup.string().required(PRENOM_NOT_VALID),
+    nom: yup.string().required(NOM_NOT_VALID),
     genre: yup.string().nullable().required(),
     telephone: yup.string().nullable(),
     etablissements: yup
       .array()
       .test(
         "required-oncreate-orif-present-onupdate",
-        FORM_REQUIRED_MESSAGE,
+        SERVICE_NOT_VALID,
         (value, { parent }) => {
           if (
             !isCreate &&
