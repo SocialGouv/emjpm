@@ -121,18 +121,6 @@ function checkDateNomination(value, { req }) {
         "date_nomination must be after or equivalent to date_premier_mesure"
       );
     }
-
-    if (
-      req.body.date_protection_en_cours &&
-      isBefore(
-        parseISO(`${req.body.date_protection_en_cours}T00:00:00.000Z`),
-        parseISO(`${value}T00:00:00.000Z`)
-      )
-    ) {
-      throw new Error(
-        "date_nomination must be before or equivalent to date_protection_en_cours"
-      );
-    }
   }
 
   if (req.body.etats && req.body.etats.length) {

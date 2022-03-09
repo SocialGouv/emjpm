@@ -46,6 +46,9 @@ export default function GlobalLoader(props) {
       if (errorsSet.has(error.message)) {
         return;
       }
+      if (error.message === "Could not verify JWT: JWTExpired") {
+        return;
+      }
       if (error?.message && error.message.includes("Unexpected")) {
         error.message = "Une erreur est survenue";
       }

@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.1](https://github.com/SocialGouv/emjpm/compare/v25.152.0...v25.152.1) (2022-03-07)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+# [25.152.0](https://github.com/SocialGouv/emjpm/compare/v25.151.1...v25.152.0) (2022-03-07)
+
+
+### Bug Fixes
+
+* **auth:** silent jwt refresh using refresh_token ([#2813](https://github.com/SocialGouv/emjpm/issues/2813)) ([938ea4e](https://github.com/SocialGouv/emjpm/commit/938ea4e8f238a2d7f5f790aafa0ced490e6d3ffe))
+* **fields:** red outline fix [#2801](https://github.com/SocialGouv/emjpm/issues/2801) ([bf05a6d](https://github.com/SocialGouv/emjpm/commit/bf05a6d6b9fcd408ee1119188f70895818d13a3b))
+* **rgaa:** add table for screen readers to desribe chart data ([#2815](https://github.com/SocialGouv/emjpm/issues/2815)) ([fa9fa65](https://github.com/SocialGouv/emjpm/commit/fa9fa650ef2d07365a7bf20481ec280d248a3911))
+* **ŝignup:** service required fix [#2802](https://github.com/SocialGouv/emjpm/issues/2802) ([0d937bc](https://github.com/SocialGouv/emjpm/commit/0d937bcfaa3ad0d1ac98906b9ea9c5e4be87b53c))
+
+
+### Features
+
+* **map:** genre marker fix [#2764](https://github.com/SocialGouv/emjpm/issues/2764) ([a051f4e](https://github.com/SocialGouv/emjpm/commit/a051f4ef6ac2b0dc184e7fad8817f951f373db75))
+* **mesure:** attente date-reservation fix [#2595](https://github.com/SocialGouv/emjpm/issues/2595) ([8d22618](https://github.com/SocialGouv/emjpm/commit/8d22618fb8fe58f88185dbb8204934ff4a94ff5c))
+* **mesure:** unlocked when no editor_id ([3adde98](https://github.com/SocialGouv/emjpm/commit/3adde98a7550805837b20e32033e93220a44d857))
+
+
+
+
+
+## [25.151.1](https://github.com/SocialGouv/emjpm/compare/v25.151.0...v25.151.1) (2022-02-21)
+
+
+### Bug Fixes
+
+* **rgaa:** fix mesure ressources form ([#2807](https://github.com/SocialGouv/emjpm/issues/2807)) ([57d6c6d](https://github.com/SocialGouv/emjpm/commit/57d6c6dbc015d665d55716a18d32c10b60c0da0f))
+* **rgaa:** fix typo on error messages ([#2806](https://github.com/SocialGouv/emjpm/issues/2806)) ([ccd4d2c](https://github.com/SocialGouv/emjpm/commit/ccd4d2c70c35f9683d2649ca063cef5b5ebed67b))
+* **rgaa:** fix validation error on redirect_uris ([#2808](https://github.com/SocialGouv/emjpm/issues/2808)) ([04eb0b4](https://github.com/SocialGouv/emjpm/commit/04eb0b4bf88f66bac362b9709bb747c1d8f22560))
+
+
+
+
+
 # [25.151.0](https://github.com/SocialGouv/emjpm/compare/v25.150.3...v25.151.0) (2022-02-17)
 
 

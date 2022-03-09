@@ -32,6 +32,9 @@ export const MESURES_GESTIONNAIRES = gql`
         id
         longitude
         latitude
+        user {
+          genre
+        }
       }
       service {
         id

@@ -27,8 +27,11 @@ export default function FormGroupInputYear({
 
   required = useAppFieldIsRequired({ id, required, validationSchema });
 
+  const hasError =
+    formik.errors[id] && (formik.touched[id] || formik.submitCount > 0);
+
   return (
-    <Field>
+    <Field className={hasError ? "has-error" : ""}>
       <Flex alignItems="center">
         <InputYear
           placeholderText={placeholder}

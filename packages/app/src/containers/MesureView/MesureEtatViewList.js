@@ -21,7 +21,7 @@ function MesureEtatViewList({ mesure, ...props }) {
     return selectedMesureEtat.id === etat.id;
   }
 
-  const { locked, message } = useMesuresLocked();
+  const { locked, message } = useMesuresLocked(mesure);
   const mesureModificationButtonProps = locked
     ? {
         disabled: true,

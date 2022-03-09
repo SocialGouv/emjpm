@@ -38,6 +38,10 @@ const impersonate = async (req, res, next) => {
       }
       const userResult = await user.getUser();
 
+      await User.query().findById(user.id).update({
+        refresh_token: userResult.refreshToken,
+      });
+
       if (user.type === "admin") {
         return res.status(403).json({ error: "Forbidden" });
       }

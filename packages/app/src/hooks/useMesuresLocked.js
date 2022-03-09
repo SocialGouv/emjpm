@@ -7,7 +7,7 @@ const syncEditorDisabledMessage = (editorName) => {
   return `La synchronisation de vos mesures avec votre éditeur est activée. Modifiez vos mesures sur le logiciel de votre éditeur "${editorName}"`;
 };
 
-export default function useMesuresLocked() {
+export default function useMesuresLocked(mesure) {
   const user = useUser();
 
   const isService = !!user.service;
@@ -22,6 +22,11 @@ export default function useMesuresLocked() {
     lockedByEditor = user.mandataire?.editor_locked_mesures;
     locked = lockedByEditor || user.mandataire?.sync_ocmi_enable;
     editorName = user.mandataire?.editor?.name;
+  }
+
+  if (mesure && !mesure.editor_id) {
+    locked = null;
+    lockedByEditor = null;
   }
 
   const message = lockedByEditor

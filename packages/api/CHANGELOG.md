@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.1](https://github.com/SocialGouv/emjpm/compare/v25.152.0...v25.152.1) (2022-03-07)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
+# [25.152.0](https://github.com/SocialGouv/emjpm/compare/v25.151.1...v25.152.0) (2022-03-07)
+
+
+### Bug Fixes
+
+* **auth:** silent jwt refresh using refresh_token ([#2813](https://github.com/SocialGouv/emjpm/issues/2813)) ([938ea4e](https://github.com/SocialGouv/emjpm/commit/938ea4e8f238a2d7f5f790aafa0ced490e6d3ffe))
+* **mesure:** add ui date-protection rule fix [#2812](https://github.com/SocialGouv/emjpm/issues/2812) ([2b632b8](https://github.com/SocialGouv/emjpm/commit/2b632b89c5422e422601dc1908d1dfeaaf327140))
+* **mesure:** date-protection delete rule fix [#2812](https://github.com/SocialGouv/emjpm/issues/2812) ([454b09b](https://github.com/SocialGouv/emjpm/commit/454b09bd9ebb622d55880f7cc5d52b98f8ea9296))
+* **mesure:** rm date-protection rule see [#2812](https://github.com/SocialGouv/emjpm/issues/2812) ([14acf42](https://github.com/SocialGouv/emjpm/commit/14acf42a8ec06ce8d2a9f8fe888b319982a382fb))
+* **tests:** update ([63b91e0](https://github.com/SocialGouv/emjpm/commit/63b91e0f3c9760f26a87c3286c558dc592c29bf6))
+
+
+### Features
+
+* **api:** forceDeleteAwaitingMesures ([2c37b37](https://github.com/SocialGouv/emjpm/commit/2c37b37ce09c78f27a3ec7a2d3ce3467b3fe7a8b))
+
+
+
+
+
+## [25.151.1](https://github.com/SocialGouv/emjpm/compare/v25.151.0...v25.151.1) (2022-02-21)
+
+**Note:** Version bump only for package @emjpm/api
+
+
+
+
+
 # [25.151.0](https://github.com/SocialGouv/emjpm/compare/v25.150.3...v25.151.0) (2022-02-17)
 
 

@@ -27,6 +27,12 @@ const redirs = {
   ti: "/magistrats",
 };
 
+const TokenExpiration = {
+  Access: 24 * 60 * 60,
+  Refresh: 14 * 24 * 60 * 60,
+  RefreshIfLessThan: 24 * 60 * 60,
+};
+
 class User extends Model {
   static get tableName() {
     return "users";
@@ -89,7 +95,6 @@ class User extends Model {
     const defaultRoleName = (
       this.roles.find((role) => MAIN_ROLES.includes(role.name)) || {}
     ).name;
-
     if (!defaultRoleName) {
       throw new Error(
         "No default role found in the list : " + JSON.stringify(this.roles)
@@ -100,12 +105,13 @@ class User extends Model {
 
   async getUser() {
     const token = await this.getJwt();
+    const refreshToken = await this.getRereshToken();
     return {
       email: this.email,
       id: this.id,
+      refreshToken,
       roles: this.getRoles(),
       token: token,
-
       type: this.type,
 
       // TODO: remove when full graphql auth
@@ -148,7 +154,7 @@ class User extends Model {
   async getJwt() {
     const signOptions = {
       algorithm: "RS256",
-      expiresIn: "30d",
+      expiresIn: TokenExpiration.Access,
       subject: this.id.toString(),
     };
 
@@ -160,7 +166,63 @@ class User extends Model {
       role: this.getDefaultRole(),
       url: redirs[this.type] || redirs.default,
     };
+
     return jwt.sign(claim, jwtConfig.key, signOptions);
+  }
+
+  async generateRefreshToken() {
+    return jwt.sign({ id: this.id, name: this.email }, jwtConfig.key, {
+      algorithm: "RS256",
+      expiresIn: TokenExpiration.Refresh,
+      subject: this.id.toString(),
+    });
+  }
+
+  async getRereshToken() {
+    const refreshTokenStillValid = await this.isRefreshTokenValid();
+    const { isValid } = refreshTokenStillValid;
+    if (isValid) {
+      return this.refresh_token;
+    }
+    return this.generateRefreshToken();
+  }
+
+  async isRefreshTokenValid() {
+    return jwt.verify(
+      this.refresh_token,
+      jwtConfig.key,
+      {
+        algorithms: ["RS256"],
+      },
+      function (err, decoded) {
+        if (err) {
+          return {
+            expired: true,
+            expiresSoon: false,
+            isValid: false,
+          };
+        }
+
+        const expiration = new Date(decoded.exp * 1000);
+        const now = new Date();
+        const secondsUntilExpiration =
+          (expiration.getTime() - now.getTime()) / 1000;
+
+        if (secondsUntilExpiration < TokenExpiration.RefreshIfLessThan) {
+          return {
+            expired: false,
+            expiresSoon: true,
+            isValid: true,
+          };
+        }
+
+        return {
+          expired: false,
+          expiresSoon: false,
+          isValid: true,
+        };
+      }
+    );
   }
 
   async $beforeInsert() {
