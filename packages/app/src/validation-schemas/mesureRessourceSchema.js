@@ -6,26 +6,26 @@ const mesureRessourceSchema = yup.object().shape({
   annee: yup
     .number()
     .typeError(
-      `L'année choisie doit être au minimum 1900. Par exemple ${
+      `L'année choisie doit être au minimum 1900. Par exemple  : ${
         Number(currentYear) - 1
-      }`
+      }.`
     )
     .required(
-      `L'année choisie doit être au minimum 1900. Par exemple ${
+      `L'année choisie doit être au minimum 1900. Par exemple : ${
         Number(currentYear) - 1
-      }`
+      }.`
     )
     .min(
       1900,
-      `L'année choisie doit être au minimum 1900. Par exemple ${
+      `L'année choisie doit être au minimum 1900. Par exemple : ${
         Number(currentYear) - 1
-      }`
+      }.`
     )
     .max(
       currentYear,
-      `L'année choisie doit être au maximum  ${currentYear}. Par exemple: ${
+      `L'année choisie doit être au maximum  ${currentYear}. Par exemple : ${
         Number(currentYear) - 1
-      }`
+      }.`
     ),
   niveau_ressource: yup
     .number(NIVEAU_DE_RESSOURCE_NOT_VALID)
