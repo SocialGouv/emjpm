@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.4](https://github.com/SocialGouv/emjpm/compare/v25.152.3...v25.152.4) (2022-03-10)
+
+
+### Bug Fixes
+
+* **inversed-fields:** mesures ([80f5365](https://github.com/SocialGouv/emjpm/commit/80f5365ff64ce8be14cef4e6b01e83873d69d988))
+
+
+
+
+
 ## [25.152.3](https://github.com/SocialGouv/emjpm/compare/v25.152.2...v25.152.3) (2022-03-08)
 
 **Note:** Version bump only for package @emjpm/api
