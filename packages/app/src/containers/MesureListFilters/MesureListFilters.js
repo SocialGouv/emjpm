@@ -64,6 +64,7 @@ function MesureListFilters(props) {
                   placeholder={"Antenne"}
                   value={antenne}
                   onChange={(option) => changeAntenne(option)}
+                  id="antenne"
                 />
               </Box>
             )}
@@ -76,6 +77,7 @@ function MesureListFilters(props) {
                 placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}
+                instanceId="nature_de_la_mesure"
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
@@ -85,6 +87,7 @@ function MesureListFilters(props) {
                 placeholder={"État de la mesure"}
                 value={mesureStatus}
                 onChange={(option) => changeMesureStatus(option)}
+                id="etat_de_la_mesure"
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
@@ -95,6 +98,7 @@ function MesureListFilters(props) {
                 placeholder={"Tous"}
                 value={mesureDepartement}
                 onChange={(option) => changeMesureDepartement(option)}
+                id="departement_du_majeure"
               />
             </Box>
             <Box width="200px" mb={1} mr={1}>
@@ -105,6 +109,7 @@ function MesureListFilters(props) {
                 placeholder="Aucun Tri"
                 value={sortBy}
                 onChange={(option) => changeSortBy(option)}
+                id="trier_par"
               />
             </Box>
           </Flex>

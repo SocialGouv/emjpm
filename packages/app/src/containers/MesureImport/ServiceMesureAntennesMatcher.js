@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Box, Button, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Select, Text } from "~/components";
+import { AccessibleSelect, Text } from "~/components";
 import { Warning } from "@styled-icons/material/Warning";
 
 import styled from "styled-components";
@@ -72,7 +72,7 @@ function ServiceMesureAntennesMatcher({
               correspond à
             </Box>
             <Box width={200}>
-              <Select
+              <AccessibleSelect
                 instanceId={`antenne-select-${index}`}
                 name={`select-${index}`}
                 isSearchable={false}

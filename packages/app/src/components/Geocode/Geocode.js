@@ -1,6 +1,6 @@
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 
-import { Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { debouncedGeocode } from "~/query-service/datagouv/api-adresse/geocode";
 import useQueryReady from "~/hooks/useQueryReady";
@@ -12,6 +12,7 @@ function Geocode(props) {
     placeholder,
     resource,
     instanceId,
+    id,
     ...selectProps
   } = props;
 
@@ -42,9 +43,10 @@ function Geocode(props) {
     : null;
 
   return (
-    <Select
+    <AccessibleSelect
       isAsync
       instanceId={instanceId}
+      id={id}
       defaultValue={defaultValue}
       hasError={hasError}
       isClearable

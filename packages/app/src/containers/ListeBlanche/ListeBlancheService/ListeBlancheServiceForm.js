@@ -283,7 +283,7 @@ export function ListeBlancheServiceForm(props) {
                   size="small"
                   departementFieldId="ville_departement"
                   formik={formik}
-                  aria-describedby="msg-ville"
+                  aria-describedby="msg-ville-select"
                 />
                 <div id="msg-ville">
                   {formik.touched.ville && formik.errors.ville && (

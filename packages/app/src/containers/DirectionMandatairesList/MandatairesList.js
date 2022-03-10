@@ -5,7 +5,7 @@ import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
-import { AccessibleSelect as Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 import MandataireListItem from "~/containers/MandataireListItem";
 
 import {
@@ -80,7 +80,7 @@ function MandatairesList(props) {
     <Box sx={MandatairesListStyle} {...props}>
       <Flex mb="3">
         <Box width="200px" mr="2">
-          <Select
+          <AccessibleSelect
             instanceId={"type-mandataire-filter"}
             size="small"
             placeholder="Type de mandataire"
@@ -90,7 +90,7 @@ function MandatairesList(props) {
           />
         </Box>
         <Box width="200px">
-          <Select
+          <AccessibleSelect
             instanceId={"capacity-sort"}
             size="small"
             placeholder="trier par capacité"

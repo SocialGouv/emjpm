@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import { Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 
 import { searchAdresse } from "~/query-service/nomatim";
 
@@ -58,7 +58,7 @@ export default function SelectAdresse({ label, placeholder, onChange, value }) {
 
   const { isLoading, loadedOptions } = loadState;
   return (
-    <Select
+    <AccessibleSelect
       size="small"
       loadOptions={loadOptions}
       isCreatable

@@ -1,6 +1,6 @@
 import { useLazyQuery } from "@apollo/client";
 
-import { Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 
 import { CODE_POSTAL } from "./queries";
 import { useEffect } from "react";
@@ -16,6 +16,8 @@ export function GeocodeCities(props) {
     required,
     formik = {},
     departementFieldId,
+    instanceId,
+    id,
   } = props;
   const [execQuery, queryResult] = useLazyQuery(CODE_POSTAL);
   const { data, loading } = queryResult;
@@ -54,8 +56,8 @@ export function GeocodeCities(props) {
   }
 
   return (
-    <Select
-      instanceId={name}
+    <AccessibleSelect
+      instanceId={name || instanceId || id}
       isClearable={false}
       value={value ? { label: value, value } : { label: "", value: "" }}
       placeholder="Ville"

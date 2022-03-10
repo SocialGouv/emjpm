@@ -1,7 +1,7 @@
 import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Card, Select } from "~/components";
+import { Card, AccessibleSelect } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
 
 import { BoxStyle } from "./style";
@@ -37,7 +37,7 @@ function DirectionEnqueteReponsesCriteria({ criteria, updateCriteria }) {
     <Card>
       <Flex flexDirection="row">
         <Box sx={BoxStyle}>
-          <Select
+          <AccessibleSelect
             instanceId={"departement-filter"}
             size="small"
             options={departementsOptions}
@@ -47,7 +47,7 @@ function DirectionEnqueteReponsesCriteria({ criteria, updateCriteria }) {
           />
         </Box>
         <Box sx={BoxStyle}>
-          <Select
+          <AccessibleSelect
             instanceId={"user-type-filter"}
             size="small"
             options={USER_TYPE_OPTIONS}
@@ -57,7 +57,7 @@ function DirectionEnqueteReponsesCriteria({ criteria, updateCriteria }) {
           />
         </Box>
         <Box sx={BoxStyle}>
-          <Select
+          <AccessibleSelect
             instanceId={"enquete-reponse-statut-filter"}
             size="small"
             options={ENQUETE_REPONSE_STATUS_OPTIONS}
