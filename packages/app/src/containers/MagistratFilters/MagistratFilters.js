@@ -73,6 +73,7 @@ function MagistratFilters() {
             </Box>
             <Box width="320px" mr={1}>
               <Input
+                id="search"
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
@@ -83,13 +84,14 @@ function MagistratFilters() {
                 label="Rechercher"
                 forceActive
                 aria-label="Rechercher"
+                ariaDescribedBy="none"
               />
             </Box>
             <Box width="160px" mr={1}>
               <Input
+                id="search2"
                 value={cabinet}
                 spellCheck="false"
-                autoComplete="false"
                 onChange={(event) => changeCabinet(event.target.value)}
                 name="search2"
                 size="small"
@@ -97,6 +99,7 @@ function MagistratFilters() {
                 label="Préciser un cabinet"
                 forceActive
                 autoComplete="organization"
+                ariaDescribedBy="none"
               />
             </Box>
           </Flex>
