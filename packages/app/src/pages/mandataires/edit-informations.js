@@ -19,7 +19,7 @@ function EditInformations() {
       </Helmet>
       <SkipToContent skipTo="Informations_personnelles_heading" />
       <LayoutMandataire>
-        <BoxWrapper px="1">
+        <BoxWrapper px="1" mt={3}>
           <MandataireEditInformations
             userId={id}
             userType={type}

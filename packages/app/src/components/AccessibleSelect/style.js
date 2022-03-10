@@ -31,7 +31,6 @@ export function LabelStyle({ size }) {
     pt: "6px",
     px: "2",
     transition: "150ms ease-in-out all",
-    width: "100%",
     zIndex: 1,
   };
 }
