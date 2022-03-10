@@ -40,14 +40,11 @@ const checkStatus = async (
     setStatus({ errorMsg: json.errors.msg });
     return json;
   }
-  const params = location.search;
   login(json);
-  history.push(`/application/authorization${params}`);
   return json;
 };
 
-function AuthorizationLogin(props) {
-  const { token } = props;
+function AuthorizationLogin() {
   const url = `${API_URL}/api/auth/login`;
 
   const history = useHistory();
@@ -73,7 +70,7 @@ function AuthorizationLogin(props) {
       email: "",
     },
     onSubmit: (values, { setSubmitting, setStatus }) => {
-      handleSubmit(values, setSubmitting, setStatus, token);
+      handleSubmit(values, setSubmitting, setStatus);
     },
     validationSchema: loginSchema,
   });

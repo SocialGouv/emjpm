@@ -17,7 +17,7 @@ import {
   Field,
   Heading,
   InlineError,
-  Select,
+  AccessibleSelect,
   Textarea,
   CheckBox,
 } from "~/components";
@@ -286,7 +286,7 @@ function AdminUserServiceForm(props) {
         </FormGrayBox>
         <FormInputBox>
           <Field>
-            <Select
+            <AccessibleSelect
               instanceId={"tis-filter"}
               id="tis"
               name="tis"
@@ -340,6 +340,7 @@ function AdminUserServiceForm(props) {
               formik={formik}
               validationSchema={adminUserServiceSchema}
               aria-label="Rraisons de suspension de l'activité"
+              required
             />
           )}
           <FormGroupInput

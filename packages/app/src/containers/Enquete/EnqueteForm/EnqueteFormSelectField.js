@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { Field, Input, Select } from "~/components";
+import { Field, Input, AccessibleSelect } from "~/components";
 import { findOption } from "~/utils/form";
 
 import { EnqueteFormFieldErrorMessage } from "./EnqueteFormFieldErrorMessage";
@@ -70,7 +70,7 @@ export function EnqueteFormSelectField({
           aria-describedby={`msg-${id}`}
         />
       ) : (
-        <Select
+        <AccessibleSelect
           id={id}
           instanceId={id}
           placeholder=""

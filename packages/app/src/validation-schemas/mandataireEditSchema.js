@@ -68,6 +68,17 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
     telephone_portable: yup.string(),
     tis: yup.mixed().required(),
     siret,
+    suspendActivity: yup.boolean().nullable(),
+    suspendActivityReason: yup
+      .string()
+      .nullable()
+      .when("suspendActivity", {
+        is: (suspendActivity) => {
+          console.log({ suspendActivity });
+          return suspendActivity === true;
+        },
+        then: yup.string().nullable().required(),
+      }),
   });
 };
 

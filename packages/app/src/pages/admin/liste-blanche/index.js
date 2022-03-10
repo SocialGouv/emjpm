@@ -15,7 +15,7 @@ function ListBlanchePage() {
       <Helmet>
         <title>Liste blanche | e-MJPM</title>
       </Helmet>
-      <SkipToContent skipTo="list_blanche_filter" />
+      <SkipToContent skipTo="direction_filter" />
       <LayoutAdmin>
         <FiltersContextSerializableProvider useLocalStorage={true}>
           <BoxWrapper mt={3} px={1}>

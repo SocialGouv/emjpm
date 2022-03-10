@@ -38,6 +38,8 @@ export const MESURE_CONTEXT_QUERY = gql`
         id
         etablissement
       }
+      created_at
+      editor_id
       status
       nature_mesure
       champ_mesure

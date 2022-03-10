@@ -61,6 +61,17 @@ const adminUserServiceSchema = yup.object().shape({
   prenom: yup.string().required(PRENOM_NOT_VALID),
   telephone: yup.string(TELEPHONE_NOT_VALID),
   tis: yup.mixed().required(),
+  suspendActivity: yup.boolean().nullable(),
+  suspendActivityReason: yup
+    .string()
+    .nullable()
+    .when("suspendActivity", {
+      is: (suspendActivity) => {
+        console.log({ suspendActivity });
+        return suspendActivity === true;
+      },
+      then: yup.string().nullable().required(),
+    }),
 });
 
 export { adminUserServiceSchema };

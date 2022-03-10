@@ -71,7 +71,7 @@ function MagistratMesure(props) {
         sx={MagistratMesureStyle}
         {...props}
         id="magistrat_mesure_details"
-        tabIndex="0"
+        tabIndex="-1"
       >
         <Box sx={MagistratMesureLinksStyle}>
           {status === "en_attente" && (

@@ -7,22 +7,22 @@ import { useAuth } from "~/user/Auth";
 import { formatUserFromToken } from "~/user/formatUserFromToken";
 
 import { setUser } from "~/user/sentry";
+import creds from "~/user/creds";
 
 export default function AppUser({ children }) {
   const { authStore } = useAuth();
-  const { token } = authStore;
 
   const user = useMemo(() => {
-    const currentUser = token ? jwtDecode(token) : null;
+    const currentUser = authStore.id ? jwtDecode(creds.token) : null;
     return formatUserFromToken(currentUser);
-  }, [token]);
+  }, [authStore.id]);
 
   useEffect(() => {
-    if (token) {
-      const { id, role } = jwtDecode(token);
+    if (authStore.id) {
+      const { id, role } = jwtDecode(creds.token);
       setUser(id, role);
     }
-  }, [token]);
+  }, [authStore.id]);
 
   return <UserProvider user={user}>{children}</UserProvider>;
 }

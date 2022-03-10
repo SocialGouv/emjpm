@@ -10,7 +10,7 @@ function AdminFilterBar({ children }) {
       sx={AdminFilterBarStyle}
       mb={2}
       id="search_filter"
-      tabIndex="0"
+      tabIndex="-1"
     >
       <Flex justifyContent={"space-between"} flexWrap="wrap">
         {children}

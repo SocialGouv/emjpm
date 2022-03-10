@@ -1,15 +1,15 @@
 import { Button } from "~/components";
 
 import { UserSecret } from "@styled-icons/fa-solid/UserSecret";
-import { impersonateLogin, useAuth } from "~/user/Auth";
+import { impersonateLogin } from "~/user/Auth";
 import { useCallback } from "react";
 
+import creds from "~/user/creds";
+
 export default function ImpersonateButton({ userId: id }) {
-  const { authStore } = useAuth();
-  const { token } = authStore;
   const onClickImpersonate = useCallback(() => {
-    impersonateLogin({ id, token });
-  }, [id, token]);
+    impersonateLogin({ id, token: creds.token });
+  }, [id]);
 
   return (
     <Button

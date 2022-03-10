@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 import { Helmet } from "react-helmet";
 
 import { LayoutGreffierMap } from "~/containers/Layout";
-import { GreffierMandatairesMap } from "~/containers/GreffierMandatairesMap";
+import { MagistratMandatairesMap } from "~/containers/MagistratMandatairesMap";
 import { GreffierMapMandatairesPanelList } from "~/containers/GreffierMapMandatairesPanelList";
 import { MapContextProvider } from "~/containers/Map/context";
 import useUser from "~/hooks/useUser";
@@ -18,6 +18,7 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM</title>
       </Helmet>
+
       <SkipToContent skipTo="greffier_mandataires_list" />
       <MapContextProvider latitude={latitude} longitude={longitude}>
         <LayoutGreffierMap>
@@ -34,7 +35,7 @@ function Map() {
               <GreffierMapMandatairesPanelList />
             </Box>
             <Box height="100%" flex="1 1 auto">
-              <GreffierMandatairesMap />
+              <MagistratMandatairesMap />
             </Box>
           </Flex>
         </LayoutGreffierMap>

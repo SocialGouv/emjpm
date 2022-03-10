@@ -188,7 +188,7 @@ describe("POST /api/editors/mesures", () => {
       errors: [
         {
           location: "body",
-          msg: "date_nomination must be before or equivalent to date_protection_en_cours",
+          msg: "date_nomination must be before or equivalent to date_changement_etat",
           param: "date_nomination",
           value: "2020-01-11",
         },

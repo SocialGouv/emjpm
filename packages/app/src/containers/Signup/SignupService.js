@@ -11,7 +11,7 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/validation-schemas";
-import { Select, Button, Heading, Text } from "~/components";
+import { AccessibleSelect, Button, Heading, Text } from "~/components";
 import { toOptions, findOptions } from "~/utils/form";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
@@ -96,7 +96,7 @@ function SignupServiceForm({ serviceDatas }) {
           </FormGrayBox>
           <FormInputBox>
             <Box style={{ marginBottom: "10px" }}>
-              <Select
+              <AccessibleSelect
                 id="departements"
                 formik={formik}
                 placeholder="Département(s) de votre service"
@@ -115,6 +115,7 @@ function SignupServiceForm({ serviceDatas }) {
                     (options || []).map((o) => o.value)
                   );
                 }}
+                required
               />
             </Box>
             <FormGroupSelect
@@ -123,6 +124,7 @@ function SignupServiceForm({ serviceDatas }) {
               placeholder="Votre service"
               options={serviceOptions}
               isClearable
+              required
             />
           </FormInputBox>
         </Flex>

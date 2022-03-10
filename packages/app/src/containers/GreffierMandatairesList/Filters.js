@@ -6,7 +6,7 @@ import { Star } from "@styled-icons/fa-solid/Star";
 import { DotCircle } from "@styled-icons/fa-regular/DotCircle";
 import { Location } from "@styled-icons/entypo/Location";
 
-import { Card, Input, Select, Button } from "~/components";
+import { Card, Input, AccessibleSelect, Button } from "~/components";
 
 import SelectAdresse from "./SelectAdresse";
 
@@ -69,11 +69,11 @@ function GreffierMandatairesListFilters(props) {
   );
 
   return (
-    <Card mb="2" mt="1" tabIndex="0" id="greffier_mandataires_filter">
+    <Card mb="2" mt="1" tabIndex="-1" id="greffier_mandataires_filter">
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexWrap="wrap">
           <Box width="200px" mr="2">
-            <Select
+            <AccessibleSelect
               instanceId={"type-mandataire-filter"}
               size="small"
               placeholder="Type de mandataire"
@@ -83,7 +83,7 @@ function GreffierMandatairesListFilters(props) {
             />
           </Box>
           <Box width="200px" mr="2">
-            <Select
+            <AccessibleSelect
               instanceId={"direction-departement-filter"}
               size="small"
               options={departementOptions}
@@ -95,7 +95,7 @@ function GreffierMandatairesListFilters(props) {
           </Box>
           {!searchByLocation && (
             <Box width="200px" mr={2}>
-              <Select
+              <AccessibleSelect
                 instanceId={"mandataire-sort"}
                 size="small"
                 label={"Trier par"}
@@ -112,6 +112,7 @@ function GreffierMandatairesListFilters(props) {
                 placeholder="rechercher par localisation"
                 onChange={onChangeLocalisation}
                 value={localisation}
+                id="recherche_par_localisation"
               />
             </Box>
           )}

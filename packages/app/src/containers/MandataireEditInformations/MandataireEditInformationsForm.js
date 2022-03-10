@@ -19,7 +19,7 @@ import {
   Field,
   Heading,
   InlineError,
-  Select,
+  AccessibleSelect,
   Textarea,
 } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -219,6 +219,8 @@ function MandataireEditInformationsForm(props) {
                 resource={geocodeResource}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
+                instanceId="localisation"
+                hasError={formik.errors.geocode}
               />
               <div id="msg-geocode">
                 <InlineError
@@ -272,7 +274,7 @@ function MandataireEditInformationsForm(props) {
           </FormGrayBox>
           <FormInputBox>
             <Field>
-              <Select
+              <AccessibleSelect
                 instanceId={"tis-select"}
                 id="tis"
                 name="tis"
@@ -326,6 +328,7 @@ function MandataireEditInformationsForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 aria-label="Motif de l'absence"
+                required
               />
             )}
             <FormGroupInput

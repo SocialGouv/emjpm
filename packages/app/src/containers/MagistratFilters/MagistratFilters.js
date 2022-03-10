@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Box, Flex } from "rebass";
 
 import { DEFAULT_MESURE_NATURE } from "~/constants/mesures";
-import { Card, Input, Select } from "~/components";
+import { Card, Input, AccessibleSelect } from "~/components";
 import { findOption } from "~/utils/form";
 
 import { FiltersContext } from "./context";
@@ -45,12 +45,12 @@ function MagistratFilters() {
         justifyContent={"space-between"}
         flexWrap="wrap"
         id="magistrats_filter"
-        tabIndex="0"
+        tabIndex="-1"
       >
         <Box>
           <Flex>
             <Box width="200px" mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={[DEFAULT_MESURE_NATURE].concat(
                   MESURE_PROTECTION.NATURE_MESURE.options
@@ -58,19 +58,22 @@ function MagistratFilters() {
                 placeholder={"Nature de la mesure"}
                 value={natureMesure}
                 onChange={(option) => changeNatureMesure(option)}
+                id="nature_de_la_mesure"
               />
             </Box>
             <Box width="200px" mr={1}>
-              <Select
+              <AccessibleSelect
                 size="small"
                 options={etatMesuresOptions}
                 placeholder={"État de la mesure"}
                 value={findOption(etatMesuresOptions, etatMesure)}
                 onChange={(option) => changeEtatMesure(option.value)}
+                id="etat_de_la_mesure"
               />
             </Box>
             <Box width="320px" mr={1}>
               <Input
+                id="search"
                 value={searchText}
                 spellCheck="false"
                 autoComplete="false"
@@ -81,13 +84,14 @@ function MagistratFilters() {
                 label="Rechercher"
                 forceActive
                 aria-label="Rechercher"
+                ariaDescribedBy="none"
               />
             </Box>
             <Box width="160px" mr={1}>
               <Input
+                id="search2"
                 value={cabinet}
                 spellCheck="false"
-                autoComplete="false"
                 onChange={(event) => changeCabinet(event.target.value)}
                 name="search2"
                 size="small"
@@ -95,6 +99,7 @@ function MagistratFilters() {
                 label="Préciser un cabinet"
                 forceActive
                 autoComplete="organization"
+                ariaDescribedBy="none"
               />
             </Box>
           </Flex>

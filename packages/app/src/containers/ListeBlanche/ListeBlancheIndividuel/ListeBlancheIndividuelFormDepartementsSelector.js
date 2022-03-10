@@ -1,7 +1,7 @@
 import { findDepartementByCodeOrId } from "@emjpm/biz";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Select } from "~/components";
+import { AccessibleSelect } from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 export function ListeBlancheIndividuelFormDepartementsSelector(props) {
@@ -27,7 +27,7 @@ export function ListeBlancheIndividuelFormDepartementsSelector(props) {
         });
 
   return (
-    <Select
+    <AccessibleSelect
       instanceId={"add-department"}
       placeholder={"Ajouter un département"}
       size="small"

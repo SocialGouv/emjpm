@@ -71,16 +71,10 @@ function MagistratMapMandatairesPanelList() {
   );
 
   return (
-    <Box
-      pt="2"
-      px="2"
-      sx={MagistratMapMandataireListStyle}
-      id="magistrats_map"
-      tabIndex="0"
-    >
+    <Box pt="2" px="2" sx={MagistratMapMandataireListStyle}>
       <Scrollbar style={{ height: "100%", width: "100%" }}>
         <Box mr="1" mb="4">
-          {gestionnaires.map((gestionnaire) => {
+          {gestionnaires.map((gestionnaire, index) => {
             return (
               <MandataireListItem
                 key={gestionnaire.id}
@@ -98,6 +92,8 @@ function MagistratMapMandatairesPanelList() {
                         }`
                       : "Voir le mondataire sur la carte",
                   "aria-pressed": gestionnaire.id === currentMarker.id,
+                  id: index === 0 ? "magistrats_map" : gestionnaire.id,
+                  tabIndex: index === 0 ? "-1" : "0",
                 }}
               />
             );

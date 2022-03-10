@@ -71,7 +71,7 @@ function ForgotPassword() {
       p="0"
       maxWidth={["100%", "60%", "50%"]}
       id="forgot_password"
-      tabIndex="0"
+      tabIndex="-1"
     >
       <Box bg="cardSecondary" borderRadius="5px 0 0 5px" p="5">
         <Box>

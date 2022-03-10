@@ -23,6 +23,7 @@ function MesureDetailView({ mesure, ...props }) {
     dateNominationFormated,
     dateProtectionEnCoursFormatted,
     datePremierMesureFormatted,
+    createdAtFormatted,
     numeroDossier,
     numeroRg,
     lieuVie,
@@ -53,7 +54,7 @@ function MesureDetailView({ mesure, ...props }) {
     formatPays,
   } = mesureFormatter;
 
-  const { locked, message } = useMesuresLocked();
+  const { locked, message } = useMesuresLocked(mesure);
 
   const mesureModificationButtonProps =
     locked && status !== "en_attente"
@@ -150,6 +151,15 @@ function MesureDetailView({ mesure, ...props }) {
               <Text sx={subtitle}>Date de protection en cours</Text>
               <Text sx={content}>{dateProtectionEnCoursFormatted}</Text>
             </Box>
+
+            {status === "en_attente" && (
+              <Box mb={2}>
+                <Text sx={subtitle}>
+                  Date de réservation de la mesure sur eMJPM
+                </Text>
+                <Text sx={content}>{createdAtFormatted}</Text>
+              </Box>
+            )}
 
             {antenne && (
               <Box mb={2}>

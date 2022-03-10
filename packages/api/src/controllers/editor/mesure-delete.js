@@ -33,11 +33,16 @@ const deleteById = async (req, res) => {
 const deleteAll = async (req, res) => {
   const serviceOrMandataire = req.serviceOrMandataire;
   const type = req.type;
+  const { forceDeleteAwaitingMesures } = req.query;
 
   try {
-    const mesures = await Mesure.query()
+    const query = Mesure.query()
       .select("mesures.id")
       .where({ [`${type}_id`]: serviceOrMandataire.id });
+    if (forceDeleteAwaitingMesures !== "true") {
+      query.whereNot("status", "en_attente");
+    }
+    const mesures = await query;
 
     const mesureIds = mesures.map((m) => m.id);
 
