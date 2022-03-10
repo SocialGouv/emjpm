@@ -2,7 +2,7 @@ import { createFilter } from "react-select";
 import { useMemo, useState, useEffect, useRef } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
-import { Field, Input, Select } from "~/components";
+import { Field, Input, AccessibleSelect as Select } from "~/components";
 
 import AppFormFieldErrorMessage from "./AppFormFieldErrorMessage";
 import useAppFieldIsRequired from "./useAppFieldIsRequired";
