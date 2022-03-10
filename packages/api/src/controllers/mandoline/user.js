@@ -47,8 +47,8 @@ const getUserService = (user) => {
     adresse,
     code_postal,
     ville,
-    mesures_in_progress: mesures_en_attente,
-    mesures_awaiting: mesures_en_cours,
+    mesures_in_progress: mesures_en_cours,
+    mesures_awaiting: mesures_en_attente,
     departements,
   } = service;
 
