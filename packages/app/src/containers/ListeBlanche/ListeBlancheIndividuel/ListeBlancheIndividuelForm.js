@@ -7,7 +7,13 @@ import { useApolloClient } from "@apollo/client";
 import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
+import yup, {
+  FORM_REQUIRED_MESSAGE,
+  EMAIL_NOT_VALID,
+  NOM_NOT_VALID,
+  PRENOM_NOT_VALID,
+  CODE_POSTAL_NOT_VALID,
+} from "~/validation-schemas/yup";
 
 import {
   FormGrayBox,
@@ -41,12 +47,15 @@ const lbSchema = ({ apolloClient, isCreate }) =>
     adresse_complement: yup.string().optional().nullable(),
     code_postal: yup
       .string()
-      .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-      .required(),
+      .matches(
+        /^[0-9]{5}$/,
+        "Le code postal doit être composé de 5 chiffres. Par exemple: 75001."
+      )
+      .required(CODE_POSTAL_NOT_VALID),
     genre: yup.string().required(),
-    email: yup.string().required(),
-    nom: yup.string().required(),
-    prenom: yup.string().required(),
+    email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
+    nom: yup.string().required(NOM_NOT_VALID),
+    prenom: yup.string().required(PRENOM_NOT_VALID),
     telephone: yup.string().nullable(),
     siret: yup
       .string()
