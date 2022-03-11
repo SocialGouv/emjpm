@@ -82,7 +82,7 @@ function Input(props) {
         aria-label={name}
         aria-required={required}
         aria-describedby={
-          props?.ariaDescribedBy !== "none" ? `msg-${props.id}` : null
+          props?.ariaDescribedBy !== "none" ? `error-${props.id}` : null
         }
         placeholder={null}
         isActive={isActive}
@@ -105,6 +105,7 @@ function Input(props) {
             onFocus(event);
           }
         }}
+        aria-invalid={hasError}
       />
     </InputWrapper>
   );

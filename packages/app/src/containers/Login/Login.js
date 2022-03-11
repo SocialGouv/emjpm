@@ -126,7 +126,7 @@ function Login(props) {
               onChange={formik.handleChange}
               placeholder="Votre email"
               required
-              aria-describedby="msg-email"
+              aria-describedby="error-email"
               autoComplete="email"
               aria-label="Votre email"
             />
@@ -151,7 +151,7 @@ function Login(props) {
               }}
               placeholder="Votre mot de passe"
               required
-              aria-describedby="msg-password"
+              aria-describedby="error-password"
               autoComplete="current-password"
               aria-label="Votre mot de passe"
             />

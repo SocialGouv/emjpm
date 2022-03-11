@@ -7,12 +7,7 @@ function InlineError({ message, fieldId, showError, ...props }) {
   return (
     showError !== false &&
     message && (
-      <Flex
-        id={`error-${fieldId}`}
-        alignItems="center"
-        color="error"
-        {...props}
-      >
+      <Flex alignItems="center" color="error" {...props}>
         <Box style={{ minWidth: "18px" }}>
           <Exclamation size="18" />
         </Box>
@@ -24,6 +19,7 @@ function InlineError({ message, fieldId, showError, ...props }) {
               whiteSpace: "pre-line",
             }}
             role="alert"
+            id={`error-${fieldId}`}
           >
             {message}
           </Text>
