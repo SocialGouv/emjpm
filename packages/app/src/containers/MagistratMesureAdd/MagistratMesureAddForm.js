@@ -52,6 +52,9 @@ export function MagistratMesureAddForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex id="magistrat_mesure_add">
         <FormGrayBox>
           <Heading size={4} id="jugement_heading">

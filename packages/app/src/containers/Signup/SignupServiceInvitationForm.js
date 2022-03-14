@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { signupSchema } from "~/validation-schemas";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
 
 export function SignupServiceInvitationForm(props) {
@@ -31,6 +31,9 @@ export function SignupServiceInvitationForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="informations_personnelles">
         <FormGrayBox>
           <Heading size={4} id="informations_personnelles">

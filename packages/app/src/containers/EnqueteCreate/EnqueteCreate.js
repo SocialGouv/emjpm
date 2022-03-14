@@ -4,7 +4,14 @@ import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 
 import yup, { FORM_DATE_NOT_VALID } from "~/validation-schemas/yup";
-import { Button, Field, InlineError, InputDate, InputYear } from "~/components";
+import {
+  Button,
+  Field,
+  InlineError,
+  InputDate,
+  InputYear,
+  SrOnly,
+} from "~/components";
 import useQueryReady from "~/hooks/useQueryReady";
 
 import { CREATE_ENQUETE } from "./mutations";
@@ -54,6 +61,9 @@ export function EnqueteCreate() {
   const { values, touched, handleSubmit, errors } = formik;
   return (
     <form noValidate onSubmit={handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Field>
         <InputYear
           value={values.year}

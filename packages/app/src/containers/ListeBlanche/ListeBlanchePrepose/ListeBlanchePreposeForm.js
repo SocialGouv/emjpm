@@ -19,6 +19,7 @@ import {
   InlineError,
   Input,
   AccessibleSelect,
+  SrOnly,
 } from "~/components";
 
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -150,6 +151,9 @@ export function ListeBlanchePreposeForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1} id="informations_heading">

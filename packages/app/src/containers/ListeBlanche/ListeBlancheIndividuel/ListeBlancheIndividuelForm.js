@@ -17,7 +17,14 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import { Button, Heading, Field, InlineError, Input } from "~/components";
+import {
+  Button,
+  Heading,
+  Field,
+  InlineError,
+  Input,
+  SrOnly,
+} from "~/components";
 import { DepartementFormUtil } from "~/utils/departements";
 
 import SelectSIRET from "~/containers/SelectSIRET";
@@ -220,6 +227,9 @@ export function ListeBlancheIndividuelForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="informations_individuelles">
         <FormGrayBox>
           <Heading size={4} mb={1} id="informations_individuelles">

@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import { magistratEditSchema } from "~/validation-schemas";
-import { Button, Heading, Text, CheckBox } from "~/components";
+import { Button, Heading, Text, CheckBox, SrOnly } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
@@ -40,6 +40,9 @@ function MagistratEditInformationsForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1} id="informations_personnelles_heading">

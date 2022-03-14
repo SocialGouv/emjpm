@@ -14,6 +14,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 
 import { cardStyle } from "./style";
@@ -101,6 +102,9 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
         <Box p="5" width={[1, 3 / 5]}>
           <Box mb="2" role="group" aria-labelledby="contact_tribunal">
             <form noValidate onSubmit={formik.handleSubmit}>
+              <SrOnly id="instructions">
+                {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+              </SrOnly>
               <Field>
                 <Input
                   value={formik.values.etablissement}

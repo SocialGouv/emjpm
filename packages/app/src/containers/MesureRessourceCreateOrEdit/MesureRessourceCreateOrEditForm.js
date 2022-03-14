@@ -16,6 +16,7 @@ import {
   InlineError,
   AccessibleSelect,
   Text,
+  SrOnly,
 } from "~/components";
 import { findOptions } from "~/utils/form";
 
@@ -39,6 +40,9 @@ export function MesureRessourceCreateOrEditForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="ressource_heading">
         <FormGrayBox>
           {mesureRessourceToEdit?.id && (

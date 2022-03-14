@@ -14,6 +14,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 import { captureException } from "~/user/sentry";
 
@@ -103,6 +104,9 @@ function ForgotPassword() {
       </Box>
       <Box p="5" role="group" aria-labelledby="demande_mot_de_passe">
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">
               {formik.status.error}

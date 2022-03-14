@@ -20,6 +20,7 @@ import {
   AccessibleSelect,
   Textarea,
   CheckBox,
+  SrOnly,
 } from "~/components";
 import { findOptions } from "~/utils/form";
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -109,6 +110,9 @@ function AdminUserServiceForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>

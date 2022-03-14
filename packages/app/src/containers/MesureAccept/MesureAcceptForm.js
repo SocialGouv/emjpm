@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError } from "~/components";
+import { Button, Field, Heading, InlineError, SrOnly } from "~/components";
 
 export function MesureAcceptForm(props) {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
@@ -57,6 +57,9 @@ export function MesureAcceptForm(props) {
         </Box>
 
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           <FormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"

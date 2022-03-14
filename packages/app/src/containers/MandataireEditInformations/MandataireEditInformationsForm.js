@@ -21,6 +21,7 @@ import {
   InlineError,
   AccessibleSelect,
   Textarea,
+  SrOnly,
 } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
@@ -115,6 +116,9 @@ function MandataireEditInformationsForm(props) {
   return (
     <FormikProvider value={formik}>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1} id="Informations_personnelles_heading">

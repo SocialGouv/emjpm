@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
 import { FormGroupSelect, FormGroupInputDate } from "~/components/AppForm";
-import { Button, Heading } from "~/components";
+import { Button, Heading, SrOnly } from "~/components";
 import { FORM_DATE_NOT_VALID } from "../../validation-schemas/yup";
 
 export function MesureCloseForm(props) {
@@ -58,6 +58,9 @@ export function MesureCloseForm(props) {
           </Heading>
         </Box>
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           <FormGroupInputDate
             label="Date de fin de la mesure de protection"
             placeholder="jj/mm/aaaa"

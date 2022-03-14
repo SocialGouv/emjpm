@@ -20,6 +20,7 @@ import {
   Field,
   Input,
   AccessibleSelect,
+  SrOnly,
 } from "~/components";
 
 import { Link } from "~/containers/Commons";
@@ -217,6 +218,9 @@ export function ListeBlancheServiceForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1} id="structure_juridique_heading">

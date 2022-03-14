@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import yup from "~/validation-schemas/yup";
-import { Button, Heading } from "~/components";
+import { Button, Heading, SrOnly } from "~/components";
 
 const directionTypeOptions = [
   {
@@ -68,6 +68,9 @@ export function AdminDirectionTypeForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="type_direction">
         <FormGrayBox>
           <Heading size={4} id="type_direction">

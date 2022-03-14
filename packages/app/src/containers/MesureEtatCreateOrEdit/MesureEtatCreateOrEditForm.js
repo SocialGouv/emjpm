@@ -12,7 +12,14 @@ import {
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureEtatSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError, Text } from "~/components";
+import {
+  Button,
+  Field,
+  Heading,
+  InlineError,
+  Text,
+  SrOnly,
+} from "~/components";
 
 function initialValues(mesureEtat) {
   return {
@@ -44,6 +51,9 @@ export function MesureEtatCreateOrEditForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="mesure_de_protection_informations">
         <FormGrayBox>
           {mesureEtatToEdit?.id && (

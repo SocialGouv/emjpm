@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import { serviceAntenneSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError } from "~/components";
+import { Button, Field, Heading, InlineError, SrOnly } from "~/components";
 import { useHistory } from "react-router-dom";
 
 function ServiceAntenneForm(props) {
@@ -48,6 +48,9 @@ function ServiceAntenneForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>

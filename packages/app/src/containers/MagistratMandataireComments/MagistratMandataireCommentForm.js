@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
 
-import { Button, Field, Input } from "~/components";
+import { Button, Field, Input, SrOnly } from "~/components";
 
 import { ADD_COMMENT, EDIT_COMMENT } from "./mutations";
 import useQueryReady from "~/hooks/useQueryReady";
@@ -70,6 +70,9 @@ export function MagistratMandataireCommentForm(props) {
         tribunal
       </Text>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <Field>
           <Input
             value={formik.values.comment || undefined}

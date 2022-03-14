@@ -14,7 +14,14 @@ import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { signupMandataireSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
-import { Button, Field, Heading, InlineError, Text } from "~/components";
+import {
+  Button,
+  Field,
+  Heading,
+  InlineError,
+  Text,
+  SrOnly,
+} from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
 import { SignupContext } from "./context";
@@ -84,6 +91,9 @@ function SignupMandataireForm() {
       </HeadingTitle>
 
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <SignupGeneralError errors={formik.errors} />
         {isIndividuel(user) && (
           <Flex role="group" aria-labelledby="informations">
