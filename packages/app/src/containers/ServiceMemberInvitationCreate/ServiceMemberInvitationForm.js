@@ -42,10 +42,15 @@ function ServiceMemberInvitationForm(props) {
             hasError={formik.touched.email && formik.errors.email}
             onChange={formik.handleChange}
             placeholder="Email"
-            aria-describedby="msg-email"
             autoComplete="email"
             aria-label="Votre email"
+            aria-describedby={
+              formik.errors.email && formik.touched.email
+                ? "msg-email"
+                : "format_email"
+            }
           />
+          <SrOnly id="format_email">format attendu : nom@justice.fr </SrOnly>
           <div id="msg-email">
             {formik.touched.email && (
               <InlineError message={formik.errors.email} fieldId="email" />

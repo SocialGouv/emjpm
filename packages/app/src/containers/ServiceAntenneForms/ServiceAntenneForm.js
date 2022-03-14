@@ -111,7 +111,9 @@ function ServiceAntenneForm(props) {
             validationSchema={serviceAntenneSchema}
             autoComplete="tel"
             aria-label="Votre téléphone"
+            ariaDescribedBy="format_contact_phone"
           />
+          <SrOnly id="format_contact_phone">Format attendu:0601020304 </SrOnly>
           <FormGroupInput
             value={formik.values.contact_email}
             id="contact_email"
@@ -120,7 +122,11 @@ function ServiceAntenneForm(props) {
             validationSchema={serviceAntenneSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="format_contact_email"
           />
+          <SrOnly id="format_contact_email">
+            format attendu : nom@justice.fr{" "}
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>

@@ -117,14 +117,22 @@ function ForgotPassword() {
               value={formik.values.email}
               id="email"
               name="email"
-              aria-describedby="msg-email"
               type="text"
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Entrez votre email"
               autoComplete="email"
               aria-label="Votre email"
+              aria-describedby={
+                formik.errors.email && formik.touched.email
+                  ? "msg-email"
+                  : "email_format_attendu"
+              }
             />
+
+            <SrOnly id="email_format_attendu">
+              format attendu : nom@justice.fr
+            </SrOnly>
             <div id="msg-email">
               {formik.touched.email && (
                 <InlineError message={formik.errors.email} fieldId="email" />

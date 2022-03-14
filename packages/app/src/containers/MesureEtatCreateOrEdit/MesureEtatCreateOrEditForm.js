@@ -86,7 +86,11 @@ export function MesureEtatCreateOrEditForm(props) {
             validationSchema={mesureEtatSchema}
             size="small"
             aria-label="Date de changement d'état"
+            ariaDescribedBy="date_changement_etat"
           />
+          <SrOnly id="date_changement_etat">
+            Format: jj/mm/aaaa. Exemple 01/01/2021.
+          </SrOnly>
 
           <FormGroupSelect
             id="nature_mesure"
@@ -170,7 +174,9 @@ export function MesureEtatCreateOrEditForm(props) {
                   }}
                   size="small"
                   aria-label="Code postal"
+                  ariaDescribedBy="format_code_postal"
                 />
+                <SrOnly id="format_code_postal">Format attendu: 75001.</SrOnly>
               </Box>
               <Box ml={1} flex={1 / 2}>
                 <Field>

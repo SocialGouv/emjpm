@@ -85,7 +85,6 @@ function SignupGreffierForm({ tiDatas }) {
 
             <FormGroupInput
               id="cabinet"
-              placeholder="Cabinet"
               formik={formik}
               autoComplete="organization"
               placeholder="Cabinet du tribunal"

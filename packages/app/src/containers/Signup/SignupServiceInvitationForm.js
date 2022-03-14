@@ -91,7 +91,9 @@ export function SignupServiceInvitationForm(props) {
             validationSchema={signupSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format"
           />
+          <SrOnly id="email_format">format attendu : nom@justice.fr </SrOnly>
           <FormGroupSelect
             id="genre"
             options={GENDER_OPTIONS}

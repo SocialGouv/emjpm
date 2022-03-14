@@ -69,7 +69,9 @@ export function MesureRessourceCreateOrEditForm(props) {
             validationSchema={mesureRessourceSchema}
             size="small"
             required
+            ariaDescribedBy="format_annee"
           />
+          <SrOnly id="format_annee">Format attendu aaaa. Example: 2020</SrOnly>
           <FormGroupInput
             placeholder="Niveau de Ressource (€)"
             id="niveau_ressource"
@@ -77,7 +79,9 @@ export function MesureRessourceCreateOrEditForm(props) {
             validationSchema={mesureRessourceSchema}
             size="small"
             aria-label="Niveau de Ressource (€)"
+            ariaDescribedBy="format_niveau_ressource"
           />
+          <SrOnly id="format_niveau_ressource">Format attendu: 10543.</SrOnly>
           <Field>
             <AccessibleSelect
               instanceId={"prestations_sociales"}

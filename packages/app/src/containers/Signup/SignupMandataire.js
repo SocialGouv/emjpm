@@ -115,7 +115,9 @@ function SignupMandataireForm() {
                 validationSchema={signupMandataireSchema}
                 required={isIndividuel(user)}
                 aria-label="Siret"
+                ariaDescribedBy="format_siret"
               />
+              <SrOnly id="format_siret">format attendu : 82254321300027</SrOnly>
             </FormInputBox>
           </Flex>
         )}
@@ -134,7 +136,9 @@ function SignupMandataireForm() {
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
               aria-label="Votre téléphone"
+              ariaDescribedBy="format_telephone"
             />
+            <SrOnly id="format_telephone">format attendu : 0301020304</SrOnly>
             <FormGroupInput
               id="telephone_portable"
               formik={formik}
@@ -143,7 +147,11 @@ function SignupMandataireForm() {
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
               aria-label="Votre téléphone portable"
+              ariaDescribedBy="format_telephone_portable"
             />
+            <SrOnly id="format_telephone_portable">
+              format attendu : 0601020304
+            </SrOnly>
           </FormInputBox>
         </Flex>
 

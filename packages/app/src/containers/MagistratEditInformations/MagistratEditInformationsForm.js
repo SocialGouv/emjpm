@@ -87,7 +87,11 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
           <CheckBox
             isChecked={formik.values.share_email}
             onChange={() => {
@@ -117,7 +121,6 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
           />
           <FormGroupInput
-            placeholder="Cabinet"
             id="cabinet"
             formik={formik}
             validationSchema={magistratEditSchema}

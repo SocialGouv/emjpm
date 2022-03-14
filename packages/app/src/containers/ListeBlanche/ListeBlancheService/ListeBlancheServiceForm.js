@@ -272,7 +272,11 @@ export function ListeBlancheServiceForm(props) {
                 size="small"
                 autoComplete="postal-code"
                 aria-label="Code postal"
+                ariaDescribedBy={"code_postal_format_attendu"}
               />
+              <SrOnly id="code_postal_format_attendu">
+                format attendu : 75001
+              </SrOnly>
             </Box>
             <Box ml={1} flex={1 / 2}>
               <Field>

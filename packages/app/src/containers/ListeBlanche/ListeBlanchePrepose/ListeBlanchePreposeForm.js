@@ -194,7 +194,11 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr{" "}
+          </SrOnly>
           <Box flex={1 / 2}>
             <FormGroupInput
               placeholder="Téléphone"
@@ -202,7 +206,11 @@ export function ListeBlanchePreposeForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               aria-label="Votre téléphone"
+              ariaDescribedBy="telephone_format_attendu"
             />
+            <SrOnly id="telephone_format_attendu">
+              format attendu : 0601020304
+            </SrOnly>
           </Box>
         </FormInputBox>
       </Flex>

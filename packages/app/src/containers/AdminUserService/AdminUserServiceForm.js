@@ -157,13 +157,22 @@ function AdminUserServiceForm(props) {
             normalizers={[normalizeLastName]}
             aria-label="Votre nom"
           />
+
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="user_email"
             formik={formik}
             validationSchema={adminUserServiceSchema}
             aria-label="Votre adresse e-mail"
+            aria-describedby={
+              formik.errors.user_email && formik.touched.user_email
+                ? "msg-user_email"
+                : "user_email_format_attendu"
+            }
           />
+          <SrOnly id="user_email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex role="group" aria-labelledby="structure_juridique">

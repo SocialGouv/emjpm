@@ -35,7 +35,6 @@ export default function InputYear(props) {
     <>
       {label && (
         <Label
-          aria-describedby={props.id}
           htmlFor={props.id}
           isActive={props.isActive}
           required={props.required}
@@ -58,6 +57,7 @@ export default function InputYear(props) {
         selected={selected}
         className={classNames("yearpicker", className)}
         {...datePickerProps}
+        ariaDescribedBy={props?.ariaDescribedBy}
       />
     </>
   );

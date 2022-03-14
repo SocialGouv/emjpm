@@ -72,8 +72,11 @@ export function EnqueteCreate() {
           onChange={(value) => formik.setFieldValue("year", value)}
           placeholderText="Année de l'enquête"
           title="Format: aaaa. Exemple: 2021"
-          aria-describedby="msg-year"
+          aria-describedby={
+            errors.year && touched.year ? "msg-year" : "year_format_attendu"
+          }
         />
+        <SrOnly id="year_format_attendu">format attendu : jj/mm/aaaa</SrOnly>
         <div id="msg-year">
           {touched.year && errors.year && (
             <InlineError message={errors.year} fieldId="year" />
@@ -87,8 +90,13 @@ export function EnqueteCreate() {
           name="endedAt"
           onChange={(value) => formik.setFieldValue("endedAt", value)}
           placeholderText="Date de fin"
-          aria-describedby="msg-endedAt"
+          aria-describedby={
+            errors.endedAt && touched.endedAt
+              ? "msg-endedAt"
+              : "endedAt_format_attendu"
+          }
         />
+        <SrOnly id="endedAt_format_attendu">format attendu : jj/mm/aaaa</SrOnly>
         <div id="msg-endedAt">
           {touched.endedAt && (
             <InlineError message={errors.endedAt} fieldId="endedAt" />

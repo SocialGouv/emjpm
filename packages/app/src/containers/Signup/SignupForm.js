@@ -171,7 +171,9 @@ export function SignupForm() {
               validationSchema={signupSchema}
               autoComplete="email"
               aria-label="Votre email"
+              ariaDescribedBy="format_email"
             />
+            <SrOnly id="format_email">format attendu : nom@justice.fr</SrOnly>
             <FormGroupInput
               placeholder="Mot de passe"
               type="password"

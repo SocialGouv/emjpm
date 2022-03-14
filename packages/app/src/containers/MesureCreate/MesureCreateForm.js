@@ -84,7 +84,7 @@ export function MesureCreateForm(props) {
                   }
                 }}
                 errorMessage={formik.errors.numero_rg}
-                aria-describedby="format_rg_attendu"
+                ariaDescribedBy="format_rg_attendu"
               />
               <SrOnly id="format_rg_attendu">
                 Format : 8 chiffres ou lettres. Exemple : 12A34567
@@ -114,7 +114,6 @@ export function MesureCreateForm(props) {
             </Box>
             <Box style={{ minWidth: "200px" }} pl="1px">
               <FormGroupInput
-                placeholder="Cabinet"
                 id="cabinet"
                 formik={formik}
                 size="small"
@@ -141,7 +140,11 @@ export function MesureCreateForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Année de naissance"
+            ariaDescribedBy="format_annee_naissance"
           />
+          <SrOnly id="format_annee_naissance">
+            Format attendu: aaaa. Exemple: 2021
+          </SrOnly>
           <FormGroupInputDate
             label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
@@ -150,7 +153,11 @@ export function MesureCreateForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Date de première mise sous protection"
+            ariaDescribedBy="format_date_premier_mesure"
           />
+          <SrOnly id="format_date_premier_mesure">
+            Format: jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -169,7 +176,11 @@ export function MesureCreateForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Date de nomination"
+            ariaDescribedBy="format_date_nomination"
           />
+          <SrOnly id="format_date_nomination">
+            Format: jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
           <FormGroupSelect
             id="nature_mesure"
             options={MESURE_PROTECTION.NATURE_MESURE.options}

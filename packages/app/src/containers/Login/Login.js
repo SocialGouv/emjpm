@@ -135,10 +135,17 @@ function Login(props) {
               onChange={formik.handleChange}
               placeholder="Votre email"
               required
-              aria-describedby="msg-email"
               autoComplete="email"
               aria-label="Votre email"
+              aria-describedby={
+                formik.errors.email && formik.touched.email
+                  ? "msg-email"
+                  : "email_format_attendu"
+              }
             />
+            <SrOnly id="email_format_attendu">
+              format attendu : nom@justice.fr
+            </SrOnly>
 
             <div id="msg-email">
               <InlineError message={formik.errors.email} fieldId="email" />

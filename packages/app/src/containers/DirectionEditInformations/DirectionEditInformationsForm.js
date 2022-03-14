@@ -63,7 +63,11 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             validationSchema={directionEditSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">

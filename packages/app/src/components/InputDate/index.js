@@ -47,7 +47,6 @@ export default function InputDate(props) {
     <>
       {label && (
         <Label
-          aria-describedby={props.id}
           htmlFor={labelFor}
           isActive={props.isActive}
           aria-required={props.required}
@@ -61,7 +60,9 @@ export default function InputDate(props) {
           {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
+
       <DatePicker
+        ariaDescribedBy={props?.ariaDescribedBy}
         ref={inputRef}
         onChange={onChange}
         selected={selected}

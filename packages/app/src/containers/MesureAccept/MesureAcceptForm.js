@@ -68,7 +68,11 @@ export function MesureAcceptForm(props) {
             formik={formik}
             validationSchema={mesureAcceptSchema}
             aria-label="Date de nomination"
+            ariaDescribedBy="date_nomination_format_attendu"
           />
+          <SrOnly id="date_nomination_format_attendu">
+            format attendu : jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
 
           {antenneOptions.length > 0 && (
             <FormGroupSelect
@@ -135,8 +139,11 @@ export function MesureAcceptForm(props) {
                     await formik.setFieldValue("ville", "");
                   }}
                   aria-label="Code postal"
-                  aria-label="Code postal"
+                  ariaDescribedBy="code_postal_format_attendu"
                 />
+                <SrOnly id="code_postal_format_attendu">
+                  format attendu : 75001
+                </SrOnly>
               </Box>
               <Box ml={1} flex={1 / 2}>
                 <Field>

@@ -87,7 +87,11 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
           <CheckBox
             isChecked={formik.values.share_email}
             onChange={() => {
@@ -117,7 +121,6 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
           />
           <FormGroupInput
-            placeholder="Cabinet"
             id="cabinet"
             formik={formik}
             validationSchema={greffierEditSchema}
