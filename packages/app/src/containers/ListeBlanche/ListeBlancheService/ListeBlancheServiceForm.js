@@ -468,7 +468,6 @@ export function ListeBlancheServiceForm(props) {
           />
         </FormInputBox>
       </Flex>
-
       {!isCreate && (
         <Flex>
           <FormGrayBox>
@@ -585,7 +584,6 @@ export function ListeBlancheServiceForm(props) {
           </FormInputBox>
         </Flex>
       )}
-
       <Flex justifyContent="flex-end" p={1}>
         {handleCancel && (
           <Box>

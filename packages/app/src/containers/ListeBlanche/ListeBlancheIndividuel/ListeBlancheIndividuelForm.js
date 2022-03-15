@@ -7,7 +7,15 @@ import { useApolloClient } from "@apollo/client";
 import { checkDuplicateListeBlancheSIRET } from "~/query-service/emjpm-hasura/checkDuplicateListeBlancheSIRET";
 
 import useDebouncedEffect from "~/hooks/useDebouncedEffect";
-import yup, { FORM_REQUIRED_MESSAGE } from "~/validation-schemas/yup";
+import yup, {
+  FORM_REQUIRED_MESSAGE,
+  CODE_POSTAL_NOT_VALID,
+  EMAIL_NOT_VALID,
+  NOM_NOT_VALID,
+  PRENOM_NOT_VALID,
+  TELEPHONE_NOT_VALID,
+  SIRET_NOT_VALID,
+} from "~/validation-schemas/yup";
 
 import {
   FormGrayBox,
@@ -48,21 +56,18 @@ const lbSchema = ({ apolloClient, isCreate }) =>
     adresse_complement: yup.string().optional().nullable(),
     code_postal: yup
       .string()
-      .matches(/^[0-9]{5}$/, "Le code postal doit être composé de 5 chiffres.")
-      .required(),
+      .matches(/^[0-9]{5}$/, CODE_POSTAL_NOT_VALID)
+      .required(CODE_POSTAL_NOT_VALID),
     genre: yup.string().required(),
-    email: yup.string().required(),
-    nom: yup.string().required(),
-    prenom: yup.string().required(),
-    telephone: yup.string().nullable(),
+    email: yup.string().required(EMAIL_NOT_VALID),
+    nom: yup.string().required(NOM_NOT_VALID),
+    prenom: yup.string().required(PRENOM_NOT_VALID),
+    telephone: yup.string().nullable(TELEPHONE_NOT_VALID),
     siret: yup
       .string()
       .nullable()
-      .matches(
-        /^[0-9]{14}$/,
-        "Le SIRET est composé de 14 chiffres. Par exemple: 82254321300027."
-      )
-      .required()
+      .matches(/^[0-9]{14}$/, SIRET_NOT_VALID)
+      .required(SIRET_NOT_VALID)
       .test(
         "siret-duplicate",
         "Le numéro SIRET que vous venez de saisir existe déjà dans la liste blanche sur eMJPM.",
@@ -437,7 +442,6 @@ export function ListeBlancheIndividuelForm(props) {
           </div>
         </FormInputBox>
       </Flex>
-
       {!isCreate && (
         <Flex role="group" aria-labelledby="informations_mandataire">
           <FormGrayBox>
@@ -546,7 +550,6 @@ export function ListeBlancheIndividuelForm(props) {
           </FormInputBox>
         </Flex>
       )}
-
       <Flex mt={4} justifyContent="flex-end">
         {editMode && isAdmin && (
           <Box>
