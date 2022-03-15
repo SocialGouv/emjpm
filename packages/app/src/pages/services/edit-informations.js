@@ -16,7 +16,7 @@ export default function EditInformations() {
       <SkipToContent skipTo="edit_informations" />
       <LayoutServices>
         <BoxWrapper mt={3} id="edit_informations">
-          <HeadingTitle mx="1">
+          <HeadingTitle mb={3}>
             Editer les informations de votre service
           </HeadingTitle>
           <AdminUserService
