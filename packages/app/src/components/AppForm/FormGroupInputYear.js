@@ -17,6 +17,7 @@ export default function FormGroupInputYear({
   validationSchema,
   onChange,
   required,
+  ariaLabelledBy,
   ...props
 }) {
   const { handleBlur, values } = formik;
@@ -51,6 +52,7 @@ export default function FormGroupInputYear({
               ? props.ariaDescribedBy
               : `msg-${id}`
           }
+          ariaLabelledBy={ariaLabelledBy}
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>

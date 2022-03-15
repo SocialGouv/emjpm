@@ -17,6 +17,7 @@ export default function InputYear(props) {
     selected,
     className,
     onChange: onChangeProp,
+    ariaLabelledBy,
     ...datePickerProps
   } = props;
 
@@ -58,6 +59,8 @@ export default function InputYear(props) {
         className={classNames("yearpicker", className)}
         {...datePickerProps}
         ariaDescribedBy={props?.ariaDescribedBy}
+        ariaRequired={props.required}
+        ariaLabelledBy={ariaLabelledBy}
       />
     </>
   );

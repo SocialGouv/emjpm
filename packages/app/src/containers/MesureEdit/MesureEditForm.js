@@ -123,9 +123,10 @@ export function MesureEditForm(props) {
             id="annee_naissance"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Année de naissance"
             ariaDescribedBy="format_annee_naissance"
+            ariaLabelledBy="anne_naissance_label"
           />
+          <SrOnly id="anne_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="format_annee_naissance">
             Format: aaaa. Exemple: 2021.
           </SrOnly>

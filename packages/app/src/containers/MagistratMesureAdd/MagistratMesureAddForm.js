@@ -136,7 +136,9 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
+            ariaLabelledBy="annee_naissance_label"
           />
+          <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             Format: aaaa. Exemple: 2021
           </SrOnly>

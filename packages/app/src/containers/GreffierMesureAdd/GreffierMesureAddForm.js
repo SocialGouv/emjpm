@@ -137,7 +137,9 @@ export function GreffierMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
+            ariaLabelledBy="annee_naissance_label"
           />
+          <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             format attendu : aaaa. Exemple: 2021.
           </SrOnly>
