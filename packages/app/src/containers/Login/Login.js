@@ -16,6 +16,7 @@ import {
   Heading,
   InlineError,
   Input,
+  SrOnly,
   Text,
 } from "~/components";
 import { useAuth } from "~/user/Auth";
@@ -111,6 +112,14 @@ function Login(props) {
       </Box>
       <Box p="5" role="group" aria-labelledby="login_heading">
         <form noValidate onSubmit={onSubmit}>
+          <SrOnly>
+            <SrOnly id="instructions">
+              {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+            </SrOnly>
+            <Text id="instructions" lineHeight="1.5" color="textSecondary">
+              {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+            </Text>
+          </SrOnly>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">
               {formik.status.errorMsg}
@@ -126,10 +135,17 @@ function Login(props) {
               onChange={formik.handleChange}
               placeholder="Votre email"
               required
-              aria-describedby="msg-email"
               autoComplete="email"
               aria-label="Votre email"
+              aria-describedby={
+                formik.errors.email && formik.touched.email
+                  ? "msg-email"
+                  : "email_format_attendu"
+              }
             />
+            <SrOnly id="email_format_attendu">
+              format attendu : nom@justice.fr
+            </SrOnly>
 
             <div id="msg-email">
               <InlineError message={formik.errors.email} fieldId="email" />

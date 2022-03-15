@@ -12,6 +12,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 
 import { EDITOR_TOKEN_REQUEST, SEND_EMAIL_TOKEN_REQUEST } from "./mutations";
@@ -98,6 +99,9 @@ function TokenRequest() {
       </Box>
       <Box p="5" role="group" aria-labelledby="demande_acces">
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           <Field>
             <Input
               value={formik.values.name}
@@ -124,10 +128,15 @@ function TokenRequest() {
               hasError={formik.errors.email && formik.touched.email}
               onChange={formik.handleChange}
               placeholder="Votre email"
-              aria-describedby="msg-email"
               autoComplete="email"
               aria-label="Votre email"
+              aria-describedby={
+                formik.errors.email && formik.touched.email
+                  ? "msg-email"
+                  : "format_email"
+              }
             />
+            <SrOnly id="format_email">format attendu : nom@justice.fr </SrOnly>
             <div id="msg-email">
               {formik.touched.email && (
                 <InlineError message={formik.errors.email} fieldId="email" />

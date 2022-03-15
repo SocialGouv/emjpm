@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { directionEditSchema } from "~/validation-schemas/directionEditSchema";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 
 function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
   const formik = useFormik({
@@ -24,6 +24,9 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} id="modifier_vos_informations_heading">
@@ -60,7 +63,11 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             validationSchema={directionEditSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">

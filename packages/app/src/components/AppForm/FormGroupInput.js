@@ -30,6 +30,7 @@ export default function FormGroupInput({
   noRequiredAsterisk,
   normalizers = [],
   autoComplete,
+  ariaDescribedBy,
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -71,7 +72,9 @@ export default function FormGroupInput({
           readOnly={readOnly}
           required={required}
           id={id}
-          aria-describedby={`msg-${id}`}
+          aria-describedby={
+            ariaDescribedBy && !showError ? ariaDescribedBy : `msg-${id}`
+          }
           name={id}
           title={title}
           value={value}

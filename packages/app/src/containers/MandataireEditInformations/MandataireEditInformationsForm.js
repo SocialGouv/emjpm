@@ -21,6 +21,7 @@ import {
   InlineError,
   AccessibleSelect,
   Textarea,
+  SrOnly,
 } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { mandataireEditSchema } from "~/validation-schemas";
@@ -115,6 +116,9 @@ function MandataireEditInformationsForm(props) {
   return (
     <FormikProvider value={formik}>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1} id="Informations_personnelles_heading">
@@ -168,7 +172,11 @@ function MandataireEditInformationsForm(props) {
               validationSchema={validationSchema}
               autoComplete="email"
               aria-label="Votre email"
+              ariaDescribedBy="email_format_attendu"
             />
+            <SrOnly id="email_format_attendu">
+              format attendu : nom@justice.fr
+            </SrOnly>
             <Flex justifyContent="space-between">
               <Box flex={1 / 2}>
                 <FormGroupInput
@@ -178,7 +186,11 @@ function MandataireEditInformationsForm(props) {
                   validationSchema={validationSchema}
                   autoComplete="tel"
                   aria-label="Votre téléphone"
+                  ariaDescribedBy="telephone_format_attendu"
                 />
+                <SrOnly id="telephone_format_attendu">
+                  format attendu : 0601020304
+                </SrOnly>
               </Box>
               <Box ml={1} flex={1 / 2}>
                 <FormGroupInput
@@ -188,6 +200,7 @@ function MandataireEditInformationsForm(props) {
                   validationSchema={validationSchema}
                   autoComplete="tel"
                   aria-label="Votre téléphone"
+                  ariaDescribedBy="telephone_format_attendu"
                 />
               </Box>
             </Flex>
@@ -207,8 +220,12 @@ function MandataireEditInformationsForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 aria-label="Siret"
+                ariaDescribedBy="siret_format_attendu"
               />
             )}
+            <SrOnly id="siret_format_attendu">
+              format attendu : 82254321300027
+            </SrOnly>
 
             <Field>
               <Geocode
