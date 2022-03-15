@@ -106,6 +106,7 @@ function Input(props) {
           }
         }}
         aria-invalid={hasError}
+        id={props.id || name}
       />
     </InputWrapper>
   );
