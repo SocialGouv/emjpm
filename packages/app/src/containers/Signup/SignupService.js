@@ -128,6 +128,7 @@ function SignupServiceForm({ serviceDatas }) {
               options={serviceOptions}
               isClearable
               required
+              aria-label="Votre service"
             />
           </FormInputBox>
         </Flex>

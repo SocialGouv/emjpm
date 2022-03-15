@@ -130,6 +130,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Votre civilité"
           />
 
           <FormGroupInputYear
@@ -188,6 +189,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Nature de la mesure"
           />
 
           <FormGroupSelect
@@ -198,6 +200,7 @@ export function MesureCreateForm(props) {
             isClearable
             size="small"
             validationSchema={validationSchema}
+            aria-label="Champ de la mesure"
           />
 
           <FormGroupSelect
@@ -210,6 +213,7 @@ export function MesureCreateForm(props) {
               formik.setFieldValue("lieu_vie", option.value);
               formik.setFieldValue("type_etablissement", null);
             }}
+            aria-label="Lieu de vie du majeur"
           />
 
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
@@ -219,6 +223,7 @@ export function MesureCreateForm(props) {
               placeholder="Type d'établissement"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Type d'etablissement'"
             />
           )}
 
@@ -238,6 +243,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Pays"
           />
 
           {formik.values.pays === "FR" && (
@@ -300,6 +306,7 @@ export function MesureCreateForm(props) {
               formik={formik}
               size="small"
               validationSchema={validationSchema}
+              aria-label="Antenne"
             />
           </FormInputBox>
         </Flex>

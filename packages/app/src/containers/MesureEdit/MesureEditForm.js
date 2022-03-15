@@ -113,6 +113,7 @@ export function MesureEditForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Votre civilité"
           />
 
           <FormGroupInputYear
@@ -216,6 +217,7 @@ export function MesureEditForm(props) {
               formik={formik}
               size="small"
               validationSchema={validationSchema}
+              aria-label="Antenne"
             />
           </FormInputBox>
         </Flex>

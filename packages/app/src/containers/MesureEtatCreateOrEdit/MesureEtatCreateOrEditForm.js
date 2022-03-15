@@ -99,6 +99,7 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            aria-label="Nature de la mesure"
           />
 
           <FormGroupSelect
@@ -109,6 +110,7 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            aria-labelledby="Champ de la mesure"
           />
 
           <FormGroupSelect
@@ -122,6 +124,7 @@ export function MesureEtatCreateOrEditForm(props) {
               formik.setFieldValue("lieu_vie", option.value);
               formik.setFieldValue("type_etablissement", null);
             }}
+            aria-label="Lieu de vie du majeur"
           />
 
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
@@ -156,6 +159,7 @@ export function MesureEtatCreateOrEditForm(props) {
               formik.setFieldValue("code_postal", null);
               formik.setFieldValue("ville", null);
             }}
+            aria-label="Pays"
           />
 
           {formik.values.pays === "FR" && (

@@ -81,6 +81,7 @@ function SignupGreffierForm({ tiDatas }) {
               enableFilterByLabel
               isClearable={true}
               required
+              aria-label="Tribunal d'instance"
             />
 
             <FormGroupInput

@@ -102,6 +102,7 @@ export function SignupServiceInvitationForm(props) {
             formik={formik}
             validationSchema={signupSchema}
             autoComplete="sex"
+            aria-label="Votre civilité"
           />
           <FormGroupInput
             formik={formik}
