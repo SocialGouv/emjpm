@@ -86,7 +86,6 @@ export function GreffierMesureAddForm(props) {
           <SrOnly id="format_rg_attendu">
             Format : 8 chiffres ou lettres. Exemple : 12A34567
           </SrOnly>
-
           <FormGroupInput
             id="cabinet"
             placeholder="Cabinet du tribunal"
@@ -96,6 +95,7 @@ export function GreffierMesureAddForm(props) {
             autoComplete="organization"
             ariaLabel="Cabinet du tribunal"
           />
+
           <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
@@ -104,9 +104,12 @@ export function GreffierMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date prévisionnelle du jugement"
             ariaDescribedBy="judgmentDate_format_attendu"
+            ariaLabelledBy="judgmentDate_label"
           />
+          <SrOnly id="judgmentDate_label">
+            Date prévisionnelle du jugement
+          </SrOnly>
           <SrOnly id="judgmentDate_format_attendu">
             format attendu : Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>

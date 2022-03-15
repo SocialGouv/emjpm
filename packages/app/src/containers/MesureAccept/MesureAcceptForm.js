@@ -67,9 +67,10 @@ export function MesureAcceptForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={mesureAcceptSchema}
-            aria-label="Date de nomination"
+            ariaLabelledBy="date_nomination_label"
             ariaDescribedBy="date_nomination_format_attendu"
           />
+          <SrOnly id="date_nomination_label">Date de nomination</SrOnly>
           <SrOnly id="date_nomination_format_attendu">
             format attendu : jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>

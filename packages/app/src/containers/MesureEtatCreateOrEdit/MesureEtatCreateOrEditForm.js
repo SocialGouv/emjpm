@@ -85,9 +85,12 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
-            aria-label="Date de changement d'état"
+            ariaLabelledBy="date_changement_etat_label"
             ariaDescribedBy="date_changement_etat"
           />
+          <SrOnly id="date_changement_etat_label">
+            Date de changement d'état.
+          </SrOnly>
           <SrOnly id="date_changement_etat">
             Format: jj/mm/aaaa. Exemple 01/01/2021.
           </SrOnly>

@@ -137,9 +137,12 @@ export function MesureEditForm(props) {
             id="date_premier_mesure"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date de première mise sous protection"
+            ariaLabelledBy="date_premier_mesure_label"
             ariaDescribedBy="format_date_premier_mesure"
           />
+          <SrOnly id="date_premier_mesure_label">
+            Date de première mise sous protection
+          </SrOnly>
           <SrOnly id="format_date_premier_mesure">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -181,9 +184,10 @@ export function MesureEditForm(props) {
             id="date_nomination"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date de nomination"
+            ariaLabelledBy="date_nomination_label"
             ariaDescribedBy="format_date_nomination"
           />
+          <SrOnly id="date_nomination_label">Date de nomination</SrOnly>
           <SrOnly id="format_date_nomination">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -194,9 +198,12 @@ export function MesureEditForm(props) {
             id="date_protection_en_cours"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date de la protection en cours"
+            ariaLabelledBy="date_protection_en_cours_label"
             ariaDescribedBy="format_date_protection_en_cours"
           />
+          <SrOnly id="date_protection_en_cours_label">
+            Date de la protection en cours
+          </SrOnly>
           <SrOnly id="format_date_protection_en_cours">
             Format: jj/mm/aaaa. Exemple 01/01/2021.
           </SrOnly>

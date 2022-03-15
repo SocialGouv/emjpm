@@ -102,9 +102,12 @@ export function MagistratMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date prévisionnelle du jugement"
+            ariaLabelledBy="judgmentDate_label"
             ariaDescribedBy="judgmentDate_format_attendu"
           />
+          <SrOnly id="judgmentDate_label">
+            Date prévisionnelle du jugement
+          </SrOnly>
           <SrOnly id="judgmentDate_format_attendu">
             Format : Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
