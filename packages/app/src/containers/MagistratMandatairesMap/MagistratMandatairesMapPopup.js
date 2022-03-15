@@ -14,11 +14,15 @@ import {
   subtitleStyle,
   titleStyle,
 } from "./style";
+import useUser from "~/hooks/useUser";
 
 function MagistratMandatairesMapPopup() {
   const {
     currentMarker: { id },
   } = useContext(MapContext);
+
+  const user = useUser();
+
   const { data, error, loading } = useQuery(MESURES_GESTIONNAIRE, {
     fetchPolicy: "network-only",
     variables: {
@@ -61,7 +65,9 @@ function MagistratMandatairesMapPopup() {
         mt="2"
         width="100%"
         textAlign="center"
-        to={`/magistrats/gestionnaires/${id}`}
+        to={`/${
+          user.type === "greffier" ? "greffiers" : "magistrats"
+        }/gestionnaires/${id}`}
       >
         Réserver une mesure
       </LinkButton>

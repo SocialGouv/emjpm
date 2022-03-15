@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.152.5](https://github.com/SocialGouv/emjpm/compare/v25.152.4...v25.152.5) (2022-03-11)
+
+
+### Bug Fixes
+
+* **link:** on magistrat map for greffier ([3e87a1d](https://github.com/SocialGouv/emjpm/commit/3e87a1d20329b9f7fc4776fdab4dc625c08beed8))
+
+
+
+
+
+## [25.152.4](https://github.com/SocialGouv/emjpm/compare/v25.152.3...v25.152.4) (2022-03-10)
+
+
+### Bug Fixes
+
+* **rgaa:** fix overflow scroll on pages ([#2822](https://github.com/SocialGouv/emjpm/issues/2822)) ([72c2b47](https://github.com/SocialGouv/emjpm/commit/72c2b474a18d355c5f0518ac1a9e0fb92aad9305))
+* **rgaa:** fix typo error ([#2820](https://github.com/SocialGouv/emjpm/issues/2820)) ([f5a898f](https://github.com/SocialGouv/emjpm/commit/f5a898fe982d2c3fdedf219905c06c1313773872))
+* **rgaa:** replace react-select component by accessible-react-select ([#2803](https://github.com/SocialGouv/emjpm/issues/2803)) ([4f9f84c](https://github.com/SocialGouv/emjpm/commit/4f9f84c7d2ba79327e40d3f21ac236ea66c99905))
+
+
+
+
+
 ## [25.152.3](https://github.com/SocialGouv/emjpm/compare/v25.152.2...v25.152.3) (2022-03-08)
 
 

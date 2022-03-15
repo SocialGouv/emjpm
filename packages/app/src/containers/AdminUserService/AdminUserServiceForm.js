@@ -20,6 +20,7 @@ import {
   AccessibleSelect,
   Textarea,
   CheckBox,
+  SrOnly,
 } from "~/components";
 import { findOptions } from "~/utils/form";
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -109,6 +110,9 @@ function AdminUserServiceForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1}>
@@ -153,13 +157,22 @@ function AdminUserServiceForm(props) {
             normalizers={[normalizeLastName]}
             aria-label="Votre nom"
           />
+
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="user_email"
             formik={formik}
             validationSchema={adminUserServiceSchema}
             aria-label="Votre adresse e-mail"
+            aria-describedby={
+              formik.errors.user_email && formik.touched.user_email
+                ? "msg-user_email"
+                : "user_email_format_attendu"
+            }
           />
+          <SrOnly id="user_email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex role="group" aria-labelledby="structure_juridique">

@@ -38,7 +38,11 @@ export default function FormGroupInputDate({
           placeholderText={placeholder}
           readOnly={readOnly}
           id={id}
-          aria-describedby={`msg-${id}`}
+          ariaDescribedBy={
+            props?.ariaDescribedBy && !hasError
+              ? props.ariaDescribedBy
+              : `msg-${id}`
+          }
           name={id}
           value={value}
           onBlur={handleBlur}

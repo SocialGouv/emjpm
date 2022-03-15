@@ -14,7 +14,7 @@ import { HeadingTitle } from "~/containers/HeadingTitle";
 import { GENDER_OPTIONS } from "~/constants/user";
 import { signupSchema } from "~/validation-schemas";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
 
 import { SignupContext } from "./context";
@@ -92,6 +92,9 @@ export function SignupForm() {
         {"Création de compte"}
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <Flex>
           <FormGrayBox>
             <Heading size={4}>{"Information professionnelle"}</Heading>
@@ -168,7 +171,9 @@ export function SignupForm() {
               validationSchema={signupSchema}
               autoComplete="email"
               aria-label="Votre email"
+              ariaDescribedBy="format_email"
             />
+            <SrOnly id="format_email">format attendu : nom@justice.fr</SrOnly>
             <FormGroupInput
               placeholder="Mot de passe"
               type="password"

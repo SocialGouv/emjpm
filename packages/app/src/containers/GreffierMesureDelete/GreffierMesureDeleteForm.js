@@ -5,7 +5,7 @@ import { Box, Flex, Text } from "rebass";
 
 import { GESTIONNAIRES } from "~/containers/GreffierMesureMandataire/queries";
 import { greffierMesureDeleteSchema } from "~/validation-schemas";
-import { Button, Heading, InlineError, Input } from "~/components";
+import { Button, Heading, InlineError, Input, SrOnly } from "~/components";
 
 import { DELETE_MESURE } from "./mutations";
 import { GreffierMesureRemoveStyle } from "./style";
@@ -76,6 +76,9 @@ export function GreffierMesureDeleteForm(props) {
           <Heading size={3}>Supprimer la mesure</Heading>
         </Box>
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           <Box mb="2">
             <Input
               value={formik.values.reason_delete}

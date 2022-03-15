@@ -3,7 +3,15 @@ import { useFormik } from "formik";
 import { Box, Flex } from "rebass";
 
 import { adminEditorSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError, Input, Text } from "~/components";
+import {
+  Button,
+  Field,
+  Heading,
+  InlineError,
+  Input,
+  Text,
+  SrOnly,
+} from "~/components";
 
 export function AdminEditorForm(props) {
   const { handleCancel, handleSubmit, editor } = props;
@@ -32,6 +40,9 @@ export function AdminEditorForm(props) {
       <Box p="5" width={[1, 3 / 5]}>
         <Box mb="2" role="group" aria-labelledby="informations_editeur">
           <form noValidate onSubmit={formik.handleSubmit}>
+            <SrOnly id="instructions">
+              {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+            </SrOnly>
             <Field>
               <Input
                 value={formik.values.name}

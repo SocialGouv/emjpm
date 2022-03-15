@@ -9,7 +9,7 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/components/Link";
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 
 function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
   const formik = useFormik({
@@ -24,6 +24,9 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex id="modifier_informations" tabIndex="-1">
         <FormGrayBox>
           <Heading size={4}>{"Modifier vos informations"}</Heading>
@@ -62,7 +65,11 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             validationSchema={adminEditSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">

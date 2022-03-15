@@ -13,7 +13,7 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupDirectionSchema } from "~/validation-schemas";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
 import { toOptions } from "~/utils/form";
 
@@ -66,6 +66,9 @@ export function SignupDirection() {
         {"Création d'un compte d'agent de l'état"}
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <SignupGeneralError errors={formik.errors} />
         <Flex>
           <FormGrayBox>

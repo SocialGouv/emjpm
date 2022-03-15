@@ -12,7 +12,7 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupGreffierSchema } from "~/validation-schemas";
-import { Button, Heading, Text } from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 
 import { SignupContext } from "./context";
 import signup from "./signup";
@@ -59,6 +59,9 @@ function SignupGreffierForm({ tiDatas }) {
         {"Création d'un compte de greffier"}
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <SignupGeneralError errors={formik.errors} />
         <Flex role="group" aria-labelledby="choix_tribunal">
           <FormGrayBox>
@@ -82,7 +85,6 @@ function SignupGreffierForm({ tiDatas }) {
 
             <FormGroupInput
               id="cabinet"
-              placeholder="Cabinet"
               formik={formik}
               autoComplete="organization"
               placeholder="Cabinet du tribunal"

@@ -14,6 +14,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 
 import { cardStyle } from "./style";
@@ -101,6 +102,9 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
         <Box p="5" width={[1, 3 / 5]}>
           <Box mb="2" role="group" aria-labelledby="contact_tribunal">
             <form noValidate onSubmit={formik.handleSubmit}>
+              <SrOnly id="instructions">
+                {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+              </SrOnly>
               <Field>
                 <Input
                   value={formik.values.etablissement}
@@ -131,9 +135,16 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.siret && formik.touched.siret}
                   onChange={formik.handleChange}
                   placeholder="SIRET"
-                  aria-describedby="msg-siret"
+                  aria-describedby={
+                    formik.errors.siret && formik.touched.siret
+                      ? "msg-siret"
+                      : "siret_format_attendu"
+                  }
                   required
                 />
+                <SrOnly id="siret_format_attendu">
+                  format attendu : 82254321300027
+                </SrOnly>
                 <div id="msg-siret">
                   <InlineError message={formik.errors.siret} fieldId="siret" />
                 </div>
@@ -158,10 +169,17 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.email && formik.touched.email}
                   onChange={formik.handleChange}
                   placeholder="Email"
-                  aria-describedby="msg-email"
+                  aria-describedby={
+                    formik.errors.email && formik.touched.email
+                      ? "msg-email"
+                      : "email_format_attendu"
+                  }
                   autoComplete="email"
                   aria-label="Votre email"
                 />
+                <SrOnly id="email_format_attendu">
+                  format attendu : nom@justice.fr
+                </SrOnly>
                 <div id="msg-email">
                   <InlineError message={formik.errors.email} fieldId="email" />
                 </div>
@@ -174,9 +192,16 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
                   hasError={formik.errors.telephone && formik.touched.telephone}
                   onChange={formik.handleChange}
                   placeholder="Téléphone"
-                  aria-describedby="msg-telephone"
+                  aria-describedby={
+                    formik.errors.telephone && formik.touched.telephone
+                      ? "msg-telephone"
+                      : "telephone_format_attendu"
+                  }
                   autoComplete="tel"
                 />
+                <SrOnly id="telephone_format_attendu">
+                  format attendu : 0601020304
+                </SrOnly>
                 <div id="msg-telephone">
                   <InlineError
                     message={formik.errors.telephone}
