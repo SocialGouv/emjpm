@@ -75,7 +75,9 @@ export function EnqueteCreate() {
           aria-describedby={
             errors.year && touched.year ? "msg-year" : "year_format_attendu"
           }
+          ariaLabelledBy="year_label"
         />
+        <SrOnly id="year_label">Année de l'enquête</SrOnly>
         <SrOnly id="year_format_attendu">format attendu : jj/mm/aaaa</SrOnly>
         <div id="msg-year">
           {touched.year && errors.year && (
