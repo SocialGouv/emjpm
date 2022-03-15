@@ -20,6 +20,7 @@ import {
   Field,
   Input,
   AccessibleSelect,
+  SrOnly,
 } from "~/components";
 
 import { Link } from "~/containers/Commons";
@@ -217,6 +218,9 @@ export function ListeBlancheServiceForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1} id="structure_juridique_heading">
@@ -268,7 +272,11 @@ export function ListeBlancheServiceForm(props) {
                 size="small"
                 autoComplete="postal-code"
                 aria-label="Code postal"
+                ariaDescribedBy={"code_postal_format_attendu"}
               />
+              <SrOnly id="code_postal_format_attendu">
+                format attendu : 75001
+              </SrOnly>
             </Box>
             <Box ml={1} flex={1 / 2}>
               <Field>

@@ -52,6 +52,9 @@ export function GreffierMesureAddForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4}>Jugement</Heading>
@@ -78,7 +81,7 @@ export function GreffierMesureAddForm(props) {
               }
             }}
             errorMessage={formik.errors.numero_rg}
-            aria-describedby="format_rg_attendu"
+            ariaDescribedBy="format_rg_attendu"
           />
           <SrOnly id="format_rg_attendu">
             Format : 8 chiffres ou lettres. Exemple : 12A34567
@@ -91,7 +94,6 @@ export function GreffierMesureAddForm(props) {
             size="small"
             validationSchema={validationSchema}
             autoComplete="organization"
-            placeholder="Cabinet du tribunal"
             aria-label="Cabinet du tribunal"
           />
           <FormGroupInputDate
@@ -103,7 +105,11 @@ export function GreffierMesureAddForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Date prévisionnelle du jugement"
+            ariaDescribedBy="judgmentDate_format_attendu"
           />
+          <SrOnly id="judgmentDate_format_attendu">
+            format attendu : Format: jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -130,7 +136,11 @@ export function GreffierMesureAddForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Année de naissance"
+            ariaDescribedBy="annee_naissance_format_attendu"
           />
+          <SrOnly id="annee_naissance_format_attendu">
+            format attendu : aaaa. Exemple: 2021.
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>

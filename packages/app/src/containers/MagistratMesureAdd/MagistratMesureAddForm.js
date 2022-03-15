@@ -52,6 +52,9 @@ export function MagistratMesureAddForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex id="magistrat_mesure_add">
         <FormGrayBox>
           <Heading size={4} id="jugement_heading">
@@ -78,7 +81,7 @@ export function MagistratMesureAddForm(props) {
               }
             }}
             errorMessage={formik.errors.numero_rg}
-            aria-describedby="format_rg_attendu"
+            ariaDescribedBy="format_rg_attendu"
           />
           <SrOnly id="format_rg_attendu">
             Format : 8 chiffres ou lettres. Exemple : 12A34567
@@ -100,7 +103,11 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Date prévisionnelle du jugement"
+            ariaDescribedBy="judgmentDate_format_attendu"
           />
+          <SrOnly id="judgmentDate_format_attendu">
+            Format : Format: jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>
@@ -127,7 +134,11 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Année de naissance"
+            ariaDescribedBy="annee_naissance_format_attendu"
           />
+          <SrOnly id="annee_naissance_format_attendu">
+            Format: aaaa. Exemple: 2021
+          </SrOnly>
         </FormInputBox>
       </Flex>
       <Flex>

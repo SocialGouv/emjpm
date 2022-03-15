@@ -8,8 +8,8 @@ function InlineError({ message, fieldId, showError, ...props }) {
     showError !== false &&
     message && (
       <Flex
-        id={`error-${fieldId}`}
         alignItems="center"
+        id={`error-${fieldId}`}
         color="error"
         {...props}
       >

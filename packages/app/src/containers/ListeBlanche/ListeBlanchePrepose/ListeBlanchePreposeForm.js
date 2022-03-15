@@ -19,6 +19,7 @@ import {
   InlineError,
   Input,
   AccessibleSelect,
+  SrOnly,
 } from "~/components";
 
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -150,6 +151,9 @@ export function ListeBlanchePreposeForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex>
         <FormGrayBox>
           <Heading size={4} mb={1} id="informations_heading">
@@ -190,7 +194,11 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             autoComplete="email"
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr{" "}
+          </SrOnly>
           <Box flex={1 / 2}>
             <FormGroupInput
               placeholder="Téléphone"
@@ -198,7 +206,11 @@ export function ListeBlanchePreposeForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               aria-label="Votre téléphone"
+              ariaDescribedBy="telephone_format_attendu"
             />
+            <SrOnly id="telephone_format_attendu">
+              format attendu : 0601020304
+            </SrOnly>
           </Box>
         </FormInputBox>
       </Flex>

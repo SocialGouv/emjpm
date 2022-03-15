@@ -15,6 +15,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 import { useAuth } from "~/user/Auth";
 import { matopush } from "~/user/matomo";
@@ -89,6 +90,9 @@ function AuthorizationLogin() {
       </Box>
       <Box p="5" role="group" aria-labelledby="authlogin">
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           {!!formik.status && (
             <Box color="error" mb="1" role="alert">
               {formik.status.errorMsg}
@@ -104,9 +108,16 @@ function AuthorizationLogin() {
               onChange={formik.handleChange}
               placeholder="Votre nom d'utilisateur"
               outline="default"
-              aria-describedby="msg-email"
+              aria-describedby={
+                formik.errors.email && formik.touched.email
+                  ? "msg-email"
+                  : "email_format_attendu"
+              }
               autoComplete="email"
             />
+            <SrOnly id="email_format_attendu">
+              format attendu : nom@justice.fr{" "}
+            </SrOnly>
             <div id="msg-email">
               {formik.touched.email && (
                 <InlineError

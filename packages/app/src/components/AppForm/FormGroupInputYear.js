@@ -46,6 +46,11 @@ export default function FormGroupInputYear({
           }
           required={required}
           {...props}
+          ariaDescribedBy={
+            props?.ariaDescribedBy && !hasError
+              ? props.ariaDescribedBy
+              : `msg-${id}`
+          }
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>

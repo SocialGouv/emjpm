@@ -11,7 +11,7 @@ import {
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/validation-schemas";
-import { AccessibleSelect, Button, Heading, Text } from "~/components";
+import { AccessibleSelect, Button, Heading, Text, SrOnly } from "~/components";
 import { toOptions, findOptions } from "~/utils/form";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 
@@ -80,6 +80,9 @@ function SignupServiceForm({ serviceDatas }) {
         {"Création d'un compte de service mandataire"}
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
+        <SrOnly id="instructions">
+          {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+        </SrOnly>
         <SignupGeneralError errors={formik.errors} />
         <Flex role="group" aria-labelledby="votre_service_heading">
           <FormGrayBox>

@@ -16,6 +16,7 @@ import {
   InlineError,
   Input,
   Text,
+  SrOnly,
 } from "~/components";
 
 const { API_URL } = config;
@@ -100,6 +101,9 @@ function EditPassword() {
         </Box>
         <Box p="5" width={[1, 1 / 2]}>
           <Box mb="2">
+            <SrOnly id="instructions">
+              {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+            </SrOnly>
             <form noValidate onSubmit={formik.handleSubmit}>
               {!!formik.status && (
                 <Box color="error" mb="1" role="alert">

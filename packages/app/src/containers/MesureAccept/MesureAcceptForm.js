@@ -10,7 +10,7 @@ import {
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
-import { Button, Field, Heading, InlineError } from "~/components";
+import { Button, Field, Heading, InlineError, SrOnly } from "~/components";
 
 export function MesureAcceptForm(props) {
   const { mesure, handleSubmit, handleCancel, antenneOptions } = props;
@@ -57,6 +57,9 @@ export function MesureAcceptForm(props) {
         </Box>
 
         <form noValidate onSubmit={formik.handleSubmit}>
+          <SrOnly id="instructions">
+            {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+          </SrOnly>
           <FormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"
@@ -65,7 +68,11 @@ export function MesureAcceptForm(props) {
             formik={formik}
             validationSchema={mesureAcceptSchema}
             aria-label="Date de nomination"
+            ariaDescribedBy="date_nomination_format_attendu"
           />
+          <SrOnly id="date_nomination_format_attendu">
+            format attendu : jj/mm/aaaa. Exemple 01/01/2021
+          </SrOnly>
 
           {antenneOptions.length > 0 && (
             <FormGroupSelect
@@ -132,8 +139,11 @@ export function MesureAcceptForm(props) {
                     await formik.setFieldValue("ville", "");
                   }}
                   aria-label="Code postal"
-                  aria-label="Code postal"
+                  ariaDescribedBy="code_postal_format_attendu"
                 />
+                <SrOnly id="code_postal_format_attendu">
+                  format attendu : 75001
+                </SrOnly>
               </Box>
               <Box ml={1} flex={1 / 2}>
                 <Field>

@@ -17,7 +17,14 @@ import {
 } from "~/components/AppForm";
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
-import { Button, Heading, Field, InlineError, Input } from "~/components";
+import {
+  Button,
+  Heading,
+  Field,
+  InlineError,
+  Input,
+  SrOnly,
+} from "~/components";
 import { DepartementFormUtil } from "~/utils/departements";
 
 import SelectSIRET from "~/containers/SelectSIRET";
@@ -220,6 +227,9 @@ export function ListeBlancheIndividuelForm(props) {
 
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
+      <SrOnly id="instructions">
+        {"Tous les champs marqués d'un astérisque * sont obligatoires"}
+      </SrOnly>
       <Flex role="group" aria-labelledby="informations_individuelles">
         <FormGrayBox>
           <Heading size={4} mb={1} id="informations_individuelles">
@@ -257,7 +267,11 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             aria-label="Votre email"
+            ariaDescribedBy="email_format_attendu"
           />
+          <SrOnly id="email_format_attendu">
+            format attendu : nom@justice.fr
+          </SrOnly>
           <Box flex={1 / 2}>
             <FormGroupInput
               placeholder="Téléphone"
@@ -265,7 +279,11 @@ export function ListeBlancheIndividuelForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               aria-label="Votre téléphone"
+              ariaDescribedBy="telephone_format_attendu"
             />
+            <SrOnly id="email_format_attendu">
+              format attendu : 0601020304
+            </SrOnly>
           </Box>
         </FormInputBox>
       </Flex>
@@ -314,7 +332,11 @@ export function ListeBlancheIndividuelForm(props) {
                 size="small"
                 autoComplete="postal-code"
                 aria-label="Code postal"
+                ariaDescribedBy="code_postal_format_attendu"
               />
+              <SrOnly id="code_postal_format_attendu">
+                format attendu : 75001.
+              </SrOnly>
             </Box>
             <Box ml={1} flex={1 / 2}>
               <Field>
@@ -448,7 +470,11 @@ export function ListeBlancheIndividuelForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  aria-describedby="siret_format_attendu"
                 />
+                <SrOnly id="siret_format_attendu">
+                  format attendu : 82254321300027.
+                </SrOnly>
                 <Input
                   label="Civilité"
                   placeholder=""
@@ -490,7 +516,11 @@ export function ListeBlancheIndividuelForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  aria-describedby="email_format_attendu"
                 />
+                <SrOnly id="email_format_attendu">
+                  format attendu : nom@justice.fr
+                </SrOnly>
                 <Input
                   placeholder="Téléphone"
                   value={mandataire.telephone}
@@ -498,7 +528,11 @@ export function ListeBlancheIndividuelForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  aria-describedby="telephone_format_attendu"
                 />
+                <SrOnly id="telephone_format_attendu">
+                  format attendu : 0601020304
+                </SrOnly>
                 <Input
                   placeholder="Adresse"
                   value={mandataire.adresse}
