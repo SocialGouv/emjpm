@@ -65,7 +65,7 @@ export function MagistratMesureAddForm(props) {
         <FormInputBox role="group" aria-labelledby="jugement_heading">
           <FormGroupInput
             id="numero_rg"
-            aria-label="Numéro RG"
+            ariaLabel="Numéro RG"
             label="Numéro RG"
             placeholder="8 chiffres ou lettres"
             forceActive
@@ -92,7 +92,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}
@@ -125,6 +125,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Votre civilité"
           />
           <FormGroupInputYear
             id="annee_naissance"
@@ -158,6 +159,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Nature de la mesure"
           />
           <FormGroupSelect
             id="champ_mesure"

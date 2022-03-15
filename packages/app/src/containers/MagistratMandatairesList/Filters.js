@@ -129,6 +129,7 @@ function MagistratMandatairesListFilters(props) {
                 label="Rechercher"
                 forceActive
                 placeholder="nom, email, code postal, ville..."
+                ariaLabel="Rechercher par nom, email, code postal, ville"
               />
             </Box>
           )}

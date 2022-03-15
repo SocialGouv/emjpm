@@ -66,7 +66,7 @@ export function GreffierMesureAddForm(props) {
           <FormGroupInput
             id="numero_rg"
             label="Numéro RG"
-            aria-label="Numéro RG"
+            ariaLabel="Numéro RG"
             placeholder="8 chiffres ou lettres"
             forceActive
             formik={formik}
@@ -94,7 +94,7 @@ export function GreffierMesureAddForm(props) {
             size="small"
             validationSchema={validationSchema}
             autoComplete="organization"
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}

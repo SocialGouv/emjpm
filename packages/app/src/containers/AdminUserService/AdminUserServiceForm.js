@@ -147,7 +147,7 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeFirstName]}
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -155,7 +155,7 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeLastName]}
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
 
           <FormGroupInput
@@ -163,7 +163,7 @@ function AdminUserServiceForm(props) {
             id="user_email"
             formik={formik}
             validationSchema={adminUserServiceSchema}
-            aria-label="Votre adresse e-mail"
+            ariaLabel="Votre adresse e-mail"
             aria-describedby={
               formik.errors.user_email && formik.touched.user_email
                 ? "msg-user_email"
@@ -187,7 +187,7 @@ function AdminUserServiceForm(props) {
             id="etablissement"
             formik={formik}
             validationSchema={adminUserServiceSchema}
-            aria-label="Nom du service"
+            ariaLabel="Nom du service"
           />
           <Field>
             <Geocode
@@ -223,7 +223,7 @@ function AdminUserServiceForm(props) {
               required
               formik={formik}
               validationSchema={adminUserServiceSchema}
-              aria-label="Votre adresse, cette adresse sera celle visible pour le magistrat/greffier"
+              ariaLabel="Votre adresse, cette adresse sera celle visible pour le magistrat/greffier"
             />
           )}
           <FormGroupInput
@@ -232,7 +232,7 @@ function AdminUserServiceForm(props) {
             id="adresse_complement"
             formik={formik}
             validationSchema={adminUserServiceSchema}
-            aria-label="Complément d'adresse"
+            ariaLabel="Complément d'adresse"
           />
         </FormInputBox>
       </Flex>
@@ -250,6 +250,7 @@ function AdminUserServiceForm(props) {
             value={formik.values.genre}
             formik={formik}
             validationSchema={adminUserServiceSchema}
+            aria-label="Votre civilité"
           />
           <FormGroupInput
             placeholder="Prénom"
@@ -258,7 +259,7 @@ function AdminUserServiceForm(props) {
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeFirstName]}
             autoComplete="given-name"
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -267,7 +268,7 @@ function AdminUserServiceForm(props) {
             validationSchema={adminUserServiceSchema}
             normalizers={[normalizeLastName]}
             autoComplete="family-name"
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -275,7 +276,7 @@ function AdminUserServiceForm(props) {
             formik={formik}
             validationSchema={adminUserServiceSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
           />
           <Box flex={1 / 2}>
             <FormGroupInput
@@ -283,7 +284,7 @@ function AdminUserServiceForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={adminUserServiceSchema}
-              aria-label="Votre téléphone"
+              ariaLabel="Votre téléphone"
             />
           </Box>
         </FormInputBox>
@@ -352,7 +353,7 @@ function AdminUserServiceForm(props) {
               id="suspendActivityReason"
               formik={formik}
               validationSchema={adminUserServiceSchema}
-              aria-label="Rraisons de suspension de l'activité"
+              ariaLabel="Rraisons de suspension de l'activité"
               required
             />
           )}
@@ -365,7 +366,7 @@ function AdminUserServiceForm(props) {
             id="dispo_max"
             formik={formik}
             validationSchema={adminUserServiceSchema}
-            aria-label="Nombre de mesures souhaité"
+            ariaLabel="Nombre de mesures souhaité"
           />
           {formik.values.suspendActivity && (
             <FormGroupInput
@@ -374,7 +375,7 @@ function AdminUserServiceForm(props) {
               formik={formik}
               readOnly
               value={service.mesures_in_progress}
-              aria-label="Nombre de mesures en cours"
+              ariaLabel="Nombre de mesures en cours"
             />
           )}
           <Box>

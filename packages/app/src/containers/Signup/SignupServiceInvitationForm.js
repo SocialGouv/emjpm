@@ -60,7 +60,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Prénom"
             validationSchema={signupSchema}
             autoComplete="given-name"
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
         </FormInputBox>
       </Flex>
@@ -90,7 +90,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Email"
             validationSchema={signupSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format"
           />
           <SrOnly id="email_format">format attendu : nom@justice.fr </SrOnly>
@@ -111,7 +111,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Mot de passe"
             validationSchema={signupSchema}
             autoComplete="new-password"
-            aria-label="Votre nouveau mot de passe"
+            ariaLabel="Votre nouveau mot de passe"
           />
           <FormGroupInput
             formik={formik}
@@ -121,7 +121,7 @@ export function SignupServiceInvitationForm(props) {
             placeholder="Confirmation du mot de passe"
             validationSchema={signupSchema}
             autoComplete="new-password"
-            aria-label="Confirmation de votre nouveau mot de passe"
+            ariaLabel="Confirmation de votre nouveau mot de passe"
           />
         </FormInputBox>
       </Flex>

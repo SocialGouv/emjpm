@@ -76,7 +76,7 @@ export function MesureEditForm(props) {
                 placeholder="8 chiffres ou lettres"
                 forceActive
                 id="numero_rg"
-                aria-label="Numéro RG"
+                ariaLabel="Numéro RG"
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
@@ -102,7 +102,7 @@ export function MesureEditForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
-                aria-label="Numéro de dossier"
+                ariaLabel="Numéro de dossier"
               />
             </Box>
           </Flex>
@@ -168,7 +168,7 @@ export function MesureEditForm(props) {
                 size="small"
                 validationSchema={validationSchema}
                 placeholder="Cabinet du tribunal"
-                aria-label="Cabinet du tribunal"
+                ariaLabel="Cabinet du tribunal"
               />
             </Box>
           </Flex>

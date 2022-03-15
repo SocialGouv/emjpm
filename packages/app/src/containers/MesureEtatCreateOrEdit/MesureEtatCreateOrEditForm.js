@@ -173,7 +173,7 @@ export function MesureEtatCreateOrEditForm(props) {
                     formik.setFieldValue("ville", "");
                   }}
                   size="small"
-                  aria-label="Code postal"
+                  ariaLabel="Code postal"
                   ariaDescribedBy="format_code_postal"
                 />
                 <SrOnly id="format_code_postal">Format attendu: 75001.</SrOnly>

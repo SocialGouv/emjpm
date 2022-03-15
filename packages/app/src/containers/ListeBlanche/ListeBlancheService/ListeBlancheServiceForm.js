@@ -237,7 +237,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="organization"
-            aria-label="Nom du service"
+            ariaLabel="Nom du service"
           />
           <SelectSIRET
             id="siret"
@@ -271,7 +271,7 @@ export function ListeBlancheServiceForm(props) {
                 }
                 size="small"
                 autoComplete="postal-code"
-                aria-label="Code postal"
+                ariaLabel="Code postal"
                 ariaDescribedBy={"code_postal_format_attendu"}
               />
               <SrOnly id="code_postal_format_attendu">
@@ -386,7 +386,7 @@ export function ListeBlancheServiceForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 autoComplete="organization"
-                aria-label="Nom"
+                ariaLabel="Votre nom"
               />
               <FormGroupInput
                 placeholder="Adresse"
@@ -394,7 +394,7 @@ export function ListeBlancheServiceForm(props) {
                 formik={formik}
                 validationSchema={validationSchema}
                 autoComplete="address-line1"
-                aria-label="Adresse"
+                ariaLabel="Adresse"
               />
               <Flex>
                 <Box flex={1 / 2}>
@@ -404,7 +404,7 @@ export function ListeBlancheServiceForm(props) {
                     formik={formik}
                     validationSchema={validationSchema}
                     autoComplete="postal-code"
-                    aria-label="Code postal"
+                    ariaLabel="Code postal"
                   />
                 </Box>
                 <Box flex={1 / 2} pl={1}>
@@ -413,7 +413,7 @@ export function ListeBlancheServiceForm(props) {
                     id="org_ville"
                     formik={formik}
                     validationSchema={validationSchema}
-                    aria-label="Ville"
+                    ariaLabel="Ville"
                   />
                 </Box>
               </Flex>
@@ -442,7 +442,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -450,21 +450,21 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Votre email"
+            ariaLabel="Votre email"
           />
           <FormGroupInput
             placeholder="Téléphone"
             id="telephone"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Votre téléphone"
+            ariaLabel="Votre téléphone"
           />
         </FormInputBox>
       </Flex>
@@ -504,6 +504,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Nom du service"
             />
             {/* <Input
               label="SIRET"
@@ -521,6 +522,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Adresse"
             />
             <Input
               label="Code postal"
@@ -530,6 +532,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Code postal"
             />
 
             <Input
@@ -545,6 +548,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Civilité"
             />
             <Input
               label="Prénom"
@@ -554,6 +558,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Votre prénom"
             />
             <Input
               label="NOM"
@@ -563,6 +568,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Votre nom"
             />
             <Input
               label="Adresse e-mail"
@@ -572,6 +578,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Votre adresse e-mail"
             />
             <Input
               placeholder="Téléphone"
@@ -580,6 +587,7 @@ export function ListeBlancheServiceForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
+              ariaLabel="Votre téléphone"
             />
           </FormInputBox>
         </Flex>

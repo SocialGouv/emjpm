@@ -249,6 +249,7 @@ export function ListeBlancheIndividuelForm(props) {
             value={formik.values.genre}
             formik={formik}
             validationSchema={validationSchema}
+            ariaLabel="Votre civilité"
           />
           <FormGroupInput
             placeholder="Prénom"
@@ -256,7 +257,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -264,14 +265,14 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
             id="email"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">
@@ -283,7 +284,7 @@ export function ListeBlancheIndividuelForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={validationSchema}
-              aria-label="Votre téléphone"
+              ariaLabel="Votre téléphone"
               ariaDescribedBy="telephone_format_attendu"
             />
             <SrOnly id="email_format_attendu">
@@ -319,7 +320,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="address-line2"
-            aria-label="Complément d'adresse"
+            ariaLabel="Complément d'adresse"
           />
           <Flex justifyContent="space-between">
             <Box mr={1} flex={1 / 2}>
@@ -336,7 +337,7 @@ export function ListeBlancheIndividuelForm(props) {
                 }}
                 size="small"
                 autoComplete="postal-code"
-                aria-label="Code postal"
+                ariaLabel="Code postal"
                 ariaDescribedBy="code_postal_format_attendu"
               />
               <SrOnly id="code_postal_format_attendu">

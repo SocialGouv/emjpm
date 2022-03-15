@@ -138,7 +138,7 @@ export function MesureAcceptForm(props) {
                     await formik.setFieldValue("code_postal", value);
                     await formik.setFieldValue("ville", "");
                   }}
-                  aria-label="Code postal"
+                  ariaLabel="Code postal"
                   ariaDescribedBy="code_postal_format_attendu"
                 />
                 <SrOnly id="code_postal_format_attendu">

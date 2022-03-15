@@ -71,7 +71,7 @@ export function MesureCreateForm(props) {
                 placeholder="8 chiffres ou lettres"
                 forceActive
                 id="numero_rg"
-                aria-label="Numéro RG"
+                ariaLabel="Numéro RG"
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
@@ -97,7 +97,7 @@ export function MesureCreateForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
-                aria-label="Numéro de dossier"
+                ariaLabel="Numéro de dossier"
               />
             </Box>
           </Flex>
@@ -119,7 +119,7 @@ export function MesureCreateForm(props) {
                 size="small"
                 validationSchema={validationSchema}
                 placeholder="Cabinet du tribunal"
-                aria-label="Cabinet du tribunal"
+                ariaLabel="Cabinet du tribunal"
               />
             </Box>
           </Flex>
@@ -255,7 +255,7 @@ export function MesureCreateForm(props) {
                     await formik.setFieldValue("code_postal", value);
                     await formik.setFieldValue("ville", "");
                   }}
-                  aria-label="Code postal"
+                  ariaLabel="Code postal"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>

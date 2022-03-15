@@ -90,6 +90,7 @@ export function MagistratMesureDeleteForm(props) {
               onChange={formik.handleChange}
               placeholder="Raison de la suppression"
               aria-describedby="msg-reason_delete"
+              ariaLabel="Raison de la suppression"
             />
             <div id="msg-reason_delete">
               <InlineError

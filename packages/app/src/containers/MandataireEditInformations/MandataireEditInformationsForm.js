@@ -137,6 +137,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               autoComplete="sex"
+              aria-label="votre civilité"
             />
             <FormGroupInput
               placeholder="Prénom"
@@ -145,7 +146,7 @@ function MandataireEditInformationsForm(props) {
               validationSchema={validationSchema}
               normalizers={[normalizeFirstName]}
               autoComplete="given-name"
-              aria-label="Votre prénom"
+              ariaLabel="Votre prénom"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -154,7 +155,7 @@ function MandataireEditInformationsForm(props) {
               validationSchema={validationSchema}
               normalizers={[normalizeLastName]}
               autoComplete="family-name"
-              aria-label="Votre nom"
+              ariaLabel="Votre nom"
             />
           </FormInputBox>
         </Flex>
@@ -171,7 +172,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               validationSchema={validationSchema}
               autoComplete="email"
-              aria-label="Votre email"
+              ariaLabel="Votre email"
               ariaDescribedBy="email_format_attendu"
             />
             <SrOnly id="email_format_attendu">
@@ -185,7 +186,7 @@ function MandataireEditInformationsForm(props) {
                   formik={formik}
                   validationSchema={validationSchema}
                   autoComplete="tel"
-                  aria-label="Votre téléphone"
+                  ariaLabel="Votre téléphone"
                   ariaDescribedBy="telephone_format_attendu"
                 />
                 <SrOnly id="telephone_format_attendu">
@@ -199,7 +200,7 @@ function MandataireEditInformationsForm(props) {
                   formik={formik}
                   validationSchema={validationSchema}
                   autoComplete="tel"
-                  aria-label="Votre téléphone"
+                  ariaLabel="Votre téléphone"
                   ariaDescribedBy="telephone_format_attendu"
                 />
               </Box>
@@ -219,7 +220,7 @@ function MandataireEditInformationsForm(props) {
                 id="siret"
                 formik={formik}
                 validationSchema={validationSchema}
-                aria-label="Siret"
+                ariaLabel="Numéro siret"
                 ariaDescribedBy="siret_format_attendu"
               />
             )}
@@ -267,7 +268,7 @@ function MandataireEditInformationsForm(props) {
                 required
                 formik={formik}
                 validationSchema={validationSchema}
-                aria-label="Votre adresse, cette adresse sera celle visible pour le magistrat/greffier"
+                ariaLabel="Votre adresse, cette adresse sera celle visible pour le magistrat/greffier"
               />
             )}
             <FormGroupInput
@@ -276,7 +277,7 @@ function MandataireEditInformationsForm(props) {
               id="adresse_complement"
               formik={formik}
               validationSchema={validationSchema}
-              aria-label="Complément d'adresse"
+              ariaLabel="Complément d'adresse"
             />
           </FormInputBox>
         </Flex>
@@ -344,7 +345,7 @@ function MandataireEditInformationsForm(props) {
                 id="suspendActivityReason"
                 formik={formik}
                 validationSchema={validationSchema}
-                aria-label="Motif de l'absence"
+                ariaLabel="Motif de l'absence"
                 required
               />
             )}
@@ -357,7 +358,7 @@ function MandataireEditInformationsForm(props) {
               formik={formik}
               readOnly={formik.values.suspendActivity}
               validationSchema={validationSchema}
-              aria-label="Nombre de mesures souhaitées"
+              ariaLabel="Nombre de mesures souhaitées"
             />
             {formik.values.suspendActivity && (
               <FormGroupInput
@@ -366,7 +367,7 @@ function MandataireEditInformationsForm(props) {
                 formik={formik}
                 readOnly
                 value={mandataire.mesures_en_cours}
-                aria-label="Nombre de mesures en cours"
+                ariaLabel="Nombre de mesures en cours"
               />
             )}
             <Box>

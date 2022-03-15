@@ -43,7 +43,7 @@ function ServiceMemberInvitationForm(props) {
             onChange={formik.handleChange}
             placeholder="Email"
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             aria-describedby={
               formik.errors.email && formik.touched.email
                 ? "msg-email"
