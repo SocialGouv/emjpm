@@ -97,7 +97,10 @@ export function EnqueteCreate() {
               ? "msg-endedAt"
               : "endedAt_format_attendu"
           }
+          ariaLabelledBy="endedAt_label"
         />
+        <SrOnly id="endedAt_babel">"Date de fin</SrOnly>
+
         <SrOnly id="endedAt_format_attendu">format attendu : jj/mm/aaaa</SrOnly>
         <div id="msg-endedAt">
           {touched.endedAt && (

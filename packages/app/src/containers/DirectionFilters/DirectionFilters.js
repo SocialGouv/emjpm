@@ -94,7 +94,9 @@ export function DirectionFilters(props) {
                 label="du"
                 placeholderText="date de début"
                 ariaDescribedBy="format_attendu"
+                ariaLabelledBy="start_date_label"
               />
+              <SrOnly id="start_date_label">date de début</SrOnly>
             </Box>
             <Box sx={SimpleBoxStyle}>
               <InputDate
@@ -104,8 +106,10 @@ export function DirectionFilters(props) {
                 label="au"
                 placeholderText="date de fin"
                 ariaDescribedBy="format_attendu"
+                ariaLabelledBy="end_date_label"
               />
             </Box>
+            <SrOnly id="end_date_label">date de fin</SrOnly>
             <SrOnly id="format_attendu">format attendu : jj/mm/aaaa</SrOnly>
           </Flex>
         </Box>
