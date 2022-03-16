@@ -305,6 +305,7 @@ export function ListeBlancheIndividuelForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedSiretDataCallback}
+            aria-label="Numéro de siret"
           />
           <SelectAdresse
             placeholder="Adresse 1"

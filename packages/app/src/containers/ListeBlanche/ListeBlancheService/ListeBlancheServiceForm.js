@@ -244,6 +244,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedSiretDataCallback}
+            aria-label="Numéro de siret"
           />
           <SelectAdresse
             placeholder="Adresse"
@@ -251,6 +252,7 @@ export function ListeBlancheServiceForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             setSelectedOption={setSelectedAdresseDataCallback}
+            aria-label="Votre adresse"
           />
           <Flex justifyContent="space-between">
             <Box mr={1} flex={1 / 2}>

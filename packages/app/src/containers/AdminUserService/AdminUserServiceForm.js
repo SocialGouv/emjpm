@@ -388,6 +388,7 @@ function AdminUserServiceForm(props) {
               label="Informations à destination du magistrat"
               placeholder="Préférences géographiques, compétences, langues parlées, ..."
               aria-describedby="msg-competences"
+              aria-label="Vos préférences géographiques, compétences, langues parlées"
             />
             <div id="msg-competences">
               <InlineError
