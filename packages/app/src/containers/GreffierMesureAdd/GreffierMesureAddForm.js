@@ -66,7 +66,7 @@ export function GreffierMesureAddForm(props) {
           <FormGroupInput
             id="numero_rg"
             label="Numéro RG"
-            aria-label="Numéro RG"
+            ariaLabel="Numéro RG"
             placeholder="8 chiffres ou lettres"
             forceActive
             formik={formik}
@@ -86,7 +86,6 @@ export function GreffierMesureAddForm(props) {
           <SrOnly id="format_rg_attendu">
             Format : 8 chiffres ou lettres. Exemple : 12A34567
           </SrOnly>
-
           <FormGroupInput
             id="cabinet"
             placeholder="Cabinet du tribunal"
@@ -94,8 +93,9 @@ export function GreffierMesureAddForm(props) {
             size="small"
             validationSchema={validationSchema}
             autoComplete="organization"
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
+
           <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
@@ -104,9 +104,12 @@ export function GreffierMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date prévisionnelle du jugement"
             ariaDescribedBy="judgmentDate_format_attendu"
+            ariaLabelledBy="judgmentDate_label"
           />
+          <SrOnly id="judgmentDate_label">
+            Date prévisionnelle du jugement
+          </SrOnly>
           <SrOnly id="judgmentDate_format_attendu">
             format attendu : Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -137,7 +140,9 @@ export function GreffierMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
+            ariaLabelledBy="annee_naissance_label"
           />
+          <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             format attendu : aaaa. Exemple: 2021.
           </SrOnly>

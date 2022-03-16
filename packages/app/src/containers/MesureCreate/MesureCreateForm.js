@@ -71,7 +71,7 @@ export function MesureCreateForm(props) {
                 placeholder="8 chiffres ou lettres"
                 forceActive
                 id="numero_rg"
-                aria-label="Numéro RG"
+                ariaLabel="Numéro RG"
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
@@ -97,7 +97,7 @@ export function MesureCreateForm(props) {
                 formik={formik}
                 size="small"
                 validationSchema={validationSchema}
-                aria-label="Numéro de dossier"
+                ariaLabel="Numéro de dossier"
               />
             </Box>
           </Flex>
@@ -119,7 +119,7 @@ export function MesureCreateForm(props) {
                 size="small"
                 validationSchema={validationSchema}
                 placeholder="Cabinet du tribunal"
-                aria-label="Cabinet du tribunal"
+                ariaLabel="Cabinet du tribunal"
               />
             </Box>
           </Flex>
@@ -130,6 +130,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Votre civilité"
           />
 
           <FormGroupInputYear
@@ -139,9 +140,10 @@ export function MesureCreateForm(props) {
             id="annee_naissance"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Année de naissance"
             ariaDescribedBy="format_annee_naissance"
+            ariaLabelledBy="annee_naissance_label"
           />
+          <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="format_annee_naissance">
             Format attendu: aaaa. Exemple: 2021
           </SrOnly>
@@ -152,9 +154,12 @@ export function MesureCreateForm(props) {
             id="date_premier_mesure"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date de première mise sous protection"
+            ariaLabelledBy="date_premier_mesure_label"
             ariaDescribedBy="format_date_premier_mesure"
           />
+          <SrOnly id="date_premier_mesure_label">
+            FoDate de première mise sous protection
+          </SrOnly>
           <SrOnly id="format_date_premier_mesure">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -177,7 +182,9 @@ export function MesureCreateForm(props) {
             validationSchema={validationSchema}
             aria-label="Date de nomination"
             ariaDescribedBy="format_date_nomination"
+            ariaLabelledBy="date_nomination_label"
           />
+          <SrOnly id="date_nomination_label">Date de nomination</SrOnly>
           <SrOnly id="format_date_nomination">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -188,6 +195,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Nature de la mesure"
           />
 
           <FormGroupSelect
@@ -198,6 +206,7 @@ export function MesureCreateForm(props) {
             isClearable
             size="small"
             validationSchema={validationSchema}
+            aria-label="Champ de la mesure"
           />
 
           <FormGroupSelect
@@ -210,6 +219,7 @@ export function MesureCreateForm(props) {
               formik.setFieldValue("lieu_vie", option.value);
               formik.setFieldValue("type_etablissement", null);
             }}
+            aria-label="Lieu de vie du majeur"
           />
 
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
@@ -219,6 +229,7 @@ export function MesureCreateForm(props) {
               placeholder="Type d'établissement"
               formik={formik}
               validationSchema={validationSchema}
+              aria-label="Type d'etablissement'"
             />
           )}
 
@@ -238,6 +249,7 @@ export function MesureCreateForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Pays"
           />
 
           {formik.values.pays === "FR" && (
@@ -255,7 +267,7 @@ export function MesureCreateForm(props) {
                     await formik.setFieldValue("code_postal", value);
                     await formik.setFieldValue("ville", "");
                   }}
-                  aria-label="Code postal"
+                  ariaLabel="Code postal"
                 />
               </Box>
               <Box ml={1} flex={1 / 2}>
@@ -300,6 +312,7 @@ export function MesureCreateForm(props) {
               formik={formik}
               size="small"
               validationSchema={validationSchema}
+              aria-label="Antenne"
             />
           </FormInputBox>
         </Flex>

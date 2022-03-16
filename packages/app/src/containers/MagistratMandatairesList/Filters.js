@@ -113,6 +113,7 @@ function MagistratMandatairesListFilters(props) {
                 onChange={onChangeLocalisation}
                 value={localisation}
                 id="rechercher_par_localisation"
+                aria-label="rechercher par localisation"
               />
             </Box>
           )}
@@ -129,6 +130,8 @@ function MagistratMandatairesListFilters(props) {
                 label="Rechercher"
                 forceActive
                 placeholder="nom, email, code postal, ville..."
+                ariaLabel="Rechercher par nom, email, code postal, ville"
+                aria-describedby={null}
               />
             </Box>
           )}

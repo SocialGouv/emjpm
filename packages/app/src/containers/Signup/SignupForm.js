@@ -110,6 +110,7 @@ export function SignupForm() {
               value={formik.values.type}
               options={TYPE_OPTIONS}
               validationSchema={signupSchema}
+              aria-label="Type d'utilisateur"
             />
           </FormInputBox>
         </Flex>
@@ -132,6 +133,7 @@ export function SignupForm() {
               value={formik.values.genre}
               options={GENDER_OPTIONS}
               validationSchema={signupSchema}
+              aria-label="Civilité"
             />
             <FormGroupInput
               placeholder="Prénom"
@@ -140,7 +142,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeFirstName]}
               autoComplete="given-name"
-              aria-label="Votre prénom"
+              ariaLabel="Votre prénom"
             />
             <FormGroupInput
               placeholder="NOM"
@@ -149,7 +151,7 @@ export function SignupForm() {
               validationSchema={signupSchema}
               normalizers={[normalizeLastName]}
               autoComplete="family-name"
-              aria-label="Votre nom"
+              ariaLabel="Votre nom"
             />
           </FormInputBox>
         </Flex>
@@ -170,7 +172,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="email"
-              aria-label="Votre email"
+              ariaLabel="Votre email"
               ariaDescribedBy="format_email"
             />
             <SrOnly id="format_email">format attendu : nom@justice.fr</SrOnly>
@@ -181,7 +183,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
-              aria-label="Votre mot de passe"
+              ariaLabel="Votre mot de passe"
             />
             <FormGroupInput
               placeholder="Confirmation du mot de passe"
@@ -190,7 +192,7 @@ export function SignupForm() {
               formik={formik}
               validationSchema={signupSchema}
               autoComplete="new-password"
-              aria-label="Votre nouveau mot de passe"
+              ariaLabel="Votre mot de passe"
             />
           </FormInputBox>
         </Flex>

@@ -65,7 +65,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="organization"
-            aria-label="Nom de l'antenne"
+            ariaLabel="Nom de l'antenne"
           />
         </FormInputBox>
       </Flex>
@@ -83,7 +83,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="family-name"
-            aria-label="Nom du responsable"
+            ariaLabel="Nom du responsable"
           />
           <FormGroupInput
             value={formik.values.contact_lastname}
@@ -92,7 +92,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="given-name"
-            aria-label="Prénom du responsable"
+            ariaLabel="Prénom du responsable"
           />
         </FormInputBox>
       </Flex>
@@ -110,7 +110,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="tel"
-            aria-label="Votre téléphone"
+            ariaLabel="Votre téléphone"
             ariaDescribedBy="format_contact_phone"
           />
           <SrOnly id="format_contact_phone">Format attendu:0601020304 </SrOnly>
@@ -121,7 +121,7 @@ function ServiceAntenneForm(props) {
             formik={formik}
             validationSchema={serviceAntenneSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="format_contact_email"
           />
           <SrOnly id="format_contact_email">
@@ -167,7 +167,7 @@ function ServiceAntenneForm(props) {
             id="mesures_max"
             placeholder="nombre de mesures souhaité"
             formik={formik}
-            aria-label="nombre de mesures souhaité"
+            ariaLabel="nombre de mesures souhaité"
           />
         </FormInputBox>
       </Flex>

@@ -81,6 +81,7 @@ export function MagistratMandataireCommentForm(props) {
             hasError={formik.errors.comment && formik.touched.comment}
             onChange={formik.handleChange}
             placeholder="Observations"
+            ariaLabel="Observations"
           />
         </Field>
         <Flex justifyContent="flex-end">

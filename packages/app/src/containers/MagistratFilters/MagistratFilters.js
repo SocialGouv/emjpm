@@ -83,7 +83,7 @@ function MagistratFilters() {
                 placeholder="Numéro RG, Dossier, Ville, Code Postal..."
                 label="Rechercher"
                 forceActive
-                aria-label="Rechercher"
+                ariaLabel="Rechercher par Numéro RG, Dossier, Ville, Code Postal"
                 ariaDescribedBy="none"
               />
             </Box>
@@ -100,6 +100,7 @@ function MagistratFilters() {
                 forceActive
                 autoComplete="organization"
                 ariaDescribedBy="none"
+                ariaLabel="Rechercher cabinet"
               />
             </Box>
           </Flex>

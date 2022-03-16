@@ -46,7 +46,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Prénom"
             validationSchema={directionEditSchema}
             autoComplete="given-name"
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             formik={formik}
@@ -54,7 +54,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Nom"
             validationSchema={directionEditSchema}
             autoComplete="family-name"
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             formik={formik}
@@ -62,7 +62,7 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={directionEditSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">

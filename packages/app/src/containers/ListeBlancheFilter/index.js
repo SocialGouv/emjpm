@@ -122,7 +122,8 @@ function ListeBlancheFilter() {
                 size="small"
                 label="Rechercher"
                 placeholder="nom, prénom, email ou SIRET"
-                aria-label="Rechercher"
+                ariaLabel="Rechercher"
+                aria-describedby={null}
               />
             </Box>
             <Box mr={1} pt={2} width="250px">

@@ -65,7 +65,7 @@ export function MagistratMesureAddForm(props) {
         <FormInputBox role="group" aria-labelledby="jugement_heading">
           <FormGroupInput
             id="numero_rg"
-            aria-label="Numéro RG"
+            ariaLabel="Numéro RG"
             label="Numéro RG"
             placeholder="8 chiffres ou lettres"
             forceActive
@@ -92,7 +92,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
           <FormGroupInputDate
             value={formik.values.judgmentDate}
@@ -102,9 +102,12 @@ export function MagistratMesureAddForm(props) {
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date prévisionnelle du jugement"
+            ariaLabelledBy="judgmentDate_label"
             ariaDescribedBy="judgmentDate_format_attendu"
           />
+          <SrOnly id="judgmentDate_label">
+            Date prévisionnelle du jugement
+          </SrOnly>
           <SrOnly id="judgmentDate_format_attendu">
             Format : Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
@@ -125,6 +128,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Votre civilité"
           />
           <FormGroupInputYear
             id="annee_naissance"
@@ -135,7 +139,9 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
+            ariaLabelledBy="annee_naissance_label"
           />
+          <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             Format: aaaa. Exemple: 2021
           </SrOnly>
@@ -158,6 +164,7 @@ export function MagistratMesureAddForm(props) {
             formik={formik}
             size="small"
             validationSchema={validationSchema}
+            aria-label="Nature de la mesure"
           />
           <FormGroupSelect
             id="champ_mesure"

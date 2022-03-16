@@ -114,7 +114,7 @@ function SignupMandataireForm() {
                 value={formik.values.siret}
                 validationSchema={signupMandataireSchema}
                 required={isIndividuel(user)}
-                aria-label="Siret"
+                ariaLabel="Numéro de siret"
                 ariaDescribedBy="format_siret"
               />
               <SrOnly id="format_siret">format attendu : 82254321300027</SrOnly>
@@ -135,7 +135,7 @@ function SignupMandataireForm() {
               value={formik.values.telephone}
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
-              aria-label="Votre téléphone"
+              ariaLabel="Votre téléphone"
               ariaDescribedBy="format_telephone"
             />
             <SrOnly id="format_telephone">format attendu : 0301020304</SrOnly>
@@ -146,7 +146,7 @@ function SignupMandataireForm() {
               value={formik.values.telephone_portable}
               validationSchema={signupMandataireSchema}
               autoComplete="tel"
-              aria-label="Votre téléphone portable"
+              ariaLabel="Votre téléphone portable"
               ariaDescribedBy="format_telephone_portable"
             />
             <SrOnly id="format_telephone_portable">
@@ -205,7 +205,7 @@ function SignupMandataireForm() {
               placeholder="Nombre de mesures souhaité"
               value={formik.values.dispo_max}
               validationSchema={signupMandataireSchema}
-              aria-label="Nombre de mesures souhaité"
+              ariaLabel="Nombre de mesures souhaité"
             />
           </FormInputBox>
         </Flex>

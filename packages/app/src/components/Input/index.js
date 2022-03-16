@@ -46,6 +46,7 @@ function Input(props) {
     forceActive,
     noRequiredAsterisk,
     containerStyle,
+    ariaLabel,
   } = props;
 
   const [isFocus, toggleFocus] = useState(false);
@@ -79,7 +80,7 @@ function Input(props) {
       <InputElement
         size={size}
         type={type}
-        aria-label={name}
+        aria-label={ariaLabel || name}
         aria-required={required}
         aria-describedby={
           props?.ariaDescribedBy !== "none" ? `error-${props.id}` : null
