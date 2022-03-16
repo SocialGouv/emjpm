@@ -1,6 +1,5 @@
 import { Formik } from "formik";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
@@ -8,6 +7,9 @@ import { Link } from "~/containers/Commons";
 import config from "~/config";
 import { resetPasswordSchema } from "~/validation-schemas";
 import { Button, Card, Heading, InlineError, Input, Text } from "~/components";
+
+import { useAuth } from "~/user/Auth";
+import { useHistory } from "react-router-dom";
 
 const { API_URL } = config;
 
@@ -19,36 +21,38 @@ const grayBox = {
   p: "5",
 };
 
-const checkStatus = async (
-  response,
-  setSubmitting,
-  setStatus,
-  toggleMessage,
-  history
-) => {
-  let json = null;
-  setSubmitting(false);
-  try {
-    json = await response.json();
-  } catch (errors) {
-    setStatus({ errorMsg: errors.msg });
-  }
-  if (!response.ok) {
-    setStatus({ errorMsg: json.errors.msg });
-    return json;
-  }
-  toggleMessage(true);
-  setTimeout(function () {
-    history.push("/login");
-  }, 3000);
-  return json;
-};
-
 function ResetPassword(props) {
-  const history = useHistory();
   const { token } = props;
   const [isMessageVisible, toggleMessage] = useState(false);
   const url = `${API_URL}/api/auth/reset-password-with-token`;
+  const history = useHistory();
+
+  const { login } = useAuth();
+
+  const checkStatus = async (
+    response,
+    setSubmitting,
+    setStatus,
+    toggleMessage
+  ) => {
+    let json = null;
+    setSubmitting(false);
+    try {
+      json = await response.json();
+    } catch (errors) {
+      setStatus({ errorMsg: errors.msg });
+    }
+    if (!response.ok) {
+      setStatus({ errorMsg: json.errors.msg });
+      return json;
+    }
+    toggleMessage(true);
+    setTimeout(function () {
+      login(json);
+      history.push("/");
+    }, 3000);
+    return json;
+  };
 
   const handleSubmit = async (
     values,
@@ -68,7 +72,7 @@ function ResetPassword(props) {
       },
       method: "POST",
     });
-    checkStatus(response, setSubmitting, setStatus, toggleMessage, history);
+    checkStatus(response, setSubmitting, setStatus, toggleMessage);
   };
 
   return (
@@ -99,8 +103,7 @@ function ResetPassword(props) {
                 p: "1",
               }}
             >
-              {`Votre mot de passe a bien été changé, vous allez être
-              redirigé vers la page de connexion`}
+              {`Votre mot de passe a bien été changé, vous allez être connecté automatiquement`}
             </Box>
           )}
         </Box>
