@@ -70,6 +70,7 @@ export function MesureRessourceCreateOrEditForm(props) {
             size="small"
             required
             ariaDescribedBy="format_annee"
+            ariaLabel="Année"
           />
           <SrOnly id="format_annee">Format attendu aaaa. Example: 2020</SrOnly>
           <FormGroupInput
@@ -78,7 +79,7 @@ export function MesureRessourceCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureRessourceSchema}
             size="small"
-            aria-label="Niveau de Ressource (€)"
+            ariaLabel="Niveau de Ressource (€)"
             ariaDescribedBy="format_niveau_ressource"
           />
           <SrOnly id="format_niveau_ressource">Format attendu: 10543.</SrOnly>

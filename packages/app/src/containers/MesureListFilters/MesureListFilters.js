@@ -124,7 +124,7 @@ function MesureListFilters(props) {
             size="small"
             label="Rechercher une mesure"
             placeholder="Numéro RG, Dossier, Ville..."
-            aria-label="Rechercher une mesure"
+            ariaLabel="Rechercher une mesure"
           />
         </Box>
       </Flex>

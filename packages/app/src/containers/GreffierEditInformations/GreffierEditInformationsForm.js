@@ -69,7 +69,7 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
             autoComplete="given-name"
             normalizers={[normalizeFirstName]}
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -78,7 +78,7 @@ function GreffierEditInformationsForm(props) {
             validationSchema={greffierEditSchema}
             autoComplete="family-name"
             normalizers={[normalizeLastName]}
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Email"
@@ -86,7 +86,7 @@ function GreffierEditInformationsForm(props) {
             formik={formik}
             validationSchema={greffierEditSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">
@@ -125,7 +125,7 @@ function GreffierEditInformationsForm(props) {
             formik={formik}
             validationSchema={greffierEditSchema}
             placeholder="Cabinet du tribunal"
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
         </FormInputBox>
       </Flex>

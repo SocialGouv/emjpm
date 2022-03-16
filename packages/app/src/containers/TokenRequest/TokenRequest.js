@@ -112,6 +112,7 @@ function TokenRequest() {
               onChange={formik.handleChange}
               placeholder="Le nom de votre logiciel métier"
               aria-describedby="msg-name"
+              ariaLabel="Le nom de votre logiciel métier"
             />
             <div id="msg-name">
               {formik.touched.name && (
@@ -129,7 +130,7 @@ function TokenRequest() {
               onChange={formik.handleChange}
               placeholder="Votre email"
               autoComplete="email"
-              aria-label="Votre email"
+              ariaLabel="Votre email"
               aria-describedby={
                 formik.errors.email && formik.touched.email
                   ? "msg-email"

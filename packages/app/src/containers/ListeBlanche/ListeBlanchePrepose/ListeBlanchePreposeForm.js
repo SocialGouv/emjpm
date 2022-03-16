@@ -181,7 +181,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeFirstName]}
             autoComplete="given-name"
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -190,7 +190,7 @@ export function ListeBlanchePreposeForm(props) {
             validationSchema={validationSchema}
             normalizers={[normalizeLastName]}
             autoComplete="family-name"
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -198,7 +198,7 @@ export function ListeBlanchePreposeForm(props) {
             formik={formik}
             validationSchema={validationSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">
@@ -210,7 +210,7 @@ export function ListeBlanchePreposeForm(props) {
               id="telephone"
               formik={formik}
               validationSchema={validationSchema}
-              aria-label="Votre téléphone"
+              ariaLabel="Votre téléphone"
               ariaDescribedBy="telephone_format_attendu"
             />
             <SrOnly id="telephone_format_attendu">
@@ -389,6 +389,7 @@ export function ListeBlanchePreposeForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  ariaLabel="Votre nom"
                 />
                 <Input
                   label="Adresse e-mail"
@@ -398,6 +399,7 @@ export function ListeBlanchePreposeForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  ariaLabel="Votre adresse e-mail"
                 />
                 <Input
                   placeholder="Téléphone"
@@ -406,6 +408,7 @@ export function ListeBlanchePreposeForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  ariaLabel="Votre téléphone"
                 />
                 <Input
                   placeholder="Adresse"
@@ -414,6 +417,7 @@ export function ListeBlanchePreposeForm(props) {
                   readOnly
                   containerStyle={readOnlyContainerStyle}
                   style={readOnlyInputStyle}
+                  ariaLabel="Votre adresse"
                 />
               </>
             )}

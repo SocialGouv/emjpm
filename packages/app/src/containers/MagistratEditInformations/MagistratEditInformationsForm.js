@@ -61,6 +61,7 @@ function MagistratEditInformationsForm(props) {
             value={formik.values.genre}
             formik={formik}
             validationSchema={magistratEditSchema}
+            aria-label="Votre civilité"
           />
           <FormGroupInput
             placeholder="Prénom"
@@ -69,7 +70,7 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
             autoComplete="given-name"
             normalizers={[normalizeFirstName]}
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             placeholder="NOM"
@@ -78,7 +79,7 @@ function MagistratEditInformationsForm(props) {
             validationSchema={magistratEditSchema}
             autoComplete="family-name"
             normalizers={[normalizeLastName]}
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             placeholder="Adresse e-mail"
@@ -86,7 +87,7 @@ function MagistratEditInformationsForm(props) {
             formik={formik}
             validationSchema={magistratEditSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">
@@ -119,13 +120,14 @@ function MagistratEditInformationsForm(props) {
             enableFilterByLabel
             isClearable={true}
             validationSchema={magistratEditSchema}
+            aria-label="Tribunal d'instance"
           />
           <FormGroupInput
             id="cabinet"
             formik={formik}
             validationSchema={magistratEditSchema}
             placeholder="Cabinet du tribunal"
-            aria-label="Cabinet du tribunal"
+            ariaLabel="Cabinet du tribunal"
           />
         </FormInputBox>
       </Flex>

@@ -15,7 +15,7 @@ function SingleImportFilePicker({ onFileChosen, placeholder }) {
           onFileChosen(file);
         }}
         placeholder={placeholder}
-        aria-label="Sélectionner votre fichier excel"
+        ariaLabel="Sélectionner votre fichier excel"
       />
     </Box>
   );

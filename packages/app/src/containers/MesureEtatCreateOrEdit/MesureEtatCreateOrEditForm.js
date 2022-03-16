@@ -85,9 +85,12 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
-            aria-label="Date de changement d'état"
+            ariaLabelledBy="date_changement_etat_label"
             ariaDescribedBy="date_changement_etat"
           />
+          <SrOnly id="date_changement_etat_label">
+            Date de changement d'état.
+          </SrOnly>
           <SrOnly id="date_changement_etat">
             Format: jj/mm/aaaa. Exemple 01/01/2021.
           </SrOnly>
@@ -99,6 +102,7 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            aria-label="Nature de la mesure"
           />
 
           <FormGroupSelect
@@ -109,6 +113,7 @@ export function MesureEtatCreateOrEditForm(props) {
             formik={formik}
             validationSchema={mesureEtatSchema}
             size="small"
+            aria-labelledby="Champ de la mesure"
           />
 
           <FormGroupSelect
@@ -122,6 +127,7 @@ export function MesureEtatCreateOrEditForm(props) {
               formik.setFieldValue("lieu_vie", option.value);
               formik.setFieldValue("type_etablissement", null);
             }}
+            aria-label="Lieu de vie du majeur"
           />
 
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
@@ -156,6 +162,7 @@ export function MesureEtatCreateOrEditForm(props) {
               formik.setFieldValue("code_postal", null);
               formik.setFieldValue("ville", null);
             }}
+            aria-label="Pays"
           />
 
           {formik.values.pays === "FR" && (
@@ -173,7 +180,7 @@ export function MesureEtatCreateOrEditForm(props) {
                     formik.setFieldValue("ville", "");
                   }}
                   size="small"
-                  aria-label="Code postal"
+                  ariaLabel="Code postal"
                   ariaDescribedBy="format_code_postal"
                 />
                 <SrOnly id="format_code_postal">Format attendu: 75001.</SrOnly>
