@@ -53,6 +53,7 @@ export function SignupAdminInvitation(props) {
             nom: values.nom,
             password: values.password,
             prenom: values.prenom,
+            secret_2fa: values.secret_2fa,
           },
         },
         onComplete: () => {

@@ -1,29 +1,38 @@
-import { React, useCallback, useState } from "react";
+import { React, useCallback, useState, useEffect } from "react";
 import { Box, Heading } from "rebass";
 import { FormGroupInput } from "~/components/AppForm";
 import { Button, Text } from "~/components";
 
 import qrcode from "qrcode";
 import { authenticator } from "otplib";
-import useUser from "~/hooks/useUser";
 
-export default function Auth2FA({ formik, validationSchema }) {
-  const user = useUser();
-
+export default function Auth2FA({ unfolded, formik, validationSchema, user }) {
   const [deviceSecret, setDeviceSecret] = useState(null);
 
   const generateQrCode = useCallback(async () => {
     const secret = authenticator.generateSecret();
     const service = "eMJPM";
-    const otpauth = authenticator.keyuri(user.email, service, secret);
+    const otpauth = authenticator.keyuri(user, service, secret);
     const imageUrl = await qrcode.toDataURL(otpauth);
     formik.setFieldValue("secret_2fa", secret);
     setDeviceSecret({ imageUrl, secret });
-  }, [user.email, formik]);
+  }, [user, formik]);
 
   const associateNewDevice = useCallback(() => {
     generateQrCode();
   }, [generateQrCode]);
+
+  useEffect(() => {
+    if (unfolded) {
+      associateNewDevice();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unfolded]);
+
+  if (unfolded && !deviceSecret) {
+    return null;
+  }
+
   const label =
     "Entrez le code reçu depuis votre application d'authentification 2FA";
 

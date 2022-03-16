@@ -116,7 +116,7 @@ const signup = async (req, res) => {
   try {
     const { body } = req;
     const { invitation } = body;
-    const { nom, prenom, password, email, genre } = body.user;
+    const { nom, prenom, password, email, genre, secret_2fa } = body.user;
     let { type } = body.user;
 
     if (invitation) {
@@ -149,8 +149,12 @@ const signup = async (req, res) => {
       }
     }
 
+    if (type === "admin" && !invitation) {
+      return;
+    }
+
     const user = await User.query()
-      .allowInsert("[password,role,nom,prenom,email]")
+      .allowInsert("[password,role,nom,prenom,email,secret_2fa]")
       .insert({
         active: invitation ? true : false,
         email: email.toLowerCase().trim(),
@@ -158,14 +162,12 @@ const signup = async (req, res) => {
         nom,
         password,
         prenom,
+        secret_2fa,
         type,
       });
 
     switch (type) {
       case "admin": {
-        if (!invitation) {
-          return;
-        }
         await createRole(user.id, type);
         break;
       }

@@ -11,6 +11,8 @@ import { Link } from "~/components/Link";
 import { signupAdminSchema } from "~/validation-schemas";
 import { Button, Heading, Text, SrOnly } from "~/components";
 
+import Auth2FA from "~/containers/Auth2FA/Auth2FA";
+
 export function SignupAdminInvitationForm(props) {
   const { handleSubmit, invitation } = props;
 
@@ -81,7 +83,7 @@ export function SignupAdminInvitationForm(props) {
         >
           <FormGroupInput
             formik={formik}
-            disabled
+            readOnly
             value={formik.values.email}
             id="email"
             placeholder="Email"
@@ -110,6 +112,12 @@ export function SignupAdminInvitationForm(props) {
             validationSchema={signupAdminSchema}
             autoComplete="new-password"
             aria-label="Confirmation de votre nouveau mot de passe"
+          />
+          <Auth2FA
+            unfolded
+            formik={formik}
+            validationSchema={signupAdminSchema}
+            user={invitation.email}
           />
         </FormInputBox>
       </Flex>

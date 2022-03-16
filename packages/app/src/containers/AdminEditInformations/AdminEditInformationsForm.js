@@ -10,7 +10,7 @@ import {
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
 import { Button, Heading, Text, SrOnly } from "~/components";
 
-import Auth2FA from "./Auth2FA";
+import Auth2FA from "~/containers/Auth2FA/Auth2FA";
 
 function AdminEditInformationsForm({
   user,
@@ -77,7 +77,11 @@ function AdminEditInformationsForm({
             format attendu : nom@justice.fr
           </SrOnly>
           {!isAdmin && (
-            <Auth2FA formik={formik} validationSchema={adminEditSchema} />
+            <Auth2FA
+              formik={formik}
+              validationSchema={adminEditSchema}
+              user={user.email}
+            />
           )}
         </FormInputBox>
       </Flex>
