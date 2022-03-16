@@ -21,11 +21,13 @@ import { passwordSchema } from "./passwordSchema";
 import { resetPasswordSchema } from "./resetPasswordSchema";
 import { serviceAntenneSchema } from "./serviceAntenneSchema";
 import { serviceMemberInvitationSchema } from "./serviceMemberInvitationSchema";
+import { adminInvitationSchema } from "./adminInvitationSchema";
 import { signupDirectionSchema } from "./signupDirectionSchema";
 import { signupMagistratSchema } from "./signupMagistratSchema";
 import { signupGreffierSchema } from "./signupGreffierSchema";
 import { signupMandataireSchema } from "./signupMandataireSchema";
 import { signupSchema } from "./signupSchema";
+import { signupAdminSchema } from "./signupAdminSchema";
 import { signupServiceSchema } from "./signupServiceSchema";
 
 export {
@@ -49,11 +51,13 @@ export {
   mesureAcceptSchema,
   signupMandataireSchema,
   serviceMemberInvitationSchema,
+  adminInvitationSchema,
   resetPasswordSchema,
   signupDirectionSchema,
   signupMagistratSchema,
   signupGreffierSchema,
   signupSchema,
+  signupAdminSchema,
   signupServiceSchema,
   editorTokenSchema,
   mesureEtatSchema,

@@ -1,4 +1,5 @@
 - "!include public_access_tokens.yaml"
+- "!include public_admin_invitations.yaml"
 - "!include public_api_logs.yaml"
 - "!include public_authorization_codes.yaml"
 - "!include public_cause_sortie_mesure.yaml"

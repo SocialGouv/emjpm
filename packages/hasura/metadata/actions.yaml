@@ -66,6 +66,13 @@ actions:
     headers:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
+- name: email_admin_invitation
+  definition:
+    kind: asynchronous
+    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-admin-invitation'
+    headers:
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: email_reservation
   definition:
     kind: asynchronous
@@ -314,4 +321,5 @@ custom_types:
   - name: ResetMesuresCalculationsOutput
   - name: MesuresLastUpdateResult
   - name: DeleteAllMesuresActionOutput
+  - name: EmailAdminInvitationOutput
   scalars: []

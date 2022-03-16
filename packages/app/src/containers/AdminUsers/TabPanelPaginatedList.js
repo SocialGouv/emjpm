@@ -1,14 +1,19 @@
 import { useContext, useState } from "react";
 import { useQuery } from "@apollo/client";
+import { Box } from "rebass";
 
 import useEffectObjectValuesChangeCallback from "~/hooks/useEffectObjectValuesChangeCallback";
 
 import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
 import { PaginatedList } from "~/containers/PaginatedList";
 
+import { AdminInvitationCreate } from "~/containers/AdminInvitationCreate";
+import { AdminInvitations } from "~/containers/AdminInvitations";
+
 import { USERS } from "./queries";
 
 import useQueryReady from "~/hooks/useQueryReady";
+
 import RowItem from "./RowItem";
 
 export default function TabPanelPaginatedList({ type: selectedType }) {
@@ -49,13 +54,21 @@ export default function TabPanelPaginatedList({ type: selectedType }) {
   const users = data.search_users;
 
   return (
-    <PaginatedList
-      entries={users}
-      RowItem={RowItem}
-      count={count}
-      resultPerPage={resultPerPage}
-      currentOffset={currentOffset}
-      setCurrentOffset={setCurrentOffset}
-    />
+    <>
+      <PaginatedList
+        entries={users}
+        RowItem={RowItem}
+        count={count}
+        resultPerPage={resultPerPage}
+        currentOffset={currentOffset}
+        setCurrentOffset={setCurrentOffset}
+      />
+      {selectedType === "admin" && (
+        <Box mt={3}>
+          <AdminInvitations />
+          <AdminInvitationCreate />
+        </Box>
+      )}
+    </>
   );
 }
