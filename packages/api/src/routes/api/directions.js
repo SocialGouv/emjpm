@@ -8,13 +8,6 @@ const { User, Region } = require("~/models");
 
 const router = express.Router();
 
-// * email
-// * id
-// * nom
-// * prenom
-// * type
-// * direction(type, région / département)
-
 router.use(async (req, res, next) => {
   const {
     locals: {
@@ -94,7 +87,6 @@ router.get("/regionales/:id", async (req, res) => {
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
       );
-    console.log({ region });
     regionId = region.id;
   }
 
