@@ -136,7 +136,7 @@ function Login(props) {
               placeholder="Votre email"
               required
               autoComplete="email"
-              aria-label="Votre email"
+              ariaLabel="Votre email"
               aria-describedby={
                 formik.errors.email && formik.touched.email
                   ? "msg-email"
@@ -169,7 +169,7 @@ function Login(props) {
               required
               aria-describedby="msg-password"
               autoComplete="current-password"
-              aria-label="Votre mot de passe"
+              ariaLabel="Votre mot de passe"
             />
             <div id="msg-password">
               {(formik.touched.password || formikSubmitted) && (

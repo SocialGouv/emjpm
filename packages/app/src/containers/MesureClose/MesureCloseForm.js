@@ -68,9 +68,12 @@ export function MesureCloseForm(props) {
             id="date_fin_mesure"
             formik={formik}
             validationSchema={validationSchema}
-            aria-label="Date de fin de la mesure de protection"
+            ariaLabelledBy="date_fin_mesure_label"
             ariaDescribedBy="date_fin_mesure_format_attendu"
           />
+          <SrOnly id="date_fin_mesure_label">
+            Date de fin de la mesure de protection
+          </SrOnly>
           <SrOnly id="date_fin_mesure_format_attendu">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>

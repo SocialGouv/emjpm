@@ -30,6 +30,7 @@ export default function TribunalAutoComplete({
             }));
       }, 500)}
       placeholder={"Tribunal"}
+      aria-label="Tribunal"
       {...props}
     />
   );

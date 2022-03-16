@@ -31,6 +31,7 @@ export default function FormGroupInput({
   normalizers = [],
   autoComplete,
   ariaDescribedBy,
+  ...otherProps
 }) {
   const { handleChange, handleBlur, values } = formik;
 
@@ -88,6 +89,7 @@ export default function FormGroupInput({
           size={size ? size : ""}
           noRequiredAsterisk={noRequiredAsterisk}
           autoComplete={autoComplete ? autoComplete : "off"}
+          {...otherProps}
         />
         {children ? <Box>{children}</Box> : null}
       </Flex>

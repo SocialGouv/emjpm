@@ -48,7 +48,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Prénom"
             validationSchema={adminEditSchema}
             autoComplete="given-name"
-            aria-label="Votre prénom"
+            ariaLabel="Votre prénom"
           />
           <FormGroupInput
             formik={formik}
@@ -56,7 +56,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Nom"
             validationSchema={adminEditSchema}
             autoComplete="family-name"
-            aria-label="Votre nom"
+            ariaLabel="Votre nom"
           />
           <FormGroupInput
             formik={formik}
@@ -64,7 +64,7 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
             placeholder="Email"
             validationSchema={adminEditSchema}
             autoComplete="email"
-            aria-label="Votre email"
+            ariaLabel="Votre email"
             ariaDescribedBy="email_format_attendu"
           />
           <SrOnly id="email_format_attendu">

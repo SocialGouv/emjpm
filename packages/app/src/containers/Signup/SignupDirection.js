@@ -101,6 +101,7 @@ export function SignupDirection() {
                     break;
                 }
               }}
+              aria-label="Type de direction"
             />
             {formik.values.directionType === "regional" && (
               <FormGroupSelect
@@ -110,6 +111,7 @@ export function SignupDirection() {
                 options={regionOptions}
                 enableFilterByLabel
                 validationSchema={signupDirectionSchema}
+                aria-label="Région"
               />
             )}
             {formik.values.directionType === "departemental" && (
@@ -120,6 +122,7 @@ export function SignupDirection() {
                 options={departementsOptions}
                 enableFilterByLabel
                 validationSchema={signupDirectionSchema}
+                aria-label="Département"
               />
             )}
           </FormInputBox>

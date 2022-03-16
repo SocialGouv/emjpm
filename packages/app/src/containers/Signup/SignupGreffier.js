@@ -81,6 +81,7 @@ function SignupGreffierForm({ tiDatas }) {
               enableFilterByLabel
               isClearable={true}
               required
+              aria-label="Tribunal d'instance"
             />
 
             <FormGroupInput
@@ -88,7 +89,7 @@ function SignupGreffierForm({ tiDatas }) {
               formik={formik}
               autoComplete="organization"
               placeholder="Cabinet du tribunal"
-              aria-label="Cabinet du tribunal"
+              ariaLabel="Cabinet du tribunal"
             />
           </FormInputBox>
         </Flex>
