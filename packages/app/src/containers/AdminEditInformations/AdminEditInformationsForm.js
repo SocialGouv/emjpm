@@ -10,7 +10,14 @@ import {
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
 import { Button, Heading, Text, SrOnly } from "~/components";
 
-function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
+import Auth2FA from "./Auth2FA";
+
+function AdminEditInformationsForm({
+  user,
+  handleSubmit,
+  cancelLink,
+  isAdmin,
+}) {
   const formik = useFormik({
     initialValues: {
       email: user.email || "",
@@ -69,6 +76,9 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
           <SrOnly id="email_format_attendu">
             format attendu : nom@justice.fr
           </SrOnly>
+          {!isAdmin && (
+            <Auth2FA formik={formik} validationSchema={adminEditSchema} />
+          )}
         </FormInputBox>
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
