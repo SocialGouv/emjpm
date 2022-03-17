@@ -27,7 +27,12 @@ function Header(props) {
               <LogoEtat />
             </Box>
             <Box ml={2}>
-              <button onClick={goToHome} style={{ paddingTop: "24px" }}>
+              <button
+                onClick={goToHome}
+                style={{ paddingTop: "24px" }}
+                title="Aller à l'accueil"
+                aria-label="Aller à l'acceuil"
+              >
                 <Text
                   color="#007AD9"
                   fontWeight="100"

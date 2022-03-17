@@ -12,7 +12,6 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
-import { Link } from "~/components/Link";
 import {
   CheckBox,
   Button,
@@ -394,13 +393,16 @@ function MandataireEditInformationsForm(props) {
         {errorMessage && <InlineError message={`${errorMessage}`} />}
         <Flex p={2} alignItems="center" justifyContent="flex-end">
           <Box mr="2">
-            <Link
-              to={cancelLink}
+            <Button
+              variant="outline"
+              as="a"
+              type={null}
+              href={cancelLink}
               title="Annuler la modification de vos informations"
               aria-label="Annuler la modification de vos informations"
             >
-              <Button variant="outline">Annuler</Button>
-            </Link>
+              Annuler
+            </Button>
           </Box>
           <Box mr="2">
             <Button

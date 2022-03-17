@@ -9,7 +9,6 @@ import {
   FormInputBox,
   FormGroupSelect,
 } from "~/components/AppForm";
-import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import yup, {
   EMAIL_NOT_VALID,
@@ -343,14 +342,18 @@ export function ListeBlanchePreposeForm(props) {
               {"Ces informations sont modifables uniquement par le mandataire"}
             </Text>
             {isAdmin && mandataire && (
-              <Link to={`/admin/users/${mandataire.user.id}`}>
-                <Button>
-                  <span role="img" aria-labelledby="user-profile-link">
-                    🧑
-                  </span>
-                  <span id="user-profile-link"> Profil de l'utilisateur</span>
-                </Button>
-              </Link>
+              <Button
+                as="a"
+                type={null}
+                href={`/admin/users/${mandataire.user.id}`}
+                title=" Profil de l'utilisateur"
+                aria-label=" Profil de l'utilisateur"
+              >
+                <span role="img" aria-labelledby="user-profile-link">
+                  🧑
+                </span>
+                <span id="user-profile-link"> Profil de l'utilisateur</span>
+              </Button>
             )}
           </FormGrayBox>
           <FormInputBox>
@@ -428,15 +431,24 @@ export function ListeBlanchePreposeForm(props) {
       <Flex justifyContent="flex-end" mt={4}>
         {editMode && isAdmin && (
           <Box>
-            <Link to={`/admin/liste-blanche/${data.id}/delete`}>
-              <Button mr="2" bg="red">
-                Supprimer
-              </Button>
-            </Link>
+            <Button
+              mr="2"
+              bg="red"
+              href={`/admin/liste-blanche/${data.id}/delete`}
+              as="a"
+              type={null}
+            >
+              Supprimer
+            </Button>
           </Box>
         )}
         <Box>
-          <Button disabled={formik.isSubmitting} type="submit">
+          <Button
+            disabled={formik.isSubmitting}
+            type="submit"
+            title={editMode ? "Mettre à jour" : "Ajouter"}
+            aria-label={editMode ? "Mettre à jour" : "Ajouter"}
+          >
             {editMode ? "Mettre à jour" : "Ajouter"}
           </Button>
         </Box>

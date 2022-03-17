@@ -241,7 +241,12 @@ function MesureDetailView({ mesure, ...props }) {
                 )
               }
             >
-              <Button ml={3} variant="outline">
+              <Button
+                ml={3}
+                variant="outline"
+                title="Envoyer un email au magistrat à propos de cette mesure"
+                aria-label="Envoyer un email au magistrat à propos de cette mesure"
+              >
                 <Text fontSize={1} fontWeight="normal">
                   Envoyer un email au magistrat à propos de cette mesure
                 </Text>
@@ -261,7 +266,12 @@ function MesureDetailView({ mesure, ...props }) {
                 )
               }
             >
-              <Button ml={3} variant="outline">
+              <Button
+                ml={3}
+                variant="outline"
+                title="Envoyer un email au greffier à propos de cette mesure"
+                aria-label="Envoyer un email au greffier à propos de cette mesure"
+              >
                 <Text fontSize={1} fontWeight="normal">
                   Envoyer un email au greffier à propos de cette mesure
                 </Text>

@@ -52,7 +52,13 @@ export function EnqueteWelcome({
             autre.
           </Text>
         </Flex>
-        <Button onClick={() => goToFirstPage()} mx="auto">
+        <Button
+          onClick={() => goToFirstPage()}
+          mx="auto"
+          role="link"
+          title="Répondre"
+          aria-label="Répondre"
+        >
           Répondre
         </Button>
       </Flex>

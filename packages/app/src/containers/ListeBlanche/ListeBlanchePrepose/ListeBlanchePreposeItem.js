@@ -18,7 +18,18 @@ export function ListeBlanchePreposeItem(props) {
       sx={cardStyle({ clickable: !!onClick })}
       mb="2"
     >
-      <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
+      <a
+        href={to}
+        onClick={onClick}
+        style={anchorStyle}
+        draggable="false"
+        title={`Mandataire préposé ${liste_blanche?.nom || ""} ${
+          liste_blanche?.prenom || ""
+        }`}
+        aria-label={`Mandataire préposé ${liste_blanche?.nom || ""} ${
+          liste_blanche?.prenom || ""
+        }`}
+      >
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">
             <Text sx={labelStyle}>{"Mandataire préposé d'établissement"}</Text>

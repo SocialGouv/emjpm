@@ -23,7 +23,6 @@ import {
   SrOnly,
 } from "~/components";
 
-import { Link } from "~/containers/Commons";
 import { GeocodeCities } from "~/components/Geocode";
 import { CITY_DEPARTEMENT } from "./queries";
 
@@ -483,17 +482,20 @@ export function ListeBlancheServiceForm(props) {
               service &&
               service.service_members.map(({ user }) => {
                 return (
-                  <Link to={`/admin/users/${user.id}`}>
-                    <Button style={{ marginBottom: "10px" }}>
-                      <span role="img" aria-labelledby="user-profile-link">
-                        🧑
-                      </span>
-                      <span id="user-profile-link">
-                        {" "}
-                        Profil de l'utilisateur {user.prenom} {user.nom}
-                      </span>
-                    </Button>
-                  </Link>
+                  <Button
+                    style={{ marginBottom: "10px" }}
+                    as="a"
+                    type={null}
+                    href={`/admin/users/${user.id}`}
+                  >
+                    <span role="img" aria-labelledby="user-profile-link">
+                      🧑
+                    </span>
+                    <span id="user-profile-link">
+                      {" "}
+                      Profil de l'utilisateur {user.prenom} {user.nom}
+                    </span>
+                  </Button>
                 );
               })}
           </FormGrayBox>

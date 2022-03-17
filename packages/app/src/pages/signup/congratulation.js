@@ -34,7 +34,14 @@ function CongratulationPage() {
             </Text>
             <Flex mt={5}>
               <Box>
-                <Button mr="2" variant="outline" onClick={() => backHome()}>
+                <Button
+                  role="link"
+                  title="Retour à l'accueil"
+                  aria-label="Retour à l'accueil"
+                  mr="2"
+                  variant="outline"
+                  onClick={() => backHome()}
+                >
                   <Link>Retour à l'accueil</Link>
                 </Button>
               </Box>

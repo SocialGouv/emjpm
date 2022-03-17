@@ -71,7 +71,11 @@ function ListeBlancheFilter() {
           sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}
         >
           <>
-            <Button onClick={() => setButtonsEnabled(true)}>
+            <Button
+              onClick={() => setButtonsEnabled(true)}
+              title="Ajouter un mandataire"
+              aria-label="Ajouter un mandataire"
+            >
               Ajouter
               <ChevronDown size={20} />
             </Button>
@@ -82,7 +86,13 @@ function ListeBlancheFilter() {
                   {buttonLinks.map((link) => {
                     return (
                       <Box sx={menuItemStyle} key={link.title}>
-                        <Link to={link.to}>{link.title}</Link>
+                        <Link
+                          title={`Ajouter un ${link.title}`}
+                          aria-label={`Ajouter un ${link.title}`}
+                          to={link.to}
+                        >
+                          {link.title}
+                        </Link>
                       </Box>
                     );
                   })}

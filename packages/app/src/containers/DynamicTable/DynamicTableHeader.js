@@ -22,7 +22,12 @@ export function DynamicTableHeader(props) {
       {buttonEnable && (
         <Flex justifyContent="center" alignItems="center">
           <Text mr={20}>{selectedItemsCount} éléments sélectionnés</Text>
-          <Button isLoading={isLoading} onClick={onClick}>
+          <Button
+            isLoading={isLoading}
+            onClick={onClick}
+            title={buttonText}
+            aria-label={buttonText}
+          >
             {buttonText}
           </Button>
         </Flex>

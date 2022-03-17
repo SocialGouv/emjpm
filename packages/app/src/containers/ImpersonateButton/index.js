@@ -29,6 +29,7 @@ export default function ImpersonateButton({ userId: id }) {
         role="img"
         aria-hidden="false"
         aria-label="Impersonnate"
+        title="Impersonnate"
       />
     </Button>
   );

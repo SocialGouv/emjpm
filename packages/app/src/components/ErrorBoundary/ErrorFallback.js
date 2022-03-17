@@ -18,7 +18,11 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
       >
         {error.message}
       </pre>
-      <button onClick={resetErrorBoundary}>
+      <button
+        onClick={resetErrorBoundary}
+        title="Réessayer"
+        aria-label="Réessayer"
+      >
         <Hammer2 size={12} /> Réessayer
       </button>
 
@@ -35,6 +39,8 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
           onClick={() => {
             goBackAndRefresh();
           }}
+          title="Page précédente"
+          aria-label="Page précédente"
         >
           <ArrowLeft size={40} />
           Page précédente
@@ -48,6 +54,8 @@ export default function ErrorFallback({ error, resetErrorBoundary }) {
             clearUserStorage();
             goBackAndRefresh();
           }}
+          title="Se déconnecter"
+          aria-label="Se déconnecter"
         >
           <PowerSettingsNew size={28} />
           Se déconnecter

@@ -2,7 +2,6 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 import { Helmet } from "react-helmet";
 
-import { Link } from "~/components/Link";
 import { GreffierMandataireComments } from "~/containers/GreffierMandataireComments";
 import { GreffierServiceAntennes } from "~/containers/GreffierServiceAntennes";
 import { Button, Heading } from "~/components";
@@ -80,9 +79,15 @@ export function GreffierMandataire(props) {
           {serviceId && <Heading size={2}>{etablissement}</Heading>}
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-          <Link to={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}>
-            <Button>Réserver une mesure</Button>
-          </Link>
+          <Button
+            as="a"
+            type="null"
+            href={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}
+            title="Réserver une mesure"
+            aria-label="Réserver une mesure"
+          >
+            Réserver une mesure
+          </Button>
         </Flex>
 
         <Flex sx={GreffierMandataireStyle} flexDirection="column">

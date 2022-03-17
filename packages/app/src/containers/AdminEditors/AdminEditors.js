@@ -4,7 +4,6 @@ import { Box, Flex, Text } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
-import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
 import { captureException } from "~/user/sentry";
@@ -58,10 +57,21 @@ function RowItem({ item }) {
         </Flex>
 
         <Box mr="1" width="220px">
-          <Link to={`/admin/editors/${id}`}>
-            <Button>Voir</Button>
-          </Link>
-          <Button ml="3" onClick={() => removeEditorFromList(id)}>
+          <Button
+            type={null}
+            as="a"
+            href={`/admin/editors/${id}`}
+            title="Voir"
+            aria-label="Voir"
+          >
+            Voir
+          </Button>
+          <Button
+            ml="3"
+            onClick={() => removeEditorFromList(id)}
+            title="supprimer"
+            aria-label="supprimer"
+          >
             supprimer
           </Button>
         </Box>

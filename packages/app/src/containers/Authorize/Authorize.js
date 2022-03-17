@@ -61,14 +61,19 @@ function Authorize(props) {
               <input type="hidden" name="redirect_uri" value={redirectUrl} />
               <input type="hidden" name="access_token" value={token} />
               <input type="hidden" name="state" value={state} />
-              <Button type="submit">{"Autoriser"}</Button>
+              <Button type="submit" title="Autoriser" aria-label="Autoriser">
+                {"Autoriser"}
+              </Button>
               <Button
+                role="link"
                 onClick={() => {
                   document.location.href = `${redirectUrl}?error_reason=user_denied&error=access_denied&error_description=Permissions+error`;
                 }}
                 type="button"
                 ml="2"
                 variant="outline"
+                title="Refuser"
+                aria-label="Refuser"
               >
                 {"refuser"}
               </Button>

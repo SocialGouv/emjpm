@@ -161,7 +161,9 @@ export function DirectionEnqueteDetailsReponsesList({ enqueteId }) {
                   <Link
                     to={`/direction/enquetes/${enqueteId}/reponse/${item.reponse_id}`}
                   >
-                    <Button>Visualiser</Button>
+                    <Button title="Visualiser" aria-label="Visualiser">
+                      Visualiser
+                    </Button>
                   </Link>
                 </Box>
               );

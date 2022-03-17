@@ -77,10 +77,22 @@ export function MesureDeleteForm(props) {
           </Box>
           <Box>
             {!mesure.en_attente_reouverture && (
-              <Button onClick={handleSubmit}>Supprimer la mesure</Button>
+              <Button
+                onClick={handleSubmit}
+                title="Supprimer la mesure"
+                aria-label="Supprimer la mesure"
+              >
+                Supprimer la mesure
+              </Button>
             )}
             {mesure.en_attente_reouverture && (
-              <Button onClick={handleSubmit}>Supprimer</Button>
+              <Button
+                onClick={handleSubmit}
+                title="Supprimer"
+                aria-label="Supprimer"
+              >
+                Supprimer
+              </Button>
             )}
           </Box>
         </Flex>

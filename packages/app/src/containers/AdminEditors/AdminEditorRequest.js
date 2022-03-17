@@ -50,7 +50,11 @@ function RowItem({ item }) {
           <Text sx={descriptionStyle}>{email}</Text>
         </Flex>
         <Flex>
-          <Button onClick={() => authorizeEditor(id, name, email)}>
+          <Button
+            onClick={() => authorizeEditor(id, name, email)}
+            title="Autoriser"
+            aria-label="Autoriser"
+          >
             Autoriser
           </Button>
         </Flex>

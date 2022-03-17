@@ -144,6 +144,11 @@ function GreffierMandatairesListFilters(props) {
                   ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
                   : null
               }
+              aria-label={
+                !searchByLocation
+                  ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
+                  : null
+              }
             >
               <Location
                 size={extraIconsSize}
@@ -158,6 +163,11 @@ function GreffierMandatairesListFilters(props) {
               style={styleFilterButton(habilitation)}
               onClick={onChangeHabilitation}
               data-tip={
+                !habilitation
+                  ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
+                  : null
+              }
+              aria-label={
                 !habilitation
                   ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
                   : null
@@ -180,6 +190,11 @@ function GreffierMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
                   : null
               }
+              aria-label={
+                !prefer
+                  ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
+                  : null
+              }
             >
               <Star size={extraIconsSize} color={prefer ? "#70D54F" : ""} />
             </Button>
@@ -191,6 +206,11 @@ function GreffierMandatairesListFilters(props) {
               onClick={onChangeAvailable}
               style={styleFilterButton(available)}
               data-tip={
+                !available
+                  ? "Afficher uniquement les mandataire ayant des places disponibles"
+                  : null
+              }
+              aria-label={
                 !available
                   ? "Afficher uniquement les mandataire ayant des places disponibles"
                   : null

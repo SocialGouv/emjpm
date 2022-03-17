@@ -18,7 +18,14 @@ export function EnqueteAlreadySubmitted({ enquete, goToFirstPage }) {
           <Text>
             Pour visualiser vos réponses, cliquez sur le bouton suivant:
           </Text>
-          <Button onClick={() => goToFirstPage()} mx="auto" mt={30}>
+          <Button
+            onClick={() => goToFirstPage()}
+            mx="auto"
+            mt={30}
+            role="link"
+            aria-label="Visualiser mes réponses"
+            title="Visualiser mes réponses"
+          >
             Visualiser mes réponses
           </Button>
         </Box>

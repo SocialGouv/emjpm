@@ -21,7 +21,6 @@ import {
   natureStyle,
   statusStyle,
   titleStyle,
-  anchorStyle,
 } from "./style";
 
 const GrayMale = styled(Male)`
@@ -75,152 +74,141 @@ export default function MesureListItem(props) {
 
   return (
     <>
-      <Card sx={cardStyle} width="100%">
-        <a
-          href={getHref && getHref(props)}
-          onClick={onItemClick}
-          draggable="false"
-          style={anchorStyle}
-        >
-          <Box sx={decorationStyle(status)} />
-          <Flex sx={mesureListItemStyle}>
-            <Box minWidth="220px" maxWidth="220px" mr="1">
-              <Text sx={titleStyle}>
-                {!numeroRgIsValid && (
-                  <div
-                    style={{ display: "inline" }}
-                    data-multiline={true}
-                    data-tip={
-                      "Le Numéro RG de cette mesure est invalide,  il est probable qu'elle soit doublonnée.<br />" +
-                      "Veuillez corriger cette anomalie afin que les fonctions d'imports <br />(OCMI, éditeur tiers de logiciel utilisant notre API, import fichier) puissent fonctionner correctement."
-                    }
-                  >
-                    <ExclamationCircle size="12" color="#ff0000" />
-                  </div>
-                )}{" "}
-                {numeroRg || ""}{" "}
-                <Text sx={statusStyle(status)}>{currentStatus || ""}</Text>
-              </Text>
-              <Text sx={natureStyle}>{`${natureMesure} ${
-                champMesure || ""
-              }`}</Text>
-            </Box>
+      <Card
+        sx={cardStyle}
+        width="100%"
+        as="a"
+        display="block"
+        onClick={onItemClick}
+        draggable="false"
+        href={getHref && getHref(props)}
+        title={`${natureMesure} ${champMesure || ""} ${numeroRg || ""}`}
+        aria-label={`${natureMesure} ${champMesure || ""} ${numeroRg || ""}`}
+      >
+        <Box sx={decorationStyle(status)} />
+        <Flex sx={mesureListItemStyle}>
+          <Box minWidth="220px" maxWidth="220px" mr="1">
+            <Text sx={titleStyle}>
+              {!numeroRgIsValid && (
+                <div
+                  style={{ display: "inline" }}
+                  data-multiline={true}
+                  data-tip={
+                    "Le Numéro RG de cette mesure est invalide,  il est probable qu'elle soit doublonnée.<br />" +
+                    "Veuillez corriger cette anomalie afin que les fonctions d'imports <br />(OCMI, éditeur tiers de logiciel utilisant notre API, import fichier) puissent fonctionner correctement."
+                  }
+                >
+                  <ExclamationCircle size="12" color="#ff0000" />
+                </div>
+              )}{" "}
+              {numeroRg || ""}{" "}
+              <Text sx={statusStyle(status)}>{currentStatus || ""}</Text>
+            </Text>
+            <Text sx={natureStyle}>{`${natureMesure} ${
+              champMesure || ""
+            }`}</Text>
+          </Box>
 
-            <Flex
-              sx={columnStyle(true, true)}
-              minWidth="220px"
-              maxWidth="220px"
-            >
-              {hasTribunal && (
-                <>
-                  <Text sx={labelStyle}>Tribunal</Text>
-                  <Text sx={descriptionStyle}>
-                    {tribunal || ""} {cabinet}
-                  </Text>
-                </>
-              )}
-            </Flex>
-
-            <Flex minWidth="70px" mr="1">
-              <Box alignSelf="center" pt="4px" mr="1">
-                {civilite && (
-                  <>
-                    {isMonsieur({ civilite }) ? (
-                      <GrayMale
-                        size="24"
-                        role="img"
-                        aria-label="Monsieur"
-                        aria-hidden="false"
-                      />
-                    ) : (
-                      <GrayFemale
-                        size="24"
-                        role="img"
-                        aria-label="Madame"
-                        aria-hidden="false"
-                      />
-                    )}
-                  </>
-                )}
-              </Box>
-              <Box>
-                <Text sx={labelStyle}>Age</Text>
-                <Text sx={descriptionStyle}>
-                  {age ? currentYear - age : "NC"}
-                </Text>
-              </Box>
-            </Flex>
-
-            {hasFolderNumber && (
-              <Flex
-                sx={columnStyle(true, true)}
-                minWidth="90px"
-                maxWidth="90px"
-              >
-                <Text sx={labelStyle}>Dossier</Text>
-                <Text sx={descriptionStyle}>{numeroDossier || ""}</Text>
-              </Flex>
-            )}
-
-            <Flex
-              minWidth="230px"
-              maxWidth="230px"
-              sx={columnStyle(true, true)}
-            >
-              <Text sx={labelStyle}>Commune</Text>
-              <Text sx={descriptionStyle}>{ville || ""}</Text>
-            </Flex>
-
-            {status === MESURE_TYPE.WAITING && (
+          <Flex sx={columnStyle(true, true)} minWidth="220px" maxWidth="220px">
+            {hasTribunal && (
               <>
-                <Flex
-                  sx={columnStyle(false, false)}
-                  minWidth="130px"
-                  maxWidth="130px"
-                  textAlign="left"
-                >
-                  <Text sx={labelStyle}>Date prév. juge.</Text>
-                  <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
-                </Flex>
-                <Flex
-                  minWidth="100px"
-                  maxWidth="100px"
-                  style={{ marginLeft: "5px" }}
-                >
-                  <Box alignSelf="center" pt="4px" mr="1">
-                    <>
-                      {isUrgent && (
-                        <Flex alignItems="center">
-                          <Warning size="24" />
-                          <Text
-                            sx={descriptionStyle}
-                            style={{ marginLeft: "5px" }}
-                          >
-                            Urgent
-                          </Text>
-                        </Flex>
-                      )}
-                    </>
-                  </Box>
-                </Flex>
+                <Text sx={labelStyle}>Tribunal</Text>
+                <Text sx={descriptionStyle}>
+                  {tribunal || ""} {cabinet}
+                </Text>
               </>
             )}
+          </Flex>
 
-            {status !== MESURE_TYPE.WAITING && (
+          <Flex minWidth="70px" mr="1">
+            <Box alignSelf="center" pt="4px" mr="1">
+              {civilite && (
+                <>
+                  {isMonsieur({ civilite }) ? (
+                    <GrayMale
+                      size="24"
+                      role="img"
+                      aria-label="Monsieur"
+                      aria-hidden="false"
+                    />
+                  ) : (
+                    <GrayFemale
+                      size="24"
+                      role="img"
+                      aria-label="Madame"
+                      aria-hidden="false"
+                    />
+                  )}
+                </>
+              )}
+            </Box>
+            <Box>
+              <Text sx={labelStyle}>Age</Text>
+              <Text sx={descriptionStyle}>
+                {age ? currentYear - age : "NC"}
+              </Text>
+            </Box>
+          </Flex>
+
+          {hasFolderNumber && (
+            <Flex sx={columnStyle(true, true)} minWidth="90px" maxWidth="90px">
+              <Text sx={labelStyle}>Dossier</Text>
+              <Text sx={descriptionStyle}>{numeroDossier || ""}</Text>
+            </Flex>
+          )}
+
+          <Flex minWidth="230px" maxWidth="230px" sx={columnStyle(true, true)}>
+            <Text sx={labelStyle}>Commune</Text>
+            <Text sx={descriptionStyle}>{ville || ""}</Text>
+          </Flex>
+
+          {status === MESURE_TYPE.WAITING && (
+            <>
               <Flex
-                textAlign="left"
                 sx={columnStyle(false, false)}
                 minWidth="130px"
                 maxWidth="130px"
+                textAlign="left"
               >
-                <Text sx={labelStyle}>Decision du</Text>
-                <Text sx={descriptionStyle}>
-                  {dateNominationFormated || ""}
-                </Text>
+                <Text sx={labelStyle}>Date prév. juge.</Text>
+                <Text sx={descriptionStyle}>{judgmentDate || ""}</Text>
               </Flex>
-            )}
-          </Flex>
-        </a>
+              <Flex
+                minWidth="100px"
+                maxWidth="100px"
+                style={{ marginLeft: "5px" }}
+              >
+                <Box alignSelf="center" pt="4px" mr="1">
+                  <>
+                    {isUrgent && (
+                      <Flex alignItems="center">
+                        <Warning size="24" />
+                        <Text
+                          sx={descriptionStyle}
+                          style={{ marginLeft: "5px" }}
+                        >
+                          Urgent
+                        </Text>
+                      </Flex>
+                    )}
+                  </>
+                </Box>
+              </Flex>
+            </>
+          )}
+
+          {status !== MESURE_TYPE.WAITING && (
+            <Flex
+              textAlign="left"
+              sx={columnStyle(false, false)}
+              minWidth="130px"
+              maxWidth="130px"
+            >
+              <Text sx={labelStyle}>Decision du</Text>
+              <Text sx={descriptionStyle}>{dateNominationFormated || ""}</Text>
+            </Flex>
+          )}
+        </Flex>
       </Card>
     </>
   );
