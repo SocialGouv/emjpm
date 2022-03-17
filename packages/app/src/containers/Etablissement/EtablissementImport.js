@@ -127,10 +127,22 @@ export function EtablissementImport() {
             </Box>
             <Flex mt={4} justifyContent="space-between">
               <Box>
-                <Button type="submit">Enregister</Button>
+                <Button
+                  type="submit"
+                  title="Enregister"
+                  aria-label="Enregister"
+                >
+                  Enregister
+                </Button>
               </Box>
               <Box>
-                <Button onClick={runImportFiness}>Importer maintenant</Button>
+                <Button
+                  onClick={runImportFiness}
+                  title="Importer maintenant"
+                  aria-label="Importer maintenant"
+                >
+                  Importer maintenant
+                </Button>
               </Box>
             </Flex>
           </Box>

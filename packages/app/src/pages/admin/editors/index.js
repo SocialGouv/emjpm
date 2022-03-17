@@ -39,6 +39,8 @@ function AdminEditorsPage() {
                   <Button
                     width="120px"
                     onClick={() => history.push("/admin/editors/create")}
+                    title="Ajouter"
+                    aria-label="Ajouter"
                   >
                     Ajouter
                   </Button>

@@ -72,7 +72,11 @@ export default function AutoReload({
   };
   return (
     <div style={style}>
-      <button onClick={reloadApp}>
+      <button
+        onClick={reloadApp}
+        title="rechager la page"
+        aria-label="rechager la page"
+      >
         Un nouvelle version de l'application est disponible, veuillez cliquez
         ici pour rechager la page.
       </button>

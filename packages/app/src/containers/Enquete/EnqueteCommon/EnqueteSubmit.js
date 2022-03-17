@@ -150,6 +150,8 @@ export function EnqueteSubmit({
                       },
                     });
                   }}
+                  title="Envoyer mes réponses"
+                  aria-label="Envoyer mes réponses"
                 >
                   Envoyer mes réponses
                 </Button>

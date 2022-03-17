@@ -18,7 +18,12 @@ function ErrorBox(props) {
         <Text fontWeight="bold">{title}</Text>
         <Text mt={1}>{message}</Text>
       </Box>
-      <Button isLoading={isLoading} onClick={onClick}>
+      <Button
+        isLoading={isLoading}
+        onClick={onClick}
+        title={buttonText}
+        aria-label={buttonText}
+      >
         {buttonText}
       </Button>
     </Box>

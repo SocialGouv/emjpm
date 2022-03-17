@@ -40,6 +40,7 @@ export default function MesureImportDeleteAll() {
           mt="1"
           onClick={() => deleteAllMesures()}
           aria-describedby="delete-all-measures__note"
+          title="Supprimer toutes les mesures"
         >
           Supprimer toutes les mesures
         </Button>

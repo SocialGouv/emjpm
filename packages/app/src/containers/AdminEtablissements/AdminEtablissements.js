@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
 import { Context as AdminFilterContext } from "~/containers/FilterWidgets/context";
-import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { Button, Card } from "~/components";
 
@@ -41,9 +40,15 @@ function RowItem(props) {
             </Flex>
           </Box>
           <Box mr="1" width="120px">
-            <Link to={`/admin/etablissements/${id}`}>
-              <Button>Voir</Button>
-            </Link>
+            <Button
+              as="a"
+              type={null}
+              title="Voir l'établissement"
+              aria-label="Voir l'établissement"
+              href={`/admin/etablissements/${id}`}
+            >
+              Voir
+            </Button>
           </Box>
         </Flex>
       </Card>

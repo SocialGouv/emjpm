@@ -5,6 +5,7 @@ import { Flex } from "rebass";
 
 import useUser from "~/hooks/useUser";
 import MandataireListItem from "~/containers/GreffierMandatairesList/MandataireListItem";
+import capitalize from "~/utils/std/capitalize";
 
 import useQueryReady from "~/hooks/useQueryReady";
 import { SrOnly } from "~/components";
@@ -137,6 +138,20 @@ function GreffierMandatairesListList(props) {
             href={to}
             onClick={onItemClick}
             draggable="false"
+            title={
+              gestionnaire?.service?.etablissement
+                ? `Voir le service ${capitalize(
+                    gestionnaire.service.etablissement
+                  )}`
+                : `Voir le mandataire ${gestionnaire?.mandataire?.user?.nom} ${gestionnaire?.mandataire?.user?.prenom}`
+            }
+            aria-label={
+              gestionnaire?.service?.etablissement
+                ? `Voir le service ${capitalize(
+                    gestionnaire.service.etablissement
+                  )}`
+                : `Voir le mandataire ${gestionnaire?.mandataire?.user?.nom} ${gestionnaire?.mandataire?.user?.prenom}`
+            }
           >
             <MandataireListItem item={item} departementFilter={departement} />
           </a>

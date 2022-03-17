@@ -186,6 +186,8 @@ function Login(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Se connecter"
+                aria-label="Se connecter"
               >
                 Se connecter
               </Button>

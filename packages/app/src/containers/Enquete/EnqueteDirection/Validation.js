@@ -59,6 +59,8 @@ export default function EnqueteDirectionValidation({
                 onClick={() => validateEnqueteReponse()}
                 mx="auto"
                 mt={30}
+                title="Valider la réponse"
+                aria-label="Valider la réponse"
               >
                 Valider
               </Button>

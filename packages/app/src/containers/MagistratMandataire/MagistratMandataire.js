@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { Box, Flex, Text } from "rebass";
 
-import { Link } from "~/components/Link";
 import { MagistratMandataireComments } from "~/containers/MagistratMandataireComments";
 import { MagistratServiceAntennes } from "~/containers/MagistratServiceAntennes";
 import { Button, Heading } from "~/components";
@@ -83,12 +82,16 @@ export function MagistratMandataire(props) {
           {serviceId && <Heading size={2}>{etablissement}</Heading>}
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
-          <Link
-            to={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
+          <Button
+            as="a"
+            type={null}
+            href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
             id="reserver_mesure"
+            title="Réserver une mesure"
+            aria-label="Résérver une mesure"
           >
-            <Button>Réserver une mesure</Button>
-          </Link>
+            Réserver une mesure
+          </Button>
         </Flex>
 
         <Flex sx={MagistratMandataireStyle} flexDirection="column">

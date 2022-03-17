@@ -152,7 +152,11 @@ function GreffierMesure(props) {
                   )
                 }
               >
-                <Button variant="outline">
+                <Button
+                  variant="outline"
+                  title="Envoyer un email au mandataire à propos de cette mesure"
+                  aria-label="Envoyer un email au mandataire à propos de cette mesure"
+                >
                   <Text fontSize={1} fontWeight="normal">
                     Envoyer un email au mandataire à propos de cette mesure
                   </Text>

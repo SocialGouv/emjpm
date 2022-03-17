@@ -108,7 +108,13 @@ export function EnqueteCreate() {
           )}
         </div>
       </Field>
-      <Button type="submit">Créer</Button>
+      <Button
+        type="submit"
+        title="Créer une enquête"
+        aria-label="Créer une enquête"
+      >
+        Créer
+      </Button>
     </form>
   );
 }

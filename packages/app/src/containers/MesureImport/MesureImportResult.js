@@ -69,7 +69,13 @@ const MesureImportResult = ({
             </>
           )}
           {!invalidAntenneNames.length && (
-            <Button ml={2} variant="outline" onClick={reset}>
+            <Button
+              ml={2}
+              variant="outline"
+              onClick={reset}
+              title="Sélectionner un autre fichier"
+              aria-label="Sélectionner un autre fichier"
+            >
               Sélectionner un autre fichier
             </Button>
           )}

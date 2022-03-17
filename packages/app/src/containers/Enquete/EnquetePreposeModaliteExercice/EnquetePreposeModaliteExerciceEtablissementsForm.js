@@ -146,6 +146,8 @@ export function EnquetePreposeModaliteExerciceEtablissementsForm(props) {
                           type: "",
                         });
                       }}
+                      title="Ajouter un établissement"
+                      aria-label="Ajouter un établissement"
                     >
                       Ajouter un établissement
                     </Button>
