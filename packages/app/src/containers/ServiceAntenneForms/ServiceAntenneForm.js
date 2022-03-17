@@ -174,10 +174,10 @@ function ServiceAntenneForm(props) {
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
           <Button
+            type={null}
+            as="a"
+            href="/services/informations"
             variant="outline"
-            onClick={() => {
-              history.push("/services/informations");
-            }}
             title="Annuler la création d'antenne"
             aria-label="Annuler la création d'antenne"
           >

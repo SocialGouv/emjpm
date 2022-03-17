@@ -64,7 +64,14 @@ export function MesureDeleteForm(props) {
         </Box>
         <Flex justifyContent="flex-end">
           <Box>
-            <Button mr="2" variant="outline" onClick={handleCancel}>
+            <Button
+              mr="2"
+              variant="outline"
+              onClick={handleCancel}
+              role="link"
+              title="Annuler la suppression de la mesure"
+              aria-label="Annuler la suppression de la mesure"
+            >
               Annuler
             </Button>
           </Box>

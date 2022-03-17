@@ -227,12 +227,21 @@ export function AdminTribunalForm({ tribunal, onSubmit, onCancel }) {
               </Field>
               <Flex justifyContent="flex-end">
                 <Box>
-                  <Button mr="2" variant="outline" onClick={onCancel}>
+                  <Button
+                    role="link"
+                    mr="2"
+                    variant="outline"
+                    onClick={onCancel}
+                    title="Annuler la création d'un nouveau tribunal"
+                    aria-label="Annuler la création d'un nouveau tribunal"
+                  >
                     Annuler
                   </Button>
                 </Box>
                 <Box>
                   <Button
+                    tile="Enregistrer la création d'un nouveau tribunal"
+                    aria-label="Enregistrer la création d'un nouveau tribunal"
                     type="submit"
                     disabled={formik.isSubmitting}
                     isLoading={formik.isSubmitting}

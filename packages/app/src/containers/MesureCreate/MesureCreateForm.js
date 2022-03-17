@@ -320,7 +320,14 @@ export function MesureCreateForm(props) {
 
       <Flex justifyContent="flex-end" py={2}>
         <Box>
-          <Button mr="2" variant="outline" onClick={handleCancel}>
+          <Button
+            mr="2"
+            variant="outline"
+            onClick={handleCancel}
+            role="link"
+            title="Annuler la création de la mesure"
+            aria-label="Annuler la création de la mesure"
+          >
             Annuler
           </Button>
         </Box>
@@ -329,6 +336,8 @@ export function MesureCreateForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la création de la mesure"
+            aria-label="Enregistrer la création de la mesure"
           >
             Enregistrer
           </Button>

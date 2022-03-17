@@ -65,12 +65,13 @@ export function AdminUserDeleteForm(props) {
           <Flex justifyContent="flex-end">
             <Box>
               <Button
-                type="button"
+                type={null}
+                as="a"
+                href={`/admin/users/${userId}`}
                 mr="2"
                 variant="outline"
-                onClick={() => {
-                  history.push(`/admin/users/${userId}`);
-                }}
+                title="Annuler la suppression d'un utilisateur"
+                aria-label="Annuler la suppression d'un utilisateur"
               >
                 Annuler
               </Button>

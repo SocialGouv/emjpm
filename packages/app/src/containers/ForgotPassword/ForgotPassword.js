@@ -141,13 +141,21 @@ function ForgotPassword() {
           </Field>
           <Flex alignItems="center" justifyContent="flex-end">
             <Box mr="2">
-              <Link to="/login">Annuler</Link>
+              <Link
+                to="/login"
+                title="Annuler la demande de réinitialisation"
+                aria-label="Annuler la demande de réinitialisation"
+              >
+                Annuler
+              </Link>
             </Box>
             <Box>
               <Button
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Obtenir un lien de réinitialisation"
+                aria-label="Obtenir un lien de réinitialisation"
               >
                 Obtenir le lien de réinitialisation
               </Button>

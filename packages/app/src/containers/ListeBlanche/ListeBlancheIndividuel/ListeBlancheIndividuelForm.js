@@ -569,6 +569,16 @@ export function ListeBlancheIndividuelForm(props) {
               mr="2"
               variant="outline"
               onClick={handleCancel}
+              title={
+                editMode
+                  ? "Annuler la jour les informations du mandataire"
+                  : "Annuler l'enregistrement des informations du mandataire"
+              }
+              aria-label={
+                editMode
+                  ? "Annuler la jour les informations du mandataire"
+                  : "Annuler l'enregistrement des informations du mandataire"
+              }
             >
               Annuler
             </Button>
@@ -579,6 +589,16 @@ export function ListeBlancheIndividuelForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title={
+              editMode
+                ? "Mettre à jour les informations du mandataire"
+                : "Enregistrer les informations du mandataire"
+            }
+            aria-label={
+              editMode
+                ? "Mettre à jour les informations du mandataire"
+                : "Enregistrer les informations du mandataire"
+            }
           >
             {editMode ? "Mettre à jour" : "Enregistrer"}
           </Button>

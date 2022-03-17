@@ -144,10 +144,15 @@ export function MesureRessourceCreateOrEditForm(props) {
           <Box>
             <Button
               mr="2"
+              role="link"
               variant="outline"
               onClick={handleCancel}
-              title="Annuler la nouvelle ressource"
               title={
+                mesureRessourceToEdit
+                  ? "Annuler la la modification de la ressource"
+                  : "Annuler la nouvelle ressource"
+              }
+              aria-label={
                 mesureRessourceToEdit
                   ? "Annuler la la modification de la ressource"
                   : "Annuler la nouvelle ressource"
@@ -162,6 +167,11 @@ export function MesureRessourceCreateOrEditForm(props) {
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
               title={
+                mesureRessourceToEdit
+                  ? "Enregistrer la modification de la ressource"
+                  : "Enregistrer la nouvelle ressource"
+              }
+              aria-label={
                 mesureRessourceToEdit
                   ? "Enregistrer la modification de la ressource"
                   : "Enregistrer la nouvelle ressource"

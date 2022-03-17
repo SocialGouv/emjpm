@@ -7,7 +7,6 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/components/Link";
 import { directionEditSchema } from "~/validation-schemas/directionEditSchema";
 import { Button, Heading, Text, SrOnly } from "~/components";
 
@@ -72,13 +71,16 @@ function DirectionEditInformationsForm({ user, handleSubmit, cancelLink }) {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link
-            to={cancelLink}
+          <Button
             title="Annuler la modification de vos informations"
             aria-label="Annuler la modification de vos informations"
+            as="a"
+            href={cancelLink}
+            type={null}
+            variant="outline"
           >
-            <Button variant="outline">Annuler</Button>
-          </Link>
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button

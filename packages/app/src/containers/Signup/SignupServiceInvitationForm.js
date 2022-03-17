@@ -8,7 +8,6 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/components/Link";
 import { signupSchema } from "~/validation-schemas";
 import { Button, Heading, Text, SrOnly } from "~/components";
 import { GENDER_OPTIONS } from "~/constants/user";
@@ -128,15 +127,17 @@ export function SignupServiceInvitationForm(props) {
       </Flex>
       <Flex justifyContent="flex-end" p={1}>
         <Box>
-          <Link
-            to="/"
+          <Button
+            mr="2"
+            variant="outline"
             aria-label="Annuler la création de votre compte"
             title="Annuler la création de votre compte"
+            href="/"
+            type={null}
+            as="a"
           >
-            <Button mr="2" variant="outline">
-              Annuler
-            </Button>
-          </Link>
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button
@@ -144,7 +145,7 @@ export function SignupServiceInvitationForm(props) {
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
             aria-label="Aller à la page suivante"
-            title="Suivant"
+            title="Aller à la page suivante"
           >
             Suivant
           </Button>

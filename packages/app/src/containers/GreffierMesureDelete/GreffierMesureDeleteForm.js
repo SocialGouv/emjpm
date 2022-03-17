@@ -101,12 +101,15 @@ export function GreffierMesureDeleteForm(props) {
           <Flex justifyContent="flex-end">
             <Box>
               <Button
+                role="link"
                 type="button"
                 mr="2"
                 variant="outline"
                 onClick={() => {
                   history.push(`/greffiers/mesures/${mesure.id}`);
                 }}
+                title="Annuler la suppression de la mesure"
+                aria-label="Annuler la supression de la mesure"
               >
                 Annuler
               </Button>
@@ -116,6 +119,8 @@ export function GreffierMesureDeleteForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Supprimer la mesure"
+                aria-label="Supprimer la mesure"
               >
                 Supprimer la mesure
               </Button>

@@ -9,7 +9,6 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/components/Link";
 import { signupServiceSchema } from "~/validation-schemas";
 import { AccessibleSelect, Button, Heading, Text, SrOnly } from "~/components";
 import { toOptions, findOptions } from "~/utils/form";
@@ -134,15 +133,17 @@ function SignupServiceForm({ serviceDatas }) {
         </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link
-              to="/"
+            <Button
+              mr="2"
+              variant="outline"
+              as="a"
+              type={null}
               aria-label="Annuler la création de votre compte"
               title="Annuler la création de votre compte"
+              href="/"
             >
-              <Button mr="2" variant="outline">
-                Annuler
-              </Button>
-            </Link>
+              Annuler
+            </Button>
           </Box>
           <Box>
             <Button
