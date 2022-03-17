@@ -172,7 +172,13 @@ function MandataireOcmiMesureImportSwitcher({
             </Text>
           )}
           <Flex justifyContent="center">
-            <Button onClick={importMesuresNow}>Importer maintenant</Button>
+            <Button
+              onClick={importMesuresNow}
+              title="Importer maintenant"
+              aria-label="Importer maintenant"
+            >
+              Importer maintenant
+            </Button>
           </Flex>
         </Box>
       </Box>

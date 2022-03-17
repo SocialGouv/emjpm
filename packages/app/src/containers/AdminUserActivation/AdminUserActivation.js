@@ -4,7 +4,6 @@ import { useCallback } from "react";
 import { Box, Flex } from "rebass";
 
 import { FormGrayBox, FormInputBox } from "~/components/AppForm";
-import { Link } from "~/containers/Commons";
 import { Button, Heading, Text } from "~/components";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
@@ -124,17 +123,24 @@ function AdminUserActivation(props) {
                 bg={activateButtonStyle}
                 onClick={toggleActivation}
                 isLoading={activateUserLoading}
+                aria-label={`${activateButtonText} l'utilisateur`}
+                title={`${activateButtonText} l'utilisateur`}
               >
                 {activateButtonText}
               </Button>
             </Box>
             {!active && (
               <Box>
-                <Link to={`/admin/users/${userId}/delete`}>
-                  <Button mr={2} bg={"red"} title="Supprimer cet utilisateur">
-                    {"Supprimer cet utilisateur"}
-                  </Button>
-                </Link>
+                <Button
+                  mr={2}
+                  bg={"red"}
+                  title="Supprimer cet utilisateur"
+                  as="a"
+                  type={null}
+                  href={`/admin/users/${userId}/delete`}
+                >
+                  {"Supprimer cet utilisateur"}
+                </Button>
               </Box>
             )}
           </Box>

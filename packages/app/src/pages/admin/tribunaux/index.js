@@ -47,6 +47,8 @@ function AdminTribunauxPage() {
                     onClick={() =>
                       history.push("/admin/tribunaux/add-tribunal")
                     }
+                    title="Ajouter"
+                    aria-label="Ajouter"
                   >
                     Ajouter
                   </Button>

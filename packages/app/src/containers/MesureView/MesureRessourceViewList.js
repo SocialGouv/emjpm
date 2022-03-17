@@ -104,6 +104,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
             }}
             {...mesureModificationButtonProps}
             title="Ajouter une ressource"
+            aria-label="Ajouter une ressource"
           >
             Ajouter une ressource
           </Button>

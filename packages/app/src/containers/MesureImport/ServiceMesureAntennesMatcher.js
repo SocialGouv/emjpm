@@ -86,11 +86,25 @@ function ServiceMesureAntennesMatcher({
             </Box>
           </Flex>
         ))}
-        <Button type="submit" mt={4} mb={1} mr={5}>
+        <Button
+          type="submit"
+          mt={4}
+          mb={1}
+          mr={5}
+          title="Importez les mesures"
+          aria-label="Importez les mesures"
+        >
           {"Importez les mesures"}
         </Button>
         ou
-        <Button variant="outline" mt={4} onClick={reset} ml={5}>
+        <Button
+          variant="outline"
+          mt={4}
+          onClick={reset}
+          ml={5}
+          title="Sélectionner un autre fichier"
+          aria-label="Sélectionner un autre fichier"
+        >
           Sélectionner un autre fichier
         </Button>
       </Box>

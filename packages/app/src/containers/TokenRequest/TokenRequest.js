@@ -150,6 +150,8 @@ function TokenRequest() {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Demander une autorisation d'accès"
+                aria-label="Demander une autorisation d'accès"
               >
                 {"Demander une autorisation d'accès"}
               </Button>

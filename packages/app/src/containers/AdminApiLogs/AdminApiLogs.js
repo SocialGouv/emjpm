@@ -4,7 +4,6 @@ import { stdFormatter } from "@emjpm/biz";
 
 import { Box, Flex } from "rebass";
 
-import { Link } from "~/components/Link";
 import { PaginatedList } from "~/containers/PaginatedList";
 import { useDebounce } from "~/hooks";
 import useQueryReady from "~/hooks/useQueryReady";
@@ -85,9 +84,15 @@ function RowItem({ item }) {
             width: 200,
           }}
         >
-          <Link to={`/admin/api-logs/${id}`}>
-            <Button>Voir</Button>
-          </Link>
+          <Button
+            as="a"
+            type={null}
+            href={`/admin/api-logs/${id}`}
+            title="Voir les logs"
+            aria-label="Voir les logs"
+          >
+            Voir
+          </Button>
         </Flex>
       </Flex>
     </>

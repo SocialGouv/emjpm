@@ -3,7 +3,6 @@ import { Box, Flex, Text } from "rebass";
 
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
-import { Link } from "~/components/Link";
 import useUser from "~/hooks/useUser";
 import { Button, Heading } from "~/components";
 
@@ -103,9 +102,16 @@ function MandataireInformations() {
       </Flex>
       <Flex mt="5" justifyContent="center">
         <Box>
-          <Link to="/mandataires/edit-password">
-            <Button variant="outline">Modifier votre mot de passe</Button>
-          </Link>
+          <Button
+            variant="outline"
+            as="a"
+            type={null}
+            href="/mandataires/edit-password"
+            title="Modifier mon mot de passe"
+            aria-label="Modifier mon mot de passe"
+          >
+            Modifier votre mot de passe
+          </Button>
         </Box>
         <Box ml={1}>
           <LinkButton to="/mandataires/edit-informations">

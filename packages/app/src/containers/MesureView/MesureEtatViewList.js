@@ -92,6 +92,7 @@ function MesureEtatViewList({ mesure, ...props }) {
             }}
             {...mesureModificationButtonProps}
             title="Ajouter un changement"
+            aria-label="Ajouter un changement"
           >
             Ajouter un changement
           </Button>

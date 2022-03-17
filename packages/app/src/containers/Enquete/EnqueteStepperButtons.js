@@ -15,6 +15,8 @@ export function EnqueteStepperButtons(props) {
               }
             }}
             variant="outline"
+            title="Précédent"
+            aria-label="Précédent"
           >
             Précédent
           </Button>
@@ -27,6 +29,8 @@ export function EnqueteStepperButtons(props) {
               }
             }}
             ml={4}
+            title="Suivant"
+            aria-label="Suivant"
           >
             Suivant
           </Button>

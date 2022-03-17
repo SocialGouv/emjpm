@@ -157,6 +157,8 @@ function AuthorizationLogin() {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                ariaLabel="Se connecter"
+                title="Se connecter"
               >
                 Se connecter
               </Button>

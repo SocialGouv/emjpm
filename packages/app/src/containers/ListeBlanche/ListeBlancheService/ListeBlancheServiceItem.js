@@ -1,6 +1,7 @@
 import { Flex } from "rebass";
 
 import { Card, Text } from "~/components";
+import capitalize from "~/utils/std/capitalize";
 
 import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "../style";
 
@@ -12,7 +13,17 @@ export function ListeBlancheServiceItem(props) {
   const { service } = item;
 
   return (
-    <Card key={service.id} sx={cardStyle({ clickable: !!onClick })} mb="2">
+    <Card
+      key={service.id}
+      sx={cardStyle({ clickable: !!onClick })}
+      mb="2"
+      title={`Service ${
+        service?.etablissement ? capitalize(service.etablissement) : ""
+      }`}
+      aria-label={`Service ${
+        service?.etablissement ? capitalize(service.etablissement) : ""
+      }`}
+    >
       <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
         <Flex justifyContent="flex-start">
           <Flex width="25%" flexDirection="column">

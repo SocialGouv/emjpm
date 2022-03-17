@@ -11,6 +11,7 @@ const StyledClearIndicatorSvg = styled(ClearIndicatorSvg)`
 
 const CustomClearText = () => (
   <button
+    title="Supprimer tous les éléments"
     aria-label="Supprimer tous les éléments"
     style={{
       background: "none",

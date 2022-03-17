@@ -6,7 +6,6 @@ import { Box, Flex, Text } from "rebass";
 import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
-import { Link } from "~/components/Link";
 import { Button, Heading } from "~/components";
 
 import { GET_SERVICES } from "./queries";
@@ -161,12 +160,22 @@ function ServiceInformations() {
         </Box>
         <Flex mt="5" justifyContent="center">
           <Box>
-            <Link to="/services/edit-password">
-              <Button variant="outline">Modifier votre mot de passe</Button>
-            </Link>
+            <Button
+              variant="outline"
+              as="a"
+              href="/services/edit-password"
+              title=" Modifier votre mot de passe"
+              aria-label="Modifier votre mot de passe"
+            >
+              Modifier votre mot de passe
+            </Button>
           </Box>
           <Box ml={1}>
-            <LinkButton to="/services/edit-informations">
+            <LinkButton
+              to="/services/edit-informations"
+              aria-label="Modifier les informations"
+              title="Modifier les informations"
+            >
               Modifier les informations
             </LinkButton>
           </Box>

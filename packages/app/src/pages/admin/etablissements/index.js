@@ -37,6 +37,7 @@ function AdminEtablissementsPage() {
                 </Box>
                 <Box>
                   <Button
+                    role="link"
                     onClick={() => history.push("/admin/etablissements/config")}
                     style={{
                       backgroundColor: "white",

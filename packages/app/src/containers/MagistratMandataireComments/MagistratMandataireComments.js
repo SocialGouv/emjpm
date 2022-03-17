@@ -69,6 +69,8 @@ function MagistratMandataireComments(props) {
                 onClick={() => {
                   toggleCommentForm(true);
                 }}
+                title="Ajouter une observation"
+                aria-label="Ajouter une observation"
               >
                 Ajouter une observation
               </Button>

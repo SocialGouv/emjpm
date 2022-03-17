@@ -154,7 +154,7 @@ function SignupServiceForm({ serviceDatas }) {
                 validateStepOne(false);
               }}
               aria-label="Retour à la page précédente"
-              title="Retour"
+              title="Retour à la page précédente"
             >
               Retour
             </Button>
