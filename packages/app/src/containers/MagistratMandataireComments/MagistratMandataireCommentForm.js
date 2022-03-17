@@ -87,6 +87,7 @@ export function MagistratMandataireCommentForm(props) {
         <Flex justifyContent="flex-end">
           <Box>
             <Button
+              role="link"
               mr="2"
               variant="outline"
               onClick={() => {
@@ -96,6 +97,8 @@ export function MagistratMandataireCommentForm(props) {
                   toggleCommentForm(false);
                 }
               }}
+              title="Annuler l'enregistrement des observations"
+              aria-label="Annuler l'enregistrement des observations"
             >
               Annuler
             </Button>
@@ -105,6 +108,8 @@ export function MagistratMandataireCommentForm(props) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              title="Enregistrer les observations"
+              aria-label="Enregistrer les observations"
             >
               Enregistrer
             </Button>

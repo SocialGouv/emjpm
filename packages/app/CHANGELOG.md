@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.153.0](https://github.com/SocialGouv/emjpm/compare/v25.152.5...v25.153.0) (2022-03-16)
+
+
+### Bug Fixes
+
+* **rgaa:** add ariaLabels to all form fields ([#2827](https://github.com/SocialGouv/emjpm/issues/2827)) ([721f0c7](https://github.com/SocialGouv/emjpm/commit/721f0c7609c25db0379ab388857bac18bd815ecb))
+* **rgaa:** add htmlFor to input component ([#2826](https://github.com/SocialGouv/emjpm/issues/2826)) ([c906f0b](https://github.com/SocialGouv/emjpm/commit/c906f0bb91ce8c9566987cd77ce0032296de3a05))
+* **rgaa:** add instructions on form  ([#2823](https://github.com/SocialGouv/emjpm/issues/2823)) ([dedbabf](https://github.com/SocialGouv/emjpm/commit/dedbabfafeceb7e3164513024d200c8046540fe6))
+* **rgaa:** add suggestions when error occured ([#2825](https://github.com/SocialGouv/emjpm/issues/2825)) ([f4c436d](https://github.com/SocialGouv/emjpm/commit/f4c436d581371dc122866ed81af6ef39d9df9a29))
+
+
+
+
+
 ## [25.152.5](https://github.com/SocialGouv/emjpm/compare/v25.152.4...v25.152.5) (2022-03-11)
 
 

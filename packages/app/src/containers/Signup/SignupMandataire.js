@@ -212,8 +212,10 @@ function SignupMandataireForm() {
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">
             <Button
+              type={null}
+              as="a"
+              href="/"
               variant="outline"
-              onClick={() => history.push("/")}
               aria-label="Annuler la création de votre compte"
               title="Annuler la création de votre compte"
             >
@@ -228,7 +230,7 @@ function SignupMandataireForm() {
                 validateStepOne(false);
               }}
               aria-label="Retour à la page précédente"
-              title="Retour"
+              title="Retour à la page précédente"
             >
               Retour
             </Button>

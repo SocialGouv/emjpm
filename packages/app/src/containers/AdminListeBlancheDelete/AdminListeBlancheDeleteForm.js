@@ -67,12 +67,13 @@ export function AdminListeBlancheDeleteForm(props) {
           <Flex justifyContent="flex-end">
             <Box>
               <Button
-                type="button"
+                type={null}
+                as="a"
                 mr="2"
+                href={`/admin/liste-blanche/${listeBlancheId}`}
                 variant="outline"
-                onClick={() => {
-                  history.push(`/admin/liste-blanche/${listeBlancheId}`);
-                }}
+                title="Annuler la suppression d'un mandataire"
+                aria-label="Annuler la suppression d'un mandataire"
               >
                 Annuler
               </Button>
@@ -83,6 +84,7 @@ export function AdminListeBlancheDeleteForm(props) {
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
                 aria-describedby="supprimer_mandataire_note"
+                title="Supprimer le mandataire"
               >
                 {"Supprimer le mandataire"}
               </Button>

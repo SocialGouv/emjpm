@@ -195,6 +195,7 @@ export function MagistratMesureAddForm(props) {
       <Flex justifyContent="flex-end" py={2}>
         <Box>
           <Button
+            role="link"
             mr="2"
             variant="outline"
             onClick={() => {
@@ -202,6 +203,8 @@ export function MagistratMesureAddForm(props) {
                 history.push(cancelActionRoute.to);
               }
             }}
+            title="Annuler l'enregistrement de la réservation de la mesure"
+            aria-label="Annuler l'enregistrement de la réservation de la mesure"
           >
             Annuler
           </Button>
@@ -211,6 +214,8 @@ export function MagistratMesureAddForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer la réservation de la mesure"
+            aria-label="Enregistrer la réservation de la mesure"
           >
             Enregistrer
           </Button>

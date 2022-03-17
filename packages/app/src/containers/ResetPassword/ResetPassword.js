@@ -189,13 +189,21 @@ function ResetPassword(props) {
                   </Box>
                   <Flex alignItems="center" justifyContent="flex-end">
                     <Box mr="2">
-                      <Link to="/login">Annuler</Link>
+                      <Link
+                        to="/login"
+                        title="Annuler l'enregistrement de mon nouveau mot de passe"
+                        aria-label="Annuler l'enregistrement de mon nouveau mot de passe"
+                      >
+                        Annuler
+                      </Link>
                     </Box>
                     <Box>
                       <Button
                         type="submit"
                         disabled={isSubmitting}
                         isLoading={isSubmitting}
+                        title="Enregistrer mon nouveau mot de passe"
+                        aria-label="Enregistrer mon nouveau mot de passe"
                       >
                         Enregistrer mon nouveau mot de passe
                       </Button>

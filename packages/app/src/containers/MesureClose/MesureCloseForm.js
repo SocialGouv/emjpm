@@ -88,7 +88,14 @@ export function MesureCloseForm(props) {
           />
           <Flex justifyContent="flex-end">
             <Box>
-              <Button mr="2" variant="outline" onClick={handleCancel}>
+              <Button
+                mr="2"
+                variant="outline"
+                onClick={handleCancel}
+                role="link"
+                title="Annuler la fermeture de la mesure"
+                aria-label="Annuler la fermeture de la mesure"
+              >
                 Annuler
               </Button>
             </Box>
@@ -97,6 +104,8 @@ export function MesureCloseForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
+                title="Confirmer la fin du mandat"
+                aria-label="Confirmer la fin du mandat"
               >
                 Confirmer la fin du mandat
               </Button>

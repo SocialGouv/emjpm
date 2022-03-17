@@ -9,7 +9,6 @@ import {
   FormInputBox,
   FormGroupSelect,
 } from "~/components/AppForm";
-import { Link } from "~/containers/Commons";
 import { adminUserServiceSchema } from "~/validation-schemas";
 import { Geocode, geocodeInitialValue } from "~/components/Geocode";
 import {
@@ -401,13 +400,16 @@ function AdminUserServiceForm(props) {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link
-            to={cancelLink}
+          <Button
+            type={null}
+            href={cancelLink}
+            as="a"
+            variant="outline"
             title="Annuler la modification de vos informations"
             aria-label="Annuler la modification de vos informations"
           >
-            <Button variant="outline">Annuler</Button>
-          </Link>
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button

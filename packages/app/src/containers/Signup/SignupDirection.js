@@ -11,7 +11,6 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { Link } from "~/components/Link";
 import { signupDirectionSchema } from "~/validation-schemas";
 import { Button, Heading, Text, SrOnly } from "~/components";
 import { useDepartementsOptions } from "~/utils/departements";
@@ -130,15 +129,17 @@ export function SignupDirection() {
 
         <Flex justifyContent="flex-end" p={1}>
           <Box>
-            <Link
-              to="/"
+            <Button
+              mr="2"
+              variant="outline"
               aria-label="Annuler la création de votre compte"
               title="Annuler la création de votre compte"
+              as="a"
+              type={null}
+              href="/"
             >
-              <Button mr="2" variant="outline">
-                Annuler
-              </Button>
-            </Link>
+              Annuler
+            </Button>
           </Box>
           <Box>
             <Button
@@ -148,7 +149,7 @@ export function SignupDirection() {
                 validateStepOne(false);
               }}
               aria-label="Retour à la page précédente"
-              title="Retour"
+              title="Retour à la page précédente"
             >
               Retour
             </Button>

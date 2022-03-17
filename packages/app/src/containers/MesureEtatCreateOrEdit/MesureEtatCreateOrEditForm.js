@@ -235,10 +235,16 @@ export function MesureEtatCreateOrEditForm(props) {
         <Flex justifyContent="flex-end">
           <Box>
             <Button
+              role="link"
               mr="2"
               variant="outline"
               onClick={handleCancel}
               title={
+                mesureEtatToEdit
+                  ? "Annuler la modification de l'état"
+                  : "Annuler le nouvel état"
+              }
+              aria-label={
                 mesureEtatToEdit
                   ? "Annuler la modification de l'état"
                   : "Annuler le nouvel état"
@@ -253,6 +259,11 @@ export function MesureEtatCreateOrEditForm(props) {
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
               title={
+                mesureEtatToEdit
+                  ? "Enregistrer la modification de l'état"
+                  : "Enregistrer le nouvel état"
+              }
+              aria-label={
                 mesureEtatToEdit
                   ? "Enregistrer la modification de l'état"
                   : "Enregistrer le nouvel état"

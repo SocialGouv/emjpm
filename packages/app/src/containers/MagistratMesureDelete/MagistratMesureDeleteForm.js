@@ -102,18 +102,21 @@ export function MagistratMesureDeleteForm(props) {
           <Flex justifyContent="flex-end">
             <Box>
               <Button
-                type="button"
+                as="a"
+                type={null}
+                href={`/magistrats/mesures/${mesure.id}`}
                 mr="2"
                 variant="outline"
-                onClick={() => {
-                  history.push(`/magistrats/mesures/${mesure.id}`);
-                }}
+                aria-label="Annuler la suppression de la mesure"
+                title="Annuler la suppression de la mesure"
               >
                 Annuler
               </Button>
             </Box>
             <Box>
               <Button
+                title="Enregistrer la suppression de la mesure"
+                aria-label="Enregistrer la suppression de la mesure"
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}

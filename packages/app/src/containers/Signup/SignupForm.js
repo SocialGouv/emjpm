@@ -199,11 +199,11 @@ export function SignupForm() {
         <Flex justifyContent="flex-end" p={1}>
           <Box>
             <Button
+              type={null}
+              as="a"
+              href="/"
               mr="2"
               variant="outline"
-              onClick={() => {
-                history.push("/");
-              }}
               aria-label="Annuler la création de votre compte"
               title="Annuler la création de votre compte"
             >
@@ -216,7 +216,7 @@ export function SignupForm() {
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
               aria-label="Aller à la page suivante"
-              title="Suivant"
+              title="Aller à la page suivante"
             >
               Suivant
             </Button>
