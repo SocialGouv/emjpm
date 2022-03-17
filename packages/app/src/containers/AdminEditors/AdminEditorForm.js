@@ -80,22 +80,24 @@ export function AdminEditorForm(props) {
             </Field>
             <Flex justifyContent="flex-end">
               {handleCancel && (
-                <Box>
-                  <Button
-                    type="button"
-                    mr="2"
-                    variant="outline"
-                    onClick={handleCancel}
-                  >
-                    Annuler
-                  </Button>
-                </Box>
+                <Button
+                  type="button"
+                  mr="2"
+                  variant="outline"
+                  onClick={handleCancel}
+                  title="Annuler la création d'un éditeur"
+                  aria-label="Annuler la création d'un éditeur"
+                >
+                  Annuler
+                </Button>
               )}
               <Box>
                 <Button
                   type="submit"
                   disabled={formik.isSubmitting}
                   isLoading={formik.isSubmitting}
+                  title="Enregister la création d'un éditeur"
+                  aria-label="Enregister la création d'un éditeur"
                 >
                   Enregistrer
                 </Button>

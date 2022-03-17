@@ -19,12 +19,25 @@ export function MesureReactivateForm(props) {
       </Box>
       <Flex justifyContent="flex-end">
         <Box>
-          <Button mr="2" variant="outline" onClick={handleCancel}>
+          <Button
+            mr="2"
+            variant="outline"
+            onClick={handleCancel}
+            role="link"
+            title="Annuler la réouverture"
+            aria-label="Annuler la réouverture"
+          >
             Annuler
           </Button>
         </Box>
         <Box>
-          <Button onClick={handleSubmit}>Rouvrir la mesure</Button>
+          <Button
+            onClick={handleSubmit}
+            title="Rouvrir la mesure"
+            aria-label="Rouvrir la mesure"
+          >
+            Rouvrir la mesure
+          </Button>
         </Box>
       </Flex>
     </Box>

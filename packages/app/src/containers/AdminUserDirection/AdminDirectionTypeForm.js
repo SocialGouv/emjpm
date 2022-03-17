@@ -7,7 +7,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/components/Link";
+
 import yup from "~/validation-schemas/yup";
 import { Button, Heading, SrOnly } from "~/components";
 
@@ -124,12 +124,21 @@ export function AdminDirectionTypeForm(props) {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link to={"/admin/users"}>
-            <Button variant="outline">Annuler</Button>
-          </Link>
+          <Button
+            as="a"
+            type={null}
+            href="/admin/users"
+            variant="outline"
+            aria-label="Annuler l'enregistement le type de direction"
+            title="Annuler l'enregistement le type de direction"
+          >
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button
+            title="Enregistrer le type de direction"
+            aria-label="Enregistrer le type de direction"
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}

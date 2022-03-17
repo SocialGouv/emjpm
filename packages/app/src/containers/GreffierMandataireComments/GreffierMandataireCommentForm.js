@@ -95,6 +95,8 @@ export function GreffierMandataireCommentForm(props) {
                   toggleCommentForm(false);
                 }
               }}
+              title="Annuler l'enregistrement d'une observation"
+              aria-label="Annuler l'enregistrement d'une observation"
             >
               Annuler
             </Button>
@@ -104,6 +106,8 @@ export function GreffierMandataireCommentForm(props) {
               type="submit"
               disabled={formik.isSubmitting}
               isLoading={formik.isSubmitting}
+              title="Enregistrer une observation"
+              aria-label="Enregistrer une observation"
             >
               Enregistrer
             </Button>

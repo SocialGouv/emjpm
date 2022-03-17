@@ -174,12 +174,21 @@ export function MesureAcceptForm(props) {
 
           <Flex justifyContent="flex-end">
             <Box>
-              <Button mr="2" variant="outline" onClick={handleCancel}>
+              <Button
+                mr="2"
+                variant="outline"
+                title="Annuler l'acceptation de la mesure"
+                aria-label="Annuler l'acceptation de la mesure"
+                onClick={handleCancel}
+                role="link"
+              >
                 Annuler
               </Button>
             </Box>
             <Box>
               <Button
+                title="Accepter la mesure"
+                aria-label="Accepter la mesure"
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}

@@ -7,7 +7,6 @@ import {
   FormGroupInput,
   FormInputBox,
 } from "~/components/AppForm";
-import { Link } from "~/components/Link";
 import { adminEditSchema } from "~/validation-schemas/adminEditSchema";
 import { Button, Heading, Text, SrOnly } from "~/components";
 
@@ -74,15 +73,16 @@ function AdminEditInformationsForm({ user, handleSubmit, cancelLink }) {
       </Flex>
       <Flex p={2} alignItems="center" justifyContent="flex-end">
         <Box mr="2">
-          <Link to={cancelLink}>
-            <Button
-              variant="outline"
-              title="Annuler la modification de vos informations"
-              aria-label="Annuler la modification de vos informations"
-            >
-              Annuler
-            </Button>
-          </Link>
+          <Button
+            type={null}
+            as="a"
+            href={cancelLink}
+            variant="outline"
+            title="Annuler la modification de vos informations"
+            aria-label="Annuler la modification de vos informations"
+          >
+            Annuler
+          </Button>
         </Box>
         <Box>
           <Button

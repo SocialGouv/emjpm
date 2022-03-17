@@ -3,7 +3,6 @@ import { useHistory } from "react-router-dom";
 import { Box, Flex } from "rebass";
 import fetch from "unfetch";
 
-import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import config from "~/config";
 import { PATH } from "~/constants/basePath";
@@ -179,13 +178,15 @@ function EditPassword() {
               </Box>
               <Flex alignItems="center" justifyContent="flex-end">
                 <Box mr="2">
-                  <Link
-                    to={`${PATH[type]}/informations`}
+                  <Button
+                    as="a"
+                    type={null}
+                    href={`${PATH[type]}/informations`}
                     title="Annuler la modification de votre mot de passe"
                     aria-label="Annuler la modification de votre mot de passe"
                   >
                     Annuler
-                  </Link>
+                  </Button>
                 </Box>
                 <Box>
                   <Button

@@ -597,7 +597,14 @@ export function ListeBlancheServiceForm(props) {
       <Flex justifyContent="flex-end" p={1}>
         {handleCancel && (
           <Box>
-            <Button mr="2" variant="outline" onClick={handleCancel}>
+            <Button
+              role="link"
+              mr="2"
+              variant="outline"
+              onClick={handleCancel}
+              title="Annuler l'enregistrement des informations du service"
+              aria-label="Annuler l'enregistrement des informations du service"
+            >
               Annuler
             </Button>
           </Box>
@@ -607,6 +614,8 @@ export function ListeBlancheServiceForm(props) {
             type="submit"
             disabled={formik.isSubmitting}
             isLoading={formik.isSubmitting}
+            title="Enregistrer les informations du service"
+            aria-label="Enregistrer les informations du service"
           >
             Enregistrer
           </Button>

@@ -43,10 +43,20 @@ export function EnqueteConfirmExitInvalidFormDialog({
               {"Si vous quittez la page, vos modifications seront perdues."}
             </Heading>
             <Flex justifyContent="flex-end" mt={50} mb={30}>
-              <Button variant="primary" onClick={onCancel}>
+              <Button
+                variant="primary"
+                onClick={onCancel}
+                title="Corriger le formulaire"
+                aria-label="Corriger le formulaire"
+              >
                 Corriger le formulaire
               </Button>
-              <Button variant="outline" onClick={() => onConfirm()}>
+              <Button
+                variant="outline"
+                onClick={() => onConfirm()}
+                title="Annuler les modification et quitter"
+                aria-label="Annuler les modification et quitter"
+              >
                 Annuler mes modifications et quitter
               </Button>
             </Flex>
