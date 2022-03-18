@@ -38,13 +38,21 @@ function GreffierInformations(props) {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton to="/greffiers/edit-informations">
+            <LinkButton
+              to="/greffiers/edit-informations"
+              title="Modifier vos informations"
+              aria-label="Modifier vos informations"
+            >
               Modifier vos informations
             </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton to="/greffiers/edit-password">
+          <LinkButton
+            to="/greffiers/edit-password"
+            title="Modifier votre mot de passe"
+            aria-label="Modifier votre mot de passe"
+          >
             Modifier votre mot de passe
           </LinkButton>
         </Flex>

@@ -23,7 +23,11 @@ function DirectionEnquetesPage() {
             <Heading size={2}>Enquêtes</Heading>
             {isDirectionNationale(user) && (
               <Box>
-                <LinkButton to="/direction/enquetes/create">
+                <LinkButton
+                  to="/direction/enquetes/create"
+                  title="Ajouter une enquête"
+                  aria-label="Ajouter une enquête"
+                >
                   Ajouter une enquête
                 </LinkButton>
               </Box>

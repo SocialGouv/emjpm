@@ -47,7 +47,13 @@ function LoginCreateAccount() {
           OU
         </Text>
       </LineBox>
-      <LinkButton px="5" py="3" to="/signup">
+      <LinkButton
+        px="5"
+        py="3"
+        to="/signup"
+        title="Créer votre compte e-MJPM"
+        aria-label="Créer votre compte e-MJPM"
+      >
         Créer votre compte e-MJPM
       </LinkButton>
     </Flex>

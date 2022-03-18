@@ -29,7 +29,12 @@ function ServiceAntennes(props) {
           <Heading size={2}>Antennes</Heading>
           {!isAntenneCreationHidden && (
             <Box>
-              <LinkButton to="/services/antennes/create" ml="1">
+              <LinkButton
+                to="/services/antennes/create"
+                ml="1"
+                title="Créer une antenne"
+                aria-label="Créer une antenne"
+              >
                 Créer une antenne
               </LinkButton>
             </Box>

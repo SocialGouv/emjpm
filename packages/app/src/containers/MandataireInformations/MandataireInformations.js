@@ -114,7 +114,11 @@ function MandataireInformations() {
           </Button>
         </Box>
         <Box ml={1}>
-          <LinkButton to="/mandataires/edit-informations">
+          <LinkButton
+            to="/mandataires/edit-informations"
+            title=" Modifier vos informations"
+            aria-label="Modifier vos informations"
+          >
             Modifier vos informations
           </LinkButton>
         </Box>

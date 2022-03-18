@@ -41,13 +41,21 @@ function DirectionInformations(props) {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton to="/direction/edit-informations">
+            <LinkButton
+              to="/direction/edit-informations"
+              title="Modifier vos informations"
+              aria-label="Modifier vos informations"
+            >
               Modifier vos informations
             </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton to="/direction/edit-password">
+          <LinkButton
+            to="/direction/edit-password"
+            title="Modifier votre mot de passe"
+            aria-label="Modifier votre mot de passe"
+          >
             Modifier votre mot de passe
           </LinkButton>
         </Flex>

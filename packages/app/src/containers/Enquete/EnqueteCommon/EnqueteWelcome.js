@@ -80,6 +80,8 @@ export function EnqueteWelcome({
           mt={4}
           to={`${pathPrefix}/${enqueteId}/import`}
           outline
+          title="Importez votre enquête"
+          aria-label="Importez votre enquête"
         >
           Importez votre enquête
         </LinkButton>
@@ -91,6 +93,8 @@ export function EnqueteWelcome({
           </Text>
           <Text as="span" sx={downloadStyle}>
             <a
+              title="guide de remplissage des enquêtes"
+              aria-label="guide de remplissage des enquêtes"
               href={
                 "/docs/enquetes/DGCS_Mandoline_guide-de-remplissage-des-enquetes.pdf"
               }
