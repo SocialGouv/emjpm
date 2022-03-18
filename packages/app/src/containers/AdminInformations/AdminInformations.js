@@ -33,13 +33,23 @@ function AdminInformations(props) {
         </Flex>
         <Flex mt="5">
           <Box>
-            <LinkButton to="/admin/edit-informations" tabIndex="0">
+            <LinkButton
+              to="/admin/edit-informations"
+              tabIndex="0"
+              title="Modifier vos informations"
+              aria-label="Modifier vos informations"
+            >
               Modifier vos informations
             </LinkButton>
           </Box>
         </Flex>
         <Flex mt="1">
-          <LinkButton to="/admin/edit-password" tabIndex="0">
+          <LinkButton
+            to="/admin/edit-password"
+            tabIndex="0"
+            title="Modifier votre mot de passe"
+            aria-label="Modifier votre mot de passe"
+          >
             Modifier votre mot de passe
           </LinkButton>
         </Flex>

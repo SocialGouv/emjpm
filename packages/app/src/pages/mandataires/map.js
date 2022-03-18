@@ -6,7 +6,6 @@ import { LayoutMandataireMap } from "~/containers/Layout";
 import { MandataireMapPanelMesures } from "~/containers/MandataireMapPanelMesures";
 
 import { MandataireMap } from "~/containers/MandataireMap";
-import SkipToContent from "~/components/SkipToContent";
 
 function Map() {
   const [selectedMesuresIds, setSelectedMesuresIds] = useState([]);
@@ -15,8 +14,6 @@ function Map() {
       <Helmet>
         <title>La carte des mandataires | e-MJPM</title>
       </Helmet>
-
-      <SkipToContent skipTo="mandataire_map" />
 
       <LayoutMandataireMap>
         <Flex
