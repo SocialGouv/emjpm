@@ -28,6 +28,8 @@ function MesureListButtonBar() {
           <LinkButton
             {...mesureModificationButtonProps}
             to={`${path}/add-mesures`}
+            title="Ajouter une mesure"
+            aria-label="Ajouter une mesure"
           >
             Ajouter une mesure
           </LinkButton>
@@ -36,6 +38,8 @@ function MesureListButtonBar() {
           <LinkButton
             to={`${path}/import-mesures`}
             {...(lockedByEditor ? mesureModificationButtonProps : {})}
+            title="Importer vos mesures"
+            aria-label="Importer vos mesures"
           >
             Importer vos mesures
           </LinkButton>

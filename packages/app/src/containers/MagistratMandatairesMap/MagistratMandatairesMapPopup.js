@@ -68,6 +68,8 @@ function MagistratMandatairesMapPopup() {
         to={`/${
           user.type === "greffier" ? "greffiers" : "magistrats"
         }/gestionnaires/${id}`}
+        title="Réserver une mesure"
+        aria-label="Réserver une mesure"
       >
         Réserver une mesure
       </LinkButton>

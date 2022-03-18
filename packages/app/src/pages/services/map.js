@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet";
 
 import { LayoutServicesMap } from "~/containers/Layout";
 import { ServiceMapPanelMesures } from "~/containers/ServiceMapPanelMesures";
-import SkipToContent from "~/components/SkipToContent";
 
 import { ServiceMap } from "~/containers/ServiceMap";
 
@@ -16,7 +15,6 @@ function Map() {
       <Helmet>
         <title>Carte des services | e-MJPM</title>
       </Helmet>
-      <SkipToContent skipTo="service_map" />
       <LayoutServicesMap>
         <Flex
           sx={{
