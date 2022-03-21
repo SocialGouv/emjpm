@@ -89,6 +89,7 @@ export function MagistratMandataire(props) {
             id="reserver_mesure"
             title="Réserver une mesure"
             aria-label="Résérver une mesure"
+            sx={{ display: "block" }}
           >
             Réserver une mesure
           </Button>
