@@ -60,6 +60,7 @@ function MandataireMapPanelMesures({ mesuresIds }) {
                     key={mesure.id}
                     mesure={mesure}
                     onClick={({ mesure }) => selectMesure(mesure)}
+                    url="/mandataires/mesures"
                   />
                 );
               })}

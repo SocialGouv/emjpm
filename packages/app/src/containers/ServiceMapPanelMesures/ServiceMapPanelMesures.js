@@ -63,6 +63,7 @@ function ServiceMapPanelMesures({ mesuresIds }) {
                     mesure={mesure}
                     onClick={selectMesure}
                     getHref={getHref}
+                    url="/services/mesures"
                   />
                 );
               })}
