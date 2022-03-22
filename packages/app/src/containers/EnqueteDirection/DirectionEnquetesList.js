@@ -19,17 +19,21 @@ export function DirectionEnquetesList() {
 
   const { enquetes } = data;
 
-  function openEnqueteDetails(enqueteId) {
-    history.push(`/direction/enquetes/${enqueteId}`);
-  }
   return (
     <>
       {enquetes.map((enquete) => (
         <Card
           key={enquete.id}
           mb={1}
-          sx={{ cursor: "pointer" }}
-          onClick={() => openEnqueteDetails(enquete.id)}
+          as="a"
+          href={`/direction/enquetes/${enquete.id}`}
+          sx={{ display: "block" }}
+          title={`Enquête ${enquete.annee} sur l'activité de ${
+            enquete.annee - 1
+          }`}
+          aria-label={`Enquête ${enquete.annee} sur l'activité de ${
+            enquete.annee - 1
+          }`}
         >
           <Flex alignItems="center" justifyContent="flex-start">
             <Text fontWeight="bold" color="primary">

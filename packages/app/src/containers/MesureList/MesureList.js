@@ -110,17 +110,17 @@ function MesureList(props) {
 
   return (
     <>
-      <SrOnly>
+      <SrOnly role="status">
         {data.awaiting_mesures.length + count > 0 && (
-          <p role="status">
+          <span>
             {data.awaiting_mesures.length + count}{" "}
             {data.awaiting_mesures.length + count > 1
               ? "résultat"
               : "résultats"}
-          </p>
+          </span>
         )}
         {data.awaiting_mesures.length + count === 0 && (
-          <p role="status">Pas de donnée à afficher</p>
+          <span role="status">Pas de donnée à afficher</span>
         )}
       </SrOnly>
       <Text pb="1" color="#696363">
