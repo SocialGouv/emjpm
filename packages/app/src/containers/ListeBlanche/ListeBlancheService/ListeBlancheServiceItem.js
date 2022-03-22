@@ -3,7 +3,7 @@ import { Flex } from "rebass";
 import { Card, Text } from "~/components";
 import capitalize from "~/utils/std/capitalize";
 
-import { cardStyle, descriptionStyle, labelStyle, anchorStyle } from "../style";
+import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
 export function ListeBlancheServiceItem(props) {
   const { item, onClick, getHref } = props;
@@ -23,42 +23,41 @@ export function ListeBlancheServiceItem(props) {
       aria-label={`Service ${
         service?.etablissement ? capitalize(service.etablissement) : ""
       }`}
+      as="a"
+      href={to}
+      draggable={false}
     >
-      <a href={to} onClick={onClick} style={anchorStyle} draggable="false">
-        <Flex justifyContent="flex-start">
-          <Flex width="25%" flexDirection="column">
-            <Text sx={labelStyle}>{"Nom du service"}</Text>
-            <Flex>
-              <Text sx={descriptionStyle}>
-                {service.etablissement
-                  ? service.etablissement.toUpperCase()
-                  : ""}
-              </Text>
-            </Flex>
-          </Flex>
-
-          <Flex width="30%" flexDirection="column">
-            <Text sx={labelStyle}>Départements</Text>
-            {service.departement && (
-              <Text sx={descriptionStyle}>{service.departement.nom}</Text>
-            )}
+      <Flex justifyContent="flex-start">
+        <Flex width="25%" flexDirection="column">
+          <Text sx={labelStyle}>{"Nom du service"}</Text>
+          <Flex>
             <Text sx={descriptionStyle}>
-              {service.departements
-                .map(({ departement }) => departement.nom)
-                .join(", ")}
+              {service.etablissement ? service.etablissement.toUpperCase() : ""}
             </Text>
           </Flex>
-
-          <Flex width="45%" flexDirection="column">
-            {service.siret && (
-              <>
-                <Text sx={labelStyle}>SIRET</Text>
-                <Text sx={descriptionStyle}>{service.siret}</Text>
-              </>
-            )}
-          </Flex>
         </Flex>
-      </a>
+
+        <Flex width="30%" flexDirection="column">
+          <Text sx={labelStyle}>Départements</Text>
+          {service.departement && (
+            <Text sx={descriptionStyle}>{service.departement.nom}</Text>
+          )}
+          <Text sx={descriptionStyle}>
+            {service.departements
+              .map(({ departement }) => departement.nom)
+              .join(", ")}
+          </Text>
+        </Flex>
+
+        <Flex width="45%" flexDirection="column">
+          {service.siret && (
+            <>
+              <Text sx={labelStyle}>SIRET</Text>
+              <Text sx={descriptionStyle}>{service.siret}</Text>
+            </>
+          )}
+        </Flex>
+      </Flex>
     </Card>
   );
 }

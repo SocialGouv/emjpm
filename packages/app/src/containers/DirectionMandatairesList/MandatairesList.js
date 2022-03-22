@@ -100,15 +100,17 @@ function MandatairesList(props) {
           />
         </Box>
       </Flex>
-      {list.map((gestionnaire) => {
-        return (
-          <MandataireListItem
-            key={gestionnaire.id}
-            gestionnaire={gestionnaire}
-            departementFilter={filters.departement}
-          />
-        );
-      })}
+      <ul>
+        {list.map((gestionnaire) => {
+          return (
+            <MandataireListItem
+              key={gestionnaire.id}
+              gestionnaire={gestionnaire}
+              departementFilter={filters.departement}
+            />
+          );
+        })}
+      </ul>
       {count > RESULT_PER_PAGE && (
         <Flex alignItems="center" justifyContent="center">
           <ReactPaginate

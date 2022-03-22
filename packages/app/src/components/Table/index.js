@@ -18,6 +18,7 @@ const Table = ({ columns, tableData }) => {
               borderRight:
                 (index + 1) % columns === 0 ? "1px solid black" : "none",
             }}
+            key={index}
           >
             <Text
               py={1}

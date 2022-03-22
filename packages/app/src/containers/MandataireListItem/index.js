@@ -86,7 +86,7 @@ export default function MandataireListItem(props) {
 
   return (
     <>
-      <Card sx={cardStyle} width="100%" {...accessibilityProps}>
+      <Card sx={cardStyle} width="100%" as="li" {...accessibilityProps}>
         <Box sx={decorationStyle(type)} />
         <Flex
           onClick={(e) => {
