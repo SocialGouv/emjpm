@@ -56,18 +56,6 @@ export default function MapMesureListItem(props) {
 
   const currentStatus = status;
 
-  // const onItemClick = (e) => {
-  //   if (e.ctrlKey) {
-  //     return;
-  //   }
-  //   e.preventDefault();
-  //   const selection = window.getSelection().toString();
-  //   if (selection.length > 0) {
-  //     return;
-  //   }
-  //   onClick && onClick(props);
-  // };
-
   const numeroRgIsValid = numeroRg.length === 8;
 
   return (
