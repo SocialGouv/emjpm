@@ -58,7 +58,7 @@
     "p-debounce": "^2.1.0",
     "prettier": "^2.3.2",
     "qrcode": "^1.5.0",
-    "query-string": "^6.14.1",
+    "query-string": "^7.0.0",
     "react": "^17.0.2",
     "react-aria-menubutton": "^7.0.3",
     "react-datepicker": "^3.8.0",
