@@ -21,13 +21,13 @@ services:
       - emjpm-pgdata:/var/lib/postgresql/data
     restart: always
 
-  # maildev:
-  #   image: djfarrelly/maildev
-  #   command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
-  #   ports:
-  #     - "1025:1025"
-  #     - "1080:1080"
-  #   restart: always
+  maildev:
+    image: djfarrelly/maildev
+    command: bin/maildev --web 1080 --smtp 1025 --hide-extensions STARTTLS
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    restart: always
 
   hasura:
     image: emjpm_hasura
@@ -92,11 +92,10 @@ services:
       HASURA_GRAPHQL_URI: ${HASURA_GRAPHQL_URI:-http://hasura:8080/v1/graphql}
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:-admin}
       APP_URL: "localhost:3000"
-      SMTP_HOST: "${SMTP_HOST:-}"
-      SMTP_PORT: "${SMTP_PORT:-}"
+      SMTP_HOST: "${SMTP_HOST:-maildev}"
+      SMTP_PORT: "${SMTP_PORT:-1025}"
       SMTP_USER: "${SMTP_USER:-}"
       SMTP_PASS: "${SMTP_PASS:-}"
-      SMTP_FROM: "${SMTP_PORT:-}"
       OCMI_SYNC_FILE_ENABLED: "${OCMI_SYNC_FILE_ENABLED:-}"
       OCMI_SYNC_FILE_LOCAL: "true"
       OCMI_FILE_PASSWORD: ${OCMI_FILE_PASSWORD:-}

@@ -21,3 +21,31 @@ export const EDIT_USER = gql`
     }
   }
 `;
+
+export const EDIT_USER_AND_QRCODE = gql`
+  mutation EditUserAndQrCode(
+    $prenom: String!
+    $nom: String!
+    $email: String!
+    $id: Int!
+    $secret_2fa: String!
+  ) {
+    update_users(
+      _set: {
+        prenom: $prenom
+        nom: $nom
+        email: $email
+        secret_2fa: $secret_2fa
+      }
+      where: { id: { _eq: $id } }
+    ) {
+      affected_rows
+      returning {
+        email
+        id
+        nom
+        prenom
+      }
+    }
+  }
+`;

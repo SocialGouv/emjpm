@@ -6,17 +6,17 @@ import { toast } from "react-toastify";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
 
-import { SERVICE_MEMBER_INVITATION } from "./queries";
+import { ADMIN_INVITATION } from "./queries";
 import signup from "./signup";
-import { SignupServiceInvitationForm } from "./SignupServiceInvitationForm";
+import { SignupAdminInvitationForm } from "./SignupAdminInvitationForm";
 import useQueryReady from "~/hooks/useQueryReady";
 
-export function SignupServiceInvitation(props) {
+export function SignupAdminInvitation(props) {
   const history = useHistory();
   const { token } = props;
   const client = useApolloClient();
 
-  const { data, loading, error } = useQuery(SERVICE_MEMBER_INVITATION, {
+  const { data, loading, error } = useQuery(ADMIN_INVITATION, {
     context: {
       headers: {
         "X-Hasura-Invitation-Token": token,
@@ -29,12 +29,12 @@ export function SignupServiceInvitation(props) {
     return null;
   }
 
-  if (error || !data.service_member_invitations.length) {
+  if (error || !data.admin_invitations.length) {
     history.push("/login");
     return null;
   }
 
-  const [invitation] = data.service_member_invitations;
+  const [invitation] = data.admin_invitations;
 
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     const exists = await isEmailExists(client, values.email);
@@ -45,10 +45,7 @@ export function SignupServiceInvitation(props) {
         body: {
           invitation: {
             token,
-            type: "service",
-          },
-          service: {
-            service_id: invitation.service_id,
+            type: "admin",
           },
           user: {
             confirmPassword: values.confirmPassword,
@@ -56,6 +53,7 @@ export function SignupServiceInvitation(props) {
             nom: values.nom,
             password: values.password,
             prenom: values.prenom,
+            secret_2fa: values.secret_2fa,
           },
         },
         onComplete: () => {
@@ -75,11 +73,8 @@ export function SignupServiceInvitation(props) {
 
   return (
     <>
-      <HeadingTitle
-        p="1"
-        m={1}
-      >{`Création de compte - ${invitation.service.etablissement}`}</HeadingTitle>
-      <SignupServiceInvitationForm
+      <HeadingTitle p="1" m={1}>{`Création de compte admin`}</HeadingTitle>
+      <SignupAdminInvitationForm
         handleSubmit={handleSubmit}
         invitation={invitation}
       />

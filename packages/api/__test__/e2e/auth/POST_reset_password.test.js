@@ -45,6 +45,8 @@ test("reset a password", async () => {
       new_password_confirmation: "test123456?",
       token: "LpWpzK4Jla9I87Aq",
     });
+  delete response.body.refreshToken;
+  delete response.body.token;
   expect(response.body).toMatchSnapshot();
   expect(nodemailerMock.mock.sentMail()).toMatchSnapshot();
   expect(response.status).toBe(200);
@@ -131,6 +133,9 @@ test("should empty user token+expiration on password reset", async () => {
       new_password_confirmation: "test123456?",
       token: "abcdef",
     });
+
+  delete response.body.refreshToken;
+  delete response.body.token;
 
   const userData = await knex("users").where({ id: 52 }).first();
 

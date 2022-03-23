@@ -32,7 +32,13 @@ const resetPasswordWithToken = async (req, res) => {
         reset_password_expires: null,
         reset_password_token: null,
       });
-      res.status(200).json({ status: "ok" });
+
+      const userLogin = await User.query()
+        .findById(user.id)
+        .withGraphFetched("[roles, service, direction, mandataire]");
+      const userResult = await userLogin.getUser();
+
+      res.status(200).json(userResult);
       return confirmationPasswordEmail(user.email);
     } catch (err) {
       logger.error(err);

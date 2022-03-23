@@ -1,18 +1,36 @@
 import { authenticator } from "otplib";
+import yup from "./yup";
 
-import yup, {
+import {
   EMAIL_NOT_VALID,
-  NOM_NOT_VALID,
   PRENOM_NOT_VALID,
+  NOM_NOT_VALID,
   QRCODE_TOKEN_FORMAT,
   QRCODE_TOKEN_INVALID,
-} from "./yup";
+} from "~/validation-schemas/yup";
 
-const adminEditSchema = yup.object().shape({
-  email: yup.string().email().required(EMAIL_NOT_VALID),
+const signupAdminSchema = yup.object().shape({
+  confirmPassword: yup
+    .string()
+    .required()
+    .label("Confirmation du mot de passe")
+    .oneOf([yup.ref("password"), null], "Les mots de passe ne sont pas égaux"),
+  email: yup.string().email(EMAIL_NOT_VALID).required(EMAIL_NOT_VALID),
   nom: yup.string().required(NOM_NOT_VALID),
+  password: yup
+    .string()
+    .label("Mot de passe")
+    .required()
+    .min(8, "Votre mot de passe doit être de 8 caractères minimum")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~])[A-Za-z\d!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]{8,}$/,
+      {
+        message:
+          "Votre mot de passe doit contenir au moins 1 chiffre et un caractère spéciale",
+      }
+    ),
   prenom: yup.string().required(PRENOM_NOT_VALID),
-  secret_2fa: yup.string().nullable(),
+  secret_2fa: yup.string().required(),
   code_2fa: yup
     .string()
     .when("secret_2fa", {
@@ -50,4 +68,4 @@ const adminEditSchema = yup.object().shape({
     .nullable(),
 });
 
-export { adminEditSchema };
+export { signupAdminSchema };
