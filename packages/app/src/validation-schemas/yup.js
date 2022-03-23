@@ -25,9 +25,9 @@ export const SIRET_NOT_VALID =
 export const REDIRECT_URL_NOT_VALID =
   'Veuillez saisir une url valide. Par exemple: https://world-best-software-company.fr ou  ["https://world-best-software-company.fr","http://localhost/"].\n le "/" à la fin de l\'url est pris en compte.';
 export const QRCODE_TOKEN_FORMAT =
-  "Le Code doit être composé de 6 chiffres. Par exemple: 123546.";
+  "Le code doit être composé de 6 chiffres. Par exemple: 123546.";
 export const QRCODE_TOKEN_INVALID =
-  "Le Code n'est pas valide ou a expiré, si ce n'est pas encore fait, veuillez scanner le QRCode affiché en utilisant votre application 2FA pour obtenir un code valide, sinon il se peut que le code ait expiré, la durée de vide d'un code est de 30 secondes, consultez votre application 2FA pour obtenir un nouveau code.";
+  "Le code n'est pas valide ou a expiré, si ce n'est pas encore fait, veuillez scanner le QRCode affiché en utilisant votre application 2FA pour obtenir un code valide, sinon il se peut que le code ait expiré, la durée de vie d'un code est de 30 secondes, consultez votre application 2FA pour obtenir un nouveau code.";
 
 yup.setLocale({
   mixed: {

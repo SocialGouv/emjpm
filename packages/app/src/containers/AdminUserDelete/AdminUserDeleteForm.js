@@ -41,16 +41,16 @@ export function AdminUserDeleteForm(props) {
     <Flex sx={AdminUserDeleteRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading size={5} mb="1">
-          {"Supprimer l'utilisateur"}
+          {"Supprimer l'administrateur"}
         </Heading>
         <Text mb="2" lineHeight="1.5">
           {
-            "Vous êtes sur le point de supprimer définitivement un utilisateur du système eMJPM. Toute suppression est irréversible."
+            "Vous êtes sur le point de supprimer définitivement un administrateur du système eMJPM. Toute suppression est irréversible."
           }
         </Text>
         <Text lineHeight="1.5">
           {
-            'Si vous souhaitez supprimer cet utilisateur, cliquez sur "Supprimer l\'utilisateur".'
+            'Si vous souhaitez supprimer cet administrateur, cliquez sur "Supprimer l\'administrateur".'
           }
         </Text>
         <Text lineHeight="1.5">
@@ -59,7 +59,7 @@ export function AdminUserDeleteForm(props) {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading size={3}>{"Supprimer l'utilisateur"}</Heading>
+          <Heading size={3}>{"Supprimer l'administrateur"}</Heading>
         </Box>
         <form noValidate onSubmit={formik.handleSubmit}>
           <Flex justifyContent="flex-end">
@@ -81,10 +81,10 @@ export function AdminUserDeleteForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
-                title="Supprimer l'utilisateur du service"
-                aria-label="Supprimer l'utilisateur du service"
+                title="Supprimer l'administrateur du service"
+                aria-label="Supprimer l'administrateur du service"
               >
-                {"Supprimer l'utilisateur"}
+                {"Supprimer l'administrateur"}
               </Button>
             </Box>
           </Flex>

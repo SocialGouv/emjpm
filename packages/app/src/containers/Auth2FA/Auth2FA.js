@@ -50,8 +50,8 @@ export default function Auth2FA({ unfolded, formik, validationSchema, user }) {
           <Heading>Vérification de l'authentification</Heading>
           <Text>
             Scannez l'image ci-dessous avec votre application 2FA favorite
-            (FreeOTP, Google Authentication ou autre application compatible avec
-            les standards HOTP ou TOTP)
+            (FreeOTP, Google Authenticator, Microsoft Authenticator ou autre
+            application compatible avec les standards HOTP ou TOTP)
           </Text>
           <Box>
             <img alt="QRCode" src={deviceSecret.imageUrl} />
