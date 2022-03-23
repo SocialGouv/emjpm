@@ -54,9 +54,9 @@ function LoggedMenu(props) {
 
       <Box>
         <Wrapper
-          tag="button"
-          onSelection={handleSelection}
+          tag="nav"
           className="UserMenu-AriaMenuButton"
+          onSelection={handleSelection}
           style={{
             position: "relative",
             boxSizing: "border-box",
@@ -64,10 +64,12 @@ function LoggedMenu(props) {
             minWidth: "0px",
             padding: "10px",
           }}
-          title={`${email}: Votre compte`}
-          aria-label={`${email}: Votre compte`}
         >
-          <MenuButton className="UserMenu-AriaMenuButton-trigger">
+          <MenuButton
+            className="UserMenu-AriaMenuButton-trigger"
+            title={`${email}: Votre compte`}
+            aria-label={`${email}: Votre compte`}
+          >
             <Flex>
               <BlueUserCircle size={25} />
               <Box>
