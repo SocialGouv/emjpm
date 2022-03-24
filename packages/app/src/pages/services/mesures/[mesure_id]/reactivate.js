@@ -6,6 +6,8 @@ import { MesureReactivate } from "~/containers/MesureReactivate";
 import { ServiceMesureSidebar } from "~/containers/ServiceMesureSidebar";
 import { BoxWrapper } from "~/components/Grid";
 
+import { SkipToContent } from "~/components";
+
 import { useParams } from "react-router-dom";
 
 function ReactivateMesurePage() {
