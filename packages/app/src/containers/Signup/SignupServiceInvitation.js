@@ -1,6 +1,7 @@
 import { useApolloClient, useQuery } from "@apollo/client";
 
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import isEmailExists from "~/query-service/emjpm-hasura/isEmailExists";
@@ -42,7 +43,10 @@ export function SignupServiceInvitation(props) {
     } else {
       signup({
         body: {
-          invitation,
+          invitation: {
+            token,
+            type: "service",
+          },
           service: {
             service_id: invitation.service_id,
           },
@@ -52,7 +56,6 @@ export function SignupServiceInvitation(props) {
             nom: values.nom,
             password: values.password,
             prenom: values.prenom,
-            type: "service",
           },
         },
         onComplete: () => {
@@ -63,6 +66,7 @@ export function SignupServiceInvitation(props) {
           setErrors(errors);
         },
         onSuccess: () => {
+          toast.success("Nouveau compte créé avec succès");
           history.push("/login");
         },
       });

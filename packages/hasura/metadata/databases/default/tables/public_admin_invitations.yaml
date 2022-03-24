@@ -1,0 +1,13 @@
+table:
+  name: admin_invitations
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - email
+    - id
+    - token
+    filter:
+      token:
+        _eq: X-Hasura-Invitation-Token
+  role: anonymous

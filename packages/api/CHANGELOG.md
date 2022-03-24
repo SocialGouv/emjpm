@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.154.0](https://github.com/SocialGouv/emjpm/compare/v25.153.0...v25.154.0) (2022-03-23)
+
+
+### Bug Fixes
+
+* **auth:** change change refreshtoken lifetime to be 13 days ([#2836](https://github.com/SocialGouv/emjpm/issues/2836)) ([acd8127](https://github.com/SocialGouv/emjpm/commit/acd81279d5a7b139644682842490f6d644fd47f4))
+
+
+### Features
+
+* **admin:** invitation + 2fa ([#2828](https://github.com/SocialGouv/emjpm/issues/2828)) ([5c94e9a](https://github.com/SocialGouv/emjpm/commit/5c94e9a46a7fd8cc2a4b7d92dda8a38d88d1e7fe))
+
+
+
+
+
 # [25.153.0](https://github.com/SocialGouv/emjpm/compare/v25.152.5...v25.153.0) (2022-03-16)
 
 

@@ -5,6 +5,7 @@ import {
   isMandataire,
   isService,
   isGreffier,
+  isAdmin,
 } from "@emjpm/biz";
 
 import { Box } from "rebass";
@@ -19,8 +20,10 @@ import { DirectionEditInformations } from "~/containers/DirectionEditInformation
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
 import { GreffierEditInformations } from "~/containers/GreffierEditInformations";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
+import { AdminEditInformations } from "~/containers/AdminEditInformations";
 
 import { USER } from "./queries";
+import useUser from "~/hooks/useUser";
 
 function AdminUser({ userId }) {
   const { data, loading, error } = useQuery(USER, {
@@ -28,6 +31,8 @@ function AdminUser({ userId }) {
       userId,
     },
   });
+
+  const { id: adminUserId } = useUser();
 
   if (!useQueryReady(loading, error)) {
     return null;
@@ -38,12 +43,10 @@ function AdminUser({ userId }) {
 
   return (
     <Box id="informations_personelles" tabIndex="-1">
-      {type !== "admin" && (
-        <Box my={1} width="100%">
-          <AdminUserActivation userId={userId} />
-          <AdminUserResetPassword userId={userId} />
-        </Box>
-      )}
+      <Box my={1} width="100%">
+        {adminUserId !== userId && <AdminUserActivation userId={userId} />}
+        {type !== "admin" && <AdminUserResetPassword userId={userId} />}
+      </Box>
       {isMandataire({ type }) && (
         <>
           <Box my={1} width="100%">
@@ -90,6 +93,15 @@ function AdminUser({ userId }) {
       {isService({ type }) && (
         <Box my={1} width="100%">
           <AdminUserService userId={userId} cancelLink="/admin/users" />
+        </Box>
+      )}
+      {isAdmin({ type }) && (
+        <Box my={1} width="100%">
+          <AdminEditInformations
+            userId={userId}
+            cancelLink="/admin/users"
+            isAdmin
+          />
         </Box>
       )}
 

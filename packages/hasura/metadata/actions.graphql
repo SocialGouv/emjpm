@@ -34,6 +34,12 @@ type Mutation {
 }
 
 type Mutation {
+  email_admin_invitation(
+    invitation_id: Int!
+  ): EmailAdminInvitationOutput
+}
+
+type Mutation {
   email_reservation(
     mesure_id: Int!
   ): EmailReservationOutput
@@ -320,5 +326,9 @@ type MesuresLastUpdateResult {
 
 type DeleteAllMesuresActionOutput {
   success: Boolean!
+}
+
+type EmailAdminInvitationOutput {
+  result: String!
 }
 

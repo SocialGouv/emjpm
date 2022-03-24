@@ -1,10 +1,10 @@
 {
   "name": "@emjpm/app",
-  "version": "25.153.0",
+  "version": "25.154.0",
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.4.10",
-    "@emjpm/biz": "^25.153.0",
+    "@emjpm/biz": "^25.154.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@emotion/styled-base": "^11.0.0",
@@ -56,8 +56,10 @@
     "lodash.isequal": "^4.5.0",
     "mapbox-gl": "^1.13.1",
     "mdx.macro": "^0.2.9",
+    "otplib": "^12.0.1",
     "p-debounce": "^2.1.0",
     "prettier": "^2.3.2",
+    "qrcode": "^1.5.0",
     "query-string": "^6.14.1",
     "react": "^17.0.2",
     "react-aria-menubutton": "^7.0.3",

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.154.0](https://github.com/SocialGouv/emjpm/compare/v25.153.0...v25.154.0) (2022-03-23)
+
+
+### Bug Fixes
+
+* **rgaa:** add titles and ariaLabel to buttons ([#2830](https://github.com/SocialGouv/emjpm/issues/2830)) ([013bbd5](https://github.com/SocialGouv/emjpm/commit/013bbd53059781d10ba1c2c7340907793526b833))
+* **rgaa:** delete aria-label from label tag ([#2832](https://github.com/SocialGouv/emjpm/issues/2832)) ([1a01d35](https://github.com/SocialGouv/emjpm/commit/1a01d3545f0c556f938774e4926de7d20540a85d))
+* **rgaa:** delete skip to content on empty map page ([#2831](https://github.com/SocialGouv/emjpm/issues/2831)) ([e2aa7d4](https://github.com/SocialGouv/emjpm/commit/e2aa7d447325134c3bf8cd37f4a64d17f2a6d163))
+* **rgaa:** fix button styles ([#2833](https://github.com/SocialGouv/emjpm/issues/2833)) ([f58e3a6](https://github.com/SocialGouv/emjpm/commit/f58e3a68d20155e501aed21dafe2f69fd193f2e0))
+* **rgaa:** fix outline on buttons ([#2829](https://github.com/SocialGouv/emjpm/issues/2829)) ([5015bb6](https://github.com/SocialGouv/emjpm/commit/5015bb6515904d5ca796c04ba7720275b24279aa))
+* **rgaa:** replace divs with accessibility-friendly elements ([#2834](https://github.com/SocialGouv/emjpm/issues/2834)) ([7e6c697](https://github.com/SocialGouv/emjpm/commit/7e6c6975e5bb73603ef7f1f9bd595ee00c2bf00d))
+
+
+### Features
+
+* **admin:** invitation + 2fa ([#2828](https://github.com/SocialGouv/emjpm/issues/2828)) ([5c94e9a](https://github.com/SocialGouv/emjpm/commit/5c94e9a46a7fd8cc2a4b7d92dda8a38d88d1e7fe))
+
+
+
+
+
 # [25.153.0](https://github.com/SocialGouv/emjpm/compare/v25.152.5...v25.153.0) (2022-03-16)
 
 

@@ -8,8 +8,10 @@ const { validationEmail } = require("~/email/validation-email");
 const {
   serviceMemberInvitationMail,
 } = require("~/email/service-member-invitation-mail");
+const { adminInvitationMail } = require("~/email/admin-invitation-mail");
 const { Service } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
+const { AdminInvitation } = require("~/models");
 const { Tis } = require("~/models");
 const { Mesure } = require("~/models");
 
@@ -61,6 +63,22 @@ router.post("/email-service-member-invitation", async function (req, res) {
   );
 
   serviceMemberInvitationMail(serviceMemberInvitation, service);
+
+  res.json({ success: true });
+});
+
+router.post("/email-admin-invitation", async function (req, res) {
+  const { invitation_id } = req.body.input;
+
+  const adminInvitation = await AdminInvitation.query().patchAndFetchById(
+    invitation_id,
+    {
+      sent_at: new Date(),
+      token: uid(32),
+    }
+  );
+
+  adminInvitationMail(adminInvitation);
 
   res.json({ success: true });
 });
