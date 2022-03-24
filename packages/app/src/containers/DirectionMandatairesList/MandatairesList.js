@@ -107,6 +107,7 @@ function MandatairesList(props) {
               key={gestionnaire.id}
               gestionnaire={gestionnaire}
               departementFilter={filters.departement}
+              tag="li"
             />
           );
         })}
