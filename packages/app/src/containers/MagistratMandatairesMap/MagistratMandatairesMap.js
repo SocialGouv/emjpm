@@ -73,7 +73,8 @@ function MagistratMandatairesMap(props) {
     };
   }, [mesureGestionnaires]);
 
-  const { currentMarker, setCurrentMarker } = useContext(MapContext);
+  const { currentMarker, setCurrentMarker, closeMarker } =
+    useContext(MapContext);
   const { latitude, longitude } = currentMarker;
 
   function selectMarker(clickedMarker) {
@@ -91,7 +92,7 @@ function MagistratMandatairesMap(props) {
     >
       {currentMarker.isActive && (
         <MapPopup longitude={longitude} latitude={latitude}>
-          <MagistratMandatairesMapPopup />
+          <MagistratMandatairesMapPopup closeMarker={closeMarker} />
         </MapPopup>
       )}
       <MapLayer

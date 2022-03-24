@@ -15,10 +15,19 @@ export function Provider(props) {
     type: null,
   });
 
+  const closeMarker = () => {
+    setCurrentMarker((prev) => ({
+      ...prev,
+      isActive: false,
+      id: null,
+    }));
+  };
+
   // Make the context object:
   const mapContext = {
     currentMarker,
     setCurrentMarker,
+    closeMarker,
   };
 
   // pass the value in provider and return
