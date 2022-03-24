@@ -25,7 +25,7 @@ const html = (service, url) =>
   L’équipe e-mjpm.`;
 
 const serviceMemberInvitationMail = async (invitation, service) => {
-  const url = `${process.env.APP_URL}/signup/invitation?token=${invitation.token}`;
+  const url = `${process.env.APP_URL}/signup/invitation?type=service&token=${invitation.token}`;
 
   try {
     await sendEmail(

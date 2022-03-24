@@ -9,6 +9,7 @@ const resetPassword = require("~/controllers/user/reset-password");
 const forgotPassword = require("~/controllers/user/forgot-password");
 const resetPasswordWithToken = require("~/controllers/user/reset-password-with-token");
 const refreshToken = require("~/controllers/user/refresh-token");
+const token2fa = require("~/controllers/user/token2fa");
 const jwkController = require("~/controllers/jwk");
 
 router.post(
@@ -119,6 +120,8 @@ router.post(
 );
 
 router.post("/refresh-token", refreshToken);
+
+router.post("/token2fa", token2fa);
 
 router.get("/jwks", jwkController.getJwks);
 

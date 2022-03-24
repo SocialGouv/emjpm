@@ -1,3 +1,4 @@
+const { authenticator } = require("otplib");
 const passport = require("~/auth/auth-passport");
 const { validationResult } = require("express-validator");
 const { User, Logs } = require("~/models");
@@ -36,10 +37,6 @@ const login = async (req, res, next) => {
     }
 
     if (user) {
-      await User.query()
-        .where("id", user.id)
-        .update({ last_login: new Date().toISOString() });
-
       await Logs.query().insert({
         action: "connexion",
         result: "success",
@@ -49,8 +46,26 @@ const login = async (req, res, next) => {
       const userResult = await user.getUser();
 
       await User.query().findById(user.id).update({
+        last_login: new Date().toISOString(),
         refresh_token: userResult.refreshToken,
       });
+
+      const userRow = await User.query().findById(user.id);
+      if (userRow.secret_2fa) {
+        const { code_2fa } = req.body;
+        if (!code_2fa) {
+          return res.status(200).json({ authEnabled2FA: true });
+        }
+        const isValid = authenticator.verify({
+          secret: userRow.secret_2fa,
+          token: code_2fa,
+        });
+        if (isValid) {
+          return res.status(200).json(userResult);
+        } else {
+          return res.status(200).json({ authEnabled2FA: true, invalid: true });
+        }
+      }
 
       return res.status(200).json(userResult);
     }

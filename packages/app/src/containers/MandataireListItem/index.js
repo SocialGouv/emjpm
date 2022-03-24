@@ -60,6 +60,7 @@ export default function MandataireListItem(props) {
     onClick,
     departementFilter,
     accessibilityProps,
+    tag,
   } = props;
 
   const isService = type === "service";
@@ -86,7 +87,12 @@ export default function MandataireListItem(props) {
 
   return (
     <>
-      <Card sx={cardStyle} width="100%" as="li" {...accessibilityProps}>
+      <Card
+        sx={cardStyle}
+        width="100%"
+        as={tag ? tag : "button"}
+        {...accessibilityProps}
+      >
         <Box sx={decorationStyle(type)} />
         <Flex
           onClick={(e) => {

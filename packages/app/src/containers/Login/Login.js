@@ -19,82 +19,87 @@ import {
   SrOnly,
   Text,
 } from "~/components";
+import { FormGroupInput } from "~/components/AppForm";
 import { useAuth } from "~/user/Auth";
 import { matopush } from "~/user/matomo";
 
 const { API_URL } = config;
 
-const checkStatus = async (
-  apolloClient,
-  response,
-  setSubmitting,
-  setStatus,
-  history,
-  login
-) => {
-  let json = null;
-  setSubmitting(false);
-  try {
-    json = await response.json();
-  } catch (errors) {
-    setStatus({ errorMsg: errors.msg });
-  }
-  if (!response.ok) {
-    matopush(["trackEvent", "login", "error"]);
-    setStatus({ errorMsg: json.errors.msg });
-    return json;
-  }
-
-  apolloClient.clearStore();
-  login(json);
-  history.push(json.url);
-
-  return json;
-};
-
-function Login(props) {
-  const { token } = props;
-  const url = `${API_URL}/api/auth/login`;
-
+function Login() {
   const history = useHistory();
   const { login } = useAuth();
   const apolloClient = useApolloClient();
-  const [formikSubmitted, setFormikSubmitted] = useState(false);
 
-  const handleSubmit = async (values, setSubmitting, setStatus) => {
-    const response = await fetch(url, {
-      body: JSON.stringify({
-        password: values.password,
-        email: values.email,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-    });
-    checkStatus(
-      apolloClient,
-      response,
-      setSubmitting,
-      setStatus,
-      history,
-      login
-    );
-  };
+  let handleSubmit;
 
   const formik = useFormik({
     initialValues: {
       password: "",
       email: "",
     },
-    onSubmit: (values, { setSubmitting, setStatus }) => {
-      handleSubmit(values, setSubmitting, setStatus, token);
+    onSubmit: async (values) => {
+      try {
+        await handleSubmit(values);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        formik.setSubmitting(false);
+      }
     },
     validationSchema: loginSchema,
   });
 
+  const [authEnabled2FA, setAuthEnabled2FA] = useState(null);
+
+  const handleLogin = (data) => {
+    apolloClient.clearStore();
+    login(data);
+    history.push(data.url);
+  };
+
+  handleSubmit = async (values) => {
+    const url = `${API_URL}/api/auth/login`;
+    const variables = {
+      password: values.password,
+      email: values.email,
+    };
+    if (values.code_2fa) {
+      variables.code_2fa = values.code_2fa;
+    }
+    const response = await fetch(url, {
+      body: JSON.stringify(variables),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+
+    let json = null;
+    try {
+      json = await response.json();
+    } catch (errors) {
+      formik.setStatus({ errorMsg: errors.msg });
+    }
+    if (!response.ok) {
+      matopush(["trackEvent", "login", "error"]);
+      formik.setStatus({ errorMsg: json.errors.msg });
+      return json;
+    }
+
+    if (json.authEnabled2FA) {
+      if (json.invalid) {
+        formik.setFieldError("code_2fa", "Code non valide");
+      } else {
+        setAuthEnabled2FA(true);
+        formik.setFieldValue("authEnabled2FA", true);
+      }
+      return;
+    }
+    handleLogin(json);
+  };
+
   const onSubmit = (e) => {
-    setFormikSubmitted(true);
+    formik.setSubmitting(true);
     return formik.handleSubmit(e);
   };
 
@@ -159,7 +164,7 @@ function Login(props) {
               type="password"
               hasError={
                 formik.errors.password &&
-                (formik.dirty.password || formikSubmitted)
+                (formik.dirty.password || formik.submitCount > 0)
               }
               onChange={formik.handleChange}
               onBlur={() => {
@@ -172,7 +177,7 @@ function Login(props) {
               ariaLabel="Votre mot de passe"
             />
             <div id="msg-password">
-              {(formik.touched.password || formikSubmitted) && (
+              {(formik.touched.password || formik.submitCount > 0) && (
                 <InlineError
                   message={formik.errors.password}
                   fieldId="password"
@@ -180,6 +185,30 @@ function Login(props) {
               )}
             </div>
           </Field>
+          {authEnabled2FA && (
+            <Box>
+              <FormGroupInput
+                formik={formik}
+                id="code_2fa"
+                placeholder="Code"
+                label="Entrez le code de votre application 2FA"
+                validationSchema={loginSchema}
+                aria-label={"Entrez le code de votre application 2FA"}
+                hideErrors={
+                  !(
+                    formik.errors.code_2fa &&
+                    (formik.touched.code_2fa || formik.submitCount > 1)
+                  )
+                }
+                required
+                onInput={(e) => {
+                  let value = e.target.value || "";
+                  value = value.replace(/\s/g, "");
+                  formik.setFieldValue("code_2fa", value);
+                }}
+              />
+            </Box>
+          )}
           <Flex alignItems="center" justifyContent="flex-end">
             <Box>
               <Button

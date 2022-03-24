@@ -51,6 +51,7 @@ module.exports.ServiceAntenne = require("./ServiceAntenne");
 module.exports.ServiceDepartements = require("./ServiceDepartements");
 module.exports.ServiceMember = require("./ServiceMember");
 module.exports.ServiceMemberInvitation = require("./ServiceMemberInvitation");
+module.exports.AdminInvitation = require("./AdminInvitation");
 module.exports.ServiceTis = require("./ServiceTis");
 module.exports.Tis = require("./Tis");
 module.exports.User = require("./User");

@@ -7,11 +7,13 @@ const smtpUser = config.smtpUser;
 const smtpPass = config.smtpPass;
 const smtpFrom = config.smtpFrom;
 
+const isMailDev = smtpHost === "maildev";
+
 const smtpConfig = {
   host: smtpHost,
-  ignoreTLS: false,
+  ignoreTLS: isMailDev,
   port: smtpPort,
-  requireTLS: true,
+  requireTLS: !isMailDev,
   secure: false,
 };
 

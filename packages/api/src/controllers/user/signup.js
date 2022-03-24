@@ -6,6 +6,7 @@ const { Magistrat } = require("~/models");
 const { Greffier } = require("~/models");
 const { UserRole } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
+const { AdminInvitation } = require("~/models");
 const { ServiceMember } = require("~/models");
 const { Role } = require("~/models");
 const { Direction } = require("~/models");
@@ -115,10 +116,45 @@ const signup = async (req, res) => {
   try {
     const { body } = req;
     const { invitation } = body;
-    const { type, nom, prenom, password, email, genre } = body.user;
+    const { nom, prenom, password, email, genre, secret_2fa } = body.user;
+    let { type } = body.user;
+
+    if (invitation) {
+      type = invitation.type;
+      let invitationModel;
+      switch (type) {
+        case "service": {
+          invitationModel = ServiceMemberInvitation;
+          break;
+        }
+        case "admin": {
+          invitationModel = AdminInvitation;
+          break;
+        }
+        default:
+          throw new Error(`Unexpected user type "${type}" for invitation`);
+      }
+      const invitationRow = await invitationModel
+        .query()
+        .where("token", invitation.token);
+      if (invitationRow.length < 1) {
+        return res.status(410).send({
+          errors: [
+            {
+              data: {},
+              type: "InvalidToken",
+            },
+          ],
+        });
+      }
+    }
+
+    if (type === "admin" && !invitation) {
+      return;
+    }
 
     const user = await User.query()
-      .allowInsert("[password,role,nom,prenom,email]")
+      .allowInsert("[password,role,nom,prenom,email,secret_2fa]")
       .insert({
         active: invitation ? true : false,
         email: email.toLowerCase().trim(),
@@ -126,20 +162,24 @@ const signup = async (req, res) => {
         nom,
         password,
         prenom,
+        secret_2fa,
         type,
       });
 
-    await createRole(user.id, type);
-
     switch (type) {
+      case "admin": {
+        await createRole(user.id, type);
+        break;
+      }
       case "individuel":
       case "prepose": {
+        await createRole(user.id, type);
         await createMandataire(body.mandataire, user.id, type);
         break;
       }
       case "service": {
+        await createRole(user.id, type);
         const {
-          invitation,
           service: { service_id },
         } = body;
 
@@ -151,28 +191,24 @@ const signup = async (req, res) => {
             service_id,
             user_id: user.id,
           });
-
-        if (invitation) {
-          await ServiceMemberInvitation.query()
-            .delete()
-            .where("id", invitation.id);
-        }
-
         break;
       }
       case "ti": {
+        await createRole(user.id, type);
         const { cabinet } = body.magistrat;
         await User.query().update({ cabinet }).where("id", user.id);
         await createMagistrat(body.magistrat, user);
         break;
       }
       case "greffier": {
+        await createRole(user.id, type);
         const { cabinet } = body.greffier;
         await User.query().update({ cabinet }).where("id", user.id);
         await createGreffier(body.greffier, user);
         break;
       }
       case "direction": {
+        await createRole(user.id, type);
         const {
           direction: { directionType, departementCode, regionId },
         } = body;
@@ -193,6 +229,21 @@ const signup = async (req, res) => {
       }
       default:
         return;
+    }
+
+    if (invitation) {
+      switch (type) {
+        case "service":
+          await ServiceMemberInvitation.query()
+            .delete()
+            .where("token", invitation.token);
+          break;
+        case "admin":
+          await AdminInvitation.query()
+            .delete()
+            .where("token", invitation.token);
+          break;
+      }
     }
 
     const code_postal = body.mandataire ? body.mandataire.code_postal : "";

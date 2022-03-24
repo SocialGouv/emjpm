@@ -45,3 +45,13 @@ export const SERVICE_MEMBER_INVITATION = gql`
     }
   }
 `;
+
+export const ADMIN_INVITATION = gql`
+  query admin_invitations($token: String!) {
+    admin_invitations(where: { token: { _eq: $token } }) {
+      id
+      email
+      token
+    }
+  }
+`;
