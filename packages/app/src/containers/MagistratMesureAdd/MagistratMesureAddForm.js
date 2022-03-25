@@ -17,7 +17,13 @@ import {
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
-import { Button, Heading, Text, SrOnly } from "~/components";
+import {
+  Button,
+  Heading,
+  Text,
+  SrOnly,
+  AccessibleInputDate,
+} from "~/components";
 
 import ServiceReservation from "./ServiceReservation";
 
@@ -94,6 +100,10 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             ariaLabel="Cabinet du tribunal"
           />
+          <div style={{ marginBottom: "30px" }}>
+            test
+            <AccessibleInputDate />
+          </div>
           <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"

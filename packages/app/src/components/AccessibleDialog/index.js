@@ -23,14 +23,6 @@ export default function AccessbleDialog({
   );
 
   useEffect(() => {
-    console.log("mounted accessible dialog");
-
-    return () => {
-      console.log("unmount accessible dialog");
-    };
-  });
-
-  useEffect(() => {
     document.addEventListener("keydown", escFunction, false);
 
     return () => {
@@ -40,7 +32,7 @@ export default function AccessbleDialog({
 
   return (
     <FocusScope contain autoFocus restoreFocus>
-      <div role="dialog" aria-labelledby="dialogTitle">
+      <div role="dialog" aria-labelledby="dialogTitle" aria-modal="true">
         <SrOnly id="dialogTitle">{dialogLabelText}</SrOnly>
         {children}
       </div>
