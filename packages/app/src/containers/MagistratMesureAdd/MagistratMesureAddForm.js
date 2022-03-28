@@ -101,10 +101,21 @@ export function MagistratMesureAddForm(props) {
             ariaLabel="Cabinet du tribunal"
           />
           <div style={{ marginBottom: "30px" }}>
-            test
-            <AccessibleInputDate />
+            accessible datepicker
+            <AccessibleInputDate
+              id="judgmentDate"
+              label="Date prévisionnelle du jugement"
+              placeholder="jj/mm/aaaa"
+              formik={formik}
+              size="small"
+              validationSchema={validationSchema}
+              value={formik.values.judgmentDate}
+              ariaLabel="Cabinet du tribunal"
+              ariaLabelledBy="judgmentDate_label"
+              ariaDescribedBy="judgmentDate_format_attendu"
+            />
           </div>
-          <FormGroupInputDate
+          {/* <FormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
             label="Date prévisionnelle du jugement"
@@ -114,7 +125,7 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             ariaLabelledBy="judgmentDate_label"
             ariaDescribedBy="judgmentDate_format_attendu"
-          />
+          /> */}
           <SrOnly id="judgmentDate_label">
             Date prévisionnelle du jugement
           </SrOnly>

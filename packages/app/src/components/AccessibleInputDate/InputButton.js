@@ -5,11 +5,17 @@ import { CalendarAlt } from "@styled-icons/fa-regular/CalendarAlt";
 const InputButton = forwardRef(({ value, onClick }, ref) => {
   return (
     <Button
+      width="40px"
       onClick={onClick}
       ref={ref}
-      sx={{ padding: "0.5rem", margiLeft: "0.5rem" }}
+      sx={{
+        padding: "0.5rem",
+        margiLeft: "0.5rem",
+        marginLeft: "-43px",
+        marginTop: "2px",
+      }}
       aria-label={`Sélectionnez une date${
-        value ? ` la date sélectionnée est ${value}` : ""
+        value ? `. la date sélectionnée est ${value}` : ""
       }`}
     >
       <CalendarAlt

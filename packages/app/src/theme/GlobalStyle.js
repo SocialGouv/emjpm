@@ -92,6 +92,9 @@ const styles = css`
   input {
     filter: none;
   }
+  button.react-datepicker__close-icon{
+    display: none !important;
+  }
 
   ${mdxClasses}
 `;

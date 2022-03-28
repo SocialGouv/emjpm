@@ -28,6 +28,26 @@ function getMonth(date) {
   return new Date(date).getMonth();
 }
 
+const gerPreviousMonth = (date) => {
+  const m = getMonth(date);
+  const y = getYear(date);
+  if (Number(m) === 0) {
+    return `${months[11]} ${y - 1}`;
+  } else {
+    return `${months[m - 1]} ${y}`;
+  }
+};
+
+const getNextMonth = (date) => {
+  const m = getMonth(date);
+  const y = getYear(date);
+  if (Number(m) === 11) {
+    return `${months[0]} ${y + 1}`;
+  } else {
+    return `${months[m + 1]} ${y}`;
+  }
+};
+
 export default function DatePickerHeader({
   decreaseMonth,
   prevMonthButtonDisabled,
@@ -45,8 +65,8 @@ export default function DatePickerHeader({
         <button
           onClick={decreaseYear}
           disabled={prevYearButtonDisabled}
-          aria-label="l'année précédente"
-          title="l'année précédente"
+          aria-label={`année précédente, ${getYear(date) - 1}`}
+          title={`année précédente, ${getYear(date) - 1}`}
         >
           <AngleDoubleLeft
             width="20"
@@ -54,13 +74,14 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
+            color="#ccc"
           />
         </button>
         <button
           onClick={decreaseMonth}
           disabled={prevMonthButtonDisabled}
-          aria-label="le mois précédent"
-          title="le mois précédent"
+          aria-label={`mois précédent, ${gerPreviousMonth(date)}`}
+          title={`mois précédent, ${gerPreviousMonth(date)}`}
         >
           <AngleLeft
             width="20"
@@ -68,6 +89,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
+            color="#ccc"
           />
         </button>
       </Flex>
@@ -84,8 +106,8 @@ export default function DatePickerHeader({
         <button
           onClick={increaseMonth}
           disabled={nextMonthButtonDisabled}
-          aria-label="le mois suivant"
-          title="le mois suivant"
+          title={`mois suivant, ${getNextMonth(date)}`}
+          aria-label={`mois suivant, ${getNextMonth(date)}`}
         >
           <AngleRight
             width="20"
@@ -93,13 +115,14 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
+            color="#ccc"
           />
         </button>
         <button
           onClick={increaseYear}
           disabled={nextYearButtonDisabled}
-          aria-label="l'année suivante"
-          title="l'année suivante"
+          title={`année suivante, ${getYear(date) + 1}`}
+          aria-label={`année suivante, ${getYear(date) + 1}`}
         >
           <AngleDoubleRight
             width="20"
@@ -107,6 +130,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
+            color="#ccc"
           />
         </button>
       </Flex>
