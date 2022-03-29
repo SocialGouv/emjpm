@@ -19,6 +19,8 @@ setDefaultLocale("fr");
 // to restore focus to the element on close
 let previousElement = null;
 
+const userDateFormat = new RegExp(/[0-9]{1,2}(\/)[0-9]{1,2}(\/)[0-9]{4}/);
+
 export default function AccessibleInputDate(props) {
   const buttonRef = useRef();
 
@@ -50,8 +52,6 @@ export default function AccessibleInputDate(props) {
     pooperElement.setAttribute("role", "dialog");
     pooperElement.setAttribute("aria-modal", true);
     pooperElement.setAttribute("aria-label", ariaLabel || "Choisir une date");
-    // react-datepicker__day--selected
-    // react-datepicker__day--keyboard-selected
     document.querySelector(".react-datepicker__day--selected")?.focus();
     document
       .querySelector(".react-datepicker__day--keyboard-selected")
@@ -71,7 +71,6 @@ export default function AccessibleInputDate(props) {
   }
 
   function onDateChange(date) {
-    console.log(date);
     let value;
     if (date) {
       value = format(date, dateFormatValue);
@@ -82,10 +81,11 @@ export default function AccessibleInputDate(props) {
   function onInputChange(e) {
     const { value } = e.target;
 
-    if (value.length <= 10) {
+    if (value.length < 10) {
       formik.setFieldValue(id, value);
     }
-    if (value.length === 10) {
+    if (value.length === 10 && userDateFormat.test(value)) {
+      console.log("userDateFormat.test(value)", userDateFormat.test(value));
       const userInputParsed = parse(value, dateFormat, new Date());
       onDateChange(userInputParsed);
     }
@@ -107,7 +107,6 @@ export default function AccessibleInputDate(props) {
       </div>
       <div>
         <DatePicker
-          isClearable={false}
           popperClassName="datepicker-dialog"
           onCalendarOpen={onCalendarOpen}
           onCalendarClose={onCalendarClose}
@@ -115,7 +114,7 @@ export default function AccessibleInputDate(props) {
           selected={selected}
           className={classNames("datepicker", className)}
           customInput={<InputButton ref={buttonRef} />}
-          popperPlacement="bottom-start"
+          // popperPlacement="bottom-start"
           calendarContainer={DatePickerContainer}
           renderCustomHeader={(headerProps) => (
             <DatePickerHeader {...headerProps} />
@@ -128,6 +127,7 @@ export default function AccessibleInputDate(props) {
           onChange={onDateChange}
           dateFormatValue={dateFormatValue}
           dateFormat={dateFormat}
+          popperPlacement="left"
         />
       </div>
     </Flex>

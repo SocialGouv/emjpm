@@ -6,7 +6,7 @@ import { SrOnly } from "~/components";
 export default function DatePickerContainer({ className, children }) {
   return (
     <div>
-      <SrOnly class="message" aria-live="polite" as="div">
+      <SrOnly className="message" aria-live="polite" as="div">
         <p>
           Utilisez les flèches de direction gauche et droite pour avancer ou
           reculer d'une journée.

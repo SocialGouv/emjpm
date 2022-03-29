@@ -1,4 +1,5 @@
 import * as yup from "yup";
+import { parse, isDate } from "date-fns";
 
 export const FORM_REQUIRED_MESSAGE = "Veuillez renseigner ce champ.";
 export const EMAIL_NOT_VALID =
@@ -28,6 +29,20 @@ export const QRCODE_TOKEN_FORMAT =
   "Le code doit être composé de 6 chiffres. Par exemple: 123546.";
 export const QRCODE_TOKEN_INVALID =
   "Le code n'est pas valide ou a expiré, si ce n'est pas encore fait, veuillez scanner le QRCode affiché en utilisant votre application 2FA pour obtenir un code valide, sinon il se peut que le code ait expiré, la durée de vie d'un code est de 30 secondes, consultez votre application 2FA pour obtenir un nouveau code.";
+
+export function parseDateString(_, originalValue) {
+  const parsedDate = isDate(originalValue)
+    ? originalValue
+    : parse(originalValue, "yyyy-MM-dd", new Date());
+  return parsedDate;
+}
+
+export function parseDateStringWhenNullable(_, originalValue) {
+  if (originalValue == "") {
+    return null;
+  }
+  return parseDateString(_, originalValue);
+}
 
 yup.setLocale({
   mixed: {
