@@ -29,7 +29,8 @@ const magistratMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
     judgmentDate: yup
       .date(FORM_DATE_NOT_VALID)
       .transform(parseDateStringWhenNullable)
-      .nullable(),
+      .nullable()
+      .typeError(FORM_DATE_NOT_VALID),
     nature_mesure: yup.string().required(),
     numero_rg: yup
       .string()

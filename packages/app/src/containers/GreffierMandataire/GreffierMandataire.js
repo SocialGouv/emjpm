@@ -80,6 +80,9 @@ export function GreffierMandataire(props) {
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
           <Button
+            sx={{
+              display: "inline-block",
+            }}
             as="a"
             type="null"
             href={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}

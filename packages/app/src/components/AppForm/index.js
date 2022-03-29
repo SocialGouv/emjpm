@@ -5,6 +5,7 @@ import FormGroupInputYear from "./FormGroupInputYear";
 import FormGrayBox from "./FormGrayBox";
 import FormInputBox from "./FormInputBox";
 import FormGroupSwitch from "./FormGroupSwitch";
+import AccessibleFormGroupInputDate from "./AccessibleFormGroupInputDate";
 
 export {
   FormGroupSelect,
@@ -14,6 +15,7 @@ export {
   FormGrayBox,
   FormInputBox,
   FormGroupSwitch,
+  AccessibleFormGroupInputDate,
 };
 export default {
   FormGroupSelect,
@@ -23,4 +25,5 @@ export default {
   FormGrayBox,
   FormInputBox,
   FormGroupSwitch,
+  AccessibleFormGroupInputDate,
 };

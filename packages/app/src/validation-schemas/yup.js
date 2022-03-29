@@ -38,7 +38,7 @@ export function parseDateString(_, originalValue) {
 }
 
 export function parseDateStringWhenNullable(_, originalValue) {
-  if (originalValue == "") {
+  if (originalValue == "" || originalValue == null) {
     return null;
   }
   return parseDateString(_, originalValue);

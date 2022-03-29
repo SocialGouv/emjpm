@@ -13,16 +13,11 @@ import {
   FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
+  AccessibleFormGroupInputDate,
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
-import {
-  Button,
-  Heading,
-  Text,
-  SrOnly,
-  AccessibleInputDate,
-} from "~/components";
+import { Button, Heading, Text, SrOnly } from "~/components";
 
 import ServiceReservation from "./ServiceReservation";
 
@@ -100,8 +95,8 @@ export function MagistratMesureAddForm(props) {
             ariaLabel="Cabinet du tribunal"
           />
           <div style={{ marginBottom: "30px" }}>
-            accessible datepicker
-            <AccessibleInputDate
+            <AccessibleFormGroupInputDate
+              title="Format: jj/mm/aaaa. Exemple 01/01/2021"
               id="judgmentDate"
               label="Date prévisionnelle du jugement"
               placeholder="jj/mm/aaaa"
@@ -109,22 +104,11 @@ export function MagistratMesureAddForm(props) {
               size="small"
               validationSchema={validationSchema}
               value={formik.values.judgmentDate}
-              ariaLabel="Cabinet du tribunal"
               ariaLabelledBy="judgmentDate_label"
               ariaDescribedBy="judgmentDate_format_attendu"
             />
           </div>
-          {/* <FormGroupInputDate
-            value={formik.values.judgmentDate}
-            id="judgmentDate"
-            label="Date prévisionnelle du jugement"
-            placeholder="jj/mm/aaaa"
-            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
-            formik={formik}
-            validationSchema={validationSchema}
-            ariaLabelledBy="judgmentDate_label"
-            ariaDescribedBy="judgmentDate_format_attendu"
-          /> */}
+
           <SrOnly id="judgmentDate_label">
             Date prévisionnelle du jugement
           </SrOnly>

@@ -9,7 +9,7 @@ import {
   FormGrayBox,
   FormGroupInput,
   FormGroupSelect,
-  FormGroupInputDate,
+  AccessibleFormGroupInputDate,
   FormGroupInputYear,
   FormInputBox,
 } from "~/components/AppForm";
@@ -132,7 +132,6 @@ export function MesureCreateForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-
           <FormGroupInputYear
             label="Année de naissance"
             placeholder="aaaa"
@@ -147,7 +146,8 @@ export function MesureCreateForm(props) {
           <SrOnly id="format_annee_naissance">
             Format attendu: aaaa. Exemple: 2021
           </SrOnly>
-          <FormGroupInputDate
+
+          <AccessibleFormGroupInputDate
             label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
@@ -175,7 +175,7 @@ export function MesureCreateForm(props) {
           role="group"
           aria-labelledby="mesure_de_protection_heading"
         >
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             placeholder="Date de nomination"
             id="date_nomination"
             formik={formik}

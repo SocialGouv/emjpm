@@ -10,7 +10,7 @@ import { useApolloClient } from "@apollo/client";
 import {
   FormGrayBox,
   FormGroupInput,
-  FormGroupInputDate,
+  AccessibleFormGroupInputDate,
   FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
@@ -96,7 +96,7 @@ export function GreffierMesureAddForm(props) {
             ariaLabel="Cabinet du tribunal"
           />
 
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
             label="Date prévisionnelle du jugement"

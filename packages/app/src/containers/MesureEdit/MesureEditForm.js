@@ -9,6 +9,7 @@ import { Box, Flex } from "rebass";
 import {
   FormGrayBox,
   FormGroupInput,
+  AccessibleFormGroupInputDate,
   FormGroupInputDate,
   FormGroupInputYear,
   FormGroupSelect,
@@ -115,7 +116,6 @@ export function MesureEditForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-
           <FormGroupInputYear
             label="Année de naissance"
             placeholder="aaaa"
@@ -130,7 +130,8 @@ export function MesureEditForm(props) {
           <SrOnly id="format_annee_naissance">
             Format: aaaa. Exemple: 2021.
           </SrOnly>
-          <FormGroupInputDate
+
+          <AccessibleFormGroupInputDate
             label="Date de première mise sous protection"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
@@ -177,7 +178,7 @@ export function MesureEditForm(props) {
               />
             </Box>
           </Flex>
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
@@ -191,7 +192,7 @@ export function MesureEditForm(props) {
           <SrOnly id="format_date_nomination">
             Format: jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             label="Date de la protection en cours"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
