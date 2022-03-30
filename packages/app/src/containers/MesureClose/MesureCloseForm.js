@@ -3,8 +3,12 @@ import { useFormik } from "formik";
 
 import { Box, Flex, Text } from "rebass";
 import * as Yup from "yup";
+import { parseDateStringWhenNullable } from "~/validation-schemas/yup";
 
-import { FormGroupSelect, FormGroupInputDate } from "~/components/AppForm";
+import {
+  FormGroupSelect,
+  AccessibleFormGroupInputDate,
+} from "~/components/AppForm";
 import { Button, Heading, SrOnly } from "~/components";
 import { FORM_DATE_NOT_VALID } from "../../validation-schemas/yup";
 
@@ -14,8 +18,9 @@ export function MesureCloseForm(props) {
   const validationSchema = Yup.object().shape({
     cause_sortie: Yup.string().required(),
     date_fin_mesure: Yup.date(FORM_DATE_NOT_VALID)
+      .transform(parseDateStringWhenNullable)
       .nullable()
-      .required(FORM_DATE_NOT_VALID),
+      .typeError(FORM_DATE_NOT_VALID),
   });
 
   const formik = useFormik({
@@ -61,7 +66,7 @@ export function MesureCloseForm(props) {
           <SrOnly id="instructions">
             {"Tous les champs marqués d'un astérisque * sont obligatoires"}
           </SrOnly>
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             label="Date de fin de la mesure de protection"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"

@@ -42,7 +42,7 @@ function AccessibleFormGroupInputDate(props) {
     ...datePickerProps
   } = props;
 
-  const { handleBlur, values } = formik;
+  const { handleBlur, values, errors: formikError } = formik;
 
   if (value === undefined) {
     value = values[id];
@@ -118,7 +118,13 @@ function AccessibleFormGroupInputDate(props) {
           ariaDescribedBy={props?.ariaDescribedBy}
           selected={selected}
           className={classNames("datepicker", className)}
-          customInput={<InputButton ref={buttonRef} readOnly={readOnly} />}
+          customInput={
+            <InputButton
+              ref={buttonRef}
+              readOnly={readOnly}
+              hasError={formikError && formikError[id]}
+            />
+          }
           calendarContainer={DatePickerContainer}
           renderCustomHeader={(headerProps) => (
             <DatePickerHeader {...headerProps} />
