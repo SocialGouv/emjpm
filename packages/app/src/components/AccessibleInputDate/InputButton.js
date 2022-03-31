@@ -6,6 +6,7 @@ const InputButton = forwardRef(
   ({ value, onClick, readOnly, hasError }, ref) => {
     return (
       <Button
+        type="button"
         variant={readOnly ? "outline" : "primary"}
         width="40px"
         onClick={onClick}
