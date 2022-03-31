@@ -20,7 +20,12 @@ import {
 
 const greffierMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
   yup.object().shape({
-    annee_naissance: yup.string().required(FORM_YEAR_NOT_VALID),
+    annee_naissance: yup
+      .number(FORM_YEAR_NOT_VALID)
+      .min(1900)
+      .max(new Date().getFullYear())
+      .typeError(FORM_YEAR_NOT_VALID)
+      .required(FORM_YEAR_NOT_VALID),
     cabinet: yup.string().nullable(),
     champ_mesure: yup.string().nullable(),
     civilite: yup.string().required(),

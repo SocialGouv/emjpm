@@ -64,7 +64,7 @@ function Input(props) {
       hasError={hasError}
       style={containerStyle}
     >
-      {(placeholder || label) && (
+      {(label || placeholder) && (
         <InputLabel
           size={size}
           htmlFor={name}
@@ -76,6 +76,7 @@ function Input(props) {
           {label || placeholder}
         </InputLabel>
       )}
+
       <InputElement
         size={size}
         type={type}

@@ -108,6 +108,7 @@ function AccessibleFormGroupInputDate(props) {
           }
           placeholder={readOnly ? null : placeholder}
           onBlur={handleBlur}
+          forceActive
         />
       </div>
       <Box>
@@ -122,7 +123,11 @@ function AccessibleFormGroupInputDate(props) {
             <InputButton
               ref={buttonRef}
               readOnly={readOnly}
-              hasError={formikError && formikError[id]}
+              hasError={
+                formikError &&
+                formikError[id] &&
+                (!!formik.touched[id] || formik.submitCount > 0)
+              }
             />
           }
           calendarContainer={DatePickerContainer}

@@ -134,17 +134,21 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-          <FormGroupInputYear
+
+          <FormGroupInput
             id="annee_naissance"
             label="Année de naissance"
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
+            forceActive
             formik={formik}
+            size="small"
             validationSchema={validationSchema}
-            aria-label="Année de naissance"
+            ariaLabel="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
             ariaLabelledBy="annee_naissance_label"
           />
+
           <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             Format: aaaa. Exemple: 2021

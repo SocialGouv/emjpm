@@ -132,11 +132,13 @@ export function MesureCreateForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-          <FormGroupInputYear
+          <FormGroupInput
             label="Année de naissance"
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
+            size="small"
+            forceActive
             formik={formik}
             validationSchema={validationSchema}
             ariaDescribedBy="format_annee_naissance"

@@ -10,7 +10,6 @@ import {
   FormGrayBox,
   FormGroupInput,
   AccessibleFormGroupInputDate,
-  FormGroupInputDate,
   FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
@@ -116,11 +115,13 @@ export function MesureEditForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-          <FormGroupInputYear
+          <FormGroupInput
             label="Année de naissance"
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
             id="annee_naissance"
+            forceActive
+            size="small"
             formik={formik}
             validationSchema={validationSchema}
             ariaDescribedBy="format_annee_naissance"

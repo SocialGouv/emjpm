@@ -95,7 +95,7 @@ export default function DatePickerHeader({
       </Flex>
       <h2
         id="id-dialog-label"
-        class="monthYear"
+        className="monthYear"
         aria-live="polite"
         style={{ fontSize: "1.2rem", fontWeight: "bold" }}
       >
