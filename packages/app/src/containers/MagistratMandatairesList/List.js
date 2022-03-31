@@ -108,13 +108,13 @@ function MagistratMandatairesListList(props) {
 
   return (
     <>
-      <SrOnly>
+      <SrOnly role="status">
         {count > 0 && (
-          <span role="status">
+          <span>
             {count} {count > 1 ? "résultat" : "résultats"}
           </span>
         )}
-        {count === 0 && <span role="status">Pas de donnée à afficher</span>}
+        {count === 0 && <span>Pas de donnée à afficher</span>}
       </SrOnly>
 
       {data.mandatairesList.map((item) => {

@@ -72,7 +72,7 @@ function MandatairesActivityChart(props) {
         </ResponsiveContainer>
       </Box>
 
-      <SrOnly>
+      <SrOnly as="div">
         <Table
           columns={pieChartData.map((x) => x.name).length}
           tableData={[

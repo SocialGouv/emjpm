@@ -90,11 +90,9 @@ function ListeBlancheSummary() {
   return (
     <>
       <SrOnly role="status">
-        <p>
-          {resultCount === 0
-            ? "Pas de donnée à afficher"
-            : `${resultCount} résultats`}{" "}
-        </p>
+        {resultCount === 0
+          ? "Pas de donnée à afficher"
+          : `${resultCount} résultats`}{" "}
       </SrOnly>
       <Card tabIndex="0">
         <Flex>
