@@ -41,6 +41,7 @@ function MesureEtatViewList({ mesure, ...props }) {
         {mesureEtats.map((etat) => (
           <Box key={etat.id}>
             <MesureEtatView
+              selectedMesureEtat={selectedMesureEtat}
               onClick={() => {
                 if (locked) {
                   return;

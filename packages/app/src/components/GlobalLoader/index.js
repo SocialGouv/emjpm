@@ -97,6 +97,7 @@ export default function GlobalLoader(props) {
             size={32}
             color="red"
             title={"Oups, une erreur est survenue"}
+            aria-label={"Oups, une erreur est survenue"}
           />
         </div>
       )}
