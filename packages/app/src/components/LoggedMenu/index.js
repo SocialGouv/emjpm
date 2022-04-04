@@ -88,7 +88,20 @@ function LoggedMenu(props) {
                 </Text>
               </Box>
               <Box height="25px">
-                {isOpen ? <ChevronUp size={25} /> : <ChevronDown size={25} />}
+                {isOpen ? (
+                  <ChevronUp
+                    size={25}
+                    role="img"
+                    alt="menu ouvert"
+                    pointerEvents="none"
+                  />
+                ) : (
+                  <ChevronDown
+                    size={25}
+                    alt="menu fermé"
+                    pointerEvents="none"
+                  />
+                )}
               </Box>
             </Flex>
           </MenuButton>

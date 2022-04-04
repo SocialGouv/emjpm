@@ -3485,17 +3485,6 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@react-aria/dialog@^3.1.8":
-  version "3.1.8"
-  resolved "https://registry.yarnpkg.com/@react-aria/dialog/-/dialog-3.1.8.tgz#3461fc16ff3b9869a9535b403dbcab36d0a6ac51"
-  integrity sha512-jWoApTZc1QSkfu3B/9H5Zj2DNnSG71PjC6cFrGwo2Eir1jQ0u9OjIpqeSqVtHoNFTqR0av0SyqhJsZx1dpjeVw==
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-aria/focus" "^3.5.4"
-    "@react-aria/utils" "^3.11.3"
-    "@react-stately/overlays" "^3.1.6"
-    "@react-types/dialog" "^3.3.4"
-
 "@react-aria/focus@^3.5.4":
   version "3.5.4"
   resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.5.4.tgz#8eb8234bae15421eb6d7926f656b291cee6e19a2"
@@ -3534,36 +3523,12 @@
     "@react-types/shared" "^3.11.2"
     clsx "^1.1.1"
 
-"@react-stately/overlays@^3.1.6":
-  version "3.1.6"
-  resolved "https://registry.yarnpkg.com/@react-stately/overlays/-/overlays-3.1.6.tgz#ffcdea406ded6f6a541986118fb2f8d02fcf1303"
-  integrity sha512-0iOdRqYjhTj8966lO9xN8+9IXXJ1Ngv2hCF2imPa40Jl1BXLBogLPblCq3HEQPcPsa+0pU3+xoaIb0MWdIkY9w==
-  dependencies:
-    "@babel/runtime" "^7.6.2"
-    "@react-stately/utils" "^3.4.1"
-    "@react-types/overlays" "^3.5.4"
-
 "@react-stately/utils@^3.4.1":
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/@react-stately/utils/-/utils-3.4.1.tgz#56f049aa1704d338968b5973c796ee606e9c0c62"
   integrity sha512-mjFbKklj/W8KRw1CQSpUJxHd7lhUge4i00NwJTwGxbzmiJgsTWlKKS/1rBf48ey9hUBopXT5x5vG/AxQfWTQug==
   dependencies:
     "@babel/runtime" "^7.6.2"
-
-"@react-types/dialog@^3.3.4":
-  version "3.3.4"
-  resolved "https://registry.yarnpkg.com/@react-types/dialog/-/dialog-3.3.4.tgz#bde08cc8f37c2c8bdfa17630e19c47f311a6c649"
-  integrity sha512-BSJuGdoblrf4N47TfH5U7R6HbBzG2qNbq0PA2Wwu+OD/oczQXFgrsYfM5AhPReEoVtr+ISstGVk+SpMnZbl/MA==
-  dependencies:
-    "@react-types/overlays" "^3.5.4"
-    "@react-types/shared" "^3.11.2"
-
-"@react-types/overlays@^3.5.4":
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/@react-types/overlays/-/overlays-3.5.4.tgz#7bb52b738ae2d088a38563621e6ea65a173de6be"
-  integrity sha512-lofEJS+ng9ydgHwztftTGIOaiuOni1zPTSZHmxPqlOrC+VQIdvdHUKF+3IOR1d6CbYA65a80oXO5sbMwij2Z/w==
-  dependencies:
-    "@react-types/shared" "^3.11.2"
 
 "@react-types/shared@^3.11.2":
   version "3.11.2"
