@@ -15,18 +15,17 @@ export default function useMesuresLocked(mesure) {
   let lockedByEditor;
   let editorName;
   if (isService) {
-    lockedByEditor = user.service?.editor_locked_mesures;
+    lockedByEditor = mesure
+      ? !!mesure.editor_id
+      : user.service?.editor_locked_mesures;
     locked = lockedByEditor || user.service?.sync_ocmi_enable;
     editorName = user.service?.editor?.name;
   } else {
-    lockedByEditor = user.mandataire?.editor_locked_mesures;
+    lockedByEditor = mesure
+      ? !!mesure.editor_id
+      : user.mandataire?.editor_locked_mesures;
     locked = lockedByEditor || user.mandataire?.sync_ocmi_enable;
     editorName = user.mandataire?.editor?.name;
-  }
-
-  if (mesure && !mesure.editor_id) {
-    locked = null;
-    lockedByEditor = null;
   }
 
   const message = lockedByEditor

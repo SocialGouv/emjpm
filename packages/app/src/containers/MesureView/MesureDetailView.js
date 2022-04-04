@@ -61,6 +61,7 @@ function MesureDetailView({ mesure, ...props }) {
       ? {
           disabled: true,
           title: message,
+          "aria-label": message,
         }
       : {};
 
@@ -176,7 +177,6 @@ function MesureDetailView({ mesure, ...props }) {
             bg="red"
             color="white"
             to={`${userBasePath}/mesures/${id}/delete`}
-            {...mesureModificationButtonProps}
             title={
               en_attente_reouverture
                 ? "Supprimer la demande de réouverture"
@@ -187,6 +187,7 @@ function MesureDetailView({ mesure, ...props }) {
                 ? "Supprimer la demande de réouverture"
                 : "Supprimer la mesure"
             }
+            {...mesureModificationButtonProps}
           >
             {en_attente_reouverture
               ? "Supprimer la demande de réouverture"
@@ -197,7 +198,6 @@ function MesureDetailView({ mesure, ...props }) {
             <LinkButton
               outline={true}
               to={`${userBasePath}/mesures/${id}/accept`}
-              {...mesureModificationButtonProps}
               title={
                 en_attente_reouverture
                   ? "Accepter la réouverture"
@@ -208,6 +208,7 @@ function MesureDetailView({ mesure, ...props }) {
                   ? "Accepter la réouverture"
                   : "Accepter la mesure"
               }
+              {...mesureModificationButtonProps}
             >
               {en_attente_reouverture
                 ? "Accepter la réouverture"
@@ -220,9 +221,9 @@ function MesureDetailView({ mesure, ...props }) {
               ml={3}
               outline={true}
               to={`${userBasePath}/mesures/${id}/reactivate`}
-              {...mesureModificationButtonProps}
               title="Rouvrir la mesure"
               aria-label="Rouvrir la mesure"
+              {...mesureModificationButtonProps}
             >
               Rouvrir la mesure
             </LinkButton>
@@ -235,9 +236,9 @@ function MesureDetailView({ mesure, ...props }) {
                 color="white"
                 outline={true}
                 to={`${userBasePath}/mesures/${id}/close`}
-                {...mesureModificationButtonProps}
                 title="Cloturer la mesure"
                 aria-label="Cloturer la mesure"
+                {...mesureModificationButtonProps}
               >
                 Cloturer la mesure
               </LinkButton>
@@ -246,9 +247,9 @@ function MesureDetailView({ mesure, ...props }) {
                 ml={3}
                 outline={true}
                 to={`${userBasePath}/mesures/${id}/edit`}
-                {...mesureModificationButtonProps}
                 title="Modifier la mesure"
                 aria-label="Modifier la mesure"
+                {...mesureModificationButtonProps}
               >
                 Modifier la mesure
               </LinkButton>

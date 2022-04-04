@@ -26,6 +26,7 @@ function MesureEtatViewList({ mesure, ...props }) {
     ? {
         disabled: true,
         title: message,
+        "aria-label": message,
       }
     : {};
 
@@ -90,9 +91,9 @@ function MesureEtatViewList({ mesure, ...props }) {
               setSelectedMesureEtat(null);
               setCreationMode(true);
             }}
-            {...mesureModificationButtonProps}
             title="Ajouter un changement"
             aria-label="Ajouter un changement"
+            {...mesureModificationButtonProps}
           >
             Ajouter un changement
           </Button>
