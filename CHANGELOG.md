@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.154.2](https://github.com/SocialGouv/emjpm/compare/v25.154.1...v25.154.2) (2022-04-04)
+
+
+### Bug Fixes
+
+* ocmi + editor mesures lock ([703f1ca](https://github.com/SocialGouv/emjpm/commit/703f1ca8ed698b469a9d3faabf989ff7b3f264f0))
+* typo mandats de protection future ([000d3bc](https://github.com/SocialGouv/emjpm/commit/000d3bc1bf72942b3976f1aff3cfd113ab2e211e))
+
+
+
+
+
 ## [25.154.1](https://github.com/SocialGouv/emjpm/compare/v25.154.0...v25.154.1) (2022-03-24)
 
 
