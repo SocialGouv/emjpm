@@ -1,4 +1,8 @@
-import yup, { FORM_DATE_NOT_VALID, CODE_POSTAL_NOT_VALID } from "./yup";
+import yup, {
+  FORM_DATE_NOT_VALID,
+  CODE_POSTAL_NOT_VALID,
+  parseDateString,
+} from "./yup";
 
 const mesureEtatSchema = yup.object().shape({
   champ_mesure: yup.string().nullable(),
@@ -10,8 +14,11 @@ const mesureEtatSchema = yup.object().shape({
     })
     .nullable(),
   date_changement_etat: yup
+
     .date(FORM_DATE_NOT_VALID)
-    .required(FORM_DATE_NOT_VALID),
+    .transform(parseDateString)
+    .required(FORM_DATE_NOT_VALID)
+    .typeError(FORM_DATE_NOT_VALID),
   lieu_vie: yup.string().required(),
   nature_mesure: yup.string().required(),
   pays: yup.string().nullable().required(),

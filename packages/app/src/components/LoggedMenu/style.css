@@ -18,12 +18,15 @@
 .UserMenu-AriaMenuButton-trigger:hover,
 .UserMenu-AriaMenuButton-trigger:focus,
 .UserMenu-AriaMenuButton-trigger.is-open {
-
 }
 
 .UserMenu-AriaMenuButton-trigger:active,
 .UserMenu-AriaMenuButton-trigger.is-open {
+}
 
+.UserMenu-AriaMenuButton > span[role="button"][aria-expanded="true"] {
+  outline: 2px solid #007ad9;
+  border-radius: 2px;
 }
 
 .UserMenu-AriaMenuButton-menu {
@@ -45,23 +48,25 @@
 .UserMenu-AriaMenuButton-menuItem {
   cursor: pointer;
   padding: 8px;
-  border-bottom: 1px solid #EEE;
+  border-bottom: 1px solid #eee;
   text-align: left;
 }
 
-.UserMenu-AriaMenuButton-menuItemWrapper:first-of-type .UserMenu-AriaMenuButton-menuItem {
+.UserMenu-AriaMenuButton-menuItemWrapper:first-of-type
+  .UserMenu-AriaMenuButton-menuItem {
   border-top-right-radius: 3px;
   border-top-left-radius: 3px;
 }
 
-.UserMenu-AriaMenuButton-menuItemWrapper:last-of-type .UserMenu-AriaMenuButton-menuItem {
+.UserMenu-AriaMenuButton-menuItemWrapper:last-of-type
+  .UserMenu-AriaMenuButton-menuItem {
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
 }
 
 .UserMenu-AriaMenuButton-menuItem:hover,
 .UserMenu-AriaMenuButton-menuItem:focus {
-  background-color: #4183C4;
+  background-color: #4183c4;
   color: #fff;
 }
 

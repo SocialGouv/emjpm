@@ -10,10 +10,9 @@ import { useApolloClient } from "@apollo/client";
 import {
   FormGrayBox,
   FormGroupInput,
-  FormGroupInputDate,
-  FormGroupInputYear,
   FormGroupSelect,
   FormInputBox,
+  AccessibleFormGroupInputDate,
 } from "~/components/AppForm";
 import { IS_URGENT } from "~/constants/mesures";
 import { magistratMandataireSchema } from "~/validation-schemas";
@@ -94,17 +93,21 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             ariaLabel="Cabinet du tribunal"
           />
-          <FormGroupInputDate
-            value={formik.values.judgmentDate}
-            id="judgmentDate"
-            label="Date prévisionnelle du jugement"
-            placeholder="jj/mm/aaaa"
-            title="Format: jj/mm/aaaa. Exemple 01/01/2021"
-            formik={formik}
-            validationSchema={validationSchema}
-            ariaLabelledBy="judgmentDate_label"
-            ariaDescribedBy="judgmentDate_format_attendu"
-          />
+          <div style={{ marginBottom: "30px" }}>
+            <AccessibleFormGroupInputDate
+              title="Format: jj/mm/aaaa. Exemple 01/01/2021"
+              id="judgmentDate"
+              label="Date prévisionnelle du jugement"
+              placeholder="jj/mm/aaaa"
+              formik={formik}
+              size="small"
+              validationSchema={validationSchema}
+              value={formik.values.judgmentDate}
+              ariaLabelledBy="judgmentDate_label"
+              ariaDescribedBy="judgmentDate_format_attendu"
+            />
+          </div>
+
           <SrOnly id="judgmentDate_label">
             Date prévisionnelle du jugement
           </SrOnly>
@@ -130,17 +133,21 @@ export function MagistratMesureAddForm(props) {
             validationSchema={validationSchema}
             aria-label="Votre civilité"
           />
-          <FormGroupInputYear
+
+          <FormGroupInput
             id="annee_naissance"
             label="Année de naissance"
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
+            forceActive
             formik={formik}
+            size="small"
             validationSchema={validationSchema}
-            aria-label="Année de naissance"
+            ariaLabel="Année de naissance"
             ariaDescribedBy="annee_naissance_format_attendu"
             ariaLabelledBy="annee_naissance_label"
           />
+
           <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             Format: aaaa. Exemple: 2021

@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.154.2](https://github.com/SocialGouv/emjpm/compare/v25.154.1...v25.154.2) (2022-04-04)
+
+
+### Bug Fixes
+
+* ocmi + editor mesures lock ([703f1ca](https://github.com/SocialGouv/emjpm/commit/703f1ca8ed698b469a9d3faabf989ff7b3f264f0))
+* typo mandats de protection future ([000d3bc](https://github.com/SocialGouv/emjpm/commit/000d3bc1bf72942b3976f1aff3cfd113ab2e211e))
+
+
+
+
+
+## [25.154.1](https://github.com/SocialGouv/emjpm/compare/v25.154.0...v25.154.1) (2022-03-24)
+
+
+### Bug Fixes
+
+* envrc source_up ([bb44296](https://github.com/SocialGouv/emjpm/commit/bb44296de74523826ea40282e5f1374836bb384d))
+* skip to content reopen mesure service ([74358e8](https://github.com/SocialGouv/emjpm/commit/74358e8def270bb69e98095b4978f2487c69534b))
+* **rgaa:** change tag of listItem ([#2841](https://github.com/SocialGouv/emjpm/issues/2841)) ([a24be0f](https://github.com/SocialGouv/emjpm/commit/a24be0f0614c10cd169c9e170268fc9893e21745))
+
+
+
+
+
 # [25.154.0](https://github.com/SocialGouv/emjpm/compare/v25.153.0...v25.154.0) (2022-03-23)
 
 

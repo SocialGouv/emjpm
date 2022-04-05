@@ -21,7 +21,7 @@ export default function AccessibleSelect({
   const ClearIndicatorStyles = (base, state) => ({
     ...base,
     cursor: "pointer",
-    color: state.isFocused ? "blue" : "black",
+    color: state.isFocused ? "#007AD9" : "inherit",
   });
 
   const multiValueRemoveStyle = (base, state) => ({
@@ -45,14 +45,18 @@ export default function AccessibleSelect({
           required={props.required}
           aria-required={props.required}
           readOnly={props.readOnly}
-          onClick={() => selectRef?.current?.focus()}
+          onClick={() => {
+            if (!isCreatable) {
+              selectRef.current?.onMenuOpen();
+            }
+          }}
         >
           {label}
           {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <Component
-        ref={selectRef}
+        {...(!isCreatable && { ref: selectRef })}
         options={props?.options || []}
         components={{ MultiValueRemove, ClearIndicator }}
         styles={{

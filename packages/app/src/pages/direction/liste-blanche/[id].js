@@ -29,12 +29,14 @@ function ListeBlancheDetailPage() {
                 onClick={() => props.navigate(props.href)}
                 mb={4}
                 display="block"
+                href="/direction"
+                title="Retour"
+                aria-label="Retour à la page précedente"
               >
                 &larr; Retour
               </StyledLink>
             )}
           />
-
           <ListeBlancheEdit
             id={id}
             handleSubmit={async () => {

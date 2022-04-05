@@ -18,6 +18,7 @@ function MesureListButtonBar() {
     ? {
         disabled: true,
         title: message,
+        "aria-label": message,
       }
     : {};
 
@@ -26,10 +27,10 @@ function MesureListButtonBar() {
       <Flex flexDirection="row">
         <Box>
           <LinkButton
-            {...mesureModificationButtonProps}
             to={`${path}/add-mesures`}
             title="Ajouter une mesure"
             aria-label="Ajouter une mesure"
+            {...mesureModificationButtonProps}
           >
             Ajouter une mesure
           </LinkButton>
@@ -37,14 +38,19 @@ function MesureListButtonBar() {
         <Box ml={1}>
           <LinkButton
             to={`${path}/import-mesures`}
-            {...(lockedByEditor ? mesureModificationButtonProps : {})}
             title="Importer vos mesures"
             aria-label="Importer vos mesures"
+            {...(lockedByEditor ? mesureModificationButtonProps : {})}
           >
             Importer vos mesures
           </LinkButton>
         </Box>
-        <MesureExportExcelButton ml={1} mr={2} />
+        <MesureExportExcelButton
+          ml={1}
+          mr={2}
+          title="Exporter les mesures"
+          aria-label="Exporter les mesures"
+        />
       </Flex>
     </Box>
   );

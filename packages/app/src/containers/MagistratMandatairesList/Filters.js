@@ -153,6 +153,7 @@ function MagistratMandatairesListFilters(props) {
                   ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
                   : null
               }
+              aria-pressed={searchByLocation}
             >
               <Location
                 size={extraIconsSize}
@@ -178,6 +179,7 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
                   : null
               }
+              aria-pressed={habilitation}
             >
               <CheckShield
                 size={extraIconsSize}
@@ -203,6 +205,7 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
                   : null
               }
+              aria-pressed={prefer}
             >
               <Star
                 size={extraIconsSize}
@@ -228,6 +231,7 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataire ayant des places disponibles"
                   : null
               }
+              aria-pressed={available}
             >
               <DotCircle
                 size={extraIconsSize}

@@ -56,7 +56,7 @@ function MandatairesDisponibilityChart({ data }) {
         </ResponsiveContainer>
       </Box>
 
-      <SrOnly>
+      <SrOnly as="div">
         <table>
           <tr>
             <th scope="row">Type de mandataires</th>

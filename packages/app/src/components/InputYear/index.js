@@ -1,7 +1,9 @@
+import { useRef } from "react";
 import classNames from "classnames";
 
 import DatePicker from "react-datepicker";
 import { parse, format } from "date-fns";
+
 import "./style.scss";
 
 import { RequiredAsterisk } from "~/components";
@@ -20,6 +22,8 @@ export default function InputYear(props) {
     ariaLabelledBy,
     ...datePickerProps
   } = props;
+
+  const yearPickerRef = useRef(null);
 
   if (!isInt(value)) {
     value = "";
@@ -61,6 +65,7 @@ export default function InputYear(props) {
         ariaDescribedBy={props?.ariaDescribedBy}
         ariaRequired={props.required}
         ariaLabelledBy={ariaLabelledBy}
+        ref={yearPickerRef}
       />
     </>
   );
