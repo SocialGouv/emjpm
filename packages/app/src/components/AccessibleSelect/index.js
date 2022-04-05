@@ -21,7 +21,7 @@ export default function AccessibleSelect({
   const ClearIndicatorStyles = (base, state) => ({
     ...base,
     cursor: "pointer",
-    color: state.isFocused ? "blue" : "black",
+    color: state.isFocused ? "#007AD9" : "inherit",
   });
 
   const multiValueRemoveStyle = (base, state) => ({

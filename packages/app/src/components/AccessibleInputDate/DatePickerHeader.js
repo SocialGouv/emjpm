@@ -63,6 +63,7 @@ export default function DatePickerHeader({
     <Flex justifyContent="space-between" alignItems="center" margin="1">
       <Flex justifyContent="space-between">
         <button
+          type="button"
           onClick={decreaseYear}
           disabled={prevYearButtonDisabled}
           aria-label={`année précédente, ${getYear(date) - 1}`}
@@ -78,6 +79,7 @@ export default function DatePickerHeader({
           />
         </button>
         <button
+          type="button"
           onClick={decreaseMonth}
           disabled={prevMonthButtonDisabled}
           aria-label={`mois précédent, ${gerPreviousMonth(date)}`}
@@ -104,6 +106,7 @@ export default function DatePickerHeader({
 
       <Flex justifyContent="space-between">
         <button
+          type="button"
           onClick={increaseMonth}
           disabled={nextMonthButtonDisabled}
           title={`mois suivant, ${getNextMonth(date)}`}
@@ -119,6 +122,7 @@ export default function DatePickerHeader({
           />
         </button>
         <button
+          type="button"
           onClick={increaseYear}
           disabled={nextYearButtonDisabled}
           title={`année suivante, ${getYear(date) + 1}`}
