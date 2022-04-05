@@ -27,7 +27,7 @@ const MESURE_PROTECTION = {
   NATURE_MESURE: buildKeys({
     curatelle_renforcee: "curatelle renforcée",
     curatelle_simple: "curatelle simple",
-    mandat_protection_future: "mandatat de protection future",
+    mandat_protection_future: "mandats de protection future",
     mesure_accompagnement_judiciaire: "mesure d'accompagnement judiciaire",
     mesure_ad_hoc: "mesure ad'hoc",
     sauvegarde_justice: "sauvegarde de justice",

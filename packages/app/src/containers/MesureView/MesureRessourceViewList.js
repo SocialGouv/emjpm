@@ -19,6 +19,7 @@ function MesureRessourceViewList({ mesure, ...props }) {
     ? {
         disabled: true,
         title: message,
+        "aria-label": message,
       }
     : {};
 
@@ -102,9 +103,9 @@ function MesureRessourceViewList({ mesure, ...props }) {
               setSelectedMesureRessource(null);
               setCreationMode(true);
             }}
-            {...mesureModificationButtonProps}
             title="Ajouter une ressource"
             aria-label="Ajouter une ressource"
+            {...mesureModificationButtonProps}
           >
             Ajouter une ressource
           </Button>
