@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.155.0](https://github.com/SocialGouv/emjpm/compare/v25.154.2...v25.155.0) (2022-04-11)
+
+
+### Features
+
+* mandoline api service ([f7782fc](https://github.com/SocialGouv/emjpm/commit/f7782fc2537a39c7fe585f5123f070a0ab8df645))
+
+
+
+
+
 ## [25.154.2](https://github.com/SocialGouv/emjpm/compare/v25.154.1...v25.154.2) (2022-04-04)
 
 
