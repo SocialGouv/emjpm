@@ -27,6 +27,19 @@ function LinkButtonStyle(isActive, props) {
     px: 3,
     py: 2,
     transition: "150ms ease-in-out opacity",
+    "&:focus": {
+      outline: "none",
+      boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) ",
+    },
+    "&:active": {
+      color: "white",
+      opacity: "0.6",
+    },
+    "&:hover": {
+      color: "white",
+      opacity: "0.8",
+      textDecoration: "none",
+    },
   };
 
   if (!props.outline) {
@@ -46,7 +59,7 @@ function LinkButtonStyle(isActive, props) {
             },
             "&:focus": {
               outline: "none",
-              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4)",
+              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) !important",
             },
           }),
     };

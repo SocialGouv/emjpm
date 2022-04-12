@@ -87,5 +87,12 @@ export function getStyle(props) {
         paddingTop: isMulti ? "15px" : "2px",
       };
     },
+    placeholder: (defaultStyles) => {
+      console.log(colors);
+      return {
+        ...defaultStyles,
+        color: colors.textSecondary,
+      };
+    },
   };
 }
