@@ -73,7 +73,7 @@ function renderSectionTitle({
       <Flex
         sx={{
           color: isActiveSesion
-            ? "#007AD9"
+            ? "#0072ca"
             : menuSection.status === "empty"
             ? "#979797"
             : "#555555",
@@ -86,7 +86,7 @@ function renderSectionTitle({
         <Flex
           sx={{
             ...styles.menuTag,
-            border: isActiveSesion ? "2px solid #007AD9" : "1px solid #979797",
+            border: isActiveSesion ? "2px solid #0072ca" : "1px solid #979797",
           }}
         >
           <Text>{index + 1}</Text>
@@ -120,7 +120,7 @@ function renderSubSection({
       key={`${step.label}_${index}`}
       sx={{
         color: isActiveSubSection
-          ? "#007AD9"
+          ? "#0072ca"
           : step.status === "empty"
           ? "#979797"
           : "#555555",

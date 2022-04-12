@@ -3,6 +3,7 @@ function InputWrapperStyle(props) {
     bg: props.readOnly ? "#f8fafc" : "transparent",
     border: "1px solid",
     borderColor: () => {
+      if (props.isActive) return "primary";
       if (props.isValid) return "success";
       if (props.hasError) return "error";
       return "border";
