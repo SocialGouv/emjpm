@@ -37,21 +37,20 @@ export function AdminUserDeleteForm(props) {
     validationSchema: adminUserDeleteSchema,
   });
 
+  const userType = null; // TODO
+  const labelUserType = userType === "admin" ? "administrateur" : "utilisateur";
+
   return (
     <Flex sx={AdminUserDeleteRemoveStyle}>
       <Box bg="cardSecondary" p="5" width={[1, 3 / 5]}>
         <Heading size={5} mb="1">
-          {"Supprimer l'administrateur"}
+          {`Supprimer l'${labelUserType}`}
         </Heading>
         <Text mb="2" lineHeight="1.5">
-          {
-            "Vous êtes sur le point de supprimer définitivement un administrateur du système eMJPM. Toute suppression est irréversible."
-          }
+          {`Vous êtes sur le point de supprimer définitivement un ${labelUserType} du système eMJPM. Toute suppression est irréversible.`}
         </Text>
         <Text lineHeight="1.5">
-          {
-            'Si vous souhaitez supprimer cet administrateur, cliquez sur "Supprimer l\'administrateur".'
-          }
+          {`Si vous souhaitez supprimer cet ${labelUserType}, cliquez sur "Supprimer l'${labelUserType}".`}
         </Text>
         <Text lineHeight="1.5">
           {'Dans le cas contraire, cliquez sur "Annuler".'}
@@ -59,7 +58,7 @@ export function AdminUserDeleteForm(props) {
       </Box>
       <Box p="5" width={[1, 2 / 5]}>
         <Box mb="3">
-          <Heading size={3}>{"Supprimer l'administrateur"}</Heading>
+          <Heading size={3}>{`Supprimer l'${labelUserType}`}</Heading>
         </Box>
         <form noValidate onSubmit={formik.handleSubmit}>
           <Flex justifyContent="flex-end">
@@ -70,8 +69,8 @@ export function AdminUserDeleteForm(props) {
                 href={`/admin/users/${userId}`}
                 mr="2"
                 variant="outline"
-                title="Annuler la suppression d'un utilisateur"
-                aria-label="Annuler la suppression d'un utilisateur"
+                title={`Annuler la suppression d'un ${labelUserType}`}
+                aria-label={`Annuler la suppression d'un ${labelUserType}`}
               >
                 Annuler
               </Button>
@@ -81,10 +80,10 @@ export function AdminUserDeleteForm(props) {
                 type="submit"
                 disabled={formik.isSubmitting}
                 isLoading={formik.isSubmitting}
-                title="Supprimer l'administrateur du service"
-                aria-label="Supprimer l'administrateur du service"
+                title={`Supprimer l'${labelUserType}`}
+                aria-label={`Supprimer l'${labelUserType}`}
               >
-                {"Supprimer l'administrateur"}
+                {`Supprimer l'${labelUserType}`}
               </Button>
             </Box>
           </Flex>
