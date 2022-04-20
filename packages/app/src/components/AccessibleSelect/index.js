@@ -11,6 +11,17 @@ import MultiValueRemove from "./MultiValueRemove";
 import ClearIndicator from "./ClearIndicator";
 import { ariaLiveMessages } from "./ariaLiveMessages";
 
+const colourStyles = {
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    console.log({ data, isDisabled, isFocused, isSelected });
+    return {
+      ...styles,
+      backgroundColor: isFocused || isSelected ? "#0072ca" : null,
+      color: isFocused || isSelected ? "#FFFFFF" : "#333333",
+    };
+  },
+};
+
 export default function AccessibleSelect({
   label,
   isCreatable,
@@ -59,6 +70,7 @@ export default function AccessibleSelect({
           clearIndicator: ClearIndicatorStyles,
           multiValueRemove: multiValueRemoveStyle,
           ...getStyle(props),
+          ...colourStyles,
         }}
         menuPortalTarget={document.body}
         {...props}
