@@ -39,8 +39,8 @@ function France(props) {
 France.propTypes = {};
 
 France.defaultProps = {
-  aboveColor: "#FF6966",
-  belowColor: "#70D54F",
+  aboveColor: "#df1400",
+  belowColor: "#2d7600",
   color: "#f6f6f9",
   departements: [],
 };

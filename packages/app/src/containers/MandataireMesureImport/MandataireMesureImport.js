@@ -50,7 +50,7 @@ function MandataireMesureImport({ mandataireId, mandataireUserId }) {
         </Text>
         <Flex flexDirection="row" justifyContent="center" mt={2} mb={2}>
           <DocumentLink document={MANDATAIRE_MESURE_IMPORT_MANUAL}>
-            <FilePdf size="86" width="100%" color="#FF0000" />
+            <FilePdf size="86" width="100%" color="#df1400" />
             <Box textAlign="center" mt={2} color="#0072ca">
               Télécharger la note explicative (.pdf)
             </Box>

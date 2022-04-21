@@ -4,7 +4,7 @@ const style = {
   padding: "10px",
   zIndex: 1050,
   backgroundColor: "white",
-  borderColor: "#ff0000",
+  borderColor: "#df1400",
   borderWidth: "1px",
   borderStyle: "solid",
   borderRadius: "5px",

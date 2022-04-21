@@ -88,11 +88,23 @@ export function getStyle(props) {
       };
     },
     placeholder: (defaultStyles) => {
-      console.log(colors);
       return {
         ...defaultStyles,
         color: colors.textSecondary,
       };
     },
+    indicatorSeparator: (defaultStyles) => ({
+      ...defaultStyles,
+      backgroundColor: "#707074",
+    }),
+    dropdownIndicator: (defaultStyles) => ({
+      ...defaultStyles,
+      color: "#707074",
+    }),
+
+    multiValueRemove: (provided) => ({
+      ...provided,
+      backgroundColor: "#fff2ef",
+    }),
   };
 }
