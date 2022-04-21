@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.155.2](https://github.com/SocialGouv/emjpm/compare/v25.155.1...v25.155.2) (2022-04-21)
+
+
+### Bug Fixes
+
+* dev scripts ([8c911ec](https://github.com/SocialGouv/emjpm/commit/8c911ec7a6cd1172398c66c3d1629d623e9afb6a))
+* hasura + seed ([671d78a](https://github.com/SocialGouv/emjpm/commit/671d78a31ac677e6990ca056569beb5e22f14a90))
+* label user del tmp ([a5a6f8f](https://github.com/SocialGouv/emjpm/commit/a5a6f8f7197381177dcd492f571208cbdd790139))
+* update preprose ([f273c14](https://github.com/SocialGouv/emjpm/commit/f273c149bd3e834370c400369d7d9790f08d65b5))
+
+
+
+
+
 ## [25.155.1](https://github.com/SocialGouv/emjpm/compare/v25.155.0...v25.155.1) (2022-04-11)
 
 
