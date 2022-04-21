@@ -9,7 +9,7 @@ const styles = {
   },
   marker: {
     alignItems: "center",
-    backgroundColor: "#51D5A0",
+    backgroundColor: "#1E7B56",
     border: "2px solid #56C498",
     borderRadius: "50%",
     color: "white",
@@ -19,7 +19,7 @@ const styles = {
     width: 30,
   },
   selected: {
-    backgroundColor: "rgb(213, 112, 81)",
+    backgroundColor: "#B94D2D",
     border: "2px solid rgb(196, 86, 86)",
     fontWeight: "bold",
   },

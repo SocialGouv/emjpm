@@ -152,7 +152,7 @@ function GreffierMandatairesListFilters(props) {
             >
               <Location
                 size={extraIconsSize}
-                color={searchByLocation ? "#70D54F" : ""}
+                color={searchByLocation ? "#2d7600" : ""}
               />
             </Button>
           </Box>
@@ -175,7 +175,7 @@ function GreffierMandatairesListFilters(props) {
             >
               <CheckShield
                 size={extraIconsSize}
-                color={habilitation ? "#70D54F" : ""}
+                color={habilitation ? "#2d7600" : ""}
               />
             </Button>
           </Box>
@@ -196,7 +196,7 @@ function GreffierMandatairesListFilters(props) {
                   : null
               }
             >
-              <Star size={extraIconsSize} color={prefer ? "#70D54F" : ""} />
+              <Star size={extraIconsSize} color={prefer ? "#2d7600" : ""} />
             </Button>
           </Box>
           <Box mr={0}>
@@ -218,7 +218,7 @@ function GreffierMandatairesListFilters(props) {
             >
               <DotCircle
                 size={extraIconsSize}
-                color={available ? "#70D54F" : ""}
+                color={available ? "#2d7600" : ""}
               />
             </Button>
           </Box>

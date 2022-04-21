@@ -10,7 +10,7 @@ import styled from "styled-components";
 
 const StyledWarning = styled(Warning)`
   margin-right: 10px;
-  color: orange;
+  color: #df1400;
 `;
 
 import { SERVICE_ANTENNES } from "./queries";

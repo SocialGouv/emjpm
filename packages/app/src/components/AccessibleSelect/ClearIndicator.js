@@ -4,8 +4,9 @@ import styled from "@emotion/styled";
 import { ReactComponent as ClearIndicatorSvg } from "./multiValueClear.svg";
 
 const StyledClearIndicatorSvg = styled(ClearIndicatorSvg)`
+  fill: #707074;
   &:hover {
-    fill: hsl(0, 0%, 60%);
+    fill: #707074;
   }
 `;
 
