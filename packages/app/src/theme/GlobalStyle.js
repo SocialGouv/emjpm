@@ -94,6 +94,14 @@ const styles = css`
   }
 
   ${mdxClasses}
+
+  div.ScrollbarsCustom-Track.ScrollbarsCustom-TrackY{
+    background-color: #B5B5B5 !important;
+  }
+  div.ScrollbarsCustom-Thumb.ScrollbarsCustom-ThumbY{
+    background: #404044 !important;
+  }
+
 `;
 
 export default function GlobalStyle() {

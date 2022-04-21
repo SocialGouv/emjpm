@@ -4,7 +4,7 @@ export default function RequiredAsterisk() {
       style={{
         borderBottom: "none !important",
         textDecoration: "none !important",
-        color: "#db4949",
+        color: "#df1400",
       }}
       title="(obligatoire)"
     >

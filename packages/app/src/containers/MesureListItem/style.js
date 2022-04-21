@@ -1,7 +1,7 @@
 const TYPES = {
-  "Mesure en attente": "#F4AF00",
-  "Mesure en cours": "#2DA0FB",
-  "Mesure clôturée": "#7EA3AA",
+  "Mesure en attente": "#C28B00",
+  "Mesure en cours": "#0072ca",
+  "Mesure clôturée": "#4F7178",
 };
 
 const mesureListItemStyle = {

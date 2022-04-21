@@ -58,6 +58,8 @@ function Input(props) {
     (value !== null && value !== undefined && value !== "");
   return (
     <InputWrapper
+      isActive={isActive}
+      isFocus={isFocus}
       readOnly={readOnly}
       size={size}
       isValid={isValid}

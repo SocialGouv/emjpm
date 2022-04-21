@@ -7,15 +7,15 @@ import useUser from "~/hooks/useUser";
 import { Heading, Text, Table, SrOnly } from "~/components";
 
 const COLORS = [
-  "#FF6633",
+  "#d14800",
   "#FFB399",
-  "#FF33FF",
-  "#FFFF99",
-  "#00B3E6",
-  "#E6B333",
+  "#d100d1",
+  "#7b7b00",
+  "#0080a6",
+  "#957100",
   "#3366E6",
-  "#999966",
-  "#99FF99",
+  "#7a7a1a",
+  "#008a00",
   "#B34D4D",
   "#80B300",
   "#809900",

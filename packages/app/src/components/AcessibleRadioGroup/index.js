@@ -10,9 +10,9 @@ const StyledRadio = styled(RadioGroupPrimitive.Item, {
   height: 18,
   borderRadius: "100%",
 
-  border: "1px solid #007AD9",
+  border: "1px solid #0072ca",
   "&:hover": { backgroundColor: "hsl(252 96.9% 97.4%)" },
-  "&:focus": { boxShadow: `0 0 0 1px #007AD9` },
+  "&:focus": { boxShadow: `0 0 0 1px #0072ca` },
   cursor: "pointer",
   "&[disabled]": {
     border: "1px solid #9F9FA8",
@@ -34,7 +34,7 @@ const StyledIndicator = styled(RadioGroupPrimitive.Indicator, {
     width: 10,
     height: 10,
     borderRadius: "50%",
-    backgroundColor: "#007AD9",
+    backgroundColor: "#0072ca",
   },
 });
 

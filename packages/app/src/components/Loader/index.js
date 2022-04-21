@@ -4,7 +4,7 @@ export default function Loader(props) {
   return (
     <ReactLoader
       type="Rings"
-      color="#007AD9"
+      color="#0072ca"
       height={64}
       width={64}
       {...props}
