@@ -42,13 +42,7 @@ export function ListeBlanchePreposeUpdate(props) {
             return data ? data.etablissements : [];
           }}
           handleSubmit={async ({ etablissements, ...values }) => {
-            const {
-              firstname: prenom,
-              lastname: nom,
-              genre,
-              email,
-              telephone,
-            } = values;
+            const { prenom, nom, genre, email, telephone } = values;
             await updateListeBlanche({
               variables: {
                 data: {

@@ -4,7 +4,7 @@ export PGUSER=emjpm
 export PGPASSWORD=test
 DB=emjpm
 NEW_OWNER=emjpm
-DUMP_FILE=${1:-"dump/db.dump"}
+DUMP_FILE=${1:-"db-seed/devdb.dump"}
 
 cat <<EOF | psql -h localhost -p 5434 -U $PGUSER postgres
 SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = '$DB';
