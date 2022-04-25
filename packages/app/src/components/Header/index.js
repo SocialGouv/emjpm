@@ -34,7 +34,7 @@ function Header(props) {
                 aria-label="Aller à l'acceuil"
               >
                 <Text
-                  color="#007AD9"
+                  color="primary"
                   fontWeight="100"
                   fontSize="5"
                   style={{ display: "inline" }}

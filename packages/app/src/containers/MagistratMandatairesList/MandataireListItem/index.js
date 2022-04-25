@@ -280,7 +280,7 @@ export default function MandataireListItem(props) {
                     ? "Habilitation vérifiée"
                     : "Habilitation non vérifiée"
                 }
-                color={habilitation ? "#70D54F" : ""}
+                color={habilitation ? "#2d7600" : ""}
               />
               <Star
                 size={extraIconsSize}
@@ -289,7 +289,7 @@ export default function MandataireListItem(props) {
                     ? "Le mandataire souhaite recevoir des mesures en provenance de votre tribunal"
                     : "Le mandataire n'a pas exprimé son souhait de recevoir des mesures en provenance de votre tribunal"
                 }
-                color={prefer ? "#70D54F" : ""}
+                color={prefer ? "#2d7600" : ""}
                 aria-label={
                   prefer
                     ? "Le mandataire souhaite recevoir des mesures en provenance de votre tribunal"
@@ -300,7 +300,7 @@ export default function MandataireListItem(props) {
                 <DotCircleSolid
                   size={extraIconsSize}
                   title={"Il n'y plus de places disponibles"}
-                  color={"#FF6966"}
+                  color={"#df1400"}
                   aria-label="Il n'y plus de places disponibles"
                 />
               )}
@@ -310,7 +310,7 @@ export default function MandataireListItem(props) {
                   title={
                     "Il y a " + currentAvailability + " places disponibles"
                   }
-                  color={"#70D54F"}
+                  color={"#2d7600"}
                   aria-label={
                     "Il y a " + currentAvailability + " places disponibles"
                   }

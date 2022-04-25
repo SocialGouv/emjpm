@@ -87,5 +87,24 @@ export function getStyle(props) {
         paddingTop: isMulti ? "15px" : "2px",
       };
     },
+    placeholder: (defaultStyles) => {
+      return {
+        ...defaultStyles,
+        color: colors.textSecondary,
+      };
+    },
+    indicatorSeparator: (defaultStyles) => ({
+      ...defaultStyles,
+      backgroundColor: "#707074",
+    }),
+    dropdownIndicator: (defaultStyles) => ({
+      ...defaultStyles,
+      color: "#707074",
+    }),
+
+    multiValueRemove: (provided) => ({
+      ...provided,
+      backgroundColor: "#fff2ef",
+    }),
   };
 }

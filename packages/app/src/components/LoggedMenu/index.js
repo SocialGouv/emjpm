@@ -24,7 +24,7 @@ import {
 import { useAuth } from "~/user/Auth";
 
 const BlueUserCircle = styled(UserCircle)`
-  color: #006be6;
+  color: #0072ca;
 `;
 
 function LoggedMenu(props) {

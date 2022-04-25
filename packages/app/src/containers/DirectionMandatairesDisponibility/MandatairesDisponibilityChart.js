@@ -11,7 +11,7 @@ import {
 import { textStyle } from "~/containers/DirectionMandatairesActivity/style";
 import { SrOnly } from "~/components";
 
-const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
+const COLORS = ["#0072ca", "#D6317D", "#946800"];
 
 function MandatairesDisponibilityChart({ data }) {
   return (
@@ -47,7 +47,7 @@ function MandatairesDisponibilityChart({ data }) {
                 return (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.overcapacity ? "#D63C31" : "#70D54F"}
+                    fill={entry.overcapacity ? "#D63C31" : "#2d7600"}
                   />
                 );
               })}
@@ -145,7 +145,7 @@ function MandatairesDisponibilityChart({ data }) {
         <Box>
           <Flex mt="5" mb="7px">
             <Box
-              bg="#70D54F"
+              bg="#2d7600"
               flexBasis="30px"
               maxWidth="30px"
               flexGrow="1"
