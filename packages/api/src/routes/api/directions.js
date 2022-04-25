@@ -8,6 +8,8 @@ const { User, Region } = require("~/models");
 
 const router = express.Router();
 
+const allowedRoles = ["direction", "service"];
+
 router.use(async (req, res, next) => {
   const {
     locals: {
@@ -23,7 +25,9 @@ router.use(async (req, res, next) => {
   try {
     user = await User.query()
       .findById(user_id)
-      .withGraphFetched("[direction.[departement, region]]");
+      .withGraphFetched(
+        "[direction.[departement, region], service.[departements]]"
+      );
   } catch (error) {
     return res.status(422).json({
       errors: [{ error: `${error}` }],
@@ -36,9 +40,11 @@ router.use(async (req, res, next) => {
     });
   }
 
-  if (user.type !== "direction") {
+  if (!allowedRoles.includes(user.type)) {
     return res.status(403).json({
-      error: "the usage of this api is reserved for direction profiles",
+      error:
+        "the usage of this api is reserved for profiles: " +
+        allowedRoles.join(","),
     });
   }
 
@@ -67,8 +73,8 @@ router.get("/nationales", async (req, res) => {
 
 router.get("/regionales/:id", async (req, res) => {
   const { user } = res.api;
-  const { direction } = user;
-  if (direction.type !== "national") {
+  const { direction, service } = user;
+  if (direction && direction.type !== "national") {
     return res.status(403).json({
       error:
         "the usage of this api is reserved for national direction profiles",
@@ -87,7 +93,19 @@ router.get("/regionales/:id", async (req, res) => {
           .normalize("NFD")
           .replace(/[\u0300-\u036f]/g, "")
       );
+    if (!region) {
+      res.status(400).json({ message: "Region not found" });
+    }
     regionId = region.id;
+  }
+
+  if (service) {
+    if (!service.departements.some(({ id_region }) => id_region === regionId)) {
+      return res.status(403).json({
+        error:
+          "you are not allowed to access region that you are not related to",
+      });
+    }
   }
 
   const agents = await User.query()
@@ -112,8 +130,8 @@ router.get("/regionales/:id", async (req, res) => {
 
 router.get("/departementales/:id", async (req, res) => {
   const { user } = res.api;
-  const { direction } = user;
-  if (direction.type !== "national") {
+  const { direction, service } = user;
+  if (direction && direction.type !== "national") {
     return res.status(403).json({
       error:
         "the usage of this api is reserved for national direction profiles",
@@ -121,6 +139,15 @@ router.get("/departementales/:id", async (req, res) => {
   }
 
   const departementCode = req.params.id;
+
+  if (service) {
+    if (!service.departements.some(({ id }) => id === departementCode)) {
+      return res.status(403).json({
+        error:
+          "you are not allowed to access departement that you are not related to",
+      });
+    }
+  }
 
   const agents = await User.query()
     .joinRelated("direction")
@@ -145,7 +172,7 @@ router.get("/departementales/:id", async (req, res) => {
 router.get("/departementales", async (req, res) => {
   const { user } = res.api;
   const { direction } = user;
-  if (direction.type !== "regional") {
+  if (!direction || direction.type !== "regional") {
     return res.status(403).json({
       error:
         "the usage of this api is reserved for regional direction profiles",

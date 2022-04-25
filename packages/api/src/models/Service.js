@@ -47,6 +47,18 @@ class Service extends Model {
         modelClass: Models.Departement,
         relation: Model.ManyToManyRelation,
       },
+      users: {
+        join: {
+          from: "services.id",
+          through: {
+            from: "service_members.service_id",
+            to: "service_members.user_id",
+          },
+          to: "users.id",
+        },
+        modelClass: Models.User,
+        relation: Model.ManyToManyRelation,
+      },
     };
   }
 

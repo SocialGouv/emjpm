@@ -87,6 +87,7 @@ Object {
   "refresh_token": null,
   "reset_password_expires": null,
   "reset_password_token": null,
+  "secret_2fa": null,
   "type": "individuel",
 }
 `;
