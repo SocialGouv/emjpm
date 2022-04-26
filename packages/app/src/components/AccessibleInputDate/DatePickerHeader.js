@@ -75,7 +75,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
-            color="#ccc"
+            color="#4F4F4F"
           />
         </button>
         <button
@@ -91,7 +91,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
-            color="#ccc"
+            color="#4F4F4F"
           />
         </button>
       </Flex>
@@ -118,7 +118,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
-            color="#ccc"
+            color="#4F4F4F"
           />
         </button>
         <button
@@ -134,7 +134,7 @@ export default function DatePickerHeader({
             aria-hidden="true"
             focusable="false"
             role="img"
-            color="#ccc"
+            color="#4F4F4F"
           />
         </button>
       </Flex>

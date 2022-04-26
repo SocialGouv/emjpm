@@ -105,6 +105,15 @@ const styles = css`
     background: #404044 !important;
   }
 
+  input.datepicker{
+    border: solid 1px #707070 !important;
+  }
+
+  input.datepicker::placeholder {
+    color: #404040 !important;
+
+  }
+
 `;
 
 export default function GlobalStyle() {
