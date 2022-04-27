@@ -74,7 +74,7 @@ class Mandataire extends Model {
           },
           to: "tis.id",
         },
-        modelClass: Models.Departement,
+        modelClass: Models.Tis,
         relation: Model.ManyToManyRelation,
       },
       users: {
@@ -82,7 +82,7 @@ class Mandataire extends Model {
           from: "mandataires.user_id",
           to: "users.id",
         },
-        modelClass: Models.Departement,
+        modelClass: Models.User,
         relation: Model.BelongsToOneRelation,
       },
     };

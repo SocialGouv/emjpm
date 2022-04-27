@@ -1,5 +1,5 @@
 /* global */
-.react-datepicker-popper{
+.react-datepicker-popper {
   z-index: 99999;
 }
 .react-datepicker-wrapper {
@@ -12,16 +12,16 @@
   height: 44px;
   padding-left: 10px;
 
-  border: solid 1px #D4D4D4;
+  border: solid 1px #d4d4d4;
   border-radius: 5px;
   &:focus,
   &:active,
   &:focus-visible,
   &:focus-within {
     outline: none;
-    border: solid 1px #007AD9 !important;
+    border: solid 1px #0072ca !important;
   }
   .has-error & {
-    border: solid 1px #FF6966 !important;
+    border: solid 1px #df1400 !important;
   }
 }

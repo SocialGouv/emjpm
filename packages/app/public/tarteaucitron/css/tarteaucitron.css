@@ -665,12 +665,12 @@ a.tarteaucitronSelfLink {
   padding: 20px;
   margin: auto;
   width: 100%;
-  border-top: 2px solid #0067EA;
+  border-top: 2px solid #0072ca;
 }
 
 @media print {
   #tarteaucitronRoot {
-    display:none;
+    display: none;
   }
 }
 
@@ -715,7 +715,7 @@ a.tarteaucitronSelfLink {
   padding-top: 12px;
   padding-bottom: 12px;
   color: white;
-  background-color: var(--theme-ui-colors-primary,#0067EA);
+  background-color: var(--theme-ui-colors-primary, #0072ca);
   border: 0;
   border-radius: 4px;
   font-size: 14px;
@@ -759,13 +759,13 @@ a.tarteaucitronSelfLink {
   padding-top: 12px;
   padding-bottom: 12px;
   color: white;
-  background-color: var(--theme-ui-colors-primary,#0067EA);
+  background-color: var(--theme-ui-colors-primary, #0067ea);
   border: 0;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid rgba(0,107,230,.43);
+  border: 1px solid rgba(0, 107, 230, 0.43);
   border-radius: 5px;
-  color: var(--theme-ui-colors-primary,#0067EA);
+  color: var(--theme-ui-colors-primary, #0067ea);
   font-size: 16px;
   font-weight: 700;
   font-size: 14px;

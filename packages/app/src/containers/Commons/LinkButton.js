@@ -17,16 +17,30 @@ function LinkButtonStyle(isActive, props) {
     borderColor: props.outline ? color : "",
     borderRadius: "default",
     color,
-    cursor: props.disabled ? "not-allowed" : "pointer",
+    cursor: props.disabled || isActive ? "not-allowed" : "pointer",
     display: "inline-block",
     fontSize: 1,
     fontWeight: 500,
     lineHeight: "1.2",
-    opacity: props.disabled ? 0.3 : isActive ? 0.6 : 1,
+    // opacity: props.disabled ? 0.3 : isActive ? 0.6 : 1,
+    backgroundColor: props.disabled || isActive ? "#555555" : "primary",
     outline: "none",
     px: 3,
     py: 2,
     transition: "150ms ease-in-out opacity",
+    "&:focus": {
+      outline: "none",
+      boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) ",
+    },
+    "&:active": {
+      color: "white",
+      opacity: "0.6",
+    },
+    "&:hover": {
+      color: "white",
+      opacity: "0.8",
+      textDecoration: "none",
+    },
   };
 
   if (!props.outline) {
@@ -46,7 +60,7 @@ function LinkButtonStyle(isActive, props) {
             },
             "&:focus": {
               outline: "none",
-              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4)",
+              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) !important",
             },
           }),
     };

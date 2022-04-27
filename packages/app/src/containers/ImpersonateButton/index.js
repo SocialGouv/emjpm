@@ -15,7 +15,7 @@ export default function ImpersonateButton({ userId: id }) {
     <Button
       style={{
         backgroundColor: "white",
-        borderColor: "#007AD9",
+        borderColor: "#0072ca",
         borderWidth: 1,
         borderStyle: "solid",
         borderRadius: 5,

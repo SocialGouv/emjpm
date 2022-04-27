@@ -11,7 +11,7 @@ import { buildMesureGroupsAttributes } from "./buildMesureGroupsAttributes";
 import { EnqueteActiviteFormGroupMesures } from "./EnqueteActiviteFormGroupMesures";
 
 const strongStyle = {
-  color: "#007AD9",
+  color: "#0072ca",
   display: "inline-block",
   fontWeight: "bold",
 };

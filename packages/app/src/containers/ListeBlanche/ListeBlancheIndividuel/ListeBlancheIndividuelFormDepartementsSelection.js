@@ -56,7 +56,7 @@ export function ListeBlancheIndividuelFormDepartementsSelection(props) {
                   ":hover": {
                     color: "#aa2d2d",
                   },
-                  color: "#777",
+                  color: "#555555",
                   cursor: "pointer",
                 }}
                 role="status"

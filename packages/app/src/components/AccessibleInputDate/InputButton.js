@@ -16,6 +16,7 @@ const InputButton = forwardRef(
           margiLeft: "0.5rem",
           marginLeft: "-43px",
           marginBottom: hasError ? "28px" : "8px",
+          backgroundColor: "transparent",
         }}
         aria-label={`Sélectionnez une date${
           value ? `. la date sélectionnée est ${value}` : ""
@@ -27,7 +28,8 @@ const InputButton = forwardRef(
         <CalendarAlt
           width="25"
           height="25"
-          color={readOnly ? "gray" : "primary"}
+          color={readOnly ? "#4F4F4F" : "#0072ca"}
+          // color={readOnly ? "gray" : "primary"}
           aria-hidden="true"
           focusable="false"
           role="img"

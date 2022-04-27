@@ -157,7 +157,7 @@ function MagistratMandatairesListFilters(props) {
             >
               <Location
                 size={extraIconsSize}
-                color={searchByLocation ? "#70D54F" : ""}
+                color={searchByLocation ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -183,7 +183,7 @@ function MagistratMandatairesListFilters(props) {
             >
               <CheckShield
                 size={extraIconsSize}
-                color={habilitation ? "#70D54F" : ""}
+                color={habilitation ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -209,7 +209,7 @@ function MagistratMandatairesListFilters(props) {
             >
               <Star
                 size={extraIconsSize}
-                color={prefer ? "#70D54F" : ""}
+                color={prefer ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -235,7 +235,7 @@ function MagistratMandatairesListFilters(props) {
             >
               <DotCircle
                 size={extraIconsSize}
-                color={available ? "#70D54F" : ""}
+                color={available ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />

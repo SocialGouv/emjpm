@@ -98,7 +98,7 @@ export default function MesureListItem(props) {
                     "Veuillez corriger cette anomalie afin que les fonctions d'imports <br />(OCMI, éditeur tiers de logiciel utilisant notre API, import fichier) puissent fonctionner correctement."
                   }
                 >
-                  <ExclamationCircle size="12" color="#ff0000" />
+                  <ExclamationCircle size="12" color="#df1400" />
                 </div>
               )}{" "}
               {numeroRg || ""}{" "}

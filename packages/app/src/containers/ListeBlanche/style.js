@@ -4,7 +4,7 @@ const cardStyle = ({ clickable }) => ({
   pl: "16px",
   position: "relative",
   width: "100%",
-  borderLeft: "2px solid #0067EA",
+  borderLeft: "2px solid #0072ca",
   borderRadius: "0",
   marginBottom: "1px !important",
 });
