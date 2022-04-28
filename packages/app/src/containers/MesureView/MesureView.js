@@ -12,7 +12,7 @@ export function MesureView(props) {
   const mesure = useContext(MesureContext);
 
   return (
-    <Card p={4} {...props}>
+    <Card p={4} {...props} id="mesure_view" tabIndex="0">
       <MesureDetailView mesure={mesure} px="3" pt="1" />
 
       {isEnCours(mesure) && (

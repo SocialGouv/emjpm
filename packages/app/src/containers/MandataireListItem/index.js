@@ -92,8 +92,10 @@ export default function MandataireListItem(props) {
         width="100%"
         as={tag ? tag : "button"}
         {...accessibilityProps}
+        tabIndex="0"
       >
         <Box sx={decorationStyle(type)} />
+
         <Flex
           onClick={(e) => {
             onClick && onClick(e, props);

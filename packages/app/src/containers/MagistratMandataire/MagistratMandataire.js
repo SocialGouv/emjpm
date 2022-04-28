@@ -94,8 +94,7 @@ export function MagistratMandataire(props) {
             Réserver une mesure
           </Button>
         </Flex>
-
-        <Flex sx={MagistratMandataireStyle} flexDirection="column">
+        <Flex sx={MagistratMandataireStyle} flexDirection="column" tabIndex="0">
           <Flex>
             <Box width="50%">
               {mandataireId && (

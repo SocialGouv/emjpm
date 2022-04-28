@@ -13,7 +13,7 @@ function MagistratTribunalInformations(props) {
   } = useUser();
   return (
     <Box {...props}>
-      <Card p="5">
+      <Card p="5" tabIndex="0">
         <Heading size={3}>{ti.etablissement}</Heading>
         <Box sx={boxStyle}>
           <Text sx={innerTextStyle}>

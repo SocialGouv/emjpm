@@ -46,7 +46,7 @@ function MandatairesActivity(props) {
   };
 
   return (
-    <Card p="4" {...props}>
+    <Card p="4" {...props} tabIndex="0">
       <Heading size={2}>
         Répartition de l’activité par type de mandataires
       </Heading>

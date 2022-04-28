@@ -75,7 +75,7 @@ function StatisticMesureNature() {
 
   return (
     <>
-      <Card m={1} width="100%">
+      <Card m={1} width="100%" tabIndex="0">
         <Box>
           <Heading size={4}>Répartition des mesures par nature</Heading>
         </Box>

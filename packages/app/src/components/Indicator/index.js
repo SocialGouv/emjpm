@@ -6,11 +6,11 @@ import Spinner from "../Spinner";
 import { IndicatorTextStyle } from "./style";
 
 function Indicator(props) {
-  const { error, loading, title, headingSize, data, load } = props;
+  const { error, loading, title, headingSize, data, load, tabIndex } = props;
 
   if (error) {
     return (
-      <Card height="100%">
+      <Card height="100%" tabIndex={tabIndex}>
         <Heading size={headingSize}>{title}</Heading>
         <Heading size={headingSize} color="error" mt="3">
           aucune donnée disponible
@@ -21,7 +21,7 @@ function Indicator(props) {
 
   if (loading) {
     return (
-      <Card height="100%">
+      <Card height="100%" tabIndex={tabIndex}>
         <Heading size={headingSize}>{title}</Heading>
         <Box mt="3">
           <Spinner />
@@ -38,6 +38,7 @@ function Indicator(props) {
       flexDirection="column"
       display="flex"
       height="100%"
+      tabIndex={tabIndex}
     >
       <Heading size={headingSize}>{title}</Heading>
       <Heading size={0} sx={IndicatorTextStyle(indicator < 0)}>

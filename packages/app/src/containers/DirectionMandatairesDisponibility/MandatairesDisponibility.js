@@ -48,7 +48,7 @@ function MandatairesDisponibility(props) {
   ];
 
   return (
-    <Card p="4" {...props}>
+    <Card p="4" {...props} tabIndex="0">
       <Heading size={2}>Disponibilités par type de mandataires</Heading>
       <MandatairesDisponibilityChart data={activityChartData} />
     </Card>
