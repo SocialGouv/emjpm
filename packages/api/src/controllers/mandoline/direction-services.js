@@ -60,10 +60,14 @@ const getDirectionServices = async (req, res) => {
     switch (directionType) {
       case "national":
         services = await Service.query()
+          .withGraphFetched("[departements]")
           .modify("selectAll")
           .modify("selectMesuresAwaiting")
           .modify("selectMesuresInProgress")
           .select();
+        for (const service of services) {
+          service.departement = service.departements[0];
+        }
         break;
       case "departemental":
         services = direction.departement_services;
