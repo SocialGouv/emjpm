@@ -26,7 +26,7 @@ const btnStyle = ({ disabled }) => ({
   ...buttonStyle,
   cursor: !disabled ? "pointer" : "not-allowed",
   // opacity: disabled ? 0.5 : 1,
-  backgroundColor: disabled ? "#555555" : "primary",
+  backgroundColor: disabled ? "#555555" : "",
 });
 
 function Button(props, ref) {

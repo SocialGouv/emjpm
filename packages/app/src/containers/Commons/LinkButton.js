@@ -22,8 +22,10 @@ function LinkButtonStyle(isActive, props) {
     fontSize: 1,
     fontWeight: 500,
     lineHeight: "1.2",
-    // opacity: props.disabled ? 0.3 : isActive ? 0.6 : 1,
-    backgroundColor: props.disabled || isActive ? "#555555" : "primary",
+
+    backgroundColor:
+      !props.outline && (props.disabled || isActive) ? "#555555" : "",
+
     outline: "none",
     px: 3,
     py: 2,
@@ -33,11 +35,11 @@ function LinkButtonStyle(isActive, props) {
       boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) ",
     },
     "&:active": {
-      color: "white",
+      // color: "white",
       opacity: "0.6",
     },
     "&:hover": {
-      color: "white",
+      // color: "white",
       opacity: "0.8",
       textDecoration: "none",
     },
