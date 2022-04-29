@@ -17,14 +17,14 @@ function LinkButtonStyle(isActive, props) {
     borderColor: props.outline ? color : "",
     borderRadius: "default",
     color,
-    cursor: props.disabled || isActive ? "not-allowed" : "pointer",
+    cursor: props.disabled ? "not-allowed" : "pointer",
     display: "inline-block",
     fontSize: 1,
     fontWeight: 500,
     lineHeight: "1.2",
 
-    backgroundColor:
-      !props.outline && (props.disabled || isActive) ? "#555555" : "",
+    // backgroundColor:
+    //   !props.outline && (props.disabled || isActive) ? "#555555" : "primary",
 
     outline: "none",
     px: 3,
@@ -45,11 +45,17 @@ function LinkButtonStyle(isActive, props) {
     },
   };
 
+  if (props.outline && (props.disabled || isActive)) {
+    properties = { ...properties, backgroundColor: "#555555" };
+  }
+
   if (!props.outline) {
     properties = {
       ...properties,
       ...(props.disabled
-        ? {}
+        ? {
+            backgroundColor: "#555555",
+          }
         : {
             "&:active": {
               color: "white",
@@ -75,6 +81,7 @@ function LinkButton({ location, ...props }) {
   const isActive = location && location.pathname === props.to;
   // eslint-disable-next-line no-unused-vars
   const { bg, color, ...attr } = props;
+  console.log(props);
 
   return (
     <RouterLink
@@ -86,6 +93,7 @@ function LinkButton({ location, ...props }) {
           sx={LinkButtonStyle(isActive, props)}
           onClick={(e) => {
             if (props.disabled) {
+              e.preventDefault();
               return;
             }
             if (e.ctrlKey) {
@@ -94,6 +102,7 @@ function LinkButton({ location, ...props }) {
             e.preventDefault();
             navigate(props.to);
           }}
+          disabled={props.disabled}
         >
           {props.children}
         </RebassLink>

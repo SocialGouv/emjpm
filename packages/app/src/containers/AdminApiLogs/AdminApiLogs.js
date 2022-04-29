@@ -149,7 +149,7 @@ function AdminApiLogs() {
                 outline: "none",
               },
               border: "1px solid",
-              borderColor: "whiteGray",
+              borderColor: "#767676",
               borderRadius: 4,
               p: 2,
               width: 300,

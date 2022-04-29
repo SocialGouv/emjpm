@@ -107,10 +107,11 @@ const styles = css`
 
   input.datepicker{
     border: solid 1px #707070 !important;
+
   }
 
   input.datepicker::placeholder {
-    color: #404040 !important;
+    color: #767676 !important;
 
   }
 

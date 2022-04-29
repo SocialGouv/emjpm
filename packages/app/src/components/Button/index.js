@@ -24,9 +24,8 @@ function content(props) {
 
 const btnStyle = ({ disabled }) => ({
   ...buttonStyle,
-  cursor: !disabled ? "pointer" : "not-allowed",
-  // opacity: disabled ? 0.5 : 1,
   backgroundColor: disabled ? "#555555" : "",
+  border: "1px solid #0072ca",
 });
 
 function Button(props, ref) {
