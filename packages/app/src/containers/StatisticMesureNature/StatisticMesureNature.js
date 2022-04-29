@@ -99,7 +99,11 @@ function StatisticMesureNature() {
             height={300}
             role="img"
             id="chart"
-            aria-label={`${numberOfMesures} mesures réparties par nature. Voir le tableau ci-dessous pour les données.`}
+            aria-label={`${numberOfMesures} mesures réparties par nature. ${data
+              .map((el) => {
+                return `${el.name} : ${el.value}. `;
+              })
+              ?.join("")}`}
           >
             <Pie
               data={data}
@@ -134,12 +138,6 @@ function StatisticMesureNature() {
           </Flex>
         </Flex>
       </Card>
-      <SrOnly>
-        <Table
-          columns={data.map((x) => x.name).length}
-          tableData={[...data.map((x) => x.name), ...data.map((x) => x.value)]}
-        />
-      </SrOnly>
     </>
   );
 }
