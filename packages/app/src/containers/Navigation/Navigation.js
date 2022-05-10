@@ -17,6 +17,7 @@ function ServiceBadge({ service }) {
 
 function MandataireBadge({ mandataire }) {
   const { mesures_en_cours, dispo_max } = mandataire;
+
   return (
     <Box pl="5">
       <MesureBadge mesures_en_cours={mesures_en_cours} dispo_max={dispo_max} />

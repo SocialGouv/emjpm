@@ -24,6 +24,7 @@ export default function Antenne(props) {
             antenne.mesures_max <= antenne.mesures_in_progress
           )}
         />
+
         <Text sx={{ color: "black", fontSize: "1", fontWeight: "semibold" }}>
           {antenne.mesures_max <= antenne.mesures_in_progress
             ? "non disponible"
