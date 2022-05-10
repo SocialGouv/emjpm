@@ -1,6 +1,6 @@
 function cardStyle(active) {
   return {
-    borderLeft: active ? "2px solid green" : "2px solid red",
+    borderLeft: active ? "2px solid #2d7600" : "2px solid #df1400",
     overflow: "hidden",
     position: "relative",
     borderRadius: "0",

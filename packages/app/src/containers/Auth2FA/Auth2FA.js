@@ -40,7 +40,12 @@ export default function Auth2FA({ unfolded, formik, validationSchema, user }) {
     <Box m={1}>
       <Box>
         {!deviceSecret && (
-          <Button mr={2} bg="warning" onClick={associateNewDevice}>
+          <Button
+            mr={2}
+            bg="warning"
+            onClick={associateNewDevice}
+            color="white"
+          >
             Associer un nouveau téléphone
           </Button>
         )}

@@ -22,11 +22,13 @@ function content(props) {
   };
 }
 
-const btnStyle = ({ disabled }) => ({
-  ...buttonStyle,
-  backgroundColor: disabled ? "#555555" : "",
-  border: "1px solid #0072ca",
-});
+const btnStyle = ({ disabled }) => {
+  return {
+    ...buttonStyle,
+    backgroundColor: disabled ? "#555555" : "",
+    border: "1px solid",
+  };
+};
 
 function Button(props, ref) {
   const { isLoading, children } = props;

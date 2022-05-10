@@ -11,7 +11,7 @@ import {
 import { textStyle } from "~/containers/DirectionMandatairesActivity/style";
 import { SrOnly } from "~/components";
 
-const COLORS = ["#0072ca", "#D6317D", "#946800"];
+const COLORS = ["#0072ca", "#c92c75", "#946800"];
 
 function MandatairesDisponibilityChart({ data }) {
   return (

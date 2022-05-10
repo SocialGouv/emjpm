@@ -1,5 +1,5 @@
 const TYPES = {
-  "Mesure en attente": "#C28B00",
+  "Mesure en attente": "#946800",
   "Mesure en cours": "#0072ca",
   "Mesure clôturée": "#4F7178",
 };
