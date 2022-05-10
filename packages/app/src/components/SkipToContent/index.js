@@ -9,7 +9,8 @@ const SkipLinkWrapper = styled.a`
   top: 0px;
   font-size: 1.4em;
   padding: 4px;
-  background-color: #007ad9;
+  background-color: #0072ca;
+  border: 1px solid #0072ca;
   border-radius: 4px;
   color: white;
   z-index: 9999;
