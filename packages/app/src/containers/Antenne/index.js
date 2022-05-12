@@ -14,7 +14,7 @@ import {
 export default function Antenne(props) {
   const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
-    <Card sx={sx}>
+    <Card sx={sx} tabIndex="0">
       <Heading size={4} sx={antenneTitleStyle}>
         {antenne.name}
       </Heading>

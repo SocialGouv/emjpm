@@ -72,7 +72,7 @@ function MandataireInformations() {
           </Heading>
           {mandataire.suspend_activity && (
             <Flex my={1}>
-              <Text sx={{ ...subtitle, color: "#FF6966" }}>
+              <Text sx={{ ...subtitle, color: "#DF1400" }}>
                 {"Je ne souhaite pas de nouvelles mesures pour le moment"}
               </Text>
               <Text sx={content}>{mandataire.suspend_activity_reason}</Text>

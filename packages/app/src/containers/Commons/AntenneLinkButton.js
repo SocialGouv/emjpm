@@ -14,6 +14,10 @@ function AntenneLinkButtonStyle(isActive, disabled) {
       opacity: "0.8",
       textDecoration: "none",
     },
+    "&:focus": {
+      outline: "none",
+      boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4)",
+    },
     bg: "primary",
     borderRadius: "default",
     color: "white !important",
@@ -40,7 +44,8 @@ function AntenneLinkButton({ location, ...props }) {
       component={({ navigate }) => (
         <RebassLink
           sx={AntenneLinkButtonStyle(isActive, props.disabled)}
-          onClick={() => navigate(to)}
+          // onClick={() => navigate(to)}
+          href={to}
         >
           {props.children}
         </RebassLink>
