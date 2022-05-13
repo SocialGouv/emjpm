@@ -11,6 +11,16 @@ import MultiValueRemove from "./MultiValueRemove";
 import ClearIndicator from "./ClearIndicator";
 import { ariaLiveMessages } from "./ariaLiveMessages";
 
+const colourStyles = {
+  option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    return {
+      ...styles,
+      backgroundColor: isFocused || isSelected ? "#0072ca" : null,
+      color: isFocused || isSelected ? "#FFFFFF" : "#333333",
+    };
+  },
+};
+
 export default function AccessibleSelect({
   label,
   isCreatable,
@@ -21,7 +31,7 @@ export default function AccessibleSelect({
   const ClearIndicatorStyles = (base, state) => ({
     ...base,
     cursor: "pointer",
-    color: state.isFocused ? "blue" : "black",
+    color: state.isFocused ? "#007AD9" : "inherit",
   });
 
   const multiValueRemoveStyle = (base, state) => ({
@@ -45,20 +55,25 @@ export default function AccessibleSelect({
           required={props.required}
           aria-required={props.required}
           readOnly={props.readOnly}
-          onClick={() => selectRef?.current?.focus()}
+          onClick={() => {
+            if (!isCreatable) {
+              selectRef.current?.onMenuOpen();
+            }
+          }}
         >
           {label}
           {props.required && !props.readOnly && <RequiredAsterisk />}
         </Label>
       )}
       <Component
-        ref={selectRef}
+        {...(!isCreatable && { ref: selectRef })}
         options={props?.options || []}
         components={{ MultiValueRemove, ClearIndicator }}
         styles={{
           clearIndicator: ClearIndicatorStyles,
           multiValueRemove: multiValueRemoveStyle,
           ...getStyle(props),
+          ...colourStyles,
         }}
         menuPortalTarget={document.body}
         {...props}

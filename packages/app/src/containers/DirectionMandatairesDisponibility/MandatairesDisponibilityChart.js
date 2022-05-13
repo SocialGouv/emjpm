@@ -12,7 +12,7 @@ import {
 import { textStyle } from "~/containers/DirectionMandatairesActivity/style";
 import { SrOnly } from "~/components";
 
-const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
+const COLORS = ["#0072ca", "#c92c75", "#946800"];
 
 function MandatairesDisponibilityChart({ data }) {
   return (
@@ -50,7 +50,7 @@ function MandatairesDisponibilityChart({ data }) {
             <XAxis dataKey="name" hide={true} />
             <Bar barSize={40} dataKey="Disponibilité max" stackId="a">
               {data.map((entry, index) => {
-                return <Cell key={`cell-${index}`} fill="#3174D6" />;
+                return <Cell key={`cell-${index}`} fill="#0072ca" />;
               })}
             </Bar>
             <Bar barSize={40} dataKey="Disponibilité actuelle" stackId="a">
@@ -58,7 +58,7 @@ function MandatairesDisponibilityChart({ data }) {
                 return (
                   <Cell
                     key={`cell-${index}`}
-                    fill={entry.overcapacity ? "#D63C31" : "#70D54F"}
+                    fill={entry.overcapacity ? "#df1400" : "#2d7600"}
                   />
                 );
               })}
@@ -110,7 +110,7 @@ function MandatairesDisponibilityChart({ data }) {
         <Box>
           <Flex mt="5" mb="7px">
             <Box
-              bg="#3174D6"
+              bg="#0072ca"
               flexBasis="30px"
               maxWidth="30px"
               flexGrow="1"
@@ -124,7 +124,7 @@ function MandatairesDisponibilityChart({ data }) {
         <Box>
           <Flex mt="5" mb="7px">
             <Box
-              bg="#D63C31"
+              bg="#df1400"
               flexBasis="30px"
               maxWidth="30px"
               flexGrow="1"
@@ -138,7 +138,7 @@ function MandatairesDisponibilityChart({ data }) {
         <Box>
           <Flex mt="5" mb="7px">
             <Box
-              bg="#70D54F"
+              bg="#2d7600"
               flexBasis="30px"
               maxWidth="30px"
               flexGrow="1"

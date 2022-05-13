@@ -44,3 +44,7 @@ export { default as AcessibleRadioGroup } from "./AcessibleRadioGroup";
 export { default as SkipToContent } from "./SkipToContent";
 
 export { default as Table } from "./Table";
+
+export { default as AccessibleDialog } from "./AccessibleDialog";
+
+export { default as AjoutMandataireButton } from "./AjoutMandataireButton";

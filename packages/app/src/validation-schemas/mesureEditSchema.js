@@ -2,6 +2,8 @@ import yup, {
   FORM_YEAR_NOT_VALID,
   CODE_POSTAL_NOT_VALID,
   FORM_DATE_NOT_VALID,
+  parseDateString,
+  parseDateStringWhenNullable,
 } from "./yup";
 import {
   validateNumeroRG,
@@ -43,12 +45,22 @@ const mesureEditSchema = ({ apolloClient }) =>
       .nullable(),
     date_nomination: yup
       .date(FORM_DATE_NOT_VALID)
+      .transform(parseDateString)
       .required(FORM_DATE_NOT_VALID)
+      .typeError(FORM_DATE_NOT_VALID)
       .nullable(),
-    date_premier_mesure: yup.date(FORM_DATE_NOT_VALID).nullable(),
+
+    date_premier_mesure: yup
+      .date(FORM_DATE_NOT_VALID)
+      .nullable()
+      .transform(parseDateStringWhenNullable)
+      .typeError(FORM_DATE_NOT_VALID),
+
     date_protection_en_cours: yup
       .date(FORM_DATE_NOT_VALID)
+      .transform(parseDateString)
       .required(FORM_DATE_NOT_VALID)
+      .typeError(FORM_DATE_NOT_VALID)
       .nullable(),
     numero_dossier: yup.string(),
     numero_rg: yup

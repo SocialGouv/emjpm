@@ -19,7 +19,7 @@ const StyledCheckCircleOutline = styled(CheckCircleOutline)`
 `;
 const StyledWarning = styled(Warning)`
   margin-right: 10px;
-  color: orange;
+  color: #df1400;
 `;
 
 function MandataireOcmiMesureImportSwitcher({

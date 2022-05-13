@@ -14,7 +14,7 @@ import {
 export default function Antenne(props) {
   const { Link, linkText, to, sx, antenne, hasButton } = props;
   return (
-    <Card sx={sx}>
+    <Card sx={sx} tabIndex="0">
       <Heading size={4} sx={antenneTitleStyle}>
         {antenne.name}
       </Heading>
@@ -24,6 +24,7 @@ export default function Antenne(props) {
             antenne.mesures_max <= antenne.mesures_in_progress
           )}
         />
+
         <Text sx={{ color: "black", fontSize: "1", fontWeight: "semibold" }}>
           {antenne.mesures_max <= antenne.mesures_in_progress
             ? "non disponible"

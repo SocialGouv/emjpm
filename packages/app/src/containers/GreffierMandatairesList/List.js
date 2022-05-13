@@ -108,11 +108,11 @@ function GreffierMandatairesListList(props) {
 
   return (
     <>
-      <SrOnly>
+      <SrOnly role="status">
         {count > 0 && (
-          <p role="status">
+          <span>
             {count} {count > 1 ? "résultat" : "résultats"}
-          </p>
+          </span>
         )}
         {count === 0 && <p role="status">Pas de donnée à afficher</p>}
       </SrOnly>

@@ -36,13 +36,13 @@ function ServiceMesureImport({ serviceId }) {
             <Flex flexDirection="row" justifyContent="center" mt={2} mb={2}>
               <DocumentLink document={MANDATAIRE_MESURE_IMPORT_MANUAL}>
                 <FilePdf size="86" width="100%" color="#FF0000" />
-                <Box textAlign="center" mt={2} color="#0067EA">
+                <Box textAlign="center" mt={2} color="#0072ca">
                   Télécharger la note explicative (.pdf)
                 </Box>
               </DocumentLink>
               <DocumentLink document={MANDATAIRE_MESURE_IMPORT_TEMPLATE}>
                 <FileExcel size="86" width="100%" color="#008000" />
-                <Box textAlign="center" mt={2} color="#0067EA">
+                <Box textAlign="center" mt={2} color="#0072ca">
                   Télécharger le modèle Excel
                 </Box>
               </DocumentLink>

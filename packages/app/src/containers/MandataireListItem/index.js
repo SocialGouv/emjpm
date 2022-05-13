@@ -93,6 +93,11 @@ export default function MandataireListItem(props) {
         as={tag ? tag : "button"}
         {...accessibilityProps}
         tabIndex="0"
+        onKeyPress={(e) => {
+          if (e.keyCode === 0) {
+            onClick && onClick(e, props);
+          }
+        }}
       >
         <Box sx={decorationStyle(type)} />
 

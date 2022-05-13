@@ -13,6 +13,7 @@ export default function MultiValueRemove(props) {
         "aria-pressed": false,
       }}
       style={{ cursor: "pointer" }}
+      className="multi-value-clearsvg"
     >
       <MultiValueClearSvg
         aria-label={`Supprimer ${props.data.label}`}

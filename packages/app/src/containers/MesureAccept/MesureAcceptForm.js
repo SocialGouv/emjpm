@@ -6,7 +6,7 @@ import { Box, Flex, Text } from "rebass";
 import {
   FormGroupInput,
   FormGroupSelect,
-  FormGroupInputDate,
+  AccessibleFormGroupInputDate,
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
 import { mesureAcceptSchema } from "~/validation-schemas";
@@ -60,7 +60,8 @@ export function MesureAcceptForm(props) {
           <SrOnly id="instructions">
             {"Tous les champs marqués d'un astérisque * sont obligatoires"}
           </SrOnly>
-          <FormGroupInputDate
+
+          <AccessibleFormGroupInputDate
             label="Date de nomination"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
@@ -74,7 +75,6 @@ export function MesureAcceptForm(props) {
           <SrOnly id="date_nomination_format_attendu">
             format attendu : jj/mm/aaaa. Exemple 01/01/2021
           </SrOnly>
-
           {antenneOptions.length > 0 && (
             <FormGroupSelect
               id="antenne"
@@ -85,7 +85,6 @@ export function MesureAcceptForm(props) {
               validationSchema={mesureAcceptSchema}
             />
           )}
-
           <FormGroupSelect
             id="lieu_vie"
             options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
@@ -97,7 +96,6 @@ export function MesureAcceptForm(props) {
               formik.setFieldValue("type_etablissement", null);
             }}
           />
-
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
             <FormGroupSelect
               id="type_etablissement"
@@ -107,7 +105,6 @@ export function MesureAcceptForm(props) {
               validationSchema={mesureAcceptSchema}
             />
           )}
-
           <FormGroupSelect
             id="pays"
             options={[
@@ -124,7 +121,6 @@ export function MesureAcceptForm(props) {
             formik={formik}
             validationSchema={mesureAcceptSchema}
           />
-
           {formik.values.pays === "FR" && (
             <Flex justifyContent="space-between">
               <Box mr={1} flex={1 / 2}>
@@ -171,7 +167,6 @@ export function MesureAcceptForm(props) {
               </Box>
             </Flex>
           )}
-
           <Flex justifyContent="flex-end">
             <Box>
               <Button

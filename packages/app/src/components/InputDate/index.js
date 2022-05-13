@@ -6,12 +6,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format, parse } from "date-fns";
 
 import { RequiredAsterisk } from "~/components";
+import {
+  DatePickerHeader,
+  DatePickerContainer,
+} from "~/components/AccessibleInputDate";
 
 import "./style.scss";
 import Label from "./Label";
 
 registerLocale("fr", fr);
 setDefaultLocale("fr");
+
+let previousElement = null;
 
 export default function InputDate(props) {
   const inputRef = useRef(null);
@@ -41,7 +47,34 @@ export default function InputDate(props) {
   if (!label && props.placeholderText) {
     label = props.placeholderText;
   }
+
   const labelFor = props?.id || props?.label;
+
+  function onCalendarOpen() {
+    previousElement = document.activeElement || document.body;
+
+    const pooperElement = document.querySelector(".react-datepicker-popper");
+
+    pooperElement.setAttribute("role", "dialog");
+    pooperElement.setAttribute("aria-modal", true);
+    pooperElement.setAttribute(
+      "aria-label",
+      props.ariaLabel || "Choisir une date"
+    );
+    document.querySelector(".react-datepicker__day--selected")?.focus();
+    document
+      .querySelector(".react-datepicker__day--keyboard-selected")
+      ?.focus();
+
+    const monthsBlock = document.querySelector(".react-datepicker__month");
+
+    monthsBlock.setAttribute("role", "application");
+    monthsBlock.setAttribute("aria-label", "Dates du calendrier");
+  }
+
+  function onCalendarClose() {
+    previousElement?.focus();
+  }
 
   return (
     <>
@@ -69,6 +102,11 @@ export default function InputDate(props) {
         className={classNames("datepicker", className)}
         {...datePickerProps}
         id={labelFor}
+        onCalendarOpen={onCalendarOpen}
+        renderCustomHeader={(headerProps) => (
+          <DatePickerHeader {...headerProps} />
+        )}
+        calendarContainer={DatePickerContainer}
       />
     </>
   );

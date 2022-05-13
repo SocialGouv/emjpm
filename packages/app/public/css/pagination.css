@@ -17,21 +17,21 @@
 }
 
 .react-paginate li a:hover {
-  background: rgb(0, 122, 217);
+  background: #0072ca;
   opacity: 0.8;
   color: white;
   border-radius: 3px;
   text-decoration: none;
 }
 
-.react-paginate li.active a{
-  background: rgb(0, 122, 217);
+.react-paginate li.active a {
+  background: #0072ca;
   color: white;
 
   border-radius: 3px;
 }
 
-.react-paginate-top {
+.react-paginate-top  {
   display: inline-block;
   padding-left: 15px;
   padding-right: 15px;
@@ -50,15 +50,15 @@
 }
 
 .react-paginate-top li a:hover {
-  background: rgb(0, 122, 217);
+  background: #0072ca;
   opacity: 0.8;
   color: white;
   border-radius: 3px;
   text-decoration: none;
 }
 
-.react-paginate-top li.active a{
-  background: rgb(0, 122, 217);
+.react-paginate-top li.active a {
+  background: #0072ca;
   color: white;
 
   border-radius: 3px;

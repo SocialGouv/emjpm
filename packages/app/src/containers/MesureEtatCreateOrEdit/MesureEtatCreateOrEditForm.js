@@ -6,7 +6,7 @@ import { Box, Flex } from "rebass";
 import {
   FormGrayBox,
   FormGroupInput,
-  FormGroupInputDate,
+  AccessibleFormGroupInputDate,
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
@@ -77,7 +77,7 @@ export function MesureEtatCreateOrEditForm(props) {
           </Text>
         </FormGrayBox>
         <FormInputBox>
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             label="Date de changement d'état"
             placeholder="jj/mm/aaaa"
             title="Format: jj/mm/aaaa. Exemple 01/01/2021"
@@ -94,7 +94,6 @@ export function MesureEtatCreateOrEditForm(props) {
           <SrOnly id="date_changement_etat">
             Format: jj/mm/aaaa. Exemple 01/01/2021.
           </SrOnly>
-
           <FormGroupSelect
             id="nature_mesure"
             options={MESURE_PROTECTION.NATURE_MESURE.options}
@@ -104,7 +103,6 @@ export function MesureEtatCreateOrEditForm(props) {
             size="small"
             aria-label="Nature de la mesure"
           />
-
           <FormGroupSelect
             id="champ_mesure"
             options={MESURE_PROTECTION.CHAMP_MESURE.options}
@@ -115,7 +113,6 @@ export function MesureEtatCreateOrEditForm(props) {
             size="small"
             aria-labelledby="Champ de la mesure"
           />
-
           <FormGroupSelect
             id="lieu_vie"
             options={MESURE_PROTECTION.LIEU_VIE_MAJEUR.options}
@@ -129,7 +126,6 @@ export function MesureEtatCreateOrEditForm(props) {
             }}
             aria-label="Lieu de vie du majeur"
           />
-
           {isTypeEtablissementRequired(formik.values.lieu_vie) && (
             <FormGroupSelect
               id="type_etablissement"
@@ -140,7 +136,6 @@ export function MesureEtatCreateOrEditForm(props) {
               size="small"
             />
           )}
-
           <FormGroupSelect
             id="pays"
             options={[
@@ -164,7 +159,6 @@ export function MesureEtatCreateOrEditForm(props) {
             }}
             aria-label="Pays"
           />
-
           {formik.values.pays === "FR" && (
             <Flex justifyContent="space-between">
               <Box mr={1} flex={1 / 2}>

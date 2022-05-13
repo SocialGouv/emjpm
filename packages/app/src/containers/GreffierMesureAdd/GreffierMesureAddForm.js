@@ -10,8 +10,7 @@ import { useApolloClient } from "@apollo/client";
 import {
   FormGrayBox,
   FormGroupInput,
-  FormGroupInputDate,
-  FormGroupInputYear,
+  AccessibleFormGroupInputDate,
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
@@ -96,7 +95,7 @@ export function GreffierMesureAddForm(props) {
             ariaLabel="Cabinet du tribunal"
           />
 
-          <FormGroupInputDate
+          <AccessibleFormGroupInputDate
             value={formik.values.judgmentDate}
             id="judgmentDate"
             label="Date prévisionnelle du jugement"
@@ -131,9 +130,11 @@ export function GreffierMesureAddForm(props) {
             size="small"
             validationSchema={validationSchema}
           />
-          <FormGroupInputYear
+          <FormGroupInput
             id="annee_naissance"
             label="Année de naissance"
+            forceActive
+            size="small"
             placeholder="aaaa"
             title="Format: aaaa. Exemple: 2021"
             formik={formik}
@@ -142,6 +143,7 @@ export function GreffierMesureAddForm(props) {
             ariaDescribedBy="annee_naissance_format_attendu"
             ariaLabelledBy="annee_naissance_label"
           />
+
           <SrOnly id="annee_naissance_label">Votre année de naissance</SrOnly>
           <SrOnly id="annee_naissance_format_attendu">
             format attendu : aaaa. Exemple: 2021.

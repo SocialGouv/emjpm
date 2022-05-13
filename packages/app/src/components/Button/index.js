@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 
 import { Box, Button as RebassButton } from "rebass";
@@ -21,13 +22,15 @@ function content(props) {
   };
 }
 
-const btnStyle = ({ disabled }) => ({
-  ...buttonStyle,
-  cursor: !disabled ? "pointer" : "not-allowed",
-  opacity: disabled ? 0.5 : 1,
-});
+const btnStyle = ({ disabled }) => {
+  return {
+    ...buttonStyle,
+    backgroundColor: disabled ? "#555555" : "",
+    border: "1px solid",
+  };
+};
 
-function Button(props) {
+function Button(props, ref) {
   const { isLoading, children } = props;
 
   return (
@@ -37,14 +40,14 @@ function Button(props) {
           <Spinner variant="bgLight" />
         </Box>
       )}
-      <Box isLoading={isLoading} sx={content(props)}>
+      <Box isLoading={isLoading} sx={content(props)} ref={ref}>
         {children}
       </Box>
     </RebassButton>
   );
 }
 
-export default Button;
+export default React.forwardRef(Button);
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,

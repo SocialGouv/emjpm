@@ -41,7 +41,7 @@ function AdminEtablissementsPage() {
                     onClick={() => history.push("/admin/etablissements/config")}
                     style={{
                       backgroundColor: "white",
-                      borderColor: "#007AD9",
+                      borderColor: "#0072ca",
                       borderWidth: 1,
                       borderStyle: "solid",
                       borderRadius: 5,

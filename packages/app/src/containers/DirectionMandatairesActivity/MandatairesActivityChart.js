@@ -8,9 +8,9 @@ import {
   pieTextStyle,
   textStyle,
 } from "./style";
-import { SrOnly, Table } from "~/components";
+import { SrOnly } from "~/components";
 
-const COLORS = ["#3174D6", "#D6317D", "#D29E10"];
+const COLORS = ["#0072ca", "#D6317D", "#946800"];
 
 function MandatairesActivityChart(props) {
   const total = props.data.total;

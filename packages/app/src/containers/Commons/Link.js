@@ -7,7 +7,7 @@ function LinkStyle() {
     "&:hover": {
       textDecoration: "underline",
     },
-    color: "#007AD9",
+    color: "#0072ca",
     cursor: "pointer",
     fontSize: "13px",
     fontWeight: 600,

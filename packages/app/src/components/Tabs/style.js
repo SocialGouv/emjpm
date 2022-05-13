@@ -8,8 +8,8 @@ const tabListStyle = {
 
 const tabStyle = {
   "&.react-tabs__tab--selected": {
-    borderLeft: "2px solid #0067EA",
-    color: "#0067EA",
+    borderLeft: "2px solid #0072ca",
+    color: "#0072ca",
   },
   cursor: "pointer",
 };
