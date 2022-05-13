@@ -13,7 +13,6 @@ import { ariaLiveMessages } from "./ariaLiveMessages";
 
 const colourStyles = {
   option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-    console.log({ data, isDisabled, isFocused, isSelected });
     return {
       ...styles,
       backgroundColor: isFocused || isSelected ? "#0072ca" : null,
