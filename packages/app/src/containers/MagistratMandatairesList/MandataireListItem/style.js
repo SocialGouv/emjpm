@@ -1,7 +1,7 @@
 const TYPES = {
-  individuel: "#D6317D",
-  prepose: "#D29E10",
-  service: "#3174D6",
+  individuel: "#c92c75",
+  prepose: "#946800",
+  service: "#0072ca",
 };
 
 const MandatairelistStyle = {

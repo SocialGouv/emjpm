@@ -63,13 +63,18 @@ export { ServiceAntennes };
 
 function AntenneList({ service_antenne }) {
   return (
-    <FlexWrapper flexWrap={"wrap"} p="15px" sx={{ bg: "gray" }}>
+    <FlexWrapper flexWrap={"wrap"} p="15px" sx={{ bg: "#fefeff" }}>
       {service_antenne.map((antenne) => {
         antenne = { ...antenne, preferences: [] };
         return (
           <Box sx={fourColumnStyle}>
             <Antenne
-              sx={{ minHeight: "300px", p: "3", height: "100%" }}
+              sx={{
+                minHeight: "300px",
+                p: "3",
+                height: "100%",
+                border: "1px solid gray",
+              }}
               key={antenne.id}
               antenne={antenne}
               linkText="Voir l'antenne"

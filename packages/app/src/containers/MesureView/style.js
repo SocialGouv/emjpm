@@ -5,7 +5,7 @@ export const titleStyle = {
 };
 
 export const subtitle = {
-  color: "#C1C1C1",
+  color: "#555555",
   fontSize: "12px",
   fontWeight: "500",
   lineHeight: "1.4",

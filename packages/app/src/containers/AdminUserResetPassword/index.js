@@ -48,6 +48,7 @@ function AdminUserResetPassword(props) {
                   isLoading={loading}
                   title="Régénérer le mot de passe"
                   aria-label="Régénérer le mot de passe"
+                  color="white"
                 >
                   Régénérer le mot de passe
                 </Button>

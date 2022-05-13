@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.155.3](https://github.com/SocialGouv/emjpm/compare/v25.155.2...v25.155.3) (2022-04-28)
+
+
+### Bug Fixes
+
+* api direction national ls departements ([05582b0](https://github.com/SocialGouv/emjpm/commit/05582b050579eb8f99ffefa754e0271e2fe5b6c6))
+
+
+
+
+
 ## [25.155.2](https://github.com/SocialGouv/emjpm/compare/v25.155.1...v25.155.2) (2022-04-21)
 
 **Note:** Version bump only for package @emjpm/api

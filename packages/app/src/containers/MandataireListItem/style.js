@@ -1,10 +1,10 @@
 const TYPES = {
-  MANDATAIRE_IND: "#D6317D",
-  MANDATAIRE_PRE: "#D29E10",
-  SERVICE: "#3174D6",
-  individuel: "#D6317D",
-  préposé: "#D29E10",
-  service: "#3174D6",
+  MANDATAIRE_IND: "#c92c75",
+  MANDATAIRE_PRE: "#946800",
+  SERVICE: "#0072ca",
+  individuel: "#c92c75",
+  préposé: "#946800",
+  service: "#0072ca",
 };
 
 const MandatairelistStyle = {

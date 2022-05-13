@@ -173,6 +173,7 @@ export function GreffierMandataire(props) {
               </Box>
               <Box>
                 <Text sx={GreffierTitleMandataireStyle}>Disponibilité</Text>
+
                 <Text
                   sx={{
                     ...GreffierContentMandataireStyle,

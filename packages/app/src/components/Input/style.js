@@ -1,6 +1,6 @@
 function InputWrapperStyle(props) {
   return {
-    bg: props.readOnly ? "#f8fafc" : "transparent",
+    // bg: props.readOnly ? "#f8fafc" : "transparent",
     border: "1px solid",
     borderColor: () => {
       if (props.isFocus) return "primary";

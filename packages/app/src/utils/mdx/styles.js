@@ -40,7 +40,7 @@ const styles = css`
   }
   .mdx-a {
     text-decoration: underline;
-    color: #007ad9;
+    color: #0072ca;
   }
 `;
 

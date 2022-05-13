@@ -40,7 +40,7 @@ function ServiceAntenneInformations(props) {
       <Helmet>
         <title>{name} | e-MJPM</title>
       </Helmet>
-      <Box>
+      <Box tabIndex="0">
         <Heading size={3}>{name}</Heading>
         <Card p="5">
           <Flex p={1} mt={2} flexDirection="column">
