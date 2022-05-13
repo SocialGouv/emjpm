@@ -23,7 +23,7 @@ function MandataireMesurePage() {
       <MesureProvider mesureId={mesureId}>
         <LayoutMandataire>
           <BoxWrapper mt={1}>
-            <Flex flexDirection="column" id="mesure_view" tabIndex="-1">
+            <Flex flexDirection="column">
               <MandataireMesureSidebar mesureId={mesureId} />
               <MesureView />
             </Flex>

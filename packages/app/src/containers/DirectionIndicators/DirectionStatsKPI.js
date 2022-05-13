@@ -43,6 +43,7 @@ export default function DirectionStatsKPI() {
                 : 0
             }
             title="Services mandataires"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -56,6 +57,7 @@ export default function DirectionStatsKPI() {
                 : 0
             }
             title="Mandataires individuels"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -69,6 +71,7 @@ export default function DirectionStatsKPI() {
                 : 0
             }
             title="Préposés d'établissement"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -83,6 +86,7 @@ export default function DirectionStatsKPI() {
               return opened_mesures_nb ? Number(opened_mesures_nb) : 0;
             }}
             title={titleOpenedMesures}
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -97,6 +101,7 @@ export default function DirectionStatsKPI() {
               return closed_mesures_nb ? Number(closed_mesures_nb) : 0;
             }}
             title={titleClosedMesures}
+            tabIndex="0"
           />
         </Box>
       </FlexWrapper>
@@ -110,6 +115,7 @@ export default function DirectionStatsKPI() {
               data.stat_available_mesures.available_mesures_nb_real
             }
             title="Places disponibles"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -121,6 +127,7 @@ export default function DirectionStatsKPI() {
               data.stat_available_mesures.available_mesures_nb_over
             }
             title="Surcapacité"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -132,6 +139,7 @@ export default function DirectionStatsKPI() {
               data.stat_available_mesures.available_mesures_nb_global
             }
             title="Disponibilité totale"
+            tabIndex="0"
           />
         </Box>
         <Box sx={fiveColumnStyle}>
@@ -147,6 +155,7 @@ export default function DirectionStatsKPI() {
                 : 0;
             }}
             title="Mandataires capacité non renseignée"
+            tabIndex="0"
           />
         </Box>
       </FlexWrapper>

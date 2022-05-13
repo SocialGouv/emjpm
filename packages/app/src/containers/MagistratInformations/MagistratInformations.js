@@ -11,7 +11,7 @@ function MagistratInformations(props) {
   const { email, cabinet, nom, prenom, magistrat } = useUser();
   const { share_email } = magistrat;
   return (
-    <Box {...props} id="magistrats_informations" tabIndex="-1">
+    <Box {...props} id="magistrats_informations" tabIndex="0">
       <Card p="5">
         <Heading size={3}>
           {nom ? nom : ""} {prenom ? prenom : ""}

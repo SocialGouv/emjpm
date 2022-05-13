@@ -8,7 +8,7 @@ import {
   pieTextStyle,
   textStyle,
 } from "./style";
-import { SrOnly, Table } from "~/components";
+import { SrOnly } from "~/components";
 
 const COLORS = ["#0072ca", "#D6317D", "#946800"];
 
@@ -38,7 +38,12 @@ function MandatairesActivityChart(props) {
   return (
     <Box>
       <SrOnly id="repartition_par_type">
-        Graphique montrant la répartition de l’activité par type de mandataires
+        Graphique montrant la répartition de l’activité par type de mandataires.
+        {pieChartData
+          .map((el) => {
+            return `${el.name}: ${el.value} . `;
+          })
+          ?.join("")}
       </SrOnly>
       <Box
         sx={{ height: [300, 300, 300], position: "relative", width: "100%" }}
@@ -50,7 +55,7 @@ function MandatairesActivityChart(props) {
         <ResponsiveContainer>
           <PieChart
             role="img"
-            aria-label={`${mandatairesByTypeLength} mesures réparties par type de mandataire. Voir le tableau ci-dessous pour les données.`}
+            aria-label={`${mandatairesByTypeLength} mesures réparties par type de mandataire.`}
             aria-describedby="repartition_par_type"
           >
             <Pie
@@ -71,16 +76,6 @@ function MandatairesActivityChart(props) {
           </PieChart>
         </ResponsiveContainer>
       </Box>
-
-      <SrOnly as="div">
-        <Table
-          columns={pieChartData.map((x) => x.name).length}
-          tableData={[
-            ...pieChartData.map((x) => x.name),
-            ...pieChartData.map((x) => x.value),
-          ]}
-        />
-      </SrOnly>
 
       <Box
         sx={{

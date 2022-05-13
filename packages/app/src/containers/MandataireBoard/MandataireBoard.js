@@ -1,5 +1,6 @@
 import { isIndividuel, isPrepose } from "@emjpm/biz";
 import { Box, Card, Flex } from "rebass";
+import styled from "@emotion/styled";
 
 import { Link } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
@@ -17,6 +18,12 @@ function MandataireBoard() {
 
   const isTribunal = mandataireTis?.length > 0;
 
+  const MesureNumber = styled.span`
+    font-weight: bold;
+    font-weight: 700;
+    color: #404040;
+  `;
+
   return (
     <Box>
       <Flex
@@ -24,7 +31,7 @@ function MandataireBoard() {
         flexDirection="column"
         width="300px"
         id="vos_indicateurs"
-        tabIndex="-1"
+        tabIndex="0"
       >
         <Box bg="cardSecondary">
           <Box p={1}>
@@ -34,29 +41,27 @@ function MandataireBoard() {
         <Card>
           <Box>
             <Flex px={1} mb={1}>
-              <Text fontWeight="bold">{dispo_max}</Text>
               <Link to="/mandataires/edit-informations">
-                <Text ml={1}>{"mesures souhaitées"}</Text>
+                <MesureNumber>{dispo_max} </MesureNumber> mesures souhaitées
               </Link>
             </Flex>
             <Flex px={1} mb={1}>
-              <Text fontWeight="bold">{mesures_en_cours}</Text>
               <Link to="/mandataires/mesures">
-                <Text ml={1}>{"mesures en cours"}</Text>
+                <MesureNumber>{mesures_en_cours}</MesureNumber>{" "}
+                {"mesures en cours"}
               </Link>
             </Flex>
 
             <Flex px={1} mb={1}>
-              <Text fontWeight="bold">{mesures_en_attente}</Text>
               <Link to="/mandataires/mesures">
-                <Text ml={1}>{"mesures en attente"}</Text>
+                <MesureNumber>{mesures_en_attente}</MesureNumber>{" "}
+                {"mesures en attente"}
               </Link>
             </Flex>
           </Box>
         </Card>
       </Flex>
-
-      <Flex p={1} flexDirection="column" width="300px">
+      <Flex p={1} flexDirection="column" width="300px" tabIndex="0">
         <Box bg="cardSecondary">
           <Box p={1}>
             <Heading size={4}>Vos tribunaux</Heading>
@@ -86,9 +91,8 @@ function MandataireBoard() {
           </Flex>
         </Card>
       </Flex>
-
       {isIndividuel({ type }) && (
-        <Flex p={1} flexDirection="column" width="300px">
+        <Flex p={1} flexDirection="column" width="300px" tabIndex="0">
           <Box bg="cardSecondary">
             <Box p={1}>
               <Heading size={4}>Vos agréments</Heading>
@@ -112,9 +116,8 @@ function MandataireBoard() {
           </Card>
         </Flex>
       )}
-
       {isPrepose({ type }) && (
-        <Flex p={1} flexDirection="column" width="300px">
+        <Flex p={1} flexDirection="column" width="300px" tabIndex="0">
           <Box bg="cardSecondary">
             <Box p={1}>
               <Heading size={4}>Vos établissements</Heading>

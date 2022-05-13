@@ -88,12 +88,13 @@ export function GreffierMandataire(props) {
             href={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}
             title="Réserver une mesure"
             aria-label="Réserver une mesure"
+            sx={{ display: "inline-block" }}
           >
             Réserver une mesure
           </Button>
         </Flex>
 
-        <Flex sx={GreffierMandataireStyle} flexDirection="column">
+        <Flex sx={GreffierMandataireStyle} flexDirection="column" tabIndex="0">
           <Flex>
             <Box width="50%">
               {mandataireId && (

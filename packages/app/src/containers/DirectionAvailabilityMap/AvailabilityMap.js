@@ -28,7 +28,7 @@ function AvailabilityMap() {
     });
 
   return (
-    <Card p="4">
+    <Card p="4" tabIndex="0">
       <Box>
         <Heading size={2}>Disponibilités par territoire</Heading>
       </Box>
