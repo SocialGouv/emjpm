@@ -94,7 +94,7 @@ function MagistratMapMandatairesPanelList() {
                       ? `Voir le service ${gestionnaire.etablissement} sur la carte `
                       : "Voir le mondataire sur la carte",
 
-                  "aria-pressed": gestionnaire.id === currentMarker.id,
+                  // "aria-pressed": gestionnaire.id === currentMarker.id,
                   id: index === 0 ? "magistrats_map" : gestionnaire.id,
                 }}
               />

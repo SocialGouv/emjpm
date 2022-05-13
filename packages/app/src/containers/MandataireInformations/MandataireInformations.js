@@ -19,7 +19,7 @@ function MandataireInformations() {
   const { mandataire_tis, liste_blanche } = mandataire;
 
   return (
-    <Box id="mandataire_informations" tabIndex="-1">
+    <Box id="mandataire_informations" tabIndex="0">
       <Heading size={3}>
         {prenom ? prenom : ""} {nom ? nom : ""}
       </Heading>
