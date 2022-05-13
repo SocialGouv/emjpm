@@ -87,7 +87,7 @@ function GreffierMapMandatairesPanelList() {
                           gestionnaire.prenom
                         }`
                       : "Voir le mondataire sur la carte",
-                  "aria-pressed": gestionnaire.id === currentMarker.id,
+                  // "aria-pressed": gestionnaire.id === currentMarker.id,
                   id:
                     index === 0 ? "greffier_mandataires_list" : gestionnaire.id,
                 }}
