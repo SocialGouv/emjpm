@@ -108,6 +108,7 @@ function decorationStyle(type) {
 }
 
 const cardStyle = {
+  textAlign: "left",
   "&:hover": {
     bg: "cardSecondary",
   },
