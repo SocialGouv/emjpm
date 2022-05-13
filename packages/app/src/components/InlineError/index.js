@@ -1,7 +1,12 @@
 import { Exclamation } from "@styled-icons/evil/Exclamation";
 import PropTypes from "prop-types";
+import styled from "@emotion/styled";
 
 import { Flex, Box, Text } from "rebass";
+
+const StyledExclamation = styled(Exclamation)`
+  color: #df1400;
+`;
 
 function InlineError({ message, fieldId, showError, ...props }) {
   return (
@@ -14,7 +19,7 @@ function InlineError({ message, fieldId, showError, ...props }) {
         {...props}
       >
         <Box style={{ minWidth: "18px" }}>
-          <Exclamation size="18" />
+          <StyledExclamation size="18" />
         </Box>
         <Box>
           <Text

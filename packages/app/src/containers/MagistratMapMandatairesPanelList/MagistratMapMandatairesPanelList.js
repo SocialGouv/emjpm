@@ -87,13 +87,15 @@ function MagistratMapMandatairesPanelList() {
                     gestionnaire?.genre &&
                     gestionnaire?.nom &&
                     gestionnaire?.prenom
-                      ? `${genreRef[gestionnaire.genre]} ${gestionnaire.nom} ${
-                          gestionnaire.prenom
-                        }`
+                      ? `Voir ${genreRef[gestionnaire.genre] || ""} ${
+                          gestionnaire.nom
+                        } ${gestionnaire.prenom} sur la carte`
+                      : gestionnaire?.etablissement
+                      ? `Voir le service ${gestionnaire.etablissement} sur la carte `
                       : "Voir le mondataire sur la carte",
+
                   "aria-pressed": gestionnaire.id === currentMarker.id,
                   id: index === 0 ? "magistrats_map" : gestionnaire.id,
-                  tabIndex: index === 0 ? "-1" : "0",
                 }}
               />
             );

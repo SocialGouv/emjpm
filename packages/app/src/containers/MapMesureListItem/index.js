@@ -29,6 +29,10 @@ const GrayFemale = styled(Female)`
   color: "#333333";
 `;
 
+const StyledExclamationCircle = styled(ExclamationCircle)`
+  color: #df1400;
+`;
+
 const currentYear = new Date().getFullYear();
 
 export default function MapMesureListItem(props) {
@@ -81,7 +85,7 @@ export default function MapMesureListItem(props) {
                     "Veuillez corriger cette anomalie afin que les fonctions d'imports <br />(OCMI, éditeur tiers de logiciel utilisant notre API, import fichier) puissent fonctionner correctement."
                   }
                 >
-                  <ExclamationCircle size="12" color="#ff0000" />
+                  <StyledExclamationCircle size="12" />
                 </div>
               )}{" "}
               {numeroRg || ""}{" "}

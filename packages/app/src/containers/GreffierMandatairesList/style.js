@@ -56,8 +56,8 @@ const styleFilterButton = (enabled) => {
   if (enabled) {
     return {
       ...common,
-      background: "#e5e5e5",
-      boxShadow: "inset 0px 0px 5px #c1c1c1",
+      background: "#F8FAFC",
+      boxShadow: "inset 0px 0px 2px #c1c1c1",
       outline: "none",
     };
   } else {

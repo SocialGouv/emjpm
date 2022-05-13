@@ -4,18 +4,18 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts";
 
 import { Link } from "~/components/Link";
 import useUser from "~/hooks/useUser";
-import { Heading, Text, Table, SrOnly } from "~/components";
+import { Heading, Text } from "~/components";
 
 const COLORS = [
-  "#FF6633",
+  "#d14800",
   "#FFB399",
-  "#FF33FF",
-  "#FFFF99",
-  "#00B3E6",
-  "#E6B333",
+  "#d100d1",
+  "#7b7b00",
+  "#0080a6",
+  "#957100",
   "#3366E6",
-  "#999966",
-  "#99FF99",
+  "#7a7a1a",
+  "#008a00",
   "#B34D4D",
   "#80B300",
   "#809900",
@@ -75,7 +75,7 @@ function StatisticMesureNature() {
 
   return (
     <>
-      <Card m={1} width="100%">
+      <Card m={1} width="100%" tabIndex="0">
         <Box>
           <Heading size={4}>Répartition des mesures par nature</Heading>
         </Box>
@@ -99,7 +99,11 @@ function StatisticMesureNature() {
             height={300}
             role="img"
             id="chart"
-            aria-label={`${numberOfMesures} mesures réparties par nature. Voir le tableau ci-dessous pour les données.`}
+            aria-label={`${numberOfMesures} mesures réparties par nature. ${data
+              .map((el) => {
+                return `${el.name} : ${el.value}. `;
+              })
+              ?.join("")}`}
           >
             <Pie
               data={data}
@@ -134,12 +138,6 @@ function StatisticMesureNature() {
           </Flex>
         </Flex>
       </Card>
-      <SrOnly>
-        <Table
-          columns={data.map((x) => x.name).length}
-          tableData={[...data.map((x) => x.name), ...data.map((x) => x.value)]}
-        />
-      </SrOnly>
     </>
   );
 }

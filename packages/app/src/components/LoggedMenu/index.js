@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Flex, Box, Text } from "rebass";
 import styled from "@emotion/styled";
 import { useApolloClient } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import { UserCircle } from "@styled-icons/fa-regular/UserCircle";
 import { ChevronDown } from "@styled-icons/evil/ChevronDown";
+import { ChevronUp } from "@styled-icons/evil/ChevronUp";
+
 import { Global } from "@emotion/react";
 import cssStyle from "./style.css";
 
@@ -21,10 +24,11 @@ import {
 import { useAuth } from "~/user/Auth";
 
 const BlueUserCircle = styled(UserCircle)`
-  color: #006be6;
+  color: #0072ca;
 `;
 
 function LoggedMenu(props) {
+  const [isOpen, setIsOpen] = useState(false);
   const { email } = useUser();
   const apolloClient = useApolloClient();
   const history = useHistory();
@@ -45,6 +49,10 @@ function LoggedMenu(props) {
     history.push(value);
   }
 
+  function onMenuToggle(menuState) {
+    setIsOpen(menuState.isOpen);
+  }
+
   return (
     <Flex style={{ paddingTop: "55px", height: "127px" }}>
       <Global styles={cssStyle} />
@@ -54,9 +62,11 @@ function LoggedMenu(props) {
 
       <Box>
         <Wrapper
-          tag="button"
-          onSelection={handleSelection}
+          onMenuToggle={onMenuToggle}
+          tag="nav"
+          aria-label="Mon compte eMJPM"
           className="UserMenu-AriaMenuButton"
+          onSelection={handleSelection}
           style={{
             position: "relative",
             boxSizing: "border-box",
@@ -64,10 +74,12 @@ function LoggedMenu(props) {
             minWidth: "0px",
             padding: "10px",
           }}
-          title={`${email}: Votre compte`}
-          aria-label={`${email}: Votre compte`}
         >
-          <MenuButton className="UserMenu-AriaMenuButton-trigger">
+          <MenuButton
+            className="UserMenu-AriaMenuButton-trigger"
+            title={`${email}: Votre compte`}
+            aria-label={`${email}: Votre compte`}
+          >
             <Flex>
               <BlueUserCircle size={25} />
               <Box>
@@ -76,7 +88,20 @@ function LoggedMenu(props) {
                 </Text>
               </Box>
               <Box height="25px">
-                <ChevronDown size={25} />
+                {isOpen ? (
+                  <ChevronUp
+                    size={25}
+                    role="img"
+                    alt="menu ouvert"
+                    pointerEvents="none"
+                  />
+                ) : (
+                  <ChevronDown
+                    size={25}
+                    alt="menu fermé"
+                    pointerEvents="none"
+                  />
+                )}
               </Box>
             </Flex>
           </MenuButton>

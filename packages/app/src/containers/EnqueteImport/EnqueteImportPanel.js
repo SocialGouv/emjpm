@@ -102,7 +102,7 @@ function renderSectionTitle(enqueteId, goToStep) {
     <>
       <Flex
         sx={{
-          color: "#007AD9",
+          color: "#0072ca",
           cursor: "pointer",
           fontWeight: "bold",
         }}
@@ -112,7 +112,7 @@ function renderSectionTitle(enqueteId, goToStep) {
         <Flex
           sx={{
             ...menuStepperStyle.menuTag,
-            border: "2px solid #007AD9",
+            border: "2px solid #0072ca",
           }}
         >
           <Text>{"<"}</Text>

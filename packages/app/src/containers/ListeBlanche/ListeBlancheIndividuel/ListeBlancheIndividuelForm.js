@@ -564,6 +564,8 @@ export function ListeBlancheIndividuelForm(props) {
               as="a"
               type={null}
               href={`/admin/liste-blanche/${data.id}/delete`}
+              title="Supprimer la liste blanche"
+              aria-label="Supprimer la liste blanche"
             >
               Supprimer
             </Button>

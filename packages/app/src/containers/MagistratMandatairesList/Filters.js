@@ -153,10 +153,11 @@ function MagistratMandatairesListFilters(props) {
                   ? "Rechercher les mandataire à proximité d'une localisation et les trier par distance, de la plus proche à la plus éloignée."
                   : null
               }
+              aria-pressed={searchByLocation}
             >
               <Location
                 size={extraIconsSize}
-                color={searchByLocation ? "#70D54F" : ""}
+                color={searchByLocation ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -178,10 +179,11 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires ayant une habilitation vérifiée par la DD"
                   : null
               }
+              aria-pressed={habilitation}
             >
               <CheckShield
                 size={extraIconsSize}
-                color={habilitation ? "#70D54F" : ""}
+                color={habilitation ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -203,10 +205,11 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataires souhaitant recevoir des mesures en provenance de votre tribunal"
                   : null
               }
+              aria-pressed={prefer}
             >
               <Star
                 size={extraIconsSize}
-                color={prefer ? "#70D54F" : ""}
+                color={prefer ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />
@@ -228,10 +231,11 @@ function MagistratMandatairesListFilters(props) {
                   ? "Afficher uniquement les mandataire ayant des places disponibles"
                   : null
               }
+              aria-pressed={available}
             >
               <DotCircle
                 size={extraIconsSize}
-                color={available ? "#70D54F" : ""}
+                color={available ? "#2d7600" : ""}
                 alt=""
                 role="img"
               />

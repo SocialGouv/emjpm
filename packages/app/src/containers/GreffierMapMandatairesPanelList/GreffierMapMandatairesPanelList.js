@@ -90,7 +90,6 @@ function GreffierMapMandatairesPanelList() {
                   "aria-pressed": gestionnaire.id === currentMarker.id,
                   id:
                     index === 0 ? "greffier_mandataires_list" : gestionnaire.id,
-                  tabIndex: index === 0 ? "-1" : "0",
                 }}
               />
             );

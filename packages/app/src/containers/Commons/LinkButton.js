@@ -22,18 +22,40 @@ function LinkButtonStyle(isActive, props) {
     fontSize: 1,
     fontWeight: 500,
     lineHeight: "1.2",
-    opacity: props.disabled ? 0.3 : isActive ? 0.6 : 1,
+
+    // backgroundColor:
+    //   !props.outline && (props.disabled || isActive) ? "#555555" : "primary",
+
     outline: "none",
     px: 3,
     py: 2,
     transition: "150ms ease-in-out opacity",
+    "&:focus": {
+      outline: "none",
+      boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) ",
+    },
+    "&:active": {
+      // color: "white",
+      opacity: "0.6",
+    },
+    "&:hover": {
+      // color: "white",
+      opacity: "0.8",
+      textDecoration: "none",
+    },
   };
+
+  if (props.outline && (props.disabled || isActive)) {
+    properties = { ...properties, backgroundColor: "#555555" };
+  }
 
   if (!props.outline) {
     properties = {
       ...properties,
       ...(props.disabled
-        ? {}
+        ? {
+            backgroundColor: "#555555",
+          }
         : {
             "&:active": {
               color: "white",
@@ -46,7 +68,7 @@ function LinkButtonStyle(isActive, props) {
             },
             "&:focus": {
               outline: "none",
-              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4)",
+              boxShadow: "0 0 0 3px rgba(21, 156, 228, 0.4) !important",
             },
           }),
     };
@@ -59,6 +81,7 @@ function LinkButton({ location, ...props }) {
   const isActive = location && location.pathname === props.to;
   // eslint-disable-next-line no-unused-vars
   const { bg, color, ...attr } = props;
+  console.log(props);
 
   return (
     <RouterLink
@@ -70,6 +93,7 @@ function LinkButton({ location, ...props }) {
           sx={LinkButtonStyle(isActive, props)}
           onClick={(e) => {
             if (props.disabled) {
+              e.preventDefault();
               return;
             }
             if (e.ctrlKey) {
@@ -78,6 +102,7 @@ function LinkButton({ location, ...props }) {
             e.preventDefault();
             navigate(props.to);
           }}
+          disabled={props.disabled}
         >
           {props.children}
         </RebassLink>

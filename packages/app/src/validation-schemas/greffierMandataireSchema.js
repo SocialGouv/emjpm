@@ -1,4 +1,8 @@
-import yup, { FORM_YEAR_NOT_VALID, FORM_DATE_NOT_VALID } from "./yup";
+import yup, {
+  FORM_YEAR_NOT_VALID,
+  FORM_DATE_NOT_VALID,
+  parseDateStringWhenNullable,
+} from "./yup";
 import {
   validateNumeroRG,
   checkNumeroRgAlphanum,
@@ -16,11 +20,21 @@ import {
 
 const greffierMandataireSchema = ({ apolloClient, serviceId, mandataireId }) =>
   yup.object().shape({
-    annee_naissance: yup.string().required(FORM_YEAR_NOT_VALID),
+    annee_naissance: yup
+      .number(FORM_YEAR_NOT_VALID)
+      .min(1900)
+      .max(new Date().getFullYear())
+      .typeError(FORM_YEAR_NOT_VALID)
+      .required(FORM_YEAR_NOT_VALID),
     cabinet: yup.string().nullable(),
     champ_mesure: yup.string().nullable(),
     civilite: yup.string().required(),
-    judgmentDate: yup.date(FORM_DATE_NOT_VALID),
+    judgmentDate: yup
+      .date(FORM_DATE_NOT_VALID)
+      .transform(parseDateStringWhenNullable)
+      .nullable()
+      .typeError(FORM_DATE_NOT_VALID),
+
     nature_mesure: yup.string().required(),
     numero_rg: yup
       .string()

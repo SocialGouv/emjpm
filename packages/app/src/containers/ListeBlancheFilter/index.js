@@ -1,17 +1,22 @@
-import { ChevronDown } from "@styled-icons/evil/ChevronDown";
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Box, Flex } from "rebass";
 
 import useQueryReady from "~/hooks/useQueryReady";
-import { Link } from "~/containers/Commons";
+
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import useUser from "~/hooks/useUser";
-import { Button, Card, CheckBox, Input, AccessibleSelect } from "~/components";
+import {
+  Card,
+  CheckBox,
+  Input,
+  AccessibleSelect,
+  AjoutMandataireButton,
+} from "~/components";
 import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { createDepartementOptions } from "~/utils/geodata";
 import { findOption } from "~/utils/form";
 
-import { BoxStyle, dropdownStyle, menuItemStyle } from "./style";
+import { BoxStyle } from "./style";
 
 function ListeBlancheFilter() {
   const ref = useRef();
@@ -70,39 +75,10 @@ function ListeBlancheFilter() {
           ref={ref}
           sx={{ position: "absolute", right: 2, top: 2, zIndex: 99 }}
         >
-          <>
-            <Button
-              onClick={() => setButtonsEnabled(true)}
-              title="Ajouter un mandataire"
-              aria-label="Ajouter un mandataire"
-            >
-              Ajouter
-              <ChevronDown size={20} />
-            </Button>
-
-            {buttonsEnabled && (
-              <Box sx={dropdownStyle}>
-                <Card p="0" variant="sideCard">
-                  {buttonLinks.map((link) => {
-                    return (
-                      <Box sx={menuItemStyle} key={link.title}>
-                        <Link
-                          title={`Ajouter un ${link.title}`}
-                          aria-label={`Ajouter un ${link.title}`}
-                          to={link.to}
-                        >
-                          {link.title}
-                        </Link>
-                      </Box>
-                    );
-                  })}
-                </Card>
-              </Box>
-            )}
-          </>
+          <AjoutMandataireButton buttonLinks={buttonLinks} />
         </Box>
 
-        <Flex flexDirection="column" tabIndex="0">
+        <Flex flexDirection="column">
           <Flex>
             <Box sx={BoxStyle}>
               <AccessibleSelect

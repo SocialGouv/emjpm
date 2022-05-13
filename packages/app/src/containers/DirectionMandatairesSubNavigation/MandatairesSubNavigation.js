@@ -13,6 +13,7 @@ function MandatairesSubNavigation(props) {
           to="/direction/stats"
           aria-label="Vue globale"
           title="Vue globale"
+          disabled={location.pathname === "/direction/stats"}
         >
           Vue globale
         </LinkButton>
@@ -21,6 +22,7 @@ function MandatairesSubNavigation(props) {
             to="/direction/mandataires/list"
             aria-label="Vue détaillée"
             title="Vue détaillée"
+            disabled={location.pathname === "/direction/mandataires/list"}
           >
             Vue détaillée
           </LinkButton>

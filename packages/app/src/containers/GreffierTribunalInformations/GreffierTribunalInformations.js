@@ -12,7 +12,7 @@ function GreffierTribunalInformations(props) {
     greffier: { ti },
   } = useUser();
   return (
-    <Box {...props}>
+    <Box {...props} tabIndex="0">
       <Card p="5">
         <Heading size={3}>{ti.etablissement}</Heading>
         <Box sx={boxStyle}>

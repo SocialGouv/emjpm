@@ -64,7 +64,7 @@ export default function AutoReload({
     padding: "1em",
     zIndex: 1050,
     backgroundColor: "white",
-    borderColor: "#007AD9",
+    borderColor: "#0072ca",
     borderWidth: 1,
     borderStyle: "solid",
     borderRadius: 5,

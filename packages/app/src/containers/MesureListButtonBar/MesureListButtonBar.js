@@ -45,7 +45,12 @@ function MesureListButtonBar() {
             Importer vos mesures
           </LinkButton>
         </Box>
-        <MesureExportExcelButton ml={1} mr={2} />
+        <MesureExportExcelButton
+          ml={1}
+          mr={2}
+          title="Exporter les mesures"
+          aria-label="Exporter les mesures"
+        />
       </Flex>
     </Box>
   );

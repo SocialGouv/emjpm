@@ -1,0 +1,91 @@
+.MandataireButton-AriaMenuButton {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+}
+
+.MandataireButton-AriaMenuButton-trigger {
+  cursor: pointer;
+  display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight: bold;
+  padding: 6px 10px;
+  background-color: #007ad9;
+  color: white;
+  padding: 9px;
+  border-radius: 5px;
+}
+
+.MandataireButton-AriaMenuButton-trigger:hover,
+.MandataireButton-AriaMenuButton-trigger:focus,
+.MandataireButton-AriaMenuButton-trigger.is-open {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+}
+
+.MandataireButton-AriaMenuButton-trigger:active,
+.MandataireButton-AriaMenuButton-trigger.is-open {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+}
+
+.MandataireButton-AriaMenuButton > span[role="button"][aria-expanded="true"] {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(21, 156, 228, 0.4);
+}
+
+.MandataireButton-AriaMenuButton-menu {
+  background: #f8fafc;
+  border: 1px solid rgba(200, 200, 200, 0.4);
+  list-style-type: none;
+  left: 0;
+  z-index: 99;
+  padding-left: 0;
+  border-radius: 3px;
+  margin: 4px 0 0 0;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+}
+
+.MandataireButton-AriaMenuButton-menu--flushRight {
+  right: 0;
+}
+
+.MandataireButton-AriaMenuButton-menuItem {
+  display: block;
+  cursor: pointer;
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+  text-align: left;
+}
+
+.MandataireButton-AriaMenuButton-menuItemWrapper:first-of-type
+  .MandataireButton-AriaMenuButton-menuItem {
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
+}
+
+.MandataireButton-AriaMenuButton-menuItemWrapper:last-of-type
+  .MandataireButton-AriaMenuButton-menuItem {
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+
+.MandataireButton-AriaMenuButton-menuItem:hover,
+.MandataireButton-AriaMenuButton-menuItem:focus {
+  background-color: #4183c4;
+  color: #fff;
+}
+
+.MandataireButton-AriaMenuButton-menuItem.is-selected {
+  cursor: default;
+  font-weight: bold;
+}
+
+nav.MandataireButton-AriaMenuButton div[role="menu"] {
+  position: absolute;
+  width: 230px;
+  right: 10px;
+}

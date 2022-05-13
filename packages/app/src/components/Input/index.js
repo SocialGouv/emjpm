@@ -58,13 +58,15 @@ function Input(props) {
     (value !== null && value !== undefined && value !== "");
   return (
     <InputWrapper
+      isActive={isActive}
+      isFocus={isFocus}
       readOnly={readOnly}
       size={size}
       isValid={isValid}
       hasError={hasError}
       style={containerStyle}
     >
-      {(placeholder || label) && (
+      {(label || placeholder) && (
         <InputLabel
           size={size}
           htmlFor={name}
@@ -76,6 +78,7 @@ function Input(props) {
           {label || placeholder}
         </InputLabel>
       )}
+
       <InputElement
         size={size}
         type={type}

@@ -80,17 +80,21 @@ export function GreffierMandataire(props) {
           {mandataireId && <Heading size={2}>{`${prenom} ${nom}`}</Heading>}
 
           <Button
+            sx={{
+              display: "inline-block",
+            }}
             as="a"
             type="null"
             href={`/greffiers/gestionnaires/${gestionnaireId}/reservation`}
             title="Réserver une mesure"
             aria-label="Réserver une mesure"
+            sx={{ display: "inline-block" }}
           >
             Réserver une mesure
           </Button>
         </Flex>
 
-        <Flex sx={GreffierMandataireStyle} flexDirection="column">
+        <Flex sx={GreffierMandataireStyle} flexDirection="column" tabIndex="0">
           <Flex>
             <Box width="50%">
               {mandataireId && (
@@ -170,6 +174,7 @@ export function GreffierMandataire(props) {
               </Box>
               <Box>
                 <Text sx={GreffierTitleMandataireStyle}>Disponibilité</Text>
+
                 <Text
                   sx={{
                     ...GreffierContentMandataireStyle,

@@ -48,8 +48,9 @@ function MesureExportExcelButton(props) {
       pl="1"
       pr="1"
       sx={{
+        border: "1px solid #0072ca",
         ":hover": {
-          opacity: "0.7",
+          opacity: "0.8",
         },
       }}
     >
