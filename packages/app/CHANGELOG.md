@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.155.4](https://github.com/SocialGouv/emjpm/compare/v25.155.3...v25.155.4) (2022-05-23)
+
+
+### Bug Fixes
+
+* **rgaa:** dialog modal and combobox ([#2835](https://github.com/SocialGouv/emjpm/issues/2835)) ([17aa3b2](https://github.com/SocialGouv/emjpm/commit/17aa3b22f704e7dfb2072ce0848befbe059ba75b))
+* **rgaa:** fix issues with keyboad navigation ([#2846](https://github.com/SocialGouv/emjpm/issues/2846)) ([9c484c3](https://github.com/SocialGouv/emjpm/commit/9c484c3c2e49c6b4b0fbef2b966f39c5e41da13b))
+* **rgaa:** text align to left on mandatairesPanelList ([#2848](https://github.com/SocialGouv/emjpm/issues/2848)) ([0ebe617](https://github.com/SocialGouv/emjpm/commit/0ebe6176c21bd9f03cbff0dede38572c8f4beb1f))
+
+
+
+
+
 ## [25.155.3](https://github.com/SocialGouv/emjpm/compare/v25.155.2...v25.155.3) (2022-04-28)
 
 **Note:** Version bump only for package @emjpm/app
