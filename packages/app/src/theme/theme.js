@@ -38,7 +38,7 @@ const theme = {
     link: "#0072ca",
     mediumGray: "#767676",
     muted: "#f6f6f9",
-    primary: "#0072ca",
+    primary: "#007ad9",
     secondary: "#30c",
     success: "#2d7600",
     text: "#404040",
