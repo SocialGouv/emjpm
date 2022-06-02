@@ -11,7 +11,11 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY(
+    $userId: Int!
+    $endDate: timestamptz
+    $serviceId: Int
+  ) {
     enquetes(
       where: { status: { _eq: "created" }, date_fin: { _gt: $endDate } }
     ) {
@@ -20,7 +24,7 @@ export const GET_SERVICE_USERS = gql`
       date_fin
       id
     }
-    statistics: mandataire_statistics(userId: $userId) {
+    statistics: mandataire_statistics(userId: $userId, serviceId: $serviceId) {
       natureStatistics
     }
     users_by_pk(id: $userId) {
