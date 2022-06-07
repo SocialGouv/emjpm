@@ -13,8 +13,6 @@ export function ServiceSelector({ user }) {
   }, [user.allAccessibleService]);
 
   const handleServiceChange = (selected) => {
-    console.log(selected.value);
-
     if (selected.value) {
       const currentService = user?.allAccessibleService.find(
         (x) => x.id === selected.value

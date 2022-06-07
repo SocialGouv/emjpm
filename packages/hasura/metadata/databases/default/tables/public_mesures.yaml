@@ -429,8 +429,11 @@ select_permissions:
     - email_greffier
     - email_magistrat
     filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      service:
+        service_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
   role: service
 - permission:
     allow_aggregations: true
