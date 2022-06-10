@@ -171,8 +171,11 @@ insert_permissions:
   role: prepose
 - permission:
     check:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      service:
+        service_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
     columns:
     - annee_naissance
     - antenne_id
@@ -630,8 +633,11 @@ update_permissions:
     - type_etablissement
     - ville
     filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      service:
+        service_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
   role: service
 - permission:
     check: null
@@ -693,8 +699,11 @@ delete_permissions:
   role: prepose
 - permission:
     filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      service:
+        service_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
   role: service
 - permission:
     filter:
