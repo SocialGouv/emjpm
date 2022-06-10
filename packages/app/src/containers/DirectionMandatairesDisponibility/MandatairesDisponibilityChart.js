@@ -24,11 +24,11 @@ function MandatairesDisponibilityChart({ data }) {
           Graphique montrant les disponibilités des mandataires par type.
           {data
             .map((el) => {
-              return `${el.name} Disponibilité actuelle: ${
+              return `${el.name} Disponibilité max:  ${
+                el["Disponibilité max"]
+              }, Disponibilité actuelle: ${
                 el["Disponibilité actuelle"]
-              }, Disponibilité max:  ${el["Disponibilité max"]},Surcapacité: ${
-                el.overcapacity ? "Oui" : "Non"
-              }. `;
+              }, Surcapacité: ${el.overcapacity ? "Oui" : "Non"}. `;
             })
             ?.join("")}
           ;
