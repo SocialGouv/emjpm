@@ -47,6 +47,8 @@ function AdminEtablissementsPage() {
                       borderRadius: 5,
                       padding: "12px",
                     }}
+                    title="Mise à jour de la base de données FINESS"
+                    aria-label="Mise à jour de la base de données FINESS"
                   >
                     <Cog size={18} style={{ color: "#333", height: "100%" }} />
                   </Button>

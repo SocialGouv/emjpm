@@ -174,6 +174,7 @@ function AdminApiLogs() {
           sx={{
             mr: 2,
             width: 120,
+            color: "textTertiary",
           }}
         >
           DATE
@@ -185,6 +186,7 @@ function AdminApiLogs() {
             overflow: "hidden",
             whiteSpace: "nowrap",
             width: 80,
+            color: "textTertiary",
           }}
         >
           METHOD
@@ -196,6 +198,7 @@ function AdminApiLogs() {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             width: 200,
+            color: "textTertiary",
           }}
         >
           URL
@@ -207,6 +210,7 @@ function AdminApiLogs() {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             width: 150,
+            color: "textTertiary",
           }}
         >
           TOKEN
@@ -217,6 +221,7 @@ function AdminApiLogs() {
             textOverflow: "ellipsis",
             whiteSpace: "nowrap",
             width: 200,
+            color: "textTertiary",
           }}
         >
           RESPONSE

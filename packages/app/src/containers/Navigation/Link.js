@@ -8,7 +8,7 @@ function LinkStyle(isActive) {
     "&:hover": {
       textDecoration: "none",
     },
-    color: isActive ? "primary" : "black",
+    color: isActive ? "link" : "black",
     cursor: "pointer",
     display: "inline-block",
     fontFamily: "heading",
