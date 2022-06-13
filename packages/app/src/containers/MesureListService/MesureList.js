@@ -13,7 +13,7 @@ import { getUserBasePath } from "~/constants";
 import MesureListItem from "~/containers/MesureListItem";
 import { formatMesureListItems } from "~/formatters/mesures";
 
-import { MESURES_QUERY, SERVICE_MESURE_QUERY } from "./queries";
+import { SERVICE_MESURE_QUERY } from "./queries";
 import { MesureListStyle } from "./style";
 import { SrOnly } from "../../components";
 
