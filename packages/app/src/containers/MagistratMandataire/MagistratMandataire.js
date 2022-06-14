@@ -88,7 +88,7 @@ export function MagistratMandataire(props) {
             href={`/magistrats/gestionnaires/${gestionnaireId}/reservation`}
             id="reserver_mesure"
             title="Réserver une mesure"
-            aria-label="Résérver une mesure"
+            aria-label="Réserver une mesure"
             sx={{ display: "block" }}
           >
             Réserver une mesure

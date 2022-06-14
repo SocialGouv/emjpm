@@ -101,7 +101,7 @@ function StatisticMesureNature() {
             id="chart"
             aria-label={`${numberOfMesures} mesures réparties par nature. ${data
               .map((el) => {
-                return `${el.name} : ${el.value}. `;
+                return `${el.value} ${el.name}. `;
               })
               ?.join("")}`}
           >
