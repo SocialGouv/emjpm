@@ -23,11 +23,10 @@ export default function Mesures() {
     service: currentService,
   } = useUser();
 
-  // const [{ service }] = service_members;
-
   const filteredService = service_members.find(
     (s) => s.service.id === currentService.id
   );
+
   const { service } = filteredService;
 
   const { service_antennes, mesures_in_progress, dispo_max } = service;

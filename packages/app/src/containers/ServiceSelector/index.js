@@ -23,12 +23,13 @@ export function ServiceSelector({ user }) {
   };
 
   return (
-    <Box sx={{ width: "250px", marginBottom: "10px" }}>
+    <Box sx={{ width: "250px", marginBottom: "10px" }} id="service_selector">
       <AccessibleSelect
         placeholder="Sélectionner un service"
         options={ServiceOptions}
         value={ServiceOptions?.find((s) => s.value === user.service.id)}
         onChange={handleServiceChange}
+        menuPortalTarget={false}
       />
     </Box>
   );

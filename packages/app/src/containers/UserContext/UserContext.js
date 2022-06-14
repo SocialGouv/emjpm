@@ -33,7 +33,9 @@ function UserDataQueryProvider(props) {
   const { user, children } = props;
   const { role: type, id: userId } = user;
 
-  const [currentService, settCurrentService] = useState(null);
+  const [currentService, settCurrentService] = useState(() =>
+    JSON.parse(localStorage.getItem("sotredService"))
+  );
 
   const variables = useMemo(() => {
     const variables = {
@@ -64,6 +66,10 @@ function UserDataQueryProvider(props) {
     // currentService = userData.service_members[0].service;
     if (currentService == null) {
       settCurrentService(userData.service_members[0].service);
+      localStorage.setItem(
+        "sotredService",
+        JSON.stringify(userData.service_members[0].service)
+      );
     }
     allAccessibleService = userData.service_members?.map((x) => x.service);
   }
@@ -74,10 +80,10 @@ function UserDataQueryProvider(props) {
       (currentService != null && service.id != currentService.id)
     ) {
       settCurrentService(service);
+      localStorage.setItem("sotredService", JSON.stringify(service));
     }
   };
 
-  console.log("currentService", currentService);
   const currentUser = {
     ...userData,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
