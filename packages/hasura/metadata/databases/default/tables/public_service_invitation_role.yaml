@@ -1,0 +1,4 @@
+table:
+  name: service_invitation_role
+  schema: public
+is_enum: true

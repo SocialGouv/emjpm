@@ -93,6 +93,10 @@ const createDirection = (userId, type, regionId, departementCode) => {
   });
 };
 
+// const createDpf = (mandataireDatas, user_id) => {
+//   console.log("====>mandataireDatas, user_id", mandataireDatas, user_id);
+// };
+
 const createRole = async (userId, type) => {
   const [role] = await Role.query().where("name", type);
   return UserRole.query().allowInsert("[user_id,role_id]").insert({
@@ -225,6 +229,11 @@ const signup = async (req, res) => {
           departementCode
         );
 
+        break;
+      }
+      case "dpfi": {
+        // await createRole(user.id, type);
+        // await createDpf(body.mandataire, user.id, type);
         break;
       }
       default:

@@ -58,6 +58,7 @@
 - "!include public_routine_log.yaml"
 - "!include public_service_antenne.yaml"
 - "!include public_service_departements.yaml"
+- "!include public_service_invitation_role.yaml"
 - "!include public_service_member_invitations.yaml"
 - "!include public_service_members.yaml"
 - "!include public_service_tis.yaml"
