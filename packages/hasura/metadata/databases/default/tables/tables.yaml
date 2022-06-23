@@ -10,6 +10,7 @@
 - "!include public_config.yaml"
 - "!include public_departements.yaml"
 - "!include public_direction.yaml"
+- "!include public_dpfi.yaml"
 - "!include public_editor_token_requests.yaml"
 - "!include public_editors.yaml"
 - "!include public_enquete_reponse_status.yaml"

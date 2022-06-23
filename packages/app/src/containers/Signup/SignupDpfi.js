@@ -1,5 +1,5 @@
 import { useApolloClient } from "@apollo/client";
-import { findDepartementByCodeOrId, isIndividuel } from "@emjpm/biz";
+import { findDepartementByCodeOrId } from "@emjpm/biz";
 import { useFormik } from "formik";
 import { useContext } from "react";
 import { useHistory } from "react-router-dom";
@@ -12,7 +12,7 @@ import {
 } from "~/components/AppForm";
 import { Geocode } from "~/components/Geocode";
 import { HeadingTitle } from "~/containers/HeadingTitle";
-import { signupMandataireSchema } from "~/validation-schemas";
+import { signupDpfiSchema } from "~/validation-schemas";
 import isSiretExists from "~/query-service/emjpm-hasura/isSiretExists";
 import {
   Button,
@@ -29,10 +29,9 @@ import signup from "./signup";
 import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
-function SignupMandataireForm() {
+function SignupDpfiForm() {
   const history = useHistory();
-  const { user, mandataire, setMandataire, validateStepOne } =
-    useContext(SignupContext);
+  const { user, dpfi, setDpfi, validateStepOne } = useContext(SignupContext);
 
   const { departements } = useDepartements();
 
@@ -40,15 +39,14 @@ function SignupMandataireForm() {
 
   const formik = useFormik({
     initialValues: {
-      dispo_max: mandataire ? mandataire.dispo_max : "",
       geocode: "",
-      siret: mandataire ? mandataire.siret : "",
-      telephone: mandataire ? mandataire.telephone : "",
-      telephone_portable: mandataire ? mandataire.telephone_portable : "",
+      siret: dpfi ? dpfi.siret : "",
+      telephone: dpfi ? dpfi.telephone : "",
+      telephone_portable: dpfi ? dpfi.telephone_portable : "",
       user: user,
     },
     onSubmit: async (values, { setSubmitting, setErrors }) => {
-      if (isIndividuel(user) && (await isSiretExists(client, values.siret))) {
+      if (await isSiretExists(client, values.siret)) {
         setErrors({ siret: "Ce SIRET existe déjà" });
       } else {
         const codeDepartement = values.geocode.depcode;
@@ -56,16 +54,15 @@ function SignupMandataireForm() {
           code: codeDepartement,
         });
         const body = {
-          mandataire: {
+          dpfi: {
             location_adresse: values.geocode.label,
             code_postal: values.geocode.postcode,
             ville: values.geocode.city,
             departement_code: departement.id,
-            dispo_max: parseInt(values.dispo_max),
             genre: user.genre,
             latitude: values.geocode.latitude,
             longitude: values.geocode.longitude,
-            siret: isIndividuel(user) ? values.siret : null,
+            siret: values.siret,
             telephone: values.telephone,
             telephone_portable: values.telephone_portable,
           },
@@ -81,13 +78,13 @@ function SignupMandataireForm() {
       }
       setSubmitting(false);
     },
-    validationSchema: signupMandataireSchema,
+    validationSchema: signupDpfiSchema,
   });
 
   return (
     <>
       <HeadingTitle p="1" m="1">
-        {"Demande de création d'un compte agent DPF"}
+        {"Demande de création d'un compte agent  DPF"}
       </HeadingTitle>
 
       <form noValidate onSubmit={formik.handleSubmit}>
@@ -95,32 +92,32 @@ function SignupMandataireForm() {
           {"Tous les champs marqués d'un astérisque * sont obligatoires"}
         </SrOnly>
         <SignupGeneralError errors={formik.errors} />
-        {isIndividuel(user) && (
-          <Flex role="group" aria-labelledby="informations">
-            <FormGrayBox>
-              <Heading size={4} id="informations">
-                {"Information professionnelle"}
-              </Heading>
-              <Text lineHeight="1.5" color="textSecondary">
-                {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
+
+        <Flex role="group" aria-labelledby="informations">
+          <FormGrayBox>
+            <Heading size={4} id="informations">
+              {"Information professionnelle"}
+            </Heading>
+            <Text lineHeight="1.5" color="textSecondary">
+              {`Votre SIRET sera utilisé pour vous identifier en cas d'échanges de données avec
                 d'autres systèmes (OCMI par exemple)`}
-              </Text>
-            </FormGrayBox>
-            <FormInputBox>
-              <FormGroupInput
-                id="siret"
-                formik={formik}
-                placeholder="SIRET"
-                value={formik.values.siret}
-                validationSchema={signupMandataireSchema}
-                required={isIndividuel(user)}
-                ariaLabel="Numéro de siret"
-                ariaDescribedBy="format_siret"
-              />
-              <SrOnly id="format_siret">format attendu : 82254321300027</SrOnly>
-            </FormInputBox>
-          </Flex>
-        )}
+            </Text>
+          </FormGrayBox>
+          <FormInputBox>
+            <FormGroupInput
+              id="siret"
+              formik={formik}
+              placeholder="SIRET"
+              value={formik.values.siret}
+              validationSchema={signupDpfiSchema}
+              required
+              ariaLabel="Numéro de siret"
+              ariaDescribedBy="format_siret"
+            />
+            <SrOnly id="format_siret">format attendu : 82254321300027</SrOnly>
+          </FormInputBox>
+        </Flex>
+
         <Flex role="group" aria-labelledby="Téléphone">
           <FormGrayBox>
             <Heading size={4} id="telephone_heading">
@@ -133,7 +130,7 @@ function SignupMandataireForm() {
               formik={formik}
               placeholder="Téléphone"
               value={formik.values.telephone}
-              validationSchema={signupMandataireSchema}
+              validationSchema={signupDpfiSchema}
               autoComplete="tel"
               ariaLabel="Votre téléphone"
               ariaDescribedBy="format_telephone"
@@ -144,7 +141,7 @@ function SignupMandataireForm() {
               formik={formik}
               placeholder="Téléphone portable"
               value={formik.values.telephone_portable}
-              validationSchema={signupMandataireSchema}
+              validationSchema={signupDpfiSchema}
               autoComplete="tel"
               ariaLabel="Votre téléphone portable"
               ariaDescribedBy="format_telephone_portable"
@@ -170,7 +167,7 @@ function SignupMandataireForm() {
             <Field>
               <Geocode
                 id="geocode"
-                resource={mandataire}
+                resource={dpfi}
                 onChange={(geocode) => formik.setFieldValue("geocode", geocode)}
                 aria-describedby="msg-geocode"
                 required
@@ -189,26 +186,6 @@ function SignupMandataireForm() {
           </FormInputBox>
         </Flex>
 
-        <Flex role="group" aria-labelledby="mesure_max">
-          <FormGrayBox>
-            <Heading size={4} id="mesure_max">
-              {"Capacité"}
-            </Heading>
-            <Text lineHeight="1.5" color="textSecondary">
-              {"Indiquez le nombre de mesures maximal souhaité"}
-            </Text>
-          </FormGrayBox>
-          <FormInputBox>
-            <FormGroupInput
-              id="dispo_max"
-              formik={formik}
-              placeholder="Nombre de mesures souhaité"
-              value={formik.values.dispo_max}
-              validationSchema={signupMandataireSchema}
-              ariaLabel="Nombre de mesures souhaité"
-            />
-          </FormInputBox>
-        </Flex>
         <Flex justifyContent="flex-end" p={1}>
           <Box mr="2">
             <Button
@@ -226,7 +203,7 @@ function SignupMandataireForm() {
             <Button
               variant="outline"
               onClick={() => {
-                setMandataire(formik.values);
+                setDpfi(formik.values);
                 validateStepOne(false);
               }}
               aria-label="Retour à la page précédente"
@@ -255,7 +232,7 @@ function SignupMandataireForm() {
 const SignupDpfi = (props) => (
   <SignupDatas
     {...props}
-    Component={(props) => <SignupMandataireForm {...props} />}
+    Component={(props) => <SignupDpfiForm {...props} />}
   />
 );
 

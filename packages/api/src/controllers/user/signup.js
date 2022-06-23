@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const { User } = require("~/models");
 const { OcmiMandataire } = require("~/models");
 const { Mandataire } = require("~/models");
+const { Dpfi } = require("~/models");
 const { Magistrat } = require("~/models");
 const { Greffier } = require("~/models");
 const { UserRole } = require("~/models");
@@ -84,6 +85,41 @@ const createMandataire = async (mandataireDatas, user_id) => {
   return mandataire;
 };
 
+const createDpfi = async (dpfiDatas, user_id) => {
+  const {
+    telephone,
+    telephone_portable,
+    location_adresse,
+    code_postal,
+    ville,
+    departement_code,
+    dispo_max,
+    siret,
+    latitude,
+    longitude,
+  } = dpfiDatas;
+
+  const dpfiResult = await Dpfi.query()
+    .allowInsert(
+      "[siret,telephone,user_id,telephone_portable,location_adresse,code_postal,ville,departement_code]"
+    )
+    .insert({
+      code_postal,
+      departement_code,
+      dispo_max,
+      latitude,
+      location_adresse,
+      longitude,
+      siret,
+      telephone,
+      telephone_portable,
+      user_id,
+      ville,
+    });
+
+  return dpfiResult;
+};
+
 const createDirection = (userId, type, regionId, departementCode) => {
   return Direction.query().insert({
     departement_code: departementCode,
@@ -92,10 +128,6 @@ const createDirection = (userId, type, regionId, departementCode) => {
     user_id: userId,
   });
 };
-
-// const createDpf = (mandataireDatas, user_id) => {
-//   console.log("====>mandataireDatas, user_id", mandataireDatas, user_id);
-// };
 
 const createRole = async (userId, type) => {
   const [role] = await Role.query().where("name", type);
@@ -232,8 +264,9 @@ const signup = async (req, res) => {
         break;
       }
       case "dpfi": {
-        // await createRole(user.id, type);
-        // await createDpf(body.mandataire, user.id, type);
+        await createRole(user.id, type);
+        await createDpfi(body.dpfi, user.id, type);
+
         break;
       }
       default:

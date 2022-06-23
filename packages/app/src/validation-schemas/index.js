@@ -29,6 +29,7 @@ import { signupMandataireSchema } from "./signupMandataireSchema";
 import { signupSchema } from "./signupSchema";
 import { signupAdminSchema } from "./signupAdminSchema";
 import { signupServiceSchema } from "./signupServiceSchema";
+import { signupDpfiSchema } from "./signupDpfiSchema";
 
 export {
   adminEditorSchema,
@@ -62,4 +63,5 @@ export {
   editorTokenSchema,
   mesureEtatSchema,
   mesureRessourceSchema,
+  signupDpfiSchema,
 };

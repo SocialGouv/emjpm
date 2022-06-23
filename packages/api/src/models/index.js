@@ -35,6 +35,7 @@ module.exports.LbUpdateLog = require("./LbUpdateLog");
 module.exports.ListeBlanche = require("./ListeBlanche");
 module.exports.Magistrat = require("./Magistrat");
 module.exports.Mandataire = require("./Mandataire");
+module.exports.Dpfi = require("./Dpfi");
 module.exports.MandataireTis = require("./MandataireTis");
 module.exports.Mesure = require("./Mesure");
 module.exports.MesureEtat = require("./MesureEtat");

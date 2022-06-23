@@ -10,6 +10,7 @@ export function Provider(props) {
   // Use State to keep the values
   const [user, setUser] = useState(false);
   const [mandataire, setMandataire] = useState(false);
+  const [dpfi, setDpfi] = useState(false);
   const [magistrat, setMagistrat] = useState(false);
   const [greffier, setGreffier] = useState(false);
   const [direction, setDirection] = useState(false);
@@ -26,6 +27,7 @@ export function Provider(props) {
     magistrat,
     greffier,
     mandataire,
+    dpfi,
     region,
     service,
     setDepartment,
@@ -33,6 +35,7 @@ export function Provider(props) {
     setMagistrat,
     setGreffier,
     setMandataire,
+    setDpfi,
     setRegion,
     setService,
     setUser,
