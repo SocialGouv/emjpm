@@ -109,6 +109,11 @@ insert_permissions:
     - use_location_adresse
     - ville
   role: direction
+- permission:
+    backend_only: false
+    check: {}
+    columns: []
+  role: sdpf
 select_permissions:
 - permission:
     columns:

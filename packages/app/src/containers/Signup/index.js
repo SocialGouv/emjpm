@@ -21,6 +21,7 @@ function Signup(props) {
       {isStepOneValidate && user.type === "greffier" && <SignupGreffier />}
       {isStepOneValidate && user.type === "direction" && <SignupDirection />}
       {isStepOneValidate && user.type === "dpfi" && <SignupDpfi />}
+      {isStepOneValidate && user.type === "sdpf" && <SignupDpfi />}
     </>
   );
 }

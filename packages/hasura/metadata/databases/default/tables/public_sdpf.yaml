@@ -1,0 +1,46 @@
+table:
+  name: sdpf
+  schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns: []
+  role: direction
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - org_gestionnaire
+    - suspend_activity
+    - adresse
+    - code_postal
+    - comptences
+    - departement
+    - email
+    - etablissement
+    - location_adresse
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - ville
+    - id
+    - latitude
+    - longitude
+    - adresse_complement
+    - genre
+    - suspend_activity_reason
+    - created_at
+    filter: {}
+  role: direction
+update_permissions:
+- permission:
+    check: {}
+    columns: []
+    filter: {}
+  role: direction

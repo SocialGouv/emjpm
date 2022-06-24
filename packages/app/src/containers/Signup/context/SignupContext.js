@@ -15,6 +15,7 @@ export function Provider(props) {
   const [greffier, setGreffier] = useState(false);
   const [direction, setDirection] = useState(false);
   const [service, setService] = useState(false);
+  const [sdpf, setSdpf] = useState(false);
   const [department, setDepartment] = useState(null);
   const [region, setRegion] = useState(null);
   const [isStepOneValidate, validateStepOne] = useState(false);
@@ -30,6 +31,7 @@ export function Provider(props) {
     dpfi,
     region,
     service,
+    sdpf,
     setDepartment,
     setDirection,
     setMagistrat,
@@ -38,6 +40,7 @@ export function Provider(props) {
     setDpfi,
     setRegion,
     setService,
+    setSdpf,
     setUser,
     user,
     validateStepOne,

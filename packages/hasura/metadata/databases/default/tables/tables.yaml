@@ -57,6 +57,7 @@
 - "!include public_resultat_revision_mesure.yaml"
 - "!include public_role.yaml"
 - "!include public_routine_log.yaml"
+- "!include public_sdpf.yaml"
 - "!include public_service_antenne.yaml"
 - "!include public_service_departements.yaml"
 - "!include public_service_invitation_role.yaml"

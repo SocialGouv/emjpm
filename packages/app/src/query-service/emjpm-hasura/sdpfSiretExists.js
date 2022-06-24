@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-const SERVICE_BY_SIRET = gql`
+const SPDF_BY_SIRET = gql`
   query SdpfBySiret($siret: String!) {
     sdpf(where: { siret: { _eq: $siret } }) {
       siret
@@ -8,7 +8,7 @@ const SERVICE_BY_SIRET = gql`
   }
 `;
 
-export default async function serviceSiretExists(client, siret) {
+export default async function sdpfSiretExists(client, siret) {
   const { data } = await client.query({
     context: {
       headers: {
@@ -16,7 +16,7 @@ export default async function serviceSiretExists(client, siret) {
       },
     },
     fetchPolicy: "network-only",
-    query: SERVICE_BY_SIRET,
+    query: SPDF_BY_SIRET,
     variables: {
       siret,
     },
