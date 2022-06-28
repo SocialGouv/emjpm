@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Flex } from "rebass";
 
 import { Card, Text } from "~/components";
@@ -6,14 +7,16 @@ import capitalize from "~/utils/std/capitalize";
 import { cardStyle, descriptionStyle, labelStyle } from "../style";
 
 export function ListeBlancheSdpfItem(props) {
-  const { item, onClick, getHref } = props;
+  const { item, onClick, getHref, sdpfdepartements } = props;
 
   const to = getHref && getHref(item, props);
 
-  console.log("====>", props);
-  const { service } = item;
+  const { sdpf: service } = item;
 
-  return "test";
+  const sdpfDep = useMemo(() => {
+    return sdpfdepartements.find((d) => d.id === service.departement);
+  }, [sdpfdepartements, service.departement]);
+
   return (
     <Card
       key={service.id}
@@ -44,11 +47,8 @@ export function ListeBlancheSdpfItem(props) {
           {service.departement && (
             <Text sx={descriptionStyle}>{service.departement.nom}</Text>
           )}
-          <Text sx={descriptionStyle}>
-            {service.departements
-              .map(({ departement }) => departement.nom)
-              .join(", ")}
-          </Text>
+
+          <Text sx={descriptionStyle}>{sdpfDep.nom}</Text>
         </Flex>
 
         <Flex width="45%" flexDirection="column">

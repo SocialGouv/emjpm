@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { PaginatedList } from "~/containers/PaginatedList";
 
@@ -69,6 +70,7 @@ function getRequestFilters(filters) {
       case "service":
         departementsFilter.push(serviceDepartementFilters);
         break;
+
       default:
         departementsFilter.push(individuelDepartementFilters);
         departementsFilter.push(preposeDepartementFilter);
@@ -95,6 +97,7 @@ function getRequestFilters(filters) {
 export function TabPanelPaginatedList(props) {
   const { getHref, onRowClick, type } = props;
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
+  const { departements } = useDepartements({ all: true });
 
   const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -143,6 +146,7 @@ export function TabPanelPaginatedList(props) {
       currentOffset={currentOffset}
       setCurrentOffset={setCurrentOffset}
       onRowClick={onRowClick}
+      sdpfdepartements={departements}
     />
   );
 }

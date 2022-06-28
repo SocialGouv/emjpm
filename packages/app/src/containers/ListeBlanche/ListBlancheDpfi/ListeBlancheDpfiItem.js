@@ -10,7 +10,6 @@ export function ListeBlancheDpfiItem(props) {
 
   const { liste_blanche } = item;
   const { mandataire } = liste_blanche;
-  console.log("====>", liste_blanche);
 
   return (
     <Card

@@ -90,6 +90,17 @@ export const SEARCH_VIEW_LB = gql`
         nom
         telephone
       }
+      sdpf {
+        id
+        adresse
+        siret
+        etablissement
+        code_postal
+        created_at
+        departement
+        nom
+        telephone
+      }
 
       liste_blanche {
         id
