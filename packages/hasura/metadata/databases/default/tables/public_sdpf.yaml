@@ -1,11 +1,39 @@
 table:
   name: sdpf
   schema: public
+object_relationships:
+- name: liste_blanche
+  using:
+    foreign_key_constraint_on: liste_blache_id
 insert_permissions:
 - permission:
     backend_only: false
     check: {}
-    columns: []
+    columns:
+    - adresse
+    - adresse_complement
+    - code_postal
+    - comptences
+    - created_at
+    - departement
+    - email
+    - etablissement
+    - genre
+    - latitude
+    - location_adresse
+    - longitude
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_gestionnaire
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - suspend_activity
+    - suspend_activity_reason
+    - telephone
+    - ville
   role: direction
 select_permissions:
 - permission:

@@ -90,6 +90,7 @@ export const SEARCH_VIEW_LB = gql`
         nom
         telephone
       }
+
       liste_blanche {
         id
         nom
@@ -114,6 +115,14 @@ export const SEARCH_VIEW_LB = gql`
           etablissement_rattachement
         }
         mandataire_individuel_departements {
+          id
+          departement_financeur
+          departement {
+            id
+            nom
+          }
+        }
+        dpfi_departements {
           id
           departement_financeur
           departement {

@@ -1,5 +1,3 @@
-import { isIndividuel } from "@emjpm/biz";
-
 import { validateGeocode } from "./fieldValidators";
 import yup, {
   FORM_REQUIRED_MESSAGE,

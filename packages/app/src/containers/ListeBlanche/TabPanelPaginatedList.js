@@ -8,6 +8,9 @@ import { PaginatedList } from "~/containers/PaginatedList";
 import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { ListeBlancheServiceItem } from "./ListeBlancheService";
+import { ListeBlancheDpfiItem } from "./ListBlancheDpfi";
+import { ListeBlancheSdpfItem } from "./ListeBlancheSdpf";
+
 import { SEARCH_VIEW_LB } from "./queries";
 
 function getRequestFilters(filters) {
@@ -156,6 +159,10 @@ function ListeBlancheItem(props) {
       return <ListeBlanchePreposeItem {...props} />;
     case "service":
       return <ListeBlancheServiceItem {...props} />;
+    case "dpfi":
+      return <ListeBlancheDpfiItem {...props} />;
+    case "sdpf":
+      return <ListeBlancheSdpfItem {...props} />;
   }
 }
 

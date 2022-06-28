@@ -44,7 +44,7 @@ function ListeBlancheFilter() {
     },
     {
       title: "Mandataire DPF",
-      to: `/${user.type}/liste-blanche/ajout-sdpf`,
+      to: `/${user.type}/liste-blanche/ajout-dpf`,
     },
     {
       title: "Service DPF",

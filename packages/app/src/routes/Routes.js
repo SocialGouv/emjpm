@@ -55,6 +55,10 @@ const routes = [
     path: "/direction/liste-blanche/ajout-service",
   },
   {
+    Component: require("~/pages/direction/liste-blanche/ajout-dpf").default,
+    path: "/direction/liste-blanche/ajout-dpf",
+  },
+  {
     Component: require("~/pages/direction/liste-blanche/ajout-sdpf").default,
     path: "/direction/liste-blanche/ajout-sdpf",
   },

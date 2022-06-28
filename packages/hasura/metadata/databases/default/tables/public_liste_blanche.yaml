@@ -2,6 +2,13 @@ table:
   name: liste_blanche
   schema: public
 object_relationships:
+- name: dpfi
+  using:
+    foreign_key_constraint_on:
+      column: liste_blache_id
+      table:
+        name: dpfi
+        schema: public
 - name: mandataire
   using:
     foreign_key_constraint_on:
@@ -28,6 +35,13 @@ object_relationships:
         name: services
         schema: public
 array_relationships:
+- name: dpfi_departements
+  using:
+    foreign_key_constraint_on:
+      column: liste_blanche_id
+      table:
+        name: dpfi_departements
+        schema: public
 - name: mandataire_individuel_departements
   using:
     foreign_key_constraint_on:

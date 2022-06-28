@@ -1,3 +1,37 @@
 table:
   name: dpfi
   schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+- name: liste_blanche
+  using:
+    foreign_key_constraint_on: liste_blache_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - adresse
+    - code_postal
+    - created_at
+    - departement_code
+    - editor_id
+    - email_send
+    - id
+    - latitude
+    - liste_blache_id
+    - location_adresse
+    - longitude
+    - siret
+    - suspend_activity
+    - suspend_activity_reason
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+  role: direction
