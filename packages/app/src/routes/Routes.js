@@ -266,6 +266,14 @@ const routes = [
     path: "/mandataires",
   },
   {
+    Component: require("~/pages/dpfi/index").default,
+    path: "/dpfi",
+  },
+  {
+    Component: require("~/pages/dpfi/informations").default,
+    path: "/dpfi/informations",
+  },
+  {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/index")
       .default,
     path: "/mandataires/enquetes/:enquete_id(\\d+)",

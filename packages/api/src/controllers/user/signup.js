@@ -9,9 +9,12 @@ const { UserRole } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
 const { AdminInvitation } = require("~/models");
 const { ServiceMember } = require("~/models");
+const { SdpfMember } = require("~/models");
 const { Role } = require("~/models");
 const { Direction } = require("~/models");
 const { Service } = require("~/models");
+const { Sdpf } = require("~/models");
+
 const { errorHandler } = require("~/db/errors");
 const { inscriptionEmail } = require("~/email/inscription");
 
@@ -266,7 +269,22 @@ const signup = async (req, res) => {
       case "dpfi": {
         await createRole(user.id, type);
         await createDpfi(body.dpfi, user.id, type);
+        break;
+      }
+      case "sdpf": {
+        await createRole(user.id, type);
+        const {
+          sdpf: { sdpf_id },
+        } = body;
 
+        const service = await Sdpf.query().findOne("id", sdpf_id);
+        await SdpfMember.query()
+          .allowInsert("[user_id,sdpf_id]")
+          .insert({
+            is_admin: service.email === user.email,
+            sdpf_id,
+            user_id: user.id,
+          });
         break;
       }
       default:
@@ -296,6 +314,7 @@ const signup = async (req, res) => {
 
     return res.json({ success: true });
   } catch (err) {
+    console.log(err.stack);
     errorHandler(err, res);
     return;
   }

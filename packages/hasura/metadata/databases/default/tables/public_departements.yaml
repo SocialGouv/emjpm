@@ -76,6 +76,13 @@ select_permissions:
     - id_region
     - nom
     filter: {}
+  role: dpfi
+- permission:
+    columns:
+    - id
+    - id_region
+    - nom
+    filter: {}
   role: greffier
 - permission:
     columns:

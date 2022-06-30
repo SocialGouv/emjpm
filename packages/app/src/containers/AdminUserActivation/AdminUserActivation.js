@@ -7,6 +7,7 @@ import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Button, Heading, Text } from "~/components";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
+import { AdminDpfiListeBlanche } from "./AdminDpfiListeBlanche";
 import { AdminServiceListeBlanche } from "./AdminServiceListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LISTE_BLANCHE, USER } from "./queries";
@@ -88,7 +89,10 @@ function AdminUserActivation(props) {
   const activateButtonText = active ? "Bloquer" : "Activer";
   return (
     <>
-      {(type === "individuel" || type === "prepose" || type === "service") && (
+      {(type === "individuel" ||
+        type === "prepose" ||
+        type === "service" ||
+        type === "dpfi") && (
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1}>
@@ -98,6 +102,12 @@ function AdminUserActivation(props) {
           <FormInputBox>
             {(type === "individuel" || type === "prepose") && (
               <AdminMandataireListeBlanche
+                mandataire={mandataire}
+                liste_blanche={liste_blanche}
+              />
+            )}
+            {type === "dpfi" && (
+              <AdminDpfiListeBlanche
                 mandataire={mandataire}
                 liste_blanche={liste_blanche}
               />

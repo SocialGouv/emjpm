@@ -6,6 +6,7 @@ import {
   isService,
   isGreffier,
   isAdmin,
+  isDpfi,
 } from "@emjpm/biz";
 
 import { Box } from "rebass";
@@ -21,6 +22,7 @@ import { MagistratEditInformations } from "~/containers/MagistratEditInformation
 import { GreffierEditInformations } from "~/containers/GreffierEditInformations";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
 import { AdminEditInformations } from "~/containers/AdminEditInformations";
+import { DpfiEditInformations } from "~/containers/DpfiEditInformations";
 
 import { USER } from "./queries";
 import useUser from "~/hooks/useUser";
@@ -58,6 +60,17 @@ function AdminUser({ userId }) {
             />
           </Box>
         </>
+      )}
+
+      {isDpfi({ type }) && (
+        <Box my={1} width="100%">
+          <DpfiEditInformations
+            userId={userId}
+            cancelLink="/admin/users"
+            isAdmin
+            mt="3"
+          />
+        </Box>
       )}
       {isMagistrat({ type }) && (
         <Box my={1} width="100%">

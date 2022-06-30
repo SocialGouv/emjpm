@@ -28,6 +28,19 @@ export const LISTE_BLANCHE_BY_PK = gql`
           genre
         }
       }
+      dpfi {
+        id
+        adresse
+        telephone
+        siret
+        user {
+          id
+          nom
+          prenom
+          email
+          genre
+        }
+      }
       mandataire_prepose_etablissements {
         id
         etablissement {
@@ -39,6 +52,15 @@ export const LISTE_BLANCHE_BY_PK = gql`
         etablissement_rattachement
       }
       mandataire_individuel_departements {
+        id
+        departement_code
+        departement_financeur
+        departement {
+          id
+          nom
+        }
+      }
+      dpfi_departements {
         id
         departement_code
         departement_financeur

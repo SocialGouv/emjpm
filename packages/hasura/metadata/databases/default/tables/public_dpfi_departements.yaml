@@ -26,3 +26,13 @@ select_permissions:
     - liste_blanche_id
     filter: {}
   role: direction
+- permission:
+    allow_aggregations: true
+    columns:
+    - created_at
+    - departement_code
+    - departement_financeur
+    - id
+    - liste_blanche_id
+    filter: {}
+  role: dpfi

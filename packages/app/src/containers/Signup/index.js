@@ -8,7 +8,7 @@ import { SignupGreffier } from "./SignupGreffier";
 import { SignupMandataire } from "./SignupMandataire";
 import { SignupService } from "./SignupService";
 import { SignupDpfi } from "./SignupDpfi";
-
+import { SignupSdpf } from "./SignupSdpf";
 function Signup(props) {
   const { user, isStepOneValidate } = useContext(SignupContext);
   return (
@@ -21,7 +21,7 @@ function Signup(props) {
       {isStepOneValidate && user.type === "greffier" && <SignupGreffier />}
       {isStepOneValidate && user.type === "direction" && <SignupDirection />}
       {isStepOneValidate && user.type === "dpfi" && <SignupDpfi />}
-      {isStepOneValidate && user.type === "sdpf" && <SignupDpfi />}
+      {isStepOneValidate && user.type === "sdpf" && <SignupSdpf />}
     </>
   );
 }

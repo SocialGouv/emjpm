@@ -37,6 +37,14 @@ insert_permissions:
   role: direction
 select_permissions:
 - permission:
+    columns:
+    - code_postal
+    - departement
+    - etablissement
+    - id
+    filter: {}
+  role: anonymous
+- permission:
     allow_aggregations: true
     columns:
     - org_gestionnaire
@@ -58,6 +66,7 @@ select_permissions:
     - telephone
     - ville
     - id
+    - liste_blache_id
     - latitude
     - longitude
     - adresse_complement

@@ -20,38 +20,34 @@ import { SignupDatas } from "./SignupDatas";
 import { SignupGeneralError } from "./SignupGeneralError";
 
 function getServiceOptions(services, departementCodes) {
-  const servicesByDepartement = departementCodes
-    ? services.filter((service) => {
-        if (!service.departements) {
-          return false;
-        }
-        return service.departements.some(({ departement_code }) =>
-          departementCodes.includes(departement_code)
-        );
-      })
-    : [];
+  const servicesByDepartement =
+    departementCodes && services.length > 0
+      ? services.filter((ser) => departementCodes.includes(ser.departement))
+      : [];
 
   return toOptions(servicesByDepartement, "id", "etablissement");
 }
 
-function SignupSdpfForm({ serviceDatas }) {
+function SignupSdpfForm({ sdpfDatas, ...props }) {
   const history = useHistory();
-  const { user, service, setService, sdpf, setSdpf, validateStepOne } =
-    useContext(SignupContext);
+  const { user, sdpf, setSdpf, validateStepOne } = useContext(SignupContext);
+
   const { departements, loading } = useDepartements();
 
   const formik = useFormik({
     initialValues: {
-      departements: service?.departements || null,
-      service: service?.service || null,
+      departements: sdpf?.departements || null,
+      service: sdpf?.service || null,
     },
     onSubmit: (values, { setSubmitting, setErrors }) => {
+      console.log(values);
       const body = {
-        service: {
-          service_id: values.service,
+        sdpf: {
+          sdpf_id: values.service,
         },
         user: user,
       };
+
       signup({
         body,
         onComplete: () => setSubmitting(false),
@@ -67,7 +63,7 @@ function SignupSdpfForm({ serviceDatas }) {
   }
 
   const serviceOptions = getServiceOptions(
-    serviceDatas,
+    sdpfDatas,
     formik.values.departements
   );
 
@@ -76,7 +72,7 @@ function SignupSdpfForm({ serviceDatas }) {
   return (
     <>
       <HeadingTitle p="1" m="1">
-        {"Création d'un compte de service mandataire"}
+        {"Création d'un compte de service DPF"}
       </HeadingTitle>
       <form noValidate onSubmit={formik.handleSubmit}>
         <SrOnly id="instructions">
@@ -92,7 +88,7 @@ function SignupSdpfForm({ serviceDatas }) {
               id="votre_service_heading"
             >
               {
-                "Sélectionnez le département dans lequel se situe le siège social du service mandataire pour lequel vous travaillez."
+                "Sélectionnez le département dans lequel se situe le siège social du service DPF pour lequel vous travaillez."
               }
             </Text>
           </FormGrayBox>
@@ -111,10 +107,13 @@ function SignupSdpfForm({ serviceDatas }) {
                 hasError={
                   formik.errors.departements && formik.touched.departements
                 }
-                onChange={(options) => {
+                onChange={(selected) => {
+                  if (selected.length === 0) {
+                    formik.setFieldValue("service", null);
+                  }
                   formik.setFieldValue(
                     "departements",
-                    (options || []).map((o) => o.value)
+                    (selected || []).map((o) => o.value)
                   );
                 }}
                 required
@@ -150,7 +149,7 @@ function SignupSdpfForm({ serviceDatas }) {
               mr="2"
               variant="outline"
               onClick={() => {
-                setService(null);
+                setSdpf(null);
                 validateStepOne(false);
               }}
               aria-label="Retour à la page précédente"
