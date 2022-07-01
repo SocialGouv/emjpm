@@ -13,6 +13,7 @@ import {
   GREFFIER_USERS,
   MANDATAIRE_USERS,
   DPFI_USERS,
+  SDPF_USERS,
 } from "./queries";
 
 export const Context = createContext({});
@@ -26,6 +27,7 @@ const QUERY_TYPE = {
   ti: MAGISTRAT_USERS,
   greffier: GREFFIER_USERS,
   dpfi: DPFI_USERS,
+  sdpf: SDPF_USERS,
 };
 
 function UserDataQueryProvider(props) {
@@ -55,6 +57,7 @@ function UserDataQueryProvider(props) {
   }
 
   const userData = data.users_by_pk;
+  console.log(userData);
   let currentService;
   if (isService(userData)) {
     const {

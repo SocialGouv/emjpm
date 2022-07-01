@@ -124,8 +124,8 @@ export function ListeBlancheDpfiForm(props) {
   );
 
   const departements =
-    data && data.mandataire_individuel_departements
-      ? data.mandataire_individuel_departements.map((item) => {
+    data && data.dpfi_departements
+      ? data.dpfi_departements.map((item) => {
           return {
             departement_financeur: item.departement_financeur,
             id: item.departement_code,

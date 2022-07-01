@@ -36,3 +36,14 @@ select_permissions:
     - liste_blanche_id
     filter: {}
   role: dpfi
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - departement_financeur
+    filter: {}
+  role: direction
+delete_permissions:
+- permission:
+    filter: {}
+  role: direction

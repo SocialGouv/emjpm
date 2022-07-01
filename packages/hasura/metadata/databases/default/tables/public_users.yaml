@@ -250,6 +250,27 @@ select_permissions:
     - prenom
     - reset_password_expires
     - reset_password_token
+    - secret_2fa
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
+- permission:
+    allow_aggregations: true
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
     - type
     filter:
       _or:
@@ -384,6 +405,26 @@ update_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: prepose
+- permission:
+    check: null
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     check: null
     columns:

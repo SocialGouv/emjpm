@@ -83,7 +83,7 @@ function AdminUserActivation(props) {
 
   const { users_by_pk } = data;
 
-  const { active, type, mandataire, service_members } = users_by_pk;
+  const { active, type, mandataire, dpfi, service_members } = users_by_pk;
 
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
@@ -108,7 +108,7 @@ function AdminUserActivation(props) {
             )}
             {type === "dpfi" && (
               <AdminDpfiListeBlanche
-                mandataire={mandataire}
+                mandataire={dpfi}
                 liste_blanche={liste_blanche}
               />
             )}

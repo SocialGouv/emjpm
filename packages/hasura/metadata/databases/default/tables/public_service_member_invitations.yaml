@@ -5,18 +5,35 @@ object_relationships:
 - name: service
   using:
     foreign_key_constraint_on: service_id
+- name: service_invitation_role
+  using:
+    foreign_key_constraint_on: invitation_role
 insert_permissions:
 - permission:
     check:
       service_id:
         _eq: X-Hasura-Service-Id
     columns:
-    - id
-    - email
-    - token
     - created_at
+    - email
+    - id
+    - invitation_role
     - sent_at
     - service_id
+    - token
+  role: sdpf
+- permission:
+    check:
+      service_id:
+        _eq: X-Hasura-Service-Id
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
   role: service
 select_permissions:
 - permission:
@@ -31,17 +48,39 @@ select_permissions:
   role: anonymous
 - permission:
     columns:
-    - id
-    - service_id
     - created_at
-    - sent_at
     - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
+    filter:
+      service_id:
+        _eq: X-Hasura-Service-Id
+  role: sdpf
+- permission:
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
     - token
     filter:
       service_id:
         _eq: X-Hasura-Service-Id
   role: service
 delete_permissions:
+- permission:
+    filter:
+      service:
+        service_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     filter:
       service_id:

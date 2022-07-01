@@ -136,6 +136,14 @@ export const SEARCH_VIEW_LB = gql`
             prenom
           }
         }
+        dpfi {
+          id
+          user {
+            id
+            nom
+            prenom
+          }
+        }
         mandataire_prepose_etablissements {
           etablissement {
             id

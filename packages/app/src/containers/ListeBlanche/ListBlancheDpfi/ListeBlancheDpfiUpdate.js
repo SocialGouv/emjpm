@@ -38,17 +38,14 @@ export function ListeBlancheDpfiUpdate(props) {
           data={data}
           handleCancel={handleCancel}
           handleSubmit={async (values) => {
-            const { mandataire_individuel_departements } = data;
+            const { dpfi_departements } = data;
 
-            const departementsToDelete =
-              mandataire_individuel_departements.filter((d) => {
-                return !values.departements.map((d) => d.id).includes(d.id);
-              });
+            const departementsToDelete = dpfi_departements.filter((d) => {
+              return !values.departements.map((d) => d.id).includes(d.id);
+            });
 
             const departementsToAdd = values.departements.filter((d) => {
-              return !mandataire_individuel_departements
-                .map((d) => d.id)
-                .includes(d.id);
+              return !dpfi_departements.map((d) => d.id).includes(d.id);
             });
 
             const departementsToDeleteIds = departementsToDelete.map(
@@ -78,6 +75,7 @@ export function ListeBlancheDpfiUpdate(props) {
                 prenom: values.prenom,
                 siret: values.siret,
                 ville: values.ville,
+                telephone: values.telephone,
               },
             });
 

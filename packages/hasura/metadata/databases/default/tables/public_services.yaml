@@ -260,6 +260,11 @@ select_permissions:
   role: greffier
 - permission:
     columns:
+    - id
+    filter: {}
+  role: sdpf
+- permission:
+    columns:
     - adresse
     - adresse_complement
     - code_postal

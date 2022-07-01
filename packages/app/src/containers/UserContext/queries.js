@@ -330,3 +330,39 @@ export const DPFI_USERS = gql`
     }
   }
 `;
+
+export const SDPF_USERS = gql`
+  query CURRENT_USER_QUERY($userId: Int!) {
+    users_by_pk(id: $userId) {
+      email
+      created_at
+      id
+      last_login
+      nom
+      prenom
+      type
+      cabinet
+      sdpf_members {
+        id
+        sdpf_id
+        user_id
+        is_admin
+        user {
+          email
+          prenom
+          nom
+          id
+        }
+        sdpf {
+          id
+          etablissement
+          longitude
+          latitude
+          suspend_activity
+          suspend_activity_reason
+          departement
+        }
+      }
+    }
+  }
+`;

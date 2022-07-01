@@ -5,6 +5,14 @@ object_relationships:
 - name: liste_blanche
   using:
     foreign_key_constraint_on: liste_blache_id
+array_relationships:
+- name: sdpf_members
+  using:
+    foreign_key_constraint_on:
+      column: sdpf_id
+      table:
+        name: sdpf_members
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false
@@ -75,9 +83,75 @@ select_permissions:
     - created_at
     filter: {}
   role: direction
+- permission:
+    columns:
+    - org_gestionnaire
+    - suspend_activity
+    - adresse
+    - code_postal
+    - comptences
+    - departement
+    - email
+    - etablissement
+    - location_adresse
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - ville
+    - id
+    - liste_blache_id
+    - latitude
+    - longitude
+    - adresse_complement
+    - genre
+    - suspend_activity_reason
+    - created_at
+    filter:
+      sdpf_members:
+        user_id:
+          _eq: X-Hasura-User-Id
+  role: sdpf
 update_permissions:
 - permission:
     check: {}
     columns: []
     filter: {}
   role: direction
+- permission:
+    check: null
+    columns:
+    - org_gestionnaire
+    - suspend_activity
+    - adresse
+    - code_postal
+    - comptences
+    - departement
+    - email
+    - etablissement
+    - location_adresse
+    - nom
+    - org_adresse
+    - org_code_postal
+    - org_nom
+    - org_ville
+    - prenom
+    - siret
+    - telephone
+    - ville
+    - id
+    - liste_blache_id
+    - latitude
+    - longitude
+    - adresse_complement
+    - genre
+    - suspend_activity_reason
+    - created_at
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: sdpf

@@ -55,7 +55,7 @@ export const UPDATE_LISTE_BLANCHE = gql`
     $code_postal: String!
     $ville: String!
     $departementsToDelete: [Int!]
-    $departementsToAdd: [mandataire_individuel_departements_insert_input!]!
+    $departementsToAdd: [dpfi_departements_insert_input!]!
   ) {
     update_dpfi_departements(
       _set: { departement_financeur: false }

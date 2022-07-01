@@ -10,6 +10,7 @@ import { LayoutPublic } from "./LayoutPublic";
 import { LayoutServices } from "./LayoutServices";
 import { LayoutServicesMap } from "./LayoutServicesMap";
 import { LayoutDpfi } from "./LayoutDpfi";
+import { LayoutSdpf } from "./LayoutSdpf";
 
 export {
   LayoutDirection,
@@ -24,4 +25,5 @@ export {
   LayoutServicesMap,
   LayoutMandataireMap,
   LayoutDpfi,
+  LayoutSdpf,
 };

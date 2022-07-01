@@ -14,8 +14,15 @@ export function ListeBlancheSdpfItem(props) {
   const { sdpf: service } = item;
 
   const sdpfDep = useMemo(() => {
-    return sdpfdepartements.find((d) => d.id === service.departement);
-  }, [sdpfdepartements, service.departement]);
+    if (service && service?.departement) {
+      return sdpfdepartements.find((d) => d.id === service.departement);
+    }
+    return {};
+  }, [sdpfdepartements, service]);
+
+  if (!service) {
+    return null;
+  }
 
   return (
     <Card
@@ -37,22 +44,24 @@ export function ListeBlancheSdpfItem(props) {
           <Text sx={labelStyle}>{"Nom du service"}</Text>
           <Flex>
             <Text sx={descriptionStyle}>
-              {service.etablissement ? service.etablissement.toUpperCase() : ""}
+              {service?.etablissement
+                ? service.etablissement.toUpperCase()
+                : ""}
             </Text>
           </Flex>
         </Flex>
 
         <Flex width="30%" flexDirection="column">
           <Text sx={labelStyle}>Départements</Text>
-          {service.departement && (
-            <Text sx={descriptionStyle}>{service.departement.nom}</Text>
+          {service?.departement && (
+            <Text sx={descriptionStyle}>{service.departement}</Text>
           )}
 
           <Text sx={descriptionStyle}>{sdpfDep.nom}</Text>
         </Flex>
 
         <Flex width="45%" flexDirection="column">
-          {service.siret && (
+          {service?.siret && (
             <>
               <Text sx={labelStyle}>SIRET</Text>
               <Text sx={descriptionStyle}>{service.siret}</Text>

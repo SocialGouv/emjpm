@@ -1,3 +1,36 @@
 table:
   name: sdpf_members
   schema: public
+object_relationships:
+- name: sdpf
+  using:
+    foreign_key_constraint_on: sdpf_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - user_id
+    - sdpf_id
+    - is_admin
+    filter:
+      user:
+        id:
+          _eq: X-Hasura-User-Id
+  role: sdpf
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - id
+    - is_admin
+    - sdpf_id
+    - user_id
+    filter:
+      user:
+        id:
+          _eq: X-Hasura-User-Id
+  role: sdpf
