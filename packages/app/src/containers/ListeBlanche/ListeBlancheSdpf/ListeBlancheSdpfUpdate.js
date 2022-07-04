@@ -6,23 +6,23 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { captureException } from "~/user/sentry";
 import capitalize from "~/utils/std/capitalize";
 
-// import { ListeBlancheServiceForm } from "./ListeBlancheServiceForm";
-import { UPDATE_SERVICE } from "./mutations";
-// import { SERVICE } from "./queries";
+import { ListeBlancheSdpfForm } from "./ListeBlancheSdpfForm";
+import { UPDATE_SDPF } from "./mutations";
+import { SDPF } from "./queries";
 import { useState, useCallback, useEffect } from "react";
 
-export function ListeBlancheServiceUpdate(props) {
+export function ListeBlancheSdpfUpdate(props) {
   const { listeBlancheId, onSuccess, handleCancel } = props;
-  const { data, loading, error } = useQuery(SERVICE, {
+  const { data, loading, error } = useQuery(SDPF, {
     fetchPolicy: "network-only",
     variables: { listeBlancheId },
   });
   const [updateService, { loading: loading2, error: error2 }] =
-    useMutation(UPDATE_SERVICE);
+    useMutation(UPDATE_SDPF);
   useQueryReady(loading2, error2);
 
   const lbService = data?.liste_blanche_by_pk;
-  const service = lbService?.service;
+  const service = lbService?.sdpf;
 
   const [siret, setSiret] = useState();
 
@@ -36,16 +36,8 @@ export function ListeBlancheServiceUpdate(props) {
     async (values, { setSubmitting }) => {
       try {
         await updateService({
-          refetchQueries: ["services", "services_aggregate"],
+          refetchQueries: ["sdpf", "sdpf_aggregate"],
           variables: {
-            service_id: service.id,
-            service_departements: values.departements.map((dep) => ({
-              ...dep,
-              service_id: service.id,
-            })),
-            departement_codes: values.departements.map(
-              ({ departement_code }) => departement_code
-            ),
             email: values.email,
             etablissement: values.etablissement,
             adresse: values.adresse,
@@ -76,7 +68,7 @@ export function ListeBlancheServiceUpdate(props) {
 
       setSubmitting(false);
     },
-    [onSuccess, service?.id, siret, updateService]
+    [onSuccess, siret, updateService]
   );
 
   if (!useQueryReady(loading, error)) {
@@ -88,14 +80,14 @@ export function ListeBlancheServiceUpdate(props) {
       <Helmet>
         <title>{capitalize(service.etablissement)} - Service | e-MJPM</title>
       </Helmet>
-      {/* <ListeBlancheServiceForm
+      <ListeBlancheSdpfForm
         handleSubmit={handleSubmit}
         handleCancel={handleCancel}
         lbService={lbService}
         originalSiret={siret}
-      /> */}
+      />
     </Card>
   );
 }
 
-export default ListeBlancheServiceUpdate;
+export default ListeBlancheSdpfUpdate;

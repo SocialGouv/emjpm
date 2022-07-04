@@ -20,8 +20,32 @@ select_permissions:
       user:
         id:
           _eq: X-Hasura-User-Id
+  role: direction
+- permission:
+    allow_aggregations: true
+    columns:
+    - id
+    - user_id
+    - sdpf_id
+    - is_admin
+    filter:
+      user:
+        id:
+          _eq: X-Hasura-User-Id
   role: sdpf
 update_permissions:
+- permission:
+    check: null
+    columns:
+    - id
+    - user_id
+    - sdpf_id
+    - is_admin
+    filter:
+      user:
+        id:
+          _eq: X-Hasura-User-Id
+  role: direction
 - permission:
     check: null
     columns:

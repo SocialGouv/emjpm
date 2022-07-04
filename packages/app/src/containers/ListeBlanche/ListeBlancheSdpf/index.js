@@ -1,3 +1,4 @@
 import ListeBlancheSdpfCreate from "./ListeBlancheSdpfCreate";
 import ListeBlancheSdpfItem from "./ListBlancheSdpfItem";
-export { ListeBlancheSdpfCreate, ListeBlancheSdpfItem };
+import ListeBlancheSdpfUpdate from "./ListeBlancheSdpfUpdate";
+export { ListeBlancheSdpfCreate, ListeBlancheSdpfItem, ListeBlancheSdpfUpdate };

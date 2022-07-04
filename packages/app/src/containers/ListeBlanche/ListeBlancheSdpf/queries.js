@@ -13,13 +13,9 @@ export const SDPF = gql`
       org_adresse
       org_code_postal
       org_ville
-      service {
-        departements {
-          departement {
-            id
-          }
-        }
-        service_members {
+      sdpf {
+        departement
+        sdpf_members {
           user {
             id
             nom

@@ -25,6 +25,15 @@ object_relationships:
       remote_table:
         name: ocmi_mandataires
         schema: public
+- name: sdpf
+  using:
+    manual_configuration:
+      column_mapping:
+        siret: siret
+      insertion_order: null
+      remote_table:
+        name: sdpf
+        schema: public
 - name: service
   using:
     manual_configuration:

@@ -53,7 +53,7 @@ export function ListeBlancheSdpfForm(props) {
 
   const isCreate = !lbService;
 
-  const service = lbService?.service;
+  const service = lbService?.sdpf;
 
   const apolloClient = useApolloClient();
   const validationSchema = useMemo(
@@ -471,7 +471,7 @@ export function ListeBlancheSdpfForm(props) {
             </Text>
             {isAdmin &&
               service &&
-              service.service_members.map(({ user }) => {
+              service.sdpf_members.map(({ user }) => {
                 return (
                   <Button
                     style={{ marginBottom: "10px" }}
@@ -501,7 +501,7 @@ export function ListeBlancheSdpfForm(props) {
               style={readOnlyInputStyle}
               ariaLabel="Nom du service"
             />
-            {/* <Input
+            <Input
               label="SIRET"
               placeholder=""
               value={service.siret}
@@ -509,7 +509,7 @@ export function ListeBlancheSdpfForm(props) {
               readOnly
               containerStyle={readOnlyContainerStyle}
               style={readOnlyInputStyle}
-            /> */}
+            />
             <Input
               placeholder="Adresse"
               value={service.adresse}

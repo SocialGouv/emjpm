@@ -1,8 +1,7 @@
 import gql from "graphql-tag";
 
-export const UPDATE_SERVICE = gql`
+export const UPDATE_SDPF = gql`
   mutation UpdateService(
-    $service_id: Int!
     $etablissement: String!
     $code_postal: String!
     $genre: String
@@ -13,8 +12,6 @@ export const UPDATE_SERVICE = gql`
     $originalSiret: String!
     $email: String
     $telephone: String
-    $service_departements: [service_departements_insert_input!]!
-    $departement_codes: [String!]!
     $adresse: String!
     $org_gestionnaire: Boolean!
     $org_nom: String
@@ -65,30 +62,9 @@ export const UPDATE_SERVICE = gql`
         code_postal
       }
     }
-    update_services(
+    update_sdpf(
       where: { siret: { _eq: $originalSiret } }
       _set: { siret: $siret }
-    ) {
-      affected_rows
-    }
-    insert_service_departements(
-      objects: $service_departements
-      on_conflict: {
-        constraint: service_departements_service_id_departement_code_key
-        update_columns: []
-      }
-    ) {
-      returning {
-        id
-      }
-    }
-    delete_service_departements(
-      where: {
-        _and: [
-          { service_id: { _eq: $service_id } }
-          { departement_code: { _nin: $departement_codes } }
-        ]
-      }
     ) {
       affected_rows
     }

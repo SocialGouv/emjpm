@@ -85,6 +85,61 @@ const getUserService = (user) => {
   return data;
 };
 
+// const getUserSdpf = (user) => {
+//   const { sdpf } = user;
+//   if (sdpf === null) {
+//     return null;
+//   }
+//   const {
+//     id,
+//     etablissement,
+//     siret,
+//     nom,
+//     prenom,
+//     email,
+//     telephone,
+//     org_adresse,
+//     org_code_postal,
+//     org_gestionnaire,
+//     org_nom,
+//     org_ville,
+//     adresse,
+//     code_postal,
+//     ville,
+//     departements,
+//   } = sdpf;
+
+//   const data = {
+//     adresse,
+//     code_postal,
+//     departement: departements[0]
+//       ? {
+//           code: departements[0].id,
+//           nom: departements[0].nom,
+//         }
+//       : null,
+//     departements: departements.map((departement) => ({
+//       code: departement.id,
+//       nom: departement.nom,
+//     })),
+
+//     email,
+//     etablissement,
+//     id,
+//     nom,
+//     org_adresse,
+//     org_code_postal,
+//     org_gestionnaire,
+//     org_nom,
+//     org_ville,
+//     prenom,
+//     siret,
+//     telephone,
+//     ville,
+//   };
+//   return data;
+// };
+
 const getUser = async (req, res) => {
   const {
     locals: {
