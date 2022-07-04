@@ -31,6 +31,7 @@ import { signupAdminSchema } from "./signupAdminSchema";
 import { signupServiceSchema } from "./signupServiceSchema";
 import { signupDpfiSchema } from "./signupDpfiSchema";
 import { dpfiEditSchema } from "./dpfiEditSchema";
+import { adminUserSdpfSchema } from "./AdminUserSdpfSchema";
 
 export {
   adminEditorSchema,
@@ -66,4 +67,5 @@ export {
   mesureRessourceSchema,
   signupDpfiSchema,
   dpfiEditSchema,
+  adminUserSdpfSchema,
 };

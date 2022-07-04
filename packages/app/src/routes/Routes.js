@@ -81,6 +81,10 @@ const routes = [
     Component: require("~/pages/sdpf/edit-password").default,
     path: "/sdpf/edit-password",
   },
+  {
+    Component: require("~/pages/sdpf/edit-informations").default,
+    path: "/sdpf/edit-informations",
+  },
 
   {
     Component: require("~/pages/direction/liste-blanche/ajout-sdpf").default,

@@ -104,6 +104,13 @@ select_permissions:
     - id_region
     - nom
     filter: {}
+  role: sdpf
+- permission:
+    columns:
+    - id
+    - id_region
+    - nom
+    filter: {}
   role: service
 - permission:
     columns:

@@ -2,6 +2,15 @@ table:
   name: service_member_invitations
   schema: public
 object_relationships:
+- name: sdpf
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: sdpf
+        schema: public
 - name: service
   using:
     foreign_key_constraint_on: service_id
@@ -11,8 +20,11 @@ object_relationships:
 insert_permissions:
 - permission:
     check:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
     columns:
     - created_at
     - email
@@ -47,6 +59,7 @@ select_permissions:
         _eq: X-Hasura-Invitation-Token
   role: anonymous
 - permission:
+    allow_aggregations: true
     columns:
     - created_at
     - email
@@ -56,8 +69,11 @@ select_permissions:
     - service_id
     - token
     filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
   role: sdpf
 - permission:
     columns:
@@ -72,11 +88,29 @@ select_permissions:
       service_id:
         _eq: X-Hasura-Service-Id
   role: service
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
+    filter:
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  role: sdpf
 delete_permissions:
 - permission:
     filter:
-      service:
-        service_members:
+      sdpf:
+        sdpf_members:
           user:
             id:
               _eq: X-Hasura-User-Id
