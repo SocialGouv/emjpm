@@ -10,6 +10,13 @@ function isIndividuel(user) {
   return user.type === "individuel";
 }
 
+function isSdpf(user) {
+  return user.type === "sdpf";
+}
+function isDpfi(user) {
+  return user.type === "dpfi";
+}
+
 function isPrepose(user) {
   return user.type === "prepose";
 }
@@ -40,10 +47,12 @@ module.exports = {
   isAdmin,
   isDirection,
   isDirectionNationale,
+  isDpfi,
   isGreffier,
   isIndividuel,
   isMagistrat,
   isMandataire,
   isPrepose,
+  isSdpf,
   isService,
 };

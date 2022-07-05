@@ -15,12 +15,14 @@ function SignupDatas(props) {
   const tiDatas = data.tis;
   const serviceDatas = data.services;
   const roleDatas = data.role;
+  const sdpfDatas = data.sdpf;
 
   return (
     <Component
       tiDatas={tiDatas}
       serviceDatas={serviceDatas}
       roleDatas={roleDatas}
+      sdpfDatas={sdpfDatas}
       {...props}
     />
   );

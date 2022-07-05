@@ -8,7 +8,7 @@ const { User, Region } = require("~/models");
 
 const router = express.Router();
 
-const allowedRoles = ["direction", "service"];
+const allowedRoles = ["direction", "service", "sdpf"];
 
 router.use(async (req, res, next) => {
   const {
@@ -26,7 +26,7 @@ router.use(async (req, res, next) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departement, region], service.[departements]]"
+        "[direction.[departement, region], service.[departements], sdpf]"
       );
   } catch (error) {
     return res.status(422).json({

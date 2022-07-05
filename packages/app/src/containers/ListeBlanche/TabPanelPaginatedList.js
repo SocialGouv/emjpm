@@ -2,12 +2,16 @@ import { useQuery } from "@apollo/client";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
+import { useDepartements } from "~/utils/departements/useDepartements.hook";
 import { FiltersContextSerializable } from "~/containers/FiltersContextSerializable";
 import { PaginatedList } from "~/containers/PaginatedList";
 
 import { ListeBlancheIndividuelItem } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeItem } from "./ListeBlanchePrepose";
 import { ListeBlancheServiceItem } from "./ListeBlancheService";
+import { ListeBlancheDpfiItem } from "./ListBlancheDpfi";
+import { ListeBlancheSdpfItem } from "./ListeBlancheSdpf";
+
 import { SEARCH_VIEW_LB } from "./queries";
 
 function getRequestFilters(filters) {
@@ -66,6 +70,7 @@ function getRequestFilters(filters) {
       case "service":
         departementsFilter.push(serviceDepartementFilters);
         break;
+
       default:
         departementsFilter.push(individuelDepartementFilters);
         departementsFilter.push(preposeDepartementFilter);
@@ -92,6 +97,7 @@ function getRequestFilters(filters) {
 export function TabPanelPaginatedList(props) {
   const { getHref, onRowClick, type } = props;
   const { filters, debounceFilters } = useContext(FiltersContextSerializable);
+  const { departements } = useDepartements({ all: true });
 
   const resultPerPage = 10;
   const [currentOffset, setCurrentOffset] = useState(0);
@@ -140,6 +146,7 @@ export function TabPanelPaginatedList(props) {
       currentOffset={currentOffset}
       setCurrentOffset={setCurrentOffset}
       onRowClick={onRowClick}
+      sdpfdepartements={departements}
     />
   );
 }
@@ -156,6 +163,10 @@ function ListeBlancheItem(props) {
       return <ListeBlanchePreposeItem {...props} />;
     case "service":
       return <ListeBlancheServiceItem {...props} />;
+    case "dpfi":
+      return <ListeBlancheDpfiItem {...props} />;
+    case "sdpf":
+      return <ListeBlancheSdpfItem {...props} />;
   }
 }
 
