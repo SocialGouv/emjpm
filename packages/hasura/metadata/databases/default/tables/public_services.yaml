@@ -109,11 +109,6 @@ insert_permissions:
     - use_location_adresse
     - ville
   role: direction
-- permission:
-    backend_only: false
-    check: {}
-    columns: []
-  role: sdpf
 select_permissions:
 - permission:
     columns:
@@ -258,11 +253,6 @@ select_permissions:
     - mesures_in_progress
     filter: {}
   role: greffier
-- permission:
-    columns:
-    - id
-    filter: {}
-  role: sdpf
 - permission:
     columns:
     - adresse

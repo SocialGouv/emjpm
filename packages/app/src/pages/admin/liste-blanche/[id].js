@@ -34,7 +34,6 @@ function ListeBlancheDetailPage() {
               </StyledLink>
             )}
           />
-
           <ListeBlancheEdit
             id={id}
             handleSubmit={async () => {

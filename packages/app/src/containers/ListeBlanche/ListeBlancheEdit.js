@@ -6,8 +6,6 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { ListeBlancheIndividuelUpdate } from "./ListeBlancheIndividuel";
 import { ListeBlanchePreposeUpdate } from "./ListeBlanchePrepose";
 import { ListeBlancheServiceUpdate } from "./ListeBlancheService";
-import { ListeBlancheDpfiUpdate } from "./ListBlancheDpfi";
-import { ListeBlancheSdpfUpdate } from "./ListeBlancheSdpf";
 import { LISTE_BLANCHE_BY_PK } from "./queries";
 
 export function ListeBlancheEdit(props) {
@@ -49,23 +47,6 @@ export function ListeBlancheEdit(props) {
               listeBlancheId={id}
               handleSubmit={handleSubmit}
               handleCancel={handleCancel}
-            />
-          )}
-
-          {data.liste_blanche_by_pk.type === "dpfi" && (
-            <ListeBlancheDpfiUpdate
-              id={id}
-              handleSubmit={handleSubmit}
-              handleCancel={handleCancel}
-              data={data.liste_blanche_by_pk}
-            />
-          )}
-          {data.liste_blanche_by_pk.type === "sdpf" && (
-            <ListeBlancheSdpfUpdate
-              listeBlancheId={id}
-              handleSubmit={handleSubmit}
-              handleCancel={handleCancel}
-              data={data.liste_blanche_by_pk}
             />
           )}
         </>

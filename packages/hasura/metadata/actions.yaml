@@ -92,7 +92,6 @@ actions:
     - name: HASURA_WEB_HOOK_SECRET
       value_from_env: HASURA_WEB_HOOK_SECRET
   permissions:
-  - role: sdpf
   - role: service
 - name: email_token_request
   definition:

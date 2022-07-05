@@ -25,16 +25,14 @@ select_permissions:
     filter: {}
   role: greffier
 - permission:
-    allow_aggregations: true
     columns:
     - id
     - is_admin
     - service_id
     - user_id
     filter:
-      user:
-        id:
-          _eq: X-Hasura-User-Id
+      service_id:
+        _eq: X-Hasura-Service-Id
   role: service
 - permission:
     columns:

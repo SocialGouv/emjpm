@@ -28,19 +28,6 @@ export const LISTE_BLANCHE_BY_PK = gql`
           genre
         }
       }
-      dpfi {
-        id
-        adresse
-        telephone
-        siret
-        user {
-          id
-          nom
-          prenom
-          email
-          genre
-        }
-      }
       mandataire_prepose_etablissements {
         id
         etablissement {
@@ -52,15 +39,6 @@ export const LISTE_BLANCHE_BY_PK = gql`
         etablissement_rattachement
       }
       mandataire_individuel_departements {
-        id
-        departement_code
-        departement_financeur
-        departement {
-          id
-          nom
-        }
-      }
-      dpfi_departements {
         id
         departement_code
         departement_financeur
@@ -112,31 +90,11 @@ export const SEARCH_VIEW_LB = gql`
         nom
         telephone
       }
-      sdpf {
-        id
-        adresse
-        siret
-        etablissement
-        code_postal
-        created_at
-        departement
-        nom
-        telephone
-      }
-
       liste_blanche {
         id
         nom
         prenom
         mandataire {
-          id
-          user {
-            id
-            nom
-            prenom
-          }
-        }
-        dpfi {
           id
           user {
             id
@@ -156,14 +114,6 @@ export const SEARCH_VIEW_LB = gql`
           etablissement_rattachement
         }
         mandataire_individuel_departements {
-          id
-          departement_financeur
-          departement {
-            id
-            nom
-          }
-        }
-        dpfi_departements {
           id
           departement_financeur
           departement {

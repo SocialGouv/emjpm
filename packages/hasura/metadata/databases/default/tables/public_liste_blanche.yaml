@@ -2,13 +2,6 @@ table:
   name: liste_blanche
   schema: public
 object_relationships:
-- name: dpfi
-  using:
-    foreign_key_constraint_on:
-      column: liste_blanche_id
-      table:
-        name: dpfi
-        schema: public
 - name: mandataire
   using:
     foreign_key_constraint_on:
@@ -25,15 +18,6 @@ object_relationships:
       remote_table:
         name: ocmi_mandataires
         schema: public
-- name: sdpf
-  using:
-    manual_configuration:
-      column_mapping:
-        siret: siret
-      insertion_order: null
-      remote_table:
-        name: sdpf
-        schema: public
 - name: service
   using:
     manual_configuration:
@@ -44,13 +28,6 @@ object_relationships:
         name: services
         schema: public
 array_relationships:
-- name: dpfi_departements
-  using:
-    foreign_key_constraint_on:
-      column: liste_blanche_id
-      table:
-        name: dpfi_departements
-        schema: public
 - name: mandataire_individuel_departements
   using:
     foreign_key_constraint_on:
@@ -182,33 +159,6 @@ select_permissions:
             _in:
             - x-hasura-agrements
   role: direction_territoriale
-- permission:
-    allow_aggregations: true
-    columns:
-    - id
-    - adresse
-    - adresse_complement
-    - code_postal
-    - competences
-    - departement_code
-    - email
-    - etablissement
-    - genre
-    - nom
-    - org_adresse
-    - org_code_postal
-    - org_gestionnaire
-    - org_nom
-    - org_ville
-    - prenom
-    - siret
-    - telephone
-    - telephone_portable
-    - type
-    - ville
-    - created_at
-    filter: {}
-  role: dpfi
 - permission:
     allow_aggregations: true
     columns:

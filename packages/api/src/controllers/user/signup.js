@@ -2,19 +2,15 @@ const { validationResult } = require("express-validator");
 const { User } = require("~/models");
 const { OcmiMandataire } = require("~/models");
 const { Mandataire } = require("~/models");
-const { Dpfi } = require("~/models");
 const { Magistrat } = require("~/models");
 const { Greffier } = require("~/models");
 const { UserRole } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
 const { AdminInvitation } = require("~/models");
 const { ServiceMember } = require("~/models");
-const { SdpfMember } = require("~/models");
 const { Role } = require("~/models");
 const { Direction } = require("~/models");
 const { Service } = require("~/models");
-const { Sdpf } = require("~/models");
-
 const { errorHandler } = require("~/db/errors");
 const { inscriptionEmail } = require("~/email/inscription");
 
@@ -86,41 +82,6 @@ const createMandataire = async (mandataireDatas, user_id) => {
     });
 
   return mandataire;
-};
-
-const createDpfi = async (dpfiDatas, user_id) => {
-  const {
-    telephone,
-    telephone_portable,
-    location_adresse,
-    code_postal,
-    ville,
-    departement_code,
-    dispo_max,
-    siret,
-    latitude,
-    longitude,
-  } = dpfiDatas;
-
-  const dpfiResult = await Dpfi.query()
-    .allowInsert(
-      "[siret,telephone,user_id,telephone_portable,location_adresse,code_postal,ville,departement_code]"
-    )
-    .insert({
-      code_postal,
-      departement_code,
-      dispo_max,
-      latitude,
-      location_adresse,
-      longitude,
-      siret,
-      telephone,
-      telephone_portable,
-      user_id,
-      ville,
-    });
-
-  return dpfiResult;
 };
 
 const createDirection = (userId, type, regionId, departementCode) => {
@@ -264,27 +225,6 @@ const signup = async (req, res) => {
           departementCode
         );
 
-        break;
-      }
-      case "dpfi": {
-        await createRole(user.id, type);
-        await createDpfi(body.dpfi, user.id, type);
-        break;
-      }
-      case "sdpf": {
-        await createRole(user.id, type);
-        const {
-          sdpf: { sdpf_id },
-        } = body;
-
-        const service = await Sdpf.query().findOne("id", sdpf_id);
-        await SdpfMember.query()
-          .allowInsert("[user_id,sdpf_id]")
-          .insert({
-            is_admin: service.email === user.email,
-            sdpf_id,
-            user_id: user.id,
-          });
         break;
       }
       default:
