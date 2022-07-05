@@ -62,8 +62,6 @@ router.post("/email-service-member-invitation", async function (req, res) {
       token: uid(32),
     });
 
-  console.log("serviceMemberInvitation ===>", serviceMemberInvitation);
-
   if (serviceMemberInvitation.invitation_role === "service") {
     const service = await Service.query().findById(
       serviceMemberInvitation.service_id

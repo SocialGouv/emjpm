@@ -314,7 +314,6 @@ const signup = async (req, res) => {
 
     return res.json({ success: true });
   } catch (err) {
-    console.log(err.stack);
     errorHandler(err, res);
     return;
   }

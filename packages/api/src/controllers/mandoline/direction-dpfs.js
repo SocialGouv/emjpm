@@ -15,8 +15,6 @@ const getDirectionDpfs = async (req, res) => {
   try {
     // user = await User.query().findById(userId);
     user = await User.query().findById(userId);
-
-    console.log(user);
   } catch (error) {
     return res.status(422).json({
       errors: [{ error: `${error}` }],
