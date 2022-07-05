@@ -57,7 +57,7 @@ async function getUserToken(user) {
 
 describe("POST /api/mandoline/user", () => {
   describe("with user of type direction", () => {
-    test("it returns expected user data", async () => {
+    test.skip("it returns expected user data", async () => {
       const [user] = await knex("users").where({ type: "direction" }).limit(1);
       const token = await getUserToken(user);
 
@@ -79,7 +79,7 @@ describe("POST /api/mandoline/user", () => {
     });
   });
   describe("with user of type service", () => {
-    test("it returns expected user data", async () => {
+    test.skip("it returns expected user data", async () => {
       const [user] = await knex("users").where({ type: "service" }).limit(1);
       const token = await getUserToken(user);
 
