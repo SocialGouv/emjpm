@@ -39,17 +39,6 @@ export const USER = gql`
           siret
         }
       }
-      dpfi {
-        id
-        siret
-        liste_blanche {
-          id
-          nom
-          prenom
-          email
-          siret
-        }
-      }
       service_members {
         service {
           liste_blanche {

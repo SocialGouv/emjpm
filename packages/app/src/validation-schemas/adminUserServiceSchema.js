@@ -67,6 +67,7 @@ const adminUserServiceSchema = yup.object().shape({
     .nullable()
     .when("suspendActivity", {
       is: (suspendActivity) => {
+        console.log({ suspendActivity });
         return suspendActivity === true;
       },
       then: yup.string().nullable().required(),

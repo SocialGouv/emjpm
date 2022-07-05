@@ -34,20 +34,6 @@ class Direction extends Model {
         modelClass: Models.Departement,
         relation: Model.HasOneRelation,
       },
-
-      departement_sdpf: {
-        join: {
-          from: "direction.departement_code",
-          through: {
-            from: "sdpf_departements.departement_code",
-            to: "sdpf_departements.service_id",
-          },
-          to: "sdpf.id",
-        },
-        modelClass: Models.Sdpf,
-        relation: Model.ManyToManyRelation,
-      },
-
       departement_services: {
         join: {
           from: "direction.departement_code",

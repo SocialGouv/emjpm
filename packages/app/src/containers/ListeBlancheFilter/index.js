@@ -42,14 +42,6 @@ function ListeBlancheFilter() {
       title: "Service",
       to: `/${user.type}/liste-blanche/ajout-service`,
     },
-    {
-      title: "Mandataire DPF",
-      to: `/${user.type}/liste-blanche/ajout-dpf`,
-    },
-    {
-      title: "Service DPF",
-      to: `/${user.type}/liste-blanche/ajout-sdpf`,
-    },
   ];
 
   useEffect(() => {
