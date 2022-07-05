@@ -86,8 +86,6 @@ function AdminUserSdpfForm(props) {
     validationSchema: adminUserServiceSchema,
   });
 
-  console.log("===> formik.errors", formik.errors);
-
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <SrOnly id="instructions">

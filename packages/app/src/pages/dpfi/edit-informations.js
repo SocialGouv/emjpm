@@ -1,7 +1,6 @@
 import { Helmet } from "react-helmet";
-
+import { DpfiEditInformations } from "~/containers/DpfiEditInformations";
 import { LayoutDpfi } from "~/containers/Layout";
-import { MandataireInformations } from "~/containers/MandataireInformations";
 import { Card, SkipToContent } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
@@ -14,7 +13,9 @@ const Informations = () => (
 
     <LayoutDpfi>
       <BoxWrapper mt={3} px="1">
-        <Card p="5">{/* <MandataireInformations /> */}</Card>
+        <Card p="5">
+          <DpfiEditInformations />
+        </Card>
       </BoxWrapper>
     </LayoutDpfi>
   </>

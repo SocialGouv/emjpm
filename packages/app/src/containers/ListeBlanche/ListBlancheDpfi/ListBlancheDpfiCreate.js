@@ -14,7 +14,6 @@ export function ListeBlancheIndividuelCreate() {
   const [create, { loading, error }] = useMutation(CREATE_LISTE_BLANCHE_DPFI);
 
   const handleSubmit = async (values) => {
-    console.log(values);
     await create({
       variables: {
         adresse: values.adresse,

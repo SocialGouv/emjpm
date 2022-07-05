@@ -16,7 +16,7 @@ export function ListeBlancheSdpfCreate(props) {
   const client = useApolloClient();
 
   const [addSdpf, { loading, error }] = useMutation(ADD_SDPF, {
-    onCompleted: () => history.push("/admin/services"),
+    onCompleted: () => history.push("/admin/liste-blanche"),
   });
   useQueryReady(loading, error);
 
@@ -24,7 +24,6 @@ export function ListeBlancheSdpfCreate(props) {
     const siretExists = await sdpfSiretExists(client, values.siret);
 
     if (siretExists) {
-      console.log("siret exists");
       setErrors({ siret: "Le siret est déjà utilisé" });
       setSubmitting(false);
       return;

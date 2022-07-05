@@ -9,8 +9,8 @@ import { Button } from "~/components";
 import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 
 function AdminDpfiListeBlanche(props) {
-  const { liste_blanche, pdfi: mandataire } = props;
-  console.log(props);
+  const { liste_blanche, mandataire } = props;
+
   const user = useUser();
   const [updateMandataire, { loading, error }] = useMutation(
     LISTE_BLANCHE_ASSOCIATION
@@ -18,6 +18,24 @@ function AdminDpfiListeBlanche(props) {
 
   if (!useQueryReady(loading, error)) {
     return null;
+  }
+
+  async function handleClick() {
+    try {
+      await updateMandataire({
+        refetchQueries: ["adminUserQuery"],
+        variables: {
+          liste_blanche_id: liste_blanche.id,
+          mandataire_id: mandataire.id,
+        },
+      });
+    } catch (err) {
+      if (err.message.includes("Uniqueness violation")) {
+        alert(
+          `Oups, l'utilisateur ${liste_blanche.prenom} ${liste_blanche.nom} (liste_blanche_id: ${liste_blanche.id}) est déja associé à un autre mandataire (liste blanche).`
+        );
+      }
+    }
   }
 
   return (
@@ -38,27 +56,7 @@ function AdminDpfiListeBlanche(props) {
                 <Text fontWeight="bold">{`${liste_blanche.prenom} ${liste_blanche.nom}`}</Text>
                 <Text>{`${liste_blanche.email}`}</Text>
               </Box>
-              <Button
-                onClick={async () => {
-                  try {
-                    await updateMandataire({
-                      refetchQueries: ["adminUserQuery"],
-                      variables: {
-                        liste_blanche_id: liste_blanche.id,
-                        mandataire_id: mandataire.id,
-                      },
-                    });
-                  } catch (err) {
-                    if (err.message.includes("Uniqueness violation")) {
-                      alert(
-                        `Oups, l'utilisateur ${liste_blanche.prenom} ${liste_blanche.nom} (liste_blanche_id: ${liste_blanche.id}) est déja associé à un autre mandataire (liste blanche).`
-                      );
-                    }
-                  }
-                }}
-              >
-                Associer
-              </Button>
+              <Button onClick={handleClick}>Associer</Button>
             </Flex>
           ) : (
             <Box>

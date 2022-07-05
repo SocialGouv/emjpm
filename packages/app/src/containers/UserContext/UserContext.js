@@ -57,7 +57,7 @@ function UserDataQueryProvider(props) {
   }
 
   const userData = data.users_by_pk;
-  console.log(userData);
+
   let currentService;
   if (isService(userData)) {
     const {

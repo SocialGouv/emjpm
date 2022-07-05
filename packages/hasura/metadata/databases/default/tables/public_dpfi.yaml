@@ -7,7 +7,7 @@ object_relationships:
     foreign_key_constraint_on: departement_code
 - name: liste_blanche
   using:
-    foreign_key_constraint_on: liste_blache_id
+    foreign_key_constraint_on: liste_blanche_id
 - name: user
   using:
     foreign_key_constraint_on: user_id
@@ -26,7 +26,7 @@ insert_permissions:
     - ville
     - editor_id
     - id
-    - liste_blache_id
+    - liste_blanche_id
     - user_id
     - latitude
     - longitude
@@ -48,6 +48,7 @@ insert_permissions:
     - email_send
     - id
     - latitude
+    - liste_blanche_id
     - location_adresse
     - longitude
     - siret
@@ -71,7 +72,7 @@ select_permissions:
     - ville
     - editor_id
     - id
-    - liste_blache_id
+    - liste_blanche_id
     - user_id
     - latitude
     - longitude
@@ -94,7 +95,7 @@ select_permissions:
     - ville
     - editor_id
     - id
-    - liste_blache_id
+    - liste_blanche_id
     - user_id
     - latitude
     - longitude
@@ -121,7 +122,7 @@ update_permissions:
     - ville
     - editor_id
     - id
-    - liste_blache_id
+    - liste_blanche_id
     - user_id
     - latitude
     - longitude
@@ -144,6 +145,7 @@ update_permissions:
     - email_send
     - id
     - latitude
+    - liste_blanche_id
     - location_adresse
     - longitude
     - siret

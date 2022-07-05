@@ -12,6 +12,7 @@ import { AdminServiceListeBlanche } from "./AdminServiceListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LISTE_BLANCHE, USER } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
+import { isDpfi } from "@emjpm/biz/src/services/users";
 
 function AdminUserActivation(props) {
   const { userId } = props;
@@ -20,7 +21,8 @@ function AdminUserActivation(props) {
   const { data, loading, error } = useQuery(USER, {
     onCompleted: async (data) => {
       if (data) {
-        const { type, email, mandataire } = data.users_by_pk;
+        const { type, email, mandataire, dpfi } = data.users_by_pk;
+
         if (isMandataire({ type })) {
           if (isIndividuel({ type }) && mandataire.siret) {
             await execQuery({
@@ -39,6 +41,14 @@ function AdminUserActivation(props) {
               },
             });
           }
+        } else if (isDpfi({ type }) && dpfi?.siret) {
+          await execQuery({
+            variables: {
+              where: {
+                siret: { _eq: dpfi.siret },
+              },
+            },
+          });
         }
       }
     },

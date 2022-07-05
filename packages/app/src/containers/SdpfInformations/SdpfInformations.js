@@ -21,8 +21,6 @@ function SdpfInformations() {
 
   const [service] = data.sdpf;
 
-  console.log(data.sdpf, service);
-
   const {
     email,
     etablissement,

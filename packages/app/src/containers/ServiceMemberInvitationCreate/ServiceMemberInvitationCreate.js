@@ -17,7 +17,6 @@ function ServiceMemberInvitationCreate(props) {
   const { service, isAdmin } = props;
 
   const user = useUser();
-  console.log(user.type === "sdpf");
 
   const client = useApolloClient();
 

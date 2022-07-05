@@ -40,7 +40,6 @@ function SignupSdpfForm({ sdpfDatas, ...props }) {
       service: sdpf?.service || null,
     },
     onSubmit: (values, { setSubmitting, setErrors }) => {
-      console.log(values);
       const body = {
         sdpf: {
           sdpf_id: values.service,

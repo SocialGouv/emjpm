@@ -61,7 +61,7 @@ function MandatiareDpfiInformation({ mandataire, liste_blanche }) {
 
 function DpfiInformations() {
   const user = useUser();
-  console.log(user);
+
   const { email, nom, prenom, dpfi } = user;
   const { liste_blanche } = dpfi;
 
