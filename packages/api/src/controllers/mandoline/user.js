@@ -1,5 +1,5 @@
 const { User } = require("~/models");
-const { isService, isDirection } = require("@emjpm/biz");
+const { isService, isDirection, isSdpf } = require("@emjpm/biz");
 
 const getUserDirection = (user) => {
   const { direction } = user;
@@ -85,60 +85,51 @@ const getUserService = (user) => {
   return data;
 };
 
-// const getUserSdpf = (user) => {
-//   const { sdpf } = user;
-//   if (sdpf === null) {
-//     return null;
-//   }
-//   const {
-//     id,
-//     etablissement,
-//     siret,
-//     nom,
-//     prenom,
-//     email,
-//     telephone,
-//     org_adresse,
-//     org_code_postal,
-//     org_gestionnaire,
-//     org_nom,
-//     org_ville,
-//     adresse,
-//     code_postal,
-//     ville,
-//     departements,
-//   } = sdpf;
+const getUserSdpf = (user) => {
+  const { sdpf } = user;
 
-//   const data = {
-//     adresse,
-//     code_postal,
-//     departement: departements[0]
-//       ? {
-//           code: departements[0].id,
-//           nom: departements[0].nom,
-//         }
-//       : null,
-//     departements: departements.map((departement) => ({
-//       code: departement.id,
-//       nom: departement.nom,
-//     })),
+  if (sdpf === null) {
+    return null;
+  }
+  const {
+    id,
+    etablissement,
+    siret,
+    nom,
+    prenom,
+    email,
+    telephone,
+    org_adresse,
+    org_code_postal,
+    org_gestionnaire,
+    org_nom,
+    org_ville,
+    adresse,
+    code_postal,
+    ville,
+    departement,
+  } = sdpf;
 
-//     email,
-//     etablissement,
-//     id,
-//     nom,
-//     org_adresse,
-//     org_code_postal,
-//     org_gestionnaire,
-//     org_nom,
-//     org_ville,
-//     prenom,
-//     siret,
-//     telephone,
-//     ville,
-//   };
-//   return data;
-// };
+  const data = {
+    adresse,
+    code_postal,
+    departement,
+    email,
+    etablissement,
+    id,
+    nom,
+    org_adresse,
+    org_code_postal,
+    org_gestionnaire,
+    org_nom,
+    org_ville,
+    prenom,
+    siret,
+    telephone,
+    ville,
+  };
+  return data;
+};
 
 const getUser = async (req, res) => {
   const {
@@ -155,7 +146,7 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departement, region], service(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements]]"
+        "[direction.[departement, region], service(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements], sdpf(selectAll)]"
       );
   } catch (error) {
     return res.status(422).json({
@@ -176,6 +167,9 @@ const getUser = async (req, res) => {
     prenom: user.prenom,
     type: user.type,
   };
+  if (isSdpf(user)) {
+    userData.dpf = getUserSdpf(user);
+  }
   if (isService(user)) {
     userData.service = getUserService(user);
   } else if (isDirection(user)) {
