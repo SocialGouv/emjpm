@@ -38,17 +38,22 @@ module.exports = {
   },
   getClient: async function (clientId, clientSecret) {
     const editor = await Editors.query().findOne({
-      api_token: clientSecret,
       id: clientId,
     });
 
     if (editor) {
+      if (clientSecret) {
+        if (editor.api_token !== clientSecret) {
+          return;
+        }
+      }
       const client = {
         clientSecret: editor.api_token,
         grants: ["authorization_code", "refresh_token"],
         id: editor.id,
         redirectUris: editor.redirect_uris || [],
       };
+
       return client;
     }
     return null;
