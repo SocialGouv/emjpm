@@ -36,8 +36,9 @@ module.exports = {
       user: { id: data.user_id },
     };
   },
-  getClient: async function (clientId) {
+  getClient: async function (clientId, clientSecret) {
     const editor = await Editors.query().findOne({
+      api_token: clientSecret,
       id: clientId,
     });
 
