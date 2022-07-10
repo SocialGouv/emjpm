@@ -1,6 +1,5 @@
 import { Box, Flex, Text } from "rebass";
 
-// import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
 import useUser from "~/hooks/useUser";
 import { Button, Heading } from "~/components";
@@ -36,22 +35,19 @@ function MandatiareDpfiInformation({ mandataire, liste_blanche }) {
           </Box>
         </Flex>
       </Box>
-
       <Box mb={2}>
         <Heading size={5}>Agrément</Heading>
         <Flex my={1}>
           <Text sx={subtitle}>{"Liste des départements"}</Text>
           <Box flex={2 / 3}>
-            {liste_blanche?.mandataire_individuel_departements.map(
-              (lbd, index) => {
-                return (
-                  <Text key={index} sx={content}>
-                    {lbd.departement.id} - {lbd.departement.nom}{" "}
-                    {lbd.departement_financeur ? "(financeur)" : ""}
-                  </Text>
-                );
-              }
-            )}
+            {liste_blanche?.dpfi_departements.map((lbd, index) => {
+              return (
+                <Text key={index} sx={content}>
+                  {lbd.departement.id} - {lbd.departement.nom}{" "}
+                  {lbd.departement_financeur ? "(financeur)" : ""}
+                </Text>
+              );
+            })}
           </Box>
         </Flex>
       </Box>
@@ -73,7 +69,6 @@ function DpfiInformations() {
       <Flex p={1} mt={2} flexDirection="column">
         {liste_blanche && (
           <>
-            test
             <MandatiareDpfiInformation
               mandataire={dpfi}
               liste_blanche={liste_blanche}
