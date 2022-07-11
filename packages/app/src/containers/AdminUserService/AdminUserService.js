@@ -6,9 +6,12 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { AdminUserServiceForm } from "./AdminUserServiceForm";
 import { EDIT_USER } from "./mutations";
 import { USER_SERVICE } from "./queries";
+import useUser from "~/hooks/useUser";
 
 function AdminUserService({ userId, successLink, cancelLink }) {
   const history = useHistory();
+
+  const { service: currentService } = useUser();
   const { data, error, loading } = useQuery(USER_SERVICE, {
     fetchPolicy: "network-only",
     variables: {
@@ -36,9 +39,9 @@ function AdminUserService({ userId, successLink, cancelLink }) {
   }
 
   const { users_by_pk: user } = data;
-  const {
-    service_members: [{ service }],
-  } = user;
+  const [{ service }] = user.service_members.filter(
+    (sm) => sm.service.id === currentService.id
+  );
 
   const handleSubmit = async (values, { setSubmitting }) => {
     await editUser({

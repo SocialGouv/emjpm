@@ -7,11 +7,13 @@ import useQueryReady from "~/hooks/useQueryReady";
 import { AccessToken } from "~/containers/AccessToken";
 import { LinkButton } from "~/containers/Commons";
 import { Button, Heading } from "~/components";
+import useUser from "~/hooks/useUser";
 
 import { GET_SERVICES } from "./queries";
 import { content, subtitle } from "./style";
 
 function ServiceInformations() {
+  const { service: currentService } = useUser();
   const { data, error, loading } = useQuery(GET_SERVICES, {
     fetchPolicy: "cache-and-network",
   });
@@ -20,7 +22,8 @@ function ServiceInformations() {
     return null;
   }
 
-  const [service] = data.services;
+  const service = data.services.find((ser) => ser.id === currentService.id);
+
   const {
     competences,
     email,
