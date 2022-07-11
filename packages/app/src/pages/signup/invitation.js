@@ -10,6 +10,7 @@ import { SkipToContent } from "~/components";
 
 function SignupInvitationPage() {
   const { type, token } = useSearchParams();
+
   return (
     <>
       <Helmet>
@@ -19,7 +20,9 @@ function SignupInvitationPage() {
       <SignupContextProvider>
         <LayoutPublic>
           <BoxWrapper pt="6" px="1" id="invitation_wrapper">
-            {type === "service " && <SignupServiceInvitation token={token} />}
+            {type && type === "service" && (
+              <SignupServiceInvitation token={token} />
+            )}
             {type === "admin" && <SignupAdminInvitation token={token} />}
           </BoxWrapper>
         </LayoutPublic>
