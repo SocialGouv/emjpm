@@ -101,6 +101,21 @@ select_permissions:
     filter:
       user_id:
         _eq: X-Hasura-User-Id
+  role: sdpf
+- permission:
+    columns:
+    - expired
+    - editor_id
+    - id
+    - user_id
+    - expired_on
+    - refresh_token_expires_on
+    - access_token
+    - editor_url
+    - refresh_token
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
   role: service
 - permission:
     columns:
@@ -133,6 +148,11 @@ delete_permissions:
       user_id:
         _eq: X-Hasura-User-Id
   role: prepose
+- permission:
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     filter:
       user_id:
