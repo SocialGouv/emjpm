@@ -2,7 +2,7 @@ const express = require("express");
 
 const isInt = require("~/utils/std/isInt");
 
-const { User, Sdpf } = require("~/models");
+const { User, Sdpf, Departement } = require("~/models");
 
 const router = express.Router();
 
@@ -23,9 +23,7 @@ router.use(async (_req, res, next) => {
   try {
     user = await User.query()
       .findById(user_id)
-      .withGraphFetched(
-        "[direction.[departement, region], service.[departements], sdpf]"
-      );
+      .withGraphFetched("[direction.[departement, region],  sdpf]");
   } catch (error) {
     return res.status(422).json({
       errors: [{ error: `${error}` }],
@@ -62,7 +60,7 @@ router.get("/:id/users", async (req, res) => {
 
   const service = await Sdpf.query()
     .findById(serviceId)
-    .withGraphFetched("[users, departements]");
+    .withGraphFetched("[users]");
 
   if (!service) {
     return res.status(404).json({
@@ -75,24 +73,22 @@ router.get("/:id/users", async (req, res) => {
     if (user.direction.type === "national") {
       authGranted = true;
     } else if (user.direction.type === "regional") {
-      if (
-        service.departements.some(
-          ({ id_region }) => id_region === user.direction.region_id
-        )
-      ) {
+      const departementFromRegion = await Departement.query().find({
+        id_region: user.direction.region_id,
+      });
+
+      const eligibleDepartments = departementFromRegion.map((d) => d.id);
+
+      if (eligibleDepartments.includes(service.departement)) {
         authGranted = true;
       }
     } else if (user.direction.type === "departemental") {
-      if (
-        service.departements.some(
-          ({ id }) => id === user.direction.departement_code
-        )
-      ) {
+      if (service.departement === user.direction.departement_code) {
         authGranted = true;
       }
     }
-  } else if (user.type === "service") {
-    if (user.service.id === serviceId) {
+  } else if (user.type === "sdpf") {
+    if (user.sdpf.id === serviceId) {
       authGranted = true;
     }
   }
