@@ -73,7 +73,7 @@ router.get("/:id/users", async (req, res) => {
     if (user.direction.type === "national") {
       authGranted = true;
     } else if (user.direction.type === "regional") {
-      const departementFromRegion = await Departement.query().find({
+      const departementFromRegion = await Departement.query().where({
         id_region: user.direction.region_id,
       });
 
