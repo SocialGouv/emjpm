@@ -1,4 +1,4 @@
-const { User, Direction, Service } = require("~/models");
+const { User, Direction, Sdpf, Departement } = require("~/models");
 const { isDirection } = require("@emjpm/biz");
 
 const getDirectionDpfs = async (req, res) => {
@@ -38,11 +38,7 @@ const getDirectionDpfs = async (req, res) => {
   let error;
   let direction;
   try {
-    [direction] = await Direction.query()
-      .where("user_id", userId)
-      .withGraphFetched(
-        "[departement_services(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements], region_service_departements.[services(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements]]]"
-      );
+    [direction] = await Direction.query().where("user_id", userId);
 
     if (!direction) {
       error = "user's direction undefined";
@@ -57,39 +53,50 @@ const getDirectionDpfs = async (req, res) => {
   }
 
   let services;
+  let eligibleDepartments;
   try {
     const { type: directionType } = direction;
+    const departmentList = await Departement.query();
+
     switch (directionType) {
       case "national":
-        services = await Service.query()
-          .withGraphFetched("[departements]")
-          .modify("selectAll")
-          .modify("selectMesuresAwaiting")
-          .modify("selectMesuresInProgress")
-          .select();
+        services = await Sdpf.query();
+
         for (const service of services) {
-          service.departement = service.departements[0];
+          service.departement = departmentList.find(
+            (d) => d.id === service.departement
+          );
         }
         break;
       case "departemental":
-        services = direction.departement_services;
-        // temporary workaround for deprecated single departement by service
-        for (const service of services) {
-          service.departement = service.departements[0];
-        }
-        break;
-      case "regional":
-        services = Object.values(
-          direction.region_service_departements.reduce((acc, { services }) => {
-            for (const service of services) {
-              acc[service.id] = service;
-            }
-            return acc;
-          }, {})
+        services = await Sdpf.query().find(
+          "departement",
+          direction.departement_code
         );
         // temporary workaround for deprecated single departement by service
         for (const service of services) {
-          service.departement = service.departements[0];
+          service.departement = departmentList.find(
+            (d) => d.id === service.departement
+          );
+        }
+        break;
+      case "regional":
+        eligibleDepartments = departmentList
+          .filter((d) => {
+            return d.id_region === direction.region_id;
+          })
+          .map((x) => x.id);
+
+        services = await Sdpf.query().whereIn(
+          "departement",
+          eligibleDepartments
+        );
+
+        // temporary workaround for deprecated single departement by service
+        for (const service of services) {
+          service.departement = departmentList.find(
+            (d) => d.id === service.departement
+          );
         }
         break;
       default:
