@@ -1,4 +1,4 @@
-const { User } = require("~/models");
+const { User, Departement } = require("~/models");
 const { isService, isDirection, isSdpf } = require("@emjpm/biz");
 
 const getUserDirection = (user) => {
@@ -85,8 +85,9 @@ const getUserService = (user) => {
   return data;
 };
 
-const getUserSdpf = (user) => {
+const getUserSdpf = async (user) => {
   const { sdpf } = user;
+  const departments = await Departement.query();
 
   if (sdpf === null) {
     return null;
@@ -110,10 +111,17 @@ const getUserSdpf = (user) => {
     departement,
   } = sdpf;
 
+  const foundedDep = departments.find((dep) => dep.id === departement);
+
+  const dep = {
+    code: foundedDep.id,
+    nom: foundedDep.nom,
+  };
+
   const data = {
     adresse,
     code_postal,
-    departement,
+    departement: dep,
     email,
     etablissement,
     id,
@@ -168,7 +176,8 @@ const getUser = async (req, res) => {
     type: user.type,
   };
   if (isSdpf(user)) {
-    userData.dpf = getUserSdpf(user);
+    const dpfProfils = await getUserSdpf(user);
+    userData.dpf = dpfProfils;
   }
   if (isService(user)) {
     userData.service = getUserService(user);
