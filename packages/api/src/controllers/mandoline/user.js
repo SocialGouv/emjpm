@@ -109,6 +109,7 @@ const getUserSdpf = async (user) => {
     code_postal,
     ville,
     departement,
+    dispo_max,
   } = sdpf;
 
   const foundedDep = departments.find((dep) => dep.id === departement);
@@ -122,6 +123,7 @@ const getUserSdpf = async (user) => {
     adresse,
     code_postal,
     departement: dep,
+    dispo_max,
     email,
     etablissement,
     id,

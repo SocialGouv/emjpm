@@ -96,6 +96,7 @@ select_permissions:
     - comptences
     - created_at
     - departement
+    - dispo_max
     - email
     - etablissement
     - genre
@@ -161,6 +162,7 @@ update_permissions:
     - comptences
     - created_at
     - departement
+    - dispo_max
     - email
     - etablissement
     - genre
