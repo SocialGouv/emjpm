@@ -31,8 +31,8 @@ select_permissions:
     - service_id
     - user_id
     filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
+      user_id:
+        _eq: X-Hasura-User-Id
   role: service
 - permission:
     columns:

@@ -3,7 +3,7 @@ import { Flex, Text } from "rebass";
 import { HeadingTitle } from "~/containers/HeadingTitle";
 import { LayoutServices } from "~/containers/Layout";
 import { MesureBadge } from "~/containers/MesureBadge";
-import { MesureList } from "~/containers/MesureList";
+import { MesureList } from "~/containers/MesureListService";
 import { MesureListButtonBar } from "~/containers/MesureListButtonBar";
 import { MesureListFilters } from "~/containers/MesureListFilters";
 import { FiltersContextProvider } from "~/containers/MesureListFilters/context";
@@ -17,8 +17,18 @@ import { Helmet } from "react-helmet";
 import { SkipToContent } from "~/components";
 
 export default function Mesures() {
-  const { service_members } = useUser();
-  const [{ service }] = service_members;
+  const {
+    service_members,
+    allAccessibleService,
+    service: currentService,
+  } = useUser();
+
+  const filteredService = service_members.find(
+    (s) => s.service.id === currentService.id
+  );
+
+  const { service } = filteredService;
+
   const { service_antennes, mesures_in_progress, dispo_max } = service;
 
   const sansAntenneEncours = service_antennes.reduce(
@@ -42,6 +52,7 @@ export default function Mesures() {
         <title>Vos mesures | e-MJPM</title>
       </Helmet>
       <SkipToContent skipTo="vos_mesures_block" />
+
       <FiltersContextProvider
         initialValues={{
           mesureStatus: MESURE_STATUS_LABEL_VALUE[0],

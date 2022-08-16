@@ -8,8 +8,12 @@ import { Helmet } from "react-helmet";
 import { SkipToContent } from "../../components";
 
 function ServiceMembersPage() {
-  const { service_members, id } = useUser();
-  const [{ is_admin, service }] = service_members;
+  const { service_members, id, service } = useUser();
+  const currentService = service_members.find(
+    (sm) => sm.service.id === service.id
+  );
+  const { is_admin } = currentService;
+
   return (
     <>
       <Helmet>

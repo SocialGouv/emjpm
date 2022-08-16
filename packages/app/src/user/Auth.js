@@ -213,12 +213,14 @@ export async function impersonateLogin(impersonateParams) {
 export function impersonateLogout() {
   localStorage.removeItem("impersonate");
   localStorage.removeItem("filters");
+  localStorage.removeItem("sotredService");
   window.location.href = "/";
 }
 
 export function logoutLocalStorage() {
   localStorage.removeItem("auth");
   localStorage.removeItem("impersonate");
+  localStorage.removeItem("sotredService");
 
   // to support logging out from all windows
   localStorage.setItem("logout", Date.now());

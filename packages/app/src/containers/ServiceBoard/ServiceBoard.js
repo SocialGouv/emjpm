@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 
 function ServiceBoard() {
   const { service } = useUser();
+
   const {
     mesures_in_progress = 0,
     mesures_awaiting = 0,
@@ -58,7 +59,6 @@ function ServiceBoard() {
             </Box>
           </Card>
         </Flex>
-
         <Flex p={1} flexDirection="column" width="300px">
           <Box bg="cardSecondary">
             <Box p={1}>
@@ -88,7 +88,6 @@ function ServiceBoard() {
             </Flex>
           </Card>
         </Flex>
-
         <Flex p={1} flexDirection="column" width="300px">
           <Box bg="cardSecondary">
             <Box p={1}>

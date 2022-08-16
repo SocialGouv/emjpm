@@ -2,6 +2,7 @@
   display: inline-block;
   position: relative;
   cursor: pointer;
+  z-index: 999999 !important;
 }
 
 .UserMenu-AriaMenuButton-trigger {

@@ -20,13 +20,18 @@ import {
 } from "./styles";
 
 import useQueryReady from "~/hooks/useQueryReady";
+import React from "react";
 
 function ServiceMembers(props) {
   const { isAdmin, service, userId } = props;
 
-  const { loading, error, data } = useQuery(SERVICE_MEMBERS, {
+  const { loading, error, data, refetch } = useQuery(SERVICE_MEMBERS, {
     variables: { serviceId: service.id },
   });
+
+  React.useEffect(() => {
+    refetch();
+  }, [service, refetch]);
 
   const [deleteServiceMember, { loading: loading1, error: error1 }] =
     useMutation(DELETE_SERVICE_MEMBER);
