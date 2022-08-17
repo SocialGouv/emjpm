@@ -58,6 +58,17 @@ function getRequestFilters(filters) {
         },
       },
     };
+    const sdpfDepartementFilters = {
+      sdpf: { departement: { _eq: departementCode } },
+    };
+
+    const dpfiDepartementFilters = {
+      liste_blanche: {
+        dpfi: {
+          departement_code: { _eq: departementCode },
+        },
+      },
+    };
 
     const departementsFilter = [];
     switch (type) {
@@ -70,11 +81,17 @@ function getRequestFilters(filters) {
       case "service":
         departementsFilter.push(serviceDepartementFilters);
         break;
+      case "sdpf":
+        departementsFilter.push(sdpfDepartementFilters);
+      case "dpfi":
+        departementsFilter.push(dpfiDepartementFilters);
 
       default:
         departementsFilter.push(individuelDepartementFilters);
         departementsFilter.push(preposeDepartementFilter);
         departementsFilter.push(serviceDepartementFilters);
+        departementsFilter.push(sdpfDepartementFilters);
+        departementsFilter.push(dpfiDepartementFilters);
     }
     requestFilters._or = departementsFilter;
   } else {
