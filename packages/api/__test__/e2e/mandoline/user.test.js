@@ -47,9 +47,9 @@ async function getUserToken(user) {
   const res = await request(server)
     .post("/api/oauth/token")
     .send(`client_id=${authorizationCode.client_id}`)
+    .send(`client_secret=api_token`)
     .send(`redirect_uri=${authorizationCode.redirect_uri}`)
     .send(`code=${authorizationCode.code}`)
-    .send(`client_secret=test-token`)
     .send(`grant_type=authorization_code`);
 
   return res.body.access_token;
