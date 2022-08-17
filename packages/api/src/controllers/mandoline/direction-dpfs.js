@@ -69,10 +69,12 @@ const getDirectionDpfs = async (req, res) => {
         }
         break;
       case "departemental":
-        services = await Sdpf.query().find(
+        services = await Sdpf.query().where(
           "departement",
+          "=",
           direction.departement_code
         );
+
         // temporary workaround for deprecated single departement by service
         for (const service of services) {
           service.departement = departmentList.find(
