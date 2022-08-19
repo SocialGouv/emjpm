@@ -64,8 +64,10 @@ function getRequestFilters(filters) {
 
     const dpfiDepartementFilters = {
       liste_blanche: {
-        dpfi: {
-          departement_code: { _eq: departementCode },
+        dpfi_departements: {
+          departement_code: {
+            _eq: departementCode,
+          },
         },
       },
     };
