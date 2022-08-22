@@ -29,7 +29,7 @@ export function ListeBlancheDpfiUpdate(props) {
     <>
       <Helmet>
         <title>
-          {data.nom} {data.prenom} - Mandataire DPF | e-MJPM
+          {data.nom} {data.prenom} - DPF individuel | e-MJPM
         </title>
       </Helmet>
       <Card p={5}>

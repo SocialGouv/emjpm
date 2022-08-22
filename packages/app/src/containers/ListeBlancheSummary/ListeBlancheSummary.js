@@ -126,9 +126,9 @@ function ListeBlancheSummary() {
             label="Mandataire préposé à un établissement"
             value={`${preposeCount}`}
           />
-          <LabelValue label="Services" value={`${serviceCount}`} />
+          <LabelValue label="Services mandataires" value={`${serviceCount}`} />
           <LabelValue
-            label="Mandataire DPF"
+            label="DPF individuel"
             value={
               `${dpfiCount}` +
               (!departement
