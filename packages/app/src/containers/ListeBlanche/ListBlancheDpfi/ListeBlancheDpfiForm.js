@@ -447,7 +447,7 @@ export function ListeBlancheDpfiForm(props) {
         <Flex role="group" aria-labelledby="informations_mandataire">
           <FormGrayBox>
             <Heading size={4} mb={1} id="informations_mandataire">
-              {"Informations données par le mandataire DPF"}
+              {"Informations données par le DPF individuel"}
             </Heading>
             <Text mt={2} mb={1}>
               {"Ces informations sont modifables uniquement par le mandataire"}

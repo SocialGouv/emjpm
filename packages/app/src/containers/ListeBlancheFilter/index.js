@@ -39,11 +39,11 @@ function ListeBlancheFilter() {
       to: `/${user.type}/liste-blanche/ajout-prepose`,
     },
     {
-      title: "Service",
+      title: "Service Mandataire",
       to: `/${user.type}/liste-blanche/ajout-service`,
     },
     {
-      title: "Mandataire DPF",
+      title: "DPF individuel",
       to: `/${user.type}/liste-blanche/ajout-dpf`,
     },
     {

@@ -30,7 +30,7 @@ export default function ListBlancheAjoutIndividuel() {
             )}
           />
           <HeadingTitle mb={4}>
-            {"Ajout d'un service individuel à la liste blanche"}
+            {"Ajout d'un service DPF à la liste blanche"}
           </HeadingTitle>
           <ListeBlancheSdpfCreate />
         </BoxWrapper>

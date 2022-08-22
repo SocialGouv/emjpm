@@ -18,17 +18,17 @@ export function ListeBlancheDpfiItem(props) {
       mb="2"
       as="a"
       href={to}
-      title={`Mandataire DPF ${liste_blanche?.nom || ""} ${
+      title={`DPF individuel ${liste_blanche?.nom || ""} ${
         liste_blanche?.prenom || ""
       }`}
-      aria-label={`Mandataire DPF ${liste_blanche?.nom || ""} ${
+      aria-label={`DPF individuel ${liste_blanche?.nom || ""} ${
         liste_blanche?.prenom || ""
       }`}
       draggable="false"
     >
       <Flex justifyContent="flex-start">
         <Flex width="25%" flexDirection="column">
-          <Text sx={labelStyle}>{"Mandataire DPF"}</Text>
+          <Text sx={labelStyle}>{"DPF individuel"}</Text>
           <Flex>
             <Text sx={descriptionStyle}>
               {liste_blanche.nom ? liste_blanche.nom.toUpperCase() : ""}

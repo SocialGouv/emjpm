@@ -12,7 +12,7 @@ function ListBlanchePage() {
   return (
     <>
       <Helmet>
-        <title>Ajout d'un mandataire DPF à la liste blanche | e-MJPM</title>
+        <title>Ajout d'un DPF individuel à la liste blanche | e-MJPM</title>
       </Helmet>
       <SkipToContent skipTo="liste_blanche_individuel_create" />
       <LayoutDirection>
@@ -30,7 +30,7 @@ function ListBlanchePage() {
             )}
           />
           <HeadingTitle mb={4}>
-            {"Ajout d'un mandataire DPF à la liste blanche"}
+            {"Ajout d'un DPF individuel à la liste blanche"}
           </HeadingTitle>
           <ListeBlancheDpfiCreate />
         </BoxWrapper>

@@ -105,7 +105,7 @@ const DpfiEditInformations = ({
   return (
     <>
       <Helmet>
-        <title>{`${user.nom} ${user.prenom} - mandataire DPF | e-MJPM`}</title>
+        <title>{`${user.nom} ${user.prenom} - DPF individuel | e-MJPM`}</title>
       </Helmet>
       <DpfiEditInformationsForm
         mandataire={mandataire}
