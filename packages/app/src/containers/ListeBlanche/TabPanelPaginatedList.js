@@ -72,6 +72,13 @@ function getRequestFilters(filters) {
       },
     };
 
+    if (filters.departementFinanceur) {
+      dpfiDepartementFilters.liste_blanche.dpfi_departements.departement_financeur =
+        {
+          _eq: filters.departementFinanceur === true,
+        };
+    }
+
     const departementsFilter = [];
     switch (type) {
       case "individuel":
