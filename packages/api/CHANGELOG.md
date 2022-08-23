@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.155.6](https://github.com/SocialGouv/emjpm/compare/v25.155.5...v25.155.6) (2022-08-16)
+
+
+### Bug Fixes
+
+* oauth2 client secret ([#2867](https://github.com/SocialGouv/emjpm/issues/2867)) ([8681ad5](https://github.com/SocialGouv/emjpm/commit/8681ad59b9ca22c2a61858cfb206f6e1ea429ff9))
+
+
+
+
+
 ## [25.155.5](https://github.com/SocialGouv/emjpm/compare/v25.155.4...v25.155.5) (2022-06-16)
 
 **Note:** Version bump only for package @emjpm/api
