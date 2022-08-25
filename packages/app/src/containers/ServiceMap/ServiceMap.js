@@ -9,13 +9,15 @@ import useUser from "~/hooks/useUser";
 import { MESURES_SERVICE } from "./queries";
 
 function ServiceMap({ selectMesures, selectedMesuresIds }) {
-  const { service_members } = useUser();
+  const { service_members, service: currentService } = useUser();
   const [service_member] = service_members;
   const {
     service: { longitude, latitude },
   } = service_member;
 
-  const { data, loading, error } = useQuery(MESURES_SERVICE);
+  const { data, loading, error } = useQuery(MESURES_SERVICE, {
+    variables: { serviceId: currentService.id },
+  });
 
   const mesuresMarkers = useMemo(
     () =>

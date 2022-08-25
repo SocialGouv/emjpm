@@ -57,9 +57,8 @@ insert_permissions:
     - mesures_in_progress_cached
     - mesures_max
     - name
+    - service_id
     - ville
-    set:
-      service_id: x-hasura-Service-Id
   role: service
 select_permissions:
 - permission:
@@ -151,8 +150,10 @@ select_permissions:
     - mesures_awaiting
     - mesures_in_progress
     filter:
-      service_id:
-        _eq: x-hasura-service-id
+      service:
+        service_members:
+          user_id:
+            _eq: X-Hasura-User-Id
   role: service
 - permission:
     allow_aggregations: true

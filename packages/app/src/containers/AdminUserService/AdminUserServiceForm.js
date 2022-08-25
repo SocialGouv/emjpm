@@ -25,6 +25,7 @@ import { findOptions } from "~/utils/form";
 import { GENDER_OPTIONS } from "~/constants/user";
 
 import { normalizeFirstName, normalizeLastName } from "~/utils/normalizers";
+import useUser from "~/hooks/useUser";
 
 function buildTiOptions(tis) {
   const tiOptions = tis.map((ti) => ({
@@ -36,11 +37,14 @@ function buildTiOptions(tis) {
 
 function AdminUserServiceForm(props) {
   const { cancelLink, user, handleSubmit } = props;
+  const { service: currentService } = useUser();
 
-  const { service_members } = user;
+  const [{ service }] = user.service_members.filter(
+    (sm) => sm.service.id === currentService.id
+  );
 
-  const [serviceMember] = service_members;
-  const { service } = serviceMember;
+  // const [serviceMember] = service_members;
+  // const { service } = serviceMember;
 
   const { departements, service_tis } = service;
 
@@ -75,6 +79,7 @@ function AdminUserServiceForm(props) {
     [geocodeResource]
   );
 
+  console.log(service.etablissement);
   const formik = useFormik({
     initialValues: {
       user_email: user.email || "",
@@ -105,6 +110,7 @@ function AdminUserServiceForm(props) {
     },
     onSubmit: handleSubmit,
     validationSchema: adminUserServiceSchema,
+    enableReinitialize: true,
   });
 
   return (

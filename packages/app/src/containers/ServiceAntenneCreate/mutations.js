@@ -2,6 +2,7 @@ import gql from "graphql-tag";
 
 export const CREATE_ANTENNE = gql`
   mutation createAntenne(
+    $serviceId: Int!
     $name: String
     $mesures_max: Int
     $contact_phone: String
@@ -29,6 +30,7 @@ export const CREATE_ANTENNE = gql`
         ville: $ville
         latitude: $latitude
         longitude: $longitude
+        service_id: $serviceId
       }
     ) {
       returning {

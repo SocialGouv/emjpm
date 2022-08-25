@@ -109,6 +109,11 @@ insert_permissions:
     - use_location_adresse
     - ville
   role: direction
+- permission:
+    backend_only: false
+    check: {}
+    columns: []
+  role: sdpf
 select_permissions:
 - permission:
     columns:
@@ -255,6 +260,11 @@ select_permissions:
   role: greffier
 - permission:
     columns:
+    - id
+    filter: {}
+  role: sdpf
+- permission:
+    columns:
     - adresse
     - adresse_complement
     - code_postal
@@ -290,8 +300,9 @@ select_permissions:
     - mesures_awaiting
     - mesures_in_progress
     filter:
-      id:
-        _eq: X-Hasura-Service-Id
+      service_members:
+        user_id:
+          _eq: X-Hasura-User-Id
   role: service
 - permission:
     columns:
@@ -356,15 +367,20 @@ update_permissions:
     - adresse_complement
     - code_postal
     - competences
+    - created_at
     - dispo_max
+    - editor_id
+    - editor_locked_mesures
     - email
     - etablissement
     - genre
+    - id
     - latitude
     - location_adresse
     - longitude
     - mesures_awaiting_cached
     - mesures_in_progress_cached
+    - mesures_last_update
     - nom
     - org_adresse
     - org_code_postal
@@ -379,8 +395,9 @@ update_permissions:
     - use_location_adresse
     - ville
     filter:
-      id:
-        _eq: X-Hasura-Service-Id
+      service_members:
+        user_id:
+          _eq: X-Hasura-User-Id
   role: service
 - permission:
     check: null

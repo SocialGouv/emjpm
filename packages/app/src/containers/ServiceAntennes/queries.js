@@ -1,14 +1,9 @@
 import gql from "graphql-tag";
 
 export const ANTENNE = gql`
-  {
-    service_antenne {
+  query getServiceAntenne($serviceId: Int!) {
+    service_antenne(where: { service_id: { _eq: $serviceId } }) {
       name
-      mesures_aggregate {
-        aggregate {
-          count
-        }
-      }
       id
       mesures_max
       mesures_in_progress

@@ -27,6 +27,34 @@ export const LB_SUMMARY = gql`
         count
       }
     }
+    dpfi: liste_blanche_aggregate(
+      where: {
+        type: { _eq: "dpfi" }
+        dpfi_departements: { departement_code: { _eq: $departementCode } }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    dpfi_finance_departement: liste_blanche_aggregate(
+      where: {
+        type: { _eq: "dpfi" }
+        dpfi_departements: {
+          departement_code: { _eq: $departementCode }
+          departement_financeur: { _eq: true }
+        }
+      }
+    ) {
+      aggregate {
+        count
+      }
+    }
+    sdpf: liste_blanche_aggregate(where: { type: { _eq: "sdpf" } }) {
+      aggregate {
+        count
+      }
+    }
     prepose: liste_blanche_aggregate(
       where: {
         type: { _eq: "prepose" }

@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import { Box, Flex } from "rebass";
 
+import useUser from "~/hooks/useUser";
 import useQueryReady from "~/hooks/useQueryReady";
 import { AntenneLinkButton, LinkButton } from "~/containers/Commons";
 import Antenne from "~/containers/Antenne";
@@ -10,18 +11,27 @@ import { Card, Heading, Text } from "~/components";
 import { BoxWrapper, FlexWrapper, fourColumnStyle } from "~/components/Grid";
 
 import { ANTENNE } from "./queries";
+import React from "react";
 
 function ServiceAntennes(props) {
   const { isAntenneCreationHidden } = props;
-  const { data, loading, error } = useQuery(ANTENNE, {
+  const { service: currentService } = useUser();
+  const { data, loading, error, refetch } = useQuery(ANTENNE, {
+    variables: { serviceId: currentService.id },
     fetchPolicy: "cache-and-network",
   });
+
+  React.useEffect(() => {
+    refetch();
+  }, [currentService, refetch]);
 
   if (!useQueryReady(loading, error)) {
     return null;
   }
 
   const { service_antenne } = data;
+
+  console.log(data);
   return (
     <BoxWrapper>
       <Card p="5">

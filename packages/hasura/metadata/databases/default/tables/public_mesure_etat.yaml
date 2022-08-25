@@ -46,8 +46,10 @@ insert_permissions:
     backend_only: false
     check:
       mesure:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
     columns:
     - champ_mesure
     - date_changement_etat
@@ -125,8 +127,10 @@ select_permissions:
     - ville
     filter:
       mesure:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
   role: service
 - permission:
     columns:
@@ -194,8 +198,10 @@ update_permissions:
     - ville
     filter:
       mesure:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
   role: service
 delete_permissions:
 - permission:
@@ -213,6 +219,8 @@ delete_permissions:
 - permission:
     filter:
       mesure:
-        service_id:
-          _eq: X-Hasura-Service-Id
+        service:
+          service_members:
+            user_id:
+              _eq: X-Hasura-User-Id
   role: service

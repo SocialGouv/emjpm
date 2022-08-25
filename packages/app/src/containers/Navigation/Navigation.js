@@ -1,7 +1,9 @@
-import { isMandataire, isService } from "@emjpm/biz";
+import { isMandataire, isService, isSdpf } from "@emjpm/biz";
 import { Box, Flex } from "rebass";
 
 import { MesureBadge } from "~/containers/MesureBadge";
+import { ServiceSelector } from "~/containers/ServiceSelector";
+import { SdpfSelector } from "~/containers/SdpfSelector";
 import useUser from "~/hooks/useUser";
 
 import Link from "./Link";
@@ -27,13 +29,14 @@ function MandataireBadge({ mandataire }) {
 
 function Navigation({ links }) {
   const user = useUser();
+  // debugger;
   const suspendActivity = isService(user)
     ? user.service.suspend_activity
     : isMandataire(user)
     ? user.mandataire.suspend_activity
     : false;
   return (
-    <Box mt="2">
+    <Flex mt="2" justifyContent="space-between">
       <Flex alignItems="center" flexWrap="wrap">
         {links.map(({ title, to, isActive }) => (
           <Box key={title} px={1}>
@@ -60,7 +63,11 @@ function Navigation({ links }) {
           </Box>
         )}
       </Flex>
-    </Box>
+      <Flex justifyContent="right">
+        {isService(user) && <ServiceSelector user={user} />}
+        {isSdpf(user) && <SdpfSelector user={user} />}
+      </Flex>
+    </Flex>
   );
 }
 

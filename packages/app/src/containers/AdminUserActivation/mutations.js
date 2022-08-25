@@ -21,7 +21,7 @@ export const LISTE_BLANCHE_ASSOCIATION = gql`
     $mandataire_id: Int!
     $liste_blanche_id: Int!
   ) {
-    update_mandataires_by_pk(
+    update_dpfi_by_pk(
       pk_columns: { id: $mandataire_id }
       _set: { liste_blanche_id: $liste_blanche_id }
     ) {

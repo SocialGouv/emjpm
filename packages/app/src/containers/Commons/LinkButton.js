@@ -81,7 +81,6 @@ function LinkButton({ location, ...props }) {
   const isActive = location && location.pathname === props.to;
   // eslint-disable-next-line no-unused-vars
   const { bg, color, ...attr } = props;
-  console.log(props);
 
   return (
     <RouterLink

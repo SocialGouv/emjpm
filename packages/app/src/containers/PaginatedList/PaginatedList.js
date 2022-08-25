@@ -3,7 +3,14 @@ import { Box, Flex } from "rebass";
 
 import { PaginatedListStyle } from "./style";
 
-function DataList({ entries, RowItem, renderActions, onRowClick, getHref }) {
+function DataList({
+  entries,
+  RowItem,
+  renderActions,
+  onRowClick,
+  getHref,
+  sdpfdepartements,
+}) {
   return (
     <Flex flexDirection="column">
       {entries.map((entry, index) => (
@@ -13,6 +20,7 @@ function DataList({ entries, RowItem, renderActions, onRowClick, getHref }) {
           key={index}
           item={entry}
           renderActions={renderActions}
+          sdpfdepartements={sdpfdepartements}
         />
       ))}
     </Flex>
@@ -29,6 +37,7 @@ function PaginatedList({
   renderActions,
   onRowClick,
   getHref,
+  sdpfdepartements,
 }) {
   const totalPage = count / resultPerPage;
   return (
@@ -41,6 +50,7 @@ function PaginatedList({
             renderActions={renderActions}
             onRowClick={onRowClick}
             getHref={getHref}
+            sdpfdepartements={sdpfdepartements}
           />
           {count > resultPerPage && (
             <ReactPaginate

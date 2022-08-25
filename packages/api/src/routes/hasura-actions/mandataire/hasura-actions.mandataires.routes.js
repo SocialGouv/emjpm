@@ -12,14 +12,18 @@ const updateMesuresCounter = require("~/services/updateMesuresCounter");
 const router = express.Router();
 
 router.post("/stats", async (req, res) => {
-  const { userId } = req.body.input;
+  const { userId, serviceId } = req.body.input;
 
+  console.log("=====> serviceId", serviceId);
   const user = await User.query().findById(userId);
   const type = isMandataire(user) ? "mandataire" : "service";
+
   const serviceOrMandataire = await user.$relatedQuery(type);
 
   const natureStats = await Mesure.query()
-    .where({ [`${type}_id`]: serviceOrMandataire.id })
+    .where({
+      [`${type}_id`]: isMandataire(user) ? serviceOrMandataire.id : serviceId,
+    })
     .andWhere({ status: "en_cours" })
     .groupBy("nature_mesure")
     .select("nature_mesure")

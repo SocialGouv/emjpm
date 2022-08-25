@@ -11,7 +11,11 @@ export const CURRENT_USER = gql`
 `;
 
 export const GET_SERVICE_USERS = gql`
-  query CURRENT_USER_QUERY($userId: Int!, $endDate: timestamptz) {
+  query CURRENT_USER_QUERY(
+    $userId: Int!
+    $endDate: timestamptz
+    $serviceId: Int
+  ) {
     enquetes(
       where: { status: { _eq: "created" }, date_fin: { _gt: $endDate } }
     ) {
@@ -20,7 +24,7 @@ export const GET_SERVICE_USERS = gql`
       date_fin
       id
     }
-    statistics: mandataire_statistics(userId: $userId) {
+    statistics: mandataire_statistics(userId: $userId, serviceId: $serviceId) {
       natureStatistics
     }
     users_by_pk(id: $userId) {
@@ -281,6 +285,86 @@ export const MANDATAIRE_USERS = gql`
               nom
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+export const DPFI_USERS = gql`
+  query CURRENT_USER_QUERY($userId: Int!) {
+    users_by_pk(id: $userId) {
+      email
+      created_at
+      id
+      last_login
+      nom
+      prenom
+      type
+      cabinet
+      dpfi {
+        id
+        suspend_activity
+        suspend_activity_reason
+        longitude
+        latitude
+        telephone
+        telephone_portable
+        siret
+        adresse
+        location_adresse
+        liste_blanche {
+          id
+          siret
+          adresse
+          adresse_complement
+          code_postal
+          ville
+          dpfi_departements {
+            id
+            departement_code
+            departement_financeur
+            departement {
+              id
+              nom
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const SDPF_USERS = gql`
+  query CURRENT_USER_QUERY($userId: Int!) {
+    users_by_pk(id: $userId) {
+      email
+      created_at
+      id
+      last_login
+      nom
+      prenom
+      type
+      cabinet
+      sdpf_members {
+        id
+        sdpf_id
+        user_id
+        is_admin
+        user {
+          email
+          prenom
+          nom
+          id
+        }
+        sdpf {
+          id
+          etablissement
+          longitude
+          latitude
+          suspend_activity
+          suspend_activity_reason
+          departement
         }
       }
     }

@@ -13,9 +13,11 @@ function ServiceCreateAntenne() {
   const history = useHistory();
 
   const user = useUser();
-  const { service_members } = user;
-  const [{ service }] = service_members;
+  const { service } = user;
+
+  // const [{ service }] = service_members;
   const { service_antennes } = service;
+
   const otherAntennesMesuresMaxSum = service_antennes.reduce(
     (acc, s) => acc + (s.mesures_max || 0),
     0
@@ -26,10 +28,13 @@ function ServiceCreateAntenne() {
   useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    console.log(values);
+
     try {
       await createAntenne({
         refetchQueries: ["CURRENT_USER_QUERY"],
         variables: {
+          serviceId: service.id,
           adresse: values.geocode.label,
           code_postal: values.geocode.postcode,
           departement_code: values.geocode.depcode,
