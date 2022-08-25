@@ -1,8 +1,9 @@
-import { isMandataire, isService } from "@emjpm/biz";
+import { isMandataire, isService, isSdpf } from "@emjpm/biz";
 import { Box, Flex } from "rebass";
 
 import { MesureBadge } from "~/containers/MesureBadge";
 import { ServiceSelector } from "~/containers/ServiceSelector";
+import { SdpfSelector } from "~/containers/SdpfSelector";
 import useUser from "~/hooks/useUser";
 
 import Link from "./Link";
@@ -64,6 +65,7 @@ function Navigation({ links }) {
       </Flex>
       <Flex justifyContent="right">
         {isService(user) && <ServiceSelector user={user} />}
+        {isSdpf(user) && <SdpfSelector user={user} />}
       </Flex>
     </Flex>
   );

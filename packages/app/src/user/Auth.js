@@ -55,6 +55,8 @@ const routeByRole = {
   service: "/services",
   ti: "/magistrats",
   greffier: "/greffiers",
+  dpfi: "/dpfi",
+  sdpf: "/sdpf",
 };
 
 const getAuthInitialState = () => {

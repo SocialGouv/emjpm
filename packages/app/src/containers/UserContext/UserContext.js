@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { isService, isMandataire } from "@emjpm/biz";
+import { isService, isMandataire, isSdpf } from "@emjpm/biz";
 import { createContext, useMemo, useState } from "react";
 
 import useQueryReady from "~/hooks/useQueryReady";
@@ -12,6 +12,8 @@ import {
   MAGISTRAT_USERS,
   GREFFIER_USERS,
   MANDATAIRE_USERS,
+  DPFI_USERS,
+  SDPF_USERS,
 } from "./queries";
 
 export const Context = createContext({});
@@ -24,10 +26,13 @@ const QUERY_TYPE = {
   service: GET_SERVICE_USERS,
   ti: MAGISTRAT_USERS,
   greffier: GREFFIER_USERS,
+  dpfi: DPFI_USERS,
+  sdpf: SDPF_USERS,
 };
 
 // let currentService;
 let allAccessibleService;
+let allAccessibleSdpf;
 
 function UserDataQueryProvider(props) {
   const { user, children } = props;
@@ -36,19 +41,25 @@ function UserDataQueryProvider(props) {
   const [currentService, settCurrentService] = useState(() =>
     JSON.parse(localStorage.getItem("sotredService"))
   );
+  const [currentSdpf, settCurrentSdpf] = useState(() =>
+    JSON.parse(localStorage.getItem("sotredSdpf"))
+  );
 
   const variables = useMemo(() => {
     const variables = {
       userId: parseInt(userId),
     };
+
     if (isMandataire({ type }) || isService({ type })) {
       variables.endDate = endDate;
     }
+
     if (isService({ type }) && currentService) {
       if (currentService != null) {
         variables.serviceId = currentService.id;
       }
     }
+
     return variables;
   }, [userId, type, currentService]);
 
@@ -73,6 +84,16 @@ function UserDataQueryProvider(props) {
     }
     allAccessibleService = userData.service_members?.map((x) => x.service);
   }
+  if (isSdpf({ type })) {
+    if (currentSdpf == null) {
+      settCurrentService(userData.sdpf_members[0].sdpf);
+      localStorage.setItem(
+        "sotredSdpf",
+        JSON.stringify(userData.sdpf_members[0].sdpf)
+      );
+    }
+    allAccessibleSdpf = userData.sdpf_members?.map((x) => x.sdpf);
+  }
 
   const changeService = (service) => {
     if (
@@ -84,13 +105,27 @@ function UserDataQueryProvider(props) {
     }
   };
 
+  const changeSdpf = (service) => {
+    if (
+      currentSdpf == null ||
+      (currentSdpf != null && service.id != currentSdpf.id)
+    ) {
+      debugger;
+      settCurrentSdpf(service);
+      localStorage.setItem("sotredSdpf", JSON.stringify(service));
+    }
+  };
+
   const currentUser = {
     ...userData,
     enquete: data.enquetes && data.enquetes.length ? data.enquetes[0] : null,
     service: currentService,
+    sdpf: currentSdpf,
     statistics: data.statistics,
     allAccessibleService,
+    allAccessibleSdpf,
     changeService,
+    changeSdpf,
   };
 
   return <Context.Provider value={currentUser}>{children}</Context.Provider>;

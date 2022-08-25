@@ -14,15 +14,19 @@ const MAIN_ROLES = [
   "direction",
   "ti",
   "greffier",
+  "sdpf",
+  "dpfi",
 ];
 
 const redirs = {
   admin: "/admin",
   default: "/",
   direction: "/direction",
+  dpfi: "/dpfi",
   greffier: "/greffiers",
   individuel: "/mandataires",
   prepose: "/mandataires",
+  sdpf: "/sdpf",
   service: "/services",
   ti: "/magistrats",
 };
@@ -72,6 +76,19 @@ class User extends Model {
         modelClass: Models.Role,
         relation: Model.ManyToManyRelation,
       },
+      sdpf: {
+        join: {
+          from: "users.id",
+          through: {
+            from: "sdpf_members.user_id",
+            to: "sdpf_members.sdpf_id",
+          },
+          to: "sdpf.id",
+        },
+        modelClass: Models.Sdpf,
+        relation: Model.HasOneThroughRelation,
+      },
+
       service: {
         join: {
           from: "users.id",

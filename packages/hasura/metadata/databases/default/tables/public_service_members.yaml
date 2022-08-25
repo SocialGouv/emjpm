@@ -2,57 +2,58 @@ table:
   name: service_members
   schema: public
 object_relationships:
-- name: service
-  using:
-    foreign_key_constraint_on: service_id
-- name: user
-  using:
-    foreign_key_constraint_on: user_id
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - name: user
+    using:
+      foreign_key_constraint_on: user_id
 select_permissions:
-- permission:
-    columns:
-    - id
-    - user_id
-    - service_id
-    - is_admin
-    filter: {}
-  role: direction
-- permission:
-    columns:
-    - id
-    - user_id
-    - service_id
-    filter: {}
-  role: greffier
-- permission:
-    columns:
-    - id
-    - is_admin
-    - service_id
-    - user_id
-    filter:
-      user_id:
-        _eq: X-Hasura-User-Id
-  role: service
-- permission:
-    columns:
-    - id
-    - user_id
-    - service_id
-    filter: {}
-  role: ti
+  - permission:
+      columns:
+        - id
+        - user_id
+        - service_id
+        - is_admin
+      filter: {}
+    role: direction
+  - permission:
+      columns:
+        - id
+        - user_id
+        - service_id
+      filter: {}
+    role: greffier
+  - permission:
+      allow_aggregations: true
+      columns:
+        - id
+        - is_admin
+        - service_id
+        - user_id
+      filter:
+        user_id:
+          _eq: X-Hasura-User-Id
+    role: service
+  - permission:
+      columns:
+        - id
+        - user_id
+        - service_id
+      filter: {}
+    role: ti
 update_permissions:
-- permission:
-    check: null
-    columns:
-    - is_admin
-    filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
-  role: service
+  - permission:
+      check: null
+      columns:
+        - is_admin
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
 delete_permissions:
-- permission:
-    filter:
-      service_id:
-        _eq: X-Hasura-Service-Id
-  role: service
+  - permission:
+      filter:
+        service_id:
+          _eq: X-Hasura-Service-Id
+    role: service
