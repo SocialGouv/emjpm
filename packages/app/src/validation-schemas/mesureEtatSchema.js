@@ -4,31 +4,36 @@ import yup, {
   parseDateString,
 } from "./yup";
 
-const mesureEtatSchema = yup.object().shape({
-  champ_mesure: yup.string().nullable(),
-  code_postal: yup
-    .string()
-    .when("pays", {
-      is: (pays) => pays === "FR",
-      then: yup.string().length(5).required(CODE_POSTAL_NOT_VALID).nullable(),
-    })
-    .nullable(),
-  date_changement_etat: yup
+const mesureEtatSchema = (mesure) =>
+  yup.object().shape({
+    champ_mesure: yup.string().nullable(),
+    code_postal: yup
+      .string()
+      .when("pays", {
+        is: (pays) => pays === "FR",
+        then: yup.string().length(5).required(CODE_POSTAL_NOT_VALID).nullable(),
+      })
+      .nullable(),
+    date_changement_etat: yup
+      .date(FORM_DATE_NOT_VALID)
+      .min(
+        mesure.dateNomination,
+        "la date de changement d'état doit être ultérieure à la date de nomination "
+      )
+      .transform(parseDateString)
+      .required(FORM_DATE_NOT_VALID)
+      .typeError(FORM_DATE_NOT_VALID),
 
-    .date(FORM_DATE_NOT_VALID)
-    .transform(parseDateString)
-    .required(FORM_DATE_NOT_VALID)
-    .typeError(FORM_DATE_NOT_VALID),
-  lieu_vie: yup.string().required(),
-  nature_mesure: yup.string().required(),
-  pays: yup.string().nullable().required(),
-  ville: yup
-    .string()
-    .nullable()
-    .when("pays", {
-      is: (pays) => pays === "FR",
-      then: yup.string().required().nullable(),
-    }),
-});
+    lieu_vie: yup.string().required(),
+    nature_mesure: yup.string().required(),
+    pays: yup.string().nullable().required(),
+    ville: yup
+      .string()
+      .nullable()
+      .when("pays", {
+        is: (pays) => pays === "FR",
+        then: yup.string().required().nullable(),
+      }),
+  });
 
 export { mesureEtatSchema };
