@@ -74,10 +74,10 @@ router.get("/nationales", async (req, res) => {
 router.get("/regionales/:id", async (req, res) => {
   const { user } = res.api;
   const { direction, service } = user;
-  if (direction && direction.type !== "national") {
+
+  if (!direction) {
     return res.status(403).json({
-      error:
-        "the usage of this api is reserved for national direction profiles",
+      error: "the usage of this api is reserved for direction profiles",
     });
   }
 
@@ -97,6 +97,24 @@ router.get("/regionales/:id", async (req, res) => {
       res.status(400).json({ message: "Region not found" });
     }
     regionId = region.id;
+  }
+
+  if (
+    user.direction.type === "regional" &&
+    Number(regionId) !== Number(user.direction.region.id)
+  ) {
+    return res.status(403).json({
+      error: "you are not allowed to access region that you are not related to",
+    });
+  }
+
+  if (
+    user.direction.type === "departemental" &&
+    Number(regionId) !== Number(user.direction.departement.id_region)
+  ) {
+    return res.status(403).json({
+      error: "you are not allowed to access region that you are not related to",
+    });
   }
 
   if (service) {

@@ -193,6 +193,8 @@ function ListeBlancheItem(props) {
       return <ListeBlancheDpfiItem {...props} />;
     case "sdpf":
       return <ListeBlancheSdpfItem {...props} />;
+    default:
+      return null;
   }
 }
 
