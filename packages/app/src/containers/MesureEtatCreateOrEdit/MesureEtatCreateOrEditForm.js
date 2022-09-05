@@ -1,7 +1,9 @@
+import { useContext, useMemo } from "react";
 import { isTypeEtablissementRequired, MESURE_PROTECTION } from "@emjpm/biz";
 import { useFormik } from "formik";
-
 import { Box, Flex } from "rebass";
+
+import { MesureContext } from "~/containers/MesureContext";
 
 import {
   FormGrayBox,
@@ -11,7 +13,7 @@ import {
   FormInputBox,
 } from "~/components/AppForm";
 import { GeocodeCities } from "~/components/Geocode";
-import { mesureEtatSchema } from "~/validation-schemas";
+import { mesureEtatSchema as mesureEtatSchemaValidate } from "~/validation-schemas";
 import {
   Button,
   Field,
@@ -42,6 +44,13 @@ export function MesureEtatCreateOrEditForm(props) {
     mesureEtatToEdit,
     isDeletable,
   } = props;
+
+  const mesureToEdit = useContext(MesureContext);
+
+  const mesureEtatSchema = useMemo(
+    () => mesureEtatSchemaValidate(mesureToEdit),
+    [mesureToEdit]
+  );
 
   const formik = useFormik({
     initialValues: initialValues(mesureEtatToEdit),
