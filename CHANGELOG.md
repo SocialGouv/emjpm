@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.155.6](https://github.com/SocialGouv/emjpm/compare/v25.155.5...v25.155.6) (2022-08-16)
+
+
+### Bug Fixes
+
+* oauth2 client secret ([#2867](https://github.com/SocialGouv/emjpm/issues/2867)) ([8681ad5](https://github.com/SocialGouv/emjpm/commit/8681ad59b9ca22c2a61858cfb206f6e1ea429ff9))
+
+
+
+
+
+## [25.155.5](https://github.com/SocialGouv/emjpm/compare/v25.155.4...v25.155.5) (2022-06-16)
+
+
+### Bug Fixes
+
+* **postal-code:** update doc for import mesure ([#2855](https://github.com/SocialGouv/emjpm/issues/2855)) ([631ad06](https://github.com/SocialGouv/emjpm/commit/631ad06c574b03166186a45050787658dbdd96b8))
+* **rgaa:** fix accessibility issues reported by lighthouse ([#2849](https://github.com/SocialGouv/emjpm/issues/2849)) ([9499cd4](https://github.com/SocialGouv/emjpm/commit/9499cd4e8be254866aca804b01622947aa407882))
+* **rgaa:** fix primary color ([#2854](https://github.com/SocialGouv/emjpm/issues/2854)) ([28b474a](https://github.com/SocialGouv/emjpm/commit/28b474a26a5b34ae2573439df26092c27c47045f))
+
+
+
+
+
 ## [25.155.4](https://github.com/SocialGouv/emjpm/compare/v25.155.3...v25.155.4) (2022-05-23)
 
 
