@@ -75,7 +75,12 @@ router.get("/regionales/:id", async (req, res) => {
   const { user } = res.api;
   const { direction, service } = user;
 
-  if (!direction) {
+  if (
+    direction &&
+    user.direction.type !== "regional" &&
+    user.direction.type !== "departemental" &&
+    direction.type !== "national"
+  ) {
     return res.status(403).json({
       error: "the usage of this api is reserved for direction profiles",
     });
