@@ -2,6 +2,15 @@ table:
   name: users
   schema: public
 object_relationships:
+- name: dpfi
+  using:
+    manual_configuration:
+      column_mapping:
+        id: user_id
+      insertion_order: null
+      remote_table:
+        name: dpfi
+        schema: public
 - name: greffier
   using:
     manual_configuration:
@@ -36,6 +45,13 @@ array_relationships:
       column: user_id
       table:
         name: direction
+        schema: public
+- name: sdpf_members
+  using:
+    foreign_key_constraint_on:
+      column: user_id
+      table:
+        name: sdpf_members
         schema: public
 - name: service_members
   using:
@@ -146,6 +162,26 @@ select_permissions:
     - id
     - last_login
     - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: dpfi
+- permission:
+    allow_aggregations: true
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
     - prenom
     - type
     filter:
@@ -199,6 +235,27 @@ select_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: prepose
+- permission:
+    allow_aggregations: true
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - secret_2fa
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     allow_aggregations: true
     columns:
@@ -287,6 +344,26 @@ update_permissions:
     filter:
       id:
         _eq: X-Hasura-User-Id
+  role: dpfi
+- permission:
+    check: null
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
   role: greffier
 - permission:
     check: null
@@ -347,6 +424,26 @@ update_permissions:
     filter:
       id:
         _eq: X-Hasura-User-Id
+  role: sdpf
+- permission:
+    check: null
+    columns:
+    - active
+    - cabinet
+    - created_at
+    - email
+    - genre
+    - id
+    - last_login
+    - nom
+    - password
+    - prenom
+    - reset_password_expires
+    - reset_password_token
+    - type
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
   role: service
 - permission:
     check: null
@@ -368,3 +465,9 @@ update_permissions:
       id:
         _eq: X-Hasura-User-Id
   role: ti
+delete_permissions:
+- permission:
+    filter:
+      id:
+        _eq: X-Hasura-User-Id
+  role: dpfi
