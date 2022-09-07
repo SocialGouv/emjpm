@@ -76,6 +76,7 @@ router.get("/regionales/:id", async (req, res) => {
   const { direction, service } = user;
 
   if (
+    direction &&
     direction.type !== "regional" &&
     direction.type !== "departemental" &&
     direction.type !== "national"
@@ -104,6 +105,7 @@ router.get("/regionales/:id", async (req, res) => {
   }
 
   if (
+    direction &&
     user.direction.type === "regional" &&
     Number(regionId) !== Number(user.direction.region.id)
   ) {
@@ -113,6 +115,7 @@ router.get("/regionales/:id", async (req, res) => {
   }
 
   if (
+    direction &&
     user.direction.type === "departemental" &&
     Number(regionId) !== Number(user.direction.departement.id_region)
   ) {
