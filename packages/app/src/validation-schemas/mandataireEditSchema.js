@@ -74,7 +74,6 @@ const mandataireEditSchema = ({ type, apolloClient }) => {
       .nullable()
       .when("suspendActivity", {
         is: (suspendActivity) => {
-          console.log({ suspendActivity });
           return suspendActivity === true;
         },
         then: yup.string().nullable().required(),

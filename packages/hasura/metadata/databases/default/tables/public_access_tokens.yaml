@@ -41,6 +41,21 @@ select_permissions:
     filter:
       user_id:
         _eq: X-Hasura-User-Id
+  role: dpfi
+- permission:
+    columns:
+    - id
+    - user_id
+    - access_token
+    - editor_id
+    - editor_url
+    - expired
+    - expired_on
+    - refresh_token
+    - refresh_token_expires_on
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
   role: greffier
 - permission:
     columns:
@@ -72,6 +87,21 @@ select_permissions:
       user_id:
         _eq: X-Hasura-User-Id
   role: prepose
+- permission:
+    columns:
+    - expired
+    - editor_id
+    - id
+    - user_id
+    - expired_on
+    - refresh_token_expires_on
+    - access_token
+    - editor_url
+    - refresh_token
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     columns:
     - expired
@@ -118,6 +148,11 @@ delete_permissions:
       user_id:
         _eq: X-Hasura-User-Id
   role: prepose
+- permission:
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     filter:
       user_id:

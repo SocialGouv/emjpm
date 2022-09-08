@@ -1,0 +1,10 @@
+table:
+  name: service_invitation_role
+  schema: public
+is_enum: true
+select_permissions:
+- permission:
+    columns:
+    - value
+    filter: {}
+  role: sdpf

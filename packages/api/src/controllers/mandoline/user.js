@@ -1,5 +1,5 @@
-const { User } = require("~/models");
-const { isService, isDirection } = require("@emjpm/biz");
+const { User, Departement } = require("~/models");
+const { isService, isDirection, isSdpf } = require("@emjpm/biz");
 
 const getUserDirection = (user) => {
   const { direction } = user;
@@ -85,6 +85,62 @@ const getUserService = (user) => {
   return data;
 };
 
+const getUserSdpf = async (user) => {
+  const { sdpf } = user;
+  const departments = await Departement.query();
+
+  if (sdpf === null) {
+    return null;
+  }
+  const {
+    id,
+    etablissement,
+    siret,
+    nom,
+    prenom,
+    email,
+    telephone,
+    org_adresse,
+    org_code_postal,
+    org_gestionnaire,
+    org_nom,
+    org_ville,
+    adresse,
+    code_postal,
+    ville,
+    departement,
+    dispo_max,
+  } = sdpf;
+
+  const foundedDep = departments.find((dep) => dep.id === departement);
+
+  const dep = {
+    code: foundedDep.id,
+    nom: foundedDep.nom,
+  };
+
+  const data = {
+    adresse,
+    code_postal,
+    departement: dep,
+    dispo_max,
+    email,
+    etablissement,
+    id,
+    nom,
+    org_adresse,
+    org_code_postal,
+    org_gestionnaire,
+    org_nom,
+    org_ville,
+    prenom,
+    siret,
+    telephone,
+    ville,
+  };
+  return data;
+};
+
 const getUser = async (req, res) => {
   const {
     locals: {
@@ -100,7 +156,7 @@ const getUser = async (req, res) => {
     user = await User.query()
       .findById(user_id)
       .withGraphFetched(
-        "[direction.[departement, region], service(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements]]"
+        "[direction.[departement, region], service(selectAll, selectMesuresAwaiting, selectMesuresInProgress).[departements], sdpf(selectAll)]"
       );
   } catch (error) {
     return res.status(422).json({
@@ -121,6 +177,10 @@ const getUser = async (req, res) => {
     prenom: user.prenom,
     type: user.type,
   };
+  if (isSdpf(user)) {
+    const dpfProfils = await getUserSdpf(user);
+    userData.dpf = dpfProfils;
+  }
   if (isService(user)) {
     userData.service = getUserService(user);
   } else if (isDirection(user)) {

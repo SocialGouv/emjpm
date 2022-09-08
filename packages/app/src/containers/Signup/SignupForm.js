@@ -44,6 +44,14 @@ const TYPE_OPTIONS = [
     label: "Agent de l'état",
     value: "direction",
   },
+  {
+    label: "DPF individuel",
+    value: "dpfi",
+  },
+  {
+    label: "Service DPF",
+    value: "sdpf",
+  },
 ];
 
 export function SignupForm() {
