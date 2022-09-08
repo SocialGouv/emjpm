@@ -4,7 +4,7 @@ const { raw } = require("objection");
 
 const isInt = require("~/utils/std/isInt");
 
-const { User, Region } = require("~/models");
+const { User, Region, Departement } = require("~/models");
 
 const router = express.Router();
 
@@ -156,14 +156,44 @@ router.get("/regionales/:id", async (req, res) => {
 router.get("/departementales/:id", async (req, res) => {
   const { user } = res.api;
   const { direction, service } = user;
-  if (direction && direction.type !== "national") {
+  if (
+    direction &&
+    direction.type !== "regional" &&
+    direction.type !== "departemental" &&
+    direction.type !== "national"
+  ) {
     return res.status(403).json({
-      error:
-        "the usage of this api is reserved for national direction profiles",
+      error: "the usage of this api is reserved for direction profiles",
     });
   }
 
   const departementCode = req.params.id;
+
+  if (direction && user.direction.type === "regional") {
+    const departementList = await Departement.query()
+      .where({
+        id_region: direction.region.id,
+      })
+      .select("id");
+
+    if (!departementList.find((dl) => dl.id === departementCode)) {
+      return res.status(403).json({
+        error:
+          "you are not allowed to access departement that you are not related to",
+      });
+    }
+  }
+
+  if (
+    direction &&
+    user.direction.type === "departemental" &&
+    Number(departementCode) !== Number(user.direction.departement.id)
+  ) {
+    return res.status(403).json({
+      error:
+        "you are not allowed to access departement that you are not related to",
+    });
+  }
 
   if (service) {
     if (!service.departements.some(({ id }) => id === departementCode)) {
