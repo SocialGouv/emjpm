@@ -25,6 +25,19 @@ const mesureEtatSchema = (mesure) =>
       .typeError(FORM_DATE_NOT_VALID),
 
     lieu_vie: yup.string().required(),
+    type_etablissement: yup
+      .string()
+      .nullable()
+      .when("lieu_vie", (lieu_vie, schema) => {
+        return schema.test({
+          test: (type_etablissement) =>
+            !!lieu_vie &&
+            lieu_vie === "etablissement" &&
+            type_etablissement != null,
+
+          message: "Veuillez choisir le type d'établissement",
+        });
+      }),
     nature_mesure: yup.string().required(),
     pays: yup.string().nullable().required(),
     ville: yup
