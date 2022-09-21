@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const expressPinoLogger = require("express-pino-logger");
 const rateLimit = require("express-rate-limit");
+// const cron = require("node-cron");
 
 const logger = require("./utils/logger");
 const Sentry = require("./utils/sentry");
@@ -15,6 +16,7 @@ const oauthRoutes = require("./routes/api/oauth");
 const editorsRoutes = require("./routes/api/editors");
 const mandolineRoutes = require("./routes/api/mandoline");
 const devRoutes = require("./routes/api/dev");
+const p5Extrat = require("./utils/p5-extract");
 
 const { logRequests } = require("~/config");
 
@@ -27,6 +29,18 @@ const bodyParserOptions = {
 };
 
 const app = express();
+
+// cron.schedule(
+//   "0 1 * * *",
+//   () => {
+//     console.log("Running a job at 01:00 at 1am");
+//   },
+//   {
+//     scheduled: true,
+//     timezone: "Europe/Paris",
+//   }
+// );
+p5Extrat();
 
 // TODO: rate limiter use inmemory-store.
 // EMJPM uses k8s, so we must replace it by a redis or postgre table store.
