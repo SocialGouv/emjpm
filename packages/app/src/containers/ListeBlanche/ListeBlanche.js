@@ -12,7 +12,9 @@ const TYPE_OPTIONS = [
   { label: "Tous les types", value: null },
   { label: "Mandataire Individuel", value: "individuel" },
   { label: "Mandataire Préposé", value: "prepose" },
-  { label: "Service", value: "service" },
+  { label: "Service Mandataire", value: "service" },
+  { label: "DPF Individuel", value: "dpfi" },
+  { label: "Service DPF", value: "sdpf" },
 ];
 
 export function ListeBlanche(props) {

@@ -2,21 +2,50 @@ table:
   name: service_member_invitations
   schema: public
 object_relationships:
+- name: sdpf
+  using:
+    manual_configuration:
+      column_mapping:
+        service_id: id
+      insertion_order: null
+      remote_table:
+        name: sdpf
+        schema: public
 - name: service
   using:
     foreign_key_constraint_on: service_id
+- name: service_invitation_role
+  using:
+    foreign_key_constraint_on: invitation_role
 insert_permissions:
+- permission:
+    check:
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
+  role: sdpf
 - permission:
     check:
       service_id:
         _eq: X-Hasura-Service-Id
     columns:
-    - id
-    - email
-    - token
     - created_at
+    - email
+    - id
+    - invitation_role
     - sent_at
     - service_id
+    - token
   role: service
 select_permissions:
 - permission:
@@ -30,18 +59,62 @@ select_permissions:
         _eq: X-Hasura-Invitation-Token
   role: anonymous
 - permission:
+    allow_aggregations: true
     columns:
-    - id
-    - service_id
     - created_at
-    - sent_at
     - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
+    filter:
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  role: sdpf
+- permission:
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
     - token
     filter:
       service_id:
         _eq: X-Hasura-Service-Id
   role: service
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - created_at
+    - email
+    - id
+    - invitation_role
+    - sent_at
+    - service_id
+    - token
+    filter:
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  role: sdpf
 delete_permissions:
+- permission:
+    filter:
+      sdpf:
+        sdpf_members:
+          user:
+            id:
+              _eq: X-Hasura-User-Id
+  role: sdpf
 - permission:
     filter:
       service_id:

@@ -16,6 +16,12 @@ export const SIGNUP_DATA = gql`
       etablissement
       code_postal
     }
+    sdpf(order_by: { etablissement: asc }) {
+      id
+      departement
+      etablissement
+      code_postal
+    }
     role {
       id
       name

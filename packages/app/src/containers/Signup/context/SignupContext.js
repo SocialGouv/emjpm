@@ -10,10 +10,12 @@ export function Provider(props) {
   // Use State to keep the values
   const [user, setUser] = useState(false);
   const [mandataire, setMandataire] = useState(false);
+  const [dpfi, setDpfi] = useState(false);
   const [magistrat, setMagistrat] = useState(false);
   const [greffier, setGreffier] = useState(false);
   const [direction, setDirection] = useState(false);
   const [service, setService] = useState(false);
+  const [sdpf, setSdpf] = useState(false);
   const [department, setDepartment] = useState(null);
   const [region, setRegion] = useState(null);
   const [isStepOneValidate, validateStepOne] = useState(false);
@@ -26,15 +28,19 @@ export function Provider(props) {
     magistrat,
     greffier,
     mandataire,
+    dpfi,
     region,
     service,
+    sdpf,
     setDepartment,
     setDirection,
     setMagistrat,
     setGreffier,
     setMandataire,
+    setDpfi,
     setRegion,
     setService,
+    setSdpf,
     setUser,
     user,
     validateStepOne,

@@ -55,6 +55,46 @@ const routes = [
     path: "/direction/liste-blanche/ajout-service",
   },
   {
+    Component: require("~/pages/direction/liste-blanche/ajout-dpf").default,
+    path: "/direction/liste-blanche/ajout-dpf",
+  },
+
+  {
+    Component: require("~/pages/admin/liste-blanche/ajout-dpf").default,
+    path: "/admin/liste-blanche/ajout-dpf",
+  },
+
+  {
+    Component: require("~/pages/sdpf/index").default,
+    path: "/sdpf",
+  },
+
+  {
+    Component: require("~/pages/sdpf/informations").default,
+    path: "/sdpf/informations",
+  },
+  {
+    Component: require("~/pages/sdpf/members").default,
+    path: "/sdpf/members",
+  },
+  {
+    Component: require("~/pages/sdpf/edit-password").default,
+    path: "/sdpf/edit-password",
+  },
+  {
+    Component: require("~/pages/sdpf/edit-informations").default,
+    path: "/sdpf/edit-informations",
+  },
+
+  {
+    Component: require("~/pages/direction/liste-blanche/ajout-sdpf").default,
+    path: "/direction/liste-blanche/ajout-sdpf",
+  },
+  {
+    Component: require("~/pages/admin/liste-blanche/ajout-sdpf").default,
+    path: "/admin/liste-blanche/ajout-sdpf",
+  },
+  {
     Component: require("~/pages/services/antennes/[antenne_id]").default,
     path: "/services/antennes/:antenne_id(\\d+)",
   },
@@ -134,6 +174,10 @@ const routes = [
   {
     Component: require("~/pages/mandataires/edit-informations").default,
     path: "/mandataires/edit-informations",
+  },
+  {
+    Component: require("~/pages/dpfi/edit-informations").default,
+    path: "/dpfi/edit-informations",
   },
   {
     Component: require("~/pages/services/edit-informations").default,
@@ -256,6 +300,18 @@ const routes = [
   {
     Component: require("~/pages/mandataires/index").default,
     path: "/mandataires",
+  },
+  {
+    Component: require("~/pages/dpfi/index").default,
+    path: "/dpfi",
+  },
+  {
+    Component: require("~/pages/dpfi/informations").default,
+    path: "/dpfi/informations",
+  },
+  {
+    Component: require("~/pages/dpfi/edit-password").default,
+    path: "/dpfi/edit-password",
   },
   {
     Component: require("~/pages/mandataires/enquetes/[enquete_id]/index")
