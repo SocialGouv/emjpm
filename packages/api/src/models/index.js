@@ -56,3 +56,4 @@ module.exports.ServiceTis = require("./ServiceTis");
 module.exports.Tis = require("./Tis");
 module.exports.User = require("./User");
 module.exports.UserRole = require("./UserRole");
+module.exports.MandatairesIndividuelDepartement = require("./MandatairesIndividuelDepartement");
