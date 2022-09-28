@@ -43,7 +43,7 @@ const SftpOptions = {
   username: process.env.P5_SFTP_USERNAME,
 };
 
-console.log("============================>", {
+console.log("=========================>", {
   host: process.env.P5_SFTP_HOST,
   port: process.env.P5_SFTP_PORT,
   privateKey: Buffer.from(private_value),
