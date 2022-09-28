@@ -35,13 +35,20 @@ function generateDate() {
 }
 
 const private_value = process.env.P5_SFTP_PRIVATE_KEY.replace(/\\n/g, "\n");
-// /var/lib/mandoline/files_emjpm
+
 const SftpOptions = {
   host: process.env.P5_SFTP_HOST,
   port: process.env.P5_SFTP_PORT,
   privateKey: Buffer.from(private_value),
   username: process.env.P5_SFTP_USERNAME,
 };
+
+console.log("============================>", {
+  host: process.env.P5_SFTP_HOST,
+  port: process.env.P5_SFTP_PORT,
+  privateKey: Buffer.from(private_value),
+  username: process.env.P5_SFTP_USERNAME,
+});
 
 const timestamps = generateDate();
 
