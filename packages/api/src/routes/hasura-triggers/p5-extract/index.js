@@ -35,7 +35,8 @@ function generateDate() {
   return [year, month, day, hours, minutes, seconds].join("");
 }
 
-const private_value = process.env?.P5_SFTP_PRIVATE_KEY?.replace(/\\n/g, "\n");
+const private_value =
+  process.env?.P5_SFTP_PRIVATE_KEY?.replace(/\\n/g, "\n") || "";
 
 const SftpOptions = {
   host: process.env.P5_SFTP_HOST,
