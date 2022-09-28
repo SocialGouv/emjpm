@@ -1,4 +1,5 @@
 const express = require("express");
+const Buffer = require("buffer").Buffer;
 
 const logger = require("~/utils/logger");
 
