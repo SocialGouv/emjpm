@@ -76,6 +76,13 @@ async function extractTables() {
 router.post("/execute", async (req, res) => {
   logger.info(`[p5-export] export init`);
 
+  console.log("============================>", {
+    host: process.env.P5_SFTP_HOST,
+    port: process.env.P5_SFTP_PORT,
+    privateKey: Buffer.from(private_value),
+    username: process.env.P5_SFTP_USERNAME,
+  });
+
   const data = await extractTables();
 
   sftp
