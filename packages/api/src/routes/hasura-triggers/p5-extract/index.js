@@ -45,20 +45,25 @@ const SftpOptions = {
   username: process.env.P5_SFTP_USERNAME,
 };
 
-console.log("============================>", {
-  host: process.env.P5_SFTP_HOST,
-  port: process.env.P5_SFTP_PORT,
-  privateKey: Buffer.from(private_value),
-  username: process.env.P5_SFTP_USERNAME,
-});
-
 const timestamps = generateDate();
 
 async function extractTables() {
   const mandataires = await Mandataire.query();
   const regions = await Region.query();
   const services = await Service.query();
-  const users = await User.query();
+  const users = await User.query().select(
+    "id",
+    "created_at",
+    "type",
+    "last_login",
+    "active",
+    "reset_password_expires",
+    "nom",
+    "prenom",
+    "cabinet",
+    "email",
+    "genre"
+  );
   const departements = await Departement.query();
   const mandataire_individuel_departements =
     await MandatairesIndividuelDepartement.query();
@@ -76,22 +81,16 @@ async function extractTables() {
 router.post("/execute", async (req, res) => {
   logger.info(`[p5-export] export init`);
 
-  console.log("============================>", {
-    host: process.env.P5_SFTP_HOST,
-    port: process.env.P5_SFTP_PORT,
-    privateKey: Buffer.from(private_value),
-    username: process.env.P5_SFTP_USERNAME,
-  });
-
   const data = await extractTables();
 
   sftp
     .connect(SftpOptions)
     .then(() => {
       const promises = Object.keys(data).map(async (tableName) => {
+        // /var/lib/mandoline/files_emjpm/
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `/var/lib/mandoline/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `/var/lib/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
