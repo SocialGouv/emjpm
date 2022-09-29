@@ -152,7 +152,7 @@ spec:
                   name: {{ .Values.secretName }}
                   key: AUTH_PUBLIC_KEY
             - name: P5_SFTP_HOST
-              value: 'http://hasura/v1/graphql'
+              value: '185.194.83.50'
             - name: P5_SFTP_PORT
               value: '2222'
             - name: P5_SFTP_USERNAME
