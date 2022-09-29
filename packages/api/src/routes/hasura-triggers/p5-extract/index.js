@@ -86,11 +86,12 @@ router.post("/execute", async (req, res) => {
   sftp
     .connect(SftpOptions)
     .then(() => {
+      logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
+
       const promises = Object.keys(data).map(async (tableName) => {
-        // /var/lib/mandoline/files_emjpm/
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `/var/lib/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `/var/lib/mandoline/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
