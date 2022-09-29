@@ -157,3 +157,8 @@ spec:
               value: '2222'
             - name: P5_SFTP_USERNAME
               value: 'man_sftp'
+            - name: P5_SFTP_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretName }}
+                  key: P5_SFTP_PRIVATE_KEY
