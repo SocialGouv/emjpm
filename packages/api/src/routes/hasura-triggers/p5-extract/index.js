@@ -12,6 +12,7 @@ const {
   Service,
   User,
   Departement,
+  RoutineLog,
 } = require("~/models");
 const SftpClient = require("~/utils/sftp");
 
@@ -80,6 +81,7 @@ async function extractTables() {
 
 router.post("/execute", async (req, res) => {
   logger.info(`[p5-export] export init`);
+  const dateOfExecution = new Date();
 
   const data = await extractTables();
 
@@ -105,17 +107,33 @@ router.post("/execute", async (req, res) => {
       });
 
       logger.info(`[p5-export] uploading finished`);
-
-      return res.json({
-        state: "start",
-      });
+      RoutineLog.query()
+        .insert({
+          end_date: new Date(),
+          result: "success",
+          start_date: dateOfExecution,
+          type: "p5_export",
+        })
+        .then(() => {
+          return res.json({
+            state: "start",
+          });
+        });
     })
     .catch((e) => {
       console.log("[p5-export] Eror occured  while uploading file", e.message);
-
-      return res.json({
-        error: e,
-      });
+      RoutineLog.query()
+        .insert({
+          end_date: new Date(),
+          result: "error",
+          start_date: dateOfExecution,
+          type: "p5_export",
+        })
+        .then(() => {
+          return res.json({
+            error: e,
+          });
+        });
     })
     .finally(() => {
       sftp.disconnect();
