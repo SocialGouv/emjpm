@@ -52,6 +52,8 @@ const SftpOptions = {
 
 const timestamps = generateDate();
 
+const BASE_PATH = "/var/lib/mandoline";
+
 async function extractTables() {
   const mandataires = await Mandataire.query();
   const regions = await Region.query();
@@ -104,7 +106,7 @@ router.post("/execute", async (req, res) => {
       const promises = Object.keys(data).map(async (tableName) => {
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `/var/lib/mandoline/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `${BASE_PATH}/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
