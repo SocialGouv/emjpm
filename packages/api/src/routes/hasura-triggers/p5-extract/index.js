@@ -18,6 +18,9 @@ const SftpClient = require("~/utils/sftp");
 
 const sftp = new SftpClient();
 
+const env = process.env.NODE_ENV || "development";
+const isDev = env === "development";
+
 function generateDate() {
   const d = new Date();
   let month = "" + (d.getMonth() + 1);
@@ -93,7 +96,9 @@ router.post("/execute", async (req, res) => {
       const promises = Object.keys(data).map(async (tableName) => {
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `/var/lib/mandoline/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `/var/lib/mandoline/${
+            isDev ? "dev" : "prod"
+          }/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
@@ -116,7 +121,7 @@ router.post("/execute", async (req, res) => {
         })
         .then(() => {
           return res.json({
-            state: "start",
+            state: "done",
           });
         });
     })
