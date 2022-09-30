@@ -18,7 +18,8 @@ const SftpClient = require("~/utils/sftp");
 
 const sftp = new SftpClient();
 
-const env = process.env.NODE_ENV || "development";
+// const env = process.env.NODE_ENV || "development";
+const env = "development";
 const isDev = env === "development";
 
 function generateDate() {
