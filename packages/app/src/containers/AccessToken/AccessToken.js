@@ -49,15 +49,15 @@ function AccessToken(props) {
                 <Flex sx={innerTextStyle} alignItem="center" key={token.id}>
                   <Box p={1}>
                     <Text>{"Editeur"}</Text>
-                    <Text>{token.editors.name}</Text>
+                    <Text>{token?.editors?.name}</Text>
                   </Box>
                   <Box p={1}>
                     <Text>{"Token"}</Text>
-                    <Text>{token.access_token}</Text>
+                    <Text>{token?.access_token}</Text>
                   </Box>
                   <Box p={1}>
                     <Text>{"Refresh token"}</Text>
-                    <Text>{token.refresh_token}</Text>
+                    <Text>{token?.refresh_token}</Text>
                   </Box>
                   <Box p={1}>
                     <AccessTokenDelete id={token.id} />

@@ -2,6 +2,15 @@ table:
   name: view_lb
   schema: public
 object_relationships:
+- name: dpfi
+  using:
+    manual_configuration:
+      column_mapping:
+        dpfi_id: id
+      insertion_order: null
+      remote_table:
+        name: dpfi
+        schema: public
 - name: liste_blanche
   using:
     manual_configuration:
@@ -19,6 +28,15 @@ object_relationships:
       insertion_order: null
       remote_table:
         name: mandataires
+        schema: public
+- name: sdpf
+  using:
+    manual_configuration:
+      column_mapping:
+        sdpf_id: id
+      insertion_order: null
+      remote_table:
+        name: sdpf
         schema: public
 - name: service
   using:

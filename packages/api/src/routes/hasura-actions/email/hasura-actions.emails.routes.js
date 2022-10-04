@@ -8,8 +8,12 @@ const { validationEmail } = require("~/email/validation-email");
 const {
   serviceMemberInvitationMail,
 } = require("~/email/service-member-invitation-mail");
+const {
+  sdpfMemberInvitationMail,
+} = require("~/email/sdpf-member-invitation-mail");
 const { adminInvitationMail } = require("~/email/admin-invitation-mail");
 const { Service } = require("~/models");
+const { Sdpf } = require("~/models");
 const { ServiceMemberInvitation } = require("~/models");
 const { AdminInvitation } = require("~/models");
 const { Tis } = require("~/models");
@@ -58,12 +62,19 @@ router.post("/email-service-member-invitation", async function (req, res) {
       token: uid(32),
     });
 
-  const service = await Service.query().findById(
-    serviceMemberInvitation.service_id
-  );
+  if (serviceMemberInvitation.invitation_role === "service") {
+    const service = await Service.query().findById(
+      serviceMemberInvitation.service_id
+    );
 
-  serviceMemberInvitationMail(serviceMemberInvitation, service);
+    serviceMemberInvitationMail(serviceMemberInvitation, service);
+  } else if (serviceMemberInvitation.invitation_role === "dpfs") {
+    const service = await Sdpf.query().findById(
+      serviceMemberInvitation.service_id
+    );
 
+    sdpfMemberInvitationMail(serviceMemberInvitation, service);
+  }
   res.json({ success: true });
 });
 

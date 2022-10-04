@@ -1,0 +1,165 @@
+table:
+  name: dpfi
+  schema: public
+object_relationships:
+- name: departement
+  using:
+    foreign_key_constraint_on: departement_code
+- name: liste_blanche
+  using:
+    foreign_key_constraint_on: liste_blanche_id
+- name: user
+  using:
+    foreign_key_constraint_on: user_id
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - suspend_activity
+    - code_postal
+    - departement_code
+    - location_adresse
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    - editor_id
+    - id
+    - liste_blanche_id
+    - user_id
+    - latitude
+    - longitude
+    - adresse
+    - adresse_complement
+    - suspend_activity_reason
+    - created_at
+    - email_send
+  role: direction
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - adresse
+    - adresse_complement
+    - code_postal
+    - created_at
+    - departement_code
+    - email_send
+    - id
+    - latitude
+    - liste_blanche_id
+    - location_adresse
+    - longitude
+    - siret
+    - suspend_activity_reason
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+  role: dpfi
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - suspend_activity
+    - code_postal
+    - departement_code
+    - location_adresse
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    - editor_id
+    - id
+    - liste_blanche_id
+    - user_id
+    - latitude
+    - longitude
+    - adresse
+    - adresse_complement
+    - suspend_activity_reason
+    - created_at
+    - email_send
+    filter: {}
+  role: direction
+- permission:
+    columns:
+    - suspend_activity
+    - code_postal
+    - departement_code
+    - location_adresse
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    - editor_id
+    - id
+    - liste_blanche_id
+    - user_id
+    - latitude
+    - longitude
+    - adresse
+    - adresse_complement
+    - suspend_activity_reason
+    - created_at
+    - email_send
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: dpfi
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - suspend_activity
+    - code_postal
+    - departement_code
+    - location_adresse
+    - siret
+    - telephone
+    - telephone_portable
+    - ville
+    - editor_id
+    - id
+    - liste_blanche_id
+    - user_id
+    - latitude
+    - longitude
+    - adresse
+    - adresse_complement
+    - suspend_activity_reason
+    - created_at
+    - email_send
+    filter: {}
+  role: direction
+- permission:
+    check: null
+    columns:
+    - adresse
+    - adresse_complement
+    - code_postal
+    - created_at
+    - departement_code
+    - editor_id
+    - email_send
+    - id
+    - latitude
+    - liste_blanche_id
+    - location_adresse
+    - longitude
+    - siret
+    - suspend_activity
+    - suspend_activity_reason
+    - telephone
+    - telephone_portable
+    - user_id
+    - ville
+    filter:
+      user_id:
+        _eq: X-Hasura-User-Id
+  role: dpfi
+delete_permissions:
+- permission:
+    filter: {}
+  role: direction

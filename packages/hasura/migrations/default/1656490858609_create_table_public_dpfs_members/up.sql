@@ -1,0 +1,1 @@
+CREATE TABLE "public"."dpfs_members" ("id" serial NOT NULL, "user_id" integer, "sdpf_id" integer, "is_admin" boolean DEFAULT false, PRIMARY KEY ("id") , FOREIGN KEY ("user_id") REFERENCES "public"."users"("id") ON UPDATE cascade ON DELETE cascade, FOREIGN KEY ("sdpf_id") REFERENCES "public"."sdpf"("id") ON UPDATE no action ON DELETE no action);

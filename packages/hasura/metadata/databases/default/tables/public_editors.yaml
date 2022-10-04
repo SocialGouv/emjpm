@@ -13,6 +13,12 @@ select_permissions:
     - id
     - name
     filter: {}
+  role: dpfi
+- permission:
+    columns:
+    - id
+    - name
+    filter: {}
   role: greffier
 - permission:
     columns:
@@ -26,6 +32,12 @@ select_permissions:
     - name
     filter: {}
   role: prepose
+- permission:
+    columns:
+    - id
+    - name
+    filter: {}
+  role: sdpf
 - permission:
     columns:
     - id
