@@ -19,8 +19,8 @@ const SftpClient = require("~/utils/sftp");
 const sftp = new SftpClient();
 
 // const env = process.env.NODE_ENV || "development";
-// const env = "development";
-// const isDev = env === "development";
+const env = "development";
+const isDev = env === "development";
 
 function generateDate() {
   const d = new Date();
@@ -96,17 +96,12 @@ router.post("/execute", async (req, res) => {
     .then(() => {
       logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
 
-      // `/var/lib/mandoline/${
-      //   isDev ? "dev" : "prod"
-      // }/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
-      //   0,
-      //   8
-      // )}.json`
-
       const promises = Object.keys(data).map(async (tableName) => {
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `${BASE_PATH}/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `${BASE_PATH}/${
+            isDev ? "dev" : "prod"
+          }/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
