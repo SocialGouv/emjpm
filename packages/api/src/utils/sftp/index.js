@@ -27,6 +27,10 @@ class SFTPClient {
       console.error("Uploading failed:", err);
     }
   }
+
+  async cwd() {
+    return this.client.cwd();
+  }
 }
 
 module.exports = SFTPClient;
