@@ -18,9 +18,7 @@ const SftpClient = require("~/utils/sftp");
 
 const sftp = new SftpClient();
 
-// const env = process.env.NODE_ENV || "development";
-// const env = "development";
-// const isDev = env === "development";
+const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
 
 function generateDate() {
   const d = new Date();
@@ -62,9 +60,7 @@ async function extractTables() {
     "id",
     "created_at",
     "type",
-    "last_login",
     "active",
-    "reset_password_expires",
     "nom",
     "prenom",
     "cabinet",
@@ -96,10 +92,6 @@ router.post("/execute", async (req, res) => {
     .then(() => {
       logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
 
-      sftp.cwd().then((result) => {
-        console.log("[ps-extract] cwd ========>", result);
-      });
-
       const promises = Object.keys(data).map(async (tableName) => {
         // return sftp.uploadFile(
         //   JSON.stringify(data[tableName]),
@@ -113,7 +105,10 @@ router.post("/execute", async (req, res) => {
 
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(0, 8)}.json`
+          `./files_emjpm/${P5_FOLDER_ENV}/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+            0,
+            8
+          )}.json`
         );
       });
       return Promise.all(promises);
