@@ -105,7 +105,7 @@ router.post("/execute", async (req, res) => {
 
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `./files_emjpm/${P5_FOLDER_ENV}/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `./${P5_FOLDER_ENV}/files_emjpmP1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
