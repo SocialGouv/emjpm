@@ -11,7 +11,7 @@ import {
   FormGroupSelect,
   FormInputBox,
 } from "~/components/AppForm";
-import { adminServiceSchema } from "~/validation-schemas/adminServiceSchema";
+import { adminSdpfSchema as adminServiceSchema } from "~/validation-schemas/adminSdpfSchema";
 import {
   Button,
   Heading,
@@ -69,6 +69,17 @@ export function ListeBlancheSdpfForm(props) {
     []
   );
 
+  function generateSiret(lbService) {
+    if (!lbService) {
+      console.log("=======>", lbService);
+      return "";
+    }
+    if (lbService.siret && lbService.siret.startsWith("sdpf_")) {
+      return lbService.siret.split("sdpf_")[1];
+    }
+    return "";
+  }
+
   const formik = useFormik({
     initialValues: {
       departement: service?.departement || null,
@@ -85,7 +96,9 @@ export function ListeBlancheSdpfForm(props) {
       org_gestionnaire: lbService ? !!lbService.org_gestionnaire : false,
       org_nom: lbService ? lbService.org_nom : "",
       org_ville: lbService ? lbService.org_ville : "",
-      siret: lbService ? lbService.siret || "" : "",
+
+      siret: generateSiret(lbService),
+
       telephone: lbService ? lbService.telephone : "",
       initialSiret: lbService ? lbService.siret || "" : "",
     },

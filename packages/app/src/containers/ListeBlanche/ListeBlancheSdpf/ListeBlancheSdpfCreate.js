@@ -21,7 +21,8 @@ export function ListeBlancheSdpfCreate(props) {
   useQueryReady(loading, error);
 
   const handleSubmit = async (values, { setErrors, setSubmitting }) => {
-    const siretExists = await sdpfSiretExists(client, values.siret);
+    const sdpf_siret = `sdpf_${values.siret}`;
+    const siretExists = await sdpfSiretExists(client, sdpf_siret);
 
     if (siretExists) {
       setErrors({ siret: "Le siret est déjà utilisé" });
@@ -43,7 +44,7 @@ export function ListeBlancheSdpfCreate(props) {
           org_gestionnaire: !!values.org_gestionnaire,
           org_nom: values.org_nom,
           org_ville: values.org_ville,
-          siret: values.siret,
+          siret: `sdpf_${values.siret}`,
           telephone: values.telephone,
           genre: values.genre,
           nom: values.nom,

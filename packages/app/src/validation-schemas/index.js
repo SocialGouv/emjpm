@@ -32,6 +32,7 @@ import { signupServiceSchema } from "./signupServiceSchema";
 import { signupDpfiSchema } from "./signupDpfiSchema";
 import { dpfiEditSchema } from "./dpfiEditSchema";
 import { adminUserSdpfSchema } from "./AdminUserSdpfSchema";
+import { adminSdpfSchema } from "./adminSdpfSchema";
 
 export {
   adminEditorSchema,
@@ -68,4 +69,5 @@ export {
   signupDpfiSchema,
   dpfiEditSchema,
   adminUserSdpfSchema,
+  adminSdpfSchema,
 };
