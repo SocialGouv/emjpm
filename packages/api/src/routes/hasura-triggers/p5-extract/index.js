@@ -93,19 +93,9 @@ router.post("/execute", async (req, res) => {
       logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
 
       const promises = Object.keys(data).map(async (tableName) => {
-        // return sftp.uploadFile(
-        //   JSON.stringify(data[tableName]),
-        //   `${BASE_PATH}/${
-        //     isDev ? "dev" : "prod"
-        //   }/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
-        //     0,
-        //     8
-        //   )}.json`
-        // );
-
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `./${P5_FOLDER_ENV}/files_emjpmP1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
+          `./${P5_FOLDER_ENV}/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
             0,
             8
           )}.json`
