@@ -55,7 +55,16 @@ const timestamps = generateDate();
 async function extractTables() {
   const mandataires = await Mandataire.query();
   const regions = await Region.query();
-  const services = await Service.query();
+  // const services = await Service.query().withGraphFetched("[departments]");
+  const services = await Service.query()
+    .join(
+      "service_departements",
+      "services.id",
+      "=",
+      "service_departements.service_id"
+    )
+    .select("services.*", "service_departements.departement_code");
+
   const users = await User.query().select(
     "id",
     "created_at",
