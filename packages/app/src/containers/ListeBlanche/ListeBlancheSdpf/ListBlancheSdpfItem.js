@@ -41,7 +41,7 @@ export function ListeBlancheSdpfItem(props) {
     >
       <Flex justifyContent="flex-start">
         <Flex width="25%" flexDirection="column">
-          <Text sx={labelStyle}>{"Nom du service"}</Text>
+          <Text sx={labelStyle}>{"Nom du service DPF"}</Text>
           <Flex>
             <Text sx={descriptionStyle}>
               {service?.etablissement
@@ -64,7 +64,11 @@ export function ListeBlancheSdpfItem(props) {
           {service?.siret && (
             <>
               <Text sx={labelStyle}>SIRET</Text>
-              <Text sx={descriptionStyle}>{service.siret}</Text>
+              <Text sx={descriptionStyle}>
+                {service.siret.startsWith("sdpf_")
+                  ? service.siret.split("sdpf_")
+                  : service.siret}
+              </Text>
             </>
           )}
         </Flex>

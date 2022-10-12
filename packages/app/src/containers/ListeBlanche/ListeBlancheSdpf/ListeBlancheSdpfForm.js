@@ -71,13 +71,12 @@ export function ListeBlancheSdpfForm(props) {
 
   function generateSiret(lbService) {
     if (!lbService) {
-      console.log("=======>", lbService);
       return "";
     }
     if (lbService.siret && lbService.siret.startsWith("sdpf_")) {
       return lbService.siret.split("sdpf_")[1];
     }
-    return "";
+    return lbService.siret;
   }
 
   const formik = useFormik({
@@ -223,6 +222,7 @@ export function ListeBlancheSdpfForm(props) {
   const user = useUser();
   const isAdmin = user.type === "admin";
 
+  console.log(service);
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <SrOnly id="instructions">
@@ -517,7 +517,11 @@ export function ListeBlancheSdpfForm(props) {
             <Input
               label="SIRET"
               placeholder=""
-              value={service.siret}
+              value={
+                service.siret.startsWith("sdpf_")
+                  ? service.siret.split("sdpf_")[1]
+                  : service.siret
+              }
               forceActive
               readOnly
               containerStyle={readOnlyContainerStyle}

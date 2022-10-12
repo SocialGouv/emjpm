@@ -49,7 +49,13 @@ function SdpfInformations() {
           <Heading size={5}>Service tutelaire</Heading>
           <Flex my={1}>
             <Text sx={subtitle}>{"Siret"}</Text>
-            <Text sx={content}>{siret || ""}</Text>
+            <Text sx={content}>
+              {service?.siret
+                ? service.siret.startsWith("sdpf_")
+                  ? service.siret.split("sdpf_")[1]
+                  : service.startsWith
+                : ""}
+            </Text>
           </Flex>
           <Flex my={1}>
             <Text sx={subtitle}>{"Adresse"}</Text>
