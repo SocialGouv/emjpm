@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.1](https://github.com/SocialGouv/emjpm/compare/v25.156.0...v25.156.1) (2022-10-13)
+
+
+### Bug Fixes
+
+* **sdpf-siret:** add sdpf prefix to spdf siret ([#2877](https://github.com/SocialGouv/emjpm/issues/2877)) ([8bbf65e](https://github.com/SocialGouv/emjpm/commit/8bbf65ea0b773a339b7343e36392e58f2a1a612a))
+
+
+
+
+
 # [25.156.0](https://github.com/SocialGouv/emjpm/compare/v25.155.6...v25.156.0) (2022-10-04)
 
 
