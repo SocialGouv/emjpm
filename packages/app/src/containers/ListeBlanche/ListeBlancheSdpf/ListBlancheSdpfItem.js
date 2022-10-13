@@ -53,11 +53,11 @@ export function ListeBlancheSdpfItem(props) {
 
         <Flex width="30%" flexDirection="column">
           <Text sx={labelStyle}>Départements</Text>
-          {service?.departement && (
-            <Text sx={descriptionStyle}>{service.departement}</Text>
-          )}
 
-          <Text sx={descriptionStyle}>{sdpfDep.nom}</Text>
+          {service?.departement && (
+            <Text sx={descriptionStyle}>{sdpfDep.nom}</Text>
+            // <Text sx={descriptionStyle}>{service.departement}</Text>
+          )}
         </Flex>
 
         <Flex width="45%" flexDirection="column">
