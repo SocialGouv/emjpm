@@ -6,7 +6,7 @@ import useUser from "~/hooks/useUser";
 import { Link } from "~/components/Link";
 import { Button } from "~/components";
 
-import { LISTE_BLANCHE_ASSOCIATION } from "./mutations";
+import { LISTE_BLANCHE_ASSOCIATION_MANDATAIRE as LISTE_BLANCHE_ASSOCIATION } from "./mutations";
 
 export function AdminMandataireListeBlanche(props) {
   const { liste_blanche, mandataire } = props;
