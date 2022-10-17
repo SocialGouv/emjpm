@@ -55,11 +55,11 @@
     value_from_env: HASURA_WEB_HOOK_SECRET
 - name: p5-extract
   webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/p5-extract/execute'
-  schedule: 0 0 * * *
+  schedule: 0 1 * * *
   include_in_metadata: true
   payload:
     session_variables:
       x-hasura-role: admin
   headers:
-  - value: HASURA_WEB_HOOK_SECRET
-    name: HASURA_WEB_HOOK_SECRET
+  - name: HASURA_WEB_HOOK_SECRET
+    value_from_env: HASURA_WEB_HOOK_SECRET
