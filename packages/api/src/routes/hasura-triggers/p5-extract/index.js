@@ -57,14 +57,16 @@ async function extractTables() {
   const regions = await Region.query();
   // const services = await Service.query().withGraphFetched("[departments]");
   const services = await Service.query()
-    .join(
+    .leftJoin(
       "service_departements",
       "services.id",
       "=",
       "service_departements.service_id"
     )
-    .select("services.*", "service_departements.departement_code");
+    .select("services.*", "service_departements.departement_code")
+    .orderByRaw("services.id");
 
+  console.log("services===> ", services);
   const users = await User.query().select(
     "id",
     "created_at",
