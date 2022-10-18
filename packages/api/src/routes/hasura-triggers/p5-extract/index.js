@@ -66,7 +66,6 @@ async function extractTables() {
     .select("services.*", "service_departements.departement_code")
     .orderByRaw("services.id");
 
-  console.log("services===> ", services);
   const users = await User.query().select(
     "id",
     "created_at",
