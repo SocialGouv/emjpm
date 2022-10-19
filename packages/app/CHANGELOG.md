@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.2](https://github.com/SocialGouv/emjpm/compare/v25.156.1...v25.156.2) (2022-10-19)
+
+
+### Bug Fixes
+
+* **app:** fix undefined ti on magistrat ([#2879](https://github.com/SocialGouv/emjpm/issues/2879)) ([f2ced18](https://github.com/SocialGouv/emjpm/commit/f2ced187f87f09c83c6684aa3139928c03744e04))
+
+
+
+
+
 ## [25.156.1](https://github.com/SocialGouv/emjpm/compare/v25.156.0...v25.156.1) (2022-10-13)
 
 

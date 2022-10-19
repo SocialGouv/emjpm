@@ -1,6 +1,6 @@
 {
   "name": "@emjpm/biz",
-  "version": "25.156.1",
+  "version": "25.156.2",
   "private": true,
   "description": "",
   "source": "src/index.js",
