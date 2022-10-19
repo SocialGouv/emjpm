@@ -29,7 +29,7 @@ function MagistratEditInformationsForm(props) {
       email: user.email || "",
       nom: user.nom || "",
       prenom: user.prenom || "",
-      ti: magistrat.ti_id || "",
+      ti: magistrat?.ti_id || "",
       share_email: magistrat.share_email || false,
       genre: user.genre || "",
     },
