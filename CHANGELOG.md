@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.3](https://github.com/SocialGouv/emjpm/compare/v25.156.2...v25.156.3) (2022-10-20)
+
+
+### Bug Fixes
+
+* **app:** display message to sdpf profil ([#2880](https://github.com/SocialGouv/emjpm/issues/2880)) ([ad9582c](https://github.com/SocialGouv/emjpm/commit/ad9582ccb687fa1b9eda125d8eb8d05093292c4f))
+
+
+
+
+
 ## [25.156.2](https://github.com/SocialGouv/emjpm/compare/v25.156.1...v25.156.2) (2022-10-19)
 
 
