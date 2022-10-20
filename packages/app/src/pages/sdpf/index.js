@@ -1,4 +1,4 @@
-import { Flex, Box, Text, Link, Card } from "rebass";
+import { Flex, Text, Link, Card } from "rebass";
 
 import { LayoutSdpf } from "~/containers/Layout";
 
