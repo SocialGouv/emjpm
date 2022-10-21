@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.4](https://github.com/SocialGouv/emjpm/compare/v25.156.3...v25.156.4) (2022-10-21)
+
+
+### Bug Fixes
+
+* **app:** delete unused imports ([#2882](https://github.com/SocialGouv/emjpm/issues/2882)) ([a028219](https://github.com/SocialGouv/emjpm/commit/a0282198c6dc051cf06b902a2fcc7c5654ffabae))
+
+
+
+
+
 ## [25.156.3](https://github.com/SocialGouv/emjpm/compare/v25.156.2...v25.156.3) (2022-10-20)
 
 
