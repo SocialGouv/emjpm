@@ -12,6 +12,8 @@ import {
   MAGISTRAT_USERS,
   GREFFIER_USERS,
   MANDATAIRE_USERS,
+  DPFI_USERS,
+  SDPF_USERS,
 } from "./queries";
 
 export const Context = createContext({});
@@ -24,6 +26,8 @@ const QUERY_TYPE = {
   service: GET_SERVICE_USERS,
   ti: MAGISTRAT_USERS,
   greffier: GREFFIER_USERS,
+  dpfi: DPFI_USERS,
+  sdpf: SDPF_USERS,
 };
 
 function UserDataQueryProvider(props) {
@@ -34,9 +38,13 @@ function UserDataQueryProvider(props) {
     const variables = {
       userId: parseInt(userId),
     };
+
+    // isDpfi({ type }) ||
+    // isSdpf({ type })
     if (isMandataire({ type }) || isService({ type })) {
       variables.endDate = endDate;
     }
+
     return variables;
   }, [userId, type]);
 
@@ -49,6 +57,7 @@ function UserDataQueryProvider(props) {
   }
 
   const userData = data.users_by_pk;
+
   let currentService;
   if (isService(userData)) {
     const {

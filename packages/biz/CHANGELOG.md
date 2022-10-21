@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.4](https://github.com/SocialGouv/emjpm/compare/v25.156.3...v25.156.4) (2022-10-21)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+## [25.156.3](https://github.com/SocialGouv/emjpm/compare/v25.156.2...v25.156.3) (2022-10-20)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+## [25.156.2](https://github.com/SocialGouv/emjpm/compare/v25.156.1...v25.156.2) (2022-10-19)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+## [25.156.1](https://github.com/SocialGouv/emjpm/compare/v25.156.0...v25.156.1) (2022-10-13)
+
+**Note:** Version bump only for package @emjpm/biz
+
+
+
+
+
+# [25.156.0](https://github.com/SocialGouv/emjpm/compare/v25.155.6...v25.156.0) (2022-10-04)
+
+
+### Features
+
+* **profil-dpf:** add dpf and sdpf role, change service_invitations t… ([#2856](https://github.com/SocialGouv/emjpm/issues/2856)) ([853d297](https://github.com/SocialGouv/emjpm/commit/853d297670734e61a98ba51d47ae37444e9081db)), closes [#2863](https://github.com/SocialGouv/emjpm/issues/2863)
+
+
+
+
+
 ## [25.155.6](https://github.com/SocialGouv/emjpm/compare/v25.155.5...v25.155.6) (2022-08-16)
 
 **Note:** Version bump only for package @emjpm/biz

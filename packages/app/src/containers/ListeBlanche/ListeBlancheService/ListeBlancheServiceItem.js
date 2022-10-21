@@ -29,7 +29,7 @@ export function ListeBlancheServiceItem(props) {
     >
       <Flex justifyContent="flex-start">
         <Flex width="25%" flexDirection="column">
-          <Text sx={labelStyle}>{"Nom du service"}</Text>
+          <Text sx={labelStyle}>{"Nom du service mandataire"}</Text>
           <Flex>
             <Text sx={descriptionStyle}>
               {service.etablissement ? service.etablissement.toUpperCase() : ""}

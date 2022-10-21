@@ -6,6 +6,7 @@ import {
   isService,
   isGreffier,
   isAdmin,
+  isDpfi,
 } from "@emjpm/biz";
 
 import { Box } from "rebass";
@@ -16,14 +17,17 @@ import { AdminUserActivation } from "~/containers/AdminUserActivation";
 import { AdminUserResetPassword } from "~/containers/AdminUserResetPassword";
 import { AdminDirectionType } from "~/containers/AdminUserDirection";
 import { AdminUserService } from "~/containers/AdminUserService";
+import { AdminUserSdpf } from "~/containers/AdminUserSdpf";
 import { DirectionEditInformations } from "~/containers/DirectionEditInformations";
 import { MagistratEditInformations } from "~/containers/MagistratEditInformations";
 import { GreffierEditInformations } from "~/containers/GreffierEditInformations";
 import { MandataireEditInformations } from "~/containers/MandataireEditInformations";
 import { AdminEditInformations } from "~/containers/AdminEditInformations";
+import { DpfiEditInformations } from "~/containers/DpfiEditInformations";
 
 import { USER } from "./queries";
 import useUser from "~/hooks/useUser";
+import { isSdpf } from "@emjpm/biz/src/services/users";
 
 function AdminUser({ userId }) {
   const { data, loading, error } = useQuery(USER, {
@@ -59,6 +63,17 @@ function AdminUser({ userId }) {
           </Box>
         </>
       )}
+
+      {isDpfi({ type }) && (
+        <Box my={1} width="100%">
+          <DpfiEditInformations
+            userId={userId}
+            cancelLink="/admin/users"
+            isAdmin
+            mt="3"
+          />
+        </Box>
+      )}
       {isMagistrat({ type }) && (
         <Box my={1} width="100%">
           <MagistratEditInformations
@@ -93,6 +108,12 @@ function AdminUser({ userId }) {
       {isService({ type }) && (
         <Box my={1} width="100%">
           <AdminUserService userId={userId} cancelLink="/admin/users" />
+        </Box>
+      )}
+
+      {isSdpf({ type }) && (
+        <Box my={1} width="100%">
+          <AdminUserSdpf userId={userId} cancelLink="/admin/users" />
         </Box>
       )}
       {isAdmin({ type }) && (

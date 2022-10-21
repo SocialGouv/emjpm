@@ -2,6 +2,7 @@ import { useApolloClient, useMutation } from "@apollo/client";
 
 import { Box } from "rebass";
 
+import useUser from "~/hooks/useUser";
 import { Heading } from "~/components";
 
 import {
@@ -14,6 +15,8 @@ import useQueryReady from "~/hooks/useQueryReady";
 
 function ServiceMemberInvitationCreate(props) {
   const { service, isAdmin } = props;
+
+  const user = useUser();
 
   const client = useApolloClient();
 
@@ -43,6 +46,7 @@ function ServiceMemberInvitationCreate(props) {
       variables: {
         email: values.email,
         service_id: service.id,
+        type: user.type === "sdpf" ? "dpfs" : "service",
       },
     });
 

@@ -3,6 +3,61 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.4](https://github.com/SocialGouv/emjpm/compare/v25.156.3...v25.156.4) (2022-10-21)
+
+
+### Bug Fixes
+
+* **app:** delete unused imports ([#2882](https://github.com/SocialGouv/emjpm/issues/2882)) ([a028219](https://github.com/SocialGouv/emjpm/commit/a0282198c6dc051cf06b902a2fcc7c5654ffabae))
+
+
+
+
+
+## [25.156.3](https://github.com/SocialGouv/emjpm/compare/v25.156.2...v25.156.3) (2022-10-20)
+
+
+### Bug Fixes
+
+* **app:** display message to sdpf profil ([#2880](https://github.com/SocialGouv/emjpm/issues/2880)) ([ad9582c](https://github.com/SocialGouv/emjpm/commit/ad9582ccb687fa1b9eda125d8eb8d05093292c4f))
+
+
+
+
+
+## [25.156.2](https://github.com/SocialGouv/emjpm/compare/v25.156.1...v25.156.2) (2022-10-19)
+
+
+### Bug Fixes
+
+* **app:** fix undefined ti on magistrat ([#2879](https://github.com/SocialGouv/emjpm/issues/2879)) ([f2ced18](https://github.com/SocialGouv/emjpm/commit/f2ced187f87f09c83c6684aa3139928c03744e04))
+
+
+
+
+
+## [25.156.1](https://github.com/SocialGouv/emjpm/compare/v25.156.0...v25.156.1) (2022-10-13)
+
+
+### Bug Fixes
+
+* **sdpf-siret:** add sdpf prefix to spdf siret ([#2877](https://github.com/SocialGouv/emjpm/issues/2877)) ([8bbf65e](https://github.com/SocialGouv/emjpm/commit/8bbf65ea0b773a339b7343e36392e58f2a1a612a))
+
+
+
+
+
+# [25.156.0](https://github.com/SocialGouv/emjpm/compare/v25.155.6...v25.156.0) (2022-10-04)
+
+
+### Features
+
+* **profil-dpf:** add dpf and sdpf role, change service_invitations t… ([#2856](https://github.com/SocialGouv/emjpm/issues/2856)) ([853d297](https://github.com/SocialGouv/emjpm/commit/853d297670734e61a98ba51d47ae37444e9081db)), closes [#2863](https://github.com/SocialGouv/emjpm/issues/2863)
+
+
+
+
+
 ## [25.155.6](https://github.com/SocialGouv/emjpm/compare/v25.155.5...v25.155.6) (2022-08-16)
 
 **Note:** Version bump only for package @emjpm/app
