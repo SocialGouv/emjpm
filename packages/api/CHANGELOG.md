@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.5](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.5) (2022-10-31)
+
+
+### Bug Fixes
+
+* **import_ocmi:** increase the timeout to 1800 ([5318c8e](https://github.com/SocialGouv/emjpm/commit/5318c8e90725b9d76e10b14806a19c544eb1a6bf))
+* **import_ocmi:** increase the timeout to 900 ([d327cb8](https://github.com/SocialGouv/emjpm/commit/d327cb8ff6ee9c68ae64a6c21d2d9e90a8b4fca9))
+
+
+
+
+
 ## [25.156.4](https://github.com/SocialGouv/emjpm/compare/v25.156.3...v25.156.4) (2022-10-21)
 
 **Note:** Version bump only for package @emjpm/api
