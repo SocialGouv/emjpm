@@ -112,6 +112,7 @@ function GreffierEditInformationsForm(props) {
         </FormGrayBox>
         <FormInputBox role="group" aria-labelledby="tribunal_heading">
           <FormGroupSelect
+            required
             formik={formik}
             id="ti"
             placeholder="Tribunal d'instance"
