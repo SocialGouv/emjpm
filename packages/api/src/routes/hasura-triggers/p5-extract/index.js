@@ -1,4 +1,5 @@
 const express = require("express");
+const { format } = require("date-fns");
 const Buffer = require("buffer").Buffer;
 
 const logger = require("~/utils/logger");
@@ -20,23 +21,8 @@ const sftp = new SftpClient();
 
 const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
 
-function generateDate() {
-  const d = new Date();
-  let month = "" + (d.getMonth() + 1);
-  let day = "" + d.getDate();
-  const year = d.getFullYear();
-  let hours = d.getHours();
-  let minutes = d.getMinutes();
-  let seconds = d.getSeconds();
-
-  if (month.length < 2) month = "0" + month;
-  if (day.length < 2) day = "0" + day;
-  if (hours < 10) hours = "0" + hours;
-  if (minutes < 10) minutes = "0" + minutes;
-  if (seconds < 10) seconds = "0" + seconds;
-
-  return [year, month, day, hours, minutes, seconds].join("");
-}
+const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
+const currentDate = () => format(new Date(), "yyyyMMdd");
 
 const private_value =
   process.env?.P5_SFTP_PRIVATE_KEY?.replace(/\\n/g, "\n") || "";
@@ -47,8 +33,6 @@ const SftpOptions = {
   privateKey: Buffer.from(private_value),
   username: process.env.P5_SFTP_USERNAME,
 };
-
-const timestamps = generateDate();
 
 // const BASE_PATH = "/var/lib/mandoline";
 
@@ -105,10 +89,7 @@ router.post("/execute", async (req, res) => {
       const promises = Object.keys(data).map(async (tableName) => {
         return sftp.uploadFile(
           JSON.stringify(data[tableName]),
-          `./${P5_FOLDER_ENV}/files_emjpm/P1_${timestamps}_eMJPM_${tableName}_${timestamps.slice(
-            0,
-            8
-          )}.json`
+          `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${tableName}_${currentDate()}.json`
         );
       });
       return Promise.all(promises);

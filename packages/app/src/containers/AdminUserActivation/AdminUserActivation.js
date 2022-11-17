@@ -7,10 +7,12 @@ import { FormGrayBox, FormInputBox } from "~/components/AppForm";
 import { Button, Heading, Text } from "~/components";
 
 import { AdminMandataireListeBlanche } from "./AdminMandataireListeBlanche";
+import { AdminDpfiListeBlanche } from "./AdminDpfiListeBlanche";
 import { AdminServiceListeBlanche } from "./AdminServiceListeBlanche";
 import { ACTIVATE_USER, SEND_EMAIL_ACCOUNT_VALIDATION } from "./mutations";
 import { LISTE_BLANCHE, USER } from "./queries";
 import useQueryReady from "~/hooks/useQueryReady";
+import { isDpfi } from "@emjpm/biz/src/services/users";
 
 function AdminUserActivation(props) {
   const { userId } = props;
@@ -19,7 +21,8 @@ function AdminUserActivation(props) {
   const { data, loading, error } = useQuery(USER, {
     onCompleted: async (data) => {
       if (data) {
-        const { type, email, mandataire } = data.users_by_pk;
+        const { type, email, mandataire, dpfi } = data.users_by_pk;
+
         if (isMandataire({ type })) {
           if (isIndividuel({ type }) && mandataire.siret) {
             await execQuery({
@@ -38,6 +41,14 @@ function AdminUserActivation(props) {
               },
             });
           }
+        } else if (isDpfi({ type }) && dpfi?.siret) {
+          await execQuery({
+            variables: {
+              where: {
+                siret: { _eq: dpfi.siret },
+              },
+            },
+          });
         }
       }
     },
@@ -82,13 +93,16 @@ function AdminUserActivation(props) {
 
   const { users_by_pk } = data;
 
-  const { active, type, mandataire, service_members } = users_by_pk;
+  const { active, type, mandataire, dpfi, service_members } = users_by_pk;
 
   const activateButtonStyle = active ? "warning" : "primary";
   const activateButtonText = active ? "Bloquer" : "Activer";
   return (
     <>
-      {(type === "individuel" || type === "prepose" || type === "service") && (
+      {(type === "individuel" ||
+        type === "prepose" ||
+        type === "service" ||
+        type === "dpfi") && (
         <Flex>
           <FormGrayBox>
             <Heading size={4} mb={1}>
@@ -99,6 +113,12 @@ function AdminUserActivation(props) {
             {(type === "individuel" || type === "prepose") && (
               <AdminMandataireListeBlanche
                 mandataire={mandataire}
+                liste_blanche={liste_blanche}
+              />
+            )}
+            {type === "dpfi" && (
+              <AdminDpfiListeBlanche
+                mandataire={dpfi}
                 liste_blanche={liste_blanche}
               />
             )}

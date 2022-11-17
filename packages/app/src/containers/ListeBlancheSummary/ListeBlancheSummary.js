@@ -79,13 +79,24 @@ function ListeBlancheSummary() {
     service: {
       aggregate: { count: serviceCount },
     },
+    dpfi: {
+      aggregate: { count: dpfiCount },
+    },
+    sdpf: {
+      aggregate: { count: sdpfCount },
+    },
+    dpfi_finance_departement: {
+      aggregate: { count: dpfiFinanceDepartementCount },
+    },
   } = data;
 
   const resultCount =
     Number(individuelCount) +
     Number(preposeCount) +
     Number(individuelFinanceDepartementCount) +
-    Number(serviceCount);
+    Number(serviceCount) +
+    Number(dpfiCount) +
+    Number(sdpfCount);
 
   return (
     <>
@@ -115,7 +126,17 @@ function ListeBlancheSummary() {
             label="Mandataire préposé à un établissement"
             value={`${preposeCount}`}
           />
-          <LabelValue label="Services" value={`${serviceCount}`} />
+          <LabelValue label="Services mandataires" value={`${serviceCount}`} />
+          <LabelValue
+            label="DPF individuel"
+            value={
+              `${dpfiCount}` +
+              (!departement
+                ? ""
+                : " dont " + dpfiFinanceDepartementCount + " financés")
+            }
+          />
+          <LabelValue label="Services DPF" value={`${sdpfCount}`} />
         </Flex>
       </Card>
     </>

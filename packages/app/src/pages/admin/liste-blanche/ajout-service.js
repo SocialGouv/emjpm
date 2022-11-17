@@ -33,7 +33,7 @@ export default function ListBlancheAjoutService() {
             )}
           />
           <HeadingTitle mb={4}>
-            {"Ajout d'un service à la liste blanche"}
+            {"Ajout d'un service mandataire à la liste blanche"}
           </HeadingTitle>
           <ListeBlancheServiceCreate
             onSuccess={async () => {

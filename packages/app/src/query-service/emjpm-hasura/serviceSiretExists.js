@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 const SERVICE_BY_SIRET = gql`
-  query ServiceBySiret($siret: String!) {
-    services(where: { siret: { _eq: $siret } }) {
+  query SdpfBySiret($siret: String!) {
+    sdpf(where: { siret: { _eq: $siret } }) {
       siret
     }
   }
@@ -22,5 +22,5 @@ export default async function serviceSiretExists(client, siret) {
     },
   });
 
-  return data.services.length > 0;
+  return data.sdpf.length > 0;
 }
