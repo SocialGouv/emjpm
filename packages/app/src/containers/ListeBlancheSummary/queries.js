@@ -50,7 +50,7 @@ export const LB_SUMMARY = gql`
         count
       }
     }
-    sdpf: liste_blanche_aggregate(where: { type: { _eq: "sdpf" } }) {
+    sdpf: sdpf_aggregate(where: { departement: { _eq: $departementCode } }) {
       aggregate {
         count
       }
