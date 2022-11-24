@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.6](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.6) (2022-11-24)
+
+
+### Bug Fixes
+
+* **sdpf:** fix aggreagete count on lb sdpf ([#2886](https://github.com/SocialGouv/emjpm/issues/2886)) ([e874f2e](https://github.com/SocialGouv/emjpm/commit/e874f2e9f40fd49354da98c7f1e5cee4819d1b91))
+
+
+
+
+
 ## [25.156.5](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.5) (2022-11-24)
 
 

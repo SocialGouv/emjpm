@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.6](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.6) (2022-11-24)
+
+
+### Bug Fixes
+
+* **greffier:** fix display error for greffier without ti_id ([#2885](https://github.com/SocialGouv/emjpm/issues/2885)) ([612a67d](https://github.com/SocialGouv/emjpm/commit/612a67d610e05d73bdca407822a73100599fb898))
+* **import_ocmi:** increase the timeout to 1800 ([#2884](https://github.com/SocialGouv/emjpm/issues/2884)) ([47379ff](https://github.com/SocialGouv/emjpm/commit/47379ff632599c933f3121dd8bf7125367ee808b))
+* **sdpf:** fix aggreagete count on lb sdpf ([#2886](https://github.com/SocialGouv/emjpm/issues/2886)) ([e874f2e](https://github.com/SocialGouv/emjpm/commit/e874f2e9f40fd49354da98c7f1e5cee4819d1b91))
+
+
+
+
+
 ## [25.156.5](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.5) (2022-11-24)
 
 
