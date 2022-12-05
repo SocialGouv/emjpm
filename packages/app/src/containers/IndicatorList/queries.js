@@ -167,6 +167,16 @@ export const FRANCE_INDICATORS = gql`
     ) {
       count
     }
+    dpfilLoginCount: view_nation_indicateur_login(
+      where: { type: { _eq: "dpfi" } }
+    ) {
+      count
+    }
+    sdpfLoginCount: view_nation_indicateur_login(
+      where: { type: { _eq: "sdpf" } }
+    ) {
+      count
+    }
 
     serviceInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "service" } }
@@ -196,6 +206,16 @@ export const FRANCE_INDICATORS = gql`
     }
     directionInscritCount: view_nation_indicateur_inscrit(
       where: { type: { _eq: "direction" } }
+    ) {
+      count
+    }
+    dpfiInscritCount: view_nation_indicateur_inscrit(
+      where: { type: { _eq: "dpfi" } }
+    ) {
+      count
+    }
+    sdpfInscritCount: view_nation_indicateur_inscrit(
+      where: { type: { _eq: "sdpf" } }
     ) {
       count
     }

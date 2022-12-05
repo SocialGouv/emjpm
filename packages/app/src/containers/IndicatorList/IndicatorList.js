@@ -88,6 +88,8 @@ function IndicatorList(props) {
     },
   } = data;
 
+  console.log(data);
+
   const departementNom = getDepartementName(departementCode);
 
   return (
