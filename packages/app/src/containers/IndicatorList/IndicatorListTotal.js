@@ -40,12 +40,16 @@ function IndicatorListTotal() {
   const magistratLoginCount = data.magistratLoginCount[0]?.count;
   const greffierLoginCount = data.greffierLoginCount[0]?.count;
   const directionLoginCount = data.directionLoginCount[0]?.count;
+  const dpfiLoginCount = data.dpfilLoginCount[0]?.count;
+  const sdpfLoginCount = data.sdpfLoginCount[0]?.count;
   const serviceInscritCount = data.serviceInscritCount[0]?.count;
   const individuelInscritCount = data.individuelInscritCount[0]?.count;
   const preposeInscritCount = data.preposeInscritCount[0]?.count;
   const magistratInscritCount = data.magistratInscritCount[0]?.count;
   const greffierInscritCount = data.greffierInscritCount[0]?.count;
   const directionInscritCount = data.directionInscritCount[0]?.count;
+  const dpfiInscritCount = data.dpfiInscritCount[0]?.count;
+  const sdpfInscritCount = data.sdpfInscritCount[0]?.count;
 
   return (
     <Box>
@@ -97,6 +101,22 @@ function IndicatorListTotal() {
           headingSize={headingSize}
         />
       </Box>
+      <Box mt={2} mb={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Mandataires DPF"
+          indicator={dpfiInscritCount || 0}
+          headingSize={headingSize}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Services DPF"
+          indicator={sdpfInscritCount || 0}
+          headingSize={headingSize}
+        />
+      </Box>
       <Heading size={2}>Connectés au cours des 30 derniers jours</Heading>
       <Box mt={2} mb={4} sx={IndicatorBoxStyle}>
         <Indicator
@@ -141,6 +161,22 @@ function IndicatorListTotal() {
           loading={false}
           title="Mandataires individuels"
           indicator={individuelLoginCount || 0}
+          headingSize={headingSize}
+        />
+      </Box>
+      <Box mt={2} mb={4} sx={IndicatorBoxStyle}>
+        <Indicator
+          error={false}
+          loading={false}
+          title="Mandataires DPF"
+          indicator={dpfiLoginCount || 0}
+          headingSize={headingSize}
+        />
+        <Indicator
+          error={false}
+          loading={false}
+          title="Services DPF"
+          indicator={sdpfLoginCount || 0}
           headingSize={headingSize}
         />
       </Box>

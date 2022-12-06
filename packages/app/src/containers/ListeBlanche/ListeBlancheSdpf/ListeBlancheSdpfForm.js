@@ -222,7 +222,6 @@ export function ListeBlancheSdpfForm(props) {
   const user = useUser();
   const isAdmin = user.type === "admin";
 
-  console.log(service);
   return (
     <form noValidate onSubmit={formik.handleSubmit}>
       <SrOnly id="instructions">

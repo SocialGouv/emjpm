@@ -29,6 +29,8 @@ export const QRCODE_TOKEN_FORMAT =
   "Le code doit être composé de 6 chiffres. Par exemple: 123546.";
 export const QRCODE_TOKEN_INVALID =
   "Le code n'est pas valide ou a expiré, si ce n'est pas encore fait, veuillez scanner le QRCode affiché en utilisant votre application 2FA pour obtenir un code valide, sinon il se peut que le code ait expiré, la durée de vie d'un code est de 30 secondes, consultez votre application 2FA pour obtenir un nouveau code.";
+export const TRIBUNAL_REQUIRED =
+  "Veuillez saisir un nom de tribunal valide. Par exemple: Tribunal judiciaire de Paris";
 
 export function parseDateString(_, originalValue) {
   const parsedDate = isDate(originalValue)

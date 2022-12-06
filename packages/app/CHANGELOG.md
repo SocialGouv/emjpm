@@ -3,6 +3,57 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.9](https://github.com/SocialGouv/emjpm/compare/v25.156.8...v25.156.9) (2022-11-30)
+
+
+### Bug Fixes
+
+* **display-siret:** fix displayed siret for mandataire ([#2888](https://github.com/SocialGouv/emjpm/issues/2888)) ([407b4fb](https://github.com/SocialGouv/emjpm/commit/407b4fb432cad2d64c5046c061173483bfe4e63e))
+
+
+
+
+
+## [25.156.8](https://github.com/SocialGouv/emjpm/compare/v25.156.7...v25.156.8) (2022-11-28)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.156.7](https://github.com/SocialGouv/emjpm/compare/v25.156.6...v25.156.7) (2022-11-24)
+
+**Note:** Version bump only for package @emjpm/app
+
+
+
+
+
+## [25.156.6](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.6) (2022-11-24)
+
+
+### Bug Fixes
+
+* **greffier:** fix display error for greffier without ti_id ([#2885](https://github.com/SocialGouv/emjpm/issues/2885)) ([612a67d](https://github.com/SocialGouv/emjpm/commit/612a67d610e05d73bdca407822a73100599fb898))
+* **sdpf:** fix aggreagete count on lb sdpf ([#2886](https://github.com/SocialGouv/emjpm/issues/2886)) ([e874f2e](https://github.com/SocialGouv/emjpm/commit/e874f2e9f40fd49354da98c7f1e5cee4819d1b91))
+
+
+
+
+
+## [25.156.5](https://github.com/SocialGouv/emjpm/compare/v25.156.4...v25.156.5) (2022-11-24)
+
+
+### Bug Fixes
+
+* **greffier:** fix display error for greffier without ti_id ([#2885](https://github.com/SocialGouv/emjpm/issues/2885)) ([612a67d](https://github.com/SocialGouv/emjpm/commit/612a67d610e05d73bdca407822a73100599fb898))
+* **sdpf:** fix aggreagete count on lb sdpf ([#2886](https://github.com/SocialGouv/emjpm/issues/2886)) ([e874f2e](https://github.com/SocialGouv/emjpm/commit/e874f2e9f40fd49354da98c7f1e5cee4819d1b91))
+
+
+
+
+
 ## [25.156.4](https://github.com/SocialGouv/emjpm/compare/v25.156.3...v25.156.4) (2022-10-21)
 
 

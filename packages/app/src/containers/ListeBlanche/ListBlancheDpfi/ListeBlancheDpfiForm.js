@@ -225,7 +225,7 @@ export function ListeBlancheDpfiForm(props) {
     setFieldValue("ville", city || "");
   }, [selectedAdresseData, setFieldValue]);
 
-  const mandataire = data?.mandataire;
+  const mandataire = data?.dpfi;
 
   const isAdmin = user.type === "admin";
 
