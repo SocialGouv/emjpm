@@ -136,6 +136,7 @@ function ListeBlancheSummary() {
                 : " dont " + dpfiFinanceDepartementCount + " financés")
             }
           />
+
           <LabelValue label="Services DPF" value={`${sdpfCount}`} />
         </Flex>
       </Card>

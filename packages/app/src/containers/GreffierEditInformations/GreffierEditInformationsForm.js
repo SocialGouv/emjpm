@@ -30,8 +30,8 @@ function GreffierEditInformationsForm(props) {
       email: user.email || "",
       nom: user.nom || "",
       prenom: user.prenom || "",
-      ti: greffier.ti_id || "",
-      share_email: greffier.share_email || false,
+      ti: greffier?.ti_id || "",
+      share_email: greffier?.share_email || false,
       genre: user.genre || "",
     },
     onSubmit: handleSubmit,
@@ -112,6 +112,7 @@ function GreffierEditInformationsForm(props) {
         </FormGrayBox>
         <FormInputBox role="group" aria-labelledby="tribunal_heading">
           <FormGroupSelect
+            required
             formik={formik}
             id="ti"
             placeholder="Tribunal d'instance"
