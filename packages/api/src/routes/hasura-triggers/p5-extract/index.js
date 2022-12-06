@@ -14,6 +14,10 @@ const {
   User,
   Departement,
   RoutineLog,
+  Mesure,
+  MesureEtat,
+  MesureRessources,
+  MesureRessourcesPrestationsSociales,
 } = require("~/models");
 const SftpClient = require("~/utils/sftp");
 
@@ -64,11 +68,20 @@ async function extractTables() {
   const departements = await Departement.query();
   const mandataire_individuel_departements =
     await MandatairesIndividuelDepartement.query();
+  const mesures = await Mesure.query();
+  const mesuresEtat = await MesureEtat.query();
+  const mesuresResources = await MesureRessources.query();
+  const mesuresResourcesPrestations =
+    await MesureRessourcesPrestationsSociales.query();
 
   return {
     departements,
     mandataire_individuel_departements,
     mandataires,
+    mesures,
+    mesuresEtat,
+    mesuresResources,
+    mesuresResourcesPrestations,
     regions,
     services,
     users,
