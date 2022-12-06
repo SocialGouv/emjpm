@@ -60,6 +60,24 @@ export const INDICATORS = gql`
         }
       }
     }
+    dpfiLoginCount: view_departement_indicateur_login_aggregate(
+      where: { type: { _eq: "dpfi" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    sdpfLoginCount: view_departement_indicateur_login_aggregate(
+      where: { type: { _eq: "sdpf" }, id: { _eq: $code } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
 
     serviceInscritCount: view_departement_indicateur_inscrit_aggregate(
       where: { _and: { type: { _eq: "service" }, id: { _eq: $code } } }
@@ -108,6 +126,24 @@ export const INDICATORS = gql`
     }
     directionInscritCount: view_departement_indicateur_inscrit_aggregate(
       where: { _and: { type: { _eq: "direction" }, id: { _eq: $code } } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    dpfiInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "dpfi" }, id: { _eq: $code } } }
+    ) {
+      aggregate {
+        sum {
+          count
+        }
+      }
+    }
+    sdpfInscritCount: view_departement_indicateur_inscrit_aggregate(
+      where: { _and: { type: { _eq: "sdpf" }, id: { _eq: $code } } }
     ) {
       aggregate {
         sum {
