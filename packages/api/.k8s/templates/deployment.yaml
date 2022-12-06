@@ -162,3 +162,8 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.secretName }}
                   key: P5_SFTP_PRIVATE_KEY
+            - name: P5_FOLDER_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secretName }}
+                  key: P5_FOLDER_ENV
