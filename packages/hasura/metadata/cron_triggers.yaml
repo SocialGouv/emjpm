@@ -62,7 +62,7 @@
       x-hasura-role: admin
   retry_conf:
     num_retries: 0
-    timeout_seconds: 1200
+    timeout_seconds: 1800
     tolerance_seconds: 21600
     retry_interval_seconds: 10
   headers:

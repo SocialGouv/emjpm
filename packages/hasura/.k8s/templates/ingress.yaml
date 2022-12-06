@@ -9,7 +9,7 @@ metadata:
   annotations:
 {{ .Values.ingress.annotations | toYaml | indent 4 }}
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "10"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "900"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
     nginx.ingress.kubernetes.io/configuration-snippet: |
       more_clear_headers "Server";
 spec:
