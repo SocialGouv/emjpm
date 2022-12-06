@@ -138,6 +138,7 @@ actions:
       name: x-hasura-role
     - name: hasura_web_hook_secret
       value_from_env: HASURA_WEB_HOOK_SECRET
+    timeout: 1200
 - name: import_base_finess
   definition:
     kind: asynchronous

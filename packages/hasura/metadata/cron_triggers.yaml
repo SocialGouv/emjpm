@@ -60,6 +60,11 @@
   payload:
     session_variables:
       x-hasura-role: admin
+  retry_conf:
+    num_retries: 0
+    timeout_seconds: 1200
+    tolerance_seconds: 21600
+    retry_interval_seconds: 10
   headers:
   - name: HASURA_WEB_HOOK_SECRET
     value_from_env: HASURA_WEB_HOOK_SECRET
