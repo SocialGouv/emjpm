@@ -74,6 +74,10 @@ type Mutation {
 }
 
 type Mutation {
+  extract_p5_tables: ExtractOutput
+}
+
+type Mutation {
   import_base_finess: ImportFinessOutput
 }
 
@@ -330,5 +334,9 @@ type DeleteAllMesuresActionOutput {
 
 type EmailAdminInvitationOutput {
   result: String!
+}
+
+type ExtractOutput {
+  state: String
 }
 

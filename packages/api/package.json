@@ -72,6 +72,7 @@
     "query-string": "^6.14.1",
     "rand-token": "^0.4.0",
     "rasha": "^1.2.5",
+    "ssh2-sftp-client": "^9.0.4",
     "stream-chain": "^2.2.4",
     "stream-json": "^1.7.2",
     "tmp": "^0.2.1",
