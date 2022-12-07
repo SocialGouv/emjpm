@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.12](https://github.com/SocialGouv/emjpm/compare/v25.156.11...v25.156.12) (2022-12-06)
+
+
+### Bug Fixes
+
+* **p5-timeout:** change timeout for p5 export ([#2895](https://github.com/SocialGouv/emjpm/issues/2895)) ([2b28ad7](https://github.com/SocialGouv/emjpm/commit/2b28ad75546b45aa0400447546fdc9505247ddf9))
+
+
+
+
+
 ## [25.156.11](https://github.com/SocialGouv/emjpm/compare/v25.156.10...v25.156.11) (2022-12-06)
 
 

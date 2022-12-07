@@ -115,7 +115,9 @@ async function extractTables() {
 router.post("/execute", async (req, res) => {
   logger.info(`[p5-export] export init`);
   const dateOfExecution = new Date();
-
+  res.json({
+    state: "start",
+  });
   const data = await extractTables();
   res.json({
     state: "start",
@@ -140,22 +142,32 @@ router.post("/execute", async (req, res) => {
       });
 
       logger.info(`[p5-export] uploading finished`);
-
-      RoutineLog.query().insert({
-        end_date: new Date(),
-        result: "success",
-        start_date: dateOfExecution,
-        type: "p5_export",
-      });
+      RoutineLog.query()
+        .insert({
+          end_date: new Date(),
+          result: "success",
+          start_date: dateOfExecution,
+          type: "p5_export",
+        })
+        .then(() => {
+          logger.info(`[p5-export] p5_export finished successfully`);
+        });
     })
     .catch((e) => {
       console.log("[p5-export] Eror occured  while uploading file", e.message);
-      RoutineLog.query().insert({
-        end_date: new Date(),
-        result: "error",
-        start_date: dateOfExecution,
-        type: "p5_export",
-      });
+      RoutineLog.query()
+        .insert({
+          end_date: new Date(),
+          result: "error",
+          start_date: dateOfExecution,
+          type: "p5_export",
+        })
+        .then(() => {
+          logger.info(`[p5-export] p5_export finished with error`);
+          // return res.json({
+          //   error: e,
+          // });
+        });
     })
     .finally(() => {
       sftp.disconnect();
