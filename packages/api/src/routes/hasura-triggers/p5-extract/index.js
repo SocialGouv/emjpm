@@ -41,10 +41,9 @@ const SftpOptions = {
 // const BASE_PATH = "/var/lib/mandoline";
 
 async function extractTables() {
-  const mandataires = await Mandataire.query();
-  const regions = await Region.query();
-  // const services = await Service.query().withGraphFetched("[departments]");
-  const services = await Service.query()
+  const mandatairesPromise = await Mandataire.query();
+  const regionsPromise = await Region.query();
+  const servicesPromise = await Service.query()
     .leftJoin(
       "service_departements",
       "services.id",
@@ -54,7 +53,7 @@ async function extractTables() {
     .select("services.*", "service_departements.departement_code")
     .orderByRaw("services.id");
 
-  const users = await User.query().select(
+  const usersPromise = User.query().select(
     "id",
     "created_at",
     "type",
@@ -65,14 +64,39 @@ async function extractTables() {
     "email",
     "genre"
   );
-  const departements = await Departement.query();
-  const mandataire_individuel_departements =
-    await MandatairesIndividuelDepartement.query();
-  const mesures = await Mesure.query();
-  const mesuresEtat = await MesureEtat.query();
-  const mesuresResources = await MesureRessources.query();
-  const mesuresResourcesPrestations =
-    await MesureRessourcesPrestationsSociales.query();
+  const departementsPromise = Departement.query();
+  const mandataire_individuel_departementsPromise =
+    MandatairesIndividuelDepartement.query();
+  const mesuresPromise = Mesure.query();
+  const mesuresEtatPromise = MesureEtat.query();
+  const mesuresResourcesPromise = MesureRessources.query();
+  const mesuresResourcesPrestationsPromise =
+    MesureRessourcesPrestationsSociales.query();
+
+  const dbPromise = Promise.all([
+    mandatairesPromise,
+    regionsPromise,
+    servicesPromise,
+    usersPromise,
+    departementsPromise,
+    mandataire_individuel_departementsPromise,
+    mesuresPromise,
+    mesuresEtatPromise,
+    mesuresResourcesPromise,
+    mesuresResourcesPrestationsPromise,
+  ]);
+  const [
+    mandataires,
+    regions,
+    services,
+    users,
+    departements,
+    mandataire_individuel_departements,
+    mesures,
+    mesuresEtat,
+    mesuresResources,
+    mesuresResourcesPrestations,
+  ] = await dbPromise;
 
   return {
     departements,
@@ -93,6 +117,9 @@ router.post("/execute", async (req, res) => {
   const dateOfExecution = new Date();
 
   const data = await extractTables();
+  res.json({
+    state: "start",
+  });
 
   sftp
     .connect(SftpOptions)
@@ -113,33 +140,22 @@ router.post("/execute", async (req, res) => {
       });
 
       logger.info(`[p5-export] uploading finished`);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "success",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          return res.json({
-            state: "done",
-          });
-        });
+
+      RoutineLog.query().insert({
+        end_date: new Date(),
+        result: "success",
+        start_date: dateOfExecution,
+        type: "p5_export",
+      });
     })
     .catch((e) => {
       console.log("[p5-export] Eror occured  while uploading file", e.message);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "error",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          return res.json({
-            error: e,
-          });
-        });
+      RoutineLog.query().insert({
+        end_date: new Date(),
+        result: "error",
+        start_date: dateOfExecution,
+        type: "p5_export",
+      });
     })
     .finally(() => {
       sftp.disconnect();
