@@ -91,7 +91,9 @@ async function extractTables() {
 router.post("/execute", async (req, res) => {
   logger.info(`[p5-export] export init`);
   const dateOfExecution = new Date();
-
+  res.json({
+    state: "start",
+  });
   const data = await extractTables();
 
   sftp
@@ -121,9 +123,7 @@ router.post("/execute", async (req, res) => {
           type: "p5_export",
         })
         .then(() => {
-          return res.json({
-            state: "done",
-          });
+          logger.info(`[p5-export] p5_export finished successfully`);
         });
     })
     .catch((e) => {
@@ -136,9 +136,10 @@ router.post("/execute", async (req, res) => {
           type: "p5_export",
         })
         .then(() => {
-          return res.json({
-            error: e,
-          });
+          logger.info(`[p5-export] p5_export finished with error`);
+          // return res.json({
+          //   error: e,
+          // });
         });
     })
     .finally(() => {
