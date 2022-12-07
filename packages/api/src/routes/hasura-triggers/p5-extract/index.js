@@ -119,9 +119,6 @@ router.post("/execute", async (req, res) => {
     state: "start",
   });
   const data = await extractTables();
-  res.json({
-    state: "start",
-  });
 
   sftp
     .connect(SftpOptions)
