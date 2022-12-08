@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [25.156.13](https://github.com/SocialGouv/emjpm/compare/v25.156.12...v25.156.13) (2022-12-08)
+
+
+### Bug Fixes
+
+* **p5-export:** return response before executing job ([#2896](https://github.com/SocialGouv/emjpm/issues/2896)) ([70dead3](https://github.com/SocialGouv/emjpm/commit/70dead39136ed824e1fe0136ee03330d8a86c315))
+
+
+
+
+
 ## [25.156.12](https://github.com/SocialGouv/emjpm/compare/v25.156.11...v25.156.12) (2022-12-06)
 
 
