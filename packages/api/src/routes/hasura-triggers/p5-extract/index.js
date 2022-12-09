@@ -1,11 +1,7 @@
 const express = require("express");
 const { format } = require("date-fns");
-const Buffer = require("buffer").Buffer;
-
-const logger = require("~/utils/logger");
-
-const router = express.Router();
-
+const { Readable } = require("stream");
+const Client = require("~/utils/sftp");
 const {
   MandatairesIndividuelDepartement,
   Mandataire,
@@ -19,18 +15,12 @@ const {
   MesureRessources,
   MesureRessourcesPrestationsSociales,
 } = require("~/models");
-const SftpClient = require("~/utils/sftp");
 
-const sftp = new SftpClient();
-
-const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
-
-const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
-const currentDate = () => format(new Date(), "yyyyMMdd");
+const router = express.Router();
+const logger = require("~/utils/logger");
 
 const private_value =
   process.env?.P5_SFTP_PRIVATE_KEY?.replace(/\\n/g, "\n") || "";
-
 const SftpOptions = {
   host: process.env.P5_SFTP_HOST,
   port: process.env.P5_SFTP_PORT,
@@ -38,114 +28,167 @@ const SftpOptions = {
   username: process.env.P5_SFTP_USERNAME,
 };
 
-// const BASE_PATH = "/var/lib/mandoline";
+const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
+const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
+const currentDate = () => format(new Date(), "yyyyMMdd");
 
-async function extractTables() {
-  const mandataires = await Mandataire.query();
-  const regions = await Region.query();
-  // const services = await Service.query().withGraphFetched("[departments]");
-  const services = await Service.query()
-    .leftJoin(
+const sftp = new Client();
+
+const buildReadableStream = () => {
+  return new Readable({
+    objectMode: true,
+    read() {},
+  });
+};
+
+router.post("/execute", async (req, res) => {
+  const dateOfExecution = new Date();
+
+  logger.info(`[p5-export] export init`);
+  res.json({
+    state: "start",
+  });
+  function createStream(table) {
+    const stream = buildReadableStream();
+    stream.push("[");
+    table.forEach((row, index) => {
+      stream.push(JSON.stringify(row));
+      if (index < table.length - 1) {
+        stream.push(",");
+      }
+    });
+    stream.push("]");
+    stream.push(null);
+    return stream;
+  }
+
+  try {
+    await sftp.connect(SftpOptions);
+
+    const mandataires = await Mandataire.query();
+    const mandatairesStream = await createStream(mandataires);
+
+    await sftp.uploadFile(
+      mandatairesStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mandataires"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - mandataires uploaded");
+
+    const users = await User.query().select(
+      "id",
+      "created_at",
+      "type",
+      "active",
+      "nom",
+      "prenom",
+      "cabinet",
+      "email",
+      "genre"
+    );
+    const userStreamStream = createStream(users);
+
+    await sftp.uploadFile(
+      userStreamStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"users"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - users uploaded");
+
+    const regions = await Region.query();
+    const regionsStream = createStream(regions);
+
+    await sftp.uploadFile(
+      regionsStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"regions"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - regions uploaded");
+
+    const services = await Service.query().leftJoin(
       "service_departements",
       "services.id",
       "=",
       "service_departements.service_id"
-    )
-    .select("services.*", "service_departements.departement_code")
-    .orderByRaw("services.id");
+    );
+    const ServicesStream = createStream(services);
 
-  const users = await User.query().select(
-    "id",
-    "created_at",
-    "type",
-    "active",
-    "nom",
-    "prenom",
-    "cabinet",
-    "email",
-    "genre"
-  );
-  const departements = await Departement.query();
-  const mandataire_individuel_departements =
-    await MandatairesIndividuelDepartement.query();
-  const mesures = await Mesure.query();
-  const mesuresEtat = await MesureEtat.query();
-  const mesuresResources = await MesureRessources.query();
-  const mesuresResourcesPrestations =
-    await MesureRessourcesPrestationsSociales.query();
+    await sftp.uploadFile(
+      ServicesStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"services"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - services uploaded");
 
-  return {
-    departements,
-    mandataire_individuel_departements,
-    mandataires,
-    mesures,
-    mesuresEtat,
-    mesuresResources,
-    mesuresResourcesPrestations,
-    regions,
-    services,
-    users,
-  };
-}
+    const departements = await Departement.query();
+    const departementsStream = createStream(departements);
+    await sftp.uploadFile(
+      departementsStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"departements"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - departements uploaded");
 
-router.post("/execute", async (req, res) => {
-  logger.info(`[p5-export] export init`);
-  const dateOfExecution = new Date();
-  res.json({
-    state: "start",
-  });
-  const data = await extractTables();
+    const mandataire_individuel_departements =
+      await MandatairesIndividuelDepartement.query();
+    const mid = createStream(mandataire_individuel_departements);
+    await sftp.uploadFile(
+      mid,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mandataire_individuel_departements"}_${currentDate()}.json`
+    );
+    logger.info(
+      "[p5-export] export - mandataire_individuel_departements uploaded"
+    );
 
-  sftp
-    .connect(SftpOptions)
-    .then(() => {
-      logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
+    const mesures = await Mesure.query();
+    const mesuresStream = createStream(mesures);
+    await sftp.uploadFile(
+      mesuresStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mesures"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - mesures uploaded");
 
-      const promises = Object.keys(data).map(async (tableName) => {
-        return sftp.uploadFile(
-          JSON.stringify(data[tableName]),
-          `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${tableName}_${currentDate()}.json`
-        );
-      });
-      return Promise.all(promises);
-    })
-    .then((resp) => {
-      resp.forEach((el) => {
-        logger.info(`[p5-export] ${el}`);
-      });
+    const mesuresEtat = await MesureEtat.query();
+    const mesuresEtatStream = createStream(mesuresEtat);
+    await sftp.uploadFile(
+      mesuresEtatStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mesure_etat"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - mesure_etat uploaded");
 
-      logger.info(`[p5-export] uploading finished`);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "success",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          logger.info(`[p5-export] p5_export finished successfully`);
-        });
-    })
-    .catch((e) => {
-      console.log("[p5-export] Eror occured  while uploading file", e.message);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "error",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          logger.info(`[p5-export] p5_export finished with error`);
-          // return res.json({
-          //   error: e,
-          // });
-        });
-    })
-    .finally(() => {
-      sftp.disconnect();
-      console.log("[p5-export] disconnected from server");
+    const mesuresResources = await MesureRessources.query();
+    const mesuresResourcesStream = createStream(mesuresResources);
+    await sftp.uploadFile(
+      mesuresResourcesStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mesure_ressources"}_${currentDate()}.json`
+    );
+    logger.info("[p5-export] export - mesure_ressources uploaded");
+    const mesuresResourcesPrestations =
+      await MesureRessourcesPrestationsSociales.query();
+    const mesuresResourcesPrestationsStream = createStream(
+      mesuresResourcesPrestations
+    );
+    await sftp.uploadFile(
+      mesuresResourcesPrestationsStream,
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${"mesure_ressources_prestations_sociales"}_${currentDate()}.json`
+    );
+    logger.info(
+      "[p5-export] export - mesure_ressources_prestations_sociales uploaded"
+    );
+
+    await RoutineLog.query().insert({
+      end_date: new Date(),
+      result: "success",
+      start_date: dateOfExecution,
+      type: "p5_export",
     });
+
+    sftp.disconnect();
+  } catch (error) {
+    sftp.disconnect();
+    RoutineLog.query().insert({
+      end_date: new Date(),
+      result: "error",
+      start_date: dateOfExecution,
+      type: "p5_export",
+    });
+    console.log(`[p5-export] export error`, error);
+  }
 });
 
 module.exports = router;
