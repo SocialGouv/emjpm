@@ -1,32 +1,18 @@
 const express = require("express");
 const { format } = require("date-fns");
-const Buffer = require("buffer").Buffer;
+const Client = require("ssh2").Client;
+const pg = require("pg");
+const JSONStream = require("JSONStream");
+const QueryStream = require("pg-query-stream");
 
 const logger = require("~/utils/logger");
+const queries = require("./queries");
+const { RoutineLog } = require("~/models");
+
+const environment = process.env.NODE_ENV || "development";
+const config = require("../../../../knexfile.js")[environment];
 
 const router = express.Router();
-
-const {
-  MandatairesIndividuelDepartement,
-  Mandataire,
-  Region,
-  Service,
-  User,
-  Departement,
-  RoutineLog,
-  Mesure,
-  MesureEtat,
-  MesureRessources,
-  MesureRessourcesPrestationsSociales,
-} = require("~/models");
-const SftpClient = require("~/utils/sftp");
-
-const sftp = new SftpClient();
-
-const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
-
-const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
-const currentDate = () => format(new Date(), "yyyyMMdd");
 
 const private_value =
   process.env?.P5_SFTP_PRIVATE_KEY?.replace(/\\n/g, "\n") || "";
@@ -38,138 +24,130 @@ const SftpOptions = {
   username: process.env.P5_SFTP_USERNAME,
 };
 
-// const BASE_PATH = "/var/lib/mandoline";
+const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
+const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
+const currentDate = () => format(new Date(), "yyyyMMdd");
 
-async function extractTables() {
-  const mandatairesPromise = await Mandataire.query();
-  const regionsPromise = await Region.query();
-  const servicesPromise = await Service.query()
-    .leftJoin(
-      "service_departements",
-      "services.id",
-      "=",
-      "service_departements.service_id"
-    )
-    .select("services.*", "service_departements.departement_code")
-    .orderByRaw("services.id");
+const pool = new pg.Pool(config.connection);
 
-  const usersPromise = User.query().select(
-    "id",
-    "created_at",
-    "type",
-    "active",
-    "nom",
-    "prenom",
-    "cabinet",
-    "email",
-    "genre"
-  );
-  const departementsPromise = Departement.query();
-  const mandataire_individuel_departementsPromise =
-    MandatairesIndividuelDepartement.query();
-  const mesuresPromise = Mesure.query();
-  const mesuresEtatPromise = MesureEtat.query();
-  const mesuresResourcesPromise = MesureRessources.query();
-  const mesuresResourcesPrestationsPromise =
-    MesureRessourcesPrestationsSociales.query();
+async function sftpUpload(sftp, table, sql) {
+  return new Promise((resolve, reject) => {
+    const writeStream = sftp.createWriteStream(
+      `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
+    );
 
-  const dbPromise = Promise.all([
-    mandatairesPromise,
-    regionsPromise,
-    servicesPromise,
-    usersPromise,
-    departementsPromise,
-    mandataire_individuel_departementsPromise,
-    mesuresPromise,
-    mesuresEtatPromise,
-    mesuresResourcesPromise,
-    mesuresResourcesPrestationsPromise,
-  ]);
-  const [
-    mandataires,
-    regions,
-    services,
-    users,
-    departements,
-    mandataire_individuel_departements,
-    mesures,
-    mesuresEtat,
-    mesuresResources,
-    mesuresResourcesPrestations,
-  ] = await dbPromise;
+    writeStream.on("close", function () {
+      logger.info(`[p5-export] ${table} writeStream closed`);
+    });
 
-  return {
-    departements,
-    mandataire_individuel_departements,
-    mandataires,
-    mesures,
-    mesuresEtat,
-    mesuresResources,
-    mesuresResourcesPrestations,
-    regions,
-    services,
-    users,
-  };
+    writeStream.on("end", function () {
+      logger.info(`[p5-export] ${table} writeStream end`);
+    });
+
+    pool.connect((err, client, done) => {
+      if (err) {
+        reject(err);
+      }
+      const query = new QueryStream(sql);
+      const stream = client.query(query);
+      //release the client when the stream is finished
+      stream.on("end", () => {
+        logger.info(`[p5-export] ${table} uploaded successfully`);
+        resolve();
+        done();
+      });
+      stream.pipe(JSONStream.stringify()).pipe(writeStream);
+    });
+  });
 }
 
 router.post("/execute", async (req, res) => {
-  logger.info(`[p5-export] export init`);
   const dateOfExecution = new Date();
+
+  logger.info(`[p5-export] export init`);
   res.json({
     state: "start",
   });
-  const data = await extractTables();
 
-  sftp
-    .connect(SftpOptions)
-    .then(() => {
-      logger.info(`[p5-export] connected to  ${process.env.P5_SFTP_HOST}`);
+  const conn = new Client();
+  conn
+    .on("ready", function () {
+      conn.sftp(function (err, sftp) {
+        if (err) throw err;
 
-      const promises = Object.keys(data).map(async (tableName) => {
-        return sftp.uploadFile(
-          JSON.stringify(data[tableName]),
-          `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${tableName}_${currentDate()}.json`
-        );
+        async function execute() {
+          try {
+            await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
+              () => {
+                throw new Error();
+              }
+            );
+            await sftpUpload(sftp, "users", queries.users).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(sftp, "regions", queries.regions).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(sftp, "departements", queries.departements).catch(
+              () => {
+                throw new Error();
+              }
+            );
+            await sftpUpload(sftp, "services", queries.services).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(
+              sftp,
+              "mandataire_individuel_departements",
+              queries.mid
+            ).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(sftp, "mesures", queries.mesures).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(sftp, "mesure_etat", queries.mesure_etat).catch(
+              () => {
+                throw new Error();
+              }
+            );
+            await sftpUpload(
+              sftp,
+              "mesure_ressources",
+              queries.mesure_ressources
+            ).catch(() => {
+              throw new Error();
+            });
+            await sftpUpload(
+              sftp,
+              "mesure_ressources_prestations_sociales",
+              queries.mrps
+            ).catch(() => {
+              throw new Error();
+            });
+            await RoutineLog.query().insert({
+              end_date: new Date(),
+              result: "success",
+              start_date: dateOfExecution,
+              type: "p5_export",
+            });
+          } catch (error) {
+            console.log(`[p5-export] export error`, err);
+            await RoutineLog.query().insert({
+              end_date: new Date(),
+              result: "error",
+              start_date: dateOfExecution,
+              type: "p5_export",
+            });
+          } finally {
+            conn.end();
+          }
+        }
+
+        execute();
       });
-      return Promise.all(promises);
     })
-    .then((resp) => {
-      resp.forEach((el) => {
-        logger.info(`[p5-export] ${el}`);
-      });
-
-      logger.info(`[p5-export] uploading finished`);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "success",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          logger.info(`[p5-export] p5_export finished successfully`);
-        });
-    })
-    .catch((e) => {
-      console.log("[p5-export] Eror occured  while uploading file", e.message);
-      RoutineLog.query()
-        .insert({
-          end_date: new Date(),
-          result: "error",
-          start_date: dateOfExecution,
-          type: "p5_export",
-        })
-        .then(() => {
-          logger.info(`[p5-export] p5_export finished with error`);
-          // return res.json({
-          //   error: e,
-          // });
-        });
-    })
-    .finally(() => {
-      sftp.disconnect();
-      console.log("[p5-export] disconnected from server");
-    });
+    .connect(SftpOptions);
 });
 
 module.exports = router;
