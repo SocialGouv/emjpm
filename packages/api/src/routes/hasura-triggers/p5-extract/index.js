@@ -7,7 +7,7 @@ const QueryStream = require("pg-query-stream");
 
 const logger = require("~/utils/logger");
 const queries = require("./queries");
-const { RoutineLog } = require("~/models");
+// const { RoutineLog } = require("~/models");
 
 const environment = process.env.NODE_ENV || "development";
 const config = require("../../../../knexfile.js")[environment];
@@ -62,7 +62,7 @@ async function sftpUpload(sftp, table, sql) {
 }
 
 router.post("/execute", async (req, res) => {
-  const dateOfExecution = new Date();
+  // const dateOfExecution = new Date();
 
   logger.info(`[p5-export] export init`);
   res.json({
@@ -125,20 +125,20 @@ router.post("/execute", async (req, res) => {
             ).catch(() => {
               throw new Error();
             });
-            await RoutineLog.query().insert({
-              end_date: new Date(),
-              result: "success",
-              start_date: dateOfExecution,
-              type: "p5_export",
-            });
+            // await RoutineLog.query().insert({
+            //   end_date: new Date(),
+            //   result: "success",
+            //   start_date: dateOfExecution,
+            //   type: "p5_export",
+            // });
           } catch (error) {
             console.log(`[p5-export] export error`, err);
-            await RoutineLog.query().insert({
-              end_date: new Date(),
-              result: "error",
-              start_date: dateOfExecution,
-              type: "p5_export",
-            });
+            // await RoutineLog.query().insert({
+            //   end_date: new Date(),
+            //   result: "error",
+            //   start_date: dateOfExecution,
+            //   type: "p5_export",
+            // });
           } finally {
             conn.end();
           }
