@@ -73,8 +73,6 @@ router.post("/execute", async (req, res) => {
     state: "start",
   });
 
-  console.log(config.connection);
-
   const conn = new Client();
   conn
     .on("ready", function () {

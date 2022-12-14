@@ -69,7 +69,7 @@
     "passport-stub": "^1.1.1",
     "pg": "^8.7.1",
     "pg-connection-string": "^2.5.0",
-    "pg-query-stream": "^4.2.4",
+    "pg-query-stream": "4.2.1",
     "pino": "^5.17.0",
     "query-string": "^6.14.1",
     "rand-token": "^0.4.0",
