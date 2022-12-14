@@ -28,7 +28,11 @@ const P5_FOLDER_ENV = process.env.P5_FOLDER_ENV || "dev";
 const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
 const currentDate = () => format(new Date(), "yyyyMMdd");
 
-const pool = new pg.Pool(config.connection);
+const pool = new pg.Pool({
+  ...config.connection,
+  max: 1,
+  min: 0,
+});
 
 async function sftpUpload(sftp, table, sql) {
   return new Promise((resolve, reject) => {
@@ -68,6 +72,8 @@ router.post("/execute", async (req, res) => {
   res.json({
     state: "start",
   });
+
+  console.log(config.connection);
 
   const conn = new Client();
   conn
