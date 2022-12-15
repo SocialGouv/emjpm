@@ -29,13 +29,9 @@ async function sftpUpload(sftp, table, sql) {
       `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
     );
 
-    writeStream.on("close", function () {
+    writeStream.on("finish", function () {
       logger.info(`[p5-export] ${table} uploaded successfully`);
       resolve();
-    });
-
-    writeStream.on("end", function () {
-      logger.info(`[p5-export] ${table} writeStream end`);
     });
 
     writeStream.on("error", function (err) {
@@ -43,7 +39,11 @@ async function sftpUpload(sftp, table, sql) {
       reject(err);
     });
     logger.info(`[p5-export] uploading ${table} `);
-    sql.stream().pipe(JSONStream.stringify()).pipe(writeStream);
+    sql
+      .stream((s) => s.pipe(JSONStream.stringify()).pipe(process.stdout))
+      .then(() => {
+        console.log("===============>");
+      });
   });
 }
 
