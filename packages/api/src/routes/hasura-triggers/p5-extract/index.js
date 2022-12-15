@@ -24,13 +24,10 @@ const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
 const currentDate = () => format(new Date(), "yyyyMMdd");
 
 async function sftpUpload(sftp, table, sql) {
-  console.log(`[p5-export]  upload begin from ${table}`);
   return new Promise((resolve, reject) => {
     const writeStream = sftp.createWriteStream(
       `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
     );
-
-    console.log(`[p5-export] writeStream ${JSON.stringify(writeStream)}`);
 
     writeStream.on("close", function () {
       logger.info(`[p5-export] ${table} uploaded successfully`);
@@ -41,9 +38,9 @@ async function sftpUpload(sftp, table, sql) {
       logger.info(`[p5-export] ${table} writeStream end`);
     });
 
-    writeStream.on("error", function (e) {
+    writeStream.on("error", function (err) {
       logger.info(`[p5-export] error while uploading ${table} `);
-      reject(e);
+      reject(err);
     });
     logger.info(`[p5-export] uploading ${table} `);
     sql.stream().pipe(JSONStream.stringify()).pipe(writeStream);
@@ -62,42 +59,15 @@ router.post("/execute", async (req, res) => {
   conn
     .on("ready", function () {
       conn.sftp(function (err, sftp) {
-        console.log("[p5-export] connected to sftp");
         if (err) throw err;
 
         async function execute() {
           try {
-            await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
-              (e) => {
+            for (const [key, val] of Object.entries(queries)) {
+              await sftpUpload(sftp, key, val).catch((e) => {
                 throw new Error(e);
-              }
-            );
-            await sftpUpload(sftp, "users", queries.users).catch((e) => {
-              throw new Error(e);
-            });
-
-            await sftpUpload(sftp, "mesures", queries.mesures).catch((e) => {
-              throw new Error(e);
-            });
-
-            // await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
-            //   () => {
-            //     throw new Error();
-            //   }
-            // );
-            // await sftpUpload(sftp, "users", queries.users).catch(() => {
-            //   throw new Error();
-            // });
-
-            // await sftpUpload(sftp, "regions", queries.regions).catch(() => {
-            //   throw new Error();
-            // });
-
-            // await sftpUpload(sftp, "departements", queries.departements).catch(
-            //   () => {
-            //     throw new Error();
-            //   }
-            // );
+              });
+            }
 
             await RoutineLog.query().insert({
               end_date: new Date(),
@@ -106,7 +76,7 @@ router.post("/execute", async (req, res) => {
               type: "p5_export",
             });
           } catch (error) {
-            console.log(`[p5-export] export error`, err);
+            console.log(`[p5-export] export error`, error);
             await RoutineLog.query().insert({
               end_date: new Date(),
               result: "error",
