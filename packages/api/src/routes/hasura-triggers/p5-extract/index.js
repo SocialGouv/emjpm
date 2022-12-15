@@ -25,7 +25,7 @@ const currentDate = () => format(new Date(), "yyyyMMdd");
 
 async function sftpUpload(sftp, table, sql) {
   console.log(`[p5-export]  upload begin from ${table}`);
-  return new Promise((resolve) => {
+  return new Promise((resolve, reject) => {
     const writeStream = sftp.createWriteStream(
       `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
     );
@@ -41,10 +41,10 @@ async function sftpUpload(sftp, table, sql) {
       logger.info(`[p5-export] ${table} writeStream end`);
     });
 
-    // writeStream.on("error", function (e) {
-    //   logger.info(`[p5-export] error while uploading ${table} `);
-    //   reject(e);
-    // });
+    writeStream.on("error", function (e) {
+      logger.info(`[p5-export] error while uploading ${table} `);
+      reject(e);
+    });
     logger.info(`[p5-export] uploading ${table} `);
     sql.stream().pipe(JSONStream.stringify()).pipe(writeStream);
   });
@@ -68,16 +68,16 @@ router.post("/execute", async (req, res) => {
         async function execute() {
           try {
             await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
-              () => {
-                throw new Error();
+              (e) => {
+                throw new Error(e);
               }
             );
-            await sftpUpload(sftp, "users", queries.users).catch(() => {
-              throw new Error();
+            await sftpUpload(sftp, "users", queries.users).catch((e) => {
+              throw new Error(e);
             });
 
-            await sftpUpload(sftp, "mesures", queries.mesures).catch(() => {
-              throw new Error();
+            await sftpUpload(sftp, "mesures", queries.mesures).catch((e) => {
+              throw new Error(e);
             });
 
             // await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
