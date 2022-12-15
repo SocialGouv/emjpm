@@ -24,10 +24,13 @@ const withSecond = () => format(new Date(), "yyyyMMddHHmmss");
 const currentDate = () => format(new Date(), "yyyyMMdd");
 
 async function sftpUpload(sftp, table, sql) {
+  console.log(`[p5-export]  upload begin from ${table}`);
   return new Promise((resolve, reject) => {
     const writeStream = sftp.createWriteStream(
       `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
     );
+
+    console.log(`[p5-export] writeStream ${JSON.stringify(writeStream)}`);
 
     writeStream.on("close", function () {
       logger.info(`[p5-export] ${table} uploaded successfully`);
@@ -36,11 +39,11 @@ async function sftpUpload(sftp, table, sql) {
 
     writeStream.on("end", function () {
       logger.info(`[p5-export] ${table} writeStream end`);
-      reject();
     });
 
     writeStream.on("error", function () {
       logger.info(`[p5-export] error while uploading ${table} `);
+      reject();
     });
     logger.info(`[p5-export] uploading ${table} `);
     sql.stream().pipe(JSONStream.stringify()).pipe(writeStream);
@@ -59,16 +62,11 @@ router.post("/execute", async (req, res) => {
   conn
     .on("ready", function () {
       conn.sftp(function (err, sftp) {
+        console.log("[p5-export] connected to sftp");
         if (err) throw err;
 
         async function execute() {
           try {
-            // for (const [key, val] of Object.entries(queries)) {
-            //   await sftpUpload(sftp, key, val).catch(() => {
-            //     throw new Error();
-            //   });
-            // }
-
             await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
               () => {
                 throw new Error();
@@ -78,15 +76,28 @@ router.post("/execute", async (req, res) => {
               throw new Error();
             });
 
-            await sftpUpload(sftp, "regions", queries.regions).catch(() => {
+            await sftpUpload(sftp, "mesures", queries.mesures).catch(() => {
               throw new Error();
             });
 
-            await sftpUpload(sftp, "departements", queries.departements).catch(
-              () => {
-                throw new Error();
-              }
-            );
+            // await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
+            //   () => {
+            //     throw new Error();
+            //   }
+            // );
+            // await sftpUpload(sftp, "users", queries.users).catch(() => {
+            //   throw new Error();
+            // });
+
+            // await sftpUpload(sftp, "regions", queries.regions).catch(() => {
+            //   throw new Error();
+            // });
+
+            // await sftpUpload(sftp, "departements", queries.departements).catch(
+            //   () => {
+            //     throw new Error();
+            //   }
+            // );
 
             await RoutineLog.query().insert({
               end_date: new Date(),
