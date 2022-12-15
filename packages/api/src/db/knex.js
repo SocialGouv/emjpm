@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/newline-after-import
-require("pg-query-stream"); // required for ncc
 const environment = process.env.NODE_ENV || "development";
 const config = require("../../knexfile.js")[environment];
 
