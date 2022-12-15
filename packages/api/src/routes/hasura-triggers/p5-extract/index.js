@@ -39,7 +39,7 @@ async function sftpUpload(sftp, table, sql) {
     });
 
     writeStream.on("error", function (err) {
-      logger.info(`[p5-export] error while uploading ${table} `);
+      console.log("[p5-export] error while uploading", err);
       reject(err);
     });
     logger.info(`[p5-export] uploading ${table} `);
@@ -61,19 +61,15 @@ router.post("/execute", async (req, res) => {
       conn.sftp(function (err, sftp) {
         if (err) throw err;
 
+        console.log("[p5-export] connected to sftp server");
+
         async function execute() {
           try {
-            // for (const [key, val] of Object.entries(queries)) {
-            //   await sftpUpload(sftp, key, val).catch((e) => {
-            //     throw new Error(e);
-            //   });
-            // }
-
-            await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
-              (e) => {
+            for (const [key, val] of Object.entries(queries)) {
+              await sftpUpload(sftp, key, val).catch((e) => {
                 throw new Error(e);
-              }
-            );
+              });
+            }
 
             await RoutineLog.query().insert({
               end_date: new Date(),
