@@ -63,11 +63,30 @@ router.post("/execute", async (req, res) => {
 
         async function execute() {
           try {
-            for (const [key, val] of Object.entries(queries)) {
-              await sftpUpload(sftp, key, val).catch(() => {
+            // for (const [key, val] of Object.entries(queries)) {
+            //   await sftpUpload(sftp, key, val).catch(() => {
+            //     throw new Error();
+            //   });
+            // }
+
+            await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
+              () => {
                 throw new Error();
-              });
-            }
+              }
+            );
+            await sftpUpload(sftp, "users", queries.users).catch(() => {
+              throw new Error();
+            });
+
+            await sftpUpload(sftp, "regions", queries.regions).catch(() => {
+              throw new Error();
+            });
+
+            await sftpUpload(sftp, "departements", queries.departements).catch(
+              () => {
+                throw new Error();
+              }
+            );
 
             await RoutineLog.query().insert({
               end_date: new Date(),
