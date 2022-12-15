@@ -48,7 +48,7 @@ async function sftpUpload(sftp, table, sql) {
 }
 
 router.post("/execute", async (req, res) => {
-  // const dateOfExecution = new Date();
+  const dateOfExecution = new Date();
 
   logger.info(`[p5-export] export init`);
   res.json({
@@ -69,21 +69,20 @@ router.post("/execute", async (req, res) => {
               });
             }
 
-            console.log("not executed yet");
             await RoutineLog.query().insert({
               end_date: new Date(),
               result: "success",
-              // start_date: dateOfExecution,
+              start_date: dateOfExecution,
               type: "p5_export",
             });
           } catch (error) {
             console.log(`[p5-export] export error`, err);
-            // await RoutineLog.query().insert({
-            //   end_date: new Date(),
-            //   result: "error",
-            //   start_date: dateOfExecution,
-            //   type: "p5_export",
-            // });
+            await RoutineLog.query().insert({
+              end_date: new Date(),
+              result: "error",
+              start_date: dateOfExecution,
+              type: "p5_export",
+            });
           } finally {
             conn.end();
           }
