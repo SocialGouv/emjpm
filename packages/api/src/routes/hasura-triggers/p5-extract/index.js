@@ -2,6 +2,8 @@ const express = require("express");
 const { format } = require("date-fns");
 const Client = require("ssh2").Client;
 const JSONStream = require("JSONStream");
+// const fs = require("fs");
+// const path = require("path");
 
 const logger = require("~/utils/logger");
 const queries = require("./queries");
@@ -38,12 +40,20 @@ async function sftpUpload(sftp, table, sql) {
       console.log("[p5-export] error while uploading", err);
       reject(err);
     });
+
     logger.info(`[p5-export] uploading ${table} `);
-    sql
-      .stream((s) => s.pipe(JSONStream.stringify()).pipe(process.stdout))
-      .then(() => {
-        console.log("===============>");
-      });
+    const kstream = sql.stream();
+    kstream.on("error", function (args) {
+      console.log("error", args);
+    });
+    kstream.on("data", function (args) {
+      console.log("data", args);
+    });
+
+    kstream.on("finish", function () {
+      console.log("end");
+    });
+    kstream.pipe(JSONStream.stringify()).pipe(writeStream);
   });
 }
 
