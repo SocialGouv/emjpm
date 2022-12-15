@@ -31,7 +31,7 @@ async function sftpUpload(sftp, table, sql) {
 
     writeStream.on("close", function () {
       logger.info(`[p5-export] ${table} uploaded successfully`);
-      resolve(resolve);
+      resolve();
     });
 
     writeStream.on("end", function () {
@@ -63,11 +63,17 @@ router.post("/execute", async (req, res) => {
 
         async function execute() {
           try {
-            for (const [key, val] of Object.entries(queries)) {
-              await sftpUpload(sftp, key, val).catch((e) => {
+            // for (const [key, val] of Object.entries(queries)) {
+            //   await sftpUpload(sftp, key, val).catch((e) => {
+            //     throw new Error(e);
+            //   });
+            // }
+
+            await sftpUpload(sftp, "mandataires", queries.mandataires).catch(
+              (e) => {
                 throw new Error(e);
-              });
-            }
+              }
+            );
 
             await RoutineLog.query().insert({
               end_date: new Date(),
