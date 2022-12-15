@@ -69,7 +69,6 @@ router.post("/execute", async (req, res) => {
               });
             }
 
-            console.log("not executed yet");
             await RoutineLog.query().insert({
               end_date: new Date(),
               result: "success",
