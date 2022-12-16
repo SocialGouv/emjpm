@@ -46,8 +46,8 @@ async function sftpUpload(sftp, table, sql) {
     kstream.on("error", function (args) {
       console.log("error", args);
     });
-    kstream.on("data", function (args) {
-      console.log("data", args);
+    kstream.on("data", function () {
+      // console.log("data", args);
     });
 
     kstream.on("finish", function () {
