@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node dist/index.js",
-    "build": "ncc build src/start.js --source-map -e oracledb -e oracle -e pg-query-stream -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
+    "build": "ncc build src/start.js --source-map -e oracledb -e oracle -e mysql2 -e strong-oracle -e sqlite3 -e mysql -e mariasql -e mssql",
     "dev": "nodemon --watch src --watch $(realpath ../biz) --inspect --exec node --trace-warnings src/start.js",
     "dev:knex-debug-query": "DEBUG=knex:query nodemon src/start.js --inspect",
     "test": "yarn test:unit && yarn test:e2e",

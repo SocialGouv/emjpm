@@ -29,21 +29,29 @@ async function sftpUpload(sftp, table, sql) {
       `./${P5_FOLDER_ENV}/files_emjpm/P1_${withSecond()}_eMJPM_${table}_${currentDate()}.json`
     );
 
-    writeStream.on("close", function () {
+    writeStream.on("finish", function () {
       logger.info(`[p5-export] ${table} uploaded successfully`);
-      resolve(resolve);
+      resolve();
     });
 
-    writeStream.on("end", function () {
-      logger.info(`[p5-export] ${table} writeStream end`);
-      reject();
+    writeStream.on("error", function (err) {
+      console.log("[p5-export] error while uploading", err);
+      reject(err);
     });
 
-    writeStream.on("error", function () {
-      logger.info(`[p5-export] error while uploading ${table} `);
-    });
     logger.info(`[p5-export] uploading ${table} `);
-    sql.stream().pipe(JSONStream.stringify()).pipe(writeStream);
+    const kstream = sql.stream();
+    kstream.on("error", function (args) {
+      console.log("error", args);
+    });
+    kstream.on("data", function () {
+      // console.log("data", args);
+    });
+
+    kstream.on("finish", function () {
+      console.log("end");
+    });
+    kstream.pipe(JSONStream.stringify()).pipe(writeStream);
   });
 }
 
@@ -61,11 +69,13 @@ router.post("/execute", async (req, res) => {
       conn.sftp(function (err, sftp) {
         if (err) throw err;
 
+        console.log("[p5-export] connected to sftp server");
+
         async function execute() {
           try {
             for (const [key, val] of Object.entries(queries)) {
-              await sftpUpload(sftp, key, val).catch(() => {
-                throw new Error();
+              await sftpUpload(sftp, key, val).catch((e) => {
+                throw new Error(e);
               });
             }
 
@@ -76,7 +86,7 @@ router.post("/execute", async (req, res) => {
               type: "p5_export",
             });
           } catch (error) {
-            console.log(`[p5-export] export error`, err);
+            console.log(`[p5-export] export error`, error);
             await RoutineLog.query().insert({
               end_date: new Date(),
               result: "error",
