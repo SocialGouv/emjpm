@@ -38,9 +38,9 @@ module.exports = {
   regions: regionsSQL,
   departements: departementsSQL,
   services: servicesSQL,
-  mid: midSQL,
+  mandataire_individuel_departements: midSQL,
   mesures: mesuresSQL,
   mesure_etat: mesureEtatSQL,
   mesure_ressources: mesureResourcesSQL,
-  mrps: mrpsSQL,
+  mesure_ressources_prestations_sociales: mrpsSQL,
 };

@@ -69,7 +69,7 @@ router.post("/execute", async (req, res) => {
       conn.sftp(function (err, sftp) {
         if (err) throw err;
 
-        console.log("[p5-export] connected to sftp server");
+        logger.info("[p5-export] connected to sftp server");
 
         async function execute() {
           try {
@@ -78,7 +78,7 @@ router.post("/execute", async (req, res) => {
                 throw new Error(e);
               });
             }
-
+            logger.info("[p5-export] p5-export done");
             await RoutineLog.query().insert({
               end_date: new Date(),
               result: "success",
