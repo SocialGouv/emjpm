@@ -1,338 +1,338 @@
 actions:
-- name: admin_reset_user_password
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/reset-password'
-    forward_client_headers: true
-    headers:
-    - value: admin
-      name: x-hasura-role
-    - name: hasura_web_hook_secret
-      value_from_env: HASURA_WEB_HOOK_SECRET
-- name: check_email_exists
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/check-email-exists'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: greffier
-  - role: anonymous
-  - role: direction
-  - role: individuel
-  - role: prepose
-  - role: service
-  - role: ti
-- name: delete_all_mesures
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/delete-all-mesures'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: service
-  - role: prepose
-  - role: individuel
-- name: delete_mesure_action
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/delete'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: greffier
-  - role: ti
-- name: delete_mesure_etat_action
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/delete'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: email_account_validation
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-account-validation'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-- name: email_admin_invitation
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-admin-invitation'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-- name: email_reservation
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-reservation'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: greffier
-  - role: ti
-- name: email_service_member_invitation
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-service-member-invitation'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: sdpf
-  - role: service
-- name: email_token_request
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/token-request'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: anonymous
-- name: enquete_reponse_validation_status
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/reponse-status'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: direction
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: export_mesures_file
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/export'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: extract_p5_tables
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/p5-extract/execute'
-    forward_client_headers: true
-    headers:
-    - value: admin
-      name: x-hasura-role
-    - name: hasura_web_hook_secret
-      value_from_env: HASURA_WEB_HOOK_SECRET
-    timeout: 1800
-- name: import_base_finess
-  definition:
-    kind: asynchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/etablissements/import-finess'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-- name: import_ocmi_file
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/ocmi/sync-file'
-    forward_client_headers: true
-    headers:
-    - value: admin
-      name: x-hasura-role
-    - name: hasura_web_hook_secret
-      value_from_env: HASURA_WEB_HOOK_SECRET
-- name: import_ocmi_mesures
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/import-ocmi-mesures'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-    timeout: 900
-  permissions:
-  - role: individuel
-- name: mandataire_statistics
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/stats'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: reset_mesures_calculations
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/reset-mesures-calculations'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: greffier
-  - role: ti
-  - role: service
-  - role: prepose
-  - role: individuel
-- name: stat_available_mesures
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/available-mesures'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: direction
-  - role: direction_nationale
-  - role: direction_territoriale
-- name: stat_closed_mesures
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/closed-mesures'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: direction
-  - role: direction_nationale
-  - role: direction_territoriale
-- name: stat_opened_mesures
-  definition:
-    kind: ""
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/opened-mesures'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: direction
-  - role: direction_nationale
-  - role: direction_territoriale
-- name: submit_enquete_reponse
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/submit'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: upload_enquete_file
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/upload'
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: upload_mesures_file
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-    timeout: 900
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
-- name: upsert_mesure_etat
-  definition:
-    kind: synchronous
-    handler: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/upsert'
-    forward_client_headers: true
-    headers:
-    - name: HASURA_WEB_HOOK_SECRET
-      value_from_env: HASURA_WEB_HOOK_SECRET
-  permissions:
-  - role: individuel
-  - role: prepose
-  - role: service
+  - name: admin_reset_user_password
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/reset-password"
+      forward_client_headers: true
+      headers:
+        - value: admin
+          name: x-hasura-role
+        - name: hasura_web_hook_secret
+          value_from_env: HASURA_WEB_HOOK_SECRET
+  - name: check_email_exists
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/users/check-email-exists"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: greffier
+      - role: anonymous
+      - role: direction
+      - role: individuel
+      - role: prepose
+      - role: service
+      - role: ti
+  - name: delete_all_mesures
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/delete-all-mesures"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: service
+      - role: prepose
+      - role: individuel
+  - name: delete_mesure_action
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/delete"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: greffier
+      - role: ti
+  - name: delete_mesure_etat_action
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/delete"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: email_account_validation
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-account-validation"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+  - name: email_admin_invitation
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-admin-invitation"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+  - name: email_reservation
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-reservation"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: greffier
+      - role: ti
+  - name: email_service_member_invitation
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/email-service-member-invitation"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: sdpf
+      - role: service
+  - name: email_token_request
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/emails/token-request"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: anonymous
+  - name: enquete_reponse_validation_status
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/reponse-status"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: direction
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: export_mesures_file
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/export"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: extract_p5_tables
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/p5-extract/execute"
+      forward_client_headers: true
+      headers:
+        - value: admin
+          name: x-hasura-role
+        - name: hasura_web_hook_secret
+          value_from_env: HASURA_WEB_HOOK_SECRET
+      timeout: 1800
+  - name: import_base_finess
+    definition:
+      kind: asynchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/etablissements/import-finess"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+  - name: import_ocmi_file
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/ocmi/sync-file"
+      forward_client_headers: true
+      headers:
+        - value: admin
+          name: x-hasura-role
+        - name: hasura_web_hook_secret
+          value_from_env: HASURA_WEB_HOOK_SECRET
+  - name: import_ocmi_mesures
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/import-ocmi-mesures"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+      timeout: 900
+    permissions:
+      - role: individuel
+  - name: mandataire_statistics
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/stats"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: reset_mesures_calculations
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mandataires/reset-mesures-calculations"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: greffier
+      - role: ti
+      - role: service
+      - role: prepose
+      - role: individuel
+  - name: stat_available_mesures
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/available-mesures"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: direction
+      - role: direction_nationale
+      - role: direction_territoriale
+  - name: stat_closed_mesures
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/closed-mesures"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: direction
+      - role: direction_nationale
+      - role: direction_territoriale
+  - name: stat_opened_mesures
+    definition:
+      kind: ""
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/stats/opened-mesures"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: direction
+      - role: direction_nationale
+      - role: direction_territoriale
+  - name: submit_enquete_reponse
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/submit"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: upload_enquete_file
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/enquetes/upload"
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: upload_mesures_file
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesures/upload"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+      timeout: 900
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
+  - name: upsert_mesure_etat
+    definition:
+      kind: synchronous
+      handler: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/actions/mesure-etats/upsert"
+      forward_client_headers: true
+      headers:
+        - name: HASURA_WEB_HOOK_SECRET
+          value_from_env: HASURA_WEB_HOOK_SECRET
+    permissions:
+      - role: individuel
+      - role: prepose
+      - role: service
 custom_types:
   enums: []
   input_objects:
-  - name: EmailReservationInput
-  - name: StatAvailableMesuresInput
+    - name: EmailReservationInput
+    - name: StatAvailableMesuresInput
   objects:
-  - name: FileOutput
-  - name: EnqueteIndividuelReponse
-  - name: SubmittedEnqueteReponse
-  - name: EnqueteReponseSubmitted
-  - name: EnquetePreposeReponse
-  - name: EnqueteReponseStatus
-  - name: ImportFinessOutput
-  - name: EmailReservationOutput
-  - name: CalculateMesuresOutput
-  - name: EmailCancelReservationOutput
-  - name: StatAvailableMesuresOutput
-  - name: StatClosedMesuresOutput
-  - name: StatOpendMesuresOutput
-  - name: StatOpenedMesuresOutput
-  - name: StatAwaitingMesuresOutput
-  - name: DeleteMesureActionOutput
-  - name: EmailAccountValidationOutput
-  - name: EmailServiceMemberInvitationOutput
-  - name: TokenRequestOutput
-  - name: CheckEmailExistsOutput
-  - name: MandataireStatisticsOutput
-  - name: MandataireStatistic
-  - name: UpsertMesureEtatOutput
-    relationships:
-    - remote_table:
-        schema: public
-        name: mesures
-      name: mesure
-      source: default
-      type: object
-      field_mapping:
-        mesure_id: id
-    - remote_table:
-        schema: public
-        name: mesure_etat
-      name: mesure_etat
-      source: default
-      type: array
-      field_mapping:
-        id: id
-  - name: DeleteMesureEtatOutput
-  - name: ImportOcmiMesuresOutput
-  - name: StateOutput
-  - name: ImportOCMIOutput
-  - name: AdminResetPasswordOutput
-  - name: CalculateMesuresDelayedOutput
-  - name: ResetMesuresCalculationsOutput
-  - name: MesuresLastUpdateResult
-  - name: DeleteAllMesuresActionOutput
-  - name: EmailAdminInvitationOutput
-  - name: ExtractOutput
+    - name: FileOutput
+    - name: EnqueteIndividuelReponse
+    - name: SubmittedEnqueteReponse
+    - name: EnqueteReponseSubmitted
+    - name: EnquetePreposeReponse
+    - name: EnqueteReponseStatus
+    - name: ImportFinessOutput
+    - name: EmailReservationOutput
+    - name: CalculateMesuresOutput
+    - name: EmailCancelReservationOutput
+    - name: StatAvailableMesuresOutput
+    - name: StatClosedMesuresOutput
+    - name: StatOpendMesuresOutput
+    - name: StatOpenedMesuresOutput
+    - name: StatAwaitingMesuresOutput
+    - name: DeleteMesureActionOutput
+    - name: EmailAccountValidationOutput
+    - name: EmailServiceMemberInvitationOutput
+    - name: TokenRequestOutput
+    - name: CheckEmailExistsOutput
+    - name: MandataireStatisticsOutput
+    - name: MandataireStatistic
+    - name: UpsertMesureEtatOutput
+      relationships:
+        - remote_table:
+            schema: public
+            name: mesures
+          name: mesure
+          source: default
+          type: object
+          field_mapping:
+            mesure_id: id
+        - remote_table:
+            schema: public
+            name: mesure_etat
+          name: mesure_etat
+          source: default
+          type: array
+          field_mapping:
+            id: id
+    - name: DeleteMesureEtatOutput
+    - name: ImportOcmiMesuresOutput
+    - name: StateOutput
+    - name: ImportOCMIOutput
+    - name: AdminResetPasswordOutput
+    - name: CalculateMesuresDelayedOutput
+    - name: ResetMesuresCalculationsOutput
+    - name: MesuresLastUpdateResult
+    - name: DeleteAllMesuresActionOutput
+    - name: EmailAdminInvitationOutput
+    - name: ExtractOutput
   scalars: []

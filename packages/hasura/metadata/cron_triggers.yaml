@@ -1,35 +1,35 @@
 - name: clean-logs-all
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/clean-logs/all'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/clean-logs/all"
   schedule: 0 0 * * *
   include_in_metadata: true
   payload:
     session_variables:
       x-hasura-role: admin
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: mesures-delete-expired-pending
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/delete-expired-pending'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/delete-expired-pending"
   schedule: 0 1 * * *
   include_in_metadata: true
   payload:
     session_variables:
       x-hasura-role: admin
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: mesures-recount-uncached
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/recount-uncached'
-  schedule: '* * * * *'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/recount-uncached"
+  schedule: "* * * * *"
   include_in_metadata: true
   payload:
     session_variables:
       x-hasura-role: admin
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: mesures-update-status
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/update-status'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/mesures/update-status"
   schedule: 0 1 * * *
   include_in_metadata: true
   payload:
@@ -41,20 +41,20 @@
     tolerance_seconds: 21600
     retry_interval_seconds: 10
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: ocmi-sync-trigger
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/ocmi/sync-file'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/ocmi/sync-file"
   schedule: 0 5 * * *
   include_in_metadata: true
   payload:
     session_variables:
       x-hasura-role: admin
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
 - name: p5-extract
-  webhook: '{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/p5-extract/execute'
+  webhook: "{{HASURA_WEB_HOOK_BASE_URL}}/hasura/triggers/p5-extract/execute"
   schedule: 0 1 * * *
   include_in_metadata: true
   payload:
@@ -66,5 +66,5 @@
     tolerance_seconds: 21600
     retry_interval_seconds: 10
   headers:
-  - name: HASURA_WEB_HOOK_SECRET
-    value_from_env: HASURA_WEB_HOOK_SECRET
+    - name: HASURA_WEB_HOOK_SECRET
+      value_from_env: HASURA_WEB_HOOK_SECRET
