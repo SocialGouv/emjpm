@@ -94,6 +94,7 @@ router.post("/execute", async (req, res) => {
               type: "p5_export",
             });
           } finally {
+            console.log("end");
             conn.end();
           }
         }
