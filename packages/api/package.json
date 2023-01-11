@@ -50,7 +50,7 @@
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
-    "knex": "^0.95.10",
+    "knex": "^2.4.0",
     "lightship": "^6.7.2",
     "line-reader": "^0.4.0",
     "link-module-alias": "^1.2.0",
