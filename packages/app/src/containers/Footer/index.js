@@ -1,3 +1,3 @@
 import { Footer } from "./Footer";
-
-export { Footer };
+import { PublicFooter } from "./PublicFooter";
+export { Footer, PublicFooter };
