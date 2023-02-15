@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/containers/Commons";
 import config from "~/config";
-import { LogoEtat } from "~/components";
+import { LogoPublicEtat } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 import {
@@ -12,7 +12,7 @@ import {
 } from "./style";
 const { PACKAGE_VERSION } = config;
 
-function Footer(props) {
+function PublicFooter(props) {
   return (
     <Box sx={FooterWrapperStyle}>
       <Box sx={FooterContainerStyle}>
@@ -22,7 +22,7 @@ function Footer(props) {
             justifyContent="space-between"
             flexDirection={["column", "column", "row"]}>
             <Box mb={[3, 0]} flexBasis={["100%", "13%"]}>
-              <LogoEtat />
+              <LogoPublicEtat />
             </Box>
             <List sx={FooterItemStyle}>
               <ListTitle>eMJPM</ListTitle>
@@ -51,7 +51,7 @@ function Footer(props) {
               <ListTitle>Aidez-nous à améliorer cet outil</ListTitle>
               <ListItem>
                 <Link target="_blank" to={`https://mandoline.atlassian.net/servicedesk/customer/portals`}
-                >Contacter notre équipe du support
+                >Contactez-nous en cas de difficulté de connexion
                 </Link>
               </ListItem>
               <ListItem>
@@ -102,4 +102,4 @@ function Footer(props) {
   );
 }
 
-export { Footer };
+export { PublicFooter };
