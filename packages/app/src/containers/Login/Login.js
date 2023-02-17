@@ -228,7 +228,10 @@ function Login() {
             </Link>
           </Box>
           <Box>
-            <Link to={`mailto:${config.EMAIL_SUPPORT}`}>
+            <Link
+              target="_blank"
+              to={`https://mandoline.atlassian.net/servicedesk/customer/portals`}
+            >
               {"Contactez-nous en cas de difficulté de connexion"}
             </Link>
           </Box>

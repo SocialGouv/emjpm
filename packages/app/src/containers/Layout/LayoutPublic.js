@@ -1,6 +1,6 @@
 import { Box } from "rebass";
 
-import { Footer } from "~/containers/Footer";
+import { Footer } from "../Footer";
 import { Header } from "~/components";
 
 function LayoutPublic(props) {
@@ -13,9 +13,8 @@ function LayoutPublic(props) {
         bg="cardPrimary"
       >
         <Header isPublicLayout />
-      </Box>
-      <Box>{children}</Box>
-      <Footer />
+      </Box>{" "}
+      <Box> {children} </Box> <Footer isPublicLayout />
     </>
   );
 }

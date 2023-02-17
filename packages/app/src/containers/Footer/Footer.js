@@ -2,7 +2,7 @@ import { Box, Flex } from "rebass";
 
 import { Link, List, ListItem, ListTitle } from "~/containers/Commons";
 import config from "~/config";
-import { LogoEtat } from "~/components";
+import { LogoEtat, LogoPublicEtat } from "~/components";
 import { BoxWrapper } from "~/components/Grid";
 
 import {
@@ -13,6 +13,7 @@ import {
 const { PACKAGE_VERSION } = config;
 
 function Footer(props) {
+  const { isPublicLayout } = props;
   return (
     <Box sx={FooterWrapperStyle}>
       <Box sx={FooterContainerStyle}>
@@ -23,10 +24,10 @@ function Footer(props) {
             flexDirection={["column", "column", "row"]}
           >
             <Box mb={[3, 0]} flexBasis={["100%", "13%"]}>
-              <LogoEtat />
+              {!isPublicLayout ? <LogoEtat /> : <LogoPublicEtat />}
             </Box>
             <List sx={FooterItemStyle}>
-              <ListTitle>eMJPM</ListTitle>
+              <ListTitle> eMJPM </ListTitle>
               <ListItem>
                 <Link target="_blank" to="/mentions-legales">
                   Mentions légales
@@ -49,10 +50,15 @@ function Footer(props) {
               </ListItem>
             </List>
             <List sx={FooterItemStyle}>
-              <ListTitle>Aidez-nous à améliorer cet outil</ListTitle>
+              <ListTitle> Aidez - nous à améliorer cet outil </ListTitle>
               <ListItem>
-                <Link target="_blank" to={`mailto:${config.EMAIL_SUPPORT}`}>
-                  {`${config.EMAIL_SUPPORT}`}
+                <Link
+                  target="_blank"
+                  to={`https://mandoline.atlassian.net/servicedesk/customer/portals`}
+                >
+                  {isPublicLayout
+                    ? "Contactez - nous en cas de difficulté de connexion"
+                    : "Contacter notre équipe du support"}
                 </Link>
               </ListItem>
               <ListItem>
@@ -73,12 +79,12 @@ function Footer(props) {
               </ListItem>
               <ListItem>
                 <Link target="_blank" to={`/rgaa`}>
-                  Accessibilité : non conforme
+                  Accessibilité: non conforme
                 </Link>
               </ListItem>
             </List>
             <List sx={FooterItemStyle}>
-              <ListTitle>En collaboration avec</ListTitle>
+              <ListTitle> En collaboration avec </ListTitle>
               <ListItem>
                 <Link
                   target="_blank"

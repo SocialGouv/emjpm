@@ -14,6 +14,7 @@ export { default as Spinner } from "./Spinner";
 export { default as Text } from "./Text";
 export { default as Tabs } from "./Tabs";
 export { default as LogoEtat } from "./LogoEtat";
+export { default as LogoPublicEtat } from "./LogoPublicEtat";
 export { default as Field } from "./Field";
 export { default as FilePicker } from "./FilePicker";
 export { default as Switch } from "./Switch";
