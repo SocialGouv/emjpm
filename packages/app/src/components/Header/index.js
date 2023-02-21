@@ -1,6 +1,6 @@
 import { useHistory } from "react-router-dom";
 import { Box, Flex, Text } from "rebass";
-import { LogoEtat, LoggedMenu } from "~/components";
+import { LogoEtat, LogoPublicEtat, LoggedMenu } from "~/components";
 import { useCallback } from "react";
 import { BoxWrapper } from "~/components/Grid";
 
@@ -23,9 +23,7 @@ function Header(props) {
       >
         <Box p={1}>
           <Flex flexWrap="wrap" justifyContent="left">
-            <Box>
-              <LogoEtat />
-            </Box>
+            <Box>{!isPublicLayout ? <LogoEtat /> : <LogoPublicEtat />}</Box>
             <Box ml={2}>
               <button
                 onClick={goToHome}
