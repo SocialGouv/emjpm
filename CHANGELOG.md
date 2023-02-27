@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [25.157.0](https://github.com/SocialGouv/emjpm/compare/v25.156.15...v25.157.0) (2023-02-27)
+
+
+### Features
+
+* eMJPM-Mando-6 ([2bd237a](https://github.com/SocialGouv/emjpm/commit/2bd237a31e2c7338c5c503faaac7e4a27c08c011))
+
+
+
+
+
+
 ## [25.156.15](https://github.com/SocialGouv/emjpm/compare/v25.156.14...v25.156.15) (2022-12-16)
 
 
