@@ -11,6 +11,18 @@ yarn prod
 yarn delivery
 ```
 
+### On windows
+
+```
+git checkout master
+git pull
+git merge feature-xxx
+yarn lerna version --force-publish --yes
+git push --follow-tags --force origin master
+git push --follow-tags --force origin master:prod 
+```
+
+
 ## webhook
 configured in github webhooks
 run automatically on theses branches:
