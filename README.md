@@ -1,7 +1,6 @@
 # eMJPM
 
-[![Build Status](https://travis-ci.com/SocialGouv/emjpm.svg?branch=master)](https://travis-ci.com/SocialGouv/emjpm?branch=master)
-
+## Moved to : https://github.com/DNUM-SocialGouv/emjpm
 
 ## Fiche technique du projet
 
