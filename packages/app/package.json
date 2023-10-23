@@ -79,7 +79,7 @@
     "react-toastify": "^7.0.4",
     "react-tooltip": "^4.2.21",
     "rebass": "^4.0.7",
-    "recharts": "^1.8.5",
+    "recharts": "^2.0.0",
     "sass": "^1.37.5",
     "styled-components": "^4.4.1",
     "theme-ui": "0.3",
