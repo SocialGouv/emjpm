@@ -13841,13 +13841,12 @@ no-case@^3.0.4:
     lower-case "^2.0.2"
     tslib "^2.0.3"
 
-node-7z@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/node-7z/-/node-7z-2.1.2.tgz#8c15d6cf7c1baae6b6774721507c8b56ec4e6dbb"
-  integrity sha512-mSmn90OIYKYIkuRwH1YRJl2sMwB9OlYhCQS4SPTOfxlzWwomoC1G9j4tsvAsv7vJPwvK7B76Z0a2dH5Mvwo91Q==
+node-7z@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/node-7z/-/node-7z-3.0.0.tgz#42f71c5a43b00028749f7c88291a7abf2e2623e3"
+  integrity sha512-KIznWSxIkOYO/vOgKQfJEaXd7rgoFYKZbaurainCEdMhYc7V7mRHX+qdf2HgbpQFcdJL/Q6/XOPrDLoBeTfuZA==
   dependencies:
-    cross-spawn "^7.0.2"
-    debug "^4.1.1"
+    debug "^4.3.2"
     lodash.defaultsdeep "^4.6.1"
     lodash.defaultto "^4.14.0"
     lodash.flattendeep "^4.4.0"
