@@ -56,7 +56,7 @@
     "link-module-alias": "^1.2.0",
     "lodash.uniq": "^4.5.0",
     "node-7z": "^2.1.2",
-    "node-fetch": "^2.6.1",
+    "node-fetch": "^3.0.0",
     "nodemailer": "^6.6.3",
     "objection": "^2.2.15",
     "objection-db-errors": "^1.1.2",
